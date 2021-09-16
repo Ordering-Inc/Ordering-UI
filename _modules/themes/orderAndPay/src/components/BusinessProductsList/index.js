@@ -55,11 +55,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       categoryState = props.categoryState,
       isBusinessLoading = props.isBusinessLoading,
       onProductClick = props.onProductClick,
-      handleSearchRedirect = props.handleSearchRedirect,
       featured = props.featured,
       searchValue = props.searchValue,
       isCartOnProductsList = props.isCartOnProductsList,
-      handleClearSearch = props.handleClearSearch,
       errorQuantityProducts = props.errorQuantityProducts;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -131,11 +129,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       isSkeleton: true
     });
   })), !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
-    btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
-    onClickButton: function onClickButton() {
-      return !searchValue ? handleSearchRedirect() : handleClearSearch('');
-    }
+    content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')
   })), errors && errors.length > 0 && errors.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i

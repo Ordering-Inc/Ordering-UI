@@ -179,6 +179,11 @@ var CheckoutUI = function CheckoutUI(props) {
       placeId = _useState12[0],
       setPlaceId = _useState12[1];
 
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      paymethodSelectedChanged = _useState14[0],
+      setPaymethodSelectedChanged = _useState14[1];
+
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
 
   var handlePlaceOrder = /*#__PURE__*/function () {
@@ -286,6 +291,13 @@ var CheckoutUI = function CheckoutUI(props) {
       setIsResetPaymethod(true); // changePaymethod(cart?.business_id, null, null)
     }
   }, [isResetPaymethod]);
+  (0, _react.useEffect)(function () {
+    if (paymethodSelected && !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 4) {
+      setPaymethodSelectedChanged(true);
+    } else {
+      setPaymethodSelectedChanged(false);
+    }
+  }, [paymethodSelected]);
   (0, _react.useEffect)(function () {
     var getPlaceId = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
@@ -525,7 +537,7 @@ var CheckoutUI = function CheckoutUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), !props.isHideSectionFive && !cartState.loading && cart && /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMENT_METHODS', 'Payment Methods')), !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, {
+  }), !props.isHideSectionFive && !cartState.loading && cart && /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMENT_METHODS', 'Payment Methods')), !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && !paymethodSelectedChanged && !businessDetails.loading && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, {
     style: {
       marginTop: 20
     }
@@ -633,42 +645,42 @@ var Checkout = function Checkout(props) {
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
-  var _useState13 = (0, _react.useState)({
+  var _useState15 = (0, _react.useState)({
     loading: true,
     error: null,
     cart: null
   }),
-      _useState14 = _slicedToArray(_useState13, 2),
-      cartState = _useState14[0],
-      setCartState = _useState14[1];
-
-  var _useState15 = (0, _react.useState)(false),
       _useState16 = _slicedToArray(_useState15, 2),
-      openUpselling = _useState16[0],
-      setOpenUpselling = _useState16[1];
+      cartState = _useState16[0],
+      setCartState = _useState16[1];
 
   var _useState17 = (0, _react.useState)(false),
       _useState18 = _slicedToArray(_useState17, 2),
-      canOpenUpselling = _useState18[0],
-      setCanOpenUpselling = _useState18[1];
+      openUpselling = _useState18[0],
+      setOpenUpselling = _useState18[1];
 
-  var _useState19 = (0, _react.useState)(null),
+  var _useState19 = (0, _react.useState)(false),
       _useState20 = _slicedToArray(_useState19, 2),
-      currentCart = _useState20[0],
-      setCurrentCart = _useState20[1];
+      canOpenUpselling = _useState20[0],
+      setCanOpenUpselling = _useState20[1];
 
-  var _useState21 = (0, _react.useState)({
+  var _useState21 = (0, _react.useState)(null),
+      _useState22 = _slicedToArray(_useState21, 2),
+      currentCart = _useState22[0],
+      setCurrentCart = _useState22[1];
+
+  var _useState23 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState22 = _slicedToArray(_useState21, 2),
-      alertState = _useState22[0],
-      setAlertState = _useState22[1];
-
-  var _useState23 = (0, _react.useState)(false),
       _useState24 = _slicedToArray(_useState23, 2),
-      isResetPaymethod = _useState24[0],
-      setIsResetPaymethod = _useState24[1];
+      alertState = _useState24[0],
+      setAlertState = _useState24[1];
+
+  var _useState25 = (0, _react.useState)(false),
+      _useState26 = _slicedToArray(_useState25, 2),
+      isResetPaymethod = _useState26[0],
+      setIsResetPaymethod = _useState26[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;

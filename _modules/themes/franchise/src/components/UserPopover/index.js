@@ -65,6 +65,11 @@ var extraOptions = [{
   pathname: '/profile',
   displayName: 'view account',
   key: 'view_account'
+}, {
+  name: 'help',
+  pathname: '/help',
+  displayName: 'help',
+  key: 'help'
 }];
 
 var UserPopover = function UserPopover(props) {

@@ -15,6 +15,8 @@ var _FiMinusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiMinusCi
 
 var _FiPlusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiPlusCircle"));
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
 var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../../../../utils");
@@ -90,7 +92,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       handleSave = props.handleSave,
       handleChangeIngredientState = props.handleChangeIngredientState,
       handleChangeSuboptionState = props.handleChangeSuboptionState,
-      handleChangeCommentState = props.handleChangeCommentState;
+      handleChangeCommentState = props.handleChangeCommentState,
+      onClose = props.onClose;
   var product = productObject.product,
       loading = productObject.loading,
       error = productObject.error;
@@ -214,7 +217,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
     className: "product-container"
-  }, loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return onClose();
+    }
+  })), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
@@ -249,7 +256,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.price) && /*#__PURE__*/_react.default.createElement("div", {
     className: "price-wrapper"
-  }, /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total)), /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total)), (product === null || product === void 0 ? void 0 : product.offer_price) && /*#__PURE__*/_react.default.createElement("span", {
     className: "price-discount"
   }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTabContainer, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"

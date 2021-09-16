@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ModalIcon = exports.Title = exports.EmptyBtnWrapper = exports.EmptyCart = exports.BusinessCartContent = exports.BusinessCartContainer = exports.BusinessCategoryProductWrapper = exports.BusinessContent = exports.WrappLayout = exports.SkeletonItem = exports.ProductLoading = exports.ProductsNotFound = exports.WrapContent = exports.ProductsContainer = void 0;
+exports.GoBackContainer = exports.ModalIcon = exports.Title = exports.EmptyBtnWrapper = exports.EmptyCart = exports.BusinessCartContent = exports.BusinessCartContainer = exports.BusinessCategoryProductWrapper = exports.BusinessContent = exports.WrappLayout = exports.SkeletonItem = exports.ProductLoading = exports.ProductsNotFound = exports.WrapContent = exports.ProductsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,7 +21,7 @@ var ProductsContainer = _styledComponents.default.div(_templateObject || (_templ
 
 exports.ProductsContainer = ProductsContainer;
 
-var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n\n  @media (min-width: 1200px) {\n    padding: 0;\n  }\n"])), function (props) {
+var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n  margin-bottom: 50px;\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n\n  @media (min-width: 1200px) {\n    padding: 0;\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 });
 
@@ -79,6 +79,10 @@ var Title = _styledComponents.default.h1(_templateObject14 || (_templateObject14
 
 exports.Title = Title;
 
-var ModalIcon = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 65%;\n  img{\n    margin: 0 5px;\n    width: 40px;\n    height: 40px;\n  }\n  h1{\n    font-size: 1em;\n  }\n"])));
+var ModalIcon = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n"])));
 
 exports.ModalIcon = ModalIcon;
+
+var GoBackContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 65%;\n  img{\n    margin: 0 5px;\n    width: 40px;\n    height: 40px;\n  }\n  h1{\n    font-size: 1em;\n  }\n"])));
+
+exports.GoBackContainer = GoBackContainer;

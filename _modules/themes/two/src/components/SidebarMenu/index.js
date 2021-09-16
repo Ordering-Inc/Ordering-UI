@@ -27,6 +27,8 @@ var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 
 var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
 
+var _BiHelpCircle = _interopRequireDefault(require("@meronex/icons/bi/BiHelpCircle"));
+
 var _orderingComponents = require("ordering-components");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
@@ -167,7 +169,20 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/profile/orders'
   }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/profile/orders'
-  }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
+  }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    isHome: isHome,
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'help'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
+    active: window.location.pathname === '/help'
+  }, /*#__PURE__*/_react.default.createElement(_BiHelpCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
+    active: window.location.pathname === '/help'
+  }, t('HELP', 'help'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
     onCustomClick: function onCustomClick() {
       return actionSidebar(false);
     }

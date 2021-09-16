@@ -110,7 +110,7 @@ var MomentControlUI = function MomentControlUI(props) {
       maxDate = _useState6[0],
       setMaxDate = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(isAsap),
+  var _useState7 = (0, _react.useState)(true),
       _useState8 = _slicedToArray(_useState7, 2),
       isASP = _useState8[0],
       setIsASP = _useState8[1];
@@ -189,6 +189,9 @@ var MomentControlUI = function MomentControlUI(props) {
       setTimeLists(_timeLists);
     }
   }, [hoursList]);
+  (0, _react.useEffect)(function () {
+    if (isASP) handleCheckBoxChange(true);
+  }, [isAsap]);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
   }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {

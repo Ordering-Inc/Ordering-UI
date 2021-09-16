@@ -66,7 +66,8 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       canOpenUpselling = props.canOpenUpselling,
       setCanOpenUpselling = props.setCanOpenUpselling,
       business = props.business,
-      isCustomMode = props.isCustomMode;
+      isCustomMode = props.isCustomMode,
+      setOpenUpselling = props.setOpenUpselling;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -94,6 +95,11 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
         setCanOpenUpselling && setCanOpenUpselling(true);
       } else if (!(upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr2 = upsellingProducts.products) !== null && _upsellingProducts$pr2 !== void 0 && _upsellingProducts$pr2.length) && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
         handleUpsellingPage();
+      }
+
+      if (!upsellingProducts.loading && (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length) === 0) {
+        setCanOpenUpselling && setCanOpenUpselling(false);
+        setOpenUpselling && setOpenUpselling(false);
       }
     }
   }, [upsellingProducts.loading, upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length]);

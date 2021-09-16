@@ -81,10 +81,10 @@ Object.defineProperty(exports, "DriverTips", {
     return _DriverTips.DriverTips;
   }
 });
-Object.defineProperty(exports, "FacebookLogin", {
+Object.defineProperty(exports, "FacebookLoginButton", {
   enumerable: true,
   get: function get() {
-    return _FacebookLogin.FacebookLogin;
+    return _FacebookLogin.FacebookLoginButton;
   }
 });
 Object.defineProperty(exports, "ForgotPasswordForm", {
@@ -93,10 +93,10 @@ Object.defineProperty(exports, "ForgotPasswordForm", {
     return _ForgotPasswordForm.ForgotPasswordForm;
   }
 });
-Object.defineProperty(exports, "GoogleLogin", {
+Object.defineProperty(exports, "GoogleLoginButton", {
   enumerable: true,
   get: function get() {
-    return _GoogleLogin.GoogleLogin;
+    return _GoogleLogin.GoogleLoginButton;
   }
 });
 Object.defineProperty(exports, "InputPhoneNumber", {

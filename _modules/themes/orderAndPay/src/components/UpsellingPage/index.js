@@ -66,7 +66,8 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       canOpenUpselling = props.canOpenUpselling,
       setCanOpenUpselling = props.setCanOpenUpselling,
       business = props.business,
-      isCustomMode = props.isCustomMode;
+      isCustomMode = props.isCustomMode,
+      setIsUpselling = props.setIsUpselling;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -95,6 +96,10 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       } else if (!(upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr2 = upsellingProducts.products) !== null && _upsellingProducts$pr2 !== void 0 && _upsellingProducts$pr2.length) && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
         handleUpsellingPage();
       }
+    }
+
+    if (!upsellingProducts.loading && (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length) <= 0) {
+      setIsUpselling(false);
     }
   }, [upsellingProducts.loading, upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length]);
 
@@ -204,13 +209,17 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     },
     width: "70%",
     padding: "0",
-    closeOnBackdrop: true
+    closeOnBackdrop: true,
+    hideCloseDefault: true
   }, actualProduct && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     product: actualProduct,
     businessId: actualProduct.api.businessId,
     businessSlug: business.slug,
     onSave: function onSave() {
       return handleSaveProduct();
+    },
+    onClose: function onClose() {
+      return setModalIsOpen(false);
     }
   })));
 };

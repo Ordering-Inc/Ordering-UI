@@ -27,6 +27,8 @@ var _FaSignOutAlt = _interopRequireDefault(require("@meronex/icons/fa/FaSignOutA
 
 var _MdcMenuRightOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcMenuRightOutline"));
 
+var _BiHelpCircle = _interopRequireDefault(require("@meronex/icons/bi/BiHelpCircle"));
+
 var _utils = require("../../utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -65,6 +67,9 @@ var IconOption = function IconOption(_ref) {
     case 'orders':
       return /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null);
 
+    case 'help':
+      return /*#__PURE__*/_react.default.createElement(_BiHelpCircle.default, null);
+
     default:
       return /*#__PURE__*/_react.default.createElement(_MdcMenuRightOutline.default, null);
   }
@@ -76,6 +81,9 @@ var optionsDefault = [{
 }, {
   name: 'orders',
   pathname: '/profile/orders'
+}, {
+  name: 'help',
+  pathname: '/help'
 }];
 
 var UserPopover = function UserPopover(props) {

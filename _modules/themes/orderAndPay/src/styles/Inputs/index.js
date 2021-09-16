@@ -21,7 +21,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 7.6px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n  ", "\n"])), function () {
+var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 7.6px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n  &::-ms-reveal {\n    display: none;\n  }\n  ", "\n"])), function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (_ref) {
   var w = _ref.w;

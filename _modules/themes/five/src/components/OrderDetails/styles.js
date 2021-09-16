@@ -71,13 +71,13 @@ var OrderInfo = _styledComponents.default.div(_templateObject11 || (_templateObj
 
 exports.OrderInfo = OrderInfo;
 
-var ReviewOrderLink = _styledComponents.default.a(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  text-decoration-line: underline;\n  user-select: none;\n  ", "\n"])), function (_ref) {
+var ReviewOrderLink = _styledComponents.default.span(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin: 0;\n  cursor: pointer;\n  text-decoration-line: underline;\n  user-select: none;\n  ", "\n"])), function (_ref) {
   var active = _ref.active;
   return active ? (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     var _props$theme2;
 
     return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.primary;
-  }) : (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    color: #B1BCCC;\n    pointer-events: none;\n  "])));
+  }) : (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    color: #B1BCCC;\n    cursor: not-allowed;\n    span {\n      pointer-events: none;\n    }\n  "])));
 });
 
 exports.ReviewOrderLink = ReviewOrderLink;

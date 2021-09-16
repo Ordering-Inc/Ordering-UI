@@ -65,7 +65,7 @@ var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templ
 
 exports.HorizontalImage = HorizontalImage;
 
-var HorizontalDetails = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  min-width: 100px;\n  h3 {\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    margin: 0 0 5px 0;\n  }\n\n  span {\n    font-size: 12px;\n    color: ", ";\n\n    &.discount {\n      font-size: 10px;\n      color: #909BA9;\n      ", "\n    }\n  }\n\n  button {\n    margin-top: 6px;\n    border-radius: 50px;\n    color: ", ";\n    background: ", "\n  }\n"])), function (props) {
+var HorizontalDetails = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  justify-content: space-between;\n  height: 150px;\n  min-width: 100px;\n  h3 {\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    margin: 0 0 5px 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    display: -webkit-box;\n    -webkit-line-clamp: 4; /* number of lines to show */\n    -webkit-box-orient: vertical;\n  }\n\n  span {\n    font-size: 12px;\n    color: ", ";\n\n    &.discount {\n      font-size: 10px;\n      color: #909BA9;\n      ", "\n    }\n  }\n\n  button {\n    margin-top: 6px;\n    border-radius: 50px;\n    color: ", ";\n    background: ", "\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   return props.theme.colors.darkTextColor;

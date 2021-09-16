@@ -78,7 +78,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _configs$google_maps_, _orderState$options6, _orderState$options6$, _orderState$options7, _orderState$options7$, _getCustomArray, _businessesList$busin3, _orderState$options8, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _configs$google_maps_, _orderState$options6, _orderState$options6$, _businessesList$busin3, _orderState$options7, _orderState$options7$, _configs$google_maps_2, _orderState$options8, _orderState$options8$, _getCustomArray, _businessesList$busin4, _orderState$options9, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -156,6 +156,19 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return business.id;
   }));
   var businessListRef = (0, _react.useRef)(null);
+  var googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeId: 'roadmap',
+    // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: false,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    },
+    isMarkerDraggable: true
+  };
   var handleScroll = (0, _react.useCallback)(function () {
     if (windowSize.width > 850) {
       var _businessListRef$curr, _businessListRef$curr2, _businessListRef$curr3;
@@ -381,9 +394,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
-  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessMapWrapper, null, configs !== null && configs !== void 0 && (_configs$google_maps_ = configs.google_maps_api_key) !== null && _configs$google_maps_ !== void 0 && _configs$google_maps_.value && orderState !== null && orderState !== void 0 && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.location ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessMapWrapper, null, configs !== null && configs !== void 0 && (_configs$google_maps_ = configs.google_maps_api_key) !== null && _configs$google_maps_ !== void 0 && _configs$google_maps_.value && orderState !== null && orderState !== void 0 && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.location ? (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : (_orderState$options7$ = _orderState$options7.address) === null || _orderState$options7$ === void 0 ? void 0 : _orderState$options7$.location,
+    setErrors: setMapErrors
+  }) : /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
+    location: orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : (_orderState$options8$ = _orderState$options8.address) === null || _orderState$options8$ === void 0 ? void 0 : _orderState$options8$.location,
+    mapControls: googleMapsControls,
     setErrors: setMapErrors
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 350
@@ -407,7 +425,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     isCustomLayout: true,
     isBusinessesLoading: businessesList.loading
-  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin4 = businessesList.businesses) === null || _businessesList$busin4 === void 0 ? void 0 : _businessesList$busin4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,
     onClose: function onClose() {
@@ -417,7 +435,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false

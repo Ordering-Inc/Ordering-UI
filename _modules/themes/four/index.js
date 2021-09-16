@@ -141,6 +141,18 @@ Object.defineProperty(exports, "HeaderOption", {
     return _HeaderOption.HeaderOption;
   }
 });
+Object.defineProperty(exports, "Help", {
+  enumerable: true,
+  get: function get() {
+    return _Help.Help;
+  }
+});
+Object.defineProperty(exports, "HelpStaticPage", {
+  enumerable: true,
+  get: function get() {
+    return _HelpStaticPage.HelpStaticPage;
+  }
+});
 Object.defineProperty(exports, "HomeHero", {
   enumerable: true,
   get: function get() {
@@ -151,6 +163,12 @@ Object.defineProperty(exports, "HorizontalOrdersLayout", {
   enumerable: true,
   get: function get() {
     return _HorizontalOrdersLayout.HorizontalOrdersLayout;
+  }
+});
+Object.defineProperty(exports, "LastOrders", {
+  enumerable: true,
+  get: function get() {
+    return _LastOrders.LastOrders;
   }
 });
 Object.defineProperty(exports, "LoginForm", {
@@ -320,9 +338,15 @@ var _Header = require("./src/components/Header");
 
 var _HeaderOption = require("./src/components/HeaderOption");
 
+var _Help = require("./src/components/Help");
+
+var _HelpStaticPage = require("./src/components/HelpStaticPage");
+
 var _HomeHero = require("./src/components/HomeHero");
 
 var _HorizontalOrdersLayout = require("./src/components/HorizontalOrdersLayout");
+
+var _LastOrders = require("./src/components/LastOrders");
 
 var _LoginForm = require("./src/components/LoginForm");
 

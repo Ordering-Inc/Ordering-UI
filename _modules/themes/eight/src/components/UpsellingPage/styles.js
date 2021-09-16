@@ -25,7 +25,7 @@ var UpsellingContainer = _styledComponents.default.div(_templateObject2 || (_tem
   var isCustomMode = _ref.isCustomMode;
   return isCustomMode ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    width: 100%;\n    > h1 {\n      font-size: 20px;\n      color: ", ";\n    }\n  "])), function (props) {
     return props.theme.colors.grayDark;
-  }) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-wrap: wrap;\n    overflow: auto;\n  "])));
+  }) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-wrap: wrap;\n    overflow: auto;\n    width: 100%;\n    justify-content: space-around;\n  "])));
 });
 
 exports.UpsellingContainer = UpsellingContainer;

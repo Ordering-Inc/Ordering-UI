@@ -75,7 +75,7 @@ var Option = _styledComponents.default.div(_templateObject12 || (_templateObject
 
 exports.Option = Option;
 
-var HourListWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 35px;\n  margin-bottom: 100px;\n\n  ", "\n\n  > div {\n    width: 100%;\n    background-color: #FFFFFF !important;\n    border: 2px solid ", ";\n    border-radius: 7.6px;\n    padding-top: 3px;\n    padding-bottom: 3px;\n\n    > div {\n      justify-content: space-between;\n    }\n\n    #list {\n      width: 100%;\n    }\n  }\n\n  #select-input {\n    > div:first-child {\n      color: ", ";\n    }\n  }\n"])), function (_ref5) {
+var HourListWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 35px;\n  margin-bottom: 100px;\n\n  ", "\n\n  > div {\n    width: 100%;\n    background-color: #FFFFFF !important;\n    border: 2px solid ", ";\n    border-radius: 7.6px;\n    padding-top: 3px;\n    padding-bottom: 3px;\n\n    > div {\n      justify-content: space-between;\n    }\n\n    #list {\n      width: 100%;\n      max-height: 200px;\n      overflow: auto;\n      background-color: #FFFFFF;\n    }\n  }\n\n  #select-input {\n    > div:first-child {\n      color: ", ";\n    }\n  }\n"])), function (_ref5) {
   var isLoading = _ref5.isLoading;
   return isLoading && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
 }, function (props) {
@@ -86,7 +86,7 @@ var HourListWrapper = _styledComponents.default.div(_templateObject14 || (_templ
 
 exports.HourListWrapper = HourListWrapper;
 
-var DatePickerInput = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 7.6px;\n  padding: 6px 15px;\n  width: 200px;\n  margin-bottom: 10px;\n  font-size: 14px;\n\n  @media (min-width: 375px) {\n    width: 250px;\n  }\n"])), function (props) {
+var DatePickerInput = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 7.6px;\n  padding: 6px 15px;\n  width: 200px;\n  margin-bottom: 10px;\n  font-size: 14px;\n  text-align: center;\n\n  @media (min-width: 375px) {\n    width: 250px;\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 });
 

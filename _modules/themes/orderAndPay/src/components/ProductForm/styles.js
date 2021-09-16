@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProductShareWrapper = exports.Divider = exports.ProductTabContainer = exports.WrapperIngredients = exports.SkuContent = exports.WrapperSubOption = exports.SkeletonBlock = exports.ProductActions = exports.ProductComment = exports.SectionTitle = exports.ProductEdition = exports.ProductFormTitle = exports.ProductInfo = exports.ProductImage = exports.WrapperImage = exports.ProductContainer = void 0;
+exports.ModalIcon = exports.ProductShareWrapper = exports.Divider = exports.ProductTabContainer = exports.WrapperIngredients = exports.SkuContent = exports.WrapperSubOption = exports.SkeletonBlock = exports.ProductActions = exports.ProductComment = exports.SectionTitle = exports.ProductEdition = exports.ProductFormTitle = exports.ProductInfo = exports.ProductImage = exports.WrapperImage = exports.ProductContainer = void 0;
 
 var _polished = require("polished");
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -47,7 +47,7 @@ var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateOb
 
 exports.ProductInfo = ProductInfo;
 
-var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n  margin-bottom: 20px;\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])));
+var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n  margin-bottom: 20px;\n  span{\n    white-space: nowrap;\n  }\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])));
 
 exports.ProductFormTitle = ProductFormTitle;
 
@@ -63,7 +63,7 @@ var ProductComment = _styledComponents.default.div(_templateObject9 || (_templat
 
 exports.ProductComment = ProductComment;
 
-var ProductActions = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 10px 0px;\n  width: 100%;\n\n  position: fixed;\n  bottom: -19px;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  div.price {\n    font-weight: 600;\n    font-size: 20px;\n    color: ", ";\n  }\n\n  div.incdec-control {\n    width: 50%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    svg {\n      width: 22px;\n      height: 22px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    width: 90%;\n    padding: 5px 10px;\n    margin-top: 10px;\n    position: relative;\n\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 577px) {\n    position: sticky;\n    flex-direction: row;\n    justify-content: space-between;\n\n    div.price {\n      width: 20%;\n    }\n\n    button.add {\n      width: 50%;\n      margin-top: 0;\n    }\n\n    div.incdec-control {\n      width: 20%;\n    }\n  }\n"])), function (props) {
+var ProductActions = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 10px 0px;\n  width: 100%;\n\n  position: fixed;\n  bottom: -5px;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  div.price {\n    font-weight: 600;\n    font-size: 20px;\n    color: ", ";\n    white-space: nowrap;\n  }\n\n  div.incdec-control {\n    width: 50%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    svg {\n      width: 22px;\n      height: 22px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    width: 90%;\n    padding: 5px 10px;\n    margin-top: 10px;\n    position: relative;\n\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 577px) {\n    position: sticky;\n    flex-direction: row;\n    justify-content: space-between;\n\n    div.price {\n      width: 20%;\n    }\n\n    button.add {\n      width: 50%;\n      margin-top: 0;\n    }\n\n    div.incdec-control {\n      width: 20%;\n    }\n  }\n"])), function (props) {
   var _props$theme4;
 
   return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.colors.darkTextColor;
@@ -108,3 +108,11 @@ var ProductShareWrapper = _styledComponents.default.div(_templateObject18 || (_t
 });
 
 exports.ProductShareWrapper = ProductShareWrapper;
+
+var ModalIcon = _styledComponents.default.span(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  position: fixed;\n  left: 25px;\n  top: 15px;\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 2;\n  ", "\n  svg{\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n\n  @media(min-width: 769px){\n    position: absolute;\n    top: 5px;\n  }\n"])), function (props) {
+  var _props$theme6;
+
+  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    left: 5px;\n    right: initial;\n  "])));
+});
+
+exports.ModalIcon = ModalIcon;
