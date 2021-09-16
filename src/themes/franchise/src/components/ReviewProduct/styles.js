@@ -49,6 +49,9 @@ export const HandReviewWrapper = styled.div`
     color: ${props => props.theme?.colors.headingColor};
     margin: 0;
     color: #344050;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `
 
