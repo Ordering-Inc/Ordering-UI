@@ -23,6 +23,8 @@ export const UpsellingContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
+    width: 100%;
+    justify-content: space-around;
   `}
 `
 
