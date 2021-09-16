@@ -145,6 +145,8 @@ var CartUI = function CartUI(props) {
       open: true,
       content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
       handleOnAccept: function handleOnAccept() {
+        setOpenUpselling(false);
+        setCanOpenUpselling(false);
         removeProduct(product, cart);
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
@@ -267,6 +269,7 @@ var CartUI = function CartUI(props) {
     business: cart.business,
     handleUpsellingPage: handleUpsellingPage,
     openUpselling: openUpselling,
+    setOpenUpselling: setOpenUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
   }), (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.OrderBill, {

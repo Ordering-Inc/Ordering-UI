@@ -57,7 +57,7 @@ var Menu = _styledComponents.default.div(_templateObject8 || (_templateObject8 =
 
 exports.Menu = Menu;
 
-var MenuLink = _styledComponents.default.a(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 16px;\n  padding: 10px;\n  color: ", ";\n  cursor: pointer;\n"])), function (props) {
+var MenuLink = _styledComponents.default.a(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 14px;\n  padding: 10px;\n  color: ", ";\n  cursor: pointer;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
