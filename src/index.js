@@ -80,6 +80,9 @@ import { UserFormDetailsUI } from './components/UserFormDetails'
 import { UserPopover } from './components/UserPopover'
 import { UserProfileForm } from './components/UserProfileForm'
 import { VerticalOrdersLayout } from './components/VerticalOrdersLayout'
+import { GoogleLoginButton } from './components/GoogleLogin'
+import { SmsLoginButton } from './components/SmsLogin'
+import { AppleLogin } from './components/AppleLogin'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
@@ -190,6 +193,9 @@ export {
   UserFormDetailsUI,
   UserProfileForm,
   VerticalOrdersLayout,
+  GoogleLoginButton,
+  SmsLoginButton,
+  AppleLogin,
   // Contexts
   ThemeContext,
   ThemeProvider,
