@@ -16,7 +16,6 @@ export const ReviewDriver = (props) => {
    * Function that load and send the driver review to ordering
    */
   const handleSendDriverReview = async () => {
-    console.log(reviews)
     setFormState({ ...formState, loading: true })
     try {
       const response = await fetch(`${ordering.root}/${order?.driver?.id}/user_reviews`, {
