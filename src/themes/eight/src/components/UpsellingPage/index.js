@@ -25,7 +25,8 @@ const UpsellingPageUI = (props) => {
     canOpenUpselling,
     setCanOpenUpselling,
     business,
-    isCustomMode
+    isCustomMode,
+    setOpenUpselling
   } = props
   const [, t] = useLanguage()
   const [actualProduct, setActualProduct] = useState(null)
@@ -38,6 +39,10 @@ const UpsellingPageUI = (props) => {
         setCanOpenUpselling && setCanOpenUpselling(true)
       } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
         handleUpsellingPage()
+      }
+      if (!upsellingProducts.loading && upsellingProducts?.products.length === 0) {
+        setCanOpenUpselling && setCanOpenUpselling(false)
+        setOpenUpselling && setOpenUpselling(false)
       }
     }
   }, [upsellingProducts.loading, upsellingProducts?.products.length])
