@@ -30,36 +30,59 @@ const ReviewOrderUI = (props) => {
   const theme = useTheme()
   const { handleSubmit, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
-  const [comment, setComment] = useState(null)
+  const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
 
   const commentsList = [
-    t('IT_WASNT_TASTY', "It wasn't tasty"),
-    t('IT_DOESNT_PACK_WELL', "It doesn't pack well"),
-    t('IT_ISNT_WORTH_WHAT_IT_COSTS', "It isn't worth what it costs"),
-    t('TOO_SLOW', 'Too slow'),
-    t('SUSTAINABLE_PACKAGING_WASNT_USED', "Sustainable packaging wasn't used"),
-    t('THEY_DID_NOT_FOLLOW_THE_ORDER_NOTES', 'They did not follow the order notes')
+    { key: 0, content: t('IT_WASNT_TASTY', "It wasn't tasty") },
+    { key: 1, content: t('IT_DOESNT_PACK_WELL', "It doesn't pack well") },
+    { key: 2, content: t('IT_ISNT_WORTH_WHAT_IT_COSTS', "It isn't worth what it costs") },
+    { key: 3, content: t('TOO_SLOW', 'Too slow') },
+    { key: 4, content: t('SUSTAINABLE_PACKAGING_WASNT_USED', "Sustainable packaging wasn't used") },
+    { key: 5, content: t('THEY_DID_NOT_FOLLOW_THE_ORDER_NOTES', 'They did not follow the order notes') }
+  ]
+
+  const qualificationList = [
+    { key: 1, text: t('TERRIBLE', 'Terrible'), middleNode: false, left: 0, right: 'initial' },
+    { key: 2, text: t('BAD', 'Bad'), middleNode: true, left: '25%', right: '75%' },
+    { key: 3, text: t('OKAY', 'Okay'), middleNode: true, left: '50%', right: '50%' },
+    { key: 4, text: t('GOOD', 'Good'), middleNode: true, left: '75%', right: '25%' },
+    { key: 5, text: t('GREAT', 'Great'), middleNode: false, left: 'initial', right: 0 }
   ]
 
   const handleChangeStars = (index) => {
     switch (index) {
-      case 'terrible':
+      case 1:
         setStars({ ...stars, quality: 1, punctiality: 1, service: 1, packaging: 1 })
         break
-      case 'bad':
+      case 2:
         setStars({ ...stars, quality: 2, punctiality: 2, service: 2, packaging: 2 })
         break
-      case 'okay':
+      case 3:
         setStars({ ...stars, quality: 3, punctiality: 3, service: 3, packaging: 3 })
         break
-      case 'good':
+      case 4:
         setStars({ ...stars, quality: 4, punctiality: 4, service: 4, packaging: 4 })
         break
-      case 'great':
+      case 5:
         setStars({ ...stars, quality: 5, punctiality: 5, service: 5, packaging: 5 })
         break
     }
+  }
+
+  const handleChangeComment = (commentItem) => {
+    const found = comments.find((comment) => comment?.key === commentItem.key)
+    if (found) {
+      const _comments = comments.filter((comment) => comment?.key !== commentItem.key)
+      setComments(_comments)
+    } else {
+      setComments([...comments, commentItem])
+    }
+  }
+
+  const isSelectedComment = (commentKey) => {
+    const found = comments.find((comment) => comment?.key === commentKey)
+    return found
   }
 
   useEffect(() => {
@@ -92,13 +115,15 @@ const ReviewOrderUI = (props) => {
   }, [errors])
 
   const onSubmit = values => {
+    if (Object.values(stars).some((value) => value === 0)) {
+      setAlertState({
+        open: true,
+        content: stars.quality === 0 ? [`${t('REVIEW_QUALIFICATION_REQUIRED', 'Review qualification is required')}`] : []
+      })
+      return
+    }
     setAlertState({ ...alertState, success: true })
     handleSendReview()
-  }
-
-  const handleChangeComments = (text) => {
-    if (comment === text) setComment(null)
-    else setComment(text)
   }
 
   const closeAlert = () => {
@@ -112,9 +137,13 @@ const ReviewOrderUI = (props) => {
   }
 
   useEffect(() => {
-    const _comment = comment ? (extraComment !== '' ? `${comment}. ${extraComment}` : `${comment}.`) : extraComment
+    let _comments = ''
+    if (comments.length > 0) {
+      comments.map(comment => (_comments += comment.content + '. '))
+    }
+    const _comment = _comments + extraComment
     setStars({ ...stars, comments: _comment })
-  }, [comment, extraComment])
+  }, [comments, extraComment])
 
   return (
     <>
@@ -134,42 +163,27 @@ const ReviewOrderUI = (props) => {
           <ReviewsProgressWrapper>
             <p>{t('HOW_WAS_YOUR_ORDER', 'How was your order?')}</p>
             <ReviewsProgressContent>
-              <ReviewsProgressBar style={{ width: `${((stars?.quality - 1) / 4) * 100}%` }} />
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? 'initial' : '0', right: theme?.rtl ? '0' : 'initial' }}
-                active={stars?.quality === 1}
-                onClick={() => handleChangeStars('terrible')}
-              >
-                {t('TERRIBLE', 'Terrible')}
-              </ReviewsMarkPoint>
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? 'initial' : '25%', right: theme?.rtl ? '25%' : 'initial' }}
-                active={stars?.quality === 2}
-                onClick={() => handleChangeStars('bad')}
-              >
-                {t('BAD', 'Bad')}
-              </ReviewsMarkPoint>
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? 'initial' : '50%', right: theme?.rtl ? '50%' : 'initial' }}
-                active={stars?.quality === 3}
-                onClick={() => handleChangeStars('okay')}
-              >
-                {t('OKAY', 'Okay')}
-              </ReviewsMarkPoint>
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? 'initial' : '75%', right: theme?.rtl ? '75%' : 'initial' }}
-                active={stars?.quality === 4}
-                onClick={() => handleChangeStars('good')}
-              >
-                {t('GOOD', 'Good')}
-              </ReviewsMarkPoint>
-              <ReviewsMarkPoint
-                style={{ left: theme.rtl ? '0' : 'initial', right: theme?.rtl ? 'initial' : '0' }}
-                active={stars?.quality === 5}
-                onClick={() => handleChangeStars('great')}
-              >
-                {t('GREAT', 'Great')}
-              </ReviewsMarkPoint>
+              <ReviewsProgressBar style={{ width: `${(stars?.quality === 0 ? 0 : (stars?.quality - 1) / 4) * 100}%` }} />
+              {
+                qualificationList?.map(qualification => (
+                  <ReviewsMarkPoint
+                    key={qualification?.key}
+                    style={{
+                      left: theme?.rtl ? (qualification?.middleNode ? 'initial' : qualification?.right) : qualification?.left,
+                      right: theme?.rtl ? qualification?.left : (qualification?.middleNode ? 'initial' : qualification?.right)
+                    }}
+                    active={stars?.quality === qualification?.key}
+                    pass={stars?.quality >= qualification?.key}
+                    className={qualification?.middleNode ? 'mark-point' : ''}
+                    onClick={() => handleChangeStars(qualification?.key)}
+                  >
+                    <span>
+                      {qualification?.text}
+                      <span />
+                    </span>
+                  </ReviewsMarkPoint>
+                ))
+              }
             </ReviewsProgressContent>
           </ReviewsProgressWrapper>
           <CommentsList>
@@ -178,13 +192,13 @@ const ReviewOrderUI = (props) => {
               commentsList?.map((commentItem, i) => (
                 <Button
                   key={i}
-                  color={comment === commentItem ? 'primary' : 'secundary'}
-                  onClick={() => handleChangeComments(commentItem)}
+                  color={isSelectedComment(commentItem?.key) ? 'primary' : 'secundary'}
+                  onClick={() => handleChangeComment(commentItem)}
                   initialIcon
                 >
-                  {commentItem}
+                  {commentItem.content}
                   {
-                    comment === commentItem && <MdClose />
+                    isSelectedComment(commentItem?.key) && <MdClose />
                   }
                 </Button>
               ))
@@ -195,7 +209,6 @@ const ReviewOrderUI = (props) => {
           <Comments>
             <p>{t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')}</p>
             <TextArea
-              placeholder={t('COMMENTS', 'Comments')}
               name='comments'
               value={extraComment}
               onChange={(e) => setExtraComment(e.target.value)}

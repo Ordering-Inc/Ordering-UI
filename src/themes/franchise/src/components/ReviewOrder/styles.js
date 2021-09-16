@@ -21,7 +21,12 @@ export const Comments = styled.div`
     font-size: 14px;
     color: ${props => props.theme?.colors.darkTextColor};
   }
+
+  textarea {
+    min-height: 104px;
+  }
 `
+
 export const Send = styled.div`
   display: flex;
   align-items: center;
@@ -126,7 +131,7 @@ export const ReviewsProgressBar = styled.div`
   transition: all 0.2s linear;
 `
 
-export const ReviewsMarkPoint = styled.span`
+export const ReviewsMarkPoint = styled.div`
   position: absolute;
   top: 15px;
   font-size: 12px;
@@ -134,7 +139,37 @@ export const ReviewsMarkPoint = styled.span`
   cursor: pointer;
 
   ${({ active }) => active && css`
-    color: ${props => props.theme?.colors.headingColor};
+    > span {
+      color: #344050;
+    }
+  `}
+
+  &.mark-point {
+    span {
+      position: relative;
+      margin-left: -50%;
+      ${props => props.theme?.rtl && css`
+        margin-right: -50%;
+        margin-left: 0;
+      `}
+
+      > span {
+        position: absolute;
+        height: 4px;
+        top: -15px;
+        width: 2px;
+        background: #CED4DA;
+        transition: all 0.3s;
+      }
+    }
+  }
+
+  ${({ pass }) => pass && css`
+    span {
+      > span {
+        background: transparent !important;
+      }
+    }
   `}
 `
 
