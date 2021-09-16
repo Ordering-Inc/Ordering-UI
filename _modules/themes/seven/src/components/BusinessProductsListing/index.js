@@ -160,7 +160,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   var onProductClick = function onProductClick(product) {
-    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
+    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && isQuickAddProduct) {
       addProduct(product, currentCart);
     } else {
       onProductRedirect({
