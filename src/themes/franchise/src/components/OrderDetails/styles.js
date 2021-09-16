@@ -27,6 +27,10 @@ export const SkeletonWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `
 
 export const HeaderInfo = styled.div`
@@ -290,18 +294,8 @@ export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};
   border-radius: 16px;
   margin-bottom: 30px;
-  span:nth-child(2),span:nth-child(5){
-      span{
-        height: 100px;
-      }
-    }
-  @media (min-width: 768px){
-    span:nth-child(2), span:nth-child(5){
-      span{
-        height: 200px;
-      }
-    }
-  }
+  display: flex;
+  flex-direction: column;
 `
 
 export const SkeletonBlockWrapp = styled.div`

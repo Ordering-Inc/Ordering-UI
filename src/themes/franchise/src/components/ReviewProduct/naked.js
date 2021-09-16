@@ -15,6 +15,7 @@ export const ReviewProduct = (props) => {
     const _changes = [...changes]
     setFormState({ ...formState, changes: _changes })
   }
+
   /**
    * Function that load and send the product review to ordering
    */
