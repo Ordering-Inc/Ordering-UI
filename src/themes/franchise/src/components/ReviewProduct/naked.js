@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
@@ -60,9 +60,6 @@ export const ReviewProduct = (props) => {
       })
     }
   }
-  useEffect(() => {
-    console.log(formState, 'this is changes')
-  }, [formState])
 
   return (
     <>
