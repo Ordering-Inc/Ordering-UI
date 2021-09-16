@@ -22,7 +22,8 @@ const ConfirmUI = (props) => {
     onCancel,
     onClose,
     acceptText,
-    cancelText
+    cancelText,
+    isLoading
   } = props
   const [, t] = useLanguage()
 
@@ -65,8 +66,8 @@ const ConfirmUI = (props) => {
         </PopupContent>
         {(onCancel || onAccept || onClose) && (
           <PopupActions>
-            {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL', 'Cancel')}</Button>}
-            {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT', 'Accept')}</Button>}
+            {onCancel && <Button disabled={isLoading} outline onClick={() => onCancel()}>{cancelText || t('CANCEL', 'Cancel')}</Button>}
+            {onAccept && <Button disabled={isLoading} color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT', 'Accept')}</Button>}
           </PopupActions>)}
         {props.afterComponents?.map((AfterComponent, i) => (
           <AfterComponent key={i} {...props} />))}
