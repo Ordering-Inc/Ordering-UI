@@ -64,8 +64,8 @@ export const ReviewDriver = (props) => {
           {...props}
           formState={formState}
           handleSendDriverReview={handleSendDriverReview}
-          reviews={reviews}
-          setReviews={setReviews}
+          dirverReviews={reviews}
+          setDriverReviews={setReviews}
         />
       )}
     </>

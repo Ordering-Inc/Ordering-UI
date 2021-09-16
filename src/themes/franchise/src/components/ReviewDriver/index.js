@@ -27,10 +27,10 @@ import {
 
 const ReviewDriverUI = (props) => {
   const {
-    reviews,
+    dirverReviews,
     order,
     formState,
-    setReviews,
+    setDriverReviews,
     closeReviewDriver,
     setIsDriverReviewed,
     handleSendDriverReview
@@ -60,11 +60,11 @@ const ReviewDriverUI = (props) => {
   ]
 
   const handleChangeReviews = (index) => {
-    if (index) setReviews({ ...reviews, qualification: index })
+    if (index) setDriverReviews({ ...dirverReviews, qualification: index })
   }
 
   const onSubmit = values => {
-    if (reviews?.qualification === 0) {
+    if (dirverReviews?.qualification === 0) {
       setAlertState({
         open: true,
         content: [`${t('REVIEW_QUALIFICATION_REQUIRED', 'Review qualification is required')}`]
@@ -135,7 +135,7 @@ const ReviewDriverUI = (props) => {
       comments.map(comment => (_comments += comment.content + '. '))
     }
     const _comment = _comments + extraComment
-    setReviews({ ...reviews, comment: _comment })
+    setDriverReviews({ ...dirverReviews, comment: _comment })
   }, [comments, extraComment])
 
   return (
@@ -161,7 +161,7 @@ const ReviewDriverUI = (props) => {
           <ReviewsProgressWrapper>
             <p>{t('HOW_WAS_YOUR_DRIVER', 'How was your driver?')}</p>
             <ReviewsProgressContent>
-              <ReviewsProgressBar style={{ width: `${(reviews?.qualification === 0 ? 0 : (reviews?.qualification - 1) / 4) * 100}%` }} />
+              <ReviewsProgressBar style={{ width: `${(dirverReviews?.qualification === 0 ? 0 : (dirverReviews?.qualification - 1) / 4) * 100}%` }} />
               {
                 qualificationList?.map(qualification => (
                   <ReviewsMarkPoint
@@ -170,8 +170,8 @@ const ReviewDriverUI = (props) => {
                       left: theme.rtl ? (qualification?.middleNode ? 'initial' : qualification?.right) : qualification?.left,
                       right: theme?.rtl ? qualification?.left : (qualification?.middleNode ? 'initial' : qualification?.right)
                     }}
-                    active={reviews?.qualification === qualification?.key}
-                    pass={reviews?.qualification >= qualification?.key}
+                    active={dirverReviews?.qualification === qualification?.key}
+                    pass={dirverReviews?.qualification >= qualification?.key}
                     className={qualification?.middleNode ? 'mark-point' : ''}
                     onClick={() => handleChangeReviews(qualification?.key)}
                   >
