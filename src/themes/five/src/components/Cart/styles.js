@@ -22,15 +22,13 @@ export const OrderBill = styled.div`
   background-color: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
   table {
     width: 100%;
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 14px;
 
     td span {
       unicode-bidi: bidi-override;
     }
 
     tr td:nth-child(2) {
-      font-weight: 500;
       text-align: right;
       ${props => props.theme?.rtl && css`
         text-align: left;
@@ -44,13 +42,8 @@ export const OrderBill = styled.div`
       td {
         font-weight: bold;
         color: ${props => props.theme.colors.darkTextColor};
+        font-size: 16px;
       }
-    }
-  }
-
-  @media (min-width: 411px) {
-    table {
-      font-size: 18px;
     }
   }
 `
@@ -79,6 +72,7 @@ export const CheckoutAction = styled.div`
 
   button {
     padding: 10px 30px;
+    min-width: 150px;
     width: 50%;
     &:disabled{
       opacity: 0.5;

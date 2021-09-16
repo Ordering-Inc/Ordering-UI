@@ -21,8 +21,11 @@ import { Footer } from './src/components/Footer'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
+import { Help } from './src/components/Help'
+import { HelpStaticPage } from './src/components/HelpStaticPage'
 import { HomeHero } from './src/components/HomeHero'
 import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
+import { LastOrders } from './src/components/LastOrders'
 import { LoginForm } from './src/components/LoginForm'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
@@ -68,8 +71,11 @@ export {
   ForgotPasswordForm,
   Header,
   HeaderOption,
+  Help,
+  HelpStaticPage,
   HomeHero,
   HorizontalOrdersLayout,
+  LastOrders,
   LoginForm,
   MomentPopover,
   MomentControl,

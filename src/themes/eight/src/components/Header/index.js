@@ -202,16 +202,18 @@ export const Header = (props) => {
                     <AddressItem onClick={() => handleAddress()}>
                       <SuLocation /> {orderState.options?.address?.address?.split(',')?.[0] || t('FIND_RESTAURANT', 'Find a restaurant')}
                     </AddressItem>
-                    <VerticalBorderLine />
                     {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                      <MomentItem
-                        onClick={() => handleMoment()}
-                      >
-                        <FaRegClock />
-                        {orderState.options?.moment
-                          ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
-                          : t('ASAP_ABBREVIATION', 'ASAP')}
-                      </MomentItem>
+                      <>
+                        <VerticalBorderLine />
+                        <MomentItem
+                          onClick={() => handleMoment()}
+                        >
+                          <FaRegClock />
+                          {orderState.options?.moment
+                            ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
+                            : t('ASAP_ABBREVIATION', 'ASAP')}
+                        </MomentItem>
+                      </>
                     )}
                   </>
                 )}

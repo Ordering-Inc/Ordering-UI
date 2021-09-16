@@ -28,7 +28,8 @@ const UpsellingPageUI = (props) => {
     canOpenUpselling,
     setCanOpenUpselling,
     business,
-    isCustomMode
+    isCustomMode,
+    setIsUpselling
   } = props
   const [, t] = useLanguage()
   const [actualProduct, setActualProduct] = useState(null)
@@ -42,6 +43,9 @@ const UpsellingPageUI = (props) => {
       } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
         handleUpsellingPage()
       }
+    }
+    if (!upsellingProducts.loading && upsellingProducts?.products.length <= 0) {
+      setIsUpselling(false)
     }
   }, [upsellingProducts.loading, upsellingProducts?.products.length])
 
@@ -171,13 +175,21 @@ const UpsellingPageUI = (props) => {
           )}
         </>
       )}
-      <Modal open={modalIsOpen} onClose={() => setModalIsOpen(false)} width='70%' padding='0' closeOnBackdrop>
+      <Modal
+        open={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+        width='70%'
+        padding='0'
+        closeOnBackdrop
+        hideCloseDefault
+      >
         {actualProduct && (
           <ProductForm
             product={actualProduct}
             businessId={actualProduct.api.businessId}
             businessSlug={business.slug}
             onSave={() => handleSaveProduct()}
+            onClose={() => setModalIsOpen(false)}
           />
         )}
       </Modal>

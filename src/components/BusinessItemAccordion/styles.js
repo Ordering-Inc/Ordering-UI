@@ -108,7 +108,7 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: 65%;
+  width: ${({ isHasTotal }) => isHasTotal ? '65%' : '100%'};
 
   ${props => props.theme?.rtl && css`
     margin-right: 10px;

@@ -100,7 +100,7 @@ export const Menu = styled.div`
 `
 export const MenuLink = styled.a`
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   padding: 10px;
   color: ${props => props.theme.colors.primary};
   cursor: pointer;

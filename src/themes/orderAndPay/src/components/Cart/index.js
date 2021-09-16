@@ -268,11 +268,12 @@ const CartUI = (props) => {
             closeOnBackdrop={false}
           />
           <Modal
-            width='40%'
+            width='60%'
             open={openProduct}
             padding='0'
             closeOnBackdrop
             onClose={() => setModalIsOpen(false)}
+            hideCloseDefault
           >
             <ProductForm
               isCartProduct
@@ -282,6 +283,7 @@ const CartUI = (props) => {
               categoryId={curProduct?.category_id}
               productId={curProduct?.id}
               onSave={handlerProductAction}
+              onClose={() => setModalIsOpen(false)}
             />
           </Modal>
           {(openUpselling || isUpselling) && (
@@ -291,6 +293,7 @@ const CartUI = (props) => {
                 <MdClose onClick={() => setIsUpselling(false)} />
               </UpsellingPageTitleWrapper>
               <UpsellingPage
+                setIsUpselling={setIsUpselling}
                 businessId={cart.business_id}
                 isCustomMode={isCustomMode}
                 cartProducts={cart.products}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLanguage, OrderTypeControl, useOrder, useApi } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
@@ -39,8 +39,8 @@ export const OrderTypeSelectorContentUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   // const [pagination, setPagination] = useState({})
   const [places, setPlaces] = useState([])
-  const [placeId, setPlaceId] = useState(null)
-
+  const [placeId, setPlaceId] = useState('')
+  const inputRef = useRef()
   const handleClickOrderType = ({ value, text, label }) => {
     if (!label) {
       handleBusinessPage()
@@ -86,6 +86,11 @@ export const OrderTypeSelectorContentUI = (props) => {
     if (places.some(place => place.id === parseInt(placeId))) {
       await window.localStorage.setItem('place_id', placeId)
       handleBusinessPage()
+    } else {
+      setAlertState({
+        open: true,
+        content: [t('THE_PLACES_NOT_EXISTS', 'The place does not exists')]
+      })
     }
   }
 
@@ -94,6 +99,11 @@ export const OrderTypeSelectorContentUI = (props) => {
       open: false,
       content: []
     })
+  }
+
+  const onChangePlaceId = (e) => {
+    inputRef.current.value = inputRef.current.value.replace(/[^0-9.]+/g, '')
+    setPlaceId(e.target.value.replace(/[^0-9.]+/g, ''))
   }
 
   useEffect(() => {
@@ -144,10 +154,18 @@ export const OrderTypeSelectorContentUI = (props) => {
             <h1>{orderTypeSelected?.type}</h1>
             <label>{orderTypeSelected?.label}</label>
             <InputWrapper>
-              <Input placeholder='#' onChange={(e) => setPlaceId(e.target.value)} type='number' />
+              <Input
+                placeholder='#'
+                onChange={(e) => onChangePlaceId(e)}
+                type='text'
+                ref={inputRef}
+                min={0}
+              />
             </InputWrapper>
             <Table>
-              <h2>{t('AVAILABLE_PLACES', 'Available places')}</h2>
+              {places.length > 0 && (
+                <h2>{t('AVAILABLE_PLACES', 'Available places')}</h2>
+              )}
               {places.map(place => (
                 <PlaceName key={place.id} isDisabled={!place.enabled}>
                   {place.name} #{place.id}

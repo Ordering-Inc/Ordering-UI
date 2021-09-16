@@ -130,9 +130,19 @@ export const CalendarWrapper = styled.div`
 
 export const DatePickerWrapper = styled.div`
   position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+
+  @media (min-width: 430px) {
+    width: 300px;
+  }
 
   .react-datepicker-popper {
     display: none;
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
   }
 
   > svg {
@@ -147,6 +157,10 @@ export const DatePickerWrapper = styled.div`
       left: 5px;
       right: initial;
     `}
+  }
+
+  input {
+    width: 100%;
   }
 `
 

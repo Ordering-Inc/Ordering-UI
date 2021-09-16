@@ -25,9 +25,12 @@ import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { GoogleLogin } from './src/components/GoogleLogin'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
+import { Help } from './src/components/Help'
+import { HelpStaticPage } from './src/components/HelpStaticPage'
 import { HomeHero } from './src/components/HomeHero'
 import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
+import { LastOrders } from './src/components/LastOrders'
 import { LoginForm } from './src/components/LoginForm'
 import { Messages } from './src/components/Messages'
 import { MomentContent } from './src/components/MomentContent'
@@ -86,9 +89,12 @@ export {
   GoogleLogin,
   Header,
   HeaderOption,
+  Help,
+  HelpStaticPage,
   HomeHero,
   HorizontalOrdersLayout,
   InputPhoneNumber,
+  LastOrders,
   LoginForm,
   Messages,
   MomentContent,

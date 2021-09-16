@@ -8,6 +8,7 @@ import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
+import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
 
 import { useEvent, useLanguage, useOrder, useSession } from 'ordering-components'
 import { useTheme } from 'styled-components'
@@ -219,6 +220,36 @@ export const SidebarMenu = (props) => {
                       }
                     >
                       {t('PROFILE', 'Profile')}
+                    </TextInfo>
+                  </MenuLinkText>
+                  <MenuLinkSeparator>
+                    <div>
+                      <hr />
+                    </div>
+                  </MenuLinkSeparator>
+                </WrappContent>
+              </MenuLink>
+              <MenuLink
+                isHome={isHome}
+                onClick={() => handleGoToPage({ page: 'help' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    isHome={isHome}
+                    active={
+                      window.location.pathname === '/help'
+                    }
+                  >
+                    <BiHelpCircle />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      isHome={isHome}
+                      active={
+                        window.location.pathname === '/help'
+                      }
+                    >
+                      {t('HELP', 'help')}
                     </TextInfo>
                   </MenuLinkText>
                   <MenuLinkSeparator>

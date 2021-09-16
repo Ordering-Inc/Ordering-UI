@@ -23,6 +23,9 @@ export const Input = styled.input`
   &:-ms-input-placeholder {
     color: #DBDCDB;
   }
+  &::-ms-reveal{
+    display: none;
+  }
 `
 
 export const InputGroup = styled.div`
