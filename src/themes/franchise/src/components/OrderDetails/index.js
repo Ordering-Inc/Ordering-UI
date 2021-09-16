@@ -84,6 +84,7 @@ const OrderDetailsUI = (props) => {
   const [isDriverReviewed, setIsDriverReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
   const [isReviewOpen, setIsReviewOpen] = useState(false)
+  const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
 
   const { order, loading, businessData, error } = props.order
 
@@ -148,8 +149,27 @@ const OrderDetailsUI = (props) => {
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
 
-  const handleCloseProductReview = () => {
-    if (!order?.driver) setIsReviewOpen(false)
+  const handleOpenReview = () => {
+    if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
+    else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
+    else if (order?.driver && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    setIsReviewOpen(true)
+  }
+
+  const handleCloseReivew = () => {
+    setReviewStatus({ order: false, product: false, driver: false })
+    setIsReviewOpen(false)
+  }
+
+  const closeReviewOrder = () => {
+    if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
+    else if (order?.driver && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else handleCloseReivew()
+  }
+
+  const closeReviewProduct = () => {
+    if (order?.driver && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else handleCloseReivew()
   }
 
   useEffect(() => {
@@ -202,9 +222,9 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && (!isOrderReviewed || !isProductReviewed)}
+                  ) && (!order?.review || order.driver || !isProductReviewed)}
                 >
-                  <span onClick={() => setIsReviewOpen(true)}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                  <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                 </ReviewOrderLink>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
@@ -452,26 +472,25 @@ const OrderDetailsUI = (props) => {
             />
           )
         )}
-        {isReviewOpen && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed) && (
-          <Modal
-            open={isReviewOpen}
-            onClose={() => setIsReviewOpen(false)}
-            title={order
-              ? ((!isOrderReviewed && !order.review)
-                ? t('REVIEW_ORDER', 'Review order')
-                : (!isProductReviewed
-                  ? t('REVIEW_PRODUCT', 'Review Product')
-                  : t('REVIEW_DRIVER', 'Review Driver')))
-              : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
-          >
-            {
-              (!isOrderReviewed && !order.review) ? (<ReviewOrder order={order} closeReviewOrder={() => setIsOrderReviewed(true)} setIsReviewed={setIsOrderReviewed} />)
-                : (!isProductReviewed
-                  ? <ReviewProduct order={order} closeReviewProduct={handleCloseProductReview} setIsProductReviewed={setIsProductReviewed} />
-                  : (!isDriverReviewed && order?.driver && <ReviewDriver order={order} closeReviewDriver={() => setIsReviewOpen(false)} setIsDriverReviewed={setIsDriverReviewed} />))
-            }
-          </Modal>
-        )}
+        <Modal
+          open={isReviewOpen}
+          onClose={handleCloseReivew}
+          title={order
+            ? (reviewStatus?.order
+              ? t('REVIEW_ORDER', 'Review order')
+              : (reviewStatus?.product
+                ? t('REVIEW_PRODUCT', 'Review Product')
+                : t('REVIEW_DRIVER', 'Review Driver')))
+            : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
+        >
+          {
+            reviewStatus?.order
+              ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+              : (reviewStatus?.product
+                ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
+                : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
+          }
+        </Modal>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
