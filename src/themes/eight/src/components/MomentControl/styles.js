@@ -177,6 +177,9 @@ export const HourListWrapper = styled.div`
 
     #list {
       width: 100%;
+      max-height: 200px;
+      overflow: auto;
+      background-color: #FFFFFF;
     }
   }
 
