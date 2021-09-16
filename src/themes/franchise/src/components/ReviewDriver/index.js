@@ -60,23 +60,7 @@ const ReviewDriverUI = (props) => {
   ]
 
   const handleChangeReviews = (index) => {
-    switch (index) {
-      case 1:
-        setReviews({ ...reviews, qualification: 1 })
-        break
-      case 2:
-        setReviews({ ...reviews, qualification: 2 })
-        break
-      case 3:
-        setReviews({ ...reviews, qualification: 3 })
-        break
-      case 4:
-        setReviews({ ...reviews, qualification: 4 })
-        break
-      case 5:
-        setReviews({ ...reviews, qualification: 5 })
-        break
-    }
+    if (index) setReviews({ ...reviews, qualification: index })
   }
 
   const onSubmit = values => {
@@ -191,10 +175,7 @@ const ReviewDriverUI = (props) => {
                     className={qualification?.middleNode ? 'mark-point' : ''}
                     onClick={() => handleChangeReviews(qualification?.key)}
                   >
-                    <span>
-                      {qualification?.text}
-                      <span />
-                    </span>
+                    <span>{qualification?.text}<span /></span>
                   </ReviewsMarkPoint>
                 ))
               }
