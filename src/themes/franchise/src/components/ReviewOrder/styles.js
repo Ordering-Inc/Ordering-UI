@@ -119,13 +119,13 @@ export const ReviewsProgressContent = styled.div`
   background: #E9ECEF;
   border-radius: 50px;
   width: 100%;
-  height: 4px;
+  height: 6px;
   position: relative;
   margin-bottom: 30px;
 `
 
 export const ReviewsProgressBar = styled.div`
-  height: 4px;
+  height: 6px;
   border-radius: 50px;
   background: #344050;
   transition: all 0.2s linear;
@@ -155,7 +155,7 @@ export const ReviewsMarkPoint = styled.div`
 
       > span {
         position: absolute;
-        height: 4px;
+        height: 6px;
         top: -15px;
         width: 2px;
         background: #CED4DA;

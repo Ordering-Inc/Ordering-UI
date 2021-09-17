@@ -69,10 +69,10 @@ const SingleProductReview = (props) => {
     const _comment = _comments + extraComment
     let found = false
     const _changes = formState.changes.map(item => {
-      if (item?.product_id === product?.id) {
+      if (item?.product_id === product?.product_id) {
         found = true
         return {
-          product_id: product?.id,
+          product_id: product?.product_id,
           comment: _comment,
           qualification: isLike ? 5 : 1
         }
@@ -81,7 +81,7 @@ const SingleProductReview = (props) => {
     })
     if (!found) {
       _changes.push({
-        product_id: product?.id,
+        product_id: product?.product_id,
         comment: _comment,
         qualification: isLike ? 5 : 1
       })
