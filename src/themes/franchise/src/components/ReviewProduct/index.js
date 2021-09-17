@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { ReviewProduct as ReviewProductController } from './naked'
-import { useLanguage } from 'ordering-components'
+// import { ReviewProduct as ReviewProductController } from './naked'
+import { useLanguage, ReviewProduct as ReviewProductController } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -245,7 +245,8 @@ const ReviewProductUI = (props) => {
 export const ReviewProduct = (props) => {
   const reviewProductProps = {
     ...props,
-    UIComponent: ReviewProductUI
+    UIComponent: ReviewProductUI,
+    isToast: true
   }
   return <ReviewProductController {...reviewProductProps} />
 }

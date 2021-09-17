@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useLanguage, useUtils } from 'ordering-components'
-import { ReviewDriver as ReviewDriverController } from './naked'
+import { useLanguage, useUtils, ReviewDriver as ReviewDriverController } from 'ordering-components'
+// import { ReviewDriver as ReviewDriverController } from './naked'
 import MdClose from '@meronex/icons/md/MdClose'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
@@ -247,7 +247,8 @@ const ReviewDriverUI = (props) => {
 export const ReviewDriver = (props) => {
   const reviewDriverProps = {
     ...props,
-    UIComponent: ReviewDriverUI
+    UIComponent: ReviewDriverUI,
+    isToast: true
   }
 
   return <ReviewDriverController {...reviewDriverProps} />

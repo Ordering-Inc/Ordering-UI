@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { useSession, useApi, ToastType, useToast, useLanguage } from 'ordering-components'
 
 export const OrderReview = (props) => {
-  const { UIComponent, order, onSaveReview, handleCustomSendReview } = props
+  const { UIComponent, order, onSaveReview, handleCustomSendReview, isToast } = props
 
   const [ordering] = useApi()
   const [session] = useSession()
@@ -45,7 +45,7 @@ export const OrderReview = (props) => {
       const { result, error } = await response.json()
       onSaveReview && onSaveReview(response)
       setFormState({ loading: false, result: result, error: error })
-      if (!error) showToast(ToastType.Success, t('ORDER_REVIEW_SUCCESS_CONTENT', 'Thank you, Order review successfully submitted!'))
+      if (!error && isToast) showToast(ToastType.Success, t('ORDER_REVIEW_SUCCESS_CONTENT', 'Thank you, Order review successfully submitted!'))
     } catch (err) {
       setFormState({
         result: {
