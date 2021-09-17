@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
-import { useSession, useApi } from 'ordering-components'
+// import { ToastType, useToast } from '../../contexts/ToastContext'
+// import { useLanguage } from '../../contexts/LanguageContext'
+import { useSession, useApi, ToastType, useToast, useLanguage } from 'ordering-components'
 
 export const ReviewDriver = (props) => {
   const { UIComponent, order } = props
 
   const [ordering] = useApi()
   const [session] = useSession()
+  const [, t] = useLanguage()
+  const [, { showToast }] = useToast()
   const [reviews, setReviews] = useState({ qualification: 0, comment: '' })
   const [formState, setFormState] = useState({ loading: false, result: { error: false } })
 
@@ -35,6 +39,7 @@ export const ReviewDriver = (props) => {
             error: false
           }
         })
+        showToast(ToastType.Success, t('DRIVER_REVIEW_SUCCESS_CONTENT', 'Thank you, Driver review successfully submitted!'))
       } else {
         setFormState({
           ...formState,
