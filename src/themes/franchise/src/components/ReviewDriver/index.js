@@ -90,9 +90,6 @@ const ReviewDriverUI = (props) => {
       open: false,
       content: []
     })
-    if (!formState.loading && !formState.result?.error && alertState.success) {
-      closeReviewDriver()
-    }
   }
 
   const isSelectedComment = (commentKey) => {
@@ -109,13 +106,8 @@ const ReviewDriverUI = (props) => {
       })
     }
     if (!formState.loading && !formState.result?.error && alertState.success) {
-      setAlertState({
-        ...alertState,
-        open: true,
-        title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
-        content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
-      })
       setIsDriverReviewed && setIsDriverReviewed(true)
+      closeReviewDriver && closeReviewDriver()
     }
   }, [formState])
 

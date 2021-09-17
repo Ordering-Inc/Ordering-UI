@@ -79,13 +79,8 @@ const ReviewOrderUI = (props) => {
       })
     }
     if (!formState.loading && !formState.result?.error && alertState.success) {
-      setAlertState({
-        ...alertState,
-        open: true,
-        title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
-        content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
-      })
       setIsReviewed && setIsReviewed(true)
+      closeReviewOrder && closeReviewOrder()
     }
   }, [formState])
 
@@ -116,9 +111,6 @@ const ReviewOrderUI = (props) => {
       open: false,
       content: []
     })
-    if (!formState.loading && !formState.result?.error && alertState.success) {
-      closeReviewOrder()
-    }
   }
 
   useEffect(() => {

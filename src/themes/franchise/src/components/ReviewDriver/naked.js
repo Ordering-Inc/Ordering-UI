@@ -22,7 +22,7 @@ export const ReviewDriver = (props) => {
   const handleSendDriverReview = async () => {
     setFormState({ ...formState, loading: true })
     try {
-      const response = await fetch(`${ordering.root}/${order?.driver?.id}/user_reviews`, {
+      const response = await fetch(`${ordering.root}/users/${order?.driver?.id}/user_reviews`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${session.token}`,

@@ -168,9 +168,6 @@ const ReviewProductUI = (props) => {
       open: false,
       content: []
     })
-    if (!formState.loading && !formState.result?.error && alertState.success) {
-      closeReviewProduct()
-    }
   }
 
   useEffect(() => {
@@ -182,13 +179,8 @@ const ReviewProductUI = (props) => {
       })
     }
     if (!formState.loading && !formState.result?.error && alertState.success) {
-      setAlertState({
-        ...alertState,
-        open: true,
-        title: t('REVIEW_SUCCESS_TITLE', 'Well done'),
-        content: t('REVIEW_SUCCESS_CONTENT', 'Thank you, Review successfully submitted!')
-      })
       setIsProductReviewed && setIsProductReviewed(true)
+      closeReviewProduct && closeReviewProduct()
     }
   }, [formState])
 

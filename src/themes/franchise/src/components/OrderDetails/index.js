@@ -152,7 +152,7 @@ const OrderDetailsUI = (props) => {
   const handleOpenReview = () => {
     if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
     else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
-    else if (order?.driver && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
     setIsReviewOpen(true)
   }
 
@@ -163,12 +163,12 @@ const OrderDetailsUI = (props) => {
 
   const closeReviewOrder = () => {
     if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
-    else if (order?.driver && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
     else handleCloseReivew()
   }
 
   const closeReviewProduct = () => {
-    if (order?.driver && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
     else handleCloseReivew()
   }
 
@@ -222,7 +222,7 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && (!order?.review || order.driver || !isProductReviewed)}
+                  ) && (!order?.review || (order.driver && !order?.user_review) || !isProductReviewed)}
                 >
                   <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                 </ReviewOrderLink>
@@ -475,8 +475,6 @@ const OrderDetailsUI = (props) => {
                   <Skeleton height={60} />
                   <Skeleton height={300} />
                   <Skeleton height={60} />
-                  <Skeleton height={25} />
-                  <Skeleton height={25} />
                   <Skeleton height={25} />
                   <Skeleton height={25} />
                   <Skeleton height={25} />
