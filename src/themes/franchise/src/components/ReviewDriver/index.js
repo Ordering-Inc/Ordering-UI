@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLanguage, useUtils, ReviewDriver as ReviewDriverController } from 'ordering-components'
-// import { ReviewDriver as ReviewDriverController } from './naked'
 import MdClose from '@meronex/icons/md/MdClose'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 

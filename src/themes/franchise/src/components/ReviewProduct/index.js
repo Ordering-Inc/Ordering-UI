@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import { ReviewProduct as ReviewProductController } from './naked'
 import { useLanguage, ReviewProduct as ReviewProductController } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 
