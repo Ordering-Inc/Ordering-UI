@@ -92,9 +92,15 @@ const BusinessProductsListingUI = (props) => {
   const handler = () => {
     setOpenBusinessInformation(true)
   }
+
   const onProductClick = (product) => {
-    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && isQuickAddProduct) {
-      addProduct(product, currentCart)
+    const isProductAddedToCart = currentCart.products.some(Cproduct => Cproduct.id === product.id)
+    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && !isProductAddedToCart && isQuickAddProduct) {
+      const currentProduct = {
+        ...product,
+        quantity: product.quantity + 1
+      }
+      addProduct(currentProduct, currentCart, isQuickAddProduct)
     } else {
       onProductRedirect({
         slug: business?.slug,
@@ -239,6 +245,7 @@ const BusinessProductsListingUI = (props) => {
                     isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
                     handleClearSearch={handleChangeSearch}
                     errorQuantityProducts={errorQuantityProducts}
+                    currentCart={currentCart}
                   />
                 </WrapContent>
               </div>

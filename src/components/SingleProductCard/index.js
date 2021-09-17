@@ -18,7 +18,8 @@ export const SingleProductCard = (props) => {
     isSoldOut,
     isSkeleton,
     onProductClick,
-    isCartOnProductsList
+    isCartOnProductsList,
+    isProductAddedToCart
   } = props
 
   const [, t] = useLanguage()
@@ -64,6 +65,9 @@ export const SingleProductCard = (props) => {
             <Skeleton width={100} />
           )}
         </CardInfo>
+        {!isSkeleton && isProductAddedToCart && (
+          <span>{t('PRODUCT_ADDED', 'Product added')}</span>
+        )}
         {!isSkeleton ? (
           <WrapLogo>
             <CardLogo
