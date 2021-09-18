@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
 import React from 'react'
+import styled, { css } from 'styled-components'
 
-export const ReviewOrderContainer = styled.form`
+export const ReviewDriverContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,6 @@ export const Comments = styled.div`
   margin-top: 10px;
 
   p {
-    text-transform: capitalize;
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 14px;
@@ -26,40 +25,18 @@ export const Comments = styled.div`
     min-height: 104px;
   }
 `
-
-export const Send = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+export const ActionBtnWrapper = styled.div`
   margin-top: 30px;
   width: 100%;
-
-  span {
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 16px;
-    user-select: none;
-  }
 
   button {
     font-size: 14px;
     padding: 6px 20px;
-
-    svg {
-      color: white;
-      font-size: 21px;
-      vertical-align: middle;
-      margin-left: 8px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 0;
-        margin-right: 8px;
-        transform: rotateZ(180deg);
-      `}
-    }
+    width: 100%;
   }
 `
 
-const BusinessLogoStyled = styled.div`
+const DriverPhotoStyled = styled.div`
   display: flex;
   width: 124px;
   height: 124px;
@@ -79,20 +56,20 @@ const BusinessLogoStyled = styled.div`
   }
 `
 
-export const BusinessLogo = (props) => {
+export const DriverPhoto = (props) => {
   const style = {}
   if (props.bgimage) {
     style.backgroundImage = `url(${props.bgimage})`
   }
 
   return (
-    <BusinessLogoStyled {...props} style={style}>
+    <DriverPhotoStyled {...props} style={style}>
       {props.children}
-    </BusinessLogoStyled>
+    </DriverPhotoStyled>
   )
 }
 
-export const WrapperBusinessLogo = styled.div`
+export const WrapperDriverPhoto = styled.div`
   align-self: center;
   width: 124px;
   height: 124px;
@@ -100,6 +77,11 @@ export const WrapperBusinessLogo = styled.div`
   max-width: 124px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
+
+  svg {
+    width: 124px;
+    height: 124px;
+  }
 `
 
 export const ReviewsProgressWrapper = styled.div`
@@ -207,4 +189,12 @@ export const CommentsList = styled.div`
       `}
     }
   }
+`
+
+export const DriverInfoBlock = styled.p`
+  margin-top: 16px;
+  margin-bottom: 0;
+  font-size: 14px;
+  text-align: center;
+  color: #344050;
 `

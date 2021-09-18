@@ -1,45 +1,53 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-
-import { useLanguage, useUtils, OrderReview as ReviewOrderController } from 'ordering-components'
+import { useLanguage, useUtils, ReviewDriver as ReviewDriverController } from 'ordering-components'
 import MdClose from '@meronex/icons/md/MdClose'
-import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+
+import { Alert } from '../Confirm'
+import { TextArea } from '../../styles/Inputs'
+import { Button } from '../../styles/Buttons'
+import { useTheme } from 'styled-components'
+
 import {
-  ReviewOrderContainer,
+  ReviewDriverContainer,
   Comments,
-  Send,
-  BusinessLogo,
-  WrapperBusinessLogo,
+  ActionBtnWrapper,
+  DriverPhoto,
+  WrapperDriverPhoto,
   ReviewsProgressWrapper,
   ReviewsProgressContent,
   ReviewsProgressBar,
   ReviewsMarkPoint,
   LogoAndReviewWrapper,
-  CommentsList
+  CommentsList,
+  DriverInfoBlock
 } from './styles'
-import { Alert } from '../Confirm'
 
-import { TextArea } from '../../styles/Inputs'
-import { Button } from '../../styles/Buttons'
-import { useTheme } from 'styled-components'
+const ReviewDriverUI = (props) => {
+  const {
+    dirverReviews,
+    order,
+    formState,
+    setDriverReviews,
+    closeReviewDriver,
+    setIsDriverReviewed,
+    handleSendDriverReview
+  } = props
 
-const ReviewOrderUI = (props) => {
-  const { stars, order, handleSendReview, formState, closeReviewOrder, setIsReviewed, setStars } = props
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
-  const theme = useTheme()
   const { handleSubmit, errors } = useForm()
-  const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
   const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
+  const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
 
   const commentsList = [
-    { key: 0, content: t('IT_WASNT_TASTY', "It wasn't tasty") },
-    { key: 1, content: t('IT_DOESNT_PACK_WELL', "It doesn't pack well") },
-    { key: 2, content: t('IT_ISNT_WORTH_WHAT_IT_COSTS', "It isn't worth what it costs") },
-    { key: 3, content: t('TOO_SLOW', 'Too slow') },
-    { key: 4, content: t('SUSTAINABLE_PACKAGING_WASNT_USED', "Sustainable packaging wasn't used") },
-    { key: 5, content: t('THEY_DID_NOT_FOLLOW_THE_ORDER_NOTES', 'They did not follow the order notes') }
+    { key: 0, content: t('FAST_AND_EFFICIENT', 'Fast and efficient') },
+    { key: 1, content: t('DELIVERY_PERFECT', 'Delivery perfect') },
+    { key: 2, content: t('EXCELLENT_COMMUNICATION', 'Excellent communication') },
+    { key: 3, content: t('CORDIAL_SERVICE', 'Cordial service') }
   ]
 
   const qualificationList = [
@@ -50,8 +58,20 @@ const ReviewOrderUI = (props) => {
     { key: 5, text: t('GREAT', 'Great'), middleNode: false, left: 'initial', right: 0 }
   ]
 
-  const handleChangeStars = (index) => {
-    if (index) setStars({ ...stars, quality: index, punctiality: index, service: index, packaging: index })
+  const handleChangeReviews = (index) => {
+    if (index) setDriverReviews({ ...dirverReviews, qualification: index })
+  }
+
+  const onSubmit = values => {
+    if (dirverReviews?.qualification === 0) {
+      setAlertState({
+        open: true,
+        content: [`${t('REVIEW_QUALIFICATION_REQUIRED', 'Review qualification is required')}`]
+      })
+      return
+    }
+    setAlertState({ ...alertState, success: true })
+    handleSendDriverReview()
   }
 
   const handleChangeComment = (commentItem) => {
@@ -62,6 +82,13 @@ const ReviewOrderUI = (props) => {
     } else {
       setComments([...comments, commentItem])
     }
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
   const isSelectedComment = (commentKey) => {
@@ -78,8 +105,8 @@ const ReviewOrderUI = (props) => {
       })
     }
     if (!formState.loading && !formState.result?.error && alertState.success) {
-      setIsReviewed && setIsReviewed(true)
-      closeReviewOrder && closeReviewOrder()
+      setIsDriverReviewed && setIsDriverReviewed(true)
+      closeReviewDriver && closeReviewDriver()
     }
   }, [formState])
 
@@ -93,32 +120,13 @@ const ReviewOrderUI = (props) => {
     }
   }, [errors])
 
-  const onSubmit = values => {
-    if (Object.values(stars).some((value) => value === 0)) {
-      setAlertState({
-        open: true,
-        content: stars.quality === 0 ? [`${t('REVIEW_QUALIFICATION_REQUIRED', 'Review qualification is required')}`] : []
-      })
-      return
-    }
-    setAlertState({ ...alertState, success: true })
-    handleSendReview()
-  }
-
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
-  }
-
   useEffect(() => {
     let _comments = ''
     if (comments.length > 0) {
       comments.map(comment => (_comments += comment.content + '. '))
     }
     const _comment = _comments + extraComment
-    setStars({ ...stars, comments: _comment })
+    setDriverReviews({ ...dirverReviews, comment: _comment })
   }, [comments, extraComment])
 
   return (
@@ -131,27 +139,32 @@ const ReviewOrderUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <>
         <LogoAndReviewWrapper>
-          <WrapperBusinessLogo>
-            {(order?.business?.logo || theme.images?.dummies?.businessLogo) && (
-              <BusinessLogo bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-            )}
-          </WrapperBusinessLogo>
+          <WrapperDriverPhoto>
+            {(order?.driver?.photo) ? (
+              <DriverPhoto bgimage={optimizeImage(order?.driver?.photo, 'h_200,c_limit')} />
+            ) : <FaUserAlt />}
+          </WrapperDriverPhoto>
+          {
+            order?.driver?.name && (
+              <DriverInfoBlock>{order?.driver?.name}</DriverInfoBlock>
+            )
+          }
           <ReviewsProgressWrapper>
-            <p>{t('HOW_WAS_YOUR_ORDER', 'How was your order?')}</p>
+            <p>{t('HOW_WAS_YOUR_DRIVER', 'How was your driver?')}</p>
             <ReviewsProgressContent>
-              <ReviewsProgressBar style={{ width: `${(stars?.quality === 0 ? 0 : (stars?.quality - 1) / 4) * 100}%` }} />
+              <ReviewsProgressBar style={{ width: `${(dirverReviews?.qualification === 0 ? 0 : (dirverReviews?.qualification - 1) / 4) * 100}%` }} />
               {
                 qualificationList?.map(qualification => (
                   <ReviewsMarkPoint
                     key={qualification?.key}
                     style={{
-                      left: theme?.rtl ? (qualification?.middleNode ? 'initial' : qualification?.right) : qualification?.left,
+                      left: theme.rtl ? (qualification?.middleNode ? 'initial' : qualification?.right) : qualification?.left,
                       right: theme?.rtl ? qualification?.left : (qualification?.middleNode ? 'initial' : qualification?.right)
                     }}
-                    active={stars?.quality === qualification?.key}
-                    pass={stars?.quality >= qualification?.key}
+                    active={dirverReviews?.qualification === qualification?.key}
+                    pass={dirverReviews?.qualification >= qualification?.key}
                     className={qualification?.middleNode ? 'mark-point' : ''}
-                    onClick={() => handleChangeStars(qualification?.key)}
+                    onClick={() => handleChangeReviews(qualification?.key)}
                   >
                     <span>{qualification?.text}<span /></span>
                   </ReviewsMarkPoint>
@@ -165,24 +178,24 @@ const ReviewOrderUI = (props) => {
               commentsList?.map((commentItem, i) => (
                 <Button
                   key={i}
-                  color={isSelectedComment(commentItem?.key) ? 'primary' : 'secundary'}
+                  color={isSelectedComment(commentItem.key) ? 'primary' : 'secundary'}
                   onClick={() => handleChangeComment(commentItem)}
                   initialIcon
                 >
                   {commentItem.content}
                   {
-                    isSelectedComment(commentItem?.key) && <MdClose />
+                    isSelectedComment(commentItem.key) && <MdClose />
                   }
                 </Button>
               ))
             }
           </CommentsList>
         </LogoAndReviewWrapper>
-        <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
+        <ReviewDriverContainer onSubmit={handleSubmit(onSubmit)}>
           <Comments>
             <p>{t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')}</p>
             <TextArea
-              name='comments'
+              name='comment'
               value={extraComment}
               onChange={(e) => setExtraComment(e.target.value)}
               autoComplete='off'
@@ -198,20 +211,19 @@ const ReviewOrderUI = (props) => {
             props.afterMidComponents?.map((MidComponent, i) => (
               <MidComponent key={i} {...props} />))
           }
-          <Send>
-            <span onClick={closeReviewOrder}>{t('SKIP', 'Skip')}</span>
+          <ActionBtnWrapper>
             <Button
               color={!formState.loading ? 'primary' : 'secondary'}
               type='submit'
               disabled={formState.loading}
             >
               {!formState.loading ? (
-                <>{t('CONTINUE', 'Continue')}<BsArrowRight /></>
+                t('SEND_REVIEW', 'Send review')
               ) : t('LOADING', 'Loading')}
             </Button>
-          </Send>
+          </ActionBtnWrapper>
           <Alert
-            title={t('ORDER_REVIEW', 'Order Review')}
+            title={t('DRIVER_REVIEW', 'Driver Review')}
             content={alertState.content}
             acceptText={t('ACCEPT', 'Accept')}
             open={alertState.open}
@@ -219,7 +231,7 @@ const ReviewOrderUI = (props) => {
             onAccept={() => closeAlert()}
             closeOnBackdrop={false}
           />
-        </ReviewOrderContainer>
+        </ReviewDriverContainer>
       </>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
@@ -231,12 +243,12 @@ const ReviewOrderUI = (props) => {
   )
 }
 
-export const ReviewOrder = (props) => {
-  const ReviewOrderProps = {
+export const ReviewDriver = (props) => {
+  const reviewDriverProps = {
     ...props,
-    UIComponent: ReviewOrderUI,
+    UIComponent: ReviewDriverUI,
     isToast: true
   }
 
-  return <ReviewOrderController {...ReviewOrderProps} />
+  return <ReviewDriverController {...reviewDriverProps} />
 }
