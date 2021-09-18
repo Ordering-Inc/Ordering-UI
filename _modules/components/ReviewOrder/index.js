@@ -286,9 +286,9 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, qualification === null || qualification === void 0 ? void 0 : qualification.text, /*#__PURE__*/_react.default.createElement("span", null)));
   }))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENTS', 'Comments')), commentsList === null || commentsList === void 0 ? void 0 : commentsList.map(function (commentItem, i) {
-    return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    return /*#__PURE__*/_react.default.createElement(_styles.CommentButton, {
       key: i,
-      color: isSelectedComment(commentItem === null || commentItem === void 0 ? void 0 : commentItem.key) ? 'primary' : 'secundary',
+      active: isSelectedComment(commentItem === null || commentItem === void 0 ? void 0 : commentItem.key),
       onClick: function onClick() {
         return handleChangeComment(commentItem);
       },
@@ -316,7 +316,8 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
   }, t('SKIP', 'Skip')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !formState.loading ? 'primary' : 'secondary',
     type: "submit",
-    disabled: formState.loading
+    disabled: formState.loading,
+    className: "review-sent"
   }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('CONTINUE', 'Continue'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ORDER_REVIEW', 'Order Review'),
     content: alertState.content,

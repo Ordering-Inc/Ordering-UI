@@ -273,9 +273,9 @@ var ReviewDriverUI = function ReviewDriverUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, qualification === null || qualification === void 0 ? void 0 : qualification.text, /*#__PURE__*/_react.default.createElement("span", null)));
   }))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENTS', 'Comments')), commentsList === null || commentsList === void 0 ? void 0 : commentsList.map(function (commentItem, i) {
-    return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    return /*#__PURE__*/_react.default.createElement(_styles.CommentButton, {
       key: i,
-      color: isSelectedComment(commentItem.key) ? 'primary' : 'secundary',
+      active: isSelectedComment(commentItem.key),
       onClick: function onClick() {
         return handleChangeComment(commentItem);
       },
@@ -301,7 +301,8 @@ var ReviewDriverUI = function ReviewDriverUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.ActionBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !formState.loading ? 'primary' : 'secondary',
     type: "submit",
-    disabled: formState.loading
+    disabled: formState.loading,
+    className: "review-sent"
   }, !formState.loading ? t('SEND_REVIEW', 'Send review') : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('DRIVER_REVIEW', 'Driver Review'),
     content: alertState.content,

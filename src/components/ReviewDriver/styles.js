@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { Button } from '../../styles/Buttons'
 
 export const ReviewDriverContainer = styled.form`
   display: flex;
@@ -17,7 +18,7 @@ export const Comments = styled.div`
   p {
     margin-top: 0;
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 15px;
     color: ${props => props.theme?.colors.darkTextColor};
   }
 
@@ -92,7 +93,7 @@ export const ReviewsProgressWrapper = styled.div`
   p {
     margin-top: 0;
     margin-bottom: 17px;
-    font-size: 14px;
+    font-size: 15px;
     color: ${props => props.theme?.colors.darkTextColor};
   }
 `
@@ -165,7 +166,7 @@ export const CommentsList = styled.div`
   p {
     margin-top: 0;
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 15px;
     color: ${props => props.theme?.colors.darkTextColor};
   }
 
@@ -197,4 +198,36 @@ export const DriverInfoBlock = styled.p`
   font-size: 14px;
   text-align: center;
   color: #344050;
+`
+
+export const CommentButton = styled(Button)`
+  border-radius: 50px;
+  margin-bottom: 18px;
+  margin-right: 18px;
+  font-size: 13px;
+  color: #414954;
+  background: #E9ECEF;
+  border: 1px solid #E9ECEF;
+  transition: all 0.3s linear;
+
+  ${props => props.theme?.rtl && css`
+    margin-left: 18px;
+    margin-right: 0;
+  `}
+
+  svg {
+    vertical-align: middle;
+    margin-left: 5px;
+
+    ${props => props.theme?.rtl && css`
+      margin-right: 5px;
+      margin-left: 0;
+    `}
+  }
+
+  ${({ active }) => active && css`
+    background: ${props => props.theme?.colors.primary};
+    border: 1px solid ${props => props.theme?.colors.primary};
+    color: white;
+  `}
 `

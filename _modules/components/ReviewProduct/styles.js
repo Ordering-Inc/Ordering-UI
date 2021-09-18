@@ -35,7 +35,7 @@ var SingleProductReviewContainer = _styledComponents.default.div(_templateObject
 
 exports.SingleProductReviewContainer = SingleProductReviewContainer;
 
-var HandReviewWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  p {\n    font-size: 14px;\n    color: ", ";\n    margin: 0;\n    color: #344050;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n"])), function (props) {
+var HandReviewWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  p {\n    font-size: 15px;\n    color: ", ";\n    margin: 0;\n    color: #344050;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.headingColor;

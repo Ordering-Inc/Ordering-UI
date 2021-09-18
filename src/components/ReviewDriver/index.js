@@ -21,7 +21,8 @@ import {
   ReviewsMarkPoint,
   LogoAndReviewWrapper,
   CommentsList,
-  DriverInfoBlock
+  DriverInfoBlock,
+  CommentButton
 } from './styles'
 
 const ReviewDriverUI = (props) => {
@@ -176,9 +177,9 @@ const ReviewDriverUI = (props) => {
             <p>{t('COMMENTS', 'Comments')}</p>
             {
               commentsList?.map((commentItem, i) => (
-                <Button
+                <CommentButton
                   key={i}
-                  color={isSelectedComment(commentItem.key) ? 'primary' : 'secundary'}
+                  active={isSelectedComment(commentItem.key)}
                   onClick={() => handleChangeComment(commentItem)}
                   initialIcon
                 >
@@ -186,7 +187,7 @@ const ReviewDriverUI = (props) => {
                   {
                     isSelectedComment(commentItem.key) && <MdClose />
                   }
-                </Button>
+                </CommentButton>
               ))
             }
           </CommentsList>
@@ -216,6 +217,7 @@ const ReviewDriverUI = (props) => {
               color={!formState.loading ? 'primary' : 'secondary'}
               type='submit'
               disabled={formState.loading}
+              className='review-sent'
             >
               {!formState.loading ? (
                 t('SEND_REVIEW', 'Send review')

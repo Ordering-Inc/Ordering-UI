@@ -215,6 +215,7 @@ const ReviewProductUI = (props) => {
             color={!formState.loading ? 'primary' : 'secondary'}
             type='submit'
             disabled={formState.loading || formState?.changes?.length === 0}
+            className='review-sent'
           >
             {!formState.loading ? (
               <>{t('CONTINUE', 'Continue')}<BsArrowRight /></>

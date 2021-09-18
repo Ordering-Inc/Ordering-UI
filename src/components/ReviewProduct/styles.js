@@ -45,7 +45,7 @@ export const HandReviewWrapper = styled.div`
   justify-content: space-between;
 
   p {
-    font-size: 14px;
+    font-size: 15px;
     color: ${props => props.theme?.colors.headingColor};
     margin: 0;
     color: #344050;

@@ -15,7 +15,8 @@ import {
   ReviewsProgressBar,
   ReviewsMarkPoint,
   LogoAndReviewWrapper,
-  CommentsList
+  CommentsList,
+  CommentButton
 } from './styles'
 import { Alert } from '../Confirm'
 
@@ -163,9 +164,9 @@ const ReviewOrderUI = (props) => {
             <p>{t('COMMENTS', 'Comments')}</p>
             {
               commentsList?.map((commentItem, i) => (
-                <Button
+                <CommentButton
                   key={i}
-                  color={isSelectedComment(commentItem?.key) ? 'primary' : 'secundary'}
+                  active={isSelectedComment(commentItem?.key)}
                   onClick={() => handleChangeComment(commentItem)}
                   initialIcon
                 >
@@ -173,7 +174,7 @@ const ReviewOrderUI = (props) => {
                   {
                     isSelectedComment(commentItem?.key) && <MdClose />
                   }
-                </Button>
+                </CommentButton>
               ))
             }
           </CommentsList>
@@ -204,6 +205,7 @@ const ReviewOrderUI = (props) => {
               color={!formState.loading ? 'primary' : 'secondary'}
               type='submit'
               disabled={formState.loading}
+              className='review-sent'
             >
               {!formState.loading ? (
                 <>{t('CONTINUE', 'Continue')}<BsArrowRight /></>
