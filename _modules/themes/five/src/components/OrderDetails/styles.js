@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MyOrderActions = exports.Divider = exports.WrapperRightContainer = exports.WrapperLeftContainer = exports.ExclamationWrapper = exports.MessagesIcon = exports.ShareOrder = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.ReviewsAction = exports.OrderBill = exports.OrderProducts = exports.WrapperDriver = exports.OrderDriver = exports.Map = exports.PhotoBlock = exports.OrderCustomer = exports.SectionTitle = exports.StatusBar = exports.ReviewOrderLink = exports.OrderInfo = exports.ActionsBlock = exports.BusinessInfo = exports.BusinessWrapper = exports.OrderBusiness = exports.Content = exports.HeaderInfo = exports.SkeletonWrapper = exports.WrapperContainer = exports.Container = void 0;
+exports.ReviewWrapper = exports.MyOrderActions = exports.Divider = exports.WrapperRightContainer = exports.WrapperLeftContainer = exports.ExclamationWrapper = exports.MessagesIcon = exports.ShareOrder = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.OrderBill = exports.OrderProducts = exports.WrapperDriver = exports.OrderDriver = exports.Map = exports.PhotoBlock = exports.OrderCustomer = exports.SectionTitle = exports.StatusBar = exports.ReviewOrderLink = exports.OrderInfo = exports.ActionsBlock = exports.BusinessInfo = exports.BusinessWrapper = exports.OrderBusiness = exports.Content = exports.HeaderInfo = exports.SkeletonWrapper = exports.WrapperContainer = exports.Container = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -29,7 +29,7 @@ var WrapperContainer = _styledComponents.default.div(_templateObject2 || (_templ
 
 exports.WrapperContainer = WrapperContainer;
 
-var SkeletonWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n"])));
+var SkeletonWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n  }\n"])));
 
 exports.SkeletonWrapper = SkeletonWrapper;
 
@@ -134,22 +134,18 @@ var OrderBill = _styledComponents.default.div(_templateObject26 || (_templateObj
 
 exports.OrderBill = OrderBill;
 
-var ReviewsAction = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  margin: 20px 0px;\n\n  button {\n    width: 100%;\n    padding: 5px 20px;\n    color: #FFF;\n    cursor: pointer;\n  }\n\n  @media (min-width: 480px) {\n    button {\n      width: 70%;\n    }\n  }\n"])));
-
-exports.ReviewsAction = ReviewsAction;
-
-var SkeletonBlock = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n  margin-bottom: 30px;\n  span:nth-child(2),span:nth-child(5){\n      span{\n        height: 100px;\n      }\n    }\n  @media (min-width: 768px){\n    span:nth-child(2), span:nth-child(5){\n      span{\n        height: 200px;\n      }\n    }\n  }\n"])), function (_ref2) {
+var SkeletonBlock = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n  margin-bottom: 30px;\n  display: flex;\n  flex-direction: column;\n"])), function (_ref2) {
   var width = _ref2.width;
   return width && "".concat(width, "%");
 });
 
 exports.SkeletonBlock = SkeletonBlock;
 
-var SkeletonBlockWrapp = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin-top: 20px;\n  line-height: 40px;\n"])));
+var SkeletonBlockWrapp = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin-top: 20px;\n  line-height: 40px;\n"])));
 
 exports.SkeletonBlockWrapp = SkeletonBlockWrapp;
 
-var ShareOrder = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 0 0 20px;\n  justify-content: space-between;\n  z-index: 1;\n\n  div.wrap {\n    & > div:first-child {\n      left: 0;\n    }\n  }\n  \n  h1 {\n    font-size: 15px;\n    margin: 0px;\n  }\n\n  p {\n    font-size: 13px;\n    margin: 0px;\n  }\n\n  button {\n    display: flex;\n    justify-content: center;\n    position: relative;\n    font-size: 14px;\n    align-items: center;\n    background: ", ";\n\n    svg {\n      left: 0;\n      margin-right: 6px;\n      color: ", ";\n    }\n\n    &:hover {\n      svg {\n        color: #FFFFFF;\n      }\n    }\n  }\n\n  div.text {\n    width: 60%;\n  }\n\n  div.wrap {\n    display: flex;\n    align-items: center;\n\n    & > div:first-child {\n      width: 100%;\n      position: relative;\n      div {\n        right: 0px;\n        left: initial;\n        top: 35px;\n      }\n    }\n  }\n\n  @media (min-width: 1201px) {\n    div.wrap {\n      & > div:first-child {\n        left: 0;\n      }\n    }\n  }\n\n  @media (min-width: 768px) {\n    div.wrap {\n      width: 30%;\n      & > div:first-child {\n        left: 0;\n      }\n    }\n\n    h1 {\n      font-size: 20px;\n    }\n\n    p {\n      font-size: 18px;\n    }\n\n    button {\n      font-size: 18px;\n      width: 100%;\n      svg {\n        position: absolute;\n        margin-left: 10px;\n      }\n    }\n  }\n\n  @media (min-width: 425px) {\n    div.text {\n      width: 70%;\n    }\n\n    h1 {\n      font-size: 18px;\n    }\n\n    p {\n      font-size: 15px;\n    }\n  }\n"])), function (props) {
+var ShareOrder = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 0 0 20px;\n  justify-content: space-between;\n  z-index: 1;\n\n  div.wrap {\n    & > div:first-child {\n      left: 0;\n    }\n  }\n  \n  h1 {\n    font-size: 15px;\n    margin: 0px;\n  }\n\n  p {\n    font-size: 13px;\n    margin: 0px;\n  }\n\n  button {\n    display: flex;\n    justify-content: center;\n    position: relative;\n    font-size: 14px;\n    align-items: center;\n    background: ", ";\n\n    svg {\n      left: 0;\n      margin-right: 6px;\n      color: ", ";\n    }\n\n    &:hover {\n      svg {\n        color: #FFFFFF;\n      }\n    }\n  }\n\n  div.text {\n    width: 60%;\n  }\n\n  div.wrap {\n    display: flex;\n    align-items: center;\n\n    & > div:first-child {\n      width: 100%;\n      position: relative;\n      div {\n        right: 0px;\n        left: initial;\n        top: 35px;\n      }\n    }\n  }\n\n  @media (min-width: 1201px) {\n    div.wrap {\n      & > div:first-child {\n        left: 0;\n      }\n    }\n  }\n\n  @media (min-width: 768px) {\n    div.wrap {\n      width: 30%;\n      & > div:first-child {\n        left: 0;\n      }\n    }\n\n    h1 {\n      font-size: 20px;\n    }\n\n    p {\n      font-size: 18px;\n    }\n\n    button {\n      font-size: 18px;\n      width: 100%;\n      svg {\n        position: absolute;\n        margin-left: 10px;\n      }\n    }\n  }\n\n  @media (min-width: 425px) {\n    div.text {\n      width: 70%;\n    }\n\n    h1 {\n      font-size: 18px;\n    }\n\n    p {\n      font-size: 15px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (props) {
   return props.theme.colors.primary;
@@ -157,11 +153,11 @@ var ShareOrder = _styledComponents.default.div(_templateObject31 || (_templateOb
 
 exports.ShareOrder = ShareOrder;
 
-var MessagesIcon = _styledComponents.default.span(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n"])));
+var MessagesIcon = _styledComponents.default.span(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n"])));
 
 exports.MessagesIcon = MessagesIcon;
 
-var ExclamationWrapper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(75%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
+var ExclamationWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(75%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
   var _props$theme7, _props$theme7$colors;
 
   return (_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : (_props$theme7$colors = _props$theme7.colors) === null || _props$theme7$colors === void 0 ? void 0 : _props$theme7$colors.primary;
@@ -169,16 +165,20 @@ var ExclamationWrapper = _styledComponents.default.div(_templateObject33 || (_te
 
 exports.ExclamationWrapper = ExclamationWrapper;
 
-var WrapperLeftContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px;\n  box-sizing: border-box;\n\n  @media (min-width: 769px) {\n    width: 50%;\n    padding: 40px;\n  }\n"])));
+var WrapperLeftContainer = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px;\n  box-sizing: border-box;\n\n  @media (min-width: 769px) {\n    width: 50%;\n    padding: 40px;\n  }\n"])));
 
 exports.WrapperLeftContainer = WrapperLeftContainer;
-var WrapperRightContainer = (0, _styledComponents.default)(WrapperLeftContainer)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n"])));
+var WrapperRightContainer = (0, _styledComponents.default)(WrapperLeftContainer)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n"])));
 exports.WrapperRightContainer = WrapperRightContainer;
 
-var Divider = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  height: 8px;\n  background: #F8F9FA;\n  width: calc(100% + 40px);\n  margin-left: -20px;\n\n  @media(min-width: 769px) {\n    width: calc(100% + 80px);\n    margin-left: -40px;\n  }\n"])));
+var Divider = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  height: 8px;\n  background: #F8F9FA;\n  width: calc(100% + 40px);\n  margin-left: -20px;\n\n  @media(min-width: 769px) {\n    width: calc(100% + 80px);\n    margin-left: -40px;\n  }\n"])));
 
 exports.Divider = Divider;
 
-var MyOrderActions = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n\n"])));
+var MyOrderActions = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral([""])));
 
 exports.MyOrderActions = MyOrderActions;
+
+var ReviewWrapper = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  .review-sent {\n    border-radius: 7.6px;\n  }\n"])));
+
+exports.ReviewWrapper = ReviewWrapper;

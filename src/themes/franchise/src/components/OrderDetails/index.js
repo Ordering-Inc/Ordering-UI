@@ -20,7 +20,7 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
-import { ReviewOrder } from '../ReviewOrder'
+import { ReviewOrder } from '../../../../../components/ReviewOrder'
 import { ProductShare } from '../../../../../components/ProductShare'
 
 import {
@@ -52,12 +52,13 @@ import {
   Divider,
   MyOrderActions,
   ReviewOrderLink,
-  SkeletonWrapper
+  SkeletonWrapper,
+  ReviewWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
-import { ReviewProduct } from '../ReviewProduct'
-import { ReviewDriver } from '../ReviewDriver'
+import { ReviewProduct } from '../../../../../components/ReviewProduct'
+import { ReviewDriver } from '../../../../../components/ReviewDriver'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -517,13 +518,16 @@ const OrderDetailsUI = (props) => {
                     : t('REVIEW_DRIVER', 'Review Driver')))
                 : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
             >
-              {
-                reviewStatus?.order
-                  ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
-                  : (reviewStatus?.product
-                    ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
-                    : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
-              }
+              <ReviewWrapper>
+                {
+                  reviewStatus?.order
+                    ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+                    : (reviewStatus?.product
+                      ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
+                      : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
+                }
+              </ReviewWrapper>
+
             </Modal>
           )
         }

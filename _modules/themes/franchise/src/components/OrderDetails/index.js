@@ -33,7 +33,7 @@ var _Modal = require("../Modal");
 
 var _Messages = require("../Messages");
 
-var _ReviewOrder = require("../ReviewOrder");
+var _ReviewOrder = require("../../../../../components/ReviewOrder");
 
 var _ProductShare = require("../../../../../components/ProductShare");
 
@@ -43,9 +43,9 @@ var _styledComponents = require("styled-components");
 
 var _utils = require("../../../../../utils");
 
-var _ReviewProduct = require("../ReviewProduct");
+var _ReviewProduct = require("../../../../../components/ReviewProduct");
 
-var _ReviewDriver = require("../ReviewDriver");
+var _ReviewDriver = require("../../../../../components/ReviewDriver");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -576,7 +576,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     open: isReviewOpen,
     onClose: handleCloseReivew,
     title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag42 = theme.defaultLanguages) === null || _theme$defaultLanguag42 === void 0 ? void 0 : _theme$defaultLanguag42.LOADING) || 'Loading...')
-  }, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ReviewWrapper, null, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
     closeReviewOrder: closeReviewOrder,
     setIsReviewed: setIsOrderReviewed
@@ -588,7 +588,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     order: order,
     closeReviewDriver: handleCloseReivew,
     setIsDriverReviewed: setIsDriverReviewed
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

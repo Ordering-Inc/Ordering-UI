@@ -459,3 +459,9 @@ export const Divider = styled.div`
 `
 
 export const MyOrderActions = styled.div``
+
+export const ReviewWrapper = styled.div`
+  .review-sent {
+    border-radius: 7.6px;
+  }
+`
