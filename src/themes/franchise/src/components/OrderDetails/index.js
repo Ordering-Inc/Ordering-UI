@@ -504,25 +504,29 @@ const OrderDetailsUI = (props) => {
             />
           )
         )}
-        <Modal
-          open={isReviewOpen}
-          onClose={handleCloseReivew}
-          title={order
-            ? (reviewStatus?.order
-              ? t('REVIEW_ORDER', 'Review order')
-              : (reviewStatus?.product
-                ? t('REVIEW_PRODUCT', 'Review Product')
-                : t('REVIEW_DRIVER', 'Review Driver')))
-            : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
-        >
-          {
-            reviewStatus?.order
-              ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
-              : (reviewStatus?.product
-                ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
-                : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
-          }
-        </Modal>
+        {
+          isReviewOpen && (
+            <Modal
+              open={isReviewOpen}
+              onClose={handleCloseReivew}
+              title={order
+                ? (reviewStatus?.order
+                  ? t('REVIEW_ORDER', 'Review order')
+                  : (reviewStatus?.product
+                    ? t('REVIEW_PRODUCT', 'Review Product')
+                    : t('REVIEW_DRIVER', 'Review Driver')))
+                : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
+            >
+              {
+                reviewStatus?.order
+                  ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+                  : (reviewStatus?.product
+                    ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
+                    : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
+              }
+            </Modal>
+          )
+        }
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

@@ -572,7 +572,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     content: t('NOT_FOUND_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag40 = theme.defaultLanguages) === null || _theme$defaultLanguag40 === void 0 ? void 0 : _theme$defaultLanguag40.NOT_FOUND_ORDER) || 'Sorry, we couldn\'t find the requested order.'),
     btnTitle: t('ORDERS_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag41 = theme.defaultLanguages) === null || _theme$defaultLanguag41 === void 0 ? void 0 : _theme$defaultLanguag41.ORDERS_REDIRECT) || 'Go to Orders'),
     onClickButton: handleOrderRedirect
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isReviewOpen,
     onClose: handleCloseReivew,
     title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag42 = theme.defaultLanguages) === null || _theme$defaultLanguag42 === void 0 ? void 0 : _theme$defaultLanguag42.LOADING) || 'Loading...')
