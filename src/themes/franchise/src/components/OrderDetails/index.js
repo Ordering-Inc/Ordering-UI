@@ -153,6 +153,10 @@ const OrderDetailsUI = (props) => {
     if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
     else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
     else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else {
+      setIsReviewOpen(false)
+      return
+    }
     setIsReviewOpen(true)
   }
 
@@ -169,7 +173,10 @@ const OrderDetailsUI = (props) => {
 
   const closeReviewProduct = () => {
     if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
-    else handleCloseReivew()
+    else {
+      setIsDriverReviewed(true)
+      handleCloseReivew()
+    }
   }
 
   useEffect(() => {
@@ -222,7 +229,7 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && (!order?.review || (order.driver && !order?.user_review) || !isProductReviewed)}
+                  ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
                 >
                   <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                 </ReviewOrderLink>
