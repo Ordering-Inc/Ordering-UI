@@ -441,6 +441,18 @@ Object.defineProperty(exports, "ReviewOrder", {
     return _ReviewOrder.ReviewOrder;
   }
 });
+Object.defineProperty(exports, "ReviewProduct", {
+  enumerable: true,
+  get: function get() {
+    return _ReviewProduct.ReviewProduct;
+  }
+});
+Object.defineProperty(exports, "ReviewDriver", {
+  enumerable: true,
+  get: function get() {
+    return _ReviewDriver.ReviewDriver;
+  }
+});
 Object.defineProperty(exports, "SearchBar", {
   enumerable: true,
   get: function get() {
@@ -837,6 +849,10 @@ var _ProductShare = require("./components/ProductShare");
 var _ResetPassword = require("./components/ResetPassword");
 
 var _ReviewOrder = require("./components/ReviewOrder");
+
+var _ReviewProduct = require("./components/ReviewProduct");
+
+var _ReviewDriver = require("./components/ReviewDriver");
 
 var _SearchBar = require("./components/SearchBar");
 
