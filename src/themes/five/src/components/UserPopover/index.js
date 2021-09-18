@@ -23,7 +23,8 @@ const optionsDefault = [
 ]
 
 const extraOptions = [
-  { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account' }
+  { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account' },
+  { name: 'help', pathname: '/help', displayName: 'help', key: 'help' }
 ]
 
 export const UserPopover = (props) => {

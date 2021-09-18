@@ -30,11 +30,14 @@ import { Footer } from './components/Footer'
 import { ForgotPasswordForm } from './components/ForgotPasswordForm'
 import { GoogleGpsButton } from './components/GoogleGpsButton'
 import { Header } from './components/Header'
+import { Help } from './components/Help'
+import { HelpStaticPage } from './components/HelpStaticPage'
 import { HeaderOption } from './components/HeaderOption'
 import { HomeHero } from './components/HomeHero'
 import { HorizontalOrdersLayout } from './components/HorizontalOrdersLayout'
 import { Image } from './components/Image'
 import { InputPhoneNumber } from './components/InputPhoneNumber'
+import { LastOrders } from './components/LastOrders'
 import { LanguageSelector } from './components/LanguageSelector'
 import { LoginForm } from './components/LoginForm'
 import { LogoutButton } from './components/LogoutButton'
@@ -77,6 +80,9 @@ import { UserFormDetailsUI } from './components/UserFormDetails'
 import { UserPopover } from './components/UserPopover'
 import { UserProfileForm } from './components/UserProfileForm'
 import { VerticalOrdersLayout } from './components/VerticalOrdersLayout'
+import { GoogleLoginButton } from './components/GoogleLogin'
+import { SmsLoginButton } from './components/SmsLogin'
+import { AppleLogin } from './components/AppleLogin'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
@@ -137,12 +143,15 @@ export {
   FloatingButton,
   GoogleGpsButton,
   HeaderOption,
+  Help,
+  HelpStaticPage,
   HorizontalOrdersLayout,
   Header,
   HomeHero,
   Image,
   InputPhoneNumber,
   LanguageSelector,
+  LastOrders,
   LoginForm,
   LogoutButton,
   Messages,
@@ -184,6 +193,9 @@ export {
   UserFormDetailsUI,
   UserProfileForm,
   VerticalOrdersLayout,
+  GoogleLoginButton,
+  SmsLoginButton,
+  AppleLogin,
   // Contexts
   ThemeContext,
   ThemeProvider,

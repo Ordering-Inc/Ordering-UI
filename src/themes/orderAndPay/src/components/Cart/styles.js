@@ -98,7 +98,7 @@ export const Divider = styled.div`
   margin-left: -10px;
 
   @media (min-width: 768px) {
-    width: calc(100% + 60px);
+    width: calc(100%);
     margin-left: -30px;
   }
 `

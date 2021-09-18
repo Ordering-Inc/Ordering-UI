@@ -31,7 +31,9 @@ const PaymentOptionStripeUI = (props) => {
     deleteCard,
     cardsList,
     handleCardClick,
-    handleNewCard
+    handleNewCard,
+    onSelectCard,
+    onPaymentChange
   } = props
   const [{ token }] = useSession()
   const [, t] = useLanguage()
@@ -42,6 +44,14 @@ const PaymentOptionStripeUI = (props) => {
   const _handleNewCard = (card) => {
     setAddCardOpen(false)
     handleNewCard(card)
+    onSelectCard({
+      id: card.id,
+      type: 'card',
+      card: {
+        brand: card.brand,
+        last4: card.last4
+      }
+    })
   }
 
   const handleDeleteCard = (card) => {
@@ -51,6 +61,8 @@ const PaymentOptionStripeUI = (props) => {
       handleOnAccept: () => {
         deleteCard(card)
         setConfirm({ ...confirm, open: false })
+        onSelectCard({})
+        onPaymentChange(null)
       }
     })
   }
@@ -145,8 +157,9 @@ export const PaymentCard = (props) => {
   const {
     handleDeleteCard,
     card,
-    setDefaultCard,
-    cardDefault
+    cardSelected,
+    handleCardClick,
+    onSelectCard
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -174,7 +187,15 @@ export const PaymentCard = (props) => {
   }
 
   const handleChangeDefaultCard = () => {
-    setDefaultCard(card)
+    handleCardClick(card)
+    onSelectCard({
+      id: card.id,
+      type: 'card',
+      card: {
+        brand: card.brand,
+        last4: card.last4
+      }
+    })
   }
 
   useEffect(() => {
@@ -194,7 +215,7 @@ export const PaymentCard = (props) => {
       </CardItemContent>
       <CardItemActions>
         {
-          card?.id === cardDefault?.id && (
+          card?.id === cardSelected?.id && (
             <span>{t('DEFAULT', 'Default')}</span>
           )
         }

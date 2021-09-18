@@ -68,6 +68,8 @@ const CartUI = (props) => {
       open: true,
       content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
       handleOnAccept: () => {
+        setOpenUpselling(false)
+        setCanOpenUpselling(false)
         removeProduct(product, cart)
         setConfirm({ ...confirm, open: false })
       }
@@ -173,6 +175,7 @@ const CartUI = (props) => {
                 business={cart.business}
                 handleUpsellingPage={handleUpsellingPage}
                 openUpselling={openUpselling}
+                setOpenUpselling={setOpenUpselling}
                 canOpenUpselling={canOpenUpselling}
                 setCanOpenUpselling={setCanOpenUpselling}
               />
@@ -253,7 +256,6 @@ const CartUI = (props) => {
                         <td>{parsePrice(cart?.service_fee)}</td>
                       </tr>
                     )}
-
                   </tbody>
                 </table>
                 {isCouponEnabled && !isCartPending && (isCartPopover && !(isCheckout && isCartPopover)) && (

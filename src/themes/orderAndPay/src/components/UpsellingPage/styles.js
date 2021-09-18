@@ -171,12 +171,22 @@ export const HorizontalImage = styled.div`
 `
 
 export const HorizontalDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 150px;
   min-width: 100px;
   h3 {
     font-weight: 500;
     font-size: 12px;
     color: ${props => props.theme.colors.darkTextColor};
     margin: 0 0 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    -webkit-box-orient: vertical;
   }
 
   span {

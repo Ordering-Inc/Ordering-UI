@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import VscEdit from '@meronex/icons/vsc/VscEdit'
+import BsPencil from '@meronex/icons/bs/BsPencil'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import FaHome from '@meronex/icons/fa/FaHome'
 import FaPlus from '@meronex/icons/fa/FaPlus'
@@ -247,7 +247,7 @@ const AddressListUI = (props) => {
                   </div>
                   <AddressItemActions className='form'>
                     <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                      <VscEdit />
+                      <BsPencil />
                     </a>
                     <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
                       <VscTrash />

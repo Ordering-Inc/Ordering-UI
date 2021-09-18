@@ -8,7 +8,7 @@ export const Button = styled.button`
   border-radius: 30px;
   line-height: 30px;
   padding: 6px 20px;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   outline: none;
   overflow: hidden;

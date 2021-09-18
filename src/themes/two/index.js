@@ -17,8 +17,11 @@ import { FacebookLoginButton } from './src/components/FacebookLogin'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
+import { Help } from './src/components/Help'
+import { HelpStaticPage } from './src/components/HelpStaticPage'
 import { HomeHero } from './src/components/HomeHero'
 import { LanguageSelector } from './src/components/LanguageSelector'
+import { LastOrders } from './src/components/LastOrders'
 import { LoginForm } from './src/components/LoginForm'
 import { Modal } from './src/components/Modal'
 import { MomentContent } from './src/components/MomentContent'
@@ -67,8 +70,11 @@ export {
   ForgotPasswordForm,
   Header,
   HeaderOption,
+  Help,
+  HelpStaticPage,
   HomeHero,
   LanguageSelector,
+  LastOrders,
   LoginForm,
   Modal,
   MomentContent,

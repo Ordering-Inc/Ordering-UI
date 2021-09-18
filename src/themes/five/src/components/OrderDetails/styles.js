@@ -135,7 +135,8 @@ export const OrderInfo = styled.div`
     font-size: 16px;
   }
 `
-export const ReviewOrderLink = styled.a`
+export const ReviewOrderLink = styled.span`
+  margin: 0;
   cursor: pointer;
   text-decoration-line: underline;
   user-select: none;
@@ -143,7 +144,10 @@ export const ReviewOrderLink = styled.a`
     color: ${props => props.theme?.colors.primary};
   ` : css`
     color: #B1BCCC;
-    pointer-events: none;
+    cursor: not-allowed;
+    span {
+      pointer-events: none;
+    }
   `}
 `
 
