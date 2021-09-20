@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useLanguage, useUtils, OrderReview as ReviewOrderController } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components'
+import { OrderReview as ReviewOrderController } from './naked'
 import MdClose from '@meronex/icons/md/MdClose'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import {
@@ -237,7 +238,8 @@ export const ReviewOrder = (props) => {
   const ReviewOrderProps = {
     ...props,
     UIComponent: ReviewOrderUI,
-    isToast: true
+    isToast: true,
+    defaultStar: 0
   }
 
   return <ReviewOrderController {...ReviewOrderProps} />
