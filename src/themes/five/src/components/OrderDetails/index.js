@@ -438,16 +438,16 @@ const OrderDetailsUI = (props) => {
             <WrapperLeftContainer>
               <SkeletonBlockWrapp>
                 <SkeletonBlock width={90}>
-                  <Skeleton height={40} width={250} />
+                  <Skeleton height={40} width={230} />
                   <Skeleton height={20} width={80} />
                   <Skeleton height={15} />
                   <Skeleton height={20} width={210} style={{ marginBottom: '50px' }} />
-                  <Skeleton height={40} width={250} />
+                  <Skeleton height={40} width={230} />
                   <Skeleton height={20} width={180} />
                   <Skeleton height={20} width={210} />
                   <Skeleton height={20} width={150} />
                   <Skeleton height={20} width={170} style={{ marginBottom: '50px' }} />
-                  <Skeleton height={40} width={250} />
+                  <Skeleton height={40} width={230} />
                   <Skeleton height={20} width={180} />
                   <Skeleton height={20} width={210} />
                   <Skeleton height={20} width={150} />
@@ -458,7 +458,7 @@ const OrderDetailsUI = (props) => {
             <WrapperRightContainer>
               <SkeletonBlockWrapp>
                 <SkeletonBlock width={90}>
-                  <Skeleton height={40} width={280} />
+                  <Skeleton height={40} width={230} />
                   <Skeleton height={20} />
                   <Skeleton height={45} width={100} />
                   <Skeleton height={60} />
