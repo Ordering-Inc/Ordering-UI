@@ -206,6 +206,9 @@ export const ProductActions = styled.div`
       width: 20%;
     }
   }
+  @media (min-width: 1200px){
+    bottom: -21px;
+  }
 `
 export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};
