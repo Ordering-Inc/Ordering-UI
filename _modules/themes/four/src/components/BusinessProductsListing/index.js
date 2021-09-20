@@ -39,6 +39,8 @@ var _Cart = require("../Cart");
 
 var _styledComponents = require("styled-components");
 
+var _Buttons = require("../../styles/Buttons");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -73,10 +75,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var PIXELS_TO_SCROLL = 300;
-
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products2, _currentCart$products3, _currentCart$products4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _error$, _theme$defaultLanguag8, _currentCart$products5, _theme$defaultLanguag9, _theme$defaultLanguag10, _currentCart$products6, _productModal$error$, _theme$defaultLanguag11, _props$afterComponent, _props$afterElements;
+  var _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products2, _categoryState$pagina, _categoryState$pagina2, _currentCart$products3, _currentCart$products4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _error$, _theme$defaultLanguag8, _currentCart$products5, _theme$defaultLanguag9, _theme$defaultLanguag10, _currentCart$products6, _productModal$error$, _theme$defaultLanguag11, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
@@ -198,15 +198,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     });
   };
 
-  var handleScroll = (0, _react.useCallback)(function () {
-    var _document$documentEle, _document$documentEle2;
-
-    var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
-    var badScrollPosition = innerHeightScrolltop < ((_document$documentEle2 = document.documentElement) === null || _document$documentEle2 === void 0 ? void 0 : _document$documentEle2.offsetHeight);
+  var handleLoadMoreProducts = function handleLoadMoreProducts() {
     var hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage);
-    if (badScrollPosition || categoryState.loading || !hasMore) return;
+    if (!hasMore) return;
     getNextProducts();
-  }, [categoryState]);
+  };
 
   var handleChangePage = function handleChangePage(data) {
     if (Object.entries(data.query).length === 0 && openProduct) {
@@ -246,12 +242,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       events.off('change_view', handleChangePage);
     };
   }, [openProduct]);
-  (0, _react.useEffect)(function () {
-    window.addEventListener('scroll', handleScroll);
-    return function () {
-      return window.removeEventListener('scroll', handleScroll);
-    };
-  }, [handleScroll]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -309,7 +299,13 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0,
     handleClearSearch: handleChangeSearch,
     errorQuantityProducts: errorQuantityProducts
-  })))), isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+  }), !((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$pagina = categoryState.pagination) === null || _categoryState$pagina === void 0 ? void 0 : _categoryState$pagina.totalPages) === (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$pagina2 = categoryState.pagination) === null || _categoryState$pagina2 === void 0 ? void 0 : _categoryState$pagina2.currentPage)) && /*#__PURE__*/_react.default.createElement(_styles.WrappButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    color: "primary",
+    onClick: function onClick() {
+      return handleLoadMoreProducts();
+    }
+  }, t('LOAD_MORE', 'Load more')))))), isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isForceOpenCart: true,
     cart: currentCart,
     isCartPending: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.status) === 2,

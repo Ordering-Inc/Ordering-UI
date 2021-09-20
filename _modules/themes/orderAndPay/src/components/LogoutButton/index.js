@@ -40,7 +40,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LogoutButtonUI = function LogoutButtonUI(props) {
-  var onCustomClick = props.onCustomClick;
+  var onCustomClick = props.onCustomClick,
+      formState = props.formState;
+
+  var _useToast = (0, _orderingComponents.useToast)(),
+      _useToast2 = _slicedToArray(_useToast, 2),
+      showToast = _useToast2[1].showToast;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -79,6 +84,13 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
     setOpenConfirm(true);
   };
 
+  (0, _react.useEffect)(function () {
+    if (formState.result.error) {
+      var _formState$result;
+
+      showToast(_orderingComponents.ToastType.Error, t((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result));
+    }
+  }, [formState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BiLogOut.default, {
     onClick: handleOpenConfirm,
     size: 20
@@ -92,7 +104,9 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
     },
     onCancel: function onCancel() {
       return setOpenConfirm(false);
-    }
+    },
+    acceptText: formState.loading && t('LOADING', 'Loading...'),
+    isLoading: formState.loading
   }));
 };
 
