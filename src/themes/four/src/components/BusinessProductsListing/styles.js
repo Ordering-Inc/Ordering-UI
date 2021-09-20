@@ -108,3 +108,21 @@ export const WrappLayout = styled.div`
     }  
   `}
 `
+
+export const WrappButton = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  margin: 30px auto;
+
+  button {
+    padding: 10px 0px;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    button {
+      width: 70%;
+    }
+  }
+`
