@@ -340,40 +340,43 @@ const CheckoutUI = (props) => {
             </PanelBottom>
           </LeftPanel>
           <RightPanel>
-            <PanelTop>
-              {props.beforeElementsSectionFive?.map((BeforeElement, i) => (
-                <React.Fragment key={i}>
-                  {BeforeElement}
-                </React.Fragment>))}
-              {props.beforeComponentsSectionFive?.map((BeforeComponent, i) => (
-                <BeforeComponent key={i} {...props} />))}
-              {!props.isHideSectionFour &&
-                !cartState.loading &&
-                cart &&
-                cart?.business_id &&
-                options.type === 1 &&
-                cart?.status !== 2 &&
-                validationFields?.fields?.checkout?.driver_tip?.enabled &&
-                driverTipsOptions.length > 0 &&
-                (
-                  <DriverTipContainer>
-                    <SectionHeader>
-                      <SectionTitle>{t('DRIVER_TIPS', 'Driver Tips')}</SectionTitle>
-                    </SectionHeader>
-                    <DriverTips
-                      businessId={cart?.business_id}
-                      driverTipsOptions={driverTipsOptions}
-                      isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                      isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                      driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)
-                        ? cart?.driver_tip
-                        : cart?.driver_tip_rate}
-                      useOrderContext
-                    />
-                  </DriverTipContainer>
-                )}
-            </PanelTop>
-            <Hr height={8} color='#DDDDDD' />
+
+            {props.beforeElementsSectionFive?.map((BeforeElement, i) => (
+              <React.Fragment key={i}>
+                {BeforeElement}
+              </React.Fragment>))}
+            {props.beforeComponentsSectionFive?.map((BeforeComponent, i) => (
+              <BeforeComponent key={i} {...props} />))}
+            {!props.isHideSectionFour &&
+              !cartState.loading &&
+              cart &&
+              cart?.business_id &&
+              options.type === 1 &&
+              cart?.status !== 2 &&
+              validationFields?.fields?.checkout?.driver_tip?.enabled &&
+              driverTipsOptions.length > 0 &&
+              (
+                <>
+                  <PanelTop>
+                    <DriverTipContainer>
+                      <SectionHeader>
+                        <SectionTitle>{t('DRIVER_TIPS', 'Driver Tips')}</SectionTitle>
+                      </SectionHeader>
+                      <DriverTips
+                        businessId={cart?.business_id}
+                        driverTipsOptions={driverTipsOptions}
+                        isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                        isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                        driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)
+                          ? cart?.driver_tip
+                          : cart?.driver_tip_rate}
+                        useOrderContext
+                      />
+                    </DriverTipContainer>
+                  </PanelTop>
+                  <Hr height={8} color='#DDDDDD' />
+                </>
+              )}
             <PanelBottom>
               {props.beforeElementsSectionSix?.map((BeforeElement, i) => (
                 <React.Fragment key={i}>

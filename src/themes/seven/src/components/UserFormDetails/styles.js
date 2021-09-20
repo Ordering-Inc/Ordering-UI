@@ -8,8 +8,22 @@ export const FormInput = styled.form`
   margin: 0 auto;
 
   div.phone_number {
+    position: relative;
     margin-bottom: 20px;
     width: 100%;
+    .PhoneInput .PhoneInputInput {
+      padding: 11.5px;
+      font-size: .86rem;
+    }
+
+    span {
+      top: 47px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 13px;
+    }
   }
 
   input.form {
@@ -30,14 +44,18 @@ export const FormInput = styled.form`
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
+
     input.form {
       width: 49%;
     }
-    ${({ isCheckout }) => isCheckout && css`
-      div.phone_number  {
-        width: 49%;
-      }
-    `}
+
+    div.phone_number {
+      width: 49%;
+      ${({ isCheckout }) => isCheckout && css`
+        width: 100%;
+      `}
+    }
+   
   }
 `
 

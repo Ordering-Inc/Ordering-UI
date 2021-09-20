@@ -145,7 +145,7 @@ export const BusinissWrapper = styled.div`
   }
 `
 export const MapWrapper = styled.div`
-  display: none;
+  /* display: none; */
 
   ${({ isPickup }) => isPickup && css`
     display: block;
