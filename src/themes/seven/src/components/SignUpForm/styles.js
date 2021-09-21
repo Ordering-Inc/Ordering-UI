@@ -37,7 +37,7 @@ export const FormSide = styled(Side)`
 
   @media (min-width: 769px) {
     ${({ isPopup }) => isPopup && css`
-      margin: 20px 0px;
+      margin: 0px;
     `}
   }
 
@@ -236,7 +236,15 @@ export const FormInline = styled.div`
 
   .phone_number {
     width: 100%;
+    .PhoneInputInput {
+      font-size: 14px;
+      padding: 10px 11px;
+    }
   }
+
+
+
+
 
   @media (min-width: 768px) {
     width: 48.6795%;
@@ -275,6 +283,10 @@ export const AccountLogin = styled.div`
 `
 export const WrapperBirthday = styled.div`
   width: 100%;
+  display: block;
+  .react-datepicker-popper {
+    display: block;
+  }
 `
 export const ConditionCheck = styled.div`
   display: flex;
@@ -284,6 +296,7 @@ export const ConditionCheck = styled.div`
   cursor: pointer;
   span {
     display: flex;
+    font-size: 14px;
   }
   .condition-checkbox {
     color: ${props => props.theme.colors.primary};
@@ -301,4 +314,6 @@ export const ConditionCheck = styled.div`
 `
 export const Terms = styled.div`
   margin-bottom: 15px;
+  height: 150px;
+  overflow-y: scroll;
 `

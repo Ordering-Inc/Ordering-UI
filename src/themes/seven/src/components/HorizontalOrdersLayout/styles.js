@@ -4,7 +4,7 @@ export const OpenOrder = styled.div`
   height: 15%;
   width: 90%;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   button {
     width: 100%;
     font-size: 0.8em;
@@ -22,7 +22,7 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   border-radius: 16px;
-  padding: 10px;
+  padding: 10px 20px;
 
 `
 
