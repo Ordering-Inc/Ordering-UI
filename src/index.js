@@ -67,6 +67,8 @@ import { ProductOptionSubOption } from './components/ProductOptionSubOption'
 import { ProductShare } from './components/ProductShare'
 import { ResetPassword } from './components/ResetPassword'
 import { ReviewOrder } from './components/ReviewOrder'
+import { ReviewProduct } from './components/ReviewProduct'
+import { ReviewDriver } from './components/ReviewDriver'
 import { SearchBar } from './components/SearchBar'
 import { SidebarMenu } from './components/SidebarMenu'
 import { SignUpForm } from './components/SignUpForm'
@@ -180,6 +182,8 @@ export {
   PaymentOptionPaypal,
   ResetPassword,
   ReviewOrder,
+  ReviewProduct,
+  ReviewDriver,
   SearchBar,
   SignUpForm,
   SingleProductCard,

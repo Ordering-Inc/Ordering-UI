@@ -614,11 +614,26 @@ export const Checkout = (props) => {
       )}
 
       {cartState.loading && !(window.location.pathname === '/checkout') && (
-        <div style={{ width: '80%', margin: 'auto auto 20px' }}>
-          <Skeleton height={35} style={{ marginBottom: '10px' }} />
-          <Skeleton height={150} style={{ marginBottom: '10px' }} />
-          <Skeleton height={35} count={6} style={{ marginBottom: '10px' }} />
-        </div>
+        <Container>
+          <WrapperLeftContainer>
+            <Skeleton height={30} />
+            <Skeleton height={100} style={{ marginBottom: '15px' }} />
+            <Skeleton height={25} />
+            <Skeleton height={50} style={{ marginBottom: '15px' }} />
+            <Skeleton height={25} />
+            <Skeleton height={50} style={{ marginBottom: '15px' }} />
+            <Skeleton height={25} />
+            <Skeleton height={25} />
+          </WrapperLeftContainer>
+          <WrapperRightContainer>
+            <Skeleton height={25} />
+            <Skeleton height={50} style={{ marginBottom: '20px' }} />
+            <Skeleton height={25} />
+            <Skeleton height={60} />
+            <Skeleton height={80} style={{ marginBottom: '20px' }} />
+            <Skeleton height={25} />
+          </WrapperRightContainer>
+        </Container>
       )}
 
       {cartUuid && cartState.cart && cartState.cart?.status !== 1 && <CheckoutController {...checkoutProps} />}

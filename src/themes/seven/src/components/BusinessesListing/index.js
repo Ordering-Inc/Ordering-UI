@@ -26,7 +26,7 @@ import { SearchBar } from '../SearchBar'
 import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
 import { OrdersOption } from '../../../../../components/OrdersOption'
-import { BusinessesMap } from '../../../../../components/BusinessesMap'
+import { BusinessesMap } from '../BusinessesMap'
 import { useLocation, useHistory } from 'react-router-dom'
 
 import {
@@ -108,8 +108,8 @@ const BusinessesListingUI = (props) => {
 
   useEffect(() => {
     if (orderState.loading && !businessesList.loading) {
-      //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
-      //  window.history.pushState({ path: newurl }, '', newurl)
+      const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
+      window.history.pushState({ path: newurl }, '', newurl)
       const params = new URLSearchParams()
       history.replace({ pathname: location.pathname, search: params.toString() })
       setPrevPage({ loading: true, page: 1 })

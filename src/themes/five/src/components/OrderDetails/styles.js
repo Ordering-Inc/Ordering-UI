@@ -27,6 +27,10 @@ export const SkeletonWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `
 
 export const HeaderInfo = styled.div`
@@ -287,42 +291,12 @@ export const OrderBill = styled.div`
   }
 `
 
-export const ReviewsAction = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 20px 0px;
-
-  button {
-    width: 100%;
-    padding: 5px 20px;
-    color: #FFF;
-    cursor: pointer;
-  }
-
-  @media (min-width: 480px) {
-    button {
-      width: 70%;
-    }
-  }
-`
-
 export const SkeletonBlock = styled.div`
   width: ${({ width }) => width && `${width}%`};
   border-radius: 16px;
   margin-bottom: 30px;
-  span:nth-child(2),span:nth-child(5){
-      span{
-        height: 100px;
-      }
-    }
-  @media (min-width: 768px){
-    span:nth-child(2), span:nth-child(5){
-      span{
-        height: 200px;
-      }
-    }
-  }
+  display: flex;
+  flex-direction: column;
 `
 
 export const SkeletonBlockWrapp = styled.div`
@@ -485,6 +459,10 @@ export const Divider = styled.div`
   }
 `
 
-export const MyOrderActions = styled.div`
+export const MyOrderActions = styled.div``
 
+export const ReviewWrapper = styled.div`
+  .review-sent {
+    border-radius: 7.6px;
+  }
 `

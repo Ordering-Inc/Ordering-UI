@@ -19,7 +19,6 @@ export const CheckoutPage = (props) => {
   }
 
   const actionsBeforePlace = async (paymethod, cart) => {
-    console.log('actionsBeforePlace', paymethod, cart)
     if (stripePayments.includes(paymethod.gateway)) {
       try {
         const stripe = await loadStripe(paymethod.paymethod?.credentials?.publishable)
