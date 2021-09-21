@@ -20,7 +20,7 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
-import { ReviewOrder } from '../ReviewOrder'
+import { ReviewOrder } from '../../../../../components/ReviewOrder'
 import { ProductShare } from '../../../../../components/ProductShare'
 
 import {
@@ -52,10 +52,13 @@ import {
   Divider,
   MyOrderActions,
   ReviewOrderLink,
-  SkeletonWrapper
+  SkeletonWrapper,
+  ReviewWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
+import { ReviewProduct } from '../../../../../components/ReviewProduct'
+import { ReviewDriver } from '../../../../../components/ReviewDriver'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -77,9 +80,12 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
-  const [openReview, setOpenReview] = useState(false)
-  const [isReviewed, setIsReviewed] = useState(false)
+  const [isOrderReviewed, setIsOrderReviewed] = useState(false)
+  const [isProductReviewed, setIsProductReviewed] = useState(false)
+  const [isDriverReviewed, setIsDriverReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
+  const [isReviewOpen, setIsReviewOpen] = useState(false)
+  const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
 
   const { order, loading, businessData, error } = props.order
 
@@ -144,6 +150,36 @@ const OrderDetailsUI = (props) => {
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
 
+  const handleOpenReview = () => {
+    if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
+    else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else {
+      setIsReviewOpen(false)
+      return
+    }
+    setIsReviewOpen(true)
+  }
+
+  const handleCloseReivew = () => {
+    setReviewStatus({ order: false, product: false, driver: false })
+    setIsReviewOpen(false)
+  }
+
+  const closeReviewOrder = () => {
+    if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else handleCloseReivew()
+  }
+
+  const closeReviewProduct = () => {
+    if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else {
+      setIsDriverReviewed(true)
+      handleCloseReivew()
+    }
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -194,9 +230,9 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && !order.review && !isReviewed}
+                  ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
                 >
-                  <span onClick={() => setOpenReview(true)}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                  <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                 </ReviewOrderLink>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
@@ -395,21 +431,6 @@ const OrderDetailsUI = (props) => {
                     </div>
                   </ShareOrder>
                 )}
-                {/* {(
-                  parseInt(order?.status) === 1 ||
-                  parseInt(order?.status) === 2 ||
-                  parseInt(order?.status) === 5 ||
-                  parseInt(order?.status) === 6 ||
-                  parseInt(order?.status) === 10 ||
-                  parseInt(order?.status) === 11 ||
-                  parseInt(order?.status) === 12
-                ) && !order.review && !isReviewed && (
-                  <ReviewsAction>
-                    <Button color='primary' onClick={() => setOpenReview(true)}>
-                      {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
-                    </Button>
-                  </ReviewsAction>
-                )} */}
               </Content>
             </WrapperRightContainer>
           </WrapperContainer>
@@ -433,16 +454,41 @@ const OrderDetailsUI = (props) => {
 
         {loading && !error && (
           <SkeletonWrapper>
-            <SkeletonBlockWrapp>
-              <SkeletonBlock width={80}>
-                <Skeleton height={300} />
-                <Skeleton />
-                <Skeleton height={100} />
-                <Skeleton height={100} />
-                <Skeleton />
-                <Skeleton height={200} />
-              </SkeletonBlock>
-            </SkeletonBlockWrapp>
+            <WrapperLeftContainer>
+              <SkeletonBlockWrapp>
+                <SkeletonBlock width={90}>
+                  <Skeleton height={40} width={230} />
+                  <Skeleton height={20} width={80} />
+                  <Skeleton height={15} />
+                  <Skeleton height={20} width={210} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={40} width={230} />
+                  <Skeleton height={20} width={180} />
+                  <Skeleton height={20} width={210} />
+                  <Skeleton height={20} width={150} />
+                  <Skeleton height={20} width={170} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={40} width={230} />
+                  <Skeleton height={20} width={180} />
+                  <Skeleton height={20} width={210} />
+                  <Skeleton height={20} width={150} />
+                  <Skeleton height={20} width={170} style={{ marginBottom: '50px' }} />
+                </SkeletonBlock>
+              </SkeletonBlockWrapp>
+            </WrapperLeftContainer>
+            <WrapperRightContainer>
+              <SkeletonBlockWrapp>
+                <SkeletonBlock width={90}>
+                  <Skeleton height={40} width={230} />
+                  <Skeleton height={20} />
+                  <Skeleton height={45} width={100} />
+                  <Skeleton height={60} />
+                  <Skeleton height={300} />
+                  <Skeleton height={60} />
+                  <Skeleton height={25} />
+                  <Skeleton height={25} />
+                  <Skeleton height={25} />
+                </SkeletonBlock>
+              </SkeletonBlockWrapp>
+            </WrapperRightContainer>
           </SkeletonWrapper>
         )}
 
@@ -459,15 +505,32 @@ const OrderDetailsUI = (props) => {
             />
           )
         )}
-        {openReview && (
-          <Modal
-            open={openReview}
-            onClose={() => setOpenReview(false)}
-            title={order ? t('REVIEW_ORDER', 'Review order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
-          >
-            <ReviewOrder order={order} closeReviewOrder={() => setOpenReview(false)} setIsReviewed={setIsReviewed} />
-          </Modal>
-        )}
+        {
+          isReviewOpen && (
+            <Modal
+              open={isReviewOpen}
+              onClose={handleCloseReivew}
+              title={order
+                ? (reviewStatus?.order
+                  ? t('REVIEW_ORDER', 'Review order')
+                  : (reviewStatus?.product
+                    ? t('REVIEW_PRODUCT', 'Review Product')
+                    : t('REVIEW_DRIVER', 'Review Driver')))
+                : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
+            >
+              <ReviewWrapper>
+                {
+                  reviewStatus?.order
+                    ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+                    : (reviewStatus?.product
+                      ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
+                      : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
+                }
+              </ReviewWrapper>
+
+            </Modal>
+          )
+        }
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
