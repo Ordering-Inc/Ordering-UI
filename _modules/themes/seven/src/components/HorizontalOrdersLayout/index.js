@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.HorizontalOrdersLayout = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -23,7 +25,9 @@ var _Buttons = require("../../styles/Buttons");
 
 var _utils = require("../../../../../utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -66,6 +70,11 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       parsePrice = _useUtils2$.parsePrice,
       parseDate = _useUtils2$.parseDate;
 
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      brandBusiness = _useState2[0],
+      setBrandBusiness = _useState2[1];
+
   var ordersToShow = businessesIds ? orders.filter(function (order) {
     return businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id);
   }) : orders;
@@ -88,6 +97,26 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     }
   };
 
+  var fillterBrand = function fillterBrand() {
+    var containBrandBusineess = [];
+
+    if (ordersToShow) {
+      // const mainbrand = ''
+      var mainbrand = 'Archie';
+      containBrandBusineess = ordersToShow.filter(function (order) {
+        return order.business.name.toLowerCase().includes(mainbrand.toLowerCase());
+      });
+    }
+
+    setBrandBusiness(containBrandBusineess);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (ordersToShow.length > 0) {
+      fillterBrand();
+    }
+  }, [ordersToShow]);
+
   var Orders = function Orders() {
     var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
@@ -99,8 +128,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
         key: i
       }, props));
-    }), orders.length > 0 && ordersToShow.map(function (order) {
-      var _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _order$summary, _getOrderStatus;
+    }), brandBusiness.length > 0 && brandBusiness.map(function (order) {
+      var _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _order$business6, _theme$images3, _theme$images3$dummie, _order$business7, _order$summary, _getOrderStatus;
 
       return /*#__PURE__*/_react.default.createElement(_styles.Card, {
         key: order.id || order.uuid,
@@ -117,13 +146,14 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         height: isBusinessesPage ? '200px' : '100px',
         width: "400px"
       })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, (((_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo)) && !isBusinessesPage && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
-        src: ((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
+        src: ((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo.indexOf('http')) > -1 && ((_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
         alt: "business-logo",
         width: "75px",
-        height: "75px"
+        height: "75px",
+        loading: "lazy"
       })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
         activeOrders: true
-      }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.name), /*#__PURE__*/_react.default.createElement("p", {
+      }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.name), /*#__PURE__*/_react.default.createElement("p", {
         name: "order_number"
       }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
         utc: false

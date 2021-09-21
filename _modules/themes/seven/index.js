@@ -39,6 +39,12 @@ Object.defineProperty(exports, "BusinessesListing", {
     return _BusinessesListing.BusinessesListing;
   }
 });
+Object.defineProperty(exports, "BusinessesMap", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessesMap.BusinessesMap;
+  }
+});
 Object.defineProperty(exports, "BusinessInformation", {
   enumerable: true,
   get: function get() {
@@ -327,6 +333,8 @@ var _BusinessBasicInformation = require("./src/components/BusinessBasicInformati
 var _BusinessController = require("./src/components/BusinessController");
 
 var _BusinessesListing = require("./src/components/BusinessesListing");
+
+var _BusinessesMap = require("./src/components/BusinessesMap");
 
 var _BusinessInformation = require("./src/components/BusinessInformation");
 

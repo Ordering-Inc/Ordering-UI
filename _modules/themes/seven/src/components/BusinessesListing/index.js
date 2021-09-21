@@ -35,7 +35,7 @@ var _BusinessController = require("../BusinessController");
 
 var _OrdersOption = require("../../../../../components/OrdersOption");
 
-var _BusinessesMap = require("../../../../../components/BusinessesMap");
+var _BusinessesMap = require("../BusinessesMap");
 
 var _reactRouterDom = require("react-router-dom");
 
@@ -209,8 +209,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, [mapErrors]);
   (0, _react.useEffect)(function () {
     if (orderState.loading && !businessesList.loading) {
-      //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
-      //  window.history.pushState({ path: newurl }, '', newurl)
+      var newurl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+      window.history.pushState({
+        path: newurl
+      }, '', newurl);
       var params = new URLSearchParams();
       history.replace({
         pathname: location.pathname,

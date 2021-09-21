@@ -75,7 +75,7 @@ var UserEdit = _styledComponents.default.div(_templateObject14 || (_templateObje
 
 exports.UserEdit = UserEdit;
 
-var CenterHeader = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-grow: 1;\n  justify-content: flex-end;\n  padding: 0 15px;\n\n  #select-input {\n    height: 40px;\n    box-sizing: border-box;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: .86rem;\n    border: none;\n    @media (min-width: 768px) {\n      border: 1px solid ", ";;\n    }\n  }\n  @media (min-width: 1024px) {\n    width: 50%;\n    justify-content: space-around;\n  }\n  @media (min-width: 1200px) {\n    justify-content: space-between;\n    #select-input {\n      height: 48px;\n      width: auto;\n    }\n  }\n"])), function (props) {
+var CenterHeader = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-grow: 1;\n  justify-content: flex-end;\n  padding: 0 15px;\n\n  #select-input {\n    height: 40px;\n    box-sizing: border-box;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: .86rem;\n    border: none;\n    @media (min-width: 768px) {\n      border: 1px solid ", ";;\n    }\n  }\n  @media (min-width: 1024px) {\n    width: 50%;\n    justify-content: space-around;\n  }\n  @media (min-width: 1200px) {\n    justify-content: space-between;\n    max-width: 50%;\n    #select-input {\n      height: 48px;\n      width: auto;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

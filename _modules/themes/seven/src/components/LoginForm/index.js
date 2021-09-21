@@ -377,7 +377,9 @@ var LoginFormUI = function LoginFormUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormTitle, null, t('LOGIN_FORM_TITLE', 'Log in to your account and enjoy the Benefits we have for you.')), useLoginByEmail && useLoginByCellphone && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.FormTitle, {
+    isPopup: isPopup
+  }, t('LOGIN_FORM_TITLE', 'Log in to your account and enjoy the Benefits we have for you.')), useLoginByEmail && useLoginByCellphone && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
