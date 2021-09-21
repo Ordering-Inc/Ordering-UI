@@ -187,24 +187,25 @@ export const ProductActions = styled.div`
 
   @media (min-width: 577px) {
     position: sticky;
+  }
+
+  @media (min-width: 1200px) {
+    bottom: -20px;
     flex-direction: row;
     justify-content: space-between;
 
     div.price {
-      width: 20%;
+      width: 25%;
     }
 
     button.add {
-      width: 50%;
+      width: 40%;
       margin-top: 0;
     }
 
     div.incdec-control {
       width: 20%;
     }
-  }
-  @media (min-width: 1200px) {
-    bottom: -20px;
   }
 `
 export const SkeletonBlock = styled.div`
