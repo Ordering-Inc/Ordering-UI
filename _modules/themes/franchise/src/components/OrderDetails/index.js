@@ -33,7 +33,7 @@ var _Modal = require("../Modal");
 
 var _Messages = require("../Messages");
 
-var _ReviewOrder = require("../ReviewOrder");
+var _ReviewOrder = require("../../../../../components/ReviewOrder");
 
 var _ProductShare = require("../../../../../components/ProductShare");
 
@@ -42,6 +42,10 @@ var _styles = require("./styles");
 var _styledComponents = require("styled-components");
 
 var _utils = require("../../../../../utils");
+
+var _ReviewProduct = require("../../../../../components/ReviewProduct");
+
+var _ReviewDriver = require("../../../../../components/ReviewDriver");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -114,21 +118,40 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      openReview = _useState4[0],
-      setOpenReview = _useState4[1];
+      isOrderReviewed = _useState4[0],
+      setIsOrderReviewed = _useState4[1];
 
   var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      isReviewed = _useState6[0],
-      setIsReviewed = _useState6[1];
+      isProductReviewed = _useState6[0],
+      setIsProductReviewed = _useState6[1];
 
-  var _useState7 = (0, _react.useState)({
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isDriverReviewed = _useState8[0],
+      setIsDriverReviewed = _useState8[1];
+
+  var _useState9 = (0, _react.useState)({
     business: false,
     driver: false
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      unreadAlert = _useState8[0],
-      setUnreadAlert = _useState8[1];
+      _useState10 = _slicedToArray(_useState9, 2),
+      unreadAlert = _useState10[0],
+      setUnreadAlert = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isReviewOpen = _useState12[0],
+      setIsReviewOpen = _useState12[1];
+
+  var _useState13 = (0, _react.useState)({
+    order: false,
+    product: false,
+    driver: false
+  }),
+      _useState14 = _slicedToArray(_useState13, 2),
+      reviewStatus = _useState14[0],
+      setReviewStatus = _useState14[1];
 
   var _props$order = props.order,
       order = _props$order.order,
@@ -301,6 +324,59 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }), _objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.location), {}, {
     icon: (order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.customerPhoto)
   })];
+
+  var handleOpenReview = function handleOpenReview() {
+    if (!(order !== null && order !== void 0 && order.review) && !isOrderReviewed) setReviewStatus({
+      order: true,
+      product: false,
+      driver: false
+    });else if (!isProductReviewed) setReviewStatus({
+      order: false,
+      product: true,
+      driver: false
+    });else if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true
+    });else {
+      setIsReviewOpen(false);
+      return;
+    }
+    setIsReviewOpen(true);
+  };
+
+  var handleCloseReivew = function handleCloseReivew() {
+    setReviewStatus({
+      order: false,
+      product: false,
+      driver: false
+    });
+    setIsReviewOpen(false);
+  };
+
+  var closeReviewOrder = function closeReviewOrder() {
+    if (!isProductReviewed) setReviewStatus({
+      order: false,
+      product: true,
+      driver: false
+    });else if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true
+    });else handleCloseReivew();
+  };
+
+  var closeReviewProduct = function closeReviewProduct() {
+    if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true
+    });else {
+      setIsDriverReviewed(true);
+      handleCloseReivew();
+    }
+  };
+
   (0, _react.useEffect)(function () {
     if (driverLocation) {
       locations[0] = driverLocation;
@@ -332,11 +408,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     utc: false
   })), /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
     className: "Review-order",
-    active: (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && !order.review && !isReviewed
+    active: (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
   }, /*#__PURE__*/_react.default.createElement("span", {
-    onClick: function onClick() {
-      return setOpenReview(true);
-    }
+    onClick: handleOpenReview
   }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag24 = theme.defaultLanguages) === null || _theme$defaultLanguag24 === void 0 ? void 0 : _theme$defaultLanguag24.REVIEW_ORDER) || 'Review your Order'))), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
   }), /*#__PURE__*/_react.default.createElement("p", {
@@ -418,35 +492,103 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         business: false
       });
     }
-  }), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
-    width: 80
+  }), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+    width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 300
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
+    height: 40,
+    width: 230
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 200
-  })))), !loading && error && (error.includes('ERROR_ACCESS_EXPIRED') ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    height: 20,
+    width: 80
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 15
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 210,
+    style: {
+      marginBottom: '50px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 40,
+    width: 230
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 180
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 210
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 150
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 170,
+    style: {
+      marginBottom: '50px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 40,
+    width: 230
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 180
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 210
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 150
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 170,
+    style: {
+      marginBottom: '50px'
+    }
+  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+    width: 90
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 40,
+    width: 230
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 45,
+    width: 100
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 60
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 300
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 60
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 25
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 25
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 25
+  }))))), !loading && error && (error.includes('ERROR_ACCESS_EXPIRED') ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t(error[0], 'Sorry, the order has expired.')
   }) : /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag40 = theme.defaultLanguages) === null || _theme$defaultLanguag40 === void 0 ? void 0 : _theme$defaultLanguag40.NOT_FOUND_ORDER) || 'Sorry, we couldn\'t find the requested order.'),
     btnTitle: t('ORDERS_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag41 = theme.defaultLanguages) === null || _theme$defaultLanguag41 === void 0 ? void 0 : _theme$defaultLanguag41.ORDERS_REDIRECT) || 'Go to Orders'),
     onClickButton: handleOrderRedirect
-  })), openReview && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openReview,
-    onClose: function onClose() {
-      return setOpenReview(false);
-    },
-    title: order ? t('REVIEW_ORDER', 'Review order') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag42 = theme.defaultLanguages) === null || _theme$defaultLanguag42 === void 0 ? void 0 : _theme$defaultLanguag42.LOADING) || 'Loading...')
-  }, /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
+  })), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: isReviewOpen,
+    onClose: handleCloseReivew,
+    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag42 = theme.defaultLanguages) === null || _theme$defaultLanguag42 === void 0 ? void 0 : _theme$defaultLanguag42.LOADING) || 'Loading...')
+  }, /*#__PURE__*/_react.default.createElement(_styles.ReviewWrapper, null, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
-    closeReviewOrder: function closeReviewOrder() {
-      return setOpenReview(false);
-    },
-    setIsReviewed: setIsReviewed
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    closeReviewOrder: closeReviewOrder,
+    setIsReviewed: setIsOrderReviewed
+  }) : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? /*#__PURE__*/_react.default.createElement(_ReviewProduct.ReviewProduct, {
+    order: order,
+    closeReviewProduct: closeReviewProduct,
+    setIsProductReviewed: setIsProductReviewed
+  }) : /*#__PURE__*/_react.default.createElement(_ReviewDriver.ReviewDriver, {
+    order: order,
+    closeReviewDriver: handleCloseReivew,
+    setIsDriverReviewed: setIsDriverReviewed
+  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
