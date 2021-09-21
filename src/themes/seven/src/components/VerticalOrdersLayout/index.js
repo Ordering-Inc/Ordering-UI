@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import { Button } from '../../styles/Buttons'
@@ -29,24 +29,41 @@ export const VerticalOrdersLayout = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parseDate }] = useUtils()
+  const [brandBusiness, setBrandBusiness] = useState([])
+
+  const fillterBrand = () => {
+    let containBrandBusineess = []
+    if (orders) {
+      // const mainbrand = ''
+      const mainbrand = 'Archie'
+      containBrandBusineess = orders.filter(order => order.business.name.toLowerCase().includes(mainbrand.toLowerCase()))
+    }
+    setBrandBusiness(containBrandBusineess)
+  }
+
+  useEffect(() => {
+    if (orders.length > 0) {
+      fillterBrand()
+    }
+  }, [orders])
 
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>)
+      )}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />)
+      )}
       <OrdersContainer id='orders-container'>
-        {orders.map(order => (
+        {brandBusiness.map(order => (
           <SingleCard key={order.id} id='order-card'>
             <OrderPastContent>
               {(order.business?.logo || theme.images?.dummies?.businessLogo) && (
                 <PastLogo>
-                  <img src={order.business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='55px' height='64px' loading='lazy' />
+                  <img src={((order.business?.logo.indexOf('http') > -1) && order.business?.logo) || theme.images?.dummies?.businessLogo} alt='business-logo' width='55px' height='64px' loading='lazy' />
                 </PastLogo>
               )}
               <BusinessInformation>
@@ -88,13 +105,13 @@ export const VerticalOrdersLayout = (props) => {
         </WrappButton>
       )}
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />)
+      )}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>)
+      )}
     </>
   )
 }
