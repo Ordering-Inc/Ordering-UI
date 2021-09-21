@@ -507,3 +507,9 @@ export const OrderBusinessHeaderImage = styled.div`
     object-fit: cover;
   }
 `
+
+export const ReviewWrapper = styled.div`
+  .review-sent {
+    border-radius: 7.6px;
+  }
+`
