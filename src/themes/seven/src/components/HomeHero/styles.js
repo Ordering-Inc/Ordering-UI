@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 export const HeroContainerStyled = styled.div`
   width: 100%;
-  height: 43.562132vh;
+  height: 62.562132vh;
 
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
@@ -13,13 +13,13 @@ export const HeroContainerStyled = styled.div`
   `}
 
   @media (min-width: 768px) {
-    height: 55vw;
-    max-height: 55vw;
+    height: 75vw;
+    max-height: 75vw;
     overflow: hidden;
   }
 
   @media (min-width: 1200px) {
-    height: 65.562132vh;
+    height: 85.562132vh;
   }
 `
 
@@ -43,8 +43,8 @@ export const ContentWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    text-shadow: 0px 0px 5px #fff;
     padding: 0px 20px 0px;
-
     ${props => props.theme?.rtl && css`
       padding: 0px 20px 0px;
     `}
@@ -71,11 +71,10 @@ export const Title = styled.h1`
   margin: 0px;
   text-align: left;
   letter-spacing: 0px;
-  color: #FFFFFF;
-  text-shadow: 0px 3px 6px #00000029;
+  color: ${props => props.theme.colors.primary};
   opacity: 1;
   font-weight: bold;
-  font-size: 36px;
+  font-size: 48px;
   line-height: 48px;
   ${props => props.theme?.rtl && css`
       text-align: right;
@@ -102,7 +101,8 @@ export const Slogan = styled.p`
   font-size: 22px;
   line-height: 34px;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: ${props => props.theme.colors.primary};
+  text-shadow: 0px 0px 3px #dfdfdfa8;
   opacity: 1;
   margin-bottom: 15px;
   ${props => props.theme?.rtl && css`
@@ -124,69 +124,74 @@ export const Slogan = styled.p`
 
 export const WrapOrderyType = styled.div`
   display: flex;
-  border: 1px inset ${props => props.theme.colors.borderColor};
-  border-radius: 4.6px;
-  padding: 1px;
+  border: 2px solid #fff;
+  border-radius: 7.6px;
   box-sizing: border-box;
   width: fit-content;
   background-color: #fff;
+  overflow: hidden;
+  position: relative;
+
 `
 export const OrderTypeItem = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  width: 100px;
-  height: 40px;
+  width: 150px;
+  height: 70px;
   padding: 6px 12px;
   box-sizing: border-box;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 500;
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.primaryContrast};
-
-  &:before {
-    background-color: initial;
-    background-image: linear-gradient(#fff 0,rgba(255,255,255,0) 100%);
-    border-radius: 2px;
-    content: "";
-    height: 47%;
-    left: 1%;
-    opacity: .5;
-    position: absolute;
-    top: 1%;
-    transition: all .3;
-    width: 98%;
-  }
-
-  &:after {
-
-  }
   
   &:first-child {
-    border-radius: 4px 0px 0px 4px;
+    svg {
+      height: 33px;
+      width: 33px;
+      fill: #fff;
+    }
   }
   &:nth-child(2){
-    background-color: ${props => props.theme.colors.secundary};
-    color: ${props => props.theme.colors.secundaryContrast};
-    border-radius: 0px 4px 4px 0px;
+    background-color: #ffe512;
+    color: #636569;
+    svg {
+      height: 33px;
+      width: 25px;
+      fill: #ef3e42;
+    }
   }
 
   @media (min-width: 768px) {
-    font-size: 18px;
-    width: 120px;
-    height: 45px;
+    font-size: 14px;
+    width: 173px;
+    height: 65px;
   }
 
-  @media (min-width: 1024px) {
-    width: 12vw;
-    height: 4vw;
+  @media (min-width: 1200px) {
+    font-size: 16px;
+    width: 200px;
+    height: 70px;
+  }  
+`
+export const FoodLocation = styled.div`
+  position: absolute;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 1px -2px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
+  svg {
+    width: 35px;
+    height: fit-content;
+    fill: gray;
   }
-
-  @media (min-width: 1450px) {
-    width: 140px;
-    height: 45px;
-  }
-  
 `

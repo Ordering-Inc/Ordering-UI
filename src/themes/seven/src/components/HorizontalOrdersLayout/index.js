@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import {
@@ -36,6 +36,7 @@ export const HorizontalOrdersLayout = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()
+  const [brandBusiness, setBrandBusiness] = useState([])
 
   const ordersToShow = businessesIds
     ? orders.filter(order => businessesIds?.includes(order?.business_id))
@@ -49,6 +50,22 @@ export const HorizontalOrdersLayout = (props) => {
     }
   }
 
+  const fillterBrand = () => {
+    let containBrandBusineess = []
+    if (ordersToShow) {
+      // const mainbrand = ''
+      const mainbrand = 'Archie'
+      containBrandBusineess = ordersToShow.filter(order => order.business.name.toLowerCase().includes(mainbrand.toLowerCase()))
+    }
+    setBrandBusiness(containBrandBusineess)
+  }
+
+  useEffect(() => {
+    if (ordersToShow.length > 0) {
+      fillterBrand()
+    }
+  }, [ordersToShow])
+
   const Orders = () => {
     return (
       <>
@@ -58,7 +75,7 @@ export const HorizontalOrdersLayout = (props) => {
           </React.Fragment>))}
         {props.beforeComponents?.map((BeforeComponent, i) => (
           <BeforeComponent key={i} {...props} />))}
-        {orders.length > 0 && ordersToShow.map(order => (
+        {brandBusiness.length > 0 && brandBusiness.map(order => (
           <Card
             key={order.id || order.uuid}
             id='order-card'
@@ -82,7 +99,7 @@ export const HorizontalOrdersLayout = (props) => {
             <Content>
               {(order.business?.logo || theme.images?.dummies?.businessLogo) && !isBusinessesPage && (
                 <Logo>
-                  <img src={order.business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='75px' height='75px' />
+                  <img src={((order.business?.logo.indexOf('http') > -1) && order.business?.logo) || theme.images?.dummies?.businessLogo} alt='business-logo' width='75px' height='75px' loading='lazy' />
                 </Logo>
               )}
 
