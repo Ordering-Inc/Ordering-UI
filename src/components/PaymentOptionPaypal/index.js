@@ -3,7 +3,7 @@ import { PaymentOptionPaypal as PaymentPaypalController } from 'ordering-compone
 import Skeleton from 'react-loading-skeleton'
 
 import { Container } from './styles'
-
+import { useConfig } from 'ordering-components'
 const PaymentOptionPaypalUI = (props) => {
   const {
     isSdkReady,
@@ -48,9 +48,11 @@ const PaymentOptionPaypalUI = (props) => {
 }
 
 export const PaymentOptionPaypal = (props) => {
+  const [{ configs }] = useConfig()
   const paymentPaypalProps = {
     ...props,
-    UIComponent: PaymentOptionPaypalUI
+    UIComponent: PaymentOptionPaypalUI,
+    currency: configs?.stripe_currency?.value
   }
   return (
     <PaymentPaypalController {...paymentPaypalProps} />
