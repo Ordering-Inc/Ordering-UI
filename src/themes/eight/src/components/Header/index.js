@@ -139,7 +139,7 @@ export const Header = (props) => {
   }
 
   const handleMoment = () => {
-    if (configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0) return
+    if (configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0 || window.location.pathname === '/moment') return
     handleGoToPage({ page: 'moment' })
   }
 

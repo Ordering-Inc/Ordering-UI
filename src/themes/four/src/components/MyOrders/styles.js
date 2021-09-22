@@ -23,4 +23,5 @@ export const InnerContainer = styled.div`
 export const OrdersContainer = styled.div`
   overflow: hidden;
   padding: 0 10px;
+  flex: 1;
 `

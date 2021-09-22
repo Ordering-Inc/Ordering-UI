@@ -4,6 +4,7 @@ import { AddressList } from './src/components/AddressList'
 import { BusinessBasicInformation } from './src/components/BusinessBasicInformation'
 import { BusinessController } from './src/components/BusinessController'
 import { BusinessesListing } from './src/components/BusinessesListing'
+import { BusinessesMap } from './src/components/BusinessesMap'
 import { BusinessInformation } from './src/components/BusinessInformation'
 import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
 import { BusinessProductsCategories } from './src/components/BusinessProductsCategories'
@@ -59,6 +60,7 @@ export {
   BusinessBasicInformation,
   BusinessController,
   BusinessesListing,
+  BusinessesMap,
   BusinessInformation,
   BusinessItemAccordion,
   BusinessProductsCategories,

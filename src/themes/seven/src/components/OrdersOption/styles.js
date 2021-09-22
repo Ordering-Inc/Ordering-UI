@@ -72,6 +72,7 @@ export const OrdersContainer = styled.div`
     
     @media (min-width: 768px) {
       width: ${({ isBusinessesPage }) => isBusinessesPage ? '100%' : '90%'};
+      margin-left: ${({ isBusinessesPage }) => isBusinessesPage ? 'auto' : '5%'};
       justify-content: flex-start;
       ${({ isSkeleton, ordersLength }) => !isSkeleton && !ordersLength && css`
       > div:first-child{

@@ -67,6 +67,8 @@ import { ProductOptionSubOption } from './components/ProductOptionSubOption'
 import { ProductShare } from './components/ProductShare'
 import { ResetPassword } from './components/ResetPassword'
 import { ReviewOrder } from './components/ReviewOrder'
+import { ReviewProduct } from './components/ReviewProduct'
+import { ReviewDriver } from './components/ReviewDriver'
 import { SearchBar } from './components/SearchBar'
 import { SidebarMenu } from './components/SidebarMenu'
 import { SignUpForm } from './components/SignUpForm'
@@ -80,6 +82,9 @@ import { UserFormDetailsUI } from './components/UserFormDetails'
 import { UserPopover } from './components/UserPopover'
 import { UserProfileForm } from './components/UserProfileForm'
 import { VerticalOrdersLayout } from './components/VerticalOrdersLayout'
+import { GoogleLoginButton } from './components/GoogleLogin'
+import { SmsLoginButton } from './components/SmsLogin'
+import { AppleLogin } from './components/AppleLogin'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
@@ -177,6 +182,8 @@ export {
   PaymentOptionPaypal,
   ResetPassword,
   ReviewOrder,
+  ReviewProduct,
+  ReviewDriver,
   SearchBar,
   SignUpForm,
   SingleProductCard,
@@ -190,6 +197,9 @@ export {
   UserFormDetailsUI,
   UserProfileForm,
   VerticalOrdersLayout,
+  GoogleLoginButton,
+  SmsLoginButton,
+  AppleLogin,
   // Contexts
   ThemeContext,
   ThemeProvider,

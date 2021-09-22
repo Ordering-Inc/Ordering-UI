@@ -38,7 +38,7 @@ export const FormSide = styled(Side)`
 
   @media (min-width: 768px) {
     ${({ isPopup }) => isPopup && css`
-      margin: 20px 0px;
+      margin: 0px;
     `}
 
     width: ${({ isPopup }) => isPopup ? '100%' : '70%'};
