@@ -19,7 +19,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;  \n  background-color: ", ";\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border: 1px solid #E9ECEF;\n\n  & ", " {\n    background-color: transparent;\n    border-color: transparent;\n  }\n"])), function (props) {
+var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;  \n  background-color: ", ";\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n\n  & ", " {\n    background-color: transparent;\n    border-color: transparent;\n  }\n"])), function (props) {
   return props.theme.colors.backgroudPage;
 }, _Selects.Select);
 

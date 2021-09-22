@@ -17,11 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var NavBarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  padding: 0 5%;\n  position: relative;\n\n  @media (min-width: 992px) {\n    padding: 0 10%;\n  }\n"])));
+var NavBarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  padding: 0 1%;\n  position: relative;\n\n  @media (min-width: 768px) {\n    padding: 0 5%;\n  }\n\n  @media (min-width: 992px) {\n    padding: 0 10%;\n  }\n"])));
 
 exports.NavBarContainer = NavBarContainer;
 
-var BackButton = _styledComponents.default.button(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  outline: none;\n  background: transparent;\n  border: none;\n  display: flex;\n  align-items: center;\n  position: absolute;\n  top: 20px;\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n  }\n\n  span {\n    font-size: 12px;\n    ", "\n  }\n"])), function (props) {
+var BackButton = _styledComponents.default.button(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  outline: none;\n  background: transparent;\n  border: none;\n  display: flex;\n  align-items: center;\n  position: absolute;\n  height: 100%;\n  padding: 0px;\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n  }\n\n  span {\n    font-size: 12px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;
@@ -31,7 +31,7 @@ var BackButton = _styledComponents.default.button(_templateObject2 || (_template
 
 exports.BackButton = BackButton;
 
-var NavBarTitle = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: center;\n  font-size: 16px;\n  padding: 18px;\n  color: ", ";\n"])), function (props) {
+var NavBarTitle = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: center;\n  font-size: 14px;\n  padding: 18px 5px;\n  color: ", ";\n  max-width: calc(100% - 160px);\n  margin: auto;\n\n  @media (min-width: 768px) {\n    font-size: 16px;\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 });
 

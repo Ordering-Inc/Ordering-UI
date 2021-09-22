@@ -27,11 +27,11 @@ var WrapperImage = _styledComponents.default.div(_templateObject2 || (_templateO
 
 exports.WrapperImage = WrapperImage;
 
-var ProductImage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  width: 300px;\n  height: 300px;\n\n  > div {\n    position: absolute;\n    margin: 10px;\n  }\n\n  img {\n    object-fit: contain;\n    height: 100%;\n    box-sizing: border-box;\n    border-radius: 7.6px;\n  }\n\n  @media (min-width: 1201px) {\n    img {\n      width: 100%;\n      object-fit: cover;\n    }\n  }\n"])));
+var ProductImage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  width: 300px;\n  height: 300px;\n\n  > div {\n    position: absolute;\n    margin: 10px;\n    z-index: 1;\n  }\n\n  img {\n    object-fit: contain;\n    height: 100%;\n    box-sizing: border-box;\n    border-radius: 7.6px;\n  }\n\n  @media (min-width: 1201px) {\n    img {\n      width: 100%;\n      object-fit: cover;\n    }\n  }\n"])));
 
 exports.ProductImage = ProductImage;
 
-var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0px;\n  position: relative;\n  margin-top: 10px;\n\n  h1 {\n    font-size: 20px;\n    font-weight: 500;\n    color: ", ";\n    margin: 0 0 5px 0;\n  }\n\n  h4 {\n    font-size: 16px;\n    margin: 0 0 20px 0;\n    font-weight: 400;\n  }\n\n  p {\n    font-size: 14px;\n    font-weight: 200;\n    margin-top: 0px;\n    line-height: 1.5em;\n    width: 100%;\n    text-align: left;\n    color: ", ";\n    ", "\n  }\n\n  @media (min-width: 381px) {\n    h1 {\n      font-size: 24px;\n    }\n\n    h4 {\n      font-size: 18px;\n    }\n    p {\n      font-size: 16px;\n    }\n  }\n\n  @media (min-width: 411px) {\n    padding: 10px 0px;\n  }\n\n  @media (min-width: 1201px) {\n    top: 0;\n    margin-top: 0px;\n  }\n"])), function (props) {
+var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0px 15px;\n  position: relative;\n  margin-top: 10px;\n\n  h1 {\n    font-size: 20px;\n    font-weight: 500;\n    color: ", ";\n    margin: 0 0 5px 0;\n  }\n\n  h4 {\n    font-size: 16px;\n    margin: 0 0 20px 0;\n    font-weight: 400;\n  }\n\n  p {\n    font-size: 14px;\n    font-weight: 200;\n    margin-top: 0px;\n    line-height: 1.5em;\n    width: 100%;\n    text-align: left;\n    color: ", ";\n    ", "\n  }\n\n  @media (min-width: 381px) {\n    h1 {\n      font-size: 24px;\n    }\n\n    h4 {\n      font-size: 18px;\n    }\n    p {\n      font-size: 16px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    padding: 10px 0px;\n  }\n\n  @media (min-width: 1201px) {\n    top: 0;\n    margin-top: 0px;\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 }, function (props) {
   return props.theme.colors.grayDark;
@@ -71,7 +71,7 @@ var SectionTitle = _styledComponents.default.h3(_templateObject11 || (_templateO
 
 exports.SectionTitle = SectionTitle;
 
-var ProductComment = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 115px;\n\n  p {\n    font-weight: 300;\n    margin-bottom: 5px;\n  }\n\n  @media (min-width: 577px) {\n    margin-bottom: 62px;\n  }\n\n  @media (min-width: 769px) {\n    margin-bottom: 0px;\n  }\n"])));
+var ProductComment = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n\n  p {\n    font-weight: 300;\n    margin-bottom: 5px;\n  }\n"])));
 
 exports.ProductComment = ProductComment;
 

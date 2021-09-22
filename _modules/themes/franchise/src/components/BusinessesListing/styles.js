@@ -21,7 +21,7 @@ var BusinessContainer = _styledComponents.default.div(_templateObject || (_templ
 
 exports.BusinessContainer = BusinessContainer;
 
-var BusinessListWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px 15px;\n  overflow: auto;\n  box-sizing: border-box;\n\n  @media (min-width: 850px) {\n    width: 50%;\n    height: calc(100vh - 331px);\n    padding: 40px 25px 20px 70px;\n    ", "\n  }\n"])), function (props) {
+var BusinessListWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px 15px;\n  overflow: auto;\n  box-sizing: border-box;\n\n  @media (min-width: 850px) {\n    width: 50%;\n    height: 90vh;\n    padding: 40px 25px 20px 70px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      padding: 40px 70px 20px 25px;\n    "])));
@@ -29,7 +29,7 @@ var BusinessListWrapper = _styledComponents.default.div(_templateObject2 || (_te
 
 exports.BusinessListWrapper = BusinessListWrapper;
 
-var BusinessMapWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 350px;\n  position: relative;\n  \n  @media (min-width: 850px) {\n    width: 50%;\n    height: calc(100vh - 331px);\n  }\n\n  > div {\n    height: 100% !important;\n    width: 100% !important;\n  }\n"])));
+var BusinessMapWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 350px;\n  position: relative;\n  \n  @media (min-width: 850px) {\n    width: 50%;\n    height: 90vh;\n  }\n\n  > div {\n    height: 100% !important;\n    width: 100% !important;\n  }\n"])));
 
 exports.BusinessMapWrapper = BusinessMapWrapper;
 
