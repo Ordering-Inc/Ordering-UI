@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import { useHistory } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import FaHome from '@meronex/icons/fa/FaHome'
 import FaPlus from '@meronex/icons/fa/FaPlus'
@@ -66,7 +65,6 @@ const AddressFormUI = (props) => {
   const formMethods = useForm()
   const [{ auth }] = useSession()
   const theme = useTheme()
-  // const history = useHistory()
   const [events] = useEvent()
 
   const [state, setState] = useState({ selectedFromAutocomplete: true })
