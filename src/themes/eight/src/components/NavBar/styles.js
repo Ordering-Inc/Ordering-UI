@@ -3,8 +3,12 @@ import styled, { css } from 'styled-components'
 export const NavBarContainer = styled.div`
   border: 1px solid #E9ECEF;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  padding: 0 5%;
+  padding: 0 1%;
   position: relative;
+
+  @media (min-width: 768px) {
+    padding: 0 5%;
+  }
 
   @media (min-width: 992px) {
     padding: 0 10%;
@@ -19,7 +23,8 @@ export const BackButton = styled.button`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 20px;
+  height: 100%;
+  padding: 0px;
 
   svg {
     color: ${props => props.theme.colors.primary};
@@ -39,7 +44,13 @@ export const BackButton = styled.button`
 export const NavBarTitle = styled.p`
   margin: 0px;
   text-align: center;
-  font-size: 16px;
-  padding: 18px;
+  font-size: 14px;
+  padding: 18px 5px;
   color: ${props => props.theme.colors.grayDark};
+  max-width: calc(100% - 160px);
+  margin: auto;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 `

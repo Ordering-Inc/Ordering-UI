@@ -18,7 +18,7 @@ export const BusinessListWrapper = styled.div`
 
   @media (min-width: 850px) {
     width: 50%;
-    height: calc(100vh - 331px);
+    height: 90vh;
     padding: 40px 25px 20px 70px;
     ${props => props.theme?.rtl && css`
       padding: 40px 70px 20px 25px;
@@ -33,7 +33,7 @@ export const BusinessMapWrapper = styled.div`
   
   @media (min-width: 850px) {
     width: 50%;
-    height: calc(100vh - 331px);
+    height: 90vh;
   }
 
   > div {
