@@ -23,6 +23,8 @@ var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox")
 
 var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
 
+var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
+
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
@@ -143,7 +145,13 @@ var SignUpFormUI = function SignUpFormUI(props) {
       conditionCheck = _useState10[0],
       setConditionCheck = _useState10[1];
 
-  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false; // const [isSignupBusiness, setIsSignupBusiness] = useState(false)
+  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+
+  var _useState11 = (0, _react.useState)(new Date()),
+      _useState12 = _slicedToArray(_useState11, 2),
+      startDate = _useState12[0],
+      setStartDate = _useState12[1]; // const [isSignupBusiness, setIsSignupBusiness] = useState(false)
+
 
   var initParams = {
     client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
@@ -331,8 +339,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.SignUpContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
-    isPopup: isPopup,
-    className: "test-marker"
+    isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.FormTitle, null, t('SIGN_UP_FORM_TITLE', 'Register in archies and enjoy the benefits we have for you.')), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
@@ -395,8 +402,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.TogglePassword, {
     onClick: togglePasswordView
   }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_AiOutlineEye.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineEyeInvisible.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.FormInline, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBirthday, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    type: "text",
-    name: "birthday",
+    type: "date",
+    defaultValue: new Date(),
+    name: "birthdate",
     className: "form",
     placeholder: t('BIRTHDAY', 'dd/mm/yyyy'),
     onChange: handleChangeInput

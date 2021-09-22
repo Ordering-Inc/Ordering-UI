@@ -407,10 +407,6 @@ var CheckoutUI = function CheckoutUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again'))), /*#__PURE__*/_react.default.createElement(_PaymentOptions.PaymentOptions, {
     cart: cart,
-    open: modalOpen === null || modalOpen === void 0 ? void 0 : modalOpen.payment,
-    onClose: function onClose() {
-      return handleModal('payment');
-    },
     isDisabled: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
     businessId: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi8 = businessDetails.business) === null || _businessDetails$busi8 === void 0 ? void 0 : _businessDetails$busi8.id,
     isLoading: businessDetails.loading,
@@ -419,8 +415,8 @@ var CheckoutUI = function CheckoutUI(props) {
     errorCash: errorCash,
     setErrorCash: setErrorCash,
     handleOrderRedirect: handleOrderRedirect,
-    isPaymethodNull: paymethodSelected,
-    isCustomerMode: isCustomerMode
+    isCustomerMode: isCustomerMode,
+    paySelected: paymethodSelected
   })), (_props$beforeElements6 = props.beforeElementsSectionFive) === null || _props$beforeElements6 === void 0 ? void 0 : _props$beforeElements6.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PaymentOptionPaypal = void 0;
+exports.BusinessesMap = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+var _googleMap = require("./googleMap.js");
 
 var _styles = require("./styles");
 
@@ -20,6 +20,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -33,15 +35,36 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+var BusinessesMapUI = function BusinessesMapUI(props) {
+  var _props$beforeElements, _props$beforeComponen, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _props$afterComponent, _props$afterElements;
 
-var PaymentOptionPaypalUI = function PaymentOptionPaypalUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var userLocation = props.userLocation,
+      businessLocations = props.businessLocations,
+      onBusinessClick = props.onBusinessClick,
+      setErrors = props.setErrors,
+      businessList = props.businessList;
 
-  var isSdkReady = props.isSdkReady,
-      PaypalButton = props.PaypalButton,
-      noAuthMessage = props.noAuthMessage,
-      paypalButtonProps = props.paypalButtonProps;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configState = _useConfig2[0];
+
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderState = _useOrder2[0];
+
+  var googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeId: 'roadmap',
+    // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: false,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    },
+    isMarkerDraggable: true
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -50,10 +73,19 @@ var PaymentOptionPaypalUI = function PaymentOptionPaypalUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, noAuthMessage ? /*#__PURE__*/_react.default.createElement("p", null, noAuthMessage) : isSdkReady ? PaypalButton && /*#__PURE__*/_react.default.createElement(PaypalButton, paypalButtonProps) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    count: 3,
-    height: 55
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
+    disabled: orderState.loading
+  }, /*#__PURE__*/_react.default.createElement(_googleMap.GoogleMapsMap, {
+    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value,
+    location: userLocation,
+    locations: businessLocations,
+    mapControls: googleMapsControls,
+    maxLimitLocation: parseInt(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.meters_to_change_address) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value),
+    businessMap: true,
+    onBusinessClick: onBusinessClick,
+    setErrors: setErrors,
+    businessList: businessList
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
@@ -64,19 +96,12 @@ var PaymentOptionPaypalUI = function PaymentOptionPaypalUI(props) {
   }));
 };
 
-var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
-  var _configs$stripe_curre;
-
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  var paymentPaypalProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: PaymentOptionPaypalUI,
-    currency: configs === null || configs === void 0 ? void 0 : (_configs$stripe_curre = configs.stripe_currency) === null || _configs$stripe_curre === void 0 ? void 0 : _configs$stripe_curre.value
+var BusinessesMap = function BusinessesMap(props) {
+  var businessMapController = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: BusinessesMapUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.PaymentOptionPaypal, paymentPaypalProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessesMap, businessMapController);
 };
 
-exports.PaymentOptionPaypal = PaymentOptionPaypal;
+exports.BusinessesMap = BusinessesMap;

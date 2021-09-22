@@ -93,7 +93,7 @@ var BusinissWrapper = _styledComponents.default.div(_templateObject12 || (_templ
 
 exports.BusinissWrapper = BusinissWrapper;
 
-var MapWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: none;\n\n  ", "\n\n"])), function (_ref3) {
+var MapWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  /* display: none; */\n\n  ", "\n\n"])), function (_ref3) {
   var isPickup = _ref3.isPickup;
   return isPickup && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    display: block;\n    width: 100%;\n    height: auto;\n    padding: 0;\n    box-sizing: border-box;\n    margin-bottom: 20px;\n\n    #map {\n      border-radius: 0;\n      @media (min-width: 576px) {\n        width: 94% !important;\n      }\n    }\n\n    @media (min-width: 1024px) {\n      height: 45vh;\n    }\n\n    @media (min-width: 1024px) {\n      width: 66.6%;\n      height: 100vh;\n      overflow: hidden;\n      >div {\n        height: 100%  \n      }\n    }\n  "])));
 });

@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReviewOrder = void 0;
+exports.ReviewDriver = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -15,9 +15,7 @@ var _orderingComponents = require("ordering-components");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
-var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
-
-var _styles = require("./styles");
+var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
 var _Confirm = require("../Confirm");
 
@@ -26,6 +24,8 @@ var _Inputs = require("../../styles/Inputs");
 var _Buttons = require("../../styles/Buttons");
 
 var _styledComponents = require("styled-components");
+
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61,16 +61,17 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var ReviewOrderUI = function ReviewOrderUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+var ReviewDriverUI = function ReviewDriverUI(props) {
+  var _props$beforeElements, _props$beforeComponen, _order$driver, _order$driver2, _order$driver3, _order$driver4, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
-  var stars = props.stars,
+  var dirverReviews = props.dirverReviews,
       order = props.order,
-      handleSendReview = props.handleSendReview,
       formState = props.formState,
-      closeReviewOrder = props.closeReviewOrder,
-      setIsReviewed = props.setIsReviewed,
-      setStars = props.setStars;
+      setDriverReviews = props.setDriverReviews,
+      closeReviewDriver = props.closeReviewDriver,
+      setIsDriverReviewed = props.setIsDriverReviewed,
+      handleSendDriverReview = props.handleSendDriverReview;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -80,49 +81,41 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       optimizeImage = _useUtils2[0].optimizeImage;
 
-  var theme = (0, _styledComponents.useTheme)();
-
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
       errors = _useForm.errors;
 
-  var _useState = (0, _react.useState)({
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      comments = _useState2[0],
+      setComments = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      extraComment = _useState4[0],
+      setExtraComment = _useState4[1];
+
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: [],
     success: false
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
-
-  var _useState3 = (0, _react.useState)([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      comments = _useState4[0],
-      setComments = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      extraComment = _useState6[0],
-      setExtraComment = _useState6[1];
+      alertState = _useState6[0],
+      setAlertState = _useState6[1];
 
   var commentsList = [{
     key: 0,
-    content: t('IT_WASNT_TASTY', "It wasn't tasty")
+    content: t('FAST_AND_EFFICIENT', 'Fast and efficient')
   }, {
     key: 1,
-    content: t('IT_DOESNT_PACK_WELL', "It doesn't pack well")
+    content: t('DELIVERY_PERFECT', 'Delivery perfect')
   }, {
     key: 2,
-    content: t('IT_ISNT_WORTH_WHAT_IT_COSTS', "It isn't worth what it costs")
+    content: t('EXCELLENT_COMMUNICATION', 'Excellent communication')
   }, {
     key: 3,
-    content: t('TOO_SLOW', 'Too slow')
-  }, {
-    key: 4,
-    content: t('SUSTAINABLE_PACKAGING_WASNT_USED', "Sustainable packaging wasn't used")
-  }, {
-    key: 5,
-    content: t('THEY_DID_NOT_FOLLOW_THE_ORDER_NOTES', 'They did not follow the order notes')
+    content: t('CORDIAL_SERVICE', 'Cordial service')
   }];
   var qualificationList = [{
     key: 1,
@@ -156,13 +149,25 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     right: 0
   }];
 
-  var handleChangeStars = function handleChangeStars(index) {
-    if (index) setStars(_objectSpread(_objectSpread({}, stars), {}, {
-      quality: index,
-      punctiality: index,
-      service: index,
-      packaging: index
+  var handleChangeReviews = function handleChangeReviews(index) {
+    if (index) setDriverReviews(_objectSpread(_objectSpread({}, dirverReviews), {}, {
+      qualification: index
     }));
+  };
+
+  var onSubmit = function onSubmit(values) {
+    if ((dirverReviews === null || dirverReviews === void 0 ? void 0 : dirverReviews.qualification) === 0) {
+      setAlertState({
+        open: true,
+        content: ["".concat(t('REVIEW_QUALIFICATION_REQUIRED', 'Review qualification is required'))]
+      });
+      return;
+    }
+
+    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+      success: true
+    }));
+    handleSendDriverReview();
   };
 
   var handleChangeComment = function handleChangeComment(commentItem) {
@@ -179,6 +184,13 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     } else {
       setComments([].concat(_toConsumableArray(comments), [commentItem]));
     }
+  };
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
   };
 
   var isSelectedComment = function isSelectedComment(commentKey) {
@@ -202,8 +214,8 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     }
 
     if (!formState.loading && !((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && alertState.success) {
-      setIsReviewed && setIsReviewed(true);
-      closeReviewOrder && closeReviewOrder();
+      setIsDriverReviewed && setIsDriverReviewed(true);
+      closeReviewDriver && closeReviewDriver();
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
@@ -217,31 +229,6 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       });
     }
   }, [errors]);
-
-  var onSubmit = function onSubmit(values) {
-    if (Object.values(stars).some(function (value) {
-      return value === 0;
-    })) {
-      setAlertState({
-        open: true,
-        content: stars.quality === 0 ? ["".concat(t('REVIEW_QUALIFICATION_REQUIRED', 'Review qualification is required'))] : []
-      });
-      return;
-    }
-
-    setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-      success: true
-    }));
-    handleSendReview();
-  };
-
-  var closeAlert = function closeAlert() {
-    setAlertState({
-      open: false,
-      content: []
-    });
-  };
-
   (0, _react.useEffect)(function () {
     var _comments = '';
 
@@ -253,8 +240,8 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
 
     var _comment = _comments + extraComment;
 
-    setStars(_objectSpread(_objectSpread({}, stars), {}, {
-      comments: _comment
+    setDriverReviews(_objectSpread(_objectSpread({}, dirverReviews), {}, {
+      comment: _comment
     }));
   }, [comments, extraComment]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -265,39 +252,39 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LogoAndReviewWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, ((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit')
-  })), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('HOW_WAS_YOUR_ORDER', 'How was your order?')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressContent, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressBar, {
+  }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LogoAndReviewWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverPhoto, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement(_styles.DriverPhoto, {
+    bgimage: optimizeImage(order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_200,c_limit')
+  }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), (order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name) && /*#__PURE__*/_react.default.createElement(_styles.DriverInfoBlock, null, order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.name), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('HOW_WAS_YOUR_DRIVER', 'How was your driver?')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressContent, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressBar, {
     style: {
-      width: "".concat(((stars === null || stars === void 0 ? void 0 : stars.quality) === 0 ? 0 : ((stars === null || stars === void 0 ? void 0 : stars.quality) - 1) / 4) * 100, "%")
+      width: "".concat(((dirverReviews === null || dirverReviews === void 0 ? void 0 : dirverReviews.qualification) === 0 ? 0 : ((dirverReviews === null || dirverReviews === void 0 ? void 0 : dirverReviews.qualification) - 1) / 4) * 100, "%")
     }
   }), qualificationList === null || qualificationList === void 0 ? void 0 : qualificationList.map(function (qualification) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
       key: qualification === null || qualification === void 0 ? void 0 : qualification.key,
       style: {
-        left: theme !== null && theme !== void 0 && theme.rtl ? qualification !== null && qualification !== void 0 && qualification.middleNode ? 'initial' : qualification === null || qualification === void 0 ? void 0 : qualification.right : qualification === null || qualification === void 0 ? void 0 : qualification.left,
+        left: theme.rtl ? qualification !== null && qualification !== void 0 && qualification.middleNode ? 'initial' : qualification === null || qualification === void 0 ? void 0 : qualification.right : qualification === null || qualification === void 0 ? void 0 : qualification.left,
         right: theme !== null && theme !== void 0 && theme.rtl ? qualification === null || qualification === void 0 ? void 0 : qualification.left : qualification !== null && qualification !== void 0 && qualification.middleNode ? 'initial' : qualification === null || qualification === void 0 ? void 0 : qualification.right
       },
-      active: (stars === null || stars === void 0 ? void 0 : stars.quality) === (qualification === null || qualification === void 0 ? void 0 : qualification.key),
-      pass: (stars === null || stars === void 0 ? void 0 : stars.quality) >= (qualification === null || qualification === void 0 ? void 0 : qualification.key),
+      active: (dirverReviews === null || dirverReviews === void 0 ? void 0 : dirverReviews.qualification) === (qualification === null || qualification === void 0 ? void 0 : qualification.key),
+      pass: (dirverReviews === null || dirverReviews === void 0 ? void 0 : dirverReviews.qualification) >= (qualification === null || qualification === void 0 ? void 0 : qualification.key),
       className: qualification !== null && qualification !== void 0 && qualification.middleNode ? 'mark-point' : '',
       onClick: function onClick() {
-        return handleChangeStars(qualification === null || qualification === void 0 ? void 0 : qualification.key);
+        return handleChangeReviews(qualification === null || qualification === void 0 ? void 0 : qualification.key);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, qualification === null || qualification === void 0 ? void 0 : qualification.text, /*#__PURE__*/_react.default.createElement("span", null)));
   }))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENTS', 'Comments')), commentsList === null || commentsList === void 0 ? void 0 : commentsList.map(function (commentItem, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.CommentButton, {
       key: i,
-      active: isSelectedComment(commentItem === null || commentItem === void 0 ? void 0 : commentItem.key),
+      active: isSelectedComment(commentItem.key),
       onClick: function onClick() {
         return handleChangeComment(commentItem);
       },
       initialIcon: true
-    }, commentItem.content, isSelectedComment(commentItem === null || commentItem === void 0 ? void 0 : commentItem.key) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderContainer, {
+    }, commentItem.content, isSelectedComment(commentItem.key) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ReviewDriverContainer, {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles.Comments, null, /*#__PURE__*/_react.default.createElement("p", null, t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
-    name: "comments",
+    name: "comment",
     value: extraComment,
     onChange: function onChange(e) {
       return setExtraComment(e.target.value);
@@ -311,15 +298,13 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Send, null, /*#__PURE__*/_react.default.createElement("span", {
-    onClick: closeReviewOrder
-  }, t('SKIP', 'Skip')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ActionBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !formState.loading ? 'primary' : 'secondary',
     type: "submit",
     disabled: formState.loading,
     className: "review-sent"
-  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('CONTINUE', 'Continue'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ORDER_REVIEW', 'Order Review'),
+  }, !formState.loading ? t('SEND_REVIEW', 'Send review') : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('DRIVER_REVIEW', 'Driver Review'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -341,14 +326,13 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
   }));
 };
 
-var ReviewOrder = function ReviewOrder(props) {
-  var ReviewOrderProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: ReviewOrderUI,
-    isToast: true,
-    defaultStar: 0
+var ReviewDriver = function ReviewDriver(props) {
+  var reviewDriverProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: ReviewDriverUI,
+    isToast: true
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderReview, ReviewOrderProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.ReviewDriver, reviewDriverProps);
 };
 
-exports.ReviewOrder = ReviewOrder;
+exports.ReviewDriver = ReviewDriver;

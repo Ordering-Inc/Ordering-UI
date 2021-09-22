@@ -122,7 +122,7 @@ var AddressFormUI = function AddressFormUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       auth = _useSession2[0].auth;
 
-  var theme = (0, _styledComponents.useTheme)(); // const history = useHistory()
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),

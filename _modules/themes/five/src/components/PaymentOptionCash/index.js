@@ -87,7 +87,7 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
     el.current.value = value || '';
   }, [value]);
   (0, _react.useEffect)(function () {
-    if (value && parseFloat(value) < orderTotal) {
+    if (value && parseFloat(value) < orderTotal || !value) {
       setErrorCash && setErrorCash(true);
     } else {
       setErrorCash && setErrorCash(false);

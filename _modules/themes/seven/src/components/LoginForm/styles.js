@@ -36,7 +36,7 @@ var Side = _styledComponents.default.div(_templateObject2 || (_templateObject2 =
 
 var FormSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin: auto;\n\n  @media (min-width: 768px) {\n    ", "\n\n    width: ", ";\n  }\n\n  @media (min-width: 992px) {\n    width: ", ";\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px){\n    font-size: ", ";\n  }\n"])), function (_ref4) {
   var isPopup = _ref4.isPopup;
-  return isPopup && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin: 20px 0px;\n    "])));
+  return isPopup && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin: 0px;\n    "])));
 }, function (_ref5) {
   var isPopup = _ref5.isPopup;
   return isPopup ? '100%' : '70%';

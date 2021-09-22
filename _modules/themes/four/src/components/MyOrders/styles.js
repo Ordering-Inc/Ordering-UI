@@ -21,6 +21,6 @@ var InnerContainer = _styledComponents.default.div(_templateObject2 || (_templat
 
 exports.InnerContainer = InnerContainer;
 
-var OrdersContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  overflow: hidden;\n  padding: 0 10px;\n"])));
+var OrdersContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  overflow: hidden;\n  padding: 0 10px;\n  flex: 1;\n"])));
 
 exports.OrdersContainer = OrdersContainer;

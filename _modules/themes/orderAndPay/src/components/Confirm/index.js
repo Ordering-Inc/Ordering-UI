@@ -57,7 +57,8 @@ var ConfirmUI = function ConfirmUI(props) {
       onCancel = props.onCancel,
       onClose = props.onClose,
       acceptText = props.acceptText,
-      cancelText = props.cancelText;
+      cancelText = props.cancelText,
+      isLoading = props.isLoading;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -96,11 +97,13 @@ var ConfirmUI = function ConfirmUI(props) {
       key: i
     }, (0, _utils.getTraduction)(item));
   })), children), (onCancel || onAccept || onClose) && /*#__PURE__*/_react.default.createElement(_styles.PopupActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    disabled: isLoading,
     outline: true,
     onClick: function onClick() {
       return onCancel();
     }
   }, cancelText || t('CANCEL', 'Cancel')), onAccept && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    disabled: isLoading,
     color: "primary",
     onClick: function onClick() {
       return onAccept();

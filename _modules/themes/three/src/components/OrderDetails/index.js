@@ -39,6 +39,10 @@ var _Messages = require("../../../../../components/Messages");
 
 var _ReviewOrder = require("../../../../../components/ReviewOrder");
 
+var _ReviewProduct = require("../../../../../components/ReviewProduct");
+
+var _ReviewDriver = require("../../../../../components/ReviewDriver");
+
 var _ProductShare = require("../ProductShare");
 
 var _styles = require("./styles");
@@ -74,7 +78,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _order$driver, _order$driver2, _theme$images2, _theme$images2$dummie, _order$business, _order$business2, _theme$images3, _theme$images3$dummie, _order$customer, _order$customer2, _theme$images4, _theme$images4$dummie, _props$beforeElements, _props$beforeComponen, _order$business3, _theme$images5, _theme$images5$dummie, _order$business4, _order$business5, _order$business6, _order$business7, _getOrderStatus, _getOrderStatus2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _configs$guest_uuid_a, _order$driver3, _configs$google_maps_, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$products, _order$summary, _order$summary2, _order$summary3, _order$summary4, _order$summary5, _order$summary6, _order$summary7, _order$summary8, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary9, _order$summary10, _order$summary11, _props$afterComponent, _props$afterElements;
+  var _order$driver, _order$driver2, _theme$images2, _theme$images2$dummie, _order$business, _order$business2, _theme$images3, _theme$images3$dummie, _order$customer, _order$customer2, _theme$images4, _theme$images4$dummie, _props$beforeElements, _props$beforeComponen, _order$business3, _theme$images5, _theme$images5$dummie, _order$business4, _order$business5, _order$business6, _order$business7, _getOrderStatus, _getOrderStatus2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _configs$guest_uuid_a, _order$driver3, _configs$google_maps_, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$products, _order$summary, _order$summary2, _order$summary3, _order$summary4, _order$summary5, _order$summary6, _order$summary7, _order$summary8, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary9, _order$summary10, _order$summary11, _theme$defaultLanguag, _props$afterComponent, _props$afterElements;
 
   var userCustomerId = props.userCustomerId,
       handleBusinessRedirect = props.handleBusinessRedirect,
@@ -108,31 +112,50 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       parseNumber = _useUtils2$.parseNumber,
       parseDate = _useUtils2$.parseDate;
 
-  var _useState = (0, _react.useState)({
-    business: false,
-    driver: false
-  }),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      openMessages = _useState2[0],
-      setOpenMessages = _useState2[1];
+      isReviewOpen = _useState2[0],
+      setIsReviewOpen = _useState2[1];
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      openReview = _useState4[0],
-      setOpenReview = _useState4[1];
+      isOrderReviewed = _useState4[0],
+      setIsOrderReviewed = _useState4[1];
 
   var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      isReviewed = _useState6[0],
-      setIsReviewed = _useState6[1];
+      isProductReviewed = _useState6[0],
+      setIsProductReviewed = _useState6[1];
 
-  var _useState7 = (0, _react.useState)({
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isDriverReviewed = _useState8[0],
+      setIsDriverReviewed = _useState8[1];
+
+  var _useState9 = (0, _react.useState)({
     business: false,
     driver: false
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      unreadAlert = _useState8[0],
-      setUnreadAlert = _useState8[1];
+      _useState10 = _slicedToArray(_useState9, 2),
+      unreadAlert = _useState10[0],
+      setUnreadAlert = _useState10[1];
+
+  var _useState11 = (0, _react.useState)({
+    business: false,
+    driver: false
+  }),
+      _useState12 = _slicedToArray(_useState11, 2),
+      openMessages = _useState12[0],
+      setOpenMessages = _useState12[1];
+
+  var _useState13 = (0, _react.useState)({
+    order: false,
+    product: false,
+    driver: false
+  }),
+      _useState14 = _slicedToArray(_useState13, 2),
+      reviewStatus = _useState14[0],
+      setReviewStatus = _useState14[1];
 
   var _props$order = props.order,
       order = _props$order.order,
@@ -313,6 +336,59 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }), _objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.location), {}, {
     icon: (order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo) || ((_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$dummie = _theme$images4.dummies) === null || _theme$images4$dummie === void 0 ? void 0 : _theme$images4$dummie.customerPhoto)
   })];
+
+  var handleOpenReview = function handleOpenReview() {
+    if (!(order !== null && order !== void 0 && order.review) && !isOrderReviewed) setReviewStatus({
+      order: true,
+      product: false,
+      driver: false
+    });else if (!isProductReviewed) setReviewStatus({
+      order: false,
+      product: true,
+      driver: false
+    });else if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true
+    });else {
+      setIsReviewOpen(false);
+      return;
+    }
+    setIsReviewOpen(true);
+  };
+
+  var handleCloseReivew = function handleCloseReivew() {
+    setReviewStatus({
+      order: false,
+      product: false,
+      driver: false
+    });
+    setIsReviewOpen(false);
+  };
+
+  var closeReviewOrder = function closeReviewOrder() {
+    if (!isProductReviewed) setReviewStatus({
+      order: false,
+      product: true,
+      driver: false
+    });else if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true
+    });else handleCloseReivew();
+  };
+
+  var closeReviewProduct = function closeReviewProduct() {
+    if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true
+    });else {
+      setIsDriverReviewed(true);
+      handleCloseReivew();
+    }
+  };
+
   (0, _react.useEffect)(function () {
     if (driverLocation) {
       locations[0] = driverLocation;
@@ -422,11 +498,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
   }))), /*#__PURE__*/_react.default.createElement(_styles.OrderBill, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.subtotal) || (order === null || order === void 0 ? void 0 : order.subtotal)))), ((order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.discount) > 0 || (order === null || order === void 0 ? void 0 : order.discount) > 0) && /*#__PURE__*/_react.default.createElement("tr", null, (order === null || order === void 0 ? void 0 : order.offer_type) === 1 ? /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount'), /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(order === null || order === void 0 ? void 0 : order.offer_rate, parsePrice), "%)"))) : /*#__PURE__*/_react.default.createElement("td", null, t('DISCOUNT', 'Discount')), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice((order === null || order === void 0 ? void 0 : (_order$summary3 = order.summary) === null || _order$summary3 === void 0 ? void 0 : _order$summary3.discount) || (order === null || order === void 0 ? void 0 : order.discount)))), (order === null || order === void 0 ? void 0 : order.tax_type) !== 1 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TAX', 'Tax'), /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(order === null || order === void 0 ? void 0 : order.tax, parseNumber), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary4 = order.summary) === null || _order$summary4 === void 0 ? void 0 : _order$summary4.tax) || (order === null || order === void 0 ? void 0 : order.totalTax)))), ((order === null || order === void 0 ? void 0 : (_order$summary5 = order.summary) === null || _order$summary5 === void 0 ? void 0 : _order$summary5.delivery_price) > 0 || (order === null || order === void 0 ? void 0 : order.deliveryFee) > 0) && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary6 = order.summary) === null || _order$summary6 === void 0 ? void 0 : _order$summary6.delivery_price) || (order === null || order === void 0 ? void 0 : order.deliveryFee)))), ((order === null || order === void 0 ? void 0 : (_order$summary7 = order.summary) === null || _order$summary7 === void 0 ? void 0 : _order$summary7.driver_tip) > 0 || (order === null || order === void 0 ? void 0 : order.driver_tip) > 0) && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip'), ((order === null || order === void 0 ? void 0 : (_order$summary8 = order.summary) === null || _order$summary8 === void 0 ? void 0 : _order$summary8.driver_tip) > 0 || (order === null || order === void 0 ? void 0 : order.driver_tip) > 0) && parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 2 && !!!parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_u = configs.driver_tip_use_custom) === null || _configs$driver_tip_u === void 0 ? void 0 : _configs$driver_tip_u.value, 10) && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(order === null || order === void 0 ? void 0 : order.driver_tip, parseNumber), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary9 = order.summary) === null || _order$summary9 === void 0 ? void 0 : _order$summary9.driver_tip) || (order === null || order === void 0 ? void 0 : order.totalDriverTip)))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SERVICE_FEE', 'Service Fee'), /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(order === null || order === void 0 ? void 0 : order.service_fee, parseNumber), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary10 = order.summary) === null || _order$summary10 === void 0 ? void 0 : _order$summary10.service_fee) || (order === null || order === void 0 ? void 0 : order.serviceFee) || 0))))), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
-  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary11 = order.summary) === null || _order$summary11 === void 0 ? void 0 : _order$summary11.total) || (order === null || order === void 0 ? void 0 : order.total))))))), (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && !order.review && !isReviewed && /*#__PURE__*/_react.default.createElement(_styles.ReviewsAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary11 = order.summary) === null || _order$summary11 === void 0 ? void 0 : _order$summary11.total) || (order === null || order === void 0 ? void 0 : order.total))))))), (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed) && /*#__PURE__*/_react.default.createElement(_styles.ReviewsAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    onClick: function onClick() {
-      return setOpenReview(true);
-    }
+    onClick: handleOpenReview
   }, t('REVIEW_ORDER', 'Review your Order'))), !userCustomerId && /*#__PURE__*/_react.default.createElement(_styles.FootActions, null, /*#__PURE__*/_react.default.createElement("a", {
     onClick: function onClick() {
       return handleGoToPage({
@@ -470,18 +544,22 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     messages: messages,
     setMessages: setMessages,
     readMessages: readMessages
-  })), openReview && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openReview,
-    onClose: function onClose() {
-      return setOpenReview(false);
-    },
-    title: order ? "".concat(t('WRITE_A_REVIEW', 'Write a Review'), " #").concat(order === null || order === void 0 ? void 0 : order.id) : t('LOADING', 'Loading...')
-  }, /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
+  })), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: isReviewOpen,
+    onClose: handleCloseReivew,
+    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.LOADING) || 'Loading...')
+  }, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
-    closeReviewOrder: function closeReviewOrder() {
-      return setOpenReview(false);
-    },
-    setIsReviewed: setIsReviewed
+    closeReviewOrder: closeReviewOrder,
+    setIsReviewed: setIsOrderReviewed
+  }) : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? /*#__PURE__*/_react.default.createElement(_ReviewProduct.ReviewProduct, {
+    order: order,
+    closeReviewProduct: closeReviewProduct,
+    setIsProductReviewed: setIsProductReviewed
+  }) : /*#__PURE__*/_react.default.createElement(_ReviewDriver.ReviewDriver, {
+    order: order,
+    closeReviewDriver: handleCloseReivew,
+    setIsDriverReviewed: setIsDriverReviewed
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

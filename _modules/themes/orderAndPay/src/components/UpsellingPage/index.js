@@ -168,9 +168,9 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       name: product.name
     }, /*#__PURE__*/_react.default.createElement(_styles.HorizontalDetails, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
       title: product.name
-    }, product.name)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.price)), /*#__PURE__*/_react.default.createElement("span", {
+    }, product.name)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.price)), product.offer_price && /*#__PURE__*/_react.default.createElement("span", {
       className: "discount"
-    }, parsePrice(product.price))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, parsePrice(product.offer_price))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return handleFormProduct(product);

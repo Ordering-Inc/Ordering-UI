@@ -34,7 +34,7 @@ var Side = _styledComponents.default.div(_templateObject2 || (_templateObject2 =
 
 var FormSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin: auto;\n\n  @media (min-width: 769px) {\n    ", "\n  }\n\n  @media (min-width: 992px) {\n    width: ", ";\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px){\n    font-size: ", ";\n  }\n"])), function (_ref4) {
   var isPopup = _ref4.isPopup;
-  return isPopup && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin: 20px 0px;\n    "])));
+  return isPopup && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin: 0px;\n    "])));
 }, function (_ref5) {
   var isPopup = _ref5.isPopup;
   return isPopup ? '100%' : '45%';
@@ -89,7 +89,7 @@ var FormTitle = _styledComponents.default.div(_templateObject13 || (_templateObj
 
 exports.FormTitle = FormTitle;
 
-var FormInline = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  position: relative;\n  width: 100%;\n  margin-bottom: 15px;\n\n  button {\n    width: 100%;\n    padding: 5px;\n  }\n\n  .forgot {\n    span {\n      color: ", ";\n      width: 100%;\n    }\n\n    a {\n      position: absolute;\n      z-index: 10;\n      opacity: 0;\n      text-decoration: none;\n      width: 100%;\n    }\n  }\n\n  .phone_number {\n    width: 100%;\n  }\n\n  @media (min-width: 768px) {\n    width: 48.6795%;\n  }\n"])), function (props) {
+var FormInline = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  position: relative;\n  width: 100%;\n  margin-bottom: 15px;\n\n  button {\n    width: 100%;\n    padding: 5px;\n  }\n\n  .forgot {\n    span {\n      color: ", ";\n      width: 100%;\n    }\n\n    a {\n      position: absolute;\n      z-index: 10;\n      opacity: 0;\n      text-decoration: none;\n      width: 100%;\n    }\n  }\n\n  .phone_number {\n    width: 100%;\n    .PhoneInputInput {\n      font-size: 14px;\n      padding: 10px 11px;\n    }\n  }\n\n\n\n\n\n  @media (min-width: 768px) {\n    width: 48.6795%;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
@@ -105,11 +105,11 @@ var AccountLogin = _styledComponents.default.div(_templateObject17 || (_template
 
 exports.AccountLogin = AccountLogin;
 
-var WrapperBirthday = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
+var WrapperBirthday = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: block;\n  .react-datepicker-popper {\n    display: block;\n  }\n"])));
 
 exports.WrapperBirthday = WrapperBirthday;
 
-var ConditionCheck = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  margin-bottom: 10px;\n  cursor: pointer;\n  span {\n    display: flex;\n  }\n  .condition-checkbox {\n    color: ", ";\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 20px;\n  }\n  .condition-link-text {\n    margin: 0 6px;\n  }\n  .condition-link {\n    color: ", ";\n  }\n"])), function (props) {
+var ConditionCheck = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  margin-bottom: 10px;\n  cursor: pointer;\n  span {\n    display: flex;\n    font-size: 14px;\n  }\n  .condition-checkbox {\n    color: ", ";\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 20px;\n  }\n  .condition-link-text {\n    margin: 0 6px;\n  }\n  .condition-link {\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primary;
@@ -117,6 +117,6 @@ var ConditionCheck = _styledComponents.default.div(_templateObject19 || (_templa
 
 exports.ConditionCheck = ConditionCheck;
 
-var Terms = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-bottom: 15px;\n"])));
+var Terms = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-bottom: 15px;\n  height: 150px;\n  overflow-y: scroll;\n"])));
 
 exports.Terms = Terms;

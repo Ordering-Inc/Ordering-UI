@@ -99,7 +99,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
-  var isQuickAddProduct = (configs === null || configs === void 0 ? void 0 : (_configs$add_product_ = configs.add_product_with_one_click) === null || _configs$add_product_ === void 0 ? void 0 : _configs$add_product_.value) === '1';
+  var addProductWithOneClick = configs === null || configs === void 0 ? void 0 : (_configs$add_product_ = configs.add_product_with_one_click) === null || _configs$add_product_ === void 0 ? void 0 : _configs$add_product_.value;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -160,7 +160,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   var onProductClick = function onProductClick(product) {
-    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && isQuickAddProduct) {
+    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
       addProduct(product, currentCart);
     } else {
       onProductRedirect({
