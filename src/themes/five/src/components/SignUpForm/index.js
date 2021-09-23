@@ -213,23 +213,11 @@ const SignUpFormUI = (props) => {
             }
           })
         ) : (
-          field.code.includes('name') ? (
-            formMethods.register(field.code, {
-              required: isRequiredField(field.code)
-                ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code))
-                : null,
-              pattern: {
-                value: /^[a-zA-Z\s]*$/,
-                message: t(`INVALID_${field.code.toUpperCase()}`, `Invalid ${field.name}`).replace('_attribute_', t(field.name, field.code))
-              }
-            })
-          ) : (
-            formMethods.register(field.code, {
-              required: isRequiredField(field.code)
-                ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code))
-                : null
-            })
-          )
+          formMethods.register(field.code, {
+            required: isRequiredField(field.code)
+              ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code))
+              : null
+          })
         )
       ))
     }

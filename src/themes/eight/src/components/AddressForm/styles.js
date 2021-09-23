@@ -113,6 +113,7 @@ export const AddressTagSection = styled.div`
     align-items: center;
     width: 46px;
     height: 46px;
+    -webkit-tap-highlight-color: transparent;
 
     img {
       width: 22px;

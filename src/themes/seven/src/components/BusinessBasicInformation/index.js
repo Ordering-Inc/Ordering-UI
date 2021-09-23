@@ -65,17 +65,20 @@ export const BusinessBasicInformation = (props) => {
                   ) : (
                     <Skeleton width={70} />
                   )}
-                  {business?.distance >= 0 ? (
+                  {business?.distance && (
                     <>
-                      <MetaItem>
-                        <span>{t('DISTANCE', 'Distance')}{' : '}</span>
-                        {business?.distance.toFixed(2)}
-                      </MetaItem>
+                      {business?.distance || business?.distance > 0 ? (
+                        <>
+                          <MetaItem>
+                            <span>{t('DISTANCE', 'Distance')}{' : '}</span>
+                            {business?.distance.toFixed(2)}
+                          </MetaItem>
+                        </>
+                      ) : (
+                        <Skeleton width={70} />
+                      )}
                     </>
-                  ) : (
-                    <Skeleton width={70} />
                   )}
-
                 </BuinessMeta>
               )}
             </>

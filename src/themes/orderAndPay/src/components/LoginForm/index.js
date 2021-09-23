@@ -426,15 +426,16 @@ const LoginFormUI = (props) => {
               {elementLinkToSignup}
             </RedirectLink>
           )}
-          <LoginDivider isPopup={isPopup}>
-            <DividerLine />
-            <p>{t('OR', 'or')}</p>
-            <DividerLine />
-          </LoginDivider>
           {(!props.isDisableButtons && !loginWithOtpState) && (
             Object.keys(configs).length > 0 ? (
-              <SocialButtons isPopup={isPopup}>
-                {(configs?.facebook_login?.value === 'true' ||
+              <>
+                <LoginDivider isPopup={isPopup}>
+                  <DividerLine />
+                  <p>{t('OR', 'or')}</p>
+                  <DividerLine />
+                </LoginDivider>
+                <SocialButtons isPopup={isPopup}>
+                  {(configs?.facebook_login?.value === 'true' ||
                 configs?.facebook_login?.value === '1') &&
                 configs?.facebook_id?.value &&
               (
@@ -443,24 +444,25 @@ const LoginFormUI = (props) => {
                   handleSuccessFacebookLogin={handleSuccessFacebook}
                 />
               )}
-                {configs?.google_login_client_id?.value && (
-                  <GoogleLoginButton
-                    initParams={initParams}
-                    handleSuccessGoogleLogin={handleSuccessGoogle}
-                    onFailure={(data) => console.log('onFailure', data)}
-                  />
-                )}
-                {configs?.apple_login_client_id?.value &&
+                  {configs?.google_login_client_id?.value && (
+                    <GoogleLoginButton
+                      initParams={initParams}
+                      handleSuccessGoogleLogin={handleSuccessGoogle}
+                      onFailure={(data) => console.log('onFailure', data)}
+                    />
+                  )}
+                  {configs?.apple_login_client_id?.value &&
               (
                 <AppleLogin
                   onSuccess={handleSuccessApple}
                   onFailure={(data) => console.log('onFailure', data)}
                 />
               )}
-                {useLoginByCellphone && loginTab === 'cellphone' &&
+                  {useLoginByCellphone && loginTab === 'cellphone' &&
                 configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
                   configs?.twilio_service_enabled?.value === '1') && (<SmsLoginButton handleSmsLogin={() => { setLoginWithOtpState(true) }} />)}
-              </SocialButtons>
+                </SocialButtons>
+              </>
             ) : (
               <SkeletonSocialWrapper>
                 <Skeleton height={43} />

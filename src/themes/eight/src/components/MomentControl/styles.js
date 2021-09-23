@@ -101,6 +101,13 @@ export const DatePickerWrapper = styled.div`
     border-radius: 50%;
     color: ${props => props.theme.colors.grayDark};
   }
+
+  @media (max-width: 576px) {
+    .react-datepicker {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `
 
 export const CheckBoxWrapper = styled.div`

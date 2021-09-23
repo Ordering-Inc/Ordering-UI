@@ -201,6 +201,7 @@ export const CenterHeader = styled.div`
   }
   @media (min-width: 1200px) {
     justify-content: space-between;
+    max-width: 50%;
     #select-input {
       height: 48px;
       width: auto;

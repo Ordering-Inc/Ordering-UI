@@ -8,6 +8,7 @@ export const Header = styled.div`
   background-color: ${props => props.theme.colors.backgroudPage};
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid #E9ECEF;
+  box-sizing: border-box;
 
   & ${Select} {
     background-color: transparent;
