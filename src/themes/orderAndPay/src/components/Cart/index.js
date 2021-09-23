@@ -122,6 +122,8 @@ const CartUI = (props) => {
     else setOpenUpselling(true)
   }
 
+  console.log(curProduct)
+
   useEffect(() => {
     if (isCustomMode) setIsUpselling(true)
   }, [isCustomMode])
@@ -239,6 +241,39 @@ const CartUI = (props) => {
               </table>
             </OrderBill>
           )}
+
+          <Divider />
+
+          <Confirm
+            title={t('PRODUCT', 'Product')}
+            content={confirm.content}
+            acceptText={t('ACCEPT', 'Accept')}
+            open={confirm.open}
+            onClose={() => setConfirm({ ...confirm, open: false })}
+            onCancel={() => setConfirm({ ...confirm, open: false })}
+            onAccept={confirm.handleOnAccept}
+            closeOnBackdrop={false}
+          />
+
+          {(openUpselling || isUpselling) && (
+            <>
+              <UpsellingPageTitleWrapper>
+                <p>{t('DO_YOU_WANT_SOMETHING_ELSE', 'Do you want something else?')}</p>
+                <MdClose size={26} onClick={() => setIsUpselling(false)} />
+              </UpsellingPageTitleWrapper>
+              <UpsellingPage
+                setIsUpselling={setIsUpselling}
+                businessId={cart.business_id}
+                isCustomMode={isCustomMode}
+                cartProducts={cart.products}
+                business={cart.business}
+                handleUpsellingPage={handleUpsellingPage}
+                openUpselling={openUpselling}
+                canOpenUpselling={canOpenUpselling}
+                setCanOpenUpselling={setCanOpenUpselling}
+              />
+            </>
+          )}
           {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
             <CheckoutAction>
               <Button
@@ -256,56 +291,39 @@ const CartUI = (props) => {
               </Button>
             </CheckoutAction>
           )}
-          <Divider />
-          <Confirm
-            title={t('PRODUCT', 'Product')}
-            content={confirm.content}
-            acceptText={t('ACCEPT', 'Accept')}
-            open={confirm.open}
-            onClose={() => setConfirm({ ...confirm, open: false })}
-            onCancel={() => setConfirm({ ...confirm, open: false })}
-            onAccept={confirm.handleOnAccept}
-            closeOnBackdrop={false}
-          />
-          <Modal
-            width='60%'
-            open={openProduct}
-            padding='0'
-            closeOnBackdrop
-            onClose={() => setModalIsOpen(false)}
-            hideCloseDefault
-          >
-            <ProductForm
-              isCartProduct
-              productCart={curProduct}
-              businessSlug={cart?.business?.slug}
-              businessId={cart?.business_id}
-              categoryId={curProduct?.category_id}
-              productId={curProduct?.id}
-              onSave={handlerProductAction}
-              onClose={() => setModalIsOpen(false)}
-            />
-          </Modal>
-          {(openUpselling || isUpselling) && (
-            <>
-              <UpsellingPageTitleWrapper>
-                <p>{t('DO_YOU_WANT_SOMETHING_ELSE', 'Do you want something else?')}</p>
-                <MdClose onClick={() => setIsUpselling(false)} />
-              </UpsellingPageTitleWrapper>
-              <UpsellingPage
-                setIsUpselling={setIsUpselling}
-                businessId={cart.business_id}
-                isCustomMode={isCustomMode}
-                cartProducts={cart.products}
-                business={cart.business}
-                handleUpsellingPage={handleUpsellingPage}
-                openUpselling={openUpselling}
-                canOpenUpselling={canOpenUpselling}
-                setCanOpenUpselling={setCanOpenUpselling}
-              />
-            </>
-          )}
         </CartSticky>
+        <Modal
+          width='60%'
+          open={openProduct}
+          closeOnBackdrop
+          onClose={() => setModalIsOpen(false)}
+          hideCloseDefault
+          padding='20px 0 0 0'
+          customModal
+          isProductForm
+        >
+          <ProductForm
+            isCartProduct
+            productCart={curProduct}
+            businessSlug={cart?.business?.slug}
+            businessId={cart?.business_id}
+            categoryId={curProduct?.category_id}
+            productId={curProduct?.id}
+            onSave={handlerProductAction}
+            onClose={() => setModalIsOpen(false)}
+            productName={curProduct.name}
+          />
+        </Modal>
+        <Confirm
+          title={t('PRODUCT', 'Product')}
+          content={confirm.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={confirm.open}
+          onClose={() => setConfirm({ ...confirm, open: false })}
+          onCancel={() => setConfirm({ ...confirm, open: false })}
+          onAccept={confirm.handleOnAccept}
+          closeOnBackdrop={false}
+        />
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
