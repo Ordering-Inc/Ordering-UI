@@ -69,7 +69,7 @@ var OrderTypeListTitle = _styledComponents.default.h1(_templateObject10 || (_tem
 
 exports.OrderTypeListTitle = OrderTypeListTitle;
 
-var Logo = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 65px;\n  height: 65px;\n  img {\n    width: 100%;\n  }\n"])));
+var Logo = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 65px;\n  height: 65px;\n  img {\n    width: 100%;\n    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);\n  }\n"])));
 
 exports.Logo = Logo;
 

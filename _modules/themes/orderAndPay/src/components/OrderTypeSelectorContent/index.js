@@ -269,7 +269,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
     src: logo
-  })), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), orderTypes && orderTypes.map(function (item, i) {
+  })), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('SELECT_YOUR_ORDER_TYPE', 'Select your order type')), orderTypes && orderTypes.map(function (item, i) {
     var _orderStatus$options;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListItemContainer, {
@@ -343,7 +343,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
 exports.OrderTypeSelectorContentUI = OrderTypeSelectorContentUI;
 
 var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
-  var _theme$images, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$delive, _theme$images4, _theme$images4$delive, _theme$images5, _theme$images5$delive, _theme$images6, _theme$images6$delive;
+  var _theme$images, _theme$images2, _theme$images2$dummie, _theme$defaultLanguag, _theme$images3, _theme$images3$delive, _theme$defaultLanguag2, _theme$images4, _theme$images4$delive, _theme$defaultLanguag3, _theme$images5, _theme$images5$delive, _theme$defaultLanguag4, _theme$images6, _theme$images6$delive;
 
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
@@ -357,24 +357,24 @@ var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
     orderTypes: props.orderTypes || [{
       value: 2,
       text: t('PICKUP', 'Pickup'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
+      description: t('ORDERTYPE_DESCRIPTION_PICKUP', theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ORDERTYPE_DESCRIPTION_PICKUP),
       image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$delive = _theme$images3.deliveryTypes) === null || _theme$images3$delive === void 0 ? void 0 : _theme$images3$delive.pickUp
     }, {
       value: 3,
       text: t('EAT_IN', 'Eat in'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
+      description: t('ORDERTYPE_DESCRIPTION_EATIN', theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.ORDERTYPE_DESCRIPTION_EATIN),
       image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$delive = _theme$images4.deliveryTypes) === null || _theme$images4$delive === void 0 ? void 0 : _theme$images4$delive.eatIn,
       label: t('TABLE_NUMBER', 'Table number')
     }, {
       value: 4,
       text: t('CURBSIDE', 'Curbside'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
+      description: t('ORDERTYPE_DESCRIPTION_CURBSIDE', theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.ORDERTYPE_DESCRIPTION_CURBSIDE),
       image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$delive = _theme$images5.deliveryTypes) === null || _theme$images5$delive === void 0 ? void 0 : _theme$images5$delive.curbside,
       label: t('Spot', 'Spot')
     }, {
       value: 5,
       text: t('DRIVE_THRU', 'Drive thru'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
+      description: t('ORDERTYPE_DESCRIPTION_DRIVETHRU', theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.ORDERTYPE_DESCRIPTION_DRIVETHRU),
       image: (_theme$images6 = theme.images) === null || _theme$images6 === void 0 ? void 0 : (_theme$images6$delive = _theme$images6.deliveryTypes) === null || _theme$images6$delive === void 0 ? void 0 : _theme$images6$delive.driveThru
     }]
   });

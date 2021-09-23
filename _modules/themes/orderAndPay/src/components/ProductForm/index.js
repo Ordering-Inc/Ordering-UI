@@ -93,7 +93,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       handleChangeIngredientState = props.handleChangeIngredientState,
       handleChangeSuboptionState = props.handleChangeSuboptionState,
       handleChangeCommentState = props.handleChangeCommentState,
-      onClose = props.onClose;
+      onClose = props.onClose,
+      productName = props.productName;
   var product = productObject.product,
       loading = productObject.loading,
       error = productObject.error;
@@ -221,7 +222,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClick: function onClick() {
       return onClose();
     }
-  })), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  }), /*#__PURE__*/_react.default.createElement("h1", null, productName || (product === null || product === void 0 ? void 0 : product.name))), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
@@ -254,7 +255,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       e.target.onerror = null;
       e.target.src = (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.product;
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.price) && /*#__PURE__*/_react.default.createElement("div", {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, (product === null || product === void 0 ? void 0 : product.price) && /*#__PURE__*/_react.default.createElement("div", {
     className: "price-wrapper"
   }, /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total)), (product === null || product === void 0 ? void 0 : product.offer_price) && /*#__PURE__*/_react.default.createElement("span", {
     className: "price-discount"

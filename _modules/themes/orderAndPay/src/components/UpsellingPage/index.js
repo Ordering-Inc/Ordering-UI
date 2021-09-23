@@ -208,9 +208,11 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       return setModalIsOpen(false);
     },
     width: "70%",
-    padding: "0",
     closeOnBackdrop: true,
-    hideCloseDefault: true
+    hideCloseDefault: true,
+    padding: "20px 0 0 0",
+    customModal: true,
+    isProductForm: true
   }, actualProduct && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     product: actualProduct,
     businessId: actualProduct.api.businessId,
