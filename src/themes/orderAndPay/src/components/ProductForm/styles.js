@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 export const ProductContainer = styled.div`
   max-height: 100vh;
   position: relative;
-  padding: 50px 20px 20px;
+  padding: 30px 20px 20px;
 
   @media (min-width: 768px) {
     height: 100%;
@@ -87,6 +87,7 @@ export const ProductInfo = styled.div`
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
   margin-bottom: 20px;
+  display: flex;
   span{
     white-space: nowrap;
   }
@@ -183,15 +184,14 @@ export const ProductActions = styled.div`
     position: relative;
 
     &.soldout {
-      width: 100%;
+      width: 70%;
       pointer-events: none;
     }
   }
 
   @media (min-width: 577px) {
-    position: sticky;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 
     div.price {
       width: 20%;
@@ -205,6 +205,12 @@ export const ProductActions = styled.div`
     div.incdec-control {
       width: 20%;
     }
+  }
+  @media (min-width: 769px){
+    position: relative;
+  }
+  @media (min-width: 1200px){
+    bottom: -21px;
   }
 `
 export const SkeletonBlock = styled.div`
@@ -289,6 +295,9 @@ export const ModalIcon = styled.span`
   font-size: 30px;
   cursor: pointer;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  width: 95%;
   ${props => props.theme?.rtl && css`
     left: 5px;
     right: initial;
@@ -298,8 +307,20 @@ export const ModalIcon = styled.span`
     border-radius: 50%;
   }
 
+  h1{
+    font-size: 14px;
+    margin-left: 20px;
+    white-space: nowrap;
+  }
+
+  @media(min-width: 576px){
+    h1{
+      font-size: 16px;
+    }
+  }
+
   @media(min-width: 769px){
     position: absolute;
-    top: 5px;
+    top: -10px;
   }
 `
