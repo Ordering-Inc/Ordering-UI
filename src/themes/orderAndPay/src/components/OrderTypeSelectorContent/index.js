@@ -124,7 +124,7 @@ export const OrderTypeSelectorContentUI = (props) => {
             src={logo}
           />
         </Logo>
-        <OrderTypeListTitle>{t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')}</OrderTypeListTitle>
+        <OrderTypeListTitle>{t('SELECT_YOUR_ORDER_TYPE', 'Select your order type')}</OrderTypeListTitle>
         {
           orderTypes && orderTypes.map((item, i) => (
             <OrderTypeListItemContainer
@@ -208,27 +208,27 @@ export const OrderTypeSelectorContent = (props) => {
       {
         value: 2,
         text: t('PICKUP', 'Pickup'),
-        description: 'Lorem ipsum dolor sit amet, consectetur.',
+        description: t('ORDERTYPE_DESCRIPTION_PICKUP', theme?.defaultLanguages?.ORDERTYPE_DESCRIPTION_PICKUP),
         image: theme.images?.deliveryTypes?.pickUp
       },
       {
         value: 3,
         text: t('EAT_IN', 'Eat in'),
-        description: 'Lorem ipsum dolor sit amet, consectetur.',
+        description: t('ORDERTYPE_DESCRIPTION_EATIN', theme?.defaultLanguages?.ORDERTYPE_DESCRIPTION_EATIN),
         image: theme.images?.deliveryTypes?.eatIn,
         label: t('TABLE_NUMBER', 'Table number')
       },
       {
         value: 4,
         text: t('CURBSIDE', 'Curbside'),
-        description: 'Lorem ipsum dolor sit amet, consectetur.',
+        description: t('ORDERTYPE_DESCRIPTION_CURBSIDE', theme?.defaultLanguages?.ORDERTYPE_DESCRIPTION_CURBSIDE),
         image: theme.images?.deliveryTypes?.curbside,
         label: t('Spot', 'Spot')
       },
       {
         value: 5,
         text: t('DRIVE_THRU', 'Drive thru'),
-        description: 'Lorem ipsum dolor sit amet, consectetur.',
+        description: t('ORDERTYPE_DESCRIPTION_DRIVETHRU', theme?.defaultLanguages?.ORDERTYPE_DESCRIPTION_DRIVETHRU),
         image: theme.images?.deliveryTypes?.driveThru
       }
     ]
