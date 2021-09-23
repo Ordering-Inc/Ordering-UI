@@ -93,6 +93,7 @@ export const Logo = styled.div`
   height: 65px;
   img {
     width: 100%;
+    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
   }
 `
 
