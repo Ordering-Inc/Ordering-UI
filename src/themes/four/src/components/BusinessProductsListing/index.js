@@ -17,8 +17,7 @@ import {
   ProductLoading,
   SkeletonItem,
   WrappLayout,
-  WrapProductsCategroy,
-  WrappButton
+  WrapProductsCategroy
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -33,7 +32,8 @@ import { Modal } from '../../../../../components/Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { Cart } from '../Cart'
 import { useTheme } from 'styled-components'
-import { Button } from '../../styles/Buttons'
+
+const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
   const {
@@ -113,11 +113,13 @@ const BusinessProductsListingUI = (props) => {
     })
   }
 
-  const handleLoadMoreProducts = () => {
+  const handleScroll = useCallback(() => {
+    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
+    const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
-    if (!hasMore) return
+    if (badScrollPosition || categoryState.loading || !hasMore) return
     getNextProducts()
-  }
+  }, [categoryState])
 
   const handleChangePage = (data) => {
     if (Object.entries(data.query).length === 0 && openProduct) {
@@ -154,6 +156,11 @@ const BusinessProductsListingUI = (props) => {
       events.off('change_view', handleChangePage)
     }
   }, [openProduct])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <>
@@ -212,17 +219,6 @@ const BusinessProductsListingUI = (props) => {
                       handleClearSearch={handleChangeSearch}
                       errorQuantityProducts={errorQuantityProducts}
                     />
-                    {!(categoryState?.pagination?.totalPages === categoryState?.pagination?.currentPage) && (
-                      <WrappButton>
-                        <Button
-                          outline
-                          color='primary'
-                          onClick={() => handleLoadMoreProducts()}
-                        >
-                          {t('LOAD_MORE', 'Load more')}
-                        </Button>
-                      </WrappButton>
-                    )}
                   </WrapProducts>
                 </WrapContent>
               </div>
@@ -255,16 +251,13 @@ const BusinessProductsListingUI = (props) => {
                 openBusinessInformation={openBusinessInformation}
               />
               <WrapProducts>
-                {[...Array(3).keys()].map(i => (
-                  <BusinessProductsList
-                    key={i}
-                    categories={[]}
-                    category={categorySelected}
-                    categoryState={categoryState}
-                    isBusinessLoading={loading}
-                    errorQuantityProducts={errorQuantityProducts}
-                  />
-                ))}
+                <BusinessProductsList
+                  categories={[]}
+                  category={categorySelected}
+                  categoryState={categoryState}
+                  isBusinessLoading={loading}
+                  errorQuantityProducts={errorQuantityProducts}
+                />
               </WrapProducts>
             </WrapContent>
           </>
