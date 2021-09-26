@@ -43,7 +43,7 @@ export const SingleProductCard = (props) => {
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig
 
   const maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory)
-  console.log(productAddedToCart)
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
