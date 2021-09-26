@@ -106,6 +106,7 @@ export const Divider = styled.div`
 export const UpsellingPageTitleWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   p {
     font-weight: 500;

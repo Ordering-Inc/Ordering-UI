@@ -23,7 +23,8 @@ const ModalUI = (props) => {
     cancelText,
     isTransparent,
     hideCloseDefault,
-    isProductForm
+    isProductForm,
+    customModal
   } = props
   const [, t] = useLanguage()
 
@@ -55,7 +56,7 @@ const ModalUI = (props) => {
       isTransparent={isTransparent}
     >
       {isProductForm && (
-        <ModalBackHeader />
+        <ModalBackHeader customModal={customModal} />
       )}
       {!hideCloseDefault && (
         <ModalIcon>

@@ -9,6 +9,7 @@ export const DriverTipContainer = styled.div`
   margin-top: 20px;
   padding-bottom: 20px;
   width: 100%;
+  overflow: auto;
 `
 
 export const TipCard = styled.div`
@@ -79,11 +80,9 @@ export const DriverTipMessage = styled.p`
 
 export const WrapperTips = styled.div`
   display: flex;
-  width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-
+  overflow: auto;
   > div {
     margin: 5px;
   }

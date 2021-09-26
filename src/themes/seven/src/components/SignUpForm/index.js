@@ -6,6 +6,7 @@ import { InputPhoneNumber } from '../InputPhoneNumber'
 import parsePhoneNumber from 'libphonenumber-js'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
+import DatePicker from 'react-datepicker'
 import {
   SignupForm as SignUpController,
   useLanguage,
@@ -72,6 +73,7 @@ const SignUpFormUI = (props) => {
   const [passwordSee, setPasswordSee] = useState(false)
   const [conditionCheck, setConditionCheck] = useState(false)
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const [startDate, setStartDate] = useState(new Date())
 
   // const [isSignupBusiness, setIsSignupBusiness] = useState(false)
 
@@ -246,7 +248,7 @@ const SignUpFormUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <SignUpContainer isPopup={isPopup}>
-        <FormSide isPopup={isPopup} className='test-marker'>
+        <FormSide isPopup={isPopup}>
           <FormTitle>{t('SIGN_UP_FORM_TITLE', 'Register in archies and enjoy the benefits we have for you.')}</FormTitle>
           {
             !(useChekoutFileds && validationFields?.loading) ? (
@@ -340,8 +342,9 @@ const SignUpFormUI = (props) => {
                   <FormInline>
                     <WrapperBirthday>
                       <Input
-                        type='text'
-                        name='birthday'
+                        type='date'
+                        defaultValue={new Date()}
+                        name='birthdate'
                         className='form'
                         placeholder={t('BIRTHDAY', 'dd/mm/yyyy')}
                         onChange={handleChangeInput}

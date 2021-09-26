@@ -64,7 +64,8 @@ const ProductOptionsUI = (props) => {
     handleChangeIngredientState,
     handleChangeSuboptionState,
     handleChangeCommentState,
-    onClose
+    onClose,
+    productName
   } = props
 
   const { product, loading, error } = productObject
@@ -151,6 +152,7 @@ const ProductOptionsUI = (props) => {
       <ProductContainer className='product-container'>
         <ModalIcon>
           <MdClose onClick={() => onClose()} />
+          <h1>{productName || product?.name}</h1>
         </ModalIcon>
         {loading && !error && (
           <SkeletonBlock width={90}>
@@ -186,7 +188,6 @@ const ProductOptionsUI = (props) => {
             </WrapperImage>
             <ProductInfo>
               <ProductFormTitle>
-                <h1>{product?.name}</h1>
                 {product?.price && (
                   <div className='price-wrapper'>
                     <span>{productCart.total && parsePrice(productCart.total)}</span>

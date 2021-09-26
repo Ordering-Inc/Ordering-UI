@@ -25,6 +25,7 @@ export const ProductImage = styled.div`
   > div {
     position: absolute;
     margin: 10px;
+    z-index: 1;
   }
 
   img {
@@ -47,7 +48,7 @@ export const ProductInfo = styled.div`
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  padding: 0px;
+  padding: 0px 15px;
   position: relative;
   margin-top: 10px;
 
@@ -90,7 +91,7 @@ export const ProductInfo = styled.div`
     }
   }
 
-  @media (min-width: 411px) {
+  @media (min-width: 768px) {
     padding: 10px 0px;
   }
 
@@ -145,19 +146,10 @@ export const SectionTitle = styled.h3`
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 115px;
 
   p {
     font-weight: 300;
     margin-bottom: 5px;
-  }
-
-  @media (min-width: 577px) {
-    margin-bottom: 62px;
-  }
-
-  @media (min-width: 769px) {
-    margin-bottom: 0px;
   }
 `
 

@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { LogoutAction, useLanguage } from 'ordering-components'
+import React, { useEffect, useState } from 'react'
+import { LogoutAction, useLanguage, useToast, ToastType } from 'ordering-components'
 
 import BiLogOut from '@meronex/icons/bi/BiLogOut'
 import { Confirm } from '../Confirm'
 
 const LogoutButtonUI = (props) => {
-  const { onCustomClick } = props
+  const { onCustomClick, formState } = props
+  const [, { showToast }] = useToast()
   const [, t] = useLanguage()
   const [openConfirm, setOpenConfirm] = useState(false)
 
@@ -34,6 +35,12 @@ const LogoutButtonUI = (props) => {
     setOpenConfirm(true)
   }
 
+  useEffect(() => {
+    if (formState.result.error) {
+      showToast(ToastType.Error, t(formState.result?.result))
+    }
+  }, [formState.loading])
+
   return (
     <>
       <BiLogOut onClick={handleOpenConfirm} size={20} />
@@ -41,10 +48,12 @@ const LogoutButtonUI = (props) => {
         <Confirm
           open={openConfirm}
           title={t('LOGOUT', 'Logout')}
-          content={t('DO_YOU_WANT_LOGOUT', 'Do you want logout?')} 
+          content={t('DO_YOU_WANT_LOGOUT', 'Do you want logout?')}
           onAccept={handleLogOutClick}
           onClose={() => setOpenConfirm(false)}
           onCancel={() => setOpenConfirm(false)}
+          acceptText={formState.loading && t('LOADING', 'Loading...')}
+          isLoading={formState.loading}
         />
       )}
     </>

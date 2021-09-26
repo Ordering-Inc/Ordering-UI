@@ -339,8 +339,6 @@ const CheckoutUI = (props) => {
                 )}
                 <PaymentOptions
                   cart={cart}
-                  open={modalOpen?.payment}
-                  onClose={() => handleModal('payment')}
                   isDisabled={cart?.status === 2}
                   businessId={businessDetails?.business?.id}
                   isLoading={businessDetails.loading}
@@ -349,8 +347,8 @@ const CheckoutUI = (props) => {
                   errorCash={errorCash}
                   setErrorCash={setErrorCash}
                   handleOrderRedirect={handleOrderRedirect}
-                  isPaymethodNull={paymethodSelected}
                   isCustomerMode={isCustomerMode}
+                  paySelected={paymethodSelected}
                 />
               </PaymentMethodContainer>
             )}

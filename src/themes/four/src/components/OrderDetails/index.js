@@ -19,6 +19,8 @@ import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Modal } from '../../../../../components/Modal'
 import { Messages } from '../../../../../components/Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
+import { ReviewProduct } from '../../../../../components/ReviewProduct'
+import { ReviewDriver } from '../../../../../components/ReviewDriver'
 import { ProductShare } from '../../../../../components/ProductShare'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 
@@ -60,7 +62,8 @@ import {
   OrderBillDivider,
   OrderPayMethodIcon,
   SectionContainer,
-  OrderBusinessHeaderImage
+  OrderBusinessHeaderImage,
+  ReviewWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -86,8 +89,11 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseNumber }] = useUtils()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
-  const [openReview, setOpenReview] = useState(false)
-  const [isReviewed, setIsReviewed] = useState(false)
+  const [isReviewOpen, setIsReviewOpen] = useState(false)
+  const [isOrderReviewed, setIsOrderReviewed] = useState(false)
+  const [isProductReviewed, setIsProductReviewed] = useState(false)
+  const [isDriverReviewed, setIsDriverReviewed] = useState(false)
+  const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
 
   const { order, loading, businessData, error } = props.order
@@ -171,6 +177,36 @@ const OrderDetailsUI = (props) => {
     { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
+
+  const handleOpenReview = () => {
+    if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
+    else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else {
+      setIsReviewOpen(false)
+      return
+    }
+    setIsReviewOpen(true)
+  }
+
+  const handleCloseReivew = () => {
+    setReviewStatus({ order: false, product: false, driver: false })
+    setIsReviewOpen(false)
+  }
+
+  const closeReviewOrder = () => {
+    if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else handleCloseReivew()
+  }
+
+  const closeReviewProduct = () => {
+    if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else {
+      setIsDriverReviewed(true)
+      handleCloseReivew()
+    }
+  }
 
   useEffect(() => {
     if (driverLocation) {
@@ -392,18 +428,17 @@ const OrderDetailsUI = (props) => {
                 <img src={order?.business?.header} alt='business header image' />
               </OrderBusinessHeaderImage>
 
-              {(
-                parseInt(order?.status) === 1 ||
+              {(parseInt(order?.status) === 1 ||
                 parseInt(order?.status) === 2 ||
                 parseInt(order?.status) === 5 ||
                 parseInt(order?.status) === 6 ||
                 parseInt(order?.status) === 10 ||
                 parseInt(order?.status) === 11 ||
                 parseInt(order?.status) === 12
-              ) && !order.review && !isReviewed && (
+              ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed) && (
                 <SectionContainer>
                   <ReviewsAction>
-                    <Button color='primary' onClick={() => setOpenReview(true)}>
+                    <Button color='primary' onClick={handleOpenReview}>
                       {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
                     </Button>
                   </ReviewsAction>
@@ -483,15 +518,32 @@ const OrderDetailsUI = (props) => {
             />
           </Modal>
         )}
-        {openReview && (
-          <Modal
-            open={openReview}
-            onClose={() => setOpenReview(false)}
-            title={order ? `${t('WRITE_A_REVIEW', theme?.defaultLanguages?.WRITE_A_REVIEW || 'Write a Review')} #${order?.id}` : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
-          >
-            <ReviewOrder order={order} closeReviewOrder={() => setOpenReview(false)} setIsReviewed={setIsReviewed} />
-          </Modal>
-        )}
+        {
+          isReviewOpen && (
+            <Modal
+              open={isReviewOpen}
+              onClose={handleCloseReivew}
+              title={order
+                ? (reviewStatus?.order
+                  ? t('REVIEW_ORDER', 'Review order')
+                  : (reviewStatus?.product
+                    ? t('REVIEW_PRODUCT', 'Review Product')
+                    : t('REVIEW_DRIVER', 'Review Driver')))
+                : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
+            >
+              <ReviewWrapper>
+                {
+                  reviewStatus?.order
+                    ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+                    : (reviewStatus?.product
+                      ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
+                      : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
+                }
+              </ReviewWrapper>
+
+            </Modal>
+          )
+        }
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

@@ -129,7 +129,9 @@ const UpsellingPageUI = (props) => {
                           </div>
                           <div>
                             <span>{parsePrice(product.price)}</span>
-                            <span className='discount'>{parsePrice(product.price)}</span>
+                            {product.offer_price && (
+                              <span className='discount'>{parsePrice(product.offer_price)}</span>
+                            )}
                           </div>
                           <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
                         </HorizontalDetails>
@@ -179,9 +181,11 @@ const UpsellingPageUI = (props) => {
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
         width='70%'
-        padding='0'
         closeOnBackdrop
         hideCloseDefault
+        padding='20px 0 0 0'
+        customModal
+        isProductForm
       >
         {actualProduct && (
           <ProductForm
