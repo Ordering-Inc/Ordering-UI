@@ -5,6 +5,8 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
 `
 
 export const WrapperContainer = styled.div`
@@ -73,7 +75,6 @@ export const BusinessInfo = styled.div`
 `
 
 export const ActionsBlock = styled.div`
-  width: 10%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -439,7 +440,7 @@ export const MessagesIcon = styled.span`
 
 export const ExclamationWrapper = styled.div`
   position: absolute;
-  transform: translate(75%, -25%);
+  transform: translate(350%, -25%);
   svg{
     font-size: 16px;
     color: ${props => props.theme?.colors?.primary}
@@ -480,5 +481,14 @@ export const MyOrderActions = styled.div`
 export const ModalIcon = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+`
+
+export const IconsContainer = styled.div`
+  display: flex;
+  svg{
+    margin-left: 10px;
+  }
 `
