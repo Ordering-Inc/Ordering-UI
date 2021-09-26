@@ -144,3 +144,16 @@ export const CardLogo = (props) => {
     </CardLogoStyled>
   )
 }
+
+export const QuantityContainer = styled.div`
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primaryContrast};
+  position: absolute;
+  left: 100%;
+  bottom: 100%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  transform: translate(-50%, 50%);
+`

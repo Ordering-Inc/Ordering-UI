@@ -68,7 +68,7 @@ const BusinessProductsListingUI = (props) => {
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }, { addProduct }] = useOrder()
+  const [{ carts }, { addProduct, updateProduct }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const [{ auth }] = useSession()
@@ -94,13 +94,24 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const onProductClick = (product) => {
-    const isProductAddedToCart = currentCart.products.some(Cproduct => Cproduct.id === product.id)
-    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && !isProductAddedToCart && isQuickAddProduct) {
-      const currentProduct = {
+    const isProductAddedToCart = currentCart.products.find(Cproduct => Cproduct.id === product.id)
+    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) /* && isQuickAddProduct */) {
+      const productQuantity = isProductAddedToCart?.quantity
+      const addCurrentProduct = {
         ...product,
-        quantity: product.quantity + 1
+        quantity: 1
       }
-      addProduct(currentProduct, currentCart, isQuickAddProduct)
+      const updateCurrentProduct = {
+        businessid: business.id,
+        id: product.id,
+        code: isProductAddedToCart?.code,
+        quantity: productQuantity + 1
+      }
+      if (isProductAddedToCart) {
+        updateProduct(updateCurrentProduct, currentCart)
+      } else {
+        addProduct(addCurrentProduct, currentCart, isQuickAddProduct)
+      }
     } else {
       onProductRedirect({
         slug: business?.slug,

@@ -52,7 +52,7 @@ const BusinessProductsListUI = (props) => {
                   businessId={businessId}
                   onProductClick={onProductClick}
                   isCartOnProductsList={isCartOnProductsList}
-                  isProductAddedToCart={currentCart.products.some(Cproduct => Cproduct.id === product.id)}
+                  productAddedToCart={currentCart.products.find(Cproduct => Cproduct.id === product.id)}
                 />
               ))
             }
@@ -75,7 +75,7 @@ const BusinessProductsListUI = (props) => {
                           businessId={businessId}
                           onProductClick={onProductClick}
                           isCartOnProductsList={isCartOnProductsList}
-                          isProductAddedToCart={currentCart.products.some(Cproduct => Cproduct.id === product.id)}
+                          productAddedToCart={currentCart.products.find(Cproduct => Cproduct.id === product.id)}
                         />
                       ))}
                     </ProductsListing>
@@ -105,7 +105,7 @@ const BusinessProductsListUI = (props) => {
                               product={product}
                               onProductClick={onProductClick}
                               isCartOnProductsList={isCartOnProductsList}
-                              isProductAddedToCart={currentCart.products.some(Cproduct => Cproduct.id === product.id)}
+                              productAddedToCart={currentCart.products.find(Cproduct => Cproduct.id === product.id)}
                             />
                           ))
                         }
