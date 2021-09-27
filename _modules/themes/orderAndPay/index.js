@@ -117,10 +117,22 @@ Object.defineProperty(exports, "Modal", {
     return _Modal.Modal;
   }
 });
+Object.defineProperty(exports, "MyOrders", {
+  enumerable: true,
+  get: function get() {
+    return _MyOrders.MyOrders;
+  }
+});
 Object.defineProperty(exports, "OrderDetails", {
   enumerable: true,
   get: function get() {
     return _OrderDetails.OrderDetails;
+  }
+});
+Object.defineProperty(exports, "OrdersOption", {
+  enumerable: true,
+  get: function get() {
+    return _OrdersOption.OrdersOption;
   }
 });
 Object.defineProperty(exports, "OrderTypeSelectorContent", {
@@ -195,6 +207,12 @@ Object.defineProperty(exports, "UserPopover", {
     return _UserPopover.UserPopover;
   }
 });
+Object.defineProperty(exports, "VerticalOrdersLayout", {
+  enumerable: true,
+  get: function get() {
+    return _VerticalOrdersLayout.VerticalOrdersLayout;
+  }
+});
 Object.defineProperty(exports, "Button", {
   enumerable: true,
   get: function get() {
@@ -258,7 +276,11 @@ var _LoginForm = require("./src/components/LoginForm");
 
 var _Modal = require("./src/components/Modal");
 
+var _MyOrders = require("./src/components/MyOrders");
+
 var _OrderDetails = require("./src/components/OrderDetails");
+
+var _OrdersOption = require("./src/components/OrdersOption");
 
 var _OrderTypeSelectorContent = require("./src/components/OrderTypeSelectorContent");
 
@@ -283,6 +305,8 @@ var _UpsellingPage = require("./src/components/UpsellingPage");
 var _UserDetails = require("./src/components/UserDetails");
 
 var _UserPopover = require("./src/components/UserPopover");
+
+var _VerticalOrdersLayout = require("./src/components/VerticalOrdersLayout");
 
 var _Buttons = require("./src/styles/Buttons");
 

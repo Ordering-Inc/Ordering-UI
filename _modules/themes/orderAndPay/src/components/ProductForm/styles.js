@@ -109,7 +109,7 @@ var ProductShareWrapper = _styledComponents.default.div(_templateObject18 || (_t
 
 exports.ProductShareWrapper = ProductShareWrapper;
 
-var ModalIcon = _styledComponents.default.span(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  position: fixed;\n  left: 25px;\n  top: 15px;\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 2;\n  display: flex;\n  align-items: center;\n  width: 95%;\n  ", "\n  svg{\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n\n  h1{\n    font-size: 14px;\n    margin-left: 20px;\n    white-space: nowrap;\n  }\n\n  @media(min-width: 576px){\n    h1{\n      font-size: 16px;\n    }\n  }\n\n  @media(min-width: 769px){\n    position: absolute;\n    top: -10px;\n  }\n"])), function (props) {
+var ModalIcon = _styledComponents.default.span(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  position: fixed;\n  left: 25px;\n  top: 15px;\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 2;\n  display: flex;\n  align-items: center;\n  width: 95%;\n  ", "\n  svg{\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n\n  h1{\n    font-size: 14px;\n    margin-left: 20px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  @media(min-width: 576px){\n    h1{\n      font-size: 16px;\n    }\n  }\n\n  @media(min-width: 769px){\n    position: absolute;\n    top: -10px;\n  }\n"])), function (props) {
   var _props$theme6;
 
   return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    left: 5px;\n    right: initial;\n  "])));
