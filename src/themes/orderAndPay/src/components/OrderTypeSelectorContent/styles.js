@@ -18,6 +18,8 @@ export const OrderTypeListItemContainerStyled = styled.div`
   background: #000000;
   cursor: pointer;
   width: 100%;
+  -webkit-tap-highlight-color: transparent;
+
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
     background-size: cover;

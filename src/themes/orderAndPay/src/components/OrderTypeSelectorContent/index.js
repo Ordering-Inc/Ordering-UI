@@ -162,6 +162,7 @@ export const OrderTypeSelectorContentUI = (props) => {
           open={orderTypeSelected?.open}
           onClose={() => setOrderTypeSelected({ ...orderTypeSelected, open: false })}
           hideCloseDefault
+          height='calc(100vh + 100px)'
         >
           <ModalIcon>
             <BsArrowLeft size={20} onClick={() => setOrderTypeSelected({ ...orderTypeSelected, open: false })} />
