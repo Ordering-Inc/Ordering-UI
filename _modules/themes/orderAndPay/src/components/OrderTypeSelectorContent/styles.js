@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PlaceNumber = exports.PlaceName = exports.Table = exports.InputWrapper = exports.ModalIcon = exports.TypeContainer = exports.Logo = exports.OrderTypeListTitle = exports.OrderStartWrapper = exports.OrderTypeDescription = exports.OrderTypeTitle = exports.OrderTypeListItemContainer = exports.OrderTypeListItemContainerStyled = exports.OrderTypeSelectorContainer = void 0;
+exports.TitleContainer = exports.PlaceNumber = exports.PlaceName = exports.Table = exports.InputWrapper = exports.ModalIcon = exports.TypeContainer = exports.Logo = exports.OrderTypeListTitle = exports.OrderStartWrapper = exports.OrderTypeDescription = exports.OrderTypeTitle = exports.OrderTypeListItemContainer = exports.OrderTypeListItemContainerStyled = exports.OrderTypeSelectorContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23,11 +23,11 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var OrderTypeSelectorContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  text-align: left;\n  padding-top: 10px\n"])));
+var OrderTypeSelectorContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  text-align: left;\n  padding-top: 10px;\n  padding: 10px;\n  box-sizing: border-box;\n"])));
 
 exports.OrderTypeSelectorContainer = OrderTypeSelectorContainer;
 
-var OrderTypeListItemContainerStyled = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-radius: 7.6px;\n  margin-bottom: 25px;\n  background: #000000;\n  cursor: pointer;\n  width: 95%;\n  ", "\n\n  ", "\n"])), function (_ref) {
+var OrderTypeListItemContainerStyled = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-radius: 7.6px;\n  margin-bottom: 25px;\n  background: #000000;\n  cursor: pointer;\n  width: 100%;\n  ", "\n\n  ", "\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 }, function (_ref2) {
@@ -63,13 +63,13 @@ var OrderStartWrapper = _styledComponents.default.div(_templateObject7 || (_temp
 
 exports.OrderStartWrapper = OrderStartWrapper;
 
-var OrderTypeListTitle = _styledComponents.default.h1(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  margin: 0 0 30px;\n"])), function (props) {
+var OrderTypeListTitle = _styledComponents.default.h1(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
 exports.OrderTypeListTitle = OrderTypeListTitle;
 
-var Logo = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 65px;\n  height: 65px;\n  img {\n    width: 100%;\n  }\n"])));
+var Logo = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 65px;\n  height: 65px;\n  margin-bottom: 20px;\n  img {\n    width: 100%;\n    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);\n  }\n"])));
 
 exports.Logo = Logo;
 
@@ -99,3 +99,7 @@ exports.PlaceName = PlaceName;
 var PlaceNumber = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n\n"])));
 
 exports.PlaceNumber = PlaceNumber;
+
+var TitleContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  align-items: center;\n"])));
+
+exports.TitleContainer = TitleContainer;

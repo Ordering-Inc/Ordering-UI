@@ -60,7 +60,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       searchValue = props.searchValue,
       isCartOnProductsList = props.isCartOnProductsList,
       handleClearSearch = props.handleClearSearch,
-      errorQuantityProducts = props.errorQuantityProducts;
+      errorQuantityProducts = props.errorQuantityProducts,
+      currentCart = props.currentCart;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -81,7 +82,10 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       product: product,
       businessId: businessId,
       onProductClick: onProductClick,
-      isCartOnProductsList: isCartOnProductsList
+      isCartOnProductsList: isCartOnProductsList,
+      productAddedToCart: currentCart.products.find(function (Cproduct) {
+        return Cproduct.id === product.id;
+      })
     });
   })), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
     return product.featured;
@@ -92,7 +96,10 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       product: product,
       businessId: businessId,
       onProductClick: onProductClick,
-      isCartOnProductsList: isCartOnProductsList
+      isCartOnProductsList: isCartOnProductsList,
+      productAddedToCart: currentCart.products.find(function (Cproduct) {
+        return Cproduct.id === product.id;
+      })
     });
   })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
@@ -113,7 +120,10 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         businessId: businessId,
         product: product,
         onProductClick: onProductClick,
-        isCartOnProductsList: isCartOnProductsList
+        isCartOnProductsList: isCartOnProductsList,
+        productAddedToCart: currentCart.products.find(function (Cproduct) {
+          return Cproduct.id === product.id;
+        })
       });
     }), categoryState.loading && i + 1 === _categories.length && _toConsumableArray(Array(categoryState.pagination.nextPageItems).keys()).map(function (i) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {

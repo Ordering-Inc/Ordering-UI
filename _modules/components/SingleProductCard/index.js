@@ -39,7 +39,8 @@ var SingleProductCard = function SingleProductCard(props) {
       isSoldOut = props.isSoldOut,
       isSkeleton = props.isSkeleton,
       onProductClick = props.onProductClick,
-      isCartOnProductsList = props.isCartOnProductsList;
+      isCartOnProductsList = props.isCartOnProductsList,
+      productAddedToCart = props.productAddedToCart;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -88,7 +89,7 @@ var SingleProductCard = function SingleProductCard(props) {
       return !isSkeleton && onProductClick(product);
     },
     isCartOnProductsList: isCartOnProductsList
-  }, /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
+  }, !isSkeleton && productAddedToCart && (productAddedToCart === null || productAddedToCart === void 0 ? void 0 : productAddedToCart.quantity) > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCart === null || productAddedToCart === void 0 ? void 0 : productAddedToCart.quantity)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
