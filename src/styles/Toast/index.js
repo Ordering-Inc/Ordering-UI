@@ -4,8 +4,6 @@ import { useToast, ToastType } from 'ordering-components'
 
 const ToastBar = styled.div`
   visibility: hidden;
-  min-width: 250px;
-  margin-left: -125px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   color: #fff;
   text-align: center;
@@ -13,8 +11,10 @@ const ToastBar = styled.div`
   padding: 16px;
   position: fixed;
   z-index: 9999;
-  left: 50%;
   bottom: 30px;
+  font-size: 14px;
+  min-width: 200px;
+  max-width: 200px;
 
   /* Animations to fade the snackbar in and out */
   @-webkit-keyframes fadein {
@@ -37,6 +37,17 @@ const ToastBar = styled.div`
     to {bottom: 0; opacity: 0;}
   }
 
+  @media(min-width: 380px){
+    font-size: 16px;
+    min-width: 250px;
+    max-width: initial;
+  }
+`
+
+const ToastContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `
 
 export const Toast = () => {
@@ -78,6 +89,8 @@ export const Toast = () => {
   }
 
   return (
-    <ToastBar backgroundColor={backgroundColor} id='toast-bar' ref={toastRef}>{message}</ToastBar>
+    <ToastContainer>
+      <ToastBar backgroundColor={backgroundColor} id='toast-bar' ref={toastRef}>{message}</ToastBar>
+    </ToastContainer>
   )
 }

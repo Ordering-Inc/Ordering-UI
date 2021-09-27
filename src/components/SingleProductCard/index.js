@@ -7,7 +7,8 @@ import {
   CardInfo,
   WrapLogo,
   CardLogo,
-  SoldOut
+  SoldOut,
+  QuantityContainer
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -18,7 +19,8 @@ export const SingleProductCard = (props) => {
     isSoldOut,
     isSkeleton,
     onProductClick,
-    isCartOnProductsList
+    isCartOnProductsList,
+    productAddedToCart
   } = props
 
   const [, t] = useLanguage()
@@ -55,6 +57,11 @@ export const SingleProductCard = (props) => {
         onClick={() => !isSkeleton && onProductClick(product)}
         isCartOnProductsList={isCartOnProductsList}
       >
+        {!isSkeleton && productAddedToCart && productAddedToCart?.quantity > 0 && (
+          <QuantityContainer>
+            <span>{productAddedToCart?.quantity}</span>
+          </QuantityContainer>
+        )}
         <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
           {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
           {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}

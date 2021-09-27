@@ -4,12 +4,6 @@ export const ProductsContainer = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
 `
 
-export const WrapAutoScroll = styled.div`
-  width: 100%;
-  overflow-x: auto;
-  display: flex;
-`
-
 export const ErrorMessage = styled.div`
   padding: 20px;
   width: 100%;
@@ -21,6 +15,7 @@ export const ErrorMessage = styled.div`
 
 export const ProductsListing = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `
 
 export const WrapAllCategories = styled.div`

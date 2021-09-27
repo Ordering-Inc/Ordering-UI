@@ -17,7 +17,9 @@ import { GoogleLoginButton } from './src/components/GoogleLogin'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { LoginForm } from './src/components/LoginForm'
 import { Modal } from './src/components/Modal'
+import { MyOrders } from './src/components/MyOrders'
 import { OrderDetails } from './src/components/OrderDetails'
+import { OrdersOption } from './src/components/OrdersOption'
 import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorContent'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
@@ -30,6 +32,7 @@ import { StripeElementsForm } from './src/components/StripeElementsForm'
 import { UpsellingPage } from './src/components/UpsellingPage'
 import { UserDetails } from './src/components/UserDetails'
 import { UserPopover } from './src/components/UserPopover'
+import { VerticalOrdersLayout } from './src/components/VerticalOrdersLayout'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -68,6 +71,9 @@ export {
   UpsellingPage,
   UserDetails,
   UserPopover,
+  MyOrders,
+  OrdersOption,
+  VerticalOrdersLayout,
 
   // styles
   Button,

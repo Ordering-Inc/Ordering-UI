@@ -311,6 +311,8 @@ export const ModalIcon = styled.span`
     font-size: 14px;
     margin-left: 20px;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @media(min-width: 576px){
