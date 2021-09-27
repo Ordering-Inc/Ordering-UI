@@ -3,11 +3,9 @@ import { ProductsList, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-import { AutoScroll } from '../AutoScroll'
 
 import {
   ProductsContainer,
-  WrapAutoScroll,
   ProductsListing,
   WrapAllCategories,
   ErrorMessage,
@@ -43,24 +41,20 @@ const BusinessProductsListUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
         {category.id && (
-          <WrapAutoScroll>
-            <ProductsListing>
-              <AutoScroll scrollId='selected-category'>
-                {
-                  categoryState.products?.map(product => (
-                    <SingleProductCard
-                      key={product.id}
-                      isSoldOut={(product.inventoried && !product.quantity)}
-                      product={product}
-                      businessId={businessId}
-                      onProductClick={onProductClick}
-                      isCartOnProductsList={isCartOnProductsList}
-                    />
-                  ))
-                }
-              </AutoScroll>
-            </ProductsListing>
-          </WrapAutoScroll>
+          <ProductsListing>
+            {
+              categoryState.products?.map(product => (
+                <SingleProductCard
+                  key={product.id}
+                  isSoldOut={(product.inventoried && !product.quantity)}
+                  product={product}
+                  businessId={businessId}
+                  onProductClick={onProductClick}
+                  isCartOnProductsList={isCartOnProductsList}
+                />
+              ))
+            }
+          </ProductsListing>
         )}
 
         {
@@ -70,22 +64,18 @@ const BusinessProductsListUI = (props) => {
                 featured && categoryState?.products?.find(product => product.featured) && (
                   <WrapAllCategories>
                     <h3>{t('FEATURED', 'Featured')}</h3>
-                    <WrapAutoScroll>
-                      <ProductsListing>
-                        <AutoScroll scrollId='featured-category' innerScroll>
-                          {categoryState.products?.map(product => product.featured && (
-                            <SingleProductCard
-                              key={product.id}
-                              isSoldOut={(product.inventoried && !product.quantity)}
-                              product={product}
-                              businessId={businessId}
-                              onProductClick={onProductClick}
-                              isCartOnProductsList={isCartOnProductsList}
-                            />
-                          ))}
-                        </AutoScroll>
-                      </ProductsListing>
-                    </WrapAutoScroll>
+                    <ProductsListing>
+                      {categoryState.products?.map(product => product.featured && (
+                        <SingleProductCard
+                          key={product.id}
+                          isSoldOut={(product.inventoried && !product.quantity)}
+                          product={product}
+                          businessId={businessId}
+                          onProductClick={onProductClick}
+                          isCartOnProductsList={isCartOnProductsList}
+                        />
+                      ))}
+                    </ProductsListing>
                   </WrapAllCategories>
                 )
               }
@@ -102,32 +92,28 @@ const BusinessProductsListUI = (props) => {
                   products.length > 0 && (
                     <WrapAllCategories id='container'>
                       <h3>{category.name}</h3>
-                      <WrapAutoScroll>
-                        <ProductsListing>
-                          <AutoScroll scrollId={`${category.name}`} innerScroll>
-                            {
-                              products.map(product => (
-                                <SingleProductCard
-                                  key={product.id}
-                                  isSoldOut={product.inventoried && !product.quantity}
-                                  businessId={businessId}
-                                  product={product}
-                                  onProductClick={onProductClick}
-                                  isCartOnProductsList={isCartOnProductsList}
-                                />
-                              ))
-                            }
-                            {
-                              categoryState.loading && (i + 1) === _categories.length && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
-                                <SingleProductCard
-                                  key={`skeleton:${i}`}
-                                  isSkeleton
-                                />
-                              ))
-                            }
-                          </AutoScroll>
-                        </ProductsListing>
-                      </WrapAutoScroll>
+                      <ProductsListing>
+                        {
+                          products.map(product => (
+                            <SingleProductCard
+                              key={product.id}
+                              isSoldOut={product.inventoried && !product.quantity}
+                              businessId={businessId}
+                              product={product}
+                              onProductClick={onProductClick}
+                              isCartOnProductsList={isCartOnProductsList}
+                            />
+                          ))
+                        }
+                        {
+                          categoryState.loading && (i + 1) === _categories.length && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+                            <SingleProductCard
+                              key={`skeleton:${i}`}
+                              isSkeleton
+                            />
+                          ))
+                        }
+                      </ProductsListing>
                     </WrapAllCategories>
                   )
                 }
