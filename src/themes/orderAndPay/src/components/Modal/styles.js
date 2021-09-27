@@ -100,12 +100,12 @@ export const ModalIcon = styled.span`
 `
 
 export const ModalBackHeader = styled.div`
-  height: 50px;
+  height: ${({ customModal }) => customModal ? '70px' : '50px'};
   background-color: white;
   width: 100%;
   position: fixed;
   z-index: 2;
-
+  top: 0;
   @media (min-width: 769px) {
     display: none;
   }

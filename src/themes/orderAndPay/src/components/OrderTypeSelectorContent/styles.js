@@ -7,7 +7,9 @@ export const OrderTypeSelectorContainer = styled.div`
   align-items: center;
   width: 100%;
   text-align: left;
-  padding-top: 10px
+  padding-top: 10px;
+  padding: 10px;
+  box-sizing: border-box;
 `
 
 export const OrderTypeListItemContainerStyled = styled.div`
@@ -15,7 +17,7 @@ export const OrderTypeListItemContainerStyled = styled.div`
   margin-bottom: 25px;
   background: #000000;
   cursor: pointer;
-  width: 95%;
+  width: 100%;
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
     background-size: cover;
@@ -85,14 +87,15 @@ export const OrderTypeListTitle = styled.h1`
   font-weight: 600;
   font-size: 24px;
   color: ${props => props.theme.colors.darkTextColor};
-  margin: 0 0 30px;
 `
 
 export const Logo = styled.div`
   width: 65px;
   height: 65px;
+  margin-bottom: 20px;
   img {
     width: 100%;
+    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
   }
 `
 
@@ -130,4 +133,11 @@ export const PlaceName = styled.div`
 
 export const PlaceNumber = styled.div`
 
+`
+
+export const TitleContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `

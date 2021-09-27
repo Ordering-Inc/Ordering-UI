@@ -304,9 +304,10 @@ const BusinessProductsListingUI = (props) => {
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
-        padding='0'
+        padding='20px 0 0 0'
         isProductForm
         hideCloseDefault={productModal.product || curProduct}
+        customModal
       >
 
         {productModal.loading && !productModal.error && (

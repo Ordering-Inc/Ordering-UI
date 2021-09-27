@@ -145,7 +145,7 @@ export const HorizontalItem = styled.div`
   justify-content: space-between;
   border-radius: 7.6px;
   margin-right: 15px;
-  border: 1px solid #E9ECEF;
+  border: 2px solid #E9ECEF;
   box-sizing: border-box;
   padding: 10px;
 
@@ -156,10 +156,12 @@ export const HorizontalItem = styled.div`
 `
 
 export const HorizontalImage = styled.div`
+  width: 110px;
+  height: 110px;
   img {
     border-radius: 7.6px;
-    min-width: 73px;
-    min-height: 73px;
+    width: 110px;
+    height: 110px;
     margin-left: 10px;
 
     ${props => props.theme?.rtl && css`
@@ -175,9 +177,10 @@ export const HorizontalDetails = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  height: 150px;
-  min-width: 100px;
+  height: 110px;
+  width: 150px;
   h3 {
+    width: 160px;
     font-weight: 500;
     font-size: 12px;
     color: ${props => props.theme.colors.darkTextColor};
@@ -185,7 +188,7 @@ export const HorizontalDetails = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4; /* number of lines to show */
+    -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
   }
 
