@@ -140,6 +140,6 @@ export const PlaceNumber = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: ${({ auth }) => auth ? 'space-between' : 'center'};
   align-items: center;
 `

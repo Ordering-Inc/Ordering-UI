@@ -3,7 +3,6 @@ import { useLanguage, OrderTypeControl, useOrder, useApi, useEvent, useSession }
 import { useTheme } from 'styled-components'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
-import MdcOrderBoolAscendingVariant from '@meronex/icons/mdc/MdcOrderBoolAscendingVariant'
 import { Modal } from '../Modal'
 import {
   OrderTypeSelectorContainer,
@@ -127,7 +126,7 @@ export const OrderTypeSelectorContentUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <OrderTypeSelectorContainer>
-        <TitleContainer>
+        <TitleContainer auth={auth}>
           <OrderTypeListTitle>{t('SELECT_YOUR_ORDER_TYPE', 'Select your order type')}</OrderTypeListTitle>
           {auth && (
             <svg onClick={ordersRedirect} width='24' height='24' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
