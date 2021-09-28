@@ -20,11 +20,13 @@ import {
   SkeletonWrapper,
   SkeletonSocialWrapper,
   WrapperPassword,
-  TogglePassword
+  TogglePassword,
+  TermsConditionWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
+import { Checkbox } from '../../../../../styles/Checkbox'
 
 import { FacebookLoginButton } from '../../../../../components/FacebookLogin'
 import { AppleLogin } from '../../../../../components/AppleLogin'
@@ -320,6 +322,31 @@ const SignUpFormUI = (props) => {
                 </>
               )
             }
+
+            {configs?.terms_and_conditions?.value === 'true' && (
+              <TermsConditionWrapper>
+                <Checkbox
+                  name='acceptTerms'
+                  ref={formMethods.register({
+                    required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')
+                  })}
+                  id='acceptTerms'
+                />
+                <label
+                  htmlFor='acceptTerms'
+                >
+                  <span>{t('TERMS_AND_CONDITIONS_TEXT')}</span>
+                  <a
+                    href={configs?.terms_and_conditions_url?.value}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {t('TERMS_AND_CONDITIONS')}
+                  </a>
+                </label>
+              </TermsConditionWrapper>
+            )}
+
             <Button
               color='secundary'
               rectangle
