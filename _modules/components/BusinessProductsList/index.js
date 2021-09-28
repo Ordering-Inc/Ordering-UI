@@ -76,6 +76,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, (category === null || category === void 0 ? void 0 : category.id) && /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product) {
+    var _currentCart$products;
+
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
       isSoldOut: product.inventoried && !product.quantity,
@@ -83,13 +85,15 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       businessId: businessId,
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList,
-      productAddedToCart: currentCart.products.find(function (Cproduct) {
+      productAddedToCart: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.find(function (Cproduct) {
         return Cproduct.id === product.id;
       })
     });
   })), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
     return product.featured;
   })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("h3", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc3 = categoryState.products) === null || _categoryState$produc3 === void 0 ? void 0 : _categoryState$produc3.map(function (product) {
+    var _currentCart$products2;
+
     return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
       isSoldOut: product.inventoried && !product.quantity,
@@ -97,7 +101,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       businessId: businessId,
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList,
-      productAddedToCart: currentCart.products.find(function (Cproduct) {
+      productAddedToCart: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.find(function (Cproduct) {
         return Cproduct.id === product.id;
       })
     });
@@ -114,6 +118,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
       id: "container"
     }, /*#__PURE__*/_react.default.createElement("h3", null, category.name), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
+      var _currentCart$products3;
+
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: product === null || product === void 0 ? void 0 : product.id,
         isSoldOut: product.inventoried && !product.quantity,
@@ -121,7 +127,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         product: product,
         onProductClick: onProductClick,
         isCartOnProductsList: isCartOnProductsList,
-        productAddedToCart: currentCart.products.find(function (Cproduct) {
+        productAddedToCart: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.find(function (Cproduct) {
           return Cproduct.id === product.id;
         })
       });
