@@ -18,6 +18,7 @@ import { FacebookLoginButton } from '../FacebookLogin'
 import { GoogleLoginButton } from '../GoogleLogin'
 import { AppleLogin } from '../AppleLogin'
 import { Button, CustomInputContainer } from '../../styles'
+import { Checkbox } from '../../../../../styles/Checkbox'
 
 import {
   SignUpContainer,
@@ -31,7 +32,8 @@ import {
   TogglePassword,
   ReCaptchaWrapper,
   Title,
-  Description
+  Description,
+  TermsConditionWrapper
 } from './styles'
 
 import { Alert } from '../../../../../components/Confirm'
@@ -432,6 +434,31 @@ const SignUpFormUI = (props) => {
                     <ReCaptcha handleReCaptcha={handleReCaptcha} />
                   </ReCaptchaWrapper>
                 )}
+
+                {configs?.terms_and_conditions?.value === 'true' && (
+                  <TermsConditionWrapper>
+                    <Checkbox
+                      name='acceptTerms'
+                      ref={formMethods.register({
+                        required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')
+                      })}
+                      id='acceptTerms'
+                    />
+                    <label
+                      htmlFor='acceptTerms'
+                    >
+                      <span>{t('TERMS_AND_CONDITIONS_TEXT')}</span>
+                      <a
+                        href={configs?.terms_and_conditions_url?.value}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        {t('TERMS_AND_CONDITIONS')}
+                      </a>
+                    </label>
+                  </TermsConditionWrapper>
+                )}
+
                 <Button
                   color='primaryGradient'
                   type='submit'
