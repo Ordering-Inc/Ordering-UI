@@ -272,14 +272,16 @@ export const Header = (props) => {
                 variant='address'
                 addressState={orderState?.options?.address?.address?.split(',')?.[0]}
                 onClick={(variant) => openModal(variant)}
-              />
-              <HeaderOption
-                variant='moment'
-                momentState={orderState?.options?.moment}
-                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                  ? null
-                  : (variant) => openModal(variant)}
-              />
+              />              
+              {isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined && (
+                <HeaderOption
+                  variant='moment'
+                  momentState={orderState?.options?.moment}
+                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                    ? null
+                    : (variant) => openModal(variant)}
+                />
+              )}
             </SubMenu>
           )
         )}
