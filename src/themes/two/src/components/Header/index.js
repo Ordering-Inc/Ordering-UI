@@ -290,14 +290,16 @@ export const Header = (props) => {
                 onClick={(variant) => openModal(variant)}
                 isHome={isHome}
               />
-              <HeaderOption
-                variant='moment'
-                momentState={orderState?.options?.moment}
-                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                  ? null
-                  : (variant) => openModal(variant)}
-                isHome={isHome}
-              />
+              {isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined && (
+                <HeaderOption
+                  variant='moment'
+                  momentState={orderState?.options?.moment}
+                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                    ? null
+                    : (variant) => openModal(variant)}
+                  isHome={isHome}
+                />
+              )}
             </SubMenu>
           )
         )}
