@@ -165,10 +165,15 @@ export const GoBackContainer = styled.div`
 export const OrderTypeWrapperButton = styled(Button)`
   background: ${({ theme }) => theme.colors.primary};
   height: 35px;
-  line-height: 0.5;
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+  max-width: 100px;
   h2{
-    font-size: 14px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `
 
