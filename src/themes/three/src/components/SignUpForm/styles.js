@@ -184,5 +184,37 @@ export const TogglePassword = styled.span`
   span{
     cursor: pointer;
   }
+`
+export const TermsConditionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
 
+  > label {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 7px;
+    ` : css`
+      margin-left: 7px;
+    `}
+
+    > span:first-child {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 7px;
+      ` : css`
+        margin-right: 7px;
+      `}
+    }
+
+    > a {
+      font-weight: 500;
+      color: ${props => props.theme.colors.primary} !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    > label {
+      font-size: 16px;
+    }
+  }
 `
