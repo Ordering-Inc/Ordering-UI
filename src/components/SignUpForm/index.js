@@ -267,8 +267,7 @@ const SignUpFormUI = (props) => {
                   ? `${t('LOADING', 'Loading')}...`
                   : !isSignupBusiness
                     ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
-                    : t('SIGN_UP', 'Sign up')
-                }
+                    : t('SIGN_UP', 'Sign up')}
               </Button>
             )}
           </TitleHeroSide>
@@ -408,11 +407,10 @@ const SignUpFormUI = (props) => {
               disabled={formState.loading || validationFields?.loading}
             >
               {formState.loading
-                  ? `${t('LOADING', 'Loading')}...`
-                  : isSignupBusiness
-                    ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
-                    : t('SIGN_UP', 'Sign up')
-                }
+                ? `${t('LOADING', 'Loading')}...`
+                : isSignupBusiness
+                  ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
+                  : t('SIGN_UP', 'Sign up')}
             </Button>
           </FormInput>
           {elementLinkToLogin && (
@@ -439,9 +437,9 @@ const SignUpFormUI = (props) => {
                   )}
                   {configs?.google_login_client_id?.value && (
                     <GoogleLoginButton
-                    initParams={initParams}
-                    handleSuccessGoogleLogin={handleSuccessGoogle}
-                    onFailure={(data) => console.log('onFailure', data)}
+                      initParams={initParams}
+                      handleSuccessGoogleLogin={handleSuccessGoogle}
+                      onFailure={(data) => console.log('onFailure', data)}
                     />
                   )}
                 </SocialButtons>
