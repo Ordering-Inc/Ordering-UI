@@ -15,9 +15,11 @@ export const OrderTypeSelectorContainer = styled.div`
 export const OrderTypeListItemContainerStyled = styled.div`
   border-radius: 7.6px;
   margin-bottom: 25px;
-  background: #000000;
+  background: rgba(0,0,0,0.2);
   cursor: pointer;
   width: 100%;
+  -webkit-tap-highlight-color: transparent;
+
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
     background-size: cover;
@@ -40,6 +42,10 @@ export const OrderTypeListItemContainer = (props) => {
     </OrderTypeListItemContainerStyled>
   )
 }
+
+export const OrderTypeWrapper = styled.div`
+  background: rgba(0,0,0,0.5);
+`
 
 export const OrderTypeTitle = styled.h2`
   font-weight: 600;
@@ -138,6 +144,6 @@ export const PlaceNumber = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: ${({ auth }) => auth ? 'space-between' : 'center'};
   align-items: center;
 `
