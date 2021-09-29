@@ -46,12 +46,12 @@ export const OrderTypeSelectorContentUI = (props) => {
   const [placeId, setPlaceId] = useState('')
   const inputRef = useRef()
   const handleClickOrderType = ({ value, text, label }) => {
+    handleChangeOrderType && handleChangeOrderType(value)
     if (!label) {
       handleBusinessPage()
       return
     }
     onClose && onClose()
-    handleChangeOrderType && handleChangeOrderType(value)
     setOrderTypeSelected({ open: true, type: text, label })
   }
 

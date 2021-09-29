@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-
+import { Button } from '../../styles/Buttons'
 export const ProductsContainer = styled.div`
   width: 95%;
   margin: 20px auto 0px;
@@ -160,4 +160,19 @@ export const GoBackContainer = styled.div`
   h1{
     font-size: 1em;
   }
+`
+
+export const OrderTypeWrapperButton = styled(Button)`
+  background: ${({ theme }) => theme.colors.primary};
+  height: 35px;
+  line-height: 0.5;
+  margin-right: 10px;
+  h2{
+    font-size: 14px;
+  }
+`
+
+export const LogoutButtonContainer = styled.div`
+  position: relative;
+  top: 2px;
 `
