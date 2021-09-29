@@ -77,6 +77,7 @@ export const Header = (props) => {
 
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
 
   const handleSuccessSignup = (user) => {
     login({
@@ -206,7 +207,7 @@ export const Header = (props) => {
                   >
                     <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
                   </AddressMenu>
-                  {!isCustomerMode && (
+                  {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                     <MomentMenu
                       onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
                         ? null
@@ -301,7 +302,7 @@ export const Header = (props) => {
               >
                 <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
               </AddressMenu>
-              {!isCustomerMode && (
+              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
                   variant='moment'
                   momentState={orderState?.options?.moment}
@@ -318,7 +319,7 @@ export const Header = (props) => {
                 addressState={orderState?.options?.address?.address?.split(',')?.[0]}
                 onClick={(variant) => openModal(variant)}
               />
-              {!isCustomerMode && (
+              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
                   variant='moment'
                   momentState={orderState?.options?.moment}

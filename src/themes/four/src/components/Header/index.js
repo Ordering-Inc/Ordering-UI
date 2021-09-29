@@ -72,6 +72,7 @@ export const Header = (props) => {
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isHero = location.pathname === '/' || location.pathname === '/home' || location.pathname === '/login' || location.pathname === '/signin' || location.pathname === '/signup'
   const isStorePage = location.pathname.includes('store')
+  const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
 
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
@@ -189,12 +190,14 @@ export const Header = (props) => {
                 )}
                 {onlineStatus && windowSize.width > 820 && (
                   <>
-                    <MomentPopover
-                      open={openPopover.moment}
-                      onClick={() => handleTogglePopover('moment')}
-                      onClose={() => handleClosePopover('moment')}
-                      isHome={isHome}
-                    />
+                    {isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined && (
+                      <MomentPopover
+                        open={openPopover.moment}
+                        onClick={() => handleTogglePopover('moment')}
+                        onClose={() => handleClosePopover('moment')}
+                        isHome={isHome}
+                      />
+                    )}
                     <AddressesPopover
                       auth={auth}
                       addressState={orderState?.options?.address}
@@ -270,12 +273,14 @@ export const Header = (props) => {
                 onClose={() => handleClosePopover('addresses')}
                 isHome={isHome}
               />
-              <MomentPopover
-                open={openPopover.moment}
-                onClick={() => handleTogglePopover('moment')}
-                onClose={() => handleClosePopover('moment')}
-                isHome={isHome}
-              />
+              {isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined && (
+                <MomentPopover
+                  open={openPopover.moment}
+                  onClick={() => handleTogglePopover('moment')}
+                  onClose={() => handleClosePopover('moment')}
+                  isHome={isHome}
+                />
+              )}
             </SubMenu>
           ) : (
             <SubMenu isStorePage={isStorePage}>
@@ -285,14 +290,16 @@ export const Header = (props) => {
                 onClick={(variant) => openModal(variant)}
                 isHome={isHome}
               />
-              <HeaderOption
-                variant='moment'
-                momentState={orderState?.options?.moment}
-                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                  ? null
-                  : (variant) => openModal(variant)}
-                isHome={isHome}
-              />
+              {isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined && (
+                <HeaderOption
+                  variant='moment'
+                  momentState={orderState?.options?.moment}
+                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                    ? null
+                    : (variant) => openModal(variant)}
+                  isHome={isHome}
+                />
+              )}
             </SubMenu>
           )
         )}
