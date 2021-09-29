@@ -17,7 +17,8 @@ import {
   InputWrapper,
   Table,
   PlaceName,
-  TitleContainer
+  TitleContainer,
+  OrderTypeWrapper
 } from './styles'
 import { Input } from '../../../../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -148,12 +149,14 @@ export const OrderTypeSelectorContentUI = (props) => {
               onClick={() => handleClickOrderType({ value: item.value, text: item.text, label: item.label })}
               active={orderStatus?.options?.type === item?.value}
             >
-              <OrderTypeTitle>{item.text}</OrderTypeTitle>
-              <OrderTypeDescription>{item.description}</OrderTypeDescription>
-              <OrderStartWrapper>
-                <span>{t('START_MY_ORDER', 'start my order')}</span>
-                <BsArrowRight />
-              </OrderStartWrapper>
+              <OrderTypeWrapper>
+                <OrderTypeTitle>{item.text}</OrderTypeTitle>
+                <OrderTypeDescription>{item.description}</OrderTypeDescription>
+                <OrderStartWrapper>
+                  <span>{t('START_MY_ORDER', 'start my order')}</span>
+                  <BsArrowRight />
+                </OrderStartWrapper>
+              </OrderTypeWrapper>
             </OrderTypeListItemContainer>
           ))
         }
