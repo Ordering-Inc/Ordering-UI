@@ -4,9 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../../../../../components/Confirm'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import parsePhoneNumber from 'libphonenumber-js'
-import MdCheckBox from '@meronex/icons/md/MdCheckBox'
-import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
-import DatePicker from 'react-datepicker'
+
 import {
   SignupForm as SignUpController,
   useLanguage,
@@ -30,11 +28,12 @@ import {
   FormBottom,
   AccountLogin,
   WrapperBirthday,
-  ConditionCheck,
-  Terms
+  TermsConditionWrapper
 } from './styles'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
+import { Checkbox } from '../../../../../styles/Checkbox'
+
 import { FacebookLoginButton } from '../../../../../components/FacebookLogin'
 import { GoogleLoginButton } from '../../../../../components/GoogleLogin'
 import { AppleLogin } from '../../../../../components/AppleLogin'
@@ -71,9 +70,7 @@ const SignUpFormUI = (props) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
-  const [conditionCheck, setConditionCheck] = useState(false)
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
-  const [startDate, setStartDate] = useState(new Date())
 
   // const [isSignupBusiness, setIsSignupBusiness] = useState(false)
 
@@ -176,10 +173,6 @@ const SignUpFormUI = (props) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
     emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
-  }
-
-  const toggleSelect = () => {
-    setConditionCheck(!conditionCheck)
   }
 
   useEffect(() => {
@@ -352,7 +345,7 @@ const SignUpFormUI = (props) => {
                     </WrapperBirthday>
                   </FormInline>
 
-                  <ConditionCheck>
+                  {/* <ConditionCheck>
                     <span onClick={() => toggleSelect()}>
                       <span className='condition-checkbox'>
                         {conditionCheck ? (
@@ -374,7 +367,31 @@ const SignUpFormUI = (props) => {
 
                   <Terms>
                     {t('TERMS_WEB_PF', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')}
-                  </Terms>
+                  </Terms> */}
+
+                  {configs?.terms_and_conditions?.value === 'true' && (
+                    <TermsConditionWrapper>
+                      <Checkbox
+                        name='acceptTerms'
+                        ref={formMethods.register({
+                          required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')
+                        })}
+                        id='acceptTerms'
+                      />
+                      <label
+                        htmlFor='acceptTerms'
+                      >
+                        <span>{t('TERMS_AND_CONDITIONS_TEXT', 'I’m agree with')}</span>
+                        <a
+                          href={configs?.terms_and_conditions_url?.value}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
+                          {t('TERMS_AND_CONDITIONS', 'Terms & Conditions')}
+                        </a>
+                      </label>
+                    </TermsConditionWrapper>
+                  )}
 
                   {props.afterMidElements?.map((MidElement, i) => (
                     <React.Fragment key={i}>
@@ -395,7 +412,7 @@ const SignUpFormUI = (props) => {
                   <Button
                     color='primary'
                     type='submit'
-                    disabled={formState.loading || validationFields?.loading || !conditionCheck}
+                    disabled={formState.loading || validationFields?.loading}
                   >
                     {formState.loading
                       ? `${t('LOADING', 'Loading')}...`
