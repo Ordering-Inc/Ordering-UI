@@ -99,7 +99,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       isCartOnProductsList = props.isCartOnProductsList,
       errorQuantityProducts = props.errorQuantityProducts,
       handleGoBack = props.handleGoBack,
-      handleGoToCart = props.handleGoToCart;
+      handleGoToCart = props.handleGoToCart,
+      ordertype = props.ordertype;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -256,7 +257,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     }
   }), /*#__PURE__*/_react.default.createElement("img", {
     src: business === null || business === void 0 ? void 0 : business.logo
-  }), /*#__PURE__*/_react.default.createElement("h1", null, business === null || business === void 0 ? void 0 : business.name)), auth && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))), !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
+  }), /*#__PURE__*/_react.default.createElement("h1", null, business === null || business === void 0 ? void 0 : business.name)), ordertype && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapperButton, {
+    onClick: function onClick() {
+      return handleGoBack();
+    }
+  }, /*#__PURE__*/_react.default.createElement("h2", null, ordertype)), auth && /*#__PURE__*/_react.default.createElement(_styles.LogoutButtonContainer, null, /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))), !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
@@ -371,12 +376,46 @@ var BusinessProductsListing = function BusinessProductsListing(props) {
       isInitialRender = _useState10[0],
       setIsInitialRender = _useState10[1];
 
+  var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
+
+  var _useOrder3 = (0, _orderingComponents.useOrder)(),
+      _useOrder4 = _slicedToArray(_useOrder3, 1),
+      options = _useOrder4[0].options;
+
+  var _useState11 = (0, _react.useState)(),
+      _useState12 = _slicedToArray(_useState11, 2),
+      orderType = _useState12[0],
+      setOrderType = _useState12[1];
+
+  var ordertypes = [{
+    value: 2,
+    content: t('PICKUP', 'Pickup')
+  }, {
+    value: 3,
+    content: t('EAT_IN', 'Eat in')
+  }, {
+    value: 4,
+    content: t('CURBSIDE', 'Curbside')
+  }, {
+    value: 5,
+    content: t('DRIVE_THRU', 'Drive thru')
+  }];
+  (0, _react.useEffect)(function () {
+    var ordertype = ordertypes.find(function (type) {
+      return (options === null || options === void 0 ? void 0 : options.type) === type.value;
+    });
+    setOrderType(ordertype);
+  }, [options === null || options === void 0 ? void 0 : options.type]);
+
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,
     isInitialRender: isInitialRender,
     handleUpdateInitialRender: function handleUpdateInitialRender(val) {
       return setIsInitialRender(val);
-    }
+    },
+    ordertype: orderType === null || orderType === void 0 ? void 0 : orderType.content
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessAndProductList, businessProductslistingProps);

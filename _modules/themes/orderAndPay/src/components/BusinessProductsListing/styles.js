@@ -5,11 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GoBackContainer = exports.ModalIcon = exports.Title = exports.EmptyBtnWrapper = exports.EmptyCart = exports.BusinessCartContent = exports.BusinessCartContainer = exports.BusinessCategoryProductWrapper = exports.BusinessContent = exports.WrappLayout = exports.SkeletonItem = exports.ProductLoading = exports.ProductsNotFound = exports.WrapContent = exports.ProductsContainer = void 0;
+exports.LogoutButtonContainer = exports.OrderTypeWrapperButton = exports.GoBackContainer = exports.ModalIcon = exports.Title = exports.EmptyBtnWrapper = exports.EmptyCart = exports.BusinessCartContent = exports.BusinessCartContainer = exports.BusinessCategoryProductWrapper = exports.BusinessContent = exports.WrappLayout = exports.SkeletonItem = exports.ProductLoading = exports.ProductsNotFound = exports.WrapContent = exports.ProductsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
+var _Buttons = require("../../styles/Buttons");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -86,3 +88,12 @@ exports.ModalIcon = ModalIcon;
 var GoBackContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 65%;\n  img{\n    margin: 0 5px;\n    width: 40px;\n    height: 40px;\n  }\n  h1{\n    font-size: 1em;\n  }\n"])));
 
 exports.GoBackContainer = GoBackContainer;
+var OrderTypeWrapperButton = (0, _styledComponents.default)(_Buttons.Button)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  background: ", ";\n  height: 35px;\n  margin-right: 10px;\n  display: flex;\n  align-items: center;\n  max-width: 100px;\n  h2{\n    font-size: 12px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n"])), function (_ref) {
+  var theme = _ref.theme;
+  return theme.colors.primary;
+});
+exports.OrderTypeWrapperButton = OrderTypeWrapperButton;
+
+var LogoutButtonContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: relative;\n  top: 2px;\n"])));
+
+exports.LogoutButtonContainer = LogoutButtonContainer;
