@@ -24,11 +24,13 @@ import {
   SkeletonSocialWrapper,
   WrapperPassword,
   TogglePassword,
-  ReCaptchaWrapper
+  ReCaptchaWrapper,
+  TermsConditionWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
+import { Checkbox } from '../../styles/Checkbox'
 
 import { FacebookLoginButton } from '../FacebookLogin'
 import { GoogleLoginButton } from '../GoogleLogin'
@@ -265,8 +267,7 @@ const SignUpFormUI = (props) => {
                   ? `${t('LOADING', 'Loading')}...`
                   : !isSignupBusiness
                     ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
-                    : t('SIGN_UP', 'Sign up')
-                }
+                    : t('SIGN_UP', 'Sign up')}
               </Button>
             )}
           </TitleHeroSide>
@@ -375,17 +376,41 @@ const SignUpFormUI = (props) => {
                 <ReCaptcha handleReCaptcha={handleReCaptcha} />
               </ReCaptchaWrapper>
             )}
+
+            {configs?.terms_and_conditions?.value === 'true' && (
+              <TermsConditionWrapper>
+                <Checkbox
+                  name='acceptTerms'
+                  ref={formMethods.register({
+                    required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')
+                  })}
+                  id='acceptTerms'
+                />
+                <label
+                  htmlFor='acceptTerms'
+                >
+                  <span>{t('TERMS_AND_CONDITIONS_TEXT', 'I’m agree with')}</span>
+                  <a
+                    href={configs?.terms_and_conditions_url?.value}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {t('TERMS_AND_CONDITIONS', 'Terms & Conditions')}
+                  </a>
+                </label>
+              </TermsConditionWrapper>
+            )}
+
             <Button
               color='primary'
               type='submit'
               disabled={formState.loading || validationFields?.loading}
             >
               {formState.loading
-                  ? `${t('LOADING', 'Loading')}...`
-                  : isSignupBusiness
-                    ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
-                    : t('SIGN_UP', 'Sign up')
-                }
+                ? `${t('LOADING', 'Loading')}...`
+                : isSignupBusiness
+                  ? t('SIGN_UP_AS_BUSINESS', 'Sign up as business')
+                  : t('SIGN_UP', 'Sign up')}
             </Button>
           </FormInput>
           {elementLinkToLogin && (
@@ -412,9 +437,9 @@ const SignUpFormUI = (props) => {
                   )}
                   {configs?.google_login_client_id?.value && (
                     <GoogleLoginButton
-                    initParams={initParams}
-                    handleSuccessGoogleLogin={handleSuccessGoogle}
-                    onFailure={(data) => console.log('onFailure', data)}
+                      initParams={initParams}
+                      handleSuccessGoogleLogin={handleSuccessGoogle}
+                      onFailure={(data) => console.log('onFailure', data)}
                     />
                   )}
                 </SocialButtons>
