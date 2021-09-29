@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Terms = exports.ConditionCheck = exports.WrapperBirthday = exports.AccountLogin = exports.FormBottom = exports.FormInline = exports.FormTitle = exports.ReCaptchaWrapper = exports.TogglePassword = exports.WrapperPassword = exports.SkeletonSocialWrapper = exports.SkeletonWrapper = exports.SocialButtons = exports.RedirectLink = exports.FormInput = exports.FormSide = exports.SignUpContainer = void 0;
+exports.TermsConditionWrapper = exports.WrapperBirthday = exports.AccountLogin = exports.FormBottom = exports.FormInline = exports.FormTitle = exports.ReCaptchaWrapper = exports.TogglePassword = exports.WrapperPassword = exports.SkeletonSocialWrapper = exports.SkeletonWrapper = exports.SocialButtons = exports.RedirectLink = exports.FormInput = exports.FormSide = exports.SignUpContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -109,14 +109,16 @@ var WrapperBirthday = _styledComponents.default.div(_templateObject18 || (_templ
 
 exports.WrapperBirthday = WrapperBirthday;
 
-var ConditionCheck = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  margin-bottom: 10px;\n  cursor: pointer;\n  span {\n    display: flex;\n    font-size: 14px;\n  }\n  .condition-checkbox {\n    color: ", ";\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 20px;\n  }\n  .condition-link-text {\n    margin: 0 6px;\n  }\n  .condition-link {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
+var TermsConditionWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n\n  > input {\n    width: 18px !important;\n    height: 18px !important;\n  }\n\n  > label {\n    font-size: 14px;\n    ", "\n\n    > span:first-child {\n      font-weight: 500;\n      ", "\n    }\n\n    > a {\n      color: ", " !important;\n    }\n  }\n\n  @media (min-width: 768px) {\n    > label {\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
+  var _props$theme2;
+
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      margin-right: 7px;\n    "]))) : (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      margin-left: 7px;\n    "])));
+}, function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n        margin-left: 7px;\n      "]))) : (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n        margin-right: 7px;\n      "])));
 }, function (props) {
   return props.theme.colors.primary;
 });
 
-exports.ConditionCheck = ConditionCheck;
-
-var Terms = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-bottom: 15px;\n  height: 150px;\n  overflow-y: scroll;\n"])));
-
-exports.Terms = Terms;
+exports.TermsConditionWrapper = TermsConditionWrapper;
