@@ -346,7 +346,7 @@ const SignUpFormUI = (props) => {
                     <label
                       htmlFor='acceptTerms'
                     >
-                      <span>{t('TERMS_AND_CONDITIONS_TEXT', 'I’m agree with)}</span>
+                      <span>{t('TERMS_AND_CONDITIONS_TEXT', 'I’m agree with')}</span>
                       <a
                         href={configs?.terms_and_conditions_url?.value}
                         target='_blank'
