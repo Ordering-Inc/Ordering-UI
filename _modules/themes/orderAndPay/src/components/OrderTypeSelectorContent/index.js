@@ -19,8 +19,6 @@ var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRig
 
 var _BsArrowLeft = _interopRequireDefault(require("@meronex/icons/bs/BsArrowLeft"));
 
-var _MdcOrderBoolAscendingVariant = _interopRequireDefault(require("@meronex/icons/mdc/MdcOrderBoolAscendingVariant"));
-
 var _Modal = require("../Modal");
 
 var _styles = require("./styles");
@@ -121,6 +119,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     var value = _ref.value,
         text = _ref.text,
         label = _ref.label;
+    handleChangeOrderType && handleChangeOrderType(value);
 
     if (!label) {
       handleBusinessPage();
@@ -128,7 +127,6 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     }
 
     onClose && onClose();
-    handleChangeOrderType && handleChangeOrderType(value);
     setOrderTypeSelected({
       open: true,
       type: text,
@@ -283,7 +281,9 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('SELECT_YOUR_ORDER_TYPE', 'Select your order type')), auth && /*#__PURE__*/_react.default.createElement("svg", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
+    auth: auth
+  }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('SELECT_YOUR_ORDER_TYPE', 'Select your order type')), auth && /*#__PURE__*/_react.default.createElement("svg", {
     onClick: ordersRedirect,
     width: "24",
     height: "24",
@@ -312,7 +312,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
         });
       },
       active: (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === (item === null || item === void 0 ? void 0 : item.value)
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeTitle, null, item.text), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeDescription, null, item.description), /*#__PURE__*/_react.default.createElement(_styles.OrderStartWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('START_MY_ORDER', 'start my order')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)));
+    }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeTitle, null, item.text), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeDescription, null, item.description), /*#__PURE__*/_react.default.createElement(_styles.OrderStartWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('START_MY_ORDER', 'start my order')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))));
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: orderTypeSelected === null || orderTypeSelected === void 0 ? void 0 : orderTypeSelected.open,
     onClose: function onClose() {
@@ -320,7 +320,8 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
         open: false
       }));
     },
-    hideCloseDefault: true
+    hideCloseDefault: true,
+    height: "calc(100vh + 100px)"
   }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_BsArrowLeft.default, {
     size: 20,
     onClick: function onClick() {
