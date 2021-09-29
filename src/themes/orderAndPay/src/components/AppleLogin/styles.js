@@ -24,9 +24,13 @@ export const AppleButton = styled(Button)`
   div {
     width: 80%;
     text-align: left;
-
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
     @media (min-width: 576px) {
       width: 50%;
+      font-size: 16px;
     }
   }
 `
