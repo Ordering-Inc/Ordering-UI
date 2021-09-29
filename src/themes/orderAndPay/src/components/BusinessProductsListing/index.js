@@ -20,7 +20,9 @@ import {
   BusinessContent,
   BusinessCategoryProductWrapper,
   ModalIcon,
-  GoBackContainer
+  GoBackContainer,
+  OrderTypeWrapperButton,
+  LogoutButtonContainer
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -62,7 +64,8 @@ const BusinessProductsListingUI = (props) => {
     isCartOnProductsList,
     errorQuantityProducts,
     handleGoBack,
-    handleGoToCart
+    handleGoToCart,
+    ordertype
   } = props
 
   const { business, loading, error } = businessState
@@ -181,10 +184,17 @@ const BusinessProductsListingUI = (props) => {
             <img src={business?.logo} />
             <h1>{business?.name}</h1>
           </GoBackContainer>
+          {ordertype && (
+            <OrderTypeWrapperButton onClick={() => handleGoBack()}>
+              <h2>
+                {ordertype}
+              </h2>
+            </OrderTypeWrapperButton>
+          )}
           {auth && (
-            <div>
+            <LogoutButtonContainer>
               <LogoutButton />
-            </div>
+            </LogoutButtonContainer>
           )}
         </ModalIcon>
         {
@@ -363,12 +373,39 @@ const BusinessProductsListingUI = (props) => {
 
 export const BusinessProductsListing = (props) => {
   const [isInitialRender, setIsInitialRender] = useState(false)
+  const [, t] = useLanguage()
+  const [{ options }] = useOrder()
+  const [orderType, setOrderType] = useState()
+  const ordertypes = [
+    {
+      value: 2,
+      content: t('PICKUP', 'Pickup')
+    },
+    {
+      value: 3,
+      content: t('EAT_IN', 'Eat in')
+    },
+    {
+      value: 4,
+      content: t('CURBSIDE', 'Curbside')
+    },
+    {
+      value: 5,
+      content: t('DRIVE_THRU', 'Drive thru')
+    }
+  ]
+
+  useEffect(() => {
+    const ordertype = ordertypes.find(type => options?.type === type.value)
+    setOrderType(ordertype)
+  }, [options?.type])
 
   const businessProductslistingProps = {
     ...props,
     UIComponent: BusinessProductsListingUI,
     isInitialRender,
-    handleUpdateInitialRender: (val) => setIsInitialRender(val)
+    handleUpdateInitialRender: (val) => setIsInitialRender(val),
+    ordertype: orderType?.content
   }
 
   return (

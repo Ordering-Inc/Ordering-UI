@@ -3,7 +3,6 @@ import { useLanguage, OrderTypeControl, useOrder, useApi, useEvent, useSession }
 import { useTheme } from 'styled-components'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
-import MdcOrderBoolAscendingVariant from '@meronex/icons/mdc/MdcOrderBoolAscendingVariant'
 import { Modal } from '../Modal'
 import {
   OrderTypeSelectorContainer,
@@ -18,7 +17,8 @@ import {
   InputWrapper,
   Table,
   PlaceName,
-  TitleContainer
+  TitleContainer,
+  OrderTypeWrapper
 } from './styles'
 import { Input } from '../../../../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -46,12 +46,12 @@ export const OrderTypeSelectorContentUI = (props) => {
   const [placeId, setPlaceId] = useState('')
   const inputRef = useRef()
   const handleClickOrderType = ({ value, text, label }) => {
+    handleChangeOrderType && handleChangeOrderType(value)
     if (!label) {
       handleBusinessPage()
       return
     }
     onClose && onClose()
-    handleChangeOrderType && handleChangeOrderType(value)
     setOrderTypeSelected({ open: true, type: text, label })
   }
 
@@ -127,7 +127,7 @@ export const OrderTypeSelectorContentUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <OrderTypeSelectorContainer>
-        <TitleContainer>
+        <TitleContainer auth={auth}>
           <OrderTypeListTitle>{t('SELECT_YOUR_ORDER_TYPE', 'Select your order type')}</OrderTypeListTitle>
           {auth && (
             <svg onClick={ordersRedirect} width='24' height='24' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -149,12 +149,14 @@ export const OrderTypeSelectorContentUI = (props) => {
               onClick={() => handleClickOrderType({ value: item.value, text: item.text, label: item.label })}
               active={orderStatus?.options?.type === item?.value}
             >
-              <OrderTypeTitle>{item.text}</OrderTypeTitle>
-              <OrderTypeDescription>{item.description}</OrderTypeDescription>
-              <OrderStartWrapper>
-                <span>{t('START_MY_ORDER', 'start my order')}</span>
-                <BsArrowRight />
-              </OrderStartWrapper>
+              <OrderTypeWrapper>
+                <OrderTypeTitle>{item.text}</OrderTypeTitle>
+                <OrderTypeDescription>{item.description}</OrderTypeDescription>
+                <OrderStartWrapper>
+                  <span>{t('START_MY_ORDER', 'start my order')}</span>
+                  <BsArrowRight />
+                </OrderStartWrapper>
+              </OrderTypeWrapper>
             </OrderTypeListItemContainer>
           ))
         }
@@ -162,6 +164,7 @@ export const OrderTypeSelectorContentUI = (props) => {
           open={orderTypeSelected?.open}
           onClose={() => setOrderTypeSelected({ ...orderTypeSelected, open: false })}
           hideCloseDefault
+          height='calc(100vh + 100px)'
         >
           <ModalIcon>
             <BsArrowLeft size={20} onClick={() => setOrderTypeSelected({ ...orderTypeSelected, open: false })} />
