@@ -272,7 +272,7 @@ var Header = function Header(props) {
     style: styles.clearCustomer
   }))), !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     configTypes: configTypes
-  }), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.preorder_status_enabled) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === undefined && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
+  }), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.preorder_status_enabled) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === undefined) && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
       return handleTogglePopover('moment');
@@ -343,7 +343,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('addresses');
     }
-  }), isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.preorder_status_enabled) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === undefined && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
+  }), (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.preorder_status_enabled) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === undefined) && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
       return handleTogglePopover('moment');
@@ -357,7 +357,7 @@ var Header = function Header(props) {
     onClick: function onClick(variant) {
       return openModal(variant);
     }
-  }), isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.preorder_status_enabled) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === undefined && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }), (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.preorder_status_enabled) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
     momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 ? void 0 : (_configState$configs11 = _configState$configs10.max_days_preorder) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 ? void 0 : (_configState$configs13 = _configState$configs12.max_days_preorder) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === 0 ? null : function (variant) {
