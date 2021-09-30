@@ -70,6 +70,7 @@ export const Header = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
 
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
@@ -176,11 +177,13 @@ export const Header = (props) => {
                 )}
                 {onlineStatus && windowSize.width > 820 && (
                   <>
+                   {(isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                     <MomentPopover
                       open={openPopover.moment}
                       onClick={() => handleTogglePopover('moment')}
                       onClose={() => handleClosePopover('moment')}
                     />
+                    )}
                     <AddressesPopover
                       auth={auth}
                       addressState={orderState?.options?.address}
@@ -255,11 +258,13 @@ export const Header = (props) => {
                 onClick={() => handleTogglePopover('addresses')}
                 onClose={() => handleClosePopover('addresses')}
               />
-              <MomentPopover
-                open={openPopover.moment}
-                onClick={() => handleTogglePopover('moment')}
-                onClose={() => handleClosePopover('moment')}
-              />
+              {(isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+                <MomentPopover
+                  open={openPopover.moment}
+                  onClick={() => handleTogglePopover('moment')}
+                  onClose={() => handleClosePopover('moment')}
+                />
+              )}
             </SubMenu>
           ) : (
             <SubMenu>
@@ -267,14 +272,16 @@ export const Header = (props) => {
                 variant='address'
                 addressState={orderState?.options?.address?.address?.split(',')?.[0]}
                 onClick={(variant) => openModal(variant)}
-              />
-              <HeaderOption
-                variant='moment'
-                momentState={orderState?.options?.moment}
-                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                  ? null
-                  : (variant) => openModal(variant)}
-              />
+              />              
+              {(isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+                <HeaderOption
+                  variant='moment'
+                  momentState={orderState?.options?.moment}
+                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                    ? null
+                    : (variant) => openModal(variant)}
+                />
+              )}
             </SubMenu>
           )
         )}
