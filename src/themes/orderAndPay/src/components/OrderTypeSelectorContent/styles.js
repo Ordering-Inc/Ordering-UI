@@ -8,7 +8,7 @@ export const OrderTypeSelectorContainer = styled.div`
   width: 100%;
   text-align: left;
   padding-top: 10px;
-  padding: 10px;
+  padding: 20px 40px;
   box-sizing: border-box;
 `
 
@@ -44,6 +44,7 @@ export const OrderTypeListItemContainer = (props) => {
 }
 
 export const OrderTypeWrapper = styled.div`
+  border-radius: 7.6px;
   background: rgba(0,0,0,0.5);
 `
 
@@ -53,7 +54,7 @@ export const OrderTypeTitle = styled.h2`
   color: #FFFFFF;
   margin-top: 0;
   margin-bottom: 5px;
-  padding: 0px 15%;
+  padding: 0px 40px;
   padding-top: 20px;
 `
 
@@ -62,7 +63,9 @@ export const OrderTypeDescription = styled.p`
   color: #FFFFFF;
   margin-top: 0;
   margin-bottom: 20px;
-  padding: 0px 15%;
+  padding: 0px 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const OrderStartWrapper = styled.div`
@@ -71,7 +74,8 @@ export const OrderStartWrapper = styled.div`
   user-select: none;
   cursor: pointer;
   padding-bottom: 20px;
-  padding-left: 15%;
+  padding-left: 40px;
+  padding-right: 40px;
 
   span {
     color: #FFFFFF;
@@ -93,15 +97,18 @@ export const OrderTypeListTitle = styled.h1`
   font-weight: 600;
   font-size: 24px;
   color: ${props => props.theme.colors.darkTextColor};
+  text-align: left;
 `
 
 export const Logo = styled.div`
-  width: 65px;
-  height: 65px;
+  width: 72px;
+  height: 72px;
   margin-bottom: 20px;
   img {
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+    border-radius: 7.6px;
     width: 100%;
-    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 4px 0px #0000001A;
   }
 `
 
@@ -144,6 +151,6 @@ export const PlaceNumber = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: ${({ auth }) => auth ? 'space-between' : 'center'};
+  justify-content: space-between;
   align-items: center;
 `

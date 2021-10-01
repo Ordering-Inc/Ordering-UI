@@ -127,7 +127,7 @@ export const OrderTypeSelectorContentUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <OrderTypeSelectorContainer>
-        <TitleContainer auth={auth}>
+        <TitleContainer>
           <OrderTypeListTitle>{t('SELECT_YOUR_ORDER_TYPE', 'Select your order type')}</OrderTypeListTitle>
           {auth && (
             <svg onClick={ordersRedirect} width='24' height='24' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -153,7 +153,7 @@ export const OrderTypeSelectorContentUI = (props) => {
                 <OrderTypeTitle>{item.text}</OrderTypeTitle>
                 <OrderTypeDescription>{item.description}</OrderTypeDescription>
                 <OrderStartWrapper>
-                  <span>{t('START_MY_ORDER', 'start my order')}</span>
+                  <span>{t('START_MY_ORDER', 'Start my order')}</span>
                   <BsArrowRight />
                 </OrderStartWrapper>
               </OrderTypeWrapper>
