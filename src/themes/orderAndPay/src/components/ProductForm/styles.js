@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 export const ProductContainer = styled.div`
   max-height: 100vh;
   position: relative;
-  padding: 30px 20px 20px;
+  padding: 30px 20px 40px;
 
   @media (min-width: 768px) {
     height: 100%;
@@ -297,7 +297,7 @@ export const ModalIcon = styled.span`
   z-index: 2;
   display: flex;
   align-items: center;
-  width: 95%;
+  width: 85%;
   ${props => props.theme?.rtl && css`
     left: 5px;
     right: initial;

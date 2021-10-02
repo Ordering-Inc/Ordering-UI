@@ -180,17 +180,10 @@ const BusinessProductsListingUI = (props) => {
       <ProductsContainer>
         <ModalIcon>
           <GoBackContainer>
-            <BsArrowLeft size={20} onClick={() => handleGoBack()} />
+            <BsArrowLeft size={20} onClick={() => handleGoBack()} color={theme.colors.darkTextColor.arrowColor} />
             <img src={business?.logo} />
             <h1>{business?.name}</h1>
           </GoBackContainer>
-          {ordertype && (
-            <OrderTypeWrapperButton onClick={() => handleGoBack()}>
-              <h2>
-                {ordertype}
-              </h2>
-            </OrderTypeWrapperButton>
-          )}
           {auth && (
             <LogoutButtonContainer>
               <LogoutButton />

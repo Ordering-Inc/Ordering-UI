@@ -95,7 +95,7 @@ export const OrderStartWrapper = styled.div`
 export const OrderTypeListTitle = styled.h1`
   text-align: center;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 16px;
   color: ${props => props.theme.colors.darkTextColor};
   text-align: left;
 `
@@ -120,6 +120,20 @@ export const TypeContainer = styled.div`
   height: 85%;
   button: {
     width: 100%;
+    border-radius: 7.6px;
+    height: 44px;
+  }
+  h1{
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    color: ${props => props.theme.colors.darkTextColor};
+    margin-bottom: 25px;
+  }
+  label{
+    font-size: 12px;
+    margin-bottom: 10px;
   }
 `
 
@@ -132,16 +146,40 @@ export const InputWrapper = styled.div`
   display: flex;
   input{
     width: 100%;
+    border-radius: 7.6px;
+    border: 1px solid #DEE2E6;
   }
 `
 
 export const Table = styled.div`
  display: flex;
  flex-direction: column;
+ h2{
+   font-weight: 500;
+   font-size: 16px;
+   display: flex;
+   align-items: center;
+   color: ${props => props.theme.colors.darkTextColor};
+   margin-bottom: 20px;
+ }
 `
 
 export const PlaceName = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   opacity: ${({ isDisabled }) => isDisabled ? 0.5 : 1};
+  font-weight: 400;
+  border-bottom: 1px solid #E9ECEF;
+  margin-bottom: 10px;
+  p{
+    font-size: 14px;
+    color: ${props => props.theme.colors.darkTextColor};
+  }
+  span{
+    font-size: 12px;
+    color: #909BA9;
+  }
 `
 
 export const PlaceNumber = styled.div`
@@ -153,4 +191,5 @@ export const TitleContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 `

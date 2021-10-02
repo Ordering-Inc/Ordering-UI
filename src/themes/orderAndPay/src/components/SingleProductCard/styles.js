@@ -13,7 +13,7 @@ export const CardContainer = styled.div`
   position: relative;
   border: 1px solid #E9ECEF;
 
-  background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
+  background: ${({ soldOut, theme }) => soldOut ? '#B8B8B8' : theme.colors.backgroundPage};
 
   ${props => (
     props.theme.colors.backgroundPage === '#FFF' ||
@@ -62,34 +62,31 @@ export const CardInfo = styled.div`
   }
 
   h1 {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '500'};
     text-align: left;
-    color: #263238;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
+  span {
+    color: ${props => props.theme.colors.darkTextColor};
+    font-size: 12px;
+  }
+
   p {
-    font-weight: ${({ soldOut }) => soldOut ? 'bold' : '200'};
-    color: #909BA9;
+    font-weight: ${({ soldOut }) => soldOut ? 'bold' : '400'};
     text-align: left;
     font-size: 10px;
     ${props => props.theme?.rtl && css`
       text-align: right;
-    `}
-
+    `};
+    color: ${({ soldOut, theme }) => soldOut ? theme.colors.darkTextColor : theme.colors.textDisabled};
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-  }
-
-  span {
-    color: ${props => props.theme.colors.darkTextColor};
-    font-weight: bold;
-    font-size: 12px;
   }
 
   @media (min-width: 1024px) {
@@ -108,10 +105,10 @@ export const CardInfo = styled.div`
 `
 
 export const WrapLogo = styled.div`
-  max-width: 75px;
-  max-height: 75px;
-  height: 75px;
-  width: 75px;
+  max-width: 86px;
+  max-height: 86px;
+  height: 86px;
+  width: 86px;
   margin-right: 5px;
   ${props => props.theme?.rtl && css`
     margin-left: 5px;
@@ -126,7 +123,7 @@ const CardLogoStyled = styled.div`
   background-size: cover;
   background-position: center;
   object-fit: cover;
-  min-height: 75px;
+  min-height: 86px;
   border-radius: 10px;
 `
 export const CardLogo = (props) => {

@@ -151,7 +151,7 @@ const ProductOptionsUI = (props) => {
 
       <ProductContainer className='product-container'>
         <ModalIcon>
-          <MdClose onClick={() => onClose()} />
+          <MdClose onClick={() => onClose()} color='#748194' />
           <h1>{productName || product?.name}</h1>
         </ModalIcon>
         {loading && !error && (
@@ -187,24 +187,6 @@ const ProductOptionsUI = (props) => {
               </ProductImage>
             </WrapperImage>
             <ProductInfo>
-              <ProductFormTitle>
-                {product?.price && (
-                  <div className='price-wrapper'>
-                    <span>{productCart.total && parsePrice(productCart.total)}</span>
-                    {product?.offer_price && (
-                      <span className='price-discount'>{parsePrice(product?.offer_price)}</span>
-                    )}
-                  </div>
-                )}
-                {product?.description && <p>{product?.description}</p>}
-                {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
-                  <SkuContent>
-                    <h2>{t('SKU', theme?.defaultLanguages?.SKU || 'Sku')}</h2>
-                    <p>{product?.sku}</p>
-                  </SkuContent>
-                )}
-              </ProductFormTitle>
-              <Divider />
               <ProductEdition>
                 <ProductTabContainer>
                   <Tabs variant='primary'>
