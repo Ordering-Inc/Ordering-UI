@@ -5,12 +5,16 @@ export const ContainerCard = styled.div`
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   border-radius: 7.6px;
-  max-height: 320px;
-  height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '320px'};
+  max-height: 300px;
+  height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '330px'};
   border-radius: 10px;
   margin: 30px 20px;
 
   width: calc(100% - 40px);
+
+  @media (min-width: 481px) {
+    max-height: 330px;
+  }
 
   @media (min-width: 681px) {
     width: calc(50% - 40px);
@@ -188,14 +192,10 @@ export const BusinessLogo = (props) => {
 export const BusinessInfo = styled.div`
   display: flex;
   width: 100%;
-
-  @media (min-width: 1350px){
-    width: calc(100% - 75px);
-  }
 `
 
 export const BusinessInfoItem = styled.div`
-  width: 92%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -220,10 +220,6 @@ export const BusinessInfoItem = styled.div`
     p.bold {
       font-weight: bold;
     }
-  }
-
-  @media (min-width: 1201px) {
-    width: 95%;
   }
 `
 
@@ -254,6 +250,7 @@ export const Medadata = styled.div`
   font-weight: 300;
   font-size: 12px;
   color: #909BA9;
+  flex-wrap: wrap;
   ${({ isCustomerMode }) => isCustomerMode && css`
     > div {
       flex-direction: column;
@@ -262,11 +259,9 @@ export const Medadata = styled.div`
   p {
     color: #909BA9;
     svg {
-      margin-right: 3px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 3px;
-        margin-right: 0;
-    `}
+      font-size: 7px;
+      min-width: 6px;
+      margin: 0 3px;
     }
 
     span {

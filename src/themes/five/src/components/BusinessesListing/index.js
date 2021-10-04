@@ -47,7 +47,8 @@ const BusinessesListingUI = (props) => {
     onRedirectPage,
     handleChangeSearch,
     handleChangeBusinessType,
-    handleBusinessClick
+    handleBusinessClick,
+    onBusinessClick
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -148,6 +149,7 @@ const BusinessesListingUI = (props) => {
           <Divider />
           <HightestRated
             handleClickAddress={handleClickAddress}
+            onBusinessClick={onBusinessClick}
           />
           <Divider />
         </HightestRatedWrapper>

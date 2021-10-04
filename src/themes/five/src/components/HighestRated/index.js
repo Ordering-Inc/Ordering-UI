@@ -26,7 +26,7 @@ const HighestRatedUI = (props) => {
   return (
     <HighestRatedContainer>
       <Title>{t('HIGHEST_RATED', 'Highest rated')}</Title>
-      <Description>{t('HIGHEST_RATED_DESC', 'Top ratings and great service')}</Description>
+      <Description>{t('TOP_RATINGS_AND_GREAT_SERVICE', 'Top ratings and great service')}</Description>
       <BusinessList>
         {
           !businessesList.loading && businessesList.businesses.length === 0 && (
