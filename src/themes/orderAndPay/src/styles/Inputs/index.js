@@ -5,7 +5,7 @@ import { Button } from '../Buttons'
 export const Input = styled.input`
   background: #FFF;
   color: #010300;
-  border: 1px solid #DBDCDB;
+  border: 1px solid #DEE2E6;
   border-radius: 7.6px;
   font-size: 16px;
   padding: 7px 15px;
@@ -18,10 +18,10 @@ export const Input = styled.input`
   `}
   &::placeholder,
   &::-webkit-input-placeholder {
-    color: #DBDCDB;
+    color: #B1BCCC;
   }
   &:-ms-input-placeholder {
-    color: #DBDCDB;
+    color: #B1BCCC;
   }
   &::-ms-reveal {
     display: none;
@@ -76,8 +76,8 @@ export const InputGroupLeft = styled.div`
 export const TextArea = styled.textarea`
   background: #FFF;
   color: #010300;
-  border: 1px solid #DBDCDB;
-  border-radius: 16px;
+  border: 1px solid #DEE2E6;
+  border-radius: 7.6px;
   font-size: 16px;
   padding: 7px 15px;
   outline: none;
@@ -90,10 +90,10 @@ export const TextArea = styled.textarea`
   `}
   &::placeholder,
   &::-webkit-input-placeholder {
-    color: #DBDCDB;
+    color: #B1BCCC;
   }
   &:-ms-input-placeholder {
-    color: #DBDCDB;
+    color: #B1BCCC;
   }
 `
 

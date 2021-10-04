@@ -15,9 +15,9 @@ import {
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
-import { ProductIngredient } from '../../../../../components/ProductIngredient'
-import { ProductOption } from '../../../../../components/ProductOption'
-import { ProductOptionSubOption } from '../../../../../components/ProductOptionSubOption'
+import { ProductIngredient } from '../ProductIngredient'
+import { ProductOption } from '../ProductOption'
+import { ProductOptionSubOption } from '../ProductOptionSubOption'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
@@ -38,11 +38,8 @@ import {
   ProductComment,
   SkeletonBlock,
   WrapperSubOption,
-  SkuContent,
-  ProductFormTitle,
   WrapperIngredients,
   ProductTabContainer,
-  Divider,
   ModalIcon
 } from './styles'
 import { useTheme } from 'styled-components'
@@ -318,11 +315,11 @@ const ProductOptionsUI = (props) => {
                     disabled={orderState.loading}
                   >
                     {orderState.loading ? (
-                      <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
+                      <>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</>
                     ) : (
-                      <span>
+                      <>
                         {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD', theme?.defaultLanguages?.ADD || 'Add')}
-                      </span>
+                      </>
                     )}
                   </Button>
                 )}
@@ -367,10 +364,15 @@ const ProductOptionsUI = (props) => {
             open={modalIsOpen}
             onClose={() => closeModal()}
             width='50%'
+            hideCloseDefault
+            padding='30px 40px'
+            customModal
+            isProductForm
           >
             {modalPageToShow === 'login' && (
               <LoginForm
                 handleSuccessLogin={handleSuccessLogin}
+                onClose={() => closeModal()}
                 elementLinkToSignup={
                   <a
                     onClick={
@@ -384,7 +386,7 @@ const ProductOptionsUI = (props) => {
                     onClick={
                       (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
                     } href='#'
-                  >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+                  >{t('FORGOT_YOUR_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Forgot your password?')}
                   </a>
                 }
                 useLoginByCellphone
@@ -401,6 +403,7 @@ const ProductOptionsUI = (props) => {
                   >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
                   </a>
                 }
+                onClose={() => closeModal()}
                 useLoginByCellphone
                 useChekoutFileds
                 handleSuccessSignup={handleSuccessSignup}
@@ -417,6 +420,7 @@ const ProductOptionsUI = (props) => {
                   >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
                   </a>
                 }
+                onClose={() => closeModal()}
                 isPopup
               />
             )}

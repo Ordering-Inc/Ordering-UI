@@ -5,13 +5,16 @@ export const Tabs = styled.div`
   ${({ variant }) => variant === 'primary' && css`
     color: ${props => props.theme.colors.darkTextColor};
   `}
-  fi
 `
 
 export const Tab = styled.div`
   padding: 10px 15px;
   cursor: pointer;
   ${({ active }) => active && css`
+    ${({ onlyTwoOptions }) => onlyTwoOptions && css`
+      padding-left: 0;
+      padding-right: 0;
+    `}
     ${({ borderBottom }) => borderBottom && css`
       border-bottom: 3px solid;
       font-size: 14px;

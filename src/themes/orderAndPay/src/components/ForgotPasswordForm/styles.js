@@ -56,16 +56,17 @@ export const FormInput = styled.form`
 
 export const RedirectLink = styled.div`
   padding: 10px;
+  padding-left: 0px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  align-items: flex-start;
   margin: 0px;
-  font-size: 17px;
+  font-size: 14px;
+  font-weight: 400;
 
   span {
     margin-right: 5px;
-
+    color: black;
     ${props => props.theme?.rtl && css`
       margin-left: 5px;
       margin-right: 0px;
@@ -83,10 +84,12 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: calc(95% - 20px);
-
+    flex-direction: row;
+    justify-content: center;
+    width: calc(100% - 20px);
+    align-items: center;
     @media (min-width: 481px) {
-      width: ${({ isPopup }) => isPopup ? 'calc(95% - 20px)' : 'calc(80% - 20px)'};
+      width: ${({ isPopup }) => isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)'};
     }
   `}
 

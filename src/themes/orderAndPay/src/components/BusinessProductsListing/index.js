@@ -180,7 +180,7 @@ const BusinessProductsListingUI = (props) => {
       <ProductsContainer>
         <ModalIcon>
           <GoBackContainer>
-            <BsArrowLeft size={20} onClick={() => handleGoBack()} color={theme.colors.darkTextColor.arrowColor} />
+            <BsArrowLeft size={20} onClick={() => handleGoBack()} color={theme.colors.arrowColor} />
             <img src={business?.logo} />
             <h1>{business?.name}</h1>
           </GoBackContainer>
