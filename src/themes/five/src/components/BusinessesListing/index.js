@@ -7,7 +7,9 @@ import {
   ErrorMessage,
   WrapperSearch,
   BusinessesTitle,
-  BusinessHeroImg
+  BusinessHeroImg,
+  HightestRatedWrapper,
+  Divider
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -31,6 +33,7 @@ import {
   useConfig,
   BusinessList as BusinessListController
 } from 'ordering-components'
+import { HightestRated } from '../HighestRated'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -141,6 +144,13 @@ const BusinessesListingUI = (props) => {
             <FiMap onClick={toggleMap} />
           )}
         </WrapperSearch>
+        <HightestRatedWrapper>
+          <Divider />
+          <HightestRated
+            handleClickAddress={handleClickAddress}
+          />
+          <Divider />
+        </HightestRatedWrapper>
         {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
           <BusinessTypeFilter
             images={props.images}
