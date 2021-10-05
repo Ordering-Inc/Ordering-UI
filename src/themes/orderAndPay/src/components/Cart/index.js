@@ -124,11 +124,10 @@ const CartUI = (props) => {
     else setOpenUpselling(true)
   }
 
-  console.log(curProduct)
-
   useEffect(() => {
     if (isCustomMode) setIsUpselling(true)
   }, [isCustomMode])
+
   return (
     <Container isCheckout={isCheckout}>
       {!isCheckout && (

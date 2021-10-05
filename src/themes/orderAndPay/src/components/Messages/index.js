@@ -36,7 +36,6 @@ import { Image as ImageWithFallback } from '../../../../../components/Image'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
-import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
@@ -298,31 +297,21 @@ const MessagesUI = (props) => {
                 {message.type === 2 && user?.id === message.author_id && (
                   <MessageCustomer>
                     <BubbleCustomer>
-                      <strong>
-                        <MyName>
-                          {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                        </MyName>
-                      </strong>
                       {message.comment}
-                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                      <TimeofSent white>{getTimeAgo(message.created_at)}</TimeofSent>
                     </BubbleCustomer>
                   </MessageCustomer>
                 )}
                 {message.type === 3 && user.id === message.author_id && (
                   <MessageCustomer>
                     <BubbleCustomer name='image'>
-                      <strong>
-                        <MyName>
-                          {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                        </MyName>
-                      </strong>
                       <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
                       {message.comment && (
                         <>
                           {message.comment}
                         </>
                       )}
-                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                      <TimeofSent white>{getTimeAgo(message.created_at)}</TimeofSent>
                     </BubbleCustomer>
                   </MessageCustomer>
                 )}
@@ -452,13 +441,14 @@ const MessagesUI = (props) => {
         <SendForm>
           <Send onSubmit={handleSubmit(onSubmit)} noValidate>
             <Input
-              placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
+              placeholder={t('TYPE_YOUR_MESSAGE_HERE', 'Type your message here')}
               onChange={onChangeMessage}
               name='message'
               id='message'
               ref={register({
                 required: !image
               })}
+              style={{ borderColor: '#F8F9FA', background: '#F8F9FA', fontSize: '12px', color: theme.colors.darkTextColor }}
               autoComplete='off'
             />
             <SendImage htmlFor='chat_image' hidden={image}>
@@ -494,16 +484,7 @@ const MessagesUI = (props) => {
                 disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
                 ref={buttonRef}
               >
-                <IosSend />
-                {sendMessage.loading ? (
-                  <span>
-                    {t('SENDING_MESSAGE', 'Sending...')}
-                  </span>
-                )
-                  : (
-                    <span>
-                      {t('SEND', 'Send')}
-                    </span>)}
+                <img src={theme.images?.general?.arrowSend} />
               </Button>
             </WrapperSendMessageButton>
           </Send>

@@ -50,7 +50,7 @@ export const OrderTypeWrapper = styled.div`
 
 export const OrderTypeTitle = styled.h2`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 12px;
   color: #FFFFFF;
   margin-top: 0;
   margin-bottom: 5px;
@@ -59,7 +59,7 @@ export const OrderTypeTitle = styled.h2`
 `
 
 export const OrderTypeDescription = styled.p`
-  font-size: 14px;
+  font-size: 10px;
   color: #FFFFFF;
   margin-top: 0;
   margin-bottom: 20px;
@@ -79,6 +79,7 @@ export const OrderStartWrapper = styled.div`
 
   span {
     color: #FFFFFF;
+    font-size: 10px;
     ${props => props.theme?.rtl ? css`
       margin-left: 10px;
     ` : css`
@@ -173,7 +174,7 @@ export const PlaceName = styled.div`
   border-bottom: 1px solid #E9ECEF;
   margin-bottom: 10px;
   p{
-    font-size: 14px;
+    font-size: 10px;
     color: ${props => props.theme.colors.darkTextColor};
   }
   span{

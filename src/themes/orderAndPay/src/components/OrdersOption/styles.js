@@ -2,28 +2,18 @@ import styled, { css } from 'styled-components'
 
 export const OptionTitle = styled.div`
   width: 100%;
-  padding: 10px;
   display: flex;
   flex-direction: row;
   h1{
     text-transform: capitalize;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
-  }
-
-  h1:nth-child(1){
-    color: ${({ isActive }) => isActive === 'preorders' ? '#ccc' : '#333'};
-    margin-right: 10px
-  }
-
-  h1:nth-child(2){
-    color: ${({ isActive }) => isActive === 'preorders' ? '#333' : '#ccc'};
+    font-weight: 500;
   }
 `
 
 export const OrdersContainer = styled.div`
   ${({ activeOrders }) => activeOrders && css`
-    padding: 0 10px;
     text-align: center;
     display: flex;
     overflow-x: auto;
@@ -84,7 +74,6 @@ export const OrdersContainer = styled.div`
     display: flex;
     flex-direction: column-reverse;
     margin: 0 auto;
-    padding: 0 10px;
     p{
       margin-block-end: 0;
       margin-block-start: 0;
@@ -144,13 +133,6 @@ export const SkeletonMap = styled.div`
 export const SkeletonContent = styled.div`
   display: flex;
   width: 100%;
-
-  ${({ activeOrders }) => activeOrders && css`
-    > * {
-      margin: 5px;
-    }
-  `}
-
   ${({ activeOrders }) => !activeOrders && css`
     justify-content: space-between;
   `}
@@ -234,9 +216,8 @@ export const ImageNotFound = styled.div`
 export const BusinessInformation = styled.div`
   display: inline-flex;
   flex-direction: column;
-  width: 80%;
+  width: 70%;
   padding-left: 5px;
-  font-size: 0.9em;
   ${({ activeOrders }) => activeOrders && css`
       width: 30%;
   `}
@@ -257,10 +238,7 @@ export const BusinessInformation = styled.div`
     margin-block-start: 0.1em;
     color : #9A9A9A;
     white-space: nowrap;
-    font-size: 0.65em;
-    ${({ activeOrders }) => activeOrders && css`
-      font-size: 0.6em;
-    `}
+    font-size: 10px;
   }
 
   p[name='order_number']{
@@ -281,36 +259,17 @@ export const BusinessInformation = styled.div`
     color: ${props => props.theme.colors.orderStatus} !important;
   }
 
-  @media (min-width: 380px){
-    h2 {
-      font-size: 14px;
-    }
-    p{
-      font-size: 0.8em;
-    }
-  }
-
   @media (min-width: 480px){
     h2 {
     font-size: 14px;
     }
     p{
       ${({ activeOrders }) => activeOrders && css`
-        font-size: 0.9em;
+        font-size: 12px;
       `}
     }
     p[name='order_number']{
       width: 230px;
-    }
-  }
-
-  @media (min-width: 768px){
-    font-size: 0.9em;
-    p {
-      font-size: 1em;
-    }
-    h2{
-      font-size: 16px;
     }
   }
 `
@@ -321,11 +280,16 @@ export const TitleContainer = styled.div`
   align-items: center;
   box-sizing: border-box;
   width: 100%;
-  padding: 0 10px;
-  margin-top: 10px;
+  margin-bottom: 30px;
   h1{
     text-transform: capitalize;
     font-size: 24px;
     cursor: pointer;
+    margin: 0;
+    font-weight: 600;
   }
+`
+
+export const Container = styled.div`
+  padding: 30px 40px;
 `
