@@ -30,16 +30,17 @@ export const CartSticky = styled.div`
       flex: 1;
       > div:first-child {
         flex: 1;
+        margin-bottom: 20px;
       }
   `}
 
   width: 100%;
 `
 export const ContainerTop = styled.div`
-display: flex;
+  display: flex;
 `
 export const OrderBill = styled.div`
-padding-left: 10px;
+  padding-left: 10px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -73,12 +74,6 @@ padding-left: 10px;
       }
     }
   }
-
-  @media (min-width: 411px) {
-    table {
-      font-size: 18px;
-    }
-  }
 `
 export const BorderProductAccordion = styled.div`
   border-bottom: 1px solid #D9D9D9;
@@ -98,6 +93,7 @@ export const CheckoutAction = styled.div`
   padding: 0 6px;
   box-sizing: border-box;
   margin-left: 3px;
+  margin-bottom: 10px;
   p {
     margin: 0;
     font-weight: 600;
@@ -111,6 +107,18 @@ export const CheckoutAction = styled.div`
       opacity: 0.5;
       cursor: not-allowed
     }
+  }
+
+  @media (min-width: 767px){
+    top: 60px;
+  }
+
+  @media (max-width: 430px){
+    top: 60px;
+  }
+
+  @media (max-width: 376px){
+    top: 100px;
   }
 `
 

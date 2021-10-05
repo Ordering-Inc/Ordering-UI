@@ -85,10 +85,14 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: 54%;
+  width: 60%;
 
   @media (min-width: 411px) {
     width: calc(65% - 60px);
+  }
+
+  @media (min-width: 480px){
+    width: 80%;
   }
 
   ${props => props.theme?.rtl && css`
@@ -193,7 +197,7 @@ export const ProductInfo = styled.div`
 
   h3 {
     font-size: 12px;
-    max-width: 90%;
+    max-width: 60%;
   }
 
   p {
@@ -201,15 +205,16 @@ export const ProductInfo = styled.div`
     margin: 0px 5px;
   }
 
-  @media (min-width: 411px) {
-    width: 80%;
+  @media (min-width: 380px){
     h3{
-      max-width: 100%;
+      max-width: 80%;
     }
   }
 
-  @media (min-width: 481px) {
-    width: 70%;
+  @media (min-width: 411px) {
+    h3{
+      max-width: 100%;
+    }
   }
 `
 
