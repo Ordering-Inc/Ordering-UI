@@ -9,6 +9,8 @@ exports.SidebarMenu = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _IosMenu = _interopRequireDefault(require("@meronex/icons/ios/IosMenu"));
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
@@ -20,10 +22,6 @@ var _AiOutlineUserAdd = _interopRequireDefault(require("@meronex/icons/ai/AiOutl
 var _FaRegAddressCard = _interopRequireDefault(require("@meronex/icons/fa/FaRegAddressCard"));
 
 var _FaRegListAlt = _interopRequireDefault(require("@meronex/icons/fa/FaRegListAlt"));
-
-var _AiOutlineHome = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineHome"));
-
-var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 
 var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
 
@@ -56,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
-  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _options$address2, _props$afterComponent, _props$afterElements;
 
   var auth = props.auth,
       isHideSignup = props.isHideSignup,
@@ -138,12 +136,34 @@ var SidebarMenu = function SidebarMenu(props) {
       return handleGoToPage({
         page: options !== null && options !== void 0 && (_options$address = options.address) !== null && _options$address !== void 0 && _options$address.location ? 'search' : 'home'
       });
+    },
+    style: {
+      padding: '10px 16px',
+      boxSizing: 'border-box'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
-  }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
-  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home')))), /*#__PURE__*/_react.default.createElement(_styles.Navlinks, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: t('ARCHIES_MENU_LINK', 'Archies menu link')
+  }, t('ARCHIES_MENU_TEXT', 'Menu')), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, t('ARCHIES_UBICATION_TEXT ', 'Ubicación')), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/picoli",
+    onClick: function onClick() {
+      return actionSidebar(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: window.location.pathname === '/picoli' ? 'active' : ''
+  }, t('ARCHIES_PICOLI_TEXT ', 'Picoli'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/promotions",
+    onClick: function onClick() {
+      return actionSidebar(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: window.location.pathname === '/promotions' ? 'active' : ''
+  }, t('ARCHIES_PROMOS_TEXT ', 'Promociones'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: t('ARCHIES_CONTACT_LINK', 'Archies menu link')
+  }, t('ARCHIES_CONTACT_TEXT ', 'Contacto'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'profile'

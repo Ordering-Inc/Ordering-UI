@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CartegoryTitle = exports.BusinessProductsCategorieWrapper = exports.WrappLayout = exports.SkeletonItem = exports.ProductLoading = exports.ProductsNotFound = exports.WrapperSearch = exports.WrapContent = exports.ProductsContainer = void 0;
+exports.UnderAgeButtons = exports.UnderAge = exports.AgeConfirmContainer = exports.CartegoryTitle = exports.BusinessProductsCategorieWrapper = exports.WrappLayout = exports.SkeletonItem = exports.ProductLoading = exports.ProductsNotFound = exports.WrapperSearch = exports.WrapContent = exports.ProductsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -77,3 +77,20 @@ var CartegoryTitle = _styledComponents.default.div(_templateObject12 || (_templa
 });
 
 exports.CartegoryTitle = CartegoryTitle;
+
+var AgeConfirmContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  background-color: #fff;\n  ", "\n  background-size: cover;\n  background-repeat: no-repeat;\n  background-position: top center;\n  box-shadow: border-box;\n\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  @media (min-width: 1024px) {\n    height: 40vw;\n  }\n"])), function (_ref2) {
+  var bgimage = _ref2.bgimage;
+  return bgimage && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    background-image: url(", "); \n  "])), function (props) {
+    return props.bgimage;
+  });
+});
+
+exports.AgeConfirmContainer = AgeConfirmContainer;
+
+var UnderAge = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  h2 {\n    text-align: center;\n    color: #000;\n  }\n"])));
+
+exports.UnderAge = UnderAge;
+
+var UnderAgeButtons = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  button {\n    width: 100px;\n    margin: 0 7px;\n    font-size: 16px;\n    font-weight: bold;\n  }\n"])));
+
+exports.UnderAgeButtons = UnderAgeButtons;

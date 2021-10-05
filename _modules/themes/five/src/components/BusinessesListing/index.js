@@ -39,6 +39,8 @@ var _BusinessesMap = require("../../../../../components/BusinessesMap");
 
 var _orderingComponents = require("ordering-components");
 
+var _HighestRated = require("../HighestRated");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -86,7 +88,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       onRedirectPage = props.onRedirectPage,
       handleChangeSearch = props.handleChangeSearch,
       handleChangeBusinessType = props.handleChangeBusinessType,
-      handleBusinessClick = props.handleBusinessClick;
+      handleBusinessClick = props.handleBusinessClick,
+      onBusinessClick = props.onBusinessClick;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -232,7 +235,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onSearch: handleChangeSearch
   }), isCustomLayout && /*#__PURE__*/_react.default.createElement(_FiMap.default, {
     onClick: toggleMap
-  })), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
+    handleClickAddress: handleClickAddress,
+    onBusinessClick: onBusinessClick
+  }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     images: props.images,
     businessTypes: props.businessTypes,
     defaultBusinessType: props.defaultBusinessType,
