@@ -93,3 +93,13 @@ export const BusinessHeroImg = (props) => {
     </BusinessHeroImgStyled>
   )
 }
+
+export const HightestRatedWrapper = styled.div`
+  padding: 50px 0 30px 0;
+`
+
+export const Divider = styled.div`
+  background: #F8F9FA;
+  height: 8px;
+  width: 100%;
+`
