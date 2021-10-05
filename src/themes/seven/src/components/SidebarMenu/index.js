@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import IosMenu from '@meronex/icons/ios/IosMenu'
 import MdClose from '@meronex/icons/md/MdClose'
 import AiOutlineLogin from '@meronex/icons/ai/AiOutlineLogin'
 import AiOutlineUserAdd from '@meronex/icons/ai/AiOutlineUserAdd'
 import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
 import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
-import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
-import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import { useEvent, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
@@ -21,7 +20,8 @@ import {
   MenuLinkIcon,
   MenuLinkText,
   TextInfo,
-  MenuLinkSeparator
+  MenuLinkSeparator,
+  Navlinks
 } from './styles'
 
 export const SidebarMenu = (props) => {
@@ -31,11 +31,13 @@ export const SidebarMenu = (props) => {
   const [{ options }] = useOrder()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
     actionSidebar(false)
     setIsMenuOpen(false)
   }
+
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
     document.getElementById('sidebar_menu').style.width = value
@@ -101,46 +103,44 @@ export const SidebarMenu = (props) => {
               </WrappContent>
             </MenuLink>
           )}
-
           <MenuLink
             onClick={() => handleGoToPage({ page: options?.address?.location ? 'search' : 'home' })}
+            style={{ padding: '10px 16px', boxSizing: 'border-box' }}
           >
-            <WrappContent>
-              <MenuLinkIcon
+            <MenuLinkText>
+              <TextInfo
                 active={
                   window.location.pathname === '/' ||
-                  window.location.pathname === '/home' ||
-                  window.location.pathname === '/search'
+                    window.location.pathname === '/home' ||
+                    window.location.pathname === '/search'
                 }
               >
                 {options?.address?.location ? (
-                  <BiStore />
+                  t('BUSINESSES', 'Businesses')
                 ) : (
-                  <AiOutlineHome />
+                  t('HOME', 'Home')
                 )}
-              </MenuLinkIcon>
-              <MenuLinkText>
-                <TextInfo
-                  active={
-                    window.location.pathname === '/' ||
-                    window.location.pathname === '/home' ||
-                    window.location.pathname === '/search'
-                  }
-                >
-                  {options?.address?.location ? (
-                    t('BUSINESSES', 'Businesses')
-                  ) : (
-                    t('HOME', 'Home')
-                  )}
-                </TextInfo>
-              </MenuLinkText>
-              <MenuLinkSeparator>
-                <div>
-                  <hr />
-                </div>
-              </MenuLinkSeparator>
-            </WrappContent>
+              </TextInfo>
+            </MenuLinkText>
           </MenuLink>
+
+          <Navlinks>
+            <Link to={t('ARCHIES_MENU_LINK', 'Archies menu link')}>{t('ARCHIES_MENU_TEXT', 'Menu')}</Link>
+            <Link to='/'>{t('ARCHIES_UBICATION_TEXT ', 'Ubicación')}</Link>
+            <Link
+              to='/picoli'
+              onClick={() => actionSidebar(false)}
+            >
+              <span className={window.location.pathname === '/picoli' ? 'active' : ''}>{t('ARCHIES_PICOLI_TEXT ', 'Picoli')}</span>
+            </Link>
+            <Link
+              to='/promotions'
+              onClick={() => actionSidebar(false)}
+            >
+              <span className={window.location.pathname === '/promotions' ? 'active' : ''}>{t('ARCHIES_PROMOS_TEXT ', 'Promociones')}</span>
+            </Link>
+            <Link to={t('ARCHIES_CONTACT_LINK', 'Archies menu link')}>{t('ARCHIES_CONTACT_TEXT ', 'Contacto')}</Link>
+          </Navlinks>
 
           {auth && (
             <>

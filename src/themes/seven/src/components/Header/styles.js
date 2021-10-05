@@ -19,7 +19,7 @@ export const Header = styled.div`
   }
 
   @media (min-width: 1200px) {
-    height: 90px;
+    height: 75px;
   }
 
 `
@@ -37,15 +37,7 @@ export const LogoHeader = styled.div`
     width: 35px;
     margin: 0;
     vertical-align: middle;
-    @media (min-width: 768px) {
-      width: 120px;
-      height: 45px;
-      margin-top: 10px;
-    }
-    @media (min-width: 1024px) {
-      width: 150px;
-      height: auto;
-    }
+
     @media (min-width: 1200px) {
       width: 180px;
       height: auto;
@@ -56,7 +48,7 @@ export const LogoHeader = styled.div`
     display: none;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1200px) {
     img:nth-child(1) {
       display: block;
     }
@@ -79,8 +71,6 @@ export const RightHeader = styled.div`
 export const Menu = styled.div`
   display: flex;
   align-items: center;
-
-  
 
   .moment-popover,
   .address-popover {
@@ -176,77 +166,109 @@ export const UserEdit = styled.div`
      margin-bottom: 20px;  
   }
 `
-export const CenterHeader = styled.div`
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  justify-content: flex-end;
-  padding: 0 15px;
-
+export const OrderTypes = styled.div`
+  width: 40%;
   #select-input {
     height: 40px;
+    padding: 6px 16px;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: .86rem;
-    border: none;
-    @media (min-width: 768px) {
-      border: 1px solid ${props => props.theme.colors.primary};;
+    border: 1px solid #DDDDDD;
+    background-color: #FAFAFA;
+    border-left: none;
+    font-weight: normal;
+    text-transform: capitalize;
+    ${props => props.theme?.rtl && css`
+      border-left: 1px solid #DDDDDD;
+      border-right: : none;
+    `}
+
+    @media (min-width: 1024px) {
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      >div {
+        font-size: 14px;
+      }
     }
-  }
-  @media (min-width: 1024px) {
-    width: 50%;
-    justify-content: space-around;
-  }
-  @media (min-width: 1200px) {
-    justify-content: space-between;
-    max-width: 50%;
-    #select-input {
+
+    @media (min-width: 1200px) {
+      font-size: 1rem;
       height: 48px;
-      width: auto;
+      >div {
+        font-size: 1rem;
+      }
     }
   }
-`
-export const HeaderOptions = styled.div`
-  display: flex;
-  margin-right: 15px;
-  @media (min-width: 1024px) {
-    width: 70%;
-  }
-  @media (min-width: 1200px) {
-    width: 78%;
-  }
-`
-export const OrderTypes = styled.div`
+
   #list {
     width: 100%;
     top: 33px;
       @media (min-width: 1200px) {
       top: 40px;
     }
-  }  
+  } 
+
+  @media (min-width: 1200px) {
+    width: unset;
+  }
 `
 
-export const PopoverWrapper = styled.div`
+export const OptionsHeader = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 96%;
   align-items: center;
-  margin: 10px auto 0;
-  padding: 5px 0;
-  box-sizing: border-box;
-  border-top: 1px solid ${props => props.theme.colors.borderColor};
-  
-  .address-popover {
-    svg {
+  margin-left: 10px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0;
+ `}
+`
+export const Navlinks = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+  a {
+    text-decoration: none;
+    margin: 0 5px;
+    color: #444444;
+    font-size: 1em;
+    &:hover {
       color: ${props => props.theme.colors.primary};
     }
-  }
-  .moment-popover {
-    svg {
+
+    span.active {
       color: ${props => props.theme.colors.primary};
+    }
+
+    @media (min-width: 1200px) {
+      margin: 0 7px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    @media (min-width: 1440px) {
+      margin: 0 10px;
     }
   }
 
+
+`
+
+export const IconLinks = styled.div`
+  display: flex;
+  span {
+    cursor: pointer;
+  }
+  svg {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    fill: #444444;
+  }
+`
+
+export const IconLink = styled.div`
+  display: flex;
+  width: 30px;
+  height: 30px;
 `
