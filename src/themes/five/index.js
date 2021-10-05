@@ -28,7 +28,7 @@ import { HeaderOption } from './src/components/HeaderOption'
 import { Help } from './src/components/Help'
 import { HelpStaticPage } from './src/components/HelpStaticPage'
 import { HomeHero } from './src/components/HomeHero'
-import { HightestRated } from './src/components/HighestRated'
+import { HighestRated } from './src/components/HighestRated'
 import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { LastOrders } from './src/components/LastOrders'
@@ -94,7 +94,7 @@ export {
   HelpStaticPage,
   HomeHero,
   HorizontalOrdersLayout,
-  HightestRated,
+  HighestRated,
   InputPhoneNumber,
   LastOrders,
   LoginForm,

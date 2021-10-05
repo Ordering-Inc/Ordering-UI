@@ -33,7 +33,7 @@ import {
   useConfig,
   BusinessList as BusinessListController
 } from 'ordering-components'
-import { HightestRated } from '../HighestRated'
+import { HighestRated } from '../HighestRated'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -147,7 +147,7 @@ const BusinessesListingUI = (props) => {
         </WrapperSearch>
         <HightestRatedWrapper>
           <Divider />
-          <HightestRated
+          <HighestRated
             handleClickAddress={handleClickAddress}
             onBusinessClick={onBusinessClick}
           />
