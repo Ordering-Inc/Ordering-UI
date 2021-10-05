@@ -17,7 +17,10 @@ import {
   SkeletonItem,
   WrappLayout,
   BusinessProductsCategorieWrapper,
-  CartegoryTitle
+  CartegoryTitle,
+  AgeConfirmContainer,
+  UnderAge,
+  UnderAgeButtons
 } from './styles'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { BusinessProductsList } from '../BusinessProductsList'
@@ -26,7 +29,10 @@ import { Modal } from '../../../../../components/Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
+import { CustomModal } from '../CustomModal'
 import { ProductForm } from '../ProductForm'
+import { Alert } from '../../../../../components/Confirm'
+import { Button } from '../../styles/Buttons'
 
 const PIXELS_TO_SCROLL = 300
 const BusinessProductsListingUI = (props) => {
@@ -59,20 +65,39 @@ const BusinessProductsListingUI = (props) => {
   const [, t] = useLanguage()
   const [{ carts }, { addProduct }] = useOrder()
   const [events] = useEvent()
-  const [{ auth }] = useSession()
+  const [{ auth, user }] = useSession()
   const location = useLocation()
   const [openProduct, setModalIsOpen] = useState(false)
+  const [openAgeConfirm, setOpenAgeConfirm] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
+  const [isOver18Age, setIsOver18Age] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [ageError, setAgeError] = useState(false)
 
+  const ageValidationCategorys = ['Vinos'.toUpperCase(), 'Cervezas'.toUpperCase()]
   const handler = () => {
     setOpenBusinessInformation(true)
   }
 
   const onProductClick = (product) => {
+    if (ageError && ageValidationCategorys.indexOf((business?.categories.filter(category => category.id === product?.category_id))[0].name) > -1) {
+      setAlertState({
+        ...alertState,
+        open: true,
+        content: [t('UNDERAGE_MESSAGE', 'We cannot add this product because you are a minor.')]
+      })
+      return
+    }
+
+    if (!isOver18Age && ageValidationCategorys.indexOf((business?.categories.filter(category => category.id === product?.category_id))[0].name) > -1) {
+      setOpenAgeConfirm(true)
+      return
+    }
+
     if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
       addProduct(product, currentCart)
     } else {
@@ -86,6 +111,9 @@ const BusinessProductsListingUI = (props) => {
       events.emit('product_clicked', product)
     }
   }
+
+  // Vinos
+  // Cervezas
 
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
@@ -126,6 +154,10 @@ const BusinessProductsListingUI = (props) => {
     setCanOpenUpselling(false)
   }
 
+  const handleCloseAlerts = () => {
+    setAlertState({ open: false, content: [] })
+  }
+
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
       if (productModal?.product?.id) {
@@ -154,6 +186,23 @@ const BusinessProductsListingUI = (props) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
+
+  useEffect(() => {
+    if (user?.birthdate) {
+      const date = new Date()
+      const formattedDate = date.toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      }).replace(/ /g, '-')
+      const thisYear = parseInt(formattedDate.slice(-4))
+      const birthDateYear = parseInt((user?.birthdate).slice(0, 4))
+      const result = thisYear - birthDateYear
+      if (result <= 18) {
+        setAgeError(true)
+      } else {
+        setIsOver18Age(true)
+      }
+    }
+  }, [user])
 
   return (
     <>
@@ -311,6 +360,32 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </Modal>
+
+      <CustomModal
+        width='40%'
+        padding='0'
+        open={openAgeConfirm}
+        onClose={() => setOpenAgeConfirm(false)}
+      >
+        <AgeCheckForm
+          setIsOver18Age={setIsOver18Age}
+          setOpenAgeConfirm={setOpenAgeConfirm}
+          setAgeError={setAgeError}
+        />
+      </CustomModal>
+
+      {ageError && (
+        <Alert
+          title='Alsea Colombia'
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => handleCloseAlerts()}
+          onAccept={() => handleCloseAlerts()}
+          closeOnBackdrop={false}
+        />
+      )}
+
       {currentCart?.products && openUpselling && (
         <UpsellingPage
           businessId={currentCart?.business_id}
@@ -345,4 +420,62 @@ export const BusinessProductsListing = (props) => {
   return (
     <BusinessAndProductList {...businessProductslistingProps} />
   )
+}
+
+export const AgeCheckForm = (props) => {
+  const theme = useTheme()
+  const windowSize = useWindowSize()
+  const [, t] = useLanguage()
+  const { setIsOver18Age, setOpenAgeConfirm, setAgeError } = props
+  return (
+    <AgeConfirmContainer
+      bgimage={windowSize.width < 768 ? (theme.images?.alsea?.confirmBackMobile) : (theme.images?.alsea?.confirmBackDesktop)}
+    >
+      <UnderAge>
+        <h2>{t('AGE_CONFIRM_TITLE', 'You are of age?')}</h2>
+        <UnderAgeButtons>
+          <Button
+            color='primary'
+            onClick={() => {
+              setIsOver18Age(true)
+              setOpenAgeConfirm(false)
+            }}
+          > {t('YES', 'Yes')}
+          </Button>
+          <Button
+            color='primary'
+            outline
+            onClick={() => {
+              setAgeError(true)
+              setOpenAgeConfirm(false)
+            }}
+          > {t('NO', 'No')}
+          </Button>
+        </UnderAgeButtons>
+      </UnderAge>
+    </AgeConfirmContainer>
+  )
+}
+
+export const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined
+  })
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    }
+
+    window.addEventListener('resize', handleResize)
+    handleResize()
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return windowSize
 }

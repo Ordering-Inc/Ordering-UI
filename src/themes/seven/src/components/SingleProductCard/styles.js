@@ -17,22 +17,6 @@ export const CardContainer = styled.div`
   @media (min-width: 681px) {
     display: flex;
   }
-
-  
-
-  /* ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
-    @media (min-width: 993px) {
-      width: calc(50% - 40px);
-    }
-  ` : css`
-    @media (min-width: 681px) {
-      width: calc(50% - 40px);
-    }
-
-    @media (min-width: 993px) {
-      width: calc(33% - 40px);
-    }
-  `} */
 `
 
 export const SoldOut = styled.span`
@@ -136,7 +120,7 @@ const CardLogoStyled = styled.div`
   min-height: 75px;
   width: 130px;
   height: 130px;
-  
+  background-color: #dddddd;
   @media (min-width: 1024px) {
     width: 150px;
     height: 150px;
@@ -162,9 +146,6 @@ export const CardLogo = (props) => {
     </CardLogoStyled>
   )
 }
-
-
-
 
 export const ProductInfo = styled.div`
   display:flex;
