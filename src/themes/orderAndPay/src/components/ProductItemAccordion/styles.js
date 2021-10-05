@@ -6,14 +6,12 @@ export const AccordionSection = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 10px 0px;
-  background: #FFF;
-  border-bottom: 1px solid #D9D9D9;
   background: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
 `
 
 const AccordionStyled = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   cursor: initial;
@@ -31,10 +29,6 @@ const AccordionStyled = styled.div`
       margin-right: auto;
       margin-left: initial;
     `}
-  }
-
-  @media (min-width: 411px){
-    flex-direction: row;
   }
 
 `
@@ -55,24 +49,10 @@ export const Accordion = (props) => {
 }
 
 export const WrapperProductImage = styled.div`
-  max-width: 55px;
-  max-height: 55px;
-  height: 55px;
-  width: 55px;
-
-  @media (min-width: 361px) {
-    max-width: 65px;
-    max-height: 65px;
-    height: 65px;
-    width: 65px;
-  }
-
-  @media (min-width: 411px) {
-    max-width: 75px;
-    max-height: 75px;
-    height: 75px;
-    width: 75px;
-  }
+  max-width: 48px;
+  max-height: 48px;
+  height: 48px;
+  width: 48px;
 `
 
 const ProductImageStyled = styled.div`
@@ -105,7 +85,7 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: 55%;
+  width: 54%;
 
   @media (min-width: 411px) {
     width: calc(65% - 60px);
@@ -117,7 +97,7 @@ export const ContentInfo = styled.div`
   `}
 
   h3 {
-    font-size: 14px;
+    font-size: 12px;
     margin: 0px;
     font-weight: 600;
   }
@@ -201,14 +181,19 @@ export const ProductComment = styled.div`
 
 export const ProductInfo = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-
+  overflow: hidden;
   h1,
   h3 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  h3 {
+    font-size: 12px;
+    max-width: 90%;
   }
 
   p {
@@ -218,6 +203,9 @@ export const ProductInfo = styled.div`
 
   @media (min-width: 411px) {
     width: 80%;
+    h3{
+      max-width: 100%;
+    }
   }
 
   @media (min-width: 481px) {
@@ -232,7 +220,7 @@ export const ProductError = styled.div`
   justify-content: center;
 
   span {
-    font-size: 18px;
+    font-size: 12px;
     text-align: center;
   }
 
@@ -263,7 +251,6 @@ export const ProductActionsEdit = styled.span`
 `
 
 export const ProductActionsDelete = styled(ProductActionsEdit)`
-  display: none;
   svg {
     margin-right: 0px;
   }
@@ -287,7 +274,7 @@ export const ProductPrice = styled.div`
 
   p,
   span {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   span {
@@ -314,22 +301,22 @@ export const ProductPrice = styled.div`
 export const ProductSelect = styled.select`
   background: ${isCheckout => isCheckout ? '#FFFFFF' : '#F8F9FA'};
   border-radius: 7.6px;
-  max-width: 45px;
-  height: 25px;
+  max-width: 42px;
+  height: 22px;
   border: none;
   font-size: 12px;
   outline: none;
-  margin: 0 5px;
-  padding: 0 3px;
+  margin: 0px 0px 0px 5px;
+  padding: 2px 10px 2px 2px;
   cursor: pointer;
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-progress-appearance: none;
-
   background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');
-  background-repeat: no-repeat, repeat;
-  background-position: right .7em top 50%, 0 0;
-  background-size: .65em auto, 100%;
+  background-repeat: no-repeat,repeat;
+  background-position: right 0.3em top 50%;
+  background-size: 0.65em auto,100%;
+  text-align: center;
 `
 
 export const ProductNotAvailable = styled.span`

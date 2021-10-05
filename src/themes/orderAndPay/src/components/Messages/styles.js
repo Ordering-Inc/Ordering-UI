@@ -4,36 +4,10 @@ export const MessagesContainer = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-`
-
-export const HeaderProfile = styled.div`
-  display: flex;
-  padding: 15px 20px;
-  border-bottom: 1px solid #EEEEEE;
-  margin-left: 45px;
-  div {
-     p {
-       margin-left: 10px;
-       ${props => props.theme?.rtl && css`
-         margin-right: 10px;
-         margin-left: 0px;
-      `}
-      }
-     strong {
-      p{
-        margin-block-end: 0.1em;
-      }
-    }
-    p {
-      margin-block-start: 0.1em;
-      font-size: 0.7em
-    }
-  }
+  box-sizing: border-box;
+  padding: 0px 40px;
 `
 export const HeaderName = styled.p`
-  font-size: 1.1em;
-  margin-block-end: 0.1em;
-  margin-block-start: 0.1em;
 
 `
 
@@ -41,39 +15,6 @@ export const Status = styled.p`
   margin-block-start: 0.1em;
   margin-block-end: 0.1em;
   font-size: 0.7em;
-`
-
-export const Image = styled.div`
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid ${props => props.theme?.colors?.primary};
-  border-radius: 50%;
-  padding: 5px;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #F5F5F5;
-  }
-
-  img[name]{
-    border: 1px solid #D81212;
-    border-radius: 50%;
-  }
-
-  svg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 6px;
-  }
 `
 
 export const HeaderOnline = styled.div`
@@ -85,10 +26,10 @@ export const HeaderOnline = styled.div`
   align-items: flex-start;
   justify-content: center;
   text-align: left;
-  margin-left: 10px;
-
+  margin-left: 15px;
+  
   ${props => props.theme?.rtl && css`
-    margin-right: 10px;
+    margin-right: 15px;
     margin-left: 0px;
     text-align: right;
   `}
@@ -98,13 +39,14 @@ export const HeaderOnline = styled.div`
   }
 
   h1 {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
   }
 
   span {
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 12px;
+    font-weight: 400;
+    color: #909BA9;
   }
 `
 
@@ -308,14 +250,8 @@ export const SendForm = styled.div`
   padding: 0px 5px;
   position: fixed;
   bottom: 0;
-  background: #FAFAFA;
   border-top: 1px solid #EEEEEE;
-  width: 97%;
   height: 70px;
-  @media (min-width: 480px){
-    padding: 0px 20px;
-    width: 95%;
-  }
 
   @media (min-width: 768px) {
     padding: 10px 20px;
@@ -333,18 +269,19 @@ export const Send = styled.form`
   input {
     padding-top: 10px;
     padding-bottom: 10px;
-    width: 60%;
-    flex: 1;
+    width: 70%;
   }
 `
 
 export const SendImage = styled.label`
-  width: 25px;
-  height: 25px;
+  width: 16px;
+  height: 16px;
   margin: 0px 20px;
   position: ${props => props.hidden && 'fixed'};
   opacity: ${props => props.hidden && '0'};
-
+  position: absolute;
+  right: 0;
+  transform: translateX(-35px);
   input {
     display: none;
   }
@@ -391,11 +328,12 @@ export const WrapperSendMessageButton = styled.div`
   white-space: nowrap;
 
   button{
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding: 0;
+    width: 44px;
+    height: 44px;
     svg {
        width: 1.5em;
-       height: 1.5em; 
+       height: 1.5em;
        vertical-align: middle;
        color: white;
        ${props => props.theme?.rtl && css`
@@ -467,5 +405,24 @@ export const ModalIcon = styled.span`
     left: 5px;
     right: initial;
   `}
+  }
+`
+
+export const ModalIconHeader = styled.div`
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  align-items: center;
+  box-shadow: 0px 1px 4px 0px #0000001A;
+  padding: 15px 40px 0 40px;
+  img {
+    margin-left: 15px;
+    box-shadow: 0px 1px 4px 0px #0000001A;
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+    width: 32px;
+    height: 32px;
+    border-radius: 7.6px;
+    object-fit: cover;
   }
 `

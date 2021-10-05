@@ -115,7 +115,7 @@ export const InputGroupRight = styled(InputGroupLeft)`
         margin-right: 0
     `}
   }
-  
+
 `
 
 export const InputPrimary = styled(Input)`

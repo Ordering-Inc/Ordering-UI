@@ -147,7 +147,7 @@ export const ProductItemAccordion = (props) => {
                   )
                 }
               </div>
-              {windowSize.width <= 410 && (
+              {/* {windowSize.width <= 410 && (
                 <span>
                   <p>{parsePrice(product.total || product.price)}</p>
                   {isCartProduct && !isCartPending && (
@@ -165,11 +165,11 @@ export const ProductItemAccordion = (props) => {
                     </div>
                   )}
                 </span>
-              )}
+              )} */}
             </ContentInfo>
           </ProductInfo>
 
-          {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
+          {(product?.valid || !isCartProduct) && (
             <ProductPriceSection>
               <ProductPrice className='prod-price'>
                 <span>

@@ -150,7 +150,6 @@ export const ProductActions = styled.div`
     font-size: 16px;
     color: ${props => props.theme?.colors.darkTextColor};
     white-space: nowrap;
-    width: 30%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -186,7 +185,7 @@ export const ProductActions = styled.div`
   }
 
   button.add {
-    width: 40%;
+    width: 45%;
     margin-top: 0;
     padding: 5px 10px;
     position: relative;

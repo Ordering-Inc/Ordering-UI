@@ -16,17 +16,12 @@ export const FormCash = styled.div`
         margin-right: 0;
     `}
   }
-
-  @media (min-width: 381px) {
-    label {
-      font-size: 18px;
-    }
-  }
 `
 
 export const WrapperInput = styled.div`
   label {
-    font-size: 16px;
+    font-size: 12px;
+    font-weight: 400;
   }
   
   input {

@@ -11,11 +11,13 @@ export const FormInput = styled.form`
     width: 100%;
   }
   input.form {
-    padding: 5px 0px;
     font-size: 14px;
     width: 100%;
+    height: 44px;
     margin-bottom: 20px;
     box-sizing: border-box;
+    border-radius: 7.6px;
+    border: 1px solid #DEE2E6;
     &:disabled {
       background-color: rgba(239, 239, 239, 0.3);
       cursor: not-allowed;
@@ -104,7 +106,7 @@ export const InputGroup = styled.div`
 
   p {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 12px;
     color: ${props => props.theme.colors.darkTextColor};
     width: 100%;
     text-align: left;
@@ -123,9 +125,13 @@ export const InputPhoneNumberWrapper = styled(InputGroup)`
   .PhoneInput {
     border-bottom: 1px solid #E9ECEF;
     input {
-      border: none;
-      border-radius: 0px;
-      padding: 5px;
+      border-radius: 7.8px;
+      font-size: 14px;
+      width: 100%;
+      height: 44px;
+      box-sizing: border-box;
+      border-radius: 7.6px;
+      border: 1px solid #DEE2E6;
     }
   }
 `
