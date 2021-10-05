@@ -162,3 +162,42 @@ export const CartegoryTitle = styled.div`
     `}
   }
 `
+export const AgeConfirmContainer = styled.div`
+  background-color: #fff;
+  ${({ bgimage }) => bgimage && css`
+    background-image: url(${props => props.bgimage}); 
+  `}
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  box-shadow: border-box;
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    height: 40vw;
+  }
+`
+export const UnderAge = styled.div`
+  h2 {
+    text-align: center;
+    color: #000;
+  }
+`
+
+export const UnderAgeButtons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    width: 100px;
+    margin: 0 7px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+`

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 import { useSession, useOrder, useLanguage, OrderTypeControl, useConfig } from 'ordering-components'
 import {
@@ -26,7 +27,7 @@ export const HomeHero = (props) => {
   const theme = useTheme()
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
-  // const configTypes = [1, 2, 3]
+  const history = useHistory()
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
@@ -48,6 +49,19 @@ export const HomeHero = (props) => {
   useEffect(() => {
     return () => setModals({ listOpen: false, formOpen: false })
   }, [])
+
+  const [submited, setSubmited] = useState(false)
+
+  const handleSaveAddress = () => {
+    setSubmited(true)
+    setModals({ ...modals, formOpen: false })
+  }
+
+  useEffect(() => {
+    if (orderState?.options?.address?.address && submited) {
+      history.push('/search')
+    }
+  }, [orderState, submited])
 
   return (
     <>
@@ -76,7 +90,8 @@ export const HomeHero = (props) => {
             useValidationFileds
             address={orderState?.options?.address || {}}
             onClose={() => setModals({ ...modals, formOpen: false })}
-            onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+            // onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+            onSaveAddress={() => handleSaveAddress()}
             onCancel={() => setModals({ ...modals, formOpen: false })}
           />
         </Modal>

@@ -173,6 +173,7 @@ export const MenuLinkText = styled.div`
   overflow: hidden;
   flex-basis: 100%;
   grid-area: 2 / 2 / auto / auto;
+
 `
 
 export const TextInfo = styled.span`
@@ -190,8 +191,9 @@ export const TextInfo = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${({ active, theme }) => active ? theme.colors.primary : '#000'}
-
+  color: ${({ active, theme }) => active
+    ? theme.colors.primary
+    : '#000'};
   ${props => props.theme?.rtl && css`
     text-align: right;
     display: inline-block;
@@ -224,6 +226,21 @@ export const MenuLinkSeparator = styled.div`
       border: none;
       height: 1px;
       background: rgb(231, 231, 231);
+    }
+  }
+`
+
+export const Navlinks = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  a {
+    padding: 10px 16px;
+    text-decoration: none;
+    font-weight: 500;
+    color: #000;
+    span.active {
+      color: ${props => props.theme.colors.primary};
     }
   }
 `
