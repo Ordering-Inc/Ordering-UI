@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
-  width: 86px;
+  width: 55px;
   height: 40px;
   background-color: ${props => props.theme.colors.primary};
   display: flex;
@@ -15,15 +15,14 @@ export const HeaderItem = styled.div`
     font-size: 16px;
     line-height: 26px;
     margin: 0;
+    margin-left: 5px;
+    ${props => props.theme?.rtl && css`
+        margin-right: 5px;
+        margin-left: 0px;
+    `}
   }
   svg {
     font-size: 24px;
-    margin-right: 10px;
-    ${props => props.theme?.rtl && css`
-        margin-right: 0px;
-        margin-left: 10px;
-    `}
-
     path {
       fill: #fff;
     }
@@ -31,6 +30,10 @@ export const HeaderItem = styled.div`
 
   @media (min-width: 1200px) {
     height: 48px;
+  }
+
+  @media (min-width: 1400px) {
+    width: 86px;
   }
 `
 
