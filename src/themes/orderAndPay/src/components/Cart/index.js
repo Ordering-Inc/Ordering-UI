@@ -147,8 +147,8 @@ const CartUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <CartContainer className='cart'>
-        <CartSticky isCartOnProductsList={isCartOnProductsList}>
+      <CartContainer className='cart' isCheckout={isCheckout}>
+        <CartSticky isCartOnProductsList={isCartOnProductsList} isCheckout={isCheckout}>
           <div>
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
