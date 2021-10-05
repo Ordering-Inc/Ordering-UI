@@ -17,12 +17,12 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 86px;\n  height: 40px;\n  background-color: ", ";\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  color: #fff;\n  span {\n    font-weight: bold;\n    font-size: 16px;\n    line-height: 26px;\n    margin: 0;\n  }\n  svg {\n    font-size: 24px;\n    margin-right: 10px;\n    ", "\n\n    path {\n      fill: #fff;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    height: 48px;\n  }\n"])), function (props) {
+var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 55px;\n  height: 40px;\n  background-color: ", ";\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  color: #fff;\n  span {\n    font-weight: bold;\n    font-size: 16px;\n    line-height: 26px;\n    margin: 0;\n    margin-left: 5px;\n    ", "\n  }\n  svg {\n    font-size: 24px;\n    path {\n      fill: #fff;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    height: 48px;\n  }\n\n  @media (min-width: 1400px) {\n    width: 86px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n        margin-right: 0px;\n        margin-left: 10px;\n    "])));
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n        margin-right: 5px;\n        margin-left: 0px;\n    "])));
 });
 
 exports.HeaderItem = HeaderItem;

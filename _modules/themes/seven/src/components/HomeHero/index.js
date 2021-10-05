@@ -9,6 +9,8 @@ exports.FoodLocationIcon = exports.TruckIcon = exports.StorePickupIcon = exports
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _styledComponents = require("styled-components");
 
 var _orderingComponents = require("ordering-components");
@@ -46,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options2, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options3, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
 
   var onFindBusiness = props.onFindBusiness;
 
@@ -78,7 +80,8 @@ var HomeHero = function HomeHero(props) {
   var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
   var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
     return Number(value);
-  })) || []; // const configTypes = [1, 2, 3]
+  })) || [];
+  var history = (0, _reactRouterDom.useHistory)();
 
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
@@ -117,6 +120,26 @@ var HomeHero = function HomeHero(props) {
       });
     };
   }, []);
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      submited = _useState4[0],
+      setSubmited = _useState4[1];
+
+  var handleSaveAddress = function handleSaveAddress() {
+    setSubmited(true);
+    setModals(_objectSpread(_objectSpread({}, modals), {}, {
+      formOpen: false
+    }));
+  };
+
+  (0, _react.useEffect)(function () {
+    var _orderState$options2, _orderState$options2$;
+
+    if (orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2$ = _orderState$options2.address) !== null && _orderState$options2$ !== void 0 && _orderState$options2$.address && submited) {
+      history.push('/search');
+    }
+  }, [orderState, submited]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -141,16 +164,15 @@ var HomeHero = function HomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
       }));
-    },
+    } // onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+    ,
     onSaveAddress: function onSaveAddress() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
+      return handleSaveAddress();
     },
     onCancel: function onCancel() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {

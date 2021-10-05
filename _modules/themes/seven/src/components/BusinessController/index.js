@@ -139,7 +139,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary"
-  }, "Go to Store")))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, t('GOTO_STORE', 'Go To Store'))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_CLOSED', 'Business Closed'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

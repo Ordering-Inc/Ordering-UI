@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PopoverWrapper = exports.OrderTypes = exports.HeaderOptions = exports.CenterHeader = exports.UserEdit = exports.CustomerInfo = exports.SubMenu = exports.MenuLink = exports.MenuItem = exports.Menu = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.Header = void 0;
+exports.IconLink = exports.IconLinks = exports.Navlinks = exports.OptionsHeader = exports.OrderTypes = exports.UserEdit = exports.CustomerInfo = exports.SubMenu = exports.MenuLink = exports.MenuItem = exports.Menu = exports.RightHeader = exports.LeftHeader = exports.LogoHeader = exports.InnerHeader = exports.Header = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;  \n  ", " \n  background-color: #fff;\n\n  @media (min-width: 850px) {\n    height: 70px;\n  }\n\n  @media (min-width: 1200px) {\n    height: 90px;\n  }\n\n"])), function (_ref) {
+var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;  \n  ", " \n  background-color: #fff;\n\n  @media (min-width: 850px) {\n    height: 70px;\n  }\n\n  @media (min-width: 1200px) {\n    height: 75px;\n  }\n\n"])), function (_ref) {
   var home = _ref.home;
   return home ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      border-bottom: 0px solid;\n      "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid ", ";\n    "])), function (props) {
     return props.theme.colors.borderColor;
@@ -30,7 +30,7 @@ var InnerHeader = _styledComponents.default.div(_templateObject4 || (_templateOb
 
 exports.InnerHeader = InnerHeader;
 
-var LogoHeader = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  img {\n    width: 35px;\n    margin: 0;\n    vertical-align: middle;\n    @media (min-width: 768px) {\n      width: 120px;\n      height: 45px;\n      margin-top: 10px;\n    }\n    @media (min-width: 1024px) {\n      width: 150px;\n      height: auto;\n    }\n    @media (min-width: 1200px) {\n      width: 180px;\n      height: auto;\n    }\n  }\n\n  img:nth-child(1) {\n    display: none;\n  }\n\n  @media (min-width: 768px) {\n    img:nth-child(1) {\n      display: block;\n    }\n    img:nth-child(2) {\n      display: none;\n    }\n  }\n"])));
+var LogoHeader = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  img {\n    width: 35px;\n    margin: 0;\n    vertical-align: middle;\n\n    @media (min-width: 1200px) {\n      width: 180px;\n      height: auto;\n    }\n  }\n\n  img:nth-child(1) {\n    display: none;\n  }\n\n  @media (min-width: 1200px) {\n    img:nth-child(1) {\n      display: block;\n    }\n    img:nth-child(2) {\n      display: none;\n    }\n  }\n"])));
 
 exports.LogoHeader = LogoHeader;
 
@@ -42,7 +42,7 @@ var RightHeader = _styledComponents.default.div(_templateObject7 || (_templateOb
 
 exports.RightHeader = RightHeader;
 
-var Menu = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  \n\n  .moment-popover,\n  .address-popover {\n    display: none;\n  }\n\n  @media (min-width: 821px) {\n    .moment-popover,\n    .address-popover {\n      display: flex;\n    }\n  }\n"])));
+var Menu = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  .moment-popover,\n  .address-popover {\n    display: none;\n  }\n\n  @media (min-width: 821px) {\n    .moment-popover,\n    .address-popover {\n      display: flex;\n    }\n  }\n"])));
 
 exports.Menu = Menu;
 
@@ -75,26 +75,34 @@ var UserEdit = _styledComponents.default.div(_templateObject14 || (_templateObje
 
 exports.UserEdit = UserEdit;
 
-var CenterHeader = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-grow: 1;\n  justify-content: flex-end;\n  padding: 0 15px;\n\n  #select-input {\n    height: 40px;\n    box-sizing: border-box;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: .86rem;\n    border: none;\n    @media (min-width: 768px) {\n      border: 1px solid ", ";;\n    }\n  }\n  @media (min-width: 1024px) {\n    width: 50%;\n    justify-content: space-around;\n  }\n  @media (min-width: 1200px) {\n    justify-content: space-between;\n    max-width: 50%;\n    #select-input {\n      height: 48px;\n      width: auto;\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
+var OrderTypes = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 40%;\n  #select-input {\n    height: 40px;\n    padding: 6px 16px;\n    box-sizing: border-box;\n    border: 1px solid #DDDDDD;\n    background-color: #FAFAFA;\n    border-left: none;\n    font-weight: normal;\n    text-transform: capitalize;\n    ", "\n\n    @media (min-width: 1024px) {\n      padding: 6px 10px;\n      display: flex;\n      align-items: center;\n      font-size: 14px;\n      >div {\n        font-size: 14px;\n      }\n    }\n\n    @media (min-width: 1200px) {\n      font-size: 1rem;\n      height: 48px;\n      >div {\n        font-size: 1rem;\n      }\n    }\n  }\n\n  #list {\n    width: 100%;\n    top: 33px;\n      @media (min-width: 1200px) {\n      top: 40px;\n    }\n  } \n\n  @media (min-width: 1200px) {\n    width: unset;\n  }\n"])), function (props) {
+  var _props$theme;
+
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      border-left: 1px solid #DDDDDD;\n      border-right: : none;\n    "])));
 });
-
-exports.CenterHeader = CenterHeader;
-
-var HeaderOptions = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-right: 15px;\n  @media (min-width: 1024px) {\n    width: 70%;\n  }\n  @media (min-width: 1200px) {\n    width: 78%;\n  }\n"])));
-
-exports.HeaderOptions = HeaderOptions;
-
-var OrderTypes = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  #list {\n    width: 100%;\n    top: 33px;\n      @media (min-width: 1200px) {\n      top: 40px;\n    }\n  }  \n"])));
 
 exports.OrderTypes = OrderTypes;
 
-var PopoverWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: 96%;\n  align-items: center;\n  margin: 10px auto 0;\n  padding: 5px 0;\n  box-sizing: border-box;\n  border-top: 1px solid ", ";\n  \n  .address-popover {\n    svg {\n      color: ", ";\n    }\n  }\n  .moment-popover {\n    svg {\n      color: ", ";\n    }\n  }\n\n"])), function (props) {
-  return props.theme.colors.borderColor;
-}, function (props) {
+var OptionsHeader = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n  ", "\n"])), function (props) {
+  var _props$theme2;
+
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0;\n "])));
+});
+
+exports.OptionsHeader = OptionsHeader;
+
+var Navlinks = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin: 0 20px;\n  a {\n    text-decoration: none;\n    margin: 0 5px;\n    color: #444444;\n    font-size: 1em;\n    &:hover {\n      color: ", ";\n    }\n\n    span.active {\n      color: ", ";\n    }\n\n    @media (min-width: 1200px) {\n      margin: 0 7px;\n      font-weight: bold;\n      font-size: 1.1em;\n    }\n\n    @media (min-width: 1440px) {\n      margin: 0 10px;\n    }\n  }\n\n\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primary;
 });
 
-exports.PopoverWrapper = PopoverWrapper;
+exports.Navlinks = Navlinks;
+
+var IconLinks = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  span {\n    cursor: pointer;\n  }\n  svg {\n    width: 20px;\n    height: 20px;\n    margin: 0 5px;\n    fill: #444444;\n  }\n"])));
+
+exports.IconLinks = IconLinks;
+
+var IconLink = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 30px;\n  height: 30px;\n"])));
+
+exports.IconLink = IconLink;

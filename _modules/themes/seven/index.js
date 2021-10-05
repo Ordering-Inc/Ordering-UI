@@ -99,6 +99,12 @@ Object.defineProperty(exports, "Checkout", {
     return _Checkout.Checkout;
   }
 });
+Object.defineProperty(exports, "CustomModal", {
+  enumerable: true,
+  get: function get() {
+    return _CustomModal.CustomModal;
+  }
+});
 Object.defineProperty(exports, "DriverTips", {
   enumerable: true,
   get: function get() {
@@ -353,6 +359,8 @@ var _CartContent = require("./src/components/CartContent");
 var _CartPopover = require("./src/components/CartPopover");
 
 var _Checkout = require("./src/components/Checkout");
+
+var _CustomModal = require("./src/components/CustomModal");
 
 var _DriverTips = require("./src/components/DriverTips");
 

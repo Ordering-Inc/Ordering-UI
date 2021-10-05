@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessProductsListing = void 0;
+exports.useWindowSize = exports.AgeCheckForm = exports.BusinessProductsListing = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -33,19 +33,19 @@ var _BusinessBasicInformation = require("../BusinessBasicInformation");
 
 var _BusinessProductsCategories = require("../BusinessProductsCategories");
 
+var _CustomModal = require("../CustomModal");
+
 var _ProductForm = require("../ProductForm");
+
+var _Confirm = require("../../../../../components/Confirm");
+
+var _Buttons = require("../../styles/Buttons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -56,6 +56,12 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -120,7 +126,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
+      _useSession2$ = _useSession2[0],
+      auth = _useSession2$.auth,
+      user = _useSession2$.user;
 
   var location = (0, _reactRouterDom.useLocation)();
 
@@ -129,25 +137,30 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       openProduct = _useState2[0],
       setModalIsOpen = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(props.product),
+  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      curProduct = _useState4[0],
-      setCurProduct = _useState4[1];
+      openAgeConfirm = _useState4[0],
+      setOpenAgeConfirm = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(false),
+  var _useState5 = (0, _react.useState)(props.product),
       _useState6 = _slicedToArray(_useState5, 2),
-      openUpselling = _useState6[0],
-      setOpenUpselling = _useState6[1];
+      curProduct = _useState6[0],
+      setCurProduct = _useState6[1];
 
   var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      canOpenUpselling = _useState8[0],
-      setCanOpenUpselling = _useState8[1];
+      openUpselling = _useState8[0],
+      setOpenUpselling = _useState8[1];
 
   var _useState9 = (0, _react.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      openBusinessInformation = _useState10[0],
-      setOpenBusinessInformation = _useState10[1];
+      canOpenUpselling = _useState10[0],
+      setCanOpenUpselling = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      openBusinessInformation = _useState12[0],
+      setOpenBusinessInformation = _useState12[1];
 
   var currentCart = (_Object$values$find = Object.values(carts).find(function (cart) {
     var _cart$business;
@@ -155,11 +168,48 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === (business === null || business === void 0 ? void 0 : business.slug);
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
 
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isOver18Age = _useState14[0],
+      setIsOver18Age = _useState14[1];
+
+  var _useState15 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState16 = _slicedToArray(_useState15, 2),
+      alertState = _useState16[0],
+      setAlertState = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      ageError = _useState18[0],
+      setAgeError = _useState18[1];
+
+  var ageValidationCategorys = ['Vinos'.toUpperCase(), 'Cervezas'.toUpperCase()];
+
   var handler = function handler() {
     setOpenBusinessInformation(true);
   };
 
   var onProductClick = function onProductClick(product) {
+    if (ageError && ageValidationCategorys.indexOf((business === null || business === void 0 ? void 0 : business.categories.filter(function (category) {
+      return category.id === (product === null || product === void 0 ? void 0 : product.category_id);
+    }))[0].name) > -1) {
+      setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+        open: true,
+        content: [t('UNDERAGE_MESSAGE', 'We cannot add this product because you are a minor.')]
+      }));
+      return;
+    }
+
+    if (!isOver18Age && ageValidationCategorys.indexOf((business === null || business === void 0 ? void 0 : business.categories.filter(function (category) {
+      return category.id === (product === null || product === void 0 ? void 0 : product.category_id);
+    }))[0].name) > -1) {
+      setOpenAgeConfirm(true);
+      return;
+    }
+
     if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
       addProduct(product, currentCart);
     } else {
@@ -172,7 +222,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       setModalIsOpen(true);
       events.emit('product_clicked', product);
     }
-  };
+  }; // Vinos
+  // Cervezas
+
 
   var handlerProductAction = function handlerProductAction(product) {
     if (Object.keys(product).length) {
@@ -215,6 +267,13 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setCanOpenUpselling(false);
   };
 
+  var handleCloseAlerts = function handleCloseAlerts() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+
   (0, _react.useEffect)(function () {
     if (categoryId && productId && isInitialRender) {
       var _productModal$product;
@@ -247,6 +306,25 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
+  (0, _react.useEffect)(function () {
+    if (user !== null && user !== void 0 && user.birthdate) {
+      var date = new Date();
+      var formattedDate = date.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      }).replace(/ /g, '-');
+      var thisYear = parseInt(formattedDate.slice(-4));
+      var birthDateYear = parseInt((user === null || user === void 0 ? void 0 : user.birthdate).slice(0, 4));
+      var result = thisYear - birthDateYear;
+
+      if (result <= 18) {
+        setAgeError(true);
+      } else {
+        setIsOver18Age(true);
+      }
+    }
+  }, [user]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -354,7 +432,30 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     product: productModal.product || curProduct,
     businessId: business === null || business === void 0 ? void 0 : business.id,
     onSave: handlerProductAction
-  })), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && openUpselling && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+  })), /*#__PURE__*/_react.default.createElement(_CustomModal.CustomModal, {
+    width: "40%",
+    padding: "0",
+    open: openAgeConfirm,
+    onClose: function onClose() {
+      return setOpenAgeConfirm(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(AgeCheckForm, {
+    setIsOver18Age: setIsOver18Age,
+    setOpenAgeConfirm: setOpenAgeConfirm,
+    setAgeError: setAgeError
+  })), ageError && /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: "Alsea Colombia",
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return handleCloseAlerts();
+    },
+    onAccept: function onAccept() {
+      return handleCloseAlerts();
+    },
+    closeOnBackdrop: false
+  }), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && openUpselling && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
     business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,
     cartProducts: currentCart === null || currentCart === void 0 ? void 0 : currentCart.products,
@@ -374,10 +475,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isInitialRender = _useState12[0],
-      setIsInitialRender = _useState12[1];
+  var _useState19 = (0, _react.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      isInitialRender = _useState20[0],
+      setIsInitialRender = _useState20[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,
@@ -391,3 +492,64 @@ var BusinessProductsListing = function BusinessProductsListing(props) {
 };
 
 exports.BusinessProductsListing = BusinessProductsListing;
+
+var AgeCheckForm = function AgeCheckForm(props) {
+  var _theme$images, _theme$images$alsea, _theme$images2, _theme$images2$alsea;
+
+  var theme = (0, _styledComponents.useTheme)();
+  var windowSize = useWindowSize();
+
+  var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
+
+  var setIsOver18Age = props.setIsOver18Age,
+      setOpenAgeConfirm = props.setOpenAgeConfirm,
+      setAgeError = props.setAgeError;
+  return /*#__PURE__*/_react.default.createElement(_styles.AgeConfirmContainer, {
+    bgimage: windowSize.width < 768 ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$alsea = _theme$images.alsea) === null || _theme$images$alsea === void 0 ? void 0 : _theme$images$alsea.confirmBackMobile : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$alsea = _theme$images2.alsea) === null || _theme$images2$alsea === void 0 ? void 0 : _theme$images2$alsea.confirmBackDesktop
+  }, /*#__PURE__*/_react.default.createElement(_styles.UnderAge, null, /*#__PURE__*/_react.default.createElement("h2", null, t('AGE_CONFIRM_TITLE', 'You are of age?')), /*#__PURE__*/_react.default.createElement(_styles.UnderAgeButtons, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    onClick: function onClick() {
+      setIsOver18Age(true);
+      setOpenAgeConfirm(false);
+    }
+  }, " ", t('YES', 'Yes')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    outline: true,
+    onClick: function onClick() {
+      setAgeError(true);
+      setOpenAgeConfirm(false);
+    }
+  }, " ", t('NO', 'No')))));
+};
+
+exports.AgeCheckForm = AgeCheckForm;
+
+var useWindowSize = function useWindowSize() {
+  var _useState21 = (0, _react.useState)({
+    width: undefined,
+    height: undefined
+  }),
+      _useState22 = _slicedToArray(_useState21, 2),
+      windowSize = _useState22[0],
+      setWindowSize = _useState22[1];
+
+  (0, _react.useEffect)(function () {
+    var handleResize = function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return function () {
+      return window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  return windowSize;
+};
+
+exports.useWindowSize = useWindowSize;
