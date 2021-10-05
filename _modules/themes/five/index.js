@@ -183,6 +183,12 @@ Object.defineProperty(exports, "HomeHero", {
     return _HomeHero.HomeHero;
   }
 });
+Object.defineProperty(exports, "HighestRated", {
+  enumerable: true,
+  get: function get() {
+    return _HighestRated.HighestRated;
+  }
+});
 Object.defineProperty(exports, "HorizontalOrdersLayout", {
   enumerable: true,
   get: function get() {
@@ -435,6 +441,8 @@ var _Help = require("./src/components/Help");
 var _HelpStaticPage = require("./src/components/HelpStaticPage");
 
 var _HomeHero = require("./src/components/HomeHero");
+
+var _HighestRated = require("./src/components/HighestRated");
 
 var _HorizontalOrdersLayout = require("./src/components/HorizontalOrdersLayout");
 
