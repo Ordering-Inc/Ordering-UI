@@ -72,7 +72,7 @@ export const ProductImage = (props) => {
   return (
     <ProductImageStyled
       {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
+      style={{ backgroundImage: `url(${props.bgimage})`, width: '48px', height: '48px' }}
     >
       {props.children}
     </ProductImageStyled>
@@ -87,13 +87,19 @@ export const ContentInfo = styled.div`
   margin-left: 10px;
   width: 60%;
 
-  @media (min-width: 411px) {
-    width: calc(65% - 60px);
-  }
+  ${({ isOrderDetails }) => isOrderDetails && css`
+     width: 80%;
+  `}
 
-  @media (min-width: 480px){
-    width: 80%;
-  }
+  ${({ isOrderDetails }) => !isOrderDetails && css`
+    @media (min-width: 411px) {
+      width: calc(65% - 30px);
+    }
+
+    @media (min-width: 480px){
+      width: 80%;
+    }
+  `}
 
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
@@ -197,7 +203,7 @@ export const ProductInfo = styled.div`
 
   h3 {
     font-size: 12px;
-    max-width: 60%;
+    max-width: 50%;
   }
 
   p {
@@ -205,11 +211,12 @@ export const ProductInfo = styled.div`
     margin: 0px 5px;
   }
 
-  @media (min-width: 380px){
+  @media (min-width: 360px){
     h3{
-      max-width: 80%;
+      max-width: 70%;
     }
   }
+
 
   @media (min-width: 411px) {
     h3{
@@ -270,6 +277,10 @@ export const ProductPriceSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  ${({ isOrderDetails }) => isOrderDetails && css`
+    position: relative;
+    bottom: 14px;
+  `}
 `
 
 export const ProductPrice = styled.div`
@@ -298,13 +309,13 @@ export const ProductPrice = styled.div`
   @media (min-width: 512px) {
     span,
     p {
-      font-size: 18px;
+      font-size: 12px;
     }
   }
 `
 
 export const ProductSelect = styled.select`
-  background: ${isCheckout => isCheckout ? '#FFFFFF' : '#F8F9FA'};
+  background: ${isCheckout => !isCheckout ? '#FFFFFF' : '#F8F9FA'};
   border-radius: 7.6px;
   max-width: 42px;
   height: 22px;
@@ -344,12 +355,14 @@ export const ProductOptionsList = styled.ul`
   }
 
   p {
-    font-weight: 400;
+    font-size:12px;
+    font-weight: 600;
     margin: 0px;
   }
 
   li span {
-    font-weight: 300;
+    font-size: 12px;
+    font-weight: 500;
   }
 
   li.ingredient {

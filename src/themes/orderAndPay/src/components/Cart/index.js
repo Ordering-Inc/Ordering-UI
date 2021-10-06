@@ -16,7 +16,7 @@ import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 
 import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
-import { CouponControl } from '../../../../../components/CouponControl'
+import { CouponControl } from '../CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
 

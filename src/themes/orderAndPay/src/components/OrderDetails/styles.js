@@ -130,7 +130,7 @@ export const ReviewOrderLink = styled.a`
 
 const StatusBarStyled = styled.div`
   height: 12px;
-  margin: 18px 0px 8px;
+  margin: 18px 0px;
   background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, #F8F9FA ${props.percentage}%)`};
   ${props => props.theme?.rtl && css`
     background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, #F8F9FA ${props.percentage}%)

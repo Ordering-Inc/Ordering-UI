@@ -63,7 +63,7 @@ export const ThemeProvider = ({ children, ...props }) => {
       font-family: inherit;
     }
     h1,p,span {
-      ${props.orderAndPay && css`
+      ${props.isDarkTextColor && css`
         color: ${theme.colors.darkTextColor}
       `}
     }

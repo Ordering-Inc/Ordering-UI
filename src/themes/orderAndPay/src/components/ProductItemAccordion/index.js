@@ -3,7 +3,6 @@ import TiPencil from '@meronex/icons/ti/TiPencil'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   AccordionSection,
@@ -36,17 +35,16 @@ export const ProductItemAccordion = (props) => {
     offsetDisabled,
     onDeleteProduct,
     onEditProduct,
-    isCheckout
+    isCheckout,
+    isOrderDetails
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
-  const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
-
   const content = useRef(null)
   const productSelect = useRef(null)
   const productActionsEdit = useRef(null)
@@ -138,7 +136,7 @@ export const ProductItemAccordion = (props) => {
               </ProductQuantity>
             )}
 
-            <ContentInfo>
+            <ContentInfo isOrderDetails={isOrderDetails}>
               <div>
                 <h3>{product.name}</h3>
                 {
@@ -170,7 +168,7 @@ export const ProductItemAccordion = (props) => {
           </ProductInfo>
 
           {(product?.valid || !isCartProduct) && (
-            <ProductPriceSection>
+            <ProductPriceSection isOrderDetails={isOrderDetails}>
               <ProductPrice className='prod-price'>
                 <span>
                   {parsePrice(product.total || product.price)}

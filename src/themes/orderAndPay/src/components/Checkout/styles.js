@@ -220,9 +220,15 @@ export const TotalCart = styled.div`
   button{
     height: 52px;
     font-weight: 600;
+    font-size: 12px;
     width: 45%;
   }
   p{
     font-size: 16px;
+  }
+  @media (min-width: 340px){
+    button{
+      font-size: 14px;
+    }
   }
 `

@@ -242,6 +242,7 @@ const OrderDetailsUI = (props) => {
                   <ProductItemAccordion
                     key={product.id}
                     product={product}
+                    isOrderDetails
                   />
                 ))}
               </OrderProducts>
