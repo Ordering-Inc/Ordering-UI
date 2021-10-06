@@ -188,7 +188,6 @@ const OrderDetailsUI = (props) => {
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
               </OrderInfo>
-              <Divider />
               {order?.driver && (
                 <>
                   <>
