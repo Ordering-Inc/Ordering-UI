@@ -35,11 +35,11 @@ var OrderPastContent = _styledComponents.default.div(_templateObject4 || (_templ
 
 exports.OrderPastContent = OrderPastContent;
 
-var PastLogo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 66px;\n  height: 66px;\n  img {\n    width: 100%;\n    height: 100%;\n    border-radius: 17px;\n    object-fit: contain;\n  }\n  @media (min-width: 480px){\n    width: 75px;\n    height: 75px;\n  }\n"])));
+var PastLogo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 64px;\n  height: 64px;\n  img {\n    width: 64px;\n    height: 64px;\n    border-radius: 7.6px;\n    object-fit: contain;\n    box-shadow: 0px 1px 4px 0px #0000001A;\n    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  }\n"])));
 
 exports.PastLogo = PastLogo;
 
-var WrapperBusinessTitle = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 95%\n"])));
+var WrapperBusinessTitle = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 75%\n"])));
 
 exports.WrapperBusinessTitle = WrapperBusinessTitle;
 
@@ -49,7 +49,7 @@ var WrappButton = _styledComponents.default.div(_templateObject8 || (_templateOb
 
 exports.WrappButton = WrappButton;
 
-var OrderPrice = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 20%;\n  h2{\n    font-size: 12px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    margin: 0;\n  }\n  @media (min-width: 768px){\n    h2{\n      font-size: 16px;\n    }\n  }\n"])));
+var OrderPrice = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 40%;\n  position: absolute;\n  right: 0;\n  text-align: right;\n  padding-right: 40px;\n  h2{\n    font-size: 12px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    margin: 0;\n  }\n  @media (min-width: 768px){\n    h2{\n      font-size: 16px;\n    }\n  }\n"])));
 
 exports.OrderPrice = OrderPrice;
 

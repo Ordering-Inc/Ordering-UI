@@ -254,14 +254,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     size: 20,
     onClick: function onClick() {
       return handleGoBack();
-    }
+    },
+    color: theme.colors.arrowColor
   }), /*#__PURE__*/_react.default.createElement("img", {
     src: business === null || business === void 0 ? void 0 : business.logo
-  }), /*#__PURE__*/_react.default.createElement("h1", null, business === null || business === void 0 ? void 0 : business.name)), ordertype && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapperButton, {
-    onClick: function onClick() {
-      return handleGoBack();
-    }
-  }, /*#__PURE__*/_react.default.createElement("h2", null, ordertype)), auth && /*#__PURE__*/_react.default.createElement(_styles.LogoutButtonContainer, null, /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))), !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
+  }), /*#__PURE__*/_react.default.createElement("h1", null, business === null || business === void 0 ? void 0 : business.name)), auth && /*#__PURE__*/_react.default.createElement(_styles.LogoutButtonContainer, null, /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))), !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"

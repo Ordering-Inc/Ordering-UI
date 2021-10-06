@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var FormInput = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  margin: 0 auto;\n  div.phone_number {\n    margin-bottom: 20px;\n    width: 100%;\n  }\n  input.form {\n    padding: 5px 0px;\n    font-size: 14px;\n    width: 100%;\n    margin-bottom: 20px;\n    box-sizing: border-box;\n    &:disabled {\n      background-color: rgba(239, 239, 239, 0.3);\n      cursor: not-allowed;\n    }\n  }\n  button {\n    width: 100%;\n    padding: 7px 0;\n  }\n  @media (min-width: 769px) {\n    flex-wrap: wrap;\n    flex-direction: row;\n    justify-content: space-between;\n    ", "\n  }\n"])), function (_ref) {
+var FormInput = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  margin: 0 auto;\n  div.phone_number {\n    margin-bottom: 20px;\n    width: 100%;\n  }\n  input.form {\n    font-size: 14px;\n    width: 100%;\n    height: 44px;\n    margin-bottom: 20px;\n    box-sizing: border-box;\n    border-radius: 7.6px;\n    border: 1px solid #DEE2E6;\n    &:disabled {\n      background-color: rgba(239, 239, 239, 0.3);\n      cursor: not-allowed;\n    }\n  }\n  button {\n    width: 100%;\n    padding: 7px 0;\n  }\n  @media (min-width: 769px) {\n    flex-wrap: wrap;\n    flex-direction: row;\n    justify-content: space-between;\n    ", "\n  }\n"])), function (_ref) {
   var isCheckout = _ref.isCheckout;
   return isCheckout && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      div.phone_number  {\n        width: 49%;\n      }\n    "])));
 });
@@ -36,7 +36,7 @@ var SkeletonForm = _styledComponents.default.div(_templateObject5 || (_templateO
 
 exports.SkeletonForm = SkeletonForm;
 
-var InputGroup = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  p {\n    font-weight: 500;\n    font-size: 20px;\n    color: ", ";\n    width: 100%;\n    text-align: left;\n    margin: 0 0 7px 0;\n  }\n"])), function (props) {
+var InputGroup = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  p {\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    width: 100%;\n    text-align: left;\n    margin: 0 0 7px 0;\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
@@ -45,7 +45,7 @@ exports.InputGroup = InputGroup;
 var Divider = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n  height: 8px;\n  width: 100%;\n  margin-bottom: 20px;\n"])));
 
 exports.Divider = Divider;
-var InputPhoneNumberWrapper = (0, _styledComponents.default)(InputGroup)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  .PhoneInput {\n    border-bottom: 1px solid #E9ECEF;\n    input {\n      border: none;\n      border-radius: 0px;\n      padding: 5px;\n    }\n  }\n"])));
+var InputPhoneNumberWrapper = (0, _styledComponents.default)(InputGroup)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  .PhoneInput {\n    border-bottom: 1px solid #E9ECEF;\n    input {\n      border-radius: 7.8px;\n      font-size: 14px;\n      width: 100%;\n      height: 44px;\n      box-sizing: border-box;\n      border-radius: 7.6px;\n      border: 1px solid #DEE2E6;\n    }\n  }\n"])));
 exports.InputPhoneNumberWrapper = InputPhoneNumberWrapper;
 var LanguageSelectorWrapper = (0, _styledComponents.default)(InputGroup)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  > div {\n    width: 100%;\n    border-radius: 7.6px;\n    text-align: left;\n    background: #F8F9FA !important;\n    border-color: #F8F9FA;\n\n    #list {\n      width: 100%;\n      border-radius: 7.6px;\n      background: #F8F9FA !important;\n      border-color: #F8F9FA;\n    }\n  }\n"])));
 exports.LanguageSelectorWrapper = LanguageSelectorWrapper;

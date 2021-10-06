@@ -21,7 +21,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 7.6px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n  &::-ms-reveal {\n    display: none;\n  }\n  ", "\n"])), function () {
+var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DEE2E6;\n  border-radius: 7.6px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #B1BCCC;\n  }\n  &:-ms-input-placeholder {\n    color: #B1BCCC;\n  }\n  &::-ms-reveal {\n    display: none;\n  }\n  ", "\n"])), function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (_ref) {
   var w = _ref.w;
@@ -49,7 +49,7 @@ var InputGroupLeft = _styledComponents.default.div(_templateObject5 || (_templat
 
 exports.InputGroupLeft = InputGroupLeft;
 
-var TextArea = _styledComponents.default.textarea(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 16px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n"])), function () {
+var TextArea = _styledComponents.default.textarea(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DEE2E6;\n  border-radius: 7.6px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #B1BCCC;\n  }\n  &:-ms-input-placeholder {\n    color: #B1BCCC;\n  }\n"])), function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (_ref3) {
   var w = _ref3.w;
@@ -57,7 +57,7 @@ var TextArea = _styledComponents.default.textarea(_templateObject9 || (_template
 });
 
 exports.TextArea = TextArea;
-var InputGroupRight = (0, _styledComponents.default)(InputGroupLeft)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  border-radius: 0 34px 34px 0;\n  line-height: 34px;\n  border-right-width: 1px;\n  border-left-width: 0;\n  ", "\n  & ", " {\n    margin-left: 0;\n    margin-right: -7px;\n    ", "\n  }\n  \n"])), function (props) {
+var InputGroupRight = (0, _styledComponents.default)(InputGroupLeft)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  border-radius: 0 34px 34px 0;\n  line-height: 34px;\n  border-right-width: 1px;\n  border-left-width: 0;\n  ", "\n  & ", " {\n    margin-left: 0;\n    margin-right: -7px;\n    ", "\n  }\n\n"])), function (props) {
   var _props$theme3;
 
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        border-left-width: 1px;\n        border-right-width: 0;\n        border-radius: 0 0 34px 34px;\n    "])));

@@ -19,11 +19,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 95%;\n  margin: 20px auto 0px;\n"])));
+var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  padding-top: 20px;\n  padding-bottom: 10px;\n  box-sizing: border-box;\n"])));
 
 exports.ProductsContainer = ProductsContainer;
 
-var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n  margin-bottom: 50px;\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n\n  @media (min-width: 1200px) {\n    padding: 0;\n  }\n"])), function (props) {
+var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n  margin-bottom: 50px;\n\n  @media (min-width: 1200px) {\n    padding: 0;\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 });
 
@@ -81,11 +81,13 @@ var Title = _styledComponents.default.h1(_templateObject14 || (_templateObject14
 
 exports.Title = Title;
 
-var ModalIcon = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n"])));
+var ModalIcon = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 40px;\n"])));
 
 exports.ModalIcon = ModalIcon;
 
-var GoBackContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 65%;\n  img{\n    margin: 0 5px;\n    width: 40px;\n    height: 40px;\n  }\n  h1{\n    font-size: 1em;\n  }\n"])));
+var GoBackContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 90%;\n  img{\n    margin: 0 5px;\n    width: 46px;\n    height: 46px;\n    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n    box-shadow: 0px 1px 4px 0px #0000001A;\n    border-radius: 7.6px;\n  }\n  h1{\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    margin-right: 5px;\n    width: 70%;\n  }\n"])), function (props) {
+  return props.theme.colors.darkTextColor;
+});
 
 exports.GoBackContainer = GoBackContainer;
 var OrderTypeWrapperButton = (0, _styledComponents.default)(_Buttons.Button)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  background: ", ";\n  height: 35px;\n  margin-right: 10px;\n  display: flex;\n  align-items: center;\n  max-width: 100px;\n  h2{\n    font-size: 12px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n"])), function (_ref) {

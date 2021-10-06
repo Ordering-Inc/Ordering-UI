@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: ", ";\n"])), function (props) {
+var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: ", ";\n  padding: 0px 30px\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 });
 
@@ -31,7 +31,7 @@ var ProductsListing = _styledComponents.default.div(_templateObject3 || (_templa
 
 exports.ProductsListing = ProductsListing;
 
-var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    margin-left: 10px;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n    }\n  }\n  h3 {\n    font-weight: 600;\n    font-size: 24px;\n    color: ", ";\n    margin-left: 10px;\n    ", "\n  }\n"])), function (props) {
+var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    margin-left: 10px;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n    }\n  }\n  h3 {\n    font-weight: 600;\n    font-size: 16px;\n    color: ", ";\n    margin-left: 10px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));

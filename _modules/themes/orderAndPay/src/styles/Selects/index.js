@@ -19,8 +19,8 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding-left: 15px;\n  padding-right: 15px;\n  min-width: 100px;\n  color: #333;\n  cursor: pointer;\n  &:hover {\n    background-color: ", ";\n  }\n  ", "\n  svg {\n    vertical-align: text-top;\n  }\n  ", "\n"])), (0, _polished.darken)(0.03, '#CCC'), function (props) {
-  return props.selected && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#CCC'), (0, _polished.darken)(0.07, '#CCC'));
+var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding-left: 15px;\n  padding-right: 15px;\n  min-width: 100px;\n  color: #909BA9;\n  cursor: pointer;\n  &:hover {\n    background-color: ", ";\n  }\n  ", "\n  svg {\n    vertical-align: text-top;\n  }\n  ", "\n"])), (0, _polished.darken)(0.03, '#E5E5E5'), function (props) {
+  return props.selected && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#E5E5E5'), (0, _polished.darken)(0.07, '#E5E5E5'));
 }, function (_ref) {
   var withIcons = _ref.withIcons;
   return withIcons && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      display: flex;\n      align-items: center;\n      justify-content: flex-start;\n      svg {\n        margin-right: 3px;\n        ", "\n      }\n  "])), function (props) {
@@ -32,7 +32,7 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
 
 exports.Option = Option;
 
-var Options = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #CCC;\n  margin-top: 7px;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  border-radius: 15px;\n  overflow: hidden;\n  ", "\n  ", "\n"])), function (_ref2) {
+var Options = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #E5E5E5;\n  margin-top: 7px;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  border-radius: 15px;\n  overflow: hidden;\n  ", "\n  ", "\n"])), function (_ref2) {
   var position = _ref2.position;
   return (position === null || position === void 0 ? void 0 : position.toLowerCase()) === 'left' && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    left: 0;\n    margin-left: -1px;\n    ", "\n  "])), function (props) {
     var _props$theme2;
@@ -54,16 +54,16 @@ var Selected = _styledComponents.default.div(_templateObject10 || (_templateObje
 
 exports.Selected = Selected;
 
-var Select = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: inline-block;\n  height: 34px;\n  border-radius: 34px;\n  line-height: 34px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  background-color: ", " !important;\n  color: ", " !important;\n  position: relative;\n  ", "\n  ", "\n"])), function (_ref4) {
+var Select = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: inline-block;\n  height: 44px;\n  border-radius: 34px;\n  line-height: 44px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #F8F9FA;\n  background-color: ", " !important;\n  color: ", " !important;\n  position: relative;\n  ", "\n  ", "\n"])), function (_ref4) {
   var isHome = _ref4.isHome;
-  return isHome ? 'rgba(247,247,247,0.3)' : '#CCC';
+  return isHome ? 'rgba(247,247,247,0.3)' : '#E5E5E5';
 }, function (_ref5) {
   var isHome = _ref5.isHome;
-  return isHome ? '#FFF' : '#333';
+  return isHome ? '#FFF' : '#909BA9';
 }, function (props) {
   return props.disabled && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
 }, function (props) {
-  return props.open && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), (0, _polished.darken)(0.07, '#CCC'));
+  return props.open && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), (0, _polished.darken)(0.07, '#E5E5E5'));
 });
 
 exports.Select = Select;

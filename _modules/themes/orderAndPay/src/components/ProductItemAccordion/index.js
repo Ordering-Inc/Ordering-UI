@@ -17,8 +17,6 @@ var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
 
 var _orderingComponents = require("ordering-components");
 
-var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -66,7 +64,8 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       offsetDisabled = props.offsetDisabled,
       onDeleteProduct = props.onDeleteProduct,
       onEditProduct = props.onEditProduct,
-      isCheckout = props.isCheckout;
+      isCheckout = props.isCheckout,
+      isOrderDetails = props.isOrderDetails;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -79,8 +78,6 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
-
-  var windowSize = (0, _useWindowSize.useWindowSize)();
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -183,21 +180,11 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       value: i,
       disabled: offsetDisabled(product) < i && i !== 0
     }, i === 0 ? t('REMOVE', 'Remove') : i);
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), (product === null || product === void 0 ? void 0 : product.comment) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.comment)), windowSize.width <= 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement("div", null, onEditProduct && /*#__PURE__*/_react.default.createElement("span", {
-    ref: productActionsEdit
-  }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
-    color: "#F2BB40",
-    onClick: function onClick() {
-      return onEditProduct(product);
-    }
-  })), onDeleteProduct && /*#__PURE__*/_react.default.createElement("span", {
-    ref: productActionsDelete
-  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
-    color: "#D81212",
-    onClick: function onClick() {
-      return onDeleteProduct(product);
-    }
-  })))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
+    isOrderDetails: isOrderDetails
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), (product === null || product === void 0 ? void 0 : product.comment) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.comment)))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, {
+    isOrderDetails: isOrderDetails
+  }, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
     className: "prod-price"
   }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)

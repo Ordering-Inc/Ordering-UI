@@ -15,6 +15,8 @@ var _BiLogOut = _interopRequireDefault(require("@meronex/icons/bi/BiLogOut"));
 
 var _Confirm = require("../Confirm");
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -56,6 +58,8 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
       openConfirm = _useState2[0],
       setOpenConfirm = _useState2[1];
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var handleLogOutClick = function handleLogOutClick() {
     var _window, _window$gapi, _window$gapi$auth;
 
@@ -93,7 +97,8 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
   }, [formState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BiLogOut.default, {
     onClick: handleOpenConfirm,
-    size: 20
+    size: 20,
+    color: theme.colors.darkTextColor
   }), openConfirm && /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     open: openConfirm,
     title: t('LOGOUT', 'Logout'),
