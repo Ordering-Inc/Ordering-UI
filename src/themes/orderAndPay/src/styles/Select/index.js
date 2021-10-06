@@ -86,7 +86,7 @@ export const Select = (props) => {
             {selectedOption.showOnSelected || selectedOption.content}
           </Header>
           <Chevron>
-            <BsChevronDown />
+            <BsChevronDown color='#748194' />
           </Chevron>
         </Selected>
       )}

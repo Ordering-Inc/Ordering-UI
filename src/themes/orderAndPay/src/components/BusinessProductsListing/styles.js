@@ -1,17 +1,16 @@
 import styled, { css } from 'styled-components'
 import { Button } from '../../styles/Buttons'
 export const ProductsContainer = styled.div`
-  width: 95%;
-  margin: 20px auto 0px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
 `
 
 export const WrapContent = styled.div`
   padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
   margin-bottom: 50px;
-  @media (min-width: 381px) {
-    padding: 15px;
-  }
 
   @media (min-width: 1200px) {
     padding: 0;
@@ -146,19 +145,30 @@ export const ModalIcon = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 40px;
 `
 
 export const GoBackContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 65%;
+  width: 90%;
   img{
     margin: 0 5px;
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+    box-shadow: 0px 1px 4px 0px #0000001A;
+    border-radius: 7.6px;
   }
   h1{
-    font-size: 1em;
+    font-size: 14px;
+    font-weight: 600;
+    color: ${props => props.theme.colors.darkTextColor};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 5px;
+    width: 70%;
   }
 `
 

@@ -32,7 +32,7 @@ export const FormSide = styled(Side)`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   display: flex;
   flex-direction: column;
 
@@ -57,9 +57,9 @@ export const RedirectLink = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   margin: 0px;
-  font-size: 17px;
+  font-size: 14px;
+  font-weight: 400;
 
   span {
     margin-right: 5px;
@@ -82,10 +82,10 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: calc(95% - 20px);
+    width: calc(100% - 20px);
 
     @media (min-width: 481px) {
-      width: ${({ isPopup }) => isPopup ? 'calc(95% - 20px)' : 'calc(80% - 20px)'};
+      width: ${({ isPopup }) => isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)'};
     }
   `}
 
@@ -110,7 +110,7 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
 
   button {
     width: 100%;
@@ -144,7 +144,7 @@ export const SkeletonWrapper = styled.div`
 `
 
 export const SkeletonSocialWrapper = styled(SkeletonWrapper)`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   span{
     margin-top: 0;
   }
@@ -163,11 +163,13 @@ export const WrapperPassword = styled.div`
 export const TogglePassword = styled.span`
   position: absolute;
   font-weight: 300;
-  padding: 10px 0;
   color: #333;
   font-size: 26px;
   transform: translate(-150%, 10%);
   max-height: 100%;
+  svg{
+    vertical-align: text-bottom;
+  }
   ${props => props.theme?.rtl && css`
     transform: translate(150%, 10%);
   `}
@@ -175,6 +177,7 @@ export const TogglePassword = styled.span`
     cursor: pointer;
   }
 `
+
 
 export const ReCaptchaWrapper = styled.div`
   margin: 12px auto;
@@ -236,7 +239,7 @@ export const TermsConditionWrapper = styled.div`
     `}
 
     > span:first-child {
-      font-weight: 500;
+      font-weight: 400;
       ${props => props.theme?.rtl ? css`
         margin-left: 7px;
       ` : css`
@@ -253,5 +256,29 @@ export const TermsConditionWrapper = styled.div`
     > label {
       font-size: 16px;
     }
+  }
+`
+
+export const ModalIcon = styled.span`
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+
+  svg{
+    margin-bottom: 25px;
+  }
+
+  h1{
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media(min-width: 769px){
+    position: absolute;
+    top: -10px;
   }
 `
