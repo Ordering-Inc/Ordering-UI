@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const Option = styled.div`
   display: flex;
   align-items: center;
-
+  
   svg {
     min-width: 14px;
     margin-right: 5px;
@@ -15,9 +15,7 @@ export const Option = styled.div`
 `
 
 export const OrderTypeWrapper = styled.span`
-  div {
-    max-width: 120px;
-  }
+
   @media (min-width: 380px) {
     div{
       max-width: initial;
@@ -27,17 +25,17 @@ export const OrderTypeWrapper = styled.span`
 
 export const SelectedOption = styled.p`
   margin: 0;
-  max-width: 30px;
+  max-width: 72px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 
   @media (min-width: 768px) {
-      max-width: 50px;
+    max-width: 120px;
   }
 
   @media (min-width: 1024px) {
-    max-width: 80px;
+    max-width: 40px;
   }
 
   @media (min-width: 1200px) {
