@@ -25,6 +25,7 @@ export const WrapperLeftContainer = styled.div`
 
 export const WrapperRightContainer = styled.div`
   width: 100%;
+  background: #F8F9FA;
   box-sizing: border-box;
 
   @media (min-width: 769px) {
