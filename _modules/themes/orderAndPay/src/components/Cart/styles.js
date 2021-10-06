@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: ", ";\n  height: ", ";\n  display: flex;\n  flex-direction: column;\n  box-sizing: border-box;\n"])), function (_ref) {
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: ", ";\n  height: ", ";\n  display: flex;\n  flex-direction: column;\n  box-sizing: border-box;\n  background: #fff;\n"])), function (_ref) {
   var isCheckout = _ref.isCheckout;
   return isCheckout ? '0px' : '20px 40px';
 }, function (_ref2) {
