@@ -239,7 +239,7 @@ export const UserFormDetailsUI = (props) => {
               <BeforeMidComponents key={i} {...props} />))
             }
             <Divider />
-            {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
+            {sortInputFields({ values: validationFields?.fields?.checkout || {} }).map(field =>
               showField && showField(field.code) && (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (

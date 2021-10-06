@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 export const ProductContainer = styled.div`
   max-height: 100vh;
   position: relative;
-  padding: 30px 20px 20px;
+  padding: 30px 20px 40px;
 
   @media (min-width: 768px) {
     height: 100%;
@@ -49,11 +49,11 @@ export const ProductInfo = styled.div`
   padding: 0px;
   position: relative;
   margin-top: 18px;
-
+  padding: 0 20px;
+  box-sizing: border-box;
   h1 {
     font-weight: 600;
-    font-size: 28px;
-    color: ${props => props.theme?.colors.darkTextColor};
+    font-size: 16px;
     margin-top: 0;
     margin-bottom: 5px;
   }
@@ -79,8 +79,9 @@ export const ProductInfo = styled.div`
   }
   p {
     font-size: 16px;
-    color: #909BA9;
-    margin-top: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `
 
@@ -102,11 +103,11 @@ export const ProductEdition = styled.div`
 
 export const SectionTitle = styled.h3`
   text-transform: capitalize;
-  font-size: 18px;
+  font-size: 16px;
   padding: 15px 0px;
   margin: 0px;
   font-weight: 600;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.darkTextColor};
 `
 
 export const ProductComment = styled.div`
@@ -131,11 +132,13 @@ export const ProductComment = styled.div`
 
 export const ProductActions = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 0px;
+  padding: 10px 40px;
   width: 100%;
-
+  box-sizing: border-box;
+  border-top: 1px solid #E9ECEF;
   position: fixed;
   bottom: -5px;
   right: 0;
@@ -144,20 +147,23 @@ export const ProductActions = styled.div`
 
   div.price {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
     color: ${props => props.theme?.colors.darkTextColor};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   div.incdec-control {
-    width: 50%;
+    width: 20%;
     display: flex;
     justify-content: space-around;
     align-items: center;
 
     svg {
-      width: 22px;
-      height: 22px;
+      width: 16px;
+      height: 16px;
       cursor: pointer;
     }
   }
@@ -175,37 +181,21 @@ export const ProductActions = styled.div`
 
   svg.disabled {
     pointer-events: none;
+    color: #B1BCCC;
   }
 
   button.add {
-    width: 90%;
+    width: 45%;
+    margin-top: 0;
     padding: 5px 10px;
-    margin-top: 10px;
     position: relative;
-
+    font-size: 14px;
     &.soldout {
       width: 70%;
       pointer-events: none;
     }
   }
 
-  @media (min-width: 577px) {
-    flex-direction: row;
-    justify-content: space-around;
-
-    div.price {
-      width: 20%;
-    }
-
-    button.add {
-      width: 50%;
-      margin-top: 0;
-    }
-
-    div.incdec-control {
-      width: 20%;
-    }
-  }
   @media (min-width: 769px){
     position: relative;
   }
@@ -297,7 +287,7 @@ export const ModalIcon = styled.span`
   z-index: 2;
   display: flex;
   align-items: center;
-  width: 95%;
+  width: 85%;
   ${props => props.theme?.rtl && css`
     left: 5px;
     right: initial;
