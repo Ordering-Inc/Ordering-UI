@@ -245,8 +245,9 @@ const CartUI = (props) => {
                 </table>
               </OrderBill>
             )}
-
-            <Divider />
+            {!isCheckout && (
+              <Divider />
+            )}
 
             <Confirm
               title={t('PRODUCT', 'Product')}

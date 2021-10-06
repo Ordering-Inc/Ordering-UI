@@ -145,7 +145,7 @@ export const HorizontalItem = styled.div`
   margin-right: 15px;
   border: 2px solid #E9ECEF;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 10px 10px 6px 10px;
 
   ${props => props.theme.rtl && css`
     margin-left: 15px;
@@ -154,13 +154,11 @@ export const HorizontalItem = styled.div`
 `
 
 export const HorizontalImage = styled.div`
-  width: 110px;
-  height: 110px;
   img {
     border-radius: 7.6px;
-    width: 110px;
-    height: 110px;
-    margin-left: 10px;
+    width: 78px;
+    height: 78px;
+    margin-left: 5px;
 
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
@@ -174,19 +172,18 @@ export const HorizontalDetails = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  height: 110px;
-  width: 150px;
+  justify-content: flex-start;
+  width: 110px;
   h3 {
-    width: 160px;
+    width: 95px;
     font-weight: 500;
     font-size: 12px;
     color: ${props => props.theme.colors.darkTextColor};
-    margin: 0 0 5px 0;
+    margin: 0px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
   }
 
@@ -206,15 +203,19 @@ export const HorizontalDetails = styled.div`
   }
 
   button {
-    margin-top: 6px;
+    line-height: 22px;
+    padding-left: 9px;
+    padding-right: 9px;
+    font-size: 12px;
+    margin-top: 3px;
     border-radius: 50px;
     color: ${props => props.theme?.colors.primary};
     background: ${props => props.theme?.colors.primaryContrast}
   }
 `
 export const WrapAutoScroll = styled.div`
-  margin-top: 20px;
   width: 100%;
   overflow-x: auto;
   display: flex;
+  margin-left: 10px;
 `
