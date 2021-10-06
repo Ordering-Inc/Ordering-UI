@@ -148,7 +148,7 @@ const UpsellingPageUI = (props) => {
                 </AutoScroll>
               ) : [...Array(8)].map((item, i) => (
                 <SkeletonContainer key={i}>
-                  <Skeleton width={250} height={100} />
+                  <Skeleton width={250} height={80} />
                 </SkeletonContainer>
               ))
             }

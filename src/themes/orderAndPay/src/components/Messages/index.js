@@ -10,8 +10,6 @@ import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import {
   MessagesContainer,
-  HeaderProfile,
-  Image,
   Chat,
   BubbleCustomer,
   MessageCustomer,
@@ -31,16 +29,17 @@ import {
   WrapperSendMessageButton,
   HeaderOnline,
   ImageContainer,
-  ModalIcon
+  ModalIcon,
+  ModalIconHeader
 } from './styles'
 import { Image as ImageWithFallback } from '../../../../../components/Image'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
-import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
+import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 import { bytesConverter, getTraduction } from '../../../../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
@@ -60,7 +59,8 @@ const MessagesUI = (props) => {
     business,
     driver,
     messagesToShow,
-    readMessages
+    readMessages,
+    onClose
   } = props
 
   const theme = useTheme()
@@ -297,31 +297,21 @@ const MessagesUI = (props) => {
                 {message.type === 2 && user?.id === message.author_id && (
                   <MessageCustomer>
                     <BubbleCustomer>
-                      <strong>
-                        <MyName>
-                          {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                        </MyName>
-                      </strong>
                       {message.comment}
-                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                      <TimeofSent white>{getTimeAgo(message.created_at)}</TimeofSent>
                     </BubbleCustomer>
                   </MessageCustomer>
                 )}
                 {message.type === 3 && user.id === message.author_id && (
                   <MessageCustomer>
                     <BubbleCustomer name='image'>
-                      <strong>
-                        <MyName>
-                          {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                        </MyName>
-                      </strong>
                       <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
                       {message.comment && (
                         <>
                           {message.comment}
                         </>
                       )}
-                      <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                      <TimeofSent white>{getTimeAgo(message.created_at)}</TimeofSent>
                     </BubbleCustomer>
                   </MessageCustomer>
                 )}
@@ -371,26 +361,25 @@ const MessagesUI = (props) => {
   }
 
   return (
-    <MessagesContainer>
-      <HeaderProfile>
-        <Image>
-          {
-            business && (
-              <ImageWithFallback
-                src={order.business?.logo || theme.images?.dummies?.businessLogo}
-                fallback={<FaUserAlt />}
-              />
-            )
-          }
-          {
-            driver && (
-              <ImageWithFallback
-                src={order.driver?.photo}
-                fallback={<RiUser2Fill />}
-              />
-            )
-          }
-        </Image>
+    <div>
+      <ModalIconHeader>
+        <BsArrowLeft size={20} onClick={onClose} color={theme.colors.arrowColor} />
+        {
+          business && (
+            <ImageWithFallback
+              src={order.business?.logo || theme.images?.dummies?.businessLogo}
+              fallback={<FaUserAlt />}
+            />
+          )
+        }
+        {
+          driver && (
+            <ImageWithFallback
+              src={order.driver?.photo}
+              fallback={<RiUser2Fill />}
+            />
+          )
+        }
         {business && (
           <HeaderOnline>
             <h1>{order.business?.name}</h1>
@@ -403,10 +392,10 @@ const MessagesUI = (props) => {
             <span>{t('ONLINE', 'Online')}</span>
           </HeaderOnline>
         )}
-      </HeaderProfile>
-      <Chat id='chat'>
-        {
-          messages?.loading && (
+      </ModalIconHeader>
+      <MessagesContainer>
+        <Chat id='chat'>
+          {messages?.loading && (
             <>
               <MessageBusiness>
                 <SkeletonBubbleBusiness>
@@ -429,111 +418,103 @@ const MessagesUI = (props) => {
                 </SkeletonBubbleCustomer>
               </MessageCustomer>
             </>
-          )
-        }
-        {
-          !messages?.loading && order && (
-            <>
-              <MessageConsole>
-                <BubbleConsole>
-                  {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-                  <strong>{parseDate(order.created_at)}</strong> {' '}
-                  {t('VIA', 'Via')}{' '}
-                  <strong>
-                    {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
-                  </strong>{' '}
-                  <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
-                </BubbleConsole>
-              </MessageConsole>
-              <MapMessages messages={messagesToShow?.messages?.length ? messagesToShow : messages} />
-            </>
-          )
-        }
-      </Chat>
-      <SendForm>
-        <Send onSubmit={handleSubmit(onSubmit)} noValidate>
-          <Input
-            placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
-            onChange={onChangeMessage}
-            name='message'
-            id='message'
-            ref={register({
-              required: !image
-            })}
-            autoComplete='off'
-          />
-          <SendImage htmlFor='chat_image' hidden={image}>
-            <input
-              type='file'
-              name='image'
-              id='chat_image'
-              accept='image/png,image/jpg,image/jpeg'
-              onChange={onChangeImage}
-              ref={imageRef}
-            />
-            <BsCardImage />
-          </SendImage>
-          {image && (
-            <WrapperDeleteImage>
-              <Button
-                circle
-                onClick={removeImage}
-                type='reset'
-              >
-                <MdClose />
-              </Button>
-              <img
-                src={image}
-                loading='lazy'
-              />
-            </WrapperDeleteImage>
           )}
-          <WrapperSendMessageButton>
-            <Button
-              color='primary'
-              type='submit'
-              disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
-              ref={buttonRef}
-            >
-              <IosSend />
-              {sendMessage.loading ? (
-                <span>
-                  {t('SENDING_MESSAGE', 'Sending...')}
-                </span>
-              )
-                : (
-                  <span>
-                    {t('SEND', 'Send')}
-                  </span>)}
-            </Button>
-          </WrapperSendMessageButton>
-        </Send>
-      </SendForm>
-      <Alert
-        title={t('ERROR', 'Error')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-      <Modal
-        onClose={() => setModalImage({ ...modalImage, open: false })}
-        open={modalImage.open}
-        padding='0'
-        hideCloseDefault
-        isTransparent
-        height='auto'
-      >
-        <ImageContainer>
-          <ModalIcon>
-            <MdClose onClick={() => setModalImage({ ...modalImage, open: false })} />
-          </ModalIcon>
-          <img src={modalImage.src} width='320px' height='180px' loading='lazy' />
-        </ImageContainer>
-      </Modal>
-    </MessagesContainer>
+          {
+            !messages?.loading && order && (
+              <>
+                <MessageConsole>
+                  <BubbleConsole>
+                    {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+                    <strong>{parseDate(order.created_at)}</strong> {' '}
+                    {t('VIA', 'Via')}{' '}
+                    <strong>
+                      {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
+                    </strong>{' '}
+                    <TimeofSent>{getTimeAgo(order.created_at)}</TimeofSent>
+                  </BubbleConsole>
+                </MessageConsole>
+                <MapMessages messages={messagesToShow?.messages?.length ? messagesToShow : messages} />
+              </>
+            )
+          }
+        </Chat>
+        <SendForm>
+          <Send onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Input
+              placeholder={t('TYPE_YOUR_MESSAGE_HERE', 'Type your message here')}
+              onChange={onChangeMessage}
+              name='message'
+              id='message'
+              ref={register({
+                required: !image
+              })}
+              style={{ borderColor: '#F8F9FA', background: '#F8F9FA', fontSize: '12px', color: theme.colors.darkTextColor }}
+              autoComplete='off'
+            />
+            <SendImage htmlFor='chat_image' hidden={image}>
+              <input
+                type='file'
+                name='image'
+                id='chat_image'
+                accept='image/png,image/jpg,image/jpeg'
+                onChange={onChangeImage}
+                ref={imageRef}
+              />
+              <BsCardImage />
+            </SendImage>
+            {image && (
+              <WrapperDeleteImage>
+                <Button
+                  circle
+                  onClick={removeImage}
+                  type='reset'
+                >
+                  <MdClose />
+                </Button>
+                <img
+                  src={image}
+                  loading='lazy'
+                />
+              </WrapperDeleteImage>
+            )}
+            <WrapperSendMessageButton>
+              <Button
+                color='primary'
+                type='submit'
+                disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
+                ref={buttonRef}
+              >
+                <img src={theme.images?.general?.arrowSend} />
+              </Button>
+            </WrapperSendMessageButton>
+          </Send>
+        </SendForm>
+        <Alert
+          title={t('ERROR', 'Error')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
+          closeOnBackdrop={false}
+        />
+        <Modal
+          onClose={() => setModalImage({ ...modalImage, open: false })}
+          open={modalImage.open}
+          padding='0'
+          hideCloseDefault
+          isTransparent
+          height='auto'
+        >
+          <ImageContainer>
+            <ModalIcon>
+              <MdClose onClick={() => setModalImage({ ...modalImage, open: false })} />
+            </ModalIcon>
+            <img src={modalImage.src} width='320px' height='180px' loading='lazy' />
+          </ImageContainer>
+        </Modal>
+      </MessagesContainer>
+    </div>
   )
 }
 

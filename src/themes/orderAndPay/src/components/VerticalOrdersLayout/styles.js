@@ -44,22 +44,20 @@ export const OrderPastContent = styled.div`
 `
 
 export const PastLogo = styled.div`
-  width: 66px;
-  height: 66px;
+  width: 64px;
+  height: 64px;
   img {
-    width: 100%;
-    height: 100%;
-    border-radius: 17px;
+    width: 64px;
+    height: 64px;
+    border-radius: 7.6px;
     object-fit: contain;
-  }
-  @media (min-width: 480px){
-    width: 75px;
-    height: 75px;
+    box-shadow: 0px 1px 4px 0px #0000001A;
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
   }
 `
 
 export const WrapperBusinessTitle = styled.div`
-  width: 95%
+  width: 75%
 `
 
 export const WrappButton = styled.div`
@@ -84,7 +82,11 @@ export const WrappButton = styled.div`
 `
 
 export const OrderPrice = styled.div`
-  width: 20%;
+  width: 40%;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  padding-right: 40px;
   h2{
     font-size: 12px;
     white-space: nowrap;

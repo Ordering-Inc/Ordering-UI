@@ -288,42 +288,32 @@ export const WrapperBirthday = styled.div`
     display: block;
   }
 `
-
-export const TermsConditionWrapper = styled.div`
+export const ConditionCheck = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
   margin-bottom: 10px;
-
-  > input {
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-  > label {
+  cursor: pointer;
+  span {
+    display: flex;
     font-size: 14px;
-    ${props => props.theme?.rtl ? css`
-      margin-right: 7px;
-    ` : css`
-      margin-left: 7px;
-    `}
-
-    > span:first-child {
-      font-weight: 500;
-      ${props => props.theme?.rtl ? css`
-        margin-left: 7px;
-      ` : css`
-        margin-right: 7px;
-      `}
-    }
-
-    > a {
-      color: ${props => props.theme.colors.primary} !important;
-    }
   }
-
-  @media (min-width: 768px) {
-    > label {
-      font-size: 16px;
-    }
+  .condition-checkbox {
+    color: ${props => props.theme.colors.primary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
   }
+  .condition-link-text {
+    margin: 0 6px;
+  }
+  .condition-link {
+    color: ${props => props.theme.colors.primary};
+  }
+`
+export const Terms = styled.div`
+  margin-bottom: 15px;
+  height: 150px;
+  overflow-y: scroll;
 `

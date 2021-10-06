@@ -3,13 +3,13 @@ import { LogoutAction, useLanguage, useToast, ToastType } from 'ordering-compone
 
 import BiLogOut from '@meronex/icons/bi/BiLogOut'
 import { Confirm } from '../Confirm'
-
+import { useTheme } from 'styled-components'
 const LogoutButtonUI = (props) => {
   const { onCustomClick, formState } = props
   const [, { showToast }] = useToast()
   const [, t] = useLanguage()
   const [openConfirm, setOpenConfirm] = useState(false)
-
+  const theme = useTheme()
   const handleLogOutClick = () => {
     window.FB.getLoginStatus((response) => {
       if (response.status === 'connected') {
@@ -43,7 +43,7 @@ const LogoutButtonUI = (props) => {
 
   return (
     <>
-      <BiLogOut onClick={handleOpenConfirm} size={20} />
+      <BiLogOut onClick={handleOpenConfirm} size={20} color={theme.colors.darkTextColor}/>
       {openConfirm && (
         <Confirm
           open={openConfirm}

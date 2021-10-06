@@ -4,6 +4,9 @@ export const Container = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
+  padding: 30px 40px;
+  margin-bottom: 60px;
+  box-sizing: border-box;
 
   @media (min-width: 769px) {
     flex-direction: row;
@@ -13,7 +16,6 @@ export const Container = styled.div`
 export const WrapperLeftContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 0px 20px 40px 20px;
 
   @media (min-width: 769px) {
     width: 55%;
@@ -25,7 +27,6 @@ export const WrapperRightContainer = styled.div`
   width: 100%;
   background: #F8F9FA;
   box-sizing: border-box;
-  padding: 40px 20px;
 
   @media (min-width: 769px) {
     width: 45%;
@@ -52,7 +53,7 @@ export const BusinessDetailsContainer = styled(UserDetailsContainer)`
     h1 {
       text-transform: capitalize;
       margin: 0px;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 16px;
     }
     p {
@@ -70,7 +71,7 @@ export const PaymentMethodContainer = styled.div`
   h1 {
     margin: 0px;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
     color: ${props => props.theme.colors.darkTextColor};
   }
 `
@@ -94,7 +95,6 @@ export const WrapperPlaceOrderButton = styled.div`
   display: flex;
   justify-content: center;
   margin: 50px 0px 10px;
-  padding: 0 10px;
 
   button {
     width: 100%;
@@ -170,8 +170,9 @@ export const WrapperLeftContent = styled.div`
 
   .checkout-title {
     margin: 0;
+    margin-bottom: 50px;
     font-weight: 600;
-    font-size: 32px;
+    font-size: 20px;
     color: ${props => props.theme?.colors.darkTextColor};
   }
 `
@@ -199,5 +200,35 @@ export const DriverTipDivider = styled.div`
   }
 `
 export const ModalIcon = styled.div`
-  margin: 15px;
+  margin-bottom: 20px;
+`
+
+export const TotalCart = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid #E9ECEF;
+  position: fixed;
+  bottom: -5px;
+  right: 0;
+  width: 100%;
+  background-color: #FFF;
+  button{
+    height: 52px;
+    font-weight: 600;
+    font-size: 12px;
+    width: 45%;
+  }
+  p{
+    font-size: 16px;
+  }
+  @media (min-width: 340px){
+    button{
+      font-size: 14px;
+    }
+  }
 `

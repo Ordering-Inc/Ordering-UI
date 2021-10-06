@@ -14,6 +14,7 @@ import { Cart } from './src/components/Cart'
 import { CartContent } from './src/components/CartContent'
 import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
+import { CustomModal } from './src/components/CustomModal'
 import { DriverTips } from './src/components/DriverTips'
 import { Footer } from './src/components/Footer'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
@@ -70,6 +71,7 @@ export {
   CartContent,
   CartPopover,
   Checkout,
+  CustomModal,
   DriverTips,
   Footer,
   ForgotPasswordForm,

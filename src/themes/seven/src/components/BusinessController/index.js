@@ -44,7 +44,6 @@ const BusinessControllerUI = (props) => {
   const handleShowAlert = () => {
     setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -131,7 +130,7 @@ const BusinessControllerUI = (props) => {
                   </BuinessMeta>
                 )}
                 <Button outline color='primary'>
-                  Go to Store
+                 {t('GOTO_STORE', 'Go To Store')}
                 </Button>
               </BusinessInfoItem>
             </BusinessInfo>

@@ -15,7 +15,8 @@ import {
   SkeletonContent,
   SkeletonText,
   SkeletonInformation,
-  SkeletonReorder
+  SkeletonReorder,
+  Container
 } from './styles'
 
 const OrdersOptionUI = (props) => {
@@ -122,70 +123,72 @@ const OrdersOptionUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <TitleContainer>
-        <h1>{t('MY_ORDERS', 'My orders')}</h1>
-        <RiHome2Line size='24' onClick={() => onRedirectPage({ page: 'ordertypes' })} />
-      </TitleContainer>
-      {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : (isShowTitles || !isBusinessesPage)) && (
-        <>
-          {!(!loading && orders.length === 0) && orders.some(order => [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21].includes(order.status)) && (
-            <OptionTitle isBusinessesPage={isBusinessesPage} isActive={filterForOrders}>
-              <h1 onClick={() => setFilterForOrders('active-orders')}>
-                {t('ACTIVE', 'Active')}
-              </h1>
-            </OptionTitle>
-          )}
-          {!loading && (orders.length === 0 || !orders.some(order => [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21].includes(order.status))) && (
-            <NotFoundSource
-              image={imageFails}
-              content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
-              conditioned
-            />
-          )}
-        </>
-      )}
+      <Container>
+        <TitleContainer>
+          <h1>{t('MY_ORDERS', 'My orders')}</h1>
+          <RiHome2Line size='16' onClick={() => onRedirectPage({ page: 'ordertypes' })} />
+        </TitleContainer>
+        {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : (isShowTitles || !isBusinessesPage)) && (
+          <>
+            {!(!loading && orders.length === 0) && orders.some(order => [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21].includes(order.status)) && (
+              <OptionTitle isBusinessesPage={isBusinessesPage} isActive={filterForOrders}>
+                <h1 onClick={() => setFilterForOrders('active-orders')}>
+                  {t('ACTIVE', 'Active')}
+                </h1>
+              </OptionTitle>
+            )}
+            {!loading && (orders.length === 0 || !orders.some(order => [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21].includes(order.status))) && (
+              <NotFoundSource
+                image={imageFails}
+                content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
+                conditioned
+              />
+            )}
+          </>
+        )}
 
-      {(isCustomLayout ? (loadingOrders || loading || isBusinessesLoading) : loading) && (
-        <OrdersContainer
-          isSkeleton
-          activeOrders={horizontal}
-          isBusinessesPage={isBusinessesPage}
-        >
-          {
-            [...Array(3)].map((item, i) => (
-              <SkeletonOrder key={i}>
-                <SkeletonContent>
-                  <SkeletonInformation>
-                    <div>
-                      <Skeleton width={70} height={70} />
-                    </div>
-                    <SkeletonText>
-                      <Skeleton width={100} />
-                      <Skeleton width={120} />
-                      <Skeleton width={80} />
-                    </SkeletonText>
-                  </SkeletonInformation>
-                  <SkeletonReorder>
-                    <Skeleton />
-                  </SkeletonReorder>
-                </SkeletonContent>
-              </SkeletonOrder>
-            ))
-          }
-        </OrdersContainer>
-      )}
+        {(isCustomLayout ? (loadingOrders || loading || isBusinessesLoading) : loading) && (
+          <OrdersContainer
+            isSkeleton
+            activeOrders={horizontal}
+            isBusinessesPage={isBusinessesPage}
+          >
+            {
+              [...Array(3)].map((item, i) => (
+                <SkeletonOrder key={i}>
+                  <SkeletonContent>
+                    <SkeletonInformation>
+                      <div>
+                        <Skeleton width={64} height={64} />
+                      </div>
+                      <SkeletonText>
+                        <Skeleton width={80} />
+                        <Skeleton width={100} />
+                        <Skeleton width={60} />
+                      </SkeletonText>
+                    </SkeletonInformation>
+                    <SkeletonReorder>
+                      <Skeleton />
+                    </SkeletonReorder>
+                  </SkeletonContent>
+                </SkeletonOrder>
+              ))
+            }
+          </OrdersContainer>
+        )}
 
-      {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (
-        <VerticalOrdersLayout
-          reorderLoading={reorderLoading}
-          orders={ordersFiltered}
-          pagination={pagination}
-          loadMoreOrders={loadMoreOrders}
-          onRedirectPage={onRedirectPage}
-          getOrderStatus={getOrderStatus}
-          handleReorder={handleReorder}
-        />
-      )}
+        {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (
+          <VerticalOrdersLayout
+            reorderLoading={reorderLoading}
+            orders={ordersFiltered}
+            pagination={pagination}
+            loadMoreOrders={loadMoreOrders}
+            onRedirectPage={onRedirectPage}
+            getOrderStatus={getOrderStatus}
+            handleReorder={handleReorder}
+          />
+        )}
+      </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

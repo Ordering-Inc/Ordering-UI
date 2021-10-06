@@ -34,7 +34,8 @@ import {
   WrapperLeftContent,
   CheckOutDivider,
   DriverTipDivider,
-  ModalIcon
+  ModalIcon,
+  TotalCart
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -453,7 +454,8 @@ const CheckoutUI = (props) => {
             <BeforeComponent key={i} {...props} />))}
 
           {!props.isHideSectionSeven && !cartState.loading && cart && cart?.status !== 2 && (
-            <WrapperPlaceOrderButton>
+            <TotalCart>
+              <p>{parsePrice(cart?.total)}</p>
               <Button
                 color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
                 disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || loading || isLoadingPlace}
@@ -465,7 +467,7 @@ const CheckoutUI = (props) => {
                   `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
                 ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
               </Button>
-            </WrapperPlaceOrderButton>
+            </TotalCart>
           )}
 
           {!cart?.valid_address && cart?.status !== 2 && (

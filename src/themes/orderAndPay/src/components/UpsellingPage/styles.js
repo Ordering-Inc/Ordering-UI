@@ -127,8 +127,6 @@ export const CloseUpselling = styled.div`
 export const SkeletonContainer = styled.div`
   display: flex;
   width: 15%;
-  margin: 20px;
-  padding: 10px;
   flex-direction: column;
   justify-content: flex-start;
   text-align: center;

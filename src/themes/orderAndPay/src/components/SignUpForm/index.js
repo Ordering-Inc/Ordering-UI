@@ -28,7 +28,8 @@ import {
   Title,
   InputWrapper,
   InputBeforeIcon,
-  TermsConditionWrapper
+  TermsConditionWrapper,
+  ModalIcon
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -45,6 +46,8 @@ import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 import GoMail from '@meronex/icons/go/GoMail'
 import FaRegUser from '@meronex/icons/fa/FaRegUser'
 import BsLock from '@meronex/icons/bs/BsLock'
+import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
+import { useTheme } from 'styled-components'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes']
 
@@ -65,8 +68,10 @@ const SignUpFormUI = (props) => {
     saveCustomerUser,
     fieldsNotValid,
     signupData,
-    enableReCaptcha
+    enableReCaptcha,
+    onClose
   } = props
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
@@ -79,6 +84,7 @@ const SignUpFormUI = (props) => {
   const [passwordSee, setPasswordSee] = useState(false)
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const isAvailableSocialLogin = ((configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) || configs?.google_login_client_id?.value || configs?.apple_login_client_id?.value
 
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
@@ -247,8 +253,11 @@ const SignUpFormUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <SignUpContainer isPopup={isPopup}>
-        <FormSide isPopup={isPopup}>
+        <ModalIcon>
+          <BsArrowLeft size={20} onClick={() => onClose()} color={theme.colors.arrowColor} />
           <Title>{t('SIGN_UP', 'Sign up')}</Title>
+        </ModalIcon>
+        <FormSide isPopup={isPopup}>
           <FormInput
             noValidate
             isPopup={isPopup}
@@ -334,7 +343,7 @@ const SignUpFormUI = (props) => {
                         })}
                       />
                       <TogglePassword onClick={togglePasswordView}>
-                        {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                        {!passwordSee ? <AiOutlineEye color='#B1BCCC' size='18' /> : <AiOutlineEyeInvisible color='#B1BCCC' size='18' />}
                       </TogglePassword>
                       <InputBeforeIcon>
                         <BsLock />
@@ -402,21 +411,26 @@ const SignUpFormUI = (props) => {
               {elementLinkToLogin}
             </RedirectLink>
           )}
-          <LoginDivider>
-            <DividerLine />
-            <p>{t('OR', 'or')}</p>
-            <DividerLine />
-          </LoginDivider>
+          {isAvailableSocialLogin && (
+            <LoginDivider>
+              <DividerLine />
+              <p>{t('OR', 'or')}</p>
+              <DividerLine />
+            </LoginDivider>
+          )}
           {!externalPhoneNumber && (
             <>
               {Object.keys(configs).length > 0 ? (
                 <SocialButtons isPopup={isPopup}>
-                  {configs?.facebook_login?.value && configs?.facebook_id?.value && (
-                    <FacebookLoginButton
-                      appId={configs?.facebook_id?.value}
-                      handleSuccessFacebookLogin={handleSuccessFacebook}
-                    />
-                  )}
+                  {(configs?.facebook_login?.value === 'true' ||
+                configs?.facebook_login?.value === '1') &&
+                configs?.facebook_id?.value &&
+                (
+                  <FacebookLoginButton
+                    appId={configs?.facebook_id?.value}
+                    handleSuccessFacebookLogin={handleSuccessFacebook}
+                  />
+                )}
                   {configs?.apple_login_client_id?.value && (
                     <AppleLogin
                       onSuccess={handleSuccessApple}
