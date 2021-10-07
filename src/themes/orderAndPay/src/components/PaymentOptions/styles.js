@@ -13,7 +13,6 @@ export const PaymentMethodsList = styled.div`
 
   #select-input {
     width: 100%;
-    background: #F8F9FA;
     border-radius: 7.6px;
 
     > div: first-child {

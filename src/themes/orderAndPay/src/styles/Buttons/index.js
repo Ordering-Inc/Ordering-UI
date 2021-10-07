@@ -14,6 +14,7 @@ export const Button = styled.button`
   outline: none;
   overflow: hidden;
   text-overflow: ellipsis;
+  height: ${props => props.height};
   &:active {
     background: ${() => darken(0.07, '#CCC')};
   }

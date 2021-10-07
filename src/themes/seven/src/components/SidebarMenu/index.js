@@ -126,7 +126,7 @@ export const SidebarMenu = (props) => {
 
           <Navlinks>
             <Link to={t('ARCHIES_MENU_LINK', 'Archies menu link')}>{t('ARCHIES_MENU_TEXT', 'Menu')}</Link>
-            <Link to='/'>{t('ARCHIES_UBICATION_TEXT ', 'Ubicación')}</Link>
+            <Link to='#'>{t('ARCHIES_UBICATION_TEXT ', 'Ubicación')}</Link>
             <Link
               to='/picoli'
               onClick={() => actionSidebar(false)}

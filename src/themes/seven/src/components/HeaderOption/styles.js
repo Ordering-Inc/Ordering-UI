@@ -34,6 +34,9 @@ export const Container = styled.div`
 
   ${({ variant }) => variant === 'address' && css`
     width: 60%;
+    @media (min-width: 1200px) { 
+      min-width: 125px
+    }
   `}
 
   ${({ variant }) => variant === 'moment' && css`
@@ -51,15 +54,8 @@ export const AddressInput = styled.div`
   overflow: hidden;
   border: 1px solid ${props => props.theme.colors.borderColor};
   background-color: ${props => props.theme.colors.secundaryBackground};
+  color: ${props => props.theme.colors.primary};
 
-  ${props => props.theme?.rtl
-    ? css`
-      border-left: none;
-    `
-    : css`
-      border-right: none;
-    `
-  }
   span {
     width: 75%;
     white-space: nowrap;
@@ -71,12 +67,20 @@ export const AddressInput = styled.div`
   svg {
     margin: 0 5px;
     font-size: .9rem;
-    color: ${props => props.theme.colors.primary};
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 14px;
+    justify-content: flex-start;
   }
 
   @media (min-width: 1200px) {
     height: 48px;
     font-size: 1rem;
+    padding-right: 10px;
+    span {
+      width: 100%;
+    }
   }
 `
 

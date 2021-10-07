@@ -28,7 +28,8 @@ import {
   InputWrapper,
   LoginDivider,
   DividerLine,
-  Title
+  Title,
+  ModalIcon
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -47,6 +48,7 @@ import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 import BsLock from '@meronex/icons/bs/BsLock'
 import GoMail from '@meronex/icons/go/GoMail'
 import { GoogleLoginButton } from '../GoogleLogin'
+import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 
 const LoginFormUI = (props) => {
   const {
@@ -66,7 +68,8 @@ const LoginFormUI = (props) => {
     loginTab,
     isPopup,
     credentials,
-    enableReCaptcha
+    enableReCaptcha,
+    onClose
   } = props
   const numOtpInputs = 4
   const [, t] = useLanguage()
@@ -81,6 +84,7 @@ const LoginFormUI = (props) => {
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
   const [otpState, setOtpState] = useState('')
+  const isAvailableSocialLogin = ((configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) || configs?.google_login_client_id?.value || configs?.apple_login_client_id?.value
   const [otpLeftTime,, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
 
@@ -254,17 +258,21 @@ const LoginFormUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <LoginContainer isPopup={isPopup}>
-        <FormSide isPopup={isPopup}>
+        <ModalIcon>
+          <BsArrowLeft size={20} onClick={() => onClose()} color={theme.colors.arrowColor} />
           <Title>{t('LOGIN', 'Login')}</Title>
+        </ModalIcon>
+        <FormSide isPopup={isPopup}>
 
           {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
             <LoginWith isPopup={isPopup}>
-              <Tabs variant='primary'>
+              <Tabs variant='primary' onlyTwoOptions={useLoginByEmail && useLoginByCellphone}>
                 {useLoginByEmail && (
                   <Tab
                     onClick={() => handleChangeTab('email')}
                     active={loginTab === 'email'}
                     borderBottom={loginTab === 'email'}
+                    onlyTwoOptions
                   >
                     {t('BY_EMAIL', 'by Email')}
                   </Tab>
@@ -274,6 +282,7 @@ const LoginFormUI = (props) => {
                     onClick={() => handleChangeTab('cellphone')}
                     active={loginTab === 'cellphone'}
                     borderBottom={loginTab === 'cellphone'}
+                    onlyTwoOptions
                   >
                     {t('BY_PHONE', 'by Phone')}
                   </Tab>
@@ -364,7 +373,7 @@ const LoginFormUI = (props) => {
                     onChange={(e) => handleChangeInput(e)}
                   />
                   <TogglePassword onClick={togglePasswordView}>
-                    {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                    {!passwordSee ? <AiOutlineEye color='#B1BCCC' size='18' /> : <AiOutlineEyeInvisible color='#B1BCCC' size='18' />}
                   </TogglePassword>
                   <InputBeforeIcon>
                     <BsLock />
@@ -383,7 +392,6 @@ const LoginFormUI = (props) => {
               }
               {!loginWithOtpState && (
                 <RedirectLink isPopup={isPopup}>
-                  <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
@@ -429,11 +437,13 @@ const LoginFormUI = (props) => {
           {(!props.isDisableButtons && !loginWithOtpState) && (
             Object.keys(configs).length > 0 ? (
               <>
-                <LoginDivider isPopup={isPopup}>
-                  <DividerLine />
-                  <p>{t('OR', 'or')}</p>
-                  <DividerLine />
-                </LoginDivider>
+                {isAvailableSocialLogin && (
+                  <LoginDivider isPopup={isPopup}>
+                    <DividerLine />
+                    <p>{t('OR', 'or')}</p>
+                    <DividerLine />
+                  </LoginDivider>
+                )}
                 <SocialButtons isPopup={isPopup}>
                   {(configs?.facebook_login?.value === 'true' ||
                 configs?.facebook_login?.value === '1') &&
