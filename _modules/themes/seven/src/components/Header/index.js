@@ -259,7 +259,7 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: window.location.pathname === '/menu' ? 'active' : ''
   }, t('ARCHIES_MENU_TEXT', 'Menu'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/#"
+    to: "/"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: window.location.pathname === '/location' ? 'active' : ''
   }, t('ARCHIES_UBICATION_TEXT ', 'Ubicación'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {

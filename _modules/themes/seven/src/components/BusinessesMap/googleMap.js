@@ -47,8 +47,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// import { useEvent } from '../../contexts/EventContext'
-// import { useUtils } from '../../contexts/UtilsContext'
 var GoogleMaps = function GoogleMaps(props) {
   var googleReady = props.googleReady,
       locations = props.locations,
@@ -90,6 +88,10 @@ var GoogleMaps = function GoogleMaps(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       boundMap = _useState8[0],
       setBoundMap = _useState8[1];
+
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
   var location = fixedLocation || props.location;
   var center = {
@@ -145,12 +147,13 @@ var GoogleMaps = function GoogleMaps(props) {
           scaledSize: new window.google.maps.Size(45, 45)
         } : null
       });
+      var mapLinkText = t('SELECT_STORE', 'Select Store');
       var content = '<div style="display: flex; flex-direction: column;"><h4 style="margin: 7px 0px;">' + ((_locations$i6 = locations[i]) === null || _locations$i6 === void 0 ? void 0 : _locations$i6.slug) + '</h4></div>';
 
       if (businessMeta) {
         var _businessMeta, _businessMeta2, _locations$i7;
 
-        content = '<div style="display: flex; flex-direction: column;"><h4 style="margin: 7px 0px;">' + ((_businessMeta = businessMeta) === null || _businessMeta === void 0 ? void 0 : _businessMeta.businesName) + '</h4> <p style="margin: 0px;"> Today: ' + ((_businessMeta2 = businessMeta) === null || _businessMeta2 === void 0 ? void 0 : _businessMeta2.todayLapses) + '</p> <a href="store/' + ((_locations$i7 = locations[i]) === null || _locations$i7 === void 0 ? void 0 : _locations$i7.slug) + '"style="text-decoration: none; display: flex; justify-content: center; align-items: center; line-height: 30px; flex-grow: 1; border:none; border-radius: 4px; background-color: #dd0031; font-size:10px; color: #fff; margin-top: 10px;">Select Store</a></div>';
+        content = '<div style="display: flex; flex-direction: column;"><h4 style="margin: 7px 0px;">' + ((_businessMeta = businessMeta) === null || _businessMeta === void 0 ? void 0 : _businessMeta.businesName) + '</h4> <p style="margin: 0px;"> Today: ' + ((_businessMeta2 = businessMeta) === null || _businessMeta2 === void 0 ? void 0 : _businessMeta2.todayLapses) + '</p> <a href="store/' + ((_locations$i7 = locations[i]) === null || _locations$i7 === void 0 ? void 0 : _locations$i7.slug) + '"style="text-decoration: none; display: flex; justify-content: center; align-items: center; line-height: 30px; flex-grow: 1; border:none; border-radius: 4px; background-color: #dd0031; font-size:10px; color: #fff; margin-top: 10px;">' + mapLinkText + '</a></div>';
       }
 
       if (businessMap) {
