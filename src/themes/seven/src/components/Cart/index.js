@@ -253,7 +253,7 @@ const CartUI = (props) => {
                 </table>
                 {!couponShow && (
                   <CouponQuestion>
-                    <p>{t('COUPON_QUESTION', 'Do you have a coupon?')}<span className='coupon-apply' onClick={showCouponInput}>Apply</span></p>
+                    <p>{t('COUPON_QUESTION', 'Do you have a coupon?')}<span className='coupon-apply' onClick={showCouponInput}>{t('APPLY', 'Apply')}</span></p>
                   </CouponQuestion>
                 )}
                 {isCouponEnabled && !isCartPending && couponShow && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (

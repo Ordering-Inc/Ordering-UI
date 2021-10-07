@@ -13,13 +13,13 @@ export const HeroContainerStyled = styled.div`
   `}
 
   @media (min-width: 768px) {
-    height: 75vw;
+    height: 55vw;
     max-height: 75vw;
     overflow: hidden;
   }
 
   @media (min-width: 1200px) {
-    height: 85.562132vh;
+    height: 65.562132vh;
   }
 `
 
