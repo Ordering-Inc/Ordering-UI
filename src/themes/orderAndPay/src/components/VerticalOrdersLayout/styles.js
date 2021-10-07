@@ -12,7 +12,6 @@ export const SingleCard = styled.div`
     props.theme.colors.backgroundPage === '#FFF' ||
     props.theme.colors.backgroundPage === '#FFFFFF'
   ) && css`
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
     border-radius: 16px;
     margin-bottom: 15px;
   `}
