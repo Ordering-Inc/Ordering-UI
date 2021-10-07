@@ -114,7 +114,7 @@ export const SingleProductCard = (props) => {
               maxLength='500'
             />
           </Quantity>
-          {!(isSoldOut || maxProductQuantity <= 0) && <Button color='primary' outline>ADD TO CART</Button>}
+          {!(isSoldOut || maxProductQuantity <= 0) && <Button color='primary' outline>{t('ADD_TO_CART', 'ADD TO CART')}</Button>}
         </CartAction>
         {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
       </CardContainer>
