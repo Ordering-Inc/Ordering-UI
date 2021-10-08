@@ -265,7 +265,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return handleChangeTabValue('all');
     },
     borderBottom: true
-  }, t('ALL', 'All')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, t('ALL', 'All')), (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     key: "ingredients",
     active: tabValue === 'ingredients',
     onClick: function onClick() {

@@ -25,7 +25,7 @@ var WrapperLeftContainer = _styledComponents.default.div(_templateObject2 || (_t
 
 exports.WrapperLeftContainer = WrapperLeftContainer;
 
-var WrapperRightContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  background: #F8F9FA;\n  box-sizing: border-box;\n\n  @media (min-width: 769px) {\n    width: 45%;\n    padding: 55px 40px;\n  }\n"])));
+var WrapperRightContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  background: #fff;\n  box-sizing: border-box;\n\n  @media (min-width: 769px) {\n    width: 45%;\n    padding: 55px 40px;\n  }\n"])));
 
 exports.WrapperRightContainer = WrapperRightContainer;
 
@@ -85,7 +85,7 @@ var WrapperLeftContent = _styledComponents.default.div(_templateObject16 || (_te
 
 exports.WrapperLeftContent = WrapperLeftContent;
 
-var CheckOutDivider = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  height: 8px;\n  width: calc(100% + 40px);\n  margin-left: -20px;\n  background: #F8F9FA;\n\n  @media(min-width: 769px) {\n    width: calc(100% + 100px);\n    margin-left: -40px;\n  }\n"])));
+var CheckOutDivider = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  height: 8px;\n  width: calc(100% + 40px);\n  margin-left: -20px;\n  background: #fff;\n\n  @media(min-width: 769px) {\n    width: calc(100% + 100px);\n    margin-left: -40px;\n  }\n"])));
 
 exports.CheckOutDivider = CheckOutDivider;
 

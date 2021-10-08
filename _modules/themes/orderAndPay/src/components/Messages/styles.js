@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ModalIconHeader = exports.ModalIcon = exports.ImageContainer = exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.SendImage = exports.Send = exports.SendForm = exports.TimeofSent = exports.MyName = exports.PartnerName = exports.ChatImage = exports.SkeletonBubbleBusiness = exports.SkeletonBubbleCustomer = exports.BubbleCustomer = exports.BubbleBusines = exports.BubbleConsole = exports.MessageCustomer = exports.MessageBusiness = exports.MessageConsole = exports.Chat = exports.HeaderOnline = exports.Status = exports.HeaderName = exports.MessagesContainer = void 0;
+exports.ModalIconHeader = exports.NotSendMessage = exports.ModalIcon = exports.ImageContainer = exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.SendImage = exports.Send = exports.SendForm = exports.TimeofSent = exports.MyName = exports.PartnerName = exports.ChatImage = exports.SkeletonBubbleBusiness = exports.SkeletonBubbleCustomer = exports.BubbleCustomer = exports.BubbleBusines = exports.BubbleConsole = exports.MessageCustomer = exports.MessageBusiness = exports.MessageConsole = exports.Chat = exports.HeaderOnline = exports.Status = exports.HeaderName = exports.MessagesContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -172,7 +172,9 @@ var ModalIcon = _styledComponents.default.span(_templateObject34 || (_templateOb
 });
 
 exports.ModalIcon = ModalIcon;
+var NotSendMessage = (0, _styledComponents.default)(SendForm)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  width: 100%;\n  color: #909BA9;\n  background: #FAFAFA;\n\n  svg {\n    font-size: 20px;\n  }\n\n  p {\n    font-size: 14px;\n    color: #909BA9;\n    margin: 6px 0;\n  }\n"])));
+exports.NotSendMessage = NotSendMessage;
 
-var ModalIconHeader = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  box-sizing: border-box;\n  margin-bottom: 20px;\n  align-items: center;\n  box-shadow: 0px 1px 4px 0px #0000001A;\n  padding: 15px 40px 0 40px;\n  img {\n    margin-left: 15px;\n    box-shadow: 0px 1px 4px 0px #0000001A;\n    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n    width: 32px;\n    height: 32px;\n    border-radius: 7.6px;\n    object-fit: cover;\n  }\n"])));
+var ModalIconHeader = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  box-sizing: border-box;\n  margin-bottom: 20px;\n  align-items: center;\n  box-shadow: 0px 1px 4px 0px #0000001A;\n  padding: 10px 40px 0 40px;\n  img {\n    margin-left: 15px;\n    box-shadow: 0px 1px 4px 0px #0000001A;\n    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n    width: 32px;\n    height: 32px;\n    border-radius: 7.6px;\n    object-fit: cover;\n  }\n"])));
 
 exports.ModalIconHeader = ModalIconHeader;

@@ -323,7 +323,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   })), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderLoading,
-    orders: ordersFiltered,
+    orders: ordersFiltered.reverse(),
     pagination: pagination,
     loadMoreOrders: loadMoreOrders,
     onRedirectPage: onRedirectPage,
@@ -344,6 +344,8 @@ var OrdersOption = function OrdersOption(props) {
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersOptionUI,
     orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21] : [1, 2, 5, 6, 10, 11, 12, 16, 17],
+    orderBy: '-id',
+    orderDirection: 'asc',
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
