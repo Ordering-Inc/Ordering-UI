@@ -272,7 +272,7 @@ var CartUI = function CartUI(props) {
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total))))), !couponShow && /*#__PURE__*/_react.default.createElement(_styles.CouponQuestion, null, /*#__PURE__*/_react.default.createElement("p", null, t('COUPON_QUESTION', 'Do you have a coupon?'), /*#__PURE__*/_react.default.createElement("span", {
     className: "coupon-apply",
     onClick: showCouponInput
-  }, "Apply"))), isCouponEnabled && !isCartPending && couponShow && (isCheckout || isCartPopover) && !(isCheckout && isCartPopover) && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
+  }, t('APPLY', 'Apply')))), isCouponEnabled && !isCartPending && couponShow && (isCheckout || isCartPopover) && !(isCheckout && isCartPopover) && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
     businessId: cart.business_id,
     price: cart.total
   }))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

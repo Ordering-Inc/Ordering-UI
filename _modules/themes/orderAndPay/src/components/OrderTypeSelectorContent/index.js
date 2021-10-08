@@ -68,6 +68,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       logo = props.logo,
       handleBusinessPage = props.handleBusinessPage,
       businessId = props.businessId;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -281,12 +282,10 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
-    auth: auth
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('SELECT_YOUR_ORDER_TYPE', 'Select your order type')), auth && /*#__PURE__*/_react.default.createElement("svg", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('SELECT_YOUR_ORDER_TYPE', 'Select your order type')), auth && /*#__PURE__*/_react.default.createElement("svg", {
     onClick: ordersRedirect,
-    width: "24",
-    height: "24",
+    width: "16px",
+    height: "16px",
     viewBox: "0 0 16 16",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg"
@@ -312,7 +311,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
         });
       },
       active: (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === (item === null || item === void 0 ? void 0 : item.value)
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeTitle, null, item.text), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeDescription, null, item.description), /*#__PURE__*/_react.default.createElement(_styles.OrderStartWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('START_MY_ORDER', 'start my order')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))));
+    }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeTitle, null, item.text), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeDescription, null, item.description), /*#__PURE__*/_react.default.createElement(_styles.OrderStartWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('START_MY_ORDER', 'Start my order')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))));
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: orderTypeSelected === null || orderTypeSelected === void 0 ? void 0 : orderTypeSelected.open,
     onClose: function onClose() {
@@ -321,14 +320,16 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       }));
     },
     hideCloseDefault: true,
-    height: "calc(100vh + 100px)"
+    height: "calc(100vh + 100px)",
+    padding: "30px 40px 10px 40px"
   }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_BsArrowLeft.default, {
     size: 20,
     onClick: function onClick() {
       return setOrderTypeSelected(_objectSpread(_objectSpread({}, orderTypeSelected), {}, {
         open: false
       }));
-    }
+    },
+    color: theme.colors.arrowColor
   })), /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, orderTypeSelected === null || orderTypeSelected === void 0 ? void 0 : orderTypeSelected.type), /*#__PURE__*/_react.default.createElement("label", null, orderTypeSelected === null || orderTypeSelected === void 0 ? void 0 : orderTypeSelected.label), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     placeholder: "#",
     onChange: function onChange(e) {
@@ -341,12 +342,13 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.PlaceName, {
       key: place.id,
       isDisabled: !place.enabled
-    }, place.name, " #", place.id);
+    }, /*#__PURE__*/_react.default.createElement("p", null, place.name), " ", /*#__PURE__*/_react.default.createElement("span", null, t('TABLE', 'Table'), " ", place.id));
   }))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     style: {
       width: '100%'
     },
+    height: "44px",
     onClick: handleChangePlace
   }, t('CONTINUE', 'Continue')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),

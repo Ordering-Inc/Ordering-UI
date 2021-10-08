@@ -42,7 +42,7 @@ var FormInput = _styledComponents.default.form(_templateObject4 || (_templateObj
 
 exports.FormInput = FormInput;
 
-var RedirectLink = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  padding: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  margin: 0px;\n  font-size: 17px;\n\n  span {\n    margin-right: 5px;\n\n    ", "\n  }\n\n  a {\n    color: ", ";\n    text-decoration: none;\n  }\n\n  * {\n    margin: 0px;\n    padding: 0px;\n  }\n\n  ", "\n\n  @media (min-width: 425px) {\n    flex-direction: row;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n    flex-direction: row;\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (props) {
+var RedirectLink = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  padding: 10px;\n  padding-left: 0px;\n  display: flex;\n  justify-content: center;\n  align-items: flex-start;\n  margin: 0px;\n  font-size: 14px;\n  font-weight: 400;\n\n  span {\n    margin-right: 5px;\n    color: black;\n    ", "\n  }\n\n  a {\n    color: ", ";\n    text-decoration: none;\n  }\n\n  * {\n    margin: 0px;\n    padding: 0px;\n  }\n\n  ", "\n\n  @media (min-width: 425px) {\n    flex-direction: row;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n    flex-direction: row;\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n    "])));
@@ -50,9 +50,9 @@ var RedirectLink = _styledComponents.default.div(_templateObject5 || (_templateO
   return props.theme.colors.primary;
 }, function (_ref5) {
   var register = _ref5.register;
-  return register && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    width: calc(95% - 20px);\n\n    @media (min-width: 481px) {\n      width: ", ";\n    }\n  "])), function (_ref6) {
+  return register && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    flex-direction: row;\n    justify-content: center;\n    width: calc(100% - 20px);\n    align-items: center;\n    @media (min-width: 481px) {\n      width: ", ";\n    }\n  "])), function (_ref6) {
     var isPopup = _ref6.isPopup;
-    return isPopup ? 'calc(95% - 20px)' : 'calc(80% - 20px)';
+    return isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)';
   });
 }, function (_ref7) {
   var isPopup = _ref7.isPopup;

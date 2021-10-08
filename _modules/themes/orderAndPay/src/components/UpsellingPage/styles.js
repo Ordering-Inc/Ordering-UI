@@ -43,7 +43,7 @@ var CloseUpselling = _styledComponents.default.div(_templateObject6 || (_templat
 
 exports.CloseUpselling = CloseUpselling;
 
-var SkeletonContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 15%;\n  margin: 20px;\n  padding: 10px;\n  flex-direction: column;\n  justify-content: flex-start;\n  text-align: center;\n  border-radius: 9px;\n  overflow: hidden;\n"])));
+var SkeletonContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 15%;\n  flex-direction: column;\n  justify-content: flex-start;\n  text-align: center;\n  border-radius: 9px;\n  overflow: hidden;\n"])));
 
 exports.SkeletonContainer = SkeletonContainer;
 
@@ -51,13 +51,13 @@ var HorizontalUpsellingContainer = _styledComponents.default.div(_templateObject
 
 exports.HorizontalUpsellingContainer = HorizontalUpsellingContainer;
 
-var HorizontalItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  border-radius: 7.6px;\n  margin-right: 15px;\n  border: 2px solid #E9ECEF;\n  box-sizing: border-box;\n  padding: 10px;\n\n  ", "\n"])), function (props) {
+var HorizontalItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  border-radius: 7.6px;\n  margin-right: 15px;\n  border: 2px solid #E9ECEF;\n  box-sizing: border-box;\n  padding: 10px 10px 6px 10px;\n\n  ", "\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n    margin-right: 0px;\n  "])));
 });
 
 exports.HorizontalItem = HorizontalItem;
 
-var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 110px;\n  height: 110px;\n  img {\n    border-radius: 7.6px;\n    width: 110px;\n    height: 110px;\n    margin-left: 10px;\n\n    ", "\n\n  }\n"])), function (props) {
+var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  img {\n    border-radius: 7.6px;\n    width: 78px;\n    height: 78px;\n    margin-left: 5px;\n\n    ", "\n\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
@@ -65,7 +65,7 @@ var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templ
 
 exports.HorizontalImage = HorizontalImage;
 
-var HorizontalDetails = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  justify-content: space-between;\n  height: 110px;\n  width: 150px;\n  h3 {\n    width: 160px;\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    margin: 0 0 5px 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    display: -webkit-box;\n    -webkit-line-clamp: 2; /* number of lines to show */\n    -webkit-box-orient: vertical;\n  }\n\n  span {\n    font-size: 12px;\n    color: ", ";\n\n    &.discount {\n      font-size: 10px;\n      color: #909BA9;\n      ", "\n    }\n  }\n\n  button {\n    margin-top: 6px;\n    border-radius: 50px;\n    color: ", ";\n    background: ", "\n  }\n"])), function (props) {
+var HorizontalDetails = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  justify-content: flex-start;\n  width: 110px;\n  h3 {\n    width: 95px;\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    margin: 0px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    display: -webkit-box;\n    -webkit-line-clamp: 1; /* number of lines to show */\n    -webkit-box-orient: vertical;\n  }\n\n  span {\n    font-size: 12px;\n    color: ", ";\n\n    &.discount {\n      font-size: 10px;\n      color: #909BA9;\n      ", "\n    }\n  }\n\n  button {\n    line-height: 22px;\n    padding-left: 9px;\n    padding-right: 9px;\n    font-size: 12px;\n    margin-top: 3px;\n    border-radius: 50px;\n    color: ", ";\n    background: ", "\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   return props.theme.colors.darkTextColor;
@@ -85,6 +85,6 @@ var HorizontalDetails = _styledComponents.default.div(_templateObject13 || (_tem
 
 exports.HorizontalDetails = HorizontalDetails;
 
-var WrapAutoScroll = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  width: 100%;\n  overflow-x: auto;\n  display: flex;\n"])));
+var WrapAutoScroll = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow-x: auto;\n  display: flex;\n  margin-left: 10px;\n"])));
 
 exports.WrapAutoScroll = WrapAutoScroll;

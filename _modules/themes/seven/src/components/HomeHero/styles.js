@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 62.562132vh;\n\n  ", "\n\n  @media (min-width: 768px) {\n    height: 75vw;\n    max-height: 75vw;\n    overflow: hidden;\n  }\n\n  @media (min-width: 1200px) {\n    height: 85.562132vh;\n  }\n"])), function (_ref) {
+var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 62.562132vh;\n\n  ", "\n\n  @media (min-width: 768px) {\n    height: 55vw;\n    max-height: 75vw;\n    overflow: hidden;\n  }\n\n  @media (min-width: 1200px) {\n    height: 65.562132vh;\n  }\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 });

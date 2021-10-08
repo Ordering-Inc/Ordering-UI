@@ -282,8 +282,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ORDERS', 'My orders')), /*#__PURE__*/_react.default.createElement(_RiHome2Line.default, {
-    size: "24",
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ORDERS', 'My orders')), /*#__PURE__*/_react.default.createElement(_RiHome2Line.default, {
+    size: "16",
     onClick: function onClick() {
       return onRedirectPage({
         page: 'ordertypes'
@@ -312,14 +312,14 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonInformation, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 70,
-      height: 70
+      width: 64,
+      height: 64
     })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonText, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 80
+    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 120
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 80
+      width: 60
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   })), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderLoading,
@@ -329,7 +329,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     onRedirectPage: onRedirectPage,
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder
-  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

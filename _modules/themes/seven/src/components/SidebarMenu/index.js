@@ -146,7 +146,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home')))), /*#__PURE__*/_react.default.createElement(_styles.Navlinks, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: t('ARCHIES_MENU_LINK', 'Archies menu link')
   }, t('ARCHIES_MENU_TEXT', 'Menu')), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
+    to: "#"
   }, t('ARCHIES_UBICATION_TEXT ', 'Ubicación')), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/picoli",
     onClick: function onClick() {
