@@ -172,7 +172,7 @@ exports.ExclamationWrapper = ExclamationWrapper;
 var WrapperLeftContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n\n"])));
 
 exports.WrapperLeftContainer = WrapperLeftContainer;
-var WrapperRightContainer = (0, _styledComponents.default)(WrapperLeftContainer)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n"])));
+var WrapperRightContainer = (0, _styledComponents.default)(WrapperLeftContainer)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n"])));
 exports.WrapperRightContainer = WrapperRightContainer;
 
 var Divider = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  height: 8px;\n  background: #F8F9FA;\n  width: calc(100% + 40px);\n  margin-left: -20px;\n"])));
