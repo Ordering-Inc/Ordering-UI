@@ -225,6 +225,8 @@ export const OrderBill = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;
+  border-top: 1px solid #BFBFBF;
+  padding-top: 10px;
   table {
     width: 100%;
     font-size: 12px;
@@ -241,7 +243,7 @@ export const OrderBill = styled.div`
 
   table.total {
     border-top: 1px solid #BFBFBF;
-    margin-top: 15px;
+    margin-top: 5px;
     tr {
       font-size: 12px;
       td:nth-child(1) {
