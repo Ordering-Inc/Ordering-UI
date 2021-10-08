@@ -16,7 +16,10 @@ const AccordionStyled = styled.div`
   justify-content: space-between;
   cursor: initial;
   transition: background-color 0.6s ease;
-  margin: 0px 10px;
+  margin: 0 10px;
+  ${({ isCheckout }) => isCheckout && css`
+    margin: 0px;
+  `}
 
   .rotate {
     transform: rotate(180deg);
@@ -101,6 +104,10 @@ export const ContentInfo = styled.div`
     }
   `}
 
+  @media (min-width: 480px){
+    width: 80%;
+  }
+
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
     margin-left: 0px;
@@ -110,6 +117,15 @@ export const ContentInfo = styled.div`
     font-size: 12px;
     margin: 0px;
     font-weight: 600;
+  }
+
+  div {
+    span {
+      font-size: 10px;
+    }
+    p{
+      font-size: 10px;
+    }
   }
 
   span {
@@ -172,19 +188,22 @@ export const ProductComment = styled.div`
     padding-left: 0px;
   `}
   p {
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 12px;
     margin: 0px;
   }
 
   h3 {
-    font-weight: normal;
+    color: ${({ theme }) => theme.colors.darkTextColor};
+    font-size: 12px;
+    font-weight: 500;
     text-transform: capitalize;
-    margin: 0px 20px 0px 40px;
+    margin: 0px 20px 0px 15px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     ${props => props.theme?.rtl && css`
-      margin: 0px 40px 0px 20px
+      margin: 0px 15px 0px 20px
     `}
   }
 `
@@ -195,7 +214,8 @@ export const ProductInfo = styled.div`
   width: 100%;
   overflow: hidden;
   h1,
-  h3 {
+  h3,
+  p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -203,24 +223,24 @@ export const ProductInfo = styled.div`
 
   h3 {
     font-size: 12px;
-    max-width: 50%;
+    max-width: ${({ isOrderDetails }) => isOrderDetails ? '90%' : '50%'};
   }
 
   p {
-    font-size: 20px;
+    font-size: 12px;
     margin: 0px 5px;
+    width: 80%;
   }
 
   @media (min-width: 360px){
     h3{
-      max-width: 70%;
+      max-width: ${({ isOrderDetails }) => isOrderDetails ? '98%' : '70%'};
     }
   }
 
-
   @media (min-width: 411px) {
     h3{
-      max-width: 100%;
+      max-width: 90%;
     }
   }
 `
@@ -273,7 +293,7 @@ export const ProductActionsDelete = styled(ProductActionsEdit)`
 `
 
 export const ProductPriceSection = styled.div`
-  width: 25%;
+  width: ${({ isOrderDetails }) => isOrderDetails ? '15px' : '25%'};
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -376,4 +396,5 @@ export const ProductOptionsList = styled.ul`
 
 export const ProductQuantity = styled.span`
   margin: 0 5px;
+  font-size: 14px;
 `

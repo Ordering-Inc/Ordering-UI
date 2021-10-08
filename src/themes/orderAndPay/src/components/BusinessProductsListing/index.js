@@ -111,8 +111,24 @@ const BusinessProductsListingUI = (props) => {
     }
   }
 
-  const onClickCategory = (category) => {
-    setCategory(category)
+  const onClickCategory = (category, categoryId) => {
+    const categoryTitle = document.getElementsByClassName(category.name)[0]
+    if (categoryTitle) {
+      window.scrollTo({
+        top: categoryTitle.offsetTop - 75,
+        behavior: 'smooth'
+      })
+    } else if (categoryId === 'featured') {
+      window.scrollTo({
+        top: 120,
+        behavior: 'smooth'
+      })
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
   }
 
   const closeModalProductForm = () => {
@@ -210,6 +226,7 @@ const BusinessProductsListingUI = (props) => {
                         onClickCategory={handleChangeCategory}
                         featured={featuredProducts}
                         onClickCategoryCustom={onClickCategory}
+                        setCategorySelected={setCategory}
                       />
                     )}
 
@@ -231,6 +248,7 @@ const BusinessProductsListingUI = (props) => {
                         isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
                         handleClearSearch={handleChangeSearch}
                         errorQuantityProducts={errorQuantityProducts}
+                        setCategorySelected={setCategory}
                       />
                     </WrapContent>
                   </BusinessCategoryProductWrapper>

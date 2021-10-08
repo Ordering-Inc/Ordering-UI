@@ -252,6 +252,7 @@ const MessagesUI = (props) => {
           <React.Fragment key={message.id}>
             {message.type === 1 && (
               <MessageConsole key={message.id}>
+                {parseDate(message.created_at)}
                 {message.change?.attribute !== 'driver_id' ? (
                   <BubbleConsole>
                     {t('ORDER', 'Order')} {' '}
@@ -296,6 +297,8 @@ const MessagesUI = (props) => {
               <>
                 {message.type === 2 && user?.id === message.author_id && (
                   <MessageCustomer>
+                    {parseDate(message.created_at)}
+
                     <BubbleCustomer>
                       {message.comment}
                       <TimeofSent white>{getTimeAgo(message.created_at)}</TimeofSent>
@@ -304,6 +307,8 @@ const MessagesUI = (props) => {
                 )}
                 {message.type === 3 && user.id === message.author_id && (
                   <MessageCustomer>
+                    {parseDate(message.created_at)}
+
                     <BubbleCustomer name='image'>
                       <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
                       {message.comment && (
@@ -317,6 +322,8 @@ const MessagesUI = (props) => {
                 )}
                 {message.type === 2 && user?.id !== message.author_id && (
                   <MessageBusiness>
+                    {parseDate(message.created_at)}
+
                     <BubbleBusines>
                       <strong>
                         <MyName>
@@ -330,6 +337,8 @@ const MessagesUI = (props) => {
                 )}
                 {message.type === 3 && user.id !== message.author_id && (
                   <MessageBusiness>
+                    {parseDate(message.created_at)}
+
                     <BubbleBusines name='image'>
                       <strong>
                         <MyName>

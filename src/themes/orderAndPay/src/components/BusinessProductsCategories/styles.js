@@ -13,6 +13,10 @@ export const CategoriesContainer = styled.div`
   border-bottom: 1px solid #D9D9D9;
   text-align: center;
 
+  ::-webkit-scrollbar {
+    height: 0;
+  }
+
   div.category {
     text-overflow: ellipsis;
     white-space: nowrap;

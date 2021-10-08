@@ -16,7 +16,6 @@ const BusinessProductsListUI = (props) => {
   const {
     errors,
     businessId,
-    category,
     categories,
     categoryState,
     isBusinessLoading,
@@ -24,25 +23,42 @@ const BusinessProductsListUI = (props) => {
     featured,
     searchValue,
     isCartOnProductsList,
-    errorQuantityProducts
+    errorQuantityProducts,
+    setCategorySelected
   } = props
 
   const [, t] = useLanguage()
 
   useEffect(() => {
-    const categoryTitle = document.getElementsByClassName(category.name)[0]
-    if (categoryTitle) {
-      window.scrollTo({
-        top: categoryTitle.offsetTop - 75,
-        behavior: 'smooth'
-      })
-    } else {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
+    window.addEventListener('scroll', () => {
+      const categoriesOffset = getCategoriesOffset()
+      if (categoriesOffset?.length > 0) {
+        const lastContainerHeight = document.getElementsByClassName('last-category')[0]?.offsetHeight
+        categoriesOffset.map((category, i, hash) => {
+          if (category.offset - 125 < window.scrollY && hash[i + 1]?.offset > window.scrollY) {
+            setCategorySelected(category)
+          } else if (window.scrollY + lastContainerHeight + 125 > hash[categoriesOffset?.length - 1]?.offset) {
+            setCategorySelected(hash[categoriesOffset?.length - 1])
+          } else if (window.scrollY > 100 && window.scrollY < hash[2]?.offset && category?.name === t('FEATURED', 'Featured')) {
+            setCategorySelected(category)
+          } else if (window.scrollY === 0) {
+            setCategorySelected(hash[0])
+          }
+        })
+      }
+    })
+    return () => {
+      window.removeEventListener('scroll')
     }
-  }, [category])
+  }, [])
+
+  const getCategoriesOffset = () => {
+    return categories.map(category => ({
+      ...category,
+      offset: document.getElementsByClassName(category.name)[0]?.offsetTop
+    }
+    ))
+  }
 
   return (
     <>
@@ -73,7 +89,7 @@ const BusinessProductsListUI = (props) => {
         {
           featured && categoryState?.products?.find(product => product.featured) && (
             <WrapAllCategories>
-              <h3 class='featured'>{t('FEATURED', 'Featured')}</h3>
+              <h3 className='featured'>{t('FEATURED', 'Featured')}</h3>
               <ProductsListing>
                 {categoryState.products?.map(product => product.featured && (
                   <SingleProductCard
@@ -97,7 +113,7 @@ const BusinessProductsListUI = (props) => {
               <React.Fragment key={category?.id}>
                 {
                   products.length > 0 && (
-                    <WrapAllCategories id='container'>
+                    <WrapAllCategories className={i === categories.length - 1 && 'last-category'} id={`container ${i === categories.length - 1 && 'last-category'}`}>
                       {category.name !== t('FEATURED', 'Featured') && (
                         <div className='category-title'>
                           {

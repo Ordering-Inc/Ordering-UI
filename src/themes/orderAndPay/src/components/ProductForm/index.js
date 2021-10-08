@@ -195,14 +195,16 @@ const ProductOptionsUI = (props) => {
                     >
                       {t('ALL', 'All')}
                     </Tab>
-                    <Tab
-                      key='ingredients'
-                      active={tabValue === 'ingredients'}
-                      onClick={() => handleChangeTabValue('ingredients')}
-                      borderBottom
-                    >
-                      {t('INGREDIENTS', 'ingredients')}
-                    </Tab>
+                    {product?.ingredients.length > 0 && (
+                      <Tab
+                        key='ingredients'
+                        active={tabValue === 'ingredients'}
+                        onClick={() => handleChangeTabValue('ingredients')}
+                        borderBottom
+                      >
+                        {t('INGREDIENTS', 'ingredients')}
+                      </Tab>
+                    )}
                     <Tab
                       key='extra'
                       active={tabValue === 'extra'}
