@@ -39,7 +39,7 @@ var CartSticky = _styledComponents.default.div(_templateObject4 || (_templateObj
   return isCartOnProductsList && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    overflow-y: auto;\n    max-height: 70vh;\n    position: sticky;\n    top: 20px;\n  "])));
 }, function (_ref5) {
   var isCheckout = _ref5.isCheckout;
-  return !isCheckout && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      display: flex;\n      flex-direction: column;\n      flex: 1;\n      > div:first-child {\n        flex: 1;\n        margin-bottom: 20px;\n      }\n  "])));
+  return !isCheckout && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      display: flex;\n      flex-direction: column;\n      flex: 1;\n      > div:first-child {\n        margin-bottom: 20px;\n      }\n  "])));
 });
 
 exports.CartSticky = CartSticky;
@@ -74,7 +74,7 @@ var CheckoutAction = _styledComponents.default.div(_templateObject12 || (_templa
 
 exports.CheckoutAction = CheckoutAction;
 
-var Divider = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n  height: 8px;\n  width: calc(100% + 20px);\n  margin: 20px 0;\n  @media (min-width: 768px) {\n    width: calc(100%);\n  }\n"])));
+var Divider = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #fff;\n  height: 8px;\n  width: calc(100% + 20px);\n  margin: 20px 0;\n  @media (min-width: 768px) {\n    width: calc(100%);\n  }\n"])));
 
 exports.Divider = Divider;
 

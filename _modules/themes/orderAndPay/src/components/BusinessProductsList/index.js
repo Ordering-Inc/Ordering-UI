@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BusinessProductsList = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -15,13 +17,9 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _styles = require("./styles");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -32,6 +30,12 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -46,11 +50,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _categoryState$produc, _categoryState$produc2, _categoryState$produc3, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _categoryState$produc, _categoryState$produc2, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       businessId = props.businessId,
-      category = props.category,
       categories = props.categories,
       categoryState = props.categoryState,
       isBusinessLoading = props.isBusinessLoading,
@@ -58,11 +61,50 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       featured = props.featured,
       searchValue = props.searchValue,
       isCartOnProductsList = props.isCartOnProductsList,
-      errorQuantityProducts = props.errorQuantityProducts;
+      errorQuantityProducts = props.errorQuantityProducts,
+      setCategorySelected = props.setCategorySelected;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  (0, _react.useEffect)(function () {
+    window.addEventListener('scroll', function () {
+      var categoriesOffset = getCategoriesOffset();
+
+      if ((categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) > 0) {
+        var _document$getElements;
+
+        var lastContainerHeight = (_document$getElements = document.getElementsByClassName('last-category')[0]) === null || _document$getElements === void 0 ? void 0 : _document$getElements.offsetHeight;
+        categoriesOffset.map(function (category, i, hash) {
+          var _hash, _hash2, _hash$;
+
+          if (category.offset - 125 < window.scrollY && ((_hash = hash[i + 1]) === null || _hash === void 0 ? void 0 : _hash.offset) > window.scrollY) {
+            setCategorySelected(category);
+          } else if (window.scrollY + lastContainerHeight + 125 > ((_hash2 = hash[(categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) - 1]) === null || _hash2 === void 0 ? void 0 : _hash2.offset)) {
+            setCategorySelected(hash[(categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) - 1]);
+          } else if (window.scrollY > 100 && window.scrollY < ((_hash$ = hash[2]) === null || _hash$ === void 0 ? void 0 : _hash$.offset) && (category === null || category === void 0 ? void 0 : category.name) === t('FEATURED', 'Featured')) {
+            setCategorySelected(category);
+          } else if (window.scrollY === 0) {
+            setCategorySelected(hash[0]);
+          }
+        });
+      }
+    });
+    return function () {
+      window.removeEventListener('scroll');
+    };
+  }, []);
+
+  var getCategoriesOffset = function getCategoriesOffset() {
+    return categories.map(function (category) {
+      var _document$getElements2;
+
+      return _objectSpread(_objectSpread({}, category), {}, {
+        offset: (_document$getElements2 = document.getElementsByClassName(category.name)[0]) === null || _document$getElements2 === void 0 ? void 0 : _document$getElements2.offsetTop
+      });
+    });
+  };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -72,18 +114,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, (category === null || category === void 0 ? void 0 : category.id) && /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product) {
-    return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
-      key: product === null || product === void 0 ? void 0 : product.id,
-      isSoldOut: product.inventoried && !product.quantity,
-      product: product,
-      businessId: businessId,
-      onProductClick: onProductClick,
-      isCartOnProductsList: isCartOnProductsList
-    });
-  })), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.find(function (product) {
     return product.featured;
-  })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("h3", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc3 = categoryState.products) === null || _categoryState$produc3 === void 0 ? void 0 : _categoryState$produc3.map(function (product) {
+  })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("h3", {
+    className: "featured"
+  }, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.map(function (product) {
     return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
       isSoldOut: product.inventoried && !product.quantity,
@@ -92,28 +127,27 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList
     });
-  })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
-    return (category === null || category === void 0 ? void 0 : category.id) !== null;
-  }).map(function (category, i, _categories) {
-    var _categoryState$produc4;
-
-    var products = ((_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.filter(function (product) {
-      return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
-    })) || [];
+  }))), categories.map(function (category, i, _categories) {
+    var products = categoryState.products || [];
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: category === null || category === void 0 ? void 0 : category.id
     }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
-      id: "container"
-    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: i === categories.length - 1 && 'last-category',
+      id: "container ".concat(i === categories.length - 1 && 'last-category')
+    }, category.name !== t('FEATURED', 'Featured') && /*#__PURE__*/_react.default.createElement("div", {
       className: "category-title"
     }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
       src: category.image
-    }), /*#__PURE__*/_react.default.createElement("h3", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
+    }), /*#__PURE__*/_react.default.createElement("h3", {
+      className: category.name
+    }, category.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.filter(function (product) {
+      return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
+    }).map(function (_product) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
-        key: product === null || product === void 0 ? void 0 : product.id,
-        isSoldOut: product.inventoried && !product.quantity,
+        key: _product === null || _product === void 0 ? void 0 : _product.id,
+        isSoldOut: _product.inventoried && !_product.quantity,
         businessId: businessId,
-        product: product,
+        product: _product,
         onProductClick: onProductClick,
         isCartOnProductsList: isCartOnProductsList
       });

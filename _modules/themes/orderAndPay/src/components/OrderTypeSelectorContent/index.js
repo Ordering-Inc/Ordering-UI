@@ -338,11 +338,6 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     type: "text",
     ref: inputRef,
     min: 0
-  })), /*#__PURE__*/_react.default.createElement(_styles.Table, null, places.length > 0 && /*#__PURE__*/_react.default.createElement("h2", null, t('AVAILABLE_PLACES', 'Available places')), places.map(function (place) {
-    return /*#__PURE__*/_react.default.createElement(_styles.PlaceName, {
-      key: place.id,
-      isDisabled: !place.enabled
-    }, /*#__PURE__*/_react.default.createElement("p", null, place.name), " ", /*#__PURE__*/_react.default.createElement("span", null, t('TABLE', 'Table'), " ", place.id));
   }))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     style: {
