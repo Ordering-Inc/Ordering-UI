@@ -25,7 +25,7 @@ export const WrapperLeftContainer = styled.div`
 
 export const WrapperRightContainer = styled.div`
   width: 100%;
-  background: #F8F9FA;
+  background: #fff;
   box-sizing: border-box;
 
   @media (min-width: 769px) {
@@ -180,7 +180,7 @@ export const CheckOutDivider = styled.div`
   height: 8px;
   width: calc(100% + 40px);
   margin-left: -20px;
-  background: #F8F9FA;
+  background: #fff;
 
   @media(min-width: 769px) {
     width: calc(100% + 100px);

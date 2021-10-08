@@ -30,7 +30,6 @@ export const CartSticky = styled.div`
       flex-direction: column;
       flex: 1;
       > div:first-child {
-        flex: 1;
         margin-bottom: 20px;
       }
   `}
@@ -124,7 +123,7 @@ export const CheckoutAction = styled.div`
 `
 
 export const Divider = styled.div`
-  background: #F8F9FA;
+  background: #fff;
   height: 8px;
   width: calc(100% + 20px);
   margin: 20px 0;

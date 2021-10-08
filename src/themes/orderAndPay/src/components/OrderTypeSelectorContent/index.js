@@ -46,6 +46,7 @@ export const OrderTypeSelectorContentUI = (props) => {
   const [places, setPlaces] = useState([])
   const [placeId, setPlaceId] = useState('')
   const inputRef = useRef()
+
   const handleClickOrderType = ({ value, text, label }) => {
     handleChangeOrderType && handleChangeOrderType(value)
     if (!label) {
@@ -183,7 +184,7 @@ export const OrderTypeSelectorContentUI = (props) => {
                 min={0}
               />
             </InputWrapper>
-            <Table>
+            {/* <Table>
               {places.length > 0 && (
                 <h2>{t('AVAILABLE_PLACES', 'Available places')}</h2>
               )}
@@ -192,7 +193,7 @@ export const OrderTypeSelectorContentUI = (props) => {
                   <p>{place.name}</p> <span>{t('TABLE', 'Table')} {place.id}</span>
                 </PlaceName>
               ))}
-            </Table>
+            </Table> */}
           </TypeContainer>
           <Button color='primary' style={{ width: '100%' }} height='44px' onClick={handleChangePlace}>
             {t('CONTINUE', 'Continue')}
