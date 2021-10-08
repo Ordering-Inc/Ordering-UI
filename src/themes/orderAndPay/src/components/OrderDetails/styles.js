@@ -383,7 +383,6 @@ export const WrapperLeftContainer = styled.div`
 `
 
 export const WrapperRightContainer = styled(WrapperLeftContainer)`
-  background: #F8F9FA;
 `
 
 export const Divider = styled.div`
