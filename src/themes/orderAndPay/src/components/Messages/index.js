@@ -30,6 +30,7 @@ import {
   HeaderOnline,
   ImageContainer,
   ModalIcon,
+  NotSendMessage,
   ModalIconHeader
 } from './styles'
 import { Image as ImageWithFallback } from '../../../../../components/Image'
@@ -39,6 +40,7 @@ import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
+import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 import { bytesConverter, getTraduction } from '../../../../../utils'
 import { Alert } from '../Confirm'
@@ -447,57 +449,72 @@ const MessagesUI = (props) => {
             )
           }
         </Chat>
-        <SendForm>
-          <Send onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Input
-              placeholder={t('TYPE_YOUR_MESSAGE_HERE', 'Type your message here')}
-              onChange={onChangeMessage}
-              name='message'
-              id='message'
-              ref={register({
-                required: !image
-              })}
-              style={{ borderColor: '#F8F9FA', background: '#F8F9FA', fontSize: '12px', color: theme.colors.darkTextColor }}
-              autoComplete='off'
-            />
-            <SendImage htmlFor='chat_image' hidden={image}>
-              <input
-                type='file'
-                name='image'
-                id='chat_image'
-                accept='image/png,image/jpg,image/jpeg'
-                onChange={onChangeImage}
-                ref={imageRef}
-              />
-              <BsCardImage />
-            </SendImage>
-            {image && (
-              <WrapperDeleteImage>
-                <Button
-                  circle
-                  onClick={removeImage}
-                  type='reset'
-                >
-                  <MdClose />
-                </Button>
-                <img
-                  src={image}
-                  loading='lazy'
+        {(parseInt(order?.status) === 1 ||
+          parseInt(order?.status) === 2 ||
+          parseInt(order?.status) === 5 ||
+          parseInt(order?.status) === 6 ||
+          parseInt(order?.status) === 10 ||
+          parseInt(order?.status) === 11 ||
+          parseInt(order?.status) === 12
+        ) && driver
+          ? (
+            <NotSendMessage>
+              <MdcCloseOctagonOutline />
+              <p>{t('NOT_SEND_MESSAGES', 'You can\'t send messages because the order has ended')}</p>
+            </NotSendMessage>
+          ) : (
+            <SendForm>
+              <Send onSubmit={handleSubmit(onSubmit)} noValidate>
+                <Input
+                  placeholder={t('TYPE_YOUR_MESSAGE_HERE', 'Type your message here')}
+                  onChange={onChangeMessage}
+                  name='message'
+                  id='message'
+                  ref={register({
+                    required: !image
+                  })}
+                  style={{ borderColor: '#F8F9FA', background: '#F8F9FA', fontSize: '12px', color: theme.colors.darkTextColor }}
+                  autoComplete='off'
                 />
-              </WrapperDeleteImage>
-            )}
-            <WrapperSendMessageButton>
-              <Button
-                color='primary'
-                type='submit'
-                disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
-                ref={buttonRef}
-              >
-                <img src={theme.images?.general?.arrowSend} />
-              </Button>
-            </WrapperSendMessageButton>
-          </Send>
-        </SendForm>
+                <SendImage htmlFor='chat_image' hidden={image}>
+                  <input
+                    type='file'
+                    name='image'
+                    id='chat_image'
+                    accept='image/png,image/jpg,image/jpeg'
+                    onChange={onChangeImage}
+                    ref={imageRef}
+                  />
+                  <BsCardImage />
+                </SendImage>
+                {image && (
+                  <WrapperDeleteImage>
+                    <Button
+                      circle
+                      onClick={removeImage}
+                      type='reset'
+                    >
+                      <MdClose />
+                    </Button>
+                    <img
+                      src={image}
+                      loading='lazy'
+                    />
+                  </WrapperDeleteImage>
+                )}
+                <WrapperSendMessageButton>
+                  <Button
+                    color='primary'
+                    type='submit'
+                    disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
+                    ref={buttonRef}
+                  >
+                    <img src={theme.images?.general?.arrowSend} />
+                  </Button>
+                </WrapperSendMessageButton>
+              </Send>
+            </SendForm>
+          )}
         <Alert
           title={t('ERROR', 'Error')}
           content={alertState.content}
