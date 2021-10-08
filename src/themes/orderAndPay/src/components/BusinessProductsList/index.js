@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ProductsList, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
@@ -16,7 +16,6 @@ const BusinessProductsListUI = (props) => {
   const {
     errors,
     businessId,
-    category,
     categories,
     categoryState,
     isBusinessLoading,
@@ -24,10 +23,42 @@ const BusinessProductsListUI = (props) => {
     featured,
     searchValue,
     isCartOnProductsList,
-    errorQuantityProducts
+    errorQuantityProducts,
+    setCategorySelected
   } = props
 
   const [, t] = useLanguage()
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      const categoriesOffset = getCategoriesOffset()
+      if (categoriesOffset?.length > 0) {
+        const lastContainerHeight = document.getElementsByClassName('last-category')[0]?.offsetHeight
+        categoriesOffset.map((category, i, hash) => {
+          if (category.offset - 125 < window.scrollY && hash[i + 1]?.offset > window.scrollY) {
+            setCategorySelected(category)
+          } else if (window.scrollY + lastContainerHeight + 125 > hash[categoriesOffset?.length - 1]?.offset) {
+            setCategorySelected(hash[categoriesOffset?.length - 1])
+          } else if (window.scrollY > 100 && window.scrollY < hash[2]?.offset && category?.name === t('FEATURED', 'Featured')) {
+            setCategorySelected(category)
+          } else if (window.scrollY === 0) {
+            setCategorySelected(hash[0])
+          }
+        })
+      }
+    })
+    return () => {
+      window.removeEventListener('scroll')
+    }
+  }, [])
+
+  const getCategoriesOffset = () => {
+    return categories.map(category => ({
+      ...category,
+      offset: document.getElementsByClassName(category.name)[0]?.offsetTop
+    }
+    ))
+  }
 
   return (
     <>
@@ -38,7 +69,7 @@ const BusinessProductsListUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
-        {category?.id && (
+        {/* {category?.id && (
           <ProductsListing>
             {
               categoryState.products?.map(product => (
@@ -53,62 +84,60 @@ const BusinessProductsListUI = (props) => {
               ))
             }
           </ProductsListing>
-        )}
+        )} */}
 
         {
-          !category?.id && (
-            <>
-              {
-                featured && categoryState?.products?.find(product => product.featured) && (
-                  <WrapAllCategories>
-                    <h3>{t('FEATURED', 'Featured')}</h3>
-                    <ProductsListing>
-                      {categoryState.products?.map(product => product.featured && (
-                        <SingleProductCard
-                          key={product?.id}
-                          isSoldOut={(product.inventoried && !product.quantity)}
-                          product={product}
-                          businessId={businessId}
-                          onProductClick={onProductClick}
-                          isCartOnProductsList={isCartOnProductsList}
-                        />
-                      ))}
-                    </ProductsListing>
-                  </WrapAllCategories>
-                )
-              }
-            </>
+          featured && categoryState?.products?.find(product => product.featured) && (
+            <WrapAllCategories>
+              <h3 className='featured'>{t('FEATURED', 'Featured')}</h3>
+              <ProductsListing>
+                {categoryState.products?.map(product => product.featured && (
+                  <SingleProductCard
+                    key={product?.id}
+                    isSoldOut={(product.inventoried && !product.quantity)}
+                    product={product}
+                    businessId={businessId}
+                    onProductClick={onProductClick}
+                    isCartOnProductsList={isCartOnProductsList}
+                  />
+                ))}
+              </ProductsListing>
+            </WrapAllCategories>
           )
         }
 
         {
-          !category?.id && categories.filter(category => category?.id !== null).map((category, i, _categories) => {
-            const products = categoryState.products?.filter(product => product?.category_id === category?.id) || []
+          categories.map((category, i, _categories) => {
+            const products = categoryState.products || []
             return (
               <React.Fragment key={category?.id}>
                 {
                   products.length > 0 && (
-                    <WrapAllCategories id='container'>
-                      <div className='category-title'>
-                        {
-                          category?.image && (
-                            <img src={category.image} />
-                          )
-                        }
-                        <h3>{category.name}</h3>
-                      </div>
+                    <WrapAllCategories className={i === categories.length - 1 && 'last-category'} id={`container ${i === categories.length - 1 && 'last-category'}`}>
+                      {category.name !== t('FEATURED', 'Featured') && (
+                        <div className='category-title'>
+                          {
+                            category?.image && (
+                              <img src={category.image} />
+                            )
+                          }
+                          <h3 className={category.name}>{category.name}</h3>
+                        </div>
+                      )}
                       <ProductsListing>
                         {
-                          products.map(product => (
-                            <SingleProductCard
-                              key={product?.id}
-                              isSoldOut={product.inventoried && !product.quantity}
-                              businessId={businessId}
-                              product={product}
-                              onProductClick={onProductClick}
-                              isCartOnProductsList={isCartOnProductsList}
-                            />
-                          ))
+                          products.filter(product => product?.category_id === category?.id).map(_product => {
+                            return (
+                              <SingleProductCard
+                                key={_product?.id}
+                                isSoldOut={_product.inventoried && !_product.quantity}
+                                businessId={businessId}
+                                product={_product}
+                                onProductClick={onProductClick}
+                                isCartOnProductsList={isCartOnProductsList}
+                              />
+                            )
+                          })
                         }
                         {
                           categoryState.loading && (i + 1) === _categories.length && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (

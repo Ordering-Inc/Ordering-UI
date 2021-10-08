@@ -62,6 +62,11 @@ export const ThemeProvider = ({ children, ...props }) => {
     input, textarea, button {
       font-family: inherit;
     }
+    h1,p,span {
+      ${props.isDarkTextColor && css`
+        color: ${theme.colors.darkTextColor}
+      `}
+    }
     .popup-backdrop {
       background-color: rgba(0, 0, 0, 0.4);
       position: fixed;

@@ -130,7 +130,7 @@ const BusinessControllerUI = (props) => {
                   </BuinessMeta>
                 )}
                 <Button outline color='primary'>
-                 {t('GOTO_STORE', 'Go To Store')}
+                  {t('GOTO_STORE', 'Go To Store')}
                 </Button>
               </BusinessInfoItem>
             </BusinessInfo>

@@ -6,19 +6,20 @@ export const AccordionSection = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 10px 0px;
-  background: #FFF;
-  border-bottom: 1px solid #D9D9D9;
   background: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
 `
 
 const AccordionStyled = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   cursor: initial;
   transition: background-color 0.6s ease;
-  margin: 0px 10px;
+  margin: 0 10px;
+  ${({ isCheckout }) => isCheckout && css`
+    margin: 0px;
+  `}
 
   .rotate {
     transform: rotate(180deg);
@@ -31,10 +32,6 @@ const AccordionStyled = styled.div`
       margin-right: auto;
       margin-left: initial;
     `}
-  }
-
-  @media (min-width: 411px){
-    flex-direction: row;
   }
 
 `
@@ -55,24 +52,10 @@ export const Accordion = (props) => {
 }
 
 export const WrapperProductImage = styled.div`
-  max-width: 55px;
-  max-height: 55px;
-  height: 55px;
-  width: 55px;
-
-  @media (min-width: 361px) {
-    max-width: 65px;
-    max-height: 65px;
-    height: 65px;
-    width: 65px;
-  }
-
-  @media (min-width: 411px) {
-    max-width: 75px;
-    max-height: 75px;
-    height: 75px;
-    width: 75px;
-  }
+  max-width: 48px;
+  max-height: 48px;
+  height: 48px;
+  width: 48px;
 `
 
 const ProductImageStyled = styled.div`
@@ -92,7 +75,7 @@ export const ProductImage = (props) => {
   return (
     <ProductImageStyled
       {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
+      style={{ backgroundImage: `url(${props.bgimage})`, width: '48px', height: '48px' }}
     >
       {props.children}
     </ProductImageStyled>
@@ -105,10 +88,24 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: 55%;
+  width: 60%;
 
-  @media (min-width: 411px) {
-    width: calc(65% - 60px);
+  ${({ isOrderDetails }) => isOrderDetails && css`
+     width: 80%;
+  `}
+
+  ${({ isOrderDetails }) => !isOrderDetails && css`
+    @media (min-width: 411px) {
+      width: calc(65% - 30px);
+    }
+
+    @media (min-width: 480px){
+      width: 80%;
+    }
+  `}
+
+  @media (min-width: 480px){
+    width: 80%;
   }
 
   ${props => props.theme?.rtl && css`
@@ -117,9 +114,18 @@ export const ContentInfo = styled.div`
   `}
 
   h3 {
-    font-size: 14px;
+    font-size: 12px;
     margin: 0px;
     font-weight: 600;
+  }
+
+  div {
+    span {
+      font-size: 10px;
+    }
+    p{
+      font-size: 10px;
+    }
   }
 
   span {
@@ -182,46 +188,60 @@ export const ProductComment = styled.div`
     padding-left: 0px;
   `}
   p {
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 12px;
     margin: 0px;
   }
 
   h3 {
-    font-weight: normal;
+    color: ${({ theme }) => theme.colors.darkTextColor};
+    font-size: 12px;
+    font-weight: 500;
     text-transform: capitalize;
-    margin: 0px 20px 0px 40px;
+    margin: 0px 20px 0px 15px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     ${props => props.theme?.rtl && css`
-      margin: 0px 40px 0px 20px
+      margin: 0px 15px 0px 20px
     `}
   }
 `
 
 export const ProductInfo = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-
+  overflow: hidden;
   h1,
-  h3 {
+  h3,
+  p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  p {
-    font-size: 20px;
-    margin: 0px 5px;
+  h3 {
+    font-size: 12px;
+    max-width: ${({ isOrderDetails }) => isOrderDetails ? '90%' : '50%'};
   }
 
-  @media (min-width: 411px) {
+  p {
+    font-size: 12px;
+    margin: 0px 5px;
     width: 80%;
   }
 
-  @media (min-width: 481px) {
-    width: 70%;
+  @media (min-width: 360px){
+    h3{
+      max-width: ${({ isOrderDetails }) => isOrderDetails ? '98%' : '70%'};
+    }
+  }
+
+  @media (min-width: 411px) {
+    h3{
+      max-width: 90%;
+    }
   }
 `
 
@@ -232,7 +252,7 @@ export const ProductError = styled.div`
   justify-content: center;
 
   span {
-    font-size: 18px;
+    font-size: 12px;
     text-align: center;
   }
 
@@ -263,7 +283,6 @@ export const ProductActionsEdit = styled.span`
 `
 
 export const ProductActionsDelete = styled(ProductActionsEdit)`
-  display: none;
   svg {
     margin-right: 0px;
   }
@@ -274,10 +293,14 @@ export const ProductActionsDelete = styled(ProductActionsEdit)`
 `
 
 export const ProductPriceSection = styled.div`
-  width: 25%;
+  width: ${({ isOrderDetails }) => isOrderDetails ? '15px' : '25%'};
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  ${({ isOrderDetails }) => isOrderDetails && css`
+    position: relative;
+    bottom: 14px;
+  `}
 `
 
 export const ProductPrice = styled.div`
@@ -287,7 +310,7 @@ export const ProductPrice = styled.div`
 
   p,
   span {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   span {
@@ -306,30 +329,30 @@ export const ProductPrice = styled.div`
   @media (min-width: 512px) {
     span,
     p {
-      font-size: 18px;
+      font-size: 12px;
     }
   }
 `
 
 export const ProductSelect = styled.select`
-  background: ${isCheckout => isCheckout ? '#FFFFFF' : '#F8F9FA'};
+  background: ${isCheckout => !isCheckout ? '#FFFFFF' : '#F8F9FA'};
   border-radius: 7.6px;
-  max-width: 45px;
-  height: 25px;
+  max-width: 42px;
+  height: 22px;
   border: none;
   font-size: 12px;
   outline: none;
-  margin: 0 5px;
-  padding: 0 3px;
+  margin: 0px 0px 0px 5px;
+  padding: 2px 10px 2px 2px;
   cursor: pointer;
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-progress-appearance: none;
-
   background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');
-  background-repeat: no-repeat, repeat;
-  background-position: right .7em top 50%, 0 0;
-  background-size: .65em auto, 100%;
+  background-repeat: no-repeat,repeat;
+  background-position: right 0.3em top 50%;
+  background-size: 0.65em auto,100%;
+  text-align: center;
 `
 
 export const ProductNotAvailable = styled.span`
@@ -352,12 +375,14 @@ export const ProductOptionsList = styled.ul`
   }
 
   p {
-    font-weight: 400;
+    font-size:12px;
+    font-weight: 600;
     margin: 0px;
   }
 
   li span {
-    font-weight: 300;
+    font-size: 12px;
+    font-weight: 500;
   }
 
   li.ingredient {
@@ -371,4 +396,5 @@ export const ProductOptionsList = styled.ul`
 
 export const ProductQuantity = styled.span`
   margin: 0 5px;
+  font-size: 14px;
 `

@@ -3,7 +3,6 @@ import TiPencil from '@meronex/icons/ti/TiPencil'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   AccordionSection,
@@ -36,17 +35,16 @@ export const ProductItemAccordion = (props) => {
     offsetDisabled,
     onDeleteProduct,
     onEditProduct,
-    isCheckout
+    isCheckout,
+    isOrderDetails
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
-  const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
-
   const content = useRef(null)
   const productSelect = useRef(null)
   const productActionsEdit = useRef(null)
@@ -108,8 +106,9 @@ export const ProductItemAccordion = (props) => {
           isValid={product?.valid ?? true}
           className={`product accordion ${setActive}`}
           onClick={(e) => toggleAccordion(e)}
+          isCheckout={isCheckout}
         >
-          <ProductInfo className='info'>
+          <ProductInfo className='info' isOrderDetails={isOrderDetails}>
             {product?.images && (
               <WrapperProductImage>
                 <ProductImage bgimage={product?.images} />
@@ -138,7 +137,7 @@ export const ProductItemAccordion = (props) => {
               </ProductQuantity>
             )}
 
-            <ContentInfo>
+            <ContentInfo isOrderDetails={isOrderDetails}>
               <div>
                 <h3>{product.name}</h3>
                 {
@@ -146,8 +145,13 @@ export const ProductItemAccordion = (props) => {
                     <p>{product?.comment}</p>
                   )
                 }
+                {isOrderDetails && (
+                  <span>
+                    {parsePrice(product.total || product.price)}
+                  </span>
+                )}
               </div>
-              {windowSize.width <= 410 && (
+              {/* {windowSize.width <= 410 && (
                 <span>
                   <p>{parsePrice(product.total || product.price)}</p>
                   {isCartProduct && !isCartPending && (
@@ -165,16 +169,18 @@ export const ProductItemAccordion = (props) => {
                     </div>
                   )}
                 </span>
-              )}
+              )} */}
             </ContentInfo>
           </ProductInfo>
 
-          {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
-            <ProductPriceSection>
+          {(product?.valid || !isCartProduct) && (
+            <ProductPriceSection isOrderDetails={isOrderDetails}>
               <ProductPrice className='prod-price'>
-                <span>
-                  {parsePrice(product.total || product.price)}
-                </span>
+                {!isOrderDetails && (
+                  <span>
+                    {parsePrice(product.total || product.price)}
+                  </span>
+                )}
                 {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
                   <p>
                     <IosArrowDown className={`${setRotate}`} />

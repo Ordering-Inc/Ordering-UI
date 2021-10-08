@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
+  padding: 0px 30px
 `
 
 export const ErrorMessage = styled.div`
@@ -30,6 +31,7 @@ export const WrapAllCategories = styled.div`
 
     img {
       border-radius: 7.6px;
+      filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
       min-width: 41px;
       min-height: 41px;
       height: 41px;
@@ -38,7 +40,7 @@ export const WrapAllCategories = styled.div`
   }
   h3 {
     font-weight: 600;
-    font-size: 24px;
+    font-size: 16px;
     color: ${props => props.theme?.colors.darkTextColor};
     margin-left: 10px;
     ${props => props.theme?.rtl && css`

@@ -9,7 +9,7 @@ import {
   useSession
 } from 'ordering-components'
 
-import { UserFormDetailsUI } from '../../../../../components/UserFormDetails'
+import { UserFormDetailsUI } from '../UserFormDetails'
 import { Button } from '../../styles/Buttons'
 
 const UserDetailsUI = (props) => {
@@ -61,12 +61,8 @@ const UserDetailsUI = (props) => {
         <Container>
           <Header className='user-form'>
             <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
-            {cartStatus !== 2 && (
-              !isEdit ? (
-                <Button color='primary' onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</Button>
-              ) : (
-                <AiOutlineClose className='cancel' onClick={() => toggleEditState()} />
-              )
+            {cartStatus !== 2 && isEdit && (
+              <AiOutlineClose className='cancel' onClick={() => toggleEditState()} />
             )}
           </Header>
 
@@ -90,6 +86,9 @@ const UserDetailsUI = (props) => {
               )}
               {(userData?.phone || user?.phone) && (
                 <p>{(userData?.cellphone)}</p>
+              )}
+              {cartStatus !== 2 && !isEdit && (
+                <a onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</a>
               )}
             </UserData>
           ) : (

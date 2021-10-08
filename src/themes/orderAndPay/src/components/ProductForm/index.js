@@ -15,9 +15,9 @@ import {
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
-import { ProductIngredient } from '../../../../../components/ProductIngredient'
-import { ProductOption } from '../../../../../components/ProductOption'
-import { ProductOptionSubOption } from '../../../../../components/ProductOptionSubOption'
+import { ProductIngredient } from '../ProductIngredient'
+import { ProductOption } from '../ProductOption'
+import { ProductOptionSubOption } from '../ProductOptionSubOption'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
@@ -38,11 +38,8 @@ import {
   ProductComment,
   SkeletonBlock,
   WrapperSubOption,
-  SkuContent,
-  ProductFormTitle,
   WrapperIngredients,
   ProductTabContainer,
-  Divider,
   ModalIcon
 } from './styles'
 import { useTheme } from 'styled-components'
@@ -151,7 +148,7 @@ const ProductOptionsUI = (props) => {
 
       <ProductContainer className='product-container'>
         <ModalIcon>
-          <MdClose onClick={() => onClose()} />
+          <MdClose onClick={() => onClose()} color='#748194' />
           <h1>{productName || product?.name}</h1>
         </ModalIcon>
         {loading && !error && (
@@ -187,24 +184,6 @@ const ProductOptionsUI = (props) => {
               </ProductImage>
             </WrapperImage>
             <ProductInfo>
-              <ProductFormTitle>
-                {product?.price && (
-                  <div className='price-wrapper'>
-                    <span>{productCart.total && parsePrice(productCart.total)}</span>
-                    {product?.offer_price && (
-                      <span className='price-discount'>{parsePrice(product?.offer_price)}</span>
-                    )}
-                  </div>
-                )}
-                {product?.description && <p>{product?.description}</p>}
-                {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
-                  <SkuContent>
-                    <h2>{t('SKU', theme?.defaultLanguages?.SKU || 'Sku')}</h2>
-                    <p>{product?.sku}</p>
-                  </SkuContent>
-                )}
-              </ProductFormTitle>
-              <Divider />
               <ProductEdition>
                 <ProductTabContainer>
                   <Tabs variant='primary'>
@@ -216,14 +195,16 @@ const ProductOptionsUI = (props) => {
                     >
                       {t('ALL', 'All')}
                     </Tab>
-                    <Tab
-                      key='ingredients'
-                      active={tabValue === 'ingredients'}
-                      onClick={() => handleChangeTabValue('ingredients')}
-                      borderBottom
-                    >
-                      {t('INGREDIENTS', 'ingredients')}
-                    </Tab>
+                    {product?.ingredients.length > 0 && (
+                      <Tab
+                        key='ingredients'
+                        active={tabValue === 'ingredients'}
+                        onClick={() => handleChangeTabValue('ingredients')}
+                        borderBottom
+                      >
+                        {t('INGREDIENTS', 'ingredients')}
+                      </Tab>
+                    )}
                     <Tab
                       key='extra'
                       active={tabValue === 'extra'}
@@ -336,11 +317,11 @@ const ProductOptionsUI = (props) => {
                     disabled={orderState.loading}
                   >
                     {orderState.loading ? (
-                      <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
+                      <>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</>
                     ) : (
-                      <span>
+                      <>
                         {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD', theme?.defaultLanguages?.ADD || 'Add')}
-                      </span>
+                      </>
                     )}
                   </Button>
                 )}
@@ -385,10 +366,15 @@ const ProductOptionsUI = (props) => {
             open={modalIsOpen}
             onClose={() => closeModal()}
             width='50%'
+            hideCloseDefault
+            padding='30px 40px'
+            customModal
+            isProductForm
           >
             {modalPageToShow === 'login' && (
               <LoginForm
                 handleSuccessLogin={handleSuccessLogin}
+                onClose={() => closeModal()}
                 elementLinkToSignup={
                   <a
                     onClick={
@@ -402,7 +388,7 @@ const ProductOptionsUI = (props) => {
                     onClick={
                       (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
                     } href='#'
-                  >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+                  >{t('FORGOT_YOUR_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Forgot your password?')}
                   </a>
                 }
                 useLoginByCellphone
@@ -419,6 +405,7 @@ const ProductOptionsUI = (props) => {
                   >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
                   </a>
                 }
+                onClose={() => closeModal()}
                 useLoginByCellphone
                 useChekoutFileds
                 handleSuccessSignup={handleSuccessSignup}
@@ -435,6 +422,7 @@ const ProductOptionsUI = (props) => {
                   >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
                   </a>
                 }
+                onClose={() => closeModal()}
                 isPopup
               />
             )}

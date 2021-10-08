@@ -359,12 +359,12 @@ const SignUpFormUI = (props) => {
                         )}
                       </span>
                       <span className='condition-link-text'>
-                        {t('FOOTER_ARCHIES_PRIVACY_POLICY_LINK_TEXT', 'You must agree with')}
+                        {t('ARCHIES_AGREE_TEXT', 'You must agree with')}
                       </span>
                     </span>
                     <a href='https://tupedidostarbucks.co/pages/privacidad-starbucks' className='condition-link'>
                       <span>
-                        {t('FOOTER_ARCHIES_PRIVACY_POLICY_LINK', 'Terms and Conditions')}
+                        {t('ARCHIES_TERMS_AND_CONDITIONS_LINK_TEXT', 'Terms and Conditions')}
                       </span>
                     </a>
                   </ConditionCheck>
