@@ -5,6 +5,7 @@ export const AccordionSection = styled.div`
   flex-direction: column;
   width: 100%;
   opacity: 1;
+  -webkit-tap-highlight-color: transparent;
 
   ${({ isCartOnProductsList }) => isCartOnProductsList && css`
     position: sticky;

@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom'
 import { Router } from './template/router'
 import { OrderingProvider } from 'ordering-components'
 import { Alert } from './src/components/Confirm'
+import { ThemeProvider } from './src/contexts/ThemeContext'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
-import { ThemeProvider } from './src/contexts/ThemeContext'
-import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
+import settings from './template/config.json'
 
 /**
  * Theme images
@@ -18,6 +18,7 @@ import isotype from './template/assets/images/isotype.svg'
 import isotypeInvert from './template/assets/images/isotype-invert.svg'
 
 import homeHero from './template/assets/images/home-hero.png'
+import businessHero from './template/assets/images/business-hero.png'
 import notFound from './template/assets/images/not-found.svg'
 import notNetwork from './template/assets/images/not-network.svg'
 import notFound404 from './template/assets/images/not-found-404.svg'
@@ -58,33 +59,19 @@ import categoryAll from './template/assets/images/categories/category-all.png'
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
 
-const configFile = {
-  app_id: 'ordering-react',
-  project: 'luisv4',
-  api: {
-    url: 'https://apiv4.ordering.co',
-    language: 'en',
-    version: 'v400'
-  },
-  socket: {
-    url: 'https://socket.ordering.co'
-  }
-}
+import delivery from './template/assets/images/delivery-types/delivery.png'
+import curbside from './template/assets/images/delivery-types/curbside.png'
+import driveThru from './template/assets/images/delivery-types/drive_thru.png'
+import eatIn from './template/assets/images/delivery-types/eat_in.png'
+import pickUp from './template/assets/images/delivery-types/pickup.png'
 
 Sentry.init({
   environment: window?.location?.hostname === 'localhost' ? 'development' : process.env.NODE_ENV,
-  dsn: 'https://ab508d2c6990411c8da375c997f9f3d6@o460529.ingest.sentry.io/5496646',
-  release: process.env.npm_package_version ? 'ordering-ui@' + process.env.npm_package_version : 'ordering-ui@' + '0.0.2',
+  dsn: 'https://fd10e533c55143409a512a4d1b4169bf@o460529.ingest.sentry.io/5498134',
   integrations: [
     new Integrations.BrowserTracing()
   ],
-  ignoreErrors: [
-    'is not defined',
-    'is not a function',
-    'can\'t find variable',
-    'objects are not valid',
-    'element type is invalid'
-  ],
+  release: process.env.npm_package_version ? "react-template-5@" + process.env.npm_package_version : "react-template-5@" + '0.0.1' ,
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
   tracesSampleRate: 1.0
@@ -101,6 +88,7 @@ theme.images = {
   logos,
   general: {
     homeHero,
+    businessHero,
     notFound,
     notFound404,
     notFoundLighting,
@@ -146,15 +134,21 @@ theme.images = {
     driverPhoto: 'https://res.cloudinary.com/demo/image/fetch/c_thumb,g_face,r_max/https://www.freeiconspng.com/thumbs/driver-icon/driver-icon-14.png',
     businessLogo: storeDummy,
     customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png'
+  },
+  deliveryTypes: {
+    delivery: delivery,
+    curbside: curbside,
+    driveThru: driveThru,
+    eatIn: eatIn,
+    pickUp: pickUp
   }
 }
 
 const wrapper = document.getElementById('app')
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <OrderingProvider Alert={Alert} settings={configFile}>
+    <OrderingProvider Alert={Alert} settings={settings}>
       <Router />
-      <Toast />
     </OrderingProvider>
   </ThemeProvider>
   , wrapper)

@@ -7,9 +7,9 @@ import {
   useLocation
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
+import { Header } from '../src/themes/pwa/src/components/Header'
+import { Footer } from '../src/themes/pwa/src/components/Footer'
 
-import { Header } from '../src/components/Header'
-import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
@@ -29,7 +29,6 @@ import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
-import { Help } from './pages/Help'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -248,17 +247,6 @@ export const App = () => {
                   </Route>
                   <Route exact path='/pages'>
                     <PagesList />
-                  </Route>
-                  <Route exact path='/help'>
-                    {auth
-                      ? <Help />
-                      : (
-                        <Redirect to={{
-                          pathname: '/login',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
-                      )}
                   </Route>
                   <Route exact path='/:store'>
                     <BusinessProductsList />
