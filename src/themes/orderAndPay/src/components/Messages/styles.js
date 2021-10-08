@@ -421,6 +421,26 @@ export const ModalIcon = styled.span`
   }
 `
 
+export const NotSendMessage = styled(SendForm)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  color: #909BA9;
+  background: #FAFAFA;
+
+  svg {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #909BA9;
+    margin: 6px 0;
+  }
+`
+
 export const ModalIconHeader = styled.div`
   display: flex;
   width: 100%;
@@ -428,7 +448,7 @@ export const ModalIconHeader = styled.div`
   margin-bottom: 20px;
   align-items: center;
   box-shadow: 0px 1px 4px 0px #0000001A;
-  padding: 15px 40px 0 40px;
+  padding: 10px 40px 0 40px;
   img {
     margin-left: 15px;
     box-shadow: 0px 1px 4px 0px #0000001A;

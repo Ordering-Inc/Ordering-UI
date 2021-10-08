@@ -42,7 +42,8 @@ import {
   InputWrapper,
   MessageContentWrapper,
   MessageCreatedDate,
-  TimeofSentByAdmin
+  TimeofSentByAdmin,
+  NotSendMessage
 } from './styles'
 import { Image as ImageWithFallback } from '../../../../../components/Image'
 import { Input } from '../../styles/Inputs'
@@ -51,6 +52,7 @@ import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
+import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import { bytesConverter, getTraduction } from '../../../../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
@@ -559,69 +561,85 @@ const MessagesUI = (props) => {
               )
             }
           </Chat>
-          <SendForm>
-            <Send onSubmit={handleSubmit(onSubmit)} noValidate>
-              <InputWrapper>
-                <Input
-                  placeholder={t('TYPE_YOUR_MESSAGE_HERE', 'Type your message here')}
-                  onChange={onChangeMessage}
-                  name='message'
-                  id='message'
-                  ref={register({
-                    required: !image
-                  })}
-                  autoComplete='off'
-                />
-                <SendImage htmlFor='chat_image' hidden={image}>
-                  <input
-                    type='file'
-                    name='image'
-                    id='chat_image'
-                    accept='image/png,image/jpg,image/jpeg'
-                    onChange={onChangeImage}
-                    ref={imageRef}
-                  />
-                  <BsCardImage />
-                </SendImage>
-                {image && (
-                  <WrapperDeleteImage>
-                    <div>
-                      <Button
-                        circle
-                        onClick={removeImage}
-                        type='reset'
-                      >
-                        <MdClose />
-                      </Button>
-                      <img
-                        src={image}
-                        loading='lazy'
+          {(parseInt(order?.status) === 1 ||
+            parseInt(order?.status) === 2 ||
+            parseInt(order?.status) === 5 ||
+            parseInt(order?.status) === 6 ||
+            parseInt(order?.status) === 10 ||
+            parseInt(order?.status) === 11 ||
+            parseInt(order?.status) === 12
+          ) && driver
+            ? (
+              <NotSendMessage>
+                <MdcCloseOctagonOutline />
+                <p>{t('NOT_SEND_MESSAGES', 'You can\'t send messages because the order has ended')}</p>
+              </NotSendMessage>
+            )
+            : (
+              <SendForm>
+                <Send onSubmit={handleSubmit(onSubmit)} noValidate>
+                  <InputWrapper>
+                    <Input
+                      placeholder={t('TYPE_YOUR_MESSAGE_HERE', 'Type your message here')}
+                      onChange={onChangeMessage}
+                      name='message'
+                      id='message'
+                      ref={register({
+                        required: !image
+                      })}
+                      autoComplete='off'
+                    />
+                    <SendImage htmlFor='chat_image' hidden={image}>
+                      <input
+                        type='file'
+                        name='image'
+                        id='chat_image'
+                        accept='image/png,image/jpg,image/jpeg'
+                        onChange={onChangeImage}
+                        ref={imageRef}
                       />
-                    </div>
-                  </WrapperDeleteImage>
-                )}
-              </InputWrapper>
-              <WrapperSendMessageButton>
-                <Button
-                  color='primary'
-                  type='submit'
-                  disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
-                  ref={buttonRef}
-                >
-                  <IosSend />
-                  {sendMessage.loading ? (
-                    <span>
-                      {t('SENDING_MESSAGE', 'Sending...')}
-                    </span>
-                  )
-                    : (
-                      <span>
-                        {t('SEND', 'Send')}
-                      </span>)}
-                </Button>
-              </WrapperSendMessageButton>
-            </Send>
-          </SendForm>
+                      <BsCardImage />
+                    </SendImage>
+                    {image && (
+                      <WrapperDeleteImage>
+                        <div>
+                          <Button
+                            circle
+                            onClick={removeImage}
+                            type='reset'
+                          >
+                            <MdClose />
+                          </Button>
+                          <img
+                            src={image}
+                            loading='lazy'
+                          />
+                        </div>
+                      </WrapperDeleteImage>
+                    )}
+                  </InputWrapper>
+                  <WrapperSendMessageButton>
+                    <Button
+                      color='primary'
+                      type='submit'
+                      disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
+                      ref={buttonRef}
+                    >
+                      <IosSend />
+                      {sendMessage.loading ? (
+                        <span>
+                          {t('SENDING_MESSAGE', 'Sending...')}
+                        </span>
+                      )
+                        : (
+                          <span>
+                            {t('SEND', 'Send')}
+                          </span>)}
+                    </Button>
+                  </WrapperSendMessageButton>
+                </Send>
+              </SendForm>
+            )}
         </MessagesRightLayout>
       </MessagesLayoutWrapper>
       <Alert

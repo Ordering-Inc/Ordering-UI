@@ -21,7 +21,7 @@ import {
   BusinessCategoryProductWrapper,
   ModalIcon,
   GoBackContainer,
-  OrderTypeWrapperButton,
+  // OrderTypeWrapperButton,
   LogoutButtonContainer
 } from './styles'
 
@@ -44,7 +44,7 @@ const BusinessProductsListingUI = (props) => {
     errors,
     isInitialRender,
     businessState,
-    categorySelected,
+    // categorySelected,
     searchValue,
     // sortByValue,
     categoryState,
@@ -64,8 +64,8 @@ const BusinessProductsListingUI = (props) => {
     isCartOnProductsList,
     errorQuantityProducts,
     handleGoBack,
-    handleGoToCart,
-    ordertype
+    handleGoToCart
+    // ordertype
   } = props
 
   const { business, loading, error } = businessState
@@ -81,6 +81,7 @@ const BusinessProductsListingUI = (props) => {
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [category, setCategory] = useState({ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') })
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
@@ -106,6 +107,26 @@ const BusinessProductsListingUI = (props) => {
       setModalIsOpen(false)
       onProductRedirect({
         slug: business?.slug
+      })
+    }
+  }
+
+  const onClickCategory = (category, categoryId) => {
+    const categoryTitle = document.getElementsByClassName(category.name)[0]
+    if (categoryTitle) {
+      window.scrollTo({
+        top: categoryTitle.offsetTop - 75,
+        behavior: 'smooth'
+      })
+    } else if (categoryId === 'featured') {
+      window.scrollTo({
+        top: 120,
+        behavior: 'smooth'
+      })
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       })
     }
   }
@@ -201,9 +222,11 @@ const BusinessProductsListingUI = (props) => {
                     {!(business?.categories?.length === 0 && !categoryId) && (
                       <BusinessProductsCategories
                         categories={[{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
-                        categorySelected={categorySelected}
+                        categorySelected={category}
                         onClickCategory={handleChangeCategory}
                         featured={featuredProducts}
+                        onClickCategoryCustom={onClickCategory}
+                        setCategorySelected={setCategory}
                       />
                     )}
 
@@ -214,7 +237,7 @@ const BusinessProductsListingUI = (props) => {
                           { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
                           ...business?.categories.sort((a, b) => a.rank - b.rank)
                         ]}
-                        category={categorySelected}
+                        category={category}
                         categoryState={categoryState}
                         businessId={business.id}
                         errors={errors}
@@ -225,6 +248,7 @@ const BusinessProductsListingUI = (props) => {
                         isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
                         handleClearSearch={handleChangeSearch}
                         errorQuantityProducts={errorQuantityProducts}
+                        setCategorySelected={setCategory}
                       />
                     </WrapContent>
                   </BusinessCategoryProductWrapper>
@@ -243,7 +267,7 @@ const BusinessProductsListingUI = (props) => {
             <WrapContent>
               <BusinessProductsList
                 categories={[]}
-                category={categorySelected}
+                category={category}
                 categoryState={categoryState}
                 isBusinessLoading={loading}
                 errorQuantityProducts={errorQuantityProducts}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
@@ -10,10 +10,11 @@ const BusinessProductsCategoriesUI = (props) => {
   const {
     isSkeleton,
     categories,
-    handlerClickCategory,
+    // handlerClickCategory,
     categorySelected,
     featured,
-    openBusinessInformation
+    openBusinessInformation,
+    onClickCategoryCustom,
   } = props
 
   const ProductCategories = () => {
@@ -23,7 +24,7 @@ const BusinessProductsCategoriesUI = (props) => {
           key={category.name}
           className={`category ${category.id === 'featured' ? 'special' : ''}`}
           active={categorySelected?.id === category.id}
-          onClick={() => handlerClickCategory(category)}
+          onClick={() => onClickCategoryCustom(category, category.id)}
           borderBottom
         >
           {category.name}

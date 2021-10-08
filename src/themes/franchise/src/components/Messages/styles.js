@@ -622,3 +622,23 @@ export const MessageCreatedDate = styled.div`
     color: ${props => props.theme?.colors.darkGray}
   }
 `
+
+export const NotSendMessage = styled(SendForm)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  color: #909BA9;
+  background: #F8F9FA;
+
+  svg {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #909BA9;
+    margin: 6px 0;
+  }
+`

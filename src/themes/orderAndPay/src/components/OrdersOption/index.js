@@ -180,7 +180,7 @@ const OrdersOptionUI = (props) => {
         {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (
           <VerticalOrdersLayout
             reorderLoading={reorderLoading}
-            orders={ordersFiltered}
+            orders={ordersFiltered.reverse()}
             pagination={pagination}
             loadMoreOrders={loadMoreOrders}
             onRedirectPage={onRedirectPage}
@@ -206,6 +206,8 @@ export const OrdersOption = (props) => {
     orderStatus: props.activeOrders
       ? [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21]
       : [1, 2, 5, 6, 10, 11, 12, 16, 17],
+    orderBy: '-id',
+    orderDirection: 'asc',
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
