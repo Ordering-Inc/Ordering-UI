@@ -11,7 +11,7 @@ export const Header = styled.div`
   h1 {
     font-weight: 600;
     font-size: 16px;
-    color: ${props => props.theme.colors.darkTextColor}; 
+    color: ${props => props.theme.colors.darkTextColor};
     margin: 0px 10px 0px 0px;
     ${props => props.theme?.rtl && css`
       margin: 0px 0px 0px 10px;
@@ -55,12 +55,19 @@ export const UserData = styled.div`
   `}
 
   > * {
-    margin: 5px 0;
+    margin: 1px 0;
     width: 75%;
   }
 
   p {
-    font-size: 14px;
+    font-size: 12px;
     color: ${props => props.theme?.colors.darkTextColor};
+  }
+
+  a {
+    margin-top: 10px;
+    font-size: 10px;
+    color: ${props => props.theme?.colors?.primary};
+    text-decoration: underline;
   }
 `

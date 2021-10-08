@@ -15,7 +15,6 @@ const BusinessesMapUI = (props) => {
   const [configState] = useConfig()
   const [orderState] = useOrder()
 
-
   const googleMapsControls = {
     defaultZoom: 15,
     zoomControl: true,

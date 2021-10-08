@@ -5,12 +5,17 @@ export const CategoriesContainer = styled.div`
   overflow-x: auto;
   padding: 5px;
   padding-bottom: 0;
+  padding-left: 30px;
   background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
   position: sticky;
   top: 0;
   border-bottom: 1px solid #D9D9D9;
   text-align: center;
+
+  ::-webkit-scrollbar {
+    height: 0;
+  }
 
   div.category {
     text-overflow: ellipsis;
@@ -22,10 +27,5 @@ export const CategoriesContainer = styled.div`
     ${props => !props.featured && css`
       display: none
     `}
-  }
-
-  @media (min-width: 381px) {
-    padding: 15px 15px 0px 0px;
-    padding-bottom: 0;
   }
 `

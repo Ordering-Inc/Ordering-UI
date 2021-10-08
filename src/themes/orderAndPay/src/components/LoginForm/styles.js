@@ -20,7 +20,6 @@ const Side = styled.div`
 
 export const FormSide = styled(Side)`
   flex-direction: column;
-  align-items: center;
 
   @media (min-width: 992px) {
     width: 100%;
@@ -41,7 +40,7 @@ export const Title = styled.h1`
 `
 
 export const LoginWith = styled.div`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   border-bottom: 1px solid #E9ECEF;
   font-size: 14px;
 
@@ -65,10 +64,10 @@ export const LoginWith = styled.div`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   display: flex;
   flex-direction: column;
-
+  margin-top: 40px;
   input:not(:last-child) {
     margin: 10px 0px;
     padding: 8px 20px;
@@ -86,12 +85,14 @@ export const FormInput = styled.form`
 
 export const RedirectLink = styled.div`
   padding: 10px;
+  padding-left: 0px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   margin: 0px;
-  font-size: 17px;
+  font-size: 14px;
+  font-weight: 400;
 
   span {
     margin-right: 5px;
@@ -113,10 +114,12 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: calc(95% - 20px);
-
+    flex-direction: row;
+    justify-content: center;
+    width: calc(100% - 20px);
+    align-items: center;
     @media (min-width: 481px) {
-      width: ${({ isPopup }) => isPopup ? 'calc(95% - 20px)' : 'calc(80% - 20px)'};
+      width: ${({ isPopup }) => isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)'};
     }
   `}
 
@@ -141,7 +144,7 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-   width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+   width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
    margin-top: 10px;
 
   button {
@@ -160,7 +163,7 @@ export const SocialButtons = styled.div`
 `
 
 export const SkeletonSocialWrapper = styled.div`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   span{
     border-radius: 30px;
     margin-bottom: 10px
@@ -170,23 +173,25 @@ export const SkeletonSocialWrapper = styled.div`
 export const TogglePassword = styled.span`
   position: absolute;
   font-weight: 300;
-  padding: 10px 0;
   color: #333;
   font-size: 26px;
   transform: translate(-150%, 10%);
   max-height: 100%;
+  svg{
+    vertical-align: text-bottom;
+  }
   ${props => props.theme?.rtl && css`
     transform: translate(150%, 10%);
   `}
   span{
     cursor: pointer;
   }
- 
+
 `
 
 export const InputWrapper = styled.div`
   position: relative;
-  
+
   input{
     box-sizing: border-box;
     width: 100%;
@@ -201,7 +206,7 @@ export const OtpWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
     margin: 20px;
-    
+
     .otp-input{
       width: 30px;
       height: 30px;
@@ -234,7 +239,7 @@ export const CountdownTimer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   margin: 20px;
-  
+
   span {
     &:first-child {
       font-size: 30px;
@@ -271,13 +276,14 @@ export const InputBeforeIcon = styled.div`
   svg {
     font-size: 16px;
     color: #B1BCCC;
+
   }
 `
 
 export const LoginDivider = styled.div`
   display: flex;
   align-items: center;
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   margin: 30px 0;
 
   p {
@@ -293,4 +299,28 @@ export const DividerLine = styled.div`
   height: 1px;
   background: #E9ECEF;
   flex-grow: 1;
+`
+
+export const ModalIcon = styled.span`
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+
+  svg{
+    margin-bottom: 25px;
+  }
+
+  h1{
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media(min-width: 769px){
+    position: absolute;
+    top: -10px;
+  }
 `

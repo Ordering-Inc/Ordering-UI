@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { WrapperGoogleMaps, useEvent, useUtils } from 'ordering-components'
-
-// import { useEvent } from '../../contexts/EventContext'
-// import { useUtils } from '../../contexts/UtilsContext'
+import { WrapperGoogleMaps, useEvent, useUtils, useLanguage } from 'ordering-components'
 
 export const GoogleMaps = (props) => {
   const {
@@ -26,6 +23,7 @@ export const GoogleMaps = (props) => {
   const [googleMapMarker, setGoogleMapMarker] = useState(null)
   const [markers, setMarkers] = useState([])
   const [boundMap, setBoundMap] = useState(null)
+  const [, t] = useLanguage()
 
   const location = fixedLocation || props.location
   const center = { lat: location?.lat, lng: location?.lng }
@@ -65,9 +63,10 @@ export const GoogleMaps = (props) => {
           scaledSize: new window.google.maps.Size(45, 45)
         } : null
       })
+      const mapLinkText = t('SELECT_STORE', 'Select Store')
       let content = '<div style="display: flex; flex-direction: column;"><h4 style="margin: 7px 0px;">' + locations[i]?.slug + '</h4></div>'
       if (businessMeta) {
-        content = '<div style="display: flex; flex-direction: column;"><h4 style="margin: 7px 0px;">' + businessMeta?.businesName + '</h4> <p style="margin: 0px;"> Today: ' + businessMeta?.todayLapses + '</p> <a href="store/' + locations[i]?.slug + '"style="text-decoration: none; display: flex; justify-content: center; align-items: center; line-height: 30px; flex-grow: 1; border:none; border-radius: 4px; background-color: #dd0031; font-size:10px; color: #fff; margin-top: 10px;">Select Store</a></div>'
+        content = '<div style="display: flex; flex-direction: column;"><h4 style="margin: 7px 0px;">' + businessMeta?.businesName + '</h4> <p style="margin: 0px;"> Today: ' + businessMeta?.todayLapses + '</p> <a href="store/' + locations[i]?.slug + '"style="text-decoration: none; display: flex; justify-content: center; align-items: center; line-height: 30px; flex-grow: 1; border:none; border-radius: 4px; background-color: #dd0031; font-size:10px; color: #fff; margin-top: 10px;">' + mapLinkText + '</a></div>'
       }
       if (businessMap) {
         const isNear = validateResult(googleMap, marker, marker.getPosition())

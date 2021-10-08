@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 30px 40px;
   box-sizing: border-box;
 `
 
@@ -13,10 +13,6 @@ export const WrapperContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-
-  @media (min-width: 769px) {
-    flex-direction: row;
-  }
 `
 
 export const SkeletonWrapper = styled.div`
@@ -91,14 +87,6 @@ export const ActionsBlock = styled.div`
     cursor: pointer;
     color: #B1BCCC;
   }
-
-  @media (min-width: 380px) {
-    flex-direction: row;
-
-    svg {
-      font-size: 24px;
-    }
-  }
 `
 
 export const OrderInfo = styled.div`
@@ -110,7 +98,7 @@ export const OrderInfo = styled.div`
   h1 {
     margin-bottom: 5px;
     font-weight: 600;
-    font-size: 32px;
+    font-size: 20px;
   }
   p {
     font-size: 14px;
@@ -142,10 +130,10 @@ export const ReviewOrderLink = styled.a`
 
 const StatusBarStyled = styled.div`
   height: 12px;
-  margin: 18px 0px 8px;
-  background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)`};
+  margin: 18px 0px;
+  background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, #F8F9FA ${props.percentage}%)`};
   ${props => props.theme?.rtl && css`
-    background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)
+    background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, #F8F9FA ${props.percentage}%)
   `}
 `
 
@@ -237,9 +225,11 @@ export const OrderBill = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;
+  border-top: 1px solid #BFBFBF;
+  padding-top: 10px;
   table {
     width: 100%;
-    font-size: 14px;
+    font-size: 12px;
     td span {
       unicode-bidi: bidi-override;
     }
@@ -253,17 +243,17 @@ export const OrderBill = styled.div`
 
   table.total {
     border-top: 1px solid #BFBFBF;
-    margin-top: 15px;
+    margin-top: 5px;
     tr {
-      font-size: 14px;
+      font-size: 12px;
       td:nth-child(1) {
         font-weight: 600;
-        font-size: 20px;
+        font-size: 14;
         padding-top: 10px;
       }
       td:nth-child(2) {
         font-weight: 600;
-        font-size: 20px;
+        font-size: 14px;
         padding-top: 10px;
       }
     }
@@ -271,7 +261,7 @@ export const OrderBill = styled.div`
 
   @media (min-width: 678px) {
     table {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 `
@@ -288,12 +278,6 @@ export const ReviewsAction = styled.div`
     color: #FFF;
     cursor: pointer;
   }
-
-  @media (min-width: 480px) {
-    button {
-      width: 70%;
-    }
-  }
 `
 
 export const SkeletonBlock = styled.div`
@@ -305,13 +289,6 @@ export const SkeletonBlock = styled.div`
         height: 100px;
       }
     }
-  @media (min-width: 768px){
-    span:nth-child(2), span:nth-child(5){
-      span{
-        height: 200px;
-      }
-    }
-  }
 `
 
 export const SkeletonBlockWrapp = styled.div`
@@ -333,7 +310,7 @@ export const ShareOrder = styled.div`
       left: 0;
     }
   }
-  
+
   h1 {
     font-size: 15px;
     margin: 0px;
@@ -383,54 +360,6 @@ export const ShareOrder = styled.div`
       }
     }
   }
-
-  @media (min-width: 1201px) {
-    div.wrap {
-      & > div:first-child {
-        left: 0;
-      }
-    }
-  }
-
-  @media (min-width: 768px) {
-    div.wrap {
-      width: 30%;
-      & > div:first-child {
-        left: 0;
-      }
-    }
-
-    h1 {
-      font-size: 20px;
-    }
-
-    p {
-      font-size: 18px;
-    }
-
-    button {
-      font-size: 18px;
-      width: 100%;
-      svg {
-        position: absolute;
-        margin-left: 10px;
-      }
-    }
-  }
-
-  @media (min-width: 425px) {
-    div.text {
-      width: 70%;
-    }
-
-    h1 {
-      font-size: 18px;
-    }
-
-    p {
-      font-size: 15px;
-    }
-  }
 `
 
 export const MessagesIcon = styled.span`
@@ -449,17 +378,11 @@ export const ExclamationWrapper = styled.div`
 
 export const WrapperLeftContainer = styled.div`
   width: 100%;
-  padding: 0px 20px;
   box-sizing: border-box;
 
-  @media (min-width: 769px) {
-    width: 50%;
-    padding: 40px;
-  }
 `
 
 export const WrapperRightContainer = styled(WrapperLeftContainer)`
-  background: #F8F9FA;
 `
 
 export const Divider = styled.div`
@@ -467,11 +390,6 @@ export const Divider = styled.div`
   background: #F8F9FA;
   width: calc(100% + 40px);
   margin-left: -20px;
-
-  @media(min-width: 769px) {
-    width: calc(100% + 80px);
-    margin-left: -40px;
-  }
 `
 
 export const MyOrderActions = styled.div`
@@ -483,12 +401,13 @@ export const ModalIcon = styled.div`
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 20px;
+  margin-bottom: 20px;
 `
 
 export const IconsContainer = styled.div`
   display: flex;
   svg{
     margin-left: 10px;
+    color: ${({ theme }) => theme.colors.arrowColor};
   }
 `

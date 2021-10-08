@@ -174,7 +174,7 @@ export const Header = (props) => {
               {windowSize.width > 1023 && (
                 <Navlinks>
                   <Link to={t('ARCHIES_MENU_LINK', 'Archies menu link')}><span className={window.location.pathname === '/menu' ? 'active' : ''}>{t('ARCHIES_MENU_TEXT', 'Menu')}</span></Link>
-                  <Link to='/#'><span className={window.location.pathname === '/location' ? 'active' : ''}>{t('ARCHIES_UBICATION_TEXT ', 'Ubicación')}</span></Link>
+                  <Link to='/'><span className={window.location.pathname === '/location' ? 'active' : ''}>{t('ARCHIES_UBICATION_TEXT ', 'Ubicación')}</span></Link>
                   <Link to='/picoli'><span className={window.location.pathname === '/picoli' ? 'active' : ''}>{t('ARCHIES_PICOLI_TEXT ', 'Picoli')}</span></Link>
                   <Link to='/promotions'><span className={window.location.pathname === '/promotions' ? 'active' : ''}>{t('ARCHIES_PROMOS_TEXT ', 'Promociones')}</span></Link>
                   <Link to={t('ARCHIES_CONTACT_LINK', 'Archies contact link')}><span className={window.location.pathname === '/contact' ? 'active' : ''}>{t('ARCHIES_CONTACT_TEXT ', 'Contacto')}</span></Link>
