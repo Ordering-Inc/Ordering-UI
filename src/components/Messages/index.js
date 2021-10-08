@@ -32,8 +32,7 @@ import {
   WrapperSendMessageButton,
   HeaderOnline,
   ImageContainer,
-  ModalIcon,
-  NotSendMessage
+  ModalIcon
 } from './styles'
 import { Image as ImageWithFallback } from '../Image'
 import { Input } from '../../styles/Inputs'
@@ -43,7 +42,6 @@ import IosSend from '@meronex/icons/ios/IosSend'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import MdClose from '@meronex/icons/md/MdClose'
-import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import { bytesConverter, getTraduction } from '../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
@@ -214,7 +212,7 @@ const MessagesUI = (props) => {
       case 2:
         return t('BUSINESS', 'Business')
       case 3:
-        return t('CUSTOMER', 'Customer')
+          return t('CUSTOMER', 'Customer')
       case 4:
         return t('DRIVER', 'Driver')
       case 5:
@@ -453,81 +451,65 @@ const MessagesUI = (props) => {
           )
         }
       </Chat>
-      {(parseInt(order?.status) === 1 ||
-          parseInt(order?.status) === 2 ||
-          parseInt(order?.status) === 5 ||
-          parseInt(order?.status) === 6 ||
-          parseInt(order?.status) === 10 ||
-          parseInt(order?.status) === 11 ||
-          parseInt(order?.status) === 12
-      ) && driver
-        ? (
-          <NotSendMessage>
-            <MdcCloseOctagonOutline />
-            <p>{t('NOT_SEND_MESSAGES', 'You can\'t send messages because the order has ended')}</p>
-          </NotSendMessage>
-        )
-        : (
-          <SendForm>
-            <Send onSubmit={handleSubmit(onSubmit)} noValidate>
-              <Input
-                placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
-                onChange={onChangeMessage}
-                name='message'
-                id='message'
-                ref={register({
-                  required: !image
-                })}
-                autoComplete='off'
+      <SendForm>
+        <Send onSubmit={handleSubmit(onSubmit)} noValidate>
+          <Input
+            placeholder={t('WRITE_A_MESSAGE', 'Write a message')}
+            onChange={onChangeMessage}
+            name='message'
+            id='message'
+            ref={register({
+              required: !image
+            })}
+            autoComplete='off'
+          />
+          <SendImage htmlFor='chat_image' hidden={image}>
+            <input
+              type='file'
+              name='image'
+              id='chat_image'
+              accept='image/png,image/jpg,image/jpeg'
+              onChange={onChangeImage}
+              ref={imageRef}
+            />
+            <BsCardImage />
+          </SendImage>
+          {image && (
+            <WrapperDeleteImage>
+              <Button
+                circle
+                onClick={removeImage}
+                type='reset'
+              >
+                <MdClose />
+              </Button>
+              <img
+                src={image}
+                loading='lazy'
               />
-              <SendImage htmlFor='chat_image' hidden={image}>
-                <input
-                  type='file'
-                  name='image'
-                  id='chat_image'
-                  accept='image/png,image/jpg,image/jpeg'
-                  onChange={onChangeImage}
-                  ref={imageRef}
-                />
-                <BsCardImage />
-              </SendImage>
-              {image && (
-                <WrapperDeleteImage>
-                  <Button
-                    circle
-                    onClick={removeImage}
-                    type='reset'
-                  >
-                    <MdClose />
-                  </Button>
-                  <img
-                    src={image}
-                    loading='lazy'
-                  />
-                </WrapperDeleteImage>
-              )}
-              <WrapperSendMessageButton>
-                <Button
-                  color='primary'
-                  type='submit'
-                  disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
-                  ref={buttonRef}
-                >
-                  <IosSend />
-                  {sendMessage.loading ? (
-                    <span>
-                      {t('SENDING_MESSAGE', 'Sending...')}
-                    </span>
-                  )
-                    : (
-                      <span>
-                        {t('SEND', 'Send')}
-                      </span>)}
-                </Button>
-              </WrapperSendMessageButton>
-            </Send>
-          </SendForm>
-        )}
+            </WrapperDeleteImage>
+          )}
+          <WrapperSendMessageButton>
+            <Button
+              color='primary'
+              type='submit'
+              disabled={sendMessage?.loading || (message === '' && !image) || messages?.loading}
+              ref={buttonRef}
+            >
+              <IosSend />
+              {sendMessage.loading ? (
+                <span>
+                  {t('SENDING_MESSAGE', 'Sending...')}
+                </span>
+              )
+                : (
+                  <span>
+                    {t('SEND', 'Send')}
+                  </span>)}
+            </Button>
+          </WrapperSendMessageButton>
+        </Send>
+      </SendForm>
       <Alert
         title={t('ERROR', 'Error')}
         content={alertState.content}
