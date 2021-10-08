@@ -469,23 +469,3 @@ export const ModalIcon = styled.span`
   `}
   }
 `
-
-export const NotSendMessage = styled(SendForm)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  color: #909BA9;
-  background: #FAFAFA;
-
-  svg {
-    font-size: 20px;
-  }
-
-  p {
-    font-size: 14px;
-    color: #909BA9;
-    margin: 6px 0;
-  }
-`
