@@ -9,7 +9,7 @@ exports.ModalBackHeader = exports.ModalIcon = exports.ModalOrderTypes = exports.
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref) {
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  -webkit-tap-highlight-color: transparent;\n  ", "\n"])), function (_ref) {
   var zx = _ref.zx;
   return zx && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    .popup {\n      z-index: ", " !important;\n    }\n  "])), zx);
 });
@@ -68,14 +68,17 @@ var ModalOrderTypes = _styledComponents.default.div(_templateObject9 || (_templa
 
 exports.ModalOrderTypes = ModalOrderTypes;
 
-var ModalIcon = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: fixed;\n  left: 25px;\n  top: 30px;\n  font-size: 22px;\n  cursor: pointer;\n  display: inline-flex;\n  align-items: center;\n  z-index: 2;\n  ", "\n  svg {\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n\n  @media(min-width: 576px){\n    font-size: 30px;\n  }\n  @media(min-width: 769px){\n    position: absolute;\n  }\n"])), function (props) {
+var ModalIcon = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: absolute;\n  left: 25px;\n  top: 30px;\n  font-size: 22px;\n  cursor: pointer;\n  display: inline-flex;\n  align-items: center;\n  z-index: 2;\n  ", "\n  svg {\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n\n  ", "\n\n  @media(min-width: 576px){\n    font-size: 30px;\n  }\n  @media(min-width: 769px){\n    position: absolute;\n  }\n"])), function (props) {
   var _props$theme4;
 
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    left: 5px;\n    right: initial;\n  "])));
+}, function (_ref6) {
+  var isProductForm = _ref6.isProductForm;
+  return isProductForm && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    position: fixed;\n  "])));
 });
 
 exports.ModalIcon = ModalIcon;
 
-var ModalBackHeader = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  height: 70px;\n  background-color: white;\n  width: 100%;\n  position: fixed;\n  z-index: 2;\n\n  @media (min-width: 769px) {\n    display: none;\n  }\n"])));
+var ModalBackHeader = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  height: 70px;\n  background-color: white;\n  width: 100%;\n  position: fixed;\n  z-index: 2;\n\n  @media (min-width: 769px) {\n    display: none;\n  }\n"])));
 
 exports.ModalBackHeader = ModalBackHeader;

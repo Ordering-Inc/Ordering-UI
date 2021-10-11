@@ -59,7 +59,7 @@ var BusinessCartContainer = _styledComponents.default.div(_templateObject9 || (_
 
 exports.BusinessCartContainer = BusinessCartContainer;
 
-var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 35px 30px;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n"])));
+var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 35px 30px;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  position: relative;\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n"])));
 
 exports.BusinessCartContent = BusinessCartContent;
 

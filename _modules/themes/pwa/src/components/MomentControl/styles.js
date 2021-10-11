@@ -31,7 +31,7 @@ var DatePickerWrapper = _styledComponents.default.div(_templateObject2 || (_temp
 
 exports.DatePickerWrapper = DatePickerWrapper;
 
-var CheckBoxWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-bottom: 25px;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  user-select: none;\n\n  span {\n    font-size: 14px;\n    color: #909BA9;\n    flex: 1;\n  }\n\n  svg {\n    color: #B1BCCC;\n    font-size: 20px;\n    margin-right: 10px;\n    ", "\n\n    @media (min-width: 576px) {\n      font-size: 24px;\n    }\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
+var CheckBoxWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-bottom: 25px;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  user-select: none;\n  -webkit-tap-highlight-color: transparent;\n\n  span {\n    font-size: 14px;\n    color: #909BA9;\n    flex: 1;\n  }\n\n  svg {\n    color: #B1BCCC;\n    font-size: 20px;\n    margin-right: 10px;\n    ", "\n\n    @media (min-width: 576px) {\n      font-size: 24px;\n    }\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0px;\n    "])));
@@ -57,7 +57,7 @@ var Option = _styledComponents.default.div(_templateObject7 || (_templateObject7
 
 exports.Option = Option;
 
-var HourListWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 35px;\n  margin-bottom: 100px;\n  text-align: center;\n\n  ", "\n\n  > div {\n    width: 100%;\n    background-color: #FFFFFF !important;\n    border: 1px solid #DEE2E6;\n    border-radius: 7.6px;\n\n    > div {\n      justify-content: space-between;\n    }\n\n    #list {\n      width: 100%;\n    }\n  }\n\n  #select-input {\n    >div:first-child {\n      color: ", ";\n    }\n    @media (max-width: 576px) {\n      width: 240px;\n    }\n  }\n"])), function (_ref3) {
+var HourListWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 35px;\n  margin-bottom: 100px;\n  text-align: center;\n  -webkit-tap-highlight-color: transparent;\n\n  ", "\n\n  > div {\n    width: 100%;\n    background-color: #FFFFFF !important;\n    border: 1px solid #DEE2E6;\n    border-radius: 7.6px;\n\n    > div {\n      justify-content: space-between;\n    }\n\n    #list {\n      width: 100%;\n    }\n  }\n\n  #select-input {\n    >div:first-child {\n      color: ", ";\n    }\n    @media (max-width: 576px) {\n      width: 240px;\n    }\n  }\n"])), function (_ref3) {
   var isLoading = _ref3.isLoading;
   return isLoading && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
 }, function (props) {

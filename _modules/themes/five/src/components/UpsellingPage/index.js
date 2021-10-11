@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UpsellingPageUI = function UpsellingPageUI(props) {
-  var _upsellingProducts$pr3;
+  var _upsellingProducts$pr4;
 
   var upsellingProducts = props.upsellingProducts,
       handleUpsellingPage = props.handleUpsellingPage,
@@ -109,7 +109,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
   };
 
   var UpsellingLayout = function UpsellingLayout() {
-    var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+    var _props$beforeElements, _props$beforeComponen, _upsellingProducts$pr3, _props$afterComponent, _props$afterElements;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -119,7 +119,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
         key: i
       }, props));
-    }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !upsellingProducts.error ? upsellingProducts.products.map(function (product, i) {
+    }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !upsellingProducts.error && ((_upsellingProducts$pr3 = upsellingProducts.products) === null || _upsellingProducts$pr3 === void 0 ? void 0 : _upsellingProducts$pr3.length) > 0 ? upsellingProducts.products.map(function (product, i) {
       return /*#__PURE__*/_react.default.createElement(_styles.Item, {
         key: product.id,
         name: product.name
@@ -137,7 +137,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
           return handleFormProduct(product);
         }
       }, t('ADD', 'Add'))));
-    }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, upsellingProducts.message)) : _toConsumableArray(Array(8)).map(function (item, i) {
+    }) : /*#__PURE__*/_react.default.createElement("div", null, upsellingProducts.message || t('NO_UPSELLING_PRODUCTS', 'There are no upselling products'))) : _toConsumableArray(Array(8)).map(function (item, i) {
       return /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, {
         key: i
       }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -157,7 +157,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomMode ? /*#__PURE__*/_react.default.createElement(_styles.WrapAutoScroll, null, /*#__PURE__*/_react.default.createElement(_styles.HorizontalUpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: "upSelling"
-  }, !upsellingProducts.error ? upsellingProducts.products.map(function (product, i) {
+  }, !upsellingProducts.error && upsellingProducts.products.length > 0 ? upsellingProducts.products.map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.HorizontalItem, {
       key: product.id,
       name: product.name
@@ -177,14 +177,14 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       height: "150px",
       loading: "lazy"
     })));
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, upsellingProducts.message)) : _toConsumableArray(Array(8)).map(function (item, i) {
+  }) : /*#__PURE__*/_react.default.createElement("div", null, upsellingProducts.message || t('NO_UPSELLING_PRODUCTS', 'There are no upselling products'))) : _toConsumableArray(Array(8)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 250,
       height: 100
     }));
-  }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr3 = upsellingProducts.products) === null || _upsellingProducts$pr3 === void 0 ? void 0 : _upsellingProducts$pr3.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr4 = upsellingProducts.products) === null || _upsellingProducts$pr4 === void 0 ? void 0 : _upsellingProducts$pr4.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('UPSELLING_QUESTION', 'Do you want something else?'),
     open: openUpselling,
     onClose: function onClose() {
