@@ -50,6 +50,7 @@ export const WrapperInput = styled.div`
     box-sizing: border-box;
     flex: 1;
     margin-right: 10px;
+    padding: 7px 15px;
   }
 
   @media (min-width: 768px) {
