@@ -179,10 +179,26 @@ export const AccordionContent = styled.div`
   transition: max-height 0.6s ease;
 
   ${props => props.theme?.rtl ? css`
-    margin-right: 115px;
+    margin-right: 95px;
   ` : css`
-    margin-left: 115px;
+    margin-left: 95px;
   `}
+
+  @media (min-width: 361px) {
+    ${props => props.theme?.rtl ? css`
+      margin-right: 105px;
+    ` : css`
+      margin-left: 105px;
+    `}
+  }
+
+  @media (min-width: 411px) {
+    ${props => props.theme?.rtl ? css`
+      margin-right: 115px;
+    ` : css`
+      margin-left: 115px;
+    `}
+  }
 `
 
 export const AccordionText = styled.div`
