@@ -91,10 +91,14 @@ var AccordionText = _styledComponents.default.div(_templateObject12 || (_templat
 
 exports.AccordionText = AccordionText;
 
-var ProductComment = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  padding-left: 40px;\n  ", "\n  p {\n    font-weight: bold;\n    margin: 0px;\n  }\n\n  h3 {\n    font-weight: normal;\n    text-transform: capitalize;\n    margin: 0px 20px 0px 40px;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    ", "\n  }\n"])), function (props) {
+var ProductComment = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  padding-left: 40px;\n  ", "\n  p {\n    margin: 0px;\n    font-weight: 400;\n    font-size: 14px;\n    color: ", ";\n  }\n\n  h3 {\n    font-size: 14px;\n    font-weight: 400;\n    text-transform: capitalize;\n    margin: 0px 20px 0px 40px;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    color: ", ";\n    ", "\n  }\n"])), function (props) {
   var _props$theme4;
 
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    padding-right: 40px;\n    padding-left: 0px;\n  "])));
+}, function (props) {
+  return props.theme.colors.grayMedium;
+}, function (props) {
+  return props.theme.colors.grayMedium;
 }, function (props) {
   var _props$theme5;
 
@@ -147,7 +151,7 @@ var ProductNotAvailable = _styledComponents.default.span(_templateObject26 || (_
 
 exports.ProductNotAvailable = ProductNotAvailable;
 
-var ProductOptionsList = _styledComponents.default.ul(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  list-style-type: none;\n  color: ", ";\n  font-size: 14px;\n\n  ", "\n\n  .suboption {\n    margin-left: -25px;\n    ", "\n  }\n\n  p:nth-child(1) {\n    margin-bottom: 0;\n  }\n\n  p {\n    font-weight: 400;\n    margin: 0px;\n  }\n\n  li span {\n    font-weight: 300;\n  }\n\n  li.ingredient {\n    padding-left: 15px;\n    ", "\n  }\n"])), function (props) {
+var ProductOptionsList = _styledComponents.default.ul(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  list-style-type: none;\n  color: ", ";\n  font-size: 14px;\n\n  ", "\n\n  .suboption {\n    margin-left: -25px;\n    ", "\n  }\n\n  p:nth-child(1) {\n    margin-bottom: 0;\n  }\n\n  p {\n    font-weight: 400;\n    margin: 0px;\n    color: ", ";\n  }\n\n  li span {\n    font-weight: 400;\n    color: ", ";\n  }\n\n  li.ingredient {\n    padding-left: 15px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 }, function (_ref3) {
   var isCustomMode = _ref3.isCustomMode;
@@ -156,6 +160,10 @@ var ProductOptionsList = _styledComponents.default.ul(_templateObject27 || (_tem
   var _props$theme8;
 
   return ((_props$theme8 = props.theme) === null || _props$theme8 === void 0 ? void 0 : _props$theme8.rtl) && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n      margin-right: -25px;\n      margin-left: 0px;\n  "])));
+}, function (props) {
+  return props.theme.colors.grayMedium;
+}, function (props) {
+  return props.theme.colors.grayMedium;
 }, function (props) {
   var _props$theme9;
 
