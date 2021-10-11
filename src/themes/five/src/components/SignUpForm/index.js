@@ -407,12 +407,12 @@ const SignUpFormUI = (props) => {
           )}
           <BussinessAndDriverSignUp>
             <Button
-              color='lightPrimary'
+              color='primaryContrast'
             >
               {t('SIGNUP_FOR_BUSINESS', 'Sign up for business')}
             </Button>
             <Button
-              color='lightPrimary'
+              color='primaryContrast'
             >
               {t('SIGNUP_FOR_DRIVER', 'Sign up for driver')}
             </Button>

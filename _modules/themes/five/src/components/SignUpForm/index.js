@@ -424,9 +424,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), /*#__PURE__*/_react.default.createElement(_styles.BussinessAndDriverSignUp, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "lightPrimary"
+    color: "primaryContrast"
   }, t('SIGNUP_FOR_BUSINESS', 'Sign up for business')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "lightPrimary"
+    color: "primaryContrast"
   }, t('SIGNUP_FOR_DRIVER', 'Sign up for driver'))), /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, null, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
   }, isFacebookLogin && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
