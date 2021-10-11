@@ -8,7 +8,6 @@ export const CardContainer = styled.div`
   width: calc(100% - 40px);
   cursor: pointer;
   position: relative;
-  background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
   margin: 10px;
   padding: 20px;
   box-sizing: border-box;
