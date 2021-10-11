@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
-// import { Select } from '../../styles/Selects'
 
 export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   border-bottom: 1px solid #E9ECEF;
+  -webkit-tap-highlight-color: transparent;
 `
 
 export const InnerHeader = styled.div`
