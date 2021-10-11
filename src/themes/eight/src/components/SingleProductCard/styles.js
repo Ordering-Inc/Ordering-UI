@@ -140,5 +140,6 @@ export const QuantityContainer = styled.div`
   height: 25px;
   text-align: center;
   border-radius: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-33px,33px);
+  z-index: 1;
 `
