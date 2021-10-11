@@ -46,7 +46,6 @@ export const WrapperInput = styled.div`
 
   input {
     width: 65%;
-    padding: 4px 15px;
     box-sizing: border-box;
     flex: 1;
     margin-right: 10px;
