@@ -222,7 +222,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
         price: parsePrice(suboption.price)
       })));
     })));
-  })), product.comment && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement("p", null, t('SPECIAL_COMMENT', 'Special Comment')), /*#__PURE__*/_react.default.createElement("h3", null, product.comment))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
+  })), product.comment && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, {
+    isCustomMode: true
+  }, /*#__PURE__*/_react.default.createElement("p", null, t('SPECIAL_COMMENT', 'Special Comment')), /*#__PURE__*/_react.default.createElement("h3", null, product.comment))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
     className: "prod-price"
   }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price))), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
