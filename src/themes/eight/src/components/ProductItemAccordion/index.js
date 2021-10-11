@@ -186,7 +186,7 @@ export const ProductItemAccordion = (props) => {
                 </ProductOptionsList>
               )}
               {product.comment && (
-                <ProductComment>
+                <ProductComment isCustomMode>
                   <p>{t('SPECIAL_COMMENT', 'Special Comment')}</p>
                   <h3>{product.comment}</h3>
                 </ProductComment>

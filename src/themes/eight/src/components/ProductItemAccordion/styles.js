@@ -177,12 +177,12 @@ export const ContentInfo = styled.div`
 export const AccordionContent = styled.div`
   overflow: hidden;
   transition: max-height 0.6s ease;
-  width: 100%;
-  margin: auto;
 
-  @media (min-width: 481px) {
-    width: 80%;
-  }
+  ${props => props.theme?.rtl ? css`
+    margin-right: 115px;
+  ` : css`
+    margin-left: 115px;
+  `}
 `
 
 export const AccordionText = styled.div`
@@ -192,10 +192,12 @@ export const AccordionText = styled.div`
 `
 
 export const ProductComment = styled.div`
-  padding-left: 40px;
-  ${props => props.theme?.rtl && css`
-    padding-right: 40px;
-    padding-left: 0px;
+  ${({ isCustomMode }) => !isCustomMode && css`
+    padding-left: 40px;
+    ${props => props.theme?.rtl && css`
+      padding-right: 40px;
+      padding-left: 0px;
+    `}
   `}
   p {
     margin: 0px;
@@ -208,14 +210,11 @@ export const ProductComment = styled.div`
     font-size: 14px;
     font-weight: 400;
     text-transform: capitalize;
-    margin: 0px 20px 0px 40px;
+    margin: 0px 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     color: ${props => props.theme.colors.grayMedium};
-    ${props => props.theme?.rtl && css`
-      margin: 0px 40px 0px 20px;
-    `}
   }
 `
 
