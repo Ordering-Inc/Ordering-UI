@@ -12,6 +12,7 @@ import {
   FoodLocation
 } from './styles'
 
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Modal } from '../../../../../components/Modal'
 import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
@@ -28,6 +29,7 @@ export const HomeHero = (props) => {
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const history = useHistory()
+  const windowSize = useWindowSize()
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
@@ -63,6 +65,22 @@ export const HomeHero = (props) => {
     }
   }, [orderState, submited])
 
+  const today = new Date()
+  const curHr = today.getHours()
+  const [bgImage, setBgImage] = useState()
+
+  useEffect(() => {
+    if (curHr < 12) {
+      windowSize.width > 480
+        ? setBgImage(theme.images?.alsea?.moringHomeBackDesktop || theme.images?.general?.homeHero)
+        : setBgImage(theme.images?.alsea?.moringHomeBackMobile || theme.images?.general?.homeHero)
+    } else {
+      windowSize.width > 480
+        ? setBgImage(theme.images?.alsea?.afternoonHomeBackDesktop || theme.images?.general?.homeHero)
+        : setBgImage(theme.images?.alsea?.afternoonHomeBackMobile || theme.images?.general?.homeHero)
+    }
+  }, [curHr, windowSize])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -71,7 +89,7 @@ export const HomeHero = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <HeroContainer bgimage={theme.images?.general?.homeHero}>
+      <HeroContainer bgimage={bgImage}>
         <ContentWrapper>
           <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
           <Slogan>{t('SUBTITLE_HOME', theme?.defaultLanguages?.SUBTITLE_HOME || 'Let\'s start to order food now')}</Slogan>
@@ -133,10 +151,6 @@ const ArchiesOrderTypeUI = (props) => {
       handleChangeOrderType(orderType.value)
     }
     handleAddressInput()
-
-    // if (orderType.value === configTypes[0]) {
-    //   handleAddressInput()
-    // }
   }
 
   return (

@@ -42,9 +42,9 @@ const BusinessProductsListUI = (props) => {
             <h3>{category?.name}</h3>
             <ProductsListing>
               {
-                categoryState.products?.map(product => (
+                categoryState.products?.map((product, i) => (
                   <SingleProductCard
-                    key={product?.id}
+                    key={i}
                     isSoldOut={(product.inventoried && !product.quantity)}
                     product={product}
                     businessId={businessId}
@@ -92,9 +92,9 @@ const BusinessProductsListUI = (props) => {
                       <h3>{category.name}</h3>
                       <ProductsListing>
                         {
-                          products.map(product => (
+                          products.map((product, i) => (
                             <SingleProductCard
-                              key={product?.id}
+                              key={i}
                               isSoldOut={product.inventoried && !product.quantity}
                               businessId={businessId}
                               product={product}

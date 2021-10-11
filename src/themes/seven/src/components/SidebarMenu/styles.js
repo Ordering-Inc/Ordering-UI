@@ -239,6 +239,7 @@ export const Navlinks = styled.div`
     text-decoration: none;
     font-weight: 500;
     color: #000;
+    font-size: 18px;
     span.active {
       color: ${props => props.theme.colors.primary};
     }

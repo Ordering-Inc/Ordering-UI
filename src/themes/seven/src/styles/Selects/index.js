@@ -131,9 +131,6 @@ export const Chevron = styled.div`
 
 export const Header = styled.div`
   flex: 1;
-  svg {
-    font-size: 18px;
-  }
 `
 
 export const SelectImage = styled.div`

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useConfig, useOrder, useUtils } from 'ordering-components'
 
@@ -45,18 +45,34 @@ export const SingleProductCard = (props) => {
   let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - productBalance
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig
   const maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory)
+  const [qty, setQty] = useState(1)
+  const [productObj, setProductObj] = useState(props.product)
 
-  const checkProdcutImage = () => {
-    let bgImage
-    if (product?.images) {
-      if (product?.images.indexOf('http') > -1) {
-        bgImage = optimizeImage(product.images, 'h_200,c_limit')
-      } else {
-        bgImage = optimizeImage(theme.images?.dummies?.product, 'h_200,c_limit')
-      }
-      return bgImage
-    }
+  // const checkProdcutImage = () => {
+  //   let bgImage
+  //   if (productObj?.images) {
+  //     if (productObj?.images.indexOf('http') > -1) {
+  //       bgImage = optimizeImage(productObj.images, 'h_200,c_limit')
+  //     } else {
+  //       bgImage = optimizeImage(theme.images?.dummies?.product, 'h_200,c_limit')
+  //     }
+  //     return bgImage
+  //   }
+  // }
+
+  useEffect(() => {
+    setProductObj(product)
+  }, [product])
+
+  const handleQuantity = (e) => {
+    setQty(e.target.value)
   }
+
+  useEffect(() => {
+    const _product = { ...productObj }
+    _product.quantity = parseInt(qty)
+    setProductObj(_product)
+  }, [qty, productObj?.quantity])
 
   return (
     <>
@@ -68,7 +84,6 @@ export const SingleProductCard = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <CardContainer
         soldOut={isSoldOut || maxProductQuantity <= 0}
-        onClick={() => !(isSkeleton || isSoldOut) && onProductClick(product)}
         isCartOnProductsList={isCartOnProductsList}
       >
         <ProductInfo>
@@ -77,7 +92,7 @@ export const SingleProductCard = (props) => {
               <CardLogo
                 className='image'
                 soldOut={isSoldOut || maxProductQuantity <= 0}
-                bgimage={checkProdcutImage()}
+                // bgimage={checkProdcutImage()}
               />
             </WrapLogo>
           ) : (
@@ -86,12 +101,12 @@ export const SingleProductCard = (props) => {
             </WrapLogo>
           )}
           {windowSize.width < 768 && (
-            <ProductCost textLeft={(isSoldOut || maxProductQuantity <= 0)}>{parsePrice(product?.price)}</ProductCost>
+            <ProductCost textLeft={(isSoldOut || maxProductQuantity <= 0)}>{parsePrice(productObj?.price)}</ProductCost>
           )}
           {!isSkeleton ? (
             <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
-              <h1>{product?.name}</h1>
-              <p>{product?.description ? product?.description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus et, purus lorem quis eleifend id diam.'}</p>
+              <h1>{productObj?.name}</h1>
+              <p>{productObj?.description ? productObj?.description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus et, purus lorem quis eleifend id diam.'}</p>
             </CardInfo>
           ) : (
             <CardInfo>
@@ -101,7 +116,7 @@ export const SingleProductCard = (props) => {
         </ProductInfo>
         <CartAction>
           {windowSize.width > 768 && (
-            <ProductCost textLeft={(isSoldOut || maxProductQuantity <= 0)}>{parsePrice(product?.price)}</ProductCost>
+            <ProductCost textLeft={(isSoldOut || maxProductQuantity <= 0)}>{parsePrice(productObj?.price)}</ProductCost>
           )}
           <Quantity isSoldOut={isSoldOut}>
             <span>{t('QUANTITY', 'Quantity')}</span>
@@ -110,11 +125,12 @@ export const SingleProductCard = (props) => {
               name='product-quantity'
               aria-label='product-quantity'
               autoComplete='off'
-              defaultValue={1}
+              defaultValue={qty}
               maxLength='500'
+              onChange={(e) => handleQuantity(e)}
             />
           </Quantity>
-          {!(isSoldOut || maxProductQuantity <= 0) && <Button color='primary' outline>{t('ADD_TO_CART', 'ADD TO CART')}</Button>}
+          {!(isSoldOut || maxProductQuantity <= 0) && <Button color='primary' outline onClick={() => !(isSkeleton || isSoldOut) && onProductClick(productObj)}>{t('ADD_TO_CART', 'ADD TO CART')}</Button>}
         </CartAction>
         {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
       </CardContainer>
