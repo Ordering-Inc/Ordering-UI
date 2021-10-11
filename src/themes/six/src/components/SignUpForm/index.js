@@ -67,6 +67,7 @@ const SignUpFormUI = (props) => {
   const [, { login }] = useSession()
   const theme = useTheme()
   const emailInput = useRef(null)
+  const isFacebookLogin = configs?.facebook_login?.value === 'true'
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
@@ -388,7 +389,7 @@ const SignUpFormUI = (props) => {
             <>
               {Object.keys(configs).length > 0 ? (
                 <SocialButtons isPopup={isPopup}>
-                  {configs?.facebook_login?.value && configs?.facebook_id?.value && (
+                  { isFacebookLogin && configs?.facebook_id?.value && (
                     <FacebookLoginButton
                       appId={configs?.facebook_id?.value}
                       handleSuccessFacebookLogin={handleSuccessFacebook}
