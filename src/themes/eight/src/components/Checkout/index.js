@@ -361,7 +361,7 @@ const CheckoutUI = (props) => {
               <DriverTipContainer>
                 <WrapRightInnerContainer>
                   <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                  <h2>{t('MOBILE_FRONT_GOES_TO_YOUR_DRIVER', '100% of the tip goes to your driver')}</h2>
+                  <h2>{t('CUSTOM_DRIVER_TIP_MESSAGE', '100% of these tips go directly to your driver')}</h2>
                   <DriverTips
                     businessId={cart?.business_id}
                     driverTipsOptions={driverTipsOptions}

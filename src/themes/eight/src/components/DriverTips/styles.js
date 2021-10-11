@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const DriverTipContainer = styled.div`
   display: flex;
@@ -35,16 +35,6 @@ export const FormDriverTip = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`
-
-export const DriverTipLabel = styled.label`
-  font-size: 16px;
-  align-self: flex-start;
-
-  ${props => props.theme?.rtl && css`
-    margin-left: 20px;
-    margin-right: 0;
-  `}
 `
 
 export const WrapperInput = styled.div`
