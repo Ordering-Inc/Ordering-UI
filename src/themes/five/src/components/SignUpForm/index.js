@@ -28,7 +28,8 @@ import {
   Title,
   InputWrapper,
   InputBeforeIcon,
-  TermsConditionWrapper
+  TermsConditionWrapper,
+  BussinessAndDriverSignUp
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -404,6 +405,19 @@ const SignUpFormUI = (props) => {
               {elementLinkToLogin}
             </RedirectLink>
           )}
+          <BussinessAndDriverSignUp>
+            <Button
+              color='lightPrimary'
+            >
+              {t('SIGNUP_FOR_BUSINESS', 'Sign up for business')}
+            </Button>
+            <Button
+              color='lightPrimary'
+            >
+              {t('SIGNUP_FOR_DRIVER', 'Sign up for driver')}
+            </Button>
+          </BussinessAndDriverSignUp>
+
           <LoginDivider>
             <DividerLine />
             <p>{t('OR', 'or')}</p>
@@ -413,7 +427,7 @@ const SignUpFormUI = (props) => {
             <>
               {Object.keys(configs).length > 0 ? (
                 <SocialButtons isPopup={isPopup}>
-                  { isFacebookLogin && configs?.facebook_id?.value && (
+                  {isFacebookLogin && configs?.facebook_id?.value && (
                     <FacebookLoginButton
                       appId={configs?.facebook_id?.value}
                       handleSuccessFacebookLogin={handleSuccessFacebook}

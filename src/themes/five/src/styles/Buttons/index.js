@@ -134,6 +134,17 @@ export const Button = styled.button`
       }
     `}
   `}
+  ${({ color }) => color === 'primaryContrast' && css`
+    background: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
+    border-color: ${props => props.theme.colors.primaryContrast};
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.primaryContrast)};
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.primaryContrast)};
+    }
+  `}
   ${({ color }) => color === 'secundary' && css`
     background: ${props => props.theme.colors.secundary};
     color: ${props => props.theme.colors.secundaryContrast};
