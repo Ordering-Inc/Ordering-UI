@@ -76,6 +76,7 @@ export const CheckBoxWrapper = styled.div`
   align-items: center;
   cursor: pointer;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   span {
     font-size: 14px;
@@ -132,6 +133,7 @@ export const HourListWrapper = styled.div`
   margin-top: 35px;
   margin-bottom: 100px;
   text-align: center;
+  -webkit-tap-highlight-color: transparent;
 
   ${({ isLoading }) => isLoading && css`
     pointer-events: none;

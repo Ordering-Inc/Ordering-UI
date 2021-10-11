@@ -63,7 +63,7 @@ const ModalUI = (props) => {
         <ModalBackHeader />
       )}
       {!hideCloseDefault && (
-        <ModalIcon>
+        <ModalIcon isProductForm={isProductForm}>
           {windowSize.width > 576 ? (
             <>
               {(authModal && onRemove) ? <MdClose onClick={() => onRemove()} /> : <MdClose onClick={() => onClose()} />}
