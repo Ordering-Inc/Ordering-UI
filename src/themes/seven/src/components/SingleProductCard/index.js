@@ -48,17 +48,17 @@ export const SingleProductCard = (props) => {
   const [qty, setQty] = useState(1)
   const [productObj, setProductObj] = useState(props.product)
 
-  // const checkProdcutImage = () => {
-  //   let bgImage
-  //   if (productObj?.images) {
-  //     if (productObj?.images.indexOf('http') > -1) {
-  //       bgImage = optimizeImage(productObj.images, 'h_200,c_limit')
-  //     } else {
-  //       bgImage = optimizeImage(theme.images?.dummies?.product, 'h_200,c_limit')
-  //     }
-  //     return bgImage
-  //   }
-  // }
+  const checkProdcutImage = () => {
+    let bgImage
+    if (productObj?.images) {
+      if (productObj?.images.indexOf('http') > -1) {
+        bgImage = optimizeImage(productObj.images, 'h_200,c_limit')
+      } else {
+        bgImage = optimizeImage(theme.images?.dummies?.product, 'h_200,c_limit')
+      }
+      return bgImage
+    }
+  }
 
   useEffect(() => {
     setProductObj(product)
@@ -92,7 +92,7 @@ export const SingleProductCard = (props) => {
               <CardLogo
                 className='image'
                 soldOut={isSoldOut || maxProductQuantity <= 0}
-                // bgimage={checkProdcutImage()}
+                bgimage={checkProdcutImage()}
               />
             </WrapLogo>
           ) : (
