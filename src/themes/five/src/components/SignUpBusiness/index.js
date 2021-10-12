@@ -90,6 +90,13 @@ const SignUpBusinessUI = (props) => {
     handleChangeInput(phoneNumber, true)
   }
 
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
   useEffect(() => {
     if (externalPhoneNumber) {
       setUserPhoneNumber(externalPhoneNumber)
@@ -97,12 +104,14 @@ const SignUpBusinessUI = (props) => {
     }
   }, [externalPhoneNumber])
 
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
-  }
+  useEffect(() => {
+    if (Object.keys(formMethods.errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(formMethods.errors).map(error => error.message)
+      })
+    }
+  }, [formMethods.errors])
 
   return (
     <SignupBusinessContainer>
@@ -130,6 +139,9 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_FIRST_NAME_REQUIRED', 'First name is required')
+            })}
           />
           <Input
             type='text'
@@ -140,6 +152,9 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_LAST_NAME_REQUIRED', 'Last name is required')
+            })}
           />
           <Input
             type='text'
@@ -150,6 +165,9 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_STORE_NAME_REQUIRED', 'Store name is required')
+            })}
           />
           <Input
             type='password'
@@ -160,6 +178,9 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'Password is required')
+            })}
           />
           <PhoneInputWrapper>
             <InputPhoneNumber
@@ -177,6 +198,9 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_COUNTRY_REQUIRED', 'Country is required')
+            })}
           />
           <Input
             type='text'
@@ -187,6 +211,9 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_INVITE_CODE_REQUIRED', 'Invite code is required')
+            })}
           />
           {props.afterMidElements?.map((MidElement, i) => (
             <React.Fragment key={i}>
@@ -205,7 +232,7 @@ const SignUpBusinessUI = (props) => {
         </FormInput>
       </SignUpFormWrapper>
       <Alert
-        title={t('SIGN_UP', 'Sign up')}
+        title={t('SIGN_UP_FOR_BUSINESS', 'Sign up for business')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

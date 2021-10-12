@@ -97,6 +97,13 @@ const SignUpBusinessUI = (props) => {
     emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
   }
 
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
   useEffect(() => {
     if (externalPhoneNumber) {
       setUserPhoneNumber(externalPhoneNumber)
@@ -104,12 +111,14 @@ const SignUpBusinessUI = (props) => {
     }
   }, [externalPhoneNumber])
 
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
-  }
+  useEffect(() => {
+    if (Object.keys(formMethods.errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(formMethods.errors).map(error => error.message)
+      })
+    }
+  }, [formMethods.errors])
 
   return (
     <SignupBusinessContainer>
@@ -137,6 +146,9 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_STORE_NAME_REQUIRED', 'Store name is required')
+            })}
           />
           <Input
             type='text'
@@ -147,16 +159,22 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_STORE_ADDRESS_REQUIRED', 'Store address is required')
+            })}
           />
           <Input
             type='text'
             name='floor'
             aria-label='floor'
             className='form'
-            placeholder={t('FLOOR/SUITE', 'Floor / Suite')}
+            placeholder={t('FLOOR_SUITE', 'Floor / Suite')}
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_FLOOR_SUITE_REQUIRED', 'Floor / Suite is required')
+            })}
           />
           <Input
             type='text'
@@ -167,6 +185,9 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_FIRST_NAME_REQUIRED', 'First name is required')
+            })}
           />
           <Input
             type='text'
@@ -177,6 +198,9 @@ const SignUpBusinessUI = (props) => {
             onChange={handleChangeInput}
             required
             autoComplete='off'
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_LAST_NAME_REQUIRED', 'Last name is required')
+            })}
           />
           <Input
             type='email'
@@ -215,7 +239,7 @@ const SignUpBusinessUI = (props) => {
         </FormInput>
       </SignUpFormWrapper>
       <Alert
-        title={t('SIGN_UP', 'Sign up')}
+        title={t('SIGN_UP_FOR_DRIVER', 'Sign up for driver')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

@@ -123,12 +123,14 @@ export const PhoneInputWrapper = styled.div`
     border: none !important;
     border-radius: 7.6px;
     margin-bottom: 0;
+    font-size: 14px;
   }
 
   .phone_number {
     > span {
       left: 0;
       position: absolute;
+      font-size: 13px;
     }
   }
 `
