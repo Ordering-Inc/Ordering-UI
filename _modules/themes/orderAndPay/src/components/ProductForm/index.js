@@ -53,11 +53,11 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -73,12 +73,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductOptionsUI = function ProductOptionsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$images, _theme$images$dummies, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _props$afterMidElemen, _props$afterMidCompon, _orderState$options, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _orderState$options2, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _error$, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$images, _theme$images$dummies, _product$ingredients, _product$extras, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _props$afterMidElemen, _props$afterMidCompon, _orderState$options, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _orderState$options2, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _error$, _props$afterComponent, _props$afterElements;
 
   var editMode = props.editMode,
       isSoldOut = props.isSoldOut,
@@ -205,9 +205,44 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   };
 
   var handleChangeTabValue = function handleChangeTabValue(value) {
-    setTabValue(value);
+    var categoryTitle = document.getElementById(value);
+    var container = document.getElementsByClassName('popup-dialog')[0];
+
+    if (categoryTitle) {
+      container.scroll({
+        top: categoryTitle.offsetTop + 300,
+        behavior: 'smooth'
+      });
+    } else {
+      container.scroll({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   };
 
+  (0, _react.useEffect)(function () {
+    var container = document.getElementsByClassName('popup-dialog')[0];
+
+    if (container) {
+      container.addEventListener('scroll', function () {
+        var extrasContainer = document.getElementById('extra');
+        var ingredientsContainer = document.getElementById('ingredients');
+
+        if (container.scrollTop < (ingredientsContainer === null || ingredientsContainer === void 0 ? void 0 : ingredientsContainer.offsetTop) + 290 || container.scrollTop < 200) {
+          setTabValue('all');
+        } else if (ingredientsContainer && container.scrollTop < (extrasContainer === null || extrasContainer === void 0 ? void 0 : extrasContainer.offsetTop) + 290) {
+          setTabValue('ingredients');
+        } else {
+          extrasContainer ? setTabValue('extra') : ingredientsContainer ? setTabValue('ingredients') : setTabValue('all');
+        }
+      });
+    }
+
+    return function () {
+      container && container.removeEventListener('scroll');
+    };
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -265,21 +300,23 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return handleChangeTabValue('all');
     },
     borderBottom: true
-  }, t('ALL', 'All')), (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, t('ALL', 'All')), (product === null || product === void 0 ? void 0 : (_product$ingredients = product.ingredients) === null || _product$ingredients === void 0 ? void 0 : _product$ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     key: "ingredients",
     active: tabValue === 'ingredients',
     onClick: function onClick() {
       return handleChangeTabValue('ingredients');
     },
     borderBottom: true
-  }, t('INGREDIENTS', 'ingredients')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, t('INGREDIENTS', 'ingredients')), (product === null || product === void 0 ? void 0 : (_product$extras = product.extras) === null || _product$extras === void 0 ? void 0 : _product$extras.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     key: "extra",
     active: tabValue === 'extra',
     onClick: function onClick() {
       return handleChangeTabValue('extra');
     },
     borderBottom: true
-  }, t('EXTRA', 'Extra')))), (tabValue === 'ingredients' || tabValue === 'all') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.INGREDIENTS) || 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
+  }, t('EXTRA', 'Extra')))), (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, {
+    id: "ingredients"
+  }, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.INGREDIENTS) || 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
     isProductSoldout: isSoldOut || maxProductQuantity <= 0
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
@@ -288,11 +325,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       state: productCart.ingredients["id:".concat(ingredient === null || ingredient === void 0 ? void 0 : ingredient.id)],
       onChange: handleChangeIngredientState
     });
-  }))), (tabValue === 'extra' || tabValue === 'all') && (product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
-    return extra.options.map(function (option) {
+  })), product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
+    return extra.options.map(function (option, i) {
       var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
-        key: option === null || option === void 0 ? void 0 : option.id
+        key: option === null || option === void 0 ? void 0 : option.id,
+        id: i === 0 ? 'extra' : ''
       }, showOption(option) && /*#__PURE__*/_react.default.createElement(_ProductOption.ProductOption, {
         option: option,
         currentState: currentState,
@@ -314,7 +352,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         }) : null;
       }))));
     });
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('COMMENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SPECIAL_COMMENT) || 'COMMENTS')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('COMMENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SPECIAL_COMMENT) || 'COMMENTS')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     placeholder: t('SPECIAL_COMMENT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SPECIAL_COMMENT) || 'Special comment'),
     defaultValue: productCart.comment,

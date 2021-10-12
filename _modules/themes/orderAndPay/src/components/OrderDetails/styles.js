@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.IconsContainer = exports.ModalIcon = exports.MyOrderActions = exports.Divider = exports.WrapperRightContainer = exports.WrapperLeftContainer = exports.ExclamationWrapper = exports.MessagesIcon = exports.ShareOrder = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.ReviewsAction = exports.OrderBill = exports.OrderProducts = exports.WrapperDriver = exports.OrderDriver = exports.Map = exports.PhotoBlock = exports.OrderCustomer = exports.SectionTitle = exports.StatusBar = exports.ReviewOrderLink = exports.OrderInfo = exports.ActionsBlock = exports.BusinessInfo = exports.BusinessWrapper = exports.OrderBusiness = exports.Content = exports.HeaderInfo = exports.SkeletonWrapper = exports.WrapperContainer = exports.Container = void 0;
+exports.WrapperRightContainer = exports.WrapperLeftContainer = exports.WrapperDriver = exports.WrapperContainer = exports.StatusBar = exports.SkeletonWrapper = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.ShareOrder = exports.SectionTitle = exports.ReviewsAction = exports.ReviewOrderLink = exports.PhotoBlock = exports.OrderProducts = exports.OrderInfo = exports.OrderDriver = exports.OrderCustomer = exports.OrderBusiness = exports.OrderBill = exports.MyOrderActions = exports.ModalIcon = exports.MessagesIcon = exports.Map = exports.IconsContainer = exports.HeaderInfo = exports.ExclamationWrapper = exports.Divider = exports.Content = exports.Container = exports.BusinessWrapper = exports.BusinessInfo = exports.ActionsBlock = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,9 +13,9 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39;
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -161,7 +161,10 @@ var MessagesIcon = _styledComponents.default.span(_templateObject32 || (_templat
 
 exports.MessagesIcon = MessagesIcon;
 
-var ExclamationWrapper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(350%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
+var ExclamationWrapper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: ", ";\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (_ref3) {
+  var driver = _ref3.driver;
+  return driver ? 'translate(50%,-25%)' : 'translate(300%, -25%)';
+}, function (props) {
   var _props$theme7, _props$theme7$colors;
 
   return (_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : (_props$theme7$colors = _props$theme7.colors) === null || _props$theme7$colors === void 0 ? void 0 : _props$theme7$colors.primary;
@@ -187,8 +190,8 @@ var ModalIcon = _styledComponents.default.div(_templateObject38 || (_templateObj
 
 exports.ModalIcon = ModalIcon;
 
-var IconsContainer = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  display: flex;\n  svg{\n    margin-left: 10px;\n    color: ", ";\n  }\n"])), function (_ref3) {
-  var theme = _ref3.theme;
+var IconsContainer = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  display: flex;\n  svg{\n    margin-left: 10px;\n    color: ", ";\n  }\n"])), function (_ref4) {
+  var theme = _ref4.theme;
   return theme.colors.arrowColor;
 });
 

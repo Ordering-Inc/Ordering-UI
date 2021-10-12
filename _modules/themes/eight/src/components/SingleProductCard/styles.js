@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CardLogo = exports.WrapLogo = exports.CardInfo = exports.SoldOut = exports.CardContainer = void 0;
+exports.WrapLogo = exports.SoldOut = exports.QuantityContainer = exports.CardLogo = exports.CardInfo = exports.CardContainer = void 0;
 
 var _polished = require("polished");
 
@@ -13,11 +13,11 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,13 +25,10 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: calc(100% - 40px);\n  cursor: pointer;\n  position: relative;\n  background: ", ";\n  margin: 10px;\n  padding: 20px;\n  box-sizing: border-box;\n  border-radius: 7.6px;\n\n  &:hover {\n    box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;\n    background-color: ", ";\n  }\n\n  ", "\n"])), function (_ref) {
-  var soldOut = _ref.soldOut;
-  return soldOut ? '#B8B8B8' : '#FFF';
-}, function (props) {
+var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: calc(100% - 40px);\n  cursor: pointer;\n  position: relative;\n  margin: 10px;\n  padding: 20px;\n  box-sizing: border-box;\n  border-radius: 7.6px;\n\n  &:hover {\n    box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;\n    background-color: ", ";\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.third;
-}, function (_ref2) {
-  var isCartOnProductsList = _ref2.isCartOnProductsList;
+}, function (_ref) {
+  var isCartOnProductsList = _ref.isCartOnProductsList;
   return isCartOnProductsList ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    @media (min-width: 993px) {\n      width: calc(50% - 20px);\n    }\n  "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    @media (min-width: 681px) {\n      width: calc(50% - 20px);\n    }\n\n    @media (min-width: 993px) {\n      width: calc(33% - 20px);\n    }\n  "])));
 });
 
@@ -45,21 +42,21 @@ var SoldOut = _styledComponents.default.span(_templateObject4 || (_templateObjec
 
 exports.SoldOut = SoldOut;
 
-var CardInfo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  h1 {\n    font-size: 16px;\n    font-weight: ", ";\n    text-align: left;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    text-align: center;\n    color: ", ";\n    margin: 0px;\n    padding-top: 10px;\n  }\n\n  p {\n    font-weight: ", ";\n    text-align: left;\n    ", "\n\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    color: ", ";\n    font-weight: bold;\n  }\n\n  p, span {\n    font-size: 13px;\n  }\n\n  @media (min-width: 1024px) {\n    p {\n      font-size: 16px;\n    }\n\n    span {\n      font-size: 15px;\n    }\n  }\n"])), function (_ref3) {
-  var soldOut = _ref3.soldOut;
+var CardInfo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  h1 {\n    font-size: 16px;\n    font-weight: ", ";\n    text-align: left;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    text-align: center;\n    color: ", ";\n    margin: 0px;\n    padding-top: 10px;\n  }\n\n  p {\n    font-weight: ", ";\n    text-align: left;\n    ", "\n\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    color: ", ";\n    font-weight: bold;\n  }\n\n  p, span {\n    font-size: 13px;\n  }\n\n  @media (min-width: 1024px) {\n    p {\n      font-size: 16px;\n    }\n\n    span {\n      font-size: 15px;\n    }\n  }\n"])), function (_ref2) {
+  var soldOut = _ref2.soldOut;
   return soldOut ? 'bold' : '500';
 }, function (props) {
   return props.theme.colors.secundary;
-}, function (_ref4) {
-  var soldOut = _ref4.soldOut;
+}, function (_ref3) {
+  var soldOut = _ref3.soldOut;
   return soldOut ? 'bold' : '200';
 }, function (props) {
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      text-align: right;\n    "])));
-}, function (_ref5) {
-  var soldOut = _ref5.soldOut,
-      theme = _ref5.theme;
+}, function (_ref4) {
+  var soldOut = _ref4.soldOut,
+      theme = _ref4.theme;
   return soldOut ? (0, _polished.lighten)(0.05, theme.colors.primary) : theme.colors.primary;
 });
 
@@ -88,3 +85,13 @@ var CardLogo = function CardLogo(props) {
 };
 
 exports.CardLogo = CardLogo;
+
+var QuantityContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-33px,33px);\n  z-index: 1;\n"])), function (_ref5) {
+  var theme = _ref5.theme;
+  return theme.colors.primary;
+}, function (_ref6) {
+  var theme = _ref6.theme;
+  return theme.colors.primaryContrast;
+});
+
+exports.QuantityContainer = QuantityContainer;

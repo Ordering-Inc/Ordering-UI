@@ -41,25 +41,25 @@ var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -69,14 +69,14 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _configs$add_product_, _Object$values$find, _currentCart$products2, _props$beforeElements, _props$beforeComponen, _currentCart$products3, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _currentCart$products4, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _error$, _theme$defaultLanguag7, _currentCart$products5, _currentCart$products6, _currentCart$products7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _currentCart$products8, _productModal$product2, _productModal$error$, _theme$defaultLanguag12, _props$afterComponent, _props$afterElements;
+  var _configs$add_product_, _Object$values$find, _currentCart$products3, _props$beforeElements, _props$beforeComponen, _currentCart$products4, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _currentCart$products5, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _error$, _theme$defaultLanguag7, _currentCart$products6, _currentCart$products7, _currentCart$products8, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _currentCart$products9, _productModal$product2, _productModal$error$, _theme$defaultLanguag12, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
@@ -116,7 +116,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 2),
       carts = _useOrder2[0].carts,
-      addProduct = _useOrder2[1].addProduct;
+      _useOrder2$ = _useOrder2[1],
+      addProduct = _useOrder2$.addProduct,
+      updateProduct = _useOrder2$.updateProduct;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -178,8 +180,30 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   var onProductClick = function onProductClick(product) {
-    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && isQuickAddProduct) {
-      addProduct(product, currentCart);
+    if (product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct) {
+      var _currentCart$products;
+
+      var isProductAddedToCart = currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.find(function (Cproduct) {
+        return Cproduct.id === product.id;
+      });
+      var productQuantity = isProductAddedToCart === null || isProductAddedToCart === void 0 ? void 0 : isProductAddedToCart.quantity;
+
+      var addCurrentProduct = _objectSpread(_objectSpread({}, product), {}, {
+        quantity: 1
+      });
+
+      var updateCurrentProduct = {
+        businessid: business.id,
+        id: product.id,
+        code: isProductAddedToCart === null || isProductAddedToCart === void 0 ? void 0 : isProductAddedToCart.code,
+        quantity: productQuantity + 1
+      };
+
+      if (isProductAddedToCart) {
+        updateProduct(updateCurrentProduct, currentCart);
+      } else {
+        addProduct(addCurrentProduct, currentCart, isQuickAddProduct);
+      }
     } else {
       onProductRedirect({
         slug: business === null || business === void 0 ? void 0 : business.slug,
@@ -273,12 +297,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    var _currentCart$products;
+    var _currentCart$products2;
 
-    if ((currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 || !isCartOpen) return;
+    if ((currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0 || !isCartOpen) return;
     handleBackShowOption();
     setIsCartOpen(false);
-  }, [currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length, isCartOpen]);
+  }, [currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length, isCartOpen]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -293,7 +317,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return handleShowOption('categories');
     }
   }), (showOption === 'categories' || showOption === 'products') && /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
-    isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0
+    isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.length) > 0
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
   }, showOption === 'categories' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) ? /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
@@ -328,9 +352,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleSearchRedirect: handleSearchRedirect,
     featured: featuredProducts,
     searchValue: searchValue,
-    isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.length) > 0,
+    isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products5 = currentCart.products) === null || _currentCart$products5 === void 0 ? void 0 : _currentCart$products5.length) > 0,
     handleClearSearch: handleChangeSearch,
-    errorQuantityProducts: errorQuantityProducts
+    errorQuantityProducts: errorQuantityProducts,
+    currentCart: currentCart
   })))), loading && !error && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showOption === 'categories' && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: [],
     isSkeleton: true
@@ -360,13 +385,13 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleBackShowOption();
       setIsCartOpen(false);
     }
-  }), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products5 = currentCart.products) === null || _currentCart$products5 === void 0 ? void 0 : _currentCart$products5.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapCart, null, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+  }), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapCart, null, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isForceOpenCart: true,
     isCustomMode: true,
     cart: currentCart,
     isCartPending: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.status) === 2,
     isProducts: currentCart.products.length,
-    isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.length) > 0,
+    isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products7 = currentCart.products) === null || _currentCart$products7 === void 0 ? void 0 : _currentCart$products7.length) > 0,
     handleCartOpen: function handleCartOpen(val) {
       return setIsCartOpen(val);
     },
@@ -374,10 +399,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleBackShowOption();
       setIsCartOpen(false);
     }
-  }))), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products7 = currentCart.products) === null || _currentCart$products7 === void 0 ? void 0 : _currentCart$products7.length) > 0 && auth && !isCartOpen && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid_schedule) && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid_products) && showOption !== 'productForm' && showOption !== 'cart' && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
+  }))), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products8 = currentCart.products) === null || _currentCart$products8 === void 0 ? void 0 : _currentCart$products8.length) > 0 && auth && !isCartOpen && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid_schedule) && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid_products) && showOption !== 'productForm' && showOption !== 'cart' && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
     btnText: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.MAXIMUM_SUBTOTAL_ORDER) || 'Maximum subtotal order'), ": ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.maximum)) : !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.MINIMUN_SUBTOTAL_ORDER) || 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)) : !openUpselling ^ canOpenUpselling ? t('VIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.VIEW_ORDER) || 'View Order') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag11 = theme.defaultLanguages) === null || _theme$defaultLanguag11 === void 0 ? void 0 : _theme$defaultLanguag11.LOADING) || 'Loading'),
     isSecondaryBtn: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100),
-    btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products8 = currentCart.products) === null || _currentCart$products8 === void 0 ? void 0 : _currentCart$products8.length // handleClick={() => setOpenUpselling(true)}
+    btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products9 = currentCart.products) === null || _currentCart$products9 === void 0 ? void 0 : _currentCart$products9.length // handleClick={() => setOpenUpselling(true)}
     ,
     handleClick: function handleClick() {
       return handleShowOption('cart');

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PageNotFoundImage = exports.PageNotFoundText = exports.PageNotFoundContainer = void 0;
+exports.PageNotFoundText = exports.PageNotFoundImage = exports.PageNotFoundContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.InvisibleInput = exports.Send = exports.Comments = exports.Stars = exports.Category = exports.Categories = exports.Reviews = exports.ReviewOrderContainer = void 0;
+exports.Stars = exports.Send = exports.Reviews = exports.ReviewOrderContainer = exports.InvisibleInput = exports.Comments = exports.Category = exports.Categories = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
