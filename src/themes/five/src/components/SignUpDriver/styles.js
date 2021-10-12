@@ -99,6 +99,7 @@ export const FormInput = styled.form`
   }
 
   button {
+    margin-top: 12px;
     width: 100%;
     height: 44px;
   }
@@ -121,5 +122,11 @@ export const PhoneInputWrapper = styled.div`
     border: none !important;
     border-radius: 7.6px;
     margin-bottom: 0;
+  }
+
+  .phone_number {
+    > span {
+      position: absolute;
+    }
   }
 `

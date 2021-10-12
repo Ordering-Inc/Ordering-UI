@@ -67,7 +67,8 @@ const SignUpFormUI = (props) => {
     saveCustomerUser,
     fieldsNotValid,
     signupData,
-    enableReCaptcha
+    enableReCaptcha,
+    closeModal
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -124,6 +125,7 @@ const SignUpFormUI = (props) => {
 
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
+    closeModal && closeModal()
   }
 
   const onSubmit = () => {

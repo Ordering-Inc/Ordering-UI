@@ -445,6 +445,7 @@ export const Header = (props) => {
                 useChekoutFileds
                 handleSuccessSignup={handleSuccessSignup}
                 isPopup
+                closeModal={() => closeAuthModal()}
               />
             )}
             {modalPageToShow === 'forgotpassword' && (
