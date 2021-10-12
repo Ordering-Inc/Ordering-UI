@@ -213,7 +213,7 @@ const OrderDetailsUI = (props) => {
                           </span>}
                         <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
                           {order?.unread_count > 0 && unreadAlert.driver && (
-                            <ExclamationWrapper>
+                            <ExclamationWrapper driver>
                               <AiFillExclamationCircle />
                             </ExclamationWrapper>
                           )}
