@@ -8,7 +8,6 @@ export const CardContainer = styled.div`
   width: calc(100% - 40px);
   cursor: pointer;
   position: relative;
-  background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
   margin: 10px;
   padding: 20px;
   box-sizing: border-box;
@@ -129,3 +128,17 @@ export const CardLogo = (props) => {
     </CardLogoStyled>
   )
 }
+
+export const QuantityContainer = styled.div`
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primaryContrast};
+  position: absolute;
+  left: 100%;
+  bottom: 100%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  transform: translate(-33px,33px);
+  z-index: 1;
+`

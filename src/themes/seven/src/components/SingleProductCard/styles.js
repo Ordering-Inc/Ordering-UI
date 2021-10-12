@@ -3,11 +3,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
-  
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
-  cursor: pointer;
   position: relative;
   box-sizing: border-box;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
@@ -130,7 +128,6 @@ const CardLogoStyled = styled.div`
     width: 195px;
     height: 195px;
   }
-
 `
 export const CardLogo = (props) => {
   const style = {}

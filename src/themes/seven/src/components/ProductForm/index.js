@@ -4,12 +4,14 @@ import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
 
 import {
-  ProductForm as ProductOptions,
+  // ProductForm as ProductOptions,
   useSession,
   useLanguage,
   useOrder,
   useUtils
 } from 'ordering-components'
+
+import { ProductForm as ProductOptions } from './productForm'
 
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
