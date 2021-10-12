@@ -30,6 +30,7 @@ import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
+import { SignUpBusiness } from './pages/SignUpBusiness'
 import { Help } from './pages/Help'
 
 import { ScrollToTop } from './components/ScrollToTop'
@@ -135,6 +136,21 @@ export const App = () => {
                       !auth
                         ? (
                           <SignUp
+                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                            useLoginByCellphone
+                            useChekoutFileds
+                            handleSuccessSignup={handleSuccessSignup}
+                            isRecaptchaEnable
+                          />
+                        )
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/signup_business'>
+                    {
+                      !auth
+                        ? (
+                          <SignUpBusiness
                             elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
                             useLoginByCellphone
                             useChekoutFileds

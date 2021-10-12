@@ -10,7 +10,8 @@ import {
   useLanguage,
   useConfig,
   useSession,
-  ReCaptcha
+  ReCaptcha,
+  useEvent
 } from 'ordering-components'
 import {
   SignUpContainer,
@@ -71,6 +72,7 @@ const SignUpFormUI = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
+  const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const emailInput = useRef(null)
@@ -118,6 +120,10 @@ const SignUpFormUI = (props) => {
       open: false,
       content: []
     })
+  }
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
   }
 
   const onSubmit = () => {
@@ -408,6 +414,7 @@ const SignUpFormUI = (props) => {
           <BussinessAndDriverSignUp>
             <Button
               color='primaryContrast'
+              onClick={() => handleGoToPage({ page: 'signup_business' })}
             >
               {t('SIGNUP_FOR_BUSINESS', 'Sign up for business')}
             </Button>
