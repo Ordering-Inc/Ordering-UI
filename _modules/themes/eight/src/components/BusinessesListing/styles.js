@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PreviousOrders = exports.PreviousButtonWrapper = exports.ErrorMessage = exports.BusinessesTitle = exports.BusinessList = exports.BusinessContainer = void 0;
+exports.PreviousButtonWrapper = exports.BusinessesTitle = exports.PreviousOrders = exports.ErrorMessage = exports.BusinessList = exports.BusinessContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

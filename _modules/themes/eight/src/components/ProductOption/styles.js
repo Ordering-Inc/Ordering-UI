@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapHeader = exports.TitleContainer = exports.Title = exports.OptionThumbnail = exports.Flag = exports.Container = void 0;
+exports.OptionThumbnail = exports.Flag = exports.Title = exports.TitleContainer = exports.WrapHeader = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

@@ -45,12 +45,6 @@ Object.defineProperty(exports, "BusinessReviews", {
     return _BusinessReviews.BusinessReviews;
   }
 });
-Object.defineProperty(exports, "Button", {
-  enumerable: true,
-  get: function get() {
-    return _Buttons.Button;
-  }
-});
 Object.defineProperty(exports, "CardForm", {
   enumerable: true,
   get: function get() {
@@ -105,12 +99,6 @@ Object.defineProperty(exports, "GoogleLoginButton", {
     return _GoogleLogin.GoogleLoginButton;
   }
 });
-Object.defineProperty(exports, "Input", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.Input;
-  }
-});
 Object.defineProperty(exports, "InputPhoneNumber", {
   enumerable: true,
   get: function get() {
@@ -141,16 +129,16 @@ Object.defineProperty(exports, "OrderDetails", {
     return _OrderDetails.OrderDetails;
   }
 });
-Object.defineProperty(exports, "OrderTypeSelectorContent", {
-  enumerable: true,
-  get: function get() {
-    return _OrderTypeSelectorContent.OrderTypeSelectorContent;
-  }
-});
 Object.defineProperty(exports, "OrdersOption", {
   enumerable: true,
   get: function get() {
     return _OrdersOption.OrdersOption;
+  }
+});
+Object.defineProperty(exports, "OrderTypeSelectorContent", {
+  enumerable: true,
+  get: function get() {
+    return _OrderTypeSelectorContent.OrderTypeSelectorContent;
   }
 });
 Object.defineProperty(exports, "PaymentOptionCash", {
@@ -183,12 +171,6 @@ Object.defineProperty(exports, "SearchBar", {
     return _SearchBar.SearchBar;
   }
 });
-Object.defineProperty(exports, "Select", {
-  enumerable: true,
-  get: function get() {
-    return _Select.Select;
-  }
-});
 Object.defineProperty(exports, "SignUpForm", {
   enumerable: true,
   get: function get() {
@@ -205,12 +187,6 @@ Object.defineProperty(exports, "StripeElementsForm", {
   enumerable: true,
   get: function get() {
     return _StripeElementsForm.StripeElementsForm;
-  }
-});
-Object.defineProperty(exports, "TextArea", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.TextArea;
   }
 });
 Object.defineProperty(exports, "UpsellingPage", {
@@ -235,6 +211,30 @@ Object.defineProperty(exports, "VerticalOrdersLayout", {
   enumerable: true,
   get: function get() {
     return _VerticalOrdersLayout.VerticalOrdersLayout;
+  }
+});
+Object.defineProperty(exports, "Button", {
+  enumerable: true,
+  get: function get() {
+    return _Buttons.Button;
+  }
+});
+Object.defineProperty(exports, "Input", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.Input;
+  }
+});
+Object.defineProperty(exports, "TextArea", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.TextArea;
+  }
+});
+Object.defineProperty(exports, "Select", {
+  enumerable: true,
+  get: function get() {
+    return _Select.Select;
   }
 });
 

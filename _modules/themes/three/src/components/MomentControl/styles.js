@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.MomentControlContainer = exports.Hours = exports.Days = void 0;
+exports.Hours = exports.Days = exports.Title = exports.MomentControlContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

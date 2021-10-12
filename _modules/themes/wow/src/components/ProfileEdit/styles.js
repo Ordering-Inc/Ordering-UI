@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIcon = exports.SkeletonWrapper = exports.ProfileContent = exports.Image = exports.Container = void 0;
+exports.ProfileContent = exports.UploadImageIcon = exports.SkeletonWrapper = exports.Image = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UpsellingContainer = exports.SkeletonContainer = exports.Item = exports.Image = exports.Details = exports.Container = exports.CloseUpselling = void 0;
+exports.SkeletonContainer = exports.CloseUpselling = exports.Details = exports.Image = exports.Item = exports.UpsellingContainer = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
