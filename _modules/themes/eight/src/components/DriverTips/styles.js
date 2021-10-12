@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperTips = exports.WrapperInput = exports.TipCard = exports.FormDriverTip = exports.DriverTipMessage = exports.DriverTipContainer = void 0;
+exports.WrapperTips = exports.DriverTipMessage = exports.WrapperInput = exports.FormDriverTip = exports.TipCard = exports.DriverTipContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

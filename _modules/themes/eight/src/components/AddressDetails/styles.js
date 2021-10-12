@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrappMap = exports.Text = exports.Map = exports.Header = exports.ChangeButton = exports.AddressContainer = void 0;
+exports.ChangeButton = exports.Text = exports.Map = exports.WrappMap = exports.Header = exports.AddressContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

@@ -39,6 +39,12 @@ Object.defineProperty(exports, "BusinessController", {
     return _BusinessController.BusinessController;
   }
 });
+Object.defineProperty(exports, "BusinessesListing", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessesListing.BusinessesListing;
+  }
+});
 Object.defineProperty(exports, "BusinessItemAccordion", {
   enumerable: true,
   get: function get() {
@@ -55,12 +61,6 @@ Object.defineProperty(exports, "BusinessProductsListing", {
   enumerable: true,
   get: function get() {
     return _BusinessProductsListing.BusinessProductsListing;
-  }
-});
-Object.defineProperty(exports, "BusinessesListing", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessesListing.BusinessesListing;
   }
 });
 Object.defineProperty(exports, "Cart", {
