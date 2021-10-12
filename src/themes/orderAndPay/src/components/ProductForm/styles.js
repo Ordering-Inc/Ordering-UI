@@ -248,6 +248,9 @@ export const WrapperIngredients = styled.div`
 `
 
 export const ProductTabContainer = styled.div`
+  position: sticky;
+  top: 40px;
+  background: ${({ theme }) => theme.colors.white};
   border-bottom: 1px solid #E9ECEF;
 `
 
