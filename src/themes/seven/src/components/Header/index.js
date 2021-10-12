@@ -173,11 +173,11 @@ export const Header = (props) => {
             <RightHeader>
               {windowSize.width > 1023 && (
                 <Navlinks>
-                  <Link to={t('ARCHIES_MENU_LINK', 'Archies menu link')}><span className={window.location.pathname === '/menu' ? 'active' : ''}>{t('ARCHIES_MENU_TEXT', 'Menu')}</span></Link>
-                  <Link to='/'><span className={window.location.pathname === '/location' ? 'active' : ''}>{t('ARCHIES_UBICATION_TEXT ', 'Ubicación')}</span></Link>
-                  <Link to='/picoli'><span className={window.location.pathname === '/picoli' ? 'active' : ''}>{t('ARCHIES_PICOLI_TEXT ', 'Picoli')}</span></Link>
-                  <Link to='/promotions'><span className={window.location.pathname === '/promotions' ? 'active' : ''}>{t('ARCHIES_PROMOS_TEXT ', 'Promociones')}</span></Link>
-                  <Link to={t('ARCHIES_CONTACT_LINK', 'Archies contact link')}><span className={window.location.pathname === '/contact' ? 'active' : ''}>{t('ARCHIES_CONTACT_TEXT ', 'Contacto')}</span></Link>
+                  <a href={t('ARCHIES_MENU_LINK', 'https://archies.cluvi.co')} target='_blank' rel='noopener noreferrer'><span className={window.location.pathname === '/menu' ? 'active' : ''}>{t('ARCHIES_MENU_TEXT', 'Menu')}</span></a>
+                  <Link to='/location'><span className={window.location.pathname === '/location' ? 'active' : ''}>{t('ARCHIES_UBICATION_TEXT', 'Location')}</span></Link>
+                  <Link to='/picoli'><span className={window.location.pathname === '/picoli' ? 'active' : ''}>{t('ARCHIES_PICOLI_TEXT ', 'Piccoli')}</span></Link>
+                  <Link to='/promotions'><span className={window.location.pathname === '/promotions' ? 'active' : ''}>{t('ARCHIES_PROMOS_TEXT', 'Promotions')}</span></Link>
+                  <a href={t('ARCHIES_CONTACT_LINK', 'https://contacto.miexperienciaarchies.com.co')} target='_blank' rel='noopener noreferrer'><span className={window.location.pathname === '/contact' ? 'active' : ''}>{t('ARCHIES_CONTACT_TEXT', 'Contact')}</span></a>
                 </Navlinks>
               )}
               <Menu>

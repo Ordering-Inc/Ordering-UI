@@ -79,6 +79,7 @@ const BusinessProductsListingUI = (props) => {
   const [ageError, setAgeError] = useState(false)
 
   const ageValidationCategorys = ['Vinos'.toUpperCase(), 'Cervezas'.toUpperCase()]
+  
   const handler = () => {
     setOpenBusinessInformation(true)
   }
@@ -98,22 +99,15 @@ const BusinessProductsListingUI = (props) => {
       return
     }
 
-    if (product.extras.length === 0 && !product.inventoried && !Object.is(auth, null) && addProductWithOneClick) {
-      addProduct(product, currentCart)
-    } else {
-      onProductRedirect({
-        slug: business?.slug,
-        product: product.id,
-        category: product.category_id
-      })
-      setCurProduct(product)
-      setModalIsOpen(true)
-      events.emit('product_clicked', product)
-    }
+    onProductRedirect({
+      slug: business?.slug,
+      product: product.id,
+      category: product.category_id
+    })
+    setCurProduct(product)
+    setModalIsOpen(true)
+    events.emit('product_clicked', product)
   }
-
-  // Vinos
-  // Cervezas
 
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
@@ -202,7 +196,7 @@ const BusinessProductsListingUI = (props) => {
         setIsOver18Age(true)
       }
     }
-  }, [user])
+  }, [user?.birthdate])
 
   return (
     <>
