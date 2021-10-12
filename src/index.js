@@ -102,7 +102,6 @@ import {
   capitalize,
   convertHoursToMinutes,
   scrollTo,
-  DriverTipsOptions,
   bytesConverter,
   formatSeconds,
   verifyDecimals
@@ -227,7 +226,6 @@ export {
   capitalize,
   convertHoursToMinutes,
   scrollTo,
-  DriverTipsOptions,
   bytesConverter,
   formatSeconds,
   verifyDecimals

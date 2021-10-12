@@ -77,6 +77,7 @@ export const CheckoutAction = styled.div`
   button {
     padding: 10px 30px;
     width: 90%;
+    transition: unset;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed

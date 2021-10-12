@@ -369,7 +369,7 @@ export const MessagesIcon = styled.span`
 
 export const ExclamationWrapper = styled.div`
   position: absolute;
-  transform: translate(350%, -25%);
+  transform: ${({ driver }) => driver ? 'translate(50%,-25%)' : 'translate(300%, -25%)'};
   svg{
     font-size: 16px;
     color: ${props => props.theme?.colors?.primary}
@@ -383,7 +383,6 @@ export const WrapperLeftContainer = styled.div`
 `
 
 export const WrapperRightContainer = styled(WrapperLeftContainer)`
-  background: #F8F9FA;
 `
 
 export const Divider = styled.div`

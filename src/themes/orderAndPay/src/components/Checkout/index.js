@@ -73,7 +73,8 @@ const CheckoutUI = (props) => {
     isCustomerMode,
     isResetPaymethod,
     setIsResetPaymethod,
-    handleStoreRedirect
+    handleStoreRedirect,
+    isDisabledTables
   } = props
 
   const theme = useTheme()
@@ -199,34 +200,32 @@ const CheckoutUI = (props) => {
 
   useEffect(() => {
     const handleChangePlace = async () => {
-      if (cart?.products?.length > 0) {
-        setIsLoadingPlace(true)
-        try {
-          const response = await fetch(`${ordering.root}/carts/change_place`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-            body: JSON.stringify({
-              place_id: placeId,
-              business_id: businessId
-            })
+      setIsLoadingPlace(true)
+      try {
+        const response = await fetch(`${ordering.root}/carts/change_place`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+          body: JSON.stringify({
+            place_id: placeId,
+            business_id: businessId
           })
-          const { result, error } = await response.json()
-          if (error) {
-            setAlertState({
-              open: true,
-              content: [result]
-            })
-          }
-          setIsLoadingPlace(false)
-        } catch (err) {
+        })
+        const { result, error } = await response.json()
+        if (error) {
           setAlertState({
             open: true,
-            content: [err.message]
+            content: [result]
           })
         }
+        setIsLoadingPlace(false)
+      } catch (err) {
+        setAlertState({
+          open: true,
+          content: [err.message]
+        })
       }
     }
-    if (placeId) {
+    if (cart?.products?.length > 0 && placeId && [3, 4].includes(options?.type) && !isDisabledTables) {
       handleChangePlace()
     }
   }, [placeId])

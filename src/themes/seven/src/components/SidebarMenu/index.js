@@ -125,8 +125,13 @@ export const SidebarMenu = (props) => {
           </MenuLink>
 
           <Navlinks>
-            <Link to={t('ARCHIES_MENU_LINK', 'Archies menu link')}>{t('ARCHIES_MENU_TEXT', 'Menu')}</Link>
-            <Link to='#'>{t('ARCHIES_UBICATION_TEXT ', 'Ubicación')}</Link>
+            <a href={t('ARCHIES_MENU_LINK', 'https://archies.cluvi.co')} target='_blank' rel='noopener noreferrer'>{t('ARCHIES_MENU_TEXT', 'Menu')}</a>
+            <Link
+              to='/location'
+              onClick={() => actionSidebar(false)}
+            >
+              <span className={window.location.pathname === '/location' ? 'active' : ''}>{t('ARCHIES_UBICATION_TEXT ', 'Ubicación')} </span>
+            </Link>
             <Link
               to='/picoli'
               onClick={() => actionSidebar(false)}
@@ -139,7 +144,7 @@ export const SidebarMenu = (props) => {
             >
               <span className={window.location.pathname === '/promotions' ? 'active' : ''}>{t('ARCHIES_PROMOS_TEXT ', 'Promociones')}</span>
             </Link>
-            <Link to={t('ARCHIES_CONTACT_LINK', 'Archies menu link')}>{t('ARCHIES_CONTACT_TEXT ', 'Contacto')}</Link>
+            <a href={t('ARCHIES_CONTACT_LINK', 'https://contacto.miexperienciaarchies.com.co')} target='_blank' rel='noopener noreferrer'>{t('ARCHIES_CONTACT_TEXT ', 'Contacto')}</a>
           </Navlinks>
 
           {auth && (

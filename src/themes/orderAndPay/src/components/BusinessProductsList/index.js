@@ -37,7 +37,7 @@ const BusinessProductsListUI = (props) => {
         categoriesOffset.map((category, i, hash) => {
           if (category.offset - 125 < window.scrollY && hash[i + 1]?.offset > window.scrollY) {
             setCategorySelected(category)
-          } else if (window.scrollY + lastContainerHeight + 125 > hash[categoriesOffset?.length - 1]?.offset) {
+          } else if (window.scrollY + (categories.length > 3 ? lastContainerHeight + 125 : 100) > hash[categoriesOffset?.length - 1]?.offset) {
             setCategorySelected(hash[categoriesOffset?.length - 1])
           } else if (window.scrollY > 100 && window.scrollY < hash[2]?.offset && category?.name === t('FEATURED', 'Featured')) {
             setCategorySelected(category)

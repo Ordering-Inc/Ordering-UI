@@ -6,28 +6,19 @@ export const Container = styled.div`
   ${({ variant }) => variant === 'cart' && css`
     span {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       position: relative;
+      background-color: ${props => props.theme.colors.primary};\
+      padding: 6px 5px;
       p {
-        position: absolute;
-        height: 15px;
-        width: 15px;
-        margin: 0;
-        background: ${props => props.theme.colors.primary};
-        border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 10px;
-        ${props => props.theme?.rtl ? css`
-          left: 0;
-        ` : css`
-          right: 0;
-        `}
+        position: relative;
+        margin: 0 3px;
+        font-size: 18px;
+        color: #fff;
       }
       svg {
-        color: ${props => props.theme.colors.primary};
-        font-size: 30px;
+        color: #fff;
+        font-size: 22px;
       }
     }
   `}

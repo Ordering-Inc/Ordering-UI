@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  -webkit-tap-highlight-color: transparent;
 
   ${({ isLoading }) => isLoading && css`
     pointer-events: none;

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
+  -webkit-tap-highlight-color: transparent;
   ${({ zx }) => zx && css`
     .popup {
       z-index: ${zx} !important;
@@ -83,7 +84,7 @@ export const ModalOrderTypes = styled.div`
   `}
 `
 export const ModalIcon = styled.span`
-  position: fixed;
+  position: absolute;
   left: 25px;
   top: 30px;
   font-size: 22px;
@@ -99,6 +100,10 @@ export const ModalIcon = styled.span`
     background: rgba(255,255,255,0.5);
     border-radius: 50%;
   }
+
+  ${({ isProductForm }) => isProductForm && css`
+    position: fixed;
+  `}
 
   @media(min-width: 576px){
     font-size: 30px;

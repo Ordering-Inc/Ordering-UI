@@ -70,7 +70,7 @@ const UpsellingPageUI = (props) => {
               !upsellingProducts.loading ? (
                 <>
                   {
-                    !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
+                    (!upsellingProducts.error && upsellingProducts.products?.length > 0) ? upsellingProducts.products.map((product, i) => (
                       <Item key={product.id} name={product.name}>
                         <Image>
                           <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
@@ -84,9 +84,9 @@ const UpsellingPageUI = (props) => {
                         </Details>
                       </Item>
                     )) : (
-                      <>
-                        {upsellingProducts.message}
-                      </>
+                      <div>
+                        {upsellingProducts.message || t('NO_UPSELLING_PRODUCTS', 'There are no upselling products')}
+                      </div>
                     )
                   }
                 </>
@@ -117,7 +117,7 @@ const UpsellingPageUI = (props) => {
               !upsellingProducts.loading ? (
                 <AutoScroll scrollId='upSelling'>
                   {
-                    !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
+                    (!upsellingProducts.error && upsellingProducts.products?.length > 0) ? upsellingProducts.products.map((product, i) => (
                       <HorizontalItem key={product.id} name={product.name}>
                         <HorizontalDetails>
                           <div>
@@ -134,9 +134,9 @@ const UpsellingPageUI = (props) => {
                         </HorizontalImage>
                       </HorizontalItem>
                     )) : (
-                      <>
-                        {upsellingProducts.message}
-                      </>
+                      <div>
+                        {upsellingProducts.message || t('NO_UPSELLING_PRODUCTS', 'There are no upselling products')}
+                      </div>
                     )
                   }
                 </AutoScroll>
