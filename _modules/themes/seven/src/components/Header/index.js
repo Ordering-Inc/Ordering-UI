@@ -47,13 +47,13 @@ var _AddressForm = require("../AddressForm");
 
 var _SidebarMenu = require("../SidebarMenu");
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -67,7 +67,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -254,27 +254,31 @@ var Header = function Header(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypes, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
     defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1
-  })))))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, windowSize.width > 1023 && /*#__PURE__*/_react.default.createElement(_styles.Navlinks, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: t('ARCHIES_MENU_LINK', 'Archies menu link')
+  })))))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, windowSize.width > 1023 && /*#__PURE__*/_react.default.createElement(_styles.Navlinks, null, /*#__PURE__*/_react.default.createElement("a", {
+    href: t('ARCHIES_MENU_LINK', 'https://archies.cluvi.co'),
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: window.location.pathname === '/menu' ? 'active' : ''
   }, t('ARCHIES_MENU_TEXT', 'Menu'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
+    to: "/location"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: window.location.pathname === '/location' ? 'active' : ''
-  }, t('ARCHIES_UBICATION_TEXT ', 'Ubicación'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, t('ARCHIES_UBICATION_TEXT', 'Location'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/picoli"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: window.location.pathname === '/picoli' ? 'active' : ''
-  }, t('ARCHIES_PICOLI_TEXT ', 'Picoli'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, t('ARCHIES_PICOLI_TEXT ', 'Piccoli'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/promotions"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: window.location.pathname === '/promotions' ? 'active' : ''
-  }, t('ARCHIES_PROMOS_TEXT ', 'Promociones'))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: t('ARCHIES_CONTACT_LINK', 'Archies contact link')
+  }, t('ARCHIES_PROMOS_TEXT', 'Promotions'))), /*#__PURE__*/_react.default.createElement("a", {
+    href: t('ARCHIES_CONTACT_LINK', 'https://contacto.miexperienciaarchies.com.co'),
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: window.location.pathname === '/contact' ? 'active' : ''
-  }, t('ARCHIES_CONTACT_TEXT ', 'Contacto')))), /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 1367 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('ARCHIES_CONTACT_TEXT', 'Contact')))), /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 1367 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'signin'

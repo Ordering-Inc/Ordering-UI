@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Quantity = exports.ProductCost = exports.CartAction = exports.ProductInfo = exports.CardLogo = exports.WrapLogo = exports.CardInfo = exports.SoldOut = exports.CardContainer = void 0;
+exports.WrapLogo = exports.SoldOut = exports.Quantity = exports.ProductInfo = exports.ProductCost = exports.CartAction = exports.CardLogo = exports.CardInfo = exports.CardContainer = void 0;
 
 var _polished = require("polished");
 
@@ -15,9 +15,9 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,7 +25,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  \n  align-items: center;\n  width: 100%;\n  margin-bottom: 20px;\n  cursor: pointer;\n  position: relative;\n  box-sizing: border-box;\n  border-bottom: 1px solid ", ";\n  background: ", ";\n  padding-bottom: ", ";\n\n  @media (min-width: 681px) {\n    display: flex;\n  }\n"])), function (props) {
+var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  align-items: center;\n  width: 100%;\n  margin-bottom: 20px;\n  position: relative;\n  box-sizing: border-box;\n  border-bottom: 1px solid ", ";\n  background: ", ";\n  padding-bottom: ", ";\n\n  @media (min-width: 681px) {\n    display: flex;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref) {
   var soldOut = _ref.soldOut;
@@ -68,7 +68,7 @@ var WrapLogo = _styledComponents.default.div(_templateObject6 || (_templateObjec
 
 exports.WrapLogo = WrapLogo;
 
-var CardLogoStyled = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 75px;\n  width: 130px;\n  height: 130px;\n  background-color: #dddddd;\n  @media (min-width: 1024px) {\n    width: 150px;\n    height: 150px;\n  }\n\n  @media (min-width: 1200px) {\n    width: 195px;\n    height: 195px;\n  }\n\n"])));
+var CardLogoStyled = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 75px;\n  width: 130px;\n  height: 130px;\n  background-color: #dddddd;\n  @media (min-width: 1024px) {\n    width: 150px;\n    height: 150px;\n  }\n\n  @media (min-width: 1200px) {\n    width: 195px;\n    height: 195px;\n  }\n"])));
 
 var CardLogo = function CardLogo(props) {
   var style = {};

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Copy = exports.SocialIcon = exports.Content = exports.FooterContainer = void 0;
+exports.SocialIcon = exports.FooterContainer = exports.Copy = exports.Content = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

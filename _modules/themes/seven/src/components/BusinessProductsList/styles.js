@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperNotFound = exports.WrapAllCategories = exports.ProductsListing = exports.ErrorMessage = exports.ProductsContainer = void 0;
+exports.WrapperNotFound = exports.WrapAllCategories = exports.ProductsListing = exports.ProductsContainer = exports.ErrorMessage = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
