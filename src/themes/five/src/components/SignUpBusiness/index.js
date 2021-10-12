@@ -50,7 +50,7 @@ const SignUpBusinessUI = (props) => {
         open: true,
         content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
       })
-      return
+      // return
     }
     // handleButtonSignupClick && handleButtonSignupClick()
     // if (!formState.loading && formState.result.result && !formState.result.error) {

@@ -31,6 +31,7 @@ import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
 import { SignUpBusiness } from './pages/SignUpBusiness'
+import { SignUpDriver } from './pages/SignUpDriver'
 import { Help } from './pages/Help'
 
 import { ScrollToTop } from './components/ScrollToTop'
@@ -151,6 +152,21 @@ export const App = () => {
                       !auth
                         ? (
                           <SignUpBusiness
+                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                            useLoginByCellphone
+                            useChekoutFileds
+                            handleSuccessSignup={handleSuccessSignup}
+                            isRecaptchaEnable
+                          />
+                        )
+                        : <Redirect to='/' />
+                    }
+                  </Route>
+                  <Route exact path='/signup_driver'>
+                    {
+                      !auth
+                        ? (
+                          <SignUpDriver
                             elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
                             useLoginByCellphone
                             useChekoutFileds
