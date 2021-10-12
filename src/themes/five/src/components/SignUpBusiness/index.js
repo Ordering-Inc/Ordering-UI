@@ -179,7 +179,11 @@ const SignUpBusinessUI = (props) => {
             required
             autoComplete='off'
             ref={formMethods.register({
-              required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'Password is required')
+              required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'Password is required'),
+              minLength: {
+                value: 8,
+                message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+              }
             })}
           />
           <PhoneInputWrapper>
