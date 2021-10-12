@@ -252,7 +252,6 @@ const MessagesUI = (props) => {
           <React.Fragment key={message.id}>
             {message.type === 1 && (
               <MessageConsole key={message.id}>
-                {parseDate(message.created_at)}
                 {message.change?.attribute !== 'driver_id' ? (
                   <BubbleConsole>
                     {t('ORDER', 'Order')} {' '}
@@ -297,8 +296,6 @@ const MessagesUI = (props) => {
               <>
                 {message.type === 2 && user?.id === message.author_id && (
                   <MessageCustomer>
-                    {parseDate(message.created_at)}
-
                     <BubbleCustomer>
                       {message.comment}
                       <TimeofSent white>{getTimeAgo(message.created_at)}</TimeofSent>
@@ -307,8 +304,6 @@ const MessagesUI = (props) => {
                 )}
                 {message.type === 3 && user.id === message.author_id && (
                   <MessageCustomer>
-                    {parseDate(message.created_at)}
-
                     <BubbleCustomer name='image'>
                       <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
                       {message.comment && (
@@ -322,8 +317,6 @@ const MessagesUI = (props) => {
                 )}
                 {message.type === 2 && user?.id !== message.author_id && (
                   <MessageBusiness>
-                    {parseDate(message.created_at)}
-
                     <BubbleBusines>
                       <strong>
                         <MyName>
@@ -337,8 +330,6 @@ const MessagesUI = (props) => {
                 )}
                 {message.type === 3 && user.id !== message.author_id && (
                   <MessageBusiness>
-                    {parseDate(message.created_at)}
-
                     <BubbleBusines name='image'>
                       <strong>
                         <MyName>
@@ -377,7 +368,7 @@ const MessagesUI = (props) => {
           business && (
             <ImageWithFallback
               src={order.business?.logo || theme.images?.dummies?.businessLogo}
-              fallback={<FaUserAlt />}
+              fallback={<FaUserAlt className='fallback' />}
             />
           )
         }
@@ -385,7 +376,7 @@ const MessagesUI = (props) => {
           driver && (
             <ImageWithFallback
               src={order.driver?.photo}
-              fallback={<RiUser2Fill />}
+              fallback={<RiUser2Fill className='fallback' />}
             />
           )
         }
