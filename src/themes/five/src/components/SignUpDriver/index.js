@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -28,6 +28,7 @@ const SignUpBusinessUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const formMethods = useForm()
+  const emailInput = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
@@ -88,6 +89,12 @@ const SignUpBusinessUI = (props) => {
       }
     }
     handleChangeInput(phoneNumber, true)
+  }
+
+  const handleChangeInputEmail = (e) => {
+    handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
+    formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
+    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
   }
 
   useEffect(() => {
@@ -177,7 +184,10 @@ const SignUpBusinessUI = (props) => {
             aria-label='email'
             className='form'
             placeholder={t('EMAIL', 'Email')}
-            onChange={handleChangeInput}
+            onChange={handleChangeInputEmail}
+            ref={(e) => {
+              emailInput.current = e
+            }}
             required
             autoComplete='off'
           />

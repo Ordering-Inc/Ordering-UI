@@ -112,6 +112,7 @@ export const PhoneInputWrapper = styled.div`
   padding-left: 15px;
   background: white;
   width: 100%;
+  position: relative;
 
   ${props => props.theme.rtl && css`
     padding-right: 15px;
@@ -126,6 +127,7 @@ export const PhoneInputWrapper = styled.div`
 
   .phone_number {
     > span {
+      left: 0;
       position: absolute;
     }
   }
