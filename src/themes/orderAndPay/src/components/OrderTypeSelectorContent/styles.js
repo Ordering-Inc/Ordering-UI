@@ -118,7 +118,6 @@ export const TypeContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 85%;
   button: {
     width: 100%;
     border-radius: 7.6px;
