@@ -331,7 +331,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles2.FormSide, {
     isPopup: isPopup,
     isSignupEmail: isSignupEmail
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('FRONT_CREATE_AN_ACCOUNT', 'Create an account')), !isSignupEmail ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Description, null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum pharetra placerat massa risus aliquet purus arcu. Quis enim, interdum ac massa feugiat arcu nulla aliquet."), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.SocialButtons, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('FRONT_CREATE_AN_ACCOUNT', 'Create an account')), !isSignupEmail ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('SELECT_ACCOUNT_OPTION', 'You don\'t have an account? Select one of this options.')), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.SocialButtons, {
     isPopup: isPopup
   }, (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
     isSignup: true,
