@@ -93,7 +93,7 @@ const BusinessesListingUI = (props) => {
   }, [mapErrors])
 
   useEffect(() => {
-    if (orderState.loading && !businessesList.loading) {
+    if (orderState.loading && businessesList.loading) {
     //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
     //  window.history.pushState({ path: newurl }, '', newurl)
       const params = new URLSearchParams()
@@ -240,7 +240,7 @@ const BusinessesListingUI = (props) => {
           </PreviousButtonWrapper>
         }
         <BusinessList>
-          {businessesList.loading && prevPage.loading && (
+          {(businessesList.loading || prevPage.loading) && (
             [...Array(paginationProps.pageSize).keys()].map(i => (
               <BusinessController
                 key={i}
