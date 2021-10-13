@@ -5,15 +5,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TotalCart = exports.ModalIcon = exports.DriverTipDivider = exports.CheckOutDivider = exports.WrapperLeftContent = exports.WarningText = exports.CartsList = exports.NotFoundImage = exports.WarningMessage = exports.WrapperPlaceOrderButton = exports.CartContainer = exports.DriverTipContainer = exports.PaymentMethodContainer = exports.BusinessDetailsContainer = exports.UserDetailsContainer = exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperLeftContainer = exports.Container = void 0;
+exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperPlaceOrderButton = exports.WrapperLeftContent = exports.WrapperLeftContainer = exports.WarningText = exports.WarningMessage = exports.UserDetailsContainer = exports.TypeContainer = exports.TotalCart = exports.Table = exports.PlaceNumber = exports.PlaceName = exports.PaymentMethodContainer = exports.NotFoundImage = exports.ModalIcon = exports.InputWrapper = exports.DriverTipDivider = exports.DriverTipContainer = exports.Container = exports.CheckOutDivider = exports.CartsList = exports.CartContainer = exports.BusinessDetailsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -100,3 +100,32 @@ exports.ModalIcon = ModalIcon;
 var TotalCart = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 10px 40px;\n  width: 100%;\n  box-sizing: border-box;\n  border-top: 1px solid #E9ECEF;\n  position: fixed;\n  bottom: -5px;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n  button{\n    height: 52px;\n    font-weight: 600;\n    font-size: 12px;\n    width: 45%;\n  }\n  p{\n    font-size: 16px;\n  }\n  @media (min-width: 340px){\n    button{\n      font-size: 14px;\n    }\n  }\n"])));
 
 exports.TotalCart = TotalCart;
+
+var InputWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  input{\n    width: 100%;\n    border-radius: 7.6px;\n    border: 1px solid #DEE2E6;\n  }\n"])));
+
+exports.InputWrapper = InputWrapper;
+
+var Table = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n display: flex;\n flex-direction: column;\n h2{\n   font-weight: 500;\n   font-size: 16px;\n   display: flex;\n   align-items: center;\n   color: ", ";\n   margin-bottom: 20px;\n }\n"])), function (props) {
+  return props.theme.colors.darkTextColor;
+});
+
+exports.Table = Table;
+
+var PlaceName = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  opacity: ", ";\n  font-weight: 400;\n  border-bottom: 1px solid #E9ECEF;\n  margin-bottom: 10px;\n  p{\n    font-size: 10px;\n    color: ", ";\n  }\n  span{\n    font-size: 12px;\n    color: #909BA9;\n  }\n"])), function (_ref) {
+  var isDisabled = _ref.isDisabled;
+  return isDisabled ? 0.5 : 1;
+}, function (props) {
+  return props.theme.colors.darkTextColor;
+});
+
+exports.PlaceName = PlaceName;
+
+var PlaceNumber = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n\n"])));
+
+exports.PlaceNumber = PlaceNumber;
+
+var TypeContainer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  padding: 10px 0;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  button: {\n    width: 100%;\n    border-radius: 7.6px;\n    height: 44px;\n  }\n  h1{\n    font-weight: 600;\n    font-size: 20px;\n    display: flex;\n    align-items: center;\n    color: ", ";\n    margin-bottom: 25px;\n  }\n  label{\n    font-size: 12px;\n    margin-bottom: 10px;\n  }\n"])), function (props) {
+  return props.theme.colors.darkTextColor;
+});
+
+exports.TypeContainer = TypeContainer;

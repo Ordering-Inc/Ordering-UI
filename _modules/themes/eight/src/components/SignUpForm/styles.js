@@ -5,15 +5,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TermsConditionWrapper = exports.ReCaptchaWrapper = exports.TogglePassword = exports.WrapperPassword = exports.SkeletonSocialWrapper = exports.SkeletonWrapper = exports.SocialButtons = exports.RedirectLink = exports.FormInput = exports.Description = exports.Title = exports.FormSide = exports.SignUpContainer = void 0;
+exports.WrapperPassword = exports.TogglePassword = exports.Title = exports.TermsConditionWrapper = exports.SocialButtons = exports.SkeletonWrapper = exports.SkeletonSocialWrapper = exports.SignUpContainer = exports.RedirectLink = exports.ReCaptchaWrapper = exports.FormSide = exports.FormInput = exports.Description = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27;
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -47,7 +47,7 @@ var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 =
 
 exports.Title = Title;
 
-var Description = _styledComponents.default.p(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  color: ", ";\n  width: 80%;\n  font-size: 18px;\n  margin: 0px;\n  max-width: 700px;\n"])), function (props) {
+var Description = _styledComponents.default.p(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  color: ", ";\n  width: 80%;\n  font-size: 14px;\n  margin: 0px;\n  max-width: 700px;\n  text-align: center;\n\n  @media (min-width: 768px) {\n    font-size: 18px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: 20px;\n  }\n\n  @media (min-width: 1200px) {\n    font-size: 24px;\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 });
 
@@ -86,7 +86,7 @@ var RedirectLink = _styledComponents.default.div(_templateObject9 || (_templateO
 
 exports.RedirectLink = RedirectLink;
 
-var SocialButtons = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n  margin: 80px 0 60px;\n  \n  button {\n    width: 100%;\n    margin: 10px;\n    padding-top: 6px;\n    padding-bottom: 6px;\n\n    img {\n      width: 30px;\n    }\n  }\n\n  @media (min-width: 1300px) {\n    ", "\n  }\n"])), function (_ref11) {
+var SocialButtons = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n  margin: 80px 0 60px;\n  justify-content: center;\n  align-items: center;\n  max-width: 1200px;\n  \n  button {\n    width: 100%;\n    margin: 10px;\n    padding-top: 6px;\n    padding-bottom: 6px;\n    max-width: 600px;\n\n    img {\n      width: 30px;\n    }\n  }\n\n  @media (min-width: 1300px) {\n    ", "\n  }\n"])), function (_ref11) {
   var isPopup = _ref11.isPopup;
   return isPopup ? '90%' : '80%';
 }, function (_ref12) {

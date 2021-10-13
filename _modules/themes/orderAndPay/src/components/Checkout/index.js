@@ -45,13 +45,17 @@ var _Confirm = require("../Confirm");
 
 var _CartContent = require("../CartContent");
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+var _Modal = require("../Modal");
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var _Inputs = require("../../styles/Inputs");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -61,7 +65,7 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -79,7 +83,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -185,6 +189,12 @@ var CheckoutUI = function CheckoutUI(props) {
       paymethodSelectedChanged = _useState14[0],
       setPaymethodSelectedChanged = _useState14[1];
 
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      openSpotModal = _useState16[0],
+      setOpenSpotModal = _useState16[1];
+
+  var inputRef = (0, _react.useRef)();
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
 
   var handlePlaceOrder = /*#__PURE__*/function () {
@@ -193,19 +203,31 @@ var CheckoutUI = function CheckoutUI(props) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              if (!(!placeId && options.type === 4)) {
+                _context.next = 3;
+                break;
+              }
+
+              setAlertState({
+                open: true,
+                content: [t('PLACE_ID_REQURED', 'Place id is required')]
+              });
+              return _context.abrupt("return");
+
+            case 3:
               if (userErrors.length) {
-                _context.next = 5;
+                _context.next = 8;
                 break;
               }
 
               handlerClickPlaceOrder && handlerClickPlaceOrder();
-              _context.next = 4;
+              _context.next = 7;
               return window.localStorage.removeItem('place_id');
 
-            case 4:
+            case 7:
               return _context.abrupt("return");
 
-            case 5:
+            case 8:
               setAlertState({
                 open: true,
                 content: Object.values(userErrors).map(function (error) {
@@ -214,7 +236,7 @@ var CheckoutUI = function CheckoutUI(props) {
               });
               setIsUserDetailsEdit(true);
 
-            case 7:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -233,6 +255,15 @@ var CheckoutUI = function CheckoutUI(props) {
       content: []
     });
     setIsUserDetailsEdit(false);
+  };
+
+  var handleChangePlace = function handleChangePlace() {
+    (options === null || options === void 0 ? void 0 : options.type) === 4 ? setOpenSpotModal(true) : handlePlaceOrder();
+  };
+
+  var onChangePlaceId = function onChangePlaceId(e) {
+    inputRef.current.value = inputRef.current.value.replace(/[^0-9.]+/g, '');
+    setPlaceId(e.target.value.replace(/[^0-9.]+/g, ''));
   };
 
   var checkValidationFields = function checkValidationFields() {
@@ -588,9 +619,38 @@ var CheckoutUI = function CheckoutUI(props) {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? 'secundary' : 'primary',
     disabled: !(cart !== null && cart !== void 0 && cart.valid) || !paymethodSelected || placing || errorCash || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || loading || isLoadingPlace,
     onClick: function onClick() {
-      return handlePlaceOrder();
+      return handleChangePlace();
     }
-  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: openSpotModal,
+    onClose: function onClose() {
+      return setOpenSpotModal(false);
+    },
+    hideCloseDefault: true,
+    height: "calc(100vh + 100px)",
+    padding: "30px 40px 10px 40px"
+  }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_BsArrowLeft.default, {
+    size: 20,
+    onClick: function onClick() {
+      return setOpenSpotModal(false);
+    },
+    color: theme.colors.arrowColor
+  })), /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CURBSIDE', 'Curbside')), /*#__PURE__*/_react.default.createElement("label", null, t('Spot', 'Spot')), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    placeholder: "#",
+    onChange: function onChange(e) {
+      return onChangePlaceId(e);
+    },
+    type: "text",
+    ref: inputRef,
+    min: 0
+  }))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    style: {
+      width: '100%'
+    },
+    height: "44px",
+    onClick: handlePlaceOrder
+  }, t('CONTINUE', 'Continue'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CUSTOMER_DETAILS', 'Customer Details'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -641,42 +701,42 @@ var Checkout = function Checkout(props) {
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
-  var _useState15 = (0, _react.useState)({
+  var _useState17 = (0, _react.useState)({
     loading: true,
     error: null,
     cart: null
   }),
-      _useState16 = _slicedToArray(_useState15, 2),
-      cartState = _useState16[0],
-      setCartState = _useState16[1];
-
-  var _useState17 = (0, _react.useState)(false),
       _useState18 = _slicedToArray(_useState17, 2),
-      openUpselling = _useState18[0],
-      setOpenUpselling = _useState18[1];
+      cartState = _useState18[0],
+      setCartState = _useState18[1];
 
   var _useState19 = (0, _react.useState)(false),
       _useState20 = _slicedToArray(_useState19, 2),
-      canOpenUpselling = _useState20[0],
-      setCanOpenUpselling = _useState20[1];
+      openUpselling = _useState20[0],
+      setOpenUpselling = _useState20[1];
 
-  var _useState21 = (0, _react.useState)(null),
+  var _useState21 = (0, _react.useState)(false),
       _useState22 = _slicedToArray(_useState21, 2),
-      currentCart = _useState22[0],
-      setCurrentCart = _useState22[1];
+      canOpenUpselling = _useState22[0],
+      setCanOpenUpselling = _useState22[1];
 
-  var _useState23 = (0, _react.useState)({
+  var _useState23 = (0, _react.useState)(null),
+      _useState24 = _slicedToArray(_useState23, 2),
+      currentCart = _useState24[0],
+      setCurrentCart = _useState24[1];
+
+  var _useState25 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState24 = _slicedToArray(_useState23, 2),
-      alertState = _useState24[0],
-      setAlertState = _useState24[1];
-
-  var _useState25 = (0, _react.useState)(false),
       _useState26 = _slicedToArray(_useState25, 2),
-      isResetPaymethod = _useState26[0],
-      setIsResetPaymethod = _useState26[1];
+      alertState = _useState26[0],
+      setAlertState = _useState26[1];
+
+  var _useState27 = (0, _react.useState)(false),
+      _useState28 = _slicedToArray(_useState27, 2),
+      isResetPaymethod = _useState28[0],
+      setIsResetPaymethod = _useState28[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;

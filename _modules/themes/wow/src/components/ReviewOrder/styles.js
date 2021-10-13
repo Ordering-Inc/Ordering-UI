@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessInfo = exports.BusinessLogo = exports.LogoWrapper = exports.BusinessGeneralInfo = exports.InvisibleInput = exports.Send = exports.Comments = exports.Stars = exports.Category = exports.Categories = exports.Reviews = exports.ReviewOrderInnerContainer = exports.ReviewOrderContainer = void 0;
+exports.Stars = exports.Send = exports.Reviews = exports.ReviewOrderInnerContainer = exports.ReviewOrderContainer = exports.LogoWrapper = exports.InvisibleInput = exports.Comments = exports.Category = exports.Categories = exports.BusinessLogo = exports.BusinessInfo = exports.BusinessGeneralInfo = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

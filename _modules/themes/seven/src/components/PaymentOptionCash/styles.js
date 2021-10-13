@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ErrorText = exports.WrapperInput = exports.FormCash = exports.PaymentCashContainer = void 0;
+exports.WrapperInput = exports.PaymentCashContainer = exports.FormCash = exports.ErrorText = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

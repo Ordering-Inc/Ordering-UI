@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Spinner = exports.Content = exports.Logo = exports.Container = void 0;
+exports.Spinner = exports.Logo = exports.Content = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

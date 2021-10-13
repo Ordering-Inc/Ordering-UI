@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Description = exports.Title = exports.BusinessList = exports.ErrorMessage = exports.HighestRatedContainer = void 0;
+exports.Title = exports.HighestRatedContainer = exports.ErrorMessage = exports.Description = exports.BusinessList = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 

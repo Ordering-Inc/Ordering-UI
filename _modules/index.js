@@ -9,12 +9,6 @@ Object.defineProperty(exports, "AddressDetails", {
     return _AddressDetails.AddressDetails;
   }
 });
-Object.defineProperty(exports, "AddressesPopover", {
-  enumerable: true,
-  get: function get() {
-    return _AddressesPopover.AddressesPopover;
-  }
-});
 Object.defineProperty(exports, "AddressForm", {
   enumerable: true,
   get: function get() {
@@ -25,6 +19,24 @@ Object.defineProperty(exports, "AddressList", {
   enumerable: true,
   get: function get() {
     return _AddressList.AddressList;
+  }
+});
+Object.defineProperty(exports, "AddressesPopover", {
+  enumerable: true,
+  get: function get() {
+    return _AddressesPopover.AddressesPopover;
+  }
+});
+Object.defineProperty(exports, "Alert", {
+  enumerable: true,
+  get: function get() {
+    return _Confirm.Alert;
+  }
+});
+Object.defineProperty(exports, "AppleLogin", {
+  enumerable: true,
+  get: function get() {
+    return _AppleLogin.AppleLogin;
   }
 });
 Object.defineProperty(exports, "AutoScroll", {
@@ -43,18 +55,6 @@ Object.defineProperty(exports, "BusinessController", {
   enumerable: true,
   get: function get() {
     return _BusinessController.BusinessController;
-  }
-});
-Object.defineProperty(exports, "BusinessesListing", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessesListing.BusinessesListing;
-  }
-});
-Object.defineProperty(exports, "BusinessesMap", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessesMap.BusinessesMap;
   }
 });
 Object.defineProperty(exports, "BusinessInformation", {
@@ -99,6 +99,24 @@ Object.defineProperty(exports, "BusinessTypeFilter", {
     return _BusinessTypeFilter.BusinessTypeFilter;
   }
 });
+Object.defineProperty(exports, "BusinessesListing", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessesListing.BusinessesListing;
+  }
+});
+Object.defineProperty(exports, "BusinessesMap", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessesMap.BusinessesMap;
+  }
+});
+Object.defineProperty(exports, "Button", {
+  enumerable: true,
+  get: function get() {
+    return _Buttons.Button;
+  }
+});
 Object.defineProperty(exports, "CardForm", {
   enumerable: true,
   get: function get() {
@@ -141,12 +159,6 @@ Object.defineProperty(exports, "Confirm", {
     return _Confirm.Confirm;
   }
 });
-Object.defineProperty(exports, "Alert", {
-  enumerable: true,
-  get: function get() {
-    return _Confirm.Alert;
-  }
-});
 Object.defineProperty(exports, "CouponControl", {
   enumerable: true,
   get: function get() {
@@ -159,16 +171,16 @@ Object.defineProperty(exports, "DriverTips", {
     return _DriverTips.DriverTips;
   }
 });
-Object.defineProperty(exports, "Dropdown", {
-  enumerable: true,
-  get: function get() {
-    return _Dropdown.Dropdown;
-  }
-});
 Object.defineProperty(exports, "DropDownMenu", {
   enumerable: true,
   get: function get() {
     return _Dropdown.DropDownMenu;
+  }
+});
+Object.defineProperty(exports, "Dropdown", {
+  enumerable: true,
+  get: function get() {
+    return _Dropdown.Dropdown;
   }
 });
 Object.defineProperty(exports, "DropdownItem", {
@@ -213,10 +225,22 @@ Object.defineProperty(exports, "GoogleGpsButton", {
     return _GoogleGpsButton.GoogleGpsButton;
   }
 });
+Object.defineProperty(exports, "GoogleLoginButton", {
+  enumerable: true,
+  get: function get() {
+    return _GoogleLogin.GoogleLoginButton;
+  }
+});
 Object.defineProperty(exports, "Header", {
   enumerable: true,
   get: function get() {
     return _Header.Header;
+  }
+});
+Object.defineProperty(exports, "HeaderOption", {
+  enumerable: true,
+  get: function get() {
+    return _HeaderOption.HeaderOption;
   }
 });
 Object.defineProperty(exports, "Help", {
@@ -229,12 +253,6 @@ Object.defineProperty(exports, "HelpStaticPage", {
   enumerable: true,
   get: function get() {
     return _HelpStaticPage.HelpStaticPage;
-  }
-});
-Object.defineProperty(exports, "HeaderOption", {
-  enumerable: true,
-  get: function get() {
-    return _HeaderOption.HeaderOption;
   }
 });
 Object.defineProperty(exports, "HomeHero", {
@@ -255,22 +273,64 @@ Object.defineProperty(exports, "Image", {
     return _Image.Image;
   }
 });
+Object.defineProperty(exports, "Input", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.Input;
+  }
+});
+Object.defineProperty(exports, "InputGroup", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.InputGroup;
+  }
+});
+Object.defineProperty(exports, "InputGroupLeft", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.InputGroupLeft;
+  }
+});
+Object.defineProperty(exports, "InputGroupPrimary", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.InputGroupPrimary;
+  }
+});
+Object.defineProperty(exports, "InputGroupRight", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.InputGroupRight;
+  }
+});
 Object.defineProperty(exports, "InputPhoneNumber", {
   enumerable: true,
   get: function get() {
     return _InputPhoneNumber.InputPhoneNumber;
   }
 });
-Object.defineProperty(exports, "LastOrders", {
+Object.defineProperty(exports, "InputPrimary", {
   enumerable: true,
   get: function get() {
-    return _LastOrders.LastOrders;
+    return _Inputs.InputPrimary;
+  }
+});
+Object.defineProperty(exports, "InputSecundary", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.InputSecundary;
   }
 });
 Object.defineProperty(exports, "LanguageSelector", {
   enumerable: true,
   get: function get() {
     return _LanguageSelector.LanguageSelector;
+  }
+});
+Object.defineProperty(exports, "LastOrders", {
+  enumerable: true,
+  get: function get() {
+    return _LastOrders.LastOrders;
   }
 });
 Object.defineProperty(exports, "LoginForm", {
@@ -339,16 +399,16 @@ Object.defineProperty(exports, "OrderDetails", {
     return _OrderDetails.OrderDetails;
   }
 });
-Object.defineProperty(exports, "OrdersOption", {
-  enumerable: true,
-  get: function get() {
-    return _OrdersOption.OrdersOption;
-  }
-});
 Object.defineProperty(exports, "OrderTypeSelectorHeader", {
   enumerable: true,
   get: function get() {
     return _OrderTypeSelectorHeader.OrderTypeSelectorHeader;
+  }
+});
+Object.defineProperty(exports, "OrdersOption", {
+  enumerable: true,
+  get: function get() {
+    return _OrdersOption.OrdersOption;
   }
 });
 Object.defineProperty(exports, "PageNotFound", {
@@ -375,16 +435,16 @@ Object.defineProperty(exports, "PaymentOptionPaypal", {
     return _PaymentOptionPaypal.PaymentOptionPaypal;
   }
 });
-Object.defineProperty(exports, "PaymentOptions", {
-  enumerable: true,
-  get: function get() {
-    return _PaymentOptions.PaymentOptions;
-  }
-});
 Object.defineProperty(exports, "PaymentOptionStripe", {
   enumerable: true,
   get: function get() {
     return _PaymentOptionStripe.PaymentOptionStripe;
+  }
+});
+Object.defineProperty(exports, "PaymentOptions", {
+  enumerable: true,
+  get: function get() {
+    return _PaymentOptions.PaymentOptions;
   }
 });
 Object.defineProperty(exports, "PhoneAutocomplete", {
@@ -435,6 +495,12 @@ Object.defineProperty(exports, "ResetPassword", {
     return _ResetPassword.ResetPassword;
   }
 });
+Object.defineProperty(exports, "ReviewDriver", {
+  enumerable: true,
+  get: function get() {
+    return _ReviewDriver.ReviewDriver;
+  }
+});
 Object.defineProperty(exports, "ReviewOrder", {
   enumerable: true,
   get: function get() {
@@ -447,16 +513,16 @@ Object.defineProperty(exports, "ReviewProduct", {
     return _ReviewProduct.ReviewProduct;
   }
 });
-Object.defineProperty(exports, "ReviewDriver", {
-  enumerable: true,
-  get: function get() {
-    return _ReviewDriver.ReviewDriver;
-  }
-});
 Object.defineProperty(exports, "SearchBar", {
   enumerable: true,
   get: function get() {
     return _SearchBar.SearchBar;
+  }
+});
+Object.defineProperty(exports, "Select", {
+  enumerable: true,
+  get: function get() {
+    return _Select.Select;
   }
 });
 Object.defineProperty(exports, "SidebarMenu", {
@@ -477,6 +543,12 @@ Object.defineProperty(exports, "SingleProductCard", {
     return _SingleProductCard.SingleProductCard;
   }
 });
+Object.defineProperty(exports, "SmsLoginButton", {
+  enumerable: true,
+  get: function get() {
+    return _SmsLogin.SmsLoginButton;
+  }
+});
 Object.defineProperty(exports, "SpinnerLoader", {
   enumerable: true,
   get: function get() {
@@ -493,6 +565,42 @@ Object.defineProperty(exports, "StripeRedirectForm", {
   enumerable: true,
   get: function get() {
     return _StripeRedirectForm.StripeRedirectForm;
+  }
+});
+Object.defineProperty(exports, "Tab", {
+  enumerable: true,
+  get: function get() {
+    return _Tabs.Tab;
+  }
+});
+Object.defineProperty(exports, "Tabs", {
+  enumerable: true,
+  get: function get() {
+    return _Tabs.Tabs;
+  }
+});
+Object.defineProperty(exports, "TextArea", {
+  enumerable: true,
+  get: function get() {
+    return _Inputs.TextArea;
+  }
+});
+Object.defineProperty(exports, "ThemeContext", {
+  enumerable: true,
+  get: function get() {
+    return _ThemeContext.ThemeContext;
+  }
+});
+Object.defineProperty(exports, "ThemeProvider", {
+  enumerable: true,
+  get: function get() {
+    return _ThemeContext.ThemeProvider;
+  }
+});
+Object.defineProperty(exports, "Toast", {
+  enumerable: true,
+  get: function get() {
+    return _Toast.Toast;
   }
 });
 Object.defineProperty(exports, "UpsellingPage", {
@@ -531,142 +639,10 @@ Object.defineProperty(exports, "VerticalOrdersLayout", {
     return _VerticalOrdersLayout.VerticalOrdersLayout;
   }
 });
-Object.defineProperty(exports, "GoogleLoginButton", {
+Object.defineProperty(exports, "bytesConverter", {
   enumerable: true,
   get: function get() {
-    return _GoogleLogin.GoogleLoginButton;
-  }
-});
-Object.defineProperty(exports, "SmsLoginButton", {
-  enumerable: true,
-  get: function get() {
-    return _SmsLogin.SmsLoginButton;
-  }
-});
-Object.defineProperty(exports, "AppleLogin", {
-  enumerable: true,
-  get: function get() {
-    return _AppleLogin.AppleLogin;
-  }
-});
-Object.defineProperty(exports, "ThemeContext", {
-  enumerable: true,
-  get: function get() {
-    return _ThemeContext.ThemeContext;
-  }
-});
-Object.defineProperty(exports, "ThemeProvider", {
-  enumerable: true,
-  get: function get() {
-    return _ThemeContext.ThemeProvider;
-  }
-});
-Object.defineProperty(exports, "useTheme", {
-  enumerable: true,
-  get: function get() {
-    return _ThemeContext.useTheme;
-  }
-});
-Object.defineProperty(exports, "useOnlineStatus", {
-  enumerable: true,
-  get: function get() {
-    return _useOnlineStatus.useOnlineStatus;
-  }
-});
-Object.defineProperty(exports, "useWindowSize", {
-  enumerable: true,
-  get: function get() {
-    return _useWindowSize.useWindowSize;
-  }
-});
-Object.defineProperty(exports, "useCountdownTimer", {
-  enumerable: true,
-  get: function get() {
-    return _useCountdownTimer.useCountdownTimer;
-  }
-});
-Object.defineProperty(exports, "Button", {
-  enumerable: true,
-  get: function get() {
-    return _Buttons.Button;
-  }
-});
-Object.defineProperty(exports, "Input", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.Input;
-  }
-});
-Object.defineProperty(exports, "InputGroup", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.InputGroup;
-  }
-});
-Object.defineProperty(exports, "InputPrimary", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.InputPrimary;
-  }
-});
-Object.defineProperty(exports, "InputGroupLeft", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.InputGroupLeft;
-  }
-});
-Object.defineProperty(exports, "InputGroupPrimary", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.InputGroupPrimary;
-  }
-});
-Object.defineProperty(exports, "InputGroupRight", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.InputGroupRight;
-  }
-});
-Object.defineProperty(exports, "InputSecundary", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.InputSecundary;
-  }
-});
-Object.defineProperty(exports, "TextArea", {
-  enumerable: true,
-  get: function get() {
-    return _Inputs.TextArea;
-  }
-});
-Object.defineProperty(exports, "Select", {
-  enumerable: true,
-  get: function get() {
-    return _Select.Select;
-  }
-});
-Object.defineProperty(exports, "Tab", {
-  enumerable: true,
-  get: function get() {
-    return _Tabs.Tab;
-  }
-});
-Object.defineProperty(exports, "Tabs", {
-  enumerable: true,
-  get: function get() {
-    return _Tabs.Tabs;
-  }
-});
-Object.defineProperty(exports, "Toast", {
-  enumerable: true,
-  get: function get() {
-    return _Toast.Toast;
-  }
-});
-Object.defineProperty(exports, "sortInputFields", {
-  enumerable: true,
-  get: function get() {
-    return _utils.sortInputFields;
+    return _utils.bytesConverter;
   }
 });
 Object.defineProperty(exports, "capitalize", {
@@ -681,22 +657,46 @@ Object.defineProperty(exports, "convertHoursToMinutes", {
     return _utils.convertHoursToMinutes;
   }
 });
+Object.defineProperty(exports, "formatSeconds", {
+  enumerable: true,
+  get: function get() {
+    return _utils.formatSeconds;
+  }
+});
 Object.defineProperty(exports, "scrollTo", {
   enumerable: true,
   get: function get() {
     return _utils.scrollTo;
   }
 });
-Object.defineProperty(exports, "bytesConverter", {
+Object.defineProperty(exports, "sortInputFields", {
   enumerable: true,
   get: function get() {
-    return _utils.bytesConverter;
+    return _utils.sortInputFields;
   }
 });
-Object.defineProperty(exports, "formatSeconds", {
+Object.defineProperty(exports, "useCountdownTimer", {
   enumerable: true,
   get: function get() {
-    return _utils.formatSeconds;
+    return _useCountdownTimer.useCountdownTimer;
+  }
+});
+Object.defineProperty(exports, "useOnlineStatus", {
+  enumerable: true,
+  get: function get() {
+    return _useOnlineStatus.useOnlineStatus;
+  }
+});
+Object.defineProperty(exports, "useTheme", {
+  enumerable: true,
+  get: function get() {
+    return _ThemeContext.useTheme;
+  }
+});
+Object.defineProperty(exports, "useWindowSize", {
+  enumerable: true,
+  get: function get() {
+    return _useWindowSize.useWindowSize;
   }
 });
 Object.defineProperty(exports, "verifyDecimals", {
