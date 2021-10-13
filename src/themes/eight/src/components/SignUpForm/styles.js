@@ -59,9 +59,22 @@ export const Title = styled.h1`
 export const Description = styled.p`
   color: ${props => props.theme.colors.grayDark};
   width: 80%;
-  font-size: 18px;
+  font-size: 14px;
   margin: 0px;
   max-width: 700px;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 24px;
+  }
 `
 
 export const FormInput = styled.form`
@@ -148,12 +161,15 @@ export const SocialButtons = styled.div`
   display: flex;
   flex-direction: column;
   margin: 80px 0 60px;
+  justify-content: center;
+  max-width: 1200px;
   
   button {
     width: 100%;
     margin: 10px;
     padding-top: 6px;
     padding-bottom: 6px;
+    max-width: 600px;
 
     img {
       width: 30px;
