@@ -86,7 +86,7 @@ var RedirectLink = _styledComponents.default.div(_templateObject9 || (_templateO
 
 exports.RedirectLink = RedirectLink;
 
-var SocialButtons = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n  margin: 80px 0 60px;\n  justify-content: center;\n  max-width: 1200px;\n  \n  button {\n    width: 100%;\n    margin: 10px;\n    padding-top: 6px;\n    padding-bottom: 6px;\n    max-width: 600px;\n\n    img {\n      width: 30px;\n    }\n  }\n\n  @media (min-width: 1300px) {\n    ", "\n  }\n"])), function (_ref11) {
+var SocialButtons = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n  margin: 80px 0 60px;\n  justify-content: center;\n  align-items: center;\n  max-width: 1200px;\n  \n  button {\n    width: 100%;\n    margin: 10px;\n    padding-top: 6px;\n    padding-bottom: 6px;\n    max-width: 600px;\n\n    img {\n      width: 30px;\n    }\n  }\n\n  @media (min-width: 1300px) {\n    ", "\n  }\n"])), function (_ref11) {
   var isPopup = _ref11.isPopup;
   return isPopup ? '90%' : '80%';
 }, function (_ref12) {
