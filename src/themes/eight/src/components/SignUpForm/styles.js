@@ -162,6 +162,7 @@ export const SocialButtons = styled.div`
   flex-direction: column;
   margin: 80px 0 60px;
   justify-content: center;
+  align-items: center;
   max-width: 1200px;
   
   button {
