@@ -8,6 +8,7 @@ import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
+import smoothscroll from 'smoothscroll-polyfill'
 
 /**
  * Theme images
@@ -148,6 +149,8 @@ theme.images = {
     customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png'
   }
 }
+
+smoothscroll.polyfill()
 
 const wrapper = document.getElementById('app')
 ReactDOM.render(

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 import Skeleton from 'react-loading-skeleton'
@@ -35,7 +35,9 @@ import {
   CheckOutDivider,
   DriverTipDivider,
   ModalIcon,
-  TotalCart
+  TotalCart,
+  TypeContainer,
+  InputWrapper
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -49,6 +51,8 @@ import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
+import { Modal } from '../Modal'
+import { Input } from '../../styles/Inputs'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -94,12 +98,30 @@ const CheckoutUI = (props) => {
   const [isLoadingPlace, setIsLoadingPlace] = useState(false)
   const [placeId, setPlaceId] = useState(null)
   const [paymethodSelectedChanged, setPaymethodSelectedChanged] = useState(false)
+  const [openSpotModal, setOpenSpotModal] = useState(false)
+  const inputRef = useRef()
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
   const handlePlaceOrder = async () => {
+    if (!placeId && options.type === 4) {
+      setAlertState({
+        open: true,
+        content: [t('PLACE_ID_REQURED', 'Place id is required')]
+      })
+      return
+    }
+    // if (options.type === 4 && (places.some(place => place.id === parseInt(placeId)) || isDisabledTables)) {
+    //   await window.localStorage.setItem('place_id', placeId)
+    // } else {
+    //   setAlertState({
+    //     open: true,
+    //     content: [t('THE_PLACES_NOT_EXISTS', 'The place does not exists')]
+    //   })
+    // }
+
     if (!userErrors.length) {
       handlerClickPlaceOrder && handlerClickPlaceOrder()
       await window.localStorage.removeItem('place_id')
@@ -118,6 +140,15 @@ const CheckoutUI = (props) => {
       content: []
     })
     setIsUserDetailsEdit(false)
+  }
+
+  const handleChangePlace = () => {
+    options?.type === 4 ? setOpenSpotModal(true) : handlePlaceOrder()
+  }
+
+  const onChangePlaceId = (e) => {
+    inputRef.current.value = inputRef.current.value.replace(/[^0-9.]+/g, '')
+    setPlaceId(e.target.value.replace(/[^0-9.]+/g, ''))
   }
 
   const checkValidationFields = () => {
@@ -458,7 +489,7 @@ const CheckoutUI = (props) => {
               <Button
                 color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
                 disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || loading || isLoadingPlace}
-                onClick={() => handlePlaceOrder()}
+                onClick={() => handleChangePlace()}
               >
                 {!cart?.valid_maximum ? (
                   `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
@@ -487,6 +518,45 @@ const CheckoutUI = (props) => {
             </WarningText>
           )}
         </WrapperRightContainer>
+        <Modal
+          open={openSpotModal}
+          onClose={() => setOpenSpotModal(false)}
+          hideCloseDefault
+          height='calc(100vh + 100px)'
+          padding='30px 40px 10px 40px'
+        >
+          <ModalIcon>
+            <BsArrowLeft size={20} onClick={() => setOpenSpotModal(false)} color={theme.colors.arrowColor} />
+          </ModalIcon>
+          <TypeContainer>
+            <h1>{t('CURBSIDE', 'Curbside')}</h1>
+            <label>{t('Spot', 'Spot')}</label>
+            <InputWrapper>
+              <Input
+                placeholder='#'
+                onChange={(e) => onChangePlaceId(e)}
+                type='text'
+                ref={inputRef}
+                min={0}
+              />
+            </InputWrapper>
+            {/* {!isDisabledTables && (
+              <Table>
+                {places.length > 0 && (
+                  <h2>{t('AVAILABLE_PLACES', 'Available places')}</h2>
+                )}
+                {places.map(place => (
+                  <PlaceName key={place.id} isDisabled={!place.enabled}>
+                    <p>{place.name}</p> <span>{t('TABLE', 'Table')} {place.id}</span>
+                  </PlaceName>
+                ))}
+              </Table>
+            )} */}
+          </TypeContainer>
+          <Button color='primary' style={{ width: '100%' }} height='44px' onClick={handlePlaceOrder}>
+            {t('CONTINUE', 'Continue')}
+          </Button>
+        </Modal>
         <Alert
           title={t('CUSTOMER_DETAILS', 'Customer Details')}
           content={alertState.content}
