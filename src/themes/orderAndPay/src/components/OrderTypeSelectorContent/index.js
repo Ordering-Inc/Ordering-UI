@@ -249,8 +249,7 @@ export const OrderTypeSelectorContent = (props) => {
         value: 4,
         text: t('CURBSIDE', 'Curbside'),
         description: t('ORDERTYPE_DESCRIPTION_CURBSIDE', theme?.defaultLanguages?.ORDERTYPE_DESCRIPTION_CURBSIDE),
-        image: theme.images?.deliveryTypes?.curbside,
-        label: t('Spot', 'Spot')
+        image: theme.images?.deliveryTypes?.curbside
       },
       {
         value: 5,
