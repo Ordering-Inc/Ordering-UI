@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ChangeButton = exports.WrapperForm = exports.SkeletonWrapper = exports.UploadImageIcon = exports.SavedPlaces = exports.UserData = exports.Camera = exports.SideForm = exports.Image = exports.UserImage = exports.ProfileContent = exports.UserProfileContainer = void 0;
+exports.WrapperForm = exports.UserProfileContainer = exports.UserImage = exports.UserData = exports.UploadImageIcon = exports.SkeletonWrapper = exports.SideForm = exports.SavedPlaces = exports.ProfileContent = exports.Image = exports.ChangeButton = exports.Camera = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 

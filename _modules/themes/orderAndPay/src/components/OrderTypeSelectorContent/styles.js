@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TitleContainer = exports.PlaceNumber = exports.PlaceName = exports.Table = exports.InputWrapper = exports.ModalIcon = exports.TypeContainer = exports.Logo = exports.OrderTypeListTitle = exports.OrderStartWrapper = exports.OrderTypeDescription = exports.OrderTypeTitle = exports.OrderTypeWrapper = exports.OrderTypeListItemContainer = exports.OrderTypeListItemContainerStyled = exports.OrderTypeSelectorContainer = void 0;
+exports.TypeContainer = exports.TitleContainer = exports.Table = exports.PlaceNumber = exports.PlaceName = exports.OrderTypeWrapper = exports.OrderTypeTitle = exports.OrderTypeSelectorContainer = exports.OrderTypeListTitle = exports.OrderTypeListItemContainerStyled = exports.OrderTypeListItemContainer = exports.OrderTypeDescription = exports.OrderStartWrapper = exports.ModalIcon = exports.Logo = exports.InputWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -77,7 +77,7 @@ var Logo = _styledComponents.default.div(_templateObject12 || (_templateObject12
 
 exports.Logo = Logo;
 
-var TypeContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  padding: 10px 0;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  height: 85%;\n  button: {\n    width: 100%;\n    border-radius: 7.6px;\n    height: 44px;\n  }\n  h1{\n    font-weight: 600;\n    font-size: 20px;\n    display: flex;\n    align-items: center;\n    color: ", ";\n    margin-bottom: 25px;\n  }\n  label{\n    font-size: 12px;\n    margin-bottom: 10px;\n  }\n"])), function (props) {
+var TypeContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  padding: 10px 0;\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  button: {\n    width: 100%;\n    border-radius: 7.6px;\n    height: 44px;\n  }\n  h1{\n    font-weight: 600;\n    font-size: 20px;\n    display: flex;\n    align-items: center;\n    color: ", ";\n    margin-bottom: 25px;\n  }\n  label{\n    font-size: 12px;\n    margin-bottom: 10px;\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 

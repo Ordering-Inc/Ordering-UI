@@ -15,6 +15,8 @@ var _orderingComponents = require("ordering-components");
 
 var _Buttons = require("../../styles/Buttons");
 
+var _Inputs = require("../../styles/Inputs");
+
 var _ProductItemAccordion = require("../ProductItemAccordion");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Alert = exports.Confirm = void 0;
+exports.Confirm = exports.Alert = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 

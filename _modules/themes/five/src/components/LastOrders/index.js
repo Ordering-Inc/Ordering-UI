@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LastOrders = exports.LastOrdersUI = void 0;
+exports.LastOrdersUI = exports.LastOrders = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

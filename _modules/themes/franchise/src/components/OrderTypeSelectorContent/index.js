@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrderTypeSelectorContent = exports.OrderTypeSelectorContentUI = void 0;
+exports.OrderTypeSelectorContentUI = exports.OrderTypeSelectorContent = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

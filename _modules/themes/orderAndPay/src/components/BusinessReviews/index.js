@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessReviews = exports.BusinessReviewsUI = void 0;
+exports.BusinessReviewsUI = exports.BusinessReviews = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 

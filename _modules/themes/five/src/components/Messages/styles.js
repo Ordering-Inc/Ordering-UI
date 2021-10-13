@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NotSendMessage = exports.ModalIcon = exports.ImageContainer = exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.SendImage = exports.Send = exports.SendForm = exports.TimeofSent = exports.MyName = exports.PartnerName = exports.ChatImage = exports.SkeletonBubbleBusiness = exports.SkeletonBubbleCustomer = exports.BubbleCustomer = exports.BubbleBusines = exports.BubbleConsole = exports.MessageCustomer = exports.MessageBusiness = exports.MessageConsole = exports.Chat = exports.HeaderOnline = exports.Image = exports.Status = exports.HeaderName = exports.HeaderProfile = exports.MessagesContainer = void 0;
+exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.TimeofSent = exports.Status = exports.SkeletonBubbleCustomer = exports.SkeletonBubbleBusiness = exports.SendImage = exports.SendForm = exports.Send = exports.PartnerName = exports.NotSendMessage = exports.MyName = exports.ModalIcon = exports.MessagesContainer = exports.MessageCustomer = exports.MessageConsole = exports.MessageBusiness = exports.ImageContainer = exports.Image = exports.HeaderProfile = exports.HeaderOnline = exports.HeaderName = exports.ChatImage = exports.Chat = exports.BubbleCustomer = exports.BubbleConsole = exports.BubbleBusines = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 

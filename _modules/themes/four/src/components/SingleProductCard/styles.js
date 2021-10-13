@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CartAmount = exports.CardLogo = exports.WrapLogo = exports.CardInfo = exports.SoldOut = exports.CardContainer = void 0;
+exports.WrapLogo = exports.SoldOut = exports.CartAmount = exports.CardLogo = exports.CardInfo = exports.CardContainer = void 0;
 
 var _polished = require("polished");
 
