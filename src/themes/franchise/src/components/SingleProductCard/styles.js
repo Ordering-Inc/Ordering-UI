@@ -33,6 +33,11 @@ export const CardContainer = styled.div`
 
     @media (min-width: 993px) {
       width: calc(33% - 40px);
+      margin: 10px 10px 10px 0;
+
+      ${props => props.theme.rtl && css`
+        margin: 10px 0 10px 10px;
+      `}
     }
   `}
 `

@@ -22,11 +22,6 @@ export const WrapAllCategories = styled.div`
   .category-title {
     display: flex;
     align-items: center;
-    margin-left: 10px;
-    ${props => props.theme?.rtl && css`
-      margin-right: 10px;
-      margin-left: 0;
-    `}
 
     img {
       border-radius: 7.6px;
@@ -34,17 +29,17 @@ export const WrapAllCategories = styled.div`
       min-height: 41px;
       height: 41px;
       width: 41px;
+      margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
     }
   }
   h3 {
     font-weight: 600;
     font-size: 24px;
     color: ${props => props.theme?.colors.darkTextColor};
-    margin-left: 10px;
-    ${props => props.theme?.rtl && css`
-      margin-right: 10px;
-      margin-left: 0;
-    `}
   }
 `
 
