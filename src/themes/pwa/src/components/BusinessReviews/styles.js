@@ -3,8 +3,12 @@ import styled, { css } from 'styled-components'
 export const BusinessReviewsContainer = styled.div`
   width: 100%;
   overflow-x: hidden;
-  padding: 0 6px;
+  padding: 0;
   box-sizing: border-box;
+
+  @media (min-width: 576px) {
+    padding: 0 6px;
+  }
 `
 
 export const ReviewOf = styled.div``
