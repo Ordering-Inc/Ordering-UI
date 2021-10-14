@@ -27,6 +27,7 @@ export const Accordion = styled.div`
   position: relative;
   padding: 10px;
   width: 100%;
+  box-sizing: border-box;
 
   ${props => props.isClosed && css`
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));

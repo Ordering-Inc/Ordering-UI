@@ -85,7 +85,7 @@ export const ModalOrderTypes = styled.div`
 `
 export const ModalIcon = styled.span`
   position: absolute;
-  left: 25px;
+  left: 20px;
   top: 30px;
   font-size: 22px;
   cursor: pointer;

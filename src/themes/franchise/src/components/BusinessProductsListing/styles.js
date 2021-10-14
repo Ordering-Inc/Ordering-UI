@@ -73,6 +73,17 @@ export const BusinessContent = styled.div`
 export const BusinessCategoryProductWrapper = styled.div`
   width: 100%;
 
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .category-lists::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .category-lists {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   @media (min-width: 1200px) {
     width: 70%;
   }
