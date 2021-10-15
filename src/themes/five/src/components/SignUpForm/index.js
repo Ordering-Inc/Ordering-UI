@@ -420,12 +420,13 @@ const SignUpFormUI = (props) => {
             >
               {t('SIGNUP_FOR_BUSINESS', 'Sign up for business')}
             </Button>
-            {/* <Button
+            <Button
               color='primaryContrast'
               onClick={() => handleGoToPage({ page: 'signup_driver' })}
+              disabled
             >
               {t('SIGNUP_FOR_DRIVER', 'Sign up for driver')}
-            </Button> */}
+            </Button>
           </BussinessAndDriverSignUp>
 
           <LoginDivider>
