@@ -9,7 +9,7 @@ import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
-import MdMyLocation from '@meronex/icons/md/MdMyLocation';
+import MdMyLocation from '@meronex/icons/md/MdMyLocation'
 
 import { useEvent, useLanguage, useOrder, useSession } from 'ordering-components'
 import { useTheme } from 'styled-components'
