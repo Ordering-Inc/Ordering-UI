@@ -494,7 +494,10 @@ var Header = function Header(props) {
     useLoginByCellphone: true,
     useChekoutFileds: true,
     handleSuccessSignup: handleSuccessSignup,
-    isPopup: true
+    isPopup: true,
+    closeModal: function closeModal() {
+      return closeAuthModal();
+    }
   }), modalPageToShow === 'forgotpassword' && /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
     elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {

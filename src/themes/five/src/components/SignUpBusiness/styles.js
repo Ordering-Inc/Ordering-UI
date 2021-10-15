@@ -5,7 +5,7 @@ export const SignupBusinessContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 70px 15px;
+  padding: 10px 15px;
 
   > div {
     width: 100%;
@@ -13,7 +13,7 @@ export const SignupBusinessContainer = styled.div`
 
   @media (min-width: 993px) {
     flex-direction: row;
-    padding: 150px 70px;
+    padding: 120px 70px;
     > div {
       width: 50%;
     }
@@ -22,7 +22,7 @@ export const SignupBusinessContainer = styled.div`
 
 export const SignUpHeroWrapper = styled.div`
   margin-top: 15px;
-  padding: 65px 0 0 0;
+  padding: 70px 0 0 0;
   box-sizing: border-box;
 
   @media (min-width: 993px) {
@@ -63,74 +63,146 @@ export const SignUpHero = (props) => {
   )
 }
 
-export const SignUpFormWrapper = styled.div`
-  margin-top: 15px;
-
-  h1 {
-    font-weight: 500;
-    font-size: 24px;
-    margin-bottom: 30px;
-    margin-top: 0;
-  }
-`
-
 export const FormInput = styled.form`
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
 
-  input {
-    height: 44px;
-    font-size: 14px;
-    box-sizing: border-box;
-    margin-bottom: 24px;
+  div.phone_number {
+    margin: 10px 0px;
     width: 100%;
   }
 
-  .half-input {
-    width: 100%;
-  }
-
-  @media (min-width: 576px) {
-    .half-input {
-      width: 49%;
-    }
+  input.form:not(:last-child) {
+    margin: 10px 0px;
+    padding: 8px 20px;
   }
 
   button {
-    width: 100%;
-    height: 44px;
-    margin-top: 12px;
+    margin-top: 10px;
+    padding: 5px;
   }
 `
 
-export const PhoneInputWrapper = styled.div`
-  border-radius: 7.6px;
-  margin-bottom: 24px;
-  border: 1px solid #DBDCDB;
-  padding-left: 15px;
-  background: white;
-  width: 100%;
-  position: relative;
-
-  ${props => props.theme.rtl && css`
-    padding-right: 15px;
-    padding-left: 0;
-  `}
-
-  input.PhoneInputInput {
-    border: none !important;
+export const PhoneNumberWrapper = styled.div`
+  .PhoneInput {
+    border: 1px solid #DEE2E6;
+    box-sizing: border-box;
     border-radius: 7.6px;
-    margin-bottom: 0;
+    background: white;
+
+    .PhoneInputCountry {
+      padding-left: 20px;
+      ${props => props.theme.rtl && css`
+        padding-left: 0;
+        padding-right: 20px;
+      `}
+    }
+
+    input {
+      border: none;
+    }
+  }
+`
+
+export const ReCaptchaWrapper = styled.div`
+  margin: 12px auto;
+`
+
+export const WrapperPassword = styled.div`
+  position: relative;
+  width: 100%;
+  input{
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: 40px;
+  }
+`
+
+export const TogglePassword = styled.span`
+  position: absolute;
+  font-weight: 300;
+  padding: 10px 0;
+  color: #333;
+  font-size: 26px;
+  transform: translate(-150%, 10%);
+  max-height: 100%;
+  ${props => props.theme?.rtl && css`
+    transform: translate(150%, 10%);
+  `}
+  span{
+    cursor: pointer;
+  }
+`
+
+export const TermsConditionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+
+  > label {
     font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 7px;
+    ` : css`
+      margin-left: 7px;
+    `}
+
+    > span:first-child {
+      font-weight: 500;
+      ${props => props.theme?.rtl ? css`
+        margin-left: 7px;
+      ` : css`
+        margin-right: 7px;
+      `}
+    }
+
+    > a {
+      color: ${props => props.theme.colors.primary} !important;
+    }
   }
 
-  .phone_number {
-    > span {
-      left: 0;
-      position: absolute;
-      font-size: 13px;
+  @media (min-width: 768px) {
+    > label {
+      font-size: 16px;
     }
+  }
+`
+
+export const SkeletonWrapper = styled.div`
+  span{
+    margin: 10px 0;
+    border-radius: 7.6px;
+  }
+`
+
+export const FormSide = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+
+  > h1 {
+    width: 100%;
+    margin-bottom: 25px;
+    margin-top: 15;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  @media (min-width: 769px) {
+    ${({ isPopup }) => isPopup && css`
+      margin: 20px 0px;
+    `}
+  }
+
+  @media (min-width: 992px) {
+    width: 45%;
+    font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
+  }
+
+  @media (min-width: 1200px){
+    font-size: ${({ isPopup }) => isPopup ? '0.9em' : '1em'};
   }
 `

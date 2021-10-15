@@ -19,7 +19,6 @@ export const ListenPageChanges = ({ children }) => {
     drivethru: '/drivethru',
     signup: '/signup',
     signup_business: '/signup_business',
-    signup_driver: '/signup_driver',
     signin: '/signin',
     profile: '/profile',
     orders: '/profile/orders',

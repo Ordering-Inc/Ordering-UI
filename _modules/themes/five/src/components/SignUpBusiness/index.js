@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SignUpForm = void 0;
+exports.SignUpBusiness = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -15,13 +15,11 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _Confirm = require("../Confirm");
 
-var _InputPhoneNumber = require("../InputPhoneNumber");
+var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
 
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
-var _orderingComponents = require("ordering-components");
-
-var _styles = require("./styles");
+var _styledComponents = require("styled-components");
 
 var _Inputs = require("../../styles/Inputs");
 
@@ -31,21 +29,13 @@ var _Checkbox = require("../../../../../styles/Checkbox");
 
 var _utils = require("../../../../../utils");
 
-var _FacebookLogin = require("../FacebookLogin");
-
-var _GoogleLogin = require("../GoogleLogin");
-
-var _AppleLogin = require("../AppleLogin");
-
 var _AiOutlineEye = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEye"));
 
 var _AiOutlineEyeInvisible = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEyeInvisible"));
 
-var _GoMail = _interopRequireDefault(require("@meronex/icons/go/GoMail"));
+var _orderingComponents = require("ordering-components");
 
-var _FaRegUser = _interopRequireDefault(require("@meronex/icons/fa/FaRegUser"));
-
-var _BsLock = _interopRequireDefault(require("@meronex/icons/bs/BsLock"));
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -83,13 +73,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
-var SignUpFormUI = function SignUpFormUI(props) {
-  var _configs$facebook_log, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$google_login, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login2, _props$afterComponent, _props$afterElements;
+var SignUpBusinessUI = function SignUpBusinessUI(props) {
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _theme$images, _theme$images$general, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
       handleReCaptcha = props.handleReCaptcha,
-      elementLinkToLogin = props.elementLinkToLogin,
       useChekoutFileds = props.useChekoutFileds,
       validationFields = props.validationFields,
       showField = props.showField,
@@ -101,8 +90,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       saveCustomerUser = props.saveCustomerUser,
       fieldsNotValid = props.fieldsNotValid,
       signupData = props.signupData,
-      enableReCaptcha = props.enableReCaptcha,
-      closeModal = props.closeModal;
+      enableReCaptcha = props.enableReCaptcha;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -114,10 +103,6 @@ var SignUpFormUI = function SignUpFormUI(props) {
 
   var formMethods = (0, _reactHookForm.useForm)();
 
-  var _useEvent = (0, _orderingComponents.useEvent)(),
-      _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0];
-
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -126,12 +111,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 2),
-      login = _useSession2[1].login;
-
   var emailInput = (0, _react.useRef)(null);
-  var isFacebookLogin = (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) === 'true';
 
   var _useState3 = (0, _react.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -149,38 +129,6 @@ var SignUpFormUI = function SignUpFormUI(props) {
       setPasswordSee = _useState8[1];
 
   var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
-  var initParams = {
-    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
-    cookiepolicy: 'single_host_origin',
-    scope: 'profile'
-  };
-
-  var handleSuccessFacebook = function handleSuccessFacebook(user) {
-    var _user$session;
-
-    login({
-      user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
-    });
-  };
-
-  var handleSuccessApple = function handleSuccessApple(user) {
-    var _user$session2;
-
-    login({
-      user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
-    });
-  };
-
-  var handleSuccessGoogle = function handleSuccessGoogle(user) {
-    var _user$session3;
-
-    login({
-      user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session3 = user.session) === null || _user$session3 === void 0 ? void 0 : _user$session3.access_token
-    });
-  };
 
   var togglePasswordView = function togglePasswordView() {
     setPasswordSee(!passwordSee);
@@ -191,11 +139,6 @@ var SignUpFormUI = function SignUpFormUI(props) {
       open: false,
       content: []
     });
-  };
-
-  var handleGoToPage = function handleGoToPage(data) {
-    events.emit('go_to_page', data);
-    closeModal && closeModal();
   };
 
   var onSubmit = function onSubmit() {
@@ -325,19 +268,20 @@ var SignUpFormUI = function SignUpFormUI(props) {
       handleChangePhoneNumber(externalPhoneNumber, true);
     }
   }, [externalPhoneNumber]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.SignUpContainer, {
-    isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
-    isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SIGN_UP', 'Sign up')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  (0, _react.useEffect)(function () {
+    handleChangeInput({
+      target: {
+        name: 'level',
+        value: 2
+      }
+    });
+  }, []);
+  (0, _react.useEffect)(function () {
+    console.log(signupData);
+  }, [signupData]);
+  return /*#__PURE__*/_react.default.createElement(_styles.SignupBusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SignUpHeroWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SignUpHero, {
+    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.businessSignUpHero
+  })), /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SIGN_UP_NOW', 'Sign up now')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: formMethods.handleSubmit(onSubmit),
@@ -355,7 +299,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }).map(function (field) {
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
-    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       type: field.type,
       name: field.code,
       "aria-label": field.code,
@@ -367,7 +311,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       },
       required: !!field.required,
       autoComplete: "off"
-    }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_GoMail.default, null))) : /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    }) : /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       type: field.type,
       name: field.code,
       "aria-label": field.code,
@@ -376,12 +320,12 @@ var SignUpFormUI = function SignUpFormUI(props) {
       onChange: handleChangeInput,
       required: field.required,
       autoComplete: "off"
-    }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_FaRegUser.default, null))));
-  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+    }));
+  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_styles.PhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber
-  }), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  })), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: !passwordSee ? 'password' : 'text',
     name: "password",
     "aria-label": "password",
@@ -398,7 +342,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     })
   }), /*#__PURE__*/_react.default.createElement(_styles.TogglePassword, {
     onClick: togglePasswordView
-  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_AiOutlineEye.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineEyeInvisible.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_BsLock.default, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_AiOutlineEye.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineEyeInvisible.default, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);
@@ -430,36 +374,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     color: "primary",
     type: "submit",
     disabled: formState.loading || (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
-  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGN_UP', 'Sign up'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
-    register: true,
-    isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), /*#__PURE__*/_react.default.createElement(_styles.BussinessAndDriverSignUp, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primaryContrast",
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'signup_business'
-      });
-    }
-  }, t('SIGNUP_FOR_BUSINESS', 'Sign up for business'))), /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, null, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
-    isPopup: isPopup
-  }, isFacebookLogin && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
-    appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
-    handleSuccessFacebookLogin: handleSuccessFacebook
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_ = configs.apple_login_client_id) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value) && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
-    onSuccess: handleSuccessApple,
-    onFailure: function onFailure(data) {
-      return console.log('onFailure', data);
-    }
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
-    initParams: initParams,
-    handleSuccessGoogleLogin: handleSuccessGoogle,
-    onFailure: function onFailure(data) {
-      return console.log('onFailure', data);
-    }
-  })) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonSocialWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 43
-  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('SIGN_UP', 'Sign up'),
+  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SUBMIT', 'Submit')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('SIGN_UP_FOR_BUSINESS', 'Sign up for business'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -470,23 +386,15 @@ var SignUpFormUI = function SignUpFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 
-var SignUpForm = function SignUpForm(props) {
-  var loginControllerProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: SignUpFormUI
+var SignUpBusiness = function SignUpBusiness(props) {
+  var signUpBusinessProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: SignUpBusinessUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.SignupForm, loginControllerProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.SignupForm, signUpBusinessProps);
 };
 
-exports.SignUpForm = SignUpForm;
+exports.SignUpBusiness = SignUpBusiness;
