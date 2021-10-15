@@ -8,7 +8,8 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
 
-import { Header } from '../src/components/Header'
+import { Header } from '../src/themes/franchise/src/components/Header'
+// import { Header } from '../src/components/Header'
 import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -27,6 +28,7 @@ import { OrderDetailsPage } from './pages/OrderDetails'
 import { PageNotFound } from './pages/PageNotFound'
 import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
+import { MySavedPlaces } from './pages/MySavedPlaces'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
 import { Help } from './pages/Help'
@@ -202,6 +204,11 @@ export const App = () => {
                   <Route exact path='/profile'>
                     {auth
                       ? (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
+                      : <Redirect to='/login' />}
+                  </Route>
+                  <Route exact path='/saved_places'>
+                    {auth
+                      ? (<MySavedPlaces userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/profile/orders'>

@@ -20,6 +20,7 @@ export const ListenPageChanges = ({ children }) => {
     signup: '/signup',
     signin: '/signin',
     profile: '/profile',
+    saved_places: '/saved_places',
     orders: '/profile/orders',
     order_detail: '/orders/:orderId',
     checkout: '/checkout/:cartUuid',

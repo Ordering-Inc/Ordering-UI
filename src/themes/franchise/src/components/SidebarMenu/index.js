@@ -9,6 +9,7 @@ import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
+import MdMyLocation from '@meronex/icons/md/MdMyLocation';
 
 import { useEvent, useLanguage, useOrder, useSession } from 'ordering-components'
 import { useTheme } from 'styled-components'
@@ -220,6 +221,36 @@ export const SidebarMenu = (props) => {
                       }
                     >
                       {t('PROFILE', 'Profile')}
+                    </TextInfo>
+                  </MenuLinkText>
+                  <MenuLinkSeparator>
+                    <div>
+                      <hr />
+                    </div>
+                  </MenuLinkSeparator>
+                </WrappContent>
+              </MenuLink>
+              <MenuLink
+                isHome={isHome}
+                onClick={() => handleGoToPage({ page: 'saved_places' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    isHome={isHome}
+                    active={
+                      window.location.pathname === '/saved_places'
+                    }
+                  >
+                    <MdMyLocation />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      isHome={isHome}
+                      active={
+                        window.location.pathname === '/saved_places'
+                      }
+                    >
+                      {t('MY_ADDRESSES', 'My Saved places')}
                     </TextInfo>
                   </MenuLinkText>
                   <MenuLinkSeparator>
