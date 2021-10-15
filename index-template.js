@@ -8,6 +8,7 @@ import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
+import smoothscroll from 'smoothscroll-polyfill'
 
 /**
  * Theme images
@@ -25,8 +26,6 @@ import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import searchIcon from './template/assets/images/search-icon.svg'
 import emptyActiveOrders from './template/assets/images/empty-active-orders.svg'
 import emptyPastOrders from './template/assets/images/empty-past-orders.svg'
-import businessSignUpHero from './template/assets/images/business_signup.png'
-import driverSignUpHero from './template/assets/images/driver_signup.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -109,9 +108,7 @@ theme.images = {
     searchIcon,
     notNetwork,
     emptyActiveOrders,
-    emptyPastOrders,
-    businessSignUpHero,
-    driverSignUpHero
+    emptyPastOrders
   },
 
   order: {
@@ -152,6 +149,8 @@ theme.images = {
     customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png'
   }
 }
+
+smoothscroll.polyfill()
 
 const wrapper = document.getElementById('app')
 ReactDOM.render(

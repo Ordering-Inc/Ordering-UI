@@ -18,7 +18,6 @@ export const ListenPageChanges = ({ children }) => {
     curbside: '/curbside',
     drivethru: '/drivethru',
     signup: '/signup',
-    signup_business: '/signup_business',
     signin: '/signin',
     profile: '/profile',
     orders: '/profile/orders',

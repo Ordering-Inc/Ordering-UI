@@ -8,8 +8,7 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
 
-import { Header } from '../src/themes/five/src/components/Header'
-// import { Header } from '../src/components/Header'
+import { Header } from '../src/components/Header'
 import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -30,7 +29,6 @@ import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
-import { SignUpBusiness } from './pages/SignUpBusiness'
 import { Help } from './pages/Help'
 
 import { ScrollToTop } from './components/ScrollToTop'
@@ -136,21 +134,6 @@ export const App = () => {
                       !auth
                         ? (
                           <SignUp
-                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-                            useLoginByCellphone
-                            useChekoutFileds
-                            handleSuccessSignup={handleSuccessSignup}
-                            isRecaptchaEnable
-                          />
-                        )
-                        : <Redirect to='/' />
-                    }
-                  </Route>
-                  <Route exact path='/signup_business'>
-                    {
-                      !auth
-                        ? (
-                          <SignUpBusiness
                             elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
                             useLoginByCellphone
                             useChekoutFileds
