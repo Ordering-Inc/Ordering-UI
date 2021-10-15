@@ -50,17 +50,19 @@ const HighestRatedUI = (props) => {
             )
           }
           {
-            businessesList.businesses?.map((business) => (
-              <BusinessController
-                key={business.id}
-                className='card'
-                business={business}
-                isBusinessOpen={business.open}
-                handleCustomClick={handleBusinessClick}
-                orderType={orderState?.options?.type}
-                isCustomLayout={isCustomLayout}
-                isShowCallcenterInformation={isCustomLayout}
-              />
+            !businessesList?.loading && businessesList?.businesses?.map((business) => (
+              business?.reviews?.total > 0 && (
+                <BusinessController
+                  key={business.id}
+                  className='card'
+                  business={business}
+                  isBusinessOpen={business.open}
+                  handleCustomClick={handleBusinessClick}
+                  orderType={orderState?.options?.type}
+                  isCustomLayout={isCustomLayout}
+                  isShowCallcenterInformation={isCustomLayout}
+                />
+              )
             ))
           }
           {businessesList.loading && (

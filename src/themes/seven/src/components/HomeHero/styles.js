@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 export const HeroContainerStyled = styled.div`
   width: 100%;
-  height: 62.562132vh;
+  height: calc(100vh - 85px);
 
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
@@ -13,13 +13,16 @@ export const HeroContainerStyled = styled.div`
   `}
 
   @media (min-width: 768px) {
-    height: 55vw;
-    max-height: 75vw;
+    height: 45vh;
     overflow: hidden;
   }
 
+  @media (min-width: 1024px) {
+    height: 70vh;
+  }
+
   @media (min-width: 1200px) {
-    height: 65.562132vh;
+    height: calc(100vh - 70px);
   }
 `
 
@@ -42,11 +45,13 @@ export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 100%;
     text-shadow: 0px 0px 5px #fff;
-    padding: 0px 20px 0px;
+    padding: 0px 20px 50px;
+    box-sizing: border-box;
     ${props => props.theme?.rtl && css`
-      padding: 0px 20px 0px;
+      padding: 0px 20px 50px;
     `}
 
     input {
@@ -156,8 +161,10 @@ export const OrderTypeItem = styled.div`
     }
   }
   &:nth-child(2){
-    background-color: #ffe512;
-    color: #636569;
+    background-color: #fff;
+    border: 1.2px solid #878787;
+    border-radius: 0 7px 7px 0;
+    color: #000;
     svg {
       height: 33px;
       width: 25px;

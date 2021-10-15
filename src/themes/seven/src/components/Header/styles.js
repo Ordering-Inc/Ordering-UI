@@ -170,7 +170,7 @@ export const OrderTypes = styled.div`
   width: 40%;
   #select-input {
     height: 40px;
-    padding: 6px 16px;
+    padding: 10px 16px;
     box-sizing: border-box;
     border: 1px solid #DDDDDD;
     background-color: #FAFAFA;

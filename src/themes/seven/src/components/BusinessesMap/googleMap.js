@@ -31,6 +31,7 @@ export const GoogleMaps = (props) => {
    * Function to generate multiple markers
    * @param {Google map} map
    */
+  const [isOpened, setIsOpened] = useState(false)
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
@@ -41,10 +42,12 @@ export const GoogleMaps = (props) => {
     const bounds = new window.google.maps.LatLngBounds()
     let businessesNear = 0
     const infowindow = new window.google.maps.InfoWindow()
+    const mapLinkText = t('SELECT_STORE', 'Select Store')
 
     for (let i = 0; i < locations.length; i++) {
       let formatUrl = null
       let businessMeta = null
+
       if (businessMap) {
         formatUrl = optimizeImage(locations[i]?.icon, 'r_max')
         if (businessList) {
@@ -54,6 +57,7 @@ export const GoogleMaps = (props) => {
           }
         }
       }
+
       const marker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(locations[i]?.lat, locations[i]?.lng),
         map,
@@ -63,19 +67,23 @@ export const GoogleMaps = (props) => {
           scaledSize: new window.google.maps.Size(45, 45)
         } : null
       })
-      const mapLinkText = t('SELECT_STORE', 'Select Store')
-      let content = '<div style="display: flex; flex-direction: column;"><h4 style="margin: 7px 0px;">' + locations[i]?.slug + '</h4></div>'
+
+      let content
+      content = '<div style="display: flex; flex-direction: column;"><h4 style="margin: 7px 0px;">' + locations[i]?.slug + '</h4></div>'
       if (businessMeta) {
         content = '<div style="display: flex; flex-direction: column;"><h4 style="margin: 7px 0px;">' + businessMeta?.businesName + '</h4> <p style="margin: 0px;"> Today: ' + businessMeta?.todayLapses + '</p> <a href="store/' + locations[i]?.slug + '"style="text-decoration: none; display: flex; justify-content: center; align-items: center; line-height: 30px; flex-grow: 1; border:none; border-radius: 4px; background-color: #dd0031; font-size:10px; color: #fff; margin-top: 10px;">' + mapLinkText + '</a></div>'
       }
       if (businessMap) {
         const isNear = validateResult(googleMap, marker, marker.getPosition())
         if (isNear) {
-          if (i === 0) {
+          if (i === 0 && !isOpened) {
             infowindow.setContent(content)
             infowindow.open(map, marker)
+            setIsOpened(true)
           }
+
           marker.addListener('click', () => {
+            infowindow.close()
             if (locations[i]) {
               infowindow.setContent(content)
               infowindow.open(map, marker)
@@ -188,25 +196,16 @@ export const GoogleMaps = (props) => {
           ...mapControls?.mapTypeControlOptions
         }
       })
-
       let marker = null
       setGoogleMap(map)
-
       if (locations) {
         if (businessMap) {
-          marker = new window.google.maps.Marker({
-            position: new window.google.maps.LatLng(center.lat, center.lng),
-            map
-          })
+          marker = []
           setGoogleMapMarker(marker)
         }
         if (locations.length > 0) {
           generateMarkers(map)
         }
-        marker = new window.google.maps.Marker({
-          position: new window.google.maps.LatLng(center?.lat, center?.lng),
-          map
-        })
         setGoogleMapMarker(marker)
       } else {
         marker = new window.google.maps.Marker({
@@ -258,7 +257,6 @@ export const GoogleMaps = (props) => {
       }
       center.lat = location?.lat
       center.lng = location?.lng
-      googleMapMarker && googleMapMarker.setPosition(new window.google.maps.LatLng(center?.lat, center?.lng))
       googleMap && googleMap.panTo(new window.google.maps.LatLng(center?.lat, center?.lng))
     }
   }, [location, locations?.length])

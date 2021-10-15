@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import Skeleton from 'react-loading-skeleton'
 import { Container, Header, SideForm, UserData } from './styles'
@@ -10,7 +10,6 @@ import {
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
-import { Button } from '../../styles/Buttons'
 
 const UserDetailsUI = (props) => {
   const {
@@ -28,6 +27,7 @@ const UserDetailsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [placeId, setPlaceId] = useState()
   const userData = userState.result?.result || props.userData || formState.result?.result || user
 
   useEffect(() => {
@@ -40,6 +40,11 @@ const UserDetailsUI = (props) => {
     toggleIsEdit()
     cleanFormState({ changes: {} })
   }
+
+  useEffect(() => {
+    const placeId = window.localStorage.getItem('place_id')
+    setPlaceId(placeId)
+  }, [])
 
   return (
     <>
@@ -87,6 +92,9 @@ const UserDetailsUI = (props) => {
               {(userData?.phone || user?.phone) && (
                 <p>{(userData?.cellphone)}</p>
               )}
+              {(placeId && (
+                <p>{t('PLACE_ID', 'Place ID:')} {placeId}</p>
+              ))}
               {cartStatus !== 2 && !isEdit && (
                 <a onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</a>
               )}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
@@ -134,8 +134,40 @@ const ProductOptionsUI = (props) => {
   }
 
   const handleChangeTabValue = (value) => {
-    setTabValue(value)
+    const categoryTitle = document.getElementById(value)
+    const container = document.getElementsByClassName('popup-dialog')[0]
+    if (categoryTitle) {
+      container.scroll({
+        top: categoryTitle.offsetTop + 300,
+        behavior: 'smooth'
+      })
+    } else {
+      container.scroll({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
   }
+
+  useEffect(() => {
+    const container = document.getElementsByClassName('popup-dialog')[0]
+    if (container) {
+      container.addEventListener('scroll', () => {
+        const extrasContainer = document.getElementById('extra')
+        const ingredientsContainer = document.getElementById('ingredients')
+        if (container.scrollTop < ingredientsContainer?.offsetTop + 290 || container.scrollTop < 200) {
+          setTabValue('all')
+        } else if (ingredientsContainer && container.scrollTop < extrasContainer?.offsetTop + 290) {
+          setTabValue('ingredients')
+        } else {
+          extrasContainer ? setTabValue('extra') : ingredientsContainer ? setTabValue('ingredients') : setTabValue('all')
+        }
+      })
+    }
+    return () => {
+      container && container.removeEventListener('scroll')
+    }
+  }, [])
 
   return (
     <>
@@ -195,7 +227,7 @@ const ProductOptionsUI = (props) => {
                     >
                       {t('ALL', 'All')}
                     </Tab>
-                    {product?.ingredients.length > 0 && (
+                    {product?.ingredients?.length > 0 && (
                       <Tab
                         key='ingredients'
                         active={tabValue === 'ingredients'}
@@ -205,39 +237,35 @@ const ProductOptionsUI = (props) => {
                         {t('INGREDIENTS', 'ingredients')}
                       </Tab>
                     )}
-                    <Tab
-                      key='extra'
-                      active={tabValue === 'extra'}
-                      onClick={() => handleChangeTabValue('extra')}
-                      borderBottom
-                    >
-                      {t('EXTRA', 'Extra')}
-                    </Tab>
+                    {product?.extras?.length > 0 && (
+                      <Tab
+                        key='extra'
+                        active={tabValue === 'extra'}
+                        onClick={() => handleChangeTabValue('extra')}
+                        borderBottom
+                      >
+                        {t('EXTRA', 'Extra')}
+                      </Tab>
+                    )}
                   </Tabs>
                 </ProductTabContainer>
 
+                {product?.ingredients.length > 0 && (<SectionTitle id='ingredients'>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
+                <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
+                  {product?.ingredients.map(ingredient => (
+                    <ProductIngredient
+                      key={ingredient?.id}
+                      ingredient={ingredient}
+                      state={productCart.ingredients[`id:${ingredient?.id}`]}
+                      onChange={handleChangeIngredientState}
+                    />
+                  ))}
+                </WrapperIngredients>
                 {
-                  (tabValue === 'ingredients' || tabValue === 'all') && (
-                    <>
-                      {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
-                      <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
-                        {product?.ingredients.map(ingredient => (
-                          <ProductIngredient
-                            key={ingredient?.id}
-                            ingredient={ingredient}
-                            state={productCart.ingredients[`id:${ingredient?.id}`]}
-                            onChange={handleChangeIngredientState}
-                          />
-                        ))}
-                      </WrapperIngredients>
-                    </>
-                  )
-                }
-                {
-                  (tabValue === 'extra' || tabValue === 'all') && product?.extras.map(extra => extra.options.map(option => {
+                  product?.extras.map(extra => extra.options.map((option, i) => {
                     const currentState = productCart.options[`id:${option?.id}`] || {}
                     return (
-                      <div key={option?.id}>
+                      <div key={option?.id} id={i === 0 ? 'extra' : ''}>
                         {
                           showOption(option) && (
                             <ProductOption

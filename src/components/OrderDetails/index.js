@@ -302,7 +302,7 @@ const OrderDetailsUI = (props) => {
               <OrderCustomer>
                 <div className='photo'>
                   {order?.customer?.photo ? (
-                    <PhotoBlock src={order?.customer?.photo} />
+                    <PhotoBlock src={order?.customer?.photo} width='80' height='80' />
                   ) : (
                     <FaUserCircle />
                   )}

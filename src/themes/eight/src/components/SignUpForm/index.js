@@ -249,7 +249,7 @@ const SignUpFormUI = (props) => {
           {!isSignupEmail ? (
             <>
               <Description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum pharetra placerat massa risus aliquet purus arcu. Quis enim, interdum ac massa feugiat arcu nulla aliquet.
+                {t('SELECT_ACCOUNT_OPTION', 'You don\'t have an account? Select one of this options.')}
               </Description>
               {!externalPhoneNumber && (
                 <>
@@ -270,7 +270,7 @@ const SignUpFormUI = (props) => {
                           onFailure={(data) => console.log('onFailure', data)}
                         />
                       )}
-                      { isFacebookLogin && configs?.facebook_id?.value && (
+                      {isFacebookLogin && configs?.facebook_id?.value && (
                         <FacebookLoginButton
                           isSignup
                           appId={configs?.facebook_id?.value}

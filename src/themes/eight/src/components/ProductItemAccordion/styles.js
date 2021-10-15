@@ -177,11 +177,27 @@ export const ContentInfo = styled.div`
 export const AccordionContent = styled.div`
   overflow: hidden;
   transition: max-height 0.6s ease;
-  width: 100%;
-  margin: auto;
 
-  @media (min-width: 481px) {
-    width: 80%;
+  ${props => props.theme?.rtl ? css`
+    margin-right: 95px;
+  ` : css`
+    margin-left: 95px;
+  `}
+
+  @media (min-width: 361px) {
+    ${props => props.theme?.rtl ? css`
+      margin-right: 105px;
+    ` : css`
+      margin-left: 105px;
+    `}
+  }
+
+  @media (min-width: 411px) {
+    ${props => props.theme?.rtl ? css`
+      margin-right: 115px;
+    ` : css`
+      margin-left: 115px;
+    `}
   }
 `
 
@@ -192,26 +208,29 @@ export const AccordionText = styled.div`
 `
 
 export const ProductComment = styled.div`
-  padding-left: 40px;
-  ${props => props.theme?.rtl && css`
-    padding-right: 40px;
-    padding-left: 0px;
+  ${({ isCustomMode }) => !isCustomMode && css`
+    padding-left: 40px;
+    ${props => props.theme?.rtl && css`
+      padding-right: 40px;
+      padding-left: 0px;
+    `}
   `}
   p {
-    font-weight: bold;
     margin: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    color: ${props => props.theme.colors.grayMedium};
   }
 
   h3 {
-    font-weight: normal;
+    font-size: 14px;
+    font-weight: 400;
     text-transform: capitalize;
-    margin: 0px 20px 0px 40px;
+    margin: 0px 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    ${props => props.theme?.rtl && css`
-      margin: 0px 40px 0px 20px;
-    `}
+    color: ${props => props.theme.colors.grayMedium};
   }
 `
 
@@ -383,10 +402,12 @@ export const ProductOptionsList = styled.ul`
   p {
     font-weight: 400;
     margin: 0px;
+    color: ${props => props.theme.colors.grayMedium};
   }
 
   li span {
-    font-weight: 300;
+    font-weight: 400;
+    color: ${props => props.theme.colors.grayMedium};
   }
 
   li.ingredient {

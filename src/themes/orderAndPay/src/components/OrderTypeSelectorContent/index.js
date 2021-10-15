@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useLanguage, OrderTypeControl, useOrder, useApi, useEvent, useSession } from 'ordering-components'
+import { useLanguage, OrderTypeControl, useOrder, useApi, useEvent, useSession, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
@@ -31,7 +31,8 @@ export const OrderTypeSelectorContentUI = (props) => {
     onClose,
     logo,
     handleBusinessPage,
-    businessId
+    businessId,
+    isDisabledTables
   } = props
 
   const theme = useTheme()
@@ -40,12 +41,14 @@ export const OrderTypeSelectorContentUI = (props) => {
   const [orderStatus] = useOrder()
   const [ordering] = useApi()
   const [{ auth }] = useSession()
+  const [configState] = useConfig()
   const [orderTypeSelected, setOrderTypeSelected] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   // const [pagination, setPagination] = useState({})
   const [places, setPlaces] = useState([])
   const [placeId, setPlaceId] = useState('')
   const inputRef = useRef()
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const handleClickOrderType = ({ value, text, label }) => {
     handleChangeOrderType && handleChangeOrderType(value)
@@ -89,7 +92,7 @@ export const OrderTypeSelectorContentUI = (props) => {
       })
       return
     }
-    if (places.some(place => place.id === parseInt(placeId))) {
+    if (places.some(place => place.id === parseInt(placeId)) || isDisabledTables) {
       await window.localStorage.setItem('place_id', placeId)
       handleBusinessPage()
     } else {
@@ -144,7 +147,7 @@ export const OrderTypeSelectorContentUI = (props) => {
           />
         </Logo>
         {
-          orderTypes && orderTypes.map((item, i) => (
+          orderTypes && orderTypes.filter(ordertype => configTypes.includes(ordertype.value)).map((item, i) => (
             <OrderTypeListItemContainer
               key={i}
               bgimage={item?.image}
@@ -184,16 +187,18 @@ export const OrderTypeSelectorContentUI = (props) => {
                 min={0}
               />
             </InputWrapper>
-            {/* <Table>
-              {places.length > 0 && (
-                <h2>{t('AVAILABLE_PLACES', 'Available places')}</h2>
-              )}
-              {places.map(place => (
-                <PlaceName key={place.id} isDisabled={!place.enabled}>
-                  <p>{place.name}</p> <span>{t('TABLE', 'Table')} {place.id}</span>
-                </PlaceName>
-              ))}
-            </Table> */}
+            {!isDisabledTables && (
+              <Table>
+                {places.length > 0 && (
+                  <h2>{t('AVAILABLE_PLACES', 'Available places')}</h2>
+                )}
+                {places.map(place => (
+                  <PlaceName key={place.id} isDisabled={!place.enabled}>
+                    <p>{place.name}</p> <span>{t('TABLE', 'Table')} {place.id}</span>
+                  </PlaceName>
+                ))}
+              </Table>
+            )}
           </TypeContainer>
           <Button color='primary' style={{ width: '100%' }} height='44px' onClick={handleChangePlace}>
             {t('CONTINUE', 'Continue')}
@@ -244,8 +249,7 @@ export const OrderTypeSelectorContent = (props) => {
         value: 4,
         text: t('CURBSIDE', 'Curbside'),
         description: t('ORDERTYPE_DESCRIPTION_CURBSIDE', theme?.defaultLanguages?.ORDERTYPE_DESCRIPTION_CURBSIDE),
-        image: theme.images?.deliveryTypes?.curbside,
-        label: t('Spot', 'Spot')
+        image: theme.images?.deliveryTypes?.curbside
       },
       {
         value: 5,
