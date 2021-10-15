@@ -35,6 +35,7 @@ import { Messages } from './src/components/Messages'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MyOrders } from './src/components/MyOrders'
+import { MySavedPlaces } from './src/components/MySavedPlaces'
 import { Modal } from './src/components/Modal'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrdersOption } from './src/components/OrdersOption'
@@ -98,6 +99,7 @@ export {
   MomentContent,
   MomentControl,
   MyOrders,
+  MySavedPlaces,
   Modal,
   OrderDetails,
   OrdersOption,
