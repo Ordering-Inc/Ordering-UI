@@ -15,6 +15,8 @@ export const MyOrders = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <ProfileOptions value='orders' />
       <Container>
+        <OrdersOption {...props} preOrders horizontal />
+        <Divider />
         <OrdersOption {...props} activeOrders horizontal />
         <Divider />
         <OrdersOption {...props} pastOrders horizontal />
