@@ -75,7 +75,8 @@ var MomentControlUI = function MomentControlUI(props) {
       timeSelected = props.timeSelected,
       handleAsap = props.handleAsap,
       handleChangeDate = props.handleChangeDate,
-      handleChangeTime = props.handleChangeTime;
+      handleChangeTime = props.handleChangeTime,
+      onClose = props.onClose;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -120,6 +121,11 @@ var MomentControlUI = function MomentControlUI(props) {
       timeLists = _useState10[0],
       setTimeLists = _useState10[1];
 
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isSelectedTime = _useState12[0],
+      setIsSelectedTime = _useState12[1];
+
   var onDateChange = function onDateChange(value) {
     onChange(value);
 
@@ -142,6 +148,11 @@ var MomentControlUI = function MomentControlUI(props) {
   var handleRemoveDate = function handleRemoveDate() {
     !orderState.loading && handleAsap();
     setIsASP(true);
+  };
+
+  var handleChangeSelect = function handleChangeSelect(startTime) {
+    !orderState.loading && handleChangeTime(startTime);
+    setIsSelectedTime(true);
   };
 
   (0, _react.useEffect)(function () {
@@ -189,6 +200,12 @@ var MomentControlUI = function MomentControlUI(props) {
       setTimeLists(_timeLists);
     }
   }, [hoursList]);
+  (0, _react.useEffect)(function () {
+    if (timeSelected && onClose && isSelectedTime) {
+      setIsSelectedTime(false);
+      onClose();
+    }
+  }, [timeSelected]);
   (0, _react.useEffect)(function () {
     if (isASP) handleCheckBoxChange(true);
   }, [isAsap]);
@@ -240,7 +257,7 @@ var MomentControlUI = function MomentControlUI(props) {
     options: timeLists,
     defaultValue: timeSelected,
     onChange: function onChange(startTime) {
-      return !orderState.loading && handleChangeTime(startTime);
+      return handleChangeSelect(startTime);
     },
     placeholder: t('SELECT_TIME', 'Select a time')
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {

@@ -186,7 +186,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, [mapErrors]);
   (0, _react.useEffect)(function () {
-    if (orderState.loading && !businessesList.loading) {
+    if (orderState.loading && businessesList.loading) {
       //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
       //  window.history.pushState({ path: newurl }, '', newurl)
       var params = new URLSearchParams();
@@ -349,7 +349,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return handleClickPrevItems();
     },
     color: "primary"
-  }, t('SHOW_PREVIOUS_BUSINESS', 'Show previous businesses...'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, businessesList.loading && prevPage.loading && _toConsumableArray(Array(paginationProps.pageSize).keys()).map(function (i) {
+  }, t('SHOW_PREVIOUS_BUSINESS', 'Show previous businesses...'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, (businessesList.loading || prevPage.loading) && _toConsumableArray(Array(paginationProps.pageSize).keys()).map(function (i) {
     var _orderState$options3;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {

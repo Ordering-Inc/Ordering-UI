@@ -66,6 +66,11 @@ var extraOptions = [{
   displayName: 'view account',
   key: 'view_account'
 }, {
+  name: 'saved_places',
+  pathname: '/saved_places',
+  displayName: 'My saved places',
+  key: 'MY_ADDRESSES'
+}, {
   name: 'help',
   pathname: '/help',
   displayName: 'help',

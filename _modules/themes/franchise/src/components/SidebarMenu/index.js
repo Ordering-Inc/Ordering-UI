@@ -29,6 +29,8 @@ var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCirc
 
 var _BiHelpCircle = _interopRequireDefault(require("@meronex/icons/bi/BiHelpCircle"));
 
+var _MdMyLocation = _interopRequireDefault(require("@meronex/icons/md/MdMyLocation"));
+
 var _orderingComponents = require("ordering-components");
 
 var _styledComponents = require("styled-components");
@@ -229,6 +231,19 @@ var SidebarMenu = function SidebarMenu(props) {
     isHome: isHome,
     active: window.location.pathname === '/profile'
   }, t('PROFILE', 'Profile'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    isHome: isHome,
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'saved_places'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
+    active: window.location.pathname === '/saved_places'
+  }, /*#__PURE__*/_react.default.createElement(_MdMyLocation.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
+    active: window.location.pathname === '/saved_places'
+  }, t('MY_ADDRESSES', 'My Saved places'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({

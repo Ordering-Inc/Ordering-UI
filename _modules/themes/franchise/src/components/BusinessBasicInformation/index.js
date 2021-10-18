@@ -31,8 +31,6 @@ var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../../../../utils");
 
-var _Select = require("../../styles/Select");
-
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -161,15 +159,11 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SEARCH_PRODUCTS) || 'Search Products'),
-    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended
-  }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    notAsync: true,
-    notReload: true,
-    options: sortByOptions,
-    defaultValue: sortByValue,
-    onChange: function onChange(val) {
-      return handleChangeSortBy && handleChangeSortBy(val);
-    }
+    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended,
+    handleChangeSortBy: handleChangeSortBy,
+    isFilter: true,
+    sortByOptions: sortByOptions,
+    defaultValue: sortByValue
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     open: openBusinessInformation,
