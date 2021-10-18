@@ -243,6 +243,12 @@ Object.defineProperty(exports, "MyOrders", {
     return _MyOrders.MyOrders;
   }
 });
+Object.defineProperty(exports, "MySavedPlaces", {
+  enumerable: true,
+  get: function get() {
+    return _MySavedPlaces.MySavedPlaces;
+  }
+});
 Object.defineProperty(exports, "OrderDetails", {
   enumerable: true,
   get: function get() {
@@ -443,6 +449,8 @@ var _MomentContent = require("./src/components/MomentContent");
 var _MomentControl = require("./src/components/MomentControl");
 
 var _MyOrders = require("./src/components/MyOrders");
+
+var _MySavedPlaces = require("./src/components/MySavedPlaces");
 
 var _Modal = require("./src/components/Modal");
 

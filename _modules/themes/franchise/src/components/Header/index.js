@@ -432,7 +432,11 @@ var Header = function Header(props) {
     onSaveAddress: function onSaveAddress() {
       return setModalIsOpen(false);
     }
-  })), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null), modalSelected === 'delivery' && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorContent.OrderTypeSelectorContent, {
+  })), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, {
+    onClose: function onClose() {
+      return setModalIsOpen(false);
+    }
+  }), modalSelected === 'delivery' && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorContent.OrderTypeSelectorContent, {
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
