@@ -40,7 +40,7 @@ export const BusinessSearch = styled.div`
   }
 `
 
-export const DeleteContent = styled.span`
+export const DeleteContent = styled.div`
   position: absolute;
   font-weight: 300;
   padding: 10px 0;
@@ -62,6 +62,12 @@ export const DeleteContent = styled.span`
       transform: translate(25%, 0%);
     `}
   }
+
+  svg {
+    font-size: 20px;
+    cursor: pointer;
+    color: #414954;
+  }
 `
 export const SearchIcon = styled.div`
   background-image: url(${props => props.theme?.images?.general?.searchIcon});
@@ -69,5 +75,37 @@ export const SearchIcon = styled.div`
   background-repeat: no-repeat;
   background-size: 15px;
   background-color: ${props => props.theme?.colors?.backgroundPage};
+`
 
+export const SortList = styled.div`
+  position: absolute;
+  background: #cccccc;
+  border-radius: 7.6px;
+  overflow: hidden;
+  right: 0;
+  ${props => props.theme?.rtl && css`
+    left: 0;
+    right: initial;
+  `}
+`
+
+export const SortItem = styled.div`
+  padding: 3px 10px;
+  font-size: 15px;
+  min-width: 60px;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background: #c4c4c4;
+  }
+
+  ${({ active }) => active && css`
+    background: #bababa;
+  `}
+`
+
+export const SortWrapper = styled.div`
+  position: relative;
 `
