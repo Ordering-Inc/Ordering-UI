@@ -38,7 +38,8 @@ const MomentControlUI = (props) => {
     timeSelected,
     handleAsap,
     handleChangeDate,
-    handleChangeTime
+    handleChangeTime,
+    onClose
   } = props
 
   const [{ configs }] = useConfig()
@@ -51,6 +52,7 @@ const MomentControlUI = (props) => {
   const [maxDate, setMaxDate] = useState(new Date())
   const [isASP, setIsASP] = useState(true)
   const [timeLists, setTimeLists] = useState(null)
+  const [isSelectedTime, setIsSelectedTime] = useState(false)
 
   const onDateChange = (value) => {
     onChange(value)
@@ -73,6 +75,11 @@ const MomentControlUI = (props) => {
   const handleRemoveDate = () => {
     !orderState.loading && handleAsap()
     setIsASP(true)
+  }
+
+  const handleChangeSelect = (startTime) => {
+    !orderState.loading && handleChangeTime(startTime)
+    setIsSelectedTime(true)
   }
 
   useEffect(() => {
@@ -119,6 +126,13 @@ const MomentControlUI = (props) => {
       setTimeLists(_timeLists)
     }
   }, [hoursList])
+
+  useEffect(() => {
+    if (timeSelected && onClose && isSelectedTime) {
+      setIsSelectedTime(false)
+      onClose()
+    }
+  }, [timeSelected])
 
   useEffect(() => {
     if (isASP) handleCheckBoxChange(true)
@@ -181,7 +195,7 @@ const MomentControlUI = (props) => {
               <Select
                 options={timeLists}
                 defaultValue={timeSelected}
-                onChange={(startTime) => !orderState.loading && handleChangeTime(startTime)}
+                onChange={(startTime) => handleChangeSelect(startTime)}
                 placeholder={t('SELECT_TIME', 'Select a time')}
               />
             </HourListWrapper>

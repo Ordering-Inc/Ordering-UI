@@ -33,6 +33,11 @@ export const CardContainer = styled.div`
 
     @media (min-width: 993px) {
       width: calc(33% - 40px);
+      margin: 10px 10px 10px 0;
+
+      ${props => props.theme.rtl && css`
+        margin: 10px 0 10px 10px;
+      `}
     }
   `}
 `
@@ -147,20 +152,4 @@ export const CardLogo = (props) => {
 export const PriceWrapper = styled.div`
   display: flex;
   align-items: center;
-
-  .off-price {
-    font-size: 10px;
-    color: #909BA9;
-    margin-left: 5px;
-    text-decoration: line-through;
-
-    ${props => props.theme.rtl && css`
-      margin-right: 5px;
-      margin-left: 0;
-    `}
-
-    @media (min-width: 1024px) {
-      font-size: 13px;
-    }
-  }
 `

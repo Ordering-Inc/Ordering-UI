@@ -137,7 +137,12 @@ export const EmptyBtnWrapper = styled.div`
   button {
     color: #748194;
     background: #F8F9FA;
+    border: 1px solid #F8F9FA;
     border-radius: 7.6px;
+    height: 44px;
+    font-size: 14px;
+    padding-left: 25px;
+    padding-right: 25px;
   }
 `
 

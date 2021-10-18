@@ -67,6 +67,7 @@ export const WrapperSearch = styled.div`
     `}
     input {
       width: 100%;
+      background-size: 20px 18px;
     }
   }
 
