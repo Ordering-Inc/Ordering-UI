@@ -43,7 +43,7 @@ const LogoutButtonUI = (props) => {
 
   return (
     <>
-      <BiLogOut onClick={handleOpenConfirm} size={20} color={theme.colors.darkTextColor}/>
+      <BiLogOut onClick={handleOpenConfirm} size={20} color={theme.colors.darkTextColor} />
       {openConfirm && (
         <Confirm
           open={openConfirm}

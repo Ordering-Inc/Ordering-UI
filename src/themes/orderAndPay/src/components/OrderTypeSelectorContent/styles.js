@@ -8,7 +8,7 @@ export const OrderTypeSelectorContainer = styled.div`
   width: 100%;
   text-align: left;
   padding-top: 10px;
-  padding: 20px 40px;
+  padding: 30px 40px;
   box-sizing: border-box;
 `
 
@@ -96,9 +96,10 @@ export const OrderStartWrapper = styled.div`
 export const OrderTypeListTitle = styled.h1`
   text-align: center;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   color: ${props => props.theme.colors.darkTextColor};
   text-align: left;
+  margin: 0
 `
 
 export const Logo = styled.div`
@@ -192,4 +193,15 @@ export const TitleContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+`
+
+export const LogoutButtonContainer = styled.div`
+  position: relative;
+  top: 3px;
+  margin-left: 10px
+`
+
+export const IconsContainer = styled.div`
+  display: flex;
+  align-items: center;
 `

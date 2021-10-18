@@ -30,7 +30,7 @@ const BusinessProductsListUI = (props) => {
   const [, t] = useLanguage()
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+    const goToCategory = () => {
       const categoriesOffset = getCategoriesOffset()
       if (categoriesOffset?.length > 0) {
         const lastContainerHeight = document.getElementsByClassName('last-category')[0]?.offsetHeight
@@ -46,9 +46,10 @@ const BusinessProductsListUI = (props) => {
           }
         })
       }
-    })
+    }
+    window.addEventListener('scroll', goToCategory)
     return () => {
-      window.removeEventListener('scroll')
+      window.removeEventListener('scroll', goToCategory)
     }
   }, [])
 

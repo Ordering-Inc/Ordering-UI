@@ -68,7 +68,7 @@ const MessagesUI = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
-  const [{ parseDate, getTimeAgo }] = useUtils()
+  const [{ parseDate, getTimeAgo, optimizeImage }] = useUtils()
   const buttonRef = useRef(null)
   const [modalImage, setModalImage] = useState({ open: false, src: '' })
   const imageRef = useRef(null)
@@ -305,7 +305,7 @@ const MessagesUI = (props) => {
                 {message.type === 3 && user.id === message.author_id && (
                   <MessageCustomer>
                     <BubbleCustomer name='image'>
-                      <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
+                      <ChatImage><img src={optimizeImage(message.source, 'h_300,c_limit')} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
                       {message.comment && (
                         <>
                           {message.comment}
@@ -336,7 +336,7 @@ const MessagesUI = (props) => {
                           {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
                         </MyName>
                       </strong>
-                      <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
+                      <ChatImage><img src={optimizeImage(message.source, 'h_300,c_limit')} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
                       {message.comment && (
                         <>
                           {message.comment}
@@ -367,7 +367,7 @@ const MessagesUI = (props) => {
         {
           business && (
             <ImageWithFallback
-              src={order.business?.logo || theme.images?.dummies?.businessLogo}
+              src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_300,c_limit')}
               fallback={<FaUserAlt className='fallback' />}
             />
           )
@@ -375,7 +375,7 @@ const MessagesUI = (props) => {
         {
           driver && (
             <ImageWithFallback
-              src={order.driver?.photo}
+              src={optimizeImage(order.driver?.photo, 'h_300,c_limit')}
               fallback={<RiUser2Fill className='fallback' />}
             />
           )

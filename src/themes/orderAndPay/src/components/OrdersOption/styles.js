@@ -283,7 +283,7 @@ export const TitleContainer = styled.div`
   margin-bottom: 30px;
   h1{
     text-transform: capitalize;
-    font-size: 24px;
+    font-size: 18px;
     cursor: pointer;
     margin: 0;
     font-weight: 600;

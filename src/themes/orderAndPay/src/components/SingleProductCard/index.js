@@ -75,7 +75,7 @@ export const SingleProductCard = (props) => {
             <CardLogo
               className='image'
               soldOut={isSoldOut || maxProductQuantity <= 0}
-              bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
+              bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_300,c_limit')}
             />
           </WrapLogo>
         ) : (
