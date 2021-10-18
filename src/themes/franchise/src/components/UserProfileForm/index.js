@@ -9,7 +9,6 @@ import {
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
-import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 
 import { ProfileOptions } from './ProfileOptions'
@@ -26,7 +25,6 @@ import {
   Image,
   SideForm,
   Camera,
-  SavedPlaces,
   UploadImageIcon,
   SkeletonWrapper,
   WrapperForm
@@ -34,7 +32,6 @@ import {
 
 const UserProfileFormUI = (props) => {
   const {
-    userData,
     handleButtonUpdateClick,
     handlechangeImage,
     formState,
@@ -113,6 +110,7 @@ const UserProfileFormUI = (props) => {
         <ProfileOptions value='account' />
       )}
       <Container>
+        <h1>{t('ACCOUNT', 'Account')}</h1>
         <UserProfileContainer mbottom={isHiddenAddress && 25}>
           <UserImage className='user-image'>
             <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
@@ -148,12 +146,6 @@ const UserProfileFormUI = (props) => {
             </WrapperForm>
           </SideForm>
         </UserProfileContainer>
-        {(userData?.addresses || user?.addresses) && !isHiddenAddress && (
-          <SavedPlaces>
-            <h1>{t('MY_ADDRESSES', 'My Saved places')}</h1>
-            <AddressList isModal addressList={user?.addresses} />
-          </SavedPlaces>
-        )}
       </Container>
       <Alert
         title={t('PROFILE', 'Profile')}

@@ -1,6 +1,14 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  > h1 {
+    width: 90%;
+    font-weight: 600;
+    font-size: 32px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`
 
 export const UserProfileContainer = styled.div`
   display: flex;
@@ -9,11 +17,12 @@ export const UserProfileContainer = styled.div`
   align-items: center;
   text-align: center;
   width: 90%;
-  margin: 25px auto ${props => props.mbottom ? `${props.mbottom}px` : 'auto'};
+  margin: 25px auto;
 
   @media (min-width: 768px) {
     align-items: flex-start;
     flex-direction: row;
+    justify-content: space-between;
   }
 `
 
@@ -36,7 +45,6 @@ export const Image = styled.div`
   height: 170px;
   border-radius: 7.6px;
   overflow: hidden;
-  padding: 20px;
   cursor: -webkit-grab;
   cursor: grab;
 
@@ -66,7 +74,7 @@ export const SideForm = styled.div`
     width: 70%;
     display: flex;
     align-items: center;
-    margin: 30px 0px 0px 30px;
+    margin: 0px 0px 0px 30px;
     ${props => props.theme?.rtl && css`
       margin: auto 30px auto 0px;
     `}
@@ -111,50 +119,6 @@ export const UserData = styled.div`
     ${props => props.theme?.rtl && css`
      text-align: right;
     `}
-  }
-
-`
-
-export const SavedPlaces = styled.div`
-  width: 90%;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 40px;
-  margin-bottom: 20px;
-
-
-  h1{
-    font-size: 24px;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-    text-align: right;
-    `}
-  }
-
-  > div{
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-  }
-
-  button{
-    width: 100%;
-    align-self: center;
-  }
-
-  @media (min-width: 768px){
-    width: 90%;
-    margin-top: 40px;
-    h1 {
-      text-align: center;
-    }
-    ul{
-      width: 100%;
-    }
-    button {
-      width: 50%;
-      align-self: flex-end;
-    }
   }
 
 `

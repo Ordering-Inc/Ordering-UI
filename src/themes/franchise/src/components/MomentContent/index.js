@@ -21,6 +21,7 @@ export const MomentContent = (props) => {
   currentDate.setHours(23)
   currentDate.setMinutes(59)
   const momentProps = {
+    ...props,
     maxDate: currentDate
   }
 
