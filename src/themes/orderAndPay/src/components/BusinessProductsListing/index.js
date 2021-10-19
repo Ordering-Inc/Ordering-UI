@@ -20,9 +20,8 @@ import {
   BusinessContent,
   BusinessCategoryProductWrapper,
   ModalIcon,
-  GoBackContainer,
-  // OrderTypeWrapperButton,
-  LogoutButtonContainer
+  GoBackContainer
+  // OrderTypeWrapperButton
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -35,7 +34,6 @@ import { Modal } from '../Modal'
 import { FloatingButton } from '../FloatingButton'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
-import { LogoutButton } from '../LogoutButton'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -72,7 +70,7 @@ const BusinessProductsListingUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ carts }] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
   const [events] = useEvent()
   const [{ auth }] = useSession()
   const location = useLocation()
@@ -82,7 +80,7 @@ const BusinessProductsListingUI = (props) => {
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [category, setCategory] = useState({ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') })
-
+  const [isAnimation, setIsAnimation] = useState(false)
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
   // const sortByOptions = [
@@ -115,7 +113,7 @@ const BusinessProductsListingUI = (props) => {
     const categoryTitle = document.getElementsByClassName(category.name)[0]
     if (categoryTitle) {
       window.scrollTo({
-        top: categoryTitle.offsetTop - 75,
+        top: categoryTitle.offsetTop,
         behavior: 'smooth'
       })
     } else if (categoryId === 'featured') {
@@ -132,13 +130,7 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const closeModalProductForm = () => {
-    setModalIsOpen(false)
-    handleUpdateInitialRender(false)
-    updateProductModal(null)
-    setCurProduct(null)
-    onProductRedirect({
-      slug: business?.slug
-    })
+    fading()
   }
 
   const handleScroll = useCallback(() => {
@@ -159,6 +151,21 @@ const BusinessProductsListingUI = (props) => {
     onCheckoutRedirect(currentCart?.uuid)
     setOpenUpselling(false)
     setCanOpenUpselling(false)
+  }
+
+  const fading = () => {
+    setIsAnimation(true)
+    const timeout = setTimeout(function () {
+      setIsAnimation(false)
+      setModalIsOpen(false)
+      handleUpdateInitialRender(false)
+      updateProductModal(null)
+      setCurProduct(null)
+      onProductRedirect({
+        slug: business?.slug
+      })
+      clearInterval(timeout)
+    }, 300)
   }
 
   useEffect(() => {
@@ -202,14 +209,9 @@ const BusinessProductsListingUI = (props) => {
         <ModalIcon>
           <GoBackContainer>
             <BsArrowLeft size={20} onClick={() => handleGoBack()} color={theme.colors.arrowColor} />
-            <img src={business?.logo} />
+            <img src={optimizeImage(business?.logo, 'h_200,c_limit')} />
             <h1>{business?.name}</h1>
           </GoBackContainer>
-          {auth && (
-            <LogoutButtonContainer>
-              <LogoutButton />
-            </LogoutButtonContainer>
-          )}
         </ModalIcon>
         {
           !loading && business?.id && (
@@ -249,6 +251,7 @@ const BusinessProductsListingUI = (props) => {
                         handleClearSearch={handleChangeSearch}
                         errorQuantityProducts={errorQuantityProducts}
                         setCategorySelected={setCategory}
+                        categorySelected={category}
                       />
                     </WrapContent>
                   </BusinessCategoryProductWrapper>
@@ -335,6 +338,7 @@ const BusinessProductsListingUI = (props) => {
         isProductForm
         hideCloseDefault={productModal.product || curProduct}
         customModal
+        isAnimation={isAnimation}
       >
 
         {productModal.loading && !productModal.error && (

@@ -428,7 +428,7 @@ export const ModalIconHeader = styled.div`
   margin-bottom: 20px;
   align-items: center;
   box-shadow: 0px 1px 4px 0px #0000001A;
-  padding: 10px 40px 0 40px;
+  padding: 13px 40px 0 40px;
   img, [class='fallback'] {
     margin-left: 15px;
     box-shadow: 0px 1px 4px 0px #0000001A;

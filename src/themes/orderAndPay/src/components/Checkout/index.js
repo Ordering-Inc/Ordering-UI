@@ -25,7 +25,6 @@ import {
   PaymentMethodContainer,
   DriverTipContainer,
   CartContainer,
-  WrapperPlaceOrderButton,
   WarningMessage,
   CartsList,
   WarningText,
@@ -271,7 +270,7 @@ const CheckoutUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <Container>
         <ModalIcon>
-          <BsArrowLeft size={20} onClick={() => handleStoreRedirect(cart?.business?.slug)} />
+          <BsArrowLeft size={20} onClick={() => handleStoreRedirect(cart?.business?.slug)} color={theme.colors.arrowColor} />
         </ModalIcon>
         <WrapperLeftContainer>
           <WrapperLeftContent>

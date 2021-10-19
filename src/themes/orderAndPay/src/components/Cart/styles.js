@@ -162,7 +162,7 @@ export const Title = styled.h1`
 `
 
 export const ModalIcon = styled.div`
-  margin: 5px 7px;
+  margin: 13px 0px;
   display: flex;
   align-items:center;
   margin-right: 20px;

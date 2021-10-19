@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductOption as ProductOptionController, useLanguage } from 'ordering-components'
+import { ProductOption as ProductOptionController, useLanguage, useUtils } from 'ordering-components'
 
 import {
   Container,
@@ -17,7 +17,7 @@ const ProductOptionUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-
+  const [{ optimizeImage }] = useUtils()
   let maxMin = `(${t('MIN', 'Min')}: ${option.min} / ${t('MAX', 'Max')}: ${option.max})`
   if (option.min === 1 && option.max === 1) {
     maxMin = t('REQUIRED', 'Required')
@@ -39,7 +39,7 @@ const ProductOptionUI = (props) => {
         <WrapHeader>
           <TitleContainer>
             {option.image && option.image !== '-' && (
-              <OptionThumbnail src={option.image} />
+              <OptionThumbnail src={optimizeImage(option.image, 'h_300,c_limit')} />
             )}
             <div>
               <Title>{option.name}</Title>
