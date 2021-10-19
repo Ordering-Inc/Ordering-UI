@@ -9,8 +9,8 @@ export const Container = styled.div`
 `
 
 const modalAnimation = keyframes`
-  0% {opacity: 1}
-  100% {opacity: 0}
+  0% {transform: translate(0,0)}
+  100% {transform: translate(0, 100%)}
 `
 
 export const ModalDialog = styled.div`
@@ -28,7 +28,7 @@ export const ModalDialog = styled.div`
   &:hover {
     ${({ isAnimation }) => isAnimation && css`
       animation-name: ${modalAnimation};
-      animation-duration: 1.2s;
+      animation-duration: 0.5s;
       animation-iteration-count: 1;
     `}
   }

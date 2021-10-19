@@ -24,7 +24,7 @@ const BusinessProductsCategoriesUI = (props) => {
           key={category.name}
           className={`category ${category.id === 'featured' ? 'special' : ''}`}
           active={categorySelected?.id === category.id}
-          onClick={() => onClickCategoryCustom(category, category.id, i + 1, hash.findIndex(cat => categorySelected?.id === cat.id))}
+          onClick={() => onClickCategoryCustom(category, category.id)}
           borderBottom
         >
           {category.name}

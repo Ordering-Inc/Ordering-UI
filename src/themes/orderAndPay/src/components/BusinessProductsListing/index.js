@@ -109,20 +109,11 @@ const BusinessProductsListingUI = (props) => {
     }
   }
 
-  const onClickCategory = (category, categoryId, index, previousIndex) => {
+  const onClickCategory = (category, categoryId) => {
     const categoryTitle = document.getElementsByClassName(category.name)[0]
-    const categories = document.getElementsByClassName('category-lists')[0]
-    const categoryWidth = categoryTitle?.scrollWidth - 10
-    // al dar click calcular cartegory offsetWidth + la position en el container de categorias
-    console.log(index, previousIndex)
-    categories.scrollBy({
-      top: 0,
-      left: index === 1 || (categoryId === 'featured' && index === 2) ? -100 : index === previousIndex ? -categoryWidth : index > previousIndex ? categoryWidth * Math.abs(index - previousIndex) : -categoryWidth * Math.abs(index - previousIndex),
-      behavior: 'smooth'
-    })
     if (categoryTitle) {
       window.scrollTo({
-        top: categoryTitle.offsetTop - 75,
+        top: categoryTitle.offsetTop,
         behavior: 'smooth'
       })
     } else if (categoryId === 'featured') {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ProductsList, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
@@ -24,10 +24,27 @@ const BusinessProductsListUI = (props) => {
     searchValue,
     isCartOnProductsList,
     errorQuantityProducts,
-    setCategorySelected
+    setCategorySelected,
+    categorySelected
   } = props
 
   const [, t] = useLanguage()
+  const [indexCategorySelected, setIndexCategorySelected] = useState(0)
+
+  useEffect(() => {
+    const categories = document.getElementsByClassName('category-lists')
+    const categoriesOffset = getCategoriesOffset()
+
+    if (categorySelected?.name && categorySelected?.name !== 'All') {
+      const index = categoriesOffset.findIndex(category => category?.name === categorySelected?.name)
+      setIndexCategorySelected(index)
+      categories[0].scrollBy({
+        top: 0,
+        left: index > indexCategorySelected ? categoriesOffset?.length * 8 : -categoriesOffset?.length * 8,
+        behavior: 'smooth'
+      })
+    }
+  }, [categorySelected?.name])
 
   useEffect(() => {
     const goToCategory = () => {
@@ -35,10 +52,10 @@ const BusinessProductsListUI = (props) => {
       if (categoriesOffset?.length > 0) {
         const lastContainerHeight = document.getElementsByClassName('last-category')[0]?.offsetHeight
         categoriesOffset.map((category, i, hash) => {
-          if (category.offset - 125 < window.scrollY && hash[i + 1]?.offset > window.scrollY) {
-            setCategorySelected(category)
-          } else if (window.scrollY + (categories.length > 3 ? lastContainerHeight + 125 : 100) > hash[categoriesOffset?.length - 1]?.offset) {
+          if (window.scrollY + (categories.length > 3 ? lastContainerHeight + 125 : 100) > hash[categoriesOffset?.length - 1]?.offset) {
             setCategorySelected(hash[categoriesOffset?.length - 1])
+          } else if (category.offset < window.scrollY && hash[i + 1]?.offset > window.scrollY) {
+            setCategorySelected(category)
           } else if (window.scrollY > 100 && window.scrollY < hash[2]?.offset && category?.name === t('FEATURED', 'Featured')) {
             setCategorySelected(category)
           } else if (window.scrollY === 0) {
