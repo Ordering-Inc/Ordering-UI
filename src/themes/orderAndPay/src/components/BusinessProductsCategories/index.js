@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
@@ -14,12 +14,12 @@ const BusinessProductsCategoriesUI = (props) => {
     categorySelected,
     featured,
     openBusinessInformation,
-    onClickCategoryCustom,
+    onClickCategoryCustom
   } = props
 
   const ProductCategories = () => {
     return (
-      categories && categories.length && categories.map(category => (
+      categories && categories.length && categories.map((category, i, hash) => (
         <Tab
           key={category.name}
           className={`category ${category.id === 'featured' ? 'special' : ''}`}

@@ -24,6 +24,7 @@ import {
   ProductOptionsList,
   ProductQuantity
 } from './styles'
+import { useTheme } from 'styled-components'
 
 export const ProductItemAccordion = (props) => {
   const {
@@ -40,7 +41,8 @@ export const ProductItemAccordion = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
+  const theme = useTheme()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -109,11 +111,9 @@ export const ProductItemAccordion = (props) => {
           isCheckout={isCheckout}
         >
           <ProductInfo className='info' isOrderDetails={isOrderDetails}>
-            {product?.images && (
-              <WrapperProductImage>
-                <ProductImage bgimage={product?.images} />
-              </WrapperProductImage>
-            )}
+            <WrapperProductImage>
+              <ProductImage bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')} />
+            </WrapperProductImage>
             {isCartProduct && !isCartPending && getProductMax ? (
               <ProductSelect
                 ref={productSelect}

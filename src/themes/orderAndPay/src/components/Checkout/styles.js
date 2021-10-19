@@ -200,6 +200,7 @@ export const DriverTipDivider = styled.div`
   }
 `
 export const ModalIcon = styled.div`
+  margin-top: 3px;
   margin-bottom: 20px;
 `
 
