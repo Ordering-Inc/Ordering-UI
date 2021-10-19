@@ -50,6 +50,7 @@ import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { SearchBar } from './src/components/SearchBar'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
+import { SignUpBusiness } from './src/components/SignUpBusiness'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { StripeElementsForm } from './src/components/StripeElementsForm'
 import { StripeRedirectForm } from './src/components/StripeRedirectForm'
@@ -115,6 +116,7 @@ export {
   SearchBar,
   SidebarMenu,
   SignUpForm,
+  SignUpBusiness,
   SingleProductCard,
   StripeElementsForm,
   StripeRedirectForm,

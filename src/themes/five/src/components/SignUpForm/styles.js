@@ -266,3 +266,26 @@ export const TermsConditionWrapper = styled.div`
     }
   }
 `
+
+export const BussinessAndDriverSignUp = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 95%;
+
+  @media (min-width: 993px) {
+    flex-direction: row;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 5px;
+
+    @media (min-width: 993px) {
+      width: 48%;
+    }
+  }
+`
