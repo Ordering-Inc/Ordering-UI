@@ -17,7 +17,7 @@ var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -33,7 +33,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -111,27 +111,27 @@ var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
     orderTypes: props.orderTypes || [{
       value: 1,
       text: t('DELIVERY', 'Delivery'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
+      description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description'),
       image: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$deliver = _theme$images.deliveryTypes) === null || _theme$images$deliver === void 0 ? void 0 : _theme$images$deliver.delivery
     }, {
       value: 2,
       text: t('PICKUP', 'Pickup'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
+      description: t('ORDERTYPE_DESCRIPTION_PICKUP', 'Pickup description'),
       image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$delive = _theme$images2.deliveryTypes) === null || _theme$images2$delive === void 0 ? void 0 : _theme$images2$delive.pickUp
     }, {
       value: 3,
       text: t('EAT_IN', 'Eat in'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
+      description: t('ORDERTYPE_DESCRIPTION_EATIN', 'Eat in description'),
       image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$delive = _theme$images3.deliveryTypes) === null || _theme$images3$delive === void 0 ? void 0 : _theme$images3$delive.eatIn
     }, {
       value: 4,
       text: t('CURBSIDE', 'Curbside'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
+      description: t('ORDERTYPE_DESCRIPTION_CURBSIDE', 'Curbside description'),
       image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$delive = _theme$images4.deliveryTypes) === null || _theme$images4$delive === void 0 ? void 0 : _theme$images4$delive.curbside
     }, {
       value: 5,
       text: t('DRIVE_THRU', 'Drive thru'),
-      description: 'Lorem ipsum dolor sit amet, consectetur.',
+      description: t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description'),
       image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$delive = _theme$images5.deliveryTypes) === null || _theme$images5$delive === void 0 ? void 0 : _theme$images5$delive.driveThru
     }]
   });
