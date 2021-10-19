@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components'
 export const FormRedirect = styled.form`
   display: flex;
   flex-direction: column;
-  padding-left: 10px;
+  padding-left: 5px;
   ${props => props.theme?.rtl && css`
-    padding-right: 10px;
+    padding-right: 5px;
     padding-left: 0px;
   `}
   button {

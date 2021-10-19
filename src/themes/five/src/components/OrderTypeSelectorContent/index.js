@@ -76,31 +76,31 @@ export const OrderTypeSelectorContent = (props) => {
       {
         value: 1,
         text: t('DELIVERY', 'Delivery'),
-        description: 'Lorem ipsum dolor sit amet, consectetur.',
+        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description'),
         image: theme.images?.deliveryTypes?.delivery
       },
       {
         value: 2,
         text: t('PICKUP', 'Pickup'),
-        description: 'Lorem ipsum dolor sit amet, consectetur.',
+        description: t('ORDERTYPE_DESCRIPTION_PICKUP', 'Pickup description'),
         image: theme.images?.deliveryTypes?.pickUp
       },
       {
         value: 3,
         text: t('EAT_IN', 'Eat in'),
-        description: 'Lorem ipsum dolor sit amet, consectetur.',
+        description: t('ORDERTYPE_DESCRIPTION_EATIN', 'Eat in description'),
         image: theme.images?.deliveryTypes?.eatIn
       },
       {
         value: 4,
         text: t('CURBSIDE', 'Curbside'),
-        description: 'Lorem ipsum dolor sit amet, consectetur.',
+        description: t('ORDERTYPE_DESCRIPTION_CURBSIDE', 'Curbside description'),
         image: theme.images?.deliveryTypes?.curbside
       },
       {
         value: 5,
         text: t('DRIVE_THRU', 'Drive thru'),
-        description: 'Lorem ipsum dolor sit amet, consectetur.',
+        description: t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description'),
         image: theme.images?.deliveryTypes?.driveThru
       }
     ]

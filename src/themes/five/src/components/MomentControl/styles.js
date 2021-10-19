@@ -22,7 +22,7 @@ export const CalendarWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  padding: 17px 15px 3px 15px;
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   border-radius: 7.6px;
@@ -65,6 +65,8 @@ export const CalendarWrapper = styled.div`
     .react-calendar__month-view__weekdays {
       font-size: 12px;
       color: #909BA9;
+      font-weight: normal;
+      text-transform: capitalize;
       abbr {
         text-decoration: none;
       }
@@ -82,15 +84,16 @@ export const CalendarWrapper = styled.div`
         border-radius: 50%;
 
         @media (min-width: 350px) {
-          width: 30px;
-          height: 30px;
+          width: 34px;
+          height: 32px;
         }
       }
     }
 
     .react-calendar__tile:disabled {
       background-color: transparent;
-      color: ${props => props.theme?.colors.disabled};
+      // color: ${props => props.theme?.colors.disabled};
+      cursor: not-allowed;
     }
 
     .react-calendar__navigation {
@@ -104,6 +107,10 @@ export const CalendarWrapper = styled.div`
           ${props => props.theme.rtl && css`
             transform: rotateZ(180deg);
           `}
+        }
+
+        &:disabled {
+          cursor: not-allowed;
         }
 
         span {
@@ -134,7 +141,7 @@ export const DatePickerWrapper = styled.div`
   margin-bottom: 10px;
 
   @media (min-width: 430px) {
-    width: 300px;
+    width: 325px;
   }
 
   .react-datepicker-popper {
@@ -149,7 +156,7 @@ export const DatePickerWrapper = styled.div`
     cursor: pointer;
     font-size: 20px;
     right: 5px;
-    top: 11px;
+    top: 9px;
     color: #B1BCCC;
     position: absolute;
 
@@ -161,6 +168,11 @@ export const DatePickerWrapper = styled.div`
 
   input {
     width: 100%;
+    color: #B1BCCC;
+    font-size: 12px;
+    border: 1px solid #DEE2E6;
+    border-radius: 7.6px;
+    padding: 9px 14px;
   }
 `
 

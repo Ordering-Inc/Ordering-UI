@@ -75,9 +75,9 @@ export const SidebarContent = styled.div`
 
 export const MenuClose = styled.button`
   position: absolute;
-  top: 0;
+  top: 7px;
   max-width: 100%;
-  margin: 6px;
+  margin: 10px;
   display: inline-flex;
   min-height: 35px;
   border-radius: 40px;
