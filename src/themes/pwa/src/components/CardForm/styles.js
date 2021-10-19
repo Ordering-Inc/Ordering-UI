@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const FormStripe = styled.form`
   display: flex;
   flex-direction: column;
+  padding: 0 5px;
 
   .StripeElement,
   .StripeElementIdeal {

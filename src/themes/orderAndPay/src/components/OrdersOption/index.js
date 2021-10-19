@@ -126,7 +126,7 @@ const OrdersOptionUI = (props) => {
       <Container>
         <TitleContainer>
           <h1>{t('MY_ORDERS', 'My orders')}</h1>
-          <RiHome2Line size='16' onClick={() => onRedirectPage({ page: 'ordertypes' })} />
+          <RiHome2Line size='20' onClick={() => onRedirectPage({ page: 'ordertypes' })} color={theme.colors.darkTextColor} />
         </TitleContainer>
         {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : (isShowTitles || !isBusinessesPage)) && (
           <>

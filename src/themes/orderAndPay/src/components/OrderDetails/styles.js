@@ -401,6 +401,7 @@ export const ModalIcon = styled.div`
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
+  margin-top: 3px;
   margin-bottom: 20px;
 `
 

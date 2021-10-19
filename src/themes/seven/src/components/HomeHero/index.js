@@ -41,7 +41,7 @@ export const HomeHero = (props) => {
   }
 
   const handleAddressInput = () => {
-    if (auth) {
+    if (auth && orderState?.options?.address?.location) {
       setModals({ ...modals, listOpen: true })
     } else {
       setModals({ ...modals, formOpen: true })

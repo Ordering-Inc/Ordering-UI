@@ -10,7 +10,6 @@ import {
   useConfig
 } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
-import { Input } from '../../styles/Inputs'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import MdClose from '@meronex/icons/md/MdClose'
 import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'

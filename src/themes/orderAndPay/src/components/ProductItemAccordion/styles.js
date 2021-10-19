@@ -65,7 +65,7 @@ const ProductImageStyled = styled.div`
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
-  background-size: contain;
+  background-size: cover;
   object-fit: cover;
   background-position: center;
   border-radius: 10px;

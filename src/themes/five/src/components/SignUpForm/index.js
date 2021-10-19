@@ -10,7 +10,8 @@ import {
   useLanguage,
   useConfig,
   useSession,
-  ReCaptcha
+  ReCaptcha,
+  useEvent
 } from 'ordering-components'
 import {
   SignUpContainer,
@@ -28,7 +29,8 @@ import {
   Title,
   InputWrapper,
   InputBeforeIcon,
-  TermsConditionWrapper
+  TermsConditionWrapper,
+  BussinessAndDriverSignUp
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -65,11 +67,13 @@ const SignUpFormUI = (props) => {
     saveCustomerUser,
     fieldsNotValid,
     signupData,
-    enableReCaptcha
+    enableReCaptcha,
+    closeModal
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
+  const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const emailInput = useRef(null)
@@ -117,6 +121,11 @@ const SignUpFormUI = (props) => {
       open: false,
       content: []
     })
+  }
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
+    closeModal && closeModal()
   }
 
   const onSubmit = () => {
@@ -404,6 +413,22 @@ const SignUpFormUI = (props) => {
               {elementLinkToLogin}
             </RedirectLink>
           )}
+          <BussinessAndDriverSignUp>
+            <Button
+              color='primaryContrast'
+              onClick={() => handleGoToPage({ page: 'signup_business' })}
+            >
+              {t('SIGNUP_FOR_BUSINESS', 'Sign up for business')}
+            </Button>
+            <Button
+              color='primaryContrast'
+              onClick={() => handleGoToPage({ page: 'signup_driver' })}
+              disabled
+            >
+              {t('SIGNUP_FOR_DRIVER', 'Sign up for driver')}
+            </Button>
+          </BussinessAndDriverSignUp>
+
           <LoginDivider>
             <DividerLine />
             <p>{t('OR', 'or')}</p>
@@ -413,7 +438,7 @@ const SignUpFormUI = (props) => {
             <>
               {Object.keys(configs).length > 0 ? (
                 <SocialButtons isPopup={isPopup}>
-                  { isFacebookLogin && configs?.facebook_id?.value && (
+                  {isFacebookLogin && configs?.facebook_id?.value && (
                     <FacebookLoginButton
                       appId={configs?.facebook_id?.value}
                       handleSuccessFacebookLogin={handleSuccessFacebook}

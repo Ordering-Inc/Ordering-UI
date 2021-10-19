@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 export const Container = styled.div`
   ${({ zx }) => zx && css`
@@ -6,6 +6,11 @@ export const Container = styled.div`
       z-index: ${zx} !important;
     }
   `}
+`
+
+const modalAnimation = keyframes`
+  0% {transform: translate(0,0)}
+  100% {transform: translate(0, 100%)}
 `
 
 export const ModalDialog = styled.div`
@@ -20,6 +25,13 @@ export const ModalDialog = styled.div`
   height: ${({ height }) => height || '100%'};;
   max-height: 100vh;
   overflow: auto;
+  &:hover {
+    ${({ isAnimation }) => isAnimation && css`
+      animation-name: ${modalAnimation};
+      animation-duration: 0.5s;
+      animation-iteration-count: 1;
+    `}
+  }
 
   @media (min-width: 769px) {
     width: ${({ width }) => width || '50%'};

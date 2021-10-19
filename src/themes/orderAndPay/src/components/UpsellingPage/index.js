@@ -34,7 +34,7 @@ const UpsellingPageUI = (props) => {
   const [, t] = useLanguage()
   const [actualProduct, setActualProduct] = useState(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
 
   useEffect(() => {
     if (!isCustomMode) {
@@ -77,7 +77,7 @@ const UpsellingPageUI = (props) => {
                     !upsellingProducts.error ? upsellingProducts.products.map((product, i) => (
                       <Item key={product.id} name={product.name}>
                         <Image>
-                          <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
+                          <img src={optimizeImage(product.images, 'h_300,c_limit')} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
                         </Image>
                         <Details>
                           <div>
@@ -136,7 +136,7 @@ const UpsellingPageUI = (props) => {
                           <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
                         </HorizontalDetails>
                         <HorizontalImage>
-                          <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
+                          <img src={optimizeImage(product.images, 'h_300,c_limit')} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
                         </HorizontalImage>
                       </HorizontalItem>
                     )) : (

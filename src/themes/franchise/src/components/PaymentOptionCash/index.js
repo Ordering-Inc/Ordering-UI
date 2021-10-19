@@ -48,7 +48,7 @@ export const PaymentOptionCash = (props) => {
   }, [value])
 
   useEffect(() => {
-    if ((value && parseFloat(value) < orderTotal) || !value) {
+    if (value && parseFloat(value) < orderTotal) {
       setErrorCash && setErrorCash(true)
     } else {
       setErrorCash && setErrorCash(false)

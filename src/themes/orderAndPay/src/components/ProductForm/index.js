@@ -72,7 +72,7 @@ const ProductOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, optimizeImage }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [tabValue, setTabValue] = useState('all')
@@ -206,7 +206,7 @@ const ProductOptionsUI = (props) => {
             <WrapperImage>
               <ProductImage id='product_image'>
                 <img
-                  src={product?.images || theme.images?.dummies?.product}
+                  src={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_300,c_limit')}
                   alt='product'
                   width='300px'
                   height='300px'

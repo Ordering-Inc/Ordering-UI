@@ -24,7 +24,8 @@ const ModalUI = (props) => {
     isTransparent,
     hideCloseDefault,
     isProductForm,
-    customModal
+    customModal,
+    isAnimation
   } = props
   const [, t] = useLanguage()
 
@@ -50,10 +51,12 @@ const ModalUI = (props) => {
   return (
     <ModalDialog
       className='popup-dialog'
+      id='popup-dialog'
       width={props.width}
       height={props.height}
       padding={props.padding}
       isTransparent={isTransparent}
+      isAnimation={isAnimation}
     >
       {isProductForm && (
         <ModalBackHeader customModal={customModal} />
