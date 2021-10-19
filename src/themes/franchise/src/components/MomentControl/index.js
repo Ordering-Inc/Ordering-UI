@@ -15,7 +15,6 @@ import { Select } from '../../styles/Select'
 import MdClose from '@meronex/icons/md/MdClose'
 import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
 import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   Title,
@@ -38,21 +37,18 @@ const MomentControlUI = (props) => {
     timeSelected,
     handleAsap,
     handleChangeDate,
-    handleChangeTime,
-    onClose
+    handleChangeTime
   } = props
 
   const [{ configs }] = useConfig()
   const [{ parseTime }] = useUtils()
   const [, t] = useLanguage()
-  const windowSize = useWindowSize()
   const [orderState] = useOrder()
   const [value, onChange] = useState(new Date())
   const [minDate, setMinDate] = useState(new Date())
   const [maxDate, setMaxDate] = useState(new Date())
   const [isASP, setIsASP] = useState(true)
   const [timeLists, setTimeLists] = useState(null)
-  const [isSelectedTime, setIsSelectedTime] = useState(false)
 
   const onDateChange = (value) => {
     onChange(value)
@@ -77,9 +73,19 @@ const MomentControlUI = (props) => {
     setIsASP(true)
   }
 
-  const handleChangeSelect = (startTime) => {
-    !orderState.loading && handleChangeTime(startTime)
-    setIsSelectedTime(true)
+  const formatMonthYear = (date) => {
+    return moment(date).format('MMMM')
+  }
+
+  const formatShortWeekday = (date) => {
+    return moment(date).format('dd')
+  }
+
+  const formatDay = (date) => {
+    const minMon = moment(minDate).format('MM')
+    const maxMon = moment(maxDate).format('MM')
+    const currMon = moment(date).format('MM')
+    return ((minMon === currMon) || (maxMon === currMon)) ? moment(date).format('D') : ''
   }
 
   useEffect(() => {
@@ -128,13 +134,6 @@ const MomentControlUI = (props) => {
   }, [hoursList])
 
   useEffect(() => {
-    if (timeSelected && onClose && isSelectedTime) {
-      setIsSelectedTime(false)
-      onClose()
-    }
-  }, [timeSelected])
-
-  useEffect(() => {
     if (isASP) handleCheckBoxChange(true)
   }, [isAsap])
 
@@ -172,6 +171,7 @@ const MomentControlUI = (props) => {
                   onChange={(val) => onDateChange(val)}
                   minDate={minDate}
                   maxDate={maxDate}
+                  dateFormat='MM/dd/yy'
                 />
                 <MdClose
                   onClick={handleRemoveDate}
@@ -180,13 +180,16 @@ const MomentControlUI = (props) => {
               <Calendar
                 onChange={(val) => onDateChange(val)}
                 value={value}
-                showDoubleView={windowSize.width > 1200}
                 next2Label=''
                 prev2Label=''
                 prevLabel={<MdKeyboardArrowLeft />}
                 nextLabel={<MdKeyboardArrowRight />}
                 minDate={minDate}
                 maxDate={maxDate}
+                formatMonthYear={(locale, date) => formatMonthYear(date)}
+                formatShortWeekday={(locale, date) => formatShortWeekday(date)}
+                formatDay={(locale, date) => formatDay(date)}
+                calendarType='US'
               />
             </CalendarWrapper>
             <HourListWrapper
@@ -195,7 +198,7 @@ const MomentControlUI = (props) => {
               <Select
                 options={timeLists}
                 defaultValue={timeSelected}
-                onChange={(startTime) => handleChangeSelect(startTime)}
+                onChange={(startTime) => !orderState.loading && handleChangeTime(startTime)}
                 placeholder={t('SELECT_TIME', 'Select a time')}
               />
             </HourListWrapper>
