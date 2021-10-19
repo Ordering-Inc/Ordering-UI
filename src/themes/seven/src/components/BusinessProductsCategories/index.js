@@ -23,6 +23,7 @@ const BusinessProductsCategoriesUI = (props) => {
           active={categorySelected?.id === category.id}
           onClick={() => handlerClickCategory(category)}
           isVerticalList={isVerticalList}
+          style={{ textTransform: 'uppercase' }}
         >
           <span>{category.name}</span>
           {categorySelected?.id === category.id && (

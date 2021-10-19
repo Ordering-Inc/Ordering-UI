@@ -7,8 +7,7 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession,
-  useConfig
+  useSession
 } from 'ordering-components'
 import {
   ProductsContainer,
@@ -58,14 +57,12 @@ const BusinessProductsListingUI = (props) => {
     isCartOnProductsList,
     errorQuantityProducts
   } = props
-  const [{ configs }] = useConfig()
-  const addProductWithOneClick = configs?.add_product_with_one_click?.value
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }, { addProduct }] = useOrder()
+  const [{ carts }] = useOrder()
   const [events] = useEvent()
-  const [{ auth, user }] = useSession()
+  const [{ user }] = useSession()
   const location = useLocation()
   const [openProduct, setModalIsOpen] = useState(false)
   const [openAgeConfirm, setOpenAgeConfirm] = useState(false)
@@ -79,7 +76,7 @@ const BusinessProductsListingUI = (props) => {
   const [ageError, setAgeError] = useState(false)
 
   const ageValidationCategorys = ['Vinos'.toUpperCase(), 'Cervezas'.toUpperCase()]
-  
+
   const handler = () => {
     setOpenBusinessInformation(true)
   }
@@ -224,7 +221,11 @@ const BusinessProductsListingUI = (props) => {
                       {t('OUR_MENU', 'Our Menu')}
                     </CartegoryTitle>
                     <BusinessProductsCategories
-                      categories={[{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                      categories={[
+                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                        ...business?.categories.sort((a, b) => a.rank - b.rank)
+                      ]}
                       categorySelected={categorySelected}
                       onClickCategory={handleChangeCategory}
                       featured={featuredProducts}

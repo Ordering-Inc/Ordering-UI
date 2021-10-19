@@ -26,6 +26,7 @@ const BusinessProductsListUI = (props) => {
     handleClearSearch,
     errorQuantityProducts
   } = props
+
   const [, t] = useLanguage()
 
   return (
@@ -42,9 +43,9 @@ const BusinessProductsListUI = (props) => {
             <h3>{category?.name}</h3>
             <ProductsListing>
               {
-                categoryState.products?.map((product, i) => (
+                category.products?.map(product => (
                   <SingleProductCard
-                    key={i}
+                    key={product?.id}
                     isSoldOut={(product.inventoried && !product.quantity)}
                     product={product}
                     businessId={businessId}
@@ -83,16 +84,16 @@ const BusinessProductsListUI = (props) => {
         }
         {
           !category?.id && categories.filter(category => category?.id !== null).map((category, i, _categories) => {
-            const products = categoryState.products?.filter(product => product?.category_id === category?.id) || []
+            // const products = categoryState.products?.filter(product => product?.category_id === category?.id) || []
             return (
               <React.Fragment key={category?.id}>
                 {
-                  products.length > 0 && (
+                  category?.products?.length > 0 && (
                     <WrapAllCategories id='container'>
                       <h3>{category.name}</h3>
                       <ProductsListing>
                         {
-                          products.map((product, i) => (
+                          category?.products?.map((product, i) => (
                             <SingleProductCard
                               key={i}
                               isSoldOut={product.inventoried && !product.quantity}

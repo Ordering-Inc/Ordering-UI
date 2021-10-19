@@ -345,6 +345,9 @@ const SignUpFormUI = (props) => {
                         className='form'
                         placeholder={t('BIRTHDAY', 'dd/mm/yyyy')}
                         onChange={handleChangeInput}
+                        ref={formMethods.register({
+                          required: t('VALIDATION_ERROR_BIRTHDAY_REQUIRED', 'The field birthdate is required')
+                        })}
                       />
                     </WrapperBirthday>
                   </FormInline>
