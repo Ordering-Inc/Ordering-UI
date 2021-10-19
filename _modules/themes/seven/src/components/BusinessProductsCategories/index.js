@@ -56,7 +56,10 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         onClick: function onClick() {
           return handlerClickCategory(category);
         },
-        isVerticalList: isVerticalList
+        isVerticalList: isVerticalList,
+        style: {
+          textTransform: 'uppercase'
+        }
       }, /*#__PURE__*/_react.default.createElement("span", null, category.name), (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id && /*#__PURE__*/_react.default.createElement("svg", {
         width: 12,
         height: 40,

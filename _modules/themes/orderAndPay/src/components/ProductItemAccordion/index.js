@@ -19,6 +19,8 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -54,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _props$beforeElements, _props$beforeComponen, _product$valid, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _product$valid, _theme$images, _theme$images$dummies, _props$afterComponent, _props$afterElements;
 
   var isCartPending = props.isCartPending,
       isCartProduct = props.isCartProduct,
@@ -77,7 +79,11 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      optimizeImage = _useUtils2$.optimizeImage;
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -167,8 +173,8 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, {
     className: "info",
     isOrderDetails: isOrderDetails
-  }, (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
-    bgimage: product === null || product === void 0 ? void 0 : product.images
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
+    bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_200,c_limit')
   })), isCartProduct && !isCartPending && getProductMax ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
     ref: productSelect,
     value: product.quantity,

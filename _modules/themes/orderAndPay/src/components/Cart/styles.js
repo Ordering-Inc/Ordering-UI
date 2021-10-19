@@ -96,6 +96,6 @@ var Title = _styledComponents.default.h1(_templateObject16 || (_templateObject16
 
 exports.Title = Title;
 
-var ModalIcon = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 5px 7px;\n  display: flex;\n  align-items:center;\n  margin-right: 20px;\n"])));
+var ModalIcon = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 13px 0px;\n  display: flex;\n  align-items:center;\n  margin-right: 20px;\n"])));
 
 exports.ModalIcon = ModalIcon;

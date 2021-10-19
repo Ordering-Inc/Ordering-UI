@@ -101,7 +101,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       saveCustomerUser = props.saveCustomerUser,
       fieldsNotValid = props.fieldsNotValid,
       signupData = props.signupData,
-      enableReCaptcha = props.enableReCaptcha;
+      enableReCaptcha = props.enableReCaptcha,
+      closeModal = props.closeModal;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -112,6 +113,10 @@ var SignUpFormUI = function SignUpFormUI(props) {
       configs = _useConfig2[0].configs;
 
   var formMethods = (0, _reactHookForm.useForm)();
+
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -186,6 +191,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
       open: false,
       content: []
     });
+  };
+
+  var handleGoToPage = function handleGoToPage(data) {
+    events.emit('go_to_page', data);
+    closeModal && closeModal();
   };
 
   var onSubmit = function onSubmit() {
@@ -423,7 +433,22 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGN_UP', 'Sign up'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, null, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), /*#__PURE__*/_react.default.createElement(_styles.BussinessAndDriverSignUp, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primaryContrast",
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'signup_business'
+      });
+    }
+  }, t('SIGNUP_FOR_BUSINESS', 'Sign up for business')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primaryContrast",
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'signup_driver'
+      });
+    },
+    disabled: true
+  }, t('SIGNUP_FOR_DRIVER', 'Sign up for driver'))), /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, null, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
   }, isFacebookLogin && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,

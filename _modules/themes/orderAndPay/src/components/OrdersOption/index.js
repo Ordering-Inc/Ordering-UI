@@ -283,12 +283,13 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ORDERS', 'My orders')), /*#__PURE__*/_react.default.createElement(_RiHome2Line.default, {
-    size: "16",
+    size: "20",
     onClick: function onClick() {
       return onRedirectPage({
         page: 'ordertypes'
       });
-    }
+    },
+    color: theme.colors.darkTextColor
   })), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(!loading && orders.length === 0) && orders.some(function (order) {
     return [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21].includes(order.status);
   }) && /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {

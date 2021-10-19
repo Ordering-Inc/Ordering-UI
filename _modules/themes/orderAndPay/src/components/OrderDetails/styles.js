@@ -186,7 +186,7 @@ var MyOrderActions = _styledComponents.default.div(_templateObject37 || (_templa
 
 exports.MyOrderActions = MyOrderActions;
 
-var ModalIcon = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  box-sizing: border-box;\n  margin-bottom: 20px;\n"])));
+var ModalIcon = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  box-sizing: border-box;\n  margin-top: 3px;\n  margin-bottom: 20px;\n"])));
 
 exports.ModalIcon = ModalIcon;
 

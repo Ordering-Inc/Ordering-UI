@@ -78,7 +78,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _configs$add_product_, _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products2, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _error$, _theme$defaultLanguag9, _productModal$error$, _theme$defaultLanguag10, _props$afterComponent, _props$afterElements;
+  var _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products2, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _error$, _theme$defaultLanguag9, _productModal$error$, _theme$defaultLanguag10, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
@@ -100,12 +100,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       featuredProducts = props.featuredProducts,
       isCartOnProductsList = props.isCartOnProductsList,
       errorQuantityProducts = props.errorQuantityProducts;
-
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  var addProductWithOneClick = configs === null || configs === void 0 ? void 0 : (_configs$add_product_ = configs.add_product_with_one_click) === null || _configs$add_product_ === void 0 ? void 0 : _configs$add_product_.value;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -116,9 +110,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       t = _useLanguage2[1];
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 2),
-      carts = _useOrder2[0].carts,
-      addProduct = _useOrder2[1].addProduct;
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      carts = _useOrder2[0].carts;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -126,9 +119,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
-      _useSession2$ = _useSession2[0],
-      auth = _useSession2$.auth,
-      user = _useSession2$.user;
+      user = _useSession2[0].user;
 
   var location = (0, _reactRouterDom.useLocation)();
 

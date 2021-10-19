@@ -37,8 +37,6 @@ var _UpsellingPage = require("../../../../../components/UpsellingPage");
 
 var _BsArrowLeft = _interopRequireDefault(require("@meronex/icons/bs/BsArrowLeft"));
 
-var _LogoutButton = require("../LogoutButton");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -114,7 +112,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -154,6 +154,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       category = _useState10[0],
       setCategory = _useState10[1];
 
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isAnimation = _useState12[0],
+      setIsAnimation = _useState12[1];
+
   var currentCart = (_Object$values$find = Object.values(carts).find(function (cart) {
     var _cart$business;
 
@@ -189,7 +194,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
     if (categoryTitle) {
       window.scrollTo({
-        top: categoryTitle.offsetTop - 75,
+        top: categoryTitle.offsetTop,
         behavior: 'smooth'
       });
     } else if (categoryId === 'featured') {
@@ -206,13 +211,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   var closeModalProductForm = function closeModalProductForm() {
-    setModalIsOpen(false);
-    handleUpdateInitialRender(false);
-    updateProductModal(null);
-    setCurProduct(null);
-    onProductRedirect({
-      slug: business === null || business === void 0 ? void 0 : business.slug
-    });
+    fading();
   };
 
   var handleScroll = (0, _react.useCallback)(function () {
@@ -235,6 +234,21 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onCheckoutRedirect(currentCart === null || currentCart === void 0 ? void 0 : currentCart.uuid);
     setOpenUpselling(false);
     setCanOpenUpselling(false);
+  };
+
+  var fading = function fading() {
+    setIsAnimation(true);
+    var timeout = setTimeout(function () {
+      setIsAnimation(false);
+      setModalIsOpen(false);
+      handleUpdateInitialRender(false);
+      updateProductModal(null);
+      setCurProduct(null);
+      onProductRedirect({
+        slug: business === null || business === void 0 ? void 0 : business.slug
+      });
+      clearInterval(timeout);
+    }, 300);
   };
 
   (0, _react.useEffect)(function () {
@@ -284,8 +298,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     },
     color: theme.colors.arrowColor
   }), /*#__PURE__*/_react.default.createElement("img", {
-    src: business === null || business === void 0 ? void 0 : business.logo
-  }), /*#__PURE__*/_react.default.createElement("h1", null, business === null || business === void 0 ? void 0 : business.name)), auth && /*#__PURE__*/_react.default.createElement(_styles.LogoutButtonContainer, null, /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))), !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
+    src: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
+  }), /*#__PURE__*/_react.default.createElement("h1", null, business === null || business === void 0 ? void 0 : business.name))), !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
@@ -325,7 +339,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0,
     handleClearSearch: handleChangeSearch,
     errorQuantityProducts: errorQuantityProducts,
-    setCategorySelected: setCategory
+    setCategorySelected: setCategory,
+    categorySelected: category
   })))))), loading && !error && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: [],
     isSkeleton: true
@@ -364,7 +379,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     padding: "20px 0 0 0",
     isProductForm: true,
     hideCloseDefault: productModal.product || curProduct,
-    customModal: true
+    customModal: true,
+    isAnimation: isAnimation
   }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45,
     count: 8
@@ -398,10 +414,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isInitialRender = _useState12[0],
-      setIsInitialRender = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isInitialRender = _useState14[0],
+      setIsInitialRender = _useState14[1];
 
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
@@ -411,10 +427,10 @@ var BusinessProductsListing = function BusinessProductsListing(props) {
       _useOrder4 = _slicedToArray(_useOrder3, 1),
       options = _useOrder4[0].options;
 
-  var _useState13 = (0, _react.useState)(),
-      _useState14 = _slicedToArray(_useState13, 2),
-      orderType = _useState14[0],
-      setOrderType = _useState14[1];
+  var _useState15 = (0, _react.useState)(),
+      _useState16 = _slicedToArray(_useState15, 2),
+      orderType = _useState16[0],
+      setOrderType = _useState16[1];
 
   var ordertypes = [{
     value: 2,

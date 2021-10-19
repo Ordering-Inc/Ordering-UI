@@ -47,7 +47,7 @@ var BusinessContent = _styledComponents.default.div(_templateObject7 || (_templa
 
 exports.BusinessContent = BusinessContent;
 
-var BusinessCategoryProductWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  @media (min-width: 1200px) {\n    width: 70%;\n  }\n"])));
+var BusinessCategoryProductWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  /* Hide scrollbar for Chrome, Safari and Opera */\n  .category-lists::-webkit-scrollbar {\n    display: none;\n  }\n\n  /* Hide scrollbar for IE, Edge and Firefox */\n  .category-lists {\n    -ms-overflow-style: none;\n    scrollbar-width: none;\n  }\n\n  @media (min-width: 1200px) {\n    width: 70%;\n  }\n"])));
 
 exports.BusinessCategoryProductWrapper = BusinessCategoryProductWrapper;
 

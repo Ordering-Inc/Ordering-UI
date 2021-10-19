@@ -50,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options3, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options4, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
 
   var onFindBusiness = props.onFindBusiness;
 
@@ -104,7 +104,9 @@ var HomeHero = function HomeHero(props) {
   };
 
   var handleAddressInput = function handleAddressInput() {
-    if (auth) {
+    var _orderState$options2, _orderState$options2$;
+
+    if (auth && orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2$ = _orderState$options2.address) !== null && _orderState$options2$ !== void 0 && _orderState$options2$.location) {
       setModals(_objectSpread(_objectSpread({}, modals), {}, {
         listOpen: true
       }));
@@ -137,9 +139,9 @@ var HomeHero = function HomeHero(props) {
   };
 
   (0, _react.useEffect)(function () {
-    var _orderState$options2, _orderState$options2$;
+    var _orderState$options3, _orderState$options3$;
 
-    if (orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2$ = _orderState$options2.address) !== null && _orderState$options2$ !== void 0 && _orderState$options2$.address && submited) {
+    if (orderState !== null && orderState !== void 0 && (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && (_orderState$options3$ = _orderState$options3.address) !== null && _orderState$options3$ !== void 0 && _orderState$options3$.address && submited) {
       history.push('/search');
     }
   }, [orderState, submited]);
@@ -186,7 +188,7 @@ var HomeHero = function HomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false

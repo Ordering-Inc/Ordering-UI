@@ -173,6 +173,6 @@ var ModalIcon = _styledComponents.default.span(_templateObject34 || (_templateOb
 
 exports.ModalIcon = ModalIcon;
 
-var ModalIconHeader = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  box-sizing: border-box;\n  margin-bottom: 20px;\n  align-items: center;\n  box-shadow: 0px 1px 4px 0px #0000001A;\n  padding: 10px 40px 0 40px;\n  img, [class='fallback'] {\n    margin-left: 15px;\n    box-shadow: 0px 1px 4px 0px #0000001A;\n    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n    width: 32px;\n    height: 32px;\n    border-radius: 7.6px;\n    object-fit: cover;\n  }\n"])));
+var ModalIconHeader = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  box-sizing: border-box;\n  margin-bottom: 20px;\n  align-items: center;\n  box-shadow: 0px 1px 4px 0px #0000001A;\n  padding: 13px 40px 0 40px;\n  img, [class='fallback'] {\n    margin-left: 15px;\n    box-shadow: 0px 1px 4px 0px #0000001A;\n    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n    width: 32px;\n    height: 32px;\n    border-radius: 7.6px;\n    object-fit: cover;\n  }\n"])));
 
 exports.ModalIconHeader = ModalIconHeader;

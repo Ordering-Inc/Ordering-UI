@@ -327,6 +327,12 @@ Object.defineProperty(exports, "SidebarMenu", {
     return _SidebarMenu.SidebarMenu;
   }
 });
+Object.defineProperty(exports, "SignUpBusiness", {
+  enumerable: true,
+  get: function get() {
+    return _SignUpBusiness.SignUpBusiness;
+  }
+});
 Object.defineProperty(exports, "SignUpForm", {
   enumerable: true,
   get: function get() {
@@ -485,6 +491,8 @@ var _SearchBar = require("./src/components/SearchBar");
 var _SidebarMenu = require("./src/components/SidebarMenu");
 
 var _SignUpForm = require("./src/components/SignUpForm");
+
+var _SignUpBusiness = require("./src/components/SignUpBusiness");
 
 var _SingleProductCard = require("./src/components/SingleProductCard");
 

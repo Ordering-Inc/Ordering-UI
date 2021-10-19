@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BusinessReviewsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow-x: hidden;\n"])));
+var BusinessReviewsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow-x: hidden;\n  padding: 0;\n  box-sizing: border-box;\n\n  @media (min-width: 576px) {\n    padding: 0 6px;\n  }\n"])));
 
 exports.BusinessReviewsContainer = BusinessReviewsContainer;
 
@@ -82,7 +82,7 @@ var ReviewsProgressBar = _styledComponents.default.div(_templateObject13 || (_te
 
 exports.ReviewsProgressBar = ReviewsProgressBar;
 
-var ReviewsMarkPoint = _styledComponents.default.span(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 15px;\n  font-size: 12px;\n  color: #CED4DA\n"])));
+var ReviewsMarkPoint = _styledComponents.default.span(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 15px;\n  font-size: 12px;\n  color: #CED4DA;\n"])));
 
 exports.ReviewsMarkPoint = ReviewsMarkPoint;
 
@@ -102,7 +102,7 @@ var ReviewItemContent = _styledComponents.default.div(_templateObject17 || (_tem
 
 exports.ReviewItemContent = ReviewItemContent;
 
-var SearchContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 35px 0;\n  \n  input {\n    outline: none;\n    border: none;\n    border-bottom: 1px solid #E9ECEF;\n    border-radius: 0px;\n    width: 100%;\n    background-repeat: no-repeat;\n    background-size: 30px 18px;\n    background-position: left center;\n    box-sizing: border-box;\n    padding: 7px 0 7px 30px;\n\n    ", "\n  }\n"])), function (props) {
+var SearchContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 35px 0;\n  \n  input {\n    outline: none;\n    border: none;\n    border-bottom: 1px solid #E9ECEF;\n    border-radius: 0px;\n    width: 100%;\n    background-repeat: no-repeat;\n    background-size: 20px 18px;\n    background-position: left center;\n    box-sizing: border-box;\n    padding: 7px 0 7px 30px;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme7;
 
   return ((_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.rtl) && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n      padding: 7px 30px 7px 0;\n      background-position: right center;\n    "])));

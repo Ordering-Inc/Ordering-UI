@@ -146,7 +146,7 @@ var BusinessInformation = _styledComponents.default.div(_templateObject30 || (_t
 
 exports.BusinessInformation = BusinessInformation;
 
-var TitleContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 30px;\n  h1{\n    text-transform: capitalize;\n    font-size: 24px;\n    cursor: pointer;\n    margin: 0;\n    font-weight: 600;\n  }\n"])));
+var TitleContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 30px;\n  h1{\n    text-transform: capitalize;\n    font-size: 18px;\n    cursor: pointer;\n    margin: 0;\n    font-weight: 600;\n  }\n"])));
 
 exports.TitleContainer = TitleContainer;
 

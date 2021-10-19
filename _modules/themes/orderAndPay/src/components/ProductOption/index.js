@@ -43,6 +43,10 @@ var ProductOptionUI = function ProductOptionUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      optimizeImage = _useUtils2[0].optimizeImage;
+
   var maxMin = "(".concat(t('MIN', 'Min'), ": ").concat(option.min, " / ").concat(t('MAX', 'Max'), ": ").concat(option.max, ")");
 
   if (option.min === 1 && option.max === 1) {
@@ -62,7 +66,7 @@ var ProductOptionUI = function ProductOptionUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapHeader, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, option.image && option.image !== '-' && /*#__PURE__*/_react.default.createElement(_styles.OptionThumbnail, {
-    src: option.image
+    src: optimizeImage(option.image, 'h_300,c_limit')
   }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, option.name))), /*#__PURE__*/_react.default.createElement(_styles.Flag, null, maxMin)), children), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

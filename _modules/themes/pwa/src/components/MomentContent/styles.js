@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 0px 10px 20px;\n\n  @media (min-width: 769px) {\n    padding: 0px;\n  }\n\n  ", "\n"])), function (_ref) {
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n  padding-bottom: 20px;\n\n  @media (min-width: 769px) {\n    padding: 0px;\n  }\n\n  ", "\n"])), function (_ref) {
   var isLoading = _ref.isLoading;
   return isLoading && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      pointer-events: none;\n  "])));
 });

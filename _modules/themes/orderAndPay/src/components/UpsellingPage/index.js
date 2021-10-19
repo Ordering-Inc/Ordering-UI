@@ -85,7 +85,9 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   (0, _react.useEffect)(function () {
     if (!isCustomMode) {
@@ -129,7 +131,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
         key: product.id,
         name: product.name
       }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement("img", {
-        src: product.images,
+        src: optimizeImage(product.images, 'h_300,c_limit'),
         alt: "product-".concat(i),
         width: "150px",
         height: "150px",
@@ -176,7 +178,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
         return handleFormProduct(product);
       }
     }, t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_styles.HorizontalImage, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: product.images,
+      src: optimizeImage(product.images, 'h_300,c_limit'),
       alt: "product-".concat(i),
       width: "150px",
       height: "150px",

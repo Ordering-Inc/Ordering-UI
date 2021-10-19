@@ -29,8 +29,6 @@ var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdK
 
 var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
 
-var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
 var _styles = require("./styles");
 
 var _CgRadioCheck = _interopRequireDefault(require("@meronex/icons/cg/CgRadioCheck"));
@@ -89,8 +87,6 @@ var MomentControlUI = function MomentControlUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var windowSize = (0, _useWindowSize.useWindowSize)();
-
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
@@ -142,6 +138,21 @@ var MomentControlUI = function MomentControlUI(props) {
   var handleRemoveDate = function handleRemoveDate() {
     !orderState.loading && handleAsap();
     setIsASP(true);
+  };
+
+  var _formatMonthYear = function formatMonthYear(date) {
+    return (0, _moment.default)(date).format('MMMM');
+  };
+
+  var _formatShortWeekday = function formatShortWeekday(date) {
+    return (0, _moment.default)(date).format('dd');
+  };
+
+  var _formatDay = function formatDay(date) {
+    var minMon = (0, _moment.default)(minDate).format('MM');
+    var maxMon = (0, _moment.default)(maxDate).format('MM');
+    var currMon = (0, _moment.default)(date).format('MM');
+    return minMon === currMon || maxMon === currMon ? (0, _moment.default)(date).format('D') : '';
   };
 
   (0, _react.useEffect)(function () {
@@ -219,7 +230,8 @@ var MomentControlUI = function MomentControlUI(props) {
       return onDateChange(val);
     },
     minDate: minDate,
-    maxDate: maxDate
+    maxDate: maxDate,
+    dateFormat: "MM/dd/yy"
   }), /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: handleRemoveDate
   })), /*#__PURE__*/_react.default.createElement(_reactCalendar.default, {
@@ -227,13 +239,22 @@ var MomentControlUI = function MomentControlUI(props) {
       return onDateChange(val);
     },
     value: value,
-    showDoubleView: windowSize.width > 1200,
     next2Label: "",
     prev2Label: "",
     prevLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, null),
     nextLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null),
     minDate: minDate,
-    maxDate: maxDate
+    maxDate: maxDate,
+    formatMonthYear: function formatMonthYear(locale, date) {
+      return _formatMonthYear(date);
+    },
+    formatShortWeekday: function formatShortWeekday(locale, date) {
+      return _formatShortWeekday(date);
+    },
+    formatDay: function formatDay(locale, date) {
+      return _formatDay(date);
+    },
+    calendarType: "US"
   })), /*#__PURE__*/_react.default.createElement(_styles.HourListWrapper, {
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_Select.Select, {

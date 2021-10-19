@@ -112,7 +112,8 @@ var MessagesUI = function MessagesUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parseDate = _useUtils2$.parseDate,
-      getTimeAgo = _useUtils2$.getTimeAgo;
+      getTimeAgo = _useUtils2$.getTimeAgo,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var buttonRef = (0, _react.useRef)(null);
 
@@ -356,7 +357,7 @@ var MessagesUI = function MessagesUI(props) {
       }, getTimeAgo(message.created_at)))), message.type === 3 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, {
         name: "image"
       }, /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
-        src: message.source,
+        src: optimizeImage(message.source, 'h_300,c_limit'),
         onClick: function onClick() {
           return handleModalImage(message.source);
         },
@@ -368,7 +369,7 @@ var MessagesUI = function MessagesUI(props) {
       }, getTimeAgo(message.created_at)))), message.type === 2 && (user === null || user === void 0 ? void 0 : user.id) !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, null, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message.author.name, " (", order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level), ")")), message.comment, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))), message.type === 3 && user.id !== message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleBusines, {
         name: "image"
       }, /*#__PURE__*/_react.default.createElement("strong", null, /*#__PURE__*/_react.default.createElement(_styles.MyName, null, message.author.name, " (", order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level), ")")), /*#__PURE__*/_react.default.createElement(_styles.ChatImage, null, /*#__PURE__*/_react.default.createElement("img", {
-        src: message.source,
+        src: optimizeImage(message.source, 'h_300,c_limit'),
         onClick: function onClick() {
           return handleModalImage(message.source);
         },
@@ -392,12 +393,12 @@ var MessagesUI = function MessagesUI(props) {
     onClick: onClose,
     color: theme.colors.arrowColor
   }), business && /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: ((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
+    src: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_300,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, {
       className: "fallback"
     })
   }), driver && /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo,
+    src: optimizeImage((_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo, 'h_300,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, {
       className: "fallback"
     })

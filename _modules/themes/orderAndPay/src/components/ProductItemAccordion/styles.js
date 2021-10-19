@@ -56,7 +56,7 @@ var WrapperProductImage = _styledComponents.default.div(_templateObject5 || (_te
 
 exports.WrapperProductImage = WrapperProductImage;
 
-var ProductImageStyled = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: contain;\n  object-fit: cover;\n  background-position: center;\n  border-radius: 10px;\n"])));
+var ProductImageStyled = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  border-radius: 10px;\n"])));
 
 var ProductImage = function ProductImage(props) {
   return /*#__PURE__*/_react.default.createElement(ProductImageStyled, _extends({}, props, {

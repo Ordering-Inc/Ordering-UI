@@ -52,7 +52,8 @@ var ModalUI = function ModalUI(props) {
       isTransparent = props.isTransparent,
       hideCloseDefault = props.hideCloseDefault,
       isProductForm = props.isProductForm,
-      customModal = props.customModal;
+      customModal = props.customModal,
+      isAnimation = props.isAnimation;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -82,10 +83,12 @@ var ModalUI = function ModalUI(props) {
   }, [props.open]);
   return /*#__PURE__*/_react.default.createElement(_styles.ModalDialog, {
     className: "popup-dialog",
+    id: "popup-dialog",
     width: props.width,
     height: props.height,
     padding: props.padding,
-    isTransparent: isTransparent
+    isTransparent: isTransparent,
+    isAnimation: isAnimation
   }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, {
     customModal: customModal
   }), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {

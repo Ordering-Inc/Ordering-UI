@@ -93,7 +93,7 @@ var DriverTipDivider = _styledComponents.default.div(_templateObject18 || (_temp
 
 exports.DriverTipDivider = DriverTipDivider;
 
-var ModalIcon = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n"])));
+var ModalIcon = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-top: 3px;\n  margin-bottom: 20px;\n"])));
 
 exports.ModalIcon = ModalIcon;
 

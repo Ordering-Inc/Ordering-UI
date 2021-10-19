@@ -62,14 +62,36 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       searchValue = props.searchValue,
       isCartOnProductsList = props.isCartOnProductsList,
       errorQuantityProducts = props.errorQuantityProducts,
-      setCategorySelected = props.setCategorySelected;
+      setCategorySelected = props.setCategorySelected,
+      categorySelected = props.categorySelected;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useState = (0, _react.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      indexCategorySelected = _useState2[0],
+      setIndexCategorySelected = _useState2[1];
+
   (0, _react.useEffect)(function () {
-    window.addEventListener('scroll', function () {
+    var categories = document.getElementsByClassName('category-lists');
+    var categoriesOffset = getCategoriesOffset();
+
+    if (categorySelected !== null && categorySelected !== void 0 && categorySelected.name && (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name) !== 'All') {
+      var index = categoriesOffset.findIndex(function (category) {
+        return (category === null || category === void 0 ? void 0 : category.name) === (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name);
+      });
+      setIndexCategorySelected(index);
+      categories[0].scrollBy({
+        top: 0,
+        left: index > indexCategorySelected ? (categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) * 8 : -(categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) * 8,
+        behavior: 'smooth'
+      });
+    }
+  }, [categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name]);
+  (0, _react.useEffect)(function () {
+    var goToCategory = function goToCategory() {
       var categoriesOffset = getCategoriesOffset();
 
       if ((categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) > 0) {
@@ -79,10 +101,10 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         categoriesOffset.map(function (category, i, hash) {
           var _hash, _hash2, _hash$;
 
-          if (category.offset - 125 < window.scrollY && ((_hash = hash[i + 1]) === null || _hash === void 0 ? void 0 : _hash.offset) > window.scrollY) {
-            setCategorySelected(category);
-          } else if (window.scrollY + (categories.length > 3 ? lastContainerHeight + 125 : 100) > ((_hash2 = hash[(categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) - 1]) === null || _hash2 === void 0 ? void 0 : _hash2.offset)) {
+          if (window.scrollY + (categories.length > 3 ? lastContainerHeight + 125 : 100) > ((_hash = hash[(categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) - 1]) === null || _hash === void 0 ? void 0 : _hash.offset)) {
             setCategorySelected(hash[(categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) - 1]);
+          } else if (category.offset < window.scrollY && ((_hash2 = hash[i + 1]) === null || _hash2 === void 0 ? void 0 : _hash2.offset) > window.scrollY) {
+            setCategorySelected(category);
           } else if (window.scrollY > 100 && window.scrollY < ((_hash$ = hash[2]) === null || _hash$ === void 0 ? void 0 : _hash$.offset) && (category === null || category === void 0 ? void 0 : category.name) === t('FEATURED', 'Featured')) {
             setCategorySelected(category);
           } else if (window.scrollY === 0) {
@@ -90,9 +112,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
           }
         });
       }
-    });
+    };
+
+    window.addEventListener('scroll', goToCategory);
     return function () {
-      window.removeEventListener('scroll');
+      window.removeEventListener('scroll', goToCategory);
     };
   }, []);
 

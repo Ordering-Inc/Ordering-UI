@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperPassword = exports.TogglePassword = exports.Title = exports.TermsConditionWrapper = exports.SocialButtons = exports.SkeletonWrapper = exports.SkeletonSocialWrapper = exports.SignUpContainer = exports.RedirectLink = exports.ReCaptchaWrapper = exports.LoginDivider = exports.InputWrapper = exports.InputBeforeIcon = exports.FormSide = exports.FormInput = exports.DividerLine = void 0;
+exports.WrapperPassword = exports.TogglePassword = exports.Title = exports.TermsConditionWrapper = exports.SocialButtons = exports.SkeletonWrapper = exports.SkeletonSocialWrapper = exports.SignUpContainer = exports.RedirectLink = exports.ReCaptchaWrapper = exports.LoginDivider = exports.InputWrapper = exports.InputBeforeIcon = exports.FormSide = exports.FormInput = exports.DividerLine = exports.BussinessAndDriverSignUp = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -137,3 +137,7 @@ var TermsConditionWrapper = _styledComponents.default.div(_templateObject24 || (
 });
 
 exports.TermsConditionWrapper = TermsConditionWrapper;
+
+var BussinessAndDriverSignUp = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-direction: column;\n  width: 95%;\n\n  @media (min-width: 993px) {\n    flex-direction: row;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 15px;\n    padding: 5px;\n\n    @media (min-width: 993px) {\n      width: 48%;\n    }\n  }\n"])));
+
+exports.BussinessAndDriverSignUp = BussinessAndDriverSignUp;

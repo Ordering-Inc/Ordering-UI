@@ -29,8 +29,6 @@ var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdK
 
 var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
 
-var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
 var _styles = require("./styles");
 
 var _CgRadioCheck = _interopRequireDefault(require("@meronex/icons/cg/CgRadioCheck"));
@@ -75,8 +73,7 @@ var MomentControlUI = function MomentControlUI(props) {
       timeSelected = props.timeSelected,
       handleAsap = props.handleAsap,
       handleChangeDate = props.handleChangeDate,
-      handleChangeTime = props.handleChangeTime,
-      onClose = props.onClose;
+      handleChangeTime = props.handleChangeTime;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -89,8 +86,6 @@ var MomentControlUI = function MomentControlUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var windowSize = (0, _useWindowSize.useWindowSize)();
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -121,11 +116,6 @@ var MomentControlUI = function MomentControlUI(props) {
       timeLists = _useState10[0],
       setTimeLists = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isSelectedTime = _useState12[0],
-      setIsSelectedTime = _useState12[1];
-
   var onDateChange = function onDateChange(value) {
     onChange(value);
 
@@ -150,9 +140,19 @@ var MomentControlUI = function MomentControlUI(props) {
     setIsASP(true);
   };
 
-  var handleChangeSelect = function handleChangeSelect(startTime) {
-    !orderState.loading && handleChangeTime(startTime);
-    setIsSelectedTime(true);
+  var _formatMonthYear = function formatMonthYear(date) {
+    return (0, _moment.default)(date).format('MMMM');
+  };
+
+  var _formatShortWeekday = function formatShortWeekday(date) {
+    return (0, _moment.default)(date).format('dd');
+  };
+
+  var _formatDay = function formatDay(date) {
+    var minMon = (0, _moment.default)(minDate).format('MM');
+    var maxMon = (0, _moment.default)(maxDate).format('MM');
+    var currMon = (0, _moment.default)(date).format('MM');
+    return minMon === currMon || maxMon === currMon ? (0, _moment.default)(date).format('D') : '';
   };
 
   (0, _react.useEffect)(function () {
@@ -201,12 +201,6 @@ var MomentControlUI = function MomentControlUI(props) {
     }
   }, [hoursList]);
   (0, _react.useEffect)(function () {
-    if (timeSelected && onClose && isSelectedTime) {
-      setIsSelectedTime(false);
-      onClose();
-    }
-  }, [timeSelected]);
-  (0, _react.useEffect)(function () {
     if (isASP) handleCheckBoxChange(true);
   }, [isAsap]);
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -236,7 +230,8 @@ var MomentControlUI = function MomentControlUI(props) {
       return onDateChange(val);
     },
     minDate: minDate,
-    maxDate: maxDate
+    maxDate: maxDate,
+    dateFormat: "MM/dd/yy"
   }), /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: handleRemoveDate
   })), /*#__PURE__*/_react.default.createElement(_reactCalendar.default, {
@@ -244,20 +239,29 @@ var MomentControlUI = function MomentControlUI(props) {
       return onDateChange(val);
     },
     value: value,
-    showDoubleView: windowSize.width > 1200,
     next2Label: "",
     prev2Label: "",
     prevLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, null),
     nextLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null),
     minDate: minDate,
-    maxDate: maxDate
+    maxDate: maxDate,
+    formatMonthYear: function formatMonthYear(locale, date) {
+      return _formatMonthYear(date);
+    },
+    formatShortWeekday: function formatShortWeekday(locale, date) {
+      return _formatShortWeekday(date);
+    },
+    formatDay: function formatDay(locale, date) {
+      return _formatDay(date);
+    },
+    calendarType: "US"
   })), /*#__PURE__*/_react.default.createElement(_styles.HourListWrapper, {
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: timeLists,
     defaultValue: timeSelected,
     onChange: function onChange(startTime) {
-      return handleChangeSelect(startTime);
+      return !orderState.loading && handleChangeTime(startTime);
     },
     placeholder: t('SELECT_TIME', 'Select a time')
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {

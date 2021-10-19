@@ -68,7 +68,7 @@ var ModalOrderTypes = _styledComponents.default.div(_templateObject9 || (_templa
 
 exports.ModalOrderTypes = ModalOrderTypes;
 
-var ModalIcon = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: absolute;\n  left: 25px;\n  top: 30px;\n  font-size: 22px;\n  cursor: pointer;\n  display: inline-flex;\n  align-items: center;\n  z-index: 2;\n  ", "\n  svg {\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n\n  ", "\n\n  @media(min-width: 576px){\n    font-size: 30px;\n  }\n  @media(min-width: 769px){\n    position: absolute;\n  }\n"])), function (props) {
+var ModalIcon = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: absolute;\n  left: 20px;\n  top: 30px;\n  font-size: 22px;\n  cursor: pointer;\n  display: inline-flex;\n  align-items: center;\n  z-index: 2;\n  ", "\n  svg {\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n\n  ", "\n\n  @media(min-width: 576px){\n    font-size: 30px;\n  }\n  @media(min-width: 769px){\n    position: absolute;\n  }\n"])), function (props) {
   var _props$theme4;
 
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    left: 5px;\n    right: initial;\n  "])));
