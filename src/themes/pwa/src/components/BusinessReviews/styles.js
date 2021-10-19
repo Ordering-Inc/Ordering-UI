@@ -3,6 +3,12 @@ import styled, { css } from 'styled-components'
 export const BusinessReviewsContainer = styled.div`
   width: 100%;
   overflow-x: hidden;
+  padding: 0;
+  box-sizing: border-box;
+
+  @media (min-width: 576px) {
+    padding: 0 6px;
+  }
 `
 
 export const ReviewOf = styled.div``
@@ -118,7 +124,7 @@ export const ReviewsMarkPoint = styled.span`
   position: absolute;
   top: 15px;
   font-size: 12px;
-  color: #CED4DA
+  color: #CED4DA;
 `
 
 export const ReviewTime = styled.p`
@@ -146,7 +152,7 @@ export const SearchContainer = styled.div`
     border-radius: 0px;
     width: 100%;
     background-repeat: no-repeat;
-    background-size: 30px 18px;
+    background-size: 20px 18px;
     background-position: left center;
     box-sizing: border-box;
     padding: 7px 0 7px 30px;
