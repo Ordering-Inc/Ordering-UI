@@ -17,6 +17,7 @@ import logotype from './template/assets/images/logotype.svg'
 import logotypeInvert from './template/assets/images/logotype-invert.svg'
 import isotype from './template/assets/images/isotype.svg'
 import isotypeInvert from './template/assets/images/isotype-invert.svg'
+import orderingAppIcon from './template/assets/images/orderingAppIcon.webp'
 
 import homeHero from './template/assets/images/home-hero.png'
 import notFound from './template/assets/images/not-found.svg'
@@ -108,7 +109,8 @@ theme.images = {
     searchIcon,
     notNetwork,
     emptyActiveOrders,
-    emptyPastOrders
+    emptyPastOrders,
+    orderingAppIcon
   },
 
   order: {
