@@ -4,7 +4,7 @@ export const AutoscrollContainer = styled.span`
   display: ${props => props.modal ? 'flex' : 'inherit'};
   width: ${props => props.modal ? '300vw' : 'initial'};
   
-  svg {
+  > svg {
     background: #D9D9D9;
     display: inline-block;
     border-radius: 50%;
