@@ -6,14 +6,14 @@ export const ContainerCard = styled.div`
   box-sizing: border-box;
   border-radius: 7.6px;
   max-height: 300px;
-  height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '330px'};
+  height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '320px'};
   border-radius: 10px;
   margin: 30px 20px;
 
   width: calc(100% - 40px);
 
   @media (min-width: 481px) {
-    max-height: 330px;
+    max-height: 320px;
   }
 
   @media (min-width: 681px) {
