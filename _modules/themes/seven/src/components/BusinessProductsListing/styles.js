@@ -21,7 +21,7 @@ var ProductsContainer = _styledComponents.default.div(_templateObject || (_templ
 
 exports.ProductsContainer = ProductsContainer;
 
-var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 0 15px;\n  background: ", ";\n\n  @media (min-width: 768px) {\n    padding: 0px;\n    width: 75%;\n    overflow-x: hidden;\n    padding: 0 20px 30px;\n    box-sizing: border-box;\n  }\n\n  @media (min-width: 1200px) {\n    width: 80%;\n  }\n"])), function (props) {
+var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 0 15px;\n  background: ", ";\n\n  @media (min-width: 768px) {\n    padding: 0px;\n    width: 75%;\n    overflow-x: hidden;\n    padding: 0 20px 30px;\n    box-sizing: border-box;\n  }\n\n  @media (min-width: 1200px) {\n    width: 80%;\n    margin: 0 auto;\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 });
 
