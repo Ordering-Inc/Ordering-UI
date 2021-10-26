@@ -13,11 +13,14 @@ export const ProductsContainer = styled.div`
 `
 
 export const WrapContent = styled.div`
-  padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
 
   @media (min-width: 381px) {
     padding: 15px;
+  }
+
+  @media (min-width: 681px) {
+    padding: 5px;
   }
 `
 

@@ -94,6 +94,7 @@ const CategoryImageStyled = styled.div`
   align-items: flex-end;
   justify-content: center;
   min-width: 90px;
+  border-radius: 8px;
 `
 
 export const CategoryImage = (props) => {
