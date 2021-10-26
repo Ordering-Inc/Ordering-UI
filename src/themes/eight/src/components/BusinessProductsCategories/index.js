@@ -4,6 +4,7 @@ import {
   BusinessProductsCategories as ProductsCategories,
   useUtils
 } from 'ordering-components'
+import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { useTheme } from 'styled-components'
 
 import {
@@ -45,6 +46,7 @@ const BusinessProductsCategoriesUI = (props) => {
                   <CategoryImage bgimage={optimizeImage(category.image || theme.images?.dummies?.businessLogo)} />
                 </WrapImage>
                 <CategoryName>{category.name}</CategoryName>
+                <BsChevronRight />
               </CategoryCard>
             ))}
           </>
@@ -52,7 +54,8 @@ const BusinessProductsCategoriesUI = (props) => {
           <>
             {[...Array(10).keys()].map(i => (
               <CategoryCard key={i}>
-                <WrapImage>
+                <WrapImage isSkeleton>
+                  <Skeleton width={90} height={90} />
                   <CategoryImage />
                 </WrapImage>
                 <CategoryName>

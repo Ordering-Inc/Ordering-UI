@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
-  width: 90%;
-  margin: 30px auto 0px;
+  width: 100%;
+  margin: 0px auto;
   min-height: calc(100vh - 300px);
 
   @media (min-width: 768px) {
+    margin: 30px auto 0px;
     width: 80%;
     margin: 50px auto 0px;
   }
