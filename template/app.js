@@ -153,7 +153,7 @@ export const App = () => {
                         ? (
                           <Login
                             elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</Link>}
                             useLoginByCellphone
                             isRecaptchaEnable
                           />
@@ -175,7 +175,7 @@ export const App = () => {
                         ? (
                           <Login
                             elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</Link>}
                             useLoginByCellphone
                             isRecaptchaEnable
                           />
