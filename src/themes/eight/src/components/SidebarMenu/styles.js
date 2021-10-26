@@ -4,18 +4,9 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  ${({ auth }) => auth && css`
-    @media (min-width: 769px) {
-      display: none;
-    }
-  `}
-
-  ${({ auth }) => !auth && css`
-    @media (min-width: 871px) {
-      display: none;
-    }
-  `}
+  @media (min-width: 871px) {
+    display: none;
+  }
 `
 
 export const IconContent = styled.button`

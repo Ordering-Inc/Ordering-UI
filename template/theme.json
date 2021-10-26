@@ -5,20 +5,28 @@
       "weights": [300, 400, 500, 600]
     },
     "special": {
-      "name": "Lobster",
+      "name": "Mada",
       "weights": [400]
     }
   },
   "colors": {
-    "primary": "#D83520",
+    "primary": "#DD0030",
+    "primaryDark": "#CA082A",
     "primaryContrast": "#FFF",
-    "secundary": "#EFEFEF",
+    "secundary": "#005071",
+    "secundaryDark": "#F4F8F9",
+    "secundaryLight": "#F4F8F9",
     "secundaryContrast": "#000",
+    "third": "#FCF9F4",
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
-    "backgroundPage": "#F8F8F8",
-    "colorPage": "#333",
-    "colorTextSignForm": "#FFFFFF"
+    "backgroundPage": "#FFF",
+    "colorPage": "#344050",
+    "colorTextSignForm": "#FFFFFF",
+    "grayMedium": "#ACB2B6",
+    "grayDark": "#485259",
+    "gray": "#E9ECEF",
+    "green": "#027100"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
@@ -26,12 +34,19 @@
     "SIGN_UP": "Sign up",
     "ACCEPT": "Accept",
 
-    "TITLE_HOME": "All We need is Food",
-    "SUBTITLE_HOME": "Let's start to order food now",
+    "TITLE_HOME_8": "What type of order can we get started for you?",
+    "SUBTITLE_HOME_8": "Let's start to order food now",
     "TYPE_AN_ADDRESS": "Type an addres",
-    "FIND_BUSINESSES": "Find businesse",
     "ADDRESS": "Address",
     "ADDRESSES": "Addresses",
+    "FIND_RESTAURANT": "Find a restaurant",
+
+    "TITLE_ADDRESS_FORM": "Enter your address for delivery options",
+    "SUBTITLE_ADDRESS_FORM": "Select your address from suggetions",
+    "ADDRESS_LIST": "Address List",
+    "DELIVERYA_V21": "Delivery address",
+
+    "SHOPPING_SECOND_WHERE_BACK_BUTTON": "Back",
 
     "SORT_BY": "Sort By",
     "RANK": "Rank",
@@ -82,8 +97,7 @@
     "ORDER_MESSAGE_RECEIVED": "Your order has been received",
     "ORDER_MESSAGE_HEADER_TEXT": "Once business accepts your order, we will send you an email, thank you",
     "ORDER": "Order",
-    "DATE_TIME_FOR_ORDER": "Date and time for your order",
-    "CUSTOMER": "Customer",
+    "MENU_LIST_TO": "To",
     "SHARE_THIS_DELIVERY": "Share this delivery",
     "LET_SOMEONE_FOLLOW_ALONG": "Let someone follow along",
     "SHARE": "Share",

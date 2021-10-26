@@ -117,5 +117,26 @@
     "keywords": "test, dummy, data",
     "robots": "index, follow",
     "canonicalUrl": ""
+  },
+  "address": {
+    "title": "Address",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "addresslist": {
+    "title": "Address list",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "moment": {
+    "title": "Moment option",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
   }
 }

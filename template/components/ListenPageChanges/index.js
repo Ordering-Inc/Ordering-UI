@@ -28,7 +28,10 @@ export const ListenPageChanges = ({ children }) => {
     business_slug: '/:store',
     forgot_password: '/password/forgot',
     reset_password: '/password/reset',
-    help: '/help'
+    help: '/help',
+    address: '/address',
+    address_list: '/address-list',
+    moment: '/moment'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
