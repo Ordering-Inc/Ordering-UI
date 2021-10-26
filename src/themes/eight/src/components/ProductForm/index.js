@@ -44,7 +44,8 @@ import {
   ProductOptionInfo,
   ProductInnerContainer,
   ProductCartTotalPrice,
-  IncDecActions
+  IncDecActions,
+  ProductActionHeaderContainer
 } from './styles'
 
 const ProductOptionsUI = (props) => {
@@ -280,27 +281,36 @@ const ProductOptionsUI = (props) => {
               )}
               <ProductActions>
                 <ProductInnerContainer>
-                  {
-                    productCart && !isSoldOut && maxProductQuantity > 0 && (
-                      <IncDecActions>
-                        <button
-                          className='decrease'
-                          onClick={decrement}
-                          disabled={productCart.quantity === 1 || isSoldOut}
-                        >
-                          -
-                        </button>
-                        <span>{productCart.quantity}</span>
-                        <button
-                          className='increase'
-                          onClick={increment}
-                          disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
-                        >
-                          +
-                        </button>
-                      </IncDecActions>
-                    )
-                  }
+                  <ProductActionHeaderContainer>
+                    {
+                      productCart && !isSoldOut && maxProductQuantity > 0 && (
+                        <IncDecActions>
+                          <button
+                            className='decrease'
+                            onClick={decrement}
+                            disabled={productCart.quantity === 1 || isSoldOut}
+                          >
+                            -
+                          </button>
+                          <span>{productCart.quantity}</span>
+                          <button
+                            className='increase'
+                            onClick={increment}
+                            disabled={maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut}
+                          >
+                            +
+                          </button>
+                        </IncDecActions>
+                      )
+                    }
+
+                    {productCart.total && (
+                      <ProductCartTotalPrice isMobile>
+                        <span>{t('Price_V2', 'Price')}</span>
+                        <span>{parsePrice(productCart.total)}</span>
+                      </ProductCartTotalPrice>
+                    )}
+                  </ProductActionHeaderContainer>
 
                   {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                     <Button
