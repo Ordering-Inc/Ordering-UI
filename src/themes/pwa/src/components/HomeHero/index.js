@@ -108,7 +108,7 @@ export const HomeHero = (props) => {
             <WrapInput onClick={handleAddressInput} withIcon>
               <HiOutlineLocationMarker />
               <p>
-                {orderState?.options?.address?.address || t('TYPE_AN_ADDRESS', theme?.defaultLanguages?.TYPE_AN_ADDRESS || 'Type an address')}
+                {orderState?.options?.address?.address || t('WHERE_DO_WE_DELIVERY', theme?.defaultLanguages?.WHERE_DO_WE_DELIVERY || 'Where do we delivery?')}
               </p>
             </WrapInput>
 

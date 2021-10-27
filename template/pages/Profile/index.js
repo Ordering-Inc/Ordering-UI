@@ -1,12 +1,12 @@
 import React from 'react'
-import { UserProfileForm } from '../../../src/components/UserProfileForm'
+import { UserProfile } from '../../../src/themes/pwa/src/components/UserProfile'
 import { HelmetTags } from '../../components/HelmetTags'
 
 export const Profile = (props) => {
   return (
     <>
       <HelmetTags page='profile' />
-      <UserProfileForm {...props} />
+      <UserProfile {...props} />
     </>
   )
 }
