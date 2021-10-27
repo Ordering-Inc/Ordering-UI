@@ -52,7 +52,6 @@ import { SingleProductCard } from './src/components/SingleProductCard'
 import { UserDetails } from './src/components/UserDetails'
 import { UserProfileForm } from './src/components/UserProfileForm'
 import { WrapperGoogleMaps } from './src/components/WrapperGoogleMaps'
-import { SmartAppBanner } from './src/components/SmartAppBanner'
 import { ConfigContext, ConfigProvider, useConfig } from './src/contexts/ConfigContext'
 import { LanguageContext, LanguageProvider, useLanguage } from './src/contexts/LanguageContext'
 import { OrderContext, OrderProvider, useOrder } from './src/contexts/OrderContext'
@@ -115,7 +114,6 @@ export {
   UserDetails,
   UserProfileForm,
   WrapperGoogleMaps,
-  SmartAppBanner,
   // Contexts
   ConfigContext,
   ConfigProvider,

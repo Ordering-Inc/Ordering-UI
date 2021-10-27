@@ -234,6 +234,7 @@ SmartAppBanner.propTypes = {
   onInstall: PropTypes.func
 }
 
+// This props need to improve further
 SmartAppBanner.defaultProps = {
   daysHidden: 7,
   daysReminder: 30,

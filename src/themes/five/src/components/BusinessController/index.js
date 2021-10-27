@@ -18,7 +18,6 @@ import {
   BusinessInfo,
   BusinessInfoItem,
   BusinessName,
-  Categories,
   Medadata,
   CallCenterInformation,
   CallCenterInformationBullet,
@@ -50,17 +49,6 @@ const BusinessControllerUI = (props) => {
   const [orderState] = useOrder()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-
-  const types = ['food', 'alcohol', 'groceries', 'laundry']
-
-  const businessType = () => {
-    if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
-    const _types = []
-    types.forEach(type => business[type] && _types.push(
-      t(`BUSINESS_TYPE_${type?.replace(/\s/g, '_')?.toUpperCase()}`, type)
-    ))
-    return _types.join(', ')
-  }
 
   const handleShowAlert = () => {
     setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
@@ -129,17 +117,6 @@ const BusinessControllerUI = (props) => {
                     <Skeleton width={100} />
                   )}
                 </div>
-                {!isShowCallcenterInformation && (
-                  <Categories>
-                    {
-                      Object.keys(business).length > 0 ? (
-                        businessType()
-                      ) : (
-                        <Skeleton width={100} />
-                      )
-                    }
-                  </Categories>
-                )}
                 <Medadata isCustomerMode={isShowCallcenterInformation}>
                   {orderType === 1 && (
                     <>

@@ -35,7 +35,7 @@ export const SelectedOption = styled.p`
   }
 
   @media (min-width: 1024px) {
-    max-width: 40px;
+    max-width: unset;
   }
 
   @media (min-width: 1200px) {

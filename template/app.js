@@ -14,7 +14,6 @@ import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { Alert } from '../src/components/Confirm'
-import { SmartAppBanner } from '../src/components/SmartAppBanner'
 
 import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
@@ -107,7 +106,6 @@ export const App = () => {
       {
         loaded && (
           <>
-            <SmartAppBanner />
             <Header
               isHome={isHome}
               location={location}
