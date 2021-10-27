@@ -145,7 +145,6 @@ export const ActionsButtons = styled.div`
   }
 `
 
-
 export const OrderInfo = styled.div`
   width: 100%;
   margin: 0px 0px 20px;
@@ -288,6 +287,10 @@ export const WrapperDriver = styled.div`
 
 export const OrderProducts = styled(OrderCustomer)`
   flex-direction: column;
+
+  .product.accordion {
+    margin: 0;
+  }
 `
 
 export const OrderBill = styled.div`
@@ -540,5 +543,3 @@ export const MyOrderActions = styled.div`
     background-color: transparent;
   }
 `
-
-

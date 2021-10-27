@@ -121,6 +121,12 @@ export const ContentInfo = styled.div`
     font-weight: 600;
   }
 
+  .comment {
+    font-size: 11px;
+    color: #909BA9;
+    margin: 3px 0;
+  }
+
   span {
     display: flex;
     justify-content: space-between;
@@ -185,6 +191,7 @@ export const ProductComment = styled.div`
   }
 
   h3 {
+    font-size: 15px;
     font-weight: normal;
     text-transform: capitalize;
     margin: 0px 20px 0px 40px;

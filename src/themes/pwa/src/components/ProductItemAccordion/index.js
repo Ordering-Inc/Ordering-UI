@@ -143,7 +143,7 @@ export const ProductItemAccordion = (props) => {
                 <h3>{product.name}</h3>
                 {
                   product?.comment && (
-                    <p>{product?.comment}</p>
+                    <p className='comment'>{product?.comment}</p>
                   )
                 }
               </div>
