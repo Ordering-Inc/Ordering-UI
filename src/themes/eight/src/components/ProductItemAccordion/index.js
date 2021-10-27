@@ -355,6 +355,7 @@ export const ProductItemAccordion = (props) => {
           <AccordionContent
             ref={content}
             style={{ maxHeight: `${setHeight}` }}
+            isCustomMode={isCustomMode}
           >
             {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
               <ProductOptionsList>

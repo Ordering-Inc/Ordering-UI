@@ -176,10 +176,18 @@ export const AccordionContent = styled.div`
   `}
 
   @media (min-width: 361px) {
-    ${props => props.theme?.rtl ? css`
-      margin-right: 105px;
+    ${({ isCustomMode }) => isCustomMode ? css`
+      ${props => props.theme?.rtl ? css`
+        margin-right: 105px;
+      ` : css`
+        margin-left: 105px;
+      `}
     ` : css`
-      margin-left: 105px;
+      ${props => props.theme?.rtl ? css`
+        margin-right: 90px;
+      ` : css`
+        margin-left: 90px;
+      `}
     `}
   }
 
@@ -209,19 +217,25 @@ export const ProductComment = styled.div`
   p {
     margin: 0px;
     font-weight: 400;
-    font-size: 14px;
-    color: ${props => props.theme.colors.grayMedium};
+    font-size: 12px;
+    color: ${props => props.theme.colors.grayDark};
   }
 
   h3 {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     text-transform: capitalize;
     margin: 0px 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    color: ${props => props.theme.colors.grayMedium};
+    color: ${props => props.theme.colors.grayDark};
+  }
+
+  @media (min-width: 681px) {
+    p, h3 {
+      font-size: 14px;
+    }
   }
 `
 
@@ -330,7 +344,7 @@ export const ProductSelect = styled.select`
   font-size: 14px;
   padding: 0px;
   max-width: 40px;
-  height: 30px;
+  height: 25px;
   border: none;
   background-color: #FFF;
   border-radius: 7.6px;
@@ -365,7 +379,7 @@ export const ProductNotAvailable = styled.span`
 export const ProductOptionsList = styled.ul`
   list-style-type: none;
   color: ${props => props.theme.colors.grayDark};
-  font-size: 14px;
+  font-size: 12px;
 
   ${({ isCustomMode }) => isCustomMode && css`
     padding: 0px;
@@ -387,12 +401,12 @@ export const ProductOptionsList = styled.ul`
   p {
     font-weight: 400;
     margin: 0px;
-    color: ${props => props.theme.colors.grayMedium};
+    color: ${props => props.theme.colors.grayDark};
   }
 
   li span {
     font-weight: 400;
-    color: ${props => props.theme.colors.grayMedium};
+    color: ${props => props.theme.colors.grayDark};
   }
 
   li.ingredient {
@@ -401,6 +415,10 @@ export const ProductOptionsList = styled.ul`
       padding-right: 15px;
       padding-left: 0px;
     `}
+  }
+
+  @media (min-width: 681px) {
+    font-size: 14px;
   }
 `
 
