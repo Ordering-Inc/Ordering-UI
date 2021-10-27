@@ -52,7 +52,7 @@ const AddressDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <AddressContainer>
-        <Header>
+        {/* <Header>
           <Text>
             <h4>{addressToShow || orderState?.options?.address?.address}</h4>
             {orderState?.options?.type === 1 && !isCartPending &&
@@ -62,7 +62,7 @@ const AddressDetailsUI = (props) => {
                 {t('CHANGE', 'Change')}
               </ChangeButton>}
           </Text>
-        </Header>
+        </Header> */}
         {apiKey && (
           <WrappMap>
             <Map>

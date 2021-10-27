@@ -19,7 +19,7 @@ export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 20px;
   background-color: #FFF;
   margin-top: 30px;
 
@@ -58,6 +58,10 @@ export const OrderBill = styled.div`
     table {
       font-size: 18px;
     }
+  }
+
+  @media (min-width: 681px) {
+    padding: 10px;
   }
 `
 
