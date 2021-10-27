@@ -73,6 +73,7 @@ import { SearchBar } from './components/SearchBar'
 import { SidebarMenu } from './components/SidebarMenu'
 import { SignUpForm } from './components/SignUpForm'
 import { SingleProductCard } from './components/SingleProductCard'
+import { SmartAppBanner } from './components/SmartAppBanner'
 import { SpinnerLoader } from './components/SpinnerLoader'
 import { StripeElementsForm } from './components/StripeElementsForm'
 import { StripeRedirectForm } from './components/StripeRedirectForm'
@@ -186,6 +187,7 @@ export {
   SearchBar,
   SignUpForm,
   SingleProductCard,
+  SmartAppBanner,
   SpinnerLoader,
   StripeElementsForm,
   StripeRedirectForm,
