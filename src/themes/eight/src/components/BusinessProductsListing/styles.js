@@ -163,7 +163,10 @@ export const WrapperNotFound = styled.div`
 
 export const WrapCart = styled.div`
   max-width: 800px;
-  margin: 50px auto;
   min-height: calc(100vh - 300px);
-  padding: 0 20px;
+
+  @media (min-width: 681px) {
+    padding: 0 20px;
+    margin: 50px auto;
+  }
 `

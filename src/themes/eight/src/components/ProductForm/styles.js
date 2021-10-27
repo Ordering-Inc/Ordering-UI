@@ -360,8 +360,10 @@ export const ProductActionHeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 90%;
+  margin: 10px 0;
 
   @media (min-width: 681px) {
+    margin: 0px;
     width: initial;
   }
 `

@@ -13,7 +13,7 @@ export const AccordionSection = styled.div`
 
 const AccordionStyled = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   cursor: initial;
@@ -32,11 +32,6 @@ const AccordionStyled = styled.div`
       margin-left: initial;
     `}
   }
-
-  @media (min-width: 411px){
-    flex-direction: row;
-  }
-
 `
 
 export const Accordion = (props) => {
@@ -121,11 +116,7 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: 55%;
-
-  @media (min-width: 411px) {
-    width: calc(65% - 60px);
-  }
+  width: calc(65% - 60px);
 
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
@@ -237,7 +228,7 @@ export const ProductComment = styled.div`
 export const ProductInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 70%;
 
   h1,
   h3 {
@@ -249,14 +240,6 @@ export const ProductInfo = styled.div`
   p {
     font-size: 20px;
     margin: 0px 5px;
-  }
-
-  @media (min-width: 411px) {
-    width: 80%;
-  }
-
-  @media (min-width: 481px) {
-    width: 70%;
   }
 `
 
@@ -283,6 +266,7 @@ export const ProductError = styled.div`
 export const ProductActions = styled.div`
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 `
 
 export const ProductActionsEdit = styled.span`
@@ -298,13 +282,8 @@ export const ProductActionsEdit = styled.span`
 `
 
 export const ProductActionsDelete = styled(ProductActionsEdit)`
-  display: none;
   svg {
     margin-right: 0px;
-  }
-
-  @media (min-width: 411px){
-    display: block;
   }
 `
 
@@ -348,13 +327,13 @@ export const ProductPrice = styled.div`
 `
 
 export const ProductSelect = styled.select`
-  max-width: 55px;
+  font-size: 14px;
+  padding: 0px;
+  max-width: 40px;
   height: 30px;
   border: none;
   background-color: #FFF;
   border-radius: 7.6px;
-  padding: 0 5px;
-  font-size: 17px;
   outline: none;
   margin-left: 5px;
   cursor: pointer;
@@ -371,6 +350,12 @@ export const ProductSelect = styled.select`
     margin-right: 5px;
     margin-left: 0px;
   `}
+
+  @media (min-width: 681px) {
+    font-size: 17px;
+    padding: 0 5px;
+    max-width: 55px;
+  }
 `
 
 export const ProductNotAvailable = styled.span`
@@ -428,31 +413,45 @@ export const ProductQuantity = styled.span`
 `
 
 export const ProductCardContainer = styled.div`
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-  border-radius: 20px;
-  padding: 20px 30px 30px 30px;
+  padding: 20px;
   display: flex;
-  margin-bottom: 40px;
   justify-content: space-between;
+  border-bottom: 1px dashed #ACB2B6;
+
+  @media (min-width: 681px) {
+    padding: 20px 30px 30px 30px;
+    border-bottom: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    border-radius: 20px;
+    margin-bottom: 40px;
+  }
 `
 
 export const ProductInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: calc(100% - 100px);
-  flex-direction: column;
+  width: calc(100% - 75px);
+  flex-direction: row;
 
   > div:last-child {
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     align-items: center;
 
     > div {
       span {
-        font-size: 16px;
+        font-size: 14px;
         margin: 0 5px;
       }
     }
+  }
+
+  @media (min-width: 361px) {
+    width: calc(100% - 85px);
+  }
+
+  @media (min-width: 411px) {
+    width: calc(100% - 95px);
   }
 
   @media (min-width: 768px) {
@@ -460,19 +459,23 @@ export const ProductInfoContainer = styled.div`
     flex-direction: row;
 
     > div:last-child {
-      flex-direction: column;
       width: 25%;
       align-items: flex-end;
+      > div {
+        span {
+          font-size: 16px;
+        }
+      }
     }
   }
 `
 
 export const ProductInfoContent = styled.div`
-  width: 100%;
+  width: 60%;
   h1 {
-    color: ${props => props.theme.colors.secundary};
+    color: ${props => props.theme.colors.darkGray};
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
     margin: 0px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -481,6 +484,10 @@ export const ProductInfoContent = styled.div`
 
   @media (min-width: 768px) {
     width: calc(75% - 20px);
+    h1 {
+      color: ${props => props.theme.colors.secundary};
+      font-size: 20px;
+    }
   }
 `
 
@@ -500,7 +507,7 @@ export const IncDecActions = styled.div`
     font-size: 20px;
     background: #FFF;
     transition: all .3s ease-in-out;
-    padding: 0 10px;
+    padding: 0 5px;
     display: flex;
     align-items: center;
     &:active {
@@ -544,5 +551,11 @@ export const IncDecActions = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  @media (min-width: 681px) {
+    button {
+      padding: 0 10px;
+    }
   }
 `

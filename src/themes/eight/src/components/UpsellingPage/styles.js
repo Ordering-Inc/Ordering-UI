@@ -17,6 +17,7 @@ export const UpsellingContainer = styled.div`
     width: 100%;
     > h1 {
       font-size: 20px;
+      padding: 0 20px;
       color: ${props => props.theme.colors.grayDark};
     }
   ` : css`
@@ -26,6 +27,14 @@ export const UpsellingContainer = styled.div`
     width: 100%;
     justify-content: space-around;
   `}
+
+  @media (min-width: 681px) {
+    ${({ isCustomMode }) => isCustomMode && css`
+      > h1 {
+        padding: 0px;
+      }
+    `}
+  }
 `
 
 export const Item = styled.div`

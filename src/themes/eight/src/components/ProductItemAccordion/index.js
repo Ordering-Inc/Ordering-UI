@@ -3,7 +3,6 @@ import BsPencil from '@meronex/icons/bs/BsPencil'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   AccordionSection,
@@ -46,7 +45,6 @@ export const ProductItemAccordion = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
-  const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -257,7 +255,7 @@ export const ProductItemAccordion = (props) => {
               )}
               <ContentInfo>
                 <h3>{product.name}</h3>
-                {windowSize.width <= 410 && (
+                {/* {windowSize.width <= 410 && (
                   <span>
                     <p>{parsePrice(product.total ?? product.price)}</p>
                     {isCartProduct && !isCartPending && (
@@ -275,11 +273,11 @@ export const ProductItemAccordion = (props) => {
                       </div>
                     )}
                   </span>
-                )}
+                )} */}
               </ContentInfo>
             </ProductInfo>
 
-            {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
+            {(product?.valid || !isCartProduct) && (
               <ProductPriceSection>
                 <ProductPrice className='prod-price'>
                   <span>
