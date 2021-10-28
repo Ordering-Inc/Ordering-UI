@@ -192,7 +192,6 @@ export const MobileCartViewWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: ${props => props.theme.colors.colorTextSignForm};
   box-sizing: border-box;
 
   span {

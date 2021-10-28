@@ -94,8 +94,6 @@ export const ProductItemAccordion = (props) => {
     const pos = position ? `(${position})` : ''
     return `${quantity} x ${name} ${pos} +${price}`
   }
-  console.log(productInfo().ingredients)
-  console.log(productInfo().options)
 
   return (
     <>
