@@ -34,10 +34,10 @@ export const FormSide = styled(Side)`
 
 export const Title = styled.h1`
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 50px;
   margin-bottom: 20px;
-  width: 95%;
+  width: 100%;
   color: ${props => props.theme.colors.darkTextColor};
   @media (min-width: 576px) {
     margin-top: 0;
@@ -48,7 +48,7 @@ export const Title = styled.h1`
 `
 
 export const LoginWith = styled.div`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   border-bottom: 1px solid #E9ECEF;
   font-size: 14px;
 
@@ -72,7 +72,7 @@ export const LoginWith = styled.div`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   display: flex;
   flex-direction: column;
 
@@ -147,7 +147,7 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-   width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+   width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
    margin-top: 10px;
 
   button {
@@ -283,7 +283,7 @@ export const InputBeforeIcon = styled.div`
 export const LoginDivider = styled.div`
   display: flex;
   align-items: center;
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   margin: 30px 0;
 
   p {

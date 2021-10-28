@@ -21,9 +21,10 @@ const Side = styled.div`
 export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
-  margin: 50px auto;
+  margin: 35px auto;
 
   @media (min-width: 992px) {
+    margin: 50px auto;
     width: 55%;
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
   }
@@ -35,14 +36,17 @@ export const FormSide = styled(Side)`
 `
 
 export const Title = styled.h1`
-  font-size: 24px;
+  width: 80%;
+  font-size: 32px;
   color: ${props => props.theme.colors.secundary};
   text-align: center;
-  margin: 0 0 10px 0;
+  margin: 0 0 20px 0;
+  font-weight: 700;
+  line-height: 42px;
 
   @media (min-width: 768px) {
-    font-size: 32px;
     max-width: 350px;
+    line-height: initial;
   }
 
   @media (min-width: 992px) {
@@ -57,8 +61,14 @@ export const Title = styled.h1`
 export const Description = styled.p`
   color: ${props => props.theme.colors.grayDark};
   width: 80%;
-  font-size: 18px;
+  font-size: 16px;
   margin: 0px;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    text-align: initial;
+    font-size: 18px;
+  }
 `
 
 export const LoginWith = styled.div`
@@ -93,19 +103,26 @@ export const FormInput = styled.form`
   }
 
   button {
-    margin-top: 10px;
-    width: fit-content;
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    button {
+      width: fit-content;
+    }
   }
 `
 
 export const RedirectLink = styled.div`
-  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   margin: 0px;
-  font-size: 17px;
+  font-size: 12px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 13px 0;
 
   span {
     color: ${props => props.theme.colors.grayDark};
@@ -117,11 +134,12 @@ export const RedirectLink = styled.div`
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary} !important;
     text-decoration: none;
+    font-weight: 500;
 
     &:link, &:visited {
-      color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.primary} !important;;
     }
   }
 
@@ -131,10 +149,10 @@ export const RedirectLink = styled.div`
   }
 
   ${({ register }) => register && css`
-    width: calc(90% - 20px);
+    width: 80%;
 
     @media (min-width: 481px) {
-      width: ${({ isPopup }) => isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)'};
+      width: ${({ isPopup }) => isPopup ? '90%' : '80%'};
     }
   `}
 
@@ -270,7 +288,11 @@ export const ReCaptchaWrapper = styled.div`
 `
 
 export const DottedBorderBound = styled.div`
-  border-bottom: 9px dotted ${props => props.theme.colors.grayMedium};
+  border-bottom: 6px dotted ${props => props.theme.colors.grayMedium};
   width: 80%;
-  margin: 30px 0 20px 0;
+  ${({ bottom }) => bottom ? css`
+    margin: 45px 0 10px 0;
+  ` : css`
+    margin: 20px 0 35px 0;
+  `}
 `

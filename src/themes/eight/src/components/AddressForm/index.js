@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import FaHome from '@meronex/icons/fa/FaHome'
-import FaPlus from '@meronex/icons/fa/FaPlus'
-import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
-import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
+// import FaHome from '@meronex/icons/fa/FaHome'
+// import FaPlus from '@meronex/icons/fa/FaPlus'
+// import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
+// import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import { useForm } from 'react-hook-form'
@@ -26,7 +26,7 @@ import {
   FormControl,
   FormActions,
   AddressWrap,
-  AddressTagSection,
+  // AddressTagSection,
   WrapperMap,
   ShowMap,
   WrapperSkeleton
@@ -68,7 +68,7 @@ const AddressFormUI = (props) => {
   const [events] = useEvent()
 
   const [state, setState] = useState({ selectedFromAutocomplete: true })
-  const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
+  // const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [toggleMap, setToggleMap] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
@@ -236,15 +236,15 @@ const AddressFormUI = (props) => {
     })
   }
 
-  const handleAddressTag = (tag) => {
-    setAddressTag(tag)
-    handleChangeInput({
-      target: {
-        name: 'tag',
-        value: tag
-      }
-    })
-  }
+  // const handleAddressTag = (tag) => {
+  //   setAddressTag(tag)
+  //   handleChangeInput({
+  //     target: {
+  //       name: 'tag',
+  //       value: tag
+  //     }
+  //   })
+  // }
 
   const handleChangeAddress = (address) => {
     setState({
@@ -490,7 +490,7 @@ const AddressFormUI = (props) => {
 
             {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
 
-            <AddressTagSection>
+            {/* <AddressTagSection>
               <Button className={addressTag === 'home' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('home')}>
                 <span><FaHome /></span>
               </Button>
@@ -503,7 +503,7 @@ const AddressFormUI = (props) => {
               <Button className={addressTag === 'other' ? 'active' : ''} type='button' outline circle onClick={() => handleAddressTag('other')}>
                 <span><FaPlus /></span>
               </Button>
-            </AddressTagSection>
+            </AddressTagSection> */}
             {
               props.afterMidElements?.map((MidElement, i) => (
                 <React.Fragment key={i}>

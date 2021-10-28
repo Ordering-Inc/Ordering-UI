@@ -24,7 +24,8 @@ import {
   BusinessCartContent,
   EmptyCart,
   EmptyBtnWrapper,
-  Title
+  Title,
+  MobileCartViewWrapper
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -39,6 +40,7 @@ import { Modal } from '../Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { Cart } from '../Cart'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -73,6 +75,7 @@ const BusinessProductsListingUI = (props) => {
   const [, t] = useLanguage()
   const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
+  const windowSize = useWindowSize()
   const [events] = useEvent()
   const [{ auth }] = useSession()
   const location = useLocation()
@@ -82,6 +85,7 @@ const BusinessProductsListingUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isCartModal, setisCartModal] = useState(false)
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
@@ -212,7 +216,12 @@ const BusinessProductsListingUI = (props) => {
                         openBusinessInformation={openBusinessInformation}
                       />
                     )}
-
+                    {windowSize.width < 500 && (
+                      <MobileCartViewWrapper>
+                        <span>{parsePrice(currentCart?.total)}</span>
+                        <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
+                      </MobileCartViewWrapper>
+                    )}
                     <WrapContent>
                       <BusinessProductsList
                         categories={[
@@ -257,7 +266,7 @@ const BusinessProductsListingUI = (props) => {
                             <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
                           </div>
                           <EmptyBtnWrapper>
-                            <span>$0.00</span>
+                            <span>{parsePrice(0)}</span>
                             <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
                           </EmptyBtnWrapper>
                         </EmptyCart>
@@ -382,6 +391,41 @@ const BusinessProductsListingUI = (props) => {
             onSave={handlerProductAction}
           />
         )}
+      </Modal>
+      <Modal
+        width='40%'
+        open={isCartModal}
+        onClose={() => setisCartModal(false)}
+        padding='0'
+      >
+        <BusinessCartContent isModal>
+          <Title style={{ textAlign: 'center', marginTop: '5px' }}>{t('YOUR_CART', 'Your cart')}</Title>
+          {currentCart?.products?.length > 0 ? (
+            <>
+              <Cart
+                isForceOpenCart
+                cart={currentCart}
+                isCartPending={currentCart?.status === 2}
+                isProducts={currentCart.products.length}
+                isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                handleCartOpen={(val) => setIsCartOpen(val)}
+                isCustomMode
+                isStore
+              />
+            </>
+          ) : (
+            <EmptyCart>
+              <div className='empty-content'>
+                <AiOutlineShoppingCart />
+                <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
+              </div>
+              <EmptyBtnWrapper>
+                <span>{parsePrice(0)}</span>
+                <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
+              </EmptyBtnWrapper>
+            </EmptyCart>
+          )}
+        </BusinessCartContent>
       </Modal>
 
       {currentCart?.products && openUpselling && (
