@@ -32,7 +32,7 @@ export const FormSide = styled(Side)`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   display: flex;
   flex-direction: column;
 
@@ -109,7 +109,7 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
 
   button {
     width: 100%;
@@ -129,10 +129,10 @@ export const SocialButtons = styled.div`
 
 export const Title = styled.h1`
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 50px;
   margin-bottom: 20px;
-  width: 95%;
+  width: 100%;
   color: ${props => props.theme.colors.darkTextColor};
   @media (min-width: 576px) {
     margin-top: 0;
