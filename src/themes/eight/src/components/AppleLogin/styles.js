@@ -42,6 +42,11 @@ export const Content = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
+  ${props => props.theme?.rtl ? css`
+    padding-left: 7px;
+  ` : css`
+    padding-right: 7px;
+  `}
 
   svg {
     font-size: 20px;

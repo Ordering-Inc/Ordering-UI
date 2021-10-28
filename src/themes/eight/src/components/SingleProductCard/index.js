@@ -1,6 +1,7 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useConfig, useOrder, useUtils } from 'ordering-components'
+import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 
 import {
   CardContainer,
@@ -57,13 +58,13 @@ export const SingleProductCard = (props) => {
         onClick={() => !isSkeleton && onProductClick(product)}
         isCartOnProductsList={isCartOnProductsList}
       >
-        {!isSkeleton && productAddedToCart && productAddedToCart?.quantity > 0 && (
-          <QuantityContainer>
-            <span>{productAddedToCart?.quantity}</span>
-          </QuantityContainer>
-        )}
         {!isSkeleton ? (
           <WrapLogo>
+            {!isSkeleton && productAddedToCart && productAddedToCart?.quantity > 0 && (
+              <QuantityContainer>
+                <span>{productAddedToCart?.quantity}</span>
+              </QuantityContainer>
+            )}
             <CardLogo
               className='image'
               soldOut={isSoldOut || maxProductQuantity <= 0}
@@ -76,6 +77,7 @@ export const SingleProductCard = (props) => {
         <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
           {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
         </CardInfo>
+        <BsChevronRight />
         {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
       </CardContainer>
       {props.afterComponents?.map((AfterComponent, i) => (

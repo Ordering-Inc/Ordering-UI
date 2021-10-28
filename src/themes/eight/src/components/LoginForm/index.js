@@ -427,7 +427,6 @@ const LoginFormUI = (props) => {
               }
               {!loginWithOtpState && (
                 <RedirectLink isPopup={isPopup}>
-                  <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
@@ -463,9 +462,9 @@ const LoginFormUI = (props) => {
               )}
             </FormInput>
           )}
-          <DottedBorderBound />
+          <DottedBorderBound bottom />
           {(elementLinkToSignup && !loginWithOtpState) && (
-            <RedirectLink register isPopup={isPopup}>
+            <RedirectLink register isPopup={isPopup} isCreateAccount>
               <span>{t('NEW_ON_PLATFORM', theme?.defaultLanguages?.NEW_ON_PLATFORM || 'New on Ordering?')}</span>
               {elementLinkToSignup}
             </RedirectLink>
