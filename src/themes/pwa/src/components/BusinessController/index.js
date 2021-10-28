@@ -55,8 +55,6 @@ const BusinessControllerUI = (props) => {
     setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   }
 
-  console.log(business)
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
