@@ -183,7 +183,19 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       value: i,
       disabled: offsetDisabled(product) < i && i !== 0
     }, i === 0 ? t('REMOVE', 'Remove') : i);
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), (product === null || product === void 0 ? void 0 : product.comment) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.comment)), windowSize.width < 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement("div", null, onEditProduct && /*#__PURE__*/_react.default.createElement("span", {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "options-list"
+  }, /*#__PURE__*/_react.default.createElement("h3", null, product.name), productInfo().ingredients.length > 0 && productInfo().ingredients.some(function (ingredient) {
+    return !ingredient.selected;
+  }) && productInfo().ingredients.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement("p", {
+      key: i
+    }, item.name);
+  }), productInfo().options.length > 0 && productInfo().options.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement("p", {
+      key: i
+    }, item.name);
+  }), (product === null || product === void 0 ? void 0 : product.comment) && /*#__PURE__*/_react.default.createElement("p", null, t('COMMENTS', 'Comments'))), windowSize.width < 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement("div", null, onEditProduct && /*#__PURE__*/_react.default.createElement("span", {
     ref: productActionsEdit
   }, /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
     color: "#B1BCCC",

@@ -61,8 +61,6 @@ var MomentControlUI = function MomentControlUI(props) {
       handleChangeDate = props.handleChangeDate,
       handleChangeTime = props.handleChangeTime,
       isCheckout = props.isCheckout;
-  console.log('isAsap');
-  console.log(isAsap);
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),

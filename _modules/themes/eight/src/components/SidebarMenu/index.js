@@ -27,6 +27,10 @@ var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 
 var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
 
+var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
+
+var _FaRegClock = _interopRequireDefault(require("@meronex/icons/fa/FaRegClock"));
+
 var _orderingComponents = require("ordering-components");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
@@ -56,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
-  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _options$address4, _options$address4$add, _options$address4$add2, _configState$configs, _configState$configs$, _props$afterComponent, _props$afterElements;
 
   var auth = props.auth,
       isHideSignup = props.isHideSignup,
@@ -74,6 +78,14 @@ var SidebarMenu = function SidebarMenu(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       options = _useOrder2[0].options;
+
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parseDate = _useUtils2[0].parseDate;
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configState = _useConfig2[0];
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -143,7 +155,29 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
   }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
-  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: auth ? 'address_list' : 'address'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    active: window.location.pathname === '/address' || window.location.pathname === '/address-list'
+  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    active: window.location.pathname === '/address' || window.location.pathname === '/address-list'
+  }, (options === null || options === void 0 ? void 0 : (_options$address4 = options.address) === null || _options$address4 === void 0 ? void 0 : (_options$address4$add = _options$address4.address) === null || _options$address4$add === void 0 ? void 0 : (_options$address4$add2 = _options$address4$add.split(',')) === null || _options$address4$add2 === void 0 ? void 0 : _options$address4$add2[0]) || t('FIND_RESTAURANT', 'Find a restaurant'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'moment'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    active: window.location.pathname === '/moment'
+  }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    active: window.location.pathname === '/moment'
+  }, options !== null && options !== void 0 && options.moment ? parseDate(options === null || options === void 0 ? void 0 : options.moment, {
+    outputFormat: configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.dates_moment_format) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value
+  }) : t('ASAP_ABBREVIATION', 'ASAP'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'profile'

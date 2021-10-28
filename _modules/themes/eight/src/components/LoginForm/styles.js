@@ -11,7 +11,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -28,7 +28,7 @@ exports.LoginContainer = LoginContainer;
 
 var Side = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n"])));
 
-var FormSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin: 50px auto;\n\n  @media (min-width: 992px) {\n    width: 55%;\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px){\n    width: 45%;\n    font-size: ", ";\n  }\n"])), function (_ref2) {
+var FormSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  align-items: center;\n  margin: 35px auto;\n\n  @media (min-width: 992px) {\n    margin: 50px auto;\n    width: 55%;\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px){\n    width: 45%;\n    font-size: ", ";\n  }\n"])), function (_ref2) {
   var isPopup = _ref2.isPopup;
   return isPopup ? '12px' : '1em';
 }, function (_ref3) {
@@ -37,13 +37,13 @@ var FormSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templa
 });
 exports.FormSide = FormSide;
 
-var Title = _styledComponents.default.h1(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  color: ", ";\n  text-align: center;\n  margin: 0 0 10px 0;\n\n  @media (min-width: 768px) {\n    font-size: 32px;\n    max-width: 350px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: 40px;\n  }\n\n  @media (min-width: 1200px) {\n    font-size: 48px;\n  }\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 80%;\n  font-size: 32px;\n  color: ", ";\n  text-align: center;\n  margin: 0 0 20px 0;\n  font-weight: 700;\n  line-height: 42px;\n\n  @media (min-width: 768px) {\n    max-width: 350px;\n    line-height: initial;\n  }\n\n  @media (min-width: 992px) {\n    font-size: 40px;\n  }\n\n  @media (min-width: 1200px) {\n    font-size: 48px;\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 });
 
 exports.Title = Title;
 
-var Description = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  color: ", ";\n  width: 80%;\n  font-size: 18px;\n  margin: 0px;\n"])), function (props) {
+var Description = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  color: ", ";\n  width: 80%;\n  font-size: 16px;\n  margin: 0px;\n  text-align: center;\n\n  @media (min-width: 768px) {\n    text-align: initial;\n    font-size: 18px;\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 });
 
@@ -59,14 +59,14 @@ var LoginWith = _styledComponents.default.div(_templateObject6 || (_templateObje
 
 exports.LoginWith = LoginWith;
 
-var FormInput = _styledComponents.default.form(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  input {\n    border-width: 2px !important;\n  }\n\n  button {\n    margin-top: 10px;\n    width: fit-content;\n  }\n"])), function (_ref6) {
+var FormInput = _styledComponents.default.form(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  input {\n    border-width: 2px !important;\n  }\n\n  button {\n    margin-top: 15px;\n    width: 100%;\n  }\n\n  @media (min-width: 768px) {\n    button {\n      width: fit-content;\n    }\n  }\n"])), function (_ref6) {
   var isPopup = _ref6.isPopup;
   return isPopup ? '90%' : '80%';
 });
 
 exports.FormInput = FormInput;
 
-var RedirectLink = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  margin: 0px;\n  font-size: 17px;\n\n  span {\n    color: ", ";\n    margin-right: 5px;\n    ", "\n  }\n\n  a {\n    color: ", ";\n    text-decoration: none;\n\n    &:link, &:visited {\n      color: ", ";\n    }\n  }\n\n  * {\n    margin: 0px;\n    padding: 0px;\n  }\n\n  ", "\n\n  @media (min-width: 425px) {\n    flex-direction: row;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n    flex-direction: row;\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (props) {
+var RedirectLink = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin: 0px;\n  font-size: 12px;\n  display: flex;\n  justify-content: flex-start;\n  padding: 13px 0;\n\n  span {\n    color: ", ";\n    margin-right: 5px;\n    ", "\n  }\n\n  a {\n    color: ", " !important;\n    text-decoration: none;\n    font-weight: 500;\n\n    &:link, &:visited {\n      color: ", " !important;;\n    }\n  }\n\n  * {\n    margin: 0px;\n    padding: 0px;\n  }\n\n  ", "\n\n  @media (min-width: 425px) {\n    flex-direction: row;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n    flex-direction: row;\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 }, function (props) {
   var _props$theme;
@@ -78,9 +78,9 @@ var RedirectLink = _styledComponents.default.div(_templateObject9 || (_templateO
   return props.theme.colors.primary;
 }, function (_ref7) {
   var register = _ref7.register;
-  return register && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    width: calc(90% - 20px);\n\n    @media (min-width: 481px) {\n      width: ", ";\n    }\n  "])), function (_ref8) {
+  return register && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    width: 80%;\n\n    @media (min-width: 481px) {\n      width: ", ";\n    }\n  "])), function (_ref8) {
     var isPopup = _ref8.isPopup;
-    return isPopup ? 'calc(90% - 20px)' : 'calc(80% - 20px)';
+    return isPopup ? '90%' : '80%';
   });
 }, function (_ref9) {
   var isPopup = _ref9.isPopup;
@@ -138,8 +138,11 @@ var ReCaptchaWrapper = _styledComponents.default.div(_templateObject21 || (_temp
 
 exports.ReCaptchaWrapper = ReCaptchaWrapper;
 
-var DottedBorderBound = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  border-bottom: 9px dotted ", ";\n  width: 80%;\n  margin: 30px 0 20px 0;\n"])), function (props) {
+var DottedBorderBound = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  border-bottom: 6px dotted ", ";\n  width: 80%;\n  ", "\n"])), function (props) {
   return props.theme.colors.grayMedium;
+}, function (_ref13) {
+  var bottom = _ref13.bottom;
+  return bottom ? (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    margin: 45px 0 10px 0;\n  "]))) : (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    margin: 20px 0 35px 0;\n  "])));
 });
 
 exports.DottedBorderBound = DottedBorderBound;

@@ -11,6 +11,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
+var _BsChevronRight = _interopRequireDefault(require("@meronex/icons/bs/BsChevronRight"));
+
 var _styledComponents = require("styled-components");
 
 var _styles = require("./styles");
@@ -78,11 +80,16 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapImage, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryImage, {
       bgimage: optimizeImage(category.image || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
-    })), /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, category.name));
+    })), /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, category.name), /*#__PURE__*/_react.default.createElement(_BsChevronRight.default, null));
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.CategoryCard, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.WrapImage, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryImage, null)), /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapImage, {
+      isSkeleton: true
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 90,
+      height: 90
+    }), /*#__PURE__*/_react.default.createElement(_styles.CategoryImage, null)), /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     })));
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {

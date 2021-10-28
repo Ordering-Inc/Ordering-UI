@@ -70,7 +70,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), orderTypes && orderTypes.map(function (item, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('HOW_WILL_YOUR_ORDER_TYPE', 'How will your order type?')), orderTypes && orderTypes.map(function (item, i) {
     var _orderStatus$options;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListItemContainer, {

@@ -87,7 +87,7 @@ var BusinessInfoContent = _styledComponents.default.div(_templateObject13 || (_t
 
 exports.BusinessInfoContent = BusinessInfoContent;
 
-var WrapperSearch = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  .search-bar {\n    @media (min-width: 768px) {\n      margin: 0;\n      margin-right: 10px;\n      ", "\n    } \n    \n    @media(max-width: 480px){\n      input {\n        padding: 7px;\n        padding-left: 30px;\n        padding-right: 20px;\n        width: 30px;\n        border-bottom: 0;\n        &:focus{\n          margin-left: 20px;\n          width: 100%;\n          border-bottom: 1px solid #E9ECEF;\n        }\n      }\n    }\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n"])), function (props) {
+var WrapperSearch = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n\n  > svg {\n    margin-left: 20px;\n    color: #748194;\n    font-size: 24px;\n    cursor: pointer;\n  }\n\n  .search-bar {\n    @media (min-width: 768px) {\n      margin: 0;\n      margin-right: 10px;\n      ", "\n    } \n    \n    @media(max-width: 480px){\n      input {\n        padding: 7px;\n        padding-left: 30px;\n        padding-right: 20px;\n        width: 30px;\n        border-bottom: 0;\n        &:focus{\n          margin-left: 20px;\n          width: 100%;\n          border-bottom: 1px solid #E9ECEF;\n        }\n      }\n    }\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme4;
 
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
@@ -99,7 +99,7 @@ var WrapperSearch = _styledComponents.default.div(_templateObject14 || (_templat
 
 exports.WrapperSearch = WrapperSearch;
 
-var BusinessDetail = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  h5 {\n    font-size: 14px;\n    color: #909BA9;\n    margin: 0 5px 0 0;\n    ", "\n\n    span {\n      margin-right: 5px;\n      ", "\n    }\n  }\n\n\n"])), function (props) {
+var BusinessDetail = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  p {\n    font-size: 14px;\n    color: #909BA9;\n    margin: 0 5px 0 0;\n    ", "\n\n    span {\n      margin-right: 5px;\n      ", "\n    }\n  }\n\n\n"])), function (props) {
   var _props$theme6;
 
   return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n    "])));

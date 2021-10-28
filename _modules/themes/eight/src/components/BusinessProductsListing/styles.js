@@ -17,11 +17,11 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 90%;\n  margin: 30px auto 0px;\n  min-height: calc(100vh - 300px);\n\n  @media (min-width: 768px) {\n    width: 80%;\n    margin: 50px auto 0px;\n  }\n"])));
+var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px auto;\n  min-height: calc(100vh - 300px);\n\n  @media (min-width: 768px) {\n    margin: 30px auto 0px;\n    width: 80%;\n    margin: 50px auto 0px;\n  }\n"])));
 
 exports.ProductsContainer = ProductsContainer;
 
-var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n"])), function (props) {
+var WrapContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  background: ", ";\n\n  @media (min-width: 381px) {\n    padding: 15px;\n  }\n\n  @media (min-width: 681px) {\n    padding: 5px;\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 });
 
@@ -70,6 +70,6 @@ var WrapperNotFound = _styledComponents.default.div(_templateObject15 || (_templ
 
 exports.WrapperNotFound = WrapperNotFound;
 
-var WrapCart = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  max-width: 800px;\n  margin: 50px auto;\n  min-height: calc(100vh - 300px);\n  padding: 0 20px;\n"])));
+var WrapCart = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  max-width: 800px;\n  min-height: calc(100vh - 300px);\n\n  @media (min-width: 681px) {\n    padding: 0 20px;\n    margin: 50px auto;\n  }\n"])));
 
 exports.WrapCart = WrapCart;

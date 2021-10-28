@@ -490,7 +490,7 @@ var LoginFormUI = function LoginFormUI(props) {
     }, props));
   }), !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles2.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
+  }, elementLinkToForgotPassword), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles2.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
     handleReCaptcha: handleReCaptcha
   })), !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primaryGradient",
@@ -503,9 +503,12 @@ var LoginFormUI = function LoginFormUI(props) {
     onClick: function onClick() {
       setLoginWithOtpState(false);
     }
-  }, t('CANCEL', 'Cancel'))), /*#__PURE__*/_react.default.createElement(_styles2.DottedBorderBound, null), elementLinkToSignup && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, {
+  }, t('CANCEL', 'Cancel'))), /*#__PURE__*/_react.default.createElement(_styles2.DottedBorderBound, {
+    bottom: true
+  }), elementLinkToSignup && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, {
     register: true,
-    isPopup: isPopup
+    isPopup: isPopup,
+    isCreateAccount: true
   }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.NEW_ON_PLATFORM) || 'New on Ordering?')), elementLinkToSignup)), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('LOGIN', 'Login'),
     content: alertState.content,

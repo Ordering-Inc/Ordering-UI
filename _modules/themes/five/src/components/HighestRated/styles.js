@@ -21,7 +21,7 @@ var ErrorMessage = _styledComponents.default.span(_templateObject2 || (_template
 
 exports.ErrorMessage = ErrorMessage;
 
-var BusinessList = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  box-sizing: border-box;\n\n  > div {\n    width: 250px;\n    min-width: 250px;\n  }\n\n  #highestRated {\n    > div {\n      width: 250px;\n      min-width: 250px;\n\n      @media (min-width: 481px) {\n        max-height: 320px;\n        width: 310px;\n        min-width: 310px;\n      }\n      @media (min-width: 993px) {\n        width: 350px;\n        min-width: 350px;\n      }\n      @media (min-width: 1200px) {\n        width: 430px;\n        min-width: 430px;\n      }\n    }\n  }\n"])));
+var BusinessList = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  box-sizing: border-box;\n\n  #highestRated {\n    > div {\n      width: 250px;\n      min-width: 250px;\n\n      @media (min-width: 481px) {\n        max-height: 320px;\n        width: 310px;\n        min-width: 310px;\n      }\n      @media (min-width: 993px) {\n        width: 350px;\n        min-width: 350px;\n      }\n      @media (min-width: 1200px) {\n        width: 430px;\n        min-width: 430px;\n      }\n    }\n  }\n"])));
 
 exports.BusinessList = BusinessList;
 
