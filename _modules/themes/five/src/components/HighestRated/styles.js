@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.HighestRatedContainer = exports.ErrorMessage = exports.Description = exports.BusinessList = void 0;
+exports.Title = exports.HighestRatedContainer = exports.ErrorMessage = exports.Description = exports.BusinessListWrapper = exports.BusinessList = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21,7 +21,7 @@ var ErrorMessage = _styledComponents.default.span(_templateObject2 || (_template
 
 exports.ErrorMessage = ErrorMessage;
 
-var BusinessList = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n"])));
+var BusinessList = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  box-sizing: border-box;\n\n  #highestRated {\n    > div {\n      width: 250px;\n      min-width: 250px;\n\n      @media (min-width: 481px) {\n        max-height: 320px;\n        width: 310px;\n        min-width: 310px;\n      }\n      @media (min-width: 993px) {\n        width: 350px;\n        min-width: 350px;\n      }\n      @media (min-width: 1200px) {\n        width: 430px;\n        min-width: 430px;\n      }\n    }\n  }\n"])));
 
 exports.BusinessList = BusinessList;
 
@@ -40,3 +40,7 @@ var Description = _styledComponents.default.p(_templateObject5 || (_templateObje
 });
 
 exports.Description = Description;
+
+var BusinessListWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow: scroll hidden;\n  width: 100%;\n"])));
+
+exports.BusinessListWrapper = BusinessListWrapper;

@@ -286,7 +286,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  })), productCart.total && /*#__PURE__*/_react.default.createElement(_styles2.ProductCartTotalPrice, null, /*#__PURE__*/_react.default.createElement("span", null, t('Price_V2', 'Price')), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(productCart.total))), /*#__PURE__*/_react.default.createElement(_styles2.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductInnerContainer, null, productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement(_styles2.IncDecActions, null, /*#__PURE__*/_react.default.createElement("button", {
+  })), productCart.total && /*#__PURE__*/_react.default.createElement(_styles2.ProductCartTotalPrice, null, /*#__PURE__*/_react.default.createElement("span", null, t('Price_V2', 'Price')), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(productCart.total))), /*#__PURE__*/_react.default.createElement(_styles2.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductActionHeaderContainer, null, productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement(_styles2.IncDecActions, null, /*#__PURE__*/_react.default.createElement("button", {
     className: "decrease",
     onClick: decrement,
     disabled: productCart.quantity === 1 || isSoldOut
@@ -294,7 +294,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     className: "increase",
     onClick: increment,
     disabled: maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut
-  }, "+")), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, "+")), productCart.total && /*#__PURE__*/_react.default.createElement(_styles2.ProductCartTotalPrice, {
+    isMobile: true
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('Price_V2', 'Price')), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(productCart.total)))), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     className: "add ".concat(maxProductQuantity === 0 || Object.keys(errors).length > 0 ? 'disabled' : ''),
     color: "primaryGradient",
     onClick: function onClick() {

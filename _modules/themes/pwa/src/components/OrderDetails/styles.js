@@ -127,7 +127,7 @@ var WrapperDriver = _styledComponents.default.div(_templateObject24 || (_templat
 });
 
 exports.WrapperDriver = WrapperDriver;
-var OrderProducts = (0, _styledComponents.default)(OrderCustomer)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  flex-direction: column;\n"])));
+var OrderProducts = (0, _styledComponents.default)(OrderCustomer)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  flex-direction: column;\n\n  .product.accordion {\n    margin: 0;\n  }\n"])));
 exports.OrderProducts = OrderProducts;
 
 var OrderBill = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 25px;\n  table {\n    width: 100%;\n    font-size: 14px;\n    td span {\n      unicode-bidi: bidi-override;\n    }\n    tr td:nth-child(2) {\n      text-align: right;\n      ", "\n    }\n  }\n\n  table.total {\n    border-top: 1px solid #BFBFBF;\n    margin-top: 15px;\n    tr {\n      font-size: 14px;\n      td:nth-child(1) {\n        font-weight: 600;\n        font-size: 20px;\n        padding-top: 10px;\n      }\n      td:nth-child(2) {\n        font-weight: 600;\n        font-size: 20px;\n        padding-top: 10px;\n      }\n    }\n  }\n\n  @media (min-width: 678px) {\n    table {\n      font-size: 16px;\n    }\n  }\n"])), function (props) {

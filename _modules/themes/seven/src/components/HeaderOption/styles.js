@@ -24,7 +24,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
   });
 }, function (_ref2) {
   var variant = _ref2.variant;
-  return variant === 'address' && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    @media (min-width: 1200px) { \n      min-width: 125px\n    }\n  "])));
+  return variant === 'address' && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    width: 60%;\n    @media (min-width: 1024px) { \n      width: auto;\n    }\n    @media (min-width: 1200px) { \n      min-width: 125px\n    }\n  "])));
 }, function (_ref3) {
   var variant = _ref3.variant;
   return variant === 'moment' && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    width: 40%;\n  "])));

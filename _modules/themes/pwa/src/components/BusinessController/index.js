@@ -94,19 +94,6 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var types = ['food', 'alcohol', 'groceries', 'laundry'];
-
-  var businessType = function businessType() {
-    if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
-    var _types = [];
-    types.forEach(function (type) {
-      var _type$replace;
-
-      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
-    });
-    return _types.join(', ');
-  };
-
   var handleShowAlert = function handleShowAlert() {
     setAlertState({
       open: true,
@@ -151,9 +138,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })), !isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles.Categories, null, Object.keys(business).length > 0 ? businessType() : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 100
-  })), /*#__PURE__*/_react.default.createElement(_styles.Medadata, {
+  })), !isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles.Categories, null, business === null || business === void 0 ? void 0 : business.address), /*#__PURE__*/_react.default.createElement(_styles.Medadata, {
     isCustomerMode: isShowCallcenterInformation
   }, orderType === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (business === null || business === void 0 ? void 0 : business.delivery_price) >= 0 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_FEE', 'Delivery fee')), business && parsePrice(business === null || business === void 0 ? void 0 : business.delivery_price)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70

@@ -23,9 +23,9 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ContainerCard = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  border-radius: 7.6px;\n  max-height: 300px;\n  height: ", ";\n  border-radius: 10px;\n  margin: 30px 20px;\n\n  width: calc(100% - 40px);\n\n  @media (min-width: 481px) {\n    max-height: 330px;\n  }\n\n  @media (min-width: 681px) {\n    width: calc(50% - 40px);\n  }\n\n  @media (min-width: 993px) {\n    width: calc(33% - 40px);\n  }\n\n  @media (min-width: 1200px) {\n    width: calc(25% - 40px);\n  }\n"])), function (_ref) {
+var ContainerCard = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  border-radius: 7.6px;\n  max-height: 300px;\n  height: ", ";\n  border-radius: 10px;\n  margin: 30px 20px;\n\n  width: calc(100% - 40px);\n\n  @media (min-width: 481px) {\n    max-height: 320px;\n  }\n\n  @media (min-width: 681px) {\n    width: calc(50% - 40px);\n  }\n\n  @media (min-width: 993px) {\n    width: calc(33% - 40px);\n  }\n\n  @media (min-width: 1200px) {\n    width: calc(25% - 40px);\n  }\n"])), function (_ref) {
   var isSkeleton = _ref.isSkeleton;
-  return isSkeleton ? 'auto' : '330px';
+  return isSkeleton ? 'auto' : '320px';
 });
 
 exports.ContainerCard = ContainerCard;
