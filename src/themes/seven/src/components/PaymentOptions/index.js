@@ -13,6 +13,7 @@ import {
   useLanguage,
   useSession
 } from 'ordering-components'
+
 import { PaymentOptionStripe } from '../../../../../components/PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
 import { StripeElementsForm } from '../../../../../components/StripeElementsForm'
@@ -23,6 +24,7 @@ import { Modal } from '../../../../../components/Modal'
 
 import { Select } from '../../styles/Select'
 import { PaymentOptionCash } from '../PaymentOptionCash'
+
 import {
   PaymentMethodsContainer,
   PaymentMethodsList,
@@ -99,6 +101,7 @@ const PaymentOptionsUI = (props) => {
       setPaymethodData(props.paySelected?.data)
     }
   }, [props.paySelected])
+
   const _paymentType = paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => {
     return {
       value: paymethod?.id,
@@ -153,9 +156,9 @@ const PaymentOptionsUI = (props) => {
           {!(paymethodsList.loading || isLoading) &&
             !paymethodsList.error &&
             (!paymethodsList?.paymethods || paymethodsList.paymethods.length === 0) &&
-          (
-            <p>{t('NO_PAYMENT_METHODS', 'No payment methods!')}</p>
-          )}
+            (
+              <p>{t('NO_PAYMENT_METHODS', 'No payment methods!')}</p>
+            )}
         </PaymentMethodsList>
         {paymethodSelected?.gateway === 'cash' && (
           <PaymentOptionCash
@@ -224,6 +227,8 @@ const PaymentOptionsUI = (props) => {
             />
           )}
         </Modal>
+        {/* Globalpay */}
+
         {/* Stripe Connect */}
         <Modal
           title={t('SELECT_A_CARD', 'Select a card')}

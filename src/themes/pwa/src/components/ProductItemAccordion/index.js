@@ -139,11 +139,17 @@ export const ProductItemAccordion = (props) => {
             )}
 
             <ContentInfo>
-              <div>
+              <div className='options-list'>
                 <h3>{product.name}</h3>
+                {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && productInfo().ingredients.map((item, i) => (
+                  <p key={i}>{item.name}</p>
+                ))}
+                {productInfo().options.length > 0 && productInfo().options.map((item, i) => (
+                  <p key={i}>{item.name}</p>
+                ))}
                 {
                   product?.comment && (
-                    <p>{product?.comment}</p>
+                    <p>{t('COMMENTS', 'Comments')}</p>
                   )
                 }
               </div>

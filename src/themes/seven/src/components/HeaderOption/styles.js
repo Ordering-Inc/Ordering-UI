@@ -24,6 +24,10 @@ export const Container = styled.div`
   `}
 
   ${({ variant }) => variant === 'address' && css`
+    width: 60%;
+    @media (min-width: 1024px) { 
+      width: auto;
+    }
     @media (min-width: 1200px) { 
       min-width: 125px
     }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
+import HiArrowNarrowLeft from '@meronex/icons/hi/HiArrowNarrowLeft'
 import {
   Checkout as CheckoutController,
   useOrder,
@@ -16,6 +17,7 @@ import {
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { useHistory } from 'react-router-dom'
 
 import {
   Container,
@@ -75,6 +77,7 @@ const CheckoutUI = (props) => {
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
+  const history = useHistory()
   // const [{ options, loading }, { changePaymethod }] = useOrder()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
@@ -185,6 +188,9 @@ const CheckoutUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <Container>
         <WrapperLeftContainer>
+          {windowSize.width < 500 && (
+            <HiArrowNarrowLeft className='left-arrow' onClick={() => history.goBack()} />
+          )}
           <WrapperLeftContent>
             {!cartState.loading && cart?.status === 2 && (
               <WarningMessage>

@@ -2,7 +2,11 @@ import styled, { css } from 'styled-components'
 import React from 'react'
 
 export const OrderTypeSelectorContainer = styled.div`
-  padding: 0 3px;
+  padding: 0;
+
+  @media (min-width: 576px) {
+    padding: 0 3px;
+  }
 `
 
 export const OrderTypeListItemContainerStyled = styled.div`
@@ -84,7 +88,8 @@ export const OrderStartWrapper = styled.div`
 export const OrderTypeListTitle = styled.h1`
   text-align: center;
   font-weight: 600;
-  font-size: 17px;
+  font-size: 15px;
+  line-height: 21px;
   line-height: 21px;
   color: ${props => props.theme.colors.darkTextColor};
   margin: 0 0 30px;

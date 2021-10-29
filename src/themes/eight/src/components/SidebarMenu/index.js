@@ -8,8 +8,9 @@ import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
-
-import { useEvent, useLanguage, useOrder } from 'ordering-components'
+import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
+import FaRegClock from '@meronex/icons/fa/FaRegClock'
+import { useEvent, useLanguage, useOrder, useUtils, useConfig } from 'ordering-components'
 
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { LogoutButton } from '../../../../../components/LogoutButton'
@@ -32,6 +33,8 @@ export const SidebarMenu = (props) => {
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
+  const [{ parseDate }] = useUtils()
+  const [configState] = useConfig()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -137,6 +140,66 @@ export const SidebarMenu = (props) => {
                   ) : (
                     t('HOME', 'Home')
                   )}
+                </TextInfo>
+              </MenuLinkText>
+              <MenuLinkSeparator>
+                <div>
+                  <hr />
+                </div>
+              </MenuLinkSeparator>
+            </WrappContent>
+          </MenuLink>
+
+          <MenuLink
+            onClick={() => handleGoToPage({ page: auth ? 'address_list' : 'address' })}
+          >
+            <WrappContent>
+              <MenuLinkIcon
+                active={
+                  window.location.pathname === '/address' ||
+                  window.location.pathname === '/address-list'
+                }
+              >
+                <FaMapMarkerAlt />
+              </MenuLinkIcon>
+              <MenuLinkText>
+                <TextInfo
+                  active={
+                    window.location.pathname === '/address' ||
+                    window.location.pathname === '/address-list'
+                  }
+                >
+                  {options?.address?.address?.split(',')?.[0] || t('FIND_RESTAURANT', 'Find a restaurant')}
+                </TextInfo>
+              </MenuLinkText>
+              <MenuLinkSeparator>
+                <div>
+                  <hr />
+                </div>
+              </MenuLinkSeparator>
+            </WrappContent>
+          </MenuLink>
+
+          <MenuLink
+            onClick={() => handleGoToPage({ page: 'moment' })}
+          >
+            <WrappContent>
+              <MenuLinkIcon
+                active={
+                  window.location.pathname === '/moment'
+                }
+              >
+                <FaRegClock />
+              </MenuLinkIcon>
+              <MenuLinkText>
+                <TextInfo
+                  active={
+                    window.location.pathname === '/moment'
+                  }
+                >
+                  {options?.moment
+                    ? parseDate(options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
+                    : t('ASAP_ABBREVIATION', 'ASAP')}
                 </TextInfo>
               </MenuLinkText>
               <MenuLinkSeparator>

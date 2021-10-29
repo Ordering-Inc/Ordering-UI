@@ -5,14 +5,14 @@ const CustomInputContainer = styled.div`
   position: relative;
 
   > span {
-    font-size: 14px;
+    font-size: 12px;
     color: ${props => props.theme.colors.grayMedium};
     position: absolute;
-    top: 15px;
+    top: 10px;
     ${props => props.theme?.rtl ? css`
-      margin-right: 20px;
+      margin-right: 22px;
     ` : css`
-      margin-left: 20px;
+      margin-left: 22px;
     `}
   }
 
@@ -20,9 +20,9 @@ const CustomInputContainer = styled.div`
   > textarea {
     width: 100%;
     border: 2px solid ${props => props.theme.colors.grayDark};
-    padding: 40px 20px 10px 20px;
+    padding: 32px 20px 10px 20px;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 7.6px;
     outline: none;
     color: ${props => props.theme.colors.grayDark};
@@ -34,6 +34,18 @@ const CustomInputContainer = styled.div`
 
   > textarea {
     resize: none;
+  }
+
+  @media (min-width: 768px) {
+    span {
+      top: 15px;
+      font-size: 14px;
+    }
+    > input,
+    > textarea {
+      padding: 40px 20px 10px 20px;
+      font-size: 16px;
+    }
   }
 `
 

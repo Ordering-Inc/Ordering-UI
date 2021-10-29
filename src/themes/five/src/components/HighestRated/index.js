@@ -8,8 +8,10 @@ import {
   ErrorMessage,
   BusinessList,
   Title,
-  Description
+  Description,
+  BusinessListWrapper
 } from './styles'
+import { AutoScroll } from '../AutoScroll'
 
 const HighestRatedUI = (props) => {
   const {
@@ -33,55 +35,59 @@ const HighestRatedUI = (props) => {
       <HighestRatedContainer>
         <Title>{t('HIGHEST_RATED', 'Highest rated')}</Title>
         <Description>{t('TOP_RATINGS_AND_GREAT_SERVICE', 'Top ratings and great service')}</Description>
-        <BusinessList>
-          {
-            !businessesList.loading && businessesList.businesses.length === 0 && (
-              <NotFoundSource
-                content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-              >
-                <Button
-                  outline
-                  color='primary'
-                  onClick={() => handleClickAddress()}
+        <BusinessListWrapper>
+          <BusinessList>
+            {
+              !businessesList.loading && businessesList.businesses.length === 0 && (
+                <NotFoundSource
+                  content={t('NOT_FOUND_BUSINESSES_HIGHEST_RATED', 'No highest rated businesses found, please change filters or change address.')}
                 >
-                  {t('CHANGE_ADDRESS', 'Select other Address')}
-                </Button>
-              </NotFoundSource>
-            )
-          }
-          {
-            !businessesList?.loading && businessesList?.businesses?.map((business) => (
-              business?.reviews?.total > 0 && (
-                <BusinessController
-                  key={business.id}
-                  className='card'
-                  business={business}
-                  isBusinessOpen={business.open}
-                  handleCustomClick={handleBusinessClick}
-                  orderType={orderState?.options?.type}
-                  isCustomLayout={isCustomLayout}
-                  isShowCallcenterInformation={isCustomLayout}
-                />
+                  <Button
+                    outline
+                    color='primary'
+                    onClick={() => handleClickAddress()}
+                  >
+                    {t('CHANGE_ADDRESS', 'Select other Address')}
+                  </Button>
+                </NotFoundSource>
               )
-            ))
-          }
-          {businessesList.loading && (
-            [...Array(8).keys()].map(i => (
-              <BusinessController
-                key={i}
-                className='card'
-                business={{}}
-                isSkeleton
-                orderType={orderState?.options?.type}
-              />
-            ))
-          )}
-          {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
-            businessesList.error.map((e, i) => (
-              <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
-            ))
-          )}
-        </BusinessList>
+            }
+            <AutoScroll scrollId='highestRated'>
+              {
+                !businessesList?.loading && businessesList?.businesses?.map((business) => (
+                  business?.reviews?.total > 0 && (
+                    <BusinessController
+                      key={business.id}
+                      className='card'
+                      business={business}
+                      isBusinessOpen={business.open}
+                      handleCustomClick={handleBusinessClick}
+                      orderType={orderState?.options?.type}
+                      isCustomLayout={isCustomLayout}
+                      isShowCallcenterInformation={isCustomLayout}
+                    />
+                  )
+                ))
+              }
+            </AutoScroll>
+            {businessesList.loading && (
+              [...Array(8).keys()].map(i => (
+                <BusinessController
+                  key={i}
+                  className='card'
+                  business={{}}
+                  isSkeleton
+                  orderType={orderState?.options?.type}
+                />
+              ))
+            )}
+            {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
+              businessesList.error.map((e, i) => (
+                <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+              ))
+            )}
+          </BusinessList>
+        </BusinessListWrapper>
       </HighestRatedContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
