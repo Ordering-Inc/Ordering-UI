@@ -122,8 +122,12 @@ export const BusinessContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 135px;
+  max-height: 170px;
   padding: 0 20px 20px 20px;
+
+  @media (min-width: 481px){
+    max-height: 150px;
+  }
 `
 
 export const WrapperBusinessLogo = styled.div`
@@ -236,9 +240,10 @@ export const Categories = styled.div`
   font-size: 14px;
   font-weight: 300;
   color: #6C6C6C;
+  display: block !important;
 
   @media (min-width: 481px) {
-    font-size: 16px;
+    display: none !important;
   }
 `
 

@@ -40,7 +40,7 @@ const HighestRatedUI = (props) => {
             {
               !businessesList.loading && businessesList.businesses.length === 0 && (
                 <NotFoundSource
-                  content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
+                  content={t('NOT_FOUND_BUSINESSES_HIGHEST_RATED', 'No highest rated businesses found, please change filters or change address.')}
                 >
                   <Button
                     outline

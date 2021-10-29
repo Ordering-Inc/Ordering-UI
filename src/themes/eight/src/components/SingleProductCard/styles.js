@@ -4,18 +4,37 @@ import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  width: calc(100% - 40px);
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
   cursor: pointer;
   position: relative;
-  margin: 10px;
-  padding: 20px;
   box-sizing: border-box;
-  border-radius: 7.6px;
+  padding: 25px 35px;
+  border-bottom: 1px dashed ${props => props.theme.colors.grayMedium};
+  justify-content: space-between;
 
   &:hover {
     box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;
     background-color: ${props => props.theme.colors.third};
+  }
+
+  > svg {
+    color: ${props => props.theme.colors.secundary};
+  }
+  
+  @media (min-width: 681px) {
+    justify-content: initial;
+    padding: 20px;
+    border-radius: 7.6px;
+    border-bottom: none;
+    margin: 10px;
+    flex-direction: column;
+    align-items: initial;
+
+    > svg {
+      display: none;
+    }
   }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
@@ -55,14 +74,11 @@ export const CardInfo = styled.div`
   h1 {
     font-size: 16px;
     font-weight: ${({ soldOut }) => soldOut ? 'bold' : '500'};
-    text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-align: center;
-    color: ${props => props.theme.colors.secundary};
+    color: ${props => props.theme.colors.darkGray};
     margin: 0px;
-    padding-top: 10px;
   }
 
   p {
@@ -87,6 +103,18 @@ export const CardInfo = styled.div`
     font-size: 13px;
   }
 
+  width: calc(100% - 150px);
+
+  @media (min-width: 681px) {
+    width: 100%;
+
+    h1 {
+      padding-top: 10px;
+      text-align: center;
+      color: ${props => props.theme.colors.secundary};
+    }
+  }
+
   @media (min-width: 1024px) {
     p {
       font-size: 16px;
@@ -99,7 +127,11 @@ export const CardInfo = styled.div`
 `
 
 export const WrapLogo = styled.div`
-  width: 100%;
+  position: relative;
+  width: 90px;
+  @media (min-width: 681px) {
+    width: 100%;
+  }
 `
 
 const CardLogoStyled = styled.div`
@@ -133,12 +165,15 @@ export const QuantityContainer = styled.div`
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.primaryContrast};
   position: absolute;
-  left: 100%;
-  bottom: 100%;
   width: 25px;
   height: 25px;
   text-align: center;
   border-radius: 50%;
-  transform: translate(-33px,33px);
   z-index: 1;
+  top: -10px;
+  ${props => props.theme?.rtl ? css`
+    left: -10px;
+  ` : css`
+    right: -10px;
+  `}
 `

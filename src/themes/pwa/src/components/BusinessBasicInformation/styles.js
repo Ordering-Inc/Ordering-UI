@@ -199,6 +199,13 @@ export const WrapperSearch = styled.div`
   align-items: center;
   justify-content: flex-end;
 
+  > svg {
+    margin-left: 20px;
+    color: #748194;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
   .search-bar {
     @media (min-width: 768px) {
       margin: 0;
@@ -238,7 +245,7 @@ export const BusinessDetail = styled.div`
   display: flex;
   align-items: center;
 
-  h5 {
+  p {
     font-size: 14px;
     color: #909BA9;
     margin: 0 5px 0 0;

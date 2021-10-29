@@ -35,7 +35,6 @@ import {
   RightHeader,
   Menu,
   MenuLink,
-  SubMenu,
   CustomerInfo,
   UserEdit,
   VerticalBorderLine,
@@ -196,7 +195,7 @@ export const Header = (props) => {
                     </span>
                   </CustomerInfo>
                 )}
-                {onlineStatus && windowSize.width > 820 && (
+                {onlineStatus && windowSize.width > 860 && (
                   <>
                     <VerticalBorderLine />
                     <AddressItem onClick={() => handleAddress()}>
@@ -284,42 +283,6 @@ export const Header = (props) => {
             </RightHeader>
           )}
         </InnerHeader>
-        {onlineStatus && isShowOrderOptions && (
-          windowSize.width > 768 && windowSize.width <= 820 ? (
-            <SubMenu>
-              <AddressItem onClick={() => handleAddress()}>
-                <SuLocation /> {orderState.options?.address?.address?.split(',')?.[0] || t('FIND_RESTAURANT', 'Find a restaurant')}
-              </AddressItem>
-              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                <MomentItem
-                  onClick={() => handleMoment()}
-                >
-                  <FaRegClock />
-                  {orderState.options?.moment
-                    ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
-                    : t('ASAP_ABBREVIATION', 'ASAP')}
-                </MomentItem>
-              )}
-            </SubMenu>
-          ) : (
-            <SubMenu>
-              <HeaderOption
-                auth={auth}
-                variant='address'
-                addressState={orderState?.options?.address?.address?.split(',')?.[0]}
-                onClick={() => handleAddress()}
-              />
-              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                <HeaderOption
-                  auth={auth}
-                  variant='moment'
-                  momentState={orderState?.options?.moment}
-                  onClick={() => handleMoment()}
-                />
-              )}
-            </SubMenu>
-          )
-        )}
         {modalIsOpen && (
           <Modal
             title={t(modalSelected.toUpperCase(), capitalize(modalSelected))}
