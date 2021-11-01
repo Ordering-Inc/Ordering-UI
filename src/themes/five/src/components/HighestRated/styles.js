@@ -19,21 +19,20 @@ export const BusinessList = styled.div`
 
   #highestRated {
     > div {
-      width: 250px;
-      min-width: 250px;
+      width: calc(100vw - 40px);
+      min-width: calc(100vw - 40px);
 
-      @media (min-width: 481px) {
-        max-height: 320px;
-        width: 310px;
-        min-width: 310px;
+      @media (min-width: 681px) {
+        width: calc(50vw - 40px);
+        min-width: calc(50vw - 40px);
       }
       @media (min-width: 993px) {
-        width: 350px;
-        min-width: 350px;
+        width: calc(33vw - 40px);
+        min-width: calc(33vw - 40px);
       }
       @media (min-width: 1200px) {
-        width: 430px;
-        min-width: 430px;
+        width: calc(25vw - 40px);
+        min-width: calc(25vw - 40px);
       }
     }
   }
