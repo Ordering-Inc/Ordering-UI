@@ -22,6 +22,13 @@ export const WrapperLeftContainer = styled.div`
   box-sizing: border-box;
   padding: 20px;
 
+  > svg {
+    color: #748194;
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
   @media (min-width: 576px) {
     padding: 40px 20px;
   }
@@ -199,8 +206,13 @@ export const WrapperLeftContent = styled.div`
   .checkout-title {
     margin: 0;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 20px;
     color: ${props => props.theme?.colors.darkTextColor};
+
+    @media(min-width: 500px) {
+      font-size: 24px;
+    }
+
     @media(min-width: 768px) {
       font-size: 32px;
     }

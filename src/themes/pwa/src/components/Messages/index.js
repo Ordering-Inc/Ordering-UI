@@ -396,13 +396,13 @@ const MessagesUI = (props) => {
         {business && (
           <HeaderOnline>
             <h1>{order.business?.name}</h1>
-            <span>{t('ONLINE', 'Online')}</span>
+            <span>{t('BUSINESS', 'Business')}</span>
           </HeaderOnline>
         )}
         {driver && (
           <HeaderOnline>
             <h1>{order.driver?.name}</h1>
-            <span>{t('ONLINE', 'Online')}</span>
+            <span>{t('DRIVER', 'Driver')}</span>
           </HeaderOnline>
         )}
       </HeaderProfile>

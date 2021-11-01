@@ -17,11 +17,6 @@ export const BusinessList = styled.div`
   display: flex;
   box-sizing: border-box;
 
-  > div {
-    width: 250px;
-    min-width: 250px;
-  }
-
   #highestRated {
     > div {
       width: 250px;
