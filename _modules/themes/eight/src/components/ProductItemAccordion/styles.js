@@ -13,7 +13,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -71,7 +71,7 @@ var ProductImage = function ProductImage(props) {
 
 exports.ProductImage = ProductImage;
 
-var ContentInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-transform: capitalize;\n  margin-left: 10px;\n  width: calc(65% - 60px);\n\n  ", "\n\n  h3 {\n    font-size: 14px;\n    margin: 0px;\n    font-weight: 600;\n  }\n\n  span {\n    display: flex;\n    justify-content: space-between;\n    margin: 0px;\n\n    p {\n      margin: 0px;\n      font-size: 14px;\n    }\n\n    div {\n      display: flex;\n\n      span {\n        height: 20px;\n        svg {\n          font-size: 20px;\n          &:nth-child(1) {\n            margin-right: 3px;\n            ", "\n          }\n        }\n      }\n    }\n  }\n\n  @media (min-width: 577px) {\n    h3 {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
+var ContentInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-transform: capitalize;\n  margin-left: 10px;\n  width: calc(65% - 60px);\n\n  ", "\n\n  h3 {\n    font-size: 14px;\n    margin: 0px;\n    font-weight: 400;\n  }\n\n  span {\n    display: flex;\n    justify-content: space-between;\n    margin: 0px;\n\n    p {\n      margin: 0px;\n      font-size: 14px;\n    }\n\n    div {\n      display: flex;\n\n      span {\n        height: 20px;\n        svg {\n          font-size: 20px;\n          &:nth-child(1) {\n            margin-right: 3px;\n            ", "\n          }\n        }\n      }\n    }\n  }\n\n  @media (min-width: 577px) {\n    h3 {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0px;\n  "])));
@@ -147,66 +147,70 @@ exports.ProductActionsEdit = ProductActionsEdit;
 var ProductActionsDelete = (0, _styledComponents.default)(ProductActionsEdit)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  svg {\n    margin-right: 0px;\n  }\n"])));
 exports.ProductActionsDelete = ProductActionsDelete;
 
-var ProductPriceSection = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  width: 25%;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n"])));
+var ProductPriceSection = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  width: 28%;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n"])));
 
 exports.ProductPriceSection = ProductPriceSection;
 
-var ProductPrice = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: flex-end;\n  margin-bottom: 10px;\n\n  p,\n  span {\n    font-size: 14px;\n  }\n\n  span {\n    font-weight: 500;\n    color: ", ";\n  }\n\n  p {\n    margin: 0px 5px;\n  }\n\n  svg {\n    cursor: pointer;\n  }\n\n  @media (min-width: 512px) {\n    span,\n    p {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
+var ProductPrice = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: flex-end;\n  margin-bottom: 10px;\n\n  p,\n  span {\n    font-size: 14px;\n  }\n\n  span {\n    color: ", ";\n  }\n\n  p {\n    margin-top: 0px;\n    margin-bottom: 0px;\n    ", "\n  }\n\n  svg {\n    cursor: pointer;\n  }\n\n  @media (min-width: 512px) {\n    span,\n    p {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
+}, function (props) {
+  var _props$theme10;
+
+  return (_props$theme10 = props.theme) !== null && _props$theme10 !== void 0 && _props$theme10.rtl ? (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n      margin-right: 5px;\n    "]))) : (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n    "])));
 });
 
 exports.ProductPrice = ProductPrice;
 
-var ProductSelect = _styledComponents.default.select(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  padding: 0px;\n  max-width: 40px;\n  height: 25px;\n  border: none;\n  background-color: #FFF;\n  border-radius: 7.6px;\n  outline: none;\n  margin-left: 5px;\n  cursor: pointer;\n  -moz-appearance: none;\n  -webkit-appearance: none;\n  -ms-progress-appearance: none;\n\n  background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');\n  background-repeat: no-repeat, repeat;\n  background-position: right .7em top 50%, 0 0;\n  background-size: .65em auto, 100%;\n\n  ", "\n\n  @media (min-width: 681px) {\n    font-size: 17px;\n    padding: 0 5px;\n    max-width: 55px;\n  }\n"])), function (props) {
-  var _props$theme10;
+var ProductSelect = _styledComponents.default.select(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  padding: 0px;\n  max-width: 40px;\n  height: 25px;\n  border: none;\n  background-color: #FFF;\n  border-radius: 7.6px;\n  outline: none;\n  margin-left: 5px;\n  cursor: pointer;\n  -moz-appearance: none;\n  -webkit-appearance: none;\n  -ms-progress-appearance: none;\n\n  background-image: url('https://res.cloudinary.com/dq4bhnmtt/image/upload/q_50/v1613334826/bzydg4yrmrz0hzihtsxs.png');\n  background-repeat: no-repeat, repeat;\n  background-position: right .7em top 50%, 0 0;\n  background-size: .65em auto, 100%;\n\n  ", "\n\n  @media (min-width: 681px) {\n    font-size: 17px;\n    padding: 0 5px;\n    max-width: 55px;\n  }\n"])), function (props) {
+  var _props$theme11;
 
-  return ((_props$theme10 = props.theme) === null || _props$theme10 === void 0 ? void 0 : _props$theme10.rtl) && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n    margin-left: 0px;\n  "])));
+  return ((_props$theme11 = props.theme) === null || _props$theme11 === void 0 ? void 0 : _props$theme11.rtl) && (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n    margin-left: 0px;\n  "])));
 });
 
 exports.ProductSelect = ProductSelect;
 
-var ProductNotAvailable = _styledComponents.default.span(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  color: #D81212;\n"])));
+var ProductNotAvailable = _styledComponents.default.span(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  color: #D81212;\n"])));
 
 exports.ProductNotAvailable = ProductNotAvailable;
 
-var ProductOptionsList = _styledComponents.default.ul(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  list-style-type: none;\n  color: ", ";\n  font-size: 12px;\n\n  ", "\n\n  .suboption {\n    margin-left: -25px;\n    ", "\n  }\n\n  p:nth-child(1) {\n    margin-bottom: 0;\n  }\n\n  p {\n    font-weight: 400;\n    margin: 0px;\n    color: ", ";\n  }\n\n  li span {\n    font-weight: 400;\n    color: ", ";\n  }\n\n  li.ingredient {\n    padding-left: 15px;\n    ", "\n  }\n\n  @media (min-width: 681px) {\n    font-size: 14px;\n  }\n"])), function (props) {
+var ProductOptionsList = _styledComponents.default.ul(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  list-style-type: none;\n  color: ", ";\n  font-size: 12px;\n\n  ", "\n\n  .suboption {\n    margin-left: -25px;\n    ", "\n  }\n\n  p:nth-child(1) {\n    margin-bottom: 0;\n  }\n\n  p {\n    font-weight: 400;\n    margin: 0px;\n    color: ", ";\n  }\n\n  li span {\n    font-weight: 400;\n    color: ", ";\n  }\n\n  li.ingredient {\n    padding-left: 15px;\n    ", "\n  }\n\n  @media (min-width: 681px) {\n    font-size: 14px;\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 }, function (_ref5) {
   var isCustomMode = _ref5.isCustomMode;
-  return isCustomMode && (0, _styledComponents.css)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n    padding: 0px;\n    margin: 0px;\n  "])));
-}, function (props) {
-  var _props$theme11;
-
-  return ((_props$theme11 = props.theme) === null || _props$theme11 === void 0 ? void 0 : _props$theme11.rtl) && (0, _styledComponents.css)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n      margin-right: -25px;\n      margin-left: 0px;\n  "])));
-}, function (props) {
-  return props.theme.colors.grayDark;
-}, function (props) {
-  return props.theme.colors.grayDark;
+  return isCustomMode && (0, _styledComponents.css)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n    padding: 0px;\n    margin: 0px;\n  "])));
 }, function (props) {
   var _props$theme12;
 
-  return ((_props$theme12 = props.theme) === null || _props$theme12 === void 0 ? void 0 : _props$theme12.rtl) && (0, _styledComponents.css)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n      padding-right: 15px;\n      padding-left: 0px;\n    "])));
+  return ((_props$theme12 = props.theme) === null || _props$theme12 === void 0 ? void 0 : _props$theme12.rtl) && (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n      margin-right: -25px;\n      margin-left: 0px;\n  "])));
+}, function (props) {
+  return props.theme.colors.grayDark;
+}, function (props) {
+  return props.theme.colors.grayDark;
+}, function (props) {
+  var _props$theme13;
+
+  return ((_props$theme13 = props.theme) === null || _props$theme13 === void 0 ? void 0 : _props$theme13.rtl) && (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n      padding-right: 15px;\n      padding-left: 0px;\n    "])));
 });
 
 exports.ProductOptionsList = ProductOptionsList;
 
-var ProductQuantity = _styledComponents.default.span(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  margin-left: 5px;\n  ", "\n"])), function (props) {
-  var _props$theme13;
+var ProductQuantity = _styledComponents.default.span(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  margin-left: 5px;\n  ", "\n"])), function (props) {
+  var _props$theme14;
 
-  return ((_props$theme13 = props.theme) === null || _props$theme13 === void 0 ? void 0 : _props$theme13.rtl) && (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n    margin-left: 0px;\n  "])));
+  return ((_props$theme14 = props.theme) === null || _props$theme14 === void 0 ? void 0 : _props$theme14.rtl) && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n    margin-left: 0px;\n  "])));
 });
 
 exports.ProductQuantity = ProductQuantity;
 
-var ProductCardContainer = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  border-bottom: 1px dashed #ACB2B6;\n\n  @media (min-width: 681px) {\n    padding: 20px 30px 30px 30px;\n    border-bottom: none;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 20px;\n    margin-bottom: 40px;\n  }\n"])));
+var ProductCardContainer = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  border-bottom: 1px dashed #ACB2B6;\n\n  @media (min-width: 681px) {\n    padding: 20px 30px 30px 30px;\n    border-bottom: none;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 20px;\n    margin-bottom: 40px;\n  }\n"])));
 
 exports.ProductCardContainer = ProductCardContainer;
 
-var ProductInfoContainer = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: calc(100% - 75px);\n  flex-direction: row;\n\n  > div:last-child {\n    flex-direction: column;\n    width: 100%;\n    align-items: center;\n\n    > div {\n      span {\n        font-size: 14px;\n        margin: 0 5px;\n      }\n    }\n  }\n\n  @media (min-width: 361px) {\n    width: calc(100% - 85px);\n  }\n\n  @media (min-width: 411px) {\n    width: calc(100% - 95px);\n  }\n\n  @media (min-width: 768px) {\n    width: calc(100% - 140px);\n    flex-direction: row;\n\n    > div:last-child {\n      width: 25%;\n      align-items: flex-end;\n      > div {\n        span {\n          font-size: 16px;\n        }\n      }\n    }\n  }\n"])));
+var ProductInfoContainer = _styledComponents.default.div(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: calc(100% - 75px);\n  flex-direction: row;\n\n  > div:last-child {\n    flex-direction: column;\n    width: 100%;\n    align-items: center;\n\n    > div {\n      span {\n        font-size: 14px;\n        margin: 0 5px;\n      }\n    }\n  }\n\n  @media (min-width: 361px) {\n    width: calc(100% - 85px);\n  }\n\n  @media (min-width: 411px) {\n    width: calc(100% - 95px);\n  }\n\n  @media (min-width: 768px) {\n    width: calc(100% - 140px);\n    flex-direction: row;\n\n    > div:last-child {\n      width: 25%;\n      align-items: flex-end;\n      > div {\n        span {\n          font-size: 16px;\n        }\n      }\n    }\n  }\n"])));
 
 exports.ProductInfoContainer = ProductInfoContainer;
 
-var ProductInfoContent = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  width: 60%;\n  h1 {\n    color: ", ";\n    font-weight: 500;\n    font-size: 16px;\n    margin: 0px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 768px) {\n    width: calc(75% - 20px);\n    h1 {\n      color: ", ";\n      font-size: 20px;\n    }\n  }\n"])), function (props) {
+var ProductInfoContent = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  width: 60%;\n  h1 {\n    color: ", ";\n    font-weight: 500;\n    font-size: 16px;\n    margin: 0px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 768px) {\n    width: calc(75% - 20px);\n    h1 {\n      color: ", ";\n      font-size: 20px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.darkGray;
 }, function (props) {
   return props.theme.colors.secundary;
@@ -214,26 +218,26 @@ var ProductInfoContent = _styledComponents.default.div(_templateObject45 || (_te
 
 exports.ProductInfoContent = ProductInfoContent;
 
-var IncDecActions = _styledComponents.default.div(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);\n  border-radius: 30px;\n  position: absolute;\n  bottom: -10px;\n  background-color: #FFF;\n  button {\n    cursor: pointer;\n    outline: none;\n    height: 24px;\n    border: none;\n    font-size: 20px;\n    background: #FFF;\n    transition: all .3s ease-in-out;\n    padding: 0 5px;\n    display: flex;\n    align-items: center;\n    &:active {\n      background: ", ";\n    }\n\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n\n  button.decrease {\n    color: ", ";\n    ", "    \n  }\n  \n  button.increase {\n    color: ", ";\n    ", "\n  }\n\n  span {\n    min-width: 30px;\n    height: 24px;\n    color: ", ";\n    font-weight: 500;\n    font-size: 14px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  @media (min-width: 681px) {\n    button {\n      padding: 0 10px;\n    }\n  }\n"])), function () {
+var IncDecActions = _styledComponents.default.div(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);\n  border-radius: 30px;\n  position: absolute;\n  bottom: -10px;\n  background-color: #FFF;\n  button {\n    cursor: pointer;\n    outline: none;\n    height: 24px;\n    border: none;\n    font-size: 20px;\n    background: #FFF;\n    transition: all .3s ease-in-out;\n    padding: 0 5px;\n    display: flex;\n    align-items: center;\n    &:active {\n      background: ", ";\n    }\n\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n\n  button.decrease {\n    color: ", ";\n    ", "    \n  }\n  \n  button.increase {\n    color: ", ";\n    ", "\n  }\n\n  span {\n    min-width: 30px;\n    height: 24px;\n    color: ", ";\n    font-weight: 500;\n    font-size: 14px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  @media (min-width: 681px) {\n    button {\n      padding: 0 10px;\n    }\n  }\n"])), function () {
   return (0, _polished.darken)(0.07, '#FFF');
 }, function (props) {
   return props.theme.colors.grayDark;
 }, function (props) {
-  var _props$theme14;
+  var _props$theme15;
 
-  return (_props$theme14 = props.theme) !== null && _props$theme14 !== void 0 && _props$theme14.rtl ? (0, _styledComponents.css)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n      border-radius: 0 30px 30px 0;\n      border-left: 1px solid ", ";\n    "])), function (props) {
+  return (_props$theme15 = props.theme) !== null && _props$theme15 !== void 0 && _props$theme15.rtl ? (0, _styledComponents.css)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n      border-radius: 0 30px 30px 0;\n      border-left: 1px solid ", ";\n    "])), function (props) {
     return props.theme.colors.gray;
-  }) : (0, _styledComponents.css)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n      border-radius: 30px 0 0 30px;\n      border-right: 1px solid ", ";\n    "])), function (props) {
+  }) : (0, _styledComponents.css)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n      border-radius: 30px 0 0 30px;\n      border-right: 1px solid ", ";\n    "])), function (props) {
     return props.theme.colors.gray;
   });
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
-  var _props$theme15;
+  var _props$theme16;
 
-  return (_props$theme15 = props.theme) !== null && _props$theme15 !== void 0 && _props$theme15.rtl ? (0, _styledComponents.css)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n      border-radius: 30px 0 0 30px;\n      border-right: 1px solid ", ";\n    "])), function (props) {
+  return (_props$theme16 = props.theme) !== null && _props$theme16 !== void 0 && _props$theme16.rtl ? (0, _styledComponents.css)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["\n      border-radius: 30px 0 0 30px;\n      border-right: 1px solid ", ";\n    "])), function (props) {
     return props.theme.colors.gray;
-  }) : (0, _styledComponents.css)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n      border-radius: 0 30px 30px 0;\n      border-left: 1px solid ", ";\n    "])), function (props) {
+  }) : (0, _styledComponents.css)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["\n      border-radius: 0 30px 30px 0;\n      border-left: 1px solid ", ";\n    "])), function (props) {
     return props.theme.colors.gray;
   });
 }, function (props) {

@@ -144,7 +144,8 @@ var Footer = function Footer() {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, footerState.body && /*#__PURE__*/_react.default.createElement("div", {
     dangerouslySetInnerHTML: {
       __html: footerState.body
-    }
+    },
+    id: "page-footer"
   }));
 };
 

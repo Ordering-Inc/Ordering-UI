@@ -229,7 +229,8 @@ var CartUI = function CartUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.CartContainer, {
     className: "cart",
-    isCustomMode: isCustomMode
+    isCustomMode: isCustomMode,
+    isCheckout: isCheckout
   }, /*#__PURE__*/_react.default.createElement(_styles.CartSticky, {
     isCartOnProductsList: isCartOnProductsList
   }, /*#__PURE__*/_react.default.createElement(_BusinessItemAccordion.BusinessItemAccordion, {

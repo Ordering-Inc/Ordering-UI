@@ -199,7 +199,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles2.ProductContainer, {
-    className: "product-container"
+    className: "product-container",
+    isExistBottom: document.getElementById('page-footer')
   }, loading && !error && /*#__PURE__*/_react.default.createElement(_styles2.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

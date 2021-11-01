@@ -56,7 +56,7 @@ exports.WrapperUserDetails = WrapperUserDetails;
 var UserDetailsContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin: 30px 0px 20px;\n  flex-wrap: wrap;\n"])));
 
 exports.UserDetailsContainer = UserDetailsContainer;
-var BusinessDetailsContainer = (0, _styledComponents.default)(UserDetailsContainer)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  div {\n    h1 {\n      text-transform: capitalize;\n      margin: 0px;\n      font-size: 20px;\n      color: ", ";\n      margin-bottom: 10px;\n      font-weight: 500;\n    }\n    p {\n      margin: 0;\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var BusinessDetailsContainer = (0, _styledComponents.default)(UserDetailsContainer)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  div {\n    h1 {\n      text-transform: capitalize;\n      margin: 0px;\n      font-size: 20px;\n      color: ", ";\n      margin-bottom: 10px;\n      font-weight: 500;\n    }\n    p {\n      margin: 0;\n      font-weight: 300;\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 }, function (props) {
   return props.theme.colors.grayDark;

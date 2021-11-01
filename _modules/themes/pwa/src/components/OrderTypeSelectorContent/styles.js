@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var OrderTypeSelectorContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 0 3px;\n"])));
+var OrderTypeSelectorContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 0;\n\n  @media (min-width: 576px) {\n    padding: 0 3px;\n  }\n"])));
 
 exports.OrderTypeSelectorContainer = OrderTypeSelectorContainer;
 
@@ -63,7 +63,7 @@ var OrderStartWrapper = _styledComponents.default.div(_templateObject7 || (_temp
 
 exports.OrderStartWrapper = OrderStartWrapper;
 
-var OrderTypeListTitle = _styledComponents.default.h1(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-weight: 600;\n  font-size: 17px;\n  line-height: 21px;\n  color: ", ";\n  margin: 0 0 30px;\n\n  @media (min-width: 576px) {\n    padding-left: 30px;\n    font-size: 20px;\n    ", "\n  }\n\n  @media (min-width: 768px) {\n    font-size: 24px;\n  }\n    \n"])), function (props) {
+var OrderTypeListTitle = _styledComponents.default.h1(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-weight: 600;\n  font-size: 15px;\n  line-height: 21px;\n  line-height: 21px;\n  color: ", ";\n  margin: 0 0 30px;\n\n  @media (min-width: 576px) {\n    padding-left: 30px;\n    font-size: 20px;\n    ", "\n  }\n\n  @media (min-width: 768px) {\n    font-size: 24px;\n  }\n    \n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      padding-right: 30px;\n      padding-left: 0;\n    "])));

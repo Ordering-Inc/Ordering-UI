@@ -17,6 +17,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _styledComponents = require("styled-components");
 
+var _HiArrowNarrowLeft = _interopRequireDefault(require("@meronex/icons/hi/HiArrowNarrowLeft"));
+
 var _orderingComponents = require("ordering-components");
 
 var _UpsellingPage = require("../UpsellingPage");
@@ -24,6 +26,8 @@ var _UpsellingPage = require("../UpsellingPage");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
+
+var _reactRouterDom = require("react-router-dom");
 
 var _styles = require("./styles");
 
@@ -110,8 +114,9 @@ var CheckoutUI = function CheckoutUI(props) {
 
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
       _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
-      validationFields = _useValidationFields2[0]; // const [{ options, loading }, { changePaymethod }] = useOrder()
+      validationFields = _useValidationFields2[0];
 
+  var history = (0, _reactRouterDom.useHistory)(); // const [{ options, loading }, { changePaymethod }] = useOrder()
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -254,7 +259,12 @@ var CheckoutUI = function CheckoutUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), /*#__PURE__*/_react.default.createElement("h2", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, windowSize.width < 500 && /*#__PURE__*/_react.default.createElement(_HiArrowNarrowLeft.default, {
+    className: "left-arrow",
+    onClick: function onClick() {
+      return history.goBack();
+    }
+  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), /*#__PURE__*/_react.default.createElement("h2", {
     className: "checkout-title"
   }, t('CHECK_OUT', 'Checkout')), /*#__PURE__*/_react.default.createElement(_styles.ReverseWrapper, null, (_props$beforeElements2 = props.beforeElementsSectionOne) === null || _props$beforeElements2 === void 0 ? void 0 : _props$beforeElements2.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

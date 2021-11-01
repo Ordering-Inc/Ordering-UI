@@ -68,7 +68,7 @@ var BusinessTags = _styledComponents.default.div(_templateObject5 || (_templateO
 
 exports.BusinessTags = BusinessTags;
 
-var BusinessContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  max-height: 135px;\n  padding: 0 20px 20px 20px;\n"])));
+var BusinessContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  max-height: 170px;\n  padding: 0 20px 20px 20px;\n\n  @media (min-width: 481px){\n    max-height: 150px;\n  }\n"])));
 
 exports.BusinessContent = BusinessContent;
 
@@ -113,7 +113,7 @@ var BusinessName = _styledComponents.default.h6(_templateObject16 || (_templateO
 
 exports.BusinessName = BusinessName;
 
-var Categories = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  font-weight: 300;\n  color: #6C6C6C;\n\n  @media (min-width: 481px) {\n    font-size: 16px;\n  }\n"])));
+var Categories = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  font-weight: 300;\n  color: #6C6C6C;\n  display: block !important;\n\n  @media (min-width: 481px) {\n    display: none !important;\n  }\n"])));
 
 exports.Categories = Categories;
 

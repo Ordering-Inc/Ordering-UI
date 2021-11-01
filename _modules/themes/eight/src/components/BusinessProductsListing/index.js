@@ -385,7 +385,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleBackShowOption();
       setIsCartOpen(false);
     }
-  }), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapCart, null, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+  }), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapCart, {
+    isExistBottom: document.getElementById('page-footer')
+  }, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isForceOpenCart: true,
     isCustomMode: true,
     cart: currentCart,

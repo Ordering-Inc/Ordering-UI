@@ -37,7 +37,7 @@ var SideForm = _styledComponents.default.div(_templateObject4 || (_templateObjec
 
 exports.SideForm = SideForm;
 
-var UserData = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  color: ", ";\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  text-align: left;\n  ", "\n\n  > * {\n    margin: 0;\n    width: 75%;\n  }\n"])), function (props) {
+var UserData = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  color: ", ";\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  text-align: left;\n  ", "\n\n  > * {\n    margin: 0;\n    width: 75%;\n    font-weight: 300;\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
 }, function (props) {
   var _props$theme2;

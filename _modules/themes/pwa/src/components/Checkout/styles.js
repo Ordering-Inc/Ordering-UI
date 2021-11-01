@@ -21,7 +21,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var WrapperLeftContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  padding: 20px;\n\n  @media (min-width: 576px) {\n    padding: 40px 20px;\n  }\n\n  @media (min-width: 1024px) {\n    width: 50%;\n    padding: 40px 50px 45px 40px;\n  }\n"])));
+var WrapperLeftContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  padding: 20px;\n\n  > svg {\n    color: #748194;\n    font-size: 24px;\n    cursor: pointer;\n    margin-bottom: 10px;\n  }\n\n  @media (min-width: 576px) {\n    padding: 40px 20px;\n  }\n\n  @media (min-width: 1024px) {\n    width: 50%;\n    padding: 40px 50px 45px 40px;\n  }\n"])));
 
 exports.WrapperLeftContainer = WrapperLeftContainer;
 
@@ -77,7 +77,7 @@ var WarningText = _styledComponents.default.p(_templateObject15 || (_templateObj
 
 exports.WarningText = WarningText;
 
-var WrapperLeftContent = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  .checkout-title {\n    margin: 0;\n    font-weight: 600;\n    font-size: 24px;\n    color: ", ";\n    @media(min-width: 768px) {\n      font-size: 32px;\n    }\n  }\n"])), function (props) {
+var WrapperLeftContent = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  .checkout-title {\n    margin: 0;\n    font-weight: 600;\n    font-size: 20px;\n    color: ", ";\n\n    @media(min-width: 500px) {\n      font-size: 24px;\n    }\n\n    @media(min-width: 768px) {\n      font-size: 32px;\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.darkTextColor;
