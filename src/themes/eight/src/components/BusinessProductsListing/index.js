@@ -341,7 +341,9 @@ const BusinessProductsListingUI = (props) => {
             }}
           />
           {currentCart?.products?.length > 0 && (
-            <WrapCart>
+            <WrapCart
+              isExistBottom={document.getElementById('page-footer')}
+            >
               <Cart
                 isForceOpenCart
                 isCustomMode

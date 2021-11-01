@@ -46,9 +46,11 @@ export const Footer = () => {
     <>
       {
         footerState.body && (
-          <div dangerouslySetInnerHTML={{
-            __html: footerState.body
-          }}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: footerState.body
+            }}
+            id='page-footer'
           />
         )
       }
