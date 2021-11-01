@@ -27,6 +27,7 @@ const BusinessProductsCategoriesUI = (props) => {
       behavior: 'smooth'
     })
   }
+
   const ProductCategories = () => {
     return (
       categories && categories.length && categories.map(category => (
