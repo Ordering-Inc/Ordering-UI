@@ -24,6 +24,8 @@ const HighestRatedUI = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
 
+  const isBusinessWithReviews = businessesList?.businesses?.every((business) => business?.reviews?.total === 0 )
+  
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -38,7 +40,7 @@ const HighestRatedUI = (props) => {
         <BusinessListWrapper>
           <BusinessList>
             {
-              !businessesList.loading && businessesList.businesses.length === 0 && (
+              !businessesList.loading && (businessesList.businesses.length === 0 || isBusinessWithReviews) && (
                 <NotFoundSource
                   content={t('NOT_FOUND_BUSINESSES_HIGHEST_RATED', 'No highest rated businesses found, please change filters or change address.')}
                 >
