@@ -214,7 +214,7 @@ const BusinessProductsListingUI = (props) => {
                       />
                     )}
 
-                    <WrapContent>
+                    <WrapContent id='businessProductList'>
                       <BusinessProductsList
                         categories={[
                           { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
