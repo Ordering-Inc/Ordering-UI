@@ -51,5 +51,6 @@ export const UserData = styled.div`
   > * {
     margin: 0;
     width: 75%;
+    font-weight: 300;
   }
 `
