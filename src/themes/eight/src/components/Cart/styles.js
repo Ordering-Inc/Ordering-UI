@@ -4,6 +4,11 @@ export const CartContainer = styled.div`
   ${({ isCustomMode }) => !isCustomMode && css`
     border-bottom: 1px solid #F0F0F0;
   `}
+
+  ${({ isCheckout }) => isCheckout && css`
+    margin-right: -10px;
+    margin-left: -10px;
+  `}
 `
 
 export const CartSticky = styled.div`
@@ -33,7 +38,6 @@ export const OrderBill = styled.div`
     }
 
     tr td:nth-child(2) {
-      font-weight: 500;
       text-align: right;
       ${props => props.theme?.rtl && css`
         text-align: left;

@@ -133,7 +133,11 @@ const CartUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <CartContainer className='cart' isCustomMode={isCustomMode}>
+      <CartContainer
+        className='cart'
+        isCustomMode={isCustomMode}
+        isCheckout={isCheckout}
+      >
         <CartSticky isCartOnProductsList={isCartOnProductsList}>
           <BusinessItemAccordion
             isCustomMode={isCustomMode}

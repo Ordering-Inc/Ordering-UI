@@ -126,7 +126,7 @@ export const ContentInfo = styled.div`
   h3 {
     font-size: 14px;
     margin: 0px;
-    font-weight: 600;
+    font-weight: 400;
   }
 
   span {
@@ -302,7 +302,7 @@ export const ProductActionsDelete = styled(ProductActionsEdit)`
 `
 
 export const ProductPriceSection = styled.div`
-  width: 25%;
+  width: 28%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -320,12 +320,17 @@ export const ProductPrice = styled.div`
   }
 
   span {
-    font-weight: 500;
     color: ${props => props.theme.colors.grayDark};
   }
 
   p {
-    margin: 0px 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 5px;
+    ` : css`
+      margin-left: 5px;
+    `}
   }
 
   svg {
