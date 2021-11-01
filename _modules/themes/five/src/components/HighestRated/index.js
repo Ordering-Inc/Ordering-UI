@@ -50,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HighestRatedUI = function HighestRatedUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _businessesList$busin, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       handleBusinessClick = props.handleBusinessClick,
@@ -65,6 +65,11 @@ var HighestRatedUI = function HighestRatedUI(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
+  var isBusinessWithReviews = businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.every(function (business) {
+    var _business$reviews;
+
+    return (business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) === 0;
+  });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -73,7 +78,7 @@ var HighestRatedUI = function HighestRatedUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.HighestRatedContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('HIGHEST_RATED', 'Highest rated')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('TOP_RATINGS_AND_GREAT_SERVICE', 'Top ratings and great service')), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.HighestRatedContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('HIGHEST_RATED', 'Highest rated')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('TOP_RATINGS_AND_GREAT_SERVICE', 'Top ratings and great service')), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && (businessesList.businesses.length === 0 || isBusinessWithReviews) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES_HIGHEST_RATED', 'No highest rated businesses found, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
@@ -83,10 +88,10 @@ var HighestRatedUI = function HighestRatedUI(props) {
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: "highestRated"
-  }, !(businessesList !== null && businessesList !== void 0 && businessesList.loading) && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
-    var _business$reviews, _orderState$options;
+  }, !(businessesList !== null && businessesList !== void 0 && businessesList.loading) && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin2 = businessesList.businesses) === null || _businessesList$busin2 === void 0 ? void 0 : _businessesList$busin2.map(function (business) {
+    var _business$reviews2, _orderState$options;
 
-    return (business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) > 0 && /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
+    return (business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total) > 0 && /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
       className: "card",
       business: business,
