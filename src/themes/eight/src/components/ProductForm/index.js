@@ -141,7 +141,10 @@ const ProductOptionsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ProductContainer className='product-container'>
+      <ProductContainer
+        className='product-container'
+        isExistBottom={document.getElementById('page-footer')}
+      >
         {loading && !error && (
           <SkeletonBlock width={90}>
             <Skeleton variant='rect' height={50} />

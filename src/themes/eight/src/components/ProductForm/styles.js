@@ -4,6 +4,9 @@ import { darken, lighten } from 'polished'
 export const ProductContainer = styled.div`
   position: relative;
   padding: 30px 0px;
+  ${({ isExistBottom }) => !isExistBottom && css`
+    margin-bottom: 130px;
+  `}
 
   @media (min-width: 681px) {
     padding: 50px 0px;
