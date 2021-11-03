@@ -1,9 +1,23 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
+import { AccordionDropdown } from '../../../AccordionDropdown'
 
-import { CategoriesContainer, CategoriesWrap } from './styles'
-import { Tab } from '../../../../styles/Tabs'
+import {
+  CategoriesContainer,
+  CategoriesWrap,
+  CategoryTab
+} from './styles'
+
+const SPACE_CONTANT = 20
+
+const categorySpace = {
+  1: 1 * SPACE_CONTANT,
+  2: 2 * SPACE_CONTANT,
+  3: 3 * SPACE_CONTANT,
+  4: 4 * SPACE_CONTANT,
+  5: 5 * SPACE_CONTANT,
+}
 
 const BusinessProductsCategoriesUI = (props) => {
   const {
@@ -11,22 +25,74 @@ const BusinessProductsCategoriesUI = (props) => {
     categories,
     handlerClickCategory,
     categorySelected,
-    featured
+    featured,
+    openCategories,
   } = props
 
-  const ProductCategories = () => {
+  const IterateCategories = ({ list, isSub, currentCat }) => {
     return (
-      categories && categories.length && categories.map(category => (
-        <Tab
-          key={category.name}
-          className={`category ${category.id === 'featured' ? 'special' : ''}`}
-          active={categorySelected?.id === category.id}
-          onClick={() => handlerClickCategory(category)}
-          borderBottom
-        >
-          {category.name}
-        </Tab>
-      ))
+      <>
+        {list?.length && list?.map(category => (
+          <div key={category?.id ?? category?.name}>
+            {(category?.subcategories?.length > 0 || isSub) ? (
+              <>
+                {category?.subcategories?.length > 0 && (
+                  <>
+                    <div className="accordion">
+                      <AccordionDropdown
+                        item={category}
+                        isSelected={categorySelected?.id === category.id}
+                        isOpen={openCategories?.includes(category.id)}
+                        spaceTab={categorySpace[category?.level ?? 1]}
+                        handleClickItem={() => handlerClickCategory(category)}
+                        IterateCategories={IterateCategories}
+                      />
+                    </div>
+                  </>
+                )}
+                {isSub && !category?.subcategories?.length && (
+                  <CategoryTab
+                    active={categorySelected?.id === category.id}
+                    className={`${category.id === 'featured' ? 'special' : ''}`}
+                    categorySpace={categorySpace[category?.level ?? 1]}
+                    onClick={() => handlerClickCategory(category)}
+                  >
+                    <span>
+                      {/* {category.name} */}
+                      {category.id ?? category.name}
+                    </span>
+                  </CategoryTab>
+                )}
+              </>
+            ) : (
+              <CategoryTab
+                active={categorySelected?.id === category.id}
+                className={`${category.id === 'featured' ? 'special' : ''}`}
+                categorySpace={categorySpace[category?.level ?? 1]}
+                onClick={() => handlerClickCategory(category)}
+              >
+                <span>
+                  {/* {category.name} */}
+                  {category.id ?? category.name}
+                </span>
+              </CategoryTab>
+            )}
+          </div>
+        ))}
+
+        {list && list.length === 0 && isSub && (
+          <CategoryTab
+            active={categorySelected?.id === category.id}
+            className={`${category.id === 'featured' ? 'special' : ''}`}
+            categorySpace={categorySpace[category?.level ?? 1]}
+            onClick={() => handlerClickCategory(category)}
+          >
+            <span>
+              {currentCat.name}
+            </span>
+          </CategoryTab>
+        )}
+      </>
     )
   }
 
@@ -34,7 +100,7 @@ const BusinessProductsCategoriesUI = (props) => {
     <CategoriesContainer className='category-lists' featured={featured}>
       {!isSkeleton ? (
         <CategoriesWrap variant='primary'>
-          <ProductCategories />
+          {categories?.length && <IterateCategories list={categories} />}
         </CategoriesWrap>
       ) : (
         <CategoriesWrap variant='primary'>

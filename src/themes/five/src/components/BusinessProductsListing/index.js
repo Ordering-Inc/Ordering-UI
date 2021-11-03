@@ -23,7 +23,6 @@ import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
-
 import { RenderProductsLayout } from '../RenderProductsLayout'
 
 const PIXELS_TO_SCROLL = 300
@@ -31,6 +30,7 @@ const PIXELS_TO_SCROLL = 300
 const BusinessProductsListingUI = (props) => {
   const {
     errors,
+    openCategories,
     isInitialRender,
     businessState,
     categorySelected,
@@ -117,7 +117,7 @@ const BusinessProductsListingUI = (props) => {
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
     if (badScrollPosition || categoryState.loading || !hasMore) return
-    getNextProducts()
+    getNextProducts({ isNextPage: true })
   }, [categoryState])
 
   const handleChangePage = (data) => {
@@ -176,7 +176,9 @@ const BusinessProductsListingUI = (props) => {
           businessState={businessState}
           sortByOptions={sortByOptions}
           categoryState={categoryState}
+          categoriesState={props.categoriesState}
           categorySelected={categorySelected}
+          openCategories={openCategories}
           openBusinessInformation={openBusinessInformation}
           isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
           handleChangeSortBy={handleChangeSortBy}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
-import { useLanguage } from 'ordering-components'
+import { useLanguage, useConfig } from 'ordering-components'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
@@ -41,6 +41,7 @@ export const RenderProductsLayout = (props) => {
     sortByOptions,
     categoryState,
     categorySelected,
+    openCategories,
     openBusinessInformation,
     isCartOnProductsList,
     handleChangeSortBy,
@@ -57,14 +58,22 @@ export const RenderProductsLayout = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const businessLayout = business?.front_layout
+  const [{ configs }] = useConfig()
+
+  const isUseParentCategory = configs?.use_parent_category?.value === 'true'
+    || configs?.use_parent_category?.value === '1'
+
+  const frontLayout = business?.front_layout
+  const businessLayout = {
+    layoutOne: frontLayout === layoutOne && isUseParentCategory
+  }
 
   const BusinessLayout = (props) => {
     const components = {
-      categories: businessLayout === layoutOne
+      categories: businessLayout.layoutOne
         ? CategoriesLayoutGroceries
         : BusinessProductsCategories,
-      products_list: businessLayout === layoutOne
+      products_list: businessLayout.layoutOne
         ? ProductListLayoutGroceries
         : BusinessProductsList,
     }
@@ -95,7 +104,7 @@ export const RenderProductsLayout = (props) => {
               errorQuantityProducts={errorQuantityProducts}
               sortByValue={sortByValue}
             />
-              {!businessLayout && (
+              {!businessLayout.layoutOne && (
                 <BusinessContent>
                   <BusinessCategoryProductWrapper>
                     {!(business?.categories?.length === 0 && !categoryId) && (
@@ -168,7 +177,7 @@ export const RenderProductsLayout = (props) => {
                 </BusinessContent>
               )}
 
-              {businessLayout === layoutOne && (
+              {businessLayout.layoutOne && (
                 <BusinessContent>
                   <BusinessCategoriesContainer>
                     {!(business?.categories?.length === 0 && !categoryId) && (
@@ -183,6 +192,7 @@ export const RenderProductsLayout = (props) => {
                         onClickCategory={onClickCategory}
                         featured={featuredProducts}
                         openBusinessInformation={openBusinessInformation}
+                        openCategories={openCategories}
                       />
                     )}
                   </BusinessCategoriesContainer>
@@ -196,6 +206,7 @@ export const RenderProductsLayout = (props) => {
                           ...business?.categories.sort((a, b) => a.rank - b.rank)
                         ]}
                         category={categorySelected}
+                        categoriesState={props.categoriesState}
                         categoryState={categoryState}
                         businessId={business?.id}
                         errors={errors}
