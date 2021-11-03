@@ -6,7 +6,6 @@ export const GoogleLoginButtonUI = (props) => {
   const { initParams, handleSigninSuccess } = props
 
   useEffect(() => {
-    console.log(document.getElementById('g_id_onload'))
     window.handleCredentialResponse = (response) => {
       handleSigninSuccess(response.credential)
     }
