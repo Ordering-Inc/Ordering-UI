@@ -11,10 +11,12 @@ export const GoogleButton = styled(Button)`
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+  height: 41.6px;
   svg {
     font-size: 28px;
     color: #1977F2;
   }
+
   div {
     margin: 0 auto;
   }
