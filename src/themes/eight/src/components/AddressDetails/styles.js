@@ -3,7 +3,11 @@ import styled from 'styled-components'
 export const AddressContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin: 0 -20px 10px -20px;
+  
+  @media (min-width: 681px) {
+    margin: 0 0 10px 0;
+  }
 `
 
 export const Header = styled.div`

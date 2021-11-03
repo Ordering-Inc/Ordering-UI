@@ -1,22 +1,26 @@
 import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
-  width: 90%;
-  margin: 30px auto 0px;
+  width: 100%;
+  margin: 0px auto;
   min-height: calc(100vh - 300px);
 
   @media (min-width: 768px) {
+    margin: 30px auto 0px;
     width: 80%;
     margin: 50px auto 0px;
   }
 `
 
 export const WrapContent = styled.div`
-  padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
 
   @media (min-width: 381px) {
     padding: 15px;
+  }
+
+  @media (min-width: 681px) {
+    padding: 5px;
   }
 `
 
@@ -159,7 +163,14 @@ export const WrapperNotFound = styled.div`
 
 export const WrapCart = styled.div`
   max-width: 800px;
-  margin: 50px auto;
   min-height: calc(100vh - 300px);
-  padding: 0 20px;
+
+  ${({ isExistBottom }) => !isExistBottom && css`
+    padding-bottom: 90px;
+  `}
+
+  @media (min-width: 681px) {
+    padding: 0 20px;
+    margin: 50px auto;
+  }
 `

@@ -36,9 +36,6 @@ const MomentControlUI = (props) => {
     isCheckout
   } = props
 
-  console.log('isAsap')
-  console.log(isAsap)
-
   const [{ configs }] = useConfig()
   const [{ parseTime }] = useUtils()
   const [, t] = useLanguage()

@@ -7,6 +7,9 @@ export const TypeContainer = styled.div`
   padding: 15px 20px 0 20px;
   box-sizing: border-box;
   position: relative;
+  #left-autoscroll {
+    display: none;
+  }
 
   ::-webkit-scrollbar {
       opacity: 0
@@ -40,6 +43,7 @@ export const TypeContainer = styled.div`
   }
 
   @media (min-width: 480px){
+      display: block;
     .category{
       padding: 10px 15px 0 0;
     }

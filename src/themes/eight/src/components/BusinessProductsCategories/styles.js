@@ -8,22 +8,37 @@ export const CategoriesContainer = styled.div`
 
 export const CategoryCard = styled.div`
   cursor: pointer;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-  border-radius: 7.6px;
   overflow: hidden;
-  background-color: ${props => props.theme.colors.third};
-  margin: 30px 20px;
-  padding: 20px;
+  padding: 20px 35px;
   box-sizing: border-box;
-
-  width: calc(100% - 40px);
-
-  &:hover {
-    box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed ${props => props.theme.colors.grayMedium};
+  > svg {
+    color: ${props => props.theme.colors.secundary};
   }
 
   @media (min-width: 681px) {
+    justify-content: center;
+    padding: 20px;
+    margin: 30px 20px;
+    border: none;
+    border-radius: 7.6px;
+    flex-direction: column;
     width: calc(50% - 40px);
+    background-color: ${props => props.theme.colors.third};
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+
+    > svg {
+      display: none;
+    }
+
+    &:hover {
+      box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;
+    }
   }
 
   @media (min-width: 993px) {
@@ -38,7 +53,23 @@ export const CategoryCard = styled.div`
 `
 
 export const WrapImage = styled.div`
-  padding: 0 20px;
+  ${({ isSkeleton }) => isSkeleton && css`
+    div {
+      display: none;
+    }
+  `}
+  @media (min-width: 681px) {
+    padding: 0 20px;
+    width: calc(100% - 40px);
+    ${({ isSkeleton }) => isSkeleton && css`
+      div {
+        display: block;
+      }
+      span {
+        display: none;
+      }
+    `}
+  }
 `
 
 const CategoryImageStyled = styled.div`
@@ -62,6 +93,8 @@ const CategoryImageStyled = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  min-width: 90px;
+  border-radius: 8px;
 `
 
 export const CategoryImage = (props) => {
@@ -78,9 +111,20 @@ export const CategoryImage = (props) => {
 }
 
 export const CategoryName = styled.div`
-  color: ${props => props.theme.colors.secundary};
+  color: ${props => props.theme.colors.grayDark};
   font-weight: 500;
-  font-size: 20px;
-  text-align: center;
-  padding-top: 10px;
+  font-size: 16px;
+  flex: 1;
+  padding: 0 30px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+
+  @media (min-width: 681px) {
+    padding: 10px 0 0 0;
+    font-size: 20px;
+    text-align: center;
+    color: ${props => props.theme.colors.secundary};
+  }
 `

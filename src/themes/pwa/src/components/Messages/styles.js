@@ -8,6 +8,7 @@ export const MessagesContainer = styled.div`
 
 export const HeaderProfile = styled.div`
   display: flex;
+  align-items: center;
   padding: 15px 20px;
   ${props => props.theme?.rtl ? css`
     padding: 15px 60px 15px 20px;
@@ -16,15 +17,23 @@ export const HeaderProfile = styled.div`
   `}
   border-bottom: 1px solid #EEEEEE;
 
+  @media (min-width: 500px) {
+    ${props => props.theme?.rtl ? css`
+      padding: 20px 60px 15px 20px;
+    ` : css`
+      padding: 20px 20px 15px 60px;
+    `}
+  }
+
   div {
-     p {
-       margin-left: 10px;
-       ${props => props.theme?.rtl && css`
-         margin-right: 10px;
-         margin-left: 0px;
-      `}
-      }
-     strong {
+    p {
+      margin-left: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-right: 10px;
+        margin-left: 0px;
+    `}
+    }
+    strong {
       p{
         margin-block-end: 0.1em;
       }
@@ -49,42 +58,40 @@ export const Status = styled.p`
 `
 
 export const Image = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 35px;
+  height: 35px;
+  min-width: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${props => props.theme?.colors?.primary};
-  border-radius: 50%;
-  padding: 5px;
+  border-radius: 7.6px;
   box-sizing: border-box;
   overflow: hidden;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 
   img {
     width: 100%;
     height: auto;
-    border-radius: 50%;
+    border-radius: 7.6px;
     object-fit: cover;
     border: 1px solid #F5F5F5;
   }
 
   img[name]{
-    border: 1px solid #D81212;
-    border-radius: 50%;
+    border-radius: 7.6px;
   }
 
   svg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 6px;
+    width: 35px;
+    height: 35px;
+    border-radius: 7.6px;
   }
 `
 
 export const HeaderOnline = styled.div`
   display: flex;
   flex-direction: column;
-  height: 60px;
+  height: 50px;
   line-height: 1.5;
   display: flex;
   align-items: flex-start;
@@ -103,13 +110,14 @@ export const HeaderOnline = styled.div`
   }
 
   h1 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
   }
 
   span {
     font-size: 13px;
     font-weight: 300;
+    color: #909BA9;
   }
 `
 

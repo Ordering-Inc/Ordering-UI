@@ -3,12 +3,14 @@ import Skeleton from 'react-loading-skeleton'
 import FaStar from '@meronex/icons/fa/FaStar'
 import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
 import { useTheme } from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 import { SearchBar } from '../SearchBar'
 import { BusinessReviews } from '../BusinessReviews'
 import { MomentContent } from '../MomentContent'
+import HiArrowNarrowLeft from '@meronex/icons/hi/HiArrowNarrowLeft'
 
 import { useUtils, useOrder, useLanguage } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
@@ -50,6 +52,7 @@ export const BusinessBasicInformation = (props) => {
   const { business, loading } = businessState
 
   const theme = useTheme()
+  const history = useHistory()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const windowSize = useWindowSize()
@@ -86,6 +89,7 @@ export const BusinessBasicInformation = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {(windowSize.width < 768) && (categoryState?.products?.length !== 0 || searchValue) && !errorQuantityProducts && (
         <WrapperSearch style={{ marginBottom: '15px' }}>
+          <HiArrowNarrowLeft onClick={() => history.goBack()} />
           <SearchBar
             onSearch={handleChangeSearch}
             search={searchValue}
@@ -102,18 +106,6 @@ export const BusinessBasicInformation = (props) => {
                 {!loading ? (
                   <BusinessName>
                     <h2 className='bold'>{business?.name}</h2>
-                    {(windowSize.width < 576) && (
-                      <>
-                        {!loading ? (
-                          <div className='review'>
-                            <FaStar className='start' />
-                            <span>{business?.reviews?.total}</span>
-                          </div>
-                        ) : (
-                          <Skeleton width={100} />
-                        )}
-                      </>
-                    )}
                   </BusinessName>
                 ) : (
                   <Skeleton width={100} />
@@ -127,10 +119,10 @@ export const BusinessBasicInformation = (props) => {
                   {orderState?.options.type === 1 && (
                     <>
                       {!loading ? (
-                        <h5>
+                        <p>
                           <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
                           {business && parsePrice(business?.delivery_price || 0)}
-                        </h5>
+                        </p>
                       ) : (
                         <Skeleton width={70} />
                       )}
@@ -139,13 +131,13 @@ export const BusinessBasicInformation = (props) => {
                   {!loading ? (
                     <>
                       {orderState?.options?.type === 1 ? (
-                        <h5>
+                        <p>
                           {convertHoursToMinutes(business?.delivery_time)}
-                        </h5>
+                        </p>
                       ) : (
-                        <h5>
+                        <p>
                           {convertHoursToMinutes(business?.pickup_time)}
-                        </h5>
+                        </p>
                       )}
                     </>
                   ) : (
@@ -153,25 +145,22 @@ export const BusinessBasicInformation = (props) => {
                   )}
 
                   {!loading ? (
-                    <h5>
+                    <p>
                       {parseDistance(business?.distance || 0)}
-                    </h5>
+                    </p>
                   ) : (
                     <Skeleton width={70} />
                   )}
-
-                  {(windowSize.width > 576) && (
-                    <>
-                      {!loading ? (
-                        <div className='review'>
-                          <FaStar className='start' />
-                          <span>{business?.reviews?.total}</span>
-                        </div>
-                      ) : (
-                        <Skeleton width={100} />
-                      )}
-                    </>
-                  )}
+                  <>
+                    {!loading ? (
+                      <div className='review'>
+                        <FaStar className='start' />
+                        <span>{business?.reviews?.total}</span>
+                      </div>
+                    ) : (
+                      <Skeleton width={100} />
+                    )}
+                  </>
                 </BusinessDetail>
                 {
                   !loading ? (

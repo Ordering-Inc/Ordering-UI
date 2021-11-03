@@ -4,6 +4,11 @@ export const CartContainer = styled.div`
   ${({ isCustomMode }) => !isCustomMode && css`
     border-bottom: 1px solid #F0F0F0;
   `}
+
+  ${({ isCheckout }) => isCheckout && css`
+    margin-right: -10px;
+    margin-left: -10px;
+  `}
 `
 
 export const CartSticky = styled.div`
@@ -19,7 +24,7 @@ export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 20px;
   background-color: #FFF;
   margin-top: 30px;
 
@@ -33,7 +38,6 @@ export const OrderBill = styled.div`
     }
 
     tr td:nth-child(2) {
-      font-weight: 500;
       text-align: right;
       ${props => props.theme?.rtl && css`
         text-align: left;
@@ -58,6 +62,10 @@ export const OrderBill = styled.div`
     table {
       font-size: 18px;
     }
+  }
+
+  @media (min-width: 681px) {
+    padding: 10px;
   }
 `
 

@@ -3,7 +3,14 @@ import { darken, lighten } from 'polished'
 
 export const ProductContainer = styled.div`
   position: relative;
-  padding: 50px 0px;
+  padding: 30px 0px;
+  ${({ isExistBottom }) => !isExistBottom && css`
+    margin-bottom: 130px;
+  `}
+
+  @media (min-width: 681px) {
+    padding: 50px 0px;
+  }
 `
 
 export const WrapperImage = styled.div`
@@ -103,7 +110,11 @@ export const ProductInfo = styled.div`
 
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
-  margin-top: 50px;
+  margin-top: 20px;
+
+  @media (min-width: 681px) {
+    margin-top: 50px;
+  }
 `
 
 export const ProductEdition = styled.div`
@@ -121,16 +132,31 @@ export const ProductInnerContainer = styled.div`
 `
 
 export const ProductCartTotalPrice = styled(ProductInnerContainer)`
-  display: flex;
   justify-content: flex-end;
-  width: 100%;
-  padding: 40px 0 20px 0;
+  margin: 0px;
+  ${({ isMobile }) => !isMobile && css`
+    width: 100%;
+    padding: 40px 0 20px 0;
+    margin: 0 auto;
+  `}
   color: ${props => props.theme.colors.grayDark};
   font-weight: 500;
   font-size: 16px;
 
+  ${({ isMobile }) => !isMobile && css`
+    display: none;
+  `}
+
   span:first-child {
     margin: 0 5px;
+  }
+
+  @media (min-width: 681px) {
+    ${({ isMobile }) => isMobile ? css`
+      display: none;
+    ` : css`
+      display: flex;
+    `}
   }
 `
 
@@ -330,5 +356,17 @@ export const IncDecActions = styled.div`
     ` : css`
       margin-right: 20px;
     `}
+  }
+`
+export const ProductActionHeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin: 10px 0;
+
+  @media (min-width: 681px) {
+    margin: 0px;
+    width: initial;
   }
 `

@@ -98,6 +98,7 @@ export const BusinessDetailsContainer = styled(UserDetailsContainer)`
     }
     p {
       margin: 0;
+      font-weight: 300;
       color: ${props => props.theme.colors.grayDark};
     }
   }

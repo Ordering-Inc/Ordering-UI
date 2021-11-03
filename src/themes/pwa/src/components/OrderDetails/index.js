@@ -6,8 +6,7 @@ import {
   useEvent,
   useUtils,
   useConfig,
-  GoogleMapsMap,
-  useOrder
+  GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
@@ -43,7 +42,6 @@ import {
   WrapperDriver,
   OrderProducts,
   OrderBill,
-  ReviewsAction,
   SkeletonBlockWrapp,
   SkeletonBlock,
   ShareOrder,

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
@@ -10,11 +10,23 @@ const BusinessProductsCategoriesUI = (props) => {
   const {
     isSkeleton,
     categories,
-    handlerClickCategory,
-    categorySelected,
     featured,
     openBusinessInformation
   } = props
+
+  const [categorySelected, setCategorySelected] = useState({ id: null })
+
+  const handlerClickCategory = (category) => {
+    setCategorySelected(category)
+    let topPos = 0
+    if (category?.id && category?.id !== 'featured') topPos = document.getElementById(`category${category.id}`).offsetTop
+    else topPos = document.getElementById('businessProductList').offsetTop
+    window.scrollTo({
+      top: topPos - 60,
+      left: 100,
+      behavior: 'smooth'
+    })
+  }
 
   const ProductCategories = () => {
     return (
