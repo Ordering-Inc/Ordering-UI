@@ -15,6 +15,8 @@ var _styles = require("./styles");
 
 var _Tabs = require("../../styles/Tabs");
 
+var _useWindowSize = require("../../../../../hooks/useWindowSize");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -46,15 +48,27 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       categorySelected = props.categorySelected,
       featured = props.featured,
       isVerticalList = props.isVerticalList;
+  var windowSize = (0, _useWindowSize.useWindowSize)();
+
+  var handleChnageCategory = function handleChnageCategory(category) {
+    if (windowSize.width > 768) {
+      window.scrollTo({
+        top: 335,
+        behavior: 'smooth'
+      });
+    }
+
+    handlerClickCategory(category);
+  };
 
   var ProductCategories = function ProductCategories() {
-    return categories && categories.length && categories.map(function (category) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categories && categories.length && categories.map(function (category) {
       return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
         key: category.name,
         className: "category ".concat(category.id === 'featured' ? 'special' : ''),
         active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
         onClick: function onClick() {
-          return handlerClickCategory(category);
+          return handleChnageCategory(category);
         },
         isVerticalList: isVerticalList,
         style: {
@@ -94,7 +108,11 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         xlinkHref: "#a",
         fill: "#fff"
       })))));
-    });
+    }), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+      style: {
+        borderBottom: 'none'
+      }
+    }, /*#__PURE__*/_react.default.createElement("span", null, ' ')));
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {

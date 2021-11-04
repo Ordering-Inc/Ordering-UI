@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperNotFound = exports.WrappLayout = exports.WrapContent = exports.WrapCart = exports.SkeletonItem = exports.ProductsNotFound = exports.ProductsContainer = exports.ProductLoading = exports.ProductDetailsHeader = void 0;
+exports.WrapperNotFound = exports.WrappLayout = exports.WrapContent = exports.SkeletonItem = exports.ProductsNotFound = exports.ProductsContainer = exports.ProductLoading = exports.ProductDetailsHeader = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -69,10 +69,3 @@ exports.ProductDetailsHeader = ProductDetailsHeader;
 var WrapperNotFound = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  height: 500px;\n  > div{\n    height: 100%;\n  }\n"])));
 
 exports.WrapperNotFound = WrapperNotFound;
-
-var WrapCart = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  max-width: 800px;\n  min-height: calc(100vh - 300px);\n\n  ", "\n\n  @media (min-width: 681px) {\n    padding: 0 20px;\n    margin: 50px auto;\n  }\n"])), function (_ref2) {
-  var isExistBottom = _ref2.isExistBottom;
-  return !isExistBottom && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    padding-bottom: 90px;\n  "])));
-});
-
-exports.WrapCart = WrapCart;
