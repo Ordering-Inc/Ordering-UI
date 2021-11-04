@@ -20,7 +20,6 @@ import { FloatingButton } from '../../../../../components/FloatingButton'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 
 import { ProductForm } from '../ProductForm'
-import { Cart } from '../Cart'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { NavBar } from '../NavBar'
@@ -32,8 +31,7 @@ import {
   SkeletonItem,
   WrappLayout,
   ProductDetailsHeader,
-  WrapperNotFound,
-  WrapCart
+  WrapperNotFound
 } from './styles'
 
 const PIXELS_TO_SCROLL = 300
@@ -59,7 +57,8 @@ const BusinessProductsListingUI = (props) => {
     handleSearchRedirect,
     featuredProducts,
     isCartOnProductsList,
-    errorQuantityProducts
+    errorQuantityProducts,
+    onBusinessCartRedirect
   } = props
 
   const [{ configs }] = useConfig()
@@ -76,7 +75,6 @@ const BusinessProductsListingUI = (props) => {
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
-  const [isCartOpen, setIsCartOpen] = useState(false)
 
   const [showOption, setShowOption] = useState('categories')
   const [previousShowOption, setPreviousShowOption] = useState('categories')
@@ -195,12 +193,6 @@ const BusinessProductsListingUI = (props) => {
     handleChangeCategory(category)
     handleShowOption('products')
   }
-
-  useEffect(() => {
-    if (currentCart?.products?.length > 0 || !isCartOpen) return
-    handleBackShowOption()
-    setIsCartOpen(false)
-  }, [currentCart?.products?.length, isCartOpen])
 
   return (
     <>
@@ -331,38 +323,7 @@ const BusinessProductsListingUI = (props) => {
         />
       )}
 
-      {showOption === 'cart' && (
-        <>
-          <NavBar
-            title={t('LOGIN_LINK_MY_ORDERS', 'My Orders')}
-            handleGoBack={() => {
-              handleBackShowOption()
-              setIsCartOpen(false)
-            }}
-          />
-          {currentCart?.products?.length > 0 && (
-            <WrapCart
-              isExistBottom={document.getElementById('page-footer')}
-            >
-              <Cart
-                isForceOpenCart
-                isCustomMode
-                cart={currentCart}
-                isCartPending={currentCart?.status === 2}
-                isProducts={currentCart.products.length}
-                isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                handleCartOpen={(val) => setIsCartOpen(val)}
-                handleGoBack={() => {
-                  handleBackShowOption()
-                  setIsCartOpen(false)
-                }}
-              />
-            </WrapCart>
-          )}
-        </>
-      )}
-
-      {currentCart?.products?.length > 0 && auth && !isCartOpen && currentCart?.valid_schedule && currentCart?.valid_products && showOption !== 'productForm' && showOption !== 'cart' && (
+      {currentCart?.products?.length > 0 && auth && currentCart?.valid_schedule && currentCart?.valid_products && showOption !== 'productForm' && showOption !== 'cart' && (
         <FloatingButton
           btnText={
             !currentCart?.valid_maximum ? (
@@ -373,8 +334,7 @@ const BusinessProductsListingUI = (props) => {
           }
           isSecondaryBtn={!currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
           btnValue={currentCart?.products?.length}
-          // handleClick={() => setOpenUpselling(true)}
-          handleClick={() => handleShowOption('cart')}
+          handleClick={() => onBusinessCartRedirect(business?.slug)}
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
       )}

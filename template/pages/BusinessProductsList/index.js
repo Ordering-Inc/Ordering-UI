@@ -84,6 +84,9 @@ export const BusinessProductsList = (props) => {
           replace: true
         })
     },
+    onBusinessCartRedirect: (slug) => {
+      events.emit('go_to_page', { page: 'business_cart', params: { store: slug } })
+    },
     onCheckoutRedirect: (cartUuid) => {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid } })
     }

@@ -94,6 +94,10 @@ const CartUI = (props) => {
     }
   }
 
+  const handleBusinessCartRedirect = (slug) => {
+    events.emit('go_to_page', { page: 'business_cart', params: { store: slug } })
+  }
+
   useEffect(() => {
     events.emit('get_current_view')
     return () => {
@@ -284,7 +288,7 @@ const CartUI = (props) => {
               <CheckoutAction>
                 <Button
                   color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
-                  onClick={() => setOpenUpselling(true)}
+                  onClick={() => handleBusinessCartRedirect(cart?.business?.slug)}
                   disabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
                 >
                   {!cart?.valid_address ? (
@@ -293,7 +297,7 @@ const CartUI = (props) => {
                   `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
                   ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
                   `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-                  ) : !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
+                  ) : !openUpselling ^ canOpenUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')}
                 </Button>
               </CheckoutAction>
             )}

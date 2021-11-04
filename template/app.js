@@ -33,6 +33,7 @@ import { Help } from './pages/Help'
 import { AddressForm } from './pages/AddressForm'
 import { AddressList } from './pages/AddressList'
 import { MomentOption } from './pages/MomentOption'
+import { BusinessCart } from './pages/BusinessCart'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -223,6 +224,9 @@ export const App = () => {
                   </Route>
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
+                  </Route>
+                  <Route exact path='/store/:store/cart'>
+                    <BusinessCart />
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth

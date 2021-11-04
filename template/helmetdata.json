@@ -90,6 +90,13 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "business_cart" : {
+    "title": "Business Cart",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "checkout": {
     "title": "Checkout",
     "description": "a dummy description about this page",
