@@ -3,6 +3,7 @@ import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AppleLogin } from './src/components/AppleLogin'
 import { AutoScroll } from './src/components/AutoScroll'
+import { BusinessCart } from './src/components/BusinessCart'
 import { BusinessController } from './src/components/BusinessController'
 import { BusinessesListing } from './src/components/BusinessesListing'
 import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
@@ -42,6 +43,7 @@ export {
   AddressList,
   AppleLogin,
   AutoScroll,
+  BusinessCart,
   BusinessController,
   BusinessesListing,
   BusinessItemAccordion,
