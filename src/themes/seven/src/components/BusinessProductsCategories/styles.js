@@ -5,12 +5,17 @@ export const CategoriesContainer = styled.div`
   padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
-  position: sticky;
-  top: 0;
+
   
 
   ${({ isVerticalList }) => isVerticalList && css`
     padding: 0px;
+    @media (min-width: 768px) {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: scroll;
+    }
   `}
 
 
@@ -27,4 +32,10 @@ export const CategoriesContainer = styled.div`
   @media (min-width: 768px) {
     padding: 0px;
   }
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+
 `
