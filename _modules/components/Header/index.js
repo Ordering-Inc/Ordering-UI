@@ -91,7 +91,8 @@ var Header = function Header(props) {
       closeCartPopover = props.closeCartPopover,
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      isLinkedToAdmin = props.isLinkedToAdmin;
 
   var _useLocation = (0, _reactRouterDom.useLocation)(),
       pathname = _useLocation.pathname;
@@ -331,7 +332,8 @@ var Header = function Header(props) {
     },
     onClose: function onClose() {
       return handleClosePopover('user');
-    }
+    },
+    isLinkedToAdmin: isLinkedToAdmin
   }), isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
     carts: cartsWithProducts,

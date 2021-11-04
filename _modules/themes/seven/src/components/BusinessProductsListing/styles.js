@@ -9,7 +9,7 @@ exports.WrapperSearch = exports.WrappLayout = exports.WrapContent = exports.Unde
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -62,35 +62,39 @@ var BusinessProductsCategorieWrapper = _styledComponents.default.div(_templateOb
 
 exports.BusinessProductsCategorieWrapper = BusinessProductsCategorieWrapper;
 
-var CartegoryTitle = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  background-color: ", ";\n  font-size: 20px;\n  line-height: 30px;\n  color: #fff;\n  font-weight: bold;\n  padding: 10px 15px;\n  @media (min-width: 768px) {\n    background-color: ", ";\n    padding-left: 10%;\n    ", "\n  }\n  @media (min-width: 1024px) {\n    padding-left: 15%;\n    ", "\n  }\n"])), function (props) {
+var CartegoryTitle = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  background-color: ", ";\n  font-size: 20px;\n  line-height: 30px;\n  color: #fff;\n  font-weight: bold;\n  padding: 10px 15px;\n  margin-right: 14px;\n  ", "\n  @media (min-width: 768px) {\n    background-color: ", ";\n    padding-left: 10%;\n    ", "\n  }\n  @media (min-width: 1024px) {\n    padding-left: 15%;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.primary;
-}, function (props) {
-  return props.theme.colors.primaryDark;
 }, function (props) {
   var _props$theme3;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n      padding-right: 10%;\n      padding-left: unset;\n    "])));
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    margin-right: 0px;\n    margin-left: 14px;\n "])));
+}, function (props) {
+  return props.theme.colors.primaryDark;
 }, function (props) {
   var _props$theme4;
 
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      padding-right: 15%;\n      padding-left: unset;\n    "])));
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      padding-right: 10%;\n      padding-left: unset;\n    "])));
+}, function (props) {
+  var _props$theme5;
+
+  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      padding-right: 15%;\n      padding-left: unset;\n    "])));
 });
 
 exports.CartegoryTitle = CartegoryTitle;
 
-var AgeConfirmContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  background-color: #fff;\n  ", "\n  background-size: cover;\n  background-repeat: no-repeat;\n  background-position: top center;\n  box-shadow: border-box;\n\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  @media (min-width: 1024px) {\n    height: 40vw;\n  }\n"])), function (_ref2) {
+var AgeConfirmContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background-color: #fff;\n  ", "\n  background-size: cover;\n  background-repeat: no-repeat;\n  background-position: top center;\n  box-shadow: border-box;\n\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  @media (min-width: 1024px) {\n    height: 40vw;\n  }\n"])), function (_ref2) {
   var bgimage = _ref2.bgimage;
-  return bgimage && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    background-image: url(", "); \n  "])), function (props) {
+  return bgimage && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    background-image: url(", "); \n  "])), function (props) {
     return props.bgimage;
   });
 });
 
 exports.AgeConfirmContainer = AgeConfirmContainer;
 
-var UnderAge = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  h2 {\n    text-align: center;\n    color: #000;\n  }\n"])));
+var UnderAge = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  h2 {\n    text-align: center;\n    color: #000;\n  }\n"])));
 
 exports.UnderAge = UnderAge;
 
-var UnderAgeButtons = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  button {\n    width: 100px;\n    margin: 0 7px;\n    font-size: 16px;\n    font-weight: bold;\n  }\n"])));
+var UnderAgeButtons = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  button {\n    width: 100px;\n    margin: 0 7px;\n    font-size: 16px;\n    font-weight: bold;\n  }\n"])));
 
 exports.UnderAgeButtons = UnderAgeButtons;
