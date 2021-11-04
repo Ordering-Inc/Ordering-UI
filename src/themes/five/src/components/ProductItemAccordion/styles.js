@@ -280,6 +280,10 @@ export const ProductPriceSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
+  span {
+    white-space: nowrap;
+  }
 `
 
 export const ProductPrice = styled.div`

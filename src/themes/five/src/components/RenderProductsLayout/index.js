@@ -121,7 +121,7 @@ export const RenderProductsLayout = (props) => {
                     />
                   )}
 
-                  <WrapContent>
+                  <WrapContent id='businessProductList'>
                     <BusinessLayout
                       component='products_list'
                       categories={[

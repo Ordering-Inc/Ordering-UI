@@ -1,8 +1,15 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const ProductsContainer = styled.div`
   width: 95%;
   margin: 20px auto 0px;
+
+  > svg {
+    color: #748194;
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
 `
 
 export const ProductLoading = styled.div`

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
@@ -43,6 +43,15 @@ const BusinessProductsCategoriesUI = (props) => {
       ))
     )
   }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log(window.scrollY, 'scrollY')
+      console.log(document.getElementById('businessProductList').offsetTop - 60, 'offsettope')
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <>
