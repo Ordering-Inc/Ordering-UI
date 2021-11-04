@@ -24,8 +24,8 @@ const HighestRatedUI = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
 
-  const isBusinessWithReviews = businessesList?.businesses?.every((business) => business?.reviews?.total === 0 )
-  
+  const isBusinessWithReviews = businessesList?.businesses?.every((business) => business?.reviews?.total === 0)
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
