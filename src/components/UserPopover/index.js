@@ -55,7 +55,7 @@ export const UserPopover = (props) => {
 
   const options = isCustomerMode
     ? optionsDefault.filter(option => option.name === 'profile' || (option.name === 'orders_manager' && isLinkedToAdmin))
-    : optionsList || optionsDefault
+    : optionsList || optionsDefault.filter(option => option.pathname)
 
   const popper = usePopper(referenceElement.current, popperElement.current, {
     placement: 'auto',
