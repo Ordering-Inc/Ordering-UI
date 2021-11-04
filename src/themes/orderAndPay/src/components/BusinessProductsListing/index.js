@@ -113,7 +113,7 @@ const BusinessProductsListingUI = (props) => {
     const categoryTitle = document.getElementsByClassName(category.name)[0]
     if (categoryTitle) {
       window.scrollTo({
-        top: categoryTitle.offsetTop,
+        top: categoryTitle.offsetTop - 70,
         behavior: 'smooth'
       })
     } else if (categoryId === 'featured') {

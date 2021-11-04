@@ -29,7 +29,7 @@ export const Tabs = styled.div`
       border-bottom: none;
     }
     @media (min-width: 1024px) {
-      padding-right: 0;
+      padding-right: 15px;
       padding-left: 15%;
       ${props => props.theme?.rtl && css`
         padding-right: 15%;
@@ -97,6 +97,7 @@ export const Tab = styled.div`
       border-top: none;
       border-bottom: 1px solid ${props => props.theme.colors.primary};
       height: 39px;
+      min-height: 39px;
       box-sizing: border-box;
       padding: 0 15px;
       display: flex;
@@ -124,6 +125,7 @@ export const Tab = styled.div`
 
     @media (min-width: 1440px) {
       height: 50px;
+      min-height: 50px;
       span {
         font-size: 1.1rem;
       }
