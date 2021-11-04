@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartUI = function CartUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$business, _cart$business2, _orderState$options, _configs$driver_tip_t, _configs$driver_tip_u, _cart$business3, _cart$business4, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$business, _cart$business2, _orderState$options, _configs$driver_tip_t, _configs$driver_tip_u, _cart$business3, _cart$business5, _props$afterComponent, _props$afterElements;
 
   var currentCartUuid = props.currentCartUuid,
       cart = props.cart,
@@ -184,6 +184,15 @@ var CartUI = function CartUI(props) {
     }
   };
 
+  var handleBusinessCartRedirect = function handleBusinessCartRedirect(slug) {
+    events.emit('go_to_page', {
+      page: 'business_cart',
+      params: {
+        store: slug
+      }
+    });
+  };
+
   (0, _react.useEffect)(function () {
     events.emit('get_current_view');
     return function () {
@@ -283,10 +292,12 @@ var CartUI = function CartUI(props) {
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)))))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && !isCustomMode && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address) ? 'secundary' : 'primary',
     onClick: function onClick() {
-      return setOpenUpselling(true);
+      var _cart$business4;
+
+      return handleBusinessCartRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business4 = cart.business) === null || _cart$business4 === void 0 ? void 0 : _cart$business4.slug);
     },
     disabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address)
-  }, !(cart !== null && cart !== void 0 && cart.valid_address) ? t('OUT_OF_COVERAGE', 'Out of Coverage') : !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+  }, !(cart !== null && cart !== void 0 && cart.valid_address) ? t('OUT_OF_COVERAGE', 'Out of Coverage') : !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : !openUpselling ^ canOpenUpselling ? t('VIEW_ORDER', 'View Order') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('PRODUCT', 'Product'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -314,7 +325,7 @@ var CartUI = function CartUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     isCartProduct: true,
     productCart: curProduct,
-    businessSlug: cart === null || cart === void 0 ? void 0 : (_cart$business4 = cart.business) === null || _cart$business4 === void 0 ? void 0 : _cart$business4.slug,
+    businessSlug: cart === null || cart === void 0 ? void 0 : (_cart$business5 = cart.business) === null || _cart$business5 === void 0 ? void 0 : _cart$business5.slug,
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,

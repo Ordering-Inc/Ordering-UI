@@ -9,9 +9,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _SingleProductCard = require("../SingleProductCard");
+var _SingleProductCard = require("../../../SingleProductCard");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../../../../../../../components/NotFoundSource");
 
 var _styles = require("./styles");
 
@@ -31,8 +31,6 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -46,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _categoryState$produc, _categoryState$produc2, _categoryState$produc3, _props$afterComponent, _props$afterElements;
+  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _categoriesState$feat, _categoriesState$feat2, _categoriesState$feat3, _categoriesState$feat4, _categoryState$produc6;
 
   var errors = props.errors,
       businessId = props.businessId,
@@ -56,39 +54,42 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       isBusinessLoading = props.isBusinessLoading,
       onProductClick = props.onProductClick,
       handleSearchRedirect = props.handleSearchRedirect,
-      featured = props.featured,
       searchValue = props.searchValue,
       isCartOnProductsList = props.isCartOnProductsList,
       handleClearSearch = props.handleClearSearch,
-      errorQuantityProducts = props.errorQuantityProducts;
+      errorQuantityProducts = props.errorQuantityProducts,
+      categoriesState = props.categoriesState;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, (category === null || category === void 0 ? void 0 : category.id) && /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product) {
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var isUseParentCategory = (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1';
+  return /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, (category === null || category === void 0 ? void 0 : category.id) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
+    id: "container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "category-title"
+  }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
+    src: category.image
+  }), /*#__PURE__*/_react.default.createElement("h3", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
-      isSoldOut: product.inventoried && !product.quantity,
+      isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
       product: product,
       businessId: businessId,
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList
     });
-  })), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
+  }))), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (categoriesState === null || categoriesState === void 0 ? void 0 : (_categoriesState$feat = categoriesState.featured) === null || _categoriesState$feat === void 0 ? void 0 : (_categoriesState$feat2 = _categoriesState$feat.products) === null || _categoriesState$feat2 === void 0 ? void 0 : _categoriesState$feat2.some(function (product) {
     return product.featured;
-  })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("h3", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc3 = categoryState.products) === null || _categoryState$produc3 === void 0 ? void 0 : _categoryState$produc3.map(function (product) {
+  })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("h3", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, categoriesState === null || categoriesState === void 0 ? void 0 : (_categoriesState$feat3 = categoriesState.featured) === null || _categoriesState$feat3 === void 0 ? void 0 : (_categoriesState$feat4 = _categoriesState$feat3.products) === null || _categoriesState$feat4 === void 0 ? void 0 : _categoriesState$feat4.map(function (product) {
     return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
-      isSoldOut: product.inventoried && !product.quantity,
+      isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
       product: product,
       businessId: businessId,
       onProductClick: onProductClick,
@@ -97,15 +98,21 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
   }).map(function (category, i, _categories) {
-    var _categoryState$produc4;
+    var _categoryState$produc2, _categoryState$produc3, _categoryState$produc4, _categoryState$produc5, _categoryState$pagina;
 
-    var products = ((_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.filter(function (product) {
+    var products = !isUseParentCategory ? (_categoryState$produc2 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc3 = categoryState.products) === null || _categoryState$produc3 === void 0 ? void 0 : _categoryState$produc3.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
-    })) || [];
+    })) !== null && _categoryState$produc2 !== void 0 ? _categoryState$produc2 : [] : (_categoryState$produc4 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc5 = categoryState.products) === null || _categoryState$produc5 === void 0 ? void 0 : _categoryState$produc5.filter(function (product) {
+      var _category$children;
+
+      return category === null || category === void 0 ? void 0 : (_category$children = category.children) === null || _category$children === void 0 ? void 0 : _category$children.some(function (cat) {
+        return cat.category_id === (product === null || product === void 0 ? void 0 : product.category_id);
+      });
+    })) !== null && _categoryState$produc4 !== void 0 ? _categoryState$produc4 : [];
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: category === null || category === void 0 ? void 0 : category.id
     }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
-      id: "category".concat(category === null || category === void 0 ? void 0 : category.id)
+      id: "container"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "category-title"
     }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
@@ -113,24 +120,24 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     }), /*#__PURE__*/_react.default.createElement("h3", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: product === null || product === void 0 ? void 0 : product.id,
-        isSoldOut: product.inventoried && !product.quantity,
+        isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
         businessId: businessId,
         product: product,
         onProductClick: onProductClick,
         isCartOnProductsList: isCartOnProductsList
       });
-    }), categoryState.loading && i + 1 === _categories.length && _toConsumableArray(Array(categoryState.pagination.nextPageItems).keys()).map(function (i) {
+    }), (categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading) && i + 1 === _categories.length && _toConsumableArray(Array(categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$pagina = categoryState.pagination) === null || _categoryState$pagina === void 0 ? void 0 : _categoryState$pagina.nextPageItems).keys()).map(function (i) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: "skeleton:".concat(i),
         isSkeleton: true
       });
     }))));
-  }), (categoryState.loading || isBusinessLoading) && /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, _toConsumableArray(Array(categoryState.pagination.nextPageItems).keys()).map(function (i) {
+  }), ((categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading) || isBusinessLoading) && /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, _toConsumableArray(Array(categoryState === null || categoryState === void 0 ? void 0 : categoryState.pagination.nextPageItems).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: "skeleton:".concat(i),
       isSkeleton: true
     });
-  })), !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && !isBusinessLoading && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc6 = categoryState.products) === null || _categoryState$produc6 === void 0 ? void 0 : _categoryState$produc6.length) === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
     btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
     onClickButton: function onClickButton() {
@@ -140,14 +147,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, "ERROR: [", e, "]");
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 

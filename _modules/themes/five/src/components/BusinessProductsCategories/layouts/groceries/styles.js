@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SkeletonItem = exports.ProductsContainer = exports.ProductLoading = void 0;
+exports.CategoriesWrap = exports.CategoriesContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -17,14 +17,14 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 95%;\n  margin: 20px auto 0px;\n"])));
+var CategoriesWrap = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
 
-exports.ProductsContainer = ProductsContainer;
+exports.CategoriesWrap = CategoriesWrap;
 
-var ProductLoading = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n"])));
+var CategoriesContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px;\n  padding-bottom: 0;\n  background: ", ";\n  z-index: 1000;\n  top: 0;\n  text-align: center;\n\n  div.category {\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n  }\n\n  div.special{\n    ", "\n  }\n\n  @media (min-width: 381px) {\n    padding: 15px;\n    padding-bottom: 0;\n  }\n"])), function (props) {
+  return props.theme.colors.backgroundPage;
+}, function (props) {
+  return !props.featured && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      display: none\n    "])));
+});
 
-exports.ProductLoading = ProductLoading;
-
-var SkeletonItem = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 80%;\n  margin: 30px auto;\n\n  span {\n    margin-bottom: 10px;\n  }\n"])));
-
-exports.SkeletonItem = SkeletonItem;
+exports.CategoriesContainer = CategoriesContainer;
