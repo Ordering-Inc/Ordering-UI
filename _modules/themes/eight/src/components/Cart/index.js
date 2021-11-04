@@ -335,7 +335,7 @@ var CartUI = function CartUI(props) {
     onClick: function onClick() {
       return handleClearProducts();
     }
-  }, t('CANCEL_ORDER', 'Cancel order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, orderState !== null && orderState !== void 0 && orderState.loading ? t('LOADING', 'Loading') : t('CANCEL_ORDER', 'Cancel order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primaryGradient",
     onClick: function onClick() {
       return handleClickCheckout();
