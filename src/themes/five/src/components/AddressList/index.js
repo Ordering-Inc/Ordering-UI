@@ -202,7 +202,7 @@ const AddressListUI = (props) => {
         {
           !isPopover && (
             <Modal
-              title={t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
+              title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               open={!isPopover && addressOpen}
               onClose={() => setAddressOpen(false)}
             >

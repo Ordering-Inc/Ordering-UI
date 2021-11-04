@@ -53,15 +53,14 @@ export const RenderProductsLayout = (props) => {
     handleSearchRedirect,
     handleChangeSearch,
     setOpenBusinessInformation,
-    handleCartOpen,
+    handleCartOpen
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
 
-  const isUseParentCategory = configs?.use_parent_category?.value === 'true'
-    || configs?.use_parent_category?.value === '1'
+  const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
 
   const frontLayout = business?.front_layout
   const businessLayout = {
@@ -75,7 +74,7 @@ export const RenderProductsLayout = (props) => {
         : BusinessProductsCategories,
       products_list: businessLayout.layoutOne
         ? ProductListLayoutGroceries
-        : BusinessProductsList,
+        : BusinessProductsList
     }
 
     const ComponentToRender = props?.component && components[props?.component]
@@ -104,124 +103,124 @@ export const RenderProductsLayout = (props) => {
               errorQuantityProducts={errorQuantityProducts}
               sortByValue={sortByValue}
             />
-              {!businessLayout.layoutOne && (
-                <BusinessContent>
-                  <BusinessCategoryProductWrapper>
-                    {!(business?.categories?.length === 0 && !categoryId) && (
-                      <BusinessLayout
-                        component='categories'
-                        categories={[
-                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                          ...business?.categories.sort((a, b) => a.rank - b.rank)
-                        ]}
-                        categorySelected={categorySelected}
-                        onClickCategory={onClickCategory}
-                        featured={featuredProducts}
-                        openBusinessInformation={openBusinessInformation}
-                      />
-                    )}
+            {!businessLayout.layoutOne && (
+              <BusinessContent>
+                <BusinessCategoryProductWrapper>
+                  {!(business?.categories?.length === 0 && !categoryId) && (
+                    <BusinessLayout
+                      component='categories'
+                      categories={[
+                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                        ...business?.categories.sort((a, b) => a.rank - b.rank)
+                      ]}
+                      categorySelected={categorySelected}
+                      onClickCategory={onClickCategory}
+                      featured={featuredProducts}
+                      openBusinessInformation={openBusinessInformation}
+                    />
+                  )}
 
-                    <WrapContent>
-                      <BusinessLayout
-                        component='products_list'
-                        categories={[
-                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                          ...business?.categories.sort((a, b) => a.rank - b.rank)
-                        ]}
-                        category={categorySelected}
-                        categoryState={categoryState}
-                        businessId={business?.id}
-                        errors={errors}
-                        onProductClick={onProductClick}
-                        handleSearchRedirect={handleSearchRedirect}
-                        featured={featuredProducts}
-                        searchValue={searchValue}
-                        isCartOnProductsList={isCartOnProductsList}
-                        handleClearSearch={handleChangeSearch}
-                        errorQuantityProducts={errorQuantityProducts}
-                      />
-                    </WrapContent>
-                  </BusinessCategoryProductWrapper>
-                  <BusinessCartContainer>
-                    <BusinessCartContent>
-                      {currentCart?.products?.length > 0 ? (
-                        <>
-                          <Title>{t('YOUR_CART', 'Your cart')}</Title>
-                          <Cart
-                            isStore
-                            isCustomMode
-                            isForceOpenCart
-                            cart={currentCart}
-                            isCartPending={currentCart?.status === 2}
-                            isProducts={currentCart.products.length}
-                            isCartOnProductsList={isCartOnProductsList}
-                            handleCartOpen={handleCartOpen}
-                          />
-                        </>
-                      ) : (
-                        <EmptyCart>
-                          <div className='empty-content'>
-                            <AiOutlineShoppingCart />
-                            <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
-                          </div>
-                          <EmptyBtnWrapper>
-                            <span>$0.00</span>
-                            <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
-                          </EmptyBtnWrapper>
-                        </EmptyCart>
-                      )}
-                    </BusinessCartContent>
-                  </BusinessCartContainer>
-                </BusinessContent>
-              )}
-
-              {businessLayout.layoutOne && (
-                <BusinessContent>
-                  <BusinessCategoriesContainer>
-                    {!(business?.categories?.length === 0 && !categoryId) && (
-                      <BusinessLayout
-                        component='categories'
-                        categories={[
-                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                          ...business?.categories.sort((a, b) => a.rank - b.rank)
-                        ]}
-                        categorySelected={categorySelected}
-                        onClickCategory={onClickCategory}
-                        featured={featuredProducts}
-                        openBusinessInformation={openBusinessInformation}
-                        openCategories={openCategories}
-                      />
+                  <WrapContent>
+                    <BusinessLayout
+                      component='products_list'
+                      categories={[
+                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                        ...business?.categories.sort((a, b) => a.rank - b.rank)
+                      ]}
+                      category={categorySelected}
+                      categoryState={categoryState}
+                      businessId={business?.id}
+                      errors={errors}
+                      onProductClick={onProductClick}
+                      handleSearchRedirect={handleSearchRedirect}
+                      featured={featuredProducts}
+                      searchValue={searchValue}
+                      isCartOnProductsList={isCartOnProductsList}
+                      handleClearSearch={handleChangeSearch}
+                      errorQuantityProducts={errorQuantityProducts}
+                    />
+                  </WrapContent>
+                </BusinessCategoryProductWrapper>
+                <BusinessCartContainer>
+                  <BusinessCartContent>
+                    {currentCart?.products?.length > 0 ? (
+                      <>
+                        <Title>{t('YOUR_CART', 'Your cart')}</Title>
+                        <Cart
+                          isStore
+                          isCustomMode
+                          isForceOpenCart
+                          cart={currentCart}
+                          isCartPending={currentCart?.status === 2}
+                          isProducts={currentCart.products.length}
+                          isCartOnProductsList={isCartOnProductsList}
+                          handleCartOpen={handleCartOpen}
+                        />
+                      </>
+                    ) : (
+                      <EmptyCart>
+                        <div className='empty-content'>
+                          <AiOutlineShoppingCart />
+                          <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
+                        </div>
+                        <EmptyBtnWrapper>
+                          <span>$0.00</span>
+                          <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
+                        </EmptyBtnWrapper>
+                      </EmptyCart>
                     )}
-                  </BusinessCategoriesContainer>
-                  <BusinessCategoryProductWrapper>
-                    <WrapContent>
-                      <BusinessLayout
-                        component='products_list'
-                        categories={[
-                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                          ...business?.categories.sort((a, b) => a.rank - b.rank)
-                        ]}
-                        category={categorySelected}
-                        categoriesState={props.categoriesState}
-                        categoryState={categoryState}
-                        businessId={business?.id}
-                        errors={errors}
-                        onProductClick={onProductClick}
-                        handleSearchRedirect={handleSearchRedirect}
-                        featured={featuredProducts}
-                        searchValue={searchValue}
-                        isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                        handleClearSearch={handleChangeSearch}
-                        errorQuantityProducts={errorQuantityProducts}
-                      />
-                    </WrapContent>
-                  </BusinessCategoryProductWrapper>
-                </BusinessContent>
-              )}
+                  </BusinessCartContent>
+                </BusinessCartContainer>
+              </BusinessContent>
+            )}
+
+            {businessLayout.layoutOne && (
+              <BusinessContent>
+                <BusinessCategoriesContainer>
+                  {!(business?.categories?.length === 0 && !categoryId) && (
+                    <BusinessLayout
+                      component='categories'
+                      categories={[
+                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                        ...business?.categories.sort((a, b) => a.rank - b.rank)
+                      ]}
+                      categorySelected={categorySelected}
+                      onClickCategory={onClickCategory}
+                      featured={featuredProducts}
+                      openBusinessInformation={openBusinessInformation}
+                      openCategories={openCategories}
+                    />
+                  )}
+                </BusinessCategoriesContainer>
+                <BusinessCategoryProductWrapper>
+                  <WrapContent>
+                    <BusinessLayout
+                      component='products_list'
+                      categories={[
+                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                        ...business?.categories.sort((a, b) => a.rank - b.rank)
+                      ]}
+                      category={categorySelected}
+                      categoriesState={props.categoriesState}
+                      categoryState={categoryState}
+                      businessId={business?.id}
+                      errors={errors}
+                      onProductClick={onProductClick}
+                      handleSearchRedirect={handleSearchRedirect}
+                      featured={featuredProducts}
+                      searchValue={searchValue}
+                      isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                      handleClearSearch={handleChangeSearch}
+                      errorQuantityProducts={errorQuantityProducts}
+                    />
+                  </WrapContent>
+                </BusinessCategoryProductWrapper>
+              </BusinessContent>
+            )}
           </div>
         </WrappLayout>
       )}

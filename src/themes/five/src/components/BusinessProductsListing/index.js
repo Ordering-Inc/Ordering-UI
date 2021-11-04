@@ -14,7 +14,7 @@ import {
 import {
   ProductsContainer,
   ProductLoading,
-  SkeletonItem,
+  SkeletonItem
 } from './styles'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
