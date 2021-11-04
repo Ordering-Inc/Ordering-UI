@@ -147,6 +147,11 @@ export const CartegoryTitle = styled.div`
   color: #fff;
   font-weight: bold;
   padding: 10px 15px;
+  margin-right: 14px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 0px;
+    margin-left: 14px;
+ `}
   @media (min-width: 768px) {
     background-color: ${props => props.theme.colors.primaryDark};
     padding-left: 10%;
