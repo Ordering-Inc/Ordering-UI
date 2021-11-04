@@ -338,7 +338,7 @@ const CartUI = (props) => {
               color='primaryContrast'
               onClick={() => handleClearProducts()}
             >
-              {t('CANCEL_ORDER', 'Cancel order')}
+              {orderState?.loading ? t('LOADING', 'Loading') : t('CANCEL_ORDER', 'Cancel order')}
             </Button>
             <Button
               color='primaryGradient'
