@@ -44,7 +44,8 @@ export const Header = (props) => {
     closeCartPopover,
     isShowOrderOptions,
     isHideSignup,
-    isCustomerMode
+    isCustomerMode,
+    isLinkedToAdmin
   } = props
 
   const { pathname } = useLocation()
@@ -229,6 +230,7 @@ export const Header = (props) => {
                           isHome={isHome}
                           onClick={() => handleTogglePopover('user')}
                           onClose={() => handleClosePopover('user')}
+                          isLinkedToAdmin={isLinkedToAdmin}
                         />
                       )}
                       {isShowOrderOptions && (

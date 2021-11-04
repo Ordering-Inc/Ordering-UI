@@ -19,6 +19,9 @@ const IconOption = ({ value }) => {
     case 'orders':
       return <FaRegListAlt />
 
+    case 'orders_manager':
+      return <FaRegListAlt />
+
     case 'help':
       return <BiHelpCircle />
 
@@ -27,19 +30,14 @@ const IconOption = ({ value }) => {
   }
 }
 
-const optionsDefault = [
-  { name: 'profile', pathname: '/profile' },
-  { name: 'orders', pathname: '/profile/orders' },
-  { name: 'help', pathname: '/help' }
-]
-
 export const UserPopover = (props) => {
   const {
     open,
     isHome,
     optionsList,
     withLogout,
-    isCustomerMode
+    isCustomerMode,
+    isLinkedToAdmin
   } = props
   const [sessionState] = useSession()
   const [, t] = useLanguage()
@@ -48,8 +46,15 @@ export const UserPopover = (props) => {
   const popperElement = useRef()
   const arrowElement = useRef()
 
+  const optionsDefault = [
+    { name: 'profile', pathname: '/profile' },
+    { name: 'orders', pathname: '/profile/orders' },
+    { name: 'help', pathname: '/help' },
+    { name: 'orders_manager', link: t('REACT_ORDERS_MANAGER_URL', 'https://new-admin.ordering.co/orders') }
+  ]
+
   const options = isCustomerMode
-    ? optionsDefault.filter(option => option.name === 'profile')
+    ? optionsDefault.filter(option => option.name === 'profile' || (option.name === 'orders_manager' && isLinkedToAdmin))
     : optionsList || optionsDefault
 
   const popper = usePopper(referenceElement.current, popperElement.current, {
@@ -86,8 +91,12 @@ export const UserPopover = (props) => {
     }
   }
 
-  const handleGoToPage = (page) => {
-    events.emit('go_to_page', { page })
+  const handleGoToPage = (page, link) => {
+    if (link) {
+      window.open(link, '_blank').focus()
+    } else {
+      events.emit('go_to_page', { page })
+    }
     props.onClick && props.onClick()
   }
 
@@ -109,11 +118,9 @@ export const UserPopover = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <HeaderItem
         isPhoto={sessionState?.user?.photo}
         isHome={isHome}
@@ -132,7 +139,7 @@ export const UserPopover = (props) => {
               <PopoverListLink
                 key={option.name}
                 active={window.location.pathname === option.pathname}
-                onClick={() => handleGoToPage(option.name)}
+                onClick={() => handleGoToPage(option.name, option.link)}
               >
                 <IconOption value={option.name} /> {t(option.name.toUpperCase(), capitalize(option.name))}
               </PopoverListLink>
@@ -145,13 +152,11 @@ export const UserPopover = (props) => {
         <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
       </PopoverBody>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
-      }
+        <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
         <React.Fragment key={i}>
           {AfterElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
     </div>
   )
 }
