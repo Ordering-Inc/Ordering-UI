@@ -46,11 +46,16 @@ const BusinessProductsCategoriesUI = (props) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      categories && categories.length && categories.forEach(category => {
+      const featuredElement = document.getElementById('categoryfeatured')
+      const _categories = featuredElement ? [...categories] : categories.filter(category => category.id !== 'featured')
+      _categories.length && _categories.forEach(category => {
         const windowTop = window.scrollY
+        let element
         let topPos = 0
-        if (!category?.id) topPos = document.getElementById('businessProductList').offsetTop
-        else topPos = document.getElementById(`category${category.id}`).offsetTop
+        if (category?.id) element = document.getElementById(`category${category.id}`)
+        if (element) topPos = element.offsetTop
+        else topPos = document.getElementById('businessProductList').offsetTop
+
         if (windowTop >= (topPos - 60)) {
           setCategorySelected(category)
           return

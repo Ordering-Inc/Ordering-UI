@@ -23,6 +23,13 @@ export const CardItem = styled.div`
   justify-content: space-between;
   padding: 10px 0;
   border-bottom: 1px solid #EAEAEA;
+  ${({ isCursor }) => isCursor && css`
+    cursor: pointer;
+
+    &:hover {
+      background-color: #F8F9FA;
+    }
+  `}
 `
 
 export const CardItemContent = styled.div`
@@ -97,7 +104,7 @@ export const CardItemActionsWrapper = styled.div`
       color: #212121;
     }
 
-    &: hover {
+    &:hover {
       background: #F8F9FA;
     }
   }
@@ -127,7 +134,7 @@ export const ActionsContent = styled.div`
     transition: all 0.3s;
     color: ${props => props.theme?.colors.headingColor};
 
-    &: hover {
+    &:hover {
       background: #f8f9fa;
     }
 
