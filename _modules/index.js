@@ -543,6 +543,12 @@ Object.defineProperty(exports, "SingleProductCard", {
     return _SingleProductCard.SingleProductCard;
   }
 });
+Object.defineProperty(exports, "SmartAppBanner", {
+  enumerable: true,
+  get: function get() {
+    return _SmartAppBanner.SmartAppBanner;
+  }
+});
 Object.defineProperty(exports, "SmsLoginButton", {
   enumerable: true,
   get: function get() {
@@ -855,6 +861,8 @@ var _SidebarMenu = require("./components/SidebarMenu");
 var _SignUpForm = require("./components/SignUpForm");
 
 var _SingleProductCard = require("./components/SingleProductCard");
+
+var _SmartAppBanner = require("./components/SmartAppBanner");
 
 var _SpinnerLoader = require("./components/SpinnerLoader");
 
