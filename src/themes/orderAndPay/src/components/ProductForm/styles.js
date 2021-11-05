@@ -135,14 +135,13 @@ export const ProductActions = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 40px;
+  padding: ${({ isIOS }) => isIOS ? '10px 40px 20px' : '10px 40px'};
   width: 100%;
   box-sizing: border-box;
   border-top: 1px solid #E9ECEF;
   position: fixed;
   bottom: -5px;
   right: 0;
-  width: 100%;
   background-color: #FFF;
 
   div.price {

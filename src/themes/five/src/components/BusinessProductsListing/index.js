@@ -14,8 +14,9 @@ import {
 import {
   ProductsContainer,
   ProductLoading,
-  SkeletonItem,
+  SkeletonItem
 } from './styles'
+import HiArrowNarrowLeft from '@meronex/icons/hi/HiArrowNarrowLeft'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
@@ -132,6 +133,10 @@ const BusinessProductsListingUI = (props) => {
     setCanOpenUpselling(false)
   }
 
+  const handleGoToBusinessList = () => {
+    events.emit('go_to_page', { page: 'search' })
+  }
+
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
       if (productModal?.product?.id) {
@@ -164,6 +169,7 @@ const BusinessProductsListingUI = (props) => {
   return (
     <>
       <ProductsContainer>
+        <HiArrowNarrowLeft onClick={() => handleGoToBusinessList()} />
         <RenderProductsLayout
           errors={errors}
           isError={error}
@@ -227,7 +233,6 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </ProductsContainer>
-
       {currentCart?.products?.length > 0 && auth && !isCartOpen && (
         <FloatingButton
           btnText={

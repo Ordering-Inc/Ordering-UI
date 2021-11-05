@@ -61,7 +61,7 @@ export const HomeHero = (props) => {
           <WrapInput onClick={handleAddressInput} withIcon>
             <HiOutlineLocationMarker />
             <p>
-              {orderState?.options?.address?.address || t('WHERE_DO_WE_DELIVERY', theme?.defaultLanguages?.WHERE_DO_WE_DELIVERY || 'Where do we delivery?')}
+              {orderState?.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
             </p>
           </WrapInput>
           <Button
@@ -74,7 +74,7 @@ export const HomeHero = (props) => {
         </ContentWrapper>
 
         <Modal
-          title={t('WHERE_DO_WE_DELIVERY', theme?.defaultLanguages?.WHERE_DO_WE_DELIVERY || 'Where do we delivery?')}
+          title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
           open={modals.formOpen}
           onClose={() => setModals({ ...modals, formOpen: false })}
         >
@@ -87,7 +87,7 @@ export const HomeHero = (props) => {
           />
         </Modal>
         <Modal
-          title={t('WHERE_DO_WE_DELIVERY', theme?.defaultLanguages?.WHERE_DO_WE_DELIVERY || 'Where do we delivery?')}
+          title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
           open={modals.listOpen}
           width='70%'
           onClose={() => setModals({ ...modals, listOpen: false })}

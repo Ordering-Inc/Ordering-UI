@@ -46,7 +46,7 @@ export const HeaderOption = (props) => {
         {variant === 'address' && (
           <>
             <FaMapMarkerAlt id='icon' />
-            {addressState || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
+            {addressState || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
           </>
         )}
         {variant === 'moment' && (

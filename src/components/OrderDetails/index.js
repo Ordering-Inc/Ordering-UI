@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
   OrderDetails as OrderDetailsController,
@@ -27,6 +26,7 @@ import { ProductShare } from '../ProductShare'
 import { ReviewOrder } from '../ReviewOrder'
 import { ReviewProduct } from '../ReviewProduct'
 import { ReviewDriver } from '../ReviewDriver'
+import { OrderSuccessModal } from '../OrderSuccessModal'
 
 import {
   Container,
@@ -57,8 +57,6 @@ import {
   OrderBill,
   ReviewsAction,
   FootActions,
-  SkeletonBlockWrapp,
-  SkeletonBlock,
   HeaderImg,
   ShareOrder,
   MessagesIcon,
@@ -95,6 +93,7 @@ const OrderDetailsUI = (props) => {
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
 
+  const [openSuccessModal, setOpenSuccessModal] = useState(true)
   const { order, loading, businessData, error } = props.order
 
   const getOrderStatus = (s) => {
@@ -212,6 +211,13 @@ const OrderDetailsUI = (props) => {
     }
   }, [messagesReadList])
 
+  useEffect(() => {
+    if (!loading) {
+      setOpenSuccessModal(false)
+      localStorage.removeItem('business-address')
+    }
+  }, [loading])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -221,7 +227,7 @@ const OrderDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container>
-        {order && Object.keys(order).length > 0 && (
+        {!loading && order && Object.keys(order).length > 0 && (
           <WrapperContainer>
             <Content className='order-content'>
               <Header>
@@ -452,9 +458,9 @@ const OrderDetailsUI = (props) => {
                           {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
                             parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
                             !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                          (
-                            <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
-                          )}
+                            (
+                              <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
+                            )}
                         </td>
                         <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
                       </tr>
@@ -507,16 +513,14 @@ const OrderDetailsUI = (props) => {
 
         {loading && !error && (
           <WrapperContainer isLoading className='skeleton-loading'>
-            <SkeletonBlockWrapp>
-              <SkeletonBlock width={80}>
-                <Skeleton height={300} />
-                <Skeleton />
-                <Skeleton height={100} />
-                <Skeleton height={100} />
-                <Skeleton />
-                <Skeleton height={200} />
-              </SkeletonBlock>
-            </SkeletonBlockWrapp>
+            <Modal
+              open={openSuccessModal}
+              width='50%'
+              hideCloseDefault
+              onClose={() => setOpenSuccessModal(false)}
+            >
+              <OrderSuccessModal isOrderDetail />
+            </Modal>
           </WrapperContainer>
         )}
 

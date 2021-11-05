@@ -104,7 +104,6 @@ export const ContentInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   text-transform: capitalize;
-  margin-left: 10px;
   width: 55%;
 
   @media (min-width: 411px) {
@@ -280,6 +279,10 @@ export const ProductPriceSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
+  span {
+    white-space: nowrap;
+  }
 `
 
 export const ProductPrice = styled.div`
