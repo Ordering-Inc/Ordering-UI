@@ -39,7 +39,7 @@ var BusinessHeader = function BusinessHeader(props) {
 
 exports.BusinessHeader = BusinessHeader;
 
-var OrderInfoBlock = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-left: 20px;\n  ", "\n\n  @media (min-width: 769px) {\n    margin-left: 40px;\n    ", "\n  }\n\n\n  h4 {\n    font-weight: 600;\n    font-size: 16px;\n    color: #FFFFFF;\n    margin: 0;\n  }\n\n  p {\n    font-size: 14px;\n    color: #FFFFFF;\n    margin: 0;\n  }\n"])), function (props) {
+var OrderInfoBlock = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-left: 20px;\n  cursor: pointer;\n  ", "\n\n  @media (min-width: 769px) {\n    margin-left: 40px;\n    ", "\n  }\n\n  h4 {\n    font-weight: 600;\n    font-size: 16px;\n    color: #FFFFFF;\n    margin: 0;\n    transition: all 0.3s;\n  }\n\n  p {\n    font-size: 14px;\n    color: #FFFFFF;\n    margin: 0;\n    transition: all 0.3s;\n  }\n\n  &:hover {\n    h4, p {\n      text-decoration: underline;\n    }\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-right: 20px;\n    margin-left: 0;\n  "])));
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 40px;\n      margin-left: 0;\n    "])));

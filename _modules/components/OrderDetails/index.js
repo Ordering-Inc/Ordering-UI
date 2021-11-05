@@ -9,8 +9,6 @@ exports.OrderDetails = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _orderingComponents = require("ordering-components");
 
 var _FiPhone = _interopRequireDefault(require("@meronex/icons/fi/FiPhone"));
@@ -46,6 +44,8 @@ var _ReviewOrder = require("../ReviewOrder");
 var _ReviewProduct = require("../ReviewProduct");
 
 var _ReviewDriver = require("../ReviewDriver");
+
+var _OrderSuccessModal = require("../OrderSuccessModal");
 
 var _styles = require("./styles");
 
@@ -159,6 +159,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       _useState14 = _slicedToArray(_useState13, 2),
       unreadAlert = _useState14[0],
       setUnreadAlert = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(true),
+      _useState16 = _slicedToArray(_useState15, 2),
+      openSuccessModal = _useState16[0],
+      setOpenSuccessModal = _useState16[1];
 
   var _props$order = props.order,
       order = _props$order.order,
@@ -410,6 +415,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       }));
     }
   }, [messagesReadList]);
+  (0, _react.useEffect)(function () {
+    if (!loading) {
+      setOpenSuccessModal(false);
+      localStorage.removeItem('business-address');
+    }
+  }, [loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -418,7 +429,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, !loading && order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, {
     className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles.Header, null, isCustomerMode && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
@@ -520,17 +531,16 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, t('MY_ORDERS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag43 = theme.defaultLanguages) === null || _theme$defaultLanguag43 === void 0 ? void 0 : _theme$defaultLanguag43.MY_ORDERS) || 'My Orders'), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, null))))), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
     isLoading: true,
     className: "skeleton-loading"
-  }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
-    width: 80
-  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 300
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 200
-  })))), !loading && error && (error.includes('ERROR_ACCESS_EXPIRED') ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }, /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: openSuccessModal,
+    width: "50%",
+    hideCloseDefault: true,
+    onClose: function onClose() {
+      return setOpenSuccessModal(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_OrderSuccessModal.OrderSuccessModal, {
+    isOrderDetail: true
+  }))), !loading && error && (error.includes('ERROR_ACCESS_EXPIRED') ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t(error[0], 'Sorry, the order has expired.')
   }) : /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag44 = theme.defaultLanguages) === null || _theme$defaultLanguag44 === void 0 ? void 0 : _theme$defaultLanguag44.NOT_FOUND_ORDER) || 'Sorry, we couldn\'t find the requested order.'),

@@ -27,9 +27,12 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var WrapperContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: ", ";\n  margin: auto;\n"])), function (_ref) {
+var WrapperContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: ", ";\n  min-height: ", ";;\n  margin: auto;\n"])), function (_ref) {
   var isLoading = _ref.isLoading;
   return isLoading ? '100%' : '80%';
+}, function (_ref2) {
+  var isLoading = _ref2.isLoading;
+  return isLoading ? '70vh' : 'unset';
 });
 
 exports.WrapperContainer = WrapperContainer;
@@ -58,11 +61,11 @@ exports.HeaderInfo = HeaderInfo;
 
 var HeaderText = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  color: ", ";\n  text-align: center;\n\n  ", ";\n  ", ";\n\n  h1 {\n    margin: 0;\n    font-size: 22px;\n  }\n\n  p {\n    font-size: 14px;\n  }\n\n  @media (min-width: 480px) {\n    margin: 0px 20px;\n  }\n\n  @media (min-width: 769px) {\n    h1 {\n      font-size: 26px;\n    }\n\n    p {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primaryContrast;
-}, function (_ref2) {
-  var column = _ref2.column;
-  return column && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    flex-direction: column;\n  "])));
 }, function (_ref3) {
   var column = _ref3.column;
+  return column && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    flex-direction: column;\n  "])));
+}, function (_ref4) {
+  var column = _ref4.column;
   return !column && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    justify-content: space-between;\n    align-items: center;\n  "])));
 });
 
@@ -121,7 +124,7 @@ var StatusBarStyled = _styledComponents.default.div(_templateObject20 || (_templ
 }, function (props) {
   var _props$theme4;
 
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    background: linear-gradient(to left, ", " ", "%, ", " ", "%)\n  "])), props.theme.colors.primary, props.percentage, props.theme.colors.disabled, props.percentage);
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    background: linear-gradient(to left, ", " ", "%, ", " ", "%);\n  "])), props.theme.colors.primary, props.percentage, props.theme.colors.disabled, props.percentage);
 });
 
 var StatusBar = function StatusBar(props) {
@@ -206,8 +209,8 @@ var FootActions = _styledComponents.default.div(_templateObject38 || (_templateO
 
 exports.FootActions = FootActions;
 
-var SkeletonBlock = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n  margin-bottom: 30px;\n  span:nth-child(2),span:nth-child(5){\n      span{\n        height: 100px;\n      }\n    }\n  @media (min-width: 768px){\n    span:nth-child(2), span:nth-child(5){\n      span{\n        height: 200px;\n      }\n    }\n  }\n"])), function (_ref4) {
-  var width = _ref4.width;
+var SkeletonBlock = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n  margin-bottom: 30px;\n  span:nth-child(2),span:nth-child(5){\n      span{\n        height: 100px;\n      }\n    }\n  @media (min-width: 768px){\n    span:nth-child(2), span:nth-child(5){\n      span{\n        height: 200px;\n      }\n    }\n  }\n"])), function (_ref5) {
+  var width = _ref5.width;
   return width && "".concat(width, "%");
 });
 

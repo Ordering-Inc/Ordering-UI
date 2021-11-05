@@ -399,6 +399,12 @@ Object.defineProperty(exports, "OrderDetails", {
     return _OrderDetails.OrderDetails;
   }
 });
+Object.defineProperty(exports, "OrderSuccessModal", {
+  enumerable: true,
+  get: function get() {
+    return _OrderSuccessModal.OrderSuccessModal;
+  }
+});
 Object.defineProperty(exports, "OrderTypeSelectorHeader", {
   enumerable: true,
   get: function get() {
@@ -817,6 +823,8 @@ var _NotNetworkConnectivity = require("./components/NotNetworkConnectivity");
 var _OrderDetails = require("./components/OrderDetails");
 
 var _OrdersOption = require("./components/OrdersOption");
+
+var _OrderSuccessModal = require("./components/OrderSuccessModal");
 
 var _OrderTypeSelectorHeader = require("./components/OrderTypeSelectorHeader");
 

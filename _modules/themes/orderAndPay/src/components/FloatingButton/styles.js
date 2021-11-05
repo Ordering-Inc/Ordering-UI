@@ -17,7 +17,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: 0px;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #FFF;\n  z-index: 1000;\n  display: flex;\n  align-items: center;\n  justify-content: space-around;\n\n  h1{\n    font-size: 1.2em;\n  }\n  button {\n    position: relative;\n    width: 40%;\n    padding: 10px;\n    text-align: center;\n    font-size: 18px;\n    margin: 10px 0px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    @media (min-width: 850px) {\n      width: 80%;\n    }\n\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n"])));
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: 0px;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #FFF;\n  z-index: 1000;\n  display: flex;\n  align-items: center;\n  justify-content: space-around;\n  padding-bottom: ", ";\n  h1{\n    font-size: 1.2em;\n  }\n  button {\n    position: relative;\n    width: 40%;\n    padding: 10px;\n    text-align: center;\n    font-size: 18px;\n    margin: 10px 0px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    @media (min-width: 850px) {\n      width: 80%;\n    }\n\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n"])), function (_ref) {
+  var isIOS = _ref.isIOS;
+  return isIOS ? '10px' : '0';
+});
 
 exports.Container = Container;
 

@@ -19,6 +19,8 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
+var _HiArrowNarrowLeft = _interopRequireDefault(require("@meronex/icons/hi/HiArrowNarrowLeft"));
+
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _PageNotFound = require("../../../../../components/PageNotFound");
@@ -219,6 +221,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setCanOpenUpselling(false);
   };
 
+  var handleGoToBusinessList = function handleGoToBusinessList() {
+    events.emit('go_to_page', {
+      page: 'search'
+    });
+  };
+
   (0, _react.useEffect)(function () {
     if (categoryId && productId && isInitialRender) {
       var _productModal$product;
@@ -251,7 +259,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, /*#__PURE__*/_react.default.createElement(_RenderProductsLayout.RenderProductsLayout, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, /*#__PURE__*/_react.default.createElement(_HiArrowNarrowLeft.default, {
+    onClick: function onClick() {
+      return handleGoToBusinessList();
+    }
+  }), /*#__PURE__*/_react.default.createElement(_RenderProductsLayout.RenderProductsLayout, {
     errors: errors,
     isError: error,
     isLoading: loading,
