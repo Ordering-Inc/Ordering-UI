@@ -64,7 +64,6 @@ const BusinessProductsCategoriesUI = (props) => {
 
         if (windowTop >= (topPos - 60)) {
           setSelectedCateogry(category)
-          return
         }
       })
     }
