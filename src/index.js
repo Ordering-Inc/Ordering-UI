@@ -51,6 +51,7 @@ import { NotFoundSource } from './components/NotFoundSource'
 import { NotNetworkConnectivity } from './components/NotNetworkConnectivity'
 import { OrderDetails } from './components/OrderDetails'
 import { OrdersOption } from './components/OrdersOption'
+import { OrderSuccessModal } from './components/OrderSuccessModal'
 import { OrderTypeSelectorHeader } from './components/OrderTypeSelectorHeader'
 import { PageNotFound } from './components/PageNotFound'
 import { PagesList } from './components/PagesList'
@@ -166,6 +167,7 @@ export {
   NotNetworkConnectivity,
   OrderDetails,
   OrdersOption,
+  OrderSuccessModal,
   OrderTypeSelectorHeader,
   PageNotFound,
   PagesList,
