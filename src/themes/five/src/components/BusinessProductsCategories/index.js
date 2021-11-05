@@ -19,8 +19,8 @@ const BusinessProductsCategoriesUI = (props) => {
   const handlerClickCategory = (category) => {
     setCategorySelected(category)
     let topPos = 0
-    if (category?.id && category?.id !== 'featured') topPos = document.getElementById(`category${category.id}`).offsetTop
-    else topPos = document.getElementById('businessProductList').offsetTop
+    if (!category?.id) topPos = document.getElementById('businessProductList').offsetTop
+    else topPos = document.getElementById(`category${category.id}`).offsetTop
     window.scrollTo({
       top: topPos - 60,
       left: 100,
@@ -46,8 +46,16 @@ const BusinessProductsCategoriesUI = (props) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY, 'scrollY')
-      console.log(document.getElementById('businessProductList').offsetTop - 60, 'offsettope')
+      categories && categories.length && categories.forEach(category => {
+        const windowTop = window.scrollY
+        let topPos = 0
+        if (!category?.id) topPos = document.getElementById('businessProductList').offsetTop
+        else topPos = document.getElementById(`category${category.id}`).offsetTop
+        if (windowTop >= (topPos - 60)) {
+          setCategorySelected(category)
+          return
+        }
+      })
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)

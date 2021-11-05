@@ -31,8 +31,7 @@ const BusinessProductsListUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-  const isUseParentCategory = configs?.use_parent_category?.value === 'true'
-    || configs?.use_parent_category?.value === '1'
+  const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
 
   return (
     <ProductsContainer>

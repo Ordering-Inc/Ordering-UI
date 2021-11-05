@@ -207,3 +207,37 @@ export const WrapAutoScroll = styled.div`
   overflow-x: auto;
   display: flex;
 `
+export const UpsellingPageTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  p {
+    font-weight: 500;
+    font-size: 16px;
+    color: ${props => props.theme?.colors.darkTextColor};
+  }
+
+  svg {
+    font-size: 20px;
+    cursor: pointer;
+    color: #748194;
+    margin-left: 30px;
+
+    ${props => props.theme?.rtl && css`
+      margin-right: 30px;
+      margin-left: 0px;
+    `}
+  }
+`
+
+export const Divider = styled.div`
+  background: #F8F9FA;
+  height: 8px;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+
+  @media (min-width: 768px) {
+    width: calc(100% + 60px);
+    margin-left: -30px;
+  }
+`
