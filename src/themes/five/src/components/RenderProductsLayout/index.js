@@ -124,6 +124,7 @@ export const RenderProductsLayout = (props) => {
                       onClickCategory={onClickCategory}
                       featured={featuredProducts}
                       openBusinessInformation={openBusinessInformation}
+                      business={business}
                     />
                   )}
                   {windowSize.width < 500 && (
@@ -151,6 +152,7 @@ export const RenderProductsLayout = (props) => {
                       isCartOnProductsList={isCartOnProductsList}
                       handleClearSearch={handleChangeSearch}
                       errorQuantityProducts={errorQuantityProducts}
+                      business={business}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
@@ -203,6 +205,7 @@ export const RenderProductsLayout = (props) => {
                       featured={featuredProducts}
                       openBusinessInformation={openBusinessInformation}
                       openCategories={openCategories}
+                      business={business}
                     />
                   )}
                 </BusinessCategoriesContainer>
@@ -227,6 +230,7 @@ export const RenderProductsLayout = (props) => {
                       isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
                       handleClearSearch={handleChangeSearch}
                       errorQuantityProducts={errorQuantityProducts}
+                      business={business}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
