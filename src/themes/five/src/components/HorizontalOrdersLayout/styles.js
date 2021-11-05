@@ -52,6 +52,7 @@ export const Logo = styled.div`
 `
 
 export const Card = styled.div`
+  cursor: pointer;
   min-width: 300px;
   width: 300px;
   margin: 10px;

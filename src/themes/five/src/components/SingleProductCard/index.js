@@ -61,7 +61,9 @@ export const SingleProductCard = (props) => {
           {!isSkeleton ? (
             <PriceWrapper>
               <span>{parsePrice(product?.price)}</span>
-              <span className='off-price'>{parsePrice(product?.offer_price)}</span>
+              {product?.offer_price && (
+                <span className='off-price'>{parsePrice(product?.offer_price)}</span>
+              )}
             </PriceWrapper>
           ) : (
             <Skeleton width={100} />

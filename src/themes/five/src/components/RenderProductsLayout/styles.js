@@ -25,7 +25,7 @@ export const WrapContent = styled.div`
 export const BusinessContent = styled.div`
   margin-top: 30px;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 
   @media (min-width: 1200px) {
     flex-direction: row;
@@ -68,15 +68,30 @@ export const BusinessCartContainer = styled(BusinessCategoriesContainer)``
 
 export const BusinessCartContent = styled.div`
   background: white;
-  padding: 35px 30px;
-  border: 1px solid #E9ECEF;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-  border-radius: 7.6px;
+  padding: 30px;
   position: relative;
+
+  .product.accordion {
+    margin: 0;
+  }
+
+  .accordion.active {
+    padding: 10px 0;
+  }
+
+  ${({ isModal }) => !isModal && css`
+    border: 1px solid #E9ECEF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    border-radius: 7.6px;
+  `}
 
   @media (min-width: 1200px) {
     position: sticky;
     top: 0;
+  }
+
+  @media (min-width: 768px) {
+    padding: 35px 30px;
   }
 `
 
@@ -121,5 +136,24 @@ export const EmptyBtnWrapper = styled.div`
     font-size: 14px;
     padding-left: 25px;
     padding-right: 25px;
+  }
+`
+
+export const MobileCartViewWrapper = styled.div`
+  margin-top: 20px;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  span {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  button {
+    height: 44px;
+    border-radius: 7.6px;
   }
 `

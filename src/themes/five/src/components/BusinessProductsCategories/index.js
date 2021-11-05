@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
@@ -11,16 +11,23 @@ const BusinessProductsCategoriesUI = (props) => {
     isSkeleton,
     categories,
     featured,
-    openBusinessInformation
+    openBusinessInformation,
+    business,
+    handlerClickCategory,
+    categorySelected
   } = props
 
-  const [categorySelected, setCategorySelected] = useState({ id: null })
+  const [selectedCategory, setSelectedCateogry] = useState({ id: null })
 
-  const handlerClickCategory = (category) => {
-    setCategorySelected(category)
+  const handleChangeCategory = (category) => {
+    if (business?.lazy_load_products_recommended) {
+      handlerClickCategory({ ...category })
+      return
+    }
+    setSelectedCateogry({ ...category })
     let topPos = 0
-    if (category?.id && category?.id !== 'featured') topPos = document.getElementById(`category${category.id}`).offsetTop
-    else topPos = document.getElementById('businessProductList').offsetTop
+    if (!category?.id) topPos = document.getElementById('businessProductList').offsetTop
+    else topPos = document.getElementById(`category${category.id}`).offsetTop
     window.scrollTo({
       top: topPos - 60,
       left: 100,
@@ -34,8 +41,8 @@ const BusinessProductsCategoriesUI = (props) => {
         <Tab
           key={category.name}
           className={`category ${category.id === 'featured' ? 'special' : ''}`}
-          active={categorySelected?.id === category.id}
-          onClick={() => handlerClickCategory(category)}
+          active={business?.lazy_load_products_recommended ? (categorySelected?.id === category.id) : (selectedCategory?.id === category.id)}
+          onClick={() => handleChangeCategory(category)}
           borderBottom
         >
           {category.name}
@@ -43,6 +50,26 @@ const BusinessProductsCategoriesUI = (props) => {
       ))
     )
   }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (business?.lazy_load_products_recommended) return
+      const featuredElement = document.getElementById('categoryfeatured')
+      const _categories = featuredElement ? [...categories] : categories.filter(category => category.id !== 'featured')
+      _categories?.length && _categories.forEach(category => {
+        const windowTop = window.scrollY
+        let topPos = 0
+        if (!category?.id) topPos = document.getElementById('businessProductList').offsetTop
+        else topPos = document.getElementById(`category${category.id}`).offsetTop
+
+        if (windowTop >= (topPos - 60)) {
+          setSelectedCateogry(category)
+        }
+      })
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <>
