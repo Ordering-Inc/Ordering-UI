@@ -12,7 +12,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-
+  padding-bottom: ${({ isIOS }) => isIOS ? '10px' : '0'};
   h1{
     font-size: 1.2em;
   }

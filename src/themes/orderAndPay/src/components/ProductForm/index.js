@@ -78,6 +78,7 @@ const ProductOptionsUI = (props) => {
   const [tabValue, setTabValue] = useState('all')
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
+  const isIOS = window.navigator.userAgent.includes('iPhone')
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -319,7 +320,7 @@ const ProductOptionsUI = (props) => {
                   <MidComponent key={i} {...props} />))
                 }
               </ProductEdition>
-              <ProductActions>
+              <ProductActions isIOS={isIOS}>
                 <div className='price'>{productCart.total && parsePrice(productCart.total)}</div>
                 {
                   productCart && !isSoldOut && maxProductQuantity > 0 && (

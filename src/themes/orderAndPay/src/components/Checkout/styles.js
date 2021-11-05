@@ -219,6 +219,7 @@ export const TotalCart = styled.div`
   width: 100%;
   background-color: #FFF;
   button{
+    margin-bottom: ${({ isIOS }) => isIOS ? '10px' : '0'};
     height: 52px;
     font-weight: 600;
     font-size: 12px;
