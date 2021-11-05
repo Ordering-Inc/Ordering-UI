@@ -99,6 +99,7 @@ const CheckoutUI = (props) => {
   const [paymethodSelectedChanged, setPaymethodSelectedChanged] = useState(false)
   const [openSpotModal, setOpenSpotModal] = useState(false)
   const inputRef = useRef()
+  const isIOS = window.navigator.userAgent.includes('iPhone')
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -483,7 +484,7 @@ const CheckoutUI = (props) => {
             <BeforeComponent key={i} {...props} />))}
 
           {!props.isHideSectionSeven && !cartState.loading && cart && cart?.status !== 2 && (
-            <TotalCart>
+            <TotalCart isIOS={isIOS}>
               <p>{parsePrice(cart?.total)}</p>
               <Button
                 color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
