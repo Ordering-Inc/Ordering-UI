@@ -29,6 +29,7 @@ import BisStar from '@meronex/icons/bi/BisStar'
 import FaCrown from '@meronex/icons/fa/FaCrown'
 import BiCar from '@meronex/icons/bi/BiCar'
 import BiBasket from '@meronex/icons/bi/BiBasket'
+import { BusinessPreorder } from '../BusinessPreorder'
 
 const BusinessControllerUI = (props) => {
   const {
@@ -187,7 +188,7 @@ const BusinessControllerUI = (props) => {
         width='60%'
         onClose={() => setIsPreorder(false)}
       >
-        preorder modal
+        <BusinessPreorder {...props} />
       </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
