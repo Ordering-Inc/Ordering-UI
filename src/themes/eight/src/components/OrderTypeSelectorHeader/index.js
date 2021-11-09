@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { OrderTypeControl, useLanguage } from 'ordering-components'
 import { Select } from '../../styles/Select'
 import { Option, OrderTypeWrapper, SelectedOption, ContentOption } from './styles'
@@ -14,6 +14,13 @@ const OrderTypeSelectorHeaderUI = (props) => {
 
   const defaultType = configTypes?.includes(typeSelected) ? null : configTypes?.[0]
 
+  const [selectedType, setSelectedType] = useState(defaultType || defaultValue)
+
+  const onChangeOrderType = (type) => {
+    setSelectedType(type)
+    handleChangeOrderType(type)
+  }
+
   return (
     <OrderTypeWrapper>
       <Select
@@ -22,8 +29,8 @@ const OrderTypeSelectorHeaderUI = (props) => {
             ? orderTypes.filter(type => configTypes?.includes(type.value))
             : orderTypes
         }
-        defaultValue={defaultType || defaultValue || typeSelected}
-        onChange={(orderType) => handleChangeOrderType(orderType)}
+        defaultValue={defaultType || selectedType || defaultValue}
+        onChange={(orderType) => onChangeOrderType(orderType)}
       />
     </OrderTypeWrapper>
   )
