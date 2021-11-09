@@ -98,6 +98,7 @@ const PaymentOptionStripeUI = (props) => {
                 handleCardClick={() => handleCardClick(card)}
                 handleDeleteCard={() => handleDeleteCard(card)}
                 card={card}
+                defaultSelected={i === 0}
               />
             ))}
           </>
@@ -159,12 +160,14 @@ export const PaymentCard = (props) => {
     card,
     cardSelected,
     handleCardClick,
-    onSelectCard
+    onSelectCard,
+    defaultSelected
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
   const [isShowActions, setIsShowActions] = useState(false)
   const cardActionsRef = useRef(null)
+  const actionWrapperRef = useRef(null)
 
   const getIconCard = (brand = '') => {
     const value = brand.toLowerCase()
@@ -186,7 +189,8 @@ export const PaymentCard = (props) => {
     }
   }
 
-  const handleChangeDefaultCard = () => {
+  const handleChangeDefaultCard = (e) => {
+    if (actionWrapperRef.current?.contains(e.target)) return
     handleCardClick(card)
     onSelectCard({
       id: card.id,
@@ -203,8 +207,22 @@ export const PaymentCard = (props) => {
     return () => window.removeEventListener('click', handleClickOutside)
   }, [isShowActions])
 
+  useEffect(() => {
+    if (defaultSelected && card) {
+      handleCardClick(card)
+      onSelectCard({
+        id: card.id,
+        type: 'card',
+        card: {
+          brand: card.brand,
+          last4: card.last4
+        }
+      })
+    }
+  }, [defaultSelected])
+
   return (
-    <CardItem>
+    <CardItem onClick={handleChangeDefaultCard} isCursor>
       <CardItemContent>
         <div>
           <img src={getIconCard(card?.brand)} alt={card?.brand} />
@@ -219,14 +237,13 @@ export const PaymentCard = (props) => {
             <span>{t('DEFAULT', 'Default')}</span>
           )
         }
-        <CardItemActionsWrapper>
+        <CardItemActionsWrapper ref={actionWrapperRef}>
           <span ref={cardActionsRef}>
             <FiMoreVertical onClick={() => setIsShowActions(true)} />
           </span>
           {
             isShowActions && (
               <ActionsContent>
-                <div onClick={handleChangeDefaultCard}>{t('USE_AS_DEFAULT', 'Use as default')}</div>
                 <div className='delete' onClick={handleDeleteCard}>{t('DELETE', 'Delete')}</div>
               </ActionsContent>
             )

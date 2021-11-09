@@ -15,6 +15,7 @@ import {
 } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
+import { Modal } from '../Modal'
 
 import {
   Container,
@@ -42,6 +43,7 @@ import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
+import { OrderSuccessModal } from '../OrderSuccessModal'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -80,12 +82,15 @@ const CheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
+  const [createOrder, setCreateOrder] = useState(false)
+  const [cardData, setCardData] = useState(null)
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
   const handlePlaceOrder = () => {
+    setCreateOrder(true)
     if (!userErrors.length) {
       handlerClickPlaceOrder && handlerClickPlaceOrder()
       return
@@ -349,6 +354,7 @@ const CheckoutUI = (props) => {
                 handleOrderRedirect={handleOrderRedirect}
                 isCustomerMode={isCustomerMode}
                 paySelected={paymethodSelected}
+                setCardData={setCardData}
               />
             </PaymentMethodContainer>
           )}
@@ -413,6 +419,16 @@ const CheckoutUI = (props) => {
           )}
 
         </WrappContainer>
+        {createOrder && cartState.cart && (
+          <Modal
+            open={createOrder}
+            width='50%'
+            hideCloseDefault
+            onClose={() => setCreateOrder(false)}
+          >
+            <OrderSuccessModal cardData={cardData} cart={cartState.cart} businessData={businessDetails?.business} isCheckOut />
+          </Modal>
+        )}
         <Alert
           title={t('CUSTOMER_DETAILS', 'Customer Details')}
           content={alertState.content}

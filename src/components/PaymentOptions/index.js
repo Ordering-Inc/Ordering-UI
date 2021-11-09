@@ -79,7 +79,8 @@ const PaymentOptionsUI = (props) => {
     handlePaymethodClick,
     handlePaymethodDataChange,
     isCustomerMode,
-    isOpenMethod
+    isOpenMethod,
+    setCardData
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -108,6 +109,10 @@ const PaymentOptionsUI = (props) => {
       setPaymethodData(props.paySelected?.data)
     }
   }, [props.paySelected])
+
+  useEffect(() => {
+    setCardData(paymethodData)
+  }, [paymethodData])
 
   return (
     <>
@@ -157,9 +162,9 @@ const PaymentOptionsUI = (props) => {
           {!(paymethodsList.loading || isLoading) &&
             !paymethodsList.error &&
             (!paymethodsList?.paymethods || paymethodsList.paymethods.length === 0) &&
-          (
-            <p>{t('NO_PAYMENT_METHODS', 'No payment methods!')}</p>
-          )}
+            (
+              <p>{t('NO_PAYMENT_METHODS', 'No payment methods!')}</p>
+            )}
         </PaymentMethodsList>
 
         {paymethodSelected?.gateway === 'cash' && (

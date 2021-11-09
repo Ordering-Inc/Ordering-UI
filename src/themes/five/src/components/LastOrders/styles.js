@@ -47,6 +47,7 @@ export const BusinessHeader = (props) => {
 
 export const OrderInfoBlock = styled.div`
   margin-left: 20px;
+  cursor: pointer;
   ${props => props.theme.rtl && css`
     margin-right: 20px;
     margin-left: 0;
@@ -60,17 +61,24 @@ export const OrderInfoBlock = styled.div`
     `}
   }
 
-
   h4 {
     font-weight: 600;
     font-size: 16px;
     color: #FFFFFF;
     margin: 0;
+    transition: all 0.3s;
   }
 
   p {
     font-size: 14px;
     color: #FFFFFF;
     margin: 0;
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    h4, p {
+      text-decoration: underline;
+    }
   }
 `

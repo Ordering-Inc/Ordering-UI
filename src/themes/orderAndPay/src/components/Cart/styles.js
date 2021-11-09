@@ -93,7 +93,7 @@ export const CheckoutAction = styled.div`
   padding: 0 6px;
   box-sizing: border-box;
   margin-left: 3px;
-  margin-bottom: 10px;
+  margin-bottom: ${({ isIOS }) => isIOS ? '20px' : '10px'};
   p {
     margin: 0;
     font-weight: 600;

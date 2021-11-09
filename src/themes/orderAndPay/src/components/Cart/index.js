@@ -67,6 +67,8 @@ const CartUI = (props) => {
   const [isUpselling, setIsUpselling] = useState(false)
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
+  const isIOS = window.navigator.userAgent.includes('iPhone')
+
   const handleDeleteClick = (product) => {
     setConfirm({
       open: true,
@@ -281,7 +283,7 @@ const CartUI = (props) => {
             )}
           </div>
           {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
-            <CheckoutAction>
+            <CheckoutAction isIOS={isIOS}>
               <Button
                 color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
                 onClick={checkOutBtnClick}

@@ -10,6 +10,7 @@ export const Container = styled.div`
 
 export const WrapperContainer = styled.div`
   width: ${({ isLoading }) => isLoading ? '100%' : '80%'};
+  min-height: ${({ isLoading }) => isLoading ? '70vh' : 'unset'};;
   margin: auto;
 `
 
@@ -283,7 +284,7 @@ const StatusBarStyled = styled.div`
   margin: 10px 0px 0px;
   background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)`};
   ${props => props.theme?.rtl && css`
-    background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)
+    background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%);
   `}
 `
 
