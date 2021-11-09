@@ -6,7 +6,7 @@ export const BusinessContainer = styled.div`
   width: 90%;
   margin: 30px auto;
 
-  h1 {
+  > h1 {
     color: ${props => props.theme.colors.secundary};
     font-size: 24px;
     text-align: center;
@@ -15,21 +15,21 @@ export const BusinessContainer = styled.div`
   }
 
   @media (min-width: 768px) {
-    h1 {
+    > h1 {
       font-size: 32px;
     }
   }
 
   @media (min-width: 992px) {
     width: 80%;
-    h1 {
+    > h1 {
       font-size: 40px;
     }
   }
 
   @media (min-width: 1200px) {
     margin: 70px auto;
-    h1 {
+    > h1 {
       font-size: 48px;
     }
   }
