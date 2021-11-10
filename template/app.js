@@ -110,6 +110,7 @@ export const App = () => {
               isHome={isHome}
               location={location}
             />
+
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>

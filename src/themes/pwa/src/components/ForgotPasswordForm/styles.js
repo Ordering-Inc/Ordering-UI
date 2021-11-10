@@ -6,10 +6,17 @@ export const ForgotPasswordContainer = styled.div`
 
   h1 {
     font-weight: 600;
-    font-size: 24px;
-    margin-top: 0;
-    margin-bottom: 30px;
-    text-align: center;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    width: 100%;
+    color: ${props => props.theme.colors.darkTextColor};
+    @media (min-width: 576px) {
+      margin-top: 0;
+      margin-bottom: 30px;
+      width: unset;
+      text-align: center;
+    }
   }
   @media (min-width: 992px) {
     height: 100%;
