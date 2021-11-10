@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FaStar from '@meronex/icons/fa/FaStar'
-import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
@@ -78,7 +78,7 @@ export const BusinessBasicInformation = (props) => {
                 )}
                 {!loading && (
                   <BusinessMoreDetail>
-                    <BsExclamationCircle
+                    <BsInfoCircle
                       className='popup'
                       onClick={() => setOpenBusinessInformation(true)}
                     />

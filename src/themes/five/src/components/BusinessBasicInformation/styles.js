@@ -222,15 +222,15 @@ export const BusinessMoreDetail = styled.div`
   min-width: 24px;
   width: 24px;
   height: 24px;
-  border-radius: 50%;
-  border: 1px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  
-  span {
-    font-size: 19px;
+
+  svg {
+    font-size: 24px;
     color: white;
   }
+  
+  
 `
