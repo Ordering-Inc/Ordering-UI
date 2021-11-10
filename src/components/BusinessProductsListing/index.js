@@ -102,15 +102,15 @@ const BusinessProductsListingUI = (props) => {
         quantity: 1
       }
       const updateCurrentProduct = {
-        businessid: business.id,
         id: product.id,
         code: isProductAddedToCart?.code,
         quantity: productQuantity + 1
       }
+      const cartData = currentCart?.business_id ? currentCart : { business_id: business.id }
       if (isProductAddedToCart) {
-        updateProduct(updateCurrentProduct, currentCart)
+        updateProduct(updateCurrentProduct, cartData)
       } else {
-        addProduct(addCurrentProduct, currentCart, isQuickAddProduct)
+        addProduct(addCurrentProduct, cartData, isQuickAddProduct)
       }
     } else {
       onProductRedirect({
@@ -146,7 +146,7 @@ const BusinessProductsListingUI = (props) => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
-    if (badScrollPosition || categoryState.loading || !hasMore) return
+    if (badScrollPosition || categoryState.loading || !hasMore || loading) return
     getNextProducts()
   }, [categoryState])
 
