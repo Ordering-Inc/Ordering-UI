@@ -142,7 +142,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       handlePaymethodClick = props.handlePaymethodClick,
       handlePaymethodDataChange = props.handlePaymethodDataChange,
       isCustomerMode = props.isCustomerMode,
-      isOpenMethod = props.isOpenMethod;
+      isOpenMethod = props.isOpenMethod,
+      setCardData = props.setCardData;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -178,6 +179,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       setPaymethodData((_props$paySelected2 = props.paySelected) === null || _props$paySelected2 === void 0 ? void 0 : _props$paySelected2.data);
     }
   }, [props.paySelected]);
+  (0, _react.useEffect)(function () {
+    setCardData(paymethodData);
+  }, [paymethodData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

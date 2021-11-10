@@ -31,6 +31,7 @@ var FloatingButtonUI = function FloatingButtonUI(props) {
       handleButtonClick = props.handleButtonClick,
       disabled = props.disabled,
       isSecondaryBtn = props.isSecondaryBtn;
+  var isIOS = window.navigator.userAgent.includes('iPhone');
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -39,7 +40,9 @@ var FloatingButtonUI = function FloatingButtonUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    isIOS: isIOS
+  }, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: isSecondaryBtn ? 'secundary' : 'primary',
     onClick: handleButtonClick,
     disabled: disabled

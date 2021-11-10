@@ -31,7 +31,7 @@ var ProductImage = _styledComponents.default.div(_templateObject3 || (_templateO
 
 exports.ProductImage = ProductImage;
 
-var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 0px;\n  position: relative;\n  margin-top: 18px;\n\n  h1 {\n    font-weight: 600;\n    font-size: 28px;\n    color: ", ";\n    margin-top: 0;\n    margin-bottom: 5px;\n  }\n\n  .price-wrapper {\n    display: flex;\n    align-items: center;\n\n    span {\n      font-size: 18px;\n      color: ", ";\n      margin-right: 5px;\n      ", "\n    }\n\n    .price-discount {\n      font-size: 14px;\n      color: #909BA9;\n    }\n  }\n  p {\n    font-size: 16px;\n    color: #909BA9;\n    margin-top: 0px;\n  }\n"])), function (props) {
+var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 0px 5px;\n  position: relative;\n  margin-top: 18px;\n\n  h1 {\n    font-weight: 600;\n    font-size: 28px;\n    color: ", ";\n    margin-top: 0;\n    margin-bottom: 5px;\n  }\n\n  .price-wrapper {\n    display: flex;\n    align-items: center;\n\n    span {\n      font-size: 18px;\n      color: ", ";\n      margin-right: 5px;\n      ", "\n    }\n\n    .price-discount {\n      font-size: 14px;\n      color: #909BA9;\n    }\n  }\n  p {\n    font-size: 16px;\n    color: #909BA9;\n    margin-top: 0px;\n  }\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.colors.darkTextColor;

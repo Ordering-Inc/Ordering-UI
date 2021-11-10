@@ -399,6 +399,12 @@ Object.defineProperty(exports, "OrderDetails", {
     return _OrderDetails.OrderDetails;
   }
 });
+Object.defineProperty(exports, "OrderSuccessModal", {
+  enumerable: true,
+  get: function get() {
+    return _OrderSuccessModal.OrderSuccessModal;
+  }
+});
 Object.defineProperty(exports, "OrderTypeSelectorHeader", {
   enumerable: true,
   get: function get() {
@@ -541,6 +547,12 @@ Object.defineProperty(exports, "SingleProductCard", {
   enumerable: true,
   get: function get() {
     return _SingleProductCard.SingleProductCard;
+  }
+});
+Object.defineProperty(exports, "SmartAppBanner", {
+  enumerable: true,
+  get: function get() {
+    return _SmartAppBanner.SmartAppBanner;
   }
 });
 Object.defineProperty(exports, "SmsLoginButton", {
@@ -812,6 +824,8 @@ var _OrderDetails = require("./components/OrderDetails");
 
 var _OrdersOption = require("./components/OrdersOption");
 
+var _OrderSuccessModal = require("./components/OrderSuccessModal");
+
 var _OrderTypeSelectorHeader = require("./components/OrderTypeSelectorHeader");
 
 var _PageNotFound = require("./components/PageNotFound");
@@ -855,6 +869,8 @@ var _SidebarMenu = require("./components/SidebarMenu");
 var _SignUpForm = require("./components/SignUpForm");
 
 var _SingleProductCard = require("./components/SingleProductCard");
+
+var _SmartAppBanner = require("./components/SmartAppBanner");
 
 var _SpinnerLoader = require("./components/SpinnerLoader");
 

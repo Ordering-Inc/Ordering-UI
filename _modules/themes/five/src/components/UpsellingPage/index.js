@@ -15,6 +15,8 @@ var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _Modal = require("../Modal");
@@ -86,6 +88,11 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
+  var _useState5 = (0, _react.useState)(true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      showUpselling = _useState6[0],
+      setShowUpSelling = _useState6[1];
+
   (0, _react.useEffect)(function () {
     if (!isCustomMode) {
       var _upsellingProducts$pr, _upsellingProducts$pr2;
@@ -97,6 +104,9 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       }
     }
   }, [upsellingProducts.loading, upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length]);
+  (0, _react.useEffect)(function () {
+    if ((upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length) > 0) setShowUpSelling(true);else setShowUpSelling(false);
+  }, [upsellingProducts === null || upsellingProducts === void 0 ? void 0 : upsellingProducts.products.length]);
 
   var handleFormProduct = function handleFormProduct(product) {
     setActualProduct(product);
@@ -155,7 +165,11 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     }));
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomMode ? /*#__PURE__*/_react.default.createElement(_styles.WrapAutoScroll, null, /*#__PURE__*/_react.default.createElement(_styles.HorizontalUpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomMode ? showUpselling ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.UpsellingPageTitleWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('UPSELLING_QUESTION', 'Do you want something else?')), /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return setShowUpSelling(false);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapAutoScroll, null, /*#__PURE__*/_react.default.createElement(_styles.HorizontalUpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: "upSelling"
   }, !upsellingProducts.error && upsellingProducts.products.length > 0 ? upsellingProducts.products.map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.HorizontalItem, {
@@ -184,7 +198,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       width: 250,
       height: 100
     }));
-  }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr4 = upsellingProducts.products) === null || _upsellingProducts$pr4 === void 0 ? void 0 : _upsellingProducts$pr4.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr4 = upsellingProducts.products) === null || _upsellingProducts$pr4 === void 0 ? void 0 : _upsellingProducts$pr4.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('UPSELLING_QUESTION', 'Do you want something else?'),
     open: openUpselling,
     onClose: function onClose() {

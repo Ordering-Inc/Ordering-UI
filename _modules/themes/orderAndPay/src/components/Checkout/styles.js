@@ -97,7 +97,10 @@ var ModalIcon = _styledComponents.default.div(_templateObject19 || (_templateObj
 
 exports.ModalIcon = ModalIcon;
 
-var TotalCart = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 10px 40px;\n  width: 100%;\n  box-sizing: border-box;\n  border-top: 1px solid #E9ECEF;\n  position: fixed;\n  bottom: -5px;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n  button{\n    height: 52px;\n    font-weight: 600;\n    font-size: 12px;\n    width: 45%;\n  }\n  p{\n    font-size: 16px;\n  }\n  @media (min-width: 340px){\n    button{\n      font-size: 14px;\n    }\n  }\n"])));
+var TotalCart = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 10px 40px;\n  width: 100%;\n  box-sizing: border-box;\n  border-top: 1px solid #E9ECEF;\n  position: fixed;\n  bottom: -5px;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n  button{\n    margin-bottom: ", ";\n    height: 52px;\n    font-weight: 600;\n    font-size: 12px;\n    width: 45%;\n  }\n  p{\n    font-size: 16px;\n  }\n  @media (min-width: 340px){\n    button{\n      font-size: 14px;\n    }\n  }\n"])), function (_ref) {
+  var isIOS = _ref.isIOS;
+  return isIOS ? '10px' : '0';
+});
 
 exports.TotalCart = TotalCart;
 
@@ -111,8 +114,8 @@ var Table = _styledComponents.default.div(_templateObject22 || (_templateObject2
 
 exports.Table = Table;
 
-var PlaceName = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  opacity: ", ";\n  font-weight: 400;\n  border-bottom: 1px solid #E9ECEF;\n  margin-bottom: 10px;\n  p{\n    font-size: 10px;\n    color: ", ";\n  }\n  span{\n    font-size: 12px;\n    color: #909BA9;\n  }\n"])), function (_ref) {
-  var isDisabled = _ref.isDisabled;
+var PlaceName = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  opacity: ", ";\n  font-weight: 400;\n  border-bottom: 1px solid #E9ECEF;\n  margin-bottom: 10px;\n  p{\n    font-size: 10px;\n    color: ", ";\n  }\n  span{\n    font-size: 12px;\n    color: #909BA9;\n  }\n"])), function (_ref2) {
+  var isDisabled = _ref2.isDisabled;
   return isDisabled ? 0.5 : 1;
 }, function (props) {
   return props.theme.colors.darkTextColor;
