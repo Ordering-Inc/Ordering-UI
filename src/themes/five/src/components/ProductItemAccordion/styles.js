@@ -104,7 +104,6 @@ export const ContentInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   text-transform: capitalize;
-  margin-left: 10px;
   width: 55%;
 
   @media (min-width: 411px) {
@@ -280,6 +279,10 @@ export const ProductPriceSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
+  span {
+    white-space: nowrap;
+  }
 `
 
 export const ProductPrice = styled.div`
@@ -327,17 +330,21 @@ export const ProductSelect = styled.select`
     background: ${props => props.theme?.colors.grayDividerColor};
   `}
   border-radius: 7.6px;
-  max-width: 45px;
+  max-width: 35px;
   height: 25px;
   border: none;
   font-size: 12px;
   outline: none;
-  margin: 0 5px;
+  margin: 0 5px 0 15px;
   padding: 0 3px;
   cursor: pointer;
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-progress-appearance: none;
+
+  ${props => props.theme.rtl && css`
+    margin: 0 15px 0 5px;
+  `}
 `
 
 export const ProductNotAvailable = styled.span`

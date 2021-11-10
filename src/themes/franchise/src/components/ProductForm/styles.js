@@ -46,7 +46,7 @@ export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0px;
+  padding: 0px 5px;
   position: relative;
   margin-top: 18px;
 

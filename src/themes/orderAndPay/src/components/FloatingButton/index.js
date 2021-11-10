@@ -15,6 +15,8 @@ const FloatingButtonUI = (props) => {
     isSecondaryBtn
   } = props
 
+  const isIOS = window.navigator.userAgent.includes('iPhone')
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -23,7 +25,7 @@ const FloatingButtonUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Container>
+      <Container isIOS={isIOS}>
         <h1>{title}</h1>
         <Button
           color={isSecondaryBtn ? 'secundary' : 'primary'}

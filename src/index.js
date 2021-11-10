@@ -51,6 +51,7 @@ import { NotFoundSource } from './components/NotFoundSource'
 import { NotNetworkConnectivity } from './components/NotNetworkConnectivity'
 import { OrderDetails } from './components/OrderDetails'
 import { OrdersOption } from './components/OrdersOption'
+import { OrderSuccessModal } from './components/OrderSuccessModal'
 import { OrderTypeSelectorHeader } from './components/OrderTypeSelectorHeader'
 import { PageNotFound } from './components/PageNotFound'
 import { PagesList } from './components/PagesList'
@@ -73,6 +74,7 @@ import { SearchBar } from './components/SearchBar'
 import { SidebarMenu } from './components/SidebarMenu'
 import { SignUpForm } from './components/SignUpForm'
 import { SingleProductCard } from './components/SingleProductCard'
+import { SmartAppBanner } from './components/SmartAppBanner'
 import { SpinnerLoader } from './components/SpinnerLoader'
 import { StripeElementsForm } from './components/StripeElementsForm'
 import { StripeRedirectForm } from './components/StripeRedirectForm'
@@ -165,6 +167,7 @@ export {
   NotNetworkConnectivity,
   OrderDetails,
   OrdersOption,
+  OrderSuccessModal,
   OrderTypeSelectorHeader,
   PageNotFound,
   PagesList,
@@ -186,6 +189,7 @@ export {
   SearchBar,
   SignUpForm,
   SingleProductCard,
+  SmartAppBanner,
   SpinnerLoader,
   StripeElementsForm,
   StripeRedirectForm,

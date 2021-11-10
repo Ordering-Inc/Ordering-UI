@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FaStar from '@meronex/icons/fa/FaStar'
-import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
@@ -9,6 +8,7 @@ import { BusinessInformation } from '../BusinessInformation'
 import { SearchBar } from '../SearchBar'
 import { BusinessReviews } from '../BusinessReviews'
 import { MomentContent } from '../MomentContent'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
 import { useUtils, useOrder, useLanguage } from 'ordering-components'
 
@@ -173,11 +173,8 @@ export const BusinessBasicInformation = (props) => {
           </WrapperBusinessLogo>
         </BusinessContent>
         {!loading && (
-          <BusinessMoreDetail>
-            <BsExclamationCircle
-              className='popup'
-              onClick={() => setOpenBusinessInformation(true)}
-            />
+          <BusinessMoreDetail onClick={() => setOpenBusinessInformation(true)}>
+            <BsInfoCircle />
           </BusinessMoreDetail>
         )}
         <Modal

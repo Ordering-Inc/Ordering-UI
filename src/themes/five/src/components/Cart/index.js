@@ -3,7 +3,6 @@ import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useV
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
-import MdClose from '@meronex/icons/md/MdClose'
 
 import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
@@ -18,8 +17,7 @@ import {
   CheckoutAction,
   CouponContainer,
   CartSticky,
-  Divider,
-  UpsellingPageTitleWrapper
+  Divider
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
 
@@ -273,7 +271,7 @@ const CartUI = (props) => {
               </CheckoutAction>
             )}
           </BusinessItemAccordion>
-          <Divider />
+          {!isStore && <Divider />}
           <Confirm
             title={t('PRODUCT', 'Product')}
             content={confirm.content}
@@ -302,22 +300,16 @@ const CartUI = (props) => {
             />
           </Modal>
           {(openUpselling || isUpselling) && (
-            <>
-              <UpsellingPageTitleWrapper>
-                <p>{t('UPSELLING_QUESTION', 'Do you want something else?')}</p>
-                <MdClose onClick={() => setIsUpselling(false)} />
-              </UpsellingPageTitleWrapper>
-              <UpsellingPage
-                businessId={cart.business_id}
-                isCustomMode={isCustomMode}
-                cartProducts={cart.products}
-                business={cart.business}
-                handleUpsellingPage={handleUpsellingPage}
-                openUpselling={openUpselling}
-                canOpenUpselling={canOpenUpselling}
-                setCanOpenUpselling={setCanOpenUpselling}
-              />
-            </>
+            <UpsellingPage
+              businessId={cart.business_id}
+              isCustomMode={isCustomMode}
+              cartProducts={cart.products}
+              business={cart.business}
+              handleUpsellingPage={handleUpsellingPage}
+              openUpselling={openUpselling}
+              canOpenUpselling={canOpenUpselling}
+              setCanOpenUpselling={setCanOpenUpselling}
+            />
           )}
         </CartSticky>
       </CartContainer>

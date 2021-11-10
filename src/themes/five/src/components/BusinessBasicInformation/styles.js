@@ -159,8 +159,12 @@ export const WrapperSearch = styled.div`
       margin-left: 10px;
       margin-right: 0;
     `}
-    input: focus {
-      width: 250px;
+    input {
+      width: 200px;
+
+      @media (min-width: 500px) {
+        width: 250px;
+      }
     }
   }
 
@@ -215,10 +219,18 @@ export const BusinessMoreDetail = styled.div`
   top: 30px;
   right: 30px;
   position: absolute;
-  
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
   svg {
-    cursor: pointer;
     font-size: 24px;
     color: white;
   }
+  
+  
 `
