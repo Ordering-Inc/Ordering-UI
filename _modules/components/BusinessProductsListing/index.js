@@ -207,16 +207,18 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       });
 
       var updateCurrentProduct = {
-        businessid: business.id,
         id: product.id,
         code: isProductAddedToCart === null || isProductAddedToCart === void 0 ? void 0 : isProductAddedToCart.code,
         quantity: productQuantity + 1
       };
+      var cartData = currentCart !== null && currentCart !== void 0 && currentCart.business_id ? currentCart : {
+        business_id: business.id
+      };
 
       if (isProductAddedToCart) {
-        updateProduct(updateCurrentProduct, currentCart);
+        updateProduct(updateCurrentProduct, cartData);
       } else {
-        addProduct(addCurrentProduct, currentCart, isQuickAddProduct);
+        addProduct(addCurrentProduct, cartData, isQuickAddProduct);
       }
     } else {
       onProductRedirect({
@@ -255,7 +257,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
     var badScrollPosition = innerHeightScrolltop < ((_document$documentEle2 = document.documentElement) === null || _document$documentEle2 === void 0 ? void 0 : _document$documentEle2.offsetHeight);
     var hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage);
-    if (badScrollPosition || categoryState.loading || !hasMore) return;
+    if (badScrollPosition || categoryState.loading || !hasMore || loading) return;
     getNextProducts();
   }, [categoryState]);
 
