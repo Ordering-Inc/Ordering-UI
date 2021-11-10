@@ -25,6 +25,8 @@ var _BusinessReviews = require("../BusinessReviews");
 
 var _MomentContent = require("../MomentContent");
 
+var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCircle"));
+
 var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../../../../utils");
@@ -178,7 +180,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     onClick: function onClick() {
       return setOpenBusinessInformation(true);
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, "i")), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, null)), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     open: openBusinessInformation,
     onClose: setOpenBusinessInformation,

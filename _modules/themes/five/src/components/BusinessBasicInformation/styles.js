@@ -111,6 +111,6 @@ var BusinessDetail = _styledComponents.default.div(_templateObject17 || (_templa
 
 exports.BusinessDetail = BusinessDetail;
 
-var BusinessMoreDetail = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  top: 30px;\n  right: 30px;\n  position: absolute;\n  min-width: 24px;\n  width: 24px;\n  height: 24px;\n  border-radius: 50%;\n  border: 1px solid white;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n  \n  span {\n    font-size: 19px;\n    color: white;\n  }\n"])));
+var BusinessMoreDetail = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  top: 30px;\n  right: 30px;\n  position: absolute;\n  min-width: 24px;\n  width: 24px;\n  height: 24px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n\n  svg {\n    font-size: 24px;\n    color: white;\n  }\n  \n  \n"])));
 
 exports.BusinessMoreDetail = BusinessMoreDetail;
