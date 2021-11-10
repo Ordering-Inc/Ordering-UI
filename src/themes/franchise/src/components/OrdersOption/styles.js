@@ -279,7 +279,7 @@ export const BusinessInformation = styled.div`
 
   @media (min-width: 480px){
     h2 {
-    font-size: 14px;
+    font-size: 16px;
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
     }
@@ -293,7 +293,7 @@ export const BusinessInformation = styled.div`
   @media (min-width: 768px){
     font-size: 0.9em;
     p {
-      font-size: 1em;
+      font-size: 14px;
     }
   }
 `

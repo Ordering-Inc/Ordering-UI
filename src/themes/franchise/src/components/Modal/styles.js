@@ -79,7 +79,7 @@ export const ModalOrderTypes = styled.div`
   `}
 `
 export const ModalIcon = styled.span`
-  position: fixed;
+  position: absolute;
   left: 20px;
   top: 30px;
   font-size: 30px;
@@ -94,13 +94,17 @@ export const ModalIcon = styled.span`
     border-radius: 50%;
   }
 
+  ${({ isProductForm }) => isProductForm && css`
+    position: fixed;
+  `}
+
   @media(min-width: 769px){
     position: absolute;
   }
 `
 
 export const ModalBackHeader = styled.div`
-  height: 50px;
+  height: 70px;
   background-color: white;
   width: 100%;
   position: fixed;

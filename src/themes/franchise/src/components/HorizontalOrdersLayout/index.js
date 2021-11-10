@@ -3,10 +3,16 @@ import { useLanguage, useUtils } from 'ordering-components'
 import {
   Content,
   Price,
-  Card
+  Card,
+  BusinessLogoWrapper,
+  ButtonWrapper
 } from './styles'
-import { OrdersContainer, BusinessInformation } from '../OrdersOption/styles'
+import {
+  OrdersContainer,
+  BusinessInformation
+} from '../OrdersOption/styles'
 
+import { useTheme } from 'styled-components'
 import { AutoScroll } from '../AutoScroll'
 import { Tabs } from '../../styles/Tabs'
 import { Button } from '../../styles/Buttons'
@@ -29,7 +35,8 @@ export const HorizontalOrdersLayout = (props) => {
   const orders = customArray || props.orders
 
   const [, t] = useLanguage()
-  const [{ parsePrice, parseDate }] = useUtils()
+  const theme = useTheme()
+  const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
 
   const ordersToShow = businessesIds
     ? orders.filter(order => businessesIds?.includes(order?.business_id))
@@ -59,6 +66,7 @@ export const HorizontalOrdersLayout = (props) => {
             isBusinessesPage={isBusinessesPage}
             onClick={() => handleClickCard(order?.uuid)}
           >
+            <BusinessLogoWrapper bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} />
             <Content>
               <BusinessInformation activeOrders>
                 <h2>{order.business?.name}</h2>
@@ -81,7 +89,7 @@ export const HorizontalOrdersLayout = (props) => {
                     </h2>
                   )
                 }
-                {pastOrders && (
+                {/* {pastOrders && (
                   <Button
                     outline
                     color='primary'
@@ -94,9 +102,24 @@ export const HorizontalOrdersLayout = (props) => {
                   <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
                     {t('REORDER', 'Reorder')}
                   </Button>
-                )}
+                )} */}
               </Price>
             </Content>
+            {pastOrders && (
+              <ButtonWrapper>
+                <Button
+                  outline
+                  color='primary'
+                  onClick={() => handleClickCard(order.uuid)}
+                >
+                  {t('REVIEW', 'Review')}
+                </Button>
+                <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
+                  {t('REORDER', 'Reorder')}
+                </Button>
+              </ButtonWrapper>
+            )}
+
           </Card>
         ))}
         {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && (
