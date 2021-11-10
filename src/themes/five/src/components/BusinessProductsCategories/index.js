@@ -24,7 +24,6 @@ const BusinessProductsCategoriesUI = (props) => {
       handlerClickCategory({ ...category })
       return
     }
-    setSelectedCateogry({ ...category })
     let topPos = 0
     if (!category?.id) topPos = document.getElementById('businessProductList').offsetTop
     else topPos = document.getElementById(`category${category.id}`).offsetTop
