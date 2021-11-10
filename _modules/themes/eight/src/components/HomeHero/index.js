@@ -11,9 +11,19 @@ var _styledComponents = require("styled-components");
 
 var _orderingComponents = require("ordering-components");
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -30,7 +40,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -46,11 +56,25 @@ var HomeHero = function HomeHero(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 2),
+      changeType = _useOrder2[1].changeType;
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configState = _useConfig2[0];
+
+  var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
+    return Number(value);
+  })) || [];
+
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
   };
 
-  var handleAddressInput = function handleAddressInput() {
+  var handleAddressInput = function handleAddressInput(orderType) {
+    changeType(orderType);
+
     if (auth) {
       handleGoToPage({
         page: 'address_list'
@@ -70,32 +94,53 @@ var HomeHero = function HomeHero(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_8', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'What type of order can we get started for you?')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME_8', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Order ahead for pickup or let us deliver to your location')), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
-    onClick: handleAddressInput
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme.images.orderTypes.pickup,
-    alt: "pickup"
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.')))), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
-    onClick: handleAddressInput
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_8', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'What type of order can we get started for you?')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME_8', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Order ahead for pickup or let us deliver to your location')), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectContainer, null, (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(1)) && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
+    onClick: function onClick() {
+      return handleAddressInput(1);
+    }
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.orderTypes.delivery,
     alt: "delivery"
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY', 'Delivery')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.')))), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
-    onClick: handleAddressInput
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY', 'Delivery')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.')))), (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(2)) && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
+    onClick: function onClick() {
+      return handleAddressInput(2);
+    }
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.orderTypes.pickup,
+    alt: "pickup"
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.')))), (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(3)) && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
+    onClick: function onClick() {
+      return handleAddressInput(3);
+    }
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.orderTypes.eatIn,
     alt: "eat in"
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('EAT_IN', 'Eat in')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.')))), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
-    onClick: handleAddressInput
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('EAT_IN', 'Eat in')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.')))), (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(4)) && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
+    onClick: function onClick() {
+      return handleAddressInput(4);
+    }
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.orderTypes.curbside,
     alt: "curbside"
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('CURBSIDE', 'Curbside')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.')))), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
-    onClick: handleAddressInput
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('CURBSIDE', 'Curbside')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.')))), (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(5)) && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
+    onClick: function onClick() {
+      return handleAddressInput(5);
+    }
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.orderTypes.driveThru,
     alt: "drive thru"
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('DRIVE_THRU', 'Drive thru')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.'))))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, t('DRIVE_THRU', 'Drive thru')), /*#__PURE__*/_react.default.createElement("p", null, t('Feugiat ipsum est egestas nulla diam dolor.')))), (configState === null || configState === void 0 ? void 0 : configState.loading) && _toConsumableArray(Array(5).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 60,
+      height: 40
+    }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeInfo, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100
+    })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 250
+    }))));
+  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

@@ -77,7 +77,6 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       return;
     }
 
-    setSelectedCateogry(_objectSpread({}, category));
     var topPos = 0;
     if (!(category !== null && category !== void 0 && category.id)) topPos = document.getElementById('businessProductList').offsetTop;else topPos = document.getElementById("category".concat(category.id)).offsetTop;
     window.scrollTo({
