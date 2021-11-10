@@ -130,7 +130,6 @@ export const HorizontalOrdersLayout = (props) => {
           >
             <Button
               className='load-orders'
-              bgtransparent
               color='primary'
               outline
               onClick={loadMoreOrders}
