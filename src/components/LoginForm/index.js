@@ -179,7 +179,7 @@ const LoginFormUI = (props) => {
     } else {
       formMethods.setValue('cellphone', '')
     }
-  }, [credentials])
+  }, [loginTab])
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
