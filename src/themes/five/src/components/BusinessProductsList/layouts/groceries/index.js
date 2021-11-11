@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProductsList, useLanguage, useConfig } from 'ordering-components'
 
-import { Button } from '../../styles/Buttons'
+import { Button } from '../../../../styles/Buttons'
 import { SingleProductCard } from '../../../SingleProductCard'
 import { NotFoundSource } from '../../../../../../../components/NotFoundSource'
 
