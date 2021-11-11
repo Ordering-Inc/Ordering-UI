@@ -66,10 +66,9 @@ export const BusinessesTitle = styled.h1`
 `
 
 export const BusinessHeroImgStyled = styled.div`
-  height: auto;
   margin-bottom: 30px;
   width: 100%;
-  height: calc(100vh - 98px);
+  height: 370px;
 
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
