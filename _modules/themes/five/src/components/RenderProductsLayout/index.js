@@ -228,6 +228,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       return a.rank - b.rank;
     }))),
     category: categorySelected,
+    onClickCategory: onClickCategory,
     categoriesState: props.categoriesState,
     categoryState: categoryState,
     businessId: business === null || business === void 0 ? void 0 : business.id,

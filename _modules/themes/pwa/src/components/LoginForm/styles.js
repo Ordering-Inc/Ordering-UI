@@ -37,7 +37,7 @@ var FormSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templa
 });
 exports.FormSide = FormSide;
 
-var Title = _styledComponents.default.h1(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 20px;\n  margin-top: 50px;\n  margin-bottom: 20px;\n  width: 100%;\n  color: ", ";\n  @media (min-width: 576px) {\n    margin-top: 0;\n    margin-bottom: 30px;\n    width: unset;\n  }\n\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 20px;\n  margin-top: 50px;\n  margin-bottom: 20px;\n  width: 100%;\n  color: ", ";\n  @media (min-width: 576px) {\n    margin-top: 0;\n    margin-bottom: 30px;\n    width: unset;\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
