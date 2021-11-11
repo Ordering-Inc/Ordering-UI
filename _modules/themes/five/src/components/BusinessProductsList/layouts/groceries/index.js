@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _Buttons = require("../../styles/Buttons");
+var _Buttons = require("../../../../styles/Buttons");
 
 var _SingleProductCard = require("../../../SingleProductCard");
 
