@@ -54,7 +54,7 @@ export const HomePage = (props) => {
 
   const homeHeroProps = {
     ...props,
-    onFindBusiness: handlerFindBusiness,
+    onFindBusiness: handlerFindBusiness
   }
 
   return (
