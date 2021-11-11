@@ -44,7 +44,6 @@ export const Title = styled.h1`
     margin-bottom: 30px;
     width: unset;
   }
-
 `
 
 export const LoginWith = styled.div`
