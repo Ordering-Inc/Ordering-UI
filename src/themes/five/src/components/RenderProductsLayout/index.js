@@ -219,6 +219,7 @@ export const RenderProductsLayout = (props) => {
                         ...business?.categories.sort((a, b) => a.rank - b.rank)
                       ]}
                       category={categorySelected}
+                      onClickCategory={onClickCategory}
                       categoriesState={props.categoriesState}
                       categoryState={categoryState}
                       businessId={business?.id}
