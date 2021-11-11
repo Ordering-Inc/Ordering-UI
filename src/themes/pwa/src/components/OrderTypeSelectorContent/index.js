@@ -35,7 +35,7 @@ export const OrderTypeSelectorContentUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <OrderTypeSelectorContainer>
-        <OrderTypeListTitle>{t('HOW_WILL_YOUR_ORDER_TYPE', 'How will your order type?')}</OrderTypeListTitle>
+        <OrderTypeListTitle>{t('SELECT_YOUR_DELIVERY_TYPE', 'Select your delivery type')}</OrderTypeListTitle>
         {
           orderTypes && orderTypes.map((item, i) => (
             <OrderTypeListItemContainer

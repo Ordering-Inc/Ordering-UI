@@ -58,8 +58,7 @@ const BusinessProductsCategoriesUI = (props) => {
                     onClick={() => handlerClickCategory(category)}
                   >
                     <span>
-                      {/* {category.name} */}
-                      {category.id ?? category.name}
+                      {category.name}
                     </span>
                   </CategoryTab>
                 )}
@@ -72,15 +71,14 @@ const BusinessProductsCategoriesUI = (props) => {
                 onClick={() => handlerClickCategory(category)}
               >
                 <span>
-                  {/* {category.name} */}
-                  {category.id ?? category.name}
+                  {category.name}
                 </span>
               </CategoryTab>
             )}
           </div>
         ))}
 
-        {list && list.length === 0 && isSub && (
+        {list && list?.length === 0 && isSub && (
           <CategoryTab
             active={categorySelected?.id === category.id}
             className={`${category.id === 'featured' ? 'special' : ''}`}

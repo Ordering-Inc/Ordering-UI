@@ -36,6 +36,11 @@ export const WrapAllCategories = styled.div`
       width: 41px;
     }
   }
+  .wrap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   h3 {
     font-weight: 600;
     font-size: 24px;

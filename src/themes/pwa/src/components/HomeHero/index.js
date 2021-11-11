@@ -97,7 +97,7 @@ export const HomeHero = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper>
-          {isPWA && windowSize.width < 450 && (
+          {isPWA && windowSize.width < 576 && (
             <LogoWrapper>
               <img alt='Logotype' src={theme?.images?.logos?.logotypeInvert} loading='lazy' />
             </LogoWrapper>
@@ -122,7 +122,7 @@ export const HomeHero = (props) => {
           </HeroContent>
         </ContentWrapper>
 
-        {isPWA && windowSize.width < 450 && (
+        {isPWA && windowSize.width < 576 && (
           <UseAccount>
             <SectionHeader>
               {t('YOUR_ACCOUNT', 'Use your account')}
