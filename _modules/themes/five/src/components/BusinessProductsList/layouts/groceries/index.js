@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
+var _Buttons = require("../../styles/Buttons");
+
 var _SingleProductCard = require("../../../SingleProductCard");
 
 var _NotFoundSource = require("../../../../../../../components/NotFoundSource");
@@ -44,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _categoriesState$feat, _categoriesState$feat2, _categoriesState$feat3, _categoriesState$feat4, _categoryState$produc6;
+  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _categoriesState$feat, _categoriesState$feat2, _categoriesState$feat3, _categoriesState$feat4, _products, _categoryState$produc6;
 
   var errors = props.errors,
       businessId = props.businessId,
@@ -58,7 +60,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       isCartOnProductsList = props.isCartOnProductsList,
       handleClearSearch = props.handleClearSearch,
       errorQuantityProducts = props.errorQuantityProducts,
-      categoriesState = props.categoriesState;
+      categoriesState = props.categoriesState,
+      onClickCategory = props.onClickCategory;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -86,7 +89,15 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     });
   }))), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (categoriesState === null || categoriesState === void 0 ? void 0 : (_categoriesState$feat = categoriesState.featured) === null || _categoriesState$feat === void 0 ? void 0 : (_categoriesState$feat2 = _categoriesState$feat.products) === null || _categoriesState$feat2 === void 0 ? void 0 : _categoriesState$feat2.some(function (product) {
     return product.featured;
-  })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("h3", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, categoriesState === null || categoriesState === void 0 ? void 0 : (_categoriesState$feat3 = categoriesState.featured) === null || _categoriesState$feat3 === void 0 ? void 0 : (_categoriesState$feat4 = _categoriesState$feat3.products) === null || _categoriesState$feat4 === void 0 ? void 0 : _categoriesState$feat4.map(function (product) {
+  })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "wrap-header"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "category-title"
+  }, /*#__PURE__*/_react.default.createElement("h3", null, t('FEATURED', 'Featured'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: function onClick() {
+      return onClickCategory(category);
+    }
+  }, t('MORE', 'More'))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, categoriesState === null || categoriesState === void 0 ? void 0 : (_categoriesState$feat3 = categoriesState.featured) === null || _categoriesState$feat3 === void 0 ? void 0 : (_categoriesState$feat4 = _categoriesState$feat3.products) === null || _categoriesState$feat4 === void 0 ? void 0 : _categoriesState$feat4.map(function (product) {
     return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
       isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
@@ -95,6 +106,17 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList
     });
+  }), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && ((_products = products) === null || _products === void 0 ? void 0 : _products.length) && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+    useCustomFunctionality: true,
+    onCustomClick: function onCustomClick() {
+      return onClickCategory(category);
+    },
+    isCartOnProductsList: isCartOnProductsList,
+    customText: t('MORE', 'More'),
+    customStyle: {
+      display: 'flex',
+      justifyContent: 'center'
+    }
   })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
   }).map(function (category, i, _categories) {
@@ -114,10 +136,16 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
       id: "container"
     }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "wrap-header"
+    }, /*#__PURE__*/_react.default.createElement("div", {
       className: "category-title"
     }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
       src: category.image
-    }), /*#__PURE__*/_react.default.createElement("h3", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
+    }), /*#__PURE__*/_react.default.createElement("h3", null, category.name)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      onClick: function onClick() {
+        return onClickCategory(category);
+      }
+    }, t('MORE', 'More'))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: product === null || product === void 0 ? void 0 : product.id,
         isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
@@ -126,6 +154,17 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         onProductClick: onProductClick,
         isCartOnProductsList: isCartOnProductsList
       });
+    }), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (products === null || products === void 0 ? void 0 : products.length) && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+      useCustomFunctionality: true,
+      onCustomClick: function onCustomClick() {
+        return onClickCategory(category);
+      },
+      isCartOnProductsList: isCartOnProductsList,
+      customText: t('MORE', 'More'),
+      customStyle: {
+        display: 'flex',
+        justifyContent: 'center'
+      }
     }), (categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading) && i + 1 === _categories.length && _toConsumableArray(Array(categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$pagina = categoryState.pagination) === null || _categoryState$pagina === void 0 ? void 0 : _categoryState$pagina.nextPageItems).keys()).map(function (i) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: "skeleton:".concat(i),

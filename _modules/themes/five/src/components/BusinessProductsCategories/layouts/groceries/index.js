@@ -59,7 +59,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         isSub = _ref.isSub,
         currentCat = _ref.currentCat;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (list === null || list === void 0 ? void 0 : list.length) && (list === null || list === void 0 ? void 0 : list.map(function (category) {
-      var _category$id, _category$subcategori, _category$subcategori2, _category$level, _category$subcategori3, _category$level2, _category$id2, _category$level3, _category$id3;
+      var _category$id, _category$subcategori, _category$subcategori2, _category$level, _category$subcategori3, _category$level2, _category$level3;
 
       return /*#__PURE__*/_react.default.createElement("div", {
         key: (_category$id = category === null || category === void 0 ? void 0 : category.id) !== null && _category$id !== void 0 ? _category$id : category === null || category === void 0 ? void 0 : category.name
@@ -81,15 +81,15 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         onClick: function onClick() {
           return handlerClickCategory(category);
         }
-      }, /*#__PURE__*/_react.default.createElement("span", null, (_category$id2 = category.id) !== null && _category$id2 !== void 0 ? _category$id2 : category.name))) : /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
+      }, /*#__PURE__*/_react.default.createElement("span", null, category.name))) : /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
         active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
         className: "".concat(category.id === 'featured' ? 'special' : ''),
         categorySpace: categorySpace[(_category$level3 = category === null || category === void 0 ? void 0 : category.level) !== null && _category$level3 !== void 0 ? _category$level3 : 1],
         onClick: function onClick() {
           return handlerClickCategory(category);
         }
-      }, /*#__PURE__*/_react.default.createElement("span", null, (_category$id3 = category.id) !== null && _category$id3 !== void 0 ? _category$id3 : category.name)));
-    })), list && list.length === 0 && isSub && /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
+      }, /*#__PURE__*/_react.default.createElement("span", null, category.name)));
+    })), list && (list === null || list === void 0 ? void 0 : list.length) === 0 && isSub && /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
       active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
       className: "".concat(category.id === 'featured' ? 'special' : ''),
       categorySpace: categorySpace[(_category$level4 = (_category = category) === null || _category === void 0 ? void 0 : _category.level) !== null && _category$level4 !== void 0 ? _category$level4 : 1],

@@ -17,9 +17,11 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ForgotPasswordContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n\n  h1 {\n    font-weight: 600;\n    font-size: 24px;\n    margin-top: 0;\n    margin-bottom: 30px;\n    text-align: center;\n  }\n  @media (min-width: 992px) {\n    height: 100%;\n    min-height: ", ";\n  }\n"])), function (_ref) {
+var ForgotPasswordContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n\n  h1 {\n    font-weight: 600;\n    font-size: 20px;\n    margin-top: 50px;\n    margin-bottom: 20px;\n    width: 100%;\n    color: ", ";\n    @media (min-width: 576px) {\n      margin-top: 0;\n      margin-bottom: 30px;\n      width: unset;\n      text-align: center;\n    }\n  }\n  @media (min-width: 992px) {\n    height: 100%;\n    min-height: ", ";\n  }\n"])), function (_ref) {
   var isPopup = _ref.isPopup;
   return isPopup ? '100vh' : 'auto';
+}, function (props) {
+  return props.theme.colors.darkTextColor;
 }, function (_ref2) {
   var isPopup = _ref2.isPopup;
   return isPopup ? '500px' : 'calc(100vh - 65px)';
