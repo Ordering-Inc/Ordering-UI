@@ -174,6 +174,14 @@ const LoginFormUI = (props) => {
   }
 
   useEffect(() => {
+    if (loginTab === 'cellphone') {
+      formMethods.setValue('email', '')
+    } else {
+      formMethods.setValue('cellphone', '')
+    }
+  }, [credentials])
+
+  useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
