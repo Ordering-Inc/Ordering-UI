@@ -1,6 +1,7 @@
 import React from 'react'
 import { ProductsList, useLanguage, useConfig } from 'ordering-components'
 
+import { Button } from '../../styles/Buttons'
 import { SingleProductCard } from '../../../SingleProductCard'
 import { NotFoundSource } from '../../../../../../../components/NotFoundSource'
 
@@ -26,7 +27,8 @@ const BusinessProductsListUI = (props) => {
     isCartOnProductsList,
     handleClearSearch,
     errorQuantityProducts,
-    categoriesState
+    categoriesState,
+    onClickCategory
   } = props
 
   const [, t] = useLanguage()
@@ -68,7 +70,16 @@ const BusinessProductsListUI = (props) => {
             {
               categoriesState?.featured?.products?.some(product => product.featured) && (
                 <WrapAllCategories>
-                  <h3>{t('FEATURED', 'Featured')}</h3>
+                  <div className='wrap-header'>
+                    <div className='category-title'>
+                      <h3>{t('FEATURED', 'Featured')}</h3>
+                    </div>
+                    <Button
+                      onClick={() => onClickCategory(category)}
+                    >
+                      {t('MORE', 'More')}
+                    </Button>
+                    </div>
                   <ProductsListing>
                     {categoriesState?.featured?.products?.map(product => product.featured && (
                       <SingleProductCard
@@ -80,6 +91,18 @@ const BusinessProductsListUI = (props) => {
                         isCartOnProductsList={isCartOnProductsList}
                       />
                     ))}
+                    {!categoryState?.loading && products?.length && (
+                      <SingleProductCard
+                        useCustomFunctionality
+                        onCustomClick={() => onClickCategory(category)}
+                        isCartOnProductsList={isCartOnProductsList}
+                        customText={t('MORE', 'More')}
+                        customStyle={{
+                          display: 'flex',
+                          justifyContent: 'center'
+                        }}
+                      />
+                    )}
                   </ProductsListing>
                 </WrapAllCategories>
               )
@@ -98,13 +121,20 @@ const BusinessProductsListUI = (props) => {
               {
                 products.length > 0 && (
                   <WrapAllCategories id='container'>
-                    <div className='category-title'>
-                      {
-                        category?.image && (
-                          <img src={category.image} />
-                        )
-                      }
-                      <h3>{category.name}</h3>
+                    <div className='wrap-header'>
+                      <div className='category-title'>
+                        {
+                          category?.image && (
+                            <img src={category.image} />
+                          )
+                        }
+                        <h3>{category.name}</h3>
+                      </div>
+                      <Button
+                        onClick={() => onClickCategory(category)}
+                      >
+                        {t('MORE', 'More')}
+                      </Button>
                     </div>
                     <ProductsListing>
                       {
@@ -119,6 +149,18 @@ const BusinessProductsListUI = (props) => {
                           />
                         ))
                       }
+                      {!categoryState?.loading && products?.length && (
+                        <SingleProductCard
+                          useCustomFunctionality
+                          onCustomClick={() => onClickCategory(category)}
+                          isCartOnProductsList={isCartOnProductsList}
+                          customText={t('MORE', 'More')}
+                          customStyle={{
+                            display: 'flex',
+                            justifyContent: 'center'
+                          }}
+                        />
+                      )}
                       {
                         categoryState?.loading && (i + 1) === _categories.length && [...Array(categoryState?.pagination?.nextPageItems).keys()].map(i => (
                           <SingleProductCard
