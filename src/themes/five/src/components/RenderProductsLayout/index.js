@@ -129,7 +129,7 @@ export const RenderProductsLayout = (props) => {
                   )}
                   {windowSize.width < 500 && (
                     <MobileCartViewWrapper>
-                      <span>{parsePrice(currentCart?.total)}</span>
+                      <span>{currentCart?.products?.length > 0 ? parsePrice(currentCart?.total) : parsePrice(0)}</span>
                       <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
                     </MobileCartViewWrapper>
                   )}
