@@ -3,10 +3,11 @@ import { GoogleIdentityButton as GoogleIdentityButtonController } from 'ordering
 import { GoogleButton } from './styles'
 
 export const GoogleLoginButtonUI = (props) => {
-  const { initParams, handleSigninSuccess } = props
-
+  const { initParams, handleSigninSuccess, formState } = props
+  console.log(formState)
   useEffect(() => {
     window.handleCredentialResponse = (response) => {
+      console.log(response)
       handleSigninSuccess(response.credential)
     }
     const GoogleButton = document.getElementById('g_id_onload')

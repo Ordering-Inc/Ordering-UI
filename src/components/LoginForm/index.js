@@ -42,7 +42,7 @@ import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
-import { GoogleLoginButton } from '../GoogleLogin'
+import { GoogleIdentityButton } from '../GoogleIdentity'
 
 const LoginFormUI = (props) => {
   const {
@@ -449,10 +449,9 @@ const LoginFormUI = (props) => {
                 />
               )}
                 {configs?.google_login_client_id?.value && (
-                  <GoogleLoginButton
+                  <GoogleIdentityButton
                     initParams={initParams}
                     handleSuccessGoogleLogin={handleSuccessGoogle}
-                    onFailure={(data) => console.log('onFailure', data)}
                   />
                 )}
                 {useLoginByCellphone && loginTab === 'cellphone' &&
