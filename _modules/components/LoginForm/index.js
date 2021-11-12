@@ -296,6 +296,13 @@ var LoginFormUI = function LoginFormUI(props) {
   };
 
   (0, _react.useEffect)(function () {
+    if (loginTab === 'cellphone') {
+      formMethods.setValue('email', '');
+    } else {
+      formMethods.setValue('cellphone', '');
+    }
+  }, [loginTab]);
+  (0, _react.useEffect)(function () {
     var _formState$result;
 
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {

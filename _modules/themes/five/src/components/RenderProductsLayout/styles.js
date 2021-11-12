@@ -48,7 +48,7 @@ var BusinessCategoriesContainer = _styledComponents.default.div(_templateObject6
 });
 
 exports.BusinessCategoriesContainer = BusinessCategoriesContainer;
-var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral([""])));
+var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: none;\n\n  @media (min-width: 500px) {\n    display: block;\n  }\n"])));
 exports.BusinessCartContainer = BusinessCartContainer;
 
 var BusinessCartContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 30px;\n  position: relative;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  .accordion.active {\n    padding: 10px 0;\n  }\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref) {
@@ -68,6 +68,6 @@ var EmptyBtnWrapper = _styledComponents.default.div(_templateObject12 || (_templ
 
 exports.EmptyBtnWrapper = EmptyBtnWrapper;
 
-var MobileCartViewWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  padding: 0 25px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n\n  span {\n    font-weight: 600;\n    font-size: 16px;\n  }\n\n  button {\n    height: 44px;\n    border-radius: 7.6px;\n  }\n"])));
+var MobileCartViewWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: fixed;\n  width: 100vw;\n  left: 0;\n  bottom: 0;\n  background-color: white;\n  padding: 10px 25px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n  z-index: 1000;\n  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);\n\n  span {\n    font-weight: 600;\n    font-size: 16px;\n  }\n\n  button {\n    height: 44px;\n    border-radius: 7.6px;\n  }\n"])));
 
 exports.MobileCartViewWrapper = MobileCartViewWrapper;

@@ -47,7 +47,7 @@ var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateOb
 
 exports.ProductInfo = ProductInfo;
 
-var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n  margin-bottom: 20px;\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])));
+var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n  margin-bottom: 20px;\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n\n  .price-discount {\n    text-decoration: line-through;\n  }\n"])));
 
 exports.ProductFormTitle = ProductFormTitle;
 
