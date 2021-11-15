@@ -211,7 +211,7 @@ const ProductOptionsUI = (props) => {
                 {product?.price && (
                   <div className='price-wrapper'>
                     <span>{productCart.total && parsePrice(productCart.total)}</span>
-                    <span className='price-discount'>{parsePrice(product?.offer_price)}</span>
+                    {product?.offer_price && <span className='price-discount'>{parsePrice(product?.offer_price)}</span>}
                   </div>
                 )}
                 {product?.description && <p>{product?.description}</p>}
@@ -356,7 +356,6 @@ const ProductOptionsUI = (props) => {
                     </div>
                   )
                 }
-
                 {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                   <Button
                     className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
