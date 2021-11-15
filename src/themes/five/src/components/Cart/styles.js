@@ -84,8 +84,8 @@ export const CheckoutAction = styled.div`
 export const Divider = styled.div`
   background: #F8F9FA;
   height: 8px;
-  width: calc(100% + 20px);
-  margin-left: -10px;
+  width: 100%;
+  margin-left: 0;
 
   @media (min-width: 768px) {
     width: calc(100% + 60px);
