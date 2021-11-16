@@ -51,7 +51,7 @@ var _AiOutlineEye = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineE
 
 var _AiOutlineEyeInvisible = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEyeInvisible"));
 
-var _GoogleLogin = require("../GoogleLogin");
+var _GoogleIdentity = require("../GoogleIdentity");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -501,12 +501,9 @@ var LoginFormUI = function LoginFormUI(props) {
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleIdentity.GoogleIdentityButton, {
     initParams: initParams,
-    handleSuccessGoogleLogin: handleSuccessGoogle,
-    onFailure: function onFailure(data) {
-      return console.log('onFailure', data);
-    }
+    handleSuccessGoogleLogin: handleSuccessGoogle
   }), useLoginByCellphone && loginTab === 'cellphone' && configs && Object.keys(configs).length > 0 && ((configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi = configs.twilio_service_enabled) === null || _configs$twilio_servi === void 0 ? void 0 : _configs$twilio_servi.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi2 = configs.twilio_service_enabled) === null || _configs$twilio_servi2 === void 0 ? void 0 : _configs$twilio_servi2.value) === '1') && /*#__PURE__*/_react.default.createElement(_SmsLogin.SmsLoginButton, {
     handleSmsLogin: function handleSmsLogin() {
       setLoginWithOtpState(true);
