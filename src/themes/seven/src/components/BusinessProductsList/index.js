@@ -29,6 +29,14 @@ const BusinessProductsListUI = (props) => {
 
   const [, t] = useLanguage()
 
+  const getUniquCategoryName = (categoryName) => {
+    let _categoryName = categoryName
+    if (categoryName.indexOf('/') > -1) {
+      _categoryName = categoryName.split('/')[1]
+    }
+    return _categoryName
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -90,7 +98,7 @@ const BusinessProductsListUI = (props) => {
                 {
                   category?.products?.length > 0 && (
                     <WrapAllCategories id='container'>
-                      <h3>{category.name}</h3>
+                      <h3>{getUniquCategoryName(category.name)}</h3>
                       <ProductsListing>
                         {
                           category?.products?.map((product, i) => (
