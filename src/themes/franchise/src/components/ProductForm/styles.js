@@ -49,6 +49,7 @@ export const ProductInfo = styled.div`
   padding: 0px 5px;
   position: relative;
   margin-top: 18px;
+  box-sizing: border-box;
 
   h1 {
     font-weight: 600;
@@ -266,8 +267,8 @@ export const ProductTabContainer = styled.div`
 
 export const Divider = styled.div`
   height: 8px;
-  width: calc(100% + 40px);
-  margin-left: -20px;
+  width: calc(100% + 50px);
+  margin-left: -25px;
   background: #F8F9FA;
 `
 
@@ -275,13 +276,18 @@ export const ProductShareWrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: flex-end;
-  padding-right: 20px;
+  padding-right: 28px;
   ${props => props.theme?.rtl && css`
-    padding-left: 20px;
+    padding-left: 28px;
     padding-right: 0;
   `}
 
   @media (max-width: 768px) {
+    padding-right: 20px;
+    ${props => props.theme?.rtl && css`
+      padding-left: 20px;
+      padding-right: 0;
+    `}
     > div {
       right: 16px;
       top: 33px;
