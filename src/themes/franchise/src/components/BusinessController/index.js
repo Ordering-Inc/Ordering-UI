@@ -128,7 +128,7 @@ const BusinessControllerUI = (props) => {
                       </CallCenterInformation>
                     )}
                   </Medadata>
-                  {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
+                  {/* {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>} */}
                   {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
                     <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
                   )}
