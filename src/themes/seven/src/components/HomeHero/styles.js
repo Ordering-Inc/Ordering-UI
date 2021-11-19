@@ -18,11 +18,15 @@ export const HeroContainerStyled = styled.div`
   }
 
   @media (min-width: 1024px) {
-    height: 70vh;
+    height: 550px;
   }
 
   @media (min-width: 1200px) {
-    height: calc(100vh - 70px);
+    height: 620px;
+  }
+
+  @media (min-width: 1440px) {
+    height: 70vh;
   }
 `
 
@@ -42,33 +46,20 @@ export const HeroContainer = (props) => {
 }
 
 export const ContentWrapper = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
     height: 100%;
     text-shadow: 0px 0px 5px #fff;
-    padding: 0px 20px 50px;
+    padding: 30px 20px 38vh;
     box-sizing: border-box;
-    ${props => props.theme?.rtl && css`
-      padding: 0px 20px 50px;
-    `}
-
-    input {
-      width: 90%;
-      margin-bottom: 15px;
-    }
-
-    @media (min-width: 425px) {
-      input {
-        width: 97%;
-      }
-    }
 
     @media (min-width: 768px) {
-      max-width: 94%;
-      margin: auto;
-      padding: 0;
+      padding: 33px 3.5vw;
+      flex-direction: row;
     }
 `
 
@@ -79,19 +70,20 @@ export const Title = styled.h1`
   color: ${props => props.theme.colors.primary};
   opacity: 1;
   font-weight: bold;
-  font-size: 48px;
+  font-size: 40px;
   line-height: 48px;
+  margin-bottom: 15px;
   ${props => props.theme?.rtl && css`
       text-align: right;
   `}
 
   @media (min-width: 768px) {
-    font-size: 48px;
-    margin-bottom: 1vw;
+    font-size: 42px;
   }
 
   @media (min-width: 1024px) {
-    font-size: 5vw;
+    font-size: 4vw;
+    margin-bottom: 25px;
   }
 
   @media (min-width: 1450px) {
@@ -100,88 +92,93 @@ export const Title = styled.h1`
 
 `
 
-export const Slogan = styled.p`
-  margin: 0px;
-  text-align: left;
-  font-size: 22px;
-  line-height: 34px;
-  letter-spacing: 0px;
-  color: ${props => props.theme.colors.primary};
-  text-shadow: 0px 0px 3px #dfdfdfa8;
-  opacity: 1;
-  margin-bottom: 15px;
-  ${props => props.theme?.rtl && css`
-      text-align: right;
-  `}
+export const DiscountBars = styled.div`
+  display: flex;
+  width: calc(100% + 40px);
+  overflow: hidden;
+  justify-content: flex-end;
+  img {
+    width: 80%;
+    object-fit: cover;
+  }
 
   @media (min-width: 768px) {
-    font-size: 23px;
+    position: absolute;
+    top: 3vh;
+    right: 0;
+    width: 100%;
+    img {
+      width: 50%;
+    }
   }
 
   @media (min-width: 1024px) {
-    font-size: 2vw;
+    img {
+      width: 42%;
+    }
   }
+`
 
-  @media (min-width: 1450px) {
-    font-size: 24px;
+export const SloganContent = styled.div`
+  @media (min-width: 768px) {
+    margin-top: 80px;
   }
 `
 
 export const WrapOrderyType = styled.div`
   display: flex;
-  border: 2px solid #fff;
-  border-radius: 7.6px;
-  box-sizing: border-box;
-  width: fit-content;
-  background-color: #fff;
+  justify-content: center;
+  width: 100%;
   overflow: hidden;
   position: relative;
 
+  >div{
+    &:first-child{
+      svg {
+        width: 45px;
+      }
+    }
+    &:nth-child(2) {
+      svg {
+        height: 33px;
+      }
+    }
+  }
 `
 export const OrderTypeItem = styled.div`
   position: relative;
   display: flex;
+  width: 120px;
+  height: 65px;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 150px;
-  height: 70px;
-  padding: 6px 12px;
+  margin: 0 3px;
   box-sizing: border-box;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
-  background-color: ${props => props.theme.colors.primary};
-  color: ${props => props.theme.colors.primaryContrast};
-  
-  &:first-child {
-    svg {
-      height: 33px;
-      width: 33px;
-      fill: #fff;
-    }
-  }
-  &:nth-child(2){
-    background-color: #fff;
-    border: 1.2px solid #878787;
-    border-radius: 0 7px 7px 0;
-    color: #000;
-    svg {
-      height: 33px;
-      width: 25px;
-      fill: #ef3e42;
-    }
+  color: ${props => props.theme.colors.primary};
+  background-color: #fff;
+  border: 2px inset ${props => props.theme.colors.primary};
+  border-radius: 7.6px;
+  box-shadow: rgb(177 177 177) 3px 3px 6px 0px inset, rgb(255 255 255 / 50%) -3px -3px 6px 1px inset;
+  svg {
+    height: 33px;
+    width: 25px;
+    fill: ${props => props.theme.colors.primary};
   }
 
   @media (min-width: 768px) {
     font-size: 14px;
-    width: 173px;
-    height: 65px;
+    width: 125px;
+    height: 70px;
   }
 
   @media (min-width: 1200px) {
     font-size: 16px;
-    width: 200px;
-    height: 70px;
+    width: 135px;
+    height: 73px;
   }  
 `
 export const FoodLocation = styled.div`
