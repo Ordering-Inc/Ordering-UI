@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TruckIcon = exports.StorePickupIcon = exports.HomeHero = exports.FoodLocationIcon = exports.ArchiesOrderTypes = void 0;
+exports.TruckIcon = exports.StorePickupIcon = exports.HomeHero = exports.ArchiesOrderTypes = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -25,13 +25,13 @@ var _AddressForm = require("../AddressForm");
 
 var _AddressList = require("../AddressList");
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -45,12 +45,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options4, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$images9, _theme$images9$alsea, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options4, _theme$defaultLanguag3, _props$afterComponent, _props$afterElements;
 
   var onFindBusiness = props.onFindBusiness;
 
@@ -174,12 +174,15 @@ var HomeHero = function HomeHero(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: bgImage
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(ArchiesOrderTypes, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DiscountBars, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: (_theme$images9 = theme.images) === null || _theme$images9 === void 0 ? void 0 : (_theme$images9$alsea = _theme$images9.alsea) === null || _theme$images9$alsea === void 0 ? void 0 : _theme$images9$alsea.discountBanner,
+    alt: ""
+  })), /*#__PURE__*/_react.default.createElement(_styles.SloganContent, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(ArchiesOrderTypes, {
     configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
     defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1,
     handleAddressInput: handleAddressInput
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.ADDRESS) || 'Address'),
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.ADDRESS) || 'Address'),
     open: modals.formOpen,
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -204,7 +207,7 @@ var HomeHero = function HomeHero(props) {
       }));
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.ADDRESSES) || 'Addresses'),
+    title: t('ADDRESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.ADDRESSES) || 'Addresses'),
     open: modals.listOpen,
     width: "70%",
     onClose: function onClose() {
@@ -258,7 +261,7 @@ var ArchiesOrderTypeUI = function ArchiesOrderTypeUI(props) {
         return handleOrderType(orderType);
       }
     }, orderType.icon, orderType.content);
-  }), /*#__PURE__*/_react.default.createElement(_styles.FoodLocation, null, /*#__PURE__*/_react.default.createElement(FoodLocationIcon, null)));
+  }));
 };
 
 var ArchiesOrderTypes = function ArchiesOrderTypes(props) {
@@ -328,18 +331,3 @@ var TruckIcon = function TruckIcon() {
 };
 
 exports.TruckIcon = TruckIcon;
-
-var FoodLocationIcon = function FoodLocationIcon() {
-  return /*#__PURE__*/_react.default.createElement("svg", {
-    id: "Capa_1",
-    enableBackground: "new 0 0 515 512",
-    height: "512",
-    viewBox: "0 0 512 512",
-    width: "512",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/_react.default.createElement("g", null, /*#__PURE__*/_react.default.createElement("g", null, /*#__PURE__*/_react.default.createElement("path", {
-    d: "m368.688 368.203c-10.479-3.498-21.806 2.16-25.305 12.636-3.498 10.477 2.16 21.806 12.637 25.304 30.208 10.086 39.98 21.776 39.98 25.857 0 2.852-6.225 13.327-33.885 23.7-28.031 10.511-65.716 16.3-106.115 16.3s-78.084-5.789-106.115-16.3c-27.66-10.373-33.885-20.848-33.885-23.7 0-4.081 9.772-15.771 39.98-25.856 10.477-3.498 16.135-14.827 12.637-25.304-3.499-10.477-14.828-16.136-25.305-12.636-58.567 19.553-67.312 48.363-67.312 63.796 0 17.661 10.382 42.606 59.84 61.153 32.41 12.154 75.084 18.847 120.16 18.847s87.75-6.693 120.16-18.847c49.458-18.547 59.84-43.492 59.84-61.153 0-15.433-8.745-44.243-67.312-63.797zm-169.195-17.261 38.993 70.716c3.518 6.38 10.228 10.342 17.514 10.342s13.996-3.962 17.514-10.343l38.993-70.716c33.863-11.224 64.197-32.693 86.109-61.107 24.457-31.714 37.384-69.694 37.384-109.834 0-99.252-80.748-180-180-180s-180 80.748-180 180c0 40.14 12.927 78.12 37.384 109.835 21.912 28.414 52.246 49.883 86.109 61.107zm56.507-310.942c77.196 0 140 62.804 140 140 0 62.683-42.125 118.16-102.442 134.91-5.182 1.439-9.565 4.904-12.163 9.614l-25.395 46.056-25.396-46.056c-2.597-4.709-6.981-8.174-12.163-9.614-60.316-16.75-102.441-72.227-102.441-134.91 0-77.196 62.804-140 140-140zm-80 200h160c11.046 0 20-8.954 20-20 0-48.293-34.411-88.698-80-97.989v-22.011c0-11.046-8.954-20-20-20s-20 8.954-20 20v22.011c-45.589 9.291-80 49.697-80 97.989 0 11.046 8.954 20 20 20zm80-80c26.075 0 48.318 16.719 56.573 40h-113.146c8.255-23.281 30.498-40 56.573-40z"
-  }))));
-};
-
-exports.FoodLocationIcon = FoodLocationIcon;

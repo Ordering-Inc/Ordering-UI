@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: ", ";\n  @media (min-width: 1024px) {\n    max-width: 85%;\n    margin: 0 auto;\n  }\n\n  @media (min-width: 1440px) {\n    max-width: 75%;\n  }\n"])), function (props) {
+var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: ", ";\n  @media (min-width: 768px) {\n    margin-right: 15px;\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 });
 
