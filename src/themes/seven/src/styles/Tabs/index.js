@@ -21,20 +21,10 @@ export const Tabs = styled.div`
     @media (min-width: 768px) {
       justify-content: flex-start;
       padding-right: 0;
-      padding-left: 10%;
-      ${props => props.theme?.rtl && css`
-        padding-right: 10%;
-        padding-left: 0;
-      `}
       border-bottom: none;
     }
     @media (min-width: 1024px) {
-      padding-right: 15px;
-      padding-left: 15%;
-      ${props => props.theme?.rtl && css`
-        padding-right: 15%;
-        padding-left: 0;
-      `}
+      padding-left: 10%;
     }
   `}
 `
@@ -66,10 +56,6 @@ export const Tab = styled.div`
 
   ${({ isVerticalList }) => isVerticalList && css`
     padding: 0px;
-    &:first-child {
-
-    }
-
     &:last-child {
       border-bottom: none;
       @media (min-width: 768px) {

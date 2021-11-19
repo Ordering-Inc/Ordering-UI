@@ -5,9 +5,6 @@ export const CategoriesContainer = styled.div`
   padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
-
-  
-
   ${({ isVerticalList }) => isVerticalList && css`
     padding: 0px;
     @media (min-width: 768px) {
@@ -17,20 +14,14 @@ export const CategoriesContainer = styled.div`
       overflow-y: scroll;
     }
   `}
-
-
   div.special{
     ${props => !props.featured && css`
       display: none;
     `}
   }
 
-  @media (min-width: 381px) {
-    padding: 15px;
-  }
-
   @media (min-width: 768px) {
-    padding: 0px;
+    padding: 0px 15px;
   }
 
   /* width */

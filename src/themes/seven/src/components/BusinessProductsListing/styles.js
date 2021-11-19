@@ -203,3 +203,14 @@ export const UnderAgeButtons = styled.div`
     font-weight: bold;
   }
 `
+export const BreackFastCheckModalContent = styled.div`
+  padding: 20px;
+`
+
+export const AgreeButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  button {
+    font-size: 14px;
+  }
+`

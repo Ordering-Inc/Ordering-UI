@@ -131,7 +131,7 @@ const BusinessProductsListUI = (props) => {
         {
           (categoryState.loading || isBusinessLoading) && (
             <WrapAllCategories id='container'>
-              <ProductsListing>
+              <ProductsListing style={{ marginTop: '20px' }}>
                 {[...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
                   <SingleProductCard
                     key={`skeleton:${i}`}

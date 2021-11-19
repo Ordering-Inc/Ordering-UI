@@ -527,8 +527,6 @@ export const ProductForm = (props) => {
         const suboptions = []
           .concat(...options.map(option => option.suboptions))
           .filter(suboption => suboption.name === 'Grande (16oz - 437ml)')
-        // console.log(suboptions)
-
         const states = suboptions.map((suboption, i) => {
           const price = options[i].with_half_option && suboption.half_price && suboption?.position !== 'whole'
             ? suboption.half_price
