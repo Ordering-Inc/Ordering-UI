@@ -21,20 +21,10 @@ export const Tabs = styled.div`
     @media (min-width: 768px) {
       justify-content: flex-start;
       padding-right: 0;
-      padding-left: 10%;
-      ${props => props.theme?.rtl && css`
-        padding-right: 10%;
-        padding-left: 0;
-      `}
       border-bottom: none;
     }
     @media (min-width: 1024px) {
-      padding-right: 15px;
-      padding-left: 15%;
-      ${props => props.theme?.rtl && css`
-        padding-right: 15%;
-        padding-left: 0;
-      `}
+      padding-left: 10%;
     }
   `}
 `
@@ -65,21 +55,7 @@ export const Tab = styled.div`
   `}
 
   ${({ isVerticalList }) => isVerticalList && css`
-    border-bottom: 1px dashed;
-    span {
-      display: block;
-      width: 95%;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-    &:first-child {
-      padding-left: 15px;
-      ${props => props.theme?.rtl && css`
-        padding-right: 15px;
-        padding-left: 0;
-      `}
-    }
+    padding: 0px;
     &:last-child {
       border-bottom: none;
       @media (min-width: 768px) {
@@ -89,50 +65,38 @@ export const Tab = styled.div`
         `}
       }
     }
+
     svg {
       display: none;
     }
-    @media (min-width: 768px) {
-      border: 1px solid ${props => props.theme.colors.borderColor};
-      border-top: none;
-      border-bottom: 1px solid ${props => props.theme.colors.primary};
-      height: 39px;
-      min-height: 39px;
-      box-sizing: border-box;
-      padding: 0 15px;
-      display: flex;
-      align-items: center;
-      svg {
-        display: inline-flex;
-        transform: scale(0.98);
-        position: absolute;
-        top: -1px;
-        right: -12px;
-        ${props => props.theme?.rtl && css`
-          right: unset;
-          left: -12px;
-          transform: rotate(180deg);
-        `}
+
+    &.active{
+      .accordion {
+        color: ${props => props.theme.colors.primary};
+        font-weight: 600;
       }
-      ${({ active }) => active && css`
-        border-right: none;
-        ${props => props.theme?.rtl && css`
-          border-right: 1px solid ${props => props.theme.colors.borderColor};
-          border-left: none;
-        `}
-      `}
+
+      .accordion-content {
+        max-height: fit-content;
+      }
     }
 
-    @media (min-width: 1440px) {
-      height: 50px;
-      min-height: 50px;
-      span {
-        font-size: 1.1rem;
-      }
-      svg {
-        transform: scale(1.25);
-        top: 4px;
-        right: -12px;
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &.active {
+        .accordion {
+          border-right: none;
+          border-left: 5px solid red;
+        }
+        svg {
+          display: inline-block;
+          position: absolute;
+          top: -1px;
+          right: -12px;
+        }
       }
     }
   `}

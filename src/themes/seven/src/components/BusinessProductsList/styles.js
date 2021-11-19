@@ -2,13 +2,8 @@ import styled from 'styled-components'
 
 export const ProductsContainer = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
-  @media (min-width: 1024px) {
-    max-width: 85%;
-    margin: 0 auto;
-  }
-
-  @media (min-width: 1440px) {
-    max-width: 75%;
+  @media (min-width: 768px) {
+    margin-right: 15px;
   }
 `
 
