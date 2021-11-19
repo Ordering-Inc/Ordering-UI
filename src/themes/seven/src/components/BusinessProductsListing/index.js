@@ -7,7 +7,8 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession
+  useSession,
+  useApi
 } from 'ordering-components'
 import {
   ProductsContainer,
@@ -19,7 +20,9 @@ import {
   CartegoryTitle,
   AgeConfirmContainer,
   UnderAge,
-  UnderAgeButtons
+  UnderAgeButtons,
+  BreackFastCheckModalContent,
+  AgreeButtonWrapper
 } from './styles'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { BusinessProductsList } from '../BusinessProductsList'
@@ -60,9 +63,10 @@ const BusinessProductsListingUI = (props) => {
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
+  const [ordering] = useApi()
   const [{ carts }] = useOrder()
   const [events] = useEvent()
-  const [{ user }] = useSession()
+  const [{ user, token }] = useSession()
   const location = useLocation()
   const [openProduct, setModalIsOpen] = useState(false)
   const [openAgeConfirm, setOpenAgeConfirm] = useState(false)
@@ -74,15 +78,60 @@ const BusinessProductsListingUI = (props) => {
   const [isOver18Age, setIsOver18Age] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [ageError, setAgeError] = useState(false)
+  const [isNestBreackFast, setIsNestBreackFast] = useState(false)
+  const [businessOpentime, setBusinessOpentime] = useState('')
 
   const ageValidationCategorys = ['Vinos'.toUpperCase(), 'Cervezas'.toUpperCase()]
+  const breakFastCategories = ['Desayunos'.toUpperCase(), 'Desayuno'.toUpperCase()]
 
   const handler = () => {
     setOpenBusinessInformation(true)
   }
 
+  const getHaveMetaBreakFast = async (_businessId, _categoryId, _productId) => {
+    const response = await fetch(`${ordering.root}/business/${_businessId}/categories/${_categoryId}/products/${_productId}/metafields`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    const { result, error } = await response.json()
+    const existIndex = result.findIndex((c) => c.key === 'breakfast')
+    if (!error && existIndex > -1) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const scheduleFormatted = ({ hour, minute }) => {
+    const checkTime = (val) => val < 10 ? `0${val}` : val
+    return `${checkTime(hour)}:${checkTime(minute)}`
+  }
+
   const onProductClick = (product) => {
-    if (ageError && ageValidationCategorys.indexOf((business?.categories.filter(category => category.id === product?.category_id))[0].name) > -1) {
+    let _categoryName = business?.categories.filter(category => category.id === product?.category_id)[0].name
+    if (_categoryName.indexOf('/')) {
+      _categoryName = _categoryName.split('/')[0]
+      _categoryName.toUpperCase()
+    } else {
+      _categoryName.toUpperCase()
+    }
+    if (breakFastCategories.indexOf(_categoryName) > -1) {
+      const hour = new Date().getHours()
+      const _businessId = product.category?.business_id
+      const _categoryId = product.category?.id
+      const _productId = product?.id
+      const businessOpenTime = scheduleFormatted(business.today.lapses[0].open)
+      const _isHave = getHaveMetaBreakFast(_businessId, _categoryId, _productId)
+      if (_isHave && hour < 12) {
+        setBusinessOpentime(businessOpenTime)
+        setIsNestBreackFast(true)
+        return
+      }
+    }
+    if (ageError && ageValidationCategorys.indexOf(_categoryName) > -1) {
       setAlertState({
         ...alertState,
         open: true,
@@ -90,12 +139,10 @@ const BusinessProductsListingUI = (props) => {
       })
       return
     }
-
-    if (!isOver18Age && ageValidationCategorys.indexOf((business?.categories.filter(category => category.id === product?.category_id))[0].name) > -1) {
+    if (!isOver18Age && ageValidationCategorys.indexOf(_categoryName) > -1) {
       setOpenAgeConfirm(true)
       return
     }
-
     onProductRedirect({
       slug: business?.slug,
       product: product.id,
@@ -123,6 +170,11 @@ const BusinessProductsListingUI = (props) => {
     onProductRedirect({
       slug: business?.slug
     })
+  }
+
+  const closeCustomModal = () => {
+    setOpenAgeConfirm(false)
+    setIsNestBreackFast(false)
   }
 
   const handleScroll = useCallback(() => {
@@ -355,20 +407,26 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </Modal>
-
       <CustomModal
         width='40%'
         padding='0'
-        open={openAgeConfirm}
-        onClose={() => setOpenAgeConfirm(false)}
+        open={openAgeConfirm || isNestBreackFast}
+        onClose={() => closeCustomModal()}
       >
-        <AgeCheckForm
-          setIsOver18Age={setIsOver18Age}
-          setOpenAgeConfirm={setOpenAgeConfirm}
-          setAgeError={setAgeError}
-        />
+        {openAgeConfirm && (
+          <AgeCheckForm
+            setIsOver18Age={setIsOver18Age}
+            setOpenAgeConfirm={setOpenAgeConfirm}
+            setAgeError={setAgeError}
+          />
+        )}
+        {isNestBreackFast && (
+          <BreackFastCheck
+            businessOpentime={businessOpentime}
+            closeCustomModal={closeCustomModal}
+          />
+        )}
       </CustomModal>
-
       {ageError && (
         <Alert
           title='Alsea Colombia'
@@ -380,7 +438,6 @@ const BusinessProductsListingUI = (props) => {
           closeOnBackdrop={false}
         />
       )}
-
       {currentCart?.products && openUpselling && (
         <UpsellingPage
           businessId={currentCart?.business_id}
@@ -404,14 +461,12 @@ const BusinessProductsListingUI = (props) => {
 
 export const BusinessProductsListing = (props) => {
   const [isInitialRender, setIsInitialRender] = useState(false)
-
   const businessProductslistingProps = {
     ...props,
     UIComponent: BusinessProductsListingUI,
     isInitialRender,
     handleUpdateInitialRender: (val) => setIsInitialRender(val)
   }
-
   return (
     <BusinessAndProductList {...businessProductslistingProps} />
   )
@@ -451,13 +506,28 @@ export const AgeCheckForm = (props) => {
     </AgeConfirmContainer>
   )
 }
+export const BreackFastCheck = (props) => {
+  const [, t] = useLanguage()
+  const { businessOpentime, closeCustomModal } = props
+  return (
+    <BreackFastCheckModalContent>
+      <p>{t('ARCHIES_BREAKFAST_ALERT').replaceAll('_schedule_open_', businessOpentime)}</p>
+      <AgreeButtonWrapper>
+        <Button
+          color='primary'
+          onClick={() => closeCustomModal()}
+        > {t('OK', 'Ok')}
+        </Button>
+      </AgreeButtonWrapper>
+    </BreackFastCheckModalContent>
+  )
+}
 
 export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined
   })
-
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
@@ -465,12 +535,9 @@ export const useWindowSize = () => {
         height: window.innerHeight
       })
     }
-
     window.addEventListener('resize', handleResize)
     handleResize()
-
     return () => window.removeEventListener('resize', handleResize)
   }, [])
-
   return windowSize
 }

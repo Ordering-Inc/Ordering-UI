@@ -33,7 +33,7 @@ const Side = styled.div`
 
 export const FormSide = styled(Side)`
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   margin: auto;
 
   @media (min-width: 768px) {
@@ -57,6 +57,7 @@ export const FormSide = styled(Side)`
 export const LoginWith = styled.div`
   font-size: 14px;
   width: 100%;
+  text-transform: lowercase !important;
 
   .consume-side-padding {
     padding-left: 0px;
@@ -282,12 +283,10 @@ export const FormTitle = styled.div`
   text-transform: uppercase;
   color: ${props => props.theme.colors.primary};
   margin-top: 10px;
-  margin-bottom: 20px;
   @media (min-width: 768px) {
     font-size: 24px;
     line-height: 34px;
     margin-top: 30px;
-    margin-bottom: 25px;
     width: 100%;
   }
 
@@ -370,4 +369,8 @@ export const CreateAccount = styled.div`
     border-radius: 0;
     background-color: transparent;
   }
+`
+export const FormSubTitle = styled.p`
+  margin-top: 7px;
+  line-height: 20px;
 `
