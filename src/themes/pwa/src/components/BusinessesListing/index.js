@@ -25,7 +25,8 @@ import {
   BusinessInfo,
   BusinessName,
   BusinessMeta,
-  BusinessLogo
+  BusinessLogo,
+  SearchTitle
 } from './styles'
 import { convertHoursToMinutes } from '../../../../../utils'
 import { Button } from '../../styles/Buttons'
@@ -350,6 +351,7 @@ const BusinessesListingUI = (props) => {
           onClose={() => setModals({ ...modals, searchOpen: false })}
         >
           <BusinessItemsWrapper>
+            <SearchTitle>{t('BUSINESSES', 'Businesses')}</SearchTitle>
             <SearchBar
               lazyLoad
               search={searchValue}

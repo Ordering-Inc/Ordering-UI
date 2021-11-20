@@ -181,7 +181,6 @@ export const BusinessSearch = styled.div`
 export const BusinessItemsWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding-top: 50px;
 `
 export const BusineessItems = styled.div`
   margin-top: 10px;
@@ -259,4 +258,12 @@ export const BusinessMeta = styled.div`
       margin: 0 3px;
     }
   }
+`
+
+export const SearchTitle = styled.h1`
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: -5px;
+  margin-bottom: 15px;
 `
