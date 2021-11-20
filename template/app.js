@@ -7,7 +7,7 @@ import {
   useLocation
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
-import { Header } from '../src/themes/pwa'
+import { Header, NavigationBar } from '../src/themes/pwa'
 
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -271,6 +271,9 @@ export const App = () => {
                   </Route>
                 </Switch>
               </ScrollToTop>
+            )}
+            {windowSize.width < 576 && (
+              <NavigationBar />
             )}
             <Alert
               title={t('INFORMATION', 'Information')}
