@@ -79,7 +79,7 @@ export const SingleProductCard = (props) => {
         ) : (
           <Skeleton height={75} width={75} />
         )}
-        {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
+        {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'Sold Out')}</SoldOut>}
       </CardContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
