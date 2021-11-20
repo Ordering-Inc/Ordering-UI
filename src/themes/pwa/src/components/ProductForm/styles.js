@@ -127,11 +127,12 @@ export const ProductComment = styled.div`
 
 export const ProductActions = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 10px 0px;
+  justify-content: space-between;
+  padding: 10px 20px;
   width: 100%;
-  z-index: 999;
+  z-index: 9999997;
+  box-sizing: border-box;
 
   position: fixed;
   bottom: 0;
@@ -141,20 +142,31 @@ export const ProductActions = styled.div`
 
   div.price {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
     color: ${props => props.theme?.colors.darkTextColor};
+    white-space: nowrap;
+    margin-right: 5px;
+
+    ${props => props.theme.rtl && css`
+      margin-right: 0px;
+      margin-left: 5px;
+    `}
   }
 
   div.incdec-control {
-    width: 50%;
     display: flex;
     justify-content: space-around;
     align-items: center;
 
     svg {
-      width: 22px;
-      height: 22px;
+      width: 18px;
+      height: 18px;
       cursor: pointer;
+      color: #909BA9;
+    }
+
+    span {
+      margin: 0 12px;
     }
   }
   div:last-child {
@@ -174,9 +186,10 @@ export const ProductActions = styled.div`
   }
 
   button.add {
-    width: 90%;
+    width: auto;
+    min-width: 105px;
+    white-space: nowrap;
     padding: 5px 10px;
-    margin-top: 10px;
     position: relative;
 
     &.soldout {
@@ -189,18 +202,24 @@ export const ProductActions = styled.div`
     position: sticky;
     flex-direction: row;
     justify-content: space-between;
+    padding: 10px 0px;
 
     div.price {
       width: 20%;
+      font-size: 16px;
     }
 
     button.add {
       width: 50%;
-      margin-top: 0;
     }
 
     div.incdec-control {
       width: 20%;
+      
+      svg {
+        width: 22px;
+        height: 22px;
+      }
     }
   }
   @media (min-width: 1200px) {
@@ -254,9 +273,9 @@ export const WrapperIngredients = styled.div`
 export const ProductTabContainer = styled.div`
   border-bottom: 1px solid #E9ECEF;
   position: sticky;
-  top: 50px;
+  top: 0px;
   background: white;
-  z-index: 900;
+  z-index: 9999995;
 
   @media (min-width: 769px) {
     top: 0;
@@ -283,106 +302,9 @@ export const ProductShareWrapper = styled.div`
   @media (max-width: 768px) {
     > div {
       right: 16px;
-      top: 33px;
+      top: 26px;
       left: auto;
     }
   }
 
-`
-
-export const Hr = styled.div`
-  width: 100%;
-  height: ${({ height }) => height ? `${height}px` : '10px'};
-  background: ${({ color }) => color ? `${color}` : '#DDDDDD'};
-`
-
-export const CategoriesContainer = styled.div`
-  box-sizing: border-box;
-  overflow-x : scroll;
-  .category span{
-    white-space: nowrap;
-  }
-`
-
-export const ActionItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  div.incdec-control {
-    width: 25%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    svg {
-      width: 25px;
-      height: 25px;
-      cursor: pointer;
-    }
-  }
-  button:disabled,
-  button.disabled,
-  svg.disabled {
-    opacity: 0.5;
-  }
-  svg.disabled {
-    pointer-events: none;
-  }
-  button.add {
-    width: 55%;
-    padding: 5px 10px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-    &.soldout {
-      pointer-events: none;
-    }
-  }
-  .total-price {
-    font-size: 20px;
-    line-height: 30px;
-    color: #666666;
-    font-weight: 600;
-  }
-  @media (min-width: 577px) {
-    width: 50%;
-  }
-  @media (min-width: 1024px) {
-    &:first-child {
-      width:40%;
-    }
-    &:last-child {
-      width:60%;
-    }
-    div.incdec-control {
-      width: 32%;
-    }
-    button.add {
-      width: 45%;
-    }
-  }
-`
-
-export const ProductActionButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 20px;
-  width: 100%;
-  box-sizing: border-box;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  background-color: #FFF;
-  border-top: 1px solid #E9ECEF;
-  @media (min-width: 577px) {
-    justify-content: space-between;
-    flex-direction: row;
-  }
-  @media (min-width: 1024px) {
-    position: relative;
-    bottom: initial;
-    right: initial;
-  }
 `
