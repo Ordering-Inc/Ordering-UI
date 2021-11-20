@@ -12,7 +12,7 @@ export const Container = styled.div`
   }
 
   @media (min-width: 993px) {
-    min-height: calc(100vh - 337px);
+    min-height: calc(100vh - 87px);
     box-sizing: border-box;
   }
 `

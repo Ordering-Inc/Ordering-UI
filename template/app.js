@@ -7,7 +7,7 @@ import {
   useLocation
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
-import { Header, Footer } from '../src/themes/pwa'
+import { Header } from '../src/themes/pwa'
 
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -61,7 +61,6 @@ export const App = () => {
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const isSearch = location.pathname === '/search'
-  const isFooterPage = location.pathname === '/pages/footer'
 
   const handleSuccessSignup = (user) => {
     login({
@@ -272,9 +271,6 @@ export const App = () => {
                   </Route>
                 </Switch>
               </ScrollToTop>
-            )}
-            {!isFooterPage && (
-              <Footer />
             )}
             <Alert
               title={t('INFORMATION', 'Information')}
