@@ -95,6 +95,16 @@ export const BusinessCategoryProductWrapper = styled.div`
 export const BusinessCartContainer = styled.div`
   margin: 0 25px 25px;
 
+  > div {
+    display: none;
+  }
+
+  @media (min-width: 500px) {
+    > div {
+      display: block;
+    }
+  }
+
   @media (min-width: 768px) {
     margin: 0;
   }
@@ -187,12 +197,18 @@ export const Title = styled.h1`
 `
 
 export const MobileCartViewWrapper = styled.div`
-  margin-top: 20px;
-  padding: 0 25px;
+  position: fixed;
+  width: 100vw;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  padding: 10px 25px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  z-index: 1000;
+  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
 
   span {
     font-weight: 600;
