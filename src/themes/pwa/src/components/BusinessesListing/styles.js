@@ -107,7 +107,7 @@ export const BusinessFeatures = styled.div`
   position: absolute;
   top: 10%;
   width: 100%;
-  padding: 0 7vw;
+  padding: 0 15px;
   box-sizing: border-box;
 `
 
@@ -137,32 +137,44 @@ export const FeatureItems = styled.div`
   justify-content: space-between;
 `
 export const ItemInline = styled.div`
-  span #select-input {
+  > span #select-input {
     background-color: #F8F9FA !important;
     border: none;
     border-radius: 7.6px;
     svg {
-      font-size: 16px;
+      font-size: 14px;
     }
     #list {
       background-color: #fff;
       border: none;
       border-radius: 7.6px;
     }
+
+    > div:first-child {
+      font-size: 11px;
+    }
   }
 
-
+  .moment-popover {
+    > div:first-child {
+      font-size: 11px;
+      padding: 4px 7px;
+      svg {
+        font-size: 14px;
+      }
+    }
+  }
 `
 
 export const BusinessSearch = styled.div`
     display: flex;
     background-color: #f8f9fa;
     align-items: center;
-    padding: 7px 8px;
+    padding: 7px;
     border-radius: 7px;
-    font-size: 14px;
+    font-size: 11px;
     svg {
-      font-size: 20px;
+      font-size: 15px;
     }
 `
 
