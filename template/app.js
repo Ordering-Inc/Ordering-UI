@@ -7,7 +7,7 @@ import {
   useLocation
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
-import { Header, Footer } from '../src/themes/five'
+import { Header, Footer } from '../src/themes/pwa'
 
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -60,6 +60,7 @@ export const App = () => {
   }
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
+  const isSearch = location.pathname === '/search'
   const isFooterPage = location.pathname === '/pages/footer'
 
   const handleSuccessSignup = (user) => {
@@ -107,7 +108,7 @@ export const App = () => {
       {
         loaded && (
           <>
-            {(!isHome || windowSize.width > 576) && (
+            {!((isHome || isSearch) && windowSize.width < 576) && (
               <Header
                 isHome={isHome}
                 location={location}
