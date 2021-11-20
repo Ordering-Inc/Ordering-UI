@@ -240,7 +240,6 @@ const ProductOptionsUI = (props) => {
                 {product?.price && (
                   <div className='price-wrapper'>
                     <span>{productCart.total && parsePrice(productCart.total)}</span>
-                    <span className='price-discount'>{parsePrice(product?.offer_price)}</span>
                   </div>
                 )}
                 {product?.description && <p>{product?.description}</p>}
