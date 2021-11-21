@@ -11,6 +11,7 @@ import {
   DragAndDrop,
   ExamineClick
 } from 'ordering-components'
+import IosGlobe from '@meronex/icons/ios/IosGlobe'
 import { UserFormDetailsUI } from '../UserFormDetails'
 import { AddressList } from '../AddressList'
 import { Alert } from '../../../../../components/Confirm'
@@ -39,7 +40,8 @@ import {
   ShortLinks,
   LinkItem,
   ProfileImage,
-  LanguageSelectorWrapper
+  LanguageSelectorWrapper,
+  FooterMenuWrapper
 } from './styles'
 
 const UserProfileFormUI = (props) => {
@@ -165,9 +167,13 @@ const UserProfileFormUI = (props) => {
             <LinkItem><span><Bell /></span>{t('SAVED_ADDRESS', 'Notifications')}</LinkItem>
             <LinkItem><span><Reward /></span>{t('SAVED_ADDRESS', 'Rewards')}</LinkItem>
           </ShortLinks>
-          <LanguageSelectorWrapper>
-            <LanguageSelector isLanguageFullName={isLanguageFullName} />
-          </LanguageSelectorWrapper>
+          <FooterMenuWrapper>
+            <LanguageSelectorWrapper>
+              <IosGlobe />
+              <LanguageSelector isLanguageFullName={isLanguageFullName} />
+            </LanguageSelectorWrapper>
+          </FooterMenuWrapper>
+
         </ProfileContainer>
 
         {modalIsOpen && (

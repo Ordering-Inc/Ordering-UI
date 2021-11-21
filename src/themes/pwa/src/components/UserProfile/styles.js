@@ -335,10 +335,14 @@ export const LinkItem = styled.a`
 `
 
 export const LanguageSelectorWrapper = styled.div`
-  width: calc(100% - 40px);
-  position: absolute;
-  bottom: 15px;
-  left: 20px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 16px;
+    min-width: 16px;
+  }
+
   #select-input {
     width: 100%;
     height: auto;
@@ -346,24 +350,32 @@ export const LanguageSelectorWrapper = styled.div`
     border: none;
     border-radius: 0px;
     #list {
-      width: 100%;
+      min-width: 120px;
+      left: 0;
       border-radius: 0px;
       background-color: #fff;
       border: none;
-      border-top: 1px solid #E9ECEF;
+      border-bottom: 1px solid #E9ECEF;
       box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
       font-size: 13px;
+      bottom: 100%;
+
+      ${props => props.theme.rtl && css`
+        left: initial;
+        right: 0px;
+      `}
     }
 
     @media(min-width: 768px) {
-      width: 25%;
-      margin-left: auto;
+      width: 30%;
       max-width: 185px;
     }
-
-    @media(min-width: 1200px) {
-      margin-right: auto;
-      float: right;
-    }
   }
+`
+
+export const FooterMenuWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  padding: 20px;
 `
