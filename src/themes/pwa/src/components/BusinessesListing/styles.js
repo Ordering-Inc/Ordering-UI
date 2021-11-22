@@ -148,6 +148,14 @@ export const ItemInline = styled.div`
       background-color: #fff;
       border: none;
       border-radius: 7.6px;
+
+      left: 0px;
+      right: initial;
+
+      ${props => props.theme.rtl && css`
+        left: initial;
+        right: 0px;
+      `}
     }
 
     > div:first-child {

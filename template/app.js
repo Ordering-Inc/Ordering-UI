@@ -60,7 +60,6 @@ export const App = () => {
   }
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
-  const isSearch = location.pathname === '/search'
 
   const handleSuccessSignup = (user) => {
     login({
