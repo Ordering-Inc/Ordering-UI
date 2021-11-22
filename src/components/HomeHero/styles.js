@@ -77,7 +77,7 @@ export const Title = styled.h1`
   text-align: left;
   font: normal normal normal 80px ${props => props.theme.fonts.special?.name || 'Georgia'};
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: ${props => props.theme.colors.titleHomeColor ?? '#FFFFFF'};
   text-shadow: 0px 3px 6px #00000029;
   opacity: 1;
   font-size: 35px;
@@ -92,7 +92,7 @@ export const Slogan = styled.p`
   text-align: left;
   font-size: 18px;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: ${props => props.theme.colors.subtitleHomeColor ?? '#FFFFFF'};
   opacity: 1;
   margin-bottom: 15px;
 
