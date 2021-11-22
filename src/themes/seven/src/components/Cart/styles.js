@@ -86,9 +86,14 @@ export const CouponQuestion = styled.div`
   padding: 0 5px;
   box-sizing: border-box;
   p {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 24px;
     margin-bottom: 0px;
+    cursor: pointer;
+    &:hover {
+      color: ${props => props.theme.colors.primary};
+      text-decoration: underline;
+    }
   } 
   span {
     margin: 0 10px;

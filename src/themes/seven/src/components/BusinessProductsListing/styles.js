@@ -147,12 +147,8 @@ export const CartegoryTitle = styled.div`
   color: #fff;
   font-weight: bold;
   padding: 10px 15px;
-  margin-right: 14px;
-  ${props => props.theme?.rtl && css`
-    margin-right: 0px;
-    margin-left: 14px;
- `}
   @media (min-width: 768px) {
+    margin-right: 14px;
     background-color: ${props => props.theme.colors.primaryDark};
     padding-left: 10%;
     ${props => props.theme?.rtl && css`
@@ -205,5 +201,16 @@ export const UnderAgeButtons = styled.div`
     margin: 0 7px;
     font-size: 16px;
     font-weight: bold;
+  }
+`
+export const BreackFastCheckModalContent = styled.div`
+  padding: 20px;
+`
+
+export const AgreeButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  button {
+    font-size: 14px;
   }
 `
