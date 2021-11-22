@@ -107,7 +107,7 @@ export const App = () => {
       {
         loaded && (
           <>
-            {!((isHome || isSearch) && windowSize.width < 576) && (
+            {windowSize.width > 576 && (
               <Header
                 isHome={isHome}
                 location={location}

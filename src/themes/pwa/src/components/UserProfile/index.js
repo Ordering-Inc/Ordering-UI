@@ -4,12 +4,15 @@ import Skeleton from 'react-loading-skeleton'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
+import GrLogout from '@meronex/icons/gr/GrLogout'
 import {
   UserFormDetails as UserProfileController,
+  LogoutAction as LogoutActionController,
   useLanguage,
   useSession,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  useCustomer
 } from 'ordering-components'
 import IosGlobe from '@meronex/icons/ios/IosGlobe'
 import { UserFormDetailsUI } from '../UserFormDetails'
@@ -41,7 +44,8 @@ import {
   LinkItem,
   ProfileImage,
   LanguageSelectorWrapper,
-  FooterMenuWrapper
+  FooterMenuWrapper,
+  LogoutWrapper
 } from './styles'
 
 const UserProfileFormUI = (props) => {
@@ -172,6 +176,7 @@ const UserProfileFormUI = (props) => {
               <IosGlobe />
               <LanguageSelector isLanguageFullName={isLanguageFullName} />
             </LanguageSelectorWrapper>
+            <PopoverListItemLogout />
           </FooterMenuWrapper>
 
         </ProfileContainer>
@@ -311,5 +316,42 @@ export const LifePre = () => {
 export const Reward = () => {
   return (
     <svg id='Capa_1' enableBackground='new 0 0 512 512' height='512' viewBox='0 0 512 512' width='512' xmlns='http://www.w3.org/2000/svg'><path d='m418.648 279.958 33.986-33.458-16.143-44.865 16.143-44.865-33.986-33.458-5-47.409-45.112-15.385-25.016-40.594-47.347 5.716-40.173-25.64-40.173 25.64-47.346-5.716-25.015 40.593-45.113 15.385-5.001 47.41-33.986 33.458 16.143 44.865-16.143 44.865 33.986 33.457 5 47.411 25.047 8.542-42.929 134.181 73.492-4.042 57.499 45.951 36.441-113.899 8.098 5.169 8.098-5.169 36.441 113.899 57.498-45.951 73.492 4.042-42.929-134.181 25.046-8.542zm-222.5 181.368-32.392-25.886-41.403 2.276 27.214-85.06 18.912 30.69 47.347-5.716 5.895 3.763zm152.096-25.886-32.392 25.886-25.574-79.933 5.895-3.763 47.346 5.716 18.913-30.69 27.214 85.06zm37.554-130.299-37.166 12.675-20.593 33.416-38.949-4.702-33.09 21.12-33.09-21.119-38.95 4.702-20.593-33.417-37.166-12.675-4.117-39.033-27.959-27.524 13.295-36.949-13.295-36.949 27.959-27.525 4.117-39.033 37.166-12.675 20.593-33.416 38.949 4.702 33.091-21.118 33.09 21.119 38.95-4.702 20.593 33.417 37.166 12.675 4.117 39.033 27.959 27.524-13.295 36.949 13.295 36.949-27.959 27.525z' /><path d='m256 84.791c-64.428 0-116.844 52.416-116.844 116.845s52.416 116.843 116.844 116.843 116.844-52.416 116.844-116.844-52.416-116.844-116.844-116.844zm0 203.662c-47.871 0-86.818-38.947-86.818-86.818 0-47.872 38.947-86.818 86.818-86.818s86.818 38.947 86.818 86.818c0 47.872-38.947 86.818-86.818 86.818z' /></svg>
+  )
+}
+
+const LogoutActionUI = (props) => {
+  const [, t] = useLanguage()
+  const [, { deleteUserCustomer }] = useCustomer()
+
+  const handleClick = () => {
+    const GoogleAuth = window?.gapi?.auth2?.getAuthInstance()
+    if (GoogleAuth) {
+      const signedIn = GoogleAuth.isSignedIn.get()
+      if (signedIn) {
+        GoogleAuth.signOut().then(() => {
+          GoogleAuth.disconnect()
+        })
+      }
+    }
+
+    deleteUserCustomer(true)
+    props.handleLogoutClick()
+    props.onClose && props.onClose()
+  }
+  return (
+    <LogoutWrapper onClick={handleClick}>
+      <GrLogout />
+      <span>{t('LOGOUT', 'Logout')}</span>
+    </LogoutWrapper>
+  )
+}
+
+const PopoverListItemLogout = (props) => {
+  const logoutActionProps = {
+    UIComponent: LogoutActionUI,
+    onClose: props.onClose
+  }
+  return (
+    <LogoutActionController {...logoutActionProps} />
   )
 }
