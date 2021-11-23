@@ -8,7 +8,8 @@ import {
   WrapLogo,
   CardLogo,
   SoldOut,
-  QuantityContainer
+  QuantityContainer,
+  PriceWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 
