@@ -31,6 +31,8 @@ var _Cart = require("../Cart");
 
 var _SearchBar = require("../SearchBar");
 
+var _NotFoundSource = require("../NotFoundSource");
+
 var _Buttons = require("../../styles/Buttons");
 
 var _Select = require("../../styles/Select");
@@ -128,6 +130,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
+    isLayoutOne: businessLayout.layoutOne,
     isCartOnProductsList: isCartOnProductsList
   }, !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
@@ -135,7 +138,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation
-  }), (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }), !errorQuantityProducts ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (categoryState.products.length !== 0 || searchValue) && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SEARCH_PRODUCTS) || 'Search Products'),
@@ -184,7 +187,13 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleClearSearch: handleChangeSearch,
     errorQuantityProducts: errorQuantityProducts,
     currentCart: currentCart
-  }))), isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+  }))) : /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time'),
+    btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
+    onClickButton: function onClickButton() {
+      return handleSearchRedirect();
+    }
+  })), isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isForceOpenCart: true,
     cart: currentCart,
     isCartPending: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.status) === 2,
@@ -193,13 +202,15 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleCartOpen: function handleCartOpen(val) {
       return setIsCartOpen(val);
     }
-  })), businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement("div", {
-    className: "bp-list"
-  }, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  })), businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation
-  }), (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }), !errorQuantityProducts ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
+    style: {
+      visibility: (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts ? 'visible' : 'hidden'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.SEARCH_PRODUCTS) || 'Search Products'),
@@ -255,7 +266,13 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     errorQuantityProducts: errorQuantityProducts,
     business: business,
     currentCart: currentCart
-  })))))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  }))))) : /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time'),
+    btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
+    onClickButton: function onClickButton() {
+      return handleSearchRedirect();
+    }
+  }))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     isSkeleton: true,
     handler: handler,
     businessState: {

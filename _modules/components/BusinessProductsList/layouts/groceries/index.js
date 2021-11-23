@@ -62,7 +62,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       handleClearSearch = props.handleClearSearch,
       errorQuantityProducts = props.errorQuantityProducts,
       categoriesState = props.categoriesState,
-      onClickCategory = props.onClickCategory;
+      onClickCategory = props.onClickCategory,
+      currentCart = props.currentCart;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -80,13 +81,19 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
     src: category.image
   }), /*#__PURE__*/_react.default.createElement("h3", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product) {
+    var _currentCart$products;
+
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
+      isLayoutOne: true,
       isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
       product: product,
       businessId: businessId,
       onProductClick: onProductClick,
-      isCartOnProductsList: isCartOnProductsList
+      isCartOnProductsList: isCartOnProductsList,
+      productAddedToCart: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.find(function (Cproduct) {
+        return Cproduct.id === product.id;
+      })
     });
   }))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) === 'featured';
@@ -98,7 +105,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     }) ? categoriesState === null || categoriesState === void 0 ? void 0 : (_categoriesState$feat3 = categoriesState.featured) === null || _categoriesState$feat3 === void 0 ? void 0 : _categoriesState$feat3.products : [] : (_categoryState$produc2 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc3 = categoryState.products) === null || _categoryState$produc3 === void 0 ? void 0 : _categoryState$produc3.filter(function (product) {
       return product.featured;
     })) !== null && _categoryState$produc2 !== void 0 ? _categoryState$produc2 : [];
-    return /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, null, /*#__PURE__*/_react.default.createElement("div", {
+    return (featProducts === null || featProducts === void 0 ? void 0 : featProducts.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
+      key: category === null || category === void 0 ? void 0 : category.id
+    }, /*#__PURE__*/_react.default.createElement("div", {
       className: "wrap-header"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "category-title"
@@ -107,13 +116,19 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return onClickCategory(category);
       }
     }, t('MORE', 'More'))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, featProducts === null || featProducts === void 0 ? void 0 : featProducts.map(function (product) {
+      var _currentCart$products2;
+
       return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: product === null || product === void 0 ? void 0 : product.id,
+        isLayoutOne: true,
         isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
         product: product,
         businessId: businessId,
         onProductClick: onProductClick,
-        isCartOnProductsList: isCartOnProductsList
+        isCartOnProductsList: isCartOnProductsList,
+        productAddedToCart: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.find(function (Cproduct) {
+          return Cproduct.id === product.id;
+        })
       });
     }), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (featProducts === null || featProducts === void 0 ? void 0 : featProducts.length) && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       useCustomFunctionality: true,
@@ -156,13 +171,19 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return onClickCategory(category);
       }
     }, t('MORE', 'More'))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
+      var _currentCart$products3;
+
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: product === null || product === void 0 ? void 0 : product.id,
+        isLayoutOne: true,
         isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
         businessId: businessId,
         product: product,
         onProductClick: onProductClick,
-        isCartOnProductsList: isCartOnProductsList
+        isCartOnProductsList: isCartOnProductsList,
+        productAddedToCart: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.find(function (Cproduct) {
+          return Cproduct.id === product.id;
+        })
       });
     }), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (products === null || products === void 0 ? void 0 : products.length) && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       useCustomFunctionality: true,

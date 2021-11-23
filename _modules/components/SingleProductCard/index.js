@@ -79,6 +79,7 @@ var SingleProductCard = function SingleProductCard(props) {
   var maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {
     soldOut: isSoldOut || maxProductQuantity <= 0,
+    isLayoutOne: props.isLayoutOne,
     onClick: function onClick() {
       return !isSkeleton && !useCustomFunctionality && onProductClick(product) || useCustomFunctionality && onCustomClick();
     },
