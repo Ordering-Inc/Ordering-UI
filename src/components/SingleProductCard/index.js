@@ -20,7 +20,11 @@ export const SingleProductCard = (props) => {
     isSkeleton,
     onProductClick,
     isCartOnProductsList,
-    productAddedToCart
+    productAddedToCart,
+    useCustomFunctionality,
+    onCustomClick,
+    customText,
+    customStyle,
   } = props
 
   const [, t] = useLanguage()
@@ -46,50 +50,51 @@ export const SingleProductCard = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       <CardContainer
         soldOut={isSoldOut || maxProductQuantity <= 0}
-        onClick={() => !isSkeleton && onProductClick(product)}
+        onClick={() => (!isSkeleton && !useCustomFunctionality && onProductClick(product) || useCustomFunctionality && onCustomClick())}
         isCartOnProductsList={isCartOnProductsList}
+        style={useCustomFunctionality && customStyle}
       >
-        {!isSkeleton && productAddedToCart && productAddedToCart?.quantity > 0 && (
-          <QuantityContainer>
-            <span>{productAddedToCart?.quantity}</span>
-          </QuantityContainer>
+        {!useCustomFunctionality && (
+          <>
+            {!isSkeleton && productAddedToCart && productAddedToCart?.quantity > 0 && (
+              <QuantityContainer>
+                <span>{productAddedToCart?.quantity}</span>
+              </QuantityContainer>
+            )}
+            <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
+              {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
+              {!isSkeleton ? (
+                <PriceWrapper>
+                  <span>{parsePrice(product?.price)}</span>
+                  {product?.offer_price && (
+                    <span className='off-price'>{parsePrice(product?.offer_price)}</span>
+                  )}
+                </PriceWrapper>
+              ) : (
+                <Skeleton width={100} />
+              )}
+              {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+            </CardInfo>
+            {!isSkeleton ? (
+              <WrapLogo>
+                <CardLogo
+                  className='image'
+                  soldOut={isSoldOut || maxProductQuantity <= 0}
+                  bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
+                />
+              </WrapLogo>
+            ) : (
+              <Skeleton height={75} width={75} />
+            )}
+            {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
+          </>
         )}
-        <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
-          {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-          {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
-          {!isSkeleton ? (
-            <span>{parsePrice(product?.price)}</span>
-          ) : (
-            <Skeleton width={100} />
-          )}
-        </CardInfo>
-        {!isSkeleton ? (
-          <WrapLogo>
-            <CardLogo
-              className='image'
-              soldOut={isSoldOut || maxProductQuantity <= 0}
-              bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
-            />
-          </WrapLogo>
-        ) : (
-          <Skeleton height={75} width={75} />
+        {useCustomFunctionality && customText && (
+          <span style={{ fontSize: 16, fontWeight: 500}}>{customText}</span>
         )}
-        {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
       </CardContainer>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }
