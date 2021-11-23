@@ -37,8 +37,6 @@ export const WrappLayout = styled.div`
         width: calc(40% - 20px);
       }
     }  
-  }
-    }  
 
     @media (min-width: 1200px) {
       .bp-list {
@@ -198,53 +196,5 @@ export const EmptyBtnWrapper = styled.div`
     font-size: 14px;
     padding-left: 25px;
     padding-right: 25px;
-  }
-`
-
-export const MobileCartViewWrapper = styled.div`
-  position: fixed;
-  width: 100vw;
-  left: 0;
-  bottom: 0;
-  background-color: white;
-  padding: 10px 25px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  z-index: 1000;
-  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
-
-  span {
-    font-weight: 600;
-    font-size: 16px;
-  }
-
-  button {
-    height: 44px;
-    border-radius: 7.6px;
-  }
-`
-
-export const WrapperSearch = styled.div`
-  margin: 15px 0px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  .search-bar {
-    margin-right: 10px;
-    ${props => props.theme?.rtl && css`
-      margin-left: 10px;
-      margin-right: 0;
-    `}
-  }
-
-  div:last-child {
-    text-align: right;
-
-    ${props => props.theme?.rtl && css`
-      text-align: left;
-    `}
   }
 `
