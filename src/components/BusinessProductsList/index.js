@@ -27,7 +27,8 @@ const BusinessProductsListUI = (props) => {
     isCartOnProductsList,
     handleClearSearch,
     errorQuantityProducts,
-    currentCart
+    currentCart,
+    productToIdLoading
   } = props
 
   const [, t] = useLanguage()
@@ -53,6 +54,7 @@ const BusinessProductsListUI = (props) => {
                   onProductClick={onProductClick}
                   isCartOnProductsList={isCartOnProductsList}
                   productAddedToCart={currentCart?.products?.find(Cproduct => Cproduct.id === product.id)}
+                  productToIdLoading={productToIdLoading}
                 />
               ))
             }
@@ -76,6 +78,7 @@ const BusinessProductsListUI = (props) => {
                           onProductClick={onProductClick}
                           isCartOnProductsList={isCartOnProductsList}
                           productAddedToCart={currentCart?.products?.find(Cproduct => Cproduct.id === product.id)}
+                          productToIdLoading={productToIdLoading}
                         />
                       ))}
                     </ProductsListing>
@@ -106,6 +109,7 @@ const BusinessProductsListUI = (props) => {
                               onProductClick={onProductClick}
                               isCartOnProductsList={isCartOnProductsList}
                               productAddedToCart={currentCart?.products?.find(Cproduct => Cproduct.id === product.id)}
+                              productToIdLoading={productToIdLoading}
                             />
                           ))
                         }

@@ -11,7 +11,7 @@ import {
   QuantityContainer
 } from './styles'
 import { useTheme } from 'styled-components'
-
+import { SpinnerLoader } from '../SpinnerLoader'
 export const SingleProductCard = (props) => {
   const {
     businessId,
@@ -20,7 +20,8 @@ export const SingleProductCard = (props) => {
     isSkeleton,
     onProductClick,
     isCartOnProductsList,
-    productAddedToCart
+    productAddedToCart,
+    productToIdLoading
   } = props
 
   const [, t] = useLanguage()
@@ -43,7 +44,7 @@ export const SingleProductCard = (props) => {
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig
 
   const maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory)
-
+  console.log(productToIdLoading)
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -53,7 +54,7 @@ export const SingleProductCard = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <CardContainer
-        soldOut={isSoldOut || maxProductQuantity <= 0}
+        soldOut={isSoldOut || maxProductQuantity <= 0 || (productToIdLoading === product?.id && productToIdLoading)}
         onClick={() => !isSkeleton && onProductClick(product)}
         isCartOnProductsList={isCartOnProductsList}
       >
@@ -71,6 +72,9 @@ export const SingleProductCard = (props) => {
             <Skeleton width={100} />
           )}
         </CardInfo>
+        {productToIdLoading === product?.id && productToIdLoading && (
+          <SpinnerLoader iconStyleWidth={50} iconStyleHeight={50} style={{ width: 50, height: 50 }} />
+        )}
         {!isSkeleton ? (
           <WrapLogo>
             <CardLogo

@@ -80,6 +80,7 @@ const BusinessProductsListingUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [productToIdLoading, setProductIdToLoading] = useState(null)
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
@@ -93,8 +94,9 @@ const BusinessProductsListingUI = (props) => {
     setOpenBusinessInformation(true)
   }
 
-  const onProductClick = (product) => {
+  const onProductClick = async (product) => {
     if (product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct) {
+      setProductIdToLoading(product.id)
       const isProductAddedToCart = currentCart?.products?.find(Cproduct => Cproduct.id === product.id)
       const productQuantity = isProductAddedToCart?.quantity
       const addCurrentProduct = {
@@ -108,10 +110,11 @@ const BusinessProductsListingUI = (props) => {
       }
       const cartData = currentCart?.business_id ? currentCart : { business_id: business.id }
       if (isProductAddedToCart) {
-        updateProduct(updateCurrentProduct, cartData)
+        await updateProduct(updateCurrentProduct, cartData, isQuickAddProduct)
       } else {
-        addProduct(addCurrentProduct, cartData, isQuickAddProduct)
+        await addProduct(addCurrentProduct, cartData, isQuickAddProduct)
       }
+      setProductIdToLoading(null)
     } else {
       onProductRedirect({
         slug: business?.slug,
@@ -250,6 +253,7 @@ const BusinessProductsListingUI = (props) => {
                     businessId={business.id}
                     errors={errors}
                     onProductClick={onProductClick}
+                    productToIdLoading={productToIdLoading}
                     handleSearchRedirect={handleSearchRedirect}
                     featured={featuredProducts}
                     searchValue={searchValue}
