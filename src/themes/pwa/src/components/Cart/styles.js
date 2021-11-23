@@ -87,6 +87,17 @@ export const CheckoutAction = styled.div`
       width: 50%;
     }
   }
+
+  ${({ isFixed }) => isFixed && css`
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    background: white;
+    z-index: 10;
+    margin: 0;
+  `}
 `
 
 export const Divider = styled.div`

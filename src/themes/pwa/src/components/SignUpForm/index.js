@@ -258,7 +258,7 @@ const SignUpFormUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <SignUpContainer isPopup={isPopup}>
         <FormSide isPopup={isPopup}>
-          <Title>{t('SIGN_UP', 'Sign up')}</Title>
+          <Title isPopup={isPopup}>{t('SIGN_UP', 'Sign up')}</Title>
           <FormInput
             noValidate
             isPopup={isPopup}

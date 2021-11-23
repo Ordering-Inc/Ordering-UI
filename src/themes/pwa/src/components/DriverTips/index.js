@@ -7,7 +7,6 @@ import {
   FormDriverTip,
   WrapperInput,
   DriverTipMessage,
-  DriverTipLabel,
   WrapperTips
 } from './styles'
 import { Input } from '../../styles/Inputs'
@@ -27,7 +26,7 @@ const DriverTipsUI = (props) => {
   const [{ configs }] = useConfig()
 
   const [value, setvalue] = useState(0)
-  const _driverTipsOptions = driverTipsOptions?.sort((a, b) => a - b)
+
   const handleChangeDriverTip = (e) => {
     let tip = parseFloat(e?.target?.value)
     tip = isNaN(tip) ? 0 : tip
@@ -50,7 +49,7 @@ const DriverTipsUI = (props) => {
         {!isDriverTipUseCustom ? (
           <>
             <WrapperTips>
-              {driverTipsOptions && _driverTipsOptions.map((option, i) => (
+              {driverTipsOptions.map((option, i) => (
                 <TipCard
                   key={i}
                   className={`${option === optionSelected ? 'active' : ''}`}
@@ -68,9 +67,6 @@ const DriverTipsUI = (props) => {
           </>
         ) : (
           <FormDriverTip>
-            <DriverTipLabel>
-              {t('CUSTOM_DRIVER_TIP_MESSAGE', '100% of these tips go directly to your driver')}
-            </DriverTipLabel>
             <WrapperInput>
               <Input
                 name='drivertip'
