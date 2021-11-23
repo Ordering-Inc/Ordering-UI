@@ -22,7 +22,7 @@ export const CardContainer = styled.div`
     box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
   `}
 
-  ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
+  ${({ isCartOnProductsList, isLayoutOne }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {
       width: calc(50% - 40px);
     }
@@ -31,9 +31,15 @@ export const CardContainer = styled.div`
       width: calc(50% - 40px);
     }
 
-    @media (min-width: 993px) {
-      width: calc(33% - 40px);
-    }
+    ${isLayoutOne ? css`
+      @media (min-width: 1025px) {
+        width: calc(33% - 40px);
+      }
+    ` : css`
+      @media (min-width: 993px) {
+        width: calc(33% - 40px);
+      }
+    `}
   `}
 `
 

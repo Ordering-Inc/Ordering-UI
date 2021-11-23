@@ -7,27 +7,82 @@ export const Title = styled.h1`
   margin-bottom: 18px;
 `
 
-export const WrappLayout = styled.div``
+export const WrappLayout = styled.div`
+  ${({ isCartOnProductsList }) => isCartOnProductsList && css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
-export const WrapContent = styled.div`
-  padding: 5px;
-  background: ${props => props.theme.colors.backgroundPage};
+    .bp-list,
+    .cart {
+      width: 100%;
+    }
 
-  @media (min-width: 381px) {
-    padding: 15px;
+    @media (min-width: 870px) {
+      flex-direction: row;
+      .bp-list {
+        width: 55%;
+      }
+      .cart {
+        width: calc(45% - 20px);
+        margin-left: 20px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .bp-list {
+        width: 60%;
+      }
+      .cart {
+        width: calc(40% - 20px);
+      }
+    }  
+  }
+    }  
+
+    @media (min-width: 1200px) {
+      .bp-list {
+        width: 70%;
+      }
+      .cart {
+        width: calc(30% - 20px);
+      }
+    }  
+  `}
+`
+
+export const WrapperSearch = styled.div`
+  margin: 15px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .search-bar {
+    margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
   }
 
-  @media (min-width: 1200px) {
-    padding: 0;
+  div:last-child {
+    text-align: right;
+
+    ${props => props.theme?.rtl && css`
+      text-align: left;
+    `}
   }
 `
 
+export const WrapContent = styled.div`
+  background: ${props => props.theme.colors.backgroundPage};
+`
+
 export const BusinessContent = styled.div`
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 1200px) {
+  @media (min-width: 701px) {
     flex-direction: row;
   }
 `
@@ -46,16 +101,17 @@ export const BusinessCategoryProductWrapper = styled.div`
     scrollbar-width: none;
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1024px) {
     width: 70%;
   }
 `
 
 export const BusinessCategoriesContainer = styled.div`
   margin: 0;
-  @media (min-width: 1200px) {
-    width: calc(31% - 25px);
-    margin-left: 25px;
+  width: 100%;
+
+  @media (min-width: 701px) {
+    width: 30%;
 
     ${props => props.theme?.rtl && css`
       margin-right: 25px;

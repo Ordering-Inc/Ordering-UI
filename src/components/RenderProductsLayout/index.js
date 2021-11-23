@@ -11,6 +11,7 @@ import { BusinessProductsList as ProductListLayoutGroceries } from '../BusinessP
 import { Modal } from '../Modal'
 import { Cart } from '../Cart'
 import { SearchBar } from '../SearchBar'
+import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { Select } from '../../styles/Select'
 
@@ -93,7 +94,10 @@ export const RenderProductsLayout = (props) => {
   return (
     <>
       {!isLoading && business?.id && (
-        <WrappLayout isCartOnProductsList={isCartOnProductsList}>
+        <WrappLayout
+          isLayoutOne={businessLayout.layoutOne}
+          isCartOnProductsList={isCartOnProductsList}
+        >
           {!businessLayout.layoutOne && (
             <>
               <div className='bp-list'>
@@ -102,54 +106,65 @@ export const RenderProductsLayout = (props) => {
                   setOpenBusinessInformation={setOpenBusinessInformation}
                   openBusinessInformation={openBusinessInformation}
                 />
-                {(categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && (
-                  <WrapperSearch>
-                    <SearchBar
-                      onSearch={handleChangeSearch}
-                      search={searchValue}
-                      placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
-                      lazyLoad={businessState?.business?.lazy_load_products_recommended}
-                    />
-                    <Select
-                      notAsync
-                      notReload
-                      options={sortByOptions}
-                      defaultValue={sortByValue}
-                      onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
-                    />
-                  </WrapperSearch>
-                )}
-                {!(business?.categories?.length === 0 && !categoryId) && (
-                  <BusinessProductsCategories
-                    categories={[{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
-                    categorySelected={categorySelected}
-                    onClickCategory={onClickCategory}
-                    featured={featuredProducts}
-                    openBusinessInformation={openBusinessInformation}
-                  />
-                )}
+                {!errorQuantityProducts ? (
+                  <>
+                    {(categoryState.products.length !== 0 || searchValue) && (
+                      <WrapperSearch>
+                        <SearchBar
+                          onSearch={handleChangeSearch}
+                          search={searchValue}
+                          placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
+                          lazyLoad={businessState?.business?.lazy_load_products_recommended}
+                        />
+                        <Select
+                          notAsync
+                          notReload
+                          options={sortByOptions}
+                          defaultValue={sortByValue}
+                          onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                        />
+                      </WrapperSearch>
+                    )}
 
-                <WrapContent>
-                  <BusinessProductsList
-                    categories={[
-                      { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                      { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                      ...business?.categories.sort((a, b) => a.rank - b.rank)
-                    ]}
-                    category={categorySelected}
-                    categoryState={categoryState}
-                    businessId={business.id}
-                    errors={errors}
-                    onProductClick={onProductClick}
-                    handleSearchRedirect={handleSearchRedirect}
-                    featured={featuredProducts}
-                    searchValue={searchValue}
-                    isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                    handleClearSearch={handleChangeSearch}
-                    errorQuantityProducts={errorQuantityProducts}
-                    currentCart={currentCart}
+                    {!(business?.categories?.length === 0 && !categoryId) && (
+                      <BusinessProductsCategories
+                        categories={[{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') }, ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                        categorySelected={categorySelected}
+                        onClickCategory={onClickCategory}
+                        featured={featuredProducts}
+                        openBusinessInformation={openBusinessInformation}
+                      />
+                    )}
+
+                    <WrapContent>
+                      <BusinessProductsList
+                        categories={[
+                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                          ...business?.categories.sort((a, b) => a.rank - b.rank)
+                        ]}
+                        category={categorySelected}
+                        categoryState={categoryState}
+                        businessId={business.id}
+                        errors={errors}
+                        onProductClick={onProductClick}
+                        handleSearchRedirect={handleSearchRedirect}
+                        featured={featuredProducts}
+                        searchValue={searchValue}
+                        isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                        handleClearSearch={handleChangeSearch}
+                        errorQuantityProducts={errorQuantityProducts}
+                        currentCart={currentCart}
+                      />
+                    </WrapContent>
+                  </>
+                ) : (
+                  <NotFoundSource
+                    content={t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time')}
+                    btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+                    onClickButton={() => handleSearchRedirect()}
                   />
-                </WrapContent>
+                )}
               </div>
               {isCartOnProductsList && currentCart?.products?.length > 0 && (
                 <Cart
@@ -165,77 +180,91 @@ export const RenderProductsLayout = (props) => {
           )}
 
           {businessLayout.layoutOne && (
-            <div className='bp-list'>
+            <>
               <BusinessBasicInformation
                 businessState={businessState}
                 setOpenBusinessInformation={setOpenBusinessInformation}
                 openBusinessInformation={openBusinessInformation}
               />
-              {(categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && (
-                <WrapperSearch>
-                  <SearchBar
-                    onSearch={handleChangeSearch}
-                    search={searchValue}
-                    placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
-                    lazyLoad={businessState?.business?.lazy_load_products_recommended}
-                  />
-                  <Select
-                    notAsync
-                    notReload
-                    options={sortByOptions}
-                    defaultValue={sortByValue}
-                    onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
-                  />
-                </WrapperSearch>
+              {!errorQuantityProducts ? (
+                <>
+                  <WrapperSearch
+                    style={{
+                      visibility: (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts
+                        ? 'visible'
+                        : 'hidden'
+                    }}
+                  >
+                    <SearchBar
+                      onSearch={handleChangeSearch}
+                      search={searchValue}
+                      placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
+                      lazyLoad={businessState?.business?.lazy_load_products_recommended}
+                    />
+                    <Select
+                      notAsync
+                      notReload
+                      options={sortByOptions}
+                      defaultValue={sortByValue}
+                      onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                    />
+                  </WrapperSearch>
+                  <BusinessContent>
+                    <BusinessCategoriesContainer>
+                      {!(business?.categories?.length === 0 && !categoryId) && (
+                        <BusinessLayout
+                          component='categories'
+                          categories={[
+                            { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                            { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                            ...business?.categories.sort((a, b) => a.rank - b.rank)
+                          ]}
+                          categorySelected={categorySelected}
+                          onClickCategory={onClickCategory}
+                          featured={featuredProducts}
+                          openBusinessInformation={openBusinessInformation}
+                          openCategories={openCategories}
+                          business={business}
+                        />
+                      )}
+                    </BusinessCategoriesContainer>
+                    <BusinessCategoryProductWrapper>
+                      <WrapContent>
+                        <BusinessLayout
+                          component='products_list'
+                          categories={[
+                            { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                            { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                            ...business?.categories.sort((a, b) => a.rank - b.rank)
+                          ]}
+                          category={categorySelected}
+                          onClickCategory={onClickCategory}
+                          categoriesState={props.categoriesState}
+                          categoryState={categoryState}
+                          businessId={business?.id}
+                          errors={errors}
+                          onProductClick={onProductClick}
+                          handleSearchRedirect={handleSearchRedirect}
+                          featured={featuredProducts}
+                          searchValue={searchValue}
+                          isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                          handleClearSearch={handleChangeSearch}
+                          errorQuantityProducts={errorQuantityProducts}
+                          business={business}
+                          currentCart={currentCart}
+                        />
+                      </WrapContent>
+                    </BusinessCategoryProductWrapper>
+                  </BusinessContent>
+                </>
+              ) : (
+                <NotFoundSource
+                  content={t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time')}
+                  btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+                  onClickButton={() => handleSearchRedirect()}
+                />
               )}
-              <BusinessContent>
-                <BusinessCategoriesContainer>
-                  {!(business?.categories?.length === 0 && !categoryId) && (
-                    <BusinessLayout
-                      component='categories'
-                      categories={[
-                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                        ...business?.categories.sort((a, b) => a.rank - b.rank)
-                      ]}
-                      categorySelected={categorySelected}
-                      onClickCategory={onClickCategory}
-                      featured={featuredProducts}
-                      openBusinessInformation={openBusinessInformation}
-                      openCategories={openCategories}
-                      business={business}
-                    />
-                  )}
-                </BusinessCategoriesContainer>
-                <BusinessCategoryProductWrapper>
-                  <WrapContent>
-                    <BusinessLayout
-                      component='products_list'
-                      categories={[
-                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                        ...business?.categories.sort((a, b) => a.rank - b.rank)
-                      ]}
-                      category={categorySelected}
-                      onClickCategory={onClickCategory}
-                      categoriesState={props.categoriesState}
-                      categoryState={categoryState}
-                      businessId={business?.id}
-                      errors={errors}
-                      onProductClick={onProductClick}
-                      handleSearchRedirect={handleSearchRedirect}
-                      featured={featuredProducts}
-                      searchValue={searchValue}
-                      isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                      handleClearSearch={handleChangeSearch}
-                      errorQuantityProducts={errorQuantityProducts}
-                      business={business}
-                      currentCart={currentCart}
-                    />
-                  </WrapContent>
-                </BusinessCategoryProductWrapper>
-              </BusinessContent>
-            </div>
+            </>
           )}
         </WrappLayout>
       )}

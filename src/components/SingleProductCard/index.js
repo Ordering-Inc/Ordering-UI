@@ -53,6 +53,7 @@ export const SingleProductCard = (props) => {
     <>
       <CardContainer
         soldOut={isSoldOut || maxProductQuantity <= 0}
+        isLayoutOne={props.isLayoutOne}
         onClick={() => (!isSkeleton && !useCustomFunctionality && onProductClick(product) || useCustomFunctionality && onCustomClick())}
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
