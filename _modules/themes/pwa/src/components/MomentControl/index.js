@@ -17,7 +17,17 @@ var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
 
 require("react-datepicker/dist/react-datepicker.css");
 
+require("react-calendar/dist/Calendar.css");
+
+var _reactCalendar = _interopRequireDefault(require("react-calendar"));
+
 var _Select = require("../../styles/Select");
+
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
+var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowLeft"));
+
+var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
 
 var _styles = require("./styles");
 
@@ -96,7 +106,7 @@ var MomentControlUI = function MomentControlUI(props) {
       maxDate = _useState6[0],
       setMaxDate = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(isAsap),
+  var _useState7 = (0, _react.useState)(true),
       _useState8 = _slicedToArray(_useState7, 2),
       isASP = _useState8[0],
       setIsASP = _useState8[1];
@@ -123,6 +133,26 @@ var MomentControlUI = function MomentControlUI(props) {
       !orderState.loading && handleAsap();
       setIsASP(true);
     } else setIsASP(false);
+  };
+
+  var handleRemoveDate = function handleRemoveDate() {
+    !orderState.loading && handleAsap();
+    setIsASP(true);
+  };
+
+  var _formatMonthYear = function formatMonthYear(date) {
+    return (0, _moment.default)(date).format('MMMM');
+  };
+
+  var _formatShortWeekday = function formatShortWeekday(date) {
+    return (0, _moment.default)(date).format('dd');
+  };
+
+  var _formatDay = function formatDay(date) {
+    var minMon = (0, _moment.default)(minDate).format('MM');
+    var maxMon = (0, _moment.default)(maxDate).format('MM');
+    var currMon = (0, _moment.default)(date).format('MM');
+    return minMon === currMon || maxMon === currMon ? (0, _moment.default)(date).format('D') : '';
   };
 
   (0, _react.useEffect)(function () {
@@ -170,6 +200,9 @@ var MomentControlUI = function MomentControlUI(props) {
       setTimeLists(_timeLists);
     }
   }, [hoursList]);
+  (0, _react.useEffect)(function () {
+    if (isASP) handleCheckBoxChange(true);
+  }, [isAsap]);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
   }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -191,13 +224,37 @@ var MomentControlUI = function MomentControlUI(props) {
     onClick: function onClick() {
       return handleCheckBoxChange(null);
     }
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_CgRadioChecked.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DatePickerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_CgRadioChecked.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DatePickerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
     selected: value,
-    onChange: function onChange(date) {
-      return onDateChange(date);
+    onChange: function onChange(val) {
+      return onDateChange(val);
     },
     minDate: minDate,
-    maxDate: maxDate
+    maxDate: maxDate,
+    dateFormat: "MM/dd/yy"
+  }), /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: handleRemoveDate
+  })), /*#__PURE__*/_react.default.createElement(_reactCalendar.default, {
+    onChange: function onChange(val) {
+      return onDateChange(val);
+    },
+    value: value,
+    next2Label: "",
+    prev2Label: "",
+    prevLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, null),
+    nextLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null),
+    minDate: minDate,
+    maxDate: maxDate,
+    formatMonthYear: function formatMonthYear(locale, date) {
+      return _formatMonthYear(date);
+    },
+    formatShortWeekday: function formatShortWeekday(locale, date) {
+      return _formatShortWeekday(date);
+    },
+    formatDay: function formatDay(locale, date) {
+      return _formatDay(date);
+    },
+    calendarType: "US"
   })), /*#__PURE__*/_react.default.createElement(_styles.HourListWrapper, {
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_Select.Select, {

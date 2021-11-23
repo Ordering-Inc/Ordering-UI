@@ -50,6 +50,10 @@ var LastOrdersUI = function LastOrdersUI(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
@@ -57,6 +61,16 @@ var LastOrdersUI = function LastOrdersUI(props) {
       parseDate = _useUtils2$.parseDate;
 
   var imageFails = (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyPastOrders;
+
+  var handleClickOrder = function handleClickOrder(uuid) {
+    events.emit('go_to_page', {
+      page: 'order_detail',
+      params: {
+        orderId: uuid
+      }
+    });
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -73,7 +87,11 @@ var LastOrdersUI = function LastOrdersUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
       key: i,
       bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.header) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_400,c_limit')
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoBlock, null, (order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name) && /*#__PURE__*/_react.default.createElement("h4", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), ((order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) || (order === null || order === void 0 ? void 0 : order.delivery_datetime)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('TUTORIAL_ORDER_COMPLETED', 'Order Completed'), " ", ('ON', 'on'), " "), order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoBlock, {
+      onClick: function onClick() {
+        return handleClickOrder(order === null || order === void 0 ? void 0 : order.uuid);
+      }
+    }, (order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name) && /*#__PURE__*/_react.default.createElement("h4", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), ((order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) || (order === null || order === void 0 ? void 0 : order.delivery_datetime)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('TUTORIAL_ORDER_COMPLETED', 'Order Completed'), " ", ('ON', 'on'), " "), order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
       outputFormat: 'MMM DD, YY - hh:mm A'
     }) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false

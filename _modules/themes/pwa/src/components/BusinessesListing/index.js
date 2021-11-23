@@ -268,7 +268,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 481 && /*#__PURE__*/_react.default.createElement(_styles.BusinessFeatures, null, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_styles.BusinessFeatures, null, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
       return handleClickAddress();
     }
@@ -413,7 +413,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
         searchOpen: false
       }));
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessItemsWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessItemsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SearchTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     search: searchValue,
     isCustomLayout: isCustomLayout,

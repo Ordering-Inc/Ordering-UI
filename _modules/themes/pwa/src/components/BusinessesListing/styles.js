@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSearch = exports.WrapperBusinessLogo = exports.PreviousOrders = exports.ItemInline = exports.FeatureItems = exports.ErrorMessage = exports.BusinessesTitle = exports.BusinessSearch = exports.BusinessName = exports.BusinessMeta = exports.BusinessLogo = exports.BusinessList = exports.BusinessItemsWrapper = exports.BusinessItem = exports.BusinessInfo = exports.BusinessHeroImgStyled = exports.BusinessHeroImg = exports.BusinessFeatures = exports.BusinessContainer = exports.BusinessBanner = exports.BusineessItems = exports.AddressMenu = void 0;
+exports.WrapperSearch = exports.WrapperBusinessLogo = exports.SearchTitle = exports.PreviousOrders = exports.ItemInline = exports.FeatureItems = exports.ErrorMessage = exports.BusinessesTitle = exports.BusinessSearch = exports.BusinessName = exports.BusinessMeta = exports.BusinessLogo = exports.BusinessList = exports.BusinessItemsWrapper = exports.BusinessItem = exports.BusinessInfo = exports.BusinessHeroImgStyled = exports.BusinessHeroImg = exports.BusinessFeatures = exports.BusinessContainer = exports.BusinessBanner = exports.BusineessItems = exports.AddressMenu = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -75,7 +75,7 @@ var BusinessHeroImg = function BusinessHeroImg(props) {
 
 exports.BusinessHeroImg = BusinessHeroImg;
 
-var BusinessFeatures = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10%;\n  width: 100%;\n  padding: 0 7vw;\n  box-sizing: border-box;\n"])));
+var BusinessFeatures = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10%;\n  width: 100%;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
 
 exports.BusinessFeatures = BusinessFeatures;
 
@@ -91,29 +91,31 @@ var FeatureItems = _styledComponents.default.div(_templateObject14 || (_template
 
 exports.FeatureItems = FeatureItems;
 
-var ItemInline = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  span #select-input {\n    background-color: #F8F9FA !important;\n    border: none;\n    border-radius: 7.6px;\n    svg {\n      font-size: 16px;\n    }\n    #list {\n      background-color: #fff;\n      border: none;\n      border-radius: 7.6px;\n    }\n  }\n\n\n"])));
+var ItemInline = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  > span #select-input {\n    background-color: #F8F9FA !important;\n    border: none;\n    border-radius: 7.6px;\n    svg {\n      font-size: 14px;\n    }\n    #list {\n      background-color: #fff;\n      border: none;\n      border-radius: 7.6px;\n\n      left: 0px;\n      right: initial;\n\n      ", "\n    }\n\n    > div:first-child {\n      font-size: 11px;\n    }\n  }\n\n  .moment-popover {\n    > div:first-child {\n      font-size: 11px;\n      padding: 4px 7px;\n      svg {\n        font-size: 14px;\n      }\n    }\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n        left: initial;\n        right: 0px;\n      "])));
+});
 
 exports.ItemInline = ItemInline;
 
-var BusinessSearch = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    display: flex;\n    background-color: #f8f9fa;\n    align-items: center;\n    padding: 7px 8px;\n    border-radius: 7px;\n    font-size: 14px;\n    svg {\n      font-size: 20px;\n    }\n"])));
+var BusinessSearch = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    display: flex;\n    background-color: #f8f9fa;\n    align-items: center;\n    padding: 7px;\n    border-radius: 7px;\n    font-size: 11px;\n    svg {\n      font-size: 15px;\n    }\n"])));
 
 exports.BusinessSearch = BusinessSearch;
 
-var BusinessItemsWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  padding-top: 50px;\n"])));
+var BusinessItemsWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n"])));
 
 exports.BusinessItemsWrapper = BusinessItemsWrapper;
 
-var BusineessItems = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n"])));
+var BusineessItems = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n"])));
 
 exports.BusineessItems = BusineessItems;
 
-var BusinessItem = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  margin-bottom: 15px;\n"])));
+var BusinessItem = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  margin-bottom: 15px;\n"])));
 
 exports.BusinessItem = BusinessItem;
 
-var WrapperBusinessLogo = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  align-self: center;\n  width: 50px;\n  height: 50px;\n  min-height: 50px;\n  max-width: 50px;\n  ", "\n"])), function (_ref3) {
+var WrapperBusinessLogo = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  align-self: center;\n  width: 50px;\n  height: 50px;\n  min-height: 50px;\n  max-width: 50px;\n  ", "\n"])), function (_ref3) {
   var isSkeleton = _ref3.isSkeleton;
-  return isSkeleton && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    width: auto;\n    height: auto;\n  "])));
+  return isSkeleton && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    width: auto;\n    height: auto;\n  "])));
 });
 
 exports.WrapperBusinessLogo = WrapperBusinessLogo;
@@ -132,16 +134,20 @@ var BusinessLogo = function BusinessLogo(props) {
 
 exports.BusinessLogo = BusinessLogo;
 
-var BusinessLogoStyled = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 50px;\n  height: 50px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  min-height: 50px;\n  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;\n  border-radius: 7.6px;\n"])));
+var BusinessLogoStyled = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 50px;\n  height: 50px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  min-height: 50px;\n  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;\n  border-radius: 7.6px;\n"])));
 
-var BusinessName = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  line-height: 18px;\n  color: #344050;\n  font-weight: 600;\n  width: 100%;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n\n"])));
+var BusinessName = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  line-height: 18px;\n  color: #344050;\n  font-weight: 600;\n  width: 100%;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n\n"])));
 
 exports.BusinessName = BusinessName;
 
-var BusinessInfo = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  width: calc(100% - 60px);\n  margin-left: auto;\n  margin-top: 3px;\n"])));
+var BusinessInfo = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  width: calc(100% - 60px);\n  margin-left: auto;\n  margin-top: 3px;\n"])));
 
 exports.BusinessInfo = BusinessInfo;
 
-var BusinessMeta = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 5px;\n  width: 100%;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  p {\n    margin: 0;\n    font-size: 12px;\n    svg {\n      font-size: 8px;\n      margin: 0 3px;\n    }\n  }\n"])));
+var BusinessMeta = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 5px;\n  width: 100%;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  p {\n    margin: 0;\n    font-size: 12px;\n    svg {\n      font-size: 8px;\n      margin: 0 3px;\n    }\n  }\n"])));
 
 exports.BusinessMeta = BusinessMeta;
+
+var SearchTitle = _styledComponents.default.h1(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-weight: 600;\n  font-size: 24px;\n  margin-top: -5px;\n  margin-bottom: 15px;\n"])));
+
+exports.SearchTitle = SearchTitle;

@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperForm = exports.UserProfileContainer = exports.UserName = exports.UserInfomation = exports.UserInfo = exports.UserImage = exports.UserData = exports.UploadImageIcon = exports.Title = exports.SkeletonWrapper = exports.SideForm = exports.ShortLinks = exports.SavedPlaces = exports.RedireactLink = exports.ProfileImage = exports.ProfileContainer = exports.LinkItem = exports.LanguageSelectorWrapper = exports.ImageWrapper = exports.Image = exports.Divider = exports.Container = exports.Camera = void 0;
+exports.WrapperForm = exports.UserProfileContainer = exports.UserName = exports.UserInfomation = exports.UserInfo = exports.UserImage = exports.UserData = exports.UploadImageIcon = exports.Title = exports.SkeletonWrapper = exports.SideForm = exports.ShortLinks = exports.SavedPlaces = exports.RedireactLink = exports.ProfileImage = exports.ProfileContainer = exports.LogoutWrapper = exports.LinkItem = exports.LanguageSelectorWrapper = exports.ImageWrapper = exports.Image = exports.FooterMenuWrapper = exports.Divider = exports.Container = exports.Camera = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -71,7 +71,7 @@ var WrapperForm = _styledComponents.default.div(_templateObject13 || (_templateO
 
 exports.WrapperForm = WrapperForm;
 
-var ProfileContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px;\n  box-sizing: border-box;\n  min-height: 85vh;\n  position: relative;\n  @media(min-width: 1024px) {\n    padding: 40px;\n  }\n"])));
+var ProfileContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px;\n  box-sizing: border-box;\n  min-height: calc(100vh - 68px);\n  position: relative;\n\n  @media (min-width: 576px) {\n    min-height: 85vh;\n  }\n\n  @media(min-width: 1024px) {\n    padding: 40px;\n  }\n"])));
 
 exports.ProfileContainer = ProfileContainer;
 
@@ -123,6 +123,18 @@ var LinkItem = _styledComponents.default.a(_templateObject25 || (_templateObject
 
 exports.LinkItem = LinkItem;
 
-var LanguageSelectorWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  width: calc(100% - 40px);\n  position: absolute;\n  bottom: 15px;\n  left: 20px;\n  #select-input {\n    width: 100%;\n    height: auto;\n    background-color: transparent !important;\n    border: none;\n    border-radius: 0px;\n    #list {\n      width: 100%;\n      border-radius: 0px;\n      background-color: #fff;\n      border: none;\n      border-top: 1px solid #E9ECEF;\n      box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;\n      font-size: 13px;\n    }\n\n    @media(min-width: 768px) {\n      width: 25%;\n      margin-left: auto;\n      max-width: 185px;\n    }\n\n    @media(min-width: 1200px) {\n      margin-right: auto;\n      float: right;\n    }\n  }\n"])));
+var LanguageSelectorWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  svg {\n    font-size: 16px;\n    min-width: 16px;\n  }\n\n  #select-input {\n    width: 100%;\n    height: auto;\n    background-color: transparent !important;\n    border: none;\n    border-radius: 0px;\n    #list {\n      min-width: 150px;\n      left: 0;\n      max-height: 200px;\n      border-radius: 0px;\n      background-color: #fff;\n      border: none;\n      border-bottom: 1px solid #E9ECEF;\n      box-shadow: rgb(0 0 0 / 4%) 0px 3px 5px;\n      font-size: 13px;\n      bottom: 100%;\n      overflow: auto;\n\n      ", "\n    }\n\n    @media(min-width: 768px) {\n      width: 30%;\n      max-width: 185px;\n    }\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n        left: initial;\n        right: 0px;\n      "])));
+});
 
 exports.LanguageSelectorWrapper = LanguageSelectorWrapper;
+
+var LogoutWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  margin-top: 20px;\n\n  span {\n    font-weight: 500;\n    font-size: 14px;\n  }\n\n  svg {\n    font-size: 16px;\n    min-width: 16px;\n    margin-right: 9px;\n\n    ", "\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n      margin-right: initial;\n      margin-left: 9px;\n    "])));
+});
+
+exports.LogoutWrapper = LogoutWrapper;
+
+var FooterMenuWrapper = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  position: absolute;\n  left: 0;\n  bottom: 15px;\n  padding: 20px;\n"])));
+
+exports.FooterMenuWrapper = FooterMenuWrapper;
