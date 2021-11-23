@@ -3,12 +3,12 @@ import styled, { css } from 'styled-components'
 export const CategoriesWrap = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `
 
 export const CategoriesContainer = styled.div`
   display: flex;
   overflow-x: auto;
-  padding: 5px;
   padding-bottom: 0;
   background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
@@ -26,11 +26,6 @@ export const CategoriesContainer = styled.div`
       display: none;
     `}
   }
-
-  @media (min-width: 381px) {
-    padding: 15px;
-    padding-bottom: 0;
-  }
 `;
 
 export const CategoryTab = styled.div`
@@ -41,8 +36,17 @@ export const CategoryTab = styled.div`
   align-items: center;
   margin-left: ${props => props.categorySpace ?? 0}px;
   border-radius: 8px;
+  text-align: left;
+
+  span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 80%;
+  }
 
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.primaryContrast};
+    font-weight: bold;
   `}
 `
