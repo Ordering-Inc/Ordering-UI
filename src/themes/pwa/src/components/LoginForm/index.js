@@ -255,7 +255,7 @@ const LoginFormUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <LoginContainer isPopup={isPopup}>
         <FormSide isPopup={isPopup}>
-          <Title>{t('LOGIN', 'Login')}</Title>
+          <Title isPopup={isPopup}>{t('LOGIN', 'Login')}</Title>
           {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
