@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSession, useLanguage } from 'ordering-components'
+import { useSession, useLanguage, UserFormDetails as UserFormDetailsController } from 'ordering-components'
 import { AddressList } from '../AddressList'
 import { useTheme } from 'styled-components'
 import {
@@ -7,7 +7,7 @@ import {
   WrappNotAddresses
 } from './styles'
 
-export const MySavedPlaces = (props) => {
+const MySavedPlacesUI = (props) => {
   const [{ user }] = useSession()
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -25,4 +25,12 @@ export const MySavedPlaces = (props) => {
       )}
     </MySavedPlacesContainer>
   )
+}
+
+export const MySavedPlaces = (props) => {
+  const mySavedPlacesProps = {
+    ...props,
+    UIComponent: MySavedPlacesUI
+  }
+  return <UserFormDetailsController {...mySavedPlacesProps} />
 }

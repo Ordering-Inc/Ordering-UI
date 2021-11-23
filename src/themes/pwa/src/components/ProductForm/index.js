@@ -43,11 +43,7 @@ import {
   WrapperIngredients,
   ProductTabContainer,
   Divider,
-  ProductShareWrapper,
-  Hr,
-  CategoriesContainer,
-  ActionItem,
-  ProductActionButtons
+  ProductShareWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -157,32 +153,6 @@ const ProductOptionsUI = (props) => {
     }
   }, [tabValue])
 
-  const [selectedCategory, setSelectedCategory] = useState({
-    id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') // initial selected category all
-  })
-
-  const handlerClickCategory = (category) => {
-    setSelectedCategory(category)
-  }
-
-  const ProductOptionCategory = () => {
-    const _options = product.extras[0].options.filter(op => showOption(op))
-    const optionCategories = [{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, ..._options]
-    return (
-      optionCategories && optionCategories.length && optionCategories.map(category => (
-        <Tab
-          key={category.name}
-          className={`${!category.id ? 'category-all' : 'category'}`}
-          active={selectedCategory?.id === category.id}
-          onClick={() => handlerClickCategory(category)}
-          borderBottom
-        >
-          <span>{category.name}</span>
-        </Tab>
-      ))
-    )
-  }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -240,7 +210,6 @@ const ProductOptionsUI = (props) => {
                 {product?.price && (
                   <div className='price-wrapper'>
                     <span>{productCart.total && parsePrice(productCart.total)}</span>
-                    <span className='price-discount'>{parsePrice(product?.offer_price)}</span>
                   </div>
                 )}
                 {product?.description && <p>{product?.description}</p>}
@@ -251,363 +220,176 @@ const ProductOptionsUI = (props) => {
                   </SkuContent>
                 )}
               </ProductFormTitle>
-
-              {windowSize.width > 576 ? (
-                <>
-                  <Divider />
-                  <ProductEdition>
-                    <ProductTabContainer id='all'>
-                      <Tabs variant='primary'>
-                        <Tab
-                          key='all'
-                          active={tabValue === 'all'}
-                          onClick={() => handleChangeTabValue('all')}
-                          borderBottom
-                        >
-                          {t('ALL', 'All')}
-                        </Tab>
-                        <Tab
-                          key='ingredients'
-                          active={tabValue === 'ingredients'}
-                          onClick={() => handleChangeTabValue('ingredients')}
-                          borderBottom
-                        >
-                          {t('INGREDIENTS', 'ingredients')}
-                        </Tab>
-                        <Tab
-                          key='extra'
-                          active={tabValue === 'extra'}
-                          onClick={() => handleChangeTabValue('extra')}
-                          borderBottom
-                        >
-                          {t('EXTRA', 'Extra')}
-                        </Tab>
-                      </Tabs>
-                    </ProductTabContainer>
-                    <div id='ingredients'>
-                      {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
-                      <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
-                        {product?.ingredients.map(ingredient => (
-                          <ProductIngredient
-                            key={ingredient?.id}
-                            ingredient={ingredient}
-                            state={productCart.ingredients[`id:${ingredient?.id}`]}
-                            onChange={handleChangeIngredientState}
-                          />
-                        ))}
-                      </WrapperIngredients>
-                    </div>
-                    <div id='extra'>
-                      {
-                        product?.extras.map(extra => extra.options.map(option => {
-                          const currentState = productCart.options[`id:${option?.id}`] || {}
-                          return (
-                            <div key={option?.id}>
-                              {
-                                showOption(option) && (
-                                  <ProductOption
-                                    option={option}
-                                    currentState={currentState}
-                                    error={errors[`id:${option?.id}`]}
-                                  >
-                                    <WrapperSubOption className={isError(option?.id)}>
-                                      {
-                                        option.suboptions.map(suboption => {
-                                          const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
-                                          const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                          return suboption?.enabled ? (
-                                            <ProductOptionSubOption
-                                              key={suboption?.id}
-                                              onChange={handleChangeSuboptionState}
-                                              balance={balance}
-                                              option={option}
-                                              suboption={suboption}
-                                              state={currentState}
-                                            />
-                                          ) : null
-                                        })
-                                      }
-                                    </WrapperSubOption>
-                                  </ProductOption>
-                                )
-                              }
-                            </div>
-                          )
-                        }))
-                      }
-                    </div>
-
-                    <ProductComment>
-                      <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
-                      <TextArea
-                        rows={4}
-                        placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
-                        defaultValue={productCart.comment}
-                        onChange={handleChangeCommentState}
-                        disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+              <Divider />
+              <ProductEdition>
+                <ProductTabContainer id='all'>
+                  <Tabs variant='primary'>
+                    <Tab
+                      key='all'
+                      active={tabValue === 'all'}
+                      onClick={() => handleChangeTabValue('all')}
+                      borderBottom
+                    >
+                      {t('ALL', 'All')}
+                    </Tab>
+                    <Tab
+                      key='ingredients'
+                      active={tabValue === 'ingredients'}
+                      onClick={() => handleChangeTabValue('ingredients')}
+                      borderBottom
+                    >
+                      {t('INGREDIENTS', 'ingredients')}
+                    </Tab>
+                    <Tab
+                      key='extra'
+                      active={tabValue === 'extra'}
+                      onClick={() => handleChangeTabValue('extra')}
+                      borderBottom
+                    >
+                      {t('EXTRA', 'Extra')}
+                    </Tab>
+                  </Tabs>
+                </ProductTabContainer>
+                <div id='ingredients'>
+                  {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
+                  <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
+                    {product?.ingredients.map(ingredient => (
+                      <ProductIngredient
+                        key={ingredient?.id}
+                        ingredient={ingredient}
+                        state={productCart.ingredients[`id:${ingredient?.id}`]}
+                        onChange={handleChangeIngredientState}
                       />
-                    </ProductComment>
-                    {
-                      props.afterMidElements?.map((MidElement, i) => (
-                        <React.Fragment key={i}>
-                          {MidElement}
-                        </React.Fragment>))
-                    }
-                    {
-                      props.afterMidComponents?.map((MidComponent, i) => (
-                        <MidComponent key={i} {...props} />))
-                    }
-                  </ProductEdition>
-                  <ProductActions>
-                    <div className='price'>{productCart.total && parsePrice(productCart.total)}</div>
-                    {
-                      productCart && !isSoldOut && maxProductQuantity > 0 && (
-                        <div className='incdec-control'>
-                          <FiMinusCircle
-                            onClick={decrement}
-                            className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
-                          />
-                          <span>{productCart.quantity}</span>
-                          <FiPlusCircle
-                            onClick={increment}
-                            className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
-                          />
-                        </div>
-                      )
-                    }
-
-                    {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
-                      <Button
-                        className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
-                        color='primary'
-                        onClick={() => handleSaveProduct()}
-                        disabled={orderState.loading}
-                      >
-                        {orderState.loading ? (
-                          <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
-                        ) : (
-                          <span>
-                            {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD', theme?.defaultLanguages?.ADD || 'Add')}
-                          </span>
-                        )}
-                      </Button>
-                    )}
-
-                    {auth && !orderState.options?.address_id && (
-                      orderState.loading ? (
-                        <Button
-                          className='add'
-                          color='primary'
-                          disabled
-                        >
-                          {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
-                        </Button>
-                      ) : (
-                        <AddressList
-                          isModal
-                          userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-                          addressList={isNaN(userCustomer?.id) ? user.addresses : null}
-                          isProductForm
-                        />
-                      )
-                    )}
-
-                    {(!auth || isSoldOut || maxProductQuantity <= 0) && (
-                      <Button
-                        className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
-                        color='primary'
-                        outline
-                        disabled={isSoldOut || maxProductQuantity <= 0}
-                        onClick={() => setModalIsOpen(true)}
-                      >
-                        {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
-                      </Button>
-                    )}
-                  </ProductActions>
-                </>
-              ) : (
-                <>
-                  {product?.extras.length > 0 && (
-                    <Hr height={8} color='#FAFAFA' />
-                  )}
-                  {product?.extras.length > 0 && (
-                    <ProductEdition className='product-edtion'>
-                      <CategoriesContainer className='product-category-container'>
-                        <Tabs variant='primary' borderBottom>
-                          <ProductOptionCategory />
-                        </Tabs>
-                      </CategoriesContainer>
-                      {selectedCategory?.id ? (
-                        <div className='selecte-options'>
+                    ))}
+                  </WrapperIngredients>
+                </div>
+                <div id='extra'>
+                  {
+                    product?.extras.map(extra => extra.options.map(option => {
+                      const currentState = productCart.options[`id:${option?.id}`] || {}
+                      return (
+                        <div key={option?.id}>
                           {
-                            <ProductOption
-                              option={selectedCategory}
-                              error={errors[`id:${selectedCategory?.id}`]}
-                            >
-                              <WrapperSubOption className={isError(selectedCategory?.id)}>
-                                {
-                                  selectedCategory.suboptions.map(suboption => {
-                                    const currentState = productCart.options[`id:${selectedCategory?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
-                                    const balance = productCart.options[`id:${selectedCategory?.id}`]?.balance || 0
-                                    return suboption?.enabled ? (
-                                      <ProductOptionSubOption
-                                        key={suboption?.id}
-                                        onChange={handleChangeSuboptionState}
-                                        balance={balance}
-                                        option={selectedCategory}
-                                        suboption={suboption}
-                                        state={currentState}
-                                      />
-                                    ) : null
-                                  })
-                                }
-                              </WrapperSubOption>
-                            </ProductOption>
-                          }
-                        </div>
-                      ) : (
-                        <div className='all-options'>
-                          {
-                            product?.extras.map(extra => extra.options.map(option => {
-                              const currentState = productCart.options[`id:${option?.id}`] || {}
-                              return (
-                                <div key={option?.id}>
+                            showOption(option) && (
+                              <ProductOption
+                                option={option}
+                                currentState={currentState}
+                                error={errors[`id:${option?.id}`]}
+                              >
+                                <WrapperSubOption className={isError(option?.id)}>
                                   {
-                                    showOption(option) && (
-                                      <ProductOption
-                                        option={option}
-                                        currentState={currentState}
-                                        error={errors[`id:${option?.id}`]}
-                                      >
-                                        <WrapperSubOption className={isError(option?.id)}>
-                                          {
-                                            option.suboptions.map(suboption => {
-                                              const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
-                                              const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                              return suboption?.enabled ? (
-                                                <ProductOptionSubOption
-                                                  key={suboption?.id}
-                                                  onChange={handleChangeSuboptionState}
-                                                  balance={balance}
-                                                  option={option}
-                                                  suboption={suboption}
-                                                  state={currentState}
-                                                />
-                                              ) : null
-                                            })
-                                          }
-                                        </WrapperSubOption>
-                                      </ProductOption>
-                                    )
+                                    option.suboptions.map(suboption => {
+                                      const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                      const balance = productCart.options[`id:${option?.id}`]?.balance || 0
+                                      return suboption?.enabled ? (
+                                        <ProductOptionSubOption
+                                          key={suboption?.id}
+                                          onChange={handleChangeSuboptionState}
+                                          balance={balance}
+                                          option={option}
+                                          suboption={suboption}
+                                          state={currentState}
+                                        />
+                                      ) : null
+                                    })
                                   }
-                                </div>
-                              )
-                            }))
+                                </WrapperSubOption>
+                              </ProductOption>
+                            )
                           }
                         </div>
-                      )}
-                    </ProductEdition>
-                  )}
+                      )
+                    }))
+                  }
+                </div>
 
-                  <ProductActionButtons>
-                    <ActionItem>
-                      {productCart && (
-                        <span className='total-price'>{productCart.total && parsePrice(productCart.total)}</span>
-                      )}
-                    </ActionItem>
-                    <ActionItem>
-                      {
-                        productCart && !isSoldOut && maxProductQuantity > 0 && (
-                          <div className='incdec-control'>
-                            <FiMinusCircle
-                              onClick={decrement}
-                              className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
-                            />
-                            <span>{productCart.quantity}</span>
-                            <FiPlusCircle
-                              onClick={increment}
-                              className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
-                            />
-                          </div>
-                        )
-                      }
+                <ProductComment>
+                  <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
+                  <TextArea
+                    rows={4}
+                    placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
+                    defaultValue={productCart.comment}
+                    onChange={handleChangeCommentState}
+                    disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                  />
+                </ProductComment>
+                {
+                  props.afterMidElements?.map((MidElement, i) => (
+                    <React.Fragment key={i}>
+                      {MidElement}
+                    </React.Fragment>))
+                }
+                {
+                  props.afterMidComponents?.map((MidComponent, i) => (
+                    <MidComponent key={i} {...props} />))
+                }
+              </ProductEdition>
+              <ProductActions>
+                <div className='price'>{productCart.total && parsePrice(productCart.total)}</div>
+                {
+                  productCart && !isSoldOut && maxProductQuantity > 0 && (
+                    <div className='incdec-control'>
+                      <FiMinusCircle
+                        onClick={decrement}
+                        className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
+                      />
+                      <span>{productCart.quantity}</span>
+                      <FiPlusCircle
+                        onClick={increment}
+                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
+                      />
+                    </div>
+                  )
+                }
 
-                      {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
-                        <Button
-                          className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
-                          color='primary'
-                          onClick={() => handleSaveProduct()}
-                          disabled={orderState.loading}
-                        >
-                          {orderState.loading ? (
-                            <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
-                          ) : (
-                            <span>
-                              {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD_TO_CART', theme?.defaultLanguages?.ADD_TO_CART || 'Add to Cart')}
-                            </span>
-                          )}
+                {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
+                  <Button
+                    className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
+                    color='primary'
+                    onClick={() => handleSaveProduct()}
+                    disabled={orderState.loading}
+                  >
+                    {orderState.loading ? (
+                      <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
+                    ) : (
+                      <span>
+                        {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD', theme?.defaultLanguages?.ADD || 'Add')}
+                      </span>
+                    )}
+                  </Button>
+                )}
 
-                        </Button>
-                      )}
-
-                      {auth && !orderState.options?.address_id && (
-                        orderState.loading ? (
-                          <Button
-                            className='add'
-                            color='primary'
-                            disabled
-                          >
-                            {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
-                          </Button>
-                        ) : (
-                          <AddressList
-                            isModal
-                            userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-                            addressList={isNaN(userCustomer?.id) ? user.addresses : null}
-                            isProductForm
-                          />
-                        )
-                      )}
-
-                      {(!auth || isSoldOut || maxProductQuantity <= 0) && (
-                        <Button
-                          className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
-                          color='primary'
-                          disabled={isSoldOut || maxProductQuantity <= 0}
-                          onClick={() => setModalIsOpen(true)}
-                        >
-                          {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
-                        </Button>
-                      )}
-                    </ActionItem>
-                  </ProductActionButtons>
-
-                  {product?.ingredients.length > 0 && (
-                    <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
-                      <SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>
-                      {product?.ingredients.map(ingredient => (
-                        <ProductIngredient
-                          key={ingredient?.id}
-                          ingredient={ingredient}
-                          state={productCart.ingredients[`id:${ingredient?.id}`]}
-                          onChange={handleChangeIngredientState}
-                        />
-                      ))}
-                    </WrapperIngredients>
-                  )}
-
-                  <ProductComment>
-                    <SectionTitle>{t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}</SectionTitle>
-                    <TextArea
-                      rows={4}
-                      placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
-                      defaultValue={productCart.comment}
-                      onChange={handleChangeCommentState}
-                      disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                {auth && !orderState.options?.address_id && (
+                  orderState.loading ? (
+                    <Button
+                      className='add'
+                      color='primary'
+                      disabled
+                    >
+                      {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
+                    </Button>
+                  ) : (
+                    <AddressList
+                      isModal
+                      userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+                      addressList={isNaN(userCustomer?.id) ? user.addresses : null}
+                      isProductForm
                     />
-                  </ProductComment>
-                </>
-              )}
+                  )
+                )}
+
+                {(!auth || isSoldOut || maxProductQuantity <= 0) && (
+                  <Button
+                    className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
+                    color='primary'
+                    outline
+                    disabled={isSoldOut || maxProductQuantity <= 0}
+                    onClick={() => setModalIsOpen(true)}
+                  >
+                    {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
+                  </Button>
+                )}
+              </ProductActions>
             </ProductInfo>
           </>
         )}
