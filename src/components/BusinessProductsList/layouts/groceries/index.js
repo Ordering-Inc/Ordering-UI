@@ -3,7 +3,7 @@ import { ProductsList, useLanguage, useConfig } from 'ordering-components'
 
 import { Button } from '../../../../styles/Buttons'
 import { SingleProductCard } from '../../../SingleProductCard'
-import { NotFoundSource } from '../../../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../../../NotFoundSource'
 
 import {
   ProductsContainer,
@@ -16,6 +16,7 @@ import {
 const BusinessProductsListUI = (props) => {
   const {
     errors,
+    business,
     businessId,
     category,
     categories,
@@ -70,7 +71,7 @@ const BusinessProductsListUI = (props) => {
             ? categoriesState?.featured?.products?.some(product => product.featured) ? categoriesState?.featured?.products : []
             : categoryState?.products?.filter(product => product.featured) ?? []
           return (
-            <WrapAllCategories key={category?.id}>
+            <WrapAllCategories>
               <div className='wrap-header'>
                 <div className='category-title'>
                   <h3>{t('FEATURED', 'Featured')}</h3>

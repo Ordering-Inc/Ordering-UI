@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessesMap as BusinessesMapController, GoogleMapsMap, useConfig, useOrder } from 'ordering-components'
+import { BusinessesMap as BusinessesMapController, useConfig, useOrder, GoogleMapsMap } from 'ordering-components'
 import { WrapperMap } from './styles'
 
 const BusinessesMapUI = (props) => {
@@ -44,6 +44,7 @@ const BusinessesMapUI = (props) => {
           businessMap
           onBusinessClick={onBusinessClick}
           setErrors={setErrors}
+          isFranchise
         />
       </WrapperMap>
       {props.afterComponents?.map((AfterComponent, i) => (

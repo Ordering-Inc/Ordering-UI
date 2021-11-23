@@ -66,4 +66,11 @@ export const OrderInfoBlock = styled.div`
     color: #FFFFFF;
     margin: 0;
   }
+
+  &:hover {
+    h4, p {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 `

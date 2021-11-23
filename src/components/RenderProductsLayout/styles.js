@@ -1,19 +1,20 @@
 import styled, { css } from 'styled-components'
 
-export const ProductsContainer = styled.div`
-  width: 100%;
-  @media (min-width: 576px) {
-    width: 95%;
-    margin: 20px auto 0px;
-  }
+export const Title = styled.h1`
+  font-weight: 600;
+  font-size: 20px;
+  color: ${props => props.theme.colors.darkTextColor};
+  margin-bottom: 18px;
 `
 
+export const WrappLayout = styled.div``
+
 export const WrapContent = styled.div`
-  padding: 15px;
+  padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
 
-  @media (min-width: 768px) {
-    padding: 5px;
+  @media (min-width: 381px) {
+    padding: 15px;
   }
 
   @media (min-width: 1200px) {
@@ -21,52 +22,10 @@ export const WrapContent = styled.div`
   }
 `
 
-export const ProductsNotFound = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  height: calc(100vh - 45px);
-  margin: auto;
-
-  h1 {
-    font-size: 20px;
-    opacity: 0.5;
-    text-align: center;
-  }
-
-  @media (min-width: 411px) {
-    h1 {
-      font-size: 24px;
-    }
-  }
-`
-
-export const ProductLoading = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`
-
-export const SkeletonItem = styled.div`
-  width: 80%;
-  margin: 30px auto;
-
-  span {
-    margin-bottom: 10px;
-  }
-`
-
-export const WrappLayout = styled.div``
-
 export const BusinessContent = styled.div`
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
-
-  @media (min-width: 768px) {
-    margin-top: 30px;
-  }
 
   @media (min-width: 1200px) {
     flex-direction: row;
@@ -92,23 +51,8 @@ export const BusinessCategoryProductWrapper = styled.div`
   }
 `
 
-export const BusinessCartContainer = styled.div`
-  margin: 0 25px 25px;
-
-  > div {
-    display: none;
-  }
-
-  @media (min-width: 500px) {
-    > div {
-      display: block;
-    }
-  }
-
-  @media (min-width: 768px) {
-    margin: 0;
-  }
-
+export const BusinessCategoriesContainer = styled.div`
+  margin: 0;
   @media (min-width: 1200px) {
     width: calc(31% - 25px);
     margin-left: 25px;
@@ -120,21 +64,31 @@ export const BusinessCartContainer = styled.div`
   }
 `
 
+export const BusinessCartContainer = styled(BusinessCategoriesContainer)`
+  display: none;
+
+  @media (min-width: 500px) {
+    display: block;
+  }
+`
+
 export const BusinessCartContent = styled.div`
   background: white;
-  padding: 20px;
+  padding: 30px;
   position: relative;
-  padding-bottom: 75px;
 
   .product.accordion {
     margin: 0;
+  }
+
+  .accordion.active {
+    padding: 10px 0;
   }
 
   ${({ isModal }) => !isModal && css`
     border: 1px solid #E9ECEF;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 7.6px;
-    padding-bottom: 20px;
   `}
 
   @media (min-width: 1200px) {
@@ -191,13 +145,6 @@ export const EmptyBtnWrapper = styled.div`
   }
 `
 
-export const Title = styled.h1`
-  font-weight: 600;
-  font-size: 20px;
-  color: ${props => props.theme.colors.darkTextColor};
-  margin-bottom: 18px;
-`
-
 export const MobileCartViewWrapper = styled.div`
   position: fixed;
   width: 100vw;
@@ -220,5 +167,28 @@ export const MobileCartViewWrapper = styled.div`
   button {
     height: 44px;
     border-radius: 7.6px;
+  }
+`
+
+export const WrapperSearch = styled.div`
+  margin: 15px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .search-bar {
+    margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
+  }
+
+  div:last-child {
+    text-align: right;
+
+    ${props => props.theme?.rtl && css`
+      text-align: left;
+    `}
   }
 `

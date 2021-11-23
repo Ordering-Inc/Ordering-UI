@@ -49,6 +49,7 @@ export const ContentWrapper = styled.div`
     justify-content: space-around;
     height: 100%;
     padding: 0px 10vw 0px;
+    background-color: #0000004D;
 
     input {
       width: 90%;

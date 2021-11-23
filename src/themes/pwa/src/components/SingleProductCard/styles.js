@@ -42,15 +42,16 @@ export const CardContainer = styled.div`
 export const SoldOut = styled.span`
   font-weight: bold;
   position: absolute;
-  background: #D6D6D6 0% 0% no-repeat padding-box;
-  border-radius: 23px;
+  background: #495057 0% 0% no-repeat padding-box;
   padding: 5px 10px;
-  top: 8px;
-  right: 6px;
-  text-transform: uppercase;
-  font-size: 14px;
+  top: 5px;
+  border-radius: 3px 0px 0px 3px;
+  right: 0px;
+  text-transform: capitalize;
+  color: white;
+  font-size: 12px;
   ${props => props.theme?.rtl && css`
-    left: 6px;
+    left: 0px;
     right: initial;
   `}
 `

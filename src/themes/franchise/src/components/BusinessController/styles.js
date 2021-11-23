@@ -51,6 +51,7 @@ export const CallCenterInformationBullet = styled.div`
   background: ${({ bgcolor }) => bgcolor};
   width: 50px;
   color: #fff;
+
   svg{
     font-size: 18px;
   }
@@ -72,11 +73,36 @@ export const BranchTitle = styled.h2`
 export const BranchContent = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+
+  @media (min-width: 470px) {
+    flex-direction: row;
+  }
+
+  @media (min-width: 850px) {
+    flex-direction: column;
+  }
+
+  @media (min-width: 1000px) {
+    flex-direction: row;
+  }
 `
 
 export const BranchInfoBlock = styled.div`
   margin-bottom: 20px;
+  max-width: 250px;
+  box-sizing: border-box;
+
+  padding-right: 15px;
+  ${props => props.theme.rtl && css`
+    padding-left: 15px;
+    padding-right: 0px;
+  `}
+
+  @media (min-width: 1300px) {
+    max-width: 70%;
+  }
+
   p {
     font-size: 14px;
     color: ${props => props.theme?.colors.darkGray};
