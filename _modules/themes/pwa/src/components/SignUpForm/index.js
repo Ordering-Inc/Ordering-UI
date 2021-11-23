@@ -330,7 +330,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SIGN_UP', 'Sign up')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Title, {
+    isPopup: isPopup
+  }, t('SIGN_UP', 'Sign up')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: formMethods.handleSubmit(onSubmit),

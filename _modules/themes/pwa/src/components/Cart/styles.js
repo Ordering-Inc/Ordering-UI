@@ -9,7 +9,7 @@ exports.UpsellingPageTitleWrapper = exports.OrderBill = exports.Divider = export
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -44,29 +44,32 @@ var CouponContainer = _styledComponents.default.div(_templateObject6 || (_templa
 
 exports.CouponContainer = CouponContainer;
 
-var CheckoutAction = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  padding: 0;\n  box-sizing: border-box;\n\n  p {\n    margin: 0;\n    font-weight: 600;\n    font-size: 16px;\n    color: ", ";\n  }\n\n  button {\n    padding: 10px 30px;\n    width: 100%;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n    @media (min-width: 576px) {\n      width: 50%;\n    }\n  }\n"])), function (props) {
+var CheckoutAction = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  padding: 0;\n  box-sizing: border-box;\n\n  p {\n    margin: 0;\n    font-weight: 600;\n    font-size: 16px;\n    color: ", ";\n  }\n\n  button {\n    padding: 10px 30px;\n    width: 100%;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n    @media (min-width: 576px) {\n      width: 50%;\n    }\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.darkTextColor;
+}, function (_ref2) {
+  var isFixed = _ref2.isFixed;
+  return isFixed && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    box-sizing: border-box;\n    padding: 10px 15px;\n    background: white;\n    z-index: 10;\n    margin: 0;\n  "])));
 });
 
 exports.CheckoutAction = CheckoutAction;
 
-var Divider = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: none;\n  background: #F8F9FA;  \n  height: 8px;\n  width: calc(100% + 20px);\n  margin-left: -10px;\n\n  @media (min-width: 768px) {\n    display: block;\n    width: calc(100% + 60px);\n    margin-left: -30px;\n  }\n"])));
+var Divider = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: none;\n  background: #F8F9FA;  \n  height: 8px;\n  width: calc(100% + 20px);\n  margin-left: -10px;\n\n  @media (min-width: 768px) {\n    display: block;\n    width: calc(100% + 60px);\n    margin-left: -30px;\n  }\n"])));
 
 exports.Divider = Divider;
 
-var UpsellingPageTitleWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  p {\n    font-weight: 500;\n    font-size: 16px;\n    color: ", ";\n    white-space: nowrap;\n  }\n\n  svg {\n    font-size: 20px;\n    cursor: pointer;\n    color: #748194;\n    margin-left: 30px;\n\n    ", "\n  }\n"])), function (props) {
+var UpsellingPageTitleWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  p {\n    font-weight: 500;\n    font-size: 16px;\n    color: ", ";\n    white-space: nowrap;\n  }\n\n  svg {\n    font-size: 20px;\n    cursor: pointer;\n    color: #748194;\n    margin-left: 30px;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.darkTextColor;
 }, function (props) {
   var _props$theme3;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin-right: 30px;\n      margin-left: 0px;\n    "])));
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      margin-right: 30px;\n      margin-left: 0px;\n    "])));
 });
 
 exports.UpsellingPageTitleWrapper = UpsellingPageTitleWrapper;
 
-var CouponQuestion = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 100%;\n  p {\n    font-size: 14px;\n    line-height: 24px;\n    margin-bottom: 0px;\n  }\n\n  span {\n    margin: 0 10px;\n    cursor: pointer;\n    color: ", ";\n  }\n"])), function (props) {
+var CouponQuestion = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  p {\n    font-size: 14px;\n    line-height: 24px;\n    margin-bottom: 0px;\n  }\n\n  span {\n    margin: 0 10px;\n    cursor: pointer;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

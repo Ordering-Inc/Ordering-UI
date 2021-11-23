@@ -13,7 +13,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _FaStar = _interopRequireDefault(require("@meronex/icons/fa/FaStar"));
 
-var _BsExclamationCircle = _interopRequireDefault(require("@meronex/icons/bs/BsExclamationCircle"));
+var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCircle"));
 
 var _styledComponents = require("styled-components");
 
@@ -213,7 +213,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 70,
     width: 70
-  }))), !loading && /*#__PURE__*/_react.default.createElement(_styles.BusinessMoreDetail, null, /*#__PURE__*/_react.default.createElement(_BsExclamationCircle.default, {
+  }))), !loading && /*#__PURE__*/_react.default.createElement(_styles.BusinessMoreDetail, null, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
     className: "popup",
     onClick: function onClick() {
       return openBusineesInfomation();

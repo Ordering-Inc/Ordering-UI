@@ -9,7 +9,7 @@ exports.WrapAutoScroll = exports.UpsellingContainer = exports.SkeletonContainer 
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -51,13 +51,13 @@ var HorizontalUpsellingContainer = _styledComponents.default.div(_templateObject
 
 exports.HorizontalUpsellingContainer = HorizontalUpsellingContainer;
 
-var HorizontalItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  border-radius: 7.6px;\n  margin-right: 15px;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  padding: 10px;\n\n  ", "\n"])), function (props) {
+var HorizontalItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  border-radius: 7.6px;\n  margin-right: 15px;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  padding: 10px;\n  min-width: 232px;\n\n  ", "\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n    margin-right: 0px;\n  "])));
 });
 
 exports.HorizontalItem = HorizontalItem;
 
-var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  img {\n    border-radius: 7.6px;\n    min-width: 73px;\n    min-height: 73px;\n    margin-left: 10px;\n\n    ", "\n\n  }\n"])), function (props) {
+var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  img {\n    border-radius: 7.6px;\n    min-width: 73px;\n    min-height: 73px;\n    margin-left: 10px;\n    width: 92px;\n    height: 92px;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
@@ -65,26 +65,30 @@ var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templ
 
 exports.HorizontalImage = HorizontalImage;
 
-var HorizontalDetails = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  min-width: 100px;\n  h3 {\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    margin: 0 0 5px 0;\n  }\n\n  span {\n    font-size: 12px;\n    color: ", ";\n\n    &.discount {\n      font-size: 10px;\n      color: #909BA9;\n      ", "\n    }\n  }\n\n  button {\n    margin-top: 6px;\n    border-radius: 50px;\n    color: ", ";\n    background: ", "\n  }\n"])), function (props) {
+var HorizontalDetails = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  min-width: 100px;\n  h3 {\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    margin: 0;\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    font-size: 12px;\n    color: ", ";\n  }\n\n  button {\n    margin-top: 6px;\n    border-radius: 50px;\n    border: none;\n    color: ", ";\n    background: ", ";\n    font-size: 13px;\n\n    &:hover {\n      color: ", ";\n      background: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   var _props$theme2;
 
-  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n        margin-right: 5px;\n      "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n        margin-left: 5px;\n      "])));
+  return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.primary;
 }, function (props) {
   var _props$theme3;
 
-  return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.primary;
+  return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.primaryContrast;
 }, function (props) {
   var _props$theme4;
 
   return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.colors.primaryContrast;
+}, function (props) {
+  var _props$theme5;
+
+  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.colors.primary;
 });
 
 exports.HorizontalDetails = HorizontalDetails;
 
-var WrapAutoScroll = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  width: 100%;\n  overflow-x: auto;\n  display: flex;\n"])));
+var WrapAutoScroll = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  width: 100%;\n  overflow-x: auto;\n  display: flex;\n"])));
 
 exports.WrapAutoScroll = WrapAutoScroll;

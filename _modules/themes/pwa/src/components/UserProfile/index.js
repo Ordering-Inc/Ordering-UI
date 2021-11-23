@@ -19,7 +19,11 @@ var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
 
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
+var _GrLogout = _interopRequireDefault(require("@meronex/icons/gr/GrLogout"));
+
 var _orderingComponents = require("ordering-components");
+
+var _IosGlobe = _interopRequireDefault(require("@meronex/icons/ios/IosGlobe"));
 
 var _UserFormDetails = require("../UserFormDetails");
 
@@ -206,9 +210,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     onClick: function onClick() {
       return handleHelpRedirect();
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(LifePre, null)), t('SAVED_ADDRESS', 'Help')), /*#__PURE__*/_react.default.createElement(_styles.LinkItem, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(Bell, null)), t('SAVED_ADDRESS', 'Notifications')), /*#__PURE__*/_react.default.createElement(_styles.LinkItem, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(Reward, null)), t('SAVED_ADDRESS', 'Rewards'))), /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(LifePre, null)), t('SAVED_ADDRESS', 'Help')), /*#__PURE__*/_react.default.createElement(_styles.LinkItem, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(Bell, null)), t('SAVED_ADDRESS', 'Notifications')), /*#__PURE__*/_react.default.createElement(_styles.LinkItem, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(Reward, null)), t('SAVED_ADDRESS', 'Rewards'))), /*#__PURE__*/_react.default.createElement(_styles.FooterMenuWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_IosGlobe.default, null), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, {
     isLanguageFullName: isLanguageFullName
-  }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, null))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return setModalIsOpen(false);
@@ -385,3 +389,45 @@ var Reward = function Reward() {
 };
 
 exports.Reward = Reward;
+
+var LogoutActionUI = function LogoutActionUI(props) {
+  var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
+
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 2),
+      deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+
+  var handleClick = function handleClick() {
+    var _window, _window$gapi, _window$gapi$auth;
+
+    var GoogleAuth = (_window = window) === null || _window === void 0 ? void 0 : (_window$gapi = _window.gapi) === null || _window$gapi === void 0 ? void 0 : (_window$gapi$auth = _window$gapi.auth2) === null || _window$gapi$auth === void 0 ? void 0 : _window$gapi$auth.getAuthInstance();
+
+    if (GoogleAuth) {
+      var signedIn = GoogleAuth.isSignedIn.get();
+
+      if (signedIn) {
+        GoogleAuth.signOut().then(function () {
+          GoogleAuth.disconnect();
+        });
+      }
+    }
+
+    deleteUserCustomer(true);
+    props.handleLogoutClick();
+    props.onClose && props.onClose();
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_styles.LogoutWrapper, {
+    onClick: handleClick
+  }, /*#__PURE__*/_react.default.createElement(_GrLogout.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('LOGOUT', 'Logout')));
+};
+
+var PopoverListItemLogout = function PopoverListItemLogout(props) {
+  var logoutActionProps = {
+    UIComponent: LogoutActionUI,
+    onClose: props.onClose
+  };
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.LogoutAction, logoutActionProps);
+};
