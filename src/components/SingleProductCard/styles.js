@@ -157,3 +157,24 @@ export const QuantityContainer = styled.div`
   border-radius: 50%;
   transform: translate(-50%, 50%);
 `
+
+export const PriceWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  .off-price {
+    font-size: 10px;
+    color: #909BA9;
+    margin-left: 5px;
+    text-decoration: line-through;
+
+    ${props => props.theme.rtl && css`
+      margin-right: 5px;
+      margin-left: 0;
+    `}
+
+    @media (min-width: 1024px) {
+      font-size: 13px;
+    }
+  }
+`
