@@ -169,3 +169,26 @@ export const MobileCartViewWrapper = styled.div`
     border-radius: 7.6px;
   }
 `
+
+export const WrapperSearch = styled.div`
+  margin: 15px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .search-bar {
+    margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
+  }
+
+  div:last-child {
+    text-align: right;
+
+    ${props => props.theme?.rtl && css`
+      text-align: left;
+    `}
+  }
+`
