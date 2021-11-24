@@ -7,8 +7,7 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession,
-  useApi
+  useSession
 } from 'ordering-components'
 import {
   ProductsContainer,
@@ -63,10 +62,9 @@ const BusinessProductsListingUI = (props) => {
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [ordering] = useApi()
   const [{ carts }] = useOrder()
   const [events] = useEvent()
-  const [{ user, token }] = useSession()
+  const [{ user }] = useSession()
   const location = useLocation()
   const [openProduct, setModalIsOpen] = useState(false)
   const [openAgeConfirm, setOpenAgeConfirm] = useState(false)
@@ -88,26 +86,17 @@ const BusinessProductsListingUI = (props) => {
     setOpenBusinessInformation(true)
   }
 
-  const getHaveMetaBreakFast = async (_businessId, _categoryId, _productId) => {
-    const response = await fetch(`${ordering.root}/business/${_businessId}/categories/${_categoryId}/products/${_productId}/metafields`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
-    const { result, error } = await response.json()
-    const existIndex = result.findIndex((c) => c.key === 'breakfast')
-    if (!error && existIndex > -1) {
-      return true
-    } else {
-      return false
-    }
-  }
-
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
     return `${checkTime(hour)}:${checkTime(minute)}`
+  }
+
+  const checkIsHaveBreakFast = (product) => {
+    const existIndex = Object.keys(product).findIndex((name) => name === 'breakfast')
+    if (existIndex > -1) {
+      return true
+    }
+    return false
   }
 
   const onProductClick = (product) => {
@@ -120,12 +109,9 @@ const BusinessProductsListingUI = (props) => {
     }
     if (breakFastCategories.indexOf(_categoryName) > -1) {
       const hour = new Date().getHours()
-      const _businessId = product.category?.business_id
-      const _categoryId = product.category?.id
-      const _productId = product?.id
       const businessOpenTime = scheduleFormatted(business.today.lapses[0].open)
-      const _isHave = getHaveMetaBreakFast(_businessId, _categoryId, _productId)
-      if (_isHave && hour < 12) {
+      const _isHaveBreakFastMeta = checkIsHaveBreakFast(product)
+      if (_isHaveBreakFastMeta && hour < 12) {
         setBusinessOpentime(businessOpenTime)
         setIsNestBreackFast(true)
         return
