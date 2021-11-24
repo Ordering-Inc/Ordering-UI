@@ -210,7 +210,11 @@ export const BreackFastCheckModalContent = styled.div`
 export const AgreeButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 10px;
   button {
+    text-transform: uppercase;
+    padding: 3px;
     font-size: 14px;
+    width: 100px;
   }
 `
