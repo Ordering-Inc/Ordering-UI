@@ -76,9 +76,12 @@ export const BusinessHeroImgStyled = styled.div`
     object-fit: cover;
     background-position: center;
   `}
+  @media (min-width: 450px) {
+    height: 370px;
+  }
 
   @media (min-width: 821px) {
-    height: 700px;
+    height: 650px;
   }
 `
 
