@@ -76,6 +76,7 @@ export const BusinessCartContent = styled.div`
   background: white;
   padding: 30px;
   position: relative;
+  margin-bottom: 30px;
 
   .product.accordion {
     margin: 0;
