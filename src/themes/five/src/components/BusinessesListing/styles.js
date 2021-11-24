@@ -68,7 +68,7 @@ export const BusinessesTitle = styled.h1`
 export const BusinessHeroImgStyled = styled.div`
   margin-bottom: 30px;
   width: 100%;
-  height: 370px;
+  height: 230px;
 
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
@@ -78,7 +78,7 @@ export const BusinessHeroImgStyled = styled.div`
   `}
 
   @media (min-width: 821px) {
-    height: 500px;
+    height: 700px;
   }
 `
 
