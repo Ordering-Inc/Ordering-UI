@@ -5,6 +5,8 @@ export const SignUpContainer = styled.div`
   height: 100%;
   display: flex;
   min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 65px)'};
+  padding: 0 6px;
+  box-sizing: border-box;
 
   flex-direction: column;
 
@@ -32,7 +34,7 @@ export const FormSide = styled(Side)`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   display: flex;
   flex-direction: column;
 
@@ -85,7 +87,7 @@ export const RedirectLink = styled.div`
     width: calc(95% - 20px);
 
     @media (min-width: 481px) {
-      width: ${({ isPopup }) => isPopup ? 'calc(95% - 20px)' : 'calc(80% - 20px)'};
+      width: ${({ isPopup }) => isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)'};
     }
   `}
 
@@ -110,7 +112,7 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
 
   button {
     width: 100%;
@@ -144,7 +146,7 @@ export const SkeletonWrapper = styled.div`
 `
 
 export const SkeletonSocialWrapper = styled(SkeletonWrapper)`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   span{
     margin-top: 0;
   }
@@ -232,6 +234,7 @@ export const InputBeforeIcon = styled.div`
     color: #B1BCCC;
   }
 `
+
 export const TermsConditionWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -262,6 +265,29 @@ export const TermsConditionWrapper = styled.div`
   @media (min-width: 768px) {
     > label {
       font-size: 16px;
+    }
+  }
+`
+
+export const BussinessAndDriverSignUp = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 95%;
+
+  @media (min-width: 993px) {
+    flex-direction: row;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 5px;
+
+    @media (min-width: 993px) {
+      width: 48%;
     }
   }
 `
