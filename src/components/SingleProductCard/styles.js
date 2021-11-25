@@ -22,7 +22,7 @@ export const CardContainer = styled.div`
     box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
   `}
 
-  ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
+  ${({ isCartOnProductsList, isLayoutOne }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {
       width: calc(50% - 40px);
     }
@@ -31,9 +31,15 @@ export const CardContainer = styled.div`
       width: calc(50% - 40px);
     }
 
-    @media (min-width: 993px) {
-      width: calc(33% - 40px);
-    }
+    ${isLayoutOne ? css`
+      @media (min-width: 1025px) {
+        width: calc(33% - 40px);
+      }
+    ` : css`
+      @media (min-width: 993px) {
+        width: calc(33% - 40px);
+      }
+    `}
   `}
 `
 
@@ -156,4 +162,25 @@ export const QuantityContainer = styled.div`
   text-align: center;
   border-radius: 50%;
   transform: translate(-50%, 50%);
+`
+
+export const PriceWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  .off-price {
+    font-size: 10px;
+    color: #909BA9;
+    margin-left: 5px;
+    text-decoration: line-through;
+
+    ${props => props.theme.rtl && css`
+      margin-right: 5px;
+      margin-left: 0;
+    `}
+
+    @media (min-width: 1024px) {
+      font-size: 13px;
+    }
+  }
 `

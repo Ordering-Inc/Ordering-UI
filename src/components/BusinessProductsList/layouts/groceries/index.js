@@ -3,7 +3,7 @@ import { ProductsList, useLanguage, useConfig } from 'ordering-components'
 
 import { Button } from '../../../../styles/Buttons'
 import { SingleProductCard } from '../../../SingleProductCard'
-import { NotFoundSource } from '../../../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../../../NotFoundSource'
 
 import {
   ProductsContainer,
@@ -16,6 +16,7 @@ import {
 const BusinessProductsListUI = (props) => {
   const {
     errors,
+    business,
     businessId,
     category,
     categories,
@@ -28,7 +29,8 @@ const BusinessProductsListUI = (props) => {
     handleClearSearch,
     errorQuantityProducts,
     categoriesState,
-    onClickCategory
+    onClickCategory,
+    currentCart
   } = props
 
   const [, t] = useLanguage()
@@ -52,11 +54,13 @@ const BusinessProductsListUI = (props) => {
               categoryState?.products?.map(product => (
                 <SingleProductCard
                   key={product?.id}
+                  isLayoutOne
                   isSoldOut={(product?.inventoried && !product?.quantity)}
                   product={product}
                   businessId={businessId}
                   onProductClick={onProductClick}
                   isCartOnProductsList={isCartOnProductsList}
+                  productAddedToCart={currentCart?.products?.find(Cproduct => Cproduct.id === product.id)}
                 />
               ))
             }
@@ -70,7 +74,7 @@ const BusinessProductsListUI = (props) => {
             ? categoriesState?.featured?.products?.some(product => product.featured) ? categoriesState?.featured?.products : []
             : categoryState?.products?.filter(product => product.featured) ?? []
           return (
-            <WrapAllCategories key={category?.id}>
+            featProducts?.length > 0 && <WrapAllCategories key={category?.id}>
               <div className='wrap-header'>
                 <div className='category-title'>
                   <h3>{t('FEATURED', 'Featured')}</h3>
@@ -85,11 +89,13 @@ const BusinessProductsListUI = (props) => {
                 {featProducts?.map(product => product.featured && (
                   <SingleProductCard
                     key={product?.id}
+                    isLayoutOne
                     isSoldOut={(product?.inventoried && !product?.quantity)}
                     product={product}
                     businessId={businessId}
                     onProductClick={onProductClick}
                     isCartOnProductsList={isCartOnProductsList}
+                    productAddedToCart={currentCart?.products?.find(Cproduct => Cproduct.id === product.id)}
                   />
                 ))}
                 {!categoryState?.loading && featProducts?.length && (
@@ -140,11 +146,13 @@ const BusinessProductsListUI = (props) => {
                         products.map(product => (
                           <SingleProductCard
                             key={product?.id}
+                            isLayoutOne
                             isSoldOut={product?.inventoried && !product?.quantity}
                             businessId={businessId}
                             product={product}
                             onProductClick={onProductClick}
                             isCartOnProductsList={isCartOnProductsList}
+                            productAddedToCart={currentCart?.products?.find(Cproduct => Cproduct.id === product.id)}
                           />
                         ))
                       }
