@@ -13,19 +13,13 @@ var _styledComponents = require("styled-components");
 
 var _orderingComponents = require("ordering-components");
 
-var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
-
 var _styles = require("./styles");
 
 var _Modal = require("../Modal");
 
-var _Buttons = require("../../styles/Buttons");
-
 var _AddressForm = require("../../components/AddressForm");
 
 var _AddressList = require("../../components/AddressList");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -52,13 +46,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options2, _orderState$options2$, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _orderState$options3, _theme$defaultLanguag6, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$defaultLanguag, _orderState$options2, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
 
   var onFindBusiness = props.onFindBusiness;
-
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -96,18 +86,6 @@ var HomeHero = function HomeHero(props) {
     onFindBusiness && onFindBusiness();
   };
 
-  var handleAddressInput = function handleAddressInput() {
-    if (auth) {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: true
-      }));
-    } else {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: true
-      }));
-    }
-  };
-
   (0, _react.useEffect)(function () {
     return function () {
       return setModals({
@@ -126,15 +104,8 @@ var HomeHero = function HomeHero(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
-    onClick: handleAddressInput,
-    withIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('TYPE_AN_ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.TYPE_AN_ADDRESS) || 'Type an address'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    name: "find-business",
-    onClick: handleFindBusinesses
-  }, t('FIND_BUSINESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.FIND_BUSINESSES) || 'Find businesses'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'),
+  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'),
     open: modals.formOpen,
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -143,7 +114,7 @@ var HomeHero = function HomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
@@ -160,7 +131,7 @@ var HomeHero = function HomeHero(props) {
       }));
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'),
+    title: t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'),
     open: modals.listOpen,
     width: "70%",
     onClose: function onClose() {

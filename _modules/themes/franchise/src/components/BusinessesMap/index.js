@@ -39,7 +39,8 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
   var userLocation = props.userLocation,
       businessLocations = props.businessLocations,
       onBusinessClick = props.onBusinessClick,
-      setErrors = props.setErrors;
+      setErrors = props.setErrors,
+      setIsBusinessNear = props.setIsBusinessNear;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -81,7 +82,7 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
     businessMap: true,
     onBusinessClick: onBusinessClick,
     setErrors: setErrors,
-    isFranchise: true
+    setIsBusinessNear: setIsBusinessNear
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
