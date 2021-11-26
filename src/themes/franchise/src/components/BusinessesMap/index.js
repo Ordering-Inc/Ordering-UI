@@ -7,7 +7,8 @@ const BusinessesMapUI = (props) => {
     userLocation,
     businessLocations,
     onBusinessClick,
-    setErrors
+    setErrors,
+    setIsBusinessNear
   } = props
 
   const [configState] = useConfig()
@@ -44,7 +45,7 @@ const BusinessesMapUI = (props) => {
           businessMap
           onBusinessClick={onBusinessClick}
           setErrors={setErrors}
-          isFranchise
+          setIsBusinessNear={setIsBusinessNear}
         />
       </WrapperMap>
       {props.afterComponents?.map((AfterComponent, i) => (
