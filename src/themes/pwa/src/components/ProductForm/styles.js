@@ -278,9 +278,9 @@ export const WrapperIngredients = styled.div`
 export const ProductTabContainer = styled.div`
   border-bottom: 1px solid #E9ECEF;
   position: sticky;
-  top: 0px;
+  top: 14px;
   background: white;
-  z-index: 9999995;
+  z-index: 9999994;
 
   @media (min-width: 769px) {
     top: 0;

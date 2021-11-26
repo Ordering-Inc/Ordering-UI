@@ -56,6 +56,7 @@ const BusinessProductsListingUI = (props) => {
   } = props
 
   const { business, loading, error } = businessState
+  console.log(business, 'this is business ')
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ carts }] = useOrder()
