@@ -33,6 +33,7 @@ const UpsellingPageUI = (props) => {
     business,
     isCustomMode
   } = props
+
   const [, t] = useLanguage()
   const [actualProduct, setActualProduct] = useState(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)

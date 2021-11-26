@@ -271,7 +271,7 @@ const CartUI = (props) => {
               </CheckoutAction>
             )}
           </BusinessItemAccordion>
-          <Divider />
+          {!isStore && <Divider />}
           <Confirm
             title={t('PRODUCT', 'Product')}
             content={confirm.content}

@@ -49,6 +49,7 @@ const BusinessesListingUI = (props) => {
     handleBusinessClick,
     currentPageParam
   } = props
+
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
