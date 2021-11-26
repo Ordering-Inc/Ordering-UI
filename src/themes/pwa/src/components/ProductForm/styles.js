@@ -87,6 +87,11 @@ export const ProductInfo = styled.div`
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
   margin-bottom: 20px;
+
+  > h1 {
+    font-size: 24px;
+  }
+
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
   }
