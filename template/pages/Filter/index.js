@@ -2,7 +2,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { useEvent } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
-import { FilterBusinessesListing } from '../../../src/themes/franchise'
+import { FilterBusinessesListing } from '../../../src/components/FilterBusinessesListing'
 
 export const FilterPage = (props) => {
   const [events] = useEvent()

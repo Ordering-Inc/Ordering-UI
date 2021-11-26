@@ -1,5 +1,5 @@
 import React from 'react'
-import { Cms as CmsController } from '../../../src/themes/franchise'
+import { Cms as CmsController } from '../../../src/components/Cms'
 import { useParams, useHistory } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 
