@@ -50,7 +50,10 @@ export const Card = styled.div`
   border-radius: 16px;
   text-align: left;
   cursor: ${({ isBusinessesPage }) => isBusinessesPage && 'pointer'};
-  box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;
+  }
 
   button.load-orders {
     padding: 10px 30px;
