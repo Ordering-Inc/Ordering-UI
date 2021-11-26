@@ -12,9 +12,12 @@ import {
   HorizontalItem,
   HorizontalImage,
   HorizontalDetails,
-  WrapAutoScroll
+  WrapAutoScroll,
+  UpsellingPageTitleWrapper,
+  Divider
 } from './styles'
 import { Button } from '../../styles/Buttons'
+import MdClose from '@meronex/icons/md/MdClose'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../Modal'
 import { ProductForm } from '../ProductForm'
@@ -30,10 +33,12 @@ const UpsellingPageUI = (props) => {
     business,
     isCustomMode
   } = props
+
   const [, t] = useLanguage()
   const [actualProduct, setActualProduct] = useState(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [{ parsePrice }] = useUtils()
+  const [showUpselling, setShowUpSelling] = useState(true)
 
   useEffect(() => {
     if (!isCustomMode) {
@@ -44,6 +49,11 @@ const UpsellingPageUI = (props) => {
       }
     }
   }, [upsellingProducts.loading, upsellingProducts?.products.length])
+
+  useEffect(() => {
+    if (upsellingProducts?.products.length > 0) setShowUpSelling(true)
+    else setShowUpSelling(false)
+  }, [upsellingProducts?.products.length])
 
   const handleFormProduct = (product) => {
     setActualProduct(product)
@@ -111,43 +121,54 @@ const UpsellingPageUI = (props) => {
   return (
     <>
       {isCustomMode ? (
-        <WrapAutoScroll>
-          <HorizontalUpsellingContainer>
-            {
-              !upsellingProducts.loading ? (
-                <AutoScroll scrollId='upSelling'>
-                  {
-                    (!upsellingProducts.error && upsellingProducts.products?.length > 0) ? upsellingProducts.products.map((product, i) => (
-                      <HorizontalItem key={product.id} name={product.name}>
-                        <HorizontalDetails>
+        showUpselling ? (
+          <>
+            <Divider />
+            <UpsellingPageTitleWrapper>
+              <p>{t('UPSELLING_QUESTION', 'Do you want something else?')}</p>
+              <MdClose onClick={() => setShowUpSelling(false)} />
+            </UpsellingPageTitleWrapper>
+            <WrapAutoScroll>
+              <HorizontalUpsellingContainer>
+                {
+                  !upsellingProducts.loading ? (
+                    <AutoScroll scrollId='upSelling'>
+                      {
+                        (!upsellingProducts.error && upsellingProducts.products.length > 0) ? upsellingProducts.products.map((product, i) => (
+                          <HorizontalItem key={product.id} name={product.name}>
+                            <HorizontalDetails>
+                              <div>
+                                <h3 title={product.name}>{product.name}</h3>
+                              </div>
+                              <div>
+                                <span>{parsePrice(product.price)}</span>
+                                <span className='discount'>{parsePrice(product.price)}</span>
+                              </div>
+                              <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
+                            </HorizontalDetails>
+                            <HorizontalImage>
+                              <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
+                            </HorizontalImage>
+                          </HorizontalItem>
+                        )) : (
                           <div>
-                            <h3 title={product.name}>{product.name}</h3>
+                            {upsellingProducts.message || t('NO_UPSELLING_PRODUCTS', 'There are no upselling products')}
                           </div>
-                          <div>
-                            <span>{parsePrice(product.price)}</span>
-                            <span className='discount'>{parsePrice(product.price)}</span>
-                          </div>
-                          <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
-                        </HorizontalDetails>
-                        <HorizontalImage>
-                          <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
-                        </HorizontalImage>
-                      </HorizontalItem>
-                    )) : (
-                      <div>
-                        {upsellingProducts.message || t('NO_UPSELLING_PRODUCTS', 'There are no upselling products')}
-                      </div>
-                    )
-                  }
-                </AutoScroll>
-              ) : [...Array(8)].map((item, i) => (
-                <SkeletonContainer key={i}>
-                  <Skeleton width={250} height={100} />
-                </SkeletonContainer>
-              ))
-            }
-          </HorizontalUpsellingContainer>
-        </WrapAutoScroll>
+                        )
+                      }
+                    </AutoScroll>
+                  ) : [...Array(8)].map((item, i) => (
+                    <SkeletonContainer key={i}>
+                      <Skeleton width={250} height={100} />
+                    </SkeletonContainer>
+                  ))
+                }
+              </HorizontalUpsellingContainer>
+            </WrapAutoScroll>
+          </>
+        ) : (
+          <></>
+        )
       ) : (
         <>
           {!canOpenUpselling || upsellingProducts?.products?.length === 0 ? '' : (
