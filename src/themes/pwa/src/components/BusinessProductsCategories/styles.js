@@ -22,6 +22,6 @@ export const CategoriesContainer = styled.div`
     `}
   }
   @media (min-width: 381px) {
-    padding: 15px 0 0 0;
+    padding: 15px 15px 0 15px;
   }
 `

@@ -127,7 +127,7 @@ const OrdersOptionUI = (props) => {
             <h1 className={!activeOrders ? 'marginTop30' : ''}>
               {titleContent || (activeOrders
                 ? t('ACTIVE', 'Active')
-                : (pastOrders ? t('PAST', 'Past') : t('PREORDERS', 'Preorders')))}
+                : (pastOrders ? t('PAST', 'Past') : t('COMPLETE', 'Complete')))}
             </h1>
           </OptionTitle>
           {!loading && orders.length === 0 && (
