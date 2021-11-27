@@ -7,8 +7,9 @@ import {
   useLocation
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
-import { Header, NavigationBar } from '../src/themes/pwa'
 
+import { Header } from '../src/components/Header'
+import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
@@ -28,12 +29,11 @@ import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
+import { Help } from './pages/Help'
 
 import { ScrollToTop } from './components/ScrollToTop'
-import { useWindowSize } from '../src/hooks/useWindowSize'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
-import { Help } from './pages/Help'
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
@@ -43,7 +43,6 @@ export const App = () => {
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
-  const windowSize = useWindowSize()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
 
@@ -60,6 +59,7 @@ export const App = () => {
   }
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
+  const isFooterPage = location.pathname === '/pages/footer'
 
   const handleSuccessSignup = (user) => {
     login({
@@ -106,12 +106,11 @@ export const App = () => {
       {
         loaded && (
           <>
-            {windowSize.width > 576 && (
-              <Header
-                isHome={isHome}
-                location={location}
-              />
-            )}
+            <Header
+              isHome={isHome}
+              location={location}
+            />
+
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
@@ -271,8 +270,8 @@ export const App = () => {
                 </Switch>
               </ScrollToTop>
             )}
-            {windowSize.width < 576 && (
-              <NavigationBar />
+            {!isFooterPage && (
+              <Footer />
             )}
             <Alert
               title={t('INFORMATION', 'Information')}

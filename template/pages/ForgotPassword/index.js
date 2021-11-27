@@ -1,5 +1,5 @@
 import React from 'react'
-import { ForgotPasswordForm } from '../../../src/themes/pwa'
+import { ForgotPasswordForm } from '../../../src/components/ForgotPasswordForm'
 import { HelmetTags } from '../../components/HelmetTags'
 
 export const ForgotPassword = (props) => {

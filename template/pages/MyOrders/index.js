@@ -1,5 +1,5 @@
 import React from 'react'
-import { MyOrders as MyOrdersController } from '../../../src/themes/pwa'
+import { MyOrders as MyOrdersController } from '../../../src/components/MyOrders'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components'
 
