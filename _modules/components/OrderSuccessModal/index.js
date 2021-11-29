@@ -77,17 +77,25 @@ var OrderSuccessModal = function OrderSuccessModal(props) {
     var min = 0;
 
     if ((OrderState === null || OrderState === void 0 ? void 0 : (_OrderState$options = OrderState.options) === null || _OrderState$options === void 0 ? void 0 : _OrderState$options.type) === 1 && cart) {
-      var _cart$business, _cart$business2;
+      var _cart$business;
 
-      hour = (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.delivery_time).split(':')[0];
-      min = (cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.delivery_time).split(':')[1];
+      if (cart !== null && cart !== void 0 && (_cart$business = cart.business) !== null && _cart$business !== void 0 && _cart$business.delivery_time) {
+        var _cart$business2, _cart$business3;
+
+        hour = (cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.delivery_time).split(':')[0];
+        min = (cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.delivery_time).split(':')[1];
+      }
     }
 
     if ((OrderState === null || OrderState === void 0 ? void 0 : (_OrderState$options2 = OrderState.options) === null || _OrderState$options2 === void 0 ? void 0 : _OrderState$options2.type) === 2 && cart) {
-      var _cart$business3, _cart$business4;
+      var _cart$business4;
 
-      hour = (cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.pickup_time).split(':')[0];
-      min = (cart === null || cart === void 0 ? void 0 : (_cart$business4 = cart.business) === null || _cart$business4 === void 0 ? void 0 : _cart$business4.pickup_time).split(':')[1];
+      if (cart !== null && cart !== void 0 && (_cart$business4 = cart.business) !== null && _cart$business4 !== void 0 && _cart$business4.pickup_time) {
+        var _cart$business5, _cart$business6;
+
+        hour = (cart === null || cart === void 0 ? void 0 : (_cart$business5 = cart.business) === null || _cart$business5 === void 0 ? void 0 : _cart$business5.pickup_time).split(':')[0];
+        min = (cart === null || cart === void 0 ? void 0 : (_cart$business6 = cart.business) === null || _cart$business6 === void 0 ? void 0 : _cart$business6.pickup_time).split(':')[1];
+      }
     }
 
     return (0, _utils.getHourMin)(hour, min);

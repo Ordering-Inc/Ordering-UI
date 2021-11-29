@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessProductsListing = void 0;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -33,17 +35,21 @@ var _UpsellingPage = require("../UpsellingPage");
 
 var _RenderProductsLayout = require("../RenderProductsLayout");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -151,6 +157,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       isCartOpen = _useState12[0],
       setIsCartOpen = _useState12[1];
 
+  var _useState13 = (0, _react.useState)(null),
+      _useState14 = _slicedToArray(_useState13, 2),
+      productToIdLoading = _useState14[0],
+      setProductIdToLoading = _useState14[1];
+
   var currentCart = (_Object$values$find = Object.values(carts).find(function (cart) {
     var _cart$business;
 
@@ -174,44 +185,79 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setOpenBusinessInformation(true);
   };
 
-  var onProductClick = function onProductClick(product) {
-    if (product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct) {
-      var _currentCart$products;
+  var onProductClick = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(product) {
+      var _currentCart$products, isProductAddedToCart, productQuantity, addCurrentProduct, updateCurrentProduct, cartData;
 
-      var isProductAddedToCart = currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.find(function (Cproduct) {
-        return Cproduct.id === product.id;
-      });
-      var productQuantity = isProductAddedToCart === null || isProductAddedToCart === void 0 ? void 0 : isProductAddedToCart.quantity;
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (!(product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct)) {
+                _context.next = 17;
+                break;
+              }
 
-      var addCurrentProduct = _objectSpread(_objectSpread({}, product), {}, {
-        quantity: 1
-      });
+              setProductIdToLoading(product.id);
+              isProductAddedToCart = currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.find(function (Cproduct) {
+                return Cproduct.id === product.id;
+              });
+              productQuantity = isProductAddedToCart === null || isProductAddedToCart === void 0 ? void 0 : isProductAddedToCart.quantity;
+              addCurrentProduct = _objectSpread(_objectSpread({}, product), {}, {
+                quantity: 1
+              });
+              updateCurrentProduct = {
+                id: product.id,
+                code: isProductAddedToCart === null || isProductAddedToCart === void 0 ? void 0 : isProductAddedToCart.code,
+                quantity: productQuantity + 1
+              };
+              cartData = currentCart !== null && currentCart !== void 0 && currentCart.business_id ? currentCart : {
+                business_id: business.id
+              };
 
-      var updateCurrentProduct = {
-        id: product.id,
-        code: isProductAddedToCart === null || isProductAddedToCart === void 0 ? void 0 : isProductAddedToCart.code,
-        quantity: productQuantity + 1
-      };
-      var cartData = currentCart !== null && currentCart !== void 0 && currentCart.business_id ? currentCart : {
-        business_id: business.id
-      };
+              if (!isProductAddedToCart) {
+                _context.next = 12;
+                break;
+              }
 
-      if (isProductAddedToCart) {
-        updateProduct(updateCurrentProduct, cartData);
-      } else {
-        addProduct(addCurrentProduct, cartData, isQuickAddProduct);
-      }
-    } else {
-      onProductRedirect({
-        slug: business === null || business === void 0 ? void 0 : business.slug,
-        product: product.id,
-        category: product.category_id
-      });
-      setCurProduct(product);
-      setModalIsOpen(true);
-      events.emit('product_clicked', product);
-    }
-  };
+              _context.next = 10;
+              return updateProduct(updateCurrentProduct, cartData, isQuickAddProduct);
+
+            case 10:
+              _context.next = 14;
+              break;
+
+            case 12:
+              _context.next = 14;
+              return addProduct(addCurrentProduct, cartData, isQuickAddProduct);
+
+            case 14:
+              setProductIdToLoading(null);
+              _context.next = 21;
+              break;
+
+            case 17:
+              onProductRedirect({
+                slug: business === null || business === void 0 ? void 0 : business.slug,
+                product: product.id,
+                category: product.category_id
+              });
+              setCurProduct(product);
+              setModalIsOpen(true);
+              events.emit('product_clicked', product);
+
+            case 21:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function onProductClick(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   var handlerProductAction = function handlerProductAction(product) {
     if (Object.keys(product).length) {
@@ -312,6 +358,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleSearchRedirect: handleSearchRedirect,
     handleChangeSearch: handleChangeSearch,
     setOpenBusinessInformation: setOpenBusinessInformation,
+    productToIdLoading: productToIdLoading,
     handleCartOpen: function handleCartOpen(val) {
       return setIsCartOpen(val);
     }
@@ -370,10 +417,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState13 = (0, _react.useState)(false),
-      _useState14 = _slicedToArray(_useState13, 2),
-      isInitialRender = _useState14[0],
-      setIsInitialRender = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      isInitialRender = _useState16[0],
+      setIsInitialRender = _useState16[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

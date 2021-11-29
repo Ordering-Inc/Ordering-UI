@@ -75,11 +75,11 @@ var AutoScroll = function AutoScroll(_ref) {
   });
 
   var handleScroll = function handleScroll() {
-    var _document2;
+    var _document2, _autoScrollContainer$, _autoScrollContainer$2;
 
     var autoScrollContainer = (_document2 = document) === null || _document2 === void 0 ? void 0 : _document2.getElementById("".concat(autoScrollId));
-    var botonRight = autoScrollContainer.querySelector('.right-autoscroll');
-    var botonLeft = autoScrollContainer.querySelector('.left-autoscroll');
+    var botonRight = autoScrollContainer === null || autoScrollContainer === void 0 ? void 0 : (_autoScrollContainer$ = autoScrollContainer.querySelector) === null || _autoScrollContainer$ === void 0 ? void 0 : _autoScrollContainer$.call(autoScrollContainer, '.right-autoscroll');
+    var botonLeft = autoScrollContainer === null || autoScrollContainer === void 0 ? void 0 : (_autoScrollContainer$2 = autoScrollContainer.querySelector) === null || _autoScrollContainer$2 === void 0 ? void 0 : _autoScrollContainer$2.call(autoScrollContainer, '.left-autoscroll');
 
     if (botonLeft || botonRight) {
       if (theme !== null && theme !== void 0 && theme.rtl) {
