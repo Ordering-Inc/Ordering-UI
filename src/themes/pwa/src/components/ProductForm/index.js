@@ -146,7 +146,7 @@ const ProductOptionsUI = (props) => {
       if (windowSize.width >= 1200) {
         scrollElement = productContainerRef.current
       }
-      scrollElement.scrollTo({
+      scrollElement.scroll({
         top: top,
         behavior: 'smooth'
       })

@@ -168,8 +168,6 @@ const UserProfileFormUI = (props) => {
           <ShortLinks>
             <LinkItem onClick={() => openModal('address')}><span><GeoAlt /></span>{t('SAVED_ADDRESS', 'My saved places')}</LinkItem>
             <LinkItem onClick={() => handleHelpRedirect()}><span><LifePre /></span>{t('SAVED_ADDRESS', 'Help')}</LinkItem>
-            <LinkItem><span><Bell /></span>{t('SAVED_ADDRESS', 'Notifications')}</LinkItem>
-            <LinkItem><span><Reward /></span>{t('SAVED_ADDRESS', 'Rewards')}</LinkItem>
           </ShortLinks>
           <FooterMenuWrapper>
             <LanguageSelectorWrapper>
