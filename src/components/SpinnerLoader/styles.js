@@ -40,8 +40,8 @@ export const Spinner = styled.div`
   }
 
   .spinner-content > div {
-    width: 108px;
-    height: 108px;
+    width: ${props => props.iconStyleWidth || '108'}px;
+    height: ${props => props.iconStyleHeight || '108'}px;
     border-radius: 50%;
     border: 8px solid #000;
     border-color: ${props => `${props.theme.colors.primary} transparent ${props.theme.colors.primary} transparent`};

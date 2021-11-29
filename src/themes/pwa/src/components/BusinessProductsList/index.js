@@ -90,7 +90,7 @@ const BusinessProductsListUI = (props) => {
               <React.Fragment key={category?.id}>
                 {
                   products.length > 0 && (
-                    <WrapAllCategories id='container'>
+                    <WrapAllCategories id={`category${category?.id}`}>
                       <div className='category-title'>
                         {
                           category?.image && (

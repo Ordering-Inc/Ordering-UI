@@ -97,8 +97,8 @@ export const HomeHero = (props) => {
           <SloganContent>
             <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
             <ArchiesOrderTypes
-              configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-              defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+              configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+              defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
               handleAddressInput={handleAddressInput}
             />
           </SloganContent>

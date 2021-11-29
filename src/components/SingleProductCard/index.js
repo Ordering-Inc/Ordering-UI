@@ -12,7 +12,7 @@ import {
   PriceWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
-
+import { SpinnerLoader } from '../SpinnerLoader'
 export const SingleProductCard = (props) => {
   const {
     businessId,
@@ -22,10 +22,11 @@ export const SingleProductCard = (props) => {
     onProductClick,
     isCartOnProductsList,
     productAddedToCart,
+    productToIdLoading,
     useCustomFunctionality,
     onCustomClick,
     customText,
-    customStyle,
+    customStyle
   } = props
 
   const [, t] = useLanguage()
@@ -52,9 +53,9 @@ export const SingleProductCard = (props) => {
   return (
     <>
       <CardContainer
-        soldOut={isSoldOut || maxProductQuantity <= 0}
+        soldOut={isSoldOut || maxProductQuantity <= 0 || (productToIdLoading === product?.id && productToIdLoading)}
         isLayoutOne={props.isLayoutOne}
-        onClick={() => (!isSkeleton && !useCustomFunctionality && onProductClick(product) || useCustomFunctionality && onCustomClick())}
+        onClick={() => (((!isSkeleton && !useCustomFunctionality && onProductClick(product)) || useCustomFunctionality) && onCustomClick())}
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
       >
@@ -79,6 +80,9 @@ export const SingleProductCard = (props) => {
               )}
               {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
             </CardInfo>
+            {productToIdLoading === product?.id && productToIdLoading && (
+              <SpinnerLoader iconStyleWidth={50} iconStyleHeight={50} style={{ width: 50, height: 50 }} />
+            )}
             {!isSkeleton ? (
               <WrapLogo>
                 <CardLogo
@@ -94,7 +98,7 @@ export const SingleProductCard = (props) => {
           </>
         )}
         {useCustomFunctionality && customText && (
-          <span style={{ fontSize: 16, fontWeight: 500}}>{customText}</span>
+          <span style={{ fontSize: 16, fontWeight: 500 }}>{customText}</span>
         )}
       </CardContainer>
     </>
