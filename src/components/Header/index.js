@@ -179,8 +179,8 @@ export const Header = (props) => {
                   </CustomerInfo>
                 )}
                 <OrderTypeSelectorHeader
-                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                  defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+                  configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+                  defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
                 />
                 {onlineStatus && windowSize.width > 820 && (
                   <>

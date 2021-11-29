@@ -56,7 +56,8 @@ export const RenderProductsLayout = (props) => {
     handleSearchRedirect,
     handleChangeSearch,
     setOpenBusinessInformation,
-    handleCartOpen
+    handleCartOpen,
+    productToIdLoading
   } = props
 
   const theme = useTheme()
@@ -155,6 +156,7 @@ export const RenderProductsLayout = (props) => {
                         handleClearSearch={handleChangeSearch}
                         errorQuantityProducts={errorQuantityProducts}
                         currentCart={currentCart}
+                        productToIdLoading={productToIdLoading}
                       />
                     </WrapContent>
                   </>
@@ -173,7 +175,7 @@ export const RenderProductsLayout = (props) => {
                   isCartPending={currentCart?.status === 2}
                   isProducts={currentCart.products.length}
                   isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                  handleCartOpen={(val) => setIsCartOpen(val)}
+                  handleCartOpen={(val) => handleCartOpen(val)}
                 />
               )}
             </>
@@ -289,6 +291,7 @@ export const RenderProductsLayout = (props) => {
               categoryState={categoryState}
               isBusinessLoading={isLoading}
               errorQuantityProducts={errorQuantityProducts}
+              productToIdLoading={productToIdLoading}
             />
           </WrapContent>
         </>
