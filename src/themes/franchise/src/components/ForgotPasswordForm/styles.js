@@ -34,13 +34,13 @@ export const FormSide = styled(Side)`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   display: flex;
   flex-direction: column;
 
   * {
     padding: 8px 20px;
-    margin: 10px;
+    margin: 10px 6px;
   }
 
   input:not(:last-child) {

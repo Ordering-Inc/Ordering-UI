@@ -441,7 +441,8 @@ export const ShareOrder = styled.div`
       div {
         right: 0px;
         left: initial;
-        top: 35px;
+        top: initial;
+        bottom: 100%;
       }
     }
   }

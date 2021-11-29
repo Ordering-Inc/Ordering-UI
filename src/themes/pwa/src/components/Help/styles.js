@@ -6,7 +6,7 @@ export const HelpContainer = styled.div`
   margin-right: auto;
   padding: 30px 15px 15px 15px;
   box-sizing: border-box;
-  min-height: calc(100vh - 280px);
+  min-height: calc(100vh - 68px);
   @media (min-width: 769px) {
     width: 70%;
   }

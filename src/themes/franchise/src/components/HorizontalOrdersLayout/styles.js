@@ -50,6 +50,10 @@ export const Card = styled.div`
   border-radius: 16px;
   text-align: left;
   cursor: ${({ isBusinessesPage }) => isBusinessesPage && 'pointer'};
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;
+  }
 
   button.load-orders {
     padding: 10px 30px;
@@ -99,6 +103,13 @@ const BusinessLogoWrapperStyled = styled.div`
   align-items: center;
   border-radius: 7.6px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+
+  margin-left: 8px;
+
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: 8px;
+  `}
 `
 
 export const BusinessLogoWrapper = (props) => {

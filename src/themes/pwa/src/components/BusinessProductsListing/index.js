@@ -222,7 +222,7 @@ const BusinessProductsListingUI = (props) => {
                         <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
                       </MobileCartViewWrapper>
                     )}
-                    <WrapContent>
+                    <WrapContent id='businessProductList'>
                       <BusinessProductsList
                         categories={[
                           { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },

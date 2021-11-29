@@ -46,6 +46,7 @@ export const WrapAllCategories = styled.div`
     font-size: 24px;
     color: ${props => props.theme?.colors.darkTextColor};
     margin-left: 10px;
+    margin-top: 0;
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
       margin-left: 0;
