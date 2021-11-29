@@ -15,6 +15,8 @@ var _styles = require("./styles");
 
 var _styledComponents = require("styled-components");
 
+var _SpinnerLoader = require("../SpinnerLoader");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -39,6 +41,7 @@ var SingleProductCard = function SingleProductCard(props) {
       onProductClick = props.onProductClick,
       isCartOnProductsList = props.isCartOnProductsList,
       productAddedToCart = props.productAddedToCart,
+      productToIdLoading = props.productToIdLoading,
       useCustomFunctionality = props.useCustomFunctionality,
       onCustomClick = props.onCustomClick,
       customText = props.customText,
@@ -78,10 +81,10 @@ var SingleProductCard = function SingleProductCard(props) {
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig;
   var maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {
-    soldOut: isSoldOut || maxProductQuantity <= 0,
+    soldOut: isSoldOut || maxProductQuantity <= 0 || productToIdLoading === (product === null || product === void 0 ? void 0 : product.id) && productToIdLoading,
     isLayoutOne: props.isLayoutOne,
     onClick: function onClick() {
-      return !isSkeleton && !useCustomFunctionality && onProductClick(product) || useCustomFunctionality && onCustomClick();
+      return (!isSkeleton && !useCustomFunctionality && onProductClick(product) || useCustomFunctionality) && onCustomClick();
     },
     isCartOnProductsList: isCartOnProductsList,
     style: useCustomFunctionality && customStyle
@@ -95,7 +98,14 @@ var SingleProductCard = function SingleProductCard(props) {
     width: 100
   }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, null, /*#__PURE__*/_react.default.createElement(_styles.CardLogo, {
+  })), productToIdLoading === (product === null || product === void 0 ? void 0 : product.id) && productToIdLoading && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+    iconStyleWidth: 50,
+    iconStyleHeight: 50,
+    style: {
+      width: 50,
+      height: 50
+    }
+  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, null, /*#__PURE__*/_react.default.createElement(_styles.CardLogo, {
     className: "image",
     soldOut: isSoldOut || maxProductQuantity <= 0,
     bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_200,c_limit')

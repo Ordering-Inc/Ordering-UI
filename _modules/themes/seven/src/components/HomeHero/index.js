@@ -178,8 +178,8 @@ var HomeHero = function HomeHero(props) {
     src: (_theme$images9 = theme.images) === null || _theme$images9 === void 0 ? void 0 : (_theme$images9$alsea = _theme$images9.alsea) === null || _theme$images9$alsea === void 0 ? void 0 : _theme$images9$alsea.discountBanner,
     alt: ""
   })), /*#__PURE__*/_react.default.createElement(_styles.SloganContent, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(ArchiesOrderTypes, {
-    configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
-    defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1,
+    configTypes: !(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0 ? configTypes : null,
+    defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0) && 1,
     handleAddressInput: handleAddressInput
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.ADDRESS) || 'Address'),

@@ -217,7 +217,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         scrollElement = productContainerRef.current;
       }
 
-      scrollElement.scrollTo({
+      scrollElement.scroll({
         top: top,
         behavior: 'smooth'
       });

@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var NavigationBarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFFFFF;\n  box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.1);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 20px;\n  position: sticky;\n  bottom: 0px;\n  left: 0px;\n  width: 100%;\n  box-sizing: border-box;\n  z-index: 100;\n"])));
+var NavigationBarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFFFFF;\n  box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.1);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 10vw;\n  position: sticky;\n  bottom: 0px;\n  left: 0px;\n  width: 100%;\n  box-sizing: border-box;\n  z-index: 100;\n"])));
 
 exports.NavigationBarContainer = NavigationBarContainer;
 

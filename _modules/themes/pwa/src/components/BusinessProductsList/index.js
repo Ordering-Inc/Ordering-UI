@@ -105,7 +105,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: category === null || category === void 0 ? void 0 : category.id
     }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
-      id: "container"
+      id: "category".concat(category === null || category === void 0 ? void 0 : category.id)
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "category-title"
     }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {

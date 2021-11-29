@@ -210,7 +210,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     onClick: function onClick() {
       return handleHelpRedirect();
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(LifePre, null)), t('SAVED_ADDRESS', 'Help')), /*#__PURE__*/_react.default.createElement(_styles.LinkItem, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(Bell, null)), t('SAVED_ADDRESS', 'Notifications')), /*#__PURE__*/_react.default.createElement(_styles.LinkItem, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(Reward, null)), t('SAVED_ADDRESS', 'Rewards'))), /*#__PURE__*/_react.default.createElement(_styles.FooterMenuWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_IosGlobe.default, null), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(LifePre, null)), t('SAVED_ADDRESS', 'Help'))), /*#__PURE__*/_react.default.createElement(_styles.FooterMenuWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_IosGlobe.default, null), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, {
     isLanguageFullName: isLanguageFullName
   })), /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, null))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,

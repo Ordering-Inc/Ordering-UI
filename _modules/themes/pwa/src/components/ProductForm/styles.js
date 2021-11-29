@@ -47,7 +47,7 @@ var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateOb
 
 exports.ProductInfo = ProductInfo;
 
-var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n  margin-bottom: 20px;\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])));
+var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n  margin-bottom: 20px;\n\n  > h1 {\n    font-size: 24px;\n  }\n\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])));
 
 exports.ProductFormTitle = ProductFormTitle;
 
@@ -95,7 +95,7 @@ var WrapperIngredients = _styledComponents.default.div(_templateObject15 || (_te
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var ProductTabContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 9999995;\n\n  @media (min-width: 769px) {\n    top: 0;\n  }\n"])));
+var ProductTabContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 14px;\n  background: white;\n  z-index: 9999994;\n\n  @media (min-width: 769px) {\n    top: 0;\n  }\n"])));
 
 exports.ProductTabContainer = ProductTabContainer;
 

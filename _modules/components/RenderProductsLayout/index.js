@@ -94,7 +94,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       handleSearchRedirect = props.handleSearchRedirect,
       handleChangeSearch = props.handleChangeSearch,
       setOpenBusinessInformation = props.setOpenBusinessInformation,
-      handleCartOpen = props.handleCartOpen;
+      _handleCartOpen = props.handleCartOpen,
+      productToIdLoading = props.productToIdLoading;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -186,7 +187,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0,
     handleClearSearch: handleChangeSearch,
     errorQuantityProducts: errorQuantityProducts,
-    currentCart: currentCart
+    currentCart: currentCart,
+    productToIdLoading: productToIdLoading
   }))) : /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
@@ -200,7 +202,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     isProducts: currentCart.products.length,
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0,
     handleCartOpen: function handleCartOpen(val) {
-      return setIsCartOpen(val);
+      return _handleCartOpen(val);
     }
   })), businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: businessState,
@@ -289,7 +291,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     category: categorySelected,
     categoryState: categoryState,
     isBusinessLoading: isLoading,
-    errorQuantityProducts: errorQuantityProducts
+    errorQuantityProducts: errorQuantityProducts,
+    productToIdLoading: productToIdLoading
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "40%",
     open: isCartModal,
@@ -312,7 +315,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     isCartPending: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.status) === 2,
     isProducts: currentCart.products.length,
     isCartOnProductsList: isCartOnProductsList,
-    handleCartOpen: handleCartOpen
+    handleCartOpen: _handleCartOpen
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyCart, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineShoppingCart.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart')))))));
