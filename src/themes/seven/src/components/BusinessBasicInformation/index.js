@@ -1,13 +1,11 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils, useOrder } from 'ordering-components'
+import { useLanguage } from 'ordering-components'
 import {
   BusinessContainer,
   BusinessName,
   BusinessHeader,
   CloseOverall,
-  BuinessMeta,
-  MetaItem,
   ScheduleDate,
   ScheduleTime,
   ScheduleTitle
@@ -20,8 +18,6 @@ export const BusinessBasicInformation = (props) => {
   } = props
   const { business, loading } = businessState
   const [, t] = useLanguage()
-  const [{ parsePrice }] = useUtils()
-  const [orderState] = useOrder()
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
@@ -50,36 +46,6 @@ export const BusinessBasicInformation = (props) => {
                   <ScheduleTime> {' - '}</ScheduleTime>
                   <ScheduleTime>{scheduleFormatted(business.today.lapses[0].close)}</ScheduleTime>
                 </ScheduleDate>
-              )}
-              {(
-                <BuinessMeta>
-                  {business?.delivery_price >= 0 ? (
-                    <>
-                      {orderState?.options?.type === 1 && (
-                        <MetaItem>
-                          <span>{t('DELIVERY_PRICE', 'Delivery Price')}{' : '}</span>
-                          {business && parsePrice(business?.delivery_price)}
-                        </MetaItem>
-                      )}
-                    </>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                  {business?.distance && (
-                    <>
-                      {business?.distance || business?.distance > 0 ? (
-                        <>
-                          <MetaItem>
-                            <span>{t('DISTANCE', 'Distance')}{' : '}</span>
-                            {business?.distance.toFixed(2)}
-                          </MetaItem>
-                        </>
-                      ) : (
-                        <Skeleton width={70} />
-                      )}
-                    </>
-                  )}
-                </BuinessMeta>
               )}
             </>
           ) : (
