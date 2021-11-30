@@ -194,7 +194,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
     if (categoryTitle) {
       window.scrollTo({
-        top: categoryTitle.offsetTop,
+        top: categoryTitle.offsetTop - 70,
         behavior: 'smooth'
       });
     } else if (categoryId === 'featured') {

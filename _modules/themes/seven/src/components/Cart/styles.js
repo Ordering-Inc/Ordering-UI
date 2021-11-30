@@ -44,7 +44,9 @@ var CheckoutAction = _styledComponents.default.div(_templateObject7 || (_templat
 
 exports.CheckoutAction = CheckoutAction;
 
-var CouponQuestion = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  padding: 0 5px;\n  box-sizing: border-box;\n  p {\n    font-size: 14px;\n    line-height: 24px;\n    margin-bottom: 0px;\n  } \n  span {\n    margin: 0 10px;\n    cursor: pointer;\n    color: ", ";\n  }\n"])), function (props) {
+var CouponQuestion = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  padding: 0 5px;\n  box-sizing: border-box;\n  p {\n    font-size: 16px;\n    line-height: 24px;\n    margin-bottom: 0px;\n    cursor: pointer;\n    &:hover {\n      color: ", ";\n      text-decoration: underline;\n    }\n  } \n  span {\n    margin: 0 10px;\n    cursor: pointer;\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
   return props.theme.colors.primary;
 });
 

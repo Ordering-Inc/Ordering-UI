@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SignUpContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  min-height: ", ";\n\n  flex-direction: column;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n  }\n"])), function (_ref) {
+var SignUpContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  min-height: ", ";\n  padding: 0 10px;\n  box-sizing: border-box;\n\n  flex-direction: column;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n  }\n"])), function (_ref) {
   var isPopup = _ref.isPopup;
   return isPopup ? '500px' : 'calc(100vh - 65px)';
 });
@@ -37,7 +37,7 @@ exports.FormSide = FormSide;
 
 var FormInput = _styledComponents.default.form(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  div.phone_number {\n    margin: 10px 0px;\n    width: 100%;\n  }\n\n  input.form:not(:last-child) {\n    margin: 10px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n  }\n"])), function (_ref4) {
   var isPopup = _ref4.isPopup;
-  return isPopup ? '95%' : '80%';
+  return isPopup ? '100%' : '80%';
 });
 
 exports.FormInput = FormInput;
@@ -52,7 +52,7 @@ var RedirectLink = _styledComponents.default.div(_templateObject5 || (_templateO
   var register = _ref5.register;
   return register && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    width: calc(95% - 20px);\n\n    @media (min-width: 481px) {\n      width: ", ";\n    }\n  "])), function (_ref6) {
     var isPopup = _ref6.isPopup;
-    return isPopup ? 'calc(95% - 20px)' : 'calc(80% - 20px)';
+    return isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)';
   });
 }, function (_ref7) {
   var isPopup = _ref7.isPopup;
@@ -66,7 +66,7 @@ exports.RedirectLink = RedirectLink;
 
 var SocialButtons = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: ", ";\n\n  button {\n    width: 100%;\n    padding: 5px 30px;\n    color: #000000;\n    margin-bottom: 15px;\n\n    img {\n      width: 30px;\n    }\n\n    div {\n      font-size: 0.8em;\n    }\n  }\n"])), function (_ref9) {
   var isPopup = _ref9.isPopup;
-  return isPopup ? '95%' : '80%';
+  return isPopup ? '100%' : '80%';
 });
 
 exports.SocialButtons = SocialButtons;
@@ -82,7 +82,7 @@ var SkeletonWrapper = _styledComponents.default.div(_templateObject11 || (_templ
 exports.SkeletonWrapper = SkeletonWrapper;
 var SkeletonSocialWrapper = (0, _styledComponents.default)(SkeletonWrapper)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    margin-top: 0;\n  }\n"])), function (_ref10) {
   var isPopup = _ref10.isPopup;
-  return isPopup ? '95%' : '80%';
+  return isPopup ? '100%' : '80%';
 });
 exports.SkeletonSocialWrapper = SkeletonSocialWrapper;
 

@@ -95,17 +95,15 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       var categoriesOffset = getCategoriesOffset();
 
       if ((categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) > 0) {
-        var _document$getElements;
-
-        var lastContainerHeight = (_document$getElements = document.getElementsByClassName('last-category')[0]) === null || _document$getElements === void 0 ? void 0 : _document$getElements.offsetHeight;
         categoriesOffset.map(function (category, i, hash) {
           var _hash, _hash2, _hash$;
 
-          if (window.scrollY + (categories.length > 3 ? lastContainerHeight + 125 : 100) > ((_hash = hash[(categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) - 1]) === null || _hash === void 0 ? void 0 : _hash.offset)) {
+          if (window.scrollY + 75 > ((_hash = hash[(categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) - 1]) === null || _hash === void 0 ? void 0 : _hash.offset) || window.scrollY + 680 >= document.body.offsetHeight) {
+            // last category
             setCategorySelected(hash[(categoriesOffset === null || categoriesOffset === void 0 ? void 0 : categoriesOffset.length) - 1]);
-          } else if (category.offset < window.scrollY && ((_hash2 = hash[i + 1]) === null || _hash2 === void 0 ? void 0 : _hash2.offset) > window.scrollY) {
+          } else if (category.offset - 75 < window.scrollY && ((_hash2 = hash[i + 1]) === null || _hash2 === void 0 ? void 0 : _hash2.offset) - 75 > window.scrollY) {
             setCategorySelected(category);
-          } else if (window.scrollY > 100 && window.scrollY < ((_hash$ = hash[2]) === null || _hash$ === void 0 ? void 0 : _hash$.offset) && (category === null || category === void 0 ? void 0 : category.name) === t('FEATURED', 'Featured')) {
+          } else if (window.scrollY > 100 && window.scrollY < ((_hash$ = hash[2]) === null || _hash$ === void 0 ? void 0 : _hash$.offset) - 75 && (category === null || category === void 0 ? void 0 : category.name) === t('FEATURED', 'Featured')) {
             setCategorySelected(category);
           } else if (window.scrollY === 0) {
             setCategorySelected(hash[0]);
@@ -122,10 +120,10 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
 
   var getCategoriesOffset = function getCategoriesOffset() {
     return categories.map(function (category) {
-      var _document$getElements2;
+      var _document$getElements;
 
       return _objectSpread(_objectSpread({}, category), {}, {
-        offset: (_document$getElements2 = document.getElementsByClassName(category.name)[0]) === null || _document$getElements2 === void 0 ? void 0 : _document$getElements2.offsetTop
+        offset: (_document$getElements = document.getElementsByClassName(category.name)[0]) === null || _document$getElements === void 0 ? void 0 : _document$getElements.offsetTop
       });
     });
   };

@@ -139,6 +139,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       setTabValue = _useState6[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+  var isIOS = window.navigator.userAgent.includes('iPhone');
 
   var closeModal = function closeModal() {
     setModalIsOpen(false);
@@ -368,7 +369,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement("div", {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, {
+    isIOS: isIOS
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "price"
   }, productCart.total && parsePrice(productCart.total)), productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
     className: "incdec-control"

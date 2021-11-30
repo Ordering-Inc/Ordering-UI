@@ -465,15 +465,15 @@ var AddressFormUI = function AddressFormUI(props) {
         var _formState$changes21, _formState$changes21$, _formState$changes22, _formState$changes22$;
 
         var prevLocation = {
-          lat: Math.trunc(locationChange.lat),
-          lng: Math.trunc(locationChange.lng)
+          lat: Math.trunc(locationChange === null || locationChange === void 0 ? void 0 : locationChange.lat),
+          lng: Math.trunc(locationChange === null || locationChange === void 0 ? void 0 : locationChange.lng)
         };
         var newLocation = {
           lat: Math.trunc(formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : (_formState$changes21$ = _formState$changes21.location) === null || _formState$changes21$ === void 0 ? void 0 : _formState$changes21$.lat),
           lng: Math.trunc(formState === null || formState === void 0 ? void 0 : (_formState$changes22 = formState.changes) === null || _formState$changes22 === void 0 ? void 0 : (_formState$changes22$ = _formState$changes22.location) === null || _formState$changes22$ === void 0 ? void 0 : _formState$changes22$.lng)
         };
 
-        if (prevLocation.lat !== newLocation.lat && prevLocation.lng !== newLocation.lng) {
+        if ((prevLocation === null || prevLocation === void 0 ? void 0 : prevLocation.lat) !== (newLocation === null || newLocation === void 0 ? void 0 : newLocation.lat) && (prevLocation === null || prevLocation === void 0 ? void 0 : prevLocation.lng) !== (newLocation === null || newLocation === void 0 ? void 0 : newLocation.lng)) {
           var _formState$changes23;
 
           setLocationChange(formState === null || formState === void 0 ? void 0 : (_formState$changes23 = formState.changes) === null || _formState$changes23 === void 0 ? void 0 : _formState$changes23.location);

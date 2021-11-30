@@ -261,6 +261,12 @@ Object.defineProperty(exports, "MyOrders", {
     return _MyOrders.MyOrders;
   }
 });
+Object.defineProperty(exports, "NavigationBar", {
+  enumerable: true,
+  get: function get() {
+    return _NavigationBar.NavigationBar;
+  }
+});
 Object.defineProperty(exports, "OrderDetails", {
   enumerable: true,
   get: function get() {
@@ -499,6 +505,8 @@ var _MomentControl = require("./src/components/MomentControl");
 var _MomentPopover = require("./src/components/MomentPopover");
 
 var _MyOrders = require("./src/components/MyOrders");
+
+var _NavigationBar = require("./src/components/NavigationBar");
 
 var _OrderDetails = require("./src/components/OrderDetails");
 

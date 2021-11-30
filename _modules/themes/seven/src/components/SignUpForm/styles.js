@@ -109,7 +109,7 @@ var WrapperBirthday = _styledComponents.default.div(_templateObject18 || (_templ
 
 exports.WrapperBirthday = WrapperBirthday;
 
-var ConditionCheck = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  margin-bottom: 10px;\n  cursor: pointer;\n  span {\n    display: flex;\n    font-size: 14px;\n  }\n  .condition-checkbox {\n    color: ", ";\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 20px;\n  }\n  .condition-link-text {\n    margin: 0 6px;\n  }\n  .condition-link {\n    color: ", ";\n  }\n"])), function (props) {
+var ConditionCheck = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  margin-bottom: 10px;\n  cursor: pointer;\n  span {\n    display: flex;\n    font-size: 14px;\n    align-items: center;\n  }\n  .condition-checkbox {\n    color: ", ";\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 20px;\n  }\n  .condition-link-text {\n    margin: 0 6px;\n  }\n  .condition-link {\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primary;

@@ -51,7 +51,7 @@ var BusinessCategoryProductWrapper = _styledComponents.default.div(_templateObje
 
 exports.BusinessCategoryProductWrapper = BusinessCategoryProductWrapper;
 
-var BusinessCartContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin: 0 25px 25px;\n\n  @media (min-width: 768px) {\n    margin: 0;\n  }\n\n  @media (min-width: 1200px) {\n    width: calc(31% - 25px);\n    margin-left: 25px;\n\n    ", "\n  }\n"])), function (props) {
+var BusinessCartContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin: 0 25px 25px;\n\n  > div {\n    display: none;\n  }\n\n  @media (min-width: 500px) {\n    > div {\n      display: block;\n    }\n  }\n\n  @media (min-width: 768px) {\n    margin: 0;\n  }\n\n  @media (min-width: 1200px) {\n    width: calc(31% - 25px);\n    margin-left: 25px;\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin-right: 25px;\n      margin-left: 0;\n    "])));
@@ -59,9 +59,9 @@ var BusinessCartContainer = _styledComponents.default.div(_templateObject9 || (_
 
 exports.BusinessCartContainer = BusinessCartContainer;
 
-var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 20px;\n  position: relative;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref) {
+var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 20px;\n  position: relative;\n  padding-bottom: 75px;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref) {
   var isModal = _ref.isModal;
-  return !isModal && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border: 1px solid #E9ECEF;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 7.6px;\n  "])));
+  return !isModal && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border: 1px solid #E9ECEF;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 7.6px;\n    padding-bottom: 20px;\n  "])));
 });
 
 exports.BusinessCartContent = BusinessCartContent;
@@ -82,6 +82,6 @@ var Title = _styledComponents.default.h1(_templateObject15 || (_templateObject15
 
 exports.Title = Title;
 
-var MobileCartViewWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  padding: 0 25px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n\n  span {\n    font-weight: 600;\n    font-size: 16px;\n  }\n\n  button {\n    height: 44px;\n    border-radius: 7.6px;\n  }\n"])));
+var MobileCartViewWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  position: fixed;\n  width: 100vw;\n  left: 0;\n  bottom: 0;\n  background-color: white;\n  padding: 10px 25px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n  z-index: 1000;\n  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);\n\n  span {\n    font-weight: 600;\n    font-size: 16px;\n  }\n\n  button {\n    height: 44px;\n    border-radius: 7.6px;\n  }\n"])));
 
 exports.MobileCartViewWrapper = MobileCartViewWrapper;

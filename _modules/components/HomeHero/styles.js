@@ -58,10 +58,14 @@ var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templat
 
 exports.ContentWrapper = ContentWrapper;
 
-var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font: normal normal normal 80px ", ";\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  text-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  font-size: 35px;\n\n  ", "\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font: normal normal normal 80px ", ";\n  letter-spacing: 0px;\n  color: ", ";\n  text-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  font-size: 35px;\n\n  ", "\n"])), function (props) {
   var _props$theme$fonts$sp;
 
   return ((_props$theme$fonts$sp = props.theme.fonts.special) === null || _props$theme$fonts$sp === void 0 ? void 0 : _props$theme$fonts$sp.name) || 'Georgia';
+}, function (props) {
+  var _props$theme$colors$t;
+
+  return (_props$theme$colors$t = props.theme.colors.titleHomeColor) !== null && _props$theme$colors$t !== void 0 ? _props$theme$colors$t : '#FFFFFF';
 }, function (props) {
   var _props$theme3;
 
@@ -70,7 +74,11 @@ var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 =
 
 exports.Title = Title;
 
-var Slogan = _styledComponents.default.p(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-size: 18px;\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  opacity: 1;\n  margin-bottom: 15px;\n\n  ", "\n\n  @media (min-width: 480px) {\n    font-size: 24px;\n  }\n"])), function (props) {
+var Slogan = _styledComponents.default.p(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-size: 18px;\n  letter-spacing: 0px;\n  color: ", ";\n  opacity: 1;\n  margin-bottom: 15px;\n\n  ", "\n\n  @media (min-width: 480px) {\n    font-size: 24px;\n  }\n"])), function (props) {
+  var _props$theme$colors$s;
+
+  return (_props$theme$colors$s = props.theme.colors.subtitleHomeColor) !== null && _props$theme$colors$s !== void 0 ? _props$theme$colors$s : '#FFFFFF';
+}, function (props) {
   var _props$theme4;
 
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      text-align: right;\n  "])));

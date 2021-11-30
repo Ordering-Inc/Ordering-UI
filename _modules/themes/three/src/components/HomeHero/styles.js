@@ -58,7 +58,11 @@ var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templat
 
 exports.ContentWrapper = ContentWrapper;
 
-var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n  font-size: 24px;\n  text-align: left;\n  letter-spacing: 0px;\n  color: #000;\n  text-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  font-size: 35px;\n\n  ", "\n\n  @media (min-width: 768px) [\n    font-size: 32px;\n  ]\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n  font-size: 24px;\n  text-align: left;\n  letter-spacing: 0px;\n  color: ", ";\n  text-shadow: 0px 3px 6px #00000029;\n  opacity: 1;\n  font-size: 35px;\n\n  ", "\n\n  @media (min-width: 768px) {\n    font-size: 32px;\n  }\n"])), function (props) {
+  var _props$theme$colors$t;
+
+  return (_props$theme$colors$t = props.theme.colors.titleHomeColor) !== null && _props$theme$colors$t !== void 0 ? _props$theme$colors$t : '#000';
+}, function (props) {
   var _props$theme3;
 
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    text-align: right;\n  "])));

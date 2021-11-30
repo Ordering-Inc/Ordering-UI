@@ -268,7 +268,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     isBusinessesPage: isBusinessesPage
   }, /*#__PURE__*/_react.default.createElement("h1", {
     className: !activeOrders ? 'marginTop30' : ''
-  }, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('PREORDERS', 'Preorders')))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('COMPLETE', 'Complete')))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true

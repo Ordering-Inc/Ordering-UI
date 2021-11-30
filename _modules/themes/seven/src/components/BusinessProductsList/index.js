@@ -66,6 +66,16 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var getUniquCategoryName = function getUniquCategoryName(categoryName) {
+    var _categoryName = categoryName;
+
+    if (categoryName.indexOf('/') > -1) {
+      _categoryName = categoryName.split('/')[1];
+    }
+
+    return _categoryName;
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -104,7 +114,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       key: category === null || category === void 0 ? void 0 : category.id
     }, (category === null || category === void 0 ? void 0 : (_category$products2 = category.products) === null || _category$products2 === void 0 ? void 0 : _category$products2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
       id: "container"
-    }, /*#__PURE__*/_react.default.createElement("h3", null, category.name), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, category === null || category === void 0 ? void 0 : (_category$products3 = category.products) === null || _category$products3 === void 0 ? void 0 : _category$products3.map(function (product, i) {
+    }, /*#__PURE__*/_react.default.createElement("h3", null, getUniquCategoryName(category.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, category === null || category === void 0 ? void 0 : (_category$products3 = category.products) === null || _category$products3 === void 0 ? void 0 : _category$products3.map(function (product, i) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: i,
         isSoldOut: product.inventoried && !product.quantity,
@@ -121,7 +131,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     }))));
   }), (categoryState.loading || isBusinessLoading) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
     id: "container"
-  }, /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, _toConsumableArray(Array(categoryState.pagination.nextPageItems).keys()).map(function (i) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, {
+    style: {
+      marginTop: '20px'
+    }
+  }, _toConsumableArray(Array(categoryState.pagination.nextPageItems).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: "skeleton:".concat(i),
       isSkeleton: true

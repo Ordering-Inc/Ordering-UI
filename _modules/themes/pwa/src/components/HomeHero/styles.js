@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: fit-content;\n  min-height: calc(60vh - 97px);\n  position:relative;\n  margin-bottom: 30vh;\n\n\n  ", "\n\n  @media (min-width: 375px) {\n    height: calc(60vh - 97px);\n  }\n\n  @media (min-width: 567px) {\n    height: calc(100vh - 65px);\n    margin-bottom: 0;\n  }\n\n\n"])), function (_ref) {
+var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: fit-content;\n  height: 374px;\n  position:relative;\n  margin-bottom: 30vh;\n\n\n  ", "\n\n  @media (min-width: 375px) {\n    height: 374px;\n  }\n\n  @media (min-width: 567px) {\n    height: calc(100vh - 65px);\n    margin-bottom: 0;\n  }\n\n\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 });
@@ -46,7 +46,7 @@ var HeroContainer = function HeroContainer(props) {
 
 exports.HeroContainer = HeroContainer;
 
-var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n    height: 100%;\n    padding: 0px 10vw 0px;\n\n    input {\n      width: 90%;\n      margin-bottom: 15px;\n    }\n\n    @media (min-width: 576px) {\n      justify-content: center;\n      padding: 0px 40px 0px;\n      input {\n        width: 97%;\n      }\n    }\n\n    @media (min-width: 768px) {\n      ", "\n    }\n"])), function (props) {
+var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n    height: 100%;\n    padding: 0px 10vw 0px;\n    background-color: #0000004D;\n\n    input {\n      width: 90%;\n      margin-bottom: 15px;\n    }\n\n    @media (min-width: 576px) {\n      justify-content: center;\n      padding: 0px 40px 0px;\n      input {\n        width: 97%;\n      }\n    }\n\n    @media (min-width: 768px) {\n      ", "\n    }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n        padding: 0px 40px 0px;\n      "])));
@@ -103,7 +103,7 @@ var SectionHeader = _styledComponents.default.div(_templateObject17 || (_templat
 
 exports.SectionHeader = SectionHeader;
 
-var LogoWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 150px;\n  margin: 6vh auto 0;\n  display: flex;\n  justify-content: center;\n  img {\n    width: 100%;\n    object-fit: fill;\n  }\n"])));
+var LogoWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 150px;\n  margin: 53px auto;\n  display: flex;\n  justify-content: center;\n  img {\n    width: 100%;\n    object-fit: fill;\n  }\n"])));
 
 exports.LogoWrapper = LogoWrapper;
 

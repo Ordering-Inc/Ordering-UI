@@ -37,27 +37,30 @@ var FormSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templa
 });
 exports.FormSide = FormSide;
 
-var Title = _styledComponents.default.h1(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 20px;\n  margin-top: 50px;\n  margin-bottom: 20px;\n  width: 100%;\n  color: ", ";\n  @media (min-width: 576px) {\n    margin-top: 0;\n    margin-bottom: 30px;\n    width: unset;\n  }\n\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 20px;\n  margin-top: 50px;\n  margin-bottom: 20px;\n  width: ", ";\n  color: ", ";\n  @media (min-width: 576px) {\n    margin-top: 0;\n    margin-bottom: 30px;\n    width: unset;\n  }\n"])), function (_ref4) {
+  var isPopup = _ref4.isPopup;
+  return isPopup ? '100%' : '80%';
+}, function (props) {
   return props.theme.colors.darkTextColor;
 });
 
 exports.Title = Title;
 
-var LoginWith = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-bottom: 1px solid #E9ECEF;\n  font-size: 14px;\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (_ref4) {
-  var isPopup = _ref4.isPopup;
-  return isPopup ? '100%' : '80%';
-}, function (_ref5) {
+var LoginWith = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-bottom: 1px solid #E9ECEF;\n  font-size: 14px;\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (_ref5) {
   var isPopup = _ref5.isPopup;
-  return isPopup ? '13px' : '18px';
+  return isPopup ? '100%' : '80%';
 }, function (_ref6) {
   var isPopup = _ref6.isPopup;
+  return isPopup ? '13px' : '18px';
+}, function (_ref7) {
+  var isPopup = _ref7.isPopup;
   return isPopup && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      font-size: 17px;\n    "])));
 });
 
 exports.LoginWith = LoginWith;
 
-var FormInput = _styledComponents.default.form(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  input:not(:last-child) {\n    margin: 10px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n  }\n\n  .phone_number {\n    margin: 10px 0;\n  }\n"])), function (_ref7) {
-  var isPopup = _ref7.isPopup;
+var FormInput = _styledComponents.default.form(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  input:not(:last-child) {\n    margin: 10px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n  }\n\n  .phone_number {\n    margin: 10px 0;\n  }\n"])), function (_ref8) {
+  var isPopup = _ref8.isPopup;
   return isPopup ? '100%' : '80%';
 });
 
@@ -69,31 +72,31 @@ var RedirectLink = _styledComponents.default.div(_templateObject8 || (_templateO
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n    "])));
 }, function (props) {
   return props.theme.colors.primary;
-}, function (_ref8) {
-  var register = _ref8.register;
-  return register && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    width: calc(95% - 20px);\n\n    @media (min-width: 481px) {\n      width: ", ";\n    }\n  "])), function (_ref9) {
-    var isPopup = _ref9.isPopup;
+}, function (_ref9) {
+  var register = _ref9.register;
+  return register && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    width: calc(95% - 20px);\n\n    @media (min-width: 481px) {\n      width: ", ";\n    }\n  "])), function (_ref10) {
+    var isPopup = _ref10.isPopup;
     return isPopup ? 'calc(95% - 20px)' : 'calc(80% - 20px)';
   });
-}, function (_ref10) {
-  var isPopup = _ref10.isPopup;
-  return isPopup ? '13px' : '18px';
 }, function (_ref11) {
   var isPopup = _ref11.isPopup;
+  return isPopup ? '13px' : '18px';
+}, function (_ref12) {
+  var isPopup = _ref12.isPopup;
   return isPopup && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      font-size: 16px;\n    "])));
 });
 
 exports.RedirectLink = RedirectLink;
 
-var SocialButtons = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n   width: ", ";\n   margin-top: 10px;\n\n  button {\n    width: 100%;\n    padding: 6px 40px;\n    color: #000000;\n\n    img {\n      width: 16px;\n    }\n\n    div {\n      font-size: 14px;\n    }\n  }\n"])), function (_ref12) {
-  var isPopup = _ref12.isPopup;
+var SocialButtons = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n   width: ", ";\n   margin-top: 10px;\n\n  button {\n    width: 100%;\n    padding: 6px 40px;\n    color: #000000;\n\n    img {\n      width: 16px;\n    }\n\n    div {\n      font-size: 14px;\n    }\n  }\n"])), function (_ref13) {
+  var isPopup = _ref13.isPopup;
   return isPopup ? '100%' : '80%';
 });
 
 exports.SocialButtons = SocialButtons;
 
-var SkeletonSocialWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    border-radius: 30px;\n    margin-bottom: 10px\n  }\n"])), function (_ref13) {
-  var isPopup = _ref13.isPopup;
+var SkeletonSocialWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    border-radius: 30px;\n    margin-bottom: 10px\n  }\n"])), function (_ref14) {
+  var isPopup = _ref14.isPopup;
   return isPopup ? '95%' : '80%';
 });
 
@@ -135,8 +138,8 @@ var InputBeforeIcon = _styledComponents.default.div(_templateObject20 || (_templ
 
 exports.InputBeforeIcon = InputBeforeIcon;
 
-var LoginDivider = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: ", ";\n  margin: 30px 0;\n\n  p {\n    margin: 0;\n    width: 70px;\n    font-size: 14px;\n    color: #748194;\n    text-align: center;\n  }\n"])), function (_ref14) {
-  var isPopup = _ref14.isPopup;
+var LoginDivider = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: ", ";\n  margin: 30px 0;\n\n  p {\n    margin: 0;\n    width: 70px;\n    font-size: 14px;\n    color: #748194;\n    text-align: center;\n  }\n"])), function (_ref15) {
+  var isPopup = _ref15.isPopup;
   return isPopup ? '100%' : '80%';
 });
 

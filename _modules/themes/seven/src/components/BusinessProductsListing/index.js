@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.useWindowSize = exports.BusinessProductsListing = exports.AgeCheckForm = void 0;
+exports.useWindowSize = exports.BusinessProductsListing = exports.BreackFastCheck = exports.AgeCheckForm = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -177,16 +177,73 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       ageError = _useState18[0],
       setAgeError = _useState18[1];
 
+  var _useState19 = (0, _react.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      isNestBreackFast = _useState20[0],
+      setIsNestBreackFast = _useState20[1];
+
+  var _useState21 = (0, _react.useState)(''),
+      _useState22 = _slicedToArray(_useState21, 2),
+      businessOpentime = _useState22[0],
+      setBusinessOpentime = _useState22[1];
+
   var ageValidationCategorys = ['Vinos'.toUpperCase(), 'Cervezas'.toUpperCase()];
+  var breakFastCategories = ['Desayunos'.toUpperCase(), 'Desayuno'.toUpperCase()];
 
   var handler = function handler() {
     setOpenBusinessInformation(true);
   };
 
+  var scheduleFormatted = function scheduleFormatted(_ref) {
+    var hour = _ref.hour,
+        minute = _ref.minute;
+
+    var checkTime = function checkTime(val) {
+      return val < 10 ? "0".concat(val) : val;
+    };
+
+    return "".concat(checkTime(hour), ":").concat(checkTime(minute));
+  };
+
+  var checkIsHaveBreakFast = function checkIsHaveBreakFast(product) {
+    var existIndex = Object.keys(product).findIndex(function (name) {
+      return name === 'breakfast';
+    });
+
+    if (existIndex > -1) {
+      return true;
+    }
+
+    return false;
+  };
+
   var onProductClick = function onProductClick(product) {
-    if (ageError && ageValidationCategorys.indexOf((business === null || business === void 0 ? void 0 : business.categories.filter(function (category) {
+    var _categoryName = business === null || business === void 0 ? void 0 : business.categories.filter(function (category) {
       return category.id === (product === null || product === void 0 ? void 0 : product.category_id);
-    }))[0].name) > -1) {
+    })[0].name;
+
+    if (_categoryName.indexOf('/')) {
+      _categoryName = _categoryName.split('/')[0];
+
+      _categoryName.toUpperCase();
+    } else {
+      _categoryName.toUpperCase();
+    }
+
+    if (breakFastCategories.indexOf(_categoryName) > -1) {
+      var hour = new Date().getHours();
+      var businessOpenTime = scheduleFormatted(business.today.lapses[0].open);
+
+      var _isHaveBreakFastMeta = checkIsHaveBreakFast(product);
+
+      if (_isHaveBreakFastMeta && hour < 12) {
+        setBusinessOpentime(businessOpenTime);
+        setIsNestBreackFast(true);
+        return;
+      }
+    }
+
+    if (ageError && ageValidationCategorys.indexOf(_categoryName) > -1) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         open: true,
         content: [t('UNDERAGE_MESSAGE', 'We cannot add this product because you are a minor.')]
@@ -194,9 +251,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return;
     }
 
-    if (!isOver18Age && ageValidationCategorys.indexOf((business === null || business === void 0 ? void 0 : business.categories.filter(function (category) {
-      return category.id === (product === null || product === void 0 ? void 0 : product.category_id);
-    }))[0].name) > -1) {
+    if (!isOver18Age && ageValidationCategorys.indexOf(_categoryName) > -1) {
       setOpenAgeConfirm(true);
       return;
     }
@@ -228,6 +283,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onProductRedirect({
       slug: business === null || business === void 0 ? void 0 : business.slug
     });
+  };
+
+  var closeCustomModal = function closeCustomModal() {
+    setOpenAgeConfirm(false);
+    setIsNestBreackFast(false);
   };
 
   var handleScroll = (0, _react.useCallback)(function () {
@@ -420,14 +480,17 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_CustomModal.CustomModal, {
     width: "40%",
     padding: "0",
-    open: openAgeConfirm,
+    open: openAgeConfirm || isNestBreackFast,
     onClose: function onClose() {
-      return setOpenAgeConfirm(false);
+      return closeCustomModal();
     }
-  }, /*#__PURE__*/_react.default.createElement(AgeCheckForm, {
+  }, openAgeConfirm && /*#__PURE__*/_react.default.createElement(AgeCheckForm, {
     setIsOver18Age: setIsOver18Age,
     setOpenAgeConfirm: setOpenAgeConfirm,
     setAgeError: setAgeError
+  }), isNestBreackFast && /*#__PURE__*/_react.default.createElement(BreackFastCheck, {
+    businessOpentime: businessOpentime,
+    closeCustomModal: closeCustomModal
   })), ageError && /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: "Alsea Colombia",
     content: alertState.content,
@@ -460,10 +523,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState19 = (0, _react.useState)(false),
-      _useState20 = _slicedToArray(_useState19, 2),
-      isInitialRender = _useState20[0],
-      setIsInitialRender = _useState20[1];
+  var _useState23 = (0, _react.useState)(false),
+      _useState24 = _slicedToArray(_useState23, 2),
+      isInitialRender = _useState24[0],
+      setIsInitialRender = _useState24[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,
@@ -511,14 +574,31 @@ var AgeCheckForm = function AgeCheckForm(props) {
 
 exports.AgeCheckForm = AgeCheckForm;
 
+var BreackFastCheck = function BreackFastCheck(props) {
+  var _useLanguage5 = (0, _orderingComponents.useLanguage)(),
+      _useLanguage6 = _slicedToArray(_useLanguage5, 2),
+      t = _useLanguage6[1];
+
+  var businessOpentime = props.businessOpentime,
+      closeCustomModal = props.closeCustomModal;
+  return /*#__PURE__*/_react.default.createElement(_styles.BreackFastCheckModalContent, null, /*#__PURE__*/_react.default.createElement("p", null, t('ARCHIES_BREAKFAST_ALERT').replaceAll('_schedule_open_', businessOpentime)), /*#__PURE__*/_react.default.createElement(_styles.AgreeButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    onClick: function onClick() {
+      return closeCustomModal();
+    }
+  }, " ", t('OK', 'Ok'))));
+};
+
+exports.BreackFastCheck = BreackFastCheck;
+
 var useWindowSize = function useWindowSize() {
-  var _useState21 = (0, _react.useState)({
+  var _useState25 = (0, _react.useState)({
     width: undefined,
     height: undefined
   }),
-      _useState22 = _slicedToArray(_useState21, 2),
-      windowSize = _useState22[0],
-      setWindowSize = _useState22[1];
+      _useState26 = _slicedToArray(_useState25, 2),
+      windowSize = _useState26[0],
+      setWindowSize = _useState26[1];
 
   (0, _react.useEffect)(function () {
     var handleResize = function handleResize() {

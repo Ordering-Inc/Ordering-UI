@@ -68,7 +68,10 @@ var CouponContainer = _styledComponents.default.div(_templateObject11 || (_templ
 
 exports.CouponContainer = CouponContainer;
 
-var CheckoutAction = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 6px;\n  box-sizing: border-box;\n  margin-left: 3px;\n  margin-bottom: 10px;\n  p {\n    margin: 0;\n    font-weight: 600;\n    font-size: 16px;\n    color: ", ";\n  }\n  button {\n    padding: 10px 30px;\n    width: 100%;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n\n  @media (min-width: 767px){\n    top: 60px;\n  }\n\n  @media (max-width: 430px){\n    top: 60px;\n  }\n\n  @media (max-width: 376px){\n    top: 100px;\n  }\n"])), function (props) {
+var CheckoutAction = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 6px;\n  box-sizing: border-box;\n  margin-left: 3px;\n  margin-bottom: ", ";\n  p {\n    margin: 0;\n    font-weight: 600;\n    font-size: 16px;\n    color: ", ";\n  }\n  button {\n    padding: 10px 30px;\n    width: 100%;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n\n  @media (min-width: 767px){\n    top: 60px;\n  }\n\n  @media (max-width: 430px){\n    top: 60px;\n  }\n\n  @media (max-width: 376px){\n    top: 100px;\n  }\n"])), function (_ref6) {
+  var isIOS = _ref6.isIOS;
+  return isIOS ? '20px' : '10px';
+}, function (props) {
   return props.theme.colors.darkTextColor;
 });
 

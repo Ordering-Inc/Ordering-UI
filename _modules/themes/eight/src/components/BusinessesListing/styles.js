@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BusinessContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 90%;\n  margin: 30px auto;\n\n  h1 {\n    color: ", ";\n    font-size: 24px;\n    text-align: center;\n    width: 100%;\n    margin: 0 0 20px 0;\n  }\n\n  @media (min-width: 768px) {\n    h1 {\n      font-size: 32px;\n    }\n  }\n\n  @media (min-width: 992px) {\n    width: 80%;\n    h1 {\n      font-size: 40px;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    margin: 70px auto;\n    h1 {\n      font-size: 48px;\n    }\n  }\n"])), function (props) {
+var BusinessContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 90%;\n  margin: 30px auto;\n\n  > h1 {\n    color: ", ";\n    font-size: 24px;\n    text-align: center;\n    width: 100%;\n    margin: 0 0 20px 0;\n  }\n\n  @media (min-width: 768px) {\n    > h1 {\n      font-size: 32px;\n    }\n  }\n\n  @media (min-width: 992px) {\n    width: 80%;\n    > h1 {\n      font-size: 40px;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    margin: 70px auto;\n    > h1 {\n      font-size: 48px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 });
 

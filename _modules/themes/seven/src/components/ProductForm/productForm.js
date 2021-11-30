@@ -770,8 +770,7 @@ var ProductForm = function ProductForm(props) {
           return option.suboptions;
         }))).filter(function (suboption) {
           return suboption.name === 'Grande (16oz - 437ml)';
-        }); // console.log(suboptions)
-
+        });
 
         var states = suboptions.map(function (suboption, i) {
           var price = options[i].with_half_option && suboption.half_price && (suboption === null || suboption === void 0 ? void 0 : suboption.position) !== 'whole' ? suboption.half_price : suboption.price;

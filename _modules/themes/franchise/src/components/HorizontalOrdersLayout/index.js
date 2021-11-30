@@ -13,6 +13,8 @@ var _styles = require("./styles");
 
 var _styles2 = require("../OrdersOption/styles");
 
+var _styledComponents = require("styled-components");
+
 var _AutoScroll = require("../AutoScroll");
 
 var _Tabs = require("../../styles/Tabs");
@@ -54,11 +56,14 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
-      parseDate = _useUtils2$.parseDate;
+      parseDate = _useUtils2$.parseDate,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var ordersToShow = businessesIds ? orders.filter(function (order) {
     return businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id);
@@ -94,7 +99,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         key: i
       }, props));
     }), orders.length > 0 && ordersToShow.map(function (order) {
-      var _order$business, _getOrderStatus, _order$summary;
+      var _order$business, _theme$images, _theme$images$dummies, _order$business2, _getOrderStatus, _order$summary;
 
       return /*#__PURE__*/_react.default.createElement(_styles.Card, {
         key: order.id || order.uuid,
@@ -103,9 +108,11 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         onClick: function onClick() {
           return handleClickCard(order === null || order === void 0 ? void 0 : order.uuid);
         }
-      }, /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
+      }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, {
+        bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_400,c_limit')
+      }), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
         activeOrders: true
-      }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.name), /*#__PURE__*/_react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("div", {
         className: "orders-detail"
       }, /*#__PURE__*/_react.default.createElement("p", {
         name: "order_number"
@@ -117,27 +124,26 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         className: "order-status"
       }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)), /*#__PURE__*/_react.default.createElement(_styles.Price, {
         isBusinessesPage: isBusinessesPage
-      }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))), pastOrders && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))))), pastOrders && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
         outline: true,
         color: "primary",
         onClick: function onClick() {
           return handleClickCard(order.uuid);
         }
-      }, t('REVIEW', 'Review')), pastOrders && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      }, t('REVIEW', 'Review')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
         color: "primary",
         className: "reorder",
         outline: true,
         onClick: function onClick() {
           return handleReorder(order.id);
         }
-      }, t('REORDER', 'Reorder')))));
+      }, t('REORDER', 'Reorder'))));
     }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.Card, {
       flex: true,
       nobg: true,
       isBusinessesPage: isBusinessesPage
     }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       className: "load-orders",
-      bgtransparent: true,
       color: "primary",
       outline: true,
       onClick: loadMoreOrders

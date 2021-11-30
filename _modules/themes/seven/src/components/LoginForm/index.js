@@ -379,7 +379,7 @@ var LoginFormUI = function LoginFormUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.FormTitle, {
     isPopup: isPopup
-  }, t('LOGIN_FORM_TITLE', 'Log in to your account and enjoy the Benefits we have for you.')), useLoginByEmail && useLoginByCellphone && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+  }, t('LOGIN_ARCHIES_TITLE', 'Welcome to your Archies order!')), /*#__PURE__*/_react.default.createElement(_styles.FormSubTitle, null, t('LOGIN_ARCHIES_SUBTITLE', 'Enter your login details and take advantage of great benefits that we have for you: ordering and paying online, tracking your orders in real time, chat, order history, exclusive promotions and excellent seasonal news.')), useLoginByEmail && useLoginByCellphone && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"

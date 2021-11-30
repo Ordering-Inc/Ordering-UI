@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSearch = exports.WrappLayout = exports.WrapContent = exports.UnderAgeButtons = exports.UnderAge = exports.SkeletonItem = exports.ProductsNotFound = exports.ProductsContainer = exports.ProductLoading = exports.CartegoryTitle = exports.BusinessProductsCategorieWrapper = exports.AgeConfirmContainer = void 0;
+exports.WrapperSearch = exports.WrappLayout = exports.WrapContent = exports.UnderAgeButtons = exports.UnderAge = exports.SkeletonItem = exports.ProductsNotFound = exports.ProductsContainer = exports.ProductLoading = exports.CartegoryTitle = exports.BusinessProductsCategorieWrapper = exports.BreackFastCheckModalContent = exports.AgreeButtonWrapper = exports.AgeConfirmContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -62,7 +62,7 @@ var BusinessProductsCategorieWrapper = _styledComponents.default.div(_templateOb
 
 exports.BusinessProductsCategorieWrapper = BusinessProductsCategorieWrapper;
 
-var CartegoryTitle = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  background-color: ", ";\n  font-size: 20px;\n  line-height: 30px;\n  color: #fff;\n  font-weight: bold;\n  padding: 10px 15px;\n  @media (min-width: 768px) {\n    background-color: ", ";\n    padding-left: 10%;\n    ", "\n  }\n  @media (min-width: 1024px) {\n    padding-left: 15%;\n    ", "\n  }\n"])), function (props) {
+var CartegoryTitle = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  background-color: ", ";\n  font-size: 20px;\n  line-height: 30px;\n  color: #fff;\n  font-weight: bold;\n  padding: 10px 15px;\n  @media (min-width: 768px) {\n    margin-right: 14px;\n    background-color: ", ";\n    padding-left: 10%;\n    ", "\n  }\n  @media (min-width: 1024px) {\n    padding-left: 15%;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primaryDark;
@@ -94,3 +94,11 @@ exports.UnderAge = UnderAge;
 var UnderAgeButtons = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n\n  button {\n    width: 100px;\n    margin: 0 7px;\n    font-size: 16px;\n    font-weight: bold;\n  }\n"])));
 
 exports.UnderAgeButtons = UnderAgeButtons;
+
+var BreackFastCheckModalContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  padding: 20px;\n"])));
+
+exports.BreackFastCheckModalContent = BreackFastCheckModalContent;
+
+var AgreeButtonWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  margin-top: 10px;\n  button {\n    text-transform: uppercase;\n    padding: 3px;\n    font-size: 14px;\n    width: 100px;\n  }\n"])));
+
+exports.AgreeButtonWrapper = AgreeButtonWrapper;

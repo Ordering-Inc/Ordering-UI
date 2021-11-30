@@ -67,6 +67,9 @@ var IconOption = function IconOption(_ref) {
     case 'orders':
       return /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null);
 
+    case 'orders_manager':
+      return /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null);
+
     case 'help':
       return /*#__PURE__*/_react.default.createElement(_BiHelpCircle.default, null);
 
@@ -75,17 +78,6 @@ var IconOption = function IconOption(_ref) {
   }
 };
 
-var optionsDefault = [{
-  name: 'profile',
-  pathname: '/profile'
-}, {
-  name: 'orders',
-  pathname: '/profile/orders'
-}, {
-  name: 'help',
-  pathname: '/help'
-}];
-
 var UserPopover = function UserPopover(props) {
   var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
 
@@ -93,7 +85,8 @@ var UserPopover = function UserPopover(props) {
       isHome = props.isHome,
       optionsList = props.optionsList,
       withLogout = props.withLogout,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      isLinkedToAdmin = props.isLinkedToAdmin;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -110,9 +103,24 @@ var UserPopover = function UserPopover(props) {
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
+  var optionsDefault = [{
+    name: 'profile',
+    pathname: '/profile'
+  }, {
+    name: 'orders',
+    pathname: '/profile/orders'
+  }, {
+    name: 'help',
+    pathname: '/help'
+  }, {
+    name: 'orders_manager',
+    link: t('REACT_ORDERS_MANAGER_URL', 'https://new-admin.ordering.co/orders')
+  }];
   var options = isCustomerMode ? optionsDefault.filter(function (option) {
-    return option.name === 'profile';
-  }) : optionsList || optionsDefault;
+    return option.name === 'profile' || option.name === 'orders_manager' && isLinkedToAdmin;
+  }) : optionsList || optionsDefault.filter(function (option) {
+    return option.pathname;
+  });
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
     placement: 'auto',
     modifiers: [{
@@ -152,10 +160,15 @@ var UserPopover = function UserPopover(props) {
     }
   };
 
-  var handleGoToPage = function handleGoToPage(page) {
-    events.emit('go_to_page', {
-      page: page
-    });
+  var handleGoToPage = function handleGoToPage(page, link) {
+    if (link) {
+      window.open(link, '_blank').focus();
+    } else {
+      events.emit('go_to_page', {
+        page: page
+      });
+    }
+
     props.onClick && props.onClick();
   };
 
@@ -205,7 +218,7 @@ var UserPopover = function UserPopover(props) {
       key: option.name,
       active: window.location.pathname === option.pathname,
       onClick: function onClick() {
-        return handleGoToPage(option.name);
+        return handleGoToPage(option.name, option.link);
       }
     }, /*#__PURE__*/_react.default.createElement(IconOption, {
       value: option.name

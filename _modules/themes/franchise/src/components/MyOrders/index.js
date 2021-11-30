@@ -68,7 +68,7 @@ var MyOrders = function MyOrders(props) {
   }];
 
   var handleChangeFilter = function handleChangeFilter(key) {
-    if (selectItem === key) setSelectItem('');else setSelectItem(key);
+    if (selectItem === key) setSelectItem('all');else setSelectItem(key);
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {

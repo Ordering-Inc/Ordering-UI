@@ -23,6 +23,8 @@ var _UpsellingPage = require("../UpsellingPage");
 
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
+var _Modal = require("../Modal");
+
 var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
@@ -42,6 +44,8 @@ var _Cart = require("../Cart");
 var _Confirm = require("../Confirm");
 
 var _CartContent = require("../CartContent");
+
+var _OrderSuccessModal = require("../OrderSuccessModal");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -160,9 +164,21 @@ var CheckoutUI = function CheckoutUI(props) {
       isUserDetailsEdit = _useState8[0],
       setIsUserDetailsEdit = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      createOrder = _useState10[0],
+      setCreateOrder = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      cardData = _useState12[0],
+      setCardData = _useState12[1];
+
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
 
   var handlePlaceOrder = function handlePlaceOrder() {
+    setCreateOrder(true);
+
     if (!userErrors.length) {
       handlerClickPlaceOrder && handlerClickPlaceOrder();
       return;
@@ -394,7 +410,8 @@ var CheckoutUI = function CheckoutUI(props) {
     setErrorCash: setErrorCash,
     handleOrderRedirect: handleOrderRedirect,
     isCustomerMode: isCustomerMode,
-    paySelected: paymethodSelected
+    paySelected: paymethodSelected,
+    setCardData: setCardData
   })), (_props$beforeElements7 = props.beforeElementsSectionSix) === null || _props$beforeElements7 === void 0 ? void 0 : _props$beforeElements7.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -422,7 +439,19 @@ var CheckoutUI = function CheckoutUI(props) {
     onClick: function onClick() {
       return handlePlaceOrder();
     }
-  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.'))), createOrder && cartState.cart && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: createOrder,
+    width: "50%",
+    hideCloseDefault: true,
+    onClose: function onClose() {
+      return setCreateOrder(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_OrderSuccessModal.OrderSuccessModal, {
+    cardData: cardData,
+    cart: cartState.cart,
+    businessData: businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.business,
+    isCheckOut: true
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CUSTOMER_DETAILS', 'Customer Details'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -473,42 +502,42 @@ var Checkout = function Checkout(props) {
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
-  var _useState9 = (0, _react.useState)({
+  var _useState13 = (0, _react.useState)({
     loading: true,
     error: null,
     cart: null
   }),
-      _useState10 = _slicedToArray(_useState9, 2),
-      cartState = _useState10[0],
-      setCartState = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      openUpselling = _useState12[0],
-      setOpenUpselling = _useState12[1];
-
-  var _useState13 = (0, _react.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      canOpenUpselling = _useState14[0],
-      setCanOpenUpselling = _useState14[1];
+      cartState = _useState14[0],
+      setCartState = _useState14[1];
 
-  var _useState15 = (0, _react.useState)(null),
+  var _useState15 = (0, _react.useState)(false),
       _useState16 = _slicedToArray(_useState15, 2),
-      currentCart = _useState16[0],
-      setCurrentCart = _useState16[1];
+      openUpselling = _useState16[0],
+      setOpenUpselling = _useState16[1];
 
-  var _useState17 = (0, _react.useState)({
+  var _useState17 = (0, _react.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      canOpenUpselling = _useState18[0],
+      setCanOpenUpselling = _useState18[1];
+
+  var _useState19 = (0, _react.useState)(null),
+      _useState20 = _slicedToArray(_useState19, 2),
+      currentCart = _useState20[0],
+      setCurrentCart = _useState20[1];
+
+  var _useState21 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState18 = _slicedToArray(_useState17, 2),
-      alertState = _useState18[0],
-      setAlertState = _useState18[1];
+      _useState22 = _slicedToArray(_useState21, 2),
+      alertState = _useState22[0],
+      setAlertState = _useState22[1];
 
-  var _useState19 = (0, _react.useState)(false),
-      _useState20 = _slicedToArray(_useState19, 2),
-      isResetPaymethod = _useState20[0],
-      setIsResetPaymethod = _useState20[1];
+  var _useState23 = (0, _react.useState)(false),
+      _useState24 = _slicedToArray(_useState23, 2),
+      isResetPaymethod = _useState24[0],
+      setIsResetPaymethod = _useState24[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products2;

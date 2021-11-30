@@ -269,7 +269,7 @@ var AddressListUI = function AddressListUI(props) {
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup
   }), !isPopover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?'),
+    title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
     open: !isPopover && addressOpen,
     onClose: function onClose() {
       return setAddressOpen(false);

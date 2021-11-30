@@ -140,7 +140,6 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       isBusinessesPage: isBusinessesPage
     }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       className: "load-orders",
-      bgtransparent: true,
       color: "primary",
       outline: true,
       onClick: loadMoreOrders

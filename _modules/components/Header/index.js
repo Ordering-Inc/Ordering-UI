@@ -91,7 +91,8 @@ var Header = function Header(props) {
       closeCartPopover = props.closeCartPopover,
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      isLinkedToAdmin = props.isLinkedToAdmin;
 
   var _useLocation = (0, _reactRouterDom.useLocation)(),
       pathname = _useLocation.pathname;
@@ -283,8 +284,8 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     style: styles.clearCustomer
   }))), /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
-    configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
-    defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1
+    configTypes: !(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0 ? configTypes : null,
+    defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0) && 1
   }), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.preorder_status_enabled) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === undefined) && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
@@ -331,7 +332,8 @@ var Header = function Header(props) {
     },
     onClose: function onClose() {
       return handleClosePopover('user');
-    }
+    },
+    isLinkedToAdmin: isLinkedToAdmin
   }), isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
     carts: cartsWithProducts,

@@ -62,7 +62,10 @@ var ProductComment = _styledComponents.default.div(_templateObject9 || (_templat
 
 exports.ProductComment = ProductComment;
 
-var ProductActions = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 10px 40px;\n  width: 100%;\n  box-sizing: border-box;\n  border-top: 1px solid #E9ECEF;\n  position: fixed;\n  bottom: -5px;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  div.price {\n    font-weight: 600;\n    font-size: 16px;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  div.incdec-control {\n    width: 20%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    svg {\n      width: 16px;\n      height: 16px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n    color: #B1BCCC;\n  }\n\n  button.add {\n    width: 45%;\n    margin-top: 0;\n    padding: 5px 10px;\n    position: relative;\n    font-size: 14px;\n    &.soldout {\n      width: 70%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 769px){\n    position: relative;\n  }\n  @media (min-width: 1200px){\n    bottom: -21px;\n  }\n"])), function (props) {
+var ProductActions = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: ", ";\n  width: 100%;\n  box-sizing: border-box;\n  border-top: 1px solid #E9ECEF;\n  position: fixed;\n  bottom: -5px;\n  right: 0;\n  background-color: #FFF;\n\n  div.price {\n    font-weight: 600;\n    font-size: 16px;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  div.incdec-control {\n    width: 20%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    svg {\n      width: 16px;\n      height: 16px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n    color: #B1BCCC;\n  }\n\n  button.add {\n    width: 45%;\n    margin-top: 0;\n    padding: 5px 10px;\n    position: relative;\n    font-size: 14px;\n    &.soldout {\n      width: 70%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 769px){\n    position: relative;\n  }\n  @media (min-width: 1200px){\n    bottom: -21px;\n  }\n"])), function (_ref2) {
+  var isIOS = _ref2.isIOS;
+  return isIOS ? '10px 40px 20px' : '10px 40px';
+}, function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.darkTextColor;
@@ -70,8 +73,8 @@ var ProductActions = _styledComponents.default.div(_templateObject10 || (_templa
 
 exports.ProductActions = ProductActions;
 
-var SkeletonBlock = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n  margin: auto;\n\n  span {\n    margin-bottom: 10px;\n  }\n"])), function (_ref2) {
-  var width = _ref2.width;
+var SkeletonBlock = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-radius: 16px;\n  margin: auto;\n\n  span {\n    margin-bottom: 10px;\n  }\n"])), function (_ref3) {
+  var width = _ref3.width;
   return width && "".concat(width, "%");
 });
 
@@ -85,15 +88,15 @@ var SkuContent = _styledComponents.default.div(_templateObject13 || (_templateOb
 
 exports.SkuContent = SkuContent;
 
-var WrapperIngredients = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref3) {
-  var isProductSoldout = _ref3.isProductSoldout;
+var WrapperIngredients = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref4) {
+  var isProductSoldout = _ref4.isProductSoldout;
   return isProductSoldout && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    border-radius: 10px;\n    pointer-events: none;\n    background: hsl(0, 0%, 72%);\n  "])));
 });
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var ProductTabContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 40px;\n  background: ", ";\n  border-bottom: 1px solid #E9ECEF;\n"])), function (_ref4) {
-  var theme = _ref4.theme;
+var ProductTabContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 40px;\n  background: ", ";\n  border-bottom: 1px solid #E9ECEF;\n"])), function (_ref5) {
+  var theme = _ref5.theme;
   return theme.colors.white;
 });
 
