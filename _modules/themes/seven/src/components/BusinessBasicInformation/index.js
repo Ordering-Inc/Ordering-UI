@@ -25,12 +25,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _props$beforeElements, _props$beforeComponen, _business$today, _orderState$options, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _business$today, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       businessState = props.businessState;
@@ -40,14 +40,6 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var _useUtils = (0, _orderingComponents.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
-
-  var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      orderState = _useOrder2[0];
 
   var scheduleFormatted = function scheduleFormatted(_ref) {
     var hour = _ref.hour,
@@ -75,11 +67,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     isClosed: !(business !== null && business !== void 0 && business.open)
   }, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", {
     className: "bold"
-  }, business === null || business === void 0 ? void 0 : business.name), (business === null || business === void 0 ? void 0 : (_business$today = business.today) === null || _business$today === void 0 ? void 0 : _business$today.enabled) && /*#__PURE__*/_react.default.createElement(_styles.ScheduleDate, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, " ", t('TODAY_DATE', "Today's Hours"), ' : ', " "), /*#__PURE__*/_react.default.createElement(_styles.ScheduleTime, null, scheduleFormatted(business.today.lapses[0].open)), /*#__PURE__*/_react.default.createElement(_styles.ScheduleTime, null, " ", ' - '), /*#__PURE__*/_react.default.createElement(_styles.ScheduleTime, null, scheduleFormatted(business.today.lapses[0].close))), /*#__PURE__*/_react.default.createElement(_styles.BuinessMeta, null, (business === null || business === void 0 ? void 0 : business.delivery_price) >= 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.MetaItem, null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_PRICE', 'Delivery Price'), ' : '), business && parsePrice(business === null || business === void 0 ? void 0 : business.delivery_price))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70
-  }), (business === null || business === void 0 ? void 0 : business.distance) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, business !== null && business !== void 0 && business.distance || (business === null || business === void 0 ? void 0 : business.distance) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MetaItem, null, /*#__PURE__*/_react.default.createElement("span", null, t('DISTANCE', 'Distance'), ' : '), business === null || business === void 0 ? void 0 : business.distance.toFixed(2))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70
-  })))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, business === null || business === void 0 ? void 0 : business.name), (business === null || business === void 0 ? void 0 : (_business$today = business.today) === null || _business$today === void 0 ? void 0 : _business$today.enabled) && /*#__PURE__*/_react.default.createElement(_styles.ScheduleDate, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, " ", t('TODAY_DATE', "Today's Hours"), ' : ', " "), /*#__PURE__*/_react.default.createElement(_styles.ScheduleTime, null, scheduleFormatted(business.today.lapses[0].open)), /*#__PURE__*/_react.default.createElement(_styles.ScheduleTime, null, " ", ' - '), /*#__PURE__*/_react.default.createElement(_styles.ScheduleTime, null, scheduleFormatted(business.today.lapses[0].close)))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150,
     height: 25
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
