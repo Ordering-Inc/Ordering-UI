@@ -148,6 +148,7 @@ export const HorizontalItem = styled.div`
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   padding: 10px;
+  min-width: 232px;
 
   ${props => props.theme.rtl && css`
     margin-left: 15px;
@@ -161,12 +162,13 @@ export const HorizontalImage = styled.div`
     min-width: 73px;
     min-height: 73px;
     margin-left: 10px;
+    width: 92px;
+    height: 92px;
 
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
       margin-left: 0;
     `}
-
   }
 `
 
@@ -176,29 +178,30 @@ export const HorizontalDetails = styled.div`
     font-weight: 500;
     font-size: 12px;
     color: ${props => props.theme.colors.darkTextColor};
-    margin: 0 0 5px 0;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 
   span {
     font-size: 12px;
     color: ${props => props.theme.colors.darkTextColor};
-
-    &.discount {
-      font-size: 10px;
-      color: #909BA9;
-      ${props => props.theme?.rtl ? css`
-        margin-right: 5px;
-      ` : css`
-        margin-left: 5px;
-      `}
-    }
   }
 
   button {
     margin-top: 6px;
     border-radius: 50px;
+    border: none;
     color: ${props => props.theme?.colors.primary};
-    background: ${props => props.theme?.colors.primaryContrast}
+    background: ${props => props.theme?.colors.primaryContrast};
+    font-size: 13px;
+
+    &:hover {
+      color: ${props => props.theme?.colors.primaryContrast};
+      background: ${props => props.theme?.colors.primary};
+    }
   }
 `
 export const WrapAutoScroll = styled.div`

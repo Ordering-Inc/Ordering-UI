@@ -1,13 +1,25 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  padding: 0px 10px;
+  padding: 0px 5px;
+  margin-top: 35px;
+
+  .cart {
+    > div {
+      > div {
+        > .accordion {
+          padding: 10px 5px;
+        }
+      }
+    }
+  }
 
   div:not(:last-child) {
     padding-bottom: 5px;
   }
 
   @media (min-width: 769px) {
+    margin-top: 0px;
     margin-bottom: 10px;
     padding: 15px;
   }

@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components'
+import React from 'react'
 
 export const Content = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   border-radius: 16px;
   padding: 10px;
-
+  flex: 1;
 `
 
 export const Price = styled.div`
@@ -20,9 +21,10 @@ export const Price = styled.div`
     align-items: center;
   }
   h2 {
-    font-size: 14px;
+    font-size: 16px;
     margin-block-end: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
     margin-block-start: 0.1em;
+    font-weight: normal;
   }
   p {
     margin-block-end: 0.1em;
@@ -33,35 +35,25 @@ export const Price = styled.div`
     text-overflow: ellipsis;
     margin-left: 5px;
   }
-
-  button {
-    border-radius: 50px;
-    font-size: 10px;
-    line-height: 19px;
-    padding: 4px 8px;
-    border: 1px solid ${props => props.theme.colors.primaryContrast};
-    margin: 5px;
-
-    &.reorder {
-      background: ${props => props.theme.colors.primaryContrast};
-      &:hover {
-        background: ${props => props.theme.colors.primary};
-      }
-    }
-  }
 `
 
 export const Card = styled.div`
-  min-width: 300px;
-  width: 300px;
+  min-width: 380px;
+  width: 380px;
   margin: 10px;
-  display: inline-block;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
   background: white;
   height: ${({ isBusinessesPage }) => isBusinessesPage && '300px'};
   max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '220px'};
   border-radius: 16px;
   text-align: left;
   cursor: ${({ isBusinessesPage }) => isBusinessesPage && 'pointer'};
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;
+  }
 
   button.load-orders {
     padding: 10px 30px;
@@ -93,5 +85,68 @@ export const Card = styled.div`
       width: calc(33% - 40px);
     `}
   }
+`
 
+const BusinessLogoWrapperStyled = styled.div`
+  display: flex;
+  width: 86px;
+  min-width: 86px;
+  height: 86px;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  min-height: 86px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7.6px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+
+  margin-left: 8px;
+
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: 8px;
+  `}
+`
+
+export const BusinessLogoWrapper = (props) => {
+  const style = {}
+  if (props.bgimage && !props.isClosed) {
+    style.backgroundImage = `url(${props.bgimage})`
+  } else {
+    style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage})`
+  }
+
+  return (
+    <BusinessLogoWrapperStyled {...props} style={style}>
+      {props.children}
+    </BusinessLogoWrapperStyled>
+  )
+}
+
+export const ButtonWrapper = styled.div`
+  position: absolute;
+  right: 0px;
+  top: 4px;
+  display: flex;
+  align-items: center;
+
+  button {
+    border-radius: 50px;
+    font-size: 10px;
+    line-height: 19px;
+    padding: 4px 8px;
+    border: 1px solid ${props => props.theme.colors.primaryContrast};
+    margin: 5px;
+
+    &.reorder {
+      background: ${props => props.theme.colors.primaryContrast};
+      &:hover {
+        background: ${props => props.theme.colors.primary};
+      }
+    }
+  }
 `

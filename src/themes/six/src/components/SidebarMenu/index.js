@@ -207,8 +207,8 @@ export const SidebarMenu = (props) => {
           <MenuLink>
             <WrappContent>
               <OrderTypeSelectorHeader
-                configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+                configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+                defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
               />
             </WrappContent>
             <Hr />

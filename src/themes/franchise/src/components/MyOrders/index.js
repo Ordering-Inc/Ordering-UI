@@ -19,7 +19,7 @@ export const MyOrders = (props) => {
   ]
 
   const handleChangeFilter = (key) => {
-    if (selectItem === key) setSelectItem('')
+    if (selectItem === key) setSelectItem('all')
     else setSelectItem(key)
   }
 

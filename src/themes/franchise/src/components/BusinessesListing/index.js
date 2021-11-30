@@ -49,6 +49,7 @@ const BusinessesListingUI = (props) => {
     handleBusinessClick,
     currentPageParam
   } = props
+
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
@@ -59,6 +60,7 @@ const BusinessesListingUI = (props) => {
   const [mapErrors, setMapErrors] = useState('')
   const [prevPage, setPrevPage] = useState({ page: currentPageParam || 1, loading: false })
   const [nextPage, setNextPage] = useState({ page: currentPageParam || 1, loading: false })
+  const [isBusinessNear, setIsBusinessNear] = useState(true)
   const location = useLocation()
   const history = useHistory()
   const windowSize = useWindowSize()
@@ -118,7 +120,7 @@ const BusinessesListingUI = (props) => {
 
   useEffect(() => {
     if (mapErrors) {
-      handleMapErrors(mapErrors)
+      mapErrors !== 'ERROR_NOT_FOUND_BUSINESSES' && handleMapErrors(mapErrors)
       setActiveMap(false)
     }
   }, [mapErrors])
@@ -236,7 +238,7 @@ const BusinessesListingUI = (props) => {
               ))
             )}
             {
-              !businessesList.loading && businessesList.businesses.length === 0 && (
+              !businessesList.loading && (businessesList.businesses.length === 0 || !isBusinessNear) && (
                 <NotFoundSource
                   content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
                 >
@@ -251,7 +253,7 @@ const BusinessesListingUI = (props) => {
               )
             }
             {
-              businessesList.businesses?.map((business) => (
+              isBusinessNear && businessesList.businesses?.map((business) => (
                 <BusinessController
                   key={business.id}
                   className='card'
@@ -289,6 +291,7 @@ const BusinessesListingUI = (props) => {
                 businessList={businessesList.businesses}
                 userLocation={orderState?.options?.address?.location}
                 setErrors={setMapErrors}
+                setIsBusinessNear={setIsBusinessNear}
               />
             ) : (
               <GoogleMapsMap

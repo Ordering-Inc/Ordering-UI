@@ -107,7 +107,7 @@ export const BusinessFeatures = styled.div`
   position: absolute;
   top: 10%;
   width: 100%;
-  padding: 0 7vw;
+  padding: 0 15px;
   box-sizing: border-box;
 `
 
@@ -137,39 +137,58 @@ export const FeatureItems = styled.div`
   justify-content: space-between;
 `
 export const ItemInline = styled.div`
-  span #select-input {
+  > span #select-input {
     background-color: #F8F9FA !important;
     border: none;
     border-radius: 7.6px;
     svg {
-      font-size: 16px;
+      font-size: 14px;
     }
     #list {
       background-color: #fff;
       border: none;
       border-radius: 7.6px;
+
+      left: 0px;
+      right: initial;
+
+      ${props => props.theme.rtl && css`
+        left: initial;
+        right: 0px;
+      `}
+    }
+
+    > div:first-child {
+      font-size: 11px;
     }
   }
 
-
+  .moment-popover {
+    > div:first-child {
+      font-size: 11px;
+      padding: 4px 7px;
+      svg {
+        font-size: 14px;
+      }
+    }
+  }
 `
 
 export const BusinessSearch = styled.div`
     display: flex;
     background-color: #f8f9fa;
     align-items: center;
-    padding: 7px 8px;
+    padding: 7px;
     border-radius: 7px;
-    font-size: 14px;
+    font-size: 11px;
     svg {
-      font-size: 20px;
+      font-size: 15px;
     }
 `
 
 export const BusinessItemsWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding-top: 50px;
 `
 export const BusineessItems = styled.div`
   margin-top: 10px;
@@ -247,4 +266,12 @@ export const BusinessMeta = styled.div`
       margin: 0 3px;
     }
   }
+`
+
+export const SearchTitle = styled.h1`
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: -5px;
+  margin-bottom: 15px;
 `

@@ -218,8 +218,8 @@ export const Header = (props) => {
                 )}
                 <VerticalBorderLine />
                 <OrderTypeSelectorHeader
-                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                  defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+                  configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+                  defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
                 />
               </Menu>
             )}

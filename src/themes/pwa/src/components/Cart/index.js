@@ -277,7 +277,7 @@ const CartUI = (props) => {
               </OrderBill>
             )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
-              <CheckoutAction>
+              <CheckoutAction isFixed={windowSize.width < 576 && isStore}>
                 {windowSize.width > 576 && (
                   <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 )}

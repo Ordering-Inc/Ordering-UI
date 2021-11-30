@@ -369,8 +369,8 @@ export const Header = (props) => {
             {modalSelected === 'delivery' && (
               <OrderTypeSelectorContent
                 onClose={() => setModalIsOpen(false)}
-                configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+                configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+                defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
               />
             )}
           </Modal>

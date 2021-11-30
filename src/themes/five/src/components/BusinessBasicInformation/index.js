@@ -8,6 +8,7 @@ import { BusinessInformation } from '../BusinessInformation'
 import { SearchBar } from '../SearchBar'
 import { BusinessReviews } from '../BusinessReviews'
 import { MomentContent } from '../MomentContent'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
 import { useUtils, useOrder, useLanguage } from 'ordering-components'
 
@@ -173,7 +174,7 @@ export const BusinessBasicInformation = (props) => {
         </BusinessContent>
         {!loading && (
           <BusinessMoreDetail onClick={() => setOpenBusinessInformation(true)}>
-            <span>i</span>
+            <BsInfoCircle />
           </BusinessMoreDetail>
         )}
         <Modal

@@ -90,6 +90,10 @@ export const ProductFormTitle = styled.div`
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
   }
+
+  .price-discount {
+    text-decoration: line-through;
+  }
 `
 
 export const ProductEdition = styled.div`

@@ -5,6 +5,8 @@ export const SignUpContainer = styled.div`
   height: 100%;
   display: flex;
   min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 65px)'};
+  padding: 0 10px;
+  box-sizing: border-box;
 
   flex-direction: column;
 
@@ -32,7 +34,7 @@ export const FormSide = styled(Side)`
 `
 
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   display: flex;
   flex-direction: column;
 
@@ -85,7 +87,7 @@ export const RedirectLink = styled.div`
     width: calc(95% - 20px);
 
     @media (min-width: 481px) {
-      width: ${({ isPopup }) => isPopup ? 'calc(95% - 20px)' : 'calc(80% - 20px)'};
+      width: ${({ isPopup }) => isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)'};
     }
   `}
 
@@ -110,7 +112,7 @@ export const RedirectLink = styled.div`
 `
 
 export const SocialButtons = styled.div`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
 
   button {
     width: 100%;
@@ -144,7 +146,7 @@ export const SkeletonWrapper = styled.div`
 `
 
 export const SkeletonSocialWrapper = styled(SkeletonWrapper)`
-  width: ${({ isPopup }) => isPopup ? '95%' : '80%'};
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   span{
     margin-top: 0;
   }
