@@ -273,7 +273,7 @@ const ProductOptionsUI = (props) => {
                                 >
                                   <WrapperSubOption className={isError(option?.id)}>
                                     {
-                                      option.suboptions.map(suboption => {
+                                      option.suboptions.sort((a, b) => a.rank - b.rank).map(suboption => {
                                         const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
                                         const balance = productCart.options[`id:${option?.id}`]?.balance || 0
                                         return suboption?.enabled ? (
