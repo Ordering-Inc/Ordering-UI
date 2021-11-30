@@ -21,13 +21,13 @@ var _Confirm = require("../../../../../components/Confirm");
 
 var _Modal = require("../../../../../components/Modal");
 
-var _CouponControl = require("../../../../../components/CouponControl");
-
-var _ProductForm = require("../ProductForm");
-
 var _UpsellingPage = require("../../../../../components/UpsellingPage");
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
+
+var _ProductForm = require("../ProductForm");
+
+var _CouponControl = require("../CouponControl");
 
 var _styles = require("./styles");
 
@@ -71,7 +71,6 @@ var CartUI = function CartUI(props) {
       onClickCheckout = props.onClickCheckout,
       isCheckout = props.isCheckout,
       isCartPending = props.isCartPending,
-      isCartPopover = props.isCartPopover,
       isForceOpenCart = props.isForceOpenCart,
       isCartOnProductsList = props.isCartOnProductsList,
       handleCartOpen = props.handleCartOpen;
@@ -271,7 +270,7 @@ var CartUI = function CartUI(props) {
     className: "total"
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total))))), !couponShow && /*#__PURE__*/_react.default.createElement(_styles.CouponQuestion, null, /*#__PURE__*/_react.default.createElement("p", {
     onClick: showCouponInput
-  }, t('ARCHIES_ADD_COUPON', 'Do you have a coupon?'))), isCouponEnabled && !isCartPending && couponShow && (isCheckout || isCartPopover) && !(isCheckout && isCartPopover) && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
+  }, t('ARCHIES_ADD_COUPON', 'Do you have a coupon?'))), isCouponEnabled && !isCartPending && couponShow && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
     businessId: cart.business_id,
     price: cart.total
   }))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

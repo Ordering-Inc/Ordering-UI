@@ -15,8 +15,6 @@ var _styles = require("./styles");
 
 var _Tabs = require("../../styles/Tabs");
 
-var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -48,7 +46,6 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       categorySelected = props.categorySelected,
       featured = props.featured,
       isVerticalList = props.isVerticalList;
-  var windowSize = (0, _useWindowSize.useWindowSize)();
   var updatedCategories = [];
 
   if (categories.length > 0) {
@@ -90,13 +87,6 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     var category = props.category;
 
     var handleChnageCategory = function handleChnageCategory(category) {
-      if (windowSize.width > 768) {
-        window.scrollTo({
-          top: 335,
-          behavior: 'smooth'
-        });
-      }
-
       handlerClickCategory(category === null || category === void 0 ? void 0 : category.data[0]);
     };
 
