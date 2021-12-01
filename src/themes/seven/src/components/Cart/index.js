@@ -255,7 +255,7 @@ const CartUI = (props) => {
                     <p onClick={showCouponInput}>{t('ARCHIES_ADD_COUPON', 'Do you have a coupon?')}</p>
                   </CouponQuestion>
                 )}
-                {isCouponEnabled && !isCartPending && couponShow && !(isCheckout) && (
+                {isCouponEnabled && !isCartPending && couponShow && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
                   <CouponContainer>
                     <CouponControl
                       businessId={cart.business_id}
