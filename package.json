@@ -88,6 +88,7 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.8.1",
     "react-horizontal-datepicker": "^0.1.11",
+    "react-horizontal-strip-datepicker": "^3.0.2",
     "react-loading-skeleton": "^2.1.1",
     "react-otp-input": "^2.3.0",
     "react-phone-number-input": "^3.1.6",
