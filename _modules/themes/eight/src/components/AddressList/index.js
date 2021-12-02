@@ -124,6 +124,11 @@ var AddressListUI = function AddressListUI(props) {
       confirm = _useState6[0],
       setConfirm = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isSelectedNewAddress = _useState8[0],
+      setIsSelectedNewAddress = _useState8[1];
+
   var theme = (0, _styledComponents.useTheme)();
 
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
@@ -182,6 +187,10 @@ var AddressListUI = function AddressListUI(props) {
       return;
     }
 
+    if (!checkAddress(address)) {
+      setIsSelectedNewAddress(true);
+    }
+
     setAddressOpen(false);
     handleSetDefault(address, userCustomerSetup);
   };
@@ -228,10 +237,16 @@ var AddressListUI = function AddressListUI(props) {
       return value;
     });
   };
+
+  (0, _react.useEffect)(function () {
+    if (actionStatus !== null && actionStatus !== void 0 && actionStatus.loading || !isSelectedNewAddress) return;
+    events.emit('go_to_page', {
+      page: 'search'
+    });
+  }, [actionStatus, isSelectedNewAddress]);
   /**
    * Close modals and alerts
    */
-
 
   (0, _react.useEffect)(function () {
     return function () {
