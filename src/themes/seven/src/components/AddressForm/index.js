@@ -17,11 +17,8 @@ import {
   useOrder,
   useConfig
 } from 'ordering-components'
-// import { AddressForm as AddressFormController } from './FormControl.js'
-
 import { Alert } from '../../../../../components/Confirm'
 import { GoogleGpsButton } from '../GoogleGpsButton'
-
 import {
   FormControl,
   FormActions,
@@ -31,7 +28,6 @@ import {
   WrapperMap,
   WrapperSkeleton
 } from './styles'
-
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 
@@ -332,6 +328,15 @@ const AddressFormUI = (props) => {
       formMethods.setValue(field.name, formState.changes?.[field.name] ?? addressState.address?.[field.name] ?? '')
     })
   }, [formMethods])
+
+  useEffect(() => {
+    if (alertState?.content[0] === 'User denied Geolocation') {
+      setAlertState({
+        ...alertState,
+        content: [t('ERROR_LOCATION_MESSAGE', 'Uso de localización negado por usuario.')]
+      })
+    }
+  }, [alertState])
 
   return (
     <div className='address-form'>

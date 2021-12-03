@@ -31,8 +31,8 @@ export const AutoScroll = ({ children, modal, special, scrollId }) => {
 
   const handleScroll = () => {
     const autoScrollContainer = document?.getElementById(`${autoScrollId}`)
-    const botonRight = autoScrollContainer.querySelector('.right-autoscroll')
-    const botonLeft = autoScrollContainer.querySelector('.left-autoscroll')
+    const botonRight = autoScrollContainer?.querySelector?.('.right-autoscroll')
+    const botonLeft = autoScrollContainer?.querySelector?.('.left-autoscroll')
     if (botonLeft || botonRight) {
       if (theme?.rtl) {
         if ((containerElement?.scrollLeft * -1) < 40) {

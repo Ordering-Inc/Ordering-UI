@@ -10,7 +10,8 @@ export const SpinnerLoader = (props) => {
   const {
     logotype,
     content,
-    style
+    style,
+    iconStyle
   } = props
   return (
     <Container style={style}>
@@ -24,7 +25,7 @@ export const SpinnerLoader = (props) => {
           {content}
         </Content>
       )}
-      <Spinner className='spinner'>
+      <Spinner className='spinner' style={iconStyle} {...props}>
         <div className='spinner-content'>
           <div />
         </div>

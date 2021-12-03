@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ProductsList, useLanguage } from 'ordering-components'
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import {
   ProductsContainer,
   ProductsListing,
@@ -28,6 +29,7 @@ const BusinessProductsListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const windowSize = useWindowSize()
 
   const getUniquCategoryName = (categoryName) => {
     let _categoryName = categoryName
@@ -36,6 +38,16 @@ const BusinessProductsListUI = (props) => {
     }
     return _categoryName
   }
+
+  useEffect(() => {
+    if (windowSize.width < 540) {
+      document.querySelector('#productWrapper').scrollIntoView({ behavior: 'smooth' })
+    }
+
+    if (windowSize.width > 768) {
+      window.scrollTo({ top: 335, behavior: 'smooth' })
+    }
+  }, [category])
 
   return (
     <>

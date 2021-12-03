@@ -87,6 +87,11 @@ export const ProductInfo = styled.div`
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
   margin-bottom: 20px;
+
+  > h1 {
+    font-size: 24px;
+  }
+
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
   }
@@ -273,9 +278,9 @@ export const WrapperIngredients = styled.div`
 export const ProductTabContainer = styled.div`
   border-bottom: 1px solid #E9ECEF;
   position: sticky;
-  top: 0px;
+  top: 14px;
   background: white;
-  z-index: 9999995;
+  z-index: 9999994;
 
   @media (min-width: 769px) {
     top: 0;

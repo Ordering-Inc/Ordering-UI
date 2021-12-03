@@ -7,7 +7,6 @@ import {
   AccordionPanel
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 const BusinessProductsCategoriesUI = (props) => {
   const {
@@ -19,7 +18,6 @@ const BusinessProductsCategoriesUI = (props) => {
     isVerticalList
   } = props
 
-  const windowSize = useWindowSize()
   const updatedCategories = []
 
   if (categories.length > 0) {
@@ -52,10 +50,8 @@ const BusinessProductsCategoriesUI = (props) => {
 
   const CategoryAccordion = (props) => {
     const category = props.category
+
     const handleChnageCategory = (category) => {
-      if (windowSize.width > 768) {
-        window.scrollTo({ top: 335, behavior: 'smooth' })
-      }
       handlerClickCategory(category?.data[0])
     }
 
