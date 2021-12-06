@@ -80,6 +80,7 @@ const ProductOptionsUI = (props) => {
   const [tabValue, setTabValue] = useState('all')
   const productContainerRef = useRef(null)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
+  const [isShowExtra, setIsShowExtra] = useState(false)
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -153,6 +154,14 @@ const ProductOptionsUI = (props) => {
     }
   }, [tabValue])
 
+  useEffect(() => {
+    let valid = false
+    product.extras.forEach(extra => extra.options.forEach(option => {
+      if (showOption(option)) valid = true
+    }))
+    setIsShowExtra(valid)
+  }, [product.extras])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -222,34 +231,37 @@ const ProductOptionsUI = (props) => {
               </ProductFormTitle>
               <Divider />
               <ProductEdition>
-                <ProductTabContainer id='all'>
-                  <Tabs variant='primary'>
-                    <Tab
-                      key='all'
-                      active={tabValue === 'all'}
-                      onClick={() => handleChangeTabValue('all')}
-                      borderBottom
-                    >
-                      {t('ALL', 'All')}
-                    </Tab>
-                    <Tab
-                      key='ingredients'
-                      active={tabValue === 'ingredients'}
-                      onClick={() => handleChangeTabValue('ingredients')}
-                      borderBottom
-                    >
-                      {t('INGREDIENTS', 'ingredients')}
-                    </Tab>
-                    <Tab
-                      key='extra'
-                      active={tabValue === 'extra'}
-                      onClick={() => handleChangeTabValue('extra')}
-                      borderBottom
-                    >
-                      {t('EXTRA', 'Extra')}
-                    </Tab>
-                  </Tabs>
-                </ProductTabContainer>
+                {product?.ingredients.length > 0 && isShowExtra && (
+                  <ProductTabContainer id='all'>
+                    <Tabs variant='primary'>
+                      <Tab
+                        key='all'
+                        active={tabValue === 'all'}
+                        onClick={() => handleChangeTabValue('all')}
+                        borderBottom
+                      >
+                        {t('ALL', 'All')}
+                      </Tab>
+                      <Tab
+                        key='ingredients'
+                        active={tabValue === 'ingredients'}
+                        onClick={() => handleChangeTabValue('ingredients')}
+                        borderBottom
+                      >
+                        {t('INGREDIENTS', 'ingredients')}
+                      </Tab>
+                      <Tab
+                        key='extra'
+                        active={tabValue === 'extra'}
+                        onClick={() => handleChangeTabValue('extra')}
+                        borderBottom
+                      >
+                        {t('EXTRA', 'Extra')}
+                      </Tab>
+                    </Tabs>
+                  </ProductTabContainer>
+                )}
+
                 <div id='ingredients'>
                   {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                   <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
