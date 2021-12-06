@@ -49,7 +49,7 @@ export const Card = styled.div`
   max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '220px'};
   border-radius: 16px;
   text-align: left;
-  cursor: ${({ isBusinessesPage }) => isBusinessesPage && 'pointer'};
+  cursor: pointer;
   transition: all 0.3s ease;
   &:hover {
     box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;
@@ -73,7 +73,7 @@ export const Card = styled.div`
     justify-content: center;
   `}
 
-  @media (min-width: 480px){
+  @media (min-width: 480px) {
     min-width: 430px;
     max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '250px'};;
     width: 430px;
