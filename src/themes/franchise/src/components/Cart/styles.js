@@ -63,17 +63,10 @@ export const CheckoutAction = styled.div`
   padding: 0 10px;
   box-sizing: border-box;
 
-  p {
-    margin: 0;
-    font-weight: 600;
-    font-size: 16px;
-    color: ${props => props.theme.colors.darkTextColor};
-  }
-
   button {
     padding: 10px 30px;
     min-width: 150px;
-    width: 50%;
+    width: 100%;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed

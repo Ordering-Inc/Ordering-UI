@@ -39,6 +39,7 @@ import { Modal } from '../Modal'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { Cart } from '../Cart'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
+import HiArrowNarrowLeft from '@meronex/icons/hi/HiArrowNarrowLeft'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -145,6 +146,10 @@ const BusinessProductsListingUI = (props) => {
     setCanOpenUpselling(false)
   }
 
+  const handleGoToBusinessList = () => {
+    events.emit('go_to_page', { page: 'search' })
+  }
+
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
       if (productModal?.product?.id) {
@@ -183,6 +188,7 @@ const BusinessProductsListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
+        <HiArrowNarrowLeft onClick={() => handleGoToBusinessList()} />
         {
           !loading && business?.id && (
             <WrappLayout

@@ -111,7 +111,7 @@ const PaymentOptionsUI = (props) => {
   }, [props.paySelected])
 
   useEffect(() => {
-    setCardData(paymethodData)
+    setCardData && setCardData(paymethodData)
   }, [paymethodData])
 
   return (
