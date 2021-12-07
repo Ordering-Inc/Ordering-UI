@@ -76,7 +76,9 @@ const CheckoutUI = (props) => {
     handlePaymethodChange,
     handlerClickPlaceOrder,
     handleOrderRedirect,
-    isCustomerMode
+    isCustomerMode,
+    isResetPaymethod,
+    setIsResetPaymethod
   } = props
 
   const theme = useTheme()
@@ -187,11 +189,11 @@ const CheckoutUI = (props) => {
   }, [errors])
 
   useEffect(() => {
-    const paymethods = businessDetails?.business?.paymethods || []
-    if (paymethods && paymethods.length > 1) {
+    if (isResetPaymethod) {
       handlePaymethodChange(null)
+      setIsResetPaymethod(true)
     }
-  }, [cart?.total])
+  }, [isResetPaymethod])
 
   return (
     <>
@@ -610,6 +612,7 @@ export const Checkout = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isResetPaymethod, setIsResetPaymethod] = useState(false)
 
   const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products?.length) || null)
 
@@ -676,6 +679,7 @@ export const Checkout = (props) => {
               open: true,
               content: [confirmCartRes.error.message]
             })
+            setIsResetPaymethod(true)
           }
           if (confirmCartRes.result.order?.uuid) {
             handleOrderRedirect(confirmCartRes.result.order.uuid)
@@ -719,7 +723,9 @@ export const Checkout = (props) => {
     ...props,
     UIComponent: CheckoutUI,
     cartState,
-    businessId: cartState.cart?.business_id
+    businessId: cartState.cart?.business_id,
+    isResetPaymethod,
+    setIsResetPaymethod
   }
 
   return (
