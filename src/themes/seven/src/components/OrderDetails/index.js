@@ -138,6 +138,14 @@ const OrderDetailsUI = (props) => {
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
 
+  const handleOrderReview = () => {
+    const hrefUrl = t('ARCHIES_MEDALLIA_LINK')
+    window.open(
+      hrefUrl,
+      '_blank' // <- This is what makes it open in a new window.
+    )
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -193,7 +201,7 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 12
                   ) && (!order.review && !isReviewed) && (
                     <ReviewsAction>
-                      <Button color='primary' onClick={() => setOpenReview(true)}>
+                      <Button color='primary' onClick={()=>handleOrderReview()}>
                         {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
                       </Button>
                     </ReviewsAction>
