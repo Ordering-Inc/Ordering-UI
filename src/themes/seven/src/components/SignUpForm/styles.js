@@ -287,6 +287,10 @@ export const WrapperBirthday = styled.div`
   .react-datepicker-popper {
     display: block;
   }
+
+  .birthdate-input::placeholder {
+      color: #dbdcdb;
+  }
 `
 export const ConditionCheck = styled.div`
   display: flex;
