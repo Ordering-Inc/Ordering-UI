@@ -63,7 +63,6 @@ const LoginFormUI = (props) => {
     enableReCaptcha
   } = props
   const numOtpInputs = 4
-  const hideLoginMethod = true
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
@@ -252,7 +251,7 @@ const LoginFormUI = (props) => {
         <FormSide isPopup={isPopup}>
           <FormTitle isPopup={isPopup}>{t('LOGIN_ARCHIES_TITLE', 'Welcome to your Archies order!')}</FormTitle>
           <FormSubTitle>{t('LOGIN_ARCHIES_SUBTITLE', 'Enter your login details and take advantage of great benefits that we have for you: ordering and paying online, tracking your orders in real time, chat, order history, exclusive promotions and excellent seasonal news.')}</FormSubTitle>
-          {(!hideLoginMethod && useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
+          {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 {useLoginByEmail && (

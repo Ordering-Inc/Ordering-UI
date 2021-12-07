@@ -44,6 +44,8 @@ const CouponControlUI = (props) => {
     onChangeInputCoupon('')
   }
 
+  console.log('COUPON_APPLY: ', t('COUPON_APPLY'))
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (

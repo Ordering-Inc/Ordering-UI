@@ -342,8 +342,8 @@ const SignUpFormUI = (props) => {
                         type='date'
                         defaultValue={new Date()}
                         name='birthdate'
-                        className='form birthdate-input'
-                        placeholder={t('BIRTHDATE_ARCHIES', 'yy-mm-dd')}
+                        className='form'
+                        placeholder={t('BIRTHDAY', 'dd/mm/yyyy')}
                         onChange={handleChangeInput}
                         ref={formMethods.register({
                           required: t('VALIDATION_ERROR_BIRTHDAY_REQUIRED', 'The field birthdate is required')
@@ -365,7 +365,7 @@ const SignUpFormUI = (props) => {
                         {t('ARCHIES_AGREE_TEXT', 'You must agree with')}
                       </span>
                     </span>
-                    <a href={t('ARCHIES_PRIVACY_LINK', 'https://tupedidostarbucks.co/pages/privacidad-starbucks')} target='_blank' rel='noopener noreferrer' className='condition-link'>
+                    <a href='https://tupedidostarbucks.co/pages/privacidad-starbucks' className='condition-link'>
                       <span>
                         {t('ARCHIES_TERMS_AND_CONDITIONS_LINK_TEXT', 'Terms and Conditions')}
                       </span>

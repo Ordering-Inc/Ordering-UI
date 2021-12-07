@@ -112,11 +112,6 @@ export const SkeletonWrapper = styled.div`
   margin: 0 auto;
   span {
     width: 100%;
-    height: 60px;
-    margin-bottom: 20px;
-    @media (min-width: 768px) {
-      height: 200px;
-    }
   }
 `
 export const Layout = styled.div`
@@ -168,11 +163,13 @@ export const MapWrapper = styled.div`
     }
 
     @media (min-width: 1024px) {
+      height: 45vh;
+    }
+
+    @media (min-width: 1024px) {
       width: 66.6%;
+      height: 100vh;
       overflow: hidden;
-      ${({ isSkeleton }) => !isSkeleton && css`
-        height: 100vh;
-      `}
       >div {
         height: 100%  
       }
