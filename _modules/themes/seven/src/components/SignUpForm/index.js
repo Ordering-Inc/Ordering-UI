@@ -396,8 +396,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     type: "date",
     defaultValue: new Date(),
     name: "birthdate",
-    className: "form",
-    placeholder: t('BIRTHDAY', 'dd/mm/yyyy'),
+    className: "form birthdate-input",
+    placeholder: t('BIRTHDATE_ARCHIES', 'yy-mm-dd'),
     onChange: handleChangeInput,
     ref: formMethods.register({
       required: t('VALIDATION_ERROR_BIRTHDAY_REQUIRED', 'The field birthdate is required')
@@ -413,7 +413,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
   })), /*#__PURE__*/_react.default.createElement("span", {
     className: "condition-link-text"
   }, t('ARCHIES_AGREE_TEXT', 'You must agree with'))), /*#__PURE__*/_react.default.createElement("a", {
-    href: "https://tupedidostarbucks.co/pages/privacidad-starbucks",
+    href: t('ARCHIES_PRIVACY_LINK', 'https://tupedidostarbucks.co/pages/privacidad-starbucks'),
+    target: "_blank",
+    rel: "noopener noreferrer",
     className: "condition-link"
   }, /*#__PURE__*/_react.default.createElement("span", null, t('ARCHIES_TERMS_AND_CONDITIONS_LINK_TEXT', 'Terms and Conditions')))), /*#__PURE__*/_react.default.createElement(_styles.Terms, null, t('TERMS_WEB_ARCHIES', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

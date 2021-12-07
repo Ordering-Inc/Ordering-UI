@@ -224,8 +224,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   var ProductOptionCategory = function ProductOptionCategory() {
     var _theme$defaultLanguag2;
 
-    var _options = product.extras[0].options.filter(function (op) {
+    var __options = product.extras[0].options.filter(function (op) {
       return showOption(op);
+    });
+
+    var _options = __options.sort(function (a, b) {
+      return a.rank - b.rank;
     });
 
     var optionCategories = [{

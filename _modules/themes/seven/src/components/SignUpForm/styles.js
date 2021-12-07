@@ -105,7 +105,7 @@ var AccountLogin = _styledComponents.default.div(_templateObject17 || (_template
 
 exports.AccountLogin = AccountLogin;
 
-var WrapperBirthday = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: block;\n  .react-datepicker-popper {\n    display: block;\n  }\n"])));
+var WrapperBirthday = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: block;\n  .react-datepicker-popper {\n    display: block;\n  }\n\n  .birthdate-input::placeholder {\n      color: #dbdcdb;\n  }\n"])));
 
 exports.WrapperBirthday = WrapperBirthday;
 

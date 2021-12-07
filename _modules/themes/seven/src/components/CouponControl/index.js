@@ -85,7 +85,6 @@ var CouponControlUI = function CouponControlUI(props) {
     onChangeInputCoupon('');
   };
 
-  console.log('COUPON_APPLY: ', t('COUPON_APPLY'));
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

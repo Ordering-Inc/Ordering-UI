@@ -98,6 +98,7 @@ var LoginFormUI = function LoginFormUI(props) {
       credentials = props.credentials,
       enableReCaptcha = props.enableReCaptcha;
   var numOtpInputs = 4;
+  var hideLoginMethod = true;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -379,7 +380,7 @@ var LoginFormUI = function LoginFormUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.FormTitle, {
     isPopup: isPopup
-  }, t('LOGIN_ARCHIES_TITLE', 'Welcome to your Archies order!')), /*#__PURE__*/_react.default.createElement(_styles.FormSubTitle, null, t('LOGIN_ARCHIES_SUBTITLE', 'Enter your login details and take advantage of great benefits that we have for you: ordering and paying online, tracking your orders in real time, chat, order history, exclusive promotions and excellent seasonal news.')), useLoginByEmail && useLoginByCellphone && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+  }, t('LOGIN_ARCHIES_TITLE', 'Welcome to your Archies order!')), /*#__PURE__*/_react.default.createElement(_styles.FormSubTitle, null, t('LOGIN_ARCHIES_SUBTITLE', 'Enter your login details and take advantage of great benefits that we have for you: ordering and paying online, tracking your orders in real time, chat, order history, exclusive promotions and excellent seasonal news.')), !hideLoginMethod && useLoginByEmail && useLoginByCellphone && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
