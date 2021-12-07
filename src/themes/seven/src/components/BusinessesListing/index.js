@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useTheme } from 'styled-components'
 import FiMap from '@meronex/icons/fi/FiMap'
+import Skeleton from 'react-loading-skeleton'
 import {
   BusinessContainer,
   BusinessList,
@@ -12,7 +13,8 @@ import {
   Layout,
   BusinissWrapper,
   MapWrapper,
-  NotFoundButtonWrapper
+  NotFoundButtonWrapper,
+  SkeletonWrapper
 } from './styles'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -213,6 +215,10 @@ const BusinessesListingUI = (props) => {
     history.push('/home')
   }
 
+  useEffect(() => {
+    console.log('businessesList: ', businessesList)
+  }, [businessesList])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -356,7 +362,7 @@ const BusinessesListingUI = (props) => {
             ) : (
               <>
                 {
-                  !businessesList.loading && businessesList.businesses.length === 0 && (
+                  !businessesList.loading && businessesList.businesses.length === 0 ? (
                     <NotFoundSource
                       content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
                     >
@@ -377,6 +383,20 @@ const BusinessesListingUI = (props) => {
                         </Button>
                       </NotFoundButtonWrapper>
                     </NotFoundSource>
+                  ) : (
+                    <Layout>
+                      <BusinissWrapper isPickup={isPickup}>
+                        <SkeletonWrapper>
+                          <Skeleton variant='rect' />
+                          <Skeleton variant='rect' />
+                        </SkeletonWrapper>
+                      </BusinissWrapper>
+                      <MapWrapper isPickup={isPickup} isSkeleton>
+                        <SkeletonWrapper>
+                          <Skeleton variant='rect' height={420} />
+                        </SkeletonWrapper>
+                      </MapWrapper>
+                    </Layout>
                   )
                 }
                 {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
