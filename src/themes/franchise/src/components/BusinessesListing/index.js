@@ -60,7 +60,7 @@ const BusinessesListingUI = (props) => {
   const [mapErrors, setMapErrors] = useState('')
   const [prevPage, setPrevPage] = useState({ page: currentPageParam || 1, loading: false })
   const [nextPage, setNextPage] = useState({ page: currentPageParam || 1, loading: false })
-  const [isBusinessNear, setIsBusinessNear] = useState(true)
+  const [nearBusinessList, setNearBusinessList] = useState([])
   const location = useLocation()
   const history = useHistory()
   const windowSize = useWindowSize()
@@ -238,7 +238,7 @@ const BusinessesListingUI = (props) => {
               ))
             )}
             {
-              !businessesList.loading && (businessesList.businesses.length === 0 || !isBusinessNear) && (
+              !businessesList.loading && (businessesList.businesses.length === 0 || nearBusinessList.length === 0) && (
                 <NotFoundSource
                   content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
                 >
@@ -253,7 +253,7 @@ const BusinessesListingUI = (props) => {
               )
             }
             {
-              isBusinessNear && businessesList.businesses?.map((business) => (
+              nearBusinessList.length > 0 && businessesList.businesses.filter(business => nearBusinessList.includes(business.slug))?.map((business) => (
                 <BusinessController
                   key={business.id}
                   className='card'
@@ -291,7 +291,7 @@ const BusinessesListingUI = (props) => {
                 businessList={businessesList.businesses}
                 userLocation={orderState?.options?.address?.location}
                 setErrors={setMapErrors}
-                setIsBusinessNear={setIsBusinessNear}
+                setNearBusinessList={setNearBusinessList}
               />
             ) : (
               <GoogleMapsMap

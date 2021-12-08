@@ -36,6 +36,7 @@ import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { UpsellingPage } from './src/components/UpsellingPage'
+import { UserProfileForm } from './src/components/UserProfileForm'
 
 export {
   AddressDetails,
@@ -75,5 +76,6 @@ export {
   SidebarMenu,
   SignUpForm,
   SingleProductCard,
-  UpsellingPage
+  UpsellingPage,
+  UserProfileForm
 }
