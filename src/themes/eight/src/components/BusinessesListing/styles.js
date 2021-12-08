@@ -1,5 +1,18 @@
 import styled from 'styled-components'
 
+export const TitleBar = styled.div`
+  border: 1px solid #E9ECEF;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 18px 5px;
+  text-align: center;
+  color: ${props => props.theme.colors.grayDark};
+  font-size: 14px;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+`
+
 export const BusinessContainer = styled.div`
   display: flex;
   flex-direction: column;

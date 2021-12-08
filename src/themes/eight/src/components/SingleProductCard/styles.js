@@ -145,6 +145,19 @@ const CardLogoStyled = styled.div`
   width: 100%;
   padding-top: 100%;
   border-radius: 7.6px;
+
+  ${({ isSkeleton }) => isSkeleton && css`
+    > span {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      height: 100%;
+
+      span {
+        height: 100%;
+      }
+    }
+  `}
 `
 export const CardLogo = (props) => {
   const style = {}
