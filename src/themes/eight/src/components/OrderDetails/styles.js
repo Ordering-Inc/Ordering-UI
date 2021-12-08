@@ -19,7 +19,7 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   border-bottom: 1px solid ${props => props.theme.colors.gray};
-  min-height: calc(100vh - 290px);
+  min-height: calc(100vh - 180px);
 
   @media (min-width: 1024px) {
     flex-direction: row;
