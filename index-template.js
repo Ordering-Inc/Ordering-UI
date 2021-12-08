@@ -69,7 +69,7 @@ import storeDummy from './template/assets/images/dummies/store.png'
 
 const configFile = {
   app_id: 'ordering-react',
-  project: 'luisv4',
+  project: 'reactdemo',
   api: {
     url: 'https://apiv4.ordering.co',
     language: 'en',
