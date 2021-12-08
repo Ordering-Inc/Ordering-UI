@@ -3,13 +3,14 @@ import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useV
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
-
+import { useTheme } from 'styled-components'
 import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { TaxInformation } from '../TaxInformation'
 
 import {
   CartContainer,
@@ -17,10 +18,11 @@ import {
   CheckoutAction,
   CouponContainer,
   CartSticky,
-  Divider
+  Divider,
+  Exclamation
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
-
+import AiOutlineExclamationCircle from '@meronex/icons/ai/AiOutlineExclamationCircle'
 const CartUI = (props) => {
   const {
     currentCartUuid,
@@ -42,20 +44,23 @@ const CartUI = (props) => {
     isStore
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
+  const windowSize = useWindowSize()
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
-  const windowSize = useWindowSize()
+  const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isUpselling, setIsUpselling] = useState(false)
+
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
   const momentFormatted = !orderState?.option?.moment
@@ -192,15 +197,18 @@ const CartUI = (props) => {
                       </tr>
                     )}
                     {
-                      cart.business.tax_type !== 1 && (
-                        <tr>
-                          <td>
-                            {t('TAX', 'Tax')}{' '}
-                            <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
+                      cart.taxes.length > 0 && cart.taxes.map(tax => (
+                        <tr key={tax.id}>
+                          <td style={{ display: 'flex' }}>
+                            {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, tax })}>
+                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                            </Exclamation>
                           </td>
-                          <td>{parsePrice(cart?.tax || 0)}</td>
+                          <td>{parsePrice(tax?.total || 0)}</td>
                         </tr>
-                      )
+                      ))
                     }
                     {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
                       <tr>
@@ -298,6 +306,17 @@ const CartUI = (props) => {
               productId={curProduct?.id}
               onSave={handlerProductAction}
             />
+          </Modal>
+          <Modal
+            width='70%'
+            open={openTaxModal.open}
+            padding='20px'
+            closeOnBackdrop
+            title={`${openTaxModal.tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (${openTaxModal.tax?.rate}%) `}
+            onClose={() => setOpenTaxModal({ open: false, tax: null })}
+            modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+          >
+            <TaxInformation tax={openTaxModal.tax} products={cart.products} />
           </Modal>
           {(openUpselling || isUpselling) && (
             <UpsellingPage

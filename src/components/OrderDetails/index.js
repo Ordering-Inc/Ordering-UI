@@ -435,15 +435,15 @@ const OrderDetailsUI = (props) => {
                       </tr>
                     )}
                     {
-                      order?.tax_type !== 1 && (
-                        <tr>
+                      order.taxes.length > 0 && order.taxes.map(tax => (
+                        <tr key={tax.id}>
                           <td>
-                            {t('TAX', theme?.defaultLanguages?.TAX || 'Tax')}{' '}
-                            <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
+                            {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                           </td>
-                          <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
+                          <td>{parsePrice(tax?.total || 0)}</td>
                         </tr>
-                      )
+                      ))
                     }
                     {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
                       <tr>

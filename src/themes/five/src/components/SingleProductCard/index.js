@@ -57,7 +57,7 @@ export const SingleProductCard = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <CardContainer
         soldOut={isSoldOut || maxProductQuantity <= 0}
-        onClick={() => (!isSkeleton && !useCustomFunctionality && onProductClick(product) || useCustomFunctionality && onCustomClick())}
+        onClick={() => ((!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product)) || (useCustomFunctionality && onCustomClick && onCustomClick()))}
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
       >
@@ -92,7 +92,7 @@ export const SingleProductCard = (props) => {
           </>
         )}
         {useCustomFunctionality && customText && (
-          <span style={{ fontSize: 16, fontWeight: 500}}>{customText}</span>
+          <span style={{ fontSize: 16, fontWeight: 500 }}>{customText}</span>
         )}
       </CardContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
