@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import {
+  TitleBar,
   BusinessContainer,
   BusinessList,
   ErrorMessage,
@@ -11,7 +12,6 @@ import {
 import { Button } from '../../styles/Buttons'
 import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
-import { NavBar } from '../NavBar'
 import { BusinessController } from '../BusinessController'
 
 import { OrdersOption } from '../../../../../components/OrdersOption'
@@ -145,7 +145,9 @@ const BusinessesListingUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <NavBar title={t('SELECT_RESTAURANT', 'Select Restaurant')} />
+      <TitleBar>
+        {t('SELECT_RESTAURANT', 'Select Restaurant')}
+      </TitleBar>
       <BusinessContainer>
         <h1>{t('TITLE_BUSINESSES_LIST', 'Select a restaurant to start a order')}</h1>
 

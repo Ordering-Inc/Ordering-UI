@@ -13,10 +13,14 @@ export const Container = styled.div`
 `
 
 export const WrapLeftContainer = styled.div`
-  flex: 1;
   padding: 30px 20px;
   display: flex;
   justify-content: flex-end;
+  box-sizing: border-box;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+  }
 `
 
 export const WrapLeftInnerContainer = styled.div`
@@ -67,12 +71,13 @@ export const WrapRightInnerContainer = styled.div`
 `
 
 export const WrapRightContainer = styled.div`
-  flex: 1;
   background-color: ${props => props.theme.colors.secundaryLight};
   padding: 30px 20px;
+  box-sizing: border-box;
 
   @media (min-width: 1024px) {
     padding: 30px 0px;
+    width: 50%;
   }
 `
 

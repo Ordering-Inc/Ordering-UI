@@ -143,7 +143,7 @@ const BusinessProductsListingUI = (props) => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
-    if (badScrollPosition || categoryState.loading || !hasMore) return
+    if (badScrollPosition || categoryState.loading || !hasMore || loading) return
     getNextProducts()
   }, [categoryState])
 
@@ -202,6 +202,11 @@ const BusinessProductsListingUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
+      {showOption === 'categories' && (
+        <NavBar
+          title={t('MENU_V21', 'Menu')}
+        />
+      )}
       {showOption === 'products' && (
         <NavBar
           title={categorySelected?.name}

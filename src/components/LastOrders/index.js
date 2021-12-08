@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components'
 import {
   useLanguage,
   useUtils,
+  useEvent,
   OrderList as OrderListController
 } from 'ordering-components'
 
@@ -22,8 +23,13 @@ export const LastOrdersUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage, parseDate }] = useUtils()
+  const [events] = useEvent()
 
   const imageFails = theme.images?.general?.emptyPastOrders
+
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
+  }
 
   return (
     <>
@@ -36,7 +42,11 @@ export const LastOrdersUI = (props) => {
       <LastOrdersContainer>
         {orderList?.loading && <Skeleton height={150} />}
         {!orderList?.loading && orderList?.orders?.length > 0 && orderList?.orders.map((order, i) => (
-          <BusinessHeader key={i} bgimage={optimizeImage(order?.business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')}>
+          <BusinessHeader
+            key={i}
+            bgimage={optimizeImage(order?.business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')}
+            onClick={() => handleGoToPage({ page: 'order_detail', params: { orderId: order.uuid } })}
+          >
             <OrderInfoBlock>
               {order?.business?.name && (
                 <h4>{order?.business?.name}</h4>

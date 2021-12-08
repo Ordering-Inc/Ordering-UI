@@ -72,10 +72,14 @@ export const SingleProductCard = (props) => {
             />
           </WrapLogo>
         ) : (
-          <Skeleton height={75} width={75} />
+          <WrapLogo>
+            <CardLogo isSkeleton>
+              <Skeleton />
+            </CardLogo>
+          </WrapLogo>
         )}
         <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
-          {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
+          {!isSkeleton ? (<h1>{product?.name}</h1>) : (<h1><Skeleton width={100} /></h1>)}
         </CardInfo>
         <BsChevronRight />
         {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
