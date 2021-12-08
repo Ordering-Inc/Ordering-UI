@@ -202,6 +202,11 @@ const BusinessProductsListingUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
+      {showOption === 'categories' && (
+        <NavBar
+          title={t('MENU_V21', 'Menu')}
+        />
+      )}
       {showOption === 'products' && (
         <NavBar
           title={categorySelected?.name}
