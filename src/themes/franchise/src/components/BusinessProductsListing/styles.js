@@ -3,6 +3,16 @@ import styled, { css } from 'styled-components'
 export const ProductsContainer = styled.div`
   padding: 20px 15px 0px 15px;
 
+  > svg {
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
   @media (min-width: 769px) {
     padding: 20px 40px 0px 40px;
   }

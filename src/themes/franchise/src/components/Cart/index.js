@@ -231,7 +231,6 @@ const CartUI = (props) => {
                         <td>{parsePrice(cart?.service_fee)}</td>
                       </tr>
                     )}
-
                   </tbody>
                 </table>
                 {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
@@ -254,7 +253,6 @@ const CartUI = (props) => {
             )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
               <CheckoutAction>
-                <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 <Button
                   color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
                   onClick={checkOutBtnClick}

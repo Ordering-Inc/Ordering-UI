@@ -81,6 +81,18 @@ const BusinessProductsListingUI = (props) => {
 
   const ageValidationCategorys = ['Vinos'.toUpperCase(), 'Cervezas'.toUpperCase()]
   const breakFastCategories = ['Desayunos'.toUpperCase(), 'Desayuno'.toUpperCase()]
+  const url = window.location.pathname
+
+  useEffect(() => {
+    const urls = url.split('/')
+    if (business?.categories && business?.categories.length > 0 && urls.length === 5 && urls[1] === 'store') {
+      const _curCategory = business.categories.filter(c => c.id === parseInt(urls[3]))
+      const _curProduct = _curCategory[0]?.products.filter(p => p.id === parseInt(urls[4]))
+      setCurProduct(_curProduct[0])
+      setModalIsOpen(true)
+      events.emit('product_clicked', _curProduct[0])
+    }
+  }, [business, url])
 
   const handler = () => {
     setOpenBusinessInformation(true)
@@ -111,7 +123,7 @@ const BusinessProductsListingUI = (props) => {
       const hour = new Date().getHours()
       const businessOpenTime = scheduleFormatted(business.today.lapses[0].open)
       const _isHaveBreakFastMeta = checkIsHaveBreakFast(product)
-      if (_isHaveBreakFastMeta && hour < 12) {
+      if (_isHaveBreakFastMeta && hour >= 12) {
         setBusinessOpentime(businessOpenTime)
         setIsNestBreackFast(true)
         return
@@ -272,7 +284,7 @@ const BusinessProductsListingUI = (props) => {
                     />
                   </BusinessProductsCategorieWrapper>
                 )}
-                <WrapContent>
+                <WrapContent id='productWrapper'>
                   <BusinessProductsList
                     categories={[
                       { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },

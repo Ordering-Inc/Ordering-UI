@@ -204,7 +204,7 @@ export const Header = (props) => {
                   <AddressMenu
                     onClick={() => openModal('address')}
                   >
-                    <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
+                    <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
                   </AddressMenu>
                   {!isCustomerMode && (
                     <MomentMenu
@@ -299,7 +299,7 @@ export const Header = (props) => {
               <AddressMenu
                 onClick={() => openModal('address')}
               >
-                <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
+                <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               </AddressMenu>
               {!isCustomerMode && (
                 <HeaderOption
@@ -332,7 +332,7 @@ export const Header = (props) => {
         )}
         {modalIsOpen && (
           <Modal
-            title={(modalSelected === 'address') ? t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?') : null}
+            title={(modalSelected === 'address') ? t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?') : null}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
             width='50%'
