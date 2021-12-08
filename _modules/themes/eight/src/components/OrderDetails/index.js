@@ -39,8 +39,6 @@ var _ProductShare = require("../../../../../components/ProductShare");
 
 var _styles = require("../../styles");
 
-var _NavBar = require("../NavBar");
-
 var _ProductItemAccordion = require("../ProductItemAccordion");
 
 var _styles2 = require("./styles");
@@ -329,9 +327,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_NavBar.NavBar, {
-    title: t('BACK_BUTTON_CONFIRMATION', 'Confirmation')
-  }), order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Container, {
+  }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleBar, null, t('BACK_BUTTON_CONFIRMATION', 'Confirmation')), order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles2.WrapLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapLeftInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderData, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag23 = theme.defaultLanguages) === null || _theme$defaultLanguag23 === void 0 ? void 0 : _theme$defaultLanguag23.ORDER) || 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), (order === null || order === void 0 ? void 0 : order.status) !== 0 && (order === null || order === void 0 ? void 0 : order.integration_id) && /*#__PURE__*/_react.default.createElement("h1", null, t('TICKET', 'Ticket'), ": ", order === null || order === void 0 ? void 0 : order.integration_id), /*#__PURE__*/_react.default.createElement("p", {
     className: "date"

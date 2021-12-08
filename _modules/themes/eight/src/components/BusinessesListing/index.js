@@ -19,8 +19,6 @@ var _AddressForm = require("../AddressForm");
 
 var _AddressList = require("../AddressList");
 
-var _NavBar = require("../NavBar");
-
 var _BusinessController = require("../BusinessController");
 
 var _OrdersOption = require("../../../../../components/OrdersOption");
@@ -267,9 +265,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_NavBar.NavBar, {
-    title: t('SELECT_RESTAURANT', 'Select Restaurant')
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_BUSINESSES_LIST', 'Select a restaurant to start a order')), activeMap && /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.TitleBar, null, t('SELECT_RESTAURANT', 'Select Restaurant')), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('TITLE_BUSINESSES_LIST', 'Select a restaurant to start a order')), activeMap && /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.location,
     setErrors: setMapErrors

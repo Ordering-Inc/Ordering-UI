@@ -235,7 +235,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
     var badScrollPosition = innerHeightScrolltop < ((_document$documentEle2 = document.documentElement) === null || _document$documentEle2 === void 0 ? void 0 : _document$documentEle2.offsetHeight);
     var hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage);
-    if (badScrollPosition || categoryState.loading || !hasMore) return;
+    if (badScrollPosition || categoryState.loading || !hasMore || loading) return;
     getNextProducts();
   }, [categoryState]);
 
@@ -298,6 +298,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
+  }), showOption === 'categories' && /*#__PURE__*/_react.default.createElement(_NavBar.NavBar, {
+    title: t('MENU_V21', 'Menu')
   }), showOption === 'products' && /*#__PURE__*/_react.default.createElement(_NavBar.NavBar, {
     title: categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name,
     handleGoBack: function handleGoBack() {

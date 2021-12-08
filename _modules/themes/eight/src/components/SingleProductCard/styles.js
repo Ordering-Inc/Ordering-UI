@@ -13,7 +13,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -72,7 +72,10 @@ var WrapLogo = _styledComponents.default.div(_templateObject8 || (_templateObjec
 
 exports.WrapLogo = WrapLogo;
 
-var CardLogoStyled = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 75px;\n  width: 100%;\n  padding-top: 100%;\n  border-radius: 7.6px;\n"])));
+var CardLogoStyled = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 75px;\n  width: 100%;\n  padding-top: 100%;\n  border-radius: 7.6px;\n\n  ", "\n"])), function (_ref5) {
+  var isSkeleton = _ref5.isSkeleton;
+  return isSkeleton && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    > span {\n      position: absolute;\n      width: 100%;\n      top: 0;\n      height: 100%;\n\n      span {\n        height: 100%;\n      }\n    }\n  "])));
+});
 
 var CardLogo = function CardLogo(props) {
   var style = {};
@@ -92,16 +95,16 @@ var CardLogo = function CardLogo(props) {
 
 exports.CardLogo = CardLogo;
 
-var QuantityContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  z-index: 1;\n  top: -10px;\n  ", "\n"])), function (_ref5) {
-  var theme = _ref5.theme;
-  return theme.colors.primary;
-}, function (_ref6) {
+var QuantityContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  z-index: 1;\n  top: -10px;\n  ", "\n"])), function (_ref6) {
   var theme = _ref6.theme;
+  return theme.colors.primary;
+}, function (_ref7) {
+  var theme = _ref7.theme;
   return theme.colors.primaryContrast;
 }, function (props) {
   var _props$theme3;
 
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    left: -10px;\n  "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    right: -10px;\n  "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    left: -10px;\n  "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    right: -10px;\n  "])));
 });
 
 exports.QuantityContainer = QuantityContainer;
