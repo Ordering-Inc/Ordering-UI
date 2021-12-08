@@ -23,16 +23,15 @@ import { ReviewOrder } from '../../../../../components/ReviewOrder'
 import { ProductShare } from '../../../../../components/ProductShare'
 
 import { Button } from '../../styles'
-import { NavBar } from '../NavBar'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 
 import {
+  TitleBar,
   Container,
   WrapLeftContainer,
   WrapLeftInnerContainer,
   WrapRightContainer,
   WrapRightInnerContainer,
-  WrapperContainer,
   Header,
   HeaderText,
   OrderBusiness,
@@ -53,8 +52,6 @@ import {
   OrderProducts,
   OrderBill,
   ReviewsAction,
-  SkeletonBlockWrapp,
-  SkeletonBlock,
   ShareOrder,
   MessagesIcon,
   ExclamationWrapper
@@ -173,7 +170,7 @@ const OrderDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <>
-        <NavBar title={t('BACK_BUTTON_CONFIRMATION', 'Confirmation')} />
+        <TitleBar>{t('BACK_BUTTON_CONFIRMATION', 'Confirmation')}</TitleBar>
         {order && Object.keys(order).length > 0 && (
           <Container className='order-content'>
             <WrapLeftContainer>
