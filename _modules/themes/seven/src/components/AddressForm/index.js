@@ -512,6 +512,13 @@ var AddressFormUI = function AddressFormUI(props) {
       formMethods.setValue(field.name, (_ref8 = (_formState$changes$fi = (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25[field.name]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11[field.name]) !== null && _ref8 !== void 0 ? _ref8 : '');
     });
   }, [formMethods]);
+  (0, _react.useEffect)(function () {
+    if ((alertState === null || alertState === void 0 ? void 0 : alertState.content[0]) === 'User denied Geolocation') {
+      setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
+        content: [t('ERROR_LOCATION_MESSAGE', 'Uso de localización negado por usuario.')]
+      }));
+    }
+  }, [alertState]);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "address-form"
   }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {

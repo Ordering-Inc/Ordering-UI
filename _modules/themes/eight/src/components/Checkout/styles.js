@@ -23,7 +23,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var WrapLeftContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 30px 20px;\n  display: flex;\n  justify-content: flex-end;\n"])));
+var WrapLeftContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 30px 20px;\n  display: flex;\n  justify-content: flex-end;\n  box-sizing: border-box;\n\n  @media (min-width: 1024px) {\n    width: 50%;\n  }\n"])));
 
 exports.WrapLeftContainer = WrapLeftContainer;
 
@@ -43,7 +43,7 @@ var WrapRightInnerContainer = _styledComponents.default.div(_templateObject4 || 
 
 exports.WrapRightInnerContainer = WrapRightInnerContainer;
 
-var WrapRightContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  flex: 1;\n  background-color: ", ";\n  padding: 30px 20px;\n\n  @media (min-width: 1024px) {\n    padding: 30px 0px;\n  }\n"])), function (props) {
+var WrapRightContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  padding: 30px 20px;\n  box-sizing: border-box;\n\n  @media (min-width: 1024px) {\n    padding: 30px 0px;\n    width: 50%;\n  }\n"])), function (props) {
   return props.theme.colors.secundaryLight;
 });
 

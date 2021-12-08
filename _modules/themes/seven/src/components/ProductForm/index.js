@@ -224,8 +224,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   var ProductOptionCategory = function ProductOptionCategory() {
     var _theme$defaultLanguag2;
 
-    var _options = product.extras[0].options.filter(function (op) {
+    var __options = product.extras[0].options.filter(function (op) {
       return showOption(op);
+    });
+
+    var _options = __options.sort(function (a, b) {
+      return a.rank - b.rank;
     });
 
     var optionCategories = [{
@@ -333,7 +337,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)]
       }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
         className: isError(option === null || option === void 0 ? void 0 : option.id)
-      }, option.suboptions.map(function (suboption) {
+      }, option.suboptions.sort(function (a, b) {
+        return a.rank - b.rank;
+      }).map(function (suboption) {
         var _productCart$options$3, _productCart$options$4;
 
         var currentState = ((_productCart$options$3 = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$3 === void 0 ? void 0 : _productCart$options$3.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};

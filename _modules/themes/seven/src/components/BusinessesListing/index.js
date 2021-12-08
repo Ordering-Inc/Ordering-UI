@@ -13,6 +13,8 @@ var _styledComponents = require("styled-components");
 
 var _FiMap = _interopRequireDefault(require("@meronex/icons/fi/FiMap"));
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
@@ -372,6 +374,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     history.push('/home');
   };
 
+  (0, _react.useEffect)(function () {
+    console.log('businessesList: ', businessesList);
+  }, [businessesList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -466,7 +471,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     businessList: brandBusiness,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : (_orderState$options6$ = _orderState$options6.address) === null || _orderState$options6$ === void 0 ? void 0 : _orderState$options6$.location,
     setErrors: setMapErrors
-  }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !businessesList.loading && businessesList.businesses.length === 0 ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_styles.NotFoundButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
@@ -479,7 +484,19 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: function onClick() {
       return handleGotoHome();
     }
-  }, t('GO_HOME', 'Go to home')))), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
+  }, t('GO_HOME', 'Go to home')))) : /*#__PURE__*/_react.default.createElement(_styles.Layout, null, /*#__PURE__*/_react.default.createElement(_styles.BusinissWrapper, {
+    isPickup: isPickup
+  }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect"
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect"
+  }))), /*#__PURE__*/_react.default.createElement(_styles.MapWrapper, {
+    isPickup: isPickup,
+    isSkeleton: true
+  }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect",
+    height: 420
+  })))), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");

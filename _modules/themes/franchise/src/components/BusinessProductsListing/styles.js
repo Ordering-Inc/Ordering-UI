@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px 15px 0px 15px;\n\n  @media (min-width: 769px) {\n    padding: 20px 40px 0px 40px;\n  }\n"])));
+var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px 15px 0px 15px;\n\n  > svg {\n    font-size: 24px;\n    cursor: pointer;\n    transition: all 0.2s ease;\n\n    &:hover {\n      transform: scale(1.1);\n    }\n  }\n\n  @media (min-width: 769px) {\n    padding: 20px 40px 0px 40px;\n  }\n"])));
 
 exports.ProductsContainer = ProductsContainer;
 

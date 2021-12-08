@@ -231,6 +231,12 @@ Object.defineProperty(exports, "UpsellingPage", {
     return _UpsellingPage.UpsellingPage;
   }
 });
+Object.defineProperty(exports, "UserProfileForm", {
+  enumerable: true,
+  get: function get() {
+    return _UserProfileForm.UserProfileForm;
+  }
+});
 
 var _AddressDetails = require("./src/components/AddressDetails");
 
@@ -307,3 +313,5 @@ var _SignUpForm = require("./src/components/SignUpForm");
 var _SingleProductCard = require("./src/components/SingleProductCard");
 
 var _UpsellingPage = require("./src/components/UpsellingPage");
+
+var _UserProfileForm = require("./src/components/UserProfileForm");

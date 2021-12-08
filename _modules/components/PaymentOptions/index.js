@@ -180,7 +180,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }
   }, [props.paySelected]);
   (0, _react.useEffect)(function () {
-    setCardData(paymethodData);
+    setCardData && setCardData(paymethodData);
   }, [paymethodData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

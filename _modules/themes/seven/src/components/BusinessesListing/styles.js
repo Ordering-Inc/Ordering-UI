@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -78,7 +78,7 @@ var Banner = function Banner(props) {
 
 exports.Banner = Banner;
 
-var SkeletonWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 96%;\n  flex-direction: column;\n  margin: 0 auto;\n  span {\n    width: 100%;\n  }\n"])));
+var SkeletonWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 96%;\n  flex-direction: column;\n  margin: 0 auto;\n  span {\n    width: 100%;\n    height: 60px;\n    margin-bottom: 20px;\n    @media (min-width: 768px) {\n      height: 200px;\n    }\n  }\n"])));
 
 exports.SkeletonWrapper = SkeletonWrapper;
 
@@ -95,11 +95,14 @@ exports.BusinissWrapper = BusinissWrapper;
 
 var MapWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  /* display: none; */\n\n  ", "\n\n"])), function (_ref3) {
   var isPickup = _ref3.isPickup;
-  return isPickup && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    display: block;\n    width: 100%;\n    height: auto;\n    padding: 0;\n    box-sizing: border-box;\n    margin-bottom: 20px;\n\n    #map {\n      border-radius: 0;\n      @media (min-width: 576px) {\n        width: 94% !important;\n      }\n    }\n\n    @media (min-width: 1024px) {\n      height: 45vh;\n    }\n\n    @media (min-width: 1024px) {\n      width: 66.6%;\n      height: 100vh;\n      overflow: hidden;\n      >div {\n        height: 100%  \n      }\n    }\n  "])));
+  return isPickup && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    display: block;\n    width: 100%;\n    height: auto;\n    padding: 0;\n    box-sizing: border-box;\n    margin-bottom: 20px;\n\n    #map {\n      border-radius: 0;\n      @media (min-width: 576px) {\n        width: 94% !important;\n      }\n    }\n\n    @media (min-width: 1024px) {\n      width: 66.6%;\n      overflow: hidden;\n      ", "\n      >div {\n        height: 100%  \n      }\n    }\n  "])), function (_ref4) {
+    var isSkeleton = _ref4.isSkeleton;
+    return !isSkeleton && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n        height: 100vh;\n      "])));
+  });
 });
 
 exports.MapWrapper = MapWrapper;
 
-var NotFoundButtonWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  width: fit-content;\n  button {\n    margin: 0 5px;\n  }\n"])));
+var NotFoundButtonWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  width: fit-content;\n  button {\n    margin: 0 5px;\n  }\n"])));
 
 exports.NotFoundButtonWrapper = NotFoundButtonWrapper;

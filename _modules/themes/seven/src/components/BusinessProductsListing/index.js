@@ -189,6 +189,26 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var ageValidationCategorys = ['Vinos'.toUpperCase(), 'Cervezas'.toUpperCase()];
   var breakFastCategories = ['Desayunos'.toUpperCase(), 'Desayuno'.toUpperCase()];
+  var url = window.location.pathname;
+  (0, _react.useEffect)(function () {
+    var urls = url.split('/');
+
+    if (business !== null && business !== void 0 && business.categories && (business === null || business === void 0 ? void 0 : business.categories.length) > 0 && urls.length === 5 && urls[1] === 'store') {
+      var _curCategory$;
+
+      var _curCategory = business.categories.filter(function (c) {
+        return c.id === parseInt(urls[3]);
+      });
+
+      var _curProduct = (_curCategory$ = _curCategory[0]) === null || _curCategory$ === void 0 ? void 0 : _curCategory$.products.filter(function (p) {
+        return p.id === parseInt(urls[4]);
+      });
+
+      setCurProduct(_curProduct[0]);
+      setModalIsOpen(true);
+      events.emit('product_clicked', _curProduct[0]);
+    }
+  }, [business, url]);
 
   var handler = function handler() {
     setOpenBusinessInformation(true);
@@ -236,7 +256,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
       var _isHaveBreakFastMeta = checkIsHaveBreakFast(product);
 
-      if (_isHaveBreakFastMeta && hour < 12) {
+      if (_isHaveBreakFastMeta && hour >= 12) {
         setBusinessOpentime(businessOpenTime);
         setIsNestBreackFast(true);
         return;
@@ -399,7 +419,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     featured: featuredProducts,
     openBusinessInformation: openBusinessInformation,
     isVerticalList: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, {
+    id: "productWrapper"
+  }, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
     categories: [{
       id: null,
       name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.ALL) || 'All')
