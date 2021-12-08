@@ -145,7 +145,8 @@ const ProductOptionsUI = (props) => {
   }
 
   const ProductOptionCategory = () => {
-    const _options = product.extras[0].options.filter(op => showOption(op))
+    const __options = product.extras[0].options.filter(op => showOption(op))
+    const _options = __options.sort((a, b) => a.rank - b.rank)
     const optionCategories = [{ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') }, ..._options]
     return (
       optionCategories && optionCategories.length && optionCategories.map(category => (
@@ -338,7 +339,6 @@ const ProductOptionsUI = (props) => {
                         {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD_TO_CART', theme?.defaultLanguages?.ADD_TO_CART || 'Add to Cart')}
                       </span>
                     )}
-
                   </Button>
                 )}
 
