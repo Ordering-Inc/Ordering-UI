@@ -27,14 +27,105 @@ export const WrapperImage = styled.div`
   width: 100%;
   position: relative;
   border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  .mySwiper2 {
+    height: 320px;
+    margin-left: -10px;
+    margin-top: 0px;
+    width: calc(100% + 20px);
+
+    .swiper-slide-active {
+      border-radius: 0px;
+      img {
+        border-radius: 0px;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    margin-top: 10px;
+  }
 
   @media (min-width: 1201px) {
     width: calc(50% - 10px);
     position: sticky;
     top: 0;
+
+    .mySwiper2 {
+      height: 70%;
+      margin-left: 0px;
+      width: 100%;
+      margin-top: 50px;
+      .swiper-slide-active {
+        border-radius: 7.6px;
+        img {
+          border-radius: 7.6px;
+        }
+      }
+    }
+  }
+
+  .swiper {
+    width: 100%;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .product-thumb {
+    box-sizing: border-box;
+    padding: 30px 0px;
+    margin: 0px 10px;
+
+    .swiper-slide {
+      opacity: 0.8;
+      border-radius: 7.6px;
+      height: auto;
+
+      img {
+        border-radius: 7.6px;
+      }
+    }
+
+    .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-button-next {
+    background-image: url(${props => props.theme.images.general.rightArrow});
+    background-color: rgba(255,255,255,0.3);
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .swiper-button-prev {
+    background-image: url(${props => props.theme.images.general.leftArrow});
+    background-color: rgba(255,255,255,0.3);
+    background-repeat: no-repeat;
+    background-position: 45% center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .swiper-button-next::after, .swiper-button-prev::after {
+    display: none;
   }
 `
 
@@ -44,7 +135,7 @@ export const ProductImage = styled.div`
   align-items: center;
   height: 300px;
 
-  img {
+  /* img {
     border-radius: 16px;
     object-fit: contain;
     height: 100%;
@@ -57,7 +148,7 @@ export const ProductImage = styled.div`
       width: 100%;
       object-fit: cover;
     }
-  }
+  } */
 `
 
 export const ProductInfo = styled.div`
