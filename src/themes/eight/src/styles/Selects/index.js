@@ -8,12 +8,12 @@ export const Option = styled.div`
   color: #333;
   cursor: pointer;
   &:hover {
-    background-color: ${darken(0.03, '#CCC')};
+    background-color: ${darken(0.05, '#FFF')};
   }
   ${props => props.selected && css`
-    background-color: ${darken(0.07, '#CCC')};
+    background-color: ${darken(0.1, '#FFF')};
     &:hover {
-      background-color: ${darken(0.07, '#CCC')};
+      background-color: ${darken(0.1, '#FFF')};
     }
   `}
   svg {
@@ -35,12 +35,10 @@ export const Option = styled.div`
 
 export const Options = styled.div`
   position: absolute;
-  background-color: #CCC;
+  background-color: #FFF;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   margin-top: 7px;
   z-index: 10000;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #CCC;
   border-radius: 7.6px;
   overflow: hidden;
   ${({ position }) => position?.toLowerCase() === 'left' && css`

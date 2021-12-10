@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useApi } from 'ordering-components'
 
+import {
+  FooterContainer
+} from './styles'
+
 export const Footer = () => {
   const location = useLocation()
   const [footerState, setfooterState] = useState({ body: null, loading: false, error: null })
@@ -43,7 +47,7 @@ export const Footer = () => {
   }, [location.pathname])
 
   return (
-    <>
+    <FooterContainer>
       {
         footerState.body && (
           <div
@@ -54,6 +58,6 @@ export const Footer = () => {
           />
         )
       }
-    </>
+    </FooterContainer>
   )
 }
