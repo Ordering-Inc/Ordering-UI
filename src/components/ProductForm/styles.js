@@ -137,28 +137,6 @@ export const WrapperImage = styled.div`
   }
 `
 
-export const ProductImage = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 300px;
-
-  /* img {
-    border-radius: 16px;
-    object-fit: contain;
-    height: 100%;
-    box-sizing: border-box;
-  }
-
-  @media (min-width: 1201px) {
-    height: 100%;
-    img {
-      width: 100%;
-      object-fit: cover;
-    }
-  } */
-`
-
 export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;

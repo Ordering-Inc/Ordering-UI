@@ -29,7 +29,6 @@ import { Button } from '../../styles/Buttons'
 import {
   ProductContainer,
   WrapperImage,
-  // ProductImage,
   ProductInfo,
   ProductEdition,
   SectionTitle,
