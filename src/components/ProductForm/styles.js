@@ -29,7 +29,7 @@ export const WrapperImage = styled.div`
   border-radius: 16px;
 
   .mySwiper2 {
-    height: 320px;
+    height: 250px;
     margin-left: -10px;
     margin-top: 0px;
     width: calc(100% + 20px);
@@ -42,8 +42,16 @@ export const WrapperImage = styled.div`
     }
   }
 
+  @media (min-width: 576px) {
+    .mySwiper2 {
+      height: 320px;
+    }
+  }
+
   @media (min-width: 768px) {
-    margin-top: 10px;
+    .mySwiper2 {
+      margin-top: 10px;
+    }
   }
 
   @media (min-width: 1201px) {
