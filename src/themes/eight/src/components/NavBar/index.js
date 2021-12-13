@@ -3,17 +3,24 @@ import { useHistory } from 'react-router-dom'
 import BsChevronLeft from '@meronex/icons/bs/BsChevronLeft'
 import { useLanguage } from 'ordering-components'
 import { useTheme } from 'styled-components'
+import { SearchBar } from '../SearchBar'
 
 import {
   NavBarContainer,
   BackButton,
-  NavBarTitle
+  NavBarTitle,
+  SearchBarWrapper
 } from './styles'
 
 export const NavBar = (props) => {
   const {
     title,
-    handleGoBack
+    handleGoBack,
+    searchValue,
+    handleChangeSearch,
+    lazyLoad,
+    isSearchShow,
+    placeholder
   } = props
 
   const history = useHistory()
@@ -28,7 +35,22 @@ export const NavBar = (props) => {
         <BsChevronLeft />
         <span>{t('SHOPPING_SECOND_WHERE_BACK_BUTTON', theme.defaultLanguages?.SHOPPING_SECOND_WHERE_BACK_BUTTON || 'Back')}</span>
       </BackButton>
-      <NavBarTitle>{title}</NavBarTitle>
+      <NavBarTitle
+        isSearchShow={isSearchShow}
+      >
+        {title}
+      </NavBarTitle>
+      {isSearchShow && (
+        <SearchBarWrapper>
+          <SearchBar
+            isCustomLayout
+            onSearch={handleChangeSearch}
+            search={searchValue}
+            placeholder={placeholder || ''}
+            lazyLoad={lazyLoad}
+          />
+        </SearchBarWrapper>
+      )}
     </NavBarContainer>
   )
 }

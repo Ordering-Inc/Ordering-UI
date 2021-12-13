@@ -79,7 +79,7 @@ export const BusinessProductsList = (props) => {
           replace: replace
         })
     },
-    onProductRedirect: ({ slug, category, product }) => {
+    onProductRedirect: ({ slug, category, product, replace = false }) => {
       if (!category && !product) {
         return window.location.pathname.includes('/store/')
           ? events.emit('go_to_page', { page: 'business', params: { store: slug }, replace: true })
@@ -90,13 +90,13 @@ export const BusinessProductsList = (props) => {
           page: 'business',
           params: { store: slug },
           search: `?category=${category}&product=${product}`,
-          replace: true
+          replace: replace
         })
         : events.emit('go_to_page', {
           page: 'business_slug',
           params: { store: slug },
           search: `?category=${category}&product=${product}`,
-          replace: true
+          replace: replace
         })
     },
     onBusinessCartRedirect: (slug) => {

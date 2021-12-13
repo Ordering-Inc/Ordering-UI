@@ -5,6 +5,8 @@ export const NavBarContainer = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   padding: 0 1%;
   position: relative;
+  display: flex;
+  align-items: center;
 
   @media (min-width: 768px) {
     padding: 0 5%;
@@ -47,10 +49,29 @@ export const NavBarTitle = styled.p`
   font-size: 14px;
   padding: 18px 5px;
   color: ${props => props.theme.colors.grayDark};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   max-width: calc(100% - 160px);
   margin: auto;
 
+  ${({ isSearchShow }) => isSearchShow && css`
+    max-width: calc(100% - 500px);
+  `}
+
   @media (min-width: 768px) {
     font-size: 16px;
+  }
+`
+export const SearchBarWrapper = styled.div`
+  position: absolute;
+  ${props => props.theme?.rtl ? css`
+    left: 12px;
+  ` : css`
+    right: 12px;
+  `}
+
+  input {
+    border: 1px solid #EBEBEB;
   }
 `

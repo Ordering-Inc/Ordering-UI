@@ -79,6 +79,7 @@ const BusinessProductsListingUI = (props) => {
 
   const [showOption, setShowOption] = useState('categories')
   const [previousShowOption, setPreviousShowOption] = useState('categories')
+  const [categorySearchValue, setCategorySearchValue] = useState('')
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
@@ -137,8 +138,8 @@ const BusinessProductsListingUI = (props) => {
     setCurProduct(null)
     onCategoryRedirect({
       slug: business?.slug,
-      category: categorySelected.id,
-      replace: true
+      category: categoryId,
+      replace: false
     })
   }
 
@@ -203,16 +204,31 @@ const BusinessProductsListingUI = (props) => {
   }
 
   useEffect(() => {
-    if (loading || productId) return
+    if (loading) return
+    if (categoryId && productId) {
+      if (!curProduct) {
+        handleUpdateInitialRender(true)
+        handleShowOption('productForm')
+      }
+      return
+    }
     if (!categoryId) {
       handleShowOption('categories')
     } else {
+      setCurProduct(null)
+      updateProductModal(null)
       if (showOption !== 'products') {
         const selectedCategory = business?.categories.find(category => category.id.toString() === categoryId)
-        onClickCategory(selectedCategory)
+        onCategoryRedirect({
+          slug: business?.slug,
+          category: selectedCategory.id,
+          replace: true
+        })
+        handleChangeCategory(selectedCategory)
+        handleShowOption('products')
       }
     }
-  }, [categoryId, productId, loading])
+  }, [categoryId, productId, loading, curProduct])
 
   return (
     <>
@@ -226,11 +242,19 @@ const BusinessProductsListingUI = (props) => {
         <NavBar
           title={t('MENU_V21', 'Menu')}
           handleGoBack={() => handleSearchRedirect()}
+          isSearchShow
+          searchValue={categorySearchValue}
+          handleChangeSearch={val => setCategorySearchValue(val)}
         />
       )}
       {showOption === 'products' && (
         <NavBar
           title={categorySelected?.name}
+          handleGoBack={() => onProductRedirect({ slug: business.slug })}
+          isSearchShow
+          searchValue={searchValue}
+          handleChangeSearch={handleChangeSearch}
+          lazyLoad={businessState?.business?.lazy_load_products_recommended}
         />
       )}
       {(showOption === 'categories' || showOption === 'products') && (
@@ -245,10 +269,17 @@ const BusinessProductsListingUI = (props) => {
                     <>
                       {!(business?.categories?.length === 0 && !categoryId) ? (
                         <BusinessProductsCategories
-                          categories={[...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                          categories={
+                            [...business?.categories]
+                              .filter(category => category?.name.toLowerCase().includes(categorySearchValue.toLowerCase()))
+                              .sort((a, b) => a.rank - b.rank)
+                          }
                           categorySelected={categorySelected}
                           onClickCategory={onClickCategory}
                           featured={featuredProducts}
+                          searchValue={categorySearchValue}
+                          handleClearSearch={val => setCategorySearchValue(val)}
+                          handleSearchRedirect={handleSearchRedirect}
                         />
                       ) : (
                         <WrapperNotFound>
@@ -311,41 +342,41 @@ const BusinessProductsListingUI = (props) => {
               )}
             </>
           )}
+
+          {
+            !loading && business && !Object.keys(business).length && (
+              <NotFoundSource
+                content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
+                btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
+                onClickButton={() => handleSearchRedirect()}
+              />
+            )
+          }
+
+          {
+            !loading && !business && location.pathname.includes('/store/') && (
+              <NotFoundSource
+                content={t('ERROR_NOT_FOUND_STORE', theme?.defaultLanguages?.ERROR_NOT_FOUND_STORE || 'Sorry, an error has occurred with business selected.')}
+                btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
+                onClickButton={handleSearchRedirect}
+              />
+            )
+          }
+
+          {
+            !loading && !business && !location.pathname.includes('/store/') && (
+              <PageNotFound />
+            )
+          }
+
+          {error && error.length > 0 && Object.keys(business).length && (
+            <NotFoundSource
+              content={error[0]?.message || error[0]}
+              btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
+              onClickButton={handleSearchRedirect}
+            />
+          )}
         </ProductsContainer>
-      )}
-
-      {
-        !loading && business && !Object.keys(business).length && (
-          <NotFoundSource
-            content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
-            btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
-            onClickButton={() => handleSearchRedirect()}
-          />
-        )
-      }
-
-      {
-        !loading && !business && location.pathname.includes('/store/') && (
-          <NotFoundSource
-            content={t('ERROR_NOT_FOUND_STORE', theme?.defaultLanguages?.ERROR_NOT_FOUND_STORE || 'Sorry, an error has occurred with business selected.')}
-            btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
-            onClickButton={handleSearchRedirect}
-          />
-        )
-      }
-
-      {
-        !loading && !business && !location.pathname.includes('/store/') && (
-          <PageNotFound />
-        )
-      }
-
-      {error && error.length > 0 && Object.keys(business).length && (
-        <NotFoundSource
-          content={error[0]?.message || error[0]}
-          btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
-          onClickButton={handleSearchRedirect}
-        />
       )}
 
       {currentCart?.products?.length > 0 && auth && currentCart?.valid_schedule && currentCart?.valid_products && showOption !== 'productForm' && showOption !== 'cart' && (
