@@ -117,7 +117,7 @@ export const ProgressContentWrapper = styled.div`
 export const ProgressBar = styled.div`
   height: 12px;
   background: ${props => props.theme.colors.primary};
-  width: 50px;
+  width: 0px;
 `
 
 export const ProgressTextWrapper = styled.div`

@@ -66,7 +66,7 @@ var ProgressContentWrapper = _styledComponents.default.div(_templateObject10 || 
 
 exports.ProgressContentWrapper = ProgressContentWrapper;
 
-var ProgressBar = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  height: 12px;\n  background: ", ";\n  width: 50px;\n"])), function (props) {
+var ProgressBar = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  height: 12px;\n  background: ", ";\n  width: 0px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
