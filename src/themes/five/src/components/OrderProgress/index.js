@@ -2,12 +2,15 @@ import React from 'react'
 import {
   useLanguage,
   useUtils,
+  useEvent,
   OrderList as OrderListController
 } from 'ordering-components'
+import { Button } from '../../styles/Buttons'
 import moment from 'moment'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import {
   OrderProgressContainer,
   OrderInfoWrapper,
@@ -28,6 +31,7 @@ const OrderProgressUI = (props) => {
   const [, t] = useLanguage()
   const [{ optimizeImage, parseDate, parseTime }] = useUtils()
   const theme = useTheme()
+  const [events] = useEvent()
 
   const imageFails = theme.images?.general?.emptyPastOrders
 
@@ -72,7 +76,10 @@ const OrderProgressUI = (props) => {
     const returnedDate = moment(deliveryTime).add(result, 'minutes').format('hh:mm A')
     return returnedDate
   }
-  console.log(orderList, 'this is orderList')
+
+  const handleGoToPage = (index) => {
+    events.emit('go_to_page', { page: index })
+  }
 
   return (
     <>
@@ -84,6 +91,14 @@ const OrderProgressUI = (props) => {
             <ProgressDescriptionWrapper>
               <h2>{t('ORDER_IN_PROGRESS', 'Order in progress')}</h2>
               <p>{('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')}</p>
+              <Button
+                color='primaryContrast'
+                naked
+                onClick={() => handleGoToPage('orders')}
+              >
+                {t('GO_TO_MY_ORDERS', 'Go to my orders')}
+                <BsArrowRight />
+              </Button>
             </ProgressDescriptionWrapper>
           </OrderInfoWrapper>
           <ProgressBarWrapper>

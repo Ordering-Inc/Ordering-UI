@@ -83,6 +83,23 @@ export const ProgressDescriptionWrapper = styled.div`
     font-size: 16px;
     margin: 0;
   }
+  button {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    svg {
+      margin-left: 5px;
+      ${props => props.theme.rtl && css`
+        margin-left: 0px;
+        margin-right: 5px;
+      `}
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+    
+  }
 
   @media (min-width: 768px) {
     margin-left: 35px;

@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
+var _Buttons = require("../../styles/Buttons");
+
 var _moment = _interopRequireDefault(require("moment"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -16,6 +18,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _styledComponents = require("styled-components");
 
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
+
+var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
 
 var _styles = require("./styles");
 
@@ -56,6 +60,11 @@ var OrderProgressUI = function OrderProgressUI(props) {
       parseTime = _useUtils2$.parseTime;
 
   var theme = (0, _styledComponents.useTheme)();
+
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var imageFails = (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyPastOrders;
 
   var getOrderStatus = function getOrderStatus(s) {
@@ -197,7 +206,12 @@ var OrderProgressUI = function OrderProgressUI(props) {
     return returnedDate;
   };
 
-  console.log(orderList, 'this is orderList');
+  var handleGoToPage = function handleGoToPage(index) {
+    events.emit('go_to_page', {
+      page: index
+    });
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderList === null || orderList === void 0 ? void 0 : orderList.loading) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
   }), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) > 0 && (orderList === null || orderList === void 0 ? void 0 : orderList.orders.map(function (order, i) {
@@ -207,7 +221,13 @@ var OrderProgressUI = function OrderProgressUI(props) {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressLogo, {
       bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_91,c_limit')
-    }), /*#__PURE__*/_react.default.createElement(_styles.ProgressDescriptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_IN_PROGRESS', 'Order in progress')), /*#__PURE__*/_react.default.createElement("p", null, ('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')))), /*#__PURE__*/_react.default.createElement(_styles.ProgressBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressBar, {
+    }), /*#__PURE__*/_react.default.createElement(_styles.ProgressDescriptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_IN_PROGRESS', 'Order in progress')), /*#__PURE__*/_react.default.createElement("p", null, ('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      color: "primaryContrast",
+      naked: true,
+      onClick: function onClick() {
+        return handleGoToPage('orders');
+      }
+    }, t('GO_TO_MY_ORDERS', 'Go to my orders'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ProgressBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressBar, {
       style: {
         width: (_getOrderStatus = getOrderStatus(order.status)) !== null && _getOrderStatus !== void 0 && _getOrderStatus.percentage ? "".concat(getOrderStatus(order.status).percentage, "%") : '0%'
       }

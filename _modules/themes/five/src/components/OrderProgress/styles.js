@@ -11,7 +11,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,40 +48,42 @@ var ProgressLogo = function ProgressLogo(props) {
 
 exports.ProgressLogo = ProgressLogo;
 
-var ProgressDescriptionWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-left: 20px;\n\n  ", "\n\n  h2 {\n    font-weight: 600;\n    font-size: 20px;\n    margin-top: 0;\n    margin-bottom: 9px;\n  }\n  p {\n    font-size: 16px;\n    margin: 0;\n  }\n\n  @media (min-width: 768px) {\n    margin-left: 35px;\n\n    ", "\n  }\n"])), function (props) {
+var ProgressDescriptionWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-left: 20px;\n\n  ", "\n\n  h2 {\n    font-weight: 600;\n    font-size: 20px;\n    margin-top: 0;\n    margin-bottom: 9px;\n  }\n  p {\n    font-size: 16px;\n    margin: 0;\n  }\n  button {\n    display: flex;\n    align-items: center;\n    padding: 0px;\n    svg {\n      margin-left: 5px;\n      ", "\n    }\n\n    &:hover {\n      text-decoration: underline;\n    }\n    \n  }\n\n  @media (min-width: 768px) {\n    margin-left: 35px;\n\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 20px;\n  "])));
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-left: 0px;\n      margin-right: 35px;\n    "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin-left: 0px;\n        margin-right: 5px;\n      "])));
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-left: 0px;\n      margin-right: 35px;\n    "])));
 });
 
 exports.ProgressDescriptionWrapper = ProgressDescriptionWrapper;
 
-var ProgressBarWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding: 0px;\n  box-sizing: border-box;\n\n  @media (min-width: 768px) {\n    padding-left: 15px;\n\n    ", "\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      padding-left: 0px;\n      padding-right: 15px;\n    "])));
+var ProgressBarWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 0px;\n  box-sizing: border-box;\n\n  @media (min-width: 768px) {\n    padding-left: 15px;\n\n    ", "\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      padding-left: 0px;\n      padding-right: 15px;\n    "])));
 });
 
 exports.ProgressBarWrapper = ProgressBarWrapper;
 
-var ProgressContentWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 12px;\n  background: #F8F9FA;\n"])));
+var ProgressContentWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 12px;\n  background: #F8F9FA;\n"])));
 
 exports.ProgressContentWrapper = ProgressContentWrapper;
 
-var ProgressBar = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  height: 12px;\n  background: ", ";\n  width: 0px;\n"])), function (props) {
+var ProgressBar = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  height: 12px;\n  background: ", ";\n  width: 0px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
 exports.ProgressBar = ProgressBar;
 
-var ProgressTextWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: 14px;\n"])));
+var ProgressTextWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: 14px;\n"])));
 
 exports.ProgressTextWrapper = ProgressTextWrapper;
 
-var StatusWrapper = _styledComponents.default.p(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n  margin-bottom: 0px;\n  font-size: 14px;\n  margin-right: 10px;\n\n  ", "\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    margin-right: 0px;\n    margin-left: 10px;\n  "])));
+var StatusWrapper = _styledComponents.default.p(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n  margin-bottom: 0px;\n  font-size: 14px;\n  margin-right: 10px;\n\n  ", "\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    margin-right: 0px;\n    margin-left: 10px;\n  "])));
 });
 
 exports.StatusWrapper = StatusWrapper;
 
-var TimeWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: #909BA9;\n"])));
+var TimeWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: #909BA9;\n"])));
 
 exports.TimeWrapper = TimeWrapper;
