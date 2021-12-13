@@ -90,7 +90,7 @@ const OrderProgressUI = (props) => {
             <ProgressLogo bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_91,c_limit')} />
             <ProgressDescriptionWrapper>
               <h2>{t('ORDER_IN_PROGRESS', 'Order in progress')}</h2>
-              <p>{('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')}</p>
+              <p>{t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')}</p>
               <Button
                 color='primaryContrast'
                 naked
