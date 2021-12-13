@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var OrderProgressContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  background: #FFFFFF;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n  margin: 45px 20px;\n  padding: 25px;\n\n  > div {\n    width: 100%;\n  }\n\n  @media (min-width: 768px) {\n    > div {\n      width: 50%;\n    }\n  }\n"])));
+var OrderProgressContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  background: #FFFFFF;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n  margin: 45px 20px;\n  padding: 15px;\n\n  > div {\n    width: 100%;\n  }\n\n  @media (min-width: 576px) {\n    padding: 25px;\n  }\n\n  @media (min-width: 768px) {\n    > div {\n      width: 50%;\n    }\n  }\n"])));
 
 exports.OrderProgressContainer = OrderProgressContainer;
 
@@ -48,7 +48,7 @@ var ProgressLogo = function ProgressLogo(props) {
 
 exports.ProgressLogo = ProgressLogo;
 
-var ProgressDescriptionWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-left: 20px;\n\n  ", "\n\n  h2 {\n    font-weight: 600;\n    font-size: 20px;\n    margin-top: 0;\n    margin-bottom: 9px;\n  }\n  p {\n    font-size: 16px;\n    margin: 0;\n  }\n  button {\n    display: flex;\n    align-items: center;\n    padding: 0px;\n    svg {\n      margin-left: 5px;\n      ", "\n    }\n\n    &:hover {\n      text-decoration: underline;\n    }\n    \n  }\n\n  @media (min-width: 768px) {\n    margin-left: 35px;\n\n    ", "\n  }\n"])), function (props) {
+var ProgressDescriptionWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-left: 20px;\n  ", "\n\n  h2 {\n    font-weight: 600;\n    font-size: 14px;\n    margin-top: 0;\n    margin-bottom: 5px;\n  }\n\n  p {\n    font-size: 12px;\n    margin: 0;\n  }\n\n  button {\n    display: flex;\n    align-items: center;\n    padding: 0px;\n    margin-top: 0px;\n    font-size: 12px;\n    line-height: 25px;\n    svg {\n      margin-left: 5px;\n      ", "\n    }\n    &:hover {\n      text-decoration: underline;\n    }\n  }\n\n  @media (min-width: 576px) {\n    h2 {\n      font-size: 20px;\n      margin-bottom: 6px;\n    }\n    p {\n      font-size: 16px;\n    }\n    button {\n      font-size: 16px;\n      margin-top: 2px;\n      line-height: 30px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    margin-left: 35px;\n\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 20px;\n  "])));
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin-left: 0px;\n        margin-right: 5px;\n      "])));
@@ -84,6 +84,6 @@ var StatusWrapper = _styledComponents.default.p(_templateObject14 || (_templateO
 
 exports.StatusWrapper = StatusWrapper;
 
-var TimeWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: #909BA9;\n"])));
+var TimeWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  color: #909BA9;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-end;\n  flex-direction: column;\n\n  @media (min-width: 576px) {\n    flex-direction: row;\n    font-size: 14px;\n  }\n"])));
 
 exports.TimeWrapper = TimeWrapper;

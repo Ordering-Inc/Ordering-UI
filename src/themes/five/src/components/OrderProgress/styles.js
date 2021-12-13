@@ -10,10 +10,14 @@ export const OrderProgressContainer = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
   margin: 45px 20px;
-  padding: 25px;
+  padding: 15px;
 
   > div {
     width: 100%;
+  }
+
+  @media (min-width: 576px) {
+    padding: 25px;
   }
 
   @media (min-width: 768px) {
@@ -67,7 +71,6 @@ export const ProgressLogo = (props) => {
 
 export const ProgressDescriptionWrapper = styled.div`
   margin-left: 20px;
-
   ${props => props.theme.rtl && css`
     margin-left: 0px;
     margin-right: 20px;
@@ -75,18 +78,23 @@ export const ProgressDescriptionWrapper = styled.div`
 
   h2 {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 14px;
     margin-top: 0;
-    margin-bottom: 9px;
+    margin-bottom: 5px;
   }
+
   p {
-    font-size: 16px;
+    font-size: 12px;
     margin: 0;
   }
+
   button {
     display: flex;
     align-items: center;
     padding: 0px;
+    margin-top: 0px;
+    font-size: 12px;
+    line-height: 25px;
     svg {
       margin-left: 5px;
       ${props => props.theme.rtl && css`
@@ -94,11 +102,24 @@ export const ProgressDescriptionWrapper = styled.div`
         margin-right: 5px;
       `}
     }
-
     &:hover {
       text-decoration: underline;
     }
-    
+  }
+
+  @media (min-width: 576px) {
+    h2 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+    p {
+      font-size: 16px;
+    }
+    button {
+      font-size: 16px;
+      margin-top: 2px;
+      line-height: 30px;
+    }
   }
 
   @media (min-width: 768px) {
@@ -157,6 +178,15 @@ export const StatusWrapper = styled.p`
 `
 
 export const TimeWrapper = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   color: #909BA9;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex-direction: column;
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+    font-size: 14px;
+  }
 `

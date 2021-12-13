@@ -107,12 +107,15 @@ const OrderProgressUI = (props) => {
             </ProgressContentWrapper>
             <ProgressTextWrapper>
               <StatusWrapper>{getOrderStatus(order.status).value}</StatusWrapper>
-              <TimeWrapper>{t('ESTIMATED_DELIVERY', 'Estimated delivery')}:
-                {order?.delivery_datetime_utc
-                  ? parseTime(order?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
-                  : parseTime(order?.delivery_datetime, { utc: false })}
-                  -
-                {convertDiffToHours(order.delivery_type === 1 ? order?.business?.delivery_time : order?.business?.pickup_time, order)}
+              <TimeWrapper>
+                <span>{t('ESTIMATED_DELIVERY', 'Estimated delivery')}:</span>
+                <span>
+                  {order?.delivery_datetime_utc
+                    ? parseTime(order?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
+                    : parseTime(order?.delivery_datetime, { utc: false })}
+                    -
+                  {convertDiffToHours(order.delivery_type === 1 ? order?.business?.delivery_time : order?.business?.pickup_time, order)}
+                </span>
               </TimeWrapper>
             </ProgressTextWrapper>
           </ProgressBarWrapper>
