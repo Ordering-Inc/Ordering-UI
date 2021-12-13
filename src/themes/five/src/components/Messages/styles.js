@@ -205,7 +205,7 @@ export const BubbleCustomer = styled.div`
   min-width: 80px;
   height: auto;
   margin-bottom: 10px;
-  background: #D81212;
+  background: ${props => props.theme.colors.primary};
   color: white;
   overflow-wrap: break-word;
   overflow: hidden;
