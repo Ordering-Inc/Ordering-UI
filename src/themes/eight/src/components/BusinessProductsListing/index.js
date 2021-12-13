@@ -58,7 +58,8 @@ const BusinessProductsListingUI = (props) => {
     featuredProducts,
     isCartOnProductsList,
     errorQuantityProducts,
-    onBusinessCartRedirect
+    onBusinessCartRedirect,
+    onCategoryRedirect
   } = props
 
   const [{ configs }] = useConfig()
@@ -134,8 +135,10 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateInitialRender(false)
     updateProductModal(null)
     setCurProduct(null)
-    onProductRedirect({
-      slug: business?.slug
+    onCategoryRedirect({
+      slug: business?.slug,
+      category: categorySelected.id,
+      replace: true
     })
   }
 
@@ -190,9 +193,26 @@ const BusinessProductsListingUI = (props) => {
   }, [handleScroll])
 
   const onClickCategory = (category) => {
+    onCategoryRedirect({
+      slug: business?.slug,
+      category: category.id,
+      replace: false
+    })
     handleChangeCategory(category)
     handleShowOption('products')
   }
+
+  useEffect(() => {
+    if (loading || productId) return
+    if (!categoryId) {
+      handleShowOption('categories')
+    } else {
+      if (showOption !== 'products') {
+        const selectedCategory = business?.categories.find(category => category.id.toString() === categoryId)
+        onClickCategory(selectedCategory)
+      }
+    }
+  }, [categoryId, productId, loading])
 
   return (
     <>
@@ -205,12 +225,12 @@ const BusinessProductsListingUI = (props) => {
       {showOption === 'categories' && (
         <NavBar
           title={t('MENU_V21', 'Menu')}
+          handleGoBack={() => handleSearchRedirect()}
         />
       )}
       {showOption === 'products' && (
         <NavBar
           title={categorySelected?.name}
-          handleGoBack={() => handleShowOption('categories')}
         />
       )}
       {(showOption === 'categories' || showOption === 'products') && (

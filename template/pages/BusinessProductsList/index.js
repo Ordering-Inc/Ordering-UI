@@ -64,6 +64,21 @@ export const BusinessProductsList = (props) => {
     handleSearchRedirect: () => {
       events.emit('go_to_page', { page: 'search' })
     },
+    onCategoryRedirect: ({ slug, category, replace }) => {
+      return window.location.pathname.includes('/store/')
+        ? events.emit('go_to_page', {
+          page: 'business',
+          params: { store: slug },
+          search: `?category=${category}`,
+          replace: replace
+        })
+        : events.emit('go_to_page', {
+          page: 'business_slug',
+          params: { store: slug },
+          search: `?category=${category}`,
+          replace: replace
+        })
+    },
     onProductRedirect: ({ slug, category, product }) => {
       if (!category && !product) {
         return window.location.pathname.includes('/store/')
