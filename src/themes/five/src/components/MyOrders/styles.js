@@ -4,6 +4,7 @@ export const Container = styled.div`
   padding: 20px;
   overflow: hidden;
   min-height: auto;
+  box-sizing: border-box;
 
   @media (min-width: 769px) {
     padding: 40px;
@@ -11,7 +12,6 @@ export const Container = styled.div`
 
   @media (min-width: 993px) {
     min-height: calc(100vh - 382px);
-    box-sizing: border-box;
   }
 `
 

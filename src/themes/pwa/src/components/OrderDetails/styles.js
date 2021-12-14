@@ -70,22 +70,22 @@ export const BusinessWrapper = styled.div`
 `
 
 export const BusinessInfo = styled.div`
+  width: 100%;
   h1,
   p {
     margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     color: ${props => props.theme.colors.darkTextColor};
+    overflow-wrap: break-word;
   }
 
   h2 {
     font-weight: 500;
     font-size: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
   }
   p {
     font-size: 14px;
+    margin-bottom: 5px;
   }
 `
 
