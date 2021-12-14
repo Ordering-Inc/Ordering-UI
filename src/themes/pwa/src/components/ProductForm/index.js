@@ -231,7 +231,7 @@ const ProductOptionsUI = (props) => {
               </ProductFormTitle>
               <Divider />
               <ProductEdition>
-                {product?.ingredients.length > 0 && isShowExtra && (
+                {(product?.ingredients.length > 0 || isShowExtra) && (
                   <ProductTabContainer id='all'>
                     <Tabs variant='primary'>
                       <Tab
@@ -242,22 +242,26 @@ const ProductOptionsUI = (props) => {
                       >
                         {t('ALL', 'All')}
                       </Tab>
-                      <Tab
-                        key='ingredients'
-                        active={tabValue === 'ingredients'}
-                        onClick={() => handleChangeTabValue('ingredients')}
-                        borderBottom
-                      >
-                        {t('INGREDIENTS', 'ingredients')}
-                      </Tab>
-                      <Tab
-                        key='extra'
-                        active={tabValue === 'extra'}
-                        onClick={() => handleChangeTabValue('extra')}
-                        borderBottom
-                      >
-                        {t('EXTRA', 'Extra')}
-                      </Tab>
+                      {product?.ingredients.length > 0 && (
+                        <Tab
+                          key='ingredients'
+                          active={tabValue === 'ingredients'}
+                          onClick={() => handleChangeTabValue('ingredients')}
+                          borderBottom
+                        >
+                          {t('INGREDIENTS', 'ingredients')}
+                        </Tab>
+                      )}
+                      {isShowExtra && (
+                        <Tab
+                          key='extra'
+                          active={tabValue === 'extra'}
+                          onClick={() => handleChangeTabValue('extra')}
+                          borderBottom
+                        >
+                          {t('EXTRA', 'Extra')}
+                        </Tab>
+                      )}
                     </Tabs>
                   </ProductTabContainer>
                 )}
