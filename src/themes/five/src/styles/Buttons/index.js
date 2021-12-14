@@ -144,6 +144,16 @@ export const Button = styled.button`
     &:active {
       background: ${props => darken(0.1, props.theme.colors.primaryContrast)};
     }
+    ${({ naked }) => naked && css`
+      background: transparent;
+      border-color: transparent;
+      &:active {
+        background: transparent;
+      }
+      &:hover {
+        background: transparent;
+      }
+    `}
   `}
   ${({ color }) => color === 'secundary' && css`
     background: ${props => props.theme.colors.secundary};
