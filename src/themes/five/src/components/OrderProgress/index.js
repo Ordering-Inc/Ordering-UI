@@ -73,7 +73,7 @@ const OrderProgressUI = (props) => {
       : parseDate(order?.delivery_datetime, { utc: false, outputFormat: 'YYYY-MM-DD hh:mm A' })
     const [hour, minute] = time.split(':')
     const result = time ? (parseInt(hour, 10) * 60) + parseInt(minute, 10) : 0
-    const returnedDate = moment(deliveryTime).add(result, 'minutes').format('hh:mm A')
+    const returnedDate = moment(new Date(deliveryTime)).add(result, 'minutes').format('hh:mm A')
     return returnedDate
   }
 
