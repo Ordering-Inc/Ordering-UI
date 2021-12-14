@@ -24,7 +24,7 @@ export const Accordion = styled.div`
   cursor: ${({ isClosed }) => isClosed ? 'not-allowed' : 'pointer'};
   transition: background-color 0.6s ease;
   position: relative;
-  padding: 10px;
+  padding: 10px 0px;
   box-sizing: border-box;
 
   ${props => props.isClosed && css`

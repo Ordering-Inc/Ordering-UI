@@ -18,7 +18,7 @@ export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 0;
   background-color: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
   table {
     width: 100%;
@@ -60,7 +60,7 @@ export const CheckoutAction = styled.div`
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 0 10px;
+  padding: 0px;
   box-sizing: border-box;
 
   button {
