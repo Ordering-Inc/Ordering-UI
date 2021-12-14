@@ -141,7 +141,6 @@ const UpsellingPageUI = (props) => {
                               </div>
                               <div>
                                 <span>{parsePrice(product.price)}</span>
-                                <span className='discount'>{parsePrice(product.price)}</span>
                               </div>
                               <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
                             </HorizontalDetails>
