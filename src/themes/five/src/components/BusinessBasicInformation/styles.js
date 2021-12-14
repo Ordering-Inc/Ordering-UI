@@ -136,7 +136,6 @@ export const BusinessInfoItem = styled.div`
 export const BusinessInfoContainer = styled.div`
   margin-bottom: 25px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   flex-direction: column;
 
@@ -160,7 +159,7 @@ export const WrapperSearch = styled.div`
       margin-right: 0;
     `}
     input {
-      width: 200px;
+      width: 100%;
 
       @media (min-width: 500px) {
         width: 250px;
