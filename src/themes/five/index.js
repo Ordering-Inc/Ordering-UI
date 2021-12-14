@@ -43,6 +43,7 @@ import { MyOrders } from './src/components/MyOrders'
 import { Modal } from './src/components/Modal'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrdersOption } from './src/components/OrdersOption'
+import { OrderProgress } from './src/components/OrderProgress'
 import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorContent'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
@@ -114,6 +115,7 @@ export {
   OrdersOption,
   OrderTypeSelectorContent,
   OrderTypeSelectorHeader,
+  OrderProgress,
   PaymentOptionCash,
   PaymentOptionStripe,
   PaymentOptions,
