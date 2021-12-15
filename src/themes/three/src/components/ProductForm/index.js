@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
@@ -74,6 +75,7 @@ const ProductOptionsUI = (props) => {
   } = props
 
   const { product, loading, error } = productObject
+  const theme = useTheme()
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
   const windowSize = useWindowSize()
@@ -152,7 +154,7 @@ const ProductOptionsUI = (props) => {
 
   useEffect(() => {
     const imageList = []
-    if (product?.images) imageList.push(product?.images)
+    imageList.push(product?.images || theme.images?.dummies?.product)
     for (const galleryItem of product?.gallery) {
       imageList.push(galleryItem.file)
     }

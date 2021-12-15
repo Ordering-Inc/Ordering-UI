@@ -13,6 +13,7 @@ import {
 
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { useTheme } from 'styled-components'
 
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
@@ -76,6 +77,7 @@ const ProductOptionsUI = (props) => {
   } = props
 
   const { product, loading, error } = productObject
+  const theme = useTheme()
 
   const windowSize = useWindowSize()
   const [{ auth, user }, { login }] = useSession()
@@ -145,7 +147,7 @@ const ProductOptionsUI = (props) => {
 
   useEffect(() => {
     const imageList = []
-    if (product?.images) imageList.push(product?.images)
+    imageList.push(product?.images || theme.images?.dummies?.product)
     for (const galleryItem of product?.gallery) {
       imageList.push(galleryItem.file)
     }
@@ -211,23 +213,23 @@ const ProductOptionsUI = (props) => {
                         spaceBetween={20}
                         slidesPerView={5}
                         breakpoints={{
-                          '@0.00': {
+                          0: {
                             slidesPerView: 3,
                             spaceBetween: 20
                           },
-                          '@0.03': {
+                          300: {
                             slidesPerView: 4,
                             spaceBetween: 20
                           },
-                          '@0.4': {
+                          400: {
                             slidesPerView: 5,
                             spaceBetween: 20
                           },
-                          '@0.55': {
+                          550: {
                             slidesPerView: 6,
                             spaceBetween: 20
                           },
-                          '@0.7': {
+                          769: {
                             slidesPerView: 7,
                             spaceBetween: 20
                           }

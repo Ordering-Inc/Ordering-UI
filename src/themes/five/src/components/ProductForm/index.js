@@ -30,7 +30,7 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import {
   ProductContainer,
   WrapperImage,
-  ProductImage,
+  SwiperWrapper,
   ProductInfo,
   ProductEdition,
   SectionTitle,
@@ -48,6 +48,15 @@ import {
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, {
+  Navigation,
+  Thumbs
+} from 'swiper'
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
+SwiperCore.use([Navigation, Thumbs])
 
 const ProductOptionsUI = (props) => {
   const {
@@ -79,6 +88,8 @@ const ProductOptionsUI = (props) => {
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [tabValue, setTabValue] = useState('all')
   const productContainerRef = useRef(null)
+  const [gallery, setGallery] = useState([])
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
@@ -154,6 +165,15 @@ const ProductOptionsUI = (props) => {
     }
   }, [tabValue])
 
+  useEffect(() => {
+    const imageList = []
+    imageList.push(product?.images || theme.images?.dummies?.product)
+    for (const galleryItem of product?.gallery) {
+      imageList.push(galleryItem.file)
+    }
+    setGallery(imageList)
+  }, [product])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -194,16 +214,67 @@ const ProductOptionsUI = (props) => {
         {!loading && !error && product && (
           <>
             <WrapperImage>
-              <ProductImage id='product_image'>
-                <img
-                  src={product?.images || theme.images?.dummies?.product}
-                  alt='product'
-                  width='300px'
-                  height='300px'
-                  loading='lazy'
-                  onError={(e) => { e.target.onerror = null; e.target.src = theme.images?.dummies?.product }}
-                />
-              </ProductImage>
+              <SwiperWrapper>
+                <Swiper
+                  spaceBetween={10}
+                  navigation
+                  thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+                >
+                  {gallery.map((img, i) => (
+                    <SwiperSlide key={i}>
+                      <img src={img} alt='' />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                <Swiper
+                  onSwiper={setThumbsSwiper}
+                  spaceBetween={20}
+                  slidesPerView={5}
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 3,
+                      spaceBetween: 20
+                    },
+                    300: {
+                      slidesPerView: 4,
+                      spaceBetween: 20
+                    },
+                    400: {
+                      slidesPerView: 5,
+                      spaceBetween: 20
+                    },
+                    550: {
+                      slidesPerView: 6,
+                      spaceBetween: 20
+                    },
+                    769: {
+                      slidesPerView: 4,
+                      spaceBetween: 20
+                    },
+                    1000: {
+                      slidesPerView: 5,
+                      spaceBetween: 20
+                    },
+                    1400: {
+                      slidesPerView: 6,
+                      spaceBetween: 20
+                    },
+                    1600: {
+                      slidesPerView: 7,
+                      spaceBetween: 20
+                    }
+                  }}
+                  freeMode
+                  watchSlidesProgress
+                  className='product-thumb'
+                >
+                  {gallery.map((img, i) => (
+                    <SwiperSlide key={i}>
+                      <img src={img} alt='' />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </SwiperWrapper>
             </WrapperImage>
             <ProductInfo>
               <ProductFormTitle>
