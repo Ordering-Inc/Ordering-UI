@@ -305,15 +305,16 @@ export const TimeofSent = styled.p`
 
 export const SendForm = styled.div`
   display: flex;
-  padding: 0px 5px;
+  flex-direction: column;
+  padding: 5px;
   position: fixed;
   bottom: 0;
   background: #FAFAFA;
   border-top: 1px solid #EEEEEE;
   width: 97%;
-  height: 70px;
+  /* height: 70px; */
   @media (min-width: 480px){
-    padding: 0px 20px;
+    padding: 5px 20px;
     width: 95%;
   }
 
@@ -487,5 +488,25 @@ export const NotSendMessage = styled(SendForm)`
     font-size: 14px;
     color: #909BA9;
     margin: 6px 0;
+  }
+`
+
+export const QuickMessageWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  button {
+    margin-bottom: 5px;
+    color: #414954;
+    border: none;
+    margin-right: 12px;
+    font-size: 12px;
+    line-height: 25px;
+    padding: 0px 12px;
+
+    ${props => props.theme.rtl && css`
+      margin-right: 0px;
+      margin-left: 12px;
+    `}
   }
 `
