@@ -7,7 +7,6 @@ import {
   FormDriverTip,
   WrapperInput,
   DriverTipMessage,
-  // DriverTipLabel,
   WrapperTips
 } from './styles'
 import { Input } from '../../styles/Inputs'
@@ -68,9 +67,6 @@ const DriverTipsUI = (props) => {
           </>
         ) : (
           <FormDriverTip>
-            {/* <DriverTipLabel>
-              {t('CUSTOM_DRIVER_TIP_MESSAGE', '100% of these tips go directly to your driver')}
-            </DriverTipLabel> */}
             <WrapperInput>
               <Input
                 name='drivertip'
