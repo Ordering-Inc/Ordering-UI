@@ -5,11 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.TimeofSentByAdmin = exports.TimeofSent = exports.Status = exports.SkeletonBubbleCustomer = exports.SkeletonBubbleBusiness = exports.SendImage = exports.SendForm = exports.Send = exports.PartnerName = exports.NotSendMessage = exports.MyName = exports.ModalIcon = exports.MessagesTitle = exports.MessagesRightLayout = exports.MessagesLeftLayout = exports.MessagesLayoutWrapper = exports.MessagesContainer = exports.MessagesClose = exports.MessageCustomer = exports.MessageCreatedDate = exports.MessageContentWrapper = exports.MessageConsole = exports.MessageBusiness = exports.InputWrapper = exports.ImageContainer = exports.Image = exports.HeaderProfile = exports.HeaderOnline = exports.HeaderName = exports.CustomerList = exports.ChatImage = exports.Chat = exports.BubbleCustomer = exports.BubbleConsole = exports.BubbleBusines = void 0;
+exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.TimeofSentByAdmin = exports.TimeofSent = exports.Status = exports.SkeletonBubbleCustomer = exports.SkeletonBubbleBusiness = exports.SendImage = exports.SendForm = exports.Send = exports.QuickMessageWrapper = exports.PartnerName = exports.NotSendMessage = exports.MyName = exports.ModalIcon = exports.MessagesTitle = exports.MessagesRightLayout = exports.MessagesLeftLayout = exports.MessagesLayoutWrapper = exports.MessagesContainer = exports.MessagesClose = exports.MessageCustomer = exports.MessageCreatedDate = exports.MessageContentWrapper = exports.MessageConsole = exports.MessageBusiness = exports.InputWrapper = exports.ImageContainer = exports.Image = exports.HeaderProfile = exports.HeaderOnline = exports.HeaderName = exports.CustomerList = exports.ChatImage = exports.Chat = exports.BubbleCustomer = exports.BubbleConsole = exports.BubbleBusines = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62;
+var _polished = require("polished");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -59,7 +61,7 @@ var HeaderOnline = _styledComponents.default.div(_templateObject9 || (_templateO
 
 exports.HeaderOnline = HeaderOnline;
 
-var Chat = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-y: auto;\n  overflow-x: hidden;\n  height: calc(100vh - 490px);\n  min-height: 400px;\n  flex-direction: column;\n  padding: 0 20px;\n  > :first-child{\n    margin-top: 10px;\n  }\n  @media (min-width: 769px){\n    height: calc(60vh - 60px);\n  }\n"])));
+var Chat = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-y: auto;\n  overflow-x: hidden;\n  height: calc(100vh - 490px);\n  min-height: 400px;\n  flex-direction: column;\n  padding: 0 20px;\n  > :first-child{\n    margin-top: 10px;\n  }\n  @media (min-width: 769px){\n    height: calc(60vh - 90px);\n  }\n"])));
 
 exports.Chat = Chat;
 
@@ -155,7 +157,7 @@ var TimeofSentByAdmin = _styledComponents.default.p(_templateObject32 || (_templ
 
 exports.TimeofSentByAdmin = TimeofSentByAdmin;
 
-var SendForm = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 0px 5px;\n  bottom: 0;\n  width: 100%;\n  height: 70px;\n  box-sizing: border-box;\n\n  @media (min-width: 480px){\n    padding: 0px 20px;\n  }\n\n  @media (min-width: 769px) {\n    padding: 10px 20px;\n    position: static;\n    width: auto;\n  }\n"])));
+var SendForm = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 5px;\n  bottom: 0;\n  width: 100%;\n  box-sizing: border-box;\n  border-top: 1px solid #DEE2E6;\n\n  @media (min-width: 480px){\n    padding: 5px 20px;\n  }\n\n  @media (min-width: 769px) {\n    padding: 10px 20px;\n    position: static;\n    width: auto;\n  }\n"])));
 
 exports.SendForm = SendForm;
 
@@ -272,3 +274,11 @@ var MessageCreatedDate = _styledComponents.default.div(_templateObject61 || (_te
 exports.MessageCreatedDate = MessageCreatedDate;
 var NotSendMessage = (0, _styledComponents.default)(SendForm)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  width: 100%;\n  color: #909BA9;\n  background: #F8F9FA;\n\n  svg {\n    font-size: 20px;\n  }\n\n  p {\n    font-size: 14px;\n    color: #909BA9;\n    margin: 6px 0;\n  }\n"])));
 exports.NotSendMessage = NotSendMessage;
+
+var QuickMessageWrapper = _styledComponents.default.div(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n\n  button {\n    margin-bottom: 5px;\n    border-radius: 50px;\n    color: #414954;\n    background: #E9ECEF;\n    border: none;\n    margin-right: 12px;\n    font-size: 12px;\n    line-height: 25px;\n    padding: 0px 12px;\n    ", "\n\n    &:active {\n      background: ", ";\n    }\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["\n      margin-right: 0px;\n      margin-left: 12px;\n    "])));
+}, function () {
+  return (0, _polished.darken)(0.05, '#E9ECEF');
+});
+
+exports.QuickMessageWrapper = QuickMessageWrapper;

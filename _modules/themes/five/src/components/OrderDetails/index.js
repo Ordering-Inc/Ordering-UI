@@ -35,10 +35,6 @@ var _Messages = require("../Messages");
 
 var _ReviewOrder = require("../../../../../components/ReviewOrder");
 
-var _ReviewProduct = require("../../../../../components/ReviewProduct");
-
-var _ReviewDriver = require("../../../../../components/ReviewDriver");
-
 var _ProductShare = require("../../../../../components/ProductShare");
 
 var _styles = require("./styles");
@@ -46,6 +42,10 @@ var _styles = require("./styles");
 var _styledComponents = require("styled-components");
 
 var _utils = require("../../../../../utils");
+
+var _ReviewProduct = require("../../../../../components/ReviewProduct");
+
+var _ReviewDriver = require("../../../../../components/ReviewDriver");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -118,40 +118,40 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      isReviewOpen = _useState4[0],
-      setIsReviewOpen = _useState4[1];
+      isOrderReviewed = _useState4[0],
+      setIsOrderReviewed = _useState4[1];
 
   var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      isOrderReviewed = _useState6[0],
-      setIsOrderReviewed = _useState6[1];
+      isProductReviewed = _useState6[0],
+      setIsProductReviewed = _useState6[1];
 
   var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      isProductReviewed = _useState8[0],
-      setIsProductReviewed = _useState8[1];
+      isDriverReviewed = _useState8[0],
+      setIsDriverReviewed = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(false),
+  var _useState9 = (0, _react.useState)({
+    business: false,
+    driver: false
+  }),
       _useState10 = _slicedToArray(_useState9, 2),
-      isDriverReviewed = _useState10[0],
-      setIsDriverReviewed = _useState10[1];
+      unreadAlert = _useState10[0],
+      setUnreadAlert = _useState10[1];
 
-  var _useState11 = (0, _react.useState)({
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isReviewOpen = _useState12[0],
+      setIsReviewOpen = _useState12[1];
+
+  var _useState13 = (0, _react.useState)({
     order: false,
     product: false,
     driver: false
   }),
-      _useState12 = _slicedToArray(_useState11, 2),
-      reviewStatus = _useState12[0],
-      setReviewStatus = _useState12[1];
-
-  var _useState13 = (0, _react.useState)({
-    business: false,
-    driver: false
-  }),
       _useState14 = _slicedToArray(_useState13, 2),
-      unreadAlert = _useState14[0],
-      setUnreadAlert = _useState14[1];
+      reviewStatus = _useState14[0],
+      setReviewStatus = _useState14[1];
 
   var _props$order = props.order,
       order = _props$order.order,
@@ -402,7 +402,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, !loading && order && Object.keys(order).length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag23 = theme.defaultLanguages) === null || _theme$defaultLanguag23 === void 0 ? void 0 : _theme$defaultLanguag23.ORDER) || 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), (order === null || order === void 0 ? void 0 : order.status) !== 0 && (order === null || order === void 0 ? void 0 : order.integration_id) && /*#__PURE__*/_react.default.createElement("h1", null, t('TICKET', 'Ticket'), ": ", order === null || order === void 0 ? void 0 : order.integration_id), /*#__PURE__*/_react.default.createElement("p", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, !loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag23 = theme.defaultLanguages) === null || _theme$defaultLanguag23 === void 0 ? void 0 : _theme$defaultLanguag23.ORDER) || 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), (order === null || order === void 0 ? void 0 : order.status) !== 0 && (order === null || order === void 0 ? void 0 : order.integration_id) && /*#__PURE__*/_react.default.createElement("h1", null, t('TICKET', 'Ticket'), ": ", order === null || order === void 0 ? void 0 : order.integration_id), /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
   }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
@@ -411,7 +411,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     active: (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
   }, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleOpenReview
-  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag24 = theme.defaultLanguages) === null || _theme$defaultLanguag24 === void 0 ? void 0 : _theme$defaultLanguag24.REVIEW_ORDER) || 'Review Order'))), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
+  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag24 = theme.defaultLanguages) === null || _theme$defaultLanguag24 === void 0 ? void 0 : _theme$defaultLanguag24.REVIEW_ORDER) || 'Review your Order'))), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
   }), /*#__PURE__*/_react.default.createElement("p", {
     className: "order-status"
@@ -447,12 +447,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         business: false
       });
     }
-  }, (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && unreadAlert.driver && /*#__PURE__*/_react.default.createElement(_styles.ExclamationWrapper, null, /*#__PURE__*/_react.default.createElement(_AiFillExclamationCircle.default, null)), /*#__PURE__*/_react.default.createElement(_BiMessageRounded.default, null))))), (order === null || order === void 0 ? void 0 : (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.location) && parseInt(order === null || order === void 0 ? void 0 : order.status) === 9 && /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+  }, (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && unreadAlert.driver && /*#__PURE__*/_react.default.createElement(_styles.ExclamationWrapper, null, /*#__PURE__*/_react.default.createElement(_AiFillExclamationCircle.default, null)), /*#__PURE__*/_react.default.createElement(_BiMessageRounded.default, null))))), (order === null || order === void 0 ? void 0 : (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.location) && parseInt(order === null || order === void 0 ? void 0 : order.status) === 9 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
     location: order === null || order === void 0 ? void 0 : (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.location,
     locations: locations,
     mapControls: googleMapsControls
-  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_MESSAGE_RECEIVED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.ORDER_MESSAGE_RECEIVED) || 'Your order has been received')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_MESSAGE_HEADER_TEXT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag27 = theme.defaultLanguages) === null || _theme$defaultLanguag27 === void 0 ? void 0 : _theme$defaultLanguag27.ORDER_MESSAGE_HEADER_TEXT) || 'Once business accepts your order, we will send you an email, thank you!'))), !userCustomerId && /*#__PURE__*/_react.default.createElement(_styles.MyOrderActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER_MESSAGE_RECEIVED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.ORDER_MESSAGE_RECEIVED) || 'Your order has been received')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_MESSAGE_HEADER_TEXT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag27 = theme.defaultLanguages) === null || _theme$defaultLanguag27 === void 0 ? void 0 : _theme$defaultLanguag27.ORDER_MESSAGE_HEADER_TEXT) || 'Once business accepts your order, we will send you an email, thank you!'))), !userCustomerId && /*#__PURE__*/_react.default.createElement(_styles.MyOrderActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     outline: true,
     onClick: function onClick() {
@@ -477,7 +477,22 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     withBtn: true,
     btnText: t('SHARE', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag39 = theme.defaultLanguages) === null || _theme$defaultLanguag39 === void 0 ? void 0 : _theme$defaultLanguag39.SHARE) || 'Share'),
     defaultUrl: urlToShare(order === null || order === void 0 ? void 0 : order.hash_key)
-  })))))), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  })))))), (openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
+    orderId: order === null || order === void 0 ? void 0 : order.id,
+    order: order,
+    business: openMessages.business,
+    driver: openMessages.driver,
+    messages: messages,
+    setMessages: setMessages,
+    readMessages: readMessages,
+    onMessages: setOpenMessages,
+    onClose: function onClose() {
+      return setOpenMessages({
+        driver: false,
+        business: false
+      });
+    }
+  }), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 40,
@@ -557,24 +572,6 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     content: t('NOT_FOUND_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag40 = theme.defaultLanguages) === null || _theme$defaultLanguag40 === void 0 ? void 0 : _theme$defaultLanguag40.NOT_FOUND_ORDER) || 'Sorry, we couldn\'t find the requested order.'),
     btnTitle: t('ORDERS_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag41 = theme.defaultLanguages) === null || _theme$defaultLanguag41 === void 0 ? void 0 : _theme$defaultLanguag41.ORDERS_REDIRECT) || 'Go to Orders'),
     onClickButton: handleOrderRedirect
-  })), (openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    open: openMessages.driver || openMessages.business,
-    onClose: function onClose() {
-      return setOpenMessages({
-        driver: false,
-        business: false
-      });
-    },
-    padding: "0",
-    width: "70%"
-  }, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
-    orderId: order === null || order === void 0 ? void 0 : order.id,
-    order: order,
-    business: openMessages.business,
-    driver: openMessages.driver,
-    messages: messages,
-    setMessages: setMessages,
-    readMessages: readMessages
   })), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isReviewOpen,
     onClose: handleCloseReivew,

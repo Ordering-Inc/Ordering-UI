@@ -63,6 +63,7 @@ export const BusinessWrapper = styled.div`
 `
 
 export const BusinessInfo = styled.div`
+  width: 100%;
   h1,
   p {
     margin: 0;

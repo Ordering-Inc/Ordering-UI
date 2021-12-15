@@ -51,7 +51,7 @@ var BusinessWrapper = _styledComponents.default.div(_templateObject7 || (_templa
 
 exports.BusinessWrapper = BusinessWrapper;
 
-var BusinessInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  h1,\n  p {\n    margin: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    color: ", ";\n  }\n\n  h2 {\n    font-weight: 500;\n    font-size: 20px;\n    margin-bottom: 5px;\n  }\n  p {\n    font-size: 14px;\n  }\n"])), function (props) {
+var BusinessInfo = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  h1,\n  p {\n    margin: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    color: ", ";\n  }\n\n  h2 {\n    font-weight: 500;\n    font-size: 20px;\n    margin-bottom: 5px;\n  }\n  p {\n    font-size: 14px;\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
