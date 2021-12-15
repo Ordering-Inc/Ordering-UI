@@ -505,13 +505,13 @@ export const QuickMessageWrapper = styled.div`
     font-size: 12px;
     line-height: 25px;
     padding: 0px 12px;
-
     ${props => props.theme.rtl && css`
       margin-right: 0px;
       margin-left: 12px;
     `}
+
     &:active {
-      background: darken(0.05, '#E9ECEF');
+      background: darken(#E9ECEF, 5%);
     }
   }
 `
