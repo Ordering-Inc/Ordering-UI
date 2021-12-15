@@ -55,6 +55,8 @@ import SwiperCore, {
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 
+SwiperCore.use([Navigation, Thumbs])
+
 const ProductOptionsUI = (props) => {
   const {
     businessSlug,

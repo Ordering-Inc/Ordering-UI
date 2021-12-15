@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
@@ -30,7 +30,6 @@ import { Button } from '../../styles/Buttons'
 import {
   ProductContainer,
   WrapperImage,
-  ProductImage,
   ProductInfo,
   ProductEdition,
   SectionTitle,
@@ -43,9 +42,18 @@ import {
   WrapperIngredients,
   IngredientHeader
 } from './styles'
-import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, {
+  Navigation,
+  Thumbs
+} from 'swiper'
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
+SwiperCore.use([Navigation, Thumbs])
 
 const ProductOptionsUI = (props) => {
   const {
@@ -66,6 +74,7 @@ const ProductOptionsUI = (props) => {
   } = props
 
   const { product, loading, error } = productObject
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
   const windowSize = useWindowSize()
   const [{ auth, user }, { login }] = useSession()
@@ -73,12 +82,12 @@ const ProductOptionsUI = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
-  const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [setActive, setActiveState] = useState('active')
   const [setRotate, setRotateState] = useState('accordion__icon rotate')
+  const [gallery, setGallery] = useState([])
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -141,6 +150,15 @@ const ProductOptionsUI = (props) => {
     )
   }
 
+  useEffect(() => {
+    const imageList = []
+    if (product?.images) imageList.push(product?.images)
+    for (const galleryItem of product?.gallery) {
+      imageList.push(galleryItem.file)
+    }
+    setGallery(imageList)
+  }, [product])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -178,9 +196,53 @@ const ProductOptionsUI = (props) => {
         {!loading && !error && product && (
           <>
             <WrapperImage>
-              <ProductImage id='product_image'>
-                <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
-              </ProductImage>
+              <Swiper
+                spaceBetween={10}
+                navigation
+                thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+              >
+                {gallery.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={20}
+                slidesPerView={5}
+                breakpoints={{
+                  '@0.00': {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                  },
+                  '@0.4': {
+                    slidesPerView: 4,
+                    spaceBetween: 20
+                  },
+                  '@0.55': {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  },
+                  '@1.27': {
+                    slidesPerView: 5,
+                    spaceBetween: 20
+                  },
+                  '@1.60': {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  }
+                }}
+                freeMode
+                watchSlidesProgress
+                className='product-thumb'
+              >
+                {gallery.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </WrapperImage>
             <ProductInfo>
               <ProductFormTitle>
