@@ -313,7 +313,6 @@ export const SendForm = styled.div`
   background: #FAFAFA;
   border-top: 1px solid #EEEEEE;
   width: 97%;
-  /* height: 70px; */
   @media (min-width: 480px){
     padding: 5px 20px;
     width: 95%;
