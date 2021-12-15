@@ -511,7 +511,7 @@ export const QuickMessageWrapper = styled.div`
     `}
 
     &:active {
-      background: darken(#E9ECEF, 5%);
+      background: ${() => darken(0.05, '#E9ECEF')};
     }
   }
 `
