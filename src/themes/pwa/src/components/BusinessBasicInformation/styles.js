@@ -190,7 +190,7 @@ export const BusinessInfoContainer = styled.div`
 `
 
 export const BusinessInfoContent = styled.div`
-  width: 100%;
+  /* width: 100%; */
 `
 
 export const WrapperSearch = styled.div`
@@ -207,22 +207,26 @@ export const WrapperSearch = styled.div`
   }
 
   .search-bar {
-    @media (min-width: 768px) {
-      margin: 0;
-      margin-right: 10px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 10px;
-        margin-right: 0;
-      `}
-    } 
+    margin-right: 20px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 20px;
+      margin-right: 0;
+    `}
+    @media (min-width: 681px) {
+      input {
+        width: 212px;
+        &:focus{
+          width: 100%;
+        }
+      }
+    }
     
     @media(max-width: 480px){
       input {
         padding: 7px;
         padding-left: 30px;
-        padding-right: 20px;
-        width: 30px;
-        border-bottom: 0;
+        padding-right: 50px;
+        width: 240px;
         &:focus{
           margin-left: 20px;
           width: 100%;

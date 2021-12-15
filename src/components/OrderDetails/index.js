@@ -96,6 +96,8 @@ const OrderDetailsUI = (props) => {
   const [openSuccessModal, setOpenSuccessModal] = useState(true)
   const { order, loading, businessData, error } = props.order
 
+  const isFromCheckPage = JSON.parse(window.localStorage.getItem('business-address'))
+
   const getOrderStatus = (s) => {
     const status = parseInt(s)
     const orderStatus = [
@@ -511,7 +513,7 @@ const OrderDetailsUI = (props) => {
           </WrapperContainer>
         )}
 
-        {loading && !error && (
+        {loading && !error && isFromCheckPage && (
           <WrapperContainer isLoading className='skeleton-loading'>
             <Modal
               open={openSuccessModal}
