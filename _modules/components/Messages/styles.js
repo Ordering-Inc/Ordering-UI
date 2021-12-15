@@ -9,6 +9,8 @@ exports.WrapperSendMessageButton = exports.WrapperDeleteImage = exports.TimeofSe
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
+var _polished = require("polished");
+
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -187,7 +189,7 @@ exports.ModalIcon = ModalIcon;
 var NotSendMessage = (0, _styledComponents.default)(SendForm)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  width: 100%;\n  color: #909BA9;\n  background: #FAFAFA;\n\n  svg {\n    font-size: 20px;\n  }\n\n  p {\n    font-size: 14px;\n    color: #909BA9;\n    margin: 6px 0;\n  }\n"])));
 exports.NotSendMessage = NotSendMessage;
 
-var QuickMessageWrapper = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n\n  button {\n    margin-bottom: 5px;\n    color: #414954;\n    background: #E9ECEF;\n    border: none;\n    margin-right: 12px;\n    font-size: 12px;\n    line-height: 25px;\n    padding: 0px 12px;\n\n    ", "\n  }\n"])), function (props) {
+var QuickMessageWrapper = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n\n  button {\n    margin-bottom: 5px;\n    color: #414954;\n    background: #E9ECEF;\n    border: none;\n    margin-right: 12px;\n    font-size: 12px;\n    line-height: 25px;\n    padding: 0px 12px;\n\n    ", "\n    &:active {\n      background: darken(0.05, '#E9ECEF');\n    }\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n      margin-right: 0px;\n      margin-left: 12px;\n    "])));
 });
 

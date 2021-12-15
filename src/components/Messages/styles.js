@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const MessagesContainer = styled.div`
   width: 100%;
@@ -509,5 +510,8 @@ export const QuickMessageWrapper = styled.div`
       margin-right: 0px;
       margin-left: 12px;
     `}
+    &:active {
+      background: darken(0.05, '#E9ECEF');
+    }
   }
 `
