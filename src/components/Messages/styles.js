@@ -498,6 +498,7 @@ export const QuickMessageWrapper = styled.div`
   button {
     margin-bottom: 5px;
     color: #414954;
+    background: #E9ECEF;
     border: none;
     margin-right: 12px;
     font-size: 12px;

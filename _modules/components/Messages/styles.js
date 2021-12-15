@@ -187,7 +187,7 @@ exports.ModalIcon = ModalIcon;
 var NotSendMessage = (0, _styledComponents.default)(SendForm)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  width: 100%;\n  color: #909BA9;\n  background: #FAFAFA;\n\n  svg {\n    font-size: 20px;\n  }\n\n  p {\n    font-size: 14px;\n    color: #909BA9;\n    margin: 6px 0;\n  }\n"])));
 exports.NotSendMessage = NotSendMessage;
 
-var QuickMessageWrapper = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n\n  button {\n    margin-bottom: 5px;\n    color: #414954;\n    border: none;\n    margin-right: 12px;\n    font-size: 12px;\n    line-height: 25px;\n    padding: 0px 12px;\n\n    ", "\n  }\n"])), function (props) {
+var QuickMessageWrapper = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n\n  button {\n    margin-bottom: 5px;\n    color: #414954;\n    background: #E9ECEF;\n    border: none;\n    margin-right: 12px;\n    font-size: 12px;\n    line-height: 25px;\n    padding: 0px 12px;\n\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n      margin-right: 0px;\n      margin-left: 12px;\n    "])));
 });
 
