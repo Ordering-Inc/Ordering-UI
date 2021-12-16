@@ -85,4 +85,5 @@ export const Exclamation = styled.div`
   display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
+  top: 3px;
 `
