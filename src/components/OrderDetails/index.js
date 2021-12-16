@@ -470,7 +470,7 @@ const OrderDetailsUI = (props) => {
                     }
                     {order?.summary?.delivery_price > 0 && (
                       <tr>
-                        <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                        <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
                         <td>{parsePrice(order?.summary?.delivery_price)}</td>
                       </tr>
                     )}

@@ -198,7 +198,6 @@ const CartUI = (props) => {
                         )}
                       </tr>
                     )}
-                    {/** 'MOSTRAR SERVICE FEE FIXED Y PERCENTAGE' */}
                     {
                       cart.taxes.length > 0 && cart.taxes.map(tax => (
                         <tr key={tax.id}>
