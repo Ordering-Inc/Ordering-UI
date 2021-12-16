@@ -21,7 +21,7 @@ import {
   Exclamation
 } from './styles'
 import { verifyDecimals } from '../../utils'
-import AiOutlineExclamationCircle from '@meronex/icons/ai/AiOutlineExclamationCircle'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
 const CartUI = (props) => {
   const {
@@ -122,6 +122,16 @@ const CartUI = (props) => {
     handleClickCheckout()
   }
 
+  const getIncludedTaxes = () => {
+    if (cart?.taxes === null) {
+      return cart.business.tax_type === 1 ? cart?.tax : 0
+    } else {
+      return cart?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -168,7 +178,7 @@ const CartUI = (props) => {
                   <tbody>
                     <tr>
                       <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                      <td>{cart.business.tax_type === 1 ? parsePrice((cart?.subtotal + cart?.tax) || 0) : parsePrice(cart?.subtotal || 0)}</td>
+                      <td>{parsePrice(cart?.subtotal + getIncludedTaxes())}</td>
                     </tr>
                     {cart?.discount > 0 && cart?.total >= 0 && (
                       <tr>
@@ -199,13 +209,13 @@ const CartUI = (props) => {
                       </tr>
                     )}
                     {
-                      cart.taxes.length > 0 && cart.taxes.map(tax => (
+                      cart.taxes?.length > 0 && cart.taxes.filter(tax => tax.type === 2).map(tax => (
                         <tr key={tax.id}>
                           <td>
                             {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>{parsePrice(tax?.summary?.tax || 0)}</td>
@@ -217,8 +227,9 @@ const CartUI = (props) => {
                         <tr key={fee.id}>
                           <td>
                             {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            ({parsePrice(fee?.fixed)} + {fee.percentage}%)
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>{parsePrice(fee?.summary?.fixed + fee?.summary?.percentage || 0)}</td>

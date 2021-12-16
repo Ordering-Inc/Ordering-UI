@@ -196,6 +196,16 @@ const OrderDetailsUI = (props) => {
     setUnreadAlert({ business, driver })
   }
 
+  const getIncludedTaxes = () => {
+    if (order?.taxes?.length === 0) {
+      return order.tax_type === 1 ? order?.summary?.tax ?? 0 : 0
+    } else {
+      return order?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
   const locations = [
     { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
     { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
@@ -408,9 +418,7 @@ const OrderDetailsUI = (props) => {
                     <tr>
                       <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
                       <td>
-                        {order.tax_type === 1
-                          ? parsePrice(((order?.summary?.subtotal || order?.subtotal) + (order?.summary?.tax || order?.tax)) || 0)
-                          : parsePrice((order?.summary?.subtotal || order?.subtotal) || 0)}
+                        {parsePrice(((order?.summary?.subtotal || order?.subtotal) + getIncludedTaxes()))}
                       </td>
                     </tr>
                     {(order?.summary?.discount > 0 || order?.discount > 0) && (
@@ -442,7 +450,29 @@ const OrderDetailsUI = (props) => {
                       </tr>
                     )}
                     {
-                      order.taxes.length > 0 && order.taxes.map(tax => (
+                      order?.taxes?.length === 0 && order?.tax_type === 2 && (
+                        <tr>
+                          <td>
+                            {t('TAX', 'Tax')}
+                            <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
+                          </td>
+                          <td>{parsePrice(order?.summary?.tax || 0)}</td>
+                        </tr>
+                      )
+                    }
+                    {
+                      order?.fees?.length === 0 && (
+                        <tr>
+                          <td>
+                            {t('SERVICE_FEE', 'Service fee')}
+                            <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
+                          </td>
+                          <td>{parsePrice(order?.summary?.service_fee || 0)}</td>
+                        </tr>
+                      )
+                    }
+                    {
+                      order.taxes.length > 0 && order.taxes.filter(tax => tax?.type === 2).map(tax => (
                         <tr key={tax.id}>
                           <td>
                             {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
