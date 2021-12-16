@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig } from 'ordering-components'
+import { useTheme } from 'styled-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
@@ -10,15 +11,17 @@ import { CouponControl } from '../CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../hooks/useWindowSize'
-
+import { TaxInformation } from '../TaxInformation'
 import {
   CartContainer,
   OrderBill,
   CheckoutAction,
   CouponContainer,
-  CartSticky
+  CartSticky,
+  Exclamation
 } from './styles'
 import { verifyDecimals } from '../../utils'
+import AiOutlineExclamationCircle from '@meronex/icons/ai/AiOutlineExclamationCircle'
 
 const CartUI = (props) => {
   const {
@@ -39,6 +42,7 @@ const CartUI = (props) => {
     handleCartOpen
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
@@ -51,6 +55,7 @@ const CartUI = (props) => {
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [openTaxModal, setOpenTaxModal] = useState({ open: false, data: null })
   const windowSize = useWindowSize()
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
@@ -194,15 +199,31 @@ const CartUI = (props) => {
                       </tr>
                     )}
                     {
-                      cart.business.tax_type !== 1 && (
-                        <tr>
+                      cart.taxes.length > 0 && cart.taxes.map(tax => (
+                        <tr key={tax.id}>
                           <td>
-                            {t('TAX', 'Tax')}{' '}
-                            <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
+                            {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
+                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                            </Exclamation>
                           </td>
-                          <td>{parsePrice(cart?.tax || 0)}</td>
+                          <td>{parsePrice(tax?.summary?.tax || 0)}</td>
                         </tr>
-                      )
+                      ))
+                    }
+                    {
+                      cart.fees.length > 0 && cart.fees.map(fee => (
+                        <tr key={fee.id}>
+                          <td>
+                            {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
+                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                            </Exclamation>
+                          </td>
+                          <td>{parsePrice(fee?.summary?.fixed + fee?.summary?.percentage || 0)}</td>
+                        </tr>
+                      ))
                     }
                     {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
                       <tr>
@@ -224,16 +245,6 @@ const CartUI = (props) => {
                         <td>{parsePrice(cart?.driver_tip)}</td>
                       </tr>
                     )}
-                    {cart?.service_fee > 0 && (
-                      <tr>
-                        <td>
-                          {t('SERVICE_FEE', 'Service Fee')}{' '}
-                          <span>{`(${verifyDecimals(cart?.business?.service_fee, parseNumber)}%)`}</span>
-                        </td>
-                        <td>{parsePrice(cart?.service_fee)}</td>
-                      </tr>
-                    )}
-
                   </tbody>
                 </table>
                 {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
@@ -298,6 +309,18 @@ const CartUI = (props) => {
               productId={curProduct?.id}
               onSave={handlerProductAction}
             />
+          </Modal>
+          <Modal
+            width='70%'
+            open={openTaxModal.open}
+            padding='20px'
+            closeOnBackdrop
+            title={`${openTaxModal.data?.name ||
+            t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`}) `}
+            onClose={() => setOpenTaxModal({ open: false, tax: null })}
+            modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+          >
+            <TaxInformation data={openTaxModal.data} products={cart.products} />
           </Modal>
           {openUpselling && (
             <UpsellingPage

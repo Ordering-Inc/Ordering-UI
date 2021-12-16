@@ -92,3 +92,10 @@ export const Divider = styled.div`
     margin-left: -30px;
   }
 `
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+`
