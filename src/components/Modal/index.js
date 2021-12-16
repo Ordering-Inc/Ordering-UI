@@ -23,7 +23,8 @@ const ModalUI = (props) => {
     cancelText,
     isTransparent,
     hideCloseDefault,
-    isProductForm
+    isProductForm,
+    modalTitleStyle
   } = props
   const [, t] = useLanguage()
 
@@ -64,7 +65,7 @@ const ModalUI = (props) => {
       )}
       <ModalHeader>
         {title && (
-          <ModalTitle>
+          <ModalTitle style={modalTitleStyle}>
             {title}
           </ModalTitle>
         )}
