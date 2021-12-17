@@ -125,8 +125,10 @@ const BusinessProductsListingUI = (props) => {
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       handleBackShowOption()
-      onProductRedirect({
-        slug: business?.slug
+      onCategoryRedirect({
+        slug: business?.slug,
+        category: categoryId,
+        replace: false
       })
     }
   }

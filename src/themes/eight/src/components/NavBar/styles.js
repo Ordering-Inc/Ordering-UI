@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const NavBarContainer = styled.div`
   border: 1px solid #E9ECEF;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  padding: 0 1%;
+  padding: 0 15px;
   position: relative;
   display: flex;
   align-items: center;
@@ -54,13 +54,12 @@ export const NavBarTitle = styled.p`
   white-space: nowrap;
   max-width: calc(100% - 160px);
   margin: auto;
-
-  ${({ isSearchShow }) => isSearchShow && css`
-    max-width: calc(100% - 500px);
-  `}
-
+  
   @media (min-width: 768px) {
     font-size: 16px;
+    ${({ isSearchShow }) => isSearchShow && css`
+      max-width: calc(100% - 500px);
+    `}
   }
 `
 export const SearchBarWrapper = styled.div`
@@ -73,5 +72,54 @@ export const SearchBarWrapper = styled.div`
 
   input {
     border: 1px solid #EBEBEB;
+  }
+
+  @media (max-width: 767px) {
+    width: calc(100% - 30px);
+    ${props => props.theme?.rtl ? css`
+      left: initial;
+    ` : css`
+      right: initial;
+    `}
+    > div {
+      justify-content: flex-start;
+      span {
+        left: 20px;
+        img {
+          ${props => props.theme?.rtl ? css`
+            padding-right: 20px;
+          ` : css`
+            padding-left: 20px;
+          `}
+        }
+      }
+      input {
+        border: none !important;
+        ${props => props.theme?.rtl ? css`
+          padding-right: 60px;
+        ` : css`
+          padding-left: 60px;
+        `}
+      }
+    }
+  }
+
+  @media (min-width: 992px) {
+    input {
+      width: 250px;
+    }
+  }
+`
+export const SearchBarIconWrapper = styled.div`
+  position: absolute;
+  right: 15px;
+  display: flex;
+  img {
+    width: 20px;
+  }
+
+  svg {
+    font-size: 20px;
+    color: ${props => props.theme.colors.primary};
   }
 `
