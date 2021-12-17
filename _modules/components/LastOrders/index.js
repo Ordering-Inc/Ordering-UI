@@ -115,7 +115,6 @@ exports.LastOrdersUI = LastOrdersUI;
 var LastOrders = function LastOrders(props) {
   var lastOrdersProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LastOrdersUI,
-    orderStatus: [1, 11, 15],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,

@@ -51,7 +51,8 @@ var ModalUI = function ModalUI(props) {
       cancelText = props.cancelText,
       isTransparent = props.isTransparent,
       hideCloseDefault = props.hideCloseDefault,
-      isProductForm = props.isProductForm;
+      isProductForm = props.isProductForm,
+      modalTitleStyle = props.modalTitleStyle;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -89,7 +90,9 @@ var ModalUI = function ModalUI(props) {
     onClick: function onClick() {
       return onClose();
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.ModalHeader, null, title && /*#__PURE__*/_react.default.createElement(_styles.ModalTitle, null, title)), children, (onCancel || onAccept) && /*#__PURE__*/_react.default.createElement(_styles.ModalActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ModalHeader, null, title && /*#__PURE__*/_react.default.createElement(_styles.ModalTitle, {
+    style: modalTitleStyle
+  }, title)), children, (onCancel || onAccept) && /*#__PURE__*/_react.default.createElement(_styles.ModalActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     onClick: function onClick() {
       return onCancel();

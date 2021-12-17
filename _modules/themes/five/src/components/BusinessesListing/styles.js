@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSearch = exports.PreviousOrders = exports.HightestRatedWrapper = exports.ErrorMessage = exports.Divider = exports.BusinessesTitle = exports.BusinessList = exports.BusinessHeroImgStyled = exports.BusinessHeroImg = exports.BusinessContainer = void 0;
+exports.WrapperSearch = exports.PreviousOrders = exports.OrderProgressWrapper = exports.HightestRatedWrapper = exports.ErrorMessage = exports.Divider = exports.BusinessesTitle = exports.BusinessList = exports.BusinessHeroImgStyled = exports.BusinessHeroImg = exports.BusinessContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78,3 +78,7 @@ exports.HightestRatedWrapper = HightestRatedWrapper;
 var Divider = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n  height: 8px;\n  width: 100%;\n"])));
 
 exports.Divider = Divider;
+
+var OrderProgressWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral([""])));
+
+exports.OrderProgressWrapper = OrderProgressWrapper;

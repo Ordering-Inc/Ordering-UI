@@ -113,7 +113,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var theme = (0, _styledComponents.useTheme)();
 
@@ -227,7 +229,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     categoryId: product === null || product === void 0 ? void 0 : product.category_id,
     productId: product === null || product === void 0 ? void 0 : product.id
   }), /*#__PURE__*/_react.default.createElement("img", {
-    src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product),
+    src: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_300,c_limit'),
     alt: "product",
     width: "300px",
     height: "300px",

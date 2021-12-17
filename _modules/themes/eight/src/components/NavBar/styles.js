@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NavBarTitle = exports.NavBarContainer = exports.BackButton = void 0;
+exports.SearchBarWrapper = exports.NavBarTitle = exports.NavBarContainer = exports.BackButton = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var NavBarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  padding: 0 1%;\n  position: relative;\n\n  @media (min-width: 768px) {\n    padding: 0 5%;\n  }\n\n  @media (min-width: 992px) {\n    padding: 0 10%;\n  }\n"])));
+var NavBarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  padding: 0 1%;\n  position: relative;\n  display: flex;\n  align-items: center;\n\n  @media (min-width: 768px) {\n    padding: 0 5%;\n  }\n\n  @media (min-width: 992px) {\n    padding: 0 10%;\n  }\n"])));
 
 exports.NavBarContainer = NavBarContainer;
 
@@ -31,8 +31,19 @@ var BackButton = _styledComponents.default.button(_templateObject2 || (_template
 
 exports.BackButton = BackButton;
 
-var NavBarTitle = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: center;\n  font-size: 14px;\n  padding: 18px 5px;\n  color: ", ";\n  max-width: calc(100% - 160px);\n  margin: auto;\n\n  @media (min-width: 768px) {\n    font-size: 16px;\n  }\n"])), function (props) {
+var NavBarTitle = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: center;\n  font-size: 14px;\n  padding: 18px 5px;\n  color: ", ";\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  max-width: calc(100% - 160px);\n  margin: auto;\n\n  ", "\n\n  @media (min-width: 768px) {\n    font-size: 16px;\n  }\n"])), function (props) {
   return props.theme.colors.grayDark;
+}, function (_ref) {
+  var isSearchShow = _ref.isSearchShow;
+  return isSearchShow && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    max-width: calc(100% - 500px);\n  "])));
 });
 
 exports.NavBarTitle = NavBarTitle;
+
+var SearchBarWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  position: absolute;\n  ", "\n\n  input {\n    border: 1px solid #EBEBEB;\n  }\n"])), function (props) {
+  var _props$theme2;
+
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    left: 12px;\n  "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    right: 12px;\n  "])));
+});
+
+exports.SearchBarWrapper = SearchBarWrapper;

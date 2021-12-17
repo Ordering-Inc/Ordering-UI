@@ -15,6 +15,8 @@ var _BsChevronRight = _interopRequireDefault(require("@meronex/icons/bs/BsChevro
 
 var _styledComponents = require("styled-components");
 
+var _NotFoundSource = require("../../../../../components/NotFoundSource");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -53,7 +55,14 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   var isSkeleton = props.isSkeleton,
       categories = props.categories,
       handlerClickCategory = props.handlerClickCategory,
-      featured = props.featured;
+      featured = props.featured,
+      searchValue = props.searchValue,
+      handleClearSearch = props.handleClearSearch,
+      handleSearchRedirect = props.handleSearchRedirect;
+
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -70,7 +79,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
     featured: featured
-  }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categories && categories.length && categories.map(function (category) {
+  }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categories && categories.length > 0 && categories.map(function (category) {
     var _theme$images, _theme$images$dummies;
 
     return /*#__PURE__*/_react.default.createElement(_styles.CategoryCard, {
@@ -92,6 +101,12 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     }), /*#__PURE__*/_react.default.createElement(_styles.CategoryImage, null)), /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     })));
+  })), !isSkeleton && categories.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_CATEGORIES', 'No categories found, please change filters.'),
+    btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
+    onClickButton: function onClickButton() {
+      return !searchValue ? handleSearchRedirect() : handleClearSearch('');
+    }
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

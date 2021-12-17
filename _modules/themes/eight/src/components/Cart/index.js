@@ -191,6 +191,7 @@ var CartUI = function CartUI(props) {
         store: slug
       }
     });
+    onClickCheckout && onClickCheckout();
   };
 
   (0, _react.useEffect)(function () {

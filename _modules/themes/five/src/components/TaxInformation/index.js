@@ -3,19 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NavBar = void 0;
+exports.TaxInformation = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
-
-var _BsChevronLeft = _interopRequireDefault(require("@meronex/icons/bs/BsChevronLeft"));
-
 var _orderingComponents = require("ordering-components");
 
-var _styledComponents = require("styled-components");
-
-var _SearchBar = require("../SearchBar");
+var _SingleProductCard = require("../SingleProductCard");
 
 var _styles = require("./styles");
 
@@ -33,36 +27,25 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var NavBar = function NavBar(props) {
-  var _theme$defaultLanguag;
-
-  var title = props.title,
-      handleGoBack = props.handleGoBack,
-      searchValue = props.searchValue,
-      handleChangeSearch = props.handleChangeSearch,
-      lazyLoad = props.lazyLoad,
-      isSearchShow = props.isSearchShow,
-      placeholder = props.placeholder;
-  var history = (0, _reactRouterDom.useHistory)();
+var TaxInformation = function TaxInformation(props) {
+  var tax = props.tax,
+      products = props.products;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var theme = (0, _styledComponents.useTheme)();
-  return /*#__PURE__*/_react.default.createElement(_styles.NavBarContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BackButton, {
-    onClick: function onClick() {
-      return handleGoBack ? handleGoBack() : history.goBack();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_BsChevronLeft.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('SHOPPING_SECOND_WHERE_BACK_BUTTON', ((_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SHOPPING_SECOND_WHERE_BACK_BUTTON) || 'Back'))), /*#__PURE__*/_react.default.createElement(_styles.NavBarTitle, {
-    isSearchShow: isSearchShow
-  }, title), isSearchShow && /*#__PURE__*/_react.default.createElement(_styles.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
-    isCustomLayout: true,
-    onSearch: handleChangeSearch,
-    search: searchValue,
-    placeholder: placeholder || '',
-    lazyLoad: lazyLoad
+  return /*#__PURE__*/_react.default.createElement(_styles.TaxInformationContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('OTHER_PRODUCTS_WITH_SAME_TAX', 'Other products with the same Tax')), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, null, products.filter(function (product) {
+    var _product$tax, _product$tax2;
+
+    return (_product$tax = product.tax) !== null && _product$tax !== void 0 && _product$tax.id ? ((_product$tax2 = product.tax) === null || _product$tax2 === void 0 ? void 0 : _product$tax2.id) === tax.id : tax.id === null;
+  }).map(function (product) {
+    return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+      key: product.id,
+      product: product,
+      isModal: true
+    });
   })));
 };
 
-exports.NavBar = NavBar;
+exports.TaxInformation = TaxInformation;

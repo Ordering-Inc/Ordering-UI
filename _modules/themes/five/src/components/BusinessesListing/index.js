@@ -41,6 +41,8 @@ var _orderingComponents = require("ordering-components");
 
 var _HighestRated = require("../HighestRated");
 
+var _OrderProgress = require("../OrderProgress");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -225,7 +227,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.businessHero
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderProgress.OrderProgress, null)), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,

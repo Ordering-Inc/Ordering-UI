@@ -74,7 +74,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _configs$add_product_, _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products2, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _currentCart$products3, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _error$, _theme$defaultLanguag7, _currentCart$products4, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _currentCart$products5, _productModal$product2, _productModal$error$, _theme$defaultLanguag12, _props$afterComponent, _props$afterElements;
+  var _configs$add_product_, _Object$values$find, _props$beforeElements, _props$beforeComponen, _businessState$busine, _currentCart$products2, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _currentCart$products3, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _error$, _theme$defaultLanguag7, _currentCart$products4, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _currentCart$products5, _productModal$product2, _productModal$error$, _theme$defaultLanguag12, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
@@ -96,7 +96,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       featuredProducts = props.featuredProducts,
       isCartOnProductsList = props.isCartOnProductsList,
       errorQuantityProducts = props.errorQuantityProducts,
-      onBusinessCartRedirect = props.onBusinessCartRedirect;
+      onBusinessCartRedirect = props.onBusinessCartRedirect,
+      onCategoryRedirect = props.onCategoryRedirect;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -157,6 +158,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       _useState10 = _slicedToArray(_useState9, 2),
       previousShowOption = _useState10[0],
       setPreviousShowOption = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      categorySearchValue = _useState12[0],
+      setCategorySearchValue = _useState12[1];
 
   var currentCart = (_Object$values$find = Object.values(carts).find(function (cart) {
     var _cart$business;
@@ -224,8 +230,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleUpdateInitialRender(false);
     updateProductModal(null);
     setCurProduct(null);
-    onProductRedirect({
-      slug: business === null || business === void 0 ? void 0 : business.slug
+    onCategoryRedirect({
+      slug: business === null || business === void 0 ? void 0 : business.slug,
+      category: categoryId,
+      replace: false
     });
   };
 
@@ -286,10 +294,47 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }, [handleScroll]);
 
   var onClickCategory = function onClickCategory(category) {
+    onCategoryRedirect({
+      slug: business === null || business === void 0 ? void 0 : business.slug,
+      category: category.id,
+      replace: false
+    });
     handleChangeCategory(category);
     handleShowOption('products');
   };
 
+  (0, _react.useEffect)(function () {
+    if (loading) return;
+
+    if (categoryId && productId) {
+      if (!curProduct) {
+        handleUpdateInitialRender(true);
+        handleShowOption('productForm');
+      }
+
+      return;
+    }
+
+    if (!categoryId) {
+      handleShowOption('categories');
+    } else {
+      setCurProduct(null);
+      updateProductModal(null);
+
+      if (showOption !== 'products') {
+        var selectedCategory = business === null || business === void 0 ? void 0 : business.categories.find(function (category) {
+          return category.id.toString() === categoryId;
+        });
+        onCategoryRedirect({
+          slug: business === null || business === void 0 ? void 0 : business.slug,
+          category: selectedCategory.id,
+          replace: true
+        });
+        handleChangeCategory(selectedCategory);
+        handleShowOption('products');
+      }
+    }
+  }, [categoryId, productId, loading, curProduct]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -299,23 +344,44 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       key: i
     }, props));
   }), showOption === 'categories' && /*#__PURE__*/_react.default.createElement(_NavBar.NavBar, {
-    title: t('MENU_V21', 'Menu')
+    title: t('MENU_V21', 'Menu'),
+    handleGoBack: function handleGoBack() {
+      return handleSearchRedirect();
+    },
+    isSearchShow: true,
+    searchValue: categorySearchValue,
+    handleChangeSearch: function handleChangeSearch(val) {
+      return setCategorySearchValue(val);
+    }
   }), showOption === 'products' && /*#__PURE__*/_react.default.createElement(_NavBar.NavBar, {
     title: categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name,
     handleGoBack: function handleGoBack() {
-      return handleShowOption('categories');
-    }
+      return onProductRedirect({
+        slug: business.slug
+      });
+    },
+    isSearchShow: true,
+    searchValue: searchValue,
+    handleChangeSearch: handleChangeSearch,
+    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended
   }), (showOption === 'categories' || showOption === 'products') && /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !loading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
   }, showOption === 'categories' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) ? /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
-    categories: _toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
+    categories: _toConsumableArray(business === null || business === void 0 ? void 0 : business.categories).filter(function (category) {
+      return category === null || category === void 0 ? void 0 : category.name.toLowerCase().includes(categorySearchValue.toLowerCase());
+    }).sort(function (a, b) {
       return a.rank - b.rank;
-    })),
+    }),
     categorySelected: categorySelected,
     onClickCategory: onClickCategory,
-    featured: featuredProducts
+    featured: featuredProducts,
+    searchValue: categorySearchValue,
+    handleClearSearch: function handleClearSearch(val) {
+      return setCategorySearchValue(val);
+    },
+    handleSearchRedirect: handleSearchRedirect
   }) : /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
@@ -354,7 +420,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categoryState: categoryState,
     isBusinessLoading: loading,
     errorQuantityProducts: errorQuantityProducts
-  })))), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }))), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: function onClickButton() {
@@ -368,7 +434,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0],
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: handleSearchRedirect
-  }), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.length) > 0 && auth && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid_schedule) && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid_products) && showOption !== 'productForm' && showOption !== 'cart' && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
+  })), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.length) > 0 && auth && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid_schedule) && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid_products) && showOption !== 'productForm' && showOption !== 'cart' && /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
     btnText: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.MAXIMUM_SUBTOTAL_ORDER) || 'Maximum subtotal order'), ": ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.maximum)) : !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.MINIMUN_SUBTOTAL_ORDER) || 'Minimum subtotal order:'), " ").concat(parsePrice(currentCart === null || currentCart === void 0 ? void 0 : currentCart.minimum)) : !openUpselling ^ canOpenUpselling ? t('VIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.VIEW_ORDER) || 'View Order') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag11 = theme.defaultLanguages) === null || _theme$defaultLanguag11 === void 0 ? void 0 : _theme$defaultLanguag11.LOADING) || 'Loading'),
     isSecondaryBtn: !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100),
     btnValue: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products5 = currentCart.products) === null || _currentCart$products5 === void 0 ? void 0 : _currentCart$products5.length,
@@ -412,10 +478,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isInitialRender = _useState12[0],
-      setIsInitialRender = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isInitialRender = _useState14[0],
+      setIsInitialRender = _useState14[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

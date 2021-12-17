@@ -84,7 +84,7 @@ var SingleProductCard = function SingleProductCard(props) {
     soldOut: isSoldOut || maxProductQuantity <= 0 || productToIdLoading === (product === null || product === void 0 ? void 0 : product.id) && productToIdLoading,
     isLayoutOne: props.isLayoutOne,
     onClick: function onClick() {
-      return (!isSkeleton && !useCustomFunctionality && onProductClick(product) || useCustomFunctionality) && onCustomClick();
+      return (!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product) || useCustomFunctionality) && onCustomClick && onCustomClick();
     },
     isCartOnProductsList: isCartOnProductsList,
     style: useCustomFunctionality && customStyle
