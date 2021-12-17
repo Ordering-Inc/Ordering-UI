@@ -1,7 +1,8 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useConfig, useOrder, useUtils } from 'ordering-components'
-import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
+// import FaChevronRight from '@meronex/icons/fa/FaChevronRight'
+import EnChevronThinRight from '@meronex/icons/en/EnChevronThinRight'
 
 import {
   CardContainer,
@@ -81,7 +82,7 @@ export const SingleProductCard = (props) => {
         <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
           {!isSkeleton ? (<h1>{product?.name}</h1>) : (<h1><Skeleton width={100} /></h1>)}
         </CardInfo>
-        <BsChevronRight />
+        <EnChevronThinRight />
         {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
       </CardContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
