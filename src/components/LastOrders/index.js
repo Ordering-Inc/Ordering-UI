@@ -84,7 +84,6 @@ export const LastOrders = (props) => {
   const lastOrdersProps = {
     ...props,
     UIComponent: LastOrdersUI,
-    orderStatus: [1, 11, 15],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,

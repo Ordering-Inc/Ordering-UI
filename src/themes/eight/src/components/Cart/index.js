@@ -96,6 +96,7 @@ const CartUI = (props) => {
 
   const handleBusinessCartRedirect = (slug) => {
     events.emit('go_to_page', { page: 'business_cart', params: { store: slug } })
+    onClickCheckout && onClickCheckout()
   }
 
   useEffect(() => {
