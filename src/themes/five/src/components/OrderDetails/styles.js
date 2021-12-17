@@ -67,10 +67,8 @@ export const BusinessInfo = styled.div`
   h1,
   p {
     margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     color: ${props => props.theme.colors.darkTextColor};
+    overflow-wrap: break-word;
   }
 
   h2 {
@@ -80,6 +78,7 @@ export const BusinessInfo = styled.div`
   }
   p {
     font-size: 14px;
+    margin-bottom: 5px;
   }
 `
 
