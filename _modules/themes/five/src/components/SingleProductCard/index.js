@@ -89,7 +89,7 @@ var SingleProductCard = function SingleProductCard(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {
     soldOut: isSoldOut || maxProductQuantity <= 0,
     onClick: function onClick() {
-      return !isSkeleton && !useCustomFunctionality && onProductClick(product) || useCustomFunctionality && onCustomClick();
+      return !isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product) || useCustomFunctionality && onCustomClick && onCustomClick();
     },
     isCartOnProductsList: isCartOnProductsList,
     style: useCustomFunctionality && customStyle
