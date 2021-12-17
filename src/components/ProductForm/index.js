@@ -203,23 +203,39 @@ const ProductOptionsUI = (props) => {
                 spaceBetween={20}
                 slidesPerView={5}
                 breakpoints={{
-                  '@0.00': {
+                  0: {
                     slidesPerView: 3,
                     spaceBetween: 20
                   },
-                  '@0.4': {
+                  300: {
                     slidesPerView: 4,
                     spaceBetween: 20
                   },
-                  '@0.55': {
-                    slidesPerView: 6,
-                    spaceBetween: 20
-                  },
-                  '@1.27': {
+                  400: {
                     slidesPerView: 5,
                     spaceBetween: 20
                   },
-                  '@1.60': {
+                  550: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  },
+                  769: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  },
+                  1000: {
+                    slidesPerView: 7,
+                    spaceBetween: 20
+                  },
+                  1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 20
+                  },
+                  1300: {
+                    slidesPerView: 5,
+                    spaceBetween: 20
+                  },
+                  1600: {
                     slidesPerView: 6,
                     spaceBetween: 20
                   }

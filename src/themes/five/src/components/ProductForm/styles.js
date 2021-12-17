@@ -22,23 +22,97 @@ export const ProductContainer = styled.div`
 `
 
 export const WrapperImage = styled.div`
-  width: calc(100% + 40px);
-  margin-top: 20px;
   margin-left: -20px;
+  margin-top: 20px;
+  width: calc(100% + 40px);
   position: relative;
-  height: 320px;
 `
 
-export const ProductImage = styled.div`
+export const SwiperWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
 
-  img {
-    height: 100%;
-    box-sizing: border-box;
-    object-fit: cover;
+  .mySwiper2 {
+    height: 250px;
     width: 100%;
+
+    .swiper-slide-active {
+      border-radius: 0px;
+      img {
+        border-radius: 0px;
+      }
+    }
+
+    @media (min-width: 576px) {
+      height: 320px;
+    }
+
+    @media (min-width: 1201px) {
+    }
+  }
+
+
+  .swiper {
+    width: 100%;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .product-thumb {
+    box-sizing: border-box;
+    padding: 30px 0px;
+    margin: 0px 20px;
+
+    .swiper-slide {
+      opacity: 0.8;
+      border-radius: 7.6px;
+      height: auto;
+
+      img {
+        border-radius: 7.6px;
+      }
+    }
+
+    .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-button-next {
+    background-image: url(${props => props.theme.images.general.rightArrow});
+    background-color: rgba(255,255,255,0.3);
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .swiper-button-prev {
+    background-image: url(${props => props.theme.images.general.leftArrow});
+    background-color: rgba(255,255,255,0.3);
+    background-repeat: no-repeat;
+    background-position: 45% center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .swiper-button-next::after, .swiper-button-prev::after {
+    display: none;
   }
 `
 
