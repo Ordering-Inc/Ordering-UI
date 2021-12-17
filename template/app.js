@@ -227,7 +227,15 @@ export const App = () => {
                     <BusinessProductsList />
                   </Route>
                   <Route exact path='/store/:store/cart'>
-                    <BusinessCart />
+                    {auth ? (
+                      <BusinessCart />
+                    ) : (
+                      <Redirect to={{
+                        pathname: '/login',
+                        state: { from: location.pathname || null }
+                      }}
+                      />
+                    )}
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth

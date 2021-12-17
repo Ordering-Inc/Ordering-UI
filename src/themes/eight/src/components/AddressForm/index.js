@@ -528,6 +528,7 @@ const AddressFormUI = (props) => {
               <Button
                 id='submit-btn'
                 type='submit'
+                color='primary'
                 disabled={formState.loading || Object.keys(formState?.changes).length === 0}
               >
                 {!formState.loading ? (
