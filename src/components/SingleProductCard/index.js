@@ -55,7 +55,7 @@ export const SingleProductCard = (props) => {
       <CardContainer
         soldOut={isSoldOut || maxProductQuantity <= 0 || (productToIdLoading === product?.id && productToIdLoading)}
         isLayoutOne={props.isLayoutOne}
-        onClick={() => (((!isSkeleton && !useCustomFunctionality && onProductClick(product)) || useCustomFunctionality) && onCustomClick())}
+        onClick={() => (((!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product)) || useCustomFunctionality) && onCustomClick && onCustomClick())}
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
       >

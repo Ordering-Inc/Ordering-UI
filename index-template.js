@@ -67,6 +67,9 @@ import categoryAll from './template/assets/images/categories/category-all.png'
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
 
+import leftArrow from './template/assets/left-arrow.svg'
+import rightArrow from './template/assets/right-arrow.svg'
+
 const configFile = {
   app_id: 'ordering-react',
   project: 'reactdemo',
@@ -118,7 +121,9 @@ theme.images = {
     emptyActiveOrders,
     emptyPastOrders,
     creatingOrder,
-    successOrder
+    successOrder,
+    leftArrow,
+    rightArrow
   },
 
   order: {

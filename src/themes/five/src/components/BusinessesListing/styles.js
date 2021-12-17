@@ -105,3 +105,5 @@ export const Divider = styled.div`
   height: 8px;
   width: 100%;
 `
+
+export const OrderProgressWrapper = styled.div``
