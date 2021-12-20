@@ -1,23 +1,11 @@
 import styled from 'styled-components'
 
-export const TitleBar = styled.div`
-  border: 1px solid #E9ECEF;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  padding: 18px 5px;
-  text-align: center;
-  color: ${props => props.theme.colors.grayDark};
-  font-size: 14px;
-
-  @media (min-width: 768px) {
-    font-size: 16px;
-  }
-`
-
 export const BusinessContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
   margin: 30px auto;
+  min-height: calc(100vh - 390px);
 
   > h1 {
     color: ${props => props.theme.colors.secundary};
@@ -35,12 +23,15 @@ export const BusinessContainer = styled.div`
 
   @media (min-width: 992px) {
     width: 80%;
+    min-height: calc(100vh - 350px);
+
     > h1 {
       font-size: 40px;
     }
   }
 
   @media (min-width: 1200px) {
+    min-height: calc(100vh - 430px);
     margin: 70px auto;
     > h1 {
       font-size: 48px;

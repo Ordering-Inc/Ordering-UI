@@ -100,7 +100,7 @@ export const HomeHero = (props) => {
                   <Skeleton width={60} height={40} />
                   <OrderTypeInfo>
                     <span><Skeleton width={100} /></span>
-                    <p><Skeleton width={250} /></p>
+                    <p><Skeleton width={200} /></p>
                   </OrderTypeInfo>
                 </OrderTypeItem>
               ))

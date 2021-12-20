@@ -15,9 +15,6 @@ export const WrapHeader = styled.div`
 
 export const TitleContainer = styled.div`
   margin: 0px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
   width: 70%;
   display: flex;
   align-items: center;  
@@ -29,9 +26,11 @@ export const TitleContainer = styled.div`
 
 export const Title = styled.h3`
   font-size: 18px;
-  display: flex;
-  flex-direction: column;
   margin: 0px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: calc(100% - 50px);
 
   color: ${props => props.theme.colors.grayDark};
   font-weight: 500;

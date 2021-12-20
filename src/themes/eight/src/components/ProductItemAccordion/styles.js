@@ -127,6 +127,7 @@ export const ContentInfo = styled.div`
     font-size: 14px;
     margin: 0px;
     font-weight: 400;
+    color: ${props => props.theme.colors.secundary};
   }
 
   span {
