@@ -8,8 +8,8 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
 
-import { Header } from '../src/themes/eight/src/components/Header'
-import { Footer } from '../src/themes/eight/src/components/Footer'
+import { Header } from '../src/components/Header'
+import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
@@ -30,10 +30,6 @@ import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
 import { Help } from './pages/Help'
-import { AddressForm } from './pages/AddressForm'
-import { AddressList } from './pages/AddressList'
-import { MomentOption } from './pages/MomentOption'
-import { BusinessCart } from './pages/BusinessCart'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -155,7 +151,7 @@ export const App = () => {
                         ? (
                           <Login
                             elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                             isRecaptchaEnable
                           />
@@ -177,7 +173,7 @@ export const App = () => {
                         ? (
                           <Login
                             elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</Link>}
+                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                             isRecaptchaEnable
                           />
@@ -226,17 +222,6 @@ export const App = () => {
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
                   </Route>
-                  <Route exact path='/store/:store/cart'>
-                    {auth ? (
-                      <BusinessCart />
-                    ) : (
-                      <Redirect to={{
-                        pathname: '/login',
-                        state: { from: location.pathname || null }
-                      }}
-                      />
-                    )}
-                  </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
                       ? <CheckoutPage />
@@ -258,19 +243,6 @@ export const App = () => {
                         }}
                         />
                       )}
-                  </Route>
-                  <Route exact path='/address'>
-                    <AddressForm />
-                  </Route>
-                  <Route exact path='/address-list'>
-                    {
-                      auth
-                        ? <AddressList />
-                        : <Redirect to='/address' />
-                    }
-                  </Route>
-                  <Route exact path='/moment'>
-                    <MomentOption />
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
                     <Cms />

@@ -90,13 +90,6 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "business_cart" : {
-    "title": "Business Cart",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "index, follow",
-    "canonicalUrl": ""
-  },
   "checkout": {
     "title": "Checkout",
     "description": "a dummy description about this page",
@@ -120,27 +113,6 @@
   },
   "help": {
     "title": "Help",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "index, follow",
-    "canonicalUrl": ""
-  },
-  "address": {
-    "title": "Address",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "index, follow",
-    "canonicalUrl": ""
-  },
-  "addresslist": {
-    "title": "Address list",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "index, follow",
-    "canonicalUrl": ""
-  },
-  "moment": {
-    "title": "Moment option",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

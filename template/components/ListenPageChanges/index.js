@@ -26,13 +26,9 @@ export const ListenPageChanges = ({ children }) => {
     checkout_list: '/checkout',
     business: '/store/:store',
     business_slug: '/:store',
-    business_cart: '/store/:store/cart',
     forgot_password: '/password/forgot',
     reset_password: '/password/reset',
-    help: '/help',
-    address: '/address',
-    address_list: '/address-list',
-    moment: '/moment'
+    help: '/help'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

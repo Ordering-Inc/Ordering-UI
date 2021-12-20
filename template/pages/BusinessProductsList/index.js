@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import { useApi, useEvent } from 'ordering-components'
-import { BusinessProductsListing } from '../../../src/themes/eight/src/components/BusinessProductsListing'
+import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
 import { HelmetTags } from '../../components/HelmetTags'
 import { capitalize } from '../../../src/utils'
 
@@ -64,22 +64,7 @@ export const BusinessProductsList = (props) => {
     handleSearchRedirect: () => {
       events.emit('go_to_page', { page: 'search' })
     },
-    onCategoryRedirect: ({ slug, category, replace }) => {
-      return window.location.pathname.includes('/store/')
-        ? events.emit('go_to_page', {
-          page: 'business',
-          params: { store: slug },
-          search: `?category=${category}`,
-          replace: replace
-        })
-        : events.emit('go_to_page', {
-          page: 'business_slug',
-          params: { store: slug },
-          search: `?category=${category}`,
-          replace: replace
-        })
-    },
-    onProductRedirect: ({ slug, category, product, replace = false }) => {
+    onProductRedirect: ({ slug, category, product }) => {
       if (!category && !product) {
         return window.location.pathname.includes('/store/')
           ? events.emit('go_to_page', { page: 'business', params: { store: slug }, replace: true })
@@ -90,17 +75,14 @@ export const BusinessProductsList = (props) => {
           page: 'business',
           params: { store: slug },
           search: `?category=${category}&product=${product}`,
-          replace: replace
+          replace: true
         })
         : events.emit('go_to_page', {
           page: 'business_slug',
           params: { store: slug },
           search: `?category=${category}&product=${product}`,
-          replace: replace
+          replace: true
         })
-    },
-    onBusinessCartRedirect: (slug) => {
-      events.emit('go_to_page', { page: 'business_cart', params: { store: slug } })
     },
     onCheckoutRedirect: (cartUuid) => {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid } })
