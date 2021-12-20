@@ -126,7 +126,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       modalPageToShow = _useState4[0],
       setModalPageToShow = _useState4[1];
 
-  var _useState5 = (0, _react.useState)('all'),
+  var _useState5 = (0, _react.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
       tabValue = _useState6[0],
       setTabValue = _useState6[1];
@@ -212,6 +212,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   };
 
   (0, _react.useEffect)(function () {
+    if (!tabValue) return;
+
     if (document.getElementById("".concat(tabValue))) {
       var TabOffset = tabValue === 'all' ? 0 : document.getElementById("".concat(tabValue)).offsetTop;
       var totalOffset = 0;
@@ -294,7 +296,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     key: "all",
-    active: tabValue === 'all',
+    active: tabValue === 'all' || !tabValue,
     onClick: function onClick() {
       return handleChangeTabValue('all');
     },
