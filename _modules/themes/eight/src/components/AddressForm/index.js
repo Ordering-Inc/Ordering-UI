@@ -682,6 +682,7 @@ var AddressFormUI = function AddressFormUI(props) {
   }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     id: "submit-btn",
     type: "submit",
+    color: "primary",
     disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0
   }, !formState.loading ? isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.address ? t('UPDATE', 'Update') : t('ADD', 'Add') : t('LOADING', 'Loading'))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ADDRESS', 'Address'),

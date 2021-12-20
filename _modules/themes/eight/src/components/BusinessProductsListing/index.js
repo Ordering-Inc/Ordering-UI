@@ -219,8 +219,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var handlerProductAction = function handlerProductAction(product) {
     if (Object.keys(product).length) {
       handleBackShowOption();
-      onProductRedirect({
-        slug: business === null || business === void 0 ? void 0 : business.slug
+      onCategoryRedirect({
+        slug: business === null || business === void 0 ? void 0 : business.slug,
+        category: categoryId,
+        replace: false
       });
     }
   };
