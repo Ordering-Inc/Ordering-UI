@@ -18,7 +18,7 @@ const AccordionStyled = styled.div`
   justify-content: space-between;
   cursor: initial;
   transition: background-color 0.6s ease;
-  margin: 0px 10px;
+  margin: 0px;
 
   .rotate {
     transform: rotate(180deg);

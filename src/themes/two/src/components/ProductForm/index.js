@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
@@ -13,6 +13,7 @@ import {
 
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { useTheme } from 'styled-components'
 
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
@@ -30,7 +31,6 @@ import {
   ProductContainer,
   ProductInfoContent,
   WrapperImage,
-  ProductImage,
   ProductInfo,
   ProductEdition,
   SectionTitle,
@@ -42,11 +42,21 @@ import {
   ProductFormTitle,
   WrapperIngredients,
   WrapProductShare,
-  ProductQuantity
+  ProductQuantity,
+  SwiperWrapper
 } from './styles'
-import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, {
+  Navigation,
+  Thumbs
+} from 'swiper'
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
+SwiperCore.use([Navigation, Thumbs])
 
 const ProductOptionsUI = (props) => {
   const {
@@ -67,6 +77,7 @@ const ProductOptionsUI = (props) => {
   } = props
 
   const { product, loading, error } = productObject
+  const theme = useTheme()
 
   const windowSize = useWindowSize()
   const [{ auth, user }, { login }] = useSession()
@@ -74,8 +85,9 @@ const ProductOptionsUI = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
-  const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
+  const [gallery, setGallery] = useState([])
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
@@ -133,6 +145,15 @@ const ProductOptionsUI = (props) => {
     return classnames
   }
 
+  useEffect(() => {
+    const imageList = []
+    imageList.push(product?.images || theme.images?.dummies?.product)
+    for (const galleryItem of product?.gallery) {
+      imageList.push(galleryItem.file)
+    }
+    setGallery(imageList)
+  }, [product])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -175,9 +196,55 @@ const ProductOptionsUI = (props) => {
                 </ProductFormTitle>
                 {product?.images && (
                   <WrapperImage>
-                    <ProductImage id='product_image'>
-                      <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
-                    </ProductImage>
+                    <SwiperWrapper>
+                      <Swiper
+                        spaceBetween={10}
+                        navigation
+                        thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+                      >
+                        {gallery.map((img, i) => (
+                          <SwiperSlide key={i}>
+                            <img src={img} alt='' />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                      <Swiper
+                        onSwiper={setThumbsSwiper}
+                        spaceBetween={20}
+                        slidesPerView={5}
+                        breakpoints={{
+                          0: {
+                            slidesPerView: 3,
+                            spaceBetween: 20
+                          },
+                          300: {
+                            slidesPerView: 4,
+                            spaceBetween: 20
+                          },
+                          400: {
+                            slidesPerView: 5,
+                            spaceBetween: 20
+                          },
+                          550: {
+                            slidesPerView: 6,
+                            spaceBetween: 20
+                          },
+                          769: {
+                            slidesPerView: 7,
+                            spaceBetween: 20
+                          }
+                        }}
+                        freeMode
+                        watchSlidesProgress
+                        className='product-thumb'
+                      >
+                        {gallery.map((img, i) => (
+                          <SwiperSlide key={i}>
+                            <img src={img} alt='' />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                    </SwiperWrapper>
                     {product && !loading && !error && (
                       <WrapProductShare>
                         <ProductShare

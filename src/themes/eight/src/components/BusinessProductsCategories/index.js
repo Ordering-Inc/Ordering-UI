@@ -2,17 +2,20 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   BusinessProductsCategories as ProductsCategories,
-  useUtils
+  useUtils,
+  useLanguage
 } from 'ordering-components'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { useTheme } from 'styled-components'
+import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import {
   CategoriesContainer,
   CategoryCard,
   WrapImage,
   CategoryImage,
-  CategoryName
+  CategoryName,
+  WrapperNotFound
 } from './styles'
 
 const BusinessProductsCategoriesUI = (props) => {
@@ -20,9 +23,13 @@ const BusinessProductsCategoriesUI = (props) => {
     isSkeleton,
     categories,
     handlerClickCategory,
-    featured
+    featured,
+    searchValue,
+    handleClearSearch,
+    handleSearchRedirect
   } = props
 
+  const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
 
@@ -37,7 +44,7 @@ const BusinessProductsCategoriesUI = (props) => {
       <CategoriesContainer featured={featured}>
         {!isSkeleton ? (
           <>
-            {categories && categories.length && categories.map(category => (
+            {categories && categories.length > 0 && categories.map(category => (
               <CategoryCard
                 key={category.id}
                 onClick={() => handlerClickCategory(category)}
@@ -65,6 +72,17 @@ const BusinessProductsCategoriesUI = (props) => {
             ))}
           </>
         )}
+        {
+          !isSkeleton && categories.length === 0 && (
+            <WrapperNotFound>
+              <NotFoundSource
+                content={!searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_CATEGORIES', 'No categories found, please change filters.')}
+                btnTitle={!searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters')}
+                onClickButton={() => !searchValue ? handleSearchRedirect() : handleClearSearch('')}
+              />
+            </WrapperNotFound>
+          )
+        }
       </CategoriesContainer>
 
       {props.afterComponents?.map((AfterComponent, i) => (

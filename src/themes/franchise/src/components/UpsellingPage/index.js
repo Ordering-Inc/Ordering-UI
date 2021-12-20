@@ -142,12 +142,11 @@ const UpsellingPageUI = (props) => {
                               </div>
                               <div>
                                 <span>{parsePrice(product.price)}</span>
-                                <span className='discount'>{parsePrice(product.price)}</span>
                               </div>
                               <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
                             </HorizontalDetails>
                             <HorizontalImage>
-                              <img src={product.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
+                              <img src={product.images} alt={`product-${i}`} loading='lazy' />
                             </HorizontalImage>
                           </HorizontalItem>
                         )) : (

@@ -41,7 +41,7 @@ const ProductOptionUI = (props) => {
             {option.image && option.image !== '-' && (
               <OptionThumbnail src={option.image} />
             )}
-            <Title><span>{option.name}</span></Title>
+            <Title>{option.name}</Title>
           </TitleContainer>
 
           <Flag>{maxMin}</Flag>

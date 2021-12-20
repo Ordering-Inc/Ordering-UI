@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
@@ -30,7 +30,6 @@ import { Button } from '../../styles/Buttons'
 import {
   ProductContainer,
   WrapperImage,
-  ProductImage,
   ProductInfo,
   ProductEdition,
   SectionTitle,
@@ -46,6 +45,16 @@ import {
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, {
+  Navigation,
+  Thumbs
+} from 'swiper'
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
+SwiperCore.use([Navigation, Thumbs])
 
 const ProductOptionsUI = (props) => {
   const {
@@ -75,6 +84,8 @@ const ProductOptionsUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [gallery, setGallery] = useState([])
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
@@ -132,6 +143,15 @@ const ProductOptionsUI = (props) => {
     return classnames
   }
 
+  useEffect(() => {
+    const imageList = []
+    imageList.push(product?.images || theme.images?.dummies?.product)
+    for (const galleryItem of product?.gallery) {
+      imageList.push(galleryItem.file)
+    }
+    setGallery(imageList)
+  }, [product])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -169,9 +189,69 @@ const ProductOptionsUI = (props) => {
         {!loading && !error && product && (
           <>
             <WrapperImage>
-              <ProductImage id='product_image'>
-                <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
-              </ProductImage>
+              <Swiper
+                spaceBetween={10}
+                navigation
+                thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+              >
+                {gallery.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={20}
+                slidesPerView={5}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                  },
+                  300: {
+                    slidesPerView: 4,
+                    spaceBetween: 20
+                  },
+                  400: {
+                    slidesPerView: 5,
+                    spaceBetween: 20
+                  },
+                  550: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  },
+                  769: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  },
+                  1000: {
+                    slidesPerView: 7,
+                    spaceBetween: 20
+                  },
+                  1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 20
+                  },
+                  1300: {
+                    slidesPerView: 5,
+                    spaceBetween: 20
+                  },
+                  1600: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  }
+                }}
+                freeMode
+                watchSlidesProgress
+                className='product-thumb'
+              >
+                {gallery.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
               {product?.images && (
                 <Zoomlink
                   target='_blank'

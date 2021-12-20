@@ -77,7 +77,7 @@ export const CardInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: ${props => props.theme.colors.darkGray};
+    color: ${props => props.theme.colors.secundary};
     margin: 0px;
   }
 
@@ -111,7 +111,6 @@ export const CardInfo = styled.div`
     h1 {
       padding-top: 10px;
       text-align: center;
-      color: ${props => props.theme.colors.secundary};
     }
   }
 
