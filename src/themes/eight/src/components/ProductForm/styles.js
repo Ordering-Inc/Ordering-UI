@@ -121,7 +121,7 @@ export const ProductEdition = styled.div`
 `
 
 export const ProductOptionInfo = styled.div`
-  margin: 50px 0 30px 0;
+  margin-bottom: 30px;
   background-color: ${props => props.theme.colors.third};
   padding: 20px 0 40px 0;
 `
@@ -163,6 +163,7 @@ export const ProductCartTotalPrice = styled(ProductInnerContainer)`
 export const SectionTitle = styled.h3`
   text-transform: capitalize;
   font-size: 18px;
+  padding-top: 10px;
   padding-bottom: 15px;
   margin: 0px;
   font-weight: 500;
@@ -187,6 +188,7 @@ export const ProductActions = styled.div`
   width: 100%;
 
   position: fixed;
+  z-index: 1000;
   bottom: 0;
   right: 0;
   width: 100%;
@@ -368,5 +370,22 @@ export const ProductActionHeaderContainer = styled.div`
   @media (min-width: 681px) {
     margin: 0px;
     width: initial;
+  }
+`
+export const ProductTabContainer = styled.div`
+  position: sticky;
+  top: 0px;
+  background: white;
+  z-index: 9999994;
+  padding-top: 15px;
+  border-bottom: 1px solid #E9ECEF;
+
+  > div {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 769px) {
+    top: 0;
   }
 `
