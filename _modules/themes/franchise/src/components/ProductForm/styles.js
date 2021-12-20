@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSubOption = exports.WrapperIngredients = exports.WrapperImage = exports.SkuContent = exports.SkeletonBlock = exports.SectionTitle = exports.ProductTabContainer = exports.ProductShareWrapper = exports.ProductInfo = exports.ProductImage = exports.ProductFormTitle = exports.ProductEdition = exports.ProductContainer = exports.ProductComment = exports.ProductActions = exports.Divider = void 0;
+exports.WrapperSubOption = exports.WrapperIngredients = exports.WrapperImage = exports.SwiperWrapper = exports.SkuContent = exports.SkeletonBlock = exports.SectionTitle = exports.ProductTabContainer = exports.ProductShareWrapper = exports.ProductInfo = exports.ProductFormTitle = exports.ProductEdition = exports.ProductContainer = exports.ProductComment = exports.ProductActions = exports.Divider = void 0;
 
 var _polished = require("polished");
 
@@ -23,13 +23,17 @@ var ProductContainer = _styledComponents.default.div(_templateObject || (_templa
 
 exports.ProductContainer = ProductContainer;
 
-var WrapperImage = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: calc(100% + 40px);\n  margin-top: 20px;\n  margin-left: -20px;\n  position: relative;\n  height: 320px;\n"])));
+var WrapperImage = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin-left: -20px;\n  margin-top: 20px;\n  width: calc(100% + 40px);\n  position: relative;\n"])));
 
 exports.WrapperImage = WrapperImage;
 
-var ProductImage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  height: 100%;\n\n  img {\n    height: 100%;\n    box-sizing: border-box;\n    object-fit: cover;\n    width: 100%;\n  }\n"])));
+var SwiperWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n\n  .mySwiper2 {\n    height: 250px;\n    width: 100%;\n\n    .swiper-slide-active {\n      border-radius: 0px;\n      img {\n        border-radius: 0px;\n      }\n    }\n\n    @media (min-width: 576px) {\n      height: 320px;\n    }\n\n    @media (min-width: 1201px) {\n    }\n  }\n\n\n  .swiper {\n    width: 100%;\n    height: 500px;\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n  .swiper-slide {\n    background-size: cover;\n    background-position: center;\n  }\n\n  .product-thumb {\n    box-sizing: border-box;\n    padding: 30px 0px;\n    margin: 0px 20px;\n\n    .swiper-slide {\n      opacity: 0.8;\n      border-radius: 7.6px;\n      height: auto;\n\n      img {\n        border-radius: 7.6px;\n      }\n    }\n\n    .swiper-slide-thumb-active {\n      opacity: 1;\n    }\n  }\n\n  .swiper-slide img {\n    display: block;\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n  }\n\n  .swiper-button-next {\n    background-image: url(", ");\n    background-color: rgba(255,255,255,0.3);\n    background-repeat: no-repeat;\n    background-position: 55% center;\n    width: 32px;\n    height: 32px;\n    border-radius: 50%;\n  }\n\n  .swiper-button-prev {\n    background-image: url(", ");\n    background-color: rgba(255,255,255,0.3);\n    background-repeat: no-repeat;\n    background-position: 45% center;\n    width: 32px;\n    height: 32px;\n    border-radius: 50%;\n  }\n\n  .swiper-button-next::after, .swiper-button-prev::after {\n    display: none;\n  }\n"])), function (props) {
+  return props.theme.images.general.rightArrow;
+}, function (props) {
+  return props.theme.images.general.leftArrow;
+});
 
-exports.ProductImage = ProductImage;
+exports.SwiperWrapper = SwiperWrapper;
 
 var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 0px 5px;\n  position: relative;\n  margin-top: 18px;\n  box-sizing: border-box;\n\n  h1 {\n    font-weight: 600;\n    font-size: 28px;\n    color: ", ";\n    margin-top: 0;\n    margin-bottom: 5px;\n  }\n\n  .price-wrapper {\n    display: flex;\n    align-items: center;\n\n    span {\n      font-size: 18px;\n      color: ", ";\n      margin-right: 5px;\n      ", "\n    }\n\n    .price-discount {\n      font-size: 14px;\n      color: #909BA9;\n    }\n  }\n  p {\n    font-size: 16px;\n    color: #909BA9;\n    margin-top: 0px;\n  }\n"])), function (props) {
   var _props$theme;
