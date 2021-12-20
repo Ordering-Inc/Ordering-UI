@@ -89,16 +89,16 @@ export const Card = styled.div`
 
 const BusinessLogoWrapperStyled = styled.div`
   display: flex;
-  width: 86px;
-  min-width: 86px;
-  height: 86px;
+  width: 55px;
+  min-width: 55px;
+  height: 55px;
+  min-height: 55px;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  min-height: 86px;
   justify-content: center;
   align-items: center;
   border-radius: 7.6px;
@@ -110,6 +110,13 @@ const BusinessLogoWrapperStyled = styled.div`
     margin-left: 0px;
     margin-right: 8px;
   `}
+
+  @media (min-width: 576px) {
+    width: 86px;
+    min-width: 86px;
+    height: 86px;
+    min-height: 86px;
+  }
 `
 
 export const BusinessLogoWrapper = (props) => {
