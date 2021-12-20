@@ -52,12 +52,6 @@ import orderStatus19 from './template/assets/images/order/status-19.svg'
 import orderStatus20 from './template/assets/images/order/status-20.svg'
 import orderStatus21 from './template/assets/images/order/status-21.svg'
 
-import pickup from './template/assets/images/orderTypes/pickup.svg'
-import delivery from './template/assets/images/orderTypes/delivery.svg'
-import eatIn from './template/assets/images/orderTypes/eat-in.svg'
-import curbside from './template/assets/images/orderTypes/curbside.svg'
-import driveThru from './template/assets/images/orderTypes/drive-thru.svg'
-
 import categoryFood from './template/assets/images/categories/category-food.png'
 import categoryGroceries from './template/assets/images/categories/category-groceries.png'
 import categoryAlcohol from './template/assets/images/categories/category-alcohol.png'
@@ -72,7 +66,7 @@ import rightArrow from './template/assets/right-arrow.svg'
 
 const configFile = {
   app_id: 'ordering-react',
-  project: 'reactdemo',
+  project: 'luisv4',
   api: {
     url: 'https://apiv4.ordering.co',
     language: 'en',
@@ -149,13 +143,6 @@ theme.images = {
     status19: orderStatus19,
     status20: orderStatus20,
     status21: orderStatus21
-  },
-  orderTypes: {
-    pickup: pickup,
-    delivery: delivery,
-    eatIn: eatIn,
-    curbside: curbside,
-    driveThru: driveThru
   },
   categories: {
     food: categoryFood,
