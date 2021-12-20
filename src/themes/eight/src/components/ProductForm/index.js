@@ -79,7 +79,7 @@ const ProductOptionsUI = (props) => {
   const [{ parsePrice, optimizeImage }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
-  const [tabValue, setTabValue] = useState('all')
+  const [tabValue, setTabValue] = useState(null)
   const productContainerRef = useRef(null)
   const productInfoRef = useRef(null)
   const [isShowExtra, setIsShowExtra] = useState(false)
@@ -145,6 +145,7 @@ const ProductOptionsUI = (props) => {
   }
 
   useEffect(() => {
+    if (!tabValue) return
     if (document.getElementById(`${tabValue}`)) {
       const TabOffset = (tabValue === 'all') ? 0 : document.getElementById(`${tabValue}`).offsetTop
       let totalOffset = 0
@@ -240,7 +241,7 @@ const ProductOptionsUI = (props) => {
                     <Tabs variant='primary'>
                       <Tab
                         key='all'
-                        active={tabValue === 'all'}
+                        active={tabValue === 'all' || !tabValue}
                         onClick={() => handleChangeTabValue('all')}
                         borderBottom
                       >
