@@ -16,35 +16,72 @@ export const Title = styled.div`
   }
 `
 
-export const CalendarWrapper = styled.div`
-  width: 100%;
+export const CheckBoxWrapper = styled.div`
+  margin-bottom: 25px;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
   align-items: center;
-  padding: 17px 15px 3px 15px;
-  border: 1px solid #E9ECEF;
-  box-sizing: border-box;
-  border-radius: 7.6px;
+  cursor: pointer;
+  user-select: none;
 
-  input {
-    padding: 10px;
-    border: 1px solid #DEE2E6;
+  span {
+    font-size: 14px;
+    color: #909BA9;
+  }
+
+  svg {
+    color: #B1BCCC;
+    font-size: 24px;
+    margin-right: 10px;
+    min-width: 24px;
+
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0px;
+    `}
+  }
+
+  ${({ highlight }) => highlight && css`
+    span {
+      font-weight: 600;
+      color: ${props => props.theme.colors.darkTextColor};
+    }
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
+  `}
+
+  ${({ isLoading }) => isLoading && css`
+    pointer-events: none;
+  `}
+`
+
+export const DateTimeWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  > div {
+    border: 1px solid #E9ECEF;
     box-sizing: border-box;
     border-radius: 7.6px;
-    outline: none;
   }
+`
+
+export const DateWrapper = styled.div`
+  width: 100%;
+  margin: 14px 0px;
+  padding: 10px 2px;
+  display: flex;
+  justify-content: center;
 
   .react-calendar {
     border: none;
+    border-radius: 7.6px;
 
     .react-calendar__tile--active,
     .react-calendar__tile:enabled:focus {
-      /* background: ${props => props.theme?.colors.primaryContrast}; */
       background: transparent;
-
       abbr {
-        background: #E9F2FE;
+        background: #F5F9FF;
         color: #344050;
       }
     }
@@ -92,11 +129,12 @@ export const CalendarWrapper = styled.div`
 
     .react-calendar__tile:disabled {
       background-color: transparent;
-      // color: ${props => props.theme?.colors.disabled};
+      color: ${props => props.theme?.colors.disabled};
       cursor: not-allowed;
     }
 
     .react-calendar__navigation {
+      margin-bottom: 5px;
       button {
         background: transparent!important;
         color: #748194;
@@ -133,144 +171,107 @@ export const CalendarWrapper = styled.div`
       }
     }
   }
-`
 
-export const DatePickerWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 10px;
-
-  @media (min-width: 430px) {
-    width: 325px;
-  }
-
-  .react-datepicker-popper {
-    display: none;
-  }
-
-  .react-datepicker-wrapper {
-    width: 100%;
-  }
-
-  > svg {
-    cursor: pointer;
-    font-size: 20px;
-    right: 5px;
-    top: 9px;
-    color: #B1BCCC;
-    position: absolute;
-
+  @media (min-width: 768px) {
+    width: calc(50% - 12px);
+    margin-right: 12px;
     ${props => props.theme.rtl && css`
-      left: 5px;
-      right: initial;
-    `}
-  }
-
-  input {
-    width: 100%;
-    color: #B1BCCC;
-    font-size: 12px;
-    border: 1px solid #DEE2E6;
-    border-radius: 7.6px;
-    padding: 9px 14px;
-  }
-`
-
-export const CheckBoxWrapper = styled.div`
-  margin-bottom: 25px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-
-  span {
-    font-size: 14px;
-    color: #909BA9;
-  }
-
-  svg {
-    color: #B1BCCC;
-    font-size: 24px;
-    margin-right: 10px;
-    min-width: 24px;
-
-    ${props => props.theme?.rtl && css`
-      margin-left: 10px;
-      margin-right: 0px;
-    `}
-  }
-
-  ${({ highlight }) => highlight && css`
-    span {
-      font-weight: 600;
-      color: ${props => props.theme.colors.darkTextColor};
-    }
-    svg {
-      color: ${props => props.theme.colors.primary};
-    }
-  `}
-
-  ${({ isLoading }) => isLoading && css`
-    pointer-events: none;
-  `}
-`
-
-export const Option = styled.div`
-  display: flex;
-  align-items: center;
-
-  svg {
-    min-width: 16px;
-    font-size: 16px;
-    margin-right: 5px;
-    ${props => props.theme?.rtl && css`
-      margin-left: 5px;
-      margin-right: 0px;
+      margin-left: 12px;
     `}
   }
 `
 
-export const HourListWrapper = styled.div`
+export const TimeListWrapper = styled.div`
   width: 100%;
-  margin-top: 35px;
-  margin-bottom: 100px;
-
-  ${({ isLoading }) => isLoading && css`
-    pointer-events: none;
-  `}
+  margin: 14px 0px;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
 
   > div {
-    width: 100%;
-    background-color: #FFFFFF !important;
-    border: 1px solid #DEE2E6;
-    border-radius: 7.6px;
-
-    > div {
-      justify-content: space-between;
-    }
-
-    #list {
-      width: 100%;
-      border-radius: 7.6px;
-    }
+    width: 350px;
+    max-width: 100%;
   }
 
-  #select-input {
-    height: 44px;
-    > div:first-child {
-      height: 44px;
-      font-size: 14px;
-      color: #B1BCCC;
+  @media (min-width: 375px) {
+    padding: 20px 15px;
+  }
 
-      span {
-        font-size: 14px;
-        color: #B1BCCC;
-      }
+  @media (min-width: 768px) {
+    width: calc(50% - 12px);
+    margin-left: 12px;
+    ${props => props.theme.rtl && css`
+      margin-right: 12px;
+    `}
+  }
+`
 
-      svg {
-        font-size: 16px;
-        color: #748194;
-      }
+export const TimeListHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #748194;
+  svg {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  span {
+    font-size: 14px;
+  }
+`
+
+export const TimeListContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 295px;
+  overflow: auto;
+  margin-top: 14px;
+
+  > button {
+    font-size: 14px;
+    line-height: 24px;
+    padding: 4px 8px;
+    margin: 0px 10px 16px 0px;
+    ${props => props.theme.rtl && css`
+      margin: 0px 0px 16px 10px;
+    `}
+    width: calc(50% - 15px);
+
+    @media (min-width: 340px) {
+      margin: 0px 7px 16px 0px;
+      ${props => props.theme.rtl && css`
+        margin: 0px 0px 16px 7px;
+      `}
+    width: calc(33.33% - 7px);
+    }
+
+    @media (min-width: 414px) {
+      margin: 0px 9px 16px 0px;
+      width: calc(25% - 9px);
+      ${props => props.theme.rtl && css`
+        margin: 0px 0px 16px 9px;
+      `}
+    }
+
+    @media (min-width: 768px) {
+      margin: 0px 15px 16px 0px;
+      ${props => props.theme.rtl && css`
+        margin: 0px 0px 16px 15px;
+      `}
+      width: calc(33.33% - 15px);
     }
   }
+`
+
+export const CheckedIcon = styled.div`
+  border-radius: 50%;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 6px solid ${props => props.theme.colors?.primary};
+  margin: 2px 12px 2px 2px;
+  ${props => props.theme.rtl && css`
+    margin: 2px 2px 2px 12px;
+  `}
 `
