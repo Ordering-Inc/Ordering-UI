@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSubOption = exports.WrapperIngredients = exports.WrapperImage = exports.SkuContent = exports.SkeletonBlock = exports.SectionTitle = exports.ProductOptionInfo = exports.ProductInnerContainer = exports.ProductInfo = exports.ProductImage = exports.ProductFormTitle = exports.ProductEdition = exports.ProductContainer = exports.ProductComment = exports.ProductCartTotalPrice = exports.ProductActions = exports.ProductActionHeaderContainer = exports.IncDecActions = void 0;
+exports.WrapperSubOption = exports.WrapperIngredients = exports.WrapperImage = exports.SkuContent = exports.SkeletonBlock = exports.SectionTitle = exports.ProductTabContainer = exports.ProductOptionInfo = exports.ProductInnerContainer = exports.ProductInfo = exports.ProductImage = exports.ProductFormTitle = exports.ProductEdition = exports.ProductContainer = exports.ProductComment = exports.ProductCartTotalPrice = exports.ProductActions = exports.ProductActionHeaderContainer = exports.IncDecActions = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -54,7 +54,7 @@ var ProductEdition = _styledComponents.default.div(_templateObject8 || (_templat
 
 exports.ProductEdition = ProductEdition;
 
-var ProductOptionInfo = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin: 50px 0 30px 0;\n  background-color: ", ";\n  padding: 20px 0 40px 0;\n"])), function (props) {
+var ProductOptionInfo = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-bottom: 30px;\n  background-color: ", ";\n  padding: 20px 0 40px 0;\n"])), function (props) {
   return props.theme.colors.third;
 });
 
@@ -77,7 +77,7 @@ var ProductCartTotalPrice = (0, _styledComponents.default)(ProductInnerContainer
 });
 exports.ProductCartTotalPrice = ProductCartTotalPrice;
 
-var SectionTitle = _styledComponents.default.h3(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  text-transform: capitalize;\n  font-size: 18px;\n  padding-bottom: 15px;\n  margin: 0px;\n  font-weight: 500;\n  color: ", ";\n"])), function (props) {
+var SectionTitle = _styledComponents.default.h3(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  text-transform: capitalize;\n  font-size: 18px;\n  padding-top: 10px;\n  padding-bottom: 15px;\n  margin: 0px;\n  font-weight: 500;\n  color: ", ";\n"])), function (props) {
   return props.theme.colors.grayDark;
 });
 
@@ -87,7 +87,7 @@ var ProductComment = _styledComponents.default.div(_templateObject17 || (_templa
 
 exports.ProductComment = ProductComment;
 
-var ProductActions = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 10px 0px;\n  width: 100%;\n\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n  > div {\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    width: 90%;\n    margin: 10px auto;\n    position: relative;\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 769px) {\n    button.add {\n      margin: 0px;\n      width: fit-content;\n    }\n    justify-content: space-between;\n    flex-direction: row;\n\n    > div {\n      flex-direction: row;\n      justify-content: flex-end;\n    }\n  }\n\n  @media (min-width: 769px) {\n    position: relative;\n    bottom: initial;\n    right: initial;\n\n    button.add {\n      margin: 0px;\n    }\n  }\n\n  @media (min-width: 1201px) {\n    position: sticky;\n    top: 100%;\n    padding: 10px 0px;\n  }\n"])));
+var ProductActions = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 10px 0px;\n  width: 100%;\n\n  position: fixed;\n  z-index: 1000;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n  > div {\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    width: 90%;\n    margin: 10px auto;\n    position: relative;\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 769px) {\n    button.add {\n      margin: 0px;\n      width: fit-content;\n    }\n    justify-content: space-between;\n    flex-direction: row;\n\n    > div {\n      flex-direction: row;\n      justify-content: flex-end;\n    }\n  }\n\n  @media (min-width: 769px) {\n    position: relative;\n    bottom: initial;\n    right: initial;\n\n    button.add {\n      margin: 0px;\n    }\n  }\n\n  @media (min-width: 1201px) {\n    position: sticky;\n    top: 100%;\n    padding: 10px 0px;\n  }\n"])));
 
 exports.ProductActions = ProductActions;
 
@@ -148,3 +148,7 @@ exports.IncDecActions = IncDecActions;
 var ProductActionHeaderContainer = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 90%;\n  margin: 10px 0;\n\n  @media (min-width: 681px) {\n    margin: 0px;\n    width: initial;\n  }\n"])));
 
 exports.ProductActionHeaderContainer = ProductActionHeaderContainer;
+
+var ProductTabContainer = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 9999994;\n  padding-top: 15px;\n  border-bottom: 1px solid #E9ECEF;\n\n  > div {\n    max-width: 700px;\n    margin: 0 auto;\n  }\n\n  @media (min-width: 769px) {\n    top: 0;\n  }\n"])));
+
+exports.ProductTabContainer = ProductTabContainer;

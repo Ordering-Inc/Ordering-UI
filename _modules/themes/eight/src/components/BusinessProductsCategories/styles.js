@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapImage = exports.CategoryName = exports.CategoryImage = exports.CategoryCard = exports.CategoriesContainer = void 0;
+exports.WrapperNotFound = exports.WrapImage = exports.CategoryName = exports.CategoryImage = exports.CategoryCard = exports.CategoriesContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -73,3 +73,7 @@ var CategoryName = _styledComponents.default.div(_templateObject8 || (_templateO
 });
 
 exports.CategoryName = CategoryName;
+
+var WrapperNotFound = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  height: 500px;\n  width: 100%;\n  > div{\n    height: 100%;\n  }\n"])));
+
+exports.WrapperNotFound = WrapperNotFound;

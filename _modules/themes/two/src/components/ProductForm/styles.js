@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSubOption = exports.WrapperIngredients = exports.WrapperImage = exports.WrapProductShare = exports.SkuContent = exports.SkeletonBlock = exports.SectionTitle = exports.ProductQuantity = exports.ProductInfoContent = exports.ProductInfo = exports.ProductImage = exports.ProductFormTitle = exports.ProductEdition = exports.ProductContainer = exports.ProductComment = exports.ProductActions = void 0;
+exports.WrapperSubOption = exports.WrapperIngredients = exports.WrapperImage = exports.WrapProductShare = exports.SwiperWrapper = exports.SkuContent = exports.SkeletonBlock = exports.SectionTitle = exports.ProductQuantity = exports.ProductInfoContent = exports.ProductInfo = exports.ProductFormTitle = exports.ProductEdition = exports.ProductContainer = exports.ProductComment = exports.ProductActions = void 0;
 
 var _polished = require("polished");
 
@@ -27,13 +27,17 @@ var ProductInfoContent = _styledComponents.default.div(_templateObject2 || (_tem
 
 exports.ProductInfoContent = ProductInfoContent;
 
-var WrapperImage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  position: relative;\n  border-radius: 16px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"])));
+var WrapperImage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-left: -15px;\n  margin-top: 0px;\n  width: calc(100% + 30px);\n  position: relative;\n"])));
 
 exports.WrapperImage = WrapperImage;
 
-var ProductImage = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  height: 300px;\n  width: 100%;\n\n  img {\n    border-radius: 8px;\n    object-fit: cover;\n    height: 100%;\n    width: 100%;\n    box-sizing: border-box;\n  }\n\n  @media (min-width: 768px) {\n    height: 400px;\n  }\n"])));
+var SwiperWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n\n  .mySwiper2 {\n    height: 250px;\n    width: 100%;\n\n    .swiper-slide-active {\n      border-radius: 0px;\n      img {\n        border-radius: 0px;\n      }\n    }\n\n    @media (min-width: 576px) {\n      height: 320px;\n    }\n\n    @media (min-width: 1201px) {\n    }\n  }\n\n\n  .swiper {\n    width: 100%;\n    height: 500px;\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n  .swiper-slide {\n    background-size: cover;\n    background-position: center;\n  }\n\n  .product-thumb {\n    box-sizing: border-box;\n    padding: 30px 0px;\n    margin: 0px 20px;\n\n    .swiper-slide {\n      opacity: 0.8;\n      border-radius: 7.6px;\n      height: auto;\n\n      img {\n        border-radius: 7.6px;\n      }\n    }\n\n    .swiper-slide-thumb-active {\n      opacity: 1;\n    }\n  }\n\n  .swiper-slide img {\n    display: block;\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n  }\n\n  .swiper-button-next {\n    background-image: url(", ");\n    background-color: rgba(255,255,255,0.3);\n    background-repeat: no-repeat;\n    background-position: 55% center;\n    width: 32px;\n    height: 32px;\n    border-radius: 50%;\n  }\n\n  .swiper-button-prev {\n    background-image: url(", ");\n    background-color: rgba(255,255,255,0.3);\n    background-repeat: no-repeat;\n    background-position: 45% center;\n    width: 32px;\n    height: 32px;\n    border-radius: 50%;\n  }\n\n  .swiper-button-next::after, .swiper-button-prev::after {\n    display: none;\n  }\n"])), function (props) {
+  return props.theme.images.general.rightArrow;
+}, function (props) {
+  return props.theme.images.general.leftArrow;
+});
 
-exports.ProductImage = ProductImage;
+exports.SwiperWrapper = SwiperWrapper;
 
 var ProductInfo = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  position: relative;\n  margin-top: 10px;\n\n  h1 {\n    font-size: 20px;\n    font-weight: 500;\n    color: #263238;\n    margin-top: 0px;\n  }\n\n  p {\n    font-size: 14px;\n    font-weight: 200;\n    margin-top: 0px;\n    line-height: 1.5em;\n    width: 100%;\n    text-align: left;\n    ", "\n  }\n\n  @media (min-width: 381px) {\n    h1 {\n      font-size: 24px;\n    }\n    p {\n      font-size: 16px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    margin-top: 40px;\n  }\n"])), function (props) {
   var _props$theme;

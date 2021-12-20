@@ -46,11 +46,11 @@ var SoldOut = _styledComponents.default.span(_templateObject4 || (_templateObjec
 
 exports.SoldOut = SoldOut;
 
-var CardInfo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  h1 {\n    font-size: 16px;\n    font-weight: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    color: ", ";\n    margin: 0px;\n  }\n\n  p {\n    font-weight: ", ";\n    text-align: left;\n    ", "\n\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    color: ", ";\n    font-weight: bold;\n  }\n\n  p, span {\n    font-size: 13px;\n  }\n\n  width: calc(100% - 150px);\n\n  @media (min-width: 681px) {\n    width: 100%;\n\n    h1 {\n      padding-top: 10px;\n      text-align: center;\n      color: ", ";\n    }\n  }\n\n  @media (min-width: 1024px) {\n    p {\n      font-size: 16px;\n    }\n\n    span {\n      font-size: 15px;\n    }\n  }\n"])), function (_ref2) {
+var CardInfo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  h1 {\n    font-size: 16px;\n    font-weight: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    color: ", ";\n    margin: 0px;\n  }\n\n  p {\n    font-weight: ", ";\n    text-align: left;\n    ", "\n\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    color: ", ";\n    font-weight: bold;\n  }\n\n  p, span {\n    font-size: 13px;\n  }\n\n  width: calc(100% - 150px);\n\n  @media (min-width: 681px) {\n    width: 100%;\n\n    h1 {\n      padding-top: 10px;\n      text-align: center;\n    }\n  }\n\n  @media (min-width: 1024px) {\n    p {\n      font-size: 16px;\n    }\n\n    span {\n      font-size: 15px;\n    }\n  }\n"])), function (_ref2) {
   var soldOut = _ref2.soldOut;
   return soldOut ? 'bold' : '500';
 }, function (props) {
-  return props.theme.colors.darkGray;
+  return props.theme.colors.secundary;
 }, function (_ref3) {
   var soldOut = _ref3.soldOut;
   return soldOut ? 'bold' : '200';
@@ -62,8 +62,6 @@ var CardInfo = _styledComponents.default.div(_templateObject6 || (_templateObjec
   var soldOut = _ref4.soldOut,
       theme = _ref4.theme;
   return soldOut ? (0, _polished.lighten)(0.05, theme.colors.primary) : theme.colors.primary;
-}, function (props) {
-  return props.theme.colors.secundary;
 });
 
 exports.CardInfo = CardInfo;

@@ -51,6 +51,14 @@ var _Inputs = require("../../styles/Inputs");
 
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
+var _react2 = require("swiper/react");
+
+var _swiper = _interopRequireWildcard(require("swiper"));
+
+require("swiper/swiper-bundle.min.css");
+
+require("swiper/swiper.min.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -65,6 +73,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -77,8 +87,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+_swiper.default.use([_swiper.Navigation, _swiper.Thumbs]);
+
 var ProductOptionsUI = function ProductOptionsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$images, _theme$images$dummies, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _props$afterMidElemen, _props$afterMidCompon, _orderState$options, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _orderState$options2, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _error$, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _props$afterMidElemen, _props$afterMidCompon, _orderState$options, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _orderState$options2, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _error$, _props$afterComponent, _props$afterElements;
 
   var businessSlug = props.businessSlug,
       editMode = props.editMode,
@@ -142,6 +154,16 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       isShowExtra = _useState8[0],
       setIsShowExtra = _useState8[1];
+
+  var _useState9 = (0, _react.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      gallery = _useState10[0],
+      setGallery = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      thumbsSwiper = _useState12[0],
+      setThumbsSwiper = _useState12[1];
 
   var closeModal = function closeModal() {
     setModalIsOpen(false);
@@ -237,6 +259,28 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     });
     setIsShowExtra(valid);
   }, [product.extras]);
+  (0, _react.useEffect)(function () {
+    var _theme$images, _theme$images$dummies;
+
+    var imageList = [];
+    imageList.push((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product));
+
+    var _iterator = _createForOfIteratorHelper(product === null || product === void 0 ? void 0 : product.gallery),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var galleryItem = _step.value;
+        imageList.push(galleryItem.file);
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    setGallery(imageList);
+  }, [product]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -271,21 +315,69 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
-    id: "product_image"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product),
-    alt: "product",
-    width: "300px",
-    height: "300px",
-    loading: "lazy",
-    onError: function onError(e) {
-      var _theme$images2, _theme$images2$dummie;
-
-      e.target.onerror = null;
-      e.target.src = (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.product;
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.price) && /*#__PURE__*/_react.default.createElement("div", {
+  }), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.SwiperWrapper, null, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
+    spaceBetween: 10,
+    navigation: true,
+    thumbs: {
+      swiper: thumbsSwiper
+    },
+    className: "mySwiper2"
+  }, gallery.map(function (img, i) {
+    return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: img,
+      alt: ""
+    }));
+  })), /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
+    onSwiper: setThumbsSwiper,
+    spaceBetween: 20,
+    slidesPerView: 5,
+    breakpoints: {
+      0: {
+        slidesPerView: 3,
+        spaceBetween: 20
+      },
+      300: {
+        slidesPerView: 4,
+        spaceBetween: 20
+      },
+      400: {
+        slidesPerView: 5,
+        spaceBetween: 20
+      },
+      550: {
+        slidesPerView: 6,
+        spaceBetween: 20
+      },
+      769: {
+        slidesPerView: 4,
+        spaceBetween: 20
+      },
+      1000: {
+        slidesPerView: 5,
+        spaceBetween: 20
+      },
+      1400: {
+        slidesPerView: 6,
+        spaceBetween: 20
+      },
+      1600: {
+        slidesPerView: 7,
+        spaceBetween: 20
+      }
+    },
+    freeMode: true,
+    watchSlidesProgress: true,
+    className: "product-thumb"
+  }, gallery.map(function (img, i) {
+    return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: img,
+      alt: ""
+    }));
+  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.price) && /*#__PURE__*/_react.default.createElement("div", {
     className: "price-wrapper"
   }, /*#__PURE__*/_react.default.createElement("span", null, productCart.total && parsePrice(productCart.total))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || isShowExtra) && /*#__PURE__*/_react.default.createElement(_styles.ProductTabContainer, {
     id: "all"

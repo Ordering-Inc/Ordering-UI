@@ -51,13 +51,13 @@ var HorizontalUpsellingContainer = _styledComponents.default.div(_templateObject
 
 exports.HorizontalUpsellingContainer = HorizontalUpsellingContainer;
 
-var HorizontalItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  border-radius: 7.6px;\n  margin-right: 15px;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  padding: 10px;\n\n  ", "\n"])), function (props) {
+var HorizontalItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 230px;\n  display: flex;\n  justify-content: space-between;\n  border-radius: 7.6px;\n  margin-right: 15px;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  padding: 10px;\n\n  ", "\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n    margin-right: 0px;\n  "])));
 });
 
 exports.HorizontalItem = HorizontalItem;
 
-var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  img {\n    border-radius: 7.6px;\n    min-width: 73px;\n    min-height: 73px;\n    margin-left: 10px;\n\n    ", "\n\n  }\n"])), function (props) {
+var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  img {\n    border-radius: 7.6px;\n    min-width: 80px;\n    min-height: 80px;\n    width: 80px;\n    height: 80px;\n    margin-left: 10px;\n\n    ", "\n\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
@@ -65,7 +65,7 @@ var HorizontalImage = _styledComponents.default.div(_templateObject11 || (_templ
 
 exports.HorizontalImage = HorizontalImage;
 
-var HorizontalDetails = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  min-width: 100px;\n  h3 {\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    margin: 0 0 5px 0;\n  }\n\n  span {\n    font-size: 12px;\n    color: ", ";\n\n    &.discount {\n      font-size: 10px;\n      color: #909BA9;\n      ", "\n    }\n  }\n\n  button {\n    margin-top: 6px;\n    border-radius: 50px;\n    color: ", ";\n    background: ", "\n  }\n"])), function (props) {
+var HorizontalDetails = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  min-width: 100px;\n  position: relative;\n\n  > div {\n    line-height: 18px;\n  }\n\n  h3 {\n    font-weight: 500;\n    font-size: 12px;\n    color: ", ";\n    margin: 0;\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    font-size: 12px;\n    color: ", ";\n\n    &.discount {\n      font-size: 10px;\n      color: #909BA9;\n      ", "\n    }\n  }\n\n  button {\n    position: absolute;\n    bottom: 0px;\n    left: 0px;\n    margin-top: 3px;\n    border-radius: 50px;\n    font-size: 12px;\n    line-height: 20px;\n    padding-left: 10px;\n    padding-right: 10px;\n    color: ", ";\n    background: ", ";\n    border: none;\n    &:active {\n      color: white;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   return props.theme.colors.darkTextColor;

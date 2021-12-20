@@ -21,11 +21,11 @@ var WrapHeader = _styledComponents.default.div(_templateObject2 || (_templateObj
 
 exports.WrapHeader = WrapHeader;
 
-var TitleContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  width: 70%;\n  display: flex;\n  align-items: center;  \n\n  *:first-child {\n    margin-right: 8px;\n  }\n"])));
+var TitleContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin: 0px;\n  width: 70%;\n  display: flex;\n  align-items: center;  \n\n  *:first-child {\n    margin-right: 8px;\n  }\n"])));
 
 exports.TitleContainer = TitleContainer;
 
-var Title = _styledComponents.default.h3(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  display: flex;\n  flex-direction: column;\n  margin: 0px;\n\n  color: ", ";\n  font-weight: 500;\n"])), function (props) {
+var Title = _styledComponents.default.h3(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  margin: 0px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  max-width: calc(100% - 50px);\n\n  color: ", ";\n  font-weight: 500;\n"])), function (props) {
   return props.theme.colors.grayDark;
 });
 

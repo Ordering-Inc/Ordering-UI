@@ -177,9 +177,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       name: product.name
     }, /*#__PURE__*/_react.default.createElement(_styles.HorizontalDetails, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
       title: product.name
-    }, product.name)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.price)), /*#__PURE__*/_react.default.createElement("span", {
-      className: "discount"
-    }, parsePrice(product.price))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, product.name)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.price))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return handleFormProduct(product);
@@ -187,8 +185,6 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     }, t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_styles.HorizontalImage, null, /*#__PURE__*/_react.default.createElement("img", {
       src: product.images,
       alt: "product-".concat(i),
-      width: "150px",
-      height: "150px",
       loading: "lazy"
     })));
   }) : /*#__PURE__*/_react.default.createElement("div", null, upsellingProducts.message || t('NO_UPSELLING_PRODUCTS', 'There are no upselling products'))) : _toConsumableArray(Array(8)).map(function (item, i) {

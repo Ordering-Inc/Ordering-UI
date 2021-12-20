@@ -41,6 +41,8 @@ var _styles = require("../../styles");
 
 var _styledComponents = require("styled-components");
 
+var _Tabs = require("../../styles/Tabs");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -113,7 +115,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      optimizeImage = _useUtils2$.optimizeImage;
 
   var theme = (0, _styledComponents.useTheme)();
 
@@ -121,6 +125,19 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       modalPageToShow = _useState4[0],
       setModalPageToShow = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      tabValue = _useState6[0],
+      setTabValue = _useState6[1];
+
+  var productContainerRef = (0, _react.useRef)(null);
+  var productInfoRef = (0, _react.useRef)(null);
+
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isShowExtra = _useState8[0],
+      setIsShowExtra = _useState8[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
 
@@ -190,6 +207,38 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     return classnames;
   };
 
+  var handleChangeTabValue = function handleChangeTabValue(value) {
+    setTabValue(value);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!tabValue) return;
+
+    if (document.getElementById("".concat(tabValue))) {
+      var TabOffset = tabValue === 'all' ? 0 : document.getElementById("".concat(tabValue)).offsetTop;
+      var totalOffset = 0;
+
+      if (tabValue === 'all') {
+        totalOffset = productContainerRef.current.offsetTop;
+      } else {
+        totalOffset = productContainerRef.current.offsetTop + productInfoRef.current.offsetTop + TabOffset - 64;
+      }
+
+      window.scroll({
+        top: totalOffset,
+        behavior: 'smooth'
+      });
+    }
+  }, [tabValue]);
+  (0, _react.useEffect)(function () {
+    var valid = false;
+    product.extras.forEach(function (extra) {
+      return extra.options.forEach(function (option) {
+        if (showOption(option)) valid = true;
+      });
+    });
+    setIsShowExtra(valid);
+  }, [product.extras]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -200,7 +249,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles2.ProductContainer, {
     className: "product-container",
-    isExistBottom: document.getElementById('page-footer')
+    isExistBottom: document.getElementById('page-footer'),
+    ref: productContainerRef
   }, loading && !error && /*#__PURE__*/_react.default.createElement(_styles2.SkeletonBlock, {
     width: 90
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -227,7 +277,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     categoryId: product === null || product === void 0 ? void 0 : product.category_id,
     productId: product === null || product === void 0 ? void 0 : product.id
   }), /*#__PURE__*/_react.default.createElement("img", {
-    src: (product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product),
+    src: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_300,c_limit'),
     alt: "product",
     width: "300px",
     height: "300px",
@@ -238,7 +288,36 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       e.target.onerror = null;
       e.target.src = (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.product;
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductInnerContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles2.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku)))), /*#__PURE__*/_react.default.createElement(_styles2.ProductEdition, null, ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || (product === null || product === void 0 ? void 0 : product.extras.length) > 0) && /*#__PURE__*/_react.default.createElement(_styles2.ProductOptionInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductInnerContainer, null, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.INGREDIENTS) || 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperIngredients, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.ProductInfo, {
+    ref: productInfoRef
+  }, /*#__PURE__*/_react.default.createElement(_styles2.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductInnerContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles2.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku)))), /*#__PURE__*/_react.default.createElement(_styles2.ProductEdition, null, ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || isShowExtra) && /*#__PURE__*/_react.default.createElement(_styles2.ProductTabContainer, {
+    id: "all"
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+    variant: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    key: "all",
+    active: tabValue === 'all' || !tabValue,
+    onClick: function onClick() {
+      return handleChangeTabValue('all');
+    },
+    borderBottom: true
+  }, t('ALL', 'All')), (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    key: "ingredients",
+    active: tabValue === 'ingredients',
+    onClick: function onClick() {
+      return handleChangeTabValue('ingredients');
+    },
+    borderBottom: true
+  }, t('INGREDIENTS', 'ingredients')), isShowExtra && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    key: "extra",
+    active: tabValue === 'extra',
+    onClick: function onClick() {
+      return handleChangeTabValue('extra');
+    },
+    borderBottom: true
+  }, t('EXTRA', 'Extra')))), ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || (product === null || product === void 0 ? void 0 : product.extras.length) > 0) && /*#__PURE__*/_react.default.createElement(_styles2.ProductOptionInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductInnerContainer, null, /*#__PURE__*/_react.default.createElement("div", {
+    id: "ingredients"
+  }, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.INGREDIENTS) || 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperIngredients, {
     isProductSoldout: isSoldOut || maxProductQuantity <= 0
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
@@ -247,7 +326,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       state: productCart.ingredients["id:".concat(ingredient === null || ingredient === void 0 ? void 0 : ingredient.id)],
       onChange: handleChangeIngredientState
     });
-  })), product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    id: "extra"
+  }, product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
     return extra.options.map(function (option) {
       var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
@@ -273,7 +354,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         }) : null;
       }))));
     });
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.ProductInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('SPECIAL_COMMENT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SPECIAL_COMMENT) || 'Special comment')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.ProductInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('SPECIAL_COMMENT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SPECIAL_COMMENT) || 'Special comment')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     rows: 4,
     placeholder: t('SPECIAL_COMMENT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.SPECIAL_COMMENT) || 'Special comment'),
     defaultValue: productCart.comment,
