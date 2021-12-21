@@ -17,6 +17,7 @@ const BusinessProductsListUI = (props) => {
   const {
     errors,
     businessId,
+    business,
     category,
     categories,
     categoryState,
@@ -69,7 +70,7 @@ const BusinessProductsListUI = (props) => {
           const featProducts = business?.lazy_load_products_recommended
             ? categoriesState?.featured?.products?.some(product => product.featured) ? categoriesState?.featured?.products : []
             : categoryState?.products?.filter(product => product.featured) ?? []
-          return (
+          return featProducts?.length > 0 ? (
             <WrapAllCategories key={category?.id}>
               <div className='wrap-header'>
                 <div className='category-title'>
@@ -106,7 +107,7 @@ const BusinessProductsListUI = (props) => {
                 )}
               </ProductsListing>
             </WrapAllCategories>
-          )
+          ): null
         })
       }
 
