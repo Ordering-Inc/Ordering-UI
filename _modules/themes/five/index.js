@@ -333,6 +333,12 @@ Object.defineProperty(exports, "ProductListLayoutGroceries", {
     return _groceries2.BusinessProductsList;
   }
 });
+Object.defineProperty(exports, "RenderProductsLayout", {
+  enumerable: true,
+  get: function get() {
+    return _RenderProductsLayout.RenderProductsLayout;
+  }
+});
 Object.defineProperty(exports, "SearchBar", {
   enumerable: true,
   get: function get() {
@@ -517,6 +523,8 @@ var _PaymentOptionStripe = require("./src/components/PaymentOptionStripe");
 var _ProductForm = require("./src/components/ProductForm");
 
 var _ProductItemAccordion = require("./src/components/ProductItemAccordion");
+
+var _RenderProductsLayout = require("./src/components/RenderProductsLayout");
 
 var _SearchBar = require("./src/components/SearchBar");
 
