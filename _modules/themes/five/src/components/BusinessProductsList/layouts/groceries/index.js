@@ -50,6 +50,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
 
   var errors = props.errors,
       businessId = props.businessId,
+      business = props.business,
       category = props.category,
       categories = props.categories,
       categoryState = props.categoryState,
@@ -90,14 +91,14 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   }))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) === 'featured';
   }).map(function (category) {
-    var _business, _categoriesState$feat, _categoriesState$feat2, _categoriesState$feat3, _categoryState$produc2, _categoryState$produc3;
+    var _categoriesState$feat, _categoriesState$feat2, _categoriesState$feat3, _categoryState$produc2, _categoryState$produc3;
 
-    var featProducts = (_business = business) !== null && _business !== void 0 && _business.lazy_load_products_recommended ? categoriesState !== null && categoriesState !== void 0 && (_categoriesState$feat = categoriesState.featured) !== null && _categoriesState$feat !== void 0 && (_categoriesState$feat2 = _categoriesState$feat.products) !== null && _categoriesState$feat2 !== void 0 && _categoriesState$feat2.some(function (product) {
+    var featProducts = business !== null && business !== void 0 && business.lazy_load_products_recommended ? categoriesState !== null && categoriesState !== void 0 && (_categoriesState$feat = categoriesState.featured) !== null && _categoriesState$feat !== void 0 && (_categoriesState$feat2 = _categoriesState$feat.products) !== null && _categoriesState$feat2 !== void 0 && _categoriesState$feat2.some(function (product) {
       return product.featured;
     }) ? categoriesState === null || categoriesState === void 0 ? void 0 : (_categoriesState$feat3 = categoriesState.featured) === null || _categoriesState$feat3 === void 0 ? void 0 : _categoriesState$feat3.products : [] : (_categoryState$produc2 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc3 = categoryState.products) === null || _categoryState$produc3 === void 0 ? void 0 : _categoryState$produc3.filter(function (product) {
       return product.featured;
     })) !== null && _categoryState$produc2 !== void 0 ? _categoryState$produc2 : [];
-    return /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
+    return (featProducts === null || featProducts === void 0 ? void 0 : featProducts.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
       key: category === null || category === void 0 ? void 0 : category.id
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "wrap-header"
@@ -127,7 +128,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         display: 'flex',
         justifyContent: 'center'
       }
-    })));
+    }))) : null;
   }), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
   }).map(function (category, i, _categories) {

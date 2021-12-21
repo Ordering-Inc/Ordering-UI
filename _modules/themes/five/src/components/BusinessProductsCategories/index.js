@@ -72,13 +72,15 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       setSelectedCateogry = _useState2[1];
 
   var handleChangeCategory = function handleChangeCategory(category) {
+    var _document$getElementB, _document$getElementB2;
+
     if (business !== null && business !== void 0 && business.lazy_load_products_recommended) {
       handlerClickCategory(_objectSpread({}, category));
       return;
     }
 
     var topPos = 0;
-    if (!(category !== null && category !== void 0 && category.id)) topPos = document.getElementById('businessProductList').offsetTop;else topPos = document.getElementById("category".concat(category.id)).offsetTop;
+    if (!(category !== null && category !== void 0 && category.id)) topPos = (_document$getElementB = document.getElementById('businessProductList')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.offsetTop;else topPos = (_document$getElementB2 = document.getElementById("category".concat(category.id))) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.offsetTop;
     window.scroll({
       top: topPos - 60,
       left: 0,
@@ -110,9 +112,11 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       });
 
       (_categories === null || _categories === void 0 ? void 0 : _categories.length) && _categories.forEach(function (category) {
+        var _document$getElementB3, _document$getElementB4;
+
         var windowTop = window.scrollY;
         var topPos = 0;
-        if (!(category !== null && category !== void 0 && category.id)) topPos = document.getElementById('businessProductList').offsetTop;else topPos = document.getElementById("category".concat(category.id)).offsetTop;
+        if (!(category !== null && category !== void 0 && category.id)) topPos = (_document$getElementB3 = document.getElementById('businessProductList')) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.offsetTop;else topPos = (_document$getElementB4 = document.getElementById("category".concat(category.id))) === null || _document$getElementB4 === void 0 ? void 0 : _document$getElementB4.offsetTop;
 
         if (windowTop >= topPos - 60) {
           setSelectedCateogry(category);
