@@ -186,14 +186,14 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   }))) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), (product === null || product === void 0 ? void 0 : product.comment) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.comment)), windowSize.width <= 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement("div", null, onEditProduct && /*#__PURE__*/_react.default.createElement("span", {
     ref: productActionsEdit
   }, /*#__PURE__*/_react.default.createElement(_BsPencil.default, {
-    color: "#F2BB40",
+    color: "#B1BCCC",
     onClick: function onClick() {
       return onEditProduct(product);
     }
   })), onDeleteProduct && /*#__PURE__*/_react.default.createElement("span", {
     ref: productActionsDelete
   }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
-    color: "#D81212",
+    color: "#B1BCCC",
     onClick: function onClick() {
       return onDeleteProduct(product);
     }

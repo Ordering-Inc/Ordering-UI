@@ -59,7 +59,7 @@ var BusinessCartContainer = _styledComponents.default.div(_templateObject9 || (_
 
 exports.BusinessCartContainer = BusinessCartContainer;
 
-var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 35px 30px;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  position: relative;\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n"])), function (_ref) {
+var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 35px 30px;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  position: relative;\n\n  ", "\n\n  @media (max-width: 576px) {\n    .info {\n      width: 100%;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n"])), function (_ref) {
   var isModal = _ref.isModal;
   return isModal && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    padding: 35px 25px;\n    box-shadow: none;\n    border: none;\n  "])));
 });

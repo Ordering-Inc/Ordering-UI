@@ -260,23 +260,25 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     setIsShowExtra(valid);
   }, [product.extras]);
   (0, _react.useEffect)(function () {
-    var _theme$images, _theme$images$dummies;
+    var _theme$images, _theme$images$dummies, _product$gallery;
 
     var imageList = [];
     imageList.push((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product));
 
-    var _iterator = _createForOfIteratorHelper(product === null || product === void 0 ? void 0 : product.gallery),
-        _step;
+    if (product !== null && product !== void 0 && product.gallery && (product === null || product === void 0 ? void 0 : (_product$gallery = product.gallery) === null || _product$gallery === void 0 ? void 0 : _product$gallery.length) > 0) {
+      var _iterator = _createForOfIteratorHelper(product === null || product === void 0 ? void 0 : product.gallery),
+          _step;
 
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var galleryItem = _step.value;
-        imageList.push(galleryItem.file);
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var galleryItem = _step.value;
+          imageList.push(galleryItem === null || galleryItem === void 0 ? void 0 : galleryItem.file);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
       }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
     }
 
     setGallery(imageList);

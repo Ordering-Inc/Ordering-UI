@@ -88,7 +88,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       onRedirectPage = props.onRedirectPage,
       handleChangeSearch = props.handleChangeSearch,
       handleBusinessClick = props.handleBusinessClick,
-      currentPageParam = props.currentPageParam;
+      currentPageParam = props.currentPageParam,
+      franchiseEnabled = props.franchiseEnabled;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -329,7 +330,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, {
     ref: businessListRef
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
+  }, franchiseEnabled && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
@@ -364,7 +365,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       isSkeleton: true,
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
     });
-  }), !businessesList.loading && (businessesList.businesses.length === 0 || nearBusinessList.length === 0) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), !businessesList.loading && franchiseEnabled && (businessesList.businesses.length === 0 || nearBusinessList.length === 0) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
@@ -372,7 +373,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: function onClick() {
       return handleClickAddress();
     }
-  }, t('CHANGE_ADDRESS', 'Select other Address'))), nearBusinessList.length > 0 && ((_businessesList$busin2 = businessesList.businesses.filter(function (business) {
+  }, t('CHANGE_ADDRESS', 'Select other Address'))), !franchiseEnabled && !businessesList.loading && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: t('NOT_ENABLED_FRANCHISE', 'Franchise is not enabled or franchise id doesn\'t exist')
+  }), nearBusinessList.length > 0 && franchiseEnabled && ((_businessesList$busin2 = businessesList.businesses.filter(function (business) {
     return nearBusinessList.includes(business.slug);
   })) === null || _businessesList$busin2 === void 0 ? void 0 : _businessesList$busin2.map(function (business) {
     var _orderState$options4;
@@ -401,7 +404,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
-  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessMapWrapper, null, configs !== null && configs !== void 0 && (_configs$google_maps_ = configs.google_maps_api_key) !== null && _configs$google_maps_ !== void 0 && _configs$google_maps_.value && orderState !== null && orderState !== void 0 && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.location ? (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessMapWrapper, null, configs !== null && configs !== void 0 && (_configs$google_maps_ = configs.google_maps_api_key) !== null && _configs$google_maps_ !== void 0 && _configs$google_maps_.value && orderState !== null && orderState !== void 0 && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.location ? (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 && franchiseEnabled ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : (_orderState$options7$ = _orderState$options7.address) === null || _orderState$options7$ === void 0 ? void 0 : _orderState$options7$.location,
     setErrors: setMapErrors,
