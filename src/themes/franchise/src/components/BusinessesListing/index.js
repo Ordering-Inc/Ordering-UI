@@ -258,7 +258,7 @@ const BusinessesListingUI = (props) => {
             {
               !franchiseEnabled && !businessesList.loading && (
                 <NotFoundSource
-                  content={t('NOT_ENABLED_FRANCHISE', 'Franchise is not enabled now')}
+                  content={t('NOT_ENABLED_FRANCHISE', 'Franchise is not enabled or franchise id doesn\'t exist')}
                 />
               )
             }
