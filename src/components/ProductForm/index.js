@@ -144,8 +144,10 @@ const ProductOptionsUI = (props) => {
   useEffect(() => {
     const imageList = []
     if (product?.images) imageList.push(product?.images)
-    for (const galleryItem of product?.gallery) {
-      imageList.push(galleryItem.file)
+    if (product?.gallery && product?.gallery?.length > 0) {
+      for (const galleryItem of product?.gallery) {
+        imageList.push(galleryItem?.file)
+      }
     }
     setGallery(imageList)
   }, [product])
