@@ -167,11 +167,11 @@ const ProductOptionsUI = (props) => {
 
   useEffect(() => {
     let valid = false
-    product.extras.forEach(extra => extra.options.forEach(option => {
+    product?.extras && product.extras.forEach(extra => extra.options.forEach(option => {
       if (showOption(option)) valid = true
     }))
     setIsShowExtra(valid)
-  }, [product.extras])
+  }, [product?.extras])
 
   useEffect(() => {
     const imageList = []
