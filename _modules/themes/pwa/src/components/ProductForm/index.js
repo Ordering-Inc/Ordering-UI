@@ -252,13 +252,13 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }, [tabValue]);
   (0, _react.useEffect)(function () {
     var valid = false;
-    product.extras.forEach(function (extra) {
+    (product === null || product === void 0 ? void 0 : product.extras) && product.extras.forEach(function (extra) {
       return extra.options.forEach(function (option) {
         if (showOption(option)) valid = true;
       });
     });
     setIsShowExtra(valid);
-  }, [product.extras]);
+  }, [product === null || product === void 0 ? void 0 : product.extras]);
   (0, _react.useEffect)(function () {
     var _theme$images, _theme$images$dummies, _product$gallery;
 
