@@ -99,10 +99,6 @@ export const WrapperImage = styled.div`
 
       img {
         border-radius: 7.6px;
-        transition: all 0.2s ease;
-        &:hover {
-          transform: scale(1.06);
-        }
       }
     }
 
