@@ -287,7 +287,7 @@ const ProductOptionsUI = (props) => {
                                     option.suboptions.map(suboption => {
                                       const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
                                       const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                      return (
+                                      return suboption?.enabled ? (
                                         <ProductOptionSubOption
                                           key={suboption?.id}
                                           onChange={handleChangeSuboptionState}
@@ -296,7 +296,7 @@ const ProductOptionsUI = (props) => {
                                           suboption={suboption}
                                           state={currentState}
                                         />
-                                      )
+                                      ) : null
                                     })
                                   }
                                 </WrapperSubOption>
