@@ -314,10 +314,10 @@ const ProductOptionsUI = (props) => {
                             >
                               <WrapperSubOption className={isError(option.id)}>
                                 {
-                                  option.suboptions.map(suboption => {
-                                    const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
-                                    const balance = productCart.options[`id:${option.id}`]?.balance || 0
-                                    return suboption?.enabled ? (
+                                  option.suboptions.filter(suboptions => suboptions.enabled).map(suboption => {
+                                    const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                    const balance = productCart.options[`id:${option?.id}`]?.balance || 0
+                                    return (
                                       <ProductOptionSubOption
                                         key={suboption?.id}
                                         onChange={handleChangeSuboptionState}
@@ -326,7 +326,7 @@ const ProductOptionsUI = (props) => {
                                         suboption={suboption}
                                         state={currentState}
                                       />
-                                    ) : null
+                                    )
                                   })
                                 }
                               </WrapperSubOption>
