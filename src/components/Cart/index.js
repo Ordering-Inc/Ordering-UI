@@ -224,7 +224,7 @@ const CartUI = (props) => {
                     }
                     {
                       cart.fees.length > 0 && cart.fees.map(fee => (
-                        (fee.fixed !== 0 || fee.percentage !== 0) && (
+                        !(fee.fixed === 0 && fee.percentage === 0) && (
                           <tr key={fee.id}>
                             <td>
                               {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
