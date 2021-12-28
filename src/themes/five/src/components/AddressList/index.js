@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import BsPencil from '@meronex/icons/bs/BsPencil'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
-import FaHome from '@meronex/icons/fa/FaHome'
-import FaPlus from '@meronex/icons/fa/FaPlus'
-import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
-import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
+import {
+  Heart,
+  Building,
+  PlusLg,
+  House
+} from 'react-bootstrap-icons'
 
 import {
   AddressList as AddressListController,
@@ -235,10 +237,10 @@ const AddressListUI = (props) => {
                       {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
                     </span>
                     <span className='tag'>
-                      {address?.tag === 'home' && <FaHome />}
-                      {address?.tag === 'office' && <FaRegBuilding />}
-                      {address?.tag === 'favorite' && <FaRegHeart />}
-                      {address?.tag === 'other' && <FaPlus />}
+                      {address?.tag === 'home' && <House />}
+                      {address?.tag === 'office' && <Building />}
+                      {address?.tag === 'favorite' && <Heart />}
+                      {address?.tag === 'other' && <PlusLg />}
                     </span>
                     <div className='address'>
                       <span>{address.address}</span>

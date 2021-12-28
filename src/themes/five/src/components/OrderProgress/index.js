@@ -9,7 +9,6 @@ import { Button } from '../../styles/Buttons'
 import moment from 'moment'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import {
   OrderProgressContainer,
@@ -33,8 +32,6 @@ const OrderProgressUI = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [lastOrder, setLastOrder] = useState(null)
-
-  const imageFails = theme.images?.general?.emptyPastOrders
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)

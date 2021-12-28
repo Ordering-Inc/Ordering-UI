@@ -76,6 +76,7 @@ export const DateWrapper = styled.div`
   .react-calendar {
     border: none;
     border-radius: 7.6px;
+    font-family: 'Poppins',sans-serif;
 
     .react-calendar__tile--active,
     .react-calendar__tile:enabled:focus {

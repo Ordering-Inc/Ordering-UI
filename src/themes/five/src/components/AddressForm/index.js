@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import BsBuilding from '@meronex/icons/bs/BsBuilding'
-import BsHouse from '@meronex/icons/bs/BsHouse'
-import FaPlus from '@meronex/icons/fa/FaPlus'
-import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
+import {
+  Heart,
+  Building,
+  PlusLg,
+  House
+} from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
@@ -454,16 +456,16 @@ const AddressFormUI = (props) => {
 
           <AddressTagSection>
             <Button className={addressTag === 'home' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('home')}>
-              <span><BsHouse /></span>
+              <span><House /></span>
             </Button>
             <Button className={addressTag === 'office' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('office')}>
-              <span><BsBuilding /></span>
+              <span><Building /></span>
             </Button>
             <Button className={addressTag === 'favorite' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('favorite')}>
-              <span><FaRegHeart /></span>
+              <span><Heart /></span>
             </Button>
             <Button className={addressTag === 'other' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('other')}>
-              <span><FaPlus /></span>
+              <span><PlusLg /></span>
             </Button>
           </AddressTagSection>
           {
