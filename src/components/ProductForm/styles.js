@@ -213,6 +213,7 @@ export const ProductActions = styled.div`
   align-items: center;
   padding: 10px 0px;
   width: 100%;
+  z-index: 99;
 
   position: fixed;
   bottom: 0;
