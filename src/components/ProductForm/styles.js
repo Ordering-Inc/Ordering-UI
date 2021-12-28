@@ -56,6 +56,7 @@ export const WrapperImage = styled.div`
 
   @media (min-width: 1201px) {
     width: calc(50% - 10px);
+    padding: 0 10px;
     position: sticky;
     top: 0;
 
@@ -88,7 +89,7 @@ export const WrapperImage = styled.div`
   .product-thumb {
     box-sizing: border-box;
     padding: 30px 0px;
-    margin: 0px 10px;
+    margin: 0px;
 
     .swiper-slide {
       opacity: 0.8;
@@ -159,35 +160,6 @@ export const ProductInfo = styled.div`
   position: relative;
   margin-top: 10px;
 
-  h1 {
-    font-size: 20px;
-    font-weight: 500;
-    text-align: center;
-    color: #263238;
-    margin-top: 0px;
-  }
-
-  p {
-    font-size: 14px;
-    font-weight: 200;
-    margin-top: 0px;
-    line-height: 1.5em;
-    width: 100%;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-      text-align: right;
-    `}
-  }
-
-  @media (min-width: 381px) {
-    h1 {
-      font-size: 24px;
-    }
-    p {
-      font-size: 16px;
-    }
-  }
-
   @media (min-width: 411px) {
     padding: 10px 0px;
   }
@@ -202,9 +174,7 @@ export const ProductInfo = styled.div`
 
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
-  @media (min-width: 1201px) {
-    width: calc(100% - 25px);
-  }
+
 `
 
 export const ProductEdition = styled.div``
@@ -370,19 +340,28 @@ export const WrapperSubOption = styled.div`
   }
 `
 
+export const ProductMeta = styled.div`
+  display: flex;
+  span {
+    font-size: 16px;
+    line-height: 24px;
+    color: #909BA9;
+  }
+`
+
 export const SkuContent = styled.div`
   display: flex;
-  flex-direction: column;
 
-  h2 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 0px;
-  }
+`
+export const PriceContent = styled.p`
+  font-size: 18px;
+  line-height: 27px;
+  color: #344050;
+  margin: 0;
+`
 
-  p {
-    font-size: 14px;
-  }
+export const EstimatedPersons = styled.div`
+
 `
 
 export const WrapperIngredients = styled.div`
@@ -391,4 +370,24 @@ export const WrapperIngredients = styled.div`
     pointer-events: none;
     background: hsl(0, 0%, 72%);
   `}
+`
+export const ProductName = styled.h1`
+  font-size: 24px;
+  line-height: 36px;
+  color: #344050;
+  margin-bottom: 10px;
+  @media (min-width: 1201px) {
+    width: calc(100% - 25px);
+  }
+`
+
+export const Properties = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+
+`
+
+export const ProductDescription = styled.p`
+  margin-top: 10px;
 `
