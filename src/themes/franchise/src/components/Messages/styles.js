@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const MessagesContainer = styled.div`
   width: 100%;
@@ -134,7 +135,7 @@ export const Chat = styled.div`
     margin-top: 10px;
   }
   @media (min-width: 769px){
-    height: calc(60vh - 60px);
+    height: calc(60vh - 90px);
   }
 `
 
@@ -333,14 +334,15 @@ export const TimeofSentByAdmin = styled.p`
 
 export const SendForm = styled.div`
   display: flex;
-  padding: 0px 5px;
+  flex-direction: column;
+  padding: 5px;
   bottom: 0;
   width: 100%;
-  height: 70px;
   box-sizing: border-box;
+  border-top: 1px solid #DEE2E6;
 
   @media (min-width: 480px){
-    padding: 0px 20px;
+    padding: 5px 20px;
   }
 
   @media (min-width: 769px) {
@@ -640,5 +642,30 @@ export const NotSendMessage = styled(SendForm)`
     font-size: 14px;
     color: #909BA9;
     margin: 6px 0;
+  }
+`
+
+export const QuickMessageWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  button {
+    margin-bottom: 5px;
+    border-radius: 50px;
+    color: #414954;
+    background: #E9ECEF;
+    border: none;
+    margin-right: 12px;
+    font-size: 12px;
+    line-height: 25px;
+    padding: 0px 12px;
+    ${props => props.theme.rtl && css`
+      margin-right: 0px;
+      margin-left: 12px;
+    `}
+
+    &:active {
+      background: ${() => darken(0.05, '#E9ECEF')};
+    }
   }
 `

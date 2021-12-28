@@ -43,7 +43,8 @@ import {
   MessageContentWrapper,
   MessageCreatedDate,
   TimeofSentByAdmin,
-  NotSendMessage
+  NotSendMessage,
+  QuickMessageWrapper
 } from './styles'
 import { Image as ImageWithFallback } from '../../../../../components/Image'
 import { Input } from '../../styles/Inputs'
@@ -80,13 +81,25 @@ const MessagesUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const { handleSubmit, register, errors } = useForm()
+  const { handleSubmit, register, errors, setValue } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
   const [{ parseDate, parseTime }] = useUtils()
   const buttonRef = useRef(null)
   const [modalImage, setModalImage] = useState({ open: false, src: '' })
   const imageRef = useRef(null)
+
+  const quickMessageList = [
+    { key: 'message_1', text: t('CUSTOMER_MESSAGE_1', 'Lorem ipsum 1') },
+    { key: 'message_2', text: t('CUSTOMER_MESSAGE_2', 'Lorem ipsum 2') },
+    { key: 'message_3', text: t('CUSTOMER_MESSAGE_3', 'Lorem ipsum 3') },
+    { key: 'message_4', text: t('CUSTOMER_MESSAGE_4', 'Lorem ipsum 4') }
+  ]
+
+  const handleClickQuickMessage = (index) => {
+    setValue('message', `${message} ${index}`)
+    setMessage(`${message} ${index}`)
+  }
 
   const handleModalImage = (src) => {
     setModalImage({ open: true, src })
@@ -577,6 +590,17 @@ const MessagesUI = (props) => {
             )
             : (
               <SendForm>
+                <QuickMessageWrapper>
+                  {quickMessageList.map((quickMessage, i) => (
+                    <Button
+                      key={i}
+                      color='secundary'
+                      onClick={() => handleClickQuickMessage(quickMessage.text)}
+                    >
+                      {quickMessage.text}
+                    </Button>
+                  ))}
+                </QuickMessageWrapper>
                 <Send onSubmit={handleSubmit(onSubmit)} noValidate>
                   <InputWrapper>
                     <Input

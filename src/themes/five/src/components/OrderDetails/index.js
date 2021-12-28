@@ -21,8 +21,6 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
-import { ReviewProduct } from '../../../../../components/ReviewProduct'
-import { ReviewDriver } from '../../../../../components/ReviewDriver'
 import { ProductShare } from '../../../../../components/ProductShare'
 
 import {
@@ -59,6 +57,8 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
+import { ReviewProduct } from '../../../../../components/ReviewProduct'
+import { ReviewDriver } from '../../../../../components/ReviewDriver'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -80,12 +80,12 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
-  const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
   const [isProductReviewed, setIsProductReviewed] = useState(false)
   const [isDriverReviewed, setIsDriverReviewed] = useState(false)
-  const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
+  const [isReviewOpen, setIsReviewOpen] = useState(false)
+  const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
 
   const { order, loading, businessData, error } = props.order
 
@@ -205,7 +205,7 @@ const OrderDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container>
-        {!loading && order && Object.keys(order).length > 0 && (
+        {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
           <WrapperContainer>
             <WrapperLeftContainer>
               <OrderInfo>
@@ -222,7 +222,8 @@ const OrderDetailsUI = (props) => {
                 </p>
                 <ReviewOrderLink
                   className='Review-order'
-                  active={(parseInt(order?.status) === 1 ||
+                  active={(
+                    parseInt(order?.status) === 1 ||
                     parseInt(order?.status) === 2 ||
                     parseInt(order?.status) === 5 ||
                     parseInt(order?.status) === 6 ||
@@ -231,7 +232,7 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 12
                   ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
                 >
-                  <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review Order')}</span>
+                  <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                 </ReviewOrderLink>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
@@ -307,14 +308,16 @@ const OrderDetailsUI = (props) => {
                     </OrderDriver>
                   </>
                   {order?.driver?.location && parseInt(order?.status) === 9 && (
-                    <Map>
-                      <GoogleMapsMap
-                        apiKey={configs?.google_maps_api_key?.value}
-                        location={order?.driver?.location}
-                        locations={locations}
-                        mapControls={googleMapsControls}
-                      />
-                    </Map>
+                    <>
+                      <Map>
+                        <GoogleMapsMap
+                          apiKey={configs?.google_maps_api_key?.value}
+                          location={order?.driver?.location}
+                          locations={locations}
+                          mapControls={googleMapsControls}
+                        />
+                      </Map>
+                    </>
                   )}
                 </>
               )}
@@ -433,6 +436,22 @@ const OrderDetailsUI = (props) => {
           </WrapperContainer>
         )}
 
+        {
+          (openMessages.driver || openMessages.business) && (
+            <Messages
+              orderId={order?.id}
+              order={order}
+              business={openMessages.business}
+              driver={openMessages.driver}
+              messages={messages}
+              setMessages={setMessages}
+              readMessages={readMessages}
+              onMessages={setOpenMessages}
+              onClose={() => setOpenMessages({ driver: false, business: false })}
+            />
+          )
+        }
+
         {loading && !error && (
           <SkeletonWrapper>
             <WrapperLeftContainer>
@@ -486,25 +505,6 @@ const OrderDetailsUI = (props) => {
             />
           )
         )}
-
-        {(openMessages.driver || openMessages.business) && (
-          <Modal
-            open={openMessages.driver || openMessages.business}
-            onClose={() => setOpenMessages({ driver: false, business: false })}
-            padding='0'
-            width='70%'
-          >
-            <Messages
-              orderId={order?.id}
-              order={order}
-              business={openMessages.business}
-              driver={openMessages.driver}
-              messages={messages}
-              setMessages={setMessages}
-              readMessages={readMessages}
-            />
-          </Modal>
-        )}
         {
           isReviewOpen && (
             <Modal
@@ -527,6 +527,7 @@ const OrderDetailsUI = (props) => {
                       : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
                 }
               </ReviewWrapper>
+
             </Modal>
           )
         }
