@@ -167,11 +167,11 @@ const ProductOptionsUI = (props) => {
 
   useEffect(() => {
     let valid = false
-    product.extras.forEach(extra => extra.options.forEach(option => {
+    product?.extras && product.extras.forEach(extra => extra.options.forEach(option => {
       if (showOption(option)) valid = true
     }))
     setIsShowExtra(valid)
-  }, [product.extras])
+  }, [product?.extras])
 
   useEffect(() => {
     const imageList = []
@@ -367,10 +367,10 @@ const ProductOptionsUI = (props) => {
                               >
                                 <WrapperSubOption className={isError(option?.id)}>
                                   {
-                                    option.suboptions.map(suboption => {
+                                    option.suboptions.filter(suboptions => suboptions.enabled).map(suboption => {
                                       const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
                                       const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                      return suboption?.enabled ? (
+                                      return (
                                         <ProductOptionSubOption
                                           key={suboption?.id}
                                           onChange={handleChangeSuboptionState}
@@ -379,7 +379,7 @@ const ProductOptionsUI = (props) => {
                                           suboption={suboption}
                                           state={currentState}
                                         />
-                                      ) : null
+                                      )
                                     })
                                   }
                                 </WrapperSubOption>

@@ -73,6 +73,8 @@ export const SwiperWrapper = styled.div`
       opacity: 0.8;
       border-radius: 7.6px;
       height: auto;
+      cursor: pointer;
+      overflow: hidden;
 
       img {
         border-radius: 7.6px;
@@ -93,22 +95,34 @@ export const SwiperWrapper = styled.div`
 
   .swiper-button-next {
     background-image: url(${props => props.theme.images.general.rightArrow});
-    background-color: rgba(255,255,255,0.3);
+    background-color: #d1d0d04d;
     background-repeat: no-repeat;
     background-position: 55% center;
     width: 32px;
     height: 32px;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
     border-radius: 50%;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .swiper-button-prev {
     background-image: url(${props => props.theme.images.general.leftArrow});
-    background-color: rgba(255,255,255,0.3);
+    background-color: #d1d0d04d;
     background-repeat: no-repeat;
     background-position: 45% center;
     width: 32px;
     height: 32px;
     border-radius: 50%;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .swiper-button-next::after, .swiper-button-prev::after {
