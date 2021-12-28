@@ -304,7 +304,7 @@ var CartUI = function CartUI(props) {
   }), cart.fees.length > 0 && cart.fees.map(function (fee) {
     var _fee$summary, _fee$summary2;
 
-    return /*#__PURE__*/_react.default.createElement("tr", {
+    return !(fee.fixed === 0 && fee.percentage === 0) && /*#__PURE__*/_react.default.createElement("tr", {
       key: fee.id
     }, /*#__PURE__*/_react.default.createElement("td", null, fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), "(", parsePrice(fee === null || fee === void 0 ? void 0 : fee.fixed), " + ", fee.percentage, "%)", /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
       onClick: function onClick() {

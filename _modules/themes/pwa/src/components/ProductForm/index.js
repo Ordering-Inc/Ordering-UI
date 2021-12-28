@@ -430,19 +430,21 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)]
       }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
         className: isError(option === null || option === void 0 ? void 0 : option.id)
-      }, option.suboptions.map(function (suboption) {
+      }, option.suboptions.filter(function (suboptions) {
+        return suboptions.enabled;
+      }).map(function (suboption) {
         var _productCart$options$, _productCart$options$2;
 
         var currentState = ((_productCart$options$ = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$ === void 0 ? void 0 : _productCart$options$.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
         var balance = ((_productCart$options$2 = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$2 === void 0 ? void 0 : _productCart$options$2.balance) || 0;
-        return suboption !== null && suboption !== void 0 && suboption.enabled ? /*#__PURE__*/_react.default.createElement(_ProductOptionSubOption.ProductOptionSubOption, {
+        return /*#__PURE__*/_react.default.createElement(_ProductOptionSubOption.ProductOptionSubOption, {
           key: suboption === null || suboption === void 0 ? void 0 : suboption.id,
           onChange: handleChangeSuboptionState,
           balance: balance,
           option: option,
           suboption: suboption,
           state: currentState
-        }) : null;
+        });
       }))));
     });
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('COMMENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SPECIAL_COMMENT) || 'COMMENTS')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {

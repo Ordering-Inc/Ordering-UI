@@ -337,21 +337,23 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)]
       }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
         className: isError(option === null || option === void 0 ? void 0 : option.id)
-      }, option.suboptions.sort(function (a, b) {
+      }, option.suboptions.filter(function (suboptions) {
+        return suboptions.enabled;
+      }).sort(function (a, b) {
         return a.rank - b.rank;
       }).map(function (suboption) {
         var _productCart$options$3, _productCart$options$4;
 
         var currentState = ((_productCart$options$3 = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$3 === void 0 ? void 0 : _productCart$options$3.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
         var balance = ((_productCart$options$4 = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$4 === void 0 ? void 0 : _productCart$options$4.balance) || 0;
-        return suboption !== null && suboption !== void 0 && suboption.enabled ? /*#__PURE__*/_react.default.createElement(_ProductOptionSubOption.ProductOptionSubOption, {
+        return /*#__PURE__*/_react.default.createElement(_ProductOptionSubOption.ProductOptionSubOption, {
           key: suboption === null || suboption === void 0 ? void 0 : suboption.id,
           onChange: handleChangeSuboptionState,
           balance: balance,
           option: option,
           suboption: suboption,
           state: currentState
-        }) : null;
+        });
       }))));
     });
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ActionItem, null, productCart && /*#__PURE__*/_react.default.createElement("span", {

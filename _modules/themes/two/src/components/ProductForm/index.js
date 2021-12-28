@@ -344,7 +344,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)]
       }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
         className: isError(option === null || option === void 0 ? void 0 : option.id)
-      }, option.suboptions.map(function (suboption) {
+      }, option.suboptions.filter(function (suboptions) {
+        return suboptions.enabled;
+      }).map(function (suboption) {
         var _productCart$options$, _productCart$options$2;
 
         var currentState = ((_productCart$options$ = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$ === void 0 ? void 0 : _productCart$options$.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
