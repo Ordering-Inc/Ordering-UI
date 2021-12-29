@@ -339,12 +339,6 @@ Object.defineProperty(exports, "Select", {
     return _Select.Select;
   }
 });
-Object.defineProperty(exports, "Selects", {
-  enumerable: true,
-  get: function get() {
-    return _Selects.Selects;
-  }
-});
 Object.defineProperty(exports, "SidebarMenu", {
   enumerable: true,
   get: function get() {
@@ -399,10 +393,10 @@ Object.defineProperty(exports, "UserDetails", {
     return _UserDetails.UserDetails;
   }
 });
-Object.defineProperty(exports, "UserFormDetails", {
+Object.defineProperty(exports, "UserFormDetailsUI", {
   enumerable: true,
   get: function get() {
-    return _UserFormDetails.UserFormDetails;
+    return _UserFormDetails.UserFormDetailsUI;
   }
 });
 Object.defineProperty(exports, "UserPopover", {
@@ -557,7 +551,5 @@ var _Buttons = require("./src/styles/Buttons");
 var _Inputs = require("./src/styles/Inputs");
 
 var _Select = require("./src/styles/Select");
-
-var _Selects = require("./src/styles/Selects");
 
 var _Tabs = require("./src/styles/Tabs");
