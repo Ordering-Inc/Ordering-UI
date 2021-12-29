@@ -214,6 +214,7 @@ export const ProductActions = styled.div`
   padding: 10px 0px;
   width: 100%;
   box-shadow: 0px -2px 3px #ccc;
+  z-index: 99;
 
   position: fixed;
   bottom: 0;
