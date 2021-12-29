@@ -42,11 +42,13 @@ import { FacebookLoginButton } from '../FacebookLogin'
 import { GoogleLoginButton } from '../GoogleLogin'
 import { AppleLogin } from '../AppleLogin'
 
-import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
-import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
-import GoMail from '@meronex/icons/go/GoMail'
-import FaRegUser from '@meronex/icons/fa/FaRegUser'
-import BsLock from '@meronex/icons/bs/BsLock'
+import {
+  Person,
+  Envelope,
+  Lock,
+  Eye,
+  EyeSlash
+} from 'react-bootstrap-icons'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes']
 
@@ -294,7 +296,7 @@ const SignUpFormUI = (props) => {
                                 autoComplete='off'
                               />
                               <InputBeforeIcon>
-                                <GoMail />
+                                <Envelope />
                               </InputBeforeIcon>
                             </InputWrapper>
                           ) : (
@@ -310,7 +312,7 @@ const SignUpFormUI = (props) => {
                                 autoComplete='off'
                               />
                               <InputBeforeIcon>
-                                <FaRegUser />
+                                <Person />
                               </InputBeforeIcon>
                             </InputWrapper>
                           )}
@@ -344,10 +346,10 @@ const SignUpFormUI = (props) => {
                         })}
                       />
                       <TogglePassword onClick={togglePasswordView}>
-                        {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                        {!passwordSee ? <Eye /> : <EyeSlash />}
                       </TogglePassword>
                       <InputBeforeIcon>
-                        <BsLock />
+                        <Lock />
                       </InputBeforeIcon>
                     </WrapperPassword>
                   )}

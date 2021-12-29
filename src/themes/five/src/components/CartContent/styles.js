@@ -36,9 +36,10 @@ export const NotCarts = styled.div`
 `
 
 export const Title = styled.h1`
-  text-align: center;
   font-weight: 600;
   font-size: 20px;
   color: ${props => props.theme.colors.darkTextColor};
-  margin-bottom: 18px;
+  margin-bottom: 8px;
+  line-height: 30px;
+  margin-top: 0;
 `

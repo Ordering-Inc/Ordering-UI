@@ -125,7 +125,7 @@ export const SocialButtons = styled.div`
     }
 
     div {
-      font-size: 0.8em;
+      font-size: 16px;
     }
   }
 `
@@ -167,8 +167,8 @@ export const TogglePassword = styled.span`
   font-weight: 300;
   padding: 10px 0;
   color: #333;
-  font-size: 26px;
-  transform: translate(-150%, 10%);
+  font-size: 24px;
+  transform: translate(-150%, 13%);
   max-height: 100%;
   ${props => props.theme?.rtl && css`
     transform: translate(150%, 10%);
