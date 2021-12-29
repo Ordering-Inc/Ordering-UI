@@ -58,7 +58,7 @@ import { StripeElementsForm } from './src/components/StripeElementsForm'
 import { StripeRedirectForm } from './src/components/StripeRedirectForm'
 import { UpsellingPage } from './src/components/UpsellingPage'
 import { UserDetails } from './src/components/UserDetails'
-import { UserFormDetails } from './src/components/UserFormDetails'
+import { UserFormDetailsUI } from './src/components/UserFormDetails'
 import { UserPopover } from './src/components/UserPopover'
 import { UserProfile } from './src/components/UserProfile'
 import { VerticalOrdersLayout } from './src/components/VerticalOrdersLayout'
@@ -66,7 +66,6 @@ import { VerticalOrdersLayout } from './src/components/VerticalOrdersLayout'
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
-import { Selects } from './src/styles/Selects'
 import { Tabs } from './src/styles/Tabs'
 
 export {
@@ -130,7 +129,7 @@ export {
   StripeRedirectForm,
   UpsellingPage,
   UserDetails,
-  UserFormDetails,
+  UserFormDetailsUI,
   UserPopover,
   UserProfile,
   VerticalOrdersLayout,
@@ -140,6 +139,5 @@ export {
   Input,
   TextArea,
   Select,
-  Selects,
   Tabs
 }

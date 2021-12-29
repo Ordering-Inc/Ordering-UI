@@ -114,30 +114,6 @@ export const Divider = styled.div`
   }
 `
 
-export const UpsellingPageTitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  p {
-    font-weight: 500;
-    font-size: 16px;
-    color: ${props => props.theme?.colors.darkTextColor};
-    white-space: nowrap;
-  }
-
-  svg {
-    font-size: 20px;
-    cursor: pointer;
-    color: #748194;
-    margin-left: 30px;
-
-    ${props => props.theme?.rtl && css`
-      margin-right: 30px;
-      margin-left: 0px;
-    `}
-  }
-`
-
 export const CouponQuestion = styled.div`
   width: 100%;
   p {
