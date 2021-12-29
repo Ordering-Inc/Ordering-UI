@@ -3,7 +3,7 @@ import { ProductsList, useLanguage, useConfig } from 'ordering-components'
 
 import { Button } from '../../../../styles/Buttons'
 import { SingleProductCard } from '../../../SingleProductCard'
-import { NotFoundSource } from '../../../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../../../NotFoundSource'
 
 import {
   ProductsContainer,
@@ -80,7 +80,7 @@ const BusinessProductsListUI = (props) => {
                 >
                   {t('MORE', 'More')}
                 </Button>
-                </div>
+              </div>
               <ProductsListing>
                 {featProducts?.map(product => product.featured && (
                   <SingleProductCard

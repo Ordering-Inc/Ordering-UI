@@ -15,7 +15,7 @@ import BsPhone from '@meronex/icons/bs/BsPhone'
 import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
 
 import { Button } from '../../styles/Buttons'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'

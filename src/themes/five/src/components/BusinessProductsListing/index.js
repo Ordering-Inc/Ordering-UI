@@ -18,7 +18,7 @@ import {
 } from './styles'
 import HiArrowNarrowLeft from '@meronex/icons/hi/HiArrowNarrowLeft'
 
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'

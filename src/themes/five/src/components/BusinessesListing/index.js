@@ -14,7 +14,7 @@ import {
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { Modal } from '../Modal'
 import { Alert } from '../Confirm'
@@ -218,6 +218,7 @@ const BusinessesListingUI = (props) => {
                   outline
                   color='primary'
                   onClick={() => handleClickAddress()}
+                  style={{ height: '44px' }}
                 >
                   {t('CHANGE_ADDRESS', 'Select other Address')}
                 </Button>

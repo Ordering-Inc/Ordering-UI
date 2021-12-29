@@ -22,7 +22,8 @@ import {
   CallCenterInformation,
   CallCenterInformationBullet,
   BusinessLogoWrapper,
-  BusinessStarInfo
+  BusinessStarInfo,
+  CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import BisStar from '@meronex/icons/bi/BisStar'
@@ -64,6 +65,7 @@ const BusinessControllerUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}>
+          {!isSkeleton && !isBusinessOpen && <CardOverlay />}
           <BusinessHero>
             {isSkeleton ? (
               <Skeleton height={100} />
@@ -84,7 +86,7 @@ const BusinessControllerUI = (props) => {
                 {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
                   <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
                 )}
-                {!isBusinessOpen && <h1>{t('CLOSED', 'Closed')}</h1>}
+                {!isBusinessOpen && <h1 className='closed'>{t('CLOSED', 'Closed')}</h1>}
               </BusinessHeader>
             )}
           </BusinessHero>

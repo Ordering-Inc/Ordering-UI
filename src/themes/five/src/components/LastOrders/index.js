@@ -13,7 +13,7 @@ import {
   OrderInfoBlock,
   BusinessHeader
 } from './styles'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 
 export const LastOrdersUI = (props) => {
   const {

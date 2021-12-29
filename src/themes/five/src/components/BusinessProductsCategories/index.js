@@ -36,9 +36,9 @@ const BusinessProductsCategoriesUI = (props) => {
 
   const ProductCategories = () => {
     return (
-      categories && categories.length && categories.map(category => (
+      categories && categories.length && categories.map((category, i) => (
         <Tab
-          key={category.name}
+          key={i}
           className={`category ${category.id === 'featured' ? 'special' : ''}`}
           active={business?.lazy_load_products_recommended ? (categorySelected?.id === category.id) : (selectedCategory?.id === category.id)}
           onClick={() => handleChangeCategory(category)}

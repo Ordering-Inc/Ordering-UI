@@ -47,7 +47,7 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, {
   Navigation,

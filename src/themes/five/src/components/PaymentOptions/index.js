@@ -12,7 +12,7 @@ import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../StripeRedirectForm'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { getIconCard } from '../../../../../utils'
 

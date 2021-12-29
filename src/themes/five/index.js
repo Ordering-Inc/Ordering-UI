@@ -40,6 +40,7 @@ import { Messages } from './src/components/Messages'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MyOrders } from './src/components/MyOrders'
+import { NotFoundSource } from './src/components/NotFoundSource'
 import { Modal } from './src/components/Modal'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrdersOption } from './src/components/OrdersOption'
@@ -111,6 +112,7 @@ export {
   MomentControl,
   MyOrders,
   Modal,
+  NotFoundSource,
   OrderDetails,
   OrdersOption,
   OrderTypeSelectorContent,

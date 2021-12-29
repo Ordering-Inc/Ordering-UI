@@ -29,7 +29,7 @@ import {
   ContinueButton
 } from './styles'
 
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
