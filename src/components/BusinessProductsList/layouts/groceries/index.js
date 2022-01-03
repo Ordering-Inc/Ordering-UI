@@ -74,44 +74,46 @@ const BusinessProductsListUI = (props) => {
             ? categoriesState?.featured?.products?.some(product => product.featured) ? categoriesState?.featured?.products : []
             : categoryState?.products?.filter(product => product.featured) ?? []
           return (
-            featProducts?.length > 0 && <WrapAllCategories key={category?.id}>
-              <div className='wrap-header'>
-                <div className='category-title'>
-                  <h3>{t('FEATURED', 'Featured')}</h3>
+            featProducts?.length > 0 && (
+              <WrapAllCategories key={category?.id}>
+                <div className='wrap-header'>
+                  <div className='category-title'>
+                    <h3>{t('FEATURED', 'Featured')}</h3>
+                  </div>
+                  <Button
+                    onClick={() => onClickCategory(category)}
+                  >
+                    {t('MORE', 'More')}
+                  </Button>
                 </div>
-                <Button
-                  onClick={() => onClickCategory(category)}
-                >
-                  {t('MORE', 'More')}
-                </Button>
-                </div>
-              <ProductsListing>
-                {featProducts?.map(product => product.featured && (
-                  <SingleProductCard
-                    key={product?.id}
-                    isLayoutOne
-                    isSoldOut={(product?.inventoried && !product?.quantity)}
-                    product={product}
-                    businessId={businessId}
-                    onProductClick={onProductClick}
-                    isCartOnProductsList={isCartOnProductsList}
-                    productAddedToCart={currentCart?.products?.find(Cproduct => Cproduct.id === product.id)}
-                  />
-                ))}
-                {!categoryState?.loading && featProducts?.length && (
-                  <SingleProductCard
-                    useCustomFunctionality
-                    onCustomClick={() => onClickCategory(category)}
-                    isCartOnProductsList={isCartOnProductsList}
-                    customText={t('MORE', 'More')}
-                    customStyle={{
-                      display: 'flex',
-                      justifyContent: 'center'
-                    }}
-                  />
-                )}
-              </ProductsListing>
-            </WrapAllCategories>
+                <ProductsListing>
+                  {featProducts?.map(product => product.featured && (
+                    <SingleProductCard
+                      key={product?.id}
+                      isLayoutOne
+                      isSoldOut={(product?.inventoried && !product?.quantity)}
+                      product={product}
+                      businessId={businessId}
+                      onProductClick={onProductClick}
+                      isCartOnProductsList={isCartOnProductsList}
+                      productAddedToCart={currentCart?.products?.find(Cproduct => Cproduct.id === product.id)}
+                    />
+                  ))}
+                  {!categoryState?.loading && featProducts?.length && (
+                    <SingleProductCard
+                      useCustomFunctionality
+                      onCustomClick={() => onClickCategory(category)}
+                      isCartOnProductsList={isCartOnProductsList}
+                      customText={t('MORE', 'More')}
+                      customStyle={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                      }}
+                    />
+                  )}
+                </ProductsListing>
+              </WrapAllCategories>
+            )
           )
         })
       }
