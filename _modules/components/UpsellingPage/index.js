@@ -56,8 +56,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UpsellingPageUI = function UpsellingPageUI(props) {
-  var _upsellingProducts$pr3;
-
   var upsellingProducts = props.upsellingProducts,
       handleUpsellingPage = props.handleUpsellingPage,
       openUpselling = props.openUpselling,
@@ -90,7 +88,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
 
       if (upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr = upsellingProducts.products) !== null && _upsellingProducts$pr !== void 0 && _upsellingProducts$pr.length && !upsellingProducts.loading) {
         setCanOpenUpselling && setCanOpenUpselling(true);
-      } else if (!(upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr2 = upsellingProducts.products) !== null && _upsellingProducts$pr2 !== void 0 && _upsellingProducts$pr2.length) && !upsellingProducts.loading && !canOpenUpselling && openUpselling) {
+      } else if (!(upsellingProducts !== null && upsellingProducts !== void 0 && (_upsellingProducts$pr2 = upsellingProducts.products) !== null && _upsellingProducts$pr2 !== void 0 && _upsellingProducts$pr2.length) && !upsellingProducts.loading && canOpenUpselling && openUpselling) {
         handleUpsellingPage();
       }
     }
@@ -153,7 +151,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     }));
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomMode ? /*#__PURE__*/_react.default.createElement(UpsellingLayout, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr3 = upsellingProducts.products) === null || _upsellingProducts$pr3 === void 0 ? void 0 : _upsellingProducts$pr3.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomMode ? /*#__PURE__*/_react.default.createElement(UpsellingLayout, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!canOpenUpselling || !upsellingProducts.loading) && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('WANT_SOMETHING_ELSE', 'Do you want something else?'),
     open: openUpselling,
     onClose: function onClose() {
