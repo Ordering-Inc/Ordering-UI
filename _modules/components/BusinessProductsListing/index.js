@@ -167,6 +167,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
     return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === (business === null || business === void 0 ? void 0 : business.slug);
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
+  var hasScrollBar = document.documentElement.clientHeight < document.body.offsetHeight;
   var sortByOptions = [{
     value: null,
     content: t('SORT_BY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SORT_BY) || 'Sort By'),
@@ -332,6 +333,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
+  (0, _react.useEffect)(function () {
+    var hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage);
+    if (categoryState !== null && categoryState !== void 0 && categoryState.loading || loading || hasScrollBar || !hasMore || (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name) === 'All') return;
+    getNextProducts();
+  }, [hasScrollBar, categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, /*#__PURE__*/_react.default.createElement(_RenderProductsLayout.RenderProductsLayout, {
     errors: errors,
     isError: error,
