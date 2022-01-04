@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils } from 'ordering-components'
-import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
+import { Cart3 } from 'react-bootstrap-icons'
 
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
@@ -175,7 +175,7 @@ export const RenderProductsLayout = (props) => {
                     ) : (
                       <EmptyCart>
                         <div className='empty-content'>
-                          <AiOutlineShoppingCart />
+                          <Cart3 />
                           <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
                         </div>
                         <EmptyBtnWrapper>
@@ -289,7 +289,7 @@ export const RenderProductsLayout = (props) => {
           ) : (
             <EmptyCart>
               <div className='empty-content'>
-                <AiOutlineShoppingCart />
+                <Cart3 />
                 <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
               </div>
               <EmptyBtnWrapper>

@@ -18,7 +18,7 @@ export const CategoriesContainer = styled.div`
     overflow: hidden;
   }
 
-  div.special{
+  div.special {
     ${props => !props.featured && css`
       display: none
     `}
