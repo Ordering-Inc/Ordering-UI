@@ -42,4 +42,9 @@ export const Title = styled.h1`
   margin-bottom: 8px;
   line-height: 30px;
   margin-top: 0;
+  text-align: center;
+
+  @media (min-width: 576px) {
+    text-align: left;
+  }
 `

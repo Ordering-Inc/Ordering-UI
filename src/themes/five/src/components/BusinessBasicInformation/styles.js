@@ -122,12 +122,18 @@ export const BusinessInfoItem = styled.div`
       font-size: 14px;
       color: ${props => props.theme?.colors.primary};
       text-decoration: underline;
-      &:first-child {
+      &:not(:last-child) {
         margin-right: 5px;
         ${props => props.theme?.rtl && css`
           margin-left: 5px;
           margin-right: 0;
         `}
+      }
+
+      &.dot {
+        font-size: 12px;
+        text-decoration: none;
+        color: #909BA9;
       }
     }
   }
@@ -149,7 +155,7 @@ export const BusinessInfoContent = styled.div``
 export const WrapperSearch = styled.div`
   margin: 15px 0px 0px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-end;
 
   .search-bar {
@@ -174,6 +180,16 @@ export const WrapperSearch = styled.div`
       text-align: left;
     `}
   }
+
+  #select-input {
+    background-color: transparent !important;
+    border: none;
+    color: #748194 !important;
+
+    #list {
+      border-radius: 8px;
+    }
+  }
 `
 
 export const BusinessDetail = styled.div`
@@ -184,6 +200,7 @@ export const BusinessDetail = styled.div`
     font-size: 14px;
     color: #909BA9;
     margin: 0 5px 0 0;
+    font-weight: normal;
     ${props => props.theme?.rtl && css`
       margin-left: 5px;
       margin-right: 0px;
@@ -211,6 +228,16 @@ export const BusinessDetail = styled.div`
     span {
       font-size: 14px;
     }
+  }
+
+  .dot {
+    color: #909BA9;
+    font-size: 12px;
+    margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
   }
 `
 

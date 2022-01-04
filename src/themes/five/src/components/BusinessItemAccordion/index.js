@@ -146,41 +146,23 @@ export const BusinessItemAccordion = (props) => {
                       </span>
                     )}
                     {!isClosed && !!isProducts && !isCartPending && !isStore && (
-                      <span
-                        ref={businessDelete}
-                        onClick={() => handleClearProducts()}
-                        className='clear-cart'
-                      >
-                        {t('CLEAR_CART', 'Clear cart')}
-                      </span>
+                      <>
+                        <span>•</span>
+                        <span
+                          ref={businessDelete}
+                          onClick={() => handleClearProducts()}
+                          className='clear-cart'
+                        >
+                          {t('CLEAR_CART', 'Clear cart')}
+                        </span>
+                      </>
                     )}
                     {isStore && (
                       <span onClick={handleChangeStore} className='change-store'>{t('CHANGE_STORE', 'Change store')}</span>
                     )}
                   </div>
                 </ContentInfo>
-                {
-                  !isStore && (
-                    orderState?.options?.type === 1 ? (
-                      <TimeInfo>
-                        <FiClock />
-                        {convertHoursToMinutes(business?.delivery_time)}
-                      </TimeInfo>
-                    ) : (
-                      <TimeInfo>
-                        <FiClock />
-                        {convertHoursToMinutes(business?.pickup_time)}
-                      </TimeInfo>
-                    )
-                  )
-                }
               </BusinessInfo>
-              {!isClosed && !!isProducts && !isStore && (
-                <BusinessTotal className='total' isCartOnProductsList={isCartOnProductsList}>
-                  {isValidProducts && orderTotal > 0 && <p>{parsePrice(orderTotal)}</p>}
-                  <p>{t('CART_TOTAL', 'Total')}</p>
-                </BusinessTotal>
-              )}
               {isClosed && !isStore && (
                 <BusinessTotal className='closed'>
                   <p>{t('CLOSED', 'Closed')} {moment}</p>
