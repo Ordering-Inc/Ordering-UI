@@ -20,6 +20,11 @@ export const WrapContent = styled.div`
   @media (min-width: 1200px) {
     padding: 0;
   }
+  &#businessProductList {
+    > div {
+      margin-top: 30px;
+    }
+  }
 `
 
 export const BusinessContent = styled.div`
