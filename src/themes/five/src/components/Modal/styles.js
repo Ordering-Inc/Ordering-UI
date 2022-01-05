@@ -92,8 +92,11 @@ export const ModalIcon = styled.span`
     right: 25px;
     left: initial;
   `}
+  ${({ isProductForm }) => isProductForm && css`
+    top: 18px;
+  `}
   svg{
-    background: rgba(255,255,255,0.5);
+    /* background: rgba(255,255,255,0.5); */
     border-radius: 50%;
   }
 
