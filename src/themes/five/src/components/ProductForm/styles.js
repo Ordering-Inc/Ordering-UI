@@ -240,20 +240,27 @@ export const ProductActions = styled.div`
       cursor: pointer;
     }
   }
+
   div:last-child {
     width: 100%;
     display: flex;
     align-items: center;
   }
 
-  button:disabled,
-  button.disabled,
-  svg.disabled {
-    opacity: 0.5;
+  svg {
+    color: ${props => props.theme.colors.primary};
   }
 
   svg.disabled {
     pointer-events: none;
+    color: #CED4DA;
+  }
+
+  button:disabled,
+  button.disabled {
+    background: #E9ECEF;
+    border: 1px solid #E9ECEF;
+    color: #B1BCCC;
   }
 
   button.add {

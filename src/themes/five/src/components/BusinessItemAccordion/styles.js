@@ -76,6 +76,12 @@ export const ContentInfo = styled.div`
       }
     }
 
+    ${({ isStore }) => isStore && css`
+      .clear-cart {
+        margin: 0px;
+      }
+    `}
+
     .change-store {
       cursor: pointer;
       text-decoration: underline;
@@ -198,9 +204,4 @@ export const BusinessActions = styled.div`
       }
     }
   }
-`
-
-export const TimeInfo = styled.div`
-  font-size: 13px;
-  color: ${props => props.theme.colors.darkTextColor};
 `

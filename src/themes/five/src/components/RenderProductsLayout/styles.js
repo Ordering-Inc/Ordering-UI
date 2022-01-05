@@ -87,9 +87,9 @@ export const BusinessCartContent = styled.div`
     margin: 0;
   }
 
-  .accordion.active {
-    padding: 10px 0;
-  }
+  /* .accordion.active {
+    padding-bottom: 10px;
+  } */
 
   ${({ isModal }) => !isModal && css`
     border: 1px solid #E9ECEF;

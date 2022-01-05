@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import FiClock from '@meronex/icons/fi/FiClock'
 import TiArrowSortedUp from '@meronex/icons/ti/TiArrowSortedUp'
-import { useOrder, useLanguage, useUtils, useEvent } from 'ordering-components'
-import { convertHoursToMinutes } from '../../../../../utils'
+import { useOrder, useLanguage, useEvent } from 'ordering-components'
 
 import {
   AccordionSection,
@@ -11,8 +9,7 @@ import {
   ContentInfo,
   BusinessInfo,
   BusinessTotal,
-  BusinessActions,
-  TimeInfo
+  BusinessActions
 } from './styles'
 
 export const BusinessItemAccordion = (props) => {
@@ -24,9 +21,7 @@ export const BusinessItemAccordion = (props) => {
     isClosed,
     moment,
     business,
-    orderTotal,
     isProducts,
-    isValidProducts,
     isForceOpenAccordion,
     isCartOnProductsList,
     handleClearProducts,
@@ -37,7 +32,6 @@ export const BusinessItemAccordion = (props) => {
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
 
   const [setActive, setActiveState] = useState('')
@@ -53,9 +47,6 @@ export const BusinessItemAccordion = (props) => {
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
     if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
-    // setHeightState(
-    //   setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
-    // )
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
     )
@@ -63,7 +54,6 @@ export const BusinessItemAccordion = (props) => {
 
   const activeAccordion = (value) => {
     setActiveState(value ? 'active' : '')
-    // setHeightState(value ? `${content.current.scrollHeight}px` : '0px')
     setRotateState(value ? 'accordion__icon rotate' : 'accordion__icon')
   }
 
@@ -108,10 +98,6 @@ export const BusinessItemAccordion = (props) => {
     }
   }, [])
 
-  const handleChangeStore = () => {
-    events.emit('go_to_page', { page: 'search' })
-  }
-
   useEffect(() => {
     handleCartOpen && handleCartOpen(!!setActive)
   }, [setActive])
@@ -133,32 +119,29 @@ export const BusinessItemAccordion = (props) => {
               onClick={(e) => toggleAccordion(e)}
             >
               <BusinessInfo>
-                <ContentInfo className='info'>
+                <ContentInfo className='info' isStore={isStore}>
                   <h2>{business?.name}</h2>
                   <div>
                     {handleStoreRedirect && !isCartOnProductsList && !isStore && (
-                      <span
-                        ref={businessStore}
-                        onClick={() => handleStoreRedirect(business?.slug)}
-                        className='go-store'
-                      >
-                        {t('GO_TO_STORE', 'Go to store')}
-                      </span>
-                    )}
-                    {!isClosed && !!isProducts && !isCartPending && !isStore && (
                       <>
-                        <span>•</span>
                         <span
-                          ref={businessDelete}
-                          onClick={() => handleClearProducts()}
-                          className='clear-cart'
+                          ref={businessStore}
+                          onClick={() => handleStoreRedirect(business?.slug)}
+                          className='go-store'
                         >
-                          {t('CLEAR_CART', 'Clear cart')}
+                          {t('GO_TO_STORE', 'Go to store')}
                         </span>
+                        <span>•</span>
                       </>
                     )}
-                    {isStore && (
-                      <span onClick={handleChangeStore} className='change-store'>{t('CHANGE_STORE', 'Change store')}</span>
+                    {!isClosed && !!isProducts && !isCartPending && (
+                      <span
+                        ref={businessDelete}
+                        onClick={() => handleClearProducts()}
+                        className='clear-cart'
+                      >
+                        {t('CLEAR_CART', 'Clear cart')}
+                      </span>
                     )}
                   </div>
                 </ContentInfo>
