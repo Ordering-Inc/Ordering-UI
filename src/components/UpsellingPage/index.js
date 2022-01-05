@@ -25,7 +25,7 @@ const UpsellingPageUI = (props) => {
     if (!isCustomMode) {
       if (upsellingProducts?.products?.length && !upsellingProducts.loading) {
         setCanOpenUpselling && setCanOpenUpselling(true)
-      } else if (!upsellingProducts?.products?.length && !upsellingProducts.loading && canOpenUpselling && openUpselling) {
+      } else if ((!upsellingProducts?.products?.length && !upsellingProducts.loading && !canOpenUpselling && openUpselling) || !upsellingProducts?.products?.length && !upsellingProducts.loading && openUpselling) {
         handleUpsellingPage()
       }
     }
@@ -105,7 +105,7 @@ const UpsellingPageUI = (props) => {
         <UpsellingLayout />
       ) : (
         <>
-          {(!canOpenUpselling || !upsellingProducts.loading) && (
+          {!canOpenUpselling || upsellingProducts?.products?.length === 0 ? '' : (
             <Modal
               title={t('WANT_SOMETHING_ELSE', 'Do you want something else?')}
               open={openUpselling}
