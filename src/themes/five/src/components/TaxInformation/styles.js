@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const TaxInformationContainer = styled.div`
   h2{
-    font-size: 18px;
+    font-size: 22px;
     margin: 10px;
+    text-align: center;
   }
 `
 
