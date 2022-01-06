@@ -455,3 +455,11 @@ export const DriverInfo = styled.div`
   border-top: 1px solid #E7E7E7;
   padding: 20px 0;
 `
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
+`

@@ -658,3 +658,11 @@ export const ExclamationWrapper = styled.div`
     color: ${props => props.theme?.colors?.primary}
   }
 `
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
+`

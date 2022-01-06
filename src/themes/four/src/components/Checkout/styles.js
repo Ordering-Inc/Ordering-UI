@@ -281,3 +281,11 @@ export const CouponContainer = styled.div`
   width: 100%;
   margin: 10px;
 `
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
+`
