@@ -473,9 +473,9 @@ const OrderDetailsUI = (props) => {
                     }
                     {
                       order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
-                        <tr key={tax.id}>
+                        <tr key={tax?.id}>
                           <td>
-                            {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
                               <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
@@ -486,11 +486,11 @@ const OrderDetailsUI = (props) => {
                       ))
                     }
                     {
-                      order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee.fixed === 0 && fee.percentage === 0))?.map(fee => (
+                      order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
                         <tr key={fee.id}>
                           <td>
-                            {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            ({parsePrice(fee?.fixed)} + {fee.percentage}%)
+                            {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            ({parsePrice(fee?.fixed)} + {fee?.percentage}%)
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
                               <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
