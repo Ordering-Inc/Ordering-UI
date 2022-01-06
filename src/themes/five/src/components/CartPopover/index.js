@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
+import { Cart3 } from 'react-bootstrap-icons'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
@@ -96,7 +96,7 @@ export const CartPopover = (props) => {
       <div style={{ overflow: 'hidden' }}>
         <HeaderItem ref={referenceElement} onClick={props.onClick} name='cart-popover'>
           <span>
-            <AiOutlineShoppingCart />
+            <Cart3 />
             {props.carts?.length > 0 && <span>{props.carts?.length}</span>}
           </span>
         </HeaderItem>

@@ -182,4 +182,8 @@ export const ContinueButton = styled.div`
 export const AddressTitle = styled.span`
   font-size: 16px;
   margin-bottom: 25px;
+  text-align: left;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
 `

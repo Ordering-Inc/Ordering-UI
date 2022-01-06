@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react'
-import BsPencil from '@meronex/icons/bs/BsPencil'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
-import VscTrash from '@meronex/icons/vsc/VscTrash'
+import {
+  Pencil,
+  Trash
+} from 'react-bootstrap-icons'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
@@ -158,12 +160,12 @@ export const ProductItemAccordion = (props) => {
                     <div>
                       {onEditProduct && (
                         <span ref={productActionsEdit}>
-                          <BsPencil color='#B1BCCC' onClick={() => onEditProduct(product)} />
+                          <Pencil color='#B1BCCC' onClick={() => onEditProduct(product)} />
                         </span>
                       )}
                       {onDeleteProduct && (
                         <span ref={productActionsDelete}>
-                          <VscTrash color='#B1BCCC' onClick={() => onDeleteProduct(product)} />
+                          <Trash color='#B1BCCC' onClick={() => onDeleteProduct(product)} />
                         </span>
                       )}
                     </div>
@@ -192,14 +194,14 @@ export const ProductItemAccordion = (props) => {
                     onClick={() => onEditProduct(product)}
                     disabled={orderState.loading}
                   >
-                    <BsPencil color='#B1BCCC' />
+                    <Pencil color='#B1BCCC' />
                   </ProductActionsEdit>
                   <ProductActionsDelete
                     ref={productActionsDelete}
                     onClick={() => onDeleteProduct(product)}
                     disabled={orderState.loading}
                   >
-                    <VscTrash color='#B1BCCC' />
+                    <Trash color='#B1BCCC' />
                   </ProductActionsDelete>
                 </ProductActions>
               )}
@@ -214,14 +216,14 @@ export const ProductItemAccordion = (props) => {
                   onClick={() => onEditProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <BsPencil color='#B1BCCC' />
+                  <Pencil color='#B1BCCC' />
                 </ProductActionsEdit>
                 <ProductActionsDelete
                   ref={productActionsDelete}
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <VscTrash color='#B1BCCC' />
+                  <Trash color='#B1BCCC' />
                 </ProductActionsDelete>
               </ProductActions>
               <ProductNotAvailable>
@@ -238,7 +240,7 @@ export const ProductItemAccordion = (props) => {
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 >
-                  <VscTrash color='#D81212' />
+                  <Trash color='#D81212' />
                 </ProductActionsDelete>
               </ProductActions>
               <ProductNotAvailable>
