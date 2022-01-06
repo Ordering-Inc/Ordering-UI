@@ -123,25 +123,25 @@ export const BusinessItemAccordion = (props) => {
                   <h2>{business?.name}</h2>
                   <div>
                     {handleStoreRedirect && !isCartOnProductsList && !isStore && (
-                      <>
-                        <span
-                          ref={businessStore}
-                          onClick={() => handleStoreRedirect(business?.slug)}
-                          className='go-store'
-                        >
-                          {t('GO_TO_STORE', 'Go to store')}
-                        </span>
-                        <span>•</span>
-                      </>
+                      <span
+                        ref={businessStore}
+                        onClick={() => handleStoreRedirect(business?.slug)}
+                        className='go-store'
+                      >
+                        {t('GO_TO_STORE', 'Go to store')}
+                      </span>
                     )}
                     {!isClosed && !!isProducts && !isCartPending && (
-                      <span
-                        ref={businessDelete}
-                        onClick={() => handleClearProducts()}
-                        className='clear-cart'
-                      >
-                        {t('CLEAR_CART', 'Clear cart')}
-                      </span>
+                      <>
+                        {!isStore && <span>•</span>}
+                        <span
+                          ref={businessDelete}
+                          onClick={() => handleClearProducts()}
+                          className='clear-cart'
+                        >
+                          {t('CLEAR_CART', 'Clear cart')}
+                        </span>
+                      </>
                     )}
                   </div>
                 </ContentInfo>

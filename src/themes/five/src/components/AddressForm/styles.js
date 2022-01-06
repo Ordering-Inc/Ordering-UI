@@ -10,18 +10,9 @@ export const FormActions = styled.div`
   button {
     height: 44px;
     width: 100%;
-    position: relative;
-
-    svg {
-      font-size: 25px;
-      position: absolute;
-      ${props => props.theme?.rtl ? css`
-        left: 30px;
-        transform: rotateZ(180deg);
-      ` : css`
-        right: 30px; 
-      `}
-      top: 8px;
+    text-transform: lowercase;
+    &:first-letter {
+      text-transform: uppercase;
     }
   }
 `
@@ -189,7 +180,7 @@ export const AddressTagSection = styled.div`
       align-items: center;
 
       svg {
-        font-size: 25px;
+        font-size: 30px;
       }
     }
   }

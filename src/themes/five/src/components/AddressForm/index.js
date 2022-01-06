@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import {
   Heart,
   Building,
   PlusLg,
-  House
+  House,
+  GeoAlt
 } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 import {
@@ -402,7 +402,7 @@ const AddressFormUI = (props) => {
                       handleChangeAddress(e)
                     }}
                     onError={setMapErrors}
-                    IconButton={HiOutlineLocationMarker}
+                    IconButton={GeoAlt}
                     IconLoadingButton={CgSearchLoading}
                   />
                 </AddressWrap>
@@ -504,9 +504,8 @@ const AddressFormUI = (props) => {
                     {
                       isEditing || (!auth && orderState.options?.address?.address)
                         ? t('UPDATE', 'Update')
-                        : t('CONTINUE', 'Continue')
+                        : t('ADD_ADDRESS', 'Add address')
                     }
-                    <BsArrowRight />
                   </>
                 ) : (
                   t('LOADING', 'Loading')
