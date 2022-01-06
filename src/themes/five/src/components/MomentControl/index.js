@@ -47,7 +47,7 @@ const MomentControlUI = (props) => {
   const [maxDate, setMaxDate] = useState(new Date())
   const [isASP, setIsASP] = useState(false)
   const [timeLists, setTimeLists] = useState(null)
-  const [timeFormat, setTimeFormat] = useState('AM')
+  const [timeFormat, setTimeFormat] = useState('')
 
   const onDateChange = (value) => {
     onChange(value)
@@ -83,13 +83,13 @@ const MomentControlUI = (props) => {
   }
 
   const handleChangeTimeFormat = () => {
-    if (configs?.format_time?.value === '24') return
+    if (configs?.format_time?.value !== '12') return
     setTimeFormat(prev => prev === 'AM' ? 'PM' : 'AM')
   }
 
   useEffect(() => {
-    if (configs?.format_time?.value === '24') setTimeFormat('')
-    else setTimeFormat('AM')
+    if (configs?.format_time?.value === '12') setTimeFormat('AM')
+    else setTimeFormat('')
   }, [configs?.format_time?.value])
 
   useEffect(() => {

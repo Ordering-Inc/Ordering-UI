@@ -220,7 +220,7 @@ export const BusinessBasicInformation = (props) => {
           />
         </Modal>
         <Modal
-          width='70%'
+          width='700px'
           open={isPreOrder}
           onClose={() => setIsPreOrder(false)}
           padding='20px'

@@ -5,7 +5,7 @@ export const Title = styled.div`
   font-weight: 600;
   text-align: center;
   margin-bottom: 40px;
-  color: ${props => props.theme.colors.darkTextColor};
+  color: ${props => props.theme.colors?.darkTextColor};
 
   @media (max-width: 450px) {
     padding-left: 30px;
@@ -43,10 +43,10 @@ export const CheckBoxWrapper = styled.div`
   ${({ highlight }) => highlight && css`
     span {
       font-weight: 600;
-      color: ${props => props.theme.colors.darkTextColor};
+      color: ${props => props.theme.colors?.darkTextColor};
     }
     svg {
-      color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors?.primary};
     }
   `}
 
@@ -130,7 +130,7 @@ export const DateWrapper = styled.div`
 
     .react-calendar__tile:disabled {
       background-color: transparent;
-      color: ${props => props.theme?.colors.disabled};
+      color: ${props => props.theme.colors?.disabled};
       cursor: not-allowed;
     }
 
