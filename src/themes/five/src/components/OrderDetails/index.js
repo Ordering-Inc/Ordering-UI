@@ -576,7 +576,7 @@ const OrderDetailsUI = (props) => {
           onClose={() => setOpenTaxModal({ open: false, tax: null })}
           modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
         >
-          <TaxInformation data={openTaxModal.data} products={order?.products} />
+          <TaxInformation data={openTaxModal?.data} products={order?.products} />
         </Modal>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (

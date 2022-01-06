@@ -325,7 +325,7 @@ const OrderDetailsUI = (props) => {
                         ))
                       }
                       {
-                        order.fees.length > 0 && order.fees.map(fee => (
+                        order?.fees?.length > 0 && order?.fees?.map(fee => (
                           <tr key={fee.id}>
                             <td>
                               {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
@@ -589,7 +589,7 @@ const OrderDetailsUI = (props) => {
           onClose={() => setOpenTaxModal({ open: false, tax: null })}
           modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
         >
-          <TaxInformation data={openTaxModal.data} products={order?.products} />
+          <TaxInformation data={openTaxModal?.data} products={order?.products} />
         </Modal>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
