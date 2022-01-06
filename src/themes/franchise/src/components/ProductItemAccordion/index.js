@@ -158,12 +158,12 @@ export const ProductItemAccordion = (props) => {
                     <div>
                       {onEditProduct && (
                         <span ref={productActionsEdit}>
-                          <BsPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
+                          <BsPencil color='#B1BCCC' onClick={() => onEditProduct(product)} />
                         </span>
                       )}
                       {onDeleteProduct && (
                         <span ref={productActionsDelete}>
-                          <VscTrash color='#D81212' onClick={() => onDeleteProduct(product)} />
+                          <VscTrash color='#B1BCCC' onClick={() => onDeleteProduct(product)} />
                         </span>
                       )}
                     </div>

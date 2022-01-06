@@ -137,6 +137,12 @@ export const BusinessCartContent = styled.div`
     border: none;
   `}
 
+  @media (max-width: 576px) {
+    .info {
+      width: 100%;
+    }
+  }
+
   @media (min-width: 1200px) {
     position: sticky;
     top: 0;

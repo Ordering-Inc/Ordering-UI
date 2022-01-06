@@ -15,7 +15,7 @@ import {
 import {
   ProductsContainer,
   ProductLoading,
-  SkeletonItem,
+  SkeletonItem
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -76,6 +76,7 @@ const BusinessProductsListingUI = (props) => {
   const [productToIdLoading, setProductIdToLoading] = useState(null)
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
+  const hasScrollBar = document.documentElement.clientHeight < document.body.offsetHeight
 
   const sortByOptions = [
     { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
@@ -186,6 +187,13 @@ const BusinessProductsListingUI = (props) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
+
+  useEffect(() => {
+    const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
+
+    if (categoryState?.loading || loading || hasScrollBar || !hasMore || categorySelected?.name === 'All') return
+    getNextProducts()
+  }, [hasScrollBar, categoryState?.loading])
 
   return (
     <>

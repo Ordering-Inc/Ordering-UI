@@ -146,8 +146,10 @@ const ProductOptionsUI = (props) => {
   useEffect(() => {
     const imageList = []
     imageList.push(product?.images || theme.images?.dummies?.product)
-    for (const galleryItem of product?.gallery) {
-      imageList.push(galleryItem.file)
+    if (product?.gallery && product?.gallery?.length > 0) {
+      for (const galleryItem of product?.gallery) {
+        imageList.push(galleryItem?.file)
+      }
     }
     setGallery(imageList)
   }, [product])
@@ -298,12 +300,12 @@ const ProductOptionsUI = (props) => {
                             >
                               <WrapperSubOption className={isError(option.id)}>
                                 {
-                                  option.suboptions.map(suboption => {
-                                    const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
-                                    const balance = productCart.options[`id:${option.id}`]?.balance || 0
+                                  option.suboptions.filter(suboptions => suboptions.enabled).map(suboption => {
+                                    const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                    const balance = productCart.options[`id:${option?.id}`]?.balance || 0
                                     return (
                                       <ProductOptionSubOption
-                                        key={suboption.id}
+                                        key={suboption?.id}
                                         onChange={handleChangeSuboptionState}
                                         balance={balance}
                                         option={option}

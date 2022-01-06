@@ -36,9 +36,15 @@ import {
   ProductComment,
   SkeletonBlock,
   WrapperSubOption,
+  ProductMeta,
   SkuContent,
+  EstimatedPersons,
+  PriceContent,
   ProductFormTitle,
-  WrapperIngredients
+  WrapperIngredients,
+  ProductName,
+  Properties,
+  ProductDescription
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -144,8 +150,10 @@ const ProductOptionsUI = (props) => {
   useEffect(() => {
     const imageList = []
     if (product?.images) imageList.push(product?.images)
-    for (const galleryItem of product?.gallery) {
-      imageList.push(galleryItem.file)
+    if (product?.gallery && product?.gallery?.length > 0) {
+      for (const galleryItem of product?.gallery) {
+        imageList.push(galleryItem?.file)
+      }
     }
     setGallery(imageList)
   }, [product])
@@ -175,14 +183,14 @@ const ProductOptionsUI = (props) => {
           />
         )}
         {
-        props.beforeMidElements?.map((BeforeMidElements, i) => (
-          <React.Fragment key={i}>
-            {BeforeMidElements}
-          </React.Fragment>))
+          props.beforeMidElements?.map((BeforeMidElements, i) => (
+            <React.Fragment key={i}>
+              {BeforeMidElements}
+            </React.Fragment>))
         }
         {
-        props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-          <BeforeMidComponents key={i} {...props} />))
+          props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+            <BeforeMidComponents key={i} {...props} />))
         }
         {!loading && !error && product && (
           <>
@@ -253,14 +261,28 @@ const ProductOptionsUI = (props) => {
             </WrapperImage>
             <ProductInfo>
               <ProductFormTitle>
-                <h1>{product?.name}</h1>
-                {product?.description && <p>{product?.description}</p>}
-                {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
-                  <SkuContent>
-                    <h2>{t('SKU', theme?.defaultLanguages?.SKU || 'Sku')}</h2>
-                    <p>{product?.sku}</p>
-                  </SkuContent>
-                )}
+                <ProductName>{product?.name}</ProductName>
+                <Properties>
+                  <PriceContent>{parsePrice(product?.price)}</PriceContent>
+                  <ProductMeta>
+                    {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
+                      <SkuContent>
+                        <span>{t('SKU', theme?.defaultLanguages?.SKU || 'Sku')}&nbsp;</span>
+                        <span>{product?.sku}</span>
+                      </SkuContent>
+                    )}
+                    {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && product?.estimated_person && (
+                      <span>&nbsp;&#183;&nbsp;</span>
+                    )}
+                    {product?.estimated_person && (
+                      <EstimatedPersons>
+                        <span>{product?.estimated_person}&nbsp;</span>
+                        <span>{t('ESTIMATED_PERSONS', 'persons')}</span>
+                      </EstimatedPersons>
+                    )}
+                  </ProductMeta>
+                </Properties>
+                {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
               </ProductFormTitle>
               <ProductEdition>
                 {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
@@ -288,10 +310,10 @@ const ProductOptionsUI = (props) => {
                             >
                               <WrapperSubOption className={isError(option?.id)}>
                                 {
-                                  option.suboptions.map(suboption => {
+                                  option.suboptions.filter(suboptions => suboptions.enabled).map(suboption => {
                                     const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
                                     const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                    return suboption?.enabled ? (
+                                    return (
                                       <ProductOptionSubOption
                                         key={suboption?.id}
                                         onChange={handleChangeSuboptionState}
@@ -300,7 +322,7 @@ const ProductOptionsUI = (props) => {
                                         suboption={suboption}
                                         state={currentState}
                                       />
-                                    ) : null
+                                    )
                                   })
                                 }
                               </WrapperSubOption>
@@ -322,14 +344,14 @@ const ProductOptionsUI = (props) => {
                   />
                 </ProductComment>
                 {
-                props.afterMidElements?.map((MidElement, i) => (
-                  <React.Fragment key={i}>
-                    {MidElement}
-                  </React.Fragment>))
+                  props.afterMidElements?.map((MidElement, i) => (
+                    <React.Fragment key={i}>
+                      {MidElement}
+                    </React.Fragment>))
                 }
                 {
-                props.afterMidComponents?.map((MidComponent, i) => (
-                  <MidComponent key={i} {...props} />))
+                  props.afterMidComponents?.map((MidComponent, i) => (
+                    <MidComponent key={i} {...props} />))
                 }
               </ProductEdition>
               <ProductActions>

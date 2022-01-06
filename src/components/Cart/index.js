@@ -224,16 +224,18 @@ const CartUI = (props) => {
                     }
                     {
                       cart.fees.length > 0 && cart.fees.map(fee => (
-                        <tr key={fee.id}>
-                          <td>
-                            {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            ({parsePrice(fee?.fixed)} + {fee.percentage}%)
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
-                              <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>{parsePrice(fee?.summary?.fixed + fee?.summary?.percentage || 0)}</td>
-                        </tr>
+                        !(fee.fixed === 0 && fee.percentage === 0) && (
+                          <tr key={fee.id}>
+                            <td>
+                              {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              ({parsePrice(fee?.fixed)} + {fee.percentage}%)
+                              <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
+                                <BsInfoCircle size='20' color={theme.colors.primary} />
+                              </Exclamation>
+                            </td>
+                            <td>{parsePrice(fee?.summary?.fixed + fee?.summary?.percentage || 0)}</td>
+                          </tr>
+                        )
                       ))
                     }
                     {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
