@@ -497,7 +497,7 @@ export const ProductInfoContainer = styled.div`
 export const ProductInfoContent = styled.div`
   width: 60%;
   h1 {
-    color: ${props => props.theme.colors.darkGray};
+    color: ${props => props.theme.colors.secundary};
     font-weight: 500;
     font-size: 16px;
     margin: 0px;
@@ -509,7 +509,6 @@ export const ProductInfoContent = styled.div`
   @media (min-width: 768px) {
     width: calc(75% - 20px);
     h1 {
-      color: ${props => props.theme.colors.secundary};
       font-size: 20px;
     }
   }
