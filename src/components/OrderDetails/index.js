@@ -472,7 +472,7 @@ const OrderDetailsUI = (props) => {
                       )
                     }
                     {
-                      order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 || tax?.rate !== 0).map(tax => (
+                      order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
                         <tr key={tax.id}>
                           <td>
                             {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
