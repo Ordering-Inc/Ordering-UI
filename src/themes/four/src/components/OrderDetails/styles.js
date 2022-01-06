@@ -513,3 +513,11 @@ export const ReviewWrapper = styled.div`
     border-radius: 7.6px;
   }
 `
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
+`
