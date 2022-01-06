@@ -40,7 +40,15 @@ import {
   WrapperSubOption,
   WrapperIngredients,
   ProductTabContainer,
-  ModalIcon
+  ModalIcon,
+  ProductFormTitle,
+  SkuContent,
+  ProductName,
+  Properties,
+  ProductMeta,
+  EstimatedPersons,
+  ProductDescription,
+  PriceContent
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -182,7 +190,6 @@ const ProductOptionsUI = (props) => {
       <ProductContainer className='product-container'>
         <ModalIcon>
           <MdClose onClick={() => onClose()} color='#748194' />
-          <h1>{productName || product?.name}</h1>
         </ModalIcon>
         {loading && !error && (
           <SkeletonBlock width={90}>
@@ -191,16 +198,15 @@ const ProductOptionsUI = (props) => {
             <Skeleton variant='rect' height={200} />
           </SkeletonBlock>
         )}
-
         {
-        props.beforeMidElements?.map((BeforeMidElements, i) => (
-          <React.Fragment key={i}>
-            {BeforeMidElements}
-          </React.Fragment>))
+          props.beforeMidElements?.map((BeforeMidElements, i) => (
+            <React.Fragment key={i}>
+              {BeforeMidElements}
+            </React.Fragment>))
         }
         {
-        props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-          <BeforeMidComponents key={i} {...props} />))
+          props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+            <BeforeMidComponents key={i} {...props} />))
         }
         {!loading && !error && product && (
           <>
@@ -216,6 +222,30 @@ const ProductOptionsUI = (props) => {
                 />
               </ProductImage>
             </WrapperImage>
+            <ProductFormTitle>
+              <ProductName>{productName || product?.name}</ProductName>
+              <Properties>
+                <PriceContent>{parsePrice(product?.price)}</PriceContent>
+                <ProductMeta>
+                  {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
+                    <SkuContent>
+                      <span>{t('SKU', theme?.defaultLanguages?.SKU || 'Sku')}&nbsp;</span>
+                      <span>{product?.sku}</span>
+                    </SkuContent>
+                  )}
+                  {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && product?.estimated_person && (
+                    <span>&nbsp;&#183;&nbsp;</span>
+                  )}
+                  {product?.estimated_person && (
+                    <EstimatedPersons>
+                      <span>{product?.estimated_person}&nbsp;</span>
+                      <span>{t('ESTIMATED_PERSONS', 'persons')}</span>
+                    </EstimatedPersons>
+                  )}
+                </ProductMeta>
+              </Properties>
+              {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
+            </ProductFormTitle>
             <ProductInfo>
               <ProductEdition>
                 <ProductTabContainer>
@@ -310,14 +340,14 @@ const ProductOptionsUI = (props) => {
                   />
                 </ProductComment>
                 {
-                props.afterMidElements?.map((MidElement, i) => (
-                  <React.Fragment key={i}>
-                    {MidElement}
-                  </React.Fragment>))
+                  props.afterMidElements?.map((MidElement, i) => (
+                    <React.Fragment key={i}>
+                      {MidElement}
+                    </React.Fragment>))
                 }
                 {
-                props.afterMidComponents?.map((MidComponent, i) => (
-                  <MidComponent key={i} {...props} />))
+                  props.afterMidComponents?.map((MidComponent, i) => (
+                    <MidComponent key={i} {...props} />))
                 }
               </ProductEdition>
               <ProductActions isIOS={isIOS}>
