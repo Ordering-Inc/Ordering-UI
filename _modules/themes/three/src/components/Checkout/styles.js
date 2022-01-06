@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperUserDetails = exports.WrapperPlaceOrderButton = exports.WrappContainer = exports.WarningText = exports.WarningMessage = exports.UserDetailsContainer = exports.RightInnerContainer = exports.RightContainer = exports.PaymentMethodHeader = exports.PaymentMethodContainer = exports.OrderBill = exports.NotFoundImage = exports.LeftContainer = exports.DriverTipContainer = exports.CouponContainer = exports.CouponAddButton = exports.Container = exports.ConfirmInfoItem = exports.CheckoutConfirmInfo = exports.CartsList = exports.CartContainer = exports.BusinessDetailsContainer = void 0;
+exports.WrapperUserDetails = exports.WrapperPlaceOrderButton = exports.WrappContainer = exports.WarningText = exports.WarningMessage = exports.UserDetailsContainer = exports.RightInnerContainer = exports.RightContainer = exports.PaymentMethodHeader = exports.PaymentMethodContainer = exports.OrderBill = exports.NotFoundImage = exports.LeftContainer = exports.Exclamation = exports.DriverTipContainer = exports.CouponContainer = exports.CouponAddButton = exports.Container = exports.ConfirmInfoItem = exports.CheckoutConfirmInfo = exports.CartsList = exports.CartContainer = exports.BusinessDetailsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -131,3 +131,7 @@ exports.CouponAddButton = CouponAddButton;
 var CouponContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  padding: 10px;\n  h2 {\n    font-size: 24px;\n  }\n\n  > div {\n    width: 100%;\n    flex-direction: column;\n\n    input {\n      margin-bottom: 15px;\n      background-color: #F6F6F6;\n      width: 100%;\n      box-sizing: border-box;\n    }\n    button {\n      margin: 0px;\n      height: 41px;\n    }\n  }\n"])));
 
 exports.CouponContainer = CouponContainer;
+
+var Exclamation = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  position: relative;\n  display: inline-flex;\n  cursor: pointer;\n  margin-left: 5px;\n  top: 3px;\n"])));
+
+exports.Exclamation = Exclamation;

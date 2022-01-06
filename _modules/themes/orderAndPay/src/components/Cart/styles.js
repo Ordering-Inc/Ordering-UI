@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UpsellingPageTitleWrapper = exports.Title = exports.OrderBill = exports.ModalIcon = exports.Divider = exports.CouponContainer = exports.ContainerTop = exports.Container = exports.CheckoutAction = exports.CartSticky = exports.CartContainer = exports.BorderProductAccordion = void 0;
+exports.UpsellingPageTitleWrapper = exports.Title = exports.OrderBill = exports.ModalIcon = exports.Exclamation = exports.Divider = exports.CouponContainer = exports.ContainerTop = exports.Container = exports.CheckoutAction = exports.CartSticky = exports.CartContainer = exports.BorderProductAccordion = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -102,3 +102,7 @@ exports.Title = Title;
 var ModalIcon = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 13px 0px;\n  display: flex;\n  align-items:center;\n  margin-right: 20px;\n"])));
 
 exports.ModalIcon = ModalIcon;
+
+var Exclamation = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: relative;\n  display: inline-flex;\n  cursor: pointer;\n  margin-left: 5px;\n  top: 3px;\n"])));
+
+exports.Exclamation = Exclamation;

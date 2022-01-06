@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperDriver = exports.WrapperContainer = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.ShareOrder = exports.SectionContainer = exports.ReviewsAction = exports.ReviewWrapper = exports.OrderProducts = exports.OrderPayMethodIcon = exports.OrderPayInfoWrapper = exports.OrderPayInfoContent = exports.OrderDriver = exports.OrderCustomer = exports.OrderBusinessHeaderImage = exports.OrderBusiness = exports.OrderBillDivider = exports.OrderBill = exports.MessagesIcon = exports.Map = exports.InfoBlock = exports.HeaderText = exports.HeaderInfo = exports.HeaderImg = exports.Header = exports.FootActions = exports.ExclamationWrapper = exports.Content = exports.Container = exports.BusinessWrapper = exports.BusinessInfo = exports.ActionsBlock = void 0;
+exports.WrapperDriver = exports.WrapperContainer = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.ShareOrder = exports.SectionContainer = exports.ReviewsAction = exports.ReviewWrapper = exports.OrderProducts = exports.OrderPayMethodIcon = exports.OrderPayInfoWrapper = exports.OrderPayInfoContent = exports.OrderDriver = exports.OrderCustomer = exports.OrderBusinessHeaderImage = exports.OrderBusiness = exports.OrderBillDivider = exports.OrderBill = exports.MessagesIcon = exports.Map = exports.InfoBlock = exports.HeaderText = exports.HeaderInfo = exports.HeaderImg = exports.Header = exports.FootActions = exports.ExclamationWrapper = exports.Exclamation = exports.Content = exports.Container = exports.BusinessWrapper = exports.BusinessInfo = exports.ActionsBlock = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -187,3 +187,7 @@ exports.OrderBusinessHeaderImage = OrderBusinessHeaderImage;
 var ReviewWrapper = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  .review-sent {\n    border-radius: 7.6px;\n  }\n"])));
 
 exports.ReviewWrapper = ReviewWrapper;
+
+var Exclamation = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  position: relative;\n  display: inline-flex;\n  cursor: pointer;\n  margin-left: 5px;\n  top: 3px;\n"])));
+
+exports.Exclamation = Exclamation;
