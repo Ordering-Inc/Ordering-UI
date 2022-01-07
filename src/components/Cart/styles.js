@@ -49,6 +49,20 @@ export const OrderBill = styled.div`
       }
     }
   }
+  table.comments {
+    margin-top: 20px;
+    tr {
+      td:nth-child(1) {
+        font-weight: bold;
+      }
+    }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 7.6px;
+      height: 77px;
+    }
+  }
 
   @media (min-width: 411px) {
     table {

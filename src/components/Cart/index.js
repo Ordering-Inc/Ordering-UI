@@ -4,7 +4,6 @@ import { useTheme } from 'styled-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
-
 import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { CouponControl } from '../CouponControl'
@@ -22,6 +21,7 @@ import {
 } from './styles'
 import { verifyDecimals } from '../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
+import { Input, TextArea } from '../../styles/Inputs'
 
 const CartUI = (props) => {
   const {
@@ -39,7 +39,8 @@ const CartUI = (props) => {
     isCartPopover,
     isForceOpenCart,
     isCartOnProductsList,
-    handleCartOpen
+    handleCartOpen,
+    handleChangeComment
   } = props
 
   const theme = useTheme()
@@ -274,8 +275,22 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
+                <table className='comments'>
+                  <tbody>
+                    <tr>
+                      <td>{t('COMMENTS', 'Comments')}</td>
+                    </tr>
+                  </tbody>
+                  <td>
+                    <TextArea
+                      placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
+                      onChange={(e) => handleChangeComment(e.target.value)}
+                    />
+                  </td>
+                </table>
               </OrderBill>
             )}
+
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
               <CheckoutAction>
                 <Button
