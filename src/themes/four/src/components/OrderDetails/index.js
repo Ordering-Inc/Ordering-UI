@@ -212,6 +212,16 @@ const OrderDetailsUI = (props) => {
     }
   }
 
+  const getIncludedTaxes = () => {
+    if (order?.taxes?.length === 0) {
+      return order.tax_type === 1 ? order?.summary?.tax ?? 0 : 0
+    } else {
+      return order?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -273,7 +283,7 @@ const OrderDetailsUI = (props) => {
                     <tbody>
                       <tr>
                         <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
-                        <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
+                        <td>{parsePrice(((order?.summary?.subtotal || order?.subtotal) + getIncludedTaxes()))}</td>
                       </tr>
                       {(order?.summary?.discount > 0 || order?.discount > 0) && (
                         <tr>
@@ -311,10 +321,10 @@ const OrderDetailsUI = (props) => {
                         )
                       }
                       {
-                        order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2).map(tax => (
-                          <tr key={tax.id}>
+                        order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
+                          <tr key={tax?.id}>
                             <td>
-                              {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                               <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                               <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
                                 <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
@@ -325,10 +335,11 @@ const OrderDetailsUI = (props) => {
                         ))
                       }
                       {
-                        order?.fees?.length > 0 && order?.fees?.map(fee => (
+                        order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
                           <tr key={fee.id}>
                             <td>
-                              {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              ({parsePrice(fee?.fixed)} + {fee?.percentage}%)
                               <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
                                 <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
                               </Exclamation>
@@ -471,14 +482,14 @@ const OrderDetailsUI = (props) => {
                 parseInt(order?.status) === 11 ||
                 parseInt(order?.status) === 12
               ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed) && (
-                <SectionContainer>
-                  <ReviewsAction>
-                    <Button color='primary' onClick={handleOpenReview}>
-                      {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
-                    </Button>
-                  </ReviewsAction>
-                </SectionContainer>
-              )}
+                  <SectionContainer>
+                    <ReviewsAction>
+                      <Button color='primary' onClick={handleOpenReview}>
+                        {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
+                      </Button>
+                    </ReviewsAction>
+                  </SectionContainer>
+                )}
 
               <SectionContainer>
                 <OrderCustomer>
