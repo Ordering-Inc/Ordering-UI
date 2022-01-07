@@ -36,8 +36,8 @@ export const BusinessReviewsUI = (props) => {
     if (value === 'all') {
       return {
         value: value,
-        content: value.toUpperCase(),
-        showOnSelected: value.toUpperCase()
+        content: t('ALL','ALL'),
+        showOnSelected: t('ALL','ALL')
       }
     } else {
       return {

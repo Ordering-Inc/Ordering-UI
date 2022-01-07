@@ -167,3 +167,11 @@ export const ModalIcon = styled.div`
   align-items:center;
   margin-right: 20px;
 `
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
+`

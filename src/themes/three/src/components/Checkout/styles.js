@@ -287,3 +287,11 @@ export const CouponContainer = styled.div`
     }
   }
 `
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
+`

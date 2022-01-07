@@ -31,6 +31,7 @@ import FaCcStripe from '@meronex/icons/fa/FaCcStripe'
 import FaStripeS from '@meronex/icons/fa/FaStripeS'
 import GrStripe from '@meronex/icons/gr/GrStripe'
 import EnPaypal from '@meronex/icons/en/EnPaypal'
+import AiOutlineExclamationCircle from '@meronex/icons/ai/AiOutlineExclamationCircle'
 
 import {
   Container,
@@ -63,10 +64,12 @@ import {
   OrderPayMethodIcon,
   SectionContainer,
   OrderBusinessHeaderImage,
-  ReviewWrapper
+  ReviewWrapper,
+  Exclamation
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
+import { TaxInformation } from '../TaxInformation'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -95,6 +98,7 @@ const OrderDetailsUI = (props) => {
   const [isDriverReviewed, setIsDriverReviewed] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
+  const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
 
   const { order, loading, businessData, error } = props.order
 
@@ -208,6 +212,16 @@ const OrderDetailsUI = (props) => {
     }
   }
 
+  const getIncludedTaxes = () => {
+    if (order?.taxes?.length === 0) {
+      return order.tax_type === 1 ? order?.summary?.tax ?? 0 : 0
+    } else {
+      return order?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -269,7 +283,7 @@ const OrderDetailsUI = (props) => {
                     <tbody>
                       <tr>
                         <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
-                        <td>{parsePrice(order?.summary?.subtotal || order?.subtotal)}</td>
+                        <td>{parsePrice(((order?.summary?.subtotal || order?.subtotal) + getIncludedTaxes()))}</td>
                       </tr>
                       {(order?.summary?.discount > 0 || order?.discount > 0) && (
                         <tr>
@@ -285,15 +299,54 @@ const OrderDetailsUI = (props) => {
                         </tr>
                       )}
                       {
-                        order?.tax_type !== 1 && (
+                        order?.taxes?.length === 0 && order?.tax_type === 2 && (
                           <tr>
                             <td>
-                              {t('TAX', theme?.defaultLanguages?.TAX || 'Tax')}{' '}
+                              {t('TAX', 'Tax')}
                               <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
                             </td>
-                            <td>{parsePrice(order?.summary?.tax || order?.totalTax)}</td>
+                            <td>{parsePrice(order?.summary?.tax || 0)}</td>
                           </tr>
                         )
+                      }
+                      {
+                        order?.fees?.length === 0 && (
+                          <tr>
+                            <td>
+                              {t('SERVICE_FEE', 'Service fee')}
+                              <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
+                            </td>
+                            <td>{parsePrice(order?.summary?.service_fee || 0)}</td>
+                          </tr>
+                        )
+                      }
+                      {
+                        order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
+                          <tr key={tax?.id}>
+                            <td>
+                              {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                              <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
+                                <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              </Exclamation>
+                            </td>
+                            <td>{parsePrice(tax?.summary?.tax || 0)}</td>
+                          </tr>
+                        ))
+                      }
+                      {
+                        order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
+                          <tr key={fee.id}>
+                            <td>
+                              {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              ({parsePrice(fee?.fixed)} + {fee?.percentage}%)
+                              <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
+                                <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              </Exclamation>
+                            </td>
+                            <td>{parsePrice(fee?.fixed + fee?.summary?.percentage || 0)}</td>
+                          </tr>
+                        ))
                       }
                       {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
                         <tr>
@@ -308,20 +361,13 @@ const OrderDetailsUI = (props) => {
                             {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
                               parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
                               !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                            (
-                              <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
-                            )}
+                              (
+                                <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
+                              )}
                           </td>
                           <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
                         </tr>
                       )}
-                      <tr>
-                        <td>
-                          {t('SERVICE_FEE', theme?.defaultLanguages?.SERVICE_FEE || 'Service Fee')}{' '}
-                          <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
-                        </td>
-                        <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee || 0)}</td>
-                      </tr>
                     </tbody>
                   </table>
                   <OrderBillDivider />
@@ -436,14 +482,14 @@ const OrderDetailsUI = (props) => {
                 parseInt(order?.status) === 11 ||
                 parseInt(order?.status) === 12
               ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed) && (
-                <SectionContainer>
-                  <ReviewsAction>
-                    <Button color='primary' onClick={handleOpenReview}>
-                      {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
-                    </Button>
-                  </ReviewsAction>
-                </SectionContainer>
-              )}
+                  <SectionContainer>
+                    <ReviewsAction>
+                      <Button color='primary' onClick={handleOpenReview}>
+                        {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
+                      </Button>
+                    </ReviewsAction>
+                  </SectionContainer>
+                )}
 
               <SectionContainer>
                 <OrderCustomer>
@@ -544,6 +590,18 @@ const OrderDetailsUI = (props) => {
             </Modal>
           )
         }
+        <Modal
+          width='70%'
+          open={openTaxModal.open}
+          padding='20px'
+          closeOnBackdrop
+          title={`${openTaxModal.data?.name ||
+            t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`}) `}
+          onClose={() => setOpenTaxModal({ open: false, tax: null })}
+          modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <TaxInformation data={openTaxModal?.data} products={order?.products} />
+        </Modal>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

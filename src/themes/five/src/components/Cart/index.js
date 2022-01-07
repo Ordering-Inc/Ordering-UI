@@ -22,7 +22,7 @@ import {
   Exclamation
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
-import AiOutlineExclamationCircle from '@meronex/icons/ai/AiOutlineExclamationCircle'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 const CartUI = (props) => {
   const {
     currentCartUuid,
@@ -130,9 +130,20 @@ const CartUI = (props) => {
     handleClickCheckout()
   }
 
+  const getIncludedTaxes = () => {
+    if (cart?.taxes === null) {
+      return cart.business.tax_type === 1 ? cart?.tax : 0
+    } else {
+      return cart?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
   useEffect(() => {
     if (isCustomMode) setIsUpselling(true)
   }, [isCustomMode])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -181,7 +192,7 @@ const CartUI = (props) => {
                   <tbody>
                     <tr>
                       <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                      <td>{cart.business.tax_type === 1 ? parsePrice((cart?.subtotal + cart?.tax) || 0) : parsePrice(cart?.subtotal || 0)}</td>
+                      <td>{parsePrice(cart?.subtotal + getIncludedTaxes())}</td>
                     </tr>
                     {cart?.discount > 0 && cart?.total >= 0 && (
                       <tr>
@@ -197,16 +208,30 @@ const CartUI = (props) => {
                       </tr>
                     )}
                     {
-                      cart.taxes.length > 0 && cart.taxes.map(tax => (
+                      cart.taxes?.length > 0 && cart.taxes.filter(tax => tax.type === 2 && tax?.rate !== 0).map(tax => (
                         <tr key={tax.id}>
-                          <td style={{ display: 'flex' }}>
+                          <td>
                             {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, tax })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
-                          <td>{parsePrice(tax?.total || 0)}</td>
+                          <td>{parsePrice(tax?.summary?.tax || 0)}</td>
+                        </tr>
+                      ))
+                    }
+                    {
+                      cart?.fees?.length > 0 && cart?.fees?.filter(fee => !(fee.fixed === 0 && fee.percentage === 0))?.map(fee => (
+                        <tr key={fee.id}>
+                          <td>
+                            {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            ({parsePrice(fee?.fixed)} + {fee.percentage}%)
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
+                            </Exclamation>
+                          </td>
+                          <td>{parsePrice(fee?.summary?.fixed + fee?.summary?.percentage || 0)}</td>
                         </tr>
                       ))
                     }
@@ -221,25 +246,15 @@ const CartUI = (props) => {
                         <td>
                           {t('DRIVER_TIP', 'Driver tip')}{' '}
                           {cart?.driver_tip_rate > 0 &&
-                          parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                          !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                        (
-                          <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>
-                        )}
+                            parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
+                            !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
+                            (
+                              <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>
+                            )}
                         </td>
                         <td>{parsePrice(cart?.driver_tip)}</td>
                       </tr>
                     )}
-                    {cart?.service_fee > 0 && (
-                      <tr>
-                        <td>
-                          {t('SERVICE_FEE', 'Service Fee')}{' '}
-                          <span>{`(${verifyDecimals(cart?.business?.service_fee, parseNumber)}%)`}</span>
-                        </td>
-                        <td>{parsePrice(cart?.service_fee)}</td>
-                      </tr>
-                    )}
-
                   </tbody>
                 </table>
                 {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
@@ -271,9 +286,9 @@ const CartUI = (props) => {
                   {!cart?.valid_address ? (
                     t('OUT_OF_COVERAGE', 'Out of Coverage')
                   ) : !cart?.valid_maximum ? (
-                  `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
+                    `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
                   ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
-                  `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+                    `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
                   ) : !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
                 </Button>
               </CheckoutAction>
@@ -312,11 +327,12 @@ const CartUI = (props) => {
             open={openTaxModal.open}
             padding='20px'
             closeOnBackdrop
-            title={`${openTaxModal.tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (${openTaxModal.tax?.rate}%) `}
+            title={`${openTaxModal.data?.name ||
+              t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`}) `}
             onClose={() => setOpenTaxModal({ open: false, tax: null })}
             modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
           >
-            <TaxInformation tax={openTaxModal.tax} products={cart.products} />
+            <TaxInformation data={openTaxModal.data} products={cart.products} />
           </Modal>
           {(openUpselling || isUpselling) && (
             <UpsellingPage
