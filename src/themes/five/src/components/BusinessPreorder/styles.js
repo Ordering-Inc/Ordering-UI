@@ -184,6 +184,48 @@ export const TimeItem = styled.div`
 
 export const DateWrapper = styled.div``
 
+export const DaysSwiper = styled.div`
+  width: 100%;
+  position: relative;
+  border-top: 1px solid #E9ECEF;
+  border-bottom: 1px solid #E9ECEF;
+
+  .swiper-datelist {
+    padding: 0 20px;
+    .swiper-button-prev {
+      background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 16 16' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 00-1.659-.753l-5.48 4.796a1 1 0 000 1.506z'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-position: center;
+      width: 20px;
+    }
+
+    .swiper-button-prev::after {
+      display: none;
+    }
+    .swiper-button-next {
+      background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 16 16' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 011.659-.753l5.48 4.796a1 1 0 010 1.506z'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-position: center;
+      width: 18px;
+    }
+
+    .swiper-button-next::after {
+      display: none;
+    }
+
+    .swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+      right: 0px;
+      left: auto;
+    }
+    .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+      left: 0px;
+      right: auto;
+    }
+  }
+`
+
 export const MonthYearLayer = styled.div`
   margin-top: 0px;
   margin-bottom: 13px;
@@ -215,154 +257,38 @@ export const Layer = styled.div`
   `}
 `
 
-export const Days = styled.div`
-  display: flex;
-  border: 1px solid #d9d9d9;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  margin-bottom: 20px;
-  width: 100%;
-  flex-wrap: wrap;
-  position: relative;
-`
-
-export const ContentDay = styled.div`
-  display: flex;
-  flex-grow: 1;
-  margin: 10px 0;
-  padding: 3px 0;
-  flex-direction: column;
-  align-items: center;
-  border-right: 1px solid #d9d9d9;
-  ${props => props.theme?.rtl && css`
-    border-right: 0;
-    border-left: 1px solid #d9d9d9;
-  `}
-`
-
 export const Day = styled.div`
   display: flex;
   flex-grow: 1;
-  padding: 5px 0;
+  color: #B1BCCC;
+  cursor: pointer;
+  padding: 14px 0 13px 0;
+  flex-direction: column;
   align-items: center;
-  font-weight: 300;
-  color: #9A9A9A;
-  width: calc(100% / 3);
-  /**
-    ** Modify this validation in case the dates to display change
-   */
-  &:nth-child(1) div,
-  &:nth-child(2) div,
-  &:nth-child(3) div {
-    margin-bottom: 5px;
-  }
-
-  &:nth-child(3) div,
-  &:nth-child(6) div {
-    ${props => props.theme?.rtl ? css`
-        border-left: 0      
-    ` : css`
-       border-right: 0;
-    `}
-  }
-
-  &:nth-child(4) div,
-  &:nth-child(5) div,
-  &:nth-child(6) div {
-    margin-top: 5px;
-  }
-
-  @media (min-width: 426px) {
-    width: calc(100% / 6);
-    &:nth-child(3) div.content-day {
-      border-right: 1px solid #d9d9d9;
-      ${props => props.theme?.rtl && css`
-        border-right: 0;
-        border-left: 1px solid #d9d9d9;
-      `}
-    }
-  }
+  transition: background-color .16s ease -0.01s;
 
   ${({ selected }) => selected && css`
-    font-weight: 400;
-    color: ${props => props.theme.colors.primary};
+    color: #344050;
   `}
 
-
-  :last-child {
-    ${ContentDay} {
-      ${props => props.theme?.rtl ? css`
-        border-left: 0;
-      ` : css`
-        border-right: 0;
-      `}
-    }
-  }
-
   :hover {
-    background-color: #f9f9f9;
+    background-color: #e9ecef;
   }
 `
 
 export const DayName = styled.div`
   display: flex;
-  font-size: 20px;
+  font-size: 14px;
   line-height: 24px;
+  margin-bottom: 10px;
+  &:first-letter {
+    text-transform: uppercase;
+  }
 `
 
 export const DayNumber = styled.div`
   display: flex;
-  font-size: 24px;
-  line-height: 24px;
-`
-
-export const Hours = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`
-
-export const Hour = styled.div`
-  display: flex;
-  width: calc(50% - 5px);
-  justify-content: center;
-  cursor: pointer;
-  font-weight: 300;
-  border: 1px solid #d9d9d9;
-  border-radius: 1000px;
-  padding: 5px 10px;
-  margin-bottom: 7px;
-  box-sizing: border-box;
-
-  ${({ selected }) => selected && css`
-    border-color: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.primary};
-  `}
-
-  ${({ isLoading }) => isLoading && css`
-    pointer-events: none;
-  `}
-`
-
-export const MiddleLine = styled.span`
-  display: block;
-  width: 80%;
-  height: 1px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: ${props => props.theme.colors.disabled};
-
-  ${props => props.theme?.rtl && css`
-    left: initial;
-    right: 50%;
-    transform: translateX(50%);
-  `}
-
-  @media (min-width: 426px) {
-    display: none;
-  }
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
 `

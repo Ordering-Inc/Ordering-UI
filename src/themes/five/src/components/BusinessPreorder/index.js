@@ -13,6 +13,7 @@ import { Button } from '../../styles/Buttons'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
+import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 import {
   BusinessPreorderContainer,
   LogoWrapper,
@@ -28,9 +29,20 @@ import {
   TimeItem,
   Layer,
   MonthYearLayer,
-  Days, Day, DayName, DayNumber, ContentDay, MiddleLine
+  DaysSwiper,
+  Day,
+  DayName,
+  DayNumber
 } from './styles'
 import { BusinessMenuList } from '../BusinessMenuList'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, {
+  Navigation
+} from 'swiper'
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
+SwiperCore.use([Navigation])
 
 const BusinessPreorderUI = (props) => {
   const {
@@ -168,25 +180,51 @@ const BusinessPreorderUI = (props) => {
           <MonthYearLayer>
             <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
           </MonthYearLayer>
-          <Days name='days'>
-            {
-              datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10)).map(date => {
-                const dateParts = date.split('-')
-                const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
-                const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 3).toUpperCase()
-                const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
-                return (
-                  <Day key={dayNumber} selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
-                    <ContentDay className='content-day'>
-                      <DayName>{dayName}</DayName>
-                      <DayNumber>{dayNumber}</DayNumber>
-                    </ContentDay>
-                  </Day>
-                )
-              })
-            }
-            <MiddleLine />
-          </Days>
+          <DaysSwiper left={<BsCaretLeftFill />}>
+            <Swiper
+              spaceBetween={10}
+              navigation
+              breakpoints={{
+                0: {
+                  slidesPerView: 4,
+                  spaceBetween: 20
+                },
+                400: {
+                  slidesPerView: 5,
+                  spaceBetween: 20
+                },
+                550: {
+                  slidesPerView: 6,
+                  spaceBetween: 20
+                },
+                769: {
+                  slidesPerView: configs?.max_days_preorder?.value < 7 ? configs?.max_days_preorder?.value : 7,
+                  spaceBetween: 20
+                }
+              }}
+              freeMode
+              watchSlidesProgress
+              className='swiper-datelist'
+            >
+              {
+                datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10)).map(date => {
+                  const dateParts = date.split('-')
+                  const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
+                  const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2)
+                  const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
+                  return (
+                    <SwiperSlide key={dayNumber}>
+                      <Day selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
+                        <DayName>{dayName}</DayName>
+                        <DayNumber>{dayNumber}</DayNumber>
+                      </Day>
+                    </SwiperSlide>
+                  )
+                })
+              }
+            </Swiper>
+          </DaysSwiper>
+
         </DateWrapper>
 
         <TimeListWrapper>
