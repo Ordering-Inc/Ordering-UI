@@ -17,11 +17,14 @@ import {
   CheckoutAction,
   CouponContainer,
   CartSticky,
-  Exclamation
+  Exclamation,
+  Spinner,
+  CommentContainer
 } from './styles'
 import { verifyDecimals } from '../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
-import { Input, TextArea } from '../../styles/Inputs'
+import { TextArea } from '../../styles/Inputs'
+import { SpinnerLoader } from '../SpinnerLoader'
 
 const CartUI = (props) => {
   const {
@@ -40,7 +43,8 @@ const CartUI = (props) => {
     isForceOpenCart,
     isCartOnProductsList,
     handleCartOpen,
-    handleChangeComment
+    handleChangeComment,
+    commentState
   } = props
 
   const theme = useTheme()
@@ -275,19 +279,31 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                <table className='comments'>
-                  <tbody>
-                    <tr>
-                      <td>{t('COMMENTS', 'Comments')}</td>
-                    </tr>
-                  </tbody>
-                  <td>
-                    <TextArea
-                      placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
-                      onChange={(e) => handleChangeComment(e.target.value)}
-                    />
-                  </td>
-                </table>
+                {cart?.status !== 2 && (
+                  <table className='comments'>
+                    <tbody>
+                      <tr>
+                        <td>{t('COMMENTS', 'Comments')}</td>
+                      </tr>
+                      <tr>
+                        <CommentContainer>
+                          <TextArea
+                            defaultValue={cart?.comment}
+                            placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
+                            onChange={(e) => handleChangeComment(e.target.value)}
+                          />
+                          {commentState?.loading && (
+                            <Spinner>
+                              <SpinnerLoader
+                                style={{ height: 100 }}
+                              />
+                            </Spinner>
+                          )}
+                        </CommentContainer>
+                      </tr>
+                    </tbody>
+                  </table>
+                )}
               </OrderBill>
             )}
 

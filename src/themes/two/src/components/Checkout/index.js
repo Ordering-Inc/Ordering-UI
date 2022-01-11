@@ -29,6 +29,7 @@ import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { verifyDecimals } from '../../../../../utils'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { TaxInformation } from '../TaxInformation'
+import { TextArea } from '../../styles/Inputs'
 
 import {
   Container,
@@ -52,9 +53,12 @@ import {
   BusinessName,
   OrderBill,
   CouponContainer,
-  Exclamation
+  Exclamation,
+  Spinner,
+  CommentContainer
 } from './styles'
 import { Modal } from '../../../../../components/Modal'
+import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -77,7 +81,9 @@ const CheckoutUI = (props) => {
     handleOrderRedirect,
     isCustomerMode,
     isResetPaymethod,
-    setIsResetPaymethod
+    setIsResetPaymethod,
+    handleChangeComment,
+    commentState
   } = props
 
   const theme = useTheme()
@@ -563,6 +569,31 @@ const CheckoutUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
+                {cart?.status !== 2 && !cartState?.loading && (
+                  <table className='comments'>
+                    <tbody>
+                      <tr>
+                        <td>{t('COMMENTS', 'Comments')}</td>
+                      </tr>
+                      <tr>
+                        <CommentContainer>
+                          <TextArea
+                            defaultValue={cart?.comment}
+                            placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
+                            onChange={(e) => handleChangeComment(e.target.value)}
+                          />
+                          {commentState?.loading && (
+                            <Spinner>
+                              <SpinnerLoader
+                                style={{ height: 100 }}
+                              />
+                            </Spinner>
+                          )}
+                        </CommentContainer>
+                      </tr>
+                    </tbody>
+                  </table>
+                )}
               </OrderBill>
             )}
 
@@ -587,7 +618,7 @@ const CheckoutUI = (props) => {
           onClose={() => setOpenTaxModal({ open: false, tax: null })}
           modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
         >
-          <TaxInformation data={openTaxModal.data} products={cart.products} />
+          <TaxInformation data={openTaxModal.data} products={cart?.products} />
         </Modal>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
