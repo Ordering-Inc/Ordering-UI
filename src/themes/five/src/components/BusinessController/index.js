@@ -3,7 +3,6 @@ import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrd
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
-import { Modal } from '../Modal'
 import { convertHoursToMinutes } from '../../../../../utils'
 
 import {
@@ -29,7 +28,6 @@ import BisStar from '@meronex/icons/bi/BisStar'
 import FaCrown from '@meronex/icons/fa/FaCrown'
 import BiCar from '@meronex/icons/bi/BiCar'
 import BiBasket from '@meronex/icons/bi/BiBasket'
-import { BusinessPreorder } from '../BusinessPreorder'
 
 const BusinessControllerUI = (props) => {
   const {
@@ -41,7 +39,8 @@ const BusinessControllerUI = (props) => {
     isCustomLayout,
     isShowCallcenterInformation,
     isBusinessOpen,
-    businessWillCloseSoonMinutes
+    businessWillCloseSoonMinutes,
+    onPreorderBusiness
   } = props
 
   const theme = useTheme()
@@ -50,14 +49,14 @@ const BusinessControllerUI = (props) => {
   const [orderState] = useOrder()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [isPreorder, setIsPreorder] = useState(false)
 
   // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   // }
 
-  const handleOpenPreorder = () => {
-    setIsPreorder(true)
+  const handleBusinessClick = () => {
+    if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business)
+    else handleClick(business)
   }
 
   return (
@@ -69,7 +68,7 @@ const BusinessControllerUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton}>
-        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!isBusinessOpen ? handleOpenPreorder() : handleClick(business))}>
+        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
           <BusinessHero>
             {isSkeleton ? (
               <Skeleton height={100} />
@@ -183,13 +182,6 @@ const BusinessControllerUI = (props) => {
         onAccept={() => setAlertState({ open: false, content: [] })}
         closeOnBackdrop={false}
       />
-      <Modal
-        open={isPreorder}
-        width='60%'
-        onClose={() => setIsPreorder(false)}
-      >
-        <BusinessPreorder {...props} />
-      </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

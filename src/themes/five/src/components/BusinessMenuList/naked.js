@@ -11,12 +11,12 @@ export const BusinessMenuListing = (props) => {
 
   const [ordering] = useApi()
   /**
-   * Object to save products, loading and error values
+   * Object to save menus, loading and error values
    */
   const [businessMenuList, setBusinessMenuList] = useState({ menus: [], loading: true, error: false })
 
   /**
-   * Method to get products from API
+   * Method to get menus from API
    */
   const getBusinessMenus = async () => {
     try {
@@ -71,14 +71,6 @@ BusinessMenuListing.propTypes = {
    */
   businessId: PropTypes.number,
   /**
-   * Enable/disable search by name
-   */
-  isSearchByName: PropTypes.bool,
-  /**
-   * Enable/disable search by description
-   */
-  isSearchByDescription: PropTypes.bool,
-  /**
    * Components types before products listing
    * Array of type components, the parent props will pass to these components
    */
@@ -101,8 +93,6 @@ BusinessMenuListing.propTypes = {
 }
 
 BusinessMenuListing.defaultProps = {
-  isSearchByName: true,
-  isSearchByDescription: true,
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

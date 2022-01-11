@@ -166,124 +166,31 @@ export const TimeItem = styled.div`
     font-size: 14px;
   }
 
-  @media (min-width: 576px) {
+  @media (min-width: 400px) {
     width: calc(33.33% - 24px);
     min-width: calc(33.33% - 24px);
   }
 
-  @media (min-width: 993px) {
-    width: calc(20% - 24px);
-    min-width: calc(20% - 24px);
+  @media (min-width: 576px) {
+    width: calc(25% - 24px);
+    min-width: calc(25% - 24px);
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 769px) {
     width: calc(16.66% - 24px);
     min-width: calc(16.66% - 24px);
   }
 `
 
-export const DateWrapper = styled.div`
-  /* .datepicker-strip {
-    width: 100%;
-    
-    .datepicker-month-label {
-      margin: 0 0 13px 0;
-      font-size: 16px;
-      color: #344050;
-    }
+export const DateWrapper = styled.div``
 
-    .datepicker {
-      margin: 0px;
-      border-top: 1px solid #E9ECEF;
-      border-bottom: 1px solid #E9ECEF;
-      padding: 13px 0;
+export const MonthYearLayer = styled.div`
+  margin-top: 0px;
+  margin-bottom: 13px;
 
-      .datepicker-button-previous, .datepicker-button-next {
-        border: none;
-        color: #344050;
-        background: transparent;
-      }
-
-      .wrapper {
-        .scroll-head, .blank-space-div {
-          display: none;
-        }
-      }
-
-      #container {
-        flex: 1;
-        justify-content: space-between;
-
-        .datepicker-date-day-Item {
-          border: none;
-          color: #B1BCCC;
-
-          &:hover {
-            border: none;
-            background: transparent;
-            color: ${props => props.theme.colors.primary};
-          }
-        }
-
-        .date-day-Item-selected {
-          border: none;
-          color: #344050;
-        }
-
-        .datepicker-day-label {
-          margin-top: 0px;
-          margin-bottom: 11px;
-        }
-
-        .wrapper {
-          font-weight: 500;
-          font-size: 20px;
-        }
-      }
-    }
-  } */
-
-  .Datepicker--Strip {
-    width: 100%;
-
-    .Datepicker {
-      border-top: 1px solid #E9ECEF;
-      border-bottom: 1px solid #E9ECEF;
-      padding: 13px 0px;
-    }
-
-    .Datepicker--DateList {
-      display: flex;
-      flex: 1;
-      margin: 2px 0 2px 0;
-      justify-content: space-between;
-    }
-
-    .DateDayItem--selected {
-      border: none;
-      color: #344050;
-    }
-
-    .Datepicker--MonthYearLabel {
-      color: #344050;
-      margin-left: 0px;
-      font-size: 16px;
-      font-weight: normal;
-    }
-
-    .Datepicker--DayLabel {
-      font-size: 14px;
-      margin: 0 0 6px 0;
-    }
-
-    .Datepicker--DateLabel {
-      font-size: 20px;
-    }
-
-    .Datepicker--button-prev, .Datepicker--button-next {
-      background: transparent;
-      color: #344050;
-    }
+  span {
+    font-size: 16px;
+    line-height: 24px;
   }
 `
 
@@ -291,4 +198,171 @@ export const TypeContent = styled.div`
   white-space: nowrap;
   color: #909BA9;
   font-size: 13px;
+`
+
+export const Layer = styled.div`
+  ${({ nobg }) => !nobg && css`
+    background-color: rgba(255, 255, 255, 0.7);
+  `}
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: ${({ height }) => height || '100vh'};
+  ${props => props.theme?.rtl ? css`
+    right: 0;
+  ` : css`
+    left: 0;
+  `}
+`
+
+export const Days = styled.div`
+  display: flex;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+  position: relative;
+`
+
+export const ContentDay = styled.div`
+  display: flex;
+  flex-grow: 1;
+  margin: 10px 0;
+  padding: 3px 0;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid #d9d9d9;
+  ${props => props.theme?.rtl && css`
+    border-right: 0;
+    border-left: 1px solid #d9d9d9;
+  `}
+`
+
+export const Day = styled.div`
+  display: flex;
+  flex-grow: 1;
+  padding: 5px 0;
+  align-items: center;
+  font-weight: 300;
+  color: #9A9A9A;
+  width: calc(100% / 3);
+  /**
+    ** Modify this validation in case the dates to display change
+   */
+  &:nth-child(1) div,
+  &:nth-child(2) div,
+  &:nth-child(3) div {
+    margin-bottom: 5px;
+  }
+
+  &:nth-child(3) div,
+  &:nth-child(6) div {
+    ${props => props.theme?.rtl ? css`
+        border-left: 0      
+    ` : css`
+       border-right: 0;
+    `}
+  }
+
+  &:nth-child(4) div,
+  &:nth-child(5) div,
+  &:nth-child(6) div {
+    margin-top: 5px;
+  }
+
+  @media (min-width: 426px) {
+    width: calc(100% / 6);
+    &:nth-child(3) div.content-day {
+      border-right: 1px solid #d9d9d9;
+      ${props => props.theme?.rtl && css`
+        border-right: 0;
+        border-left: 1px solid #d9d9d9;
+      `}
+    }
+  }
+
+  ${({ selected }) => selected && css`
+    font-weight: 400;
+    color: ${props => props.theme.colors.primary};
+  `}
+
+
+  :last-child {
+    ${ContentDay} {
+      ${props => props.theme?.rtl ? css`
+        border-left: 0;
+      ` : css`
+        border-right: 0;
+      `}
+    }
+  }
+
+  :hover {
+    background-color: #f9f9f9;
+  }
+`
+
+export const DayName = styled.div`
+  display: flex;
+  font-size: 20px;
+  line-height: 24px;
+`
+
+export const DayNumber = styled.div`
+  display: flex;
+  font-size: 24px;
+  line-height: 24px;
+`
+
+export const Hours = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`
+
+export const Hour = styled.div`
+  display: flex;
+  width: calc(50% - 5px);
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 300;
+  border: 1px solid #d9d9d9;
+  border-radius: 1000px;
+  padding: 5px 10px;
+  margin-bottom: 7px;
+  box-sizing: border-box;
+
+  ${({ selected }) => selected && css`
+    border-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
+  `}
+
+  ${({ isLoading }) => isLoading && css`
+    pointer-events: none;
+  `}
+`
+
+export const MiddleLine = styled.span`
+  display: block;
+  width: 80%;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: ${props => props.theme.colors.disabled};
+
+  ${props => props.theme?.rtl && css`
+    left: initial;
+    right: 50%;
+    transform: translateX(50%);
+  `}
+
+  @media (min-width: 426px) {
+    display: none;
+  }
 `

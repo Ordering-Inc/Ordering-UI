@@ -3,14 +3,16 @@ import {
   useUtils,
   useLanguage,
   MomentOption,
-  useConfig
+  useConfig,
+  useOrder
 } from 'ordering-components'
+import moment from 'moment'
 import { useTheme } from 'styled-components'
 import { Select } from '../../styles/Select'
 import { Button } from '../../styles/Buttons'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
-// import DatePicker from 'react-horizontal-datepicker'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import {
   BusinessPreorderContainer,
   LogoWrapper,
@@ -23,45 +25,34 @@ import {
   TimeListWrapper,
   DateWrapper,
   TypeContent,
-  TimeItem
+  TimeItem,
+  Layer,
+  MonthYearLayer,
+  Days, Day, DayName, DayNumber, ContentDay, MiddleLine
 } from './styles'
 import { BusinessMenuList } from '../BusinessMenuList'
-import DatePicker from 'react-horizontal-datepicker'
 
 const BusinessPreorderUI = (props) => {
   const {
     business,
     handleClick,
-    isAsap,
     datesList,
     hoursList,
     dateSelected,
     timeSelected,
-    handleAsap,
     handleChangeDate,
     handleChangeTime
   } = props
 
-  const [{ optimizeImage }] = useUtils()
+  const [{ optimizeImage, parseTime }] = useUtils()
   const theme = useTheme()
   const [{ configs }] = useConfig()
+  const [orderState] = useOrder()
   const [, t] = useLanguage()
   const windowSize = useWindowSize()
-  const [selectDate, setSelectedDate] = useState(new Date())
-  const [type, setType] = useState('business_menu')
+  const [type, setType] = useState('business_hours')
   const [menu, setMenu] = useState(null)
   const [timeList, setTimeList] = useState([])
-
-  const selectedDay = (val) => {
-    setSelectedDate(val)
-    if (handleChangeDate) {
-      const date = (val.getDate() < 10 ? '0' : '') + val.getDate()
-      const month = ((val.getMonth() + 1) < 10 ? '0' : '') + (val.getMonth() + 1)
-      const year = val.getFullYear()
-      const fullDate = `${year}-${month}-${date}`
-      handleChangeDate(fullDate)
-    }
-  }
 
   const preOrderType = [
     { value: 'business_menu', content: <TypeContent>{t('BUSINESS_MENU', 'Business menu')}</TypeContent> },
@@ -73,9 +64,9 @@ const BusinessPreorderUI = (props) => {
   }
 
   const getTimes = (curdate, menu) => {
-    // var date = new Date().toLocaleString('en-US', { timeZone: gBusiness.getData().timezone })
     const date = new Date()
-    var dateSeleted = new Date(curdate)
+    const dateParts = curdate.split('-')
+    const dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
     var times = []
     for (var k = 0; k < menu.schedule[dateSeleted.getDay()].lapses.length; k++) {
       var open = {
@@ -90,7 +81,7 @@ const BusinessPreorderUI = (props) => {
         if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
           let hour = ''
           let meridian = ''
-          if (configs.time_format.value === '24') hour = i < 10 ? '0' + i : i
+          if (configs.format_time.value === '24') hour = i < 10 ? '0' + i : i
           else {
             if (i === 0) {
               hour = '12'
@@ -120,20 +111,32 @@ const BusinessPreorderUI = (props) => {
     return times
   }
 
-  const handleTimeChange = (time) => {
-    handleChangeTime(time)
-  }
+  useEffect(() => {
+    if (!menu && !hoursList) return
+
+    if (menu) {
+      const _times = getTimes(dateSelected, menu)
+      setTimeList(_times)
+    } else {
+      const _timeLists = hoursList.map(hour => {
+        return {
+          value: hour.startTime,
+          text: configs?.format_time?.value === '12' ? (
+            hour.startTime.includes('12')
+              ? `${hour.startTime}PM`
+              : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })
+          ) : (
+            parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'HH:mm' })
+          )
+        }
+      })
+      setTimeList(_timeLists)
+    }
+  }, [dateSelected, hoursList, menu])
 
   useEffect(() => {
-    if (!menu) return
-    const _times = getTimes(selectDate, menu)
-    setTimeList(_times)
-  }, [selectDate])
-
-  useEffect(() => {
-    if (document.querySelector('.Datepicker--button-prev')) document.querySelector('.Datepicker--button-prev').innerHTML = '◄'
-    if (document.querySelector('.Datepicker--button-next')) document.querySelector('.Datepicker--button-next').innerHTML = '►'
-  }, [])
+    if (type === 'business_hours') setMenu(null)
+  }, [type])
 
   return (
     <BusinessPreorderContainer>
@@ -162,12 +165,28 @@ const BusinessPreorderUI = (props) => {
       <OrderTimeWrapper>
         <p>{t('ORDER_TIME', 'Order time')}</p>
         <DateWrapper>
-          <DatePicker
-            getSelectedDay={selectedDay}
-            shouldScroll={windowSize < 576}
-            selectDate={selectDate}
-            endDate={5}
-          />
+          <MonthYearLayer>
+            <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
+          </MonthYearLayer>
+          <Days name='days'>
+            {
+              datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10)).map(date => {
+                const dateParts = date.split('-')
+                const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
+                const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 3).toUpperCase()
+                const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
+                return (
+                  <Day key={dayNumber} selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
+                    <ContentDay className='content-day'>
+                      <DayName>{dayName}</DayName>
+                      <DayNumber>{dayNumber}</DayNumber>
+                    </ContentDay>
+                  </Day>
+                )
+              })
+            }
+            <MiddleLine />
+          </Days>
         </DateWrapper>
 
         <TimeListWrapper>
@@ -175,9 +194,9 @@ const BusinessPreorderUI = (props) => {
             <TimeItem
               key={i}
               active={timeSelected === time.value}
-              onClick={() => handleTimeChange(time.value)}
+              onClick={() => handleChangeTime(time.value)}
             >
-              <span>{time.value}</span>
+              <span>{time.text}</span>
             </TimeItem>
           ))}
         </TimeListWrapper>
@@ -191,6 +210,19 @@ const BusinessPreorderUI = (props) => {
           <BsArrowRight />
         </Button>
       </ButtonWrapper>
+      {orderState?.loading && (
+        <Layer>
+          {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (
+            <SpinnerLoader
+              style={{
+                top: windowSize.width <= 768 ? '50%' : '40%',
+                position: windowSize.width <= 768 ? 'absolute' : 'sticky',
+                height: 'auto'
+              }}
+            />
+          )}
+        </Layer>
+      )}
     </BusinessPreorderContainer>
   )
 }
