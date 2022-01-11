@@ -78,7 +78,7 @@ export const Title = styled.h1`
   font-size: 24px;
   text-align: left;
   letter-spacing: 0px;
-  color: #000;
+  color: ${props => props.theme.colors.titleHomeColor ?? '#000'};
   text-shadow: 0px 3px 6px #00000029;
   opacity: 1;
   font-size: 35px;
@@ -87,9 +87,9 @@ export const Title = styled.h1`
     text-align: right;
   `}
 
-  @media (min-width: 768px) [
+  @media (min-width: 768px) {
     font-size: 32px;
-  ]
+  }
 `
 
 export const FindAddressForm = styled.div`

@@ -62,7 +62,7 @@ const BusinessProductsListUI = (props) => {
             <>
               {
                 featured && categoryState?.products?.find(product => product.featured) && (
-                  <WrapAllCategories>
+                  <WrapAllCategories id='categoryfeatured'>
                     <h3>{t('FEATURED', 'Featured')}</h3>
                     <ProductsListing>
                       {categoryState.products?.map(product => product.featured && (
@@ -90,7 +90,7 @@ const BusinessProductsListUI = (props) => {
               <React.Fragment key={category?.id}>
                 {
                   products.length > 0 && (
-                    <WrapAllCategories id='container'>
+                    <WrapAllCategories id={`category${category?.id}`}>
                       <div className='category-title'>
                         {
                           category?.image && (

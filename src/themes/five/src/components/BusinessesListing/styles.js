@@ -66,10 +66,9 @@ export const BusinessesTitle = styled.h1`
 `
 
 export const BusinessHeroImgStyled = styled.div`
-  height: auto;
   margin-bottom: 30px;
   width: 100%;
-  height: calc(100vh - 98px);
+  height: 230px;
 
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
@@ -77,9 +76,12 @@ export const BusinessHeroImgStyled = styled.div`
     object-fit: cover;
     background-position: center;
   `}
+  @media (min-width: 450px) {
+    height: 370px;
+  }
 
   @media (min-width: 821px) {
-    height: 500px;
+    height: 650px;
   }
 `
 
@@ -103,3 +105,5 @@ export const Divider = styled.div`
   height: 8px;
   width: 100%;
 `
+
+export const OrderProgressWrapper = styled.div``

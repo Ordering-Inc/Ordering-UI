@@ -25,7 +25,8 @@ import {
   FormTitle,
   FormInline,
   FormBottom,
-  CreateAccount
+  CreateAccount,
+  FormSubTitle
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -62,6 +63,7 @@ const LoginFormUI = (props) => {
     enableReCaptcha
   } = props
   const numOtpInputs = 4
+  const hideLoginMethod = true
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
@@ -248,8 +250,9 @@ const LoginFormUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <LoginContainer isPopup={isPopup}>
         <FormSide isPopup={isPopup}>
-          <FormTitle isPopup={isPopup}>{t('LOGIN_FORM_TITLE', 'Log in to your account and enjoy the Benefits we have for you.')}</FormTitle>
-          {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
+          <FormTitle isPopup={isPopup}>{t('LOGIN_ARCHIES_TITLE', 'Welcome to your Archies order!')}</FormTitle>
+          <FormSubTitle>{t('LOGIN_ARCHIES_SUBTITLE', 'Enter your login details and take advantage of great benefits that we have for you: ordering and paying online, tracking your orders in real time, chat, order history, exclusive promotions and excellent seasonal news.')}</FormSubTitle>
+          {(!hideLoginMethod && useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 {useLoginByEmail && (
@@ -281,14 +284,14 @@ const LoginFormUI = (props) => {
               isPopup={isPopup}
             >
               {
-              props.beforeMidElements?.map((BeforeMidElements, i) => (
-                <React.Fragment key={i}>
-                  {BeforeMidElements}
-                </React.Fragment>))
+                props.beforeMidElements?.map((BeforeMidElements, i) => (
+                  <React.Fragment key={i}>
+                    {BeforeMidElements}
+                  </React.Fragment>))
               }
               {
-              props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-                <BeforeMidComponents key={i} {...props} />))
+                props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+                  <BeforeMidComponents key={i} {...props} />))
               }
 
               {(verifyPhoneState?.loading || checkPhoneCodeState?.loading) && (
@@ -368,14 +371,14 @@ const LoginFormUI = (props) => {
               </FormInline>
 
               {
-              props.afterMidElements?.map((MidElement, i) => (
-                <React.Fragment key={i}>
-                  {MidElement}
-                </React.Fragment>))
+                props.afterMidElements?.map((MidElement, i) => (
+                  <React.Fragment key={i}>
+                    {MidElement}
+                  </React.Fragment>))
               }
               {
-              props.afterMidComponents?.map((MidComponent, i) => (
-                <MidComponent key={i} {...props} />))
+                props.afterMidComponents?.map((MidComponent, i) => (
+                  <MidComponent key={i} {...props} />))
               }
               {!loginWithOtpState && (
                 <FormInline>
@@ -399,26 +402,26 @@ const LoginFormUI = (props) => {
             Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
                 {(configs?.facebook_login?.value === 'true' ||
-                configs?.facebook_login?.value === '1') &&
-                configs?.facebook_id?.value &&
-              (
-                <FormInline>
-                  <FacebookLoginButton
-                    appId={configs?.facebook_id?.value}
-                    handleSuccessFacebookLogin={handleSuccessFacebook}
-                  />
-                </FormInline>
-              )}
+                  configs?.facebook_login?.value === '1') &&
+                  configs?.facebook_id?.value &&
+                  (
+                    <FormInline>
+                      <FacebookLoginButton
+                        appId={configs?.facebook_id?.value}
+                        handleSuccessFacebookLogin={handleSuccessFacebook}
+                      />
+                    </FormInline>
+                  )}
                 {configs?.apple_login_client_id?.value &&
-              (
-                <FormInline>
-                  <AppleLogin
-                    onSuccess={handleSuccessApple}
-                    onFailure={(data) => console.log('onFailure', data)}
-                  />
-                </FormInline>
+                  (
+                    <FormInline>
+                      <AppleLogin
+                        onSuccess={handleSuccessApple}
+                        onFailure={(data) => console.log('onFailure', data)}
+                      />
+                    </FormInline>
 
-              )}
+                  )}
                 {configs?.google_login_client_id?.value && (
                   <FormInline>
                     <GoogleLoginButton
@@ -428,13 +431,12 @@ const LoginFormUI = (props) => {
                     />
                   </FormInline>
                 )}
-                {useLoginByCellphone && loginTab === 'cellphone' &&
-                  configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
-                configs?.twilio_service_enabled?.value === '1') && (
-                  <SmsLoginButton
-                    handleSmsLogin={() => { setLoginWithOtpState(true) }}
-                  />
-                )}
+                {
+                  (useLoginByCellphone && loginTab === 'cellphone') &&
+                  (configs && Object.keys(configs).length > 0) &&
+                  (configs?.twilio_service_enabled?.value === 'true' || configs?.twilio_service_enabled?.value === '1') &&
+                    <SmsLoginButton handleSmsLogin={() => { setLoginWithOtpState(true) }} />
+                }
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>

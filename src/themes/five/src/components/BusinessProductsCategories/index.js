@@ -24,13 +24,12 @@ const BusinessProductsCategoriesUI = (props) => {
       handlerClickCategory({ ...category })
       return
     }
-    setSelectedCateogry({ ...category })
     let topPos = 0
-    if (!category?.id) topPos = document.getElementById('businessProductList').offsetTop
-    else topPos = document.getElementById(`category${category.id}`).offsetTop
-    window.scrollTo({
+    if (!category?.id) topPos = document.getElementById('businessProductList')?.offsetTop
+    else topPos = document.getElementById(`category${category.id}`)?.offsetTop
+    window.scroll({
       top: topPos - 60,
-      left: 100,
+      left: 0,
       behavior: 'smooth'
     })
   }
@@ -59,8 +58,8 @@ const BusinessProductsCategoriesUI = (props) => {
       _categories?.length && _categories.forEach(category => {
         const windowTop = window.scrollY
         let topPos = 0
-        if (!category?.id) topPos = document.getElementById('businessProductList').offsetTop
-        else topPos = document.getElementById(`category${category.id}`).offsetTop
+        if (!category?.id) topPos = document.getElementById('businessProductList')?.offsetTop
+        else topPos = document.getElementById(`category${category.id}`)?.offsetTop
 
         if (windowTop >= (topPos - 60)) {
           setSelectedCateogry(category)

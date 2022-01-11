@@ -3,6 +3,16 @@ import styled, { css } from 'styled-components'
 export const ProductsContainer = styled.div`
   padding: 20px 15px 0px 15px;
 
+  > svg {
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
   @media (min-width: 769px) {
     padding: 20px 40px 0px 40px;
   }
@@ -91,6 +101,17 @@ export const BusinessCategoryProductWrapper = styled.div`
 
 export const BusinessCartContainer = styled.div`
   margin: 0;
+
+  > div {
+    display: none;
+  }
+
+  @media (min-width: 500px) {
+    > div {
+      display: block;
+    }
+  }
+
   @media (min-width: 1200px) {
     width: calc(31% - 25px);
     margin-left: 25px;
@@ -109,6 +130,18 @@ export const BusinessCartContent = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
   position: relative;
+
+  ${({ isModal }) => isModal && css`
+    padding: 35px 25px;
+    box-shadow: none;
+    border: none;
+  `}
+
+  @media (max-width: 576px) {
+    .info {
+      width: 100%;
+    }
+  }
 
   @media (min-width: 1200px) {
     position: sticky;
@@ -161,7 +194,7 @@ export const EmptyBtnWrapper = styled.div`
 `
 
 export const Divider = styled.div`
-  width: 100vw;
+  width: calc(100% + 30px);
   height: 8px;
   background-color: ${props => props.theme?.colors.grayDividerColor};
   margin-left: -15px;
@@ -171,10 +204,43 @@ export const Divider = styled.div`
   `}
 
   @media (min-width: 769px) {
+    width: calc(100% + 80px);
     margin-left: -40px;
     ${props => props.theme?.rtl && css`
       margin-right: -40px;
       margin-left: 0;
     `}
   }
+`
+
+export const MobileCartViewWrapper = styled.div`
+  position: fixed;
+  width: 100vw;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  z-index: 1000;
+  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
+
+  span {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  button {
+    height: 44px;
+    border-radius: 7.6px;
+  }
+`
+
+export const Title = styled.h1`
+  font-weight: 600;
+  font-size: 20px;
+  color: ${props => props.theme.colors.darkTextColor};
+  margin-bottom: 18px;
 `

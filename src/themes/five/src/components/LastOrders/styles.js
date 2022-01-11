@@ -79,6 +79,7 @@ export const OrderInfoBlock = styled.div`
   &:hover {
     h4, p {
       text-decoration: underline;
+      cursor: pointer;
     }
   }
 `

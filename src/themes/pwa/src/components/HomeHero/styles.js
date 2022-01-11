@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 export const HeroContainerStyled = styled.div`
   width: 100%;
   height: fit-content;
-  min-height: calc(60vh - 97px);
+  height: 374px;
   position:relative;
   margin-bottom: 30vh;
 
@@ -17,7 +17,7 @@ export const HeroContainerStyled = styled.div`
   `}
 
   @media (min-width: 375px) {
-    height: calc(60vh - 97px);
+    height: 374px;
   }
 
   @media (min-width: 567px) {
@@ -49,6 +49,7 @@ export const ContentWrapper = styled.div`
     justify-content: space-around;
     height: 100%;
     padding: 0px 10vw 0px;
+    background-color: #0000004D;
 
     input {
       width: 90%;
@@ -241,7 +242,7 @@ export const SectionHeader = styled.div`
 
 export const LogoWrapper = styled.div`
   width: 150px;
-  margin: 6vh auto 0;
+  margin: 53px auto;
   display: flex;
   justify-content: center;
   img {

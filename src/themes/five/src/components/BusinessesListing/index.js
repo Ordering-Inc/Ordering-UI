@@ -9,7 +9,8 @@ import {
   BusinessesTitle,
   BusinessHeroImg,
   HightestRatedWrapper,
-  Divider
+  Divider,
+  OrderProgressWrapper
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -35,6 +36,7 @@ import {
 } from 'ordering-components'
 import { HighestRated } from '../HighestRated'
 import { BusinessPreorder } from '../BusinessPreorder'
+import { OrderProgress } from '../OrderProgress'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -145,6 +147,9 @@ const BusinessesListingUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
         <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
+        <OrderProgressWrapper>
+          <OrderProgress />
+        </OrderProgressWrapper>
         <WrapperSearch isCustomLayout={isCustomLayout}>
           <SearchBar
             lazyLoad

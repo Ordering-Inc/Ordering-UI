@@ -18,7 +18,7 @@ export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 0;
   background-color: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
   table {
     width: 100%;
@@ -60,20 +60,13 @@ export const CheckoutAction = styled.div`
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 0 10px;
+  padding: 0px;
   box-sizing: border-box;
-
-  p {
-    margin: 0;
-    font-weight: 600;
-    font-size: 16px;
-    color: ${props => props.theme.colors.darkTextColor};
-  }
 
   button {
     padding: 10px 30px;
     min-width: 150px;
-    width: 50%;
+    width: 100%;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed
@@ -93,25 +86,10 @@ export const Divider = styled.div`
   }
 `
 
-export const UpsellingPageTitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  p {
-    font-weight: 500;
-    font-size: 16px;
-    color: ${props => props.theme?.colors.darkTextColor};
-  }
-
-  svg {
-    font-size: 20px;
-    cursor: pointer;
-    color: #748194;
-    margin-left: 30px;
-
-    ${props => props.theme?.rtl && css`
-      margin-right: 30px;
-      margin-left: 0px;
-    `}
-  }
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
 `

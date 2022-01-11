@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ProductsList, useLanguage } from 'ordering-components'
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import {
   ProductsContainer,
   ProductsListing,
@@ -28,6 +29,25 @@ const BusinessProductsListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const windowSize = useWindowSize()
+
+  const getUniquCategoryName = (categoryName) => {
+    let _categoryName = categoryName
+    if (categoryName.indexOf('/') > -1) {
+      _categoryName = categoryName.split('/')[1]
+    }
+    return _categoryName
+  }
+
+  useEffect(() => {
+    if (windowSize.width < 540) {
+      document.querySelector('#productWrapper').scrollIntoView({ behavior: 'smooth' })
+    }
+
+    if (windowSize.width > 768) {
+      window.scrollTo({ top: 335, behavior: 'smooth' })
+    }
+  }, [category])
 
   return (
     <>
@@ -90,7 +110,7 @@ const BusinessProductsListUI = (props) => {
                 {
                   category?.products?.length > 0 && (
                     <WrapAllCategories id='container'>
-                      <h3>{category.name}</h3>
+                      <h3>{getUniquCategoryName(category.name)}</h3>
                       <ProductsListing>
                         {
                           category?.products?.map((product, i) => (
@@ -123,7 +143,7 @@ const BusinessProductsListUI = (props) => {
         {
           (categoryState.loading || isBusinessLoading) && (
             <WrapAllCategories id='container'>
-              <ProductsListing>
+              <ProductsListing style={{ marginTop: '20px' }}>
                 {[...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
                   <SingleProductCard
                     key={`skeleton:${i}`}

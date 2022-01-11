@@ -3,7 +3,6 @@ import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useV
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
-import MdClose from '@meronex/icons/md/MdClose'
 
 import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
@@ -11,6 +10,7 @@ import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { TaxInformation } from '../TaxInformation'
 
 import {
   CartContainer,
@@ -19,10 +19,12 @@ import {
   CouponContainer,
   CartSticky,
   Divider,
-  UpsellingPageTitleWrapper,
-  CouponQuestion
+  CouponQuestion,
+  Exclamation
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
+import { useTheme } from 'styled-components'
 
 const CartUI = (props) => {
   const {
@@ -45,6 +47,7 @@ const CartUI = (props) => {
     isStore
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
@@ -59,6 +62,8 @@ const CartUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const windowSize = useWindowSize()
   const [isUpselling, setIsUpselling] = useState(false)
+  const [openTaxModal, setOpenTaxModal] = useState({ open: false, data: null })
+
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
   const momentFormatted = !orderState?.option?.moment
@@ -138,6 +143,16 @@ const CartUI = (props) => {
     setCouponShow(true)
   }
 
+  const getIncludedTaxes = () => {
+    if (cart?.taxes === null) {
+      return cart.business.tax_type === 1 ? cart?.tax : 0
+    } else {
+      return cart?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -186,7 +201,7 @@ const CartUI = (props) => {
                   <tbody>
                     <tr>
                       <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                      <td>{cart.business.tax_type === 1 ? parsePrice((cart?.subtotal + cart?.tax) || 0) : parsePrice(cart?.subtotal || 0)}</td>
+                      <td>{parsePrice(cart?.subtotal + getIncludedTaxes())}</td>
                     </tr>
                     {cart?.discount > 0 && cart?.total >= 0 && (
                       <tr>
@@ -202,15 +217,32 @@ const CartUI = (props) => {
                       </tr>
                     )}
                     {
-                      cart.business.tax_type !== 1 && (
-                        <tr>
+                      cart.taxes?.length > 0 && cart.taxes.filter(tax => tax.type === 2 && tax?.rate !== 0).map(tax => (
+                        <tr key={tax.id}>
                           <td>
-                            {t('TAX', 'Tax')}{' '}
-                            <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
+                            {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
+                            </Exclamation>
                           </td>
-                          <td>{parsePrice(cart?.tax || 0)}</td>
+                          <td>{parsePrice(tax?.summary?.tax || 0)}</td>
                         </tr>
-                      )
+                      ))
+                    }
+                    {
+                      cart?.fees?.length > 0 && cart?.fees?.filter(fee => !(fee.fixed === 0 && fee.percentage === 0))?.map(fee => (
+                        <tr key={fee.id}>
+                          <td>
+                            {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            ({parsePrice(fee?.fixed)} + {fee.percentage}%)
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
+                            </Exclamation>
+                          </td>
+                          <td>{parsePrice(fee?.summary?.fixed + fee?.summary?.percentage || 0)}</td>
+                        </tr>
+                      ))
                     }
                     {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
                       <tr>
@@ -232,16 +264,6 @@ const CartUI = (props) => {
                         <td>{parsePrice(cart?.driver_tip)}</td>
                       </tr>
                     )}
-                    {cart?.service_fee > 0 && (
-                      <tr>
-                        <td>
-                          {t('SERVICE_FEE', 'Service Fee')}{' '}
-                          <span>{`(${verifyDecimals(cart?.business?.service_fee, parseNumber)}%)`}</span>
-                        </td>
-                        <td>{parsePrice(cart?.service_fee)}</td>
-                      </tr>
-                    )}
-
                   </tbody>
                 </table>
                 {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
@@ -277,7 +299,7 @@ const CartUI = (props) => {
               </OrderBill>
             )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
-              <CheckoutAction>
+              <CheckoutAction isFixed={windowSize.width < 576 && isStore}>
                 {windowSize.width > 576 && (
                   <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 )}
@@ -297,7 +319,7 @@ const CartUI = (props) => {
               </CheckoutAction>
             )}
           </BusinessItemAccordion>
-          <Divider />
+          {!isStore && <Divider />}
           <Confirm
             title={t('PRODUCT', 'Product')}
             content={confirm.content}
@@ -325,23 +347,29 @@ const CartUI = (props) => {
               onSave={handlerProductAction}
             />
           </Modal>
+          <Modal
+            width='70%'
+            open={openTaxModal.open}
+            padding='20px'
+            closeOnBackdrop
+            title={`${openTaxModal.data?.name ||
+              t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`}) `}
+            onClose={() => setOpenTaxModal({ open: false, tax: null })}
+            modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+          >
+            <TaxInformation data={openTaxModal.data} products={cart.products} />
+          </Modal>
           {(openUpselling || isUpselling) && (
-            <>
-              <UpsellingPageTitleWrapper>
-                <p>{t('DO_YOU_WANT_SOMETHING_ELSE', 'Do you want something else?')}</p>
-                <MdClose onClick={() => setIsUpselling(false)} />
-              </UpsellingPageTitleWrapper>
-              <UpsellingPage
-                businessId={cart.business_id}
-                isCustomMode={isCustomMode}
-                cartProducts={cart.products}
-                business={cart.business}
-                handleUpsellingPage={handleUpsellingPage}
-                openUpselling={openUpselling}
-                canOpenUpselling={canOpenUpselling}
-                setCanOpenUpselling={setCanOpenUpselling}
-              />
-            </>
+            <UpsellingPage
+              businessId={cart.business_id}
+              isCustomMode={isCustomMode}
+              cartProducts={cart.products}
+              business={cart.business}
+              handleUpsellingPage={handleUpsellingPage}
+              openUpselling={openUpselling}
+              canOpenUpselling={canOpenUpselling}
+              setCanOpenUpselling={setCanOpenUpselling}
+            />
           )}
         </CartSticky>
       </CartContainer>

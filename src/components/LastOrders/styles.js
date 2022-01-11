@@ -19,6 +19,7 @@ const BusinessHeaderStyled = styled.div`
   align-items: center;
   border-radius: 7.6px;
   margin-bottom: 15px;
+  cursor: pointer;
 
   h1 {
     color: #FFF;

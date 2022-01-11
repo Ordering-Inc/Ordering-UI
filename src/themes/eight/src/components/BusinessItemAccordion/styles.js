@@ -117,6 +117,10 @@ export const ContentInfo = styled.div`
     margin-left: 0;
   `}
 
+  h2 {
+    color: ${props => props.theme.colors.secundary};
+  }
+
   h2, span {
     margin: 0px;
   }

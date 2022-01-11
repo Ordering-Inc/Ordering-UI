@@ -87,6 +87,17 @@ export const CheckoutAction = styled.div`
       width: 50%;
     }
   }
+
+  ${({ isFixed }) => isFixed && css`
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    background: white;
+    z-index: 10;
+    margin: 0;
+  `}
 `
 
 export const Divider = styled.div`
@@ -103,30 +114,6 @@ export const Divider = styled.div`
   }
 `
 
-export const UpsellingPageTitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  p {
-    font-weight: 500;
-    font-size: 16px;
-    color: ${props => props.theme?.colors.darkTextColor};
-    white-space: nowrap;
-  }
-
-  svg {
-    font-size: 20px;
-    cursor: pointer;
-    color: #748194;
-    margin-left: 30px;
-
-    ${props => props.theme?.rtl && css`
-      margin-right: 30px;
-      margin-left: 0px;
-    `}
-  }
-`
-
 export const CouponQuestion = styled.div`
   width: 100%;
   p {
@@ -140,4 +127,12 @@ export const CouponQuestion = styled.div`
     cursor: pointer;
     color: ${props => props.theme.colors.primary};
   }
+`
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
 `

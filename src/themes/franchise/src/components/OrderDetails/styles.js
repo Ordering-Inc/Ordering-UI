@@ -63,13 +63,12 @@ export const BusinessWrapper = styled.div`
 `
 
 export const BusinessInfo = styled.div`
+  width: 100%;
   h1,
   p {
     margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     color: ${props => props.theme.colors.darkTextColor};
+    overflow-wrap: break-word;
   }
 
   h2 {
@@ -79,6 +78,7 @@ export const BusinessInfo = styled.div`
   }
   p {
     font-size: 14px;
+    margin-bottom: 5px;
   }
 `
 
@@ -464,4 +464,12 @@ export const ReviewWrapper = styled.div`
   .review-sent {
     border-radius: 7.6px;
   }
+`
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
 `

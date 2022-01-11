@@ -161,7 +161,7 @@ const UserProfileFormUI = (props) => {
                         {(userData?.cellphone || user?.cellphone) && (
                           <tr>
                             <td>{t('PHONE', 'Phone')}</td>
-                            <td>{(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}</td>
+                            <td style={{direction: 'ltr'}}>{(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}</td>
                           </tr>
                         )}
                       </tbody>

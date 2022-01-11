@@ -342,8 +342,8 @@ const SignUpFormUI = (props) => {
                         type='date'
                         defaultValue={new Date()}
                         name='birthdate'
-                        className='form'
-                        placeholder={t('BIRTHDAY', 'dd/mm/yyyy')}
+                        className='form birthdate-input'
+                        placeholder={t('BIRTHDATE_ARCHIES', 'yy-mm-dd')}
                         onChange={handleChangeInput}
                         ref={formMethods.register({
                           required: t('VALIDATION_ERROR_BIRTHDAY_REQUIRED', 'The field birthdate is required')
@@ -365,7 +365,7 @@ const SignUpFormUI = (props) => {
                         {t('ARCHIES_AGREE_TEXT', 'You must agree with')}
                       </span>
                     </span>
-                    <a href='https://tupedidostarbucks.co/pages/privacidad-starbucks' className='condition-link'>
+                    <a href={t('ARCHIES_PRIVACY_LINK', 'https://tupedidostarbucks.co/pages/privacidad-starbucks')} target='_blank' rel='noopener noreferrer' className='condition-link'>
                       <span>
                         {t('ARCHIES_TERMS_AND_CONDITIONS_LINK_TEXT', 'Terms and Conditions')}
                       </span>
@@ -373,7 +373,7 @@ const SignUpFormUI = (props) => {
                   </ConditionCheck>
 
                   <Terms>
-                    {t('TERMS_WEB_PF', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')}
+                    {t('TERMS_WEB_ARCHIES', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')}
                   </Terms>
 
                   {props.afterMidElements?.map((MidElement, i) => (

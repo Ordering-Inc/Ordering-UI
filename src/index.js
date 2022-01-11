@@ -1,3 +1,4 @@
+import { AccordionDropdown } from './components/AccordionDropdown'
 import { AddressDetails } from './components/AddressDetails'
 import { AddressesPopover } from './components/AddressesPopover'
 import { AddressForm } from './components/AddressForm'
@@ -10,7 +11,9 @@ import { BusinessesMap } from './components/BusinessesMap'
 import { BusinessInformation } from './components/BusinessInformation'
 import { BusinessItemAccordion } from './components/BusinessItemAccordion'
 import { BusinessProductsCategories } from './components/BusinessProductsCategories'
+import { BusinessProductsCategories as CategoriesLayoutGroceries } from './components/BusinessProductsCategories/layouts/groceries'
 import { BusinessProductsList } from './components/BusinessProductsList'
+import { BusinessProductsList as ProductListLayoutGroceries } from './components/BusinessProductsList/layouts/groceries'
 import { BusinessProductsListing } from './components/BusinessProductsListing'
 import { BusinessReviews } from './components/BusinessReviews'
 import { BusinessTypeFilter } from './components/BusinessTypeFilter'
@@ -70,6 +73,7 @@ import { ResetPassword } from './components/ResetPassword'
 import { ReviewOrder } from './components/ReviewOrder'
 import { ReviewProduct } from './components/ReviewProduct'
 import { ReviewDriver } from './components/ReviewDriver'
+import { RenderProductsLayout } from './components/RenderProductsLayout'
 import { SearchBar } from './components/SearchBar'
 import { SidebarMenu } from './components/SidebarMenu'
 import { SignUpForm } from './components/SignUpForm'
@@ -110,6 +114,7 @@ import {
 } from './utils'
 
 export {
+  AccordionDropdown,
   AddressDetails,
   AddressesPopover,
   AddressForm,
@@ -121,7 +126,9 @@ export {
   BusinessInformation,
   BusinessItemAccordion,
   BusinessProductsCategories,
+  CategoriesLayoutGroceries,
   BusinessProductsList,
+  ProductListLayoutGroceries,
   BusinessProductsListing,
   BusinessesMap,
   BusinessReviews,
@@ -186,6 +193,7 @@ export {
   ReviewOrder,
   ReviewProduct,
   ReviewDriver,
+  RenderProductsLayout,
   SearchBar,
   SignUpForm,
   SingleProductCard,

@@ -37,14 +37,13 @@ export const Title = styled.h1`
   font-size: 20px;
   margin-top: 50px;
   margin-bottom: 20px;
-  width: 100%;
+  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   color: ${props => props.theme.colors.darkTextColor};
   @media (min-width: 576px) {
     margin-top: 0;
     margin-bottom: 30px;
     width: unset;
   }
-
 `
 
 export const LoginWith = styled.div`

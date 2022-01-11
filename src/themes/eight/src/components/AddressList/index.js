@@ -63,6 +63,7 @@ const AddressListUI = (props) => {
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isSelectedNewAddress, setIsSelectedNewAddress] = useState(false)
   const theme = useTheme()
   const [{ user }] = useCustomer()
 
@@ -120,6 +121,10 @@ const AddressListUI = (props) => {
       return
     }
 
+    if (!checkAddress(address)) {
+      setIsSelectedNewAddress(true)
+    }
+
     setAddressOpen(false)
     handleSetDefault(address, userCustomerSetup)
   }
@@ -155,6 +160,11 @@ const AddressListUI = (props) => {
     })
     return values.every(value => value)
   }
+
+  useEffect(() => {
+    if (actionStatus?.loading || !isSelectedNewAddress) return
+    events.emit('go_to_page', { page: 'search' })
+  }, [actionStatus, isSelectedNewAddress])
 
   /**
    * Close modals and alerts

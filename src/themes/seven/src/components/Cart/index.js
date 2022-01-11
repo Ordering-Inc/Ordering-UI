@@ -6,10 +6,10 @@ import { BusinessItemAccordion } from '../BusinessItemAccordion'
 
 import { Confirm } from '../../../../../components/Confirm'
 import { Modal } from '../../../../../components/Modal'
-import { CouponControl } from '../../../../../components/CouponControl'
-import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { ProductForm } from '../ProductForm'
+import { CouponControl } from '../CouponControl'
 
 import {
   CartContainer,
@@ -34,7 +34,6 @@ const CartUI = (props) => {
     onClickCheckout,
     isCheckout,
     isCartPending,
-    isCartPopover,
     isForceOpenCart,
     isCartOnProductsList,
     handleCartOpen
@@ -253,10 +252,10 @@ const CartUI = (props) => {
                 </table>
                 {!couponShow && (
                   <CouponQuestion>
-                    <p>{t('COUPON_QUESTION', 'Do you have a coupon?')}<span className='coupon-apply' onClick={showCouponInput}>{t('APPLY', 'Apply')}</span></p>
+                    <p onClick={showCouponInput}>{t('ARCHIES_ADD_COUPON', 'Do you have a coupon?')}</p>
                   </CouponQuestion>
                 )}
-                {isCouponEnabled && !isCartPending && couponShow && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
+                {isCouponEnabled && !isCartPending && couponShow && (
                   <CouponContainer>
                     <CouponControl
                       businessId={cart.business_id}

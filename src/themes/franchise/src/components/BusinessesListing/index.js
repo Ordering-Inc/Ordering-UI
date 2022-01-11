@@ -47,8 +47,10 @@ const BusinessesListingUI = (props) => {
     onRedirectPage,
     handleChangeSearch,
     handleBusinessClick,
-    currentPageParam
+    currentPageParam,
+    franchiseEnabled
   } = props
+
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ auth }] = useSession()
@@ -59,6 +61,7 @@ const BusinessesListingUI = (props) => {
   const [mapErrors, setMapErrors] = useState('')
   const [prevPage, setPrevPage] = useState({ page: currentPageParam || 1, loading: false })
   const [nextPage, setNextPage] = useState({ page: currentPageParam || 1, loading: false })
+  const [nearBusinessList, setNearBusinessList] = useState([])
   const location = useLocation()
   const history = useHistory()
   const windowSize = useWindowSize()
@@ -118,7 +121,7 @@ const BusinessesListingUI = (props) => {
 
   useEffect(() => {
     if (mapErrors) {
-      handleMapErrors(mapErrors)
+      mapErrors !== 'ERROR_NOT_FOUND_BUSINESSES' && handleMapErrors(mapErrors)
       setActiveMap(false)
     }
   }, [mapErrors])
@@ -193,18 +196,20 @@ const BusinessesListingUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
         <BusinessListWrapper ref={businessListRef}>
-          <WrapperSearch isCustomLayout={isCustomLayout}>
-            <SearchBar
-              lazyLoad
-              search={searchValue}
-              isCustomLayout={isCustomLayout}
-              placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-              onSearch={handleChangeSearch}
-            />
-            {isCustomLayout && (
-              <FiMap onClick={toggleMap} />
-            )}
-          </WrapperSearch>
+          {franchiseEnabled && (
+            <WrapperSearch isCustomLayout={isCustomLayout}>
+              <SearchBar
+                lazyLoad
+                search={searchValue}
+                isCustomLayout={isCustomLayout}
+                placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                onSearch={handleChangeSearch}
+              />
+              {isCustomLayout && (
+                <FiMap onClick={toggleMap} />
+              )}
+            </WrapperSearch>
+          )}
           {paginationProps.currentPage !== 1 && prevPage.page !== 1 && (
             <PreviousButtonWrapper>
               <Button onClick={() => handleClickPrevItems()} color='primary'>
@@ -236,7 +241,7 @@ const BusinessesListingUI = (props) => {
               ))
             )}
             {
-              !businessesList.loading && businessesList.businesses.length === 0 && (
+              !businessesList.loading && franchiseEnabled && (businessesList.businesses.length === 0 || nearBusinessList.length === 0) && (
                 <NotFoundSource
                   content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
                 >
@@ -251,7 +256,14 @@ const BusinessesListingUI = (props) => {
               )
             }
             {
-              businessesList.businesses?.map((business) => (
+              !franchiseEnabled && !businessesList.loading && (
+                <NotFoundSource
+                  content={t('NOT_ENABLED_FRANCHISE', 'Franchise is not enabled or franchise id doesn\'t exist')}
+                />
+              )
+            }
+            {
+              nearBusinessList.length > 0 && franchiseEnabled && businessesList.businesses.filter(business => nearBusinessList.includes(business.slug))?.map((business) => (
                 <BusinessController
                   key={business.id}
                   className='card'
@@ -284,11 +296,12 @@ const BusinessesListingUI = (props) => {
         </BusinessListWrapper>
         <BusinessMapWrapper>
           {(configs?.google_maps_api_key?.value && orderState?.options?.address?.location) ? (
-            businessesList?.businesses?.length > 0 ? (
+            (businessesList?.businesses?.length > 0 && franchiseEnabled) ? (
               <BusinessesMap
                 businessList={businessesList.businesses}
                 userLocation={orderState?.options?.address?.location}
                 setErrors={setMapErrors}
+                setNearBusinessList={setNearBusinessList}
               />
             ) : (
               <GoogleMapsMap

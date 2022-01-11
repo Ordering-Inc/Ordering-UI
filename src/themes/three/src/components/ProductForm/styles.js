@@ -26,35 +26,122 @@ export const ProductContainer = styled.div`
 export const WrapperImage = styled.div`
   width: 100%;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 16px;
+
+  .mySwiper2 {
+    height: 250px;
+    margin-left: -10px;
+    margin-top: 0px;
+    width: calc(100% + 20px);
+
+    .swiper-slide-active {
+      border-radius: 0px;
+      img {
+        border-radius: 0px;
+      }
+    }
+  }
+
+  @media (min-width: 576px) {
+    .mySwiper2 {
+      height: 320px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .mySwiper2 {
+      margin-top: 10px;
+    }
+  }
 
   @media (min-width: 1201px) {
     width: calc(50% - 10px);
     position: sticky;
     top: 0;
-  }
-`
 
-export const ProductImage = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 300px;
-
-  img {
-    object-fit: contain;
-    height: 100%;
-    box-sizing: border-box;
-  }
-
-  @media (min-width: 1201px) {
-    height: 100%;
-    img {
+    .mySwiper2 {
+      height: 70%;
+      margin-left: 0px;
       width: 100%;
-      object-fit: cover;
+      margin-top: 50px;
     }
+  }
+
+  .swiper {
+    width: 100%;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .product-thumb {
+    box-sizing: border-box;
+    padding: 30px 0px;
+    margin: 0px 10px;
+
+    .swiper-slide {
+      opacity: 0.8;
+      border-radius: 5px;
+      height: auto;
+      cursor: pointer;
+      overflow: hidden;
+
+      img {
+        border-radius: 5px;
+      }
+    }
+
+    .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-button-next {
+    background-image: url(${props => props.theme.images.general.rightArrow});
+    background-color: #d1d0d04d;
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    width: 32px;
+    height: 32px;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .swiper-button-prev {
+    background-image: url(${props => props.theme.images.general.leftArrow});
+    background-color: #d1d0d04d;
+    background-repeat: no-repeat;
+    background-position: 45% center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .swiper-button-next::after, .swiper-button-prev::after {
+    display: none;
   }
 `
 
@@ -65,35 +152,6 @@ export const ProductInfo = styled.div`
   padding: 0px;
   position: relative;
   margin-top: 10px;
-
-  h1 {
-    font-size: 20px;
-    font-weight: 500;
-    text-align: center;
-    color: #263238;
-    margin-top: 0px;
-  }
-
-  p {
-    font-size: 14px;
-    font-weight: 200;
-    margin-top: 0px;
-    line-height: 1.5em;
-    width: 100%;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-      text-align: right;
-    `}
-  }
-
-  @media (min-width: 381px) {
-    h1 {
-      font-size: 24px;
-    }
-    p {
-      font-size: 16px;
-    }
-  }
 
   @media (min-width: 411px) {
     padding: 10px 0px;
@@ -109,9 +167,6 @@ export const ProductInfo = styled.div`
 
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
-  @media (min-width: 1201px) {
-    width: calc(100% - 25px);
-  }
 `
 
 export const ProductEdition = styled.div``
@@ -150,6 +205,7 @@ export const ProductActions = styled.div`
   align-items: center;
   padding: 10px 0px;
   width: 100%;
+  z-index: 99;
 
   position: fixed;
   bottom: 0;
@@ -278,17 +334,6 @@ export const WrapperSubOption = styled.div`
 
 export const SkuContent = styled.div`
   display: flex;
-  flex-direction: column;
-
-  h2 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 0px;
-  }
-
-  p {
-    font-size: 14px;
-  }
 `
 
 export const WrapperIngredients = styled.div`
@@ -328,4 +373,38 @@ export const IngredientHeader = styled.div`
   .accordion__icon {
     transition: transform 0.6s ease;
   }
+`
+export const ProductName = styled.h1`
+  font-size: 24px;
+  line-height: 36px;
+  color: #344050;
+  margin-bottom: 10px;
+  @media (min-width: 1201px) {
+    width: calc(100% - 25px);
+  }
+`
+export const Properties = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const ProductDescription = styled.p`
+  margin-top: 10px;
+`
+export const PriceContent = styled.p`
+  font-size: 18px;
+  line-height: 27px;
+  color: #344050;
+  margin: 0;
+`
+export const ProductMeta = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 16px;
+    line-height: 24px;
+    color: #909BA9;
+  }
+`
+export const EstimatedPersons = styled.div`
+
 `

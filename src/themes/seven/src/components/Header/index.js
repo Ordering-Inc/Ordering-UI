@@ -159,8 +159,8 @@ export const Header = (props) => {
                       />
                       <OrderTypes>
                         <OrderTypeSelectorHeader
-                          configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                          defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+                          configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+                          defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
                         />
                       </OrderTypes>
                     </>
@@ -248,8 +248,8 @@ export const Header = (props) => {
               />
               <OrderTypes>
                 <OrderTypeSelectorHeader
-                  configTypes={!configState?.loading && configTypes.length > 0 ? configTypes : null}
-                  defaultValue={!(!configState?.loading && configTypes.length > 0) && 1}
+                  configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+                  defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
                 />
               </OrderTypes>
             </SubMenu>

@@ -22,23 +22,111 @@ export const ProductContainer = styled.div`
 `
 
 export const WrapperImage = styled.div`
-  width: calc(100% + 40px);
-  margin-top: 20px;
   margin-left: -20px;
+  margin-top: 20px;
+  width: calc(100% + 40px);
   position: relative;
-  height: 320px;
 `
 
-export const ProductImage = styled.div`
+export const SwiperWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
 
-  img {
-    height: 100%;
-    box-sizing: border-box;
-    object-fit: cover;
+  .mySwiper2 {
+    height: 250px;
     width: 100%;
+
+    .swiper-slide-active {
+      border-radius: 0px;
+      img {
+        border-radius: 0px;
+      }
+    }
+
+    @media (min-width: 576px) {
+      height: 320px;
+    }
+
+    @media (min-width: 1201px) {
+    }
+  }
+
+
+  .swiper {
+    width: 100%;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .product-thumb {
+    box-sizing: border-box;
+    padding: 30px 0px;
+    margin: 0px 20px;
+
+    .swiper-slide {
+      opacity: 0.8;
+      border-radius: 7.6px;
+      height: auto;
+      cursor: pointer;
+      overflow: hidden;
+
+      img {
+        border-radius: 7.6px;
+      }
+    }
+
+    .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-button-next {
+    background-image: url(${props => props.theme.images.general.rightArrow});
+    background-color: #d1d0d04d;
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    width: 32px;
+    height: 32px;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .swiper-button-prev {
+    background-image: url(${props => props.theme.images.general.leftArrow});
+    background-color: #d1d0d04d;
+    background-repeat: no-repeat;
+    background-position: 45% center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .swiper-button-next::after, .swiper-button-prev::after {
+    display: none;
   }
 `
 
@@ -50,38 +138,6 @@ export const ProductInfo = styled.div`
   position: relative;
   margin-top: 18px;
 
-  h1 {
-    font-weight: 600;
-    font-size: 28px;
-    color: ${props => props.theme?.colors.darkTextColor};
-    margin-top: 0;
-    margin-bottom: 5px;
-  }
-
-  .price-wrapper {
-    display: flex;
-    align-items: center;
-
-    span {
-      font-size: 18px;
-      color: ${props => props.theme?.colors.darkTextColor};
-      margin-right: 5px;
-      ${props => props.theme?.rtl && css`
-        margin-right: 0px;
-        margin-left: 5px;
-      `}
-    }
-
-    .price-discount {
-      font-size: 14px;
-      color: #909BA9;
-    }
-  }
-  p {
-    font-size: 16px;
-    color: #909BA9;
-    margin-top: 0px;
-  }
 `
 
 export const ProductFormTitle = styled.div`
@@ -89,6 +145,10 @@ export const ProductFormTitle = styled.div`
   margin-bottom: 20px;
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
+  }
+
+  .price-discount {
+    text-decoration: line-through;
   }
 `
 
@@ -231,17 +291,6 @@ export const WrapperSubOption = styled.div`
 
 export const SkuContent = styled.div`
   display: flex;
-  flex-direction: column;
-
-  h2 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 0px;
-  }
-
-  p {
-    font-size: 14px;
-  }
 `
 
 export const WrapperIngredients = styled.div`
@@ -288,5 +337,36 @@ export const ProductShareWrapper = styled.div`
       left: auto;
     }
   }
+
+`
+export const ProductName = styled.h1`
+  font-size: 24px;
+  line-height: 36px;
+  color: #344050;
+  margin-bottom: 10px;
+`
+export const Properties = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const ProductDescription = styled.p`
+  margin-top: 10px;
+`
+export const PriceContent = styled.p`
+  font-size: 18px;
+  line-height: 27px;
+  color: #344050;
+  margin: 0;
+`
+export const ProductMeta = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 16px;
+    line-height: 24px;
+    color: #909BA9;
+  }
+`
+export const EstimatedPersons = styled.div`
 
 `

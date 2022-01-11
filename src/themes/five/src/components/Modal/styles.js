@@ -100,7 +100,7 @@ export const ModalIcon = styled.span`
 `
 
 export const ModalBackHeader = styled.div`
-  height: 50px;
+  height: 70px;
   background-color: white;
   width: 100%;
   position: fixed;

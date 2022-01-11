@@ -218,11 +218,11 @@ const BusinessProductsListingUI = (props) => {
                     )}
                     {windowSize.width < 500 && (
                       <MobileCartViewWrapper>
-                        <span>{parsePrice(currentCart?.total)}</span>
+                        <span>{currentCart?.products?.length > 0 ? parsePrice(currentCart?.total) : parsePrice(0)}</span>
                         <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
                       </MobileCartViewWrapper>
                     )}
-                    <WrapContent>
+                    <WrapContent id='businessProductList'>
                       <BusinessProductsList
                         categories={[
                           { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },

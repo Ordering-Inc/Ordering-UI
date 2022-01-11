@@ -1,20 +1,33 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const MessagesContainer = styled.div`
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   overflow: hidden;
+  padding: 0 15px;
+
+  @media (min-width: 769px) {
+    padding: 0 40px;
+  }
 `
 
 export const HeaderProfile = styled.div`
   display: flex;
+  align-items: center;
   padding: 15px 20px;
-  ${props => props.theme?.rtl ? css`
-    padding: 15px 60px 15px 20px;
-  ` : css`
-    padding: 15px 20px 15px 60px;
-  `}
   border-bottom: 1px solid #EEEEEE;
+  height: 70px;
+  box-sizing: border-box;
+
+  ${({ active }) => active && css`
+    background: ${props => props.theme?.colors.grayDividerColor};
+  `}
+
+  ${({ isCursor }) => isCursor && css`
+    cursor: pointer;
+  `}
 
   div {
      p {
@@ -49,16 +62,16 @@ export const Status = styled.p`
 `
 
 export const Image = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${props => props.theme?.colors?.primary};
-  border-radius: 50%;
+  border-radius: 7.6px;
   padding: 5px;
   box-sizing: border-box;
   overflow: hidden;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 
   img {
     width: 100%;
@@ -74,18 +87,15 @@ export const Image = styled.div`
   }
 
   svg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 6px;
+    width: 36px;
+    height: 36px;
   }
 `
 
 export const HeaderOnline = styled.div`
   display: flex;
   flex-direction: column;
-  height: 60px;
-  line-height: 1.5;
+  height: 36px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -103,12 +113,12 @@ export const HeaderOnline = styled.div`
   }
 
   h1 {
-    font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 14px;
   }
 
   span {
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 300;
   }
 `
@@ -117,18 +127,20 @@ export const Chat = styled.div`
   display: flex;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 70vh;
+  height: calc(100vh - 490px);
+  min-height: 400px;
   flex-direction: column;
   padding: 0 20px;
   > :first-child{
     margin-top: 10px;
   }
-  @media (min-width: 768px){
-    height: calc(60vh - 60px);
+  @media (min-width: 769px){
+    height: calc(60vh - 90px);
   }
 `
 
 export const MessageConsole = styled.div`
+  width: 100%;
   display: inline-flex;
   justify-content: center;
   font-size: 0.8em;
@@ -165,7 +177,7 @@ export const BubbleConsole = styled.div`
 `
 
 export const BubbleBusines = styled.div`
-  border-radius: 40px 40px 40px 0px;
+  border-radius: 7.6px 7.6px 7.6px 0px;
   padding: 10px 25px 10px 25px;
   max-width: 60%;
   min-width: 80px;
@@ -174,21 +186,21 @@ export const BubbleBusines = styled.div`
   overflow: hidden;
   overflow-wrap: break-word;
   &[name=image]{
-    border-radius: 40px 40px 40px 0px;
+    border-radius: 7.6px 7.6px 7.6px 0px;
     width: 100%;
   }
 
   ${props => props.theme?.rtl && css`
-      border-radius: 40px 40px 0px 40px;
+      border-radius: 7.6px 7.6px 0px 7.6px;
   `}
 
   @media (min-width: 480px) {
-    border-radius: 60px 60px 60px 0px;
+    border-radius: 7.6px 7.6px 7.6px 0px;
 
     ${props => props.theme?.rtl && css`
-      border-radius: 60px 60px 0px 60px;
+      border-radius: 7.6px 7.6px 0px 7.6px;
       &[name=image]{
-        border-radius: 40px 40px 0px 40px;
+        border-radius: 7.6px 7.6px 0px 7.6px;
        }
     `}
   }
@@ -199,13 +211,13 @@ export const BubbleBusines = styled.div`
 `
 
 export const BubbleCustomer = styled.div`
-  border-radius: 40px 40px 0px 40px;
+  border-radius: 7.6px 7.6px 0px 7.6px;
   padding: 10px 25px 10px 25px;
   max-width: 60%;
   min-width: 80px;
   height: auto;
   margin-bottom: 10px;
-  background: #D81212;
+  background: ${props => props.theme?.colors.primary};
   color: white;
   overflow-wrap: break-word;
   overflow: hidden;
@@ -215,12 +227,12 @@ export const BubbleCustomer = styled.div`
   }
 
   &[name=image]{
-    border-radius: 40px 40px 0px 40px;
+    border-radius: 7.6px 7.6px 0px 7.6px;
     width: 100%;
   }
 
   ${props => props.theme?.rtl && css`
-    border-radius: 40px 40px 40px 0px;
+    border-radius: 7.6px 7.6px 7.6px 0px;
 
     p:last-child {
       left: initial;
@@ -228,15 +240,15 @@ export const BubbleCustomer = styled.div`
     }
 
     &[name=image]{
-      border-radius: 40px 40px 40px 0px;
+      border-radius: 7.6px 7.6px 7.6px 0px;
      }
   `}
   
   @media (min-width: 480px){
-    border-radius: 60px 60px 0px 60px;
+    border-radius: 7.6px 7.6px 0px 7.6px;
 
     ${props => props.theme?.rtl && css`
-      border-radius: 60px 60px 60px 0px;
+      border-radius: 7.6px 7.6px 7.6px 0px;
     `}
   }
 
@@ -248,18 +260,18 @@ export const BubbleCustomer = styled.div`
 
 export const SkeletonBubbleCustomer = styled.div`
   span{
-    border-radius: 60px 60px 0px 60px;
+    border-radius: 7.6px 7.6px 0px 7.6px;
     ${props => props.theme?.rtl && css`
-    border-radius: 60px 60px 60px 0px;
+    border-radius: 7.6px 7.6px 7.6px 0px;
     `}
   }
 `
 
 export const SkeletonBubbleBusiness = styled.div`
   span{
-    border-radius: 60px 60px 60px 0px;
+    border-radius: 7.6px 7.6px 7.6px 0px;
     ${props => props.theme?.rtl && css`
-    border-radius: 60px 60px 0px 60px;
+    border-radius: 7.6px 7.6px 0px 7.6px;
     `}
   }
 `
@@ -271,7 +283,7 @@ export const ChatImage = styled.div`
   img{
     width: 100%;
     height: auto;
-    max-height: 300;
+    max-height: 300px;
     aspect-ratio: attr(width) / attr(height);
     vertical-align: middle;
     object-fit: contain;
@@ -308,21 +320,32 @@ export const TimeofSent = styled.p`
   `}
 `
 
+export const TimeofSentByAdmin = styled.p`
+    position: relative;
+  text-align: left;
+  font-size: 0.8em;
+  margin-block-start: 0.2em;
+  margin-block-end: initial;
+
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
+`
+
 export const SendForm = styled.div`
   display: flex;
-  padding: 0px 5px;
-  position: fixed;
+  flex-direction: column;
+  padding: 5px;
   bottom: 0;
-  background: #FAFAFA;
-  border-top: 1px solid #EEEEEE;
-  width: 97%;
-  height: 70px;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid #DEE2E6;
+
   @media (min-width: 480px){
-    padding: 0px 20px;
-    width: 95%;
+    padding: 5px 20px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     padding: 10px 20px;
     position: static;
     width: auto;
@@ -336,19 +359,36 @@ export const Send = styled.form`
   height: auto;
   width: 100%;
   input {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 60%;
-    flex: 1;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    width: 100%;
+    background: #F8F9FA;
+    border-radius: 7.6px;
+    border: none;
+    font-size: 12px;
+    box-sizing: border-box;
+    ${props => props.theme?.rtl ? css`
+      padding-left: 30px;
+      padding-right: 15px;
+    ` : css`
+      padding-left: 15px;
+      padding-right: 30px;
+    `}
   }
 `
 
 export const SendImage = styled.label`
-  width: 25px;
-  height: 25px;
-  margin: 0px 20px;
-  position: ${props => props.hidden && 'fixed'};
+  width: 15px;
+  height: 15px;
+  position: ${props => props.hidden ? 'fixed' : 'absolute'};
   opacity: ${props => props.hidden && '0'};
+  right: 16px;
+  top: 11px;
+
+  ${props => props.theme?.rtl && css`
+    left: 16px;
+    right: initial;
+  `}
 
   input {
     display: none;
@@ -358,54 +398,68 @@ export const SendImage = styled.label`
 
   svg {
     color: #CFD0D0;
-    width: 25px;
-    height: 25px;
+    width: 15px;
+    height: 15px;
     cursor: pointer
   }
 `
 
 export const WrapperDeleteImage = styled.div`
-  margin: 0px 17px;
-  width: 30px;
-  height: 30px;
-  position: relative;
-  img{
-    width: 30px;
-    height: 30px;
-    &:disabled {
-    cursor: not-allowed;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 9px;
+  ${props => props.theme?.rtl ? css`
+    left: 12px;
+  ` : css`
+    right: 12px;
+  `}
+  > div {
+    position: relative;
+
+    img{
+      width: 25px;
+      height: 25px;
+      &:disabled {
+      cursor: not-allowed;
+      }
+      border-radius: 8px;
     }
-    border-radius: 8px;
+
+    svg{
+      margin-bottom: 5px;
+      color: black;
+    }
+
+    button{
+      position: absolute;
+      background: white;
+      width: 18px;
+      height: 18px;
+      transform: translate(100%, -50%);
+    }
   }
 
-  svg{
-    margin-bottom: 5px;
-    color: black;
-  }
-
-  button{
-    position: absolute;
-    background: white;
-    width: 20px;
-    height: 20px;
-    transform: translate(100%, -50%);
-  }
 `
 
 export const WrapperSendMessageButton = styled.div`
   white-space: nowrap;
+  margin-left: 20px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 20px;
+    margin-left: 0;
+  `}
 
   button{
-    padding-top: 7px;
-    padding-bottom: 7px;
-    svg {
-       width: 1.5em;
-       height: 1.5em; 
-       vertical-align: middle;
-       color: white;
-       ${props => props.theme?.rtl && css`
-        margin-left: 10px;
-        margin-right: 0px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+      svg {
+        display: inline;
+        width: 20px;
+        height: 20px; 
+        vertical-align: middle;
+        color: white;
+        ${props => props.theme?.rtl && css`
         transform: rotate(270deg)
       `}
     }
@@ -423,7 +477,7 @@ export const WrapperSendMessageButton = styled.div`
   @media (min-width: 480px){
     button{
       svg {
-        margin-right: 10px;
+        display: none;
       }
       span {
         display: inline;
@@ -466,7 +520,7 @@ export const ModalIcon = styled.span`
     right: initial;
   `}
   }
-  @media (min-width: 768px){
+  @media (min-width: 769px){
     right: 5px;
     ${props => props.theme?.rtl && css`
     left: 5px;
@@ -475,13 +529,110 @@ export const ModalIcon = styled.span`
   }
 `
 
-export const NotSendMessage = styled.div`
+export const MessagesLayoutWrapper = styled.div`
+  display: flex;
+  border-left: 1px solid #DEE2E6;
+  border-right: 1px solid #DEE2E6;
+  position: relative;
+  flex-direction: column;
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+  }
+`
+
+export const MessagesLeftLayout = styled.div`
+  width: 100%;
+  border-right: 1px solid #DEE2E6;
+  min-width: 250px;
+
+  ${props => props.theme?.rtl && css`
+    border-left: 1px solid #DEE2E6;
+    border-right: none;
+  `}
+
+  @media (min-width: 769px) {
+    width: 30%;
+  }
+`
+
+export const MessagesRightLayout = styled.div`
+  width: 100%;
+  border-top: 1px solid #DEE2E6;
+  margin-top: 30px;
+
+  @media (min-width: 769px) {
+    width: 70%;
+    border: none;
+    margin-top: 0;
+  }
+`
+
+export const MessagesTitle = styled.div`
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #DEE2E6;
+  padding: 15px 20px;
+  height: 70px;
+  box-sizing: border-box;
+
+  h1 {
+    font-weight: 600;
+    font-size: 20px;
+    color: ${props => props.theme?.colors.headingColor};
+    margin: 0;
+  }
+`
+
+export const CustomerList = styled.div`
+  > div {
+    border: none;
+  }
+`
+
+export const MessagesClose = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  ${props => props.theme?.rtl && css`
+    left: 10px;
+    right: initial;
+  `}
+  cursor: pointer;
+
+  svg {
+    font-size: 24px;
+  }
+`
+
+export const InputWrapper = styled.div`
+  width: 60%;
+  flex: 1;
+  position: relative;
+`
+
+export const MessageContentWrapper = styled.div``
+
+export const MessageCreatedDate = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+
+  span {
+    font-size: 12px;
+    color: ${props => props.theme?.colors.darkGray}
+  }
+`
+
+export const NotSendMessage = styled(SendForm)`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 100%;
   color: #909BA9;
+  background: #F8F9FA;
 
   svg {
     font-size: 20px;
@@ -491,5 +642,30 @@ export const NotSendMessage = styled.div`
     font-size: 14px;
     color: #909BA9;
     margin: 6px 0;
+  }
+`
+
+export const QuickMessageWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  button {
+    margin-bottom: 5px;
+    border-radius: 50px;
+    color: #414954;
+    background: #E9ECEF;
+    border: none;
+    margin-right: 12px;
+    font-size: 12px;
+    line-height: 25px;
+    padding: 0px 12px;
+    ${props => props.theme.rtl && css`
+      margin-right: 0px;
+      margin-left: 12px;
+    `}
+
+    &:active {
+      background: ${() => darken(0.05, '#E9ECEF')};
+    }
   }
 `

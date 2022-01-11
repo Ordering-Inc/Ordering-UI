@@ -355,6 +355,7 @@ const CheckoutUI = (props) => {
                   <DriverTips
                     businessId={cart?.business_id}
                     driverTipsOptions={driverTipsOptions}
+                    isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)}
                     isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
                     driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)
                       ? cart?.driver_tip

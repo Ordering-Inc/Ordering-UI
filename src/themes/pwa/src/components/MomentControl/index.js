@@ -9,14 +9,20 @@ import {
 } from 'ordering-components'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import 'react-calendar/dist/Calendar.css'
+import Calendar from 'react-calendar'
 import { Select } from '../../styles/Select'
+import MdClose from '@meronex/icons/md/MdClose'
+import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
+import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
 
 import {
   Title,
   Option,
   DatePickerWrapper,
   CheckBoxWrapper,
-  HourListWrapper
+  HourListWrapper,
+  CalendarWrapper
 } from './styles'
 import CgRadioCheck from '@meronex/icons/cg/CgRadioCheck'
 import CgRadioChecked from '@meronex/icons/cg/CgRadioChecked'
@@ -41,7 +47,7 @@ const MomentControlUI = (props) => {
   const [value, onChange] = useState(new Date())
   const [minDate, setMinDate] = useState(new Date())
   const [maxDate, setMaxDate] = useState(new Date())
-  const [isASP, setIsASP] = useState(isAsap)
+  const [isASP, setIsASP] = useState(true)
   const [timeLists, setTimeLists] = useState(null)
 
   const onDateChange = (value) => {
@@ -60,6 +66,26 @@ const MomentControlUI = (props) => {
       !orderState.loading && handleAsap()
       setIsASP(true)
     } else setIsASP(false)
+  }
+
+  const handleRemoveDate = () => {
+    !orderState.loading && handleAsap()
+    setIsASP(true)
+  }
+
+  const formatMonthYear = (date) => {
+    return moment(date).format('MMMM')
+  }
+
+  const formatShortWeekday = (date) => {
+    return moment(date).format('dd')
+  }
+
+  const formatDay = (date) => {
+    const minMon = moment(minDate).format('MM')
+    const maxMon = moment(maxDate).format('MM')
+    const currMon = moment(date).format('MM')
+    return ((minMon === currMon) || (maxMon === currMon)) ? moment(date).format('D') : ''
   }
 
   useEffect(() => {
@@ -107,6 +133,10 @@ const MomentControlUI = (props) => {
     }
   }, [hoursList])
 
+  useEffect(() => {
+    if (isASP) handleCheckBoxChange(true)
+  }, [isAsap])
+
   return (
     <div id='moment_control'>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -134,14 +164,34 @@ const MomentControlUI = (props) => {
       {
         !isASP && (
           <>
-            <DatePickerWrapper>
-              <DatePicker
-                selected={value}
-                onChange={(date) => onDateChange(date)}
+            <CalendarWrapper>
+              <DatePickerWrapper>
+                <DatePicker
+                  selected={value}
+                  onChange={(val) => onDateChange(val)}
+                  minDate={minDate}
+                  maxDate={maxDate}
+                  dateFormat='MM/dd/yy'
+                />
+                <MdClose
+                  onClick={handleRemoveDate}
+                />
+              </DatePickerWrapper>
+              <Calendar
+                onChange={(val) => onDateChange(val)}
+                value={value}
+                next2Label=''
+                prev2Label=''
+                prevLabel={<MdKeyboardArrowLeft />}
+                nextLabel={<MdKeyboardArrowRight />}
                 minDate={minDate}
                 maxDate={maxDate}
+                formatMonthYear={(locale, date) => formatMonthYear(date)}
+                formatShortWeekday={(locale, date) => formatShortWeekday(date)}
+                formatDay={(locale, date) => formatDay(date)}
+                calendarType='US'
               />
-            </DatePickerWrapper>
+            </CalendarWrapper>
             <HourListWrapper
               isLoading={orderState?.loading}
             >

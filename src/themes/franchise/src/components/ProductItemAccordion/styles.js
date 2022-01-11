@@ -18,7 +18,7 @@ const AccordionStyled = styled.div`
   justify-content: space-between;
   cursor: initial;
   transition: background-color 0.6s ease;
-  margin: 0px 10px;
+  margin: 0px;
 
   .rotate {
     transform: rotate(180deg);
@@ -104,17 +104,11 @@ export const ContentInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   text-transform: capitalize;
-  margin-left: 10px;
   width: 55%;
 
   @media (min-width: 411px) {
     width: calc(65% - 60px);
   }
-
-  ${props => props.theme?.rtl && css`
-    margin-right: 10px;
-    margin-left: 0px;
-  `}
 
   h3 {
     font-size: 14px;
@@ -327,12 +321,12 @@ export const ProductSelect = styled.select`
     background: ${props => props.theme?.colors.grayDividerColor};
   `}
   border-radius: 7.6px;
-  max-width: 45px;
+  max-width: 37px;
   height: 25px;
   border: none;
   font-size: 12px;
   outline: none;
-  margin: 0 5px;
+  margin: 0 5px 0 10px;
   padding: 0 3px;
   cursor: pointer;
   -moz-appearance: none;

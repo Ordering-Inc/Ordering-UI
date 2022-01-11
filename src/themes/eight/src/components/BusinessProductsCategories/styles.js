@@ -128,3 +128,10 @@ export const CategoryName = styled.div`
     color: ${props => props.theme.colors.secundary};
   }
 `
+export const WrapperNotFound = styled.div`
+  height: 500px;
+  width: 100%;
+  > div{
+    height: 100%;
+  }
+`

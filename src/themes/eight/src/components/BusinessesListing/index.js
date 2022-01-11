@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
+import { NavBar } from '../NavBar'
+
 import {
   BusinessContainer,
   BusinessList,
@@ -11,7 +13,6 @@ import {
 import { Button } from '../../styles/Buttons'
 import { AddressForm } from '../AddressForm'
 import { AddressList } from '../AddressList'
-import { NavBar } from '../NavBar'
 import { BusinessController } from '../BusinessController'
 
 import { OrdersOption } from '../../../../../components/OrdersOption'
@@ -37,7 +38,9 @@ const BusinessesListingUI = (props) => {
     isCustomLayout,
     onRedirectPage,
     handleBusinessClick,
-    currentPageParam
+    currentPageParam,
+    searchValue,
+    handleChangeSearch
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -145,7 +148,16 @@ const BusinessesListingUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <NavBar title={t('SELECT_RESTAURANT', 'Select Restaurant')} />
+
+      <NavBar
+        isHideBackButton
+        isSearchShow
+        title={t('SELECT_RESTAURANT', 'Select Restaurant')}
+        lazyLoad
+        searchValue={searchValue}
+        handleChangeSearch={handleChangeSearch}
+      />
+
       <BusinessContainer>
         <h1>{t('TITLE_BUSINESSES_LIST', 'Select a restaurant to start a order')}</h1>
 

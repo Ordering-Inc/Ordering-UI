@@ -1,21 +1,39 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+export const TitleBar = styled.div`
+  border: 1px solid #E9ECEF;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 18px 5px;
+  text-align: center;
+  color: ${props => props.theme.colors.grayDark};
+  font-size: 14px;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+`
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid #F8F9FA;
+  border-bottom: 1px solid ${props => props.theme.colors.gray};
+  min-height: calc(100vh - 180px);
 
   @media (min-width: 1024px) {
     flex-direction: row;
   }
 `
 export const WrapLeftContainer = styled.div`
-  flex: 1;
   padding: 30px 20px;
   display: flex;
   justify-content: flex-end;
+  box-sizing: border-box;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+  }
 `
 
 export const WrapLeftInnerContainer = styled.div`
@@ -66,18 +84,14 @@ export const WrapRightInnerContainer = styled.div`
 `
 
 export const WrapRightContainer = styled.div`
-  flex: 1;
   background-color: ${props => props.theme.colors.secundaryLight};
   padding: 30px 20px;
+  box-sizing: border-box;
 
   @media (min-width: 1024px) {
     padding: 30px 0px;
+    width: 50%;
   }
-`
-
-export const WrapperContainer = styled.div`
-  width: ${({ isLoading }) => isLoading ? '100%' : '80%'};
-  margin: auto;
 `
 
 export const Header = styled.div`
@@ -374,32 +388,6 @@ export const ReviewsAction = styled.div`
   &:hover {
     opacity: 1;
   }
-`
-
-export const SkeletonBlock = styled.div`
-  width: ${({ width }) => width && `${width}%`};
-  border-radius: 16px;
-  margin-bottom: 30px;
-  span:nth-child(2),span:nth-child(5){
-      span{
-        height: 100px;
-      }
-    }
-  @media (min-width: 768px){
-    span:nth-child(2), span:nth-child(5){
-      span{
-        height: 200px;
-      }
-    }
-  }
-`
-
-export const SkeletonBlockWrapp = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  line-height: 40px;
 `
 
 export const ShareOrder = styled.div`

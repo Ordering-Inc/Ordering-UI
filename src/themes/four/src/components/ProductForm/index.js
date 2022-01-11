@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
@@ -30,7 +30,6 @@ import { Button } from '../../styles/Buttons'
 import {
   ProductContainer,
   WrapperImage,
-  ProductImage,
   ProductInfo,
   ProductEdition,
   SectionTitle,
@@ -41,11 +40,27 @@ import {
   SkuContent,
   ProductFormTitle,
   WrapperIngredients,
-  Zoomlink
+  Zoomlink,
+  ProductName,
+  Properties,
+  ProductMeta,
+  EstimatedPersons,
+  ProductDescription,
+  PriceContent
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, {
+  Navigation,
+  Thumbs
+} from 'swiper'
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
+SwiperCore.use([Navigation, Thumbs])
 
 const ProductOptionsUI = (props) => {
   const {
@@ -75,6 +90,8 @@ const ProductOptionsUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [gallery, setGallery] = useState([])
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
@@ -132,6 +149,17 @@ const ProductOptionsUI = (props) => {
     return classnames
   }
 
+  useEffect(() => {
+    const imageList = []
+    imageList.push(product?.images || theme.images?.dummies?.product)
+    if (product?.gallery && product?.gallery?.length > 0) {
+      for (const galleryItem of product?.gallery) {
+        imageList.push(galleryItem?.file)
+      }
+    }
+    setGallery(imageList)
+  }, [product])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -157,21 +185,81 @@ const ProductOptionsUI = (props) => {
           />
         )}
         {
-        props.beforeMidElements?.map((BeforeMidElements, i) => (
-          <React.Fragment key={i}>
-            {BeforeMidElements}
-          </React.Fragment>))
+          props.beforeMidElements?.map((BeforeMidElements, i) => (
+            <React.Fragment key={i}>
+              {BeforeMidElements}
+            </React.Fragment>))
         }
         {
-        props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-          <BeforeMidComponents key={i} {...props} />))
+          props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+            <BeforeMidComponents key={i} {...props} />))
         }
         {!loading && !error && product && (
           <>
             <WrapperImage>
-              <ProductImage id='product_image'>
-                <img src={product?.images || theme.images?.dummies?.product} alt='product' width='300px' height='300px' loading='lazy' />
-              </ProductImage>
+              <Swiper
+                spaceBetween={10}
+                navigation
+                thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+              >
+                {gallery.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={20}
+                slidesPerView={5}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                  },
+                  300: {
+                    slidesPerView: 4,
+                    spaceBetween: 20
+                  },
+                  400: {
+                    slidesPerView: 5,
+                    spaceBetween: 20
+                  },
+                  550: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  },
+                  769: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  },
+                  1000: {
+                    slidesPerView: 7,
+                    spaceBetween: 20
+                  },
+                  1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 20
+                  },
+                  1300: {
+                    slidesPerView: 5,
+                    spaceBetween: 20
+                  },
+                  1600: {
+                    slidesPerView: 6,
+                    spaceBetween: 20
+                  }
+                }}
+                freeMode
+                watchSlidesProgress
+                className='product-thumb'
+              >
+                {gallery.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
               {product?.images && (
                 <Zoomlink
                   target='_blank'
@@ -183,14 +271,28 @@ const ProductOptionsUI = (props) => {
             </WrapperImage>
             <ProductInfo>
               <ProductFormTitle>
-                <h1>{product?.name}</h1>
-                {product?.description && <p>{product?.description}</p>}
-                {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
-                  <SkuContent>
-                    <h2>{t('SKU', theme?.defaultLanguages?.SKU || 'Sku')}</h2>
-                    <p>{product?.sku}</p>
-                  </SkuContent>
-                )}
+                <ProductName>{product?.name}</ProductName>
+                <Properties>
+                  <PriceContent>{parsePrice(product?.price)}</PriceContent>
+                  <ProductMeta>
+                    {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
+                      <SkuContent>
+                        <span>{t('SKU', theme?.defaultLanguages?.SKU || 'Sku')}&nbsp;</span>
+                        <span>{product?.sku}</span>
+                      </SkuContent>
+                    )}
+                    {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && product?.estimated_person && (
+                      <span>&nbsp;&#183;&nbsp;</span>
+                    )}
+                    {product?.estimated_person && (
+                      <EstimatedPersons>
+                        <span>{product?.estimated_person}&nbsp;</span>
+                        <span>{t('ESTIMATED_PERSONS', 'persons')}</span>
+                      </EstimatedPersons>
+                    )}
+                  </ProductMeta>
+                </Properties>
+                {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
               </ProductFormTitle>
               <ProductEdition>
                 {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
@@ -218,12 +320,12 @@ const ProductOptionsUI = (props) => {
                             >
                               <WrapperSubOption className={isError(option.id)}>
                                 {
-                                  option.suboptions.map(suboption => {
-                                    const currentState = productCart.options[`id:${option.id}`]?.suboptions[`id:${suboption.id}`] || {}
-                                    const balance = productCart.options[`id:${option.id}`]?.balance || 0
+                                  option.suboptions.filter(suboptions => suboptions.enabled).map(suboption => {
+                                    const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                    const balance = productCart.options[`id:${option?.id}`]?.balance || 0
                                     return (
                                       <ProductOptionSubOption
-                                        key={suboption.id}
+                                        key={suboption?.id}
                                         onChange={handleChangeSuboptionState}
                                         balance={balance}
                                         option={option}
@@ -252,14 +354,14 @@ const ProductOptionsUI = (props) => {
                   />
                 </ProductComment>
                 {
-                props.afterMidElements?.map((MidElement, i) => (
-                  <React.Fragment key={i}>
-                    {MidElement}
-                  </React.Fragment>))
+                  props.afterMidElements?.map((MidElement, i) => (
+                    <React.Fragment key={i}>
+                      {MidElement}
+                    </React.Fragment>))
                 }
                 {
-                props.afterMidComponents?.map((MidComponent, i) => (
-                  <MidComponent key={i} {...props} />))
+                  props.afterMidComponents?.map((MidComponent, i) => (
+                    <MidComponent key={i} {...props} />))
                 }
               </ProductEdition>
               <ProductActions>

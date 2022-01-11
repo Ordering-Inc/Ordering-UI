@@ -3,6 +3,8 @@ import VscWarning from '@meronex/icons/vsc/VscWarning'
 import RiShoppingBagFill from '@meronex/icons/ri/RiShoppingBagFill'
 import HiClock from '@meronex/icons/hi/HiClock'
 import HiLocationMarker from '@meronex/icons/hi/HiLocationMarker'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
+
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import {
@@ -21,6 +23,7 @@ import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../CouponControl'
+import { TaxInformation } from '../TaxInformation'
 
 import {
   Container,
@@ -43,7 +46,9 @@ import {
   ConfirmInfoItem,
   OrderBill,
   CouponAddButton,
-  CouponContainer
+  CouponContainer,
+  Exclamation
+
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -78,7 +83,9 @@ const CheckoutUI = (props) => {
     handlePaymethodChange,
     handlerClickPlaceOrder,
     handleOrderRedirect,
-    isCustomerMode
+    isCustomerMode,
+    isResetPaymethod,
+    setIsResetPaymethod
   } = props
 
   const theme = useTheme()
@@ -96,6 +103,7 @@ const CheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
+  const [openTaxModal, setOpenTaxModal] = useState({ open: false, data: null })
 
   const [modalOpen, setModalOpen] = useState({})
 
@@ -173,6 +181,16 @@ const CheckoutUI = (props) => {
     events.emit('go_to_page', { page: 'business', params: { store: slug } })
   }
 
+  const getIncludedTaxes = () => {
+    if (cart?.taxes === null) {
+      return cart.business.tax_type === 1 ? cart?.tax : 0
+    } else {
+      return cart?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
   useEffect(() => {
     if (validationFields && validationFields?.fields?.checkout) {
       checkValidationFields()
@@ -189,11 +207,11 @@ const CheckoutUI = (props) => {
   }, [errors])
 
   useEffect(() => {
-    const paymethods = businessDetails?.business?.paymethods || []
-    if (paymethods && paymethods.length > 1) {
+    if (isResetPaymethod) {
       handlePaymethodChange(null)
+      setIsResetPaymethod(true)
     }
-  }, [cart?.total])
+  }, [isResetPaymethod])
 
   return (
     <>
@@ -440,7 +458,7 @@ const CheckoutUI = (props) => {
                     <tbody>
                       <tr>
                         <td>{t('SUBTOTAL', 'Subtotal')}</td>
-                        <td>{cart.business.tax_type === 1 ? parsePrice((cart?.subtotal + cart?.tax) || 0) : parsePrice(cart?.subtotal || 0)}</td>
+                        <td>{parsePrice(cart?.subtotal + getIncludedTaxes())}</td>
                       </tr>
                       {cart?.discount > 0 && cart?.total >= 0 && (
                         <tr>
@@ -456,15 +474,32 @@ const CheckoutUI = (props) => {
                         </tr>
                       )}
                       {
-                        cart.business.tax_type !== 1 && (
-                          <tr>
+                        cart.taxes?.length > 0 && cart.taxes.filter(tax => tax.type === 2 && tax?.rate !== 0).map(tax => (
+                          <tr key={tax.id}>
                             <td>
-                              {t('TAX', 'Tax')}
-                              <span>{`(${verifyDecimals(cart?.business?.tax, parseNumber)}%)`}</span>
+                              {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                              <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
+                                <BsInfoCircle size='20' color={theme.colors.primary} />
+                              </Exclamation>
                             </td>
-                            <td>{parsePrice(cart?.tax || 0)}</td>
+                            <td>{parsePrice(tax?.summary?.tax || 0)}</td>
                           </tr>
-                        )
+                        ))
+                      }
+                      {
+                        cart?.fees?.length > 0 && cart?.fees?.filter(fee => !(fee.fixed === 0 && fee.percentage === 0))?.map(fee => (
+                          <tr key={fee.id}>
+                            <td>
+                              {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              ({parsePrice(fee?.fixed)} + {fee.percentage}%)
+                              <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
+                                <BsInfoCircle size='20' color={theme.colors.primary} />
+                              </Exclamation>
+                            </td>
+                            <td>{parsePrice(fee?.summary?.fixed + fee?.summary?.percentage || 0)}</td>
+                          </tr>
+                        ))
                       }
                       {cart?.driver_tip > 0 && (
                         <tr>
@@ -472,10 +507,10 @@ const CheckoutUI = (props) => {
                             {t('DRIVER_TIP', 'Driver tip')}
                             {cart?.driver_tip_rate > 0 &&
                               parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                              !!!parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                            (
-                              <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>
-                            )}
+                              !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
+                              (
+                                <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>
+                              )}
                           </td>
                           <td>{parsePrice(cart?.driver_tip)}</td>
                         </tr>
@@ -484,15 +519,6 @@ const CheckoutUI = (props) => {
                         <tr>
                           <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                           <td>{parsePrice(cart?.delivery_price)}</td>
-                        </tr>
-                      )}
-                      {cart?.service_fee > 0 && (
-                        <tr>
-                          <td>
-                            {t('SERVICE_FEE', 'Service Fee')}
-                            <span>{`(${verifyDecimals(cart?.business?.service_fee, parseNumber)}%)`}</span>
-                          </td>
-                          <td>{parsePrice(cart?.service_fee)}</td>
                         </tr>
                       )}
                     </tbody>
@@ -566,6 +592,18 @@ const CheckoutUI = (props) => {
             />
           </CouponContainer>
         </Modal>
+        <Modal
+          width='70%'
+          open={openTaxModal.open}
+          padding='20px'
+          closeOnBackdrop
+          title={`${openTaxModal.data?.name ||
+            t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`}) `}
+          onClose={() => setOpenTaxModal({ open: false, tax: null })}
+          modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <TaxInformation data={openTaxModal.data} products={cart?.products} />
+        </Modal>
         <Alert
           title={t('CUSTOMER_DETAILS', 'Customer Details')}
           content={alertState.content}
@@ -609,6 +647,7 @@ export const Checkout = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [currentCart, setCurrentCart] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isResetPaymethod, setIsResetPaymethod] = useState(false)
 
   const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products?.length) || null)
 
@@ -675,6 +714,7 @@ export const Checkout = (props) => {
               open: true,
               content: [confirmCartRes.error.message]
             })
+            setIsResetPaymethod(true)
           }
           if (confirmCartRes.result.order?.uuid) {
             handleOrderRedirect(confirmCartRes.result.order.uuid)
@@ -718,7 +758,9 @@ export const Checkout = (props) => {
     ...props,
     UIComponent: CheckoutUI,
     cartState,
-    businessId: cartState.cart?.business_id
+    businessId: cartState.cart?.business_id,
+    isResetPaymethod,
+    setIsResetPaymethod
   }
 
   return (

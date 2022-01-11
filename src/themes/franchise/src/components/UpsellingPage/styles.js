@@ -141,6 +141,7 @@ export const HorizontalUpsellingContainer = styled.div`
 `
 
 export const HorizontalItem = styled.div`
+  width: 230px;
   display: flex;
   justify-content: space-between;
   border-radius: 7.6px;
@@ -156,10 +157,15 @@ export const HorizontalItem = styled.div`
 `
 
 export const HorizontalImage = styled.div`
+  display: flex;
+  align-items: center;
+
   img {
     border-radius: 7.6px;
-    min-width: 73px;
-    min-height: 73px;
+    min-width: 80px;
+    min-height: 80px;
+    width: 80px;
+    height: 80px;
     margin-left: 10px;
 
     ${props => props.theme?.rtl && css`
@@ -172,11 +178,21 @@ export const HorizontalImage = styled.div`
 
 export const HorizontalDetails = styled.div`
   min-width: 100px;
+  position: relative;
+
+  > div {
+    line-height: 18px;
+  }
+
   h3 {
     font-weight: 500;
     font-size: 12px;
     color: ${props => props.theme.colors.darkTextColor};
-    margin: 0 0 5px 0;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 
   span {
@@ -195,10 +211,21 @@ export const HorizontalDetails = styled.div`
   }
 
   button {
-    margin-top: 6px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    margin-top: 3px;
     border-radius: 50px;
+    font-size: 12px;
+    line-height: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     color: ${props => props.theme?.colors.primary};
-    background: ${props => props.theme?.colors.primaryContrast}
+    background: ${props => props.theme?.colors.primaryContrast};
+    border: none;
+    &:active {
+      color: white;
+    }
   }
 `
 export const WrapAutoScroll = styled.div`
@@ -206,4 +233,38 @@ export const WrapAutoScroll = styled.div`
   width: 100%;
   overflow-x: auto;
   display: flex;
+`
+export const UpsellingPageTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  p {
+    font-weight: 500;
+    font-size: 16px;
+    color: ${props => props.theme?.colors.darkTextColor};
+  }
+
+  svg {
+    font-size: 20px;
+    cursor: pointer;
+    color: #748194;
+    margin-left: 30px;
+
+    ${props => props.theme?.rtl && css`
+      margin-right: 30px;
+      margin-left: 0px;
+    `}
+  }
+`
+
+export const Divider = styled.div`
+  background: #F8F9FA;
+  height: 8px;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+
+  @media (min-width: 768px) {
+    width: calc(100% + 60px);
+    margin-left: -30px;
+  }
 `

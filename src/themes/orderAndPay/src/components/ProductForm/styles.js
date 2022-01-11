@@ -46,9 +46,7 @@ export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0px;
   position: relative;
-  margin-top: 18px;
   padding: 0 20px;
   box-sizing: border-box;
   h1 {
@@ -87,18 +85,12 @@ export const ProductInfo = styled.div`
 
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
-  margin-bottom: 20px;
-  display: flex;
-  span{
-    white-space: nowrap;
-  }
-  @media (min-width: 1201px) {
-    width: calc(100% - 25px);
-  }
+  padding: 0 20px;
+  margin-top: 20px;
 `
 
 export const ProductEdition = styled.div`
-  margin-top: 20px;
+
 `
 
 export const SectionTitle = styled.h3`
@@ -225,17 +217,6 @@ export const WrapperSubOption = styled.div`
 
 export const SkuContent = styled.div`
   display: flex;
-  flex-direction: column;
-
-  h2 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 0px;
-  }
-
-  p {
-    font-size: 14px;
-  }
 `
 
 export const WrapperIngredients = styled.div`
@@ -248,9 +229,13 @@ export const WrapperIngredients = styled.div`
 
 export const ProductTabContainer = styled.div`
   position: sticky;
-  top: 40px;
-  background: ${({ theme }) => theme.colors.white};
+  top: -20px;
   border-bottom: 1px solid #E9ECEF;
+  ${({ theme }) => theme.colors.white ? css`
+    background: ${({ theme }) => theme.colors.white};
+  ` : css`
+    background: #fff;
+  `} 
 `
 
 export const Divider = styled.div`
@@ -315,6 +300,37 @@ export const ModalIcon = styled.span`
 
   @media(min-width: 769px){
     position: absolute;
-    top: -10px;
+    top: 0px;
   }
+`
+export const ProductName = styled.h1`
+  font-size: 24px;
+  line-height: 36px;
+  color: #344050;
+  margin-bottom: 10px;
+`
+export const Properties = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const ProductDescription = styled.p`
+  margin-top: 10px;
+`
+export const PriceContent = styled.p`
+  font-size: 18px;
+  line-height: 27px;
+  color: #344050;
+  margin: 0;
+`
+export const ProductMeta = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 16px;
+    line-height: 24px;
+    color: #909BA9;
+  }
+`
+export const EstimatedPersons = styled.div`
+
 `

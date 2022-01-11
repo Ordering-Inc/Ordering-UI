@@ -18,7 +18,7 @@ export const WrapperContainer = styled.div`
   }
 
   @media (min-width: 993px) {
-    min-height: calc(100vh - 337px);
+    min-height: calc(100vh - 87px);
     box-sizing: border-box;
   }
 `
@@ -70,22 +70,22 @@ export const BusinessWrapper = styled.div`
 `
 
 export const BusinessInfo = styled.div`
+  width: 100%;
   h1,
   p {
     margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     color: ${props => props.theme.colors.darkTextColor};
+    overflow-wrap: break-word;
   }
 
   h2 {
     font-weight: 500;
     font-size: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
   }
   p {
     font-size: 14px;
+    margin-bottom: 5px;
   }
 `
 
@@ -441,7 +441,8 @@ export const ShareOrder = styled.div`
       div {
         right: 0px;
         left: initial;
-        top: 35px;
+        top: initial;
+        bottom: 100%;
       }
     }
   }
@@ -542,4 +543,12 @@ export const MyOrderActions = styled.div`
   button {
     background-color: transparent;
   }
+`
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
 `

@@ -77,7 +77,7 @@ export const CardInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: ${props => props.theme.colors.darkGray};
+    color: ${props => props.theme.colors.secundary};
     margin: 0px;
   }
 
@@ -111,7 +111,6 @@ export const CardInfo = styled.div`
     h1 {
       padding-top: 10px;
       text-align: center;
-      color: ${props => props.theme.colors.secundary};
     }
   }
 
@@ -145,6 +144,19 @@ const CardLogoStyled = styled.div`
   width: 100%;
   padding-top: 100%;
   border-radius: 7.6px;
+
+  ${({ isSkeleton }) => isSkeleton && css`
+    > span {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      height: 100%;
+
+      span {
+        height: 100%;
+      }
+    }
+  `}
 `
 export const CardLogo = (props) => {
   const style = {}
