@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage, BusinessMenuListing } from 'ordering-components'
 import { Select } from '../../styles/Select'
-import { BusinessMenuListing } from './naked'
 import Skeleton from 'react-loading-skeleton'
 import {
   BusinessMenuListContainer,
