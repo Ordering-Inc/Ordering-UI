@@ -212,3 +212,12 @@ export const formatSeconds = (seconds) => {
  ret += "" + secs;
  return ret;
 }
+
+/**
+ * Function to transform degree to radian
+ * @param {number} value for transform
+ *
+ */
+export const convertToRadian = (value) => {
+  return value * Math.PI / 180
+}
