@@ -212,9 +212,7 @@ var ProductInfoContainer = _styledComponents.default.div(_templateObject46 || (_
 
 exports.ProductInfoContainer = ProductInfoContainer;
 
-var ProductInfoContent = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  width: 60%;\n  h1 {\n    color: ", ";\n    font-weight: 500;\n    font-size: 16px;\n    margin: 0px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 768px) {\n    width: calc(75% - 20px);\n    h1 {\n      color: ", ";\n      font-size: 20px;\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.darkGray;
-}, function (props) {
+var ProductInfoContent = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  width: 60%;\n  h1 {\n    color: ", ";\n    font-weight: 500;\n    font-size: 16px;\n    margin: 0px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 768px) {\n    width: calc(75% - 20px);\n    h1 {\n      font-size: 20px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 });
 

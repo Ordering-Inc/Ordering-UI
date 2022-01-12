@@ -142,7 +142,7 @@ var CallCenterInformationBullet = _styledComponents.default.div(_templateObject2
 
 exports.CallCenterInformationBullet = CallCenterInformationBullet;
 
-var BusinessLogoWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  aligin-items: center;\n  justify-content: space-between;\n  margin-top: -20px;\n  margin-bottom: 10px;\n"])));
+var BusinessLogoWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: -20px;\n  margin-bottom: 10px;\n"])));
 
 exports.BusinessLogoWrapper = BusinessLogoWrapper;
 

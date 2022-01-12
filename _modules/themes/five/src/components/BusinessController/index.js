@@ -68,7 +68,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       isCustomLayout = props.isCustomLayout,
       isShowCallcenterInformation = props.isShowCallcenterInformation,
       isBusinessOpen = props.isBusinessOpen,
-      businessWillCloseSoonMinutes = props.businessWillCloseSoonMinutes;
+      businessWillCloseSoonMinutes = props.businessWillCloseSoonMinutes,
+      onPreorderBusiness = props.onPreorderBusiness;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -92,13 +93,13 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }),
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
-      setAlertState = _useState2[1];
+      setAlertState = _useState2[1]; // const handleShowAlert = () => {
+  //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
+  // }
 
-  var handleShowAlert = function handleShowAlert() {
-    setAlertState({
-      open: true,
-      content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')]
-    });
+
+  var handleBusinessClick = function handleBusinessClick() {
+    if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business);else handleClick(business);
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -114,7 +115,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
     isSkeleton: isSkeleton,
     onClick: function onClick() {
-      return !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business));
+      return !isSkeleton && handleClick && handleBusinessClick();
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHero, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100

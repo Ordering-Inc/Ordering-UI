@@ -149,6 +149,6 @@ var ProductActionHeaderContainer = _styledComponents.default.div(_templateObject
 
 exports.ProductActionHeaderContainer = ProductActionHeaderContainer;
 
-var ProductTabContainer = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 9999994;\n  padding-top: 15px;\n  border-bottom: 1px solid #E9ECEF;\n\n  > div {\n    max-width: 700px;\n    margin: 0 auto;\n  }\n\n  @media (min-width: 769px) {\n    top: 0;\n  }\n"])));
+var ProductTabContainer = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 900;\n  padding-top: 15px;\n  border-bottom: 1px solid #E9ECEF;\n\n  > div {\n    max-width: 700px;\n    margin: 0 auto;\n  }\n\n  @media (min-width: 769px) {\n    top: 0;\n  }\n"])));
 
 exports.ProductTabContainer = ProductTabContainer;

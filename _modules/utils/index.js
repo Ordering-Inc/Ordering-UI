@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.scrollTo = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.scrollTo = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -312,5 +312,17 @@ var formatSeconds = function formatSeconds(seconds) {
   ret += "" + secs;
   return ret;
 };
+/**
+ * Function to transform degree to radian
+ * @param {number} value for transform
+ *
+ */
+
 
 exports.formatSeconds = formatSeconds;
+
+var convertToRadian = function convertToRadian(value) {
+  return value * Math.PI / 180;
+};
+
+exports.convertToRadian = convertToRadian;

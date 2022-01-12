@@ -41,6 +41,8 @@ var _orderingComponents = require("ordering-components");
 
 var _HighestRated = require("../HighestRated");
 
+var _BusinessPreorder = require("../BusinessPreorder");
+
 var _OrderProgress = require("../OrderProgress");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -137,6 +139,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       mapErrors = _useState8[0],
       setMapErrors = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isPreorder = _useState10[0],
+      setIsPreorder = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      preorderBusiness = _useState12[0],
+      setPreorderBusiness = _useState12[1];
+
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
@@ -217,6 +229,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return isArray ? list : Object.values(list);
   };
 
+  var handleClosePreorder = function handleClosePreorder() {
+    setIsPreorder(false);
+    setPreorderBusiness(null);
+  };
+
+  (0, _react.useEffect)(function () {
+    if (preorderBusiness) setIsPreorder(true);
+  }, [preorderBusiness]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -288,7 +308,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       handleCustomClick: handleBusinessClick,
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type,
       isCustomLayout: isCustomLayout,
-      isShowCallcenterInformation: isCustomLayout
+      isShowCallcenterInformation: isCustomLayout,
+      onPreorderBusiness: setPreorderBusiness
     });
   }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
     var _orderState$options4;
@@ -304,6 +325,15 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: isPreorder,
+    width: "760px",
+    onClose: function onClose() {
+      return handleClosePreorder();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
+    business: preorderBusiness,
+    handleClick: handleBusinessClick
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,
