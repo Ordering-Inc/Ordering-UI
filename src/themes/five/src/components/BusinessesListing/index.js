@@ -35,6 +35,7 @@ import {
   BusinessList as BusinessListController
 } from 'ordering-components'
 import { HighestRated } from '../HighestRated'
+import { BusinessPreorder } from '../BusinessPreorder'
 import { OrderProgress } from '../OrderProgress'
 
 const PIXELS_TO_SCROLL = 300
@@ -61,6 +62,8 @@ const BusinessesListingUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
   const [mapErrors, setMapErrors] = useState('')
+  const [isPreorder, setIsPreorder] = useState(false)
+  const [preorderBusiness, setPreorderBusiness] = useState(null)
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
@@ -124,6 +127,15 @@ const BusinessesListingUI = (props) => {
     const isArray = Array.isArray(list)
     return isArray ? list : Object.values(list)
   }
+
+  const handleClosePreorder = () => {
+    setIsPreorder(false)
+    setPreorderBusiness(null)
+  }
+
+  useEffect(() => {
+    if (preorderBusiness) setIsPreorder(true)
+  }, [preorderBusiness])
 
   return (
     <>
@@ -235,6 +247,7 @@ const BusinessesListingUI = (props) => {
                 orderType={orderState?.options?.type}
                 isCustomLayout={isCustomLayout}
                 isShowCallcenterInformation={isCustomLayout}
+                onPreorderBusiness={setPreorderBusiness}
               />
             ))
           }
@@ -255,6 +268,17 @@ const BusinessesListingUI = (props) => {
             ))
           )}
         </BusinessList>
+
+        <Modal
+          open={isPreorder}
+          width='760px'
+          onClose={() => handleClosePreorder()}
+        >
+          <BusinessPreorder
+            business={preorderBusiness}
+            handleClick={handleBusinessClick}
+          />
+        </Modal>
 
         <Modal
           title={t('ADDRESS_FORM', 'Address Form')}

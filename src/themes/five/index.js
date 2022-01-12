@@ -9,6 +9,8 @@ import { BusinessController } from './src/components/BusinessController'
 import { BusinessesListing } from './src/components/BusinessesListing'
 import { BusinessInformation } from './src/components/BusinessInformation'
 import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
+import { BusinessPreorder } from './src/components/BusinessPreorder'
+import { BusinessMenuList } from './src/components/BusinessMenuList'
 import { BusinessProductsCategories } from './src/components/BusinessProductsCategories'
 import { BusinessProductsCategories as CategoriesLayoutGroceries } from './src/components/BusinessProductsCategories/layouts/groceries'
 import { BusinessProductsList } from './src/components/BusinessProductsList'
@@ -80,6 +82,8 @@ export {
   BusinessesListing,
   BusinessInformation,
   BusinessItemAccordion,
+  BusinessPreorder,
+  BusinessMenuList,
   BusinessProductsCategories,
   CategoriesLayoutGroceries,
   BusinessProductsList,

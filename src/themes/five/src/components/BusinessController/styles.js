@@ -301,7 +301,7 @@ export const CallCenterInformationBullet = styled.div`
 
 export const BusinessLogoWrapper = styled.div`
   display: flex;
-  aligin-items: center;
+  align-items: center;
   justify-content: space-between;
   margin-top: -20px;
   margin-bottom: 10px;

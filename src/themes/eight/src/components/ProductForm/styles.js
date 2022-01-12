@@ -376,7 +376,7 @@ export const ProductTabContainer = styled.div`
   position: sticky;
   top: 0px;
   background: white;
-  z-index: 9999994;
+  z-index: 900;
   padding-top: 15px;
   border-bottom: 1px solid #E9ECEF;
 

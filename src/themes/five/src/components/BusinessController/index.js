@@ -3,7 +3,6 @@ import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrd
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
-
 import { convertHoursToMinutes } from '../../../../../utils'
 
 import {
@@ -40,7 +39,8 @@ const BusinessControllerUI = (props) => {
     isCustomLayout,
     isShowCallcenterInformation,
     isBusinessOpen,
-    businessWillCloseSoonMinutes
+    businessWillCloseSoonMinutes,
+    onPreorderBusiness
   } = props
 
   const theme = useTheme()
@@ -50,8 +50,13 @@ const BusinessControllerUI = (props) => {
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const handleShowAlert = () => {
-    setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
+  // const handleShowAlert = () => {
+  //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
+  // }
+
+  const handleBusinessClick = () => {
+    if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business)
+    else handleClick(business)
   }
 
   return (
@@ -63,7 +68,7 @@ const BusinessControllerUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton}>
-        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}>
+        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
           <BusinessHero>
             {isSkeleton ? (
               <Skeleton height={100} />
