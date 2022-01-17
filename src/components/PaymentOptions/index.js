@@ -88,7 +88,7 @@ const PaymentOptionsUI = (props) => {
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
   const handlePaymentMethodClick = (paymethod) => {
-    const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod?.gateway)
+    const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square'].includes(paymethod?.gateway)
     handlePaymethodClick(paymethod, isPopupMethod)
   }
 
