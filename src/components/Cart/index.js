@@ -4,7 +4,6 @@ import { useTheme } from 'styled-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
-
 import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { CouponControl } from '../CouponControl'
@@ -18,10 +17,14 @@ import {
   CheckoutAction,
   CouponContainer,
   CartSticky,
-  Exclamation
+  Exclamation,
+  Spinner,
+  CommentContainer
 } from './styles'
 import { verifyDecimals } from '../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
+import { TextArea } from '../../styles/Inputs'
+import { SpinnerLoader } from '../SpinnerLoader'
 
 const CartUI = (props) => {
   const {
@@ -39,7 +42,9 @@ const CartUI = (props) => {
     isCartPopover,
     isForceOpenCart,
     isCartOnProductsList,
-    handleCartOpen
+    handleCartOpen,
+    handleChangeComment,
+    commentState
   } = props
 
   const theme = useTheme()
@@ -274,8 +279,34 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
+                {cart?.status !== 2 && (
+                  <table className='comments'>
+                    <tbody>
+                      <tr>
+                        <td>{t('COMMENTS', 'Comments')}</td>
+                      </tr>
+                      <tr>
+                        <CommentContainer>
+                          <TextArea
+                            defaultValue={cart?.comment}
+                            placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
+                            onChange={(e) => handleChangeComment(e.target.value)}
+                          />
+                          {commentState?.loading && (
+                            <Spinner>
+                              <SpinnerLoader
+                                style={{ height: 100 }}
+                              />
+                            </Spinner>
+                          )}
+                        </CommentContainer>
+                      </tr>
+                    </tbody>
+                  </table>
+                )}
               </OrderBill>
             )}
+
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
               <CheckoutAction>
                 <Button
