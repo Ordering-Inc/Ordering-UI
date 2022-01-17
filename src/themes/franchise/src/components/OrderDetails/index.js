@@ -449,6 +449,16 @@ const OrderDetailsUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
+                {order?.comment && (
+                  <table className='comments'>
+                    <tbody>
+                      <tr>
+                        <td>{t('COMMENT', 'Comment')}</td>
+                        <td>{order?.comment}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                )}
               </OrderBill>
               <Content className='order-content'>
                 {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (

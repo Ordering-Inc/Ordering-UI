@@ -47,8 +47,9 @@ import {
   OrderBill,
   CouponAddButton,
   CouponContainer,
-  Exclamation
-
+  Exclamation,
+  Spinner,
+  CommentContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -63,6 +64,8 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { verifyDecimals } from '../../../../../utils'
+import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
+import { TextArea } from '../../styles/Inputs'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -85,7 +88,9 @@ const CheckoutUI = (props) => {
     handleOrderRedirect,
     isCustomerMode,
     isResetPaymethod,
-    setIsResetPaymethod
+    setIsResetPaymethod,
+    handleChangeComment,
+    commentState
   } = props
 
   const theme = useTheme()
@@ -531,6 +536,31 @@ const CheckoutUI = (props) => {
                       </tr>
                     </tbody>
                   </table>
+                  {cart?.status !== 2 && !cartState?.loading && (
+                    <table className='comments'>
+                      <tbody>
+                        <tr>
+                          <td>{t('COMMENTS', 'Comments')}</td>
+                        </tr>
+                        <tr>
+                          <CommentContainer>
+                            <TextArea
+                              defaultValue={cart?.comment}
+                              placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
+                              onChange={(e) => handleChangeComment(e.target.value)}
+                            />
+                            {commentState?.loading && (
+                              <Spinner>
+                                <SpinnerLoader
+                                  style={{ height: 100 }}
+                                />
+                              </Spinner>
+                            )}
+                          </CommentContainer>
+                        </tr>
+                      </tbody>
+                    </table>
+                  )}
                 </OrderBill>
               )}
 

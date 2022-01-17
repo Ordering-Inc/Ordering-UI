@@ -529,6 +529,16 @@ const OrderDetailsUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
+                {order?.comment && (
+                  <table className='comments'>
+                    <tbody>
+                      <tr>
+                        <td>{t('COMMENT', 'Comment')}</td>
+                        <td>{order?.comment}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                )}
               </OrderBill>
 
               {(parseInt(order?.status) === 1 ||

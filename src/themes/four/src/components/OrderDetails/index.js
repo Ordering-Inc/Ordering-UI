@@ -370,6 +370,16 @@ const OrderDetailsUI = (props) => {
                       )}
                     </tbody>
                   </table>
+                  {order?.comment && (
+                    <table className='comments'>
+                      <tbody>
+                        <tr>
+                          <td>{t('COMMENT', 'Comment')}</td>
+                          <td>{order?.comment}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  )}
                   <OrderBillDivider />
                   <OrderPayInfoWrapper>
                     <h3>{t('EXPORT_PAYMENT_METHOD', theme?.defaultLanguages?.EXPORT_PAYMENT_METHOD || 'Payment Method')}</h3>
