@@ -183,6 +183,7 @@ export const Header = (props) => {
       const crd = pos.coords
       const distance = getDistance(crd.latitude, crd.longitude, orderState?.options?.address?.location?.lat, orderState?.options?.address?.location?.lng)
       if (distance > 20) setIsFarAway(true)
+      else setIsFarAway(false)
     }, (err) => {
       console.warn(`ERROR(${err.code}): ${err.message}`)
     }, {
