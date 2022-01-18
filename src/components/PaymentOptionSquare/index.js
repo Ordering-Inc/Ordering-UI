@@ -11,12 +11,12 @@ const PaymentOptionSquareUI = (props) => {
     paymentMethods,
     methodSelected,
     handleChangeMethodSelected,
-    digitalWalletPaymethod,
-    setDigitalWalletPaymethod,
     isLoading,
     isLoadingMethod,
     alertState,
     setAlertState
+    // digitalWalletPaymethod,
+    // setDigitalWalletPaymethod,
   } = props
 
   const [, t] = useLanguage()
@@ -71,7 +71,7 @@ const PaymentOptionSquareUI = (props) => {
             {methodSelected === 'ach_bank_transfer' && !isLoadingMethod && (
               <Button color='primary' id='ach-button' type='button'>{t('PAY_WITH_BANK_ACCOUNT', 'Pay with Bank Account')}</Button>
             )}
-            {methodSelected === 'digital_wallets' && (
+            {/* {methodSelected === 'digital_wallets' && (
               <>
                 <Tabs>
                   <Tab active={digitalWalletPaymethod === 'apple_pay'} onClick={() => setDigitalWalletPaymethod('apple_pay')}>
@@ -88,7 +88,7 @@ const PaymentOptionSquareUI = (props) => {
                   <div id='google-pay-button' />
                 )}
               </>
-            )}
+            )} */}
             {methodSelected === 'gift_cards' && (
               <form>
                 <div id='gift-card-container' />

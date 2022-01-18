@@ -17,7 +17,7 @@ export const PaymentOptionSquare = (props) => {
   const paymentMethods = [
     { name: t('CARD_PAYMENTS', 'Card payments'), value: 'card_payments' },
     { name: t('ACH_BANK_TRANSFER', 'ACH Back transfer'), value: 'ach_bank_transfer' },
-    { name: t('DIGITAL_WALLETS', 'Digital Wallets'), value: 'digital_wallets' },
+    // { name: t('DIGITAL_WALLETS', 'Digital Wallets'), value: 'digital_wallets' },
     { name: t('GIFT_CARDS', 'Gift Cards'), value: 'gift_cards' }
   ]
 

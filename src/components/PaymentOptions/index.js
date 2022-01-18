@@ -20,10 +20,10 @@ import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../StripeRedirectForm'
+import { PaymentOptionSquare } from '../PaymentOptionSquare'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { getIconCard } from '../../utils'
-
 import {
   PaymentMethodsContainer,
   PaymentMethodsList,
@@ -287,6 +287,17 @@ const PaymentOptionsUI = (props) => {
             currency={props.currency}
             paymethods={stripeRedirectOptions}
             handleStripeRedirect={handlePaymethodDataChange}
+          />
+        </Modal>
+        <Modal
+          title={t('SQUARE', 'Square')}
+          open={isOpenMethod?.paymethod?.gateway === 'square' && !paymethodData.token}
+          onClose={() => handlePaymethodClick(null)}
+        >
+          <PaymentOptionSquare
+            businessId={props.businessId}
+            cartTotal={cart?.total}
+            handlePaymethodDataChange={handlePaymethodDataChange}
           />
         </Modal>
       </PaymentMethodsContainer>
