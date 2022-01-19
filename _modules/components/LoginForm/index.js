@@ -242,10 +242,16 @@ var LoginFormUI = function LoginFormUI(props) {
   };
 
   var closeAlert = function closeAlert() {
+    var _checkPhoneCodeState$;
+
     setAlertState({
       open: false,
       content: []
     });
+
+    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) {
+      setOtpState('');
+    }
   };
 
   var parseNumber = function parseNumber(unparsedNumber) {
@@ -353,14 +359,14 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, [otpState]);
   (0, _react.useEffect)(function () {
-    var _checkPhoneCodeState$;
+    var _checkPhoneCodeState$2;
 
-    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) {
-      var _checkPhoneCodeState$2;
+    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$2 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$2 !== void 0 && _checkPhoneCodeState$2.error) {
+      var _checkPhoneCodeState$3;
 
       setAlertState({
         open: true,
-        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
+        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$3 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$3 === void 0 ? void 0 : _checkPhoneCodeState$3.result) || [t('ERROR', 'Error')]
       });
     } else {
       resetOtpLeftTime();
@@ -448,7 +454,15 @@ var LoginFormUI = function LoginFormUI(props) {
     placeholder: "0000",
     isInputNum: true,
     shouldAutoFocus: true
-  }))), ((verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : verifyPhoneState.loading) || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    type: "button",
+    color: "secundary",
+    disabled: formState.loading,
+    onClick: function onClick() {
+      setLoginWithOtpState(false);
+      setWillVerifyOtpState(false);
+    }
+  }, t('CANCEL', 'Cancel'))), ((verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : verifyPhoneState.loading) || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
       height: 160
     }
