@@ -107,7 +107,8 @@ var CheckoutUI = function CheckoutUI(props) {
       handleOrderRedirect = props.handleOrderRedirect,
       isCustomerMode = props.isCustomerMode,
       isResetPaymethod = props.isResetPaymethod,
-      setIsResetPaymethod = props.setIsResetPaymethod;
+      setIsResetPaymethod = props.setIsResetPaymethod,
+      onPlaceOrderClick = props.onPlaceOrderClick;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
@@ -411,7 +412,9 @@ var CheckoutUI = function CheckoutUI(props) {
     handleOrderRedirect: handleOrderRedirect,
     isCustomerMode: isCustomerMode,
     paySelected: paymethodSelected,
-    setCardData: setCardData
+    setCardData: setCardData,
+    handlePlaceOrder: handlePlaceOrder,
+    onPlaceOrderClick: onPlaceOrderClick
   })), (_props$beforeElements7 = props.beforeElementsSectionSix) === null || _props$beforeElements7 === void 0 ? void 0 : _props$beforeElements7.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
