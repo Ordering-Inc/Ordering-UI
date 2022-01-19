@@ -64,7 +64,6 @@ const BusinessesListingUI = (props) => {
   const [mapErrors, setMapErrors] = useState('')
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
-
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const businessesIds = isCustomLayout &&
@@ -75,9 +74,9 @@ const BusinessesListingUI = (props) => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
-    if (badScrollPosition || businessesList.loading || !hasMore) return
+    if (badScrollPosition || businessesList.loading || businessesList.error?.length > 0 || !hasMore) return
     getBusinesses()
-  }, [businessesList, paginationProps])
+  }, [businessesList.loading, paginationProps])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -252,7 +251,7 @@ const BusinessesListingUI = (props) => {
             ))
           }
           {businessesList.loading && (
-            [...Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()].map(i => (
+            [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
               <BusinessController
                 key={i}
                 className='card'
