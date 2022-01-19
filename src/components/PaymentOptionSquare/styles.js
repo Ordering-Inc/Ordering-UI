@@ -8,3 +8,17 @@ export const Container = styled.div`
     height: 40px
   }
 `
+export const Spinner = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  transform: translateY(75%);
+`
+
+export const PaymentSquareContainer = styled.div`
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`

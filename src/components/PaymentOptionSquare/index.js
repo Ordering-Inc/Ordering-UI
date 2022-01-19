@@ -1,11 +1,12 @@
 import React from 'react'
-import { PaymentOptionSquare as PaymentOptionSquareController } from './test'
+import { PaymentOptionSquare as PaymentOptionSquareController, useLanguage } from 'ordering-components'
 import { Tabs, Tab } from '../../styles/Tabs'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
-import { useLanguage } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
-import { Container } from './styles'
+import { Container, Spinner, PaymentSquareContainer } from './styles'
+import { SpinnerLoader } from '../SpinnerLoader'
+
 const PaymentOptionSquareUI = (props) => {
   const {
     paymentMethods,
@@ -14,7 +15,8 @@ const PaymentOptionSquareUI = (props) => {
     isLoading,
     isLoadingMethod,
     alertState,
-    setAlertState
+    setAlertState,
+    isLoadingPlace
     // digitalWalletPaymethod,
     // setDigitalWalletPaymethod,
   } = props
@@ -29,7 +31,7 @@ const PaymentOptionSquareUI = (props) => {
   }
 
   return (
-    <>
+    <PaymentSquareContainer>
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
@@ -63,12 +65,12 @@ const PaymentOptionSquareUI = (props) => {
             {methodSelected === 'card_payments' && (
               <>
                 <div id='card-container' />
-                {!isLoadingMethod && (
+                {!isLoadingMethod && !isLoadingPlace && (
                   <Button color='primary' id='card-button' type='button'>{t('ACCEPT', 'Accept')}</Button>
                 )}
               </>
             )}
-            {methodSelected === 'ach_bank_transfer' && !isLoadingMethod && (
+            {methodSelected === 'ach_bank_transfer' && !isLoadingMethod && !isLoadingPlace && (
               <Button color='primary' id='ach-button' type='button'>{t('PAY_WITH_BANK_ACCOUNT', 'Pay with Bank Account')}</Button>
             )}
             {/* {methodSelected === 'digital_wallets' && (
@@ -92,8 +94,17 @@ const PaymentOptionSquareUI = (props) => {
             {methodSelected === 'gift_cards' && (
               <form>
                 <div id='gift-card-container' />
-                <button id='gift-card-button' type='button'>{t('PAY_WITH_GIFT_CARD', 'Pay with Gift Card')}</button>
+                {!isLoadingPlace && (
+                  <button id='gift-card-button' type='button'>{t('PAY_WITH_GIFT_CARD', 'Pay with Gift Card')}</button>
+                )}
               </form>
+            )}
+            {isLoadingPlace && (
+              <Spinner>
+                <SpinnerLoader
+                  style={{ height: 100 }}
+                />
+              </Spinner>
             )}
           </Container>
         </>
@@ -113,7 +124,7 @@ const PaymentOptionSquareUI = (props) => {
         <React.Fragment key={i}>
           {AfterElement}
         </React.Fragment>))}
-    </>
+    </PaymentSquareContainer>
   )
 }
 

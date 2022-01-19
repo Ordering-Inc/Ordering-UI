@@ -80,7 +80,8 @@ const PaymentOptionsUI = (props) => {
     handlePaymethodDataChange,
     isCustomerMode,
     isOpenMethod,
-    setCardData
+    setCardData,
+    onPlaceOrderClick
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -297,7 +298,13 @@ const PaymentOptionsUI = (props) => {
           <PaymentOptionSquare
             businessId={props.businessId}
             cartTotal={cart?.total}
-            handlePaymethodDataChange={handlePaymethodDataChange}
+            body={{
+              paymethod_id: isOpenMethod?.paymethod?.id,
+              amount: cart.total,
+              delivery_zone_id: cart.delivery_zone_id,
+              cartUuid: cart.uuid
+            }}
+            onPlaceOrderClick={onPlaceOrderClick}
           />
         </Modal>
       </PaymentMethodsContainer>
