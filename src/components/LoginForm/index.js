@@ -133,7 +133,7 @@ const LoginFormUI = (props) => {
       open: false,
       content: []
     })
-    if (checkPhoneCodeState?.result?.error) {
+    if (checkPhoneCodeState?.result?.error || verifyPhoneState?.result?.error) {
       setOtpState('')
     }
   }

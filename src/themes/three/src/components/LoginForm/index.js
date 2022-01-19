@@ -116,6 +116,9 @@ const LoginFormUI = (props) => {
       open: false,
       content: []
     })
+    if (checkPhoneCodeState?.result?.error || verifyPhoneState?.result?.error) {
+      setOtpState('')
+    }
   }
 
   const parseNumber = (unparsedNumber) => {
@@ -326,6 +329,18 @@ const LoginFormUI = (props) => {
                       shouldAutoFocus
                     />
                   </OtpWrapper>
+
+                  <Button
+                    type='button'
+                    color='secundary'
+                    disabled={formState.loading}
+                    onClick={() => {
+                      setLoginWithOtpState(false)
+                      setWillVerifyOtpState(false)
+                    }}
+                  >
+                    {t('CANCEL', 'Cancel')}
+                  </Button>
                 </>
               )}
 
