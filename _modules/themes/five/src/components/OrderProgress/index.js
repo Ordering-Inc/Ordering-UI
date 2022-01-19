@@ -17,8 +17,6 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _styledComponents = require("styled-components");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
-
 var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
 
 var _styles = require("./styles");
@@ -44,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderProgressUI = function OrderProgressUI(props) {
-  var _theme$images, _theme$images$general, _orderList$orders, _orderList$orders2;
+  var _orderList$orders;
 
   var orderList = props.orderList;
 
@@ -64,8 +62,6 @@ var OrderProgressUI = function OrderProgressUI(props) {
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
-
-  var imageFails = (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyPastOrders;
 
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22;
@@ -215,12 +211,12 @@ var OrderProgressUI = function OrderProgressUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderList === null || orderList === void 0 ? void 0 : orderList.loading) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
   }), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) > 0 && (orderList === null || orderList === void 0 ? void 0 : orderList.orders.map(function (order, i) {
-    var _order$business, _theme$images2, _theme$images2$dummie, _getOrderStatus, _order$business2, _order$business3;
+    var _order$business, _theme$images, _theme$images$dummies, _getOrderStatus, _order$business2, _order$business3;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderProgressContainer, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressLogo, {
-      bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_91,c_limit')
+      bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_91,c_limit')
     }), /*#__PURE__*/_react.default.createElement(_styles.ProgressDescriptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_IN_PROGRESS', 'Order in progress')), /*#__PURE__*/_react.default.createElement("p", null, t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primaryContrast",
       naked: true,
@@ -236,11 +232,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     }) : parseTime(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     }), "\xA0-\xA0", convertDiffToHours(order.delivery_type === 1 ? order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.delivery_time : order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.pickup_time, order))))));
-  })), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders2 = orderList.orders) === null || _orderList$orders2 === void 0 ? void 0 : _orderList$orders2.length) === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    image: imageFails,
-    content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
-    conditioned: true
-  }));
+  })));
 };
 
 var OrderProgress = function OrderProgress(props) {

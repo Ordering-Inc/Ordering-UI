@@ -154,14 +154,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return business.id;
   }));
   var handleScroll = (0, _react.useCallback)(function () {
-    var _document$documentEle, _document$documentEle2;
+    var _document$documentEle, _document$documentEle2, _businessesList$error;
 
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
     var badScrollPosition = innerHeightScrolltop < ((_document$documentEle2 = document.documentElement) === null || _document$documentEle2 === void 0 ? void 0 : _document$documentEle2.offsetHeight);
     var hasMore = !(paginationProps.totalPages === paginationProps.currentPage);
-    if (badScrollPosition || businessesList.loading || !hasMore) return;
+    if (badScrollPosition || businessesList.loading || ((_businessesList$error = businessesList.error) === null || _businessesList$error === void 0 ? void 0 : _businessesList$error.length) > 0 || !hasMore) return;
     getBusinesses();
-  }, [businessesList, paginationProps]);
+  }, [businessesList.loading, paginationProps]);
   (0, _react.useEffect)(function () {
     window.addEventListener('scroll', handleScroll);
     return function () {
@@ -311,7 +311,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       isShowCallcenterInformation: isCustomLayout,
       onPreorderBusiness: setPreorderBusiness
     });
-  }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
+  }), businessesList.loading && _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.nextPageItems) > 4 ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
     var _orderState$options4;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {

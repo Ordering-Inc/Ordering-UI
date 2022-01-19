@@ -119,6 +119,10 @@ var formatUrlVideo = function formatUrlVideo(url) {
 exports.formatUrlVideo = formatUrlVideo;
 
 var convertHoursToMinutes = function convertHoursToMinutes(time) {
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   if (!time) return '0min';
 
   var _time$split = time.split(':'),
@@ -127,7 +131,7 @@ var convertHoursToMinutes = function convertHoursToMinutes(time) {
       minute = _time$split2[1];
 
   var result = parseInt(hour, 10) * 60 + parseInt(minute, 10);
-  return "".concat(result, "min");
+  return "".concat(result).concat(t('MIN', 'min'));
 };
 /**
  * Function to convert a string in string capitalized
@@ -175,9 +179,9 @@ var flatArray = function flatArray(arr) {
 exports.flatArray = flatArray;
 
 var getTraduction = function getTraduction(key) {
-  var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
+  var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
 
   var keyList = {
     // Add the key and traduction that you need below
