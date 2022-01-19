@@ -136,6 +136,9 @@ const LoginFormUI = (props) => {
       open: false,
       content: []
     })
+    if (checkPhoneCodeState?.result?.error || verifyPhoneState?.result?.error) {
+      setOtpState('')
+    }
   }
 
   const parseNumber = (unparsedNumber) => {
@@ -342,6 +345,18 @@ const LoginFormUI = (props) => {
                       shouldAutoFocus
                     />
                   </OtpWrapper>
+
+                  <Button
+                    type='button'
+                    color='secundary'
+                    disabled={formState.loading}
+                    onClick={() => {
+                      setLoginWithOtpState(false)
+                      setWillVerifyOtpState(false)
+                    }}
+                  >
+                    {t('CANCEL', 'Cancel')}
+                  </Button>
                 </>
               )}
 
@@ -459,7 +474,28 @@ const LoginFormUI = (props) => {
               )}
                 {useLoginByCellphone && loginTab === 'cellphone' &&
                 configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
-                  configs?.twilio_service_enabled?.value === '1') && (<SmsLoginButton handleSmsLogin={() => { setLoginWithOtpState(true) }} />)}
+                  configs?.twilio_service_enabled?.value === '1') && (
+                    <SmsLoginButton
+                      style={{
+                        borderRadius: 8,
+                        borderWidth: 1,
+                        borderColor: '#000000',
+                        backgroundColor: 'transparent',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        marginBottom: 10,
+                        justifyContent: 'space-around',
+                      }}
+                      iconStyle={{ fontSize: 16 }}
+                      textStyle={{
+                        margin: 0,
+                        width: '50%',
+                        textAlign: 'left'
+                      }}
+                      handleSmsLogin={() => { setLoginWithOtpState(true) }}
+                    />
+                  )}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>
