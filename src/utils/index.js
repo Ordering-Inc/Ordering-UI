@@ -70,10 +70,11 @@ export const formatUrlVideo = (url) => {
  * @param {string} time business delivery time
  */
 export const convertHoursToMinutes = (time) => {
+  const [, t] = useLanguage()
   if (!time) return '0min'
   const [hour, minute] = time.split(':')
   const result = (parseInt(hour, 10) * 60) + parseInt(minute, 10)
-  return `${result}min`
+  return `${result}${t('MIN', 'min')}`
 }
 
 /**
