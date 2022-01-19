@@ -13,7 +13,7 @@ export const FacebookButton = styled(Button)`
   margin-bottom: 10px;
   justify-content: space-around;
 
-  &: active {
+  &:active {
     background: ${props => props.theme.colors.primaryContrast};
   }
 

@@ -306,7 +306,7 @@ export const LoginWithButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   padding: 5px 30px;
   svg {
     font-size: 28px;
