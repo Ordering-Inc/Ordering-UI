@@ -66,7 +66,8 @@ const CheckoutUI = (props) => {
     handleOrderRedirect,
     isCustomerMode,
     isResetPaymethod,
-    setIsResetPaymethod
+    setIsResetPaymethod,
+    onPlaceOrderClick
   } = props
 
   const theme = useTheme()
@@ -355,6 +356,8 @@ const CheckoutUI = (props) => {
                 isCustomerMode={isCustomerMode}
                 paySelected={paymethodSelected}
                 setCardData={setCardData}
+                handlePlaceOrder={handlePlaceOrder}
+                onPlaceOrderClick={onPlaceOrderClick}
               />
             </PaymentMethodContainer>
           )}
