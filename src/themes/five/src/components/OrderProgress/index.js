@@ -9,7 +9,6 @@ import { Button } from '../../styles/Buttons'
 import moment from 'moment'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import {
   OrderProgressContainer,
@@ -32,8 +31,6 @@ const OrderProgressUI = (props) => {
   const [{ optimizeImage, parseDate, parseTime }] = useUtils()
   const theme = useTheme()
   const [events] = useEvent()
-
-  const imageFails = theme.images?.general?.emptyPastOrders
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -121,13 +118,6 @@ const OrderProgressUI = (props) => {
           </ProgressBarWrapper>
         </OrderProgressContainer>
       ))}
-      {!orderList?.loading && orderList?.orders?.length === 0 && (
-        <NotFoundSource
-          image={imageFails}
-          content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
-          conditioned
-        />
-      )}
     </>
 
   )

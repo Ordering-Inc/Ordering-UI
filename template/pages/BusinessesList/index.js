@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessesListing } from '../../../src/components/BusinessesListing'
+import { BusinessesListing } from '../../pages/BusinessesList'
 import { useEvent } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
 
@@ -14,7 +14,7 @@ export const BusinessesList = (props) => {
       events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     },
     currentPageParam: parseInt(currentPageParam),
-    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'menus']
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
   }
 
   return (
