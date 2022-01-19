@@ -44,8 +44,13 @@ var SmsLoginButtonUI = function SmsLoginButtonUI(props) {
     color: "secondary",
     onClick: function onClick() {
       return handleSmsLogin();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_MdSms.default, null), /*#__PURE__*/_react.default.createElement("div", null, t('LOGIN_WITH_SMS', 'Login with SMS')));
+    },
+    style: props.style
+  }, /*#__PURE__*/_react.default.createElement(_MdSms.default, {
+    style: props.iconStyle
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    style: props.textStyle
+  }, t('LOGIN_WITH_SMS', 'Login with SMS')));
 };
 
 var SmsLoginButton = function SmsLoginButton(props) {

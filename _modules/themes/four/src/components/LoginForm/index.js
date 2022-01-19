@@ -226,10 +226,16 @@ var LoginFormUI = function LoginFormUI(props) {
   };
 
   var closeAlert = function closeAlert() {
+    var _checkPhoneCodeState$, _verifyPhoneState$res;
+
     setAlertState({
       open: false,
       content: []
     });
+
+    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error || verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) {
+      setOtpState('');
+    }
   };
 
   var parseNumber = function parseNumber(unparsedNumber) {
@@ -339,19 +345,19 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, [otpState]);
   (0, _react.useEffect)(function () {
-    var _checkPhoneCodeState$, _checkPhoneCodeState$2;
+    var _checkPhoneCodeState$2, _checkPhoneCodeState$3;
 
-    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) setAlertState({
+    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$2 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$2 !== void 0 && _checkPhoneCodeState$2.error) setAlertState({
       open: true,
-      content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
+      content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$3 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$3 === void 0 ? void 0 : _checkPhoneCodeState$3.result) || [t('ERROR', 'Error')]
     });else resetOtpLeftTime();
   }, [checkPhoneCodeState]);
   (0, _react.useEffect)(function () {
-    var _verifyPhoneState$res, _verifyPhoneState$res2;
+    var _verifyPhoneState$res2, _verifyPhoneState$res3;
 
-    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) setAlertState({
+    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res2 = verifyPhoneState.result) !== null && _verifyPhoneState$res2 !== void 0 && _verifyPhoneState$res2.error) setAlertState({
       open: true,
-      content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
+      content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res3 = verifyPhoneState.result) === null || _verifyPhoneState$res3 === void 0 ? void 0 : _verifyPhoneState$res3.result) || [t('ERROR', 'Error')]
     });else resetOtpLeftTime();
   }, [verifyPhoneState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -412,7 +418,15 @@ var LoginFormUI = function LoginFormUI(props) {
     placeholder: "0000",
     isInputNum: true,
     shouldAutoFocus: true
-  }))), ((verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : verifyPhoneState.loading) || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    type: "button",
+    color: "secundary",
+    disabled: formState.loading,
+    onClick: function onClick() {
+      setLoginWithOtpState(false);
+      setWillVerifyOtpState(false);
+    }
+  }, t('CANCEL', 'Cancel'))), ((verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : verifyPhoneState.loading) || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
       height: 160
     }
@@ -465,6 +479,9 @@ var LoginFormUI = function LoginFormUI(props) {
       return console.log('onFailure', data);
     }
   }), useLoginByCellphone && loginTab === 'cellphone' && configs && Object.keys(configs).length > 0 && ((configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi = configs.twilio_service_enabled) === null || _configs$twilio_servi === void 0 ? void 0 : _configs$twilio_servi.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi2 = configs.twilio_service_enabled) === null || _configs$twilio_servi2 === void 0 ? void 0 : _configs$twilio_servi2.value) === '1') && /*#__PURE__*/_react.default.createElement(_SmsLogin.SmsLoginButton, {
+    style: {
+      borderRadius: 8
+    },
     handleSmsLogin: function handleSmsLogin() {
       setLoginWithOtpState(true);
     }

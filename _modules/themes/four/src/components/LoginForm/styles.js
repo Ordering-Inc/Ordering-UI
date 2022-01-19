@@ -146,7 +146,7 @@ var CountdownTimer = _styledComponents.default.div(_templateObject19 || (_templa
 });
 
 exports.CountdownTimer = CountdownTimer;
-var LoginWithButton = (0, _styledComponents.default)(_Buttons.Button)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  width: 100%;\n  background-color: #EFEFEF;\n  border-color: #EFEFEF;\n  font-size: 16px;\n  font-weight: 400;\n  text-align: center;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin-bottom: 10px;\n  padding: 5px 30px;\n  svg {\n    font-size: 28px;\n    color: #000;\n  }\n\n  div {\n    margin: 0 auto;\n    color: #000;\n    line-height: 30px;\n    font-size: 16px;\n  }\n\n  &:hover {\n    svg,\n    div {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var LoginWithButton = (0, _styledComponents.default)(_Buttons.Button)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  width: 100%;\n  background-color: #EFEFEF;\n  border-color: #EFEFEF;\n  font-size: 16px;\n  font-weight: 400;\n  text-align: center;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  /* margin-bottom: 10px; */\n  padding: 5px 30px;\n  svg {\n    font-size: 28px;\n    color: #000;\n  }\n\n  div {\n    margin: 0 auto;\n    color: #000;\n    line-height: 30px;\n    font-size: 16px;\n  }\n\n  &:hover {\n    svg,\n    div {\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.LoginWithButton = LoginWithButton;

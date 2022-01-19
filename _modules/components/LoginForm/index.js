@@ -242,14 +242,14 @@ var LoginFormUI = function LoginFormUI(props) {
   };
 
   var closeAlert = function closeAlert() {
-    var _checkPhoneCodeState$;
+    var _checkPhoneCodeState$, _verifyPhoneState$res;
 
     setAlertState({
       open: false,
       content: []
     });
 
-    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) {
+    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error || verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) {
       setOtpState('');
     }
   };
@@ -373,14 +373,14 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, [checkPhoneCodeState]);
   (0, _react.useEffect)(function () {
-    var _verifyPhoneState$res;
+    var _verifyPhoneState$res2;
 
-    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) {
-      var _verifyPhoneState$res2;
+    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res2 = verifyPhoneState.result) !== null && _verifyPhoneState$res2 !== void 0 && _verifyPhoneState$res2.error) {
+      var _verifyPhoneState$res3;
 
       setAlertState({
         open: true,
-        content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
+        content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res3 = verifyPhoneState.result) === null || _verifyPhoneState$res3 === void 0 ? void 0 : _verifyPhoneState$res3.result) || [t('ERROR', 'Error')]
       });
     } else {
       resetOtpLeftTime();
