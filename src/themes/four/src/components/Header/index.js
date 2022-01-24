@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
+import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 
 import {
   Header as HeaderContainer,
@@ -14,11 +16,13 @@ import {
   MenuLink,
   SubMenu,
   CustomerInfo,
-  UserEdit
+  UserEdit,
+  FarAwayMessage,
+  AddressWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
-import { capitalize } from '../../../../../utils'
+import { capitalize, getDistance } from '../../../../../utils'
 
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { AddressesPopover } from '../AddressesPopover'
@@ -46,6 +50,7 @@ export const Header = (props) => {
     isCustomerMode
   } = props
 
+  const { pathname } = useLocation()
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
@@ -54,6 +59,7 @@ export const Header = (props) => {
   const theme = useTheme()
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
+  const [isFarAway, setIsFarAway] = useState(false)
 
   const clearCustomer = useRef(null)
 
@@ -132,6 +138,25 @@ export const Header = (props) => {
     }
   }, [customerState?.user?.address])
 
+  useEffect(() => {
+    if (!(pathname.includes('/search') || pathname.includes('/checkout'))) {
+      setIsFarAway(false)
+      return
+    }
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const crd = pos.coords
+      const distance = getDistance(crd.latitude, crd.longitude, orderState?.options?.address?.location?.lat, orderState?.options?.address?.location?.lng)
+      if (distance > 20) setIsFarAway(true)
+      else setIsFarAway(false)
+    }, (err) => {
+      console.warn(`ERROR(${err.code}): ${err.message}`)
+    }, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    })
+  }, [orderState?.options?.address?.location, pathname])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -198,14 +223,22 @@ export const Header = (props) => {
                         isHome={isHome}
                       />
                     )}
-                    <AddressesPopover
-                      auth={auth}
-                      addressState={orderState?.options?.address}
-                      open={openPopover.addresses}
-                      onClick={() => handleTogglePopover('addresses')}
-                      onClose={() => handleClosePopover('addresses')}
-                      isHome={isHome}
-                    />
+                    <AddressWrapper>
+                      <AddressesPopover
+                        auth={auth}
+                        addressState={orderState?.options?.address}
+                        open={openPopover.addresses}
+                        onClick={() => handleTogglePopover('addresses')}
+                        onClose={() => handleClosePopover('addresses')}
+                        isHome={isHome}
+                      />
+                      {isFarAway && (
+                        <FarAwayMessage>
+                          <TiWarningOutline />
+                          <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                        </FarAwayMessage>
+                      )}
+                    </AddressWrapper>
                   </>
                 )}
               </Menu>
@@ -265,14 +298,22 @@ export const Header = (props) => {
         {onlineStatus && isShowOrderOptions && (
           windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
-              <AddressesPopover
-                auth={auth}
-                addressState={orderState?.options?.address}
-                open={openPopover.addresses}
-                onClick={() => handleTogglePopover('addresses')}
-                onClose={() => handleClosePopover('addresses')}
-                isHome={isHome}
-              />
+              <AddressWrapper>
+                <AddressesPopover
+                  auth={auth}
+                  addressState={orderState?.options?.address}
+                  open={openPopover.addresses}
+                  onClick={() => handleTogglePopover('addresses')}
+                  onClose={() => handleClosePopover('addresses')}
+                  isHome={isHome}
+                />
+                {isFarAway && (
+                  <FarAwayMessage>
+                    <TiWarningOutline />
+                    <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                  </FarAwayMessage>
+                )}
+              </AddressWrapper>
               {(isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <MomentPopover
                   open={openPopover.moment}
@@ -284,12 +325,20 @@ export const Header = (props) => {
             </SubMenu>
           ) : (
             <SubMenu isStorePage={isStorePage}>
-              <HeaderOption
-                variant='address'
-                addressState={orderState?.options?.address?.address?.split(',')?.[0]}
-                onClick={(variant) => openModal(variant)}
-                isHome={isHome}
-              />
+              <AddressWrapper>
+                <HeaderOption
+                  variant='address'
+                  addressState={orderState?.options?.address?.address?.split(',')?.[0]}
+                  onClick={(variant) => openModal(variant)}
+                  isHome={isHome}
+                />
+                {isFarAway && (
+                  <FarAwayMessage>
+                    <TiWarningOutline />
+                    <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                  </FarAwayMessage>
+                )}
+              </AddressWrapper>
               {(isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
                   variant='moment'
