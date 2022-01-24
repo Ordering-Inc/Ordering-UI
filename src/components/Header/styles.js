@@ -183,3 +183,59 @@ export const UserEdit = styled.div`
      margin-bottom: 20px;  
   }
 `
+
+export const FarAwayMessage = styled.div`
+  pointer-events: none;
+  position: absolute;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  top: 100%;
+  background: ${props => props.theme.colors.warning100};
+  border: 1px solid ${props => props.theme.colors.warning500};
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+  padding: 6px 15px;
+  box-sizing: border-box;
+  margin: 12px 0px 0px 0px !important;
+  min-width: 240px;
+  left: 0px;
+  ${props => props.theme?.rtl && css`
+    right: 0px;
+    left: initial;
+  `}
+
+  svg {
+    font-size: 20px;
+    color: ${props => props.theme.colors.warning500};
+    margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-right: auto;
+      margin-left: 10px;
+    `}
+  }
+  span {
+    color: #344050;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  @media (min-width: 400px) {
+    padding: 8px 20px;
+    font-size: 14px;
+    line-height: 24px;
+    min-width: 260px;
+  }
+
+  @media (min-width: 820px) {
+    left: -50%;
+    ${props => props.theme?.rtl && css`
+      right: -50%;
+      left: initial;
+    `}
+  }
+`
+
+export const AddressWrapper = styled.div`
+  position: relative;
+`

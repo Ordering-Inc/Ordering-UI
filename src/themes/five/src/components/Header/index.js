@@ -42,7 +42,7 @@ import { Confirm } from '../Confirm'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
-import { convertToRadian } from '../../../../../utils'
+import { getDistance } from '../../../../../utils'
 
 export const Header = (props) => {
   const {
@@ -53,7 +53,7 @@ export const Header = (props) => {
     isCustomerMode
   } = props
 
-  const location1 = useLocation()
+  const { pathname } = useLocation()
   const [events] = useEvent()
   const [{ parseDate }] = useUtils()
   const [, t] = useLanguage()
@@ -130,7 +130,7 @@ export const Header = (props) => {
 
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
-    if (isCustomerMode && location1.pathname.includes('/orders')) {
+    if (isCustomerMode && pathname.includes('/orders')) {
       deleteUserCustomer(true)
       refreshOrderOptions()
     }
@@ -163,19 +163,8 @@ export const Header = (props) => {
     }
   }, [customerState?.user?.address])
 
-  const getDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371 // km
-    const dLat = convertToRadian(lat2 - lat1)
-    const dLon = convertToRadian(lon2 - lon1)
-    const curLat1 = convertToRadian(lat1)
-    const curLat2 = convertToRadian(lat2)
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(curLat1) * Math.cos(curLat2)
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    return R * c
-  }
-
   useEffect(() => {
-    if (!(location1.pathname.includes('/search') || location1.pathname.includes('/checkout'))) {
+    if (!(pathname.includes('/search') || pathname.includes('/checkout'))) {
       setIsFarAway(false)
       return
     }
@@ -191,7 +180,7 @@ export const Header = (props) => {
       timeout: 5000,
       maximumAge: 0
     })
-  }, [orderState?.options?.address?.location, location1.pathname])
+  }, [orderState?.options?.address?.location, pathname])
 
   return (
     <>
@@ -337,7 +326,7 @@ export const Header = (props) => {
         </InnerHeader>
         {onlineStatus && isShowOrderOptions && (
           windowSize.width > 768 && windowSize.width <= 820 ? (
-            <SubMenu className='ddd'>
+            <SubMenu>
               {isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />
@@ -360,7 +349,7 @@ export const Header = (props) => {
               )}
             </SubMenu>
           ) : (
-            <SubMenu className='ddd'>
+            <SubMenu>
               {isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />
