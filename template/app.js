@@ -29,6 +29,7 @@ import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
+import { MessagesList } from './pages/MessagesList'
 import { Help } from './pages/Help'
 
 import { ScrollToTop } from './components/ScrollToTop'
@@ -249,6 +250,17 @@ export const App = () => {
                   </Route>
                   <Route exact path='/pages'>
                     <PagesList />
+                  </Route>
+                  <Route exact path='/messages'>
+                    {auth
+                      ? <MessagesList />
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
                   </Route>
                   <Route exact path='/help'>
                     {auth

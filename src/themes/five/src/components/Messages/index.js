@@ -44,8 +44,13 @@ import {
   MessageCreatedDate,
   TimeofSentByAdmin,
   NotSendMessage,
-  QuickMessageWrapper
+  QuickMessageWrapper,
+  ProfileMessageHeader,
+  MessageType,
+  OrderData,
+  MessagesTypes
 } from './styles'
+
 import { Image as ImageWithFallback } from '../../../../../components/Image'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -76,7 +81,8 @@ const MessagesUI = (props) => {
     readMessages,
     onClose,
     onMessages,
-    setCanRead
+    setCanRead,
+    profileMessages
   } = props
 
   const theme = useTheme()
@@ -293,16 +299,16 @@ const MessagesUI = (props) => {
                     <MessageConsole>
                       <BubbleConsole>
                         {t('ORDER', 'Order')} {' '}
-                        <strong>{t(message.change.attribute.toUpperCase(), message.change.attribute.replace('_', ' '))}</strong> {}
+                        <strong>{t(message.change.attribute.toUpperCase(), message.change.attribute.replace('_', ' '))}</strong> {' '}
                         {t('CHANGED_FROM', 'Changed from')} {' '}
                         {filterSpecialStatus.includes(message.change.attribute) ? (
                           <>
                             {message.change.old === null ? <strong>0</strong> : (
                               <>
-                                <strong>{ message.change.old }</strong> {' '}
+                                <strong>{message.change.old}</strong> {' '}
                               </>
                             )}
-                            <> {t('TO', 'to')} {' '} <strong>{ message.change.new }</strong> {t('MINUTES', 'Minutes')}</>
+                            <> {t('TO', 'to')} {' '} <strong>{message.change.new}</strong> {t('MINUTES', 'Minutes')}</>
                           </>
                         ) : (
                           <>
@@ -440,92 +446,145 @@ const MessagesUI = (props) => {
   }
 
   return (
-    <MessagesContainer>
+    <MessagesContainer profileMessages={profileMessages}>
       <MessagesLayoutWrapper>
-        <MessagesClose onClick={onClose}>
-          <MdClose />
-        </MessagesClose>
-        <MessagesLeftLayout>
-          <MessagesTitle>
-            <h1>{t('MESSAGES', 'Messages')}</h1>
-          </MessagesTitle>
-          <CustomerList>
-            {
-              order.business && (
-                <HeaderProfile
-                  active={business}
-                  onClick={() => onMessages({ business: true, driver: false })}
-                  isCursor
-                >
-                  <Image>
+        {!profileMessages && (
+          <>
+            <MessagesClose onClick={onClose}>
+              <MdClose />
+            </MessagesClose>
+            <MessagesLeftLayout>
+              <MessagesTitle>
+                <h1>{t('MESSAGES', 'Messages')}</h1>
+              </MessagesTitle>
+              <CustomerList>
+                {
+                  order.business && (
+                    <HeaderProfile
+                      active={business}
+                      onClick={() => onMessages({ business: true, driver: false })}
+                      isCursor
+                    >
+                      <Image>
+                        <ImageWithFallback
+                          src={order.business?.logo || theme.images?.dummies?.businessLogo}
+                          fallback={<FaUserAlt />}
+                        />
+                      </Image>
+                      <HeaderOnline>
+                        <h1>{order.business?.name}</h1>
+                        <span>{t('BUSINESS', 'Business')}</span>
+                      </HeaderOnline>
+                    </HeaderProfile>
+                  )
+                }
+                {
+                  order?.driver && (
+                    <HeaderProfile
+                      active={driver}
+                      onClick={() => onMessages({ business: false, driver: true })}
+                      isCursor
+                    >
+                      <Image>
+                        <ImageWithFallback
+                          src={order.driver?.photo}
+                          fallback={<RiUser2Fill />}
+                        />
+                      </Image>
+                      <HeaderOnline>
+                        <h1>{order.driver?.name}</h1>
+                        <span>{t('DRIVER', 'Driver')}</span>
+                      </HeaderOnline>
+                    </HeaderProfile>
+                  )
+                }
+              </CustomerList>
+            </MessagesLeftLayout>
+          </>
+        )}
+        <MessagesRightLayout profileMessages={profileMessages}>
+          {!profileMessages ? (
+            <HeaderProfile>
+              <Image>
+                {
+                  business && (
                     <ImageWithFallback
                       src={order.business?.logo || theme.images?.dummies?.businessLogo}
                       fallback={<FaUserAlt />}
                     />
-                  </Image>
-                  <HeaderOnline>
-                    <h1>{order.business?.name}</h1>
-                    <span>{t('BUSINESS', 'Business')}</span>
-                  </HeaderOnline>
-                </HeaderProfile>
-              )
-            }
-            {
-              order?.driver && (
-                <HeaderProfile
-                  active={driver}
-                  onClick={() => onMessages({ business: false, driver: true })}
-                  isCursor
-                >
-                  <Image>
+                  )
+                }
+                {
+                  driver && (
                     <ImageWithFallback
                       src={order.driver?.photo}
                       fallback={<RiUser2Fill />}
                     />
-                  </Image>
-                  <HeaderOnline>
-                    <h1>{order.driver?.name}</h1>
-                    <span>{t('DRIVER', 'Driver')}</span>
-                  </HeaderOnline>
-                </HeaderProfile>
-              )
-            }
-          </CustomerList>
-        </MessagesLeftLayout>
-        <MessagesRightLayout>
-          <HeaderProfile>
-            <Image>
-              {
-                business && (
-                  <ImageWithFallback
-                    src={order.business?.logo || theme.images?.dummies?.businessLogo}
-                    fallback={<FaUserAlt />}
-                  />
-                )
-              }
-              {
-                driver && (
-                  <ImageWithFallback
-                    src={order.driver?.photo}
-                    fallback={<RiUser2Fill />}
-                  />
-                )
-              }
-            </Image>
-            {business && (
-              <HeaderOnline>
-                <h1>{order.business?.name}</h1>
-                <span>{t('BUSINESS', 'Business')}</span>
-              </HeaderOnline>
-            )}
-            {driver && (
-              <HeaderOnline>
-                <h1>{order.driver?.name}</h1>
-                <span>{t('DRIVER', 'Driver')}</span>
-              </HeaderOnline>
-            )}
-          </HeaderProfile>
-          <Chat id='chat'>
+                  )
+                }
+              </Image>
+              {business && (
+                <HeaderOnline>
+                  <h1>{order.business?.name}</h1>
+                  <span>{t('BUSINESS', 'Business')}</span>
+                </HeaderOnline>
+              )}
+              {driver && (
+                <HeaderOnline>
+                  <h1>{order.driver?.name}</h1>
+                  <span>{t('DRIVER', 'Driver')}</span>
+                </HeaderOnline>
+              )}
+            </HeaderProfile>
+          ) : (
+            <ProfileMessageHeader>
+              <OrderData>
+                <h2>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</h2>
+                <p>
+                  {order?.delivery_datetime_utc
+                    ? parseDate(order?.delivery_datetime_utc)
+                    : parseDate(order?.delivery_datetime, { utc: false })}
+                </p>
+              </OrderData>
+              <MessagesTypes>
+                {
+                  order.business && (
+                    <MessageType
+                      active={business}
+                      onClick={() => onMessages({ business: true, driver: false })}
+                      isCursor
+                    >
+                      <Image>
+                        <ImageWithFallback
+                          src={order.business?.logo || theme.images?.dummies?.businessLogo}
+                          fallback={<FaUserAlt />}
+                        />
+                      </Image>
+                    </MessageType>
+                  )
+                }
+                {
+                  order?.driver && (
+                    <MessageType
+                      active={driver}
+                      onClick={() => onMessages({ business: false, driver: true })}
+                      isCursor
+                    >
+                      <Image>
+                        <ImageWithFallback
+                          src={order.driver?.photo}
+                          fallback={<RiUser2Fill />}
+                        />
+                      </Image>
+                    </MessageType>
+                  )
+                }
+              </MessagesTypes>
+
+            </ProfileMessageHeader>
+          )}
+
+          <Chat id='chat' profileMessages={profileMessages}>
             {
               messages?.loading && (
                 <>
