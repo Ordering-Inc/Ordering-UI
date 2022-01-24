@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.scrollTo = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.scrollTo = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -328,5 +328,27 @@ exports.formatSeconds = formatSeconds;
 var convertToRadian = function convertToRadian(value) {
   return value * Math.PI / 180;
 };
+/**
+ * Function to calculate distance
+ * @param {*} lat1 lat from fist point
+ * @param {*} lon1 lon from fist point
+ * @param {*} lat2 lat from second point
+ * @param {*} lon2 lon from second point
+ */
+
 
 exports.convertToRadian = convertToRadian;
+
+var getDistance = function getDistance(lat1, lon1, lat2, lon2) {
+  var R = 6371; // km
+
+  var dLat = convertToRadian(lat2 - lat1);
+  var dLon = convertToRadian(lon2 - lon1);
+  var curLat1 = convertToRadian(lat1);
+  var curLat2 = convertToRadian(lat2);
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(curLat1) * Math.cos(curLat2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+};
+
+exports.getDistance = getDistance;

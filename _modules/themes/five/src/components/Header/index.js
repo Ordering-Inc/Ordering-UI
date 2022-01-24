@@ -97,7 +97,9 @@ var Header = function Header(props) {
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
       isCustomerMode = props.isCustomerMode;
-  var location1 = (0, _reactRouterDom.useLocation)();
+
+  var _useLocation = (0, _reactRouterDom.useLocation)(),
+      pathname = _useLocation.pathname;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -245,7 +247,7 @@ var Header = function Header(props) {
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
 
-    if (isCustomerMode && location1.pathname.includes('/orders')) {
+    if (isCustomerMode && pathname.includes('/orders')) {
       deleteUserCustomer(true);
       refreshOrderOptions();
     }
@@ -278,21 +280,8 @@ var Header = function Header(props) {
       setCustomerModalOpen(false);
     }
   }, [customerState === null || customerState === void 0 ? void 0 : (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.address]);
-
-  var getDistance = function getDistance(lat1, lon1, lat2, lon2) {
-    var R = 6371; // km
-
-    var dLat = (0, _utils.convertToRadian)(lat2 - lat1);
-    var dLon = (0, _utils.convertToRadian)(lon2 - lon1);
-    var curLat1 = (0, _utils.convertToRadian)(lat1);
-    var curLat2 = (0, _utils.convertToRadian)(lat2);
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(curLat1) * Math.cos(curLat2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-  };
-
   (0, _react.useEffect)(function () {
-    if (!(location1.pathname.includes('/search') || location1.pathname.includes('/checkout'))) {
+    if (!(pathname.includes('/search') || pathname.includes('/checkout'))) {
       setIsFarAway(false);
       return;
     }
@@ -301,7 +290,7 @@ var Header = function Header(props) {
       var _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options2, _orderState$options2$, _orderState$options2$2;
 
       var crd = pos.coords;
-      var distance = getDistance(crd.latitude, crd.longitude, orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.location) === null || _orderState$options$a2 === void 0 ? void 0 : _orderState$options$a2.lat, orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : (_orderState$options2$2 = _orderState$options2$.location) === null || _orderState$options2$2 === void 0 ? void 0 : _orderState$options2$2.lng);
+      var distance = (0, _utils.getDistance)(crd.latitude, crd.longitude, orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.location) === null || _orderState$options$a2 === void 0 ? void 0 : _orderState$options$a2.lat, orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : (_orderState$options2$2 = _orderState$options2$.location) === null || _orderState$options2$2 === void 0 ? void 0 : _orderState$options2$2.lng);
       if (distance > 20) setIsFarAway(true);else setIsFarAway(false);
     }, function (err) {
       console.warn("ERROR(".concat(err.code, "): ").concat(err.message));
@@ -310,7 +299,7 @@ var Header = function Header(props) {
       timeout: 5000,
       maximumAge: 0
     });
-  }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location, location1.pathname]);
+  }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location, pathname]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -421,9 +410,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  }))))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
-    className: "ddd"
-  }, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+  }))))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
       return openModal('address');
     }
@@ -433,9 +420,7 @@ var Header = function Header(props) {
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs14 = configState.configs) === null || _configState$configs14 === void 0 ? void 0 : (_configState$configs15 = _configState$configs14.max_days_preorder) === null || _configState$configs15 === void 0 ? void 0 : _configState$configs15.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs16 = configState.configs) === null || _configState$configs16 === void 0 ? void 0 : (_configState$configs17 = _configState$configs16.max_days_preorder) === null || _configState$configs17 === void 0 ? void 0 : _configState$configs17.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
-  })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
-    className: "ddd"
-  }, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
     addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : (_orderState$options11 = _orderState$options10.address) === null || _orderState$options11 === void 0 ? void 0 : (_orderState$options12 = _orderState$options11.address) === null || _orderState$options12 === void 0 ? void 0 : (_orderState$options13 = _orderState$options12.split(',')) === null || _orderState$options13 === void 0 ? void 0 : _orderState$options13[0],
     onClick: function onClick(variant) {

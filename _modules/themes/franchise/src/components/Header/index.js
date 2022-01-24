@@ -19,6 +19,8 @@ var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCirc
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
+var _TiWarningOutline = _interopRequireDefault(require("@meronex/icons/ti/TiWarningOutline"));
+
 var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
 
 var _OrderTypeSelectorContent = require("../OrderTypeSelectorContent");
@@ -59,6 +61,8 @@ var _SignUpForm = require("../SignUpForm");
 
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
+var _utils = require("../../../../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -86,14 +90,16 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options2, _orderState$options2$, _orderState$options2$2, _orderState$options2$3, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options3, _orderState$options4, _configState$configs6, _configState$configs7, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options5, _orderState$options5$, _orderState$options5$2, _orderState$options5$3, _orderState$options6, _configState$configs8, _configState$configs9, _configState$configs10, _configState$configs11, _orderState$options7, _orderState$options7$, _orderState$options7$2, _orderState$options7$3, _orderState$options8, _configState$configs12, _configState$configs13, _configState$configs14, _configState$configs15, _orderState$options9, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _customerState$user, _orderState$options3, _orderState$options3$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options5, _orderState$options5$, _orderState$options5$2, _orderState$options5$3, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options6, _orderState$options7, _configState$configs6, _configState$configs7, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options8, _orderState$options8$, _orderState$options8$2, _orderState$options8$3, _orderState$options9, _configState$configs8, _configState$configs9, _configState$configs10, _configState$configs11, _orderState$options10, _orderState$options11, _orderState$options12, _orderState$options13, _orderState$options14, _configState$configs12, _configState$configs13, _configState$configs14, _configState$configs15, _orderState$options15, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
 
   var isHome = props.isHome,
       location = props.location,
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
       isCustomerMode = props.isCustomerMode;
-  var location1 = (0, _reactRouterDom.useLocation)();
+
+  var _useLocation = (0, _reactRouterDom.useLocation)(),
+      pathname = _useLocation.pathname;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -133,41 +139,46 @@ var Header = function Header(props) {
       customerState = _useCustomer2[0],
       deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
 
-  var clearCustomer = (0, _react.useRef)(null);
-
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      modalIsOpen = _useState4[0],
-      setModalIsOpen = _useState4[1];
+      isFarAway = _useState4[0],
+      setIsFarAway = _useState4[1];
+
+  var clearCustomer = (0, _react.useRef)(null);
 
   var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      customerModalOpen = _useState6[0],
-      setCustomerModalOpen = _useState6[1];
+      modalIsOpen = _useState6[0],
+      setModalIsOpen = _useState6[1];
 
   var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      authModalOpen = _useState8[0],
-      setAuthModalOpen = _useState8[1];
+      customerModalOpen = _useState8[0],
+      setCustomerModalOpen = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(null),
+  var _useState9 = (0, _react.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      modalSelected = _useState10[0],
-      setModalSelected = _useState10[1];
+      authModalOpen = _useState10[0],
+      setAuthModalOpen = _useState10[1];
 
   var _useState11 = (0, _react.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      modalPageToShow = _useState12[0],
-      setModalPageToShow = _useState12[1];
+      modalSelected = _useState12[0],
+      setModalSelected = _useState12[1];
 
-  var _useState13 = (0, _react.useState)({
+  var _useState13 = (0, _react.useState)(null),
+      _useState14 = _slicedToArray(_useState13, 2),
+      modalPageToShow = _useState14[0],
+      setModalPageToShow = _useState14[1];
+
+  var _useState15 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
-      _useState14 = _slicedToArray(_useState13, 2),
-      confirm = _useState14[0],
-      setConfirm = _useState14[1];
+      _useState16 = _slicedToArray(_useState15, 2),
+      confirm = _useState16[0],
+      setConfirm = _useState16[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
@@ -235,7 +246,7 @@ var Header = function Header(props) {
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
 
-    if (isCustomerMode && location1.pathname.includes('/orders')) {
+    if (isCustomerMode && pathname.includes('/orders')) {
       deleteUserCustomer(true);
       refreshOrderOptions();
     }
@@ -268,6 +279,27 @@ var Header = function Header(props) {
       setCustomerModalOpen(false);
     }
   }, [customerState === null || customerState === void 0 ? void 0 : (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.address]);
+  (0, _react.useEffect)(function () {
+    if (!(pathname.includes('/search') || pathname.includes('/checkout'))) {
+      setIsFarAway(false);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options2, _orderState$options2$, _orderState$options2$2;
+
+      var crd = pos.coords;
+      var distance = (0, _utils.getDistance)(crd.latitude, crd.longitude, orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.location) === null || _orderState$options$a2 === void 0 ? void 0 : _orderState$options$a2.lat, orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : (_orderState$options2$2 = _orderState$options2$.location) === null || _orderState$options2$2 === void 0 ? void 0 : _orderState$options2$2.lng);
+      if (distance > 20) setIsFarAway(true);else setIsFarAway(false);
+    }, function (err) {
+      console.warn("ERROR(".concat(err.code, "): ").concat(err.message));
+    }, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    });
+  }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location, pathname]);
+  console.log(isFarAway, 'ths is');
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -283,10 +315,10 @@ var Header = function Header(props) {
     isCustomerMode: isCustomerMode
   }), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
-      var _orderState$options, _orderState$options$a;
+      var _orderState$options4, _orderState$options4$;
 
       return handleGoToPage({
-        page: orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location && !isCustomerMode ? 'search' : 'home'
+        page: orderState !== null && orderState !== void 0 && (_orderState$options4 = orderState.options) !== null && _orderState$options4 !== void 0 && (_orderState$options4$ = _orderState$options4.address) !== null && _orderState$options4$ !== void 0 && _orderState$options4$.location && !isCustomerMode ? 'search' : 'home'
       });
     }
   }, /*#__PURE__*/_react.default.createElement("img", {
@@ -303,7 +335,7 @@ var Header = function Header(props) {
     loading: "lazy"
   }))), isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     className: "left-header"
-  }, isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
+  }, windowSize.width > 820 && isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
     onClick: function onClick(e) {
       return handleClickUserCustomer(e);
     }
@@ -316,11 +348,11 @@ var Header = function Header(props) {
     onClick: function onClick() {
       return openModal('address');
     }
-  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : (_orderState$options2$2 = _orderState$options2$.address) === null || _orderState$options2$2 === void 0 ? void 0 : (_orderState$options2$3 = _orderState$options2$2.split(',')) === null || _orderState$options2$3 === void 0 ? void 0 : _orderState$options2$3[0]) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.MomentMenu, {
+  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : (_orderState$options5$2 = _orderState$options5$.address) === null || _orderState$options5$2 === void 0 ? void 0 : (_orderState$options5$3 = _orderState$options5$2.split(',')) === null || _orderState$options5$3 === void 0 ? void 0 : _orderState$options5$3[0]) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.MomentMenu, {
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function () {
       return openModal('moment');
     }
-  }, /*#__PURE__*/_react.default.createElement("div", null, (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && _orderState$options3.moment ? parseDate((_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.moment, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && _orderState$options6.moment ? parseDate((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.moment, {
     outputFormat: configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.dates_moment_format) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')))), windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     orderTypeList: orderTypeList,
@@ -378,25 +410,25 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  }))))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+  }))))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
       return openModal('address');
     }
-  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : (_orderState$options5$2 = _orderState$options5$.address) === null || _orderState$options5$2 === void 0 ? void 0 : (_orderState$options5$3 = _orderState$options5$2.split(',')) === null || _orderState$options5$3 === void 0 ? void 0 : _orderState$options5$3[0]) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), " ", ((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : (_orderState$options8$ = _orderState$options8.address) === null || _orderState$options8$ === void 0 ? void 0 : (_orderState$options8$2 = _orderState$options8$.address) === null || _orderState$options8$2 === void 0 ? void 0 : (_orderState$options8$3 = _orderState$options8$2.split(',')) === null || _orderState$options8$3 === void 0 ? void 0 : _orderState$options8$3[0]) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
-    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.moment,
+    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.max_days_preorder) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 ? void 0 : (_configState$configs11 = _configState$configs10.max_days_preorder) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
-  })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
-    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : (_orderState$options7$ = _orderState$options7.address) === null || _orderState$options7$ === void 0 ? void 0 : (_orderState$options7$2 = _orderState$options7$.address) === null || _orderState$options7$2 === void 0 ? void 0 : (_orderState$options7$3 = _orderState$options7$2.split(',')) === null || _orderState$options7$3 === void 0 ? void 0 : _orderState$options7$3[0],
+    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : (_orderState$options11 = _orderState$options10.address) === null || _orderState$options11 === void 0 ? void 0 : (_orderState$options12 = _orderState$options11.address) === null || _orderState$options12 === void 0 ? void 0 : (_orderState$options13 = _orderState$options12.split(',')) === null || _orderState$options13 === void 0 ? void 0 : _orderState$options13[0],
     onClick: function onClick(variant) {
       return openModal(variant);
     }
   }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
-    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.moment,
+    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options14 = orderState.options) === null || _orderState$options14 === void 0 ? void 0 : _orderState$options14.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 ? void 0 : (_configState$configs13 = _configState$configs12.max_days_preorder) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs14 = configState.configs) === null || _configState$configs14 === void 0 ? void 0 : (_configState$configs15 = _configState$configs14.max_days_preorder) === null || _configState$configs15 === void 0 ? void 0 : _configState$configs15.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
@@ -425,7 +457,7 @@ var Header = function Header(props) {
     }
   }) : /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options15 = orderState.options) === null || _orderState$options15 === void 0 ? void 0 : _orderState$options15.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },
