@@ -11,6 +11,10 @@ export const MessagesContainer = styled.div`
   @media (min-width: 769px) {
     padding: 0 40px;
   }
+
+  ${({ profileMessages }) => profileMessages && css`
+    padding: 0 !important;
+  `};
 `
 
 export const HeaderProfile = styled.div`
@@ -136,6 +140,9 @@ export const Chat = styled.div`
   }
   @media (min-width: 769px){
     height: calc(60vh - 90px);
+    ${({ profileMessages }) => profileMessages && css`
+      height: calc(100vh - 266px);
+    `};
   }
 `
 
@@ -460,7 +467,7 @@ export const WrapperSendMessageButton = styled.div`
         vertical-align: middle;
         color: white;
         ${props => props.theme?.rtl && css`
-        transform: rotate(270deg)
+        transform: rotate(270deg);
       `}
     }
 
@@ -560,11 +567,17 @@ export const MessagesRightLayout = styled.div`
   width: 100%;
   border-top: 1px solid #DEE2E6;
   margin-top: 30px;
+  ${({ profileMessages }) => profileMessages && css`
+    margin-top: 0px;
+  `}
 
   @media (min-width: 769px) {
     width: 70%;
     border: none;
     margin-top: 0;
+    ${({ profileMessages }) => profileMessages && css`
+      width: 100%;
+    `}
   }
 `
 
@@ -668,4 +681,48 @@ export const QuickMessageWrapper = styled.div`
       background: ${() => darken(0.05, '#E9ECEF')};
     }
   }
+`
+export const ProfileMessageHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 1px solid #EEEEEE;
+  height: 62px;
+  box-sizing: border-box;
+`
+export const MessagesTypes = styled.div`
+  display: flex;
+`
+
+export const OrderData = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: #344050;
+  }
+`
+
+export const MessageType = styled.div`
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  >div {
+    margin-right: 5px;
+    box-shadow: none;
+  }
+
+  ${({ active }) => active && css`
+    >div {
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+  `}
 `
