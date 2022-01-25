@@ -28,7 +28,6 @@ export const ListenPageChanges = ({ children }) => {
     business_slug: '/:store',
     forgot_password: '/password/forgot',
     reset_password: '/password/reset',
-    messages: '/messages',
     help: '/help'
   }
 

@@ -37,6 +37,7 @@ import { InputPhoneNumber } from './src/components/InputPhoneNumber'
 import { LastOrders } from './src/components/LastOrders'
 import { LoginForm } from './src/components/LoginForm'
 import { Messages } from './src/components/Messages'
+import { MessagesListing } from './src/components/MessagesListing'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MyOrders } from './src/components/MyOrders'
@@ -108,6 +109,7 @@ export {
   LastOrders,
   LoginForm,
   Messages,
+  MessagesListing,
   MomentContent,
   MomentControl,
   MyOrders,
