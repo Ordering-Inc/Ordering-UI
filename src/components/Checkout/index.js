@@ -3,7 +3,6 @@ import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import {
-  Checkout as CheckoutController,
   useOrder,
   useSession,
   useApi,
@@ -16,7 +15,7 @@ import {
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { Modal } from '../Modal'
-
+import { Checkout as CheckoutController } from './test'
 import {
   Container,
   WrappContainer,
@@ -29,7 +28,8 @@ import {
   WarningMessage,
   CartsList,
   WarningText,
-  WrapperUserDetails
+  WrapperUserDetails,
+  DeliveryOptionsContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -44,6 +44,8 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { OrderSuccessModal } from '../OrderSuccessModal'
+import { TextArea } from '../../styles/Inputs'
+import { Select } from '../../styles/Select'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -67,12 +69,14 @@ const CheckoutUI = (props) => {
     isCustomerMode,
     isResetPaymethod,
     setIsResetPaymethod,
-    onPlaceOrderClick
+    onPlaceOrderClick,
+    handleChangeInstructions,
+    handleChangeDeliveryOption
   } = props
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  const [{ options, loading }, { changePaymethod }] = useOrder()
+  const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
@@ -250,6 +254,27 @@ const CheckoutUI = (props) => {
                 )}
               </WrapperUserDetails>
             </UserDetailsContainer>
+          )}
+
+          {props.beforeElementsSectionEight?.map((BeforeElement, i) => (
+            <React.Fragment key={i}>
+              {BeforeElement}
+            </React.Fragment>))}
+          {props.beforeComponentsSectionEight?.map((BeforeComponent, i) => (
+            <BeforeComponent key={i} {...props} />))}
+
+          {!props.isHideSectionEight && (
+            <DeliveryOptionsContainer>
+              <h3>{t('DELIVERY_OPTIONS', 'Delivery Details')}</h3>
+              <Select
+                placeholder={t('LEAVE_AT_DOOR')}
+                onChange={(val) => handleChangeDeliveryOption(val)}
+              />
+              <TextArea
+                placeholder={t('ADD_INSTRUCTIONS', 'Add instructions')}
+                onChange={(e) => handleChangeInstructions(e.target.value)}
+              />
+            </DeliveryOptionsContainer>
           )}
 
           {props.beforeElementsSectionThree?.map((BeforeElement, i) => (

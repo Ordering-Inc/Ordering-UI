@@ -136,3 +136,11 @@ export const WarningText = styled.p`
   text-align: center;
   color: ${props => props.theme.colors.primary};
 `
+
+export const DeliveryOptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  #select-input {
+    margin-bottom: 10px;
+  }
+`
