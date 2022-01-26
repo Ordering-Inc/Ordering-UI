@@ -709,3 +709,8 @@ export const Exclamation = styled.div`
   margin-left: 5px;
   top: 3px;
 `
+
+export const Divider = styled.div`
+  border-top: 1px solid #EAEAEA;
+  margin-bottom: 10px;
+`
