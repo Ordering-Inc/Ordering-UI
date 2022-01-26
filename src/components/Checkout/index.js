@@ -71,7 +71,8 @@ const CheckoutUI = (props) => {
     setIsResetPaymethod,
     onPlaceOrderClick,
     handleChangeInstructions,
-    handleChangeDeliveryOption
+    handleChangeDeliveryOption,
+    instructionsOptions
   } = props
 
   const theme = useTheme()
@@ -93,6 +94,12 @@ const CheckoutUI = (props) => {
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
+
+  const deliveryOptions = instructionsOptions?.result && instructionsOptions?.result?.filter(option => option?.enabled)?.map(option => {
+    return {
+      value: option?.id, content: option?.name, showOnSelected: option?.name
+    }
+  })
 
   const handlePlaceOrder = () => {
     setCreateOrder(true)
@@ -265,9 +272,10 @@ const CheckoutUI = (props) => {
 
           {!props.isHideSectionEight && (
             <DeliveryOptionsContainer>
-              <h3>{t('DELIVERY_OPTIONS', 'Delivery Details')}</h3>
+              <h3>{t('DELIVERY_DETAILS', 'Delivery Details')}</h3>
               <Select
-                placeholder={t('LEAVE_AT_DOOR')}
+                placeholder={t('DELIVERY_OPTIONS', 'Delivery options')}
+                options={deliveryOptions}
                 onChange={(val) => handleChangeDeliveryOption(val)}
               />
               <TextArea

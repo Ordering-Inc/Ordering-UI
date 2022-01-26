@@ -36,6 +36,10 @@ export const Checkout = (props) => {
    */
   const [, { showToast }] = useToast()
   /**
+   * Instructions options
+   */
+  const [instructionsOptions, setInstructionsOptions] = useState({ loading: false, result: null, error: null })
+  /**
    * Instructions state
    */
   const [instructionsState, setInstructionsState] = useState({ loading: false, result: null, error: null })
@@ -205,6 +209,28 @@ export const Checkout = (props) => {
     }
   }
 
+  const getDeliveryOptions = async () => {
+    try {
+      const response = await fetch(`${ordering.root}/delivery_options`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${token}`
+        }
+      })
+      const { result, error } = await response.json()
+      if (!error) {
+        setInstructionsOptions({ loading: false, result })
+        return
+      }
+      setInstructionsOptions({ loading: false, error: true, result })
+      showToast(ToastType.Error, result)
+    } catch (err) {
+      setInstructionsOptions({ loading: false, error: true, result: err.message })
+      showToast(ToastType.Error, err.message)
+    }
+  }
+
   const handleChangeInstructions = (value) => {
     try {
       if (previousInstructions !== value) {
@@ -220,9 +246,22 @@ export const Checkout = (props) => {
     }
   }
 
-  const handleChangeDeliveryOption = (value) => {
+  const handleChangeDeliveryOption = async (value) => {
     try {
-      console.log(value)
+      const response = await fetch(`${ordering.root}/carts/${cart?.uuid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${token}`
+        },
+        body: JSON.stringify({
+          delivery_zone_id: value
+        })
+      })
+      const { result, error } = await response.json()
+      if (error) {
+        showToast(ToastType.Error, result)
+      }
     } catch (err) {
       showToast(ToastType.Error, err.message)
     }
@@ -248,6 +287,10 @@ export const Checkout = (props) => {
     }
   }, [cart])
 
+  useEffect(() => {
+    getDeliveryOptions()
+  }, [])
+
   return (
     <>
       {UIComponent && (
@@ -260,9 +303,11 @@ export const Checkout = (props) => {
           paymethodSelected={paymethodSelected}
           businessDetails={businessDetails}
           commentState={commentState}
+          instructionsOptions={instructionsOptions}
           handlePaymethodChange={handlePaymethodChange}
           handlerClickPlaceOrder={handlerClickPlaceOrder}
           handleChangeComment={handleChangeComment}
+          handleChangeDeliveryOption={handleChangeDeliveryOption}
         />
       )}
     </>

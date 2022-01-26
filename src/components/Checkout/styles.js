@@ -143,4 +143,7 @@ export const DeliveryOptionsContainer = styled.div`
   #select-input {
     margin-bottom: 10px;
   }
+  #list {
+    width: 100%;
+  }
 `
