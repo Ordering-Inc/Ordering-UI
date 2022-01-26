@@ -712,7 +712,6 @@ export const Exclamation = styled.div`
 
 export const CommentContainer = styled.div`
   margin: 0;
-  // margin-bottom: ${props => props.mbottom ? '20px' : '0'};
   h3 {
     margin: 0;
   }

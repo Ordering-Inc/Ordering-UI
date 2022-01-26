@@ -44,7 +44,6 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { OrderSuccessModal } from '../OrderSuccessModal'
-import { TextArea } from '../../styles/Inputs'
 import { Select } from '../../styles/Select'
 
 const mapConfigs = {
