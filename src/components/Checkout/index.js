@@ -3,6 +3,7 @@ import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import {
+  Checkout as CheckoutController,
   useOrder,
   useSession,
   useApi,
@@ -15,7 +16,6 @@ import {
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { Modal } from '../Modal'
-import { Checkout as CheckoutController } from './test'
 import {
   Container,
   WrappContainer,
@@ -70,9 +70,9 @@ const CheckoutUI = (props) => {
     isResetPaymethod,
     setIsResetPaymethod,
     onPlaceOrderClick,
-    handleChangeInstructions,
     handleChangeDeliveryOption,
-    instructionsOptions
+    instructionsOptions,
+    deliveryOptionSelected
   } = props
 
   const theme = useTheme()
@@ -263,28 +263,6 @@ const CheckoutUI = (props) => {
             </UserDetailsContainer>
           )}
 
-          {props.beforeElementsSectionEight?.map((BeforeElement, i) => (
-            <React.Fragment key={i}>
-              {BeforeElement}
-            </React.Fragment>))}
-          {props.beforeComponentsSectionEight?.map((BeforeComponent, i) => (
-            <BeforeComponent key={i} {...props} />))}
-
-          {!props.isHideSectionEight && (
-            <DeliveryOptionsContainer>
-              <h3>{t('DELIVERY_DETAILS', 'Delivery Details')}</h3>
-              <Select
-                placeholder={t('DELIVERY_OPTIONS', 'Delivery options')}
-                options={deliveryOptions}
-                onChange={(val) => handleChangeDeliveryOption(val)}
-              />
-              <TextArea
-                placeholder={t('ADD_INSTRUCTIONS', 'Add instructions')}
-                onChange={(e) => handleChangeInstructions(e.target.value)}
-              />
-            </DeliveryOptionsContainer>
-          )}
-
           {props.beforeElementsSectionThree?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
@@ -327,6 +305,31 @@ const CheckoutUI = (props) => {
             </BusinessDetailsContainer>
           )}
 
+          {props.beforeElementsSectionEight?.map((BeforeElement, i) => (
+            <React.Fragment key={i}>
+              {BeforeElement}
+            </React.Fragment>))}
+          {props.beforeComponentsSectionEight?.map((BeforeComponent, i) => (
+            <BeforeComponent key={i} {...props} />))}
+
+          {cartState.loading && (
+            <div>
+              <div>
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={55} style={{ marginBottom: '10px' }} />
+              </div>
+            </div>
+          )}
+          {!props.isHideSectionEight && !cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
+            <DeliveryOptionsContainer>
+              <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
+              <Select
+                defaultValue={deliveryOptionSelected}
+                options={deliveryOptions}
+                onChange={(val) => handleChangeDeliveryOption(val)}
+              />
+            </DeliveryOptionsContainer>
+          )}
           {props.beforeElementsSectionFour?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
