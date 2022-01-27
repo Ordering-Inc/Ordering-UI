@@ -193,7 +193,7 @@ const CartUI = (props) => {
             ))}
             {cart?.valid_products && (
               <OrderBill isCheckout={isCheckout}>
-                <table>
+                <table className='order-info'>
                   <tbody>
                     <tr>
                       <td>{t('SUBTOTAL', 'Subtotal')}</td>

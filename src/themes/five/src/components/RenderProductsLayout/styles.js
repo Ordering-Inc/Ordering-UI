@@ -20,6 +20,11 @@ export const WrapContent = styled.div`
   @media (min-width: 1200px) {
     padding: 0;
   }
+  &#businessProductList {
+    > div {
+      margin-top: 30px;
+    }
+  }
 `
 
 export const BusinessContent = styled.div`
@@ -82,9 +87,9 @@ export const BusinessCartContent = styled.div`
     margin: 0;
   }
 
-  .accordion.active {
-    padding: 10px 0;
-  }
+  /* .accordion.active {
+    padding-bottom: 10px;
+  } */
 
   ${({ isModal }) => !isModal && css`
     border: 1px solid #E9ECEF;

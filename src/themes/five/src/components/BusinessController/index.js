@@ -21,7 +21,8 @@ import {
   CallCenterInformation,
   CallCenterInformationBullet,
   BusinessLogoWrapper,
-  BusinessStarInfo
+  BusinessStarInfo,
+  CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import BisStar from '@meronex/icons/bi/BisStar'
@@ -89,7 +90,7 @@ const BusinessControllerUI = (props) => {
                 {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
                   <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
                 )}
-                {!isBusinessOpen && <h1>{t('CLOSED', 'Closed')}</h1>}
+                {!isBusinessOpen && <h1 className='closed'>{t('CLOSED', 'Closed')}</h1>}
               </BusinessHeader>
             )}
           </BusinessHero>

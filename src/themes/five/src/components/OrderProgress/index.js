@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
   useUtils,
@@ -31,6 +31,7 @@ const OrderProgressUI = (props) => {
   const [{ optimizeImage, parseDate, parseTime }] = useUtils()
   const theme = useTheme()
   const [events] = useEvent()
+  const [lastOrder, setLastOrder] = useState(null)
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -64,10 +65,10 @@ const OrderProgressUI = (props) => {
     return objectStatus && objectStatus
   }
 
-  const convertDiffToHours = (time, order) => {
-    const deliveryTime = order?.delivery_datetime_utc
-      ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'YYYY-MM-DD hh:mm A' })
-      : parseDate(order?.delivery_datetime, { utc: false, outputFormat: 'YYYY-MM-DD hh:mm A' })
+  const convertDiffToHours = (time) => {
+    const deliveryTime = lastOrder?.delivery_datetime_utc
+      ? parseDate(lastOrder?.delivery_datetime_utc, { outputFormat: 'YYYY-MM-DD hh:mm A' })
+      : parseDate(lastOrder?.delivery_datetime, { utc: false, outputFormat: 'YYYY-MM-DD hh:mm A' })
     const [hour, minute] = time.split(':')
     const result = time ? (parseInt(hour, 10) * 60) + parseInt(minute, 10) : 0
     const returnedDate = moment(new Date(deliveryTime)).add(result, 'minutes').format('hh:mm A')
@@ -78,13 +79,20 @@ const OrderProgressUI = (props) => {
     events.emit('go_to_page', { page: index })
   }
 
+  useEffect(() => {
+    if (orderList?.orders.length > 0) {
+      const sortedOrders = orderList.orders.sort((a, b) => a.id > b.id ? -1 : 1)
+      setLastOrder(sortedOrders[0])
+    }
+  }, [orderList?.orders])
+
   return (
     <>
       {orderList?.loading && <Skeleton height={150} />}
-      {!orderList?.loading && orderList?.orders?.length > 0 && orderList?.orders.map((order, i) => (
-        <OrderProgressContainer key={i}>
+      {!orderList?.loading && orderList?.orders?.length > 0 && lastOrder && (
+        <OrderProgressContainer>
           <OrderInfoWrapper>
-            <ProgressLogo bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_91,c_limit')} />
+            <ProgressLogo bgimage={optimizeImage(lastOrder?.business?.logo || theme.images?.dummies?.businessLogo, 'h_91,c_limit')} />
             <ProgressDescriptionWrapper>
               <h2>{t('ORDER_IN_PROGRESS', 'Order in progress')}</h2>
               <p>{t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')}</p>
@@ -100,24 +108,24 @@ const OrderProgressUI = (props) => {
           </OrderInfoWrapper>
           <ProgressBarWrapper>
             <ProgressContentWrapper>
-              <ProgressBar style={{ width: getOrderStatus(order.status)?.percentage ? `${getOrderStatus(order.status).percentage}%` : '0%' }} />
+              <ProgressBar style={{ width: getOrderStatus(lastOrder.status)?.percentage ? `${getOrderStatus(lastOrder.status).percentage}%` : '0%' }} />
             </ProgressContentWrapper>
             <ProgressTextWrapper>
-              <StatusWrapper>{getOrderStatus(order.status).value}</StatusWrapper>
+              <StatusWrapper>{getOrderStatus(lastOrder.status).value}</StatusWrapper>
               <TimeWrapper>
                 <span>{t('ESTIMATED_DELIVERY', 'Estimated delivery')}:&nbsp;</span>
                 <span>
-                  {order?.delivery_datetime_utc
-                    ? parseTime(order?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
-                    : parseTime(order?.delivery_datetime, { utc: false })}
+                  {lastOrder?.delivery_datetime_utc
+                    ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
+                    : parseTime(lastOrder?.delivery_datetime, { utc: false })}
                     &nbsp;-&nbsp;
-                  {convertDiffToHours(order.delivery_type === 1 ? order?.business?.delivery_time : order?.business?.pickup_time, order)}
+                  {convertDiffToHours(lastOrder.delivery_type === 1 ? lastOrder?.business?.delivery_time : lastOrder?.business?.pickup_time)}
                 </span>
               </TimeWrapper>
             </ProgressTextWrapper>
           </ProgressBarWrapper>
         </OrderProgressContainer>
-      ))}
+      )}
     </>
 
   )

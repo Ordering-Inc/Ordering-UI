@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import FaStar from '@meronex/icons/fa/FaStar'
+import { StarFill } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
@@ -89,10 +89,13 @@ export const BusinessBasicInformation = (props) => {
                 {orderState?.options.type === 1 && (
                   <>
                     {!loading ? (
-                      <h5>
-                        <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
-                        {business && parsePrice(business?.delivery_price || 0)}
-                      </h5>
+                      <>
+                        <h5>
+                          <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
+                          {business && parsePrice(business?.delivery_price || 0)}
+                        </h5>
+                        <span className='dot'>•</span>
+                      </>
                     ) : (
                       <Skeleton width={70} />
                     )}
@@ -101,13 +104,19 @@ export const BusinessBasicInformation = (props) => {
                 {!loading ? (
                   <>
                     {orderState?.options?.type === 1 ? (
-                      <h5>
-                        {convertHoursToMinutes(business?.delivery_time)}
-                      </h5>
+                      <>
+                        <h5>
+                          {convertHoursToMinutes(business?.delivery_time)}
+                        </h5>
+                        <span className='dot'>•</span>
+                      </>
                     ) : (
-                      <h5>
-                        {convertHoursToMinutes(business?.pickup_time)}
-                      </h5>
+                      <>
+                        <h5>
+                          {convertHoursToMinutes(business?.pickup_time)}
+                        </h5>
+                        <span className='dot'>•</span>
+                      </>
                     )}
                   </>
                 ) : (
@@ -115,15 +124,19 @@ export const BusinessBasicInformation = (props) => {
                 )}
 
                 {!loading ? (
-                  <h5>
-                    {parseDistance(business?.distance || 0)}
-                  </h5>
+                  <>
+                    <h5>
+                      {parseDistance(business?.distance || 0)}
+                    </h5>
+                    <span className='dot'>•</span>
+                  </>
+
                 ) : (
                   <Skeleton width={70} />
                 )}
                 {!loading ? (
                   <div className='review'>
-                    <FaStar className='start' />
+                    <StarFill className='start' />
                     <span>{business?.reviews?.total}</span>
                   </div>
                 ) : (
@@ -134,6 +147,7 @@ export const BusinessBasicInformation = (props) => {
                 !loading ? (
                   <div className='preorder-Reviews'>
                     <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
+                    <span className='dot'>•</span>
                     {business.reviews?.reviews && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
                   </div>
                 ) : (
@@ -206,7 +220,7 @@ export const BusinessBasicInformation = (props) => {
           />
         </Modal>
         <Modal
-          width='70%'
+          width='700px'
           open={isPreOrder}
           onClose={() => setIsPreOrder(false)}
           padding='20px'

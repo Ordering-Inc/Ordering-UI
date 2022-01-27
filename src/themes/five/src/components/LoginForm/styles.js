@@ -156,7 +156,7 @@ export const SocialButtons = styled.div`
     }
 
     div {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 `
@@ -174,8 +174,8 @@ export const TogglePassword = styled.span`
   font-weight: 300;
   padding: 10px 0;
   color: #333;
-  font-size: 26px;
-  transform: translate(-150%, 10%);
+  font-size: 24px;
+  transform: translate(-150%, 13%);
   max-height: 100%;
   ${props => props.theme?.rtl && css`
     transform: translate(150%, 10%);
@@ -264,14 +264,14 @@ export const ReCaptchaWrapper = styled.div`
 
 export const InputBeforeIcon = styled.div`
   position: absolute;
-  left: 15px;
+  left: 14px;
   top: 0;
   display: flex;
   align-items: center;
   height: 100%;
 
   ${props => props.theme.rtl && css`
-    right: 15px;
+    right: 14px;
     left: initial;
   `}
 

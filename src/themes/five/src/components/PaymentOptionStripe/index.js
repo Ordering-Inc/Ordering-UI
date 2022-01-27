@@ -12,7 +12,7 @@ import { Modal } from '../Modal'
 import { Confirm } from '../Confirm'
 import { StripeElementsForm } from '../StripeElementsForm'
 
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 
 import {
   OptionStripeContainer,
