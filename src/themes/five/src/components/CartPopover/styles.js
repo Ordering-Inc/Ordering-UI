@@ -20,7 +20,7 @@ export const HeaderItem = styled.div`
       `} 
     }
     svg {
-      font-size: 17px;
+      font-size: 16px;
     }
   }
 `

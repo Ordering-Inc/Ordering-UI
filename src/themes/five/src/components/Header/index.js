@@ -5,8 +5,8 @@ import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, us
 import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
+import { GeoAlt } from 'react-bootstrap-icons'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
-import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
 
 import {
@@ -235,7 +235,7 @@ export const Header = (props) => {
                   <AddressMenu
                     onClick={() => openModal('address')}
                   >
-                    <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                    <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
                   </AddressMenu>
                   {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                     <MomentMenu
@@ -336,7 +336,7 @@ export const Header = (props) => {
               <AddressMenu
                 onClick={() => openModal('address')}
               >
-                <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               </AddressMenu>
               {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
@@ -378,7 +378,7 @@ export const Header = (props) => {
             title={(modalSelected === 'address') ? t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?') : null}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
-            width='50%'
+            width='700px'
           >
             {modalSelected === 'cart' && (
               <CartContent

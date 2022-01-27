@@ -13,11 +13,11 @@ export const Tab = styled.div`
   cursor: pointer;
   ${({ active }) => active && css`
     ${({ borderBottom }) => borderBottom && css`
-      border-bottom: 3px solid;
+      border-bottom: 1px solid;
     `}
   `}
 
   ${({ active }) => !active && css`
-    color: ${props => props.theme.colors.disabled};
+    color: ${props => props.theme.colors.darkGray};
   `}
 `

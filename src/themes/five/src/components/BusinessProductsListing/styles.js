@@ -5,7 +5,7 @@ export const ProductsContainer = styled.div`
   margin: 20px auto 0px;
 
   > svg {
-    color: #748194;
+    color: ${props => props.theme.colors.headingColor};
     font-size: 24px;
     cursor: pointer;
     margin-bottom: 5px;

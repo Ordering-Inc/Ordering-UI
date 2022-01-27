@@ -253,7 +253,7 @@ export const ProductActions = styled.div`
 
 export const ProductActionsEdit = styled.span`
   svg {
-    font-size: 20px;
+    font-size: 16px;
     margin-right: 5px;
     cursor: pointer;
     ${props => props.theme?.rtl && css`

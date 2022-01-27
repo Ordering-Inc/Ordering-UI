@@ -14,14 +14,14 @@ import {
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
-import { ProductIngredient } from '../../../../../components/ProductIngredient'
-import { ProductOption } from '../../../../../components/ProductOption'
-import { ProductOptionSubOption } from '../../../../../components/ProductOptionSubOption'
+import { ProductIngredient } from '../ProductIngredient'
+import { ProductOption } from '../ProductOption'
+import { ProductOptionSubOption } from '../ProductOptionSubOption'
 import { ProductShare } from '../../../../../components/ProductShare'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
-import { AddressList } from '../../../../../components/AddressList'
+import { AddressList } from '../AddressList'
 
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
@@ -53,7 +53,7 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, {
   Navigation,
@@ -159,7 +159,9 @@ const ProductOptionsUI = (props) => {
 
   useEffect(() => {
     if (document.getElementById(`${tabValue}`)) {
-      const top = (tabValue === 'all') ? 0 : document.getElementById(`${tabValue}`).offsetTop + 350
+      const extraHeight = windowSize.width < 769 ? 100 : 42
+      const top = (tabValue === 'all') ? 0 : document.getElementById(`${tabValue}`).offsetTop - extraHeight
+      console.log(top, 'this is top')
       let scrollElement = document.querySelector('.popup-dialog')
       if (windowSize.width >= 1200) {
         scrollElement = productContainerRef.current

@@ -4,7 +4,7 @@ import { OrderList, useLanguage, useOrder } from 'ordering-components'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { useTheme } from 'styled-components'
 

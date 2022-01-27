@@ -3,6 +3,9 @@ import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import {
+  ArrowLeft
+} from 'react-bootstrap-icons'
+import {
   BusinessAndProductList,
   useEvent,
   useLanguage,
@@ -16,9 +19,8 @@ import {
   ProductLoading,
   SkeletonItem
 } from './styles'
-import HiArrowNarrowLeft from '@meronex/icons/hi/HiArrowNarrowLeft'
 
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
@@ -169,7 +171,7 @@ const BusinessProductsListingUI = (props) => {
   return (
     <>
       <ProductsContainer>
-        <HiArrowNarrowLeft onClick={() => handleGoToBusinessList()} />
+        <ArrowLeft onClick={() => handleGoToBusinessList()} />
         <RenderProductsLayout
           errors={errors}
           isError={error}

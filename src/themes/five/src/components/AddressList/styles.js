@@ -26,7 +26,7 @@ export const AddressItem = styled.li`
   justify-content: space-between;
   align-items: center;
   padding: 15px 0px;
-  border-top: 1px solid #00000029;
+  border-top: 1px solid #E9ECEF;
 
   label {
     font-size: 15px;
@@ -52,8 +52,23 @@ export const AddressItem = styled.li`
         margin-right: 0px;
       `}
       &.radio {
-        color: ${props => props.theme.colors.primary};
+        color: ${props => props.theme.colors.lightGray};
+        font-size: 20px;
+
+        > svg.address-checked {
+          color: ${props => props.theme.colors.primary};
+        }
+      }
+
+      &.selected-tag {
+        > svg {
+          color: ${props => props.theme.colors.primary};
+        }
+      }
+
+      &.tag {
         font-size: 24px;
+        color: ${props => props.theme.colors.lightGray};
       }
 
       @media (min-width: 768px) {
@@ -74,7 +89,7 @@ export const AddressItem = styled.li`
   }
 
   &:last-child {
-    border-bottom: 1px solid #00000029;
+    border-bottom: 1px solid #E9ECEF;
   }
 `
 
@@ -85,15 +100,10 @@ export const AddressItemActions = styled.div`
     display: flex;
     cursor: pointer;
     margin: 0px 5px;
-    font-size: 30px;
+    font-size: 20px;
     
     svg {
       color: #B1BCCC;
-    }
-  }
-  a:last-child {
-    svg {
-      color: #D83520;
     }
   }
   a.disabled {
@@ -167,4 +177,13 @@ export const ContinueButton = styled.div`
     white-space: nowrap;
     height: 50px;
   }
+`
+
+export const AddressTitle = styled.span`
+  font-size: 16px;
+  margin-bottom: 25px;
+  text-align: left;
+  ${props => props.theme?.rtl && css`
+    text-align: right;
+  `}
 `

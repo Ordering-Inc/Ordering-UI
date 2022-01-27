@@ -42,11 +42,13 @@ import { FacebookLoginButton } from '../FacebookLogin'
 import { GoogleLoginButton } from '../GoogleLogin'
 import { AppleLogin } from '../AppleLogin'
 
-import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
-import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
-import GoMail from '@meronex/icons/go/GoMail'
-import FaRegUser from '@meronex/icons/fa/FaRegUser'
-import BsLock from '@meronex/icons/bs/BsLock'
+import {
+  Person,
+  Envelope,
+  Lock,
+  Eye,
+  EyeSlash
+} from 'react-bootstrap-icons'
 
 const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes']
 
@@ -82,6 +84,7 @@ const SignUpFormUI = (props) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
+  const [fieldNumber, setFieldNumber] = useState(1)
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
@@ -248,6 +251,15 @@ const SignUpFormUI = (props) => {
     }
   }, [externalPhoneNumber])
 
+  useEffect(() => {
+    if (useChekoutFileds && validationFields?.loading) return
+    let fieldnum = 0
+    sortInputFields({ values: validationFields?.fields?.checkout }).forEach(field => {
+      if (showField && showField(field.code) && field.code !== 'email') fieldnum += 1
+    })
+    setFieldNumber(fieldnum)
+  }, [validationFields])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -294,11 +306,11 @@ const SignUpFormUI = (props) => {
                                 autoComplete='off'
                               />
                               <InputBeforeIcon>
-                                <GoMail />
+                                <Envelope />
                               </InputBeforeIcon>
                             </InputWrapper>
                           ) : (
-                            <InputWrapper>
+                            <InputWrapper isHalf={fieldNumber % 2 === 0}>
                               <Input
                                 type={field.type}
                                 name={field.code}
@@ -310,7 +322,7 @@ const SignUpFormUI = (props) => {
                                 autoComplete='off'
                               />
                               <InputBeforeIcon>
-                                <FaRegUser />
+                                <Person />
                               </InputBeforeIcon>
                             </InputWrapper>
                           )}
@@ -344,10 +356,10 @@ const SignUpFormUI = (props) => {
                         })}
                       />
                       <TogglePassword onClick={togglePasswordView}>
-                        {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                        {!passwordSee ? <Eye /> : <EyeSlash />}
                       </TogglePassword>
                       <InputBeforeIcon>
-                        <BsLock />
+                        <Lock />
                       </InputBeforeIcon>
                     </WrapperPassword>
                   )}

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import BsPencil from '@meronex/icons/bs/BsPencil'
-import VscTrash from '@meronex/icons/vsc/VscTrash'
-import FaHome from '@meronex/icons/fa/FaHome'
-import FaPlus from '@meronex/icons/fa/FaPlus'
-import FaRegBuilding from '@meronex/icons/fa/FaRegBuilding'
-import FaRegHeart from '@meronex/icons/fa/FaRegHeart'
-import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
+import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
+import {
+  Heart,
+  Building,
+  PlusLg,
+  House,
+  Pencil,
+  Trash
+} from 'react-bootstrap-icons'
 
 import {
   AddressList as AddressListController,
@@ -24,10 +26,11 @@ import {
   AddressItemActions,
   WrappNotAddresses,
   FormActions,
-  ContinueButton
+  ContinueButton,
+  AddressTitle
 } from './styles'
 
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
@@ -228,17 +231,18 @@ const AddressListUI = (props) => {
           typeof orderState.options?.address === 'object' &&
           ((!addressOpen && isPopover) || isModal) && (
             <AddressListUl id='list'>
+              <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
               {uniqueAddressesList.map(address => (
                 <AddressItem key={address?.id}>
                   <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                     <span className='radio'>
-                      {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
+                      {checkAddress(address) ? <RiRadioButtonFill className='address-checked' /> : <IosRadioButtonOff />}
                     </span>
-                    <span className='tag'>
-                      {address?.tag === 'home' && <FaHome />}
-                      {address?.tag === 'office' && <FaRegBuilding />}
-                      {address?.tag === 'favorite' && <FaRegHeart />}
-                      {address?.tag === 'other' && <FaPlus />}
+                    <span className={checkAddress(address) ? 'selected-tag tag' : 'tag'}>
+                      {address?.tag === 'home' && <House />}
+                      {address?.tag === 'office' && <Building />}
+                      {address?.tag === 'favorite' && <Heart />}
+                      {address?.tag === 'other' && <PlusLg />}
                     </span>
                     <div className='address'>
                       <span>{address.address}</span>
@@ -247,10 +251,10 @@ const AddressListUI = (props) => {
                   </div>
                   <AddressItemActions className='form'>
                     <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                      <BsPencil />
+                      <Pencil />
                     </a>
                     <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
-                      <VscTrash />
+                      <Trash />
                     </a>
                   </AddressItemActions>
                 </AddressItem>

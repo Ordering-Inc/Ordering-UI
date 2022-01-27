@@ -247,16 +247,19 @@ export const UserEdit = styled.div`
 export const AddressMenu = styled.div`
   cursor: pointer;
   font-size: 14px;
-  color: #909BA9;
+  font-weight: 600;
+  color: ${props => props.theme.colors?.headingColor};
   display: flex;
   align-items: center;
   width: 100%;
   position: relative;
 
   svg {
-    margin-right: 5px;
+    color: ${props => props.theme.colors?.lightGray};
+    font-size: 16px;
+    margin-right: 10px;
     ${props => props.theme?.rtl && css`
-      margin-left: 5px;
+      margin-left: 10px;
       margin-right: 0;
     `}
   }
