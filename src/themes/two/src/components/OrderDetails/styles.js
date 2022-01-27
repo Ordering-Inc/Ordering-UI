@@ -349,6 +349,16 @@ export const OrderBill = styled.div`
     }
   }
 
+  table.comments {
+    margin-top: 20px;
+    align-items: center;
+    tr {
+      td:nth-child(1) {
+        font-weight: bold;
+      }
+    }
+  }
+
   @media (min-width: 678px) {
     table {
       font-size: 18px;

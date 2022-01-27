@@ -70,10 +70,11 @@ export const formatUrlVideo = (url) => {
  * @param {string} time business delivery time
  */
 export const convertHoursToMinutes = (time) => {
+  const [, t] = useLanguage()
   if (!time) return '0min'
   const [hour, minute] = time.split(':')
   const result = (parseInt(hour, 10) * 60) + parseInt(minute, 10)
-  return `${result}min`
+  return `${result}${t('MIN', 'min')}`
 }
 
 /**
@@ -211,4 +212,32 @@ export const formatSeconds = (seconds) => {
  ret += "" + mins + ":" + (secs < 10 ? "0" : "");
  ret += "" + secs;
  return ret;
+}
+
+/**
+ * Function to transform degree to radian
+ * @param {number} value for transform
+ *
+ */
+export const convertToRadian = (value) => {
+  return value * Math.PI / 180
+}
+
+/**
+ * Function to calculate distance
+ * @param {*} lat1 lat from fist point
+ * @param {*} lon1 lon from fist point
+ * @param {*} lat2 lat from second point
+ * @param {*} lon2 lon from second point
+ */
+
+export const getDistance = (lat1, lon1, lat2, lon2) => {
+  const R = 6371 // km
+  const dLat = convertToRadian(lat2 - lat1)
+  const dLon = convertToRadian(lon2 - lon1)
+  const curLat1 = convertToRadian(lat1)
+  const curLat2 = convertToRadian(lat2)
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(curLat1) * Math.cos(curLat2)
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  return R * c
 }

@@ -137,38 +137,6 @@ export const ProductInfo = styled.div`
   /* position: relative; */
   margin-top: 18px;
 
-  h1 {
-    font-weight: 600;
-    font-size: 28px;
-    color: ${props => props.theme?.colors.darkTextColor};
-    margin-top: 0;
-    margin-bottom: 5px;
-  }
-
-  .price-wrapper {
-    display: flex;
-    align-items: center;
-
-    span {
-      font-size: 18px;
-      color: ${props => props.theme?.colors.darkTextColor};
-      margin-right: 5px;
-      ${props => props.theme?.rtl && css`
-        margin-right: 0px;
-        margin-left: 5px;
-      `}
-    }
-
-    .price-discount {
-      font-size: 14px;
-      color: #909BA9;
-    }
-  }
-  p {
-    font-size: 16px;
-    color: #909BA9;
-    margin-top: 0px;
-  }
 `
 
 export const ProductFormTitle = styled.div`
@@ -333,17 +301,6 @@ export const WrapperSubOption = styled.div`
 
 export const SkuContent = styled.div`
   display: flex;
-  flex-direction: column;
-
-  h2 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 0px;
-  }
-
-  p {
-    font-size: 14px;
-  }
 `
 
 export const WrapperIngredients = styled.div`
@@ -412,5 +369,36 @@ export const ProductShareWrapper = styled.div`
       left: auto;
     }
   }
+
+`
+export const ProductName = styled.h1`
+  font-size: 24px;
+  line-height: 36px;
+  color: #344050;
+  margin-bottom: 10px;
+`
+export const Properties = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const ProductDescription = styled.p`
+  margin-top: 10px;
+`
+export const PriceContent = styled.p`
+  font-size: 18px;
+  line-height: 27px;
+  color: #344050;
+  margin: 0;
+`
+export const ProductMeta = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 16px;
+    line-height: 24px;
+    color: #909BA9;
+  }
+`
+export const EstimatedPersons = styled.div`
 
 `

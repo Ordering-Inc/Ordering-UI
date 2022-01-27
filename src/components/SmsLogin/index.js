@@ -14,9 +14,10 @@ const SmsLoginButtonUI = (props) => {
       initialIcon
       color='secondary'
       onClick={() => handleSmsLogin()}
+      style={props.style}
     >
-      <MdSms />
-      <div>{t('LOGIN_WITH_SMS', 'Login with SMS')}</div>
+      <MdSms style={props.iconStyle} />
+      <div style={props.textStyle}>{t('LOGIN_WITH_SMS', 'Login with SMS')}</div>
     </SMSButton>
   )
 }

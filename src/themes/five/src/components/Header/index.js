@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils } from 'ordering-components'
@@ -5,6 +6,7 @@ import { useTheme } from 'styled-components'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
 import { GeoAlt } from 'react-bootstrap-icons'
+import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
 
 import {
@@ -19,7 +21,8 @@ import {
   CustomerInfo,
   UserEdit,
   AddressMenu,
-  MomentMenu
+  MomentMenu,
+  FarAwayMessage
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -39,6 +42,7 @@ import { Confirm } from '../Confirm'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
+import { getDistance } from '../../../../../utils'
 
 export const Header = (props) => {
   const {
@@ -49,7 +53,7 @@ export const Header = (props) => {
     isCustomerMode
   } = props
 
-  const location1 = useLocation()
+  const { pathname } = useLocation()
   const [events] = useEvent()
   const [{ parseDate }] = useUtils()
   const [, t] = useLanguage()
@@ -67,6 +71,7 @@ export const Header = (props) => {
   const [modalSelected, setModalSelected] = useState(null)
   const [modalPageToShow, setModalPageToShow] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isFarAway, setIsFarAway] = useState(false)
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
@@ -125,7 +130,7 @@ export const Header = (props) => {
 
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
-    if (isCustomerMode && location1.pathname.includes('/orders')) {
+    if (isCustomerMode && pathname.includes('/orders')) {
       deleteUserCustomer(true)
       refreshOrderOptions()
     }
@@ -158,6 +163,25 @@ export const Header = (props) => {
     }
   }, [customerState?.user?.address])
 
+  useEffect(() => {
+    if (!(pathname.includes('/search') || pathname.includes('/checkout'))) {
+      setIsFarAway(false)
+      return
+    }
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const crd = pos.coords
+      const distance = getDistance(crd.latitude, crd.longitude, orderState?.options?.address?.location?.lat, orderState?.options?.address?.location?.lng)
+      if (distance > 20) setIsFarAway(true)
+      else setIsFarAway(false)
+    }, (err) => {
+      console.warn(`ERROR(${err.code}): ${err.message}`)
+    }, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    })
+  }, [orderState?.options?.address?.location, pathname])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -184,6 +208,12 @@ export const Header = (props) => {
           </LeftHeader>
           {isShowOrderOptions && (
             <Menu className='left-header'>
+              {windowSize.width > 820 && isFarAway && (
+                <FarAwayMessage>
+                  <TiWarningOutline />
+                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                </FarAwayMessage>
+              )}
               {isCustomerMode && windowSize.width > 450 && (
                 <CustomerInfo
                   onClick={(e) => handleClickUserCustomer(e)}
@@ -297,6 +327,12 @@ export const Header = (props) => {
         {onlineStatus && isShowOrderOptions && (
           windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
+              {isFarAway && (
+                <FarAwayMessage>
+                  <TiWarningOutline />
+                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                </FarAwayMessage>
+              )}
               <AddressMenu
                 onClick={() => openModal('address')}
               >
@@ -314,6 +350,12 @@ export const Header = (props) => {
             </SubMenu>
           ) : (
             <SubMenu>
+              {isFarAway && (
+                <FarAwayMessage>
+                  <TiWarningOutline />
+                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                </FarAwayMessage>
+              )}
               <HeaderOption
                 variant='address'
                 addressState={orderState?.options?.address?.address?.split(',')?.[0]}

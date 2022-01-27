@@ -14,6 +14,7 @@ export const InnerHeader = styled.div`
   justify-content: space-between;
   width: 98%;
   margin: 15px auto;
+  align-items: center;
 `
 
 export const LogoHeader = styled.div`
@@ -89,6 +90,8 @@ export const Menu = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    height: 44px;
 
     @media (min-width: 821px) {
       border: 1px solid #DEE2E6;
@@ -195,6 +198,7 @@ export const SubMenu = styled(InnerHeader)`
   padding: 0px 20px 7px;
   box-sizing: border-box;
   margin: 0px;
+  position: relative;
 
   @media (min-width: 821px) {
     display: none;
@@ -248,6 +252,7 @@ export const AddressMenu = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  position: relative;
 
   svg {
     color: ${props => props.theme.colors?.lightGray};
@@ -289,5 +294,52 @@ export const MomentMenu = styled.div`
     text-align: center;
     white-space: nowrap;
     padding: 0 10px;
+  }
+`
+
+export const FarAwayMessage = styled.div`
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 100%;
+  background: ${props => props.theme.colors.warning100};
+  border: 1px solid ${props => props.theme.colors.warning500};
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+  padding: 6px 15px;
+  box-sizing: border-box;
+  margin: 10px 0px 0px 0px !important;
+
+  left: 5px;
+  ${props => props.theme?.rtl && css`
+    right: 5px;
+    left: initial;
+  `}
+
+  svg {
+    font-size: 20px;
+    color: ${props => props.theme.colors.warning500};
+    margin-right: 10px;
+    ${props => props.theme?.rtl && css`
+      margin-right: auto;
+      margin-left: 10px;
+    `}
+  }
+  span {
+    font-size: 12px;
+    line-height: 18px;
+    color: ${props => props.theme.colors.headingColor};
+  }
+
+  @media (min-width: 400px) {
+    padding: 8px 20px;
+    font-size: 14px;
+    line-height: 24px;
+    left: 10px;
+    ${props => props.theme?.rtl && css`
+      right: 10px;
+      left: initial;
+    `}
   }
 `

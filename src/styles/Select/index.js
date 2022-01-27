@@ -28,7 +28,7 @@ export const Select = (props) => {
   const [value, setValue] = useState(defaultValue)
   const dropdownReference = useRef()
   const [orderState] = useOrder()
-  const isOneOption = options?.length === 1;
+  const isOneOption = options?.length === 1
   const handleSelectClick = (e) => {
     !open && setOpen(true)
   }
@@ -74,48 +74,48 @@ export const Select = (props) => {
 
   return (
     isOneOption ? (
-        <SelectInput isHome={isHome} >
-            <Selected>
-              <Header>
-              {options[0].content}
-              </Header>
-            </Selected>
-          </SelectInput>
-    ):(
-        <SelectInput
-          id='select-input'
-          isHome={isHome}
-          disabled={orderState.loading && !notReload}
-          onMouseUp={handleSelectClick}
-        >
-          {!selectedOption && <Selected>{placeholder || ''}<Chevron><BsChevronDown /></Chevron></Selected>}
-          {selectedOption && (
-            <Selected>
-              <Header>
-                {selectedOption.showOnSelected || selectedOption.content}
-              </Header>
-              <Chevron>
-                <BsChevronDown />
-              </Chevron>
-            </Selected>
-          )}
-          {open && options && (
-            <Options id='list' position='right' ref={dropdownReference}>
-              {
-                options.map(option => (
-                  <Option
-                    id='item'
-                    key={option.value}
-                    selected={value === option.value}
-                    onClick={() => handleChangeOption(option)}
-                  >
-                    {option.content}
-                  </Option>
-                ))
-              }
-            </Options>
-          )}
-        </SelectInput>
+      <SelectInput isHome={isHome}>
+        <Selected>
+          <Header>
+            {options[0].content}
+          </Header>
+        </Selected>
+      </SelectInput>
+    ) : (
+      <SelectInput
+        id='select-input'
+        isHome={isHome}
+        disabled={orderState.loading && !notReload}
+        onMouseUp={handleSelectClick}
+      >
+        {!selectedOption && <Selected><Header>{placeholder || ''}</Header><Chevron><BsChevronDown /></Chevron></Selected>}
+        {selectedOption && (
+          <Selected>
+            <Header>
+              {selectedOption.showOnSelected || selectedOption.content}
+            </Header>
+            <Chevron>
+              <BsChevronDown />
+            </Chevron>
+          </Selected>
+        )}
+        {open && options && (
+          <Options id='list' position='right' ref={dropdownReference}>
+            {
+              options.map(option => (
+                <Option
+                  id='item'
+                  key={option.value}
+                  selected={value === option.value}
+                  onClick={() => handleChangeOption(option)}
+                >
+                  {option.content}
+                </Option>
+              ))
+            }
+          </Options>
+        )}
+      </SelectInput>
     )
   )
 }

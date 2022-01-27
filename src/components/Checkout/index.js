@@ -16,7 +16,6 @@ import {
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { Modal } from '../Modal'
-
 import {
   Container,
   WrappContainer,
@@ -29,7 +28,8 @@ import {
   WarningMessage,
   CartsList,
   WarningText,
-  WrapperUserDetails
+  WrapperUserDetails,
+  DeliveryOptionsContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -44,6 +44,7 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { OrderSuccessModal } from '../OrderSuccessModal'
+import { Select } from '../../styles/Select'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -66,12 +67,16 @@ const CheckoutUI = (props) => {
     handleOrderRedirect,
     isCustomerMode,
     isResetPaymethod,
-    setIsResetPaymethod
+    setIsResetPaymethod,
+    onPlaceOrderClick,
+    handleChangeDeliveryOption,
+    instructionsOptions,
+    deliveryOptionSelected
   } = props
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  const [{ options, loading }, { changePaymethod }] = useOrder()
+  const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
@@ -88,6 +93,12 @@ const CheckoutUI = (props) => {
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
+
+  const deliveryOptions = instructionsOptions?.result && instructionsOptions?.result?.filter(option => option?.enabled)?.map(option => {
+    return {
+      value: option?.id, content: option?.name, showOnSelected: option?.name
+    }
+  })
 
   const handlePlaceOrder = () => {
     setCreateOrder(true)
@@ -293,6 +304,31 @@ const CheckoutUI = (props) => {
             </BusinessDetailsContainer>
           )}
 
+          {props.beforeElementsSectionEight?.map((BeforeElement, i) => (
+            <React.Fragment key={i}>
+              {BeforeElement}
+            </React.Fragment>))}
+          {props.beforeComponentsSectionEight?.map((BeforeComponent, i) => (
+            <BeforeComponent key={i} {...props} />))}
+
+          {cartState.loading && (
+            <div>
+              <div>
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={55} style={{ marginBottom: '10px' }} />
+              </div>
+            </div>
+          )}
+          {!props.isHideSectionEight && !cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
+            <DeliveryOptionsContainer>
+              <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
+              <Select
+                defaultValue={deliveryOptionSelected}
+                options={deliveryOptions}
+                onChange={(val) => handleChangeDeliveryOption(val)}
+              />
+            </DeliveryOptionsContainer>
+          )}
           {props.beforeElementsSectionFour?.map((BeforeElement, i) => (
             <React.Fragment key={i}>
               {BeforeElement}
@@ -355,6 +391,8 @@ const CheckoutUI = (props) => {
                 isCustomerMode={isCustomerMode}
                 paySelected={paymethodSelected}
                 setCardData={setCardData}
+                handlePlaceOrder={handlePlaceOrder}
+                onPlaceOrderClick={onPlaceOrderClick}
               />
             </PaymentMethodContainer>
           )}

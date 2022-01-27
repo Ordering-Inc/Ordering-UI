@@ -11,7 +11,8 @@ import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { TaxInformation } from '../TaxInformation'
-
+import { TextArea } from '../../styles/Inputs'
+import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import {
   CartContainer,
   OrderBill,
@@ -19,7 +20,9 @@ import {
   CouponContainer,
   CartSticky,
   Divider,
-  Exclamation
+  Exclamation,
+  Spinner,
+  CommentContainer
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
@@ -41,7 +44,9 @@ const CartUI = (props) => {
     isCartOnProductsList,
     handleCartOpen,
     isCustomMode,
-    isStore
+    isStore,
+    handleChangeComment,
+    commentState
   } = props
 
   const theme = useTheme()
@@ -273,6 +278,31 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
+                {cart?.status !== 2 && (
+                  <table className='comments'>
+                    <tbody>
+                      <tr>
+                        <td>{t('COMMENTS', 'Comments')}</td>
+                      </tr>
+                      <tr>
+                        <CommentContainer>
+                          <TextArea
+                            defaultValue={cart?.comment}
+                            placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
+                            onChange={(e) => handleChangeComment(e.target.value)}
+                          />
+                          {commentState?.loading && (
+                            <Spinner>
+                              <SpinnerLoader
+                                style={{ height: 100 }}
+                              />
+                            </Spinner>
+                          )}
+                        </CommentContainer>
+                      </tr>
+                    </tbody>
+                  </table>
+                )}
               </OrderBill>
             )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
@@ -332,7 +362,7 @@ const CartUI = (props) => {
             onClose={() => setOpenTaxModal({ open: false, tax: null })}
             modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
           >
-            <TaxInformation data={openTaxModal.data} products={cart.products} />
+            <TaxInformation data={openTaxModal.data} products={cart?.products} />
           </Modal>
           {(openUpselling || isUpselling) && (
             <UpsellingPage

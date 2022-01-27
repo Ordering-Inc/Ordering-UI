@@ -247,6 +247,22 @@ export const OrderBill = styled.div`
     }
   }
 
+  table.comments {
+    margin-top: 20px;
+    tr {
+      td:nth-child(1) {
+        font-weight: bold;
+      }
+    }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 7.6px;
+      height: 77px;
+      padding-right: 60px;
+    }
+  }
+
   @media (min-width: 411px) {
     table {
       font-size: 18px;
@@ -294,4 +310,19 @@ export const Exclamation = styled.div`
   cursor: pointer;
   margin-left: 5px;
   top: 3px;
+`
+
+export const Spinner = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-20%, 15%);
+`
+
+export const CommentContainer = styled.td`
+  position: relative;
+  .spinner-content > div{
+    width: 50px;
+    height: 50px;
+  }
 `

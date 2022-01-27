@@ -8,6 +8,7 @@ import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
+import settings from './template/config.json'
 import smoothscroll from 'smoothscroll-polyfill'
 
 /**
@@ -63,19 +64,6 @@ import storeDummy from './template/assets/images/dummies/store.png'
 
 import leftArrow from './template/assets/left-arrow.svg'
 import rightArrow from './template/assets/right-arrow.svg'
-
-const configFile = {
-  app_id: 'ordering-react',
-  project: 'luisv4',
-  api: {
-    url: 'https://apiv4.ordering.co',
-    language: 'en',
-    version: 'v400'
-  },
-  socket: {
-    url: 'https://socket.ordering.co'
-  }
-}
 
 Sentry.init({
   environment: window?.location?.hostname === 'localhost' ? 'development' : process.env.NODE_ENV,
@@ -164,7 +152,7 @@ smoothscroll.polyfill()
 const wrapper = document.getElementById('app')
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <OrderingProvider Alert={Alert} settings={configFile}>
+    <OrderingProvider Alert={Alert} settings={settings}>
       <Router />
       <Toast />
     </OrderingProvider>

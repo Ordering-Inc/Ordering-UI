@@ -20,7 +20,9 @@
     "colorPage": "#333",
     "colorTextSignForm": "#FFFFFF",
     "titleHomeColor": "#FFFFFF",
-    "subtitleHomeColor": "#FFFFFF"
+    "subtitleHomeColor": "#FFFFFF",
+    "warning100": "#FFF4CC",
+    "warning500": "#FFC700"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",

@@ -20,10 +20,10 @@ import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../StripeRedirectForm'
+import { PaymentOptionSquare } from '../PaymentOptionSquare'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { getIconCard } from '../../utils'
-
 import {
   PaymentMethodsContainer,
   PaymentMethodsList,
@@ -80,7 +80,8 @@ const PaymentOptionsUI = (props) => {
     handlePaymethodDataChange,
     isCustomerMode,
     isOpenMethod,
-    setCardData
+    setCardData,
+    onPlaceOrderClick
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -88,7 +89,7 @@ const PaymentOptionsUI = (props) => {
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
   const handlePaymentMethodClick = (paymethod) => {
-    const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod?.gateway)
+    const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square'].includes(paymethod?.gateway)
     handlePaymethodClick(paymethod, isPopupMethod)
   }
 
@@ -287,6 +288,23 @@ const PaymentOptionsUI = (props) => {
             currency={props.currency}
             paymethods={stripeRedirectOptions}
             handleStripeRedirect={handlePaymethodDataChange}
+          />
+        </Modal>
+        <Modal
+          title={t('SQUARE', 'Square')}
+          open={isOpenMethod?.paymethod?.gateway === 'square' && !paymethodData.token}
+          onClose={() => handlePaymethodClick(null)}
+        >
+          <PaymentOptionSquare
+            businessId={props.businessId}
+            cartTotal={cart?.total}
+            body={{
+              paymethod_id: isOpenMethod?.paymethod?.id,
+              amount: cart.total,
+              delivery_zone_id: cart.delivery_zone_id,
+              cartUuid: cart.uuid
+            }}
+            onPlaceOrderClick={onPlaceOrderClick}
           />
         </Modal>
       </PaymentMethodsContainer>

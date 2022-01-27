@@ -46,9 +46,19 @@ export const OrderBill = styled.div`
       }
     }
   }
-  table.order-info {
-    td {
-      padding: 4px 0px;
+  table.comments {
+    margin-top: 20px;
+    tr {
+      td:nth-child(1) {
+        font-weight: bold;
+      }
+    }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 7.6px;
+      height: 77px;
+      padding-right: 60px;
     }
   }
 `
@@ -102,4 +112,19 @@ export const Exclamation = styled.div`
   display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
+`
+
+export const Spinner = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-20%, 15%);
+`
+
+export const CommentContainer = styled.td`
+  position: relative;
+  .spinner-content > div{
+    width: 50px;
+    height: 50px;
+  }
 `
