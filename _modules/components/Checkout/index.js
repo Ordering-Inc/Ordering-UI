@@ -47,6 +47,8 @@ var _CartContent = require("../CartContent");
 
 var _OrderSuccessModal = require("../OrderSuccessModal");
 
+var _Select = require("../../styles/Select");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -94,7 +96,7 @@ var mapConfigs = {
 };
 
 var CheckoutUI = function CheckoutUI(props) {
-  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _businessDetails$busi, _businessDetails$busi2, _theme$images, _theme$images$dummies, _configs$google_maps_, _props$beforeElements3, _props$beforeComponen3, _customerState$user, _customerState$user2, _props$beforeElements4, _props$beforeComponen4, _Object$values, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _props$beforeElements5, _props$beforeComponen5, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_u2, _configs$driver_tip_t2, _configs$driver_tip_u3, _props$beforeElements6, _props$beforeComponen6, _businessDetails$busi7, _businessDetails$busi8, _props$beforeElements7, _props$beforeComponen7, _cart$products, _props$beforeElements8, _props$beforeComponen8, _props$afterComponent, _props$afterElements;
+  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _businessDetails$busi, _businessDetails$busi2, _theme$images, _theme$images$dummies, _configs$google_maps_, _props$beforeElements3, _props$beforeComponen3, _customerState$user, _customerState$user2, _props$beforeElements4, _props$beforeComponen4, _Object$values, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _props$beforeElements5, _props$beforeComponen5, _props$beforeElements6, _props$beforeComponen6, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_u2, _configs$driver_tip_t2, _configs$driver_tip_u3, _props$beforeElements7, _props$beforeComponen7, _businessDetails$busi7, _businessDetails$busi8, _props$beforeElements8, _props$beforeComponen8, _cart$products, _props$beforeElements9, _props$beforeComponen9, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errors = props.errors,
@@ -108,7 +110,10 @@ var CheckoutUI = function CheckoutUI(props) {
       isCustomerMode = props.isCustomerMode,
       isResetPaymethod = props.isResetPaymethod,
       setIsResetPaymethod = props.setIsResetPaymethod,
-      onPlaceOrderClick = props.onPlaceOrderClick;
+      onPlaceOrderClick = props.onPlaceOrderClick,
+      handleChangeDeliveryOption = props.handleChangeDeliveryOption,
+      instructionsOptions = props.instructionsOptions,
+      deliveryOptionSelected = props.deliveryOptionSelected;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
@@ -116,11 +121,10 @@ var CheckoutUI = function CheckoutUI(props) {
       validationFields = _useValidationFields2[0];
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 2),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
       _useOrder2$ = _useOrder2[0],
       options = _useOrder2$.options,
-      loading = _useOrder2$.loading,
-      changePaymethod = _useOrder2[1].changePaymethod;
+      loading = _useOrder2$.loading;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -176,6 +180,15 @@ var CheckoutUI = function CheckoutUI(props) {
       setCardData = _useState12[1];
 
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
+  var deliveryOptions = (instructionsOptions === null || instructionsOptions === void 0 ? void 0 : instructionsOptions.result) && (instructionsOptions === null || instructionsOptions === void 0 ? void 0 : (_instructionsOptions$ = instructionsOptions.result) === null || _instructionsOptions$ === void 0 ? void 0 : (_instructionsOptions$2 = _instructionsOptions$.filter(function (option) {
+    return option === null || option === void 0 ? void 0 : option.enabled;
+  })) === null || _instructionsOptions$2 === void 0 ? void 0 : _instructionsOptions$2.map(function (option) {
+    return {
+      value: option === null || option === void 0 ? void 0 : option.id,
+      content: option === null || option === void 0 ? void 0 : option.name,
+      showOnSelected: option === null || option === void 0 ? void 0 : option.name
+    };
+  }));
 
   var handlePlaceOrder = function handlePlaceOrder() {
     setCreateOrder(true);
@@ -373,11 +386,35 @@ var CheckoutUI = function CheckoutUI(props) {
     }
   }))), !cartState.loading && (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.business) && ((_Object$values = Object.values(businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.business)) === null || _Object$values === void 0 ? void 0 : _Object$values.length) > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('NAME', 'Name'), ":"), " ", businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi3 = businessDetails.business) === null || _businessDetails$busi3 === void 0 ? void 0 : _businessDetails$busi3.name), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('EMAIL', 'Email'), ":"), " ", businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi4 = businessDetails.business) === null || _businessDetails$busi4 === void 0 ? void 0 : _businessDetails$busi4.email), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('CELLPHONE', 'Cellphone'), ":"), " ", businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi5 = businessDetails.business) === null || _businessDetails$busi5 === void 0 ? void 0 : _businessDetails$busi5.cellphone), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, t('ADDRESS', 'Address'), ":"), " ", businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi6 = businessDetails.business) === null || _businessDetails$busi6 === void 0 ? void 0 : _businessDetails$busi6.address))), (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error) && (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro = businessDetails.error) === null || _businessDetails$erro === void 0 ? void 0 : _businessDetails$erro.length) > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro2 = businessDetails.error[0]) === null || _businessDetails$erro2 === void 0 ? void 0 : _businessDetails$erro2.message) || (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error[0])
-  }))), (_props$beforeElements5 = props.beforeElementsSectionFour) === null || _props$beforeElements5 === void 0 ? void 0 : _props$beforeElements5.map(function (BeforeElement, i) {
+  }))), (_props$beforeElements5 = props.beforeElementsSectionEight) === null || _props$beforeElements5 === void 0 ? void 0 : _props$beforeElements5.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, BeforeElement);
-  }), (_props$beforeComponen5 = props.beforeComponentsSectionFour) === null || _props$beforeComponen5 === void 0 ? void 0 : _props$beforeComponen5.map(function (BeforeComponent, i) {
+  }), (_props$beforeComponen5 = props.beforeComponentsSectionEight) === null || _props$beforeComponen5 === void 0 ? void 0 : _props$beforeComponen5.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), cartState.loading && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 35,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 55,
+    style: {
+      marginBottom: '10px'
+    }
+  }))), !props.isHideSectionEight && !cartState.loading && deliveryOptionSelected !== undefined && (options === null || options === void 0 ? void 0 : options.type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.DeliveryOptionsContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_DETAILS', 'Delivery Details')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    defaultValue: deliveryOptionSelected,
+    options: deliveryOptions,
+    onChange: function onChange(val) {
+      return handleChangeDeliveryOption(val);
+    }
+  })), (_props$beforeElements6 = props.beforeElementsSectionFour) === null || _props$beforeElements6 === void 0 ? void 0 : _props$beforeElements6.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen6 = props.beforeComponentsSectionFour) === null || _props$beforeComponen6 === void 0 ? void 0 : _props$beforeComponen6.map(function (BeforeComponent, i) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
@@ -388,11 +425,11 @@ var CheckoutUI = function CheckoutUI(props) {
     isDriverTipUseCustom: !!parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_u2 = configs.driver_tip_use_custom) === null || _configs$driver_tip_u2 === void 0 ? void 0 : _configs$driver_tip_u2.value, 10),
     driverTip: parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t2 = configs.driver_tip_type) === null || _configs$driver_tip_t2 === void 0 ? void 0 : _configs$driver_tip_t2.value, 10) === 1 || !!parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_u3 = configs.driver_tip_use_custom) === null || _configs$driver_tip_u3 === void 0 ? void 0 : _configs$driver_tip_u3.value, 10) ? cart === null || cart === void 0 ? void 0 : cart.driver_tip : cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate,
     useOrderContext: true
-  })), (_props$beforeElements6 = props.beforeElementsSectionFive) === null || _props$beforeElements6 === void 0 ? void 0 : _props$beforeElements6.map(function (BeforeElement, i) {
+  })), (_props$beforeElements7 = props.beforeElementsSectionFive) === null || _props$beforeElements7 === void 0 ? void 0 : _props$beforeElements7.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, BeforeElement);
-  }), (_props$beforeComponen6 = props.beforeComponentsSectionFive) === null || _props$beforeComponen6 === void 0 ? void 0 : _props$beforeComponen6.map(function (BeforeComponent, i) {
+  }), (_props$beforeComponen7 = props.beforeComponentsSectionFive) === null || _props$beforeComponen7 === void 0 ? void 0 : _props$beforeComponen7.map(function (BeforeComponent, i) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
@@ -415,11 +452,11 @@ var CheckoutUI = function CheckoutUI(props) {
     setCardData: setCardData,
     handlePlaceOrder: handlePlaceOrder,
     onPlaceOrderClick: onPlaceOrderClick
-  })), (_props$beforeElements7 = props.beforeElementsSectionSix) === null || _props$beforeElements7 === void 0 ? void 0 : _props$beforeElements7.map(function (BeforeElement, i) {
+  })), (_props$beforeElements8 = props.beforeElementsSectionSix) === null || _props$beforeElements8 === void 0 ? void 0 : _props$beforeElements8.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, BeforeElement);
-  }), (_props$beforeComponen7 = props.beforeComponentsSectionSix) === null || _props$beforeComponen7 === void 0 ? void 0 : _props$beforeComponen7.map(function (BeforeComponent, i) {
+  }), (_props$beforeComponen8 = props.beforeComponentsSectionSix) === null || _props$beforeComponen8 === void 0 ? void 0 : _props$beforeComponen8.map(function (BeforeComponent, i) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
@@ -428,11 +465,11 @@ var CheckoutUI = function CheckoutUI(props) {
     cart: cart,
     isCheckout: true,
     isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) || 0
-  })), (_props$beforeElements8 = props.beforeElementsSectionSeven) === null || _props$beforeElements8 === void 0 ? void 0 : _props$beforeElements8.map(function (BeforeElement, i) {
+  })), (_props$beforeElements9 = props.beforeElementsSectionSeven) === null || _props$beforeElements9 === void 0 ? void 0 : _props$beforeElements9.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, BeforeElement);
-  }), (_props$beforeComponen8 = props.beforeComponentsSectionSeven) === null || _props$beforeComponen8 === void 0 ? void 0 : _props$beforeComponen8.map(function (BeforeComponent, i) {
+  }), (_props$beforeComponen9 = props.beforeComponentsSectionSeven) === null || _props$beforeComponen9 === void 0 ? void 0 : _props$beforeComponen9.map(function (BeforeComponent, i) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
