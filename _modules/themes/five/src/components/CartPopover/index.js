@@ -9,7 +9,7 @@ exports.CartPopover = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _AiOutlineShoppingCart = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineShoppingCart"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _reactPopper = require("react-popper");
 
@@ -20,8 +20,6 @@ var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 
 var _CartContent = require("../CartContent");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -69,7 +67,7 @@ var CartPopover = function CartPopover(props) {
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
-    placement: theme !== null && theme !== void 0 && theme.rtl ? 'bottom' : 'auto',
+    placement: theme !== null && theme !== void 0 && theme.rtl ? 'bottom' : 'bottom-end',
     modifiers: [{
       name: 'arrow',
       options: {
@@ -163,7 +161,7 @@ var CartPopover = function CartPopover(props) {
     ref: referenceElement,
     onClick: props.onClick,
     name: "cart-popover"
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_AiOutlineShoppingCart.default, null), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 && /*#__PURE__*/_react.default.createElement("span", null, (_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 && /*#__PURE__*/_react.default.createElement("span", null, (_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "cart-popover",
     ref: popperElement,
     style: popStyle

@@ -49,7 +49,7 @@ var InputGroupLeft = _styledComponents.default.div(_templateObject5 || (_templat
 
 exports.InputGroupLeft = InputGroupLeft;
 
-var TextArea = _styledComponents.default.textarea(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 16px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n"])), function () {
+var TextArea = _styledComponents.default.textarea(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: 1px solid #DBDCDB;\n  border-radius: 7.6px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n"])), function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (_ref3) {
   var w = _ref3.w;

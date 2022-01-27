@@ -89,9 +89,9 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   };
 
   var ProductCategories = function ProductCategories() {
-    return categories && categories.length && categories.map(function (category) {
+    return categories && categories.length && categories.map(function (category, i) {
       return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
-        key: category.name,
+        key: i,
         className: "category ".concat(category.id === 'featured' ? 'special' : ''),
         active: business !== null && business !== void 0 && business.lazy_load_products_recommended ? (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id : (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === category.id,
         onClick: function onClick() {

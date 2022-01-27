@@ -30,12 +30,12 @@ var Tab = _styledComponents.default.div(_templateObject3 || (_templateObject3 = 
   var active = _ref2.active;
   return active && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    ", "\n  "])), function (_ref3) {
     var borderBottom = _ref3.borderBottom;
-    return borderBottom && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      border-bottom: 3px solid;\n    "])));
+    return borderBottom && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid;\n    "])));
   });
 }, function (_ref4) {
   var active = _ref4.active;
   return !active && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
-    return props.theme.colors.disabled;
+    return props.theme.colors.darkGray;
   });
 });
 

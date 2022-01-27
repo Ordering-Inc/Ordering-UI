@@ -21,11 +21,11 @@ var _utils = require("../../../../../utils");
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
-var _ProductIngredient = require("../../../../../components/ProductIngredient");
+var _ProductIngredient = require("../ProductIngredient");
 
-var _ProductOption = require("../../../../../components/ProductOption");
+var _ProductOption = require("../ProductOption");
 
-var _ProductOptionSubOption = require("../../../../../components/ProductOptionSubOption");
+var _ProductOptionSubOption = require("../ProductOptionSubOption");
 
 var _ProductShare = require("../../../../../components/ProductShare");
 
@@ -35,7 +35,7 @@ var _SignUpForm = require("../SignUpForm");
 
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
-var _AddressList = require("../../../../../components/AddressList");
+var _AddressList = require("../AddressList");
 
 var _Modal = require("../Modal");
 
@@ -49,7 +49,7 @@ var _styledComponents = require("styled-components");
 
 var _Inputs = require("../../styles/Inputs");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _react2 = require("swiper/react");
 
@@ -233,7 +233,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
   (0, _react.useEffect)(function () {
     if (document.getElementById("".concat(tabValue))) {
-      var top = tabValue === 'all' ? 0 : document.getElementById("".concat(tabValue)).offsetTop + 350;
+      var extraHeight = windowSize.width < 769 ? 100 : 42;
+      var top = tabValue === 'all' ? 0 : document.getElementById("".concat(tabValue)).offsetTop - extraHeight;
+      console.log(top, 'this is top');
       var scrollElement = document.querySelector('.popup-dialog');
 
       if (windowSize.width >= 1200) {

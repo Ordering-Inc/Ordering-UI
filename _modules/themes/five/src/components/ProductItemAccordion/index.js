@@ -9,11 +9,9 @@ exports.ProductItemAccordion = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _BsPencil = _interopRequireDefault(require("@meronex/icons/bs/BsPencil"));
-
 var _IosArrowDown = _interopRequireDefault(require("@meronex/icons/ios/IosArrowDown"));
 
-var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _orderingComponents = require("ordering-components");
 
@@ -185,15 +183,15 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     }, i === 0 ? t('REMOVE', 'Remove') : i);
   }))) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), (product === null || product === void 0 ? void 0 : product.comment) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.comment)), windowSize.width <= 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice(product.total || product.price)), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement("div", null, onEditProduct && /*#__PURE__*/_react.default.createElement("span", {
     ref: productActionsEdit
-  }, /*#__PURE__*/_react.default.createElement(_BsPencil.default, {
-    color: "#F2BB40",
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, {
+    color: "#B1BCCC",
     onClick: function onClick() {
       return onEditProduct(product);
     }
   })), onDeleteProduct && /*#__PURE__*/_react.default.createElement("span", {
     ref: productActionsDelete
-  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
-    color: "#D81212",
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
+    color: "#B1BCCC",
     onClick: function onClick() {
       return onDeleteProduct(product);
     }
@@ -207,7 +205,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       return onEditProduct(product);
     },
     disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_BsPencil.default, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, {
     color: "#B1BCCC"
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
@@ -215,7 +213,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       return onDeleteProduct(product);
     },
     disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
     color: "#B1BCCC"
   })))), isCartProduct && !isCartPending && (product === null || product === void 0 ? void 0 : product.valid_menu) && !(product !== null && product !== void 0 && product.valid_quantity) && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
@@ -223,23 +221,23 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       return onEditProduct(product);
     },
     disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_BsPencil.default, {
-    color: "#F2BB40"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, {
+    color: "#B1BCCC"
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);
     },
     disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
-    color: "#D81212"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
+    color: "#B1BCCC"
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))), !(product !== null && product !== void 0 && product.valid_menu) && isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);
     },
     disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
     color: "#D81212"
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available')))), /*#__PURE__*/_react.default.createElement(_styles.AccordionContent, {
     ref: content,

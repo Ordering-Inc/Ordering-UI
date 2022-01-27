@@ -87,7 +87,9 @@ var ModalUI = function ModalUI(props) {
     height: props.height,
     padding: props.padding,
     isTransparent: isTransparent
-  }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, null), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, authModal && onRemove ? /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+  }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, null), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, {
+    isProductForm: isProductForm
+  }, authModal && onRemove ? /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onRemove();
     }

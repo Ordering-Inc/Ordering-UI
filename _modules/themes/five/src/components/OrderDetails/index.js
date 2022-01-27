@@ -27,7 +27,7 @@ var _AiOutlineExclamationCircle = _interopRequireDefault(require("@meronex/icons
 
 var _Buttons = require("../../styles/Buttons");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _ProductItemAccordion = require("../ProductItemAccordion");
 

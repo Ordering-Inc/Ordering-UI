@@ -13,7 +13,7 @@ var _BusinessController = require("../BusinessController");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _styles = require("./styles");
 

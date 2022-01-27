@@ -15,7 +15,7 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -9,27 +9,17 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _BsPencil = _interopRequireDefault(require("@meronex/icons/bs/BsPencil"));
-
-var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
-
-var _FaHome = _interopRequireDefault(require("@meronex/icons/fa/FaHome"));
-
-var _FaPlus = _interopRequireDefault(require("@meronex/icons/fa/FaPlus"));
-
-var _FaRegBuilding = _interopRequireDefault(require("@meronex/icons/fa/FaRegBuilding"));
-
-var _FaRegHeart = _interopRequireDefault(require("@meronex/icons/fa/FaRegHeart"));
-
-var _IosRadioButtonOn = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOn"));
-
 var _IosRadioButtonOff = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOff"));
+
+var _RiRadioButtonFill = _interopRequireDefault(require("@meronex/icons/ri/RiRadioButtonFill"));
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _Buttons = require("../../styles/Buttons");
 
@@ -286,7 +276,7 @@ var AddressListUI = function AddressListUI(props) {
     userCustomerSetup: userCustomerSetup
   })), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
-  }, uniqueAddressesList.map(function (address) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), uniqueAddressesList.map(function (address) {
     return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
       key: address === null || address === void 0 ? void 0 : address.id
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -296,9 +286,11 @@ var AddressListUI = function AddressListUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("span", {
       className: "radio"
-    }, checkAddress(address) ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
-      className: "tag"
-    }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_FaHome.default, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_FaRegBuilding.default, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_FaRegHeart.default, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_FaPlus.default, null)), /*#__PURE__*/_react.default.createElement("div", {
+    }, checkAddress(address) ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, {
+      className: "address-checked"
+    }) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
+      className: checkAddress(address) ? 'selected-tag tag' : 'tag'
+    }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "address"
     }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
       className: "form"
@@ -307,12 +299,12 @@ var AddressListUI = function AddressListUI(props) {
       onClick: function onClick() {
         return openAddress(address);
       }
-    }, /*#__PURE__*/_react.default.createElement(_BsPencil.default, null)), /*#__PURE__*/_react.default.createElement("a", {
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)), /*#__PURE__*/_react.default.createElement("a", {
       className: actionStatus.loading || address.default ? 'disabled' : '',
       onClick: function onClick() {
         return handleDeleteClick(address);
       }
-    }, /*#__PURE__*/_react.default.createElement(_VscTrash.default, null))));
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, null))));
   }), isEnableContinueButton && uniqueAddressesList.map(function (address) {
     return address.default && /*#__PURE__*/_react.default.createElement(_styles.ContinueButton, {
       key: address.id

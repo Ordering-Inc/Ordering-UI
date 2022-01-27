@@ -13,17 +13,11 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _orderingComponents = require("ordering-components");
 
-var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
-
 require("react-datepicker/dist/react-datepicker.css");
 
 require("react-calendar/dist/Calendar.css");
 
 var _reactCalendar = _interopRequireDefault(require("react-calendar"));
-
-var _Select = require("../../styles/Select");
-
-var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowLeft"));
 
@@ -33,9 +27,7 @@ var _styles = require("./styles");
 
 var _CgRadioCheck = _interopRequireDefault(require("@meronex/icons/cg/CgRadioCheck"));
 
-var _CgRadioChecked = _interopRequireDefault(require("@meronex/icons/cg/CgRadioChecked"));
-
-var _BiTimeFive = _interopRequireDefault(require("@meronex/icons/bi/BiTimeFive"));
+var _Buttons = require("../../styles/Buttons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MomentControlUI = function MomentControlUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _configs$format_time3, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var isAsap = props.isAsap,
       datesList = props.datesList,
@@ -106,7 +98,7 @@ var MomentControlUI = function MomentControlUI(props) {
       maxDate = _useState6[0],
       setMaxDate = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(true),
+  var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
       isASP = _useState8[0],
       setIsASP = _useState8[1];
@@ -115,6 +107,11 @@ var MomentControlUI = function MomentControlUI(props) {
       _useState10 = _slicedToArray(_useState9, 2),
       timeLists = _useState10[0],
       setTimeLists = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      timeFormat = _useState12[0],
+      setTimeFormat = _useState12[1];
 
   var onDateChange = function onDateChange(value) {
     onChange(value);
@@ -135,11 +132,6 @@ var MomentControlUI = function MomentControlUI(props) {
     } else setIsASP(false);
   };
 
-  var handleRemoveDate = function handleRemoveDate() {
-    !orderState.loading && handleAsap();
-    setIsASP(true);
-  };
-
   var _formatMonthYear = function formatMonthYear(date) {
     return (0, _moment.default)(date).format('MMMM');
   };
@@ -155,6 +147,20 @@ var MomentControlUI = function MomentControlUI(props) {
     return minMon === currMon || maxMon === currMon ? (0, _moment.default)(date).format('D') : '';
   };
 
+  var handleChangeTimeFormat = function handleChangeTimeFormat() {
+    var _configs$format_time;
+
+    if ((configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) !== '12') return;
+    setTimeFormat(function (prev) {
+      return prev === 'AM' ? 'PM' : 'AM';
+    });
+  };
+
+  (0, _react.useEffect)(function () {
+    var _configs$format_time2;
+
+    if ((configs === null || configs === void 0 ? void 0 : (_configs$format_time2 = configs.format_time) === null || _configs$format_time2 === void 0 ? void 0 : _configs$format_time2.value) === '12') setTimeFormat('AM');else setTimeFormat('');
+  }, [configs === null || configs === void 0 ? void 0 : (_configs$format_time3 = configs.format_time) === null || _configs$format_time3 === void 0 ? void 0 : _configs$format_time3.value]);
   (0, _react.useEffect)(function () {
     if ((datesList === null || datesList === void 0 ? void 0 : datesList.length) > 0) {
       var _configs$max_days_pre;
@@ -185,15 +191,15 @@ var MomentControlUI = function MomentControlUI(props) {
   (0, _react.useEffect)(function () {
     if (hoursList) {
       var _timeLists = hoursList.map(function (hour) {
-        var _configs$format_time;
+        var _configs$format_time4;
 
         return {
           value: hour.startTime,
-          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_BiTimeFive.default, null), /*#__PURE__*/_react.default.createElement("span", null, (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+          content: (configs === null || configs === void 0 ? void 0 : (_configs$format_time4 = configs.format_time) === null || _configs$format_time4 === void 0 ? void 0 : _configs$format_time4.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
             outputFormat: 'hh:mma'
           }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
             outputFormat: 'HH:mm'
-          })))
+          })
         };
       });
 
@@ -201,7 +207,7 @@ var MomentControlUI = function MomentControlUI(props) {
     }
   }, [hoursList]);
   (0, _react.useEffect)(function () {
-    if (isASP) handleCheckBoxChange(true);
+    handleCheckBoxChange(isAsap);
   }, [isAsap]);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
@@ -219,22 +225,12 @@ var MomentControlUI = function MomentControlUI(props) {
       return handleCheckBoxChange(true);
     },
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioChecked.default, null) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP'), " (", (0, _moment.default)(new Date()).format('LLLL'), " - ", t('DELIVERY_TIME', 'delivery time'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP'), " (", (0, _moment.default)(new Date()).format('LLLL'), " - ", t('DELIVERY_TIME', 'delivery time'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
     highlight: !isASP,
     onClick: function onClick() {
       return handleCheckBoxChange(null);
     }
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_CgRadioChecked.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DatePickerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
-    selected: value,
-    onChange: function onChange(val) {
-      return onDateChange(val);
-    },
-    minDate: minDate,
-    maxDate: maxDate,
-    dateFormat: "MM/dd/yy"
-  }), /*#__PURE__*/_react.default.createElement(_MdClose.default, {
-    onClick: handleRemoveDate
-  })), /*#__PURE__*/_react.default.createElement(_reactCalendar.default, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && /*#__PURE__*/_react.default.createElement(_styles.DateTimeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_reactCalendar.default, {
     onChange: function onChange(val) {
       return onDateChange(val);
     },
@@ -255,16 +251,21 @@ var MomentControlUI = function MomentControlUI(props) {
       return _formatDay(date);
     },
     calendarType: "US"
-  })), /*#__PURE__*/_react.default.createElement(_styles.HourListWrapper, {
-    isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    options: timeLists,
-    defaultValue: timeSelected,
-    onChange: function onChange(startTime) {
-      return !orderState.loading && handleChangeTime(startTime);
-    },
-    placeholder: t('SELECT_TIME', 'Select a time')
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.TimeListHeader, null, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, {
+    onClick: handleChangeTimeFormat
+  }), /*#__PURE__*/_react.default.createElement("span", null, timeFormat === '' ? t('TIME', 'Time') : timeFormat), /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, {
+    onClick: handleChangeTimeFormat
+  })), /*#__PURE__*/_react.default.createElement(_styles.TimeListContent, null, timeLists && timeLists.filter(function (item) {
+    return item.content.includes(timeFormat);
+  }).map(function (time, i) {
+    return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      key: i,
+      color: timeSelected === time.value ? 'primaryContrast' : 'gray',
+      onClick: function onClick() {
+        return !orderState.loading && handleChangeTime(time.value);
+      }
+    }, time.content);
+  }))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

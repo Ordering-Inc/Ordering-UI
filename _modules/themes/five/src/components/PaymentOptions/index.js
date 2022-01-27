@@ -25,7 +25,7 @@ var _StripeElementsForm = require("../StripeElementsForm");
 
 var _StripeRedirectForm = require("../StripeRedirectForm");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _utils = require("../../../../../utils");
 

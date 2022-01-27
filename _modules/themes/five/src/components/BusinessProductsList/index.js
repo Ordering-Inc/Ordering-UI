@@ -11,7 +11,7 @@ var _orderingComponents = require("ordering-components");
 
 var _SingleProductCard = require("../SingleProductCard");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _styles = require("./styles");
 

@@ -9,13 +9,9 @@ exports.BusinessItemAccordion = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _FiClock = _interopRequireDefault(require("@meronex/icons/fi/FiClock"));
-
 var _TiArrowSortedUp = _interopRequireDefault(require("@meronex/icons/ti/TiArrowSortedUp"));
 
 var _orderingComponents = require("ordering-components");
-
-var _utils = require("../../../../../utils");
 
 var _styles = require("./styles");
 
@@ -40,7 +36,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessItemAccordion = function BusinessItemAccordion(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var uuid = props.uuid,
       isCartPending = props.isCartPending,
@@ -49,9 +45,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       isClosed = props.isClosed,
       moment = props.moment,
       business = props.business,
-      orderTotal = props.orderTotal,
       isProducts = props.isProducts,
-      isValidProducts = props.isValidProducts,
       isForceOpenAccordion = props.isForceOpenAccordion,
       isCartOnProductsList = props.isCartOnProductsList,
       handleClearProducts = props.handleClearProducts,
@@ -66,10 +60,6 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var _useUtils = (0, _orderingComponents.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -104,16 +94,12 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
 
     var isActionsClick = ((_businessStore$curren = businessStore.current) === null || _businessStore$curren === void 0 ? void 0 : _businessStore$curren.contains(e === null || e === void 0 ? void 0 : e.target)) || ((_businessDelete$curre = businessDelete.current) === null || _businessDelete$curre === void 0 ? void 0 : _businessDelete$curre.contains(e === null || e === void 0 ? void 0 : e.target));
     if (isClosed || !isProducts || isActionsClick) return;
-    setActiveState(setActive === '' ? 'active' : ''); // setHeightState(
-    //   setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
-    // )
-
+    setActiveState(setActive === '' ? 'active' : '');
     setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
   };
 
   var activeAccordion = function activeAccordion(value) {
-    setActiveState(value ? 'active' : ''); // setHeightState(value ? `${content.current.scrollHeight}px` : '0px')
-
+    setActiveState(value ? 'active' : '');
     setRotateState(value ? 'accordion__icon rotate' : 'accordion__icon');
   };
 
@@ -164,13 +150,6 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       events.off('cart_product_updated', handleCartProductUpdated);
     };
   }, []);
-
-  var handleChangeStore = function handleChangeStore() {
-    events.emit('go_to_page', {
-      page: 'search'
-    });
-  };
-
   (0, _react.useEffect)(function () {
     handleCartOpen && handleCartOpen(!!setActive);
   }, [setActive]);
@@ -192,26 +171,21 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       return toggleAccordion(e);
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
-    className: "info"
+    className: "info",
+    isStore: isStore
   }, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("div", null, handleStoreRedirect && !isCartOnProductsList && !isStore && /*#__PURE__*/_react.default.createElement("span", {
     ref: businessStore,
     onClick: function onClick() {
       return handleStoreRedirect(business === null || business === void 0 ? void 0 : business.slug);
     },
     className: "go-store"
-  }, t('GO_TO_STORE', 'Go to store')), !isClosed && !!isProducts && !isCartPending && !isStore && /*#__PURE__*/_react.default.createElement("span", {
+  }, t('GO_TO_STORE', 'Go to store')), !isClosed && !!isProducts && !isCartPending && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isStore && /*#__PURE__*/_react.default.createElement("span", null, "\u2022"), /*#__PURE__*/_react.default.createElement("span", {
     ref: businessDelete,
     onClick: function onClick() {
       return handleClearProducts();
     },
     className: "clear-cart"
-  }, t('CLEAR_CART', 'Clear cart')), isStore && /*#__PURE__*/_react.default.createElement("span", {
-    onClick: handleChangeStore,
-    className: "change-store"
-  }, t('CHANGE_STORE', 'Change store')))), !isStore && ((orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement(_styles.TimeInfo, null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement(_styles.TimeInfo, null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time)))), !isClosed && !!isProducts && !isStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
-    className: "total",
-    isCartOnProductsList: isCartOnProductsList
-  }, isValidProducts && orderTotal > 0 && /*#__PURE__*/_react.default.createElement("p", null, parsePrice(orderTotal)), /*#__PURE__*/_react.default.createElement("p", null, t('CART_TOTAL', 'Total'))), isClosed && !isStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
+  }, t('CLEAR_CART', 'Clear cart')))))), isClosed && !isStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
     className: "closed"
   }, /*#__PURE__*/_react.default.createElement("p", null, t('CLOSED', 'Closed'), " ", moment)), !isClosed && !isProducts && !isStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, /*#__PURE__*/_react.default.createElement("p", null, t('NO_PRODUCTS', 'No products'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessActions, null, !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_TiArrowSortedUp.default, {
     className: "".concat(setRotate)

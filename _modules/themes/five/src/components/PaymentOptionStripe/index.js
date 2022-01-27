@@ -23,7 +23,7 @@ var _Confirm = require("../Confirm");
 
 var _StripeElementsForm = require("../StripeElementsForm");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _styles = require("./styles");
 

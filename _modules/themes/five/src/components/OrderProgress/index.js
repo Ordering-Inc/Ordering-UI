@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.OrderProgress = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -22,6 +24,10 @@ var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRig
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -42,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderProgressUI = function OrderProgressUI(props) {
-  var _orderList$orders;
+  var _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _lastOrder$business2, _lastOrder$business3;
 
   var orderList = props.orderList;
 
@@ -62,6 +68,11 @@ var OrderProgressUI = function OrderProgressUI(props) {
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
+
+  var _useState = (0, _react.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      lastOrder = _useState2[0],
+      setLastOrder = _useState2[1];
 
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22;
@@ -184,10 +195,10 @@ var OrderProgressUI = function OrderProgressUI(props) {
     return objectStatus && objectStatus;
   };
 
-  var convertDiffToHours = function convertDiffToHours(time, order) {
-    var deliveryTime = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
+  var convertDiffToHours = function convertDiffToHours(time) {
+    var deliveryTime = lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
       outputFormat: 'YYYY-MM-DD hh:mm A'
-    }) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    }) : parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
       utc: false,
       outputFormat: 'YYYY-MM-DD hh:mm A'
     });
@@ -208,31 +219,33 @@ var OrderProgressUI = function OrderProgressUI(props) {
     });
   };
 
+  (0, _react.useEffect)(function () {
+    if ((orderList === null || orderList === void 0 ? void 0 : orderList.orders.length) > 0) {
+      var sortedOrders = orderList.orders.sort(function (a, b) {
+        return a.id > b.id ? -1 : 1;
+      });
+      setLastOrder(sortedOrders[0]);
+    }
+  }, [orderList === null || orderList === void 0 ? void 0 : orderList.orders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderList === null || orderList === void 0 ? void 0 : orderList.loading) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) > 0 && (orderList === null || orderList === void 0 ? void 0 : orderList.orders.map(function (order, i) {
-    var _order$business, _theme$images, _theme$images$dummies, _getOrderStatus, _order$business2, _order$business3;
-
-    return /*#__PURE__*/_react.default.createElement(_styles.OrderProgressContainer, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressLogo, {
-      bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_91,c_limit')
-    }), /*#__PURE__*/_react.default.createElement(_styles.ProgressDescriptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_IN_PROGRESS', 'Order in progress')), /*#__PURE__*/_react.default.createElement("p", null, t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-      color: "primaryContrast",
-      naked: true,
-      onClick: function onClick() {
-        return handleGoToPage('orders');
-      }
-    }, t('GO_TO_MY_ORDERS', 'Go to my orders'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ProgressBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressBar, {
-      style: {
-        width: (_getOrderStatus = getOrderStatus(order.status)) !== null && _getOrderStatus !== void 0 && _getOrderStatus.percentage ? "".concat(getOrderStatus(order.status).percentage, "%") : '0%'
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, getOrderStatus(order.status).value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_DELIVERY', 'Estimated delivery'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseTime(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
-      outputFormat: 'hh:mm A'
-    }) : parseTime(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
-      utc: false
-    }), "\xA0-\xA0", convertDiffToHours(order.delivery_type === 1 ? order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.delivery_time : order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.pickup_time, order))))));
-  })));
+  }), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) > 0 && lastOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderProgressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressLogo, {
+    bgimage: optimizeImage((lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$business = lastOrder.business) === null || _lastOrder$business === void 0 ? void 0 : _lastOrder$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_91,c_limit')
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProgressDescriptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_IN_PROGRESS', 'Order in progress')), /*#__PURE__*/_react.default.createElement("p", null, t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primaryContrast",
+    naked: true,
+    onClick: function onClick() {
+      return handleGoToPage('orders');
+    }
+  }, t('GO_TO_MY_ORDERS', 'Go to my orders'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ProgressBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressBar, {
+    style: {
+      width: (_getOrderStatus = getOrderStatus(lastOrder.status)) !== null && _getOrderStatus !== void 0 && _getOrderStatus.percentage ? "".concat(getOrderStatus(lastOrder.status).percentage, "%") : '0%'
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, getOrderStatus(lastOrder.status).value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_DELIVERY', 'Estimated delivery'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
+    outputFormat: 'hh:mm A'
+  }) : parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
+    utc: false
+  }), "\xA0-\xA0", convertDiffToHours(lastOrder.delivery_type === 1 ? lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$business2 = lastOrder.business) === null || _lastOrder$business2 === void 0 ? void 0 : _lastOrder$business2.delivery_time : lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$business3 = lastOrder.business) === null || _lastOrder$business3 === void 0 ? void 0 : _lastOrder$business3.pickup_time)))))));
 };
 
 var OrderProgress = function OrderProgress(props) {

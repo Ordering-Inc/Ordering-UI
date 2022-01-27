@@ -27,7 +27,7 @@ var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _AddressDetails = require("../AddressDetails");
 

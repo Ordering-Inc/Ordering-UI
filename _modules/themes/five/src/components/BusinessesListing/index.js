@@ -17,7 +17,7 @@ var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _Modal = require("../Modal");
 
@@ -296,6 +296,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     color: "primary",
     onClick: function onClick() {
       return handleClickAddress();
+    },
+    style: {
+      height: '44px'
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.map(function (business) {
     var _orderState$options3;

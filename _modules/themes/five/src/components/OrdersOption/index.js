@@ -19,7 +19,7 @@ var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
 
 var _VerticalOrdersLayout = require("../../../../../components/VerticalOrdersLayout");
 
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
+var _NotFoundSource = require("../NotFoundSource");
 
 var _styledComponents = require("styled-components");
 
