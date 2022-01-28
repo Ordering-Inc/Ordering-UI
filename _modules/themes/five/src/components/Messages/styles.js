@@ -163,7 +163,7 @@ var TimeofSentByAdmin = _styledComponents.default.p(_templateObject34 || (_templ
 
 exports.TimeofSentByAdmin = TimeofSentByAdmin;
 
-var SendForm = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 5px;\n  bottom: 0;\n  width: 100%;\n  box-sizing: border-box;\n  border-top: 1px solid #DEE2E6;\n\n  @media (min-width: 480px){\n    padding: 5px 20px;\n  }\n\n  @media (min-width: 769px) {\n    padding: 10px 20px;\n    position: static;\n    width: auto;\n  }\n"])));
+var SendForm = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 5px;\n  bottom: 0;\n  width: 100%;\n  box-sizing: border-box;\n  border-top: 1px solid #DEE2E6;\n\n  @media (min-width: 480px){\n    padding: 5px 20px;\n  }\n\n  @media (min-width: 769px) {\n    padding: 10px 20px;\n    position: sticky;\n    width: auto;\n    background-color: #F8F8F8 ;\n  }\n"])));
 
 exports.SendForm = SendForm;
 
