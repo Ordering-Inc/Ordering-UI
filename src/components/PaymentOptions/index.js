@@ -115,7 +115,6 @@ const PaymentOptionsUI = (props) => {
     setCardData && setCardData(paymethodData)
   }, [paymethodData])
 
-  console.log(isOpenMethod)
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
