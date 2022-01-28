@@ -9,6 +9,8 @@ exports.SmartAppBanner = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _orderingComponents = require("ordering-components");
+
 var _styledComponents = require("styled-components");
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -45,6 +47,11 @@ var SmartAppBanner = function SmartAppBanner(props) {
   var _theme$images, _theme$images$general;
 
   var theme = (0, _styledComponents.useTheme)();
+
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var position = props.position;
 
   var _useState = (0, _react.useState)(null),
@@ -245,7 +252,7 @@ var SmartAppBanner = function SmartAppBanner(props) {
     className: "banner-button"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: "banner-button-text"
-  }, "View")))));
+  }, t('VIEW', 'View'))))));
 };
 
 exports.SmartAppBanner = SmartAppBanner;
