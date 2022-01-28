@@ -115,6 +115,7 @@ const PaymentOptionsUI = (props) => {
     setCardData && setCardData(paymethodData)
   }, [paymethodData])
 
+  console.log(isOpenMethod)
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -170,6 +171,7 @@ const PaymentOptionsUI = (props) => {
 
         {paymethodSelected?.gateway === 'cash' && (
           <PaymentOptionCash
+            data={paymethodSelected?.data}
             orderTotal={cart.total}
             defaultValue={paymethodSelected?.data?.cash}
             onChangeData={handlePaymethodDataChange}
@@ -298,6 +300,7 @@ const PaymentOptionsUI = (props) => {
           <PaymentOptionSquare
             businessId={props.businessId}
             cartTotal={cart?.total}
+            data={isOpenMethod?.paymethod?.credentials}
             body={{
               paymethod_id: isOpenMethod?.paymethod?.id,
               amount: cart.total,
