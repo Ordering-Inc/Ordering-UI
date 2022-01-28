@@ -17,7 +17,7 @@ import {
   CheckoutAction,
   CouponContainer,
   CartSticky,
-  Exclamation,
+  IconContainer,
   Spinner,
   CommentContainer,
   Divider,
@@ -27,6 +27,7 @@ import { verifyDecimals } from '../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 import { TextArea } from '../../styles/Inputs'
 import { SpinnerLoader } from '../SpinnerLoader'
+import MdCloseCircle from '@meronex/icons/ios/MdCloseCircle'
 
 const CartUI = (props) => {
   const {
@@ -46,6 +47,7 @@ const CartUI = (props) => {
     isCartOnProductsList,
     handleCartOpen,
     handleChangeComment,
+    handleRemoveOfferClick,
     commentState
   } = props
 
@@ -57,7 +59,7 @@ const CartUI = (props) => {
   const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
 
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null, id: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
@@ -143,6 +145,23 @@ const CartUI = (props) => {
     return cart?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
   }
 
+  const onRemoveOffer = (id) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_OFFER', 'Are you sure that you want to delete the offer?'),
+      offerId: id
+    })
+  }
+
+  const handleOnAccept = () => {
+    handleRemoveOfferClick(confirm?.offerId)
+    setConfirm({ ...confirm, open: false, error: false })
+  }
+
+  const handleClose = () => {
+    setConfirm({ ...confirm, open: false, error: false, id: null })
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -212,9 +231,12 @@ const CartUI = (props) => {
                             {offer.rate_type === 1 && (
                               <span>{`(${offer?.rate}%)`}</span>
                             )}
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
+                            </IconContainer>
+                            <IconContainer top='5px' onClick={() => onRemoveOffer(offer?.id)}>
+                              <MdCloseCircle size='24' color={theme.colors.primary} />
+                            </IconContainer>
                           </td>
                           <td>
                             - {parsePrice(offer?.summary?.discount)}
@@ -246,9 +268,9 @@ const CartUI = (props) => {
                           <td>
                             {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
+                            </IconContainer>
                           </td>
                           <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
                         </tr>
@@ -260,9 +282,9 @@ const CartUI = (props) => {
                           <td>
                             {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             ({parsePrice(fee?.fixed)} + {fee.percentage}%)
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
+                            </IconContainer>
                           </td>
                           <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
                         </tr>
@@ -274,9 +296,12 @@ const CartUI = (props) => {
                           <td>
                             {offer.name}
                             <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
+                            </IconContainer>
+                            <IconContainer top='5px' onClick={() => onRemoveOffer(offer?.id)}>
+                              <MdCloseCircle size='24' color={theme.colors.primary} />
+                            </IconContainer>
                           </td>
                           <td>
                             - {parsePrice(offer?.summary?.discount)}
@@ -296,9 +321,12 @@ const CartUI = (props) => {
                           <td>
                             {offer.name}
                             <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
+                            </IconContainer>
+                            <IconContainer top='5px' onClick={() => onRemoveOffer(offer?.id)}>
+                              <MdCloseCircle size='24' color={theme.colors.primary} />
+                            </IconContainer>
                           </td>
                           <td>
                             - {parsePrice(offer?.summary?.discount)}
@@ -444,6 +472,16 @@ const CartUI = (props) => {
             />
           )}
         </CartSticky>
+        <Confirm
+          title={t('OFFER', 'Offer')}
+          content={confirm?.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={confirm?.open}
+          onClose={handleClose}
+          onCancel={!confirm?.error ? () => setConfirm({ ...confirm, open: false, error: false }) : null}
+          onAccept={handleOnAccept}
+          closeOnBackdrop={false}
+        />
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

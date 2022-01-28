@@ -96,12 +96,12 @@ export const CheckoutAction = styled.div`
   }
 `
 
-export const Exclamation = styled.div`
+export const IconContainer = styled.div`
   position: relative;
   display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
-  top: 3px;
+  top: ${props => props.top || '3px'};
 `
 
 export const Spinner = styled.div`
