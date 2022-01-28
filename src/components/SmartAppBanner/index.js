@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLanguage } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 import {
@@ -22,6 +23,7 @@ const expiredDateInUTC = additionalDays => {
 
 export const SmartAppBanner = (props) => {
   const theme = useTheme()
+  const [, t] = useLanguage()
   const position = props.position
   const [type, setType] = useState(null)
   const [appId, setAppId] = useState('')
@@ -206,7 +208,7 @@ export const SmartAppBanner = (props) => {
             className='banner-button'
           >
             <span className='banner-button-text'>
-              View
+              {t('VIEW','View')}
             </span>
           </a>
         </BannerWrapper>
