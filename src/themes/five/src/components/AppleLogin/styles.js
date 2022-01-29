@@ -24,6 +24,7 @@ export const AppleButton = styled(Button)`
   div {
     width: 80%;
     text-align: left;
+    font-size: 16px;
 
     @media (min-width: 576px) {
       width: 50%;

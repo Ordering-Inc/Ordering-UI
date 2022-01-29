@@ -16,12 +16,15 @@ export const ErrorMessage = styled.div`
 export const ProductsListing = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 45px;
 `
 
 export const WrapAllCategories = styled.div`
   .category-title {
     display: flex;
     align-items: center;
+    padding-top: 5px;
+    padding-bottom: 12px;
     margin-left: 10px;
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
@@ -34,17 +37,30 @@ export const WrapAllCategories = styled.div`
       min-height: 41px;
       height: 41px;
       width: 41px;
+      margin-right: 10px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
+    }
+
+    @media (min-width: 993px) {
+      margin: 0px;
     }
   }
+
   h3 {
     font-weight: 600;
     font-size: 24px;
     color: ${props => props.theme?.colors.darkTextColor};
-    margin-left: 10px;
+    margin: 0px 0px 0px 10px;
     ${props => props.theme?.rtl && css`
-      margin-right: 10px;
-      margin-left: 0;
+      margin: 0px 10px 0px 0px;
     `}
+
+    @media (min-width: 993px) {
+      margin: 0px;
+    }
   }
 `
 

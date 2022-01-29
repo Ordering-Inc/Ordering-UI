@@ -42,11 +42,13 @@ import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { formatSeconds } from '../../../../../utils'
 import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
-import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
-import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
-import BsLock from '@meronex/icons/bs/BsLock'
-import GoMail from '@meronex/icons/go/GoMail'
 import { GoogleLoginButton } from '../GoogleLogin'
+import {
+  Envelope,
+  Lock,
+  Eye,
+  EyeSlash
+} from 'react-bootstrap-icons'
 
 const LoginFormUI = (props) => {
   const {
@@ -312,7 +314,7 @@ const LoginFormUI = (props) => {
                     autoComplete='off'
                   />
                   <InputBeforeIcon>
-                    <GoMail />
+                    <Envelope />
                   </InputBeforeIcon>
                 </InputWrapper>
               )}
@@ -379,10 +381,10 @@ const LoginFormUI = (props) => {
                     onChange={(e) => handleChangeInput(e)}
                   />
                   <TogglePassword onClick={togglePasswordView}>
-                    {!passwordSee ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                    {!passwordSee ? <Eye /> : <EyeSlash />}
                   </TogglePassword>
                   <InputBeforeIcon>
-                    <BsLock />
+                    <Lock />
                   </InputBeforeIcon>
                 </InputWrapper>
               )}

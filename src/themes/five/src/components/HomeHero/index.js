@@ -7,7 +7,8 @@ import {
   ContentWrapper,
   Title,
   Slogan,
-  WrapInput
+  WrapInput,
+  Overlay
 } from './styles'
 
 import { Modal } from '../Modal'
@@ -55,6 +56,7 @@ export const HomeHero = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
+        <Overlay />
         <ContentWrapper>
           <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
           <Slogan>{t('SUBTITLE_HOME', theme?.defaultLanguages?.SUBTITLE_HOME || 'Let\'s start to order food now')}</Slogan>

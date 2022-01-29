@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 export const HeroContainerStyled = styled.div`
   width: 100%;
   height: calc(100vh - 97px);
+  position: relative;
 
   button{
     padding-top: 5px;
@@ -42,6 +43,7 @@ export const ContentWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    position: relative;
     padding: 0px 20px 0px;
 
     ${props => props.theme?.rtl && css`
@@ -80,7 +82,6 @@ export const Title = styled.h1`
   font-size: 50px;
   letter-spacing: 0px;
   color: #FFFFFF;
-  text-shadow: 0px 3px 6px #2c2e33;
   opacity: 1;
 
   ${props => props.theme?.rtl && css`
@@ -103,7 +104,6 @@ export const Slogan = styled.p`
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
-  text-shadow: 0px 3px 6px #2c2e33;
   margin-bottom: 37px;
 
   ${props => props.theme?.rtl && css`
@@ -170,4 +170,13 @@ export const WrapInput = styled.div`
     `}
 
   }
+`
+
+export const Overlay = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0000004D;
 `

@@ -12,7 +12,7 @@ export const GoogleButton = styled(Button)`
   margin-bottom: 10px;
   justify-content: space-around;
 
-  &: active {
+  &:active {
     background: ${props => props.theme.colors.primaryContrast};
   }
 
@@ -24,6 +24,7 @@ export const GoogleButton = styled(Button)`
   div {
     width: 80%;
     text-align: left;
+    font-size: 16px;
 
     @media (min-width: 576px) {
       width: 50%;

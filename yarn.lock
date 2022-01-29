@@ -1441,9 +1441,9 @@
   integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
 
 "@react-native-async-storage/async-storage@^1.13.1":
-  version "1.15.15"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.15.15.tgz#33f930aaebc602199a3294a9b1eafff7b56df409"
-  integrity sha512-Ss2FqWP9HC5AhCyP6ydRERSwWb8QMTLknETB8cp2+tbEUhu7Q/S5+e0QIrF0D2Z/YZTUvQ2MP7uXzt9FLG9OYQ==
+  version "1.15.17"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.15.17.tgz#0dae263a52e476ffce871086f1fef5b8e44708eb"
+  integrity sha512-NQCFs47aFEch9kya/bqwdpvSdZaVRtzU7YB02L8VrmLSLpKgQH/1VwzFUBPcc1/JI1s3GU4yOLVrEbwxq+Fqcw==
   dependencies:
     merge-options "^3.0.4"
 
@@ -6255,7 +6255,12 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-libphonenumber-js@^1.9.17, libphonenumber-js@^1.9.4, libphonenumber-js@^1.9.43:
+libphonenumber-js@^1.9.17:
+  version "1.9.46"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.46.tgz#7ddae167654fb96306209b09e4a05cb7e41e0524"
+  integrity sha512-QqTX4UVsGy24njtCgLRspiKpxfRniRBZE/P+d0vQXuYWQ+hwDS6X0ouo0O/SRyf7bhhMCE71b6vAvLMtY5PfEw==
+
+libphonenumber-js@^1.9.4, libphonenumber-js@^1.9.43:
   version "1.9.44"
   resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.44.tgz#d036364fe4c1e27205d1d283c7bf8fc25625200b"
   integrity sha512-zhw8nUMJuQf7jG1dZfEOKKOS6M3QYIv3HnvB/vGohNd0QfxIQcObH3a6Y6s350H+9xgBeOXClOJkS0hJ0yvS3g==
@@ -7189,10 +7194,12 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/560890787146c9fcf86a643ca377991a487f54df"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/c5b58cdf8677b46a473509213c126316bc7b3628"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
+    "@sentry/react" "^5.27.1"
+    "@sentry/tracing" "^5.27.1"
     "@stripe/react-stripe-js" "^1.1.2"
     "@stripe/stripe-js" "^1.9.0"
     dayjs "^1.9.3"
@@ -7914,6 +7921,13 @@ react-async-script@^1.1.1:
   dependencies:
     hoist-non-react-statics "^3.3.0"
     prop-types "^15.5.0"
+
+react-bootstrap-icons@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-icons/-/react-bootstrap-icons-1.7.2.tgz#7600aaf8e6f49dee910bf3e7be535a932216de62"
+  integrity sha512-FaXk5iHjd6eltoPHUo+onIkcN/xcCEbaEnTeRacibwVlPagEzujFYtUJ0C2+DlvfkWwy5N+b347tSTbtWqBSEg==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-calendar@^3.3.1:
   version "3.6.0"

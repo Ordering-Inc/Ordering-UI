@@ -36,7 +36,21 @@ export const FormSide = styled(Side)`
 export const FormInput = styled.form`
   width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  input {
+    &::placeholder, .PhoneInputInput::placeholder {
+      color: ${props => props.theme.colors?.lightGray} !important;
+    }
+
+    &:-ms-input-placeholder, .PhoneInputInput:-ms-input-placeholder {
+      color: ${props => props.theme.colors?.lightGray} !important;
+    }
+
+    &::-ms-input-placeholder, .PhoneInputInput::-ms-input-placeholder {
+      color: ${props => props.theme.colors?.lightGray} !important;
+    }
+  }
 
   div.phone_number {
     margin: 10px 0px;
@@ -51,6 +65,7 @@ export const FormInput = styled.form`
   button {
     margin-top: 10px;
     padding: 5px;
+    width: 100%;
   }
 `
 
@@ -125,7 +140,7 @@ export const SocialButtons = styled.div`
     }
 
     div {
-      font-size: 0.8em;
+      font-size: 16px;
     }
   }
 `
@@ -153,6 +168,7 @@ export const SkeletonSocialWrapper = styled(SkeletonWrapper)`
 `
 
 export const WrapperPassword = styled.div`
+  width: 100%;
   position: relative;
   input{
     box-sizing: border-box;
@@ -167,8 +183,8 @@ export const TogglePassword = styled.span`
   font-weight: 300;
   padding: 10px 0;
   color: #333;
-  font-size: 26px;
-  transform: translate(-150%, 10%);
+  font-size: 24px;
+  transform: translate(-150%, 13%);
   max-height: 100%;
   ${props => props.theme?.rtl && css`
     transform: translate(150%, 10%);
@@ -203,6 +219,7 @@ export const DividerLine = styled.div`
 `
 export const InputWrapper = styled.div`
   position: relative;
+  width: 100%;
   
   input{
     box-sizing: border-box;
@@ -214,6 +231,12 @@ export const InputWrapper = styled.div`
       padding-left: 40px !important;
     `}
     margin: 10px 0;
+  }
+
+  @media (min-width: 800px) {
+    ${({ isHalf }) => isHalf && css`
+      width: 48%;
+    `}
   }
 `
 export const InputBeforeIcon = styled.div`

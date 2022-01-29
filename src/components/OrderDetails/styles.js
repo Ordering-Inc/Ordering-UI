@@ -588,7 +588,7 @@ export const SkeletonBlockWrapp = styled.div`
 
 export const ShareOrder = styled.div`
   display: flex;
-  margin: 0 0 20px;
+  margin-bottom: 20px;
   justify-content: space-between;
   z-index: 1;
 
@@ -713,4 +713,11 @@ export const Exclamation = styled.div`
 export const Divider = styled.div`
   border-top: 1px solid #EAEAEA;
   margin-bottom: 10px;
+`
+
+export const CommentContainer = styled.div`
+  margin: 0;
+  h3 {
+    margin: 0;
+  }
 `

@@ -8,7 +8,8 @@ import {
   OrderTypeTitle,
   OrderTypeDescription,
   OrderStartWrapper,
-  OrderTypeListTitle
+  OrderTypeListTitle,
+  OrderTypeOverlay
 } from './styles'
 
 export const OrderTypeSelectorContentUI = (props) => {
@@ -51,6 +52,7 @@ export const OrderTypeSelectorContentUI = (props) => {
                 <span>{t('START_MY_ORDER', 'start my order')}</span>
                 <BsArrowRight />
               </OrderStartWrapper>
+              <OrderTypeOverlay />
             </OrderTypeListItemContainer>
           ))
         }

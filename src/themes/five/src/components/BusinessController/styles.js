@@ -31,6 +31,7 @@ export const ContainerCard = styled.div`
 
 export const WrapperBusinessCard = styled.div`
   height: 100%;
+  position: relative;
   cursor: ${({ isSkeleton }) => isSkeleton ? 'default' : 'pointer'};
 `
 
@@ -56,6 +57,16 @@ const BusinessHeaderStyled = styled.div`
   h1 {
     color: #FFF;
     opacity: 0.7;
+  }
+
+  .closed {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 42px;
+    opacity: 1;
+    position: relative;
+    z-index: 2;
   }
 
   @media (min-width: 481px) {
@@ -141,7 +152,9 @@ export const WrapperBusinessLogo = styled.div`
   width: 65px;
   height: 65px;
   min-height: 65px;
-  max-width: 65px;
+  min-width: 65px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 7.6px;
 
   ${({ isSkeleton }) => isSkeleton && css`
     width: auto;
@@ -149,8 +162,8 @@ export const WrapperBusinessLogo = styled.div`
   `}
 
   @media (min-width: 481px){
-    max-width: 75px;
-    max-height: 75px;
+    min-width: 75px;
+    min-height: 75px;
     height: 75px;
     width: 75px;
   }
@@ -167,7 +180,7 @@ const BusinessLogoStyled = styled.div`
   object-fit: cover;
   background-position: center;
   min-height: 65px;
-  border-radius: 10px;
+  border-radius: 7.6px;
 
   @media (min-width: 481px){
     width: 100%;
@@ -328,4 +341,15 @@ export const BusinessStarInfo = styled.div`
       color: #414954;
     }
   }
+`
+
+export const CardOverlay = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 7.6px;
+  z-index: 1;
 `

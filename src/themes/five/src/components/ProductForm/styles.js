@@ -1,4 +1,3 @@
-import { lighten } from 'polished'
 import styled, { css } from 'styled-components'
 
 export const ProductContainer = styled.div`
@@ -135,7 +134,7 @@ export const ProductInfo = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 0px;
-  position: relative;
+  /* position: relative; */
   margin-top: 18px;
 
 `
@@ -158,17 +157,23 @@ export const ProductEdition = styled.div`
 
 export const SectionTitle = styled.h3`
   text-transform: capitalize;
-  font-size: 18px;
-  padding: 15px 0px;
-  margin: 0px;
   font-weight: 600;
-  color: #333333;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 7px 0px;
+  margin-bottom: 0px;
+  margin-top: 15px;
+  color: ${props => props.theme.colors.headingColor};
 `
 
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 130px;
+
+  textarea {
+    margin-top: 8px;
+  }
 
   p {
     font-weight: 300;
@@ -217,20 +222,27 @@ export const ProductActions = styled.div`
       cursor: pointer;
     }
   }
+
   div:last-child {
     width: 100%;
     display: flex;
     align-items: center;
   }
 
-  button:disabled,
-  button.disabled,
-  svg.disabled {
-    opacity: 0.5;
+  svg {
+    color: ${props => props.theme.colors.primary};
   }
 
   svg.disabled {
     pointer-events: none;
+    color: #CED4DA;
+  }
+
+  button:disabled,
+  button.disabled {
+    background: #E9ECEF;
+    border: 1px solid #E9ECEF;
+    color: #B1BCCC;
   }
 
   button.add {
@@ -280,9 +292,7 @@ export const SkeletonBlock = styled.div`
 
 export const WrapperSubOption = styled.div`
   border-radius: 10px;
-  &.error {
-    background-color: ${lighten(0.58, '#A52121')};
-  }
+
   &.soldout {
     pointer-events: none;
     background-color: hsl(0, 0%, 72%);
@@ -304,12 +314,28 @@ export const WrapperIngredients = styled.div`
 export const ProductTabContainer = styled.div`
   border-bottom: 1px solid #E9ECEF;
   position: sticky;
-  top: 50px;
+  top: 60px;
   background: white;
   z-index: 900;
 
+  > div {
+    div {
+      padding: 9px 15px;
+      &:first-child {
+        padding-left: 0px;
+        ${props => props.theme?.rtl && css`
+          padding-right: 0px;
+          padding-left: 15px;
+        `}
+      }
+    }
+  }
+
   @media (min-width: 769px) {
-    top: 0;
+    top: 0px;
+  }
+  @media (min-width: 1200px) {
+    top: -20px;
   }
 `
 
@@ -330,10 +356,16 @@ export const ProductShareWrapper = styled.div`
     padding-right: 0;
   `}
 
+  > div {
+    > svg {
+      margin: 0px !important;
+    }
+  }
+
   @media (max-width: 768px) {
     > div {
       right: 16px;
-      top: 33px;
+      top: 25px;
       left: auto;
     }
   }

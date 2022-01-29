@@ -62,13 +62,16 @@ export const ModalTitle = styled.h2`
   margin: 0px 0px;
   margin-bottom: 20px;
   padding-left: 10px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   flex: 1;
   ${props => props.theme?.rtl && css`
     text-align: left;
     padding-right: 10px;
     padding-left: 0px;
   `}
+  &::first-letter {
+    text-transform: capitalize;
+  }
 `
 
 export const ModalOrderTypes = styled.div`
@@ -89,8 +92,11 @@ export const ModalIcon = styled.span`
     right: 25px;
     left: initial;
   `}
+  ${({ isProductForm }) => isProductForm && css`
+    top: 18px;
+  `}
   svg{
-    background: rgba(255,255,255,0.5);
+    /* background: rgba(255,255,255,0.5); */
     border-radius: 50%;
   }
 

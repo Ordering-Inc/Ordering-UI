@@ -2,7 +2,7 @@ import React from 'react'
 import { useLanguage, useOrder, BusinessList as BusinessListController } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { Button } from '../../styles/Buttons'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 import {
   HighestRatedContainer,
   ErrorMessage,

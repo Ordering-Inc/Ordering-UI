@@ -354,8 +354,9 @@ export const SendForm = styled.div`
 
   @media (min-width: 769px) {
     padding: 10px 20px;
-    position: static;
+    position: sticky;
     width: auto;
+    background-color: #F8F8F8 ;
   }
 `
 

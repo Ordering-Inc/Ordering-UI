@@ -45,8 +45,7 @@ export const ContentInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-transform: capitalize;
-  width: 65%;
+  width: 100%;
 
   > div {
     display: flex;
@@ -67,13 +66,30 @@ export const ContentInfo = styled.div`
       user-select: none;
       text-decoration: underline;
       color: #d81212;
+      margin-left: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-right: 5px;
+        margin-left: 0;
+      `}
+      &:first-letter {
+        text-transform: uppercase;
+      }
     }
+
+    ${({ isStore }) => isStore && css`
+      .clear-cart {
+        margin: 0px;
+      }
+    `}
 
     .change-store {
       cursor: pointer;
       text-decoration: underline;
       color: ${props => props.theme.colors.primary};
       font-size: 12px;
+      &:first-letter {
+        text-transform: uppercase;
+      }
     }
   }
   ${props => props.theme?.rtl && css`
@@ -115,7 +131,7 @@ export const AccordionText = styled.div`
 export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
-  width: auto;
+  width: 80%;
 
   h2 {
     overflow: hidden;
@@ -188,9 +204,4 @@ export const BusinessActions = styled.div`
       }
     }
   }
-`
-
-export const TimeInfo = styled.div`
-  font-size: 13px;
-  color: ${props => props.theme.colors.darkTextColor};
 `

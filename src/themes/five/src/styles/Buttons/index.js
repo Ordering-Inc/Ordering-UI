@@ -208,4 +208,15 @@ export const Button = styled.button`
       }
     `}
   `}
+  ${({ color }) => color === 'gray' && css`
+    background: ${props => props.theme.colors.grayDividerColor};
+    color: ${props => props.theme.colors.darkGray};
+    border-color: ${props => props.theme.colors.grayDividerColor};
+    &:active {
+      background: ${props => darken(0.05, props.theme.colors.grayDividerColor)};
+    }
+    &:hover {
+      background: ${props => darken(0.07, props.theme.colors.grayDividerColor)};
+    }
+  `}
 `

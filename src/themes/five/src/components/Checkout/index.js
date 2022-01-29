@@ -37,7 +37,7 @@ import {
 
 import { Button } from '../../styles/Buttons'
 
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { NotFoundSource } from '../NotFoundSource'
 
 import { AddressDetails } from '../AddressDetails'
 import { UserDetails } from '../UserDetails'
