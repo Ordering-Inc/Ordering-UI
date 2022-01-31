@@ -29,26 +29,36 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var TaxInformation = function TaxInformation(props) {
   var data = props.data,
-      products = props.products;
+      products = props.products,
+      type = props.type;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var isTax = typeof (data === null || data === void 0 ? void 0 : data.rate) === 'number';
-  var TaxFeeString = isTax ? 'tax' : 'fee';
   var includedOnPriceString = (data === null || data === void 0 ? void 0 : data.type) === 1 ? "(".concat(t('INCLUDED_ON_PRICE', 'Included on price'), ")") : "(".concat(t('NOT_INCLUDED_ON_PRICE', 'Not included on price'), ")");
-  return /*#__PURE__*/_react.default.createElement(_styles.TaxInformationContainer, null, (data === null || data === void 0 ? void 0 : data.description) && /*#__PURE__*/_react.default.createElement("h2", null, t('DESCRIPTION', 'Description'), ": ", data === null || data === void 0 ? void 0 : data.description, " ", (data === null || data === void 0 ? void 0 : data.type) && includedOnPriceString), /*#__PURE__*/_react.default.createElement("h3", null, t("OTHER_PRODUCTS_WITH_THIS_".concat(TaxFeeString.toUpperCase()), "Other products with this ".concat(TaxFeeString)), ":"), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, null, products.filter(function (product) {
-    var _product$tax, _product$tax2, _product$tax3, _product$fee, _product$fee2, _product$fee3;
 
-    return isTax ? (_product$tax = product.tax) !== null && _product$tax !== void 0 && _product$tax.id ? ((_product$tax2 = product.tax) === null || _product$tax2 === void 0 ? void 0 : _product$tax2.id) === (data === null || data === void 0 ? void 0 : data.id) : ((_product$tax3 = product.tax) === null || _product$tax3 === void 0 ? void 0 : _product$tax3.id) === null && (data === null || data === void 0 ? void 0 : data.id) === null : (_product$fee = product.fee) !== null && _product$fee !== void 0 && _product$fee.id ? ((_product$fee2 = product.fee) === null || _product$fee2 === void 0 ? void 0 : _product$fee2.id) === (data === null || data === void 0 ? void 0 : data.id) : ((_product$fee3 = product.fee) === null || _product$fee3 === void 0 ? void 0 : _product$fee3.id) === null && (data === null || data === void 0 ? void 0 : data.id) === null;
+  var getFilterValidation = function getFilterValidation(product) {
+    var _product$tax, _product$tax2, _product$tax3, _product$fee, _product$fee2, _product$fee3, _data$discounts;
+
+    return type === 'tax' ? (_product$tax = product.tax) !== null && _product$tax !== void 0 && _product$tax.id ? ((_product$tax2 = product.tax) === null || _product$tax2 === void 0 ? void 0 : _product$tax2.id) === (data === null || data === void 0 ? void 0 : data.id) : ((_product$tax3 = product.tax) === null || _product$tax3 === void 0 ? void 0 : _product$tax3.id) === null && (data === null || data === void 0 ? void 0 : data.id) === null : type === 'fee' ? (_product$fee = product.fee) !== null && _product$fee !== void 0 && _product$fee.id ? ((_product$fee2 = product.fee) === null || _product$fee2 === void 0 ? void 0 : _product$fee2.id) === (data === null || data === void 0 ? void 0 : data.id) : ((_product$fee3 = product.fee) === null || _product$fee3 === void 0 ? void 0 : _product$fee3.id) === null && (data === null || data === void 0 ? void 0 : data.id) === null : Object.keys((_data$discounts = data === null || data === void 0 ? void 0 : data.discounts) !== null && _data$discounts !== void 0 ? _data$discounts : {}).map(function (code) {
+      return code.includes(product === null || product === void 0 ? void 0 : product.code);
+    });
+  };
+
+  var getTypeString = function getTypeString() {
+    return type === 'offer_target_1' ? t('PRODUCT_DISCOUNT', 'Product discount') : type === 'tax' ? t('TAX', 'Tax') : t('Fee', 'Fee');
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_styles.TaxInformationContainer, null, data !== null && data !== void 0 && data.description ? /*#__PURE__*/_react.default.createElement("h2", null, t('DESCRIPTION', 'Description'), ": ", data === null || data === void 0 ? void 0 : data.description, " ", (data === null || data === void 0 ? void 0 : data.type) && !type.includes('offer') && includedOnPriceString) : /*#__PURE__*/_react.default.createElement("h2", null, t('WITHOUT_DESCRIPTION', 'Without description')), !(type === 'offer_target_2' || type === 'offer_target_3') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h3", null, t('OTHER_PRODUCTS_WITH_THIS', 'Other products with this'), " ", getTypeString(), ":"), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, null, products.filter(function (product) {
+    return getFilterValidation(product);
   }).map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product.id,
       product: product,
       isModal: true
     });
-  })));
+  }))));
 };
 
 exports.TaxInformation = TaxInformation;
