@@ -63,6 +63,7 @@ import {
   MessagesIcon,
   ExclamationWrapper,
   Exclamation,
+  Divider,
   CommentContainer
 } from './styles'
 import { useTheme } from 'styled-components'
@@ -98,7 +99,7 @@ const OrderDetailsUI = (props) => {
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
 
   const [openSuccessModal, setOpenSuccessModal] = useState(true)
-  const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
+  const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null, type: '' })
 
   const { order, loading, businessData, error } = props.order
 
@@ -205,6 +206,10 @@ const OrderDetailsUI = (props) => {
         return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
       }, 0)
     }
+  }
+
+  const getIncludedTaxesDiscounts = () => {
+    return order?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
   }
 
   const locations = [
@@ -434,7 +439,7 @@ const OrderDetailsUI = (props) => {
                         {parsePrice(((order?.summary?.subtotal || order?.subtotal) + getIncludedTaxes()))}
                       </td>
                     </tr>
-                    {(order?.summary?.discount > 0 || order?.discount > 0) && (
+                    {(order?.summary?.discount > 0 || order?.discount > 0) && order?.offers?.length === 0 && (
                       <tr>
                         {order?.offer_type === 1 ? (
                           <td>
@@ -447,18 +452,39 @@ const OrderDetailsUI = (props) => {
                         <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
                       </tr>
                     )}
+                    {
+                      order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
+                        <tr key={offer.id}>
+                          <td>
+                            {offer.name}
+                            {offer.rate_type === 1 && (
+                              <span>{`(${offer?.rate}%)`}</span>
+                            )}
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
+                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                            </Exclamation>
+                          </td>
+                          <td>
+                            - {parsePrice(offer?.summary?.discount)}
+                          </td>
+                        </tr>
+                      ))
+                    }
+                    <tr>
+                      <td>
+                        <Divider />
+                      </td>
+                      <td>
+                        <Divider />
+                      </td>
+                    </tr>
                     {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
                       <tr>
+                        <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
                         {order?.tax_type === 1 ? (
-                          <>
-                            <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
-                            <td>{parsePrice((order?.summary?.subtotal_with_discount + (order?.summary?.tax || order?.tax)) || 0)}</td>
-                          </>
+                          <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0))}</td>
                         ) : (
-                          <>
-                            <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
-                            <td>{parsePrice(order?.summary?.subtotal_with_discount || 0)}</td>
-                          </>
+                          <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0)}</td>
                         )}
                       </tr>
                     )}
@@ -490,11 +516,11 @@ const OrderDetailsUI = (props) => {
                           <td>
                             {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
                               <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
-                          <td>{parsePrice(tax?.summary?.tax || 0)}</td>
+                          <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
                         </tr>
                       ))
                     }
@@ -504,11 +530,27 @@ const OrderDetailsUI = (props) => {
                           <td>
                             {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             ({parsePrice(fee?.fixed)} + {fee?.percentage}%)
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
                               <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
-                          <td>{parsePrice(fee?.fixed + fee?.summary?.percentage || 0)}</td>
+                          <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
+                        </tr>
+                      ))
+                    }
+                    {
+                      order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
+                        <tr key={offer.id}>
+                          <td>
+                            {offer.name}
+                            <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
+                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                            </Exclamation>
+                          </td>
+                          <td>
+                            - {parsePrice(offer?.summary?.discount)}
+                          </td>
                         </tr>
                       ))
                     }
@@ -518,6 +560,22 @@ const OrderDetailsUI = (props) => {
                         <td>{parsePrice(order?.summary?.delivery_price)}</td>
                       </tr>
                     )}
+                    {
+                      order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
+                        <tr key={offer.id}>
+                          <td>
+                            {offer.name}
+                            <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
+                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                            </Exclamation>
+                          </td>
+                          <td>
+                            - {parsePrice(offer?.summary?.discount)}
+                          </td>
+                        </tr>
+                      ))
+                    }
                     {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
                       <tr>
                         <td>
@@ -656,10 +714,14 @@ const OrderDetailsUI = (props) => {
           closeOnBackdrop
           title={`${openTaxModal.data?.name ||
             t('INHERIT_FROM_BUSINESS', 'Inherit from business')} (${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`}) `}
-          onClose={() => setOpenTaxModal({ open: false, tax: null })}
+          onClose={() => setOpenTaxModal({ open: false, tax: null, type: '' })}
           modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
         >
-          <TaxInformation data={openTaxModal.data} products={order?.products} />
+          <TaxInformation
+            type={openTaxModal.type}
+            data={openTaxModal.data}
+            products={order?.products}
+          />
         </Modal>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (

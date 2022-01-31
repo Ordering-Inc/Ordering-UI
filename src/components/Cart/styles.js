@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { lighten } from 'polished'
 
 export const CartContainer = styled.div`
   border-bottom: 1px solid #F0F0F0;
@@ -95,12 +96,12 @@ export const CheckoutAction = styled.div`
   }
 `
 
-export const Exclamation = styled.div`
+export const IconContainer = styled.div`
   position: relative;
   display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
-  top: 3px;
+  top: ${props => props.top || '3px'};
 `
 
 export const Spinner = styled.div`
@@ -116,4 +117,22 @@ export const CommentContainer = styled.td`
     width: 50px;
     height: 50px;
   }
+`
+
+export const Divider = styled.div`
+  border-top: 1px solid #EAEAEA;
+  margin-bottom: 10px;
+`
+
+export const SavedContainer = styled.span`
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: ${props => props.theme?.colors?.primaryContrast};
+  background: ${props => lighten('0.2', props.theme?.colors?.primary)};
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `

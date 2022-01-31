@@ -710,6 +710,11 @@ export const Exclamation = styled.div`
   top: 3px;
 `
 
+export const Divider = styled.div`
+  border-top: 1px solid #EAEAEA;
+  margin-bottom: 10px;
+`
+
 export const CommentContainer = styled.div`
   margin: 0;
   h3 {
