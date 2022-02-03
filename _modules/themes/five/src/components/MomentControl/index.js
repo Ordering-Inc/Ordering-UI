@@ -23,6 +23,8 @@ var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdK
 
 var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles = require("./styles");
 
 var _CgRadioCheck = _interopRequireDefault(require("@meronex/icons/cg/CgRadioCheck"));
@@ -65,7 +67,8 @@ var MomentControlUI = function MomentControlUI(props) {
       timeSelected = props.timeSelected,
       handleAsap = props.handleAsap,
       handleChangeDate = props.handleChangeDate,
-      handleChangeTime = props.handleChangeTime;
+      handleChangeTime = props.handleChangeTime,
+      onClose = props.onClose;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -265,7 +268,12 @@ var MomentControlUI = function MomentControlUI(props) {
         return !orderState.loading && handleChangeTime(time.value);
       }
     }, time.content);
-  }))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }))))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    onClick: function onClick() {
+      return onClose();
+    }
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRight, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

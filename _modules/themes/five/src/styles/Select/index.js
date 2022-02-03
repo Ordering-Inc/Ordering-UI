@@ -67,6 +67,8 @@ var Select = function Select(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
+  var isOneOption = (options === null || options === void 0 ? void 0 : options.length) === 1;
+
   var handleSelectClick = function handleSelectClick(e) {
     !open && setOpen(true);
   };
@@ -115,12 +117,14 @@ var Select = function Select(props) {
     setOpen(false);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
+  return isOneOption ? /*#__PURE__*/_react.default.createElement(_Selects.Select, {
+    isHome: isHome
+  }, /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, options[0].content))) : /*#__PURE__*/_react.default.createElement(_Selects.Select, {
     id: "select-input",
     isHome: isHome,
     disabled: orderState.loading && !notReload,
     onMouseUp: handleSelectClick
-  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, placeholder || ''), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     id: "list",
     position: "right",
     ref: dropdownReference
