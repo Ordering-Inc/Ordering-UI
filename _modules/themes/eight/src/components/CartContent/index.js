@@ -82,9 +82,9 @@ var CartContent = function CartContent(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, isOrderStateCarts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && carts.map(function (cart) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, isOrderStateCarts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && carts.map(function (cart, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: cart.uuid
+      key: i
     }, cart.products.length > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
       isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
       cart: cart,

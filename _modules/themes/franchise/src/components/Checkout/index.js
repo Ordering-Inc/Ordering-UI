@@ -92,7 +92,8 @@ var mapConfigs = {
 var CheckoutUI = function CheckoutUI(props) {
   var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _businessDetails$busi, _businessDetails$busi2, _theme$images, _theme$images$dummies, _configs$google_maps_, _props$beforeElements3, _props$beforeComponen3, _customerState$user, _customerState$user2, _props$beforeElements4, _props$beforeComponen4, _Object$values, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _props$beforeElements5, _props$beforeComponen5, _businessDetails$busi7, _businessDetails$busi8, _props$beforeElements6, _props$beforeComponen6, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_u2, _configs$driver_tip_t2, _configs$driver_tip_u3, _props$beforeElements7, _props$beforeComponen7, _cart$products, _props$beforeElements8, _props$beforeComponen8, _props$afterComponent, _props$afterElements;
 
-  var cart = props.cart,
+  var uuid = props.uuid,
+      cart = props.cart,
       errors = props.errors,
       placing = props.placing,
       cartState = props.cartState,
@@ -276,7 +277,7 @@ var CheckoutUI = function CheckoutUI(props) {
     location: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi = businessDetails.business) === null || _businessDetails$busi === void 0 ? void 0 : _businessDetails$busi.location,
     businessLogo: (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
-    businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
+    uuid: uuid,
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
     mapConfigs: mapConfigs,
     isCustomerMode: isCustomerMode
@@ -316,7 +317,6 @@ var CheckoutUI = function CheckoutUI(props) {
   })) : /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     isUserDetailsEdit: isUserDetailsEdit,
     cartStatus: cart === null || cart === void 0 ? void 0 : cart.status,
-    businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     useValidationFields: true,
     useDefualtSessionManager: true,
     useSessionUser: !isCustomerMode,
@@ -392,6 +392,7 @@ var CheckoutUI = function CheckoutUI(props) {
       key: i
     }, props));
   }), !props.isHideSectionFour && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : (_validationFields$fie10 = _validationFields$fie9.checkout) === null || _validationFields$fie10 === void 0 ? void 0 : (_validationFields$fie11 = _validationFields$fie10.driver_tip) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.enabled) && driverTipsOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+    uuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
     isFixedPrice: parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 1 || !!parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_u = configs.driver_tip_use_custom) === null || _configs$driver_tip_u === void 0 ? void 0 : _configs$driver_tip_u.value, 10),
@@ -449,7 +450,7 @@ var CheckoutUI = function CheckoutUI(props) {
 };
 
 var Checkout = function Checkout(props) {
-  var _Object$values2, _cartState$cart, _cartState$error, _cartState$cart2;
+  var _Object$values2, _cartState$error, _cartState$cart;
 
   var errors = props.errors,
       clearErrors = props.clearErrors,
@@ -687,7 +688,7 @@ var Checkout = function Checkout(props) {
   var checkoutProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CheckoutUI,
     cartState: cartState,
-    businessId: (_cartState$cart = cartState.cart) === null || _cartState$cart === void 0 ? void 0 : _cartState$cart.business_id,
+    uuid: cartUuid,
     isResetPaymethod: isResetPaymethod,
     setIsResetPaymethod: setIsResetPaymethod
   });
@@ -747,7 +748,7 @@ var Checkout = function Checkout(props) {
     }
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 25
-  }))), cartUuid && cartState.cart && ((_cartState$cart2 = cartState.cart) === null || _cartState$cart2 === void 0 ? void 0 : _cartState$cart2.status) !== 1 && /*#__PURE__*/_react.default.createElement(_orderingComponents.Checkout, checkoutProps), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+  }))), cartUuid && cartState.cart && ((_cartState$cart = cartState.cart) === null || _cartState$cart === void 0 ? void 0 : _cartState$cart.status) !== 1 && /*#__PURE__*/_react.default.createElement(_orderingComponents.Checkout, checkoutProps), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
     cartProducts: currentCart === null || currentCart === void 0 ? void 0 : currentCart.products,
     business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,

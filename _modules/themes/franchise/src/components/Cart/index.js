@@ -35,6 +35,8 @@ var _TaxInformation = require("../TaxInformation");
 
 var _Inputs = require("../../styles/Inputs");
 
+var _CartStoresListing = require("../CartStoresListing");
+
 var _styles = require("./styles");
 
 var _utils = require("../../../../../utils");
@@ -70,7 +72,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartUI = function CartUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$taxes, _cart$fees, _cart$fees2, _cart$fees2$filter, _orderState$options, _configs$driver_tip_t, _configs$driver_tip_u, _cart$business, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data$fi, _openTaxModal$data4, _openTaxModal$data5, _props$afterComponent, _props$afterElements;
+  var _Object$values$find$b, _Object$values$find, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$taxes, _cart$fees, _cart$fees2, _cart$fees2$filter, _orderState$options, _configs$driver_tip_t, _configs$driver_tip_u, _cart$business, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data$fi, _openTaxModal$data4, _openTaxModal$data5, _props$afterComponent, _props$afterElements;
 
   var currentCartUuid = props.currentCartUuid,
       cart = props.cart,
@@ -134,36 +136,44 @@ var CartUI = function CartUI(props) {
       openProduct = _useState4[0],
       setModalIsOpen = _useState4[1];
 
-  var _useState5 = (0, _react.useState)({}),
+  var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      curProduct = _useState6[0],
-      setCurProduct = _useState6[1];
+      openChangeStore = _useState6[0],
+      setOpenChangeStore = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(false),
+  var _useState7 = (0, _react.useState)({}),
       _useState8 = _slicedToArray(_useState7, 2),
-      openUpselling = _useState8[0],
-      setOpenUpselling = _useState8[1];
+      curProduct = _useState8[0],
+      setCurProduct = _useState8[1];
 
   var _useState9 = (0, _react.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      canOpenUpselling = _useState10[0],
-      setCanOpenUpselling = _useState10[1];
-
-  var windowSize = (0, _useWindowSize.useWindowSize)();
+      openUpselling = _useState10[0],
+      setOpenUpselling = _useState10[1];
 
   var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      isUpselling = _useState12[0],
-      setIsUpselling = _useState12[1];
+      canOpenUpselling = _useState12[0],
+      setCanOpenUpselling = _useState12[1];
 
-  var _useState13 = (0, _react.useState)({
+  var windowSize = (0, _useWindowSize.useWindowSize)();
+
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isUpselling = _useState14[0],
+      setIsUpselling = _useState14[1];
+
+  var _useState15 = (0, _react.useState)({
     open: false,
     data: null
   }),
-      _useState14 = _slicedToArray(_useState13, 2),
-      openTaxModal = _useState14[0],
-      setOpenTaxModal = _useState14[1];
+      _useState16 = _slicedToArray(_useState15, 2),
+      openTaxModal = _useState16[0],
+      setOpenTaxModal = _useState16[1];
 
+  var businessId = (_Object$values$find$b = (_Object$values$find = Object.values(orderState.carts).find(function (_cart) {
+    return (_cart === null || _cart === void 0 ? void 0 : _cart.uuid) === cart.uuid;
+  })) === null || _Object$values$find === void 0 ? void 0 : _Object$values$find.business_id) !== null && _Object$values$find$b !== void 0 ? _Object$values$find$b : {};
   var isCouponEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.coupon) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
   var momentFormatted = !(orderState !== null && orderState !== void 0 && (_orderState$option = orderState.option) !== null && _orderState$option !== void 0 && _orderState$option.moment) ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$option2 = orderState.option) === null || _orderState$option2 === void 0 ? void 0 : _orderState$option2.moment, {
     outputFormat: 'YYYY-MM-DD HH:mm'
@@ -261,6 +271,10 @@ var CartUI = function CartUI(props) {
     }
   };
 
+  var handleChangeStore = function handleChangeStore() {
+    setOpenChangeStore(true);
+  };
+
   (0, _react.useEffect)(function () {
     if (isCustomMode) setIsUpselling(true);
   }, [isCustomMode]);
@@ -282,7 +296,6 @@ var CartUI = function CartUI(props) {
     uuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
     isCheckout: isCheckout,
     orderTotal: cart === null || cart === void 0 ? void 0 : cart.total,
-    business: cart === null || cart === void 0 ? void 0 : cart.business,
     isClosed: !(cart !== null && cart !== void 0 && cart.valid_schedule),
     moment: momentFormatted,
     isProducts: isProducts,
@@ -292,7 +305,8 @@ var CartUI = function CartUI(props) {
     handleClearProducts: handleClearProducts,
     handleStoreRedirect: handleStoreRedirect,
     handleCartOpen: handleCartOpen,
-    isStore: isStore
+    isStore: isStore,
+    handleChangeStore: handleChangeStore
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,
@@ -345,7 +359,7 @@ var CartUI = function CartUI(props) {
       color: theme.colors.primary
     }))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((fee === null || fee === void 0 ? void 0 : (_fee$summary = fee.summary) === null || _fee$summary === void 0 ? void 0 : _fee$summary.fixed) + (fee === null || fee === void 0 ? void 0 : (_fee$summary2 = fee.summary) === null || _fee$summary2 === void 0 ? void 0 : _fee$summary2.percentage) || 0)));
   })), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.delivery_price))), (cart === null || cart === void 0 ? void 0 : cart.driver_tip) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip'), ' ', (cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate) > 0 && parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 2 && !parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_u = configs.driver_tip_use_custom) === null || _configs$driver_tip_u === void 0 ? void 0 : _configs$driver_tip_u.value, 10) && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate, parseNumber), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.driver_tip))))), isCouponEnabled && !isCartPending && (isCheckout || isCartPopover) && !(isCheckout && isCartPopover) && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
-    businessId: cart.business_id,
+    businessId: businessId,
     price: cart.total
   })), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
@@ -394,7 +408,7 @@ var CartUI = function CartUI(props) {
     isCartProduct: true,
     productCart: curProduct,
     businessSlug: cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug,
-    businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
+    businessId: businessId,
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
     onSave: handlerProductAction
@@ -417,7 +431,26 @@ var CartUI = function CartUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_TaxInformation.TaxInformation, {
     data: openTaxModal.data,
     products: cart === null || cart === void 0 ? void 0 : cart.products
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "70%",
+    title: t('CHANGE_STORE', 'Change store'),
+    open: openChangeStore,
+    padding: "20px",
+    closeOnBackdrop: true,
+    modalTitleStyle: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    onClose: function onClose() {
+      return setOpenChangeStore(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CartStoresListing.CartStoresListing, {
+    cartuuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
+    onClose: function onClose() {
+      return setOpenChangeStore(false);
+    }
   })), (openUpselling || isUpselling) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+    uuid: cart.uuid,
     businessId: cart.business_id,
     isCustomMode: isCustomMode,
     cartProducts: cart.products,

@@ -58,10 +58,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessControllerUI = function BusinessControllerUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _business$reviews, _business$reviews2, _business$reviews3, _orderState$options, _business$available_d, _business$busy_driver, _business$active_orde, _orderState$options2, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _business$reviews, _business$reviews2, _orderState$options, _business$available_d, _business$busy_driver, _business$active_orde, _orderState$options2, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       business = props.business,
+      isCartStore = props.isCartStore,
       getBusinessOffer = props.getBusinessOffer,
       handleClick = props.handleClick,
       orderType = props.orderType,
@@ -69,7 +70,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       isShowCallcenterInformation = props.isShowCallcenterInformation,
       isBusinessOpen = props.isBusinessOpen,
       businessWillCloseSoonMinutes = props.businessWillCloseSoonMinutes,
-      isBusinessClose = props.isBusinessClose;
+      isBusinessClose = props.isBusinessClose,
+      handleCartStoreClick = props.handleCartStoreClick;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -124,39 +126,43 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles2.ContainerCard, {
-    isSkeleton: isSkeleton
+    isSkeleton: isSkeleton,
+    isStore: isCartStore
   }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessCard, {
     isSkeleton: isSkeleton
-  }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessLogo, {
-    isSkeleton: isSkeleton
-  }, !isSkeleton && (business !== null && business !== void 0 && business.logo || (_theme$images = theme.images) !== null && _theme$images !== void 0 && (_theme$images$dummies = _theme$images.dummies) !== null && _theme$images$dummies !== void 0 && _theme$images$dummies.businessLogo) ? /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogo, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessContent, {
+    isStore: isCartStore
+  }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessLogo, {
+    isSkeleton: isSkeleton,
+    isStore: isCartStore
+  }, !isSkeleton && ((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogo, {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit')
-  }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), isSkeleton && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 70,
     width: 70
   })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfo, {
     className: "info"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, !isSkeleton && (business === null || business === void 0 ? void 0 : business.name) && /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, business === null || business === void 0 ? void 0 : business.name), isSkeleton && /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })), (business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) > 0 ? /*#__PURE__*/_react.default.createElement("div", {
+  })), !isSkeleton && (business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) > 0 && /*#__PURE__*/_react.default.createElement("div", {
     className: "reviews"
-  }, /*#__PURE__*/_react.default.createElement(_GrStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)) : (business === null || business === void 0 ? void 0 : (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.total) !== 0 && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_GrStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)), isSkeleton && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  })), !isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles2.Categories, null, Object.keys(business).length > 0 ? businessType() : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), !isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles2.Categories, null, !isSkeleton && Object.keys(business).length > 0 && businessType(), isSkeleton && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), /*#__PURE__*/_react.default.createElement(_styles2.Medadata, {
     isCustomerMode: isShowCallcenterInformation
-  }, orderType === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (business === null || business === void 0 ? void 0 : business.delivery_price) >= 0 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_V2', 'Delivery Fee:')), "\xA0", business && parsePrice(business === null || business === void 0 ? void 0 : business.delivery_price), /*#__PURE__*/_react.default.createElement(_EnDotSingle.default, null)) : /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, orderType === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && (business === null || business === void 0 ? void 0 : business.delivery_price) >= 0 && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_V2', 'Delivery Fee:')), "\xA0", business && parsePrice(business === null || business === void 0 ? void 0 : business.delivery_price), /*#__PURE__*/_react.default.createElement(_EnDotSingle.default, null)), isSkeleton && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  }))), Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("p", {
+  }))), !isSkeleton && Object.keys(business).length > 0 && /*#__PURE__*/_react.default.createElement("p", {
     className: "bullet"
   }, (0, _utils.convertHoursToMinutes)((orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? business === null || business === void 0 ? void 0 : business.delivery_time : business === null || business === void 0 ? void 0 : business.pickup_time) || /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), /*#__PURE__*/_react.default.createElement(_EnDotSingle.default, null)) : /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), /*#__PURE__*/_react.default.createElement(_EnDotSingle.default, null)), isSkeleton && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  })), (business === null || business === void 0 ? void 0 : business.distance) >= 0 ? /*#__PURE__*/_react.default.createElement("p", {
+  })), !isSkeleton && (business === null || business === void 0 ? void 0 : business.distance) >= 0 && /*#__PURE__*/_react.default.createElement("p", {
     className: "bullet"
-  }, parseDistance(business === null || business === void 0 ? void 0 : business.distance)) : /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, parseDistance(business === null || business === void 0 ? void 0 : business.distance)), isSkeleton && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
   })), isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles2.CallCenterInformation, null, /*#__PURE__*/_react.default.createElement(_styles2.CallCenterInformationBullet, {
     bgcolor: "green"
@@ -164,11 +170,19 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     bgcolor: "red"
   }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 ? void 0 : (_business$busy_driver = business.busy_drivers) === null || _business$busy_driver === void 0 ? void 0 : _business$busy_driver.length), /*#__PURE__*/_react.default.createElement(_styles2.CallCenterInformationBullet, {
     bgcolor: "rgb(252,225,5)"
-  }, /*#__PURE__*/_react.default.createElement(_BiBasket.default, null), business === null || business === void 0 ? void 0 : (_business$active_orde = business.active_orders) === null || _business$active_orde === void 0 ? void 0 : _business$active_orde.length))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessAddress, null, business === null || business === void 0 ? void 0 : business.address), !isSkeleton && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (business === null || business === void 0 ? void 0 : business.featured) && /*#__PURE__*/_react.default.createElement(_styles2.GreenDataItem, null, t('BLIST_FEATURED', 'Featured')), getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement(_styles2.GreenDataItem, null, t('OFFER', 'Offer'), ": ", getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), (!isBusinessOpen || isBusinessClose) && /*#__PURE__*/_react.default.createElement(_styles2.GreenDataItem, null, t('PREORDER', 'PreOrder')), !!businessWillCloseSoonMinutes && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.moment) === null && isBusinessOpen && !isBusinessClose && /*#__PURE__*/_react.default.createElement(_styles2.BusinessClosed, null, businessWillCloseSoonMinutes, " ", t('MINUTES_TO_CLOSE', 'minutes to close')), (!isBusinessOpen || isBusinessClose) && /*#__PURE__*/_react.default.createElement(_styles2.BusinessClosed, null, t('CLOSED', 'Closed')))))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessActions, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_BiBasket.default, null), business === null || business === void 0 ? void 0 : (_business$active_orde = business.active_orders) === null || _business$active_orde === void 0 ? void 0 : _business$active_orde.length))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessAddress, null, business === null || business === void 0 ? void 0 : business.address), !isSkeleton && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (business === null || business === void 0 ? void 0 : business.featured) && /*#__PURE__*/_react.default.createElement(_styles2.GreenDataItem, null, t('BLIST_FEATURED', 'Featured')), getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement(_styles2.GreenDataItem, null, t('OFFER', 'Offer'), ": ", getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), (!isBusinessOpen || isBusinessClose) && /*#__PURE__*/_react.default.createElement(_styles2.GreenDataItem, null, t('PREORDER', 'PreOrder')), !!businessWillCloseSoonMinutes && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.moment) === null && isBusinessOpen && !isBusinessClose && /*#__PURE__*/_react.default.createElement(_styles2.BusinessClosed, null, businessWillCloseSoonMinutes, " ", t('MINUTES_TO_CLOSE', 'minutes to close')), (!isBusinessOpen || isBusinessClose) && /*#__PURE__*/_react.default.createElement(_styles2.BusinessClosed, null, t('CLOSED', 'Closed')))))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessActions, {
+    isStore: isCartStore
+  }, !isCartStore && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primaryGradient",
     disabled: isSkeleton,
     onClick: function onClick() {
       return !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business));
+    }
+  }, t('SELECT_THIS_RESTAURANT', 'Select this restaurant')), isCartStore && handleCartStoreClick && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primaryGradient",
+    disabled: props.disabledStoreBtn,
+    onClick: function onClick() {
+      return handleCartStoreClick(business.id);
     }
   }, t('SELECT_THIS_RESTAURANT', 'Select this restaurant'))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_CLOSED', 'Business Closed'),

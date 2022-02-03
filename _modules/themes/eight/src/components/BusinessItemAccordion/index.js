@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessItemAccordion = function BusinessItemAccordion(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _orderState$options, _props$afterComponent, _props$afterElements;
+  var _Object$values$find$b, _Object$values$find, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _orderState$options, _props$afterComponent, _props$afterElements;
 
   var isCustomMode = props.isCustomMode,
       uuid = props.uuid,
@@ -55,7 +55,6 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       isCheckout = props.isCheckout,
       isClosed = props.isClosed,
       moment = props.moment,
-      business = props.business,
       orderTotal = props.orderTotal,
       isProducts = props.isProducts,
       isValidProducts = props.isValidProducts,
@@ -63,7 +62,8 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       isCartOnProductsList = props.isCartOnProductsList,
       handleClearProducts = props.handleClearProducts,
       handleStoreRedirect = props.handleStoreRedirect,
-      handleCartOpen = props.handleCartOpen;
+      handleCartOpen = props.handleCartOpen,
+      handleChangeStore = props.handleChangeStore;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
@@ -102,14 +102,18 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       cartProductUpdated = _useState8[0],
       setCartProductUpdated = _useState8[1];
 
+  var business = (_Object$values$find$b = (_Object$values$find = Object.values(orderState.carts).find(function (_cart) {
+    return (_cart === null || _cart === void 0 ? void 0 : _cart.uuid) === uuid;
+  })) === null || _Object$values$find === void 0 ? void 0 : _Object$values$find.business) !== null && _Object$values$find$b !== void 0 ? _Object$values$find$b : {};
   var content = (0, _react.useRef)(null);
   var businessStore = (0, _react.useRef)(null);
   var businessDelete = (0, _react.useRef)(null);
+  var changeStore = (0, _react.useRef)(null);
 
   var toggleAccordion = function toggleAccordion(e) {
-    var _businessStore$curren, _businessDelete$curre;
+    var _businessStore$curren, _businessDelete$curre, _changeStore$current;
 
-    var isActionsClick = ((_businessStore$curren = businessStore.current) === null || _businessStore$curren === void 0 ? void 0 : _businessStore$curren.contains(e === null || e === void 0 ? void 0 : e.target)) || ((_businessDelete$curre = businessDelete.current) === null || _businessDelete$curre === void 0 ? void 0 : _businessDelete$curre.contains(e === null || e === void 0 ? void 0 : e.target));
+    var isActionsClick = ((_businessStore$curren = businessStore.current) === null || _businessStore$curren === void 0 ? void 0 : _businessStore$curren.contains(e === null || e === void 0 ? void 0 : e.target)) || ((_businessDelete$curre = businessDelete.current) === null || _businessDelete$curre === void 0 ? void 0 : _businessDelete$curre.contains(e === null || e === void 0 ? void 0 : e.target)) || ((_changeStore$current = changeStore.current) === null || _changeStore$current === void 0 ? void 0 : _changeStore$current.contains(e === null || e === void 0 ? void 0 : e.target));
     if (isClosed || !isProducts || isActionsClick) return;
     setActiveState(setActive === '' ? 'active' : ''); // setHeightState(
     //   setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`
@@ -224,7 +228,13 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       maxHeight: !setActive && '0px'
     },
     isCustomMode: isCustomMode
-  }, props.children)), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, isCheckout && handleChangeStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
+    className: "info"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    ref: changeStore,
+    onClick: handleChangeStore,
+    className: "change-store"
+  }, t('CHANGE_STORE', 'Change store')))), props.children)), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
