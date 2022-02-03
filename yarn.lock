@@ -114,9 +114,9 @@
     semver "^6.3.0"
 
 "@babel/helper-create-class-features-plugin@^7.16.10", "@babel/helper-create-class-features-plugin@^7.16.7", "@babel/helper-create-class-features-plugin@^7.17.0", "@babel/helper-create-class-features-plugin@^7.3.0":
-  version "7.17.0"
-  resolved "https://registry.yarnpkg.com/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.17.0.tgz#3ba0eae83313d4077319d11a768c46adad026433"
-  integrity sha512-S3+IHG72pJFb0RmJgeXg/TjVKt641ZsLla028haXJjdqCf9eccE5r1JsdO//L7nzTDzXjtC+hwV/lrkEb2+t0Q==
+  version "7.17.1"
+  resolved "https://registry.yarnpkg.com/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.17.1.tgz#9699f14a88833a7e055ce57dcd3ffdcd25186b21"
+  integrity sha512-JBdSr/LtyYIno/pNnJ75lBcqc3Z1XXujzPanHqjvvrhOA+DTceTFuJi8XjmWTZh4r3fsdfqaCMN0iZemdkxZHQ==
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.16.7"
     "@babel/helper-environment-visitor" "^7.16.7"
@@ -3935,9 +3935,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.17:
-  version "1.4.63"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.63.tgz#866db72d1221fda89419dc22669d03833e11625d"
-  integrity sha512-e0PX/LRJPFRU4kzJKLvTobxyFdnANCvcoDCe8XcyTqP58nTWIwdsHvXLIl1RkB39X5yaosLaroMASWB0oIsgCA==
+  version "1.4.64"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.64.tgz#8b1b5372f77ca208f2c498c6490da0e51176bd81"
+  integrity sha512-8mec/99xgLUZCIZZq3wt61Tpxg55jnOSpxGYapE/1Ma9MpFEYYaz4QNYm0CM1rrnCo7i3FRHhbaWjeCLsveGjQ==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -7212,7 +7212,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/f14b1601fdd65e776a58aa2bc2b45f7efd4cbeb1"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/5218a67ae0cc31ec8cca9f6e4bd2ee594e6b8f64"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

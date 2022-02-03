@@ -615,6 +615,12 @@ Object.defineProperty(exports, "Tabs", {
     return _Tabs.Tabs;
   }
 });
+Object.defineProperty(exports, "TaxInformation", {
+  enumerable: true,
+  get: function get() {
+    return _TaxInformation.TaxInformation;
+  }
+});
 Object.defineProperty(exports, "TextArea", {
   enumerable: true,
   get: function get() {
@@ -909,6 +915,8 @@ var _SpinnerLoader = require("./components/SpinnerLoader");
 var _StripeElementsForm = require("./components/StripeElementsForm");
 
 var _StripeRedirectForm = require("./components/StripeRedirectForm");
+
+var _TaxInformation = require("./components/TaxInformation");
 
 var _UpsellingPage = require("./components/UpsellingPage");
 

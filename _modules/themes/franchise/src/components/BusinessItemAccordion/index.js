@@ -220,7 +220,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       minHeight: "".concat(setHeight),
       maxHeight: !setActive && '0px'
     }
-  }, isCheckout && handleChangeStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
+  }, handleChangeStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement("span", {
     ref: changeStore,
