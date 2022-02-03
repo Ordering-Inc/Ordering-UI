@@ -32,7 +32,8 @@ import {
   WrapperRightContainer,
   WrapperLeftContent,
   CheckOutDivider,
-  DriverTipDivider
+  DriverTipDivider,
+  DeliveryOptionsContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -46,6 +47,7 @@ import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
+import { Select } from '../../styles/Select'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -68,7 +70,10 @@ const CheckoutUI = (props) => {
     handleOrderRedirect,
     isCustomerMode,
     isResetPaymethod,
-    setIsResetPaymethod
+    setIsResetPaymethod,
+    handleChangeDeliveryOption,
+    instructionsOptions,
+    deliveryOptionSelected
   } = props
 
   const theme = useTheme()
@@ -89,6 +94,13 @@ const CheckoutUI = (props) => {
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
+
+  const deliveryOptions = instructionsOptions?.result && instructionsOptions?.result?.filter(option => option?.enabled)?.map(option => {
+    return {
+      value: option?.id, content: option?.name, showOnSelected: option?.name
+    }
+  })
+
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -294,6 +306,32 @@ const CheckoutUI = (props) => {
                   </div>
                 )}
               </BusinessDetailsContainer>
+            )}
+            <CheckOutDivider />
+            {props.beforeElementsSectionEight?.map((BeforeElement, i) => (
+              <React.Fragment key={i}>
+                {BeforeElement}
+              </React.Fragment>))}
+            {props.beforeComponentsSectionEight?.map((BeforeComponent, i) => (
+              <BeforeComponent key={i} {...props} />))}
+
+            {cartState.loading && (
+              <div>
+                <div>
+                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                  <Skeleton height={55} style={{ marginBottom: '10px' }} />
+                </div>
+              </div>
+            )}
+            {!props.isHideSectionEight && !cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
+              <DeliveryOptionsContainer>
+                <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
+                <Select
+                  defaultValue={deliveryOptionSelected}
+                  options={deliveryOptions}
+                  onChange={(val) => handleChangeDeliveryOption(val)}
+                />
+              </DeliveryOptionsContainer>
             )}
             <CheckOutDivider />
             {props.beforeElementsSectionFive?.map((BeforeElement, i) => (
