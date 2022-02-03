@@ -49,7 +49,8 @@ import { SignupForm } from './src/components/SignupForm'
 import { SingleBusinessCard } from './src/components/SingleBusinessCard'
 import { SingleOrderCard } from './src/components/SingleOrderCard'
 import { SingleProductCard } from './src/components/SingleProductCard'
-import { SmartAppBanner } from './components/SmartAppBanner'
+import { SmartAppBanner } from './src/components/SmartAppBanner'
+import { TaxInformation } from './src/components/TaxInformation'
 import { UserDetails } from './src/components/UserDetails'
 import { UserProfileForm } from './src/components/UserProfileForm'
 import { WrapperGoogleMaps } from './src/components/WrapperGoogleMaps'
@@ -113,6 +114,7 @@ export {
   SingleOrderCard,
   SingleProductCard,
   SmartAppBanner,
+  TaxInformation,
   UserDetails,
   UserProfileForm,
   WrapperGoogleMaps,

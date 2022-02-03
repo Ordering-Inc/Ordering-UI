@@ -82,6 +82,7 @@ import { SmartAppBanner } from './components/SmartAppBanner'
 import { SpinnerLoader } from './components/SpinnerLoader'
 import { StripeElementsForm } from './components/StripeElementsForm'
 import { StripeRedirectForm } from './components/StripeRedirectForm'
+import { TaxInformation } from './components/TaxInformation'
 import { UpsellingPage } from './components/UpsellingPage'
 import { UserDetails } from './components/UserDetails'
 import { UserFormDetailsUI } from './components/UserFormDetails'
@@ -202,6 +203,7 @@ export {
   StripeElementsForm,
   StripeRedirectForm,
   SidebarMenu,
+  TaxInformation,
   UpsellingPage,
   UserDetails,
   UserPopover,
