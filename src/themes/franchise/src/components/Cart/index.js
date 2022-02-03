@@ -12,6 +12,7 @@ import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { TaxInformation } from '../TaxInformation'
 import { TextArea } from '../../styles/Inputs'
+import { CartStoresListing } from '../CartStoresListing'
 
 import {
   CartContainer,
@@ -61,12 +62,15 @@ const CartUI = (props) => {
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
+  const [openChangeStore, setOpenChangeStore] = useState(false)
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const windowSize = useWindowSize()
   const [isUpselling, setIsUpselling] = useState(false)
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, data: null })
+
+  const businessId = Object.values(orderState.carts).find(_cart => _cart?.uuid === cart.uuid)?.business_id ?? {}
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
@@ -147,6 +151,10 @@ const CartUI = (props) => {
     }
   }
 
+  const handleChangeStore = () => {
+    setOpenChangeStore(true)
+  }
+
   useEffect(() => {
     if (isCustomMode) setIsUpselling(true)
   }, [isCustomMode])
@@ -167,7 +175,6 @@ const CartUI = (props) => {
             uuid={cart?.uuid}
             isCheckout={isCheckout}
             orderTotal={cart?.total}
-            business={cart?.business}
             isClosed={!cart?.valid_schedule}
             moment={momentFormatted}
             isProducts={isProducts}
@@ -178,6 +185,7 @@ const CartUI = (props) => {
             handleStoreRedirect={handleStoreRedirect}
             handleCartOpen={handleCartOpen}
             isStore={isStore}
+            handleChangeStore={handleChangeStore}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
@@ -267,7 +275,7 @@ const CartUI = (props) => {
                 {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
                   <CouponContainer>
                     <CouponControl
-                      businessId={cart.business_id}
+                      businessId={businessId}
                       price={cart.total}
                     />
                   </CouponContainer>
@@ -347,7 +355,7 @@ const CartUI = (props) => {
               isCartProduct
               productCart={curProduct}
               businessSlug={cart?.business?.slug}
-              businessId={cart?.business_id}
+              businessId={businessId}
               categoryId={curProduct?.category_id}
               productId={curProduct?.id}
               onSave={handlerProductAction}
@@ -365,8 +373,23 @@ const CartUI = (props) => {
           >
             <TaxInformation data={openTaxModal.data} products={cart?.products} />
           </Modal>
+          <Modal
+            width='70%'
+            title={t('CHANGE_STORE', 'Change store')}
+            open={openChangeStore}
+            padding='20px'
+            closeOnBackdrop
+            modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+            onClose={() => setOpenChangeStore(false)}
+          >
+            <CartStoresListing
+              cartuuid={cart?.uuid}
+              onClose={() => setOpenChangeStore(false)}
+            />
+          </Modal>
           {(openUpselling || isUpselling) && (
             <UpsellingPage
+              uuid={cart.uuid}
               businessId={cart.business_id}
               isCustomMode={isCustomMode}
               cartProducts={cart.products}
