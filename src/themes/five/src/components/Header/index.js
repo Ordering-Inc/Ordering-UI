@@ -406,7 +406,9 @@ export const Header = (props) => {
               )
             )}
             {modalSelected === 'moment' && (
-              <MomentContent />
+              <MomentContent
+                onClose={() => setModalIsOpen(false)}
+              />
             )}
             {modalSelected === 'delivery' && (
               <OrderTypeSelectorContent

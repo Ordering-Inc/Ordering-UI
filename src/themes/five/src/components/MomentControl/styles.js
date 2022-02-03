@@ -276,3 +276,23 @@ export const CheckedIcon = styled.div`
     margin: 2px 2px 2px 12px;
   `}
 `
+export const ButtonWrapper = styled.div`
+  margin-top: 25px;
+  button {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      position: absolute;
+      font-size: 21px;
+      ${props => props.theme?.rtl ? css`
+        left: 17px;
+      ` : css`
+        right: 17px;
+      `}
+    }
+  }
+`

@@ -12,7 +12,7 @@ import 'react-calendar/dist/Calendar.css'
 import Calendar from 'react-calendar'
 import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
 import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
-
+import { ArrowRight } from 'react-bootstrap-icons'
 import {
   Title,
   CheckBoxWrapper,
@@ -21,7 +21,8 @@ import {
   TimeListWrapper,
   TimeListHeader,
   TimeListContent,
-  CheckedIcon
+  CheckedIcon,
+  ButtonWrapper
 } from './styles'
 import CgRadioCheck from '@meronex/icons/cg/CgRadioCheck'
 import { Button } from '../../styles/Buttons'
@@ -35,7 +36,8 @@ const MomentControlUI = (props) => {
     timeSelected,
     handleAsap,
     handleChangeDate,
-    handleChangeTime
+    handleChangeTime,
+    onClose
   } = props
 
   const [{ configs }] = useConfig()
@@ -202,6 +204,16 @@ const MomentControlUI = (props) => {
           </DateTimeWrapper>
         )
       }
+
+      <ButtonWrapper>
+        <Button
+          color='primary'
+          onClick={() => onClose()}
+        >
+          <span>{t('CONTINUE', 'Continue')}</span>
+          <ArrowRight />
+        </Button>
+      </ButtonWrapper>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
