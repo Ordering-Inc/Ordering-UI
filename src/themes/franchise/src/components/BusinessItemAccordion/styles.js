@@ -67,14 +67,16 @@ export const ContentInfo = styled.div`
       text-decoration: underline;
       color: #d81212;
     }
-
-    .change-store {
-      cursor: pointer;
-      text-decoration: underline;
-      color: ${props => props.theme.colors.primary};
-      font-size: 12px;
-    }
   }
+
+  .change-store {
+    cursor: pointer;
+    text-decoration: underline;
+    color: ${props => props.theme.colors.primary};
+    font-size: 12px;
+    width: max-content;
+  }
+
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
     margin-left: 0;

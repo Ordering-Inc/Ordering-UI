@@ -11,6 +11,7 @@ import { Modal } from '../../../../../components/Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { verifyDecimals } from '../../../../../utils'
+import { CartStoresListing } from '../CartStoresListing'
 
 import {
   CartContainer,
@@ -53,11 +54,14 @@ const CartUI = (props) => {
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
+  const [openChangeStore, setOpenChangeStore] = useState(false)
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const windowSize = useWindowSize()
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
+
+  const businessId = Object.values(orderState.carts).find(_cart => _cart?.uuid === cart.uuid)?.business_id ?? {}
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -130,6 +134,10 @@ const CartUI = (props) => {
     handleClickCheckout()
   }
 
+  const handleChangeStore = () => {
+    setOpenChangeStore(true)
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -151,7 +159,7 @@ const CartUI = (props) => {
             uuid={cart?.uuid}
             isCheckout={isCheckout}
             orderTotal={cart?.total}
-            business={cart?.business}
+            // business={cart?.business}
             isClosed={!cart?.valid_schedule}
             moment={momentFormatted}
             isProducts={isProducts}
@@ -161,6 +169,7 @@ const CartUI = (props) => {
             handleClearProducts={handleClearProducts}
             handleStoreRedirect={handleStoreRedirect}
             handleCartOpen={handleCartOpen}
+            handleChangeStore={handleChangeStore}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
@@ -178,6 +187,7 @@ const CartUI = (props) => {
             ))}
             {(openUpselling || isCustomMode) && (
               <UpsellingPage
+                uuid={cart.uuid}
                 isCustomMode={isCustomMode}
                 businessId={cart.business_id}
                 cartProducts={cart.products}
@@ -270,7 +280,7 @@ const CartUI = (props) => {
                 {isCouponEnabled && !isCartPending && (isCartPopover && !(isCheckout && isCartPopover)) && (
                   <CouponContainer>
                     <CouponControl
-                      businessId={cart.business_id}
+                      businessId={businessId}
                       price={cart.total}
                     />
                   </CouponContainer>
@@ -324,10 +334,24 @@ const CartUI = (props) => {
               isCartProduct
               productCart={curProduct}
               businessSlug={cart?.business?.slug}
-              businessId={cart?.business_id}
+              businessId={businessId}
               categoryId={curProduct?.category_id}
               productId={curProduct?.id}
               onSave={handlerProductAction}
+            />
+          </Modal>
+          <Modal
+            width='70%'
+            title={t('CHANGE_STORE', 'Change store')}
+            open={openChangeStore}
+            padding='20px'
+            closeOnBackdrop
+            modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+            onClose={() => setOpenChangeStore(false)}
+          >
+            <CartStoresListing
+              cartuuid={cart?.uuid}
+              onClose={() => setOpenChangeStore(false)}
             />
           </Modal>
         </CartSticky>

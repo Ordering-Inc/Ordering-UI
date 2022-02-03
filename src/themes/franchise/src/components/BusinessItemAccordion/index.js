@@ -23,7 +23,6 @@ export const BusinessItemAccordion = (props) => {
     isCheckout,
     isClosed,
     moment,
-    business,
     orderTotal,
     isProducts,
     isValidProducts,
@@ -32,7 +31,8 @@ export const BusinessItemAccordion = (props) => {
     handleClearProducts,
     handleStoreRedirect,
     handleCartOpen,
-    isStore
+    isStore,
+    handleChangeStore
   } = props
 
   const [orderState] = useOrder()
@@ -45,13 +45,16 @@ export const BusinessItemAccordion = (props) => {
   const [setRotate, setRotateState] = useState('accordion__icon')
   const [cartProductUpdated, setCartProductUpdated] = useState(null)
 
+  const business = Object.values(orderState.carts).find(_cart => _cart?.uuid === uuid)?.business ?? {}
+
   const content = useRef(null)
   const businessStore = useRef(null)
   const businessDelete = useRef(null)
+  const changeStore = useRef(null)
 
   const toggleAccordion = (e) => {
     if (isStore) return
-    const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
+    const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target) || changeStore.current?.contains(e?.target)
     if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
     // setHeightState(
@@ -109,10 +112,6 @@ export const BusinessItemAccordion = (props) => {
     }
   }, [])
 
-  const handleChangeStore = () => {
-    events.emit('go_to_page', { page: 'search' })
-  }
-
   useEffect(() => {
     handleCartOpen && handleCartOpen(!!setActive)
   }, [setActive])
@@ -155,10 +154,14 @@ export const BusinessItemAccordion = (props) => {
                         {t('CLEAR_CART', 'Clear cart')}
                       </span>
                     )}
-                    {isStore && (
-                      <span onClick={handleChangeStore} className='change-store'>{t('CHANGE_STORE', 'Change store')}</span>
-                    )}
                   </div>
+                  <span
+                    ref={changeStore}
+                    onClick={handleChangeStore}
+                    className='change-store'
+                  >
+                    {t('CHANGE_STORE', 'Change store')}
+                  </span>
                 </ContentInfo>
                 {
                   !isStore && (
@@ -212,6 +215,19 @@ export const BusinessItemAccordion = (props) => {
           ref={content}
           style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
         >
+          {isCheckout && handleChangeStore && (
+            <BusinessInfo>
+              <ContentInfo className='info'>
+                <span
+                  ref={changeStore}
+                  onClick={handleChangeStore}
+                  className='change-store'
+                >
+                  {t('CHANGE_STORE', 'Change store')}
+                </span>
+              </ContentInfo>
+            </BusinessInfo>
+          )}
           {props.children}
         </AccordionContent>
       </AccordionSection>

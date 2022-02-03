@@ -27,13 +27,15 @@ import {
 const BusinessControllerUI = (props) => {
   const {
     isSkeleton,
+    isCartStore,
     business,
     handleClick,
     orderType,
     isCustomLayout,
     isShowCallcenterInformation,
     isBusinessOpen,
-    businessWillCloseSoonMinutes
+    businessWillCloseSoonMinutes,
+    handleCartStoreClick
   } = props
 
   const [, t] = useLanguage()
@@ -48,92 +50,86 @@ const BusinessControllerUI = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       <BranchListContainer>
-        {
-          isSkeleton ? (
-            <>
-              <BranchTitle>
-                <Skeleton width={200} height={30} />
-              </BranchTitle>
-              <BranchContent>
-                <BranchInfoBlock>
-                  <Skeleton width={250} />
-                  <OrderTypeList>
-                    {[...Array(4).keys()].map(i => (
-                      <OrderType isSkeleton={isSkeleton} key={i}>
-                        <Skeleton width={40} height={20} />
-                      </OrderType>
-                    ))}
-                  </OrderTypeList>
-                  <Skeleton width={100} height={25} />
-                </BranchInfoBlock>
-                <OrderBtnWrapper>
-                  <Skeleton width={100} height={35} />
-                </OrderBtnWrapper>
-              </BranchContent>
-            </>
-          ) : (
-            <>
-              <BranchTitle>{business?.name}</BranchTitle>
-              <BranchContent>
-                <BranchInfoBlock>
-                  <p>{business?.address}</p>
-                  <OrderTypeList>
-                    {Object.keys(business).length > 0 && (
-                      <OrderType>
-                        <GrClock />
-                        <span>
-                          {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time)}
-                        </span>
-                      </OrderType>
-                    )}
-                    {business?.distance >= 0 && (
-                      <OrderType>
-                        <GrLocation />
-                        <span>
-                          {parseDistance(business?.distance)}
-                        </span>
-                      </OrderType>
-                    )}
-                    {orderType === 1 && business?.delivery_price >= 0 && (
-                      <OrderType>
-                        <GrDeliver />
-                        <span>
-                          {business && parsePrice(business?.delivery_price)}
-                        </span>
-                      </OrderType>
-                    )}
-                  </OrderTypeList>
-                  <Medadata isCustomerMode={isShowCallcenterInformation}>
-                    {isShowCallcenterInformation && (
-                      <CallCenterInformation>
-                        <CallCenterInformationBullet bgcolor='green'>
-                          <BiCar />
-                          {business?.available_drivers?.length}
-                        </CallCenterInformationBullet>
-                        <CallCenterInformationBullet bgcolor='red'>
-                          <BiCar />
-                          {business?.busy_drivers?.length}
-                        </CallCenterInformationBullet>
-                        <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
-                          <BiBasket />
-                          {business?.active_orders?.length}
-                        </CallCenterInformationBullet>
-                      </CallCenterInformation>
-                    )}
-                  </Medadata>
-                  {/* {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>} */}
-                  {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
-                    <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
+        {isSkeleton ? (
+          <>
+            <BranchTitle>
+              <Skeleton width={200} height={30} />
+            </BranchTitle>
+            <BranchContent>
+              <BranchInfoBlock>
+                <Skeleton width={250} />
+                <OrderTypeList>
+                  {[...Array(4).keys()].map(i => (
+                    <OrderType isSkeleton={isSkeleton} key={i}>
+                      <Skeleton width={40} height={20} />
+                    </OrderType>
+                  ))}
+                </OrderTypeList>
+                <Skeleton width={100} height={25} />
+              </BranchInfoBlock>
+              <OrderBtnWrapper>
+                <Skeleton width={100} height={35} />
+              </OrderBtnWrapper>
+            </BranchContent>
+          </>
+        ) : (
+          <>
+            <BranchTitle>{business?.name}</BranchTitle>
+            <BranchContent>
+              <BranchInfoBlock>
+                <p>{business?.address}</p>
+                <OrderTypeList>
+                  {Object.keys(business).length > 0 && (
+                    <OrderType>
+                      <GrClock />
+                      <span>
+                        {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time)}
+                      </span>
+                    </OrderType>
                   )}
-                </BranchInfoBlock>
-                <OrderBtnWrapper>
+                  {business?.distance >= 0 && (
+                    <OrderType>
+                      <GrLocation />
+                      <span>
+                        {parseDistance(business?.distance)}
+                      </span>
+                    </OrderType>
+                  )}
+                  {orderType === 1 && business?.delivery_price >= 0 && (
+                    <OrderType>
+                      <GrDeliver />
+                      <span>
+                        {business && parsePrice(business?.delivery_price)}
+                      </span>
+                    </OrderType>
+                  )}
+                </OrderTypeList>
+                <Medadata isCustomerMode={isShowCallcenterInformation}>
+                  {isShowCallcenterInformation && (
+                    <CallCenterInformation>
+                      <CallCenterInformationBullet bgcolor='green'>
+                        <BiCar />
+                        {business?.available_drivers?.length}
+                      </CallCenterInformationBullet>
+                      <CallCenterInformationBullet bgcolor='red'>
+                        <BiCar />
+                        {business?.busy_drivers?.length}
+                      </CallCenterInformationBullet>
+                      <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
+                        <BiBasket />
+                        {business?.active_orders?.length}
+                      </CallCenterInformationBullet>
+                    </CallCenterInformation>
+                  )}
+                </Medadata>
+                {/* {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>} */}
+                {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
+                  <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
+                )}
+              </BranchInfoBlock>
+              <OrderBtnWrapper>
+                {!isCartStore && (
                   <Button
                     outline
                     color='primary'
@@ -141,11 +137,21 @@ const BusinessControllerUI = (props) => {
                   >
                     {t('START_ORDER', 'Start order')}
                   </Button>
-                </OrderBtnWrapper>
-              </BranchContent>
-            </>
-          )
-        }
+                )}
+                {isCartStore && handleCartStoreClick && (
+                  <Button
+                    outline
+                    disabled={props.disabledStoreBtn}
+                    color='primary'
+                    onClick={() => handleCartStoreClick(business.id)}
+                    >
+                    {t('SELECT', 'Select')}
+                  </Button>
+                )}
+              </OrderBtnWrapper>
+            </BranchContent>
+          </>
+        )}
       </BranchListContainer>
       <Alert
         title={t('BUSINESS_CLOSED', 'Business Closed')}
@@ -156,12 +162,6 @@ const BusinessControllerUI = (props) => {
         onAccept={() => setAlertState({ open: false, content: [] })}
         closeOnBackdrop={false}
       />
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }

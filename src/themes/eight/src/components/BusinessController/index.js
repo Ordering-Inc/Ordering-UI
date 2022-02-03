@@ -34,6 +34,7 @@ const BusinessControllerUI = (props) => {
   const {
     isSkeleton,
     business,
+    isCartStore,
     getBusinessOffer,
     handleClick,
     orderType,
@@ -41,7 +42,8 @@ const BusinessControllerUI = (props) => {
     isShowCallcenterInformation,
     isBusinessOpen,
     businessWillCloseSoonMinutes,
-    isBusinessClose
+    isBusinessClose,
+    handleCartStoreClick
   } = props
 
   const theme = useTheme()
@@ -74,74 +76,65 @@ const BusinessControllerUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ContainerCard isSkeleton={isSkeleton}>
+      <ContainerCard isSkeleton={isSkeleton} isStore={isCartStore}>
         <WrapperBusinessCard isSkeleton={isSkeleton}>
-          <BusinessContent>
-            <WrapperBusinessLogo isSkeleton={isSkeleton}>
-              {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
+          <BusinessContent isStore={isCartStore}>
+            <WrapperBusinessLogo isSkeleton={isSkeleton} isStore={isCartStore}>
+              {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) && (
                 <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-              ) : (
-                <Skeleton height={70} width={70} />
               )}
+              {isSkeleton && <Skeleton height={70} width={70} />}
             </WrapperBusinessLogo>
             <BusinessInfo className='info'>
               <BusinessInfoItem>
                 <div>
-                  {business?.name ? (
+                  {!isSkeleton && business?.name && (
                     <BusinessName>{business?.name}</BusinessName>
-                  ) : (
-                    <BusinessName><Skeleton width={100} /></BusinessName>
                   )}
-                  {business?.reviews?.total > 0 ? (
+                  {isSkeleton &&  <BusinessName><Skeleton width={100} /></BusinessName>}
+                  {!isSkeleton && business?.reviews?.total > 0 && (
                     <div className='reviews'>
                       <GrStar />
                       <span>{business?.reviews?.total}</span>
                     </div>
-                  ) : (
-                    business?.reviews?.total !== 0 && <Skeleton width={50} />
                   )}
+                  {isSkeleton &&  <Skeleton width={50} />}
                 </div>
                 {!isShowCallcenterInformation && (
                   <Categories>
-                    {
-                      Object.keys(business).length > 0 ? (
-                        businessType()
-                      ) : (
-                        <Skeleton width={100} />
-                      )
-                    }
+                    {!isSkeleton && Object.keys(business).length > 0 && (
+                      businessType()
+                    )}
+                    {isSkeleton &&  <Skeleton width={100} />}
                   </Categories>
                 )}
                 <Medadata isCustomerMode={isShowCallcenterInformation}>
                   {orderType === 1 && (
                     <>
-                      {business?.delivery_price >= 0 ? (
+                      {!isSkeleton && business?.delivery_price >= 0 && (
                         <p>
                           <span>{t('DELIVERY_V2', 'Delivery Fee:')}</span>
                           &nbsp;
                           {business && parsePrice(business?.delivery_price)}
                           <EnDotSingle />
                         </p>
-                      ) : (
-                        <p><Skeleton width={70} /></p>
                       )}
+                      {isSkeleton && <p><Skeleton width={70} /></p>}
                     </>
                   )}
-                  {Object.keys(business).length > 0 ? (
+                  {!isSkeleton && Object.keys(business).length > 0 && (
                     <p className='bullet'>
                       {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
                       <EnDotSingle />
                     </p>
-                  ) : (
-                    <p><Skeleton width={70} /></p>
                   )}
-                  {business?.distance >= 0 ? (
+                  {isSkeleton && <p><Skeleton width={70} /></p>}
+                  {!isSkeleton && business?.distance >= 0 && (
                     <p className='bullet'>
                       {parseDistance(business?.distance)}
                     </p>
-                  ) : (
-                    <p><Skeleton width={70} /></p>
                   )}
+                  {isSkeleton && <p><Skeleton width={70} /></p>}
 
                   {isShowCallcenterInformation && (
                     <CallCenterInformation>
@@ -179,14 +172,25 @@ const BusinessControllerUI = (props) => {
               </BusinessInfoItem>
             </BusinessInfo>
           </BusinessContent>
-          <BusinessActions>
-            <Button
-              color='primaryGradient'
-              disabled={isSkeleton}
-              onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}
-            >
-              {t('SELECT_THIS_RESTAURANT', 'Select this restaurant')}
-            </Button>
+          <BusinessActions isStore={isCartStore}>
+            {!isCartStore && (
+              <Button
+                color='primaryGradient'
+                disabled={isSkeleton}
+                onClick={() => !isSkeleton && handleClick && (!isBusinessOpen && isCustomLayout ? handleShowAlert() : handleClick(business))}
+              >
+                {t('SELECT_THIS_RESTAURANT', 'Select this restaurant')}
+              </Button>
+            )}
+            {isCartStore && handleCartStoreClick && (
+              <Button
+                color='primaryGradient'
+                disabled={props.disabledStoreBtn}
+                onClick={() => handleCartStoreClick(business.id)}
+              >
+                {t('SELECT_THIS_RESTAURANT', 'Select this restaurant')}
+              </Button>
+            )}
           </BusinessActions>
         </WrapperBusinessCard>
       </ContainerCard>

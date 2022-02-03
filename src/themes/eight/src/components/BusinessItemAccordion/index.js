@@ -28,7 +28,7 @@ export const BusinessItemAccordion = (props) => {
     isCheckout,
     isClosed,
     moment,
-    business,
+    // business,
     orderTotal,
     isProducts,
     isValidProducts,
@@ -36,7 +36,8 @@ export const BusinessItemAccordion = (props) => {
     isCartOnProductsList,
     handleClearProducts,
     handleStoreRedirect,
-    handleCartOpen
+    handleCartOpen,
+    handleChangeStore
   } = props
 
   const theme = useTheme()
@@ -50,12 +51,15 @@ export const BusinessItemAccordion = (props) => {
   const [setRotate, setRotateState] = useState('accordion__icon')
   const [cartProductUpdated, setCartProductUpdated] = useState(null)
 
+  const business = Object.values(orderState.carts).find(_cart => _cart?.uuid === uuid)?.business ?? {}
+
   const content = useRef(null)
   const businessStore = useRef(null)
   const businessDelete = useRef(null)
+  const changeStore = useRef(null)
 
   const toggleAccordion = (e) => {
-    const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
+    const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target) || changeStore.current?.contains(e?.target)
     if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
     // setHeightState(
@@ -210,6 +214,19 @@ export const BusinessItemAccordion = (props) => {
           style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
           isCustomMode={isCustomMode}
         >
+          {isCheckout && handleChangeStore && (
+            <BusinessInfo>
+              <ContentInfo className='info'>
+                <span
+                  ref={changeStore}
+                  onClick={handleChangeStore}
+                  className='change-store'
+                >
+                  {t('CHANGE_STORE', 'Change store')}
+                </span>
+              </ContentInfo>
+            </BusinessInfo>
+          )}
           {props.children}
         </AccordionContent>
       </AccordionSection>

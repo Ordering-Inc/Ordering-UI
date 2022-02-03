@@ -14,6 +14,7 @@ import { BusinessProductsListing } from './src/components/BusinessProductsListin
 import { BusinessReviews } from './src/components/BusinessReviews'
 import { CardForm } from './src/components/CardForm'
 import { Cart } from './src/components/Cart'
+import { CartStoresListing } from './src/components/CartStoresListing'
 import { CartContent } from './src/components/CartContent'
 import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
@@ -78,6 +79,7 @@ export {
   BusinessReviews,
   CardForm,
   Cart,
+  CartStoresListing,
   CartContent,
   CartPopover,
   Checkout,
