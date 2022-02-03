@@ -57,6 +57,7 @@ const mapConfigs = {
 
 const CheckoutUI = (props) => {
   const {
+    uuid,
     cart,
     errors,
     placing,
@@ -210,7 +211,7 @@ const CheckoutUI = (props) => {
                   location={businessDetails?.business?.location}
                   businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
                   isCartPending={cart?.status === 2}
-                  businessId={cart?.business_id}
+                  uuid={uuid}
                   apiKey={configs?.google_maps_api_key?.value}
                   mapConfigs={mapConfigs}
                   isCustomerMode={isCustomerMode}
@@ -240,7 +241,6 @@ const CheckoutUI = (props) => {
                     <UserDetails
                       isUserDetailsEdit={isUserDetailsEdit}
                       cartStatus={cart?.status}
-                      businessId={cart?.business_id}
                       useValidationFields
                       useDefualtSessionManager
                       useSessionUser={!isCustomerMode}
@@ -363,6 +363,7 @@ const CheckoutUI = (props) => {
                   <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                   <h2>{t('CUSTOM_DRIVER_TIP_MESSAGE', '100% of these tips go directly to your driver')}</h2>
                   <DriverTips
+                    uuid={uuid}
                     businessId={cart?.business_id}
                     driverTipsOptions={driverTipsOptions}
                     isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)}
@@ -596,7 +597,7 @@ export const Checkout = (props) => {
     ...props,
     UIComponent: CheckoutUI,
     cartState,
-    businessId: cartState.cart?.business_id,
+    uuid: cartUuid,
     isResetPaymethod,
     setIsResetPaymethod
   }

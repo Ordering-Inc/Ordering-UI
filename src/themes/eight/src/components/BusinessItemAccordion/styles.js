@@ -146,6 +146,14 @@ export const ContentInfo = styled.div`
     }
   }
 
+  .change-store {
+    cursor: pointer;
+    text-decoration: underline;
+    color: ${props => props.theme.colors.primary};
+    font-size: 12px;
+    width: max-content;
+  }
+
   @media (min-width: 576px) {
     h2 {
       font-size: 20px;

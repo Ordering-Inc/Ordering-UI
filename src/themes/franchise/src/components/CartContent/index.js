@@ -50,8 +50,8 @@ export const CartContent = (props) => {
       }
       <Container>
         {isOrderStateCarts && carts?.length > 0 &&
-          carts.map(cart => (
-            <React.Fragment key={cart.uuid}>
+          carts.map((cart, i) => (
+            <React.Fragment key={i}>
               {cart.products.length > 0 && (
                 <Cart
                   isCartPending={cart?.status === 2}

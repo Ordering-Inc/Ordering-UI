@@ -10,6 +10,7 @@ import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
 import { BusinessProductsList } from './src/components/BusinessProductsList'
 import { BusinessProductsListing } from './src/components/BusinessProductsListing'
 import { Cart } from './src/components/Cart'
+import { CartStoresListing } from './src/components/CartStoresListing'
 import { CartContent } from './src/components/CartContent'
 import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
@@ -51,6 +52,7 @@ export {
   BusinessProductsList,
   BusinessProductsListing,
   Cart,
+  CartStoresListing,
   CartContent,
   CartPopover,
   Checkout,

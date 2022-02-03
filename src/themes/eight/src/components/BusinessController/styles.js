@@ -4,6 +4,10 @@ import styled, { css } from 'styled-components'
 export const ContainerCard = styled.div`
   padding: 15px 0;
 
+  ${({ isStore }) => isStore && css`
+    width: 80%;
+  `}
+
   background-image: linear-gradient(to right, ${props => props.theme.colors.grayMedium} 20%, rgba(255,255,255,0) 0%);
   background-position: bottom;
   background-size: 10px 2px;
@@ -25,6 +29,11 @@ export const BusinessContent = styled.div`
   justify-content: space-between;
   margin-top: 15px;
   flex: 1;
+
+  ${({ isStore }) => isStore && css`
+    justify-content: flex-start;
+    width: 50%;
+  `}
 `
 
 export const WrapperBusinessLogo = styled.div`
@@ -32,6 +41,10 @@ export const WrapperBusinessLogo = styled.div`
   height: 70px;
   min-height: 70px;
   max-width: 70px;
+  ${({ isStore }) => isStore && css`
+    margin-right: 10px;
+  `}
+
   ${({ isSkeleton }) => !isSkeleton && css`
     border: 1px solid ${props => props.theme.colors.gray};
   `}
@@ -192,12 +205,20 @@ export const CallCenterInformationBullet = styled.div`
 `
 
 export const BusinessActions = styled.div`
-  margin-top: 10px;
-  ${props => props.theme?.rtl ? css`
-    padding-right: 76px;
+  ${({ isStore }) => isStore ? css`
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    width: 50%;
   ` : css`
-    padding-left: 76px;
+    margin-top: 10px;
+    ${props => props.theme?.rtl ? css`
+      padding-right: 76px;
+    ` : css`
+      padding-left: 76px;
+    `}
   `}
+
 `
 
 export const BusinessAddress = styled.div`
