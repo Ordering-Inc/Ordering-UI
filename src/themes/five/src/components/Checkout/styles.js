@@ -205,3 +205,14 @@ export const DriverTipDivider = styled.div`
     margin-left: -40px;
   }
 `
+
+export const DeliveryOptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  #select-input {
+    margin-bottom: 10px;
+  }
+  #list {
+    width: 100%;
+  }
+`

@@ -55,7 +55,8 @@ import {
   ReviewOrderLink,
   SkeletonWrapper,
   ReviewWrapper,
-  Exclamation
+  Exclamation,
+  CommentContainer
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -287,6 +288,18 @@ const OrderDetailsUI = (props) => {
                 <p>{order?.customer?.email}</p>
                 <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
               </OrderCustomer>
+              {order?.delivery_type === 1 && (
+                <CommentContainer>
+                  <h3>{t('DELIVERY_PREFERENCE', 'Delivery preference')}</h3>
+                  <span>{order?.delivery_option?.name ?? t('EITHER_WAY', 'Either way')}</span>
+                </CommentContainer>
+              )}
+              {order?.comment && (
+                <CommentContainer>
+                  <h3>{t('COMMENT', 'Comment')}</h3>
+                  <span>{order?.comment}</span>
+                </CommentContainer>
+              )}
               {order?.driver && (
                 <>
                   <>
@@ -460,16 +473,6 @@ const OrderDetailsUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                {order?.comment && (
-                  <table className='comments'>
-                    <tbody>
-                      <tr>
-                        <td>{t('COMMENT', 'Comment')}</td>
-                        <td>{order?.comment}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                )}
               </OrderBill>
               <Content className='order-content'>
                 {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
