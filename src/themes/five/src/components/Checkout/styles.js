@@ -205,3 +205,37 @@ export const DriverTipDivider = styled.div`
     margin-left: -40px;
   }
 `
+
+export const DeliveryOptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  #select-input {
+    margin-bottom: 10px;
+  }
+  #list {
+    width: 100%;
+  }
+
+  > div {
+    width: 100%;
+    background-color: #F8F9FA!important;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    height: 44px;
+    border: none;
+    border-radius: 7.6px;
+    color: #909BA9 !important;
+
+    > div:first-child {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      justify-content: space-between;
+    }
+    > div#list {
+      width: 100%;
+      background-color: #F8F9FA!important;
+      border: 1px solid #F8F9FA;
+      border-radius: 7.6px;
+      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+`

@@ -6,7 +6,7 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
+import { useSession, useLanguage, useOrder, Analytics, useConfig, FacebookPixel } from 'ordering-components'
 
 import { Header } from '../src/components/Header'
 import { Footer } from '../src/components/Footer'
@@ -94,8 +94,11 @@ export const App = () => {
 
   return (
     <>
-      {configs?.track_id_google_analytics?.value && (
+      {!!configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
+      )}
+      {!!configs?.facebook_id?.value && (
+        <FacebookPixel trackId={configs?.facebook_id?.value} />
       )}
       <ListenPageChanges />
       {
