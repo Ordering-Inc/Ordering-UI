@@ -214,7 +214,7 @@ export const BusinessItemAccordion = (props) => {
           style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
           isCustomMode={isCustomMode}
         >
-          {isCheckout && handleChangeStore && (
+          {handleChangeStore && (
             <BusinessInfo>
               <ContentInfo className='info'>
                 <span
