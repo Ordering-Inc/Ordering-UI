@@ -106,4 +106,6 @@ export const Divider = styled.div`
   width: 100%;
 `
 
-export const OrderProgressWrapper = styled.div``
+export const OrderProgressWrapper = styled.div`
+  padding: 45px 20px;
+`

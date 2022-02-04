@@ -66,6 +66,10 @@ export const OrderBill = styled.div`
 export const CouponContainer = styled.div`
   width: 100%;
   margin: 10px;
+
+  input, button {
+    border-radius: 7.6px;
+  }
 `
 
 export const CheckoutAction = styled.div`

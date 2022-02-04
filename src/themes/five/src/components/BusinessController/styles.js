@@ -37,6 +37,10 @@ export const WrapperBusinessCard = styled.div`
 
 export const BusinessHero = styled.div`
   border-radius: 10px;
+
+  > span {
+    display: flex;
+  }
 `
 
 const BusinessHeaderStyled = styled.div`
@@ -149,24 +153,16 @@ export const BusinessContent = styled.div`
 
 export const WrapperBusinessLogo = styled.div`
   align-self: center;
-  width: 65px;
-  height: 65px;
-  min-height: 65px;
-  min-width: 65px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
 
   ${({ isSkeleton }) => isSkeleton && css`
-    width: auto;
     height: auto;
+    width: auto;
+    > span {
+      display: flex;
+    }
   `}
-
-  @media (min-width: 481px){
-    min-width: 75px;
-    min-height: 75px;
-    height: 75px;
-    width: 75px;
-  }
 `
 
 const BusinessLogoStyled = styled.div`
@@ -183,8 +179,10 @@ const BusinessLogoStyled = styled.div`
   border-radius: 7.6px;
 
   @media (min-width: 481px){
-    width: 100%;
-    height: 100%;
+    min-width: 75px;
+    min-height: 75px;
+    height: 75px;
+    width: 75px;
     min-height: 75px;
   }
 `
@@ -264,10 +262,15 @@ export const Medadata = styled.div`
   font-size: 12px;
   color: #909BA9;
   flex-wrap: wrap;
+
   ${({ isCustomerMode }) => isCustomerMode && css`
     > div {
       flex-direction: column;
     }
+  `}
+  ${({ isSkeleton }) => isSkeleton && css`
+    display: flex;
+    justify-content: space-between;
   `}
   p {
     color: #909BA9;

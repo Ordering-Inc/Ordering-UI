@@ -89,11 +89,8 @@ export const OrdersListContainer = styled.div`
   padding: 15px 15px 0px 15px;
   box-sizing: border-box;
   overflow-x: hidden;
-
-  @media (min-width: 1024px) and (max-width: 1300px) {
-    height: calc(100% - 230px);
-  }
 `
+
 export const OrderCard = styled.div`
   position: relative;
   cursor: pointer;

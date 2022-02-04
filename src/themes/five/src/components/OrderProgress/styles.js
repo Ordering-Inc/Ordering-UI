@@ -9,7 +9,6 @@ export const OrderProgressContainer = styled.div`
   background: #FFFFFF;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
-  margin: 45px 20px;
   padding: 15px;
 
   > div {
