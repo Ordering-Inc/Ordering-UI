@@ -1,5 +1,9 @@
-import React, { useEffect } from 'react';
-import { CartStoresListing as StoresListingController, useOrder } from 'ordering-components'
+import React from 'react';
+import {
+  CartStoresListing as StoresListingController,
+  useOrder,
+  useLanguage
+} from 'ordering-components'
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { BusinessController } from '../BusinessController'
@@ -15,17 +19,11 @@ const CartStoresListingUI = (props) => {
     storesState,
     changeStoreState,
     handleCartStoreChange,
-    onClose
   } = props
 
+  const [, t] = useLanguage()
   const [orderState] = useOrder()
   const businessId = Object.values(orderState.carts).find(_cart => _cart?.uuid === props.cartuuid)?.business_id ?? {}
-
-  useEffect(() => {
-    if (!changeStoreState.loading && businessIdSelect === businessId) {
-      onClose && onClose()
-    }
-  }, [businessId, changeStoreState]);
 
   return(
     <Container>
