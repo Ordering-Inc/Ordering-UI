@@ -332,7 +332,8 @@ const BusinessesListingUI = (props) => {
 export const BusinessesListing = (props) => {
   const businessListingProps = {
     ...props,
-    UIComponent: BusinessesListingUI
+    UIComponent: BusinessesListingUI,
+    paginationSettings: { initialPage: 1, pageSize: 25, controlType: 'infinity' }
   }
 
   return <BusinessListController {...businessListingProps} />
