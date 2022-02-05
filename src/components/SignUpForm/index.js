@@ -60,7 +60,8 @@ const SignUpFormUI = (props) => {
     saveCustomerUser,
     fieldsNotValid,
     signupData,
-    enableReCaptcha
+    enableReCaptcha,
+    setUserEmail
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -424,10 +425,11 @@ const SignUpFormUI = (props) => {
             <>
               {Object.keys(configs).length > 0 ? (
                 <SocialButtons isPopup={isPopup}>
-                  { isFacebookLogin && configs?.facebook_id?.value && (
+                  {isFacebookLogin && configs?.facebook_id?.value && (
                     <FacebookLoginButton
                       appId={configs?.facebook_id?.value}
                       handleSuccessFacebookLogin={handleSuccessFacebook}
+                      setUserEmail={setUserEmail}
                     />
                   )}
                   {configs?.apple_login_client_id?.value && (

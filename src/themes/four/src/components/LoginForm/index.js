@@ -63,7 +63,8 @@ const LoginFormUI = (props) => {
     checkPhoneCodeState,
     loginTab,
     isPopup,
-    credentials
+    credentials,
+    setUserEmail
   } = props
   const numOtpInputs = 4
   const [, t] = useLanguage()
@@ -430,6 +431,7 @@ const LoginFormUI = (props) => {
                     <FacebookLoginButton
                       appId={configs?.facebook_id?.value}
                       handleSuccessFacebookLogin={handleSuccessFacebook}
+                      setUserEmail={setUserEmail}
                     />
                   )}
                     {configs?.apple_login_client_id?.value &&

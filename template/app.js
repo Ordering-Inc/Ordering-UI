@@ -6,7 +6,7 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, Analytics, useConfig, FacebookPixel } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useApi, Analytics, useConfig, FacebookPixel } from 'ordering-components'
 
 import { Header } from '../src/components/Header'
 import { Footer } from '../src/components/Footer'
@@ -36,14 +36,16 @@ import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
 
 export const App = () => {
-  const [{ auth, user, loading }, { login }] = useSession()
+  const [{ auth, user, loading, token }, { login }] = useSession()
   const [orderStatus] = useOrder()
   const [{ configs }] = useConfig()
   const [, t] = useLanguage()
+  const [ordering] = useApi()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [userEmail, setUserEmail] = useState(null)
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
 
   const closeAlert = () => {
@@ -65,6 +67,12 @@ export const App = () => {
     login({
       user,
       token: user?.session?.access_token
+    })
+  }
+
+  const saveEmail = async () => {
+    await ordering.users(user?.id).save({ email: userEmail }, {
+      accessToken: token
     })
   }
 
@@ -91,6 +99,12 @@ export const App = () => {
       }
     }
   }, [configs, loaded])
+
+  useEffect(() => {
+    if (!user?.email && user?.id === orderStatus?.options?.user_id && userEmail) {
+      saveEmail()
+    }
+  }, [orderStatus?.options?.user_id, user?.id, userEmail])
 
   return (
     <>
@@ -143,6 +157,7 @@ export const App = () => {
                             useChekoutFileds
                             handleSuccessSignup={handleSuccessSignup}
                             isRecaptchaEnable
+                            setUserEmail={setUserEmail}
                           />
                         )
                         : <Redirect to='/' />
@@ -157,6 +172,7 @@ export const App = () => {
                             elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                             isRecaptchaEnable
+                            setUserEmail={setUserEmail}
                           />
                         )
                         : (
@@ -179,6 +195,7 @@ export const App = () => {
                             elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
                             useLoginByCellphone
                             isRecaptchaEnable
+                            setUserEmail={setUserEmail}
                           />
                         )
                         : (

@@ -62,7 +62,8 @@ const LoginFormUI = (props) => {
     loginTab,
     isPopup,
     credentials,
-    enableReCaptcha
+    enableReCaptcha,
+    setUserEmail
   } = props
   const numOtpInputs = 4
   const [, t] = useLanguage()
@@ -308,14 +309,14 @@ const LoginFormUI = (props) => {
               isPopup={isPopup}
             >
               {
-              props.beforeMidElements?.map((BeforeMidElements, i) => (
-                <React.Fragment key={i}>
-                  {BeforeMidElements}
-                </React.Fragment>))
+                props.beforeMidElements?.map((BeforeMidElements, i) => (
+                  <React.Fragment key={i}>
+                    {BeforeMidElements}
+                  </React.Fragment>))
               }
               {
-              props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-                <BeforeMidComponents key={i} {...props} />))
+                props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+                  <BeforeMidComponents key={i} {...props} />))
               }
               {useLoginByEmail && loginTab === 'email' && (
                 <Input
@@ -333,7 +334,7 @@ const LoginFormUI = (props) => {
                 <InputPhoneNumber
                   value={credentials?.cellphone}
                   setValue={handleChangePhoneNumber}
-                  handleIsValid={() => {}}
+                  handleIsValid={() => { }}
                 />
               )}
 
@@ -397,14 +398,14 @@ const LoginFormUI = (props) => {
                 </WrapperPassword>
               )}
               {
-              props.afterMidElements?.map((MidElement, i) => (
-                <React.Fragment key={i}>
-                  {MidElement}
-                </React.Fragment>))
+                props.afterMidElements?.map((MidElement, i) => (
+                  <React.Fragment key={i}>
+                    {MidElement}
+                  </React.Fragment>))
               }
               {
-              props.afterMidComponents?.map((MidComponent, i) => (
-                <MidComponent key={i} {...props} />))
+                props.afterMidComponents?.map((MidComponent, i) => (
+                  <MidComponent key={i} {...props} />))
               }
               {!loginWithOtpState && (
                 <RedirectLink isPopup={isPopup}>
@@ -456,14 +457,15 @@ const LoginFormUI = (props) => {
             Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
                 {(configs?.facebook_login?.value === 'true' ||
-                configs?.facebook_login?.value === '1') &&
-                configs?.facebook_id?.value &&
-              (
-                <FacebookLoginButton
-                  appId={configs?.facebook_id?.value}
-                  handleSuccessFacebookLogin={handleSuccessFacebook}
-                />
-              )}
+                  configs?.facebook_login?.value === '1') &&
+                  configs?.facebook_id?.value &&
+                  (
+                    <FacebookLoginButton
+                      appId={configs?.facebook_id?.value}
+                      handleSuccessFacebookLogin={handleSuccessFacebook}
+                      setUserEmail={setUserEmail}
+                    />
+                  )}
                 {configs?.apple_login_client_id?.value &&
               (
                 <AppleLogin
