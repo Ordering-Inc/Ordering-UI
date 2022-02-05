@@ -19,7 +19,7 @@ var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
 
 var _VerticalOrdersLayout = require("../../../../../components/VerticalOrdersLayout");
 
-var _NotFoundSource = require("../NotFoundSource");
+var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _styledComponents = require("styled-components");
 
@@ -266,7 +266,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }, props));
   }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
     isBusinessesPage: isBusinessesPage
-  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('PREORDERS', 'Preorders')))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true
@@ -344,7 +344,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
 var OrdersOption = function OrdersOption(props) {
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersOptionUI,
-    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21] : [1, 2, 5, 6, 10, 11, 12, 16, 17],
+    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 14, 15, 18, 19, 20, 21] : props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 16, 17] : [13],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,

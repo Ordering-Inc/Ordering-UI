@@ -147,7 +147,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     className: "review"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, {
     className: "start"
-  }), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), !loading ? /*#__PURE__*/_react.default.createElement("div", {
     className: "preorder-Reviews"
