@@ -7,7 +7,6 @@ import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 import { SearchBar } from '../SearchBar'
 import { BusinessReviews } from '../BusinessReviews'
-import { MomentContent } from '../MomentContent'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
 import { useUtils, useOrder, useLanguage } from 'ordering-components'
@@ -28,6 +27,7 @@ import {
   BusinessDetail,
   BusinessMoreDetail
 } from './styles'
+import { BusinessPreorder } from '../BusinessPreorder'
 
 const types = ['food', 'laundry', 'alcohol', 'groceries']
 
@@ -220,12 +220,14 @@ export const BusinessBasicInformation = (props) => {
           />
         </Modal>
         <Modal
-          width='700px'
           open={isPreOrder}
+          width='760px'
           onClose={() => setIsPreOrder(false)}
-          padding='20px'
         >
-          <MomentContent />
+          <BusinessPreorder
+            business={business}
+            handleClick={() => setIsPreOrder(false)}
+          />
         </Modal>
       </BusinessContainer>
       {props.afterComponents?.map((AfterComponent, i) => (

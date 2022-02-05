@@ -336,7 +336,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
     business: preorderBusiness,
-    handleClick: handleBusinessClick
+    handleClick: handleBusinessClick,
+    showButton: true
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,

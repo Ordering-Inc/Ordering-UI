@@ -277,6 +277,7 @@ const BusinessesListingUI = (props) => {
           <BusinessPreorder
             business={preorderBusiness}
             handleClick={handleBusinessClick}
+            showButton
           />
         </Modal>
 

@@ -23,8 +23,6 @@ var _SearchBar = require("../SearchBar");
 
 var _BusinessReviews = require("../BusinessReviews");
 
-var _MomentContent = require("../MomentContent");
-
 var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCircle"));
 
 var _orderingComponents = require("ordering-components");
@@ -34,6 +32,8 @@ var _utils = require("../../../../../utils");
 var _Select = require("../../styles/Select");
 
 var _styles = require("./styles");
+
+var _BusinessPreorder = require("../BusinessPreorder");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -215,13 +215,17 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     businessName: business.name,
     stars: (_business$reviews4 = business.reviews) === null || _business$reviews4 === void 0 ? void 0 : _business$reviews4.total
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "700px",
     open: isPreOrder,
+    width: "760px",
     onClose: function onClose() {
       return setIsPreOrder(false);
-    },
-    padding: "20px"
-  }, /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
+    business: business,
+    handleClick: function handleClick() {
+      return setIsPreOrder(false);
+    }
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

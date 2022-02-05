@@ -101,7 +101,6 @@ const CheckoutUI = (props) => {
     }
   })
 
-
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
       handlerClickPlaceOrder && handlerClickPlaceOrder()
@@ -364,6 +363,7 @@ const CheckoutUI = (props) => {
                   handleOrderRedirect={handleOrderRedirect}
                   isCustomerMode={isCustomerMode}
                   paySelected={paymethodSelected}
+                  handlePlaceOrder={handlePlaceOrder}
                 />
               </PaymentMethodContainer>
             )}

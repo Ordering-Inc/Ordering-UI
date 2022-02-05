@@ -4,29 +4,89 @@ export const PaymentMethodsContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 15px;
+  margin-top: 20px;
 `
 
 export const PaymentMethodsList = styled.div`
   display: flex;
-  justify-content: flex-start;
   flex-wrap: wrap;
-
-  @media (min-width: 841px) {
-    justify-content: space-around;
-  }
+  width: calc(100% + 15px);
+  margin-left: -15px;
 `
 
-export const PayCardOption = styled.div`
-  white-space: nowrap;
-  color: ${props => props.theme.colors.grayDark};
+export const PayCard = styled.div`
+  width: calc(50% - 30px);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  text-align: center;
 
-  ${({ isSkeleton }) => isSkeleton && css`
-    span {
-      width: 100%;
-      border-radius: 30px;
-    }
+  ${props => props.isDisabled && css`
+    pointer-events: none;
   `}
+
+  > div {
+    max-width: 88px;
+    width: 100%;
+    border: 1px solid #DEE2E6;
+    border-radius: 7.6px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+
+    > svg {
+      font-size: 25px;
+      path {
+        fill: #DEE2E6;
+      }
+    }
+  }
+
+  p {
+    margin: 0px;
+    font-size: 13px;
+    text-align: center;
+    color: #DEE2E6;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 351px) {
+    width: calc(33% - 30px);
+  }
+
+  @media (min-width: 513px) {
+    width: calc(25% - 30px);
+  }
+
+  @media (min-width: 768px) {
+    width: calc(25% - 30px);
+  }
+
+  @media (min-width: 1200px) {
+    width: calc(20% - 30px);
+  }
+
+  &.active {
+    > div {
+      border: 1px solid ${props => props.theme.colors.primary};
+      svg path {
+        fill: ${props => props.theme.colors.primary};
+      }
+    }
+    p {
+      color: ${props => props.theme.colors.headingColor};
+    }
+  }
+
+  /* &:not(.active) {
+    border: ${({ isSkeleton }) => isSkeleton ? '0' : '1px solid #EAEAEA'};
+  } */
 `
 
 export const PayCardSelected = styled.div`
@@ -55,31 +115,5 @@ export const CardItemContent = styled.div`
       margin-left: 10px;
       margin-right: 0;
     `}
-  }
-`
-
-export const WrapPaymethodSelect = styled.div`
-  width: 100%;
-  > div {
-    width: 100%;
-    background-color: #F8F9FA!important;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-    height: 44px;
-    border: none;
-    border-radius: 7.6px;
-    color: #909BA9 !important;
-
-    > div:first-child {
-      padding-top: 5px;
-      padding-bottom: 5px;
-      justify-content: space-between;
-    }
-    > div#list {
-      width: 100%;
-      background-color: #F8F9FA!important;
-      border: 1px solid #F8F9FA;
-      border-radius: 7.6px;
-      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-    }
   }
 `
