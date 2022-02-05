@@ -39,7 +39,11 @@ var SingleProductCard = function SingleProductCard(props) {
       isSoldOut = props.isSoldOut,
       isSkeleton = props.isSkeleton,
       onProductClick = props.onProductClick,
-      isCartOnProductsList = props.isCartOnProductsList;
+      isCartOnProductsList = props.isCartOnProductsList,
+      useCustomFunctionality = props.useCustomFunctionality,
+      onCustomClick = props.onCustomClick,
+      customText = props.customText,
+      customStyle = props.customStyle;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -85,14 +89,17 @@ var SingleProductCard = function SingleProductCard(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {
     soldOut: isSoldOut || maxProductQuantity <= 0,
     onClick: function onClick() {
-      return !isSkeleton && onProductClick(product);
+      return !isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product) || useCustomFunctionality && onCustomClick && onCustomClick();
     },
-    isCartOnProductsList: isCartOnProductsList
-  }, /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
+    isCartOnProductsList: isCartOnProductsList,
+    style: useCustomFunctionality && customStyle
+  }, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product === null || product === void 0 ? void 0 : product.price))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)), (product === null || product === void 0 ? void 0 : product.offer_price) && /*#__PURE__*/_react.default.createElement("span", {
+    className: "off-price"
+  }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
@@ -103,7 +110,12 @@ var SingleProductCard = function SingleProductCard(props) {
   })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 75,
     width: 75
-  }), (isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_styles.SoldOut, null, t('SOLD_OUT', 'SOLD OUT'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), (isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_styles.SoldOut, null, t('SOLD_OUT', 'SOLD OUT'))), useCustomFunctionality && customText && /*#__PURE__*/_react.default.createElement("span", {
+    style: {
+      fontSize: 16,
+      fontWeight: 500
+    }
+  }, customText)), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

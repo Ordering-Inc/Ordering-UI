@@ -19,7 +19,11 @@ export const SingleProductCard = (props) => {
     isSoldOut,
     isSkeleton,
     onProductClick,
-    isCartOnProductsList
+    isCartOnProductsList,
+    useCustomFunctionality,
+    onCustomClick,
+    customText,
+    customStyle
   } = props
 
   const [, t] = useLanguage()
@@ -53,32 +57,43 @@ export const SingleProductCard = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <CardContainer
         soldOut={isSoldOut || maxProductQuantity <= 0}
-        onClick={() => !isSkeleton && onProductClick(product)}
+        onClick={() => ((!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product)) || (useCustomFunctionality && onCustomClick && onCustomClick()))}
         isCartOnProductsList={isCartOnProductsList}
+        style={useCustomFunctionality && customStyle}
       >
-        <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
-          {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-          {!isSkeleton ? (
-            <PriceWrapper>
-              <span>{parsePrice(product?.price)}</span>
-            </PriceWrapper>
-          ) : (
-            <Skeleton width={100} />
-          )}
-          {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
-        </CardInfo>
-        {!isSkeleton ? (
-          <WrapLogo>
-            <CardLogo
-              className='image'
-              soldOut={isSoldOut || maxProductQuantity <= 0}
-              bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
-            />
-          </WrapLogo>
-        ) : (
-          <Skeleton height={75} width={75} />
+        {!useCustomFunctionality && (
+          <>
+            <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
+              {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
+              {!isSkeleton ? (
+                <PriceWrapper>
+                  <span>{parsePrice(product?.price)}</span>
+                  {product?.offer_price && (
+                    <span className='off-price'>{parsePrice(product?.offer_price)}</span>
+                  )}
+                </PriceWrapper>
+              ) : (
+                <Skeleton width={100} />
+              )}
+              {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+            </CardInfo>
+            {!isSkeleton ? (
+              <WrapLogo>
+                <CardLogo
+                  className='image'
+                  soldOut={isSoldOut || maxProductQuantity <= 0}
+                  bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
+                />
+              </WrapLogo>
+            ) : (
+              <Skeleton height={75} width={75} />
+            )}
+            {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
+          </>
         )}
-        {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
+        {useCustomFunctionality && customText && (
+          <span style={{ fontSize: 16, fontWeight: 500 }}>{customText}</span>
+        )}
       </CardContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

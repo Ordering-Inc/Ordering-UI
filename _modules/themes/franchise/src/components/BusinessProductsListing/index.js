@@ -45,7 +45,7 @@ var _Cart = require("../Cart");
 
 var _AiOutlineShoppingCart = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineShoppingCart"));
 
-var _HiArrowNarrowLeft = _interopRequireDefault(require("@meronex/icons/hi/HiArrowNarrowLeft"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -288,7 +288,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, /*#__PURE__*/_react.default.createElement(_HiArrowNarrowLeft.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
     onClick: function onClick() {
       return handleGoToBusinessList();
     }

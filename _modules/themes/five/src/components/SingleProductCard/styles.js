@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% - 40px);\n  padding: 10px;\n  margin: 10px;\n  border-radius: 7.6px;\n  cursor: pointer;\n  position: relative;\n  border: 1px solid #E9ECEF;\n\n  background: ", ";\n\n  ", "\n"])), function (_ref) {
+var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  padding: 10px;\n  margin: 10px 0px;\n  border-radius: 7.6px;\n  cursor: pointer;\n  position: relative;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n\n  background: ", ";\n\n  @media (min-width: 576px) {\n    margin: 10px;\n    width: calc(100% - 40px);\n  }\n\n  ", "\n"])), function (_ref) {
   var soldOut = _ref.soldOut;
   return soldOut ? '#6c757d33' : '#FFF';
 }, function (_ref2) {

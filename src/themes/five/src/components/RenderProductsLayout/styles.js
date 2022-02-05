@@ -14,12 +14,9 @@ export const WrapContent = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
 
   @media (min-width: 381px) {
-    padding: 15px;
+    padding: 0px;
   }
 
-  @media (min-width: 1200px) {
-    padding: 0;
-  }
   &#businessProductList {
     > div {
       margin-top: 30px;

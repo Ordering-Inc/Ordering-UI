@@ -78,14 +78,14 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <h2 className='bold'>{business?.name}</h2>
               ) : (
-                <Skeleton width={100} />
+                <Skeleton width={200} height={35} />
               )}
               {!loading ? (
                 <p className='type'>{getBusinessType()}</p>
               ) : (
-                <Skeleton width={100} />
+                <Skeleton width={150} />
               )}
-              <BusinessDetail>
+              <BusinessDetail isSkeleton={loading}>
                 {orderState?.options.type === 1 && (
                   <>
                     {!loading ? (
@@ -97,7 +97,7 @@ export const BusinessBasicInformation = (props) => {
                         <span className='dot'>•</span>
                       </>
                     ) : (
-                      <Skeleton width={70} />
+                      <Skeleton width={50} />
                     )}
                   </>
                 )}
@@ -120,7 +120,7 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 ) : (
-                  <Skeleton width={70} />
+                  <Skeleton width={50} />
                 )}
 
                 {!loading ? (
@@ -132,7 +132,7 @@ export const BusinessBasicInformation = (props) => {
                   </>
 
                 ) : (
-                  <Skeleton width={70} />
+                  <Skeleton width={50} />
                 )}
                 {!loading ? (
                   <div className='review'>
@@ -140,7 +140,7 @@ export const BusinessBasicInformation = (props) => {
                     <p>{business?.reviews?.total}</p>
                   </div>
                 ) : (
-                  <Skeleton width={100} />
+                  <Skeleton width={50} />
                 )}
               </BusinessDetail>
               {
@@ -151,7 +151,7 @@ export const BusinessBasicInformation = (props) => {
                     {business.reviews?.reviews && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
                   </div>
                 ) : (
-                  <Skeleton width={100} />
+                  <Skeleton width={150} />
                 )
               }
             </BusinessInfoItem>
