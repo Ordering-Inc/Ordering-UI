@@ -4,7 +4,7 @@ import { OrderList, useLanguage, useOrder } from 'ordering-components'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
-import { NotFoundSource } from '../NotFoundSource'
+import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { useTheme } from 'styled-components'
 
@@ -127,7 +127,7 @@ const OrdersOptionUI = (props) => {
             <h1>
               {titleContent || (activeOrders
                 ? t('ACTIVE', 'Active')
-                : (pastOrders ? t('PAST', 'Past') : t('PREORDERS', 'Preorders')))}
+                : (pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))}
             </h1>
           </OptionTitle>
           {!loading && orders.length === 0 && (
@@ -236,8 +236,8 @@ export const OrdersOption = (props) => {
     ...props,
     UIComponent: OrdersOptionUI,
     orderStatus: props.activeOrders
-      ? [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21]
-      : [1, 2, 5, 6, 10, 11, 12, 16, 17],
+      ? [0, 3, 4, 7, 8, 9, 14, 15, 18, 19, 20, 21]
+      : (props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 16, 17] : [13]),
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,

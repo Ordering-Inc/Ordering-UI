@@ -137,7 +137,7 @@ export const BusinessBasicInformation = (props) => {
                 {!loading ? (
                   <div className='review'>
                     <StarFill className='start' />
-                    <span>{business?.reviews?.total}</span>
+                    <p>{business?.reviews?.total}</p>
                   </div>
                 ) : (
                   <Skeleton width={100} />

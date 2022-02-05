@@ -222,11 +222,17 @@ export const BusinessDetail = styled.div`
     align-items: center;
 
     svg {
-      font-size: 19px;
+      font-size: 15px;
+      margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0px;
+      `}
     }
 
-    span {
+    p {
       font-size: 14px;
+      margin: 0px;
     }
   }
 
