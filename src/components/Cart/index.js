@@ -149,17 +149,11 @@ const CartUI = (props) => {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_OFFER', 'Are you sure that you want to delete the offer?'),
-      offerId: id
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleRemoveOfferClick(id)
+      }
     })
-  }
-
-  const handleOnAccept = () => {
-    handleRemoveOfferClick(confirm?.offerId)
-    setConfirm({ ...confirm, open: false, error: false })
-  }
-
-  const handleClose = () => {
-    setConfirm({ ...confirm, open: false, error: false, id: null })
   }
 
   return (
@@ -472,16 +466,6 @@ const CartUI = (props) => {
             />
           )}
         </CartSticky>
-        <Confirm
-          title={t('OFFER', 'Offer')}
-          content={confirm?.content}
-          acceptText={t('ACCEPT', 'Accept')}
-          open={confirm?.open}
-          onClose={handleClose}
-          onCancel={!confirm?.error ? () => setConfirm({ ...confirm, open: false, error: false }) : null}
-          onAccept={handleOnAccept}
-          closeOnBackdrop={false}
-        />
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
