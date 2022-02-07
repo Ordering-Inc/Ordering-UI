@@ -59,7 +59,7 @@ const CartUI = (props) => {
   const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
 
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null, id: null, name: null })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null, id: null, title: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
   const [openUpselling, setOpenUpselling] = useState(false)
@@ -76,7 +76,7 @@ const CartUI = (props) => {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
-      name: null,
+      title: null,
       handleOnAccept: () => {
         removeProduct(product, cart)
         setConfirm({ ...confirm, open: false })
@@ -119,7 +119,7 @@ const CartUI = (props) => {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_PRODUCTS', 'Are you sure that you want to delete all products?'),
-      name: null,
+      title: null,
       handleOnAccept: () => {
         clearCart(cart?.uuid)
         setConfirm({ ...confirm, open: false })
@@ -151,7 +151,7 @@ const CartUI = (props) => {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_OFFER', 'Are you sure that you want to delete the offer?'),
-      name: t('OFFER', 'Offer'),
+      title: t('OFFER', 'Offer'),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
         handleRemoveOfferClick(id)
@@ -415,12 +415,12 @@ const CartUI = (props) => {
             )}
           </BusinessItemAccordion>
           <Confirm
-            title={confirm?.name ?? t('PRODUCT', 'Product')}
+            title={confirm?.title ?? t('PRODUCT', 'Product')}
             content={confirm.content}
             acceptText={t('ACCEPT', 'Accept')}
             open={confirm.open}
-            onClose={() => setConfirm({ ...confirm, open: false, name: null })}
-            onCancel={() => setConfirm({ ...confirm, open: false, name: null })}
+            onClose={() => setConfirm({ ...confirm, open: false, title: null })}
+            onCancel={() => setConfirm({ ...confirm, open: false, title: null })}
             onAccept={confirm.handleOnAccept}
             closeOnBackdrop={false}
           />
