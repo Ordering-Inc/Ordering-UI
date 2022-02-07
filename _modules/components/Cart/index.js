@@ -72,7 +72,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartUI = function CartUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers4, _cart$offers5, _cart$offers5$filter, _orderState$options, _cart$offers6, _cart$offers7, _cart$offers7$filter, _configs$driver_tip_t, _configs$driver_tip_u, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers4, _cart$offers5, _cart$offers5$filter, _orderState$options, _cart$offers6, _cart$offers7, _cart$offers7$filter, _configs$driver_tip_t, _configs$driver_tip_u, _confirm$title, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
 
   var currentCartUuid = props.currentCartUuid,
       cart = props.cart,
@@ -125,7 +125,8 @@ var CartUI = function CartUI(props) {
     open: false,
     content: null,
     handleOnAccept: null,
-    id: null
+    id: null,
+    title: null
   }),
       _useState2 = _slicedToArray(_useState, 2),
       confirm = _useState2[0],
@@ -170,6 +171,7 @@ var CartUI = function CartUI(props) {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
+      title: null,
       handleOnAccept: function handleOnAccept() {
         removeProduct(product, cart);
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
@@ -227,6 +229,7 @@ var CartUI = function CartUI(props) {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_PRODUCTS', 'Are you sure that you want to delete all products?'),
+      title: null,
       handleOnAccept: function handleOnAccept() {
         clearCart(cart === null || cart === void 0 ? void 0 : cart.uuid);
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
@@ -270,24 +273,14 @@ var CartUI = function CartUI(props) {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_OFFER', 'Are you sure that you want to delete the offer?'),
-      offerId: id
+      title: t('OFFER', 'Offer'),
+      handleOnAccept: function handleOnAccept() {
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+        handleRemoveOfferClick(id);
+      }
     });
-  };
-
-  var handleOnAccept = function handleOnAccept() {
-    handleRemoveOfferClick(confirm === null || confirm === void 0 ? void 0 : confirm.offerId);
-    setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-      open: false,
-      error: false
-    }));
-  };
-
-  var handleClose = function handleClose() {
-    setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-      open: false,
-      error: false,
-      id: null
-    }));
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -473,18 +466,20 @@ var CartUI = function CartUI(props) {
     },
     disabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address)
   }, !(cart !== null && cart !== void 0 && cart.valid_address) ? t('OUT_OF_COVERAGE', 'Out of Coverage') : !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : !openUpselling !== canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('PRODUCT', 'Product'),
+    title: (_confirm$title = confirm === null || confirm === void 0 ? void 0 : confirm.title) !== null && _confirm$title !== void 0 ? _confirm$title : t('PRODUCT', 'Product'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,
     onClose: function onClose() {
       return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
+        open: false,
+        title: null
       }));
     },
     onCancel: function onCancel() {
       return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
+        open: false,
+        title: null
       }));
     },
     onAccept: confirm.handleOnAccept,
@@ -534,21 +529,7 @@ var CartUI = function CartUI(props) {
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('OFFER', 'Offer'),
-    content: confirm === null || confirm === void 0 ? void 0 : confirm.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: confirm === null || confirm === void 0 ? void 0 : confirm.open,
-    onClose: handleClose,
-    onCancel: !(confirm !== null && confirm !== void 0 && confirm.error) ? function () {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false,
-        error: false
-      }));
-    } : null,
-    onAccept: handleOnAccept,
-    closeOnBackdrop: false
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
