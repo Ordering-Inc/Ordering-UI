@@ -93,6 +93,7 @@
     "react-phone-number-input": "^3.1.6",
     "react-popper": "^2.2.3",
     "react-select": "^4.3.1",
+    "react-smartbanner": "^5.1.4",
     "react-to-print": "^2.12.3",
     "smoothscroll-polyfill": "^0.4.4",
     "styled-components": "^5.1.1",
