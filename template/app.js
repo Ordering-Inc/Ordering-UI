@@ -6,10 +6,10 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, Analytics, useConfig, FacebookPixel } from 'ordering-components'
+import { useSession, useLanguage, useOrder, Analytics, useConfig } from 'ordering-components'
+import {Header} from '../src/themes/five/src/components/Header'
+import {Footer} from '../src/themes/five/src/components/Footer'
 
-import { Header } from '../src/components/Header'
-import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
@@ -19,16 +19,13 @@ import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { CheckoutPage } from './pages/Checkout'
 import { Cms } from './pages/Cms'
-import { ForgotPassword } from './pages/ForgotPassword'
 import { HomePage } from './pages/Home'
-import { Login } from './pages/Login'
 import { MyOrders } from './pages/MyOrders'
 import { OrderDetailsPage } from './pages/OrderDetails'
 import { PageNotFound } from './pages/PageNotFound'
 import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
-import { ResetPassword } from './pages/ResetPassword'
-import { SignUp } from './pages/SignUp'
+import { MessagesList } from './pages/MessagesList'
 import { Help } from './pages/Help'
 
 import { ScrollToTop } from './components/ScrollToTop'
@@ -61,13 +58,6 @@ export const App = () => {
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const isFooterPage = location.pathname === '/pages/footer'
 
-  const handleSuccessSignup = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
-  }
-
   useEffect(() => {
     if (!loaded && !orderStatus.loading) {
       setLoaded(true)
@@ -94,11 +84,8 @@ export const App = () => {
 
   return (
     <>
-      {!!configs?.track_id_google_analytics?.value && (
+      {configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
-      )}
-      {!!configs?.facebook_id?.value && (
-        <FacebookPixel trackId={configs?.facebook_id?.value} />
       )}
       <ListenPageChanges />
       {
@@ -113,7 +100,6 @@ export const App = () => {
               isHome={isHome}
               location={location}
             />
-
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
@@ -133,85 +119,31 @@ export const App = () => {
                         : <HomePage />
                     }
                   </Route>
-                  <Route exact path='/signup'>
-                    {
-                      !auth
-                        ? (
-                          <SignUp
-                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-                            useLoginByCellphone
-                            useChekoutFileds
-                            handleSuccessSignup={handleSuccessSignup}
-                            isRecaptchaEnable
-                          />
-                        )
-                        : <Redirect to='/' />
-                    }
-                  </Route>
-                  <Route exact path='/login'>
-                    {
-                      !auth
-                        ? (
-                          <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                            useLoginByCellphone
-                            isRecaptchaEnable
-                          />
-                        )
-                        : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader />
-                        )
-                        )
-                    }
-                  </Route>
-                  <Route exact path='/signin'>
-                    {
-                      !auth
-                        ? (
-                          <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                            useLoginByCellphone
-                            isRecaptchaEnable
-                          />
-                        )
-                        : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader />
-                        )
-                        )
-                    }
-                  </Route>
-                  <Route exact path='/password/forgot'>
-                    {
-                      !auth ? (
-                        <ForgotPassword
-                          elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-                        />
-                      )
-                        : <Redirect to='/' />
-                    }
-                  </Route>
-                  <Route exact path='/password/reset' component={ResetPassword} />
                   <Route exact path='/profile'>
                     {auth
                       ? (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
-                      : <Redirect to='/login' />}
+                      : <Redirect to='/' />}
                   </Route>
                   <Route exact path='/profile/orders'>
                     {auth
                       ? (<MyOrders />)
-                      : <Redirect to='/login' />}
+                      : <Redirect to='/' />}
+                  </Route>
+                  <Route exact path='/messages'>
+                    {auth
+                      ? <MessagesList />
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
+                  </Route>
+                  <Route exact path='/help'>
+                    {auth
+                      ? (<Help />)
+                      : <Redirect to='/' />}
                   </Route>
                   <Route exact path='/search'>
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
@@ -230,7 +162,7 @@ export const App = () => {
                       ? <CheckoutPage />
                       : (
                         <Redirect to={{
-                          pathname: '/login',
+                          pathname: '/',
                           state: { from: location.pathname || null }
                         }}
                         />
@@ -241,7 +173,7 @@ export const App = () => {
                       ? <OrderDetailsPage />
                       : (
                         <Redirect to={{
-                          pathname: '/login',
+                          pathname: '/',
                           state: { from: location.pathname || null }
                         }}
                         />
@@ -252,17 +184,6 @@ export const App = () => {
                   </Route>
                   <Route exact path='/pages'>
                     <PagesList />
-                  </Route>
-                  <Route exact path='/help'>
-                    {auth
-                      ? <Help />
-                      : (
-                        <Redirect to={{
-                          pathname: '/login',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
-                      )}
                   </Route>
                   <Route exact path='/:store'>
                     <BusinessProductsList />

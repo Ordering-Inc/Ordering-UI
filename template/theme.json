@@ -10,17 +10,21 @@
     }
   },
   "colors": {
-    "primary": "#D83520",
-    "primaryContrast": "#FFF",
+    "primary": "#2C7BE5",
+    "primaryContrast": "#E9F2FE",
     "secundary": "#EFEFEF",
     "secundaryContrast": "#000",
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
-    "backgroundPage": "#F8F8F8",
-    "colorPage": "#333",
+    "backgroundPage": "#FFFFFF",
+    "colorPage": "#344050",
     "colorTextSignForm": "#FFFFFF",
-    "titleHomeColor": "#FFFFFF",
-    "subtitleHomeColor": "#FFFFFF",
+    "headingColor": "#344050",
+    "darkGray": "#909BA9",
+    "darkTextColor": "#344050",
+    "lightGray": "#B1BCCC",
+    "darkPrimaryColor": "#03459E",
+    "grayDividerColor": "#F8F9FA",
     "warning100": "#FFF4CC",
     "warning500": "#FFC700"
   },
@@ -36,6 +40,7 @@
     "FIND_BUSINESSES": "Find businesse",
     "ADDRESS": "Address",
     "ADDRESSES": "Addresses",
+    "WHERE_DO_WE_DELIVERY": "Where do we delivery?",
 
     "SORT_BY": "Sort By",
     "RANK": "Rank",
@@ -103,11 +108,10 @@
     "TOTAL": "Total",
     "REVIEW_ORDER": "Review your Order",
     "MY_ORDERS": "My Orders",
+    "YOUR_ORDERS": "Your Orders",
     "NOT_FOUND_ORDER": "Sorry, we couldn't find the requested order.",
     "ORDERS_REDIRECT": "Go to Orders",
     "WRITE_A_REVIEW": "Write a Review",
-    "LOGIN_WITH_CELLPHONE": "Login with Cellphone",
-    "NEW_ON_PLATFORM": "New on the Plafrom?",
-    "PHONE_NUMBER": "Phone number"
+    "ADD": "Add"
   }
 }
