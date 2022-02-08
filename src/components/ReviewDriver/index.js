@@ -173,7 +173,7 @@ const ReviewDriverUI = (props) => {
               }
             </ReviewsProgressContent>
           </ReviewsProgressWrapper>
-          <CommentsList>
+          {/* <CommentsList>
             <p>{t('COMMENTS', 'Comments')}</p>
             {
               commentsList?.map((commentItem, i) => (
@@ -190,7 +190,7 @@ const ReviewDriverUI = (props) => {
                 </CommentButton>
               ))
             }
-          </CommentsList>
+          </CommentsList> */}
         </LogoAndReviewWrapper>
         <ReviewDriverContainer onSubmit={handleSubmit(onSubmit)}>
           <Comments>

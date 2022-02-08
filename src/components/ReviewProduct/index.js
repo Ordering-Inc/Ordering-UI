@@ -101,7 +101,7 @@ const SingleProductReview = (props) => {
           </HandIconWrapper>
         </HandReviewContent>
       </HandReviewWrapper>
-      <CommentsList>
+      {/* <CommentsList>
         {
           commentsList?.map((commentItem, i) => (
             <ButtonCustomized
@@ -118,7 +118,7 @@ const SingleProductReview = (props) => {
             </ButtonCustomized>
           ))
         }
-      </CommentsList>
+      </CommentsList> */}
       <AdditionCommentsWrapper>
         <AddCommentHideShow
           onClick={() => setIsExtraComment(!isExtraComment)}

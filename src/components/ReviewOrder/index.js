@@ -160,7 +160,7 @@ const ReviewOrderUI = (props) => {
               }
             </ReviewsProgressContent>
           </ReviewsProgressWrapper>
-          <CommentsList>
+          {/* <CommentsList>
             <p>{t('COMMENTS', 'Comments')}</p>
             {
               commentsList?.map((commentItem, i) => (
@@ -177,7 +177,7 @@ const ReviewOrderUI = (props) => {
                 </CommentButton>
               ))
             }
-          </CommentsList>
+          </CommentsList> */}
         </LogoAndReviewWrapper>
         <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
           <Comments>
