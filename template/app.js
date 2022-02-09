@@ -25,6 +25,7 @@ import { OrderDetailsPage } from './pages/OrderDetails'
 import { PageNotFound } from './pages/PageNotFound'
 import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
+import { Wallets } from './pages/Wallets'
 import { MessagesList } from './pages/MessagesList'
 import { Help } from './pages/Help'
 
@@ -122,6 +123,11 @@ export const App = () => {
                   <Route exact path='/profile'>
                     {auth
                       ? (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
+                      : <Redirect to='/' />}
+                  </Route>
+                  <Route exact path='/wallets'>
+                    {auth
+                      ? (<Wallets />)
                       : <Redirect to='/' />}
                   </Route>
                   <Route exact path='/profile/orders'>

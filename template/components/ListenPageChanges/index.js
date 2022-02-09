@@ -13,6 +13,7 @@ export const ListenPageChanges = ({ children }) => {
     home: '/',
     search: '/search',
     profile: '/profile',
+    wallets: '/wallets',
     messages: '/messages',
     help: '/help',
     orders: '/profile/orders',
