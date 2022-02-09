@@ -97,9 +97,9 @@ export const App = () => {
       {!!configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
       )}
-      {/* {!!configs?.facebook_id?.value && (
+      {!!configs?.facebook_id?.value && (
         <FacebookPixel trackId={configs?.facebook_id?.value} />
-      )} */}
+      )}
       <ListenPageChanges />
       {
         !loaded && (

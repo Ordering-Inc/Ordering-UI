@@ -75,6 +75,9 @@ export const Menu = styled.div`
     border-radius: 7.6px;
     margin: 0px 10px;
     height: 40px;
+    border-color: #CCC;
+    background-color: #CCC !important;
+
     svg {
       font-size: 16px;
     }
