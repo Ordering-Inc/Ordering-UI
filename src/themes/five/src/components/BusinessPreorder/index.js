@@ -183,24 +183,24 @@ const BusinessPreorderUI = (props) => {
           </MonthYearLayer>
           <DaysSwiper left={<BsCaretLeftFill />}>
             <Swiper
-              spaceBetween={10}
+              spaceBetween={0}
               navigation
               breakpoints={{
                 0: {
                   slidesPerView: 4,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 },
                 400: {
                   slidesPerView: 5,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 },
                 550: {
                   slidesPerView: 6,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 },
                 769: {
                   slidesPerView: configs?.max_days_preorder?.value < 7 ? configs?.max_days_preorder?.value : 7,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 }
               }}
               freeMode
