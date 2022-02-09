@@ -221,24 +221,24 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
     left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
-    spaceBetween: 10,
+    spaceBetween: 0,
     navigation: true,
     breakpoints: {
       0: {
         slidesPerView: 4,
-        spaceBetween: 20
+        spaceBetween: 0
       },
       400: {
         slidesPerView: 5,
-        spaceBetween: 20
+        spaceBetween: 0
       },
       550: {
         slidesPerView: 6,
-        spaceBetween: 20
+        spaceBetween: 0
       },
       769: {
         slidesPerView: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) < 7 ? configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value : 7,
-        spaceBetween: 20
+        spaceBetween: 0
       }
     },
     freeMode: true,
