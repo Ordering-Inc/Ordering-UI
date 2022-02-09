@@ -7,17 +7,21 @@ import {
 
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { BusinessController } from '../BusinessController'
+import { SearchBar } from '../SearchBar'
 
 import {
   Container,
   ItemListing,
+  WrapperSearch
 } from './styles';
 
 const CartStoresListingUI = (props) => {
   const {
+    searchValue,
     businessIdSelect,
     storesState,
     changeStoreState,
+    handleChangeSearch,
     handleCartStoreChange,
   } = props
 
@@ -29,26 +33,27 @@ const CartStoresListingUI = (props) => {
     <Container>
       {!storesState?.loading && !storesState?.error && storesState?.result && (
         <>
-          {storesState?.result?.length > 0 ? (
-            <ItemListing>
-              {storesState?.result.map(store => (
-                <BusinessController
-                  key={store.id}
-                  isCartStore
-                  className='card'
-                  business={store}
-                  isSkeleton={changeStoreState.loading && businessIdSelect === store.id}
-                  orderType={orderState?.options?.type}
-                  disabledStoreBtn={(changeStoreState?.result?.business_id ?? businessId) === store.id}
-                  handleCartStoreClick={handleCartStoreChange}
-                />
-              ))}
-            </ItemListing>
-          ) : (
-            <NotFoundSource
-              content={t('NOT_FOUND_CART_STORES', 'No businesses to show at this time.')}
+          <WrapperSearch>
+            <SearchBar
+              onSearch={handleChangeSearch}
+              search={searchValue}
+              placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
             />
-          )}
+          </WrapperSearch>
+          <ItemListing>
+            {storesState?.result.map(store => (
+              <BusinessController
+                key={store.id}
+                isCartStore
+                className='card'
+                business={store}
+                isSkeleton={changeStoreState.loading && businessIdSelect === store.id}
+                orderType={orderState?.options?.type}
+                disabledStoreBtn={(changeStoreState?.result?.business_id ?? businessId) === store.id}
+                handleCartStoreClick={handleCartStoreChange}
+              />
+            ))}
+          </ItemListing>
         </>
       )}
 
@@ -66,9 +71,12 @@ const CartStoresListingUI = (props) => {
         </ItemListing>
       )}
 
-      {!storesState?.loading && storesState?.error && (
+      {!storesState?.loading && (storesState?.error || !storesState?.result?.length) && (
         <NotFoundSource
-          content={t('ERROR_NOT_FOUND_CART_STORES', 'Sorry, an error has occurred')}
+          content={storesState?.error
+            ? t('ERROR_NOT_FOUND_CART_STORES', 'Sorry, an error has occurred')
+            : t('NOT_FOUND_CART_STORES', 'No businesses to show at this time.')
+          }
         />
       )}
     </Container>
