@@ -13,6 +13,8 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _BusinessController = require("../BusinessController");
 
+var _SearchBar = require("../SearchBar");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -46,9 +48,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CartStoresListingUI = function CartStoresListingUI(props) {
   var _Object$values$find$b, _Object$values$find, _storesState$result;
 
-  var businessIdSelect = props.businessIdSelect,
+  var searchValue = props.searchValue,
+      businessIdSelect = props.businessIdSelect,
       storesState = props.storesState,
       changeStoreState = props.changeStoreState,
+      handleChangeSearch = props.handleChangeSearch,
       handleCartStoreChange = props.handleCartStoreChange;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -62,7 +66,11 @@ var CartStoresListingUI = function CartStoresListingUI(props) {
   var businessId = (_Object$values$find$b = (_Object$values$find = Object.values(orderState.carts).find(function (_cart) {
     return (_cart === null || _cart === void 0 ? void 0 : _cart.uuid) === props.cartuuid;
   })) === null || _Object$values$find === void 0 ? void 0 : _Object$values$find.business_id) !== null && _Object$values$find$b !== void 0 ? _Object$values$find$b : {};
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, !(storesState !== null && storesState !== void 0 && storesState.loading) && !(storesState !== null && storesState !== void 0 && storesState.error) && (storesState === null || storesState === void 0 ? void 0 : storesState.result) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (storesState === null || storesState === void 0 ? void 0 : (_storesState$result = storesState.result) === null || _storesState$result === void 0 ? void 0 : _storesState$result.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.ItemListing, null, storesState === null || storesState === void 0 ? void 0 : storesState.result.map(function (store) {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, !(storesState !== null && storesState !== void 0 && storesState.loading) && !(storesState !== null && storesState !== void 0 && storesState.error) && (storesState === null || storesState === void 0 ? void 0 : storesState.result) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    onSearch: handleChangeSearch,
+    search: searchValue,
+    placeholder: t('SEARCH_BUSINESSES', 'Search Businesses')
+  })), /*#__PURE__*/_react.default.createElement(_styles.ItemListing, null, storesState === null || storesState === void 0 ? void 0 : storesState.result.map(function (store) {
     var _orderState$options, _changeStoreState$res, _changeStoreState$res2;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
@@ -75,9 +83,7 @@ var CartStoresListingUI = function CartStoresListingUI(props) {
       disabledStoreBtn: ((_changeStoreState$res = changeStoreState === null || changeStoreState === void 0 ? void 0 : (_changeStoreState$res2 = changeStoreState.result) === null || _changeStoreState$res2 === void 0 ? void 0 : _changeStoreState$res2.business_id) !== null && _changeStoreState$res !== void 0 ? _changeStoreState$res : businessId) === store.id,
       handleCartStoreClick: handleCartStoreChange
     });
-  })) : /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('NOT_FOUND_CART_STORES', 'No businesses to show at this time.')
-  })), (storesState === null || storesState === void 0 ? void 0 : storesState.loading) && /*#__PURE__*/_react.default.createElement(_styles.ItemListing, null, _toConsumableArray(Array(4).keys()).map(function (i) {
+  }))), (storesState === null || storesState === void 0 ? void 0 : storesState.loading) && /*#__PURE__*/_react.default.createElement(_styles.ItemListing, null, _toConsumableArray(Array(4).keys()).map(function (i) {
     var _orderState$options2;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
@@ -87,8 +93,8 @@ var CartStoresListingUI = function CartStoresListingUI(props) {
       isSkeleton: true,
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
     });
-  })), !(storesState !== null && storesState !== void 0 && storesState.loading) && (storesState === null || storesState === void 0 ? void 0 : storesState.error) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_NOT_FOUND_CART_STORES', 'Sorry, an error has occurred')
+  })), !(storesState !== null && storesState !== void 0 && storesState.loading) && ((storesState === null || storesState === void 0 ? void 0 : storesState.error) || !(storesState !== null && storesState !== void 0 && (_storesState$result = storesState.result) !== null && _storesState$result !== void 0 && _storesState$result.length)) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: storesState !== null && storesState !== void 0 && storesState.error ? t('ERROR_NOT_FOUND_CART_STORES', 'Sorry, an error has occurred') : t('NOT_FOUND_CART_STORES', 'No businesses to show at this time.')
   }));
 };
 
