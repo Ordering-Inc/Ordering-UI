@@ -9,5 +9,8 @@
   },
   "socket": {
     "url": "https://socket.ordering.co"
-  }
+  },
+  "store_android_id": "",
+  "store_apple_id": "",
+  "store_kindle_id": ""
 }

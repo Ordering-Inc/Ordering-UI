@@ -14,6 +14,7 @@ import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { Alert } from '../src/components/Confirm'
+import { SmartAppBanner } from '../src/components/SmartAppBanner'
 
 import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
@@ -32,6 +33,7 @@ import { Help } from './pages/Help'
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
+import settings from './config.json'
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
@@ -94,6 +96,11 @@ export const App = () => {
           <SpinnerLoader />
         )
       }
+      <SmartAppBanner
+        storeAndroidId={settings?.store_android_id}
+        storeAppleId={settings?.store_apple_id}
+        storeKindleId={settings?.store_kindle_id}
+      />
       {
         loaded && (
           <>
