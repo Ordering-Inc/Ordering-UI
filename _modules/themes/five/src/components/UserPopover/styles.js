@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  border-radius: 7.6px;\n  padding: 7px 13px;\n  margin: 0 10px;\n\n  ", "\n\n  svg {\n    color: ", ";\n    height: 40px;\n    width: 40px;\n  }\n\n  .menu-list {\n    font-size: 16px;\n    width: auto;\n    height: auto;\n    margin-right: 20px;\n    ", "\n    color: ", ";\n  }\n\n  img {\n    width: 42px;\n    height: 42px;\n    border-radius: 7.6px;\n  }\n"])), function (_ref) {
+var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  border-radius: 7.6px;\n  padding: 7px 13px;\n  margin: 0px;\n\n  ", "\n\n  svg {\n    color: ", ";\n    height: 40px;\n    width: 40px;\n  }\n\n  .menu-list {\n    font-size: 16px;\n    width: auto;\n    height: auto;\n    margin-right: 20px;\n    ", "\n    color: ", ";\n  }\n\n  img {\n    width: 42px;\n    height: 42px;\n    border-radius: 7.6px;\n  }\n"])), function (_ref) {
   var isOpen = _ref.isOpen;
   return isOpen && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background: #F8F9FA;\n  "])));
 }, function (_ref2) {
