@@ -1,97 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useApi } from 'ordering-components'
-import { HomeHero } from '../../../src/components/HomeHero'
+import { useLanguage, useApi, useEvent } from 'ordering-components'
+import { PhoneAutocomplete } from '../../../src/themes/callcenterOriginal/src/components/PhoneAutocomplete'
 import { useHistory } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
-import Skeleton from 'react-loading-skeleton'
+import settings from '../../config.json'
 
 import {
-  HomeContainer,
-  SkeletonContainer,
-  SkeletonHeader,
-  SkeletonContent,
-  SkeletonInformation,
-  SkeletonSide
+  HomeContainer
 } from './styles'
 
 export const HomePage = (props) => {
-  const history = useHistory()
-  const [homeState, setHomeState] = useState({ body: null, loading: false, error: null })
-  const [ordering] = useApi()
-  const requestsState = {}
+  const [events] = useEvent()
 
-  const handlerFindBusiness = () => {
-    history.push('/search')
-  }
-
-  const getPage = async () => {
-    setHomeState({ ...homeState, loading: true })
-    try {
-      const source = {}
-      requestsState.page = source
-      const { content: { error, result } } = await ordering.pages('orderingHome').get({ cancelToken: source })
-      setHomeState({ ...homeState, loading: false })
-      if (!error) {
-        setHomeState({ ...homeState, body: result.body })
-      } else {
-        setHomeState({ ...homeState, error: result })
-      }
-    } catch (err) {
-      if (err.constructor.name !== 'Cancel') {
-        setHomeState({ ...homeState, loading: false, error: [err.message] })
-      }
-    }
-  }
-
-  useEffect(() => {
-    getPage()
-    return () => {
-      if (requestsState.page) {
-        requestsState.page.cancel()
-      }
-    }
-  }, [])
-
-  const homeHeroProps = {
+  const phoneProps = {
     ...props,
-    onFindBusiness: handlerFindBusiness
+    fieldsNotValid: ['password'],
+    countryCallingCode: settings.country_calling_code,
+    onRedirectPage: (page) => {
+      events.emit('go_to_page', { page })
+    }
   }
 
   return (
     <>
       <HelmetTags page='home' />
       <HomeContainer>
-        <HomeHero
-          {...homeHeroProps}
-        />
-        {
-          homeState.loading && (
-            <SkeletonContainer>
-              <SkeletonHeader>
-                <Skeleton width='100%' height='100%' />
-              </SkeletonHeader>
-              <SkeletonContent>
-                <SkeletonInformation>
-                  <Skeleton width='100%' height='100px' />
-                  <Skeleton width='100%' height='100px' />
-                  <Skeleton width='100%' height='100px' />
-                  <Skeleton width='100%' height='100px' />
-                </SkeletonInformation>
-                <SkeletonSide>
-                  <Skeleton width='100%' height='100%' />
-                </SkeletonSide>
-              </SkeletonContent>
-            </SkeletonContainer>
-          )
-        }
-        {
-          homeState.body && (
-            <div dangerouslySetInnerHTML={{
-              __html: homeState.body
-            }}
-            />
-          )
-        }
+        <PhoneAutocomplete {...phoneProps} />
       </HomeContainer>
     </>
   )

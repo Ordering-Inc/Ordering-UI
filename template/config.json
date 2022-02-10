@@ -8,5 +8,6 @@
   },
   "socket": {
     "url": "https://socket.ordering.co"
-  }
+  },
+  "country_calling_code": "+52"
 }

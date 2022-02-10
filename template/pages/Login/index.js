@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoginForm } from '../../../src/components/LoginForm'
+import { LoginForm } from '../../../src/themes/callcenterOriginal/src/components/LoginForm'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useLocation } from 'react-router-dom'
 

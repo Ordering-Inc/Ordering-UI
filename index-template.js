@@ -18,6 +18,7 @@ import logotype from './template/assets/images/logotype.svg'
 import logotypeInvert from './template/assets/images/logotype-invert.svg'
 import isotype from './template/assets/images/isotype.svg'
 import isotypeInvert from './template/assets/images/isotype-invert.svg'
+import logoCallcenter from './template/assets/images/logo-callcenter.svg'
 
 import homeHero from './template/assets/images/home-hero.png'
 import notFound from './template/assets/images/not-found.svg'
@@ -29,6 +30,7 @@ import emptyActiveOrders from './template/assets/images/empty-active-orders.svg'
 import emptyPastOrders from './template/assets/images/empty-past-orders.svg'
 import creatingOrder from './template/assets/images/order-creating.png'
 import successOrder from './template/assets/images/order-sucess.png'
+import callcenterHero from './template/assets/images/callcenter-hero.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -88,13 +90,15 @@ const logos = {
   logotype,
   logotypeInvert,
   isotype,
-  isotypeInvert
+  isotypeInvert,
+  logoCallcenter
 }
 
 theme.images = {
   logos,
   general: {
     homeHero,
+    callcenterHero,
     notFound,
     notFound404,
     notFoundLighting,
