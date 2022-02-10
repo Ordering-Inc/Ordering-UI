@@ -73,6 +73,25 @@ export const Menu = styled.div`
 
   #select-input {
     border-radius: 7.6px;
+    margin: 0px 10px;
+    height: 40px;
+    border-color: #CCC;
+    background-color: #CCC !important;
+
+    svg {
+      font-size: 16px;
+    }
+
+    > div:first-child {
+      height: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+
+      @media (min-width: 993px) {
+        padding-left: 13px;
+        padding-right: 13px;
+      }
+    }
 
     #list {
       border-radius: 7.6px;
@@ -84,7 +103,7 @@ export const Menu = styled.div`
     border: none;
     box-sizing: border-box;
     border-radius: 50px;
-    margin: 0 20px;
+    margin: 0 15px;
     flex-grow: 1;
     padding: 0 10px;
     display: flex;

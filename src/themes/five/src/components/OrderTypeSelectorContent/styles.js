@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components'
 import React from 'react'
 
-export const OrderTypeSelectorContainer = styled.div``
+export const OrderTypeSelectorContainer = styled.div`
+  padding: 0px 10px;
+`
 
 export const OrderTypeListItemContainerStyled = styled.div`
   border-radius: 7.6px;

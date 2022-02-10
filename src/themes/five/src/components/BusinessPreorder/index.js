@@ -53,7 +53,8 @@ const BusinessPreorderUI = (props) => {
     dateSelected,
     timeSelected,
     handleChangeDate,
-    handleChangeTime
+    handleChangeTime,
+    showButton
   } = props
 
   const [{ optimizeImage, parseTime }] = useUtils()
@@ -239,15 +240,17 @@ const BusinessPreorderUI = (props) => {
           ))}
         </TimeListWrapper>
       </OrderTimeWrapper>
-      <ButtonWrapper>
-        <Button
-          color='primary'
-          onClick={goToBusinessPage}
-        >
-          {t('GO_TO_MENU', 'Go to menu')}
-          <BsArrowRight />
-        </Button>
-      </ButtonWrapper>
+      {showButton && (
+        <ButtonWrapper>
+          <Button
+            color='primary'
+            onClick={goToBusinessPage}
+          >
+            {t('GO_TO_MENU', 'Go to menu')}
+            <BsArrowRight />
+          </Button>
+        </ButtonWrapper>
+      )}
       {orderState?.loading && (
         <Layer>
           {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (

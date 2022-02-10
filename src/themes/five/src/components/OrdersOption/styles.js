@@ -270,10 +270,6 @@ export const BusinessInformation = styled.div`
     white-space: nowrap;
   }
 
-  p[name='order_number']{
-      display: none;
-    }
-
   p[name='view_order'] {
     color: ${props => props.theme.colors.primary};
     cursor: pointer;
@@ -283,7 +279,7 @@ export const BusinessInformation = styled.div`
 
   @media (min-width: 480px){
     h2 {
-    font-size: 14px;
+    font-size: 16px;
     margin-block-end: 0.1em;
     margin-block-start: 0.1em;
     }
@@ -292,16 +288,12 @@ export const BusinessInformation = styled.div`
         font-size: 0.9em;
       `}
     }
-    p[name='order_number']{
-      width: 230px;
-      display: inline-block;
-    }
   }
 
   @media (min-width: 768px){
     font-size: 0.9em;
     p {
-      font-size: 1em;
+      font-size: 14px;
     }
   }
 `

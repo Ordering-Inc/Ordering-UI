@@ -5,15 +5,21 @@ export const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 40px);
+  width: 100%;
   padding: 10px;
-  margin: 10px;
+  margin: 10px 0px;
   border-radius: 7.6px;
   cursor: pointer;
   position: relative;
   border: 1px solid #E9ECEF;
+  box-sizing: border-box;
 
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
+
+  @media (min-width: 576px) {
+    margin: 10px;
+    width: calc(100% - 40px);
+  }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {
