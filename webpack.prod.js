@@ -40,10 +40,6 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
-            loader: 'style-loader',
-            options: { injectType: 'singletonStyleTag' }
-          },
-          {
             loader: MiniCssExtractPlugin.loader // inject CSS to page
           },
           'css-loader'
