@@ -1,7 +1,6 @@
 import React from 'react'
 import { useLanguage, SmartAppBanner as SmartAppBannerController } from 'ordering-components'
 import SmartBanner from 'react-smartbanner'
-import './styles.css'
 
 const SmartAppBanneUI = (props) => {
   const [, t] = useLanguage()
