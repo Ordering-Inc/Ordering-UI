@@ -118,7 +118,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       return !isSkeleton && handleClick && handleBusinessClick();
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHero, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
+    height: 140
   }) : /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.header) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_400,c_limit'),
     isClosed: !isBusinessOpen
@@ -142,19 +142,20 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), /*#__PURE__*/_react.default.createElement(_styles.Medadata, {
-    isCustomerMode: isShowCallcenterInformation
+    isCustomerMode: isShowCallcenterInformation,
+    isSkeleton: isSkeleton
   }, orderType === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (business === null || business === void 0 ? void 0 : business.delivery_price) >= 0 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_FEE', 'Delivery fee')), business && parsePrice(business === null || business === void 0 ? void 0 : business.delivery_price)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70
+    width: 65
   })), Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("p", {
     className: "bullet"
   }, /*#__PURE__*/_react.default.createElement(_GoPrimitiveDot.default, null), (0, _utils.convertHoursToMinutes)((orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 ? business === null || business === void 0 ? void 0 : business.delivery_time : business === null || business === void 0 ? void 0 : business.pickup_time) || /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70
+    width: 65
   }), (business === null || business === void 0 ? void 0 : business.distance) >= 0 ? /*#__PURE__*/_react.default.createElement("p", {
     className: "bullet"
   }, /*#__PURE__*/_react.default.createElement(_GoPrimitiveDot.default, null), parseDistance(business === null || business === void 0 ? void 0 : business.distance)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70
+    width: 65
   }), isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformation, null, /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
     bgcolor: "green"
   }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 ? void 0 : (_business$available_d = business.available_drivers) === null || _business$available_d === void 0 ? void 0 : _business$available_d.length), /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {

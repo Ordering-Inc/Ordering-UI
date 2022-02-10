@@ -40,7 +40,7 @@ var OrderBill = _styledComponents.default.div(_templateObject4 || (_templateObje
 
 exports.OrderBill = OrderBill;
 
-var CouponContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 10px;\n"])));
+var CouponContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 10px;\n\n  input, button {\n    border-radius: 7.6px;\n  }\n"])));
 
 exports.CouponContainer = CouponContainer;
 

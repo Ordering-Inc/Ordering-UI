@@ -24,7 +24,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
   }, function (props) {
     var _props$theme;
 
-    return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n          margin-right: 10px;\n        "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n          margin-left: 10px;\n        "])));
+    return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n          margin-right: 5px;\n        "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n          margin-left: 5px;\n        "])));
   });
 }, function (_ref2) {
   var variant = _ref2.variant;

@@ -75,7 +75,8 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
       dateSelected = props.dateSelected,
       timeSelected = props.timeSelected,
       handleChangeDate = props.handleChangeDate,
-      handleChangeTime = props.handleChangeTime;
+      handleChangeTime = props.handleChangeTime,
+      showButton = props.showButton;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -269,7 +270,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
         return handleChangeTime(time.value);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), showButton && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: goToBusinessPage
   }, t('GO_TO_MENU', 'Go to menu'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, null, (window.location.pathname !== '/search' || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {

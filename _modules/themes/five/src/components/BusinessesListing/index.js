@@ -336,7 +336,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
     business: preorderBusiness,
-    handleClick: handleBusinessClick
+    handleClick: handleBusinessClick,
+    showButton: true
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,
@@ -409,7 +410,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
 
 var BusinessesListing = function BusinessesListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BusinessesListingUI
+    UIComponent: BusinessesListingUI,
+    paginationSettings: {
+      initialPage: 1,
+      pageSize: 25,
+      controlType: 'infinity'
+    }
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);

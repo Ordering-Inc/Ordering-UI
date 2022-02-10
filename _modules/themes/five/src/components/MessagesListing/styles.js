@@ -63,7 +63,7 @@ var OrderListContainer = _styledComponents.default.div(_templateObject11 || (_te
 
 exports.OrderListContainer = OrderListContainer;
 
-var OrdersListContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  height: 100%;\n  padding: 15px 15px 0px 15px;\n  box-sizing: border-box;\n  overflow-x: hidden;\n\n  @media (min-width: 1024px) and (max-width: 1300px) {\n    height: calc(100% - 230px);\n  }\n"])));
+var OrdersListContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  height: 100%;\n  padding: 15px 15px 0px 15px;\n  box-sizing: border-box;\n  overflow-x: hidden;\n"])));
 
 exports.OrdersListContainer = OrdersListContainer;
 

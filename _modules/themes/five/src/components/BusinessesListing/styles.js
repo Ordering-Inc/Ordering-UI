@@ -79,6 +79,6 @@ var Divider = _styledComponents.default.div(_templateObject11 || (_templateObjec
 
 exports.Divider = Divider;
 
-var OrderProgressWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral([""])));
+var OrderProgressWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  padding: 45px 20px;\n"])));
 
 exports.OrderProgressWrapper = OrderProgressWrapper;

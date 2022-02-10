@@ -1468,9 +1468,9 @@
   integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
 
 "@react-native-async-storage/async-storage@^1.13.1":
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.16.0.tgz#1594d6bfe7c1655a0bedb2cde6077af9caf3051b"
-  integrity sha512-EblfoupYjHXpRoZw9GMVcJCTY2HTQNr6OhvVHxrPKJcmTdFRxFP6EqhDQHzmv0BWFjSc1AkM4mJxNrjpltnPXw==
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.16.1.tgz#1dbaa9e0f9736e4ab8fc04c628bbb608fd80b068"
+  integrity sha512-aQ7ka+Ii1e/q+7AVFIZPt4kDeSH8b784wMDtz19Kf4A7hf+OgCHBlUQpOXsrv8XxhlBxu0hv4tfrDO15ChnV0Q==
   dependencies:
     merge-options "^3.0.4"
 
@@ -1520,7 +1520,7 @@
     "@sentry/types" "5.30.0"
     tslib "^1.9.3"
 
-"@sentry/react@^5.25.0":
+"@sentry/react@^5.25.0", "@sentry/react@^5.27.1":
   version "5.30.0"
   resolved "https://registry.yarnpkg.com/@sentry/react/-/react-5.30.0.tgz#320e05f766b6a26faefa8d76d1101fd50c69f541"
   integrity sha512-dvn4mqCgbeEuUXEGp5P9PaW5j4GWTFUSdx/yG8f9IxNZv5zM+7otjog9ukrubFZvlxVxD/PrIxK0MhadfFY/Dw==
@@ -1532,7 +1532,7 @@
     hoist-non-react-statics "^3.3.2"
     tslib "^1.9.3"
 
-"@sentry/tracing@^5.25.0":
+"@sentry/tracing@^5.25.0", "@sentry/tracing@^5.27.1":
   version "5.30.0"
   resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-5.30.0.tgz#501d21f00c3f3be7f7635d8710da70d9419d4e1f"
   integrity sha512-dUFowCr0AIMwiLD7Fs314Mdzcug+gBVo/+NCMyDw8tFxJkwWAKl7Qa2OZxLQ0ZHjakcj1hNKfCQJ9rhyfOl4Aw==
@@ -1592,9 +1592,9 @@
   integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
 
 "@types/node@*":
-  version "17.0.16"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.16.tgz#e3733f46797b9df9e853ca9f719c8a6f7b84cd26"
-  integrity sha512-ydLaGVfQOQ6hI1xK2A5nVh8bl0OGoIfYMxPWHqqYe9bTkWCfqiVvZoh2I/QF2sNSkZzZyROBoTefIEI+PB6iIA==
+  version "17.0.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.17.tgz#a8ddf6e0c2341718d74ee3dc413a13a042c45a0c"
+  integrity sha512-e8PUNQy1HgJGV3iU/Bp2+D/DXh3PYeyli8LgIwsQcs1Ar1LoaWHSIT6Rw+H2rNJmiq6SNWiDytfx8+gYj7wDHw==
 
 "@types/node@12.12.50":
   version "12.12.50"
@@ -2835,9 +2835,9 @@ camelize@^1.0.0:
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
 
 caniuse-lite@^1.0.30001286:
-  version "1.0.30001310"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001310.tgz#da02cd07432c9eece6992689d1b84ca18139eea8"
-  integrity sha512-cb9xTV8k9HTIUA3GnPUJCk0meUnrHL5gy5QePfDjxHyNBcnzPzrHFv5GqfP7ue5b1ZyzZL0RJboD6hQlPXjhjg==
+  version "1.0.30001311"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001311.tgz#682ef3f4e617f1a177ad943de59775ed3032e511"
+  integrity sha512-mleTFtFKfykEeW34EyfhGIFjGCqzhh38Y0LhdQ9aWF+HorZTtdgKV/1hEE0NlFkG2ubvisPV6l400tlbPys98A==
 
 canvg@^3.0.6:
   version "3.0.10"

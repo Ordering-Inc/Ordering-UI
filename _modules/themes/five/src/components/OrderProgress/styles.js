@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var OrderProgressContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  background: #FFFFFF;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n  margin: 45px 20px;\n  padding: 15px;\n\n  > div {\n    width: 100%;\n  }\n\n  @media (min-width: 576px) {\n    padding: 25px;\n  }\n\n  @media (min-width: 768px) {\n    > div {\n      width: 50%;\n    }\n  }\n"])));
+var OrderProgressContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  background: #FFFFFF;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n  padding: 15px;\n\n  > div {\n    width: 100%;\n  }\n\n  @media (min-width: 576px) {\n    padding: 25px;\n  }\n\n  @media (min-width: 768px) {\n    > div {\n      width: 50%;\n    }\n  }\n"])));
 
 exports.OrderProgressContainer = OrderProgressContainer;
 

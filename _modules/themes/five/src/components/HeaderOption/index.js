@@ -72,7 +72,7 @@ var HeaderOption = function HeaderOption(props) {
     isHome: props.isHome
   }, variant === 'cart' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_AiOutlineShoppingCart.default, {
     id: "icon"
-  }), totalCarts > 0 && /*#__PURE__*/_react.default.createElement("p", null, totalCarts)), variant === 'address' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, {
+  }), totalCarts > 0 && /*#__PURE__*/_react.default.createElement("span", null, totalCarts)), variant === 'address' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, {
     id: "icon"
   }), addressState || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), variant === 'moment' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, momentState ? parseDate(momentState, {
     outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
