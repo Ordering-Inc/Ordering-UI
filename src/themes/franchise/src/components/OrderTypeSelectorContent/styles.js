@@ -10,6 +10,8 @@ export const OrderTypeListItemContainerStyled = styled.div`
   margin-bottom: 25px;
   padding: 30px;
   cursor: pointer;
+  position: relative;
+  opacity: 0.3;
 
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
@@ -19,7 +21,7 @@ export const OrderTypeListItemContainerStyled = styled.div`
   `}
 
   ${({ active }) => active && css`
-    border: 1px solid ${props => props.theme?.colors.primary};
+    opacity: 1;
   `}
 `
 
@@ -34,19 +36,35 @@ export const OrderTypeListItemContainer = (props) => {
   )
 }
 
+export const OrderTypeOverlay = styled.div`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 7.6px;
+  background: #000000;
+  opacity: 0.3;
+  z-index: initial;
+`
+
 export const OrderTypeTitle = styled.h2`
   font-weight: 600;
   font-size: 16px;
   color: #FFFFFF;
   margin-top: 0;
   margin-bottom: 5px;
+  z-index: 2;
+  position: relative;
 `
 
 export const OrderTypeDescription = styled.p`
   font-size: 14px;
   color: #FFFFFF;
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
+  z-index: 2;
+  position: relative;
 `
 
 export const OrderStartWrapper = styled.div`
@@ -54,8 +72,12 @@ export const OrderStartWrapper = styled.div`
   align-items: center;
   user-select: none;
   cursor: pointer;
+  z-index: 2;
+  position: relative;
 
   span {
+    font-size: 14px;
+    color: #FFFFFF;
     color: #FFFFFF;
     ${props => props.theme?.rtl ? css`
       margin-left: 10px;

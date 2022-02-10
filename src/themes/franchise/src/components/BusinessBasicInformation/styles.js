@@ -34,12 +34,18 @@ export const BusinessInfoItem = styled.div`
       font-size: 14px;
       color: ${props => props.theme?.colors.primary};
       text-decoration: underline;
-      &:first-child {
+      &:not(:last-child) {
         margin-right: 5px;
         ${props => props.theme?.rtl && css`
           margin-left: 5px;
           margin-right: 0;
         `}
+      }
+
+      &.dot {
+        font-size: 12px;
+        text-decoration: none;
+        color: #909BA9;
       }
     }
   }
@@ -88,6 +94,7 @@ export const BusinessDetail = styled.div`
     font-size: 14px;
     color: #909BA9;
     margin: 0 5px 0 0;
+    font-weight: normal;
     ${props => props.theme?.rtl && css`
       margin-left: 5px;
       margin-right: 0px;
@@ -109,16 +116,47 @@ export const BusinessDetail = styled.div`
     align-items: center;
 
     svg {
-      font-size: 19px;
+      font-size: 15px;
+      margin-bottom: 1px;
+      margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0px;
+      `}
     }
 
-    span {
+    p {
       font-size: 14px;
+      margin: 0px;
     }
   }
+
+  .dot {
+    color: #909BA9;
+    font-size: 12px;
+    margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
+  }
+
+  ${({ isSkeleton }) => isSkeleton && css`
+    > span {
+      display: flex;
+      margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0px;
+      `}
+    }
+  `}
 `
 
 export const BusinessMoreDetail = styled.div`
+  display: flex;
+  align-items: center;
+
   margin-left: 12px;
   ${props => props.theme?.rtl && css`
     margin-right: 12px;
@@ -135,4 +173,9 @@ export const BusinessTitleWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin-bottom: 10px;
+
+  > h2 {
+    margin: 0px;
+  }
 `

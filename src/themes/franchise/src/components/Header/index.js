@@ -179,7 +179,6 @@ export const Header = (props) => {
       maximumAge: 0
     })
   }, [orderState?.options?.address?.location, pathname])
-  console.log(isFarAway, 'ths is')
 
   return (
     <>

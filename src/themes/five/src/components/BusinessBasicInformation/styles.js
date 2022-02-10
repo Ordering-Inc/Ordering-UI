@@ -222,11 +222,18 @@ export const BusinessDetail = styled.div`
     align-items: center;
 
     svg {
-      font-size: 19px;
+      font-size: 15px;
+      margin-bottom: 1px;
+      margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0px;
+      `}
     }
 
-    span {
+    p {
       font-size: 14px;
+      margin: 0px;
     }
   }
 
@@ -239,6 +246,17 @@ export const BusinessDetail = styled.div`
       margin-right: 0px;
     `}
   }
+
+  ${({ isSkeleton }) => isSkeleton && css`
+    > span {
+      display: flex;
+      margin-right: 5px;
+      ${props => props.theme?.rtl && css`
+        margin-left: 5px;
+        margin-right: 0px;
+      `}
+    }
+  `}
 `
 
 export const BusinessMoreDetail = styled.div`

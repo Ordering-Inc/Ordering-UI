@@ -18,9 +18,9 @@ export const Container = styled.div`
         margin: 0;
         font-size: 14px;
         ${props => props.theme?.rtl ? css`
-          margin-right: 10px;
+          margin-right: 5px;
         ` : css`
-          margin-left: 10px;
+          margin-left: 5px;
         `} 
       }
       svg {

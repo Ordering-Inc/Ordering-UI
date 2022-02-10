@@ -21,8 +21,8 @@ import {
   CallCenterInformation,
   CallCenterInformationBullet,
   BusinessLogoWrapper,
-  BusinessStarInfo,
-  CardOverlay
+  BusinessStarInfo
+  // CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import BisStar from '@meronex/icons/bi/BisStar'
@@ -72,7 +72,7 @@ const BusinessControllerUI = (props) => {
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
           <BusinessHero>
             {isSkeleton ? (
-              <Skeleton height={100} />
+              <Skeleton height={140} />
             ) : (
               <BusinessHeader bgimage={optimizeImage(business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} isClosed={!isBusinessOpen}>
                 <BusinessTags>
@@ -123,7 +123,7 @@ const BusinessControllerUI = (props) => {
                     <Skeleton width={100} />
                   )}
                 </div>
-                <Medadata isCustomerMode={isShowCallcenterInformation}>
+                <Medadata isCustomerMode={isShowCallcenterInformation} isSkeleton={isSkeleton}>
                   {orderType === 1 && (
                     <>
                       {business?.delivery_price >= 0 ? (
@@ -132,7 +132,7 @@ const BusinessControllerUI = (props) => {
                           {business && parsePrice(business?.delivery_price)}
                         </p>
                       ) : (
-                        <Skeleton width={70} />
+                        <Skeleton width={65} />
                       )}
                     </>
                   )}
@@ -142,7 +142,7 @@ const BusinessControllerUI = (props) => {
                       {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
                     </p>
                   ) : (
-                    <Skeleton width={70} />
+                    <Skeleton width={65} />
                   )}
                   {business?.distance >= 0 ? (
                     <p className='bullet'>
@@ -150,7 +150,7 @@ const BusinessControllerUI = (props) => {
                       {parseDistance(business?.distance)}
                     </p>
                   ) : (
-                    <Skeleton width={70} />
+                    <Skeleton width={65} />
                   )}
                   {isShowCallcenterInformation && (
                     <CallCenterInformation>

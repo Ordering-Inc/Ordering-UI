@@ -326,6 +326,9 @@ export const ShareOrder = styled.div`
     & > div:first-child {
       left: 0;
     }
+    button {
+      border-radius: 7.6px;
+    }
   }
   
   h1 {
