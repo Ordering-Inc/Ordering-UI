@@ -42,7 +42,8 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader // inject CSS to page
           },
-          'css-loader'
+          'css-loader',
+          'style-loader'
         ]
       },
       {
