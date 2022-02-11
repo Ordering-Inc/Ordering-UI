@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
-import { useLanguage, useUtils, useConfig } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components'
 import { PaymentOptionWallet as PaymentOptionWalletController } from './test'
 
 import {
@@ -15,6 +15,7 @@ import { Checkbox } from '../../../../../styles/Checkbox'
 
 const PaymentOptionWalletUI = (props) => {
   const {
+    cart,
     walletsState,
     selectWallet,
     deletetWalletSelected
@@ -42,7 +43,11 @@ const PaymentOptionWalletUI = (props) => {
       index === position ? !item : item
     );
 
-    console.log(wallet.id, position, checkedState)
+    if (!checkedState[position]) {
+      selectWallet(wallet)
+    } else {
+      deletetWalletSelected(wallet)
+    }
 
     setCheckedState(updatedCheckedState);
   };
@@ -50,7 +55,9 @@ const PaymentOptionWalletUI = (props) => {
   useEffect(() => {
     if (!walletsState.loading) {
       setCheckedState(
-        new Array(walletsState.result?.length).fill(false)
+        walletsState.result.map(wallet => {
+          return !!cart?.wallets?.find(w => w.id === wallet.id)
+        })
       )
     }
   }, [walletsState.result?.length])
@@ -71,12 +78,18 @@ const PaymentOptionWalletUI = (props) => {
                 <Checkbox
                   name={`payment_option_${wallet.type}`}
                   id={`custom-checkbox-${idx}`}
+                  disabled={(cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0 }
                   checked={checkedState[idx]}
-                  value={checkedState[idx]}
+                  value={`payment_option_${wallet.type}`}
                   onChange={() => handleOnChange(idx, wallet)}
                 />
                 <SectionLeftText>
-                  <label htmlFor={`custom-checkbox-${idx}`}>
+                  <label
+                    style={{
+                      color: (cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0 ? theme.colors.darkGray : 'black'
+                    }}
+                    htmlFor={`custom-checkbox-${idx}`}
+                  >
                     {walletName[wallet.type]?.name}
                   </label>
                   {/* {wallet.type === 'cash' && (
@@ -90,7 +103,7 @@ const PaymentOptionWalletUI = (props) => {
                 )}
                 {wallet.type === 'credit_point' && (
                   <span>
-                    <span style={{ color: theme.colors.primary }}>{`${wallet?.balance} ${t('POINTS', 'Points')}`}</span> {`= ${parsePrice((wallet?.balance * wallet?.redemption_rate) / 100)}`}
+                    <span style={{ color: theme.colors.primary }}>{`${wallet?.balance} ${t('POINTS', 'Points')}`}</span> {wallet?.balance > 0 &&`= ${parsePrice((wallet?.balance * wallet?.redemption_rate) / 100)}`}
                   </span>
                 )}
               </div>

@@ -104,8 +104,6 @@ export const WrapperPlaceOrderButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 50px 0px 10px;
-  padding: 0 10px;
 
   button {
     width: 100%;

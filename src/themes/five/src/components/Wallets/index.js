@@ -68,8 +68,17 @@ const WalletsUI = (props) => {
           <div style={{ width: '70%', margin: '0 auto' }}>
             <SectionWrapper>
               <BalanceElement>
-                <h1>{parsePrice(currentWalletSelected?.balance)}</h1>
-                <span>{configs?.stripe_currency?.value}</span>
+                <h1>
+                  {currentWalletSelected?.type === 'cash'
+                    ? parsePrice(currentWalletSelected?.balance)
+                    : currentWalletSelected?.balance
+                  }
+                </h1>
+                <span>
+                  {currentWalletSelected?.type === 'cash'
+                    ? configs?.stripe_currency?.value
+                    : t('POINTS', 'Points')}
+                </span>
               </BalanceElement>
             </SectionWrapper>
 
