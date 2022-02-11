@@ -66,6 +66,11 @@ var extraOptions = [{
   displayName: 'view account',
   key: 'view_account'
 }, {
+  name: 'wallets',
+  pathname: '/wallets',
+  displayName: 'wallets',
+  key: 'wallets'
+}, {
   name: 'messages',
   pathname: '/messages',
   displayName: 'messages',

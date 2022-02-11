@@ -23,6 +23,8 @@ var _FaRegListAlt = _interopRequireDefault(require("@meronex/icons/fa/FaRegListA
 
 var _AiOutlineHome = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineHome"));
 
+var _BiWallet = _interopRequireDefault(require("@meronex/icons/bi/BiWallet"));
+
 var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 
 var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
@@ -229,6 +231,19 @@ var SidebarMenu = function SidebarMenu(props) {
     isHome: isHome,
     active: window.location.pathname === '/profile'
   }, t('PROFILE', 'Profile'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    isHome: isHome,
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'wallets'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    isHome: isHome,
+    active: window.location.pathname === '/wallets'
+  }, /*#__PURE__*/_react.default.createElement(_BiWallet.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    isHome: isHome,
+    active: window.location.pathname === '/wallets'
+  }, t('WALLETS', 'Wallets'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({

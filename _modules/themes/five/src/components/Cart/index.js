@@ -70,10 +70,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartUI = function CartUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$taxes, _cart$fees, _cart$fees2, _cart$fees2$filter, _orderState$options, _configs$driver_tip_t, _configs$driver_tip_u, _cart$business, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data$fi, _openTaxModal$data4, _openTaxModal$data5, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$carts, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$taxes, _cart$fees, _cart$fees2, _cart$fees2$filter, _orderState$options, _configs$driver_tip_t, _configs$driver_tip_u, _cart$payment_events, _cart$payment_events2, _cart$business, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data$fi, _openTaxModal$data4, _openTaxModal$data5, _props$afterComponent, _props$afterElements;
 
   var currentCartUuid = props.currentCartUuid,
-      cart = props.cart,
       clearCart = props.clearCart,
       isProducts = props.isProducts,
       changeQuantity = props.changeQuantity,
@@ -165,6 +164,15 @@ var CartUI = function CartUI(props) {
       setIsUpselling = _useState14[1];
 
   var isCouponEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.coupon) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
+  var cart = orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(props.cart.business_id)];
+  var walletName = {
+    cash: {
+      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
+    },
+    credit_point: {
+      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
+    }
+  };
   var momentFormatted = !(orderState !== null && orderState !== void 0 && (_orderState$option = orderState.option) !== null && _orderState$option !== void 0 && _orderState$option.moment) ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$option2 = orderState.option) === null || _orderState$option2 === void 0 ? void 0 : _orderState$option2.moment, {
     outputFormat: 'YYYY-MM-DD HH:mm'
   });
@@ -363,7 +371,41 @@ var CartUI = function CartUI(props) {
     style: {
       height: 100
     }
-  }))))))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })))))), (cart === null || cart === void 0 ? void 0 : (_cart$payment_events = cart.payment_events) === null || _cart$payment_events === void 0 ? void 0 : _cart$payment_events.length) > 0 && /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      width: '100%',
+      marginTop: 10
+    }
+  }, cart === null || cart === void 0 ? void 0 : (_cart$payment_events2 = cart.payment_events) === null || _cart$payment_events2 === void 0 ? void 0 : _cart$payment_events2.map(function (event) {
+    var _walletName$cart$wall, _cart$wallets, _cart$wallets$find;
+
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: event.id,
+      style: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 10
+      }
+    }, /*#__PURE__*/_react.default.createElement("span", null, (_walletName$cart$wall = walletName[cart === null || cart === void 0 ? void 0 : (_cart$wallets = cart.wallets) === null || _cart$wallets === void 0 ? void 0 : (_cart$wallets$find = _cart$wallets.find(function (wallet) {
+      return wallet.id === event.wallet_id;
+    })) === null || _cart$wallets$find === void 0 ? void 0 : _cart$wallets$find.type]) === null || _walletName$cart$wall === void 0 ? void 0 : _walletName$cart$wall.name), /*#__PURE__*/_react.default.createElement("span", null, "-", parsePrice(event.amount)));
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 10
+    }
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    style: {
+      fontWeight: 'bold'
+    }
+  }, t('TOTAL_TO_PAY', 'Total to pay')), /*#__PURE__*/_react.default.createElement("span", {
+    style: {
+      fontWeight: 'bold'
+    }
+  }, parsePrice(cart === null || cart === void 0 ? void 0 : cart.balance))))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address) ? 'secundary' : 'primary',
     onClick: checkOutBtnClick,
     disabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address)
