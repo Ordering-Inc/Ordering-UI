@@ -75,6 +75,9 @@ export const CardInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    ${props => props.theme?.rtl && css`
+      text-align: right;
+    `}
   }
 
   p {
