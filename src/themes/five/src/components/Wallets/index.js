@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils, useConfig } from 'ordering-components'
-import { WalletList } from './test'
+import {
+  WalletList,
+  useLanguage,
+  useUtils,
+  useConfig
+} from 'ordering-components'
 
 import {
   Container,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
-import { useLanguage, useUtils, useConfig } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components'
 
 import {
   Container,

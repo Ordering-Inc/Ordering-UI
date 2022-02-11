@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
-import { useLanguage, useUtils } from 'ordering-components'
-import { PaymentOptionWallet as PaymentOptionWalletController } from './test'
+import {
+  PaymentOptionWallet as PaymentOptionWalletController,
+  useLanguage,
+  useUtils,
+} from 'ordering-components'
 
 import {
   Container,
