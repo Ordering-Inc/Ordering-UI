@@ -97,7 +97,7 @@ export const CheckoutAction = styled.div`
 
 export const Divider = styled.div`
   background: #F8F9FA;
-  height: 8px;
+  height: 4px;
   width: 100%;
   margin-left: 0;
 

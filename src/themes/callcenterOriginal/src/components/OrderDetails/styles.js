@@ -452,12 +452,10 @@ export const WrapperLeftContainer = styled.div`
   }
 `
 
-export const WrapperRightContainer = styled(WrapperLeftContainer)`
-  background: #F8F9FA;
-`
+export const WrapperRightContainer = styled(WrapperLeftContainer)``
 
 export const Divider = styled.div`
-  height: 8px;
+  height: 4px;
   background: #F8F9FA;
   width: calc(100% + 40px);
   margin-left: -20px;
@@ -488,5 +486,18 @@ export const CommentContainer = styled.div`
   margin: 0;
   h3 {
     margin: 0;
+  }
+`
+
+export const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  button {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    justify-content: space-around;
+    min-width: 200px;
+    max-height: 53px;
   }
 `

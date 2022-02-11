@@ -38,7 +38,7 @@ import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
-import { UserDetails } from '../../../../../components/UserDetails'
+import { UserDetails } from '../UserDetails'
 import { Confirm } from '../Confirm'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
@@ -153,9 +153,8 @@ export const Header = (props) => {
     }
   }
 
-  const handleOpenLoginSignUp = (index) => {
-    setModalPageToShow(index)
-    setAuthModalOpen(true)
+  const handleOpenLoginSignUp = (page) => {
+    events.emit('go_to_page', { page: 'home' })
   }
 
   useEffect(() => {
@@ -426,6 +425,7 @@ export const Header = (props) => {
             open={customerModalOpen}
             width='60%'
             onClose={() => setCustomerModalOpen(false)}
+            title={t('CUSTOMER_DETAILS', 'Customer details')}
           >
             <UserEdit>
               {!customerState?.loading && (
@@ -434,6 +434,7 @@ export const Header = (props) => {
                     userData={customerState?.user}
                     userId={customerState?.user?.id}
                     isCustomerMode
+                    isModal
                   />
                   <AddressList
                     isModal
@@ -445,68 +446,6 @@ export const Header = (props) => {
                 </>
               )}
             </UserEdit>
-          </Modal>
-        )}
-        {authModalOpen && !auth && (
-          <Modal
-            open={authModalOpen}
-            onRemove={() => closeAuthModal()}
-            width='50%'
-            authModal
-          >
-            {modalPageToShow === 'login' && (
-              <LoginForm
-                handleSuccessLogin={handleSuccessLogin}
-                elementLinkToSignup={
-                  <a
-                    onClick={
-                      (e) => handleCustomModalClick(e, { page: 'signup' })
-                    } href='#'
-                  >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
-                  </a>
-                }
-                elementLinkToForgotPassword={
-                  <a
-                    onClick={
-                      (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
-                    } href='#'
-                  >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
-                  </a>
-                }
-                useLoginByCellphone
-                isPopup
-              />
-            )}
-            {modalPageToShow === 'signup' && (
-              <SignUpForm
-                elementLinkToLogin={
-                  <a
-                    onClick={
-                      (e) => handleCustomModalClick(e, { page: 'login' })
-                    } href='#'
-                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
-                  </a>
-                }
-                useLoginByCellphone
-                useChekoutFileds
-                handleSuccessSignup={handleSuccessSignup}
-                isPopup
-                closeModal={() => closeAuthModal()}
-              />
-            )}
-            {modalPageToShow === 'forgotpassword' && (
-              <ForgotPasswordForm
-                elementLinkToLogin={
-                  <a
-                    onClick={
-                      (e) => handleCustomModalClick(e, { page: 'login' })
-                    } href='#'
-                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
-                  </a>
-                }
-                isPopup
-              />
-            )}
           </Modal>
         )}
         <Confirm

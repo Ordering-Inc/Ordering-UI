@@ -271,7 +271,7 @@ const SignUpFormUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <SignUpContainer isPopup={isPopup}>
         <FormSide isPopup={isPopup}>
-          <Title>{t('SIGN_UP', 'Sign up')}</Title>
+          <Title>{t('CREATE_NEW_USER', 'Create new user')}</Title>
           <FormInput
             noValidate
             isPopup={isPopup}
@@ -417,7 +417,7 @@ const SignUpFormUI = (props) => {
                 type='submit'
                 disabled={formState.loading || validationFields?.loading}
               >
-                {formState.loading ? `${t('LOADING', 'Loading')}...` : t('SIGN_UP', 'Sign up')}
+                {formState.loading ? `${t('LOADING', 'Loading')}...` : t('CREATE_NEW_USER', 'Create new user')}
               </Button>
             </ButtonContainer>
           </FormInput>
@@ -429,7 +429,7 @@ const SignUpFormUI = (props) => {
           )}
         </FormSide>
         <Alert
-          title={t('SIGN_UP', 'Sign up')}
+          title={t('CREATE_NEW_USER', 'Create new user')}
           content={alertState.content}
           acceptText={t('ACCEPT', 'Accept')}
           open={alertState.open}

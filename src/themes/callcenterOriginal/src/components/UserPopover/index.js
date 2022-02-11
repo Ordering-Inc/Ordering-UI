@@ -24,7 +24,6 @@ const optionsDefault = [
 
 const extraOptions = [
   { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account' },
-  { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages' },
   { name: 'help', pathname: '/help', displayName: 'help', key: 'help' }
 ]
 

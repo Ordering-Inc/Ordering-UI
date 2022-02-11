@@ -29,7 +29,6 @@ export const WrapperLeftContainer = styled.div`
 
 export const WrapperRightContainer = styled.div`
   width: 100%;
-  background: #F8F9FA;
   box-sizing: border-box;
   padding: 40px 20px;
 
@@ -183,7 +182,7 @@ export const WrapperLeftContent = styled.div`
   }
 `
 export const CheckOutDivider = styled.div`
-  height: 8px;
+  height: 4px;
   width: calc(100% + 40px);
   margin-left: -20px;
   background: #F8F9FA;
@@ -195,7 +194,7 @@ export const CheckOutDivider = styled.div`
 `
 
 export const DriverTipDivider = styled.div`
-  height: 8px;
+  height: 4px;
   width: calc(100% + 40px);
   margin-left: -20px;
   background: #E9ECEF;

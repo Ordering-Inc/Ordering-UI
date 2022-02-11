@@ -14,6 +14,7 @@ import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
 import BsPhone from '@meronex/icons/bs/BsPhone'
 import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
 import AiOutlineExclamationCircle from '@meronex/icons/ai/AiOutlineExclamationCircle'
+import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -56,7 +57,8 @@ import {
   SkeletonWrapper,
   ReviewWrapper,
   Exclamation,
-  CommentContainer
+  CommentContainer,
+  TitleContainer
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -224,7 +226,13 @@ const OrderDetailsUI = (props) => {
           <WrapperContainer>
             <WrapperLeftContainer>
               <OrderInfo>
-                <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                <TitleContainer>
+                  <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                  <Button onClick={() => handleGoToPage({ page: 'search' })} color='primary'>
+                    <BsArrowLeft />
+                    {t('GO_TO_BUSINESSLIST', 'Go to business list')}
+                  </Button>
+                </TitleContainer>
                 {order?.status !== 0 && order?.integration_id && (
                   <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
                 )}

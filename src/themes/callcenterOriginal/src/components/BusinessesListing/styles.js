@@ -21,9 +21,10 @@ export const WrapperSearch = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    margin: 0 auto;
+    margin: 0;
     margin-top: 10px;
     margin-bottom: 20px;
+    margin-right: 20px;
     width: 100%; 
     padding: 0 20px;
 
@@ -107,3 +108,9 @@ export const Divider = styled.div`
 `
 
 export const OrderProgressWrapper = styled.div``
+
+export const SearchContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`

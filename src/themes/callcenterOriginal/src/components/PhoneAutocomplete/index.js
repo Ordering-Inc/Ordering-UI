@@ -130,6 +130,8 @@ const PhoneAutocompleteUI = (props) => {
     return obj
   }) || []
 
+  console.log(userCustomer, orderState?.options?.address?.address)
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -170,11 +172,15 @@ const PhoneAutocompleteUI = (props) => {
                 {`${t('CONTINUE_WITH', 'Continue with')} ${userName}`}
               </Button> */}
             <Button
-              color={inputValue ? 'primary' : 'secundary'}
-              onClick={() => createNewUser()}
-              disabled={!inputValue}
+              color={inputValue || (userCustomer && orderState?.options?.address?.address) ? 'primary' : 'secundary'}
+              onClick={() => !(userCustomer && orderState?.options?.address?.address) ? createNewUser() : handleFindClick()}
+              disabled={!inputValue && !(userCustomer && orderState?.options?.address?.address)}
             >
-              {t('CREATE_CUSTOMER', 'Create new customer')}
+              {
+                !(userCustomer && orderState?.options?.address?.address)
+                  ? t('CREATE_CUSTOMER', 'Create new customer')
+                  : `${t('CONTINUE_WITH', 'Continue with')} ${userName}`
+              }
             </Button>
           </WrappBtn>
         </ContentWrapper>

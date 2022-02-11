@@ -22,7 +22,9 @@ import {
   CallCenterInformationBullet,
   BusinessLogoWrapper,
   BusinessStarInfo,
-  CardOverlay
+  CardOverlay,
+  InfoLength,
+  InfoDescription
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import BisStar from '@meronex/icons/bi/BisStar'
@@ -60,6 +62,8 @@ const BusinessControllerUI = (props) => {
     else handleClick(business)
   }
 
+  console.log(business)
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -68,7 +72,7 @@ const BusinessControllerUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ContainerCard isSkeleton={isSkeleton}>
+      <ContainerCard isSkeleton={isSkeleton} isShowCallcenterInformation={isShowCallcenterInformation}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
           <BusinessHero>
             {isSkeleton ? (
@@ -152,23 +156,29 @@ const BusinessControllerUI = (props) => {
                   ) : (
                     <Skeleton width={70} />
                   )}
-                  {isShowCallcenterInformation && (
-                    <CallCenterInformation>
-                      <CallCenterInformationBullet bgcolor='green'>
-                        <BiCar />
-                        {business?.available_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='red'>
-                        <BiCar />
-                        {business?.busy_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
-                        <BiBasket />
-                        {business?.active_orders?.length}
-                      </CallCenterInformationBullet>
-                    </CallCenterInformation>
-                  )}
                 </Medadata>
+                {isShowCallcenterInformation && (
+                  <CallCenterInformation>
+                    <CallCenterInformationBullet bgcolor='green'>
+                      <InfoLength>
+                        {business?.available_drivers?.length ?? 32}
+                      </InfoLength>
+                      <InfoDescription>{t('OPEN_ORDERS', 'Open orders')}</InfoDescription>
+                    </CallCenterInformationBullet>
+                    <CallCenterInformationBullet bgcolor='red'>
+                      <InfoLength>
+                        {business?.busy_drivers?.length ?? 2}
+                      </InfoLength>
+                      <InfoDescription>{t('BUSY_DRIVERS', 'Busy drivers')}</InfoDescription>
+                    </CallCenterInformationBullet>
+                    <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
+                      <InfoLength>
+                        {business?.active_orders?.length ?? 5}
+                      </InfoLength>
+                      <InfoDescription>{t('AVAILABLE_DRIVERS', 'Avalable drivers')}</InfoDescription>
+                    </CallCenterInformationBullet>
+                  </CallCenterInformation>
+                )}
               </BusinessInfoItem>
             </BusinessInfo>
           </BusinessContent>

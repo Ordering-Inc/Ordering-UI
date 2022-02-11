@@ -10,7 +10,8 @@ import {
   BusinessHeroImg,
   HightestRatedWrapper,
   Divider,
-  OrderProgressWrapper
+  OrderProgressWrapper,
+  SearchContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -36,7 +37,6 @@ import {
 } from 'ordering-components'
 import { HighestRated } from '../HighestRated'
 import { BusinessPreorder } from '../BusinessPreorder'
-import { OrderProgress } from '../OrderProgress'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -146,9 +146,6 @@ const BusinessesListingUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
         <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
-        <OrderProgressWrapper>
-          <OrderProgress />
-        </OrderProgressWrapper>
         {isCustomLayout && onRedirectPage && (
           <>
             <OrdersOption
@@ -171,27 +168,17 @@ const BusinessesListingUI = (props) => {
               onRedirectPage={onRedirectPage}
               userCustomerId={userCustomer?.id}
               isCustomLayout
+              titleContent={t('PREVIOUS_ORDERS', 'Previous orders')}
               isBusinessesLoading={businessesList.loading}
             />
           </>
         )}
-        <WrapperSearch isCustomLayout={isCustomLayout}>
-          <SearchBar
-            lazyLoad
-            search={searchValue}
-            isCustomLayout={isCustomLayout}
-            placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-            onSearch={handleChangeSearch}
-          />
-          {isCustomLayout && (
-            <FiMap onClick={toggleMap} />
-          )}
-        </WrapperSearch>
         <HightestRatedWrapper>
           <Divider />
           <HighestRated
             handleClickAddress={handleClickAddress}
             onBusinessClick={onBusinessClick}
+            isCustomLayout
           />
           <Divider />
         </HightestRatedWrapper>
@@ -203,6 +190,25 @@ const BusinessesListingUI = (props) => {
             handleChangeBusinessType={handleChangeBusinessType}
           />
         )}
+        <SearchContainer>
+          {isCustomLayout && businessesList?.businesses?.length > 0 && (
+            <BusinessesTitle>
+              {t('BUSINESSES', 'Businesses')}
+            </BusinessesTitle>
+          )}
+          <WrapperSearch isCustomLayout={isCustomLayout}>
+            <SearchBar
+              lazyLoad
+              search={searchValue}
+              isCustomLayout={isCustomLayout}
+              placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+              onSearch={handleChangeSearch}
+            />
+            {isCustomLayout && (
+              <FiMap onClick={toggleMap} />
+            )}
+          </WrapperSearch>
+        </SearchContainer>
 
         {activeMap && (
           <BusinessesMap
@@ -210,12 +216,6 @@ const BusinessesListingUI = (props) => {
             userLocation={orderState?.options?.address?.location}
             setErrors={setMapErrors}
           />
-        )}
-
-        {isCustomLayout && businessesList?.businesses?.length > 0 && (
-          <BusinessesTitle>
-            {t('BUSINESSES', 'Businesses')}
-          </BusinessesTitle>
         )}
 
         <BusinessList>

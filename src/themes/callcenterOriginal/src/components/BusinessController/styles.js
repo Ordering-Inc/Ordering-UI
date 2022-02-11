@@ -5,15 +5,15 @@ export const ContainerCard = styled.div`
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   border-radius: 7.6px;
-  max-height: 300px;
-  height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '320px'};
+  max-height: 400px;
+  height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '400px'};
   border-radius: 10px;
   margin: 30px 20px;
 
   width: calc(100% - 40px);
 
   @media (min-width: 481px) {
-    max-height: 320px;
+    max-height: ${({ isShowCallcenterInformation }) => isShowCallcenterInformation ? '360px' : '320px'};
   }
 
   @media (min-width: 681px) {
@@ -129,7 +129,7 @@ export const BusinessTags = styled.div`
     ` : css`
         margin-right: 0px;
     `
-    }
+  }
     }
   }
 `
@@ -293,7 +293,7 @@ export const Medadata = styled.div`
 
 export const CallCenterInformation = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   div{
     justify-content: space-evenly;
   }
@@ -301,12 +301,10 @@ export const CallCenterInformation = styled.div`
 
 export const CallCenterInformationBullet = styled.div`
   display: flex;
+  flex-direction: column;
   padding: 2px;
   margin-bottom: 2px;
   border-radius: 16px;
-  background: ${({ bgcolor }) => bgcolor};
-  width: 50px;
-  color: #fff;
   svg{
     font-size: 18px;
   }
@@ -352,4 +350,13 @@ export const CardOverlay = styled.div`
   background: rgba(0, 0, 0, 0.2);
   border-radius: 7.6px;
   z-index: 1;
+`
+
+export const InfoLength = styled.p`
+  font-size: 16px;
+  font-weight: 600;
+`
+
+export const InfoDescription = styled.p`
+  font-size: 12px;
 `

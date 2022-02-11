@@ -58,8 +58,6 @@ export const Card = styled.div`
   margin: 10px;
   display: inline-block;
   background: white;
-  height: ${({ isBusinessesPage }) => isBusinessesPage && '300px'};
-  max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '220px'};
   border-radius: 16px;
   text-align: left;
   cursor: ${({ isBusinessesPage }) => isBusinessesPage && 'pointer'};
@@ -111,4 +109,9 @@ export const Reorder = styled.div`
     height: 30px;
     font-size: 14px;
   }
+`
+
+export const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
