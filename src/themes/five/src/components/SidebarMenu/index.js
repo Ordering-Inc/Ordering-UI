@@ -6,6 +6,7 @@ import AiOutlineUserAdd from '@meronex/icons/ai/AiOutlineUserAdd'
 import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
 import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
+import BiWallet from '@meronex/icons/bi/BiWallet';
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
@@ -220,6 +221,36 @@ export const SidebarMenu = (props) => {
                       }
                     >
                       {t('PROFILE', 'Profile')}
+                    </TextInfo>
+                  </MenuLinkText>
+                  <MenuLinkSeparator>
+                    <div>
+                      <hr />
+                    </div>
+                  </MenuLinkSeparator>
+                </WrappContent>
+              </MenuLink>
+              <MenuLink
+                isHome={isHome}
+                onClick={() => handleGoToPage({ page: 'wallets' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    isHome={isHome}
+                    active={
+                      window.location.pathname === '/wallets'
+                    }
+                  >
+                    <BiWallet />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      isHome={isHome}
+                      active={
+                        window.location.pathname === '/wallets'
+                      }
+                    >
+                      {t('WALLETS', 'Wallets')}
                     </TextInfo>
                   </MenuLinkText>
                   <MenuLinkSeparator>
