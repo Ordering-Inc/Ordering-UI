@@ -12,16 +12,23 @@ export const ListenPageChanges = ({ children }) => {
   const routes = {
     home: '/',
     search: '/search',
+    delivery: '/delivery',
+    pickup: '/pickup',
+    eatin: '/eatin',
+    curbside: '/curbside',
+    drivethru: '/drivethru',
+    signup: '/signup',
+    signin: '/signin',
     profile: '/profile',
-    wallets: '/wallets',
-    messages: '/messages',
-    help: '/help',
     orders: '/profile/orders',
     order_detail: '/orders/:orderId',
     checkout: '/checkout/:cartUuid',
     checkout_list: '/checkout',
     business: '/store/:store',
-    business_slug: '/:store'
+    business_slug: '/:store',
+    forgot_password: '/password/forgot',
+    reset_password: '/password/reset',
+    help: '/help'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

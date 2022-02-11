@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js/pure'
 import { useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 
-import { Checkout } from '../../../src/themes/five/src/components/Checkout'
+import { Checkout } from '../../../src/components/Checkout'
 import { useEvent, useOrder, useLanguage } from 'ordering-components'
 
 export const CheckoutPage = (props) => {
