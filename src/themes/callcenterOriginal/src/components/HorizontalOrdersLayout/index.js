@@ -6,7 +6,6 @@ import {
   Price,
   Logo,
   Card,
-  Reorder,
   TitleContainer
 } from './styles'
 import { OrdersContainer, BusinessInformation } from '../OrdersOption/styles'

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react'
-import Select, { components } from 'react-select'
+import React, { useState, useEffect } from 'react'
+import Select from 'react-select'
 import {
   PhoneAutocomplete as PhoneAutocompleteController,
   useLanguage,
@@ -22,12 +22,10 @@ import {
   Slogan,
   UserEdit,
   WrappBtn,
-  SelectContainer,
-  SearchContainer
+  SelectContainer
 } from './styles'
 
 import MdcCellphoneAndroid from '@meronex/icons/mdc/MdcCellphoneAndroid'
-import { Input } from '../../styles/Inputs'
 
 const PhoneAutocompleteUI = (props) => {
   const {
@@ -123,14 +121,11 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const optionsToSelect = customersPhones.users.map(user => {
-    console.log(user)
     const obj = {}
     obj.value = user.cellphone || user.phone
     obj.label = `${user?.country_phone_code ? `(${user?.country_phone_code})` : ''} ${user?.phone && !user?.cellphone ? `${user?.phone}` : ''} ${user?.cellphone ? `${user.cellphone}` : ''} - {${user.name}}`
     return obj
   }) || []
-
-  console.log(userCustomer, orderState?.options?.address?.address)
 
   return (
     <>
@@ -164,13 +159,6 @@ const PhoneAutocompleteUI = (props) => {
             </SelectContainer>
           )}
           <WrappBtn>
-            {/* <Button
-                color='primary'
-                name='find'
-                onClick={() => handleFindClick()}
-              >
-                {`${t('CONTINUE_WITH', 'Continue with')} ${userName}`}
-              </Button> */}
             <Button
               color={inputValue || (userCustomer && orderState?.options?.address?.address) ? 'primary' : 'secundary'}
               onClick={() => !(userCustomer && orderState?.options?.address?.address) ? createNewUser() : handleFindClick()}

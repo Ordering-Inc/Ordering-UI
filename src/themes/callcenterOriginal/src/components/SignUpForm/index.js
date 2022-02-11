@@ -9,28 +9,21 @@ import {
   SignupForm as SignUpController,
   useLanguage,
   useConfig,
-  useSession,
-  ReCaptcha,
-  useEvent
+  ReCaptcha
 } from 'ordering-components'
 import {
   SignUpContainer,
   FormSide,
   FormInput,
-  SocialButtons,
   RedirectLink,
   SkeletonWrapper,
-  SkeletonSocialWrapper,
   WrapperPassword,
   TogglePassword,
   ReCaptchaWrapper,
-  LoginDivider,
-  DividerLine,
   Title,
   InputWrapper,
   InputBeforeIcon,
   TermsConditionWrapper,
-  BussinessAndDriverSignUp,
   ButtonContainer
 } from './styles'
 
@@ -38,10 +31,6 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { Checkbox } from '../../../../../styles/Checkbox'
 import { sortInputFields } from '../../../../../utils'
-
-import { FacebookLoginButton } from '../FacebookLogin'
-import { GoogleLoginButton } from '../GoogleLogin'
-import { AppleLogin } from '../AppleLogin'
 
 import {
   Person,
@@ -70,17 +59,13 @@ const SignUpFormUI = (props) => {
     saveCustomerUser,
     fieldsNotValid,
     signupData,
-    enableReCaptcha,
-    closeModal
+    enableReCaptcha
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
-  const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [, { login }] = useSession()
   const emailInput = useRef(null)
-  const isFacebookLogin = configs?.facebook_login?.value === 'true'
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
@@ -88,33 +73,6 @@ const SignUpFormUI = (props) => {
   const [fieldNumber, setFieldNumber] = useState(1)
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
-
-  const initParams = {
-    client_id: configs?.google_login_client_id?.value,
-    cookiepolicy: 'single_host_origin',
-    scope: 'profile'
-  }
-
-  const handleSuccessFacebook = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
-  }
-
-  const handleSuccessApple = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
-  }
-
-  const handleSuccessGoogle = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
-  }
 
   const togglePasswordView = () => {
     setPasswordSee(!passwordSee)
@@ -125,11 +83,6 @@ const SignUpFormUI = (props) => {
       open: false,
       content: []
     })
-  }
-
-  const handleGoToPage = (data) => {
-    events.emit('go_to_page', data)
-    closeModal && closeModal()
   }
 
   const onSubmit = () => {

@@ -62,7 +62,7 @@ const BusinessControllerUI = (props) => {
     else handleClick(business)
   }
 
-  console.log(business)
+  const hasInformationLength = (business?.available_drivers?.length + business?.busy_drivers?.length + business?.active_orders?.length) > 0
 
   return (
     <>
@@ -72,7 +72,7 @@ const BusinessControllerUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ContainerCard isSkeleton={isSkeleton} isShowCallcenterInformation={isShowCallcenterInformation}>
+      <ContainerCard isSkeleton={isSkeleton} isShowCallcenterInformation={isShowCallcenterInformation && hasInformationLength}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
           <BusinessHero>
             {isSkeleton ? (
@@ -157,26 +157,32 @@ const BusinessControllerUI = (props) => {
                     <Skeleton width={70} />
                   )}
                 </Medadata>
-                {isShowCallcenterInformation && (
+                {isShowCallcenterInformation && hasInformationLength && (
                   <CallCenterInformation>
-                    <CallCenterInformationBullet bgcolor='green'>
-                      <InfoLength>
-                        {business?.available_drivers?.length ?? 32}
-                      </InfoLength>
-                      <InfoDescription>{t('OPEN_ORDERS', 'Open orders')}</InfoDescription>
-                    </CallCenterInformationBullet>
-                    <CallCenterInformationBullet bgcolor='red'>
-                      <InfoLength>
-                        {business?.busy_drivers?.length ?? 2}
-                      </InfoLength>
-                      <InfoDescription>{t('BUSY_DRIVERS', 'Busy drivers')}</InfoDescription>
-                    </CallCenterInformationBullet>
-                    <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
-                      <InfoLength>
-                        {business?.active_orders?.length ?? 5}
-                      </InfoLength>
-                      <InfoDescription>{t('AVAILABLE_DRIVERS', 'Avalable drivers')}</InfoDescription>
-                    </CallCenterInformationBullet>
+                    {business?.available_drivers?.length > 0 && (
+                      <CallCenterInformationBullet>
+                        <InfoLength>
+                          {business?.available_drivers?.length}
+                        </InfoLength>
+                        <InfoDescription>{t('OPEN_ORDERS', 'Open orders')}</InfoDescription>
+                      </CallCenterInformationBullet>
+                    )}
+                    {business?.busy_drivers?.length > 0 && (
+                      <CallCenterInformationBullet>
+                        <InfoLength>
+                          {business?.busy_drivers?.length}
+                        </InfoLength>
+                        <InfoDescription>{t('BUSY_DRIVERS', 'Busy drivers')}</InfoDescription>
+                      </CallCenterInformationBullet>
+                    )}
+                    {business?.active_orders?.length > 0 && (
+                      <CallCenterInformationBullet>
+                        <InfoLength>
+                          {business?.active_orders?.length}
+                        </InfoLength>
+                        <InfoDescription>{t('AVAILABLE_DRIVERS', 'Avalable drivers')}</InfoDescription>
+                      </CallCenterInformationBullet>
+                    )}
                   </CallCenterInformation>
                 )}
               </BusinessInfoItem>
