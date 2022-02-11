@@ -53,6 +53,7 @@ import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeade
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { PaymentOptionStripe } from './src/components/PaymentOptionStripe'
+import { PaymentOptionWallet } from './src/components/PaymentOptionWallet'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { ProductIngredient } from './src/components/ProductIngredient'
@@ -70,6 +71,8 @@ import { UpsellingPage } from './src/components/UpsellingPage'
 import { UserDetails } from './src/components/UserDetails'
 import { UserPopover } from './src/components/UserPopover'
 import { UserProfileForm } from './src/components/UserProfileForm'
+import { Wallets } from './src/components/Wallets'
+import { WalletTransactionItem } from './src/components/WalletTransactionItem'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -130,6 +133,7 @@ export {
   OrderProgress,
   PaymentOptionCash,
   PaymentOptionStripe,
+  PaymentOptionWallet,
   PaymentOptions,
   ProductForm,
   ProductIngredient,
@@ -148,6 +152,8 @@ export {
   UserDetails,
   UserPopover,
   UserProfileForm,
+  Wallets,
+  WalletTransactionItem,
 
   // styles
   Button,
