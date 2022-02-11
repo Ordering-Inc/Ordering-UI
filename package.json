@@ -15,7 +15,8 @@
     "./theme_wow": "./_modules/themes/wow/index.js",
     "./theme_pwa": "./_modules/themes/pwa/index.js",
     "./order_and_pay": "./_modules/themes/orderAndPay/index.js",
-    "./theme_franchise": "./_modules/themes/franchise/index.js"
+    "./theme_franchise": "./_modules/themes/franchise/index.js",
+    "./callcenter_original": "./_modules/themes/callcenterOriginal/index.js"
   },
   "scripts": {
     "clean": "shx rm -rf _bundles _modules",
