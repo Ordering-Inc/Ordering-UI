@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessesListing } from '../../../src/themes/callcenterOriginal/src/components/BusinessesListing'
+import { BusinessesListing } from '../../../src/components/BusinessesListing'
 import { useEvent } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
 
@@ -10,13 +10,11 @@ export const BusinessesList = (props) => {
     ...props,
     isSearchByName: true,
     isSearchByDescription: true,
-    isCustomLayout: true,
     onBusinessClick: (business) => {
       events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     },
     currentPageParam: parseInt(currentPageParam),
-    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug'],
-    onRedirectPage: (data) => events.emit('go_to_page', data)
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
   }
 
   return (

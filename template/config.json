@@ -9,5 +9,7 @@
   "socket": {
     "url": "https://socket.ordering.co"
   },
-  "country_calling_code": "+52"
+  "store_android_id": "",
+  "store_apple_id": "",
+  "store_kindle_id": ""
 }
