@@ -50,6 +50,7 @@ import { OrdersOption } from './src/components/OrdersOption'
 import { OrderProgress } from './src/components/OrderProgress'
 import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorContent'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
+import { PhoneAutocomplete } from './src/components/PhoneAutocomplete'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { PaymentOptionStripe } from './src/components/PaymentOptionStripe'
@@ -131,6 +132,7 @@ export {
   PaymentOptionCash,
   PaymentOptionStripe,
   PaymentOptions,
+  PhoneAutocomplete,
   ProductForm,
   ProductIngredient,
   ProductItemAccordion,
