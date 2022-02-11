@@ -19,7 +19,7 @@ export const WalletList = (props) => {
     try {
       setTransactions({ ...transactions, loading: true })
       const response = await fetch(
-        `${ordering.root}/users/${user.id}/wallets/${walletId}/events`,
+        `${ordering.root}/users/${user.id}/wallets/${walletId}/events?orderBy=-id`,
         {
           method: 'GET',
           headers: {

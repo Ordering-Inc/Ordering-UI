@@ -74,17 +74,21 @@ const WalletsUI = (props) => {
             </SectionWrapper>
 
             <div style={{ marginTop: 20 }}>
-              <h2 style={{fontSize: 20}}>{t('TRANSACTIONS_HISTORY', 'Transactions history')}</h2>
-              <TransactionsWrapper>
-                {transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.map((transaction, i) =>(
-                  <WalletTransactionItem
-                    idx={i}
-                    type={currentWalletSelected?.type}
-                    key={transaction.id}
-                    item={transaction}
-                  />
-                ))}
-              </TransactionsWrapper>
+              {!transactionsList?.loading && transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.length > 0 && (
+                <>
+                  <h2 style={{fontSize: 20}}>{t('TRANSACTIONS_HISTORY', 'Transactions history')}</h2>
+                  <TransactionsWrapper>
+                    {transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.map((transaction, i) =>(
+                      <WalletTransactionItem
+                        idx={i}
+                        type={currentWalletSelected?.type}
+                        key={transaction.id}
+                        item={transaction}
+                      />
+                    ))}
+                  </TransactionsWrapper>
+                </>
+              )}
 
               {transactionsList?.loading && (
                 <>
