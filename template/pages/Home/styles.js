@@ -10,21 +10,17 @@ export const HomeSection = styled.div`
   width: 100%;
   box-sizing: border-box;
   background: #FFF;
-
   flex-direction: column;
   padding: 0px 10px 20px;
   &.reverse {
     flex-direction: column-reverse;
   }
-
   ${({ column }) => column && css`
     flex-direction: column;
   `}
-
   ${({ bgColor }) => bgColor && css`
     background: ${bgColor};
   `}
-
   ${({ bgimage }) => bgimage && css`
     background-image: linear-gradient(
       rgba(0, 0, 0, 0.5),
@@ -39,7 +35,6 @@ export const HomeSection = styled.div`
     justify-content: center;
     align-items: center;
   `}
-
   @media (min-width: 943px) {
     padding: 0px 50px 20px;
     flex-direction: ${({ column }) => column ? 'column' : 'row'};
@@ -141,7 +136,6 @@ export const TextContent = styled.div`
   justify-content: center;
   width: 100%;
   text-align: center;
-
   div {
     text-align: left;
     margin-top: 25px;
@@ -149,11 +143,9 @@ export const TextContent = styled.div`
       color: ${props => props.theme.colors.primary};
     }
   }
-
   h2 {
     font-size: 24px;
   }
-
   &.center {
     display: flex;
     flex-direction: column;
@@ -161,13 +153,11 @@ export const TextContent = styled.div`
     align-items: center;
     height: 100%;
     width: 100%;
-
     h2 {
       font-size: 24px;
       color: #FFF;
       text-align: center;
     }
-
     div {
       display: flex;
       flex-direction: column;
@@ -175,17 +165,14 @@ export const TextContent = styled.div`
       align-items: center;
       height: 100%;
     }
-
     button {
       width: 122px;
     }
   }
-
   @media (min-width: 943px) {
     width: 50%;
     text-align: left;
   }
-
   @media (min-width: 481px) {
     div {
       ${props => props.theme?.rtl && css`
@@ -208,7 +195,6 @@ export const Icons = styled.div`
 `
 export const HomeFooter = styled.div`
   font: normal normal normal 128px/160px ${props => props.theme.fonts.special || 'Georgia'};
-
   @media (min-width: 768px) {
     h2 {
       font-size: 50px !important;
