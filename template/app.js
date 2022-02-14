@@ -96,7 +96,7 @@ export const App = () => {
 
   return (
     <>
-      {/* {!!configs?.track_id_google_analytics?.value && (
+      {!!configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
       )}
       {!!configs?.facebook_id?.value && (
@@ -112,7 +112,7 @@ export const App = () => {
         storeAndroidId={settings?.store_android_id}
         storeAppleId={settings?.store_apple_id}
         storeKindleId={settings?.store_kindle_id}
-      /> */}
+      />
       {
         loaded && (
           <>
