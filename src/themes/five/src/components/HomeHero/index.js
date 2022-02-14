@@ -56,25 +56,25 @@ export const HomeHero = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
-        <Overlay />
         <ContentWrapper>
-          <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
-          <Slogan>{t('SUBTITLE_HOME', theme?.defaultLanguages?.SUBTITLE_HOME || 'Let\'s start to order food now')}</Slogan>
-          <WrapInput onClick={handleAddressInput} withIcon>
-            <HiOutlineLocationMarker />
-            <p>
-              {orderState?.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
-            </p>
-          </WrapInput>
-          <Button
-            color='primary'
-            name='find-business'
-            onClick={handleFindBusinesses}
-          >
-            {t('FIND_BUSINESSES', theme?.defaultLanguages?.FIND_BUSINESSES || 'Find businesses')}
-          </Button>
+          <div>
+            <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
+            <Slogan>{t('SUBTITLE_HOME', theme?.defaultLanguages?.SUBTITLE_HOME || 'Let\'s start to order food now')}</Slogan>
+            <WrapInput onClick={handleAddressInput} withIcon>
+              <HiOutlineLocationMarker />
+              <p>
+                {orderState?.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+              </p>
+            </WrapInput>
+            <Button
+              color='primary'
+              name='find-business'
+              onClick={handleFindBusinesses}
+            >
+              {t('FIND_BUSINESSES', theme?.defaultLanguages?.FIND_BUSINESSES || 'Find businesses')}
+            </Button>
+          </div>
         </ContentWrapper>
-
         <Modal
           title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
           open={modals.formOpen}

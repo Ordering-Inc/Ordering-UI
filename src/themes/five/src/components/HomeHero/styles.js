@@ -4,12 +4,8 @@ import styled, { css } from 'styled-components'
 export const HeroContainerStyled = styled.div`
   width: 100%;
   height: calc(100vh - 97px);
+  padding-top: 0px;
   position: relative;
-
-  button{
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
 
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
@@ -18,8 +14,13 @@ export const HeroContainerStyled = styled.div`
     background-position: center;
   `}
 
-  @media (min-width: 821px) {
+  @media (min-width: 576px) {
     height: calc(100vh - 65px);
+  }
+
+  @media (min-width: 993px) {
+    height: auto;
+    padding-top: 53%;
   }
 `
 
@@ -37,43 +38,6 @@ export const HeroContainer = (props) => {
     </HeroContainerStyled>
   )
 }
-
-export const ContentWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    position: relative;
-    padding: 0px 20px 0px;
-
-    ${props => props.theme?.rtl && css`
-      padding: 0px 20px 0px;
-    `}
-
-    button {
-      width: 180px;
-      font-size: 18px;
-    }
-
-    input {
-      width: 90%;
-      margin-bottom: 15px;
-    }
-
-    @media (min-width: 425px) {
-      input {
-        width: 97%;
-      }
-    }
-
-    @media (min-width: 768px) {
-      padding: 0px 40px 0px;
-
-      ${props => props.theme?.rtl && css`
-        padding: 0px 40px 0px;
-      `}
-    }
-`
 
 export const Title = styled.h1`
   margin: 0px;
@@ -172,11 +136,50 @@ export const WrapInput = styled.div`
   }
 `
 
-export const Overlay = styled.div`
+export const ContentWrapper = styled.div`
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: #0000004D;
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    padding: 0px 20px 0px;
+
+    ${props => props.theme?.rtl && css`
+      padding: 0px 20px 0px;
+    `}
+
+    button {
+      width: 180px;
+      font-size: 18px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    input {
+      width: 90%;
+      margin-bottom: 15px;
+    }
+
+    @media (min-width: 425px) {
+      input {
+        width: 97%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      padding: 0px 40px 0px;
+
+      ${props => props.theme?.rtl && css`
+        padding: 0px 40px 0px;
+      `}
+    }
+  }
+
 `
