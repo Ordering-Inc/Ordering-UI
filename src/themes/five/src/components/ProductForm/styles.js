@@ -4,6 +4,7 @@ export const ProductContainer = styled.div`
   max-height: 100vh;
   position: relative;
   padding: 50px 20px 20px;
+  overflow-x: hidden;
 
   @media (min-width: 768px) {
     height: 100%;
@@ -142,9 +143,6 @@ export const ProductInfo = styled.div`
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
   margin-bottom: 20px;
-  @media (min-width: 1201px) {
-    width: calc(100% - 25px);
-  }
 
   .price-discount {
     text-decoration: line-through;
@@ -376,19 +374,32 @@ export const ProductName = styled.h1`
   line-height: 36px;
   color: #344050;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  .calories {
+    font-size: 16px;
+    font-weight: 100;
+    color: #909BA9;
+  } 
 `
 export const Properties = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 `
 export const ProductDescription = styled.p`
-  margin-top: 10px;
+  margin-top: 0px;
 `
 export const PriceContent = styled.p`
   font-size: 18px;
   line-height: 27px;
   color: #344050;
   margin: 0;
+  margin-bottom: 10px;
+  .offer-price {
+    text-decoration: line-through;
+    font-size: 16px;
+    color: #909BA9;
+  }
 `
 export const ProductMeta = styled.div`
   display: flex;
@@ -397,8 +408,9 @@ export const ProductMeta = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #909BA9;
+    margin-bottom: 10px;
   }
 `
 export const EstimatedPersons = styled.div`
-
+  display: flex;
 `
