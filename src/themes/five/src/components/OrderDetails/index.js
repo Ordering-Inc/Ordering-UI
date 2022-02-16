@@ -94,6 +94,15 @@ const OrderDetailsUI = (props) => {
 
   const { order, loading, businessData, error } = props.order
 
+  const walletName = {
+    cash: {
+      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet'),
+    },
+    credit_point: {
+      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet'),
+    }
+  }
+
   const getOrderStatus = (s) => {
     const status = parseInt(s)
     const orderStatus = [
@@ -475,7 +484,7 @@ const OrderDetailsUI = (props) => {
                 </table>
                 {order?.payment_events?.length > 0 && (
                   <div style={{marginTop: 10}}>
-                    <span style={{fontSize: 18, fontWeight: 'bold'}}>{t('PAYMENTS', 'Payments')}</span>
+                    <span style={{fontSize: 20}}>{t('PAYMENTS', 'Payments')}</span>
                     <div
                       style={{
                         width: '100%',
@@ -500,7 +509,9 @@ const OrderDetailsUI = (props) => {
                             }}
                           >
                             <span>
-                              {event?.wallet?.name ?? event?.paymethod?.name}
+                              {event?.wallet_event
+                                ? walletName[event?.wallet_event?.wallet?.type]?.name
+                                : event?.paymethod?.name}
                             </span>
                             {event?.data?.charge_id && (
                               <span>
