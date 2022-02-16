@@ -170,6 +170,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       loading = _props$order.loading,
       businessData = _props$order.businessData,
       error = _props$order.error;
+  var walletName = {
+    cash: {
+      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
+    },
+    credit_point: {
+      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
+    }
+  };
 
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22;
@@ -537,8 +545,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement("span", {
     style: {
-      fontSize: 18,
-      fontWeight: 'bold'
+      fontSize: 20
     }
   }, t('PAYMENTS', 'Payments')), /*#__PURE__*/_react.default.createElement("div", {
     style: {
@@ -546,7 +553,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       marginTop: 10
     }
   }, order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.map(function (event) {
-    var _event$wallet$name, _event$wallet, _event$paymethod, _event$data, _event$data2;
+    var _walletName$event$wal, _event$wallet_event, _event$wallet_event$w, _event$paymethod, _event$data, _event$data2;
 
     return /*#__PURE__*/_react.default.createElement("div", {
       key: event.id,
@@ -562,7 +569,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         display: 'flex',
         flexDirection: 'column'
       }
-    }, /*#__PURE__*/_react.default.createElement("span", null, (_event$wallet$name = event === null || event === void 0 ? void 0 : (_event$wallet = event.wallet) === null || _event$wallet === void 0 ? void 0 : _event$wallet.name) !== null && _event$wallet$name !== void 0 ? _event$wallet$name : event === null || event === void 0 ? void 0 : (_event$paymethod = event.paymethod) === null || _event$paymethod === void 0 ? void 0 : _event$paymethod.name), (event === null || event === void 0 ? void 0 : (_event$data = event.data) === null || _event$data === void 0 ? void 0 : _event$data.charge_id) && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('CODE', 'Code'), ": ").concat(event === null || event === void 0 ? void 0 : (_event$data2 = event.data) === null || _event$data2 === void 0 ? void 0 : _event$data2.charge_id))), /*#__PURE__*/_react.default.createElement("span", null, "-", parsePrice(event.amount)));
+    }, /*#__PURE__*/_react.default.createElement("span", null, event !== null && event !== void 0 && event.wallet_event ? (_walletName$event$wal = walletName[event === null || event === void 0 ? void 0 : (_event$wallet_event = event.wallet_event) === null || _event$wallet_event === void 0 ? void 0 : (_event$wallet_event$w = _event$wallet_event.wallet) === null || _event$wallet_event$w === void 0 ? void 0 : _event$wallet_event$w.type]) === null || _walletName$event$wal === void 0 ? void 0 : _walletName$event$wal.name : event === null || event === void 0 ? void 0 : (_event$paymethod = event.paymethod) === null || _event$paymethod === void 0 ? void 0 : _event$paymethod.name), (event === null || event === void 0 ? void 0 : (_event$data = event.data) === null || _event$data === void 0 ? void 0 : _event$data.charge_id) && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('CODE', 'Code'), ": ").concat(event === null || event === void 0 ? void 0 : (_event$data2 = event.data) === null || _event$data2 === void 0 ? void 0 : _event$data2.charge_id))), /*#__PURE__*/_react.default.createElement("span", null, "-", parsePrice(event.amount)));
   })))), /*#__PURE__*/_react.default.createElement(_styles.Content, {
     className: "order-content"
   }, parseInt(configs === null || configs === void 0 ? void 0 : (_configs$guest_uuid_a = configs.guest_uuid_access) === null || _configs$guest_uuid_a === void 0 ? void 0 : _configs$guest_uuid_a.value, 10) && (order === null || order === void 0 ? void 0 : order.hash_key) && /*#__PURE__*/_react.default.createElement(_styles.ShareOrder, null, /*#__PURE__*/_react.default.createElement("div", {
