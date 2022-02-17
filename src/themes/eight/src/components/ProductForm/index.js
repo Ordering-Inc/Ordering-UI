@@ -328,18 +328,20 @@ const ProductOptionsUI = (props) => {
                     </ProductInnerContainer>
                   </ProductOptionInfo>
                 )}
-                <ProductInnerContainer>
-                  <ProductComment>
-                    <SectionTitle>{t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}</SectionTitle>
-                    <TextArea
-                      rows={4}
-                      placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
-                      defaultValue={productCart.comment}
-                      onChange={handleChangeCommentState}
-                      disabled={!(productCart && !isSoldOut && maxProductQuantity)}
-                    />
-                  </ProductComment>
-                </ProductInnerContainer>
+                {!product?.hide_special_instructions && (
+                  <ProductInnerContainer>
+                    <ProductComment>
+                      <SectionTitle>{t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}</SectionTitle>
+                      <TextArea
+                        rows={4}
+                        placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
+                        defaultValue={productCart.comment}
+                        onChange={handleChangeCommentState}
+                        disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                      />
+                    </ProductComment>
+                  </ProductInnerContainer>
+                )}
                 {
                 props.afterMidElements?.map((MidElement, i) => (
                   <React.Fragment key={i}>
