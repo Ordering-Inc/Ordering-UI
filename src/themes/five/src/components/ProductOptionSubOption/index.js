@@ -100,7 +100,7 @@ const ProductOptionSubOptionUI = (props) => {
           <div>{suboption?.name}</div>
           {showMessage && <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option?.max}`}</span>}
         </Text>
-        {option?.allow_suboption_quantity && (
+        {option?.allow_suboption_quantity && state?.selected && (
           <QuantityControl>
             <BsDashCircle
               disabled={state.quantity === 0}
@@ -114,7 +114,7 @@ const ProductOptionSubOptionUI = (props) => {
           </QuantityControl>
         )}
         {
-          option?.with_half_option && (
+          option?.with_half_option && state?.selected && (
             <PositionControl>
               <BsCircleHalf
                 className={['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}

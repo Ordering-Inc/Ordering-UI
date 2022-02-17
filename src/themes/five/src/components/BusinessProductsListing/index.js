@@ -252,7 +252,7 @@ const BusinessProductsListingUI = (props) => {
       )}
 
       <Modal
-        width='40%'
+        width='700px'
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}

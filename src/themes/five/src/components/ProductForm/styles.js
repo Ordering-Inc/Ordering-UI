@@ -45,9 +45,6 @@ export const SwiperWrapper = styled.div`
     @media (min-width: 576px) {
       height: 320px;
     }
-
-    @media (min-width: 1201px) {
-    }
   }
 
 
@@ -77,6 +74,7 @@ export const SwiperWrapper = styled.div`
 
       img {
         border-radius: 7.6px;
+        max-height: 93px;
       }
     }
 
