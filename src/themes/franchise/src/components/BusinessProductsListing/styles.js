@@ -7,10 +7,6 @@ export const ProductsContainer = styled.div`
     font-size: 24px;
     cursor: pointer;
     transition: all 0.2s ease;
-
-    &:hover {
-      transform: scale(1.1);
-    }
   }
 
   @media (min-width: 769px) {
@@ -23,11 +19,7 @@ export const WrapContent = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
 
   @media (min-width: 381px) {
-    padding: 15px;
-  }
-
-  @media (min-width: 1200px) {
-    padding: 0;
+    padding: 0px;
   }
 `
 

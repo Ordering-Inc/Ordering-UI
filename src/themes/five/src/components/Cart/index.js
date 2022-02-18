@@ -29,7 +29,6 @@ import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 const CartUI = (props) => {
   const {
     currentCartUuid,
-    cart,
     clearCart,
     isProducts,
     changeQuantity,
@@ -67,6 +66,17 @@ const CartUI = (props) => {
   const [isUpselling, setIsUpselling] = useState(false)
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
+
+  const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
+
+  const walletName = {
+    cash: {
+      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet'),
+    },
+    credit_point: {
+      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet'),
+    }
+  }
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -302,6 +312,53 @@ const CartUI = (props) => {
                       </tr>
                     </tbody>
                   </table>
+                )}
+
+                {cart?.payment_events?.length > 0 && (
+                  <div
+                    style={{
+                      width: '100%',
+                      marginTop: 10
+                    }}
+                  >
+                    {cart?.payment_events?.map(event => (
+                      <div
+                        key={event.id}
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          marginBottom: 10
+                        }}
+                      >
+                        <span>
+                          {walletName[cart?.wallets?.find(wallet => wallet.id === event.wallet_id)?.type]?.name}
+                        </span>
+                        <span>
+                          -{parsePrice(event.amount)}
+                        </span>
+                      </div>
+                    ))}
+                     <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        marginBottom: 10
+                      }}
+                    >
+                      <span
+                        style={{ fontWeight: 'bold'}}
+                      >
+                        {t('TOTAL_TO_PAY', 'Total to pay')}
+                      </span>
+                      <span
+                        style={{ fontWeight: 'bold'}}
+                      >
+                        {parsePrice(cart?.balance)}
+                      </span>
+                    </div>
+                  </div>
                 )}
               </OrderBill>
             )}

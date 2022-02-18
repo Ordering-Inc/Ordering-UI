@@ -74,7 +74,7 @@ export const BusinessBasicInformation = (props) => {
                 {!loading ? (
                   <h2 className='bold'>{business?.name}</h2>
                 ) : (
-                  <Skeleton width={100} />
+                  <Skeleton width={250} height={35} />
                 )}
                 {!loading && (
                   <BusinessMoreDetail>
@@ -89,57 +89,71 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <p className='type'>{business?.address}</p>
               ) : (
-                <Skeleton width={100} />
+                <Skeleton width={150} />
               )}
-              <BusinessDetail>
+              <BusinessDetail isSkeleton={loading}>
                 {orderState?.options.type === 1 && (
                   <>
                     {!loading ? (
-                      <h5>
-                        <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
-                        {business && parsePrice(business?.delivery_price || 0)}
-                      </h5>
+                      <>
+                        <h5>
+                          <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
+                          {business && parsePrice(business?.delivery_price || 0)}
+                        </h5>
+                        <span className='dot'>•</span>
+                      </>
                     ) : (
-                      <Skeleton width={70} />
+                      <Skeleton width={50} />
                     )}
                   </>
                 )}
                 {!loading ? (
                   <>
                     {orderState?.options?.type === 1 ? (
-                      <h5>
-                        {convertHoursToMinutes(business?.delivery_time)}
-                      </h5>
+                      <>
+                        <h5>
+                          {convertHoursToMinutes(business?.delivery_time)}
+                        </h5>
+                        <span className='dot'>•</span>
+                      </>
                     ) : (
-                      <h5>
-                        {convertHoursToMinutes(business?.pickup_time)}
-                      </h5>
+                      <>
+                        <h5>
+                          {convertHoursToMinutes(business?.pickup_time)}
+                        </h5>
+                        <span className='dot'>•</span>
+                      </>
                     )}
                   </>
                 ) : (
-                  <Skeleton width={70} />
+                  <Skeleton width={50} />
                 )}
 
                 {!loading ? (
-                  <h5>
-                    {parseDistance(business?.distance || 0)}
-                  </h5>
+                  <>
+                    <h5>
+                      {parseDistance(business?.distance || 0)}
+                    </h5>
+                    <span className='dot'>•</span>
+                  </>
+
                 ) : (
-                  <Skeleton width={70} />
+                  <Skeleton width={50} />
                 )}
                 {!loading ? (
                   <div className='review'>
                     <FaStar className='start' />
-                    <span>{business?.reviews?.total}</span>
+                    <p>{business?.reviews?.total}</p>
                   </div>
                 ) : (
-                  <Skeleton width={100} />
+                  <Skeleton width={50} />
                 )}
               </BusinessDetail>
               {
                 !loading ? (
                   <div className='preorder-Reviews'>
                     <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
+                    <span className='dot'>•</span>
                     {business.reviews?.reviews && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
                   </div>
                 ) : (

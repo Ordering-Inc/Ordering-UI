@@ -15,7 +15,8 @@
     "./theme_wow": "./_modules/themes/wow/index.js",
     "./theme_pwa": "./_modules/themes/pwa/index.js",
     "./order_and_pay": "./_modules/themes/orderAndPay/index.js",
-    "./theme_franchise": "./_modules/themes/franchise/index.js"
+    "./theme_franchise": "./_modules/themes/franchise/index.js",
+    "./callcenter_original": "./_modules/themes/callcenterOriginal/index.js"
   },
   "scripts": {
     "clean": "shx rm -rf _bundles _modules",
@@ -81,7 +82,7 @@
     "libphonenumber-js": "^1.9.4",
     "lodash": "^4.17.19",
     "moment": "^2.29.0",
-    "ordering-components": "github:Ordering-Inc/ordering-components#release",
+    "ordering-components": "github:Ordering-Inc/ordering-components#development",
     "polished": "^3.6.6",
     "react-bootstrap-icons": "^1.7.2",
     "react-calendar": "^3.3.1",
@@ -93,6 +94,7 @@
     "react-phone-number-input": "^3.1.6",
     "react-popper": "^2.2.3",
     "react-select": "^4.3.1",
+    "react-smartbanner": "^5.1.4",
     "react-to-print": "^2.12.3",
     "smoothscroll-polyfill": "^0.4.4",
     "styled-components": "^5.1.1",

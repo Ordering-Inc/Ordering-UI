@@ -6,7 +6,7 @@ export const HeaderItem = styled.div`
   align-items: center;
   border-radius: 7.6px;
   padding: 7px 13px;
-  margin: 0 10px;
+  margin: 0px;
 
   ${({ isOpen }) => isOpen && css`
     background: #F8F9FA;

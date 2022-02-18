@@ -387,17 +387,18 @@ const ProductOptionsUI = (props) => {
                 ))}
               </WrapperIngredients>
             )}
-
-            <ProductComment>
-              <SectionTitle>{t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}</SectionTitle>
-              <TextArea
-                rows={4}
-                placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
-                defaultValue={productCart.comment}
-                onChange={handleChangeCommentState}
-                disabled={!(productCart && !isSoldOut && maxProductQuantity)}
-              />
-            </ProductComment>
+            {!product?.hide_special_instructions && (
+              <ProductComment>
+                <SectionTitle>{t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}</SectionTitle>
+                <TextArea
+                  rows={4}
+                  placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
+                  defaultValue={productCart.comment}
+                  onChange={handleChangeCommentState}
+                  disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                />
+              </ProductComment>
+            )}
           </ProductInfo>
         )}
 

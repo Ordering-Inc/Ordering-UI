@@ -215,7 +215,7 @@ export const BusinessItemAccordion = (props) => {
           ref={content}
           style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
         >
-          {handleChangeStore && (
+          {isCheckout && handleChangeStore && (
             <BusinessInfo>
               <ContentInfo className='info'>
                 <span

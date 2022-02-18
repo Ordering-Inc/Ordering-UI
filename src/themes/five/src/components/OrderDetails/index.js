@@ -94,6 +94,15 @@ const OrderDetailsUI = (props) => {
 
   const { order, loading, businessData, error } = props.order
 
+  const walletName = {
+    cash: {
+      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet'),
+    },
+    credit_point: {
+      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet'),
+    }
+  }
+
   const getOrderStatus = (s) => {
     const status = parseInt(s)
     const orderStatus = [
@@ -473,6 +482,51 @@ const OrderDetailsUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
+                {order?.payment_events?.length > 0 && (
+                  <div style={{marginTop: 10}}>
+                    <span style={{fontSize: 20}}>{t('PAYMENTS', 'Payments')}</span>
+                    <div
+                      style={{
+                        width: '100%',
+                        marginTop: 10
+                      }}
+                    >
+                      {order?.payment_events?.map(event => (
+                        <div
+                          key={event.id}
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            marginBottom: 10
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                            }}
+                          >
+                            <span>
+                              {event?.wallet_event
+                                ? walletName[event?.wallet_event?.wallet?.type]?.name
+                                : event?.paymethod?.name}
+                            </span>
+                            {event?.data?.charge_id && (
+                              <span>
+                                {`${t('CODE', 'Code')}: ${event?.data?.charge_id}`}
+                              </span>
+                            )}
+                          </div>
+                          <span>
+                            -{parsePrice(event.amount)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </OrderBill>
               <Content className='order-content'>
                 {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (

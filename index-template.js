@@ -19,7 +19,7 @@ import logotypeInvert from './template/assets/images/logotype-invert.svg'
 import isotype from './template/assets/images/isotype.svg'
 import isotypeInvert from './template/assets/images/isotype-invert.svg'
 
-import homeHero from './template/assets/images/home-hero.png'
+import homeHero from './template/assets/images/home-hero.jpg'
 import notFound from './template/assets/images/not-found.svg'
 import notNetwork from './template/assets/images/not-network.svg'
 import notFound404 from './template/assets/images/not-found-404.svg'

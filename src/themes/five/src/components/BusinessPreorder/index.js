@@ -53,7 +53,8 @@ const BusinessPreorderUI = (props) => {
     dateSelected,
     timeSelected,
     handleChangeDate,
-    handleChangeTime
+    handleChangeTime,
+    showButton
   } = props
 
   const [{ optimizeImage, parseTime }] = useUtils()
@@ -182,24 +183,24 @@ const BusinessPreorderUI = (props) => {
           </MonthYearLayer>
           <DaysSwiper left={<BsCaretLeftFill />}>
             <Swiper
-              spaceBetween={10}
+              spaceBetween={0}
               navigation
               breakpoints={{
                 0: {
                   slidesPerView: 4,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 },
                 400: {
                   slidesPerView: 5,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 },
                 550: {
                   slidesPerView: 6,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 },
                 769: {
                   slidesPerView: configs?.max_days_preorder?.value < 7 ? configs?.max_days_preorder?.value : 7,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 }
               }}
               freeMode
@@ -239,15 +240,17 @@ const BusinessPreorderUI = (props) => {
           ))}
         </TimeListWrapper>
       </OrderTimeWrapper>
-      <ButtonWrapper>
-        <Button
-          color='primary'
-          onClick={goToBusinessPage}
-        >
-          {t('GO_TO_MENU', 'Go to menu')}
-          <BsArrowRight />
-        </Button>
-      </ButtonWrapper>
+      {showButton && (
+        <ButtonWrapper>
+          <Button
+            color='primary'
+            onClick={goToBusinessPage}
+          >
+            {t('GO_TO_MENU', 'Go to menu')}
+            <BsArrowRight />
+          </Button>
+        </ButtonWrapper>
+      )}
       {orderState?.loading && (
         <Layer>
           {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (

@@ -33,7 +33,8 @@ import {
   WrapperLeftContent,
   CheckOutDivider,
   DriverTipDivider,
-  DeliveryOptionsContainer
+  DeliveryOptionsContainer,
+  WalletPaymentOptionContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -43,6 +44,7 @@ import { NotFoundSource } from '../NotFoundSource'
 import { AddressDetails } from '../AddressDetails'
 import { UserDetails } from '../UserDetails'
 import { PaymentOptions } from '../PaymentOptions'
+import { PaymentOptionWallet } from '../PaymentOptionWallet'
 import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
@@ -100,7 +102,6 @@ const CheckoutUI = (props) => {
       value: option?.id, content: option?.name, showOnSelected: option?.name
     }
   })
-
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -364,9 +365,15 @@ const CheckoutUI = (props) => {
                   handleOrderRedirect={handleOrderRedirect}
                   isCustomerMode={isCustomerMode}
                   paySelected={paymethodSelected}
+                  handlePlaceOrder={handlePlaceOrder}
                 />
               </PaymentMethodContainer>
             )}
+            <WalletPaymentOptionContainer>
+              <PaymentOptionWallet
+                cart={cart}
+              />
+            </WalletPaymentOptionContainer>
           </WrapperLeftContent>
         </WrapperLeftContainer>
         <WrapperRightContainer>
