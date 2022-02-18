@@ -8,8 +8,7 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig, FacebookPixel } from 'ordering-components'
 
-import { Header } from '../src/themes/five'
-// import { Header } from '../src/components/Header'
+import { Header } from '../src/components/Header'
 import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -100,20 +99,20 @@ export const App = () => {
       {!!configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
       )}
-      {/* {!!configs?.facebook_id?.value && (
+      {!!configs?.facebook_id?.value && (
         <FacebookPixel trackId={configs?.facebook_id?.value} />
-      )} */}
+      )}
       <ListenPageChanges />
       {
         !loaded && (
           <SpinnerLoader />
         )
       }
-      {/* <SmartAppBanner
+      <SmartAppBanner
         storeAndroidId={settings?.store_android_id}
         storeAppleId={settings?.store_apple_id}
         storeKindleId={settings?.store_kindle_id}
-      /> */}
+      />
       {
         loaded && (
           <>
