@@ -200,7 +200,8 @@ var getTraduction = function getTraduction(key) {
     ERROR_PLACE_PAY_WITH_REDIRECT: 'An error occurred while trying to pay by redirect',
     ERROR_PLACE_PAY_WITH_CARD1: 'An error occurred while trying to pay by card',
     ERROR_PLACE_PAY_WITH_PAYPAL_CAPTURE: 'An error occurred while trying to pay by PayPal',
-    ERROR_ADD_PRODUCT_VERY_FAR_FOR_DELIVERY: 'Error adding product, very far for delivery'
+    ERROR_ADD_PRODUCT_VERY_FAR_FOR_DELIVERY: 'Error adding product, very far for delivery',
+    ERROR_INVALID_OFFER: "The offer doesn't exist"
   };
   return keyList[key] ? t(key, keyList[key]) : t(key);
 };
