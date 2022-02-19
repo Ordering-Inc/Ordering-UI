@@ -186,6 +186,8 @@ const CartUI = (props) => {
             handleStoreRedirect={handleStoreRedirect}
             handleCartOpen={handleCartOpen}
             isStore={isStore}
+            total={cart?.total}
+            handleClickCheckout={handleClickCheckout}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
@@ -339,7 +341,7 @@ const CartUI = (props) => {
                         </span>
                       </div>
                     ))}
-                     <div
+                    <div
                       style={{
                         display: 'flex',
                         flexDirection: 'row',
@@ -348,12 +350,12 @@ const CartUI = (props) => {
                       }}
                     >
                       <span
-                        style={{ fontWeight: 'bold'}}
+                        style={{ fontWeight: 'bold' }}
                       >
                         {t('TOTAL_TO_PAY', 'Total to pay')}
                       </span>
                       <span
-                        style={{ fontWeight: 'bold'}}
+                        style={{ fontWeight: 'bold' }}
                       >
                         {parsePrice(cart?.balance)}
                       </span>

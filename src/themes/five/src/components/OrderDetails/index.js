@@ -96,10 +96,10 @@ const OrderDetailsUI = (props) => {
 
   const walletName = {
     cash: {
-      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet'),
+      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
     },
     credit_point: {
-      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet'),
+      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
     }
   }
 
@@ -483,8 +483,8 @@ const OrderDetailsUI = (props) => {
                   </tbody>
                 </table>
                 {order?.payment_events?.length > 0 && (
-                  <div style={{marginTop: 10}}>
-                    <span style={{fontSize: 20}}>{t('PAYMENTS', 'Payments')}</span>
+                  <div style={{ marginTop: 10 }}>
+                    <span style={{ fontSize: 20 }}>{t('PAYMENTS', 'Payments')}</span>
                     <div
                       style={{
                         width: '100%',
@@ -505,7 +505,7 @@ const OrderDetailsUI = (props) => {
                           <div
                             style={{
                               display: 'flex',
-                              flexDirection: 'column',
+                              flexDirection: 'column'
                             }}
                           >
                             <span>

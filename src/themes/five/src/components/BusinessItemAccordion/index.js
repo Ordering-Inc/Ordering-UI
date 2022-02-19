@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import TiArrowSortedUp from '@meronex/icons/ti/TiArrowSortedUp'
-import { useOrder, useLanguage, useEvent } from 'ordering-components'
+import { useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
 
 import {
   AccordionSection,
@@ -9,8 +9,10 @@ import {
   ContentInfo,
   BusinessInfo,
   BusinessTotal,
-  BusinessActions
+  BusinessActions,
+  PriceContainer
 } from './styles'
+import { Button } from '../../styles/Buttons'
 
 export const BusinessItemAccordion = (props) => {
   const {
@@ -27,13 +29,15 @@ export const BusinessItemAccordion = (props) => {
     handleClearProducts,
     handleStoreRedirect,
     handleCartOpen,
-    isStore
+    isStore,
+    total,
+    handleClickCheckout
   } = props
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [events] = useEvent()
-
+  const [{ parsePrice }] = useUtils()
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
@@ -174,6 +178,12 @@ export const BusinessItemAccordion = (props) => {
         >
           {props.children}
         </AccordionContent>
+        {!setActive && !isClosed && !!isProducts && (
+          <PriceContainer>
+            <h4>{parsePrice(total)}</h4>
+            <Button onClick={handleClickCheckout} color='primary'>{t('CHECKOUT', 'Checkout')}</Button>
+          </PriceContainer>
+        )}
       </AccordionSection>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
