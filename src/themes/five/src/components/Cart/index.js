@@ -188,6 +188,7 @@ const CartUI = (props) => {
             isStore={isStore}
             total={cart?.total}
             handleClickCheckout={handleClickCheckout}
+            checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
