@@ -15,6 +15,8 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
+var _Buttons = require("../../styles/Buttons");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -51,7 +53,10 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       handleClearProducts = props.handleClearProducts,
       handleStoreRedirect = props.handleStoreRedirect,
       handleCartOpen = props.handleCartOpen,
-      isStore = props.isStore;
+      isStore = props.isStore,
+      total = props.total,
+      handleClickCheckout = props.handleClickCheckout,
+      checkoutButtonDisabled = props.checkoutButtonDisabled;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -64,6 +69,10 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
+
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -195,7 +204,10 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       minHeight: "".concat(setHeight),
       maxHeight: !setActive && '0px'
     }
-  }, props.children)), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, props.children), !setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && /*#__PURE__*/_react.default.createElement(_styles.PriceContainer, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: handleClickCheckout,
+    color: "primary"
+  }, t('CHECKOUT', 'Checkout')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

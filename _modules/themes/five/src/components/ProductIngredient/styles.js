@@ -24,7 +24,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0px;\n    "])));
 }, function (props) {
-  return props.theme.colors.primary;
+  return props.isSoldOut ? props.theme.colors.lightGray : props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.lightGray;
 });

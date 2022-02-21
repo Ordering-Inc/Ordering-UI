@@ -306,7 +306,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.SwiperWrapper, null, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
+  }), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.SwiperWrapper, {
+    isSoldOut: isSoldOut
+  }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 10,
     navigation: true,
     thumbs: {
@@ -402,7 +404,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       key: ingredient === null || ingredient === void 0 ? void 0 : ingredient.id,
       ingredient: ingredient,
       state: productCart.ingredients["id:".concat(ingredient === null || ingredient === void 0 ? void 0 : ingredient.id)],
-      onChange: handleChangeIngredientState
+      onChange: handleChangeIngredientState,
+      isSoldOut: isSoldOut
     });
   }))), /*#__PURE__*/_react.default.createElement("div", {
     id: "extra"
@@ -430,7 +433,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
           balance: balance,
           option: option,
           suboption: suboption,
-          state: currentState
+          state: currentState,
+          isSoldOut: isSoldOut
         });
       }))));
     });

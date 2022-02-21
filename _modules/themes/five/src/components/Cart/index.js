@@ -300,7 +300,10 @@ var CartUI = function CartUI(props) {
     handleClearProducts: handleClearProducts,
     handleStoreRedirect: handleStoreRedirect,
     handleCartOpen: handleCartOpen,
-    isStore: isStore
+    isStore: isStore,
+    total: cart === null || cart === void 0 ? void 0 : cart.total,
+    handleClickCheckout: handleClickCheckout,
+    checkoutButtonDisabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address)
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,

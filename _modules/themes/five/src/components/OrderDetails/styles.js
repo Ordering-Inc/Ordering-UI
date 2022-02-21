@@ -110,7 +110,7 @@ var PhotoBlock = _styledComponents.default.img(_templateObject19 || (_templateOb
 
 exports.PhotoBlock = PhotoBlock;
 
-var Map = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  width: calc(100% + 40px);\n  height: 150px;\n  margin-left: -20px;\n  margin-bottom: 10px;\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n  }\n\n  @media (min-width: 768px) {\n    width: calc(100% + 80px);\n    margin-left: -40px;\n  }\n"])));
+var Map = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  width: calc(100% + 40px);\n  height: 300px;\n  margin-left: -20px;\n  margin-bottom: 10px;\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n  }\n\n  @media (min-width: 768px) {\n    width: calc(100% + 80px);\n    margin-left: -40px;\n  }\n"])));
 
 exports.Map = Map;
 var OrderDriver = (0, _styledComponents.default)(OrderCustomer)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-bottom: 20px;\n  margin-bottom: 20px;\n  border-bottom: 1px solid #E9ECEF;\n"])));

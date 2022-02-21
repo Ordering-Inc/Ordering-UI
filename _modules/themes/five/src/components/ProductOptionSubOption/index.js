@@ -65,7 +65,8 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
       option = props.option,
       suboption = props.suboption,
       toggleSelect = props.toggleSelect,
-      changePosition = props.changePosition;
+      changePosition = props.changePosition,
+      isSoldOut = props.isSoldOut;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -133,10 +134,10 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
   })), suboption.image && suboption.image !== '-' && /*#__PURE__*/_react.default.createElement(_styles.SubOptionThumbnail, {
     src: suboption.image
   }), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max))), (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
-    disabled: state.quantity === 0,
+    disabled: state.quantity === 0 || isSoldOut,
     onClick: handleDecrement
   }), state.quantity, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, {
-    disabled: disableIncrement,
+    disabled: disableIncrement || isSoldOut,
     onClick: handleIncrement
   })), (option === null || option === void 0 ? void 0 : option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
     className: ['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(function (classname) {
