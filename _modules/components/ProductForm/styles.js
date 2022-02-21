@@ -70,7 +70,7 @@ var WrapperSubOption = _styledComponents.default.div(_templateObject11 || (_temp
 
 exports.WrapperSubOption = WrapperSubOption;
 
-var ProductMeta = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  span {\n    font-size: 16px;\n    line-height: 24px;\n    color: #909BA9;\n  }\n"])));
+var ProductMeta = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  span {\n    font-size: 16px;\n    line-height: 24px;\n    color: #909BA9;\n    margin-bottom: 10px;\n  }\n"])));
 
 exports.ProductMeta = ProductMeta;
 
@@ -78,7 +78,7 @@ var SkuContent = _styledComponents.default.div(_templateObject13 || (_templateOb
 
 exports.SkuContent = SkuContent;
 
-var PriceContent = _styledComponents.default.p(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  line-height: 27px;\n  color: #344050;\n  margin: 0;\n"])));
+var PriceContent = _styledComponents.default.p(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  line-height: 27px;\n  color: #344050;\n  margin: 0;\n  margin-bottom: 10px;\n  .offer-price {\n    text-decoration: line-through;\n    font-size: 16px;\n    color: #909BA9;\n  }\n"])));
 
 exports.PriceContent = PriceContent;
 
@@ -93,14 +93,14 @@ var WrapperIngredients = _styledComponents.default.div(_templateObject16 || (_te
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var ProductName = _styledComponents.default.h1(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  line-height: 36px;\n  color: #344050;\n  margin-bottom: 10px;\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])));
+var ProductName = _styledComponents.default.h1(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  line-height: 36px;\n  color: #344050;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: space-between;\n  .calories {\n    font-size: 16px;\n    font-weight: 100;\n    color: #909BA9;\n  } \n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])));
 
 exports.ProductName = ProductName;
 
-var Properties = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n\n\n"])));
+var Properties = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
 
 exports.Properties = Properties;
 
-var ProductDescription = _styledComponents.default.p(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n"])));
+var ProductDescription = _styledComponents.default.p(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n"])));
 
 exports.ProductDescription = ProductDescription;

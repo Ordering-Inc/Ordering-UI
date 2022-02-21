@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: 100vh;\n  position: relative;\n  padding: 50px 20px 20px;\n\n  @media (min-width: 768px) {\n    height: 100%;\n  }\n\n  @media (min-width: 769px) {\n    padding: 20px;\n  }\n\n  @media (min-width: 1201px) {\n    flex-wrap: nowrap;\n    overflow: auto;\n    max-height: 70vh;\n  }\n"])));
+var ProductContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: 100vh;\n  position: relative;\n  padding: 50px 20px 20px;\n  overflow-x: hidden;\n\n  @media (min-width: 768px) {\n    height: 100%;\n  }\n\n  @media (min-width: 769px) {\n    padding: 20px;\n  }\n\n  @media (min-width: 1201px) {\n    flex-wrap: nowrap;\n    overflow: auto;\n    max-height: 70vh;\n  }\n"])));
 
 exports.ProductContainer = ProductContainer;
 
@@ -39,7 +39,7 @@ var ProductInfo = _styledComponents.default.div(_templateObject5 || (_templateOb
 
 exports.ProductInfo = ProductInfo;
 
-var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n  margin-bottom: 20px;\n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n\n  .price-discount {\n    text-decoration: line-through;\n  }\n"])));
+var ProductFormTitle = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n  margin-bottom: 20px;\n\n  .price-discount {\n    text-decoration: line-through;\n  }\n"])));
 
 exports.ProductFormTitle = ProductFormTitle;
 
@@ -109,26 +109,26 @@ var ProductShareWrapper = _styledComponents.default.div(_templateObject19 || (_t
 
 exports.ProductShareWrapper = ProductShareWrapper;
 
-var ProductName = _styledComponents.default.h1(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  line-height: 36px;\n  color: #344050;\n  margin-bottom: 10px;\n"])));
+var ProductName = _styledComponents.default.h1(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  line-height: 36px;\n  color: #344050;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: space-between;\n  .calories {\n    font-size: 16px;\n    font-weight: 100;\n    color: #909BA9;\n  } \n"])));
 
 exports.ProductName = ProductName;
 
-var Properties = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
+var Properties = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
 
 exports.Properties = Properties;
 
-var ProductDescription = _styledComponents.default.p(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n"])));
+var ProductDescription = _styledComponents.default.p(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n"])));
 
 exports.ProductDescription = ProductDescription;
 
-var PriceContent = _styledComponents.default.p(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  line-height: 27px;\n  color: #344050;\n  margin: 0;\n"])));
+var PriceContent = _styledComponents.default.p(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  font-size: 18px;\n  line-height: 27px;\n  color: #344050;\n  margin: 0;\n  margin-bottom: 10px;\n  .offer-price {\n    text-decoration: line-through;\n    font-size: 16px;\n    color: #909BA9;\n  }\n"])));
 
 exports.PriceContent = PriceContent;
 
-var ProductMeta = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  span {\n    font-size: 16px;\n    line-height: 24px;\n    color: #909BA9;\n  }\n"])));
+var ProductMeta = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  span {\n    font-size: 16px;\n    line-height: 24px;\n    color: #909BA9;\n    margin-bottom: 10px;\n  }\n"])));
 
 exports.ProductMeta = ProductMeta;
 
-var EstimatedPersons = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n\n"])));
+var EstimatedPersons = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 
 exports.EstimatedPersons = EstimatedPersons;
