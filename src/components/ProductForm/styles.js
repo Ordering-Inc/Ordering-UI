@@ -347,6 +347,7 @@ export const ProductMeta = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #909BA9;
+    margin-bottom: 10px;
   }
 `
 
@@ -359,6 +360,12 @@ export const PriceContent = styled.p`
   line-height: 27px;
   color: #344050;
   margin: 0;
+  margin-bottom: 10px;
+  .offer-price {
+    text-decoration: line-through;
+    font-size: 16px;
+    color: #909BA9;
+  }
 `
 
 export const EstimatedPersons = styled.div`
@@ -377,6 +384,13 @@ export const ProductName = styled.h1`
   line-height: 36px;
   color: #344050;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  .calories {
+    font-size: 16px;
+    font-weight: 100;
+    color: #909BA9;
+  } 
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
   }
@@ -384,11 +398,9 @@ export const ProductName = styled.h1`
 
 export const Properties = styled.div`
   display: flex;
-  justify-content: space-between;
-
-
+  flex-direction: column;
 `
 
 export const ProductDescription = styled.p`
-  margin-top: 10px;
+  margin-top: 0px;
 `

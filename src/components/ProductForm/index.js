@@ -260,9 +260,15 @@ const ProductOptionsUI = (props) => {
             </WrapperImage>
             <ProductInfo>
               <ProductFormTitle>
-                <ProductName>{product?.name}</ProductName>
+                <ProductName>
+                  <span>{product?.name}</span>
+                  {product?.calories && (<span className='calories'>{product?.calories}{' '}cal</span>)}
+                </ProductName>
                 <Properties>
-                  <PriceContent>{parsePrice(product?.price)}</PriceContent>
+                  <PriceContent>
+                    {parsePrice(product?.price)}{' '}
+                    {product?.in_offer && (<span className='offer-price'>{parsePrice(product?.offer_price)}</span>)}
+                  </PriceContent>
                   <ProductMeta>
                     {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
                       <SkuContent>
