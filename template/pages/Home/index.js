@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useApi } from 'ordering-components'
-import { HomeHero } from '../../../src/components/HomeHero'
+import { useApi } from 'ordering-components'
+import { HomeHero } from '../../../src/themes/five/src/components/HomeHero'
 import { useHistory } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 import Skeleton from 'react-loading-skeleton'
@@ -29,7 +29,7 @@ export const HomePage = (props) => {
     try {
       const source = {}
       requestsState.page = source
-      const { content: { error, result } } = await ordering.pages('orderingHome').get({ cancelToken: source })
+      const { content: { error, result } } = await ordering.pages('originalHomeContent').get({ cancelToken: source })
       setHomeState({ ...homeState, loading: false })
       if (!error) {
         setHomeState({ ...homeState, body: result.body })
