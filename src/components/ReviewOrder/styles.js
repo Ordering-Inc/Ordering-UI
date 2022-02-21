@@ -45,7 +45,9 @@ export const Send = styled.div`
   button {
     font-size: 14px;
     padding: 6px 20px;
-
+    width: 300px;
+    height: 45px;
+    line-height: 0;
     svg {
       color: white;
       font-size: 21px;
@@ -240,4 +242,12 @@ export const CommentButton = styled(Button)`
     border: 1px solid ${props => props.theme?.colors.primary};
     color: white;
   `}
+`
+
+export const ContinueContainer = styled.div`
+  display: flex;
+  align-items: center;
+  p{
+    flex: 1
+  }
 `

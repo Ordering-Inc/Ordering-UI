@@ -224,7 +224,7 @@ const ProductOptionsUI = (props) => {
         {!loading && !error && product && (
           <>
             <WrapperImage>
-              <SwiperWrapper>
+              <SwiperWrapper isSoldOut={isSoldOut}>
                 <Swiper
                   spaceBetween={10}
                   navigation
@@ -363,6 +363,7 @@ const ProductOptionsUI = (props) => {
                         ingredient={ingredient}
                         state={productCart.ingredients[`id:${ingredient?.id}`]}
                         onChange={handleChangeIngredientState}
+                        isSoldOut={isSoldOut}
                       />
                     ))}
                   </WrapperIngredients>
@@ -393,6 +394,7 @@ const ProductOptionsUI = (props) => {
                                           option={option}
                                           suboption={suboption}
                                           state={currentState}
+                                          isSoldOut={isSoldOut}
                                         />
                                       )
                                     })

@@ -9,7 +9,8 @@ const ProductIngredientUI = (props) => {
   const {
     state,
     ingredient,
-    toggleSelect
+    toggleSelect,
+    isSoldOut
   } = props
 
   return (
@@ -22,9 +23,9 @@ const ProductIngredientUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))
       }
-      <Container onClick={() => toggleSelect()}>
+      <Container isSoldOut={isSoldOut} onClick={() => toggleSelect()}>
         <span>
-          {state?.selected ? (
+          {state?.selected && !isSoldOut ? (
             <MdCheckBox />
           ) : (
             <MdCheckBoxOutlineBlank disabled />

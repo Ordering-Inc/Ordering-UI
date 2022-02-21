@@ -205,3 +205,15 @@ export const BusinessActions = styled.div`
     }
   }
 `
+
+export const PriceContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button{ 
+    padding: 10px 30px;
+    min-width: 150px;
+    width: 50%;
+    height: 50px;
+  }
+`

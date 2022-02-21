@@ -19,7 +19,7 @@ export const Container = styled.div`
       margin-right: 0px;
     `}
     svg {
-      color: ${props => props.theme.colors.primary};
+      color: ${props => props.isSoldOut ? props.theme.colors.lightGray : props.theme.colors.primary};
       font-size: 24px;
       &[disabled] {
         color: ${props => props.theme.colors.lightGray};
