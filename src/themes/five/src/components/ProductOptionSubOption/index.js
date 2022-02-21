@@ -32,7 +32,8 @@ const ProductOptionSubOptionUI = (props) => {
     option,
     suboption,
     toggleSelect,
-    changePosition
+    changePosition,
+    isSoldOut
   } = props
 
   const [, t] = useLanguage()
@@ -103,12 +104,12 @@ const ProductOptionSubOptionUI = (props) => {
         {option?.allow_suboption_quantity && (
           <QuantityControl>
             <BsDashCircle
-              disabled={state.quantity === 0}
+              disabled={state.quantity === 0 || isSoldOut}
               onClick={handleDecrement}
             />
             {state.quantity}
             <BsPlusCircle
-              disabled={disableIncrement}
+              disabled={disableIncrement || isSoldOut}
               onClick={handleIncrement}
             />
           </QuantityControl>

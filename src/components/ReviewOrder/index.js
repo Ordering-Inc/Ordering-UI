@@ -16,7 +16,8 @@ import {
   ReviewsMarkPoint,
   LogoAndReviewWrapper,
   CommentsList,
-  CommentButton
+  CommentButton,
+  ContinueContainer
 } from './styles'
 import { Alert } from '../Confirm'
 
@@ -208,7 +209,7 @@ const ReviewOrderUI = (props) => {
               className='review-sent'
             >
               {!formState.loading ? (
-                <>{t('CONTINUE', 'Continue')}<BsArrowRight /></>
+                <ContinueContainer><p>{t('CONTINUE', 'Continue')}</p><BsArrowRight /></ContinueContainer>
               ) : t('LOADING', 'Loading')}
             </Button>
           </Send>

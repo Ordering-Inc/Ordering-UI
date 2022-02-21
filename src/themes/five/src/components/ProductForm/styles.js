@@ -30,11 +30,16 @@ export const WrapperImage = styled.div`
 export const SwiperWrapper = styled.div`
   position: relative;
   width: 100%;
-
+  
+  img{
+    ${props => props.isSoldOut && css`
+        filter: grayscale(1)
+    `}
+  }
   .mySwiper2 {
     height: 250px;
     width: 100%;
-
+    }
     .swiper-slide-active {
       border-radius: 0px;
       img {
@@ -295,7 +300,6 @@ export const WrapperSubOption = styled.div`
 
   &.soldout {
     pointer-events: none;
-    background-color: hsl(0, 0%, 72%);
   }
 `
 
@@ -305,9 +309,7 @@ export const SkuContent = styled.div`
 
 export const WrapperIngredients = styled.div`
   ${({ isProductSoldout }) => isProductSoldout && css`
-    border-radius: 10px;
     pointer-events: none;
-    background: hsl(0, 0%, 72%);
   `}
 `
 
