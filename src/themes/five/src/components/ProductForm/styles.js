@@ -31,16 +31,16 @@ export const WrapperImage = styled.div`
 export const SwiperWrapper = styled.div`
   position: relative;
   width: 100%;
-  
+
   img{
     ${props => props.isSoldOut && css`
-        filter: grayscale(1)
+        filter: grayscale(1);
     `}
   }
   .mySwiper2 {
     height: 250px;
     width: 100%;
-    }
+
     .swiper-slide-active {
       border-radius: 0px;
       img {
@@ -141,8 +141,6 @@ export const ProductInfo = styled.div`
   width: 100%;
   padding: 0px;
   /* position: relative; */
-  margin-top: 18px;
-
 `
 
 export const ProductFormTitle = styled.div`
@@ -298,6 +296,7 @@ export const WrapperSubOption = styled.div`
 
   &.soldout {
     pointer-events: none;
+    background-color: hsl(0, 0%, 72%);
   }
 `
 
@@ -307,7 +306,9 @@ export const SkuContent = styled.div`
 
 export const WrapperIngredients = styled.div`
   ${({ isProductSoldout }) => isProductSoldout && css`
+    border-radius: 10px;
     pointer-events: none;
+    background: hsl(0, 0%, 72%);
   `}
 `
 
@@ -372,8 +373,8 @@ export const ProductShareWrapper = styled.div`
 
 `
 export const ProductName = styled.h1`
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 20px;
+  line-height: 30px;
   color: #344050;
   margin-bottom: 10px;
   display: flex;
@@ -382,7 +383,14 @@ export const ProductName = styled.h1`
     font-size: 16px;
     font-weight: 100;
     color: #909BA9;
+    white-space: nowrap;
+    display: flex;
+    align-items: flex-end;
   } 
+  @media (min-width: 768px) {
+    font-size: 22px;
+    line-height: 34px;
+  }
 `
 export const Properties = styled.div`
   display: flex;
