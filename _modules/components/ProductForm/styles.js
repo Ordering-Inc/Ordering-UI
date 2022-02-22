@@ -93,7 +93,7 @@ var WrapperIngredients = _styledComponents.default.div(_templateObject16 || (_te
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var ProductName = _styledComponents.default.h1(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  line-height: 36px;\n  color: #344050;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: space-between;\n  .calories {\n    font-size: 16px;\n    font-weight: 100;\n    color: #909BA9;\n  } \n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])));
+var ProductName = _styledComponents.default.h1(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  font-size: 24px;\n  line-height: 36px;\n  color: #344050;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: space-between;\n  .calories {\n    font-size: 16px;\n    font-weight: 100;\n    color: #909BA9;\n    display: flex;\n    align-items: flex-end;\n    white-space: nowrap;\n  } \n  @media (min-width: 1201px) {\n    width: calc(100% - 25px);\n  }\n"])));
 
 exports.ProductName = ProductName;
 
