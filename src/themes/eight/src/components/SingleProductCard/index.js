@@ -22,7 +22,7 @@ export const SingleProductCard = (props) => {
     isSkeleton,
     onProductClick,
     isCartOnProductsList,
-    productAddedToCart
+    productAddedToCartLength
   } = props
 
   const [, t] = useLanguage()
@@ -61,9 +61,9 @@ export const SingleProductCard = (props) => {
       >
         {!isSkeleton ? (
           <WrapLogo>
-            {!isSkeleton && productAddedToCart && productAddedToCart?.quantity > 0 && (
+            {!isSkeleton && productAddedToCartLength > 0 && (
               <QuantityContainer>
-                <span>{productAddedToCart?.quantity}</span>
+                <span>{productAddedToCartLength}</span>
               </QuantityContainer>
             )}
             <CardLogo
