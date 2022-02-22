@@ -395,7 +395,7 @@ var CartUI = function CartUI(props) {
 
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id
-    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.IconContainer, {
+    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, (offer === null || offer === void 0 ? void 0 : offer.rate_type) === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.IconContainer, {
       onClick: function onClick() {
         return setOpenTaxModal({
           open: true,
@@ -422,7 +422,7 @@ var CartUI = function CartUI(props) {
 
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id
-    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.IconContainer, {
+    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, (offer === null || offer === void 0 ? void 0 : offer.rate_type) === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.IconContainer, {
       onClick: function onClick() {
         return setOpenTaxModal({
           open: true,

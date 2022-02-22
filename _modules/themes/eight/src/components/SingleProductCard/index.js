@@ -42,7 +42,7 @@ var SingleProductCard = function SingleProductCard(props) {
       isSkeleton = props.isSkeleton,
       onProductClick = props.onProductClick,
       isCartOnProductsList = props.isCartOnProductsList,
-      productAddedToCart = props.productAddedToCart;
+      productAddedToCartLength = props.productAddedToCartLength;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -89,7 +89,7 @@ var SingleProductCard = function SingleProductCard(props) {
       return !isSkeleton && onProductClick(product);
     },
     isCartOnProductsList: isCartOnProductsList
-  }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, null, !isSkeleton && productAddedToCart && (productAddedToCart === null || productAddedToCart === void 0 ? void 0 : productAddedToCart.quantity) > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCart === null || productAddedToCart === void 0 ? void 0 : productAddedToCart.quantity)), /*#__PURE__*/_react.default.createElement(_styles.CardLogo, {
+  }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardLogo, {
     className: "image",
     soldOut: isSoldOut || maxProductQuantity <= 0,
     bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_200,c_limit')
