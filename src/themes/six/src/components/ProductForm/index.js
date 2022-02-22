@@ -36,7 +36,9 @@ import {
   SkuContent,
   ProductFormTitle,
   WrapperIngredients,
-  ShareWrapper
+  ShareWrapper,
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 const ProductOptionsUI = (props) => {
@@ -173,6 +175,14 @@ const ProductOptionsUI = (props) => {
                   </SkuContent>
                 )}
               </ProductFormTitle>
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={tag.image} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
             </WrapperImage>
             <ProductInfo>
               <ProductEdition>
