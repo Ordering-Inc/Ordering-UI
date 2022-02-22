@@ -390,6 +390,9 @@ export const ProductName = styled.h1`
     font-size: 16px;
     font-weight: 100;
     color: #909BA9;
+    display: flex;
+    align-items: flex-end;
+    white-space: nowrap;
   } 
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
