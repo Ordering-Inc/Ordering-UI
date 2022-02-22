@@ -145,7 +145,6 @@ export const ProductInfo = styled.div`
 
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
-  margin-bottom: 20px;
 
   .price-discount {
     text-decoration: line-through;
@@ -423,4 +422,30 @@ export const ProductMeta = styled.div`
 `
 export const EstimatedPersons = styled.div`
   display: flex;
+`
+export const ProductTagsListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+`
+export const ProductTagWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin: 0 10px 0 20px;
+    ` : css`
+      margin: 0 20px 0 10px;
+    `}
+  }
 `
