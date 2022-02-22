@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import {
-  LoginForm as LoginFormController,
+  // LoginForm as LoginFormController,
   useLanguage,
   useConfig,
   useSession,
   ReCaptcha
 } from 'ordering-components'
+import {LoginForm as LoginFormController} from './test'
 import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { InputPhoneNumber } from '../InputPhoneNumber'
