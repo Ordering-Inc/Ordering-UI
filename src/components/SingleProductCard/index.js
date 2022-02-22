@@ -21,7 +21,7 @@ export const SingleProductCard = (props) => {
     isSkeleton,
     onProductClick,
     isCartOnProductsList,
-    productAddedToCart,
+    productAddedToCartLength,
     productToIdLoading,
     useCustomFunctionality,
     onCustomClick,
@@ -61,9 +61,9 @@ export const SingleProductCard = (props) => {
       >
         {!useCustomFunctionality && (
           <>
-            {!isSkeleton && productAddedToCart && productAddedToCart?.quantity > 0 && (
+            {!isSkeleton && productAddedToCartLength > 0 && (
               <QuantityContainer>
-                <span>{productAddedToCart?.quantity}</span>
+                <span>{productAddedToCartLength}</span>
               </QuantityContainer>
             )}
             <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
