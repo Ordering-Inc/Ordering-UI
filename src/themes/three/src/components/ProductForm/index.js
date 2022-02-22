@@ -47,7 +47,9 @@ import {
   PriceContent,
   ProductMeta,
   EstimatedPersons,
-  ProductDescription
+  ProductDescription,
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 import { TextArea } from '../../styles/Inputs'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -295,6 +297,14 @@ const ProductOptionsUI = (props) => {
                 </Properties>
                 {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
               </ProductFormTitle>
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={tag.image} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
               <ProductEdition>
                 {product?.ingredients.length > 0 && (
                   <IngredientHeader
