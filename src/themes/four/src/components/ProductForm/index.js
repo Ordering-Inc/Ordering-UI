@@ -46,7 +46,9 @@ import {
   ProductMeta,
   EstimatedPersons,
   ProductDescription,
-  PriceContent
+  PriceContent,
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -294,6 +296,14 @@ const ProductOptionsUI = (props) => {
                 </Properties>
                 {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
               </ProductFormTitle>
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={tag.image} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
               <ProductEdition>
                 {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                 <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>

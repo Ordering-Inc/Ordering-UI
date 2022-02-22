@@ -10,17 +10,16 @@
     }
   },
   "colors": {
-    "primary": "#D83520",
+    "primary": "#42B029",
     "primaryContrast": "#FFF",
     "secundary": "#EFEFEF",
     "secundaryContrast": "#000",
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
-    "backgroundPage": "#F8F8F8",
+    "backgroundPage": "#FFFFFF",
+    "grayColor": "#858585",
+    "blackColor": "#000",
     "colorPage": "#333",
-    "colorTextSignForm": "#FFFFFF",
-    "titleHomeColor": "#FFFFFF",
-    "subtitleHomeColor": "#FFFFFF",
     "warning100": "#FFF4CC",
     "warning500": "#FFC700"
   },
