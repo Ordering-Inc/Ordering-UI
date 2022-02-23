@@ -45,7 +45,9 @@ import {
   WrapperIngredients,
   CategoriesContainer,
   Hr,
-  ActionItem
+  ActionItem,
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -220,6 +222,16 @@ const ProductOptionsUI = (props) => {
                 </SkuContent>
               )}
             </ProductMeta>
+
+            <ProductTagsListContainer>
+              {product.tags.map(tag => (
+                <ProductTagWrapper key={tag.id}>
+                  <img src={tag.image} alt='' />
+                  <span>{tag.name}</span>
+                </ProductTagWrapper>
+              ))}
+            </ProductTagsListContainer>
+
             {product?.extras.length > 0 && (
               <Hr height={8} color='#FAFAFA' />
             )}
