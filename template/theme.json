@@ -10,20 +10,23 @@
     }
   },
   "colors": {
-    "primary": "#dd0031",
-    "primaryDark": "#CC082F", 
+    "primary": "#DD0030",
+    "primaryDark": "#CA082A",
     "primaryContrast": "#FFF",
-    "secundary": "#80B850",
+    "secundary": "#005071",
+    "secundaryDark": "#F4F8F9",
+    "secundaryLight": "#F4F8F9",
     "secundaryContrast": "#000",
+    "third": "#FCF9F4",
     "disabled": "#CBCBCB",
     "disabledContrast": "#000",
-    "backgroundPage": "#FFFFFF",
-    "colorPage": "#333",
+    "backgroundPage": "#FFF",
+    "colorPage": "#344050",
     "colorTextSignForm": "#FFFFFF",
-    "borderColor": "#DDDDDD",
-    "secundaryBackground": "#FAFAFA",
-    "primaryFontColor": "#000000",
-    "secundaryFontColor": "#666666"
+    "grayMedium": "#ACB2B6",
+    "grayDark": "#485259",
+    "gray": "#E9ECEF",
+    "green": "#027100"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
