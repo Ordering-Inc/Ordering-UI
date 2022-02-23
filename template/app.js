@@ -30,6 +30,7 @@ import { Wallets } from './pages/Wallets'
 import { MessagesList } from './pages/MessagesList'
 import { Help } from './pages/Help'
 import { SignUpBusiness } from './pages/SignUpBusiness'
+import { VerifyPage } from './pages/Verify'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -45,6 +46,8 @@ export const App = () => {
   const location = useLocation()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
+
+  const isEmailVerifyRequired = auth && (configs?.verification_email_required?.value === '1' || true) && !user?.email_verified
 
   const closeAlert = () => {
     setAlertState({
@@ -119,52 +122,67 @@ export const App = () => {
                 <HelmetTags />
                 <Switch>
                   <Route exact path='/home'>
-                    {
+                    {isEmailVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
                       orderStatus.options?.address?.location
                         ? <Redirect to='/search' />
                         : <HomePage />
-                    }
+                    )}
                   </Route>
                   <Route exact path='/'>
-                    {
+                    {isEmailVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
                       orderStatus.options?.address?.location
                         ? <Redirect to='/search' />
                         : <HomePage />
-                    }
+                    )}
+                  </Route>
+                  <Route exact path='/verify'>
+                    {isEmailVerifyRequired
+                      ? <VerifyPage />
+                      : <Redirect to={auth ? '/search' : '/'} />}
                   </Route>
                   <Route exact path='/signup_business'>
-                    {
-                      !auth
-                        ? (
-                          <SignUpBusiness
-                            elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
-                            useLoginByCellphone
-                            useChekoutFileds
-                            handleSuccessSignup={handleSuccessSignup}
-                            isRecaptchaEnable
-                          />
-                        )
-                        : <Redirect to='/' />
-                    }
+                    {!auth ? (
+                      <SignUpBusiness
+                        elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
+                        useLoginByCellphone
+                        useChekoutFileds
+                        handleSuccessSignup={handleSuccessSignup}
+                        isRecaptchaEnable
+                      />
+                    ) : (
+                      <Redirect to='/' />
+                    )}
                   </Route>
                   <Route exact path='/profile'>
                     {auth
-                      ? (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
+                      ? isEmailVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
                       : <Redirect to='/' />}
                   </Route>
                   <Route exact path='/wallets'>
                     {auth
-                      ? (<Wallets />)
+                      ? isEmailVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <Wallets />
                       : <Redirect to='/' />}
                   </Route>
                   <Route exact path='/profile/orders'>
                     {auth
-                      ? (<MyOrders />)
+                      ? isEmailVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : (<MyOrders />)
                       : <Redirect to='/' />}
                   </Route>
                   <Route exact path='/messages'>
                     {auth
-                      ? <MessagesList />
+                      ? isEmailVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <MessagesList />
                       : (
                         <Redirect to={{
                           pathname: '/login',
@@ -175,24 +193,36 @@ export const App = () => {
                   </Route>
                   <Route exact path='/help'>
                     {auth
-                      ? (<Help />)
+                      ? isEmailVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : (<Help />)
                       : <Redirect to='/' />}
                   </Route>
                   <Route exact path='/search'>
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
                       <SpinnerLoader />
                     ) : (
-                      orderStatus.options?.address?.location
-                        ? <BusinessesList />
-                        : <Redirect to='/' />
+                      isEmailVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        orderStatus.options?.address?.location
+                          ? <BusinessesList />
+                          : <Redirect to='/' />
+                      )
                     )}
                   </Route>
                   <Route exact path='/store/:store'>
-                    <BusinessProductsList />
+                    {isEmailVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <BusinessProductsList />
+                    )}
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
-                      ? <CheckoutPage />
+                      ? isEmailVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <CheckoutPage />
                       : (
                         <Redirect to={{
                           pathname: '/',
@@ -203,7 +233,9 @@ export const App = () => {
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     {(auth || hashKey)
-                      ? <OrderDetailsPage />
+                      ? isEmailVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <OrderDetailsPage />
                       : (
                         <Redirect to={{
                           pathname: '/',
@@ -213,13 +245,25 @@ export const App = () => {
                       )}
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
-                    <Cms />
+                    {isEmailVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <Cms />
+                    )}
                   </Route>
                   <Route exact path='/pages'>
-                    <PagesList />
+                    {isEmailVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <PagesList />
+                    )}
                   </Route>
                   <Route exact path='/:store'>
-                    <BusinessProductsList />
+                    {isEmailVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <BusinessProductsList />
+                    )}
                   </Route>
                   <Route path='*'>
                     <PageNotFound />

@@ -30,7 +30,14 @@ export const LoginForm = (props) => {
   const [formState, setFormState] = useState({ loading: false, result: { error: false } })
   const [credentials, setCredentials] = useState({ email: '', cellphone: '', password: '' })
   const [verifyPhoneState, setVerifyPhoneState] = useState({ loading: false, result: { error: false } })
-  const [verifyEmailState, setVerifyEmailState] = useState({ loading: false, result: null, error: null })
+  const [verifyEmailState, setVerifyEmailState] = useState({
+    loading: false,
+    loadingSendCode: false,
+    result: null,
+    resultSendCode: null,
+    error: null,
+    errorSendCode: null
+  })
   const [checkPhoneCodeState, setCheckPhoneCodeState] = useState({ loading: false, result: { error: false } })
   const [events] = useEvent()
   const [{ configs }] = useConfig()
@@ -49,7 +56,7 @@ export const LoginForm = (props) => {
   }
 
   const [loginTab, setLoginTab] = useState(defaultLoginTab || (useLoginByCellphone && !useLoginByEmail ? 'cellphone' : 'email'))
-  const [, { login, logout }] = useSession()
+  const [sessionState, { login, logout }] = useSession()
   const [, t] = useLanguage()
 
   /**
@@ -57,6 +64,12 @@ export const LoginForm = (props) => {
    * @param {object} credentials Login credentials email/cellphone and password
    */
   const handleLoginClick = async (values) => {
+    setVerifyEmailState({
+      ...verifyEmailState,
+      error: null,
+      errorSendCode: null
+    })
+
     if (handleCustomLogin) {
       handleCustomLogin(values || credentials, loginTab)
       return
@@ -132,38 +145,41 @@ export const LoginForm = (props) => {
               return
             }
           }
-          console.log(result);
-          if (!isEmailVerificationRequired) {
-            login({
-              user: result,
-              token: result.session?.access_token
-            })
-          } else {
-            if (!result?.email_verified) {
-              sendVerifyEmailCode({
-                type: 3,
-                channel: 1,
-                size: emailVerificationCodeSize,
-                email: result.email
-              })
-            } else {
-              login({
-                user: result,
-                token: result.session?.access_token
-              })
-            }
-          }
+          login({
+            user: result,
+            token: result.session?.access_token
+          })
+          // if (!isEmailVerificationRequired) {
+          //   login({
+          //     user: result,
+          //     token: result.session?.access_token
+          //   })
+          // } else {
+          //   if (!result?.email_verified) {
+          //     sendVerifyEmailCode({
+          //       type: 3,
+          //       channel: 1,
+          //       size: 6,
+          //       email: result.email
+          //     })
+          //   } else {
+          //     login({
+          //       user: result,
+          //       token: result.session?.access_token
+          //     })
+          //   }
+          // }
         }
-        if (!isEmailVerificationRequired) {
-          events.emit('userLogin', result)
-          if (handleSuccessLogin) {
-            handleSuccessLogin(result)
-          }
+        events.emit('userLogin', result)
+        if (handleSuccessLogin) {
+          handleSuccessLogin(result)
+        }
 
-          if (urlToRedirect) {
-            window.location.href = `${window.location.origin}${urlToRedirect}`
-          }
+        if (urlToRedirect) {
+          window.location.href = `${window.location.origin}${urlToRedirect}`
         }
+        // if (!isEmailVerificationRequired || result?.email_verified) {
+        // }
       }
       setFormState({
         result: {
@@ -308,8 +324,8 @@ export const LoginForm = (props) => {
       setVerifyEmailState({
         ...verifyEmailState,
         loading: false,
-        result,
-        error
+        result: error ? null : result,
+        error: error ? result : null
       })
 
     } catch (error) {
@@ -317,6 +333,35 @@ export const LoginForm = (props) => {
         ...verifyEmailState,
         loading: false,
         error: error.message
+      })
+    }
+  }
+
+  /**
+   * function to send verify code with twilio for email
+   * @param {Object} values object with cellphone and country code values
+   */
+   const handleSendEmailVerifyCode = async (values) => {
+    try {
+      setVerifyEmailState({ ...verifyEmailState, loadingSendCode: true })
+      const response = await fetch(`${ordering.root}/users/${sessionState.user?.id}/user_verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values)
+      })
+      const { error, result } = await response.json()
+      setVerifyEmailState({
+        ...verifyEmailState,
+        loadingSendCode: false,
+        resultSendCode: error ? null : result,
+        errorSendCode: error ? result : null
+      })
+
+    } catch (error) {
+      setVerifyEmailState({
+        ...verifyEmailState,
+        loadingSendCode: false,
+        errorSendCode: error.message
       })
     }
   }
@@ -330,12 +375,15 @@ export const LoginForm = (props) => {
           loginTab={loginTab}
           credentials={credentials}
           verifyPhoneState={verifyPhoneState}
+          verifyEmailState={verifyEmailState}
           checkPhoneCodeState={checkPhoneCodeState}
           setCheckPhoneCodeState={handleSetCheckPhoneCodeState}
           handleChangeInput={handleChangeInput}
           handleButtonLoginClick={handleButtonLoginClick || handleLoginClick}
           handleChangeTab={handleChangeTab}
           handleSendVerifyCode={sendVerifyPhoneCode}
+          handleSendVerifyEmailCode={sendVerifyEmailCode}
+          handleSendEmailVerifyCode={handleSendEmailVerifyCode}
           handleCheckPhoneCode={checkVerifyPhoneCode}
           enableReCaptcha={isReCaptchaEnable}
           handleReCaptcha={setReCaptchaValue}

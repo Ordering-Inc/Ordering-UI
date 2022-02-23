@@ -60,18 +60,20 @@ const LoginFormUI = (props) => {
     handleChangeTab,
     handleButtonLoginClick,
     handleSendVerifyCode,
+    handleSendEmailVerifyCode,
+    handleSendVerifyEmailCode,
     handleCheckPhoneCode,
     elementLinkToSignup,
     elementLinkToForgotPassword,
     formState,
     verifyPhoneState,
+    verifyEmailState,
     checkPhoneCodeState,
     loginTab,
     isPopup,
     credentials,
     enableReCaptcha
   } = props
-  const numOtpInputs = 4
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ configs }] = useConfig()
@@ -82,10 +84,13 @@ const LoginFormUI = (props) => {
   const emailInput = useRef(null)
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
+  const [emailVerification, setEmailVerification] = useState(false)
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
   const [otpState, setOtpState] = useState('')
   const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
-    600, !checkPhoneCodeState?.loading && willVerifyOtpState)
+    600, (!checkPhoneCodeState?.loading && willVerifyOtpState) || emailVerification)
+
+  const numOtpInputs = emailVerification ? 6 : 4
 
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
@@ -180,6 +185,16 @@ const LoginFormUI = (props) => {
         country_phone_code: countryPhoneCode
       })
     }
+    if (emailVerification) {
+      resetOtpLeftTime()
+
+      handleSendVerifyEmailCode({
+        type: 3,
+        channel: 1,
+        size: 6,
+        email: credentials?.email
+      })
+    }
   }
 
   useEffect(() => {
@@ -223,6 +238,10 @@ const LoginFormUI = (props) => {
 
   useEffect(() => {
     if (otpState?.length === numOtpInputs) {
+      if (emailVerification) {
+        handleSendEmailVerifyCode({ channel: 1, code: otpState })
+        return
+      }
       const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
 
       handleCheckPhoneCode({
@@ -251,6 +270,21 @@ const LoginFormUI = (props) => {
     } else resetOtpLeftTime()
   }, [verifyPhoneState])
 
+  useEffect(() => {
+    if (verifyEmailState?.error) {
+      setAlertState({
+        open: true,
+        content: verifyEmailState?.error[0] || [t('ERROR', 'Error')]
+      })
+    } else resetOtpLeftTime()
+  }, [verifyEmailState])
+
+  useEffect(() => {
+    if (!verifyEmailState.loading) {
+      setEmailVerification(!!verifyEmailState.result)
+    }
+  }, [verifyEmailState])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -263,7 +297,7 @@ const LoginFormUI = (props) => {
         <FormSide isPopup={isPopup}>
           <Title>{t('LOGIN', 'Login')}</Title>
 
-          {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
+          {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState && !emailVerification) && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 {useLoginByEmail && (
@@ -303,7 +337,7 @@ const LoginFormUI = (props) => {
               props.beforeMidComponents?.map((BeforeMidComponents, i) => (
                 <BeforeMidComponents key={i} {...props} />))
               }
-              {useLoginByEmail && loginTab === 'email' && (
+              {useLoginByEmail && loginTab === 'email' && !emailVerification && (
                 <InputWrapper>
                   <Input
                     type='email'
@@ -319,7 +353,7 @@ const LoginFormUI = (props) => {
                   </InputBeforeIcon>
                 </InputWrapper>
               )}
-              {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
+              {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState && !emailVerification) && (
                 <InputPhoneNumber
                   value={credentials?.cellphone}
                   setValue={handleChangePhoneNumber}
@@ -327,7 +361,7 @@ const LoginFormUI = (props) => {
                 />
               )}
 
-              {(!verifyPhoneState?.loading && willVerifyOtpState && !checkPhoneCodeState?.loading) && (
+              {(!verifyPhoneState?.loading && (willVerifyOtpState || emailVerification) && !checkPhoneCodeState?.loading) && (
                 <>
                   <CountdownTimer>
                     <span>{formatSeconds(otpLeftTime)}</span>
@@ -343,7 +377,7 @@ const LoginFormUI = (props) => {
                       numInputs={numOtpInputs}
                       containerStyle='otp-container'
                       inputStyle='otp-input'
-                      placeholder='0000'
+                      placeholder={new Array(numOtpInputs).fill(0).join('')}
                       isInputNum
                       shouldAutoFocus
                     />
@@ -356,6 +390,7 @@ const LoginFormUI = (props) => {
                     onClick={() => {
                       setLoginWithOtpState(false)
                       setWillVerifyOtpState(false)
+                      setEmailVerification(false)
                     }}
                   >
                     {t('CANCEL', 'Cancel')}
@@ -364,12 +399,10 @@ const LoginFormUI = (props) => {
               )}
 
               {(verifyPhoneState?.loading || checkPhoneCodeState?.loading) && (
-                <SpinnerLoader
-                  style={{ height: 160 }}
-                />
+                <SpinnerLoader style={{ height: 160 }} />
               )}
 
-              {!loginWithOtpState && (
+              {!loginWithOtpState && !emailVerification && (
                 <InputWrapper>
                   <Input
                     type={!passwordSee ? 'password' : 'text'}
@@ -399,24 +432,24 @@ const LoginFormUI = (props) => {
               props.afterMidComponents?.map((MidComponent, i) => (
                 <MidComponent key={i} {...props} />))
               }
-              {!loginWithOtpState && (
+              {!loginWithOtpState && !emailVerification && (
                 <RedirectLink isPopup={isPopup}>
                   <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
-              {props.isRecaptchaEnable && enableReCaptcha && (
+              {props.isRecaptchaEnable && enableReCaptcha && !emailVerification && (
                 <ReCaptchaWrapper>
                   <ReCaptcha handleReCaptcha={handleReCaptcha} />
                 </ReCaptchaWrapper>
               )}
-              {(!willVerifyOtpState &&
+              {(!willVerifyOtpState && !emailVerification &&
                 <Button
                   color='primary'
                   onClick={formMethods.handleSubmit(onSubmit)}
-                  disabled={formState.loading}
+                  disabled={(formState.loading || verifyEmailState.loading)}
                 >
-                  {formState.loading
+                  {(formState.loading || verifyEmailState.loading)
                     ? `${t('LOADING', 'Loading')}...`
                     : loginWithOtpState
                       ? t('GET_VERIFY_CODE', 'Get verify code')
@@ -438,20 +471,30 @@ const LoginFormUI = (props) => {
             </FormInput>
           )}
 
-          {(elementLinkToSignup && !loginWithOtpState) && (
+          {(elementLinkToSignup && !loginWithOtpState) && !emailVerification && (
             <RedirectLink register isPopup={isPopup}>
               <span>{t('NEW_ON_PLATFORM', theme?.defaultLanguages?.NEW_ON_PLATFORM || 'New on Ordering?')}</span>
               {elementLinkToSignup}
             </RedirectLink>
           )}
-          <LoginDivider isPopup={isPopup}>
-            <DividerLine />
-            <p>{t('OR', 'or')}</p>
-            <DividerLine />
-          </LoginDivider>
-          {(!props.isDisableButtons && !loginWithOtpState) && (
+
+          {(!props.isDisableButtons && !loginWithOtpState && !emailVerification) && (
             Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
+                {(((configs?.facebook_login?.value === 'true' ||
+                  configs?.facebook_login?.value === '1') &&
+                  configs?.facebook_id?.value) ||
+                  configs?.google_login_client_id?.value ||
+                  configs?.apple_login_client_id?.value ||
+                  (configs?.twilio_service_enabled?.value === 'true' ||
+                  configs?.twilio_service_enabled?.value === '1')) &&
+                (
+                  <LoginDivider isPopup={isPopup}>
+                    <DividerLine />
+                    <p>{t('OR', 'or')}</p>
+                    <DividerLine />
+                  </LoginDivider>
+                )}
                 {(configs?.facebook_login?.value === 'true' ||
                 configs?.facebook_login?.value === '1') &&
                 configs?.facebook_id?.value &&
@@ -475,30 +518,30 @@ const LoginFormUI = (props) => {
                   onFailure={(data) => console.log('onFailure', data)}
                 />
               )}
-                {useLoginByCellphone && loginTab === 'cellphone' &&
-                configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
-                  configs?.twilio_service_enabled?.value === '1') && (
-                    <SmsLoginButton
-                      style={{
-                        borderRadius: 8,
-                        borderWidth: 1,
-                        borderColor: '#000000',
-                        backgroundColor: 'transparent',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginBottom: 10,
-                        justifyContent: 'space-around',
-                      }}
-                      iconStyle={{ fontSize: 16 }}
-                      textStyle={{
-                        margin: 0,
-                        width: '50%',
-                        textAlign: 'left'
-                      }}
-                      handleSmsLogin={() => { setLoginWithOtpState(true) }}
-                    />
-                  )}
+              {useLoginByCellphone && loginTab === 'cellphone' &&
+              configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
+                configs?.twilio_service_enabled?.value === '1') && (
+                  <SmsLoginButton
+                    style={{
+                      borderRadius: 8,
+                      borderWidth: 1,
+                      borderColor: '#000000',
+                      backgroundColor: 'transparent',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      marginBottom: 10,
+                      justifyContent: 'space-around',
+                    }}
+                    iconStyle={{ fontSize: 16 }}
+                    textStyle={{
+                      margin: 0,
+                      width: '50%',
+                      textAlign: 'left'
+                    }}
+                    handleSmsLogin={() => { setLoginWithOtpState(true) }}
+                  />
+                )}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>
@@ -511,6 +554,7 @@ const LoginFormUI = (props) => {
             )
           )}
         </FormSide>
+
         <Alert
           title={t('LOGIN', 'Login')}
           content={alertState.content}
