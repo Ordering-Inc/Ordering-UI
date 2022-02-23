@@ -89,7 +89,7 @@ const ProductOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ optimizeImage, parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
@@ -299,7 +299,7 @@ const ProductOptionsUI = (props) => {
               <ProductTagsListContainer>
                 {product.tags.map(tag => (
                   <ProductTagWrapper key={tag.id}>
-                    <img src={tag.image} alt='' />
+                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
                     <span>{tag.name}</span>
                   </ProductTagWrapper>
                 ))}
