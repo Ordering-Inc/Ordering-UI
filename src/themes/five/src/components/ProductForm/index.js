@@ -52,6 +52,8 @@ import {
   PriceContent,
   WeightUnitSwitch,
   WeightUnitItem
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -91,7 +93,7 @@ const ProductOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ optimizeImage, parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [tabValue, setTabValue] = useState('all')
@@ -241,7 +243,7 @@ const ProductOptionsUI = (props) => {
         {!loading && !error && product && (
           <>
             <WrapperImage>
-              <SwiperWrapper>
+              <SwiperWrapper isSoldOut={isSoldOut}>
                 <Swiper
                   spaceBetween={10}
                   navigation
@@ -305,12 +307,18 @@ const ProductOptionsUI = (props) => {
             </WrapperImage>
             <ProductInfo>
               <ProductFormTitle>
-                <ProductName>{product?.name}</ProductName>
+                <ProductName>
+                  <span>{product?.name}</span>
+                  {product?.calories && (<span className='calories'>{product?.calories}{' '}cal</span>)}
+                </ProductName>
                 <Properties>
                   {isHaveWeight ? (
                     <PriceContent>{parsePrice(pricePerWeightUnit)} / {product?.weight_unit}</PriceContent>
                   ) : (
-                    <PriceContent>{parsePrice(product?.price)}</PriceContent>
+                    <PriceContent>
+                      {parsePrice(product?.price)}{' '}
+                      {product?.in_offer && (<span className='offer-price'>{parsePrice(product?.offer_price)}</span>)}
+                    </PriceContent>
                   )}
                   <ProductMeta>
                     {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
@@ -332,6 +340,14 @@ const ProductOptionsUI = (props) => {
                 </Properties>
                 {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
               </ProductFormTitle>
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
               <Divider />
               <ProductEdition>
                 {
@@ -384,6 +400,7 @@ const ProductOptionsUI = (props) => {
                         ingredient={ingredient}
                         state={productCart.ingredients[`id:${ingredient?.id}`]}
                         onChange={handleChangeIngredientState}
+                        isSoldOut={isSoldOut}
                       />
                     ))}
                   </WrapperIngredients>
@@ -414,6 +431,7 @@ const ProductOptionsUI = (props) => {
                                           option={option}
                                           suboption={suboption}
                                           state={currentState}
+                                          isSoldOut={isSoldOut}
                                         />
                                       )
                                     })

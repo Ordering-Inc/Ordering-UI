@@ -196,7 +196,7 @@ export const PhotoBlock = styled.img`
 
 export const Map = styled.div`
   width: calc(100% + 40px);
-  height: 150px;
+  height: 300px;
   margin-left: -20px;
   margin-bottom: 10px;
 

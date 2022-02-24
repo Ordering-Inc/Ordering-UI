@@ -347,6 +347,7 @@ export const ProductMeta = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #909BA9;
+    margin-bottom: 10px;
   }
 `
 
@@ -359,6 +360,12 @@ export const PriceContent = styled.p`
   line-height: 27px;
   color: #344050;
   margin: 0;
+  margin-bottom: 10px;
+  .offer-price {
+    text-decoration: line-through;
+    font-size: 16px;
+    color: #909BA9;
+  }
 `
 
 export const EstimatedPersons = styled.div`
@@ -377,6 +384,16 @@ export const ProductName = styled.h1`
   line-height: 36px;
   color: #344050;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  .calories {
+    font-size: 16px;
+    font-weight: 100;
+    color: #909BA9;
+    display: flex;
+    align-items: flex-end;
+    white-space: nowrap;
+  } 
   @media (min-width: 1201px) {
     width: calc(100% - 25px);
   }
@@ -384,11 +401,34 @@ export const ProductName = styled.h1`
 
 export const Properties = styled.div`
   display: flex;
-  justify-content: space-between;
-
-
+  flex-direction: column;
 `
 
 export const ProductDescription = styled.p`
-  margin-top: 10px;
+  margin-top: 0px;
+`
+export const ProductTagsListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+export const ProductTagWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin: 0 10px 0 20px;
+    ` : css`
+      margin: 0 20px 0 10px;
+    `}
+  }
 `

@@ -6,7 +6,8 @@ import {
   ProductForm as ProductOptions,
   useSession,
   useLanguage,
-  useOrder
+  useOrder,
+  useUtils
 } from 'ordering-components'
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
@@ -36,7 +37,9 @@ import {
   SkuContent,
   ProductFormTitle,
   WrapperIngredients,
-  ShareWrapper
+  ShareWrapper,
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 const ProductOptionsUI = (props) => {
@@ -61,9 +64,9 @@ const ProductOptionsUI = (props) => {
   const windowSize = useWindowSize()
   const [{ auth, user }, { login }] = useSession()
   const [, t] = useLanguage()
+  const [{ optimizeImage }] = useUtils()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  // const [{ parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
@@ -173,6 +176,14 @@ const ProductOptionsUI = (props) => {
                   </SkuContent>
                 )}
               </ProductFormTitle>
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
             </WrapperImage>
             <ProductInfo>
               <ProductEdition>

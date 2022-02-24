@@ -292,7 +292,9 @@ const CartUI = (props) => {
                         <tr key={offer.id}>
                           <td>
                             {offer.name}
-                            <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            {offer?.rate_type === 1 && (
+                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            )}
                             <IconContainer onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
                             </IconContainer>
@@ -317,7 +319,9 @@ const CartUI = (props) => {
                         <tr key={offer.id}>
                           <td>
                             {offer.name}
-                            <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            {offer?.rate_type === 1 && (
+                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            )}
                             <IconContainer onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
                             </IconContainer>
