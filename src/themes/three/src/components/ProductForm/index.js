@@ -47,7 +47,9 @@ import {
   PriceContent,
   ProductMeta,
   EstimatedPersons,
-  ProductDescription
+  ProductDescription,
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 import { TextArea } from '../../styles/Inputs'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -89,7 +91,7 @@ const ProductOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ optimizeImage, parsePrice }] = useUtils()
   const [modalPageToShow, setModalPageToShow] = useState('login')
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
@@ -295,6 +297,14 @@ const ProductOptionsUI = (props) => {
                 </Properties>
                 {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
               </ProductFormTitle>
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
               <ProductEdition>
                 {product?.ingredients.length > 0 && (
                   <IngredientHeader
