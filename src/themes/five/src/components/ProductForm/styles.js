@@ -215,6 +215,7 @@ export const ProductActions = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position: relative;
 
     svg {
       width: 22px;
@@ -223,11 +224,11 @@ export const ProductActions = styled.div`
     }
   }
 
-  div:last-child {
+  /* div:last-child {
     width: 100%;
     display: flex;
     align-items: center;
-  }
+  } */
 
   svg {
     color: ${props => props.theme.colors.primary};
@@ -277,6 +278,13 @@ export const ProductActions = styled.div`
 
     div.incdec-control {
       width: 20%;
+      &.show-weight-unit{
+        width: 25%;
+        span {
+          min-width: 40px;
+          text-align: center;
+        }
+      }
     }
   }
 `
@@ -448,4 +456,24 @@ export const ProductTagWrapper = styled.div`
       margin: 0 20px 0 10px;
     `}
   }
+`
+export const WeightUnitSwitch = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: auto;
+`
+export const WeightUnitItem = styled.span`
+  display: inline-flex;
+  width: fit-content;
+  min-width: unset !important;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 2px 6px;
+  cursor: pointer;
+  
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.primary}15;
+    border-radius: 3px;
+    color: ${props => props.theme.colors.primary};
+  `}
 `
