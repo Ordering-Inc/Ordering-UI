@@ -1,6 +1,6 @@
 {
   "app_id": "ordering-react",
-  "project": "luisv4",
+  "project": "apps",
   "api": {
     "url": "https://apiv4.ordering.co",
     "language": "en",
@@ -11,5 +11,6 @@
   },
   "store_android_id": "",
   "store_apple_id": "",
-  "store_kindle_id": ""
+  "store_kindle_id": "",
+  "use_marketplace": true
 }

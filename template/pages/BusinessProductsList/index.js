@@ -4,6 +4,7 @@ import { useApi, useEvent } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/themes/five/src/components/BusinessProductsListing'
 import { HelmetTags } from '../../components/HelmetTags'
 import { capitalize } from '../../../src/utils'
+import settings from '../../config.json'
 
 export const BusinessProductsList = (props) => {
   const { store } = useParams()
@@ -26,6 +27,7 @@ export const BusinessProductsList = (props) => {
   const businessProductsProps = {
     ...props,
     ordering,
+    isCustomLayout: settings?.use_marketplace,
     isSearchByName: true,
     isSearchByDescription: true,
     slug: store,

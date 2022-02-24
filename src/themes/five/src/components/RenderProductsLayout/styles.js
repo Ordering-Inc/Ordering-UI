@@ -25,7 +25,7 @@ export const WrapContent = styled.div`
 `
 
 export const BusinessContent = styled.div`
-  margin-top: 30px;
+  margin-top: ${props => props.isCustomLayout ? 0 : 30}px;
   display: flex;
   flex-direction: column;
 
