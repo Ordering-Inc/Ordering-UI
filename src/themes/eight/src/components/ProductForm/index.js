@@ -48,7 +48,9 @@ import {
   IncDecActions,
   ProductActionHeaderContainer,
 
-  ProductTabContainer
+  ProductTabContainer,
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 
 const ProductOptionsUI = (props) => {
@@ -233,6 +235,14 @@ const ProductOptionsUI = (props) => {
                       <p>{product?.sku}</p>
                     </SkuContent>
                   )}
+                  <ProductTagsListContainer>
+                    {product.tags.map(tag => (
+                      <ProductTagWrapper key={tag.id}>
+                        <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                        <span>{tag.name}</span>
+                      </ProductTagWrapper>
+                    ))}
+                  </ProductTagsListContainer>
                 </ProductInnerContainer>
               </ProductFormTitle>
               <ProductEdition>

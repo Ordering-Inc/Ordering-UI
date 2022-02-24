@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   CartStoresListing as StoresListingController,
   useOrder,
@@ -13,7 +13,7 @@ import {
   Container,
   ItemListing,
   WrapperSearch
-} from './styles';
+} from './styles'
 
 const CartStoresListingUI = (props) => {
   const {
@@ -22,24 +22,26 @@ const CartStoresListingUI = (props) => {
     storesState,
     changeStoreState,
     handleChangeSearch,
-    handleCartStoreChange,
+    handleCartStoreChange
   } = props
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const businessId = Object.values(orderState.carts).find(_cart => _cart?.uuid === props.cartuuid)?.business_id ?? {}
 
-  return(
+  return (
     <Container>
       {!storesState?.loading && !storesState?.error && storesState?.result && (
         <>
-          <WrapperSearch>
-            <SearchBar
-              onSearch={handleChangeSearch}
-              search={searchValue}
-              placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-            />
-          </WrapperSearch>
+          {(!(storesState?.error || !storesState?.result?.length) || searchValue) && (
+            <WrapperSearch>
+              <SearchBar
+                onSearch={handleChangeSearch}
+                search={searchValue}
+                placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+              />
+            </WrapperSearch>
+          )}
           <ItemListing>
             {storesState?.result.map(store => (
               <BusinessController
@@ -57,7 +59,7 @@ const CartStoresListingUI = (props) => {
         </>
       )}
 
-      {storesState?.loading && (
+      {(storesState?.loading || (!storesState?.error && !storesState?.result)) && (
         <ItemListing>
           {[...Array(4).keys()].map(i => (
             <BusinessController
@@ -71,11 +73,12 @@ const CartStoresListingUI = (props) => {
         </ItemListing>
       )}
 
-      {!storesState?.loading && (storesState?.error || !storesState?.result?.length) && (
+      {!storesState?.loading && (storesState?.error || storesState?.result?.length === 0) && (
         <NotFoundSource
-          content={storesState?.error
-            ? t('ERROR_NOT_FOUND_CART_STORES', 'Sorry, an error has occurred')
-            : t('NOT_FOUND_CART_STORES', 'No businesses to show at this time.')
+          content={
+            storesState?.error
+              ? t('ERROR_NOT_FOUND_CART_STORES', 'Sorry, an error has occurred')
+              : t('NOT_FOUND_CART_STORES', 'No businesses to show at this time.')
           }
         />
       )}

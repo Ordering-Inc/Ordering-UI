@@ -49,7 +49,9 @@ import {
   ProductMeta,
   EstimatedPersons,
   ProductDescription,
-  PriceContent
+  PriceContent,
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -89,7 +91,7 @@ const ProductOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ optimizeImage, parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [tabValue, setTabValue] = useState('all')
@@ -288,9 +290,15 @@ const ProductOptionsUI = (props) => {
             </WrapperImage>
             <ProductInfo>
               <ProductFormTitle>
-                <ProductName>{product?.name}</ProductName>
+                <ProductName>
+                  <span>{product?.name}</span>
+                  {product?.calories && (<span className='calories'>{product?.calories}{' '}cal</span>)}
+                </ProductName>
                 <Properties>
-                  <PriceContent>{parsePrice(product?.price)}</PriceContent>
+                  <PriceContent>
+                    {parsePrice(product?.price)}{' '}
+                    {product?.in_offer && (<span className='offer-price'>{parsePrice(product?.offer_price)}</span>)}
+                  </PriceContent>
                   <ProductMeta>
                     {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
                       <SkuContent>
@@ -311,6 +319,14 @@ const ProductOptionsUI = (props) => {
                 </Properties>
                 {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
               </ProductFormTitle>
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
               <Divider />
               <ProductEdition>
                 {

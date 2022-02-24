@@ -350,6 +350,7 @@ const CartUI = (props) => {
             onClose={() => setOpenChangeStore(false)}
           >
             <CartStoresListing
+              pageChangeStore='business_cart'
               cartuuid={cart?.uuid}
               onClose={() => setOpenChangeStore(false)}
             />

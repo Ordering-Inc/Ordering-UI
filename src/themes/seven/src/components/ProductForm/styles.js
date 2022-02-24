@@ -82,7 +82,7 @@ export const ProductInfo = styled.div`
 `
 export const ProductMeta = styled.div`
   padding: 0 20px;
-  margin: 25px 0 15px;
+  margin: 25px 0 0 0;
   h1 {
     font-size: 24px;
     line-height: 34px;
@@ -258,4 +258,31 @@ export const Hr = styled.div`
   width: 100%;
   height: ${({ height }) => height ? `${height}px` : '10px'};
   background: ${({ color }) => color ? `${color}` : '#DDDDDD'};
+`
+export const ProductTagsListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  margin-bottom: 15px;
+`
+export const ProductTagWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin: 0 10px 0 20px;
+    ` : css`
+      margin: 0 20px 0 10px;
+    `}
+  }
 `
