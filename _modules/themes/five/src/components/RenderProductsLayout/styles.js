@@ -33,7 +33,9 @@ var WrapContent = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.WrapContent = WrapContent;
 
-var BusinessContent = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 1200px) {\n    flex-direction: row;\n  }\n"])));
+var BusinessContent = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-top: ", "px;\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 1200px) {\n    flex-direction: row;\n  }\n"])), function (props) {
+  return props.isCustomLayout ? 0 : 30;
+});
 
 exports.BusinessContent = BusinessContent;
 

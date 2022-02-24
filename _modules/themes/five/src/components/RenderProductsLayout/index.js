@@ -88,7 +88,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       handleSearchRedirect = props.handleSearchRedirect,
       handleChangeSearch = props.handleChangeSearch,
       setOpenBusinessInformation = props.setOpenBusinessInformation,
-      handleCartOpen = props.handleCartOpen;
+      handleCartOpen = props.handleCartOpen,
+      isCustomLayout = props.isCustomLayout;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -129,7 +130,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     isCartOnProductsList: isCartOnProductsList
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
-  }, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  }, !isCustomLayout && /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation,
@@ -140,7 +141,9 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     categoryState: categoryState,
     errorQuantityProducts: errorQuantityProducts,
     sortByValue: sortByValue
-  }), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayout, {
+  }), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
+    isCustomLayout: isCustomLayout
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayout, {
     component: "categories",
     categories: [{
       id: null,
@@ -239,7 +242,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleClearSearch: handleChangeSearch,
     errorQuantityProducts: errorQuantityProducts,
     business: business
-  })))))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  })))))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
     isSkeleton: true,
     handler: handler,
     businessState: {

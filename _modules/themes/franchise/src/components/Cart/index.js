@@ -445,6 +445,7 @@ var CartUI = function CartUI(props) {
       return setOpenChangeStore(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_CartStoresListing.CartStoresListing, {
+    pageChangeStore: "business",
     cartuuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
     onClose: function onClose() {
       return setOpenChangeStore(false);

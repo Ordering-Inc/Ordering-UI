@@ -131,7 +131,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2$ = _useUtils2[0],
+      optimizeImage = _useUtils2$.optimizeImage,
+      parsePrice = _useUtils2$.parsePrice;
 
   var theme = (0, _styledComponents.useTheme)();
 
@@ -294,7 +296,16 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       e.target.onerror = null;
       e.target.src = (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.product;
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductMeta, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), /*#__PURE__*/_react.default.createElement("h5", null, '$', ' ', product === null || product === void 0 ? void 0 : product.price), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), (product === null || product === void 0 ? void 0 : product.extras.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Hr, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductMeta, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), /*#__PURE__*/_react.default.createElement("h5", null, '$', ' ', product === null || product === void 0 ? void 0 : product.price), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.ProductTagsListContainer, null, product.tags.map(function (tag) {
+    var _theme$images3, _theme$images3$dummie;
+
+    return /*#__PURE__*/_react.default.createElement(_styles.ProductTagWrapper, {
+      key: tag.id
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: optimizeImage((tag === null || tag === void 0 ? void 0 : tag.image) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.product), 'h_40,c_limit'),
+      alt: ""
+    }), /*#__PURE__*/_react.default.createElement("span", null, tag.name));
+  })), (product === null || product === void 0 ? void 0 : product.extras.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Hr, {
     height: 8,
     color: "#FAFAFA"
   }), (product === null || product === void 0 ? void 0 : product.extras.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, {
