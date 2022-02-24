@@ -44,7 +44,9 @@ import {
   WrapperIngredients,
   ProductName,
   Properties,
-  ProductDescription
+  ProductDescription,
+  ProductTagsListContainer,
+  ProductTagWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -85,7 +87,7 @@ const ProductOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ optimizeImage, parsePrice }] = useUtils()
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [gallery, setGallery] = useState([])
@@ -289,6 +291,16 @@ const ProductOptionsUI = (props) => {
                 </Properties>
                 {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
               </ProductFormTitle>
+
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
+
               <ProductEdition>
                 {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                 <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>

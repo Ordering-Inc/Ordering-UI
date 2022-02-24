@@ -185,6 +185,7 @@ const BusinessProductsListingUI = (props) => {
           sortByOptions={sortByOptions}
           categoryState={categoryState}
           categoriesState={props.categoriesState}
+          isCustomLayout={props.isCustomLayout}
           categorySelected={categorySelected}
           openCategories={openCategories}
           openBusinessInformation={openBusinessInformation}
