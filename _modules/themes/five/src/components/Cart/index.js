@@ -430,7 +430,7 @@ var CartUI = function CartUI(props) {
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "40%",
+    width: "700px",
     open: openProduct,
     padding: "0",
     closeOnBackdrop: true,

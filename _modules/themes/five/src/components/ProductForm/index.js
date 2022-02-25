@@ -69,11 +69,11 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -161,6 +161,24 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       thumbsSwiper = _useState10[0],
       setThumbsSwiper = _useState10[1];
 
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isHaveWeight = _useState12[0],
+      setIsHaveWeight = _useState12[1];
+
+  var _useState13 = (0, _react.useState)({
+    weight_unit: false,
+    pieces: true
+  }),
+      _useState14 = _slicedToArray(_useState13, 2),
+      qtyBy = _useState14[0],
+      setQtyBy = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(null),
+      _useState16 = _slicedToArray(_useState15, 2),
+      pricePerWeightUnit = _useState16[0],
+      setPricePerWeightUnit = _useState16[1];
+
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
 
   var closeModal = function closeModal() {
@@ -233,6 +251,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     setTabValue(value);
   };
 
+  var handleSwitchQtyUnit = function handleSwitchQtyUnit(val) {
+    var _setQtyBy;
+
+    setQtyBy((_setQtyBy = {}, _defineProperty(_setQtyBy, val, true), _defineProperty(_setQtyBy, !val, false), _setQtyBy));
+  };
+
   (0, _react.useEffect)(function () {
     if (document.getElementById("".concat(tabValue))) {
       var extraHeight = windowSize.width < 769 ? 100 : 42;
@@ -273,6 +297,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
 
     setGallery(imageList);
+
+    if (product !== null && product !== void 0 && product.weight && product !== null && product !== void 0 && product.weight_unit) {
+      setIsHaveWeight(true);
+      setPricePerWeightUnit((product === null || product === void 0 ? void 0 : product.price) / (product === null || product === void 0 ? void 0 : product.weight));
+    }
   }, [product]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -346,19 +375,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         spaceBetween: 20
       },
       769: {
-        slidesPerView: 4,
-        spaceBetween: 20
-      },
-      1000: {
-        slidesPerView: 5,
-        spaceBetween: 20
-      },
-      1400: {
         slidesPerView: 6,
-        spaceBetween: 20
-      },
-      1600: {
-        slidesPerView: 7,
         spaceBetween: 20
       }
     },
@@ -374,7 +391,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }));
   })))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.calories) && /*#__PURE__*/_react.default.createElement("span", {
     className: "calories"
-  }, product === null || product === void 0 ? void 0 : product.calories, ' ', "cal")), /*#__PURE__*/_react.default.createElement(_styles.Properties, null, /*#__PURE__*/_react.default.createElement(_styles.PriceContent, null, parsePrice(product === null || product === void 0 ? void 0 : product.price), ' ', (product === null || product === void 0 ? void 0 : product.in_offer) && /*#__PURE__*/_react.default.createElement("span", {
+  }, product === null || product === void 0 ? void 0 : product.calories, ' ', "cal")), /*#__PURE__*/_react.default.createElement(_styles.Properties, null, isHaveWeight ? /*#__PURE__*/_react.default.createElement(_styles.PriceContent, null, parsePrice(pricePerWeightUnit), " / ", product === null || product === void 0 ? void 0 : product.weight_unit) : /*#__PURE__*/_react.default.createElement(_styles.PriceContent, null, parsePrice(product === null || product === void 0 ? void 0 : product.price), ' ', (product === null || product === void 0 ? void 0 : product.in_offer) && /*#__PURE__*/_react.default.createElement("span", {
     className: "offer-price"
   }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))), /*#__PURE__*/_react.default.createElement(_styles.ProductMeta, null, (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku'), "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.sku)), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement("span", null, "\xA0\xB7\xA0"), (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement(_styles.EstimatedPersons, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.estimated_person, "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_PERSONS', 'persons'))))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement(_styles.ProductDescription, null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement(_styles.ProductTagsListContainer, null, product.tags.map(function (tag) {
     var _theme$images2, _theme$images2$dummie;
@@ -470,14 +487,24 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "price"
   }, productCart.total && parsePrice(productCart.total)), productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
-    className: "incdec-control"
+    className: isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'
   }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     onClick: decrement,
     className: "".concat(productCart.quantity === 1 || isSoldOut ? 'disabled' : '')
-  }), /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
+  }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.pieces) && /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit) && /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
     className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
-  })), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), isHaveWeight && /*#__PURE__*/_react.default.createElement(_styles.WeightUnitSwitch, null, /*#__PURE__*/_react.default.createElement(_styles.WeightUnitItem, {
+    onClick: function onClick() {
+      return handleSwitchQtyUnit('pieces');
+    },
+    active: qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.pieces
+  }, t('PIECES', 'pieces')), /*#__PURE__*/_react.default.createElement(_styles.WeightUnitItem, {
+    onClick: function onClick() {
+      return handleSwitchQtyUnit('weight_unit');
+    },
+    active: qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit
+  }, product === null || product === void 0 ? void 0 : product.weight_unit))), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add ".concat(maxProductQuantity === 0 || Object.keys(errors).length > 0 ? 'disabled' : ''),
     color: "primary",
     onClick: function onClick() {

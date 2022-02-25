@@ -316,7 +316,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     },
     disabled: openUpselling || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_maximum) || !(currentCart !== null && currentCart !== void 0 && currentCart.valid_minimum) && !((currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_type) === 1 && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.discount_rate) === 100)
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "40%",
+    width: "700px",
     open: openProduct,
     closeOnBackdrop: true,
     onClose: function onClose() {

@@ -212,7 +212,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
-    width: "70%",
+    width: "700px",
     padding: "0",
     closeOnBackdrop: true
   }, actualProduct && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
