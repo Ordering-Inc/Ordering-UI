@@ -396,7 +396,7 @@ const CartUI = (props) => {
             closeOnBackdrop={false}
           />
           <Modal
-            width='40%'
+            width='700px'
             open={openProduct}
             padding='0'
             closeOnBackdrop

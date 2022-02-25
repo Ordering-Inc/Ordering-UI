@@ -190,7 +190,7 @@ const UpsellingPageUI = (props) => {
           )}
         </>
       )}
-      <Modal open={modalIsOpen} onClose={() => setModalIsOpen(false)} width='70%' padding='0' closeOnBackdrop>
+      <Modal open={modalIsOpen} onClose={() => setModalIsOpen(false)} width='700px' padding='0' closeOnBackdrop>
         {actualProduct && (
           <ProductForm
             product={actualProduct}
