@@ -8,7 +8,7 @@ import MdClose from '@meronex/icons/md/MdClose'
 import { GeoAlt } from 'react-bootstrap-icons'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
-
+import { LanguageSelector } from '../LanguageSelector'
 import {
   Header as HeaderContainer,
   InnerHeader,
@@ -40,9 +40,6 @@ import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../UserDetails'
 import { Confirm } from '../Confirm'
-import { LoginForm } from '../LoginForm'
-import { SignUpForm } from '../SignUpForm'
-import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { getDistance } from '../../../../../utils'
 
 export const Header = (props) => {
@@ -73,7 +70,7 @@ export const Header = (props) => {
   const [modalPageToShow, setModalPageToShow] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
-
+  const [isOpenUserData, setIsOpenUserData] = useState(false)
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
   const windowSize = useWindowSize()
@@ -215,7 +212,7 @@ export const Header = (props) => {
                 </FarAwayMessage>
               )}
               <AddressMenu
-                onClick={() => openModal('address')}
+                onClick={(e) => handleClickUserCustomer(e)}
               >
                 <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               </AddressMenu>
@@ -309,6 +306,7 @@ export const Header = (props) => {
                           />
                         )
                       )}
+                      <LanguageSelector />
                       {windowSize.width > 768 && (
                         <UserPopover
                           withLogout
@@ -433,15 +431,19 @@ export const Header = (props) => {
                   <UserDetails
                     userData={customerState?.user}
                     userId={customerState?.user?.id}
+                    isOpenUserData={isOpenUserData}
                     isCustomerMode
                     isModal
+                    setIsOpenUserData={setIsOpenUserData}
                   />
                   <AddressList
                     isModal
                     userId={customerState?.user?.id}
                     changeOrderAddressWithDefault
                     userCustomerSetup={customerState.user}
+                    isOpenUserData={isOpenUserData}
                     setCustomerModalOpen={setCustomerModalOpen}
+                    setIsOpenUserData={setIsOpenUserData}
                   />
                 </>
               )}

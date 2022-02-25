@@ -22,7 +22,8 @@ const UserDetailsUI = (props) => {
     isUserDetailsEdit,
     isCustomerMode,
     userState,
-    isModal
+    isModal,
+    setIsOpenUserData
   } = props
 
   const [, t] = useLanguage()
@@ -34,6 +35,10 @@ const UserDetailsUI = (props) => {
       !isEdit && toggleIsEdit()
     }
   }, [isUserDetailsEdit])
+
+  useEffect(() => {
+    setIsOpenUserData && setIsOpenUserData(isEdit)
+  }, [isEdit])
 
   const toggleEditState = () => {
     toggleIsEdit()

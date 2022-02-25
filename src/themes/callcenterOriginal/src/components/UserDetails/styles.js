@@ -53,10 +53,9 @@ export const UserData = styled.div`
   ${props => props.theme?.rtl && css`
     text-align: right;
   `}
-
+  position: relative;
   > * {
     margin: 5px 0;
-    width: 75%;
   }
 
   p {
