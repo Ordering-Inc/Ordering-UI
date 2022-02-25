@@ -1,9 +1,9 @@
 import React from 'react'
 import { LanguageSelector as LanguageSelectorController } from 'ordering-components'
 import { Select } from '../../styles/Select'
-import PhoneInput from 'react-phone-number-input'
 import { Container } from './styles'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
+
 const LanguageSelectorUI = (props) => {
   const {
     languagesState,
@@ -28,6 +28,7 @@ const LanguageSelectorUI = (props) => {
     if (language === 'AR') return 'AE'
     if (language === 'CA') return 'ES'
     if (language === 'DA') return 'DK'
+    if (language === 'ZH') return 'CN'
     return language
   }
 
