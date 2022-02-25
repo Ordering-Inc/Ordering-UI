@@ -10,14 +10,12 @@ import {
   SkeletonForm,
   InputGroup,
   Divider,
-  InputPhoneNumberWrapper,
-  LanguageSelectorWrapper
+  InputPhoneNumberWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
-import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { Alert } from '../Confirm'
 import { sortInputFields } from '../../../../../utils'
 

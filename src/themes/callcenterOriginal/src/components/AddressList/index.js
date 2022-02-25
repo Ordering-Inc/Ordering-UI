@@ -173,7 +173,7 @@ const AddressListUI = (props) => {
       setAddressOpen(false)
     }
   }, [])
-  console.log(isOpenUserData)
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (

@@ -30,7 +30,7 @@ const LanguageSelectorUI = (props) => {
     if (language === 'DA') return 'DK'
     return language
   }
-  console.log(_languages, currentLanguage, defaultLanguages)
+
   return (
     _languages && _languages.length > 1 ? (
       <Container>
