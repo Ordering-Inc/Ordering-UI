@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
 import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
+import MdClose from '@meronex/icons/md/MdClose'
+
 import {
   Heart,
   Building,
@@ -27,7 +29,11 @@ import {
   WrappNotAddresses,
   FormActions,
   ContinueButton,
-  AddressTitle
+  AddressTitle,
+  AddressHalfContainer,
+  List,
+  AddressFormContainer,
+  CloseIcon
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -55,7 +61,8 @@ const AddressListUI = (props) => {
     isEnableContinueButton,
     setCustomerModalOpen,
     isCustomerMode,
-    isFromCheckout
+    isFromCheckout,
+    isOpenUserData
   } = props
 
   const [, t] = useLanguage()
@@ -166,7 +173,7 @@ const AddressListUI = (props) => {
       setAddressOpen(false)
     }
   }, [])
-
+  console.log(isOpenUserData)
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -176,39 +183,88 @@ const AddressListUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
-        {
-          (!isPopover || !addressOpen) && (
-            <Button
-              className='add'
-              outline
-              color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
-              onClick={() => openAddress({})}
-              disabled={orderState?.loading || actionStatus.loading}
-            >
-              {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
-            </Button>
-          )
-        }
-        {
-          isPopover && addressOpen && (
-            <AddressForm
-              userId={userId}
-              addressesList={addressList?.addresses}
-              useValidationFileds
-              address={curAddress}
-              onCancel={() => setAddressOpen(false)}
-              onSaveAddress={handleSaveAddress}
-              userCustomerSetup={userCustomerSetup}
-            />
-          )
-        }
-        {
-          !isPopover && (
-            <Modal
-              title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
-              open={!isPopover && addressOpen}
-              onClose={() => setAddressOpen(false)}
-            >
+        <AddressHalfContainer>
+          <List halfWidth={addressOpen}>
+            {
+              (!isPopover || !addressOpen) && (
+                <Button
+                  className='add'
+                  outline
+                  color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
+                  onClick={() => openAddress({})}
+                  disabled={orderState?.loading || actionStatus.loading}
+                >
+                  {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
+                </Button>
+              )
+            }
+            {
+              isPopover && addressOpen && (
+                <AddressForm
+                  userId={userId}
+                  addressesList={addressList?.addresses}
+                  useValidationFileds
+                  address={curAddress}
+                  onCancel={() => setAddressOpen(false)}
+                  onSaveAddress={handleSaveAddress}
+                  userCustomerSetup={userCustomerSetup}
+                />
+              )
+            }
+
+            {
+              !addressList.loading &&
+              !actionStatus.loading &&
+              !orderState.loading &&
+              !addressList.error &&
+              addressList?.addresses?.length > 0 &&
+              typeof orderState.options?.address === 'object' &&
+              ((!addressOpen && isPopover) || isModal) && (
+                <AddressListUl id='list'>
+                  <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
+                  {uniqueAddressesList.map(address => (
+                    <AddressItem key={address?.id}>
+                      <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
+                        <span className='radio'>
+                          {checkAddress(address) ? <RiRadioButtonFill className='address-checked' /> : <IosRadioButtonOff />}
+                        </span>
+                        <span className={checkAddress(address) ? 'selected-tag tag' : 'tag'}>
+                          {address?.tag === 'home' && <House />}
+                          {address?.tag === 'office' && <Building />}
+                          {address?.tag === 'favorite' && <Heart />}
+                          {address?.tag === 'other' && <PlusLg />}
+                        </span>
+                        <div className='address'>
+                          <span>{address.address}</span>
+                          <span>{address.internal_number} {address.zipcode}</span>
+                        </div>
+                      </div>
+                      <AddressItemActions className='form'>
+                        <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
+                          <Pencil />
+                        </a>
+                        <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
+                          <Trash />
+                        </a>
+                      </AddressItemActions>
+                    </AddressItem>
+                  ))}
+                  {isEnableContinueButton && uniqueAddressesList.map(address => address.default && (
+                    <ContinueButton key={address.id}>
+                      <Button color='primary' onClick={() => handleSetAddress(address)}>
+                        {t('CONTINUE_WITH', 'Continue with')}: {address.address}
+                      </Button>
+                    </ContinueButton>
+                  ))}
+                </AddressListUl>
+              )
+            }
+          </List>
+          {!isPopover && addressOpen && (
+            <AddressFormContainer isOpenUserData={isOpenUserData}>
+              <CloseIcon>
+                <MdClose onClick={() => setAddressOpen(false)} />
+              </CloseIcon>
               <AddressForm
                 userId={userId}
                 addressesList={addressList?.addresses}
@@ -218,68 +274,20 @@ const AddressListUI = (props) => {
                 onSaveAddress={handleSaveAddress}
                 userCustomerSetup={userCustomerSetup}
               />
-            </Modal>
-          )
-        }
-
-        {
-          !addressList.loading &&
-          !actionStatus.loading &&
-          !orderState.loading &&
-          !addressList.error &&
-          addressList?.addresses?.length > 0 &&
-          typeof orderState.options?.address === 'object' &&
-          ((!addressOpen && isPopover) || isModal) && (
-            <AddressListUl id='list'>
-              <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
-              {uniqueAddressesList.map(address => (
-                <AddressItem key={address?.id}>
-                  <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
-                    <span className='radio'>
-                      {checkAddress(address) ? <RiRadioButtonFill className='address-checked' /> : <IosRadioButtonOff />}
-                    </span>
-                    <span className={checkAddress(address) ? 'selected-tag tag' : 'tag'}>
-                      {address?.tag === 'home' && <House />}
-                      {address?.tag === 'office' && <Building />}
-                      {address?.tag === 'favorite' && <Heart />}
-                      {address?.tag === 'other' && <PlusLg />}
-                    </span>
-                    <div className='address'>
-                      <span>{address.address}</span>
-                      <span>{address.internal_number} {address.zipcode}</span>
-                    </div>
-                  </div>
-                  <AddressItemActions className='form'>
-                    <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                      <Pencil />
-                    </a>
-                    <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
-                      <Trash />
-                    </a>
-                  </AddressItemActions>
-                </AddressItem>
-              ))}
-              {isEnableContinueButton && uniqueAddressesList.map(address => address.default && (
-                <ContinueButton key={address.id}>
-                  <Button color='primary' onClick={() => handleSetAddress(address)}>
-                    {t('CONTINUE_WITH', 'Continue with')}: {address.address}
-                  </Button>
-                </ContinueButton>
-              ))}
-            </AddressListUl>
-          )
-        }
+            </AddressFormContainer>
+          )}
+        </AddressHalfContainer>
 
         {!(addressList.loading || actionStatus.loading || orderState.loading) &&
           !addressList.error &&
           addressList?.addresses?.length === 0 &&
           !isProductForm &&
-        (
-          <WrappNotAddresses>
-            <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
-            <h1>{t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.')}</h1>
-          </WrappNotAddresses>
-        )}
+          (
+            <WrappNotAddresses>
+              <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
+              <h1>{t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.')}</h1>
+            </WrappNotAddresses>
+          )}
 
         {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
           addressList.error.length > 0 && (
@@ -322,6 +330,25 @@ const AddressListUI = (props) => {
           </FormActions>
         )}
 
+        {
+          !isPopover && (
+            <Modal
+              title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+              open={isPopover}
+              onClose={() => setAddressOpen(false)}
+            >
+              <AddressForm
+                userId={userId}
+                addressesList={addressList?.addresses}
+                useValidationFileds
+                address={curAddress}
+                onCancel={() => setAddressOpen(false)}
+                onSaveAddress={handleSaveAddress}
+                userCustomerSetup={userCustomerSetup}
+              />
+            </Modal>
+          )
+        }
         <Confirm
           title={t('SEARCH', 'Search')}
           content={confirm.content}

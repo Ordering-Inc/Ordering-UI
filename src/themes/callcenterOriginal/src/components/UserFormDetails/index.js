@@ -226,7 +226,7 @@ export const UserFormDetailsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} isCheckout={isCheckout}>
+      <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} isCheckout={isCheckout} isEdit={isEdit}>
         {!validationFields?.loading ? (
           <>
             {
@@ -332,10 +332,6 @@ export const UserFormDetailsUI = (props) => {
               </InputGroup>
             )}
             <Divider />
-            <LanguageSelectorWrapper>
-              <p>{t('LANGUAGE', 'Language')}</p>
-              <LanguageSelector />
-            </LanguageSelectorWrapper>
             {
             props.afterMidElements?.map((MidElement, i) => (
               <React.Fragment key={i}>

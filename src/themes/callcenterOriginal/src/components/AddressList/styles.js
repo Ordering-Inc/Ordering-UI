@@ -4,7 +4,7 @@ export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 10px;
-
+  width: 100%;
   ${({ isLoading }) => isLoading && css`
     pointer-events: none;
   `}
@@ -186,4 +186,34 @@ export const AddressTitle = styled.span`
   ${props => props.theme?.rtl && css`
     text-align: right;
   `}
+`
+
+export const AddressHalfContainer = styled.div`
+  display: flex;
+  width: 100%;
+`
+
+export const List = styled.div`
+  width: ${({ halfWidth }) => halfWidth ? '50%' : '100%'};
+  padding-right: 10px;
+  button { 
+    width: 100%;
+  }
+`
+
+export const AddressFormContainer = styled.div`
+  width: 50%;
+  position: sticky;
+  right: 0;
+  top: 0;
+  margin-top: ${({ isOpenUserData }) => isOpenUserData ? '-30px' : '-165px'};
+  height: 100%;
+  padding-left: 10px;
+`
+
+export const CloseIcon = styled.div`
+  svg{
+    width: 30px;
+    height: 30px;
+  }
 `
