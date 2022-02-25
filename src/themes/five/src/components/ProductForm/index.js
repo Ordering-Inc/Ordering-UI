@@ -51,7 +51,7 @@ import {
   ProductDescription,
   PriceContent,
   WeightUnitSwitch,
-  WeightUnitItem
+  WeightUnitItem,
   ProductTagsListContainer,
   ProductTagWrapper
 } from './styles'
