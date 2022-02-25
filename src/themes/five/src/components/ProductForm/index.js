@@ -50,6 +50,8 @@ import {
   EstimatedPersons,
   ProductDescription,
   PriceContent,
+  WeightUnitSwitch,
+  WeightUnitItem,
   ProductTagsListContainer,
   ProductTagWrapper
 } from './styles'
@@ -98,6 +100,12 @@ const ProductOptionsUI = (props) => {
   const productContainerRef = useRef(null)
   const [gallery, setGallery] = useState([])
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [isHaveWeight, setIsHaveWeight] = useState(false)
+  const [qtyBy, setQtyBy] = useState({
+    weight_unit: false,
+    pieces: true
+  })
+  const [pricePerWeightUnit, setPricePerWeightUnit] = useState(null)
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
@@ -159,6 +167,10 @@ const ProductOptionsUI = (props) => {
     setTabValue(value)
   }
 
+  const handleSwitchQtyUnit = (val) => {
+    setQtyBy({ [val]: true, [!val]: false })
+  }
+
   useEffect(() => {
     if (document.getElementById(`${tabValue}`)) {
       const extraHeight = windowSize.width < 769 ? 100 : 42
@@ -184,6 +196,11 @@ const ProductOptionsUI = (props) => {
       }
     }
     setGallery(imageList)
+
+    if (product?.weight && product?.weight_unit) {
+      setIsHaveWeight(true)
+      setPricePerWeightUnit(product?.price / product?.weight)
+    }
   }, [product])
 
   return (
@@ -260,19 +277,7 @@ const ProductOptionsUI = (props) => {
                       spaceBetween: 20
                     },
                     769: {
-                      slidesPerView: 4,
-                      spaceBetween: 20
-                    },
-                    1000: {
-                      slidesPerView: 5,
-                      spaceBetween: 20
-                    },
-                    1400: {
                       slidesPerView: 6,
-                      spaceBetween: 20
-                    },
-                    1600: {
-                      slidesPerView: 7,
                       spaceBetween: 20
                     }
                   }}
@@ -295,10 +300,14 @@ const ProductOptionsUI = (props) => {
                   {product?.calories && (<span className='calories'>{product?.calories}{' '}cal</span>)}
                 </ProductName>
                 <Properties>
-                  <PriceContent>
-                    {parsePrice(product?.price)}{' '}
-                    {product?.in_offer && (<span className='offer-price'>{parsePrice(product?.offer_price)}</span>)}
-                  </PriceContent>
+                  {isHaveWeight ? (
+                    <PriceContent>{parsePrice(pricePerWeightUnit)} / {product?.weight_unit}</PriceContent>
+                  ) : (
+                    <PriceContent>
+                      {parsePrice(product?.price)}{' '}
+                      {product?.in_offer && (<span className='offer-price'>{parsePrice(product?.offer_price)}</span>)}
+                    </PriceContent>
+                  )}
                   <ProductMeta>
                     {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
                       <SkuContent>
@@ -451,19 +460,27 @@ const ProductOptionsUI = (props) => {
                 <div className='price'>{productCart.total && parsePrice(productCart.total)}</div>
                 {
                   productCart && !isSoldOut && maxProductQuantity > 0 && (
-                    <div className='incdec-control'>
+                    <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
                       <FiMinusCircle
                         onClick={decrement}
                         className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
                       />
-                      <span>{productCart.quantity}</span>
+                      {qtyBy?.pieces && (<span>{productCart.quantity}</span>)}
+                      {qtyBy?.weight_unit && (<span>{productCart.quantity * product?.weight}</span>)}
                       <FiPlusCircle
                         onClick={increment}
                         className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
                       />
+                      {isHaveWeight && (
+                        <WeightUnitSwitch>
+                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pieces')}</WeightUnitItem>
+                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
+                        </WeightUnitSwitch>
+                      )}
                     </div>
                   )
                 }
+
                 {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                   <Button
                     className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
