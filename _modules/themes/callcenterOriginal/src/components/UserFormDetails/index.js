@@ -25,8 +25,6 @@ var _Buttons = require("../../styles/Buttons");
 
 var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
 
-var _LanguageSelector = require("../../../../../components/LanguageSelector");
-
 var _Confirm = require("../Confirm");
 
 var _utils = require("../../../../../utils");
@@ -322,7 +320,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
-    isCheckout: isCheckout
+    isCheckout: isCheckout,
+    isEdit: isEdit
   }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -388,7 +387,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);

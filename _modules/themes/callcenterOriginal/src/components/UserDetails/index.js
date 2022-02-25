@@ -57,7 +57,8 @@ var UserDetailsUI = function UserDetailsUI(props) {
       isUserDetailsEdit = props.isUserDetailsEdit,
       isCustomerMode = props.isCustomerMode,
       userState = props.userState,
-      isModal = props.isModal;
+      isModal = props.isModal,
+      setIsOpenUserData = props.setIsOpenUserData;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -73,6 +74,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
       !isEdit && toggleIsEdit();
     }
   }, [isUserDetailsEdit]);
+  (0, _react.useEffect)(function () {
+    setIsOpenUserData && setIsOpenUserData(isEdit);
+  }, [isEdit]);
 
   var toggleEditState = function toggleEditState() {
     toggleIsEdit();

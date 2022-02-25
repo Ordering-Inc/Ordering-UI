@@ -37,7 +37,7 @@ var SideForm = _styledComponents.default.div(_templateObject4 || (_templateObjec
 
 exports.SideForm = SideForm;
 
-var UserData = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  text-align: left;\n  ", "\n\n  > * {\n    margin: 5px 0;\n    width: 75%;\n  }\n\n  p {\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
+var UserData = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  text-align: left;\n  ", "\n  position: relative;\n  > * {\n    margin: 5px 0;\n  }\n\n  p {\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    text-align: right;\n  "])));

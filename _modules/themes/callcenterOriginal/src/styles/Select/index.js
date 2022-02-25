@@ -34,13 +34,17 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Select = function Select(props) {
+  var _selectedOption$showO;
+
   var placeholder = props.placeholder,
       options = props.options,
       defaultValue = props.defaultValue,
       onChange = props.onChange,
       notAsync = props.notAsync,
-      notReload = props.notReload;
-  var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
+      notReload = props.notReload,
+      CustomArrow = props.CustomArrow,
+      isHomeStyle = props.isHomeStyle;
+  var isHome = window.location.pathname === '/' || window.location.pathname === '/home' || isHomeStyle;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -124,7 +128,11 @@ var Select = function Select(props) {
     isHome: isHome,
     disabled: orderState.loading && !notReload,
     onMouseUp: handleSelectClick
-  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, placeholder || ''), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, placeholder || ''), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, CustomArrow ? /*#__PURE__*/_react.default.createElement(CustomArrow, {
+    id: "arrow"
+  }) : /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, (_selectedOption$showO = selectedOption.showOnSelected) !== null && _selectedOption$showO !== void 0 ? _selectedOption$showO : selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, CustomArrow ? /*#__PURE__*/_react.default.createElement(CustomArrow, {
+    id: "arrow"
+  }) : /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     id: "list",
     position: "right",
     ref: dropdownReference

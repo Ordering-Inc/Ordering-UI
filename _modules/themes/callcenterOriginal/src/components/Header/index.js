@@ -25,6 +25,8 @@ var _TiWarningOutline = _interopRequireDefault(require("@meronex/icons/ti/TiWarn
 
 var _OrderTypeSelectorContent = require("../OrderTypeSelectorContent");
 
+var _LanguageSelector = require("../LanguageSelector");
+
 var _styles = require("./styles");
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
@@ -54,12 +56,6 @@ var _SidebarMenu = require("../SidebarMenu");
 var _UserDetails = require("../UserDetails");
 
 var _Confirm = require("../Confirm");
-
-var _LoginForm = require("../LoginForm");
-
-var _SignUpForm = require("../SignUpForm");
-
-var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
 var _utils = require("../../../../../utils");
 
@@ -179,6 +175,11 @@ var Header = function Header(props) {
       _useState16 = _slicedToArray(_useState15, 2),
       isFarAway = _useState16[0],
       setIsFarAway = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      isOpenUserData = _useState18[0],
+      setIsOpenUserData = _useState18[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
@@ -337,8 +338,8 @@ var Header = function Header(props) {
   }))), isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     className: "left-header"
   }, windowSize.width > 820 && isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
-    onClick: function onClick() {
-      return openModal('address');
+    onClick: function onClick(e) {
+      return handleClickUserCustomer(e);
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : (_orderState$options5$2 = _orderState$options5$.address) === null || _orderState$options5$2 === void 0 ? void 0 : (_orderState$options5$3 = _orderState$options5$2.split(',')) === null || _orderState$options5$3 === void 0 ? void 0 : _orderState$options5$3[0]) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
     onClick: function onClick(e) {
@@ -401,7 +402,7 @@ var Header = function Header(props) {
     onClick: function onClick(variant) {
       return openModal(variant);
     }
-  })), windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
+  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null), windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_UserPopover.UserPopover, {
     withLogout: true,
     isCustomerMode: isCustomerMode,
     open: openPopover.user,
@@ -485,14 +486,18 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     userData: customerState === null || customerState === void 0 ? void 0 : customerState.user,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id,
+    isOpenUserData: isOpenUserData,
     isCustomerMode: true,
-    isModal: true
+    isModal: true,
+    setIsOpenUserData: setIsOpenUserData
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user3 = customerState.user) === null || _customerState$user3 === void 0 ? void 0 : _customerState$user3.id,
     changeOrderAddressWithDefault: true,
     userCustomerSetup: customerState.user,
-    setCustomerModalOpen: setCustomerModalOpen
+    isOpenUserData: isOpenUserData,
+    setCustomerModalOpen: setCustomerModalOpen,
+    setIsOpenUserData: setIsOpenUserData
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.CUSTOMER) || 'Customer'),
     content: confirm.content,

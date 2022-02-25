@@ -13,6 +13,8 @@ var _IosRadioButtonOff = _interopRequireDefault(require("@meronex/icons/ios/IosR
 
 var _RiRadioButtonFill = _interopRequireDefault(require("@meronex/icons/ri/RiRadioButtonFill"));
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _orderingComponents = require("ordering-components");
@@ -79,7 +81,8 @@ var AddressListUI = function AddressListUI(props) {
       isEnableContinueButton = props.isEnableContinueButton,
       setCustomerModalOpen = props.setCustomerModalOpen,
       isCustomerMode = props.isCustomerMode,
-      isFromCheckout = props.isFromCheckout;
+      isFromCheckout = props.isFromCheckout,
+      isOpenUserData = props.isOpenUserData;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -240,6 +243,8 @@ var AddressListUI = function AddressListUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
     id: "address_control",
     isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading)
+  }, /*#__PURE__*/_react.default.createElement(_styles.AddressHalfContainer, null, /*#__PURE__*/_react.default.createElement(_styles.List, {
+    halfWidth: addressOpen
   }, (!isPopover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
@@ -258,23 +263,7 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup
-  }), !isPopover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
-    open: !isPopover && addressOpen,
-    onClose: function onClose() {
-      return setAddressOpen(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    userId: userId,
-    addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
-    useValidationFileds: true,
-    address: curAddress,
-    onCancel: function onCancel() {
-      return setAddressOpen(false);
-    },
-    onSaveAddress: handleSaveAddress,
-    userCustomerSetup: userCustomerSetup
-  })), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
   }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), uniqueAddressesList.map(function (address) {
     return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
@@ -314,7 +303,23 @@ var AddressListUI = function AddressListUI(props) {
         return handleSetAddress(address);
       }
     }, t('CONTINUE_WITH', 'Continue with'), ": ", address.address));
-  })), !(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
+  }))), !isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
+    isOpenUserData: isOpenUserData
+  }, /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return setAddressOpen(false);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    userId: userId,
+    addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
+    useValidationFileds: true,
+    address: curAddress,
+    onCancel: function onCancel() {
+      return setAddressOpen(false);
+    },
+    onSaveAddress: handleSaveAddress,
+    userCustomerSetup: userCustomerSetup
+  }))), !(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
     alt: "Not Found",
     width: "200px",
@@ -344,7 +349,23 @@ var AddressListUI = function AddressListUI(props) {
     onClick: function onClick() {
       return onAccept();
     }
-  }, t('ACCEPT', 'Accept'))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+  }, t('ACCEPT', 'Accept'))), !isPopover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
+    open: isPopover,
+    onClose: function onClose() {
+      return setAddressOpen(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    userId: userId,
+    addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
+    useValidationFileds: true,
+    address: curAddress,
+    onCancel: function onCancel() {
+      return setAddressOpen(false);
+    },
+    onSaveAddress: handleSaveAddress,
+    userCustomerSetup: userCustomerSetup
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('SEARCH', 'Search'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),

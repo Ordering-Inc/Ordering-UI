@@ -54,7 +54,7 @@ var Selected = _styledComponents.default.div(_templateObject10 || (_templateObje
 
 exports.Selected = Selected;
 
-var Select = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: inline-block;\n  height: 34px;\n  border-radius: 34px;\n  line-height: 34px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  background-color: ", " !important;\n  color: ", " !important;\n  position: relative;\n  ", "\n  ", "\n"])), function (_ref4) {
+var Select = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: inline-block;\n  height: 34px;\n  border-radius: 34px;\n  line-height: 34px;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  background-color: ", ";\n  color: ", ";\n  position: relative;\n  ", "\n  ", "\n"])), function (_ref4) {
   var isHome = _ref4.isHome;
   return isHome ? 'rgba(247,247,247,0.3)' : '#CCC';
 }, function (_ref5) {
