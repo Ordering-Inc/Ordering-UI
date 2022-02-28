@@ -207,7 +207,7 @@ export const Header = (props) => {
               <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
-          {isShowOrderOptions && (
+          {isShowOrderOptions && !props.isCustomLayout && (
             <Menu className='left-header'>
               {windowSize.width > 820 && isFarAway && (
                 <FarAwayMessage>
@@ -326,7 +326,7 @@ export const Header = (props) => {
             </RightHeader>
           )}
         </InnerHeader>
-        {onlineStatus && isShowOrderOptions && (
+        {onlineStatus && isShowOrderOptions && !props.isCustomLayout && (
           windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
               {isFarAway && (

@@ -51,9 +51,6 @@ export const SwiperWrapper = styled.div`
     @media (min-width: 576px) {
       height: 320px;
     }
-
-    @media (min-width: 1201px) {
-    }
   }
 
 
@@ -83,6 +80,7 @@ export const SwiperWrapper = styled.div`
 
       img {
         border-radius: 7.6px;
+        max-height: 93px;
       }
     }
 
@@ -145,7 +143,6 @@ export const ProductInfo = styled.div`
 
 export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
-  margin-bottom: 20px;
 
   .price-discount {
     text-decoration: line-through;
@@ -216,6 +213,7 @@ export const ProductActions = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position: relative;
 
     svg {
       width: 22px;
@@ -224,11 +222,11 @@ export const ProductActions = styled.div`
     }
   }
 
-  div:last-child {
+  /* div:last-child {
     width: 100%;
     display: flex;
     align-items: center;
-  }
+  } */
 
   svg {
     color: ${props => props.theme.colors.primary};
@@ -278,6 +276,13 @@ export const ProductActions = styled.div`
 
     div.incdec-control {
       width: 20%;
+      &.show-weight-unit{
+        width: 25%;
+        span {
+          min-width: 40px;
+          text-align: center;
+        }
+      }
     }
   }
 `
@@ -423,4 +428,50 @@ export const ProductMeta = styled.div`
 `
 export const EstimatedPersons = styled.div`
   display: flex;
+`
+export const ProductTagsListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+`
+export const ProductTagWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin: 0 10px 0 20px;
+    ` : css`
+      margin: 0 20px 0 10px;
+    `}
+  }
+`
+export const WeightUnitSwitch = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: auto;
+`
+export const WeightUnitItem = styled.span`
+  display: inline-flex;
+  width: fit-content;
+  min-width: unset !important;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 2px 6px;
+  cursor: pointer;
+  
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.primary}15;
+    border-radius: 3px;
+    color: ${props => props.theme.colors.primary};
+  `}
 `

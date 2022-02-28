@@ -56,7 +56,8 @@ export const RenderProductsLayout = (props) => {
     handleSearchRedirect,
     handleChangeSearch,
     setOpenBusinessInformation,
-    handleCartOpen
+    handleCartOpen,
+    isCustomLayout
   } = props
 
   const theme = useTheme()
@@ -97,20 +98,22 @@ export const RenderProductsLayout = (props) => {
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
           <div className='bp-list'>
-            <BusinessBasicInformation
-              businessState={businessState}
-              setOpenBusinessInformation={setOpenBusinessInformation}
-              openBusinessInformation={openBusinessInformation}
-              handleChangeSearch={handleChangeSearch}
-              searchValue={searchValue}
-              sortByOptions={sortByOptions}
-              handleChangeSortBy={handleChangeSortBy}
-              categoryState={categoryState}
-              errorQuantityProducts={errorQuantityProducts}
-              sortByValue={sortByValue}
-            />
+            {!isCustomLayout && (
+              <BusinessBasicInformation
+                businessState={businessState}
+                setOpenBusinessInformation={setOpenBusinessInformation}
+                openBusinessInformation={openBusinessInformation}
+                handleChangeSearch={handleChangeSearch}
+                searchValue={searchValue}
+                sortByOptions={sortByOptions}
+                handleChangeSortBy={handleChangeSortBy}
+                categoryState={categoryState}
+                errorQuantityProducts={errorQuantityProducts}
+                sortByValue={sortByValue}
+              />
+            )}
             {!businessLayout.layoutOne && (
-              <BusinessContent>
+              <BusinessContent isCustomLayout={isCustomLayout}>
                 <BusinessCategoryProductWrapper>
                   {!(business?.categories?.length === 0 && !categoryId) && (
                     <BusinessLayout
@@ -243,12 +246,14 @@ export const RenderProductsLayout = (props) => {
 
       {isLoading && !isError && (
         <>
-          <BusinessBasicInformation
-            isSkeleton
-            handler={handler}
-            businessState={{ business: {}, loading: true }}
-            openBusinessInformation={openBusinessInformation}
-          />
+          {!isCustomLayout && (
+            <BusinessBasicInformation
+              isSkeleton
+              handler={handler}
+              businessState={{ business: {}, loading: true }}
+              openBusinessInformation={openBusinessInformation}
+            />
+          )}
           <BusinessProductsCategories
             isSkeleton
             categories={[]}
