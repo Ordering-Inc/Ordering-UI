@@ -47,6 +47,8 @@ const PhoneAutocompleteUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [inputValue, setInputValue] = useState('')
   const [optSelected, setOptSelected] = useState(null)
+  const [isOpenUserData, setIsOpenUserData] = useState(false)
+  const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
@@ -189,16 +191,20 @@ const PhoneAutocompleteUI = (props) => {
       <Modal
         open={openModal.customer}
         width='80%'
-        title={t('CUSTOMER_DETAILS', 'Customer details')}
         onClose={() => handleCloseAddressList()}
+        hideCloseDefault
       >
         <UserEdit>
           {!customerState?.loading && (
             <>
               <UserDetails
+                isAddressFormOpen={isAddressFormOpen}
+                isOpenUserData={isOpenUserData}
                 userId={customerState?.result?.id}
                 isCustomerMode
                 isModal
+                setIsOpenUserData={setIsOpenUserData}
+                onClose={() => handleCloseAddressList()}
               />
               <AddressList
                 isModal
@@ -210,6 +216,9 @@ const PhoneAutocompleteUI = (props) => {
                 }}
                 isEnableContinueButton
                 isCustomerMode
+                isOpenUserData={isOpenUserData}
+                setIsOpenUserData={setIsOpenUserData}
+                setIsAddressFormOpen={setIsAddressFormOpen}
               />
             </>
           )}
