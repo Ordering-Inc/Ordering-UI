@@ -41,10 +41,10 @@ const ProductOptionUI = (props) => {
             {option.image && option.image !== '-' && (
               <OptionThumbnail src={option.image} />
             )}
-            <Title><span>{option.name}</span></Title>
+            <Title><span>{option.name} asdf asldkflas kdfskk kakdfk aksdfjj jasjdf asjdjskdk asjdakd jaksdj faskdfj sdkf</span></Title>
           </TitleContainer>
 
-          <Flag>{maxMin}</Flag>
+          <Flag required={option?.min > 0}>{maxMin}</Flag>
         </WrapHeader>
         {children}
       </Container>

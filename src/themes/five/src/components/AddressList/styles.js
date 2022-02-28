@@ -11,6 +11,7 @@ export const AddressListContainer = styled.div`
 
   button.add {
     height: 50px;
+    min-width: 100px;
   }
 `
 

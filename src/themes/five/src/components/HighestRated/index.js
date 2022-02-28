@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLanguage, useOrder, BusinessList as BusinessListController } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { Button } from '../../styles/Buttons'
@@ -18,13 +18,20 @@ const HighestRatedUI = (props) => {
     businessesList,
     handleBusinessClick,
     isCustomLayout,
-    handleClickAddress
+    handleClickAddress,
+    setHasHighRatedBusiness
   } = props
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
 
   const isBusinessWithReviews = businessesList?.businesses?.every((business) => business?.reviews?.total === 0)
+
+  useEffect(() => {
+    if (!businessesList.loading) {
+      setHasHighRatedBusiness(!isBusinessWithReviews)
+    }
+  }, [businessesList?.businesses])
 
   return (
     <>

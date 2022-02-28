@@ -132,9 +132,11 @@ const ProductOptionSubOptionUI = (props) => {
             </PositionControl>
           )
         }
-        <SuboptionPrice>
-          + {parsePrice(price)}
-        </SuboptionPrice>
+        {price > 0 && (
+          <SuboptionPrice>
+            + {parsePrice(price)}
+          </SuboptionPrice>
+        )}
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

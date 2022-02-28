@@ -309,8 +309,5 @@ export const BussinessAndDriverSignUp = styled.div`
     margin-top: 15px;
     padding: 5px;
 
-    @media (min-width: 993px) {
-      width: 48%;
-    }
   }
 `

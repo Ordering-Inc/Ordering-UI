@@ -64,6 +64,7 @@ const BusinessesListingUI = (props) => {
   const [mapErrors, setMapErrors] = useState('')
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
+  const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const businessesIds = isCustomLayout &&
@@ -161,14 +162,17 @@ const BusinessesListingUI = (props) => {
             <FiMap onClick={toggleMap} />
           )}
         </WrapperSearch>
-        <HightestRatedWrapper>
-          <Divider />
-          <HighestRated
-            handleClickAddress={handleClickAddress}
-            onBusinessClick={onBusinessClick}
-          />
-          <Divider />
-        </HightestRatedWrapper>
+        {hasHighRatedBusiness && (
+          <HightestRatedWrapper>
+            <Divider />
+            <HighestRated
+              handleClickAddress={handleClickAddress}
+              setHasHighRatedBusiness={setHasHighRatedBusiness}
+              onBusinessClick={onBusinessClick}
+            />
+            <Divider />
+          </HightestRatedWrapper>
+        )}
         {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
           <BusinessTypeFilter
             images={props.images}
