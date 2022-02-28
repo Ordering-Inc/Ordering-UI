@@ -33,7 +33,8 @@ import {
   AddressHalfContainer,
   List,
   AddressFormContainer,
-  CloseIcon
+  CloseIcon,
+  TitleFormContainer
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -62,7 +63,8 @@ const AddressListUI = (props) => {
     setCustomerModalOpen,
     isCustomerMode,
     isFromCheckout,
-    isOpenUserData
+    isOpenUserData,
+    setIsAddressFormOpen
   } = props
 
   const [, t] = useLanguage()
@@ -86,6 +88,7 @@ const AddressListUI = (props) => {
   const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
+    setIsAddressFormOpen && setIsAddressFormOpen(true)
     const container = window.document.getElementsByClassName('form_edit')[0]
     container && scrollTo(container, 0, 500)
   }
@@ -112,7 +115,7 @@ const AddressListUI = (props) => {
       handleSetAddress(address)
       return
     }
-    setAddressOpen(false)
+    handleCloseAddressForm()
   }
 
   const handleSetAddress = (address) => {
@@ -128,7 +131,7 @@ const AddressListUI = (props) => {
       return
     }
 
-    setAddressOpen(false)
+    handleCloseAddressForm()
     handleSetDefault(address, userCustomerSetup)
   }
 
@@ -164,13 +167,18 @@ const AddressListUI = (props) => {
     return values.every(value => value)
   }
 
+  const handleCloseAddressForm = () => {
+    setAddressOpen(false)
+    setIsAddressFormOpen && setIsAddressFormOpen(false)
+  }
+
   /**
    * Close modals and alerts
    */
   useEffect(() => {
     return () => {
       setConfirm({ ...confirm, open: false })
-      setAddressOpen(false)
+      handleCloseAddressForm()
     }
   }, [])
 
@@ -205,7 +213,7 @@ const AddressListUI = (props) => {
                   addressesList={addressList?.addresses}
                   useValidationFileds
                   address={curAddress}
-                  onCancel={() => setAddressOpen(false)}
+                  onCancel={() => handleCloseAddressForm()}
                   onSaveAddress={handleSaveAddress}
                   userCustomerSetup={userCustomerSetup}
                 />
@@ -262,15 +270,18 @@ const AddressListUI = (props) => {
           </List>
           {!isPopover && addressOpen && (
             <AddressFormContainer isOpenUserData={isOpenUserData}>
-              <CloseIcon>
-                <MdClose onClick={() => setAddressOpen(false)} />
-              </CloseIcon>
+              <TitleFormContainer>
+                <CloseIcon>
+                  <MdClose onClick={() => handleCloseAddressForm()} />
+                </CloseIcon>
+                <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
+              </TitleFormContainer>
               <AddressForm
                 userId={userId}
                 addressesList={addressList?.addresses}
                 useValidationFileds
                 address={curAddress}
-                onCancel={() => setAddressOpen(false)}
+                onCancel={() => handleCloseAddressForm()}
                 onSaveAddress={handleSaveAddress}
                 userCustomerSetup={userCustomerSetup}
               />
@@ -335,14 +346,14 @@ const AddressListUI = (props) => {
             <Modal
               title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               open={isPopover}
-              onClose={() => setAddressOpen(false)}
+              onClose={() => handleCloseAddressForm()}
             >
               <AddressForm
                 userId={userId}
                 addressesList={addressList?.addresses}
                 useValidationFileds
                 address={curAddress}
-                onCancel={() => setAddressOpen(false)}
+                onCancel={() => handleCloseAddressForm()}
                 onSaveAddress={handleSaveAddress}
                 userCustomerSetup={userCustomerSetup}
               />

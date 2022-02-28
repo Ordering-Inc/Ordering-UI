@@ -206,14 +206,24 @@ export const AddressFormContainer = styled.div`
   position: sticky;
   right: 0;
   top: 0;
-  margin-top: ${({ isOpenUserData }) => isOpenUserData ? '-30px' : '-165px'};
+  margin-top: ${({ isOpenUserData }) => isOpenUserData ? '-30px' : '-190px'};
   height: 100%;
   padding-left: 10px;
 `
 
 export const CloseIcon = styled.div`
+  cursor: pointer;
   svg{
     width: 30px;
     height: 30px;
+  }
+`
+
+export const TitleFormContainer = styled.div`
+  display: flex; 
+  align-items: center;
+  h1 {
+    margin: auto;
+    font-size: 24px;
   }
 `
