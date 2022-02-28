@@ -78,11 +78,13 @@ const BusinessProductsListUI = (props) => {
                 <div className='category-title'>
                   <h3>{t('FEATURED', 'Featured')}</h3>
                 </div>
-                <Button
-                  onClick={() => onClickCategory(category)}
-                >
-                  {t('MORE', 'More')}
-                </Button>
+                {featProducts?.length > 9 && (
+                  <Button
+                    onClick={() => onClickCategory(category)}
+                  >
+                    {t('MORE', 'More')}
+                  </Button>
+                )}
               </div>
               <ProductsListing>
                 {featProducts?.filter((p, index) => index < 9)?.map(product => product.featured && (

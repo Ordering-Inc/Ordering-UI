@@ -44,7 +44,7 @@ const BusinessProductsListUI = (props) => {
         {category?.id && (
           <ProductsListing>
             {
-              categoryState.products?.sort((a, b) => b.rank - a.rank).map(product => (
+              categoryState.products?.map(product => (
                 <SingleProductCard
                   key={product?.id}
                   isSoldOut={(product.inventoried && !product.quantity)}
@@ -67,7 +67,7 @@ const BusinessProductsListUI = (props) => {
                   <WrapAllCategories id='categoryfeatured'>
                     <h3>{t('FEATURED', 'Featured')}</h3>
                     <ProductsListing>
-                      {categoryState.products?.sort((a, b) => b.rank - a.rank).map(product => product.featured && (
+                      {categoryState.products?.map(product => product.featured && (
                         <SingleProductCard
                           key={product?.id}
                           isSoldOut={(product.inventoried && !product.quantity)}
@@ -104,7 +104,7 @@ const BusinessProductsListUI = (props) => {
                       </div>
                       <ProductsListing>
                         {
-                          products.sort((a, b) => b.rank - a.rank).map(product => (
+                          products.map(product => (
                             <SingleProductCard
                               key={product?.id}
                               isSoldOut={product.inventoried && !product.quantity}
