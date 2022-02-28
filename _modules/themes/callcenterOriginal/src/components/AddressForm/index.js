@@ -15,8 +15,6 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _CgSearchLoading = _interopRequireDefault(require("@meronex/icons/cg/CgSearchLoading"));
 
-var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _reactHookForm = require("react-hook-form");
@@ -451,8 +449,8 @@ var AddressFormUI = function AddressFormUI(props) {
         var _formState$changes21, _formState$changes21$, _formState$changes22, _formState$changes22$;
 
         var prevLocation = {
-          lat: Math.trunc(locationChange.lat),
-          lng: Math.trunc(locationChange.lng)
+          lat: Math.trunc(locationChange === null || locationChange === void 0 ? void 0 : locationChange.lat),
+          lng: Math.trunc(locationChange === null || locationChange === void 0 ? void 0 : locationChange.lng)
         };
         var newLocation = {
           lat: Math.trunc(formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : (_formState$changes21$ = _formState$changes21.location) === null || _formState$changes21$ === void 0 ? void 0 : _formState$changes21$.lat),

@@ -82,7 +82,8 @@ var AddressListUI = function AddressListUI(props) {
       setCustomerModalOpen = props.setCustomerModalOpen,
       isCustomerMode = props.isCustomerMode,
       isFromCheckout = props.isFromCheckout,
-      isOpenUserData = props.isOpenUserData;
+      isOpenUserData = props.isOpenUserData,
+      setIsAddressFormOpen = props.setIsAddressFormOpen;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -130,6 +131,7 @@ var AddressListUI = function AddressListUI(props) {
   var openAddress = function openAddress(address) {
     setCurAddress(address);
     setAddressOpen(true);
+    setIsAddressFormOpen && setIsAddressFormOpen(true);
     var container = window.document.getElementsByClassName('form_edit')[0];
     container && (0, _utils.scrollTo)(container, 0, 500);
   };
@@ -160,7 +162,7 @@ var AddressListUI = function AddressListUI(props) {
       return;
     }
 
-    setAddressOpen(false);
+    handleCloseAddressForm();
   };
 
   var handleSetAddress = function handleSetAddress(address) {
@@ -173,7 +175,7 @@ var AddressListUI = function AddressListUI(props) {
       return;
     }
 
-    setAddressOpen(false);
+    handleCloseAddressForm();
     handleSetDefault(address, userCustomerSetup);
   };
 
@@ -219,6 +221,11 @@ var AddressListUI = function AddressListUI(props) {
       return value;
     });
   };
+
+  var handleCloseAddressForm = function handleCloseAddressForm() {
+    setAddressOpen(false);
+    setIsAddressFormOpen && setIsAddressFormOpen(false);
+  };
   /**
    * Close modals and alerts
    */
@@ -229,7 +236,7 @@ var AddressListUI = function AddressListUI(props) {
       setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
         open: false
       }));
-      setAddressOpen(false);
+      handleCloseAddressForm();
     };
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -259,7 +266,7 @@ var AddressListUI = function AddressListUI(props) {
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
-      return setAddressOpen(false);
+      return handleCloseAddressForm();
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup
@@ -305,17 +312,17 @@ var AddressListUI = function AddressListUI(props) {
     }, t('CONTINUE_WITH', 'Continue with'), ": ", address.address));
   }))), !isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
     isOpenUserData: isOpenUserData
-  }, /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
-      return setAddressOpen(false);
+      return handleCloseAddressForm();
     }
-  })), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+  })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
-      return setAddressOpen(false);
+      return handleCloseAddressForm();
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup
@@ -353,7 +360,7 @@ var AddressListUI = function AddressListUI(props) {
     title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
     open: isPopover,
     onClose: function onClose() {
-      return setAddressOpen(false);
+      return handleCloseAddressForm();
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
@@ -361,7 +368,7 @@ var AddressListUI = function AddressListUI(props) {
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
-      return setAddressOpen(false);
+      return handleCloseAddressForm();
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup

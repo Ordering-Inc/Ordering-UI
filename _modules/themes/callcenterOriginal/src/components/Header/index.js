@@ -15,8 +15,6 @@ var _orderingComponents = require("ordering-components");
 
 var _styledComponents = require("styled-components");
 
-var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
-
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -110,9 +108,8 @@ var Header = function Header(props) {
       t = _useLanguage2[1];
 
   var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 2),
-      auth = _useSession2[0].auth,
-      login = _useSession2[1].login;
+      _useSession2 = _slicedToArray(_useSession, 1),
+      auth = _useSession2[0].auth;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 2),
@@ -147,39 +144,34 @@ var Header = function Header(props) {
       customerModalOpen = _useState6[0],
       setCustomerModalOpen = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(false),
+  var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      authModalOpen = _useState8[0],
-      setAuthModalOpen = _useState8[1];
+      modalSelected = _useState8[0],
+      setModalSelected = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(null),
-      _useState10 = _slicedToArray(_useState9, 2),
-      modalSelected = _useState10[0],
-      setModalSelected = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(null),
-      _useState12 = _slicedToArray(_useState11, 2),
-      modalPageToShow = _useState12[0],
-      setModalPageToShow = _useState12[1];
-
-  var _useState13 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
+      _useState10 = _slicedToArray(_useState9, 2),
+      confirm = _useState10[0],
+      setConfirm = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isFarAway = _useState12[0],
+      setIsFarAway = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      confirm = _useState14[0],
-      setConfirm = _useState14[1];
+      isOpenUserData = _useState14[0],
+      setIsOpenUserData = _useState14[1];
 
   var _useState15 = (0, _react.useState)(false),
       _useState16 = _slicedToArray(_useState15, 2),
-      isFarAway = _useState16[0],
-      setIsFarAway = _useState16[1];
-
-  var _useState17 = (0, _react.useState)(false),
-      _useState18 = _slicedToArray(_useState17, 2),
-      isOpenUserData = _useState18[0],
-      setIsOpenUserData = _useState18[1];
+      isAddressFormOpen = _useState16[0],
+      setIsAddressFormOpen = _useState16[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
@@ -194,15 +186,6 @@ var Header = function Header(props) {
     return Number(value);
   })) || [];
   var isPreOrderSetting = (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.preorder_status_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
-
-  var handleSuccessSignup = function handleSuccessSignup(user) {
-    var _user$session;
-
-    login({
-      user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
-    });
-  };
 
   var handleClickUserCustomer = function handleClickUserCustomer(e) {
     var _clearCustomer$curren;
@@ -251,23 +234,6 @@ var Header = function Header(props) {
     if (isCustomerMode && pathname.includes('/orders')) {
       deleteUserCustomer(true);
       refreshOrderOptions();
-    }
-  };
-
-  var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
-    var page = _ref.page;
-    e.preventDefault();
-    setModalPageToShow(page);
-  };
-
-  var closeAuthModal = function closeAuthModal() {
-    setAuthModalOpen(false);
-    setModalPageToShow(null);
-  };
-
-  var handleSuccessLogin = function handleSuccessLogin(user) {
-    if (user) {
-      closeAuthModal();
     }
   };
 
@@ -482,14 +448,19 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return setCustomerModalOpen(false);
     },
-    title: t('CUSTOMER_DETAILS', 'Customer details')
+    padding: "40px 20px 20px 20px",
+    hideCloseDefault: true
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+    isAddressFormOpen: isAddressFormOpen,
     userData: customerState === null || customerState === void 0 ? void 0 : customerState.user,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id,
     isOpenUserData: isOpenUserData,
     isCustomerMode: true,
     isModal: true,
-    setIsOpenUserData: setIsOpenUserData
+    setIsOpenUserData: setIsOpenUserData,
+    onClose: function onClose() {
+      return setCustomerModalOpen(false);
+    }
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user3 = customerState.user) === null || _customerState$user3 === void 0 ? void 0 : _customerState$user3.id,
@@ -497,7 +468,8 @@ var Header = function Header(props) {
     userCustomerSetup: customerState.user,
     isOpenUserData: isOpenUserData,
     setCustomerModalOpen: setCustomerModalOpen,
-    setIsOpenUserData: setIsOpenUserData
+    setIsOpenUserData: setIsOpenUserData,
+    setIsAddressFormOpen: setIsAddressFormOpen
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.CUSTOMER) || 'Customer'),
     content: confirm.content,

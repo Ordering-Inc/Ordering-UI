@@ -15,6 +15,12 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _styles = require("./styles");
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
+var _reactPhoneNumberInput = _interopRequireDefault(require("react-phone-number-input"));
+
+var _libphonenumberJs = require("libphonenumber-js");
+
 var _orderingComponents = require("ordering-components");
 
 var _UserFormDetails = require("../UserFormDetails");
@@ -46,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _userState$result, _formState$result, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _userState$result, _formState$result, _props$beforeElements, _props$beforeComponen, _parsePhoneNumber, _props$afterComponent, _props$afterElements;
 
   var isEdit = props.isEdit,
       formState = props.formState,
@@ -58,7 +64,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
       isCustomerMode = props.isCustomerMode,
       userState = props.userState,
       isModal = props.isModal,
-      setIsOpenUserData = props.setIsOpenUserData;
+      setIsOpenUserData = props.setIsOpenUserData,
+      isAddressFormOpen = props.isAddressFormOpen,
+      onClose = props.onClose;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -102,7 +110,13 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 210,
     height: 25
-  })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, {
+  })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
+    isAddressFormOpen: isAddressFormOpen && !isEdit
+  }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return onClose();
+    }
+  })), /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details'))), /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "user-form"
   }, !isModal && /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
@@ -113,7 +127,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
     onClick: function onClick() {
       return toggleEditState();
     }
-  }))), !isEdit ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, (userData === null || userData === void 0 ? void 0 : userData.address) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.address), ((userData === null || userData === void 0 ? void 0 : userData.name) || (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (userData === null || userData === void 0 ? void 0 : userData.lastname) || (userData === null || userData === void 0 ? void 0 : userData.second_lastname)) && /*#__PURE__*/_react.default.createElement(_styles.UserName, null, userData === null || userData === void 0 ? void 0 : userData.name, " ", userData === null || userData === void 0 ? void 0 : userData.middle_name, " ", userData === null || userData === void 0 ? void 0 : userData.lastname, " ", userData === null || userData === void 0 ? void 0 : userData.second_lastname), (userData === null || userData === void 0 ? void 0 : userData.email) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", null, (userData === null || userData === void 0 ? void 0 : userData.country_phone_code) && "+".concat(userData === null || userData === void 0 ? void 0 : userData.country_phone_code, " "), userData === null || userData === void 0 ? void 0 : userData.cellphone), ((userData === null || userData === void 0 ? void 0 : userData.phone) || (user === null || user === void 0 ? void 0 : user.phone)) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.cellphone)) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+  }))), !isEdit ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, (userData === null || userData === void 0 ? void 0 : userData.address) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.address), ((userData === null || userData === void 0 ? void 0 : userData.name) || (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (userData === null || userData === void 0 ? void 0 : userData.lastname) || (userData === null || userData === void 0 ? void 0 : userData.second_lastname)) && /*#__PURE__*/_react.default.createElement(_styles.UserName, null, userData === null || userData === void 0 ? void 0 : userData.name, " ", userData === null || userData === void 0 ? void 0 : userData.middle_name, " ", userData === null || userData === void 0 ? void 0 : userData.lastname, " ", userData === null || userData === void 0 ? void 0 : userData.second_lastname), (userData === null || userData === void 0 ? void 0 : userData.email) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CountryFlag, null, (userData === null || userData === void 0 ? void 0 : userData.country_phone_code) && /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
+    defaultCountry: (_parsePhoneNumber = (0, _libphonenumberJs.parsePhoneNumber)("+".concat(userData === null || userData === void 0 ? void 0 : userData.country_phone_code, " ").concat(userData === null || userData === void 0 ? void 0 : userData.cellphone))) === null || _parsePhoneNumber === void 0 ? void 0 : _parsePhoneNumber.country
+  })), /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.cellphone)), ((userData === null || userData === void 0 ? void 0 : userData.phone) || (user === null || user === void 0 ? void 0 : user.phone)) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.cellphone)) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
     userData: userData,
     isCustomerMode: isCustomerMode
   })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
