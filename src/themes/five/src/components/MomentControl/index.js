@@ -9,23 +9,33 @@ import {
 } from 'ordering-components'
 import 'react-datepicker/dist/react-datepicker.css'
 import 'react-calendar/dist/Calendar.css'
-import Calendar from 'react-calendar'
-import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
-import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
+import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 import { ArrowRight } from 'react-bootstrap-icons'
 import {
   Title,
   CheckBoxWrapper,
-  DateTimeWrapper,
   DateWrapper,
   TimeListWrapper,
-  TimeListHeader,
-  TimeListContent,
   CheckedIcon,
-  ButtonWrapper
+  ButtonWrapper,
+  OrderTimeWrapper,
+  MonthYearLayer,
+  DaysSwiper,
+  Day,
+  DayName,
+  DayNumber,
+  TimeItem
 } from './styles'
 import CgRadioCheck from '@meronex/icons/cg/CgRadioCheck'
 import { Button } from '../../styles/Buttons'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, {
+  Navigation
+} from 'swiper'
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
+SwiperCore.use([Navigation])
 
 const MomentControlUI = (props) => {
   const {
@@ -44,23 +54,8 @@ const MomentControlUI = (props) => {
   const [{ parseTime }] = useUtils()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const [value, onChange] = useState(new Date())
-  const [minDate, setMinDate] = useState(new Date())
-  const [maxDate, setMaxDate] = useState(new Date())
   const [isASP, setIsASP] = useState(false)
-  const [timeLists, setTimeLists] = useState(null)
-  const [timeFormat, setTimeFormat] = useState('')
-
-  const onDateChange = (value) => {
-    onChange(value)
-    if (handleChangeDate) {
-      const date = (value.getDate() < 10 ? '0' : '') + value.getDate()
-      const month = ((value.getMonth() + 1) < 10 ? '0' : '') + (value.getMonth() + 1)
-      const year = value.getFullYear()
-      const fullDate = `${year}-${month}-${date}`
-      handleChangeDate(fullDate)
-    }
-  }
+  const [timeList, setTimeList] = useState([])
 
   const handleCheckBoxChange = (index) => {
     if (index) {
@@ -69,70 +64,21 @@ const MomentControlUI = (props) => {
     } else setIsASP(false)
   }
 
-  const formatMonthYear = (date) => {
-    return moment(date).format('MMMM')
-  }
-
-  const formatShortWeekday = (date) => {
-    return moment(date).format('dd')
-  }
-
-  const formatDay = (date) => {
-    const minMon = moment(minDate).format('MM')
-    const maxMon = moment(maxDate).format('MM')
-    const currMon = moment(date).format('MM')
-    return ((minMon === currMon) || (maxMon === currMon)) ? moment(date).format('D') : ''
-  }
-
-  const handleChangeTimeFormat = () => {
-    if (configs?.format_time?.value !== '12') return
-    setTimeFormat(prev => prev === 'AM' ? 'PM' : 'AM')
-  }
-
   useEffect(() => {
-    if (configs?.format_time?.value === '12') setTimeFormat('AM')
-    else setTimeFormat('')
-  }, [configs?.format_time?.value])
-
-  useEffect(() => {
-    if (datesList?.length > 0) {
-      const _datesList = datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10))
-      const minDateParts = _datesList[0].split('-')
-      const maxDateParts = _datesList[_datesList.length - 1].split('-')
-      const _minDate = new Date(minDateParts[0], minDateParts[1] - 1, minDateParts[2])
-      const _maxDate = new Date(maxDateParts[0], maxDateParts[1] - 1, maxDateParts[2])
-      setMinDate(_minDate)
-      setMaxDate(_maxDate)
-    }
-  }, [datesList])
-
-  useEffect(() => {
-    if (dateSelected) {
-      const dateParts = dateSelected.split('-')
-      const _dateSelected = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
-      onChange(_dateSelected)
-    }
-  }, [dateSelected])
-
-  useEffect(() => {
-    if (hoursList) {
-      const _timeLists = hoursList.map(hour => {
-        return {
-          value: hour.startTime,
-          content: (
-            configs?.format_time?.value === '12' ? (
-              hour.startTime.includes('12')
-                ? `${hour.startTime}PM`
-                : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })
-            ) : (
-              parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'HH:mm' })
-            )
-          )
-        }
-      })
-      setTimeLists(_timeLists)
-    }
-  }, [hoursList])
+    const _timeLists = hoursList.map(hour => {
+      return {
+        value: hour.startTime,
+        text: configs?.format_time?.value === '12' ? (
+          hour.startTime.includes('12')
+            ? `${hour.startTime}PM`
+            : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })
+        ) : (
+          parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'HH:mm' })
+        )
+      }
+    })
+    setTimeList(_timeLists)
+  }, [dateSelected, hoursList])
 
   useEffect(() => {
     handleCheckBoxChange(isAsap)
@@ -164,44 +110,69 @@ const MomentControlUI = (props) => {
       </CheckBoxWrapper>
       {
         !isASP && (
-          <DateTimeWrapper>
+          <OrderTimeWrapper>
+            <p>{t('ORDER_TIME', 'Order time')}</p>
             <DateWrapper>
-              <Calendar
-                onChange={(val) => onDateChange(val)}
-                value={value}
-                next2Label=''
-                prev2Label=''
-                prevLabel={<MdKeyboardArrowLeft />}
-                nextLabel={<MdKeyboardArrowRight />}
-                minDate={minDate}
-                maxDate={maxDate}
-                formatMonthYear={(locale, date) => formatMonthYear(date)}
-                formatShortWeekday={(locale, date) => formatShortWeekday(date)}
-                formatDay={(locale, date) => formatDay(date)}
-                calendarType='US'
-              />
+              <MonthYearLayer>
+                <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
+              </MonthYearLayer>
+              <DaysSwiper left={<BsCaretLeftFill />}>
+                <Swiper
+                  spaceBetween={0}
+                  navigation
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 4,
+                      spaceBetween: 0
+                    },
+                    400: {
+                      slidesPerView: 5,
+                      spaceBetween: 0
+                    },
+                    550: {
+                      slidesPerView: 6,
+                      spaceBetween: 0
+                    },
+                    769: {
+                      slidesPerView: configs?.max_days_preorder?.value < 7 ? configs?.max_days_preorder?.value : 7,
+                      spaceBetween: 0
+                    }
+                  }}
+                  freeMode
+                  watchSlidesProgress
+                  className='swiper-datelist'
+                >
+                  {
+                    datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10)).map(date => {
+                      const dateParts = date.split('-')
+                      const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
+                      const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2)
+                      const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
+                      return (
+                        <SwiperSlide key={dayNumber}>
+                          <Day selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
+                            <DayName>{dayName}</DayName>
+                            <DayNumber>{dayNumber}</DayNumber>
+                          </Day>
+                        </SwiperSlide>
+                      )
+                    })
+                  }
+                </Swiper>
+              </DaysSwiper>
             </DateWrapper>
             <TimeListWrapper>
-              <div>
-                <TimeListHeader>
-                  <MdKeyboardArrowLeft onClick={handleChangeTimeFormat} />
-                  <span>{timeFormat === '' ? t('TIME', 'Time') : timeFormat}</span>
-                  <MdKeyboardArrowRight onClick={handleChangeTimeFormat} />
-                </TimeListHeader>
-                <TimeListContent>
-                  {timeLists && timeLists.filter(item => item.content.includes(timeFormat)).map((time, i) => (
-                    <Button
-                      key={i}
-                      color={timeSelected === time.value ? 'primaryContrast' : 'gray'}
-                      onClick={() => !orderState.loading && handleChangeTime(time.value)}
-                    >
-                      {time.content}
-                    </Button>
-                  ))}
-                </TimeListContent>
-              </div>
+              {timeList.map((time, i) => (
+                <TimeItem
+                  key={i}
+                  active={timeSelected === time.value}
+                  onClick={() => handleChangeTime(time.value)}
+                >
+                  <span>{time.text}</span>
+                </TimeItem>
+              ))}
             </TimeListWrapper>
-          </DateTimeWrapper>
+          </OrderTimeWrapper>
         )
       }
 
