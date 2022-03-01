@@ -92,6 +92,13 @@ const LoginFormUI = (props) => {
     scope: 'profile'
   }
 
+  const hasSocialLogin = (
+    (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
+    configs?.google_login_client_id?.value ||
+    configs?.apple_login_client_id?.value ||
+    (loginTab === 'cellphone' && (configs?.twilio_service_enabled?.value === 'true' ||
+      configs?.twilio_service_enabled?.value === '1'))
+
   const onSubmit = async () => {
     if (loginWithOtpState) {
       if (!validPhoneFieldState) {
@@ -293,14 +300,14 @@ const LoginFormUI = (props) => {
               isPopup={isPopup}
             >
               {
-              props.beforeMidElements?.map((BeforeMidElements, i) => (
-                <React.Fragment key={i}>
-                  {BeforeMidElements}
-                </React.Fragment>))
+                props.beforeMidElements?.map((BeforeMidElements, i) => (
+                  <React.Fragment key={i}>
+                    {BeforeMidElements}
+                  </React.Fragment>))
               }
               {
-              props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-                <BeforeMidComponents key={i} {...props} />))
+                props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+                  <BeforeMidComponents key={i} {...props} />))
               }
               {useLoginByEmail && loginTab === 'email' && (
                 <InputWrapper>
@@ -322,7 +329,7 @@ const LoginFormUI = (props) => {
                 <InputPhoneNumber
                   value={credentials?.cellphone}
                   setValue={handleChangePhoneNumber}
-                  handleIsValid={() => {}}
+                  handleIsValid={() => { }}
                 />
               )}
 
@@ -389,14 +396,14 @@ const LoginFormUI = (props) => {
                 </InputWrapper>
               )}
               {
-              props.afterMidElements?.map((MidElement, i) => (
-                <React.Fragment key={i}>
-                  {MidElement}
-                </React.Fragment>))
+                props.afterMidElements?.map((MidElement, i) => (
+                  <React.Fragment key={i}>
+                    {MidElement}
+                  </React.Fragment>))
               }
               {
-              props.afterMidComponents?.map((MidComponent, i) => (
-                <MidComponent key={i} {...props} />))
+                props.afterMidComponents?.map((MidComponent, i) => (
+                  <MidComponent key={i} {...props} />))
               }
               {!loginWithOtpState && (
                 <RedirectLink isPopup={isPopup}>
@@ -443,23 +450,25 @@ const LoginFormUI = (props) => {
               {elementLinkToSignup}
             </RedirectLink>
           )}
-          <LoginDivider isPopup={isPopup}>
-            <DividerLine />
-            <p>{t('OR', 'or')}</p>
-            <DividerLine />
-          </LoginDivider>
+          {hasSocialLogin && (
+            <LoginDivider isPopup={isPopup}>
+              <DividerLine />
+              <p>{t('OR', 'or')}</p>
+              <DividerLine />
+            </LoginDivider>
+          )}
           {(!props.isDisableButtons && !loginWithOtpState) && (
             Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
                 {(configs?.facebook_login?.value === 'true' ||
-                configs?.facebook_login?.value === '1') &&
-                configs?.facebook_id?.value &&
-              (
-                <FacebookLoginButton
-                  appId={configs?.facebook_id?.value}
-                  handleSuccessFacebookLogin={handleSuccessFacebook}
-                />
-              )}
+                  configs?.facebook_login?.value === '1') &&
+                  configs?.facebook_id?.value &&
+                  (
+                    <FacebookLoginButton
+                      appId={configs?.facebook_id?.value}
+                      handleSuccessFacebookLogin={handleSuccessFacebook}
+                    />
+                  )}
                 {configs?.google_login_client_id?.value && (
                   <GoogleLoginButton
                     initParams={initParams}
@@ -468,15 +477,16 @@ const LoginFormUI = (props) => {
                   />
                 )}
                 {configs?.apple_login_client_id?.value &&
-              (
-                <AppleLogin
-                  onSuccess={handleSuccessApple}
-                  onFailure={(data) => console.log('onFailure', data)}
-                />
-              )}
+                  (
+                    <AppleLogin
+                      onSuccess={handleSuccessApple}
+                      onFailure={(data) => console.log('onFailure', data)}
+                    />
+                  )}
                 {useLoginByCellphone && loginTab === 'cellphone' &&
-                configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
-                  configs?.twilio_service_enabled?.value === '1') && (
+                  configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
+                    configs?.twilio_service_enabled?.value === '1') &&
+                  (
                     <SmsLoginButton
                       style={{
                         borderRadius: 8,
@@ -485,9 +495,8 @@ const LoginFormUI = (props) => {
                         backgroundColor: 'transparent',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'space-between',
                         marginBottom: 10,
-                        justifyContent: 'space-around',
+                        justifyContent: 'space-around'
                       }}
                       iconStyle={{ fontSize: 16 }}
                       textStyle={{

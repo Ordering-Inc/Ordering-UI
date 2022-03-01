@@ -26,7 +26,8 @@ const BusinessProductsListUI = (props) => {
     searchValue,
     isCartOnProductsList,
     handleClearSearch,
-    errorQuantityProducts
+    errorQuantityProducts,
+    currentCart
   } = props
 
   const [, t] = useLanguage()
@@ -43,7 +44,7 @@ const BusinessProductsListUI = (props) => {
         {category?.id && (
           <ProductsListing>
             {
-              categoryState.products?.sort((a, b) => a.rank - b.rank).map(product => (
+              categoryState.products?.map(product => (
                 <SingleProductCard
                   key={product?.id}
                   isSoldOut={(product.inventoried && !product.quantity)}
@@ -51,6 +52,7 @@ const BusinessProductsListUI = (props) => {
                   businessId={businessId}
                   onProductClick={onProductClick}
                   isCartOnProductsList={isCartOnProductsList}
+                  productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                 />
               ))
             }
@@ -65,7 +67,7 @@ const BusinessProductsListUI = (props) => {
                   <WrapAllCategories id='categoryfeatured'>
                     <h3>{t('FEATURED', 'Featured')}</h3>
                     <ProductsListing>
-                      {categoryState.products?.sort((a, b) => a.rank - b.rank).map(product => product.featured && (
+                      {categoryState.products?.map(product => product.featured && (
                         <SingleProductCard
                           key={product?.id}
                           isSoldOut={(product.inventoried && !product.quantity)}
@@ -73,6 +75,7 @@ const BusinessProductsListUI = (props) => {
                           businessId={businessId}
                           onProductClick={onProductClick}
                           isCartOnProductsList={isCartOnProductsList}
+                          productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                         />
                       ))}
                     </ProductsListing>
@@ -101,7 +104,7 @@ const BusinessProductsListUI = (props) => {
                       </div>
                       <ProductsListing>
                         {
-                          products.sort((a, b) => a.rank - b.rank).map(product => (
+                          products.map(product => (
                             <SingleProductCard
                               key={product?.id}
                               isSoldOut={product.inventoried && !product.quantity}
@@ -109,6 +112,7 @@ const BusinessProductsListUI = (props) => {
                               product={product}
                               onProductClick={onProductClick}
                               isCartOnProductsList={isCartOnProductsList}
+                              productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                             />
                           ))
                         }

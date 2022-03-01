@@ -36,7 +36,7 @@ export const Title = styled.h3`
   display: flex;
   flex-direction: column;
   margin: 0px;
-
+  white-space: normal;
   span {
     &:not(:first-child) {
       color: ${props => props.theme.colors.grayTextColor};
@@ -50,7 +50,7 @@ export const Flag = styled.span`
   font-size: 13px;
   margin: 0px;
   text-transform: capitalize;
-  color: #E63757;
+  color: ${props => props.required ? '#E63757' : props.theme.colors.grayTextColor};
   font-weight: 500;
 
   @media (min-width: 381px) {
@@ -60,7 +60,7 @@ export const Flag = styled.span`
 export const OptionThumbnail = styled.div`
   display: inline-block;
   border-radius: 8px;
-  background-image: url(${({src}) => src});
+  background-image: url(${({ src }) => src});
   background-repeat: no-repeat, repeat;
   width: 40px;
   height: 40px;
