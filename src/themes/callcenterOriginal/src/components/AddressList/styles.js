@@ -206,7 +206,7 @@ export const AddressFormContainer = styled.div`
   position: sticky;
   right: 0;
   top: 0;
-  margin-top: ${({ isOpenUserData }) => isOpenUserData ? '-30px' : '-190px'};
+  margin-top: ${({ isOpenUserData, isHeader }) => isOpenUserData ? '-30px' : isHeader ? '-222px' : '-190px'};
   height: 100%;
   padding-left: 10px;
 `

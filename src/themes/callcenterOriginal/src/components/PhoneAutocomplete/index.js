@@ -193,6 +193,7 @@ const PhoneAutocompleteUI = (props) => {
         width='80%'
         onClose={() => handleCloseAddressList()}
         hideCloseDefault
+        padding='20px'
       >
         <UserEdit>
           {!customerState?.loading && (
