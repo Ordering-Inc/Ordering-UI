@@ -17,11 +17,7 @@ require("react-datepicker/dist/react-datepicker.css");
 
 require("react-calendar/dist/Calendar.css");
 
-var _reactCalendar = _interopRequireDefault(require("react-calendar"));
-
-var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowLeft"));
-
-var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
+var _BsCaretLeftFill = _interopRequireDefault(require("@meronex/icons/bs/BsCaretLeftFill"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
@@ -30,6 +26,14 @@ var _styles = require("./styles");
 var _CgRadioCheck = _interopRequireDefault(require("@meronex/icons/cg/CgRadioCheck"));
 
 var _Buttons = require("../../styles/Buttons");
+
+var _react2 = require("swiper/react");
+
+var _swiper = _interopRequireWildcard(require("swiper"));
+
+require("swiper/swiper-bundle.min.css");
+
+require("swiper/swiper.min.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57,8 +61,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+_swiper.default.use([_swiper.Navigation]);
+
 var MomentControlUI = function MomentControlUI(props) {
-  var _configs$format_time3, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _props$afterComponent, _props$afterElements;
 
   var isAsap = props.isAsap,
       datesList = props.datesList,
@@ -86,47 +92,15 @@ var MomentControlUI = function MomentControlUI(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
-  var _useState = (0, _react.useState)(new Date()),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      value = _useState2[0],
-      onChange = _useState2[1];
+      isASP = _useState2[0],
+      setIsASP = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(new Date()),
+  var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      minDate = _useState4[0],
-      setMinDate = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(new Date()),
-      _useState6 = _slicedToArray(_useState5, 2),
-      maxDate = _useState6[0],
-      setMaxDate = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isASP = _useState8[0],
-      setIsASP = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(null),
-      _useState10 = _slicedToArray(_useState9, 2),
-      timeLists = _useState10[0],
-      setTimeLists = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(''),
-      _useState12 = _slicedToArray(_useState11, 2),
-      timeFormat = _useState12[0],
-      setTimeFormat = _useState12[1];
-
-  var onDateChange = function onDateChange(value) {
-    onChange(value);
-
-    if (handleChangeDate) {
-      var date = (value.getDate() < 10 ? '0' : '') + value.getDate();
-      var month = (value.getMonth() + 1 < 10 ? '0' : '') + (value.getMonth() + 1);
-      var year = value.getFullYear();
-      var fullDate = "".concat(year, "-").concat(month, "-").concat(date);
-      handleChangeDate(fullDate);
-    }
-  };
+      timeList = _useState4[0],
+      setTimeList = _useState4[1];
 
   var handleCheckBoxChange = function handleCheckBoxChange(index) {
     if (index) {
@@ -135,80 +109,22 @@ var MomentControlUI = function MomentControlUI(props) {
     } else setIsASP(false);
   };
 
-  var _formatMonthYear = function formatMonthYear(date) {
-    return (0, _moment.default)(date).format('MMMM');
-  };
+  (0, _react.useEffect)(function () {
+    var _timeLists = hoursList.map(function (hour) {
+      var _configs$format_time;
 
-  var _formatShortWeekday = function formatShortWeekday(date) {
-    return (0, _moment.default)(date).format('dd');
-  };
-
-  var _formatDay = function formatDay(date) {
-    var minMon = (0, _moment.default)(minDate).format('MM');
-    var maxMon = (0, _moment.default)(maxDate).format('MM');
-    var currMon = (0, _moment.default)(date).format('MM');
-    return minMon === currMon || maxMon === currMon ? (0, _moment.default)(date).format('D') : '';
-  };
-
-  var handleChangeTimeFormat = function handleChangeTimeFormat() {
-    var _configs$format_time;
-
-    if ((configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) !== '12') return;
-    setTimeFormat(function (prev) {
-      return prev === 'AM' ? 'PM' : 'AM';
+      return {
+        value: hour.startTime,
+        text: (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+          outputFormat: 'hh:mma'
+        }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+          outputFormat: 'HH:mm'
+        })
+      };
     });
-  };
 
-  (0, _react.useEffect)(function () {
-    var _configs$format_time2;
-
-    if ((configs === null || configs === void 0 ? void 0 : (_configs$format_time2 = configs.format_time) === null || _configs$format_time2 === void 0 ? void 0 : _configs$format_time2.value) === '12') setTimeFormat('AM');else setTimeFormat('');
-  }, [configs === null || configs === void 0 ? void 0 : (_configs$format_time3 = configs.format_time) === null || _configs$format_time3 === void 0 ? void 0 : _configs$format_time3.value]);
-  (0, _react.useEffect)(function () {
-    if ((datesList === null || datesList === void 0 ? void 0 : datesList.length) > 0) {
-      var _configs$max_days_pre;
-
-      var _datesList = datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10));
-
-      var minDateParts = _datesList[0].split('-');
-
-      var maxDateParts = _datesList[_datesList.length - 1].split('-');
-
-      var _minDate = new Date(minDateParts[0], minDateParts[1] - 1, minDateParts[2]);
-
-      var _maxDate = new Date(maxDateParts[0], maxDateParts[1] - 1, maxDateParts[2]);
-
-      setMinDate(_minDate);
-      setMaxDate(_maxDate);
-    }
-  }, [datesList]);
-  (0, _react.useEffect)(function () {
-    if (dateSelected) {
-      var dateParts = dateSelected.split('-');
-
-      var _dateSelected = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-
-      onChange(_dateSelected);
-    }
-  }, [dateSelected]);
-  (0, _react.useEffect)(function () {
-    if (hoursList) {
-      var _timeLists = hoursList.map(function (hour) {
-        var _configs$format_time4;
-
-        return {
-          value: hour.startTime,
-          content: (configs === null || configs === void 0 ? void 0 : (_configs$format_time4 = configs.format_time) === null || _configs$format_time4 === void 0 ? void 0 : _configs$format_time4.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
-            outputFormat: 'hh:mma'
-          }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
-            outputFormat: 'HH:mm'
-          })
-        };
-      });
-
-      setTimeLists(_timeLists);
-    }
-  }, [hoursList]);
+    setTimeList(_timeLists);
+  }, [dateSelected, hoursList]);
   (0, _react.useEffect)(function () {
     handleCheckBoxChange(isAsap);
   }, [isAsap]);
@@ -233,42 +149,58 @@ var MomentControlUI = function MomentControlUI(props) {
     onClick: function onClick() {
       return handleCheckBoxChange(null);
     }
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && /*#__PURE__*/_react.default.createElement(_styles.DateTimeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_reactCalendar.default, {
-    onChange: function onChange(val) {
-      return onDateChange(val);
-    },
-    value: value,
-    next2Label: "",
-    prev2Label: "",
-    prevLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, null),
-    nextLabel: /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null),
-    minDate: minDate,
-    maxDate: maxDate,
-    formatMonthYear: function formatMonthYear(locale, date) {
-      return _formatMonthYear(date);
-    },
-    formatShortWeekday: function formatShortWeekday(locale, date) {
-      return _formatShortWeekday(date);
-    },
-    formatDay: function formatDay(locale, date) {
-      return _formatDay(date);
-    },
-    calendarType: "US"
-  })), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.TimeListHeader, null, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, {
-    onClick: handleChangeTimeFormat
-  }), /*#__PURE__*/_react.default.createElement("span", null, timeFormat === '' ? t('TIME', 'Time') : timeFormat), /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, {
-    onClick: handleChangeTimeFormat
-  })), /*#__PURE__*/_react.default.createElement(_styles.TimeListContent, null, timeLists && timeLists.filter(function (item) {
-    return item.content.includes(timeFormat);
-  }).map(function (time, i) {
-    return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-      key: i,
-      color: timeSelected === time.value ? 'primaryContrast' : 'gray',
-      onClick: function onClick() {
-        return !orderState.loading && handleChangeTime(time.value);
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
+    left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
+  }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
+    spaceBetween: 0,
+    navigation: true,
+    breakpoints: {
+      0: {
+        slidesPerView: 4,
+        spaceBetween: 0
+      },
+      400: {
+        slidesPerView: 5,
+        spaceBetween: 0
+      },
+      550: {
+        slidesPerView: 6,
+        spaceBetween: 0
+      },
+      769: {
+        slidesPerView: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) < 7 ? configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value : 7,
+        spaceBetween: 0
       }
-    }, time.content);
-  }))))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    },
+    freeMode: true,
+    watchSlidesProgress: true,
+    className: "swiper-datelist"
+  }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
+    var dateParts = date.split('-');
+
+    var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+
+    var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2);
+
+    var dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate();
+
+    return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
+      key: dayNumber
+    }, /*#__PURE__*/_react.default.createElement(_styles.Day, {
+      selected: dateSelected === date,
+      onClick: function onClick() {
+        return handleChangeDate(date);
+      }
+    }, /*#__PURE__*/_react.default.createElement(_styles.DayName, null, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, null, dayNumber)));
+  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, timeList.map(function (time, i) {
+    return /*#__PURE__*/_react.default.createElement(_styles.TimeItem, {
+      key: i,
+      active: timeSelected === time.value,
+      onClick: function onClick() {
+        return handleChangeTime(time.value);
+      }
+    }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return onClose();

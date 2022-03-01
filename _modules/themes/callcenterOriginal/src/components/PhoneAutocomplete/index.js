@@ -111,6 +111,16 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       optSelected = _useState6[0],
       setOptSelected = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isOpenUserData = _useState8[0],
+      setIsOpenUserData = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isAddressFormOpen = _useState10[0],
+      setIsAddressFormOpen = _useState10[1];
+
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var userName = userCustomer !== null && userCustomer !== void 0 && userCustomer.lastname ? "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname) : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name;
 
@@ -284,14 +294,20 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.customer,
     width: "80%",
-    title: t('CUSTOMER_DETAILS', 'Customer details'),
+    onClose: function onClose() {
+      return handleCloseAddressList();
+    },
+    hideCloseDefault: true
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+    isAddressFormOpen: isAddressFormOpen,
+    isOpenUserData: isOpenUserData,
+    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id,
+    isCustomerMode: true,
+    isModal: true,
+    setIsOpenUserData: setIsOpenUserData,
     onClose: function onClose() {
       return handleCloseAddressList();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
-    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id,
-    isCustomerMode: true,
-    isModal: true
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
@@ -300,7 +316,10 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       phone: phone
     }),
     isEnableContinueButton: true,
-    isCustomerMode: true
+    isCustomerMode: true,
+    isOpenUserData: isOpenUserData,
+    setIsOpenUserData: setIsOpenUserData,
+    setIsAddressFormOpen: setIsAddressFormOpen
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,

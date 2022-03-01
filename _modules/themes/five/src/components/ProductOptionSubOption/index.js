@@ -160,7 +160,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     onClick: function onClick(e) {
       return handlePosition(e, 'right');
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.SuboptionPrice, null, "+ ", parsePrice(price))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), price > 0 && /*#__PURE__*/_react.default.createElement(_styles.SuboptionPrice, null, "+ ", parsePrice(price))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

@@ -153,6 +153,6 @@ var TermsConditionWrapper = _styledComponents.default.div(_templateObject25 || (
 
 exports.TermsConditionWrapper = TermsConditionWrapper;
 
-var BussinessAndDriverSignUp = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-direction: column;\n  width: 95%;\n\n  @media (min-width: 993px) {\n    flex-direction: row;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 15px;\n    padding: 5px;\n\n    @media (min-width: 993px) {\n      width: 48%;\n    }\n  }\n"])));
+var BussinessAndDriverSignUp = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-direction: column;\n  width: 95%;\n\n  @media (min-width: 993px) {\n    flex-direction: row;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 15px;\n    padding: 5px;\n\n  }\n"])));
 
 exports.BussinessAndDriverSignUp = BussinessAndDriverSignUp;

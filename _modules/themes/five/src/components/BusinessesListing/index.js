@@ -149,6 +149,11 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       preorderBusiness = _useState12[0],
       setPreorderBusiness = _useState12[1];
 
+  var _useState13 = (0, _react.useState)(true),
+      _useState14 = _slicedToArray(_useState13, 2),
+      hasHighRatedBusiness = _useState14[0],
+      setHasHighRatedBusiness = _useState14[1];
+
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
@@ -257,8 +262,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onSearch: handleChangeSearch
   }), isCustomLayout && /*#__PURE__*/_react.default.createElement(_FiMap.default, {
     onClick: toggleMap
-  })), /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
+  })), hasHighRatedBusiness && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
     handleClickAddress: handleClickAddress,
+    setHasHighRatedBusiness: setHasHighRatedBusiness,
     onBusinessClick: onBusinessClick
   }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     images: props.images,

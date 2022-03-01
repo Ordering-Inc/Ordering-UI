@@ -43,7 +43,8 @@ var SingleProductCard = function SingleProductCard(props) {
       useCustomFunctionality = props.useCustomFunctionality,
       onCustomClick = props.onCustomClick,
       customText = props.customText,
-      customStyle = props.customStyle;
+      customStyle = props.customStyle,
+      productAddedToCartLength = props.productAddedToCartLength;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -93,11 +94,11 @@ var SingleProductCard = function SingleProductCard(props) {
     },
     isCartOnProductsList: isCartOnProductsList,
     style: useCustomFunctionality && customStyle
-  }, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
+  }, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)), (product === null || product === void 0 ? void 0 : product.offer_price) && /*#__PURE__*/_react.default.createElement("span", {
+  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)), (product === null || product === void 0 ? void 0 : product.offer_price) !== null && (product === null || product === void 0 ? void 0 : product.in_offer) && /*#__PURE__*/_react.default.createElement("span", {
     className: "off-price"
   }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100

@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapLogo = exports.SoldOut = exports.PriceWrapper = exports.CardLogo = exports.CardInfo = exports.CardContainer = void 0;
+exports.WrapLogo = exports.SoldOut = exports.QuantityContainer = exports.PriceWrapper = exports.CardLogo = exports.CardInfo = exports.CardContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -92,3 +92,13 @@ var PriceWrapper = _styledComponents.default.div(_templateObject13 || (_template
 });
 
 exports.PriceWrapper = PriceWrapper;
+
+var QuantityContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n"])), function (_ref3) {
+  var theme = _ref3.theme;
+  return theme.colors.primary;
+}, function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.colors.primaryContrast;
+});
+
+exports.QuantityContainer = QuantityContainer;

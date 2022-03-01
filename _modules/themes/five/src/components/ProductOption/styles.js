@@ -25,13 +25,15 @@ var TitleContainer = _styledComponents.default.div(_templateObject3 || (_templat
 
 exports.TitleContainer = TitleContainer;
 
-var Title = _styledComponents.default.h3(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 24px;\n  display: flex;\n  flex-direction: column;\n  margin: 0px;\n\n  span {\n    &:not(:first-child) {\n      color: ", ";\n      font-size: 12px;\n      font-weight: 400;\n    }\n  }\n"])), function (props) {
+var Title = _styledComponents.default.h3(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 24px;\n  display: flex;\n  flex-direction: column;\n  margin: 0px;\n  white-space: normal;\n  span {\n    &:not(:first-child) {\n      color: ", ";\n      font-size: 12px;\n      font-weight: 400;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.grayTextColor;
 });
 
 exports.Title = Title;
 
-var Flag = _styledComponents.default.span(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  font-size: 13px;\n  margin: 0px;\n  text-transform: capitalize;\n  color: #E63757;\n  font-weight: 500;\n\n  @media (min-width: 381px) {\n    font-size: 14px;\n  }\n"])));
+var Flag = _styledComponents.default.span(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  font-size: 13px;\n  margin: 0px;\n  text-transform: capitalize;\n  color: ", ";\n  font-weight: 500;\n\n  @media (min-width: 381px) {\n    font-size: 14px;\n  }\n"])), function (props) {
+  return props.required ? '#E63757' : props.theme.colors.grayTextColor;
+});
 
 exports.Flag = Flag;
 
