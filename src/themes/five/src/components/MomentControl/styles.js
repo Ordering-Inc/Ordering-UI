@@ -55,213 +55,16 @@ export const CheckBoxWrapper = styled.div`
   `}
 `
 
-export const DateTimeWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
-  > div {
-    border: 1px solid #E9ECEF;
-    box-sizing: border-box;
-    border-radius: 7.6px;
-  }
-`
-
-export const DateWrapper = styled.div`
-  width: 100%;
-  margin: 14px 0px;
-  padding: 10px 2px;
-  display: flex;
-  justify-content: center;
-
-  .react-calendar {
-    border: none;
-    border-radius: 7.6px;
-    font-family: 'Poppins',sans-serif;
-
-    .react-calendar__tile--active,
-    .react-calendar__tile:enabled:focus {
-      background: transparent;
-      abbr {
-        background: #F5F9FF;
-        color: #344050;
-      }
-    }
-
-    .react-calendar__tile:enabled:hover {
-      background: transparent;
-
-      abbr {
-        background: #EFEFEF;
-        color: #344050;
-      }
-    }
-
-    .react-calendar__tile--now {
-      background: transparent;
-    }
-
-    .react-calendar__month-view__weekdays {
-      font-size: 12px;
-      color: #909BA9;
-      font-weight: normal;
-      text-transform: capitalize;
-      abbr {
-        text-decoration: none;
-      }
-    }
-
-    .react-calendar__month-view__days__day {
-      font-size: 12px;
-      color: #344050;
-      abbr {
-        width: 20px;
-        height: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-
-        @media (min-width: 350px) {
-          width: 34px;
-          height: 32px;
-        }
-      }
-    }
-
-    .react-calendar__tile:disabled {
-      background-color: transparent;
-      color: ${props => props.theme.colors?.disabled};
-      cursor: not-allowed;
-    }
-
-    .react-calendar__navigation {
-      margin-bottom: 5px;
-      button {
-        background: transparent!important;
-        color: #748194;
-
-        svg {
-          font-size: 24px;
-
-          ${props => props.theme.rtl && css`
-            transform: rotateZ(180deg);
-          `}
-        }
-
-        &:disabled {
-          cursor: not-allowed;
-        }
-
-        span {
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          width: 100%;
-          display: inline-block;
-
-          @media (min-width: 768px) {
-            width: auto;
-            display: initial;
-          }
-        }
-      }
-
-      .react-calendar__navigation__prev2-button,
-      .react-calendar__navigation__next2-button {
-        display: none;
-      }
-    }
-  }
-
-  @media (min-width: 768px) {
-    width: calc(50% - 12px);
-    margin-right: 12px;
-    ${props => props.theme.rtl && css`
-      margin-left: 12px;
-    `}
-  }
-`
+export const DateWrapper = styled.div``
 
 export const TimeListWrapper = styled.div`
-  width: 100%;
-  margin: 14px 0px;
-  padding: 20px 10px;
-  display: flex;
-  justify-content: center;
-
-  > div {
-    width: 350px;
-    max-width: 100%;
-  }
-
-  @media (min-width: 375px) {
-    padding: 20px 15px;
-  }
-
-  @media (min-width: 768px) {
-    width: calc(50% - 12px);
-    margin-left: 12px;
-    ${props => props.theme.rtl && css`
-      margin-right: 12px;
-    `}
-  }
-`
-
-export const TimeListHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #748194;
-  svg {
-    font-size: 24px;
-    cursor: pointer;
-  }
-  span {
-    font-size: 14px;
-  }
-`
-
-export const TimeListContent = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-height: 295px;
+  margin-left: -12px;
+  width: calc(100% + 24px);
+  margin-top: 30px;
+  max-height: 250px;
   overflow: auto;
-  margin-top: 14px;
-
-  > button {
-    font-size: 14px;
-    line-height: 24px;
-    padding: 4px 8px;
-    margin: 0px 10px 16px 0px;
-    ${props => props.theme.rtl && css`
-      margin: 0px 0px 16px 10px;
-    `}
-    width: calc(50% - 15px);
-
-    @media (min-width: 340px) {
-      margin: 0px 7px 16px 0px;
-      ${props => props.theme.rtl && css`
-        margin: 0px 0px 16px 7px;
-      `}
-    width: calc(33.33% - 7px);
-    }
-
-    @media (min-width: 414px) {
-      margin: 0px 9px 16px 0px;
-      width: calc(25% - 9px);
-      ${props => props.theme.rtl && css`
-        margin: 0px 0px 16px 9px;
-      `}
-    }
-
-    @media (min-width: 768px) {
-      margin: 0px 15px 16px 0px;
-      ${props => props.theme.rtl && css`
-        margin: 0px 0px 16px 15px;
-      `}
-      width: calc(33.33% - 15px);
-    }
-  }
 `
 
 export const CheckedIcon = styled.div`
@@ -294,5 +97,139 @@ export const ButtonWrapper = styled.div`
         right: 17px;
       `}
     }
+  }
+`
+
+export const OrderTimeWrapper = styled.div`
+  > p {
+    font-weight: 600;
+    font-size: 20px;
+  }
+`
+
+export const MonthYearLayer = styled.div`
+  margin-top: 0px;
+  margin-bottom: 13px;
+
+  span {
+    font-size: 16px;
+    line-height: 24px;
+  }
+`
+
+export const DaysSwiper = styled.div`
+  width: 100%;
+  position: relative;
+  border-top: 1px solid #E9ECEF;
+  border-bottom: 1px solid #E9ECEF;
+
+  .swiper-datelist {
+    padding: 0 20px;
+    .swiper-button-prev {
+      background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 16 16' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 00-1.659-.753l-5.48 4.796a1 1 0 000 1.506z'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-position: center;
+      width: 20px;
+    }
+
+    .swiper-button-prev::after {
+      display: none;
+    }
+    .swiper-button-next {
+      background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 16 16' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 011.659-.753l5.48 4.796a1 1 0 010 1.506z'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-position: center;
+      width: 18px;
+    }
+
+    .swiper-button-next::after {
+      display: none;
+    }
+
+    .swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+      right: 0px;
+      left: auto;
+    }
+    .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+      left: 0px;
+      right: auto;
+    }
+  }
+`
+
+export const Day = styled.div`
+  display: flex;
+  flex-grow: 1;
+  color: #B1BCCC;
+  cursor: pointer;
+  padding: 14px 0 13px 0;
+  flex-direction: column;
+  align-items: center;
+  transition: background-color .16s ease -0.01s;
+
+  ${({ selected }) => selected && css`
+    color: #344050;
+  `}
+
+  :hover {
+    background-color: #e9ecef;
+  }
+`
+
+export const DayName = styled.div`
+  display: flex;
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 10px;
+  &:first-letter {
+    text-transform: uppercase;
+  }
+`
+
+export const DayNumber = styled.div`
+  display: flex;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+`
+
+export const TimeItem = styled.div`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #E9ECEF;
+  border-radius: 7.6px;
+  padding: 5px 15px;
+  margin: 12px;
+  width: calc(50% - 24px);
+  min-width: calc(50% - 24px);
+  box-sizing: border-box;
+  user-select: none;
+
+  ${({ active }) => active && css`
+    background: #F5F9FF;
+    color: ${props => props.theme.colors.primary};
+  `}
+
+  span {
+    font-size: 14px;
+  }
+
+  @media (min-width: 400px) {
+    width: calc(33.33% - 24px);
+    min-width: calc(33.33% - 24px);
+  }
+
+  @media (min-width: 576px) {
+    width: calc(25% - 24px);
+    min-width: calc(25% - 24px);
+  }
+
+  @media (min-width: 769px) {
+    width: calc(16.66% - 24px);
+    min-width: calc(16.66% - 24px);
   }
 `
