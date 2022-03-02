@@ -159,12 +159,6 @@ Object.defineProperty(exports, "DriverTips", {
     return _DriverTips.DriverTips;
   }
 });
-Object.defineProperty(exports, "FacebookLogin", {
-  enumerable: true,
-  get: function get() {
-    return _FacebookLogin.FacebookLogin;
-  }
-});
 Object.defineProperty(exports, "Footer", {
   enumerable: true,
   get: function get() {
@@ -175,12 +169,6 @@ Object.defineProperty(exports, "ForgotPasswordForm", {
   enumerable: true,
   get: function get() {
     return _ForgotPasswordForm.ForgotPasswordForm;
-  }
-});
-Object.defineProperty(exports, "GoogleLogin", {
-  enumerable: true,
-  get: function get() {
-    return _GoogleLogin.GoogleLogin;
   }
 });
 Object.defineProperty(exports, "Header", {
@@ -518,13 +506,9 @@ var _Checkout = require("./src/components/Checkout");
 
 var _DriverTips = require("./src/components/DriverTips");
 
-var _FacebookLogin = require("./src/components/FacebookLogin");
-
 var _Footer = require("./src/components/Footer");
 
 var _ForgotPasswordForm = require("./src/components/ForgotPasswordForm");
-
-var _GoogleLogin = require("./src/components/GoogleLogin");
 
 var _Header = require("./src/components/Header");
 

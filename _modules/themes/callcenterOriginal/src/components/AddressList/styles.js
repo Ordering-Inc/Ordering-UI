@@ -92,8 +92,9 @@ var List = _styledComponents.default.div(_templateObject16 || (_templateObject16
 exports.List = List;
 
 var AddressFormContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: 50%;\n  position: sticky;\n  right: 0;\n  top: 0;\n  margin-top: ", ";\n  height: 100%;\n  padding-left: 10px;\n"])), function (_ref3) {
-  var isOpenUserData = _ref3.isOpenUserData;
-  return isOpenUserData ? '-30px' : '-190px';
+  var isOpenUserData = _ref3.isOpenUserData,
+      isHeader = _ref3.isHeader;
+  return isOpenUserData ? '-30px' : isHeader ? '-222px' : '-190px';
 });
 
 exports.AddressFormContainer = AddressFormContainer;

@@ -297,7 +297,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onClose: function onClose() {
       return handleCloseAddressList();
     },
-    hideCloseDefault: true
+    hideCloseDefault: true,
+    padding: "20px"
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     isAddressFormOpen: isAddressFormOpen,
     isOpenUserData: isOpenUserData,

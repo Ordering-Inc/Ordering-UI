@@ -444,11 +444,11 @@ var Header = function Header(props) {
     defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0) && 1
   })), isCustomerMode && customerModalOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: customerModalOpen,
-    width: "60%",
+    width: "80%",
     onClose: function onClose() {
       return setCustomerModalOpen(false);
     },
-    padding: "40px 20px 20px 20px",
+    padding: "20px",
     hideCloseDefault: true
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     isAddressFormOpen: isAddressFormOpen,
@@ -469,7 +469,8 @@ var Header = function Header(props) {
     isOpenUserData: isOpenUserData,
     setCustomerModalOpen: setCustomerModalOpen,
     setIsOpenUserData: setIsOpenUserData,
-    setIsAddressFormOpen: setIsAddressFormOpen
+    setIsAddressFormOpen: setIsAddressFormOpen,
+    isHeader: true
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.CUSTOMER) || 'Customer'),
     content: confirm.content,
