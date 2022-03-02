@@ -24,10 +24,8 @@ import { CartContent } from './src/components/CartContent'
 import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
 import { DriverTips } from './src/components/DriverTips'
-import { FacebookLogin } from './src/components/FacebookLogin'
 import { Footer } from './src/components/Footer'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
-import { GoogleLogin } from './src/components/GoogleLogin'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
 import { Help } from './src/components/Help'
@@ -103,10 +101,8 @@ export {
   CartPopover,
   Checkout,
   DriverTips,
-  FacebookLogin,
   Footer,
   ForgotPasswordForm,
-  GoogleLogin,
   Header,
   HeaderOption,
   Help,

@@ -396,9 +396,9 @@ export const Header = (props) => {
         {isCustomerMode && customerModalOpen && (
           <Modal
             open={customerModalOpen}
-            width='60%'
+            width='80%'
             onClose={() => setCustomerModalOpen(false)}
-            padding='40px 20px 20px 20px'
+            padding='20px'
             hideCloseDefault
           >
             <UserEdit>
@@ -423,6 +423,7 @@ export const Header = (props) => {
                     setCustomerModalOpen={setCustomerModalOpen}
                     setIsOpenUserData={setIsOpenUserData}
                     setIsAddressFormOpen={setIsAddressFormOpen}
+                    isHeader
                   />
                 </>
               )}
