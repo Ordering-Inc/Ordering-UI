@@ -32,7 +32,7 @@ import { CartPopover } from '../CartPopover'
 import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
 import { CartContent } from '../CartContent'
 import { Modal } from '../Modal'
-import { MomentContent } from '../MomentContent'
+import { MomentControl } from '../MomentControl'
 import { AddressList } from '../AddressList'
 import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../HeaderOption'
@@ -77,6 +77,19 @@ export const Header = (props) => {
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
+
+  const limitDays = parseInt(configState?.max_days_preorder?.value, 10)
+  const currentDate = new Date()
+  const time = limitDays > 1
+    ? currentDate.getTime() + ((limitDays - 1) * 24 * 60 * 60 * 1000)
+    : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + (6 * 24 * 60 * 60 * 1000)
+
+  currentDate.setTime(time)
+  currentDate.setHours(23)
+  currentDate.setMinutes(59)
+  const momentProps = {
+    maxDate: currentDate
+  }
 
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
@@ -336,13 +349,9 @@ export const Header = (props) => {
                 )}
               </AddressWrapper>
               {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                <HeaderOption
-                  variant='moment'
-                  momentState={orderState?.options?.moment}
-                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                    ? null
-                    : (variant) => openModal(variant)}
-                  isHome={isHome}
+                <MomentControl 
+                  {...momentProps}
+                  isModalBehavior
                 />
               )}
             </SubMenu>
@@ -380,9 +389,6 @@ export const Header = (props) => {
                   onSaveAddress={() => setModalIsOpen(false)}
                 />
               )
-            )}
-            {modalSelected === 'moment' && (
-              <MomentContent />
             )}
           </Modal>
         )}
