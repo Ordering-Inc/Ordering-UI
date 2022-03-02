@@ -83,3 +83,69 @@ export const WrapPaymethodSelect = styled.div`
     }
   }
 `
+
+export const PayCard = styled.div`
+  width: calc(50% - 12px);
+  height: 60px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  text-align: center;
+
+  ${props => props.theme?.rtl && css`
+    margin-left: 10px;
+    margin-right: 0;
+  `}
+
+  ${props => props.isDisabled && css`
+    pointer-events: none;
+  `}
+
+  svg path {
+    fill: #000;
+  }
+
+  @media (min-width: 351px) {
+    width: calc(33% - 12px);
+  }
+
+  @media (min-width: 513px) {
+    width: calc(25% - 12px);
+  }
+
+  @media (min-width: 641px) {
+    width: calc(20% - 12px);
+  }
+
+  @media (min-width: 841px) {
+    width: calc(18% - 12px);
+  }
+
+  svg {
+    font-size: 30px;
+  }
+
+  p {
+    margin: 0px;
+    font-size: 12px;
+  }
+
+  &.active {
+    border: 1px solid ${props => props.theme.colors.primary};
+      svg {
+        color: ${props => props.theme.colors.primary}
+      }
+      svg path {
+      fill: ${props => props.theme.colors.primary};
+    }
+  }
+
+  &:not(.active) {
+    border: ${({ isSkeleton }) => isSkeleton ? '0' : '1px solid #EAEAEA'};
+  }
+`

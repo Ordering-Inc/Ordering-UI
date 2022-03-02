@@ -115,9 +115,6 @@ const UserDetailsUI = (props) => {
                   </p>
                 </PhoneContainer>
               )}
-              {(userData?.phone || user?.phone) && (
-                <p>{(userData?.cellphone)}</p>
-              )}
             </UserData>
           ) : (
             <SideForm>
