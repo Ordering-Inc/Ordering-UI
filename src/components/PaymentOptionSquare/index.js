@@ -61,16 +61,14 @@ const PaymentOptionSquareUI = (props) => {
               </div>
             ))
           )}
-          <Container>
+          <Container isLoading={isLoadingMethod || isLoadingPlace}>
             {methodSelected === 'card_payments' && (
               <>
                 <div id='card-container' />
-                {!isLoadingMethod && !isLoadingPlace && (
-                  <Button color='primary' id='card-button' type='button'>{t('ACCEPT', 'Accept')}</Button>
-                )}
+                <Button color='primary' id='card-button' type='button'>{t('ACCEPT', 'Accept')}</Button>
               </>
             )}
-            {methodSelected === 'ach_bank_transfer' && !isLoadingMethod && !isLoadingPlace && (
+            {methodSelected === 'ach_bank_transfer' && (
               <Button color='primary' id='ach-button' type='button'>{t('PAY_WITH_BANK_ACCOUNT', 'Pay with Bank Account')}</Button>
             )}
             {/* {methodSelected === 'digital_wallets' && (
@@ -94,9 +92,7 @@ const PaymentOptionSquareUI = (props) => {
             {methodSelected === 'gift_cards' && (
               <form>
                 <div id='gift-card-container' />
-                {!isLoadingPlace && (
-                  <button id='gift-card-button' type='button'>{t('PAY_WITH_GIFT_CARD', 'Pay with Gift Card')}</button>
-                )}
+                <button id='gift-card-button' type='button'>{t('PAY_WITH_GIFT_CARD', 'Pay with Gift Card')}</button>
               </form>
             )}
             {isLoadingPlace && (
