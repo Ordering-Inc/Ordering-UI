@@ -78,9 +78,9 @@ export const Footer = () => {
             <LanguageSelector />
           </LanguageWrapper>
           <SocialGroup>
-            <a href='https://facebook.com' target='_blank' rel='noopener noreferrer'><FaFacebookF /></a>
+            <a href='https://www.facebook.com/orderingco/' target='_blank' rel='noopener noreferrer'><FaFacebookF /></a>
             <a href='https://twitter.com' target='_blank' rel='noopener noreferrer'><Twitter /></a>
-            <a href='https://instagram.com' target='_blank' rel='noopener noreferrer'><Instagram /></a>
+            <a href='https://www.instagram.com/ordering.co/' target='_blank' rel='noopener noreferrer'><Instagram /></a>
           </SocialGroup>
         </SocialIconList>
       </FooterBottom>
