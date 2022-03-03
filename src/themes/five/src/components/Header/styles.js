@@ -282,6 +282,12 @@ export const AddressMenu = styled.div`
       margin-right: 0;
     `}
   }
+  @media (min-width: 765px) {
+    width: 80%;
+  }
+  @media (min-width: 820px) {
+    width: 100%;
+  }
 `
 
 export const MomentMenu = styled.div`

@@ -8,21 +8,8 @@ import { SpinnerLoader } from '../SpinnerLoader'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 export const MomentContent = (props) => {
-  const [{ configs }] = useConfig()
-  const limitDays = parseInt(configs?.max_days_preorder?.value, 10)
+  
   const [orderState] = useOrder()
-
-  const currentDate = new Date()
-  const time = limitDays > 1
-    ? currentDate.getTime() + ((limitDays - 1) * 24 * 60 * 60 * 1000)
-    : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + (6 * 24 * 60 * 60 * 1000)
-
-  currentDate.setTime(time)
-  currentDate.setHours(23)
-  currentDate.setMinutes(59)
-  const momentProps = {
-    maxDate: currentDate
-  }
 
   const { width } = useWindowSize()
   const momentControl = document?.getElementById('moment_control')?.getBoundingClientRect()
@@ -38,7 +25,7 @@ export const MomentContent = (props) => {
         <BeforeComponent key={i} {...props} />))
       }
       <Container isLoading={orderState?.loading}>
-        <MomentControl {...momentProps} />
+        <MomentControl />
         {orderState?.loading && (
           <Layer height={momentControl?.height && `${momentControl?.height}px`}>
             {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (
