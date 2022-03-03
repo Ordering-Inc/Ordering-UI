@@ -93,7 +93,7 @@ export const SocialIconList = styled.div`
   display: flex;
   align-items: center;
 
-  @media (min-width: 992px) {
+  @media (min-width: 1400px) {
     width: 25%;
     justify-content: space-between;
   }
@@ -122,6 +122,7 @@ export const LanguageWrapper = styled.div`
     > div:first-child {
       font-size: 14px;
       text-decoration: underline;
+      color:  #344050;
 
       padding-right: 0px !important;
       padding-left: 12px !important;

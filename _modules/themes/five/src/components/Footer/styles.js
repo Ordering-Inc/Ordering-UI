@@ -43,11 +43,11 @@ var Description = _styledComponents.default.div(_templateObject6 || (_templateOb
 
 exports.Description = Description;
 
-var SocialIconList = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  @media (min-width: 992px) {\n    width: 25%;\n    justify-content: space-between;\n  }\n"])));
+var SocialIconList = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  @media (min-width: 1400px) {\n    width: 25%;\n    justify-content: space-between;\n  }\n"])));
 
 exports.SocialIconList = SocialIconList;
 
-var LanguageWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  display: flex;\n  align-items: center;\n  margin-right: 15px;\n  ", "\n\n  svg {\n    font-size: 20px;\n  }\n  span {\n    text-decoration: underline;\n    font-size: 14px;\n  }\n  #select-input {\n    background-color: transparent !important;\n    border: none;\n    > div:first-child {\n      font-size: 14px;\n      text-decoration: underline;\n\n      padding-right: 0px !important;\n      padding-left: 12px !important;\n      ", "\n      svg {\n        display: none;\n      }\n    }\n    #list {\n      bottom: 100%;\n      border-radius: 8px;\n    }\n  }\n"])), function (props) {
+var LanguageWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  display: flex;\n  align-items: center;\n  margin-right: 15px;\n  ", "\n\n  svg {\n    font-size: 20px;\n  }\n  span {\n    text-decoration: underline;\n    font-size: 14px;\n  }\n  #select-input {\n    background-color: transparent !important;\n    border: none;\n    > div:first-child {\n      font-size: 14px;\n      text-decoration: underline;\n      color:  #344050;\n\n      padding-right: 0px !important;\n      padding-left: 12px !important;\n      ", "\n      svg {\n        display: none;\n      }\n    }\n    #list {\n      bottom: 100%;\n      border-radius: 8px;\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n    margin-right: 0px;\n  "])));
