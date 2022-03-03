@@ -8,8 +8,8 @@ const SmartAppBanneUI = (props) => {
   return (
     <>
       <SmartBanner
-        title='Ordering App'
-        author='Ordering, Inc.'
+        title={t('MOBILE_APPNAME', 'Ordering app')}
+        author={t('MOBILE_APPNAME_AUTHOR', 'Ordering, Inc.')}
         daysHidden={7}
         daysReminder={15}
         button={t('VIEW', 'View')}
