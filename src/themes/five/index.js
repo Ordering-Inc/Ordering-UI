@@ -36,6 +36,7 @@ import { HomeHero } from './src/components/HomeHero'
 import { HighestRated } from './src/components/HighestRated'
 import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
+import { LanguageSelector } from './src/components/LanguageSelector'
 import { LastOrders } from './src/components/LastOrders'
 import { LoginForm } from './src/components/LoginForm'
 import { Messages } from './src/components/Messages'
@@ -117,6 +118,7 @@ export {
   HorizontalOrdersLayout,
   HighestRated,
   InputPhoneNumber,
+  LanguageSelector,
   LastOrders,
   LoginForm,
   Messages,
