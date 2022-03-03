@@ -173,8 +173,8 @@ var CheckoutUI = function CheckoutUI(props) {
   })) === null || _instructionsOptions$2 === void 0 ? void 0 : _instructionsOptions$2.map(function (option) {
     return {
       value: option === null || option === void 0 ? void 0 : option.id,
-      content: t(option === null || option === void 0 ? void 0 : option.name.toUpperCase().replace(/\s/g, '_')),
-      showOnSelected: option === null || option === void 0 ? void 0 : option.name
+      content: t(option === null || option === void 0 ? void 0 : option.name.toUpperCase().replace(/\s/g, '_'), option === null || option === void 0 ? void 0 : option.name),
+      showOnSelected: t(option === null || option === void 0 ? void 0 : option.name.toUpperCase().replace(/\s/g, '_'), option === null || option === void 0 ? void 0 : option.name)
     };
   }));
 
