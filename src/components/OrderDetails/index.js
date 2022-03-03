@@ -344,7 +344,7 @@ const OrderDetailsUI = (props) => {
               {order?.delivery_type === 1 && (
                 <CommentContainer>
                   <h3>{t('DELIVERY_PREFERENCE', 'Delivery preference')}</h3>
-                  <span>{order?.delivery_option?.name ? t(order?.delivery_option?.name.toUpperCase().replace(/\s/g, '_')) : t('EITHER_WAY', 'Either way')}</span>
+                  <span>{order?.delivery_option?.name ? t(order?.delivery_option?.name.toUpperCase().replace(/\s/g, '_'), order?.delivery_option?.name) : t('EITHER_WAY', 'Either way')}</span>
                 </CommentContainer>
               )}
               {order?.comment && (
