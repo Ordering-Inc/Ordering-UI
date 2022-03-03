@@ -119,7 +119,7 @@ export const LanguageWrapper = styled.div`
   #select-input {
     background-color: transparent !important;
     border: none;
-    color:  #344050 !important;
+    color: #344050 !important;
 
     > div:first-child {
       font-size: 14px;
