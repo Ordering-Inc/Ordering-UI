@@ -129,8 +129,23 @@ const MomentControlUI = (props) => {
 }
 
 export const MomentControl = (props) => {
+  const [{ configs }] = useConfig()
+  const limitDays = parseInt(configs?.max_days_preorder?.value, 10)
+  const currentDate = new Date()
+  const time = limitDays > 1
+    ? currentDate.getTime() + ((limitDays - 1) * 24 * 60 * 60 * 1000)
+    : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + (6 * 24 * 60 * 60 * 1000)
+
+  currentDate.setTime(time)
+  currentDate.setHours(23)
+  currentDate.setMinutes(59)
+  const dateProps = {
+    maxDate: currentDate
+  }
+
   const momentProps = {
     ...props,
+    ...dateProps,
     UIComponent: MomentControlUI
   }
   return <MomentOption {...momentProps} />
