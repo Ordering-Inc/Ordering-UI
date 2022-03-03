@@ -237,6 +237,12 @@ Object.defineProperty(exports, "InputPhoneNumber", {
     return _InputPhoneNumber.InputPhoneNumber;
   }
 });
+Object.defineProperty(exports, "LanguageSelector", {
+  enumerable: true,
+  get: function get() {
+    return _LanguageSelector.LanguageSelector;
+  }
+});
 Object.defineProperty(exports, "LastOrders", {
   enumerable: true,
   get: function get() {
@@ -553,6 +559,8 @@ var _HighestRated = require("./src/components/HighestRated");
 var _HorizontalOrdersLayout = require("./src/components/HorizontalOrdersLayout");
 
 var _InputPhoneNumber = require("./src/components/InputPhoneNumber");
+
+var _LanguageSelector = require("./src/components/LanguageSelector");
 
 var _LastOrders = require("./src/components/LastOrders");
 

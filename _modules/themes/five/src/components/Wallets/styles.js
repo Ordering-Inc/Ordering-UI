@@ -27,7 +27,7 @@ var TransactionsWrapper = _styledComponents.default.div(_templateObject3 || (_te
 
 exports.TransactionsWrapper = TransactionsWrapper;
 
-var BalanceElement = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 250px;\n  padding: 10px 0;\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  background-color: ", ";\n  border-radius: 8px;\n\n  h1 {\n    font-size: 20px;\n    font-weight: bold;\n    margin: 0;\n    padding: 0;\n  }\n\n  span {\n    font-size: 10px;\n    margin-left: 5px;\n  }\n"])), function (props) {
+var BalanceElement = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 250px;\n  padding: 10px 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: ", ";\n  border-radius: 8px;\n\n  h1 {\n    font-size: 20px;\n    font-weight: bold;\n    margin: 0;\n    padding: 0;\n  }\n\n  span {\n    font-size: 10px;\n    margin-left: 5px;\n  }\n"])), function (props) {
   return props.theme.colors.grayDividerColor;
 });
 

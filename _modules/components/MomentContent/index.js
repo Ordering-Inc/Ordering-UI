@@ -34,26 +34,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MomentContent = function MomentContent(props) {
-  var _configs$max_days_pre, _document, _document$getElementB, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _props$afterComponent, _props$afterElements;
-
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  var limitDays = parseInt(configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value, 10);
+  var _document, _document$getElementB, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _props$afterComponent, _props$afterElements;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
-
-  var currentDate = new Date();
-  var time = limitDays > 1 ? currentDate.getTime() + (limitDays - 1) * 24 * 60 * 60 * 1000 : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + 6 * 24 * 60 * 60 * 1000;
-  currentDate.setTime(time);
-  currentDate.setHours(23);
-  currentDate.setMinutes(59);
-  var momentProps = {
-    maxDate: currentDate
-  };
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -69,7 +54,7 @@ var MomentContent = function MomentContent(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, momentProps), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, {
+  }, /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, null), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, {
     height: (momentControl === null || momentControl === void 0 ? void 0 : momentControl.height) && "".concat(momentControl === null || momentControl === void 0 ? void 0 : momentControl.height, "px")
   }, (window.location.pathname !== '/search' || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {

@@ -31,8 +31,6 @@ var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
 var _useOnlineStatus = require("../../../../../hooks/useOnlineStatus");
 
-var _LanguageSelector = require("../../../../../components/LanguageSelector");
-
 var _UserPopover = require("../UserPopover");
 
 var _CartPopover = require("../CartPopover");
@@ -412,7 +410,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  })), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)))), onlineStatus && isShowOrderOptions && !props.isCustomLayout && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+  }))))), onlineStatus && isShowOrderOptions && !props.isCustomLayout && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
       return openModal('address');
     }

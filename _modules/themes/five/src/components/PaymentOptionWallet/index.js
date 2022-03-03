@@ -115,7 +115,7 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
   }, !walletsState.loading && !walletsState.error && ((_walletsState$result3 = walletsState.result) === null || _walletsState$result3 === void 0 ? void 0 : _walletsState$result3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_walletsState$result4 = walletsState.result) === null || _walletsState$result4 === void 0 ? void 0 : _walletsState$result4.map(function (wallet, idx) {
     var _walletsState$result5, _walletName$wallet$ty;
 
-    return wallet.valid && /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    return wallet.valid && wallet.balance >= 0 && /*#__PURE__*/_react.default.createElement(_styles.Container, {
       key: wallet.id,
       isBottomBorder: idx === ((_walletsState$result5 = walletsState.result) === null || _walletsState$result5 === void 0 ? void 0 : _walletsState$result5.length) - 1
     }, /*#__PURE__*/_react.default.createElement(_styles.SectionLeft, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {

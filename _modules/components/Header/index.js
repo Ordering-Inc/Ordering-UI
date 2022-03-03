@@ -45,7 +45,7 @@ var _CartContent = require("../CartContent");
 
 var _Modal = require("../Modal");
 
-var _MomentContent = require("../MomentContent");
+var _MomentControl = require("../MomentControl");
 
 var _AddressList = require("../AddressList");
 
@@ -86,7 +86,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _customerState$user, _orderState$options3, _orderState$options3$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _configState$configs4, _configState$configs5, _orderState$options5, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options6, _configState$configs6, _configState$configs7, _orderState$options7, _orderState$options7$, _orderState$options7$2, _orderState$options7$3, _configState$configs8, _configState$configs9, _orderState$options8, _configState$configs10, _configState$configs11, _configState$configs12, _configState$configs13, _orderState$options9, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _customerState$user, _orderState$options3, _orderState$options3$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _configState$configs4, _configState$configs5, _orderState$options5, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options6, _configState$configs6, _configState$configs7, _orderState$options7, _orderState$options7$, _orderState$options7$2, _orderState$options7$3, _configState$configs8, _configState$configs9, _orderState$options8, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _props$afterComponent, _props$afterElements;
 
   var isHome = props.isHome,
       location = props.location,
@@ -406,13 +406,8 @@ var Header = function Header(props) {
       return openModal(variant);
     },
     isHome: isHome
-  }), isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')))), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.preorder_status_enabled) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
-    variant: "moment",
-    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.moment,
-    onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 ? void 0 : (_configState$configs11 = _configState$configs10.max_days_preorder) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 ? void 0 : (_configState$configs13 = _configState$configs12.max_days_preorder) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === 0 ? null : function (variant) {
-      return openModal(variant);
-    },
-    isHome: isHome
+  }), isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')))), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.preorder_status_enabled) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === undefined) && /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, {
+    isModalBehavior: true
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t(modalSelected.toUpperCase(), (0, _utils.capitalize)(modalSelected)),
     open: modalIsOpen,
@@ -439,14 +434,14 @@ var Header = function Header(props) {
     }
   }) : /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },
     onSaveAddress: function onSaveAddress() {
       return setModalIsOpen(false);
     }
-  })), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null)), isCustomerMode && customerModalOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), isCustomerMode && customerModalOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: customerModalOpen,
     width: "60%",
     onClose: function onClose() {

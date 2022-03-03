@@ -74,7 +74,7 @@ var UserEdit = _styledComponents.default.div(_templateObject13 || (_templateObje
 
 exports.UserEdit = UserEdit;
 
-var AddressMenu = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 600;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  width: 100%;\n  position: relative;\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n    margin-right: 10px;\n    ", "\n  }\n"])), function (props) {
+var AddressMenu = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 600;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  width: 100%;\n  position: relative;\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n    margin-right: 10px;\n    ", "\n  }\n  @media (min-width: 765px) {\n    width: 80%;\n  }\n  @media (min-width: 820px) {\n    width: 100%;\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
