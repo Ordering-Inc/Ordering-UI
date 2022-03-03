@@ -37,8 +37,8 @@ var SmartAppBanneUI = function SmartAppBanneUI(props) {
       t = _useLanguage2[1];
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactSmartbanner.default, {
-    title: "Ordering App",
-    author: "Ordering, Inc.",
+    title: t('MOBILE_APPNAME', 'Ordering app'),
+    author: t('MOBILE_APPNAME_AUTHOR', 'Ordering, Inc.'),
     daysHidden: 7,
     daysReminder: 15,
     button: t('VIEW', 'View'),

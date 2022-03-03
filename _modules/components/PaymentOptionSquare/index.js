@@ -103,19 +103,21 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 50
     }));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, methodSelected === 'card_payments' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    isLoading: isLoadingMethod || isLoadingPlace
+  }, methodSelected === 'card_payments' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     id: "card-container"
-  }), !isLoadingMethod && !isLoadingPlace && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     id: "card-button",
     type: "button"
-  }, t('ACCEPT', 'Accept'))), methodSelected === 'ach_bank_transfer' && !isLoadingMethod && !isLoadingPlace && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('ACCEPT', 'Accept'))), methodSelected === 'ach_bank_transfer' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     id: "ach-button",
     type: "button"
   }, t('PAY_WITH_BANK_ACCOUNT', 'Pay with Bank Account')), methodSelected === 'gift_cards' && /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("div", {
     id: "gift-card-container"
-  }), !isLoadingPlace && /*#__PURE__*/_react.default.createElement("button", {
+  }), /*#__PURE__*/_react.default.createElement("button", {
     id: "gift-card-button",
     type: "button"
   }, t('PAY_WITH_GIFT_CARD', 'Pay with Gift Card'))), isLoadingPlace && /*#__PURE__*/_react.default.createElement(_styles.Spinner, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
