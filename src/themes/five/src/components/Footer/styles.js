@@ -119,11 +119,11 @@ export const LanguageWrapper = styled.div`
   #select-input {
     background-color: transparent !important;
     border: none;
+    color:  #344050 !important;
+
     > div:first-child {
       font-size: 14px;
       text-decoration: underline;
-      color:  #344050;
-
       padding-right: 0px !important;
       padding-left: 12px !important;
       ${props => props.theme?.rtl && css`
