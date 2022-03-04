@@ -330,7 +330,7 @@ var CartUI = function CartUI(props) {
 
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id
-    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat(offer === null || offer === void 0 ? void 0 : offer.rate, "%)")), /*#__PURE__*/_react.default.createElement(_styles.IconContainer, {
+    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.IconContainer, {
       onClick: function onClick() {
         return setOpenTaxModal({
           open: true,
@@ -447,7 +447,7 @@ var CartUI = function CartUI(props) {
     price: cart.total
   })), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
-  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total))))), (cart === null || cart === void 0 ? void 0 : cart.discount) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SavedContainer, null, t('YOU_HAVE_SAVED_MONEY', 'You have saving _discount_').replace('_discount_', parsePrice(cart === null || cart === void 0 ? void 0 : cart.discount))), (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement("table", {
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.total) >= 0 ? cart === null || cart === void 0 ? void 0 : cart.total : 0))))), (cart === null || cart === void 0 ? void 0 : cart.discount) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SavedContainer, null, t('YOU_HAVE_SAVED_MONEY', 'You have saving _discount_').replace('_discount_', parsePrice(cart === null || cart === void 0 ? void 0 : cart.discount))), (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement("table", {
     className: "comments"
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('COMMENTS', 'Comments'))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement(_styles.CommentContainer, null, /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     defaultValue: cart === null || cart === void 0 ? void 0 : cart.comment,
