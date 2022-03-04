@@ -152,9 +152,9 @@ export const BusinessItemAccordion = (props) => {
             </ContentInfo>
           </BusinessInfo>
 
-          {!isClosed && !!isProducts && isValidProducts && orderTotal > 0 && (
+          {!isClosed && !!isProducts && isValidProducts && (
             <BusinessTotal className='total' isCartOnProductsList={isCartOnProductsList}>
-              <p>{parsePrice(orderTotal)}</p>
+              <p>{parsePrice(orderTotal >= 0 ? orderTotal : 0)}</p>
               <p>{t('CART_TOTAL', 'Total')}</p>
             </BusinessTotal>
           )}
