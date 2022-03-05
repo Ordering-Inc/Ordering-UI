@@ -59,8 +59,6 @@ const BusinessPreorderUI = (props) => {
     handleAsap
   } = props
 
-  console.log(props, 'This is props')
-
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
   const [{ configs }] = useConfig()
@@ -144,21 +142,6 @@ const BusinessPreorderUI = (props) => {
   useEffect(() => {
     if (type === 'business_hours') setMenu(null)
   }, [type])
-
-  useEffect(() => {
-    const savedPreorder = JSON.parse(window.localStorage.getItem('preorder'))
-    if (savedPreorder?.business_id !== business.id) {
-      window.localStorage.setItem('preorder', JSON.stringify({}))
-    }
-    if (!dateSelected || !timeSelected) return
-    const preorder = {
-      business_id: business?.id,
-      business_slug: business?.slug,
-      date: dateSelected,
-      time: timeSelected
-    }
-    window.localStorage.setItem('preorder', JSON.stringify(preorder))
-  }, [dateSelected, timeSelected])
 
   useEffect(() => {
     handleAsap && handleAsap()
