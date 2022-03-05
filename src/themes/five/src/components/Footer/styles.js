@@ -112,14 +112,11 @@ export const LanguageWrapper = styled.div`
   svg {
     font-size: 20px;
   }
-  span {
-    text-decoration: underline;
-    font-size: 14px;
-  }
   #select-input {
     background-color: transparent !important;
     border: none;
     color: #344050 !important;
+    pointer-events: none;
 
     > div:first-child {
       font-size: 14px;
