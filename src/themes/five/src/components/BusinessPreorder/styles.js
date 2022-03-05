@@ -292,3 +292,9 @@ export const DayNumber = styled.div`
   font-size: 20px;
   line-height: 30px;
 `
+
+export const ClosedBusinessMsg = styled.div`
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+`
