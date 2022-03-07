@@ -5,7 +5,19 @@ export const Title = styled.div`
   font-weight: 500;
   margin-bottom: 10px;
 `
-
+export const MomentContainer = styled.div`
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0;
+    `}
+  }
+`
 export const Days = styled.div`
   display: flex;
   border-radius: 10px;
