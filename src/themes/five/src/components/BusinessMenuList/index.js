@@ -19,12 +19,16 @@ const BusinessMenuListUI = (props) => {
 
   useEffect(() => {
     if (businessMenuList.loading) return
+
     const _menuList = []
-    for (const menu of businessMenuList?.menus) {
-      _menuList.push({
-        value: menu.id,
-        content: <Option>{menu.name}</Option>
-      })
+    if (businessMenuList?.menus?.length > 0) {
+      setMenu(businessMenuList?.menus[0])
+      for (const menu of businessMenuList?.menus) {
+        _menuList.push({
+          value: menu.id,
+          content: <Option>{menu.name}</Option>
+        })
+      }
     }
     setMenuList(_menuList)
   }, [businessMenuList?.menus])
