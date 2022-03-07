@@ -33,7 +33,8 @@ import {
   AddressHalfContainer,
   List,
   AddressFormContainer,
-  CloseIcon
+  CloseIcon,
+  TitleFormContainer
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -62,7 +63,9 @@ const AddressListUI = (props) => {
     setCustomerModalOpen,
     isCustomerMode,
     isFromCheckout,
-    isOpenUserData
+    isOpenUserData,
+    setIsAddressFormOpen,
+    isHeader
   } = props
 
   const [, t] = useLanguage()
@@ -86,6 +89,7 @@ const AddressListUI = (props) => {
   const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
+    setIsAddressFormOpen && setIsAddressFormOpen(true)
     const container = window.document.getElementsByClassName('form_edit')[0]
     container && scrollTo(container, 0, 500)
   }
@@ -112,7 +116,7 @@ const AddressListUI = (props) => {
       handleSetAddress(address)
       return
     }
-    setAddressOpen(false)
+    handleCloseAddressForm()
   }
 
   const handleSetAddress = (address) => {
@@ -128,7 +132,7 @@ const AddressListUI = (props) => {
       return
     }
 
-    setAddressOpen(false)
+    handleCloseAddressForm()
     handleSetDefault(address, userCustomerSetup)
   }
 
@@ -164,13 +168,18 @@ const AddressListUI = (props) => {
     return values.every(value => value)
   }
 
+  const handleCloseAddressForm = () => {
+    setAddressOpen(false)
+    setIsAddressFormOpen && setIsAddressFormOpen(false)
+  }
+
   /**
    * Close modals and alerts
    */
   useEffect(() => {
     return () => {
       setConfirm({ ...confirm, open: false })
-      setAddressOpen(false)
+      handleCloseAddressForm()
     }
   }, [])
 
@@ -205,7 +214,7 @@ const AddressListUI = (props) => {
                   addressesList={addressList?.addresses}
                   useValidationFileds
                   address={curAddress}
-                  onCancel={() => setAddressOpen(false)}
+                  onCancel={() => handleCloseAddressForm()}
                   onSaveAddress={handleSaveAddress}
                   userCustomerSetup={userCustomerSetup}
                 />
@@ -259,49 +268,51 @@ const AddressListUI = (props) => {
                 </AddressListUl>
               )
             }
+            {!(addressList.loading || actionStatus.loading || orderState.loading) &&
+              !addressList.error &&
+              addressList?.addresses?.length === 0 &&
+              !isProductForm &&
+              (
+                <WrappNotAddresses>
+                  <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
+                  <h1>{t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.')}</h1>
+                </WrappNotAddresses>
+              )}
+
+            {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
+              addressList.error.length > 0 && (
+                <NotFoundSource
+                  content={addressList.error[0]?.message || addressList.error[0]}
+                />
+              )
+            )}
+
+            {!(addressList.loading || actionStatus.loading || orderState.loading) && (typeof orderState.options?.address !== 'object') && !addressList.error && (
+              <NotFoundSource
+                content={t('NETWORK_ERROR', 'Network error, please reload the page')}
+              />
+            )}
           </List>
           {!isPopover && addressOpen && (
-            <AddressFormContainer isOpenUserData={isOpenUserData}>
-              <CloseIcon>
-                <MdClose onClick={() => setAddressOpen(false)} />
-              </CloseIcon>
+            <AddressFormContainer isOpenUserData={isOpenUserData} isHeader={isHeader}>
+              <TitleFormContainer>
+                <CloseIcon>
+                  <MdClose onClick={() => handleCloseAddressForm()} />
+                </CloseIcon>
+                <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
+              </TitleFormContainer>
               <AddressForm
                 userId={userId}
                 addressesList={addressList?.addresses}
                 useValidationFileds
                 address={curAddress}
-                onCancel={() => setAddressOpen(false)}
+                onCancel={() => handleCloseAddressForm()}
                 onSaveAddress={handleSaveAddress}
                 userCustomerSetup={userCustomerSetup}
               />
             </AddressFormContainer>
           )}
         </AddressHalfContainer>
-
-        {!(addressList.loading || actionStatus.loading || orderState.loading) &&
-          !addressList.error &&
-          addressList?.addresses?.length === 0 &&
-          !isProductForm &&
-          (
-            <WrappNotAddresses>
-              <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
-              <h1>{t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.')}</h1>
-            </WrappNotAddresses>
-          )}
-
-        {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
-          addressList.error.length > 0 && (
-            <NotFoundSource
-              content={addressList.error[0]?.message || addressList.error[0]}
-            />
-          )
-        )}
-
-        {!(addressList.loading || actionStatus.loading || orderState.loading) && (typeof orderState.options?.address !== 'object') && !addressList.error && (
-          <NotFoundSource
-            content={t('NETWORK_ERROR', 'Network error, please reload the page')}
-          />
-        )}
 
         {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && (
           <AddressListUl>
@@ -335,14 +346,14 @@ const AddressListUI = (props) => {
             <Modal
               title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               open={isPopover}
-              onClose={() => setAddressOpen(false)}
+              onClose={() => handleCloseAddressForm()}
             >
               <AddressForm
                 userId={userId}
                 addressesList={addressList?.addresses}
                 useValidationFileds
                 address={curAddress}
-                onCancel={() => setAddressOpen(false)}
+                onCancel={() => handleCloseAddressForm()}
                 onSaveAddress={handleSaveAddress}
                 userCustomerSetup={userCustomerSetup}
               />

@@ -226,7 +226,7 @@ const CartUI = (props) => {
                           <td>
                             {offer.name}
                             {offer.rate_type === 1 && (
-                              <span>{`(${offer?.rate}%)`}</span>
+                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <IconContainer onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
@@ -363,7 +363,7 @@ const CartUI = (props) => {
                   <tbody>
                     <tr>
                       <td>{t('TOTAL', 'Total')}</td>
-                      <td>{cart?.total >= 1 && parsePrice(cart?.total)}</td>
+                      <td>{parsePrice(cart?.total >= 0 ? cart?.total : 0)}</td>
                     </tr>
                   </tbody>
                 </table>

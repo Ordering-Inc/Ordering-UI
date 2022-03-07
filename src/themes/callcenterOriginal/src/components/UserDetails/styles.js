@@ -65,5 +65,51 @@ export const UserData = styled.div`
 `
 
 export const UserName = styled.p`
-  font-weight: 600
+  font-weight: 600;
+`
+
+export const ModalIcon = styled.span`
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 2;
+
+  svg{
+    /* background: rgba(255,255,255,0.5); */
+    border-radius: 50%;
+  }
+
+`
+
+export const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  h1 {
+    margin: auto;
+    font-size: 24px;
+  }
+  ${({ isAddressFormOpen }) => isAddressFormOpen && css`
+      h1{ 
+        width: 75%;
+      }
+  `}
+`
+
+export const CountryFlag = styled.div`
+  margin-right: 5px;
+  .PhoneInputCountryIcon {
+    width: 25px;
+  }
+  .PhoneInputInput {
+    display: none;
+  }
+  .PhoneInputCountrySelect {
+    display: none;
+  }
+`
+
+export const PhoneContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 30px;
 `

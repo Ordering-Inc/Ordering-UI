@@ -99,7 +99,7 @@ const CheckoutUI = (props) => {
 
   const deliveryOptions = instructionsOptions?.result && instructionsOptions?.result?.filter(option => option?.enabled)?.map(option => {
     return {
-      value: option?.id, content: option?.name, showOnSelected: option?.name
+      value: option?.id, content: t(option?.name.toUpperCase().replace(/\s/g, '_'), option?.name), showOnSelected: t(option?.name.toUpperCase().replace(/\s/g, '_'), option?.name)
     }
   })
 

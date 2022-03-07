@@ -23,7 +23,7 @@ export const BalanceElement = styled.div`
   padding: 10px 0;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   background-color: ${(props) => props.theme.colors.grayDividerColor};
   border-radius: 8px;
 

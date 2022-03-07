@@ -8,6 +8,7 @@ import MdClose from '@meronex/icons/md/MdClose'
 import { GeoAlt } from 'react-bootstrap-icons'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
+import { LanguageSelector } from '../../../../../components/LanguageSelector'
 
 import {
   Header as HeaderContainer,
@@ -26,7 +27,6 @@ import {
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
-import { LanguageSelector } from '../../../../../components/LanguageSelector'
 
 import { UserPopover } from '../UserPopover'
 import { CartPopover } from '../CartPopover'

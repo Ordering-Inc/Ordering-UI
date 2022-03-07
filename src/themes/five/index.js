@@ -24,10 +24,10 @@ import { CartContent } from './src/components/CartContent'
 import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
 import { DriverTips } from './src/components/DriverTips'
-import { FacebookLogin } from './src/components/FacebookLogin'
+import { FacebookLoginButton } from './src/components/FacebookLogin'
 import { Footer } from './src/components/Footer'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
-import { GoogleLogin } from './src/components/GoogleLogin'
+import { GoogleLoginButton } from './src/components/GoogleLogin'
 import { Header } from './src/components/Header'
 import { HeaderOption } from './src/components/HeaderOption'
 import { Help } from './src/components/Help'
@@ -36,6 +36,7 @@ import { HomeHero } from './src/components/HomeHero'
 import { HighestRated } from './src/components/HighestRated'
 import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
+import { LanguageSelector } from './src/components/LanguageSelector'
 import { LastOrders } from './src/components/LastOrders'
 import { LoginForm } from './src/components/LoginForm'
 import { Messages } from './src/components/Messages'
@@ -105,10 +106,10 @@ export {
   CartPopover,
   Checkout,
   DriverTips,
-  FacebookLogin,
+  FacebookLoginButton,
   Footer,
   ForgotPasswordForm,
-  GoogleLogin,
+  GoogleLoginButton,
   Header,
   HeaderOption,
   Help,
@@ -117,6 +118,7 @@ export {
   HorizontalOrdersLayout,
   HighestRated,
   InputPhoneNumber,
+  LanguageSelector,
   LastOrders,
   LoginForm,
   Messages,

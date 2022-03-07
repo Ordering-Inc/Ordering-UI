@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import MdClose from '@meronex/icons/md/MdClose'
 import { GeoAlt } from 'react-bootstrap-icons'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
@@ -55,7 +54,7 @@ export const Header = (props) => {
   const [events] = useEvent()
   const [{ parseDate }] = useUtils()
   const [, t] = useLanguage()
-  const [{ auth }, { login }] = useSession()
+  const [{ auth }] = useSession()
   const [orderState, { refreshOrderOptions }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
@@ -65,12 +64,11 @@ export const Header = (props) => {
   const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [customerModalOpen, setCustomerModalOpen] = useState(false)
-  const [authModalOpen, setAuthModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
-  const [modalPageToShow, setModalPageToShow] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
+  const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
   const windowSize = useWindowSize()
@@ -81,13 +79,6 @@ export const Header = (props) => {
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
-
-  const handleSuccessSignup = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
-  }
 
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
@@ -131,22 +122,6 @@ export const Header = (props) => {
     if (isCustomerMode && pathname.includes('/orders')) {
       deleteUserCustomer(true)
       refreshOrderOptions()
-    }
-  }
-
-  const handleCustomModalClick = (e, { page }) => {
-    e.preventDefault()
-    setModalPageToShow(page)
-  }
-
-  const closeAuthModal = () => {
-    setAuthModalOpen(false)
-    setModalPageToShow(null)
-  }
-
-  const handleSuccessLogin = (user) => {
-    if (user) {
-      closeAuthModal()
     }
   }
 
@@ -421,20 +396,23 @@ export const Header = (props) => {
         {isCustomerMode && customerModalOpen && (
           <Modal
             open={customerModalOpen}
-            width='60%'
+            width='80%'
             onClose={() => setCustomerModalOpen(false)}
-            title={t('CUSTOMER_DETAILS', 'Customer details')}
+            padding='20px'
+            hideCloseDefault
           >
             <UserEdit>
               {!customerState?.loading && (
                 <>
                   <UserDetails
+                    isAddressFormOpen={isAddressFormOpen}
                     userData={customerState?.user}
                     userId={customerState?.user?.id}
                     isOpenUserData={isOpenUserData}
                     isCustomerMode
                     isModal
                     setIsOpenUserData={setIsOpenUserData}
+                    onClose={() => setCustomerModalOpen(false)}
                   />
                   <AddressList
                     isModal
@@ -444,6 +422,8 @@ export const Header = (props) => {
                     isOpenUserData={isOpenUserData}
                     setCustomerModalOpen={setCustomerModalOpen}
                     setIsOpenUserData={setIsOpenUserData}
+                    setIsAddressFormOpen={setIsAddressFormOpen}
+                    isHeader
                   />
                 </>
               )}

@@ -97,10 +97,9 @@ const CheckoutUI = (props) => {
 
   const deliveryOptions = instructionsOptions?.result && instructionsOptions?.result?.filter(option => option?.enabled)?.map(option => {
     return {
-      value: option?.id, content: option?.name, showOnSelected: option?.name
+      value: option?.id, content: t(option?.name.toUpperCase().replace(/\s/g, '_')), showOnSelected: option?.name
     }
   })
-
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
