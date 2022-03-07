@@ -57,34 +57,40 @@ var BusinessMenuListUI = function BusinessMenuListUI(props) {
       setMenuList = _useState2[1];
 
   (0, _react.useEffect)(function () {
+    var _businessMenuList$men;
+
     if (businessMenuList.loading) return;
     var _menuList = [];
 
-    var _iterator = _createForOfIteratorHelper(businessMenuList === null || businessMenuList === void 0 ? void 0 : businessMenuList.menus),
-        _step;
+    if ((businessMenuList === null || businessMenuList === void 0 ? void 0 : (_businessMenuList$men = businessMenuList.menus) === null || _businessMenuList$men === void 0 ? void 0 : _businessMenuList$men.length) > 0) {
+      setMenu(businessMenuList === null || businessMenuList === void 0 ? void 0 : businessMenuList.menus[0]);
 
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var menu = _step.value;
+      var _iterator = _createForOfIteratorHelper(businessMenuList === null || businessMenuList === void 0 ? void 0 : businessMenuList.menus),
+          _step;
 
-        _menuList.push({
-          value: menu.id,
-          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, menu.name)
-        });
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var menu = _step.value;
+
+          _menuList.push({
+            value: menu.id,
+            content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, menu.name)
+          });
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
       }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
     }
 
     setMenuList(_menuList);
   }, [businessMenuList === null || businessMenuList === void 0 ? void 0 : businessMenuList.menus]);
 
   var handleChangeBusinessMenu = function handleChangeBusinessMenu(menuId) {
-    var _businessMenuList$men;
+    var _businessMenuList$men2;
 
-    var menu = businessMenuList === null || businessMenuList === void 0 ? void 0 : (_businessMenuList$men = businessMenuList.menus) === null || _businessMenuList$men === void 0 ? void 0 : _businessMenuList$men.find(function (menu) {
+    var menu = businessMenuList === null || businessMenuList === void 0 ? void 0 : (_businessMenuList$men2 = businessMenuList.menus) === null || _businessMenuList$men2 === void 0 ? void 0 : _businessMenuList$men2.find(function (menu) {
       return menu.id === menuId;
     });
     setMenu(_objectSpread({}, menu));

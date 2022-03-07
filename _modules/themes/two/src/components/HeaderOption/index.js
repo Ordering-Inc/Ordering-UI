@@ -13,8 +13,6 @@ var _IosBasket = _interopRequireDefault(require("@meronex/icons/ios/IosBasket"))
 
 var _FaMapMarkerAlt = _interopRequireDefault(require("@meronex/icons/fa/FaMapMarkerAlt"));
 
-var _FaRegClock = _interopRequireDefault(require("@meronex/icons/fa/FaRegClock"));
-
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -34,20 +32,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HeaderOption = function HeaderOption(props) {
-  var _props$beforeElements, _props$beforeComponen, _configs$dates_moment, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var variant = props.variant,
       addressState = props.addressState,
-      momentState = props.momentState,
       totalCarts = props.totalCarts;
-
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  var _useUtils = (0, _orderingComponents.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      parseDate = _useUtils2[0].parseDate;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -71,11 +60,7 @@ var HeaderOption = function HeaderOption(props) {
     id: "icon"
   }), totalCarts > 0 && /*#__PURE__*/_react.default.createElement("p", null, totalCarts)), variant === 'address' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, {
     id: "icon"
-  }), addressState || t('SELECT_AN_ADDRESS', 'Select an address')), variant === 'moment' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, {
-    id: "icon"
-  }), momentState ? parseDate(momentState, {
-    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
-  }) : t('ASAP_ABBREVIATION', 'ASAP'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), addressState || t('SELECT_AN_ADDRESS', 'Select an address'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

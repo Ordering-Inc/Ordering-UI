@@ -276,9 +276,6 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
       }
     });
   }, []);
-  (0, _react.useEffect)(function () {
-    console.log(signupData);
-  }, [signupData]);
   return /*#__PURE__*/_react.default.createElement(_styles.SignupBusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SignUpHeroWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SignUpHero, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.businessSignUpHero
   })), /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SIGN_UP_NOW', 'Sign up now')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {

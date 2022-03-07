@@ -261,7 +261,6 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     if (document.getElementById("".concat(tabValue))) {
       var extraHeight = windowSize.width < 769 ? 100 : 42;
       var top = tabValue === 'all' ? 0 : document.getElementById("".concat(tabValue)).offsetTop - extraHeight;
-      console.log(top, 'this is top');
       var scrollElement = document.querySelector('.popup-dialog');
 
       if (windowSize.width >= 1200) {
@@ -491,7 +490,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     onClick: decrement,
     className: "".concat(productCart.quantity === 1 || isSoldOut ? 'disabled' : '')
-  }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.pieces) && /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit) && /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
+  }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.pieces) && /*#__PURE__*/_react.default.createElement("span", {
+    className: "qty"
+  }, productCart.quantity), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit) && /*#__PURE__*/_react.default.createElement("span", {
+    className: "qty"
+  }, productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
     className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
   }), isHaveWeight && /*#__PURE__*/_react.default.createElement(_styles.WeightUnitSwitch, null, /*#__PURE__*/_react.default.createElement(_styles.WeightUnitItem, {
@@ -499,7 +502,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return handleSwitchQtyUnit('pieces');
     },
     active: qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.pieces
-  }, t('PIECES', 'pieces')), /*#__PURE__*/_react.default.createElement(_styles.WeightUnitItem, {
+  }, t('PIECES', 'pcs')), /*#__PURE__*/_react.default.createElement(_styles.WeightUnitItem, {
     onClick: function onClick() {
       return handleSwitchQtyUnit('weight_unit');
     },
