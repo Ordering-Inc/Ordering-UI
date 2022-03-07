@@ -465,15 +465,15 @@ const ProductOptionsUI = (props) => {
                         onClick={decrement}
                         className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
                       />
-                      {qtyBy?.pieces && (<span>{productCart.quantity}</span>)}
-                      {qtyBy?.weight_unit && (<span>{productCart.quantity * product?.weight}</span>)}
+                      {qtyBy?.pieces && (<span className='qty'>{productCart.quantity}</span>)}
+                      {qtyBy?.weight_unit && (<span className='qty'>{productCart.quantity * product?.weight}</span>)}
                       <FiPlusCircle
                         onClick={increment}
                         className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
                       />
                       {isHaveWeight && (
                         <WeightUnitSwitch>
-                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pieces')}</WeightUnitItem>
+                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
                           <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
                         </WeightUnitSwitch>
                       )}
