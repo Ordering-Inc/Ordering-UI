@@ -175,7 +175,6 @@ const ProductOptionsUI = (props) => {
     if (document.getElementById(`${tabValue}`)) {
       const extraHeight = windowSize.width < 769 ? 100 : 42
       const top = (tabValue === 'all') ? 0 : document.getElementById(`${tabValue}`).offsetTop - extraHeight
-      console.log(top, 'this is top')
       let scrollElement = document.querySelector('.popup-dialog')
       if (windowSize.width >= 1200) {
         scrollElement = productContainerRef.current
