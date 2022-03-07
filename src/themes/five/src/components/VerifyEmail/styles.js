@@ -33,12 +33,31 @@ export const OtpWrapper = styled.div`
   }
 `
 
+export const WrapperText = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+
+  span {
+    &:first-child {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    margin-bottom: 10px;
+  }
+`
+
 export const CountdownTimer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin: 20px;
+  margin: 10px auto 0;
+  border-radius: 7.6px;
+  width: 30%;
+  background-color: ${props => props.theme.colors.primary}80;
 
   span {
     &:first-child {
@@ -48,13 +67,13 @@ export const CountdownTimer = styled.div`
     }
     &:last-child {
       font-size: 24px;
-      color: #DBDCDB;
+      color: #FFF;
       cursor: pointer;
       :hover {
-        color: ${() => darken(0.07, '#DBDCDB')} !important;
+        color: ${() => darken(0.07, '#FFF')} !important;
       }
       :active {
-        color: ${() => darken(0.09, '#DBDCDB')} !important;
+        color: #FFF !important;
       }
     }
   }
@@ -65,27 +84,13 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
 `
 
-const Section = styled.div`
-  width: 50%;
-`
-
-export const SectionHero = styled(Section)`
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`
-
-export const SectionContent = styled(Section)`
-`
-
 export const FormInput = styled.form`
-  width: ${({ isPopup }) => isPopup ? '100%' : '80%'};
+  width: 60%;
   display: flex;
   flex-direction: column;
 
@@ -128,5 +133,17 @@ export const InputBeforeIcon = styled.div`
   svg {
     font-size: 16px;
     color: #B1BCCC;
+  }
+`
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+
+  div button {
+    width: 100%;
   }
 `

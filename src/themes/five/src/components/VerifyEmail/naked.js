@@ -15,6 +15,8 @@ export const VerifyEmail = (props) => {
     UIComponent
   } = props
 
+  const [{ user, token }] = useSession()
+
   const [verifyEmailState, setVerifyEmailState] = useState({
     loadingSendCode: false,
     resultSendCode: null,
@@ -35,7 +37,10 @@ export const VerifyEmail = (props) => {
       setVerifyEmailState({ ...verifyEmailState, loadingSendCode: true })
       const response = await fetch(`${ordering.root}/codes/generate`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           type: values?.type ?? 3,
           channel: values?.channel ?? 1,
@@ -48,14 +53,16 @@ export const VerifyEmail = (props) => {
         ...verifyEmailState,
         loadingSendCode: false,
         resultSendCode: error ? null : result,
-        errorSendCode: error ? result : null
+        errorSendCode: error
+          ? typeof result === 'string' ? [result] : result
+          : null
       })
 
     } catch (error) {
       setVerifyEmailState({
         ...verifyEmailState,
         loadingSendCode: false,
-        errorSendCode: error.message
+        errorSendCode: [error.message]
       })
     }
   }
@@ -67,9 +74,12 @@ export const VerifyEmail = (props) => {
   const checkVerifyEmailCode = async (values) => {
     try {
       setVerifyEmailState({ ...verifyEmailState, loadingCheckCode: true })
-      const response = await fetch(`${ordering.root}/users/${sessionState.user?.id}/user_verify`, {
+      const response = await fetch(`${ordering.root}/users/${user?.id}/verify`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           channel: values?.channel ?? 1,
           code: values?.code
@@ -80,14 +90,16 @@ export const VerifyEmail = (props) => {
         ...verifyEmailState,
         loadingCheckCode: false,
         resultCheckCode: error ? null : result,
-        errorCheckCode: error ? result : null
+        errorSendCode: error
+          ? typeof result === 'string' ? [result] : result
+          : null
       })
 
     } catch (error) {
       setVerifyEmailState({
         ...verifyEmailState,
         loadingCheckCode: false,
-        errorCheckCode: error.message
+        errorCheckCode: [error.message]
       })
     }
   }

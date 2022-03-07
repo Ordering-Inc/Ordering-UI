@@ -17,13 +17,13 @@ import { formatSeconds } from '../../../../../utils'
 
 import {
   Container,
-  SectionHero,
-  SectionContent,
+  WrapperText,
   FormInput,
   InputWrapper,
   OtpWrapper,
   CountdownTimer,
-  InputBeforeIcon
+  InputBeforeIcon,
+  ButtonsWrapper
 } from './styles'
 
 const VerifyEmailUI = (props) => {
@@ -53,6 +53,7 @@ const VerifyEmailUI = (props) => {
   const closeAlert = () => {
     setAlertState({ open: false, content: [] })
     cleanErrorsState()
+    setOtpState('')
   }
 
   useEffect(() => {
@@ -65,13 +66,13 @@ const VerifyEmailUI = (props) => {
   }, [otpState])
 
   useEffect(() => {
-    if (verifyEmailState?.errorSendCode) {
+    if (verifyEmailState?.errorSendCode || verifyEmailState?.errorCheckCode) {
       setAlertState({
         open: true,
-        content: verifyEmailState?.errorSendCode[0] || [t('ERROR', 'Error')]
+        content: verifyEmailState?.errorSendCode?.[0]
+          ?? verifyEmailState?.errorCheckCode?.[0]
+          ?? t('ERROR', 'Error')
       })
-    } else {
-      resetOtpLeftTime()
     }
   }, [verifyEmailState])
 
@@ -83,11 +84,19 @@ const VerifyEmailUI = (props) => {
 
   return (
     <Container>
-      <SectionHero>
-        <img src={theme.images.general.homeHero} />
-      </SectionHero>
-      <SectionContent>
-      <FormInput noValidate>
+      <FormInput>
+        <WrapperText>
+          <span>
+            {t('VERIFICATION_CODE', 'Verification Code')}
+          </span>
+          <span>
+            {!emailVerification ? (
+              t('VERIFICATION_CODE_MESSAGE', 'In order to continue using our platform please verify your email')
+            ) : (
+              t('VERIFICATION_CODE_SENT_MESSAGE', 'Please type the verification code sent to your email')
+            )}
+          </span>
+        </WrapperText>
         {!emailVerification ? (
           <>
             <InputWrapper>
@@ -103,17 +112,19 @@ const VerifyEmailUI = (props) => {
                 <Envelope />
               </InputBeforeIcon>
             </InputWrapper>
-            <span onClick={handleSendOtp}>
-              {t('SEND_CODE', 'Send code')}?
-            </span>
+            <Button
+              type='button'
+              color='primary'
+              disabled={verifyEmailState?.loadingSendCode || verifyEmailState?.loadingCheckCode}
+              onClick={handleSendOtp}
+            >
+              {t('SEND_CODE', 'Send code')}
+            </Button>
           </>
         ) : (
           <>
             <CountdownTimer>
               <span>{formatSeconds(otpLeftTime)}</span>
-              <span onClick={handleSendOtp}>
-                {t('RESEND_AGAIN', 'Resend again')}?
-              </span>
             </CountdownTimer>
 
             <OtpWrapper>
@@ -129,20 +140,33 @@ const VerifyEmailUI = (props) => {
               />
             </OtpWrapper>
 
-            <Button
-              type='button'
-              color='secundary'
-              disabled={verifyEmailState?.loadingSendCode || verifyEmailState?.loadingCheckCode}
-              onClick={() => {
-                setEmailVerification(false)
-              }}
-            >
-              {t('CANCEL', 'Cancel')}
-            </Button>
+            <ButtonsWrapper>
+              <div style={{ width: '48%' }}>
+                <Button
+                  type='button'
+                  color='secundary'
+                  disabled={verifyEmailState?.loadingSendCode || verifyEmailState?.loadingCheckCode}
+                  onClick={() => {
+                    setEmailVerification(false)
+                  }}
+                >
+                  {t('CANCEL', 'Cancel')}
+                </Button>
+              </div>
+              <div style={{ width: '48%' }}>
+                <Button
+                  type='button'
+                  color='secundary'
+                  disabled={verifyEmailState?.loadingSendCode || verifyEmailState?.loadingCheckCode}
+                  onClick={handleSendOtp}
+                >
+                  {t('RESEND_AGAIN', 'Resend again?')}
+                </Button>
+              </div>
+            </ButtonsWrapper>
           </>
         )}
       </FormInput>
-      </SectionContent>
       <Alert
         title={t('VERIFY_EMAIL', 'Verify email')}
         content={alertState.content}
