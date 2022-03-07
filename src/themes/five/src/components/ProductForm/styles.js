@@ -14,10 +14,11 @@ export const ProductContainer = styled.div`
     padding: 20px;
   }
 
-  @media (min-width: 1201px) {
+  @media (min-width: 1200px) {
     flex-wrap: nowrap;
     overflow-y: auto;
     max-height: 70vh;
+    padding-bottom: 0;
   }
 `
 
@@ -261,29 +262,41 @@ export const ProductActions = styled.div`
   }
 
   @media (min-width: 1200px) {
-    bottom: -20px;
+    bottom: 0px;
     flex-direction: row;
     justify-content: space-between;
+    border-top: 1px solid #E9ECEF;
+    width: calc(100% + 40px);
+    transform: translateX(-20px);
+    padding: 10px 20px;
+    box-sizing: border-box;
 
     div.price {
       width: 25%;
     }
 
     button.add {
-      width: 40%;
+      width: 30%;
       margin-top: 0;
     }
 
     div.incdec-control {
       width: 20%;
       &.show-weight-unit{
-        width: 25%;
-        span {
-          min-width: 40px;
-          text-align: center;
-        }
+        width: 30%;
       }
     }
+
+    .qty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 38px;
+        min-width: 60px;
+        border: 1px solid #DEE2E6;
+        box-sizing: border-box;
+        border-radius: 7.6px;
+      }
   }
 `
 export const SkeletonBlock = styled.div`
