@@ -35,6 +35,7 @@ import { VerifyPage } from './pages/Verify'
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
+import settings from './config.json'
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
@@ -47,7 +48,7 @@ export const App = () => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
 
-  const isEmailVerifyRequired = auth && (configs?.verification_email_required?.value === '1' || true) && !user?.email_verified
+  const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
 
   const closeAlert = () => {
     setAlertState({
@@ -109,12 +110,18 @@ export const App = () => {
           <SpinnerLoader />
         )
       }
+      <SmartAppBanner
+        storeAndroidId={settings?.store_android_id !== "0" ? settings?.store_android_id : false}
+        storeAppleId={settings?.store_apple_id !== "0" ? settings?.store_apple_id : false}
+        storeKindleId={settings?.store_kindle_id !== "0" ? settings?.store_kindle_id : false}
+      />
       {
         loaded && (
           <>
             <Header
               isHome={isHome}
               location={location}
+              isCustomLayout={settings?.use_marketplace}
             />
             <NotNetworkConnectivity />
             {onlineStatus && (
@@ -126,8 +133,10 @@ export const App = () => {
                       <Redirect to='/verify' />
                     ) : (
                       orderStatus.options?.address?.location
-                        ? <Redirect to='/search' />
-                        : <HomePage />
+                        ? <Redirect to={settings?.use_marketplace ? '/marketplace' : '/search'} />
+                        : settings?.use_marketplace
+                          ? <Redirect to={settings?.use_marketplace ? '' : '/search'} />
+                          : <HomePage />
                     )}
                   </Route>
                   <Route exact path='/'>
@@ -135,7 +144,7 @@ export const App = () => {
                       <Redirect to='/verify' />
                     ) : (
                       orderStatus.options?.address?.location
-                        ? <Redirect to='/search' />
+                        ? <Redirect to={settings?.use_marketplace ? '/marketplace' : '/search'} />
                         : <HomePage />
                     )}
                   </Route>
@@ -154,7 +163,7 @@ export const App = () => {
                         isRecaptchaEnable
                       />
                     ) : (
-                      <Redirect to='/' />
+                      <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
                     )}
                   </Route>
                   <Route exact path='/profile'>
@@ -162,21 +171,21 @@ export const App = () => {
                       ? isEmailVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
-                      : <Redirect to='/' />}
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/wallets'>
                     {auth
                       ? isEmailVerifyRequired
                         ? <Redirect to='/verify' />
                         : <Wallets />
-                      : <Redirect to='/' />}
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/profile/orders'>
                     {auth
                       ? isEmailVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<MyOrders />)
-                      : <Redirect to='/' />}
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/messages'>
                     {auth
@@ -196,7 +205,7 @@ export const App = () => {
                       ? isEmailVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<Help />)
-                      : <Redirect to='/' />}
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/search'>
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
@@ -207,7 +216,7 @@ export const App = () => {
                       ) : (
                         orderStatus.options?.address?.location
                           ? <BusinessesList />
-                          : <Redirect to='/' />
+                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
                       )
                     )}
                   </Route>
@@ -225,7 +234,9 @@ export const App = () => {
                         : <CheckoutPage />
                       : (
                         <Redirect to={{
-                          pathname: '/',
+                          pathname: settings?.use_marketplace
+                            ? '/marketplace'
+                            : '/',
                           state: { from: location.pathname || null }
                         }}
                         />
@@ -238,7 +249,9 @@ export const App = () => {
                         : <OrderDetailsPage />
                       : (
                         <Redirect to={{
-                          pathname: '/',
+                          pathname: settings?.use_marketplace
+                            ? '/marketplace'
+                            : '/',
                           state: { from: location.pathname || null }
                         }}
                         />
@@ -262,7 +275,10 @@ export const App = () => {
                     {isEmailVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      <BusinessProductsList />
+                      <Redirect to={{
+                        pathname: `/store${location.pathname}`,
+                        state: { from: location.pathname || null }
+                      }} />
                     )}
                   </Route>
                   <Route path='*'>
