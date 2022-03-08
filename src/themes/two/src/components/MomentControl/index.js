@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import moment from 'moment'
 import { MomentOption, useLanguage, useUtils, useConfig, useOrder } from 'ordering-components'
 
-import { Days, Day, DayName, DayNumber, ContentDay, Hours, Hour, Title, MiddleLine, MomentContainer } from './styles'
+import { Days, Day, DayName, DayNumber, ContentDay, Hours, Hour, Title, MomentContainer } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import { Modal } from '../Modal'
@@ -49,7 +49,6 @@ const MomentControlUI = (props) => {
               )
             })
           }
-          <MiddleLine />
         </Days>
         <Title>{t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')}</Title>
         <Hours name='hours'>

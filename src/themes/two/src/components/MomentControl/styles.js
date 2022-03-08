@@ -6,10 +6,10 @@ export const Title = styled.div`
   margin-bottom: 10px;
 `
 export const MomentContainer = styled.div`
-  cursor: pointer;
-  color: #333;
+  color: ${props => props.theme.colors.primary};
   display: flex;
   align-items: center;
+
   svg {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`
