@@ -116,7 +116,6 @@ export const LanguageWrapper = styled.div`
     background-color: transparent !important;
     border: none;
     color: #344050 !important;
-    pointer-events: none;
 
     > div:first-child {
       font-size: 14px;
