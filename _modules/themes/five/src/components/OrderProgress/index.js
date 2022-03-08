@@ -196,6 +196,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
   };
 
   var convertDiffToHours = function convertDiffToHours(time) {
+    if (!time) return;
     var deliveryTime = lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
       outputFormat: 'YYYY-MM-DD hh:mm A'
     }) : parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
