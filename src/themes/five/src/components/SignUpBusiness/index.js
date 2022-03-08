@@ -208,10 +208,6 @@ const SignUpBusinessUI = (props) => {
     })
   }, [])
 
-  useEffect(() => {
-    console.log(signupData)
-  }, [signupData])
-
   return (
     <SignupBusinessContainer>
       <SignUpHeroWrapper>

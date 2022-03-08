@@ -23,7 +23,7 @@ import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
-import { ProductShare } from '../../../../../components/ProductShare'
+import { ProductShare } from '../ProductShare'
 
 import {
   Container,
@@ -49,8 +49,6 @@ import {
   ShareOrder,
   MessagesIcon,
   ExclamationWrapper,
-  WrapperLeftContainer,
-  WrapperRightContainer,
   Divider,
   MyOrderActions,
   ReviewOrderLink,
@@ -58,7 +56,10 @@ import {
   ReviewWrapper,
   Exclamation,
   CommentContainer,
-  TitleContainer
+  TitleContainer,
+  BusinessTitle,
+  OrderPreferences,
+  HeaderTitle
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -77,7 +78,8 @@ const OrderDetailsUI = (props) => {
     messages,
     setMessages,
     readMessages,
-    messagesReadList
+    messagesReadList,
+    orderTypes
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -224,18 +226,30 @@ const OrderDetailsUI = (props) => {
       <Container>
         {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
           <WrapperContainer>
-            <WrapperLeftContainer>
-              <OrderInfo>
-                <TitleContainer>
-                  <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
-                  <Button onClick={() => handleGoToPage({ page: 'search' })} color='primary'>
-                    <BsArrowLeft />
-                    {t('GO_TO_BUSINESSLIST', 'Go to business list')}
-                  </Button>
-                </TitleContainer>
+            <OrderInfo>
+              <TitleContainer>
+                <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                {/* <Button onClick={() => handleGoToPage({ page: 'search' })} color='primary'>
+                  <BsArrowLeft />
+                  {t('GO_TO_BUSINESSLIST', 'Go to business list')}
+                </Button> */}
+                {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
+                  <Content className='order-content'>
+                    <ShareOrder>
+                      <div className='wrap'>
+                        <ProductShare
+                          defaultUrl={urlToShare(order?.hash_key)}
+                        />
+                      </div>
+                    </ShareOrder>
+                  </Content>
+                )}
                 {order?.status !== 0 && order?.integration_id && (
                   <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
                 )}
+                <p className='types'>
+                  {orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
+                </p>
                 <p className='date'>
                   {
                     order?.delivery_datetime_utc
@@ -257,45 +271,95 @@ const OrderDetailsUI = (props) => {
                 >
                   <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                 </ReviewOrderLink>
-                <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-                <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
-              </OrderInfo>
-              <Divider />
-              <OrderBusiness>
-                <BusinessWrapper>
-                  <BusinessInfo>
-                    <h2>{t('FROM', 'From')}</h2>
-                    <p>{order?.business?.name}</p>
-                    <p>{order?.business?.email}</p>
-                    <p>{order?.business?.cellphone}</p>
-                    <p>{order?.business?.address}</p>
-                  </BusinessInfo>
-                </BusinessWrapper>
-                <ActionsBlock>
-                  {order.driver && order.driver.phone &&
-                    <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                      <BsPhone />
-                    </span>}
-                  <span>
-                    <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
-                  </span>
-                  <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
-                    {order?.unread_count > 0 && unreadAlert.business && (
-                      <ExclamationWrapper>
-                        <AiFillExclamationCircle />
-                      </ExclamationWrapper>
+              </TitleContainer>
+              <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+              <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
+            </OrderInfo>
+            <Divider />
+            <OrderBusiness>
+              <BusinessWrapper>
+                <img src={order?.business?.logo} />
+                <BusinessInfo>
+                  <BusinessTitle>
+                    <h2>{order?.business?.name}</h2>
+                    <ActionsBlock>
+                      {order.driver && order.driver.phone &&
+                        <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                          <BsPhone />
+                        </span>}
+                      <span>
+                        <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
+                      </span>
+                      <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
+                        {order?.unread_count > 0 && unreadAlert.business && (
+                          <ExclamationWrapper>
+                            <AiFillExclamationCircle />
+                          </ExclamationWrapper>
+                        )}
+                        <BiMessageRounded />
+                      </MessagesIcon>
+                    </ActionsBlock>
+                  </BusinessTitle>
+                  <p>{order?.business?.email}</p>
+                  <p>{order?.business?.cellphone}</p>
+                  <p>{order?.business?.address}</p>
+                </BusinessInfo>
+              </BusinessWrapper>
+              {order?.driver?.location && parseInt(order?.status) === 9 && (
+                <>
+                  <Map>
+                    <GoogleMapsMap
+                      apiKey={configs?.google_maps_api_key?.value}
+                      location={order?.driver?.location}
+                      locations={locations}
+                      mapControls={googleMapsControls}
+                    />
+                  </Map>
+                </>
+              )}
+            </OrderBusiness>
+            <OrderCustomer>
+              <h2>{order?.customer?.name} {order?.customer?.lastname}</h2>
+              <p>{order?.customer?.email}</p>
+              <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
+              <p>{order?.customer?.address}</p>
+            </OrderCustomer>
+            {order?.driver && (
+              <OrderDriver>
+                <SectionTitle>
+                  <h2>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</h2>
+                  <ActionsBlock>
+                    {order.driver && order.driver.phone &&
+                      <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                        <BsPhone />
+                      </span>}
+                    <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
+                      {order?.unread_count > 0 && unreadAlert.driver && (
+                        <ExclamationWrapper>
+                          <AiFillExclamationCircle />
+                        </ExclamationWrapper>
+                      )}
+                      <BiMessageRounded />
+                    </MessagesIcon>
+                  </ActionsBlock>
+                </SectionTitle>
+                <WrapperDriver>
+                  <div className='photo'>
+                    {order?.driver?.photo ? (
+                      <PhotoBlock src={order?.driver?.photo} />
+                    ) : (
+                      <RiUser2Fill />
                     )}
-                    <BiMessageRounded />
-                  </MessagesIcon>
-                </ActionsBlock>
-              </OrderBusiness>
-              <Divider />
-              <OrderCustomer>
-                <h2>{t('TO', 'To')}</h2>
-                <p>{order?.customer?.name} {order?.customer?.lastname}</p>
-                <p>{order?.customer?.email}</p>
-                <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
-              </OrderCustomer>
+                  </div>
+                  <div>
+                    <h2>{order?.driver?.name} {order?.driver?.lastname}</h2>
+                    <p>{order?.driver?.email}</p>
+                    <p>{order?.driver?.cellphone || order?.driver?.phone}</p>
+                  </div>
+                </WrapperDriver>
+              </OrderDriver>
+            )}
+            <OrderPreferences>
               {order?.delivery_type === 1 && (
                 <CommentContainer>
                   <h3>{t('DELIVERY_PREFERENCE', 'Delivery preference')}</h3>
@@ -308,198 +372,135 @@ const OrderDetailsUI = (props) => {
                   <span>{order?.comment}</span>
                 </CommentContainer>
               )}
-              {order?.driver && (
-                <>
-                  <>
-                    <Divider />
-                    <SectionTitle>
-                      {t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}
-                    </SectionTitle>
-                    <OrderDriver>
-                      <WrapperDriver>
-                        <div className='photo'>
-                          {order?.driver?.photo ? (
-                            <PhotoBlock src={order?.driver?.photo} width='48' height='48' />
-                          ) : (
-                            <RiUser2Fill />
-                          )}
-                        </div>
-                        <p>{order?.driver?.name} {order?.driver?.lastname}</p>
-                      </WrapperDriver>
-                      <ActionsBlock>
-                        {order.driver && order.driver.phone &&
-                          <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                            <BsPhone />
-                          </span>}
-                        <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
-                          {order?.unread_count > 0 && unreadAlert.driver && (
-                            <ExclamationWrapper>
-                              <AiFillExclamationCircle />
-                            </ExclamationWrapper>
-                          )}
-                          <BiMessageRounded />
-                        </MessagesIcon>
-                      </ActionsBlock>
-                    </OrderDriver>
-                  </>
-                  {order?.driver?.location && parseInt(order?.status) === 9 && (
-                    <>
-                      <Map>
-                        <GoogleMapsMap
-                          apiKey={configs?.google_maps_api_key?.value}
-                          location={order?.driver?.location}
-                          locations={locations}
-                          mapControls={googleMapsControls}
-                        />
-                      </Map>
-                    </>
-                  )}
-                </>
-              )}
-            </WrapperLeftContainer>
-            <WrapperRightContainer>
-              <HeaderInfo>
-                <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-                <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
-              </HeaderInfo>
-              {!userCustomerId && (
-                <MyOrderActions>
-                  <Button
-                    color='primary'
-                    outline
-                    onClick={() => handleGoToPage({ page: 'orders' })}
-                  >
-                    {t('YOUR_ORDERS', theme?.defaultLanguages?.YOUR_ORDERS || 'Your Orders')}
-                  </Button>
-                </MyOrderActions>
-              )}
+            </OrderPreferences>
+            <>
               <OrderProducts>
+                <HeaderInfo>
+                  <HeaderTitle>
+                    <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
+                    {!userCustomerId && (
+                      <MyOrderActions>
+                        <Button
+                          color='primary'
+                          outline
+                          onClick={() => handleGoToPage({ page: 'orders' })}
+                        >
+                          {t('YOUR_ORDERS', theme?.defaultLanguages?.YOUR_ORDERS || 'Your Orders')}
+                        </Button>
+                      </MyOrderActions>
+                    )}
+                  </HeaderTitle>
+                  <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
+                </HeaderInfo>
                 {order?.products?.length && order?.products.map(product => (
                   <ProductItemAccordion
                     key={product.id}
                     product={product}
                   />
                 ))}
+                <OrderBill>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
+                        <td>{parsePrice(((order?.summary?.subtotal || order?.subtotal) + getIncludedTaxes()))}</td>
+                      </tr>
+                      {(order?.summary?.discount > 0 || order?.discount > 0) && (
+                        <tr>
+                          {order?.offer_type === 1 ? (
+                            <td>
+                              {t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}{' '}
+                              <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
+                            </td>
+                          ) : (
+                            <td>{t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}</td>
+                          )}
+                          <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
+                        </tr>
+                      )}
+                      {
+                        order?.taxes?.length === 0 && order?.tax_type === 2 && (
+                          <tr>
+                            <td>
+                              {t('TAX', 'Tax')}
+                              <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
+                            </td>
+                            <td>{parsePrice(order?.summary?.tax || 0)}</td>
+                          </tr>
+                        )
+                      }
+                      {
+                        order?.fees?.length === 0 && (
+                          <tr>
+                            <td>
+                              {t('SERVICE_FEE', 'Service fee')}
+                              <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
+                            </td>
+                            <td>{parsePrice(order?.summary?.service_fee || 0)}</td>
+                          </tr>
+                        )
+                      }
+                      {
+                        order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
+                          <tr key={tax?.id}>
+                            <td>
+                              {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                              <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
+                                <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              </Exclamation>
+                            </td>
+                            <td>{parsePrice(tax?.summary?.tax || 0)}</td>
+                          </tr>
+                        ))
+                      }
+                      {
+                        order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
+                          <tr key={fee.id}>
+                            <td>
+                              {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                              ({parsePrice(fee?.fixed)} + {fee?.percentage}%)
+                              <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
+                                <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              </Exclamation>
+                            </td>
+                            <td>{parsePrice(fee?.fixed + fee?.summary?.percentage || 0)}</td>
+                          </tr>
+                        ))
+                      }
+                      {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
+                        <tr>
+                          <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
+                          <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
+                        </tr>
+                      )}
+                      {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
+                        <tr>
+                          <td>
+                            {t('DRIVER_TIP', theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip')}{' '}
+                            {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
+                              parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
+                              !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
+                              (
+                                <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
+                              )}
+                          </td>
+                          <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                  <table className='total'>
+                    <tbody>
+                      <tr>
+                        <td>{t('TOTAL', theme?.defaultLanguages?.TOTAL || 'Total')}</td>
+                        <td>{parsePrice(order?.summary?.total || order?.total)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </OrderBill>
               </OrderProducts>
-              <OrderBill>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
-                      <td>{parsePrice(((order?.summary?.subtotal || order?.subtotal) + getIncludedTaxes()))}</td>
-                    </tr>
-                    {(order?.summary?.discount > 0 || order?.discount > 0) && (
-                      <tr>
-                        {order?.offer_type === 1 ? (
-                          <td>
-                            {t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}{' '}
-                            <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
-                          </td>
-                        ) : (
-                          <td>{t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}</td>
-                        )}
-                        <td>- {parsePrice(order?.summary?.discount || order?.discount)}</td>
-                      </tr>
-                    )}
-                    {
-                      order?.taxes?.length === 0 && order?.tax_type === 2 && (
-                        <tr>
-                          <td>
-                            {t('TAX', 'Tax')}
-                            <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
-                          </td>
-                          <td>{parsePrice(order?.summary?.tax || 0)}</td>
-                        </tr>
-                      )
-                    }
-                    {
-                      order?.fees?.length === 0 && (
-                        <tr>
-                          <td>
-                            {t('SERVICE_FEE', 'Service fee')}
-                            <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
-                          </td>
-                          <td>{parsePrice(order?.summary?.service_fee || 0)}</td>
-                        </tr>
-                      )
-                    }
-                    {
-                      order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
-                        <tr key={tax?.id}>
-                          <td>
-                            {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>{parsePrice(tax?.summary?.tax || 0)}</td>
-                        </tr>
-                      ))
-                    }
-                    {
-                      order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
-                        <tr key={fee.id}>
-                          <td>
-                            {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            ({parsePrice(fee?.fixed)} + {fee?.percentage}%)
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>{parsePrice(fee?.fixed + fee?.summary?.percentage || 0)}</td>
-                        </tr>
-                      ))
-                    }
-                    {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
-                      <tr>
-                        <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
-                        <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee)}</td>
-                      </tr>
-                    )}
-                    {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
-                      <tr>
-                        <td>
-                          {t('DRIVER_TIP', theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip')}{' '}
-                          {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
-                            parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                            !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                            (
-                              <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
-                            )}
-                        </td>
-                        <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip)}</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-                <table className='total'>
-                  <tbody>
-                    <tr>
-                      <td>{t('TOTAL', theme?.defaultLanguages?.TOTAL || 'Total')}</td>
-                      <td>{parsePrice(order?.summary?.total || order?.total)}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </OrderBill>
-              <Content className='order-content'>
-                {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-                  <ShareOrder>
-                    <div className='text'>
-                      <h1>{t('SHARE_THIS_DELIVERY', theme?.defaultLanguages?.SHARE_THIS_DELIVERY || 'Share this delivery')}</h1>
-                      <p>{t('LET_SOMEONE_FOLLOW_ALONG', theme?.defaultLanguages?.LET_SOMEONE_FOLLOW_ALONG || 'Let someone follow along')}</p>
-                    </div>
-                    <div className='wrap'>
-                      <ProductShare
-                        withBtn
-                        btnText={t('SHARE', theme?.defaultLanguages?.SHARE || 'Share')}
-                        defaultUrl={urlToShare(order?.hash_key)}
-                      />
-                    </div>
-                  </ShareOrder>
-                )}
-              </Content>
-            </WrapperRightContainer>
+            </>
           </WrapperContainer>
         )}
 
@@ -521,41 +522,26 @@ const OrderDetailsUI = (props) => {
 
         {loading && !error && (
           <SkeletonWrapper>
-            <WrapperLeftContainer>
+            <>
               <SkeletonBlockWrapp>
                 <SkeletonBlock width={90}>
-                  <Skeleton height={40} width={230} />
-                  <Skeleton height={20} width={80} />
+                  <Skeleton height={40} width={300} />
+                  <Skeleton height={15} width={120} />
                   <Skeleton height={15} />
-                  <Skeleton height={20} width={210} style={{ marginBottom: '50px' }} />
-                  <Skeleton height={40} width={230} />
-                  <Skeleton height={20} width={180} />
-                  <Skeleton height={20} width={210} />
-                  <Skeleton height={20} width={150} />
-                  <Skeleton height={20} width={170} style={{ marginBottom: '50px' }} />
-                  <Skeleton height={40} width={230} />
-                  <Skeleton height={20} width={180} />
-                  <Skeleton height={20} width={210} />
-                  <Skeleton height={20} width={150} />
-                  <Skeleton height={20} width={170} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={60} width={900} />
+                  <Skeleton height={200} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={40} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
                 </SkeletonBlock>
               </SkeletonBlockWrapp>
-            </WrapperLeftContainer>
-            <WrapperRightContainer>
-              <SkeletonBlockWrapp>
-                <SkeletonBlock width={90}>
-                  <Skeleton height={40} width={230} />
-                  <Skeleton height={20} />
-                  <Skeleton height={45} width={100} />
-                  <Skeleton height={60} />
-                  <Skeleton height={300} />
-                  <Skeleton height={60} />
-                  <Skeleton height={25} />
-                  <Skeleton height={25} />
-                  <Skeleton height={25} />
-                </SkeletonBlock>
-              </SkeletonBlockWrapp>
-            </WrapperRightContainer>
+            </>
           </SkeletonWrapper>
         )}
 
@@ -622,6 +608,7 @@ const OrderDetailsUI = (props) => {
 }
 
 export const OrderDetails = (props) => {
+  const [, t] = useLanguage()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const orderDetailsProps = {
     ...props,
@@ -637,6 +624,28 @@ export const OrderDetails = (props) => {
         mapTypeIds: ['roadmap', 'satellite']
       }
     },
+    orderTypes: props.orderTypes || [
+      {
+        value: 1,
+        text: t('DELIVERY', 'Delivery')
+      },
+      {
+        value: 2,
+        text: t('PICKUP', 'Pickup')
+      },
+      {
+        value: 3,
+        text: t('EAT_IN', 'Eat in')
+      },
+      {
+        value: 4,
+        text: t('CURBSIDE', 'Curbside')
+      },
+      {
+        value: 5,
+        text: t('DRIVE_THRU', 'Drive thru')
+      }
+    ],
     UIComponent: OrderDetailsUI
   }
 

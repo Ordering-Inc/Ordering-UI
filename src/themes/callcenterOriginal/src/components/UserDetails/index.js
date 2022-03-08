@@ -1,7 +1,17 @@
 import React, { useEffect } from 'react'
 import FcCancel from '@meronex/icons/fc/FcCancel'
 import Skeleton from 'react-loading-skeleton'
-import { Container, Header, SideForm, UserData, UserName, ModalIcon, TitleContainer, CountryFlag, PhoneContainer } from './styles'
+import {
+  Container,
+  Header,
+  SideForm,
+  UserData,
+  UserName,
+  ModalIcon,
+  TitleContainer,
+  CountryFlag,
+  PhoneContainer
+} from './styles'
 import MdClose from '@meronex/icons/md/MdClose'
 import PhoneInput from 'react-phone-number-input'
 import { parsePhoneNumber } from 'libphonenumber-js'
@@ -106,7 +116,7 @@ const UserDetailsUI = (props) => {
                   <CountryFlag>
                     {
                       userData?.country_phone_code && (
-                        <PhoneInput defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code)} ${userData?.cellphone}`)?.country} />
+                        <PhoneInput onChange={() => {}} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code)} ${userData?.cellphone}`)?.country} />
                       )
                     }
                   </CountryFlag>

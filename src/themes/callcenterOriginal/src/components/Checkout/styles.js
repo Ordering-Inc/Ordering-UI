@@ -57,8 +57,9 @@ export const BusinessDetailsContainer = styled(UserDetailsContainer)`
     h1 {
       text-transform: capitalize;
       margin: 0px;
-      font-weight: 600;
-      font-size: 16px;
+      font-weight: 500;
+      font-size: 20px;
+      margin-bottom: 10px;
     }
     p {
       font-size: 14px;
@@ -208,6 +209,13 @@ export const DriverTipDivider = styled.div`
 export const DeliveryOptionsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  h1 {
+    margin: 0px;
+    font-weight: 500;
+    font-size: 20px;
+    color: ${props => props.theme.colors.darkTextColor};
+    margin-bottom: 20px;
+  }
   #select-input {
     margin-bottom: 10px;
   }
@@ -236,5 +244,49 @@ export const DeliveryOptionsContainer = styled.div`
       border-radius: 7.6px;
       box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
     }
+  }
+`
+
+export const BusinessDetailsInfo = styled.div`
+  display: flex; 
+  align-items: center;
+  img{
+    width: 76px;
+    height: 76px;
+    border-radius: 7.6px;
+    margin-right: 30px;
+  }
+`
+
+export const BusinessName = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+`
+
+export const OrderDetailsContainer = styled.div`
+  margin-top: 60px;
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+  }
+  span {
+    font-size: 13px!important;
+    text-decoration: underline;
+    cursor: pointer;
+    user-select: none;
+    color: ${props => props.theme.colors.primary};
+    margin-left: 10px;
+    font-weight: normal;
+
+    ${props => props.theme?.rtl && css`
+      margin-right: 10px;
+      margin-left: initial;
+    `}
   }
 `

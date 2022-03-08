@@ -15,7 +15,8 @@ import {
 } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
-
+import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
+import { MomentContent } from '../MomentContent'
 import {
   Container,
   WrapperLeftContainer,
@@ -33,7 +34,10 @@ import {
   WrapperLeftContent,
   CheckOutDivider,
   DriverTipDivider,
-  DeliveryOptionsContainer
+  DeliveryOptionsContainer,
+  BusinessDetailsInfo,
+  BusinessName,
+  OrderDetailsContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -48,6 +52,7 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
+import { Modal } from '../Modal'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -73,7 +78,8 @@ const CheckoutUI = (props) => {
     setIsResetPaymethod,
     handleChangeDeliveryOption,
     instructionsOptions,
-    deliveryOptionSelected
+    deliveryOptionSelected,
+    orderTypes
   } = props
 
   const theme = useTheme()
@@ -81,15 +87,16 @@ const CheckoutUI = (props) => {
   // const [{ options, loading }, { changePaymethod }] = useOrder()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, parseDate }] = useUtils()
   const [{ user }] = useSession()
-  const [{ configs }] = useConfig()
+  const [{ configs, loading: loadingConfigs }] = useConfig()
   const [customerState] = useCustomer()
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
+  const [modalSelected, setModalSelected] = useState(null)
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -100,6 +107,8 @@ const CheckoutUI = (props) => {
       value: option?.id, content: t(option?.name.toUpperCase().replace(/\s/g, '_')), showOnSelected: option?.name
     }
   })
+
+  const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -288,12 +297,15 @@ const CheckoutUI = (props) => {
                 {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
                   <div>
                     <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                    <div>
-                      <p>{businessDetails?.business?.address}</p>
-                      <p>{businessDetails?.business?.name}</p>
-                      <p>{businessDetails?.business?.email}</p>
-                      <p>{businessDetails?.business?.cellphone}</p>
-                    </div>
+                    <BusinessDetailsInfo>
+                      <img src={businessDetails?.business?.logo} />
+                      <div>
+                        <BusinessName>{businessDetails?.business?.name}</BusinessName>
+                        <p>{businessDetails?.business?.address}</p>
+                        <p>{businessDetails?.business?.email}</p>
+                        <p>{businessDetails?.business?.cellphone}</p>
+                      </div>
+                    </BusinessDetailsInfo>
                   </div>
                 )}
                 {businessDetails?.error && businessDetails?.error?.length > 0 && (
@@ -324,7 +336,7 @@ const CheckoutUI = (props) => {
             )}
             {!props.isHideSectionEight && !cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
               <DeliveryOptionsContainer>
-                <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
+                <h1>{t('DELIVERY_DETAILS', 'Delivery Details')}</h1>
                 <Select
                   defaultValue={deliveryOptionSelected}
                   options={deliveryOptions}
@@ -363,6 +375,7 @@ const CheckoutUI = (props) => {
                   handleOrderRedirect={handleOrderRedirect}
                   isCustomerMode={isCustomerMode}
                   paySelected={paymethodSelected}
+                  handlePlaceOrder={handlePlaceOrder}
                 />
               </PaymentMethodContainer>
             )}
@@ -375,7 +388,25 @@ const CheckoutUI = (props) => {
             </React.Fragment>))}
           {props.beforeComponentsSectionFour?.map((BeforeComponent, i) => (
             <BeforeComponent key={i} {...props} />))}
-
+          {!props.isHideSectionNine && !cartState.loading && cart && cart?.status !== 2 && (
+            <OrderDetailsContainer>
+              <h1>{t('ORDER_DETAILS', 'Order details')}</h1>
+              {orderTypes && orderTypes?.length > 1 && configTypes?.length > 0 && (
+                <div>
+                  <p>{orderTypes.find(type => type?.value === options.type)?.text}</p>
+                  <span onClick={() => setModalSelected('ordertype')}>{t('CHANGE', 'Change')}</span>
+                </div>
+              )}
+              <div>
+                <p>
+                  {options?.moment
+                    ? parseDate(options?.moment, { outputFormat: configs?.dates_moment_format?.value })
+                    : t('ASAP_ABBREVIATION', 'ASAP')}
+                </p>
+                <span onClick={() => setModalSelected('moment')}>{t('CHANGE', 'Change')}</span>
+              </div>
+            </OrderDetailsContainer>
+          )}
           {!props.isHideSectionFour &&
             !cartState.loading &&
             cart &&
@@ -472,6 +503,24 @@ const CheckoutUI = (props) => {
           onAccept={() => closeAlert()}
           closeOnBackdrop={false}
         />
+        <Modal
+          open={!!modalSelected}
+          onClose={() => setModalSelected(null)}
+          width='700px'
+        >
+          {modalSelected === 'ordertype' && (
+            <OrderTypeSelectorContent
+              onClose={() => setModalSelected(null)}
+              configTypes={loadingConfigs && configTypes?.length > 0 ? configTypes : null}
+              defaultValue={!(loadingConfigs && configTypes?.length > 0) && 1}
+            />
+          )}
+          {modalSelected === 'moment' && (
+            <MomentContent
+              onClose={() => setModalSelected(null)}
+            />
+          )}
+        </Modal>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
@@ -621,6 +670,28 @@ export const Checkout = (props) => {
     cartState,
     businessId: cartState.cart?.business_id,
     isResetPaymethod,
+    orderTypes: props.orderTypes || [
+      {
+        value: 1,
+        text: t('DELIVERY', 'Delivery')
+      },
+      {
+        value: 2,
+        text: t('PICKUP', 'Pickup')
+      },
+      {
+        value: 3,
+        text: t('EAT_IN', 'Eat in')
+      },
+      {
+        value: 4,
+        text: t('CURBSIDE', 'Curbside')
+      },
+      {
+        value: 5,
+        text: t('DRIVE_THRU', 'Drive thru')
+      }
+    ],
     setIsResetPaymethod
   }
 
