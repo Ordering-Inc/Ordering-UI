@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperPlaceOrderButton = exports.WrapperLeftContent = exports.WrapperLeftContainer = exports.WarningText = exports.WarningMessage = exports.UserDetailsContainer = exports.PaymentMethodContainer = exports.NotFoundImage = exports.DriverTipDivider = exports.DriverTipContainer = exports.DeliveryOptionsContainer = exports.Container = exports.CheckOutDivider = exports.CartsList = exports.CartContainer = exports.BusinessDetailsContainer = void 0;
+exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperPlaceOrderButton = exports.WrapperLeftContent = exports.WrapperLeftContainer = exports.WarningText = exports.WarningMessage = exports.UserDetailsContainer = exports.PaymentMethodContainer = exports.OrderDetailsContainer = exports.NotFoundImage = exports.DriverTipDivider = exports.DriverTipContainer = exports.DeliveryOptionsContainer = exports.Container = exports.CheckOutDivider = exports.CartsList = exports.CartContainer = exports.BusinessName = exports.BusinessDetailsInfo = exports.BusinessDetailsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -36,7 +36,7 @@ exports.WrapperUserDetails = WrapperUserDetails;
 var UserDetailsContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin-top: 25px;\n  flex-wrap: wrap;\n  padding-bottom: 20px;\n  border-bottom: 1px solid #E9ECEF;\n"])));
 
 exports.UserDetailsContainer = UserDetailsContainer;
-var BusinessDetailsContainer = (0, _styledComponents.default)(UserDetailsContainer)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  border: none;\n  div {\n    h1 {\n      text-transform: capitalize;\n      margin: 0px;\n      font-weight: 600;\n      font-size: 16px;\n    }\n    p {\n      font-size: 14px;\n      margin: 5px 0;\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var BusinessDetailsContainer = (0, _styledComponents.default)(UserDetailsContainer)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  border: none;\n  div {\n    h1 {\n      text-transform: capitalize;\n      margin: 0px;\n      font-weight: 500;\n      font-size: 20px;\n      margin-bottom: 10px;\n    }\n    p {\n      font-size: 14px;\n      margin: 5px 0;\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 exports.BusinessDetailsContainer = BusinessDetailsContainer;
@@ -93,6 +93,26 @@ var DriverTipDivider = _styledComponents.default.div(_templateObject18 || (_temp
 
 exports.DriverTipDivider = DriverTipDivider;
 
-var DeliveryOptionsContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  #select-input {\n    margin-bottom: 10px;\n  }\n  #list {\n    width: 100%;\n  }\n\n  > div {\n    width: 100%;\n    background-color: #F8F9FA!important;\n    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n    height: 44px;\n    border: none;\n    border-radius: 7.6px;\n    color: #909BA9 !important;\n\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n      justify-content: space-between;\n    }\n    > div#list {\n      width: 100%;\n      background-color: #F8F9FA!important;\n      border: 1px solid #F8F9FA;\n      border-radius: 7.6px;\n      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n    }\n  }\n"])));
+var DeliveryOptionsContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  h1 {\n    margin: 0px;\n    font-weight: 500;\n    font-size: 20px;\n    color: ", ";\n    margin-bottom: 20px;\n  }\n  #select-input {\n    margin-bottom: 10px;\n  }\n  #list {\n    width: 100%;\n  }\n\n  > div {\n    width: 100%;\n    background-color: #F8F9FA!important;\n    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n    height: 44px;\n    border: none;\n    border-radius: 7.6px;\n    color: #909BA9 !important;\n\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n      justify-content: space-between;\n    }\n    > div#list {\n      width: 100%;\n      background-color: #F8F9FA!important;\n      border: 1px solid #F8F9FA;\n      border-radius: 7.6px;\n      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.darkTextColor;
+});
 
 exports.DeliveryOptionsContainer = DeliveryOptionsContainer;
+
+var BusinessDetailsInfo = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: center;\n  img{\n    width: 76px;\n    height: 76px;\n    border-radius: 7.6px;\n    margin-right: 30px;\n  }\n"])));
+
+exports.BusinessDetailsInfo = BusinessDetailsInfo;
+
+var BusinessName = _styledComponents.default.p(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  font-weight: 600;\n"])));
+
+exports.BusinessName = BusinessName;
+
+var OrderDetailsContainer = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  margin-top: 60px;\n  h1 {\n    font-size: 20px;\n    font-weight: 500;\n  }\n  div {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    height: 40px;\n  }\n  span {\n    font-size: 13px!important;\n    text-decoration: underline;\n    cursor: pointer;\n    user-select: none;\n    color: ", ";\n    margin-left: 10px;\n    font-weight: normal;\n\n    ", "\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  var _props$theme3;
+
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: initial;\n    "])));
+});
+
+exports.OrderDetailsContainer = OrderDetailsContainer;
