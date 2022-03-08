@@ -108,7 +108,7 @@ var MomentControlUI = function MomentControlUI(props) {
       }, /*#__PURE__*/_react.default.createElement(_styles.ContentDay, {
         className: "content-day"
       }, /*#__PURE__*/_react.default.createElement(_styles.DayName, null, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, null, dayNumber)));
-    }), /*#__PURE__*/_react.default.createElement(_styles.MiddleLine, null)), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')), /*#__PURE__*/_react.default.createElement(_styles.Hours, {
+    })), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('DESIRED_DELIVERY_TIME', 'Desired Delivery Time')), /*#__PURE__*/_react.default.createElement(_styles.Hours, {
       name: "hours"
     }, /*#__PURE__*/_react.default.createElement(_styles.Hour, {
       selected: isAsap,

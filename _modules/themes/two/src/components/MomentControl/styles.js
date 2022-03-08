@@ -21,7 +21,9 @@ var Title = _styledComponents.default.div(_templateObject || (_templateObject = 
 
 exports.Title = Title;
 
-var MomentContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: #333;\n  display: flex;\n  align-items: center;\n  svg {\n    margin-right: 5px;\n    ", "\n  }\n"])), function (props) {
+var MomentContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  color: ", ";\n  display: flex;\n  align-items: center;\n\n  svg {\n    margin-right: 5px;\n    ", "\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0;\n    "])));
