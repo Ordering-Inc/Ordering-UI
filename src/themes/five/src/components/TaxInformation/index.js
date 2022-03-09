@@ -6,34 +6,61 @@ import { TaxInformationContainer, ProductContainer } from './styles'
 export const TaxInformation = (props) => {
   const {
     data,
-    products
+    products,
+    type
   } = props
 
   const [, t] = useLanguage()
 
-  const isTax = typeof data?.rate === 'number'
-  const TaxFeeString = isTax ? 'tax' : 'fee'
   const includedOnPriceString = data?.type === 1 ? `(${t('INCLUDED_ON_PRICE', 'Included on price')})` : `(${t('NOT_INCLUDED_ON_PRICE', 'Not included on price')})`
+
+  const getFilterValidation = (product) => {
+    return (
+      type === 'tax'
+        ? (product.tax?.id ? product.tax?.id === data?.id : product.tax?.id === null && data?.id === null)
+        : type === 'fee'
+          ? (product.fee?.id ? product.fee?.id === data?.id : (product.fee?.id === null && data?.id === null))
+          : Object.keys(data?.discounts ?? {}).map(code => code.includes(product?.code))
+    )
+  }
+
+  const getTypeString = () => {
+    return (
+      type === 'offer_target_1'
+        ? t('PRODUCT_DISCOUNT', 'Product discount')
+        : type === 'tax'
+          ? t('TAX', 'Tax')
+          : t('Fee', 'Fee')
+    )
+  }
 
   return (
     <TaxInformationContainer>
-      {data?.description && (
+      {data?.description ? (
         <h2>
-          {t('DESCRIPTION', 'Description')}: {data?.description} {data?.type && includedOnPriceString}
+          {t('DESCRIPTION', 'Description')}: {data?.description} {data?.type && !type.includes('offer') && includedOnPriceString}
+        </h2>
+      ) : (
+        <h2>
+          {t('WITHOUT_DESCRIPTION', 'Without description')}
         </h2>
       )}
-      <h3>{t(`OTHER_PRODUCTS_WITH_THIS_${TaxFeeString.toUpperCase()}`, `Other products with this ${TaxFeeString}`)}:</h3>
-      <ProductContainer>
-        {
-          products.filter(product => isTax ? (product.tax?.id ? product.tax?.id === data?.id : product.tax?.id === null && data?.id === null) : (product.fee?.id ? product.fee?.id === data?.id : (product.fee?.id === null && data?.id === null))).map(product => (
-            <SingleProductCard
-              key={product.id}
-              product={product}
-              isModal
-            />
-          ))
-        }
-      </ProductContainer>
+      {!(type === 'offer_target_2' || type === 'offer_target_3') && (
+        <>
+          <h3>{t('OTHER_PRODUCTS_WITH_THIS', 'Other products with this')} {getTypeString()}:</h3>
+          <ProductContainer>
+            {
+              products.filter(product => getFilterValidation(product)).map(product => (
+                <SingleProductCard
+                  key={product.id}
+                  product={product}
+                  isModal
+                />
+              ))
+            }
+          </ProductContainer>
+        </>
+      )}
     </TaxInformationContainer>
   )
 }
