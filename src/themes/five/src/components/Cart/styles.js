@@ -34,6 +34,16 @@ export const OrderBill = styled.div`
         text-align: left;
     `}
     }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      max-height: 25px;
+      svg:nth-child(2){
+        position: relative;
+        top: 2px;
+      }
+    }
   }
   table.total {
     border-top: 1px solid #EAEAEA;
@@ -116,6 +126,7 @@ export const Exclamation = styled.div`
   display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
+  top: -1px;
 `
 
 export const Spinner = styled.div`
@@ -131,4 +142,10 @@ export const CommentContainer = styled.td`
     width: 50px;
     height: 50px;
   }
+`
+
+export const IconContainer = styled.div`
+  position: relative;
+  cursor: pointer;
+  margin-left: 5px;
 `

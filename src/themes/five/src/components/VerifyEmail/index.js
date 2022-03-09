@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import OtpInput from 'react-otp-input'
-import { useTheme } from 'styled-components'
-import { useSession, useLanguage } from 'ordering-components'
-
 import {
-  Envelope
-} from 'react-bootstrap-icons'
+  VerifyEmail as VerifyEmailController,
+  useSession,
+  useLanguage
+} from 'ordering-components'
 
-import { VerifyEmail as VerifyEmailController } from './naked'
+import { Envelope } from 'react-bootstrap-icons'
 
 import { Alert } from '../Confirm'
 import { Input } from '../../styles/Inputs'
@@ -34,7 +33,6 @@ const VerifyEmailUI = (props) => {
     checkVerifyEmailCode,
   } = props
 
-  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [otpState, setOtpState] = useState('')

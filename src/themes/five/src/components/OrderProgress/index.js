@@ -66,6 +66,7 @@ const OrderProgressUI = (props) => {
   }
 
   const convertDiffToHours = (time) => {
+    if (!time) return
     const deliveryTime = lastOrder?.delivery_datetime_utc
       ? parseDate(lastOrder?.delivery_datetime_utc, { outputFormat: 'YYYY-MM-DD hh:mm A' })
       : parseDate(lastOrder?.delivery_datetime, { utc: false, outputFormat: 'YYYY-MM-DD hh:mm A' })

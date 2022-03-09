@@ -6,7 +6,6 @@ export const OtpWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
     margin: 20px;
-
     .otp-input{
       width: 30px;
       height: 30px;
@@ -17,11 +16,9 @@ export const OtpWrapper = styled.div`
       outline: none;
       font-size: 20px;
       font-weight: bold;
-
       &:focus{
         border-color: ${() => darken(0.07, '#CCC')} !important;
       }
-
       &::placeholder,
       &::-webkit-input-placeholder {
         color: #DBDCDB;
@@ -38,13 +35,11 @@ export const WrapperText = styled.div`
   flex-direction: column;
   margin: 0 auto;
   text-align: center;
-
   span {
     &:first-child {
       font-size: 20px;
       font-weight: bold;
     }
-
     margin-bottom: 10px;
   }
 `
@@ -58,7 +53,6 @@ export const CountdownTimer = styled.div`
   border-radius: 7.6px;
   width: 30%;
   background-color: ${props => props.error ? '#ED4337' : props.theme.colors.primary}80;
-
   span {
     &:first-child {
       font-size: 30px;
@@ -77,7 +71,6 @@ export const CountdownTimer = styled.div`
       }
     }
   }
-
 `
 
 export const Container = styled.div`
@@ -93,12 +86,10 @@ export const FormInput = styled.form`
   width: 60%;
   display: flex;
   flex-direction: column;
-
   input:not(:last-child) {
     margin: 10px 0px;
     padding: 8px 20px;
   }
-
   button {
     margin-top: 10px;
     padding: 5px;
@@ -107,7 +98,6 @@ export const FormInput = styled.form`
 
 export const InputWrapper = styled.div`
   position: relative;
-
   input {
     box-sizing: border-box;
     width: 100%;
@@ -124,12 +114,10 @@ export const InputBeforeIcon = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-
   ${props => props.theme.rtl && css`
     right: 14px;
     left: initial;
   `}
-
   svg {
     font-size: 16px;
     color: #B1BCCC;
@@ -142,7 +130,6 @@ export const ButtonsWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
-
   div button {
     width: 100%;
   }

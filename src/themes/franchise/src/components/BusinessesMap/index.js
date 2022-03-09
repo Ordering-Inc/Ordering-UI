@@ -7,8 +7,7 @@ const BusinessesMapUI = (props) => {
     userLocation,
     businessLocations,
     onBusinessClick,
-    setErrors,
-    setNearBusinessList
+    setErrors
   } = props
 
   const [configState] = useConfig()
@@ -43,9 +42,9 @@ const BusinessesMapUI = (props) => {
           mapControls={googleMapsControls}
           maxLimitLocation={parseInt(configState?.configs?.meters_to_change_address?.value)}
           businessMap
+          noDistanceValidation
           onBusinessClick={onBusinessClick}
           setErrors={setErrors}
-          setNearBusinessList={setNearBusinessList}
         />
       </WrapperMap>
       {props.afterComponents?.map((AfterComponent, i) => (
