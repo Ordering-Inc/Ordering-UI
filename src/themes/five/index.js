@@ -72,6 +72,7 @@ import { UpsellingPage } from './src/components/UpsellingPage'
 import { UserDetails } from './src/components/UserDetails'
 import { UserPopover } from './src/components/UserPopover'
 import { UserProfileForm } from './src/components/UserProfileForm'
+import { VerifyEmail } from './src/components/VerifyEmail'
 import { Wallets } from './src/components/Wallets'
 import { WalletTransactionItem } from './src/components/WalletTransactionItem'
 
@@ -154,6 +155,7 @@ export {
   UserDetails,
   UserPopover,
   UserProfileForm,
+  VerifyEmail,
   Wallets,
   WalletTransactionItem,
 
