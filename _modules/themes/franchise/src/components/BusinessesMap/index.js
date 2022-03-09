@@ -39,8 +39,7 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
   var userLocation = props.userLocation,
       businessLocations = props.businessLocations,
       onBusinessClick = props.onBusinessClick,
-      setErrors = props.setErrors,
-      setNearBusinessList = props.setNearBusinessList;
+      setErrors = props.setErrors;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -80,9 +79,9 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
     mapControls: googleMapsControls,
     maxLimitLocation: parseInt(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.meters_to_change_address) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value),
     businessMap: true,
+    noDistanceValidation: true,
     onBusinessClick: onBusinessClick,
-    setErrors: setErrors,
-    setNearBusinessList: setNearBusinessList
+    setErrors: setErrors
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

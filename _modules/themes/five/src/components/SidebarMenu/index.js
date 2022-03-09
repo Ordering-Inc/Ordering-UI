@@ -78,8 +78,8 @@ var SidebarMenu = function SidebarMenu(props) {
       isCustomerMode = props.isCustomerMode;
 
   var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      login = _useSession2[0].login;
+      _useSession2 = _slicedToArray(_useSession, 2),
+      login = _useSession2[1].login;
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
