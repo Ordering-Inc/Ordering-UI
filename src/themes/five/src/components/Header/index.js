@@ -8,7 +8,6 @@ import MdClose from '@meronex/icons/md/MdClose'
 import { GeoAlt } from 'react-bootstrap-icons'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
-import { LanguageSelector } from '../../../../../components/LanguageSelector'
 
 import {
   Header as HeaderContainer,
@@ -321,7 +320,6 @@ export const Header = (props) => {
                     </>
                   )
                 }
-                <LanguageSelector />
               </Menu>
             </RightHeader>
           )}
