@@ -57,7 +57,7 @@ export const CountdownTimer = styled.div`
   margin: 10px auto 0;
   border-radius: 7.6px;
   width: 30%;
-  background-color: ${props => props.theme.colors.primary}80;
+  background-color: ${props => props.error ? '#ED4337' : props.theme.colors.primary}80;
 
   span {
     &:first-child {

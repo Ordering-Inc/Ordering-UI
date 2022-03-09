@@ -15,7 +15,7 @@ export const VerifyEmail = (props) => {
     UIComponent
   } = props
 
-  const [{ user, token }] = useSession()
+  const [{ user, token }, { changeUser }] = useSession()
 
   const [verifyEmailState, setVerifyEmailState] = useState({
     loadingSendCode: false,
@@ -86,6 +86,10 @@ export const VerifyEmail = (props) => {
         })
       })
       const { error, result } = await response.json()
+
+      if (result?.id) {
+        changeUser({ ...user, ...result})
+      }
       setVerifyEmailState({
         ...verifyEmailState,
         loadingCheckCode: false,

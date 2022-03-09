@@ -48,7 +48,7 @@ export const App = () => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
 
-  const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
+  const isEmailVerifyRequired = auth && (configs?.verification_email_required?.value === '1' || true) && !user?.email_verified
 
   const closeAlert = () => {
     setAlertState({

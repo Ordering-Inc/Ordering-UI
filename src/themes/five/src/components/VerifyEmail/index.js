@@ -123,7 +123,7 @@ const VerifyEmailUI = (props) => {
           </>
         ) : (
           <>
-            <CountdownTimer>
+            <CountdownTimer error={otpLeftTime === 0}>
               <span>{formatSeconds(otpLeftTime)}</span>
             </CountdownTimer>
 
