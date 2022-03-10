@@ -93,6 +93,8 @@ const CheckoutUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
 
+  const isWalletEnabled = configs?.wallet_enabled?.value === '1'
+
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
@@ -369,11 +371,13 @@ const CheckoutUI = (props) => {
                 />
               </PaymentMethodContainer>
             )}
-            <WalletPaymentOptionContainer>
-              <PaymentOptionWallet
-                cart={cart}
-              />
-            </WalletPaymentOptionContainer>
+            {isWalletEnabled && (
+              <WalletPaymentOptionContainer>
+                <PaymentOptionWallet
+                  cart={cart}
+                />
+              </WalletPaymentOptionContainer>
+            )}
           </WrapperLeftContent>
         </WrapperLeftContainer>
         <WrapperRightContainer>
