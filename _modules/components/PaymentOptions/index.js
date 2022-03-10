@@ -146,7 +146,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       isCustomerMode = props.isCustomerMode,
       isOpenMethod = props.isOpenMethod,
       setCardData = props.setCardData,
-      onPlaceOrderClick = props.onPlaceOrderClick;
+      onPlaceOrderClick = props.onPlaceOrderClick,
+      setCreateOrder = props.setCreateOrder;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -326,7 +327,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       delivery_zone_id: cart.delivery_zone_id,
       cartUuid: cart.uuid
     },
-    onPlaceOrderClick: onPlaceOrderClick
+    onPlaceOrderClick: onPlaceOrderClick,
+    setCreateOrder: setCreateOrder
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

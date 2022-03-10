@@ -451,7 +451,8 @@ var CheckoutUI = function CheckoutUI(props) {
     paySelected: paymethodSelected,
     setCardData: setCardData,
     handlePlaceOrder: handlePlaceOrder,
-    onPlaceOrderClick: onPlaceOrderClick
+    onPlaceOrderClick: onPlaceOrderClick,
+    setCreateOrder: setCreateOrder
   })), (_props$beforeElements8 = props.beforeElementsSectionSix) === null || _props$beforeElements8 === void 0 ? void 0 : _props$beforeElements8.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
