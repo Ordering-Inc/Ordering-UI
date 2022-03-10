@@ -74,8 +74,10 @@ export const SingleProductCard = (props) => {
               {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
               {!isSkeleton ? (
                 <PriceWrapper>
-                  <span>{parsePrice(product?.price)}</span>
-                  {product?.offer_price !== null && product?.in_offer && !(isSoldOut || maxProductQuantity <= 0) && (
+                  {product?.price !== 0 && (
+                    <span>{parsePrice(product?.price)}</span>
+                  )}
+                  {product?.offer_price !== null && product?.in_offer !== 0 && !(isSoldOut || maxProductQuantity <= 0) && (
                     <span className='off-price'>{parsePrice(product?.offer_price)}</span>
                   )}
                 </PriceWrapper>
