@@ -81,7 +81,8 @@ const PaymentOptionsUI = (props) => {
     isCustomerMode,
     isOpenMethod,
     setCardData,
-    onPlaceOrderClick
+    onPlaceOrderClick,
+    setCreateOrder
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -307,6 +308,7 @@ const PaymentOptionsUI = (props) => {
               cartUuid: cart.uuid
             }}
             onPlaceOrderClick={onPlaceOrderClick}
+            setCreateOrder={setCreateOrder}
           />
         </Modal>
       </PaymentMethodsContainer>
