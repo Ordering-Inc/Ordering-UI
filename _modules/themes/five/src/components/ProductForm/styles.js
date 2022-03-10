@@ -117,7 +117,7 @@ var Properties = _styledComponents.default.div(_templateObject22 || (_templateOb
 
 exports.Properties = Properties;
 
-var ProductDescription = _styledComponents.default.p(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n"])));
+var ProductDescription = _styledComponents.default.p(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n  white-space: pre-line;\n"])));
 
 exports.ProductDescription = ProductDescription;
 
