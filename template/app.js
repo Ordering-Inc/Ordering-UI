@@ -48,7 +48,8 @@ export const App = () => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
 
-  const isEmailVerifyRequired = auth && (configs?.verification_email_required?.value === '1' || true) && !user?.email_verified
+  const isWalletEnabled = configs?.wallet_enabled?.value === '1'
+  const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
 
   const closeAlert = () => {
     setAlertState({
@@ -177,7 +178,9 @@ export const App = () => {
                     {auth
                       ? isEmailVerifyRequired
                         ? <Redirect to='/verify' />
-                        : <Wallets />
+                        : isWalletEnabled
+                          ? <Wallets />
+                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
                       : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/profile/orders'>

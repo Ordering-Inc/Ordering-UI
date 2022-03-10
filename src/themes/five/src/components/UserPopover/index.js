@@ -1,5 +1,12 @@
 import React, { useRef, useEffect } from 'react'
-import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer } from 'ordering-components'
+import {
+  LogoutAction as LogoutActionController,
+  useLanguage,
+  useSession,
+  useEvent,
+  useCustomer,
+  useConfig
+} from 'ordering-components'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
@@ -22,13 +29,6 @@ const optionsDefault = [
   { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders' }
 ]
 
-const extraOptions = [
-  { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account' },
-  { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets' },
-  { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages' },
-  { name: 'help', pathname: '/help', displayName: 'help', key: 'help' }
-]
-
 export const UserPopover = (props) => {
   const {
     open,
@@ -38,11 +38,21 @@ export const UserPopover = (props) => {
     isCustomerMode
   } = props
   const [sessionState] = useSession()
+  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
   const [events] = useEvent()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
+
+  const isWalletEnabled = configs?.wallet_enabled?.value === '1'
+
+  const extraOptions = [
+    { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
+    { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: isWalletEnabled },
+    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: true },
+    { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true }
+  ]
 
   const options = isCustomerMode
     ? optionsDefault.filter(option => option.name === 'profile')
@@ -141,7 +151,7 @@ export const UserPopover = (props) => {
           <ExtraOptions>
             {
               extraOptions && extraOptions.length > 0 && (
-                extraOptions.map((option, i) => (
+                extraOptions.map((option, i) => option.isActive && (
                   <PopoverListLink
                     key={i}
                     active={window.location.pathname === option.pathname}

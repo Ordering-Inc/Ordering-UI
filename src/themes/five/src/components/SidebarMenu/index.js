@@ -11,7 +11,7 @@ import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
 
-import { useEvent, useLanguage, useOrder, useSession } from 'ordering-components'
+import { useEvent, useLanguage, useOrder, useSession, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
@@ -38,6 +38,7 @@ export const SidebarMenu = (props) => {
   const { auth, isHideSignup, userCustomer, isCustomerMode } = props
   const [, { login }] = useSession()
   const [events] = useEvent()
+  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
   const theme = useTheme()
@@ -45,6 +46,8 @@ export const SidebarMenu = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
+
+  const isWalletEnabled = configs?.wallet_enabled?.value === '1'
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
 
@@ -230,36 +233,38 @@ export const SidebarMenu = (props) => {
                   </MenuLinkSeparator>
                 </WrappContent>
               </MenuLink>
-              <MenuLink
-                isHome={isHome}
-                onClick={() => handleGoToPage({ page: 'wallets' })}
-              >
-                <WrappContent>
-                  <MenuLinkIcon
-                    isHome={isHome}
-                    active={
-                      window.location.pathname === '/wallets'
-                    }
-                  >
-                    <BiWallet />
-                  </MenuLinkIcon>
-                  <MenuLinkText>
-                    <TextInfo
+              {isWalletEnabled && (
+                <MenuLink
+                  isHome={isHome}
+                  onClick={() => handleGoToPage({ page: 'wallets' })}
+                >
+                  <WrappContent>
+                    <MenuLinkIcon
                       isHome={isHome}
                       active={
                         window.location.pathname === '/wallets'
                       }
                     >
-                      {t('WALLETS', 'Wallets')}
-                    </TextInfo>
-                  </MenuLinkText>
-                  <MenuLinkSeparator>
-                    <div>
-                      <hr />
-                    </div>
-                  </MenuLinkSeparator>
-                </WrappContent>
-              </MenuLink>
+                      <BiWallet />
+                    </MenuLinkIcon>
+                    <MenuLinkText>
+                      <TextInfo
+                        isHome={isHome}
+                        active={
+                          window.location.pathname === '/wallets'
+                        }
+                      >
+                        {t('WALLETS', 'Wallets')}
+                      </TextInfo>
+                    </MenuLinkText>
+                    <MenuLinkSeparator>
+                      <div>
+                        <hr />
+                      </div>
+                    </MenuLinkSeparator>
+                  </WrappContent>
+                </MenuLink>
+              )}
               <MenuLink
                 isHome={isHome}
                 onClick={() => handleGoToPage({ page: 'help' })}
