@@ -393,6 +393,7 @@ const CheckoutUI = (props) => {
                 setCardData={setCardData}
                 handlePlaceOrder={handlePlaceOrder}
                 onPlaceOrderClick={onPlaceOrderClick}
+                setCreateOrder={setCreateOrder}
               />
             </PaymentMethodContainer>
           )}
