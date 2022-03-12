@@ -347,7 +347,7 @@ const OrderDetailsUI = (props) => {
                       </ActionsBlock>
                     </OrderDriver>
                   </>
-                  {order?.driver?.location && typeof order?.driver?.location?.location !== 'string' && parseInt(order?.status) === 9 && (
+                  {order?.driver?.location?.lat && order?.driver?.location?.lng && parseInt(order?.status) === 9 && (
                     <>
                       <Map>
                         <GoogleMapsMap
