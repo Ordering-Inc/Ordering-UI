@@ -449,6 +449,7 @@ export const Header = (props) => {
           <Modal
             open={authModalOpen}
             onRemove={() => closeAuthModal()}
+            onClose={() => closeAuthModal()}
             width='50%'
             authModal
           >
