@@ -36,13 +36,11 @@ export const Text = styled.div`
   display: flex;
   font-weight: 300;
   color: #555;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0 5px;
 
   div {
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 14px;
@@ -66,7 +64,7 @@ export const Text = styled.div`
 export const SubOptionThumbnail = styled.div`
   display: inline-block;
   border-radius: 8px;
-  background-image: url(${({src}) => src});
+  background-image: url(${({ src }) => src});
   background-repeat: no-repeat, repeat;
   width: 40px;
   height: 40px;
@@ -148,8 +146,23 @@ export const SuboptionPrice = styled.div`
   font-size: 14px;
   color: ${props => props.theme.colors.darkGray};
   margin-left: 5px;
+  min-width: 60px;
+  max-width: 60px;
   ${props => props.theme?.rtl && css`
     margin-right: 5px;
     margin-left: 0px;
   `}
+`
+
+export const LeftOptionContainer = styled.div`
+  display: flex;
+  width: 70%;
+  align-items: center;
+`
+
+export const RightOptionContainer = styled.div`
+  display: flex;
+  width: 25%;
+  align-items: center;
+  justify-content: space-between;
 `

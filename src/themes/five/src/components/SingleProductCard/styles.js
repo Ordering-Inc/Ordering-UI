@@ -93,6 +93,7 @@ export const CardInfo = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    white-space: pre-wrap;
   }
 
   span {

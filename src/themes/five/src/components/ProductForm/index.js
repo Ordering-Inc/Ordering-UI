@@ -246,6 +246,7 @@ const ProductOptionsUI = (props) => {
                 <Swiper
                   spaceBetween={10}
                   navigation
+                  watchOverflow
                   thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
                 >
                   {gallery.map((img, i) => (
@@ -283,6 +284,7 @@ const ProductOptionsUI = (props) => {
                   freeMode
                   watchSlidesProgress
                   className='product-thumb'
+                  watchOverflow
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
@@ -303,8 +305,8 @@ const ProductOptionsUI = (props) => {
                     <PriceContent>{parsePrice(pricePerWeightUnit)} / {product?.weight_unit}</PriceContent>
                   ) : (
                     <PriceContent>
-                      {parsePrice(product?.price)}{' '}
-                      {product?.in_offer && (<span className='offer-price'>{parsePrice(product?.offer_price)}</span>)}
+                      {product?.price ? parsePrice(product?.price) : ''}
+                      {product?.in_offer && (<span className='offer-price'>{product?.offer_price ? parsePrice(product?.offer_price) : ''}</span>)}
                     </PriceContent>
                   )}
                   <ProductMeta>
