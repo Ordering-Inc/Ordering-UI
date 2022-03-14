@@ -159,7 +159,7 @@ const OrderDetailsUI = (props) => {
   }
 
   const locations = [
-    { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
+    { location: { lat: order?.driver?.location?.lat, lng: order?.driver?.location?.lng }, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
     { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
@@ -347,7 +347,7 @@ const OrderDetailsUI = (props) => {
                       </ActionsBlock>
                     </OrderDriver>
                   </>
-                  {order?.driver?.location && parseInt(order?.status) === 9 && (
+                  {order?.driver?.location?.lat && order?.driver?.location?.lng && parseInt(order?.status) === 9 && (
                     <>
                       <Map>
                         <GoogleMapsMap

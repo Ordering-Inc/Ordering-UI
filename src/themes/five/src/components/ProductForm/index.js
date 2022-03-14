@@ -246,6 +246,7 @@ const ProductOptionsUI = (props) => {
                 <Swiper
                   spaceBetween={10}
                   navigation
+                  watchOverflow
                   thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
                 >
                   {gallery.map((img, i) => (
@@ -283,6 +284,7 @@ const ProductOptionsUI = (props) => {
                   freeMode
                   watchSlidesProgress
                   className='product-thumb'
+                  watchOverflow
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
