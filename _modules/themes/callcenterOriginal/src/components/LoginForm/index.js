@@ -15,8 +15,6 @@ var _reactHookForm = require("react-hook-form");
 
 var _styledComponents = require("styled-components");
 
-var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _orderingComponents = require("ordering-components");
 
 var _Confirm = require("../Confirm");
@@ -33,12 +31,6 @@ var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _FacebookLogin = require("../FacebookLogin");
-
-var _AppleLogin = require("../AppleLogin");
-
-var _SmsLogin = require("../../../../../components/SmsLogin");
-
 var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
 
 var _utils = require("../../../../../utils");
@@ -47,9 +39,11 @@ var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
 var _reactOtpInput = _interopRequireDefault(require("react-otp-input"));
 
-var _GoogleLogin = require("../GoogleLogin");
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+require("react/cjs/react.production.min");
+
+var _ConfigFileContext = require("../../../../../contexts/ConfigFileContext");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -57,13 +51,13 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -82,7 +76,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _configs$google_login, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -92,7 +86,6 @@ var LoginFormUI = function LoginFormUI(props) {
       handleButtonLoginClick = props.handleButtonLoginClick,
       handleSendVerifyCode = props.handleSendVerifyCode,
       handleCheckPhoneCode = props.handleCheckPhoneCode,
-      elementLinkToSignup = props.elementLinkToSignup,
       elementLinkToForgotPassword = props.elementLinkToForgotPassword,
       formState = props.formState,
       verifyPhoneState = props.verifyPhoneState,
@@ -103,17 +96,17 @@ var LoginFormUI = function LoginFormUI(props) {
       enableReCaptcha = props.enableReCaptcha;
   var numOtpInputs = 4;
 
+  var _useApi = (0, _orderingComponents.useApi)(),
+      _useApi2 = _slicedToArray(_useApi, 1),
+      ordering = _useApi2[0];
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
   var formMethods = (0, _reactHookForm.useForm)();
+  var emailInput = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -123,16 +116,10 @@ var LoginFormUI = function LoginFormUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 2),
-      login = _useSession2[1].login;
-
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
       passwordSee = _useState4[0],
       setPasswordSee = _useState4[1];
-
-  var emailInput = (0, _react.useRef)(null);
 
   var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -149,10 +136,25 @@ var LoginFormUI = function LoginFormUI(props) {
       validPhoneFieldState = _useState10[0],
       setValidPhoneField = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(''),
+  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
+      _useContext2 = _slicedToArray(_useContext, 2),
+      configFile = _useContext2[0],
+      setConfigFile = _useContext2[1];
+
+  var _useState11 = (0, _react.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      otpState = _useState12[0],
-      setOtpState = _useState12[1];
+      projectName = _useState12[0],
+      setProjectName = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      submitted = _useState14[0],
+      setSubmitted = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      otpState = _useState16[0],
+      setOtpState = _useState16[1];
 
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
       _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
@@ -160,14 +162,10 @@ var LoginFormUI = function LoginFormUI(props) {
       _ = _useCountdownTimer2[1],
       resetOtpLeftTime = _useCountdownTimer2[2];
 
-  var initParams = {
-    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
-    cookiepolicy: 'single_host_origin',
-    scope: 'profile'
-  };
-
   var onSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      var _configFile;
+
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -190,13 +188,17 @@ var LoginFormUI = function LoginFormUI(props) {
 
             case 4:
               setWillVerifyOtpState(true);
-              _context.next = 8;
+              _context.next = 12;
               break;
 
             case 7:
-              handleButtonLoginClick();
+              _configFile = configFile;
+              _configFile.project = projectName;
+              setConfigFile(_objectSpread({}, _configFile));
+              localStorage.setItem('project', projectName);
+              setSubmitted(true);
 
-            case 8:
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -208,33 +210,6 @@ var LoginFormUI = function LoginFormUI(props) {
       return _ref.apply(this, arguments);
     };
   }();
-
-  var handleSuccessFacebook = function handleSuccessFacebook(user) {
-    var _user$session;
-
-    login({
-      user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
-    });
-  };
-
-  var handleSuccessApple = function handleSuccessApple(user) {
-    var _user$session2;
-
-    login({
-      user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
-    });
-  };
-
-  var handleSuccessGoogle = function handleSuccessGoogle(user) {
-    var _user$session3;
-
-    login({
-      user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session3 = user.session) === null || _user$session3 === void 0 ? void 0 : _user$session3.access_token
-    });
-  };
 
   var togglePasswordView = function togglePasswordView() {
     setPasswordSee(!passwordSee);
@@ -286,6 +261,11 @@ var LoginFormUI = function LoginFormUI(props) {
     formMethods.setValue('cellphone', number, '');
   };
 
+  var handleChangeProject = function handleChangeProject(e) {
+    setSubmitted(false);
+    setProjectName(e.target.value);
+  };
+
   var handleSendOtp = function handleSendOtp() {
     if (willVerifyOtpState) {
       var _parseNumber = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone),
@@ -310,6 +290,7 @@ var LoginFormUI = function LoginFormUI(props) {
         open: true,
         content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
+      setSubmitted(false);
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
@@ -374,6 +355,10 @@ var LoginFormUI = function LoginFormUI(props) {
       });
     } else resetOtpLeftTime();
   }, [verifyPhoneState]);
+  (0, _react.useEffect)(function () {
+    if (ordering.project === null || !submitted) return;
+    handleButtonLoginClick();
+  }, [ordering, submitted]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -425,7 +410,20 @@ var LoginFormUI = function LoginFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    type: "text",
+    name: "project",
+    "aria-label": "project",
+    placeholder: t('PROJECT', 'Project'),
+    ref: formMethods.register({
+      required: t('VALIDATION_ERROR_REQUIRED', 'Project is required').replace('_attribute_', t('PROJECT', 'Project'))
+    }),
+    onChange: function onChange(e) {
+      return handleChangeProject(e);
+    },
+    autoComplete: "off",
+    autoCapitalize: "off"
+  }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowInRight, null))), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "email",
     name: "email",
     "aria-label": "email",

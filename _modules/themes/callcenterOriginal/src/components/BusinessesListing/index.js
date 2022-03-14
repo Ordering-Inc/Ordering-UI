@@ -43,6 +43,8 @@ var _HighestRated = require("../HighestRated");
 
 var _BusinessPreorder = require("../BusinessPreorder");
 
+var _OrderProgress = require("../OrderProgress");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -245,12 +247,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.businessHero
-  }), isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderProgress.OrderProgress, {
+    userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
+    asDashboard: true
+  })), isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
     horizontal: true,
     isBusinessesPage: true,
     onRedirectPage: onRedirectPage,
     titleContent: t('CARTS', 'Carts'),
-    businessesIds: businessesIds,
     customArray: (_getCustomArray = getCustomArray(orderState.carts)) === null || _getCustomArray === void 0 ? void 0 : _getCustomArray.filter(function (cart) {
       return cart.products.length > 0;
     }),
@@ -260,7 +264,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     horizontal: true,
     asDashboard: true,
     isBusinessesPage: true,
-    businessesIds: businessesIds,
     onRedirectPage: onRedirectPage,
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     isCustomLayout: true,

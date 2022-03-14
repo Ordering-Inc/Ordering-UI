@@ -213,13 +213,18 @@ var OrderProgressUI = function OrderProgressUI(props) {
     return returnedDate;
   };
 
-  var handleGoToPage = function handleGoToPage(index) {
+  var handleGoToPage = function handleGoToPage() {
     events.emit('go_to_page', {
-      page: index
+      page: 'order_detail',
+      params: {
+        orderId: lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.uuid
+      }
     });
   };
 
   (0, _react.useEffect)(function () {
+    console.log(orderList);
+
     if ((orderList === null || orderList === void 0 ? void 0 : orderList.orders.length) > 0) {
       var sortedOrders = orderList.orders.sort(function (a, b) {
         return a.id > b.id ? -1 : 1;
@@ -237,7 +242,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     onClick: function onClick() {
       return handleGoToPage('orders');
     }
-  }, t('GO_TO_MY_ORDERS', 'Go to my orders'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ProgressBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressBar, {
+  }, t('GO_TO_THE_ORDER', 'Go to the order'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ProgressBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressBar, {
     style: {
       width: (_getOrderStatus = getOrderStatus(lastOrder.status)) !== null && _getOrderStatus !== void 0 && _getOrderStatus.percentage ? "".concat(getOrderStatus(lastOrder.status).percentage, "%") : '0%'
     }

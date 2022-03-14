@@ -261,7 +261,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     placeholder: t('PHONE_NUMBER', 'Phone number'),
     value: optSelected,
     noOptionsMessage: function noOptionsMessage() {
-      return t('NO_OPTIONS', 'No options');
+      return (inputValue === null || inputValue === void 0 ? void 0 : inputValue.length) > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions');
     },
     inputValue: !optSelected ? inputValue : '',
     onChange: onChange,
@@ -270,7 +270,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     options: optionsToSelect
   })), /*#__PURE__*/_react.default.createElement(_styles.WrappBtn, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: inputValue || userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2$ = _orderState$options2.address) !== null && _orderState$options2$ !== void 0 && _orderState$options2$.address ? 'primary' : 'secundary',
-    onClick: function onClick() {
+    onMouseDown: function onMouseDown() {
       var _orderState$options3, _orderState$options3$;
 
       return !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && (_orderState$options3$ = _orderState$options3.address) !== null && _orderState$options3$ !== void 0 && _orderState$options3$.address) ? createNewUser() : handleFindClick();
