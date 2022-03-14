@@ -298,8 +298,11 @@ export const BussinessAndDriverSignUp = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  width: 95%;
 
+  @media (min-width: 481px) {
+    width: ${({ isPopup }) => isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)'};
+  }
+  
   @media (min-width: 993px) {
     flex-direction: row;
   }
@@ -308,6 +311,6 @@ export const BussinessAndDriverSignUp = styled.div`
     width: 100%;
     margin-top: 15px;
     padding: 5px;
-
+    margin: 0 10px;
   }
 `

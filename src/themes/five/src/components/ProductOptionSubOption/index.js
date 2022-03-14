@@ -16,7 +16,9 @@ import {
   PositionControl,
   IconControl,
   Text,
-  SubOptionThumbnail
+  SubOptionThumbnail,
+  LeftOptionContainer,
+  RightOptionContainer
 } from './styles'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
@@ -79,64 +81,73 @@ const ProductOptionSubOptionUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container onClick={() => handleSuboptionClick()}>
-        <IconControl>
-          {((option?.min === 0 && option?.max === 1) || option?.max > 1) ? (
-            state?.selected ? (
-              <MdCheckBox />
+        <LeftOptionContainer>
+          <IconControl>
+            {((option?.min === 0 && option?.max === 1) || option?.max > 1) ? (
+              state?.selected ? (
+                <MdCheckBox />
+              ) : (
+                <MdCheckBoxOutlineBlank disabled />
+              )
             ) : (
-              <MdCheckBoxOutlineBlank disabled />
-            )
-          ) : (
-            state?.selected ? (
-              <RiRadioButtonFill />
-            ) : (
-              <MdRadioButtonUnchecked disabled />
-            )
+              state?.selected ? (
+                <RiRadioButtonFill />
+              ) : (
+                <MdRadioButtonUnchecked disabled />
+              )
+            )}
+          </IconControl>
+          {suboption.image && suboption.image !== '-' && (
+            <SubOptionThumbnail src={suboption.image} />
           )}
-        </IconControl>
-        {suboption.image && suboption.image !== '-' && (
-          <SubOptionThumbnail src={suboption.image} />
-        )}
-        <Text>
-          <div>{suboption?.name}</div>
-          {showMessage && <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option?.max}`}</span>}
-        </Text>
-        {option?.allow_suboption_quantity && state?.selected && (
+          <Text>
+            <div>{suboption?.name}</div>
+            {showMessage && <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option?.max}`}</span>}
+          </Text>
+        </LeftOptionContainer>
+        <RightOptionContainer>
+
           <QuantityControl>
-            <BsDashCircle
-              disabled={state.quantity === 0 || isSoldOut}
-              onClick={handleDecrement}
-            />
-            {state.quantity}
-            <BsPlusCircle
-              disabled={disableIncrement || isSoldOut}
-              onClick={handleIncrement}
-            />
+            {option?.allow_suboption_quantity && state?.selected && (
+              <>
+                <BsDashCircle
+                  disabled={state.quantity === 0 || isSoldOut}
+                  onClick={handleDecrement}
+                />
+                {state.quantity}
+                <BsPlusCircle
+                  disabled={disableIncrement || isSoldOut}
+                  onClick={handleIncrement}
+                />
+              </>
+            )}
           </QuantityControl>
-        )}
-        {
-          option?.with_half_option && state?.selected && (
-            <PositionControl>
-              <BsCircleHalf
-                className={['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}
-                onClick={(e) => handlePosition(e, 'left')}
-              />
-              <BsCircleFill
-                className={[state.selected && state.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
-                onClick={(e) => handlePosition(e, 'whole')}
-              />
-              <BsCircleHalf
-                className={[state.selected && state.position === 'right' ? 'selected' : null].filter(classname => classname).join(' ')}
-                onClick={(e) => handlePosition(e, 'right')}
-              />
-            </PositionControl>
-          )
-        }
-        {price > 0 && (
-          <SuboptionPrice>
-            + {parsePrice(price)}
-          </SuboptionPrice>
-        )}
+          <PositionControl>
+            {
+              option?.with_half_option && state?.selected && (
+                <>
+                  <BsCircleHalf
+                    className={['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}
+                    onClick={(e) => handlePosition(e, 'left')}
+                  />
+                  <BsCircleFill
+                    className={[state.selected && state.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
+                    onClick={(e) => handlePosition(e, 'whole')}
+                  />
+                  <BsCircleHalf
+                    className={[state.selected && state.position === 'right' ? 'selected' : null].filter(classname => classname).join(' ')}
+                    onClick={(e) => handlePosition(e, 'right')}
+                  />
+                </>
+              )
+            }
+          </PositionControl>
+        </RightOptionContainer>
+        <SuboptionPrice>
+          {price > 0 && (
+            <>+ {parsePrice(price)}</>
+          )}
+        </SuboptionPrice>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
