@@ -148,7 +148,7 @@ const BusinessesListingUI = (props) => {
       <BusinessContainer>
         <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
         <OrderProgressWrapper>
-          <OrderProgress />
+          <OrderProgress userCustomerId={userCustomer?.id} asDashboard />
         </OrderProgressWrapper>
         {isCustomLayout && onRedirectPage && (
           <>
