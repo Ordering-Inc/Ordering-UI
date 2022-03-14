@@ -98,9 +98,9 @@ var SingleProductCard = function SingleProductCard(props) {
     soldOut: isSoldOut || maxProductQuantity <= 0
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, (product === null || product === void 0 ? void 0 : product.price) !== 0 && /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)), (product === null || product === void 0 ? void 0 : product.offer_price) !== null && (product === null || product === void 0 ? void 0 : product.in_offer) !== 0 && !(isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement("span", {
+  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : ''), !(isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement("span", {
     className: "off-price"
-  }, parsePrice(product === null || product === void 0 ? void 0 : product.offer_price))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, product !== null && product !== void 0 && product.offer_price ? parsePrice(product === null || product === void 0 ? void 0 : product.offer_price) : '')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
