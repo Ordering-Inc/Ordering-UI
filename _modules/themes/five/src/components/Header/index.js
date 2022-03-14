@@ -495,6 +495,9 @@ var Header = function Header(props) {
     onRemove: function onRemove() {
       return closeAuthModal();
     },
+    onClose: function onClose() {
+      return closeAuthModal();
+    },
     width: "50%",
     authModal: true
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {

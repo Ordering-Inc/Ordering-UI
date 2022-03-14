@@ -341,6 +341,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 10,
     navigation: true,
+    watchOverflow: true,
     thumbs: {
       swiper: thumbsSwiper
     },
@@ -380,7 +381,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     },
     freeMode: true,
     watchSlidesProgress: true,
-    className: "product-thumb"
+    className: "product-thumb",
+    watchOverflow: true
   }, gallery.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: i

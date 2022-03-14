@@ -39,11 +39,13 @@ var TaxInformation = function TaxInformation(props) {
   var includedOnPriceString = (data === null || data === void 0 ? void 0 : data.type) === 1 ? "(".concat(t('INCLUDED_ON_PRICE', 'Included on price'), ")") : "(".concat(t('NOT_INCLUDED_ON_PRICE', 'Not included on price'), ")");
 
   var getFilterValidation = function getFilterValidation(product) {
-    var _product$tax, _product$tax2, _product$tax3, _product$fee, _product$fee2, _product$fee3, _data$discounts;
+    var _product$tax, _product$tax2, _product$tax3, _product$fee, _product$fee2, _product$fee3, _data$discounts, _product$offers;
 
     return type === 'tax' ? (_product$tax = product.tax) !== null && _product$tax !== void 0 && _product$tax.id ? ((_product$tax2 = product.tax) === null || _product$tax2 === void 0 ? void 0 : _product$tax2.id) === (data === null || data === void 0 ? void 0 : data.id) : ((_product$tax3 = product.tax) === null || _product$tax3 === void 0 ? void 0 : _product$tax3.id) === null && (data === null || data === void 0 ? void 0 : data.id) === null : type === 'fee' ? (_product$fee = product.fee) !== null && _product$fee !== void 0 && _product$fee.id ? ((_product$fee2 = product.fee) === null || _product$fee2 === void 0 ? void 0 : _product$fee2.id) === (data === null || data === void 0 ? void 0 : data.id) : ((_product$fee3 = product.fee) === null || _product$fee3 === void 0 ? void 0 : _product$fee3.id) === null && (data === null || data === void 0 ? void 0 : data.id) === null : Object.keys((_data$discounts = data === null || data === void 0 ? void 0 : data.discounts) !== null && _data$discounts !== void 0 ? _data$discounts : {}).map(function (code) {
       return code.includes(product === null || product === void 0 ? void 0 : product.code);
-    });
+    }) && (product === null || product === void 0 ? void 0 : (_product$offers = product.offers) === null || _product$offers === void 0 ? void 0 : _product$offers.find(function (offer) {
+      return (offer === null || offer === void 0 ? void 0 : offer.name) === (data === null || data === void 0 ? void 0 : data.name);
+    }));
   };
 
   var getTypeString = function getTypeString() {

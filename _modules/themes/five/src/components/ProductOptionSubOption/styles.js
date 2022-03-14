@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Text = exports.SuboptionPrice = exports.SubOptionThumbnail = exports.QuantityControl = exports.PositionControl = exports.IconControl = exports.Container = void 0;
+exports.Text = exports.SuboptionPrice = exports.SubOptionThumbnail = exports.RightOptionContainer = exports.QuantityControl = exports.PositionControl = exports.LeftOptionContainer = exports.IconControl = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -33,7 +33,7 @@ var IconControl = _styledComponents.default.div(_templateObject2 || (_templateOb
 
 exports.IconControl = IconControl;
 
-var Text = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex: 1 1 auto;\n  display: flex;\n  font-weight: 300;\n  color: #555;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 0 5px;\n\n  div {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 14px;\n    color: ", ";\n  }\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    ", "\n  }\n"])), function (props) {
+var Text = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex: 1 1 auto;\n  display: flex;\n  font-weight: 300;\n  color: #555;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 0 5px;\n\n  div {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 14px;\n    color: ", ";\n  }\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.darkGray;
 }, function (props) {
   return props.theme.colors.primary;
@@ -82,7 +82,7 @@ var PositionControl = _styledComponents.default.div(_templateObject10 || (_templ
 
 exports.PositionControl = PositionControl;
 
-var SuboptionPrice = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  white-space: nowrap;\n  font-weight: 300;\n  font-size: 14px;\n  color: ", ";\n  margin-left: 5px;\n  ", "\n"])), function (props) {
+var SuboptionPrice = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  white-space: nowrap;\n  font-weight: 300;\n  font-size: 14px;\n  color: ", ";\n  margin-left: 5px;\n  min-width: 60px;\n  max-width: 60px;\n  ", "\n"])), function (props) {
   return props.theme.colors.darkGray;
 }, function (props) {
   var _props$theme7;
@@ -91,3 +91,11 @@ var SuboptionPrice = _styledComponents.default.div(_templateObject13 || (_templa
 });
 
 exports.SuboptionPrice = SuboptionPrice;
+
+var LeftOptionContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 70%;\n  align-items: center;\n"])));
+
+exports.LeftOptionContainer = LeftOptionContainer;
+
+var RightOptionContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 25%;\n  align-items: center;\n  justify-content: space-between;\n"])));
+
+exports.RightOptionContainer = RightOptionContainer;
