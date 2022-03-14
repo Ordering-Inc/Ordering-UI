@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
-import Skeleton from 'react-loading-skeleton'
 import {
   LoginForm as LoginFormController,
   useLanguage,
-  useConfig,
-  useSession,
-  ReCaptcha
+  ReCaptcha,
+  useApi
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
@@ -17,17 +15,13 @@ import {
   FormSide,
   FormInput,
   RedirectLink,
-  SocialButtons,
   LoginWith,
-  SkeletonSocialWrapper,
   TogglePassword,
   OtpWrapper,
   CountdownTimer,
   ReCaptchaWrapper,
   InputBeforeIcon,
   InputWrapper,
-  LoginDivider,
-  DividerLine,
   Title,
   HeroSide,
   ButtonContainer,
@@ -38,20 +32,19 @@ import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { FacebookLoginButton } from '../FacebookLogin'
-import { AppleLogin } from '../AppleLogin'
-import { SmsLoginButton } from '../../../../../components/SmsLogin'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { formatSeconds } from '../../../../../utils'
 import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
-import { GoogleLoginButton } from '../GoogleLogin'
 import {
   Envelope,
   Lock,
   Eye,
-  EyeSlash
+  EyeSlash,
+  BoxArrowInRight
 } from 'react-bootstrap-icons'
+import { } from 'react/cjs/react.production.min'
+import { ConfigFileContext } from '../../../../../contexts/ConfigFileContext'
 
 const LoginFormUI = (props) => {
   const {
@@ -63,7 +56,6 @@ const LoginFormUI = (props) => {
     handleButtonLoginClick,
     handleSendVerifyCode,
     handleCheckPhoneCode,
-    elementLinkToSignup,
     elementLinkToForgotPassword,
     formState,
     verifyPhoneState,
@@ -74,26 +66,26 @@ const LoginFormUI = (props) => {
     enableReCaptcha
   } = props
   const numOtpInputs = 4
+
+  const [ordering] = useApi()
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ configs }] = useConfig()
   const formMethods = useForm()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [, { login }] = useSession()
-  const [passwordSee, setPasswordSee] = useState(false)
+
   const emailInput = useRef(null)
+
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [passwordSee, setPasswordSee] = useState(false)
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
+  const [configFile, setConfigFile] = useContext(ConfigFileContext)
+
+  const [projectName, setProjectName] = useState(null)
+  const [submitted, setSubmitted] = useState(false)
   const [otpState, setOtpState] = useState('')
   const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
-
-  const initParams = {
-    client_id: configs?.google_login_client_id?.value,
-    cookiepolicy: 'single_host_origin',
-    scope: 'profile'
-  }
 
   const onSubmit = async () => {
     if (loginWithOtpState) {
@@ -107,29 +99,12 @@ const LoginFormUI = (props) => {
       }
       setWillVerifyOtpState(true)
     } else {
-      handleButtonLoginClick()
+      const _configFile = configFile
+      _configFile.project = projectName
+      setConfigFile({ ..._configFile })
+      localStorage.setItem('project', projectName)
+      setSubmitted(true)
     }
-  }
-
-  const handleSuccessFacebook = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
-  }
-
-  const handleSuccessApple = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
-  }
-
-  const handleSuccessGoogle = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
   }
 
   const togglePasswordView = () => {
@@ -171,6 +146,11 @@ const LoginFormUI = (props) => {
     formMethods.setValue('cellphone', number, '')
   }
 
+  const handleChangeProject = (e) => {
+    setSubmitted(false)
+    setProjectName(e.target.value)
+  }
+
   const handleSendOtp = () => {
     if (willVerifyOtpState) {
       const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
@@ -190,6 +170,7 @@ const LoginFormUI = (props) => {
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
       })
+      setSubmitted(false)
     }
   }, [formState])
 
@@ -253,6 +234,11 @@ const LoginFormUI = (props) => {
     } else resetOtpLeftTime()
   }, [verifyPhoneState])
 
+  useEffect(() => {
+    if (ordering.project === null || !submitted) return
+    handleButtonLoginClick()
+  }, [ordering, submitted])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -310,6 +296,26 @@ const LoginFormUI = (props) => {
                 props.beforeMidComponents?.map((BeforeMidComponents, i) => (
                   <BeforeMidComponents key={i} {...props} />))
               }
+              <InputWrapper>
+                <Input
+                  type='text'
+                  name='project'
+                  aria-label='project'
+                  placeholder={t('PROJECT', 'Project')}
+                  ref={formMethods.register({
+                    required: t(
+                      'VALIDATION_ERROR_REQUIRED',
+                      'Project is required'
+                    ).replace('_attribute_', t('PROJECT', 'Project'))
+                  })}
+                  onChange={(e) => handleChangeProject(e)}
+                  autoComplete='off'
+                  autoCapitalize='off'
+                />
+                <InputBeforeIcon>
+                  <BoxArrowInRight />
+                </InputBeforeIcon>
+              </InputWrapper>
               {useLoginByEmail && loginTab === 'email' && (
                 <InputWrapper>
                   <Input

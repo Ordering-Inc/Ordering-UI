@@ -94,6 +94,7 @@ import { SmsLoginButton } from './components/SmsLogin'
 import { AppleLogin } from './components/AppleLogin'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
+import { ConfigFileContext } from './contexts/ConfigFileContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
 import { useCountdownTimer } from './hooks/useCountdownTimer'
@@ -217,6 +218,7 @@ export {
   ThemeContext,
   ThemeProvider,
   useTheme,
+  ConfigFileContext,
   // Hooks
   useOnlineStatus,
   useWindowSize,
