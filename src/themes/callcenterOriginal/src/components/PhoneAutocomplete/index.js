@@ -49,7 +49,6 @@ const PhoneAutocompleteUI = (props) => {
   const [optSelected, setOptSelected] = useState(null)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
-
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const userName = userCustomer?.lastname
@@ -151,7 +150,7 @@ const PhoneAutocompleteUI = (props) => {
                 classNamePrefix='select'
                 placeholder={t('PHONE_NUMBER', 'Phone number')}
                 value={optSelected}
-                noOptionsMessage={() => t('NO_OPTIONS', 'No options')}
+                noOptionsMessage={() => inputValue?.length > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')}
                 inputValue={!optSelected ? inputValue : ''}
                 onChange={onChange}
                 onInputChange={onInputChange}
@@ -163,7 +162,7 @@ const PhoneAutocompleteUI = (props) => {
           <WrappBtn>
             <Button
               color={inputValue || (userCustomer && orderState?.options?.address?.address) ? 'primary' : 'secundary'}
-              onClick={() => !(userCustomer && orderState?.options?.address?.address) ? createNewUser() : handleFindClick()}
+              onMouseDown={() => !(userCustomer && orderState?.options?.address?.address) ? createNewUser() : handleFindClick()}
               disabled={!inputValue && !(userCustomer && orderState?.options?.address?.address)}
             >
               {
