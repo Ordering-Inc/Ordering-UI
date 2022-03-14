@@ -75,11 +75,12 @@ const OrderProgressUI = (props) => {
     return returnedDate
   }
 
-  const handleGoToPage = (index) => {
-    events.emit('go_to_page', { page: index })
+  const handleGoToPage = () => {
+    events.emit('go_to_page', { page: 'order_detail', params: { orderId: lastOrder?.uuid } })
   }
 
   useEffect(() => {
+    console.log(orderList)
     if (orderList?.orders.length > 0) {
       const sortedOrders = orderList.orders.sort((a, b) => a.id > b.id ? -1 : 1)
       setLastOrder(sortedOrders[0])
@@ -101,7 +102,7 @@ const OrderProgressUI = (props) => {
                 naked
                 onClick={() => handleGoToPage('orders')}
               >
-                {t('GO_TO_MY_ORDERS', 'Go to my orders')}
+                {t('GO_TO_THE_ORDER', 'Go to the order')}
                 <BsArrowRight />
               </Button>
             </ProgressDescriptionWrapper>

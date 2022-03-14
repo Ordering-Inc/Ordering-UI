@@ -14,7 +14,6 @@ import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
 import BsPhone from '@meronex/icons/bs/BsPhone'
 import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
 import AiOutlineExclamationCircle from '@meronex/icons/ai/AiOutlineExclamationCircle'
-import BsArrowLeft from '@meronex/icons/bs/BsArrowLeft'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -22,7 +21,6 @@ import { NotFoundSource } from '../NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
-import { ReviewOrder } from '../../../../../components/ReviewOrder'
 import { ProductShare } from '../ProductShare'
 
 import {
@@ -51,9 +49,7 @@ import {
   ExclamationWrapper,
   Divider,
   MyOrderActions,
-  ReviewOrderLink,
   SkeletonWrapper,
-  ReviewWrapper,
   Exclamation,
   CommentContainer,
   TitleContainer,
@@ -61,10 +57,9 @@ import {
   OrderPreferences,
   HeaderTitle
 } from './styles'
+
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
-import { ReviewProduct } from '../../../../../components/ReviewProduct'
-import { ReviewDriver } from '../../../../../components/ReviewDriver'
 import { TaxInformation } from '../TaxInformation'
 
 const OrderDetailsUI = (props) => {
@@ -88,12 +83,7 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
-  const [isOrderReviewed, setIsOrderReviewed] = useState(false)
-  const [isProductReviewed, setIsProductReviewed] = useState(false)
-  const [isDriverReviewed, setIsDriverReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
-  const [isReviewOpen, setIsReviewOpen] = useState(false)
-  const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
 
   const { order, loading, businessData, error } = props.order
@@ -158,36 +148,6 @@ const OrderDetailsUI = (props) => {
     { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
-
-  const handleOpenReview = () => {
-    if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
-    else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
-    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
-    else {
-      setIsReviewOpen(false)
-      return
-    }
-    setIsReviewOpen(true)
-  }
-
-  const handleCloseReivew = () => {
-    setReviewStatus({ order: false, product: false, driver: false })
-    setIsReviewOpen(false)
-  }
-
-  const closeReviewOrder = () => {
-    if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
-    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
-    else handleCloseReivew()
-  }
-
-  const closeReviewProduct = () => {
-    if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
-    else {
-      setIsDriverReviewed(true)
-      handleCloseReivew()
-    }
-  }
 
   const getIncludedTaxes = () => {
     if (order?.taxes?.length === 0) {
@@ -257,20 +217,6 @@ const OrderDetailsUI = (props) => {
                       : parseDate(order?.delivery_datetime, { utc: false })
                   }
                 </p>
-                <ReviewOrderLink
-                  className='Review-order'
-                  active={(
-                    parseInt(order?.status) === 1 ||
-                    parseInt(order?.status) === 2 ||
-                    parseInt(order?.status) === 5 ||
-                    parseInt(order?.status) === 6 ||
-                    parseInt(order?.status) === 10 ||
-                    parseInt(order?.status) === 11 ||
-                    parseInt(order?.status) === 12
-                  ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
-                >
-                  <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                </ReviewOrderLink>
               </TitleContainer>
               <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
@@ -558,32 +504,6 @@ const OrderDetailsUI = (props) => {
             />
           )
         )}
-        {
-          isReviewOpen && (
-            <Modal
-              open={isReviewOpen}
-              onClose={handleCloseReivew}
-              title={order
-                ? (reviewStatus?.order
-                  ? t('REVIEW_ORDER', 'Review order')
-                  : (reviewStatus?.product
-                    ? t('REVIEW_PRODUCT', 'Review Product')
-                    : t('REVIEW_DRIVER', 'Review Driver')))
-                : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
-            >
-              <ReviewWrapper>
-                {
-                  reviewStatus?.order
-                    ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
-                    : (reviewStatus?.product
-                      ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
-                      : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
-                }
-              </ReviewWrapper>
-
-            </Modal>
-          )
-        }
         <Modal
           width='70%'
           open={openTaxModal.open}
