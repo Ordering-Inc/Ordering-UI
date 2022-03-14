@@ -37,6 +37,7 @@ import {
 } from 'ordering-components'
 import { HighestRated } from '../HighestRated'
 import { BusinessPreorder } from '../BusinessPreorder'
+import { OrderProgress } from '../OrderProgress'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -146,6 +147,9 @@ const BusinessesListingUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
         <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
+        <OrderProgressWrapper>
+          <OrderProgress />
+        </OrderProgressWrapper>
         {isCustomLayout && onRedirectPage && (
           <>
             <OrdersOption
@@ -153,7 +157,6 @@ const BusinessesListingUI = (props) => {
               isBusinessesPage
               onRedirectPage={onRedirectPage}
               titleContent={t('CARTS', 'Carts')}
-              businessesIds={businessesIds}
               customArray={
                 getCustomArray(orderState.carts)?.filter(cart => cart.products.length > 0)
               }
@@ -164,7 +167,6 @@ const BusinessesListingUI = (props) => {
               horizontal
               asDashboard
               isBusinessesPage
-              businessesIds={businessesIds}
               onRedirectPage={onRedirectPage}
               userCustomerId={userCustomer?.id}
               isCustomLayout
