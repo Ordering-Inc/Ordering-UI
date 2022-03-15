@@ -49,7 +49,8 @@ export const App = () => {
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
 
   const isWalletEnabled = configs?.wallet_enabled?.value === '1'
-  const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
+  const isEmailVerifyRequired = auth && (configs?.verification_email_required?.value === '1' || true) && !user?.email_verified
+  const isPhoneVerifyRequired = auth && (configs?.verification_phone_required?.value === '1' || true) && configs?.twilio_service_enabled?.value === '1' && !user?.phone_verified
 
   const closeAlert = () => {
     setAlertState({

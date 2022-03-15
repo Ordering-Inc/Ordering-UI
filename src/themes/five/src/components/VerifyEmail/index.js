@@ -3,7 +3,8 @@ import OtpInput from 'react-otp-input'
 import {
   VerifyEmail as VerifyEmailController,
   useSession,
-  useLanguage
+  useLanguage,
+  useConfig
 } from 'ordering-components'
 
 import { Envelope } from 'react-bootstrap-icons'
@@ -34,10 +35,14 @@ const VerifyEmailUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ user }] = useSession()
+  const [{ configs }] = useConfig()
+  const [{ auth, user }] = useSession()
   const [otpState, setOtpState] = useState('')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [emailVerification, setEmailVerification] = useState(false)
+
+  const isEmailVerifyRequired = auth && (configs?.verification_email_required?.value === '1' || true) && !user?.email_verified
+  const isPhoneVerifyRequired = auth && (configs?.verification_phone_required?.value === '1' || true) && configs?.twilio_service_enabled?.value === '1' && !user?.phone_verified
 
   const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(600, emailVerification)
 
