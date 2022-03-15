@@ -45,7 +45,7 @@ export const UserPopover = (props) => {
   const popperElement = useRef()
   const arrowElement = useRef()
 
-  const isWalletEnabled = configs?.wallet_enabled?.value === '1'
+  const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
 
   const extraOptions = [
     { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },

@@ -48,7 +48,7 @@ export const App = () => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
 
-  const isWalletEnabled = configs?.wallet_enabled?.value === '1'
+  const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
 
   const closeAlert = () => {
