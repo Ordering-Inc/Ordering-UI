@@ -12,7 +12,7 @@ import {
 const SPACE_CONTANT = 20
 
 const categorySpace = {
-  1: 1 * SPACE_CONTANT,
+  1: 0,
   2: 2 * SPACE_CONTANT,
   3: 3 * SPACE_CONTANT,
   4: 4 * SPACE_CONTANT,
