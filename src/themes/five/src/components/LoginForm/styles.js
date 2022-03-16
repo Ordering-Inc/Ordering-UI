@@ -5,7 +5,7 @@ export const LoginContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  min-height: ${({ isPopup }) => isPopup ? '500px' : 'calc(100vh - 65px)'};
+  min-height: ${({ isPopup }) => isPopup ? '410px' : 'calc(100vh - 65px)'};
   padding: 0 10px;
   box-sizing: border-box;
 
