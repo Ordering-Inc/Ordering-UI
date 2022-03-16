@@ -13,10 +13,10 @@ const SPACE_CONTANT = 20
 
 const categorySpace = {
   1: 0,
-  2: 2 * SPACE_CONTANT,
-  3: 3 * SPACE_CONTANT,
-  4: 4 * SPACE_CONTANT,
-  5: 5 * SPACE_CONTANT,
+  2: 1 * SPACE_CONTANT,
+  3: 2 * SPACE_CONTANT,
+  4: 3 * SPACE_CONTANT,
+  5: 4 * SPACE_CONTANT
 }
 
 const BusinessProductsCategoriesUI = (props) => {
@@ -26,7 +26,7 @@ const BusinessProductsCategoriesUI = (props) => {
     handlerClickCategory,
     categorySelected,
     featured,
-    openCategories,
+    openCategories
   } = props
 
   const IterateCategories = ({ list, isSub, currentCat }) => {
