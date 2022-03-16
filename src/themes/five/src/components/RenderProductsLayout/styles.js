@@ -29,7 +29,7 @@ export const BusinessContent = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 1200px) {
+  @media (min-width: 993px) {
     flex-direction: row;
   }
 `
@@ -48,21 +48,17 @@ export const BusinessCategoryProductWrapper = styled.div`
     scrollbar-width: none;
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 993px) {
     width: 70%;
   }
 `
 
 export const BusinessCategoriesContainer = styled.div`
   margin: 0;
-  @media (min-width: 1200px) {
+  margin-right: 10px;
+  width: 100%;
+  @media (min-width: 993px) {
     width: calc(31% - 25px);
-    margin-left: 25px;
-
-    ${props => props.theme?.rtl && css`
-      margin-right: 25px;
-      margin-left: 0;
-    `}
   }
 `
 

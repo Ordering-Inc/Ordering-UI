@@ -34,7 +34,7 @@ export const CardContainer = styled.div`
       width: calc(49% - 40px);
     }
 
-    @media (min-width: 993px) {
+    @media (min-width: 1200px) {
       width: calc(33% - 40px);
       margin: 10px 20px 10px 0px;
       ${props => props.theme?.rtl && css`

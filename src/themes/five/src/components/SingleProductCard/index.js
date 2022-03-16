@@ -76,7 +76,7 @@ export const SingleProductCard = (props) => {
                 <PriceWrapper>
                   <span>{product?.price ? parsePrice(product?.price) : ''}</span>
                   {!(isSoldOut || maxProductQuantity <= 0) && (
-                    <span className='off-price'>{product?.offer_price ? parsePrice(product?.offer_price) : ''}</span>
+                    <span className='off-price'>{product?.offer_price && product?.in_offer ? parsePrice(product?.offer_price) : ''}</span>
                   )}
                 </PriceWrapper>
               ) : (
