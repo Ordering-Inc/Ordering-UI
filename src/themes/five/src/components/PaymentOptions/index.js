@@ -224,7 +224,7 @@ const PaymentOptionsUI = (props) => {
               clientId={isOpenMethod?.paymethod?.credentials?.client_id}
               body={{
                 paymethod_id: isOpenMethod?.paymethod?.id,
-                amount: cart.total,
+                amount: cart?.balance ?? cart.total,
                 delivery_zone_id: cart.delivery_zone_id,
                 cartUuid: cart.uuid
               }}

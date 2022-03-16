@@ -93,6 +93,8 @@ const CheckoutUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
 
+  const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
@@ -369,11 +371,13 @@ const CheckoutUI = (props) => {
                 />
               </PaymentMethodContainer>
             )}
-            <WalletPaymentOptionContainer>
-              <PaymentOptionWallet
-                cart={cart}
-              />
-            </WalletPaymentOptionContainer>
+            {isWalletEnabled && (
+              <WalletPaymentOptionContainer>
+                <PaymentOptionWallet
+                  cart={cart}
+                />
+              </WalletPaymentOptionContainer>
+            )}
           </WrapperLeftContent>
         </WrapperLeftContainer>
         <WrapperRightContainer>
@@ -441,7 +445,7 @@ const CheckoutUI = (props) => {
             <WrapperPlaceOrderButton>
               <Button
                 color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
-                disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || loading}
+                disabled={!cart?.valid || (!paymethodSelected && cart?.balance > 0) || placing || errorCash || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || loading}
                 onClick={() => handlePlaceOrder()}
               >
                 {!cart?.valid_maximum ? (
@@ -459,7 +463,7 @@ const CheckoutUI = (props) => {
             </WarningText>
           )}
 
-          {!paymethodSelected && cart?.status !== 2 && (
+          {(!paymethodSelected && cart?.balance > 0) && cart?.status !== 2 && (
             <WarningText>
               {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
             </WarningText>
