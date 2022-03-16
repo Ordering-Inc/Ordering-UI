@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer } from 'ordering-components'
+import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer, useConfig } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
@@ -22,13 +22,6 @@ const optionsDefault = [
   { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders' }
 ]
 
-const extraOptions = [
-  { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account' },
-  { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets' },
-  { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages' },
-  { name: 'help', pathname: '/help', displayName: 'help', key: 'help' }
-]
-
 export const UserPopover = (props) => {
   const {
     open,
@@ -40,9 +33,19 @@ export const UserPopover = (props) => {
   const [sessionState] = useSession()
   const [, t] = useLanguage()
   const [events] = useEvent()
+  const [{ configs }] = useConfig()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
+
+  const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+
+  const extraOptions = [
+    { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
+    { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: isWalletEnabled },
+    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: true },
+    { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true }
+  ]
 
   const options = isCustomerMode
     ? optionsDefault.filter(option => option.name === 'profile')
