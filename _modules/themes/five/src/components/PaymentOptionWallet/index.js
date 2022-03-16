@@ -52,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
-  var _walletsState$result, _walletsState$result2, _walletsState$result3, _walletsState$result4;
+  var _walletsState$result, _configs$wallet_cash_, _configs$wallet_credi, _walletsState$result2, _walletsState$result3, _walletsState$result4;
 
   var cart = props.cart,
       walletsState = props.walletsState,
@@ -64,6 +64,10 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
@@ -73,12 +77,16 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
       checkedState = _useState2[0],
       setCheckedState = _useState2[1];
 
+  var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
+  var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
   var walletName = {
     cash: {
-      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
+      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet'),
+      isActive: isWalletCashEnabled
     },
     credit_point: {
-      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
+      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet'),
+      isActive: isWalletPointsEnabled
     }
   };
 
@@ -113,9 +121,9 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
       flexDirection: 'column'
     }
   }, !walletsState.loading && !walletsState.error && ((_walletsState$result3 = walletsState.result) === null || _walletsState$result3 === void 0 ? void 0 : _walletsState$result3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_walletsState$result4 = walletsState.result) === null || _walletsState$result4 === void 0 ? void 0 : _walletsState$result4.map(function (wallet, idx) {
-    var _walletsState$result5, _walletName$wallet$ty;
+    var _walletName$wallet$ty, _walletsState$result5, _walletName$wallet$ty2;
 
-    return wallet.valid && wallet.balance >= 0 && /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    return wallet.valid && wallet.balance >= 0 && ((_walletName$wallet$ty = walletName[wallet.type]) === null || _walletName$wallet$ty === void 0 ? void 0 : _walletName$wallet$ty.isActive) && /*#__PURE__*/_react.default.createElement(_styles.Container, {
       key: wallet.id,
       isBottomBorder: idx === ((_walletsState$result5 = walletsState.result) === null || _walletsState$result5 === void 0 ? void 0 : _walletsState$result5.length) - 1
     }, /*#__PURE__*/_react.default.createElement(_styles.SectionLeft, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
@@ -132,7 +140,7 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
         color: (cart === null || cart === void 0 ? void 0 : cart.balance) === 0 && !checkedState[idx] || wallet.balance === 0 ? theme.colors.darkGray : 'black'
       },
       htmlFor: "custom-checkbox-".concat(idx)
-    }, (_walletName$wallet$ty = walletName[wallet.type]) === null || _walletName$wallet$ty === void 0 ? void 0 : _walletName$wallet$ty.name))), /*#__PURE__*/_react.default.createElement("div", null, wallet.type === 'cash' && /*#__PURE__*/_react.default.createElement("span", null, parsePrice(wallet === null || wallet === void 0 ? void 0 : wallet.balance)), wallet.type === 'credit_point' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("span", {
+    }, (_walletName$wallet$ty2 = walletName[wallet.type]) === null || _walletName$wallet$ty2 === void 0 ? void 0 : _walletName$wallet$ty2.name))), /*#__PURE__*/_react.default.createElement("div", null, wallet.type === 'cash' && /*#__PURE__*/_react.default.createElement("span", null, parsePrice(wallet === null || wallet === void 0 ? void 0 : wallet.balance)), wallet.type === 'credit_point' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("span", {
       style: {
         color: theme.colors.primary
       }

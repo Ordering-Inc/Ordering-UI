@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var WalletsUI = function WalletsUI(props) {
-  var _ref, _walletList$wallets, _walletList$wallets2, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _transactionsList$lis5, _transactionsList$lis6, _walletList$wallets5;
+  var _configs$wallet_cash_, _configs$wallet_credi, _ref, _walletList$wallets, _walletList$wallets2, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _transactionsList$lis5, _transactionsList$lis6, _walletList$wallets5;
 
   var walletList = props.walletList,
       transactionsList = props.transactionsList,
@@ -66,15 +66,16 @@ var WalletsUI = function WalletsUI(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      parsePrice = _useUtils2$.parsePrice,
-      parseDate = _useUtils2$.parseDate;
+      parsePrice = _useUtils2[0].parsePrice;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
-  var _useState = (0, _react.useState)('cash'),
+  var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
+  var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
+
+  var _useState = (0, _react.useState)(isWalletCashEnabled ? 'cash' : 'credit_point'),
       _useState2 = _slicedToArray(_useState, 2),
       tabSelected = _useState2[0],
       setTabSelected = _useState2[1];
@@ -85,11 +86,13 @@ var WalletsUI = function WalletsUI(props) {
   var walletName = {
     cash: {
       name: t('CASH_WALLET', 'Cash Wallet'),
-      value: 0
+      value: 0,
+      isActive: isWalletCashEnabled
     },
     credit_point: {
       name: t('CREDITS_POINTS_WALLET', 'Credit Points Wallet'),
-      value: 1
+      value: 1,
+      isActive: isWalletPointsEnabled
     }
   };
 
@@ -101,16 +104,16 @@ var WalletsUI = function WalletsUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, !walletList.loading && !walletList.error && ((_walletList$wallets3 = walletList.wallets) === null || _walletList$wallets3 === void 0 ? void 0 : _walletList$wallets3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, (_walletList$wallets4 = walletList.wallets) === null || _walletList$wallets4 === void 0 ? void 0 : _walletList$wallets4.map(function (wallet) {
-    var _walletName$wallet$ty;
+    var _walletName$wallet$ty, _walletName$wallet$ty2;
 
-    return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    return ((_walletName$wallet$ty = walletName[wallet.type]) === null || _walletName$wallet$ty === void 0 ? void 0 : _walletName$wallet$ty.isActive) && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       key: wallet.id,
       active: tabSelected === wallet.type,
       onClick: function onClick() {
         return handleChangeTab(wallet);
       },
       borderBottom: true
-    }, (_walletName$wallet$ty = walletName[wallet.type]) === null || _walletName$wallet$ty === void 0 ? void 0 : _walletName$wallet$ty.name);
+    }, (_walletName$wallet$ty2 = walletName[wallet.type]) === null || _walletName$wallet$ty2 === void 0 ? void 0 : _walletName$wallet$ty2.name);
   })), /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: '70%',

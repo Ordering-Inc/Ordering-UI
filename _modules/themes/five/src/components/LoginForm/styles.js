@@ -21,7 +21,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var LoginContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  min-height: ", ";\n  padding: 0 10px;\n  box-sizing: border-box;\n\n  flex-direction: column;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n  }\n"])), function (_ref) {
   var isPopup = _ref.isPopup;
-  return isPopup ? '500px' : 'calc(100vh - 65px)';
+  return isPopup ? '410px' : 'calc(100vh - 65px)';
 });
 
 exports.LoginContainer = LoginContainer;

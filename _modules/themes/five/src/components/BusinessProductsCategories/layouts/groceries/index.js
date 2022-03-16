@@ -37,11 +37,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var SPACE_CONTANT = 20;
 var categorySpace = {
-  1: 1 * SPACE_CONTANT,
-  2: 2 * SPACE_CONTANT,
-  3: 3 * SPACE_CONTANT,
-  4: 4 * SPACE_CONTANT,
-  5: 5 * SPACE_CONTANT
+  1: 0,
+  2: 1 * SPACE_CONTANT,
+  3: 2 * SPACE_CONTANT,
+  4: 3 * SPACE_CONTANT,
+  5: 4 * SPACE_CONTANT
 };
 
 var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) {
