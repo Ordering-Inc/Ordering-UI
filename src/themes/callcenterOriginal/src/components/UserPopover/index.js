@@ -81,7 +81,6 @@ export const UserPopover = (props) => {
 
   const handleGoToPage = (page) => {
     events.emit('go_to_page', { page })
-    window.location.pathname === '/' && window.open(`/${page}`, '_self')
     props.onClick && props.onClick()
   }
 

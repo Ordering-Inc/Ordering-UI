@@ -129,7 +129,6 @@ const AddressListUI = (props) => {
       events.emit('go_to_page', { page: 'search' })
       handleSetDefault(address, userCustomerSetup, true)
       setCustomerModalOpen && setCustomerModalOpen(false)
-      window.location.pathname === '/' && window.open('/search', '_self')
       return
     }
 

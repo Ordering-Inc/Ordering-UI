@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import {
@@ -44,7 +44,6 @@ import {
   BoxArrowInRight
 } from 'react-bootstrap-icons'
 import { } from 'react/cjs/react.production.min'
-import { ConfigFileContext } from '../../../../../contexts/ConfigFileContext'
 
 const LoginFormUI = (props) => {
   const {
@@ -67,7 +66,7 @@ const LoginFormUI = (props) => {
   } = props
   const numOtpInputs = 4
 
-  const [ordering] = useApi()
+  const [ordering, { setOrdering }] = useApi()
   const [, t] = useLanguage()
   const theme = useTheme()
   const formMethods = useForm()
@@ -79,7 +78,6 @@ const LoginFormUI = (props) => {
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
-  const [configFile, setConfigFile] = useContext(ConfigFileContext)
 
   const [projectName, setProjectName] = useState(null)
   const [submitted, setSubmitted] = useState(false)
@@ -99,9 +97,10 @@ const LoginFormUI = (props) => {
       }
       setWillVerifyOtpState(true)
     } else {
-      const _configFile = configFile
-      _configFile.project = projectName
-      setConfigFile({ ..._configFile })
+      setOrdering({
+        ...ordering,
+        project: projectName
+      })
       localStorage.setItem('project', projectName)
       setSubmitted(true)
     }
