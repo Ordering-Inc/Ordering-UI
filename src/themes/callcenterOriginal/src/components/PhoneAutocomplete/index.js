@@ -69,7 +69,6 @@ const PhoneAutocompleteUI = (props) => {
   const handleFindClick = () => {
     if (userCustomer?.id && orderState?.options?.address?.address) {
       onRedirectPage && onRedirectPage('search')
-      window.location.pathname === '/' && window.open('/search', '_self')
     } else {
       setAlertState({ open: true, content: t('SELECT_ADDRESS_CUSTOMER', 'Please select an address for the selected customer') })
     }
