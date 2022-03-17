@@ -165,12 +165,6 @@ Object.defineProperty(exports, "Cms", {
     return _Cms.Cms;
   }
 });
-Object.defineProperty(exports, "ConfigFileContext", {
-  enumerable: true,
-  get: function get() {
-    return _ConfigFileContext.ConfigFileContext;
-  }
-});
 Object.defineProperty(exports, "Confirm", {
   enumerable: true,
   get: function get() {
@@ -943,8 +937,6 @@ var _SmsLogin = require("./components/SmsLogin");
 var _AppleLogin = require("./components/AppleLogin");
 
 var _ThemeContext = require("./contexts/ThemeContext");
-
-var _ConfigFileContext = require("./contexts/ConfigFileContext");
 
 var _useOnlineStatus = require("./hooks/useOnlineStatus");
 

@@ -43,8 +43,6 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 require("react/cjs/react.production.min");
 
-var _ConfigFileContext = require("../../../../../contexts/ConfigFileContext");
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -97,8 +95,9 @@ var LoginFormUI = function LoginFormUI(props) {
   var numOtpInputs = 4;
 
   var _useApi = (0, _orderingComponents.useApi)(),
-      _useApi2 = _slicedToArray(_useApi, 1),
-      ordering = _useApi2[0];
+      _useApi2 = _slicedToArray(_useApi, 2),
+      ordering = _useApi2[0],
+      setOrdering = _useApi2[1].setOrdering;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -136,11 +135,6 @@ var LoginFormUI = function LoginFormUI(props) {
       validPhoneFieldState = _useState10[0],
       setValidPhoneField = _useState10[1];
 
-  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
-      _useContext2 = _slicedToArray(_useContext, 2),
-      configFile = _useContext2[0],
-      setConfigFile = _useContext2[1];
-
   var _useState11 = (0, _react.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
       projectName = _useState12[0],
@@ -164,8 +158,6 @@ var LoginFormUI = function LoginFormUI(props) {
 
   var onSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-      var _configFile;
-
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -188,17 +180,17 @@ var LoginFormUI = function LoginFormUI(props) {
 
             case 4:
               setWillVerifyOtpState(true);
-              _context.next = 12;
+              _context.next = 10;
               break;
 
             case 7:
-              _configFile = configFile;
-              _configFile.project = projectName;
-              setConfigFile(_objectSpread({}, _configFile));
+              setOrdering(_objectSpread(_objectSpread({}, ordering), {}, {
+                project: projectName
+              }));
               localStorage.setItem('project', projectName);
               setSubmitted(true);
 
-            case 12:
+            case 10:
             case "end":
               return _context.stop();
           }
