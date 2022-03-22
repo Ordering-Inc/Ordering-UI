@@ -162,7 +162,8 @@ const ProductOptionSubOptionUI = (props) => {
 export const ProductOptionSubOption = (props) => {
   const productOptionSubOptionProps = {
     ...props,
-    UIComponent: ProductOptionSubOptionUI
+    UIComponent: ProductOptionSubOptionUI,
+    isOrigin: true
   }
 
   return (

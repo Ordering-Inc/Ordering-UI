@@ -211,7 +211,7 @@ export const Header = (props) => {
               {windowSize.width > 820 && isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />
-                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
                 </FarAwayMessage>
               )}
               {isCustomerMode && windowSize.width > 450 && (
@@ -330,7 +330,7 @@ export const Header = (props) => {
               {isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />
-                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
                 </FarAwayMessage>
               )}
               <AddressMenu
@@ -353,7 +353,7 @@ export const Header = (props) => {
               {isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />
-                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
                 </FarAwayMessage>
               )}
               <HeaderOption

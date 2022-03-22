@@ -235,7 +235,7 @@ export const Header = (props) => {
                       {isFarAway && (
                         <FarAwayMessage>
                           <TiWarningOutline />
-                          <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                          <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
                         </FarAwayMessage>
                       )}
                     </AddressWrapper>
@@ -310,7 +310,7 @@ export const Header = (props) => {
                 {isFarAway && (
                   <FarAwayMessage>
                     <TiWarningOutline />
-                    <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                    <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
                   </FarAwayMessage>
                 )}
               </AddressWrapper>
@@ -335,7 +335,7 @@ export const Header = (props) => {
                 {isFarAway && (
                   <FarAwayMessage>
                     <TiWarningOutline />
-                    <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')}</span>
+                    <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
                   </FarAwayMessage>
                 )}
               </AddressWrapper>
