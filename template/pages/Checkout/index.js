@@ -12,7 +12,7 @@ export const CheckoutPage = (props) => {
   const [errors, setErrors] = useState([])
   const [orderState, { confirmCart, changeMoment }] = useOrder()
   const [, t] = useLanguage()
-  const stripePayments = ['stripe', 'stripe_connect', 'stripe_direct']
+  const stripePayments = ['stripe', 'stripe_connect', 'stripe_direct', 'google_pay', 'apple_pay']
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search)
@@ -21,7 +21,7 @@ export const CheckoutPage = (props) => {
   const actionsBeforePlace = async (paymethod, cart) => {
     if (stripePayments.includes(paymethod.gateway)) {
       try {
-        const stripe = await loadStripe(paymethod.paymethod?.credentials?.publishable)
+        const stripe = await loadStripe(paymethod.paymethod?.credentials?.publishable || paymethod?.paymethod?.credentials?.publishable_key)
         const result = await stripe.confirmCardPayment(cart.paymethod_data.result.client_secret)
         if (result?.paymentIntent?.status === 'succeeded') {
           try {
