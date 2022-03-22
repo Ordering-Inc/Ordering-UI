@@ -64,8 +64,8 @@ const UserVerificationUI = (props) => {
   const [phoneState, setPhoneState] = useState(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
-  const isEmailVerifyRequired = auth && (configs?.verification_email_required?.value === '1' || false) && !user?.email_verified
-  const isPhoneVerifyRequired = auth && (configs?.verification_phone_required?.value === '1' || true) && configs?.twilio_service_enabled?.value === '1' && !user?.phone_verified
+  const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
+  const isPhoneVerifyRequired = auth && configs?.verification_phone_required?.value === '1' && !user?.phone_verified
 
   const phoneLength = phoneState?.cellphone && phoneState?.country_phone_code && phoneState?.cellphone?.split('')?.length
   const lastNumbers = phoneState?.cellphone && phoneState?.country_phone_code && phoneState?.cellphone?.split('').fill('*', 0, phoneLength - 2).join('')
