@@ -40,7 +40,7 @@ import settings from './config.json'
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
   const [orderStatus] = useOrder()
-  const [{ configs }] = useConfig()
+  const [{ configs, loading: configsLoading }] = useConfig()
   const [, t] = useLanguage()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
@@ -49,8 +49,11 @@ export const App = () => {
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
 
   const isWalletEnabled = configs?.wallet_enabled?.value === '1'
-  const isEmailVerifyRequired = auth && (configs?.verification_email_required?.value === '1' || true) && !user?.email_verified
+  const isEmailVerifyRequired = auth && (configs?.verification_email_required?.value === '1' || false) && !user?.email_verified
   const isPhoneVerifyRequired = auth && (configs?.verification_phone_required?.value === '1' || true) && configs?.twilio_service_enabled?.value === '1' && !user?.phone_verified
+  const isUserVerifyRequired = isEmailVerifyRequired || isPhoneVerifyRequired
+
+  console.log(isUserVerifyRequired, configs);
 
   const closeAlert = () => {
     setAlertState({
@@ -75,10 +78,10 @@ export const App = () => {
   }
 
   useEffect(() => {
-    if (!loaded && !orderStatus.loading) {
+    if (!loaded && !orderStatus.loading && !configsLoading) {
       setLoaded(true)
     }
-  }, [orderStatus])
+  }, [orderStatus, configsLoading])
 
   useEffect(() => {
     if (!loading) {
@@ -131,7 +134,7 @@ export const App = () => {
                 <HelmetTags />
                 <Switch>
                   <Route exact path='/home'>
-                    {isEmailVerifyRequired ? (
+                    {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
                       orderStatus.options?.address?.location
@@ -142,7 +145,7 @@ export const App = () => {
                     )}
                   </Route>
                   <Route exact path='/'>
-                    {isEmailVerifyRequired ? (
+                    {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
                       orderStatus.options?.address?.location
@@ -151,7 +154,7 @@ export const App = () => {
                     )}
                   </Route>
                   <Route exact path='/verify'>
-                    {isEmailVerifyRequired
+                    {isUserVerifyRequired
                       ? <VerifyPage />
                       : <Redirect to={auth ? '/search' : '/'} />}
                   </Route>
@@ -170,14 +173,14 @@ export const App = () => {
                   </Route>
                   <Route exact path='/profile'>
                     {auth
-                      ? isEmailVerifyRequired
+                      ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
                       : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/wallets'>
                     {auth
-                      ? isEmailVerifyRequired
+                      ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : isWalletEnabled
                           ? <Wallets />
@@ -186,14 +189,14 @@ export const App = () => {
                   </Route>
                   <Route exact path='/profile/orders'>
                     {auth
-                      ? isEmailVerifyRequired
+                      ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<MyOrders />)
                       : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/messages'>
                     {auth
-                      ? isEmailVerifyRequired
+                      ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : <MessagesList />
                       : (
@@ -206,7 +209,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/help'>
                     {auth
-                      ? isEmailVerifyRequired
+                      ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<Help />)
                       : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
@@ -215,7 +218,7 @@ export const App = () => {
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
                       <SpinnerLoader />
                     ) : (
-                      isEmailVerifyRequired ? (
+                      isUserVerifyRequired ? (
                         <Redirect to='/verify' />
                       ) : (
                         orderStatus.options?.address?.location
@@ -225,7 +228,7 @@ export const App = () => {
                     )}
                   </Route>
                   <Route exact path='/store/:store'>
-                    {isEmailVerifyRequired ? (
+                    {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
                       <BusinessProductsList />
@@ -233,7 +236,7 @@ export const App = () => {
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
-                      ? isEmailVerifyRequired
+                      ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : <CheckoutPage />
                       : (
@@ -248,7 +251,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     {(auth || hashKey)
-                      ? isEmailVerifyRequired
+                      ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : <OrderDetailsPage />
                       : (
@@ -262,21 +265,21 @@ export const App = () => {
                       )}
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
-                    {isEmailVerifyRequired ? (
+                    {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
                       <Cms />
                     )}
                   </Route>
                   <Route exact path='/pages'>
-                    {isEmailVerifyRequired ? (
+                    {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
                       <PagesList />
                     )}
                   </Route>
                   <Route exact path='/:store'>
-                    {isEmailVerifyRequired ? (
+                    {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
                       <Redirect to={{

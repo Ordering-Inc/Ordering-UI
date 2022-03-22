@@ -1,12 +1,12 @@
 import React from 'react'
-import { VerifyEmail } from '../../../src/themes/five/src/components/VerifyEmail'
+import { UserVerification } from '../../../src/themes/five/src/components/UserVerification'
 import { HelmetTags } from '../../components/HelmetTags'
 
 export const VerifyPage = (props) => {
   return (
     <>
-      <HelmetTags page='verify-email' />
-      <VerifyEmail {...props} />
+      <HelmetTags page='user-verification' />
+      <UserVerification {...props} />
     </>
   )
 }

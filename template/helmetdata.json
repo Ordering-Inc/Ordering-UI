@@ -111,8 +111,8 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "verify-email": {
-    "title": "Verify email",
+  "user-verification": {
+    "title": "User Verification",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

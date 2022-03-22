@@ -66,7 +66,7 @@ const SignUpBusinessUI = (props) => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
 
-  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const showInputPhoneNumber = (validationFields?.fields?.checkout?.cellphone?.enabled ?? false) || configs?.verification_phone_required?.value === '1'
 
   const togglePasswordView = () => {
     setPasswordSee(!passwordSee)

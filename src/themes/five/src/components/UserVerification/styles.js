@@ -44,6 +44,11 @@ export const WrapperText = styled.div`
   }
 `
 
+export const WarningText = styled.span`
+  color: ${props => props.theme.colors.warning500};
+  text-align: center;
+`
+
 export const CountdownTimer = styled.div`
   display: flex;
   flex-direction: column;
@@ -97,14 +102,38 @@ export const FormInput = styled.form`
 `
 
 export const InputWrapper = styled.div`
-  position: relative;
-  input {
-    box-sizing: border-box;
+  ${(props) => props.phone ? css`
     width: 100%;
-    padding-right: 40px !important;
-    padding-left: 40px !important;
-    margin: 10px 0;
-  }
+
+    .phone_number {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .PhoneInput {
+      border-bottom: 1px solid #E9ECEF;
+
+      input {
+        border: none;
+        border-radius: 0px;
+        padding: 5px;
+      }
+    }
+
+    .PhoneInputInput {
+      text-align: center;
+    }
+  `: css`
+    position: relative;
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      padding-right: 40px !important;
+      padding-left: 40px !important;
+      margin: 10px 0;
+    }
+  `}
 `
 
 export const InputBeforeIcon = styled.div`

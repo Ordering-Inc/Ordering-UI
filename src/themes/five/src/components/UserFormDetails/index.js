@@ -195,7 +195,7 @@ export const UserFormDetailsUI = (props) => {
         setUserCellPhone(true)
       }
     }
-    if (!isEdit) onCancel()
+    if (!isEdit) onCancel && onCancel()
   }, [user, isEdit])
 
   useEffect(() => {
