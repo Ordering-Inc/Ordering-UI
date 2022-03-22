@@ -173,7 +173,8 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
 
 var ProductOptionSubOption = function ProductOptionSubOption(props) {
   var productOptionSubOptionProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: ProductOptionSubOptionUI
+    UIComponent: ProductOptionSubOptionUI,
+    isOrigin: true
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductOptionSuboption, productOptionSubOptionProps);

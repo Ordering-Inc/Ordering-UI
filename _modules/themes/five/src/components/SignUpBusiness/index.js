@@ -74,7 +74,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpBusinessUI = function SignUpBusinessUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _theme$images, _theme$images$general, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _theme$images, _theme$images$general, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -128,7 +128,7 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
       passwordSee = _useState8[0],
       setPasswordSee = _useState8[1];
 
-  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+  var showInputPhoneNumber = ((_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false) || (configs === null || configs === void 0 ? void 0 : (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1';
 
   var togglePasswordView = function togglePasswordView() {
     setPasswordSee(!passwordSee);

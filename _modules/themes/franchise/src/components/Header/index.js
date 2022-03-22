@@ -334,7 +334,7 @@ var Header = function Header(props) {
     loading: "lazy"
   }))), isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     className: "left-header"
-  }, windowSize.width > 820 && isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
+  }, windowSize.width > 820 && isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
     onClick: function onClick(e) {
       return handleClickUserCustomer(e);
     }
@@ -409,7 +409,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  }))))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+  }))))), onlineStatus && isShowOrderOptions && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
       return openModal('address');
     }
@@ -419,7 +419,7 @@ var Header = function Header(props) {
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.max_days_preorder) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 ? void 0 : (_configState$configs11 = _configState$configs10.max_days_preorder) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
-  })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
     addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : (_orderState$options11 = _orderState$options10.address) === null || _orderState$options11 === void 0 ? void 0 : (_orderState$options12 = _orderState$options11.address) === null || _orderState$options12 === void 0 ? void 0 : (_orderState$options13 = _orderState$options12.split(',')) === null || _orderState$options13 === void 0 ? void 0 : _orderState$options13[0],
     onClick: function onClick(variant) {

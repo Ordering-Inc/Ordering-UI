@@ -316,7 +316,7 @@ var Header = function Header(props) {
       return handleClosePopover('addresses');
     },
     isHome: isHome
-  }), isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address'))))))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null), /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 870 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }), isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))))))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null), /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 870 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     home: isHome,
     onClick: function onClick() {
       return handleGoToPage({
@@ -371,7 +371,7 @@ var Header = function Header(props) {
       return handleClosePopover('addresses');
     },
     isHome: isHome
-  }), isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')))), (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.preorder_status_enabled) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === undefined) && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
+  }), isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')))), (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.preorder_status_enabled) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === undefined) && /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {
       return handleTogglePopover('moment');
@@ -387,7 +387,7 @@ var Header = function Header(props) {
       return openModal(variant);
     },
     isHome: isHome
-  }), isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'Your are far from this address')))), (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.preorder_status_enabled) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === undefined) && /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, {
+  }), isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')))), (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.preorder_status_enabled) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === undefined) && /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, {
     isModalBehavior: true
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t(modalSelected.toUpperCase(), (0, _utils.capitalize)(modalSelected)),

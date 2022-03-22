@@ -247,7 +247,11 @@ var AddressListUI = function AddressListUI(props) {
     onClick: function onClick() {
       return openAddress({});
     },
-    disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading
+    disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading,
+    style: {
+      flex: 1,
+      width: 'fit-content'
+    }
   }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,

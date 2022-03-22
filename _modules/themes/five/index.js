@@ -471,10 +471,10 @@ Object.defineProperty(exports, "UserProfileForm", {
     return _UserProfileForm.UserProfileForm;
   }
 });
-Object.defineProperty(exports, "VerifyEmail", {
+Object.defineProperty(exports, "UserVerification", {
   enumerable: true,
   get: function get() {
-    return _VerifyEmail.VerifyEmail;
+    return _UserVerification.UserVerification;
   }
 });
 Object.defineProperty(exports, "WalletTransactionItem", {
@@ -638,7 +638,7 @@ var _UserPopover = require("./src/components/UserPopover");
 
 var _UserProfileForm = require("./src/components/UserProfileForm");
 
-var _VerifyEmail = require("./src/components/VerifyEmail");
+var _UserVerification = require("./src/components/UserVerification");
 
 var _Wallets = require("./src/components/Wallets");
 

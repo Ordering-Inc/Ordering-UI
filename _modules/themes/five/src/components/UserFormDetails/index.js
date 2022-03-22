@@ -294,7 +294,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }
     }
 
-    if (!isEdit) onCancel();
+    if (!isEdit) onCancel && onCancel();
   }, [user, isEdit]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading && emailInput.current) {

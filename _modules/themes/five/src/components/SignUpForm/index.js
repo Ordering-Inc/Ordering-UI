@@ -76,7 +76,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _configs$facebook_log, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$google_login, _configs$facebook_log2, _configs$facebook_log3, _configs$facebook_id, _configs$google_login2, _configs$apple_login_, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie13, _validationFields$fie14, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_2, _configs$google_login3, _props$afterComponent, _props$afterElements;
+  var _configs$facebook_log, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _configs$google_login, _configs$facebook_log2, _configs$facebook_log3, _configs$facebook_id, _configs$google_login2, _configs$apple_login_, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie13, _validationFields$fie14, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_2, _configs$google_login3, _props$afterComponent, _props$afterElements;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -145,7 +145,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       fieldNumber = _useState10[0],
       setFieldNumber = _useState10[1];
 
-  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+  var showInputPhoneNumber = ((_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false) || (configs === null || configs === void 0 ? void 0 : (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1';
   var initParams = {
     client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
     cookiepolicy: 'single_host_origin',
