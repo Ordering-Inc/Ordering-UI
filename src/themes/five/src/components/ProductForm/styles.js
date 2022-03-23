@@ -73,6 +73,7 @@ export const SwiperWrapper = styled.div`
     margin: 0px 20px;
 
     .swiper-slide {
+      display: flex;
       opacity: 0.8;
       border-radius: 7.6px;
       height: auto;
@@ -81,7 +82,7 @@ export const SwiperWrapper = styled.div`
 
       img {
         border-radius: 7.6px;
-        max-height: 93px;
+        max-height: 70px;
       }
     }
 
@@ -488,4 +489,16 @@ export const WeightUnitItem = styled.span`
     border-radius: 3px;
     color: ${props => props.theme.colors.primary};
   `}
+`
+export const VideoGalleryWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  svg {
+    position: absolute;
+    fill: #fff;
+    font-size: 28px;
+  }
 `
