@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductsList, useLanguage } from 'ordering-components'
+import { ProductsList, useConfig, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../NotFoundSource'
@@ -31,6 +31,8 @@ const BusinessProductsListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+  const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
 
   return (
     <>
@@ -88,7 +90,9 @@ const BusinessProductsListUI = (props) => {
 
         {
           !category?.id && categories.filter(category => category?.id !== null).map((category, i, _categories) => {
-            const products = categoryState.products?.filter(product => product?.category_id === category?.id) || []
+            const products = !isUseParentCategory
+              ? categoryState?.products?.filter(product => product?.category_id === category?.id) ?? []
+              : categoryState?.products?.filter(product => category?.children?.some(cat => cat.category_id === product?.category_id)) ?? []
             return (
               <React.Fragment key={category?.id}>
                 {
