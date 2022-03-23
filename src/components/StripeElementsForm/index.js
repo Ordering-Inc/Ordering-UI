@@ -20,7 +20,8 @@ const StripeElementsFormUI = (props) => {
     onCancel,
     paymethod,
     cart,
-    handlePlaceOrder
+    handlePlaceOrder,
+    methodsPay
   } = props
   const [, t] = useLanguage()
 
@@ -34,7 +35,7 @@ const StripeElementsFormUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {publicKey ? (
         <Elements stripe={loadStripe(publicKey)}>
-          {['google_pay', 'apple_pay'].includes(paymethod) ? (
+          {methodsPay.includes(paymethod) ? (
             <StripeMethodForm
               cart={cart}
               handleSource={handleSource}

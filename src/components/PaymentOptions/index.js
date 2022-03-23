@@ -90,6 +90,10 @@ const PaymentOptionsUI = (props) => {
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
+  const methodsPay = ['google_pay', 'apple_pay']
+
+  const stripeDirectMethods = ['stripe_direct', ...methodsPay]
+
   const handlePaymentMethodClick = (paymethod) => {
     const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod?.gateway)
     handlePaymethodClick(paymethod, isPopupMethod)
@@ -115,7 +119,7 @@ const PaymentOptionsUI = (props) => {
 
   useEffect(() => {
     setCardData && setCardData(paymethodData)
-    if (paymethodSelected?.gateway === 'google_pay' && paymethodData?.id && paymethodSelected?.data?.card) {
+    if (methodsPay.includes(paymethodSelected?.gateway) && paymethodData?.id && paymethodSelected?.data?.card) {
       handlePlaceOrder()
     }
   }, [paymethodData, paymethodSelected])
@@ -266,12 +270,13 @@ const PaymentOptionsUI = (props) => {
         {/* Stripe direct */}
         <Modal
           title={t('ADD_CARD', 'Add card')}
-          open={['stripe_direct', 'google_pay', 'apple_pay']?.includes(isOpenMethod?.paymethod?.gateway) && !paymethodData.id}
+          open={stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && !paymethodData.id}
           className='modal-info'
           onClose={() => handlePaymethodClick(null)}
         >
-          {['stripe_direct', 'google_pay', 'apple_pay']?.includes(isOpenMethod?.paymethod?.gateway) && (
+          {stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && (
             <StripeElementsForm
+              methodsPay={methodsPay}
               paymethod={isOpenMethod?.paymethod?.gateway}
               cart={cart}
               businessId={props.businessId}
