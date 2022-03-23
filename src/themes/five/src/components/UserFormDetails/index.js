@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useSession, useLanguage, useCustomer } from 'ordering-components'
+import { useSession, useLanguage, useCustomer, useConfig } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 
@@ -40,6 +40,7 @@ export const UserFormDetailsUI = (props) => {
 
   const formMethods = useForm()
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
 
   const [{ user: userSession }] = useSession()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
@@ -86,8 +87,9 @@ export const UserFormDetailsUI = (props) => {
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
     if (!userPhoneNumber &&
-      validationFields?.fields?.checkout?.cellphone?.enabled &&
-      validationFields?.fields?.checkout?.cellphone?.required
+      ((validationFields?.fields?.checkout?.cellphone?.enabled &&
+        validationFields?.fields?.checkout?.cellphone?.required) ||
+        configs?.verification_phone_required?.value === '1')
     ) {
       setAlertState({
         open: true,

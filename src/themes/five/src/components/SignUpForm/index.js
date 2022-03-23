@@ -139,8 +139,9 @@ const SignUpFormUI = (props) => {
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
     if (!userPhoneNumber &&
-      validationFields?.fields?.checkout?.cellphone?.enabled &&
-      validationFields?.fields?.checkout?.cellphone?.required
+      ((validationFields?.fields?.checkout?.cellphone?.enabled &&
+      validationFields?.fields?.checkout?.cellphone?.required) ||
+      configs?.verification_phone_required?.value === '1')
     ) {
       setAlertState({
         open: true,
