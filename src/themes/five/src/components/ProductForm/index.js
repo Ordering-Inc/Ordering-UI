@@ -659,7 +659,3 @@ export const ProductForm = (props) => {
     <ProductOptions {...productOptionsProps} />
   )
 }
-
-// https://www.youtube.com/embed/tgbNymZ7vqY
-// https://www.youtube.com/embed/tgbNymZ7vqY
-// http://img.youtube.com/vi/tgbNymZ7vqY/0.jpg
