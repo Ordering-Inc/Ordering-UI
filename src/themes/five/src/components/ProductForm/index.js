@@ -102,7 +102,7 @@ const ProductOptionsUI = (props) => {
   const productContainerRef = useRef(null)
   const [gallery, setGallery] = useState([])
   const [videoGallery, setVideoGallery] = useState(null)
-  const [thumbsSwiper1, setThumbsSwiperOne] = useState(null)
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [isHaveWeight, setIsHaveWeight] = useState(false)
   const [qtyBy, setQtyBy] = useState({
     weight_unit: false,
@@ -264,7 +264,7 @@ const ProductOptionsUI = (props) => {
                   spaceBetween={10}
                   navigation
                   watchOverflow
-                  thumbs={{ swiper: thumbsSwiper1 }} className='mySwiper2'
+                  thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
@@ -282,7 +282,7 @@ const ProductOptionsUI = (props) => {
                   )}
                 </Swiper>
                 <Swiper
-                  onSwiper={setThumbsSwiperOne}
+                  onSwiper={setThumbsSwiper}
                   spaceBetween={20}
                   slidesPerView={5}
                   breakpoints={{
