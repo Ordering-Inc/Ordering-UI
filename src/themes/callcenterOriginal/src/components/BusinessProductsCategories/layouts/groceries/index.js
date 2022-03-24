@@ -9,14 +9,14 @@ import {
   CategoryTab
 } from './styles'
 
-const SPACE_CONTANT = 20
+const SPACE_CONTANT = 25
 
 const categorySpace = {
-  1: 1 * SPACE_CONTANT,
+  1: 1,
   2: 2 * SPACE_CONTANT,
   3: 3 * SPACE_CONTANT,
   4: 4 * SPACE_CONTANT,
-  5: 5 * SPACE_CONTANT,
+  5: 5 * SPACE_CONTANT
 }
 
 const BusinessProductsCategoriesUI = (props) => {
@@ -26,7 +26,7 @@ const BusinessProductsCategoriesUI = (props) => {
     handlerClickCategory,
     categorySelected,
     featured,
-    openCategories,
+    openCategories
   } = props
 
   const IterateCategories = ({ list, isSub, currentCat }) => {
@@ -38,7 +38,7 @@ const BusinessProductsCategoriesUI = (props) => {
               <>
                 {category?.subcategories?.length > 0 && (
                   <>
-                    <div className="accordion">
+                    <div className='accordion'>
                       <AccordionDropdown
                         item={category}
                         isSelected={categorySelected?.id === category.id}
