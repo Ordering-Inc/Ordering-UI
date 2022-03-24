@@ -116,6 +116,10 @@ const PaymentOptionsUI = (props) => {
   useEffect(() => {
     if (props.paySelected && props.paySelected?.data) {
       setPaymethodData(props.paySelected?.data)
+      const isRequiredModal = ['paypal']
+      if (isRequiredModal.includes(paymethodSelected?.gateway)) {
+        handlePaymentMethodClick(null)
+      }
     }
   }, [props.paySelected])
 
