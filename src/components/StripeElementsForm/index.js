@@ -2,7 +2,7 @@ import React from 'react'
 import { StripeElementsForm as StripeElementsFormController, useLanguage } from 'ordering-components'
 import { loadStripe } from '@stripe/stripe-js/pure'
 import { Elements } from '@stripe/react-stripe-js'
-
+import { StripeMethodForm } from '../StripeMethodForm'
 import {
   ErrorMessage
 } from './styles'
@@ -17,9 +17,14 @@ const StripeElementsFormUI = (props) => {
     requirements,
     onNewCard,
     toSave,
-    onCancel
+    onCancel,
+    paymethod,
+    cart,
+    handlePlaceOrder,
+    methodsPay
   } = props
   const [, t] = useLanguage()
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -30,14 +35,28 @@ const StripeElementsFormUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {publicKey ? (
         <Elements stripe={loadStripe(publicKey)}>
-          <CardForm
-            handleSource={handleSource}
-            onNewCard={onNewCard}
-            toSave={toSave}
-            requirements={requirements}
-            businessId={businessId}
-            handleCancel={onCancel}
-          />
+          {methodsPay.includes(paymethod) ? (
+            <StripeMethodForm
+              cart={cart}
+              handleSource={handleSource}
+              onNewCard={onNewCard}
+              toSave={toSave}
+              requirements={requirements}
+              businessId={businessId}
+              handleCancel={onCancel}
+              paymethod={paymethod}
+              handlePlaceOrder={handlePlaceOrder}
+            />
+          ) : (
+            <CardForm
+              handleSource={handleSource}
+              onNewCard={onNewCard}
+              toSave={toSave}
+              requirements={requirements}
+              businessId={businessId}
+              handleCancel={onCancel}
+            />
+          )}
         </Elements>
       ) : (
         <ErrorMessage>{t('SOMETHING_WRONG', 'Something is wrong!')}</ErrorMessage>
