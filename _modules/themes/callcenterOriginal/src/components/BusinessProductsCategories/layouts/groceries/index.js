@@ -35,9 +35,9 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var SPACE_CONTANT = 20;
+var SPACE_CONTANT = 25;
 var categorySpace = {
-  1: 1 * SPACE_CONTANT,
+  1: 1,
   2: 2 * SPACE_CONTANT,
   3: 3 * SPACE_CONTANT,
   4: 4 * SPACE_CONTANT,

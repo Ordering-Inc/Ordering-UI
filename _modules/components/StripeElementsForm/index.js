@@ -13,6 +13,8 @@ var _pure = require("@stripe/stripe-js/pure");
 
 var _reactStripeJs = require("@stripe/react-stripe-js");
 
+var _StripeMethodForm = require("../StripeMethodForm");
+
 var _styles = require("./styles");
 
 var _CardForm = require("../CardForm");
@@ -48,7 +50,11 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
       requirements = props.requirements,
       onNewCard = props.onNewCard,
       toSave = props.toSave,
-      onCancel = props.onCancel;
+      onCancel = props.onCancel,
+      paymethod = props.paymethod,
+      cart = props.cart,
+      handlePlaceOrder = props.handlePlaceOrder,
+      methodsPay = props.methodsPay;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -64,7 +70,17 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
     }, props));
   }), publicKey ? /*#__PURE__*/_react.default.createElement(_reactStripeJs.Elements, {
     stripe: (0, _pure.loadStripe)(publicKey)
-  }, /*#__PURE__*/_react.default.createElement(_CardForm.CardForm, {
+  }, methodsPay.includes(paymethod) ? /*#__PURE__*/_react.default.createElement(_StripeMethodForm.StripeMethodForm, {
+    cart: cart,
+    handleSource: handleSource,
+    onNewCard: onNewCard,
+    toSave: toSave,
+    requirements: requirements,
+    businessId: businessId,
+    handleCancel: onCancel,
+    paymethod: paymethod,
+    handlePlaceOrder: handlePlaceOrder
+  }) : /*#__PURE__*/_react.default.createElement(_CardForm.CardForm, {
     handleSource: handleSource,
     onNewCard: onNewCard,
     toSave: toSave,

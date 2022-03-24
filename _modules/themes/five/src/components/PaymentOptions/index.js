@@ -191,6 +191,11 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       var _props$paySelected2;
 
       setPaymethodData((_props$paySelected2 = props.paySelected) === null || _props$paySelected2 === void 0 ? void 0 : _props$paySelected2.data);
+      var isRequiredModal = ['paypal'];
+
+      if (isRequiredModal.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway)) {
+        handlePaymentMethodClick(null);
+      }
     }
   }, [props.paySelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {

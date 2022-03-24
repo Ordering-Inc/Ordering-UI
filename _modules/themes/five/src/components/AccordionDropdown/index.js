@@ -24,17 +24,15 @@ var AccordionDropdown = function AccordionDropdown(props) {
     className: "accordion-item"
   }, /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
     active: isSelected,
-    className: 'accordion-title',
+    className: "accordion-title",
     categorySpace: spaceTab,
     onClick: function onClick() {
       return handleClickItem();
-    }
-  }, /*#__PURE__*/_react.default.createElement("span", null, item.name), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, {
-    className: "rotate",
-    style: {
-      transform: isOpen ? 'rotate(0deg)' : 'rotate(180deg)'
-    }
-  })), isOpen && /*#__PURE__*/_react.default.createElement("div", {
+    },
+    isOpen: isOpen
+  }, /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, {
+    className: "accordion__icon ".concat(isOpen ? 'rotate' : '')
+  }), /*#__PURE__*/_react.default.createElement("span", null, item.name)), isOpen && /*#__PURE__*/_react.default.createElement("div", {
     className: "accordion-content"
   }, /*#__PURE__*/_react.default.createElement(IterateCategories, {
     list: item.subcategories,

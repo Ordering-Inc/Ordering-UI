@@ -15,6 +15,8 @@ var _FiMinusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiMinusCi
 
 var _FiPlusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiPlusCircle"));
 
+var _MdcPlayCircleOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcPlayCircleOutline"));
+
 var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../../../../utils");
@@ -158,26 +160,31 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
   var _useState9 = (0, _react.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      thumbsSwiper = _useState10[0],
-      setThumbsSwiper = _useState10[1];
+      videoGallery = _useState10[0],
+      setVideoGallery = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(false),
+  var _useState11 = (0, _react.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      isHaveWeight = _useState12[0],
-      setIsHaveWeight = _useState12[1];
+      thumbsSwiper = _useState12[0],
+      setThumbsSwiper = _useState12[1];
 
-  var _useState13 = (0, _react.useState)({
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isHaveWeight = _useState14[0],
+      setIsHaveWeight = _useState14[1];
+
+  var _useState15 = (0, _react.useState)({
     weight_unit: false,
     pieces: true
   }),
-      _useState14 = _slicedToArray(_useState13, 2),
-      qtyBy = _useState14[0],
-      setQtyBy = _useState14[1];
-
-  var _useState15 = (0, _react.useState)(null),
       _useState16 = _slicedToArray(_useState15, 2),
-      pricePerWeightUnit = _useState16[0],
-      setPricePerWeightUnit = _useState16[1];
+      qtyBy = _useState16[0],
+      setQtyBy = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(null),
+      _useState18 = _slicedToArray(_useState17, 2),
+      pricePerWeightUnit = _useState18[0],
+      setPricePerWeightUnit = _useState18[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
 
@@ -257,6 +264,13 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     setQtyBy((_setQtyBy = {}, _defineProperty(_setQtyBy, val, true), _defineProperty(_setQtyBy, !val, false), _setQtyBy));
   };
 
+  var getOverFlowImage = function getOverFlowImage(url) {
+    var keys = url.split('/');
+    var _videoId = keys[keys.length - 1];
+    var overFlowImg = 'http://img.youtube.com/vi/' + _videoId + '/0.jpg';
+    return overFlowImg;
+  };
+
   (0, _react.useEffect)(function () {
     if (document.getElementById("".concat(tabValue))) {
       var extraHeight = windowSize.width < 769 ? 100 : 42;
@@ -277,6 +291,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     var _theme$images, _theme$images$dummies, _product$gallery;
 
     var imageList = [];
+    var videoList = [];
     imageList.push((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product));
 
     if (product !== null && product !== void 0 && product.gallery && (product === null || product === void 0 ? void 0 : (_product$gallery = product.gallery) === null || _product$gallery === void 0 ? void 0 : _product$gallery.length) > 0) {
@@ -286,7 +301,14 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var galleryItem = _step.value;
-          imageList.push(galleryItem === null || galleryItem === void 0 ? void 0 : galleryItem.file);
+
+          if (galleryItem !== null && galleryItem !== void 0 && galleryItem.file) {
+            imageList.push(galleryItem === null || galleryItem === void 0 ? void 0 : galleryItem.file);
+          }
+
+          if (galleryItem !== null && galleryItem !== void 0 && galleryItem.video) {
+            videoList.push(galleryItem === null || galleryItem === void 0 ? void 0 : galleryItem.video);
+          }
         }
       } catch (err) {
         _iterator.e(err);
@@ -296,6 +318,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
 
     setGallery(imageList);
+    setVideoGallery(videoList);
 
     if (product !== null && product !== void 0 && product.weight && product !== null && product !== void 0 && product.weight_unit) {
       setIsHaveWeight(true);
@@ -353,7 +376,18 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       src: img,
       alt: ""
     }));
-  })), /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
+  }), videoGallery && videoGallery.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, videoGallery.map(function (video, j) {
+    return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
+      key: j
+    }, /*#__PURE__*/_react.default.createElement("iframe", {
+      style: {
+        border: 'none',
+        width: '100%',
+        height: '100%'
+      },
+      src: video
+    }));
+  }))), /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     onSwiper: setThumbsSwiper,
     spaceBetween: 20,
     slidesPerView: 5,
@@ -390,7 +424,14 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       src: img,
       alt: ""
     }));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.calories) && /*#__PURE__*/_react.default.createElement("span", {
+  }), videoGallery && videoGallery.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, videoGallery.map(function (video, j) {
+    return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
+      key: j
+    }, /*#__PURE__*/_react.default.createElement(_styles.VideoGalleryWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+      src: getOverFlowImage(video),
+      alt: ""
+    }), /*#__PURE__*/_react.default.createElement(_MdcPlayCircleOutline.default, null)));
+  }))))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.calories) && /*#__PURE__*/_react.default.createElement("span", {
     className: "calories"
   }, product === null || product === void 0 ? void 0 : product.calories, ' ', "cal")), /*#__PURE__*/_react.default.createElement(_styles.Properties, null, isHaveWeight ? /*#__PURE__*/_react.default.createElement(_styles.PriceContent, null, parsePrice(pricePerWeightUnit), " / ", product === null || product === void 0 ? void 0 : product.weight_unit) : /*#__PURE__*/_react.default.createElement(_styles.PriceContent, null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : '', (product === null || product === void 0 ? void 0 : product.in_offer) && /*#__PURE__*/_react.default.createElement("span", {
     className: "offer-price"
