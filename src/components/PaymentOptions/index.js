@@ -82,15 +82,20 @@ const PaymentOptionsUI = (props) => {
     isOpenMethod,
     setCardData,
     onPlaceOrderClick,
-    setCreateOrder
+    setCreateOrder,
+    handlePlaceOrder
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
+  const methodsPay = ['google_pay', 'apple_pay']
+
+  const stripeDirectMethods = ['stripe_direct', ...methodsPay]
+
   const handlePaymentMethodClick = (paymethod) => {
-    const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square'].includes(paymethod?.gateway)
+    const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod?.gateway)
     handlePaymethodClick(paymethod, isPopupMethod)
   }
 
@@ -114,7 +119,10 @@ const PaymentOptionsUI = (props) => {
 
   useEffect(() => {
     setCardData && setCardData(paymethodData)
-  }, [paymethodData])
+    if (methodsPay.includes(paymethodSelected?.gateway) && paymethodData?.id && paymethodSelected?.data?.card) {
+      handlePlaceOrder()
+    }
+  }, [paymethodData, paymethodSelected])
 
   return (
     <>
@@ -240,7 +248,6 @@ const PaymentOptionsUI = (props) => {
             />
           )}
         </Modal>
-
         {/* Stripe Connect */}
         <Modal
           title={t('SELECT_A_CARD', 'Select a card')}
@@ -260,20 +267,23 @@ const PaymentOptionsUI = (props) => {
             />
           )}
         </Modal>
-
         {/* Stripe direct */}
         <Modal
           title={t('ADD_CARD', 'Add card')}
-          open={isOpenMethod?.paymethod?.gateway === 'stripe_direct' && !paymethodData.id}
+          open={stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && !paymethodData.id}
           className='modal-info'
           onClose={() => handlePaymethodClick(null)}
         >
-          {isOpenMethod?.paymethod?.gateway === 'stripe_direct' && (
+          {stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && (
             <StripeElementsForm
+              methodsPay={methodsPay}
+              paymethod={isOpenMethod?.paymethod?.gateway}
+              cart={cart}
               businessId={props.businessId}
-              publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
+              publicKey={isOpenMethod?.paymethod?.credentials?.publishable || isOpenMethod?.paymethod?.credentials?.publishable_key}
               handleSource={handlePaymethodDataChange}
               onCancel={() => handlePaymethodClick(null)}
+              handlePlaceOrder={handlePlaceOrder}
             />
           )}
         </Modal>

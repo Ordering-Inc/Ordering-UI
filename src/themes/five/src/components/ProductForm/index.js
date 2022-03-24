@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
+import MdcPlayCircleOutline from '@meronex/icons/mdc/MdcPlayCircleOutline'
 
 import {
   ProductForm as ProductOptions,
@@ -53,7 +54,8 @@ import {
   WeightUnitSwitch,
   WeightUnitItem,
   ProductTagsListContainer,
-  ProductTagWrapper
+  ProductTagWrapper,
+  VideoGalleryWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TextArea } from '../../styles/Inputs'
@@ -99,6 +101,7 @@ const ProductOptionsUI = (props) => {
   const [tabValue, setTabValue] = useState('all')
   const productContainerRef = useRef(null)
   const [gallery, setGallery] = useState([])
+  const [videoGallery, setVideoGallery] = useState(null)
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [isHaveWeight, setIsHaveWeight] = useState(false)
   const [qtyBy, setQtyBy] = useState({
@@ -171,6 +174,13 @@ const ProductOptionsUI = (props) => {
     setQtyBy({ [val]: true, [!val]: false })
   }
 
+  const getOverFlowImage = (url) => {
+    const keys = url.split('/')
+    const _videoId = keys[keys.length - 1]
+    const overFlowImg = 'http://img.youtube.com/vi/' + _videoId + '/0.jpg'
+    return overFlowImg
+  }
+
   useEffect(() => {
     if (document.getElementById(`${tabValue}`)) {
       const extraHeight = windowSize.width < 769 ? 100 : 42
@@ -188,13 +198,20 @@ const ProductOptionsUI = (props) => {
 
   useEffect(() => {
     const imageList = []
+    const videoList = []
     imageList.push(product?.images || theme.images?.dummies?.product)
     if (product?.gallery && product?.gallery?.length > 0) {
       for (const galleryItem of product?.gallery) {
-        imageList.push(galleryItem?.file)
+        if (galleryItem?.file) {
+          imageList.push(galleryItem?.file)
+        }
+        if (galleryItem?.video) {
+          videoList.push(galleryItem?.video)
+        }
       }
     }
     setGallery(imageList)
+    setVideoGallery(videoList)
 
     if (product?.weight && product?.weight_unit) {
       setIsHaveWeight(true)
@@ -254,6 +271,15 @@ const ProductOptionsUI = (props) => {
                       <img src={img} alt='' />
                     </SwiperSlide>
                   ))}
+                  {videoGallery && videoGallery.length > 0 && (
+                    <>
+                      {videoGallery.map((video, j) => (
+                        <SwiperSlide key={j}>
+                          <iframe style={{ border: 'none', width: '100%', height: '100%' }} src={video} />
+                        </SwiperSlide>
+                      ))}
+                    </>
+                  )}
                 </Swiper>
                 <Swiper
                   onSwiper={setThumbsSwiper}
@@ -291,6 +317,18 @@ const ProductOptionsUI = (props) => {
                       <img src={img} alt='' />
                     </SwiperSlide>
                   ))}
+                  {videoGallery && videoGallery.length > 0 && (
+                    <>
+                      {videoGallery.map((video, j) => (
+                        <SwiperSlide key={j}>
+                          <VideoGalleryWrapper>
+                            <img src={getOverFlowImage(video)} alt='' />
+                            <MdcPlayCircleOutline />
+                          </VideoGalleryWrapper>
+                        </SwiperSlide>
+                      ))}
+                    </>
+                  )}
                 </Swiper>
               </SwiperWrapper>
             </WrapperImage>
