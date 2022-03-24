@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const AdviceContainer = styled.div`
-  background-color: #122428;
+  background-color: ${props => props.theme.colors?.darkGreen};
   padding: 30px 0;
 `
 export const AdviceInnerContainer = styled.div`
@@ -20,11 +20,11 @@ export const AdviceLeftContent = styled.div`
   flex-direction: column;
   justify-content: center;
   h1 {
-    color: #FFF;
+    color: ${props => props.theme.colors.primaryContrast};
     margin: 0px;
   }
   p {
-    color: #FFF;
+    color: ${props => props.theme.colors.primaryContrast};;
   }
   @media (max-width: 576px) {
     width: 100%;
@@ -66,7 +66,7 @@ export const WrapImage = (props) => {
 }
 export const AdviceDescriptionContainer = styled.div`
   width: 40%;
-  background-color: #FFC043;
+  background-color: ${props => props.theme.colors?.yellow};
   padding: 10px;
 
   p {
