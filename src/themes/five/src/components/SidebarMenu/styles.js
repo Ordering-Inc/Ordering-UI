@@ -56,11 +56,11 @@ export const SidebarContent = styled.div`
   position: fixed;
   z-index: 1005;
   top: 0;
-  background-color: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};
+  background-color: ${({ theme }) => theme.colors.backgroundPage};
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
-  box-shadow: ${({ isHome }) => isHome ? 'rgba(0, 0, 0, 0.7) 0px 8px 24px;' : 'rgba(0, 0, 0, 0.2) 0px 8px 24px;'};
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
 
   ${props => props.theme?.rtl ? css`
       right: 0;
@@ -87,7 +87,7 @@ export const MenuClose = styled.button`
   user-select: none;
   text-decoration: none;
   text-align: center;
-  background-color: ${({ isHome }) => isHome ? '#333' : 'rgb(247, 247, 247)'};
+  background-color: rgb(247, 247, 247);
   box-shadow: transparent 0px 0px 0px 1px inset;
   width: 35px;
   height: 35px;
@@ -119,7 +119,7 @@ export const MenuLink = styled.a`
   text-align: inherit;
   display: block;
   width: 100%;
-  background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};;
+  background: ${({ theme }) => theme.colors.backgroundPage};
   outline: none !important;
 
   &:hover {
@@ -162,7 +162,7 @@ export const MenuLinkIcon = styled.div`
     color: #000;
     width: 24px;
     height: 24px;
-    color: ${({ active, theme, isHome }) => active ? theme.colors.primary : isHome ? '#FFF' : '#000'}
+    color: ${({ active, theme }) => active ? theme.colors.primary : '#000'}
   }
 `
 
@@ -189,7 +189,7 @@ export const TextInfo = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${({ active, theme, isHome }) => active ? theme.colors.primary : isHome ? '#FFF' : '#000'}
+  color: ${({ active, theme }) => active ? theme.colors.primary : '#000'}
 
   ${props => props.theme?.rtl && css`
     text-align: right;
