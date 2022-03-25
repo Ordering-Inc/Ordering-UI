@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { StarFill } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
@@ -28,6 +28,13 @@ import {
   BusinessMoreDetail
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
+
+import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+import isBetween from 'dayjs/plugin/isBetween'
+
+dayjs.extend(timezone)
+dayjs.extend(isBetween)
 
 const types = ['food', 'laundry', 'alcohol', 'groceries']
 
@@ -62,6 +69,34 @@ export const BusinessBasicInformation = (props) => {
     ))
     return _types.join(', ')
   }
+
+  useEffect(() => {
+    if (businessState?.loading) return
+    if (!businessState?.business?.open) {
+      setIsPreOrder(true)
+      return
+    }
+    let timeout = null
+    const currentDate = dayjs().tz(businessState?.business?.timezone)
+    let lapse = null
+    if (businessState?.business?.today?.enabled) {
+      lapse = businessState?.business?.today?.lapses?.find(lapse => {
+        const from = currentDate.hour(lapse.open.hour).minute(lapse.open.minute)
+        const to = currentDate.hour(lapse.close.hour).minute(lapse.close.minute)
+        return currentDate.unix() >= from.unix() && currentDate.unix() <= to.unix()
+      })
+    }
+    if (lapse) {
+      const to = currentDate.hour(lapse.close.hour).minute(lapse.close.minute)
+      const timeToClose = (to.unix() - currentDate.unix()) * 1000
+      timeout = setTimeout(() => {
+        setIsPreOrder(true)
+      }, timeToClose)
+    }
+    return () => {
+      timeout && clearTimeout(timeout)
+    }
+  }, [businessState?.business])
 
   return (
     <>
