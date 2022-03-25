@@ -297,3 +297,21 @@ export const BusinessInformation = styled.div`
     }
   }
 `
+
+export const NoOrdersWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 0px;
+    margin-bottom: 25px;
+  }
+
+  button {
+    height: 44px;
+  }
+`
