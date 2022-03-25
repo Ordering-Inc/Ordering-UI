@@ -53,6 +53,16 @@ var MyOrders = function MyOrders(props) {
       selectItem = _useState2[0],
       setSelectItem = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isEmptyActive = _useState4[0],
+      setIsEmptyActive = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isEmptyPast = _useState6[0],
+      setIsEmptyPast = _useState6[1];
+
   var filterList = [{
     key: 'all',
     value: t('ALL', 'All')
@@ -94,10 +104,14 @@ var MyOrders = function MyOrders(props) {
     horizontal: true
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'active') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     activeOrders: true,
-    horizontal: true
+    horizontal: true,
+    setIsEmptyActive: setIsEmptyActive,
+    isEmptyActive: isEmptyActive,
+    isEmptyPast: isEmptyPast
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'past') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     pastOrders: true,
-    horizontal: true
+    horizontal: true,
+    setIsEmptyPast: setIsEmptyPast
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

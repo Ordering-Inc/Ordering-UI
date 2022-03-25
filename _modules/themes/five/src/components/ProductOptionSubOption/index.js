@@ -101,7 +101,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
 
     toggleSelect();
 
-    if (balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 ? void 0 : (_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : _option$suboptions.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1)) {
+    if (balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 ? void 0 : (_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : _option$suboptions.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1) && !state.selected) {
       setShowMessage(true);
     }
   };
@@ -109,7 +109,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
   (0, _react.useEffect)(function () {
     var _option$suboptions2;
 
-    if (!(balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 ? void 0 : (_option$suboptions2 = option.suboptions) === null || _option$suboptions2 === void 0 ? void 0 : _option$suboptions2.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1))) {
+    if (!(balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 ? void 0 : (_option$suboptions2 = option.suboptions) === null || _option$suboptions2 === void 0 ? void 0 : _option$suboptions2.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1) && !state.selected)) {
       setShowMessage(false);
     }
   }, [balance]);

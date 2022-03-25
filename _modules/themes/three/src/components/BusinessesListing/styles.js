@@ -23,7 +23,11 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var AdviceContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background-color: #122428;\n  padding: 30px 0;\n"])));
+var AdviceContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background-color: ", ";\n  padding: 30px 0;\n"])), function (props) {
+  var _props$theme$colors;
+
+  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.darkGreen;
+});
 
 exports.AdviceContainer = AdviceContainer;
 
@@ -31,7 +35,11 @@ var AdviceInnerContainer = _styledComponents.default.div(_templateObject2 || (_t
 
 exports.AdviceInnerContainer = AdviceInnerContainer;
 
-var AdviceLeftContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  h1 {\n    color: #FFF;\n    margin: 0px;\n  }\n  p {\n    color: #FFF;\n  }\n  @media (max-width: 576px) {\n    width: 100%;\n  }\n"])));
+var AdviceLeftContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  h1 {\n    color: ", ";\n    margin: 0px;\n  }\n  p {\n    color: ", ";;\n  }\n  @media (max-width: 576px) {\n    width: 100%;\n  }\n"])), function (props) {
+  return props.theme.colors.primaryContrast;
+}, function (props) {
+  return props.theme.colors.primaryContrast;
+});
 
 exports.AdviceLeftContent = AdviceLeftContent;
 
@@ -62,10 +70,14 @@ var WrapImage = function WrapImage(props) {
 
 exports.WrapImage = WrapImage;
 
-var AdviceDescriptionContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 40%;\n  background-color: #FFC043;\n  padding: 10px;\n\n  p {\n    font-weight: 600;\n    color: ", ";\n  }\n\n  @media (max-width: 992px) {\n    width: 50%;\n  }\n"])), function (props) {
-  var _props$theme$colors;
+var AdviceDescriptionContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 40%;\n  background-color: ", ";\n  padding: 10px;\n\n  p {\n    font-weight: 600;\n    color: ", ";\n  }\n\n  @media (max-width: 992px) {\n    width: 50%;\n  }\n"])), function (props) {
+  var _props$theme$colors2;
 
-  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.black;
+  return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.yellow;
+}, function (props) {
+  var _props$theme$colors3;
+
+  return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.black;
 });
 
 exports.AdviceDescriptionContainer = AdviceDescriptionContainer;
@@ -77,9 +89,9 @@ exports.BusinessContainer = BusinessContainer;
 var WrapperSearch = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin: 10px 20px 0px;\n\n  ", "\n"])), function (_ref2) {
   var isCustomLayout = _ref2.isCustomLayout;
   return isCustomLayout && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    box-sizing: border-box;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: relative;\n    margin: 0 auto;\n    margin-top: 10px;\n    margin-bottom: 20px;\n    width: 100%; \n    padding: 0 20px;\n\n    svg {\n      font-size: 26px;\n      color: ", ";\n      margin-left: 10px;\n      cursor: pointer;\n    }\n    \n    @media(min-width: 681px){\n      width: 75%;\n      padding: 0;\n    }\n\n    @media(min-width: 1201px){\n      width: 50%;\n    }\n  "])), function (props) {
-    var _props$theme, _props$theme$colors2;
+    var _props$theme, _props$theme$colors4;
 
-    return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors2 = _props$theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.primary;
+    return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors4 = _props$theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.primary;
   });
 });
 
