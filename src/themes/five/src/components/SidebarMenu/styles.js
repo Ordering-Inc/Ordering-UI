@@ -31,7 +31,7 @@ export const IconContent = styled.button`
   user-select: none;
   text-decoration: none;
   text-align: center;
-  background-color: ${({ isHome }) => isHome ? '#333' : 'rgb(247, 247, 247)'};
+  background-color: rgb(247, 247, 247);
   box-shadow: transparent 0px 0px 0px 1px inset;
   width: 35px;
   height: 35px;

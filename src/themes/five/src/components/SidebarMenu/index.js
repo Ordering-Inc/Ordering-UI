@@ -6,7 +6,7 @@ import AiOutlineUserAdd from '@meronex/icons/ai/AiOutlineUserAdd'
 import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
 import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
-import BiWallet from '@meronex/icons/bi/BiWallet';
+import BiWallet from '@meronex/icons/bi/BiWallet'
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
@@ -114,7 +114,6 @@ export const SidebarMenu = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <Container auth={auth}>
         <IconContent
-          isHome={isHome}
           aria-label='menu'
           onClick={() => actionSidebar(true)}
         >
