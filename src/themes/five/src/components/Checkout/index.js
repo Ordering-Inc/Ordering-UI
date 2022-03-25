@@ -75,7 +75,8 @@ const CheckoutUI = (props) => {
     setIsResetPaymethod,
     handleChangeDeliveryOption,
     instructionsOptions,
-    deliveryOptionSelected
+    deliveryOptionSelected,
+    handleStoreRedirect
   } = props
 
   const theme = useTheme()
@@ -187,6 +188,11 @@ const CheckoutUI = (props) => {
       // changePaymethod(cart?.business_id, null, null)
     }
   }, [isResetPaymethod])
+
+  useEffect(() => {
+    if (cart?.products?.length) return
+    handleStoreRedirect(cart?.business?.slug)
+  }, [cart?.products])
 
   return (
     <>
