@@ -1468,9 +1468,9 @@
   integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
 
 "@react-native-async-storage/async-storage@^1.13.1":
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.16.1.tgz#1dbaa9e0f9736e4ab8fc04c628bbb608fd80b068"
-  integrity sha512-aQ7ka+Ii1e/q+7AVFIZPt4kDeSH8b784wMDtz19Kf4A7hf+OgCHBlUQpOXsrv8XxhlBxu0hv4tfrDO15ChnV0Q==
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.0.tgz#6666e980af590d77f017065982ead74c1420f93a"
+  integrity sha512-Kr6HOHbLOZjFXnLwT9c9i1Nwb96Zj7D/bwhrJg+L4b3BCR4DlvJhUQ8gBbc45JiTOiU6SMn/1KS7MDuOjIhCzA==
   dependencies:
     merge-options "^3.0.4"
 
@@ -1520,7 +1520,7 @@
     "@sentry/types" "5.30.0"
     tslib "^1.9.3"
 
-"@sentry/react@^5.25.0", "@sentry/react@^5.27.1":
+"@sentry/react@^5.25.0":
   version "5.30.0"
   resolved "https://registry.yarnpkg.com/@sentry/react/-/react-5.30.0.tgz#320e05f766b6a26faefa8d76d1101fd50c69f541"
   integrity sha512-dvn4mqCgbeEuUXEGp5P9PaW5j4GWTFUSdx/yG8f9IxNZv5zM+7otjog9ukrubFZvlxVxD/PrIxK0MhadfFY/Dw==
@@ -1532,7 +1532,7 @@
     hoist-non-react-statics "^3.3.2"
     tslib "^1.9.3"
 
-"@sentry/tracing@^5.25.0", "@sentry/tracing@^5.27.1":
+"@sentry/tracing@^5.25.0":
   version "5.30.0"
   resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-5.30.0.tgz#501d21f00c3f3be7f7635d8710da70d9419d4e1f"
   integrity sha512-dUFowCr0AIMwiLD7Fs314Mdzcug+gBVo/+NCMyDw8tFxJkwWAKl7Qa2OZxLQ0ZHjakcj1hNKfCQJ9rhyfOl4Aw==
@@ -3574,9 +3574,9 @@ date-fns@^2.24.0:
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
 dayjs@^1.9.3:
-  version "1.10.8"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.8.tgz#267df4bc6276fcb33c04a6735287e3f429abec41"
-  integrity sha512-wbNwDfBHHur9UOzNUjeKUOJ0fCb0a52Wx0xInmQ7Y8FstyajiV1NmK1e00cxsr9YrE9r7yAChE0VvpuY5Rnlow==
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.0.tgz#009bf7ef2e2ea2d5db2e6583d2d39a4b5061e805"
+  integrity sha512-JLC809s6Y948/FuCZPm5IX8rRhQwOiyMb2TfVVQEixG7P8Lm/gt5S7yoQZmC8x1UehI9Pb7sksEt4xx14m+7Ug==
 
 debug-log@^1.0.0:
   version "1.0.1"
@@ -6293,9 +6293,9 @@ levn@^0.3.0, levn@~0.3.0:
     type-check "~0.3.2"
 
 libphonenumber-js@^1.9.17:
-  version "1.9.49"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.49.tgz#d431703cd699be2ccced5b95f26182a7c50a9227"
-  integrity sha512-/wEOIONcVboFky+lWlCaF7glm1FhBz11M5PHeCApA+xDdVfmhKjHktHS8KjyGxouV5CSXIr4f3GvLSpJa4qMSg==
+  version "1.9.50"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.50.tgz#f5028a2c4cc47a69d69a0de3629afad97a613712"
+  integrity sha512-cCzQPChw2XbordcO2LKiw5Htx5leHVfFk/EXkxNHqJfFo7Fndcb1kF5wPJpc316vCJhhikedYnVysMh3Sc7Ocw==
 
 libphonenumber-js@^1.9.4, libphonenumber-js@^1.9.47:
   version "1.9.48"
@@ -7229,19 +7229,19 @@ optionator@^0.8.3:
   dependencies:
     "@babel/runtime" "^7.10.4"
 
-"ordering-components@github:Ordering-Inc/ordering-components#development":
+"ordering-components@github:Ordering-Inc/ordering-components#canny-feedback":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/cfe3e40c98cc664fa50c8216a82df89e62b83d1e"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/ccc70ac1eabda38895ad62bb7f571b7f4cb02d10"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
-    "@sentry/react" "^5.27.1"
-    "@sentry/tracing" "^5.27.1"
     "@stripe/react-stripe-js" "^1.1.2"
     "@stripe/stripe-js" "^1.9.0"
     dayjs "^1.9.3"
-    ordering-api-sdk "github:Ordering-Inc/ordering-api-sdk#development"
+    libphonenumber-js "^1.9.17"
+    ordering-api-sdk "github:Ordering-Inc/ordering-api-sdk#release"
     prop-types "^15.7.2"
+    react-google-recaptcha latest
     socket.io-client "^2.3.0"
 
 original@^1.0.0:
