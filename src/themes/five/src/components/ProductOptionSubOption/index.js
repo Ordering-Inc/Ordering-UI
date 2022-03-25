@@ -59,13 +59,13 @@ const ProductOptionSubOptionUI = (props) => {
 
   const handleSuboptionClick = () => {
     toggleSelect()
-    if (balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1)) {
+    if (balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1) && !state.selected) {
       setShowMessage(true)
     }
   }
 
   useEffect(() => {
-    if (!(balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1))) {
+    if (!(balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1) && !state.selected)) {
       setShowMessage(false)
     }
   }, [balance])
