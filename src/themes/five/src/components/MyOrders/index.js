@@ -10,6 +10,8 @@ import MdClose from '@meronex/icons/ios/MdClose'
 export const MyOrders = (props) => {
   const [, t] = useLanguage()
   const [selectItem, setSelectItem] = useState('all')
+  const [isEmptyActive, setIsEmptyActive] = useState(false)
+  const [isEmptyPast, setIsEmptyPast] = useState(false)
 
   const filterList = [
     { key: 'all', value: t('ALL', 'All') },
@@ -53,13 +55,25 @@ export const MyOrders = (props) => {
         )}
         {(selectItem === 'all' || selectItem === 'active') && (
           <>
-            <OrdersOption {...props} activeOrders horizontal />
+            <OrdersOption
+              {...props}
+              activeOrders
+              horizontal
+              setIsEmptyActive={setIsEmptyActive}
+              isEmptyActive={isEmptyActive}
+              isEmptyPast={isEmptyPast}
+            />
             <Divider />
           </>
         )}
         {(selectItem === 'all' || selectItem === 'past') && (
           <>
-            <OrdersOption {...props} pastOrders horizontal />
+            <OrdersOption
+              {...props}
+              pastOrders
+              horizontal
+              setIsEmptyPast={setIsEmptyPast}
+            />
             <Divider />
           </>
         )}
