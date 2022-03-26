@@ -72,10 +72,6 @@ export const BusinessBasicInformation = (props) => {
 
   useEffect(() => {
     if (businessState?.loading) return
-    if (!businessState?.business?.open) {
-      setIsPreOrder(true)
-      return
-    }
     let timeout = null
     const currentDate = dayjs().tz(businessState?.business?.timezone)
     let lapse = null
