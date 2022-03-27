@@ -82,6 +82,8 @@ export const BusinessCartContent = styled.div`
   padding: 30px;
   position: relative;
   margin-bottom: 30px;
+  max-height: ${({ maxHeight }) => `${maxHeight}px`};
+  overflow: auto;
 
   .product.accordion {
     margin: 0;
