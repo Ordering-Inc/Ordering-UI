@@ -162,7 +162,7 @@ export const RenderProductsLayout = (props) => {
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
                 <BusinessCartContainer>
-                  <BusinessCartContent>
+                  <BusinessCartContent maxHeight={window.innerHeight - 100}>
                     {currentCart?.products?.length > 0 ? (
                       <>
                         <Title>{t('YOUR_CART', 'Your cart')}</Title>
