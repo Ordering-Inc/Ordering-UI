@@ -257,6 +257,17 @@ export const ProductActions = styled.div`
       pointer-events: none;
     }
   }
+  .qty {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    height: 38px;
+    min-width: 60px;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0 10px;
+  }
 
   @media (min-width: 577px) {
     position: sticky;
@@ -287,17 +298,6 @@ export const ProductActions = styled.div`
         width: 30%;
       }
     }
-
-    .qty {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 38px;
-        min-width: 60px;
-        border: 1px solid #DEE2E6;
-        box-sizing: border-box;
-        border-radius: 7.6px;
-      }
   }
 `
 export const SkeletonBlock = styled.div`

@@ -25,6 +25,7 @@ import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { AddressList } from '../AddressList'
 
 import { Modal } from '../Modal'
+import { Alert } from '../Confirm'
 import { Button } from '../../styles/Buttons'
 import { Tabs, Tab } from '../../styles/Tabs'
 
@@ -58,7 +59,7 @@ import {
   VideoGalleryWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
-import { TextArea } from '../../styles/Inputs'
+import { Input, TextArea } from '../../styles/Inputs'
 import { NotFoundSource } from '../NotFoundSource'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, {
@@ -79,6 +80,7 @@ const ProductOptionsUI = (props) => {
     productCart,
     increment,
     decrement,
+    handleChangeProductCartQuantity,
     showOption,
     maxProductQuantity,
     errors,
@@ -109,7 +111,7 @@ const ProductOptionsUI = (props) => {
     pieces: true
   })
   const [pricePerWeightUnit, setPricePerWeightUnit] = useState(null)
-
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const closeModal = () => {
@@ -179,6 +181,17 @@ const ProductOptionsUI = (props) => {
     const _videoId = keys[keys.length - 1]
     const overFlowImg = 'http://img.youtube.com/vi/' + _videoId + '/0.jpg'
     return overFlowImg
+  }
+
+  const onChangeProductCartQuantity = (quantity) => {
+    if (quantity >= maxProductQuantity) {
+      setAlertState({
+        open: true,
+        content: [t('MAX_QUANTITY', 'The max quantity is _number_').replace('_number_', maxProductQuantity)]
+      })
+      return
+    }
+    handleChangeProductCartQuantity(quantity)
   }
 
   useEffect(() => {
@@ -502,9 +515,22 @@ const ProductOptionsUI = (props) => {
                     <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
                       <FiMinusCircle
                         onClick={decrement}
-                        className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
+                        className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
                       />
-                      {qtyBy?.pieces && (<span className='qty'>{productCart.quantity}</span>)}
+                      {
+                        qtyBy?.pieces && (
+                          <Input
+                            className='qty'
+                            value={productCart?.quantity || ''}
+                            onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
+                            onKeyPress={(e) => {
+                              if (!/^[0-9.]$/.test(e.key)) {
+                                e.preventDefault()
+                              }
+                            }}
+                          />
+                        )
+                      }
                       {qtyBy?.weight_unit && (<span className='qty'>{productCart.quantity * product?.weight}</span>)}
                       <FiPlusCircle
                         onClick={increment}
@@ -525,7 +551,7 @@ const ProductOptionsUI = (props) => {
                     className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                     color='primary'
                     onClick={() => handleSaveProduct()}
-                    disabled={orderState.loading}
+                    disabled={orderState.loading || productCart?.quantity === 0}
                   >
                     {orderState.loading ? (
                       <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
@@ -638,6 +664,15 @@ const ProductOptionsUI = (props) => {
             content={error[0]?.message || error[0]}
           />
         )}
+        <Alert
+          title={t('SEARCH', 'Search')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => setAlertState({ open: false, content: [] })}
+          onAccept={() => setAlertState({ open: false, content: [] })}
+          closeOnBackdrop={false}
+        />
       </ProductContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

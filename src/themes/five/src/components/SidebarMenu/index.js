@@ -6,7 +6,7 @@ import AiOutlineUserAdd from '@meronex/icons/ai/AiOutlineUserAdd'
 import FaRegAddressCard from '@meronex/icons/fa/FaRegAddressCard'
 import FaRegListAlt from '@meronex/icons/fa/FaRegListAlt'
 import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
-import BiWallet from '@meronex/icons/bi/BiWallet';
+import BiWallet from '@meronex/icons/bi/BiWallet'
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
@@ -48,8 +48,6 @@ export const SidebarMenu = (props) => {
   const [modalPageToShow, setModalPageToShow] = useState(null)
 
   const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
-
-  const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -114,7 +112,6 @@ export const SidebarMenu = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <Container auth={auth}>
         <IconContent
-          isHome={isHome}
           aria-label='menu'
           onClick={() => actionSidebar(true)}
         >
@@ -122,10 +119,8 @@ export const SidebarMenu = (props) => {
         </IconContent>
         <SidebarContent
           id='sidebar_menu'
-          isHome={isHome}
         >
           <MenuClose
-            isHome={isHome}
             aria-label='close'
             onClick={() => actionSidebar(false)}
           >
@@ -133,17 +128,15 @@ export const SidebarMenu = (props) => {
           </MenuClose>
 
           {userCustomer && (
-            <MenuLink isHome={isHome} isCustomer={userCustomer}>
+            <MenuLink isCustomer={userCustomer}>
               <WrappContent>
                 <MenuLinkIcon
-                  isHome={isHome}
                   active={false}
                 >
                   <FaUserCircle />
                 </MenuLinkIcon>
                 <MenuLinkText>
                   <TextInfo
-                    isHome={isHome}
                     active={false}
                   >
                     {`${userCustomer?.name} ${userCustomer?.lastname}`}
@@ -159,12 +152,10 @@ export const SidebarMenu = (props) => {
           )}
 
           <MenuLink
-            isHome={isHome}
             onClick={() => handleGoToPage({ page: options?.address?.location ? 'search' : 'home' })}
           >
             <WrappContent>
               <MenuLinkIcon
-                isHome={isHome}
                 active={
                   window.location.pathname === '/' ||
                   window.location.pathname === '/home' ||
@@ -179,7 +170,6 @@ export const SidebarMenu = (props) => {
               </MenuLinkIcon>
               <MenuLinkText>
                 <TextInfo
-                  isHome={isHome}
                   active={
                     window.location.pathname === '/' ||
                     window.location.pathname === '/home' ||
@@ -204,12 +194,10 @@ export const SidebarMenu = (props) => {
           {auth && (
             <>
               <MenuLink
-                isHome={isHome}
                 onClick={() => handleGoToPage({ page: 'profile' })}
               >
                 <WrappContent>
                   <MenuLinkIcon
-                    isHome={isHome}
                     active={
                       window.location.pathname === '/profile'
                     }
@@ -218,7 +206,6 @@ export const SidebarMenu = (props) => {
                   </MenuLinkIcon>
                   <MenuLinkText>
                     <TextInfo
-                      isHome={isHome}
                       active={
                         window.location.pathname === '/profile'
                       }
@@ -235,12 +222,10 @@ export const SidebarMenu = (props) => {
               </MenuLink>
               {isWalletEnabled && (
                 <MenuLink
-                  isHome={isHome}
                   onClick={() => handleGoToPage({ page: 'wallets' })}
                 >
                   <WrappContent>
                     <MenuLinkIcon
-                      isHome={isHome}
                       active={
                         window.location.pathname === '/wallets'
                       }
@@ -249,7 +234,6 @@ export const SidebarMenu = (props) => {
                     </MenuLinkIcon>
                     <MenuLinkText>
                       <TextInfo
-                        isHome={isHome}
                         active={
                           window.location.pathname === '/wallets'
                         }
@@ -266,12 +250,10 @@ export const SidebarMenu = (props) => {
                 </MenuLink>
               )}
               <MenuLink
-                isHome={isHome}
                 onClick={() => handleGoToPage({ page: 'help' })}
               >
                 <WrappContent>
                   <MenuLinkIcon
-                    isHome={isHome}
                     active={
                       window.location.pathname === '/help'
                     }
@@ -280,7 +262,6 @@ export const SidebarMenu = (props) => {
                   </MenuLinkIcon>
                   <MenuLinkText>
                     <TextInfo
-                      isHome={isHome}
                       active={
                         window.location.pathname === '/help'
                       }
@@ -298,12 +279,10 @@ export const SidebarMenu = (props) => {
               {
                 !isCustomerMode && (
                   <MenuLink
-                    isHome={isHome}
                     onClick={() => handleGoToPage({ page: 'orders' })}
                   >
                     <WrappContent>
                       <MenuLinkIcon
-                        isHome={isHome}
                         active={
                           window.location.pathname === '/profile/orders'
                         }
@@ -312,7 +291,6 @@ export const SidebarMenu = (props) => {
                       </MenuLinkIcon>
                       <MenuLinkText>
                         <TextInfo
-                          isHome={isHome}
                           active={
                             window.location.pathname === '/profile/orders'
                           }
@@ -336,19 +314,16 @@ export const SidebarMenu = (props) => {
           {!auth && (
             <>
               <MenuLink
-                isHome={isHome}
                 onClick={() => handleOpenLoginSignUp('login')}
               >
                 <WrappContent>
                   <MenuLinkIcon
-                    isHome={isHome}
                     active={modalPageToShow === 'login'}
                   >
                     <AiOutlineLogin />
                   </MenuLinkIcon>
                   <MenuLinkText>
                     <TextInfo
-                      isHome={isHome}
                       active={modalPageToShow === 'login'}
                     >
                       {t('SIGN_IN', 'Sign in')}
@@ -363,19 +338,16 @@ export const SidebarMenu = (props) => {
               </MenuLink>
               {!isHideSignup && (
                 <MenuLink
-                  isHome={isHome}
                   onClick={() => handleOpenLoginSignUp('signup')}
                 >
                   <WrappContent>
                     <MenuLinkIcon
-                      isHome={isHome}
                       active={modalPageToShow === 'signup'}
                     >
                       <AiOutlineUserAdd />
                     </MenuLinkIcon>
                     <MenuLinkText>
                       <TextInfo
-                        isHome={isHome}
                         active={modalPageToShow === 'signup'}
                       >
                         {t('SIGNUP', 'Sign up')}
