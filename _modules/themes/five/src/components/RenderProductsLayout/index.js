@@ -191,7 +191,9 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     errorQuantityProducts: errorQuantityProducts,
     business: business,
     currentCart: currentCart
-  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, null, (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, {
+    maxHeight: window.innerHeight - 100
+  }, (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isStore: true,
     isCustomMode: true,
     isForceOpenCart: true,

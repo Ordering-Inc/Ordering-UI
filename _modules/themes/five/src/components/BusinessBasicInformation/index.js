@@ -35,6 +35,12 @@ var _styles = require("./styles");
 
 var _BusinessPreorder = require("../BusinessPreorder");
 
+var _dayjs = _interopRequireDefault(require("dayjs"));
+
+var _timezone = _interopRequireDefault(require("dayjs/plugin/timezone"));
+
+var _isBetween = _interopRequireDefault(require("dayjs/plugin/isBetween"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -55,10 +61,14 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+_dayjs.default.extend(_timezone.default);
+
+_dayjs.default.extend(_isBetween.default);
+
 var types = ['food', 'laundry', 'alcohol', 'groceries'];
 
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc, _theme$defaultLanguag, _businessState$busine, _theme$images, _theme$images$dummies, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc, _theme$defaultLanguag, _businessState$busine7, _theme$images, _theme$images$dummies, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       businessState = props.businessState,
@@ -111,6 +121,36 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     return _types.join(', ');
   };
 
+  (0, _react.useEffect)(function () {
+    var _businessState$busine, _businessState$busine2, _businessState$busine3;
+
+    if (businessState !== null && businessState !== void 0 && businessState.loading) return;
+    var timeout = null;
+    var currentDate = (0, _dayjs.default)().tz(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.timezone);
+    var lapse = null;
+
+    if (businessState !== null && businessState !== void 0 && (_businessState$busine2 = businessState.business) !== null && _businessState$busine2 !== void 0 && (_businessState$busine3 = _businessState$busine2.today) !== null && _businessState$busine3 !== void 0 && _businessState$busine3.enabled) {
+      var _businessState$busine4, _businessState$busine5, _businessState$busine6;
+
+      lapse = businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : (_businessState$busine5 = _businessState$busine4.today) === null || _businessState$busine5 === void 0 ? void 0 : (_businessState$busine6 = _businessState$busine5.lapses) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.find(function (lapse) {
+        var from = currentDate.hour(lapse.open.hour).minute(lapse.open.minute);
+        var to = currentDate.hour(lapse.close.hour).minute(lapse.close.minute);
+        return currentDate.unix() >= from.unix() && currentDate.unix() <= to.unix();
+      });
+    }
+
+    if (lapse) {
+      var to = currentDate.hour(lapse.close.hour).minute(lapse.close.minute);
+      var timeToClose = (to.unix() - currentDate.unix()) * 1000;
+      timeout = setTimeout(function () {
+        setIsPreOrder(true);
+      }, timeToClose);
+    }
+
+    return function () {
+      timeout && clearTimeout(timeout);
+    };
+  }, [businessState === null || businessState === void 0 ? void 0 : businessState.business]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -170,7 +210,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SEARCH_PRODUCTS) || 'Search Products'),
-    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended
+    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.lazy_load_products_recommended
   }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     notAsync: true,
     notReload: true,

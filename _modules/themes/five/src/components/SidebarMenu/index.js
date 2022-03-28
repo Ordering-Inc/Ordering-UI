@@ -118,7 +118,6 @@ var SidebarMenu = function SidebarMenu(props) {
       setModalPageToShow = _useState6[1];
 
   var isWalletEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && ((configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1');
-  var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
 
   var closeModal = function closeModal() {
     setModalIsOpen(false);
@@ -184,31 +183,24 @@ var SidebarMenu = function SidebarMenu(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     auth: auth
   }, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
-    isHome: isHome,
     "aria-label": "menu",
     onClick: function onClick() {
       return actionSidebar(true);
     }
   }, /*#__PURE__*/_react.default.createElement(_IosMenu.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SidebarContent, {
-    id: "sidebar_menu",
-    isHome: isHome
+    id: "sidebar_menu"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuClose, {
-    isHome: isHome,
     "aria-label": "close",
     onClick: function onClick() {
       return actionSidebar(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), userCustomer && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     isCustomer: userCustomer
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: false
   }, /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: false
   }, "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       var _options$address;
 
@@ -217,88 +209,68 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
   }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
   }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({
         page: 'profile'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: window.location.pathname === '/profile'
   }, /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: window.location.pathname === '/profile'
   }, t('PROFILE', 'Profile'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), isWalletEnabled && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({
         page: 'wallets'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: window.location.pathname === '/wallets'
   }, /*#__PURE__*/_react.default.createElement(_BiWallet.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: window.location.pathname === '/wallets'
   }, t('WALLETS', 'Wallets'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({
         page: 'help'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: window.location.pathname === '/help'
   }, /*#__PURE__*/_react.default.createElement(_BiHelpCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: window.location.pathname === '/help'
   }, t('HELP', 'help'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       return handleGoToPage({
         page: 'orders'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: window.location.pathname === '/profile/orders'
   }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: window.location.pathname === '/profile/orders'
   }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
     onCustomClick: function onCustomClick() {
       return actionSidebar(false);
     }
   })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: modalPageToShow === 'login'
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineLogin.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: modalPageToShow === 'login'
   }, t('SIGN_IN', 'Sign in'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       return handleOpenLoginSignUp('signup');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: modalPageToShow === 'signup'
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineUserAdd.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: modalPageToShow === 'signup'
   }, t('SIGNUP', 'Sign up'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,

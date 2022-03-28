@@ -94,7 +94,7 @@ var mapConfigs = {
 };
 
 var CheckoutUI = function CheckoutUI(props) {
-  var _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _businessDetails$busi, _businessDetails$busi2, _theme$images, _theme$images$dummies, _configs$google_maps_, _props$beforeElements3, _props$beforeComponen3, _customerState$user, _customerState$user2, _props$beforeElements4, _props$beforeComponen4, _Object$values, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _props$beforeElements5, _props$beforeComponen5, _props$beforeElements6, _props$beforeComponen6, _businessDetails$busi7, _businessDetails$busi8, _props$beforeElements7, _props$beforeComponen7, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_u2, _configs$driver_tip_t2, _configs$driver_tip_u3, _props$beforeElements8, _props$beforeComponen8, _cart$products, _props$beforeElements9, _props$beforeComponen9, _props$afterComponent, _props$afterElements;
+  var _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _businessDetails$busi, _businessDetails$busi2, _theme$images, _theme$images$dummies, _configs$google_maps_, _props$beforeElements3, _props$beforeComponen3, _customerState$user, _customerState$user2, _props$beforeElements4, _props$beforeComponen4, _Object$values, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _props$beforeElements5, _props$beforeComponen5, _props$beforeElements6, _props$beforeComponen6, _businessDetails$busi7, _businessDetails$busi8, _props$beforeElements7, _props$beforeComponen7, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_u2, _configs$driver_tip_t2, _configs$driver_tip_u3, _props$beforeElements8, _props$beforeComponen8, _cart$products2, _props$beforeElements9, _props$beforeComponen9, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errors = props.errors,
@@ -110,7 +110,8 @@ var CheckoutUI = function CheckoutUI(props) {
       setIsResetPaymethod = props.setIsResetPaymethod,
       handleChangeDeliveryOption = props.handleChangeDeliveryOption,
       instructionsOptions = props.instructionsOptions,
-      deliveryOptionSelected = props.deliveryOptionSelected;
+      deliveryOptionSelected = props.deliveryOptionSelected,
+      handleStoreRedirect = props.handleStoreRedirect;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
@@ -259,6 +260,12 @@ var CheckoutUI = function CheckoutUI(props) {
       setIsResetPaymethod(true); // changePaymethod(cart?.business_id, null, null)
     }
   }, [isResetPaymethod]);
+  (0, _react.useEffect)(function () {
+    var _cart$products, _cart$business;
+
+    if (cart !== null && cart !== void 0 && (_cart$products = cart.products) !== null && _cart$products !== void 0 && _cart$products.length) return;
+    handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug);
+  }, [cart === null || cart === void 0 ? void 0 : cart.products]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -454,7 +461,7 @@ var CheckoutUI = function CheckoutUI(props) {
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
     cart: cart,
     isCheckout: true,
-    isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) || 0
+    isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) || 0
   })), (_props$beforeElements9 = props.beforeElementsSectionSeven) === null || _props$beforeElements9 === void 0 ? void 0 : _props$beforeElements9.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -558,9 +565,9 @@ var Checkout = function Checkout(props) {
       setIsResetPaymethod = _useState20[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
-    var _cart$products2;
+    var _cart$products3;
 
-    return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length);
+    return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);
   })) || null);
 
   var closeAlert = function closeAlert() {

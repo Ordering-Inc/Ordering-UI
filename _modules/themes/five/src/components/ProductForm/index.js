@@ -41,6 +41,8 @@ var _AddressList = require("../AddressList");
 
 var _Modal = require("../Modal");
 
+var _Confirm = require("../Confirm");
+
 var _Buttons = require("../../styles/Buttons");
 
 var _Tabs = require("../../styles/Tabs");
@@ -101,6 +103,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       productCart = props.productCart,
       increment = props.increment,
       decrement = props.decrement,
+      handleChangeProductCartQuantity = props.handleChangeProductCartQuantity,
       showOption = props.showOption,
       maxProductQuantity = props.maxProductQuantity,
       errors = props.errors,
@@ -186,6 +189,14 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       pricePerWeightUnit = _useState18[0],
       setPricePerWeightUnit = _useState18[1];
 
+  var _useState19 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState20 = _slicedToArray(_useState19, 2),
+      alertState = _useState20[0],
+      setAlertState = _useState20[1];
+
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
 
   var closeModal = function closeModal() {
@@ -269,6 +280,18 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     var _videoId = keys[keys.length - 1];
     var overFlowImg = 'http://img.youtube.com/vi/' + _videoId + '/0.jpg';
     return overFlowImg;
+  };
+
+  var onChangeProductCartQuantity = function onChangeProductCartQuantity(quantity) {
+    if (quantity >= maxProductQuantity) {
+      setAlertState({
+        open: true,
+        content: [t('MAX_QUANTITY', 'The max quantity is _number_').replace('_number_', maxProductQuantity)]
+      });
+      return;
+    }
+
+    handleChangeProductCartQuantity(quantity);
   };
 
   (0, _react.useEffect)(function () {
@@ -532,10 +555,19 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     className: isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'
   }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     onClick: decrement,
-    className: "".concat(productCart.quantity === 1 || isSoldOut ? 'disabled' : '')
-  }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.pieces) && /*#__PURE__*/_react.default.createElement("span", {
-    className: "qty"
-  }, productCart.quantity), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit) && /*#__PURE__*/_react.default.createElement("span", {
+    className: "".concat(productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : '')
+  }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.pieces) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    className: "qty",
+    value: (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) || '',
+    onChange: function onChange(e) {
+      return onChangeProductCartQuantity(parseInt(e.target.value));
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit) && /*#__PURE__*/_react.default.createElement("span", {
     className: "qty"
   }, productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
@@ -556,7 +588,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClick: function onClick() {
       return handleSaveProduct();
     },
-    disabled: orderState.loading
+    disabled: orderState.loading || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) === 0
   }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.LOADING) || 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.UPDATE) || 'Update') : t('ADD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.ADD) || 'Add'))), auth && !((_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     color: "primary",
@@ -625,6 +657,24 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     isPopup: true
   })), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0]
+  }), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('SEARCH', 'Search'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
