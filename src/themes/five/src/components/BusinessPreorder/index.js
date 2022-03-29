@@ -6,6 +6,7 @@ import {
   useConfig,
   useOrder
 } from 'ordering-components'
+import { useLocation } from 'react-router-dom'
 import moment from 'moment'
 import { useTheme } from 'styled-components'
 import { Select } from '../../styles/Select'
@@ -59,12 +60,14 @@ const BusinessPreorderUI = (props) => {
     handleAsap
   } = props
 
+  const { pathname } = useLocation()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
   const [{ configs }] = useConfig()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const windowSize = useWindowSize()
+
   const [type, setType] = useState('business_hours')
   const [menu, setMenu] = useState(null)
   const [timeList, setTimeList] = useState([])
@@ -144,6 +147,7 @@ const BusinessPreorderUI = (props) => {
   }, [type])
 
   useEffect(() => {
+    if (pathname.includes('store')) return
     handleAsap && handleAsap()
   }, [])
 
