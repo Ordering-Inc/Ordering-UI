@@ -24,6 +24,7 @@ import { Alert } from '../Confirm'
 import { TextArea } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
+import { reviewCommentList } from '../../utils'
 
 const ReviewOrderUI = (props) => {
   const { stars, order, handleSendReview, formState, closeReviewOrder, setIsReviewed, setStars } = props
@@ -35,14 +36,7 @@ const ReviewOrderUI = (props) => {
   const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
 
-  const commentsList = [
-    { key: 0, content: t('IT_WASNT_TASTY', "It wasn't tasty") },
-    { key: 1, content: t('IT_DOESNT_PACK_WELL', "It doesn't pack well") },
-    { key: 2, content: t('IT_ISNT_WORTH_WHAT_IT_COSTS', "It isn't worth what it costs") },
-    { key: 3, content: t('TOO_SLOW', 'Too slow') },
-    { key: 4, content: t('SUSTAINABLE_PACKAGING_WASNT_USED', "Sustainable packaging wasn't used") },
-    { key: 5, content: t('THEY_DID_NOT_FOLLOW_THE_ORDER_NOTES', 'They did not follow the order notes') }
-  ]
+  const commentsList = reviewCommentList(1)
 
   const qualificationList = [
     { key: 1, text: t('TERRIBLE', 'Terrible'), middleNode: false, left: 0, right: 'initial' },
@@ -162,9 +156,9 @@ const ReviewOrderUI = (props) => {
             </ReviewsProgressContent>
           </ReviewsProgressWrapper>
           <CommentsList>
-            <p>{t('COMMENTS', 'Comments')}</p>
+            <p>{commentsList[stars?.quality || 1]?.title}</p>
             {
-              commentsList?.map((commentItem, i) => (
+              commentsList[stars?.quality || 1]?.list?.map((commentItem, i) => (
                 <CommentButton
                   key={i}
                   active={isSelectedComment(commentItem?.key)}
