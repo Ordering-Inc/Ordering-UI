@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _moment = _interopRequireDefault(require("moment"));
 
 var _styledComponents = require("styled-components");
@@ -78,6 +80,9 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
       showButton = props.showButton,
       isAsap = props.isAsap,
       handleAsap = props.handleAsap;
+
+  var _useLocation = (0, _reactRouterDom.useLocation)(),
+      pathname = _useLocation.pathname;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -201,6 +206,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     if (type === 'business_hours') setMenu(null);
   }, [type]);
   (0, _react.useEffect)(function () {
+    if (pathname.includes('store')) return;
     handleAsap && handleAsap();
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessPreorderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
