@@ -29,6 +29,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _Confirm = require("../Confirm");
 
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -64,6 +66,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleProductReview = function SingleProductReview(props) {
+  var _commentsList;
+
   var product = props.product,
       handleChangeFormState = props.handleChangeFormState,
       formState = props.formState;
@@ -92,22 +96,7 @@ var SingleProductReview = function SingleProductReview(props) {
       extraComment = _useState8[0],
       setExtraComment = _useState8[1];
 
-  var commentsList = [{
-    key: 0,
-    content: t('IT_WASNT_TASTY', "It wasn't tasty")
-  }, {
-    key: 1,
-    content: t('SMALL_PORTION', 'Small portion')
-  }, {
-    key: 2,
-    content: t('WET_OR_LEAKY', 'Wet or leaky')
-  }, {
-    key: 3,
-    content: t('SLOPPY_PRESENTATION', 'Sloppy presentation')
-  }, {
-    key: 4,
-    content: t('COLD_OR_MELTED', 'Cold or melted')
-  }];
+  var commentsList = (0, _utils.reviewCommentList)(2);
 
   var handleChangeComment = function handleChangeComment(commentItem) {
     var found = comments.find(function (comment) {
@@ -181,7 +170,7 @@ var SingleProductReview = function SingleProductReview(props) {
       return setIsLike(false);
     },
     active: !isLike
-  }, /*#__PURE__*/_react.default.createElement(_AiOutlineDislike.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, commentsList === null || commentsList === void 0 ? void 0 : commentsList.map(function (commentItem, i) {
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineDislike.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, (_commentsList = commentsList[isLike ? 'like' : 'dislike']) === null || _commentsList === void 0 ? void 0 : _commentsList.map(function (commentItem, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ButtonCustomized, {
       key: i,
       type: "button",

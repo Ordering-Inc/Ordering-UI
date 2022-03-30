@@ -27,6 +27,8 @@ var _Buttons = require("../../styles/Buttons");
 
 var _styledComponents = require("styled-components");
 
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -62,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReviewOrderUI = function ReviewOrderUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _commentsList, _commentsList2, _commentsList2$list, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var stars = props.stars,
       order = props.order,
@@ -105,25 +107,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       extraComment = _useState6[0],
       setExtraComment = _useState6[1];
 
-  var commentsList = [{
-    key: 0,
-    content: t('IT_WASNT_TASTY', "It wasn't tasty")
-  }, {
-    key: 1,
-    content: t('IT_DOESNT_PACK_WELL', "It doesn't pack well")
-  }, {
-    key: 2,
-    content: t('IT_ISNT_WORTH_WHAT_IT_COSTS', "It isn't worth what it costs")
-  }, {
-    key: 3,
-    content: t('TOO_SLOW', 'Too slow')
-  }, {
-    key: 4,
-    content: t('SUSTAINABLE_PACKAGING_WASNT_USED', "Sustainable packaging wasn't used")
-  }, {
-    key: 5,
-    content: t('THEY_DID_NOT_FOLLOW_THE_ORDER_NOTES', 'They did not follow the order notes')
-  }];
+  var commentsList = (0, _utils.reviewCommentList)(1);
   var qualificationList = [{
     key: 1,
     text: t('TERRIBLE', 'Terrible'),
@@ -285,7 +269,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
         return handleChangeStars(qualification === null || qualification === void 0 ? void 0 : qualification.key);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, qualification === null || qualification === void 0 ? void 0 : qualification.text, /*#__PURE__*/_react.default.createElement("span", null)));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENTS', 'Comments')), commentsList === null || commentsList === void 0 ? void 0 : commentsList.map(function (commentItem, i) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, (_commentsList = commentsList[(stars === null || stars === void 0 ? void 0 : stars.quality) || 1]) === null || _commentsList === void 0 ? void 0 : _commentsList.title), (_commentsList2 = commentsList[(stars === null || stars === void 0 ? void 0 : stars.quality) || 1]) === null || _commentsList2 === void 0 ? void 0 : (_commentsList2$list = _commentsList2.list) === null || _commentsList2$list === void 0 ? void 0 : _commentsList2$list.map(function (commentItem, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.CommentButton, {
       key: i,
       active: isSelectedComment(commentItem === null || commentItem === void 0 ? void 0 : commentItem.key),

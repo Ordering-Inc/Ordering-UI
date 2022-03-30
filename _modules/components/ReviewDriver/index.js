@@ -27,6 +27,8 @@ var _styledComponents = require("styled-components");
 
 var _styles = require("./styles");
 
+var _utils = require("../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -62,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReviewDriverUI = function ReviewDriverUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _order$driver, _order$driver2, _order$driver3, _order$driver4, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _order$driver, _order$driver2, _order$driver3, _order$driver4, _commentsList, _commentsList2, _commentsList2$list, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var dirverReviews = props.dirverReviews,
       order = props.order,
@@ -104,19 +106,7 @@ var ReviewDriverUI = function ReviewDriverUI(props) {
       alertState = _useState6[0],
       setAlertState = _useState6[1];
 
-  var commentsList = [{
-    key: 0,
-    content: t('FAST_AND_EFFICIENT', 'Fast and efficient')
-  }, {
-    key: 1,
-    content: t('DELIVERY_PERFECT', 'Delivery perfect')
-  }, {
-    key: 2,
-    content: t('EXCELLENT_COMMUNICATION', 'Excellent communication')
-  }, {
-    key: 3,
-    content: t('CORDIAL_SERVICE', 'Cordial service')
-  }];
+  var commentsList = (0, _utils.reviewCommentList)(1);
   var qualificationList = [{
     key: 1,
     text: t('TERRIBLE', 'Terrible'),
@@ -272,7 +262,7 @@ var ReviewDriverUI = function ReviewDriverUI(props) {
         return handleChangeReviews(qualification === null || qualification === void 0 ? void 0 : qualification.key);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, qualification === null || qualification === void 0 ? void 0 : qualification.text, /*#__PURE__*/_react.default.createElement("span", null)));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENTS', 'Comments')), commentsList === null || commentsList === void 0 ? void 0 : commentsList.map(function (commentItem, i) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, (_commentsList = commentsList[(dirverReviews === null || dirverReviews === void 0 ? void 0 : dirverReviews.qualification) || 1]) === null || _commentsList === void 0 ? void 0 : _commentsList.title), (_commentsList2 = commentsList[(dirverReviews === null || dirverReviews === void 0 ? void 0 : dirverReviews.qualification) || 1]) === null || _commentsList2 === void 0 ? void 0 : (_commentsList2$list = _commentsList2.list) === null || _commentsList2$list === void 0 ? void 0 : _commentsList2$list.map(function (commentItem, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.CommentButton, {
       key: i,
       active: isSelectedComment(commentItem.key),
