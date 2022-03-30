@@ -24,6 +24,7 @@ import {
   DriverInfoBlock,
   CommentButton
 } from './styles'
+import { reviewCommentList } from '../../utils'
 
 const ReviewDriverUI = (props) => {
   const {
@@ -44,12 +45,7 @@ const ReviewDriverUI = (props) => {
   const [extraComment, setExtraComment] = useState('')
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
 
-  const commentsList = [
-    { key: 0, content: t('FAST_AND_EFFICIENT', 'Fast and efficient') },
-    { key: 1, content: t('DELIVERY_PERFECT', 'Delivery perfect') },
-    { key: 2, content: t('EXCELLENT_COMMUNICATION', 'Excellent communication') },
-    { key: 3, content: t('CORDIAL_SERVICE', 'Cordial service') }
-  ]
+  const commentsList = reviewCommentList(1)
 
   const qualificationList = [
     { key: 1, text: t('TERRIBLE', 'Terrible'), middleNode: false, left: 0, right: 'initial' },
@@ -174,9 +170,9 @@ const ReviewDriverUI = (props) => {
             </ReviewsProgressContent>
           </ReviewsProgressWrapper>
           <CommentsList>
-            <p>{t('COMMENTS', 'Comments')}</p>
+            <p>{commentsList[dirverReviews?.qualification || 1]?.title}</p>
             {
-              commentsList?.map((commentItem, i) => (
+              commentsList[dirverReviews?.qualification || 1]?.list?.map((commentItem, i) => (
                 <CommentButton
                   key={i}
                   active={isSelectedComment(commentItem.key)}
