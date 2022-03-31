@@ -46,9 +46,6 @@ import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 
-import {InputPhoneNumber} from 'ordering-ui/callcenter_original'
-
-
 const LoginFormUI = (props) => {
   const {
     useLoginByEmail,
