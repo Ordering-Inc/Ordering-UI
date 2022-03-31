@@ -149,3 +149,36 @@ export const LanguageSelectorWrapper = styled(InputGroup)`
     }
   }
 `
+
+export const PromotionsWrapper = styled.div`
+  display: flex;
+  margin: 10px 0;
+  width: 100%;
+  > label {
+    font-size: 16px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 7px;
+    ` : css`
+      margin-left: 7px;
+    `}
+
+    > span:first-child {
+      font-weight: 500;
+      ${props => props.theme?.rtl ? css`
+        margin-left: 7px;
+      ` : css`
+        margin-right: 7px;
+      `}
+    }
+
+    > a {
+      color: ${props => props.theme.colors.primary} !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    > label {
+      font-size: 16px;
+    }
+  }
+`

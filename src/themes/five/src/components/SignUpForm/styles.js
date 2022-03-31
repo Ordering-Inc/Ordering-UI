@@ -292,6 +292,8 @@ export const TermsConditionWrapper = styled.div`
   }
 `
 
+export const PromotionsWrapper = styled(TermsConditionWrapper)``
+
 export const BussinessAndDriverSignUp = styled.div`
   width: 100%;
   display: flex;
@@ -313,4 +315,8 @@ export const BussinessAndDriverSignUp = styled.div`
     padding: 5px;
     margin: 0 10px;
   }
+`
+
+export const CheckboxArea = styled.div`
+
 `
