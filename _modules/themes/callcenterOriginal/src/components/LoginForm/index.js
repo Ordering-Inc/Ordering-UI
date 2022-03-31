@@ -15,13 +15,13 @@ var _reactHookForm = require("react-hook-form");
 
 var _styledComponents = require("styled-components");
 
+var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+
+var _reactOtpInput = _interopRequireDefault(require("react-otp-input"));
+
 var _orderingComponents = require("ordering-components");
 
-var _Confirm = require("../Confirm");
-
-var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
-
-var _InputPhoneNumber = require("../InputPhoneNumber");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("./styles");
 
@@ -35,21 +35,17 @@ var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
 
 var _utils = require("../../../../../utils");
 
-var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+var _Confirm = require("../Confirm");
 
-var _reactOtpInput = _interopRequireDefault(require("react-otp-input"));
+var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
-require("react/cjs/react.production.min");
+var _InputPhoneNumber = require("../InputPhoneNumber");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -74,7 +70,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -91,7 +87,8 @@ var LoginFormUI = function LoginFormUI(props) {
       loginTab = props.loginTab,
       isPopup = props.isPopup,
       credentials = props.credentials,
-      enableReCaptcha = props.enableReCaptcha;
+      enableReCaptcha = props.enableReCaptcha,
+      useRootPoint = props.useRootPoint;
   var numOtpInputs = 4;
 
   var _useApi = (0, _orderingComponents.useApi)(),
@@ -180,17 +177,26 @@ var LoginFormUI = function LoginFormUI(props) {
 
             case 4:
               setWillVerifyOtpState(true);
-              _context.next = 10;
+              _context.next = 13;
               break;
 
             case 7:
+              if (!projectName) {
+                _context.next = 12;
+                break;
+              }
+
               setOrdering(_objectSpread(_objectSpread({}, ordering), {}, {
                 project: projectName
               }));
-              localStorage.setItem('project', projectName);
+              localStorage.setItem('project_name', projectName);
               setSubmitted(true);
+              return _context.abrupt("return");
 
-            case 10:
+            case 12:
+              handleButtonLoginClick();
+
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -306,6 +312,12 @@ var LoginFormUI = function LoginFormUI(props) {
     formMethods.register('cellphone', {
       required: loginTab === 'cellphone' ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone')) : null
     });
+
+    if (useRootPoint) {
+      formMethods.register('project', {
+        required: t('VALIDATION_ERROR_PROJECT_REQUIRED', 'The field project is required').replace('_attribute_', t('PROJECT', 'Project'))
+      });
+    }
   }, [formMethods]);
   (0, _react.useEffect)(function () {
     handleSendOtp();
@@ -348,18 +360,10 @@ var LoginFormUI = function LoginFormUI(props) {
     } else resetOtpLeftTime();
   }, [verifyPhoneState]);
   (0, _react.useEffect)(function () {
-    if (ordering.project === null || !submitted) return;
+    if (ordering.project === null || !submitted || !useRootPoint) return;
     handleButtonLoginClick();
   }, [ordering, submitted]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, {
+  return /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
@@ -391,18 +395,10 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     active: loginTab === 'cellphone',
     borderBottom: loginTab === 'cellphone'
-  }, t('BY_PHONE', 'by Phone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, t('BY_PHONE', 'by Phone')))), (useLoginByCellphone || useLoginByEmail || useRootPoint) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup
-  }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeMidElements);
-  }), (_props$beforeMidCompo = props.beforeMidComponents) === null || _props$beforeMidCompo === void 0 ? void 0 : _props$beforeMidCompo.map(function (BeforeMidComponents, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }, useRootPoint && /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
     name: "project",
     "aria-label": "project",
@@ -467,15 +463,7 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.TogglePassword, {
     onClick: togglePasswordView
-  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null)), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Lock, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, MidElement);
-  }), (_props$afterMidCompon = props.afterMidComponents) === null || _props$afterMidCompon === void 0 ? void 0 : _props$afterMidCompon.map(function (MidComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
-      key: i
-    }, props));
-  }), !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null)), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Lock, null))), !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     RedirectLinkisPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
     handleReCaptcha: handleReCaptcha
@@ -502,14 +490,6 @@ var LoginFormUI = function LoginFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 
