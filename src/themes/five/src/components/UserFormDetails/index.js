@@ -113,7 +113,7 @@ export const UserFormDetailsUI = (props) => {
       })
       return
     }
-    if (isPhoneNumberValid && !isVerifiedPhone) {
+    if (formState?.changes?.cellphone && !isVerifiedPhone) {
       setAlertState({
         open: true,
         content: [t('VERIFY_ERROR_PHONE_NUMBER', 'The Phone Number field is not verified')]
