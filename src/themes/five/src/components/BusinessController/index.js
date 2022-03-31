@@ -41,7 +41,9 @@ const BusinessControllerUI = (props) => {
     isShowCallcenterInformation,
     isBusinessOpen,
     businessWillCloseSoonMinutes,
-    onPreorderBusiness
+    onPreorderBusiness,
+    isBusinessSearch,
+    firstCard
   } = props
 
   const theme = useTheme()
@@ -68,7 +70,7 @@ const BusinessControllerUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ContainerCard isSkeleton={isSkeleton}>
+      <ContainerCard isSkeleton={isSkeleton} isBusinessSearch={isBusinessSearch} firstCard={firstCard}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
           <BusinessHero>
             {isSkeleton ? (

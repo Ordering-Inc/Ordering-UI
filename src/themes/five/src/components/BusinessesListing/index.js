@@ -37,6 +37,7 @@ import {
 import { HighestRated } from '../HighestRated'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { OrderProgress } from '../OrderProgress'
+import { BusinessListingSearch } from '../BusinessListingSearch'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -51,7 +52,13 @@ const BusinessesListingUI = (props) => {
     handleChangeSearch,
     handleChangeBusinessType,
     handleBusinessClick,
-    onBusinessClick
+    onBusinessClick,
+    businessesSearchList,
+    handleChangeFilters,
+    filters,
+    termValue,
+    handleChangeTermValue,
+    businessesSearched
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -216,6 +223,18 @@ const BusinessesListingUI = (props) => {
             />
           </>
         )}
+        <BusinessesTitle>
+          {t('SEARCH', 'Search')}
+        </BusinessesTitle>
+        <BusinessListingSearch
+          businessesSearchList={businessesSearchList}
+          handleBusinessClick={handleBusinessClick}
+          termValue={termValue}
+          handleChangeFilters={handleChangeFilters}
+          filters={filters}
+          handleChangeTermValue={handleChangeTermValue}
+          businessesSearched={businessesSearched}
+        />
 
         {isCustomLayout && businessesList?.businesses?.length > 0 && (
           <BusinessesTitle>

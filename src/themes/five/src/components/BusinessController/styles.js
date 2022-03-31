@@ -12,20 +12,24 @@ export const ContainerCard = styled.div`
 
   width: calc(100% - 40px);
 
+  ${({ firstCard }) => firstCard && css`
+    margin-left: 0;
+  `}
+
   @media (min-width: 481px) {
     max-height: 320px;
   }
 
   @media (min-width: 681px) {
-    width: calc(50% - 40px);
+    width: ${({ isBusinessSearch }) => isBusinessSearch ? 'calc(100% - 40px)' : 'calc(50% - 40px)'};
   }
 
   @media (min-width: 993px) {
-    width: calc(33% - 40px);
+    width: ${({ isBusinessSearch }) => isBusinessSearch ? 'calc(50% - 40px)' : 'calc(33% - 40px)'};
   }
 
   @media (min-width: 1200px) {
-    width: calc(25% - 40px);
+    width: ${({ isBusinessSearch }) => isBusinessSearch ? 'calc(33% - 40px)' : 'calc(25% - 40px)'};
   }
 `
 
@@ -133,7 +137,7 @@ export const BusinessTags = styled.div`
     ` : css`
         margin-right: 0px;
     `
-    }
+  }
     }
   }
 `
@@ -262,6 +266,7 @@ export const Medadata = styled.div`
   font-size: 12px;
   color: #909BA9;
   flex-wrap: wrap;
+  
 
   ${({ isCustomerMode }) => isCustomerMode && css`
     > div {
@@ -270,7 +275,7 @@ export const Medadata = styled.div`
   `}
   ${({ isSkeleton }) => isSkeleton && css`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   `}
   p {
     color: #909BA9;
