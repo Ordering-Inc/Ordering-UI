@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import FcCancel from '@meronex/icons/fc/FcCancel'
 import Skeleton from 'react-loading-skeleton'
 import {
-  // UserFormDetails as UserFormController,
+  UserFormDetails as UserFormController,
   useLanguage,
   useSession
 } from 'ordering-components'
-import { UserFormDetails as UserFormController } from '../UserProfileForm/naked'
 import { UserFormDetailsUI } from '../UserFormDetails'
 import { VerifyCodeForm } from '../VerifyCodeForm'
 import { Alert } from '../Confirm'

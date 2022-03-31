@@ -13,8 +13,6 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _naked = require("./naked");
-
 var _UserFormDetails = require("../UserFormDetails");
 
 var _Modal = require("../Modal");
@@ -318,7 +316,7 @@ var UserProfileForm = function UserProfileForm(props) {
     UIComponent: UserProfileFormUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_naked.UserFormDetails, UserProfileProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.UserFormDetails, UserProfileProps);
 };
 
 exports.UserProfileForm = UserProfileForm;
