@@ -21,7 +21,6 @@ export const VerifyCodeForm = (props) => {
 
   const [, t] = useLanguage()
   const [otpState, setOtpState] = useState('')
-  console.log(credentials, 'This is credential')
 
   const numOtpInputs = 4
 

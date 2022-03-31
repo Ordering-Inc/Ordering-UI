@@ -128,7 +128,7 @@ const UserProfileFormUI = (props) => {
         content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
       })
     } else { resetOtpLeftTime() }
-  }, [checkPhoneCodeState])
+  }, [checkPhoneCodeState?.result?.result])
 
   useEffect(() => {
     if (verifyPhoneState?.result?.error) {
@@ -137,7 +137,7 @@ const UserProfileFormUI = (props) => {
         content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
       })
     } else { resetOtpLeftTime() }
-  }, [verifyPhoneState])
+  }, [verifyPhoneState?.result?.result])
 
   useEffect(() => {
     toggleIsEdit()
