@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SkeletonForm = exports.LanguageSelectorWrapper = exports.InputPhoneNumberWrapper = exports.InputGroup = exports.FormInput = exports.Divider = exports.ActionsForm = void 0;
+exports.SkeletonForm = exports.PromotionsWrapper = exports.LanguageSelectorWrapper = exports.InputPhoneNumberWrapper = exports.InputGroup = exports.FormInput = exports.Divider = exports.ActionsForm = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -46,3 +46,17 @@ var InputPhoneNumberWrapper = (0, _styledComponents.default)(InputGroup)(_templa
 exports.InputPhoneNumberWrapper = InputPhoneNumberWrapper;
 var LanguageSelectorWrapper = (0, _styledComponents.default)(InputGroup)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  > div {\n    width: 100%;\n    border-radius: 7.6px;\n    text-align: left;\n    background: #F8F9FA !important;\n    border-color: #F8F9FA;\n    height: 44px;\n\n    > div:first-child {\n      height: 44px;\n    }\n\n    #list {\n      width: 100%;\n      border-radius: 7.6px;\n      background: #F8F9FA !important;\n      border-color: #F8F9FA;\n      box-shadow: 0px 10px 12px 1px #e6e6e6;\n    }\n  }\n"])));
 exports.LanguageSelectorWrapper = LanguageSelectorWrapper;
+
+var PromotionsWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 10px 0;\n  width: 100%;\n  > label {\n    font-size: 16px;\n    ", "\n\n    > span:first-child {\n      font-weight: 500;\n      ", "\n    }\n\n    > a {\n      color: ", " !important;\n    }\n  }\n\n  @media (min-width: 768px) {\n    > label {\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
+  var _props$theme2;
+
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin-right: 7px;\n    "]))) : (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      margin-left: 7px;\n    "])));
+}, function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        margin-left: 7px;\n      "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n        margin-right: 7px;\n      "])));
+}, function (props) {
+  return props.theme.colors.primary;
+});
+
+exports.PromotionsWrapper = PromotionsWrapper;

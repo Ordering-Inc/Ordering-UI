@@ -31,6 +31,8 @@ var _Confirm = require("../Confirm");
 
 var _utils = require("../../../../../utils");
 
+var _Checkbox = require("../../../../../styles/Checkbox");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -60,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _formState$result11, _formState$result12, _formState$result12$r, _formState$result12$r2, _formState$result12$r3, _formState$changes$se2, _formState$changes7, _formState$changes7$s, _formState$changes7$s2, _user$settings2, _user$settings2$notif, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var isEdit = props.isEdit,
       formState = props.formState,
@@ -74,7 +76,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       handleButtonUpdateClick = props.handleButtonUpdateClick,
       isCheckout = props.isCheckout,
       userData = props.userData,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      handleChangePromotions = props.handleChangePromotions;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -392,7 +395,18 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  })), !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.PromotionsWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
+    name: "promotions",
+    id: "promotions",
+    onChange: function onChange() {
+      var _formState$result9, _formState$result10, _formState$result10$r, _formState$result10$r2, _formState$result10$r3, _formState$changes$se, _formState$changes6, _formState$changes6$s, _formState$changes6$s2, _user$settings, _user$settings$notifi;
+
+      return handleChangePromotions(!(formState !== null && formState !== void 0 && (_formState$result9 = formState.result) !== null && _formState$result9 !== void 0 && _formState$result9.result ? !!(formState !== null && formState !== void 0 && (_formState$result10 = formState.result) !== null && _formState$result10 !== void 0 && (_formState$result10$r = _formState$result10.result) !== null && _formState$result10$r !== void 0 && (_formState$result10$r2 = _formState$result10$r.settings) !== null && _formState$result10$r2 !== void 0 && (_formState$result10$r3 = _formState$result10$r2.notification) !== null && _formState$result10$r3 !== void 0 && _formState$result10$r3.newsletter) : (_formState$changes$se = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : (_formState$changes6$s = _formState$changes6.settings) === null || _formState$changes6$s === void 0 ? void 0 : (_formState$changes6$s2 = _formState$changes6$s.notification) === null || _formState$changes6$s2 === void 0 ? void 0 : _formState$changes6$s2.newsletter) !== null && _formState$changes$se !== void 0 ? _formState$changes$se : user && (user === null || user === void 0 ? void 0 : (_user$settings = user.settings) === null || _user$settings === void 0 ? void 0 : (_user$settings$notifi = _user$settings.notification) === null || _user$settings$notifi === void 0 ? void 0 : _user$settings$notifi.newsletter)));
+    },
+    defaultChecked: formState !== null && formState !== void 0 && (_formState$result11 = formState.result) !== null && _formState$result11 !== void 0 && _formState$result11.result ? !!(formState !== null && formState !== void 0 && (_formState$result12 = formState.result) !== null && _formState$result12 !== void 0 && (_formState$result12$r = _formState$result12.result) !== null && _formState$result12$r !== void 0 && (_formState$result12$r2 = _formState$result12$r.settings) !== null && _formState$result12$r2 !== void 0 && (_formState$result12$r3 = _formState$result12$r2.notification) !== null && _formState$result12$r3 !== void 0 && _formState$result12$r3.newsletter) : !!((_formState$changes$se2 = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : (_formState$changes7$s = _formState$changes7.settings) === null || _formState$changes7$s === void 0 ? void 0 : (_formState$changes7$s2 = _formState$changes7$s.notification) === null || _formState$changes7$s2 === void 0 ? void 0 : _formState$changes7$s2.newsletter) !== null && _formState$changes$se2 !== void 0 ? _formState$changes$se2 : user && (user === null || user === void 0 ? void 0 : (_user$settings2 = user.settings) === null || _user$settings2 === void 0 ? void 0 : (_user$settings2$notif = _user$settings2.notification) === null || _user$settings2$notif === void 0 ? void 0 : _user$settings2$notif.newsletter))
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "promotions"
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('RECEIVE_NEWS_EXCLUSIVE_PROMOTIONS', 'Receive newsletters and exclusive promotions')))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);
