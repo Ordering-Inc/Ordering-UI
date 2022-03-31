@@ -1,15 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
+import parsePhoneNumber from 'libphonenumber-js'
+import OtpInput from 'react-otp-input'
+
 import {
   LoginForm as LoginFormController,
   useLanguage,
   ReCaptcha,
   useApi
 } from 'ordering-components'
-import { Alert } from '../Confirm'
-import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
-import { InputPhoneNumber } from '../InputPhoneNumber'
+
+import {
+  Envelope,
+  Lock,
+  Eye,
+  EyeSlash,
+  BoxArrowInRight
+} from 'react-bootstrap-icons'
+
 import {
   LoginContainer,
   FormSide,
@@ -29,21 +38,16 @@ import {
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
-
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { formatSeconds } from '../../../../../utils'
-import parsePhoneNumber from 'libphonenumber-js'
-import OtpInput from 'react-otp-input'
-import {
-  Envelope,
-  Lock,
-  Eye,
-  EyeSlash,
-  BoxArrowInRight
-} from 'react-bootstrap-icons'
-import { } from 'react/cjs/react.production.min'
+import { Alert } from '../Confirm'
+import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
+import { InputPhoneNumber } from '../InputPhoneNumber'
+
+import {InputPhoneNumber} from 'ordering-ui/callcenter_original'
+
 
 const LoginFormUI = (props) => {
   const {
@@ -62,7 +66,8 @@ const LoginFormUI = (props) => {
     loginTab,
     isPopup,
     credentials,
-    enableReCaptcha
+    enableReCaptcha,
+    useRootPoint
   } = props
   const numOtpInputs = 4
 
@@ -97,12 +102,14 @@ const LoginFormUI = (props) => {
       }
       setWillVerifyOtpState(true)
     } else {
-      setOrdering({
-        ...ordering,
-        project: projectName
-      })
-      localStorage.setItem('project', projectName)
-      setSubmitted(true)
+      if (projectName) {
+        setOrdering({ ...ordering, project: projectName })
+        localStorage.setItem('project_name', projectName)
+        setSubmitted(true)
+        return
+      }
+
+      handleButtonLoginClick()
     }
   }
 
@@ -197,6 +204,11 @@ const LoginFormUI = (props) => {
         ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
         : null
     })
+    if (useRootPoint) {
+      formMethods.register('project', {
+        required: t('VALIDATION_ERROR_PROJECT_REQUIRED', 'The field project is required').replace('_attribute_', t('PROJECT', 'Project'))
+      })
+    }
   }, [formMethods])
 
   useEffect(() => {
@@ -234,67 +246,51 @@ const LoginFormUI = (props) => {
   }, [verifyPhoneState])
 
   useEffect(() => {
-    if (ordering.project === null || !submitted) return
+    if (ordering.project === null || !submitted || !useRootPoint) return
     handleButtonLoginClick()
   }, [ordering, submitted])
 
   return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <LoginContainer isPopup={isPopup}>
-        <HeroSide>
-          <img alt='Logotype' width='530px' height='620px' src={theme?.images?.general?.callcenterHero} loading='lazy' />
-        </HeroSide>
-        <FormSide isPopup={isPopup}>
-          <LogotypeContainer>
-            <img alt='Logotype-callcenter' width='250px' height='105px' src={theme?.images?.logos?.logoCallcenter} loading='lazy' />
-          </LogotypeContainer>
-          {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
-            <LoginWith isPopup={isPopup}>
-              <Title>{t('LOGIN', 'Login')}</Title>
-              <Tabs variant='primary'>
-                {useLoginByEmail && (
-                  <Tab
-                    onClick={() => handleChangeTab('email')}
-                    active={loginTab === 'email'}
-                    borderBottom={loginTab === 'email'}
-                  >
-                    {t('BY_EMAIL', 'by Email')}
-                  </Tab>
-                )}
-                {useLoginByCellphone && (
-                  <Tab
-                    onClick={() => handleChangeTab('cellphone')}
-                    active={loginTab === 'cellphone'}
-                    borderBottom={loginTab === 'cellphone'}
-                  >
-                    {t('BY_PHONE', 'by Phone')}
-                  </Tab>
-                )}
-              </Tabs>
-            </LoginWith>
-          )}
+    <LoginContainer isPopup={isPopup}>
+      <HeroSide>
+        <img alt='Logotype' width='530px' height='620px' src={theme?.images?.general?.callcenterHero} loading='lazy' />
+      </HeroSide>
+      <FormSide isPopup={isPopup}>
+        <LogotypeContainer>
+          <img alt='Logotype-callcenter' width='250px' height='105px' src={theme?.images?.logos?.logoCallcenter} loading='lazy' />
+        </LogotypeContainer>
+        {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
+          <LoginWith isPopup={isPopup}>
+            <Title>{t('LOGIN', 'Login')}</Title>
+            <Tabs variant='primary'>
+              {useLoginByEmail && (
+                <Tab
+                  onClick={() => handleChangeTab('email')}
+                  active={loginTab === 'email'}
+                  borderBottom={loginTab === 'email'}
+                >
+                  {t('BY_EMAIL', 'by Email')}
+                </Tab>
+              )}
+              {useLoginByCellphone && (
+                <Tab
+                  onClick={() => handleChangeTab('cellphone')}
+                  active={loginTab === 'cellphone'}
+                  borderBottom={loginTab === 'cellphone'}
+                >
+                  {t('BY_PHONE', 'by Phone')}
+                </Tab>
+              )}
+            </Tabs>
+          </LoginWith>
+        )}
 
-          {(useLoginByCellphone || useLoginByEmail) && (
-            <FormInput
-              noValidate
-              isPopup={isPopup}
-            >
-              {
-                props.beforeMidElements?.map((BeforeMidElements, i) => (
-                  <React.Fragment key={i}>
-                    {BeforeMidElements}
-                  </React.Fragment>))
-              }
-              {
-                props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-                  <BeforeMidComponents key={i} {...props} />))
-              }
+        {(useLoginByCellphone || useLoginByEmail || useRootPoint) && (
+          <FormInput
+            noValidate
+            isPopup={isPopup}
+          >
+            {useRootPoint && (
               <InputWrapper>
                 <Input
                   type='text'
@@ -315,161 +311,145 @@ const LoginFormUI = (props) => {
                   <BoxArrowInRight />
                 </InputBeforeIcon>
               </InputWrapper>
-              {useLoginByEmail && loginTab === 'email' && (
-                <InputWrapper>
-                  <Input
-                    type='email'
-                    name='email'
-                    aria-label='email'
-                    placeholder={t('EMAIL', 'Email')}
-                    ref={(e) => (emailInput.current = e)}
-                    onChange={handleChangeInputEmail}
-                    autoComplete='off'
-                  />
-                  <InputBeforeIcon>
-                    <Envelope />
-                  </InputBeforeIcon>
-                </InputWrapper>
-              )}
-              {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
-                <InputPhoneNumber
-                  value={credentials?.cellphone}
-                  setValue={handleChangePhoneNumber}
-                  handleIsValid={() => { }}
+            )}
+            {useLoginByEmail && loginTab === 'email' && (
+              <InputWrapper>
+                <Input
+                  type='email'
+                  name='email'
+                  aria-label='email'
+                  placeholder={t('EMAIL', 'Email')}
+                  ref={(e) => (emailInput.current = e)}
+                  onChange={handleChangeInputEmail}
+                  autoComplete='off'
                 />
-              )}
+                <InputBeforeIcon>
+                  <Envelope />
+                </InputBeforeIcon>
+              </InputWrapper>
+            )}
+            {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
+              <InputPhoneNumber
+                value={credentials?.cellphone}
+                setValue={handleChangePhoneNumber}
+                handleIsValid={() => { }}
+              />
+            )}
 
-              {(!verifyPhoneState?.loading && willVerifyOtpState && !checkPhoneCodeState?.loading) && (
-                <>
-                  <CountdownTimer>
-                    <span>{formatSeconds(otpLeftTime)}</span>
-                    <span onClick={handleSendOtp}>
-                      {t('RESEND_AGAIN', 'Resend again')}?
-                    </span>
-                  </CountdownTimer>
+            {(!verifyPhoneState?.loading && willVerifyOtpState && !checkPhoneCodeState?.loading) && (
+              <>
+                <CountdownTimer>
+                  <span>{formatSeconds(otpLeftTime)}</span>
+                  <span onClick={handleSendOtp}>
+                    {t('RESEND_AGAIN', 'Resend again')}?
+                  </span>
+                </CountdownTimer>
 
-                  <OtpWrapper>
-                    <OtpInput
-                      value={otpState}
-                      onChange={otp => setOtpState(otp)}
-                      numInputs={numOtpInputs}
-                      containerStyle='otp-container'
-                      inputStyle='otp-input'
-                      placeholder='0000'
-                      isInputNum
-                      shouldAutoFocus
-                    />
-                  </OtpWrapper>
-
-                  <Button
-                    type='button'
-                    color='secundary'
-                    disabled={formState.loading}
-                    onClick={() => {
-                      setLoginWithOtpState(false)
-                      setWillVerifyOtpState(false)
-                    }}
-                  >
-                    {t('CANCEL', 'Cancel')}
-                  </Button>
-                </>
-              )}
-
-              {(verifyPhoneState?.loading || checkPhoneCodeState?.loading) && (
-                <SpinnerLoader
-                  style={{ height: 160 }}
-                />
-              )}
-
-              {!loginWithOtpState && (
-                <InputWrapper>
-                  <Input
-                    type={!passwordSee ? 'password' : 'text'}
-                    name='password'
-                    aria-label='password'
-                    placeholder={t('PASSWORD', 'Password')}
-                    ref={formMethods.register({
-                      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                    })}
-                    onChange={(e) => handleChangeInput(e)}
+                <OtpWrapper>
+                  <OtpInput
+                    value={otpState}
+                    onChange={otp => setOtpState(otp)}
+                    numInputs={numOtpInputs}
+                    containerStyle='otp-container'
+                    inputStyle='otp-input'
+                    placeholder='0000'
+                    isInputNum
+                    shouldAutoFocus
                   />
-                  <TogglePassword onClick={togglePasswordView}>
-                    {!passwordSee ? <Eye /> : <EyeSlash />}
-                  </TogglePassword>
-                  <InputBeforeIcon>
-                    <Lock />
-                  </InputBeforeIcon>
-                </InputWrapper>
-              )}
-              {
-                props.afterMidElements?.map((MidElement, i) => (
-                  <React.Fragment key={i}>
-                    {MidElement}
-                  </React.Fragment>))
-              }
-              {
-                props.afterMidComponents?.map((MidComponent, i) => (
-                  <MidComponent key={i} {...props} />))
-              }
-              {!loginWithOtpState && (
-                <RedirectLink RedirectLinkisPopup={isPopup}>
-                  <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
-                  {elementLinkToForgotPassword}
-                </RedirectLink>
-              )}
-              {props.isRecaptchaEnable && enableReCaptcha && (
-                <ReCaptchaWrapper>
-                  <ReCaptcha handleReCaptcha={handleReCaptcha} />
-                </ReCaptchaWrapper>
-              )}
-              <ButtonContainer>
+                </OtpWrapper>
 
-                {(!willVerifyOtpState &&
-                  <Button
-                    color='primary'
-                    onClick={formMethods.handleSubmit(onSubmit)}
-                    disabled={formState.loading}
-                  >
-                    {formState.loading
-                      ? `${t('LOADING', 'Loading')}...`
-                      : loginWithOtpState
-                        ? t('GET_VERIFY_CODE', 'Get verify code')
-                        : t('LOGIN', 'Login')}
-                  </Button>
-                )}
-                {(loginWithOtpState && !willVerifyOtpState) && (
-                  <Button
-                    type='button'
-                    color='secundary'
-                    disabled={formState.loading}
-                    onClick={() => {
-                      setLoginWithOtpState(false)
-                    }}
-                  >
-                    {t('CANCEL', 'Cancel')}
-                  </Button>
-                )}
-              </ButtonContainer>
-            </FormInput>
-          )}
-        </FormSide>
-        <Alert
-          title={t('LOGIN', 'Login')}
-          content={alertState.content}
-          acceptText={t('ACCEPT', 'Accept')}
-          open={alertState.open}
-          onClose={() => closeAlert()}
-          onAccept={() => closeAlert()}
-          closeOnBackdrop={false}
-        />
-      </LoginContainer>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
-    </>
+                <Button
+                  type='button'
+                  color='secundary'
+                  disabled={formState.loading}
+                  onClick={() => {
+                    setLoginWithOtpState(false)
+                    setWillVerifyOtpState(false)
+                  }}
+                >
+                  {t('CANCEL', 'Cancel')}
+                </Button>
+              </>
+            )}
+
+            {(verifyPhoneState?.loading || checkPhoneCodeState?.loading) && (
+              <SpinnerLoader
+                style={{ height: 160 }}
+              />
+            )}
+
+            {!loginWithOtpState && (
+              <InputWrapper>
+                <Input
+                  type={!passwordSee ? 'password' : 'text'}
+                  name='password'
+                  aria-label='password'
+                  placeholder={t('PASSWORD', 'Password')}
+                  ref={formMethods.register({
+                    required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                  })}
+                  onChange={(e) => handleChangeInput(e)}
+                />
+                <TogglePassword onClick={togglePasswordView}>
+                  {!passwordSee ? <Eye /> : <EyeSlash />}
+                </TogglePassword>
+                <InputBeforeIcon>
+                  <Lock />
+                </InputBeforeIcon>
+              </InputWrapper>
+            )}
+            {!loginWithOtpState && (
+              <RedirectLink RedirectLinkisPopup={isPopup}>
+                <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
+                {elementLinkToForgotPassword}
+              </RedirectLink>
+            )}
+            {props.isRecaptchaEnable && enableReCaptcha && (
+              <ReCaptchaWrapper>
+                <ReCaptcha handleReCaptcha={handleReCaptcha} />
+              </ReCaptchaWrapper>
+            )}
+            <ButtonContainer>
+
+              {(!willVerifyOtpState &&
+                <Button
+                  color='primary'
+                  onClick={formMethods.handleSubmit(onSubmit)}
+                  disabled={formState.loading}
+                >
+                  {formState.loading
+                    ? `${t('LOADING', 'Loading')}...`
+                    : loginWithOtpState
+                      ? t('GET_VERIFY_CODE', 'Get verify code')
+                      : t('LOGIN', 'Login')}
+                </Button>
+              )}
+              {(loginWithOtpState && !willVerifyOtpState) && (
+                <Button
+                  type='button'
+                  color='secundary'
+                  disabled={formState.loading}
+                  onClick={() => {
+                    setLoginWithOtpState(false)
+                  }}
+                >
+                  {t('CANCEL', 'Cancel')}
+                </Button>
+              )}
+            </ButtonContainer>
+          </FormInput>
+        )}
+      </FormSide>
+      <Alert
+        title={t('LOGIN', 'Login')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+    </LoginContainer>
   )
 }
 
