@@ -1,5 +1,6 @@
 import React from 'react'
-import { UserProfileForm } from '../../../src/components/UserProfileForm'
+import { UserProfileForm } from '../../../src/themes/five'
+// import { UserProfileForm } from '../../../src/components/UserProfileForm'
 import { HelmetTags } from '../../components/HelmetTags'
 
 export const Profile = (props) => {
