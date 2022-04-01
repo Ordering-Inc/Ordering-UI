@@ -26,13 +26,12 @@ import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
 import { OrdersOption } from '../OrdersOption'
 import { BusinessesMap } from '../../../../../components/BusinessesMap'
-
+import { BusinessList as BusinessListController } from './test'
 import {
   useOrder,
   useSession,
   useLanguage,
-  useConfig,
-  BusinessList as BusinessListController
+  useConfig
 } from 'ordering-components'
 import { HighestRated } from '../HighestRated'
 import { BusinessPreorder } from '../BusinessPreorder'
@@ -73,7 +72,7 @@ const BusinessesListingUI = (props) => {
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-
+  const isEnabledBusiness = true
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
@@ -223,75 +222,81 @@ const BusinessesListingUI = (props) => {
             />
           </>
         )}
-        <BusinessesTitle>
-          {t('SEARCH', 'Search')}
-        </BusinessesTitle>
-        <BusinessListingSearch
-          businessesSearchList={businessesSearchList}
-          handleBusinessClick={handleBusinessClick}
-          termValue={termValue}
-          handleChangeFilters={handleChangeFilters}
-          filters={filters}
-          handleChangeTermValue={handleChangeTermValue}
-          businessesSearched={businessesSearched}
-        />
-
-        {isCustomLayout && businessesList?.businesses?.length > 0 && (
-          <BusinessesTitle>
-            {t('BUSINESSES', 'Businesses')}
-          </BusinessesTitle>
+        {isEnabledBusiness && (
+          <>
+            <BusinessesTitle>
+              {t('SEARCH', 'Search')}
+            </BusinessesTitle>
+            <BusinessListingSearch
+              businessesSearchList={businessesSearchList}
+              handleBusinessClick={handleBusinessClick}
+              termValue={termValue}
+              handleChangeFilters={handleChangeFilters}
+              filters={filters}
+              handleChangeTermValue={handleChangeTermValue}
+              businessesSearched={businessesSearched}
+            />
+          </>
         )}
+        {!isEnabledBusiness && (
+          <>
+            {isCustomLayout && businessesList?.businesses?.length > 0 && (
+              <BusinessesTitle>
+                {t('BUSINESSES', 'Businesses')}
+              </BusinessesTitle>
+            )}
 
-        <BusinessList>
-          {
-            !businessesList.loading && businessesList.businesses.length === 0 && (
-              <NotFoundSource
-                content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-              >
-                <Button
-                  outline
-                  color='primary'
-                  onClick={() => handleClickAddress()}
-                  style={{ height: '44px' }}
-                >
-                  {t('CHANGE_ADDRESS', 'Select other Address')}
-                </Button>
-              </NotFoundSource>
-            )
-          }
-          {
-            businessesList.businesses?.map((business) => (
-              <BusinessController
-                key={business.id}
-                className='card'
-                business={business}
-                isBusinessOpen={business.open}
-                handleCustomClick={handleBusinessClick}
-                orderType={orderState?.options?.type}
-                isCustomLayout={isCustomLayout}
-                isShowCallcenterInformation={isCustomLayout}
-                onPreorderBusiness={setPreorderBusiness}
-              />
-            ))
-          }
-          {businessesList.loading && (
-            [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
-              <BusinessController
-                key={i}
-                className='card'
-                business={{}}
-                isSkeleton
-                orderType={orderState?.options?.type}
-              />
-            ))
-          )}
-          {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
-            businessesList.error.map((e, i) => (
-              <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
-            ))
-          )}
-        </BusinessList>
-
+            <BusinessList>
+              {
+                !businessesList.loading && businessesList.businesses.length === 0 && (
+                  <NotFoundSource
+                    content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
+                  >
+                    <Button
+                      outline
+                      color='primary'
+                      onClick={() => handleClickAddress()}
+                      style={{ height: '44px' }}
+                    >
+                      {t('CHANGE_ADDRESS', 'Select other Address')}
+                    </Button>
+                  </NotFoundSource>
+                )
+              }
+              {
+                businessesList.businesses?.map((business) => (
+                  <BusinessController
+                    key={business.id}
+                    className='card'
+                    business={business}
+                    isBusinessOpen={business.open}
+                    handleCustomClick={handleBusinessClick}
+                    orderType={orderState?.options?.type}
+                    isCustomLayout={isCustomLayout}
+                    isShowCallcenterInformation={isCustomLayout}
+                    onPreorderBusiness={setPreorderBusiness}
+                  />
+                ))
+              }
+              {businessesList.loading && (
+                [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
+                  <BusinessController
+                    key={i}
+                    className='card'
+                    business={{}}
+                    isSkeleton
+                    orderType={orderState?.options?.type}
+                  />
+                ))
+              )}
+              {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
+                businessesList.error.map((e, i) => (
+                  <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+                ))
+              )}
+            </BusinessList>
+          </>
+        )}
         <Modal
           open={isPreorder}
           width='760px'
