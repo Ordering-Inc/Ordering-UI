@@ -47,7 +47,12 @@ export const BusinessListingSearch = (props) => {
     handleChangeFilters,
     filters,
     handleChangeTermValue,
-    termValue
+    termValue,
+    businessesList,
+    isCustomLayout,
+    setPreorderBusiness,
+    getBusinesses,
+    paginationProps
   } = props
 
   const [orderState] = useOrder()
@@ -62,6 +67,12 @@ export const BusinessListingSearch = (props) => {
     { text: t('PICKUP_TIME', 'Pickup time'), value: 'pickup_type' }
 
   ]
+  const getMoreBusiness = () => {
+    const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
+    if (businessesList.loading || businessesList.error?.length > 0 || !hasMore) return
+    getBusinesses()
+  }
+
   return (
     <BusinessListingSearchContainer>
       <SearchBar
@@ -116,19 +127,8 @@ export const BusinessListingSearch = (props) => {
         </Filters>
         <FiltersResultContainer>
           <BusinessListWrapper>
-            <BusinessList noResults={!businessesSearchList.loading && businessesSearchList?.businesses?.length === 0}>
-              {
-                !businessesSearchList.loading && businessesSearchList?.businesses?.length === 0 && (
-                  <NotFoundWrapper>
-                    <NotFoundSource
-                      content={!businessesSearchList.lengthError
-                        ? t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
-                        : t('PLEASE_TYPE_AT_LEAST_3_CHARACTERS', 'Please type at least 3 characters')}
-                    />
-                  </NotFoundWrapper>
-                )
-              }
-              {businessesSearchList.loading && (
+            <BusinessList noResults={!businessesSearchList.loading && businessesSearchList?.businesses?.length === 0 && !businessesSearchList.lengthError}>
+              {businessesSearchList.loading && businessesList.loading && (
                 <BusinessControllerSkeleton>
                   {[...Array(3).keys()].map(i => (
                     <BusinessController
@@ -142,104 +142,137 @@ export const BusinessListingSearch = (props) => {
                   ))}
                 </BusinessControllerSkeleton>
               )}
-              <AutoScroll scrollId='searchlist'>
-                {!businessesSearchList.loading && businessesSearchList.businesses.map((business, i) => (
-                  <BusinessController
-                    key={business.id}
-                    className='card'
-                    business={business}
-                    isBusinessOpen={business.open}
-                    handleCustomClick={handleBusinessClick}
-                    orderType={orderState?.options?.type}
-                    firstCard={i === 0}
-                  />
-                ))}
-              </AutoScroll>
+              {
+                !businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0 && (
+                  <NotFoundWrapper>
+                    <NotFoundSource
+                      content={!businessesSearchList.lengthError
+                        ? t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
+                        : t('PLEASE_TYPE_AT_LEAST_3_CHARACTERS', 'Please type at least 3 characters')}
+                    />
+                  </NotFoundWrapper>
+                )
+              }
+              {termValue?.length < 3 && !businessesList.loading && !businessesSearchList.loading && businessesList.businesses?.length > 0 && (
+                <AutoScroll scrollId='searchlist' onHandleRightEnd={getMoreBusiness}>
+                  {businessesList.businesses?.map((business, i) => (
+                    <BusinessController
+                      key={business.id}
+                      className='card'
+                      business={business}
+                      isBusinessOpen={business.open}
+                      handleCustomClick={handleBusinessClick}
+                      orderType={orderState?.options?.type}
+                      isCustomLayout={isCustomLayout}
+                      isShowCallcenterInformation={isCustomLayout}
+                      onPreorderBusiness={setPreorderBusiness}
+                      firstCard={i === 0}
+                    />
+                  ))}
+                </AutoScroll>
+              )}
+              {termValue?.length >= 3 && !businessesSearchList.loading && businessesSearchList.businesses?.length > 0 && (
+                <AutoScroll scrollId='searchlist'>
+                  {businessesSearchList.businesses.map((business, i) => (
+                    <BusinessController
+                      key={business.id}
+                      className='card'
+                      business={business}
+                      isBusinessOpen={business.open}
+                      handleCustomClick={handleBusinessClick}
+                      orderType={orderState?.options?.type}
+                      firstCard={i === 0}
+                    />
+                  ))}
+                </AutoScroll>
+              )}
             </BusinessList>
           </BusinessListWrapper>
-          <ProductsList>
-            {businessesSearchList?.loading && (
-              [...Array(3)].map((item, i) => (
-                <SingleBusinessSearch key={`skeleton:${i}`}>
+          {termValue?.length >= 3 && (
+            <ProductsList>
+              {businessesSearchList?.loading && (
+                [...Array(3)].map((item, i) => (
+                  <SingleBusinessSearch key={`skeleton:${i}`}>
+                    <BusinessInfo>
+                      <BusinessLogo>
+                        <Skeleton width={75} height={75} />
+                      </BusinessLogo>
+                      <BusinessInfoItem>
+                        <BusinessName>
+                          <Skeleton width={50} />
+                        </BusinessName>
+                        <Metadata>
+                          <Skeleton width={65} />
+                          <Skeleton width={65} />
+                          <Skeleton width={65} />
+                        </Metadata>
+                      </BusinessInfoItem>
+                    </BusinessInfo>
+                    <BusinessProductsListWrapper>
+                      <BusinessProductsListContainer>
+                        {[...Array(3)].map((item, j) => (
+                          <SingleProductCard
+                            key={`skeleton-card:${j}-${i}`}
+                            isSkeleton
+                          />
+                        ))}
+                      </BusinessProductsListContainer>
+                    </BusinessProductsListWrapper>
+                  </SingleBusinessSearch>
+                ))
+              )}
+              {!businessesSearchList.loading && businessesSearchList.businesses.map(business => (
+                <SingleBusinessSearch key={`card-${business?.id}`}>
                   <BusinessInfo>
-                    <BusinessLogo>
-                      <Skeleton width={75} height={75} />
-                    </BusinessLogo>
+                    {(business?.logo || theme.images?.dummies?.businessLogo) && (
+                      <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                    )}
                     <BusinessInfoItem>
-                      <BusinessName>
-                        <Skeleton width={50} />
-                      </BusinessName>
+                      <BusinessName>{business?.name}</BusinessName>
                       <Metadata>
-                        <Skeleton width={65} />
-                        <Skeleton width={65} />
-                        <Skeleton width={65} />
+                        {orderState?.options?.type === 1 && (
+                          <p>
+                            <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
+                            {business && parsePrice(business?.delivery_price)}
+                          </p>
+                        )}
+                        <p className='bullet'>
+                          <GoPrimitiveDot />
+                          {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time)}
+                        </p>
+                        <p className='bullet'>
+                          <GoPrimitiveDot />
+                          {parseDistance(business?.distance)}
+                        </p>
                       </Metadata>
                     </BusinessInfoItem>
+                    <Button
+                      onClick={() => handleBusinessClick(business)}
+                      outline
+                      bgtransparent
+                      color='primary'
+                    >
+                      {t('GO_TO_STORE', 'Go to store')}
+                    </Button>
                   </BusinessInfo>
                   <BusinessProductsListWrapper>
                     <BusinessProductsListContainer>
-                      {[...Array(3)].map((item, j) => (
-                        <SingleProductCard
-                          key={`skeleton-card:${j}-${i}`}
-                          isSkeleton
-                        />
-                      ))}
+                      <AutoScroll scrollId={`products-${business?.id}`}>
+                        {business?.categories?.map(category => category?.products?.map(product => (
+                          <SingleProductCard
+                            key={product?.id}
+                            isSoldOut={(product.inventoried && !product.quantity)}
+                            product={product}
+                            businessId={business?.id}
+                          />
+                        )))}
+                      </AutoScroll>
                     </BusinessProductsListContainer>
                   </BusinessProductsListWrapper>
                 </SingleBusinessSearch>
-              ))
-            )}
-            {!businessesSearchList.loading && businessesSearchList.businesses.map(business => (
-              <SingleBusinessSearch key={`card-${business?.id}`}>
-                <BusinessInfo>
-                  {(business?.logo || theme.images?.dummies?.businessLogo) && (
-                    <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-                  )}
-                  <BusinessInfoItem>
-                    <BusinessName>{business?.name}</BusinessName>
-                    <Metadata>
-                      {orderState?.options?.type === 1 && (
-                        <p>
-                          <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
-                          {business && parsePrice(business?.delivery_price)}
-                        </p>
-                      )}
-                      <p className='bullet'>
-                        <GoPrimitiveDot />
-                        {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time)}
-                      </p>
-                      <p className='bullet'>
-                        <GoPrimitiveDot />
-                        {parseDistance(business?.distance)}
-                      </p>
-                    </Metadata>
-                  </BusinessInfoItem>
-                  <Button
-                    onClick={() => handleBusinessClick(business)}
-                    outline
-                    bgtransparent
-                    color='primary'
-                  >
-                    {t('GO_TO_STORE', 'Go to store')}
-                  </Button>
-                </BusinessInfo>
-                <BusinessProductsListWrapper>
-                  <BusinessProductsListContainer>
-                    <AutoScroll scrollId={`products-${business?.id}`}>
-                      {business?.categories?.map(category => category?.products?.map(product => (
-                        <SingleProductCard
-                          key={product?.id}
-                          isSoldOut={(product.inventoried && !product.quantity)}
-                          product={product}
-                          businessId={business?.id}
-                        />
-                      )))}
-                    </AutoScroll>
-                  </BusinessProductsListContainer>
-                </BusinessProductsListWrapper>
-              </SingleBusinessSearch>
-            ))}
-          </ProductsList>
+              ))}
+            </ProductsList>
+          )}
         </FiltersResultContainer>
       </FiltersContainer>
     </BusinessListingSearchContainer>

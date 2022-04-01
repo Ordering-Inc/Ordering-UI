@@ -72,7 +72,7 @@ const BusinessesListingUI = (props) => {
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-  const isEnabledBusiness = true
+  const isEnabledSearchBusiness = true
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
@@ -222,12 +222,13 @@ const BusinessesListingUI = (props) => {
             />
           </>
         )}
-        {isEnabledBusiness && (
+        {isEnabledSearchBusiness && (
           <>
             <BusinessesTitle>
               {t('SEARCH', 'Search')}
             </BusinessesTitle>
             <BusinessListingSearch
+              businessesList={businessesList}
               businessesSearchList={businessesSearchList}
               handleBusinessClick={handleBusinessClick}
               termValue={termValue}
@@ -235,10 +236,12 @@ const BusinessesListingUI = (props) => {
               filters={filters}
               handleChangeTermValue={handleChangeTermValue}
               businessesSearched={businessesSearched}
+              setPreorderBusiness={setPreorderBusiness}
+              paginationProps={paginationProps}
             />
           </>
         )}
-        {!isEnabledBusiness && (
+        {!isEnabledSearchBusiness && (
           <>
             {isCustomLayout && businessesList?.businesses?.length > 0 && (
               <BusinessesTitle>
