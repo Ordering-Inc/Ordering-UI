@@ -70,7 +70,8 @@ const OrderProgressUI = (props) => {
     const deliveryTime = lastOrder?.delivery_datetime_utc
       ? parseDate(lastOrder?.delivery_datetime_utc, { outputFormat: 'YYYY-MM-DD hh:mm A' })
       : parseDate(lastOrder?.delivery_datetime, { utc: false, outputFormat: 'YYYY-MM-DD hh:mm A' })
-    const [hour, minute] = time.split(':')
+    const hour = time?.split(':')[0]
+    const minute = time?.split(':')[1]
     const result = time ? (parseInt(hour, 10) * 60) + parseInt(minute, 10) : 0
     const returnedDate = moment(new Date(deliveryTime)).add(result, 'minutes').format('hh:mm A')
     return returnedDate
