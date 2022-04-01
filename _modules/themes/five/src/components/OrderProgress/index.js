@@ -203,12 +203,8 @@ var OrderProgressUI = function OrderProgressUI(props) {
       utc: false,
       outputFormat: 'YYYY-MM-DD hh:mm A'
     });
-
-    var _time$split = time.split(':'),
-        _time$split2 = _slicedToArray(_time$split, 2),
-        hour = _time$split2[0],
-        minute = _time$split2[1];
-
+    var hour = time === null || time === void 0 ? void 0 : time.split(':')[0];
+    var minute = time === null || time === void 0 ? void 0 : time.split(':')[1];
     var result = time ? parseInt(hour, 10) * 60 + parseInt(minute, 10) : 0;
     var returnedDate = (0, _moment.default)(new Date(deliveryTime)).add(result, 'minutes').format('hh:mm A');
     return returnedDate;
