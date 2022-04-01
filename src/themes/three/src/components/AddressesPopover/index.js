@@ -79,7 +79,7 @@ export const AddressesPopover = (props) => {
   useEffect(() => {
     events.on('map_is_dragging', handleMapDragging)
     return () => events.off('map_is_dragging', handleMapDragging)
-  }, [])
+  }, [events])
 
   return (
     <div className='address-popover' style={{ overflow: 'hidden' }}>

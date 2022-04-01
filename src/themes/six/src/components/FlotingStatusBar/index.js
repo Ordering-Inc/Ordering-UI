@@ -56,7 +56,7 @@ export const FlotingStatusBar = (props) => {
   useEffect(() => {
     events.on('cart_product_added', handleAddProduct)
     return () => events.off('cart_product_added', handleAddProduct)
-  }, [])
+  }, [events])
 
   return (
     <StatusFloting>

@@ -101,7 +101,7 @@ export const BusinessItemAccordion = (props) => {
       events.off('cart_popover_closed', handleCloseCartPopover)
       events.off('cart_product_updated', handleCartProductUpdated)
     }
-  }, [])
+  }, [events])
 
   useEffect(() => {
     handleCartOpen && handleCartOpen(!!setActive)

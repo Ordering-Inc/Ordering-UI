@@ -34,7 +34,7 @@ export const CartContent = (props) => {
       events.off('cart_popover_closed', handleSetCurrentCartUuid)
       events.off('cart_product_added', handleAddProduct)
     }
-  }, [])
+  }, [events])
 
   return (
     <>

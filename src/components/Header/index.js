@@ -78,7 +78,6 @@ export const Header = (props) => {
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
 
-
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
     if (isActionsClick) {
@@ -139,7 +138,7 @@ export const Header = (props) => {
     if (isCustomerMode) {
       setCustomerModalOpen(false)
     }
-  }, [customerState?.user?.address])
+  }, [customerState?.user?.address, events])
 
   useEffect(() => {
     if (!(pathname.includes('/search') || pathname.includes('/checkout'))) {

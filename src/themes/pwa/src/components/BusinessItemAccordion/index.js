@@ -107,7 +107,7 @@ export const BusinessItemAccordion = (props) => {
       events.off('cart_popover_closed', handleCloseCartPopover)
       events.off('cart_product_updated', handleCartProductUpdated)
     }
-  }, [])
+  }, [events])
 
   const handleChangeStore = () => {
     events.emit('go_to_page', { page: 'search' })

@@ -171,7 +171,7 @@ const BusinessProductsListingUI = (props) => {
     return () => {
       events.off('change_view', handleChangePage)
     }
-  }, [openProduct])
+  }, [openProduct, events])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
