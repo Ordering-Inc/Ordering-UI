@@ -70,7 +70,7 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
     }, props));
   }), publicKey ? /*#__PURE__*/_react.default.createElement(_reactStripeJs.Elements, {
     stripe: (0, _pure.loadStripe)(publicKey)
-  }, methodsPay.includes(paymethod) ? /*#__PURE__*/_react.default.createElement(_StripeMethodForm.StripeMethodForm, {
+  }, methodsPay !== null && methodsPay !== void 0 && methodsPay.includes(paymethod) ? /*#__PURE__*/_react.default.createElement(_StripeMethodForm.StripeMethodForm, {
     cart: cart,
     handleSource: handleSource,
     onNewCard: onNewCard,
