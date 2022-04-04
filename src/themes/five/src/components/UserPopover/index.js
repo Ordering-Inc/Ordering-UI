@@ -144,7 +144,7 @@ export const UserPopover = (props) => {
           <ExtraOptions>
             {
               extraOptions && extraOptions.length > 0 && (
-                extraOptions.map((option, i) => (
+                extraOptions.map((option, i) => option.isActive && (
                   <PopoverListLink
                     key={i}
                     active={window.location.pathname === option.pathname}
