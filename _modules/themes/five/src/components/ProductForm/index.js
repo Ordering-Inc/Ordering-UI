@@ -283,7 +283,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   };
 
   var onChangeProductCartQuantity = function onChangeProductCartQuantity(quantity) {
-    if (quantity >= maxProductQuantity) {
+    if (quantity > maxProductQuantity) {
       setAlertState({
         open: true,
         content: [t('MAX_QUANTITY', 'The max quantity is _number_').replace('_number_', maxProductQuantity)]
