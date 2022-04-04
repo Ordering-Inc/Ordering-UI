@@ -8,6 +8,7 @@ import {
 } from './styles'
 
 import { CardForm } from '../CardForm'
+import { StripeMethodForm } from '../../../../../components/StripeMethodForm'
 
 const StripeElementsFormUI = (props) => {
   const {
@@ -17,7 +18,11 @@ const StripeElementsFormUI = (props) => {
     requirements,
     onNewCard,
     toSave,
-    onCancel
+    onCancel,
+    paymethod,
+    cart,
+    handlePlaceOrder,
+    methodsPay
   } = props
   const [, t] = useLanguage()
   return (
@@ -30,14 +35,28 @@ const StripeElementsFormUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {publicKey ? (
         <Elements stripe={loadStripe(publicKey)}>
-          <CardForm
-            handleSource={handleSource}
-            onNewCard={onNewCard}
-            toSave={toSave}
-            requirements={requirements}
-            businessId={businessId}
-            handleCancel={onCancel}
-          />
+          {methodsPay?.includes(paymethod) ? (
+            <StripeMethodForm
+              cart={cart}
+              handleSource={handleSource}
+              onNewCard={onNewCard}
+              toSave={toSave}
+              requirements={requirements}
+              businessId={businessId}
+              handleCancel={onCancel}
+              paymethod={paymethod}
+              handlePlaceOrder={handlePlaceOrder}
+            />
+          ) : (
+            <CardForm
+              handleSource={handleSource}
+              onNewCard={onNewCard}
+              toSave={toSave}
+              requirements={requirements}
+              businessId={businessId}
+              handleCancel={onCancel}
+            />
+          )}
         </Elements>
       ) : (
         <ErrorMessage>{t('SOMETHING_WRONG', 'Something is wrong!')}</ErrorMessage>

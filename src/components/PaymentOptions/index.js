@@ -267,7 +267,7 @@ const PaymentOptionsUI = (props) => {
             />
           )}
         </Modal>
-        {/* Stripe direct */}
+        {/* Stripe direct, Google pay, Apple pay */}
         <Modal
           title={t('ADD_CARD', 'Add card')}
           open={stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && !paymethodData.id}
