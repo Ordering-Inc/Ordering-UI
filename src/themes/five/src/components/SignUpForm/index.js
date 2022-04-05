@@ -30,7 +30,9 @@ import {
   InputWrapper,
   InputBeforeIcon,
   TermsConditionWrapper,
-  BussinessAndDriverSignUp
+  BussinessAndDriverSignUp,
+  CheckboxArea,
+  PromotionsWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -70,7 +72,8 @@ const SignUpFormUI = (props) => {
     fieldsNotValid,
     signupData,
     enableReCaptcha,
-    closeModal
+    closeModal,
+    handleChangePromotions
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -393,29 +396,45 @@ const SignUpFormUI = (props) => {
               </ReCaptchaWrapper>
             )}
 
-            {configs?.terms_and_conditions?.value === 'true' && (
-              <TermsConditionWrapper>
+            <CheckboxArea>
+
+              <PromotionsWrapper>
                 <Checkbox
-                  name='acceptTerms'
-                  ref={formMethods.register({
-                    required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')
-                  })}
-                  id='acceptTerms'
+                  name='promotions'
+                  id='promotions'
+                  onChange={handleChangePromotions}
                 />
                 <label
-                  htmlFor='acceptTerms'
+                  htmlFor='promotions'
                 >
-                  <span>{t('TERMS_AND_CONDITIONS_TEXT', 'I’m agree with')}</span>
-                  <a
-                    href={configs?.terms_and_conditions_url?.value}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    {t('TERMS_AND_CONDITIONS', 'Terms & Conditions')}
-                  </a>
+                  <span>{t('RECEIVE_NEWS_EXCLUSIVE_PROMOTIONS', 'Receive newsletters and exclusive promotions')}</span>
                 </label>
-              </TermsConditionWrapper>
-            )}
+              </PromotionsWrapper>
+
+              {configs?.terms_and_conditions?.value === 'true' && (
+                <TermsConditionWrapper>
+                  <Checkbox
+                    name='acceptTerms'
+                    ref={formMethods.register({
+                      required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')
+                    })}
+                    id='acceptTerms'
+                  />
+                  <label
+                    htmlFor='acceptTerms'
+                  >
+                    <span>{t('TERMS_AND_CONDITIONS_TEXT', 'I’m agree with')}</span>
+                    <a
+                      href={configs?.terms_and_conditions_url?.value}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      {t('TERMS_AND_CONDITIONS', 'Terms & Conditions')}
+                    </a>
+                  </label>
+                </TermsConditionWrapper>
+              )}
+            </CheckboxArea>
 
             <Button
               color='primary'

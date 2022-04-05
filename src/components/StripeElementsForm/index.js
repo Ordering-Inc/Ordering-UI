@@ -35,7 +35,7 @@ const StripeElementsFormUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {publicKey ? (
         <Elements stripe={loadStripe(publicKey)}>
-          {methodsPay.includes(paymethod) ? (
+          {methodsPay?.includes(paymethod) ? (
             <StripeMethodForm
               cart={cart}
               handleSource={handleSource}

@@ -11,7 +11,8 @@ import {
   InputGroup,
   Divider,
   InputPhoneNumberWrapper,
-  LanguageSelectorWrapper
+  LanguageSelectorWrapper,
+  PromotionsWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -20,6 +21,7 @@ import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { Alert } from '../Confirm'
 import { sortInputFields } from '../../../../../utils'
+import { Checkbox } from '../../../../../styles/Checkbox'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -37,7 +39,8 @@ export const UserFormDetailsUI = (props) => {
     userData,
     isCustomerMode,
     setWillVerifyOtpState,
-    isVerifiedPhone
+    isVerifiedPhone,
+    handleChangePromotions
   } = props
 
   const formMethods = useForm()
@@ -247,14 +250,14 @@ export const UserFormDetailsUI = (props) => {
         {!validationFields?.loading ? (
           <>
             {
-            props.beforeMidElements?.map((BeforeMidElements, i) => (
-              <React.Fragment key={i}>
-                {BeforeMidElements}
-              </React.Fragment>))
+              props.beforeMidElements?.map((BeforeMidElements, i) => (
+                <React.Fragment key={i}>
+                  {BeforeMidElements}
+                </React.Fragment>))
             }
             {
-            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-              <BeforeMidComponents key={i} {...props} />))
+              props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+                <BeforeMidComponents key={i} {...props} />))
             }
             <Divider />
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
@@ -272,9 +275,9 @@ export const UserFormDetailsUI = (props) => {
                         disabled={!isEdit}
                         placeholder={t(field.code.toUpperCase(), field?.name)}
                         defaultValue={
-                        formState?.result?.result
-                          ? formState?.result?.result[field.code]
-                          : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                          formState?.result?.result
+                            ? formState?.result?.result[field.code]
+                            : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
                         }
                         onChange={handleChangeInputEmail}
                         ref={(e) => {
@@ -295,9 +298,9 @@ export const UserFormDetailsUI = (props) => {
                         disabled={!isEdit}
                         placeholder={t(field.code.toUpperCase(), field?.name)}
                         defaultValue={
-                        formState?.result?.result
-                          ? formState?.result?.result[field.code]
-                          : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                          formState?.result?.result
+                            ? formState?.result?.result[field.code]
+                            : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
                         }
                         onChange={handleChangeInput}
                         ref={formMethods.register({
@@ -348,20 +351,39 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputGroup>
             )}
+            {!isCheckout && (
+              <PromotionsWrapper>
+                <Checkbox
+                  name='promotions'
+                  id='promotions'
+                  onChange={() => handleChangePromotions(!(formState?.result?.result
+                    ? !!formState?.result?.result?.settings?.notification?.newsletter
+                    : formState?.changes?.settings?.notification?.newsletter ?? (user && user?.settings?.notification?.newsletter)))}
+                  defaultChecked={formState?.result?.result
+                    ? !!formState?.result?.result?.settings?.notification?.newsletter
+                    : !!(formState?.changes?.settings?.notification?.newsletter ?? (user && user?.settings?.notification?.newsletter))}
+                />
+                <label
+                  htmlFor='promotions'
+                >
+                  <span>{t('RECEIVE_NEWS_EXCLUSIVE_PROMOTIONS', 'Receive newsletters and exclusive promotions')}</span>
+                </label>
+              </PromotionsWrapper>
+            )}
             <Divider />
             <LanguageSelectorWrapper>
               <p>{t('LANGUAGE', 'Language')}</p>
               <LanguageSelector />
             </LanguageSelectorWrapper>
             {
-            props.afterMidElements?.map((MidElement, i) => (
-              <React.Fragment key={i}>
-                {MidElement}
-              </React.Fragment>))
+              props.afterMidElements?.map((MidElement, i) => (
+                <React.Fragment key={i}>
+                  {MidElement}
+                </React.Fragment>))
             }
             {
-             props.afterMidComponents?.map((MidComponent, i) => (
-               <MidComponent key={i} {...props} />))
+              props.afterMidComponents?.map((MidComponent, i) => (
+                <MidComponent key={i} {...props} />))
             }
             <ActionsForm>
               {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (

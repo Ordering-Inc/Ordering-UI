@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import { Router } from './template/router'
 import { OrderingProvider } from 'ordering-components'
 import { Alert } from './src/components/Confirm'
-import * as Sentry from '@sentry/react'
-import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
@@ -64,25 +62,6 @@ import storeDummy from './template/assets/images/dummies/store.png'
 
 import leftArrow from './template/assets/left-arrow.svg'
 import rightArrow from './template/assets/right-arrow.svg'
-
-Sentry.init({
-  environment: window?.location?.hostname === 'localhost' ? 'development' : process.env.NODE_ENV,
-  dsn: 'https://ab508d2c6990411c8da375c997f9f3d6@o460529.ingest.sentry.io/5496646',
-  release: process.env.npm_package_version ? 'ordering-ui@' + process.env.npm_package_version : 'ordering-ui@' + '0.0.3',
-  integrations: [
-    new Integrations.BrowserTracing()
-  ],
-  ignoreErrors: [
-    'is not defined',
-    'is not a function',
-    'can\'t find variable',
-    'objects are not valid',
-    'element type is invalid'
-  ],
-  // We recommend adjusting this value in production, or using tracesSampler
-  // for finer control
-  tracesSampleRate: window?.location?.hostname === 'localhost' ? 0 : 0.5
-})
 
 const logos = {
   logotype,
