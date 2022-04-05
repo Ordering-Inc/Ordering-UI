@@ -34,7 +34,7 @@ function useCountdownTimer(initialCount, start) {
     if (start) {
       var secondsLeft = setInterval(function () {
         setCount(function (c) {
-          return c - (c == 0 ? 0 : 1);
+          return c - (c === 0 ? 0 : 1);
         });
       }, 1000);
       return function () {

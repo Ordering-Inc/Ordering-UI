@@ -1,23 +1,33 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Footer = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _FaFacebookF = _interopRequireDefault(require("@meronex/icons/fa/FaFacebookF"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
-var _LanguageSelector = require("../LanguageSelector");
-
-var _styles = require("./styles");
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -32,71 +42,99 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Footer = function Footer() {
-  var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
+  var _useState = (0, _react.useState)({
+    body: null,
+    loading: false,
+    error: null
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      footerState = _useState2[0],
+      setfooterState = _useState2[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.FooterWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h4", null, t('FOOTER_QL1_TITLE')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL1_1_HREF')
-  }, t('FOOTER_QL1_1'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL1_2_HREF')
-  }, t('FOOTER_QL1_2'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL1_3_HREF')
-  }, t('FOOTER_QL1_3')))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h4", null, t('FOOTER_QL2_TITLE')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL2_1_HREF')
-  }, t('FOOTER_QL2_1'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL2_2_HREF')
-  }, t('FOOTER_QL2_2'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL2_3_HREF')
-  }, t('FOOTER_QL2_3')))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h4", null, t('FOOTER_QL3_TITLE')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL3_1_HREF')
-  }, t('FOOTER_QL3_1'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL3_2_HREF')
-  }, t('FOOTER_QL3_2'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL3_3_HREF')
-  }, t('FOOTER_QL3_3')))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h4", null, t('FOOTER_QL4_TITLE')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL4_1_HREF')
-  }, t('FOOTER_QL4_1'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL4_2_HREF')
-  }, t('FOOTER_QL4_2'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
-    rel: "noopener noreferrer",
-    target: "_blank",
-    href: t('FOOTER_QL4_3_HREF')
-  }, t('FOOTER_QL4_3'))))), /*#__PURE__*/_react.default.createElement(_styles.FooterBottom, null, /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('FOOTER_DESC', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.')), /*#__PURE__*/_react.default.createElement(_styles.SocialIconList, null, /*#__PURE__*/_react.default.createElement(_styles.LanguageWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Globe, null), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialGroup, null, /*#__PURE__*/_react.default.createElement("a", {
-    href: "https://www.facebook.com/orderingco/",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, /*#__PURE__*/_react.default.createElement(_FaFacebookF.default, null)), /*#__PURE__*/_react.default.createElement("a", {
-    href: "https://twitter.com",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Twitter, null)), /*#__PURE__*/_react.default.createElement("a", {
-    href: "https://www.instagram.com/ordering.co/",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Instagram, null))))));
+  var _useApi = (0, _orderingComponents.useApi)(),
+      _useApi2 = _slicedToArray(_useApi, 1),
+      ordering = _useApi2[0];
+
+  var requestsState = {};
+
+  var getPage = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      var source, _yield$ordering$pages, _yield$ordering$pages2, error, result;
+
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                loading: true
+              }));
+              _context.prev = 1;
+              source = {};
+              requestsState.page = source;
+              _context.next = 6;
+              return ordering.pages('footer').get({
+                cancelToken: source
+              });
+
+            case 6:
+              _yield$ordering$pages = _context.sent;
+              _yield$ordering$pages2 = _yield$ordering$pages.content;
+              error = _yield$ordering$pages2.error;
+              result = _yield$ordering$pages2.result;
+              setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                loading: false
+              }));
+
+              if (!error) {
+                setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                  body: result.body
+                }));
+              } else {
+                setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                  error: result
+                }));
+              }
+
+              _context.next = 17;
+              break;
+
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](1);
+
+              if (_context.t0.constructor.name !== 'Cancel') {
+                setfooterState(_objectSpread(_objectSpread({}, footerState), {}, {
+                  loading: false,
+                  error: [_context.t0.message]
+                }));
+              }
+
+            case 17:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[1, 14]]);
+    }));
+
+    return function getPage() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  (0, _react.useEffect)(function () {
+    getPage();
+    return function () {
+      if (requestsState.page) {
+        requestsState.page.cancel();
+      }
+    };
+  }, []);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, footerState.body && /*#__PURE__*/_react.default.createElement("div", {
+    dangerouslySetInnerHTML: {
+      __html: footerState.body
+    }
+  }));
 };
 
 exports.Footer = Footer;

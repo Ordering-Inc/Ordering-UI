@@ -13,11 +13,19 @@ var _FcCancel = _interopRequireDefault(require("@meronex/icons/fc/FcCancel"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _styles = require("./styles");
-
 var _orderingComponents = require("ordering-components");
 
 var _UserFormDetails = require("../UserFormDetails");
+
+var _VerifyCodeForm = require("../VerifyCodeForm");
+
+var _Confirm = require("../Confirm");
+
+var _Modal = require("../Modal");
+
+var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
+
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56,7 +64,12 @@ var UserDetailsUI = function UserDetailsUI(props) {
       validationFields = props.validationFields,
       isUserDetailsEdit = props.isUserDetailsEdit,
       isCustomerMode = props.isCustomerMode,
-      userState = props.userState;
+      userState = props.userState,
+      checkPhoneCodeState = props.checkPhoneCodeState,
+      handleSendVerifyCode = props.handleSendVerifyCode,
+      handleCheckPhoneCode = props.handleCheckPhoneCode,
+      verifyPhoneState = props.verifyPhoneState,
+      isVerifiedPhone = props.isVerifiedPhone;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -66,12 +79,41 @@ var UserDetailsUI = function UserDetailsUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
 
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      willVerifyOtpState = _useState4[0],
+      setWillVerifyOtpState = _useState4[1];
+
+  var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
+      _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
+      otpLeftTime = _useCountdownTimer2[0],
+      resetOtpLeftTime = _useCountdownTimer2[2];
+
   var userData = ((_userState$result = userState.result) === null || _userState$result === void 0 ? void 0 : _userState$result.result) || props.userData || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) || user;
-  (0, _react.useEffect)(function () {
-    if (isUserDetailsEdit) {
-      !isEdit && toggleIsEdit();
+
+  var handleSendOtp = function handleSendOtp() {
+    var _formState$changes, _formState$changes2;
+
+    if (willVerifyOtpState && formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.cellphone && formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.country_phone_code) {
+      var _formState$changes3 = formState === null || formState === void 0 ? void 0 : formState.changes,
+          cellphone = _formState$changes3.cellphone,
+          countryPhoneCode = _formState$changes3.country_phone_code;
+
+      resetOtpLeftTime();
+      handleSendVerifyCode({
+        cellphone: cellphone,
+        country_phone_code: countryPhoneCode
+      });
     }
-  }, [isUserDetailsEdit]);
+  };
 
   var toggleEditState = function toggleEditState() {
     toggleIsEdit();
@@ -80,6 +122,52 @@ var UserDetailsUI = function UserDetailsUI(props) {
     });
   };
 
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+
+  (0, _react.useEffect)(function () {
+    var _checkPhoneCodeState$;
+
+    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) {
+      var _checkPhoneCodeState$2;
+
+      setAlertState({
+        open: true,
+        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
+      });
+    } else {
+      resetOtpLeftTime();
+    }
+  }, [checkPhoneCodeState]);
+  (0, _react.useEffect)(function () {
+    var _verifyPhoneState$res;
+
+    if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) {
+      var _verifyPhoneState$res2;
+
+      setAlertState({
+        open: true,
+        content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
+      });
+    } else {
+      resetOtpLeftTime();
+    }
+  }, [verifyPhoneState]);
+  (0, _react.useEffect)(function () {
+    if (isUserDetailsEdit) {
+      !isEdit && toggleIsEdit();
+    }
+  }, [isUserDetailsEdit]);
+  (0, _react.useEffect)(function () {
+    handleSendOtp();
+  }, [willVerifyOtpState]);
+  (0, _react.useEffect)(function () {
+    if (isVerifiedPhone) setWillVerifyOtpState(false);
+  }, [isVerifiedPhone]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -110,8 +198,35 @@ var UserDetailsUI = function UserDetailsUI(props) {
     }
   }))), !isEdit ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, (userData === null || userData === void 0 ? void 0 : userData.address) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.address), ((userData === null || userData === void 0 ? void 0 : userData.name) || (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (userData === null || userData === void 0 ? void 0 : userData.lastname) || (userData === null || userData === void 0 ? void 0 : userData.second_lastname)) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.name, " ", userData === null || userData === void 0 ? void 0 : userData.middle_name, " ", userData === null || userData === void 0 ? void 0 : userData.lastname, " ", userData === null || userData === void 0 ? void 0 : userData.second_lastname), (userData === null || userData === void 0 ? void 0 : userData.email) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", null, (userData === null || userData === void 0 ? void 0 : userData.country_phone_code) && "+".concat(userData === null || userData === void 0 ? void 0 : userData.country_phone_code, " "), userData === null || userData === void 0 ? void 0 : userData.cellphone), ((userData === null || userData === void 0 ? void 0 : userData.phone) || (user === null || user === void 0 ? void 0 : user.phone)) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.cellphone)) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
     userData: userData,
-    isCustomerMode: isCustomerMode
-  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    isCustomerMode: isCustomerMode,
+    setWillVerifyOtpState: setWillVerifyOtpState
+  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('PROFILE', 'Profile'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ENTER_VERIFICATION_CODE', 'Enter verification code'),
+    open: willVerifyOtpState,
+    width: "700px",
+    height: "420px",
+    onClose: function onClose() {
+      return setWillVerifyOtpState(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_VerifyCodeForm.VerifyCodeForm, {
+    otpLeftTime: otpLeftTime,
+    credentials: formState === null || formState === void 0 ? void 0 : formState.changes,
+    handleSendOtp: handleSendOtp,
+    handleCheckPhoneCode: handleCheckPhoneCode,
+    email: (userData === null || userData === void 0 ? void 0 : userData.email) || (user === null || user === void 0 ? void 0 : user.email)
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
