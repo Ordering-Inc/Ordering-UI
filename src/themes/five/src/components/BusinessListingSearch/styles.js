@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const BusinessListingSearchContainer = styled.div`
@@ -16,26 +17,39 @@ export const BusinessListingSearchContainer = styled.div`
 `
 
 export const FiltersContainer = styled.div`
-  display: flex;
-  width: 100%;
+  
+  flex-direction: column;
+  @media (min-width: 993px){
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+  }
 `
 
 export const Filters = styled.div`
-  width: 25%;
-  max-width: 25%;
-  margin-right: 20px;
+  width: 100%;
+  max-width: 100%;
+  @media (min-width: 993px){
+    width: 25%;
+    max-width: 25%;
+    margin-right: 20px;
+  }
 `
 
 export const FiltersResultContainer = styled.div`
-  width: 75%;
-  max-width: 75%;
+  width: 100%;
+  max-width: 100%;
+  @media (min-width: 993px){
+    width: 75%;
+    max-width: 75%;
+  }
 `
 
 export const SortContainer = styled.div`
 
 `
 
-export const MaxDeliveryFeeContainer = styled.div`
+export const MaxFilterContainer = styled.div`
 
 `
 
@@ -55,18 +69,22 @@ export const ProgressBar = styled.div`
   background: #344050;
 `
 
-export const Fees = styled.div`
+export const MaxItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `
 
 export const BusinessList = styled.div`
   display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   align-items: center;
   ${({ noResults }) => noResults && css`
     justify-content: center;
   `}
+  @media (min-width: 480px){
+    flex-direction: row;
+  }
   #searchlist {
     > div {
       width: calc(100vw - 40px);
@@ -85,13 +103,10 @@ export const BusinessList = styled.div`
         min-width: calc(25vw - 40px);
       }
     }
-    div:first-child {
-      margin: 0 !important;
-    }
   }
 `
 
-export const Fee = styled.p`
+export const MaxItem = styled.p`
   cursor: pointer;
   margin-top: 0;
   font-size: 14px;
@@ -111,9 +126,24 @@ export const ProductsList = styled.div`
 export const BusinessInfo = styled.div`
   display: flex;
   button {
-    height: 44px;
+    height: 25px;
+    font-size: 10px;
     white-space: nowrap;
-    overflow: initial;
+    line-height: 0;
+    max-width: 80px;
+  }
+  @media (min-width: 380px){
+    button{
+      max-width: initial;
+    }
+  }
+  @media (min-width: 480px){
+    button {
+      line-height: 30px;
+      height: 44px;
+      overflow: initial;
+      font-size: 16px;
+    }
   }
 `
 
@@ -121,7 +151,7 @@ export const Metadata = styled.div`
   margin-top: 5px;
   display: flex;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 10px;
   color: #909BA9;
   flex-wrap: wrap;
   ${({ isSkeleton }) => isSkeleton && css`
@@ -151,7 +181,7 @@ export const Metadata = styled.div`
 `
 
 export const BusinessInfoItem = styled.div`
-  width: 100%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -177,6 +207,9 @@ export const BusinessInfoItem = styled.div`
       font-weight: bold;
     }
   }
+  @media (min-width: 480px) {
+    width: 100%;
+  }
 `
 
 export const SingleBusinessSearch = styled.div`
@@ -191,8 +224,15 @@ export const BusinessProductsListContainer = styled.div`
   box-sizing: border-box;
 
   .product-card {
-    width: 400px;
-    max-width: 400px;
+    width: 270px;
+    max-width: 270px;
+  }
+
+  @media(min-width: 480px){
+    .product-card {
+      width: 400px;
+      max-width: 400px;
+    }
   }
 `
 
@@ -206,11 +246,84 @@ export const BusinessProductsListWrapper = styled(BusinessListWrapper)``
 export const BusinessControllerSkeleton = styled.div`
   display: flex;
   width: 100%;
+  flex-direction: column;
   > div {
     flex: 1;
+  }
+  @media (min-width: 681px){
+    flex-direction: row;
   }
 `
 
 export const NotFoundWrapper = styled.div`
   padding-top: 50px;
+`
+
+const BusinessLogoStyled = styled.div`
+  display: flex;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  min-height: 48px;
+  border-radius: 7.6px;
+
+  ${({ isSkeleton }) => isSkeleton && css`
+    span {
+      min-width: 45px;
+      min-height: 45px;
+      height: 45px;
+      width: 45px;
+      min-height: 45px;
+    }
+      @media (min-width: 681px){
+        span {
+          min-width: 75px;
+          min-height: 75px;
+          height: 75px;
+          width: 75px;
+          min-height: 75px;
+      }
+    }
+  `}
+
+  @media (min-width: 681px){
+    min-width: 75px;
+    min-height: 75px;
+    height: 75px;
+    width: 75px;
+    min-height: 75px;
+  }
+
+`
+
+export const BusinessLogo = (props) => {
+  const style = {}
+  if (props.bgimage) {
+    style.backgroundImage = `url(${props.bgimage})`
+  }
+
+  return (
+    <BusinessLogoStyled {...props} style={style}>
+      {props.children}
+    </BusinessLogoStyled>
+  )
+}
+
+export const BusinessName = styled.h6`
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  color: ${props => props.theme.colors.darkTextColor};
+  @media (min-width: 681px){
+    font-size: 16px;
+  }
 `

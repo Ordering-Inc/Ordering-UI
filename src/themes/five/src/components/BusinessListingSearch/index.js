@@ -6,13 +6,13 @@ import {
   Filters,
   FiltersResultContainer,
   SortContainer,
-  MaxDeliveryFeeContainer,
+  MaxFilterContainer,
   TagsContainer,
   ProgressContentWrapper,
   ProgressBar,
-  Fees,
+  MaxItemContainer,
   BusinessList,
-  Fee,
+  MaxItem,
   SortItem,
   ProductsList,
   BusinessInfo,
@@ -23,7 +23,9 @@ import {
   BusinessListWrapper,
   BusinessProductsListWrapper,
   BusinessControllerSkeleton,
-  NotFoundWrapper
+  NotFoundWrapper,
+  BusinessName,
+  BusinessLogo
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 
@@ -33,12 +35,14 @@ import { BusinessController } from '../BusinessController'
 import { AutoScroll } from '../AutoScroll'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { useTheme } from 'styled-components'
-import { BusinessLogo, BusinessName } from '../BusinessController/styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import { convertHoursToMinutes } from '../../../../../utils'
 import { Button } from '../../styles/Buttons'
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../NotFoundSource'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
+import BisUpArrow from '@meronex/icons/bi/BisUpArrow'
 
 export const BusinessListingSearch = (props) => {
   const {
@@ -59,8 +63,12 @@ export const BusinessListingSearch = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parsePrice, optimizeImage, parseDistance }] = useUtils()
-
+  const { width } = useWindowSize()
   const maxDeliveryFeeOptions = [15, 25, 35, 'default']
+  // const maxProductPriceOptions = [5, 10, 15, 'default']
+  const maxDistanceOptions = [1000, 2000, 5000, 'default']
+  const maxTimeOptions = [5, 15, 30, 'default']
+
   const sortItems = [
     { text: t('PICKED_FOR_YOU', 'Picked for you (default)'), value: 'default' },
     { text: t('DELIVERY_TIME', 'Delivery time'), value: 'delivery_time' },
@@ -71,6 +79,37 @@ export const BusinessListingSearch = (props) => {
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (businessesList.loading || businessesList.error?.length > 0 || !hasMore) return
     getBusinesses()
+  }
+  const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0) ||
+    (!businessesSearchList.loading && businessesList?.businesses?.length === 0 && termValue?.length < 3)
+
+  const MaxSectionItem = ({ title, options, filter }) => {
+    const parseValue = (option) => {
+      return filter === 'max_distance'
+        ? `${option / 1000} ${t('KM', 'Km')}`
+        : filter === 'max_eta'
+          ? `${option} ${t('MIN', 'min')}`
+          : parsePrice(option)
+    }
+    return (
+      <MaxFilterContainer>
+        <h3>{title}</h3>
+        <ProgressContentWrapper>
+          <ProgressBar style={{ width: `${((options.indexOf(filters?.[filter]) / 3) * 100) ?? 100}%` }} />
+        </ProgressContentWrapper>
+        <MaxItemContainer>
+          {options.map((option, i) => (
+            <MaxItem
+              key={option}
+              active={filters?.[filter] === option || (option === 'default' && (filters?.[filter] === 'default' || !filters?.[filter]))}
+              onClick={() => handleChangeFilters(filter, option)}
+            >
+              {option === 'default' ? `${parseValue(options[i - 1])}+` : parseValue(option)}
+            </MaxItem>
+          ))}
+        </MaxItemContainer>
+      </MaxFilterContainer>
+    )
   }
 
   return (
@@ -90,34 +129,41 @@ export const BusinessListingSearch = (props) => {
               <SortItem
                 key={item?.value}
                 onClick={() => handleChangeFilters('orderBy', item?.value)}
-                active={filters?.orderBy === item?.value || (item?.value === 'default' && (filters.orderBy === 'default' || !filters?.orderBy))}
+                active={filters?.orderBy?.includes(item?.value)}
               >
-                {item?.text}
+                {item?.text}  {(filters?.orderBy?.includes(item?.value)) && <>{filters?.orderBy?.includes('-') ? <BisUpArrow /> : <BisDownArrow />}</>}
               </SortItem>
             ))}
             {/* <SortItem onClick={() => handleChangeFilters('orderBy', 'default')}>{t('MOST_POPULAR', 'Most popular')}</SortItem>
             <SortItem onClick={() => handleChangeFilters('orderBy', 'default')}>{t('RATING', 'Rating')}</SortItem> */}
 
           </SortContainer>
-          <MaxDeliveryFeeContainer>
-            <h3>{t('MAX_DELIVERY_FEE', 'Max delivery fee')}</h3>
-            <ProgressContentWrapper>
-              <ProgressBar style={{ width: `${((maxDeliveryFeeOptions.indexOf(filters?.max_delivery_price) / 3) * 100) ?? 100}%` }} />
-            </ProgressContentWrapper>
-            <Fees>
-              {maxDeliveryFeeOptions.map((option, i) => (
-                <Fee
-                  key={option}
-                  active={filters.max_delivery_price === option || (option === 'default' && (filters.max_delivery_price === 'default' || !filters?.max_delivery_price))}
-                  onClick={() => handleChangeFilters('max_delivery_price', option)}
-                >
-                  {option === 'default' ? `${parsePrice(maxDeliveryFeeOptions[i - 1])}+` : parsePrice(option)}
-                </Fee>
-              ))}
-            </Fees>
-          </MaxDeliveryFeeContainer>
+          {orderState?.options?.type === 1 && (
+            <MaxSectionItem
+              title={t('MAX_DELIVERY_FEE', 'Max delivery fee')}
+              options={maxDeliveryFeeOptions}
+              filter='max_delivery_price'
+            />
+          )}
+          {[1, 2].includes(orderState?.options?.type) && (
+            <MaxSectionItem
+              title={orderState?.options?.type === 1 ? t('MAX_DELIVERY_TIME', 'Max delivery time') : t('MAX_PICKUP_TIME', 'Max pickup time')}
+              options={maxTimeOptions}
+              filter='max_eta'
+            />
+          )}
+          <MaxSectionItem
+            title={t('MAX_DISTANCE', 'Max distance')}
+            options={maxDistanceOptions}
+            filter='max_distance'
+          />
+          {/* <MaxSectionItem
+              title={t('MAX_PRODUCT_PRICE', 'Max product price')}
+              options={maxProductPriceOptions}
+              filter='max_product_price'
+            /> */}
           <TagsContainer>
-            <h3>{t('DIETARY', 'Dietary')}</h3>
+            <h3>{t('BUSINESS_CATEGORIES', 'Business categories')}</h3>
             <BusinessTypeFilter
               isSearchMode
               filters={filters}
@@ -127,8 +173,8 @@ export const BusinessListingSearch = (props) => {
         </Filters>
         <FiltersResultContainer>
           <BusinessListWrapper>
-            <BusinessList noResults={!businessesSearchList.loading && businessesSearchList?.businesses?.length === 0 && !businessesSearchList.lengthError}>
-              {businessesSearchList.loading && businessesList.loading && (
+            <BusinessList noResults={noResults}>
+              {(businessesSearchList.loading || (businessesList.loading && businessesSearchList.businesses?.length > 0)) && (
                 <BusinessControllerSkeleton>
                   {[...Array(3).keys()].map(i => (
                     <BusinessController
@@ -137,24 +183,22 @@ export const BusinessListingSearch = (props) => {
                       business={{}}
                       isSkeleton
                       orderType={orderState?.options?.type}
-                      firstCard={i === 0}
+                      firstCard={i === 0 && width > 681}
                     />
                   ))}
                 </BusinessControllerSkeleton>
               )}
               {
-                !businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0 && (
+                noResults && (
                   <NotFoundWrapper>
                     <NotFoundSource
-                      content={!businessesSearchList.lengthError
-                        ? t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
-                        : t('PLEASE_TYPE_AT_LEAST_3_CHARACTERS', 'Please type at least 3 characters')}
+                      content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
                     />
                   </NotFoundWrapper>
                 )
               }
               {termValue?.length < 3 && !businessesList.loading && !businessesSearchList.loading && businessesList.businesses?.length > 0 && (
-                <AutoScroll scrollId='searchlist' onHandleRightEnd={getMoreBusiness}>
+                <AutoScroll scrollId='searchlist' onHandleRightEnd={getMoreBusiness} isColumnMode={width <= 681}>
                   {businessesList.businesses?.map((business, i) => (
                     <BusinessController
                       key={business.id}
@@ -166,13 +210,13 @@ export const BusinessListingSearch = (props) => {
                       isCustomLayout={isCustomLayout}
                       isShowCallcenterInformation={isCustomLayout}
                       onPreorderBusiness={setPreorderBusiness}
-                      firstCard={i === 0}
+                      firstCard={i === 0 && width > 681}
                     />
                   ))}
                 </AutoScroll>
               )}
               {termValue?.length >= 3 && !businessesSearchList.loading && businessesSearchList.businesses?.length > 0 && (
-                <AutoScroll scrollId='searchlist'>
+                <AutoScroll scrollId='searchlist' isColumnMode={width <= 681}>
                   {businessesSearchList.businesses.map((business, i) => (
                     <BusinessController
                       key={business.id}
@@ -181,7 +225,7 @@ export const BusinessListingSearch = (props) => {
                       isBusinessOpen={business.open}
                       handleCustomClick={handleBusinessClick}
                       orderType={orderState?.options?.type}
-                      firstCard={i === 0}
+                      firstCard={i === 0 && width > 681}
                     />
                   ))}
                 </AutoScroll>
@@ -194,8 +238,8 @@ export const BusinessListingSearch = (props) => {
                 [...Array(3)].map((item, i) => (
                   <SingleBusinessSearch key={`skeleton:${i}`}>
                     <BusinessInfo>
-                      <BusinessLogo>
-                        <Skeleton width={75} height={75} />
+                      <BusinessLogo isSkeleton>
+                        <Skeleton />
                       </BusinessLogo>
                       <BusinessInfoItem>
                         <BusinessName>
@@ -252,7 +296,7 @@ export const BusinessListingSearch = (props) => {
                       bgtransparent
                       color='primary'
                     >
-                      {t('GO_TO_STORE', 'Go to store')}
+                      {t('GO_TO_THE_STORE', 'Go to the store')}
                     </Button>
                   </BusinessInfo>
                   <BusinessProductsListWrapper>

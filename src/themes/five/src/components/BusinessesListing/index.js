@@ -81,7 +81,7 @@ const BusinessesListingUI = (props) => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
-    if (badScrollPosition || businessesList.loading || businessesList.error?.length > 0 || !hasMore) return
+    if (badScrollPosition || businessesList.loading || businessesList.error?.length > 0 || !hasMore || isEnabledSearchBusiness) return
     getBusinesses()
   }, [businessesList.loading, paginationProps])
 
@@ -156,19 +156,21 @@ const BusinessesListingUI = (props) => {
         <OrderProgressWrapper>
           <OrderProgress />
         </OrderProgressWrapper>
-        <WrapperSearch isCustomLayout={isCustomLayout}>
-          <SearchBar
-            lazyLoad
-            search={searchValue}
-            isCustomLayout={isCustomLayout}
-            placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-            onSearch={handleChangeSearch}
-          />
-          {isCustomLayout && (
-            <FiMap onClick={toggleMap} />
-          )}
-        </WrapperSearch>
-        {hasHighRatedBusiness && (
+        {!isEnabledSearchBusiness && (
+          <WrapperSearch isCustomLayout={isCustomLayout}>
+            <SearchBar
+              lazyLoad
+              search={searchValue}
+              isCustomLayout={isCustomLayout}
+              placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+              onSearch={handleChangeSearch}
+            />
+            {isCustomLayout && (
+              <FiMap onClick={toggleMap} />
+            )}
+          </WrapperSearch>
+        )}
+        {hasHighRatedBusiness && !isEnabledSearchBusiness && (
           <HightestRatedWrapper>
             <Divider />
             <HighestRated
@@ -179,7 +181,7 @@ const BusinessesListingUI = (props) => {
             <Divider />
           </HightestRatedWrapper>
         )}
-        {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
+        {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && !isEnabledSearchBusiness && (
           <BusinessTypeFilter
             images={props.images}
             businessTypes={props.businessTypes}

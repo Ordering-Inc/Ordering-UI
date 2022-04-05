@@ -1,14 +1,21 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { AutoscrollContainer } from './styles'
 import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
 import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
 import { useTheme } from '../../../../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, modal, special, scrollId, onHandleRightEnd }) => {
+export const AutoScroll = (props) => {
+  const {
+    children,
+    modal,
+    special,
+    scrollId,
+    onHandleRightEnd,
+    isColumnMode
+  } = props
   const [parentElement, setParentElement] = useState([])
   const [containerElement, setContainerElement] = useState([])
   const [theme] = useTheme()
-  const autoscrollRef = useRef()
   const autoScrollId = scrollId || 'autoscroll'
   let handleEndFired = false
   useLayoutEffect(() => {
@@ -86,13 +93,13 @@ export const AutoScroll = ({ children, modal, special, scrollId, onHandleRightEn
   }
 
   return (
-    <AutoscrollContainer modal={modal} id={`${autoScrollId}`} ref={autoscrollRef}>
+    <AutoscrollContainer modal={modal} id={`${autoScrollId}`} isColumnMode={isColumnMode}>
       {
-        (!special ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth) ? <MdKeyboardArrowLeft className='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        (!special ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth) && !isColumnMode ? <MdKeyboardArrowLeft className='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        (!special ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth) ? <MdKeyboardArrowRight className='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        (!special ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth) && !isColumnMode ? <MdKeyboardArrowRight className='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
   )
