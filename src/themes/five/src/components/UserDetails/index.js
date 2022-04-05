@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import FcCancel from '@meronex/icons/fc/FcCancel'
 import Skeleton from 'react-loading-skeleton'
-import { Container, Header, SideForm, UserData } from './styles'
-
 import {
   UserFormDetails as UserFormController,
   useLanguage,
   useSession
 } from 'ordering-components'
-
 import { UserFormDetailsUI } from '../UserFormDetails'
+import { VerifyCodeForm } from '../VerifyCodeForm'
+import { Alert } from '../Confirm'
+import { Modal } from '../Modal'
+import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
+
+import { Container, Header, SideForm, UserData } from './styles'
 
 const UserDetailsUI = (props) => {
   const {
@@ -21,12 +24,65 @@ const UserDetailsUI = (props) => {
     validationFields,
     isUserDetailsEdit,
     isCustomerMode,
-    userState
+    userState,
+    checkPhoneCodeState,
+    handleSendVerifyCode,
+    handleCheckPhoneCode,
+    verifyPhoneState,
+    isVerifiedPhone
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
+  const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
+    600, !checkPhoneCodeState?.loading && willVerifyOtpState)
+
   const userData = userState.result?.result || props.userData || formState.result?.result || user
+
+  const handleSendOtp = () => {
+    if (willVerifyOtpState && formState?.changes?.cellphone && formState?.changes?.country_phone_code) {
+      const { cellphone, country_phone_code: countryPhoneCode } = formState?.changes
+
+      resetOtpLeftTime()
+
+      handleSendVerifyCode({
+        cellphone: cellphone,
+        country_phone_code: countryPhoneCode
+      })
+    }
+  }
+
+  const toggleEditState = () => {
+    toggleIsEdit()
+    cleanFormState({ changes: {} })
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  useEffect(() => {
+    if (checkPhoneCodeState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
+      })
+    } else { resetOtpLeftTime() }
+  }, [checkPhoneCodeState])
+
+  useEffect(() => {
+    if (verifyPhoneState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
+      })
+    } else { resetOtpLeftTime() }
+  }, [verifyPhoneState])
 
   useEffect(() => {
     if (isUserDetailsEdit) {
@@ -34,10 +90,13 @@ const UserDetailsUI = (props) => {
     }
   }, [isUserDetailsEdit])
 
-  const toggleEditState = () => {
-    toggleIsEdit()
-    cleanFormState({ changes: {} })
-  }
+  useEffect(() => {
+    handleSendOtp()
+  }, [willVerifyOtpState])
+
+  useEffect(() => {
+    if (isVerifiedPhone) setWillVerifyOtpState(false)
+  }, [isVerifiedPhone])
 
   return (
     <>
@@ -96,11 +155,36 @@ const UserDetailsUI = (props) => {
                 {...props}
                 userData={userData}
                 isCustomerMode={isCustomerMode}
+                setWillVerifyOtpState={setWillVerifyOtpState}
               />
             </SideForm>
           )}
         </Container>
       )}
+      <Alert
+        title={t('PROFILE', 'Profile')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+      <Modal
+        title={t('ENTER_VERIFICATION_CODE', 'Enter verification code')}
+        open={willVerifyOtpState}
+        width='700px'
+        height='420px'
+        onClose={() => setWillVerifyOtpState(false)}
+      >
+        <VerifyCodeForm
+          otpLeftTime={otpLeftTime}
+          credentials={formState?.changes}
+          handleSendOtp={handleSendOtp}
+          handleCheckPhoneCode={handleCheckPhoneCode}
+          email={(userData?.email || user?.email)}
+        />
+      </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

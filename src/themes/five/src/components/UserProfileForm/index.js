@@ -9,13 +9,14 @@ import {
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
+import { Modal } from '../Modal'
+import { VerifyCodeForm } from '../VerifyCodeForm'
+import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 
 import { ProfileOptions } from './ProfileOptions'
-
 import { bytesConverter } from '../../../../../utils'
-
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
 
@@ -26,7 +27,6 @@ import {
   Image,
   SideForm,
   Camera,
-  UserData,
   SavedPlaces,
   UploadImageIcon,
   SkeletonWrapper,
@@ -41,14 +41,24 @@ const UserProfileFormUI = (props) => {
     formState,
     cleanFormState,
     toggleIsEdit,
-    isHiddenAddress
+    isHiddenAddress,
+    checkPhoneCodeState,
+    handleSendVerifyCode,
+    handleCheckPhoneCode,
+    verifyPhoneState,
+    isVerifiedPhone
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [edit, setEdit] = useState(false)
+  const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
+  const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
+    600, !checkPhoneCodeState?.loading && willVerifyOtpState)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
+
+  console.log(edit)
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -91,6 +101,19 @@ const UserProfileFormUI = (props) => {
     })
   }
 
+  const handleSendOtp = () => {
+    if (willVerifyOtpState && formState?.changes?.cellphone && formState?.changes?.country_phone_code) {
+      const { cellphone, country_phone_code: countryPhoneCode } = formState?.changes
+
+      resetOtpLeftTime()
+
+      handleSendVerifyCode({
+        cellphone: cellphone,
+        country_phone_code: countryPhoneCode
+      })
+    }
+  }
+
   useEffect(() => {
     if (formState.changes?.photo) {
       const isImage = true
@@ -99,8 +122,34 @@ const UserProfileFormUI = (props) => {
   }, [formState.changes?.photo])
 
   useEffect(() => {
+    if (checkPhoneCodeState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
+      })
+    } else { resetOtpLeftTime() }
+  }, [checkPhoneCodeState?.result?.result])
+
+  useEffect(() => {
+    if (verifyPhoneState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
+      })
+    } else { resetOtpLeftTime() }
+  }, [verifyPhoneState?.result?.result])
+
+  useEffect(() => {
     toggleIsEdit()
   }, [])
+
+  useEffect(() => {
+    handleSendOtp()
+  }, [willVerifyOtpState])
+
+  useEffect(() => {
+    if (isVerifiedPhone) setWillVerifyOtpState(false)
+  }, [isVerifiedPhone])
 
   return (
     <>
@@ -145,6 +194,7 @@ const UserProfileFormUI = (props) => {
                 onCancel={toggleEditState}
                 onCloseProfile={() => setEdit(false)}
                 isHiddenAddress={isHiddenAddress}
+                setWillVerifyOtpState={setWillVerifyOtpState}
               />
             </WrapperForm>
           </SideForm>
@@ -165,6 +215,21 @@ const UserProfileFormUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        title={t('ENTER_VERIFICATION_CODE', 'Enter verification code')}
+        open={willVerifyOtpState}
+        width='700px'
+        height='420px'
+        onClose={() => setWillVerifyOtpState(false)}
+      >
+        <VerifyCodeForm
+          otpLeftTime={otpLeftTime}
+          credentials={formState?.changes}
+          handleSendOtp={handleSendOtp}
+          handleCheckPhoneCode={handleCheckPhoneCode}
+          email={(userData?.email || user?.email)}
+        />
+      </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

@@ -73,6 +73,7 @@ import { UserDetails } from './src/components/UserDetails'
 import { UserPopover } from './src/components/UserPopover'
 import { UserProfileForm } from './src/components/UserProfileForm'
 import { UserVerification } from './src/components/UserVerification'
+import { VerifyCodeForm } from './src/components/VerifyCodeForm'
 import { Wallets } from './src/components/Wallets'
 import { WalletTransactionItem } from './src/components/WalletTransactionItem'
 
@@ -156,6 +157,7 @@ export {
   UserPopover,
   UserProfileForm,
   UserVerification,
+  VerifyCodeForm,
   Wallets,
   WalletTransactionItem,
 
