@@ -217,7 +217,7 @@ var UserPopover = function UserPopover(props) {
       }
     }, t((option.key || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)));
   }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ExtraOptions, null, extraOptions && extraOptions.length > 0 && extraOptions.map(function (option, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
+    return option.isActive && /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
       key: i,
       active: window.location.pathname === option.pathname,
       onClick: function onClick() {
