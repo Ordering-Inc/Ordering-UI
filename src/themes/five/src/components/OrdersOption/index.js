@@ -266,7 +266,7 @@ export const OrdersOption = (props) => {
     ...props,
     UIComponent: OrdersOptionUI,
     orderStatus: props.activeOrders
-      ? [0, 3, 4, 7, 8, 9, 14, 15, 18, 19, 20, 21]
+      ? [0, 3, 4, 7, 8, 9, 14, 15, 18, 19, 20, 21, 22, 23]
       : (props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 16, 17] : [13]),
     useDefualtSessionManager: true,
     paginationSettings: {
