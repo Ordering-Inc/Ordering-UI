@@ -75,7 +75,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
       setLastOrder = _useState2[1];
 
   var getOrderStatus = function getOrderStatus(s) {
-    var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22;
+    var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
 
     var status = parseInt(s);
     var orderStatus = [{
@@ -188,6 +188,16 @@ var OrderProgressUI = function OrderProgressUI(props) {
       value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag22 = theme.defaultLanguages) === null || _theme$defaultLanguag22 === void 0 ? void 0 : _theme$defaultLanguag22.ORDER_CUSTOMER_ARRIVED_BUSINESS) || 'Customer arrived to business'),
       slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS',
       percentage: 95
+    }, {
+      key: 22,
+      value: t('ORDER_LOOKING_FOR_DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag23 = theme.defaultLanguages) === null || _theme$defaultLanguag23 === void 0 ? void 0 : _theme$defaultLanguag23.ORDER_LOOKING_FOR_DRIVER) || 'Looking for driver'),
+      slug: 'ORDER_LOOKING_FOR_DRIVER',
+      percentage: 35
+    }, {
+      key: 23,
+      value: t('ORDER_DRIVER_ON_WAY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag24 = theme.defaultLanguages) === null || _theme$defaultLanguag24 === void 0 ? void 0 : _theme$defaultLanguag24.ORDER_DRIVER_ON_WAY) || 'Driver on way'),
+      slug: 'ORDER_DRIVER_ON_WAY',
+      percentage: 45
     }];
     var objectStatus = orderStatus.find(function (o) {
       return o.key === status;
@@ -248,7 +258,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
 var OrderProgress = function OrderProgress(props) {
   var orderProgressProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrderProgressUI,
-    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21],
+    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21, 22, 23],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,

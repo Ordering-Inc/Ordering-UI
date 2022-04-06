@@ -302,7 +302,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
 var OrdersOption = function OrdersOption(props) {
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersOptionUI,
-    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21] : [1, 2, 5, 6, 10, 11, 12, 16, 17],
+    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21, 22, 23] : [1, 2, 5, 6, 10, 11, 12, 16, 17],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,

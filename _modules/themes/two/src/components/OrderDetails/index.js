@@ -80,7 +80,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _order$driver, _order$driver2, _theme$images, _theme$images$dummies, _order$business, _order$business2, _theme$images2, _theme$images2$dummie, _order$customer, _order$customer2, _theme$images3, _theme$images3$dummie, _props$beforeElements, _props$beforeComponen, _order$business3, _getOrderStatus, _getOrderStatus2, _order$business4, _order$business5, _order$business6, _order$business7, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _configs$guest_uuid_a, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _configs$google_maps_, _order$driver8, _order$products, _order$summary2, _order$summary3, _order$summary4, _order$taxes2, _order$summary5, _order$fees, _order$summary6, _order$taxes3, _order$taxes4, _order$fees2, _order$fees3, _order$fees3$filter, _order$summary7, _order$summary8, _order$summary9, _order$summary10, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary11, _order$summary12, _theme$defaultLanguag, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data$fi, _openTaxModal$data4, _openTaxModal$data5, _props$afterComponent, _props$afterElements;
+  var _order$driver, _order$driver2, _theme$images, _theme$images$dummies, _order$business, _order$business2, _theme$images2, _theme$images2$dummie, _order$customer, _order$customer2, _theme$images3, _theme$images3$dummie, _props$beforeElements, _props$beforeComponen, _order$business3, _getOrderStatus, _getOrderStatus2, _order$business4, _order$business5, _order$business6, _order$business7, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _configs$guest_uuid_a, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _configs$google_maps_, _order$driver8, _order$products, _order$summary2, _order$summary3, _order$summary4, _order$taxes2, _order$summary5, _order$fees, _order$summary6, _order$taxes3, _order$taxes4, _order$fees2, _order$fees3, _order$fees3$filter, _order$summary7, _order$summary8, _order$summary9, _order$summary10, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary11, _order$summary12, _theme$defaultLanguag3, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data$fi, _openTaxModal$data4, _openTaxModal$data5, _props$afterComponent, _props$afterElements;
 
   var userCustomerId = props.userCustomerId,
       handleBusinessRedirect = props.handleBusinessRedirect,
@@ -174,6 +174,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       error = _props$order.error;
 
   var getOrderStatus = function getOrderStatus(s) {
+    var _theme$defaultLanguag, _theme$defaultLanguag2;
+
     var status = parseInt(s);
     var orderStatus = [{
       key: 0,
@@ -285,6 +287,16 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business'),
       slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS',
       percentage: 95
+    }, {
+      key: 22,
+      value: t('ORDER_LOOKING_FOR_DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ORDER_LOOKING_FOR_DRIVER) || 'Looking for driver'),
+      slug: 'ORDER_LOOKING_FOR_DRIVER',
+      percentage: 35
+    }, {
+      key: 23,
+      value: t('ORDER_DRIVER_ON_WAY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.ORDER_DRIVER_ON_WAY) || 'Driver on way'),
+      slug: 'ORDER_DRIVER_ON_WAY',
+      percentage: 45
     }];
     var objectStatus = orderStatus.find(function (o) {
       return o.key === status;
@@ -605,7 +617,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   })), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isReviewOpen,
     onClose: handleCloseReivew,
-    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.LOADING) || 'Loading...')
+    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.LOADING) || 'Loading...')
   }, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
     closeReviewOrder: closeReviewOrder,
