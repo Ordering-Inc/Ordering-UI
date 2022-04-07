@@ -36,7 +36,7 @@ const ReviewOrderUI = (props) => {
   const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
 
-  const commentsList = reviewCommentList(1)
+  const commentsList = reviewCommentList('order')
 
   const qualificationList = [
     { key: 1, text: t('TERRIBLE', 'Terrible'), middleNode: false, left: 0, right: 'initial' },

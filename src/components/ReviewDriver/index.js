@@ -45,7 +45,7 @@ const ReviewDriverUI = (props) => {
   const [extraComment, setExtraComment] = useState('')
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
 
-  const commentsList = reviewCommentList(1)
+  const commentsList = reviewCommentList('driver')
 
   const qualificationList = [
     { key: 1, text: t('TERRIBLE', 'Terrible'), middleNode: false, left: 0, right: 'initial' },
