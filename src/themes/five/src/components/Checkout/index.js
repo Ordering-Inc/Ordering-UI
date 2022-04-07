@@ -76,7 +76,8 @@ const CheckoutUI = (props) => {
     handleChangeDeliveryOption,
     instructionsOptions,
     deliveryOptionSelected,
-    handleStoreRedirect
+    handleStoreRedirect,
+    onPlaceOrderClick
   } = props
 
   const theme = useTheme()
@@ -375,6 +376,7 @@ const CheckoutUI = (props) => {
                   isCustomerMode={isCustomerMode}
                   paySelected={paymethodSelected}
                   handlePlaceOrder={handlePlaceOrder}
+                  onPlaceOrderClick={onPlaceOrderClick}
                 />
               </PaymentMethodContainer>
             )}
