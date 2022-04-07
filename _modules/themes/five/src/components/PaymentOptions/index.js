@@ -43,6 +43,8 @@ var _NotFoundSource = require("../NotFoundSource");
 
 var _utils = require("../../../../../utils");
 
+var _PaymentOptionSquare = require("../../../../../components/PaymentOptionSquare");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -143,7 +145,7 @@ var paypalBtnStyle = {
 };
 
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errorCash = props.errorCash,
@@ -158,6 +160,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       isCustomerMode = props.isCustomerMode,
       isOpenMethod = props.isOpenMethod,
       onPaymentChange = props.onPaymentChange,
+      setCreateOrder = props.setCreateOrder,
+      onPlaceOrderClick = props.onPlaceOrderClick,
       handlePlaceOrder = props.handlePlaceOrder;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -331,6 +335,24 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     currency: props.currency,
     paymethods: stripeRedirectOptions,
     handleStripeRedirect: handlePaymethodDataChange
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('SQUARE', 'Square'),
+    open: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth25 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth25 === void 0 ? void 0 : _isOpenMethod$paymeth25.gateway) === 'square' && !paymethodData.token,
+    onClose: function onClose() {
+      return handlePaymethodClick(null);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_PaymentOptionSquare.PaymentOptionSquare, {
+    businessId: props.businessId,
+    cartTotal: cart === null || cart === void 0 ? void 0 : cart.total,
+    data: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth26 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth26 === void 0 ? void 0 : _isOpenMethod$paymeth26.credentials,
+    body: {
+      paymethod_id: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth27 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth27 === void 0 ? void 0 : _isOpenMethod$paymeth27.id,
+      amount: cart.total,
+      delivery_zone_id: cart.delivery_zone_id,
+      cartUuid: cart.uuid
+    },
+    onPlaceOrderClick: onPlaceOrderClick,
+    setCreateOrder: setCreateOrder
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

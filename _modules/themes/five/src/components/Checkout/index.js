@@ -111,7 +111,8 @@ var CheckoutUI = function CheckoutUI(props) {
       handleChangeDeliveryOption = props.handleChangeDeliveryOption,
       instructionsOptions = props.instructionsOptions,
       deliveryOptionSelected = props.deliveryOptionSelected,
-      handleStoreRedirect = props.handleStoreRedirect;
+      handleStoreRedirect = props.handleStoreRedirect,
+      onPlaceOrderClick = props.onPlaceOrderClick;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
@@ -431,7 +432,8 @@ var CheckoutUI = function CheckoutUI(props) {
     handleOrderRedirect: handleOrderRedirect,
     isCustomerMode: isCustomerMode,
     paySelected: paymethodSelected,
-    handlePlaceOrder: handlePlaceOrder
+    handlePlaceOrder: handlePlaceOrder,
+    onPlaceOrderClick: onPlaceOrderClick
   })), isWalletEnabled && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, (_props$beforeElements7 = props.beforeElementsSectionFour) === null || _props$beforeElements7 === void 0 ? void 0 : _props$beforeElements7.map(function (BeforeElement, i) {
