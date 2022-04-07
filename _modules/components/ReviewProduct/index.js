@@ -96,7 +96,7 @@ var SingleProductReview = function SingleProductReview(props) {
       extraComment = _useState8[0],
       setExtraComment = _useState8[1];
 
-  var commentsList = (0, _utils.reviewCommentList)(2);
+  var commentsList = (0, _utils.reviewCommentList)('product');
 
   var handleChangeComment = function handleChangeComment(commentItem) {
     var found = comments.find(function (comment) {
