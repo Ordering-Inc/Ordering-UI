@@ -38,6 +38,8 @@ export const UserFormDetailsUI = (props) => {
     isCheckout,
     userData,
     isCustomerMode,
+    setWillVerifyOtpState,
+    isVerifiedPhone,
     handleChangePromotions
   } = props
 
@@ -111,6 +113,13 @@ export const UserFormDetailsUI = (props) => {
       setAlertState({
         open: true,
         content: [t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')]
+      })
+      return
+    }
+    if (formState?.changes?.cellphone && !isVerifiedPhone) {
+      setAlertState({
+        open: true,
+        content: [t('VERIFY_ERROR_PHONE_NUMBER', 'The Phone Number field is not verified')]
       })
       return
     }
@@ -222,6 +231,12 @@ export const UserFormDetailsUI = (props) => {
       }
     })
   }, [formMethods])
+
+  useEffect(() => {
+    if (userPhoneNumber && isValidPhoneNumber && formState?.changes?.country_phone_code && formState?.changes?.cellphone) {
+      setWillVerifyOtpState(true)
+    }
+  }, [isValidPhoneNumber, userPhoneNumber])
 
   return (
     <>
