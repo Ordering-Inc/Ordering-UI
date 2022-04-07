@@ -108,7 +108,7 @@ export const getTraduction = key => {
   const keyList = {
     // Add the key and traduction that you need below
     ERROR_ORDER_WITHOUT_CART: 'The order was placed without a cart',
-    ERROR_INVALID_COUPON: "The coupon doesn't exist",
+    ERROR_INVALID_COUPON: 'The coupon doesn\'t exist',
     ERROR_IVALID_COUPON_MINIMUM: 'You must have more products in your cart to use the coupon',
     ERROR_ADD_PRODUCT_VERY_FAR_FOR_PICKUP: 'The business is too far for order type pickup',
     ERROR_PLACE_PAY_WITH_CARD2: 'An error occurred while trying to pay by card',
@@ -123,7 +123,7 @@ export const getTraduction = key => {
     ERROR_PLACE_PAY_WITH_CARD1: 'An error occurred while trying to pay by card',
     ERROR_PLACE_PAY_WITH_PAYPAL_CAPTURE: 'An error occurred while trying to pay by PayPal',
     ERROR_ADD_PRODUCT_VERY_FAR_FOR_DELIVERY: 'Error adding product, very far for delivery',
-    ERROR_INVALID_OFFER: "The offer doesn't exist"
+    ERROR_INVALID_OFFER: 'The offer doesn\'t exist'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)
@@ -199,20 +199,20 @@ export const verifyDecimals = (value, parser) => {
  * Format seconds to hh:mm:ss
  * @param {number} seconds
  */
-export const formatSeconds = (seconds) => {   
- // Hours, minutes and seconds
- var hrs = ~~(seconds / 3600);
- var mins = ~~((seconds % 3600) / 60);
- var secs = ~~seconds % 60;
+export const formatSeconds = (seconds) => {
+  // Hours, minutes and seconds
+  var hrs = ~~(seconds / 3600)
+  var mins = ~~((seconds % 3600) / 60)
+  var secs = ~~seconds % 60
 
- // Output like "1:01" or "4:03:59" or "123:03:59"
- var ret = "";
- if (hrs > 0) {
-     ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
- }
- ret += "" + mins + ":" + (secs < 10 ? "0" : "");
- ret += "" + secs;
- return ret;
+  // Output like '1:01' or '4:03:59' or '123:03:59'
+  var ret = ''
+  if (hrs > 0) {
+    ret += '' + hrs + ':' + (mins < 10 ? '0' : '')
+  }
+  ret += '' + mins + ':' + (secs < 10 ? '0' : '')
+  ret += '' + secs
+  return ret
 }
 
 /**
@@ -252,74 +252,184 @@ export const reviewCommentList = (type) => {
   const [, t] = useLanguage()
 
   const reviews = {
-    1: {
+    order: {
       1: {
-        title: t('QUICK_COMMENT_TITLE_1', "What went wrong?"),
+        title: t('QUICK_COMMENT_TITLE_1', 'What went wrong?'),
         list: [
-          { key: 0, content: t('QUICK_COMMENT_1_0', "Not handled with care") },
-          { key: 1, content: t('QUICK_COMMENT_1_1', "Poor communication") },
-          { key: 2, content: t('QUICK_COMMENT_1_2', "COVID-19 issue") },
-          { key: 3, content: t('QUICK_COMMENT_1_3', "Didn't follow instructions") },
-          { key: 4, content: t('QUICK_COMMENT_1_4', "Rude") },
-          { key: 5, content: t('QUICK_COMMENT_1_5', "Not on-time") },
+          { key: 0, content: t('QUICK_COMMENT_1_0', 'Not handled with care') },
+          { key: 1, content: t('QUICK_COMMENT_1_1', 'Poor communication') },
+          { key: 2, content: t('QUICK_COMMENT_1_2', 'COVID-19 issue') },
+          { key: 3, content: t('QUICK_COMMENT_1_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('QUICK_COMMENT_1_4', 'Rude') },
+          { key: 5, content: t('QUICK_COMMENT_1_5', 'Not on-time') }
         ]
       },
       2: {
-        title: t('QUICK_COMMENT_TITLE_2', "What went wrong?"),
+        title: t('QUICK_COMMENT_TITLE_2', 'What went wrong?'),
         list: [
-          { key: 0, content: t('QUICK_COMMENT_2_0', "Not handled with care") },
-          { key: 1, content: t('QUICK_COMMENT_2_1', "Poor communication") },
-          { key: 2, content: t('QUICK_COMMENT_2_2', "COVID-19 issue") },
-          { key: 3, content: t('QUICK_COMMENT_2_3', "Didn't follow instructions") },
-          { key: 4, content: t('QUICK_COMMENT_2_4', "Rude") },
-          { key: 5, content: t('QUICK_COMMENT_2_5', "Not on-time") },
+          { key: 0, content: t('QUICK_COMMENT_2_0', 'Not handled with care') },
+          { key: 1, content: t('QUICK_COMMENT_2_1', 'Poor communication') },
+          { key: 2, content: t('QUICK_COMMENT_2_2', 'COVID-19 issue') },
+          { key: 3, content: t('QUICK_COMMENT_2_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('QUICK_COMMENT_2_4', 'Rude') },
+          { key: 5, content: t('QUICK_COMMENT_2_5', 'Not on-time') }
         ]
       },
       3: {
-        title: t('QUICK_COMMENT_TITLE_3', "What could have been better?"),
+        title: t('QUICK_COMMENT_TITLE_3', 'What could have been better?'),
         list: [
-          { key: 0, content: t('QUICK_COMMENT_3_0', "Not handled with care") },
-          { key: 1, content: t('QUICK_COMMENT_3_1', "Poor communication") },
-          { key: 2, content: t('QUICK_COMMENT_3_2', "COVID-19 issue") },
-          { key: 3, content: t('QUICK_COMMENT_3_3', "Didn't follow instructions") },
-          { key: 4, content: t('QUICK_COMMENT_3_4', "Rude") },
-          { key: 5, content: t('QUICK_COMMENT_3_5', "Not on-time") },
+          { key: 0, content: t('QUICK_COMMENT_3_0', 'Not handled with care') },
+          { key: 1, content: t('QUICK_COMMENT_3_1', 'Poor communication') },
+          { key: 2, content: t('QUICK_COMMENT_3_2', 'COVID-19 issue') },
+          { key: 3, content: t('QUICK_COMMENT_3_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('QUICK_COMMENT_3_4', 'Rude') },
+          { key: 5, content: t('QUICK_COMMENT_3_5', 'Not on-time') }
         ]
       },
       4: {
-        title: t('QUICK_COMMENT_TITLE_4', " Tell us more"),
+        title: t('QUICK_COMMENT_TITLE_4', ' Tell us more'),
         list: [
-          { key: 0, content: t('QUICK_COMMENT_4_0', "Not handled with care") },
-          { key: 1, content: t('QUICK_COMMENT_4_1', "Poor communication") },
-          { key: 2, content: t('QUICK_COMMENT_4_2', "COVID-19 issue") },
-          { key: 3, content: t('QUICK_COMMENT_4_3', "Didn't follow instructions") },
-          { key: 4, content: t('QUICK_COMMENT_4_4', "Rude") },
-          { key: 5, content: t('QUICK_COMMENT_4_5', "Not on-time") },
+          { key: 0, content: t('QUICK_COMMENT_4_0', 'Not handled with care') },
+          { key: 1, content: t('QUICK_COMMENT_4_1', 'Poor communication') },
+          { key: 2, content: t('QUICK_COMMENT_4_2', 'COVID-19 issue') },
+          { key: 3, content: t('QUICK_COMMENT_4_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('QUICK_COMMENT_4_4', 'Rude') },
+          { key: 5, content: t('QUICK_COMMENT_4_5', 'Not on-time') }
         ]
       },
       5: {
-        title: t('QUICK_COMMENT_TITLE_5', "What went well?"),
+        title: t('QUICK_COMMENT_TITLE_5', 'What went well?'),
         list: [
-          { key: 0, content: t('QUICK_COMMENT_5_0', "Good communication") },
-          { key: 1, content: t('QUICK_COMMENT_5_1', "Followed instructions") },
-          { key: 2, content: t('QUICK_COMMENT_5_2', "Friendly") },
+          { key: 0, content: t('QUICK_COMMENT_5_0', 'Good communication') },
+          { key: 1, content: t('QUICK_COMMENT_5_1', 'Followed instructions') },
+          { key: 2, content: t('QUICK_COMMENT_5_2', 'Friendly') },
           { key: 3, content: t('QUICK_COMMENT_5_3', 'Handled with care') },
-          { key: 4, content: t('QUICK_COMMENT_5_4', "Above and beyond") },
+          { key: 4, content: t('QUICK_COMMENT_5_4', 'Above and beyond') }
+        ]
+      }
+    },
+    customer: {
+      1: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_1', 'What went wrong?'),
+        list: [
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_1_0', 'Poor communication') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_1_1', 'Wrong address') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_1_2', 'COVID-19 issue') },
+          { key: 3, content: t('CUSTOMER_QUICK_COMMENT_1_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_1_4', 'Rude') },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_1_5', 'Not on-time') }
         ]
       },
+      2: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_2', 'What went wrong?'),
+        list: [
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_2_0', 'Poor communication') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_2_1', 'Wrong address') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_2_2', 'COVID-19 issue') },
+          { key: 3, content: t('CUSTOMER_QUICK_COMMENT_2_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_2_4', 'Rude') },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_2_5', 'Not on-time') }
+        ]
+      },
+      3: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_3', 'What could have been better?'),
+        list: [
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_3_0', 'Poor communication') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_3_1', 'Wrong address') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_3_2', 'COVID-19 issue') },
+          { key: 3, content: t('CUSTOMER_QUICK_COMMENT_3_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_3_4', 'Rude') },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_3_5', 'Not on-time') }
+        ]
+      },
+      4: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_4', ' Tell us more'),
+        list: [
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_4_0', 'Poor communication') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_4_1', 'Wrong address') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_4_2', 'COVID-19 issue') },
+          { key: 3, content: t('CUSTOMER_QUICK_COMMENT_4_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_4_4', 'Rude') },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_4_5', 'Not on-time') }
+        ]
+      },
+      5: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_5', 'What went well?'),
+        list: [
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_5_0', 'Good communication') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_5_1', 'Friendly') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_5_2', 'Above and beyond') }
+        ]
+      }
     },
-    2: {
+    driver: {
+      1: {
+        title: t('DRIVER_QUICK_COMMENT_TITLE_1', 'What went wrong?'),
+        list: [
+          { key: 0, content: t('DRIVER_QUICK_COMMENT_1_0', 'Not handled with care') },
+          { key: 1, content: t('DRIVER_QUICK_COMMENT_1_1', 'Poor communication') },
+          { key: 2, content: t('DRIVER_QUICK_COMMENT_1_2', 'COVID-19 issue') },
+          { key: 3, content: t('DRIVER_QUICK_COMMENT_1_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('DRIVER_QUICK_COMMENT_1_4', 'Rude') },
+          { key: 5, content: t('DRIVER_QUICK_COMMENT_1_5', 'Not on-time') }
+        ]
+      },
+      2: {
+        title: t('DRIVER_QUICK_COMMENT_TITLE_2', 'What went wrong?'),
+        list: [
+          { key: 0, content: t('DRIVER_QUICK_COMMENT_2_0', 'Not handled with care') },
+          { key: 1, content: t('DRIVER_QUICK_COMMENT_2_1', 'Poor communication') },
+          { key: 2, content: t('DRIVER_QUICK_COMMENT_2_2', 'COVID-19 issue') },
+          { key: 3, content: t('DRIVER_QUICK_COMMENT_2_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('DRIVER_QUICK_COMMENT_2_4', 'Rude') },
+          { key: 5, content: t('DRIVER_QUICK_COMMENT_2_5', 'Not on-time') }
+        ]
+      },
+      3: {
+        title: t('DRIVER_QUICK_COMMENT_TITLE_3', 'What could have been better?'),
+        list: [
+          { key: 0, content: t('DRIVER_QUICK_COMMENT_3_0', 'Not handled with care') },
+          { key: 1, content: t('DRIVER_QUICK_COMMENT_3_1', 'Poor communication') },
+          { key: 2, content: t('DRIVER_QUICK_COMMENT_3_2', 'COVID-19 issue') },
+          { key: 3, content: t('DRIVER_QUICK_COMMENT_3_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('DRIVER_QUICK_COMMENT_3_4', 'Rude') },
+          { key: 5, content: t('DRIVER_QUICK_COMMENT_3_5', 'Not on-time') }
+        ]
+      },
+      4: {
+        title: t('DRIVER_QUICK_COMMENT_TITLE_4', ' Tell us more'),
+        list: [
+          { key: 0, content: t('DRIVER_QUICK_COMMENT_4_0', 'Not handled with care') },
+          { key: 1, content: t('DRIVER_QUICK_COMMENT_4_1', 'Poor communication') },
+          { key: 2, content: t('DRIVER_QUICK_COMMENT_4_2', 'COVID-19 issue') },
+          { key: 3, content: t('DRIVER_QUICK_COMMENT_4_3', 'Didn\'t follow instructions') },
+          { key: 4, content: t('DRIVER_QUICK_COMMENT_4_4', 'Rude') },
+          { key: 5, content: t('DRIVER_QUICK_COMMENT_4_5', 'Not on-time') }
+        ]
+      },
+      5: {
+        title: t('DRIVER_QUICK_COMMENT_TITLE_5', 'What went well?'),
+        list: [
+          { key: 0, content: t('DRIVER_QUICK_COMMENT_5_0', 'Good communication') },
+          { key: 1, content: t('DRIVER_QUICK_COMMENT_5_1', 'Followed instructions') },
+          { key: 2, content: t('DRIVER_QUICK_COMMENT_5_2', 'Friendly') },
+          { key: 3, content: t('DRIVER_QUICK_COMMENT_5_3', 'Handled with care') },
+          { key: 4, content: t('DRIVER_QUICK_COMMENT_5_4', 'Above and beyond') }
+        ]
+      }
+    },
+    product: {
       like: [
-        { key: 0, content: t('QUICK_COMMENT_LIKE_0', "Tasty") },
-        { key: 1, content: t('QUICK_COMMENT_LIKE_1', "Good price") },
-        { key: 2, content: t('QUICK_COMMENT_LIKE_2', "Good portion size") },
-        { key: 3, content: t('QUICK_COMMENT_LIKE_3', "Packed well") },
+        { key: 0, content: t('QUICK_COMMENT_LIKE_0', 'Tasty') },
+        { key: 1, content: t('QUICK_COMMENT_LIKE_1', 'Good price') },
+        { key: 2, content: t('QUICK_COMMENT_LIKE_2', 'Good portion size') },
+        { key: 3, content: t('QUICK_COMMENT_LIKE_3', 'Packed well') }
       ],
       dislike: [
-        { key: 0, content: t('QUICK_COMMENT_DISLIKE_0', "Not tasty") },
-        { key: 1, content: t('QUICK_COMMENT_DISLIKE_1', "High price") },
-        { key: 2, content: t('QUICK_COMMENT_DISLIKE_2', "Bad portion size") },
-        { key: 3, content: t('QUICK_COMMENT_DISLIKE_3', "Not packed well") },
+        { key: 0, content: t('QUICK_COMMENT_DISLIKE_0', 'Not tasty') },
+        { key: 1, content: t('QUICK_COMMENT_DISLIKE_1', 'High price') },
+        { key: 2, content: t('QUICK_COMMENT_DISLIKE_2', 'Bad portion size') },
+        { key: 3, content: t('QUICK_COMMENT_DISLIKE_3', 'Not packed well') }
       ]
     }
   }
