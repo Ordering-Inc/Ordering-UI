@@ -22,15 +22,14 @@ const WalletsUI = (props) => {
   const {
     walletList,
     transactionsList,
-    setWalletSelected
+    setWalletSelected,
+    isWalletCashEnabled,
+    isWalletPointsEnabled
   } = props
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ configs }] = useConfig()
-
-  const isWalletCashEnabled = configs?.wallet_cash_enabled?.value === '1'
-  const isWalletPointsEnabled = configs?.wallet_credit_point_enabled?.value === '1'
 
   const [tabSelected, setTabSelected] = useState(isWalletCashEnabled ? 'cash' : 'credit_point')
 
@@ -163,9 +162,16 @@ const WalletsUI = (props) => {
 }
 
 export const Wallets = (props) => {
+  const [{ configs }] = useConfig()
+
+  const isWalletCashEnabled = configs?.wallet_cash_enabled?.value === '1'
+  const isWalletPointsEnabled = configs?.wallet_credit_point_enabled?.value === '1'
+
   const walletsProps = {
     ...props,
-    UIComponent: WalletsUI
+    UIComponent: WalletsUI,
+    isWalletCashEnabled,
+    isWalletPointsEnabled
   }
   return (
     <WalletList {...walletsProps} />
