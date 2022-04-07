@@ -54,11 +54,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var WalletsUI = function WalletsUI(props) {
-  var _configs$wallet_cash_, _configs$wallet_credi, _ref, _walletList$wallets, _walletList$wallets2, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _transactionsList$lis5, _transactionsList$lis6, _walletList$wallets5;
+  var _ref, _walletList$wallets, _walletList$wallets2, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _transactionsList$lis5, _transactionsList$lis6, _walletList$wallets5;
 
   var walletList = props.walletList,
       transactionsList = props.transactionsList,
-      setWalletSelected = props.setWalletSelected;
+      setWalletSelected = props.setWalletSelected,
+      isWalletCashEnabled = props.isWalletCashEnabled,
+      isWalletPointsEnabled = props.isWalletPointsEnabled;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -71,9 +73,6 @@ var WalletsUI = function WalletsUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
-
-  var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
-  var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
 
   var _useState = (0, _react.useState)(isWalletCashEnabled ? 'cash' : 'credit_point'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -179,8 +178,19 @@ var WalletsUI = function WalletsUI(props) {
 };
 
 var Wallets = function Wallets(props) {
+  var _configs$wallet_cash_, _configs$wallet_credi;
+
+  var _useConfig3 = (0, _orderingComponents.useConfig)(),
+      _useConfig4 = _slicedToArray(_useConfig3, 1),
+      configs = _useConfig4[0].configs;
+
+  var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
+  var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
+
   var walletsProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: WalletsUI
+    UIComponent: WalletsUI,
+    isWalletCashEnabled: isWalletCashEnabled,
+    isWalletPointsEnabled: isWalletPointsEnabled
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.WalletList, walletsProps);
