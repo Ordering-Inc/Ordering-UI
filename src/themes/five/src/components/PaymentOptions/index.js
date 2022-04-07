@@ -22,7 +22,7 @@ import { StripeRedirectForm } from '../StripeRedirectForm'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { getIconCard } from '../../../../../utils'
-
+import { PaymentOptionSquare } from '../../../../../components/PaymentOptionSquare'
 import {
   PaymentMethodsContainer,
   PaymentMethodsList,
@@ -90,6 +90,8 @@ const PaymentOptionsUI = (props) => {
     isCustomerMode,
     isOpenMethod,
     onPaymentChange,
+    setCreateOrder,
+    onPlaceOrderClick,
     handlePlaceOrder
   } = props
   const [, t] = useLanguage()
@@ -307,6 +309,25 @@ const PaymentOptionsUI = (props) => {
             currency={props.currency}
             paymethods={stripeRedirectOptions}
             handleStripeRedirect={handlePaymethodDataChange}
+          />
+        </Modal>
+        <Modal
+          title={t('SQUARE', 'Square')}
+          open={isOpenMethod?.paymethod?.gateway === 'square' && !paymethodData.token}
+          onClose={() => handlePaymethodClick(null)}
+        >
+          <PaymentOptionSquare
+            businessId={props.businessId}
+            cartTotal={cart?.total}
+            data={isOpenMethod?.paymethod?.credentials}
+            body={{
+              paymethod_id: isOpenMethod?.paymethod?.id,
+              amount: cart.total,
+              delivery_zone_id: cart.delivery_zone_id,
+              cartUuid: cart.uuid
+            }}
+            onPlaceOrderClick={onPlaceOrderClick}
+            setCreateOrder={setCreateOrder}
           />
         </Modal>
       </PaymentMethodsContainer>
