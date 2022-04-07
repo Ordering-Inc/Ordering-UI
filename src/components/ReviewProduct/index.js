@@ -37,7 +37,7 @@ const SingleProductReview = (props) => {
   const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
 
-  const commentsList = reviewCommentList(2)
+  const commentsList = reviewCommentList('product')
 
   const handleChangeComment = (commentItem) => {
     const found = comments.find((comment) => comment?.key === commentItem.key)
