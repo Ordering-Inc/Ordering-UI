@@ -16,7 +16,7 @@ export const Header = styled.div`
 
   #select-input {
     border-radius: 8px;
-    background-color: #FFF !important;
+    background-color: transparent !important;
     color: ${props => props.theme.colors.primary} !important;
     border: 1px solid ${props => props.theme.colors.primary};
 
@@ -65,7 +65,6 @@ export const Header = styled.div`
     }
 
     #select-input {
-      background-color: transparent !important;
       border-radius: 8px;
       color: #FFF !important;
       border: 1px solid #FFF;
@@ -86,6 +85,25 @@ export const Header = styled.div`
   `}
 `
 
+export const OrderTypeSelecWrapper = styled.div`
+  span {
+    >div {
+      border-radius: 8px;
+      background-color: transparent !important;
+      color: ${props => props.theme.colors.primary} !important;
+      border: 1px solid ${props => props.theme.colors.primary};
+    }
+  }
+
+  ${({ isStorePage }) => isStorePage && css`
+    span {
+      >div {
+        color: #FFF !important;
+        border: 1px solid #FFF;
+      }
+    }
+  `}
+`
 export const InnerHeader = styled.div`
   display: flex;
   width: 100%;
