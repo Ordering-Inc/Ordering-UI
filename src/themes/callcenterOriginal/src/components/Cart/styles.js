@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
+import { lighten } from 'polished'
 
 export const CartContainer = styled.div`
-  width: 100%;
+  border-bottom: 1px solid #F0F0F0;
 `
 
 export const CartSticky = styled.div`
@@ -11,24 +12,26 @@ export const CartSticky = styled.div`
     position: sticky;
     top: 20px;
   `}
-  width: 100%;
 `
 
 export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 10px 0px;
-  background-color: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
+  padding: 10px;
+  background-color: #FFF;
+  position: relative;
   table {
     width: 100%;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 300;
 
     td span {
       unicode-bidi: bidi-override;
     }
 
     tr td:nth-child(2) {
+      font-weight: 500;
       text-align: right;
       ${props => props.theme?.rtl && css`
         text-align: left;
@@ -39,10 +42,12 @@ export const OrderBill = styled.div`
     border-top: 1px solid #EAEAEA;
     padding-top: 10px;
     tr {
-      td {
+      td:nth-child(1) {
         font-weight: bold;
-        color: ${props => props.theme.colors.darkTextColor};
-        font-size: 16px;
+      }
+      td:nth-child(2) {
+        font-weight: bold;
+        color: #D81212;
       }
     }
   }
@@ -61,6 +66,12 @@ export const OrderBill = styled.div`
       padding-right: 60px;
     }
   }
+
+  @media (min-width: 411px) {
+    table {
+      font-size: 18px;
+    }
+  }
 `
 
 export const CouponContainer = styled.div`
@@ -71,23 +82,14 @@ export const CouponContainer = styled.div`
 export const CheckoutAction = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-direction: column;
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  box-sizing: border-box;
-
-  p {
-    margin: 0;
-    font-weight: 600;
-    font-size: 18px;
-    color: ${props => props.theme.colors.darkTextColor};
-  }
-
   button {
     padding: 10px 30px;
-    min-width: 150px;
-    width: 50%;
+    width: 90%;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed
@@ -95,23 +97,16 @@ export const CheckoutAction = styled.div`
   }
 `
 
-export const Divider = styled.div`
-  background: #F8F9FA;
-  height: 4px;
-  width: 100%;
-  margin-left: 0;
-
-  @media (min-width: 768px) {
-    width: calc(100% + 60px);
-    margin-left: -30px;
-  }
-`
-
-export const Exclamation = styled.div`
+export const IconContainer = styled.div`
   position: relative;
   display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
+  top: ${props => props.top || '3px'};
+  svg:nth-child(2){
+    position: relative;
+    top: -2px
+  }
 `
 
 export const Spinner = styled.div`
@@ -127,4 +122,30 @@ export const CommentContainer = styled.td`
     width: 50px;
     height: 50px;
   }
+`
+
+export const Divider = styled.div`
+  border-top: 1px solid #EAEAEA;
+  margin-bottom: 10px;
+`
+
+export const SavedContainer = styled.span`
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: ${props => props.theme?.colors?.primaryContrast};
+  background: ${props => lighten('0.2', props.theme?.colors?.primary)};
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`
+
+export const Exclamation = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  top: 3px;
 `

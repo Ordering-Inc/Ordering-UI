@@ -13,7 +13,7 @@ import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
 import BsPhone from '@meronex/icons/bs/BsPhone'
 import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
-import AiOutlineExclamationCircle from '@meronex/icons/ai/AiOutlineExclamationCircle'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -419,7 +419,7 @@ const OrderDetailsUI = (props) => {
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>
@@ -475,7 +475,7 @@ const OrderDetailsUI = (props) => {
                             {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
@@ -489,7 +489,7 @@ const OrderDetailsUI = (props) => {
                             {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             ({parsePrice(fee?.fixed)} + {fee?.percentage}%)
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
@@ -505,7 +505,7 @@ const OrderDetailsUI = (props) => {
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>
@@ -529,7 +529,7 @@ const OrderDetailsUI = (props) => {
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>
