@@ -47,7 +47,8 @@ const ReviewOrderUI = (props) => {
   ]
 
   const handleChangeStars = (index) => {
-    if (index) setStars({ ...stars, quality: index, punctiality: index, service: index, packaging: index })
+    if (index) setStars({ ...stars, quality: index, punctiality: index, service: index, packaging: index, comments: '' })
+    setComments([])
   }
 
   const handleChangeComment = (commentItem) => {

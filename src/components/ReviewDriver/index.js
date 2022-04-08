@@ -56,7 +56,8 @@ const ReviewDriverUI = (props) => {
   ]
 
   const handleChangeReviews = (index) => {
-    if (index) setDriverReviews({ ...dirverReviews, qualification: index })
+    if (index) setDriverReviews({ ...dirverReviews, qualification: index, comment: '' })
+    setComments([])
   }
 
   const onSubmit = values => {
