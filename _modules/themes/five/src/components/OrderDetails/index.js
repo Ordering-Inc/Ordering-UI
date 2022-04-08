@@ -23,7 +23,7 @@ var _BsPhone = _interopRequireDefault(require("@meronex/icons/bs/BsPhone"));
 
 var _BiMessageRounded = _interopRequireDefault(require("@meronex/icons/bi/BiMessageRounded"));
 
-var _AiOutlineExclamationCircle = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineExclamationCircle"));
+var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCircle"));
 
 var _Buttons = require("../../styles/Buttons");
 
@@ -542,7 +542,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
           type: 'offer_target_1'
         });
       }
-    }, /*#__PURE__*/_react.default.createElement(_AiOutlineExclamationCircle.default, {
+    }, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
       size: "20",
       color: theme.colors.primary
     }))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 ? void 0 : (_offer$summary = offer.summary) === null || _offer$summary === void 0 ? void 0 : _offer$summary.discount)));
@@ -561,7 +561,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
           type: 'tax'
         });
       }
-    }, /*#__PURE__*/_react.default.createElement(_AiOutlineExclamationCircle.default, {
+    }, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
       size: "20",
       color: theme.colors.primary
     }))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_ref3 = (_tax$summary$tax_afte2 = tax === null || tax === void 0 ? void 0 : (_tax$summary4 = tax.summary) === null || _tax$summary4 === void 0 ? void 0 : _tax$summary4.tax_after_discount) !== null && _tax$summary$tax_afte2 !== void 0 ? _tax$summary$tax_afte2 : tax === null || tax === void 0 ? void 0 : (_tax$summary5 = tax.summary) === null || _tax$summary5 === void 0 ? void 0 : _tax$summary5.tax) !== null && _ref3 !== void 0 ? _ref3 : 0)));
@@ -580,7 +580,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
           type: 'fee'
         });
       }
-    }, /*#__PURE__*/_react.default.createElement(_AiOutlineExclamationCircle.default, {
+    }, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
       size: "20",
       color: theme.colors.primary
     }))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_ref4 = (fee === null || fee === void 0 ? void 0 : (_fee$summary = fee.summary) === null || _fee$summary === void 0 ? void 0 : _fee$summary.fixed) + ((_fee$summary$percenta = fee === null || fee === void 0 ? void 0 : (_fee$summary2 = fee.summary) === null || _fee$summary2 === void 0 ? void 0 : _fee$summary2.percentage_after_discount) !== null && _fee$summary$percenta !== void 0 ? _fee$summary$percenta : fee === null || fee === void 0 ? void 0 : (_fee$summary3 = fee.summary) === null || _fee$summary3 === void 0 ? void 0 : _fee$summary3.percentage)) !== null && _ref4 !== void 0 ? _ref4 : 0)));
@@ -599,7 +599,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
           type: 'offer_target_3'
         });
       }
-    }, /*#__PURE__*/_react.default.createElement(_AiOutlineExclamationCircle.default, {
+    }, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
       size: "20",
       color: theme.colors.primary
     }))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 ? void 0 : (_offer$summary2 = offer.summary) === null || _offer$summary2 === void 0 ? void 0 : _offer$summary2.discount)));
@@ -618,7 +618,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
           type: 'offer_target_2'
         });
       }
-    }, /*#__PURE__*/_react.default.createElement(_AiOutlineExclamationCircle.default, {
+    }, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
       size: "20",
       color: theme.colors.primary
     }))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 ? void 0 : (_offer$summary3 = offer.summary) === null || _offer$summary3 === void 0 ? void 0 : _offer$summary3.discount)));

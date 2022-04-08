@@ -221,7 +221,11 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       return setIsPreOrder(false);
     },
     padding: "20px"
-  }, /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, {
+    onClose: function onClose() {
+      return setIsPreOrder(false);
+    }
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

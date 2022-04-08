@@ -330,7 +330,18 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
           }
 
           if (galleryItem !== null && galleryItem !== void 0 && galleryItem.video) {
-            videoList.push(galleryItem === null || galleryItem === void 0 ? void 0 : galleryItem.video);
+            var _url = galleryItem === null || galleryItem === void 0 ? void 0 : galleryItem.video.split('/');
+
+            var _videoId = _url[(_url === null || _url === void 0 ? void 0 : _url.length) - 1];
+
+            if (_videoId.includes('watch')) {
+              var __url = _videoId.split('=')[1];
+
+              _videoId = __url;
+            }
+
+            var embedURL = 'https://www.youtube.com/embed/' + _videoId;
+            videoList.push(embedURL);
           }
         }
       } catch (err) {
