@@ -38,7 +38,7 @@ export const TaxInformation = (props) => {
     <TaxInformationContainer>
       {data?.description ? (
         <h2>
-          {t('DESCRIPTION', 'Description')}: {data?.description} {data?.type && !type.includes('offer') && includedOnPriceString}
+          {t('DESCRIPTION', 'Description')}: {data?.description} {data?.type && !type?.includes('offer') && includedOnPriceString}
         </h2>
       ) : (
         <h2>

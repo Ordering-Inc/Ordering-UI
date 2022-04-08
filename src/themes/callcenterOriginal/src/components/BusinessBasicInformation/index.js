@@ -225,7 +225,7 @@ export const BusinessBasicInformation = (props) => {
           onClose={() => setIsPreOrder(false)}
           padding='20px'
         >
-          <MomentContent />
+          <MomentContent onClose={() => setIsPreOrder(false)} />
         </Modal>
       </BusinessContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
