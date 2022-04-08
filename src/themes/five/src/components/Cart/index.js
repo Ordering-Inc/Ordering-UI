@@ -433,7 +433,7 @@ const CartUI = (props) => {
                           {walletName[cart?.wallets?.find(wallet => wallet.id === event.wallet_id)?.type]?.name}
                         </span>
                         <span>
-                          -{parsePrice(event.amount)}
+                          -{parsePrice(event.amount, { isTruncable: true })}
                         </span>
                       </div>
                     ))}
