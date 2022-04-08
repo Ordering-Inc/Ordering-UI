@@ -145,8 +145,10 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       quality: index,
       punctiality: index,
       service: index,
-      packaging: index
+      packaging: index,
+      comments: ''
     }));
+    setComments([]);
   };
 
   var handleChangeComment = function handleChangeComment(commentItem) {

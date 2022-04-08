@@ -141,8 +141,10 @@ var ReviewDriverUI = function ReviewDriverUI(props) {
 
   var handleChangeReviews = function handleChangeReviews(index) {
     if (index) setDriverReviews(_objectSpread(_objectSpread({}, dirverReviews), {}, {
-      qualification: index
+      qualification: index,
+      comment: ''
     }));
+    setComments([]);
   };
 
   var onSubmit = function onSubmit(values) {
