@@ -272,16 +272,22 @@ const CartUI = (props) => {
                         <Divider />
                       </td>
                     </tr>
-                    {cart?.subtotal_with_discount > 0 && cart?.discount > 0 && cart?.total >= 0 && (
-                      <tr>
-                        <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
-                        {cart?.business?.tax_type === 1 ? (
-                          <td>{parsePrice(cart?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0)}</td>
-                        ) : (
-                          <td>{parsePrice(cart?.subtotal_with_discount ?? 0)}</td>
-                        )}
-                      </tr>
-                    )}
+                    {
+                      cart?.offers?.filter(offer => offer?.target === 1)?.length > 0 &&
+                      cart?.subtotal_with_discount > 0 &&
+                      cart?.discount > 0 &&
+                      cart?.total >= 0 &&
+                      (
+                        <tr>
+                          <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                          {cart?.business?.tax_type === 1 ? (
+                            <td>{parsePrice(cart?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0)}</td>
+                          ) : (
+                            <td>{parsePrice(cart?.subtotal_with_discount ?? 0)}</td>
+                          )}
+                        </tr>
+                      )
+                    }
                     {
                       cart?.taxes?.length > 0 && cart?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
                         <tr key={tax?.id}>

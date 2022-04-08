@@ -45,7 +45,6 @@ export const HeaderInfo = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px 0px;
   position: absolute;
   right: 0;
 `
@@ -127,6 +126,7 @@ export const ActionsBlock = styled.div`
 export const OrderInfo = styled.div`
   width: 100%;
   margin: 0px 0px 35px;
+  position: relative;
   h1, p {
     margin: 0px;
     color: ${props => props.theme.colors.darkTextColor};
@@ -523,4 +523,10 @@ export const HeaderTitle = styled.div`
     font-weight: 600;
     margin-bottom: 5px;
   }
+`
+
+export const GoToback = styled.div`
+  position: absolute;
+  left: 0;
+  margin: 8px 0;
 `

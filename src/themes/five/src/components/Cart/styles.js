@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { lighten } from 'polished'
 
 export const CartContainer = styled.div`
   width: 100%;
@@ -126,7 +127,7 @@ export const Exclamation = styled.div`
   display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
-  top: -1px;
+  top: 3px;
 `
 
 export const Spinner = styled.div`
@@ -146,6 +147,25 @@ export const CommentContainer = styled.td`
 
 export const IconContainer = styled.div`
   position: relative;
+  display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
+  top: ${props => props.top || '3px'};
+  svg:nth-child(2){
+    position: relative;
+    top: -2px
+  }
+`
+
+export const SavedContainer = styled.span`
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: ${props => props.theme?.colors?.primaryContrast};
+  background: ${props => lighten('0.2', props.theme?.colors?.primary)};
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `
