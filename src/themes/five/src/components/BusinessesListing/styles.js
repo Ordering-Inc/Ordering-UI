@@ -14,7 +14,8 @@ export const BusinessList = styled.div`
 
 export const WrapperSearch = styled.div`
   margin: 10px 20px 0px;
-
+  display: flex;
+  justify-content: flex-end;
   ${({ isCustomLayout }) => isCustomLayout && css`
     box-sizing: border-box;
     display: flex;

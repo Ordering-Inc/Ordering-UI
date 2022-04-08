@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { BusinessList as BusinessListController } from './test'
 import {
   BusinessListingSearchContainer,
   FiltersContainer,
@@ -25,7 +25,8 @@ import {
   BusinessControllerSkeleton,
   NotFoundWrapper,
   BusinessName,
-  BusinessLogo
+  BusinessLogo,
+  BusinessesTitle
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 
@@ -44,7 +45,7 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 import BisUpArrow from '@meronex/icons/bi/BisUpArrow'
 
-export const BusinessListingSearch = (props) => {
+export const BusinessListingSearchUI = (props) => {
   const {
     businessesSearchList,
     handleBusinessClick,
@@ -54,7 +55,6 @@ export const BusinessListingSearch = (props) => {
     termValue,
     businessesList,
     isCustomLayout,
-    setPreorderBusiness,
     getBusinesses,
     paginationProps
   } = props
@@ -68,20 +68,21 @@ export const BusinessListingSearch = (props) => {
   // const maxProductPriceOptions = [5, 10, 15, 'default']
   const maxDistanceOptions = [1000, 2000, 5000, 'default']
   const maxTimeOptions = [5, 15, 30, 'default']
+  const [preorderBusiness, setPreorderBusiness] = useState(null)
 
   const sortItems = [
     { text: t('PICKED_FOR_YOU', 'Picked for you (default)'), value: 'default' },
     { text: t('DELIVERY_TIME', 'Delivery time'), value: 'delivery_time' },
     { text: t('PICKUP_TIME', 'Pickup time'), value: 'pickup_type' }
-
   ]
+
   const getMoreBusiness = () => {
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (businessesList.loading || businessesList.error?.length > 0 || !hasMore) return
     getBusinesses()
   }
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0) ||
-    (!businessesSearchList.loading && businessesList?.businesses?.length === 0 && termValue?.length < 3)
+    (!businessesSearchList.loading && businessesList?.businesses?.length === 0)
 
   const MaxSectionItem = ({ title, options, filter }) => {
     const parseValue = (option) => {
@@ -114,6 +115,9 @@ export const BusinessListingSearch = (props) => {
 
   return (
     <BusinessListingSearchContainer>
+      <BusinessesTitle>
+        {t('SEARCH', 'Search')}
+      </BusinessesTitle>
       <SearchBar
         lazyLoad
         isCustomLayout
@@ -197,7 +201,7 @@ export const BusinessListingSearch = (props) => {
                   </NotFoundWrapper>
                 )
               }
-              {termValue?.length < 3 && !businessesList.loading && !businessesSearchList.loading && businessesList.businesses?.length > 0 && (
+              {/* {!businessesList.loading && !businessesSearchList.loading && businessesList.businesses?.length > 0 && (
                 <AutoScroll scrollId='searchlist' onHandleRightEnd={getMoreBusiness} isColumnMode={width <= 681}>
                   {businessesList.businesses?.map((business, i) => (
                     <BusinessController
@@ -214,8 +218,8 @@ export const BusinessListingSearch = (props) => {
                     />
                   ))}
                 </AutoScroll>
-              )}
-              {termValue?.length >= 3 && !businessesSearchList.loading && businessesSearchList.businesses?.length > 0 && (
+              )} */}
+              {!businessesSearchList.loading && businessesSearchList.businesses?.length > 0 && (
                 <AutoScroll scrollId='searchlist' isColumnMode={width <= 681}>
                   {businessesSearchList.businesses.map((business, i) => (
                     <BusinessController
@@ -321,4 +325,12 @@ export const BusinessListingSearch = (props) => {
       </FiltersContainer>
     </BusinessListingSearchContainer>
   )
+}
+
+export const BusinessListingSearch = (props) => {
+  const BusinessListSearch = {
+    ...props,
+    UIComponent: BusinessListingSearchUI
+  }
+  return <BusinessListController {...BusinessListSearch} />
 }
