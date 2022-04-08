@@ -45,6 +45,7 @@ import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
 import { MyOrders } from './src/components/MyOrders'
 import { NotFoundSource } from './src/components/NotFoundSource'
+import { NotNetworkConnectivity } from './src/components/NotNetworkConnectivity'
 import { Modal } from './src/components/Modal'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrdersOption } from './src/components/OrdersOption'
@@ -130,6 +131,7 @@ export {
   MyOrders,
   Modal,
   NotFoundSource,
+  NotNetworkConnectivity,
   OrderDetails,
   OrdersOption,
   OrderTypeSelectorContent,
