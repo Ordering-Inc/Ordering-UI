@@ -219,7 +219,14 @@ const ProductOptionsUI = (props) => {
           imageList.push(galleryItem?.file)
         }
         if (galleryItem?.video) {
-          videoList.push(galleryItem?.video)
+          const _url = galleryItem?.video.split('/')
+          let _videoId = _url[_url?.length - 1]
+          if (_videoId.includes('watch')) {
+            const __url = _videoId.split('=')[1]
+            _videoId = __url
+          }
+          const embedURL = 'https://www.youtube.com/embed/' + _videoId
+          videoList.push(embedURL)
         }
       }
     }
