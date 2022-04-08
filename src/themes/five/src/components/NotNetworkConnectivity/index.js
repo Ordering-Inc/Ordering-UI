@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -14,10 +14,6 @@ export const NotNetworkConnectivity = (props) => {
   const [, t] = useLanguage()
   const onlineStatus = useOnlineStatus()
   const theme = useTheme()
-
-  useEffect(() => {
-
-  }, [])
 
   return (
     <>

@@ -38,7 +38,6 @@ export const Image = styled.div`
     max-width: 300px;
     width: 100%;
     height: auto;
-    aspect-ratio: attr(width) / attr(height)
   }
 `
 
@@ -48,6 +47,5 @@ export const ButtonWrapper = styled.div`
   margin: 34px 0;
   > button {
     height: 44px;
-    border-radius: 8px;
   }
 `
