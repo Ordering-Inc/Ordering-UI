@@ -36,6 +36,7 @@ const SingleProductReview = (props) => {
   const [isExtraComment, setIsExtraComment] = useState(false)
   const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
+  const [currentValue, setCurrentValue] = useState(5)
 
   const commentsList = reviewCommentList('product')
 
@@ -55,6 +56,9 @@ const SingleProductReview = (props) => {
   }
 
   useEffect(() => {
+    const value = isLike ? 5 : 1
+    setCurrentValue(value)
+    if (value !== currentValue) setComments([])
     if (comments?.length === 0 && !extraComment && formState.changes?.length === 0 && isLike) return
     let _comments = ''
     if (comments.length > 0) {

@@ -18,7 +18,8 @@ import {
   CustomerInfo,
   UserEdit,
   FarAwayMessage,
-  AddressWrapper
+  AddressWrapper,
+  OrderTypeSelecWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -190,7 +191,9 @@ export const Header = (props) => {
                 )}
               </LogoHeader>
             )}
-            <LanguageSelector />
+            <OrderTypeSelecWrapper isStorePage={isStorePage}>
+              <LanguageSelector />
+            </OrderTypeSelecWrapper>
             {isShowOrderOptions && (
               <Menu className='left-header'>
                 {isCustomerMode && windowSize.width > 450 && (
@@ -211,7 +214,9 @@ export const Header = (props) => {
                   </CustomerInfo>
                 )}
                 {!configState?.loading && configTypes.length > 0 && (
-                  <OrderTypeSelectorHeader configTypes={configTypes} />
+                  <OrderTypeSelecWrapper isStorePage={isStorePage}>
+                    <OrderTypeSelectorHeader configTypes={configTypes} />
+                  </OrderTypeSelecWrapper>
                 )}
                 {onlineStatus && windowSize.width > 820 && (
                   <>

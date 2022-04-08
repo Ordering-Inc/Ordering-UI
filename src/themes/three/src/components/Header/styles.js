@@ -15,7 +15,7 @@ export const Header = styled.div`
     color: ${props => props.theme.colors.primary};
   }
   `
-  : css`
+    : css`
     & ${SubMenu}{
       div{
         color: #333;
@@ -26,6 +26,14 @@ export const Header = styled.div`
   #select-input {
     color: ${props => props.theme.colors.primary} !important;
     border-radius: 5px;
+  }
+`
+export const OrderTypeSelecWrapper = styled.div`
+  span {
+    >div {
+      color: ${props => props.theme.colors.primary} !important;
+      border-radius: 5px;
+    }
   }
 `
 
