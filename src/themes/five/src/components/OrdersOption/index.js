@@ -127,7 +127,7 @@ const OrdersOptionUI = (props) => {
       pastOrders && setIsEmptyPast && setIsEmptyPast(true)
       preOrders && setIsEmptyPreorder && setIsEmptyPreorder(true)
     }
-  }, [orders, activeOrders, pastOrders])
+  }, [orders, activeOrders, pastOrders, preOrders])
 
   return (
     <>
