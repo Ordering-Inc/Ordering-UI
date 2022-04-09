@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { OrderList, useLanguage, useOrder } from 'ordering-components'
-import { useHistory } from 'react-router-dom'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
@@ -18,10 +17,8 @@ import {
   SkeletonText,
   SkeletonInformation,
   SkeletonReorder,
-  SkeletonButton,
-  NoOrdersWrapper
+  SkeletonButton
 } from './styles'
-import { Button } from '../../styles/Buttons'
 
 const OrdersOptionUI = (props) => {
   const {
@@ -39,16 +36,15 @@ const OrdersOptionUI = (props) => {
     isCustomLayout,
     isBusinessesLoading,
     pastOrders,
+    preOrders,
     setIsEmptyPast,
     setIsEmptyActive,
-    isEmptyPast,
-    isEmptyActive
+    setIsEmptyPreorder
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [, { reorder }] = useOrder()
-  const history = useHistory()
   const { loading, error, orders: values } = orderList
 
   const imageFails = activeOrders
@@ -129,6 +125,7 @@ const OrdersOptionUI = (props) => {
     if (orders.length === 0) {
       activeOrders && setIsEmptyActive && setIsEmptyActive(true)
       pastOrders && setIsEmptyPast && setIsEmptyPast(true)
+      preOrders && setIsEmptyPreorder && setIsEmptyPreorder(true)
     }
   }, [orders, activeOrders, pastOrders])
 
@@ -149,23 +146,12 @@ const OrdersOptionUI = (props) => {
                 : (pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))}
             </h1>
           </OptionTitle>
-          {!(activeOrders && isEmptyActive && isEmptyPast) && !loading && orders.length === 0 && (
+          {!loading && orders.length === 0 && (
             <NotFoundSource
               image={imageFails}
               content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
               conditioned
             />
-          )}
-          {activeOrders && isEmptyActive && isEmptyPast && (
-            <NoOrdersWrapper>
-              <p>{t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')}</p>
-              <Button
-                color='primary'
-                onClick={() => history.push('/')}
-              >
-                {t('ORDER_NOW', 'Order now')}
-              </Button>
-            </NoOrdersWrapper>
           )}
         </>
       )}
