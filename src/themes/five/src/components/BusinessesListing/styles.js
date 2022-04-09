@@ -16,6 +16,13 @@ export const WrapperSearch = styled.div`
   margin: 10px 20px 0px;
   display: flex;
   justify-content: flex-end;
+  svg{
+    align-self: center;
+    cursor: pointer;
+    font-size: 26px;
+    color: ${props => props.theme?.colors?.primary};
+    margin-left: 10px;
+  }
   ${({ isCustomLayout }) => isCustomLayout && css`
     box-sizing: border-box;
     display: flex;
@@ -29,10 +36,7 @@ export const WrapperSearch = styled.div`
     padding: 0 20px;
 
     svg {
-      font-size: 26px;
-      color: ${props => props.theme?.colors?.primary};
-      margin-left: 10px;
-      cursor: pointer;
+      align-self: auto;
     }
     
     @media(min-width: 681px){
@@ -111,54 +115,4 @@ export const Divider = styled.div`
 
 export const OrderProgressWrapper = styled.div`
   padding: 45px 20px;
-`
-
-export const BusinessListingSearchContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0px 20px;
-  box-sizing: border-box;
-`
-
-export const FiltersContainer = styled.div`
-  display: flex;
-  width: 100%;
-`
-
-export const Filters = styled.div`
-  width: 20%;
-`
-
-export const FiltersResultContainer = styled.div`
-  width: 80%;
-`
-
-export const SortContainer = styled.div`
-
-`
-
-export const MaxDeliveryFeeContainer = styled.div`
-
-`
-
-export const TagsContainer = styled.div`
-
-`
-
-export const ProgressContentWrapper = styled.div`
-  width: 100%;
-  height: 12px;
-  background: #F8F9FA;
-`
-
-export const ProgressBar = styled.div`
-  height: 12px;
-  background: ${props => props.theme.colors.primary};
-  width: 0px;
-`
-
-export const Fees = styled.div`
-  display: flex;
-  justify-content: space-between;
 `

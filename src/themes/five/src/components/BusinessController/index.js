@@ -42,8 +42,10 @@ const BusinessControllerUI = (props) => {
     isBusinessOpen,
     businessWillCloseSoonMinutes,
     onPreorderBusiness,
-    isBusinessSearch,
-    firstCard
+    firstCard,
+    minWidthEnabled,
+    typeButton,
+    children
   } = props
 
   const theme = useTheme()
@@ -62,6 +64,14 @@ const BusinessControllerUI = (props) => {
     else handleClick(business)
   }
 
+  if (typeButton) {
+    return (
+      <ContainerCard typeButton={typeButton}>
+        {children}
+      </ContainerCard>
+    )
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -70,7 +80,7 @@ const BusinessControllerUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ContainerCard isSkeleton={isSkeleton} isBusinessSearch={isBusinessSearch} firstCard={firstCard}>
+      <ContainerCard isSkeleton={isSkeleton} firstCard={firstCard} minWidthEnabled={minWidthEnabled}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
           <BusinessHero>
             {isSkeleton ? (

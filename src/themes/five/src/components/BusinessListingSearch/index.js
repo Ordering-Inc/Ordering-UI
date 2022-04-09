@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { BusinessList as BusinessListController } from './test'
+import React from 'react'
 import {
   BusinessListingSearchContainer,
   FiltersContainer,
@@ -31,7 +30,7 @@ import {
 import Skeleton from 'react-loading-skeleton'
 
 import { SearchBar } from '../SearchBar'
-import { useLanguage, useOrder, useUtils } from 'ordering-components'
+import { useLanguage, useOrder, useUtils, BusinessSearchList } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { AutoScroll } from '../AutoScroll'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
@@ -48,15 +47,13 @@ import BisUpArrow from '@meronex/icons/bi/BisUpArrow'
 export const BusinessListingSearchUI = (props) => {
   const {
     businessesSearchList,
-    handleBusinessClick,
+    onBusinessClick,
     handleChangeFilters,
     filters,
     handleChangeTermValue,
     termValue,
-    businessesList,
-    isCustomLayout,
-    getBusinesses,
-    paginationProps
+    paginationProps,
+    handleSearchbusinessAndProducts
   } = props
 
   const [orderState] = useOrder()
@@ -68,21 +65,13 @@ export const BusinessListingSearchUI = (props) => {
   // const maxProductPriceOptions = [5, 10, 15, 'default']
   const maxDistanceOptions = [1000, 2000, 5000, 'default']
   const maxTimeOptions = [5, 15, 30, 'default']
-  const [preorderBusiness, setPreorderBusiness] = useState(null)
-
   const sortItems = [
     { text: t('PICKED_FOR_YOU', 'Picked for you (default)'), value: 'default' },
     { text: t('DELIVERY_TIME', 'Delivery time'), value: 'delivery_time' },
     { text: t('PICKUP_TIME', 'Pickup time'), value: 'pickup_type' }
   ]
 
-  const getMoreBusiness = () => {
-    const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
-    if (businessesList.loading || businessesList.error?.length > 0 || !hasMore) return
-    getBusinesses()
-  }
-  const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0) ||
-    (!businessesSearchList.loading && businessesList?.businesses?.length === 0)
+  const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
 
   const MaxSectionItem = ({ title, options, filter }) => {
     const parseValue = (option) => {
@@ -178,20 +167,6 @@ export const BusinessListingSearchUI = (props) => {
         <FiltersResultContainer>
           <BusinessListWrapper>
             <BusinessList noResults={noResults}>
-              {(businessesSearchList.loading || (businessesList.loading && businessesSearchList.businesses?.length > 0)) && (
-                <BusinessControllerSkeleton>
-                  {[...Array(3).keys()].map(i => (
-                    <BusinessController
-                      key={i}
-                      className='card'
-                      business={{}}
-                      isSkeleton
-                      orderType={orderState?.options?.type}
-                      firstCard={i === 0 && width > 681}
-                    />
-                  ))}
-                </BusinessControllerSkeleton>
-              )}
               {
                 noResults && (
                   <NotFoundWrapper>
@@ -201,25 +176,7 @@ export const BusinessListingSearchUI = (props) => {
                   </NotFoundWrapper>
                 )
               }
-              {/* {!businessesList.loading && !businessesSearchList.loading && businessesList.businesses?.length > 0 && (
-                <AutoScroll scrollId='searchlist' onHandleRightEnd={getMoreBusiness} isColumnMode={width <= 681}>
-                  {businessesList.businesses?.map((business, i) => (
-                    <BusinessController
-                      key={business.id}
-                      className='card'
-                      business={business}
-                      isBusinessOpen={business.open}
-                      handleCustomClick={handleBusinessClick}
-                      orderType={orderState?.options?.type}
-                      isCustomLayout={isCustomLayout}
-                      isShowCallcenterInformation={isCustomLayout}
-                      onPreorderBusiness={setPreorderBusiness}
-                      firstCard={i === 0 && width > 681}
-                    />
-                  ))}
-                </AutoScroll>
-              )} */}
-              {!businessesSearchList.loading && businessesSearchList.businesses?.length > 0 && (
+              {businessesSearchList.businesses?.length > 0 && (
                 <AutoScroll scrollId='searchlist' isColumnMode={width <= 681}>
                   {businessesSearchList.businesses.map((business, i) => (
                     <BusinessController
@@ -227,100 +184,127 @@ export const BusinessListingSearchUI = (props) => {
                       className='card'
                       business={business}
                       isBusinessOpen={business.open}
-                      handleCustomClick={handleBusinessClick}
+                      handleCustomClick={onBusinessClick}
                       orderType={orderState?.options?.type}
                       firstCard={i === 0 && width > 681}
                     />
                   ))}
+                  {!businessesSearchList.loading && paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
+                    <BusinessController
+                      typeButton
+                    >
+                      <Button
+                        className='load-orders'
+                        color='primary'
+                        outline
+                        onClick={() => handleSearchbusinessAndProducts()}
+                      >
+                        {t('LOAD_MORE_BUSINESS', 'Load more business')}
+                      </Button>
+                    </BusinessController>
+                  )}
                 </AutoScroll>
+              )}
+              {businessesSearchList.loading && (
+                <BusinessControllerSkeleton>
+                  {[...Array(3).keys()].map(i => (
+                    <BusinessController
+                      key={i}
+                      className='card'
+                      business={{}}
+                      isSkeleton
+                      orderType={orderState?.options?.type}
+                      firstCard={i === 0 && width > 681}
+                      minWidthEnabled={businessesSearchList?.businesses?.length > 3}
+                    />
+                  ))}
+                </BusinessControllerSkeleton>
               )}
             </BusinessList>
           </BusinessListWrapper>
-          {termValue?.length >= 3 && (
-            <ProductsList>
-              {businessesSearchList?.loading && (
-                [...Array(3)].map((item, i) => (
-                  <SingleBusinessSearch key={`skeleton:${i}`}>
-                    <BusinessInfo>
-                      <BusinessLogo isSkeleton>
-                        <Skeleton />
-                      </BusinessLogo>
-                      <BusinessInfoItem>
-                        <BusinessName>
-                          <Skeleton width={50} />
-                        </BusinessName>
-                        <Metadata>
-                          <Skeleton width={65} />
-                          <Skeleton width={65} />
-                          <Skeleton width={65} />
-                        </Metadata>
-                      </BusinessInfoItem>
-                    </BusinessInfo>
-                    <BusinessProductsListWrapper>
-                      <BusinessProductsListContainer>
-                        {[...Array(3)].map((item, j) => (
-                          <SingleProductCard
-                            key={`skeleton-card:${j}-${i}`}
-                            isSkeleton
-                          />
-                        ))}
-                      </BusinessProductsListContainer>
-                    </BusinessProductsListWrapper>
-                  </SingleBusinessSearch>
-                ))
-              )}
-              {!businessesSearchList.loading && businessesSearchList.businesses.map(business => (
-                <SingleBusinessSearch key={`card-${business?.id}`}>
+          <ProductsList>
+            {businessesSearchList.businesses?.filter(business => business?.categories?.length > 0).map(business => (
+              <SingleBusinessSearch key={`card-${business?.id}`}>
+                <BusinessInfo>
+                  {(business?.logo || theme.images?.dummies?.businessLogo) && (
+                    <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                  )}
+                  <BusinessInfoItem>
+                    <BusinessName>{business?.name}</BusinessName>
+                    <Metadata>
+                      {orderState?.options?.type === 1 && (
+                        <p>
+                          <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
+                          {business && parsePrice(business?.delivery_price)}
+                        </p>
+                      )}
+                      <p className='bullet'>
+                        <GoPrimitiveDot />
+                        {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time)}
+                      </p>
+                      <p className='bullet'>
+                        <GoPrimitiveDot />
+                        {parseDistance(business?.distance)}
+                      </p>
+                    </Metadata>
+                  </BusinessInfoItem>
+                  <Button
+                    onClick={() => onBusinessClick(business)}
+                    outline
+                    bgtransparent
+                    color='primary'
+                  >
+                    {t('GO_TO_THE_STORE', 'Go to the store')}
+                  </Button>
+                </BusinessInfo>
+                <BusinessProductsListWrapper>
+                  <BusinessProductsListContainer>
+                    <AutoScroll scrollId={`products-${business?.id}`}>
+                      {business?.categories?.map(category => category?.products?.map(product => (
+                        <SingleProductCard
+                          key={product?.id}
+                          isSoldOut={(product.inventoried && !product.quantity)}
+                          product={product}
+                          businessId={business?.id}
+                        />
+                      )))}
+                    </AutoScroll>
+                  </BusinessProductsListContainer>
+                </BusinessProductsListWrapper>
+              </SingleBusinessSearch>
+            ))}
+            {businessesSearchList?.loading && (
+              [...Array(3)].map((item, i) => (
+                <SingleBusinessSearch key={`skeleton:${i}`}>
                   <BusinessInfo>
-                    {(business?.logo || theme.images?.dummies?.businessLogo) && (
-                      <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-                    )}
+                    <BusinessLogo isSkeleton>
+                      <Skeleton />
+                    </BusinessLogo>
                     <BusinessInfoItem>
-                      <BusinessName>{business?.name}</BusinessName>
+                      <BusinessName>
+                        <Skeleton width={50} />
+                      </BusinessName>
                       <Metadata>
-                        {orderState?.options?.type === 1 && (
-                          <p>
-                            <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
-                            {business && parsePrice(business?.delivery_price)}
-                          </p>
-                        )}
-                        <p className='bullet'>
-                          <GoPrimitiveDot />
-                          {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time)}
-                        </p>
-                        <p className='bullet'>
-                          <GoPrimitiveDot />
-                          {parseDistance(business?.distance)}
-                        </p>
+                        <Skeleton width={65} />
+                        <Skeleton width={65} />
+                        <Skeleton width={65} />
                       </Metadata>
                     </BusinessInfoItem>
-                    <Button
-                      onClick={() => handleBusinessClick(business)}
-                      outline
-                      bgtransparent
-                      color='primary'
-                    >
-                      {t('GO_TO_THE_STORE', 'Go to the store')}
-                    </Button>
                   </BusinessInfo>
                   <BusinessProductsListWrapper>
                     <BusinessProductsListContainer>
-                      <AutoScroll scrollId={`products-${business?.id}`}>
-                        {business?.categories?.map(category => category?.products?.map(product => (
-                          <SingleProductCard
-                            key={product?.id}
-                            isSoldOut={(product.inventoried && !product.quantity)}
-                            product={product}
-                            businessId={business?.id}
-                          />
-                        )))}
-                      </AutoScroll>
+                      {[...Array(3)].map((item, j) => (
+                        <SingleProductCard
+                          key={`skeleton-card:${j}-${i}`}
+                          isSkeleton
+                        />
+                      ))}
                     </BusinessProductsListContainer>
                   </BusinessProductsListWrapper>
                 </SingleBusinessSearch>
-              ))}
-            </ProductsList>
-          )}
+              ))
+            )}
+          </ProductsList>
         </FiltersResultContainer>
       </FiltersContainer>
     </BusinessListingSearchContainer>
@@ -332,5 +316,5 @@ export const BusinessListingSearch = (props) => {
     ...props,
     UIComponent: BusinessListingSearchUI
   }
-  return <BusinessListController {...BusinessListSearch} />
+  return <BusinessSearchList {...BusinessListSearch} />
 }

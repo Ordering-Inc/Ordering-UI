@@ -26,18 +26,17 @@ import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessController } from '../BusinessController'
 import { OrdersOption } from '../OrdersOption'
 import { BusinessesMap } from '../../../../../components/BusinessesMap'
-import { BusinessList as BusinessListController } from './test'
 import {
   useOrder,
   useSession,
   useLanguage,
-  useConfig
+  useConfig,
+  BusinessList as BusinessListController
 } from 'ordering-components'
 import { HighestRated } from '../HighestRated'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { OrderProgress } from '../OrderProgress'
-import { BusinessListingSearch } from '../BusinessListingSearch'
-import FiFilter from '@meronex/icons/fi/FiFilter';
+import FiFilter from '@meronex/icons/fi/FiFilter'
 const PIXELS_TO_SCROLL = 300
 
 const BusinessesListingUI = (props) => {
@@ -51,13 +50,7 @@ const BusinessesListingUI = (props) => {
     handleChangeSearch,
     handleChangeBusinessType,
     handleBusinessClick,
-    onBusinessClick,
-    businessesSearchList,
-    handleChangeFilters,
-    filters,
-    termValue,
-    handleChangeTermValue,
-    businessesSearched
+    onBusinessClick
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -156,7 +149,6 @@ const BusinessesListingUI = (props) => {
           <OrderProgress />
         </OrderProgressWrapper>
         <WrapperSearch isCustomLayout={isCustomLayout}>
-          <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
           <SearchBar
             lazyLoad
             search={searchValue}
@@ -164,6 +156,9 @@ const BusinessesListingUI = (props) => {
             placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
             onSearch={handleChangeSearch}
           />
+          {configs?.advanced_business_search_enabled?.value === '1' && (
+            <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
+          )}
           {isCustomLayout && (
             <FiMap onClick={toggleMap} />
           )}

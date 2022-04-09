@@ -332,5 +332,5 @@ export const BusinessesTitle = styled.h1`
   font-weight: 600;
   font-size: 24px;
   color: ${props => props.theme?.colors.headingColor};
-  margin: 42px 20px 5px 20px;
+  margin-bottom: 20px;
 `

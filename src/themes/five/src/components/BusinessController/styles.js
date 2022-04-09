@@ -12,6 +12,20 @@ export const ContainerCard = styled.div`
 
   width: calc(100% - 40px);
 
+  ${({ minWidthEnabled }) => minWidthEnabled && css`
+    min-width: calc(65% - 40px);
+  `}
+
+  ${({ typeButton }) => typeButton && css`
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      padding: 10px 30px;
+    }
+  `}
+  
   ${({ firstCard }) => firstCard && css`
     margin-left: 0;
   `}
@@ -21,15 +35,15 @@ export const ContainerCard = styled.div`
   }
 
   @media (min-width: 681px) {
-    width: ${({ isBusinessSearch }) => isBusinessSearch ? 'calc(100% - 40px)' : 'calc(50% - 40px)'};
+    width: calc(50% - 40px);
   }
 
   @media (min-width: 993px) {
-    width: ${({ isBusinessSearch }) => isBusinessSearch ? 'calc(50% - 40px)' : 'calc(33% - 40px)'};
+    width: calc(33% - 40px);
   }
 
   @media (min-width: 1200px) {
-    width: ${({ isBusinessSearch }) => isBusinessSearch ? 'calc(33% - 40px)' : 'calc(25% - 40px)'};
+    width: calc(25% - 40px);
   }
 `
 
