@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrderGroupFilterWrapper = exports.Divider = exports.Container = void 0;
+exports.OrderGroupFilterWrapper = exports.NoOrdersWrapper = exports.Divider = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px;\n  overflow: hidden;\n  min-height: auto;\n  width: 100%;\n  box-sizing: border-box;\n\n  > h1 {\n    font-weight: 600;\n    font-size: 32px;\n    line-height: 48px;\n    margin-bottom: 7px;\n    margin-top: 0px;\n    text-transform: capitalize;\n  }\n\n  @media (min-width: 769px) {\n    padding: 40px;\n    width: 80%;\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n  @media (min-width: 993px) {\n    min-height: calc(100vh - 382px);\n  }\n"])));
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px;\n  overflow: hidden;\n  min-height: auto;\n  width: 100%;\n  box-sizing: border-box;\n  position: relative;\n\n  > h1 {\n    font-weight: 600;\n    font-size: 32px;\n    line-height: 48px;\n    margin-bottom: 7px;\n    margin-top: 0px;\n    text-transform: capitalize;\n  }\n\n  @media (min-width: 769px) {\n    padding: 40px;\n    width: 80%;\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n  @media (min-width: 993px) {\n    min-height: calc(100vh - 382px);\n  }\n"])));
 
 exports.Container = Container;
 
@@ -32,3 +32,7 @@ var OrderGroupFilterWrapper = _styledComponents.default.div(_templateObject3 || 
 });
 
 exports.OrderGroupFilterWrapper = OrderGroupFilterWrapper;
+
+var NoOrdersWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 50px 0px;\n  position: absolute;\n  box-sizing: border-box;\n  height: calc(100% - 120px);\n  width: 100%;\n\n  > p {\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 24px;\n    margin-top: 0px;\n    margin-bottom: 25px;\n  }\n\n  button {\n    height: 44px;\n  }\n"])));
+
+exports.NoOrdersWrapper = NoOrdersWrapper;

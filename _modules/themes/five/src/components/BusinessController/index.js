@@ -69,7 +69,11 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       isShowCallcenterInformation = props.isShowCallcenterInformation,
       isBusinessOpen = props.isBusinessOpen,
       businessWillCloseSoonMinutes = props.businessWillCloseSoonMinutes,
-      onPreorderBusiness = props.onPreorderBusiness;
+      onPreorderBusiness = props.onPreorderBusiness,
+      firstCard = props.firstCard,
+      minWidthEnabled = props.minWidthEnabled,
+      typeButton = props.typeButton,
+      children = props.children;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -102,6 +106,12 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business);else handleClick(business);
   };
 
+  if (typeButton) {
+    return /*#__PURE__*/_react.default.createElement(_styles.ContainerCard, {
+      typeButton: typeButton
+    }, children);
+  }
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -111,7 +121,9 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.ContainerCard, {
-    isSkeleton: isSkeleton
+    isSkeleton: isSkeleton,
+    firstCard: firstCard,
+    minWidthEnabled: minWidthEnabled
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
     isSkeleton: isSkeleton,
     onClick: function onClick() {

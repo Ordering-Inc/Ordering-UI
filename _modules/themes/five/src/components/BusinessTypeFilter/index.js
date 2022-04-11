@@ -19,6 +19,8 @@ var _styles = require("./styles");
 
 var _AutoScroll = require("../../../../../components/AutoScroll");
 
+var _Buttons = require("../../styles/Buttons");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -31,6 +33,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -38,8 +42,6 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -58,7 +60,10 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
 
   var typesState = props.typesState,
       currentTypeSelected = props.currentTypeSelected,
-      handleChangeBusinessType = props.handleChangeBusinessType;
+      handleChangeBusinessType = props.handleChangeBusinessType,
+      isSearchMode = props.isSearchMode,
+      filters = props.filters,
+      handleChangeFilters = props.handleChangeFilters;
   var loading = typesState.loading,
       error = typesState.error,
       types = typesState.types;
@@ -76,6 +81,24 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
     handleChangeBusinessType && handleChangeBusinessType(category);
   };
 
+  var handleChangeActiveBusinessType = function handleChangeActiveBusinessType(type) {
+    var _filters$business_typ;
+
+    if ((type === null || type === void 0 ? void 0 : type.id) === null) {
+      handleChangeFilters('business_types', []);
+      return;
+    }
+
+    if (filters !== null && filters !== void 0 && (_filters$business_typ = filters.business_types) !== null && _filters$business_typ !== void 0 && _filters$business_typ.includes(type === null || type === void 0 ? void 0 : type.id)) {
+      var arrayAux = filters === null || filters === void 0 ? void 0 : filters.business_types;
+      var index = arrayAux === null || arrayAux === void 0 ? void 0 : arrayAux.indexOf(type === null || type === void 0 ? void 0 : type.id);
+      arrayAux.splice(index, 1);
+      handleChangeFilters('business_types', arrayAux);
+    } else {
+      handleChangeFilters('business_types', [].concat(_toConsumableArray(filters === null || filters === void 0 ? void 0 : filters.business_types), [type === null || type === void 0 ? void 0 : type.id]));
+    }
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -84,7 +107,19 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
+  }), isSearchMode ? /*#__PURE__*/_react.default.createElement(_styles.SearchTypeContainer, {
+    id: "container"
+  }, types.map(function (type, i) {
+    var _filters$business_typ2, _filters$business_typ3, _filters$business_typ4;
+
+    return type.enabled && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      key: type === null || type === void 0 ? void 0 : type.id,
+      color: filters !== null && filters !== void 0 && (_filters$business_typ2 = filters.business_types) !== null && _filters$business_typ2 !== void 0 && _filters$business_typ2.includes(type === null || type === void 0 ? void 0 : type.id) || (type === null || type === void 0 ? void 0 : type.id) === null && (filters === null || filters === void 0 ? void 0 : (_filters$business_typ3 = filters.business_types) === null || _filters$business_typ3 === void 0 ? void 0 : _filters$business_typ3.length) === 0 ? 'primary' : 'secondary',
+      onClick: function onClick() {
+        return handleChangeActiveBusinessType(type);
+      }
+    }, t("BUSINESS_TYPE_".concat(type.name.replace(/\s/g, '_').toUpperCase()), type.name), " ", (filters === null || filters === void 0 ? void 0 : (_filters$business_typ4 = filters.business_types) === null || _filters$business_typ4 === void 0 ? void 0 : _filters$business_typ4.includes(type === null || type === void 0 ? void 0 : type.id)) && 'X');
+  })) : /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
     id: "container"
   }, loading && /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"

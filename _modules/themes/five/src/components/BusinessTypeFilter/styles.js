@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TypeContainer = exports.Divider = exports.BusinessCategoryTitle = void 0;
+exports.TypeContainer = exports.SearchTypeContainer = exports.Divider = exports.BusinessCategoryTitle = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -39,3 +39,7 @@ exports.BusinessCategoryTitle = BusinessCategoryTitle;
 var Divider = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  position: absolute;\n  width: calc(100% - 40px);\n  height: 1px;\n  left: 20px;\n  bottom: 0;\n  background: #E9ECEF;\n"])));
 
 exports.Divider = Divider;
+
+var SearchTypeContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  box-sizing: border-box;\n  position: relative;\n  flex-wrap: wrap;\n  justify-content: center;\n  button {\n    overflow: hidden;\n    margin-right: 10px;\n    margin-top: 10px;\n    border-radius: 50px;\n  }\n"])));
+
+exports.SearchTypeContainer = SearchTypeContainer;

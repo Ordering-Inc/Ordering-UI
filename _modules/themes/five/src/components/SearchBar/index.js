@@ -75,13 +75,14 @@ var SearchBar = function SearchBar(props) {
 
   var handleClear = function handleClear() {
     onSearch('');
+    el.current.value = '';
   };
 
   (0, _react.useEffect)(function () {
     el.current.onkeyup = onChangeSearch;
   }, []);
   (0, _react.useEffect)(function () {
-    if (!search) {
+    if (!search || search === '') {
       el.current.value = '';
     }
   }, [search]);

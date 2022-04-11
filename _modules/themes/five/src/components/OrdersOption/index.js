@@ -15,8 +15,6 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _reactRouterDom = require("react-router-dom");
-
 var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
 
 var _VerticalOrdersLayout = require("../../../../../components/VerticalOrdersLayout");
@@ -26,8 +24,6 @@ var _NotFoundSource = require("../../../../../components/NotFoundSource");
 var _styledComponents = require("styled-components");
 
 var _styles = require("./styles");
-
-var _Buttons = require("../../styles/Buttons");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -84,10 +80,10 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       isCustomLayout = props.isCustomLayout,
       isBusinessesLoading = props.isBusinessesLoading,
       pastOrders = props.pastOrders,
+      preOrders = props.preOrders,
       setIsEmptyPast = props.setIsEmptyPast,
       setIsEmptyActive = props.setIsEmptyActive,
-      isEmptyPast = props.isEmptyPast,
-      isEmptyActive = props.isEmptyActive;
+      setIsEmptyPreorder = props.setIsEmptyPreorder;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -99,7 +95,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       _useOrder2 = _slicedToArray(_useOrder, 2),
       reorder = _useOrder2[1].reorder;
 
-  var history = (0, _reactRouterDom.useHistory)();
   var loading = orderList.loading,
       error = orderList.error,
       values = orderList.orders;
@@ -277,8 +272,9 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     if (orders.length === 0) {
       activeOrders && setIsEmptyActive && setIsEmptyActive(true);
       pastOrders && setIsEmptyPast && setIsEmptyPast(true);
+      preOrders && setIsEmptyPreorder && setIsEmptyPreorder(true);
     }
-  }, [orders, activeOrders, pastOrders]);
+  }, [orders, activeOrders, pastOrders, preOrders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -289,16 +285,11 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }, props));
   }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
     isBusinessesPage: isBusinessesPage
-  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))), !(activeOrders && isEmptyActive && isEmptyPast) && !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true
-  }), activeOrders && isEmptyActive && isEmptyPast && /*#__PURE__*/_react.default.createElement(_styles.NoOrdersWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    onClick: function onClick() {
-      return history.push('/');
-    }
-  }, t('ORDER_NOW', 'Order now')))), (isCustomLayout ? loadingOrders || loading || isBusinessesLoading : loading) && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
+  })), (isCustomLayout ? loadingOrders || loading || isBusinessesLoading : loading) && /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     isSkeleton: true,
     activeOrders: horizontal,
     isBusinessesPage: isBusinessesPage
