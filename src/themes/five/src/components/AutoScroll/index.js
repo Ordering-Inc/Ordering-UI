@@ -4,13 +4,20 @@ import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
 import MdKeyboardArrowRight from '@meronex/icons/md/MdKeyboardArrowRight'
 import { useTheme } from '../../../../../contexts/ThemeContext'
 
-export const AutoScroll = ({ children, modal, special, scrollId }) => {
+export const AutoScroll = (props) => {
+  const {
+    children,
+    modal,
+    special,
+    scrollId,
+    onHandleRightEnd,
+    isColumnMode
+  } = props
   const [parentElement, setParentElement] = useState([])
   const [containerElement, setContainerElement] = useState([])
   const [theme] = useTheme()
-
   const autoScrollId = scrollId || 'autoscroll'
-
+  let handleEndFired = false
   useLayoutEffect(() => {
     const element = document?.getElementById(`${autoScrollId}`)?.parentNode
     element && element.parentNode.addEventListener('scroll', handleScroll)
@@ -36,6 +43,10 @@ export const AutoScroll = ({ children, modal, special, scrollId }) => {
     if (botonLeft || botonRight) {
       if (theme?.rtl) {
         if ((containerElement?.scrollLeft * -1) < 40) {
+          if (!botonRight.classList.contains('hidden') && onHandleRightEnd && !handleEndFired) {
+            handleEndFired = true
+            onHandleRightEnd()
+          }
           botonRight && botonRight.classList.add('hidden')
         } else {
           botonRight && botonRight.classList.remove('hidden')
@@ -52,8 +63,13 @@ export const AutoScroll = ({ children, modal, special, scrollId }) => {
           botonLeft && botonLeft.classList.remove('hidden')
         }
         if (containerElement?.scrollLeft > parentElement?.scrollWidth - containerElement?.offsetWidth - 40) {
+          if (!botonRight.classList.contains('hidden') && onHandleRightEnd && !handleEndFired) {
+            handleEndFired = true
+            onHandleRightEnd()
+          }
           botonRight && botonRight.classList.add('hidden')
         } else {
+          handleEndFired = false
           botonRight && botonRight.classList.remove('hidden')
         }
       }
@@ -77,13 +93,13 @@ export const AutoScroll = ({ children, modal, special, scrollId }) => {
   }
 
   return (
-    <AutoscrollContainer modal={modal} id={`${autoScrollId}`}>
+    <AutoscrollContainer modal={modal} id={`${autoScrollId}`} isColumnMode={isColumnMode}>
       {
-        (!special ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth) ? <MdKeyboardArrowLeft className='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
+        (!special ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth) && !isColumnMode ? <MdKeyboardArrowLeft className='left-autoscroll' onMouseDown={() => scrolling(true)} /> : ''
       }
       {children}
       {
-        (!special ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth) ? <MdKeyboardArrowRight className='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
+        (!special ? containerElement?.offsetWidth < parentElement?.offsetWidth + 50 : containerElement?.offsetWidth < parentElement?.offsetWidth) && !isColumnMode ? <MdKeyboardArrowRight className='right-autoscroll' onMouseDown={() => scrolling()} /> : ''
       }
     </AutoscrollContainer>
   )

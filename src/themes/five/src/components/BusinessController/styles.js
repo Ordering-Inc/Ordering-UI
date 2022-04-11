@@ -12,6 +12,24 @@ export const ContainerCard = styled.div`
 
   width: calc(100% - 40px);
 
+  ${({ minWidthEnabled }) => minWidthEnabled && css`
+    min-width: calc(65% - 40px);
+  `}
+
+  ${({ typeButton }) => typeButton && css`
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      padding: 10px 30px;
+    }
+  `}
+  
+  ${({ firstCard }) => firstCard && css`
+    margin-left: 0;
+  `}
+
   @media (min-width: 481px) {
     max-height: 320px;
   }
@@ -133,7 +151,7 @@ export const BusinessTags = styled.div`
     ` : css`
         margin-right: 0px;
     `
-    }
+  }
     }
   }
 `
@@ -262,6 +280,7 @@ export const Medadata = styled.div`
   font-size: 12px;
   color: #909BA9;
   flex-wrap: wrap;
+  
 
   ${({ isCustomerMode }) => isCustomerMode && css`
     > div {
@@ -270,7 +289,7 @@ export const Medadata = styled.div`
   `}
   ${({ isSkeleton }) => isSkeleton && css`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   `}
   p {
     color: #909BA9;

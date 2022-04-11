@@ -3,7 +3,11 @@ import styled, { css } from 'styled-components'
 export const AutoscrollContainer = styled.span`
   display: ${props => props.modal ? 'flex' : 'inherit'};
   width: ${props => props.modal ? '300vw' : 'initial'};
-  
+  ${({ isColumnMode }) => isColumnMode && css`
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+  `}
   > svg {
     background: #D9D9D9;
     display: inline-block;

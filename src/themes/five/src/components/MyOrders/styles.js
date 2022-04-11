@@ -6,6 +6,7 @@ export const Container = styled.div`
   min-height: auto;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 
   > h1 {
     font-weight: 600;
@@ -57,5 +58,29 @@ export const OrderGroupFilterWrapper = styled.div`
         margin-left: 0;
       `}
     }
+  }
+`
+
+export const NoOrdersWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0px;
+  position: absolute;
+  box-sizing: border-box;
+  height: calc(100% - 120px);
+  width: 100%;
+
+  > p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 0px;
+    margin-bottom: 25px;
+  }
+
+  button {
+    height: 44px;
   }
 `
