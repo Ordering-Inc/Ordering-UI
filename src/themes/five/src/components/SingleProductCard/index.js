@@ -62,6 +62,7 @@ export const SingleProductCard = (props) => {
         onClick={() => ((!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product)) || (useCustomFunctionality && onCustomClick && onCustomClick()))}
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
+        className='product-card'
       >
         {!useCustomFunctionality && (
           <>

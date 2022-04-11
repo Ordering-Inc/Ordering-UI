@@ -14,7 +14,15 @@ export const BusinessList = styled.div`
 
 export const WrapperSearch = styled.div`
   margin: 10px 20px 0px;
-
+  display: flex;
+  justify-content: flex-end;
+  svg{
+    align-self: center;
+    cursor: pointer;
+    font-size: 26px;
+    color: ${props => props.theme?.colors?.primary};
+    margin-left: 10px;
+  }
   ${({ isCustomLayout }) => isCustomLayout && css`
     box-sizing: border-box;
     display: flex;
@@ -28,10 +36,7 @@ export const WrapperSearch = styled.div`
     padding: 0 20px;
 
     svg {
-      font-size: 26px;
-      color: ${props => props.theme?.colors?.primary};
-      margin-left: 10px;
-      cursor: pointer;
+      align-self: auto;
     }
     
     @media(min-width: 681px){
@@ -61,8 +66,10 @@ export const PreviousOrders = styled.div`
 `
 
 export const BusinessesTitle = styled.h1`
-  font-size: 18px;
-  margin: 0px 20px;
+  font-weight: 600;
+  font-size: 24px;
+  color: ${props => props.theme?.colors.headingColor};
+  margin: 42px 20px 5px 20px;
 `
 
 export const BusinessHeroImgStyled = styled.div`

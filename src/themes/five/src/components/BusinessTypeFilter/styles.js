@@ -73,3 +73,18 @@ export const Divider = styled.div`
   bottom: 0;
   background: #E9ECEF;
 `
+
+export const SearchTypeContainer = styled.div`
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: center;
+  button {
+    overflow: hidden;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 50px;
+  }
+`

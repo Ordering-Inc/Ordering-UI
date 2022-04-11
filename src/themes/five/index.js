@@ -77,7 +77,7 @@ import { UserVerification } from './src/components/UserVerification'
 import { VerifyCodeForm } from './src/components/VerifyCodeForm'
 import { Wallets } from './src/components/Wallets'
 import { WalletTransactionItem } from './src/components/WalletTransactionItem'
-
+import { BusinessListingSearch } from './src/components/BusinessListingSearch'
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
@@ -101,6 +101,7 @@ export {
   BusinessProductsList,
   ProductListLayoutGroceries,
   BusinessProductsListing,
+  BusinessListingSearch,
   BusinessReviews,
   BusinessTypeFilter,
   CardForm,
