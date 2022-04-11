@@ -17,12 +17,6 @@ export const NotNetworkConnectivity = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       <Container id='container' isOnline={props.isOnline ?? onlineStatus}>
         <h1>{t('MOBILE_NO_INTERNET', 'No internet connection')}</h1>
         <p>{t('NETWORK_OFFLINE_MESSAGE', 'Your connection appears to be off-line. Try to refresh the page')}</p>
@@ -38,12 +32,6 @@ export const NotNetworkConnectivity = (props) => {
           </Button>
         </ButtonWrapper>
       </Container>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }
