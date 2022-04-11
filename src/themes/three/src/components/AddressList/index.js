@@ -265,7 +265,7 @@ const AddressListUI = (props) => {
         (
           <WrappNotAddresses>
             <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
-            <h1>{t('NOT_FOUND_ADDRESS.', 'Sorry, You don\'t seem to have any addresses.')}</h1>
+            <h1>{t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.')}</h1>
           </WrappNotAddresses>
         )}
 
