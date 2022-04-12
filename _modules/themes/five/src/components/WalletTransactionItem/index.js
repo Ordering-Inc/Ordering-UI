@@ -46,7 +46,7 @@ var WalletTransactionItem = function WalletTransactionItem(props) {
       t = _useLanguage2[1];
 
   var LANG_EVENT_KEY = "WALLET_".concat(type.toUpperCase(), "_").concat(item === null || item === void 0 ? void 0 : item.event.toUpperCase(), "_").concat(item === null || item === void 0 ? void 0 : item.event_type.toUpperCase(), "_").concat((item === null || item === void 0 ? void 0 : item.amount) >= 0 ? 'POSITIVE' : 'NEGATIVE');
-  var lang_event_text = !!(item !== null && item !== void 0 && (_item$event = item.event) !== null && _item$event !== void 0 && _item$event.order_id) ? ":author ".concat((item === null || item === void 0 ? void 0 : item.amount) >= 0 ? 'add' : 'reduce', " money in Order No. :order_id") : ":author ".concat((item === null || item === void 0 ? void 0 : item.amount) >= 0 ? 'add' : 'reduce', " money");
+  var lang_event_text = !!(item !== null && item !== void 0 && (_item$event = item.event) !== null && _item$event !== void 0 && _item$event.order_id) ? ":author ".concat((item === null || item === void 0 ? void 0 : item.amount) >= 0 ? 'Add' : 'Reduce', " money in Order No. :order_id") : ":author ".concat((item === null || item === void 0 ? void 0 : item.amount) >= 0 ? 'Add' : 'Reduce', " money");
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Dot, {
     isTop: idx === 0
   }), /*#__PURE__*/_react.default.createElement(_styles.DateBlock, null, /*#__PURE__*/_react.default.createElement("span", null, parseDate(item === null || item === void 0 ? void 0 : item.created_at)), /*#__PURE__*/_react.default.createElement("span", {
