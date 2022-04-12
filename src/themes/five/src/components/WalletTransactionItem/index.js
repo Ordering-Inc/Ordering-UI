@@ -21,10 +21,10 @@ export const WalletTransactionItem = (props) => {
   const [{ parsePrice, parseDate }] = useUtils()
   const [, t] = useLanguage()
 
-  const LANG_EVENT_KEY = `WALLET_${type.toUpperCase()}_${item?.event.toUpperCase()}_${item?.event_type.toUpperCase()}_${item?.amount >= 0 ? 'POSITIVE': 'NEGATIVE'}`
+  const LANG_EVENT_KEY = `WALLET_${type.toUpperCase()}_${item?.event.toUpperCase()}_${item?.event_type.toUpperCase()}_${item?.amount >= 0 ? 'POSITIVE' : 'NEGATIVE'}`
   const lang_event_text = !!item?.event?.order_id
-    ? `:author ${item?.amount >= 0 ? 'add' : 'reduce'} money in Order No. :order_id`
-    : `:author ${item?.amount >= 0 ? 'add' : 'reduce'} money`
+    ? `:author ${item?.amount >= 0 ? 'Add' : 'Reduce'} money in Order No. :order_id`
+    : `:author ${item?.amount >= 0 ? 'Add' : 'Reduce'} money`
 
   return (
     <Container>
