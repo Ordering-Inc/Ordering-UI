@@ -284,7 +284,7 @@ const CartUI = (props) => {
                         <tr key={fee.id}>
                           <td>
                             {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            ({parsePrice(fee?.fixed)} + {fee.percentage}%)
+                            ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
                             <IconContainer onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
                             </IconContainer>
