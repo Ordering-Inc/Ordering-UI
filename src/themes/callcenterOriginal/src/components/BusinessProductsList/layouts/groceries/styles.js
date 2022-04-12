@@ -44,9 +44,16 @@ export const WrapAllCategories = styled.div`
   .category-description {
     margin-left: 15px;
     margin-bottom: 10px;
+    display: flex;
     p {
       margin: 0;
       color: #909BA9;
+    }
+    span {
+      color: ${props => props.theme.colors.primary};
+      text-decoration: underline;
+      margin-left: 10px;
+      cursor: pointer;
     }
   }
   h3 {
@@ -69,3 +76,16 @@ export const WrapperNotFound = styled.div`
 `
 
 export const HeaderWrapper = styled.div``
+
+export const DescriptionModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  img{
+    border-radius: 7.6px;
+    width: 300px;
+    height: 300px;
+    min-width: 300px;
+    min-height: 300px;
+    margin-bottom: 20px;
+  }
+`

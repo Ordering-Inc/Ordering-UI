@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ProductsList, useConfig, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../NotFoundSource'
+import { Modal } from '../Modal'
 
 import {
   ProductsContainer,
@@ -10,7 +11,8 @@ import {
   WrapAllCategories,
   ErrorMessage,
   WrapperNotFound,
-  HeaderWrapper
+  HeaderWrapper,
+  DescriptionModalContainer
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
@@ -34,6 +36,7 @@ const BusinessProductsListUI = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
+  const [openDescription, setOpenDescription] = useState(null)
 
   return (
     <>
@@ -94,6 +97,9 @@ const BusinessProductsListUI = (props) => {
             const products = !isUseParentCategory
               ? categoryState?.products?.filter(product => product?.category_id === category?.id) ?? []
               : categoryState?.products?.filter(product => category?.children?.some(cat => cat.category_id === product?.category_id)) ?? []
+
+            const shortCategoryDescription = category?.description?.length > 200 ? `${category?.description?.substring(0, 200)}...` : category?.description
+
             return (
               <React.Fragment key={category?.id}>
                 {
@@ -109,7 +115,12 @@ const BusinessProductsListUI = (props) => {
                           <h3>{category.name}</h3>
                         </div>
                         <div className='category-description'>
-                          <p>{category.description}</p>
+                          <p>
+                            {shortCategoryDescription}
+                            {category?.description?.length > 200 && (
+                              <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
+                            )}
+                          </p>
                         </div>
                       </HeaderWrapper>
                       <ProductsListing>
@@ -173,6 +184,20 @@ const BusinessProductsListUI = (props) => {
             <ErrorMessage key={i}>ERROR: [{e}]</ErrorMessage>
           ))
         )}
+        <Modal
+          open={openDescription}
+          title={openDescription?.name}
+          onClose={() => setOpenDescription(null)}
+        >
+          <DescriptionModalContainer>
+            {
+              openDescription?.image && (
+                <img src={openDescription.image} />
+              )
+            }
+            <p>{openDescription?.description}</p>
+          </DescriptionModalContainer>
+        </Modal>
       </ProductsContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
