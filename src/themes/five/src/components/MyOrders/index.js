@@ -1,17 +1,25 @@
 import React, { useState } from 'react'
-import { Container, Divider, OrderGroupFilterWrapper } from './styles'
 import { useLanguage } from 'ordering-components'
-
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { OrdersOption } from '../OrdersOption'
 import { Button } from '../../styles/Buttons'
 import MdClose from '@meronex/icons/ios/MdClose'
+import { useHistory } from 'react-router-dom'
+import {
+  Container,
+  Divider,
+  OrderGroupFilterWrapper,
+  NoOrdersWrapper
+} from './styles'
 
 export const MyOrders = (props) => {
   const [, t] = useLanguage()
+  const history = useHistory()
+
   const [selectItem, setSelectItem] = useState('all')
   const [isEmptyActive, setIsEmptyActive] = useState(false)
   const [isEmptyPast, setIsEmptyPast] = useState(false)
+  const [isEmptyPreorder, setIsEmptyPreorder] = useState(false)
 
   const filterList = [
     { key: 'all', value: t('ALL', 'All') },
@@ -36,45 +44,64 @@ export const MyOrders = (props) => {
       <ProfileOptions value='orders' />
       <Container>
         <h1>{('MY_ORDERS', 'My orders')}</h1>
-        <OrderGroupFilterWrapper>
-          {filterList?.map((order, i) => (
+        {!(isEmptyActive && isEmptyPast && isEmptyPreorder) && (
+          <OrderGroupFilterWrapper>
+            {filterList?.map((order, i) => (
+              <Button
+                key={i}
+                color={selectItem === order.key ? 'primary' : 'secundary'}
+                onClick={() => handleChangeFilter(order.key)}
+              >
+                {order.value}{selectItem === order.key && <MdClose />}
+              </Button>
+            ))}
+          </OrderGroupFilterWrapper>
+        )}
+        {(isEmptyActive && isEmptyPast && isEmptyPreorder) ? (
+          <NoOrdersWrapper>
+            <p>{t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')}</p>
             <Button
-              key={i}
-              color={selectItem === order.key ? 'primary' : 'secundary'}
-              onClick={() => handleChangeFilter(order.key)}
+              color='primary'
+              onClick={() => history.push('/')}
             >
-              {order.value}{selectItem === order.key && <MdClose />}
+              {t('ORDER_NOW', 'Order now')}
             </Button>
-          ))}
-        </OrderGroupFilterWrapper>
-        {(selectItem === 'all' || selectItem === 'preorder') && (
+          </NoOrdersWrapper>
+        ) : (
           <>
-            <OrdersOption {...props} preOrders horizontal />
-            <Divider />
-          </>
-        )}
-        {(selectItem === 'all' || selectItem === 'active') && (
-          <>
-            <OrdersOption
-              {...props}
-              activeOrders
-              horizontal
-              setIsEmptyActive={setIsEmptyActive}
-              isEmptyActive={isEmptyActive}
-              isEmptyPast={isEmptyPast}
-            />
-            <Divider />
-          </>
-        )}
-        {(selectItem === 'all' || selectItem === 'past') && (
-          <>
-            <OrdersOption
-              {...props}
-              pastOrders
-              horizontal
-              setIsEmptyPast={setIsEmptyPast}
-            />
-            <Divider />
+            {(selectItem === 'all' || selectItem === 'preorder') && (
+              <>
+                <OrdersOption
+                  {...props}
+                  preOrders
+                  horizontal
+                  setIsEmptyPreorder={setIsEmptyPreorder}
+                />
+                <Divider />
+              </>
+            )}
+            {(selectItem === 'all' || selectItem === 'active') && (
+              <>
+                <OrdersOption
+                  {...props}
+                  activeOrders
+                  horizontal
+                  setIsEmptyActive={setIsEmptyActive}
+                />
+                <Divider />
+              </>
+            )}
+            {(selectItem === 'all' || selectItem === 'past') && (
+              <>
+                <OrdersOption
+                  {...props}
+                  pastOrders
+                  horizontal
+                  setIsEmptyPast={setIsEmptyPast}
+                />
+                <Divider />
+              </>
+            )}
           </>
         )}
       </Container>
