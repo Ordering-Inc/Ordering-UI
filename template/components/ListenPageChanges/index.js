@@ -12,23 +12,19 @@ export const ListenPageChanges = ({ children }) => {
   const routes = {
     home: '/',
     search: '/search',
-    delivery: '/delivery',
-    pickup: '/pickup',
-    eatin: '/eatin',
-    curbside: '/curbside',
-    drivethru: '/drivethru',
-    signup: '/signup',
-    signin: '/signin',
     profile: '/profile',
+    messages: '/messages',
+    verify: '/verify',
+    wallets: '/wallets',
+    help: '/help',
+    signup_business: '/signup_business',
     orders: '/profile/orders',
     order_detail: '/orders/:orderId',
     checkout: '/checkout/:cartUuid',
     checkout_list: '/checkout',
     business: '/store/:store',
     business_slug: '/:store',
-    forgot_password: '/password/forgot',
-    reset_password: '/password/reset',
-    help: '/help'
+    business_search: '/business_search'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
@@ -83,7 +79,7 @@ export const ListenPageChanges = ({ children }) => {
       events.off('go_to_page', handleGoToPage)
       events.off('get_current_view', handleGetCurrentView)
     }
-  }, [events])
+  }, [])
 
   useEffect(() => {
     if (theme.rtl !== languageState?.language?.rtl) {

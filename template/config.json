@@ -1,5 +1,6 @@
 {
   "app_id": "ordering-react",
+  "app_name": "Ordering",
   "project": "luisv4",
   "api": {
     "url": "https://apiv4.ordering.co",
@@ -9,7 +10,8 @@
   "socket": {
     "url": "https://socket.ordering.co"
   },
-  "store_android_id": "",
-  "store_apple_id": "",
-  "store_kindle_id": ""
+  "use_marketplace": false,
+  "store_android_id": "asd",
+  "store_apple_id": "asd",
+  "store_kindle_id": "asd"
 }

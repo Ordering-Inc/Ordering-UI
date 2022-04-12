@@ -18,6 +18,7 @@ import isotype from './template/assets/images/isotype.svg'
 import isotypeInvert from './template/assets/images/isotype-invert.svg'
 
 import homeHero from './template/assets/images/home-hero.jpg'
+import businessHero from './template/assets/images/business-hero.jpg'
 import notFound from './template/assets/images/not-found.svg'
 import notNetwork from './template/assets/images/not-network.svg'
 import notFound404 from './template/assets/images/not-found-404.svg'
@@ -25,8 +26,10 @@ import notFoundLighting from './template/assets/images/not-found-lighting.svg'
 import searchIcon from './template/assets/images/search-icon.svg'
 import emptyActiveOrders from './template/assets/images/empty-active-orders.svg'
 import emptyPastOrders from './template/assets/images/empty-past-orders.svg'
-import creatingOrder from './template/assets/images/order-creating.png'
-import successOrder from './template/assets/images/order-sucess.png'
+import visa from './template/assets/images/visa.png'
+import mastercard from './template/assets/images/mastercard.png'
+import credit from './template/assets/images/credit.png'
+import businessSignUpHero from './template/assets/images/business_signup.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -63,6 +66,12 @@ import storeDummy from './template/assets/images/dummies/store.png'
 import leftArrow from './template/assets/left-arrow.svg'
 import rightArrow from './template/assets/right-arrow.svg'
 
+import delivery from './template/assets/images/delivery-types/delivery.jpg'
+import curbside from './template/assets/images/delivery-types/curbside.jpg'
+import driveThru from './template/assets/images/delivery-types/drive_thru.jpg'
+import eatIn from './template/assets/images/delivery-types/eat_in.jpg'
+import pickUp from './template/assets/images/delivery-types/pickup.jpg'
+
 const logos = {
   logotype,
   logotypeInvert,
@@ -74,6 +83,7 @@ theme.images = {
   logos,
   general: {
     homeHero,
+    businessHero,
     notFound,
     notFound404,
     notFoundLighting,
@@ -81,8 +91,10 @@ theme.images = {
     notNetwork,
     emptyActiveOrders,
     emptyPastOrders,
-    creatingOrder,
-    successOrder,
+    visa,
+    mastercard,
+    credit,
+    businessSignUpHero,
     leftArrow,
     rightArrow
   },
@@ -123,6 +135,13 @@ theme.images = {
     driverPhoto: 'https://res.cloudinary.com/demo/image/fetch/c_thumb,g_face,r_max/https://www.freeiconspng.com/thumbs/driver-icon/driver-icon-14.png',
     businessLogo: storeDummy,
     customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png'
+  },
+  deliveryTypes: {
+    delivery: delivery,
+    curbside: curbside,
+    driveThru: driveThru,
+    eatIn: eatIn,
+    pickUp: pickUp
   }
 }
 

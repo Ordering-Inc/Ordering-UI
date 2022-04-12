@@ -6,12 +6,13 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, Analytics, useConfig, FacebookPixel } from 'ordering-components'
+import { useSession, useLanguage, useOrder, Analytics, FacebookPixel, useConfig } from 'ordering-components'
 
-import { Header } from '../src/components/Header'
-import { Footer } from '../src/components/Footer'
+import { Header } from '../src/themes/five/src/components/Header'
+import { Footer } from '../src/themes/five/src/components/Footer'
+import { NotNetworkConnectivity } from '../src/themes/five/src/components/NotNetworkConnectivity'
+
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
-import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { Alert } from '../src/components/Confirm'
 import { SmartAppBanner } from '../src/components/SmartAppBanner'
@@ -20,18 +21,18 @@ import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { CheckoutPage } from './pages/Checkout'
 import { Cms } from './pages/Cms'
-import { ForgotPassword } from './pages/ForgotPassword'
 import { HomePage } from './pages/Home'
-import { Login } from './pages/Login'
 import { MyOrders } from './pages/MyOrders'
 import { OrderDetailsPage } from './pages/OrderDetails'
 import { PageNotFound } from './pages/PageNotFound'
 import { PagesList } from './pages/PagesList'
 import { Profile } from './pages/Profile'
-import { ResetPassword } from './pages/ResetPassword'
-import { SignUp } from './pages/SignUp'
+import { Wallets } from './pages/Wallets'
+import { MessagesList } from './pages/MessagesList'
 import { Help } from './pages/Help'
-
+import { SignUpBusiness } from './pages/SignUpBusiness'
+import { UserVerification } from './pages/UserVerification'
+import { BusinessListingSearch } from './pages/BusinessListingSearch'
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
@@ -47,6 +48,11 @@ export const App = () => {
   const location = useLocation()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
+
+  const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+  const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
+  const isPhoneVerifyRequired = auth && configs?.verification_phone_required?.value === '1' && !user?.phone_verified
+  const isUserVerifyRequired = isEmailVerifyRequired || isPhoneVerifyRequired
 
   const closeAlert = () => {
     setAlertState({
@@ -99,7 +105,7 @@ export const App = () => {
       {!!configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
       )}
-      {!!configs?.facebook_id?.value && (
+      {!!configs?.facebook_id?.value && FacebookPixel && (
         <FacebookPixel trackId={configs?.facebook_id?.value} />
       )}
       <ListenPageChanges />
@@ -109,9 +115,9 @@ export const App = () => {
         )
       }
       <SmartAppBanner
-        storeAndroidId={settings?.store_android_id}
-        storeAppleId={settings?.store_apple_id}
-        storeKindleId={settings?.store_kindle_id}
+        storeAndroidId={settings?.store_android_id !== '0' ? settings?.store_android_id : false}
+        storeAppleId={settings?.store_apple_id !== '0' ? settings?.store_apple_id : false}
+        storeKindleId={settings?.store_kindle_id !== '0' ? settings?.store_kindle_id : false}
       />
       {
         loaded && (
@@ -119,125 +125,136 @@ export const App = () => {
             <Header
               isHome={isHome}
               location={location}
+              isCustomLayout={settings?.use_marketplace}
             />
-
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
                 <HelmetTags />
                 <Switch>
                   <Route exact path='/home'>
-                    {
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
                       orderStatus.options?.address?.location
-                        ? <Redirect to='/search' />
-                        : <HomePage />
-                    }
+                        ? <Redirect to={settings?.use_marketplace ? '/marketplace' : '/search'} />
+                        : settings?.use_marketplace
+                          ? <Redirect to={settings?.use_marketplace ? '' : '/search'} />
+                          : <HomePage />
+                    )}
                   </Route>
                   <Route exact path='/'>
-                    {
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
                       orderStatus.options?.address?.location
-                        ? <Redirect to='/search' />
+                        ? <Redirect to={settings?.use_marketplace ? '/marketplace' : '/search'} />
                         : <HomePage />
-                    }
+                    )}
                   </Route>
-                  <Route exact path='/signup'>
-                    {
-                      !auth
-                        ? (
-                          <SignUp
-                            elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-                            useLoginByCellphone
-                            useChekoutFileds
-                            handleSuccessSignup={handleSuccessSignup}
-                            isRecaptchaEnable
-                          />
-                        )
-                        : <Redirect to='/' />
-                    }
+                  <Route exact path='/signup_business'>
+                    {!auth ? (
+                      <SignUpBusiness
+                        elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
+                        useLoginByCellphone
+                        useChekoutFileds
+                        handleSuccessSignup={handleSuccessSignup}
+                        isRecaptchaEnable
+                      />
+                    ) : (
+                      <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                    )}
                   </Route>
-                  <Route exact path='/login'>
-                    {
-                      !auth
-                        ? (
-                          <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                            useLoginByCellphone
-                            isRecaptchaEnable
-                          />
-                        )
-                        : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader />
-                        )
-                        )
-                    }
-                  </Route>
-                  <Route exact path='/signin'>
-                    {
-                      !auth
-                        ? (
-                          <Login
-                            elementLinkToSignup={<Link to='/signup'>{t('CREATE_ACCOUNT', 'Create account')}</Link>}
-                            elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
-                            useLoginByCellphone
-                            isRecaptchaEnable
-                          />
-                        )
-                        : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader />
-                        )
-                        )
-                    }
-                  </Route>
-                  <Route exact path='/password/forgot'>
-                    {
-                      !auth ? (
-                        <ForgotPassword
-                          elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
-                        />
-                      )
-                        : <Redirect to='/' />
-                    }
-                  </Route>
-                  <Route exact path='/password/reset' component={ResetPassword} />
                   <Route exact path='/profile'>
                     {auth
-                      ? (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
-                      : <Redirect to='/login' />}
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
+                  </Route>
+                  <Route exact path='/verify'>
+                    {isUserVerifyRequired
+                      ? <UserVerification />
+                      : <Redirect to={auth ? settings?.use_marketplace ? '/marketplace' : '/search' : '/'} />}
+                  </Route>
+                  <Route exact path='/wallets'>
+                    {auth
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : isWalletEnabled
+                          ? <Wallets />
+                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/profile/orders'>
                     {auth
-                      ? (<MyOrders />)
-                      : <Redirect to='/login' />}
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : (<MyOrders />)
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
+                  </Route>
+                  <Route exact path='/messages'>
+                    {auth
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <MessagesList />
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
+                  </Route>
+                  <Route exact path='/help'>
+                    {auth
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : (<Help />)
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/search'>
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
                       <SpinnerLoader />
                     ) : (
-                      orderStatus.options?.address?.location
-                        ? <BusinessesList />
-                        : <Redirect to='/' />
+                      isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        orderStatus.options?.address?.location
+                          ? <BusinessesList />
+                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                      )
                     )}
                   </Route>
+                  <Route exact path='/business_search'>
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      orderStatus.options?.address?.location ? (
+                        <BusinessListingSearch />
+                      ) : (
+                        <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                      )
+                    )}
+
+                  </Route>
                   <Route exact path='/store/:store'>
-                    <BusinessProductsList />
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <BusinessProductsList />
+                    )}
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
-                      ? <CheckoutPage />
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <CheckoutPage />
                       : (
                         <Redirect to={{
-                          pathname: '/login',
+                          pathname: settings?.use_marketplace
+                            ? '/marketplace'
+                            : '/',
                           state: { from: location.pathname || null }
                         }}
                         />
@@ -245,34 +262,43 @@ export const App = () => {
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     {(auth || hashKey)
-                      ? <OrderDetailsPage />
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <OrderDetailsPage />
                       : (
                         <Redirect to={{
-                          pathname: '/login',
+                          pathname: settings?.use_marketplace
+                            ? '/marketplace'
+                            : '/',
                           state: { from: location.pathname || null }
                         }}
                         />
                       )}
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
-                    <Cms />
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <Cms />
+                    )}
                   </Route>
                   <Route exact path='/pages'>
-                    <PagesList />
-                  </Route>
-                  <Route exact path='/help'>
-                    {auth
-                      ? <Help />
-                      : (
-                        <Redirect to={{
-                          pathname: '/login',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
-                      )}
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <PagesList />
+                    )}
                   </Route>
                   <Route exact path='/:store'>
-                    <BusinessProductsList />
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <Redirect to={{
+                        pathname: `/store${location.pathname}`,
+                        state: { from: location.pathname || null }
+                      }}
+                      />
+                    )}
                   </Route>
                   <Route path='*'>
                     <PageNotFound />
