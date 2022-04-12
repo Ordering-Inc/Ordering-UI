@@ -264,14 +264,14 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    <tr>
+                    {/* <tr>
                       <td>
                         <Divider />
                       </td>
                       <td>
                         <Divider />
                       </td>
-                    </tr>
+                    </tr> */}
                     {
                       cart?.offers?.filter(offer => offer?.target === 1)?.length > 0 &&
                       cart?.subtotal_with_discount > 0 &&
