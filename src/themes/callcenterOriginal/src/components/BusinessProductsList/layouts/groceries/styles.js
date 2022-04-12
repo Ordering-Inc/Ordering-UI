@@ -41,6 +41,14 @@ export const WrapAllCategories = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+  .category-description {
+    margin-left: 15px;
+    margin-bottom: 10px;
+    p {
+      margin: 0;
+      color: #909BA9;
+    }
+  }
   h3 {
     font-weight: 600;
     font-size: 24px;
@@ -59,3 +67,5 @@ export const WrapperNotFound = styled.div`
     height: 100%;
   }
 `
+
+export const HeaderWrapper = styled.div``

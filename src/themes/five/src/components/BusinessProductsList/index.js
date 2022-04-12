@@ -106,6 +106,9 @@ const BusinessProductsListUI = (props) => {
                         }
                         <h3>{category.name}</h3>
                       </div>
+                      <div className='category-description'>
+                        <p>{category.description}</p>
+                      </div>
                       <ProductsListing>
                         {
                           products.map(product => (

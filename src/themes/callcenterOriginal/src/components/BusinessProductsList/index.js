@@ -9,7 +9,8 @@ import {
   ProductsListing,
   WrapAllCategories,
   ErrorMessage,
-  WrapperNotFound
+  WrapperNotFound,
+  HeaderWrapper
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
@@ -98,14 +99,19 @@ const BusinessProductsListUI = (props) => {
                 {
                   products.length > 0 && (
                     <WrapAllCategories id={`category${category?.id}`}>
-                      <div className='category-title'>
-                        {
-                          category?.image && (
-                            <img src={category.image} />
-                          )
-                        }
-                        <h3>{category.name}</h3>
-                      </div>
+                      <HeaderWrapper>
+                        <div className='category-title'>
+                          {
+                            category?.image && (
+                              <img src={category.image} />
+                            )
+                          }
+                          <h3>{category.name}</h3>
+                        </div>
+                        <div className='category-description'>
+                          <p>{category.description}</p>
+                        </div>
+                      </HeaderWrapper>
                       <ProductsListing>
                         {
                           products.map(product => (

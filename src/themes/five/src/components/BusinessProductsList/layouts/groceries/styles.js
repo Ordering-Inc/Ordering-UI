@@ -36,6 +36,15 @@ export const WrapAllCategories = styled.div`
       width: 41px;
     }
   }
+  .category-description {
+    margin-left: 15px;
+    margin-bottom: 10px;
+    p {
+      margin: 0;
+      color: #909BA9;
+    }
+  }
+
   .wrap-header {
     display: flex;
     justify-content: space-between;
@@ -59,3 +68,5 @@ export const WrapperNotFound = styled.div`
     height: 100%;
   }
 `
+
+export const HeaderWrapper = styled.div``
