@@ -43,6 +43,7 @@ import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { getDistance } from '../../../../../utils'
+import { BusinessPreorder } from '../BusinessPreorder'
 
 export const Header = (props) => {
   const {
@@ -70,6 +71,8 @@ export const Header = (props) => {
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
   const [modalPageToShow, setModalPageToShow] = useState(null)
+  const [preorderBusiness, setPreorderBusiness] = useState(null)
+
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
 
@@ -155,6 +158,14 @@ export const Header = (props) => {
   const handleOpenLoginSignUp = (index) => {
     setModalPageToShow(index)
     setAuthModalOpen(true)
+  }
+
+  const handleClosePreorder = () => {
+    setPreorderBusiness(null)
+  }
+
+  const handleBusinessClick = (business) => {
+    events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
   }
 
   useEffect(() => {
@@ -299,6 +310,7 @@ export const Header = (props) => {
                             auth={auth}
                             location={location}
                             isCustomerMode={isCustomerMode}
+                            setPreorderBusiness={setPreorderBusiness}
                           />
                         ) : (
                           <HeaderOption
@@ -518,6 +530,17 @@ export const Header = (props) => {
           onAccept={confirm.handleOnAccept}
           closeOnBackdrop={false}
         />
+        <Modal
+          open={!!preorderBusiness}
+          width='760px'
+          onClose={() => handleClosePreorder()}
+        >
+          <BusinessPreorder
+            business={preorderBusiness}
+            handleClick={handleBusinessClick}
+            showButton
+          />
+        </Modal>
       </HeaderContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
