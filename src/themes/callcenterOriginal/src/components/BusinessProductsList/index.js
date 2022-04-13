@@ -114,14 +114,16 @@ const BusinessProductsListUI = (props) => {
                           }
                           <h3>{category.name}</h3>
                         </div>
-                        <div className='category-description'>
-                          <p>
-                            {shortCategoryDescription}
-                            {category?.description?.length > 200 && (
-                              <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
-                            )}
-                          </p>
-                        </div>
+                        {category?.description && (
+                          <div className='category-description'>
+                            <p>
+                              {shortCategoryDescription}
+                              {category?.description?.length > 200 && (
+                                <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
+                              )}
+                            </p>
+                          </div>
+                        )}
                       </HeaderWrapper>
                       <ProductsListing>
                         {

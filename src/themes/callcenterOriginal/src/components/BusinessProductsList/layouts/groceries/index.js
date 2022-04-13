@@ -39,19 +39,32 @@ const BusinessProductsListUI = (props) => {
   const [{ configs }] = useConfig()
   const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
   const [openDescription, setOpenDescription] = useState(null)
+  const shortCategoryDescriptionSelected = category?.description?.length > 200 ? `${category?.description?.substring(0, 200)}...` : category?.description
 
   return (
     <ProductsContainer>
       {category?.id && (
         <WrapAllCategories id='container'>
-          <div className='category-title'>
-            {
-              category?.image && (
-                <img src={category.image} />
-              )
-            }
-            <h3>{category.name}</h3>
-          </div>
+          <HeaderWrapper>
+            <div className='category-title'>
+              {
+                category?.image && (
+                  <img src={category.image} />
+                )
+              }
+              <h3>{category.name}</h3>
+            </div>
+            {category?.description && (
+              <div className='category-description'>
+                <p>
+                  {shortCategoryDescriptionSelected}
+                  {category?.description?.length > 200 && (
+                    <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
+                  )}
+                </p>
+              </div>
+            )}
+          </HeaderWrapper>
           <ProductsListing>
             {
               categoryState?.products?.map(product => (
@@ -138,14 +151,16 @@ const BusinessProductsListUI = (props) => {
                           }
                           <h3>{category.name}</h3>
                         </div>
-                        <div className='category-description'>
-                          <p>
-                            {shortCategoryDescription}
-                            {category?.description?.length > 200 && (
-                              <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
-                            )}
-                          </p>
-                        </div>
+                        {category?.description && (
+                          <div className='category-description'>
+                            <p>
+                              {shortCategoryDescription}
+                              {category?.description?.length > 200 && (
+                                <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
+                              )}
+                            </p>
+                          </div>
+                        )}
                       </HeaderWrapper>
                       <Button
                         onClick={() => onClickCategory(category)}

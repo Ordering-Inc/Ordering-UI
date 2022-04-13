@@ -40,6 +40,9 @@ export const WrapAllCategories = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    button {
+      min-width: max-content;
+    }
   }
   .category-description {
     margin-left: 15px;
