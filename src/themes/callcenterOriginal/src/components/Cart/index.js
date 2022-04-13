@@ -51,7 +51,8 @@ const CartUI = (props) => {
     isStore,
     handleChangeComment,
     commentState,
-    handleRemoveOfferClick
+    handleRemoveOfferClick,
+    setPreorderBusiness
   } = props
 
   const theme = useTheme()
@@ -197,6 +198,7 @@ const CartUI = (props) => {
             handleStoreRedirect={handleStoreRedirect}
             handleCartOpen={handleCartOpen}
             isStore={isStore}
+            setPreorderBusiness={setPreorderBusiness}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion

@@ -12,7 +12,7 @@ import { useTheme } from 'styled-components'
 import { CartContent } from '../CartContent'
 
 export const CartPopover = (props) => {
-  const { open, auth, location, isCustomerMode } = props
+  const { open, auth, location, isCustomerMode, setPreorderBusiness } = props
   const [orderState] = useOrder()
   const theme = useTheme()
   const [events] = useEvent()
@@ -106,6 +106,7 @@ export const CartPopover = (props) => {
             carts={props.carts}
             isOrderStateCarts={!!orderState.carts}
             onClose={props.onClose}
+            setPreorderBusiness={setPreorderBusiness}
           />
           <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
         </PopoverBody>

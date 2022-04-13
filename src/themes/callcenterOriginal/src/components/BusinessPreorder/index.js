@@ -6,6 +6,7 @@ import {
   useConfig,
   useOrder
 } from 'ordering-components'
+import { useLocation } from 'react-router-dom'
 import moment from 'moment'
 import { useTheme } from 'styled-components'
 import { Select } from '../../styles/Select'
@@ -32,7 +33,8 @@ import {
   DaysSwiper,
   Day,
   DayName,
-  DayNumber
+  DayNumber,
+  ClosedBusinessMsg
 } from './styles'
 import { BusinessMenuList } from '../BusinessMenuList'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -49,22 +51,27 @@ const BusinessPreorderUI = (props) => {
     business,
     handleClick,
     datesList,
-    hoursList,
     dateSelected,
     timeSelected,
     handleChangeDate,
-    handleChangeTime
+    handleChangeTime,
+    showButton,
+    isAsap,
+    handleAsap
   } = props
 
-  const [{ optimizeImage, parseTime }] = useUtils()
+  const { pathname } = useLocation()
+  const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
   const [{ configs }] = useConfig()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const windowSize = useWindowSize()
+
   const [type, setType] = useState('business_hours')
   const [menu, setMenu] = useState(null)
   const [timeList, setTimeList] = useState([])
+  const [isEnabled, setIsEnabled] = useState(false)
 
   const preOrderType = [
     { value: 'business_menu', content: <TypeContent>{t('BUSINESS_MENU', 'Business menu')}</TypeContent> },
@@ -75,7 +82,13 @@ const BusinessPreorderUI = (props) => {
     handleClick && handleClick(business)
   }
 
+  const validateSelectedDate = (curdate, menu) => {
+    const day = moment(curdate).format('d')
+    setIsEnabled(menu.schedule[day].enabled || false)
+  }
+
   const getTimes = (curdate, menu) => {
+    validateSelectedDate(curdate, menu)
     const date = new Date()
     const dateParts = curdate.split('-')
     const dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
@@ -124,31 +137,19 @@ const BusinessPreorderUI = (props) => {
   }
 
   useEffect(() => {
-    if (!menu && !hoursList) return
-
-    if (menu) {
-      const _times = getTimes(dateSelected, menu)
-      setTimeList(_times)
-    } else {
-      const _timeLists = hoursList.map(hour => {
-        return {
-          value: hour.startTime,
-          text: configs?.format_time?.value === '12' ? (
-            hour.startTime.includes('12')
-              ? `${hour.startTime}PM`
-              : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })
-          ) : (
-            parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'HH:mm' })
-          )
-        }
-      })
-      setTimeList(_timeLists)
-    }
-  }, [dateSelected, hoursList, menu])
+    const selectedMenu = menu ? (menu?.use_business_schedule ? business : menu) : business
+    const _times = getTimes(dateSelected, selectedMenu)
+    setTimeList(_times)
+  }, [dateSelected, menu])
 
   useEffect(() => {
     if (type === 'business_hours') setMenu(null)
   }, [type])
+
+  useEffect(() => {
+    if (pathname.includes('store')) return
+    handleAsap && handleAsap()
+  }, [])
 
   return (
     <BusinessPreorderContainer>
@@ -182,24 +183,24 @@ const BusinessPreorderUI = (props) => {
           </MonthYearLayer>
           <DaysSwiper left={<BsCaretLeftFill />}>
             <Swiper
-              spaceBetween={10}
+              spaceBetween={0}
               navigation
               breakpoints={{
                 0: {
                   slidesPerView: 4,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 },
                 400: {
                   slidesPerView: 5,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 },
                 550: {
                   slidesPerView: 6,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 },
                 769: {
                   slidesPerView: configs?.max_days_preorder?.value < 7 ? configs?.max_days_preorder?.value : 7,
-                  spaceBetween: 20
+                  spaceBetween: 0
                 }
               }}
               freeMode
@@ -228,26 +229,35 @@ const BusinessPreorderUI = (props) => {
         </DateWrapper>
 
         <TimeListWrapper>
-          {timeList.map((time, i) => (
-            <TimeItem
-              key={i}
-              active={timeSelected === time.value}
-              onClick={() => handleChangeTime(time.value)}
-            >
-              <span>{time.text}</span>
-            </TimeItem>
-          ))}
+          {(isEnabled && timeList?.length > 0) ? (
+            <>
+              {timeList.map((time, i) => (
+                <TimeItem
+                  key={i}
+                  active={timeSelected === time.value}
+                  onClick={() => handleChangeTime(time.value)}
+                >
+                  <span>{time.text}</span>
+                </TimeItem>
+              ))}
+            </>
+          ) : (
+            <ClosedBusinessMsg>{t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')}</ClosedBusinessMsg>
+          )}
         </TimeListWrapper>
       </OrderTimeWrapper>
-      <ButtonWrapper>
-        <Button
-          color='primary'
-          onClick={goToBusinessPage}
-        >
-          {t('GO_TO_MENU', 'Go to menu')}
-          <BsArrowRight />
-        </Button>
-      </ButtonWrapper>
+      {showButton && (
+        <ButtonWrapper>
+          <Button
+            color='primary'
+            onClick={goToBusinessPage}
+            disabled={isAsap || !(dateSelected && timeSelected)}
+          >
+            {t('GO_TO_MENU', 'Go to menu')}
+            <BsArrowRight />
+          </Button>
+        </ButtonWrapper>
+      )}
       {orderState?.loading && (
         <Layer>
           {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (
