@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TypeContent = exports.Title = exports.TimeListWrapper = exports.TimeItem = exports.SelectWrapper = exports.PreorderTypeWrapper = exports.OrderTimeWrapper = exports.MonthYearLayer = exports.LogoWrapper = exports.Layer = exports.DaysSwiper = exports.DayNumber = exports.DayName = exports.Day = exports.DateWrapper = exports.ButtonWrapper = exports.BusinessPreorderContainer = exports.BusinessLogo = void 0;
+exports.TypeContent = exports.Title = exports.TimeListWrapper = exports.TimeItem = exports.SelectWrapper = exports.PreorderTypeWrapper = exports.OrderTimeWrapper = exports.MonthYearLayer = exports.LogoWrapper = exports.Layer = exports.DaysSwiper = exports.DayNumber = exports.DayName = exports.Day = exports.DateWrapper = exports.ClosedBusinessMsg = exports.ButtonWrapper = exports.BusinessPreorderContainer = exports.BusinessLogo = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -128,3 +128,7 @@ exports.DayName = DayName;
 var DayNumber = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  font-weight: 500;\n  font-size: 20px;\n  line-height: 30px;\n"])));
 
 exports.DayNumber = DayNumber;
+
+var ClosedBusinessMsg = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-size: 16px;\n  width: 100%;\n"])));
+
+exports.ClosedBusinessMsg = ClosedBusinessMsg;

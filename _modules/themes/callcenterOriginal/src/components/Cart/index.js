@@ -93,7 +93,8 @@ var CartUI = function CartUI(props) {
       isStore = props.isStore,
       handleChangeComment = props.handleChangeComment,
       commentState = props.commentState,
-      handleRemoveOfferClick = props.handleRemoveOfferClick;
+      handleRemoveOfferClick = props.handleRemoveOfferClick,
+      setPreorderBusiness = props.setPreorderBusiness;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -322,7 +323,8 @@ var CartUI = function CartUI(props) {
     handleClearProducts: handleClearProducts,
     handleStoreRedirect: handleStoreRedirect,
     handleCartOpen: handleCartOpen,
-    isStore: isStore
+    isStore: isStore,
+    setPreorderBusiness: setPreorderBusiness
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,

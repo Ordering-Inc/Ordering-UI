@@ -57,6 +57,8 @@ var _Confirm = require("../Confirm");
 
 var _utils = require("../../../../../utils");
 
+var _BusinessPreorder = require("../BusinessPreorder");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -173,6 +175,11 @@ var Header = function Header(props) {
       isAddressFormOpen = _useState16[0],
       setIsAddressFormOpen = _useState16[1];
 
+  var _useState17 = (0, _react.useState)(null),
+      _useState18 = _slicedToArray(_useState17, 2),
+      preorderBusiness = _useState18[0],
+      setPreorderBusiness = _useState18[1];
+
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
 
@@ -240,6 +247,19 @@ var Header = function Header(props) {
   var handleOpenLoginSignUp = function handleOpenLoginSignUp(page) {
     events.emit('go_to_page', {
       page: 'home'
+    });
+  };
+
+  var handleClosePreorder = function handleClosePreorder() {
+    setPreorderBusiness(null);
+  };
+
+  var handleBusinessClick = function handleBusinessClick(business) {
+    events.emit('go_to_page', {
+      page: 'business',
+      params: {
+        store: business.slug
+      }
     });
   };
 
@@ -361,7 +381,8 @@ var Header = function Header(props) {
     },
     auth: auth,
     location: location,
-    isCustomerMode: isCustomerMode
+    isCustomerMode: isCustomerMode,
+    setPreorderBusiness: setPreorderBusiness
   }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "cart",
     totalCarts: cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length,
@@ -488,7 +509,17 @@ var Header = function Header(props) {
     },
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: !!preorderBusiness,
+    width: "760px",
+    onClose: function onClose() {
+      return handleClosePreorder();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
+    business: preorderBusiness,
+    handleClick: handleBusinessClick,
+    showButton: true
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

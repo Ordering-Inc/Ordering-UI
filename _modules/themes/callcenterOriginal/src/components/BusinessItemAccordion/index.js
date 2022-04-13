@@ -51,7 +51,9 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       handleClearProducts = props.handleClearProducts,
       handleStoreRedirect = props.handleStoreRedirect,
       handleCartOpen = props.handleCartOpen,
-      isStore = props.isStore;
+      isStore = props.isStore,
+      checkoutButtonDisabled = props.checkoutButtonDisabled,
+      setPreorderBusiness = props.setPreorderBusiness;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -119,6 +121,10 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     setCartProductUpdated(cart === null || cart === void 0 ? void 0 : cart.uuid);
   };
 
+  var handleOpenBusinessMenu = function handleOpenBusinessMenu(business) {
+    setPreorderBusiness && setPreorderBusiness(business);
+  };
+
   (0, _react.useEffect)(function () {
     if (cartProductUpdated === uuid || currentCartUuid === uuid && (!cartProductUpdated || cartProductUpdated === uuid)) {
       activeAccordion(true);
@@ -176,7 +182,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   }, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("div", null, handleStoreRedirect && !isCartOnProductsList && !isStore && /*#__PURE__*/_react.default.createElement("span", {
     ref: businessStore,
     onClick: function onClick() {
-      return handleStoreRedirect(business === null || business === void 0 ? void 0 : business.slug);
+      return isClosed ? handleOpenBusinessMenu(business) : handleStoreRedirect(business === null || business === void 0 ? void 0 : business.slug);
     },
     className: "go-store"
   }, t('GO_TO_STORE', 'Go to store')), !isClosed && !!isProducts && !isCartPending && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isStore && /*#__PURE__*/_react.default.createElement("span", null, "\u2022"), /*#__PURE__*/_react.default.createElement("span", {

@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
+var _reactRouterDom = require("react-router-dom");
+
 var _moment = _interopRequireDefault(require("moment"));
 
 var _styledComponents = require("styled-components");
@@ -71,17 +73,20 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
   var business = props.business,
       handleClick = props.handleClick,
       datesList = props.datesList,
-      hoursList = props.hoursList,
       dateSelected = props.dateSelected,
       timeSelected = props.timeSelected,
       handleChangeDate = props.handleChangeDate,
-      handleChangeTime = props.handleChangeTime;
+      handleChangeTime = props.handleChangeTime,
+      showButton = props.showButton,
+      isAsap = props.isAsap,
+      handleAsap = props.handleAsap;
+
+  var _useLocation = (0, _reactRouterDom.useLocation)(),
+      pathname = _useLocation.pathname;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      optimizeImage = _useUtils2$.optimizeImage,
-      parseTime = _useUtils2$.parseTime;
+      optimizeImage = _useUtils2[0].optimizeImage;
 
   var theme = (0, _styledComponents.useTheme)();
 
@@ -114,6 +119,11 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
       timeList = _useState6[0],
       setTimeList = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isEnabled = _useState8[0],
+      setIsEnabled = _useState8[1];
+
   var preOrderType = [{
     value: 'business_menu',
     content: /*#__PURE__*/_react.default.createElement(_styles.TypeContent, null, t('BUSINESS_MENU', 'Business menu'))
@@ -126,7 +136,13 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     handleClick && handleClick(business);
   };
 
+  var validateSelectedDate = function validateSelectedDate(curdate, menu) {
+    var day = (0, _moment.default)(curdate).format('d');
+    setIsEnabled(menu.schedule[day].enabled || false);
+  };
+
   var getTimes = function getTimes(curdate, menu) {
+    validateSelectedDate(curdate, menu);
     var date = new Date();
     var dateParts = curdate.split('-');
     var dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
@@ -180,32 +196,19 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (!menu && !hoursList) return;
+    var selectedMenu = menu ? menu !== null && menu !== void 0 && menu.use_business_schedule ? business : menu : business;
 
-    if (menu) {
-      var _times = getTimes(dateSelected, menu);
+    var _times = getTimes(dateSelected, selectedMenu);
 
-      setTimeList(_times);
-    } else {
-      var _timeLists = hoursList.map(function (hour) {
-        var _configs$format_time2;
-
-        return {
-          value: hour.startTime,
-          text: (configs === null || configs === void 0 ? void 0 : (_configs$format_time2 = configs.format_time) === null || _configs$format_time2 === void 0 ? void 0 : _configs$format_time2.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
-            outputFormat: 'hh:mma'
-          }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
-            outputFormat: 'HH:mm'
-          })
-        };
-      });
-
-      setTimeList(_timeLists);
-    }
-  }, [dateSelected, hoursList, menu]);
+    setTimeList(_times);
+  }, [dateSelected, menu]);
   (0, _react.useEffect)(function () {
     if (type === 'business_hours') setMenu(null);
   }, [type]);
+  (0, _react.useEffect)(function () {
+    if (pathname.includes('store')) return;
+    handleAsap && handleAsap();
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessPreorderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
   }), /*#__PURE__*/_react.default.createElement("p", null, business.name)), /*#__PURE__*/_react.default.createElement(_styles.PreorderTypeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PREORDER_TYPE', 'Preorder type')), /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
@@ -221,24 +224,24 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
     left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
-    spaceBetween: 10,
+    spaceBetween: 0,
     navigation: true,
     breakpoints: {
       0: {
         slidesPerView: 4,
-        spaceBetween: 20
+        spaceBetween: 0
       },
       400: {
         slidesPerView: 5,
-        spaceBetween: 20
+        spaceBetween: 0
       },
       550: {
         slidesPerView: 6,
-        spaceBetween: 20
+        spaceBetween: 0
       },
       769: {
         slidesPerView: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) < 7 ? configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value : 7,
-        spaceBetween: 20
+        spaceBetween: 0
       }
     },
     freeMode: true,
@@ -261,7 +264,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
         return handleChangeDate(date);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.DayName, null, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, null, dayNumber)));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, timeList.map(function (time, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, isEnabled && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, timeList.map(function (time, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TimeItem, {
       key: i,
       active: timeSelected === time.value,
@@ -269,9 +272,10 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
         return handleChangeTime(time.value);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))), showButton && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    onClick: goToBusinessPage
+    onClick: goToBusinessPage,
+    disabled: isAsap || !(dateSelected && timeSelected)
   }, t('GO_TO_MENU', 'Go to menu'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, null, (window.location.pathname !== '/search' || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
       top: windowSize.width <= 768 ? '50%' : '40%',

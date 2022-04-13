@@ -51,7 +51,8 @@ var CartPopover = function CartPopover(props) {
   var open = props.open,
       auth = props.auth,
       location = props.location,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      setPreorderBusiness = props.setPreorderBusiness;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -169,7 +170,8 @@ var CartPopover = function CartPopover(props) {
     isCartPopover: true,
     carts: props.carts,
     isOrderStateCarts: !!orderState.carts,
-    onClose: props.onClose
+    onClose: props.onClose,
+    setPreorderBusiness: setPreorderBusiness
   }), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",
     ref: arrowElement,
