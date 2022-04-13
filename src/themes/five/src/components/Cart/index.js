@@ -49,7 +49,8 @@ const CartUI = (props) => {
     isStore,
     handleChangeComment,
     commentState,
-    handleRemoveOfferClick
+    handleRemoveOfferClick,
+    setPreorderBusiness
   } = props
 
   const theme = useTheme()
@@ -209,6 +210,7 @@ const CartUI = (props) => {
             total={cart?.total}
             handleClickCheckout={handleClickCheckout}
             checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
+            setPreorderBusiness={setPreorderBusiness}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion

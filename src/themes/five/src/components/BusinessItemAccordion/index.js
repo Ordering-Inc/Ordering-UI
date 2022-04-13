@@ -32,7 +32,8 @@ export const BusinessItemAccordion = (props) => {
     isStore,
     total,
     handleClickCheckout,
-    checkoutButtonDisabled
+    checkoutButtonDisabled,
+    setPreorderBusiness
   } = props
 
   const [orderState] = useOrder()
@@ -71,6 +72,10 @@ export const BusinessItemAccordion = (props) => {
 
   const handleCartProductUpdated = (product, cart) => {
     setCartProductUpdated(cart?.uuid)
+  }
+
+  const handleOpenBusinessMenu = (business) => {
+    setPreorderBusiness && setPreorderBusiness(business)
   }
 
   useEffect(() => {
@@ -130,7 +135,7 @@ export const BusinessItemAccordion = (props) => {
                     {handleStoreRedirect && !isCartOnProductsList && !isStore && (
                       <span
                         ref={businessStore}
-                        onClick={() => handleStoreRedirect(business?.slug)}
+                        onClick={() => isClosed ? handleOpenBusinessMenu(business) : handleStoreRedirect(business?.slug)}
                         className='go-store'
                       >
                         {t('GO_TO_STORE', 'Go to store')}

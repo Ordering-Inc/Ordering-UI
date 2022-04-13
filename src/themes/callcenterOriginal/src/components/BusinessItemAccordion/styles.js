@@ -96,6 +96,10 @@ export const ContentInfo = styled.div`
     margin-right: 10px;
     margin-left: 0;
   `}
+  
+  span {
+    cursor: pointer;
+  }
 
   h2, span {
     margin: 0px;
