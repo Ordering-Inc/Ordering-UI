@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BusinessProductsList = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -13,9 +15,13 @@ var _SingleProductCard = require("../SingleProductCard");
 
 var _NotFoundSource = require("../NotFoundSource");
 
+var _Modal = require("../Modal");
+
 var _styles = require("./styles");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -72,6 +78,12 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       configs = _useConfig2[0].configs;
 
   var isUseParentCategory = (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1';
+
+  var _useState = (0, _react.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      openDescription = _useState2[0],
+      setOpenDescription = _useState2[1];
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -115,7 +127,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
   }).map(function (category, i, _categories) {
-    var _categoryState$produc4, _categoryState$produc5, _categoryState$produc6, _categoryState$produc7;
+    var _categoryState$produc4, _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _category$description, _category$description2, _category$description3;
 
     var products = !isUseParentCategory ? (_categoryState$produc4 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc5 = categoryState.products) === null || _categoryState$produc5 === void 0 ? void 0 : _categoryState$produc5.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
@@ -126,15 +138,22 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return cat.category_id === (product === null || product === void 0 ? void 0 : product.category_id);
       });
     })) !== null && _categoryState$produc6 !== void 0 ? _categoryState$produc6 : [];
+    var shortCategoryDescription = (category === null || category === void 0 ? void 0 : (_category$description = category.description) === null || _category$description === void 0 ? void 0 : _category$description.length) > 200 ? "".concat(category === null || category === void 0 ? void 0 : (_category$description2 = category.description) === null || _category$description2 === void 0 ? void 0 : _category$description2.substring(0, 200), "...") : category === null || category === void 0 ? void 0 : category.description;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: category === null || category === void 0 ? void 0 : category.id
     }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
       id: "category".concat(category === null || category === void 0 ? void 0 : category.id)
-    }, /*#__PURE__*/_react.default.createElement("div", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.HeaderWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "category-title"
     }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
       src: category.image
-    }), /*#__PURE__*/_react.default.createElement("h3", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
+    }), /*#__PURE__*/_react.default.createElement("h3", null, category.name)), (category === null || category === void 0 ? void 0 : category.description) && /*#__PURE__*/_react.default.createElement("div", {
+      className: "category-description"
+    }, /*#__PURE__*/_react.default.createElement("p", null, shortCategoryDescription, (category === null || category === void 0 ? void 0 : (_category$description3 = category.description) === null || _category$description3 === void 0 ? void 0 : _category$description3.length) > 200 && /*#__PURE__*/_react.default.createElement("span", {
+      onClick: function onClick() {
+        return setOpenDescription(category);
+      }
+    }, t('SEE_MORE', 'See more'))))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
       var _currentCart$products3;
 
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
@@ -169,7 +188,15 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, "ERROR: [", e, "]");
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: openDescription,
+    title: openDescription === null || openDescription === void 0 ? void 0 : openDescription.name,
+    onClose: function onClose() {
+      return setOpenDescription(null);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.DescriptionModalContainer, null, (openDescription === null || openDescription === void 0 ? void 0 : openDescription.image) && /*#__PURE__*/_react.default.createElement("img", {
+    src: openDescription.image
+  }), /*#__PURE__*/_react.default.createElement("p", null, openDescription === null || openDescription === void 0 ? void 0 : openDescription.description)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperNotFound = exports.WrapAllCategories = exports.ProductsListing = exports.ProductsContainer = exports.ErrorMessage = void 0;
+exports.WrapperNotFound = exports.WrapAllCategories = exports.ProductsListing = exports.ProductsContainer = exports.HeaderWrapper = exports.ErrorMessage = exports.DescriptionModalContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -31,7 +31,7 @@ var ProductsListing = _styledComponents.default.div(_templateObject3 || (_templa
 
 exports.ProductsListing = ProductsListing;
 
-var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    padding-top: 5px;\n    padding-bottom: 12px;\n    margin-left: 10px;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n      margin-right: 10px;\n      ", "\n    }\n\n    @media (min-width: 993px) {\n      margin: 0px;\n    }\n  }\n\n  h3 {\n    font-weight: 600;\n    font-size: 24px;\n    color: ", ";\n    margin: 0px 0px 0px 10px;\n    ", "\n\n    @media (min-width: 993px) {\n      margin: 0px;\n    }\n  }\n"])), function (props) {
+var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    padding-top: 5px;\n    padding-bottom: 12px;\n    margin-left: 10px;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n      margin-right: 10px;\n      ", "\n    }\n\n    @media (min-width: 993px) {\n      margin: 0px;\n    }\n  }\n\n  .category-description {\n    margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    p {\n      margin: 0;\n      color: #909BA9;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n    }\n  }\n\n  h3 {\n    font-weight: 600;\n    font-size: 24px;\n    color: ", ";\n    margin: 0px 0px 0px 10px;\n    ", "\n\n    @media (min-width: 993px) {\n      margin: 0px;\n    }\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
@@ -39,6 +39,8 @@ var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_temp
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
+}, function (props) {
+  return props.theme.colors.primary;
 }, function (props) {
   var _props$theme3;
 
@@ -54,3 +56,11 @@ exports.WrapAllCategories = WrapAllCategories;
 var WrapperNotFound = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  height: 500px;\n  > div{\n    height: 100%;\n  }\n"])));
 
 exports.WrapperNotFound = WrapperNotFound;
+
+var HeaderWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral([""])));
+
+exports.HeaderWrapper = HeaderWrapper;
+
+var DescriptionModalContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  img{\n    border-radius: 7.6px;\n    width: 300px;\n    height: 300px;\n    min-width: 300px;\n    min-height: 300px;\n    margin-bottom: 20px;\n  }\n"])));
+
+exports.DescriptionModalContainer = DescriptionModalContainer;
