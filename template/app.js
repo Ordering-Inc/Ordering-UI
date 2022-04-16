@@ -11,7 +11,7 @@ import { useSession, useLanguage, useOrder, Analytics, useConfig, FacebookPixel 
 import { Header } from '../src/components/Header'
 import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
-import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
+import { NotNetworkConnectivity } from '../src/themes/five/src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { Alert } from '../src/components/Confirm'
 import { SmartAppBanner } from '../src/components/SmartAppBanner'
