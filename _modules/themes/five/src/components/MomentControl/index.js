@@ -174,7 +174,8 @@ var MomentControlUI = function MomentControlUI(props) {
     },
     freeMode: true,
     watchSlidesProgress: true,
-    className: "swiper-datelist"
+    className: "swiper-datelist",
+    preventClicksPropagation: false
   }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
     var dateParts = date.split('-');
 

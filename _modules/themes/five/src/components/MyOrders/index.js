@@ -116,15 +116,18 @@ var MyOrders = function MyOrders(props) {
   }, t('ORDER_NOW', 'Order now'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (selectItem === 'all' || selectItem === 'preorder') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     preOrders: true,
     horizontal: true,
-    setIsEmptyPreorder: setIsEmptyPreorder
+    setIsEmptyPreorder: setIsEmptyPreorder,
+    selectItem: selectItem
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'active') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     activeOrders: true,
     horizontal: true,
-    setIsEmptyActive: setIsEmptyActive
+    setIsEmptyActive: setIsEmptyActive,
+    selectItem: selectItem
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'past') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     pastOrders: true,
     horizontal: true,
-    setIsEmptyPast: setIsEmptyPast
+    setIsEmptyPast: setIsEmptyPast,
+    selectItem: selectItem
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
