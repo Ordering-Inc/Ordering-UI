@@ -206,6 +206,7 @@ const BusinessPreorderUI = (props) => {
               freeMode
               watchSlidesProgress
               className='swiper-datelist'
+              preventClicksPropagation={false}
             >
               {
                 datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10)).map(date => {
