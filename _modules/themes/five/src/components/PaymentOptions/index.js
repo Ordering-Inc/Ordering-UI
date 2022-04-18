@@ -29,6 +29,8 @@ var _orderingComponents = require("ordering-components");
 
 var _Modal = require("../Modal");
 
+var _Confirm = require("../Confirm");
+
 var _PaymentOptionCash = require("../PaymentOptionCash");
 
 var _PaymentOptionStripe = require("../PaymentOptionStripe");
@@ -172,13 +174,36 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       token = _useSession2[0].token;
 
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
+
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
 
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
-    var isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway);
-    handlePaymethodClick(paymethod, isPopupMethod);
+    if ((cart === null || cart === void 0 ? void 0 : cart.balance) > 0) {
+      var isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway);
+      handlePaymethodClick(paymethod, isPopupMethod);
+      return;
+    }
+
+    setAlertState({
+      open: true,
+      content: [t('CART_BALANCE_ZERO', 'Sorry, the amount to pay is equal to zero and it is not necessary to select a payment method')]
+    });
+  };
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
   };
 
   (0, _react.useEffect)(function () {
@@ -353,7 +378,19 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     },
     onPlaceOrderClick: onPlaceOrderClick,
     setCreateOrder: setCreateOrder
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('PAYMENT_METHODS', 'Payment methods'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
