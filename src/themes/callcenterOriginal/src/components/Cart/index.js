@@ -51,7 +51,8 @@ const CartUI = (props) => {
     isStore,
     handleChangeComment,
     commentState,
-    handleRemoveOfferClick
+    handleRemoveOfferClick,
+    setPreorderBusiness
   } = props
 
   const theme = useTheme()
@@ -197,6 +198,7 @@ const CartUI = (props) => {
             handleStoreRedirect={handleStoreRedirect}
             handleCartOpen={handleCartOpen}
             isStore={isStore}
+            setPreorderBusiness={setPreorderBusiness}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
@@ -295,7 +297,7 @@ const CartUI = (props) => {
                         <tr key={fee.id}>
                           <td className='icon'>
                             {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            ({parsePrice(fee?.fixed)} + {fee.percentage}%)
+                            ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>

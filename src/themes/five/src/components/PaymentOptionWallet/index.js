@@ -88,7 +88,7 @@ const PaymentOptionWalletUI = (props) => {
                 <Checkbox
                   name={`payment_option_${wallet.type}`}
                   id={`custom-checkbox-${idx}`}
-                  disabled={(cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0 }
+                  disabled={(cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0}
                   checked={checkedState[idx]}
                   value={`payment_option_${wallet.type}`}
                   onChange={() => handleOnChange(idx, wallet)}

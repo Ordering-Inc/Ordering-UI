@@ -76,6 +76,7 @@ export const MyOrders = (props) => {
                   preOrders
                   horizontal
                   setIsEmptyPreorder={setIsEmptyPreorder}
+                  selectItem={selectItem}
                 />
                 <Divider />
               </>
@@ -87,6 +88,7 @@ export const MyOrders = (props) => {
                   activeOrders
                   horizontal
                   setIsEmptyActive={setIsEmptyActive}
+                  selectItem={selectItem}
                 />
                 <Divider />
               </>
@@ -98,6 +100,7 @@ export const MyOrders = (props) => {
                   pastOrders
                   horizontal
                   setIsEmptyPast={setIsEmptyPast}
+                  selectItem={selectItem}
                 />
                 <Divider />
               </>

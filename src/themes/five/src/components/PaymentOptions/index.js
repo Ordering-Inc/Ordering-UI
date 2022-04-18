@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import BilStripe from '@meronex/icons/bi/BilStripe'
@@ -14,6 +14,7 @@ import {
 } from 'ordering-components'
 
 import { Modal } from '../Modal'
+import { Alert } from '../Confirm'
 import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
@@ -96,6 +97,7 @@ const PaymentOptionsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
@@ -104,8 +106,22 @@ const PaymentOptionsUI = (props) => {
   const stripeDirectMethods = ['stripe_direct', ...methodsPay]
 
   const handlePaymentMethodClick = (paymethod) => {
-    const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod?.gateway)
-    handlePaymethodClick(paymethod, isPopupMethod)
+    if (cart?.balance > 0) {
+      const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod?.gateway)
+      handlePaymethodClick(paymethod, isPopupMethod)
+      return
+    }
+    setAlertState({
+      open: true,
+      content: [t('CART_BALANCE_ZERO', 'Sorry, the amount to pay is equal to zero and it is not necessary to select a payment method')]
+    })
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
   useEffect(() => {
@@ -330,6 +346,15 @@ const PaymentOptionsUI = (props) => {
             setCreateOrder={setCreateOrder}
           />
         </Modal>
+        <Alert
+          title={t('PAYMENT_METHODS', 'Payment methods')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
+          closeOnBackdrop={false}
+        />
       </PaymentMethodsContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
