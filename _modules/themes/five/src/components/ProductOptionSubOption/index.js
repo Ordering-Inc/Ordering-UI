@@ -66,7 +66,8 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
       suboption = props.suboption,
       toggleSelect = props.toggleSelect,
       changePosition = props.changePosition,
-      isSoldOut = props.isSoldOut;
+      isSoldOut = props.isSoldOut,
+      scrollDown = props.scrollDown;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -100,6 +101,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     var _option$suboptions;
 
     toggleSelect();
+    scrollDown();
 
     if (balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 ? void 0 : (_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : _option$suboptions.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1) && !state.selected) {
       setShowMessage(true);

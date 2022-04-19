@@ -359,6 +359,31 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       setPricePerWeightUnit((product === null || product === void 0 ? void 0 : product.price) / (product === null || product === void 0 ? void 0 : product.weight));
     }
   }, [product]);
+
+  var scrollDown = function scrollDown() {
+    var isErrors = Object.values(errors).length > 0;
+
+    if (!isErrors) {
+      return;
+    }
+
+    var myElement = document.getElementsByClassName('error')[0];
+    var productContainer = document.getElementsByClassName('product-container')[0];
+
+    if (!myElement || !productContainer) {
+      return;
+    }
+
+    var topPos = myElement.offsetTop - productContainer.offsetTop;
+
+    if (windowSize.width <= 768) {
+      var productImage = document.getElementById('product_image');
+      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0);
+    }
+
+    (0, _utils.scrollTo)(productContainer, topPos, 200);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -542,7 +567,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
           option: option,
           suboption: suboption,
           state: currentState,
-          isSoldOut: isSoldOut
+          isSoldOut: isSoldOut,
+          scrollDown: scrollDown
         });
       }))));
     });
