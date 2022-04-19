@@ -239,6 +239,24 @@ const ProductOptionsUI = (props) => {
     }
   }, [product])
 
+  const scrollDown = () => {
+    const isErrors = Object.values(errors).length > 0
+    if (!isErrors) {
+      return
+    }
+    const myElement = document.getElementsByClassName('error')[0]
+    const productContainer = document.getElementsByClassName('product-container')[0]
+    if (!myElement || !productContainer) {
+      return
+    }
+    let topPos = myElement.offsetTop - productContainer.offsetTop
+    if (windowSize.width <= 768) {
+      const productImage = document.getElementById('product_image')
+      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
+    }
+    scrollTo(productContainer, topPos, 200)
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -479,6 +497,7 @@ const ProductOptionsUI = (props) => {
                                           suboption={suboption}
                                           state={currentState}
                                           isSoldOut={isSoldOut}
+                                          scrollDown={scrollDown}
                                         />
                                       )
                                     })
