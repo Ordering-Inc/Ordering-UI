@@ -213,6 +213,10 @@ const MessagesUI = (props) => {
         return 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS'
       case 21:
         return 'ORDER_CUSTOMER_ARRIVED_BUSINESS'
+      case 22:
+        return 'ORDER_LOOKING_FOR_DRIVER'
+      case 23:
+        return 'ORDER_DRIVER_ON_WAY'
       default:
         return getTraduction(status)
     }
@@ -271,16 +275,16 @@ const MessagesUI = (props) => {
                 {message.change?.attribute !== 'driver_id' ? (
                   <BubbleConsole>
                     {t('ORDER', 'Order')} {' '}
-                    <strong>{t(message.change.attribute.toUpperCase(), message.change.attribute.replace('_', ' '))}</strong> {}
+                    <strong>{t(message.change.attribute.toUpperCase(), message.change.attribute.replace('_', ' '))}</strong> { }
                     {t('CHANGED_FROM', 'Changed from')} {' '}
                     {filterSpecialStatus.includes(message.change.attribute) ? (
                       <>
                         {message.change.old === null ? <strong>0</strong> : (
                           <>
-                            <strong>{ message.change.old }</strong> {' '}
+                            <strong>{message.change.old}</strong> {' '}
                           </>
                         )}
-                        <> {t('TO', 'to')} {' '} <strong>{ message.change.new }</strong> {t('MINUTES', 'Minutes')}</>
+                        <> {t('TO', 'to')} {' '} <strong>{message.change.new}</strong> {t('MINUTES', 'Minutes')}</>
                       </>
                     ) : (
                       <>
@@ -467,12 +471,12 @@ const MessagesUI = (props) => {
         }
       </Chat>
       {(parseInt(order?.status) === 1 ||
-          parseInt(order?.status) === 2 ||
-          parseInt(order?.status) === 5 ||
-          parseInt(order?.status) === 6 ||
-          parseInt(order?.status) === 10 ||
-          parseInt(order?.status) === 11 ||
-          parseInt(order?.status) === 12
+        parseInt(order?.status) === 2 ||
+        parseInt(order?.status) === 5 ||
+        parseInt(order?.status) === 6 ||
+        parseInt(order?.status) === 10 ||
+        parseInt(order?.status) === 11 ||
+        parseInt(order?.status) === 12
       ) && driver
         ? (
           <NotSendMessage>
