@@ -22,7 +22,8 @@
     "titleHomeColor": "#FFFFFF",
     "subtitleHomeColor": "#FFFFFF",
     "warning100": "#FFF4CC",
-    "warning500": "#FFC700"
+    "warning500": "#FFC700",
+    "danger500": "#E63757"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",

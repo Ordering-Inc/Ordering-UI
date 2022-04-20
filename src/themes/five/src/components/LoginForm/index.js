@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -28,7 +28,8 @@ import {
   InputWrapper,
   LoginDivider,
   DividerLine,
-  Title
+  Title,
+  ValidationText
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -78,7 +79,6 @@ const LoginFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const [passwordSee, setPasswordSee] = useState(false)
-  const emailInput = useRef(null)
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
@@ -166,7 +166,6 @@ const LoginFormUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
   }
 
   const handleChangePhoneNumber = (number, isValid) => {
@@ -198,24 +197,6 @@ const LoginFormUI = (props) => {
   }, [formState])
 
   useEffect(() => {
-    if (Object.keys(formMethods.errors).length > 0) {
-      setAlertState({
-        open: true,
-        content: Object.values(formMethods.errors).map(error => error.message)
-      })
-    }
-  }, [formMethods.errors])
-
-  useEffect(() => {
-    formMethods.register('email', {
-      required: loginTab === 'email'
-        ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
-        : null,
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-      }
-    })
     formMethods.register('cellphone', {
       required: loginTab === 'cellphone'
         ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
@@ -310,27 +291,53 @@ const LoginFormUI = (props) => {
                   <BeforeMidComponents key={i} {...props} />))
               }
               {useLoginByEmail && loginTab === 'email' && (
-                <InputWrapper>
-                  <Input
-                    type='email'
-                    name='email'
-                    aria-label='email'
-                    placeholder={t('EMAIL', 'Email')}
-                    ref={(e) => (emailInput.current = e)}
-                    onChange={handleChangeInputEmail}
-                    autoComplete='off'
-                  />
-                  <InputBeforeIcon>
-                    <Envelope />
-                  </InputBeforeIcon>
-                </InputWrapper>
+                <>
+                  {formMethods.errors?.email && (
+                    <ValidationText>
+                      {formMethods.errors?.email?.message} {formMethods?.errors?.email?.type === 'required' && '*'}
+                    </ValidationText>
+                  )}
+                  {formMethods.errors?.email?.type === 'pattern' && (
+                    <ValidationText>
+                      {t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))}
+                    </ValidationText>
+                  )}
+                  <InputWrapper>
+                    <Input
+                      type='email'
+                      name='email'
+                      aria-label='email'
+                      placeholder={t('EMAIL', 'Email')}
+                      ref={formMethods.register({
+                        required: loginTab === 'email'
+                          ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
+                          : null,
+                        pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                      })}
+                      onChange={handleChangeInputEmail}
+                      autoComplete='off'
+                      isError={formMethods.errors?.email}
+                    />
+                    <InputBeforeIcon>
+                      <Envelope />
+                    </InputBeforeIcon>
+                  </InputWrapper>
+                </>
               )}
               {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
-                <InputPhoneNumber
-                  value={credentials?.cellphone}
-                  setValue={handleChangePhoneNumber}
-                  handleIsValid={() => { }}
-                />
+                <>
+                  {formMethods.errors?.cellphone && !credentials?.cellphone && (
+                    <ValidationText>
+                      {formMethods.errors?.cellphone?.message} {formMethods?.errors?.cellphone?.type === 'required' && '*'}
+                    </ValidationText>
+                  )}
+                  <InputPhoneNumber
+                    value={credentials?.cellphone}
+                    setValue={handleChangePhoneNumber}
+                    handleIsValid={() => { }}
+                    isError={formMethods.errors?.cellphone && !credentials?.cellphone}
+                  />
+                </>
               )}
 
               {(!verifyPhoneState?.loading && willVerifyOtpState && !checkPhoneCodeState?.loading) && (
@@ -376,24 +383,32 @@ const LoginFormUI = (props) => {
               )}
 
               {!loginWithOtpState && (
-                <InputWrapper>
-                  <Input
-                    type={!passwordSee ? 'password' : 'text'}
-                    name='password'
-                    aria-label='password'
-                    placeholder={t('PASSWORD', 'Password')}
-                    ref={formMethods.register({
-                      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                    })}
-                    onChange={(e) => handleChangeInput(e)}
-                  />
-                  <TogglePassword onClick={togglePasswordView}>
-                    {!passwordSee ? <Eye /> : <EyeSlash />}
-                  </TogglePassword>
-                  <InputBeforeIcon>
-                    <Lock />
-                  </InputBeforeIcon>
-                </InputWrapper>
+                <>
+                  {formMethods.errors?.password && (
+                    <ValidationText>
+                      {formMethods.errors?.password?.message} {formMethods?.errors?.password?.type === 'required' && '*'}
+                    </ValidationText>
+                  )}
+                  <InputWrapper>
+                    <Input
+                      type={!passwordSee ? 'password' : 'text'}
+                      name='password'
+                      aria-label='password'
+                      placeholder={t('PASSWORD', 'Password')}
+                      ref={formMethods.register({
+                        required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                      })}
+                      onChange={(e) => handleChangeInput(e)}
+                      isError={formMethods.errors?.password}
+                    />
+                    <TogglePassword onClick={togglePasswordView}>
+                      {!passwordSee ? <Eye /> : <EyeSlash />}
+                    </TogglePassword>
+                    <InputBeforeIcon>
+                      <Lock />
+                    </InputBeforeIcon>
+                  </InputWrapper>
+                </>
               )}
               {
                 props.afterMidElements?.map((MidElement, i) => (
