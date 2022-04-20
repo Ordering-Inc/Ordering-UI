@@ -236,6 +236,10 @@ const MessagesUI = (props) => {
         return 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS'
       case 21:
         return 'ORDER_CUSTOMER_ARRIVED_BUSINESS'
+      case 22:
+        return 'ORDER_LOOKING_FOR_DRIVER'
+      case 23:
+        return 'ORDER_DRIVER_ON_WAY'
       default:
         return getTraduction(status)
     }
