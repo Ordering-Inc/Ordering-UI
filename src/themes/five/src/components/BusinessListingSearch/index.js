@@ -66,9 +66,9 @@ export const BusinessListingSearchUI = (props) => {
   const maxDistanceOptions = [1000, 2000, 5000, 'default']
   const maxTimeOptions = [5, 15, 30, 'default']
   const sortItems = [
-    { text: t('PICKED_FOR_YOU', 'Picked for you (default)'), value: 'default' },
+    { text: t('PICKED_FOR_YOU', 'Picked for you (default)'), value: 'distance' },
     { text: t('DELIVERY_TIME', 'Delivery time'), value: 'delivery_time' },
-    { text: t('PICKUP_TIME', 'Pickup time'), value: 'pickup_type' }
+    { text: t('PICKUP_TIME', 'Pickup time'), value: 'pickup_time' }
   ]
 
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
@@ -118,7 +118,7 @@ export const BusinessListingSearchUI = (props) => {
         <Filters>
           <SortContainer>
             <h3>{t('SORT', 'Sort')}</h3>
-            {sortItems?.map(item => (
+            {sortItems?.filter(item => !(orderState?.options?.type === 1 && item?.value === 'pickup_time') && !(orderState?.options?.type === 2 && item?.value === 'delivery_time'))?.map(item => (
               <SortItem
                 key={item?.value}
                 onClick={() => handleChangeFilters('orderBy', item?.value)}
