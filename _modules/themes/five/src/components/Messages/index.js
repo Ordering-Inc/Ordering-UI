@@ -320,6 +320,12 @@ var MessagesUI = function MessagesUI(props) {
       case 21:
         return 'ORDER_CUSTOMER_ARRIVED_BUSINESS';
 
+      case 22:
+        return 'ORDER_LOOKING_FOR_DRIVER';
+
+      case 23:
+        return 'ORDER_DRIVER_ON_WAY';
+
       default:
         return (0, _utils.getTraduction)(status);
     }
