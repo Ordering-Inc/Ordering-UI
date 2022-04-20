@@ -51,6 +51,7 @@ const MomentControlUI = (props) => {
   } = props
 
   const [{ configs }] = useConfig()
+  const is12hours = configs?.dates_moment_format?.value?.includes('hh:mm')
   const [{ parseTime }] = useUtils()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -68,7 +69,7 @@ const MomentControlUI = (props) => {
     const _timeLists = hoursList.map(hour => {
       return {
         value: hour.startTime,
-        text: configs?.format_time?.value === '12' ? (
+        text: is12hours ? (
           hour.startTime.includes('12')
             ? `${hour.startTime}PM`
             : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })
