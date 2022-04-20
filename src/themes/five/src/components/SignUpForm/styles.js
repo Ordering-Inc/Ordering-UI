@@ -58,7 +58,7 @@ export const FormInput = styled.form`
   }
 
   input.form:not(:last-child) {
-    margin: 10px 0px;
+    margin: 5px 0px;
     padding: 8px 20px;
   }
 
@@ -181,16 +181,19 @@ export const WrapperPassword = styled.div`
 export const TogglePassword = styled.span`
   position: absolute;
   font-weight: 300;
-  padding: 10px 0;
   color: #333;
   font-size: 24px;
-  transform: translate(-150%, 13%);
+  transform: translate(-150%, 24%);
   max-height: 100%;
   ${props => props.theme?.rtl && css`
-    transform: translate(150%, 10%);
+    transform: translate(150%, 24%);
   `}
   span{
     cursor: pointer;
+  }
+  svg {
+    font-size: 16px;
+    color: ${props => props.theme.colors.lightGray};
   }
 `
 
@@ -217,6 +220,21 @@ export const DividerLine = styled.div`
   background: #E9ECEF;
   flex-grow: 1;
 `
+
+export const InputContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 5px 0px;
+
+  
+  @media (min-width: 800px) {
+    ${({ isHalf }) => isHalf && css`
+      width: 48%;
+    `}
+  }
+`
 export const InputWrapper = styled.div`
   position: relative;
   width: 100%;
@@ -231,12 +249,6 @@ export const InputWrapper = styled.div`
       padding-left: 40px !important;
     `}
     margin: 10px 0;
-  }
-
-  @media (min-width: 800px) {
-    ${({ isHalf }) => isHalf && css`
-      width: 48%;
-    `}
   }
 `
 export const InputBeforeIcon = styled.div`
@@ -317,6 +329,11 @@ export const BussinessAndDriverSignUp = styled.div`
   }
 `
 
-export const CheckboxArea = styled.div`
+export const CheckboxArea = styled.div``
 
+export const ValidationText = styled.span`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${props => props.theme.colors.danger500};
 `

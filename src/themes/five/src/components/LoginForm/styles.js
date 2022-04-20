@@ -181,7 +181,7 @@ export const TogglePassword = styled.span`
   transform: translate(-150%, 24%);
   max-height: 100%;
   ${props => props.theme?.rtl && css`
-    transform: translate(150%, 10%);
+    transform: translate(150%, 24%);
   `}
   span{
     cursor: pointer;

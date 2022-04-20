@@ -292,9 +292,9 @@ const LoginFormUI = (props) => {
               }
               {useLoginByEmail && loginTab === 'email' && (
                 <>
-                  {formMethods.errors?.email && (
+                  {formMethods?.errors?.email?.type === 'required' && (
                     <ValidationText>
-                      {formMethods.errors?.email?.message} {formMethods?.errors?.email?.type === 'required' && '*'}
+                      {formMethods.errors?.email?.message} *
                     </ValidationText>
                   )}
                   {formMethods.errors?.email?.type === 'pattern' && (
