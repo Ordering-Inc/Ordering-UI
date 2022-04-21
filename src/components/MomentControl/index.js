@@ -22,6 +22,7 @@ const MomentControlUI = (props) => {
   } = props
 
   const [{ configs }] = useConfig()
+  const is12hours = configs?.dates_moment_format?.value?.includes('hh:mm')
   const [{ parseTime, parseDate }] = useUtils()
   const [, t] = useLanguage()
   const windowSize = useWindowSize()
@@ -72,7 +73,7 @@ const MomentControlUI = (props) => {
                 onClick={() => !orderState.loading && handleChangeTime(hour.startTime)}
                 isLoading={orderState?.loading}
               >
-                {configs?.format_time?.value === '12' ? (
+                { is12hours ? (
                   hour.startTime.includes('12')
                     ? `${hour.startTime}PM`
                     : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })

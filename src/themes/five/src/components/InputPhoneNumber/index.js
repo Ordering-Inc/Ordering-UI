@@ -12,7 +12,8 @@ export const InputPhoneNumber = (props) => {
     value,
     setValue,
     handleIsValid,
-    disabled
+    disabled,
+    isError
   } = props
 
   const [, t] = useLanguage()
@@ -35,7 +36,7 @@ export const InputPhoneNumber = (props) => {
   }, [value])
 
   return (
-    <Container className='phone_number' disabled={disabled} isValid={value ? isValidPhoneNumber(value) : true}>
+    <Container className='phone_number' disabled={disabled} isValid={value ? isValidPhoneNumber(value) : true} isError={isError}>
       <>
         {props.beforeElements?.map((BeforeElement, i) => (
           <React.Fragment key={i}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
@@ -32,7 +32,9 @@ import {
   TermsConditionWrapper,
   BussinessAndDriverSignUp,
   CheckboxArea,
-  PromotionsWrapper
+  PromotionsWrapper,
+  ValidationText,
+  InputContainer
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -81,7 +83,6 @@ const SignUpFormUI = (props) => {
   const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
-  const emailInput = useRef(null)
   const isFacebookLogin = configs?.facebook_login?.value === 'true'
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
@@ -200,7 +201,6 @@ const SignUpFormUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
   }
 
   useEffect(() => {
@@ -213,39 +213,6 @@ const SignUpFormUI = (props) => {
       saveCustomerUser && saveCustomerUser(formState.result?.result)
     }
   }, [formState])
-
-  useEffect(() => {
-    if (Object.keys(formMethods.errors).length > 0) {
-      setAlertState({
-        open: true,
-        content: Object.values(formMethods.errors).map(error => error.message)
-      })
-    }
-  }, [formMethods.errors])
-
-  useEffect(() => {
-    if (!validationFields.loading) {
-      Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
-        field.code === 'email' ? (
-          formMethods.register('email', {
-            required: isRequiredField(field.code)
-              ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
-              : null,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-            }
-          })
-        ) : (
-          formMethods.register(field.code, {
-            required: isRequiredField(field.code)
-              ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code))
-              : null
-          })
-        )
-      ))
-    }
-  }, [formMethods])
 
   useEffect(() => {
     Object.keys(signupData).map(fieldName => {
@@ -300,77 +267,124 @@ const SignUpFormUI = (props) => {
                       showField && showField(field.code) && (
                         <React.Fragment key={field.id}>
                           {field.code === 'email' ? (
-                            <InputWrapper>
-                              <Input
-                                type={field.type}
-                                name={field.code}
-                                aria-label={field.code}
-                                className='form'
-                                placeholder={t(field.code.toUpperCase(), field.name)}
-                                onChange={handleChangeInputEmail}
-                                ref={(e) => {
-                                  emailInput.current = e
-                                }}
-                                required={!!field.required}
-                                autoComplete='off'
-                              />
-                              <InputBeforeIcon>
-                                <Envelope />
-                              </InputBeforeIcon>
-                            </InputWrapper>
+                            <InputContainer>
+                              {formMethods?.errors?.email?.type === 'required' && !notValidationFields.includes(field.code) && (
+                                <ValidationText>
+                                  {formMethods.errors?.email?.message} *
+                                </ValidationText>
+                              )}
+                              {formMethods.errors?.email?.type === 'pattern' && !notValidationFields.includes(field.code) && (
+                                <ValidationText>
+                                  {t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))}
+                                </ValidationText>
+                              )}
+                              <InputWrapper>
+                                <Input
+                                  type={field.type}
+                                  name={field.code}
+                                  aria-label={field.code}
+                                  className='form'
+                                  placeholder={t(field.code.toUpperCase(), field.name)}
+                                  onChange={handleChangeInputEmail}
+                                  ref={formMethods.register({
+                                    required: isRequiredField(field.code)
+                                      ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
+                                      : null,
+                                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                                  })}
+                                  required={!!field.required}
+                                  autoComplete='off'
+                                  isError={formMethods.errors?.email && !notValidationFields.includes(field.code)}
+                                />
+                                <InputBeforeIcon>
+                                  <Envelope />
+                                </InputBeforeIcon>
+                              </InputWrapper>
+                            </InputContainer>
                           ) : (
-                            <InputWrapper isHalf={fieldNumber % 2 === 0}>
-                              <Input
-                                type={field.type}
-                                name={field.code}
-                                aria-label={field.code}
-                                className='form'
-                                placeholder={t(field.code.toUpperCase(), field.name)}
-                                onChange={handleChangeInput}
-                                required={field.required}
-                                autoComplete='off'
-                              />
-                              <InputBeforeIcon>
-                                <Person />
-                              </InputBeforeIcon>
-                            </InputWrapper>
+                            <InputContainer isHalf={fieldNumber % 2 === 0}>
+                              {formMethods.errors?.[`${field.code}`] && !notValidationFields.includes(field.code) && (
+                                <ValidationText>
+                                  {formMethods.errors?.[`${field.code}`]?.message} *
+                                </ValidationText>
+                              )}
+                              <InputWrapper>
+                                <Input
+                                  type={field.type}
+                                  name={field.code}
+                                  aria-label={field.code}
+                                  className='form'
+                                  placeholder={t(field.code.toUpperCase(), field.name)}
+                                  onChange={handleChangeInput}
+                                  ref={formMethods.register({
+                                    required: isRequiredField(field.code)
+                                      ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code))
+                                      : null
+                                  })}
+                                  required={field.required}
+                                  autoComplete='off'
+                                  isError={formMethods.errors?.[`${field.code}`] && !notValidationFields.includes(field.code)}
+                                />
+                                <InputBeforeIcon>
+                                  <Person />
+                                </InputBeforeIcon>
+                              </InputWrapper>
+                            </InputContainer>
+
                           )}
                         </React.Fragment>
                       )
                     )}
                   {!!showInputPhoneNumber && (
-                    <InputPhoneNumber
-                      value={userPhoneNumber}
-                      setValue={handleChangePhoneNumber}
-                      handleIsValid={setIsValidPhoneNumber}
-                    />
+                    <>
+                      {/* {formMethods.errors?.cellphone && !signupData?.cellphone && (
+                        <ValidationText>
+                          {formMethods.errors?.cellphone?.message} {formMethods?.errors?.cellphone?.type === 'required' && '*'}
+                        </ValidationText>
+                      )} */}
+                      <InputPhoneNumber
+                        value={userPhoneNumber}
+                        setValue={handleChangePhoneNumber}
+                        handleIsValid={setIsValidPhoneNumber}
+                        // isError={formMethods.errors?.cellphone && !signupData?.cellphone}
+                      />
+                    </>
                   )}
 
                   {(!fieldsNotValid || (fieldsNotValid && !fieldsNotValid.includes('password'))) && (
-                    <WrapperPassword>
-                      <Input
-                        type={!passwordSee ? 'password' : 'text'}
-                        name='password'
-                        aria-label='password'
-                        className='form'
-                        placeholder={t('PASSWORD', 'Password')}
-                        onChange={handleChangeInput}
-                        required
-                        ref={formMethods.register({
-                          required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
-                          minLength: {
-                            value: 8,
-                            message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                          }
-                        })}
-                      />
-                      <TogglePassword onClick={togglePasswordView}>
-                        {!passwordSee ? <Eye /> : <EyeSlash />}
-                      </TogglePassword>
-                      <InputBeforeIcon>
-                        <Lock />
-                      </InputBeforeIcon>
-                    </WrapperPassword>
+                    <>
+                      {formMethods.errors?.password && (
+                        <ValidationText>
+                          {formMethods.errors?.password?.message} {formMethods?.errors?.password?.type === 'required' && '*'}
+                        </ValidationText>
+                      )}
+                      <WrapperPassword>
+                        <Input
+                          type={!passwordSee ? 'password' : 'text'}
+                          name='password'
+                          aria-label='password'
+                          className='form'
+                          placeholder={t('PASSWORD', 'Password')}
+                          onChange={handleChangeInput}
+                          required
+                          ref={formMethods.register({
+                            required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'password')) : null,
+                            minLength: {
+                              value: 8,
+                              message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                            }
+                          })}
+                          isError={formMethods.errors?.password}
+                        />
+                        <TogglePassword onClick={togglePasswordView}>
+                          {!passwordSee ? <Eye /> : <EyeSlash />}
+                        </TogglePassword>
+                        <InputBeforeIcon>
+                          <Lock />
+                        </InputBeforeIcon>
+                      </WrapperPassword>
+                    </>
+
                   )}
 
                   {props.afterMidElements?.map((MidElement, i) => (
@@ -412,27 +426,35 @@ const SignUpFormUI = (props) => {
               </PromotionsWrapper>
 
               {configs?.terms_and_conditions?.value === 'true' && (
-                <TermsConditionWrapper>
-                  <Checkbox
-                    name='acceptTerms'
-                    ref={formMethods.register({
-                      required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')
-                    })}
-                    id='acceptTerms'
-                  />
-                  <label
-                    htmlFor='acceptTerms'
-                  >
-                    <span>{t('TERMS_AND_CONDITIONS_TEXT', 'I’m agree with')}</span>
-                    <a
-                      href={configs?.terms_and_conditions_url?.value}
-                      target='_blank'
-                      rel='noopener noreferrer'
+                <>
+                  {formMethods.errors?.acceptTerms && (
+                    <ValidationText>
+                      {formMethods.errors?.acceptTerms?.message} *
+                    </ValidationText>
+                  )}
+                  <TermsConditionWrapper>
+                    <Checkbox
+                      name='acceptTerms'
+                      ref={formMethods.register({
+                        required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')
+                      })}
+                      id='acceptTerms'
+                    />
+                    <label
+                      htmlFor='acceptTerms'
                     >
-                      {t('TERMS_AND_CONDITIONS', 'Terms & Conditions')}
-                    </a>
-                  </label>
-                </TermsConditionWrapper>
+                      <span>{t('TERMS_AND_CONDITIONS_TEXT', 'I’m agree with')}</span>
+                      <a
+                        href={configs?.terms_and_conditions_url?.value}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        {t('TERMS_AND_CONDITIONS', 'Terms & Conditions')}
+                      </a>
+                    </label>
+                  </TermsConditionWrapper>
+                </>
+
               )}
             </CheckboxArea>
 
