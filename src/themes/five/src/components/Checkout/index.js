@@ -441,7 +441,7 @@ const CheckoutUI = (props) => {
           {!props.isHideSectionSix && !cartState.loading && cart && (
             <CartContainer>
               <CartHeader>
-                <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
+                <h1>{t('YOUR_ORDER', 'Your order')}</h1>
                 <span onClick={() => cart?.business?.slug && handleGoToStore(cart?.business?.slug)}>{('ADD_PRODUCTS', 'Add products')}</span>
               </CartHeader>
               <Cart
