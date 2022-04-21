@@ -64,7 +64,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 
 var MomentControlUI = function MomentControlUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _props$afterComponent, _props$afterElements;
+  var _configs$dates_moment, _configs$dates_moment2, _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _props$afterComponent, _props$afterElements;
 
   var isAsap = props.isAsap,
       datesList = props.datesList,
@@ -79,6 +79,8 @@ var MomentControlUI = function MomentControlUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
+
+  var is12hours = configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : (_configs$dates_moment2 = _configs$dates_moment.value) === null || _configs$dates_moment2 === void 0 ? void 0 : _configs$dates_moment2.includes('hh:mm');
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -111,11 +113,9 @@ var MomentControlUI = function MomentControlUI(props) {
 
   (0, _react.useEffect)(function () {
     var _timeLists = hoursList.map(function (hour) {
-      var _configs$format_time;
-
       return {
         value: hour.startTime,
-        text: (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+        text: is12hours ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
           outputFormat: 'hh:mma'
         }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
           outputFormat: 'HH:mm'

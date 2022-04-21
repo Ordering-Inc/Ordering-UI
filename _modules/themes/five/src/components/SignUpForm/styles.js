@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperPassword = exports.TogglePassword = exports.Title = exports.TermsConditionWrapper = exports.SocialButtons = exports.SkeletonWrapper = exports.SkeletonSocialWrapper = exports.SignUpContainer = exports.RedirectLink = exports.ReCaptchaWrapper = exports.PromotionsWrapper = exports.LoginDivider = exports.InputWrapper = exports.InputBeforeIcon = exports.FormSide = exports.FormInput = exports.DividerLine = exports.CheckboxArea = exports.BussinessAndDriverSignUp = void 0;
+exports.WrapperPassword = exports.ValidationText = exports.TogglePassword = exports.Title = exports.TermsConditionWrapper = exports.SocialButtons = exports.SkeletonWrapper = exports.SkeletonSocialWrapper = exports.SignUpContainer = exports.RedirectLink = exports.ReCaptchaWrapper = exports.PromotionsWrapper = exports.LoginDivider = exports.InputWrapper = exports.InputContainer = exports.InputBeforeIcon = exports.FormSide = exports.FormInput = exports.DividerLine = exports.CheckboxArea = exports.BussinessAndDriverSignUp = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -35,7 +35,7 @@ var FormSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templa
 });
 exports.FormSide = FormSide;
 
-var FormInput = _styledComponents.default.form(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  input {\n    &::placeholder, .PhoneInputInput::placeholder {\n      color: ", " !important;\n    }\n\n    &:-ms-input-placeholder, .PhoneInputInput:-ms-input-placeholder {\n      color: ", " !important;\n    }\n\n    &::-ms-input-placeholder, .PhoneInputInput::-ms-input-placeholder {\n      color: ", " !important;\n    }\n  }\n\n  div.phone_number {\n    margin: 10px 0px;\n    width: 100%;\n  }\n\n  input.form:not(:last-child) {\n    margin: 10px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n    width: 100%;\n  }\n"])), function (_ref4) {
+var FormInput = _styledComponents.default.form(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  input {\n    &::placeholder, .PhoneInputInput::placeholder {\n      color: ", " !important;\n    }\n\n    &:-ms-input-placeholder, .PhoneInputInput:-ms-input-placeholder {\n      color: ", " !important;\n    }\n\n    &::-ms-input-placeholder, .PhoneInputInput::-ms-input-placeholder {\n      color: ", " !important;\n    }\n  }\n\n  div.phone_number {\n    margin: 10px 0px;\n    width: 100%;\n  }\n\n  input.form:not(:last-child) {\n    margin: 5px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n    width: 100%;\n  }\n"])), function (_ref4) {
   var isPopup = _ref4.isPopup;
   return isPopup ? '100%' : '80%';
 }, function (props) {
@@ -102,10 +102,12 @@ var WrapperPassword = _styledComponents.default.div(_templateObject13 || (_templ
 
 exports.WrapperPassword = WrapperPassword;
 
-var TogglePassword = _styledComponents.default.span(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: absolute;\n  font-weight: 300;\n  padding: 10px 0;\n  color: #333;\n  font-size: 24px;\n  transform: translate(-150%, 13%);\n  max-height: 100%;\n  ", "\n  span{\n    cursor: pointer;\n  }\n"])), function (props) {
+var TogglePassword = _styledComponents.default.span(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: absolute;\n  font-weight: 300;\n  color: #333;\n  font-size: 24px;\n  transform: translate(-150%, 24%);\n  max-height: 100%;\n  ", "\n  span{\n    cursor: pointer;\n  }\n  svg {\n    font-size: 16px;\n    color: ", ";\n  }\n"])), function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    transform: translate(150%, 10%);\n  "])));
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    transform: translate(150%, 24%);\n  "])));
+}, function (props) {
+  return props.theme.colors.lightGray;
 });
 
 exports.TogglePassword = TogglePassword;
@@ -122,46 +124,56 @@ var DividerLine = _styledComponents.default.div(_templateObject18 || (_templateO
 
 exports.DividerLine = DividerLine;
 
-var InputWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n\n    ", "\n    margin: 10px 0;\n  }\n\n  @media (min-width: 800px) {\n    ", "\n  }\n"])), function (props) {
-  return props.theme.rtl ? (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      padding-right: 40px !important;\n    "]))) : (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      padding-left: 40px !important;\n    "])));
-}, function (_ref11) {
+var InputContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  margin: 5px 0px;\n\n  \n  @media (min-width: 800px) {\n    ", "\n  }\n"])), function (_ref11) {
   var isHalf = _ref11.isHalf;
-  return isHalf && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n      width: 48%;\n    "])));
+  return isHalf && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      width: 48%;\n    "])));
+});
+
+exports.InputContainer = InputContainer;
+
+var InputWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n\n    ", "\n    margin: 10px 0;\n  }\n"])), function (props) {
+  return props.theme.rtl ? (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n      padding-right: 40px !important;\n    "]))) : (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n      padding-left: 40px !important;\n    "])));
 });
 
 exports.InputWrapper = InputWrapper;
 
-var InputBeforeIcon = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0px;\n  left: 15px;\n  display: flex;\n  align-items: center;\n  height: 100%;\n\n  ", "\n\n  svg {\n    font-size: 16px;\n    color: #B1BCCC;\n  }\n"])), function (props) {
+var InputBeforeIcon = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0px;\n  left: 15px;\n  display: flex;\n  align-items: center;\n  height: 100%;\n\n  ", "\n\n  svg {\n    font-size: 16px;\n    color: #B1BCCC;\n  }\n"])), function (props) {
   var _props$theme3;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    right: 15px;\n    left: initial;\n  "])));
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    right: 15px;\n    left: initial;\n  "])));
 });
 
 exports.InputBeforeIcon = InputBeforeIcon;
 
-var TermsConditionWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin: 10px 0;\n\n  > label {\n    font-size: 14px;\n    ", "\n\n    > span:first-child {\n      font-weight: 500;\n      ", "\n    }\n\n    > a {\n      color: ", " !important;\n    }\n  }\n\n  @media (min-width: 768px) {\n    > label {\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
+var TermsConditionWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin: 10px 0;\n\n  > label {\n    font-size: 14px;\n    ", "\n\n    > span:first-child {\n      font-weight: 500;\n      ", "\n    }\n\n    > a {\n      color: ", " !important;\n    }\n  }\n\n  @media (min-width: 768px) {\n    > label {\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
   var _props$theme4;
 
-  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      margin-right: 7px;\n    "]))) : (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      margin-left: 7px;\n    "])));
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      margin-right: 7px;\n    "]))) : (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n      margin-left: 7px;\n    "])));
 }, function (props) {
   var _props$theme5;
 
-  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n        margin-left: 7px;\n      "]))) : (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n        margin-right: 7px;\n      "])));
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n        margin-left: 7px;\n      "]))) : (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n        margin-right: 7px;\n      "])));
 }, function (props) {
   return props.theme.colors.primary;
 });
 
 exports.TermsConditionWrapper = TermsConditionWrapper;
-var PromotionsWrapper = (0, _styledComponents.default)(TermsConditionWrapper)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral([""])));
+var PromotionsWrapper = (0, _styledComponents.default)(TermsConditionWrapper)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral([""])));
 exports.PromotionsWrapper = PromotionsWrapper;
 
-var BussinessAndDriverSignUp = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-direction: column;\n\n  @media (min-width: 481px) {\n    width: ", ";\n  }\n  \n  @media (min-width: 993px) {\n    flex-direction: row;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 15px;\n    padding: 5px;\n    margin: 0 10px;\n  }\n"])), function (_ref12) {
+var BussinessAndDriverSignUp = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-direction: column;\n\n  @media (min-width: 481px) {\n    width: ", ";\n  }\n  \n  @media (min-width: 993px) {\n    flex-direction: row;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 15px;\n    padding: 5px;\n    margin: 0 10px;\n  }\n"])), function (_ref12) {
   var isPopup = _ref12.isPopup;
   return isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)';
 });
 
 exports.BussinessAndDriverSignUp = BussinessAndDriverSignUp;
 
-var CheckboxArea = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n\n"])));
+var CheckboxArea = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral([""])));
 
 exports.CheckboxArea = CheckboxArea;
+
+var ValidationText = _styledComponents.default.span(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  font-weight: 400;\n  font-size: 12px;\n  line-height: 18px;\n  color: ", ";\n"])), function (props) {
+  return props.theme.colors.danger500;
+});
+
+exports.ValidationText = ValidationText;

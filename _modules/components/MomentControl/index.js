@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MomentControlUI = function MomentControlUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options2, _configs$dates_moment, _props$afterComponent, _props$afterElements;
+  var _configs$dates_moment, _configs$dates_moment2, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options2, _configs$dates_moment3, _props$afterComponent, _props$afterElements;
 
   var isAsap = props.isAsap,
       datesList = props.datesList,
@@ -63,6 +63,8 @@ var MomentControlUI = function MomentControlUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
+
+  var is12hours = configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : (_configs$dates_moment2 = _configs$dates_moment.value) === null || _configs$dates_moment2 === void 0 ? void 0 : _configs$dates_moment2.includes('hh:mm');
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -117,8 +119,6 @@ var MomentControlUI = function MomentControlUI(props) {
       },
       isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
     }, windowSize.width > 410 ? t('ASAP', 'As soon as possible') : t('ASAP_ABBREVIATION', 'ASAP')), hoursList.map(function (hour, i) {
-      var _configs$format_time;
-
       return /*#__PURE__*/_react.default.createElement(_styles.Hour, {
         key: i,
         selected: timeSelected === hour.startTime,
@@ -126,7 +126,7 @@ var MomentControlUI = function MomentControlUI(props) {
           return !orderState.loading && handleChangeTime(hour.startTime);
         },
         isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-      }, (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+      }, is12hours ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
         outputFormat: 'hh:mma'
       }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
         outputFormat: 'HH:mm'
@@ -151,7 +151,7 @@ var MomentControlUI = function MomentControlUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, {
     id: "icon"
   }), orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && _orderState$options.moment ? parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.moment, {
-    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
+    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment3 = configs.dates_moment_format) === null || _configs$dates_moment3 === void 0 ? void 0 : _configs$dates_moment3.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')), isModalBehavior ? /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {

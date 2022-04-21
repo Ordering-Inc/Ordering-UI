@@ -46,7 +46,8 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
       value = props.value,
       setValue = props.setValue,
       handleIsValid = props.handleIsValid,
-      disabled = props.disabled;
+      disabled = props.disabled,
+      isError = props.isError;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -81,7 +82,8 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     className: "phone_number",
     disabled: disabled,
-    isValid: value ? isValidPhoneNumber(value) : true
+    isValid: value ? isValidPhoneNumber(value) : true,
+    isError: isError
   }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
