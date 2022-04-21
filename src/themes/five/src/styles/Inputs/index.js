@@ -28,6 +28,9 @@ export const Input = styled.input`
     border-radius: 0px;
     border-bottom: 1px solid #E9ECEF;
   `}
+  ${({ isError }) => isError && css`
+    border-color: ${props => props.theme.colors?.danger500} !important;
+  `}
 `
 
 export const InputGroup = styled.div`
