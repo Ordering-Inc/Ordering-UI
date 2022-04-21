@@ -238,6 +238,10 @@ const LoginFormUI = (props) => {
     } else resetOtpLeftTime()
   }, [verifyPhoneState])
 
+  useEffect(() => {
+    formMethods.reset()
+  }, [loginTab])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
