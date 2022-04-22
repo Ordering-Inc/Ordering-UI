@@ -640,7 +640,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.map(function (event) {
     var _walletName$event$wal, _event$wallet_event, _event$wallet_event$w, _event$paymethod, _event$data, _event$data2;
 
-    return /*#__PURE__*/_react.default.createElement("div", {
+    return event.amount > 0 && /*#__PURE__*/_react.default.createElement("div", {
       key: event.id,
       style: {
         display: 'flex',
