@@ -571,7 +571,7 @@ const OrderDetailsUI = (props) => {
                         marginTop: 10
                       }}
                     >
-                      {order?.payment_events?.map(event => (
+                      {order?.payment_events?.map(event => event.amount > 0 && (
                         <div
                           key={event.id}
                           style={{
