@@ -535,7 +535,11 @@ const ProductOptionsUI = (props) => {
                 }
               </ProductEdition>
               <ProductActions>
-                <div className='price'>{productCart.total && parsePrice(productCart.total)}</div>
+                <div className='price'>
+                  <h4>{productCart.total && parsePrice(productCart.total)}</h4>
+                  {product?.minimum_per_order && productCart?.quantity < product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
+                  {product?.maximum_per_order && productCart?.quantity > product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
+                </div>
                 {
                   productCart && !isSoldOut && maxProductQuantity > 0 && (
                     <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
@@ -577,7 +581,7 @@ const ProductOptionsUI = (props) => {
                     className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                     color='primary'
                     onClick={() => handleSaveProduct()}
-                    disabled={orderState.loading || productCart?.quantity === 0}
+                    disabled={orderState.loading || productCart?.quantity === 0 || productCart?.quantity < product?.minimum_per_order || productCart?.quantity > product?.maximum_per_order}
                   >
                     {orderState.loading ? (
                       <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
