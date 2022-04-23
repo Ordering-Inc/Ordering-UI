@@ -76,6 +76,8 @@ const CartUI = (props) => {
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
 
+  const placeSpotTypes = [3, 4]
+
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -396,7 +398,7 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                {[3, 4].includes(orderState?.options?.type) && (
+                {placeSpotTypes.includes(orderState?.options?.type) && (
                   <table className='spot'>
                     <tbody>
                       <tr>

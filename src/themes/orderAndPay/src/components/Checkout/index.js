@@ -100,7 +100,7 @@ const CheckoutUI = (props) => {
   const [openSpotModal, setOpenSpotModal] = useState(false)
   const inputRef = useRef()
   const isIOS = window.navigator.userAgent.includes('iPhone')
-
+  const placeSpotTypes = [3, 4]
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
@@ -256,7 +256,7 @@ const CheckoutUI = (props) => {
         })
       }
     }
-    if (cart?.products?.length > 0 && placeId && [3, 4].includes(options?.type) && !isDisabledTables) {
+    if (cart?.products?.length > 0 && placeId && placeSpotTypes.includes(options?.type) && !isDisabledTables) {
       handleChangePlace()
     }
   }, [placeId])

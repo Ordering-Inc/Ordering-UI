@@ -96,6 +96,7 @@ const CheckoutUI = (props) => {
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
 
   const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+  const placeSpotTypes = [3, 4]
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -104,7 +105,7 @@ const CheckoutUI = (props) => {
     loading ||
     !cart?.valid_maximum ||
     (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
-    ([3, 4].includes(options?.type) && !cart?.place)
+    (placeSpotTypes.includes(options?.type) && !cart?.place)
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -492,7 +493,7 @@ const CheckoutUI = (props) => {
               {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
             </WarningText>
           )}
-          {[3, 4].includes(options?.type) && !cart?.place && (
+          {placeSpotTypes.includes(options?.type) && !cart?.place && (
             <WarningText>
               {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
             </WarningText>

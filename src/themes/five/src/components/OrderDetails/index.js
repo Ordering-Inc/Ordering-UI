@@ -91,8 +91,8 @@ const OrderDetailsUI = (props) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
-
   const { order, loading, businessData, error } = props.order
+  const placeSpotTypes = [3, 4]
 
   const walletName = {
     cash: {
@@ -315,7 +315,7 @@ const OrderDetailsUI = (props) => {
                   <span>{order?.comment}</span>
                 </CommentContainer>
               )}
-              {[3, 4].includes(order?.delivery_type) && order?.place && (
+              {placeSpotTypes.includes(order?.delivery_type) && order?.place && (
                 <CommentContainer>
                   <h3>{t('SPOT', 'Spot')}</h3>
                   <span>{order?.place?.name}</span>
