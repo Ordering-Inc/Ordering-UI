@@ -315,6 +315,12 @@ const OrderDetailsUI = (props) => {
                   <span>{order?.comment}</span>
                 </CommentContainer>
               )}
+              {[3, 4].includes(order?.delivery_type) && order?.place && (
+                <CommentContainer>
+                  <h3>{t('SPOT', 'Spot')}</h3>
+                  <span>{order?.place?.name}</span>
+                </CommentContainer>
+              )}
               {order?.driver && (
                 <>
                   <>

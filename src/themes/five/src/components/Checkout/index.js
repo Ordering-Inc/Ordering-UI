@@ -97,6 +97,15 @@ const CheckoutUI = (props) => {
 
   const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
 
+  const isDisablePlaceOrderButton = !cart?.valid ||
+    (!paymethodSelected && cart?.balance > 0) ||
+    placing ||
+    errorCash ||
+    loading ||
+    !cart?.valid_maximum ||
+    (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
+    ([3, 4].includes(options?.type) && !cart?.place)
+
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
@@ -454,7 +463,7 @@ const CheckoutUI = (props) => {
             <WrapperPlaceOrderButton>
               <Button
                 color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
-                disabled={!cart?.valid || (!paymethodSelected && cart?.balance > 0) || placing || errorCash || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || loading}
+                disabled={isDisablePlaceOrderButton}
                 onClick={() => handlePlaceOrder()}
               >
                 {!cart?.valid_maximum ? (
@@ -481,6 +490,11 @@ const CheckoutUI = (props) => {
           {!cart?.valid_products && cart?.status !== 2 && (
             <WarningText>
               {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
+            </WarningText>
+          )}
+          {[3, 4].includes(options?.type) && !cart?.place && (
+            <WarningText>
+              {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
             </WarningText>
           )}
         </WrapperRightContainer>
