@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperDriver = exports.WrapperContainer = exports.TitleContainer = exports.StatusBar = exports.SkeletonWrapper = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.ShareOrder = exports.SectionTitle = exports.ReviewWrapper = exports.ReviewOrderLink = exports.PhotoBlock = exports.OrderProducts = exports.OrderPreferences = exports.OrderInfo = exports.OrderDriver = exports.OrderCustomer = exports.OrderBusiness = exports.OrderBill = exports.MyOrderActions = exports.MessagesIcon = exports.Map = exports.HeaderTitle = exports.HeaderInfo = exports.GoToback = exports.ExclamationWrapper = exports.Exclamation = exports.Divider = exports.Content = exports.Container = exports.CommentContainer = exports.BusinessWrapper = exports.BusinessTitle = exports.BusinessInfo = exports.ActionsBlock = void 0;
+exports.WrapperDriver = exports.WrapperContainer = exports.TitleContainer = exports.StatusBar = exports.SkeletonWrapper = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.ShareOrder = exports.SectionTitle = exports.ReviewWrapper = exports.ReviewOrderLink = exports.ReOrder = exports.PhotoBlock = exports.OrderProducts = exports.OrderPreferences = exports.OrderInfo = exports.OrderDriver = exports.OrderCustomer = exports.OrderBusiness = exports.OrderBill = exports.MyOrderActions = exports.MessagesIcon = exports.Map = exports.HeaderTitle = exports.HeaderInfo = exports.GoToback = exports.ExclamationWrapper = exports.Exclamation = exports.Divider = exports.Content = exports.Container = exports.CommentContainer = exports.BusinessWrapper = exports.BusinessTitle = exports.BusinessInfo = exports.ActionsBlock = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -87,7 +87,7 @@ var StatusBarStyled = _styledComponents.default.div(_templateObject15 || (_templ
 }, function (props) {
   var _props$theme3;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    background: linear-gradient(to left, ", " ", "%, ", " ", "%)\n  "])), props.theme.colors.primary, props.percentage, props.theme.colors.disabled, props.percentage);
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    background: linear-gradient(to left, ", " ", "%, ", " ", "%);\n  "])), props.theme.colors.primary, props.percentage, props.theme.colors.disabled, props.percentage);
 });
 
 var StatusBar = function StatusBar(props) {
@@ -198,3 +198,7 @@ exports.HeaderTitle = HeaderTitle;
 var GoToback = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  position: absolute;\n  left: 0;\n  margin: 8px 0;\n"])));
 
 exports.GoToback = GoToback;
+
+var ReOrder = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  margin-bottom: 20px;\n\n  button {\n    padding: 5px 16px;\n    min-width: unset;\n  }\n"])));
+
+exports.ReOrder = ReOrder;

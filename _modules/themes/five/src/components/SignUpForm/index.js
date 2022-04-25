@@ -76,7 +76,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _configs$facebook_log, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _configs$google_login, _configs$facebook_log2, _configs$facebook_log3, _configs$facebook_id, _configs$google_login2, _configs$apple_login_, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _formMethods$errors8, _formMethods$errors9, _formMethods$errors9$, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_2, _configs$google_login3, _props$afterComponent, _props$afterElements;
+  var _configs$facebook_log, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _configs$google_login, _configs$facebook_log2, _configs$facebook_log3, _configs$facebook_id, _configs$google_login2, _configs$apple_login_, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _formMethods$errors8, _formMethods$errors9, _formMethods$errors9$, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _formMethods$errors16, _formMethods$errors17, _formMethods$errors18, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _formMethods$errors19, _formMethods$errors20, _formMethods$errors21, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_2, _configs$google_login3, _props$afterComponent, _props$afterElements;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -307,6 +307,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
     });
     setFieldNumber(fieldnum);
   }, [validationFields]);
+  (0, _react.useEffect)(function () {
+    formMethods.register('cellphone', {
+      required: isRequiredField('cellphone') ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone')) : null
+    });
+  }, [formMethods]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -369,12 +374,12 @@ var SignUpFormUI = function SignUpFormUI(props) {
       autoComplete: "off",
       isError: ((_formMethods$errors7 = formMethods.errors) === null || _formMethods$errors7 === void 0 ? void 0 : _formMethods$errors7["".concat(field.code)]) && !notValidationFields.includes(field.code)
     }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Person, null)))));
-  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors8 = formMethods.errors) === null || _formMethods$errors8 === void 0 ? void 0 : _formMethods$errors8.cellphone) && !userPhoneNumber && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors9 = formMethods.errors) === null || _formMethods$errors9 === void 0 ? void 0 : (_formMethods$errors9$ = _formMethods$errors9.cellphone) === null || _formMethods$errors9$ === void 0 ? void 0 : _formMethods$errors9$.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors10 = formMethods.errors) === null || _formMethods$errors10 === void 0 ? void 0 : (_formMethods$errors11 = _formMethods$errors10.cellphone) === null || _formMethods$errors11 === void 0 ? void 0 : _formMethods$errors11.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
-    handleIsValid: setIsValidPhoneNumber // isError={formMethods.errors?.cellphone && !signupData?.cellphone}
-
-  })), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors8 = formMethods.errors) === null || _formMethods$errors8 === void 0 ? void 0 : _formMethods$errors8.password) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors9 = formMethods.errors) === null || _formMethods$errors9 === void 0 ? void 0 : (_formMethods$errors9$ = _formMethods$errors9.password) === null || _formMethods$errors9$ === void 0 ? void 0 : _formMethods$errors9$.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors10 = formMethods.errors) === null || _formMethods$errors10 === void 0 ? void 0 : (_formMethods$errors11 = _formMethods$errors10.password) === null || _formMethods$errors11 === void 0 ? void 0 : _formMethods$errors11.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    handleIsValid: setIsValidPhoneNumber,
+    isError: ((_formMethods$errors12 = formMethods.errors) === null || _formMethods$errors12 === void 0 ? void 0 : _formMethods$errors12.cellphone) && !userPhoneNumber
+  })), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors13 = formMethods.errors) === null || _formMethods$errors13 === void 0 ? void 0 : _formMethods$errors13.password) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors14 = formMethods.errors) === null || _formMethods$errors14 === void 0 ? void 0 : (_formMethods$errors15 = _formMethods$errors14.password) === null || _formMethods$errors15 === void 0 ? void 0 : _formMethods$errors15.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors16 = formMethods.errors) === null || _formMethods$errors16 === void 0 ? void 0 : (_formMethods$errors17 = _formMethods$errors16.password) === null || _formMethods$errors17 === void 0 ? void 0 : _formMethods$errors17.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: !passwordSee ? 'password' : 'text',
     name: "password",
     "aria-label": "password",
@@ -389,7 +394,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     }),
-    isError: (_formMethods$errors12 = formMethods.errors) === null || _formMethods$errors12 === void 0 ? void 0 : _formMethods$errors12.password
+    isError: (_formMethods$errors18 = formMethods.errors) === null || _formMethods$errors18 === void 0 ? void 0 : _formMethods$errors18.password
   }), /*#__PURE__*/_react.default.createElement(_styles.TogglePassword, {
     onClick: togglePasswordView
   }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null)), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Lock, null)))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
@@ -414,7 +419,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     onChange: handleChangePromotions
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "promotions"
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('RECEIVE_NEWS_EXCLUSIVE_PROMOTIONS', 'Receive newsletters and exclusive promotions')))), (configs === null || configs === void 0 ? void 0 : (_configs$terms_and_co = configs.terms_and_conditions) === null || _configs$terms_and_co === void 0 ? void 0 : _configs$terms_and_co.value) === 'true' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors13 = formMethods.errors) === null || _formMethods$errors13 === void 0 ? void 0 : _formMethods$errors13.acceptTerms) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors14 = formMethods.errors) === null || _formMethods$errors14 === void 0 ? void 0 : (_formMethods$errors15 = _formMethods$errors14.acceptTerms) === null || _formMethods$errors15 === void 0 ? void 0 : _formMethods$errors15.message, " *"), /*#__PURE__*/_react.default.createElement(_styles.TermsConditionWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('RECEIVE_NEWS_EXCLUSIVE_PROMOTIONS', 'Receive newsletters and exclusive promotions')))), (configs === null || configs === void 0 ? void 0 : (_configs$terms_and_co = configs.terms_and_conditions) === null || _configs$terms_and_co === void 0 ? void 0 : _configs$terms_and_co.value) === 'true' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors19 = formMethods.errors) === null || _formMethods$errors19 === void 0 ? void 0 : _formMethods$errors19.acceptTerms) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors20 = formMethods.errors) === null || _formMethods$errors20 === void 0 ? void 0 : (_formMethods$errors21 = _formMethods$errors20.acceptTerms) === null || _formMethods$errors21 === void 0 ? void 0 : _formMethods$errors21.message, " *"), /*#__PURE__*/_react.default.createElement(_styles.TermsConditionWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
     name: "acceptTerms",
     ref: formMethods.register({
       required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')

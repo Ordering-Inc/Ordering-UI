@@ -196,6 +196,7 @@ var CheckoutUI = function CheckoutUI(props) {
 
   var inputRef = (0, _react.useRef)();
   var isIOS = window.navigator.userAgent.includes('iPhone');
+  var placeSpotTypes = [3, 4];
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
 
   var handlePlaceOrder = /*#__PURE__*/function () {
@@ -429,7 +430,7 @@ var CheckoutUI = function CheckoutUI(props) {
       };
     }();
 
-    if ((cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && placeId && [3, 4].includes(options === null || options === void 0 ? void 0 : options.type) && !isDisabledTables) {
+    if ((cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && placeId && placeSpotTypes.includes(options === null || options === void 0 ? void 0 : options.type) && !isDisabledTables) {
       handleChangePlace();
     }
   }, [placeId]);

@@ -39,7 +39,8 @@ var Select = function Select(props) {
       defaultValue = props.defaultValue,
       onChange = props.onChange,
       notAsync = props.notAsync,
-      notReload = props.notReload;
+      notReload = props.notReload,
+      disableOneOption = props.disableOneOption;
   var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
 
   var _useState = (0, _react.useState)(false),
@@ -117,7 +118,7 @@ var Select = function Select(props) {
     setOpen(false);
   };
 
-  return isOneOption ? /*#__PURE__*/_react.default.createElement(_Selects.Select, {
+  return isOneOption && !disableOneOption ? /*#__PURE__*/_react.default.createElement(_Selects.Select, {
     isHome: isHome
   }, /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, options[0].content))) : /*#__PURE__*/_react.default.createElement(_Selects.Select, {
     id: "select-input",

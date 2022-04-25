@@ -45,6 +45,8 @@ var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCirc
 
 var _MdCloseCircle = _interopRequireDefault(require("@meronex/icons/ios/MdCloseCircle"));
 
+var _PlaceSpot = require("../PlaceSpot");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -72,7 +74,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartUI = function CartUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$carts, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _cart$payment_events, _cart$payment_events2, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$carts, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options2, _cart$place, _cart$payment_events, _cart$payment_events2, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
 
   var currentCartUuid = props.currentCartUuid,
       clearCart = props.clearCart,
@@ -164,11 +166,17 @@ var CartUI = function CartUI(props) {
 
   var _useState13 = (0, _react.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      isUpselling = _useState14[0],
-      setIsUpselling = _useState14[1];
+      openPlaceModal = _useState14[0],
+      setOpenPlaceModal = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      isUpselling = _useState16[0],
+      setIsUpselling = _useState16[1];
 
   var isCouponEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.coupon) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
   var cart = orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(props.cart.business_id)];
+  var placeSpotTypes = [3, 4];
   var walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -479,7 +487,13 @@ var CartUI = function CartUI(props) {
     price: cart.total
   })), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
-  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.total) >= 0 ? cart === null || cart === void 0 ? void 0 : cart.total : 0))))), (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement("table", {
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.total) >= 0 ? cart === null || cart === void 0 ? void 0 : cart.total : 0))))), placeSpotTypes.includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) && /*#__PURE__*/_react.default.createElement("table", {
+    className: "spot"
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SPOT', 'Spot'), ": ", (cart === null || cart === void 0 ? void 0 : (_cart$place = cart.place) === null || _cart$place === void 0 ? void 0 : _cart$place.name) || t('NO_SELECTED', 'No selected')), /*#__PURE__*/_react.default.createElement("td", {
+    onClick: function onClick() {
+      return setOpenPlaceModal(true);
+    }
+  }, t('EDIT', 'Edit'))))), (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement("table", {
     className: "comments"
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('COMMENTS', 'Comments'))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement(_styles.CommentContainer, null, /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     defaultValue: cart === null || cart === void 0 ? void 0 : cart.comment,
@@ -585,6 +599,16 @@ var CartUI = function CartUI(props) {
     type: openTaxModal.type,
     data: openTaxModal.data,
     products: cart.products
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "40%",
+    padding: "20px",
+    open: openPlaceModal,
+    title: t('CHOOSE_YOUR_SPOT', 'Choose your spot'),
+    onClose: function onClose() {
+      return setOpenPlaceModal(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
+    cart: cart
   })), (openUpselling || isUpselling) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: cart.business_id,
     isCustomMode: isCustomMode,
