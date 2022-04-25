@@ -184,7 +184,7 @@ export const RenderProductsLayout = (props) => {
                           <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
                         </div>
                         <EmptyBtnWrapper>
-                          <span>$0.00</span>
+                          <span>{parsePrice(0)}</span>
                           <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
                         </EmptyBtnWrapper>
                       </EmptyCart>
