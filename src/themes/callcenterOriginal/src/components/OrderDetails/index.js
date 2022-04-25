@@ -56,7 +56,8 @@ import {
   BusinessTitle,
   OrderPreferences,
   HeaderTitle,
-  GoToback
+  GoToback,
+  ReOrder
 } from './styles'
 
 import { useTheme } from 'styled-components'
@@ -195,12 +196,12 @@ const OrderDetailsUI = (props) => {
           <WrapperContainer>
             <OrderInfo>
               <TitleContainer>
-                <GoToback>
+                {/* <GoToback>
                   <Button onClick={() => handleGoToPage({ page: 'search' })} color='primary'>
                     <BsArrowLeft />
                     {t('GO_TO_BUSINESSLIST', 'Go to business list')}
                   </Button>
-                </GoToback>
+                </GoToback> */}
                 <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
                 {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
                   <Content className='order-content'>
@@ -226,6 +227,14 @@ const OrderDetailsUI = (props) => {
                       : parseDate(order?.delivery_datetime, { utc: false })
                   }
                 </p>
+                <ReOrder>
+                  <Button
+                    color='primary'
+                    onClick={() => handleGoToPage({ page: 'search' })}
+                  >
+                    {t('START_NEW_ORDER', 'Start new order')}
+                  </Button>
+                </ReOrder>
               </TitleContainer>
               <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
               <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>

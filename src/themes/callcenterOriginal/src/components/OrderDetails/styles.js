@@ -176,7 +176,7 @@ const StatusBarStyled = styled.div`
   margin: 18px 0px 8px;
   background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)`};
   ${props => props.theme?.rtl && css`
-    background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)
+    background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%);
   `}
 `
 
@@ -184,7 +184,7 @@ export const StatusBar = (props) => {
   return (
     <StatusBarStyled
       {...props}
-      // style={{ background: `linear-gradient(to right, #D81212 ${props.percentage}%, #BFBFBF ${props.percentage}%)` }}
+    // style={{ background: `linear-gradient(to right, #D81212 ${props.percentage}%, #BFBFBF ${props.percentage}%)` }}
     >
       {props.children}
     </StatusBarStyled>
@@ -529,4 +529,13 @@ export const GoToback = styled.div`
   position: absolute;
   left: 0;
   margin: 8px 0;
+`
+export const ReOrder = styled.div`
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  button {
+    padding: 5px 16px;
+    min-width: unset;
+  }
 `
