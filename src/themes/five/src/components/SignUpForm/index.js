@@ -236,6 +236,14 @@ const SignUpFormUI = (props) => {
     setFieldNumber(fieldnum)
   }, [validationFields])
 
+  useEffect(() => {
+    formMethods.register('cellphone', {
+      required: isRequiredField('cellphone')
+        ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+        : null
+    })
+  }, [formMethods])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -337,16 +345,16 @@ const SignUpFormUI = (props) => {
                     )}
                   {!!showInputPhoneNumber && (
                     <>
-                      {/* {formMethods.errors?.cellphone && !signupData?.cellphone && (
+                      {formMethods.errors?.cellphone && !userPhoneNumber && (
                         <ValidationText>
                           {formMethods.errors?.cellphone?.message} {formMethods?.errors?.cellphone?.type === 'required' && '*'}
                         </ValidationText>
-                      )} */}
+                      )}
                       <InputPhoneNumber
                         value={userPhoneNumber}
                         setValue={handleChangePhoneNumber}
                         handleIsValid={setIsValidPhoneNumber}
-                        // isError={formMethods.errors?.cellphone && !signupData?.cellphone}
+                        isError={formMethods.errors?.cellphone && !userPhoneNumber}
                       />
                     </>
                   )}

@@ -11,7 +11,8 @@ import {
   useUtils,
   useValidationFields,
   useConfig,
-  useCustomer
+  useCustomer,
+  useEvent
 } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -34,7 +35,8 @@ import {
   CheckOutDivider,
   DriverTipDivider,
   DeliveryOptionsContainer,
-  WalletPaymentOptionContainer
+  WalletPaymentOptionContainer,
+  CartHeader
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -89,6 +91,7 @@ const CheckoutUI = (props) => {
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
+  const [events] = useEvent()
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
@@ -96,6 +99,16 @@ const CheckoutUI = (props) => {
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
 
   const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+  const placeSpotTypes = [3, 4]
+
+  const isDisablePlaceOrderButton = !cart?.valid ||
+    (!paymethodSelected && cart?.balance > 0) ||
+    placing ||
+    errorCash ||
+    loading ||
+    !cart?.valid_maximum ||
+    (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
+    (placeSpotTypes.includes(options?.type) && !cart?.place)
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -165,6 +178,10 @@ const CheckoutUI = (props) => {
     }
 
     setUserErrors(errors)
+  }
+
+  const handleGoToStore = (slug) => {
+    events.emit('go_to_page', { page: 'business', params: { store: slug } })
   }
 
   useEffect(() => {
@@ -433,7 +450,10 @@ const CheckoutUI = (props) => {
 
           {!props.isHideSectionSix && !cartState.loading && cart && (
             <CartContainer>
-              <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
+              <CartHeader>
+                <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
+                <span onClick={() => cart?.business?.slug && handleGoToStore(cart?.business?.slug)}>{('ADD_PRODUCTS', 'Add products')}</span>
+              </CartHeader>
               <Cart
                 isCartPending={cart?.status === 2}
                 cart={cart}
@@ -454,7 +474,7 @@ const CheckoutUI = (props) => {
             <WrapperPlaceOrderButton>
               <Button
                 color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
-                disabled={!cart?.valid || (!paymethodSelected && cart?.balance > 0) || placing || errorCash || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || loading}
+                disabled={isDisablePlaceOrderButton}
                 onClick={() => handlePlaceOrder()}
               >
                 {!cart?.valid_maximum ? (
@@ -481,6 +501,11 @@ const CheckoutUI = (props) => {
           {!cart?.valid_products && cart?.status !== 2 && (
             <WarningText>
               {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
+            </WarningText>
+          )}
+          {placeSpotTypes.includes(options?.type) && !cart?.place && (
+            <WarningText>
+              {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
             </WarningText>
           )}
         </WrapperRightContainer>
