@@ -18,7 +18,8 @@ export const Select = (props) => {
     defaultValue,
     onChange,
     notAsync,
-    notReload
+    notReload,
+    disableOneOption
   } = props
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
@@ -73,7 +74,7 @@ export const Select = (props) => {
   }
 
   return (
-    isOneOption ? (
+    isOneOption && !disableOneOption ? (
       <SelectInput isHome={isHome}>
         <Selected>
           <Header>
