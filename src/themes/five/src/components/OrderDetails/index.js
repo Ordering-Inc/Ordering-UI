@@ -6,6 +6,7 @@ import {
   useEvent,
   useUtils,
   useConfig,
+  useOrder,
   GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
@@ -56,7 +57,9 @@ import {
   SkeletonWrapper,
   ReviewWrapper,
   Exclamation,
-  CommentContainer
+  CommentContainer,
+  NewOrder,
+  OrderActions
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -81,6 +84,7 @@ const OrderDetailsUI = (props) => {
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
+  const [, { reorder }] = useOrder()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
@@ -91,6 +95,8 @@ const OrderDetailsUI = (props) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
+  const [reorderLoading, setReorderLoading] = useState(false)
+
   const { order, loading, businessData, error } = props.order
   const placeSpotTypes = [3, 4]
 
@@ -210,6 +216,21 @@ const OrderDetailsUI = (props) => {
     return order?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
   }
 
+  const handleReorder = async (orderId) => {
+    setReorderLoading(true)
+    try {
+      const { error, result } = await reorder(orderId)
+      if (!error) {
+        handleGoToPage({ page: 'checkout', params: { cartUuid: result.uuid } })
+        return
+      }
+      handleBusinessRedirect(businessData?.slug)
+      setReorderLoading(false)
+    } catch (err) {
+      setReorderLoading(false)
+    }
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -250,9 +271,22 @@ const OrderDetailsUI = (props) => {
                       : parseDate(order?.delivery_datetime, { utc: false })
                   }
                 </p>
-                <ReviewOrderLink
-                  className='Review-order'
-                  active={(
+                <OrderActions>
+                  <ReviewOrderLink
+                    className='Review-order'
+                    active={(
+                      parseInt(order?.status) === 1 ||
+                      parseInt(order?.status) === 2 ||
+                      parseInt(order?.status) === 5 ||
+                      parseInt(order?.status) === 6 ||
+                      parseInt(order?.status) === 10 ||
+                      parseInt(order?.status) === 11 ||
+                      parseInt(order?.status) === 12
+                    ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
+                  >
+                    <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                  </ReviewOrderLink>
+                  {(
                     parseInt(order?.status) === 1 ||
                     parseInt(order?.status) === 2 ||
                     parseInt(order?.status) === 5 ||
@@ -260,10 +294,19 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
-                >
-                  <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                </ReviewOrderLink>
+                  ) && (
+                      <NewOrder>
+                        <Button
+                          color='primary'
+                          outline
+                          onClick={() => handleReorder(order.id)}
+                          disabled={reorderLoading}
+                        >
+                          {order.id && reorderLoading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
+                        </Button>
+                      </NewOrder>
+                    )}
+                </OrderActions>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
               </OrderInfo>
