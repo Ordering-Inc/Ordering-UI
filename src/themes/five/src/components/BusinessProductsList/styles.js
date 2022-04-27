@@ -101,4 +101,7 @@ export const DescriptionModalContainer = styled.div`
     min-height: 300px;
     margin-bottom: 20px;
   }
+  p{
+    white-space: pre;
+  }
 `
