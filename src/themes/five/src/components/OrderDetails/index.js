@@ -78,7 +78,9 @@ const OrderDetailsUI = (props) => {
     messages,
     setMessages,
     readMessages,
-    messagesReadList
+    messagesReadList,
+    reorderState,
+    handleReorder
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -95,7 +97,6 @@ const OrderDetailsUI = (props) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
-  const [reorderLoading, setReorderLoading] = useState(false)
 
   const { order, loading, businessData, error } = props.order
   const placeSpotTypes = [3, 4]
@@ -216,21 +217,6 @@ const OrderDetailsUI = (props) => {
     return order?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
   }
 
-  const handleReorder = async (orderId) => {
-    setReorderLoading(true)
-    try {
-      const { error, result } = await reorder(orderId)
-      if (!error) {
-        handleGoToPage({ page: 'checkout', params: { cartUuid: result.uuid } })
-        return
-      }
-      handleBusinessRedirect(businessData?.slug)
-      setReorderLoading(false)
-    } catch (err) {
-      setReorderLoading(false)
-    }
-  }
-
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -246,6 +232,15 @@ const OrderDetailsUI = (props) => {
       openMessages.business ? setUnreadAlert({ ...unreadAlert, business: false }) : setUnreadAlert({ ...unreadAlert, driver: false })
     }
   }, [messagesReadList])
+
+  useEffect(() => {
+    if (reorderState?.error) {
+      handleBusinessRedirect(businessData?.slug)
+    }
+    if (!reorderState?.error && reorderState?.result?.uuid) {
+      handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
+    }
+  }, [reorderState])
 
   return (
     <>
@@ -300,9 +295,9 @@ const OrderDetailsUI = (props) => {
                           color='primary'
                           outline
                           onClick={() => handleReorder(order.id)}
-                          disabled={reorderLoading}
+                          disabled={reorderState?.loading}
                         >
-                          {order.id && reorderLoading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
+                          {reorderState?.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
                         </Button>
                       </NewOrder>
                     )}
