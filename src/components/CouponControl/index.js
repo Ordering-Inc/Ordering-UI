@@ -60,6 +60,7 @@ const CouponControlUI = (props) => {
         ) : (
           <>
             <Input
+              value={couponInput}
               placeholder={t('DISCOUNT_COUPON', 'Discount coupon')}
               onChange={(e) => onChangeInputCoupon(e.target.value)}
               autoComplete='off'
