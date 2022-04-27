@@ -13,6 +13,8 @@ export const TaxInformation = (props) => {
   const [, t] = useLanguage()
 
   const includedOnPriceString = data?.type === 1 ? `(${t('INCLUDED_ON_PRICE', 'Included on price')})` : `(${t('NOT_INCLUDED_ON_PRICE', 'Not included on price')})`
+  const hideProductsSectionOffers = ['offer_target_2', 'offer_target_3'].includes(type)
+  const hideProductsSectionData = ['platform', 'business'].includes(data.type)
 
   const getFilterValidation = (product) => {
     return (
@@ -45,7 +47,7 @@ export const TaxInformation = (props) => {
           {t('WITHOUT_DESCRIPTION', 'Without description')}
         </h2>
       )}
-      {!(type === 'offer_target_2' || type === 'offer_target_3') && (
+      {!hideProductsSectionOffers && !hideProductsSectionData && (
         <>
           <h3>{t('OTHER_PRODUCTS_WITH_THIS', 'Other products with this')} {getTypeString()}:</h3>
           <ProductContainer>
