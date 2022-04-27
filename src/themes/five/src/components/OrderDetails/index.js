@@ -6,7 +6,6 @@ import {
   useEvent,
   useUtils,
   useConfig,
-  useOrder,
   GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
@@ -86,7 +85,6 @@ const OrderDetailsUI = (props) => {
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
-  const [, { reorder }] = useOrder()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
