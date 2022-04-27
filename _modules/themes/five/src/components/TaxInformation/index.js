@@ -37,6 +37,10 @@ var TaxInformation = function TaxInformation(props) {
       t = _useLanguage2[1];
 
   var includedOnPriceString = (data === null || data === void 0 ? void 0 : data.type) === 1 ? "(".concat(t('INCLUDED_ON_PRICE', 'Included on price'), ")") : "(".concat(t('NOT_INCLUDED_ON_PRICE', 'Not included on price'), ")");
+  var offersHideArray = ['offer_target_2', 'offer_target_3'];
+  var hideProductsSectionOffers = offersHideArray.includes(type);
+  var dataHideArray = ['platform', 'business'];
+  var hideProductsSectionData = dataHideArray.includes(data.type);
 
   var getFilterValidation = function getFilterValidation(product) {
     var _product$tax, _product$tax2, _product$tax3, _product$fee, _product$fee2, _product$fee3, _data$discounts;
@@ -50,7 +54,7 @@ var TaxInformation = function TaxInformation(props) {
     return type === 'offer_target_1' ? t('PRODUCT_DISCOUNT', 'Product discount') : type === 'tax' ? t('TAX', 'Tax') : t('Fee', 'Fee');
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.TaxInformationContainer, null, data !== null && data !== void 0 && data.description ? /*#__PURE__*/_react.default.createElement("h2", null, t('DESCRIPTION', 'Description'), ": ", data === null || data === void 0 ? void 0 : data.description, " ", (data === null || data === void 0 ? void 0 : data.type) && !type.includes('offer') && includedOnPriceString) : /*#__PURE__*/_react.default.createElement("h2", null, t('WITHOUT_DESCRIPTION', 'Without description')), !(type === 'offer_target_2' || type === 'offer_target_3') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h3", null, t('OTHER_PRODUCTS_WITH_THIS', 'Other products with this'), " ", getTypeString(), ":"), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, null, products.filter(function (product) {
+  return /*#__PURE__*/_react.default.createElement(_styles.TaxInformationContainer, null, data !== null && data !== void 0 && data.description ? /*#__PURE__*/_react.default.createElement("h2", null, t('DESCRIPTION', 'Description'), ": ", data === null || data === void 0 ? void 0 : data.description, " ", (data === null || data === void 0 ? void 0 : data.type) && !type.includes('offer') && includedOnPriceString) : /*#__PURE__*/_react.default.createElement("h2", null, t('WITHOUT_DESCRIPTION', 'Without description')), !hideProductsSectionOffers && !hideProductsSectionData && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h3", null, t('OTHER_PRODUCTS_WITH_THIS', 'Other products with this'), " ", getTypeString(), ":"), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, null, products.filter(function (product) {
     return getFilterValidation(product);
   }).map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
