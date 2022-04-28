@@ -483,6 +483,12 @@ export const WeightUnitSwitch = styled.div`
   display: flex;
   flex-direction: column;
   width: auto;
+  margin-left: 10px;
+  
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0;
+ `}
 `
 export const WeightUnitItem = styled.span`
   display: inline-flex;
