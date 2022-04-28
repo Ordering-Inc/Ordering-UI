@@ -74,7 +74,7 @@ export const AddressesPopover = (props) => {
   }, [open])
 
   useEffect(() => {
-    forceUpdate && forceUpdate()
+    // forceUpdate && forceUpdate()
   }, [open, orderState])
 
   useEffect(() => {
