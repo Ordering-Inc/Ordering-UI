@@ -19,6 +19,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _NotFoundSource = require("../NotFoundSource");
 
+var _Buttons = require("../../styles/Buttons");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -44,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PlaceSpotUI = function PlaceSpotUI(props) {
-  var _placesState$placeGro2, _placesState$placeGro3, _placesState$places3;
+  var _placesState$placeGro2, _placesState$placeGro3, _placesState$places3, _placesState$places4;
 
   var cart = props.cart,
       placesState = props.placesState,
@@ -135,7 +137,12 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
       return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
     }),
     disableOneOption: true
-  }))));
+  }))), placeGroupSelected && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places4 = placesState.places) === null || _placesState$places4 === void 0 ? void 0 : _placesState$places4.find(function (place) {
+    return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
+  })) && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: placesState !== null && placesState !== void 0 && placesState.loading ? 'secondary' : 'primary',
+    disabled: placesState === null || placesState === void 0 ? void 0 : placesState.loading
+  }, t('CONTINUE', 'Continue'))));
 };
 
 var PlaceSpot = function PlaceSpot(props) {

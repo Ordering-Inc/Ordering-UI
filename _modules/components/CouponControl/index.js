@@ -98,6 +98,7 @@ var CouponControlUI = function CouponControlUI(props) {
       return onRemoveCoupon();
     }
   }, t('REMOVE_COUPON', 'Remove Coupon'), " ", couponDefault) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    value: couponInput,
     placeholder: t('DISCOUNT_COUPON', 'Discount coupon'),
     onChange: function onChange(e) {
       return onChangeInputCoupon(e.target.value);

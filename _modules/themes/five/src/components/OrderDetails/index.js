@@ -89,7 +89,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       messages = props.messages,
       setMessages = props.setMessages,
       readMessages = props.readMessages,
-      messagesReadList = props.messagesReadList;
+      messagesReadList = props.messagesReadList,
+      reorderState = props.reorderState,
+      handleReorder = props.handleReorder;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -457,6 +459,22 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       }));
     }
   }, [messagesReadList]);
+  (0, _react.useEffect)(function () {
+    var _reorderState$result;
+
+    if (reorderState !== null && reorderState !== void 0 && reorderState.error) {
+      handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
+    }
+
+    if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && reorderState !== null && reorderState !== void 0 && (_reorderState$result = reorderState.result) !== null && _reorderState$result !== void 0 && _reorderState$result.uuid) {
+      handleGoToPage({
+        page: 'checkout',
+        params: {
+          cartUuid: reorderState === null || reorderState === void 0 ? void 0 : reorderState.result.uuid
+        }
+      });
+    }
+  }, [reorderState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -469,12 +487,19 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     className: "date"
   }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
-  })), /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.OrderActions, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
     className: "Review-order",
     active: (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
   }, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleOpenReview
-  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.REVIEW_ORDER) || 'Review your Order'))), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
+  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.REVIEW_ORDER) || 'Review your Order'))), (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && /*#__PURE__*/_react.default.createElement(_styles.NewOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    outline: true,
+    onClick: function onClick() {
+      return handleReorder(order.id);
+    },
+    disabled: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading
+  }, reorderState !== null && reorderState !== void 0 && reorderState.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')))), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
   }), /*#__PURE__*/_react.default.createElement("p", {
     className: "order-status"

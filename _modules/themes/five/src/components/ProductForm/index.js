@@ -384,6 +384,18 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     (0, _utils.scrollTo)(productContainer, topPos, 200);
   };
 
+  var handleSlideChange = function handleSlideChange() {
+    var videos = document.querySelectorAll('iframe, video');
+    Array.prototype.forEach.call(videos, function (video) {
+      if (video.tagName.toLowerCase() === 'video') {
+        video.pause();
+      } else {
+        var src = video.src;
+        video.src = src;
+      }
+    });
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -427,7 +439,10 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     thumbs: {
       swiper: thumbsSwiper
     },
-    className: "mySwiper2"
+    className: "mySwiper2",
+    onSlideChange: function onSlideChange() {
+      return handleSlideChange();
+    }
   }, gallery.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: i
@@ -604,9 +619,10 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         e.preventDefault();
       }
     }
-  }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit) && /*#__PURE__*/_react.default.createElement("span", {
-    className: "qty"
-  }, productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
+  }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    className: "qty",
+    value: productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)
+  }), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
     className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
   }), isHaveWeight && /*#__PURE__*/_react.default.createElement(_styles.WeightUnitSwitch, null, /*#__PURE__*/_react.default.createElement(_styles.WeightUnitItem, {
@@ -625,7 +641,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClick: function onClick() {
       return handleSaveProduct();
     },
-    disabled: orderState.loading || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) === 0 || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) < (product === null || product === void 0 ? void 0 : product.minimum_per_order) || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) > (product === null || product === void 0 ? void 0 : product.maximum_per_order)
+    disabled: orderState.loading || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) === 0 || (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) < (product === null || product === void 0 ? void 0 : product.minimum_per_order) || (product === null || product === void 0 ? void 0 : product.maximum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) > (product === null || product === void 0 ? void 0 : product.maximum_per_order)
   }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.LOADING) || 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.UPDATE) || 'Update') : t('ADD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.ADD) || 'Add'))), auth && !((_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && _orderState$options2.address_id) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     color: "primary",
