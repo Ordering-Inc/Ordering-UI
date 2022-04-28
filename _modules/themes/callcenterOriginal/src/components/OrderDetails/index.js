@@ -109,6 +109,16 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       parseNumber = _useUtils2$.parseNumber,
       parseDate = _useUtils2$.parseDate;
 
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+      _useCustomer2 = _slicedToArray(_useCustomer, 2),
+      customerState = _useCustomer2[0],
+      deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 2),
+      orderState = _useOrder2[0],
+      refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
+
   var _useState = (0, _react.useState)({
     business: false,
     driver: false
@@ -344,6 +354,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }, 0);
   };
 
+  var handleStartNewOrder = function handleStartNewOrder() {
+    deleteUserCustomer(true);
+    refreshOrderOptions();
+    handleGoToPage({
+      page: 'home'
+    });
+  };
+
   (0, _react.useEffect)(function () {
     if (driverLocation) {
       locations[0] = driverLocation;
@@ -386,9 +404,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.ReOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
-      return handleGoToPage({
-        page: 'search'
-      });
+      return handleStartNewOrder();
     }
   }, t('START_NEW_ORDER', 'Start new order')))), /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
