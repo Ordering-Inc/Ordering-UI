@@ -50,7 +50,8 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
 
   var cart = props.cart,
       placesState = props.placesState,
-      handleChangePlace = props.handleChangePlace;
+      handleChangePlace = props.handleChangePlace,
+      onClose = props.onClose;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -141,7 +142,10 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
   })) && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: placesState !== null && placesState !== void 0 && placesState.loading ? 'secondary' : 'primary',
-    disabled: placesState === null || placesState === void 0 ? void 0 : placesState.loading
+    disabled: placesState === null || placesState === void 0 ? void 0 : placesState.loading,
+    onClick: function onClick() {
+      return onClose && onClose();
+    }
   }, t('CONTINUE', 'Continue'))));
 };
 

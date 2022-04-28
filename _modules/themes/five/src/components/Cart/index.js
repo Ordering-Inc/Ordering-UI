@@ -608,7 +608,10 @@ var CartUI = function CartUI(props) {
       return setOpenPlaceModal(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
-    cart: cart
+    cart: cart,
+    onClose: function onClose() {
+      return setOpenPlaceModal(false);
+    }
   })), (openUpselling || isUpselling) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: cart.business_id,
     isCustomMode: isCustomMode,
