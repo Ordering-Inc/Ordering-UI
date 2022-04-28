@@ -574,7 +574,9 @@ const ProductOptionsUI = (props) => {
                           />
                         )
                       }
-                      {qtyBy?.weight_unit && (<span className='qty'>{productCart.quantity * product?.weight}</span>)}
+                      {qtyBy?.weight_unit && (
+                        <Input className='qty' value={productCart.quantity * product?.weight} />
+                      )}
                       <FiPlusCircle
                         onClick={increment}
                         className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
@@ -594,7 +596,7 @@ const ProductOptionsUI = (props) => {
                     className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                     color='primary'
                     onClick={() => handleSaveProduct()}
-                    disabled={orderState.loading || productCart?.quantity === 0 || productCart?.quantity < product?.minimum_per_order || productCart?.quantity > product?.maximum_per_order}
+                    disabled={orderState.loading || productCart?.quantity === 0 || (product?.minimum_per_order && (productCart?.quantity < product?.minimum_per_order)) || (product?.maximum_per_order && (productCart?.quantity > product?.maximum_per_order))}
                   >
                     {orderState.loading ? (
                       <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
