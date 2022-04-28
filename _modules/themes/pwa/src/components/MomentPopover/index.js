@@ -117,8 +117,7 @@ var MomentPopover = function MomentPopover(props) {
       attributes = _popper.attributes,
       forceUpdate = _popper.forceUpdate;
   (0, _react.useEffect)(function () {
-    if (orderStatus.loading) return;
-    forceUpdate && forceUpdate();
+    if (orderStatus.loading) return; // forceUpdate && forceUpdate()
   }, [open, orderStatus]);
 
   var handleClickOutside = function handleClickOutside(e) {

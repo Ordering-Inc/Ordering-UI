@@ -84,8 +84,7 @@ var CartPopover = function CartPopover(props) {
   var styles = popper.styles,
       attributes = popper.attributes,
       forceUpdate = popper.forceUpdate;
-  (0, _react.useEffect)(function () {
-    forceUpdate && forceUpdate();
+  (0, _react.useEffect)(function () {// forceUpdate && forceUpdate()
   }, [open, orderState]);
 
   var handleClickOutside = function handleClickOutside(e) {

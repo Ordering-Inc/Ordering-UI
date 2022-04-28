@@ -108,8 +108,7 @@ var UserPopover = function UserPopover(props) {
   var styles = popper.styles,
       attributes = popper.attributes,
       forceUpdate = popper.forceUpdate;
-  (0, _react.useEffect)(function () {
-    forceUpdate && forceUpdate();
+  (0, _react.useEffect)(function () {// forceUpdate && forceUpdate()
   }, [open, sessionState]);
 
   var handleClickOutside = function handleClickOutside(e) {

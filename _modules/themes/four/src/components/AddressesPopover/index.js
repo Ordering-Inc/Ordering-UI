@@ -138,8 +138,7 @@ var AddressesPopover = function AddressesPopover(props) {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [open]);
-  (0, _react.useEffect)(function () {
-    forceUpdate && forceUpdate();
+  (0, _react.useEffect)(function () {// forceUpdate && forceUpdate()
   }, [open, orderState]);
   (0, _react.useEffect)(function () {
     events.on('map_is_dragging', handleMapDragging);
