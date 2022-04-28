@@ -35,7 +35,7 @@ export const CartPopover = (props) => {
   const { styles, attributes, forceUpdate } = popper
 
   useEffect(() => {
-    forceUpdate && forceUpdate()
+    // forceUpdate && forceUpdate()
   }, [open, orderState])
 
   const handleClickOutside = (e) => {
