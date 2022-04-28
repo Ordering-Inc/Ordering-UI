@@ -257,6 +257,18 @@ const ProductOptionsUI = (props) => {
     scrollTo(productContainer, topPos, 200)
   }
 
+  const handleSlideChange = () => {
+    var videos = document.querySelectorAll('iframe, video')
+    Array.prototype.forEach.call(videos, function (video) {
+      if (video.tagName.toLowerCase() === 'video') {
+        video.pause()
+      } else {
+        var src = video.src
+        video.src = src
+      }
+    })
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -303,6 +315,7 @@ const ProductOptionsUI = (props) => {
                   navigation
                   watchOverflow
                   thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+                  onSlideChange={() => handleSlideChange()}
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
