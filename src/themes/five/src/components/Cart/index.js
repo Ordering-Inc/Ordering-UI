@@ -554,6 +554,7 @@ const CartUI = (props) => {
           >
             <PlaceSpot
               cart={cart}
+              onClose={() => setOpenPlaceModal(false)}
             />
           </Modal>
           {(openUpselling || isUpselling) && (

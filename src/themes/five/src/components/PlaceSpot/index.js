@@ -10,7 +10,8 @@ const PlaceSpotUI = (props) => {
   const {
     cart,
     placesState,
-    handleChangePlace
+    handleChangePlace,
+    onClose
   } = props
 
   const [, t] = useLanguage()
@@ -91,6 +92,7 @@ const PlaceSpotUI = (props) => {
           <Button
             color={placesState?.loading ? 'secondary' : 'primary'}
             disabled={placesState?.loading}
+            onClick={() => onClose && onClose()}
           >
             {t('CONTINUE', 'Continue')}
           </Button>
