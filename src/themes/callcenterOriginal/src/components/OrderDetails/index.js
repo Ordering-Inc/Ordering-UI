@@ -6,6 +6,8 @@ import {
   useEvent,
   useUtils,
   useConfig,
+  useOrder,
+  useCustomer,
   GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
@@ -83,6 +85,8 @@ const OrderDetailsUI = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const [customerState, { deleteUserCustomer }] = useCustomer()
+  const [orderState, { refreshOrderOptions }] = useOrder()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
@@ -167,6 +171,12 @@ const OrderDetailsUI = (props) => {
     return order?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
   }
 
+  const handleStartNewOrder = () => {
+    deleteUserCustomer(true)
+    refreshOrderOptions()
+    handleGoToPage({ page: 'home' })
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -230,7 +240,7 @@ const OrderDetailsUI = (props) => {
                 <ReOrder>
                   <Button
                     color='primary'
-                    onClick={() => handleGoToPage({ page: 'search' })}
+                    onClick={() => handleStartNewOrder()}
                   >
                     {t('START_NEW_ORDER', 'Start new order')}
                   </Button>
