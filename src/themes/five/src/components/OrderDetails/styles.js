@@ -159,7 +159,7 @@ const StatusBarStyled = styled.div`
   margin: 18px 0px 8px;
   background: ${props => `linear-gradient(to right, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)`};
   ${props => props.theme?.rtl && css`
-    background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%)
+    background: linear-gradient(to left, ${props.theme.colors.primary} ${props.percentage}%, ${props.theme.colors.disabled} ${props.percentage}%);
   `}
 `
 
@@ -167,7 +167,7 @@ export const StatusBar = (props) => {
   return (
     <StatusBarStyled
       {...props}
-      // style={{ background: `linear-gradient(to right, #D81212 ${props.percentage}%, #BFBFBF ${props.percentage}%)` }}
+    // style={{ background: `linear-gradient(to right, #D81212 ${props.percentage}%, #BFBFBF ${props.percentage}%)` }}
     >
       {props.children}
     </StatusBarStyled>
@@ -492,4 +492,14 @@ export const CommentContainer = styled.div`
   h3 {
     margin: 0;
   }
+`
+export const NewOrder = styled.div`
+  button {
+    width: 160px;
+  }
+`
+export const OrderActions = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 `

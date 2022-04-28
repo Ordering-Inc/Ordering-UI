@@ -56,7 +56,9 @@ import {
   SkeletonWrapper,
   ReviewWrapper,
   Exclamation,
-  CommentContainer
+  CommentContainer,
+  NewOrder,
+  OrderActions
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -75,7 +77,9 @@ const OrderDetailsUI = (props) => {
     messages,
     setMessages,
     readMessages,
-    messagesReadList
+    messagesReadList,
+    reorderState,
+    handleReorder
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -91,6 +95,7 @@ const OrderDetailsUI = (props) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
+
   const { order, loading, businessData, error } = props.order
   const placeSpotTypes = [3, 4]
 
@@ -226,6 +231,15 @@ const OrderDetailsUI = (props) => {
     }
   }, [messagesReadList])
 
+  useEffect(() => {
+    if (reorderState?.error) {
+      handleBusinessRedirect(businessData?.slug)
+    }
+    if (!reorderState?.error && reorderState?.result?.uuid) {
+      handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
+    }
+  }, [reorderState])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -250,9 +264,22 @@ const OrderDetailsUI = (props) => {
                       : parseDate(order?.delivery_datetime, { utc: false })
                   }
                 </p>
-                <ReviewOrderLink
-                  className='Review-order'
-                  active={(
+                <OrderActions>
+                  <ReviewOrderLink
+                    className='Review-order'
+                    active={(
+                      parseInt(order?.status) === 1 ||
+                      parseInt(order?.status) === 2 ||
+                      parseInt(order?.status) === 5 ||
+                      parseInt(order?.status) === 6 ||
+                      parseInt(order?.status) === 10 ||
+                      parseInt(order?.status) === 11 ||
+                      parseInt(order?.status) === 12
+                    ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
+                  >
+                    <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                  </ReviewOrderLink>
+                  {(
                     parseInt(order?.status) === 1 ||
                     parseInt(order?.status) === 2 ||
                     parseInt(order?.status) === 5 ||
@@ -260,10 +287,19 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
-                >
-                  <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                </ReviewOrderLink>
+                  ) && (
+                      <NewOrder>
+                        <Button
+                          color='primary'
+                          outline
+                          onClick={() => handleReorder(order.id)}
+                          disabled={reorderState?.loading}
+                        >
+                          {reorderState?.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
+                        </Button>
+                      </NewOrder>
+                    )}
+                </OrderActions>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
               </OrderInfo>

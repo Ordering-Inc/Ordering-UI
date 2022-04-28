@@ -66,7 +66,7 @@ export const UserPopover = (props) => {
   const { styles, attributes, forceUpdate } = popper
 
   useEffect(() => {
-    forceUpdate && forceUpdate()
+    // forceUpdate && forceUpdate()
   }, [open, sessionState])
 
   const handleClickOutside = (e) => {
