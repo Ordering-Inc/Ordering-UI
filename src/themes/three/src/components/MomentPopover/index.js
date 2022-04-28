@@ -31,7 +31,7 @@ export const MomentPopover = (props) => {
 
   useEffect(() => {
     if (orderStatus.loading) return
-    forceUpdate && forceUpdate()
+    // forceUpdate && forceUpdate()
   }, [open, orderStatus])
 
   const handleClickOutside = (e) => {
