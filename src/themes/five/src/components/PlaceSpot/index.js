@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Select } from '../../styles/Select'
 import { PlaceSpot as PlaceSpotController, useLanguage } from 'ordering-components'
-import { PlaceGroupContainer, PlaceSpotContainer, Title } from './styles'
+import { PlaceGroupContainer, PlaceSpotContainer, Title, ButtonWrapper } from './styles'
 import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../NotFoundSource'
+import { Button } from '../../styles/Buttons'
 
 const PlaceSpotUI = (props) => {
   const {
@@ -84,6 +85,16 @@ const PlaceSpotUI = (props) => {
             </div>
           )}
         </>
+      )}
+      {placeGroupSelected && placesState?.places?.find(place => place?.id === cart?.place_id) && (
+        <ButtonWrapper>
+          <Button
+            color={placesState?.loading ? 'secondary' : 'primary'}
+            disabled={placesState?.loading}
+          >
+            {t('CONTINUE', 'Continue')}
+          </Button>
+        </ButtonWrapper>
       )}
     </PlaceSpotContainer>
   )
