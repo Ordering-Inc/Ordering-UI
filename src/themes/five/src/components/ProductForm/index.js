@@ -244,17 +244,15 @@ const ProductOptionsUI = (props) => {
     if (!isErrors) {
       return
     }
-    const myElement = document.getElementsByClassName('error')[0]
-    const productContainer = document.getElementsByClassName('product-container')[0]
-    if (!myElement || !productContainer) {
-      return
+    const productContainer = document.getElementsByClassName('popup-dialog')[0]
+    const errorCount = document.getElementsByClassName('error').length
+    console.log('🚀 ~ file: index.js ~ line 260 ~ scrollDown ~ errorCount', errorCount)
+    let myElement = document.getElementsByClassName('error')[0]
+    if (errorCount > 1) {
+      myElement = document.getElementsByClassName('error')[1]
     }
-    let topPos = myElement.offsetTop - productContainer.offsetTop
-    if (windowSize.width <= 768) {
-      const productImage = document.getElementById('product_image')
-      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
-    }
-    scrollTo(productContainer, topPos, 200)
+    myElement.scrollIntoView(true)
+    productContainer.scrollTop -= 100
   }
 
   const handleSlideChange = () => {
@@ -483,6 +481,13 @@ const ProductOptionsUI = (props) => {
                     ))}
                   </WrapperIngredients>
                 </div>
+
+
+
+
+
+
+
                 <div id='extra'>
                   {
                     product?.extras.map(extra => extra.options.map(option => {
@@ -524,6 +529,14 @@ const ProductOptionsUI = (props) => {
                     }))
                   }
                 </div>
+
+
+
+
+
+
+
+
                 {!product?.hide_special_instructions && (
                   <ProductComment>
                     <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
