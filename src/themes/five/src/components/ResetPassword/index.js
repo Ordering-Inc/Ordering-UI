@@ -16,6 +16,8 @@ import {
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
+import { LoginForm } from '../LoginForm'
+import { Modal } from '../Modal'
 
 const ResetPasswordUI = (props) => {
   const {
@@ -25,12 +27,12 @@ const ResetPasswordUI = (props) => {
     resetPasswordData,
     handleResetPassword,
     handleChangeInput,
-    redirectResetPassword,
-    redirectLogin
+    redirectResetPassword
   } = props
 
   const { handleSubmit, register, errors, watch } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [openAuthModal, setOpenAuthModal] = useState(false)
   const [, t] = useLanguage()
   const theme = useTheme()
 
@@ -53,11 +55,10 @@ const ResetPasswordUI = (props) => {
     })
   }
 
-  const handleCloseAlert = () => {
-    if (!formState.loading && formState.result?.result?.length && !formState.result.error) {
-      redirectLogin && redirectLogin()
+  const handleSuccessLogin = (user) => {
+    if (user) {
+      setOpenAuthModal(false)
     }
-    closeAlert()
   }
 
   useEffect(() => {
@@ -69,8 +70,11 @@ const ResetPasswordUI = (props) => {
     } else if (!formState.loading && formState.result?.result?.length) {
       setAlertState({
         open: true,
-        content: formState.result?.result === 'OK' ? t('PASSWORD_RESET_SUCCESS', 'Password changed successfully') : formState.result?.result
+        content: formState.result?.result === 'OK' ? t('PASSWORD_RESET_SUCCESS', 'Password changed successfully') : t(formState.result?.result, 'Password changed successfully')
       })
+    }
+    if (!formState.loading && formState.result?.result?.length > 0 && !formState.result.error) {
+      setOpenAuthModal(true)
     }
   }, [formState])
 
@@ -208,13 +212,26 @@ const ResetPasswordUI = (props) => {
           props.afterMidComponents?.map((MidComponent, i) => (
             <MidComponent key={i} {...props} />))
         }
+        {openAuthModal && (
+          <Modal
+            open={openAuthModal}
+            onClose={() => setOpenAuthModal(false)}
+            width='700px'
+          >
+            <LoginForm
+              handleSuccessLogin={handleSuccessLogin}
+              useLoginByCellphone
+              isPopup
+            />
+          </Modal>
+        )}
         <Alert
           title={t('RESET_PASSWORD', 'Reset Password')}
           content={alertState?.content}
           acceptText={t('ACCEPT', 'Accept')}
           open={alertState.open}
-          onClose={() => handleCloseAlert()}
-          onAccept={() => handleCloseAlert()}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
           closeOnBackdrop={false}
         />
       </ResetPasswordContainer>
