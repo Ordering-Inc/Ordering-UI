@@ -246,7 +246,6 @@ const ProductOptionsUI = (props) => {
     }
     const productContainer = document.getElementsByClassName('popup-dialog')[0]
     const errorCount = document.getElementsByClassName('error').length
-    console.log('🚀 ~ file: index.js ~ line 260 ~ scrollDown ~ errorCount', errorCount)
     let myElement = document.getElementsByClassName('error')[0]
     if (errorCount > 1) {
       myElement = document.getElementsByClassName('error')[1]
@@ -481,13 +480,6 @@ const ProductOptionsUI = (props) => {
                     ))}
                   </WrapperIngredients>
                 </div>
-
-
-
-
-
-
-
                 <div id='extra'>
                   {
                     product?.extras.map(extra => extra.options.map(option => {
@@ -529,14 +521,6 @@ const ProductOptionsUI = (props) => {
                     }))
                   }
                 </div>
-
-
-
-
-
-
-
-
                 {!product?.hide_special_instructions && (
                   <ProductComment>
                     <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
