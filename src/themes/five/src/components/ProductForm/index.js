@@ -245,12 +245,12 @@ const ProductOptionsUI = (props) => {
       return
     }
     const productContainer = document.getElementsByClassName('popup-dialog')[0]
-    const errorCount = document.getElementsByClassName('error').length
-    let myElement = document.getElementsByClassName('error')[0]
+    const errorCount = document.getElementsByClassName('error')?.length
+    let unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
     if (errorCount > 1) {
-      myElement = document.getElementsByClassName('error')[1]
+      unselectedFirstSubOption = document.getElementsByClassName('error')?.[1]
     }
-    myElement.scrollIntoView(true)
+    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
     productContainer.scrollTop -= 100
   }
 
