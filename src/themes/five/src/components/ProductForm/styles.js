@@ -205,9 +205,18 @@ export const ProductActions = styled.div`
   background-color: #FFF;
 
   div.price {
-    font-weight: 600;
-    font-size: 20px;
     color: ${props => props.theme?.colors.darkTextColor};
+    h4 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 20px;
+    }
+    span {
+      font-size: 13px;
+      color: #D83520;
+      line-height: 15px;
+    }
   }
 
   div.incdec-control {
@@ -474,6 +483,12 @@ export const WeightUnitSwitch = styled.div`
   display: flex;
   flex-direction: column;
   width: auto;
+  margin-left: 10px;
+  
+  ${props => props.theme?.rtl && css`
+    margin-right: 10px;
+    margin-left: 0;
+ `}
 `
 export const WeightUnitItem = styled.span`
   display: inline-flex;

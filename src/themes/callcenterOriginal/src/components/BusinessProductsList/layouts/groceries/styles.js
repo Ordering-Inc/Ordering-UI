@@ -51,6 +51,7 @@ export const WrapAllCategories = styled.div`
     p {
       margin: 0;
       color: #909BA9;
+      white-space: pre;
     }
     span {
       color: ${props => props.theme.colors.primary};
@@ -90,5 +91,8 @@ export const DescriptionModalContainer = styled.div`
     min-width: 300px;
     min-height: 300px;
     margin-bottom: 20px;
+  }
+  p{
+    white-space: pre;
   }
 `

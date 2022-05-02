@@ -146,6 +146,12 @@ export const Container = styled.div`
       cursor: not-allowed;
     `}
   }
+
+  ${({ isError }) => isError && css`
+    input.PhoneInputInput {
+      border: 1px solid ${props => props.theme.colors.danger500} !important;
+    }
+  `}
 `
 
 export const ErrorMsg = styled.span`
