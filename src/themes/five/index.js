@@ -62,6 +62,7 @@ import { ProductIngredient } from './src/components/ProductIngredient'
 import { ProductOption } from './src/components/ProductOption'
 import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
 import { RenderProductsLayout } from './src/components/RenderProductsLayout'
+import { ResetPassword } from './src/components/ResetPassword'
 import { SearchBar } from './src/components/SearchBar'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
@@ -148,6 +149,7 @@ export {
   ProductOption,
   ProductOptionSubOption,
   RenderProductsLayout,
+  ResetPassword,
   SearchBar,
   SidebarMenu,
   SignUpForm,
