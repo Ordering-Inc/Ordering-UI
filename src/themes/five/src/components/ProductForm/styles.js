@@ -4,7 +4,6 @@ export const ProductContainer = styled.div`
   max-height: 100vh;
   position: relative;
   padding: 50px 20px 20px;
-  overflow-x: hidden;
 
   @media (min-width: 768px) {
     height: 100%;
@@ -16,7 +15,6 @@ export const ProductContainer = styled.div`
 
   @media (min-width: 1200px) {
     flex-wrap: nowrap;
-    overflow-y: auto;
     max-height: 70vh;
     padding-bottom: 0;
   }
@@ -343,7 +341,7 @@ export const WrapperIngredients = styled.div`
 export const ProductTabContainer = styled.div`
   border-bottom: 1px solid #E9ECEF;
   position: sticky;
-  top: 60px;
+  top: 0px;
   background: white;
   z-index: 900;
 
@@ -358,13 +356,6 @@ export const ProductTabContainer = styled.div`
         `}
       }
     }
-  }
-
-  @media (min-width: 769px) {
-    top: 0px;
-  }
-  @media (min-width: 1200px) {
-    top: -20px;
   }
 `
 

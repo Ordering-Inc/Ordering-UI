@@ -60,7 +60,9 @@ const ProductOptionSubOptionUI = (props) => {
 
   const handleSuboptionClick = () => {
     toggleSelect()
-    scrollDown()
+    if (balance === option?.max - 1 && !state.selected) {
+      scrollDown()
+    }
     if (balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1) && !state.selected) {
       setShowMessage(true)
     }
