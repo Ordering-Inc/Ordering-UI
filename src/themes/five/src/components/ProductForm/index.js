@@ -244,17 +244,14 @@ const ProductOptionsUI = (props) => {
     if (!isErrors) {
       return
     }
-    const myElement = document.getElementsByClassName('error')[0]
-    const productContainer = document.getElementsByClassName('product-container')[0]
-    if (!myElement || !productContainer) {
-      return
+    const productContainer = document.getElementsByClassName('popup-dialog')[0]
+    const errorCount = document.getElementsByClassName('error')?.length
+    let unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
+    if (errorCount > 1) {
+      unselectedFirstSubOption = document.getElementsByClassName('error')?.[1]
     }
-    let topPos = myElement.offsetTop - productContainer.offsetTop
-    if (windowSize.width <= 768) {
-      const productImage = document.getElementById('product_image')
-      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
-    }
-    scrollTo(productContainer, topPos, 200)
+    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
+    productContainer.scrollTop -= 100
   }
 
   const handleSlideChange = () => {
