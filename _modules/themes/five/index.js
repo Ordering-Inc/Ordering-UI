@@ -405,6 +405,12 @@ Object.defineProperty(exports, "RenderProductsLayout", {
     return _RenderProductsLayout.RenderProductsLayout;
   }
 });
+Object.defineProperty(exports, "ResetPassword", {
+  enumerable: true,
+  get: function get() {
+    return _ResetPassword.ResetPassword;
+  }
+});
 Object.defineProperty(exports, "SearchBar", {
   enumerable: true,
   get: function get() {
@@ -635,6 +641,8 @@ var _ProductOption = require("./src/components/ProductOption");
 var _ProductOptionSubOption = require("./src/components/ProductOptionSubOption");
 
 var _RenderProductsLayout = require("./src/components/RenderProductsLayout");
+
+var _ResetPassword = require("./src/components/ResetPassword");
 
 var _SearchBar = require("./src/components/SearchBar");
 

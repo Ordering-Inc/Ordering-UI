@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ProductContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: 100vh;\n  position: relative;\n  padding: 50px 20px 20px;\n  overflow-x: hidden;\n\n  @media (min-width: 768px) {\n    height: 100%;\n  }\n\n  @media (min-width: 769px) {\n    padding: 20px;\n  }\n\n  @media (min-width: 1200px) {\n    flex-wrap: nowrap;\n    overflow-y: auto;\n    max-height: 70vh;\n    padding-bottom: 0;\n  }\n"])));
+var ProductContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: 100vh;\n  position: relative;\n  padding: 50px 20px 20px;\n\n  @media (min-width: 768px) {\n    height: 100%;\n  }\n\n  @media (min-width: 769px) {\n    padding: 20px;\n  }\n\n  @media (min-width: 1200px) {\n    flex-wrap: nowrap;\n    max-height: 70vh;\n    padding-bottom: 0;\n  }\n"])));
 
 exports.ProductContainer = ProductContainer;
 
@@ -89,7 +89,7 @@ var WrapperIngredients = _styledComponents.default.div(_templateObject14 || (_te
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var ProductTabContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 60px;\n  background: white;\n  z-index: 900;\n\n  > div {\n    div {\n      padding: 9px 15px;\n      &:first-child {\n        padding-left: 0px;\n        ", "\n      }\n    }\n  }\n\n  @media (min-width: 769px) {\n    top: 0px;\n  }\n  @media (min-width: 1200px) {\n    top: -20px;\n  }\n"])), function (props) {
+var ProductTabContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 900;\n\n  > div {\n    div {\n      padding: 9px 15px;\n      &:first-child {\n        padding-left: 0px;\n        ", "\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n          padding-right: 0px;\n          padding-left: 15px;\n        "])));

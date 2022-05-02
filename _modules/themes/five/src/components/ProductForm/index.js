@@ -361,27 +361,26 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }, [product]);
 
   var scrollDown = function scrollDown() {
+    var _document$getElements, _document$getElements2;
+
     var isErrors = Object.values(errors).length > 0;
 
     if (!isErrors) {
       return;
     }
 
-    var myElement = document.getElementsByClassName('error')[0];
-    var productContainer = document.getElementsByClassName('product-container')[0];
+    var productContainer = document.getElementsByClassName('popup-dialog')[0];
+    var errorCount = (_document$getElements = document.getElementsByClassName('error')) === null || _document$getElements === void 0 ? void 0 : _document$getElements.length;
+    var unselectedFirstSubOption = (_document$getElements2 = document.getElementsByClassName('error')) === null || _document$getElements2 === void 0 ? void 0 : _document$getElements2[0];
 
-    if (!myElement || !productContainer) {
-      return;
+    if (errorCount > 1) {
+      var _document$getElements3;
+
+      unselectedFirstSubOption = (_document$getElements3 = document.getElementsByClassName('error')) === null || _document$getElements3 === void 0 ? void 0 : _document$getElements3[1];
     }
 
-    var topPos = myElement.offsetTop - productContainer.offsetTop;
-
-    if (windowSize.width <= 768) {
-      var productImage = document.getElementById('product_image');
-      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0);
-    }
-
-    (0, _utils.scrollTo)(productContainer, topPos, 200);
+    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true);
+    productContainer.scrollTop -= 100;
   };
 
   var handleSlideChange = function handleSlideChange() {
