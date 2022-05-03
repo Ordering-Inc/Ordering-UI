@@ -10,7 +10,7 @@ export const CategoriesContainer = styled.div`
   top: 0;
   border-bottom: 1px solid #D9D9D9;
   text-align: center;
-
+  width: 100%;
   ${props => props.theme.rtl && css`
     padding: 5px 0px 0px 5px;
   `}
@@ -36,11 +36,11 @@ export const CategoriesContainer = styled.div`
     `}
   }
 
-  @media (max-width: 992px) {
-    width: 100%;
+  @media (min-width: 381px) {
     padding: 15px 15px 0px 0px;
     ${props => props.theme.rtl && css`
       padding: 15px 0px 0px 15px;
     `}
-  }
+  @media (min-width: 992px) {
+    width: auto;
 `
