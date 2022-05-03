@@ -36,7 +36,8 @@ export const CategoriesContainer = styled.div`
     `}
   }
 
-  @media (min-width: 381px) {
+  @media (max-width: 992px) {
+    width: 100%;
     padding: 15px 15px 0px 0px;
     ${props => props.theme.rtl && css`
       padding: 15px 0px 0px 15px;

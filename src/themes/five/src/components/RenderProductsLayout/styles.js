@@ -13,8 +13,8 @@ export const WrapContent = styled.div`
   padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
 
-  @media (min-width: 381px) {
-    padding: 0px;
+  @media (max-width: 540px) {
+    padding: 8px;
   }
 
   &#businessProductList {
