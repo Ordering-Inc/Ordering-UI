@@ -73,6 +73,8 @@ const BusinessPreorderUI = (props) => {
   const [timeList, setTimeList] = useState([])
   const [isEnabled, setIsEnabled] = useState(false)
 
+  const is12Hours = configs?.dates_moment_format?.value?.includes('hh:mm')
+
   const preOrderType = [
     { value: 'business_menu', content: <TypeContent>{t('BUSINESS_MENU', 'Business menu')}</TypeContent> },
     { value: 'business_hours', content: <TypeContent>{t('BUSINESS_HOURS', 'Business hours')}</TypeContent> }
@@ -106,7 +108,7 @@ const BusinessPreorderUI = (props) => {
         if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
           let hour = ''
           let meridian = ''
-          if (configs?.format_time?.value === '24') hour = i < 10 ? '0' + i : i
+          if (!is12Hours) hour = i < 10 ? '0' + i : i
           else {
             if (i === 0) {
               hour = '12'
