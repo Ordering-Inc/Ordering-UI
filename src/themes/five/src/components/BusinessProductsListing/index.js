@@ -72,7 +72,6 @@ const BusinessProductsListingUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
-  const [isCartProductEdit, setIsCartProductEdit] = useState(false)
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
@@ -92,14 +91,7 @@ const BusinessProductsListingUI = (props) => {
       product: product.id,
       category: product.category_id
     })
-    const cartProduct = currentCart?.products?.find(cproduct => cproduct?.id === product?.id)
-    if (cartProduct) {
-      setIsCartProductEdit(true)
-      setCurProduct(cartProduct)
-    } else {
-      setIsCartProductEdit(false)
-      setCurProduct(product)
-    }
+    setCurProduct(product)
     setModalIsOpen(true)
     events.emit('product_clicked', product)
   }
@@ -289,27 +281,12 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
         {(productModal.product || curProduct) && (
-          <>
-            {isCartProductEdit ? (
-              <ProductForm
-                isCartProduct
-                productCart={curProduct}
-                businessSlug={business?.slug}
-                businessId={business.id}
-                categoryId={curProduct?.category_id}
-                productId={curProduct?.id}
-                onSave={handlerProductAction}
-              />
-            ) : (
-              <ProductForm
-                businessSlug={business?.slug}
-                product={productModal.product || curProduct}
-                businessId={business?.id}
-                onSave={handlerProductAction}
-              />
-            )}
-          </>
-
+          <ProductForm
+            businessSlug={business?.slug}
+            product={productModal.product || curProduct}
+            businessId={business?.id}
+            onSave={handlerProductAction}
+          />
         )}
       </Modal>
 
