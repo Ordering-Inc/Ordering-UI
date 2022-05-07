@@ -195,11 +195,6 @@ const BusinessProductsListingUI = (props) => {
     getNextProducts()
   }, [hasScrollBar, categoryState?.loading])
 
-  useEffect(() => {
-    if (!business) return
-    console.log(business, 'This is local storage')
-  }, [business])
-
   return (
     <>
       <ProductsContainer>
