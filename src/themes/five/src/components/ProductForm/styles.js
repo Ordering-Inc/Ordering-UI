@@ -203,6 +203,7 @@ export const ProductActions = styled.div`
   background-color: #FFF;
 
   div.price {
+    padding-top: 10px;
     color: ${props => props.theme?.colors.darkTextColor};
     h4 {
       margin: 0;
@@ -218,19 +219,24 @@ export const ProductActions = styled.div`
   }
 
   div.incdec-control {
-    width: 50%;
+    width: 135px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     position: relative;
 
     svg {
-      width: 22px;
-      height: 22px;
+      width: 25px;
+      height: 25px;
       cursor: pointer;
     }
   }
 
+  div.price-amount-block {
+    display: flex;
+    justify-content: space-between;
+    width: 80%
+  }
   /* div:last-child {
     width: 100%;
     display: flex;
@@ -295,12 +301,12 @@ export const ProductActions = styled.div`
     }
 
     button.add {
-      width: 30%;
+      width: 35%;
       margin-top: 0;
     }
 
     div.incdec-control {
-      width: 20%;
+      padding-right: 18%;
       &.show-weight-unit{
         width: 30%;
       }
