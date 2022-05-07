@@ -216,6 +216,7 @@ export const TimeItem = styled.div`
 
   span {
     font-size: 14px;
+    white-space: nowrap;
   }
 
   @media (min-width: 400px) {
@@ -232,4 +233,10 @@ export const TimeItem = styled.div`
     width: calc(16.66% - 24px);
     min-width: calc(16.66% - 24px);
   }
+`
+
+export const ClosedBusinessMsg = styled.div`
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
 `

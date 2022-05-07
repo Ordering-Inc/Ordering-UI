@@ -50,9 +50,9 @@ const BusinessProductsListUI = (props) => {
         {category?.id && (
           <ProductsListing>
             {
-              categoryState.products?.map(product => (
+              categoryState.products?.map((product, i) => (
                 <SingleProductCard
-                  key={product?.id}
+                  key={i}
                   isSoldOut={(product.inventoried && !product.quantity)}
                   product={product}
                   businessId={businessId}
@@ -73,9 +73,9 @@ const BusinessProductsListUI = (props) => {
                   <WrapAllCategories id='categoryfeatured'>
                     <h3>{t('FEATURED', 'Featured')}</h3>
                     <ProductsListing>
-                      {categoryState.products?.map(product => product.featured && (
+                      {categoryState.products?.map((product, i) => product.featured && (
                         <SingleProductCard
-                          key={product?.id}
+                          key={i}
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
                           businessId={businessId}
@@ -101,7 +101,7 @@ const BusinessProductsListUI = (props) => {
             const shortCategoryDescription = category?.description?.length > 200 ? `${category?.description?.substring(0, 200)}...` : category?.description
 
             return (
-              <React.Fragment key={category?.id}>
+              <React.Fragment key={i}>
                 {
                   products.length > 0 && (
                     <WrapAllCategories id={`category${category?.id}`}>
@@ -127,9 +127,9 @@ const BusinessProductsListUI = (props) => {
                       </HeaderWrapper>
                       <ProductsListing>
                         {
-                          products.map(product => (
+                          products.map((product, i) => (
                             <SingleProductCard
-                              key={product?.id}
+                              key={i}
                               isSoldOut={product.inventoried && !product.quantity}
                               businessId={businessId}
                               product={product}
