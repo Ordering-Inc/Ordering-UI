@@ -253,6 +253,15 @@ const BusinessesListingUI = (props) => {
                   isCustomLayout={isCustomLayout}
                   isShowCallcenterInformation={isCustomLayout}
                   onPreorderBusiness={setPreorderBusiness}
+                  businessHeader={business?.header}
+                  businessFeatured={business?.featured}
+                  businessOffers={business?.offers}
+                  businessLogo={business?.logo}
+                  businessReviews={business?.reviews}
+                  businessDeliveryPrice={business?.delivery_price}
+                  businessDeliveryTime={business?.delivery_time}
+                  businessPickupTime={business?.pickup_time}
+                  businessDistance={business?.distance}
                 />
               ))
             }

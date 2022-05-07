@@ -45,7 +45,16 @@ const BusinessControllerUI = (props) => {
     firstCard,
     minWidthEnabled,
     typeButton,
-    children
+    children,
+    businessHeader,
+    businessFeatured,
+    businessOffers,
+    businessLogo,
+    businessReviews,
+    businessDeliveryPrice,
+    businessDeliveryTime,
+    businessPickupTime,
+    businessDistance
   } = props
 
   const theme = useTheme()
@@ -86,15 +95,15 @@ const BusinessControllerUI = (props) => {
             {isSkeleton ? (
               <Skeleton height={140} />
             ) : (
-              <BusinessHeader bgimage={optimizeImage(business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} isClosed={!isBusinessOpen}>
+              <BusinessHeader bgimage={optimizeImage((businessHeader || business?.header || theme.images?.dummies?.businessLogo), 'h_400,c_limit')} isClosed={!isBusinessOpen}>
                 <BusinessTags>
-                  {business?.featured &&
+                  {(businessFeatured ?? business?.featured) &&
                     <span className='crown'>
                       <FaCrown />
                     </span>}
                   {!isCustomLayout && (
                     <div>
-                      {getBusinessOffer(business?.offers) && <span>{getBusinessOffer(business?.offers) || parsePrice(0)}</span>}
+                      {getBusinessOffer((businessOffers ?? business?.offers)) && <span>{getBusinessOffer((businessOffers ?? business?.offers)) || parsePrice(0)}</span>}
                       {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
                     </div>
                   )}
@@ -109,20 +118,20 @@ const BusinessControllerUI = (props) => {
           <BusinessContent>
             <BusinessLogoWrapper>
               <WrapperBusinessLogo isSkeleton={isSkeleton}>
-                {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
-                  <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                {!isSkeleton && (businessLogo || business?.logo || theme.images?.dummies?.businessLogo) ? (
+                  <BusinessLogo bgimage={optimizeImage((businessLogo || business?.logo || theme.images?.dummies?.businessLogo), 'h_200,c_limit')} />
                 ) : (
                   <Skeleton height={70} width={70} />
                 )}
               </WrapperBusinessLogo>
               <BusinessStarInfo>
-                {business?.reviews?.total > 0 ? (
+                {(businessReviews ?? business?.reviews?.total) > 0 ? (
                   <div className='reviews'>
                     <BisStar />
-                    <span>{business?.reviews?.total}</span>
+                    <span>{(businessReviews ?? business?.reviews?.total)}</span>
                   </div>
                 ) : (
-                  business?.reviews?.total !== 0 && <Skeleton width={50} />
+                  (businessReviews ?? business?.reviews?.total) !== 0 && <Skeleton width={50} />
                 )}
               </BusinessStarInfo>
             </BusinessLogoWrapper>
@@ -138,10 +147,10 @@ const BusinessControllerUI = (props) => {
                 <Medadata isCustomerMode={isShowCallcenterInformation} isSkeleton={isSkeleton}>
                   {orderType === 1 && (
                     <>
-                      {business?.delivery_price >= 0 ? (
+                      {(businessDeliveryPrice ?? business?.delivery_price) >= 0 ? (
                         <p>
                           <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
-                          {business && parsePrice(business?.delivery_price)}
+                          {business && parsePrice((businessDeliveryPrice ?? business?.delivery_price))}
                         </p>
                       ) : (
                         <Skeleton width={65} />
@@ -151,15 +160,15 @@ const BusinessControllerUI = (props) => {
                   {Object.keys(business).length > 0 ? (
                     <p className='bullet'>
                       <GoPrimitiveDot />
-                      {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
+                      {convertHoursToMinutes(orderState?.options?.type === 1 ? (businessDeliveryTime ?? business?.delivery_time) : (businessPickupTime ?? business?.pickup_time)) || <Skeleton width={100} />}
                     </p>
                   ) : (
                     <Skeleton width={65} />
                   )}
-                  {business?.distance >= 0 ? (
+                  {(businessDistance ?? business?.distance) >= 0 ? (
                     <p className='bullet'>
                       <GoPrimitiveDot />
-                      {parseDistance(business?.distance)}
+                      {parseDistance((businessDistance ?? business?.distance))}
                     </p>
                   ) : (
                     <Skeleton width={65} />
