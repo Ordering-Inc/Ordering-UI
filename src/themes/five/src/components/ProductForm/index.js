@@ -545,48 +545,50 @@ const ProductOptionsUI = (props) => {
                 }
               </ProductEdition>
               <ProductActions>
-                <div className='price'>
-                  <h4>{productCart.total && parsePrice(productCart.total)}</h4>
-                  {product?.minimum_per_order && productCart?.quantity < product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
-                  {product?.maximum_per_order && productCart?.quantity > product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
+                <div className='price-amount-block'>
+                  <div className='price'>
+                    <h4>{productCart.total && parsePrice(productCart.total)}</h4>
+                    {product?.minimum_per_order && productCart?.quantity < product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
+                    {product?.maximum_per_order && productCart?.quantity > product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
+                  </div>
+                  {
+                    productCart && !isSoldOut && maxProductQuantity > 0 && (
+                      <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
+                        <FiMinusCircle
+                          onClick={decrement}
+                          className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
+                        />
+                        {
+                          qtyBy?.pieces && (
+                            <Input
+                              className='qty'
+                              value={productCart?.quantity || ''}
+                              onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
+                              onKeyPress={(e) => {
+                                if (!/^[0-9.]$/.test(e.key)) {
+                                  e.preventDefault()
+                                }
+                              }}
+                            />
+                          )
+                        }
+                        {qtyBy?.weight_unit && (
+                          <Input className='qty' value={productCart.quantity * product?.weight} />
+                        )}
+                        <FiPlusCircle
+                          onClick={increment}
+                          className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
+                        />
+                        {isHaveWeight && (
+                          <WeightUnitSwitch>
+                            <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
+                            <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
+                          </WeightUnitSwitch>
+                        )}
+                      </div>
+                    )
+                  }
                 </div>
-                {
-                  productCart && !isSoldOut && maxProductQuantity > 0 && (
-                    <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
-                      <FiMinusCircle
-                        onClick={decrement}
-                        className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
-                      />
-                      {
-                        qtyBy?.pieces && (
-                          <Input
-                            className='qty'
-                            value={productCart?.quantity || ''}
-                            onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
-                            onKeyPress={(e) => {
-                              if (!/^[0-9.]$/.test(e.key)) {
-                                e.preventDefault()
-                              }
-                            }}
-                          />
-                        )
-                      }
-                      {qtyBy?.weight_unit && (
-                        <Input className='qty' value={productCart.quantity * product?.weight} />
-                      )}
-                      <FiPlusCircle
-                        onClick={increment}
-                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
-                      />
-                      {isHaveWeight && (
-                        <WeightUnitSwitch>
-                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
-                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
-                        </WeightUnitSwitch>
-                      )}
-                    </div>
-                  )
-                }
 
                 {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                   <Button
