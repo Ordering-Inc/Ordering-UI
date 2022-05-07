@@ -168,6 +168,18 @@ const BusinessProductsListingUI = (props) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  useEffect(() => {
+    if (business?.schedule?.length) {
+      window.localStorage.setItem('business_schedule', JSON.stringify(business?.schedule))
+    }
+
+    return () => {
+      if (business?.schedule?.length) {
+        window.localStorage.removeItem('business_schedule')
+      }
+    }
+  }, [business?.schedule])
+
   return (
     <>
       <ProductsContainer>
