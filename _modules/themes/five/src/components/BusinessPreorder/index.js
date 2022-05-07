@@ -68,7 +68,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 
 var BusinessPreorderUI = function BusinessPreorderUI(props) {
-  var _theme$images, _theme$images$dummies, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _orderState$options, _orderState$options$a;
+  var _configs$dates_moment, _configs$dates_moment2, _theme$images, _theme$images$dummies, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _orderState$options, _orderState$options$a;
 
   var business = props.business,
       handleClick = props.handleClick,
@@ -124,6 +124,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
       isEnabled = _useState8[0],
       setIsEnabled = _useState8[1];
 
+  var is12Hours = configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : (_configs$dates_moment2 = _configs$dates_moment.value) === null || _configs$dates_moment2 === void 0 ? void 0 : _configs$dates_moment2.includes('hh:mm');
   var preOrderType = [{
     value: 'business_menu',
     content: /*#__PURE__*/_react.default.createElement(_styles.TypeContent, null, t('BUSINESS_MENU', 'Business menu'))
@@ -160,11 +161,9 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
 
       for (var i = open.hour; i <= close.hour; i++) {
         if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
-          var _configs$format_time;
-
           var hour = '';
           var meridian = '';
-          if ((configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '24') hour = i < 10 ? '0' + i : i;else {
+          if (!is12Hours) hour = i < 10 ? '0' + i : i;else {
             if (i === 0) {
               hour = '12';
               meridian = ' ' + t('AM', 'AM');

@@ -601,6 +601,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       key: i
     }, props));
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "price-amount-block"
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "price"
   }, /*#__PURE__*/_react.default.createElement("h4", null, productCart.total && parsePrice(productCart.total)), (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) < (product === null || product === void 0 ? void 0 : product.minimum_per_order) && /*#__PURE__*/_react.default.createElement("span", null, t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product === null || product === void 0 ? void 0 : product.minimum_per_order)), (product === null || product === void 0 ? void 0 : product.maximum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) > (product === null || product === void 0 ? void 0 : product.maximum_per_order) && /*#__PURE__*/_react.default.createElement("span", null, t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product === null || product === void 0 ? void 0 : product.maximum_per_order)))), productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
     className: isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'
@@ -634,7 +636,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return handleSwitchQtyUnit('weight_unit');
     },
     active: qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit
-  }, product === null || product === void 0 ? void 0 : product.weight_unit))), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, product === null || product === void 0 ? void 0 : product.weight_unit)))), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add ".concat(maxProductQuantity === 0 || Object.keys(errors).length > 0 ? 'disabled' : ''),
     color: "primary",
     onClick: function onClick() {

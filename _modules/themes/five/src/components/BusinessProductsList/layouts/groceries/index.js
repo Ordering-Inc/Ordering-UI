@@ -99,11 +99,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     onClick: function onClick() {
       return setOpenDescription(category);
     }
-  }, t('SEE_MORE', 'See more'))))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product) {
+  }, t('SEE_MORE', 'See more'))))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product, i) {
     var _currentCart$products;
 
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
-      key: product === null || product === void 0 ? void 0 : product.id,
+      key: i,
       isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
       product: product,
       businessId: businessId,
@@ -115,7 +115,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     });
   }))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) === 'featured';
-  }).map(function (category) {
+  }).map(function (category, i) {
     var _categoriesState$feat, _categoriesState$feat2, _categoriesState$feat3, _categoryState$produc2, _categoryState$produc3, _featProducts$filter;
 
     var featProducts = business !== null && business !== void 0 && business.lazy_load_products_recommended ? categoriesState !== null && categoriesState !== void 0 && (_categoriesState$feat = categoriesState.featured) !== null && _categoriesState$feat !== void 0 && (_categoriesState$feat2 = _categoriesState$feat.products) !== null && _categoriesState$feat2 !== void 0 && _categoriesState$feat2.some(function (product) {
@@ -124,7 +124,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       return product.featured;
     })) !== null && _categoryState$produc2 !== void 0 ? _categoryState$produc2 : [];
     return (featProducts === null || featProducts === void 0 ? void 0 : featProducts.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
-      key: category === null || category === void 0 ? void 0 : category.id
+      key: i
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "wrap-header"
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -135,11 +135,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       }
     }, t('MORE', 'More'))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, featProducts === null || featProducts === void 0 ? void 0 : (_featProducts$filter = featProducts.filter(function (p, index) {
       return index < 9;
-    })) === null || _featProducts$filter === void 0 ? void 0 : _featProducts$filter.map(function (product) {
+    })) === null || _featProducts$filter === void 0 ? void 0 : _featProducts$filter.map(function (product, i) {
       var _currentCart$products2;
 
       return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
-        key: product === null || product === void 0 ? void 0 : product.id,
+        key: i,
         isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
         product: product,
         businessId: businessId,
@@ -177,7 +177,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     })) !== null && _categoryState$produc6 !== void 0 ? _categoryState$produc6 : [];
     var shortCategoryDescription = (category === null || category === void 0 ? void 0 : (_category$description4 = category.description) === null || _category$description4 === void 0 ? void 0 : _category$description4.length) > 200 ? "".concat(category === null || category === void 0 ? void 0 : (_category$description5 = category.description) === null || _category$description5 === void 0 ? void 0 : _category$description5.substring(0, 200), "...") : category === null || category === void 0 ? void 0 : category.description;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: category === null || category === void 0 ? void 0 : category.id
+      key: i
     }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
       id: "container"
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -198,11 +198,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       }
     }, t('MORE', 'More'))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.filter(function (p, index) {
       return index < 9;
-    }).map(function (product) {
+    }).map(function (product, i) {
       var _currentCart$products3;
 
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
-        key: product === null || product === void 0 ? void 0 : product.id,
+        key: i,
         isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
         businessId: businessId,
         product: product,

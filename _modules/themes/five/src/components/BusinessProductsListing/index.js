@@ -259,6 +259,21 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
+  (0, _react.useEffect)(function () {
+    var _business$schedule;
+
+    if (business !== null && business !== void 0 && (_business$schedule = business.schedule) !== null && _business$schedule !== void 0 && _business$schedule.length) {
+      window.localStorage.setItem('business_schedule', JSON.stringify(business === null || business === void 0 ? void 0 : business.schedule));
+    }
+
+    return function () {
+      var _business$schedule2;
+
+      if (business !== null && business !== void 0 && (_business$schedule2 = business.schedule) !== null && _business$schedule2 !== void 0 && _business$schedule2.length) {
+        window.localStorage.removeItem('business_schedule');
+      }
+    };
+  }, [business === null || business === void 0 ? void 0 : business.schedule]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
     onClick: function onClick() {
       return handleGoToBusinessList();

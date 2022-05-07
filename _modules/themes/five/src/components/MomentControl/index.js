@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _orderingComponents = require("ordering-components");
 
 require("react-datepicker/dist/react-datepicker.css");
@@ -86,6 +88,9 @@ var MomentControlUI = function MomentControlUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parseTime = _useUtils2[0].parseTime;
 
+  var _useLocation = (0, _reactRouterDom.useLocation)(),
+      pathname = _useLocation.pathname;
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
@@ -104,6 +109,16 @@ var MomentControlUI = function MomentControlUI(props) {
       timeList = _useState4[0],
       setTimeList = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      scheduleList = _useState6[0],
+      setScheduleList = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(true),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isEnabled = _useState8[0],
+      setIsEnabled = _useState8[1];
+
   var handleCheckBoxChange = function handleCheckBoxChange(index) {
     if (index) {
       !orderState.loading && handleAsap();
@@ -111,23 +126,96 @@ var MomentControlUI = function MomentControlUI(props) {
     } else setIsASP(false);
   };
 
-  (0, _react.useEffect)(function () {
-    var _timeLists = hoursList.map(function (hour) {
-      return {
-        value: hour.startTime,
-        text: is12hours ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
-          outputFormat: 'hh:mma'
-        }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
-          outputFormat: 'HH:mm'
-        })
+  var validateSelectedDate = function validateSelectedDate(curdate, schedule) {
+    var day = (0, _moment.default)(curdate).format('d');
+    setIsEnabled(schedule[day].enabled);
+  };
+
+  var getTimes = function getTimes(curdate, schedule) {
+    validateSelectedDate(curdate, schedule);
+    var date = new Date();
+    var dateParts = curdate.split('-');
+    var dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+    var times = [];
+
+    for (var k = 0; k < schedule[dateSeleted.getDay()].lapses.length; k++) {
+      var open = {
+        hour: schedule[dateSeleted.getDay()].lapses[k].open.hour,
+        minute: schedule[dateSeleted.getDay()].lapses[k].open.minute
       };
-    });
+      var close = {
+        hour: schedule[dateSeleted.getDay()].lapses[k].close.hour,
+        minute: schedule[dateSeleted.getDay()].lapses[k].close.minute
+      };
+
+      for (var i = open.hour; i <= close.hour; i++) {
+        if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
+          var hour = '';
+          var meridian = '';
+          if (!is12hours) hour = i < 10 ? '0' + i : i;else {
+            if (i === 0) {
+              hour = '12';
+              meridian = ' ' + t('AM', 'AM');
+            } else if (i > 0 && i < 12) {
+              hour = i < 10 ? '0' + i : i;
+              meridian = ' ' + t('AM', 'AM');
+            } else if (i === 12) {
+              hour = '12';
+              meridian = ' ' + t('PM', 'PM');
+            } else {
+              hour = i - 12 < 10 ? '0' + (i - 12) : i - 12;
+              meridian = ' ' + t('PM', 'PM');
+            }
+          }
+
+          for (var j = i === open.hour ? open.minute : 0; j <= (i === close.hour ? close.minute : 59); j += 15) {
+            if (i !== date.getHours() || j >= date.getMinutes() || date.getDate() !== dateSeleted.getDate()) {
+              times.push({
+                text: hour + ':' + (j < 10 ? '0' + j : j) + meridian,
+                value: (i < 10 ? '0' + i : i) + ':' + (j < 10 ? '0' + j : j)
+              });
+            }
+          }
+        }
+      }
+    }
+
+    return times;
+  };
+
+  (0, _react.useEffect)(function () {
+    var _timeLists = [];
+
+    if (!scheduleList) {
+      _timeLists = hoursList.map(function (hour) {
+        return {
+          value: hour.startTime,
+          text: is12hours ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+            outputFormat: 'hh:mma'
+          }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+            outputFormat: 'HH:mm'
+          })
+        };
+      });
+      setIsEnabled(true);
+    } else {
+      _timeLists = getTimes(dateSelected, scheduleList);
+    }
 
     setTimeList(_timeLists);
-  }, [dateSelected, hoursList]);
+  }, [dateSelected, hoursList, scheduleList]);
   (0, _react.useEffect)(function () {
     handleCheckBoxChange(isAsap);
   }, [isAsap]);
+  (0, _react.useEffect)(function () {
+    if (!pathname.includes('store')) {
+      setScheduleList(null);
+      return;
+    }
+
+    var schedules = JSON.parse(window.localStorage.getItem('business_schedule'));
+    setScheduleList(schedules);
+  }, [pathname]);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
   }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -193,7 +281,7 @@ var MomentControlUI = function MomentControlUI(props) {
         return handleChangeDate(date);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.DayName, null, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, null, dayNumber)));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, timeList.map(function (time, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, isEnabled && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, timeList.map(function (time, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TimeItem, {
       key: i,
       active: timeSelected === time.value,
@@ -201,7 +289,7 @@ var MomentControlUI = function MomentControlUI(props) {
         return handleChangeTime(time.value);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return onClose();

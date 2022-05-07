@@ -326,7 +326,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type,
       isCustomLayout: isCustomLayout,
       isShowCallcenterInformation: isCustomLayout,
-      onPreorderBusiness: setPreorderBusiness
+      onPreorderBusiness: setPreorderBusiness,
+      businessHeader: business === null || business === void 0 ? void 0 : business.header,
+      businessFeatured: business === null || business === void 0 ? void 0 : business.featured,
+      businessOffers: business === null || business === void 0 ? void 0 : business.offers,
+      businessLogo: business === null || business === void 0 ? void 0 : business.logo,
+      businessReviews: business === null || business === void 0 ? void 0 : business.reviews,
+      businessDeliveryPrice: business === null || business === void 0 ? void 0 : business.delivery_price,
+      businessDeliveryTime: business === null || business === void 0 ? void 0 : business.delivery_time,
+      businessPickupTime: business === null || business === void 0 ? void 0 : business.pickup_time,
+      businessDistance: business === null || business === void 0 ? void 0 : business.distance
     });
   }), businessesList.loading && _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.nextPageItems) > 4 ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
     var _orderState$options4;
