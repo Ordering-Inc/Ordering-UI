@@ -6,6 +6,7 @@ import {
   useEvent,
   useUtils,
   useConfig,
+  useOrder,
   GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
@@ -86,6 +87,7 @@ const OrderDetailsUI = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const [{ carts }] = useOrder()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
@@ -215,6 +217,19 @@ const OrderDetailsUI = (props) => {
     return order?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
   }
 
+  const closeOrderModal = (e) => {
+    const outsideModal = !window.document.getElementById('app-modals') ||
+      !window.document.getElementById('app-modals').contains(e.target)
+    if (outsideModal) {
+      const _businessId = 'businessId:' + businessData?.id
+      const _uuid = carts[_businessId]?.uuid
+      if (_uuid) {
+        localStorage.setItem('remove-cartId', JSON.stringify(_uuid))
+        handleBusinessRedirect(businessData?.slug)
+      }
+    }
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -233,8 +248,12 @@ const OrderDetailsUI = (props) => {
 
   useEffect(() => {
     if (reorderState?.error) {
-      handleBusinessRedirect(businessData?.slug)
+      window.addEventListener('click', closeOrderModal)
+      return () => {
+        window.removeEventListener('click', closeOrderModal)
+      }
     }
+
     if (!reorderState?.error && reorderState?.result?.uuid) {
       handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
     }

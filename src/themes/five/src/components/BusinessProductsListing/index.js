@@ -11,7 +11,9 @@ import {
   useLanguage,
   useOrder,
   useSession,
-  useUtils
+  useUtils,
+  useToast,
+  ToastType
 } from 'ordering-components'
 
 import {
@@ -60,7 +62,8 @@ const BusinessProductsListingUI = (props) => {
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }] = useOrder()
+  const [{ carts }, { clearCart }] = useOrder()
+  const [, { showToast }] = useToast()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const [{ auth }] = useSession()
@@ -179,6 +182,15 @@ const BusinessProductsListingUI = (props) => {
       }
     }
   }, [business?.schedule])
+
+  useEffect(() => {
+    const removeCardId = JSON.parse(window.localStorage.getItem('remove-cartId'))
+    if (currentCart && removeCardId) {
+      clearCart(removeCardId)
+      localStorage.removeItem('remove-cartId')
+      showToast(ToastType.Info, t('PRODUCT_REMOVED', 'Products removed from cart'))
+    }
+  }, [currentCart])
 
   return (
     <>
