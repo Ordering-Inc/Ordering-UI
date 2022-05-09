@@ -6,6 +6,8 @@ import {
   useEvent,
   useUtils,
   useConfig,
+  useCustomer,
+  useOrder,
   GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
@@ -79,13 +81,16 @@ const OrderDetailsUI = (props) => {
     readMessages,
     messagesReadList,
     reorderState,
-    handleReorder
+    handleReorder,
+    isCustomerMode
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const [orderState, { deleteUserCustomer }] = useCustomer()
+  const [, { refreshOrderOptions }] = useOrder()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
@@ -215,6 +220,14 @@ const OrderDetailsUI = (props) => {
     return order?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
   }
 
+  const handleRedirectHome = () => {
+    events.emit('go_to_page', { page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })
+    if (isCustomerMode) {
+      deleteUserCustomer(true)
+      refreshOrderOptions()
+    }
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -279,26 +292,20 @@ const OrderDetailsUI = (props) => {
                   >
                     <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                   </ReviewOrderLink>
-                  {(
-                    parseInt(order?.status) === 1 ||
-                    parseInt(order?.status) === 2 ||
-                    parseInt(order?.status) === 5 ||
-                    parseInt(order?.status) === 6 ||
-                    parseInt(order?.status) === 10 ||
-                    parseInt(order?.status) === 11 ||
-                    parseInt(order?.status) === 12
-                  ) && (
+                  {
+                    (
                       <NewOrder>
                         <Button
                           color='primary'
                           outline
-                          onClick={() => handleReorder(order.id)}
+                          onClick={() => handleRedirectHome()}
                           disabled={reorderState?.loading}
                         >
-                          {reorderState?.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
+                          {t('START_NEW_ORDER', 'Start new order')}
                         </Button>
                       </NewOrder>
-                    )}
+                    )
+                  }
                 </OrderActions>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>

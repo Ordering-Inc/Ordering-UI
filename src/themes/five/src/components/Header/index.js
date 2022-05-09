@@ -133,10 +133,6 @@ export const Header = (props) => {
 
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
-    if (isCustomerMode && pathname.includes('/orders')) {
-      deleteUserCustomer(true)
-      refreshOrderOptions()
-    }
   }
 
   const handleCustomModalClick = (e, { page }) => {
