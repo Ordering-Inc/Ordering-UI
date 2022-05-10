@@ -114,6 +114,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       parseNumber = _useUtils2$.parseNumber,
       parseDate = _useUtils2$.parseDate;
 
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      carts = _useOrder2[0].carts;
+
   var _useState = (0, _react.useState)({
     business: false,
     driver: false
@@ -442,6 +446,23 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }, 0);
   };
 
+  var closeOrderModal = function closeOrderModal(e) {
+    var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
+
+    if (outsideModal) {
+      var _carts$_businessId;
+
+      var _businessId = 'businessId:' + (businessData === null || businessData === void 0 ? void 0 : businessData.id);
+
+      var _uuid = (_carts$_businessId = carts[_businessId]) === null || _carts$_businessId === void 0 ? void 0 : _carts$_businessId.uuid;
+
+      if (_uuid) {
+        localStorage.setItem('remove-cartId', JSON.stringify(_uuid));
+        handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
+      }
+    }
+  };
+
   (0, _react.useEffect)(function () {
     if (driverLocation) {
       locations[0] = driverLocation;
@@ -463,7 +484,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     var _reorderState$result;
 
     if (reorderState !== null && reorderState !== void 0 && reorderState.error) {
-      handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
+      window.addEventListener('click', closeOrderModal);
+      return function () {
+        window.removeEventListener('click', closeOrderModal);
+      };
     }
 
     if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && reorderState !== null && reorderState !== void 0 && (_reorderState$result = reorderState.result) !== null && _reorderState$result !== void 0 && _reorderState$result.uuid) {

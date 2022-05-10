@@ -64,9 +64,7 @@ exports.MenuLink = MenuLink;
 var SubMenu = (0, _styledComponents.default)(InnerHeader)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  padding: 0px 20px 7px;\n  box-sizing: border-box;\n  margin: 0px;\n  position: relative;\n\n  @media (min-width: 821px) {\n    display: none;\n  }\n"])));
 exports.SubMenu = SubMenu;
 
-var CustomerInfo = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: none;\n  cursor: pointer;\n\n  @media (min-width: 450px) {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n\n    span {\n      display: flex;\n      align-items: center;\n      height: 30px;\n      p {\n        color: #333;\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n      }\n      svg {\n        color: ", ";\n        font-size: 30px;\n        margin-right: 5px;\n      }\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
-});
+var CustomerInfo = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: none;\n  cursor: pointer;\n  flex: 1;\n  position: relative;\n  @media (min-width: 450px) {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    span {\n      display: flex;\n      align-items: center;\n      margin: 0;\n      p {\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n        color: #909BA9;\n      }\n      svg {       \n        color: #748194; \n        margin: 0;\n        font-size: 20px;\n        position: absolute;\n        right: 0;\n      }\n    }\n  }\n"])));
 
 exports.CustomerInfo = CustomerInfo;
 
@@ -74,7 +72,7 @@ var UserEdit = _styledComponents.default.div(_templateObject13 || (_templateObje
 
 exports.UserEdit = UserEdit;
 
-var AddressMenu = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 600;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  position: relative;\n  svg {\n    color: ", ";\n    font-size: 16px;\n    margin-right: 10px;\n    ", "\n  }\n"])), function (props) {
+var AddressMenu = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 600;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  position: relative;\n  flex: 0.8;\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n    margin-right: 10px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;

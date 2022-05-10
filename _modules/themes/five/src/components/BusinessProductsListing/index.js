@@ -97,8 +97,13 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       t = _useLanguage2[1];
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      carts = _useOrder2[0].carts;
+      _useOrder2 = _slicedToArray(_useOrder, 2),
+      carts = _useOrder2[0].carts,
+      clearCart = _useOrder2[1].clearCart;
+
+  var _useToast = (0, _orderingComponents.useToast)(),
+      _useToast2 = _slicedToArray(_useToast, 2),
+      showToast = _useToast2[1].showToast;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -274,6 +279,15 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       }
     };
   }, [business === null || business === void 0 ? void 0 : business.schedule]);
+  (0, _react.useEffect)(function () {
+    var removeCardId = JSON.parse(window.localStorage.getItem('remove-cartId'));
+
+    if (currentCart && removeCardId) {
+      clearCart(removeCardId);
+      localStorage.removeItem('remove-cartId');
+      showToast(_orderingComponents.ToastType.Info, t('PRODUCT_REMOVED', 'Products removed from cart'));
+    }
+  }, [currentCart]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
     onClick: function onClick() {
       return handleGoToBusinessList();
