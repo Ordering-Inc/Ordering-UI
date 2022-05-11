@@ -38,7 +38,7 @@ export const Footer = () => {
     <>
       {
         footerState.body && (
-          <div dangerouslySetInnerHTML={{
+          <div style={{ wordBreak: 'break-all', padding: '0px 10px'}} dangerouslySetInnerHTML={{
             __html: footerState.body
           }}
           />
