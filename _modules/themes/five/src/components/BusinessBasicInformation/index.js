@@ -68,7 +68,7 @@ _dayjs.default.extend(_isBetween.default);
 var types = ['food', 'laundry', 'alcohol', 'groceries'];
 
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc, _theme$defaultLanguag, _businessState$busine7, _theme$images, _theme$images$dummies, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
+  var _configs$preorder_sta, _props$beforeElements, _props$beforeComponen, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc, _theme$defaultLanguag, _businessState$busine7, _theme$images, _theme$images$dummies, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       businessState = props.businessState,
@@ -109,6 +109,12 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       isPreOrder = _useState4[0],
       setIsPreOrder = _useState4[1];
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var isPreOrderSetting = (configs === null || configs === void 0 ? void 0 : (_configs$preorder_sta = configs.preorder_status_enabled) === null || _configs$preorder_sta === void 0 ? void 0 : _configs$preorder_sta.value) === '1';
 
   var getBusinessType = function getBusinessType() {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
@@ -194,13 +200,13 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     width: 50
   })), !loading ? /*#__PURE__*/_react.default.createElement("div", {
     className: "preorder-Reviews"
-  }, /*#__PURE__*/_react.default.createElement("span", {
+  }, isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setIsPreOrder(true);
     }
   }, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
-  }, "\u2022"), ((_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.reviews) && /*#__PURE__*/_react.default.createElement("span", {
+  }, "\u2022")), ((_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.reviews) && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setIsBusinessReviews(true);
     }

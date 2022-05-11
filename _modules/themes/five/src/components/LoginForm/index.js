@@ -550,6 +550,7 @@ var LoginFormUI = function LoginFormUI(props) {
 
 var LoginForm = function LoginForm(props) {
   var loginControllerProps = _objectSpread(_objectSpread({}, props), {}, {
+    isRecaptchaEnable: true,
     UIComponent: LoginFormUI
   });
 
