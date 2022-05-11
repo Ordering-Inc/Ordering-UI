@@ -74,7 +74,7 @@ const BusinessPreorderUI = (props) => {
   const [isEnabled, setIsEnabled] = useState(false)
 
   const is12Hours = configs?.dates_moment_format?.value?.includes('hh:mm')
-
+  const isPreOrderSetting = configs?.preorder_status_enabled?.value === '1'
   const preOrderType = [
     { value: 'business_menu', content: <TypeContent>{t('BUSINESS_MENU', 'Business menu')}</TypeContent> },
     { value: 'business_hours', content: <TypeContent>{t('BUSINESS_HOURS', 'Business hours')}</TypeContent> }
@@ -160,95 +160,102 @@ const BusinessPreorderUI = (props) => {
         <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
         <p>{business.name}</p>
       </LogoWrapper>
-      <PreorderTypeWrapper>
-        <p>{t('PREORDER_TYPE', 'Preorder type')}</p>
-        <SelectWrapper>
-          <Select
-            defaultValue={type}
-            options={preOrderType}
-            placeholder={t('SELECT_A_TYPE', 'Select a type')}
-            onChange={(value) => setType(value)}
-          />
-        </SelectWrapper>
-      </PreorderTypeWrapper>
+      {isPreOrderSetting && (
+        <PreorderTypeWrapper>
+          <p>{t('PREORDER_TYPE', 'Preorder type')}</p>
+          <SelectWrapper>
+            <Select
+              defaultValue={type}
+              options={preOrderType}
+              placeholder={t('SELECT_A_TYPE', 'Select a type')}
+              onChange={(value) => setType(value)}
+            />
+          </SelectWrapper>
+        </PreorderTypeWrapper>
+      )}
       {type === 'business_menu' && (
         <BusinessMenuList
           businessId={business.id}
           setMenu={setMenu}
         />
       )}
-      <OrderTimeWrapper>
-        <p>{t('ORDER_TIME', 'Order time')}</p>
-        <DateWrapper>
-          <MonthYearLayer>
-            <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
-          </MonthYearLayer>
-          <DaysSwiper left={<BsCaretLeftFill />}>
-            <Swiper
-              spaceBetween={0}
-              navigation
-              breakpoints={{
-                0: {
-                  slidesPerView: 4,
-                  spaceBetween: 0
-                },
-                400: {
-                  slidesPerView: 5,
-                  spaceBetween: 0
-                },
-                550: {
-                  slidesPerView: 6,
-                  spaceBetween: 0
-                },
-                769: {
-                  slidesPerView: configs?.max_days_preorder?.value < 7 ? configs?.max_days_preorder?.value : 7,
-                  spaceBetween: 0
+      {isPreOrderSetting && (
+        <OrderTimeWrapper>
+          <p>{t('ORDER_TIME', 'Order time')}</p>
+          <DateWrapper>
+            <MonthYearLayer>
+              <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
+            </MonthYearLayer>
+            <DaysSwiper left={<BsCaretLeftFill />}>
+              <Swiper
+                spaceBetween={0}
+                navigation
+                breakpoints={{
+                  0: {
+                    slidesPerView: 4,
+                    spaceBetween: 0
+                  },
+                  400: {
+                    slidesPerView: 5,
+                    spaceBetween: 0
+                  },
+                  550: {
+                    slidesPerView: 6,
+                    spaceBetween: 0
+                  },
+                  769: {
+                    slidesPerView: configs?.max_days_preorder?.value < 7 ? configs?.max_days_preorder?.value : 7,
+                    spaceBetween: 0
+                  }
+                }}
+                freeMode
+                watchSlidesProgress
+                className='swiper-datelist'
+                preventClicksPropagation={false}
+              >
+                {
+                  datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10)).map(date => {
+                    const dateParts = date.split('-')
+                    const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
+                    const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2)
+                    const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
+                    return (
+                      <SwiperSlide key={dayNumber}>
+                        <Day selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
+                          <DayName>{dayName}</DayName>
+                          <DayNumber>{dayNumber}</DayNumber>
+                        </Day>
+                      </SwiperSlide>
+                    )
+                  })
                 }
-              }}
-              freeMode
-              watchSlidesProgress
-              className='swiper-datelist'
-              preventClicksPropagation={false}
-            >
-              {
-                datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10)).map(date => {
-                  const dateParts = date.split('-')
-                  const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
-                  const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2)
-                  const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
-                  return (
-                    <SwiperSlide key={dayNumber}>
-                      <Day selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
-                        <DayName>{dayName}</DayName>
-                        <DayNumber>{dayNumber}</DayNumber>
-                      </Day>
-                    </SwiperSlide>
-                  )
-                })
-              }
-            </Swiper>
-          </DaysSwiper>
+              </Swiper>
+            </DaysSwiper>
 
-        </DateWrapper>
+          </DateWrapper>
 
-        <TimeListWrapper>
-          {(isEnabled && timeList?.length > 0) ? (
-            <>
-              {timeList.map((time, i) => (
-                <TimeItem
-                  key={i}
-                  active={timeSelected === time.value}
-                  onClick={() => handleChangeTime(time.value)}
-                >
-                  <span>{time.text}</span>
-                </TimeItem>
-              ))}
-            </>
-          ) : (
-            <ClosedBusinessMsg>{t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')}</ClosedBusinessMsg>
-          )}
-        </TimeListWrapper>
-      </OrderTimeWrapper>
+          <TimeListWrapper>
+            {(isEnabled && timeList?.length > 0) ? (
+              <>
+                {timeList.map((time, i) => (
+                  <TimeItem
+                    key={i}
+                    active={timeSelected === time.value}
+                    onClick={() => handleChangeTime(time.value)}
+                  >
+                    <span>{time.text}</span>
+                  </TimeItem>
+                ))}
+              </>
+            ) : (
+              <ClosedBusinessMsg>{t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')}</ClosedBusinessMsg>
+            )}
+          </TimeListWrapper>
+        </OrderTimeWrapper>
+      )}
+      {!isPreOrderSetting && (
+        <ClosedBusinessMsg>{t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')}</ClosedBusinessMsg>
+      )}
       {showButton && (
         <ButtonWrapper>
           <Button
