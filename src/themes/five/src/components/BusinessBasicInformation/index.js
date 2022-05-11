@@ -9,7 +9,7 @@ import { SearchBar } from '../SearchBar'
 import { BusinessReviews } from '../BusinessReviews'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
-import { useUtils, useOrder, useLanguage } from 'ordering-components'
+import { useUtils, useOrder, useLanguage, useConfig } from 'ordering-components'
 
 import { convertHoursToMinutes } from '../../../../../utils'
 import { Select } from '../../styles/Select'
@@ -60,7 +60,8 @@ export const BusinessBasicInformation = (props) => {
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [isBusinessReviews, setIsBusinessReviews] = useState(false)
   const [isPreOrder, setIsPreOrder] = useState(false)
-
+  const [{ configs }] = useConfig()
+  const isPreOrderSetting = configs?.preorder_status_enabled?.value === '1'
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -177,8 +178,12 @@ export const BusinessBasicInformation = (props) => {
               {
                 !loading ? (
                   <div className='preorder-Reviews'>
-                    <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
-                    <span className='dot'>•</span>
+                    {isPreOrderSetting && (
+                      <>
+                        <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
+                        <span className='dot'>•</span>
+                      </>
+                    )}
                     {business.reviews?.reviews && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
                   </div>
                 ) : (
