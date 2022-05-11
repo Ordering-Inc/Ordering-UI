@@ -3,7 +3,8 @@ import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import {
-  ArrowLeft
+  ArrowLeft,
+  Cart3
 } from 'react-bootstrap-icons'
 import {
   BusinessAndProductList,
@@ -19,7 +20,12 @@ import {
 import {
   ProductsContainer,
   ProductLoading,
-  SkeletonItem
+  SkeletonItem,
+  MobileCartViewWrapper,
+  BusinessCartContent,
+  EmptyCart,
+  EmptyBtnWrapper,
+  Title
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -27,8 +33,11 @@ import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../Modal'
+import { Button } from '../../styles/Buttons'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { RenderProductsLayout } from '../RenderProductsLayout'
+import { Cart } from '../Cart'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -68,13 +77,16 @@ const BusinessProductsListingUI = (props) => {
   const [events] = useEvent()
   const [{ auth }] = useSession()
   const location = useLocation()
+  const windowSize = useWindowSize()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
-  const [openUpselling, setOpenUpselling] = useState(false)
-  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  // const [openUpselling, setOpenUpselling] = useState(false)
+  // const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isCartModal, setisCartModal] = useState(false)
+
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
 
@@ -132,11 +144,11 @@ const BusinessProductsListingUI = (props) => {
     }
   }
 
-  const handleUpsellingPage = () => {
-    onCheckoutRedirect(currentCart?.uuid)
-    setOpenUpselling(false)
-    setCanOpenUpselling(false)
-  }
+  // const handleUpsellingPage = () => {
+  //   onCheckoutRedirect(currentCart?.uuid)
+  //   setOpenUpselling(false)
+  //   setCanOpenUpselling(false)
+  // }
 
   const handleGoToBusinessList = () => {
     events.emit('go_to_page', { page: 'search' })
@@ -260,7 +272,7 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </ProductsContainer>
-      {currentCart?.products?.length > 0 && auth && !isCartOpen && (
+      {/* {currentCart?.products?.length > 0 && auth && !isCartOpen && (
         <FloatingButton
           btnText={
             !currentCart?.valid_maximum ? (
@@ -274,7 +286,48 @@ const BusinessProductsListingUI = (props) => {
           handleClick={() => setOpenUpselling(true)}
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
-      )}
+      )} */}
+      {
+        <MobileCartViewWrapper>
+          <span>{currentCart?.products?.length > 0 ? parsePrice(currentCart?.total) : parsePrice(0)}</span>
+          <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
+        </MobileCartViewWrapper>
+      }
+      <Modal
+        width='45%'
+        open={isCartModal}
+        onClose={() => setisCartModal(false)}
+        padding='0'
+      >
+        <BusinessCartContent isModal>
+          <Title style={{ textAlign: 'center', marginTop: '5px' }}>{t('YOUR_CART', 'Your cart')}</Title>
+          {currentCart?.products?.length > 0 ? (
+            <>
+              <Cart
+                isStore
+                isCustomMode
+                isForceOpenCart
+                cart={currentCart}
+                isCartPending={currentCart?.status === 2}
+                isProducts={currentCart.products.length}
+                isCartOnProductsList={isCartOnProductsList}
+                handleCartOpen={(val) => setIsCartOpen(val)}
+              />
+            </>
+          ) : (
+            <EmptyCart>
+              <div className='empty-content'>
+                <Cart3 />
+                <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
+              </div>
+              <EmptyBtnWrapper>
+                <span>{parsePrice(0)}</span>
+                <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
+              </EmptyBtnWrapper>
+            </EmptyCart>
+          )}
+        </BusinessCartContent>
+      </Modal>
 
       <Modal
         width='700px'
@@ -314,7 +367,7 @@ const BusinessProductsListingUI = (props) => {
         )}
       </Modal>
 
-      {currentCart?.products && openUpselling && (
+      {/* {currentCart?.products && openUpselling && (
         <UpsellingPage
           businessId={currentCart?.business_id}
           business={currentCart?.business}
@@ -324,7 +377,7 @@ const BusinessProductsListingUI = (props) => {
           canOpenUpselling={canOpenUpselling}
           setCanOpenUpselling={setCanOpenUpselling}
         />
-      )}
+      )} */}
     </>
   )
 }
