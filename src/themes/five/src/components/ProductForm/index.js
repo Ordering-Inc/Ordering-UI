@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
 import MdcPlayCircleOutline from '@meronex/icons/mdc/MdcPlayCircleOutline'
-import Linkify from 'react-linkify'
+import { LinkableText } from '../LinkableText'
 
 import {
   ProductForm as ProductOptions,
@@ -416,15 +416,9 @@ const ProductOptionsUI = (props) => {
                 </Properties>
                 {product?.description && (
                   <ProductDescription>
-                    <Linkify
-                        componentDecorator={(decoratedHref, decoratedText, key) => (
-                            <a target="blank" href={decoratedHref} key={key}>
-                                {decoratedText}
-                            </a>
-                        )}
-                    >
-                      {product?.description}
-                    </Linkify>
+                    <LinkableText
+                      text={product?.description}
+                    />
                   </ProductDescription>
                 )}
               </ProductFormTitle>
