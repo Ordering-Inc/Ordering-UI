@@ -11,7 +11,7 @@ import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
 import { useUtils, useOrder, useLanguage, useConfig } from 'ordering-components'
 
-import { convertHoursToMinutes } from '../../../../../utils'
+import { convertHoursToMinutes, shape } from '../../../../../utils'
 import { Select } from '../../styles/Select'
 
 import {
@@ -25,7 +25,9 @@ import {
   BusinessInfoContent,
   WrapperSearch,
   BusinessDetail,
-  BusinessMoreDetail
+  BusinessMoreDetail,
+  TitleWrapper,
+  RibbonBox
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
 
@@ -108,7 +110,18 @@ export const BusinessBasicInformation = (props) => {
           <BusinessInfo className='info'>
             <BusinessInfoItem>
               {!loading ? (
-                <h2 className='bold'>{business?.name}</h2>
+                <TitleWrapper>
+                  <h2 className='bold'>{business?.name}</h2>
+                  {business?.ribbon?.enable && (
+                    <RibbonBox
+                      bgColor={business?.ribbon?.color}
+                      isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}
+                      isCapsule={business?.ribbon?.shape === shape?.capsuleShape}
+                    >
+                      {business?.ribbon?.text}
+                    </RibbonBox>
+                  )}
+                </TitleWrapper>
               ) : (
                 <Skeleton width={200} height={35} />
               )}

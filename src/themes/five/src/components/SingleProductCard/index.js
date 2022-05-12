@@ -1,6 +1,7 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useConfig, useOrder, useUtils } from 'ordering-components'
+import { shape } from '../../../../../utils'
 
 import {
   CardContainer,
@@ -9,7 +10,8 @@ import {
   CardLogo,
   SoldOut,
   PriceWrapper,
-  QuantityContainer
+  QuantityContainer,
+  RibbonBox
 } from './styles'
 import { useTheme } from 'styled-components'
 
@@ -49,6 +51,8 @@ export const SingleProductCard = (props) => {
 
   const maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory)
 
+  console.log(product?.ribbon, 'Product')
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -87,6 +91,15 @@ export const SingleProductCard = (props) => {
             </CardInfo>
             {!isSkeleton ? (
               <WrapLogo>
+                {product?.ribbon?.enable && (
+                  <RibbonBox
+                    bgColor={product?.ribbon?.color}
+                    isRoundRect={product?.ribbon?.shape === shape?.rectangleRound}
+                    isCapsule={product?.ribbon?.shape === shape?.capsuleShape}
+                  >
+                    {product?.ribbon?.text}
+                  </RibbonBox>
+                )}
                 <CardLogo
                   className='image'
                   soldOut={isSoldOut || maxProductQuantity <= 0}
@@ -96,7 +109,7 @@ export const SingleProductCard = (props) => {
             ) : (
               <Skeleton height={75} width={75} />
             )}
-            {(isSoldOut || maxProductQuantity <= 0) && <SoldOut>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
+            {(isSoldOut || maxProductQuantity <= 0) && <SoldOut isBottom={product?.ribbon?.enable}>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
           </>
         )}
         {useCustomFunctionality && customText && (
