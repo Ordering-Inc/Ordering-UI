@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
 import MdcPlayCircleOutline from '@meronex/icons/mdc/MdcPlayCircleOutline'
+import { LinkableText } from '../LinkableText'
 
 import {
   ProductForm as ProductOptions,
@@ -413,7 +414,13 @@ const ProductOptionsUI = (props) => {
                     )}
                   </ProductMeta>
                 </Properties>
-                {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
+                {product?.description && (
+                  <ProductDescription>
+                    <LinkableText
+                      text={product?.description}
+                    />
+                  </ProductDescription>
+                )}
               </ProductFormTitle>
               <ProductTagsListContainer>
                 {product.tags.map(tag => (
