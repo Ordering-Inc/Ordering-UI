@@ -194,7 +194,7 @@ export const RibbonBox = styled.div`
   padding: 2px 8px;
   box-sizing: border-box;
   z-index: 10;
-  color: #FFFFFF;
+  color: ${props => props.theme.colors.colorTextSignForm};
   font-weight: 400;
   font-size: 10px;
   line-height: 13px;

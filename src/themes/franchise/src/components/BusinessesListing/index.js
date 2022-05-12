@@ -398,7 +398,7 @@ const BusinessesListingUI = (props) => {
 export const BusinessesListing = (props) => {
   const businessListingProps = {
     ...props,
-    franchiseId: 1,
+    franchiseId: 67,
     UIComponent: BusinessesListingUI
   }
 

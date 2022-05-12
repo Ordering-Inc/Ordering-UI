@@ -112,7 +112,7 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <TitleWrapper>
                   <h2 className='bold'>{business?.name}</h2>
-                  {business?.ribbon?.enable && (
+                  {business?.ribbon?.enabled && (
                     <RibbonBox
                       bgColor={business?.ribbon?.color}
                       isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}

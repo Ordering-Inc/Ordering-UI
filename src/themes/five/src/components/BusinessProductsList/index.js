@@ -115,7 +115,7 @@ const BusinessProductsListUI = (props) => {
                             )
                           }
                           <h3>{category.name}</h3>
-                          {category?.ribbon?.enable && (
+                          {category?.ribbon?.enabled && (
                             <RibbonBox
                               bgColor={category?.ribbon?.color}
                               isRoundRect={category?.ribbon?.shape === shape?.rectangleRound}

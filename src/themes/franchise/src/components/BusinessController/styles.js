@@ -62,12 +62,17 @@ export const BranchListContainer = styled.div`
   width: 100%;
 `
 
-export const BranchTitle = styled.h2`
-  font-weight: 500;
-  font-size: 16px;
-  color: ${props => props.theme?.colors.headingColor};
-  margin-top: 0;
-  margin-bottom: 10px;
+export const BranchTitle = styled.div`
+  display: flex;
+  align-items: center;
+
+  > h2 {
+    font-weight: 500;
+    font-size: 16px;
+    color: ${props => props.theme?.colors.headingColor};
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
 `
 
 export const BranchContent = styled.div`
@@ -174,5 +179,40 @@ export const OrderType = styled.div`
 
   ${({ isSkeleton }) => isSkeleton && css`
     border: none;
+  `}
+`
+
+export const RibbonBox = styled.div`
+  padding: 2px 8px;
+  box-sizing: border-box;
+  z-index: 10;
+  color: ${props => props.theme.colors.colorTextSignForm};
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 13px;
+  background-color: ${props => props.theme.colors.primary};
+  max-width: 200px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-left: 5px;
+  margin-bottom: 10px;
+
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: 5px;
+  `}
+
+  ${({ bgColor }) => bgColor && css`
+    background-color: ${bgColor};
+  `}
+
+  ${({ isRoundRect }) => isRoundRect && css`
+    border-radius: 7.6px;
+  `}
+
+  ${({ isCapsule }) => isCapsule && css`
+    border-radius: 50px;
   `}
 `

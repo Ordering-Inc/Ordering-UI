@@ -91,7 +91,7 @@ export const SingleProductCard = (props) => {
             </CardInfo>
             {!isSkeleton ? (
               <WrapLogo>
-                {product?.ribbon?.enable && (
+                {product?.ribbon?.enabled && (
                   <RibbonBox
                     bgColor={product?.ribbon?.color}
                     isRoundRect={product?.ribbon?.shape === shape?.rectangleRound}
