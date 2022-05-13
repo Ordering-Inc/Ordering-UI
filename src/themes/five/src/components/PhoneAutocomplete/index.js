@@ -130,12 +130,6 @@ const PhoneAutocompleteUI = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       <PhoneContainer bgimage={theme.images?.general?.homeHero}>
         <ContentWrapper>
           <Title>{t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')}</Title>
@@ -231,12 +225,6 @@ const PhoneAutocompleteUI = (props) => {
         onClose={handleCloseAlert}
         onAccept={handleCloseAlert}
       />
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }

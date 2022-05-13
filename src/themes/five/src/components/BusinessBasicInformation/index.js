@@ -113,7 +113,7 @@ export const BusinessBasicInformation = (props) => {
               {!loading ? (
                 <h2 className='bold'>{business?.name}</h2>
               ) : (
-                <Skeleton width={isCustomerMode ? 100 : 150} height={isCustomerMode && 35} />
+                <Skeleton width={isCustomerMode ? 100 : 150} height={isCustomerMode ? 35 : 'auto'} />
               )}
               {!loading ? (
                 <p className='type'>{getBusinessType()}</p>
