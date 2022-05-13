@@ -26,9 +26,10 @@ const Side = styled.div`
 export const FormSide = styled(Side)`
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   @media (min-width: 992px) {
-    width: 100%;
+    width: ${({ isCustomerMode }) => isCustomerMode ? '55%' : '100%'};
     font-size: ${({ isPopup }) => isPopup ? '12px' : '1em'};
   }
 
@@ -315,4 +316,24 @@ export const ValidationText = styled.div`
   font-size: 12px;
   line-height: 18px;
   color: ${props => props.theme.colors.danger500};
+`
+
+export const LogotypeContainer = styled.div`
+  margin-bottom: 50px;
+`
+
+export const HeroSide = styled(Side)`
+  display: none;
+
+  img{
+    width: 95%;
+    height: 80%;
+  }
+  @media (min-width: 992px) {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${props => props.theme.colors.primaryContrast};
+  }
 `

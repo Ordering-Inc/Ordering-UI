@@ -52,6 +52,7 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
+import { Modal } from '../Modal'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -97,6 +98,7 @@ const CheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
+  const [modalSelected, setModalSelected] = useState(null)
 
   const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const placeSpotTypes = [3, 4]
