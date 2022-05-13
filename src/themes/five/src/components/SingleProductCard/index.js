@@ -51,8 +51,6 @@ export const SingleProductCard = (props) => {
 
   const maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory)
 
-  console.log(product?.ribbon, 'Product')
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
