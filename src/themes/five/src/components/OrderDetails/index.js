@@ -621,7 +621,7 @@ const OrderDetailsUI = (props) => {
           <SkeletonWrapper isCustomerMode={isCustomerMode}>
             <>
               <SkeletonBlockWrapp>
-                <SkeletonBlock width={90}>
+                <SkeletonBlock width={90} isCustomerMode={isCustomerMode}>
                   <Skeleton height={40} width={300} />
                   <Skeleton height={15} width={120} />
                   <Skeleton height={15} />

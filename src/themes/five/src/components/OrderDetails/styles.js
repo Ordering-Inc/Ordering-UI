@@ -402,7 +402,9 @@ export const SkeletonBlock = styled.div`
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  ${({ isCustomerMode }) => isCustomerMode && css`
+    align-items: center;
+  `}
 `
 
 export const SkeletonBlockWrapp = styled.div`
