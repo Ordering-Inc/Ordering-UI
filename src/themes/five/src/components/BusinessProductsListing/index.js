@@ -287,12 +287,12 @@ const BusinessProductsListingUI = (props) => {
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
       )} */}
-      {
+      {windowSize.width < 500 && currentCart?.products?.length > 0  && (
         <MobileCartViewWrapper>
-          <span>{currentCart?.products?.length > 0 ? parsePrice(currentCart?.total) : parsePrice(0)}</span>
+          <span>{parsePrice(currentCart?.total)}</span>
           <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
         </MobileCartViewWrapper>
-      }
+      )}
       <Modal
         width='45%'
         open={isCartModal}
