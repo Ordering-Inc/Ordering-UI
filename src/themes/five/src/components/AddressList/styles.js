@@ -4,6 +4,9 @@ export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 10px;
+  ${({ isCustomerMode }) => isCustomerMode && css`
+    width: 100%;
+  `}
 
   ${({ isLoading }) => isLoading && css`
     pointer-events: none;
@@ -11,7 +14,9 @@ export const AddressListContainer = styled.div`
 
   button.add {
     height: 50px;
-    min-width: 100px;
+    ${({ isCustomerMode }) => isCustomerMode && css`
+      min-width: 100px;
+    `}
   }
 `
 
@@ -187,4 +192,44 @@ export const AddressTitle = styled.span`
   ${props => props.theme?.rtl && css`
     text-align: right;
   `}
+`
+
+export const AddressHalfContainer = styled.div`
+  display: flex;
+  width: 100%;
+`
+
+export const List = styled.div`
+  width: ${({ halfWidth }) => halfWidth ? '50%' : '100%'};
+  padding-right: 10px;
+  button { 
+    width: 100%;
+  }
+`
+
+export const AddressFormContainer = styled.div`
+  width: 50%;
+  position: sticky;
+  right: 0;
+  top: 0;
+  margin-top: ${({ isOpenUserData, isHeader }) => isOpenUserData ? '-30px' : isHeader ? '-222px' : '-190px'};
+  height: 100%;
+  padding-left: 10px;
+`
+
+export const CloseIcon = styled.div`
+  cursor: pointer;
+  svg{
+    width: 30px;
+    height: 30px;
+  }
+`
+
+export const TitleFormContainer = styled.div`
+  display: flex; 
+  align-items: center;
+  h1 {
+    margin: auto;
+    font-size: 24px;
+  }
 `

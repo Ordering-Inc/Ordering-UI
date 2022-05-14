@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import FcCancel from '@meronex/icons/fc/FcCancel'
 import Skeleton from 'react-loading-skeleton'
+import {
+  Container,
+  Header,
+  SideForm,
+  UserData,
+  UserName,
+  ModalIcon,
+  TitleContainer,
+  CountryFlag,
+  PhoneContainer
+} from './styles'
+import MdClose from '@meronex/icons/md/MdClose'
+import PhoneInput from 'react-phone-number-input'
+import { parsePhoneNumber } from 'libphonenumber-js'
 import {
   UserFormDetails as UserFormController,
   useLanguage,
   useSession
 } from 'ordering-components'
-import { UserFormDetailsUI } from '../UserFormDetails'
-import { VerifyCodeForm } from '../VerifyCodeForm'
-import { Alert } from '../Confirm'
-import { Modal } from '../Modal'
-import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 
-import { Container, Header, SideForm, UserData } from './styles'
+import { UserFormDetailsUI } from '../UserFormDetails'
 
 const UserDetailsUI = (props) => {
   const {
@@ -25,64 +34,15 @@ const UserDetailsUI = (props) => {
     isUserDetailsEdit,
     isCustomerMode,
     userState,
-    checkPhoneCodeState,
-    handleSendVerifyCode,
-    handleCheckPhoneCode,
-    verifyPhoneState,
-    isVerifiedPhone
+    isModal,
+    setIsOpenUserData,
+    isAddressFormOpen,
+    onClose
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
-  const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
-    600, !checkPhoneCodeState?.loading && willVerifyOtpState)
-
   const userData = userState.result?.result || props.userData || formState.result?.result || user
-
-  const handleSendOtp = () => {
-    if (willVerifyOtpState && formState?.changes?.cellphone && formState?.changes?.country_phone_code) {
-      const { cellphone, country_phone_code: countryPhoneCode } = formState?.changes
-
-      resetOtpLeftTime()
-
-      handleSendVerifyCode({
-        cellphone: cellphone,
-        country_phone_code: countryPhoneCode
-      })
-    }
-  }
-
-  const toggleEditState = () => {
-    toggleIsEdit()
-    cleanFormState({ changes: {} })
-  }
-
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
-  }
-
-  useEffect(() => {
-    if (checkPhoneCodeState?.result?.error) {
-      setAlertState({
-        open: true,
-        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
-      })
-    } else { resetOtpLeftTime() }
-  }, [checkPhoneCodeState])
-
-  useEffect(() => {
-    if (verifyPhoneState?.result?.error) {
-      setAlertState({
-        open: true,
-        content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
-      })
-    } else { resetOtpLeftTime() }
-  }, [verifyPhoneState])
 
   useEffect(() => {
     if (isUserDetailsEdit) {
@@ -91,12 +51,13 @@ const UserDetailsUI = (props) => {
   }, [isUserDetailsEdit])
 
   useEffect(() => {
-    handleSendOtp()
-  }, [willVerifyOtpState])
+    setIsOpenUserData && setIsOpenUserData(isEdit)
+  }, [isEdit])
 
-  useEffect(() => {
-    if (isVerifiedPhone) setWillVerifyOtpState(false)
-  }, [isVerifiedPhone])
+  const toggleEditState = () => {
+    toggleIsEdit()
+    cleanFormState({ changes: {} })
+  }
 
   return (
     <>
@@ -116,8 +77,18 @@ const UserDetailsUI = (props) => {
 
       {!(validationFields.loading || formState.loading || userState.loading) && (
         <Container>
+          {isModal && (
+            <TitleContainer isAddressFormOpen={isAddressFormOpen && !isEdit}>
+              <ModalIcon>
+                <MdClose onClick={() => onClose()} />
+              </ModalIcon>
+              <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
+            </TitleContainer>
+          )}
           <Header className='user-form'>
-            <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
+            {!isModal && (
+              <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
+            )}
             {cartStatus !== 2 && (
               !isEdit ? (
                 <span onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</span>
@@ -133,20 +104,26 @@ const UserDetailsUI = (props) => {
                 <p>{userData?.address}</p>
               )}
               {(userData?.name || userData?.middle_name || userData?.lastname || userData?.second_lastname) && (
-                <p>
+                <UserName>
                   {userData?.name} {userData?.middle_name} {userData?.lastname} {userData?.second_lastname}
-                </p>
+                </UserName>
               )}
               {userData?.email && (
                 <p>{userData?.email}</p>
               )}
               {(userData?.cellphone || user?.cellphone) && (
-                <p>
-                  {(userData?.country_phone_code) && `+${(userData?.country_phone_code)} `}{(userData?.cellphone)}
-                </p>
-              )}
-              {(userData?.phone || user?.phone) && (
-                <p>{(userData?.cellphone)}</p>
+                <PhoneContainer>
+                  <CountryFlag>
+                    {
+                      userData?.country_phone_code && (
+                        <PhoneInput onChange={() => {}} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code)} ${userData?.cellphone}`)?.country} />
+                      )
+                    }
+                  </CountryFlag>
+                  <p>
+                    {userData?.cellphone}
+                  </p>
+                </PhoneContainer>
               )}
             </UserData>
           ) : (
@@ -155,36 +132,11 @@ const UserDetailsUI = (props) => {
                 {...props}
                 userData={userData}
                 isCustomerMode={isCustomerMode}
-                setWillVerifyOtpState={setWillVerifyOtpState}
               />
             </SideForm>
           )}
         </Container>
       )}
-      <Alert
-        title={t('PROFILE', 'Profile')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-      <Modal
-        title={t('ENTER_VERIFICATION_CODE', 'Enter verification code')}
-        open={willVerifyOtpState}
-        width='700px'
-        height='420px'
-        onClose={() => setWillVerifyOtpState(false)}
-      >
-        <VerifyCodeForm
-          otpLeftTime={otpLeftTime}
-          credentials={formState?.changes}
-          handleSendOtp={handleSendOtp}
-          handleCheckPhoneCode={handleCheckPhoneCode}
-          email={(userData?.email || user?.email)}
-        />
-      </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

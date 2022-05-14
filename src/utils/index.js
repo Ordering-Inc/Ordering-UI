@@ -244,6 +244,15 @@ export const getDistance = (lat1, lon1, lat2, lon2) => {
 }
 
 /**
+ * List shape for ribbon
+ */
+export const shape = {
+  rectangle: 'rectangle',
+  rectangleRound: 'rectangle_round',
+  capsuleShape: 'capsule_shape'
+}
+
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary

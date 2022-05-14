@@ -21,14 +21,14 @@ import {
   CallCenterInformation,
   CallCenterInformationBullet,
   BusinessLogoWrapper,
-  BusinessStarInfo
+  BusinessStarInfo,
+  InfoLength,
+  InfoDescription
   // CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import BisStar from '@meronex/icons/bi/BisStar'
 import FaCrown from '@meronex/icons/fa/FaCrown'
-import BiCar from '@meronex/icons/bi/BiCar'
-import BiBasket from '@meronex/icons/bi/BiBasket'
 
 const BusinessControllerUI = (props) => {
   const {
@@ -38,7 +38,7 @@ const BusinessControllerUI = (props) => {
     handleClick,
     orderType,
     isCustomLayout,
-    isShowCallcenterInformation,
+    isCustomerMode,
     isBusinessOpen,
     businessWillCloseSoonMinutes,
     onPreorderBusiness,
@@ -73,6 +73,8 @@ const BusinessControllerUI = (props) => {
     else handleClick(business)
   }
 
+  const hasInformationLength = (business?.available_drivers?.length + business?.busy_drivers?.length + business?.active_orders?.length) > 0
+
   if (typeButton) {
     return (
       <ContainerCard typeButton={typeButton}>
@@ -89,11 +91,11 @@ const BusinessControllerUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <ContainerCard isSkeleton={isSkeleton} firstCard={firstCard} minWidthEnabled={minWidthEnabled}>
+      <ContainerCard isSkeleton={isSkeleton} isCustomerMode={isCustomerMode && hasInformationLength} firstCard={firstCard} minWidthEnabled={minWidthEnabled}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
           <BusinessHero>
             {isSkeleton ? (
-              <Skeleton height={140} />
+              <Skeleton height={isCustomerMode ? 100 : 140} />
             ) : (
               <BusinessHeader bgimage={optimizeImage((businessHeader || business?.header || theme.images?.dummies?.businessLogo), 'h_400,c_limit')} isClosed={!isBusinessOpen}>
                 <BusinessTags>
@@ -117,7 +119,7 @@ const BusinessControllerUI = (props) => {
           </BusinessHero>
           <BusinessContent>
             <BusinessLogoWrapper>
-              <WrapperBusinessLogo isSkeleton={isSkeleton}>
+              <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
                 {!isSkeleton && (businessLogo || business?.logo || theme.images?.dummies?.businessLogo) ? (
                   <BusinessLogo bgimage={optimizeImage((businessLogo || business?.logo || theme.images?.dummies?.businessLogo), 'h_200,c_limit')} />
                 ) : (
@@ -144,7 +146,7 @@ const BusinessControllerUI = (props) => {
                     <Skeleton width={100} />
                   )}
                 </div>
-                <Medadata isCustomerMode={isShowCallcenterInformation} isSkeleton={isSkeleton}>
+                <Medadata isCustomerMode={isCustomerMode} isSkeleton={isSkeleton}>
                   {orderType === 1 && (
                     <>
                       {(businessDeliveryPrice ?? business?.delivery_price) >= 0 ? (
@@ -153,7 +155,7 @@ const BusinessControllerUI = (props) => {
                           {business && parsePrice((businessDeliveryPrice ?? business?.delivery_price))}
                         </p>
                       ) : (
-                        <Skeleton width={65} />
+                        <Skeleton width={isCustomerMode ? 70 : 65} />
                       )}
                     </>
                   )}
@@ -173,20 +175,32 @@ const BusinessControllerUI = (props) => {
                   ) : (
                     <Skeleton width={65} />
                   )}
-                  {isShowCallcenterInformation && (
+                  {isCustomerMode && hasInformationLength && (
                     <CallCenterInformation>
-                      <CallCenterInformationBullet bgcolor='green'>
-                        <BiCar />
-                        {business?.available_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='red'>
-                        <BiCar />
-                        {business?.busy_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
-                        <BiBasket />
-                        {business?.active_orders?.length}
-                      </CallCenterInformationBullet>
+                      {business?.available_drivers?.length > 0 && (
+                        <CallCenterInformationBullet>
+                          <InfoLength>
+                            {business?.available_drivers?.length}
+                          </InfoLength>
+                          <InfoDescription>{t('OPEN_ORDERS', 'Open orders')}</InfoDescription>
+                        </CallCenterInformationBullet>
+                      )}
+                      {business?.busy_drivers?.length > 0 && (
+                        <CallCenterInformationBullet>
+                          <InfoLength>
+                            {business?.busy_drivers?.length}
+                          </InfoLength>
+                          <InfoDescription>{t('BUSY_DRIVERS', 'Busy drivers')}</InfoDescription>
+                        </CallCenterInformationBullet>
+                      )}
+                      {business?.active_orders?.length > 0 && (
+                        <CallCenterInformationBullet>
+                          <InfoLength>
+                            {business?.active_orders?.length}
+                          </InfoLength>
+                          <InfoDescription>{t('AVAILABLE_DRIVERS', 'Avalable drivers')}</InfoDescription>
+                        </CallCenterInformationBullet>
+                      )}
                     </CallCenterInformation>
                   )}
                 </Medadata>

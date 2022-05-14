@@ -12,6 +12,11 @@ export const ContainerCard = styled.div`
 
   width: calc(100% - 40px);
 
+  ${({ isCustomerMode }) => isCustomerMode && css`
+    max-height: 400px;
+    height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '400px'};
+  `}
+
   ${({ minWidthEnabled }) => minWidthEnabled && css`
     min-width: calc(65% - 40px);
   `}
@@ -31,7 +36,7 @@ export const ContainerCard = styled.div`
   `}
 
   @media (min-width: 481px) {
-    max-height: 320px;
+    max-height: ${({ isCustomerMode }) => isCustomerMode ? '360px' : '320px'};
   }
 
   @media (min-width: 681px) {
@@ -174,11 +179,26 @@ export const WrapperBusinessLogo = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
 
+  ${({ isCustomerMode }) => isCustomerMode && css`
+    width: 65px;
+    height: 65px;
+    min-height: 65px;
+    min-width: 65px;
+  `}
+
   ${({ isSkeleton }) => isSkeleton && css`
     height: auto;
     width: auto;
     > span {
       display: flex;
+    }
+    @media (min-width: 481px){
+      ${({ isCustomerMode }) => isCustomerMode && css`
+        min-width: 75px;
+        min-height: 75px;
+        height: 75px;
+        width: 75px;
+      `}
     }
   `}
 `
@@ -202,6 +222,10 @@ const BusinessLogoStyled = styled.div`
     height: 75px;
     width: 75px;
     min-height: 75px;
+    ${({ isCustomerMode }) => isCustomerMode && css`
+      width: 100%;
+      height: 100%;
+    `}
   }
 `
 
@@ -326,12 +350,16 @@ export const CallCenterInformationBullet = styled.div`
   padding: 2px;
   margin-bottom: 2px;
   border-radius: 16px;
-  background: ${({ bgcolor }) => bgcolor};
-  width: 50px;
-  color: #fff;
   svg{
     font-size: 18px;
   }
+  ${({ isCustomerMode }) => isCustomerMode ? css`
+    flex-direction: column;
+    ` : css`
+    width: 50px;
+    background: ${({ bgcolor }) => bgcolor};
+    color: #fff;
+  `}
 `
 
 export const BusinessLogoWrapper = styled.div`
@@ -374,4 +402,13 @@ export const CardOverlay = styled.div`
   background: rgba(0, 0, 0, 0.2);
   border-radius: 7.6px;
   z-index: 1;
+`
+
+export const InfoLength = styled.p`
+  font-size: 16px;
+  font-weight: 600;
+`
+
+export const InfoDescription = styled.p`
+  font-size: 12px;
 `
