@@ -19,7 +19,8 @@ const HighestRatedUI = (props) => {
     handleBusinessClick,
     isCustomLayout,
     handleClickAddress,
-    setHasHighRatedBusiness
+    setHasHighRatedBusiness,
+    isCustomerMode
   } = props
 
   const [, t] = useLanguage()
@@ -73,7 +74,7 @@ const HighestRatedUI = (props) => {
                       handleCustomClick={handleBusinessClick}
                       orderType={orderState?.options?.type}
                       isCustomLayout={isCustomLayout}
-                      isShowCallcenterInformation={isCustomLayout}
+                      isCustomerMode={isCustomerMode}
                     />
                   )
                 ))

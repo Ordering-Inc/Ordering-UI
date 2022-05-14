@@ -59,6 +59,7 @@ import { PaymentOptionWallet } from './src/components/PaymentOptionWallet'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { ProductIngredient } from './src/components/ProductIngredient'
+import { PhoneAutocomplete } from './src/components/PhoneAutocomplete'
 import { ProductOption } from './src/components/ProductOption'
 import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
 import { RenderProductsLayout } from './src/components/RenderProductsLayout'
@@ -148,6 +149,7 @@ export {
   ProductItemAccordion,
   ProductOption,
   ProductOptionSubOption,
+  PhoneAutocomplete,
   RenderProductsLayout,
   ResetPassword,
   SearchBar,

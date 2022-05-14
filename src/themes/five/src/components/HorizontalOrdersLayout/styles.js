@@ -3,23 +3,30 @@ import React from 'react'
 
 export const Content = styled.div`
   display: flex;
-  align-items: flex-start;
   border-radius: 16px;
   padding: 10px;
-  flex: 1;
+  ${({ isCustomerMode }) => isCustomerMode ? css`
+    align-items: center;
+  ` : css`
+    align-items: flex-start;
+    flex: 1;
+  `}
 `
 
 export const Price = styled.div`
-  display: flex;
-  justify-content: flex-end;
   width: 35%;
-  flex-direction: column;
-  align-items: flex-end;
+  
+  ${({ isCustomerMode }) => isCustomerMode ? css`
+  text-align: end;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  ` : css`
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+  `}
 
-  @media (min-width: 480px) {
-    flex-direction: row;
-    align-items: center;
-  }
   h2 {
     font-size: 16px;
     margin-block-end: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
@@ -35,22 +42,42 @@ export const Price = styled.div`
     text-overflow: ellipsis;
     margin-left: 5px;
   }
+
+  p[name='view-cart']{
+    color: ${props => props.theme.colors.primary};
+    cursor: pointer;
+  }
+
+  @media (min-width: 480px) {
+    ${({ isCustomerMode }) => !isCustomerMode && css`
+      flex-direction: row;
+      align-items: center;
+    `}
+  }
 `
 
 export const Card = styled.div`
-  min-width: 380px;
-  width: 380px;
+  cursor: pointer;
   margin: 10px;
   position: relative;
-  display: inline-flex;
-  align-items: center;
   background: white;
-  height: ${({ isBusinessesPage }) => isBusinessesPage && '300px'};
-  max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '220px'};
   border-radius: 16px;
   text-align: left;
-  cursor: pointer;
   transition: all 0.3s ease;
+  
+  ${({ isCustomerMode }) => isCustomerMode ? css`
+    min-width: 300px;
+    width: 300px;
+    display: inline-block;
+  ` : css`
+    min-width: 380px;
+    width: 380px;
+    display: inline-flex;
+    align-items: center;
+    height: ${({ isBusinessesPage }) => isBusinessesPage && '300px'};
+    max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '220px'};
+  `}
+
   &:hover {
     box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;
   }
@@ -75,7 +102,7 @@ export const Card = styled.div`
 
   @media (min-width: 480px) {
     min-width: 430px;
-    max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '250px'};;
+    max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '250px'};
     width: 430px;
   }
 
@@ -156,4 +183,27 @@ export const ButtonWrapper = styled.div`
       }
     }
   }
+`
+
+export const Logo = styled.div`
+  width: 55px;
+  height: 55px;
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+  border-radius: 7.6px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 7.6px;
+  }
+
+  @media (min-width: 480px){
+    width: 86px;
+    height: 86px;
+  }
+`
+
+export const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `

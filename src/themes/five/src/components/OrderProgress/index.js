@@ -25,7 +25,8 @@ import {
 
 const OrderProgressUI = (props) => {
   const {
-    orderList
+    orderList,
+    isCustomerMode
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage, parseDate, parseTime }] = useUtils()
@@ -80,7 +81,7 @@ const OrderProgressUI = (props) => {
   }
 
   const handleGoToPage = (index) => {
-    events.emit('go_to_page', { page: index })
+    events.emit('go_to_page', { page: index, params: { orderId: lastOrder?.uuid } })
   }
 
   useEffect(() => {
@@ -103,9 +104,17 @@ const OrderProgressUI = (props) => {
               <Button
                 color='primaryContrast'
                 naked
-                onClick={() => handleGoToPage('orders')}
+                onClick={() => handleGoToPage(isCustomerMode ? 'order_detail' : 'orders')}
               >
-                {t('GO_TO_MY_ORDERS', 'Go to my orders')}
+                {isCustomerMode ? (
+                  <>
+                    {t('GO_TO_THE_ORDER', 'Go to the order')}
+                  </>
+                ) : (
+                  <>
+                    {t('GO_TO_MY_ORDERS', 'Go to my orders')}
+                  </>
+                )}
                 <BsArrowRight />
               </Button>
             </ProgressDescriptionWrapper>
