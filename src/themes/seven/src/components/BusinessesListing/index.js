@@ -215,10 +215,6 @@ const BusinessesListingUI = (props) => {
     history.push('/home')
   }
 
-  useEffect(() => {
-    console.log('businessesList: ', businessesList)
-  }, [businessesList])
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (

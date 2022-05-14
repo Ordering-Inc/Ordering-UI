@@ -4,6 +4,7 @@ import { ProductsList, useConfig, useLanguage } from 'ordering-components'
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
+import { shape } from '../../../../../utils'
 
 import {
   ProductsContainer,
@@ -12,7 +13,8 @@ import {
   ErrorMessage,
   WrapperNotFound,
   HeaderWrapper,
-  DescriptionModalContainer
+  DescriptionModalContainer,
+  RibbonBox
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
@@ -113,6 +115,15 @@ const BusinessProductsListUI = (props) => {
                             )
                           }
                           <h3>{category.name}</h3>
+                          {category?.ribbon?.enabled && (
+                            <RibbonBox
+                              bgColor={category?.ribbon?.color}
+                              isRoundRect={category?.ribbon?.shape === shape?.rectangleRound}
+                              isCapsule={category?.ribbon?.shape === shape?.capsuleShape}
+                            >
+                              {category?.ribbon?.text}
+                            </RibbonBox>
+                          )}
                         </div>
                         {category?.description && (
                           <div className='category-description'>
