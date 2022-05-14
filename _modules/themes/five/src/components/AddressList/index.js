@@ -13,6 +13,8 @@ var _IosRadioButtonOff = _interopRequireDefault(require("@meronex/icons/ios/IosR
 
 var _RiRadioButtonFill = _interopRequireDefault(require("@meronex/icons/ri/RiRadioButtonFill"));
 
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _orderingComponents = require("ordering-components");
@@ -39,9 +41,9 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -62,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressListUI = function AddressListUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _addressList$addresse, _addressList$addresse2, _orderState$options6, _addressList$addresse3, _theme$images, _theme$images$general, _addressList$error$, _orderState$options7, _orderState$options8, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var actionStatus = props.actionStatus,
       addressList = props.addressList,
@@ -79,7 +81,10 @@ var AddressListUI = function AddressListUI(props) {
       isEnableContinueButton = props.isEnableContinueButton,
       setCustomerModalOpen = props.setCustomerModalOpen,
       isCustomerMode = props.isCustomerMode,
-      isFromCheckout = props.isFromCheckout;
+      isFromCheckout = props.isFromCheckout,
+      isOpenUserData = props.isOpenUserData,
+      setIsAddressFormOpen = props.setIsAddressFormOpen,
+      isHeader = props.isHeader;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -127,6 +132,7 @@ var AddressListUI = function AddressListUI(props) {
   var openAddress = function openAddress(address) {
     setCurAddress(address);
     setAddressOpen(true);
+    setIsAddressFormOpen && setIsAddressFormOpen(true);
     var container = window.document.getElementsByClassName('form_edit')[0];
     container && (0, _utils.scrollTo)(container, 0, 500);
   };
@@ -157,7 +163,7 @@ var AddressListUI = function AddressListUI(props) {
       return;
     }
 
-    setAddressOpen(false);
+    handleCloseAddressForm();
   };
 
   var handleSetAddress = function handleSetAddress(address) {
@@ -170,7 +176,7 @@ var AddressListUI = function AddressListUI(props) {
       return;
     }
 
-    setAddressOpen(false);
+    handleCloseAddressForm();
     handleSetDefault(address, userCustomerSetup);
   };
 
@@ -216,6 +222,11 @@ var AddressListUI = function AddressListUI(props) {
       return value;
     });
   };
+
+  var handleCloseAddressForm = function handleCloseAddressForm() {
+    setAddressOpen(false);
+    setIsAddressFormOpen && setIsAddressFormOpen(false);
+  };
   /**
    * Close modals and alerts
    */
@@ -226,9 +237,138 @@ var AddressListUI = function AddressListUI(props) {
       setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
         open: false
       }));
-      setAddressOpen(false);
+      handleCloseAddressForm();
     };
   }, []);
+
+  var AddressButtons = function AddressButtons() {
+    var _orderState$options6;
+
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, onCancel && onAccept && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      outline: true,
+      type: "button",
+      disabled: addressList.loading || actionStatus.loading || orderState.loading,
+      onClick: function onClick() {
+        return onCancel();
+      }
+    }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      disabled: addressList.loading || actionStatus.loading || orderState.loading,
+      id: "second-btn",
+      color: "primary",
+      onClick: function onClick() {
+        return onAccept();
+      }
+    }, t('ACCEPT', 'Accept'))));
+  };
+
+  var AddressListCallcenterLayout = function AddressListCallcenterLayout(_ref) {
+    var children = _ref.children;
+    return /*#__PURE__*/_react.default.createElement(_styles.AddressHalfContainer, null, /*#__PURE__*/_react.default.createElement(_styles.List, {
+      halfWidth: addressOpen
+    }, children), !isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
+      isOpenUserData: isOpenUserData,
+      isHeader: isHeader
+    }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+      onClick: function onClick() {
+        return handleCloseAddressForm();
+      }
+    })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+      userId: userId,
+      addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
+      useValidationFileds: true,
+      address: curAddress,
+      onCancel: function onCancel() {
+        return handleCloseAddressForm();
+      },
+      onSaveAddress: handleSaveAddress,
+      userCustomerSetup: userCustomerSetup
+    })), /*#__PURE__*/_react.default.createElement(AddressButtons, null));
+  };
+
+  var AddressListContent = function AddressListContent() {
+    var _addressList$addresse, _addressList$addresse2, _orderState$options7, _addressList$addresse3, _theme$images, _theme$images$general, _addressList$error$, _orderState$options8;
+
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!isPopover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      className: "add",
+      outline: true,
+      color: isEnableContinueButton && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 ? 'secondary' : 'primary',
+      onClick: function onClick() {
+        return openAddress({});
+      },
+      disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading,
+      style: !isCustomerMode ? {
+        flex: 1,
+        width: 'fit-content'
+      } : {}
+    }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+      userId: userId,
+      addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
+      useValidationFileds: true,
+      address: curAddress,
+      onCancel: function onCancel() {
+        return handleCloseAddressForm();
+      },
+      onSaveAddress: handleSaveAddress,
+      userCustomerSetup: userCustomerSetup
+    }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.address) === 'object' && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+      id: "list"
+    }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), uniqueAddressesList.map(function (address) {
+      return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
+        key: address === null || address === void 0 ? void 0 : address.id
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "wrapAddress",
+        onClick: function onClick() {
+          return handleSetAddress(address);
+        }
+      }, /*#__PURE__*/_react.default.createElement("span", {
+        className: "radio"
+      }, checkAddress(address) ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, {
+        className: "address-checked"
+      }) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
+        className: checkAddress(address) ? 'selected-tag tag' : 'tag'
+      }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
+        className: "address"
+      }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
+        className: "form"
+      }, /*#__PURE__*/_react.default.createElement("a", {
+        className: actionStatus.loading ? 'disabled' : '',
+        onClick: function onClick() {
+          return openAddress(address);
+        }
+      }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)), /*#__PURE__*/_react.default.createElement("a", {
+        className: actionStatus.loading || address.default ? 'disabled' : '',
+        onClick: function onClick() {
+          return handleDeleteClick(address);
+        }
+      }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, null))));
+    }), isEnableContinueButton && uniqueAddressesList.map(function (address) {
+      return address.default && /*#__PURE__*/_react.default.createElement(_styles.ContinueButton, {
+        key: address.id
+      }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+        color: "primary",
+        onClick: function onClick() {
+          return handleSetAddress(address);
+        }
+      }, t('CONTINUE_WITH', 'Continue with'), ": ", address.address));
+    })), !(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
+      src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
+      alt: "Not Found",
+      width: "200px",
+      height: "112px",
+      loading: "lazy"
+    }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.'))), !(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && addressList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+      content: ((_addressList$error$ = addressList.error[0]) === null || _addressList$error$ === void 0 ? void 0 : _addressList$error$.message) || addressList.error[0]
+    }), !(addressList.loading || actionStatus.loading || orderState.loading) && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) !== 'object' && !addressList.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+      content: t('NETWORK_ERROR', 'Network error, please reload the page')
+    }), (addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      height: 50,
+      count: 3,
+      style: {
+        marginBottom: '10px'
+      }
+    })), !isCustomerMode && /*#__PURE__*/_react.default.createElement(AddressButtons, null));
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -239,116 +379,25 @@ var AddressListUI = function AddressListUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
     id: "address_control",
-    isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading)
-  }, (!isPopover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    className: "add",
-    outline: true,
-    color: isEnableContinueButton && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 ? 'secondary' : 'primary',
-    onClick: function onClick() {
-      return openAddress({});
-    },
-    disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading,
-    style: {
-      flex: 1,
-      width: 'fit-content'
-    }
-  }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    userId: userId,
-    addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
-    useValidationFileds: true,
-    address: curAddress,
-    onCancel: function onCancel() {
-      return setAddressOpen(false);
-    },
-    onSaveAddress: handleSaveAddress,
-    userCustomerSetup: userCustomerSetup
-  }), !isPopover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading),
+    isCustomerMode: isCustomerMode
+  }, isCustomerMode ? /*#__PURE__*/_react.default.createElement(AddressListCallcenterLayout, null, /*#__PURE__*/_react.default.createElement(AddressListContent, null)) : /*#__PURE__*/_react.default.createElement(AddressListContent, null), !isPopover && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
-    open: !isPopover && addressOpen,
+    open: !isPopover && addressOpen && !isCustomerMode,
     onClose: function onClose() {
-      return setAddressOpen(false);
+      return handleCloseAddressForm();
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
     address: curAddress,
-    onCancel: function onCancel() {
-      return setAddressOpen(false);
-    },
     onSaveAddress: handleSaveAddress,
-    userCustomerSetup: userCustomerSetup
-  })), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
-    id: "list"
-  }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), uniqueAddressesList.map(function (address) {
-    return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
-      key: address === null || address === void 0 ? void 0 : address.id
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "wrapAddress",
-      onClick: function onClick() {
-        return handleSetAddress(address);
-      }
-    }, /*#__PURE__*/_react.default.createElement("span", {
-      className: "radio"
-    }, checkAddress(address) ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, {
-      className: "address-checked"
-    }) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
-      className: checkAddress(address) ? 'selected-tag tag' : 'tag'
-    }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
-      className: "address"
-    }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
-      className: "form"
-    }, /*#__PURE__*/_react.default.createElement("a", {
-      className: actionStatus.loading ? 'disabled' : '',
-      onClick: function onClick() {
-        return openAddress(address);
-      }
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)), /*#__PURE__*/_react.default.createElement("a", {
-      className: actionStatus.loading || address.default ? 'disabled' : '',
-      onClick: function onClick() {
-        return handleDeleteClick(address);
-      }
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, null))));
-  }), isEnableContinueButton && uniqueAddressesList.map(function (address) {
-    return address.default && /*#__PURE__*/_react.default.createElement(_styles.ContinueButton, {
-      key: address.id
-    }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-      color: "primary",
-      onClick: function onClick() {
-        return handleSetAddress(address);
-      }
-    }, t('CONTINUE_WITH', 'Continue with'), ": ", address.address));
-  })), !(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
-    alt: "Not Found",
-    width: "200px",
-    height: "112px",
-    loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.'))), !(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && addressList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: ((_addressList$error$ = addressList.error[0]) === null || _addressList$error$ === void 0 ? void 0 : _addressList$error$.message) || addressList.error[0]
-  }), !(addressList.loading || actionStatus.loading || orderState.loading) && _typeof((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.address) !== 'object' && !addressList.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('NETWORK_ERROR', 'Network error, please reload the page')
-  }), (addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 50,
-    count: 3,
-    style: {
-      marginBottom: '10px'
+    userCustomerSetup: userCustomerSetup,
+    onCancel: function onCancel() {
+      return handleCloseAddressForm();
     }
-  })), onCancel && onAccept && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) === 'object' && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    outline: true,
-    type: "button",
-    disabled: addressList.loading || actionStatus.loading || orderState.loading,
-    onClick: function onClick() {
-      return onCancel();
-    }
-  }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    disabled: addressList.loading || actionStatus.loading || orderState.loading,
-    id: "second-btn",
-    color: "primary",
-    onClick: function onClick() {
-      return onAccept();
-    }
-  }, t('ACCEPT', 'Accept'))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('SEARCH', 'Search'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),

@@ -49,7 +49,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       onRedirectPage = props.onRedirectPage,
       businessesIds = props.businessesIds,
       activeOrders = props.activeOrders,
-      pastOrders = props.pastOrders;
+      pastOrders = props.pastOrders,
+      isCustomerMode = props.isCustomerMode;
   var orders = customArray || props.orders;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -99,32 +100,43 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         key: i
       }, props));
     }), orders.length > 0 && ordersToShow.map(function (order) {
-      var _order$business, _theme$images, _theme$images$dummies, _order$business2, _getOrderStatus, _order$summary;
+      var _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _order$business3, _theme$images3, _theme$images3$dummie, _order$business4, _order$summary, _order$business5, _getOrderStatus, _order$summary2;
 
       return /*#__PURE__*/_react.default.createElement(_styles.Card, {
         key: order.id || order.uuid,
         id: "order-card",
         isBusinessesPage: isBusinessesPage,
+        isCustomerMode: isCustomerMode,
         onClick: function onClick() {
           return handleClickCard(order === null || order === void 0 ? void 0 : order.uuid);
         }
-      }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, {
+      }, !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, {
         bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_400,c_limit')
-      }), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
+      }), /*#__PURE__*/_react.default.createElement(_styles.Content, {
+        isCustomerMode: isCustomerMode
+      }, isCustomerMode && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (((_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
+        src: ((_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
+        alt: "business-logo",
+        width: "75px",
+        height: "75px"
+      }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
         activeOrders: true
-      }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("div", {
+      }, isCustomerMode ? /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.name), /*#__PURE__*/_react.default.createElement(_styles.Price, {
+        isBusinessesPage: isBusinessesPage,
+        isCustomerMode: isCustomerMode
+      }, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))))) : /*#__PURE__*/_react.default.createElement("h2", null, (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.name), /*#__PURE__*/_react.default.createElement("div", {
         className: "orders-detail"
-      }, /*#__PURE__*/_react.default.createElement("p", {
+      }, (order === null || order === void 0 ? void 0 : order.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", {
         name: "order_number"
-      }, t('ORDER_NUM', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
+      }, t('ORDER_NUM', 'Order No.'), " ", order.id)), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
         outputFormat: 'MM/DD/YY hh:mm A'
       }) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
         utc: false
       }))), /*#__PURE__*/_react.default.createElement("p", {
         className: "order-status"
-      }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)), /*#__PURE__*/_react.default.createElement(_styles.Price, {
+      }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.Price, {
         isBusinessesPage: isBusinessesPage
-      }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))))), pastOrders && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total))))), pastOrders && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
         outline: true,
         color: "primary",
         onClick: function onClick() {
@@ -141,7 +153,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.Card, {
       flex: true,
       nobg: true,
-      isBusinessesPage: isBusinessesPage
+      isBusinessesPage: isBusinessesPage,
+      isCustomerMode: isCustomerMode
     }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       className: "load-orders",
       color: "primary",

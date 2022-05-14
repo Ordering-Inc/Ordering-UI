@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrderTypeList = exports.OrderType = exports.OrderBtnWrapper = exports.Medadata = exports.CallCenterInformationBullet = exports.CallCenterInformation = exports.BranchTitle = exports.BranchListContainer = exports.BranchInfoBlock = exports.BranchContent = void 0;
+exports.RibbonBox = exports.OrderTypeList = exports.OrderType = exports.OrderBtnWrapper = exports.Medadata = exports.CallCenterInformationBullet = exports.CallCenterInformation = exports.BranchTitle = exports.BranchListContainer = exports.BranchInfoBlock = exports.BranchContent = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -47,7 +47,7 @@ var BranchListContainer = _styledComponents.default.div(_templateObject7 || (_te
 
 exports.BranchListContainer = BranchListContainer;
 
-var BranchTitle = _styledComponents.default.h2(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  font-weight: 500;\n  font-size: 16px;\n  color: ", ";\n  margin-top: 0;\n  margin-bottom: 10px;\n"])), function (props) {
+var BranchTitle = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > h2 {\n    font-weight: 500;\n    font-size: 16px;\n    color: ", ";\n    margin-top: 0;\n    margin-bottom: 10px;\n  }\n"])), function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.headingColor;
@@ -111,3 +111,22 @@ var OrderType = _styledComponents.default.div(_templateObject14 || (_templateObj
 });
 
 exports.OrderType = OrderType;
+
+var RibbonBox = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  background-color: ", ";\n  max-width: 200px;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  overflow: hidden;\n  margin-left: 5px;\n  margin-bottom: 10px;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.colorTextSignForm;
+}, function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 5px;\n  "])));
+}, function (_ref4) {
+  var bgColor = _ref4.bgColor;
+  return bgColor && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
+}, function (_ref5) {
+  var isRoundRect = _ref5.isRoundRect;
+  return isRoundRect && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+}, function (_ref6) {
+  var isCapsule = _ref6.isCapsule;
+  return isCapsule && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
+});
+
+exports.RibbonBox = RibbonBox;

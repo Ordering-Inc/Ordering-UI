@@ -101,13 +101,13 @@ var UserPopover = function UserPopover(props) {
     pathname: '/wallets',
     displayName: 'wallets',
     key: 'wallets',
-    isActive: isWalletEnabled
+    isActive: isWalletEnabled && !isCustomerMode
   }, {
     name: 'messages',
     pathname: '/messages',
     displayName: 'messages',
     key: 'messages',
-    isActive: true
+    isActive: !isCustomerMode
   }, {
     name: 'help',
     pathname: '/help',

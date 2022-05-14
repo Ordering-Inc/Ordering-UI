@@ -15,6 +15,10 @@ var _reactHookForm = require("react-hook-form");
 
 var _styledComponents = require("styled-components");
 
+var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+
+var _reactOtpInput = _interopRequireDefault(require("react-otp-input"));
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _orderingComponents = require("ordering-components");
@@ -43,10 +47,6 @@ var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
 
 var _utils = require("../../../../../utils");
 
-var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
-
-var _reactOtpInput = _interopRequireDefault(require("react-otp-input"));
-
 var _GoogleLogin = require("../GoogleLogin");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -57,13 +57,13 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -82,7 +82,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _configs$google_login, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$google_login2, _configs$apple_login_, _configs$twilio_servi, _configs$twilio_servi2, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _formMethods$errors, _formMethods$errors$e, _formMethods$errors2, _formMethods$errors2$, _formMethods$errors3, _formMethods$errors3$, _formMethods$errors4, _formMethods$errors5, _formMethods$errors6, _formMethods$errors6$, _formMethods$errors7, _formMethods$errors7$, _formMethods$errors8, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag, _configs$facebook_log3, _configs$facebook_log4, _configs$facebook_id2, _configs$facebook_id3, _configs$google_login3, _configs$apple_login_2, _configs$twilio_servi3, _configs$twilio_servi4, _props$afterComponent, _props$afterElements;
+  var _configs$google_login, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$google_login2, _configs$apple_login_, _configs$twilio_servi, _configs$twilio_servi2, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _props$beforeMidEleme, _props$beforeMidCompo, _formMethods$errors, _formMethods$errors$e, _formMethods$errors2, _formMethods$errors2$, _formMethods$errors3, _formMethods$errors3$, _formMethods$errors4, _formMethods$errors5, _formMethods$errors6, _formMethods$errors6$, _formMethods$errors7, _formMethods$errors7$, _formMethods$errors8, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag, _configs$facebook_log3, _configs$facebook_log4, _configs$facebook_id2, _configs$facebook_id3, _configs$google_login3, _configs$apple_login_2, _configs$twilio_servi3, _configs$twilio_servi4, _props$afterComponent, _props$afterElements;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -100,8 +100,15 @@ var LoginFormUI = function LoginFormUI(props) {
       loginTab = props.loginTab,
       isPopup = props.isPopup,
       credentials = props.credentials,
-      enableReCaptcha = props.enableReCaptcha;
+      enableReCaptcha = props.enableReCaptcha,
+      useRootPoint = props.useRootPoint,
+      isCustomerMode = props.isCustomerMode;
   var numOtpInputs = 4;
+
+  var _useApi = (0, _orderingComponents.useApi)(),
+      _useApi2 = _slicedToArray(_useApi, 2),
+      ordering = _useApi2[0],
+      setOrdering = _useApi2[1].setOrdering;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -114,6 +121,7 @@ var LoginFormUI = function LoginFormUI(props) {
       configs = _useConfig2[0].configs;
 
   var formMethods = (0, _reactHookForm.useForm)();
+  var emailInput = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -147,10 +155,20 @@ var LoginFormUI = function LoginFormUI(props) {
       validPhoneFieldState = _useState10[0],
       setValidPhoneField = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(''),
+  var _useState11 = (0, _react.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      otpState = _useState12[0],
-      setOtpState = _useState12[1];
+      projectName = _useState12[0],
+      setProjectName = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      submitted = _useState14[0],
+      setSubmitted = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      otpState = _useState16[0],
+      setOtpState = _useState16[1];
 
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
       _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
@@ -189,13 +207,26 @@ var LoginFormUI = function LoginFormUI(props) {
 
             case 4:
               setWillVerifyOtpState(true);
-              _context.next = 8;
+              _context.next = 13;
               break;
 
             case 7:
+              if (!projectName) {
+                _context.next = 12;
+                break;
+              }
+
+              setOrdering(_objectSpread(_objectSpread({}, ordering), {}, {
+                project: projectName
+              }));
+              localStorage.setItem('project_name', projectName);
+              setSubmitted(true);
+              return _context.abrupt("return");
+
+            case 12:
               handleButtonLoginClick();
 
-            case 8:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -271,6 +302,7 @@ var LoginFormUI = function LoginFormUI(props) {
       }
     });
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
+    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
   };
 
   var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
@@ -282,6 +314,11 @@ var LoginFormUI = function LoginFormUI(props) {
       }
     });
     formMethods.setValue('cellphone', number, '');
+  };
+
+  var handleChangeProject = function handleChangeProject(e) {
+    setSubmitted(false);
+    setProjectName(e.target.value);
   };
 
   var handleSendOtp = function handleSendOtp() {
@@ -308,12 +345,19 @@ var LoginFormUI = function LoginFormUI(props) {
         open: true,
         content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
+      setSubmitted(false);
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
     formMethods.register('cellphone', {
       required: loginTab === 'cellphone' ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone')) : null
     });
+
+    if (useRootPoint) {
+      formMethods.register('project', {
+        required: t('VALIDATION_ERROR_PROJECT_REQUIRED', 'The field project is required').replace('_attribute_', t('PROJECT', 'Project'))
+      });
+    }
   }, [formMethods]);
   (0, _react.useEffect)(function () {
     handleSendOtp();
@@ -358,6 +402,10 @@ var LoginFormUI = function LoginFormUI(props) {
   (0, _react.useEffect)(function () {
     formMethods.reset();
   }, [loginTab]);
+  (0, _react.useEffect)(function () {
+    if (ordering.project === null || !submitted || !useRootPoint) return;
+    handleButtonLoginClick();
+  }, [ordering, submitted]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -368,9 +416,22 @@ var LoginFormUI = function LoginFormUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
-    isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LOGIN', 'Login')), useLoginByEmail && useLoginByCellphone && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+  }, isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement("img", {
+    alt: "Logotype",
+    width: "530px",
+    height: "620px",
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.callcenterHero,
+    loading: "lazy"
+  })), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
+    isPopup: isPopup,
+    isCustomerMode: isCustomerMode
+  }, isCustomerMode ? /*#__PURE__*/_react.default.createElement(_styles.LogotypeContainer, null, /*#__PURE__*/_react.default.createElement("img", {
+    alt: "Logotype-callcenter",
+    width: "250px",
+    height: "105px",
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logoCallcenter,
+    loading: "lazy"
+  })) : /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LOGIN', 'Login')), useLoginByEmail && useLoginByCellphone && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
@@ -397,7 +458,20 @@ var LoginFormUI = function LoginFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors = formMethods.errors) === null || _formMethods$errors === void 0 ? void 0 : (_formMethods$errors$e = _formMethods$errors.email) === null || _formMethods$errors$e === void 0 ? void 0 : _formMethods$errors$e.type) === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors2 = formMethods.errors) === null || _formMethods$errors2 === void 0 ? void 0 : (_formMethods$errors2$ = _formMethods$errors2.email) === null || _formMethods$errors2$ === void 0 ? void 0 : _formMethods$errors2$.message, " *"), ((_formMethods$errors3 = formMethods.errors) === null || _formMethods$errors3 === void 0 ? void 0 : (_formMethods$errors3$ = _formMethods$errors3.email) === null || _formMethods$errors3$ === void 0 ? void 0 : _formMethods$errors3$.type) === 'pattern' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), useRootPoint && /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    type: "text",
+    name: "project",
+    "aria-label": "project",
+    placeholder: t('PROJECT', 'Project'),
+    ref: formMethods.register({
+      required: t('VALIDATION_ERROR_REQUIRED', 'Project is required').replace('_attribute_', t('PROJECT', 'Project'))
+    }),
+    onChange: function onChange(e) {
+      return handleChangeProject(e);
+    },
+    autoComplete: "off",
+    autoCapitalize: "off"
+  }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowInRight, null))), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors = formMethods.errors) === null || _formMethods$errors === void 0 ? void 0 : (_formMethods$errors$e = _formMethods$errors.email) === null || _formMethods$errors$e === void 0 ? void 0 : _formMethods$errors$e.type) === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors2 = formMethods.errors) === null || _formMethods$errors2 === void 0 ? void 0 : (_formMethods$errors2$ = _formMethods$errors2.email) === null || _formMethods$errors2$ === void 0 ? void 0 : _formMethods$errors2$.message, " *"), ((_formMethods$errors3 = formMethods.errors) === null || _formMethods$errors3 === void 0 ? void 0 : (_formMethods$errors3$ = _formMethods$errors3.email) === null || _formMethods$errors3$ === void 0 ? void 0 : _formMethods$errors3$.type) === 'pattern' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "email",
     name: "email",
     "aria-label": "email",

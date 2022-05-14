@@ -47,6 +47,8 @@ var _CartContent = require("../CartContent");
 
 var _Select = require("../../styles/Select");
 
+var _Modal = require("../Modal");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -172,6 +174,11 @@ var CheckoutUI = function CheckoutUI(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       isUserDetailsEdit = _useState8[0],
       setIsUserDetailsEdit = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      modalSelected = _useState10[0],
+      setModalSelected = _useState10[1];
 
   var isWalletEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && ((configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1');
   var placeSpotTypes = [3, 4];
@@ -550,42 +557,42 @@ var Checkout = function Checkout(props) {
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
-  var _useState9 = (0, _react.useState)({
+  var _useState11 = (0, _react.useState)({
     loading: true,
     error: null,
     cart: null
   }),
-      _useState10 = _slicedToArray(_useState9, 2),
-      cartState = _useState10[0],
-      setCartState = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      openUpselling = _useState12[0],
-      setOpenUpselling = _useState12[1];
+      cartState = _useState12[0],
+      setCartState = _useState12[1];
 
   var _useState13 = (0, _react.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      canOpenUpselling = _useState14[0],
-      setCanOpenUpselling = _useState14[1];
+      openUpselling = _useState14[0],
+      setOpenUpselling = _useState14[1];
 
-  var _useState15 = (0, _react.useState)(null),
+  var _useState15 = (0, _react.useState)(false),
       _useState16 = _slicedToArray(_useState15, 2),
-      currentCart = _useState16[0],
-      setCurrentCart = _useState16[1];
+      canOpenUpselling = _useState16[0],
+      setCanOpenUpselling = _useState16[1];
 
-  var _useState17 = (0, _react.useState)({
+  var _useState17 = (0, _react.useState)(null),
+      _useState18 = _slicedToArray(_useState17, 2),
+      currentCart = _useState18[0],
+      setCurrentCart = _useState18[1];
+
+  var _useState19 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState18 = _slicedToArray(_useState17, 2),
-      alertState = _useState18[0],
-      setAlertState = _useState18[1];
-
-  var _useState19 = (0, _react.useState)(false),
       _useState20 = _slicedToArray(_useState19, 2),
-      isResetPaymethod = _useState20[0],
-      setIsResetPaymethod = _useState20[1];
+      alertState = _useState20[0],
+      setAlertState = _useState20[1];
+
+  var _useState21 = (0, _react.useState)(false),
+      _useState22 = _slicedToArray(_useState21, 2),
+      isResetPaymethod = _useState22[0],
+      setIsResetPaymethod = _useState22[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;

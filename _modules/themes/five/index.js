@@ -363,6 +363,12 @@ Object.defineProperty(exports, "PaymentOptions", {
     return _PaymentOptions.PaymentOptions;
   }
 });
+Object.defineProperty(exports, "PhoneAutocomplete", {
+  enumerable: true,
+  get: function get() {
+    return _PhoneAutocomplete.PhoneAutocomplete;
+  }
+});
 Object.defineProperty(exports, "ProductForm", {
   enumerable: true,
   get: function get() {
@@ -635,6 +641,8 @@ var _ProductForm = require("./src/components/ProductForm");
 var _ProductItemAccordion = require("./src/components/ProductItemAccordion");
 
 var _ProductIngredient = require("./src/components/ProductIngredient");
+
+var _PhoneAutocomplete = require("./src/components/PhoneAutocomplete");
 
 var _ProductOption = require("./src/components/ProductOption");
 

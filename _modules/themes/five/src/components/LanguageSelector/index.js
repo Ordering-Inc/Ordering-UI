@@ -11,6 +11,10 @@ var _orderingComponents = require("ordering-components");
 
 var _Select = require("../../styles/Select");
 
+var _styles = require("./styles");
+
+var _BisDownArrow = _interopRequireDefault(require("@meronex/icons/bi/BisDownArrow"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -33,21 +37,40 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     return {
       value: language === null || language === void 0 ? void 0 : language.code,
       content: language === null || language === void 0 ? void 0 : language.name,
-      showOnSelected: language === null || language === void 0 ? void 0 : language.name
+      showOnSelected: ''
     };
   });
 
   _languages && _languages.sort(function (a, b) {
     return a.content > b.content ? 1 : b.content > a.content ? -1 : 0;
   });
-  return _languages && _languages.length > 1 ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
+
+  var transformLanguageToCountry = function transformLanguageToCountry(currentLanguage) {
+    var _currentLanguage$slic;
+
+    var language = (_currentLanguage$slic = currentLanguage.slice(0, 2)) === null || _currentLanguage$slic === void 0 ? void 0 : _currentLanguage$slic.toUpperCase();
+    if (language === 'EN') return 'US';
+    if (language === 'AR') return 'AE';
+    if (language === 'CA') return 'ES';
+    if (language === 'DA') return 'DK';
+    if (language === 'ZH') return 'CN';
+    return language;
+  };
+
+  return _languages && _languages.length > 1 ? /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("img", {
+    alt: currentLanguage,
+    src: "http://purecatamphetamine.github.io/country-flag-icons/3x2/".concat(transformLanguageToCountry(currentLanguage), ".svg")
+  }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    isHomeStyle: true,
     options: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultLanguages : _languages,
     defaultValue: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultCurrentLanguage : currentLanguage,
     onChange: function onChange(languageId) {
       return handleChangeLanguage(languageId);
     },
-    notReload: notReload
-  }) : null;
+    notReload: notReload,
+    placeholder: "",
+    CustomArrow: _BisDownArrow.default
+  })) : null;
 };
 
 var LanguageSelector = function LanguageSelector(props) {

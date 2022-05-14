@@ -84,7 +84,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       selectItem = props.selectItem,
       setIsEmptyPast = props.setIsEmptyPast,
       setIsEmptyActive = props.setIsEmptyActive,
-      setIsEmptyPreorder = props.setIsEmptyPreorder;
+      setIsEmptyPreorder = props.setIsEmptyPreorder,
+      isCustomerMode = props.isCustomerMode;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -339,7 +340,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder,
     activeOrders: activeOrders,
-    pastOrders: pastOrders
+    pastOrders: pastOrders,
+    isCustomerMode: isCustomerMode
   })) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderLoading,
     orders: orders.filter(function (order) {
@@ -364,7 +366,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
 var OrdersOption = function OrdersOption(props) {
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersOptionUI,
-    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 14, 15, 18, 19, 20, 21, 22, 23] : props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 16, 17] : [13],
+    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23] : props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 15, 16, 17] : [13],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,

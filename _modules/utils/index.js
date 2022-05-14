@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.scrollTo = exports.reviewCommentList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -352,13 +352,23 @@ var getDistance = function getDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 };
 /**
+ * List shape for ribbon
+ */
+
+
+exports.getDistance = getDistance;
+var shape = {
+  rectangle: 'rectangle',
+  rectangleRound: 'rectangle_round',
+  capsuleShape: 'capsule_shape'
+};
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
  */
 
-
-exports.getDistance = getDistance;
+exports.shape = shape;
 
 var reviewCommentList = function reviewCommentList(type) {
   var _useLanguage5 = (0, _orderingComponents.useLanguage)(),

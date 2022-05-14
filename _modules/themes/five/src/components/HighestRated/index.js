@@ -60,7 +60,8 @@ var HighestRatedUI = function HighestRatedUI(props) {
       handleBusinessClick = props.handleBusinessClick,
       isCustomLayout = props.isCustomLayout,
       handleClickAddress = props.handleClickAddress,
-      setHasHighRatedBusiness = props.setHasHighRatedBusiness;
+      setHasHighRatedBusiness = props.setHasHighRatedBusiness,
+      isCustomerMode = props.isCustomerMode;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -109,7 +110,7 @@ var HighestRatedUI = function HighestRatedUI(props) {
       handleCustomClick: handleBusinessClick,
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type,
       isCustomLayout: isCustomLayout,
-      isShowCallcenterInformation: isCustomLayout
+      isCustomerMode: isCustomerMode
     });
   }))), businessesList.loading && _toConsumableArray(Array(8).keys()).map(function (i) {
     var _orderState$options2;

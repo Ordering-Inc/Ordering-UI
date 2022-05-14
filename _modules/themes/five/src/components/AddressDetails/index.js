@@ -136,7 +136,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       return handleFindBusinesses();
     },
     userCustomerSetup: isCustomerMode && user,
-    isFromCheckout: isFromCheckout
+    isFromCheckout: isFromCheckout,
+    isCustomerMode: isCustomerMode
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,
