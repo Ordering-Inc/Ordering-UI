@@ -5,17 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
 
-var _react = _interopRequireDefault(require("react"));
-
-var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
-
-var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
-
-var _FaCreditCard = _interopRequireDefault(require("@meronex/icons/fa/FaCreditCard"));
-
 var _orderingComponents = require("ordering-components");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _styledComponents = require("styled-components");
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -38,18 +30,21 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var getIconCard = function getIconCard() {
+  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$genera;
+
   var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var value = brand.toLowerCase();
+  var theme = (0, _styledComponents.useTheme)();
 
   switch (value) {
     case 'visa':
-      return /*#__PURE__*/_react.default.createElement(_FaCcVisa.default, null);
+      return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.visa;
 
     case 'mastercard':
-      return /*#__PURE__*/_react.default.createElement(_FaCcMastercard.default, null);
+      return (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.mastercard;
 
     default:
-      return /*#__PURE__*/_react.default.createElement(_FaCreditCard.default, null);
+      return (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.credit;
   }
 };
 /**
