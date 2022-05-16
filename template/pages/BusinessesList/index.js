@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessesListing } from 'ordering-ui/theme_five'
+import { BusinessesListing } from '../../../src/themes/five/src/components/BusinessesListing'
 import { useEvent } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
 
