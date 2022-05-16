@@ -80,6 +80,7 @@ const AddressDetailsUI = (props) => {
             onAccept={() => handleFindBusinesses()}
             userCustomerSetup={isCustomerMode && user}
             isFromCheckout={isFromCheckout}
+            isCustomerMode={isCustomerMode}
           />
         </Modal>
 

@@ -13,7 +13,7 @@ export const WrapContent = styled.div`
   padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
 
-  @media (min-width: 381px) {
+  @media (min-width: 576px) {
     padding: 0px;
   }
 

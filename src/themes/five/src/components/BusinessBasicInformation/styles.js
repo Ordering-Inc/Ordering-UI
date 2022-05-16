@@ -103,12 +103,6 @@ export const BusinessInfoItem = styled.div`
     padding-right: 0;
   `}
 
-  h2 {
-    font-weight: 600;
-    font-size: 32px;
-    margin: 0 0 10px 0;
-  }
-
   .type {
     font-size: 14px;
     color: ${props => props.theme.colors.darkTextColor};
@@ -275,6 +269,51 @@ export const BusinessMoreDetail = styled.div`
     font-size: 24px;
     color: white;
   }
-  
-  
+`
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  h2 {
+    font-weight: 600;
+    font-size: 32px;
+    margin: 0 0 10px 0;
+  }
+`
+
+export const RibbonBox = styled.div`
+  padding: 2px 8px;
+  box-sizing: border-box;
+  z-index: 10;
+  color: ${props => props.theme.colors.colorTextSignForm};
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 13px;
+  background-color: ${props => props.theme.colors.primary};
+  max-width: 200px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-left: 5px;
+  margin-bottom: 10px;
+
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: 5px;
+  `}
+
+  ${({ bgColor }) => bgColor && css`
+    background-color: ${bgColor};
+  `}
+
+  ${({ isRoundRect }) => isRoundRect && css`
+    border-radius: 7.6px;
+  `}
+
+  ${({ isCapsule }) => isCapsule && css`
+    border-radius: 50px;
+  `}
 `

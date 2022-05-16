@@ -4,6 +4,7 @@ import { ProductsList, useConfig, useLanguage } from 'ordering-components'
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
+import { shape } from '../../../../../utils'
 
 import {
   ProductsContainer,
@@ -12,7 +13,8 @@ import {
   ErrorMessage,
   WrapperNotFound,
   HeaderWrapper,
-  DescriptionModalContainer
+  DescriptionModalContainer,
+  RibbonBox
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
@@ -50,9 +52,9 @@ const BusinessProductsListUI = (props) => {
         {category?.id && (
           <ProductsListing>
             {
-              categoryState.products?.map(product => (
+              categoryState.products?.map((product, i) => (
                 <SingleProductCard
-                  key={product?.id}
+                  key={i}
                   isSoldOut={(product.inventoried && !product.quantity)}
                   product={product}
                   businessId={businessId}
@@ -73,9 +75,9 @@ const BusinessProductsListUI = (props) => {
                   <WrapAllCategories id='categoryfeatured'>
                     <h3>{t('FEATURED', 'Featured')}</h3>
                     <ProductsListing>
-                      {categoryState.products?.map(product => product.featured && (
+                      {categoryState.products?.map((product, i) => product.featured && (
                         <SingleProductCard
-                          key={product?.id}
+                          key={i}
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
                           businessId={businessId}
@@ -101,7 +103,7 @@ const BusinessProductsListUI = (props) => {
             const shortCategoryDescription = category?.description?.length > 200 ? `${category?.description?.substring(0, 200)}...` : category?.description
 
             return (
-              <React.Fragment key={category?.id}>
+              <React.Fragment key={i}>
                 {
                   products.length > 0 && (
                     <WrapAllCategories id={`category${category?.id}`}>
@@ -113,6 +115,15 @@ const BusinessProductsListUI = (props) => {
                             )
                           }
                           <h3>{category.name}</h3>
+                          {category?.ribbon?.enabled && (
+                            <RibbonBox
+                              bgColor={category?.ribbon?.color}
+                              isRoundRect={category?.ribbon?.shape === shape?.rectangleRound}
+                              isCapsule={category?.ribbon?.shape === shape?.capsuleShape}
+                            >
+                              {category?.ribbon?.text}
+                            </RibbonBox>
+                          )}
                         </div>
                         {category?.description && (
                           <div className='category-description'>
@@ -127,9 +138,9 @@ const BusinessProductsListUI = (props) => {
                       </HeaderWrapper>
                       <ProductsListing>
                         {
-                          products.map(product => (
+                          products.map((product, i) => (
                             <SingleProductCard
-                              key={product?.id}
+                              key={i}
                               isSoldOut={product.inventoried && !product.quantity}
                               businessId={businessId}
                               product={product}

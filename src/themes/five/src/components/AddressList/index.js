@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
 import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
+import MdClose from '@meronex/icons/md/MdClose'
+
 import {
   Heart,
   Building,
@@ -27,7 +29,12 @@ import {
   WrappNotAddresses,
   FormActions,
   ContinueButton,
-  AddressTitle
+  AddressTitle,
+  AddressHalfContainer,
+  List,
+  AddressFormContainer,
+  TitleFormContainer,
+  CloseIcon
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -55,7 +62,10 @@ const AddressListUI = (props) => {
     isEnableContinueButton,
     setCustomerModalOpen,
     isCustomerMode,
-    isFromCheckout
+    isFromCheckout,
+    isOpenUserData,
+    setIsAddressFormOpen,
+    isHeader
   } = props
 
   const [, t] = useLanguage()
@@ -79,6 +89,7 @@ const AddressListUI = (props) => {
   const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
+    setIsAddressFormOpen && setIsAddressFormOpen(true)
     const container = window.document.getElementsByClassName('form_edit')[0]
     container && scrollTo(container, 0, 500)
   }
@@ -105,7 +116,7 @@ const AddressListUI = (props) => {
       handleSetAddress(address)
       return
     }
-    setAddressOpen(false)
+    handleCloseAddressForm()
   }
 
   const handleSetAddress = (address) => {
@@ -121,7 +132,7 @@ const AddressListUI = (props) => {
       return
     }
 
-    setAddressOpen(false)
+    handleCloseAddressForm()
     handleSetDefault(address, userCustomerSetup)
   }
 
@@ -157,25 +168,81 @@ const AddressListUI = (props) => {
     return values.every(value => value)
   }
 
+  const handleCloseAddressForm = () => {
+    setAddressOpen(false)
+    setIsAddressFormOpen && setIsAddressFormOpen(false)
+  }
+
   /**
    * Close modals and alerts
    */
   useEffect(() => {
     return () => {
       setConfirm({ ...confirm, open: false })
-      setAddressOpen(false)
+      handleCloseAddressForm()
     }
   }, [])
 
-  return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
+  const AddressButtons = () => {
+    return (
+      <>
+        {onCancel && onAccept && typeof orderState.options?.address === 'object' && (
+          <FormActions>
+            <Button
+              outline
+              type='button'
+              disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
+              onClick={() => onCancel()}
+            >
+              {t('CANCEL', 'Cancel')}
+            </Button>
+            <Button
+              disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
+              id='second-btn'
+              color='primary'
+              onClick={() => onAccept()}
+            >
+              {t('ACCEPT', 'Accept')}
+            </Button>
+          </FormActions>
+        )}
+      </>
+    )
+  }
+
+  const AddressListCallcenterLayout = ({ children }) => {
+    return (
+      <AddressHalfContainer>
+        <List halfWidth={addressOpen}>
+          {children}
+        </List>
+        {!isPopover && addressOpen && (
+          <AddressFormContainer isOpenUserData={isOpenUserData} isHeader={isHeader}>
+            <TitleFormContainer>
+              <CloseIcon>
+                <MdClose onClick={() => handleCloseAddressForm()} />
+              </CloseIcon>
+              <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
+            </TitleFormContainer>
+            <AddressForm
+              userId={userId}
+              addressesList={addressList?.addresses}
+              useValidationFileds
+              address={curAddress}
+              onCancel={() => handleCloseAddressForm()}
+              onSaveAddress={handleSaveAddress}
+              userCustomerSetup={userCustomerSetup}
+            />
+          </AddressFormContainer>
+        )}
+        <AddressButtons />
+      </AddressHalfContainer>
+    )
+  }
+
+  const AddressListContent = () => {
+    return (
+      <>
         {
           (!isPopover || !addressOpen) && (
             <Button
@@ -184,7 +251,7 @@ const AddressListUI = (props) => {
               color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
               onClick={() => openAddress({})}
               disabled={orderState?.loading || actionStatus.loading}
-              style={{ flex: 1, width: 'fit-content'}}
+              style={!isCustomerMode ? { flex: 1, width: 'fit-content' } : {}}
             >
               {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
             </Button>
@@ -197,29 +264,10 @@ const AddressListUI = (props) => {
               addressesList={addressList?.addresses}
               useValidationFileds
               address={curAddress}
-              onCancel={() => setAddressOpen(false)}
+              onCancel={() => handleCloseAddressForm()}
               onSaveAddress={handleSaveAddress}
               userCustomerSetup={userCustomerSetup}
             />
-          )
-        }
-        {
-          !isPopover && (
-            <Modal
-              title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
-              open={!isPopover && addressOpen}
-              onClose={() => setAddressOpen(false)}
-            >
-              <AddressForm
-                userId={userId}
-                addressesList={addressList?.addresses}
-                useValidationFileds
-                address={curAddress}
-                onCancel={() => setAddressOpen(false)}
-                onSaveAddress={handleSaveAddress}
-                userCustomerSetup={userCustomerSetup}
-              />
-            </Modal>
           )
         }
 
@@ -275,12 +323,12 @@ const AddressListUI = (props) => {
           !addressList.error &&
           addressList?.addresses?.length === 0 &&
           !isProductForm &&
-        (
-          <WrappNotAddresses>
-            <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
-            <h1>{t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.')}</h1>
-          </WrappNotAddresses>
-        )}
+          (
+            <WrappNotAddresses>
+              <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
+              <h1>{t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.')}</h1>
+            </WrappNotAddresses>
+          )}
 
         {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
           addressList.error.length > 0 && (
@@ -302,27 +350,49 @@ const AddressListUI = (props) => {
           </AddressListUl>
         )}
 
-        {onCancel && onAccept && typeof orderState.options?.address === 'object' && (
-          <FormActions>
-            <Button
-              outline
-              type='button'
-              disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
-              onClick={() => onCancel()}
-            >
-              {t('CANCEL', 'Cancel')}
-            </Button>
-            <Button
-              disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
-              id='second-btn'
-              color='primary'
-              onClick={() => onAccept()}
-            >
-              {t('ACCEPT', 'Accept')}
-            </Button>
-          </FormActions>
+        {!isCustomerMode && (
+          <AddressButtons />
         )}
 
+      </>
+    )
+  }
+
+  return (
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))}
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))}
+      <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading} isCustomerMode={isCustomerMode}>
+        {isCustomerMode ? (
+          <AddressListCallcenterLayout>
+            <AddressListContent />
+          </AddressListCallcenterLayout>
+        ) : (
+          <AddressListContent />
+        )}
+        {
+          !isPopover && (
+            <Modal
+              title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+              open={!isPopover && addressOpen && !isCustomerMode}
+              onClose={() => handleCloseAddressForm()}
+            >
+              <AddressForm
+                userId={userId}
+                addressesList={addressList?.addresses}
+                useValidationFileds
+                address={curAddress}
+                onSaveAddress={handleSaveAddress}
+                userCustomerSetup={userCustomerSetup}
+                onCancel={() => handleCloseAddressForm()}
+              />
+            </Modal>
+          )
+        }
         <Confirm
           title={t('SEARCH', 'Search')}
           content={confirm.content}

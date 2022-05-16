@@ -6,14 +6,11 @@ import {
   useEvent,
   useUtils,
   useConfig,
+  useOrder,
+  useCustomer,
   GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
-import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
-import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
-import BsPhone from '@meronex/icons/bs/BsPhone'
-import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
-import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -23,6 +20,9 @@ import { Modal } from '../Modal'
 import { Messages } from '../Messages'
 import { ReviewOrder } from '../../../../../components/ReviewOrder'
 import { ProductShare } from '../../../../../components/ProductShare'
+import { OrderBillSection } from './OrderBillSection'
+import { ActionsSection } from './ActionsSection'
+import { OrderPreferencesSection } from './OrderPreferencesSections'
 
 import {
   Container,
@@ -32,7 +32,6 @@ import {
   OrderBusiness,
   BusinessWrapper,
   BusinessInfo,
-  ActionsBlock,
   OrderInfo,
   StatusBar,
   SectionTitle,
@@ -42,12 +41,9 @@ import {
   OrderDriver,
   WrapperDriver,
   OrderProducts,
-  OrderBill,
   SkeletonBlockWrapp,
   SkeletonBlock,
   ShareOrder,
-  MessagesIcon,
-  ExclamationWrapper,
   WrapperLeftContainer,
   WrapperRightContainer,
   Divider,
@@ -55,13 +51,16 @@ import {
   ReviewOrderLink,
   SkeletonWrapper,
   ReviewWrapper,
-  Exclamation,
-  CommentContainer,
   NewOrder,
-  OrderActions
+  OrderActions,
+  TitleContainer,
+  ReOrder,
+  BusinessTitle,
+  SectionTitleContainer,
+  OrderPreferences,
+  HeaderTitle
 } from './styles'
 import { useTheme } from 'styled-components'
-import { verifyDecimals } from '../../../../../utils'
 import { ReviewProduct } from '../../../../../components/ReviewProduct'
 import { ReviewDriver } from '../../../../../components/ReviewDriver'
 import { TaxInformation } from '../TaxInformation'
@@ -79,13 +78,17 @@ const OrderDetailsUI = (props) => {
     readMessages,
     messagesReadList,
     reorderState,
-    handleReorder
+    handleReorder,
+    isCustomerMode,
+    orderTypes
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
-  const [{ parsePrice, parseNumber, parseDate }] = useUtils()
+  const [{ parsePrice, parseDate }] = useUtils()
+  const [, { deleteUserCustomer }] = useCustomer()
+  const [{ carts }, { refreshOrderOptions }] = useOrder()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
@@ -97,16 +100,6 @@ const OrderDetailsUI = (props) => {
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
 
   const { order, loading, businessData, error } = props.order
-  const placeSpotTypes = [3, 4]
-
-  const walletName = {
-    cash: {
-      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
-    },
-    credit_point: {
-      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
-    }
-  }
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -144,16 +137,6 @@ const OrderDetailsUI = (props) => {
 
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
-  }
-
-  const handleOpenMessages = (data) => {
-    setOpenMessages(data)
-    readMessages()
-    if (order?.unread_count > 0) {
-      data.business
-        ? setUnreadAlert({ ...unreadAlert, business: false })
-        : setUnreadAlert({ ...unreadAlert, driver: false })
-    }
   }
 
   const unreadMessages = () => {
@@ -201,18 +184,33 @@ const OrderDetailsUI = (props) => {
     }
   }
 
-  const getIncludedTaxes = () => {
-    if (order?.taxes?.length === 0) {
-      return order.tax_type === 1 ? order?.summary?.tax ?? 0 : 0
-    } else {
-      return order?.taxes.reduce((taxIncluded, tax) => {
-        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
-      }, 0)
+  const closeOrderModal = (e) => {
+    const outsideModal = !window.document.getElementById('app-modals') ||
+      !window.document.getElementById('app-modals').contains(e.target)
+    if (outsideModal) {
+      const _businessId = 'businessId:' + businessData?.id
+      const _uuid = carts[_businessId]?.uuid
+      if (_uuid) {
+        localStorage.setItem('remove-cartId', JSON.stringify(_uuid))
+        handleBusinessRedirect(businessData?.slug)
+      }
     }
   }
 
-  const getIncludedTaxesDiscounts = () => {
-    return order?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
+  const handleStartNewOrder = () => {
+    deleteUserCustomer(true)
+    refreshOrderOptions()
+    handleGoToPage({ page: 'home' })
+  }
+
+  const ActionsSectionProps = {
+    order,
+    handleBusinessRedirect,
+    businessData,
+    unreadAlert,
+    setOpenMessages,
+    readMessages,
+    setUnreadAlert
   }
 
   useEffect(() => {
@@ -233,12 +231,62 @@ const OrderDetailsUI = (props) => {
 
   useEffect(() => {
     if (reorderState?.error) {
-      handleBusinessRedirect(businessData?.slug)
+      window.addEventListener('click', closeOrderModal)
+      return () => {
+        window.removeEventListener('click', closeOrderModal)
+      }
     }
+
     if (!reorderState?.error && reorderState?.result?.uuid) {
       handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
     }
   }, [reorderState])
+
+  const OrderMapSection = () => {
+    return (
+      <>
+        {order?.driver?.location?.lat && order?.driver?.location?.lng && parseInt(order?.status) === 9 && (
+          <>
+            <Map isCustomerMode={isCustomerMode}>
+              <GoogleMapsMap
+                apiKey={configs?.google_maps_api_key?.value}
+                location={order?.driver?.location}
+                locations={locations}
+                mapControls={googleMapsControls}
+              />
+            </Map>
+          </>
+        )}
+      </>
+    )
+  }
+
+  const OrderHeaderInfoSection = () => {
+    return (
+      <HeaderInfo>
+        <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
+        <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
+      </HeaderInfo>
+    )
+  }
+
+  const OrderActionsSection = () => {
+    return (
+      <>
+        {!userCustomerId && (
+          <MyOrderActions>
+            <Button
+              color='primary'
+              outline
+              onClick={() => handleGoToPage({ page: 'orders' })}
+            >
+              {t('YOUR_ORDERS', theme?.defaultLanguages?.YOUR_ORDERS || 'Your Orders')}
+            </Button>
+          </MyOrderActions>
+        )}
+      </>
+    )
+  }
 
   return (
     <>
@@ -248,425 +296,267 @@ const OrderDetailsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Container>
+      <Container isCustomerMode={isCustomerMode}>
         {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
-          <WrapperContainer>
-            <WrapperLeftContainer>
+          <WrapperContainer isCustomerMode={isCustomerMode}>
+            <WrapperLeftContainer isCustomerMode={isCustomerMode}>
               <OrderInfo>
-                <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
-                {order?.status !== 0 && order?.integration_id && (
-                  <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
-                )}
-                <p className='date'>
-                  {
-                    order?.delivery_datetime_utc
-                      ? parseDate(order?.delivery_datetime_utc)
-                      : parseDate(order?.delivery_datetime, { utc: false })
-                  }
-                </p>
-                <OrderActions>
-                  <ReviewOrderLink
-                    className='Review-order'
-                    active={(
-                      parseInt(order?.status) === 1 ||
-                      parseInt(order?.status) === 2 ||
-                      parseInt(order?.status) === 5 ||
-                      parseInt(order?.status) === 6 ||
-                      parseInt(order?.status) === 10 ||
-                      parseInt(order?.status) === 11 ||
-                      parseInt(order?.status) === 12
-                    ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
-                  >
-                    <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                  </ReviewOrderLink>
-                  {(
-                    parseInt(order?.status) === 1 ||
-                    parseInt(order?.status) === 2 ||
-                    parseInt(order?.status) === 5 ||
-                    parseInt(order?.status) === 6 ||
-                    parseInt(order?.status) === 10 ||
-                    parseInt(order?.status) === 11 ||
-                    parseInt(order?.status) === 12
-                  ) && (
-                      <NewOrder>
-                        <Button
-                          color='primary'
-                          outline
-                          onClick={() => handleReorder(order.id)}
-                          disabled={reorderState?.loading}
-                        >
-                          {reorderState?.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
-                        </Button>
-                      </NewOrder>
+                {isCustomerMode ? (
+                  <TitleContainer>
+                    <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                    {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
+                      <Content className='order-content' isCustomerMode={isCustomerMode}>
+                        <ShareOrder>
+                          <div className='wrap'>
+                            <ProductShare
+                              defaultUrl={urlToShare(order?.hash_key)}
+                            />
+                          </div>
+                        </ShareOrder>
+                      </Content>
                     )}
-                </OrderActions>
+                    {order?.status !== 0 && order?.integration_id && (
+                      <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                    )}
+                    <p className='types'>
+                      {orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
+                    </p>
+                    <p className='date'>
+                      {
+                        order?.delivery_datetime_utc
+                          ? parseDate(order?.delivery_datetime_utc)
+                          : parseDate(order?.delivery_datetime, { utc: false })
+                      }
+                    </p>
+                    <ReOrder>
+                      <Button
+                        color='primary'
+                        onClick={() => handleStartNewOrder()}
+                      >
+                        {t('START_NEW_ORDER', 'Start new order')}
+                      </Button>
+                    </ReOrder>
+                  </TitleContainer>
+                ) : (
+                  <>
+                    <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                    {order?.status !== 0 && order?.integration_id && (
+                      <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                    )}
+                    <p className='date'>
+                      {
+                        order?.delivery_datetime_utc
+                          ? parseDate(order?.delivery_datetime_utc)
+                          : parseDate(order?.delivery_datetime, { utc: false })
+                      }
+                    </p>
+                    <OrderActions>
+                      <ReviewOrderLink
+                        className='Review-order'
+                        active={(
+                          parseInt(order?.status) === 1 ||
+                          parseInt(order?.status) === 2 ||
+                          parseInt(order?.status) === 5 ||
+                          parseInt(order?.status) === 6 ||
+                          parseInt(order?.status) === 10 ||
+                          parseInt(order?.status) === 11 ||
+                          parseInt(order?.status) === 12
+                        ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
+                      >
+                        <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                      </ReviewOrderLink>
+                      {(
+                        parseInt(order?.status) === 1 ||
+                        parseInt(order?.status) === 2 ||
+                        parseInt(order?.status) === 5 ||
+                        parseInt(order?.status) === 6 ||
+                        parseInt(order?.status) === 10 ||
+                        parseInt(order?.status) === 11 ||
+                        parseInt(order?.status) === 12
+                      ) &&
+                        (
+                          <NewOrder>
+                            <Button
+                              color='primary'
+                              outline
+                              onClick={() => handleReorder(order.id)}
+                              disabled={reorderState?.loading}
+                            >
+                              {reorderState?.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
+                            </Button>
+                          </NewOrder>
+                        )}
+                    </OrderActions>
+                  </>
+                )}
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
               </OrderInfo>
               <Divider />
-              <OrderBusiness>
-                <BusinessWrapper>
-                  <BusinessInfo>
-                    <h2>{t('FROM', 'From')}</h2>
-                    <p>{order?.business?.name}</p>
-                    <p>{order?.business?.email}</p>
-                    <p>{order?.business?.cellphone}</p>
-                    <p>{order?.business?.address}</p>
+              <OrderBusiness isCustomerMode={isCustomerMode}>
+                <BusinessWrapper isCustomerMode={isCustomerMode}>
+                  {isCustomerMode && <img src={order?.business?.logo} />}
+                  <BusinessInfo isCustomerMode={isCustomerMode}>
+                    {isCustomerMode ? (
+                      <>
+                        <BusinessTitle>
+                          <h2>{order?.business?.name}</h2>
+                          <ActionsSection
+                            {...ActionsSectionProps}
+                            actionType='business'
+                          />
+                        </BusinessTitle>
+                        <p>{order?.business?.email}</p>
+                        <p>{order?.business?.cellphone}</p>
+                        <p>{order?.business?.address}</p>
+                      </>
+                    ) : (
+                      <>
+                        <h2>{t('FROM', 'From')}</h2>
+                        <p>{order?.business?.name}</p>
+                        <p>{order?.business?.email}</p>
+                        <p>{order?.business?.cellphone}</p>
+                        <p>{order?.business?.address}</p>
+                      </>
+                    )}
                   </BusinessInfo>
                 </BusinessWrapper>
-                <ActionsBlock>
-                  {order.driver && order.driver.phone &&
-                    <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                      <BsPhone />
-                    </span>}
-                  <span>
-                    <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
-                  </span>
-                  <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
-                    {order?.unread_count > 0 && unreadAlert.business && (
-                      <ExclamationWrapper>
-                        <AiFillExclamationCircle />
-                      </ExclamationWrapper>
-                    )}
-                    <BiMessageRounded />
-                  </MessagesIcon>
-                </ActionsBlock>
+                {isCustomerMode ? (
+                  <OrderMapSection />
+                ) : (
+                  <ActionsSection
+                    {...ActionsSectionProps}
+                    actionType='business'
+                  />
+                )}
               </OrderBusiness>
               <Divider />
-              <OrderCustomer>
-                <h2>{t('TO', 'To')}</h2>
+              <OrderCustomer isCustomerMode={isCustomerMode}>
+                {!isCustomerMode && (
+                  <h2>{t('TO', 'To')}</h2>
+                )}
                 <p>{order?.customer?.name} {order?.customer?.lastname}</p>
                 <p>{order?.customer?.email}</p>
                 <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
+                <p>{order?.customer?.address}</p>
               </OrderCustomer>
-              {order?.delivery_type === 1 && (
-                <CommentContainer>
-                  <h3>{t('DELIVERY_PREFERENCE', 'Delivery preference')}</h3>
-                  <span>{order?.delivery_option?.name ? t(order?.delivery_option?.name.toUpperCase().replace(/\s/g, '_'), order?.delivery_option?.name) : t('EITHER_WAY', 'Either way')}</span>
-                </CommentContainer>
-              )}
-              {order?.comment && (
-                <CommentContainer>
-                  <h3>{t('COMMENT', 'Comment')}</h3>
-                  <span>{order?.comment}</span>
-                </CommentContainer>
-              )}
-              {placeSpotTypes.includes(order?.delivery_type) && order?.place && (
-                <CommentContainer>
-                  <h3>{t('SPOT', 'Spot')}</h3>
-                  <span>{order?.place?.name}</span>
-                </CommentContainer>
+              {!isCustomerMode && (
+                <OrderPreferencesSection />
               )}
               {order?.driver && (
                 <>
-                  <>
-                    <Divider />
-                    <SectionTitle>
-                      {t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}
-                    </SectionTitle>
-                    <OrderDriver>
-                      <WrapperDriver>
-                        <div className='photo'>
-                          {order?.driver?.photo ? (
-                            <PhotoBlock src={order?.driver?.photo} width='48' height='48' />
-                          ) : (
-                            <RiUser2Fill />
-                          )}
-                        </div>
-                        <p>{order?.driver?.name} {order?.driver?.lastname}</p>
-                      </WrapperDriver>
-                      <ActionsBlock>
-                        {order.driver && order.driver.phone &&
-                          <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
-                            <BsPhone />
-                          </span>}
-                        <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
-                          {order?.unread_count > 0 && unreadAlert.driver && (
-                            <ExclamationWrapper>
-                              <AiFillExclamationCircle />
-                            </ExclamationWrapper>
-                          )}
-                          <BiMessageRounded />
-                        </MessagesIcon>
-                      </ActionsBlock>
-                    </OrderDriver>
-                  </>
-                  {order?.driver?.location?.lat && order?.driver?.location?.lng && parseInt(order?.status) === 9 && (
+                  {isCustomerMode ? (
                     <>
-                      <Map>
-                        <GoogleMapsMap
-                          apiKey={configs?.google_maps_api_key?.value}
-                          location={order?.driver?.location}
-                          locations={locations}
-                          mapControls={googleMapsControls}
+                      <OrderDriver isCustomerMode={isCustomerMode}>
+                        <SectionTitleContainer>
+                          <h2>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</h2>
+                          <ActionsSection
+                            {...ActionsSectionProps}
+                            actionType='driver'
+                          />
+                        </SectionTitleContainer>
+                        <WrapperDriver>
+                          <div className='photo'>
+                            {order?.driver?.photo ? (
+                              <PhotoBlock isCustomerMode={isCustomerMode} src={order?.driver?.photo} />
+                            ) : (
+                              <RiUser2Fill />
+                            )}
+                          </div>
+                          <div>
+                            <h2>{order?.driver?.name} {order?.driver?.lastname}</h2>
+                            <p>{order?.driver?.email}</p>
+                            <p>{order?.driver?.cellphone || order?.driver?.phone}</p>
+                          </div>
+                        </WrapperDriver>
+                      </OrderDriver>
+                      <OrderMapSection />
+                    </>
+                  ) : (
+                    <>
+                      <Divider />
+                      <SectionTitle>
+                        {t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}
+                      </SectionTitle>
+                      <OrderDriver>
+                        <WrapperDriver>
+                          <div className='photo'>
+                            {order?.driver?.photo ? (
+                              <PhotoBlock src={order?.driver?.photo} width='48' height='48' />
+                            ) : (
+                              <RiUser2Fill />
+                            )}
+                          </div>
+                          <p>{order?.driver?.name} {order?.driver?.lastname}</p>
+                        </WrapperDriver>
+                        <ActionsSection
+                          {...ActionsSectionProps}
+                          actionType='driver'
                         />
-                      </Map>
+                      </OrderDriver>
                     </>
                   )}
                 </>
               )}
-            </WrapperLeftContainer>
-            <WrapperRightContainer>
-              <HeaderInfo>
-                <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-                <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
-              </HeaderInfo>
-              {!userCustomerId && (
-                <MyOrderActions>
-                  <Button
-                    color='primary'
-                    outline
-                    onClick={() => handleGoToPage({ page: 'orders' })}
-                  >
-                    {t('YOUR_ORDERS', theme?.defaultLanguages?.YOUR_ORDERS || 'Your Orders')}
-                  </Button>
-                </MyOrderActions>
+              {isCustomerMode && (
+                <OrderPreferences isCustomerMode={isCustomerMode}>
+                  <OrderPreferencesSection />
+                </OrderPreferences>
               )}
-              <OrderProducts>
+            </WrapperLeftContainer>
+            <WrapperRightContainer isCustomerMode={isCustomerMode}>
+              {!isCustomerMode && (
+                <>
+                  <OrderHeaderInfoSection />
+                  <OrderActionsSection />
+                </>
+              )}
+              <OrderProducts isCustomerMode={isCustomerMode}>
+                {isCustomerMode && (
+                  <HeaderTitle>
+                    <OrderHeaderInfoSection />
+                    <OrderActionsSection />
+                  </HeaderTitle>
+                )}
                 {order?.products?.length && order?.products.map(product => (
                   <ProductItemAccordion
                     key={product.id}
                     product={product}
                   />
                 ))}
+                {isCustomerMode && (
+                  <OrderBillSection
+                    order={order}
+                    isCustomerMode={isCustomerMode}
+                    setOpenTaxModal={setOpenTaxModal}
+                  />
+                )}
               </OrderProducts>
-              <OrderBill>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
-                      <td>
-                        {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()))}
-                      </td>
-                    </tr>
-                    {(order?.summary?.discount > 0 ?? order?.discount > 0) && order?.offers?.length === 0 && (
-                      <tr>
-                        {order?.offer_type === 1 ? (
-                          <td>
-                            {t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}{' '}
-                            <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
-                          </td>
-                        ) : (
-                          <td>{t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}</td>
-                        )}
-                        <td>- {parsePrice(order?.summary?.discount ?? order?.discount)}</td>
-                      </tr>
-                    )}
-                    {
-                      order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
-                        <tr key={offer.id}>
-                          <td>
-                            {offer.name}
-                            {offer.rate_type === 1 && (
-                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                            )}
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
-                              <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>
-                            - {parsePrice(offer?.summary?.discount)}
-                          </td>
-                        </tr>
-                      ))
-                    }
-                    <tr>
-                      <td>
-                        <Divider />
-                      </td>
-                      <td>
-                        <Divider />
-                      </td>
-                    </tr>
-                    {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
-                      <tr>
-                        <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
-                        {order?.tax_type === 1 ? (
-                          <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0))}</td>
-                        ) : (
-                          <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0)}</td>
-                        )}
-                      </tr>
-                    )}
-                    {
-                      order?.taxes?.length === 0 && order?.tax_type === 2 && (
-                        <tr>
-                          <td>
-                            {t('TAX', 'Tax')}
-                            <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
-                          </td>
-                          <td>{parsePrice(order?.summary?.tax ?? 0)}</td>
-                        </tr>
-                      )
-                    }
-                    {
-                      order?.fees?.length === 0 && (
-                        <tr>
-                          <td>
-                            {t('SERVICE_FEE', 'Service fee')}
-                            <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
-                          </td>
-                          <td>{parsePrice(order?.summary?.service_fee ?? 0)}</td>
-                        </tr>
-                      )
-                    }
-                    {
-                      order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
-                        <tr key={tax?.id}>
-                          <td>
-                            {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
-                              <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
-                        </tr>
-                      ))
-                    }
-                    {
-                      order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
-                        <tr key={fee.id}>
-                          <td>
-                            {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
-                              <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
-                        </tr>
-                      ))
-                    }
-                    {
-                      order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
-                        <tr key={offer.id}>
-                          <td>
-                            {offer.name}
-                            {offer.rate_type === 1 && (
-                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                            )}
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
-                              <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>
-                            - {parsePrice(offer?.summary?.discount)}
-                          </td>
-                        </tr>
-                      ))
-                    }
-                    {order?.summary?.delivery_price > 0 && (
-                      <tr>
-                        <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
-                        <td>{parsePrice(order?.summary?.delivery_price)}</td>
-                      </tr>
-                    )}
-                    {
-                      order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
-                        <tr key={offer.id}>
-                          <td>
-                            {offer.name}
-                            {offer.rate_type === 1 && (
-                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                            )}
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
-                              <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>
-                            - {parsePrice(offer?.summary?.discount)}
-                          </td>
-                        </tr>
-                      ))
-                    }
-                    {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
-                      <tr>
-                        <td>
-                          {t('DRIVER_TIP', theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip')}{' '}
-                          {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
-                            parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                            !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                            (
-                              <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
-                            )}
-                        </td>
-                        <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip)}</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-                <table className='total'>
-                  <tbody>
-                    <tr>
-                      <td>{t('TOTAL', theme?.defaultLanguages?.TOTAL || 'Total')}</td>
-                      <td>{parsePrice(order?.summary?.total ?? order?.total)}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                {order?.payment_events?.length > 0 && (
-                  <div style={{ marginTop: 10 }}>
-                    <span style={{ fontSize: 20 }}>{t('PAYMENTS', 'Payments')}</span>
-                    <div
-                      style={{
-                        width: '100%',
-                        marginTop: 10
-                      }}
-                    >
-                      {order?.payment_events?.map(event => event.amount > 0 && (
-                        <div
-                          key={event.id}
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            marginBottom: 10
-                          }}
-                        >
-                          <div
-                            style={{
-                              display: 'flex',
-                              flexDirection: 'column'
-                            }}
-                          >
-                            <span>
-                              {event?.wallet_event
-                                ? walletName[event?.wallet_event?.wallet?.type]?.name
-                                : event?.paymethod?.name}
-                            </span>
-                            {event?.data?.charge_id && (
-                              <span>
-                                {`${t('CODE', 'Code')}: ${event?.data?.charge_id}`}
-                              </span>
-                            )}
-                          </div>
-                          <span>
-                            -{parsePrice(event.amount)}
-                          </span>
+              {!isCustomerMode && (
+                <>
+                  <OrderBillSection
+                    order={order}
+                    setOpenTaxModal={setOpenTaxModal}
+                  />
+                  <Content className='order-content'>
+                    {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
+                      <ShareOrder>
+                        <div className='text'>
+                          <h1>{t('SHARE_THIS_DELIVERY', theme?.defaultLanguages?.SHARE_THIS_DELIVERY || 'Share this delivery')}</h1>
+                          <p>{t('LET_SOMEONE_FOLLOW_ALONG', theme?.defaultLanguages?.LET_SOMEONE_FOLLOW_ALONG || 'Let someone follow along')}</p>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </OrderBill>
-              <Content className='order-content'>
-                {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-                  <ShareOrder>
-                    <div className='text'>
-                      <h1>{t('SHARE_THIS_DELIVERY', theme?.defaultLanguages?.SHARE_THIS_DELIVERY || 'Share this delivery')}</h1>
-                      <p>{t('LET_SOMEONE_FOLLOW_ALONG', theme?.defaultLanguages?.LET_SOMEONE_FOLLOW_ALONG || 'Let someone follow along')}</p>
-                    </div>
-                    <div className='wrap'>
-                      <ProductShare
-                        withBtn
-                        btnText={t('SHARE', theme?.defaultLanguages?.SHARE || 'Share')}
-                        defaultUrl={urlToShare(order?.hash_key)}
-                      />
-                    </div>
-                  </ShareOrder>
-                )}
-              </Content>
+                        <div className='wrap'>
+                          <ProductShare
+                            withBtn
+                            btnText={t('SHARE', theme?.defaultLanguages?.SHARE || 'Share')}
+                            defaultUrl={urlToShare(order?.hash_key)}
+                          />
+                        </div>
+                      </ShareOrder>
+                    )}
+                  </Content>
+                </>
+              )}
             </WrapperRightContainer>
           </WrapperContainer>
         )}
@@ -687,7 +577,7 @@ const OrderDetailsUI = (props) => {
           )
         }
 
-        {loading && !error && (
+        {loading && !error && !isCustomerMode && (
           <SkeletonWrapper>
             <WrapperLeftContainer>
               <SkeletonBlockWrapp>
@@ -724,6 +614,31 @@ const OrderDetailsUI = (props) => {
                 </SkeletonBlock>
               </SkeletonBlockWrapp>
             </WrapperRightContainer>
+          </SkeletonWrapper>
+        )}
+
+        {loading && !error && isCustomerMode && (
+          <SkeletonWrapper isCustomerMode={isCustomerMode}>
+            <>
+              <SkeletonBlockWrapp>
+                <SkeletonBlock width={90} isCustomerMode={isCustomerMode}>
+                  <Skeleton height={40} width={300} />
+                  <Skeleton height={15} width={120} />
+                  <Skeleton height={15} />
+                  <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={60} width={900} />
+                  <Skeleton height={200} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={40} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
+                </SkeletonBlock>
+              </SkeletonBlockWrapp>
+            </>
           </SkeletonWrapper>
         )}
 
@@ -783,17 +698,22 @@ const OrderDetailsUI = (props) => {
           />
         </Modal>
       </Container>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
+      {
+        props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))
+      }
+      {
+        props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))
+      }
     </>
   )
 }
 
 export const OrderDetails = (props) => {
+  const [, t] = useLanguage()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const orderDetailsProps = {
     ...props,
@@ -809,6 +729,28 @@ export const OrderDetails = (props) => {
         mapTypeIds: ['roadmap', 'satellite']
       }
     },
+    orderTypes: props.orderTypes || [
+      {
+        value: 1,
+        text: t('DELIVERY', 'Delivery')
+      },
+      {
+        value: 2,
+        text: t('PICKUP', 'Pickup')
+      },
+      {
+        value: 3,
+        text: t('EAT_IN', 'Eat in')
+      },
+      {
+        value: 4,
+        text: t('CURBSIDE', 'Curbside')
+      },
+      {
+        value: 5,
+        text: t('DRIVE_THRU', 'Drive thru')
+      }
+    ],
     UIComponent: OrderDetailsUI
   }
 

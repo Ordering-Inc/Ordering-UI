@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessesListing } from '../../../src/themes/five/src/components/BusinessesListing'
+import { BusinessesListing } from 'ordering-ui/theme_five'
 import { useEvent } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
 
@@ -14,7 +14,8 @@ export const BusinessesList = (props) => {
       events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     },
     currentPageParam: 0,
-    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug'],
+    onRedirectPage: (data) => events.emit('go_to_page', data),
   }
 
   return (

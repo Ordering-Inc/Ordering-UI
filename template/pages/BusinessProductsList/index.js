@@ -42,6 +42,7 @@ export const BusinessProductsList = (props) => {
       'open',
       'about',
       'description',
+      'ribbon',
       'address',
       'location',
       'timezone',
