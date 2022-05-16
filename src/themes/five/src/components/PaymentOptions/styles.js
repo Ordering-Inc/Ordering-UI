@@ -100,6 +100,10 @@ export const CardItemContent = styled.div`
   width: 100%;
   font-weight: bold;
 
+  span {
+    display: flex;
+  }
+
   .checks svg {
     color: ${props => props.theme.colors.primary};
     font-size: 22px;

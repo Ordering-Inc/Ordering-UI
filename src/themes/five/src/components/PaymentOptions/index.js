@@ -236,7 +236,7 @@ const PaymentOptionsUI = (props) => {
                 <IosRadioButtonOn />
               </span>
               <span className='brand'>
-                {getIconCard(paymethodData?.card?.brand)}
+                <img src={getIconCard(paymethodData?.card?.brand)} alt={paymethodData?.card?.brand} />
               </span>
               <span>
                 XXXX-XXXX-XXXX-{paymethodData?.card?.last4}

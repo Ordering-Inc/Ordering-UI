@@ -31,9 +31,7 @@ const PaymentOptionStripeUI = (props) => {
     deleteCard,
     cardsList,
     handleCardClick,
-    handleNewCard,
-    onSelectCard,
-    onPaymentChange
+    handleNewCard
   } = props
   const [{ token }] = useSession()
   const [, t] = useLanguage()
@@ -44,14 +42,6 @@ const PaymentOptionStripeUI = (props) => {
   const _handleNewCard = (card) => {
     setAddCardOpen(false)
     handleNewCard(card)
-    onSelectCard({
-      id: card.id,
-      type: 'card',
-      card: {
-        brand: card.brand,
-        last4: card.last4
-      }
-    })
   }
 
   const handleDeleteCard = (card) => {
@@ -61,8 +51,6 @@ const PaymentOptionStripeUI = (props) => {
       handleOnAccept: () => {
         deleteCard(card)
         setConfirm({ ...confirm, open: false })
-        onSelectCard({})
-        onPaymentChange(null)
       }
     })
   }
@@ -158,10 +146,8 @@ export const PaymentCard = (props) => {
   const {
     handleDeleteCard,
     card,
-    cardSelected,
     handleCardClick,
-    onSelectCard,
-    defaultSelected
+    onSelectCard
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -207,20 +193,6 @@ export const PaymentCard = (props) => {
     return () => window.removeEventListener('click', handleClickOutside)
   }, [isShowActions])
 
-  useEffect(() => {
-    if (defaultSelected && card) {
-      handleCardClick(card)
-      onSelectCard({
-        id: card.id,
-        type: 'card',
-        card: {
-          brand: card.brand,
-          last4: card.last4
-        }
-      })
-    }
-  }, [defaultSelected])
-
   return (
     <CardItem onClick={handleChangeDefaultCard} isCursor>
       <CardItemContent>
@@ -228,15 +200,10 @@ export const PaymentCard = (props) => {
           <img src={getIconCard(card?.brand)} alt={card?.brand} />
         </div>
         <span>
-          {card?.brand} {card?.last4}
+          {card?.brand} {card.last4}
         </span>
       </CardItemContent>
       <CardItemActions>
-        {
-          card?.id === cardSelected?.id && (
-            <span>{t('DEFAULT', 'Default')}</span>
-          )
-        }
         <CardItemActionsWrapper ref={actionWrapperRef}>
           <span ref={cardActionsRef}>
             <FiMoreVertical onClick={() => setIsShowActions(true)} />

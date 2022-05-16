@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrder } from 'ordering-components'
+import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrder, useConfig } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
@@ -56,25 +56,25 @@ const BusinessControllerUI = (props) => {
     businessPickupTime,
     businessDistance
   } = props
-
+  const [configState] = useConfig()
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
-
+  
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-
+  
   // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   // }
-
+  
   const handleBusinessClick = () => {
     if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business)
     else handleClick(business)
   }
-
+  
   const hasInformationLength = (business?.available_drivers?.length + business?.busy_drivers?.length + business?.active_orders?.length) > 0
-
+  
   if (typeButton) {
     return (
       <ContainerCard typeButton={typeButton}>
@@ -103,7 +103,7 @@ const BusinessControllerUI = (props) => {
                     <span className='crown'>
                       <FaCrown />
                     </span>}
-                  {!isCustomLayout && (
+                  {!isCustomLayout && (configState?.configs?.preorder_status_enabled?.value === '1') && (
                     <div>
                       {getBusinessOffer((businessOffers ?? business?.offers)) && <span>{getBusinessOffer((businessOffers ?? business?.offers)) || parsePrice(0)}</span>}
                       {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
@@ -119,7 +119,7 @@ const BusinessControllerUI = (props) => {
           </BusinessHero>
           <BusinessContent>
             <BusinessLogoWrapper>
-              <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
+            <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
                 {!isSkeleton && (businessLogo || business?.logo || theme.images?.dummies?.businessLogo) ? (
                   <BusinessLogo bgimage={optimizeImage((businessLogo || business?.logo || theme.images?.dummies?.businessLogo), 'h_200,c_limit')} />
                 ) : (

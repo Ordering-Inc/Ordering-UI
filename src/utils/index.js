@@ -1,18 +1,16 @@
-import React from 'react'
-import FaCcMastercard from '@meronex/icons/fa/FaCcMastercard'
-import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
-import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
 import { useLanguage } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 export const getIconCard = (brand = '') => {
   const value = brand.toLowerCase()
+  const theme = useTheme()
   switch (value) {
     case 'visa':
-      return <FaCcVisa />
+      return theme.images?.general?.visa
     case 'mastercard':
-      return <FaCcMastercard />
+      return theme.images?.general?.mastercard
     default:
-      return <FaCreditCard />
+      return theme.images?.general?.credit
   }
 }
 
