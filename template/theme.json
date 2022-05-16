@@ -27,7 +27,8 @@
     "grayDividerColor": "#F8F9FA",
     "warning100": "#FFF4CC",
     "warning500": "#FFC700",
-    "gray200": "#E9ECEF"
+    "gray200": "#E9ECEF",
+    "links": "#2C7BE5"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",

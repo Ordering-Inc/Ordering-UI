@@ -17,6 +17,8 @@ import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { Alert } from '../src/components/Confirm'
 import { SmartAppBanner } from '../src/components/SmartAppBanner'
 
+import { useTheme } from 'styled-components'
+
 import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { CheckoutPage } from './pages/Checkout'
@@ -40,6 +42,7 @@ import settings from './config.json'
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
+  const theme = useTheme()
   const [orderStatus] = useOrder()
   const [{ configs }] = useConfig()
   const [, t] = useLanguage()
@@ -70,6 +73,33 @@ export const App = () => {
   const isFooterPage = location.pathname === '/pages/footer'
 
   const handleSuccessSignup = (user) => {
+    if (!user?.enabled && configs?.business_signup_enabled_default?.value === '0') {
+      setAlertState({
+        open: true,
+        content: [t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')]
+      })
+      return
+    }
+    if (configs?.business_signup_enabled_default?.value === '1') {
+      setAlertState({
+        open: true,
+        content: [
+          `${t('PROJECT', 'Project')}: ${settings.project}`
+        ],
+        links: [
+          <span key='url dashboard'>
+            {`${t('DASHBOARD_WEBPAGE_MESSAGE', 'Dashboard webpage')}: `}
+            <a
+              target='blank'
+              href={`${settings.url_dashboard}/login/?project=${settings.project}&token=${user?.session?.access_token}`}
+            >
+              <span style={{ color: theme.colors.links }}>{settings.url_dashboard}</span>
+            </a>
+          </span>
+        ],
+        isOnlyAlert: true
+      })
+    }
     login({
       user,
       token: user?.session?.access_token
@@ -312,11 +342,12 @@ export const App = () => {
             <Alert
               title={t('INFORMATION', 'Information')}
               content={alertState.content}
+              links={alertState.links}
               acceptText={t('ACCEPT', 'Accept')}
               open={alertState.open}
               onClose={() => closeAlert()}
               onCancel={() => closeAlert()}
-              onAccept={() => acceptAlert()}
+              onAccept={() => alertState?.isOnlyAlert ? closeAlert() : acceptAlert()}
               closeOnBackdrop={false}
             />
           </>
