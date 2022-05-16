@@ -40,10 +40,6 @@ export const OrderBill = styled.div`
       display: flex;
       align-items: center;
       max-height: 25px;
-      svg:nth-child(2){
-        position: relative;
-        top: 2px;
-      }
     }
   }
   table.total {
@@ -163,10 +159,14 @@ export const IconContainer = styled.div`
   display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
-  top: ${props => props.top || '3px'};
+  height: 20px;
+  svg:nth-child(1){
+    position: relative;
+    top: -1px;
+  }
   svg:nth-child(2){
     position: relative;
-    top: -2px
+    top: -3px;
   }
 `
 
