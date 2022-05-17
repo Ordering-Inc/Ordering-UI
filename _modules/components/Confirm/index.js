@@ -84,7 +84,7 @@ var ConfirmUI = function ConfirmUI(props) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: i
     }, (0, _utils.getTraduction)(item));
-  }), links.map(function (item, i) {
+  }), links === null || links === void 0 ? void 0 : links.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: i
     }, item);
