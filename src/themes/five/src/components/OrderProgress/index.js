@@ -124,7 +124,7 @@ const OrderProgressUI = (props) => {
               <ProgressBar style={{ width: getOrderStatus(lastOrder.status)?.percentage ? `${getOrderStatus(lastOrder.status).percentage}%` : '0%' }} />
             </ProgressContentWrapper>
             <ProgressTextWrapper>
-              <StatusWrapper>{getOrderStatus(lastOrder.status).value}</StatusWrapper>
+              <StatusWrapper>{getOrderStatus(lastOrder?.status)?.value}</StatusWrapper>
               <TimeWrapper>
                 <span>{t('ESTIMATED_DELIVERY', 'Estimated delivery')}:&nbsp;</span>
                 <span>
