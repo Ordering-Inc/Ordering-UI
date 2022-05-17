@@ -52,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
-  var _walletsState$result, _configs$wallet_cash_, _configs$wallet_credi, _walletsState$result2, _walletsState$result3, _walletsState$result4;
+  var _walletsState$result, _configs$wallet_cash_, _configs$wallet_credi, _walletsState$result3, _walletsState$result4, _walletsState$result5;
 
   var cart = props.cart,
       walletsState = props.walletsState,
@@ -106,7 +106,9 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
 
   (0, _react.useEffect)(function () {
     if (!walletsState.loading) {
-      setCheckedState(walletsState.result.map(function (wallet) {
+      var _walletsState$result2;
+
+      setCheckedState(walletsState === null || walletsState === void 0 ? void 0 : (_walletsState$result2 = walletsState.result) === null || _walletsState$result2 === void 0 ? void 0 : _walletsState$result2.map(function (wallet) {
         var _cart$wallets;
 
         return !!(cart !== null && cart !== void 0 && (_cart$wallets = cart.wallets) !== null && _cart$wallets !== void 0 && _cart$wallets.find(function (w) {
@@ -114,18 +116,18 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
         }));
       }));
     }
-  }, [(_walletsState$result2 = walletsState.result) === null || _walletsState$result2 === void 0 ? void 0 : _walletsState$result2.length]);
+  }, [(_walletsState$result3 = walletsState.result) === null || _walletsState$result3 === void 0 ? void 0 : _walletsState$result3.length]);
   return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column'
     }
-  }, !walletsState.loading && !walletsState.error && ((_walletsState$result3 = walletsState.result) === null || _walletsState$result3 === void 0 ? void 0 : _walletsState$result3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_walletsState$result4 = walletsState.result) === null || _walletsState$result4 === void 0 ? void 0 : _walletsState$result4.map(function (wallet, idx) {
-    var _walletName$wallet$ty, _walletsState$result5, _walletName$wallet$ty2;
+  }, !walletsState.loading && !walletsState.error && ((_walletsState$result4 = walletsState.result) === null || _walletsState$result4 === void 0 ? void 0 : _walletsState$result4.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_walletsState$result5 = walletsState.result) === null || _walletsState$result5 === void 0 ? void 0 : _walletsState$result5.map(function (wallet, idx) {
+    var _walletName$wallet$ty, _walletsState$result6, _walletName$wallet$ty2;
 
     return wallet.valid && wallet.balance >= 0 && ((_walletName$wallet$ty = walletName[wallet.type]) === null || _walletName$wallet$ty === void 0 ? void 0 : _walletName$wallet$ty.isActive) && /*#__PURE__*/_react.default.createElement(_styles.Container, {
       key: wallet.id,
-      isBottomBorder: idx === ((_walletsState$result5 = walletsState.result) === null || _walletsState$result5 === void 0 ? void 0 : _walletsState$result5.length) - 1
+      isBottomBorder: idx === ((_walletsState$result6 = walletsState.result) === null || _walletsState$result6 === void 0 ? void 0 : _walletsState$result6.length) - 1
     }, /*#__PURE__*/_react.default.createElement(_styles.SectionLeft, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
       name: "payment_option_".concat(wallet.type),
       id: "custom-checkbox-".concat(idx),

@@ -231,7 +231,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
     if (windowSize.width <= 768) {
       var productImage = document.getElementById('product_image');
-      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0);
+      topPos = topPos + (myElement.offsetTop < (productImage === null || productImage === void 0 ? void 0 : productImage.clientHeight) ? productImage === null || productImage === void 0 ? void 0 : productImage.clientHeight : 0);
     }
 
     (0, _utils.scrollTo)(productContainer, topPos, 1250);

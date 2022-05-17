@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderProgressUI = function OrderProgressUI(props) {
-  var _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _lastOrder$business2, _lastOrder$business3;
+  var _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2, _lastOrder$business2, _lastOrder$business3;
 
   var orderList = props.orderList,
       isCustomerMode = props.isCustomerMode;
@@ -252,7 +252,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     style: {
       width: (_getOrderStatus = getOrderStatus(lastOrder.status)) !== null && _getOrderStatus !== void 0 && _getOrderStatus.percentage ? "".concat(getOrderStatus(lastOrder.status).percentage, "%") : '0%'
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, getOrderStatus(lastOrder.status).value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_DELIVERY', 'Estimated delivery'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, (_getOrderStatus2 = getOrderStatus(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_DELIVERY', 'Estimated delivery'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
     outputFormat: 'hh:mm A'
   }) : parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
     utc: false
