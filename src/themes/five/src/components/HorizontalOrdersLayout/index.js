@@ -131,9 +131,11 @@ export const HorizontalOrdersLayout = (props) => {
                 >
                   {t('REVIEW', 'Review')}
                 </Button>
-                <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
-                  {t('REORDER', 'Reorder')}
-                </Button>
+                {order.cart && (
+                  <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
+                    {t('REORDER', 'Reorder')}
+                  </Button>
+                )}
               </ButtonWrapper>
             )}
 

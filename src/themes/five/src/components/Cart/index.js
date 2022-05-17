@@ -20,7 +20,6 @@ import {
   CouponContainer,
   CartSticky,
   Divider,
-  Exclamation,
   Spinner,
   CommentContainer,
   IconContainer
@@ -300,9 +299,9 @@ const CartUI = (props) => {
                           <td className='icon'>
                             {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
+                            </IconContainer>
                           </td>
                           <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
                         </tr>
@@ -314,9 +313,9 @@ const CartUI = (props) => {
                           <td className='icon'>
                             {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
+                            </IconContainer>
                           </td>
                           <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
                         </tr>

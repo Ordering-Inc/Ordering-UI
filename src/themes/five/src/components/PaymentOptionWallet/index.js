@@ -65,7 +65,7 @@ const PaymentOptionWalletUI = (props) => {
   useEffect(() => {
     if (!walletsState.loading) {
       setCheckedState(
-        walletsState.result.map(wallet => {
+        walletsState?.result?.map(wallet => {
           return !!cart?.wallets?.find(w => w.id === wallet.id)
         })
       )
