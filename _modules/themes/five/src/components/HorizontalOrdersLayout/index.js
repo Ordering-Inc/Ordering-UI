@@ -142,7 +142,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         onClick: function onClick() {
           return handleClickCard(order.uuid);
         }
-      }, t('REVIEW', 'Review')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      }, t('REVIEW', 'Review')), order.cart && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
         color: "primary",
         className: "reorder",
         outline: true,
