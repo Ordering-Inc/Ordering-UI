@@ -52,9 +52,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
-  var _walletsState$result, _configs$wallet_cash_, _configs$wallet_credi, _walletsState$result3, _walletsState$result4, _walletsState$result5;
+  var _walletsState$result, _configs$wallet_cash_, _configs$wallet_credi, _businessConfigs$find, _businessConfigs$find2, _walletsState$result3, _walletsState$result4, _walletsState$result5;
 
-  var cart = props.cart,
+  var businessConfigs = props.businessConfigs,
+      cart = props.cart,
       walletsState = props.walletsState,
       selectWallet = props.selectWallet,
       deletetWalletSelected = props.deletetWalletSelected;
@@ -79,14 +80,20 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
 
   var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
   var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
+  var isBusinessWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
+    return config.key === 'wallet_cash_enabled';
+  })) === null || _businessConfigs$find === void 0 ? void 0 : _businessConfigs$find.value) === '1';
+  var isBusinessWalletPointsEnabled = ((_businessConfigs$find2 = businessConfigs.find(function (config) {
+    return config.key === 'wallet_credit_point_enabled';
+  })) === null || _businessConfigs$find2 === void 0 ? void 0 : _businessConfigs$find2.value) === '1';
   var walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet'),
-      isActive: isWalletCashEnabled
+      isActive: isWalletCashEnabled && isBusinessWalletCashEnabled
     },
     credit_point: {
       name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet'),
-      isActive: isWalletPointsEnabled
+      isActive: isWalletPointsEnabled && isBusinessWalletPointsEnabled
     }
   };
 
