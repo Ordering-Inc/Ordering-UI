@@ -217,7 +217,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     var hour = time === null || time === void 0 ? void 0 : time.split(':')[0];
     var minute = time === null || time === void 0 ? void 0 : time.split(':')[1];
     var result = time ? parseInt(hour, 10) * 60 + parseInt(minute, 10) : 0;
-    var returnedDate = (0, _moment.default)(new Date(deliveryTime)).add(result, 'minutes').format('hh:mm A');
+    var returnedDate = (0, _moment.default)(new Date(deliveryTime.replace(/-/g, '/'))).add(result, 'minutes').format('hh:mm A');
     return returnedDate;
   };
 
