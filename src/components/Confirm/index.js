@@ -53,7 +53,7 @@ const ConfirmUI = (props) => {
             {content.map((item, i) => (
               <li key={i}>{getTraduction(item)}</li>
             ))}
-            {links.map((item, i) => (
+            {links?.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>
