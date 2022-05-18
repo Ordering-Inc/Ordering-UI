@@ -30,7 +30,7 @@ import {
 import Skeleton from 'react-loading-skeleton'
 
 import { SearchBar } from '../SearchBar'
-import { useLanguage, useOrder, useUtils } from 'ordering-components'
+import { useLanguage, useOrder, useUtils, BusinessSearchList } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { AutoScroll } from '../AutoScroll'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
@@ -43,7 +43,6 @@ import { NotFoundSource } from '../NotFoundSource'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 import BisUpArrow from '@meronex/icons/bi/BisUpArrow'
-import { BusinessSearchList } from './test'
 
 export const BusinessListingSearchUI = (props) => {
   const {

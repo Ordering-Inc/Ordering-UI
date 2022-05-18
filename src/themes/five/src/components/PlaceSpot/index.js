@@ -45,7 +45,7 @@ const PlaceSpotUI = (props) => {
       setPlaceGroupSelected(placeGroupOnCart)
       const groups = placesState.placeGroups?.filter(group => group?.enabled && placesState?.places?.find(place => place?.enabled && place?.place_group_id === group?.id))
       if (groups.length === 0) {
-        setHasBusinessPlaces(false)
+        setHasBusinessPlaces && setHasBusinessPlaces(false)
       }
     }
   }, [placesState])

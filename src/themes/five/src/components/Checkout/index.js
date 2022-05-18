@@ -215,7 +215,7 @@ const CheckoutUI = (props) => {
     if (cart?.products?.length) return
     handleStoreRedirect(cart?.business?.slug)
   }, [cart?.products])
-  console.log(hasBusinessPlaces)
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
