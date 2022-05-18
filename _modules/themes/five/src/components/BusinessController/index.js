@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessControllerUI = function BusinessControllerUI(props) {
-  var _business$available_d, _business$busy_driver, _business$active_orde, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _configState$configs, _configState$configs$, _orderState$options, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _business$reviews2, _business$reviews3, _orderState$options2, _business$available_d2, _business$available_d3, _business$busy_driver2, _business$busy_driver3, _business$active_orde2, _business$active_orde3, _props$afterComponent, _props$afterElements;
+  var _business$available_d, _business$busy_driver, _business$active_orde, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _configState$configs, _configState$configs$, _orderState$options, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _business$reviews2, _orderState$options2, _business$available_d2, _business$available_d3, _business$busy_driver2, _business$busy_driver3, _business$active_orde2, _business$active_orde3, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       business = props.business,
@@ -159,9 +159,9 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 70,
     width: 70
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessStarInfo, null, (businessReviews !== null && businessReviews !== void 0 ? businessReviews : business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) > 0 ? /*#__PURE__*/_react.default.createElement("div", {
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessStarInfo, null, !isSkeleton ? (businessReviews !== null && businessReviews !== void 0 ? businessReviews : business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) > 0 && /*#__PURE__*/_react.default.createElement("div", {
     className: "reviews"
-  }, /*#__PURE__*/_react.default.createElement(_BisStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, businessReviews !== null && businessReviews !== void 0 ? businessReviews : business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)) : (businessReviews !== null && businessReviews !== void 0 ? businessReviews : business === null || business === void 0 ? void 0 : (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.total) !== 0 && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_BisStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, businessReviews !== null && businessReviews !== void 0 ? businessReviews : business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
   }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
     className: "info"
