@@ -489,7 +489,7 @@ const ProductOptionsUI = (props) => {
                 </div>
                 <div id='extra'>
                   {
-                    product?.extras.map(extra => extra.options.map(option => {
+                    product?.extras.map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                       const currentState = productCart.options[`id:${option?.id}`] || {}
                       return (
                         <div key={option?.id}>
@@ -502,7 +502,7 @@ const ProductOptionsUI = (props) => {
                               >
                                 <WrapperSubOption className={isError(option?.id)}>
                                   {
-                                    option.suboptions.filter(suboptions => suboptions.enabled).map(suboption => {
+                                    option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
                                       const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
                                       const balance = productCart.options[`id:${option?.id}`]?.balance || 0
                                       return (
