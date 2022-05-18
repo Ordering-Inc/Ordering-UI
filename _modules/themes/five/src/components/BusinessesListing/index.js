@@ -357,7 +357,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       height: '44px'
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.map(function (business) {
-    var _orderState$options4;
+    var _orderState$options4, _business$reviews;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
@@ -373,7 +373,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       businessFeatured: business === null || business === void 0 ? void 0 : business.featured,
       businessOffers: business === null || business === void 0 ? void 0 : business.offers,
       businessLogo: business === null || business === void 0 ? void 0 : business.logo,
-      businessReviews: business === null || business === void 0 ? void 0 : business.reviews,
+      businessReviews: business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total,
       businessDeliveryPrice: business === null || business === void 0 ? void 0 : business.delivery_price,
       businessDeliveryTime: business === null || business === void 0 ? void 0 : business.delivery_time,
       businessPickupTime: business === null || business === void 0 ? void 0 : business.pickup_time,
