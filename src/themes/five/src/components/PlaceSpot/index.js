@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Select } from '../../styles/Select'
-import { PlaceSpot as PlaceSpotController, useLanguage } from 'ordering-components'
+import { PlaceSpot as PlaceSpotController, useLanguage, useOrder } from 'ordering-components'
 import { PlaceGroupContainer, PlaceSpotContainer, Title, ButtonWrapper } from './styles'
 import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../NotFoundSource'
@@ -11,11 +11,15 @@ const PlaceSpotUI = (props) => {
     cart,
     placesState,
     handleChangePlace,
-    onClose
+    onClose,
+    isCheckout,
+    setHasBusinessPlaces
   } = props
 
   const [, t] = useLanguage()
+  const [orderState] = useOrder()
   const [placeGroupSelected, setPlaceGroupSelected] = useState(null)
+  const selectYourSpotString = orderState.options?.type === 3 ? t('SELECT_YOUR_TABLE', 'Select your table') : t('SELECT_YOUR_SPOT', 'Select your spot')
 
   const getPlacesGroups = () => {
     const groups = placesState.placeGroups?.filter(group => group?.enabled && placesState?.places?.find(place => place?.enabled && place?.place_group_id === group?.id))
@@ -39,14 +43,19 @@ const PlaceSpotUI = (props) => {
     if (!placesState?.loading) {
       const placeGroupOnCart = placesState?.placeGroups.find(group => group?.id === cart?.place?.place_group_id)
       setPlaceGroupSelected(placeGroupOnCart)
+      const groups = placesState.placeGroups?.filter(group => group?.enabled && placesState?.places?.find(place => place?.enabled && place?.place_group_id === group?.id))
+      if (groups.length === 0) {
+        setHasBusinessPlaces(false)
+      }
     }
   }, [placesState])
 
   return (
-    <PlaceSpotContainer>
-      {(placesState.error || placesState?.placeGroups?.length === 0) && !placesState?.loading && (
+    <PlaceSpotContainer isCheckout={isCheckout}>
+      {placesState.error && !placesState?.loading && (
         <NotFoundSource
-          content={t('NO_PLACES_THIS_BUSINESS', 'There are not places for this business')}
+          content={t('ERROR_FETCHING_PLACES', 'Error fetching places')}
+          id='not-found-source'
         />
       )}
       {placesState?.loading && (
@@ -66,6 +75,7 @@ const PlaceSpotUI = (props) => {
           <PlaceGroupContainer>
             <Title>{t('PLACE_GROUP', 'Place group')}</Title>
             <Select
+              isHomeStyle
               placeholder={t('PLACE_GROUP', 'Place group')}
               options={getPlacesGroups()}
               onChange={(group) => setPlaceGroupSelected(group)}
@@ -75,11 +85,12 @@ const PlaceSpotUI = (props) => {
           </PlaceGroupContainer>
           {placeGroupSelected && (
             <div>
-              <Title>{t('SELECT_YOUR_SPOT', 'Select your spot')}</Title>
+              <Title>{selectYourSpotString}</Title>
               <Select
-                onChange={(place) => handleChangePlace(place)}
-                placeholder={t('SELECT_YOUR_SPOT', 'Select your spot')}
+                isHomeStyle
+                placeholder={selectYourSpotString}
                 options={getPlaces()}
+                onChange={(place) => handleChangePlace(place)}
                 defaultValue={placesState?.places?.find(place => place?.id === cart?.place_id)}
                 disableOneOption
               />
@@ -87,7 +98,7 @@ const PlaceSpotUI = (props) => {
           )}
         </>
       )}
-      {placeGroupSelected && placesState?.places?.find(place => place?.id === cart?.place_id) && (
+      {placeGroupSelected && placesState?.places?.find(place => place?.id === cart?.place_id) && !isCheckout && (
         <ButtonWrapper>
           <Button
             color={placesState?.loading ? 'secondary' : 'primary'}

@@ -28,7 +28,6 @@ import {
 import { verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 import MdCloseCircle from '@meronex/icons/ios/MdCloseCircle'
-import { PlaceSpot } from '../PlaceSpot'
 
 const CartUI = (props) => {
   const {
@@ -69,14 +68,11 @@ const CartUI = (props) => {
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
-  const [openPlaceModal, setOpenPlaceModal] = useState(false)
   const [isUpselling, setIsUpselling] = useState(false)
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
-
-  const placeSpotTypes = [3, 4]
 
   const walletName = {
     cash: {
@@ -398,16 +394,6 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                {placeSpotTypes.includes(orderState?.options?.type) && (
-                  <table className='spot'>
-                    <tbody>
-                      <tr>
-                        <td>{t('SPOT', 'Spot')}: {cart?.place?.name || t('NO_SELECTED', 'No selected')}</td>
-                        <td onClick={() => setOpenPlaceModal(true)}>{t('EDIT', 'Edit')}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                )}
                 {cart?.status !== 2 && (
                   <table className='comments'>
                     <tbody>
@@ -543,18 +529,6 @@ const CartUI = (props) => {
               type={openTaxModal.type}
               data={openTaxModal.data}
               products={cart.products}
-            />
-          </Modal>
-          <Modal
-            width='40%'
-            padding='20px'
-            open={openPlaceModal}
-            title={t('CHOOSE_YOUR_SPOT', 'Choose your spot')}
-            onClose={() => setOpenPlaceModal(false)}
-          >
-            <PlaceSpot
-              cart={cart}
-              onClose={() => setOpenPlaceModal(false)}
             />
           </Modal>
           {(openUpselling || isUpselling) && (
