@@ -367,7 +367,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       onChange: handleChangeIngredientState
     });
   })), product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
-    return extra.options.map(function (option) {
+    return extra.options.sort(function (a, b) {
+      return a.rank - b.rank;
+    }).map(function (option) {
       var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
         key: option === null || option === void 0 ? void 0 : option.id
@@ -379,6 +381,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         className: isError(option === null || option === void 0 ? void 0 : option.id)
       }, option.suboptions.filter(function (suboptions) {
         return suboptions.enabled;
+      }).sort(function (a, b) {
+        return a.rank - b.rank;
       }).map(function (suboption) {
         var _productCart$options$, _productCart$options$2;
 
