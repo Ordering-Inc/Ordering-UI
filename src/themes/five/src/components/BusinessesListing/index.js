@@ -311,7 +311,7 @@ const BusinessesListingUI = (props) => {
                   businessFeatured={business?.featured}
                   businessOffers={business?.offers}
                   businessLogo={business?.logo}
-                  businessReviews={business?.reviews}
+                  businessReviews={business?.reviews?.totals}
                   businessDeliveryPrice={business?.delivery_price}
                   businessDeliveryTime={business?.delivery_time}
                   businessPickupTime={business?.pickup_time}
