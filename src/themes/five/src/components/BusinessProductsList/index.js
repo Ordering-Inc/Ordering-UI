@@ -117,17 +117,21 @@ const BusinessProductsListUI = (props) => {
             </HeaderWrapper>
             <ProductsListing>
               {
-                categoryState.products?.filter(product => !subcategoriesSelected.find(subcategory => subcategory?.parent_category_id === category?.id) || subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))?.map((product, i) => (
-                  <SingleProductCard
-                    key={i}
-                    isSoldOut={(product.inventoried && !product.quantity)}
-                    product={product}
-                    businessId={businessId}
-                    onProductClick={onProductClick}
-                    isCartOnProductsList={isCartOnProductsList}
-                    productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
-                  />
-                ))
+                categoryState.products
+                  ?.filter(product =>
+                    !subcategoriesSelected.find(subcategory => subcategory?.parent_category_id === category?.id) ||
+                    subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
+                  ?.map((product, i) => (
+                    <SingleProductCard
+                      key={i}
+                      isSoldOut={(product.inventoried && !product.quantity)}
+                      product={product}
+                      businessId={businessId}
+                      onProductClick={onProductClick}
+                      isCartOnProductsList={isCartOnProductsList}
+                      productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                    />
+                  ))
               }
             </ProductsListing>
           </>
@@ -165,7 +169,11 @@ const BusinessProductsListUI = (props) => {
             const _products = !isUseParentCategory
               ? categoryState?.products?.filter(product => product?.category_id === category?.id) ?? []
               : categoryState?.products?.filter(product => category?.children?.some(cat => cat.category_id === product?.category_id)) ?? []
-            const products = subcategoriesSelected?.length > 0 ? _products?.filter(product => !subcategoriesSelected.find(subcategory => subcategory?.parent_category_id === category?.id) || subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id)) : _products
+            const products = subcategoriesSelected?.length > 0
+              ? _products?.filter(product =>
+                !subcategoriesSelected.find(subcategory => subcategory?.parent_category_id === category?.id) ||
+                subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
+              : _products
             const shortCategoryDescription = category?.description?.length > 200 ? `${category?.description?.substring(0, 200)}...` : category?.description
 
             return (
