@@ -268,3 +268,7 @@ export const CartHeader = styled.div`
     align-items: center;
   }
 `
+
+export const SelectSpotContainer = styled.div`
+  
+`

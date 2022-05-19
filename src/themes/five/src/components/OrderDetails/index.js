@@ -58,7 +58,8 @@ import {
   BusinessTitle,
   SectionTitleContainer,
   OrderPreferences,
-  HeaderTitle
+  HeaderTitle,
+  PlaceSpotSection
 } from './styles'
 import { useTheme } from 'styled-components'
 import { ReviewProduct } from '../../../../../components/ReviewProduct'
@@ -100,6 +101,7 @@ const OrderDetailsUI = (props) => {
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
 
   const { order, loading, businessData, error } = props.order
+  const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -418,6 +420,13 @@ const OrderDetailsUI = (props) => {
                         <p>{order?.business?.cellphone}</p>
                         <p>{order?.business?.address}</p>
                       </>
+                    )}
+                    {order?.place?.name && (
+                      <PlaceSpotSection>
+                        <p>
+                          {yourSpotString}: {order?.place?.name}
+                        </p>
+                      </PlaceSpotSection>
                     )}
                   </BusinessInfo>
                 </BusinessWrapper>
