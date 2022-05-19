@@ -86,10 +86,10 @@ const BusinessProductsListingUI = (props) => {
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
-
+  const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
-
+  const isLazy = businessState?.business?.lazy_load_products_recommended
   const sortByOptions = [
     { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
     { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
@@ -212,6 +212,7 @@ const BusinessProductsListingUI = (props) => {
           errors={errors}
           isError={error}
           isLoading={loading}
+          isLazy={isLazy}
           business={business}
           categoryId={categoryId}
           searchValue={searchValue}
@@ -230,12 +231,14 @@ const BusinessProductsListingUI = (props) => {
           errorQuantityProducts={errorQuantityProducts}
           onClickCategory={handleChangeCategory}
           featuredProducts={featuredProducts}
+          subcategoriesSelected={subcategoriesSelected}
           handler={handler}
           onProductClick={onProductClick}
           handleSearchRedirect={handleSearchRedirect}
           handleChangeSearch={handleChangeSearch}
           setOpenBusinessInformation={setOpenBusinessInformation}
           handleCartOpen={(val) => setIsCartOpen(val)}
+          setSubcategoriesSelected={setSubcategoriesSelected}
         />
 
         {
@@ -287,7 +290,7 @@ const BusinessProductsListingUI = (props) => {
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
       )} */}
-      {windowSize.width < 500 && currentCart?.products?.length > 0  && (
+      {windowSize.width < 500 && currentCart?.products?.length > 0 && (
         <MobileCartViewWrapper>
           <span>{parsePrice(currentCart?.total)}</span>
           <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
