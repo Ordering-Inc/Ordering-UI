@@ -46,21 +46,29 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PlaceSpotUI = function PlaceSpotUI(props) {
-  var _placesState$placeGro2, _placesState$placeGro3, _placesState$places3, _placesState$places4;
+  var _orderState$options, _placesState$placeGro3, _placesState$places4, _placesState$places5;
 
   var cart = props.cart,
       placesState = props.placesState,
       handleChangePlace = props.handleChangePlace,
-      onClose = props.onClose;
+      onClose = props.onClose,
+      isCheckout = props.isCheckout,
+      setHasBusinessPlaces = props.setHasBusinessPlaces;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderState = _useOrder2[0];
+
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       placeGroupSelected = _useState2[0],
       setPlaceGroupSelected = _useState2[1];
+
+  var selectYourSpotString = ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 3 ? t('SELECT_YOUR_TABLE', 'Select your table') : t('SELECT_YOUR_SPOT', 'Select your spot');
 
   var getPlacesGroups = function getPlacesGroups() {
     var _placesState$placeGro;
@@ -98,16 +106,32 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
 
   (0, _react.useEffect)(function () {
     if (!(placesState !== null && placesState !== void 0 && placesState.loading)) {
+      var _placesState$placeGro2;
+
       var placeGroupOnCart = placesState === null || placesState === void 0 ? void 0 : placesState.placeGroups.find(function (group) {
         var _cart$place;
 
         return (group === null || group === void 0 ? void 0 : group.id) === (cart === null || cart === void 0 ? void 0 : (_cart$place = cart.place) === null || _cart$place === void 0 ? void 0 : _cart$place.place_group_id);
       });
       setPlaceGroupSelected(placeGroupOnCart);
+      var groups = (_placesState$placeGro2 = placesState.placeGroups) === null || _placesState$placeGro2 === void 0 ? void 0 : _placesState$placeGro2.filter(function (group) {
+        var _placesState$places3;
+
+        return (group === null || group === void 0 ? void 0 : group.enabled) && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places3 = placesState.places) === null || _placesState$places3 === void 0 ? void 0 : _placesState$places3.find(function (place) {
+          return (place === null || place === void 0 ? void 0 : place.enabled) && (place === null || place === void 0 ? void 0 : place.place_group_id) === (group === null || group === void 0 ? void 0 : group.id);
+        }));
+      });
+
+      if (groups.length === 0) {
+        setHasBusinessPlaces && setHasBusinessPlaces(false);
+      }
     }
   }, [placesState]);
-  return /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotContainer, null, (placesState.error || (placesState === null || placesState === void 0 ? void 0 : (_placesState$placeGro2 = placesState.placeGroups) === null || _placesState$placeGro2 === void 0 ? void 0 : _placesState$placeGro2.length) === 0) && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('NO_PLACES_THIS_BUSINESS', 'There are not places for this business')
+  return /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotContainer, {
+    isCheckout: isCheckout
+  }, placesState.error && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: t('ERROR_FETCHING_PLACES', 'Error fetching places'),
+    id: "not-found-source"
   }), (placesState === null || placesState === void 0 ? void 0 : placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
     height: 25,
@@ -121,6 +145,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 30
   }))), !(placesState.error || (placesState === null || placesState === void 0 ? void 0 : (_placesState$placeGro3 = placesState.placeGroups) === null || _placesState$placeGro3 === void 0 ? void 0 : _placesState$placeGro3.length) === 0) && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('PLACE_GROUP', 'Place group')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    isHomeStyle: true,
     placeholder: t('PLACE_GROUP', 'Place group'),
     options: getPlacesGroups(),
     onChange: function onChange(group) {
@@ -128,19 +153,20 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     },
     defaultValue: placeGroupSelected !== null && placeGroupSelected !== void 0 ? placeGroupSelected : cart === null || cart === void 0 ? void 0 : cart.place,
     disableOneOption: true
-  })), placeGroupSelected && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SELECT_YOUR_SPOT', 'Select your spot')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  })), placeGroupSelected && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, selectYourSpotString), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    isHomeStyle: true,
+    placeholder: selectYourSpotString,
+    options: getPlaces(),
     onChange: function onChange(place) {
       return handleChangePlace(place);
     },
-    placeholder: t('SELECT_YOUR_SPOT', 'Select your spot'),
-    options: getPlaces(),
-    defaultValue: placesState === null || placesState === void 0 ? void 0 : (_placesState$places3 = placesState.places) === null || _placesState$places3 === void 0 ? void 0 : _placesState$places3.find(function (place) {
+    defaultValue: placesState === null || placesState === void 0 ? void 0 : (_placesState$places4 = placesState.places) === null || _placesState$places4 === void 0 ? void 0 : _placesState$places4.find(function (place) {
       return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
     }),
     disableOneOption: true
-  }))), placeGroupSelected && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places4 = placesState.places) === null || _placesState$places4 === void 0 ? void 0 : _placesState$places4.find(function (place) {
+  }))), placeGroupSelected && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places5 = placesState.places) === null || _placesState$places5 === void 0 ? void 0 : _placesState$places5.find(function (place) {
     return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
-  })) && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })) && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: placesState !== null && placesState !== void 0 && placesState.loading ? 'secondary' : 'primary',
     disabled: placesState === null || placesState === void 0 ? void 0 : placesState.loading,
     onClick: function onClick() {
