@@ -14,13 +14,17 @@ import {
   WrapperNotFound,
   HeaderWrapper,
   DescriptionModalContainer,
-  RibbonBox
+  RibbonBox,
+  SubCategoriesContainer,
+  ContainerButton
 } from './styles'
+import { Button } from '../../styles/Buttons'
 
 const BusinessProductsListUI = (props) => {
   const {
     errors,
     businessId,
+    isLazy,
     category,
     categories,
     categoryState,
@@ -32,13 +36,68 @@ const BusinessProductsListUI = (props) => {
     isCartOnProductsList,
     handleClearSearch,
     errorQuantityProducts,
-    currentCart
+    currentCart,
+    setSubcategoriesSelected,
+    subcategoriesSelected,
+    onClickCategory
   } = props
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
   const [openDescription, setOpenDescription] = useState(null)
+
+  const onClickSubcategory = (subCategory, parentCategory) => {
+    if (parentCategory && isLazy) {
+      onClickCategory(parentCategory)
+    }
+    if (!subCategory) {
+      setSubcategoriesSelected(subcategoriesSelected.filter(_subcategory => _subcategory?.parent_category_id !== parentCategory?.id))
+      return
+    }
+    const categoryFounded = subcategoriesSelected.find(_subcategory => subCategory?.id === _subcategory?.id)
+    if (categoryFounded) {
+      setSubcategoriesSelected(subcategoriesSelected.filter(_subcategory => subCategory?.id !== _subcategory?.id))
+    } else {
+      setSubcategoriesSelected([...subcategoriesSelected, subCategory])
+    }
+  }
+
+  const SubcategoriesComponent = ({ category }) => {
+    const allsubcategorySelected = !subcategoriesSelected?.some(subcategory => category?.id === subcategory?.parent_category_id)
+
+    return (
+      <SubCategoriesContainer>
+        <ContainerButton
+          isSelected={allsubcategorySelected}
+        >
+          <Button
+            onClick={() => onClickSubcategory(null, category)}
+            color={allsubcategorySelected ? 'primary' : 'secondary'}
+          >
+            {t('ALL', 'All')} {allsubcategorySelected && 'X'}
+          </Button>
+        </ContainerButton>
+        {category?.subcategories?.map(subcategory => {
+          const isSubcategorySelected = subcategoriesSelected?.find(_subcategory => _subcategory?.id === subcategory?.id)
+          return (
+            <ContainerButton
+              key={subcategory?.id}
+              isSelected={isSubcategorySelected}
+            >
+              <Button
+                onClick={() => onClickSubcategory(subcategory, category)}
+                color={isSubcategorySelected ? 'primary' : 'secondary'}
+              >
+                {subcategory?.name} {isSubcategorySelected && 'X'}
+              </Button>
+            </ContainerButton>
+          )
+        }
+        )}
+      </SubCategoriesContainer>
+    )
+  }
 
   return (
     <>
@@ -50,21 +109,32 @@ const BusinessProductsListUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
         {category?.id && (
-          <ProductsListing>
-            {
-              categoryState.products?.map((product, i) => (
-                <SingleProductCard
-                  key={i}
-                  isSoldOut={(product.inventoried && !product.quantity)}
-                  product={product}
-                  businessId={businessId}
-                  onProductClick={onProductClick}
-                  isCartOnProductsList={isCartOnProductsList}
-                  productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
-                />
-              ))
-            }
-          </ProductsListing>
+          <>
+            <HeaderWrapper>
+              {category?.subcategories?.length > 0 && (
+                <SubcategoriesComponent category={category} />
+              )}
+            </HeaderWrapper>
+            <ProductsListing>
+              {
+                categoryState.products
+                  ?.filter(product =>
+                    !subcategoriesSelected.find(subcategory => subcategory?.parent_category_id === category?.id) ||
+                    subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
+                  ?.map((product, i) => (
+                    <SingleProductCard
+                      key={i}
+                      isSoldOut={(product.inventoried && !product.quantity)}
+                      product={product}
+                      businessId={businessId}
+                      onProductClick={onProductClick}
+                      isCartOnProductsList={isCartOnProductsList}
+                      productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                    />
+                  ))
+              }
+            </ProductsListing>
+          </>
         )}
 
         {
@@ -96,10 +166,14 @@ const BusinessProductsListUI = (props) => {
 
         {
           !category?.id && categories.filter(category => category?.id !== null).map((category, i, _categories) => {
-            const products = !isUseParentCategory
+            const _products = !isUseParentCategory
               ? categoryState?.products?.filter(product => product?.category_id === category?.id) ?? []
               : categoryState?.products?.filter(product => category?.children?.some(cat => cat.category_id === product?.category_id)) ?? []
-
+            const products = subcategoriesSelected?.length > 0
+              ? _products?.filter(product =>
+                !subcategoriesSelected.find(subcategory => subcategory?.parent_category_id === category?.id) ||
+                subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
+              : _products
             const shortCategoryDescription = category?.description?.length > 200 ? `${category?.description?.substring(0, 200)}...` : category?.description
 
             return (
@@ -134,6 +208,9 @@ const BusinessProductsListUI = (props) => {
                               )}
                             </p>
                           </div>
+                        )}
+                        {category?.subcategories?.length > 0 && (
+                          <SubcategoriesComponent category={category} />
                         )}
                       </HeaderWrapper>
                       <ProductsListing>
