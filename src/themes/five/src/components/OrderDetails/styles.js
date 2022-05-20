@@ -653,3 +653,7 @@ export const HeaderTitle = styled.div`
     margin-bottom: 5px;
   }
 `
+
+export const PlaceSpotSection = styled.div`
+
+`

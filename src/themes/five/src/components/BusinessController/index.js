@@ -127,14 +127,16 @@ const BusinessControllerUI = (props) => {
                 )}
               </WrapperBusinessLogo>
               <BusinessStarInfo>
-                {(businessReviews ?? business?.reviews?.total) > 0 ? (
-                  <div className='reviews'>
-                    <BisStar />
-                    <span>{(businessReviews ?? business?.reviews?.total)}</span>
-                  </div>
-                ) : (
-                  (businessReviews ?? business?.reviews?.total) !== 0 && <Skeleton width={50} />
-                )}
+                {!isSkeleton ? (
+                    (businessReviews ?? business?.reviews?.total) > 0 && (
+                      <div className='reviews'>
+                        <BisStar />
+                        <span>{(businessReviews ?? business?.reviews?.total)}</span>
+                      </div>
+                    )) : (
+                    <Skeleton width={50} />
+                  )
+                }
               </BusinessStarInfo>
             </BusinessLogoWrapper>
             <BusinessInfo className='info'>

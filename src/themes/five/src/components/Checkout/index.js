@@ -36,7 +36,8 @@ import {
   DriverTipDivider,
   DeliveryOptionsContainer,
   WalletPaymentOptionContainer,
-  CartHeader
+  CartHeader,
+  SelectSpotContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -52,7 +53,7 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
-import { Modal } from '../Modal'
+import { PlaceSpot } from '../PlaceSpot'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -97,11 +98,12 @@ const CheckoutUI = (props) => {
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(false)
-  const [modalSelected, setModalSelected] = useState(null)
+  const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
 
   const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const placeSpotTypes = [3, 4]
+  const placeSpotsEnabled = placeSpotTypes.includes(options?.type)
+  const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -110,7 +112,7 @@ const CheckoutUI = (props) => {
     loading ||
     !cart?.valid_maximum ||
     (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
-    (placeSpotTypes.includes(options?.type) && !cart?.place)
+    (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces))
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -416,7 +418,11 @@ const CheckoutUI = (props) => {
             </React.Fragment>))}
           {props.beforeComponentsSectionFour?.map((BeforeComponent, i) => (
             <BeforeComponent key={i} {...props} />))}
-
+          {!cartState.loading && placeSpotsEnabled && (hasBusinessPlaces === null || hasBusinessPlaces) && (
+            <SelectSpotContainer>
+              <PlaceSpot cart={cart} isCheckout setHasBusinessPlaces={setHasBusinessPlaces} />
+            </SelectSpotContainer>
+          )}
           {!props.isHideSectionFour &&
             !cartState.loading &&
             cart &&
@@ -506,7 +512,7 @@ const CheckoutUI = (props) => {
               {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
             </WarningText>
           )}
-          {placeSpotTypes.includes(options?.type) && !cart?.place && (
+          {placeSpotTypes.includes(options?.type) && !cart?.place && hasBusinessPlaces && (
             <WarningText>
               {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
             </WarningText>
