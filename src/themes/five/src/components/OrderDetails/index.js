@@ -80,6 +80,7 @@ const OrderDetailsUI = (props) => {
     messagesReadList,
     reorderState,
     handleReorder,
+    multiRemoveProducts,
     isCustomerMode,
     orderTypes
   } = props
@@ -186,17 +187,17 @@ const OrderDetailsUI = (props) => {
     }
   }
 
-  const closeOrderModal = (e) => {
+  const closeOrderModal = async (e) => {
     const outsideModal = !window.document.getElementById('app-modals') ||
       !window.document.getElementById('app-modals').contains(e.target)
-    if (outsideModal) {
-      const _businessId = 'businessId:' + businessData?.id
-      const _uuid = carts[_businessId]?.uuid
-      if (_uuid) {
-        localStorage.setItem('remove-cartId', JSON.stringify(_uuid))
+      if (outsideModal) {
+        const _businessId = 'businessId:' + businessData?.id
+        const _carts = carts?.[_businessId]
+        const products = carts?.[_businessId]?.products
+        const unavailableProducts = products.filter(product => product.valid !== true)
+        unavailableProducts.length > 0 && multiRemoveProducts && await multiRemoveProducts(unavailableProducts, _carts)
         handleBusinessRedirect(businessData?.slug)
       }
-    }
   }
 
   const handleStartNewOrder = () => {
