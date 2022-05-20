@@ -630,7 +630,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
   }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.weight_unit) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "qty",
-    value: productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)
+    value: (productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)).toFixed(2)
   }), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
     className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
