@@ -139,3 +139,17 @@ export const RibbonBox = styled.div`
     border-radius: 50px;
   `}
 `
+
+export const SubCategoriesContainer = styled.div`
+  display: flex;
+`
+
+export const ContainerButton = styled.div`
+  button {
+    overflow: hidden;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 50px;
+    color: ${({ isSelected }) => isSelected ? '#fff' : '#414954'};
+  }
+`
