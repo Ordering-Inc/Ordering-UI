@@ -1,7 +1,7 @@
 {
   "app_id": "ordering-react",
   "app_name": "Ordering",
-  "project": "luisv4",
+  "project": "kanteenkomdelivery",
   "api": {
     "url": "https://apiv4.ordering.co",
     "language": "en",

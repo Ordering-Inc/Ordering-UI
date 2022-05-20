@@ -7,7 +7,7 @@ import {
   Cart3
 } from 'react-bootstrap-icons'
 import {
-  BusinessAndProductList,
+  // BusinessAndProductList,
   useEvent,
   useLanguage,
   useOrder,
@@ -16,6 +16,8 @@ import {
   useToast,
   ToastType
 } from 'ordering-components'
+
+import { BusinessAndProductList } from './test'
 
 import {
   ProductsContainer,
