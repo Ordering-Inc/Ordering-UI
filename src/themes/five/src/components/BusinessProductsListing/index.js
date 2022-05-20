@@ -195,15 +195,6 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [business?.schedule])
 
-  useEffect(() => {
-    const removeCardId = JSON.parse(window.localStorage.getItem('remove-cartId'))
-    if (currentCart && removeCardId) {
-      clearCart(removeCardId)
-      localStorage.removeItem('remove-cartId')
-      showToast(ToastType.Info, t('PRODUCT_REMOVED', 'Products removed from cart'))
-    }
-  }, [currentCart])
-
   return (
     <>
       <ProductsContainer>
