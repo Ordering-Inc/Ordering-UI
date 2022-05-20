@@ -68,7 +68,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$products, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products2, _currentCart$products3, _productModal$error$, _theme$defaultLanguag12;
+  var _Object$values$find, _businessState$busine, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$products, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products2, _currentCart$products3, _productModal$error$, _theme$defaultLanguag12;
 
   var errors = props.errors,
       openCategories = props.openCategories,
@@ -153,11 +153,17 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       isCartModal = _useState10[0],
       setisCartModal = _useState10[1];
 
+  var _useState11 = (0, _react.useState)([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      subcategoriesSelected = _useState12[0],
+      setSubcategoriesSelected = _useState12[1];
+
   var currentCart = (_Object$values$find = Object.values(carts).find(function (cart) {
     var _cart$business;
 
     return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === (business === null || business === void 0 ? void 0 : business.slug);
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
+  var isLazy = businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended;
   var sortByOptions = [{
     value: null,
     content: t('SORT_BY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SORT_BY) || 'Sort By'),
@@ -299,6 +305,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     errors: errors,
     isError: error,
     isLoading: loading,
+    isLazy: isLazy,
     business: business,
     categoryId: categoryId,
     searchValue: searchValue,
@@ -317,6 +324,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     errorQuantityProducts: errorQuantityProducts,
     onClickCategory: handleChangeCategory,
     featuredProducts: featuredProducts,
+    subcategoriesSelected: subcategoriesSelected,
     handler: handler,
     onProductClick: onProductClick,
     handleSearchRedirect: handleSearchRedirect,
@@ -324,7 +332,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setOpenBusinessInformation: setOpenBusinessInformation,
     handleCartOpen: function handleCartOpen(val) {
       return setIsCartOpen(val);
-    }
+    },
+    setSubcategoriesSelected: setSubcategoriesSelected
   }), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.SEARCH_REDIRECT) || 'Go to Businesses'),
@@ -396,10 +405,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isInitialRender = _useState12[0],
-      setIsInitialRender = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isInitialRender = _useState14[0],
+      setIsInitialRender = _useState14[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

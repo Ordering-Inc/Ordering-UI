@@ -21,6 +21,8 @@ var _utils = require("../../../../../utils");
 
 var _styles = require("./styles");
 
+var _Buttons = require("../../styles/Buttons");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -31,6 +33,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -38,8 +42,6 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -54,10 +56,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _props$beforeElements, _props$beforeComponen, _categoryState$produc, _categoryState$produc2, _categoryState$produc3, _props$afterComponent, _props$afterElements;
+  var _configs$use_parent_c, _configs$use_parent_c2, _props$beforeElements, _props$beforeComponen, _category$subcategori2, _categoryState$produc, _categoryState$produc2, _categoryState$produc3, _categoryState$produc4, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       businessId = props.businessId,
+      isLazy = props.isLazy,
       category = props.category,
       categories = props.categories,
       categoryState = props.categoryState,
@@ -69,7 +72,10 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       isCartOnProductsList = props.isCartOnProductsList,
       handleClearSearch = props.handleClearSearch,
       errorQuantityProducts = props.errorQuantityProducts,
-      currentCart = props.currentCart;
+      currentCart = props.currentCart,
+      setSubcategoriesSelected = props.setSubcategoriesSelected,
+      subcategoriesSelected = props.subcategoriesSelected,
+      onClickCategory = props.onClickCategory;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -86,6 +92,61 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       openDescription = _useState2[0],
       setOpenDescription = _useState2[1];
 
+  var onClickSubcategory = function onClickSubcategory(subCategory, parentCategory) {
+    if (parentCategory && isLazy) {
+      onClickCategory(parentCategory);
+    }
+
+    if (!subCategory) {
+      setSubcategoriesSelected(subcategoriesSelected.filter(function (_subcategory) {
+        return (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.parent_category_id) !== (parentCategory === null || parentCategory === void 0 ? void 0 : parentCategory.id);
+      }));
+      return;
+    }
+
+    var categoryFounded = subcategoriesSelected.find(function (_subcategory) {
+      return (subCategory === null || subCategory === void 0 ? void 0 : subCategory.id) === (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.id);
+    });
+
+    if (categoryFounded) {
+      setSubcategoriesSelected(subcategoriesSelected.filter(function (_subcategory) {
+        return (subCategory === null || subCategory === void 0 ? void 0 : subCategory.id) !== (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.id);
+      }));
+    } else {
+      setSubcategoriesSelected([].concat(_toConsumableArray(subcategoriesSelected), [subCategory]));
+    }
+  };
+
+  var SubcategoriesComponent = function SubcategoriesComponent(_ref) {
+    var _category$subcategori;
+
+    var category = _ref.category;
+    var allsubcategorySelected = !(subcategoriesSelected !== null && subcategoriesSelected !== void 0 && subcategoriesSelected.some(function (subcategory) {
+      return (category === null || category === void 0 ? void 0 : category.id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id);
+    }));
+    return /*#__PURE__*/_react.default.createElement(_styles.SubCategoriesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContainerButton, {
+      isSelected: allsubcategorySelected
+    }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      onClick: function onClick() {
+        return onClickSubcategory(null, category);
+      },
+      color: allsubcategorySelected ? 'primary' : 'secondary'
+    }, t('ALL', 'All'), " ", allsubcategorySelected && 'X')), category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.map(function (subcategory) {
+      var isSubcategorySelected = subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.find(function (_subcategory) {
+        return (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
+      });
+      return /*#__PURE__*/_react.default.createElement(_styles.ContainerButton, {
+        key: subcategory === null || subcategory === void 0 ? void 0 : subcategory.id,
+        isSelected: isSubcategorySelected
+      }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+        onClick: function onClick() {
+          return onClickSubcategory(subcategory, category);
+        },
+        color: isSubcategorySelected ? 'primary' : 'secondary'
+      }, subcategory === null || subcategory === void 0 ? void 0 : subcategory.name, " ", isSubcategorySelected && 'X'));
+    }));
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -94,7 +155,15 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, (category === null || category === void 0 ? void 0 : category.id) && /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, (category === null || category === void 0 ? void 0 : category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderWrapper, null, (category === null || category === void 0 ? void 0 : (_category$subcategori2 = category.subcategories) === null || _category$subcategori2 === void 0 ? void 0 : _category$subcategori2.length) > 0 && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
+    category: category
+  })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : (_categoryState$produc2 = _categoryState$produc.filter(function (product) {
+    return !subcategoriesSelected.find(function (subcategory) {
+      return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id) === (category === null || category === void 0 ? void 0 : category.id);
+    }) || (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.some(function (subcategory) {
+      return subcategory.id === (product === null || product === void 0 ? void 0 : product.category_id);
+    }));
+  })) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.map(function (product, i) {
     var _currentCart$products;
 
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
@@ -108,11 +177,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
       }, 0)
     });
-  })), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
+  }))), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc3 = categoryState.products) === null || _categoryState$produc3 === void 0 ? void 0 : _categoryState$produc3.find(function (product) {
     return product.featured;
   })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
     id: "categoryfeatured"
-  }, /*#__PURE__*/_react.default.createElement("h3", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc3 = categoryState.products) === null || _categoryState$produc3 === void 0 ? void 0 : _categoryState$produc3.map(function (product, i) {
+  }, /*#__PURE__*/_react.default.createElement("h3", null, t('FEATURED', 'Featured')), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, (_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.map(function (product, i) {
     var _currentCart$products2;
 
     return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
@@ -129,17 +198,25 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
   }).map(function (category, i, _categories) {
-    var _categoryState$produc4, _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _category$description, _category$description2, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _category$description3;
+    var _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _categoryState$produc8, _category$description, _category$description2, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _category$description3, _category$subcategori3;
 
-    var products = !isUseParentCategory ? (_categoryState$produc4 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc5 = categoryState.products) === null || _categoryState$produc5 === void 0 ? void 0 : _categoryState$produc5.filter(function (product) {
+    var _products = !isUseParentCategory ? (_categoryState$produc5 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc6 = categoryState.products) === null || _categoryState$produc6 === void 0 ? void 0 : _categoryState$produc6.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
-    })) !== null && _categoryState$produc4 !== void 0 ? _categoryState$produc4 : [] : (_categoryState$produc6 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc7 = categoryState.products) === null || _categoryState$produc7 === void 0 ? void 0 : _categoryState$produc7.filter(function (product) {
+    })) !== null && _categoryState$produc5 !== void 0 ? _categoryState$produc5 : [] : (_categoryState$produc7 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc8 = categoryState.products) === null || _categoryState$produc8 === void 0 ? void 0 : _categoryState$produc8.filter(function (product) {
       var _category$children;
 
       return category === null || category === void 0 ? void 0 : (_category$children = category.children) === null || _category$children === void 0 ? void 0 : _category$children.some(function (cat) {
         return cat.category_id === (product === null || product === void 0 ? void 0 : product.category_id);
       });
-    })) !== null && _categoryState$produc6 !== void 0 ? _categoryState$produc6 : [];
+    })) !== null && _categoryState$produc7 !== void 0 ? _categoryState$produc7 : [];
+
+    var products = (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.length) > 0 ? _products === null || _products === void 0 ? void 0 : _products.filter(function (product) {
+      return !subcategoriesSelected.find(function (subcategory) {
+        return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id) === (category === null || category === void 0 ? void 0 : category.id);
+      }) || (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.some(function (subcategory) {
+        return subcategory.id === (product === null || product === void 0 ? void 0 : product.category_id);
+      }));
+    }) : _products;
     var shortCategoryDescription = (category === null || category === void 0 ? void 0 : (_category$description = category.description) === null || _category$description === void 0 ? void 0 : _category$description.length) > 200 ? "".concat(category === null || category === void 0 ? void 0 : (_category$description2 = category.description) === null || _category$description2 === void 0 ? void 0 : _category$description2.substring(0, 200), "...") : category === null || category === void 0 ? void 0 : category.description;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -159,7 +236,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       onClick: function onClick() {
         return setOpenDescription(category);
       }
-    }, t('SEE_MORE', 'See more'))))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product, i) {
+    }, t('SEE_MORE', 'See more')))), (category === null || category === void 0 ? void 0 : (_category$subcategori3 = category.subcategories) === null || _category$subcategori3 === void 0 ? void 0 : _category$subcategori3.length) > 0 && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
+      category: category
+    })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product, i) {
       var _currentCart$products3;
 
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
