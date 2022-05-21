@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useUtils, events, useEvent } from 'ordering-components'
+import { PromotionsController, useLanguage, useUtils, useEvent } from 'ordering-components'
 import {
   PromotionsContainer,
   PromotionTitle,
@@ -16,7 +16,6 @@ import {
   BusinessInfo
 } from './styles'
 import { SearchBar } from '../SearchBar'
-import { PromotionsController } from './test'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import Skeleton from 'react-loading-skeleton'
