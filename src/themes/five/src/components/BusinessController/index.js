@@ -61,20 +61,20 @@ const BusinessControllerUI = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
-  
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  
+
   // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   // }
-  
+
   const handleBusinessClick = () => {
     if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business)
     else handleClick(business)
   }
-  
+
   const hasInformationLength = (business?.available_drivers?.length + business?.busy_drivers?.length + business?.active_orders?.length) > 0
-  
+
   if (typeButton) {
     return (
       <ContainerCard typeButton={typeButton}>
@@ -119,7 +119,7 @@ const BusinessControllerUI = (props) => {
           </BusinessHero>
           <BusinessContent>
             <BusinessLogoWrapper>
-            <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
+              <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
                 {!isSkeleton && (businessLogo || business?.logo || theme.images?.dummies?.businessLogo) ? (
                   <BusinessLogo bgimage={optimizeImage((businessLogo || business?.logo || theme.images?.dummies?.businessLogo), 'h_200,c_limit')} />
                 ) : (
@@ -128,14 +128,14 @@ const BusinessControllerUI = (props) => {
               </WrapperBusinessLogo>
               <BusinessStarInfo>
                 {!isSkeleton ? (
-                    (businessReviews ?? business?.reviews?.total) > 0 && (
-                      <div className='reviews'>
-                        <BisStar />
-                        <span>{(businessReviews ?? business?.reviews?.total)}</span>
-                      </div>
-                    )) : (
-                    <Skeleton width={50} />
-                  )
+                  (businessReviews ?? business?.reviews?.total) > 0 && (
+                    <div className='reviews'>
+                      <BisStar />
+                      <span>{(businessReviews ?? business?.reviews?.total)}</span>
+                    </div>
+                  )) : (
+                  <Skeleton width={50} />
+                )
                 }
               </BusinessStarInfo>
             </BusinessLogoWrapper>
