@@ -119,7 +119,7 @@ var SidebarMenu = function SidebarMenu(props) {
 
   var isWalletEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && ((configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1');
 
-  var closeModal = function closeModal() {
+  var _closeModal = function closeModal() {
     setModalIsOpen(false);
     setModalPageToShow(null);
     actionSidebar(false);
@@ -127,7 +127,7 @@ var SidebarMenu = function SidebarMenu(props) {
 
   var handleSuccessLogin = function handleSuccessLogin(user) {
     if (user) {
-      closeModal();
+      _closeModal();
     }
   };
 
@@ -160,7 +160,8 @@ var SidebarMenu = function SidebarMenu(props) {
       user: user,
       token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
     });
-    closeModal();
+
+    _closeModal();
   };
 
   (0, _react.useEffect)(function () {
@@ -275,7 +276,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, t('SIGNUP', 'Sign up'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
-      return closeModal();
+      return _closeModal();
     },
     width: "50%"
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
@@ -310,7 +311,10 @@ var SidebarMenu = function SidebarMenu(props) {
     useLoginByCellphone: true,
     useChekoutFileds: true,
     handleSuccessSignup: handleSuccessSignup,
-    isPopup: true
+    isPopup: true,
+    closeModal: function closeModal() {
+      return _closeModal();
+    }
   }), modalPageToShow === 'forgotpassword' && /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
     elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {
