@@ -407,6 +407,7 @@ export const SidebarMenu = (props) => {
                 useChekoutFileds
                 handleSuccessSignup={handleSuccessSignup}
                 isPopup
+                closeModal={() => closeModal()}
               />
             )}
             {modalPageToShow === 'forgotpassword' && (
