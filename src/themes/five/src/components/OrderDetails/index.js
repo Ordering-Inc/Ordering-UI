@@ -186,7 +186,7 @@ const OrderDetailsUI = (props) => {
     }
   }
 
-  const closeOrderModal = async (e) => {
+  const closeOrderModal = (e) => {
     const outsideModal = !window.document.getElementById('app-modals') ||
       !window.document.getElementById('app-modals').contains(e.target)
     if (outsideModal) {
