@@ -110,7 +110,9 @@ var SearchBar = function SearchBar(props) {
     style: {
       backgroundImage: "url(".concat(theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.searchIcon, ")")
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, null, ((_el$current2 = el.current) === null || _el$current2 === void 0 ? void 0 : _el$current2.value) && /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, {
+    className: "clear"
+  }, ((_el$current2 = el.current) === null || _el$current2 === void 0 ? void 0 : _el$current2.value) && /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleClear
   }, t('CLEAR', 'Clear')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({

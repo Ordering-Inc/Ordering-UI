@@ -401,16 +401,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
 
     if (outsideModal) {
-      var _carts$_businessId;
-
       var _businessId = 'businessId:' + (businessData === null || businessData === void 0 ? void 0 : businessData.id);
 
-      var _uuid = (_carts$_businessId = carts[_businessId]) === null || _carts$_businessId === void 0 ? void 0 : _carts$_businessId.uuid;
-
-      if (_uuid) {
-        localStorage.setItem('remove-cartId', JSON.stringify(_uuid));
-        handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
-      }
+      localStorage.setItem('adjust-businessId', JSON.stringify(_businessId));
+      handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
     }
   };
 

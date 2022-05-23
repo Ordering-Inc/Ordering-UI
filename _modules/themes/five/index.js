@@ -405,6 +405,12 @@ Object.defineProperty(exports, "ProductOptionSubOption", {
     return _ProductOptionSubOption.ProductOptionSubOption;
   }
 });
+Object.defineProperty(exports, "Promotions", {
+  enumerable: true,
+  get: function get() {
+    return _Promotions.Promotions;
+  }
+});
 Object.defineProperty(exports, "RenderProductsLayout", {
   enumerable: true,
   get: function get() {
@@ -647,6 +653,8 @@ var _PhoneAutocomplete = require("./src/components/PhoneAutocomplete");
 var _ProductOption = require("./src/components/ProductOption");
 
 var _ProductOptionSubOption = require("./src/components/ProductOptionSubOption");
+
+var _Promotions = require("./src/components/Promotions");
 
 var _RenderProductsLayout = require("./src/components/RenderProductsLayout");
 
