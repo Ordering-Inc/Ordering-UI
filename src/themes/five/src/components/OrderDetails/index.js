@@ -191,11 +191,8 @@ const OrderDetailsUI = (props) => {
       !window.document.getElementById('app-modals').contains(e.target)
     if (outsideModal) {
       const _businessId = 'businessId:' + businessData?.id
-      const _uuid = carts[_businessId]?.uuid
-      if (_uuid) {
-        localStorage.setItem('remove-cartId', JSON.stringify(_uuid))
-        handleBusinessRedirect(businessData?.slug)
-      }
+      localStorage.setItem('adjust-businessId', JSON.stringify(_businessId))
+      handleBusinessRedirect(businessData?.slug)
     }
   }
 
