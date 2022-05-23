@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
 import MdcPlayCircleOutline from '@meronex/icons/mdc/MdcPlayCircleOutline'
+import { LinkableText } from '../LinkableText'
 
 import {
   ProductForm as ProductOptions,
@@ -139,7 +140,7 @@ const ProductOptionsUI = (props) => {
     let topPos = myElement.offsetTop - productContainer.offsetTop
     if (windowSize.width <= 768) {
       const productImage = document.getElementById('product_image')
-      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
+      topPos = topPos + (myElement.offsetTop < productImage?.clientHeight ? productImage?.clientHeight : 0)
     }
     scrollTo(productContainer, topPos, 1250)
   }
@@ -244,17 +245,26 @@ const ProductOptionsUI = (props) => {
     if (!isErrors) {
       return
     }
-    const myElement = document.getElementsByClassName('error')[0]
-    const productContainer = document.getElementsByClassName('product-container')[0]
-    if (!myElement || !productContainer) {
-      return
+    const productContainer = document.getElementsByClassName('popup-dialog')[0]
+    const errorCount = document.getElementsByClassName('error')?.length
+    let unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
+    if (errorCount > 1) {
+      unselectedFirstSubOption = document.getElementsByClassName('error')?.[1]
     }
-    let topPos = myElement.offsetTop - productContainer.offsetTop
-    if (windowSize.width <= 768) {
-      const productImage = document.getElementById('product_image')
-      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
-    }
-    scrollTo(productContainer, topPos, 200)
+    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
+    productContainer.scrollTop -= 100
+  }
+
+  const handleSlideChange = () => {
+    var videos = document.querySelectorAll('iframe, video')
+    Array.prototype.forEach.call(videos, function (video) {
+      if (video.tagName.toLowerCase() === 'video') {
+        video.pause()
+      } else {
+        var src = video.src
+        video.src = src
+      }
+    })
   }
 
   return (
@@ -303,6 +313,7 @@ const ProductOptionsUI = (props) => {
                   navigation
                   watchOverflow
                   thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+                  onSlideChange={() => handleSlideChange()}
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
@@ -403,7 +414,13 @@ const ProductOptionsUI = (props) => {
                     )}
                   </ProductMeta>
                 </Properties>
-                {product?.description && <ProductDescription>{product?.description}</ProductDescription>}
+                {product?.description && (
+                  <ProductDescription>
+                    <LinkableText
+                      text={product?.description}
+                    />
+                  </ProductDescription>
+                )}
               </ProductFormTitle>
               <ProductTagsListContainer>
                 {product.tags.map(tag => (
@@ -472,7 +489,7 @@ const ProductOptionsUI = (props) => {
                 </div>
                 <div id='extra'>
                   {
-                    product?.extras.map(extra => extra.options.map(option => {
+                    product?.extras.map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                       const currentState = productCart.options[`id:${option?.id}`] || {}
                       return (
                         <div key={option?.id}>
@@ -485,7 +502,7 @@ const ProductOptionsUI = (props) => {
                               >
                                 <WrapperSubOption className={isError(option?.id)}>
                                   {
-                                    option.suboptions.filter(suboptions => suboptions.enabled).map(suboption => {
+                                    option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
                                       const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
                                       const balance = productCart.options[`id:${option?.id}`]?.balance || 0
                                       return (
@@ -535,53 +552,57 @@ const ProductOptionsUI = (props) => {
                 }
               </ProductEdition>
               <ProductActions>
-                <div className='price'>
-                  <h4>{productCart.total && parsePrice(productCart.total)}</h4>
-                  {product?.minimum_per_order && productCart?.quantity < product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
-                  {product?.maximum_per_order && productCart?.quantity > product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
+                <div className='price-amount-block'>
+                  <div className='price'>
+                    <h4>{productCart.total && parsePrice(productCart.total)}</h4>
+                    {product?.minimum_per_order && productCart?.quantity < product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
+                    {product?.maximum_per_order && productCart?.quantity > product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
+                  </div>
+                  {
+                    productCart && !isSoldOut && maxProductQuantity > 0 && (
+                      <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
+                        <FiMinusCircle
+                          onClick={decrement}
+                          className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
+                        />
+                        {
+                          qtyBy?.pieces && (
+                            <Input
+                              className='qty'
+                              value={productCart?.quantity || ''}
+                              onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
+                              onKeyPress={(e) => {
+                                if (!/^[0-9.]$/.test(e.key)) {
+                                  e.preventDefault()
+                                }
+                              }}
+                            />
+                          )
+                        }
+                        {qtyBy?.weight_unit && (
+                          <Input className='qty' value={(productCart.quantity * product?.weight).toFixed(2)} />
+                        )}
+                        <FiPlusCircle
+                          onClick={increment}
+                          className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
+                        />
+                        {isHaveWeight && (
+                          <WeightUnitSwitch>
+                            <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
+                            <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
+                          </WeightUnitSwitch>
+                        )}
+                      </div>
+                    )
+                  }
                 </div>
-                {
-                  productCart && !isSoldOut && maxProductQuantity > 0 && (
-                    <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
-                      <FiMinusCircle
-                        onClick={decrement}
-                        className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
-                      />
-                      {
-                        qtyBy?.pieces && (
-                          <Input
-                            className='qty'
-                            value={productCart?.quantity || ''}
-                            onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
-                            onKeyPress={(e) => {
-                              if (!/^[0-9.]$/.test(e.key)) {
-                                e.preventDefault()
-                              }
-                            }}
-                          />
-                        )
-                      }
-                      {qtyBy?.weight_unit && (<span className='qty'>{productCart.quantity * product?.weight}</span>)}
-                      <FiPlusCircle
-                        onClick={increment}
-                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
-                      />
-                      {isHaveWeight && (
-                        <WeightUnitSwitch>
-                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
-                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
-                        </WeightUnitSwitch>
-                      )}
-                    </div>
-                  )
-                }
 
                 {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                   <Button
                     className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                     color='primary'
                     onClick={() => handleSaveProduct()}
-                    disabled={orderState.loading || productCart?.quantity === 0 || productCart?.quantity < product?.minimum_per_order || productCart?.quantity > product?.maximum_per_order}
+                    disabled={orderState.loading || productCart?.quantity === 0 || (product?.minimum_per_order && (productCart?.quantity < product?.minimum_per_order)) || (product?.maximum_per_order && (productCart?.quantity > product?.maximum_per_order))}
                   >
                     {orderState.loading ? (
                       <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>

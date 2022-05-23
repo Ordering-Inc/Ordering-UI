@@ -25,7 +25,8 @@ import {
 
 const OrderProgressUI = (props) => {
   const {
-    orderList
+    orderList,
+    isCustomerMode
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage, parseDate, parseTime }] = useUtils()
@@ -75,12 +76,12 @@ const OrderProgressUI = (props) => {
     const hour = time?.split(':')[0]
     const minute = time?.split(':')[1]
     const result = time ? (parseInt(hour, 10) * 60) + parseInt(minute, 10) : 0
-    const returnedDate = moment(new Date(deliveryTime)).add(result, 'minutes').format('hh:mm A')
+    const returnedDate = moment(new Date(deliveryTime.replace(/-/g, '/'))).add(result, 'minutes').format('hh:mm A')
     return returnedDate
   }
 
   const handleGoToPage = (index) => {
-    events.emit('go_to_page', { page: index })
+    events.emit('go_to_page', { page: index, params: { orderId: lastOrder?.uuid } })
   }
 
   useEffect(() => {
@@ -103,9 +104,17 @@ const OrderProgressUI = (props) => {
               <Button
                 color='primaryContrast'
                 naked
-                onClick={() => handleGoToPage('orders')}
+                onClick={() => handleGoToPage(isCustomerMode ? 'order_detail' : 'orders')}
               >
-                {t('GO_TO_MY_ORDERS', 'Go to my orders')}
+                {isCustomerMode ? (
+                  <>
+                    {t('GO_TO_THE_ORDER', 'Go to the order')}
+                  </>
+                ) : (
+                  <>
+                    {t('GO_TO_MY_ORDERS', 'Go to my orders')}
+                  </>
+                )}
                 <BsArrowRight />
               </Button>
             </ProgressDescriptionWrapper>
@@ -115,7 +124,7 @@ const OrderProgressUI = (props) => {
               <ProgressBar style={{ width: getOrderStatus(lastOrder.status)?.percentage ? `${getOrderStatus(lastOrder.status).percentage}%` : '0%' }} />
             </ProgressContentWrapper>
             <ProgressTextWrapper>
-              <StatusWrapper>{getOrderStatus(lastOrder.status).value}</StatusWrapper>
+              <StatusWrapper>{getOrderStatus(lastOrder?.status)?.value}</StatusWrapper>
               <TimeWrapper>
                 <span>{t('ESTIMATED_DELIVERY', 'Estimated delivery')}:&nbsp;</span>
                 <span>

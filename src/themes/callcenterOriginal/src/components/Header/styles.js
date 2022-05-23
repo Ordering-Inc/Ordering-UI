@@ -207,26 +207,29 @@ export const SubMenu = styled(InnerHeader)`
 export const CustomerInfo = styled.div`
   display: none;
   cursor: pointer;
-
+  flex: 1;
+  position: relative;
   @media (min-width: 450px) {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     span {
       display: flex;
       align-items: center;
-      height: 30px;
+      margin: 0;
       p {
-        color: #333;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        color: #909BA9;
       }
-      svg {
-        color: ${props => props.theme.colors.primary};
-        font-size: 30px;
-        margin-right: 5px;
+      svg {       
+        color: #748194; 
+        margin: 0;
+        font-size: 20px;
+        position: absolute;
+        right: 0;
       }
     }
   }
@@ -246,6 +249,8 @@ export const AddressMenu = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  flex: 0.8;
+
   svg {
     color: ${props => props.theme.colors?.lightGray};
     font-size: 16px;

@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { Button } from '../../styles/Buttons'
 
-import { convertHoursToMinutes } from '../../../../../utils'
+import { convertHoursToMinutes, shape } from '../../../../../utils'
 import GrClock from '@meronex/icons/gr/GrClock'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import GrLocation from '@meronex/icons/gr/GrLocation'
@@ -21,7 +21,8 @@ import {
   BranchInfoBlock,
   OrderBtnWrapper,
   OrderTypeList,
-  OrderType
+  OrderType,
+  RibbonBox
 } from './styles'
 
 const BusinessControllerUI = (props) => {
@@ -75,7 +76,18 @@ const BusinessControllerUI = (props) => {
           </>
         ) : (
           <>
-            <BranchTitle>{business?.name}</BranchTitle>
+            <BranchTitle>
+              <h2>{business?.name}</h2>
+              {business?.ribbon?.enabled && (
+                <RibbonBox
+                  bgColor={business?.ribbon?.color}
+                  isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}
+                  isCapsule={business?.ribbon?.shape === shape?.capsuleShape}
+                >
+                  {business?.ribbon?.text}
+                </RibbonBox>
+              )}
+            </BranchTitle>
             <BranchContent>
               <BranchInfoBlock>
                 <p>{business?.address}</p>
@@ -144,7 +156,7 @@ const BusinessControllerUI = (props) => {
                     disabled={props.disabledStoreBtn}
                     color='primary'
                     onClick={() => handleCartStoreClick(business.id)}
-                    >
+                  >
                     {t('SELECT', 'Select')}
                   </Button>
                 )}

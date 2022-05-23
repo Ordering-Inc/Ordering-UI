@@ -57,7 +57,10 @@ export const RenderProductsLayout = (props) => {
     handleChangeSearch,
     setOpenBusinessInformation,
     handleCartOpen,
-    isCustomLayout
+    isCustomLayout,
+    setSubcategoriesSelected,
+    subcategoriesSelected,
+    isLazy
   } = props
 
   const theme = useTheme()
@@ -131,12 +134,12 @@ export const RenderProductsLayout = (props) => {
                       currentCart={currentCart}
                     />
                   )}
-                  {windowSize.width < 500 && (
+                  {/* {windowSize.width < 500 && (
                     <MobileCartViewWrapper>
                       <span>{currentCart?.products?.length > 0 ? parsePrice(currentCart?.total) : parsePrice(0)}</span>
                       <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
                     </MobileCartViewWrapper>
-                  )}
+                  )} */}
                   <WrapContent id='businessProductList'>
                     <BusinessLayout
                       component='products_list'
@@ -145,6 +148,7 @@ export const RenderProductsLayout = (props) => {
                         { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
                         ...business?.categories.sort((a, b) => a.rank - b.rank)
                       ]}
+                      isLazy={isLazy}
                       category={categorySelected}
                       categoryState={categoryState}
                       businessId={business?.id}
@@ -158,6 +162,9 @@ export const RenderProductsLayout = (props) => {
                       errorQuantityProducts={errorQuantityProducts}
                       business={business}
                       currentCart={currentCart}
+                      setSubcategoriesSelected={setSubcategoriesSelected}
+                      subcategoriesSelected={subcategoriesSelected}
+                      onClickCategory={onClickCategory}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>

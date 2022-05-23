@@ -9,10 +9,11 @@ import { SearchBar } from '../SearchBar'
 import { BusinessReviews } from '../BusinessReviews'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
-import { useUtils, useOrder, useLanguage } from 'ordering-components'
+import { useUtils, useOrder, useLanguage, useConfig } from 'ordering-components'
 
-import { convertHoursToMinutes } from '../../../../../utils'
+import { convertHoursToMinutes, shape } from '../../../../../utils'
 import { Select } from '../../styles/Select'
+import { MomentContent } from '../MomentContent'
 
 import {
   BusinessContainer,
@@ -25,7 +26,9 @@ import {
   BusinessInfoContent,
   WrapperSearch,
   BusinessDetail,
-  BusinessMoreDetail
+  BusinessMoreDetail,
+  TitleWrapper,
+  RibbonBox
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
 
@@ -50,7 +53,8 @@ export const BusinessBasicInformation = (props) => {
     sortByValue,
     handleChangeSortBy,
     categoryState,
-    errorQuantityProducts
+    errorQuantityProducts,
+    isCustomerMode
   } = props
   const { business, loading } = businessState
 
@@ -60,6 +64,8 @@ export const BusinessBasicInformation = (props) => {
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [isBusinessReviews, setIsBusinessReviews] = useState(false)
   const [isPreOrder, setIsPreOrder] = useState(false)
+  const [{ configs }] = useConfig()
+  const isPreOrderSetting = configs?.preorder_status_enabled?.value === '1'
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
@@ -107,14 +113,25 @@ export const BusinessBasicInformation = (props) => {
           <BusinessInfo className='info'>
             <BusinessInfoItem>
               {!loading ? (
-                <h2 className='bold'>{business?.name}</h2>
+                <TitleWrapper>
+                  <h2 className='bold'>{business?.name}</h2>
+                  {business?.ribbon?.enabled && (
+                    <RibbonBox
+                      bgColor={business?.ribbon?.color}
+                      isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}
+                      isCapsule={business?.ribbon?.shape === shape?.capsuleShape}
+                    >
+                      {business?.ribbon?.text}
+                    </RibbonBox>
+                  )}
+                </TitleWrapper>
               ) : (
-                <Skeleton width={200} height={35} />
+                <Skeleton width={isCustomerMode ? 100 : 150} height={isCustomerMode ? 35 : 'auto'} />
               )}
               {!loading ? (
                 <p className='type'>{getBusinessType()}</p>
               ) : (
-                <Skeleton width={150} />
+                <Skeleton width={isCustomerMode ? 100 : 150} />
               )}
               <BusinessDetail isSkeleton={loading}>
                 {orderState?.options.type === 1 && (
@@ -128,7 +145,7 @@ export const BusinessBasicInformation = (props) => {
                         <span className='dot'>•</span>
                       </>
                     ) : (
-                      <Skeleton width={50} />
+                      <Skeleton width={isCustomerMode ? 70 : 50} />
                     )}
                   </>
                 )}
@@ -151,7 +168,7 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 ) : (
-                  <Skeleton width={50} />
+                  <Skeleton width={isCustomerMode ? 70 : 50} />
                 )}
 
                 {!loading ? (
@@ -163,7 +180,7 @@ export const BusinessBasicInformation = (props) => {
                   </>
 
                 ) : (
-                  <Skeleton width={50} />
+                  <Skeleton width={isCustomerMode ? 70 : 50} />
                 )}
                 {!loading ? (
                   <div className='review'>
@@ -171,18 +188,22 @@ export const BusinessBasicInformation = (props) => {
                     <p>{business?.reviews?.total}</p>
                   </div>
                 ) : (
-                  <Skeleton width={50} />
+                  <Skeleton width={isCustomerMode ? 100 : 50} />
                 )}
               </BusinessDetail>
               {
                 !loading ? (
                   <div className='preorder-Reviews'>
-                    <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
-                    <span className='dot'>•</span>
+                    {isPreOrderSetting && (
+                      <>
+                        <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
+                        <span className='dot'>•</span>
+                      </>
+                    )}
                     {business.reviews?.reviews && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
                   </div>
                 ) : (
-                  <Skeleton width={150} />
+                  <Skeleton width={isCustomerMode ? 100 : 150} />
                 )
               }
             </BusinessInfoItem>
@@ -252,13 +273,18 @@ export const BusinessBasicInformation = (props) => {
         </Modal>
         <Modal
           open={isPreOrder}
-          width='760px'
+          width={isCustomerMode ? '700px' : '760px'}
           onClose={() => setIsPreOrder(false)}
+          padding={isCustomerMode && '20px'}
         >
-          <BusinessPreorder
-            business={business}
-            handleClick={() => setIsPreOrder(false)}
-          />
+          {isCustomerMode ? (
+            <MomentContent onClose={() => setIsPreOrder(false)} />
+          ) : (
+            <BusinessPreorder
+              business={business}
+              handleClick={() => setIsPreOrder(false)}
+            />
+          )}
         </Modal>
       </BusinessContainer>
       {props.afterComponents?.map((AfterComponent, i) => (

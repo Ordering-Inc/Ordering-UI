@@ -18,6 +18,7 @@ const ConfirmUI = (props) => {
     title,
     children,
     content,
+    links,
     onAccept,
     onCancel,
     onClose,
@@ -41,44 +42,29 @@ const ConfirmUI = (props) => {
 
   return (
     <PopupDialog className='popup-dialog'>
-      <>
-        {props.beforeElements?.map((BeforeElement, i) => (
-          <React.Fragment key={i}>
-            {BeforeElement}
-          </React.Fragment>))
-        }
-        {props.beforeComponents?.map((BeforeComponent, i) => (
-          <BeforeComponent key={i} {...props} />))
-        }
-        <PopupIcon>
-          <MdClose onClick={() => onClose()} />
-        </PopupIcon>
-        {title && <PopupTitle>{title}</PopupTitle>}
-        <PopupContent>
-          {content && typeof content === 'string' && content}
-          {content && typeof content === 'object' && Array.isArray(content) && (
-            <ul>
-              {content.map((item, i) => (
-                <li key={i}>{getTraduction(item)}</li>
-              ))}
-            </ul>
-          )}
-          {children}
-        </PopupContent>
-        {(onCancel || onAccept || onClose) && (
-          <PopupActions>
-            {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL', 'Cancel')}</Button>}
-            {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT', 'Accept')}</Button>}
-          </PopupActions>)}
-        {props.afterComponents?.map((AfterComponent, i) => (
-          <AfterComponent key={i} {...props} />))
-        }
-        {props.afterElements?.map((AfterElement, i) => (
-          <React.Fragment key={i}>
-            {AfterElement}
-          </React.Fragment>))
-        }
-      </>
+      <PopupIcon>
+        <MdClose onClick={() => onClose()} />
+      </PopupIcon>
+      {title && <PopupTitle>{title}</PopupTitle>}
+      <PopupContent>
+        {content && typeof content === 'string' && content}
+        {content && typeof content === 'object' && Array.isArray(content) && (
+          <ul>
+            {content.map((item, i) => (
+              <li key={i}>{getTraduction(item)}</li>
+            ))}
+            {links?.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        )}
+        {children}
+      </PopupContent>
+      {(onCancel || onAccept || onClose) && (
+        <PopupActions>
+          {onCancel && <Button outline onClick={() => onCancel()}>{cancelText || t('CANCEL', 'Cancel')}</Button>}
+          {onAccept && <Button color='primary' onClick={() => onAccept()}>{acceptText || t('ACCEPT', 'Accept')}</Button>}
+        </PopupActions>)}
     </PopupDialog>
   )
 }

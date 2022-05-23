@@ -1,18 +1,16 @@
-import React from 'react'
-import FaCcMastercard from '@meronex/icons/fa/FaCcMastercard'
-import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
-import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
 import { useLanguage } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 export const getIconCard = (brand = '') => {
   const value = brand.toLowerCase()
+  const theme = useTheme()
   switch (value) {
     case 'visa':
-      return <FaCcVisa />
+      return theme.images?.general?.visa
     case 'mastercard':
-      return <FaCcMastercard />
+      return theme.images?.general?.mastercard
     default:
-      return <FaCreditCard />
+      return theme.images?.general?.credit
   }
 }
 
@@ -241,6 +239,15 @@ export const getDistance = (lat1, lon1, lat2, lon2) => {
   const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(curLat1) * Math.cos(curLat2)
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
   return R * c
+}
+
+/**
+ * List shape for ribbon
+ */
+export const shape = {
+  rectangle: 'rectangle',
+  rectangleRound: 'rectangle_round',
+  capsuleShape: 'capsule_shape'
 }
 
 /**

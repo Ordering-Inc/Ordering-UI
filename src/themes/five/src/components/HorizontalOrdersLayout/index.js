@@ -5,7 +5,9 @@ import {
   Price,
   Card,
   BusinessLogoWrapper,
-  ButtonWrapper
+  ButtonWrapper,
+  Logo,
+  TitleContainer
 } from './styles'
 import {
   OrdersContainer,
@@ -29,7 +31,8 @@ export const HorizontalOrdersLayout = (props) => {
     onRedirectPage,
     businessesIds,
     activeOrders,
-    pastOrders
+    pastOrders,
+    isCustomerMode
   } = props
 
   const orders = customArray || props.orders
@@ -64,15 +67,42 @@ export const HorizontalOrdersLayout = (props) => {
             key={order.id || order.uuid}
             id='order-card'
             isBusinessesPage={isBusinessesPage}
+            isCustomerMode={isCustomerMode}
             onClick={() => handleClickCard(order?.uuid)}
           >
-            <BusinessLogoWrapper bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} />
-            <Content>
+            {!isCustomerMode && (
+              <BusinessLogoWrapper bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} />
+            )}
+            <Content isCustomerMode={isCustomerMode}>
+              {isCustomerMode && (
+                <>
+                  {(order.business?.logo || theme.images?.dummies?.businessLogo) && (
+                    <Logo>
+                      <img src={order.business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='75px' height='75px' />
+                    </Logo>
+                  )}
+                </>
+              )}
               <BusinessInformation activeOrders>
-                <h2>{order.business?.name}</h2>
+                {isCustomerMode ? (
+                  <TitleContainer>
+                    <h2>{order.business?.name}</h2>
+                    <Price isBusinessesPage={isBusinessesPage} isCustomerMode={isCustomerMode}>
+                      <h2>
+                        {parsePrice(order?.summary?.total || order?.total)}
+                      </h2>
+                    </Price>
+                  </TitleContainer>
+                ) : (
+                  <h2>{order.business?.name}</h2>
+                )}
                 <div className='orders-detail'>
-                  <p name='order_number'>{t('ORDER_NUM', 'Order No.')} {order.id}</p>
-                  <BsDot />
+                  {order?.id && (
+                    <>
+                      <BsDot />
+                      <p name='order_number'>{t('ORDER_NUM', 'Order No.')} {order.id}</p>
+                    </>
+                  )}
                   <p>{order?.delivery_datetime_utc
                     ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY hh:mm A' })
                     : parseDate(order?.delivery_datetime, { utc: false })}
@@ -80,32 +110,19 @@ export const HorizontalOrdersLayout = (props) => {
                 </div>
                 <p className='order-status'>{getOrderStatus(order.status)?.value}</p>
               </BusinessInformation>
-
-              <Price isBusinessesPage={isBusinessesPage}>
-                {
-                  !pastOrders && (
-                    <h2>
-                      {parsePrice(order?.summary?.total || order?.total)}
-                    </h2>
-                  )
-                }
-                {/* {pastOrders && (
-                  <Button
-                    outline
-                    color='primary'
-                    onClick={() => handleClickCard(order.uuid)}
-                  >
-                    {t('REVIEW', 'Review')}
-                  </Button>
-                )}
-                {pastOrders && (
-                  <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
-                    {t('REORDER', 'Reorder')}
-                  </Button>
-                )} */}
-              </Price>
+              {!isCustomerMode && (
+                <Price isBusinessesPage={isBusinessesPage}>
+                  {
+                    !pastOrders && (
+                      <h2>
+                        {parsePrice(order?.summary?.total || order?.total)}
+                      </h2>
+                    )
+                  }
+                </Price>
+              )}
             </Content>
-            {pastOrders && (
+            {pastOrders && !isCustomerMode && (
               <ButtonWrapper>
                 <Button
                   outline
@@ -114,9 +131,11 @@ export const HorizontalOrdersLayout = (props) => {
                 >
                   {t('REVIEW', 'Review')}
                 </Button>
-                <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
-                  {t('REORDER', 'Reorder')}
-                </Button>
+                {order.cart && (
+                  <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
+                    {t('REORDER', 'Reorder')}
+                  </Button>
+                )}
               </ButtonWrapper>
             )}
 
@@ -127,6 +146,7 @@ export const HorizontalOrdersLayout = (props) => {
             flex
             nobg
             isBusinessesPage={isBusinessesPage}
+            isCustomerMode={isCustomerMode}
           >
             <Button
               className='load-orders'

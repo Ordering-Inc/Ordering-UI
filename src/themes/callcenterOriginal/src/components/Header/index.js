@@ -3,11 +3,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import MdClose from '@meronex/icons/md/MdClose'
 import { GeoAlt } from 'react-bootstrap-icons'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
 import { LanguageSelector } from '../LanguageSelector'
+import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import {
   Header as HeaderContainer,
   InnerHeader,
@@ -211,10 +211,9 @@ export const Header = (props) => {
                     <p>{userCustomer?.name} {userCustomer?.lastname}</p>
                   </span>
                   <span
-                    style={styles.headCustomer}
                     ref={clearCustomer}
                   >
-                    <MdClose style={styles.clearCustomer} />
+                    <AiOutlineClose />
                   </span>
                 </CustomerInfo>
               )}
@@ -472,21 +471,6 @@ export const Header = (props) => {
         </React.Fragment>))}
     </>
   )
-}
-
-const styles = {
-  headCustomer: {
-    margin: 0,
-    height: 20,
-    width: 20,
-    backgroundColor: '#CCCCCC',
-    borderRadius: '100%',
-    marginLeft: 5
-  },
-  clearCustomer: {
-    margin: 0,
-    fontSize: 20
-  }
 }
 
 Header.defaultProps = {

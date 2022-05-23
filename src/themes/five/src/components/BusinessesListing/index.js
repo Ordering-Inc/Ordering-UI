@@ -10,7 +10,8 @@ import {
   BusinessHeroImg,
   HightestRatedWrapper,
   Divider,
-  OrderProgressWrapper
+  OrderProgressWrapper,
+  SearchContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -46,6 +47,7 @@ const BusinessesListingUI = (props) => {
     searchValue,
     getBusinesses,
     isCustomLayout,
+    isCustomerMode,
     onRedirectPage,
     handleChangeSearch,
     handleChangeBusinessType,
@@ -65,6 +67,7 @@ const BusinessesListingUI = (props) => {
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
+
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
@@ -135,62 +138,9 @@ const BusinessesListingUI = (props) => {
     if (preorderBusiness) setIsPreorder(true)
   }, [preorderBusiness])
 
-  return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <BusinessContainer>
-        <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
-        <OrderProgressWrapper>
-          <OrderProgress />
-        </OrderProgressWrapper>
-        <WrapperSearch isCustomLayout={isCustomLayout}>
-          <SearchBar
-            lazyLoad
-            search={searchValue}
-            isCustomLayout={isCustomLayout}
-            placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-            onSearch={handleChangeSearch}
-          />
-          {configs?.advanced_business_search_enabled?.value === '1' && (
-            <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
-          )}
-          {isCustomLayout && (
-            <FiMap onClick={toggleMap} />
-          )}
-        </WrapperSearch>
-        {hasHighRatedBusiness && (
-          <HightestRatedWrapper>
-            <Divider />
-            <HighestRated
-              handleClickAddress={handleClickAddress}
-              setHasHighRatedBusiness={setHasHighRatedBusiness}
-              onBusinessClick={onBusinessClick}
-            />
-            <Divider />
-          </HightestRatedWrapper>
-        )}
-        {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
-          <BusinessTypeFilter
-            images={props.images}
-            businessTypes={props.businessTypes}
-            defaultBusinessType={props.defaultBusinessType}
-            handleChangeBusinessType={handleChangeBusinessType}
-          />
-        )}
-
-        {activeMap && (
-          <BusinessesMap
-            businessList={businessesList.businesses}
-            userLocation={orderState?.options?.address?.location}
-            setErrors={setMapErrors}
-          />
-        )}
-
+  const OrdersSection = (titleContent) => {
+    return (
+      <>
         {isCustomLayout && onRedirectPage && (
           <>
             <OrdersOption
@@ -204,6 +154,7 @@ const BusinessesListingUI = (props) => {
               }
               isCustomLayout
               isBusinessesLoading={businessesList.loading}
+              isCustomerMode={isCustomerMode}
             />
             <OrdersOption
               horizontal
@@ -213,12 +164,115 @@ const BusinessesListingUI = (props) => {
               onRedirectPage={onRedirectPage}
               userCustomerId={userCustomer?.id}
               isCustomLayout
+              titleContent={titleContent}
               isBusinessesLoading={businessesList.loading}
+              isCustomerMode={isCustomerMode}
+
             />
           </>
         )}
+      </>
+    )
+  }
+
+  return (
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))}
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))}
+      <BusinessContainer>
+        <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
+        <OrderProgressWrapper>
+          <OrderProgress userCustomerId={userCustomer?.id} asDashboard={isCustomerMode} isCustomerMode={isCustomerMode} />
+        </OrderProgressWrapper>
+        {isCustomerMode && (
+          <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />
+        )}
+        {!isCustomerMode && (
+          <>
+            <WrapperSearch isCustomLayout={isCustomLayout} isCustomerMode={isCustomerMode}>
+              <SearchBar
+                lazyLoad
+                search={searchValue}
+                isCustomLayout={isCustomLayout}
+                placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                onSearch={handleChangeSearch}
+              />
+              {configs?.advanced_business_search_enabled?.value === '1' && (
+                <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
+              )}
+              {isCustomLayout && (
+                <FiMap onClick={toggleMap} />
+              )}
+            </WrapperSearch>
+            {activeMap && (
+              <BusinessesMap
+                businessList={businessesList.businesses}
+                userLocation={orderState?.options?.address?.location}
+                setErrors={setMapErrors}
+              />
+            )}
+          </>
+        )}
+        {hasHighRatedBusiness && (
+          <HightestRatedWrapper>
+            <Divider />
+            <HighestRated
+              handleClickAddress={handleClickAddress}
+              setHasHighRatedBusiness={setHasHighRatedBusiness}
+              onBusinessClick={onBusinessClick}
+              isCustomerMode={isCustomerMode}
+            />
+            <Divider />
+          </HightestRatedWrapper>
+        )}
+        {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
+          <BusinessTypeFilter
+            images={props.images}
+            businessTypes={props.businessTypes}
+            defaultBusinessType={props.defaultBusinessType}
+            handleChangeBusinessType={handleChangeBusinessType}
+          />
+        )}
+        {isCustomerMode && (
+          <SearchContainer>
+            {isCustomLayout && (
+              <BusinessesTitle isCustomerMode={isCustomerMode}>
+                {t('BUSINESSES', 'Businesses')}
+              </BusinessesTitle>
+            )}
+            <WrapperSearch isCustomLayout={isCustomLayout} isCustomerMode={isCustomerMode}>
+              <SearchBar
+                lazyLoad
+                search={searchValue}
+                isCustomLayout={isCustomLayout}
+                placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                onSearch={handleChangeSearch}
+              />
+              {configs?.advanced_business_search_enabled?.value === '1' && (
+                <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
+              )}
+              {isCustomLayout && (
+                <FiMap onClick={toggleMap} />
+              )}
+            </WrapperSearch>
+          </SearchContainer>
+        )}
+        {isCustomerMode && activeMap && (
+          <BusinessesMap
+            businessList={businessesList.businesses}
+            userLocation={orderState?.options?.address?.location}
+            setErrors={setMapErrors}
+          />
+        )}
+        {!isCustomerMode && (
+          <OrdersSection />
+        )}
         <>
-          {isCustomLayout && businessesList?.businesses?.length > 0 && (
+          {!isCustomLayout && isCustomerMode && businessesList?.businesses?.length > 0 && (
             <BusinessesTitle>
               {t('BUSINESSES', 'Businesses')}
             </BusinessesTitle>
@@ -251,8 +305,17 @@ const BusinessesListingUI = (props) => {
                   handleCustomClick={handleBusinessClick}
                   orderType={orderState?.options?.type}
                   isCustomLayout={isCustomLayout}
-                  isShowCallcenterInformation={isCustomLayout}
+                  isCustomerMode={isCustomerMode}
                   onPreorderBusiness={setPreorderBusiness}
+                  businessHeader={business?.header}
+                  businessFeatured={business?.featured}
+                  businessOffers={business?.offers}
+                  businessLogo={business?.logo}
+                  businessReviews={business?.reviews?.total}
+                  businessDeliveryPrice={business?.delivery_price}
+                  businessDeliveryTime={business?.delivery_time}
+                  businessPickupTime={business?.pickup_time}
+                  businessDistance={business?.distance}
                 />
               ))
             }
@@ -312,6 +375,7 @@ const BusinessesListingUI = (props) => {
             userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
             onCancel={() => setModals({ ...modals, listOpen: false })}
             onAccept={() => handleFindBusinesses()}
+            isCustomerMode={isCustomerMode}
           />
         </Modal>
 

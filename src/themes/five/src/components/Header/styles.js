@@ -73,29 +73,32 @@ export const Menu = styled.div`
 
   #select-input {
     border-radius: 7.6px;
-    margin: 0px 10px;
-    height: 40px;
-    border-color: #CCC;
-    background-color: #CCC !important;
-
-    svg {
-      font-size: 16px;
-    }
-
-    > div:first-child {
-      height: 100%;
-      padding-left: 10px;
-      padding-right: 10px;
-
-      @media (min-width: 993px) {
-        padding-left: 13px;
-        padding-right: 13px;
-      }
-    }
-
+    
     #list {
       border-radius: 7.6px;
     }
+
+    ${({ isCustomerMode }) => !isCustomerMode && css`
+      margin: 0px 10px;
+      height: 40px;
+      border-color: #CCC;
+      background-color: #CCC !important;
+      
+      svg {
+        font-size: 16px;
+      }
+
+      > div:first-child {
+        height: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        @media (min-width: 993px) {
+          padding-left: 13px;
+          padding-right: 13px;
+        }
+      }
+    `}
   }
 
   &.left-header {
@@ -227,31 +230,29 @@ export const SubMenu = styled(InnerHeader)`
 export const CustomerInfo = styled.div`
   display: none;
   cursor: pointer;
-
+  flex: 1;
+  position: relative;
   @media (min-width: 450px) {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     span {
       display: flex;
       align-items: center;
-      height: 30px;
+      margin: 0;
       p {
-        color: #333;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        max-width: 50px;
-
-        @media (min-width: 768px) {
-          max-width: 70px;
-        }
+        color: #909BA9;
       }
-      svg {
-        color: ${props => props.theme.colors.primary};
-        font-size: 30px;
-        margin-right: 5px;
+      svg {       
+        color: #748194; 
+        margin: 0;
+        font-size: 20px;
+        position: absolute;
+        right: 0;
       }
     }
   }
@@ -270,8 +271,13 @@ export const AddressMenu = styled.div`
   color: ${props => props.theme.colors?.headingColor};
   display: flex;
   align-items: center;
-  width: 100%;
   position: relative;
+
+  ${({ isCustomerMode }) => isCustomerMode ? css`
+  flex: 0.8;
+  ` : css`
+    width: 100%;
+  `}
 
   svg {
     color: ${props => props.theme.colors?.lightGray};
@@ -283,10 +289,14 @@ export const AddressMenu = styled.div`
     `}
   }
   @media (min-width: 765px) {
-    width: 80%;
+    ${({ isCustomerMode }) => !isCustomerMode && css`
+      width: 80%;
+    `}
   }
   @media (min-width: 820px) {
-    width: 100%;
+    ${({ isCustomerMode }) => !isCustomerMode && css`
+      width: 100%;
+    `}
   }
 `
 
@@ -367,4 +377,9 @@ export const FarAwayMessage = styled.div`
       left: initial;
     `}
   }
+`
+
+export const Divider = styled.div`
+  border: 1px solid #DEE2E6;
+  height: 100%;
 `

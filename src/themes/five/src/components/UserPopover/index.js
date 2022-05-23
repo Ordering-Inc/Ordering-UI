@@ -42,8 +42,8 @@ export const UserPopover = (props) => {
 
   const extraOptions = [
     { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
-    { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: isWalletEnabled },
-    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: true },
+    { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: isWalletEnabled && !isCustomerMode },
+    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !isCustomerMode },
     { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true }
   ]
 
@@ -66,7 +66,7 @@ export const UserPopover = (props) => {
   const { styles, attributes, forceUpdate } = popper
 
   useEffect(() => {
-    forceUpdate && forceUpdate()
+    // forceUpdate && forceUpdate()
   }, [open, sessionState])
 
   const handleClickOutside = (e) => {
