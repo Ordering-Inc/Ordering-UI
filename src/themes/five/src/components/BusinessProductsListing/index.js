@@ -12,9 +12,7 @@ import {
   useLanguage,
   useOrder,
   useSession,
-  useUtils,
-  useToast,
-  ToastType
+  useUtils
 } from 'ordering-components'
 
 import {
@@ -65,14 +63,14 @@ const BusinessProductsListingUI = (props) => {
     featuredProducts,
     handleChangeSortBy,
     isCartOnProductsList,
-    errorQuantityProducts
+    errorQuantityProducts,
+    multiRemoveProducts
   } = props
 
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }, { clearCart }] = useOrder()
-  const [, { showToast }] = useToast()
+  const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const [{ auth }] = useSession()
@@ -153,6 +151,12 @@ const BusinessProductsListingUI = (props) => {
   const handleGoToBusinessList = () => {
     events.emit('go_to_page', { page: 'search' })
   }
+  const adjustBusiness = async (adjustBusinessId) => {
+    const _carts = carts?.[adjustBusinessId]
+    const products = carts?.[adjustBusinessId]?.products
+    const unavailableProducts = products.filter(product => product.valid !== true)
+    unavailableProducts.length > 0 && multiRemoveProducts && await multiRemoveProducts(unavailableProducts, _carts)
+  }
 
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
@@ -196,11 +200,10 @@ const BusinessProductsListingUI = (props) => {
   }, [business?.schedule])
 
   useEffect(() => {
-    const removeCardId = JSON.parse(window.localStorage.getItem('remove-cartId'))
-    if (currentCart && removeCardId) {
-      clearCart(removeCardId)
-      localStorage.removeItem('remove-cartId')
-      showToast(ToastType.Info, t('PRODUCT_REMOVED', 'Products removed from cart'))
+    const adjustBusinessId = JSON.parse(window.localStorage.getItem('adjust-businessId'))
+    if (currentCart && adjustBusinessId) {
+      localStorage.removeItem('adjust-businessId')
+      adjustBusiness(adjustBusinessId)
     }
   }, [currentCart])
 
