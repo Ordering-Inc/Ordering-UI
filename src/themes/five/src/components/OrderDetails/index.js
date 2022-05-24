@@ -236,8 +236,16 @@ const OrderDetailsUI = (props) => {
       }
     }
 
-    if (!reorderState?.error && reorderState?.result?.uuid) {
-      handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
+    if (!reorderState?.error && reorderState.loading === false && businessData?.id) {
+      const _businessId = 'businessId:' + businessData?.id
+      const products = carts?.[_businessId]?.products
+      const available = products.every(product => product.valid === true)
+      if (available && reorderState?.result?.uuid) {
+        handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
+      } else {
+        localStorage.setItem('adjust-businessId', JSON.stringify(_businessId))
+        handleBusinessRedirect(businessData?.slug)
+      }
     }
   }, [reorderState])
 
