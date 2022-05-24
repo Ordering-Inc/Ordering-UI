@@ -41,6 +41,8 @@ var _RenderProductsLayout = require("../RenderProductsLayout");
 
 var _Cart = require("../Cart");
 
+var _Confirm = require("../../../../../components/Confirm");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -99,7 +101,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleChangeSortBy = props.handleChangeSortBy,
       isCartOnProductsList = props.isCartOnProductsList,
       errorQuantityProducts = props.errorQuantityProducts,
-      multiRemoveProducts = props.multiRemoveProducts;
+      multiRemoveProducts = props.multiRemoveProducts,
+      setAlertState = props.setAlertState,
+      alertState = props.alertState;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -147,7 +151,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      isCartOpen = _useState8[0],
       setIsCartOpen = _useState8[1];
 
   var _useState9 = (0, _react.useState)(false),
@@ -440,7 +443,23 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     product: productModal.product || curProduct,
     businessId: business === null || business === void 0 ? void 0 : business.id,
     onSave: handlerProductAction
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('ERROR', 'Error'),
+    open: alertState.open,
+    content: alertState.content,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    }
+  }));
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
