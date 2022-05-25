@@ -66,6 +66,7 @@ import { Promotions } from './src/components/Promotions'
 import { RenderProductsLayout } from './src/components/RenderProductsLayout'
 import { ResetPassword } from './src/components/ResetPassword'
 import { SearchBar } from './src/components/SearchBar'
+import { SessionsList } from './src/components/SessionsList'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SignUpBusiness } from './src/components/SignUpBusiness'
@@ -155,6 +156,7 @@ export {
   RenderProductsLayout,
   ResetPassword,
   SearchBar,
+  SessionsList,
   SidebarMenu,
   SignUpForm,
   SignUpBusiness,
