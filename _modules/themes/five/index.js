@@ -435,6 +435,12 @@ Object.defineProperty(exports, "Select", {
     return _Select.Select;
   }
 });
+Object.defineProperty(exports, "SessionsList", {
+  enumerable: true,
+  get: function get() {
+    return _SessionsList.SessionsList;
+  }
+});
 Object.defineProperty(exports, "SidebarMenu", {
   enumerable: true,
   get: function get() {
@@ -661,6 +667,8 @@ var _RenderProductsLayout = require("./src/components/RenderProductsLayout");
 var _ResetPassword = require("./src/components/ResetPassword");
 
 var _SearchBar = require("./src/components/SearchBar");
+
+var _SessionsList = require("./src/components/SessionsList");
 
 var _SidebarMenu = require("./src/components/SidebarMenu");
 

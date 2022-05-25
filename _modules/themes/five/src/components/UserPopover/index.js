@@ -121,6 +121,12 @@ var UserPopover = function UserPopover(props) {
     displayName: 'help',
     key: 'help',
     isActive: true
+  }, {
+    name: 'sessions',
+    pathname: '/sessions',
+    displayName: 'sessions',
+    key: 'sessions',
+    isActive: true
   }];
   var options = isCustomerMode ? optionsDefault.filter(function (option) {
     return option.name === 'profile';
