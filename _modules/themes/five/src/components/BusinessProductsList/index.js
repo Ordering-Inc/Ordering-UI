@@ -92,6 +92,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       openDescription = _useState2[0],
       setOpenDescription = _useState2[1];
 
+  var headerRef = (0, _react.useRef)();
+
   var onClickSubcategory = function onClickSubcategory(subCategory, parentCategory) {
     if (parentCategory && isLazy) {
       onClickCategory(parentCategory);
@@ -198,7 +200,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
   }).map(function (category, i, _categories) {
-    var _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _categoryState$produc8, _category$description, _category$description2, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _category$description3, _category$subcategori3;
+    var _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _categoryState$produc8, _category$description, _category$description2, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _headerRef$current, _category$description3, _category$subcategori3;
 
     var _products = !isUseParentCategory ? (_categoryState$produc5 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc6 = categoryState.products) === null || _categoryState$produc6 === void 0 ? void 0 : _categoryState$produc6.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
@@ -222,7 +224,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       key: i
     }, products.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
       id: "category".concat(category === null || category === void 0 ? void 0 : category.id)
-    }, /*#__PURE__*/_react.default.createElement(_styles.HeaderWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.HeaderWrapper, {
+      ref: headerRef
+    }, /*#__PURE__*/_react.default.createElement("div", {
       className: "category-title"
     }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
       src: category.image
@@ -230,13 +234,13 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       bgColor: category === null || category === void 0 ? void 0 : (_category$ribbon2 = category.ribbon) === null || _category$ribbon2 === void 0 ? void 0 : _category$ribbon2.color,
       isRoundRect: (category === null || category === void 0 ? void 0 : (_category$ribbon3 = category.ribbon) === null || _category$ribbon3 === void 0 ? void 0 : _category$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
       isCapsule: (category === null || category === void 0 ? void 0 : (_category$ribbon4 = category.ribbon) === null || _category$ribbon4 === void 0 ? void 0 : _category$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
-    }, category === null || category === void 0 ? void 0 : (_category$ribbon5 = category.ribbon) === null || _category$ribbon5 === void 0 ? void 0 : _category$ribbon5.text)), (category === null || category === void 0 ? void 0 : category.description) && /*#__PURE__*/_react.default.createElement("div", {
-      className: "category-description"
-    }, /*#__PURE__*/_react.default.createElement("p", null, shortCategoryDescription, (category === null || category === void 0 ? void 0 : (_category$description3 = category.description) === null || _category$description3 === void 0 ? void 0 : _category$description3.length) > 200 && /*#__PURE__*/_react.default.createElement("span", {
+    }, category === null || category === void 0 ? void 0 : (_category$ribbon5 = category.ribbon) === null || _category$ribbon5 === void 0 ? void 0 : _category$ribbon5.text)), (category === null || category === void 0 ? void 0 : category.description) && /*#__PURE__*/_react.default.createElement(_styles.CategoryDescription, {
+      maxWidth: headerRef === null || headerRef === void 0 ? void 0 : (_headerRef$current = headerRef.current) === null || _headerRef$current === void 0 ? void 0 : _headerRef$current.clientWidth
+    }, /*#__PURE__*/_react.default.createElement("p", null, shortCategoryDescription), (category === null || category === void 0 ? void 0 : (_category$description3 = category.description) === null || _category$description3 === void 0 ? void 0 : _category$description3.length) > 200 && /*#__PURE__*/_react.default.createElement("span", {
       onClick: function onClick() {
         return setOpenDescription(category);
       }
-    }, t('SEE_MORE', 'See more')))), (category === null || category === void 0 ? void 0 : (_category$subcategori3 = category.subcategories) === null || _category$subcategori3 === void 0 ? void 0 : _category$subcategori3.length) > 0 && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
+    }, t('SEE_MORE', 'See more'))), (category === null || category === void 0 ? void 0 : (_category$subcategori3 = category.subcategories) === null || _category$subcategori3 === void 0 ? void 0 : _category$subcategori3.length) > 0 && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
       category: category
     })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product, i) {
       var _currentCart$products3;
