@@ -61,6 +61,7 @@ var MomentControlUI = function MomentControlUI(props) {
       handleChangeDate = props.handleChangeDate,
       handleChangeTime = props.handleChangeTime,
       onClose = props.onClose;
+  var outsideContainer = (0, _react.useRef)();
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -150,14 +151,17 @@ var MomentControlUI = function MomentControlUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.MomentControlContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('CHOOSE_A_HOUR', 'Choose a hour')), /*#__PURE__*/_react.default.createElement(_styles.Days, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.MomentControlContainer, {
+    ref: outsideContainer
+  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('CHOOSE_A_HOUR', 'Choose a hour')), /*#__PURE__*/_react.default.createElement(_styles.Days, {
     name: "days"
   }, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: dateListOptions,
     defaultValue: dateSelected,
     onChange: function onChange(date) {
       return handleChangeDate(date);
-    }
+    },
+    outsideContainer: outsideContainer
   })), /*#__PURE__*/_react.default.createElement(_styles.Hours, {
     name: "hours"
   }, /*#__PURE__*/_react.default.createElement(_Select.Select, {
@@ -166,7 +170,8 @@ var MomentControlUI = function MomentControlUI(props) {
     placeholder: t('SELECT_A_TIME', 'Select a time'),
     onChange: function onChange(hour) {
       return !orderState.loading && handleChangeTime(hour);
-    }
+    },
+    outsideContainer: outsideContainer
   })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     rectangle: true,
     color: "primary",
