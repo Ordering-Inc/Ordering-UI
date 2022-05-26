@@ -18,7 +18,8 @@ export const Select = (props) => {
     defaultValue,
     onChange,
     notAsync,
-    notReload
+    notReload,
+    outsideContainer
   } = props
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
@@ -35,7 +36,7 @@ export const Select = (props) => {
 
   const closeSelect = (e) => {
     if (open) {
-      const outsideDropdown = !dropdownReference.current?.contains(e.target)
+      const outsideDropdown = (!dropdownReference.current?.contains(e.target) && (outsideContainer ? outsideContainer?.current?.contains(e.target): true))
       if (outsideDropdown) {
         setOpen(false)
       }
