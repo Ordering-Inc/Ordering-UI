@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { ProductsList, useConfig, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
@@ -16,7 +16,8 @@ import {
   DescriptionModalContainer,
   RibbonBox,
   SubCategoriesContainer,
-  ContainerButton
+  ContainerButton,
+  CategoryDescription
 } from './styles'
 import { Button } from '../../styles/Buttons'
 
@@ -46,7 +47,7 @@ const BusinessProductsListUI = (props) => {
   const [{ configs }] = useConfig()
   const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
   const [openDescription, setOpenDescription] = useState(null)
-
+  const headerRef = useRef()
   const onClickSubcategory = (subCategory, parentCategory) => {
     if (parentCategory && isLazy) {
       onClickCategory(parentCategory)
@@ -181,7 +182,7 @@ const BusinessProductsListUI = (props) => {
                 {
                   products.length > 0 && (
                     <WrapAllCategories id={`category${category?.id}`}>
-                      <HeaderWrapper>
+                      <HeaderWrapper ref={headerRef}>
                         <div className='category-title'>
                           {
                             category?.image && (
@@ -200,14 +201,14 @@ const BusinessProductsListUI = (props) => {
                           )}
                         </div>
                         {category?.description && (
-                          <div className='category-description'>
+                          <CategoryDescription maxWidth={headerRef?.current?.clientWidth}>
                             <p>
                               {shortCategoryDescription}
-                              {category?.description?.length > 200 && (
-                                <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
-                              )}
                             </p>
-                          </div>
+                            {category?.description?.length > 200 && (
+                              <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
+                            )}
+                          </CategoryDescription>
                         )}
                         {category?.subcategories?.length > 0 && (
                           <SubcategoriesComponent category={category} />
@@ -289,12 +290,16 @@ const BusinessProductsListUI = (props) => {
           </DescriptionModalContainer>
         </Modal>
       </ProductsContainer>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
+      {
+        props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))
+      }
+      {
+        props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))
+      }
     </>
   )
 }
