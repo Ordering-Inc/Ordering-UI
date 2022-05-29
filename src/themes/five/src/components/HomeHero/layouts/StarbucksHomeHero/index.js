@@ -8,11 +8,12 @@ import {
   Slogan,
   OrderTypes
 } from './styles'
-import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
-export const HomeHero = (props) => {
+import { OrderTypeSelectorHeader } from '../../../../../../six/src/components/OrderTypeSelectorHeader'
+export const StarbucksHomeHero = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const orderTypeStyle = 'Rectangle'
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (

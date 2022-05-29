@@ -12,12 +12,12 @@ import {
   OrderTypeItem
 } from './styles'
 
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { Modal } from '../../../../../components/Modal'
-import { AddressForm } from '../AddressForm'
-import { AddressList } from '../AddressList'
+import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
+import { Modal } from '../../../../../../../components/Modal'
+import { AddressForm } from '../../../../../../seven/src/components/AddressForm'
+import { AddressList } from '../../../../../../seven/src/components/AddressList'
 
-export const HomeHero = (props) => {
+export const RedHomeHero = (props) => {
   const { onFindBusiness } = props
   const [configState] = useConfig()
 

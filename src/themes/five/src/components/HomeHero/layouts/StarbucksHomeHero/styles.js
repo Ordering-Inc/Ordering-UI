@@ -41,7 +41,9 @@ export const Title = styled.h1`
   font-weight: 500;
   font-size: 22px;
   line-height: 39px;
-  color: #000000;
+  ${props => props.theme?.colors?.backgroundPage && css`
+    color: ${props.theme?.colors?.backgroundPage};
+  `}
   margin-bottom:16px;
   text-align: center;
   @media (min-width: 1024px) {
@@ -58,6 +60,10 @@ export const Slogan = styled.p`
   margin: 0px;
   text-align: left;
   font-size: 16px;
+  
+  ${props => props.theme?.colors?.backgroundPage && css`
+    color: ${props.theme?.colors?.backgroundPage};
+  `}
   @media (min-width: 576px) {
     font-size: 18px;
     text-align: center;

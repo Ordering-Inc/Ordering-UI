@@ -11,13 +11,13 @@ import {
   Overlay
 } from './styles'
 
-import { Modal } from '../Modal'
-import { Button } from '../../styles/Buttons'
-import { AddressForm } from '../../components/AddressForm'
-import { AddressList } from '../../components/AddressList'
+import { Modal } from '../../../Modal'
+import { Button } from '../../../../styles/Buttons'
+import { AddressForm } from '../../../AddressForm'
+import { AddressList } from '../../../AddressList'
 
-export const HomeHero = (props) => {
-  const { onFindBusiness } = props
+export const OriginalHomeHero = (props) => {
+  const { onFindBusiness, contentPosition } = props
 
   const [{ auth }] = useSession()
   const [orderState] = useOrder()
@@ -56,7 +56,7 @@ export const HomeHero = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
-        <ContentWrapper>
+        <ContentWrapper contentPosition={contentPosition}>
           <div>
             <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
             <Slogan>{t('SUBTITLE_HOME', theme?.defaultLanguages?.SUBTITLE_HOME || 'Let\'s start to order food now')}</Slogan>
