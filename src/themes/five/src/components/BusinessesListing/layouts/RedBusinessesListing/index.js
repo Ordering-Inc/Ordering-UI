@@ -180,9 +180,8 @@ const BusinessesListingUI = (props) => {
   const fillterBrand = () => {
     let containBrandBusineess
     if (!businessesList.loading) {
-      // const mainbrand = ''
-      const mainbrand = 'Archie'
-      containBrandBusineess = businessesList.businesses.filter(businesse => businesse.name.toLowerCase().includes(mainbrand.toLowerCase()))
+      // const mainbrand = 'Archie'
+      containBrandBusineess = businessesList?.businesses
       containBrandBusineess.sort((a, b) => a.distance - b.distance)
     }
     setBrandBusiness(containBrandBusineess)
@@ -219,7 +218,6 @@ const BusinessesListingUI = (props) => {
   const handleGotoHome = () => {
     history.push('/home')
   }
-
 
   useEffect(() => {
     if (targetBusiness && orderState.options.type === 1 && isSearchPage) {
