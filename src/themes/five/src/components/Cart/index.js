@@ -503,6 +503,7 @@ const CartUI = (props) => {
             padding='0'
             closeOnBackdrop
             onClose={() => setModalIsOpen(false)}
+            disableOverflowX
           >
             <ProductForm
               isCartProduct
