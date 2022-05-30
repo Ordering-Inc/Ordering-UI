@@ -97,3 +97,36 @@ export const DescriptionModalContainer = styled.div`
     white-space: pre;
   }
 `
+
+export const RibbonBox = styled.div`
+  padding: 2px 8px;
+  box-sizing: border-box;
+  color: ${props => props.theme.colors.colorTextSignForm};
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 13px;
+  background-color: ${props => props.theme.colors.primary};
+  max-width: 200px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-left: 5px;
+
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: 5px;
+  `}
+
+  ${({ bgColor }) => bgColor && css`
+    background-color: ${bgColor};
+  `}
+
+  ${({ isRoundRect }) => isRoundRect && css`
+    border-radius: 7.6px;
+  `}
+
+  ${({ isCapsule }) => isCapsule && css`
+    border-radius: 50px;
+  `}
+`
