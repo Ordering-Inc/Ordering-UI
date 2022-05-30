@@ -1,37 +1,21 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.HomeHero = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
-
-var _styledComponents = require("styled-components");
+var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
-var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
+var _OriginalHomeHero = require("./layouts/OriginalHomeHero");
 
-var _styles = require("./styles");
+var _RedHomeHero = require("./layouts/RedHomeHero");
 
-var _Modal = require("../Modal");
-
-var _Buttons = require("../../styles/Buttons");
-
-var _AddressForm = require("../../components/AddressForm");
-
-var _AddressList = require("../../components/AddressList");
+var _StarbucksHomeHero = require("./layouts/StarbucksHomeHero");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -52,143 +36,30 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeHero = function HomeHero(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options2, _orderState$options2$, _theme$defaultLanguag3, _orderState$options3, _props$afterComponent, _props$afterElements;
+  var _HomeLayoutConfig$hom, _HomeLayoutConfig$hom2, _HomeLayoutConfig$hom3, _HomeLayoutConfig$hom4;
 
-  var onFindBusiness = props.onFindBusiness;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs; // *****************************
+  // HomeLayout = configs
 
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
 
-  var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      orderState = _useOrder2[0];
+  var HomeLayoutConfig = {
+    homepage_settings: {
+      layout: 'original',
+      // 'original', 'starbucks', 'red'
+      contentPosition: 'left' // 'left', 'right', top, 'bottom', 'center'
 
-  var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
-  var _useState = (0, _react.useState)({
-    listOpen: false,
-    formOpen: false
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      modals = _useState2[0],
-      setModals = _useState2[1];
-
-  var theme = (0, _styledComponents.useTheme)();
-  var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
-
-  var handleFindBusinesses = function handleFindBusinesses() {
-    var _orderState$options, _orderState$options$a;
-
-    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: true
-      }));
-      return;
-    }
-
-    setModals({
-      listOpen: false,
-      formOpen: false
-    });
-    onFindBusiness && onFindBusiness();
-  };
-
-  var handleAddressInput = function handleAddressInput() {
-    if (auth) {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: true
-      }));
-    } else {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: true
-      }));
     }
   };
+  var layout = (HomeLayoutConfig === null || HomeLayoutConfig === void 0 ? void 0 : (_HomeLayoutConfig$hom = HomeLayoutConfig.homepage_settings) === null || _HomeLayoutConfig$hom === void 0 ? void 0 : _HomeLayoutConfig$hom.layout) !== undefined ? HomeLayoutConfig === null || HomeLayoutConfig === void 0 ? void 0 : (_HomeLayoutConfig$hom2 = HomeLayoutConfig.homepage_settings) === null || _HomeLayoutConfig$hom2 === void 0 ? void 0 : _HomeLayoutConfig$hom2.layout : 'original'; // *****************************
 
-  (0, _react.useEffect)(function () {
-    return function () {
-      return setModals({
-        listOpen: false,
-        formOpen: false
-      });
-    };
-  }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
-    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
-    onClick: handleAddressInput,
-    withIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    name: "find-business",
-    onClick: handleFindBusinesses
-  }, t('FIND_BUSINESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.FIND_BUSINESSES) || 'Find businesses')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
-    open: modals.formOpen,
-    onClose: function onClose() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    }
-  }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) || {},
-    onClose: function onClose() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    },
-    onSaveAddress: function onSaveAddress() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    },
-    onCancel: function onCancel() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
-    }
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
-    open: modals.listOpen,
-    width: "70%",
-    onClose: function onClose() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: false
-      }));
-    }
-  }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
-    isModal: true,
-    changeOrderAddressWithDefault: true,
-    userId: isNaN(userCustomer) ? null : userCustomer,
-    onCancel: function onCancel() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        listOpen: false
-      }));
-    },
-    onAccept: function onAccept() {
-      return handleFindBusinesses();
-    }
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+  var homeLayoutProps = _objectSpread(_objectSpread({}, props), {}, {
+    layout: layout,
+    contentPosition: (HomeLayoutConfig === null || HomeLayoutConfig === void 0 ? void 0 : (_HomeLayoutConfig$hom3 = HomeLayoutConfig.homepage_settings) === null || _HomeLayoutConfig$hom3 === void 0 ? void 0 : _HomeLayoutConfig$hom3.contentPosition) !== undefined ? HomeLayoutConfig === null || HomeLayoutConfig === void 0 ? void 0 : (_HomeLayoutConfig$hom4 = HomeLayoutConfig.homepage_settings) === null || _HomeLayoutConfig$hom4 === void 0 ? void 0 : _HomeLayoutConfig$hom4.contentPosition : 'left'
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, layout === 'original' && /*#__PURE__*/_react.default.createElement(_OriginalHomeHero.OriginalHomeHero, homeLayoutProps), layout === 'starbucks' && /*#__PURE__*/_react.default.createElement(_StarbucksHomeHero.StarbucksHomeHero, homeLayoutProps), layout === 'red' && /*#__PURE__*/_react.default.createElement(_RedHomeHero.RedHomeHero, homeLayoutProps));
 };
 
 exports.HomeHero = HomeHero;

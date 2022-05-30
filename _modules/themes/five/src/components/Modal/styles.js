@@ -24,7 +24,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 0px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: ", ";;\n  max-height: 100vh;\n  overflow: auto;\n\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: 10px;\n    height: auto;\n  }\n"])), function (_ref2) {
+var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 0px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: ", ";;\n  max-height: 100vh;\n  overflow: auto;\n  overflow-x: ", ";\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: 10px;\n    height: auto;\n  }\n"])), function (_ref2) {
   var isTransparent = _ref2.isTransparent;
   return isTransparent ? 'transparent' : '#FFF';
 }, function (_ref3) {
@@ -34,7 +34,10 @@ var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateOb
   var height = _ref4.height;
   return height || '100%';
 }, function (_ref5) {
-  var width = _ref5.width;
+  var disableOverflowX = _ref5.disableOverflowX;
+  return disableOverflowX ? 'hidden' : 'auto';
+}, function (_ref6) {
+  var width = _ref6.width;
   return width || '50%';
 });
 
@@ -72,8 +75,8 @@ var ModalIcon = _styledComponents.default.span(_templateObject11 || (_templateOb
   var _props$theme4;
 
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    right: 25px;\n    left: initial;\n  "])));
-}, function (_ref6) {
-  var isProductForm = _ref6.isProductForm;
+}, function (_ref7) {
+  var isProductForm = _ref7.isProductForm;
   return isProductForm && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    top: 18px;\n  "])));
 });
 

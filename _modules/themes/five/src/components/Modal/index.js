@@ -53,7 +53,8 @@ var ModalUI = function ModalUI(props) {
       hideCloseDefault = props.hideCloseDefault,
       isProductForm = props.isProductForm,
       authModal = props.authModal,
-      onRemove = props.onRemove;
+      onRemove = props.onRemove,
+      disableOverflowX = props.disableOverflowX;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -86,7 +87,8 @@ var ModalUI = function ModalUI(props) {
     width: props.width,
     height: props.height,
     padding: props.padding,
-    isTransparent: isTransparent
+    isTransparent: isTransparent,
+    disableOverflowX: disableOverflowX
   }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, null), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, {
     isProductForm: isProductForm
   }, authModal && onRemove ? /*#__PURE__*/_react.default.createElement(_MdClose.default, {

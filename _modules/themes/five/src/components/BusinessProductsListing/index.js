@@ -430,7 +430,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return closeModalProductForm();
     },
     padding: "0",
-    isProductForm: true
+    isProductForm: true,
+    disableOverflowX: true
   }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45,
     count: 8

@@ -153,6 +153,12 @@ Object.defineProperty(exports, "CategoriesLayoutGroceries", {
     return _groceries.BusinessProductsCategories;
   }
 });
+Object.defineProperty(exports, "Checkbox", {
+  enumerable: true,
+  get: function get() {
+    return _Checkbox.Checkbox;
+  }
+});
 Object.defineProperty(exports, "Checkout", {
   enumerable: true,
   get: function get() {
@@ -705,3 +711,5 @@ var _Buttons = require("./src/styles/Buttons");
 var _Inputs = require("./src/styles/Inputs");
 
 var _Select = require("./src/styles/Select");
+
+var _Checkbox = require("../../styles/Checkbox");

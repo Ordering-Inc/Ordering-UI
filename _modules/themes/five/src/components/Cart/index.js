@@ -555,7 +555,8 @@ var CartUI = function CartUI(props) {
     closeOnBackdrop: true,
     onClose: function onClose() {
       return setModalIsOpen(false);
-    }
+    },
+    disableOverflowX: true
   }, /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     isCartProduct: true,
     productCart: curProduct,

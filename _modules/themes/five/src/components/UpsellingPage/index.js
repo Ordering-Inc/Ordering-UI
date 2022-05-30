@@ -214,7 +214,8 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     },
     width: "700px",
     padding: "0",
-    closeOnBackdrop: true
+    closeOnBackdrop: true,
+    disableOverflowX: true
   }, actualProduct && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     product: actualProduct,
     businessId: actualProduct.api.businessId,

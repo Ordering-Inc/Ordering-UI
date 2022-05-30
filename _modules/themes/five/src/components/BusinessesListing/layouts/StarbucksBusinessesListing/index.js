@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessesListing = void 0;
+exports.StarbucksBusinessesListing = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -13,33 +13,33 @@ var _FiMap = _interopRequireDefault(require("@meronex/icons/fi/FiMap"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _styles = require("./styles");
-
-var _Buttons = require("../../../../../styles/Buttons");
-
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
-
-var _Confirm = require("../../../../../components/Confirm");
-
-var _OrdersOption = require("../../../../../components/OrdersOption");
-
-var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
-var _Modal = require("../Modal");
-
-var _BusinessesMap = require("../BusinessesMap");
-
-var _BusinessController = require("../BusinessController");
-
-var _SearchBar = require("../SearchBar");
-
-var _AddressList = require("../AddressList");
-
-var _AddressForm = require("../AddressForm");
-
-var _BusinessInformation = require("../BusinessInformation");
-
 var _orderingComponents = require("ordering-components");
+
+var _Buttons = require("../../../../../../../styles/Buttons");
+
+var _NotFoundSource = require("../../../../../../../components/NotFoundSource");
+
+var _Confirm = require("../../../../../../../components/Confirm");
+
+var _OrdersOption = require("../../../../../../../components/OrdersOption");
+
+var _useWindowSize = require("../../../../../../../hooks/useWindowSize");
+
+var _Modal = require("../../../../../../six/src/components/Modal");
+
+var _BusinessesMap = require("../../../../../../six/src/components/BusinessesMap");
+
+var _BusinessController = require("../../../../../../six/src/components/BusinessController");
+
+var _SearchBar = require("../../../../../../six/src/components/SearchBar");
+
+var _AddressList = require("../../../../../../six/src/components/AddressList");
+
+var _AddressForm = require("../../../../../../six/src/components/AddressForm");
+
+var _BusinessInformation = require("../../../../../../six/src/components/BusinessInformation");
+
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -421,7 +421,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }));
 };
 
-var BusinessesListing = function BusinessesListing(props) {
+var StarbucksBusinessesListing = function StarbucksBusinessesListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessesListingUI
   });
@@ -429,4 +429,4 @@ var BusinessesListing = function BusinessesListing(props) {
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
 
-exports.BusinessesListing = BusinessesListing;
+exports.StarbucksBusinessesListing = StarbucksBusinessesListing;
