@@ -493,15 +493,14 @@ const SignUpFormUI = (props) => {
                     {t('SIGNUP_FOR_BUSINESS', 'Sign up for business')}
                   </Button>
                 )}
-                {/* {configs?.driver_signup_allow?.value === '1' && (
+                {configs?.driver_signup_allow?.value === '1' && (
                   <Button
                     color='primaryContrast'
                     onClick={() => handleGoToPage({ page: 'signup_driver' })}
-                    disabled
                   >
                     {t('SIGNUP_FOR_DRIVER', 'Sign up for driver')}
                   </Button>
-                )} */}
+                )}
               </BussinessAndDriverSignUp>
             )}
           {hasSocialLogin && (
