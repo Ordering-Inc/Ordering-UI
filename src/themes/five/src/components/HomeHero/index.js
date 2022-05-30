@@ -11,8 +11,8 @@ export const HomeHero = (props) => {
   // HomeLayout = configs
   const HomeLayoutConfig = {
     homepage_settings: {
-      layout: 'starbucks', // 'original', 'starbucks', 'red'
-      contentPosition: 'bottom' // 'left', 'right', top, 'bottom', 'center'
+      layout: 'original', // 'original', 'starbucks', 'red'
+      contentPosition: 'left' // 'left', 'right', top, 'bottom', 'center'
     }
   }
   const layout = HomeLayoutConfig?.homepage_settings?.layout !== undefined

@@ -2,42 +2,12 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const HeroContainerStyled = styled.div`
+  position: relative;
   width: 100%;
-  height: calc(100vh - 85px);
-
-  ${({ bgimage }) => bgimage && css`
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
-    object-fit: cover;
-    background-position: center;
-  `}
-
-  @media (min-width: 768px) {
-    height: 45vh;
-    overflow: hidden;
-  }
-
-  @media (min-width: 1024px) {
-    height: 550px;
-  }
-
-  @media (min-width: 1200px) {
-    height: 620px;
-  }
-
-  @media (min-width: 1440px) {
-    height: 70vh;
-  }
 `
 
 export const HeroContainer = (props) => {
   const style = {}
-  if (props.bgimage && !props.isClosed) {
-    style.backgroundImage = `url(${props.bgimage})`
-  } else {
-    style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage})`
-  }
-
   return (
     <HeroContainerStyled {...props} style={style}>
       {props.children}
@@ -49,17 +19,18 @@ export const ContentWrapper = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
     height: 100%;
     text-shadow: 0px 0px 5px #fff;
-    padding: 30px 20px 38vh;
+    padding: 35px 20px 15vh;
     box-sizing: border-box;
 
-    @media (min-width: 768px) {
+    @media (min-width: 530px) {
       padding: 33px 3.5vw;
       flex-direction: row;
+      justify-content: space-between;
     }
 `
 
@@ -70,12 +41,16 @@ export const Title = styled.h1`
   color: ${props => props.theme.colors.primary};
   opacity: 1;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 34px;
   line-height: 48px;
   margin-bottom: 15px;
   ${props => props.theme?.rtl && css`
       text-align: right;
   `}
+
+  @media (min-width: 330px) {
+    font-size: 36px;
+  }
 
   @media (min-width: 768px) {
     font-size: 42px;
@@ -94,18 +69,29 @@ export const Title = styled.h1`
 
 export const DiscountBars = styled.div`
   display: flex;
-  width: calc(100% + 40px);
+  width: calc(100% + 7px);
   overflow: hidden;
   justify-content: flex-end;
+  position: absolute;
+  bottom: 15px;  
+
   img {
     width: 80%;
     object-fit: cover;
   }
 
-  @media (min-width: 768px) {
-    position: absolute;
+  @media (min-width: 410px) {
+    width: 100%;
+    bottom: 2.7vh;
+    img {
+      width: 84%;
+    }
+  }
+
+  @media (min-width: 530px) {
     top: 3vh;
     right: 0;
+    bottom: unset;
     width: 100%;
     img {
       width: 50%;
@@ -120,8 +106,8 @@ export const DiscountBars = styled.div`
 `
 
 export const SloganContent = styled.div`
-  @media (min-width: 768px) {
-    margin-top: 80px;
+  @media (min-width: 530px) {
+    margin-top: 75px;
   }
 `
 
@@ -135,12 +121,7 @@ export const WrapOrderyType = styled.div`
   >div{
     &:first-child{
       svg {
-        width: 45px;
-      }
-    }
-    &:nth-child(2) {
-      svg {
-        height: 33px;
+        width: 30px;
       }
     }
   }
@@ -164,8 +145,8 @@ export const OrderTypeItem = styled.div`
   border-radius: 7.6px;
   box-shadow: rgb(177 177 177) 3px 3px 6px 0px inset, rgb(255 255 255 / 50%) -3px -3px 6px 1px inset;
   svg {
-    height: 33px;
-    width: 25px;
+    height: 34px;
+    width: 28px;
     fill: ${props => props.theme.colors.primary};
   }
 
@@ -198,4 +179,31 @@ export const FoodLocation = styled.div`
     height: fit-content;
     fill: gray;
   }
+`
+export const HomeBack =styled.div`
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  height: fit-content;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1024px) {
+    height: 72vh;
+    max-height: 650px;
+  } 
+
+  @media (min-width: 1440px) {
+    max-height: unset;
+    height: 900px;
+  }
+`
+export const HomeContentWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `
