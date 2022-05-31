@@ -117,12 +117,5 @@
     "keywords": "test, dummy, data",
     "robots": "index, follow",
     "canonicalUrl": ""
-  },
-  "signup_driver": {
-    "title": "SignUp for driver",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "index, follow",
-    "canonicalUrl": ""
   }
 }
