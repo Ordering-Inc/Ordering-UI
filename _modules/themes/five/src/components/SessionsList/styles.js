@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.SessionsWrapper = exports.SessionsListContainer = exports.SessionItem = exports.SeessionDelete = exports.NoMessage = exports.DurationWrapper = void 0;
+exports.Title = exports.SessionsWrapper = exports.SessionsListContainer = exports.SessionItem = exports.SeessionDelete = exports.NoSessionsContainer = exports.NoMessage = exports.DurationWrapper = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21,7 +21,7 @@ var Title = _styledComponents.default.h1(_templateObject2 || (_templateObject2 =
 
 exports.Title = Title;
 
-var SessionItem = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 20px;\n  border-bottom: 1px solid ", ";\n"])), function (props) {
+var SessionItem = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 20px;\n  border-bottom: 1px solid ", ";\n  \n  > p.current {\n    flex: 1;\n    font-weight: 700;\n    font-size: 14px;\n    margin: 0 15px;\n  }\n"])), function (props) {
   return props.theme.colors.gray200;
 });
 
@@ -48,3 +48,7 @@ exports.NoMessage = NoMessage;
 var SessionsWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  > button {\n    width: 90%;\n    margin: 30px auto 0 auto;\n    height: 44px;\n  }\n\n  @media (min-width: 768px) {\n    > button {\n      width: 65%;\n    }\n  }\n"])));
 
 exports.SessionsWrapper = SessionsWrapper;
+
+var NoSessionsContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  > button {\n    height: 44px;\n    margin-top: 50px;\n  }\n"])));
+
+exports.NoSessionsContainer = NoSessionsContainer;

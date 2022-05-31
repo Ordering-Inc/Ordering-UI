@@ -63,6 +63,10 @@ var SessionsListUI = function SessionsListUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parseDate = _useUtils2[0].parseDate;
@@ -84,12 +88,12 @@ var SessionsListUI = function SessionsListUI(props) {
       alertState = _useState4[0],
       setAlertState = _useState4[1];
 
-  var onDeleteSession = function onDeleteSession(sessionId) {
+  var onDeleteSession = function onDeleteSession(session) {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_SESSION', 'Are you sure to delete this session?'),
       handleOnAccept: function handleOnAccept() {
-        handleDeleteSession(sessionId);
+        handleDeleteSession(session);
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
@@ -118,7 +122,7 @@ var SessionsListUI = function SessionsListUI(props) {
       });
     }
   }, [actionState.error]);
-  return /*#__PURE__*/_react.default.createElement(_styles.SessionsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SESSIONS', 'Sessions')), sessionsList.loading ? _toConsumableArray(Array(5).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_styles.SessionsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SESSIONS', 'Sessions')), (user === null || user === void 0 ? void 0 : user.session_strategy) === 'jwt_session' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, sessionsList.loading ? _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SessionItem, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -131,9 +135,11 @@ var SessionsListUI = function SessionsListUI(props) {
   }) : sessionsList.sessions.length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SessionsWrapper, null, sessionsList.sessions.map(function (session) {
     return /*#__PURE__*/_react.default.createElement(_styles.SessionItem, {
       key: session.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.DurationWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, parseDate(session.created_at)), /*#__PURE__*/_react.default.createElement("span", null, "-"), /*#__PURE__*/_react.default.createElement("p", null, parseDate(session.valid_thru))), /*#__PURE__*/_react.default.createElement(_styles.SeessionDelete, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.DurationWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, parseDate(session.created_at)), /*#__PURE__*/_react.default.createElement("span", null, "-"), /*#__PURE__*/_react.default.createElement("p", null, parseDate(session.valid_thru))), session.current && /*#__PURE__*/_react.default.createElement("p", {
+      className: "current"
+    }, "(", t('CURRENT', 'Current'), ")"), /*#__PURE__*/_react.default.createElement(_styles.SeessionDelete, {
       onClick: function onClick() {
-        return onDeleteSession(session.id);
+        return onDeleteSession(session);
       }
     }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)));
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -142,7 +148,12 @@ var SessionsListUI = function SessionsListUI(props) {
     onClick: function onClick() {
       return onDeleteAllSessions();
     }
-  }, t('DELETE_ALL_SESSIONS', 'Delete all sessions'))) : /*#__PURE__*/_react.default.createElement(_styles.NoMessage, null, t('YOU_DONT_HAVE_ANY_SESSIONS', 'You don\'t have any sessions')), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+  }, t('DELETE_ALL_SESSIONS', 'Delete all sessions'))) : /*#__PURE__*/_react.default.createElement(_styles.NoMessage, null, t('YOU_DONT_HAVE_ANY_SESSIONS', 'You don\'t have any sessions'))) : /*#__PURE__*/_react.default.createElement(_styles.NoSessionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.NoMessage, null, t('YOU_DONT_HAVE_ENABLED_THE_SESSIONS', 'You don\'t have enabled the sessions, please active them to have a better control of your sessions.')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    onClick: function onClick() {
+      return onDeleteAllSessions();
+    }
+  }, t('ACTIVE_SESSIONS', 'Active sessions'))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
