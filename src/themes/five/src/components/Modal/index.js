@@ -25,7 +25,8 @@ const ModalUI = (props) => {
     hideCloseDefault,
     isProductForm,
     authModal,
-    onRemove
+    onRemove,
+    disableOverflowX
   } = props
   const [, t] = useLanguage()
 
@@ -55,6 +56,7 @@ const ModalUI = (props) => {
       height={props.height}
       padding={props.padding}
       isTransparent={isTransparent}
+      disableOverflowX={disableOverflowX}
     >
       {isProductForm && (
         <ModalBackHeader />
