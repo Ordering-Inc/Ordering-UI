@@ -28,7 +28,8 @@ export const ListenPageChanges = ({ children }) => {
     business_slug: '/:store',
     forgot_password: '/password/forgot',
     reset_password: '/password/reset',
-    help: '/help'
+    help: '/help',
+    signup_driver: '/signup-driver'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

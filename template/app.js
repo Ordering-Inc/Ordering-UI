@@ -6,9 +6,10 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
+import { useTheme } from 'styled-components'
 import { useSession, useLanguage, useOrder, Analytics, useConfig, FacebookPixel } from 'ordering-components'
 
-import { Header } from '../src/components/Header'
+import { Header } from '../src/themes/five/src/components/Header'
 import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -31,6 +32,7 @@ import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
 import { Help } from './pages/Help'
+import { SignUpDriver } from './pages/SignUpDriver'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -39,6 +41,7 @@ import settings from './config.json'
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
+  const theme = useTheme()
   const [orderStatus] = useOrder()
   const [{ configs }] = useConfig()
   const [, t] = useLanguage()
@@ -64,6 +67,13 @@ export const App = () => {
   const isFooterPage = location.pathname === '/pages/footer'
 
   const handleSuccessSignup = (user) => {
+    if (!user?.enabled && configs?.driver_signup_enabled_default?.value === '0') {
+      setAlertState({
+        open: true,
+        content: [t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')]
+      })
+      return
+    }
     login({
       user,
       token: user?.session?.access_token
@@ -271,6 +281,19 @@ export const App = () => {
                         />
                       )}
                   </Route>
+                  <Route exact path='/signup-driver'>
+                    {!auth ? (
+                      <SignUpDriver
+                        elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
+                        useLoginByCellphone
+                        useChekoutFileds
+                        handleSuccessSignup={handleSuccessSignup}
+                        isRecaptchaEnable
+                      />
+                    ) : (
+                      <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                    )}
+                  </Route>
                   <Route exact path='/:store'>
                     <BusinessProductsList />
                   </Route>
@@ -286,11 +309,12 @@ export const App = () => {
             <Alert
               title={t('INFORMATION', 'Information')}
               content={alertState.content}
+              links={alertState.links}
               acceptText={t('ACCEPT', 'Accept')}
               open={alertState.open}
               onClose={() => closeAlert()}
               onCancel={() => closeAlert()}
-              onAccept={() => acceptAlert()}
+              onAccept={() => alertState?.isOnlyAlert ? closeAlert() : acceptAlert()}
               closeOnBackdrop={false}
             />
           </>

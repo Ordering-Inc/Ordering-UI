@@ -24,7 +24,6 @@ export const AutoscrollContainer = styled.span`
   }
 
   .right-autoscroll{
-    box-shadow: 0px 3px 6px #00000029;
     border: 1px solid #CCCCCC;
     z-index: 100;
     ${props => props.theme?.rtl ? css`
@@ -34,7 +33,6 @@ export const AutoscrollContainer = styled.span`
     `}
   }
   .left-autoscroll{
-    box-shadow: 0px 3px 6px #00000029;
     border: 1px solid #CCCCCC;
     z-index: 100;
     ${props => props.theme?.rtl ? css`

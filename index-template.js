@@ -27,6 +27,7 @@ import emptyActiveOrders from './template/assets/images/empty-active-orders.svg'
 import emptyPastOrders from './template/assets/images/empty-past-orders.svg'
 import creatingOrder from './template/assets/images/order-creating.png'
 import successOrder from './template/assets/images/order-sucess.png'
+import driverSignUpHero from './template/assets/images/driver-signup-hero.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -84,7 +85,8 @@ theme.images = {
     creatingOrder,
     successOrder,
     leftArrow,
-    rightArrow
+    rightArrow,
+    driverSignUpHero
   },
 
   order: {
