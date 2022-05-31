@@ -2,6 +2,30 @@ import React, { useEffect, useState, useCallback } from 'react'
 import FiMap from '@meronex/icons/fi/FiMap'
 import Skeleton from 'react-loading-skeleton'
 import {
+  useOrder,
+  useSession,
+  useLanguage,
+  useConfig,
+  useUtils,
+  BusinessList as BusinessListController
+} from 'ordering-components'
+
+import { Button } from '../../../../../../../styles/Buttons'
+import { NotFoundSource } from '../../../../../../../components/NotFoundSource'
+import { Alert } from '../../../../../../../components/Confirm'
+// import { BusinessTypeFilter } from '../../../../../../../components/BusinessTypeFilter'
+import { OrdersOption } from '../../../../../../../components/OrdersOption'
+import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
+
+import { Modal } from '../../../../../../six/src/components/Modal'
+import { BusinessesMap } from '../../../../../../six/src/components/BusinessesMap'
+import { BusinessController } from '../../../../../../six/src/components/BusinessController'
+import { SearchBar } from '../../../../../../six/src/components/SearchBar'
+import { AddressList } from '../../../../../../six/src/components/AddressList'
+import { AddressForm } from '../../../../../../six/src/components/AddressForm'
+import { BusinessInformation } from '../../../../../../six/src/components/BusinessInformation'
+
+import {
   BusinessContainer,
   BusinessList,
   ErrorMessage,
@@ -11,30 +35,6 @@ import {
   BusinessContent,
   MapWrapper
 } from './styles'
-
-import { Button } from '../../../../../styles/Buttons'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
-import { Alert } from '../../../../../components/Confirm'
-// import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
-import { OrdersOption } from '../../../../../components/OrdersOption'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
-
-import { Modal } from '../Modal'
-import { BusinessesMap } from '../BusinessesMap'
-import { BusinessController } from '../BusinessController'
-import { SearchBar } from '../SearchBar'
-import { AddressList } from '../AddressList'
-import { AddressForm } from '../AddressForm'
-import { BusinessInformation } from '../BusinessInformation'
-
-import {
-  useOrder,
-  useSession,
-  useLanguage,
-  useConfig,
-  useUtils,
-  BusinessList as BusinessListController
-} from 'ordering-components'
 
 const PIXELS_TO_SCROLL = 500
 const BusinessesListingUI = (props) => {
@@ -343,7 +343,7 @@ const BusinessesListingUI = (props) => {
   )
 }
 
-export const BusinessesListing = (props) => {
+export const StarbucksBusinessesListing = (props) => {
   const businessListingProps = {
     ...props,
     UIComponent: BusinessesListingUI

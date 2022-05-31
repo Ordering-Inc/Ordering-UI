@@ -3,7 +3,7 @@ import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrd
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
-import { convertHoursToMinutes } from '../../../../../utils'
+import { convertHoursToMinutes, shape } from '../../../../../utils'
 
 import {
   ContainerCard,
@@ -23,7 +23,8 @@ import {
   BusinessLogoWrapper,
   BusinessStarInfo,
   InfoLength,
-  InfoDescription
+  InfoDescription,
+  RibbonBox
   // CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
@@ -61,20 +62,20 @@ const BusinessControllerUI = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
-  
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  
+
   // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   // }
-  
+
   const handleBusinessClick = () => {
     if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business)
     else handleClick(business)
   }
-  
+
   const hasInformationLength = (business?.available_drivers?.length + business?.busy_drivers?.length + business?.active_orders?.length) > 0
-  
+
   if (typeButton) {
     return (
       <ContainerCard typeButton={typeButton}>
@@ -93,6 +94,15 @@ const BusinessControllerUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton} isCustomerMode={isCustomerMode && hasInformationLength} firstCard={firstCard} minWidthEnabled={minWidthEnabled}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
+          {business?.ribbon?.enabled && (
+            <RibbonBox
+              bgColor={business?.ribbon?.color}
+              isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}
+              isCapsule={business?.ribbon?.shape === shape?.capsuleShape}
+            >
+              {business?.ribbon?.text}
+            </RibbonBox>
+          )}
           <BusinessHero>
             {isSkeleton ? (
               <Skeleton height={isCustomerMode ? 100 : 140} />
@@ -119,7 +129,7 @@ const BusinessControllerUI = (props) => {
           </BusinessHero>
           <BusinessContent>
             <BusinessLogoWrapper>
-            <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
+              <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
                 {!isSkeleton && (businessLogo || business?.logo || theme.images?.dummies?.businessLogo) ? (
                   <BusinessLogo bgimage={optimizeImage((businessLogo || business?.logo || theme.images?.dummies?.businessLogo), 'h_200,c_limit')} />
                 ) : (
@@ -128,14 +138,14 @@ const BusinessControllerUI = (props) => {
               </WrapperBusinessLogo>
               <BusinessStarInfo>
                 {!isSkeleton ? (
-                    (businessReviews ?? business?.reviews?.total) > 0 && (
-                      <div className='reviews'>
-                        <BisStar />
-                        <span>{(businessReviews ?? business?.reviews?.total)}</span>
-                      </div>
-                    )) : (
-                    <Skeleton width={50} />
-                  )
+                  (businessReviews ?? business?.reviews?.total) > 0 && (
+                    <div className='reviews'>
+                      <BisStar />
+                      <span>{(businessReviews ?? business?.reviews?.total)}</span>
+                    </div>
+                  )) : (
+                  <Skeleton width={50} />
+                )
                 }
               </BusinessStarInfo>
             </BusinessLogoWrapper>

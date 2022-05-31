@@ -62,9 +62,11 @@ import { ProductIngredient } from './src/components/ProductIngredient'
 import { PhoneAutocomplete } from './src/components/PhoneAutocomplete'
 import { ProductOption } from './src/components/ProductOption'
 import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
+import { Promotions } from './src/components/Promotions'
 import { RenderProductsLayout } from './src/components/RenderProductsLayout'
 import { ResetPassword } from './src/components/ResetPassword'
 import { SearchBar } from './src/components/SearchBar'
+import { SessionsList } from './src/components/SessionsList'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SignUpBusiness } from './src/components/SignUpBusiness'
@@ -80,9 +82,11 @@ import { VerifyCodeForm } from './src/components/VerifyCodeForm'
 import { Wallets } from './src/components/Wallets'
 import { WalletTransactionItem } from './src/components/WalletTransactionItem'
 import { BusinessListingSearch } from './src/components/BusinessListingSearch'
+
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
+import { Checkbox } from '../../styles/Checkbox'
 
 export {
   AccordionDropdown,
@@ -149,10 +153,12 @@ export {
   ProductItemAccordion,
   ProductOption,
   ProductOptionSubOption,
+  Promotions,
   PhoneAutocomplete,
   RenderProductsLayout,
   ResetPassword,
   SearchBar,
+  SessionsList,
   SidebarMenu,
   SignUpForm,
   SignUpBusiness,
@@ -172,5 +178,6 @@ export {
   Button,
   Input,
   TextArea,
-  Select
+  Select,
+  Checkbox
 }

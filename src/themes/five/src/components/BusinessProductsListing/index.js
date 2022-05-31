@@ -12,9 +12,7 @@ import {
   useLanguage,
   useOrder,
   useSession,
-  useUtils,
-  useToast,
-  ToastType
+  useUtils
 } from 'ordering-components'
 
 import {
@@ -38,7 +36,7 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { RenderProductsLayout } from '../RenderProductsLayout'
 import { Cart } from '../Cart'
-
+import { Alert } from '../../../../../components/Confirm'
 const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
@@ -65,14 +63,16 @@ const BusinessProductsListingUI = (props) => {
     featuredProducts,
     handleChangeSortBy,
     isCartOnProductsList,
-    errorQuantityProducts
+    errorQuantityProducts,
+    multiRemoveProducts,
+    setAlertState,
+    alertState
   } = props
 
   const { business, loading, error } = businessState
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }, { clearCart }] = useOrder()
-  const [, { showToast }] = useToast()
+  const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const [{ auth }] = useSession()
@@ -84,7 +84,7 @@ const BusinessProductsListingUI = (props) => {
   // const [openUpselling, setOpenUpselling] = useState(false)
   // const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
-  const [isCartOpen, setIsCartOpen] = useState(false)
+  const [, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
   const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
 
@@ -153,6 +153,12 @@ const BusinessProductsListingUI = (props) => {
   const handleGoToBusinessList = () => {
     events.emit('go_to_page', { page: 'search' })
   }
+  const adjustBusiness = async (adjustBusinessId) => {
+    const _carts = carts?.[adjustBusinessId]
+    const products = carts?.[adjustBusinessId]?.products
+    const unavailableProducts = products.filter(product => product.valid !== true)
+    unavailableProducts.length > 0 && multiRemoveProducts && await multiRemoveProducts(unavailableProducts, _carts)
+  }
 
   useEffect(() => {
     if (categoryId && productId && isInitialRender) {
@@ -196,11 +202,10 @@ const BusinessProductsListingUI = (props) => {
   }, [business?.schedule])
 
   useEffect(() => {
-    const removeCardId = JSON.parse(window.localStorage.getItem('remove-cartId'))
-    if (currentCart && removeCardId) {
-      clearCart(removeCardId)
-      localStorage.removeItem('remove-cartId')
-      showToast(ToastType.Info, t('PRODUCT_REMOVED', 'Products removed from cart'))
+    const adjustBusinessId = JSON.parse(window.localStorage.getItem('adjust-businessId'))
+    if (currentCart && adjustBusinessId) {
+      localStorage.removeItem('adjust-businessId')
+      adjustBusiness(adjustBusinessId)
     }
   }, [currentCart])
 
@@ -339,6 +344,7 @@ const BusinessProductsListingUI = (props) => {
         onClose={() => closeModalProductForm()}
         padding='0'
         isProductForm
+        disableOverflowX
       >
 
         {productModal.loading && !productModal.error && (
@@ -369,7 +375,13 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </Modal>
-
+      <Alert
+        title={t('ERROR', 'Error')}
+        open={alertState.open}
+        content={alertState.content}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+      />
       {/* {currentCart?.products && openUpselling && (
         <UpsellingPage
           businessId={currentCart?.business_id}

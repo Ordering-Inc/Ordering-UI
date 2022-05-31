@@ -50,23 +50,6 @@ export const WrapAllCategories = styled.div`
     }
   }
 
-  .category-description {
-    margin-left: 15px;
-    margin-bottom: 10px;
-    display: flex;
-    p {
-      margin: 0;
-      color: #909BA9;
-      white-space: pre;
-    }
-    span {
-      color: ${props => props.theme.colors.primary};
-      text-decoration: underline;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-  }
-
   h3 {
     font-weight: 600;
     font-size: 24px;
@@ -80,6 +63,27 @@ export const WrapAllCategories = styled.div`
       margin: 0px;
     }
   }
+`
+
+export const CategoryDescription = styled.div`
+  margin-left: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+    p {
+      margin: 0;
+      color: #909BA9;
+      white-space: pre;
+      max-width: ${({ maxWidth }) => maxWidth ? `${maxWidth - 200}px` : 'initial'};
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    span {
+      color: ${props => props.theme.colors.primary};
+      text-decoration: underline;
+      margin-left: 10px;
+      cursor: pointer;
+    }
 `
 
 export const WrapperNotFound = styled.div`
@@ -104,6 +108,11 @@ export const DescriptionModalContainer = styled.div`
   }
   p{
     white-space: pre;
+    overflow: auto;
+    ::-webkit-scrollbar {
+      width: 0px;
+      height: 6px;
+    }
   }
 `
 

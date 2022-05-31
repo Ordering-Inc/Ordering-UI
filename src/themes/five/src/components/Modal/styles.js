@@ -20,7 +20,7 @@ export const ModalDialog = styled.div`
   height: ${({ height }) => height || '100%'};;
   max-height: 100vh;
   overflow: auto;
-
+  overflow-x: ${({ disableOverflowX }) => disableOverflowX ? 'hidden' : 'auto'};
   @media (min-width: 769px) {
     width: ${({ width }) => width || '50%'};
     max-height: 90vh;
