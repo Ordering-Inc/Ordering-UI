@@ -56,7 +56,9 @@ export const SearchBar = (props) => {
   }, [search])
 
   useEffect(() => {
-    el.current.focus()
+    if (props.forceFocus) {
+      el.current.focus()
+    }
   }, [props.forceFocus])
 
   return (
