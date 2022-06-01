@@ -1,23 +1,21 @@
 import React from 'react'
 import { useConfig } from 'ordering-components'
+
 import { OriginalBusinessesListing } from './layouts/OriginalBusinessesListing'
+import { GridBusinessesListing } from './layouts/GridBusinessesListing'
+import { MapBusinessesListing } from './layouts/MapBusinessesListing'
+import { ListingBusinessesListing } from './layouts/ListingBusinessesListing'
 import { RedBusinessesListing } from './layouts/RedBusinessesListing'
-import { StarbucksBusinessesListing } from './layouts/StarbucksBusinessesListing'
 
 export const BusinessesListing = (props) => {
   const [{ configs }] = useConfig()
 
-  // *****************************
-  // HomeLayout = configs
-  const HomeLayoutConfig = {
-    homepage_settings: {
-      layout: 'red', // 'original', 'starbucks', 'red'
-      contentPosition: 'bottom' // 'left', 'right', top, 'bottom', 'center'
-    }
-  }
-  const layout = HomeLayoutConfig?.homepage_settings?.layout !== undefined
-    ? HomeLayoutConfig?.homepage_settings?.layout : 'original'
-  // *****************************
+  // *************stagaing code****************
+  // props.AdminSettings = configs
+  const layout = props?.AdminSettings?.businesses_listening_settings?.layout !== undefined
+    ? props?.AdminSettings?.businesses_listening_settings?.layout : props?.AdminSettings?.homepage_settings?.layout !== undefined
+      ? props?.AdminSettings?.homepage_settings?.layout : 'original'
+  // **************stagaing code***************
 
   const BusinessesListingLayoutProps = {
     ...props,
@@ -27,7 +25,9 @@ export const BusinessesListing = (props) => {
   return (
     <>
       {(layout === 'original') && <OriginalBusinessesListing {...BusinessesListingLayoutProps} />}
-      {(layout === 'starbucks') && <StarbucksBusinessesListing {...BusinessesListingLayoutProps} />}
+      {(layout === 'grid') && <GridBusinessesListing {...BusinessesListingLayoutProps} />}
+      {(layout === 'map' || layout === 'starbucks') && <MapBusinessesListing {...BusinessesListingLayoutProps} />}
+      {(layout === 'listing') && <ListingBusinessesListing {...BusinessesListingLayoutProps} />}
       {(layout === 'red') && <RedBusinessesListing {...BusinessesListingLayoutProps} />}
     </>
   )

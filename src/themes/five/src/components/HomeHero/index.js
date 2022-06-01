@@ -7,23 +7,17 @@ import { StarbucksHomeHero } from './layouts/StarbucksHomeHero'
 export const HomeHero = (props) => {
   const [{ configs }] = useConfig()
 
-  // *****************************
-  // HomeLayout = configs
-  const HomeLayoutConfig = {
-    homepage_settings: {
-      layout: 'original', // 'original', 'starbucks', 'red'
-      contentPosition: 'left' // 'left', 'right', top, 'bottom', 'center'
-    }
-  }
-  const layout = HomeLayoutConfig?.homepage_settings?.layout !== undefined
-    ? HomeLayoutConfig?.homepage_settings?.layout : 'original'
-  // *****************************
+  // *************stagaing code****************
+  // props.AdminSettings = configs
+  const layout = props?.AdminSettings?.homepage_settings?.layout !== undefined
+    ? props?.AdminSettings?.homepage_settings?.layout : 'original'
+  // **************stagaing code***************
 
   const homeLayoutProps = {
     ...props,
     layout: layout,
-    contentPosition: (HomeLayoutConfig?.homepage_settings?.contentPosition !== undefined)
-      ? HomeLayoutConfig?.homepage_settings?.contentPosition : 'left'
+    contentPosition: (props?.AdminSettings?.homepage_settings?.contentPosition !== undefined)
+      ? props?.AdminSettings?.homepage_settings?.contentPosition : 'left'
   }
 
   return (

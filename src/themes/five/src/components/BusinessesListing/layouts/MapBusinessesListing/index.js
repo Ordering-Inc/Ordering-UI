@@ -343,7 +343,7 @@ const BusinessesListingUI = (props) => {
   )
 }
 
-export const StarbucksBusinessesListing = (props) => {
+export const MapBusinessesListing = (props) => {
   const businessListingProps = {
     ...props,
     UIComponent: BusinessesListingUI
