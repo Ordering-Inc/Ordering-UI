@@ -83,6 +83,7 @@ export const CategoryDescription = styled.div`
       text-decoration: underline;
       margin-left: 10px;
       cursor: pointer;
+      white-space: nowrap;
     }
 `
 
