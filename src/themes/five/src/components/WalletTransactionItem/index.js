@@ -37,7 +37,7 @@ export const WalletTransactionItem = (props) => {
             fontWeight: 'bold'
           }}
         >
-          {item?.amount > 0 && '+ '}{parsePrice(item?.amount)}
+          {item?.amount > 0 && '+ '}{type !== 'credit_point' ? parsePrice(item?.amount) : item?.amount}
         </span>
       </DateBlock>
       <MessageBlock>

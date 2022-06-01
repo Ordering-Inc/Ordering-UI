@@ -22,7 +22,8 @@ import {
   Divider,
   Spinner,
   CommentContainer,
-  IconContainer
+  IconContainer,
+  NoValidProductMessage
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
@@ -225,6 +226,11 @@ const CartUI = (props) => {
                 onEditProduct={handleEditProduct}
               />
             ))}
+            {!cart?.valid_products && (
+              <NoValidProductMessage>
+                {t('REMOVE_NOT_AVAILABLE_CART_PRODUCTS', 'To continue with your checkout, please remove from your cart the products that are not available.')}
+              </NoValidProductMessage>
+            )}
             {cart?.valid_products && (
               <OrderBill isCheckout={isCheckout}>
                 <table className='order-info'>
