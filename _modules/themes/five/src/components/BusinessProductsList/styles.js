@@ -51,7 +51,7 @@ var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_temp
 
 exports.WrapAllCategories = WrapAllCategories;
 
-var CategoryDescription = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: flex-end;\n    p {\n      margin: 0;\n      color: #909BA9;\n      white-space: pre;\n      max-width: ", ";\n      overflow: hidden;\n      text-overflow: ellipsis;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n    }\n"])), function (_ref) {
+var CategoryDescription = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: flex-end;\n    p {\n      margin: 0;\n      color: #909BA9;\n      white-space: pre;\n      max-width: ", ";\n      overflow: hidden;\n      text-overflow: ellipsis;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n      white-space: nowrap;\n    }\n"])), function (_ref) {
   var maxWidth = _ref.maxWidth;
   return maxWidth ? "".concat(maxWidth - 200, "px") : 'initial';
 }, function (props) {

@@ -47,6 +47,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -133,7 +135,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     isCartOnProductsList: isCartOnProductsList
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
-  }, !isCustomLayout && /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  }, !isCustomLayout && /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, _extends({}, props, {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation,
@@ -144,7 +146,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     categoryState: categoryState,
     errorQuantityProducts: errorQuantityProducts,
     sortByValue: sortByValue
-  }), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
+  })), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayout, {
     component: "categories",

@@ -459,6 +459,12 @@ Object.defineProperty(exports, "SignUpBusiness", {
     return _SignUpBusiness.SignUpBusiness;
   }
 });
+Object.defineProperty(exports, "SignUpDriver", {
+  enumerable: true,
+  get: function get() {
+    return _SignUpDriver.SignUpDriver;
+  }
+});
 Object.defineProperty(exports, "SignUpForm", {
   enumerable: true,
   get: function get() {
@@ -681,6 +687,8 @@ var _SidebarMenu = require("./src/components/SidebarMenu");
 var _SignUpForm = require("./src/components/SignUpForm");
 
 var _SignUpBusiness = require("./src/components/SignUpBusiness");
+
+var _SignUpDriver = require("./src/components/SignUpDriver");
 
 var _SingleProductCard = require("./src/components/SingleProductCard");
 

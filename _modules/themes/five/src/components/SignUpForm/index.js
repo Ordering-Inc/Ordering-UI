@@ -76,7 +76,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _configs$facebook_log, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _configs$google_login, _configs$facebook_log2, _configs$facebook_log3, _configs$facebook_id, _configs$google_login2, _configs$apple_login_, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _formMethods$errors8, _formMethods$errors9, _formMethods$errors9$, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _formMethods$errors16, _formMethods$errors17, _formMethods$errors18, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _formMethods$errors19, _formMethods$errors20, _formMethods$errors21, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_2, _configs$google_login3, _props$afterComponent, _props$afterElements;
+  var _configs$facebook_log, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _configs$google_login, _configs$facebook_log2, _configs$facebook_log3, _configs$facebook_id, _configs$google_login2, _configs$apple_login_, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _formMethods$errors8, _formMethods$errors9, _formMethods$errors9$, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _formMethods$errors16, _formMethods$errors17, _formMethods$errors18, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _formMethods$errors19, _formMethods$errors20, _formMethods$errors21, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$driver_signu2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_2, _configs$google_login3, _props$afterComponent, _props$afterElements;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -445,7 +445,14 @@ var SignUpFormUI = function SignUpFormUI(props) {
         page: 'signup_business'
       });
     }
-  }, t('SIGNUP_FOR_BUSINESS', 'Sign up for business'))), hasSocialLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, null, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
+  }, t('SIGNUP_FOR_BUSINESS', 'Sign up for business')), (configs === null || configs === void 0 ? void 0 : (_configs$driver_signu2 = configs.driver_signup_allow) === null || _configs$driver_signu2 === void 0 ? void 0 : _configs$driver_signu2.value) === '1' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primaryContrast",
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'signup_driver'
+      });
+    }
+  }, t('SIGNUP_FOR_DRIVER', 'Sign up for driver'))), hasSocialLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, null, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
   }, isFacebookLogin && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id3 = configs.facebook_id) === null || _configs$facebook_id3 === void 0 ? void 0 : _configs$facebook_id3.value,

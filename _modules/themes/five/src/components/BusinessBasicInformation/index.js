@@ -19,8 +19,6 @@ var _Modal = require("../Modal");
 
 var _BusinessInformation = require("../BusinessInformation");
 
-var _SearchBar = require("../SearchBar");
-
 var _BusinessReviews = require("../BusinessReviews");
 
 var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCircle"));
@@ -32,6 +30,10 @@ var _utils = require("../../../../../utils");
 var _Select = require("../../styles/Select");
 
 var _MomentContent = require("../MomentContent");
+
+var _CgSearch = _interopRequireDefault(require("@meronex/icons/cg/CgSearch"));
+
+var _SearchProducts = require("../SearchProducts");
 
 var _styles = require("./styles");
 
@@ -70,7 +72,7 @@ _dayjs.default.extend(_isBetween.default);
 var types = ['food', 'laundry', 'alcohol', 'groceries'];
 
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _configs$preorder_sta, _props$beforeElements, _props$beforeComponen, _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc, _theme$defaultLanguag, _businessState$busine7, _theme$images, _theme$images$dummies, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
+  var _configs$preorder_sta, _props$beforeElements, _props$beforeComponen, _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc, _theme$images, _theme$images$dummies, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       businessState = props.businessState,
@@ -112,6 +114,11 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       isPreOrder = _useState4[0],
       setIsPreOrder = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      openSearchProducts = _useState6[0],
+      setOpenSearchProducts = _useState6[1];
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -160,6 +167,9 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       timeout && clearTimeout(timeout);
     };
   }, [businessState === null || businessState === void 0 ? void 0 : businessState.business]);
+  (0, _react.useEffect)(function () {
+    document.body.style.overflow = openSearchProducts ? 'hidden' : 'auto';
+  }, [openSearchProducts]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -168,7 +178,13 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
+  }), openSearchProducts && /*#__PURE__*/_react.default.createElement(_SearchProducts.SearchProducts, _extends({}, props, {
+    onClose: function onClose() {
+      handleChangeSearch('');
+      setOpenSearchProducts(false);
+    },
+    business: businessState.business
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h2", {
     className: "bold"
@@ -219,12 +235,11 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     }
   }, t('REVIEWS', 'Reviews'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: isCustomerMode ? 100 : 150
-  })))), ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
-    onSearch: handleChangeSearch,
-    search: searchValue,
-    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SEARCH_PRODUCTS) || 'Search Products'),
-    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.lazy_load_products_recommended
-  }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  })))), ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_styles.SearchIconWrapper, {
+    onClick: function onClick() {
+      return setOpenSearchProducts(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CgSearch.default, null)), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     notAsync: true,
     notReload: true,
     options: sortByOptions,

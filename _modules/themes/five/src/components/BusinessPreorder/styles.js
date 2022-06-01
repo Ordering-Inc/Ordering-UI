@@ -57,7 +57,15 @@ var PreorderTypeWrapper = _styledComponents.default.div(_templateObject6 || (_te
 
 exports.PreorderTypeWrapper = PreorderTypeWrapper;
 
-var SelectWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  > div {\n    width: 100%;\n    background-color: #F8F9FA!important;\n    height: 44px;\n    border: none;\n    border-radius: 7.6px;\n    color: #909BA9 !important;\n\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n      justify-content: space-between;\n    }\n    > div#list {\n      width: 100%;\n      background-color: #F8F9FA!important;\n      border: 1px solid #F8F9FA;\n      border-radius: 7.6px;\n      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n    }\n  }\n"])));
+var SelectWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  > div {\n    width: 100%;\n    background-color: #F8F9FA!important;\n    height: 44px;\n    border: none;\n    border-radius: 7.6px;\n    color: #909BA9 !important;\n\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n      justify-content: space-between;\n    }\n    > div#list {\n      width: 100%;\n      background-color: ", " !important;\n      border: 1px solid ", ";\n      border-radius: 7.6px;\n      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n\n      #item {\n        background-color: ", " !important;\n        &:hover {\n          background-color: ", " !important;\n        }\n      }\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.grayDividerColor;
+}, function (props) {
+  return props.theme.colors.grayDividerColor;
+}, function (props) {
+  return props.theme.colors.backgroundPage;
+}, function (props) {
+  return props.theme.colors.grayDividerColor;
+});
 
 exports.SelectWrapper = SelectWrapper;
 

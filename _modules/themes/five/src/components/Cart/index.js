@@ -348,7 +348,7 @@ var CartUI = function CartUI(props) {
       onDeleteProduct: handleDeleteClick,
       onEditProduct: handleEditProduct
     });
-  })), (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.OrderBill, {
+  })), !(cart !== null && cart !== void 0 && cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.NoValidProductMessage, null, t('REMOVE_NOT_AVAILABLE_CART_PRODUCTS', 'To continue with your checkout, please remove from your cart the products that are not available.')), (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.OrderBill, {
     isCheckout: isCheckout
   }, /*#__PURE__*/_react.default.createElement("table", {
     className: "order-info"
@@ -403,11 +403,11 @@ var CartUI = function CartUI(props) {
     }))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_ref2 = (_tax$summary$tax_afte2 = tax === null || tax === void 0 ? void 0 : (_tax$summary4 = tax.summary) === null || _tax$summary4 === void 0 ? void 0 : _tax$summary4.tax_after_discount) !== null && _tax$summary$tax_afte2 !== void 0 ? _tax$summary$tax_afte2 : tax === null || tax === void 0 ? void 0 : (_tax$summary5 = tax.summary) === null || _tax$summary5 === void 0 ? void 0 : _tax$summary5.tax) !== null && _ref2 !== void 0 ? _ref2 : 0)));
   })), (cart === null || cart === void 0 ? void 0 : (_cart$fees = cart.fees) === null || _cart$fees === void 0 ? void 0 : _cart$fees.length) > 0 && (cart === null || cart === void 0 ? void 0 : (_cart$fees2 = cart.fees) === null || _cart$fees2 === void 0 ? void 0 : _cart$fees2.filter(function (fee) {
     return !(fee.fixed === 0 && fee.percentage === 0);
-  }).map(function (fee) {
-    var _ref3, _fee$summary, _fee$summary$percenta, _fee$summary2, _fee$summary3;
+  }).map(function (fee, i) {
+    var _fee$id, _ref3, _fee$summary, _fee$summary$percenta, _fee$summary2, _fee$summary3;
 
     return /*#__PURE__*/_react.default.createElement("tr", {
-      key: fee.id
+      key: (_fee$id = fee.id) !== null && _fee$id !== void 0 ? _fee$id : i
     }, /*#__PURE__*/_react.default.createElement("td", {
       className: "icon"
     }, fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), "(", (fee === null || fee === void 0 ? void 0 : fee.fixed) > 0 && "".concat(parsePrice(fee === null || fee === void 0 ? void 0 : fee.fixed)).concat(fee.percentage > 0 ? ' + ' : ''), fee.percentage > 0 && "".concat(fee.percentage, "%"), ")", /*#__PURE__*/_react.default.createElement(_styles.IconContainer, {

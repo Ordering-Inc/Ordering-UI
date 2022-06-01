@@ -87,7 +87,7 @@ var DriverTipsUI = function DriverTipsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, {
     id: "driver-tip-container"
-  }, !isDriverTipUseCustom ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperTips, null, driverTipsOptions.map(function (option, i) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperTips, null, driverTipsOptions.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TipCard, {
       key: i,
       className: "".concat(option === optionSelected ? 'active' : ''),
@@ -95,7 +95,7 @@ var DriverTipsUI = function DriverTipsUI(props) {
         return handlerChangeOption(option);
       }
     }, "".concat(isFixedPrice ? parsePrice(option) : "".concat(option, "%")));
-  })), !driverTipsOptions.includes(driverTip) && driverTip > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option'))) : /*#__PURE__*/_react.default.createElement(_styles.FormDriverTip, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  })), !driverTipsOptions.includes(driverTip) && driverTip > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')), isDriverTipUseCustom && /*#__PURE__*/_react.default.createElement(_styles.FormDriverTip, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "drivertip",
     type: "text",
     placeholder: placeholderCurrency,

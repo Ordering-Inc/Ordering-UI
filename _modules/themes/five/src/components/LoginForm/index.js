@@ -551,7 +551,8 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, t('CANCEL', 'Cancel'))), elementLinkToSignup && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
-    isPopup: isPopup
+    isPopup: isPopup,
+    className: "new-account"
   }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.NEW_ON_PLATFORM) || 'New on Ordering?')), elementLinkToSignup), hasSocialLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !props.isDisableButtons && !loginWithOtpState && (Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
