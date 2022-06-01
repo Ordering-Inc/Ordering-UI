@@ -265,14 +265,6 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {/* <tr>
-                      <td>
-                        <Divider />
-                      </td>
-                      <td>
-                        <Divider />
-                      </td>
-                    </tr> */}
                     {
                       cart?.offers?.filter(offer => offer?.target === 1)?.length > 0 &&
                       cart?.subtotal_with_discount > 0 &&
@@ -304,8 +296,8 @@ const CartUI = (props) => {
                       ))
                     }
                     {
-                      cart?.fees?.length > 0 && cart?.fees?.filter(fee => !(fee.fixed === 0 && fee.percentage === 0)).map(fee => (
-                        <tr key={fee.id}>
+                      cart?.fees?.length > 0 && cart?.fees?.filter(fee => !(fee.fixed === 0 && fee.percentage === 0)).map((fee, i) => (
+                        <tr key={fee.id ?? i}>
                           <td className='icon'>
                             {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
