@@ -30,6 +30,7 @@ import visa from './template/assets/images/visa.png'
 import mastercard from './template/assets/images/mastercard.png'
 import credit from './template/assets/images/credit.png'
 import businessSignUpHero from './template/assets/images/business_signup.png'
+import loyaltyLevel from './template/assets/images/loyalty_level.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -134,7 +135,8 @@ theme.images = {
     product: productDummy,
     driverPhoto: 'https://res.cloudinary.com/demo/image/fetch/c_thumb,g_face,r_max/https://www.freeiconspng.com/thumbs/driver-icon/driver-icon-14.png',
     businessLogo: storeDummy,
-    customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png'
+    customerPhoto: 'https://res.cloudinary.com/demo/image/upload/c_thumb,g_face,r_max/d_avatar.png/non_existing_id.png',
+    loyaltyLevel
   },
   deliveryTypes: {
     delivery: delivery,
