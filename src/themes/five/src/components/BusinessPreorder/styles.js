@@ -95,10 +95,17 @@ export const SelectWrapper = styled.div`
     }
     > div#list {
       width: 100%;
-      background-color: #F8F9FA!important;
-      border: 1px solid #F8F9FA;
+      background-color: ${props => props.theme.colors.grayDividerColor} !important;
+      border: 1px solid ${props => props.theme.colors.grayDividerColor};
       border-radius: 7.6px;
       box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+
+      #item {
+        background-color: ${props => props.theme.colors.backgroundPage} !important;
+        &:hover {
+          background-color: ${props => props.theme.colors.grayDividerColor} !important;
+        }
+      }
     }
   }
 `
