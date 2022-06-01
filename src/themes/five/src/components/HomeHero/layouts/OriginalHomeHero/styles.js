@@ -109,10 +109,6 @@ export const WrapInput = styled.div`
         right: initial;
      `}
     }
-
-    @media (min-width: 1024px) {
-      width: calc(50% - 20px);
-    }
   `}
   
   p {
@@ -138,21 +134,45 @@ export const WrapInput = styled.div`
 
 export const ContentWrapper = styled.div`
   position: absolute;
+  display: flex;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: #0000004D;
+  align-items: center;
+  justify-content: center;
+  
+  ${props => props.contentPosition === 'left' && css`
+    align-items: center;
+    justify-content: left;
+  `}
+
+  ${props => props.contentPosition === 'right' && css`
+    align-items: center;
+    justify-content: right;
+  `}
+
+  ${props => props.contentPosition === 'top' && css`
+    align-items: start;
+    justify-content: center;
+  `}
+
+  ${props => props.contentPosition === 'bottom' && css`
+    align-items: end;
+    justify-content: center;
+  `}
+
   > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
+    width: calc(100% - 40px);
     position: relative;
-    padding: 0px 20px 0px;
+    padding: 20px;
 
     ${props => props.theme?.rtl && css`
-      padding: 0px 20px 0px;
+      padding: 20px;
     `}
 
     button {
@@ -174,10 +194,10 @@ export const ContentWrapper = styled.div`
     }
 
     @media (min-width: 768px) {
-      padding: 0px 40px 0px;
-
+      padding: 40px;
+      width: 50%;
       ${props => props.theme?.rtl && css`
-        padding: 0px 40px 0px;
+        padding: 40px;
       `}
     }
   }

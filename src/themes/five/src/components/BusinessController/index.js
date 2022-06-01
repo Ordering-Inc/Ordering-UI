@@ -3,7 +3,7 @@ import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrd
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
-import { convertHoursToMinutes } from '../../../../../utils'
+import { convertHoursToMinutes, shape } from '../../../../../utils'
 
 import {
   ContainerCard,
@@ -23,7 +23,8 @@ import {
   BusinessLogoWrapper,
   BusinessStarInfo,
   InfoLength,
-  InfoDescription
+  InfoDescription,
+  RibbonBox
   // CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
@@ -93,6 +94,15 @@ const BusinessControllerUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton} isCustomerMode={isCustomerMode && hasInformationLength} firstCard={firstCard} minWidthEnabled={minWidthEnabled}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
+          {business?.ribbon?.enabled && (
+            <RibbonBox
+              bgColor={business?.ribbon?.color}
+              isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}
+              isCapsule={business?.ribbon?.shape === shape?.capsuleShape}
+            >
+              {business?.ribbon?.text}
+            </RibbonBox>
+          )}
           <BusinessHero>
             {isSkeleton ? (
               <Skeleton height={isCustomerMode ? 100 : 140} />

@@ -25,6 +25,13 @@ export const SessionItem = styled.div`
   justify-content: space-between;
   padding: 15px 20px;
   border-bottom: 1px solid ${props => props.theme.colors.gray200};
+  
+  > p.current {
+    flex: 1;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 15px;
+  }
 `
 export const DurationWrapper = styled.div`
   display: flex;
@@ -80,5 +87,15 @@ export const SessionsWrapper = styled.div`
     > button {
       width: 65%;
     }
+  }
+`
+export const NoSessionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > button {
+    height: 44px;
+    margin-top: 50px;
   }
 `

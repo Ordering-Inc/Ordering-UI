@@ -12,7 +12,7 @@ import { MomentContent } from '../MomentContent'
 
 import { useUtils, useOrder, useLanguage } from 'ordering-components'
 
-import { convertHoursToMinutes } from '../../../../../utils'
+import { convertHoursToMinutes, shape } from '../../../../../utils'
 
 import {
   BusinessInfo,
@@ -22,7 +22,8 @@ import {
   WrapperSearch,
   BusinessDetail,
   BusinessMoreDetail,
-  BusinessTitleWrapper
+  BusinessTitleWrapper,
+  RibbonBox
 } from './styles'
 
 const types = ['food', 'laundry', 'alcohol', 'groceries']
@@ -83,6 +84,15 @@ export const BusinessBasicInformation = (props) => {
                       onClick={() => setOpenBusinessInformation(true)}
                     />
                   </BusinessMoreDetail>
+                )}
+                {business?.ribbon?.enabled && (
+                  <RibbonBox
+                    bgColor={business?.ribbon?.color}
+                    isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}
+                    isCapsule={business?.ribbon?.shape === shape?.capsuleShape}
+                  >
+                    {business?.ribbon?.text}
+                  </RibbonBox>
                 )}
               </BusinessTitleWrapper>
 
