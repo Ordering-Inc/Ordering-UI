@@ -27,15 +27,11 @@ var _PageNotFound = require("../../../../../components/PageNotFound");
 
 var _ProductForm = require("../ProductForm");
 
-var _FloatingButton = require("../../../../../components/FloatingButton");
-
 var _Modal = require("../Modal");
 
 var _Buttons = require("../../styles/Buttons");
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
-var _UpsellingPage = require("../../../../../components/UpsellingPage");
 
 var _RenderProductsLayout = require("../RenderProductsLayout");
 
@@ -94,7 +90,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleUpdateInitialRender = props.handleUpdateInitialRender,
       updateProductModal = props.updateProductModal,
       onProductRedirect = props.onProductRedirect,
-      onCheckoutRedirect = props.onCheckoutRedirect,
       handleChangeSearch = props.handleChangeSearch,
       handleSearchRedirect = props.handleSearchRedirect,
       featuredProducts = props.featuredProducts,
@@ -124,10 +119,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
-
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
 
   var location = (0, _reactRouterDom.useLocation)();
   var windowSize = (0, _useWindowSize.useWindowSize)();

@@ -723,6 +723,12 @@ Object.defineProperty(exports, "useCountdownTimer", {
     return _useCountdownTimer.useCountdownTimer;
   }
 });
+Object.defineProperty(exports, "useIntersectionObserver", {
+  enumerable: true,
+  get: function get() {
+    return _useIntersectionObserver.useIntersectionObserver;
+  }
+});
 Object.defineProperty(exports, "useOnlineStatus", {
   enumerable: true,
   get: function get() {
@@ -943,6 +949,8 @@ var _useOnlineStatus = require("./hooks/useOnlineStatus");
 var _useWindowSize = require("./hooks/useWindowSize");
 
 var _useCountdownTimer = require("./hooks/useCountdownTimer");
+
+var _useIntersectionObserver = require("./hooks/useIntersectionObserver");
 
 var _Buttons = require("./styles/Buttons");
 

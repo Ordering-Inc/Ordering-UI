@@ -19,6 +19,8 @@ var _Confirm = require("../Confirm");
 
 var _utils = require("../../../../../utils");
 
+var _useIntersectionObserver = require("../../../../../hooks/useIntersectionObserver");
+
 var _styles = require("./styles");
 
 var _GoPrimitiveDot = _interopRequireDefault(require("@meronex/icons/go/GoPrimitiveDot"));
@@ -39,8 +41,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessControllerUI = function BusinessControllerUI(props) {
-  var _business$available_d, _business$busy_driver, _business$active_orde, _props$beforeElements, _props$beforeComponen, _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _theme$images, _theme$images$dummies, _configState$configs, _configState$configs$, _orderState$options, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _business$reviews2, _orderState$options2, _business$available_d2, _business$available_d3, _business$busy_driver2, _business$busy_driver3, _business$active_orde2, _business$active_orde3, _props$afterComponent, _props$afterElements;
+  var _business$available_d, _business$busy_driver, _business$active_orde, _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _theme$images, _theme$images$dummies, _configState$configs, _configState$configs$, _orderState$options, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _business$reviews2, _orderState$options2, _business$available_d2, _business$available_d3, _business$busy_driver2, _business$busy_driver3, _business$active_orde2, _business$active_orde3;
 
   var isSkeleton = props.isSkeleton,
       business = props.business,
@@ -101,6 +101,11 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
+  var _useIntersectionObser = (0, _useIntersectionObserver.useIntersectionObserver)(),
+      _useIntersectionObser2 = _slicedToArray(_useIntersectionObser, 2),
+      $element = _useIntersectionObser2[0],
+      isObserved = _useIntersectionObser2[1];
+
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -124,20 +129,13 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     }, children);
   }
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ContainerCard, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ContainerCard, {
+    ref: $element,
     isSkeleton: isSkeleton,
     isCustomerMode: isCustomerMode && hasInformationLength,
     firstCard: firstCard,
     minWidthEnabled: minWidthEnabled
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
+  }, isObserved && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
     isSkeleton: isSkeleton,
     onClick: function onClick() {
       return !isSkeleton && handleClick && handleBusinessClick();
@@ -204,14 +202,6 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       });
     },
     closeOnBackdrop: false
-  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 

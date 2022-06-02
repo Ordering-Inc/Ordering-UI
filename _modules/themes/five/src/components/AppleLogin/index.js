@@ -1,15 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.AppleLogin = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
+var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
@@ -18,10 +14,6 @@ var _styles = require("./styles");
 var _FaApple = _interopRequireDefault(require("@meronex/icons/fa/FaApple"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -42,38 +34,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AppleLoginUI = function AppleLoginUI(props) {
-  var initLoginApple = props.initLoginApple,
-      handleAppleLoginClick = props.handleAppleLoginClick;
-  var location = (0, _reactRouterDom.useLocation)();
+  var initLoginApple = props.initLoginApple;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  (0, _react.useEffect)(function () {
-    var result = location.hash;
-
-    if (result) {
-      var _divisions$, _divisions$$split, _divisions$2, _divisions$2$split, _divisions$3, _divisions$3$split;
-
-      var divisions = result === null || result === void 0 ? void 0 : result.split('&', 4);
-      var state = divisions === null || divisions === void 0 ? void 0 : (_divisions$ = divisions[0]) === null || _divisions$ === void 0 ? void 0 : (_divisions$$split = _divisions$.split('state=', 2)) === null || _divisions$$split === void 0 ? void 0 : _divisions$$split[1];
-      var code = divisions === null || divisions === void 0 ? void 0 : (_divisions$2 = divisions[1]) === null || _divisions$2 === void 0 ? void 0 : (_divisions$2$split = _divisions$2.split('code=', 2)) === null || _divisions$2$split === void 0 ? void 0 : _divisions$2$split[1];
-      var idToken = divisions === null || divisions === void 0 ? void 0 : (_divisions$3 = divisions[2]) === null || _divisions$3 === void 0 ? void 0 : (_divisions$3$split = _divisions$3.split('id_token=', 2)) === null || _divisions$3$split === void 0 ? void 0 : _divisions$3$split[1];
-
-      if (code) {
-        handleAppleLoginClick({
-          state: state,
-          code: code,
-          idToken: idToken
-        });
-      }
-    }
-  }, [Object.keys(configs).length]);
   return /*#__PURE__*/_react.default.createElement(_styles.AppleButton, {
     initialIcon: true,
     color: "secondary",

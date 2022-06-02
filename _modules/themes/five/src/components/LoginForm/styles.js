@@ -166,7 +166,7 @@ exports.ValidationText = ValidationText;
 var LogotypeContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  margin-bottom: 50px;\n"])));
 
 exports.LogotypeContainer = LogotypeContainer;
-var HeroSide = (0, _styledComponents.default)(Side)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: none;\n\n  img{\n    width: 95%;\n    height: 80%;\n  }\n  @media (min-width: 992px) {\n    width: 45%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    color: ", ";\n  }\n"])), function (props) {
+var HeroSide = (0, _styledComponents.default)(Side)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: none;\n\n  img{\n    width: 95%;\n    height: 80%;\n  }\n  @media (min-width: 992px) {\n    width: 45%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    color: ", ";\n\n    img{\n      max-width: 100%;\n      height: auto;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primaryContrast;
 });
 exports.HeroSide = HeroSide;
