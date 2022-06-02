@@ -11,7 +11,6 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession,
   useUtils
 } from 'ordering-components'
 
@@ -29,11 +28,9 @@ import {
 import { NotFoundSource } from '../NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
-import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { RenderProductsLayout } from '../RenderProductsLayout'
 import { Cart } from '../Cart'
 import { Alert } from '../../../../../components/Confirm'
@@ -57,7 +54,6 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateInitialRender,
     updateProductModal,
     onProductRedirect,
-    onCheckoutRedirect,
     handleChangeSearch,
     handleSearchRedirect,
     featuredProducts,
@@ -75,7 +71,6 @@ const BusinessProductsListingUI = (props) => {
   const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
-  const [{ auth }] = useSession()
   const location = useLocation()
   const windowSize = useWindowSize()
 

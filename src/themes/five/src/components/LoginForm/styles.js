@@ -348,5 +348,10 @@ export const HeroSide = styled(Side)`
     justify-content: center;
     align-items: center;
     color: ${props => props.theme.colors.primaryContrast};
+
+    img{
+      max-width: 100%;
+      height: auto;
+    }
   }
 `

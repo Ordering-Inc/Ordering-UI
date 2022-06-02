@@ -151,7 +151,7 @@ const OrderDetailsUI = (props) => {
   }
 
   const locations = [
-    { location: { lat: order?.driver?.location?.lat, lng: order?.driver?.location?.lng }, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
+    { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
     { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]
@@ -250,9 +250,10 @@ const OrderDetailsUI = (props) => {
   }, [reorderState])
 
   const OrderMapSection = () => {
+    const validStatuses = [9, 19, 23]
     return (
       <>
-        {order?.driver?.location?.lat && order?.driver?.location?.lng && parseInt(order?.status) === 9 && (
+        {order?.driver?.location?.lat && order?.driver?.location?.lng && validStatuses.includes(parseInt(order?.status)) && (
           <>
             <Map isCustomerMode={isCustomerMode}>
               <GoogleMapsMap
@@ -489,6 +490,7 @@ const OrderDetailsUI = (props) => {
                   ) : (
                     <>
                       <Divider />
+                      <OrderMapSection />
                       <SectionTitle>
                         {t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}
                       </SectionTitle>
