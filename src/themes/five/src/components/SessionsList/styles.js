@@ -13,17 +13,20 @@ export const SessionsListContainer = styled.div`
   }
 `
 export const Title = styled.h1`
-  padding: 0 15px;
   font-size: 32px;
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 40px;
+  
+  @media (min-width: 768px) {
+    padding: 0 15px;
+  }
 `
 export const SessionItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 20px;
+  padding: 15px 0px;
   border-bottom: 1px solid ${props => props.theme.colors.gray200};
   
   > p.current {
@@ -31,6 +34,10 @@ export const SessionItem = styled.div`
     font-weight: 700;
     font-size: 14px;
     margin: 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 15px;
   }
 `
 export const DurationWrapper = styled.div`
@@ -77,17 +84,6 @@ export const NoMessage = styled.p`
 export const SessionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  > button {
-    width: 90%;
-    margin: 30px auto 0 auto;
-    height: 44px;
-  }
-
-  @media (min-width: 768px) {
-    > button {
-      width: 65%;
-    }
-  }
 `
 export const NoSessionsContainer = styled.div`
   display: flex;
@@ -97,5 +93,21 @@ export const NoSessionsContainer = styled.div`
   > button {
     height: 44px;
     margin-top: 50px;
+  }
+`
+export const ButtonsGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+
+  > button {
+    height: 44px;
+    margin: 10px 0;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
   }
 `

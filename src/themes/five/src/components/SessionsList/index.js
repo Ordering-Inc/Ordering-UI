@@ -13,7 +13,8 @@ import {
   SeessionDelete,
   NoMessage,
   SessionsWrapper,
-  NoSessionsContainer
+  NoSessionsContainer,
+  ButtonsGroup
 } from './styles'
 
 const SessionsListUI = (props) => {
@@ -41,12 +42,17 @@ const SessionsListUI = (props) => {
     })
   }
 
-  const onDeleteAllSessions = () => {
+  const onDeleteAllSessions = (isOldUser, deleteCurrent) => {
     setConfirm({
       open: true,
-      content: t('QUESTION_DELETE_ALL_SESSIONS', 'Are you sure that you want to delete all sessions?'),
+      content:
+        isOldUser
+          ? t('QUESTION_ENABLE_ALL_SESSIONS', 'Are you sure to enable all sessions?')
+          : deleteCurrent
+            ? t('QUESTION_DELETE_ALL_SESSIONS', 'Are you sure that you want to delete all sessions?')
+            : t('QUESTION_DELETE_ALL_SESSIONS_EXCEPT_CURRENT', 'Are you sure that you want to delete all sessions except current?'),
       handleOnAccept: () => {
-        handleDeleteAllSessions()
+        handleDeleteAllSessions(deleteCurrent)
         setConfirm({ ...confirm, open: false })
       }
     })
@@ -93,13 +99,22 @@ const SessionsListUI = (props) => {
                     </SeessionDelete>
                   </SessionItem>
                 ))}
-                <Button
-                  color='primary'
-                  disabled={actionState.loading}
-                  onClick={() => onDeleteAllSessions()}
-                >
-                  {t('DELETE_ALL_SESSIONS', 'Delete all sessions')}
-                </Button>
+                <ButtonsGroup>
+                  <Button
+                    color='primary'
+                    disabled={actionState.loading}
+                    onClick={() => onDeleteAllSessions(false, true)}
+                  >
+                    {t('DELETE_ALL_SESSIONS', 'Delete all sessions')}
+                  </Button>
+                  <Button
+                    color='primary'
+                    disabled={actionState.loading}
+                    onClick={() => onDeleteAllSessions(false, false)}
+                  >
+                    {t('DELETE_ALL_SESSIONS_EXCEPT_CURRENT', 'Delete all sessions except current')}
+                  </Button>
+                </ButtonsGroup>
               </SessionsWrapper>
             ) : (
               <NoMessage>
@@ -115,7 +130,7 @@ const SessionsListUI = (props) => {
           </NoMessage>
           <Button
             color='primary'
-            onClick={() => onDeleteAllSessions()}
+            onClick={() => onDeleteAllSessions(true, false)}
           >
             {t('ACTIVE_SESSIONS', 'Active sessions')}
           </Button>
