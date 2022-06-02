@@ -7,11 +7,15 @@ import { StarbucksHomeHero } from './layouts/StarbucksHomeHero'
 export const HomeHero = (props) => {
   const [{ configs }] = useConfig()
 
-  // *************stagaing code****************
-  // props.AdminSettings = configs
+  /**
+   * Below section is test code
+   * This section will be removed after backend ready.
+   * props.AdminSettings = configs
+   */
   const layout = props?.AdminSettings?.homepage_settings?.layout !== undefined
     ? props?.AdminSettings?.homepage_settings?.layout : 'original'
-  // **************stagaing code***************
+  /**
+  */
 
   const homeLayoutProps = {
     ...props,

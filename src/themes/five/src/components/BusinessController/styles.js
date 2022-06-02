@@ -6,7 +6,7 @@ export const ContainerCard = styled.div`
   box-sizing: border-box;
   border-radius: 7.6px;
   max-height: 300px;
-  height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '320px'};
+  height: ${({ isSkeleton, adjustCardHeight }) => isSkeleton ? 'auto' : 320 + (adjustCardHeight ? adjustCardHeight() : 0) + 'px'};
   border-radius: 10px;
   margin: 30px 20px;
 
@@ -14,7 +14,7 @@ export const ContainerCard = styled.div`
 
   ${({ isCustomerMode }) => isCustomerMode && css`
     max-height: 400px;
-    height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '400px'};
+    height: ${({ isSkeleton, adjustCardHeight }) => isSkeleton ? 'auto' : 400 + (adjustCardHeight ? adjustCardHeight() : 0) + 'px'};
   `}
 
   ${({ minWidthEnabled }) => minWidthEnabled && css`
@@ -36,7 +36,7 @@ export const ContainerCard = styled.div`
   `}
 
   @media (min-width: 481px) {
-    max-height: ${({ isCustomerMode }) => isCustomerMode ? '360px' : '320px'};
+    max-height: ${({ isCustomerMode, adjustCardHeight }) => isCustomerMode ? 360 + (adjustCardHeight ? adjustCardHeight() : 0) + 'px' : 320 + (adjustCardHeight ? adjustCardHeight() : 0) + 'px'};
   }
 
   @media (min-width: 681px) {
@@ -253,7 +253,7 @@ export const BusinessInfoItem = styled.div`
   flex-direction: column;
   justify-content: space-between;
   font-size: 12px;
-
+  margin-bottom: 15px;
   div {
     display: flex;
     p {
@@ -365,8 +365,8 @@ export const CallCenterInformationBullet = styled.div`
 export const BusinessLogoWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: -20px;
+  justify-content: ${({ logoStatus }) => (logoStatus || (logoStatus === undefined)) ? 'space-between' : 'end'};
+  margin-top: ${({ logoStatus }) => (logoStatus || (logoStatus === undefined)) ? '-20px' : '0px'};
   margin-bottom: 10px;
 `
 

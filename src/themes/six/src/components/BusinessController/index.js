@@ -38,7 +38,8 @@ const BusinessControllerUI = (props) => {
     orderType,
     isCustomLayout,
     isShowCallcenterInformation,
-    handleShowBusinessInfo
+    handleShowBusinessInfo,
+    businessesListeningSettings
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -67,22 +68,26 @@ const BusinessControllerUI = (props) => {
       <ContainerCard isSkeleton={isSkeleton}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!business?.open && isCustomLayout ? handleShowAlert() : handleClick(business))}>
           <BusinessContent>
-            <WrapperBusinessLogo isSkeleton={isSkeleton}>
-              {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
-                <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-              ) : (
-                <Skeleton height={70} width={70} />
-              )}
-            </WrapperBusinessLogo>
+            {(businessesListeningSettings?.information_show_status?.business_logo || businessesListeningSettings?.information_show_status?.business_logo === undefined) && (
+              <WrapperBusinessLogo isSkeleton={isSkeleton}>
+                {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
+                  <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                ) : (
+                  <Skeleton height={70} width={70} />
+                )}
+              </WrapperBusinessLogo>
+            )}
             <BusinessInfo className='info'>
               <BusinessInfoItem>
-                <NameWrapper>
-                  {business?.name ? (
-                    <BusinessName>{business?.name}</BusinessName>
-                  ) : (
-                    <Skeleton width={100} />
-                  )}
-                </NameWrapper>
+                {(businessesListeningSettings?.information_show_status?.address || businessesListeningSettings?.information_show_status?.address === undefined) && (
+                  <NameWrapper>
+                    {business?.name ? (
+                      <BusinessName>{business?.name}</BusinessName>
+                    ) : (
+                      <Skeleton width={100} />
+                    )}
+                  </NameWrapper>
+                )}
                 {!isShowCallcenterInformation && (
                   <Categories>
                     {
@@ -95,34 +100,44 @@ const BusinessControllerUI = (props) => {
                   </Categories>
                 )}
                 <Medadata isCustomerMode={isShowCallcenterInformation}>
-                  {Object.keys(business).length > 0 ? (
-                    <p className='bullet'>
-                      <GrClock />
-                      {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
-                    </p>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                  {business?.distance >= 0 ? (
-                    <p className='bullet'>
-                      <GrLocation />
-                      {parseDistance(business?.distance)}
-                    </p>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                  {orderType === 1 && (
+                  {(businessesListeningSettings?.information_show_status?.delivery_pickup_time || businessesListeningSettings?.information_show_status?.delivery_pickup_time === undefined) && (
                     <>
-                      {business?.delivery_price >= 0 ? (
-                        <p>
-                          <GrDeliver />
-                          {business && parsePrice(business?.delivery_price)}
+                      {Object.keys(business).length > 0 ? (
+                        <p className='bullet'>
+                          <GrClock />
+                          {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
                         </p>
                       ) : (
                         <Skeleton width={70} />
                       )}
                     </>
                   )}
+                  {(businessesListeningSettings?.information_show_status?.delivery_distance || businessesListeningSettings?.information_show_status?.delivery_distance === undefined) && (
+                    <>
+                      {business?.distance >= 0 ? (
+                        <p className='bullet'>
+                          <GrLocation />
+                          {parseDistance(business?.distance)}
+                        </p>
+                      ) : (
+                        <Skeleton width={70} />
+                      )}
+                    </>
+                  )}
+                  {(orderType === 1 &&
+                    (businessesListeningSettings?.information_show_status?.delivery_fee || businessesListeningSettings?.information_show_status?.delivery_fee === undefined)) &&
+                    (
+                      <>
+                        {business?.delivery_price >= 0 ? (
+                          <p>
+                            <GrDeliver />
+                            {business && parsePrice(business?.delivery_price)}
+                          </p>
+                        ) : (
+                          <Skeleton width={70} />
+                        )}
+                      </>
+                    )}
                   {isShowCallcenterInformation && (
                     <CallCenterInformation>
                       <CallCenterInformationBullet bgcolor='green'>

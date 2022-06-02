@@ -56,7 +56,8 @@ const BusinessesListingUI = (props) => {
     handleChangeSearch,
     handleChangeBusinessType,
     handleBusinessClick,
-    onBusinessClick
+    onBusinessClick,
+    businessesListeningSettings
   } = props
 
   const [, t] = useLanguage()
@@ -230,6 +231,7 @@ const BusinessesListingUI = (props) => {
               setHasHighRatedBusiness={setHasHighRatedBusiness}
               onBusinessClick={onBusinessClick}
               isCustomerMode={isCustomerMode}
+              businessesListeningSettings={businessesListeningSettings}
             />
             <Divider />
           </HightestRatedWrapper>
@@ -321,6 +323,7 @@ const BusinessesListingUI = (props) => {
                   businessDeliveryTime={business?.delivery_time}
                   businessPickupTime={business?.pickup_time}
                   businessDistance={business?.distance}
+                  businessesListeningSettings={businessesListeningSettings}
                 />
               ))
             }

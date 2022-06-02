@@ -345,7 +345,7 @@ export const FarAwayMessage = styled.div`
   padding: 6px 15px;
   box-sizing: border-box;
   margin: 10px 0px 0px 0px !important;
-
+  
   left: 5px;
   ${props => props.theme?.rtl && css`
     right: 5px;

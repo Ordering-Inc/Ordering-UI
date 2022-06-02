@@ -10,16 +10,22 @@ import { RedBusinessesListing } from './layouts/RedBusinessesListing'
 export const BusinessesListing = (props) => {
   const [{ configs }] = useConfig()
 
-  // *************stagaing code****************
-  // props.AdminSettings = configs
+  /**
+   * Below section is test code
+   * This section will be removed after backend ready.
+   * props.AdminSettings = configs
+   */
   const layout = props?.AdminSettings?.businesses_listening_settings?.layout !== undefined
     ? props?.AdminSettings?.businesses_listening_settings?.layout : props?.AdminSettings?.homepage_settings?.layout !== undefined
       ? props?.AdminSettings?.homepage_settings?.layout : 'original'
-  // **************stagaing code***************
+  const businessesListeningSettings = props?.AdminSettings?.businesses_listening_settings
+  /**
+   */
 
   const BusinessesListingLayoutProps = {
     ...props,
-    layout: layout
+    layout: layout,
+    businessesListeningSettings: businessesListeningSettings
   }
 
   return (

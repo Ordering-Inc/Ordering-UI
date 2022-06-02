@@ -20,7 +20,8 @@ const HighestRatedUI = (props) => {
     isCustomLayout,
     handleClickAddress,
     setHasHighRatedBusiness,
-    isCustomerMode
+    isCustomerMode,
+    businessesListeningSettings
   } = props
 
   const [, t] = useLanguage()
@@ -75,6 +76,7 @@ const HighestRatedUI = (props) => {
                       orderType={orderState?.options?.type}
                       isCustomLayout={isCustomLayout}
                       isCustomerMode={isCustomerMode}
+                      businessesListeningSettings={businessesListeningSettings}
                     />
                   )
                 ))
