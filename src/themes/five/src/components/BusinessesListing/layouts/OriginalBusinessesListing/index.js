@@ -231,11 +231,14 @@ export const BusinessListingSearchUI = (props) => {
             {businessesSearchList.businesses?.filter(business => business?.categories?.length > 0).map(business => (
               <SingleBusinessSearch key={`card-${business?.id}`}>
                 <BusinessInfo>
-                  {(business?.logo || theme.images?.dummies?.businessLogo) && (
+                  {((business?.logo || theme.images?.dummies?.businessLogo) &&
+                  (businessesListeningSettings?.information_show_status?.business_logo || businessesListeningSettings?.information_show_status?.business_logo === undefined)) && (
                     <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
                   )}
                   <BusinessInfoItem>
-                    <BusinessName>{business?.name}</BusinessName>
+                    {(businessesListeningSettings?.information_show_status?.address || businessesListeningSettings?.information_show_status?.address === undefined) && (
+                      <BusinessName>{business?.name}</BusinessName>
+                    )}
                     <Metadata>
                       {(orderState?.options?.type === 1 &&
                       (businessesListeningSettings?.information_show_status?.delivery_fee || businessesListeningSettings?.information_show_status?.delivery_fee === undefined)) &&

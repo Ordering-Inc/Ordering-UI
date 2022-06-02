@@ -154,14 +154,19 @@ const BusinessControllerUI = (props) => {
                       </CallCenterInformationBullet>
                     </CallCenterInformation>
                   )}
-                  {business?.reviews?.total > 0 ? (
-                    <div className='reviews'>
-                      <GrStar />
-                      <span>{business?.reviews?.total}</span>
-                    </div>
-                  ) : (
-                    business?.reviews?.total !== 0 && <Skeleton width={50} />
+                  {(businessesListeningSettings?.information_show_status?.business_review || businessesListeningSettings?.information_show_status?.business_review === undefined) && (
+                    <>
+                      {business?.reviews?.total > 0 ? (
+                        <div className='reviews'>
+                          <GrStar />
+                          <span>{business?.reviews?.total}</span>
+                        </div>
+                      ) : (
+                        business?.reviews?.total !== 0 && <Skeleton width={50} />
+                      )}
+                    </>
                   )}
+
                 </Medadata>
               </BusinessInfoItem>
             </BusinessInfo>

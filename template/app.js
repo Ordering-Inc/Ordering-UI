@@ -8,7 +8,8 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig, FacebookPixel } from 'ordering-components'
 
-import { Header } from '../src/components/Header'
+// import { Header } from '../src/components/Header'
+import { Header } from '../src/themes/five/src/components/Header'
 import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -36,6 +37,7 @@ import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
 import settings from './config.json'
+import { AdminSettings } from './AdminSettings'
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
@@ -130,14 +132,14 @@ export const App = () => {
                     {
                       orderStatus.options?.address?.location
                         ? <Redirect to='/search' />
-                        : <HomePage />
+                        : <HomePage AdminSettings={AdminSettings} />
                     }
                   </Route>
                   <Route exact path='/'>
                     {
                       orderStatus.options?.address?.location
                         ? <Redirect to='/search' />
-                        : <HomePage />
+                        : <HomePage AdminSettings={AdminSettings} />
                     }
                   </Route>
                   <Route exact path='/signup'>
@@ -225,7 +227,7 @@ export const App = () => {
                       <SpinnerLoader />
                     ) : (
                       orderStatus.options?.address?.location
-                        ? <BusinessesList />
+                        ? <BusinessesList AdminSettings={AdminSettings} />
                         : <Redirect to='/' />
                     )}
                   </Route>
