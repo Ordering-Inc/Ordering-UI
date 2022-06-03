@@ -22,7 +22,8 @@ import {
   Divider,
   Spinner,
   CommentContainer,
-  IconContainer
+  IconContainer,
+  NoValidProductMessage
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
@@ -227,6 +228,11 @@ const CartUI = (props) => {
                 isStore={isStore}
               />
             ))}
+            {!cart?.valid_products && (
+              <NoValidProductMessage>
+                {t('REMOVE_NOT_AVAILABLE_CART_PRODUCTS', 'To continue with your checkout, please remove from your cart the products that are not available.')}
+              </NoValidProductMessage>
+            )}
             {cart?.valid_products && (
               <OrderBill isCheckout={isCheckout}>
                 <table className='order-info'>
@@ -267,14 +273,6 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {/* <tr>
-                      <td>
-                        <Divider />
-                      </td>
-                      <td>
-                        <Divider />
-                      </td>
-                    </tr> */}
                     {
                       cart?.offers?.filter(offer => offer?.target === 1)?.length > 0 &&
                       cart?.subtotal_with_discount > 0 &&
@@ -306,11 +304,11 @@ const CartUI = (props) => {
                       ))
                     }
                     {
-                      cart?.fees?.length > 0 && cart?.fees?.filter(fee => !(fee.fixed === 0 && fee.percentage === 0)).map(fee => (
-                        <tr key={fee.id}>
+                      cart?.fees?.length > 0 && cart?.fees?.filter(fee => !(fee.fixed === 0 && fee.percentage === 0)).map((fee, i) => (
+                        <tr key={fee.id ?? i}>
                           <td className='icon'>
                             {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
+                            ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
                             <IconContainer onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
                             </IconContainer>
@@ -505,6 +503,7 @@ const CartUI = (props) => {
             padding='0'
             closeOnBackdrop
             onClose={() => setModalIsOpen(false)}
+            disableOverflowX
           >
             <ProductForm
               isCartProduct

@@ -12,7 +12,7 @@ import {
   MapWrapper
 } from './styles'
 
-import { Button } from '../../../../../../src/styles/Buttons'
+import { Button } from '../../../../../styles/Buttons'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Alert } from '../../../../../components/Confirm'
 // import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'

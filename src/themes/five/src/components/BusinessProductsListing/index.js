@@ -11,8 +11,8 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession,
-  useUtils
+  useUtils,
+  useSession
 } from 'ordering-components'
 
 import {
@@ -29,14 +29,14 @@ import {
 import { NotFoundSource } from '../NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
-import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { RenderProductsLayout } from '../RenderProductsLayout'
 import { Cart } from '../Cart'
-
+import { Alert } from '../../../../../components/Confirm'
+import { FloatingButton } from '../../../../../components/FloatingButton'
+import { UpsellingPage } from '../../../../../components/UpsellingPage'
 const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
@@ -57,14 +57,16 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateInitialRender,
     updateProductModal,
     onProductRedirect,
-    onCheckoutRedirect,
     handleChangeSearch,
     handleSearchRedirect,
     featuredProducts,
     handleChangeSortBy,
     isCartOnProductsList,
     errorQuantityProducts,
-    multiRemoveProducts
+    multiRemoveProducts,
+    setAlertState,
+    alertState,
+    onCheckoutRedirect
   } = props
 
   const { business, loading, error } = businessState
@@ -73,9 +75,9 @@ const BusinessProductsListingUI = (props) => {
   const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
-  const [{ auth }] = useSession()
   const location = useLocation()
   const windowSize = useWindowSize()
+  const [{ auth }] = useSession()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
@@ -343,6 +345,7 @@ const BusinessProductsListingUI = (props) => {
         onClose={() => closeModalProductForm()}
         padding='0'
         isProductForm
+        disableOverflowX
       >
 
         {productModal.loading && !productModal.error && (
@@ -373,7 +376,13 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </Modal>
-
+      <Alert
+        title={t('ERROR', 'Error')}
+        open={alertState.open}
+        content={alertState.content}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+      />
       {currentCart?.products && openUpselling && (
         <UpsellingPage
           businessId={currentCart?.business_id}

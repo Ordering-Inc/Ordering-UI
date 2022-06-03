@@ -27,7 +27,8 @@ const ModalUI = (props) => {
     authModal,
     onRemove,
     isSlideBar,
-    slideBarPosition
+    slideBarPosition,
+    disableOverflowX
   } = props
   const [, t] = useLanguage()
 
@@ -60,6 +61,7 @@ const ModalUI = (props) => {
       isSlideBar={isSlideBar}
       slideBarPosition={slideBarPosition}
       open={props.open}
+      disableOverflowX={disableOverflowX}
     >
       {isProductForm && (
         <ModalBackHeader />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import moment from 'moment'
 import { MomentOption, useLanguage, useUtils, useConfig, useOrder } from 'ordering-components'
 
@@ -26,6 +26,7 @@ const MomentControlUI = (props) => {
     onClose
   } = props
 
+  const outsideContainer = useRef()
   const [{ configs }] = useConfig()
   const [{ parseTime }] = useUtils()
   const [, t] = useLanguage()
@@ -94,13 +95,14 @@ const MomentControlUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <MomentControlContainer>
+      <MomentControlContainer ref={outsideContainer}>
         <Title>{t('CHOOSE_A_HOUR', 'Choose a hour')}</Title>
         <Days name='days'>
           <Select
             options={dateListOptions}
             defaultValue={dateSelected}
             onChange={(date) => handleChangeDate(date)}
+            outsideContainer={outsideContainer}
           />
         </Days>
         <Hours name='hours'>
@@ -109,6 +111,7 @@ const MomentControlUI = (props) => {
             defaultValue={timeSelected}
             placeholder={t('SELECT_A_TIME', 'Select a time')}
             onChange={(hour) => !orderState.loading && handleChangeTime(hour)}
+            outsideContainer={outsideContainer}
           />
         </Hours>
         <Button

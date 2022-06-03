@@ -104,6 +104,7 @@ export const RenderProductsLayout = (props) => {
           <div className='bp-list'>
             {!isCustomLayout && (
               <BusinessBasicInformation
+                {...props}
                 businessState={businessState}
                 setOpenBusinessInformation={setOpenBusinessInformation}
                 openBusinessInformation={openBusinessInformation}
