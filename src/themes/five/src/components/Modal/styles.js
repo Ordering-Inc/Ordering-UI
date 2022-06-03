@@ -26,6 +26,42 @@ export const ModalDialog = styled.div`
     max-height: 90vh;
     border-radius: 10px;
     height: auto;
+    ${({ isSlideBar, slideBarPosition, open }) => isSlideBar && css`
+      position: fixed;
+      max-height: 100vh;
+      height: 100%;
+      min-width: 0px;
+      width: 0%;
+      right: ${slideBarPosition !== 'left' ? 0 : 'initial'};
+      left: ${slideBarPosition === 'left' ? 0 : 'initial'};
+
+      ${open ? css`
+        animation: slide-in 0.25s forwards;
+        -webkit-animation: slide-in 0.25s forwards;
+      ` : css`
+        animation: slide-out 0.25s forwards;
+        -webkit-animation: slide-out 0.25s forwards; 
+      `}
+
+
+      @-webkit-keyframes slide-in {
+       100% { width: 25%; min-width: 400px; }
+      }
+
+      @keyframes slide-in {
+        100% { width: 25%; min-width: 400px; }
+      }
+
+      @keyframes slide-out {
+        0% { width: 25%; min-width: 400px; }
+        100% { width: 0%; min-width: 0px; }
+      }
+
+      @-webkit-keyframes slide-out {
+        0% { width: 25%; min-width: 400px; }
+        100% { width: 0%; min-width: 0px; }
+      }
+    `}
   }
 `
 

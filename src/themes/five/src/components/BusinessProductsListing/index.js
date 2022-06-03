@@ -79,8 +79,8 @@ const BusinessProductsListingUI = (props) => {
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
-  // const [openUpselling, setOpenUpselling] = useState(false)
-  // const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
@@ -88,6 +88,7 @@ const BusinessProductsListingUI = (props) => {
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
+  const showViewOrderButton = !theme?.layouts?.business_view?.components?.order_view_button?.hidden
   const sortByOptions = [
     { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
     { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
@@ -142,11 +143,11 @@ const BusinessProductsListingUI = (props) => {
     }
   }
 
-  // const handleUpsellingPage = () => {
-  //   onCheckoutRedirect(currentCart?.uuid)
-  //   setOpenUpselling(false)
-  //   setCanOpenUpselling(false)
-  // }
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
 
   const handleGoToBusinessList = () => {
     events.emit('go_to_page', { page: 'search' })
@@ -278,21 +279,21 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </ProductsContainer>
-      {/* {currentCart?.products?.length > 0 && auth && !isCartOpen && (
+      {currentCart?.products?.length > 0 && auth && !isCartOpen && showViewOrderButton && (
         <FloatingButton
           btnText={
             !currentCart?.valid_maximum ? (
               `${t('MAXIMUM_SUBTOTAL_ORDER', theme?.defaultLanguages?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
             ) : (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100)) ? (
               `${t('MINIMUN_SUBTOTAL_ORDER', theme?.defaultLanguages?.MINIMUN_SUBTOTAL_ORDER || 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
-            ) : !openUpselling ^ canOpenUpselling ? t('VIEW_ORDER', theme?.defaultLanguages?.VIEW_ORDER || 'View Order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')
+            ) : !openUpselling !== canOpenUpselling ? t('VIEW_ORDER', theme?.defaultLanguages?.VIEW_ORDER || 'View Order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')
           }
           isSecondaryBtn={!currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
-      )} */}
+      )}
       {windowSize.width < 500 && currentCart?.products?.length > 0 && (
         <MobileCartViewWrapper>
           <span>{parsePrice(currentCart?.total)}</span>
@@ -373,7 +374,7 @@ const BusinessProductsListingUI = (props) => {
         )}
       </Modal>
 
-      {/* {currentCart?.products && openUpselling && (
+      {currentCart?.products && openUpselling && (
         <UpsellingPage
           businessId={currentCart?.business_id}
           business={currentCart?.business}
@@ -383,7 +384,7 @@ const BusinessProductsListingUI = (props) => {
           canOpenUpselling={canOpenUpselling}
           setCanOpenUpselling={setCanOpenUpselling}
         />
-      )} */}
+      )}
     </>
   )
 }

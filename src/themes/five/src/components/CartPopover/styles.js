@@ -43,3 +43,30 @@ export const PopoverArrow = styled.div`
   border-bottom: 8px solid #FFF;
   top: -8px;
 `
+
+export const Title = styled.h1`
+  font-weight: 600;
+  font-size: 20px;
+  color: ${props => props.theme.colors.darkTextColor};
+  margin-bottom: 8px;
+  line-height: 30px;
+  margin-top: 0;
+  text-align: center;
+
+  @media (min-width: 576px) {
+    text-align: left;
+  }
+`
+
+export const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  button {
+    display: flex;
+    align-items: center;
+    border-radius: 16px;
+    svg{
+      margin-right: 5px;
+    }
+  }
+`

@@ -30,14 +30,6 @@ const AddressDetailsUI = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [{ user }] = useCustomer()
 
-  const handleFindBusinesses = () => {
-    if (!orderState?.options?.address?.location) {
-      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')] })
-      return
-    }
-    setOpenModal(false)
-  }
-
   useEffect(() => {
     return () => setOpenModal(false)
   }, [])
@@ -67,7 +59,6 @@ const AddressDetailsUI = (props) => {
         )}
 
         <Modal
-          title={t('ADDRESSES', 'Addresses')}
           open={openModal}
           width='70%'
           onClose={() => setOpenModal(false)}
@@ -77,7 +68,6 @@ const AddressDetailsUI = (props) => {
             changeOrderAddressWithDefault
             userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
             onCancel={() => setOpenModal(false)}
-            onAccept={() => handleFindBusinesses()}
             userCustomerSetup={isCustomerMode && user}
             isFromCheckout={isFromCheckout}
             isCustomerMode={isCustomerMode}

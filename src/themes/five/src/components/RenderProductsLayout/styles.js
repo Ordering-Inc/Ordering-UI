@@ -49,7 +49,7 @@ export const BusinessCategoryProductWrapper = styled.div`
   }
 
   @media (min-width: 993px) {
-    width: 70%;
+    width: ${({ showCartOnProductList }) => showCartOnProductList ? '70%' : '100%'};
   }
 `
 

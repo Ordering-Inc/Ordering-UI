@@ -25,7 +25,9 @@ const ModalUI = (props) => {
     hideCloseDefault,
     isProductForm,
     authModal,
-    onRemove
+    onRemove,
+    isSlideBar,
+    slideBarPosition
   } = props
   const [, t] = useLanguage()
 
@@ -55,6 +57,9 @@ const ModalUI = (props) => {
       height={props.height}
       padding={props.padding}
       isTransparent={isTransparent}
+      isSlideBar={isSlideBar}
+      slideBarPosition={slideBarPosition}
+      open={props.open}
     >
       {isProductForm && (
         <ModalBackHeader />
