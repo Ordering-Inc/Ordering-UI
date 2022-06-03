@@ -122,7 +122,7 @@
           "components": {
             "business": {
               "logo": {
-                "hidden": true
+                "hidden": false
               },
               "time": {
                 "hidden": false
@@ -134,7 +134,7 @@
               }
             },
             "comments": {
-              "hidden": true
+              "hidden": false
             }
           }
         },
@@ -148,38 +148,38 @@
         "cart": {
           "hidden": false,
           "open_strategy": {
-            "type": "slide",
+            "type": "popover",
             "position": "right"
           },
           "components": {
             "business": {
               "logo": {
-                "hidden": true
+                "hidden": false
               },
               "time": {
-                "hidden": true
+                "hidden": false
               }
             },
             "products": {
               "image": {
-                "hidden": true
+                "hidden": false
               }
             },
             "comments": {
-              "hidden": true
+              "hidden": false
             }
           }
         },
         "address_form": {
           "components": {
             "map": {
-              "hidden": true
+              "hidden": false
             },
             "icons": {
-              "hidden": true
+              "hidden": false
             },
             "zipcode": {
-              "hidden": true
+              "hidden": false
             },
             "address_notes": {
               "hidden": false
