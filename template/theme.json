@@ -2,11 +2,18 @@
   "fonts": {
     "primary": {
       "name": "Poppins",
-      "weights": [300, 400, 500, 600]
+      "weights": [
+        300,
+        400,
+        500,
+        600
+      ]
     },
     "special": {
       "name": "Lobster",
-      "weights": [400]
+      "weights": [
+        400
+      ]
     }
   },
   "colors": {
@@ -22,21 +29,20 @@
     "titleHomeColor": "#FFFFFF",
     "subtitleHomeColor": "#FFFFFF",
     "warning100": "#FFF4CC",
-    "warning500": "#FFC700"
+    "warning500": "#FFC700",
+    "grayDividerColor": "#F8F9FA"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
     "SIGN_IN": "Sign in",
     "SIGN_UP": "Sign up",
     "ACCEPT": "Accept",
-
     "TITLE_HOME": "All We need is Food",
     "SUBTITLE_HOME": "Let's start to order food now",
     "TYPE_AN_ADDRESS": "Type an addres",
     "FIND_BUSINESSES": "Find businesse",
     "ADDRESS": "Address",
     "ADDRESSES": "Addresses",
-
     "SORT_BY": "Sort By",
     "RANK": "Rank",
     "A_to_Z": "A-Z",
@@ -50,7 +56,6 @@
     "NOT_FOUND_BUSINESS_PRODUCTS": "No products to show at this business, please try with other business",
     "SEARCH_REDIRECT": "Go to Businesses",
     "ERROR_NOT_FOUND_STORE": "Sorry, an error has occurred with business selected",
-
     "SKU": "Sku",
     "INGREDIENTS": "Ingredients",
     "SPECIAL_COMMENT": "Special comment",
@@ -60,7 +65,6 @@
     "RESET_PASSWORD": "Reset password",
     "LOGIN": "Login",
     "LOGIN_SIGNUP": "Login / Sign Up",
-
     "PENDING": "Pending",
     "COMPLETED": "Completed",
     "REJECTED": "Rejected",
@@ -109,5 +113,97 @@
     "LOGIN_WITH_CELLPHONE": "Login with Cellphone",
     "NEW_ON_PLATFORM": "New on the Plafrom?",
     "PHONE_NUMBER": "Phone number"
+  },
+  "layouts": {
+    "business_view": {
+      "components": {
+        "cart": {
+          "hidden": false,
+          "components": {
+            "business": {
+              "logo": {
+                "hidden": true
+              },
+              "time": {
+                "hidden": false
+              }
+            },
+            "products": {
+              "image": {
+                "hidden": false
+              }
+            },
+            "comments": {
+              "hidden": true
+            }
+          }
+        },
+        "order_view_button": {
+          "hidden": true
+        }
+      }
+    },
+    "header": {
+      "components": {
+        "cart": {
+          "hidden": false,
+          "open_strategy": {
+            "type": "slide",
+            "position": "right"
+          },
+          "components": {
+            "business": {
+              "logo": {
+                "hidden": true
+              },
+              "time": {
+                "hidden": true
+              }
+            },
+            "products": {
+              "image": {
+                "hidden": true
+              }
+            },
+            "comments": {
+              "hidden": true
+            }
+          }
+        },
+        "address_form": {
+          "components": {
+            "map": {
+              "hidden": true
+            },
+            "icons": {
+              "hidden": true
+            },
+            "zipcode": {
+              "hidden": true
+            },
+            "address_notes": {
+              "hidden": false
+            },
+            "internal_number": {
+              "hidden": false
+            }
+          }
+        }
+      }
+    },
+    "orders": {
+      "hidden": false,
+      "components": {
+        "business_logo": {
+          "hidden": false
+        },
+        "date": {
+          "hidden": false
+        },
+        "map": {
+          "hidden": false
+        }
+      }
+    }
   }
 }
