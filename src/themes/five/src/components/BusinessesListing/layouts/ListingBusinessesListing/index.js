@@ -42,7 +42,7 @@ export const BusinessListingSearchUI = (props) => {
     termValue,
     paginationProps,
     handleSearchbusinessAndProducts,
-    businessesListeningSettings
+    AdminSettings
   } = props
 
   const [orderState] = useOrder()
@@ -88,13 +88,13 @@ export const BusinessListingSearchUI = (props) => {
                       handleCustomClick={onBusinessClick}
                       orderType={orderState?.options?.type}
                       firstCard={i === 0 && width > 681}
-                      businessesListeningSettings={businessesListeningSettings}
+                      AdminSettings={AdminSettings}
                     />
                   ))}
                   {!businessesSearchList.loading && paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
                     <BusinessController
                       typeButton
-                      businessesListeningSettings={businessesListeningSettings}
+                      AdminSettings={AdminSettings}
                     >
                       <Button
                         className='load-orders'
@@ -130,32 +130,32 @@ export const BusinessListingSearchUI = (props) => {
               <SingleBusinessSearch key={`card-${business?.id}`}>
                 <BusinessInfo>
                   {((business?.logo || theme.images?.dummies?.businessLogo) &&
-                  (businessesListeningSettings?.information_show_status?.business_logo || businessesListeningSettings?.information_show_status?.business_logo === undefined)) && (
+                  (AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo || AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo === undefined)) && (
                     <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
                   )}
                   <BusinessInfoItem>
-                    {(businessesListeningSettings?.information_show_status?.address || businessesListeningSettings?.information_show_status?.address === undefined) && (
+                    {(AdminSettings?.businesses_listening_settings?.information_show_status?.address || AdminSettings?.businesses_listening_settings?.information_show_status?.address === undefined) && (
                       <BusinessName>{business?.name}</BusinessName>
                     )}
                     <Metadata>
                       {(orderState?.options?.type === 1 &&
-                        (businessesListeningSettings?.information_show_status?.delivery_fee || businessesListeningSettings?.information_show_status?.delivery_fee === undefined)) &&
+                        (AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee === undefined)) &&
                         (
                           <p>
                             <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
                             {business && parsePrice(business?.delivery_price)}
                           </p>
                         )}
-                      {(businessesListeningSettings?.information_show_status?.delivery_pickup_time || businessesListeningSettings?.information_show_status?.delivery_pickup_time === undefined) && (
+                      {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time === undefined) && (
                         <p className='bullet'>
-                          {(businessesListeningSettings?.information_show_status?.delivery_fee || businessesListeningSettings?.information_show_status?.delivery_fee === undefined) &&
+                          {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee === undefined) &&
                             <GoPrimitiveDot />}
                           {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time)}
                         </p>
                       )}
-                      {(businessesListeningSettings?.information_show_status?.delivery_distance || businessesListeningSettings?.information_show_status?.delivery_distance === undefined) && (
+                      {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_distance || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_distance === undefined) && (
                         <p className='bullet'>
-                          {(businessesListeningSettings?.information_show_status?.delivery_pickup_time || businessesListeningSettings?.information_show_status?.delivery_fee === undefined) &&
+                          {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee === undefined) &&
                             <GoPrimitiveDot />}
                           {parseDistance(business?.distance)}
                         </p>

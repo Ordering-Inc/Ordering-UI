@@ -66,7 +66,8 @@ const BusinessProductsListingUI = (props) => {
     errorQuantityProducts,
     multiRemoveProducts,
     setAlertState,
-    alertState
+    alertState,
+    AdminSettings // **AdminSettings will be removed after backend ready
   } = props
 
   const { business, loading, error } = businessState
@@ -244,6 +245,7 @@ const BusinessProductsListingUI = (props) => {
           setOpenBusinessInformation={setOpenBusinessInformation}
           handleCartOpen={(val) => setIsCartOpen(val)}
           setSubcategoriesSelected={setSubcategoriesSelected}
+          AdminSettings={AdminSettings} // **AdminSettings will be removed after backend ready
         />
 
         {

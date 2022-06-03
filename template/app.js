@@ -36,6 +36,7 @@ import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
 import settings from './config.json'
+import { AdminSettings } from './AdminSettings'
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
@@ -130,14 +131,14 @@ export const App = () => {
                     {
                       orderStatus.options?.address?.location
                         ? <Redirect to='/search' />
-                        : <HomePage />
+                        : <HomePage AdminSettings={AdminSettings} />
                     }
                   </Route>
                   <Route exact path='/'>
                     {
                       orderStatus.options?.address?.location
                         ? <Redirect to='/search' />
-                        : <HomePage />
+                        : <HomePage AdminSettings={AdminSettings} />
                     }
                   </Route>
                   <Route exact path='/signup'>
@@ -225,12 +226,12 @@ export const App = () => {
                       <SpinnerLoader />
                     ) : (
                       orderStatus.options?.address?.location
-                        ? <BusinessesList />
+                        ? <BusinessesList AdminSettings={AdminSettings} />
                         : <Redirect to='/' />
                     )}
                   </Route>
                   <Route exact path='/store/:store'>
-                    <BusinessProductsList />
+                    <BusinessProductsList AdminSettings={AdminSettings} />
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
@@ -272,7 +273,7 @@ export const App = () => {
                       )}
                   </Route>
                   <Route exact path='/:store'>
-                    <BusinessProductsList />
+                    <BusinessProductsList AdminSettings={AdminSettings} />
                   </Route>
                   <Route path='*'>
                     <PageNotFound />

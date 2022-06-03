@@ -56,7 +56,7 @@ const BusinessControllerUI = (props) => {
     businessDeliveryTime,
     businessPickupTime,
     businessDistance,
-    businessesListeningSettings
+    AdminSettings
   } = props
 
   const [configState] = useConfig()
@@ -78,21 +78,21 @@ const BusinessControllerUI = (props) => {
     const addressHeight = 25
     const logoImgHeight = 50
     const headerImgHeight = 180
-    let reduceHeight = ((!businessesListeningSettings?.information_show_status?.delivery_fee &&
-                     businessesListeningSettings?.information_show_status?.delivery_fee !== undefined) &&
-                    (!businessesListeningSettings?.information_show_status?.delivery_pickup_time &&
-                      businessesListeningSettings?.information_show_status?.delivery_pickup_time !== undefined) &&
-                    (!businessesListeningSettings?.information_show_status?.delivery_distance &&
-                      businessesListeningSettings?.information_show_status?.delivery_distance !== undefined))
+    let reduceHeight = ((!AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee &&
+                        AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee !== undefined) &&
+                    (!AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time &&
+                      AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time !== undefined) &&
+                    (!AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_distance &&
+                      AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_distance !== undefined))
       ? -addressHeight : 0
-    reduceHeight += (!businessesListeningSettings?.information_show_status?.address &&
-                    businessesListeningSettings?.information_show_status?.address !== undefined)
+    reduceHeight += (!AdminSettings?.businesses_listening_settings?.information_show_status?.address &&
+        AdminSettings?.businesses_listening_settings?.information_show_status?.address !== undefined)
       ? -addressHeight : 0
-    reduceHeight += (!businessesListeningSettings?.information_show_status?.business_logo &&
-                    businessesListeningSettings?.information_show_status?.business_logo !== undefined)
+    reduceHeight += (!AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo &&
+      AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo !== undefined)
       ? -logoImgHeight : 0
-    reduceHeight += (!businessesListeningSettings?.information_show_status?.business_header &&
-        businessesListeningSettings?.information_show_status?.business_header !== undefined)
+    reduceHeight += (!AdminSettings?.businesses_listening_settings?.information_show_status?.business_header &&
+      AdminSettings?.businesses_listening_settings?.information_show_status?.business_header !== undefined)
       ? -headerImgHeight : 0
     return reduceHeight
   }
@@ -116,8 +116,12 @@ const BusinessControllerUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton} isCustomerMode={isCustomerMode && hasInformationLength} firstCard={firstCard} minWidthEnabled={minWidthEnabled} adjustCardHeight={adjustCardHeight}>
-        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
-          {(businessesListeningSettings?.information_show_status?.business_header || businessesListeningSettings?.information_show_status?.business_header === undefined) && (
+        <WrapperBusinessCard
+          isSkeleton={isSkeleton}
+          onClick={() => !isSkeleton && handleClick && handleBusinessClick()}
+          informationType={AdminSettings?.businesses_listening_settings?.information_type}
+        >
+          {(AdminSettings?.businesses_listening_settings?.information_show_status?.business_header || AdminSettings?.businesses_listening_settings?.information_show_status?.business_header === undefined) && (
             <>
               {business?.ribbon?.enabled && (
                 <RibbonBox
@@ -128,11 +132,14 @@ const BusinessControllerUI = (props) => {
                   {business?.ribbon?.text}
                 </RibbonBox>
               )}
-              <BusinessHero>
+              <BusinessHero informationType={AdminSettings?.businesses_listening_settings?.information_type}>
                 {isSkeleton ? (
                   <Skeleton height={isCustomerMode ? 100 : 140} />
                 ) : (
-                  <BusinessHeader bgimage={optimizeImage((businessHeader || business?.header || theme.images?.dummies?.businessLogo), 'h_400,c_limit')} isClosed={!isBusinessOpen}>
+                  <BusinessHeader
+                    bgimage={optimizeImage((businessHeader || business?.header || theme.images?.dummies?.businessLogo), 'h_400,c_limit')} isClosed={!isBusinessOpen}
+                    informationType={AdminSettings?.businesses_listening_settings?.information_type}
+                  >
                     <BusinessTags>
                       {(businessFeatured ?? business?.featured) &&
                         <span className='crown'>
@@ -155,8 +162,11 @@ const BusinessControllerUI = (props) => {
             </>
           )}
           <BusinessContent>
-            <BusinessLogoWrapper logoStatus={(businessesListeningSettings?.information_show_status?.business_logo || businessesListeningSettings?.information_show_status?.business_logo === undefined)}>
-              {(businessesListeningSettings?.information_show_status?.business_logo || businessesListeningSettings?.information_show_status?.business_logo === undefined) && (
+            <BusinessLogoWrapper
+              logoStatus={(AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo || AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo === undefined)}
+              informationType={AdminSettings?.businesses_listening_settings?.information_type}
+            >
+              {(AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo || AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo === undefined) && (
                 <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
                   {!isSkeleton && (businessLogo || business?.logo || theme.images?.dummies?.businessLogo) ? (
                     <BusinessLogo bgimage={optimizeImage((businessLogo || business?.logo || theme.images?.dummies?.businessLogo), 'h_200,c_limit')} />
@@ -165,7 +175,7 @@ const BusinessControllerUI = (props) => {
                   )}
                 </WrapperBusinessLogo>
               )}
-              {(businessesListeningSettings?.information_show_status?.business_review || businessesListeningSettings?.information_show_status?.business_review === undefined) && (
+              {(AdminSettings?.businesses_listening_settings?.information_show_status?.business_review || AdminSettings?.businesses_listening_settings?.information_show_status?.business_review === undefined) && (
                 <BusinessStarInfo>
                   {!isSkeleton ? (
                     (businessReviews ?? business?.reviews?.total) > 0 && (
@@ -181,7 +191,7 @@ const BusinessControllerUI = (props) => {
             </BusinessLogoWrapper>
             <BusinessInfo className='info'>
               <BusinessInfoItem>
-                {(businessesListeningSettings?.information_show_status?.address || businessesListeningSettings?.information_show_status?.address === undefined) && (
+                {(AdminSettings?.businesses_listening_settings?.information_show_status?.address || AdminSettings?.businesses_listening_settings?.information_show_status?.address === undefined) && (
                   <div>
                     {business?.name ? (
                       <BusinessName>{business?.name}</BusinessName>
@@ -192,7 +202,7 @@ const BusinessControllerUI = (props) => {
                 )}
                 <Medadata isCustomerMode={isCustomerMode} isSkeleton={isSkeleton}>
                   {(orderType === 1 &&
-                    (businessesListeningSettings?.information_show_status?.delivery_fee || businessesListeningSettings?.information_show_status?.delivery_fee === undefined)) &&
+                    (AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee === undefined)) &&
                     (
                       <>
                         {(businessDeliveryPrice ?? business?.delivery_price) >= 0 ? (
@@ -206,11 +216,11 @@ const BusinessControllerUI = (props) => {
                       </>
                     )}
 
-                  {(businessesListeningSettings?.information_show_status?.delivery_pickup_time || businessesListeningSettings?.information_show_status?.delivery_pickup_time === undefined) && (
+                  {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time === undefined) && (
                     <>
                       {Object.keys(business).length > 0 ? (
                         <p className='bullet'>
-                          {(businessesListeningSettings?.information_show_status?.delivery_fee || businessesListeningSettings?.information_show_status?.delivery_fee === undefined) &&
+                          {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee === undefined) &&
                             <GoPrimitiveDot />}
                           {convertHoursToMinutes(orderState?.options?.type === 1 ? (businessDeliveryTime ?? business?.delivery_time) : (businessPickupTime ?? business?.pickup_time)) || <Skeleton width={100} />}
                         </p>
@@ -220,11 +230,11 @@ const BusinessControllerUI = (props) => {
                     </>
                   )}
 
-                  {(businessesListeningSettings?.information_show_status?.delivery_distance || businessesListeningSettings?.information_show_status?.delivery_distance === undefined) && (
+                  {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_distance || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_distance === undefined) && (
                     <>
                       {((businessDistance ?? business?.distance) >= 0 && 1) ? (
                         <p className='bullet'>
-                          {(businessesListeningSettings?.information_show_status?.delivery_pickup_time || businessesListeningSettings?.information_show_status?.delivery_fee === undefined) &&
+                          {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee === undefined) &&
                             <GoPrimitiveDot />}
                           {parseDistance((businessDistance ?? business?.distance))}
                         </p>

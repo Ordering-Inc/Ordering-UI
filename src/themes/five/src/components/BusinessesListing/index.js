@@ -15,17 +15,16 @@ export const BusinessesListing = (props) => {
    * This section will be removed after backend ready.
    * props.AdminSettings = configs
    */
-  const layout = props?.AdminSettings?.businesses_listening_settings?.layout !== undefined
+  let layout = props?.AdminSettings?.businesses_listening_settings?.layout !== undefined
     ? props?.AdminSettings?.businesses_listening_settings?.layout : props?.AdminSettings?.homepage_settings?.layout !== undefined
       ? props?.AdminSettings?.homepage_settings?.layout : 'original'
-  const businessesListeningSettings = props?.AdminSettings?.businesses_listening_settings
+  layout = props?.AdminSettings?.homepage_settings?.layout === 'red' ? 'red' : layout
+
   /**
    */
-
   const BusinessesListingLayoutProps = {
     ...props,
-    layout: layout,
-    businessesListeningSettings: businessesListeningSettings
+    layout: layout
   }
 
   return (

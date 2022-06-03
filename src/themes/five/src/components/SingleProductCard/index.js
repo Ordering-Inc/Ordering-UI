@@ -2,6 +2,8 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useConfig, useOrder, useUtils } from 'ordering-components'
 import { shape } from '../../../../../utils'
+import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
+import { useTheme } from 'styled-components'
 
 import {
   CardContainer,
@@ -13,7 +15,6 @@ import {
   QuantityContainer,
   RibbonBox
 } from './styles'
-import { useTheme } from 'styled-components'
 
 export const SingleProductCard = (props) => {
   const {
@@ -26,9 +27,10 @@ export const SingleProductCard = (props) => {
     onCustomClick,
     customText,
     customStyle,
-    productAddedToCartLength
+    productAddedToCartLength,
+    AdminSettings
   } = props
-
+  // test//test
   const [, t] = useLanguage()
   const [stateConfig] = useConfig()
   const [{ parsePrice, optimizeImage }] = useUtils()
@@ -64,6 +66,8 @@ export const SingleProductCard = (props) => {
         onClick={() => ((!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product)) || (useCustomFunctionality && onCustomClick && onCustomClick()))}
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
+        informationPosition={AdminSettings?.products_listening_settings?.product_section?.information_position}
+        imageShowed={AdminSettings?.products_listening_settings?.product_section?.information_show_status?.image}
         className='product-card'
       >
         {!useCustomFunctionality && (
@@ -73,7 +77,10 @@ export const SingleProductCard = (props) => {
                 <span>{productAddedToCartLength}</span>
               </QuantityContainer>
             )}
-            <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
+            <CardInfo
+              soldOut={isSoldOut || maxProductQuantity <= 0}
+              informationPosition={AdminSettings?.products_listening_settings?.product_section?.information_position}
+            >
               {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
               {!isSkeleton ? (
                 <PriceWrapper>
@@ -85,27 +92,36 @@ export const SingleProductCard = (props) => {
               ) : (
                 <Skeleton width={100} />
               )}
-              {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+              {!isSkeleton ? ((AdminSettings?.products_listening_settings?.product_section?.information_show_status?.description ||
+                              AdminSettings?.products_listening_settings?.product_section?.information_show_status?.description === undefined)
+                ? <p>{product?.description}</p> : '') : (<Skeleton width={100} />)}
             </CardInfo>
-            {!isSkeleton ? (
-              <WrapLogo>
-                {product?.ribbon?.enabled && (
-                  <RibbonBox
-                    bgColor={product?.ribbon?.color}
-                    isRoundRect={product?.ribbon?.shape === shape?.rectangleRound}
-                    isCapsule={product?.ribbon?.shape === shape?.capsuleShape}
-                  >
-                    {product?.ribbon?.text}
-                  </RibbonBox>
+            {(AdminSettings?.products_listening_settings?.product_section?.information_show_status?.image ||
+            AdminSettings?.products_listening_settings?.product_section?.information_show_status?.image === undefined) && (
+              <>
+                {!isSkeleton ? (
+                  <WrapLogo>
+                    {product?.ribbon?.enabled && (
+                      <RibbonBox
+                        bgColor={product?.ribbon?.color}
+                        isRoundRect={product?.ribbon?.shape === shape?.rectangleRound}
+                        isCapsule={product?.ribbon?.shape === shape?.capsuleShape}
+                      >
+                        {product?.ribbon?.text}
+                      </RibbonBox>
+                    )}
+                    {(AdminSettings?.products_listening_settings?.product_section?.information_show_status?.image ||
+                        AdminSettings?.products_listening_settings?.product_section?.information_show_status?.image === undefined) &&
+                          <CardLogo
+                            className='image'
+                            soldOut={isSoldOut || maxProductQuantity <= 0}
+                            bgimage={optimizeImage(product?.images || (AdminSettings?.products_listening_settings?.product_section?.information_show_status?.dummy_product_images ? theme.images?.dummies?.product : ''), 'h_200,c_limit')}
+                          />}
+                  </WrapLogo>
+                ) : (
+                  <Skeleton height={75} width={75} />
                 )}
-                <CardLogo
-                  className='image'
-                  soldOut={isSoldOut || maxProductQuantity <= 0}
-                  bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
-                />
-              </WrapLogo>
-            ) : (
-              <Skeleton height={75} width={75} />
+              </>
             )}
             {(isSoldOut || maxProductQuantity <= 0) && <SoldOut isBottom={product?.ribbon?.enabled}>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
           </>

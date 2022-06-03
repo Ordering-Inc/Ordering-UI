@@ -39,7 +39,7 @@ const BusinessControllerUI = (props) => {
     isCustomLayout,
     isShowCallcenterInformation,
     handleShowBusinessInfo,
-    businessesListeningSettings
+    AdminSettings
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -67,8 +67,8 @@ const BusinessControllerUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton}>
         <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!business?.open && isCustomLayout ? handleShowAlert() : handleClick(business))}>
-          <BusinessContent>
-            {(businessesListeningSettings?.information_show_status?.business_logo || businessesListeningSettings?.information_show_status?.business_logo === undefined) && (
+          <BusinessContent informationType={AdminSettings?.businesses_listening_settings?.information_type}>
+            {(AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo || AdminSettings?.businesses_listening_settings?.information_show_status?.business_logo === undefined) && (
               <WrapperBusinessLogo isSkeleton={isSkeleton}>
                 {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
                   <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
@@ -79,7 +79,7 @@ const BusinessControllerUI = (props) => {
             )}
             <BusinessInfo className='info'>
               <BusinessInfoItem>
-                {(businessesListeningSettings?.information_show_status?.address || businessesListeningSettings?.information_show_status?.address === undefined) && (
+                {(AdminSettings?.businesses_listening_settings?.information_show_status?.address || AdminSettings?.businesses_listening_settings?.information_show_status?.address === undefined) && (
                   <NameWrapper>
                     {business?.name ? (
                       <BusinessName>{business?.name}</BusinessName>
@@ -100,7 +100,7 @@ const BusinessControllerUI = (props) => {
                   </Categories>
                 )}
                 <Medadata isCustomerMode={isShowCallcenterInformation}>
-                  {(businessesListeningSettings?.information_show_status?.delivery_pickup_time || businessesListeningSettings?.information_show_status?.delivery_pickup_time === undefined) && (
+                  {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_pickup_time === undefined) && (
                     <>
                       {Object.keys(business).length > 0 ? (
                         <p className='bullet'>
@@ -112,7 +112,7 @@ const BusinessControllerUI = (props) => {
                       )}
                     </>
                   )}
-                  {(businessesListeningSettings?.information_show_status?.delivery_distance || businessesListeningSettings?.information_show_status?.delivery_distance === undefined) && (
+                  {(AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_distance || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_distance === undefined) && (
                     <>
                       {business?.distance >= 0 ? (
                         <p className='bullet'>
@@ -125,7 +125,7 @@ const BusinessControllerUI = (props) => {
                     </>
                   )}
                   {(orderType === 1 &&
-                    (businessesListeningSettings?.information_show_status?.delivery_fee || businessesListeningSettings?.information_show_status?.delivery_fee === undefined)) &&
+                    (AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee || AdminSettings?.businesses_listening_settings?.information_show_status?.delivery_fee === undefined)) &&
                     (
                       <>
                         {business?.delivery_price >= 0 ? (
@@ -154,7 +154,7 @@ const BusinessControllerUI = (props) => {
                       </CallCenterInformationBullet>
                     </CallCenterInformation>
                   )}
-                  {(businessesListeningSettings?.information_show_status?.business_review || businessesListeningSettings?.information_show_status?.business_review === undefined) && (
+                  {(AdminSettings?.businesses_listening_settings?.information_show_status?.business_review || AdminSettings?.businesses_listening_settings?.information_show_status?.business_review === undefined) && (
                     <>
                       {business?.reviews?.total > 0 ? (
                         <div className='reviews'>

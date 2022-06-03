@@ -5,6 +5,26 @@ export const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${({ informationPosition, imageShowed }) => informationPosition && css`
+      ${informationPosition === 'left' || (informationPosition === 'right' && !imageShowed)
+        ? `
+          flex-direction: row;
+        `
+        : informationPosition === 'right'
+        ? `
+          flex-direction: row-reverse;
+        `
+        : informationPosition === 'top'
+        ? `
+          flex-direction: column;
+          justify-content: center;
+        `
+        : `
+          flex-direction: column-reverse;
+          justify-content: center;
+        `
+      }
+  `}
   width: 100%;
   padding: 10px;
   margin: 10px 0px;
@@ -71,6 +91,11 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
+  ${({ informationPosition }) => informationPosition && css`
+      ${informationPosition === 'top' || informationPosition === 'bottom' ? 'align-items: center;' : ''}
+    `
+  }
+
   max-width: calc(100% - 90px);
   > * {
     margin: 3px;

@@ -47,7 +47,7 @@ const BusinessesListingUI = (props) => {
     onRedirectPage,
     handleChangeSearch,
     handleBusinessClick,
-    businessesListeningSettings
+    AdminSettings
   } = props
 
   const [, t] = useLanguage()
@@ -200,7 +200,7 @@ const BusinessesListingUI = (props) => {
                         orderType={orderState?.options?.type}
                         isCustomLayout={isCustomLayout}
                         isShowCallcenterInformation={isCustomLayout}
-                        businessesListeningSettings={businessesListeningSettings}
+                        AdminSettings={AdminSettings}
                       />
                     ))}
                     {businessesList.loading && (

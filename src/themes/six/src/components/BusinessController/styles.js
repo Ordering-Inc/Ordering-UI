@@ -104,6 +104,9 @@ export const BusinessTags = styled.div`
 
 export const BusinessContent = styled.div`
   display: flex;
+  ${({ informationType }) => informationType && css`
+    ${(informationType === 'top_right' || informationType === 'bottom_right') ? 'flex-direction: row-reverse;' : ''}
+  `}
   margin-top: 15px;
   max-height: 115px;
 `

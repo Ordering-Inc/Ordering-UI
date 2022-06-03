@@ -34,7 +34,8 @@ const BusinessProductsListUI = (props) => {
     errorQuantityProducts,
     categoriesState,
     onClickCategory,
-    currentCart
+    currentCart,
+    AdminSettings
   } = props
 
   const [, t] = useLanguage()
@@ -81,6 +82,7 @@ const BusinessProductsListUI = (props) => {
               categoryState?.products?.map((product, i) => (
                 <SingleProductCard
                   key={i}
+                  AdminSettings={AdminSettings}
                   isSoldOut={(product?.inventoried && !product?.quantity)}
                   product={product}
                   businessId={businessId}
@@ -117,6 +119,7 @@ const BusinessProductsListUI = (props) => {
                 {featProducts?.filter((p, index) => index < 9)?.map((product, i) => product.featured && (
                   <SingleProductCard
                     key={i}
+                    AdminSettings={AdminSettings}
                     isSoldOut={(product?.inventoried && !product?.quantity)}
                     product={product}
                     businessId={businessId}
@@ -128,6 +131,7 @@ const BusinessProductsListUI = (props) => {
                 {!categoryState?.loading && featProducts?.length > 9 && (
                   <SingleProductCard
                     useCustomFunctionality
+                    AdminSettings={AdminSettings}
                     onCustomClick={() => onClickCategory(category)}
                     isCartOnProductsList={isCartOnProductsList}
                     customText={t('MORE', 'More')}
@@ -199,6 +203,7 @@ const BusinessProductsListUI = (props) => {
                         products.filter((p, index) => index < 9).map((product, i) => (
                           <SingleProductCard
                             key={i}
+                            AdminSettings={AdminSettings}
                             isSoldOut={product?.inventoried && !product?.quantity}
                             businessId={businessId}
                             product={product}
@@ -211,6 +216,7 @@ const BusinessProductsListUI = (props) => {
                       {!categoryState?.loading && products?.length > 9 && (
                         <SingleProductCard
                           useCustomFunctionality
+                          AdminSettings={AdminSettings}
                           onCustomClick={() => onClickCategory(category)}
                           isCartOnProductsList={isCartOnProductsList}
                           customText={t('MORE', 'More')}

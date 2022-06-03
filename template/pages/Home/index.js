@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, useApi } from 'ordering-components'
-import { HomeHero } from '../../../src/components/HomeHero'
+import { HomeHero } from '../../../src/themes/five/src/components/HomeHero'
 import { useHistory } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 import Skeleton from 'react-loading-skeleton'

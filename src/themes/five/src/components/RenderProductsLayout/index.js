@@ -60,7 +60,8 @@ export const RenderProductsLayout = (props) => {
     isCustomLayout,
     setSubcategoriesSelected,
     subcategoriesSelected,
-    isLazy
+    isLazy,
+    AdminSettings
   } = props
 
   const theme = useTheme()
@@ -91,7 +92,7 @@ export const RenderProductsLayout = (props) => {
 
     return (
       props?.component && (
-        <ComponentToRender {...props} />
+        <ComponentToRender {...props} AdminSettings={AdminSettings} />
       )
     )
   }

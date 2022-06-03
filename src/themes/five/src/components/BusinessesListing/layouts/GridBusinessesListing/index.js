@@ -57,7 +57,7 @@ const BusinessesListingUI = (props) => {
     handleChangeBusinessType,
     handleBusinessClick,
     onBusinessClick,
-    businessesListeningSettings
+    AdminSettings
   } = props
 
   const [, t] = useLanguage()
@@ -231,7 +231,7 @@ const BusinessesListingUI = (props) => {
               setHasHighRatedBusiness={setHasHighRatedBusiness}
               onBusinessClick={onBusinessClick}
               isCustomerMode={isCustomerMode}
-              businessesListeningSettings={businessesListeningSettings}
+              AdminSettings={AdminSettings}
             />
             <Divider />
           </HightestRatedWrapper>
@@ -323,7 +323,7 @@ const BusinessesListingUI = (props) => {
                   businessDeliveryTime={business?.delivery_time}
                   businessPickupTime={business?.pickup_time}
                   businessDistance={business?.distance}
-                  businessesListeningSettings={businessesListeningSettings}
+                  AdminSettings={AdminSettings}
                 />
               ))
             }
@@ -413,6 +413,5 @@ export const GridBusinessesListing = (props) => {
     UIComponent: BusinessesListingUI,
     paginationSettings: { initialPage: 1, pageSize: 25, controlType: 'infinity' }
   }
-
   return <BusinessListController {...businessListingProps} />
 }

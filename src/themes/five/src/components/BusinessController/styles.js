@@ -53,12 +53,21 @@ export const ContainerCard = styled.div`
 `
 
 export const WrapperBusinessCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${({ informationType }) => informationType && css`
+    ${(informationType === 'top_left' || informationType === 'top_right')
+    ? `
+      flex-direction: column-reverse;
+    ` : ''}
+  `}
   height: 100%;
   position: relative;
   cursor: ${({ isSkeleton }) => isSkeleton ? 'default' : 'pointer'};
 `
 
 export const BusinessHero = styled.div`
+
   border-radius: 10px;
 
   > span {
@@ -80,6 +89,12 @@ const BusinessHeaderStyled = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 7.6px 7.6px 0px 0px;
+  ${({ informationType }) => informationType && css`
+    ${(informationType === 'top_right' || informationType === 'top_left')
+    ? `
+    border-radius: 0px 0px 7.6px 7.6px;
+    ` : ''}
+  `}
 
   h1 {
     color: #FFF;
@@ -366,6 +381,12 @@ export const BusinessLogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: ${({ logoStatus }) => (logoStatus || (logoStatus === undefined)) ? 'space-between' : 'end'};
+  ${({ informationType }) => informationType && css`
+    ${(informationType === 'top_right' || informationType === 'bottom_right')
+    ? `
+      flex-direction: row-reverse;
+    ` : ''}
+  `}
   margin-top: ${({ logoStatus }) => (logoStatus || (logoStatus === undefined)) ? '-20px' : '0px'};
   margin-bottom: 10px;
 `

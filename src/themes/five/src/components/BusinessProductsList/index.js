@@ -40,7 +40,8 @@ const BusinessProductsListUI = (props) => {
     currentCart,
     setSubcategoriesSelected,
     subcategoriesSelected,
-    onClickCategory
+    onClickCategory,
+    AdminSettings
   } = props
 
   const [, t] = useLanguage()
@@ -125,6 +126,7 @@ const BusinessProductsListUI = (props) => {
                   ?.map((product, i) => (
                     <SingleProductCard
                       key={i}
+                      AdminSettings={AdminSettings}
                       isSoldOut={(product.inventoried && !product.quantity)}
                       product={product}
                       businessId={businessId}
@@ -149,6 +151,7 @@ const BusinessProductsListUI = (props) => {
                       {categoryState.products?.map((product, i) => product.featured && (
                         <SingleProductCard
                           key={i}
+                          AdminSettings={AdminSettings}
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
                           businessId={businessId}
@@ -219,6 +222,7 @@ const BusinessProductsListUI = (props) => {
                           products.map((product, i) => (
                             <SingleProductCard
                               key={i}
+                              AdminSettings={AdminSettings}
                               isSoldOut={product.inventoried && !product.quantity}
                               businessId={businessId}
                               product={product}
