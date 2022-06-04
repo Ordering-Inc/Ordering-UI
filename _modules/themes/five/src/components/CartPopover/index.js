@@ -21,6 +21,14 @@ var _styledComponents = require("styled-components");
 
 var _CartContent = require("../CartContent");
 
+var _Modal = require("../Modal");
+
+var _Buttons = require("../../styles/Buttons");
+
+var _AiOutlineClose = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineClose"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -46,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartPopover = function CartPopover(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$carts, _props$carts2, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$layouts$header4, _props$beforeElements, _props$beforeComponen, _props$carts, _props$carts2, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts2$heade4, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       auth = props.auth,
@@ -63,6 +71,10 @@ var CartPopover = function CartPopover(props) {
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
+
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
@@ -84,6 +96,7 @@ var CartPopover = function CartPopover(props) {
   var styles = popper.styles,
       attributes = popper.attributes,
       forceUpdate = popper.forceUpdate;
+  var isSlideBar = ((_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$header = _theme$layouts.header) === null || _theme$layouts$header === void 0 ? void 0 : (_theme$layouts$header2 = _theme$layouts$header.components) === null || _theme$layouts$header2 === void 0 ? void 0 : (_theme$layouts$header3 = _theme$layouts$header2.cart) === null || _theme$layouts$header3 === void 0 ? void 0 : (_theme$layouts$header4 = _theme$layouts$header3.open_strategy) === null || _theme$layouts$header4 === void 0 ? void 0 : _theme$layouts$header4.type) === 'slide';
   (0, _react.useEffect)(function () {// forceUpdate && forceUpdate()
   }, [open, orderState]);
 
@@ -161,7 +174,26 @@ var CartPopover = function CartPopover(props) {
     ref: referenceElement,
     onClick: props.onClick,
     name: "cart-popover"
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 && /*#__PURE__*/_react.default.createElement("span", null, (_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 && /*#__PURE__*/_react.default.createElement("span", null, (_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length))), isSlideBar ? /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: open,
+    onClose: props.onClose,
+    hideCloseDefault: true,
+    isSlideBar: true,
+    slideBarPosition: (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$heade = _theme$layouts2.header) === null || _theme$layouts2$heade === void 0 ? void 0 : (_theme$layouts2$heade2 = _theme$layouts2$heade.componets) === null || _theme$layouts2$heade2 === void 0 ? void 0 : (_theme$layouts2$heade3 = _theme$layouts2$heade2.cart) === null || _theme$layouts2$heade3 === void 0 ? void 0 : (_theme$layouts2$heade4 = _theme$layouts2$heade3.open_strategy) === null || _theme$layouts2$heade4 === void 0 ? void 0 : _theme$layouts2$heade4.position
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('MY_CART', 'My cart')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    color: "primary",
+    onClick: props.onClose
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineClose.default, null), " ", t('CLOSE', 'Close'))), /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+    isCartPopover: true,
+    carts: props.carts,
+    isOrderStateCarts: !!orderState.carts,
+    onClose: props.onClose,
+    setPreorderBusiness: setPreorderBusiness,
+    isOpenCart: open,
+    onClick: props.onClick,
+    isSlideBar: isSlideBar
+  })) : /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "cart-popover",
     ref: popperElement,
     style: popStyle
@@ -170,7 +202,9 @@ var CartPopover = function CartPopover(props) {
     carts: props.carts,
     isOrderStateCarts: !!orderState.carts,
     onClose: props.onClose,
-    setPreorderBusiness: setPreorderBusiness
+    setPreorderBusiness: setPreorderBusiness,
+    isOpenCart: open,
+    onClick: props.onClick
   }), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",
     ref: arrowElement,

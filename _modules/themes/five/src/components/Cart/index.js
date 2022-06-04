@@ -72,7 +72,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartUI = function CartUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$carts, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _cart$payment_events, _cart$payment_events2, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _orderState$carts, _theme$layouts, _theme$layouts$viewSt, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _cart$payment_events, _cart$payment_events2, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
 
   var currentCartUuid = props.currentCartUuid,
       clearCart = props.clearCart,
@@ -169,6 +169,8 @@ var CartUI = function CartUI(props) {
 
   var isCouponEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.coupon) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
   var cart = orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(props.cart.business_id)];
+  var viewString = isStore ? 'business_view' : 'header';
+  var hideCartComments = (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$viewSt = _theme$layouts[viewString]) === null || _theme$layouts$viewSt === void 0 ? void 0 : (_theme$layouts$viewSt2 = _theme$layouts$viewSt.components) === null || _theme$layouts$viewSt2 === void 0 ? void 0 : (_theme$layouts$viewSt3 = _theme$layouts$viewSt2.cart) === null || _theme$layouts$viewSt3 === void 0 ? void 0 : (_theme$layouts$viewSt4 = _theme$layouts$viewSt3.components) === null || _theme$layouts$viewSt4 === void 0 ? void 0 : (_theme$layouts$viewSt5 = _theme$layouts$viewSt4.comments) === null || _theme$layouts$viewSt5 === void 0 ? void 0 : _theme$layouts$viewSt5.hidden;
   var walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -346,7 +348,8 @@ var CartUI = function CartUI(props) {
       getProductMax: getProductMax,
       offsetDisabled: offsetDisabled,
       onDeleteProduct: handleDeleteClick,
-      onEditProduct: handleEditProduct
+      onEditProduct: handleEditProduct,
+      isStore: isStore
     });
   })), !(cart !== null && cart !== void 0 && cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.NoValidProductMessage, null, t('REMOVE_NOT_AVAILABLE_CART_PRODUCTS', 'To continue with your checkout, please remove from your cart the products that are not available.')), (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.OrderBill, {
     isCheckout: isCheckout
@@ -479,7 +482,7 @@ var CartUI = function CartUI(props) {
     price: cart.total
   })), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
-  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.total) >= 0 ? cart === null || cart === void 0 ? void 0 : cart.total : 0))))), (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement("table", {
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.total) >= 0 ? cart === null || cart === void 0 ? void 0 : cart.total : 0))))), (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && !hideCartComments && /*#__PURE__*/_react.default.createElement("table", {
     className: "comments"
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('COMMENTS', 'Comments'))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement(_styles.CommentContainer, null, /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     defaultValue: cart === null || cart === void 0 ? void 0 : cart.comment,

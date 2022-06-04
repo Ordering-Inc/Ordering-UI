@@ -13,9 +13,15 @@ var _TiArrowSortedUp = _interopRequireDefault(require("@meronex/icons/ti/TiArrow
 
 var _orderingComponents = require("ordering-components");
 
+var _styledComponents = require("styled-components");
+
+var _FiClock = _interopRequireDefault(require("@meronex/icons/fi/FiClock"));
+
 var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
+
+var _utils = require("../../../../../utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessItemAccordion = function BusinessItemAccordion(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _orderState$options, _props$afterComponent, _props$afterElements;
 
   var uuid = props.uuid,
       isCartPending = props.isCartPending,
@@ -75,6 +81,8 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       setActive = _useState2[0],
@@ -98,6 +106,14 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   var content = (0, _react.useRef)(null);
   var businessStore = (0, _react.useRef)(null);
   var businessDelete = (0, _react.useRef)(null);
+  var viewString = isStore ? 'business_view' : 'header';
+
+  var _theme$layouts$viewSt = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$viewSt2 = _theme$layouts[viewString]) === null || _theme$layouts$viewSt2 === void 0 ? void 0 : (_theme$layouts$viewSt3 = _theme$layouts$viewSt2.components) === null || _theme$layouts$viewSt3 === void 0 ? void 0 : (_theme$layouts$viewSt4 = _theme$layouts$viewSt3.cart) === null || _theme$layouts$viewSt4 === void 0 ? void 0 : (_theme$layouts$viewSt5 = _theme$layouts$viewSt4.components) === null || _theme$layouts$viewSt5 === void 0 ? void 0 : _theme$layouts$viewSt5.business,
+      logo = _theme$layouts$viewSt.logo,
+      time = _theme$layouts$viewSt.time;
+
+  var isHideBusinessLogo = logo === null || logo === void 0 ? void 0 : logo.hidden;
+  var isHideBusinessTime = time === null || time === void 0 ? void 0 : time.hidden;
 
   var toggleAccordion = function toggleAccordion(e) {
     var _businessStore$curren, _businessDelete$curre;
@@ -184,10 +200,12 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     onClick: function onClick(e) {
       return toggleAccordion(e);
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, !isHideBusinessLogo && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+    bgimage: (business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)
+  })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
     className: "info",
     isStore: isStore
-  }, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("div", null, handleStoreRedirect && !isCartOnProductsList && !isStore && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), !isHideBusinessTime && /*#__PURE__*/_react.default.createElement(_styles.TimeContainer, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))), /*#__PURE__*/_react.default.createElement("div", null, handleStoreRedirect && !isCartOnProductsList && !isStore && /*#__PURE__*/_react.default.createElement("span", {
     ref: businessStore,
     onClick: function onClick() {
       return isClosed ? handleOpenBusinessMenu(business) : handleStoreRedirect(business === null || business === void 0 ? void 0 : business.slug);

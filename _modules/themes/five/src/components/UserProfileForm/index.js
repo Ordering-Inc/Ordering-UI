@@ -273,7 +273,8 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     setWillVerifyOtpState: setWillVerifyOtpState
   }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ADDRESSES', 'My Saved places')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
-    addressList: user === null || user === void 0 ? void 0 : user.addresses
+    addressList: user === null || user === void 0 ? void 0 : user.addresses,
+    isProfile: true
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PROFILE', 'Profile'),
     content: alertState.content,

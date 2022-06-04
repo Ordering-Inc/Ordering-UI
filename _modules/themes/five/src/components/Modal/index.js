@@ -54,6 +54,8 @@ var ModalUI = function ModalUI(props) {
       isProductForm = props.isProductForm,
       authModal = props.authModal,
       onRemove = props.onRemove,
+      isSlideBar = props.isSlideBar,
+      slideBarPosition = props.slideBarPosition,
       disableOverflowX = props.disableOverflowX;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -88,6 +90,9 @@ var ModalUI = function ModalUI(props) {
     height: props.height,
     padding: props.padding,
     isTransparent: isTransparent,
+    isSlideBar: isSlideBar,
+    slideBarPosition: slideBarPosition,
+    open: props.open,
     disableOverflowX: disableOverflowX
   }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, null), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, {
     isProductForm: isProductForm

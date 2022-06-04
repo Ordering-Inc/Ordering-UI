@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var WalletsUI = function WalletsUI(props) {
-  var _ref, _walletList$wallets, _walletList$wallets2, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _transactionsList$lis5, _transactionsList$lis6, _loyaltyLevel$image, _walletList$wallets5;
+  var _ref, _walletList$wallets, _walletList$wallets2, _user$loyalty_level, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _transactionsList$lis5, _transactionsList$lis6, _loyaltyLevel$image, _walletList$wallets5;
 
   var walletList = props.walletList,
       transactionsList = props.transactionsList,
@@ -90,7 +90,7 @@ var WalletsUI = function WalletsUI(props) {
   var currentWalletSelected = (_ref = ((_walletList$wallets = walletList.wallets) === null || _walletList$wallets === void 0 ? void 0 : _walletList$wallets.length) > 0 && ((_walletList$wallets2 = walletList.wallets) === null || _walletList$wallets2 === void 0 ? void 0 : _walletList$wallets2.find(function (w) {
     return w.type === tabSelected;
   }))) !== null && _ref !== void 0 ? _ref : null;
-  var loyaltyLevel = Object.keys(user === null || user === void 0 ? void 0 : user.loyalty_level).length > 0 && (user === null || user === void 0 ? void 0 : user.loyalty_level);
+  var loyaltyLevel = Object.keys((_user$loyalty_level = user === null || user === void 0 ? void 0 : user.loyalty_level) !== null && _user$loyalty_level !== void 0 ? _user$loyalty_level : {}).length > 0 && (user === null || user === void 0 ? void 0 : user.loyalty_level);
   var walletName = {
     cash: {
       name: t('CASH_WALLET', 'Cash Wallet'),

@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrappNotAddresses = exports.TitleFormContainer = exports.List = exports.FormActions = exports.ContinueButton = exports.CloseIcon = exports.AddressTitle = exports.AddressListUl = exports.AddressListContainer = exports.AddressItemActions = exports.AddressItem = exports.AddressHalfContainer = exports.AddressFormContainer = void 0;
+exports.WrappNotAddresses = exports.TitleFormContainer = exports.TitleAddress = exports.List = exports.FormActions = exports.ContinueButton = exports.CloseIcon = exports.AddressTitle = exports.AddressListUl = exports.AddressListContainer = exports.AddressItemActions = exports.AddressItem = exports.AddressHalfContainer = exports.AddressFormContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -18,14 +18,14 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var AddressListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 0px 10px;\n  ", "\n\n  ", "\n\n  button.add {\n    height: 50px;\n    ", "\n  }\n"])), function (_ref) {
-  var isCustomerMode = _ref.isCustomerMode;
-  return isCustomerMode && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n  "])));
+  var isProfile = _ref.isProfile;
+  return !isProfile && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n  "])));
 }, function (_ref2) {
   var isLoading = _ref2.isLoading;
   return isLoading && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
 }, function (_ref3) {
-  var isCustomerMode = _ref3.isCustomerMode;
-  return isCustomerMode && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      min-width: 100px;\n    "])));
+  var isProfile = _ref3.isProfile;
+  return !isProfile && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      min-width: 100px;\n    "])));
 });
 
 exports.AddressListContainer = AddressListContainer;
@@ -112,3 +112,7 @@ exports.CloseIcon = CloseIcon;
 var TitleFormContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: center;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n"])));
 
 exports.TitleFormContainer = TitleFormContainer;
+
+var TitleAddress = _styledComponents.default.h1(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin: auto;\n  font-size: 24px;\n  margin-bottom: 20px;\n"])));
+
+exports.TitleAddress = TitleAddress;

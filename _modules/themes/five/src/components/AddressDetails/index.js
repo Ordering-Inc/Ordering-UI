@@ -44,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _orderState$options3, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options2, _props$afterComponent, _props$afterElements;
 
   var addressToShow = props.addressToShow,
       isCartPending = props.isCartPending,
@@ -80,20 +80,6 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       _useCustomer2 = _slicedToArray(_useCustomer, 1),
       user = _useCustomer2[0].user;
 
-  var handleFindBusinesses = function handleFindBusinesses() {
-    var _orderState$options, _orderState$options$a;
-
-    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
-      setAlertState({
-        open: true,
-        content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')]
-      });
-      return;
-    }
-
-    setOpenModal(false);
-  };
-
   (0, _react.useEffect)(function () {
     return function () {
       return setOpenModal(false);
@@ -107,7 +93,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h1", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h1", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.address)), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setOpenModal(true);
     }
@@ -119,7 +105,6 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     height: "162px",
     loading: "lazy"
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESSES', 'Addresses'),
     open: openModal,
     width: "70%",
     onClose: function onClose() {
@@ -131,9 +116,6 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     onCancel: function onCancel() {
       return setOpenModal(false);
-    },
-    onAccept: function onAccept() {
-      return handleFindBusinesses();
     },
     userCustomerSetup: isCustomerMode && user,
     isFromCheckout: isFromCheckout,

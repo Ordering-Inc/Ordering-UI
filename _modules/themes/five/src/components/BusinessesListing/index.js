@@ -46,7 +46,7 @@ var BusinessesListing = function BusinessesListing(props) {
 
   var HomeLayoutConfig = {
     homepage_settings: {
-      layout: 'red',
+      layout: 'original',
       // 'original', 'starbucks', 'red'
       contentPosition: 'bottom' // 'left', 'right', top, 'bottom', 'center'
 

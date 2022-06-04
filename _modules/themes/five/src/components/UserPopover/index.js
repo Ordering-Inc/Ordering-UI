@@ -62,7 +62,7 @@ var optionsDefault = [{
 }];
 
 var UserPopover = function UserPopover(props) {
-  var _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
+  var _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       isHome = props.isHome,
@@ -90,7 +90,7 @@ var UserPopover = function UserPopover(props) {
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
   var isWalletEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && ((configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1');
-  var isPromotionsEnabled = (configs === null || configs === void 0 ? void 0 : configs.advanced_offers_module) === '1' || (configs === null || configs === void 0 ? void 0 : configs.advanced_offers_module) === 'true';
+  var isPromotionsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off = configs.advanced_offers_module) === null || _configs$advanced_off === void 0 ? void 0 : _configs$advanced_off.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off2 = configs.advanced_offers_module) === null || _configs$advanced_off2 === void 0 ? void 0 : _configs$advanced_off2.value) === true;
   var extraOptions = [{
     name: 'profile',
     pathname: '/profile',

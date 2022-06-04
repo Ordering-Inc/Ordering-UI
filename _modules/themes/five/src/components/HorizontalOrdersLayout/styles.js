@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TitleContainer = exports.Price = exports.Logo = exports.Content = exports.Card = exports.ButtonWrapper = exports.BusinessLogoWrapper = void 0;
+exports.TitleContainer = exports.Price = exports.Map = exports.Logo = exports.Content = exports.Card = exports.ButtonWrapper = exports.BusinessLogoWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,9 +48,9 @@ var Price = _styledComponents.default.div(_templateObject4 || (_templateObject4 
 
 exports.Price = Price;
 
-var Card = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  margin: 10px;\n  position: relative;\n  background: white;\n  border-radius: 16px;\n  text-align: left;\n  transition: all 0.3s ease;\n  \n  ", "\n\n  &:hover {\n    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;\n  }\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px) {\n    min-width: 430px;\n    max-height: ", ";\n    width: 430px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n"])), function (_ref6) {
+var Card = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  margin: 10px;\n  position: relative;\n  background: white;\n  border-radius: 16px;\n  display: inline-block;\n  text-align: left;\n  transition: all 0.3s ease;\n\n  ", "\n\n  &:hover {\n    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;\n  }\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px) {\n    min-width: 430px;\n    max-height: ", ";\n    width: 430px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n"])), function (_ref6) {
   var isCustomerMode = _ref6.isCustomerMode;
-  return isCustomerMode ? (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    min-width: 300px;\n    width: 300px;\n    display: inline-block;\n  "]))) : (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    min-width: 380px;\n    width: 380px;\n    display: inline-flex;\n    align-items: center;\n    height: ", ";\n    max-height: ", ";\n  "])), function (_ref7) {
+  return isCustomerMode ? (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    min-width: 300px;\n    width: 300px;\n    display: inline-block;\n  "]))) : (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    min-width: 380px;\n    width: 380px;\n    height: ", ";\n    max-height: ", ";\n  "])), function (_ref7) {
     var isBusinessesPage = _ref7.isBusinessesPage;
     return isBusinessesPage && '300px';
   }, function (_ref8) {
@@ -112,3 +112,22 @@ exports.Logo = Logo;
 var TitleContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
 
 exports.TitleContainer = TitleContainer;
+
+var Map = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n  min-height: ", ";\n  img{\n    width: 100%;\n    height: 100%;\n    border-top-left-radius: 16px;\n    border-top-right-radius: 16px;\n    border-radius: ", ";\n    image-rendering: -webkit-optimize-contrast;\n    object-fit: cover;\n  }\n  @media(min-width: 480px){\n    height: ", ";\n    min-height: ", "\n  }\n"])), function (_ref11) {
+  var isBusinessesPage = _ref11.isBusinessesPage;
+  return isBusinessesPage ? '200px' : '88px';
+}, function (_ref12) {
+  var isBusinessesPage = _ref12.isBusinessesPage;
+  return isBusinessesPage && '175px';
+}, function (_ref13) {
+  var isBusinessesPage = _ref13.isBusinessesPage;
+  return isBusinessesPage && '16px';
+}, function (_ref14) {
+  var isBusinessesPage = _ref14.isBusinessesPage;
+  return isBusinessesPage ? '200px' : '100px';
+}, function (_ref15) {
+  var isBusinessesPage = _ref15.isBusinessesPage;
+  return isBusinessesPage && '200px';
+});
+
+exports.Map = Map;

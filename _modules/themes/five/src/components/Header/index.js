@@ -475,12 +475,11 @@ var Header = function Header(props) {
       return openModal(variant);
     }
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: modalSelected === 'address' ? t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?') : null,
     open: modalIsOpen,
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
-    width: "700px"
+    width: modalSelected === 'address' ? '70%' : '700px'
   }, modalSelected === 'cart' && /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
     carts: cartsWithProducts,
     isOrderStateCarts: !!orderState.carts,
@@ -492,9 +491,6 @@ var Header = function Header(props) {
     changeOrderAddressWithDefault: true,
     userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     onCancel: function onCancel() {
-      return setModalIsOpen(false);
-    },
-    onAccept: function onAccept() {
       return setModalIsOpen(false);
     },
     isCustomerMode: isCustomerMode
