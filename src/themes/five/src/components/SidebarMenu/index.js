@@ -10,6 +10,7 @@ import BiWallet from '@meronex/icons/bi/BiWallet'
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
+import SiJsonwebtokens from '@meronex/icons/si/SiJsonwebtokens'
 
 import { useEvent, useLanguage, useOrder, useSession, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
@@ -267,6 +268,33 @@ export const SidebarMenu = (props) => {
                       }
                     >
                       {t('HELP', 'help')}
+                    </TextInfo>
+                  </MenuLinkText>
+                  <MenuLinkSeparator>
+                    <div>
+                      <hr />
+                    </div>
+                  </MenuLinkSeparator>
+                </WrappContent>
+              </MenuLink>
+              <MenuLink
+                onClick={() => handleGoToPage({ page: 'sessions' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    active={
+                      window.location.pathname === '/sessions'
+                    }
+                  >
+                    <SiJsonwebtokens />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      active={
+                        window.location.pathname === '/sessions'
+                      }
+                    >
+                      {t('SESSIONS', 'Sessions')}
                     </TextInfo>
                   </MenuLinkText>
                   <MenuLinkSeparator>
