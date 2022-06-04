@@ -62,9 +62,10 @@ export const Card = styled.div`
   position: relative;
   background: white;
   border-radius: 16px;
+  display: inline-block;
   text-align: left;
   transition: all 0.3s ease;
-  
+
   ${({ isCustomerMode }) => isCustomerMode ? css`
     min-width: 300px;
     width: 300px;
@@ -72,8 +73,6 @@ export const Card = styled.div`
   ` : css`
     min-width: 380px;
     width: 380px;
-    display: inline-flex;
-    align-items: center;
     height: ${({ isBusinessesPage }) => isBusinessesPage && '300px'};
     max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '220px'};
   `}
@@ -206,4 +205,23 @@ export const Logo = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`
+
+export const Map = styled.div`
+  width: 100%;
+  height: ${({ isBusinessesPage }) => isBusinessesPage ? '200px' : '88px'};
+  min-height: ${({ isBusinessesPage }) => isBusinessesPage && '175px'};
+  img{
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-radius: ${({ isBusinessesPage }) => isBusinessesPage && '16px'};
+    image-rendering: -webkit-optimize-contrast;
+    object-fit: cover;
+  }
+  @media(min-width: 480px){
+    height: ${({ isBusinessesPage }) => isBusinessesPage ? '200px' : '100px'};
+    min-height: ${({ isBusinessesPage }) => isBusinessesPage && '200px'}
+  }
 `

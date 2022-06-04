@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils } from 'ordering-components'
+import { useLanguage, useUtils, useConfig } from 'ordering-components'
 import {
   Content,
   Price,
@@ -7,7 +7,8 @@ import {
   BusinessLogoWrapper,
   ButtonWrapper,
   Logo,
-  TitleContainer
+  TitleContainer,
+  Map
 } from './styles'
 import {
   OrdersContainer,
@@ -19,6 +20,7 @@ import { AutoScroll } from '../AutoScroll'
 import { Tabs } from '../../styles/Tabs'
 import { Button } from '../../styles/Buttons'
 import BsDot from '@meronex/icons/bs/BsDot'
+import { getGoogleMapImage } from '../../../../../utils'
 
 export const HorizontalOrdersLayout = (props) => {
   const {
@@ -40,6 +42,7 @@ export const HorizontalOrdersLayout = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
+  const [{ configs }] = useConfig()
 
   const ordersToShow = businessesIds
     ? orders.filter(order => businessesIds?.includes(order?.business_id))
@@ -52,6 +55,12 @@ export const HorizontalOrdersLayout = (props) => {
       onRedirectPage({ page: 'order_detail', params: { orderId: uuid } })
     }
   }
+
+  // eslint-disable-next-line camelcase
+  const { business_logo, date, map } = theme?.layouts?.orders?.components
+  const isHideBusinessLogo = business_logo.hidden
+  const isHideDate = date.hidden
+  const isHideMap = map.hidden
 
   const Orders = () => {
     return (
@@ -70,11 +79,25 @@ export const HorizontalOrdersLayout = (props) => {
             isCustomerMode={isCustomerMode}
             onClick={() => handleClickCard(order?.uuid)}
           >
-            {!isCustomerMode && (
-              <BusinessLogoWrapper bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} />
+            {(configs?.google_maps_api_key?.value || isBusinessesPage) && !isHideMap && (
+              <Map isBusinessesPage={isBusinessesPage}>
+                <img
+                  src={
+                    isBusinessesPage
+                      ? (order?.business?.header || order?.business?.logo || theme.images?.dummies?.businessLogo)
+                      : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)
+                  }
+                  alt={isBusinessesPage ? 'business_header' : 'google-maps-img'}
+                  height={isBusinessesPage ? '200px' : '100px'}
+                  width='400px'
+                />
+              </Map>
             )}
             <Content isCustomerMode={isCustomerMode}>
-              {isCustomerMode && (
+              {!isCustomerMode && !isHideBusinessLogo && (
+                <BusinessLogoWrapper bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} />
+              )}
+              {isCustomerMode && !isHideBusinessLogo && (
                 <>
                   {(order.business?.logo || theme.images?.dummies?.businessLogo) && (
                     <Logo>
@@ -103,10 +126,12 @@ export const HorizontalOrdersLayout = (props) => {
                       <p name='order_number'>{t('ORDER_NUM', 'Order No.')} {order.id}</p>
                     </>
                   )}
-                  <p>{order?.delivery_datetime_utc
-                    ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY hh:mm A' })
-                    : parseDate(order?.delivery_datetime, { utc: false })}
-                  </p>
+                  {!isHideDate && (
+                    <p>{order?.delivery_datetime_utc
+                      ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY hh:mm A' })
+                      : parseDate(order?.delivery_datetime, { utc: false })}
+                    </p>
+                  )}
                 </div>
                 <p className='order-status'>{getOrderStatus(order.status)?.value}</p>
               </BusinessInformation>
