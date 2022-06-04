@@ -317,3 +317,17 @@ export const RibbonBox = styled.div`
     border-radius: 50px;
   `}
 `
+export const SearchIconWrapper = styled.div`
+  cursor: pointer;
+  background-color: ${props => props.theme.colors.gray200};
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    font-size: 18px;
+  }
+`

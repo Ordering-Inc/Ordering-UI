@@ -114,6 +114,19 @@ export const RedirectLink = styled.div`
     text-decoration: none;
   }
 
+  &.new-account {
+    a {
+      color: ${props => props.theme.colors.primary} !important;
+      text-decoration: none;
+      &:link, &:visited {
+        color: ${props => props.theme.colors.primary} !important;
+      }
+      &:hover {
+        text-decoration: underline !important;
+      }
+    }
+  }
+
   * {
     margin: 0px;
     padding: 0px;
@@ -335,5 +348,10 @@ export const HeroSide = styled(Side)`
     justify-content: center;
     align-items: center;
     color: ${props => props.theme.colors.primaryContrast};
+
+    img{
+      max-width: 100%;
+      height: auto;
+    }
   }
 `

@@ -13,6 +13,7 @@ export const CardContainer = styled.div`
   position: relative;
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
+  min-height: 108px;
 
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
 
