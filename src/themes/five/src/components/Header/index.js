@@ -164,7 +164,6 @@ export const Header = (props) => {
       events.emit('go_to_page', { page: 'home' })
       return
     }
-    console.log(index, 'This is index')
 
     if (layoutType === 1) {
       setModalPageToShow(index)
