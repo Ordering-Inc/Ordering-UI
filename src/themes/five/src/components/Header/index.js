@@ -412,10 +412,9 @@ export const Header = (props) => {
         )}
         {modalIsOpen && (
           <Modal
-            title={(modalSelected === 'address') ? t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?') : null}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
-            width='700px'
+            width={modalSelected === 'address' ? '70%' : '700px'}
           >
             {modalSelected === 'cart' && (
               <CartContent
@@ -431,7 +430,6 @@ export const Header = (props) => {
                   changeOrderAddressWithDefault
                   userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
                   onCancel={() => setModalIsOpen(false)}
-                  onAccept={() => setModalIsOpen(false)}
                   isCustomerMode={isCustomerMode}
                 />
               ) : (

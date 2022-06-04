@@ -26,6 +26,8 @@ const ModalUI = (props) => {
     isProductForm,
     authModal,
     onRemove,
+    isSlideBar,
+    slideBarPosition,
     disableOverflowX
   } = props
   const [, t] = useLanguage()
@@ -56,6 +58,9 @@ const ModalUI = (props) => {
       height={props.height}
       padding={props.padding}
       isTransparent={isTransparent}
+      isSlideBar={isSlideBar}
+      slideBarPosition={slideBarPosition}
+      open={props.open}
       disableOverflowX={disableOverflowX}
     >
       {isProductForm && (

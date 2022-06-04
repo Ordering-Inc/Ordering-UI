@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const AccordionSection = styled.div`
@@ -219,5 +220,46 @@ export const PriceContainer = styled.div`
     min-width: 150px;
     width: 50%;
     height: 50px;
+  }
+`
+
+const BusinessLogoStyled = styled.div`
+  display: flex;
+  width: 75px;
+  height: 75px;
+  min-height: 75px;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: contain;
+  object-fit: contain;
+  background-position: center;
+  border-radius: 10px;
+`
+
+export const BusinessLogo = (props) => {
+  return (
+    <BusinessLogoStyled
+      {...props}
+      style={{ backgroundImage: `url(${props.bgimage})` }}
+    >
+      {props.children}
+    </BusinessLogoStyled>
+  )
+}
+
+export const WrapperBusinessLogo = styled.div`
+  max-width: 75px;
+  max-height: 75px;
+  height: 75px;
+  width: 75px;
+  margin-right: 10px;
+`
+
+export const TimeContainer = styled.div`
+  svg{
+    position: relative;
+    top: 1px;
+    margin-right: 5px;
   }
 `

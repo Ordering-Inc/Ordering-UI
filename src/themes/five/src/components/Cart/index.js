@@ -73,7 +73,8 @@ const CartUI = (props) => {
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
-
+  const viewString = isStore ? 'business_view' : 'header'
+  const hideCartComments = theme.layouts?.[viewString]?.components?.cart?.components?.comments?.hidden
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -224,6 +225,7 @@ const CartUI = (props) => {
                 offsetDisabled={offsetDisabled}
                 onDeleteProduct={handleDeleteClick}
                 onEditProduct={handleEditProduct}
+                isStore={isStore}
               />
             ))}
             {!cart?.valid_products && (
@@ -391,7 +393,7 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                {cart?.status !== 2 && (
+                {cart?.status !== 2 && !hideCartComments && (
                   <table className='comments'>
                     <tbody>
                       <tr>

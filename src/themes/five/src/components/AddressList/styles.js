@@ -4,7 +4,7 @@ export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 10px;
-  ${({ isCustomerMode }) => isCustomerMode && css`
+  ${({ isProfile }) => !isProfile && css`
     width: 100%;
   `}
 
@@ -14,7 +14,7 @@ export const AddressListContainer = styled.div`
 
   button.add {
     height: 50px;
-    ${({ isCustomerMode }) => isCustomerMode && css`
+    ${({ isProfile }) => !isProfile && css`
       min-width: 100px;
     `}
   }
@@ -232,4 +232,11 @@ export const TitleFormContainer = styled.div`
     margin: auto;
     font-size: 24px;
   }
+`
+
+export const TitleAddress = styled.h1`
+  text-align: center;
+  margin: auto;
+  font-size: 24px;
+  margin-bottom: 20px;
 `

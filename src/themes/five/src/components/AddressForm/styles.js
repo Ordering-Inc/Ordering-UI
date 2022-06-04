@@ -192,7 +192,7 @@ export const AddressTagSection = styled.div`
 
 export const WrapperMap = styled.div`
   width: 100%;
-  height: 250px;
+  height: 170px;
   > div {
     position: relative !important;
     width: 100% !important;

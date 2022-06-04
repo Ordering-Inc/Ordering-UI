@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import TiArrowSortedUp from '@meronex/icons/ti/TiArrowSortedUp'
 import { useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
-
+import { useTheme } from 'styled-components'
+import FiClock from '@meronex/icons/fi/FiClock'
 import {
   AccordionSection,
   Accordion,
@@ -10,9 +11,13 @@ import {
   BusinessInfo,
   BusinessTotal,
   BusinessActions,
-  PriceContainer
+  PriceContainer,
+  WrapperBusinessLogo,
+  BusinessLogo,
+  TimeContainer
 } from './styles'
 import { Button } from '../../styles/Buttons'
+import { convertHoursToMinutes } from '../../../../../utils'
 
 export const BusinessItemAccordion = (props) => {
   const {
@@ -40,6 +45,7 @@ export const BusinessItemAccordion = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
   const [{ parsePrice }] = useUtils()
+  const theme = useTheme()
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
@@ -48,6 +54,11 @@ export const BusinessItemAccordion = (props) => {
   const content = useRef(null)
   const businessStore = useRef(null)
   const businessDelete = useRef(null)
+
+  const viewString = isStore ? 'business_view' : 'header'
+  const { logo, time } = theme?.layouts?.[viewString]?.components?.cart?.components?.business
+  const isHideBusinessLogo = logo?.hidden
+  const isHideBusinessTime = time?.hidden
 
   const toggleAccordion = (e) => {
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
@@ -129,8 +140,28 @@ export const BusinessItemAccordion = (props) => {
               onClick={(e) => toggleAccordion(e)}
             >
               <BusinessInfo>
+                {!isHideBusinessLogo && (
+                  <WrapperBusinessLogo>
+                    <BusinessLogo bgimage={business?.logo || theme.images?.dummies?.businessLogo} />
+                  </WrapperBusinessLogo>
+                )}
                 <ContentInfo className='info' isStore={isStore}>
                   <h2>{business?.name}</h2>
+                  {!isHideBusinessTime && (
+                    <TimeContainer>
+                      {orderState?.options?.type === 1 ? (
+                        <span>
+                          <FiClock />
+                          {convertHoursToMinutes(business?.delivery_time)}
+                        </span>
+                      ) : (
+                        <span>
+                          <FiClock />
+                          {convertHoursToMinutes(business?.pickup_time)}
+                        </span>
+                      )}
+                    </TimeContainer>
+                  )}
                   <div>
                     {handleStoreRedirect && !isCartOnProductsList && !isStore && (
                       <span
