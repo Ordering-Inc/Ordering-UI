@@ -4,7 +4,7 @@ export const AdminSettings = {
     contentPosition: 'left' // 'left', 'right', top, 'bottom', 'center'
   },
   businesses_listening_settings: {
-    layout: 'original', // 'original', 'grid', 'map', 'listing', 'appointments//pending'
+    layout: 'listing', // 'original', 'grid', 'map', 'listing', 'appointments//pending'
     information_show_status: {
       business_header: true, // true or false
       business_logo: true, // true or false
@@ -15,18 +15,18 @@ export const AdminSettings = {
       business_review: true // true or false
       // favorite_business: true // true or false
     },
-    information_type: 'top_left' // 'top_left', 'top_right', 'bottom_left', 'bottom_right'
+    information_type: 'top_right' // 'top_left', 'top_right', 'bottom_left', 'bottom_right'
   },
   products_listening_settings: {
     product_section: {
       information_position: 'left', //  'left', 'right', 'top', 'bottom'
       information_show_status: {
-        dummy_product_images: true, // true, false ***not implemented**
+        dummy_product_images: true, // true, false
         description: true, // true, false
         image: true, // true, false
         add_icon: true // true, false
       },
-      number_of_elements: 1, // 1, 2, 3 ***not implemented**
+      elements_type: 'starbucks', // 'original', 'starbucks', 'starbucks-latam'
       image_size: '1x' // '1x', '2x', '3x', '4x', '5x',
     },
     category_section: {

@@ -100,7 +100,9 @@ export const CardInfo = styled.div`
   > * {
     margin: 3px;
   }
-
+  > svg {
+    margin: auto;
+  }
   h1 {
     font-size: 14px;
     font-weight: 500;
