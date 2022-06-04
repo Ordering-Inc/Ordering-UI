@@ -43,7 +43,7 @@ const WalletsUI = (props) => {
 
   const currentWalletSelected = (walletList.wallets?.length > 0 && walletList.wallets?.find(w => w.type === tabSelected)) ?? null
 
-  const loyaltyLevel = user?.loyalty_level && Object.keys(user?.loyalty_level).length > 0
+  const loyaltyLevel = Object.keys(user?.loyalty_level ?? {}).length > 0 && user?.loyalty_level
 
   const walletName = {
     cash: {
