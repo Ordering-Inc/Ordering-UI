@@ -444,4 +444,4 @@ export const reviewCommentList = (type) => {
   return reviews[type]
 }
 
-export const layoutType = 4
+export const layoutType = 1

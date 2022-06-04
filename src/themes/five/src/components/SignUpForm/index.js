@@ -10,5 +10,6 @@ export const SignUpForm = (props) => {
   if (layoutType === 2) return <SignUpFormStarbucks {...props} />
   if (layoutType === 3) return <SignUpFormOld {...props} />
   if (layoutType === 4) return <SignUpFormRed {...props} />
+
   return <SignUpFormOriginal {...props} />
 }
