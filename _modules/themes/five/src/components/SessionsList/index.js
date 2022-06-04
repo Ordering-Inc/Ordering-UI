@@ -101,12 +101,12 @@ var SessionsListUI = function SessionsListUI(props) {
     });
   };
 
-  var onDeleteAllSessions = function onDeleteAllSessions() {
+  var onDeleteAllSessions = function onDeleteAllSessions(isOldUser, deleteCurrent) {
     setConfirm({
       open: true,
-      content: t('QUESTION_DELETE_ALL_SESSIONS', 'Are you sure that you want to delete all sessions?'),
+      content: isOldUser ? t('QUESTION_ENABLE_ALL_SESSIONS', 'Are you sure to enable all sessions?') : deleteCurrent ? t('QUESTION_DELETE_ALL_SESSIONS', 'Are you sure that you want to delete all sessions?') : t('QUESTION_DELETE_ALL_SESSIONS_EXCEPT_CURRENT', 'Are you sure that you want to delete all sessions except current?'),
       handleOnAccept: function handleOnAccept() {
-        handleDeleteAllSessions();
+        handleDeleteAllSessions(deleteCurrent);
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
@@ -142,16 +142,22 @@ var SessionsListUI = function SessionsListUI(props) {
         return onDeleteSession(session);
       }
     }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)));
-  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     disabled: actionState.loading,
     onClick: function onClick() {
-      return onDeleteAllSessions();
+      return onDeleteAllSessions(false, true);
     }
-  }, t('DELETE_ALL_SESSIONS', 'Delete all sessions'))) : /*#__PURE__*/_react.default.createElement(_styles.NoMessage, null, t('YOU_DONT_HAVE_ANY_SESSIONS', 'You don\'t have any sessions'))) : /*#__PURE__*/_react.default.createElement(_styles.NoSessionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.NoMessage, null, t('YOU_DONT_HAVE_ENABLED_THE_SESSIONS', 'You don\'t have enabled the sessions, please active them to have a better control of your sessions.')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('DELETE_ALL_SESSIONS', 'Delete all sessions')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    disabled: actionState.loading,
+    onClick: function onClick() {
+      return onDeleteAllSessions(false, false);
+    }
+  }, t('DELETE_ALL_SESSIONS_EXCEPT_CURRENT', 'Delete all sessions except current')))) : /*#__PURE__*/_react.default.createElement(_styles.NoMessage, null, t('YOU_DONT_HAVE_ANY_SESSIONS', 'You don\'t have any sessions'))) : /*#__PURE__*/_react.default.createElement(_styles.NoSessionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.NoMessage, null, t('YOU_DONT_HAVE_ENABLED_THE_SESSIONS', 'You don\'t have enabled the sessions, please active them to have a better control of your sessions.')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
-      return onDeleteAllSessions();
+      return onDeleteAllSessions(true, false);
     }
   }, t('ACTIVE_SESSIONS', 'Active sessions'))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('WEB_APPNAME', 'Ordering'),
