@@ -6,14 +6,13 @@ import OtpInput from 'react-otp-input'
 import Skeleton from 'react-loading-skeleton'
 
 import {
-  // LoginForm as LoginFormController,
+  LoginForm as LoginFormController,
   useLanguage,
   useConfig,
   useSession,
   ReCaptcha,
   useApi
 } from 'ordering-components'
-import { LoginForm as LoginFormController } from './naked'
 import { Alert } from '../../../Confirm'
 import { SpinnerLoader } from '../../../../../../../components/SpinnerLoader'
 import { InputPhoneNumber } from '../../../InputPhoneNumber'
@@ -84,8 +83,6 @@ const LoginFormUI = (props) => {
   const theme = useTheme()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
-
-  const emailInput = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
@@ -183,7 +180,6 @@ const LoginFormUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
   }
 
   const handleChangePhoneNumber = (number, isValid) => {
@@ -536,7 +532,7 @@ const LoginFormUI = (props) => {
           )}
 
           {(elementLinkToSignup && loginTab !== 'cellphone_otp') && (
-            <RedirectLink register isPopup={isPopup}>
+            <RedirectLink register isPopup={isPopup} className='new-account'>
               <span>{t('NEW_ON_PLATFORM', theme?.defaultLanguages?.NEW_ON_PLATFORM || 'New on Ordering?')}</span>
               {elementLinkToSignup}
             </RedirectLink>
