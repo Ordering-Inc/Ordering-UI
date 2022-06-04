@@ -13,7 +13,8 @@ import {
   Description,
   OfferData,
   Code,
-  BusinessInfo
+  BusinessInfo,
+  OfferView
 } from './styles'
 import { SearchBar } from '../SearchBar'
 import { Button } from '../../styles/Buttons'
@@ -42,7 +43,7 @@ const PromotionsUI = (props) => {
     events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
   }
 
-  const filteredOffers = offersState?.offers?.filter(offer => offer.name.toLowerCase().includes(searchValue.toLowerCase()))
+  const filteredOffers = offersState?.offers?.filter(offer => offer?.name?.toLowerCase()?.includes(searchValue?.toLowerCase()))
 
   const targetString = offerSelected?.target === 1
     ? t('SUBTOTAL', 'Subtotal')
@@ -91,9 +92,11 @@ const PromotionsUI = (props) => {
             </ExpiresAt>
             <AvailableBusinesses>
               <p>{t('APPLY_FOR', 'Apply for')}:</p>
-              {offer.businesses.map((business, i) => (
-                <p key={business?.id}>{' '}{business?.name}{i + 1 < offer.businesses?.length ? ',' : ''}</p>
-              ))}
+              <p>
+                {offer.businesses.map((business, i) => (
+                  <React.Fragment key={business?.id}>{' '}{business?.name}{i + 1 < offer.businesses?.length ? ',' : ''}</React.Fragment>
+                ))}
+              </p>
             </AvailableBusinesses>
           </OfferInformation>
           <Button
@@ -107,9 +110,11 @@ const PromotionsUI = (props) => {
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}
-        title={`${offerSelected?.name} / ${t('VALUE_OF_OFFER', 'Value of offer')}: ${offerSelected?.rate_type === 1 ? `${offerSelected?.rate}%` : `${parsePrice(offerSelected?.rate)}`}`}
       >
-        <div>
+        <OfferView>
+          <h2>
+            {`${offerSelected?.name} / ${t('VALUE_OF_OFFER', 'Value of offer')}: ${offerSelected?.rate_type === 1 ? `${offerSelected?.rate}%` : `${parsePrice(offerSelected?.rate)}`}`}
+          </h2>
           <OfferData>
             {offerSelected?.type === 2 && (
               <Code>
@@ -152,7 +157,7 @@ const PromotionsUI = (props) => {
               )
             })}
           </div>
-        </div>
+        </OfferView>
       </Modal>
     </PromotionsContainer>
   )
