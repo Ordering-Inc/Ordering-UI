@@ -53,12 +53,12 @@ export const FormInput = styled.form`
   }
 
   div.phone_number {
-    margin: 10px 0px;
+    margin: 5px 0px;
     width: 100%;
   }
 
   input.form:not(:last-child) {
-    margin: 5px 0px;
+    margin: 7px 0px;
     padding: 8px 20px;
   }
 
@@ -204,7 +204,7 @@ export const LoginDivider = styled.div`
   display: flex;
   align-items: center;
   width: 80%;
-  margin: 30px 0;
+  margin: 20px 0;
 
   p {
     margin: 0;
@@ -226,7 +226,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin: 5px 0px;
+  margin: 0px;
 
   
   @media (min-width: 800px) {
@@ -273,7 +273,7 @@ export const InputBeforeIcon = styled.div`
 export const TermsConditionWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: 10px 0;
+  margin: 10px 0 5px 0px;
 
   > label {
     font-size: 14px;
@@ -304,7 +304,9 @@ export const TermsConditionWrapper = styled.div`
   }
 `
 
-export const PromotionsWrapper = styled(TermsConditionWrapper)``
+export const PromotionsWrapper = styled(TermsConditionWrapper)`
+  margin: 10px 0px;
+`
 
 export const BussinessAndDriverSignUp = styled.div`
   width: 100%;
@@ -336,4 +338,18 @@ export const ValidationText = styled.span`
   font-size: 12px;
   line-height: 18px;
   color: ${props => props.theme.colors.danger500};
+`
+
+export const TermsConditionDescription = styled.div`
+  max-height: 85px;
+  font-size: 14px;
+  overflow: auto;
+  margin-bottom: 10px;
+  margin-left: 3px;
+
+  ${props => props.theme?.rtl && css`
+    margin-left: 0px;
+    margin-right: 3px;
+  `}
+
 `

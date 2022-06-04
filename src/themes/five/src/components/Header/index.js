@@ -44,7 +44,7 @@ import { Confirm } from '../Confirm'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
-import { getDistance } from '../../../../../utils'
+import { getDistance, layoutType } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
 
 export const Header = (props) => {
@@ -162,9 +162,15 @@ export const Header = (props) => {
   const handleOpenLoginSignUp = (index) => {
     if (isCustomerMode) {
       events.emit('go_to_page', { page: 'home' })
-    } else {
+      return
+    }
+    console.log(index, 'This is index')
+
+    if (layoutType === 1) {
       setModalPageToShow(index)
       setAuthModalOpen(true)
+    } else {
+      events.emit('go_to_page', { page: index })
     }
   }
 
@@ -305,7 +311,7 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 920 && (
                     <>
-                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} style={{ whiteSpace: 'nowrap' }} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
+                      <MenuLink onClick={() => handleOpenLoginSignUp('signin')} style={{ whiteSpace: 'nowrap' }} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
                       {!isHideSignup && (
                         <MenuLink
                           onClick={() => handleOpenLoginSignUp('signup')}
@@ -504,7 +510,7 @@ export const Header = (props) => {
             width='50%'
             authModal
           >
-            {modalPageToShow === 'login' && (
+            {modalPageToShow === 'signin' && (
               <LoginForm
                 handleSuccessLogin={handleSuccessLogin}
                 elementLinkToSignup={
@@ -532,7 +538,7 @@ export const Header = (props) => {
                 elementLinkToLogin={
                   <a
                     onClick={
-                      (e) => handleCustomModalClick(e, { page: 'login' })
+                      (e) => handleCustomModalClick(e, { page: 'signin' })
                     } href='#'
                   >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
                   </a>
@@ -549,7 +555,7 @@ export const Header = (props) => {
                 elementLinkToLogin={
                   <a
                     onClick={
-                      (e) => handleCustomModalClick(e, { page: 'login' })
+                      (e) => handleCustomModalClick(e, { page: 'signin' })
                     } href='#'
                   >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
                   </a>
