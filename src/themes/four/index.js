@@ -47,6 +47,7 @@ import { PageNotFound } from '../../components/PageNotFound'
 import { FloatingButton } from '../../components/FloatingButton'
 import { Modal } from '../../components/Modal'
 import { UpsellingPage } from '../../components/UpsellingPage'
+import { NotFoundSource } from '../../components/NotFoundSource'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -97,6 +98,12 @@ export {
   UserFormDetailsUI,
   UserProfileForm,
   VerticalOrdersLayout,
+  BusinessProductsCategories,
+  PageNotFound,
+  FloatingButton,
+  Modal,
+  UpsellingPage,
+  NotFoundSource,
 
   // styles
   Button,

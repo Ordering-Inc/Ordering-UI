@@ -46,26 +46,23 @@ const DriverTipsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <DriverTipContainer id='driver-tip-container'>
-        {!isDriverTipUseCustom ? (
-          <>
-            <WrapperTips>
-              {driverTipsOptions.map((option, i) => (
-                <TipCard
-                  key={i}
-                  className={`${option === optionSelected ? 'active' : ''}`}
-                  onClick={() => handlerChangeOption(option)}
-                >
-                  {`${isFixedPrice ? parsePrice(option) : `${option}%`}`}
-                </TipCard>
-              ))}
-            </WrapperTips>
-            {!driverTipsOptions.includes(driverTip) && driverTip > 0 && (
-              <DriverTipMessage>
-                {t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')}
-              </DriverTipMessage>
-            )}
-          </>
-        ) : (
+        <WrapperTips>
+          {driverTipsOptions.map((option, i) => (
+            <TipCard
+              key={i}
+              className={`${option === optionSelected ? 'active' : ''}`}
+              onClick={() => handlerChangeOption(option)}
+            >
+              {`${isFixedPrice ? parsePrice(option) : `${option}%`}`}
+            </TipCard>
+          ))}
+        </WrapperTips>
+        {!driverTipsOptions.includes(driverTip) && driverTip > 0 && (
+          <DriverTipMessage>
+            {t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')}
+          </DriverTipMessage>
+        )}
+        {isDriverTipUseCustom && (
           <FormDriverTip>
             <WrapperInput>
               <Input

@@ -61,6 +61,11 @@ export const SoldOut = styled.span`
   &:first-letter {
     text-transform: uppercase;
   }
+
+  ${({ isBottom }) => isBottom && css`
+    bottom: 7px;
+    top: initial;
+  `}
 `
 
 export const CardInfo = styled.div`
@@ -112,6 +117,7 @@ export const CardInfo = styled.div`
 `
 
 export const WrapLogo = styled.div`
+  position: relative;
   max-width: 86px;
   max-height: 86px;
   height: 86px;
@@ -167,4 +173,40 @@ export const PriceWrapper = styled.div`
       font-size: 13px;
     }
   }
+`
+
+export const RibbonBox = styled.div`
+  position: absolute;
+  padding: 2px 8px;
+  box-sizing: border-box;
+  z-index: 10;
+  color: ${props => props.theme.colors.colorTextSignForm};
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 13px;
+  top: -4px;
+  right: -3px;
+  background-color: ${props => props.theme.colors.primary};
+  max-width: 50px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+
+  ${props => props.theme.rtl && css`
+    left: -3px;
+    right: initial;
+  `}
+
+  ${({ bgColor }) => bgColor && css`
+    background-color: ${bgColor};
+  `}
+
+  ${({ isRoundRect }) => isRoundRect && css`
+    border-radius: 7.6px;
+  `}
+
+  ${({ isCapsule }) => isCapsule && css`
+    border-radius: 50px;
+  `}
 `

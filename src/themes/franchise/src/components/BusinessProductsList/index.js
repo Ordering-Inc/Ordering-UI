@@ -3,13 +3,15 @@ import { ProductsList, useLanguage } from 'ordering-components'
 
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
+import { shape } from '../../../../../utils'
 
 import {
   ProductsContainer,
   ProductsListing,
   WrapAllCategories,
   ErrorMessage,
-  WrapperNotFound
+  WrapperNotFound,
+  RibbonBox
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
@@ -98,6 +100,15 @@ const BusinessProductsListUI = (props) => {
                           )
                         }
                         <h3>{category.name}</h3>
+                        {category?.ribbon?.enabled && (
+                          <RibbonBox
+                            bgColor={category?.ribbon?.color}
+                            isRoundRect={category?.ribbon?.shape === shape?.rectangleRound}
+                            isCapsule={category?.ribbon?.shape === shape?.capsuleShape}
+                          >
+                            {category?.ribbon?.text}
+                          </RibbonBox>
+                        )}
                       </div>
                       <ProductsListing>
                         {

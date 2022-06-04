@@ -70,6 +70,7 @@ import { SessionsList } from './src/components/SessionsList'
 import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SignUpBusiness } from './src/components/SignUpBusiness'
+import { SignUpDriver } from './src/components/SignUpDriver'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { StripeElementsForm } from './src/components/StripeElementsForm'
 import { StripeRedirectForm } from './src/components/StripeRedirectForm'
@@ -82,9 +83,11 @@ import { VerifyCodeForm } from './src/components/VerifyCodeForm'
 import { Wallets } from './src/components/Wallets'
 import { WalletTransactionItem } from './src/components/WalletTransactionItem'
 import { BusinessListingSearch } from './src/components/BusinessListingSearch'
+
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
+import { Checkbox } from '../../styles/Checkbox'
 
 export {
   AccordionDropdown,
@@ -160,6 +163,7 @@ export {
   SidebarMenu,
   SignUpForm,
   SignUpBusiness,
+  SignUpDriver,
   SingleProductCard,
   StripeElementsForm,
   StripeRedirectForm,
@@ -176,5 +180,6 @@ export {
   Button,
   Input,
   TextArea,
-  Select
+  Select,
+  Checkbox
 }

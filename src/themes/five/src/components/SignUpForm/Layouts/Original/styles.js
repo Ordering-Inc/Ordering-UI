@@ -89,8 +89,14 @@ export const RedirectLink = styled.div`
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary} !important;
     text-decoration: none;
+    &:link, &:visited {
+      color: ${props => props.theme.colors.primary} !important;
+    }
+    &:hover {
+      text-decoration: underline !important;
+    }
   }
 
   * {

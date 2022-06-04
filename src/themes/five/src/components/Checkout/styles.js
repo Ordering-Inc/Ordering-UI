@@ -19,11 +19,11 @@ export const Container = styled.div`
 export const WrapperLeftContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 40px 20px;
+  padding: 30px 20px;
 
   @media (min-width: 769px) {
     width: 55%;
-    padding: 55px 60px 55px 40px;
+    padding: 30px 60px 55px 40px;
   }
 `
 
@@ -179,6 +179,12 @@ export const WrapperLeftContent = styled.div`
     font-weight: 600;
     font-size: 32px;
     color: ${props => props.theme?.colors.darkTextColor};
+  }
+
+  .back-arrow {
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 5px;
   }
 `
 export const CheckOutDivider = styled.div`
