@@ -4,7 +4,7 @@ export const AdminSettings = {
     contentPosition: 'left' // 'left', 'right', top, 'bottom', 'center'
   },
   businesses_listening_settings: {
-    layout: 'listing', // 'original', 'grid', 'map', 'listing', 'appointments//pending'
+    layout: 'grid', // 'original', 'grid', 'map', 'listing', 'appointments//pending'
     information_show_status: {
       business_header: true, // true or false
       business_logo: true, // true or false
@@ -15,7 +15,7 @@ export const AdminSettings = {
       business_review: true // true or false
       // favorite_business: true // true or false
     },
-    information_type: 'top_right' // 'top_left', 'top_right', 'bottom_left', 'bottom_right'
+    information_type: 'bottom_left' // 'top_left', 'top_right', 'bottom_left', 'bottom_right'
   },
   products_listening_settings: {
     product_section: {
@@ -26,13 +26,13 @@ export const AdminSettings = {
         image: true, // true, false
         add_icon: true // true, false
       },
-      elements_type: 'starbucks', // 'original', 'starbucks', 'starbucks-latam'
-      image_size: '1x' // '1x', '2x', '3x', '4x', '5x',
+      elements_type: 'original', // 'original', 'starbucks', 'starbucks-latam'
+      image_scale: '1' // '0.25', '0.5', '1', '1.5', '2', '2.5'
     },
     category_section: {
-      category_position: 'left', //  'left', 'right'
-      banner: true, // true, false
-      name_position: 'left' //  'left', 'right'
+      category_position: 'right', //  'left', 'right'
+      isBanner: false, // true, false // not complete
+      name_position: 'right' //  'left', 'right'
     }
   }
 }

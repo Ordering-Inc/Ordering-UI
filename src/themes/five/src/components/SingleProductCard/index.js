@@ -2,8 +2,8 @@ import React from 'react'
 import { useConfig } from 'ordering-components'
 
 import { OriginalSingleProductCard } from './layouts/OriginalSingleProductCard'
+import { StarbucksLatamSingleProductCard } from './layouts/StarbucksLatamSingleProductCard'
 import { StarbucksSingleProductCard } from './layouts/StarbucksSingleProductCard'
-// import { MapBusinessesListing } from './layouts/MapBusinessesListing'
 
 export const SingleProductCard = (props) => {
   const [{ configs }] = useConfig()
@@ -26,8 +26,8 @@ export const SingleProductCard = (props) => {
   return (
     <>
       {(layout === 'original') && <OriginalSingleProductCard {...SingleProductCardTypeProps} />}
+      {(layout === 'starbucks-latam') && <StarbucksLatamSingleProductCard {...SingleProductCardTypeProps} />}
       {(layout === 'starbucks') && <StarbucksSingleProductCard {...SingleProductCardTypeProps} />}
-      {/* {(layout === 'map' || layout === 'starbucks') && <MapBusinessesListing {...BusinessesListingLayoutProps} />} */}
     </>
   )
 }

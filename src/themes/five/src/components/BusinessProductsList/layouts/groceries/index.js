@@ -47,16 +47,22 @@ const BusinessProductsListUI = (props) => {
   return (
     <ProductsContainer>
       {category?.id && (
-        <WrapAllCategories id='container'>
+        <WrapAllCategories
+          id='container'
+          categoryPosition={AdminSettings?.products_listening_settings?.category_section?.category_position}
+          namePosition={AdminSettings?.products_listening_settings?.category_section?.name_position}
+          isBanner={AdminSettings?.products_listening_settings?.category_section?.isBanner}
+          bannerUrl={category.image}
+        >
           <HeaderWrapper>
             <div className='category-title'>
               {
-                category?.image && (
+                category?.image && !AdminSettings?.products_listening_settings?.category_section?.isBanner && (
                   <img src={category.image} />
                 )
               }
               <h3>{category.name}</h3>
-              {category?.ribbon?.enabled && (
+              {category?.ribbon?.enabled && !AdminSettings?.products_listening_settings?.category_section?.isBanner && (
                 <RibbonBox
                   bgColor={category?.ribbon?.color}
                   isRoundRect={category?.ribbon?.shape === shape?.rectangleRound}
@@ -159,17 +165,23 @@ const BusinessProductsListUI = (props) => {
             <React.Fragment key={i}>
               {
                 products.length > 0 && (
-                  <WrapAllCategories id='container'>
+                  <WrapAllCategories
+                    id='container'
+                    categoryPosition={AdminSettings?.products_listening_settings?.category_section?.category_position}
+                    namePosition={AdminSettings?.products_listening_settings?.category_section?.name_position}
+                    isBanner={AdminSettings?.products_listening_settings?.category_section?.isBanner}
+                    bannerUrl={category.image}
+                  >
                     <div className='wrap-header'>
                       <HeaderWrapper>
                         <div className='category-title'>
                           {
-                            category?.image && (
+                            category?.image && !AdminSettings?.products_listening_settings?.category_section?.isBanner && (
                               <img src={category.image} />
                             )
                           }
                           <h3>{category.name}</h3>
-                          {category?.ribbon?.enabled && (
+                          {category?.ribbon?.enabled && !AdminSettings?.products_listening_settings?.category_section?.isBanner && (
                             <RibbonBox
                               bgColor={category?.ribbon?.color}
                               isRoundRect={category?.ribbon?.shape === shape?.rectangleRound}

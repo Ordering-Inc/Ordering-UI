@@ -3,26 +3,17 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
-  display: flex;
   align-items: center;
-  width: calc(100% - 40px);
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
-  cursor: pointer;
+  width: 100%;
+  margin-bottom: 20px;
   position: relative;
-
+  box-sizing: border-box;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   background: ${({ soldOut }) => soldOut ? '#B8B8B8' : '#FFF'};
+  padding-bottom: ${({ soldOut }) => soldOut ? '0' : '20px'};
 
-  ${props => (
-    props.theme.colors.backgroundPage === '#FFF' ||
-    props.theme.colors.backgroundPage === '#FFFFFF'
-  ) && css`
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
-  `}
-  
   @media (min-width: 681px) {
-    width: calc(50% - 40px);
+    display: flex;
   }
 `
 
@@ -45,27 +36,14 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: calc(100% - 90px);
   > * {
     margin: 5px;
   }
 
   h1 {
-    font-size: 16px;
-    font-weight: ${({ soldOut }) => soldOut ? 'bold' : '500'};
-    text-align: left;
+    font-size: 18px;
+    font-weight: 700;
     color: #263238;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 275px;
-  }
-  
-  svg{
-    color: #233E37;
-    width: 35px;
-    height: 35px;
-    margin-left: 10px;
   }
 
   p {
@@ -84,16 +62,25 @@ export const CardInfo = styled.div`
   span {
     color: ${({ soldOut, theme }) => soldOut ? lighten(0.05, theme.colors.primary) : theme.colors.primary};
     font-weight: bold;
-    display:flex;
   }
 
   p, span {
     font-size: 13px;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
+    height: 130px;
     h1 {
-      font-size: 18px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    height: 150px;
+    h1 {
+      font-size: 20px;
     }
 
     p {
@@ -104,24 +91,22 @@ export const CardInfo = styled.div`
       font-size: 15px;
     }
   }
+
+  @media (min-width: 1200px) {
+    height: 195px;
+  }
 `
 
 export const WrapLogo = styled.div`
-  max-width: 75px;
-  max-height: 75px;
-  height: 75px;
-  width: 75px;
-  margin-right: 5px;
   ${props => props.theme?.rtl && css`
-    margin-left: 5px;
+    margin-left: 25px;
     margin-right: 0px;
   `}
+
+  @media (min-width: 768px) {
+    margin-right: 15px;
+  }
 `
-
-  const IconCustoom = styled.span`
-   display:flex;
-
-  `
 
 const CardLogoStyled = styled.div`
   box-sizing: border-box;
@@ -131,12 +116,33 @@ const CardLogoStyled = styled.div`
   background-position: center;
   object-fit: cover;
   min-height: 75px;
-  min-width: 75px;
-  width: 75px;
-  height: 75px;
-  border-radius: 100px;
-  border: 1px solid ${props => props.theme.colors.primary};
-  
+  width: 130px;
+  height: 130px;
+  ${({ imgScale, imgSize }) => (imgScale && !isNaN(Number(imgScale))) && css`
+    width: ${130 * Number(imgScale)}px;
+    height: ${130 * Number(imgScale)}px;
+  `
+  }
+  background-color: #dddddd;
+  @media (min-width: 1024px) {
+    width: 150px;
+    height: 150px;
+    ${({ imgScale, imgSize }) => (imgScale && !isNaN(Number(imgScale))) && css`
+      width: ${150 * Number(imgScale)}px;
+      height: ${150 * Number(imgScale)}px;
+    `
+    }
+  }
+
+  @media (min-width: 1200px) {
+    width: 195px;
+    height: 195px;
+    ${({ imgScale, imgSize }) => (imgScale && !isNaN(Number(imgScale))) && css`
+      width: ${195 * Number(imgScale)}px;
+      height: ${195 * Number(imgScale)}px;
+    `
+    }
+  }
 `
 export const CardLogo = (props) => {
   const style = {}
@@ -152,3 +158,102 @@ export const CardLogo = (props) => {
     </CardLogoStyled>
   )
 }
+
+export const ProductInfo = styled.div`
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  @media (min-width: 768px) {
+    ${({ informationPosition }) => informationPosition && css`
+        ${informationPosition === 'right'
+          ? 'flex-direction: row-reverse;'
+          : 'flex-direction: row;'
+        }
+    `}
+    width: 70%;
+    border-right: 2px solid ${props => props.theme.colors.borderColor};
+    ${props => props.theme?.rtl && css`
+      border-right: none;
+      border-left: 2px solid ${props => props.theme.colors.borderColor};
+    `}
+  }
+  @media (min-width: 1440px) {
+    font-size: 20px;
+  }
+
+`
+export const CartAction = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  justify-content: space-around;
+  
+  button {
+    padding: 7px 0;
+    text-transform: uppercase;
+    background-color: transparent;
+    @media (min-width: 1440px) {
+      padding: 11px 0;
+    }
+  }
+  @media (min-width: 768px) {
+    width: 30%;
+    padding-left: 15px;
+    ${props => props.theme?.rtl && css`
+      padding-right: 15px;
+      padding-left: 0;
+    `}
+  }
+  @media (min-width: 1024px) {
+    height: 155px;
+  }
+  @media (min-width: 1200px) {
+    height: 195px;
+  }
+`
+
+export const ProductCost = styled.div`
+  display: flex;
+  width: 100%;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 30px;
+  color: ${props => props.theme.colors.primary};
+  justify-content: ${({ textLeft }) => textLeft ? 'flex-start' : 'center'};
+  @media (min-width: 1440px) {
+    font-size: 20px;
+  }
+`
+
+export const Quantity = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: ${({ isSoldOut }) => isSoldOut ? '10px' : '0px'};
+  ${props => props.theme?.rtl && css`
+    margin-right: ${({ isSoldOut }) => isSoldOut ? 'unset' : '0px'};
+    margin-left: ${({ isSoldOut }) => isSoldOut ? '10px' : '0px'};
+ `}
+  span {
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+  }
+  input {
+    width: 85px;
+    height: 38px;
+    box-sizing: border-box;
+    text-align: center; 
+
+    @media (min-width: 768px) {
+      width: 45px;
+      height: 33px;
+    }
+    
+    @media (min-width: 1200px) {
+      width: 85px;
+      height: 38px;
+    }
+  }
+`

@@ -150,6 +150,13 @@ export const WrapLogo = styled.div`
   max-height: 86px;
   height: 86px;
   width: 86px;
+  ${({ imgScale, imgSize }) => (imgScale && imgSize && !isNaN(Number(imgSize)) && !isNaN(Number(imgScale))) && css`
+    max-width: ${Number(imgSize) * Number(imgScale)}px;
+    max-height: ${Number(imgSize) * Number(imgScale)}px;
+    height: ${Number(imgSize) * Number(imgScale)}px;
+    width: ${Number(imgSize) * Number(imgScale)}px;
+  `
+  }
   margin-left: 5px;
   ${props => props.theme?.rtl && css`
     margin-right: 5px;
@@ -165,6 +172,10 @@ const CardLogoStyled = styled.div`
   background-position: center;
   object-fit: cover;
   min-height: 86px;
+  ${({ imgScale, imgSize }) => (imgScale && imgSize && !isNaN(Number(imgSize)) && !isNaN(Number(imgScale))) && css`
+    min-height: ${Number(imgSize) * Number(imgScale)}px;
+  `
+  }
   border-radius: 10px;
 `
 export const CardLogo = (props) => {

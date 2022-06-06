@@ -145,7 +145,13 @@ const BusinessProductsListUI = (props) => {
             <>
               {
                 featured && categoryState?.products?.find(product => product.featured) && (
-                  <WrapAllCategories id='categoryfeatured'>
+                  <WrapAllCategories
+                    id='categoryfeatured'
+                    categoryPosition={AdminSettings?.products_listening_settings?.category_section?.category_position}
+                    namePosition={AdminSettings?.products_listening_settings?.category_section?.name_position}
+                    isBanner={AdminSettings?.products_listening_settings?.category_section?.isBanner}
+                    bannerUrl={category.image}
+                  >
                     <h3>{t('FEATURED', 'Featured')}</h3>
                     <ProductsListing>
                       {categoryState.products?.map((product, i) => product.featured && (
@@ -184,16 +190,22 @@ const BusinessProductsListUI = (props) => {
               <React.Fragment key={i}>
                 {
                   products.length > 0 && (
-                    <WrapAllCategories id={`category${category?.id}`}>
+                    <WrapAllCategories
+                      id={`category${category?.id}`}
+                      categoryPosition={AdminSettings?.products_listening_settings?.category_section?.category_position}
+                      namePosition={AdminSettings?.products_listening_settings?.category_section?.name_position}
+                      isBanner={AdminSettings?.products_listening_settings?.category_section?.isBanner}
+                      bannerUrl={category.image}
+                    >
                       <HeaderWrapper ref={headerRef}>
                         <div className='category-title'>
                           {
-                            category?.image && (
+                            category?.image && !AdminSettings?.products_listening_settings?.category_section?.isBanner && (
                               <img src={category.image} />
                             )
                           }
                           <h3>{category.name}</h3>
-                          {category?.ribbon?.enabled && (
+                          {category?.ribbon?.enabled && !AdminSettings?.products_listening_settings?.category_section?.isBanner && (
                             <RibbonBox
                               bgColor={category?.ribbon?.color}
                               isRoundRect={category?.ribbon?.shape === shape?.rectangleRound}

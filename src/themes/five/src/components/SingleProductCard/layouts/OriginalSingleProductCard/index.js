@@ -102,7 +102,10 @@ export const OriginalSingleProductCard = (props) => {
             AdminSettings?.products_listening_settings?.product_section?.information_show_status?.image === undefined) && (
               <>
                 {!isSkeleton ? (
-                  <WrapLogo>
+                  <WrapLogo
+                    imgSize='86'
+                    imgScale={AdminSettings?.products_listening_settings?.product_section?.image_scale}
+                  >
                     {product?.ribbon?.enabled && (
                       <RibbonBox
                         bgColor={product?.ribbon?.color}
@@ -117,6 +120,8 @@ export const OriginalSingleProductCard = (props) => {
                           <CardLogo
                             className='image'
                             soldOut={isSoldOut || maxProductQuantity <= 0}
+                            imgSize='86'
+                            imgScale={AdminSettings?.products_listening_settings?.product_section?.image_scale}
                             bgimage={optimizeImage(product?.images || (AdminSettings?.products_listening_settings?.product_section?.information_show_status?.dummy_product_images ? theme.images?.dummies?.product : ''), 'h_200,c_limit')}
                           />}
                   </WrapLogo>

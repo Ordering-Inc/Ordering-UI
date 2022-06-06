@@ -24,6 +24,11 @@ export const WrapAllCategories = styled.div`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    ${({ namePosition, categoryPosition }) => (namePosition && categoryPosition) && css`
+        ${categoryPosition === 'left' ? 'justify-content: start;' : 'justify-content: end;'}
+        ${namePosition === 'left' ? 'flex-direction: row-reverse;' : 'flex-direction: row;'}
+      `
+    }
     padding-top: 5px;
     padding-bottom: 12px;
     margin-left: 10px;
@@ -31,7 +36,18 @@ export const WrapAllCategories = styled.div`
       margin-right: 10px;
       margin-left: 0;
     `}
-
+    > h3 {
+      ${({ isBanner, bannerUrl }) => (isBanner && bannerUrl) && css`
+          ${isBanner ? `
+            width: 100%;
+            background-image: url(${bannerUrl});
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+          ` : ''}
+        `
+      }
+    }
     img {
       border-radius: 7.6px;
       min-width: 41px;
