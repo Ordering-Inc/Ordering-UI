@@ -30,9 +30,9 @@ export const AdminSettings = {
       image_scale: '1' // '0.25', '0.5', '1', '1.5', '2', '2.5'
     },
     category_section: {
-      category_position: 'right', //  'left', 'right'
+      category_position: 'left', //  'left', 'right'
       isBanner: false, // true, false // not complete
-      name_position: 'right' //  'left', 'right'
+      name_position: 'left' //  'left', 'right'
     }
   }
 }
