@@ -489,7 +489,7 @@ const ProductOptionsUI = (props) => {
                 </div>
                 <div id='extra'>
                   {
-                    product?.extras.map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
+                    product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                       const currentState = productCart.options[`id:${option?.id}`] || {}
                       return (
                         <div key={option?.id}>

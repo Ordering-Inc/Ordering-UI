@@ -16,8 +16,7 @@ const DriverTipsUI = (props) => {
   const {
     driverTip,
     driverTipsOptions,
-    optionSelected,
-    isFixedPrice,
+    cart,
     isDriverTipUseCustom,
     handlerChangeOption
   } = props
@@ -26,6 +25,7 @@ const DriverTipsUI = (props) => {
   const [{ configs }] = useConfig()
 
   const [value, setvalue] = useState(0)
+  const isFixedPriceType = parseInt(configs?.driver_tip_type?.value, 10) === 1
 
   const handleChangeDriverTip = (e) => {
     let tip = parseFloat(e?.target?.value)
@@ -50,14 +50,14 @@ const DriverTipsUI = (props) => {
           {driverTipsOptions.map((option, i) => (
             <TipCard
               key={i}
-              className={`${option === optionSelected ? 'active' : ''}`}
+              className={`${option === driverTip ? 'active' : ''}`}
               onClick={() => handlerChangeOption(option)}
             >
-              {`${isFixedPrice ? parsePrice(option) : `${option}%`}`}
+              {`${isFixedPriceType ? parsePrice(option) : `${option}%`}`}
             </TipCard>
           ))}
         </WrapperTips>
-        {!driverTipsOptions.includes(driverTip) && driverTip > 0 && (
+        {isDriverTipUseCustom && !driverTipsOptions.includes(driverTip) && driverTip > 0 && (
           <DriverTipMessage>
             {t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')}
           </DriverTipMessage>
@@ -84,7 +84,7 @@ const DriverTipsUI = (props) => {
             </WrapperInput>
             {parseFloat(driverTip || 0) > 0 && (
               <DriverTipMessage>
-                {t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount')}: {parsePrice(driverTip)}
+                {t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount')}{!isFixedPriceType && ` (${driverTip}%)`}: {isFixedPriceType ? parsePrice(driverTip) : parsePrice(cart?.driver_tip)}
               </DriverTipMessage>
             )}
           </FormDriverTip>

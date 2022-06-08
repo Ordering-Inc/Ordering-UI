@@ -104,7 +104,7 @@ export const BusinessBasicInformation = (props) => {
   }, [businessState?.business])
 
   useEffect(() => {
-    document.body.style.overflow = openSearchProducts ? 'hidden' : 'auto'
+    document.body.style.overflowY = openSearchProducts ? 'hidden' : 'auto'
   }, [openSearchProducts])
 
   return (
