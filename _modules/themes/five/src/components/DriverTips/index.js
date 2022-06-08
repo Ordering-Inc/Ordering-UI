@@ -42,12 +42,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriverTipsUI = function DriverTipsUI(props) {
-  var _configs$currency_pos, _configs$format_numbe, _configs$format_numbe2, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _configs$driver_tip_t, _configs$currency_pos, _configs$format_numbe, _configs$format_numbe2, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var driverTip = props.driverTip,
       driverTipsOptions = props.driverTipsOptions,
-      optionSelected = props.optionSelected,
-      isFixedPrice = props.isFixedPrice,
+      cart = props.cart,
       isDriverTipUseCustom = props.isDriverTipUseCustom,
       handlerChangeOption = props.handlerChangeOption;
 
@@ -67,6 +66,8 @@ var DriverTipsUI = function DriverTipsUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       value = _useState2[0],
       setvalue = _useState2[1];
+
+  var isFixedPriceType = parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 1;
 
   var handleChangeDriverTip = function handleChangeDriverTip(e) {
     var _e$target;
@@ -90,12 +91,12 @@ var DriverTipsUI = function DriverTipsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperTips, null, driverTipsOptions.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TipCard, {
       key: i,
-      className: "".concat(option === optionSelected ? 'active' : ''),
+      className: "".concat(option === driverTip ? 'active' : ''),
       onClick: function onClick() {
         return handlerChangeOption(option);
       }
-    }, "".concat(isFixedPrice ? parsePrice(option) : "".concat(option, "%")));
-  })), !driverTipsOptions.includes(driverTip) && driverTip > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')), isDriverTipUseCustom && /*#__PURE__*/_react.default.createElement(_styles.FormDriverTip, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    }, "".concat(isFixedPriceType ? parsePrice(option) : "".concat(option, "%")));
+  })), isDriverTipUseCustom && !driverTipsOptions.includes(driverTip) && driverTip > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')), isDriverTipUseCustom && /*#__PURE__*/_react.default.createElement(_styles.FormDriverTip, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "drivertip",
     type: "text",
     placeholder: placeholderCurrency,
@@ -107,7 +108,7 @@ var DriverTipsUI = function DriverTipsUI(props) {
       handlerChangeOption(value);
       setvalue(0);
     }
-  }, t('APPLY_TIP', 'Apply Tip'))), parseFloat(driverTip || 0) > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount'), ": ", parsePrice(driverTip)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, t('APPLY_TIP', 'Apply Tip'))), parseFloat(driverTip || 0) > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount'), !isFixedPriceType && " (".concat(driverTip, "%)"), ": ", isFixedPriceType ? parsePrice(driverTip) : parsePrice(cart === null || cart === void 0 ? void 0 : cart.driver_tip)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

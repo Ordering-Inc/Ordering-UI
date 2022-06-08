@@ -560,7 +560,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     });
   }))), /*#__PURE__*/_react.default.createElement("div", {
     id: "extra"
-  }, product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
+  }, product === null || product === void 0 ? void 0 : product.extras.sort(function (a, b) {
+    return a.rank - b.rank;
+  }).map(function (extra) {
     return extra.options.sort(function (a, b) {
       return a.rank - b.rank;
     }).map(function (option) {
