@@ -45,7 +45,7 @@ var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
 
 var _utils = require("../../../../../utils");
 
-var _GoogleLogin = require("../GoogleLogin");
+var _GoogleIdentity = require("../GoogleIdentity");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
@@ -560,12 +560,9 @@ var LoginFormUI = function LoginFormUI(props) {
   }, ((configs === null || configs === void 0 ? void 0 : (_configs$facebook_log3 = configs.facebook_login) === null || _configs$facebook_log3 === void 0 ? void 0 : _configs$facebook_log3.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log4 = configs.facebook_login) === null || _configs$facebook_log4 === void 0 ? void 0 : _configs$facebook_log4.value) === '1') && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id3 = configs.facebook_id) === null || _configs$facebook_id3 === void 0 ? void 0 : _configs$facebook_id3.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login3 = configs.google_login_client_id) === null || _configs$google_login3 === void 0 ? void 0 : _configs$google_login3.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login3 = configs.google_login_client_id) === null || _configs$google_login3 === void 0 ? void 0 : _configs$google_login3.value) && /*#__PURE__*/_react.default.createElement(_GoogleIdentity.GoogleIdentityButton, {
     initParams: initParams,
-    handleSuccessGoogleLogin: handleSuccessGoogle,
-    onFailure: function onFailure(data) {
-      return console.log('onFailure', data);
-    }
+    handleSuccessGoogleLogin: handleSuccessGoogle
   }), (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_2 = configs.apple_login_client_id) === null || _configs$apple_login_2 === void 0 ? void 0 : _configs$apple_login_2.value) && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
     onSuccess: handleSuccessApple,
     onFailure: function onFailure(data) {
