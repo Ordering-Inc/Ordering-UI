@@ -11,7 +11,7 @@ export const BusinessesListing = (props) => {
   // HomeLayout = configs
   const HomeLayoutConfig = {
     homepage_settings: {
-      layout: 'red', // 'original', 'starbucks', 'red'
+      layout: 'original', // 'original', 'starbucks', 'red'
       contentPosition: 'bottom' // 'left', 'right', top, 'bottom', 'center'
     }
   }

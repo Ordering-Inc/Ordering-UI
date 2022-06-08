@@ -205,3 +205,6 @@ export const SpotSelect = styled.select`
     margin: 0 15px 0 5px;
   `}
 `
+export const NoValidProductMessage = styled.p`
+  font-size: 14px;
+`

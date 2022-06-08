@@ -47,7 +47,7 @@ import { AppleLogin } from '../AppleLogin'
 import { SmsLoginButton } from '../../../../../components/SmsLogin'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { formatSeconds } from '../../../../../utils'
-import { GoogleLoginButton } from '../GoogleLogin'
+import { GoogleIdentityButton } from '../GoogleIdentity'
 import {
   Envelope,
   Lock,
@@ -533,7 +533,7 @@ const LoginFormUI = (props) => {
           )}
 
           {(elementLinkToSignup && !loginWithOtpState) && (
-            <RedirectLink register isPopup={isPopup}>
+            <RedirectLink register isPopup={isPopup} className='new-account'>
               <span>{t('NEW_ON_PLATFORM', theme?.defaultLanguages?.NEW_ON_PLATFORM || 'New on Ordering?')}</span>
               {elementLinkToSignup}
             </RedirectLink>
@@ -558,10 +558,9 @@ const LoginFormUI = (props) => {
                     />
                   )}
                 {configs?.google_login_client_id?.value && (
-                  <GoogleLoginButton
+                  <GoogleIdentityButton
                     initParams={initParams}
                     handleSuccessGoogleLogin={handleSuccessGoogle}
-                    onFailure={(data) => console.log('onFailure', data)}
                   />
                 )}
                 {configs?.apple_login_client_id?.value &&

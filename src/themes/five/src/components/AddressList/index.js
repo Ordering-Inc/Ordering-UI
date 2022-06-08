@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
 import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
 import MdClose from '@meronex/icons/md/MdClose'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   Heart,
@@ -34,7 +35,8 @@ import {
   List,
   AddressFormContainer,
   TitleFormContainer,
-  CloseIcon
+  CloseIcon,
+  TitleAddress
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -65,7 +67,8 @@ const AddressListUI = (props) => {
     isFromCheckout,
     isOpenUserData,
     setIsAddressFormOpen,
-    isHeader
+    isHeader,
+    isProfile
   } = props
 
   const [, t] = useLanguage()
@@ -76,7 +79,8 @@ const AddressListUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
   const [{ user }] = useCustomer()
-
+  const { width } = useWindowSize()
+  const isCompletedLayout = width < 769 || isProfile
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
     (address, i, self) =>
       i === self.findIndex(obj => (
@@ -216,7 +220,7 @@ const AddressListUI = (props) => {
         <List halfWidth={addressOpen}>
           {children}
         </List>
-        {!isPopover && addressOpen && (
+        {addressOpen && (
           <AddressFormContainer isOpenUserData={isOpenUserData} isHeader={isHeader}>
             <TitleFormContainer>
               <CloseIcon>
@@ -245,16 +249,23 @@ const AddressListUI = (props) => {
       <>
         {
           (!isPopover || !addressOpen) && (
-            <Button
-              className='add'
-              outline
-              color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
-              onClick={() => openAddress({})}
-              disabled={orderState?.loading || actionStatus.loading}
-              style={!isCustomerMode ? { flex: 1, width: 'fit-content' } : {}}
-            >
-              {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
-            </Button>
+            <>
+              {!isCompletedLayout && (
+                <TitleAddress>
+                  {t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                </TitleAddress>
+              )}
+              <Button
+                className='add'
+                outline
+                color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
+                onClick={() => openAddress({})}
+                disabled={orderState?.loading || actionStatus.loading}
+                style={isCompletedLayout ? { flex: 1, width: 'fit-content' } : {}}
+              >
+                {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
+              </Button>
+            </>
           )
         }
         {
@@ -366,8 +377,8 @@ const AddressListUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading} isCustomerMode={isCustomerMode}>
-        {isCustomerMode ? (
+      <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading} isCompletedLayout={isCompletedLayout}>
+        {!isCompletedLayout ? (
           <AddressListCallcenterLayout>
             <AddressListContent />
           </AddressListCallcenterLayout>
@@ -375,10 +386,10 @@ const AddressListUI = (props) => {
           <AddressListContent />
         )}
         {
-          !isPopover && (
+          !isPopover && addressOpen && (
             <Modal
               title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
-              open={!isPopover && addressOpen && !isCustomerMode}
+              open={!isPopover && addressOpen && isCompletedLayout}
               onClose={() => handleCloseAddressForm()}
             >
               <AddressForm

@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap-icons'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-
+import { useTheme } from 'styled-components'
 import {
   AccordionSection,
   Accordion,
@@ -39,11 +39,13 @@ export const ProductItemAccordion = (props) => {
     offsetDisabled,
     onDeleteProduct,
     onEditProduct,
-    isCheckout
+    isCheckout,
+    isStore
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
+  const theme = useTheme()
   const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('')
@@ -54,6 +56,9 @@ export const ProductItemAccordion = (props) => {
   const productSelect = useRef(null)
   const productActionsEdit = useRef(null)
   const productActionsDelete = useRef(null)
+
+  const viewString = isStore ? 'business_view' : 'header'
+  const isHideProductImage = theme?.layouts?.[viewString]?.components?.cart?.components?.products?.image?.hidden
 
   const productInfo = () => {
     if (isCartProduct) {
@@ -113,7 +118,7 @@ export const ProductItemAccordion = (props) => {
           onClick={(e) => toggleAccordion(e)}
         >
           <ProductInfo className='info'>
-            {product?.images && (
+            {product?.images && !isHideProductImage && (
               <WrapperProductImage>
                 <ProductImage bgimage={product?.images} />
               </WrapperProductImage>

@@ -39,7 +39,8 @@ export const UserPopover = (props) => {
   const arrowElement = useRef()
 
   const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
-  const isPromotionsEnabled = configs?.advanced_offers_module === '1' || configs?.advanced_offers_module === 'true'
+  const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
+
   const extraOptions = [
     { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
     { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: isWalletEnabled && !isCustomerMode },

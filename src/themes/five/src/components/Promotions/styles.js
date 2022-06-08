@@ -4,9 +4,15 @@ import styled, { css } from 'styled-components'
 export const PromotionsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 100%;
   align-items: center;
   margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  @media (min-width: 993px){
+    width: 60%;
+    padding: 0px;
+  }
 `
 
 export const PromotionTitle = styled.h1`
@@ -33,6 +39,13 @@ export const SingleOfferContainer = styled.div`
 
   button{ 
     height: 45px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 720px){
+    button{
+      font-size: 16px;
+    }
   }
 `
 
@@ -47,9 +60,19 @@ export const OfferInformation = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 70%;
   ${({ isSkeleton }) => isSkeleton && css`
     width: 100%;
   `}
+  h2{
+    font-size: 14px;
+  }
+  @media (min-width: 720px){
+    width: 80%;
+    h2{
+      font-size: 16px;
+    }
+  }
 `
 
 export const SearchBarContainer = styled.div`
@@ -109,11 +132,24 @@ export const BusinessLogo = (props) => {
 
 export const SingleBusinessOffer = styled.div`
   display: flex;
+  button{
+      font-size: 12px;
+    }
+  @media (min-width: 720px){
+    button{
+      font-size: 16px;
+    }
+  }
 `
 
 export const AvailableBusinesses = styled.div`
   display: flex;
-  white-space: break-spaces;
+  white-space: pre;
+  width: 80%;
+  p:nth-child(2){
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `
 
 export const OfferData = styled.div`
@@ -158,5 +194,29 @@ export const BusinessInfo = styled.div`
   margin-left: 10px;
   button{
     height: 44px;
+  }
+  p{
+    font-size: 12px;
+    width: 50%;
+    text-align: left;
+  }
+  @media(min-width: 720px){
+    p{
+      font-size: 16px;
+      width: 70%;
+    }
+  }
+`
+
+export const OfferView = styled.div`
+  margin-top: 20px;
+  text-align: center;
+  h2 {
+    font-size: 16px;
+  }
+  @media(min-width: 720px){
+    h2 {
+      font-size: 20px;
+    }
   }
 `

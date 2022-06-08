@@ -11,8 +11,8 @@ import {
   useEvent,
   useLanguage,
   useOrder,
-  useSession,
-  useUtils
+  useUtils,
+  useSession
 } from 'ordering-components'
 
 import {
@@ -29,14 +29,14 @@ import {
 import { NotFoundSource } from '../NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
-import { FloatingButton } from '../../../../../components/FloatingButton'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { RenderProductsLayout } from '../RenderProductsLayout'
 import { Cart } from '../Cart'
 import { Alert } from '../../../../../components/Confirm'
+import { FloatingButton } from '../../../../../components/FloatingButton'
+import { UpsellingPage } from '../../../../../components/UpsellingPage'
 const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
@@ -57,7 +57,6 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateInitialRender,
     updateProductModal,
     onProductRedirect,
-    onCheckoutRedirect,
     handleChangeSearch,
     handleSearchRedirect,
     featuredProducts,
@@ -66,7 +65,8 @@ const BusinessProductsListingUI = (props) => {
     errorQuantityProducts,
     multiRemoveProducts,
     setAlertState,
-    alertState
+    alertState,
+    onCheckoutRedirect
   } = props
 
   const { business, loading, error } = businessState
@@ -75,21 +75,22 @@ const BusinessProductsListingUI = (props) => {
   const [{ carts }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
-  const [{ auth }] = useSession()
   const location = useLocation()
   const windowSize = useWindowSize()
+  const [{ auth }] = useSession()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
-  // const [openUpselling, setOpenUpselling] = useState(false)
-  // const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
-  const [, setIsCartOpen] = useState(false)
+  const [isCartOpen, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
   const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
+  const showViewOrderButton = !theme?.layouts?.business_view?.components?.order_view_button?.hidden
   const sortByOptions = [
     { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
     { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
@@ -144,11 +145,11 @@ const BusinessProductsListingUI = (props) => {
     }
   }
 
-  // const handleUpsellingPage = () => {
-  //   onCheckoutRedirect(currentCart?.uuid)
-  //   setOpenUpselling(false)
-  //   setCanOpenUpselling(false)
-  // }
+  const handleUpsellingPage = () => {
+    onCheckoutRedirect(currentCart?.uuid)
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+  }
 
   const handleGoToBusinessList = () => {
     events.emit('go_to_page', { page: 'search' })
@@ -280,21 +281,21 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </ProductsContainer>
-      {/* {currentCart?.products?.length > 0 && auth && !isCartOpen && (
+      {currentCart?.products?.length > 0 && auth && !isCartOpen && showViewOrderButton && (
         <FloatingButton
           btnText={
             !currentCart?.valid_maximum ? (
               `${t('MAXIMUM_SUBTOTAL_ORDER', theme?.defaultLanguages?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
             ) : (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100)) ? (
               `${t('MINIMUN_SUBTOTAL_ORDER', theme?.defaultLanguages?.MINIMUN_SUBTOTAL_ORDER || 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
-            ) : !openUpselling ^ canOpenUpselling ? t('VIEW_ORDER', theme?.defaultLanguages?.VIEW_ORDER || 'View Order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')
+            ) : !openUpselling !== canOpenUpselling ? t('VIEW_ORDER', theme?.defaultLanguages?.VIEW_ORDER || 'View Order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')
           }
           isSecondaryBtn={!currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
-      )} */}
+      )}
       {windowSize.width < 500 && currentCart?.products?.length > 0 && (
         <MobileCartViewWrapper>
           <span>{parsePrice(currentCart?.total)}</span>
@@ -382,7 +383,7 @@ const BusinessProductsListingUI = (props) => {
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}
       />
-      {/* {currentCart?.products && openUpselling && (
+      {currentCart?.products && openUpselling && (
         <UpsellingPage
           businessId={currentCart?.business_id}
           business={currentCart?.business}
@@ -392,7 +393,7 @@ const BusinessProductsListingUI = (props) => {
           canOpenUpselling={canOpenUpselling}
           setCanOpenUpselling={setCanOpenUpselling}
         />
-      )} */}
+      )}
     </>
   )
 }
