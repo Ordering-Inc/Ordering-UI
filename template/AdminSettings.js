@@ -34,5 +34,13 @@ export const AdminSettings = {
       isBanner: false, // true, false // not complete
       name_position: 'left' //  'left', 'right'
     }
+  },
+  product_popup_settings: {
+    layout: 'original', // 'original', 'left', 'right', 'full'
+    multiple_images_enabled: true, // true, false
+    product_comments: {
+      showed: true, // true, false
+      max_characters: 100 // number
+    }
   }
 }

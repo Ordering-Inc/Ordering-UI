@@ -374,6 +374,7 @@ const BusinessProductsListingUI = (props) => {
             product={productModal.product || curProduct}
             businessId={business?.id}
             onSave={handlerProductAction}
+            AdminSettings={AdminSettings}
           />
         )}
       </Modal>

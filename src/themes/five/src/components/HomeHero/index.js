@@ -12,16 +12,14 @@ export const HomeHero = (props) => {
    * This section will be removed after backend ready.
    * props.AdminSettings = configs
    */
-  const layout = props?.AdminSettings?.homepage_settings?.layout !== undefined
-    ? props?.AdminSettings?.homepage_settings?.layout : 'original'
+  const layout = props?.AdminSettings?.homepage_settings?.layout ?? 'original'
   /**
   */
 
   const homeLayoutProps = {
     ...props,
     layout: layout,
-    contentPosition: (props?.AdminSettings?.homepage_settings?.contentPosition !== undefined)
-      ? props?.AdminSettings?.homepage_settings?.contentPosition : 'left'
+    contentPosition: props?.AdminSettings?.homepage_settings?.contentPosition ?? 'left'
   }
 
   return (
