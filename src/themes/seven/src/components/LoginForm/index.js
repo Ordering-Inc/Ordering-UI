@@ -149,7 +149,9 @@ const LoginFormUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    if (emailInput?.current) {
+      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    }
   }
 
   const handleChangePhoneNumber = (number, isValid) => {
@@ -317,7 +319,7 @@ const LoginFormUI = (props) => {
                   <InputPhoneNumber
                     value={credentials?.cellphone}
                     setValue={handleChangePhoneNumber}
-                    handleIsValid={() => {}}
+                    handleIsValid={() => { }}
                   />
                 )}
               </FormInline>
@@ -435,7 +437,7 @@ const LoginFormUI = (props) => {
                   (useLoginByCellphone && loginTab === 'cellphone') &&
                   (configs && Object.keys(configs).length > 0) &&
                   (configs?.twilio_service_enabled?.value === 'true' || configs?.twilio_service_enabled?.value === '1') &&
-                    <SmsLoginButton handleSmsLogin={() => { setLoginWithOtpState(true) }} />
+                  <SmsLoginButton handleSmsLogin={() => { setLoginWithOtpState(true) }} />
                 }
               </SocialButtons>
             ) : (

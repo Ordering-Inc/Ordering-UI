@@ -150,7 +150,9 @@ export const UserFormDetailsUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    if (emailInput?.current) {
+      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    }
   }
 
   useEffect(() => {
@@ -220,14 +222,14 @@ export const UserFormDetailsUI = (props) => {
         {!validationFields?.loading ? (
           <>
             {
-            props.beforeMidElements?.map((BeforeMidElements, i) => (
-              <React.Fragment key={i}>
-                {BeforeMidElements}
-              </React.Fragment>))
+              props.beforeMidElements?.map((BeforeMidElements, i) => (
+                <React.Fragment key={i}>
+                  {BeforeMidElements}
+                </React.Fragment>))
             }
             {
-            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-              <BeforeMidComponents key={i} {...props} />))
+              props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+                <BeforeMidComponents key={i} {...props} />))
             }
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
               showField && showField(field.code) && (
@@ -241,9 +243,9 @@ export const UserFormDetailsUI = (props) => {
                       disabled={!isEdit}
                       placeholder={t(field.code.toUpperCase(), field?.name)}
                       defaultValue={
-                      formState?.result?.result
-                        ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                        formState?.result?.result
+                          ? formState?.result?.result[field.code]
+                          : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
                       }
                       onChange={handleChangeInputEmail}
                       ref={(e) => {
@@ -260,9 +262,9 @@ export const UserFormDetailsUI = (props) => {
                       disabled={!isEdit}
                       placeholder={t(field.code.toUpperCase(), field?.name)}
                       defaultValue={
-                      formState?.result?.result
-                        ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                        formState?.result?.result
+                          ? formState?.result?.result[field.code]
+                          : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
                       }
                       onChange={handleChangeInput}
                       ref={formMethods.register({
@@ -306,14 +308,14 @@ export const UserFormDetailsUI = (props) => {
               />
             )}
             {
-            props.afterMidElements?.map((MidElement, i) => (
-              <React.Fragment key={i}>
-                {MidElement}
-              </React.Fragment>))
+              props.afterMidElements?.map((MidElement, i) => (
+                <React.Fragment key={i}>
+                  {MidElement}
+                </React.Fragment>))
             }
             {
-             props.afterMidComponents?.map((MidComponent, i) => (
-               <MidComponent key={i} {...props} />))
+              props.afterMidComponents?.map((MidComponent, i) => (
+                <MidComponent key={i} {...props} />))
             }
             <ActionsForm>
               {onCancel && (
