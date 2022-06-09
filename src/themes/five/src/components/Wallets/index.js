@@ -5,8 +5,7 @@ import {
   WalletList,
   useLanguage,
   useUtils,
-  useConfig,
-  useSession
+  useConfig
 } from 'ordering-components'
 
 import {
@@ -27,6 +26,7 @@ import { Tabs, Tab } from '../../styles/Tabs'
 const WalletsUI = (props) => {
   const {
     walletList,
+    userLoyaltyLevel,
     transactionsList,
     setWalletSelected,
     isWalletCashEnabled,
@@ -34,7 +34,6 @@ const WalletsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ user }] = useSession()
   const [{ parsePrice }] = useUtils()
   const [{ configs }] = useConfig()
   const theme = useTheme()
@@ -43,7 +42,7 @@ const WalletsUI = (props) => {
 
   const currentWalletSelected = (walletList.wallets?.length > 0 && walletList.wallets?.find(w => w.type === tabSelected)) ?? null
 
-  const loyaltyLevel = Object.keys(user?.loyalty_level ?? {}).length > 0 && user?.loyalty_level
+  const loyaltyLevel = Object.keys(userLoyaltyLevel.loyaltyLevel ?? {}).length > 0 && userLoyaltyLevel.loyaltyLevel
 
   const walletName = {
     cash: {
@@ -66,6 +65,7 @@ const WalletsUI = (props) => {
   return (
     <Container>
       {!walletList.loading &&
+        !userLoyaltyLevel.loading &&
         !walletList.error &&
         walletList.wallets?.length > 0 &&
       (
@@ -162,7 +162,7 @@ const WalletsUI = (props) => {
         </>
       )}
 
-      {walletList?.loading && (
+      {(walletList?.loading || userLoyaltyLevel.loading) && (
         <>
           <Tabs variant='primary'>
             <Skeleton width={200} height={40} style={{ marginRight: 10 }} />
@@ -179,7 +179,7 @@ const WalletsUI = (props) => {
         </>
       )}
 
-      {!walletList?.loading && (walletList?.error || !walletList?.wallets?.length) && (
+      {!walletList?.loading && !userLoyaltyLevel.loading && (walletList?.error || !walletList?.wallets?.length) && (
         <NotFoundSource
           content={
             walletList?.error
