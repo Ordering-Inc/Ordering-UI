@@ -17,7 +17,8 @@ import {
   RibbonBox,
   SubCategoriesContainer,
   ContainerButton,
-  CategoryDescription
+  CategoryDescription,
+  DescriptionContainer
 } from './styles'
 import { Button } from '../../styles/Buttons'
 
@@ -286,7 +287,11 @@ const BusinessProductsListUI = (props) => {
                 <img src={openDescription.image} />
               )
             }
-            <p>{openDescription?.description}</p>
+            <DescriptionContainer>
+              <div>
+                <p>{openDescription?.description}</p>
+              </div>
+            </DescriptionContainer>
           </DescriptionModalContainer>
         </Modal>
       </ProductsContainer>
