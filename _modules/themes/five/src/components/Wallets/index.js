@@ -56,9 +56,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var WalletsUI = function WalletsUI(props) {
-  var _ref, _walletList$wallets, _walletList$wallets2, _user$loyalty_level, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _transactionsList$lis5, _transactionsList$lis6, _loyaltyLevel$image, _walletList$wallets5;
+  var _ref, _walletList$wallets, _walletList$wallets2, _userLoyaltyLevel$loy, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _transactionsList$lis5, _transactionsList$lis6, _loyaltyLevel$image, _walletList$wallets5;
 
   var walletList = props.walletList,
+      userLoyaltyLevel = props.userLoyaltyLevel,
       transactionsList = props.transactionsList,
       setWalletSelected = props.setWalletSelected,
       isWalletCashEnabled = props.isWalletCashEnabled,
@@ -67,10 +68,6 @@ var WalletsUI = function WalletsUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -90,7 +87,7 @@ var WalletsUI = function WalletsUI(props) {
   var currentWalletSelected = (_ref = ((_walletList$wallets = walletList.wallets) === null || _walletList$wallets === void 0 ? void 0 : _walletList$wallets.length) > 0 && ((_walletList$wallets2 = walletList.wallets) === null || _walletList$wallets2 === void 0 ? void 0 : _walletList$wallets2.find(function (w) {
     return w.type === tabSelected;
   }))) !== null && _ref !== void 0 ? _ref : null;
-  var loyaltyLevel = Object.keys((_user$loyalty_level = user === null || user === void 0 ? void 0 : user.loyalty_level) !== null && _user$loyalty_level !== void 0 ? _user$loyalty_level : {}).length > 0 && (user === null || user === void 0 ? void 0 : user.loyalty_level);
+  var loyaltyLevel = Object.keys((_userLoyaltyLevel$loy = userLoyaltyLevel.loyaltyLevel) !== null && _userLoyaltyLevel$loy !== void 0 ? _userLoyaltyLevel$loy : {}).length > 0 && userLoyaltyLevel.loyaltyLevel;
   var walletName = {
     cash: {
       name: t('CASH_WALLET', 'Cash Wallet'),
@@ -109,7 +106,7 @@ var WalletsUI = function WalletsUI(props) {
     setWalletSelected(wallet.id);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, !walletList.loading && !walletList.error && ((_walletList$wallets3 = walletList.wallets) === null || _walletList$wallets3 === void 0 ? void 0 : _walletList$wallets3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, !walletList.loading && !userLoyaltyLevel.loading && !walletList.error && ((_walletList$wallets3 = walletList.wallets) === null || _walletList$wallets3 === void 0 ? void 0 : _walletList$wallets3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary",
     className: "tabs"
   }, (_walletList$wallets4 = walletList.wallets) === null || _walletList$wallets4 === void 0 ? void 0 : _walletList$wallets4.map(function (wallet) {
@@ -154,7 +151,7 @@ var WalletsUI = function WalletsUI(props) {
     src: (_loyaltyLevel$image = loyaltyLevel.image) !== null && _loyaltyLevel$image !== void 0 ? _loyaltyLevel$image : theme.images.dummies.loyaltyLevel
   }), /*#__PURE__*/_react.default.createElement("span", {
     className: "loyalty_name"
-  }, loyaltyLevel.name))))), (walletList === null || walletList === void 0 ? void 0 : walletList.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+  }, loyaltyLevel.name))))), ((walletList === null || walletList === void 0 ? void 0 : walletList.loading) || userLoyaltyLevel.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
@@ -186,7 +183,7 @@ var WalletsUI = function WalletsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 40
     }));
-  }))), !(walletList !== null && walletList !== void 0 && walletList.loading) && ((walletList === null || walletList === void 0 ? void 0 : walletList.error) || !(walletList !== null && walletList !== void 0 && (_walletList$wallets5 = walletList.wallets) !== null && _walletList$wallets5 !== void 0 && _walletList$wallets5.length)) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }))), !(walletList !== null && walletList !== void 0 && walletList.loading) && !userLoyaltyLevel.loading && ((walletList === null || walletList === void 0 ? void 0 : walletList.error) || !(walletList !== null && walletList !== void 0 && (_walletList$wallets5 = walletList.wallets) !== null && _walletList$wallets5 !== void 0 && _walletList$wallets5.length)) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: walletList !== null && walletList !== void 0 && walletList.error ? t('ERROR_NOT_FOUND_WALLETS', 'Sorry, an error has occurred') : t('NOT_FOUND_WALLETS', 'No wallets to show at this time.')
   }));
 };
