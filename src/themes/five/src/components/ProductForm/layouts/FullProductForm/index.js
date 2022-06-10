@@ -1,8 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
+import MdcPlayCircleOutline from '@meronex/icons/mdc/MdcPlayCircleOutline'
 import { useTheme } from 'styled-components'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, {
+  Navigation,
+  Thumbs
+} from 'swiper'
+
 import {
   ProductForm as ProductOptions,
   useSession,
@@ -27,10 +34,12 @@ import { Modal } from '../../../Modal'
 import { ProductOption } from '../../../ProductOption'
 import { ProductOptionSubOption } from '../../../ProductOptionSubOption'
 
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
 import {
   ProductContainer,
   WrapperImage,
-  ProductImage,
   ProductInfo,
   ProductEdition,
   SectionTitle,
@@ -43,8 +52,11 @@ import {
   WrapperIngredients,
   ShareWrapper,
   ProductTagsListContainer,
-  ProductTagWrapper
+  ProductTagWrapper,
+  VideoGalleryWrapper
 } from './styles'
+
+SwiperCore.use([Navigation, Thumbs])
 
 const ProductOptionsUI = (props) => {
   const {
@@ -62,9 +74,11 @@ const ProductOptionsUI = (props) => {
     handleChangeIngredientState,
     handleChangeSuboptionState,
     handleChangeCommentState,
-    isIndividualBusinessCart
+    isIndividualBusinessCart,
+    AdminSettings
   } = props
   const { product, loading, error } = productObject
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const windowSize = useWindowSize()
   const [{ auth, user }, { login }] = useSession()
   const [, t] = useLanguage()
@@ -74,6 +88,9 @@ const ProductOptionsUI = (props) => {
   const theme = useTheme()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
+  const [gallery, setGallery] = useState([])
+  const [videoGallery, setVideoGallery] = useState(null)
+
   const closeModal = () => {
     setModalIsOpen(false)
     setModalPageToShow('login')
@@ -122,6 +139,50 @@ const ProductOptionsUI = (props) => {
     }
     return classnames
   }
+
+  const handleSlideChange = () => {
+    var videos = document.querySelectorAll('iframe, video')
+    Array.prototype.forEach.call(videos, function (video) {
+      if (video.tagName.toLowerCase() === 'video') {
+        video.pause()
+      } else {
+        var src = video.src
+        video.src = src
+      }
+    })
+  }
+
+  const getOverFlowImage = (url) => {
+    const keys = url.split('/')
+    const _videoId = keys[keys.length - 1]
+    const overFlowImg = 'http://img.youtube.com/vi/' + _videoId + '/0.jpg'
+    return overFlowImg
+  }
+
+  useEffect(() => {
+    const imageList = []
+    const videoList = []
+    imageList.push(product?.images || theme.images?.dummies?.product)
+    if (product?.gallery && product?.gallery?.length > 0) {
+      for (const galleryItem of product?.gallery) {
+        if (galleryItem?.file) {
+          imageList.push(galleryItem?.file)
+        }
+        if (galleryItem?.video) {
+          const _url = galleryItem?.video.split('/')
+          let _videoId = _url[_url?.length - 1]
+          if (_videoId.includes('watch')) {
+            const __url = _videoId.split('=')[1]
+            _videoId = __url
+          }
+          const embedURL = 'https://www.youtube.com/embed/' + _videoId
+          videoList.push(embedURL)
+        }
+      }
+    }
+    setGallery(imageList)
+    setVideoGallery(videoList)
+  }, [product])
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -151,25 +212,98 @@ const ProductOptionsUI = (props) => {
         {!loading && !error && product && (
           <>
             <WrapperImage>
-              <ProductImage id='product_image'>
-                {product && !loading && !error && (
-                  <ShareWrapper>
-                    <ProductShare
-                      slug={businessSlug}
-                      categoryId={product?.category_id}
-                      productId={product?.id}
-                    />
-                  </ShareWrapper>
+              <Swiper
+                spaceBetween={10}
+                navigation
+                enabled={AdminSettings?.product_popup_settings?.multiple_images_enabled || AdminSettings?.product_popup_settings?.multiple_images_enabled === undefined}
+                watchOverflow
+                thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+                onSlideChange={() => handleSlideChange()}
+              >
+                {gallery.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' />
+                  </SwiperSlide>
+                ))}
+                {videoGallery && videoGallery.length > 0 && (
+                  <>
+                    {videoGallery.map((video, j) => (
+                      <SwiperSlide key={j}>
+                        <iframe style={{ border: 'none', width: '100%', height: '100%' }} src={video} />
+                      </SwiperSlide>
+                    ))}
+                  </>
                 )}
-                <img
-                  src={product?.images || theme.images?.dummies?.product}
-                  alt='product'
-                  width='300px'
-                  height='300px'
-                  loading='lazy'
-                  onError={(e) => { e.target.onerror = null; e.target.src = theme.images?.dummies?.product }}
-                />
-              </ProductImage>
+              </Swiper>
+              {(AdminSettings?.product_popup_settings?.multiple_images_enabled || AdminSettings?.product_popup_settings?.multiple_images_enabled === undefined) && (
+                <Swiper
+                  onSwiper={setThumbsSwiper}
+                  spaceBetween={20}
+                  slidesPerView={5}
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 3,
+                      spaceBetween: 20
+                    },
+                    300: {
+                      slidesPerView: 4,
+                      spaceBetween: 20
+                    },
+                    400: {
+                      slidesPerView: 5,
+                      spaceBetween: 20
+                    },
+                    550: {
+                      slidesPerView: 6,
+                      spaceBetween: 20
+                    },
+                    769: {
+                      slidesPerView: 6,
+                      spaceBetween: 20
+                    },
+                    1000: {
+                      slidesPerView: 7,
+                      spaceBetween: 20
+                    },
+                    1200: {
+                      slidesPerView: 4,
+                      spaceBetween: 20
+                    },
+                    1300: {
+                      slidesPerView: 5,
+                      spaceBetween: 20
+                    },
+                    1600: {
+                      slidesPerView: 6,
+                      spaceBetween: 20
+                    }
+                  }}
+                  freeMode
+                  watchSlidesProgress
+                  className='product-thumb'
+                  watchOverflow
+                >
+                  {gallery.map((img, i) => (
+                    <SwiperSlide key={i}>
+                      <img src={img} alt='' />
+                    </SwiperSlide>
+                  ))}
+                  {videoGallery && videoGallery.length > 0 && (
+                    <>
+                      {videoGallery.map((video, j) => (
+                        <SwiperSlide key={j}>
+                          <VideoGalleryWrapper>
+                            <img src={getOverFlowImage(video)} alt='' />
+                            <MdcPlayCircleOutline />
+                          </VideoGalleryWrapper>
+                        </SwiperSlide>
+                      ))}
+                    </>
+                  )}
+                </Swiper>
+              )}
+            </WrapperImage>
+            <ProductInfo>
               <ProductFormTitle>
                 <h2>{product?.name}</h2>
                 {product?.description && <p>{product?.description}</p>}
@@ -188,8 +322,6 @@ const ProductOptionsUI = (props) => {
                   </ProductTagWrapper>
                 ))}
               </ProductTagsListContainer>
-            </WrapperImage>
-            <ProductInfo>
               <ProductEdition>
                 {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                 <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>

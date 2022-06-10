@@ -340,3 +340,15 @@ export const ProductTagWrapper = styled.div`
     `}
   }
 `
+export const VideoGalleryWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  svg {
+    position: absolute;
+    fill: #fff;
+    font-size: 28px;
+  }
+`
