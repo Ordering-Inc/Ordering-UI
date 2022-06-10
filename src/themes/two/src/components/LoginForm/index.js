@@ -132,7 +132,9 @@ const LoginFormUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    if (emailInput?.current) {
+      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    }
   }
 
   const handleChangePhoneNumber = (number, isValid) => {
@@ -212,7 +214,7 @@ const LoginFormUI = (props) => {
         open: true,
         content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
       })
-    
+
     else
       resetOtpLeftTime()
 
@@ -224,10 +226,10 @@ const LoginFormUI = (props) => {
         open: true,
         content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
       })
-    
+
     else
       resetOtpLeftTime()
-      
+
   }, [verifyPhoneState])
 
   return (
@@ -251,26 +253,26 @@ const LoginFormUI = (props) => {
             Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
                 {(configs?.facebook_login?.value === 'true' ||
-                configs?.facebook_login?.value === '1') &&
-                configs?.facebook_id?.value &&
-              (
-                <FacebookLoginButton
-                  appId={configs?.facebook_id?.value}
-                  handleSuccessFacebookLogin={handleSuccessFacebook}
-                />
-              )}
+                  configs?.facebook_login?.value === '1') &&
+                  configs?.facebook_id?.value &&
+                  (
+                    <FacebookLoginButton
+                      appId={configs?.facebook_id?.value}
+                      handleSuccessFacebookLogin={handleSuccessFacebook}
+                    />
+                  )}
                 {configs?.apple_login_client_id?.value &&
-              (
-                <AppleLogin
-                  onSuccess={handleSuccessApple}
-                  onFailure={(data) => console.log('onFailure', data)}
-                />
-              )}
+                  (
+                    <AppleLogin
+                      onSuccess={handleSuccessApple}
+                      onFailure={(data) => console.log('onFailure', data)}
+                    />
+                  )}
 
                 {
                   useLoginByCellphone && loginTab === 'cellphone' &&
                   configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
-                  configs?.twilio_service_enabled?.value === '1') && (
+                    configs?.twilio_service_enabled?.value === '1') && (
                     <SmsLoginButton
                       handleSmsLogin={() => setLoginWithOtpState(true)}
                     />
@@ -317,14 +319,14 @@ const LoginFormUI = (props) => {
               isPopup={isPopup}
             >
               {
-              props.beforeMidElements?.map((BeforeMidElements, i) => (
-                <React.Fragment key={i}>
-                  {BeforeMidElements}
-                </React.Fragment>))
+                props.beforeMidElements?.map((BeforeMidElements, i) => (
+                  <React.Fragment key={i}>
+                    {BeforeMidElements}
+                  </React.Fragment>))
               }
               {
-              props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-                <BeforeMidComponents key={i} {...props} />))
+                props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+                  <BeforeMidComponents key={i} {...props} />))
               }
               {useLoginByEmail && loginTab === 'email' && (
                 <Input
@@ -337,12 +339,12 @@ const LoginFormUI = (props) => {
                   autoComplete='off'
                 />
               )}
-              
+
               {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
                 <InputPhoneNumber
                   value={credentials?.cellphone}
                   setValue={handleChangePhoneNumber}
-                  handleIsValid={() => {}}
+                  handleIsValid={() => { }}
                 />
               )}
 
@@ -384,7 +386,7 @@ const LoginFormUI = (props) => {
 
               {(verifyPhoneState?.loading || checkPhoneCodeState?.loading) && (
                 <SpinnerLoader
-                  style={{height: 160}}
+                  style={{ height: 160 }}
                 />
               )}
 
@@ -406,14 +408,14 @@ const LoginFormUI = (props) => {
                 </WrapperPassword>
               )}
               {
-              props.afterMidElements?.map((MidElement, i) => (
-                <React.Fragment key={i}>
-                  {MidElement}
-                </React.Fragment>))
+                props.afterMidElements?.map((MidElement, i) => (
+                  <React.Fragment key={i}>
+                    {MidElement}
+                  </React.Fragment>))
               }
               {
-              props.afterMidComponents?.map((MidComponent, i) => (
-                <MidComponent key={i} {...props} />))
+                props.afterMidComponents?.map((MidComponent, i) => (
+                  <MidComponent key={i} {...props} />))
               }
               {!loginWithOtpState && (
                 <RedirectLink isPopup={isPopup}>
@@ -427,12 +429,12 @@ const LoginFormUI = (props) => {
                   onClick={formMethods.handleSubmit(onSubmit)}
                   disabled={formState.loading}
                 >
-                {formState.loading
-                  ? `${t('LOADING', 'Loading')}...`
-                  : loginWithOtpState
-                    ? t('GET_VERIFY_CODE', 'Get verify code')
-                    : t('LOGIN', 'Login')
-                }
+                  {formState.loading
+                    ? `${t('LOADING', 'Loading')}...`
+                    : loginWithOtpState
+                      ? t('GET_VERIFY_CODE', 'Get verify code')
+                      : t('LOGIN', 'Login')
+                  }
                 </Button>
               )}
               {(loginWithOtpState && !willVerifyOtpState) && (
