@@ -83,8 +83,8 @@ const SignUpBusinessUI = (props) => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
     if (!userPhoneNumber &&
       ((validationFields?.fields?.checkout?.cellphone?.enabled &&
-      validationFields?.fields?.checkout?.cellphone?.required) ||
-      configs?.verification_phone_required?.value === '1')
+        validationFields?.fields?.checkout?.cellphone?.required) ||
+        configs?.verification_phone_required?.value === '1')
     ) {
       setAlertState({
         open: true,
@@ -140,7 +140,9 @@ const SignUpBusinessUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    if (emailInput?.current) {
+      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    }
   }
 
   useEffect(() => {

@@ -67,7 +67,7 @@ const SignUpFormUI = (props) => {
   const [, { login }] = useSession()
   const emailInput = useRef(null)
   const isFacebookLogin = configs?.facebook_login?.value === 'true'
-  
+
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
@@ -175,7 +175,9 @@ const SignUpFormUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    if (emailInput?.current) {
+      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    }
   }
 
   useEffect(() => {
