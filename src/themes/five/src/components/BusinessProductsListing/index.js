@@ -340,7 +340,7 @@ const BusinessProductsListingUI = (props) => {
       </Modal>
 
       <Modal
-        width='700px'
+        width={(AdminSettings?.product_popup_settings?.layout === 'left' || AdminSettings?.product_popup_settings?.layout === 'right') ? '70%' : '700px'}
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}

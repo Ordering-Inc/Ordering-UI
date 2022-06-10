@@ -90,7 +90,8 @@ const ProductOptionsUI = (props) => {
     handleSave,
     handleChangeIngredientState,
     handleChangeSuboptionState,
-    handleChangeCommentState
+    handleChangeCommentState,
+    AdminSettings
   } = props
 
   const { product, loading, error } = productObject
@@ -313,6 +314,7 @@ const ProductOptionsUI = (props) => {
                 <Swiper
                   spaceBetween={10}
                   navigation
+                  enabled={AdminSettings?.product_popup_settings?.multiple_images_enabled || AdminSettings?.product_popup_settings?.multiple_images_enabled === undefined}
                   watchOverflow
                   thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
                   onSlideChange={() => handleSlideChange()}
@@ -332,55 +334,57 @@ const ProductOptionsUI = (props) => {
                     </>
                   )}
                 </Swiper>
-                <Swiper
-                  onSwiper={setThumbsSwiper}
-                  spaceBetween={20}
-                  slidesPerView={5}
-                  breakpoints={{
-                    0: {
-                      slidesPerView: 3,
-                      spaceBetween: 20
-                    },
-                    300: {
-                      slidesPerView: 4,
-                      spaceBetween: 20
-                    },
-                    400: {
-                      slidesPerView: 5,
-                      spaceBetween: 20
-                    },
-                    550: {
-                      slidesPerView: 6,
-                      spaceBetween: 20
-                    },
-                    769: {
-                      slidesPerView: 6,
-                      spaceBetween: 20
-                    }
-                  }}
-                  freeMode
-                  watchSlidesProgress
-                  className='product-thumb'
-                  watchOverflow
-                >
-                  {gallery.map((img, i) => (
-                    <SwiperSlide key={i}>
-                      <img src={img} alt='' />
-                    </SwiperSlide>
-                  ))}
-                  {videoGallery && videoGallery.length > 0 && (
-                    <>
-                      {videoGallery.map((video, j) => (
-                        <SwiperSlide key={j}>
-                          <VideoGalleryWrapper>
-                            <img src={getOverFlowImage(video)} alt='' />
-                            <MdcPlayCircleOutline />
-                          </VideoGalleryWrapper>
-                        </SwiperSlide>
-                      ))}
-                    </>
-                  )}
-                </Swiper>
+                {(AdminSettings?.product_popup_settings?.multiple_images_enabled || AdminSettings?.product_popup_settings?.multiple_images_enabled === undefined) && (
+                  <Swiper
+                    onSwiper={setThumbsSwiper}
+                    spaceBetween={20}
+                    slidesPerView={5}
+                    breakpoints={{
+                      0: {
+                        slidesPerView: 3,
+                        spaceBetween: 20
+                      },
+                      300: {
+                        slidesPerView: 4,
+                        spaceBetween: 20
+                      },
+                      400: {
+                        slidesPerView: 5,
+                        spaceBetween: 20
+                      },
+                      550: {
+                        slidesPerView: 6,
+                        spaceBetween: 20
+                      },
+                      769: {
+                        slidesPerView: 6,
+                        spaceBetween: 20
+                      }
+                    }}
+                    freeMode
+                    watchSlidesProgress
+                    className='product-thumb'
+                    watchOverflow
+                  >
+                    {gallery.map((img, i) => (
+                      <SwiperSlide key={i}>
+                        <img src={img} alt='' />
+                      </SwiperSlide>
+                    ))}
+                    {videoGallery && videoGallery.length > 0 && (
+                      <>
+                        {videoGallery.map((video, j) => (
+                          <SwiperSlide key={j}>
+                            <VideoGalleryWrapper>
+                              <img src={getOverFlowImage(video)} alt='' />
+                              <MdcPlayCircleOutline />
+                            </VideoGalleryWrapper>
+                          </SwiperSlide>
+                        ))}
+                      </>
+                    )}
+                  </Swiper>
+                )}
               </SwiperWrapper>
             </WrapperImage>
             <ProductInfo>
@@ -530,7 +534,8 @@ const ProductOptionsUI = (props) => {
                     }))
                   }
                 </div>
-                {!product?.hide_special_instructions && (
+                {!product?.hide_special_instructions &&
+                (AdminSettings?.product_popup_settings?.product_comments?.isShowed || AdminSettings?.product_popup_settings?.product_comments?.isShowed === undefined) && (
                   <ProductComment>
                     <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
                     <TextArea
@@ -539,6 +544,7 @@ const ProductOptionsUI = (props) => {
                       defaultValue={productCart.comment}
                       onChange={handleChangeCommentState}
                       disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                      maxLength={AdminSettings?.product_popup_settings?.product_comments?.max_characters ?? ''}
                     />
                   </ProductComment>
                 )}
@@ -737,7 +743,7 @@ const ProductOptionsUI = (props) => {
   )
 }
 
-export const originalProductForm = (props) => {
+export const OriginalProductForm = (props) => {
   const productOptionsProps = {
     ...props,
     UIComponent: ProductOptionsUI
