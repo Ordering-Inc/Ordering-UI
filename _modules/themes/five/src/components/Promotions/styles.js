@@ -35,7 +35,7 @@ var SingleOfferContainer = _styledComponents.default.div(_templateObject3 || (_t
 
 exports.SingleOfferContainer = SingleOfferContainer;
 
-var Description = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  color: #909BA9;\n"])));
+var Description = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  color: #909BA9;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 2;\n  line-clamp: 2; \n  -webkit-box-orient: vertical;\n\n"])));
 
 exports.Description = Description;
 
@@ -43,7 +43,7 @@ var ExpiresAt = _styledComponents.default.p(_templateObject5 || (_templateObject
 
 exports.ExpiresAt = ExpiresAt;
 
-var OfferInformation = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  width: 70%;\n  ", "\n  h2{\n    font-size: 14px;\n  }\n  @media (min-width: 720px){\n    width: 80%;\n    h2{\n      font-size: 16px;\n    }\n  }\n"])), function (_ref) {
+var OfferInformation = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  width: 70%;\n  ", "\n  h2{\n    overflow: hidden;\n    text-overflow: ellipsis;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    line-clamp: 2; \n    -webkit-box-orient: vertical;\n    font-size: 14px;\n  }\n  @media (min-width: 720px){\n    width: 80%;\n    h2{\n      font-size: 16px;\n    }\n  }\n"])), function (_ref) {
   var isSkeleton = _ref.isSkeleton;
   return isSkeleton && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    width: 100%;\n  "])));
 });
