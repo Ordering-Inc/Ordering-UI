@@ -213,6 +213,13 @@ const ProductOptionsUI = (props) => {
         {!loading && !error && product && (
           <>
             <WrapperImage>
+              <ShareWrapper>
+                <ProductShare
+                  slug={businessSlug}
+                  categoryId={product?.category_id}
+                  productId={product?.id}
+                />
+              </ShareWrapper>
               <SwiperWrapper isSoldOut={isSoldOut}>
                 <Swiper
                   spaceBetween={10}
@@ -358,15 +365,17 @@ const ProductOptionsUI = (props) => {
                     )
                   }))
                 }
-                {!product?.hide_special_instructions && (
+                {!product?.hide_special_instructions &&
+                (AdminSettings?.product_popup_settings?.product_comments?.isShowed || AdminSettings?.product_popup_settings?.product_comments?.isShowed === undefined) && (
                   <ProductComment>
-                    <SectionTitle>{t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}</SectionTitle>
+                    <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
                     <TextArea
                       rows={4}
                       placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
                       defaultValue={productCart.comment}
                       onChange={handleChangeCommentState}
                       disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                      maxLength={AdminSettings?.product_popup_settings?.product_comments?.max_characters ?? ''}
                     />
                   </ProductComment>
                 )}

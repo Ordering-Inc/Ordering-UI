@@ -4,12 +4,12 @@ export const ProductContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  padding: 50px 10px 10px;
+  padding: 0 10px 10px;
   width: calc(100% - 20px);
   box-sizing: border-box;
   @media (min-width: 768px) {
     height: 100%;
-    padding: 50px 30px 10px;
+    padding: 0 30px 10px;
   }
   @media (min-width: 1024px) {
     flex-wrap: nowrap;
@@ -20,9 +20,13 @@ export const ProductContainer = styled.div`
   }
 `
 export const WrapperImage = styled.div`
-  margin-top: 25px;
-  width: calc(50% - 10px);
+  margin-top: 35px;
+  width: calc(100% - 10px);
   position: relative;
+  
+  @media (min-width: 1024px) {
+    width: calc(50% - 10px);
+  }
 `
 
 export const SwiperWrapper = styled.div`
@@ -35,7 +39,7 @@ export const SwiperWrapper = styled.div`
     `}
   }
   .mySwiper2 {
-    height: 540px;
+    height: 320px;
     width: 100%;
 
     .swiper-slide-active {
@@ -46,14 +50,12 @@ export const SwiperWrapper = styled.div`
     }
 
     @media (min-width: 576px) {
-      height: 320px;
+      height: 500px;
     }
   }
-
-
   .swiper {
     width: 100%;
-    height: 500px;
+    height: 320px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -362,8 +364,8 @@ export const WrapperIngredients = styled.div`
 
 export const ShareWrapper = styled.div`
   position: absolute;
-  top: -40px;
-  left: -5px;
+  top: -30px;
+  left: 0;
   ${props => props.theme?.rtl && css`
     right: 10px;
   `}
@@ -371,11 +373,17 @@ export const ShareWrapper = styled.div`
   height: fit-content;
   z-index: 20;
   cursor: pointer;
-  
-  .product-share {    
+
+  & > div {
+    top: 100px;
+
+    @media (min-width: 780px) {
+      top: 0;
+    } 
+  }
+
+  .product-share {
     .a2a_vertical_style {
-      top: 36px;
-      left: 0;
       display: flex;
       flex-direction: column;
       width: 40px;
@@ -384,7 +392,7 @@ export const ShareWrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    left: -8px;
+    top: -37px;
     ${props => props.theme?.rtl && css`
       left: unset; 
       right: 25px;
@@ -392,8 +400,6 @@ export const ShareWrapper = styled.div`
   }
 
   @media (min-width: 1024px) {
-    left: -25px;
-    top: -8px;
     ${props => props.theme?.rtl && css`
       left: unset; 
       right: -25px;

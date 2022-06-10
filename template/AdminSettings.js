@@ -36,11 +36,11 @@ export const AdminSettings = {
     }
   },
   product_popup_settings: {
-    layout: 'full', // 'original', 'left', 'right', 'full'
+    layout: 'original', // 'original', 'left', 'right', 'full'
     multiple_images_enabled: true, // true, false
     product_comments: {
       isShowed: true, // true, false
-      max_characters: 100 // number || '' empty means Infinity
+      max_characters: 200 // number || '' empty means Infinity
     }
   }
 }
