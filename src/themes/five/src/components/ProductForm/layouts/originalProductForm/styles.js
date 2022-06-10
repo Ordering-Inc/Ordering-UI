@@ -14,7 +14,6 @@ export const ProductContainer = styled.div`
   }
 
   @media (min-width: 1200px) {
-    flex-wrap: nowrap;
     max-height: 70vh;
     padding-bottom: 0;
   }

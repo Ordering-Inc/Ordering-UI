@@ -4,22 +4,64 @@ import styled, { css } from 'styled-components'
 export const ProductContainer = styled.div`
   max-height: 100vh;
   position: relative;
-  padding: 50px 10px 10px;
-
-  @media (min-width: 768px) {
-    height: 100%;
-  }
+  padding: 70px 20px 20px;
 
   @media (min-width: 769px) {
     padding: 10px;
   }
 
-  @media (min-width: 1201px) {
-    overflow: auto;
-    max-height: 70vh;
+  @media (min-width: 1200px) {
+    padding:  20px 0 20px 10px;
   }
 `
 
+export const ProductInfoWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 100vh;
+  position: relative;
+
+  ${({ layout }) => layout && (layout === 'right') && css`
+    flex-direction: row-reverse;
+  `}
+
+  @media (min-width: 768px) {
+    height: 100%;
+  }
+
+  @media (min-width: 1201px) {
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    max-height: 70vh;
+  }
+`
+export const ProductShareWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5px;
+  top: 11.5px;
+  ${props => props.theme?.rtl && css`
+    padding-left: 20px;
+    padding-right: 0;
+  `}
+
+  > div {
+    left: unset;
+    top: 24px;
+    > svg {
+      margin: 0px !important;
+    }
+    @media (min-width: 769px) {
+      top: 0;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    padding-right: 50px;
+    top: 0;
+  }
+`
 export const WrapperImage = styled.div`
   width: 100%;
   position: relative;
@@ -94,9 +136,12 @@ export const WrapperImage = styled.div`
       height: auto;
       cursor: pointer;
       overflow: hidden;
-
+      & > div {
+        height: 100%;
+      }
       img {
         border-radius: 7.6px;
+        max-height: 70px;
       }
     }
 
@@ -427,5 +472,17 @@ export const ProductTagWrapper = styled.div`
     ` : css`
       margin: 0 20px 0 10px;
     `}
+  }
+`
+export const VideoGalleryWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  svg {
+    position: absolute;
+    fill: #fff;
+    font-size: 28px;
   }
 `
