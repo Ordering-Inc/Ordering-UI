@@ -97,7 +97,10 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       }
     });
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
+
+    if (emailInput !== null && emailInput !== void 0 && emailInput.current) {
+      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
+    }
   };
 
   (0, _react.useEffect)(function () {
