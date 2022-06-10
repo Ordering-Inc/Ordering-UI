@@ -60,6 +60,7 @@ const LoginFormUI = (props) => {
   const {
     useLoginByEmail,
     useLoginByCellphone,
+    useLoginOtp,
     handleChangeInput,
     handleReCaptcha,
     handleChangeTab,
@@ -76,9 +77,14 @@ const LoginFormUI = (props) => {
     credentials,
     enableReCaptcha,
     useRootPoint,
-    isCustomerMode
+    isCustomerMode,
+    otpType,
+    setOtpType,
+    generateOtpCode,
+    otpState,
+    setOtpState
   } = props
-  const numOtpInputs = 4
+  const numOtpInputs = loginTab === 'otp' ? 6 : 4
   const [ordering, { setOrdering }] = useApi()
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -95,7 +101,6 @@ const LoginFormUI = (props) => {
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
   const [projectName, setProjectName] = useState(null)
   const [submitted, setSubmitted] = useState(false)
-  const [otpState, setOtpState] = useState('')
 
   const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
@@ -114,14 +119,22 @@ const LoginFormUI = (props) => {
       configs?.twilio_service_enabled?.value === '1'))
 
   const onSubmit = async () => {
-    if (loginWithOtpState) {
-      if (!validPhoneFieldState) {
+    if (loginWithOtpState || loginTab === 'otp') {
+      if (!validPhoneFieldState && (loginTab !== 'otp' || (otpType === 'cellphone' && loginTab === 'otp'))) {
         setAlertState({
           open: true,
           content: [t('INVALID_PHONE_NUMBER', 'Invalid phone number')]
         })
 
         return
+      }
+      if (loginTab === 'otp') {
+        if (otpType === 'cellphone') {
+          const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
+          generateOtpCode(cellphone, countryPhoneCode)
+        } else {
+          generateOtpCode()
+        }
       }
       setWillVerifyOtpState(true)
     } else {
@@ -204,11 +217,12 @@ const LoginFormUI = (props) => {
       const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
 
       resetOtpLeftTime()
-
-      handleSendVerifyCode({
-        cellphone: cellphone,
-        country_phone_code: countryPhoneCode
-      })
+      if (loginTab !== 'otp') {
+        handleSendVerifyCode({
+          cellphone: cellphone,
+          country_phone_code: countryPhoneCode
+        })
+      }
     }
   }
 
@@ -236,18 +250,23 @@ const LoginFormUI = (props) => {
   }, [formMethods])
 
   useEffect(() => {
-    handleSendOtp()
+    if (loginTab !== 'otp') {
+      handleSendOtp()
+    }
   }, [willVerifyOtpState])
 
   useEffect(() => {
     if (otpState?.length === numOtpInputs) {
-      const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
-
-      handleCheckPhoneCode({
-        cellphone: cellphone,
-        country_phone_code: countryPhoneCode,
-        code: otpState
-      })
+      if (loginTab === 'otp') {
+        handleButtonLoginClick()
+      } else {
+        const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
+        handleCheckPhoneCode({
+          cellphone: cellphone,
+          country_phone_code: countryPhoneCode,
+          code: otpState
+        })
+      }
     }
   }, [otpState])
 
@@ -257,7 +276,13 @@ const LoginFormUI = (props) => {
         open: true,
         content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
       })
-    } else resetOtpLeftTime()
+    } else if (checkPhoneCodeState?.result?.result) {
+      setAlertState({
+        open: true,
+        content: t('CODE_SENT', 'The code has been sent')
+      })
+      resetOtpLeftTime()
+    }
   }, [checkPhoneCodeState])
 
   useEffect(() => {
@@ -322,6 +347,40 @@ const LoginFormUI = (props) => {
                     {t('BY_PHONE', 'by Phone')}
                   </Tab>
                 )}
+                {useLoginOtp && (
+                  <Tab
+                    onClick={() => handleChangeTab('otp')}
+                    active={loginTab === 'otp'}
+                    borderBottom={loginTab === 'otp'}
+                  >
+                    {t('BY_OTP', 'by Otp')}
+                  </Tab>
+                )}
+              </Tabs>
+            </LoginWith>
+          )}
+
+          {loginTab === 'otp' && (
+            <LoginWith isPopup={isPopup}>
+              <Tabs variant='primary'>
+                {useLoginOtp && (
+                  <Tab
+                    onClick={() => setOtpType('email')}
+                    active={otpType === 'email'}
+                    borderBottom={otpType === 'email'}
+                  >
+                    {t('BY_OTP_EMAIL', 'by Otp Email')}
+                  </Tab>
+                )}
+                {useLoginOtp && (
+                  <Tab
+                    onClick={() => setOtpType('cellphone')}
+                    active={otpType === 'cellphone'}
+                    borderBottom={otpType === 'cellphone'}
+                  >
+                    {t('BY_OTP_CELLPHONE', 'by Otp Cellphone')}
+                  </Tab>
+                )}
               </Tabs>
             </LoginWith>
           )}
@@ -363,7 +422,7 @@ const LoginFormUI = (props) => {
                   </InputBeforeIcon>
                 </InputWrapper>
               )}
-              {useLoginByEmail && loginTab === 'email' && (
+              {((useLoginByEmail && loginTab === 'email') || (loginTab === 'otp' && otpType === 'email')) && (
                 <>
                   {formMethods?.errors?.email?.type === 'required' && (
                     <ValidationText>
@@ -397,7 +456,7 @@ const LoginFormUI = (props) => {
                   </InputWrapper>
                 </>
               )}
-              {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
+              {(((useLoginByCellphone && loginTab === 'cellphone') || (loginTab === 'otp' && otpType === 'cellphone')) && !willVerifyOtpState) && (
                 <>
                   {formMethods.errors?.cellphone && !credentials?.cellphone && (
                     <ValidationText>
@@ -429,7 +488,7 @@ const LoginFormUI = (props) => {
                       numInputs={numOtpInputs}
                       containerStyle='otp-container'
                       inputStyle='otp-input'
-                      placeholder='0000'
+                      placeholder='000000'
                       isInputNum
                       shouldAutoFocus
                     />
@@ -455,7 +514,7 @@ const LoginFormUI = (props) => {
                 />
               )}
 
-              {!loginWithOtpState && (
+              {!loginWithOtpState && loginTab !== 'otp' && (
                 <>
                   {formMethods.errors?.password && (
                     <ValidationText>
@@ -512,7 +571,7 @@ const LoginFormUI = (props) => {
                 >
                   {formState.loading
                     ? `${t('LOADING', 'Loading')}...`
-                    : loginWithOtpState
+                    : loginWithOtpState || loginTab === 'otp'
                       ? t('GET_VERIFY_CODE', 'Get verify code')
                       : t('LOGIN', 'Login')}
                 </Button>
