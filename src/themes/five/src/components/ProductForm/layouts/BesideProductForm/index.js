@@ -16,23 +16,23 @@ import {
   useOrder,
   useUtils
 } from 'ordering-components'
-// check *****************
+
 import { scrollTo } from '../../../../../../../utils'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { ProductShare } from '../../../../../../../components/ProductShare'
 
-import { ProductIngredient } from '../../../../../../../components/ProductIngredient'
-import { ProductOption } from '../../../../../../../components/ProductOption'
-import { ProductOptionSubOption } from '../../../../../../../components/ProductOptionSubOption'
-import { LoginForm } from '../../../../../../../components/LoginForm'
-import { SignUpForm } from '../../../../../../../components/SignUpForm'
-import { ForgotPasswordForm } from '../../../../../../../components/ForgotPasswordForm'
-import { AddressList } from '../../../../../../../components/AddressList'
-import { NotFoundSource } from '../../../../../../../components/NotFoundSource'
-import { Modal } from '../../../../../../../components/Modal'
-import { Button } from '../../../../../../../styles/Buttons'
-import { TextArea } from '../../../../../../../styles/Inputs'
-// check *****************
+import { ProductIngredient } from '../../../ProductIngredient'
+import { ProductOption } from '../../../ProductOption'
+import { ProductOptionSubOption } from '../../../ProductOptionSubOption'
+import { LoginForm } from '../../../LoginForm'
+import { SignUpForm } from '../../../SignUpForm'
+import { ForgotPasswordForm } from '../../../ForgotPasswordForm'
+import { AddressList } from '../../../AddressList'
+import { NotFoundSource } from '../../../NotFoundSource'
+import { Modal } from '../../../Modal'
+import { Button } from '../../../../styles/Buttons'
+import { TextArea } from '../../../../styles/Inputs'
+
 import {
   ProductContainer,
   ProductInfoWrapper,
