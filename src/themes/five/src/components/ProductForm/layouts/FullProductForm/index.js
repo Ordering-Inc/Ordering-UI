@@ -51,6 +51,7 @@ import {
   ProductFormTitle,
   WrapperIngredients,
   ShareWrapper,
+  SwiperWrapper,
   ProductTagsListContainer,
   ProductTagWrapper,
   VideoGalleryWrapper
@@ -212,76 +213,14 @@ const ProductOptionsUI = (props) => {
         {!loading && !error && product && (
           <>
             <WrapperImage>
-              <Swiper
-                spaceBetween={10}
-                navigation
-                enabled={AdminSettings?.product_popup_settings?.multiple_images_enabled || AdminSettings?.product_popup_settings?.multiple_images_enabled === undefined}
-                watchOverflow
-                thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
-                onSlideChange={() => handleSlideChange()}
-              >
-                {gallery.map((img, i) => (
-                  <SwiperSlide key={i}>
-                    <img src={img} alt='' />
-                  </SwiperSlide>
-                ))}
-                {videoGallery && videoGallery.length > 0 && (
-                  <>
-                    {videoGallery.map((video, j) => (
-                      <SwiperSlide key={j}>
-                        <iframe style={{ border: 'none', width: '100%', height: '100%' }} src={video} />
-                      </SwiperSlide>
-                    ))}
-                  </>
-                )}
-              </Swiper>
-              {(AdminSettings?.product_popup_settings?.multiple_images_enabled || AdminSettings?.product_popup_settings?.multiple_images_enabled === undefined) && (
+              <SwiperWrapper isSoldOut={isSoldOut}>
                 <Swiper
-                  onSwiper={setThumbsSwiper}
-                  spaceBetween={20}
-                  slidesPerView={5}
-                  breakpoints={{
-                    0: {
-                      slidesPerView: 3,
-                      spaceBetween: 20
-                    },
-                    300: {
-                      slidesPerView: 4,
-                      spaceBetween: 20
-                    },
-                    400: {
-                      slidesPerView: 5,
-                      spaceBetween: 20
-                    },
-                    550: {
-                      slidesPerView: 6,
-                      spaceBetween: 20
-                    },
-                    769: {
-                      slidesPerView: 6,
-                      spaceBetween: 20
-                    },
-                    1000: {
-                      slidesPerView: 7,
-                      spaceBetween: 20
-                    },
-                    1200: {
-                      slidesPerView: 4,
-                      spaceBetween: 20
-                    },
-                    1300: {
-                      slidesPerView: 5,
-                      spaceBetween: 20
-                    },
-                    1600: {
-                      slidesPerView: 6,
-                      spaceBetween: 20
-                    }
-                  }}
-                  freeMode
-                  watchSlidesProgress
-                  className='product-thumb'
+                  spaceBetween={10}
+                  navigation
+                  enabled={AdminSettings?.product_popup_settings?.multiple_images_enabled || AdminSettings?.product_popup_settings?.multiple_images_enabled === undefined}
                   watchOverflow
+                  thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+                  onSlideChange={() => handleSlideChange()}
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
@@ -292,16 +231,64 @@ const ProductOptionsUI = (props) => {
                     <>
                       {videoGallery.map((video, j) => (
                         <SwiperSlide key={j}>
-                          <VideoGalleryWrapper>
-                            <img src={getOverFlowImage(video)} alt='' />
-                            <MdcPlayCircleOutline />
-                          </VideoGalleryWrapper>
+                          <iframe style={{ border: 'none', width: '100%', height: '100%' }} src={video} />
                         </SwiperSlide>
                       ))}
                     </>
                   )}
                 </Swiper>
-              )}
+                {(AdminSettings?.product_popup_settings?.multiple_images_enabled || AdminSettings?.product_popup_settings?.multiple_images_enabled === undefined) && (
+                  <Swiper
+                    onSwiper={setThumbsSwiper}
+                    spaceBetween={20}
+                    slidesPerView={5}
+                    breakpoints={{
+                      0: {
+                        slidesPerView: 3,
+                        spaceBetween: 20
+                      },
+                      300: {
+                        slidesPerView: 4,
+                        spaceBetween: 20
+                      },
+                      400: {
+                        slidesPerView: 5,
+                        spaceBetween: 20
+                      },
+                      550: {
+                        slidesPerView: 6,
+                        spaceBetween: 20
+                      },
+                      769: {
+                        slidesPerView: 6,
+                        spaceBetween: 20
+                      }
+                    }}
+                    freeMode
+                    watchSlidesProgress
+                    className='product-thumb'
+                    watchOverflow
+                  >
+                    {gallery.map((img, i) => (
+                      <SwiperSlide key={i}>
+                        <img src={img} alt='' />
+                      </SwiperSlide>
+                    ))}
+                    {videoGallery && videoGallery.length > 0 && (
+                      <>
+                        {videoGallery.map((video, j) => (
+                          <SwiperSlide key={j}>
+                            <VideoGalleryWrapper>
+                              <img src={getOverFlowImage(video)} alt='' />
+                              <MdcPlayCircleOutline />
+                            </VideoGalleryWrapper>
+                          </SwiperSlide>
+                        ))}
+                      </>
+                    )}
+                  </Swiper>
+                )}
+              </SwiperWrapper>
             </WrapperImage>
             <ProductInfo>
               <ProductFormTitle>

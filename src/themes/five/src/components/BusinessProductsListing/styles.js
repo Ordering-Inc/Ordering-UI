@@ -16,7 +16,8 @@ export const ProductDetail = styled.div`
   display: flex;
   border-top: 1px solid ${props => props.theme.colors.secundaryContrast};
   width: 100%;
-  height: 100%;  
+  height: 100%;
+  padding: 0 0 10px 20px; 
 `
 export const ProductLoading = styled.div`
   width: 100%;

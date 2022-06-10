@@ -386,7 +386,7 @@ const BusinessProductsListingUI = (props) => {
       )}
 
       {(popupLayout === 'full' && (productModal.product || curProduct)) && (
-        <ProductDetail className='testtestesteste'>
+        <ProductDetail>
           <BackMenu className='productDetail-close'>
             <MdClose onClick={() => closeModalProductForm()} />
           </BackMenu>

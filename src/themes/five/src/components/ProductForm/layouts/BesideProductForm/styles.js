@@ -218,7 +218,6 @@ export const ProductFormTitle = styled.div`
   overflow-wrap: break-word;
 
 `
-
 export const ProductEdition = styled.div``
 
 export const SectionTitle = styled.h3`
@@ -229,7 +228,6 @@ export const SectionTitle = styled.h3`
   font-weight: 600;
   color: #333333;
 `
-
 export const ProductComment = styled.div`
   display: flex;
   flex-direction: column;

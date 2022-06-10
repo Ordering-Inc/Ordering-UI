@@ -5,7 +5,7 @@ export const ProductContainer = styled.div`
   flex-wrap: wrap;
   position: relative;
   padding: 50px 10px 10px;
-  width: 100%;
+  width: calc(100% - 20px);
   box-sizing: border-box;
   @media (min-width: 768px) {
     height: 100%;
@@ -15,29 +15,119 @@ export const ProductContainer = styled.div`
     flex-wrap: nowrap;
     overflow: auto;
     padding: 0;
-    height: 84vh;
+    height: 80vh;
     overflow-y: scroll;
   }
 `
 export const WrapperImage = styled.div`
-  width: 100%;
+  margin-top: 25px;
+  width: calc(50% - 10px);
   position: relative;
-  margin-top: 10px;
-  @media (min-width: 1024px) {
-    display: flex;
-    width: 40%;
-    position: sticky;
-    top: 0;
-    flex-direction: column;
-    align-items: center;
-    border-right: 1px solid ${props => props.theme.colors.borderColor};
-    overflow-y: auto;
-    ${props => props.theme?.rtl && css`
-      border-left: 1px solid ${props => props.theme.colors.borderColor};
+`
+
+export const SwiperWrapper = styled.div`
+  position: relative;
+  width: 100%;
+
+  img{
+    ${props => props.isSoldOut && css`
+        filter: grayscale(1);
     `}
-    margin-top: 0px;
-    padding: 25px 4vw;
+  }
+  .mySwiper2 {
+    height: 540px;
+    width: 100%;
+
+    .swiper-slide-active {
+      border-radius: 0px;
+      img {
+        border-radius: 0px;
+      }
+    }
+
+    @media (min-width: 576px) {
+      height: 320px;
+    }
+  }
+
+
+  .swiper {
+    width: 100%;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .product-thumb {
     box-sizing: border-box;
+    padding: 30px 0px;
+    margin: 0px 20px;
+
+    .swiper-slide {
+      display: flex;
+      opacity: 0.8;
+      border-radius: 7.6px;
+      height: auto;
+      cursor: pointer;
+      overflow: hidden;
+
+      img {
+        border-radius: 7.6px;
+        max-height: 70px;
+      }
+    }
+
+    .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-button-next {
+    background-image: url(${props => props.theme.images.general.rightArrow});
+    background-color: #d1d0d04d;
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    width: 32px;
+    height: 32px;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .swiper-button-prev {
+    background-image: url(${props => props.theme.images.general.leftArrow});
+    background-color: #d1d0d04d;
+    background-repeat: no-repeat;
+    background-position: 45% center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .swiper-button-next::after, .swiper-button-prev::after {
+    display: none;
   }
 `
 export const ProductImage = styled.div`
@@ -101,8 +191,8 @@ export const ProductInfo = styled.div`
     padding: 10px 0px;
   }
   @media (min-width: 1024px) {
-    width: 60%;
-    padding: 25px 6vw;
+    width: 50%;
+    padding: 25px 2vw;
     top: 0;
     margin-top: 0px;   
     background-color: ${props => props.theme.colors.secundaryBackground};
