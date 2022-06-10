@@ -138,6 +138,22 @@
             }
           }
         },
+        "reviews": {
+          "components": {
+            "ranking": {
+              "hidden": false
+            },
+            "customer_comments": {
+              "hidden": true
+            },
+            "review_date": {
+              "hidden": false
+            },
+            "search": {
+              "hidden": true
+            }
+          }
+        },
         "order_view_button": {
           "hidden": true
         }
