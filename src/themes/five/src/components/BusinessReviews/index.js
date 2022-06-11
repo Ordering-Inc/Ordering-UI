@@ -40,6 +40,8 @@ export const BusinessReviewsUI = (props) => {
   const showSearch = !theme?.layouts?.business_view?.components?.reviews?.components?.search?.hidden
   const hideElement = !(!showReviewDate && !showCustomerComments)
 
+  const reviewPoints = [t('TERRIBLE', 'Terrible'), t('BAD', 'Bad'), t('OKAY', 'Okay'), t('GOOD', 'Good'), t('GREAT', 'Great')]
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -86,11 +88,20 @@ export const BusinessReviewsUI = (props) => {
                 <p>{t('REVIEW_ORDER', 'Review order')}</p>
                 <ReviewsProgressContent>
                   <ReviewsProgressBar style={{ width: `${(stars / 5) * 100}%` }} />
-                  <ReviewsMarkPoint style={{ left: theme.rtl ? 'initial' : '0', right: theme?.rtl ? '0' : 'initial' }}>{t('TERRIBLE', 'Terrible')}</ReviewsMarkPoint>
-                  <ReviewsMarkPoint style={{ left: theme.rtl ? 'initial' : '25%', right: theme?.rtl ? '25%' : 'initial' }}>{t('BAD', 'Bad')}</ReviewsMarkPoint>
-                  <ReviewsMarkPoint style={{ left: theme.rtl ? 'initial' : '50%', right: theme?.rtl ? '50%' : 'initial' }}>{t('OKAY', 'Okay')}</ReviewsMarkPoint>
-                  <ReviewsMarkPoint style={{ left: theme.rtl ? 'initial' : '75%', right: theme?.rtl ? '75%' : 'initial' }}>{t('GOOD', 'Good')}</ReviewsMarkPoint>
-                  <ReviewsMarkPoint style={{ left: theme.rtl ? '0' : 'initial', right: theme?.rtl ? 'initial' : '0' }}>{t('GREAT', 'Great')}</ReviewsMarkPoint>
+                  {reviewPoints.map((reviewPoint, i) => {
+                    const isLastReviewPoint = i === reviewPoints?.length - 1
+                    return (
+                      <ReviewsMarkPoint
+                        key={i}
+                        style={{
+                          left: theme.rtl !== isLastReviewPoint ? 'initial' : `${25 * (isLastReviewPoint ? 0 : i)}%`,
+                          right: theme.rtl !== isLastReviewPoint ? `${25 * (isLastReviewPoint ? 0 : i)}%` : 'initial'
+                        }}
+                      >
+                        {reviewPoint}
+                      </ReviewsMarkPoint>
+                    )
+                  })}
                 </ReviewsProgressContent>
               </ReviewsProgressWrapper>
             )}
