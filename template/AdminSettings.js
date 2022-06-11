@@ -42,5 +42,42 @@ export const AdminSettings = {
       isShowed: true, // true, false
       max_characters: 200 // number || '' empty means Infinity
     }
+  },
+  checkout_settings: {
+    layout: 'original', // 'original', 'starbucks', 'old', 'appointments'
+    information_show_status: {
+      map: true, // true, false
+      customer_information: {
+        email: true, // true, false
+        phone_number: true, // true, false
+        address: true, // true, false
+        profile_picture: true // true, false
+      },
+      business_information: {
+        logo: true, // true, false
+        email: true, // true, false
+        phone: true, // true, false
+        address: true // true, false
+      },
+      delivery_type_special: {
+        delivery_detail: true, // true, false
+        driver_tip_view: 'options', // 'options', 'input',
+        eat_in_table_number: true, // true, false
+        curbside_detail: {
+          car_type: true, // true, false
+          car_model: true, // true, false
+          car_color: true, // true, false
+          car_plate: true, // true, false
+          spot_number: true, // true, false
+          comments: true // true, false
+        }
+      },
+      order_information: {
+        product_images: true, // true, false
+        delivery_pickup_time: true, // true, false
+        comments: true // true, false
+      },
+      payments_options: 'options' // 'options', 'dropList'
+    }
   }
 }

@@ -235,7 +235,7 @@ export const App = () => {
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
-                      ? <CheckoutPage />
+                      ? <CheckoutPage AdminSettings={AdminSettings} />
                       : (
                         <Redirect to={{
                           pathname: '/login',
