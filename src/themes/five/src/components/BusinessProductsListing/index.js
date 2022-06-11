@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useLocation } from 'react-router-dom'
+import MdClose from '@meronex/icons/md/MdClose'
 import {
   ArrowLeft,
   Cart3
@@ -15,17 +16,6 @@ import {
   useUtils
 } from 'ordering-components'
 
-import {
-  ProductsContainer,
-  ProductLoading,
-  SkeletonItem,
-  MobileCartViewWrapper,
-  BusinessCartContent,
-  EmptyCart,
-  EmptyBtnWrapper,
-  Title
-} from './styles'
-
 import { NotFoundSource } from '../NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
@@ -37,6 +27,20 @@ import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { RenderProductsLayout } from '../RenderProductsLayout'
 import { Cart } from '../Cart'
 import { Alert } from '../../../../../components/Confirm'
+
+import {
+  ProductsContainer,
+  ProductLoading,
+  SkeletonItem,
+  MobileCartViewWrapper,
+  BusinessCartContent,
+  EmptyCart,
+  EmptyBtnWrapper,
+  Title,
+  ProductDetail,
+  BackMenu
+} from './styles'
+
 const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
@@ -88,7 +92,6 @@ const BusinessProductsListingUI = (props) => {
   const [, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
   const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
-
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
   const sortByOptions = [
@@ -96,7 +99,7 @@ const BusinessProductsListingUI = (props) => {
     { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
     { value: 'a-z', content: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z'), showOnSelected: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z') }
   ]
-
+  const popupLayout = AdminSettings?.product_popup_settings?.layout ?? 'original'
   const handler = () => {
     setOpenBusinessInformation(true)
   }
@@ -212,76 +215,78 @@ const BusinessProductsListingUI = (props) => {
 
   return (
     <>
-      <ProductsContainer>
-        <ArrowLeft onClick={() => handleGoToBusinessList()} />
-        <RenderProductsLayout
-          errors={errors}
-          isError={error}
-          isLoading={loading}
-          isLazy={isLazy}
-          business={business}
-          categoryId={categoryId}
-          searchValue={searchValue}
-          sortByValue={sortByValue}
-          currentCart={currentCart}
-          businessState={businessState}
-          sortByOptions={sortByOptions}
-          categoryState={categoryState}
-          categoriesState={props.categoriesState}
-          isCustomLayout={props.isCustomLayout}
-          categorySelected={categorySelected}
-          openCategories={openCategories}
-          openBusinessInformation={openBusinessInformation}
-          isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-          handleChangeSortBy={handleChangeSortBy}
-          errorQuantityProducts={errorQuantityProducts}
-          onClickCategory={handleChangeCategory}
-          featuredProducts={featuredProducts}
-          subcategoriesSelected={subcategoriesSelected}
-          handler={handler}
-          onProductClick={onProductClick}
-          handleSearchRedirect={handleSearchRedirect}
-          handleChangeSearch={handleChangeSearch}
-          setOpenBusinessInformation={setOpenBusinessInformation}
-          handleCartOpen={(val) => setIsCartOpen(val)}
-          setSubcategoriesSelected={setSubcategoriesSelected}
-          AdminSettings={AdminSettings} // **AdminSettings will be removed after backend ready
-        />
+      {!(popupLayout === 'full' && (productModal.product || curProduct)) && (
+        <ProductsContainer>
+          <ArrowLeft onClick={() => handleGoToBusinessList()} />
+          <RenderProductsLayout
+            errors={errors}
+            isError={error}
+            isLoading={loading}
+            isLazy={isLazy}
+            business={business}
+            categoryId={categoryId}
+            searchValue={searchValue}
+            sortByValue={sortByValue}
+            currentCart={currentCart}
+            businessState={businessState}
+            sortByOptions={sortByOptions}
+            categoryState={categoryState}
+            categoriesState={props.categoriesState}
+            isCustomLayout={props.isCustomLayout}
+            categorySelected={categorySelected}
+            openCategories={openCategories}
+            openBusinessInformation={openBusinessInformation}
+            isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+            handleChangeSortBy={handleChangeSortBy}
+            errorQuantityProducts={errorQuantityProducts}
+            onClickCategory={handleChangeCategory}
+            featuredProducts={featuredProducts}
+            subcategoriesSelected={subcategoriesSelected}
+            handler={handler}
+            onProductClick={onProductClick}
+            handleSearchRedirect={handleSearchRedirect}
+            handleChangeSearch={handleChangeSearch}
+            setOpenBusinessInformation={setOpenBusinessInformation}
+            handleCartOpen={(val) => setIsCartOpen(val)}
+            setSubcategoriesSelected={setSubcategoriesSelected}
+            AdminSettings={AdminSettings} // **AdminSettings will be removed after backend ready
+          />
 
-        {
-          !loading && business && !Object.keys(business).length && (
-            <NotFoundSource
-              content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
-              btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
-              onClickButton={() => handleSearchRedirect()}
-            />
-          )
-        }
+          {
+            !loading && business && !Object.keys(business).length && (
+              <NotFoundSource
+                content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
+                btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
+                onClickButton={() => handleSearchRedirect()}
+              />
+            )
+          }
 
-        {
-          !loading && !business && location.pathname.includes('/store/') && (
+          {
+            !loading && !business && location.pathname.includes('/store/') && (
+              <NotFoundSource
+                content={t('ERROR_NOT_FOUND_STORE', theme?.defaultLanguages?.ERROR_NOT_FOUND_STORE || 'Sorry, an error has occurred with business selected.')}
+                btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
+                onClickButton={handleSearchRedirect}
+              />
+            )
+          }
+
+          {
+            !loading && !business && !location.pathname.includes('/store/') && (
+              <PageNotFound />
+            )
+          }
+
+          {error && error.length > 0 && Object.keys(business).length && (
             <NotFoundSource
-              content={t('ERROR_NOT_FOUND_STORE', theme?.defaultLanguages?.ERROR_NOT_FOUND_STORE || 'Sorry, an error has occurred with business selected.')}
+              content={error[0]?.message || error[0]}
               btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
               onClickButton={handleSearchRedirect}
             />
-          )
-        }
-
-        {
-          !loading && !business && !location.pathname.includes('/store/') && (
-            <PageNotFound />
-          )
-        }
-
-        {error && error.length > 0 && Object.keys(business).length && (
-          <NotFoundSource
-            content={error[0]?.message || error[0]}
-            btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
-            onClickButton={handleSearchRedirect}
-          />
-        )}
-      </ProductsContainer>
+          )}
+        </ProductsContainer>
+      )}
       {/* {currentCart?.products?.length > 0 && auth && !isCartOpen && (
         <FloatingButton
           btnText={
@@ -338,45 +343,62 @@ const BusinessProductsListingUI = (props) => {
           )}
         </BusinessCartContent>
       </Modal>
+      {(popupLayout !== 'full') && (
+        <Modal
+          width={(AdminSettings?.product_popup_settings?.layout === 'left' || AdminSettings?.product_popup_settings?.layout === 'right') ? '70%' : '700px'}
+          open={openProduct}
+          closeOnBackdrop
+          onClose={() => closeModalProductForm()}
+          padding='0'
+          isProductForm
+          disableOverflowX
+        >
 
-      <Modal
-        width='700px'
-        open={openProduct}
-        closeOnBackdrop
-        onClose={() => closeModalProductForm()}
-        padding='0'
-        isProductForm
-        disableOverflowX
-      >
+          {productModal.loading && !productModal.error && (
+            <ProductLoading>
+              <SkeletonItem>
+                <Skeleton height={45} count={8} />
+              </SkeletonItem>
+            </ProductLoading>
+          )}
 
-        {productModal.loading && !productModal.error && (
-          <ProductLoading>
-            <SkeletonItem>
-              <Skeleton height={45} count={8} />
-            </SkeletonItem>
-          </ProductLoading>
-        )}
+          {productModal.error && productModal.error.length > 0 && (
+            <NotFoundSource
+              content={productModal.error[0]?.message || productModal.error[0]}
+            />
+          )}
 
-        {productModal.error && productModal.error.length > 0 && (
-          <NotFoundSource
-            content={productModal.error[0]?.message || productModal.error[0]}
-          />
-        )}
+          {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
+            <NotFoundSource
+              content={t('ERROR_GET_PRODUCT', theme?.defaultLanguages?.ERROR_GET_PRODUCT || 'Sorry, we couldn\'t find the requested product.')}
+            />
+          )}
+          {(productModal.product || curProduct) && (
+            <ProductForm
+              businessSlug={business?.slug}
+              product={productModal.product || curProduct}
+              businessId={business?.id}
+              onSave={handlerProductAction}
+              AdminSettings={AdminSettings}
+            />
+          )}
+        </Modal>
+      )}
 
-        {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
-          <NotFoundSource
-            content={t('ERROR_GET_PRODUCT', theme?.defaultLanguages?.ERROR_GET_PRODUCT || 'Sorry, we couldn\'t find the requested product.')}
-          />
-        )}
-        {(productModal.product || curProduct) && (
+      {(popupLayout === 'full' && (productModal.product || curProduct)) && (
+        <ProductDetail>
+          <BackMenu className='productDetail-close'>
+            <MdClose onClick={() => closeModalProductForm()} />
+          </BackMenu>
           <ProductForm
             businessSlug={business?.slug}
             product={productModal.product || curProduct}
             businessId={business?.id}
             onSave={handlerProductAction}
+            AdminSettings={AdminSettings}
           />
-        )}
-      </Modal>
+        </ProductDetail>
+      )}
       <Alert
         title={t('ERROR', 'Error')}
         open={alertState.open}

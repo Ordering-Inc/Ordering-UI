@@ -1,17 +1,23 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
   width: 95%;
   margin: 20px auto 0px;
 
   > svg {
-    color: ${props => props.theme.colors.headingColor};
+    color: ${props => props.theme.colors.secundaryContrast};
     font-size: 24px;
     cursor: pointer;
     margin-bottom: 5px;
   }
 `
-
+export const ProductDetail = styled.div`
+  position: relative;
+  border-top: 1px solid ${props => props.theme.colors.secundaryContrast};
+  width: 100%;
+  height: 100%;
+  padding: 0 0 10px 20px; 
+`
 export const ProductLoading = styled.div`
   width: 100%;
   display: flex;
@@ -134,5 +140,49 @@ export const EmptyBtnWrapper = styled.div`
     font-size: 14px;
     padding-left: 25px;
     padding-right: 25px;
+  }
+`
+export const BackMenu = styled.div`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  right: 10%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  cursor: pointer;  
+  svg {    
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    right: 10%;
+    ${props => props.theme?.rtl && css`
+      left: 25px;
+      right: unset;
+    `}
+
+  }
+
+  @media (min-width: 1024px) {
+    right: 50%;
+    ${props => props.theme?.rtl && css`
+      left: unset;
+    `}
+  }
+
+  @media (min-width: 1200px) {
+    ${props => props.theme?.rtl && css`
+      left: unset;
+    `}
+  }
+
+  @media (min-width: 1440px) {
+    ${props => props.theme?.rtl && css`
+      left: unset;
+    `}
   }
 `
