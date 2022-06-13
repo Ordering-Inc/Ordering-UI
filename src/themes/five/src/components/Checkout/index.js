@@ -1,8 +1,8 @@
 import React from 'react'
 import { useConfig } from 'ordering-components'
-import { OriginalCheckout } from './layouts/OriginalCheckout'
 // import { RedHomeHero } from './layouts/RedHomeHero'
-// import { StarbucksHomeHero } from './layouts/StarbucksHomeHero'
+import { OriginalCheckout } from './layouts/OriginalCheckout'
+import { StarbucksCheckout } from './layouts/StarbucksCheckout'
 
 export const Checkout = (props) => {
   const [{ configs }] = useConfig()
@@ -23,8 +23,8 @@ export const Checkout = (props) => {
   return (
     <>
       {(layout === 'original') && <OriginalCheckout {...checkoutLayoutProps} />}
-      {/* {(layout === 'starbucks') && <StarbucksHomeHero {...homeLayoutProps} />}
-      {(layout === 'red') && <RedHomeHero {...homeLayoutProps} />} */}
+      {(layout === 'starbucks') && <StarbucksCheckout {...checkoutLayoutProps} />}
+      {/* {(layout === 'red') && <RedHomeHero {...homeLayoutProps} />} */}
     </>
   )
 }

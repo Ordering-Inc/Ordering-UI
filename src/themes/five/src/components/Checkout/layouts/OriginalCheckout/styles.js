@@ -288,3 +288,6 @@ export const CartHeader = styled.div`
 export const SelectSpotContainer = styled.div`
   
 `
+export const CurbsideDetailWrapper = styled.div`
+  
+`

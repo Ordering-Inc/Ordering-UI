@@ -44,7 +44,7 @@ export const AdminSettings = {
     }
   },
   checkout_settings: {
-    layout: 'original', // 'original', 'starbucks', 'old', 'appointments'
+    layout: 'starbucks', // 'original', 'starbucks', 'old', 'appointments'
     information_show_status: {
       map: true, // true, false
       customer_information: {
@@ -67,15 +67,14 @@ export const AdminSettings = {
           car_type: true, // true, false
           car_model: true, // true, false
           car_color: true, // true, false
-          car_plate: true, // true, false
-          spot_number: true, // true, false
-          comments: true // true, false
+          car_registration: true, // true, false
+          spot_number: true // true, false
         }
       },
       order_information: {
-        product_images: true, // true, false
+        product_images: false, // true, false
         delivery_pickup_time: true, // true, false // not implement
-        comments: true // true, false
+        comments: false // true, false
       },
       payments_options: 'options' // 'options', 'dropList'
     }

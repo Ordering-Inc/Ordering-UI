@@ -24,6 +24,7 @@ import { UserDetails } from '../../../UserDetails'
 import { PaymentOptions } from '../../../PaymentOptions'
 import { PaymentOptionWallet } from '../../../PaymentOptionWallet'
 import { DriverTips } from '../../../DriverTips'
+import { CurbsideDetail } from '../../../CurbsideDetail'
 import { Cart } from '../../../Cart'
 import { Alert } from '../../../Confirm'
 import { CartContent } from '../../../CartContent'
@@ -54,7 +55,8 @@ import {
   DeliveryOptionsContainer,
   WalletPaymentOptionContainer,
   CartHeader,
-  SelectSpotContainer
+  SelectSpotContainer,
+  CurbsideDetailWrapper
 } from './styles'
 
 const mapConfigs = {
@@ -438,10 +440,16 @@ const CheckoutUI = (props) => {
             </React.Fragment>))}
           {props.beforeComponentsSectionFour?.map((BeforeComponent, i) => (
             <BeforeComponent key={i} {...props} />))}
-          {!cartState.loading && placeSpotsEnabled && (hasBusinessPlaces === null || hasBusinessPlaces) && (
+          {!cartState.loading && placeSpotsEnabled && (hasBusinessPlaces === null || hasBusinessPlaces) && (options.type === 3) &&
+          AdminSettings?.checkout_settings?.information_show_status?.delivery_type_special?.eat_in_table_number && (
             <SelectSpotContainer>
               <PlaceSpot cart={cart} isCheckout setHasBusinessPlaces={setHasBusinessPlaces} />
             </SelectSpotContainer>
+          )}
+          {!cartState.loading && placeSpotsEnabled && options.type === 4 && (
+            <CurbsideDetailWrapper>
+              <CurbsideDetail {...props} />
+            </CurbsideDetailWrapper>
           )}
           {!props.isHideSectionFour &&
             !cartState.loading &&
