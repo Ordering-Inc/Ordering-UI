@@ -60,7 +60,7 @@ export const AdminSettings = {
         address: true // true, false
       },
       delivery_type_special: {
-        delivery_detail: true, // true, false
+        delivery_detail: false, // true, false
         driver_tip_view: 'options', // 'options', 'input',
         eat_in_table_number: true, // true, false
         curbside_detail: {

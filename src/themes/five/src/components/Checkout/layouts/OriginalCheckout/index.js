@@ -37,8 +37,8 @@ import {
   UserDetailsContainer,
   BusinessDetailsContainer,
   BusinessWrapper,
-  BuisnessLogo,
-  BuisnessContent,
+  BusinessLogo,
+  BusinessContent,
   PaymentMethodContainer,
   DriverTipContainer,
   CartContainer,
@@ -326,13 +326,21 @@ const CheckoutUI = (props) => {
                   <div>
                     <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
                     <BusinessWrapper>
-                      <BuisnessLogo img={businessDetails?.business?.logo} />
-                      <BuisnessContent>
-                        <p>{businessDetails?.business?.address}</p>
+                      {(businessDetails?.business?.logo && AdminSettings?.checkout_settings?.information_show_status?.business_information?.logo) && (
+                        <BusinessLogo img={businessDetails?.business?.logo} />
+                      )}
+                      <BusinessContent>
+                        {AdminSettings?.checkout_settings?.information_show_status?.business_information?.address && (
+                          <p>{businessDetails?.business?.address}</p>
+                        )}
                         <p>{businessDetails?.business?.name}</p>
-                        <p>{businessDetails?.business?.email}</p>
-                        <p>{businessDetails?.business?.cellphone}</p>
-                      </BuisnessContent>
+                        {AdminSettings?.checkout_settings?.information_show_status?.business_information?.email && (
+                          <p>{businessDetails?.business?.email}</p>
+                        )}
+                        {AdminSettings?.checkout_settings?.information_show_status?.business_information?.phone && (
+                          <p>{businessDetails?.business?.cellphone}</p>
+                        )}
+                      </BusinessContent>
                     </BusinessWrapper>
                   </div>
                 )}
@@ -362,7 +370,11 @@ const CheckoutUI = (props) => {
                 </div>
               </div>
             )}
-            {!props.isHideSectionEight && !cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
+            {!props.isHideSectionEight &&
+            !cartState.loading &&
+            deliveryOptionSelected !== undefined &&
+            options?.type === 1 &&
+            AdminSettings?.checkout_settings?.information_show_status?.delivery_type_special?.delivery_detail && (
               <DeliveryOptionsContainer>
                 <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
                 <Select

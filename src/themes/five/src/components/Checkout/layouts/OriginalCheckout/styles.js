@@ -71,7 +71,7 @@ export const BusinessDetailsContainer = styled(UserDetailsContainer)`
 export const BusinessWrapper = styled.div`
   display: flex;
 `
-export const BuisnessLogo = styled.div`
+export const BusinessLogo = styled.div`
   width: 60px;
   height: 60px;
   ${({ img }) => img && css`
@@ -82,7 +82,7 @@ export const BuisnessLogo = styled.div`
     background-size: contain;
   `}
 `
-export const BuisnessContent = styled.div`
+export const BusinessContent = styled.div`
   flex: 1;
 `
 export const PaymentMethodContainer = styled.div`
