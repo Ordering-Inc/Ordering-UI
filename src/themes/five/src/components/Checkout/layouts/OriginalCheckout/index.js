@@ -417,6 +417,7 @@ const CheckoutUI = (props) => {
                   paySelected={paymethodSelected}
                   handlePlaceOrder={handlePlaceOrder}
                   onPlaceOrderClick={onPlaceOrderClick}
+                  AdminSettings={AdminSettings}
                 />
               </PaymentMethodContainer>
             )}
