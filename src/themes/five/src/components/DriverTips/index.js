@@ -46,7 +46,7 @@ const DriverTipsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <DriverTipContainer id='driver-tip-container'>
-        {!isDriverTipUseCustom ? (
+        {isDriverTipUseCustom ? (
           <>
             <WrapperTips>
               {driverTipsOptions.map((option, i) => (

@@ -61,7 +61,7 @@ export const AdminSettings = {
       },
       delivery_type_special: {
         delivery_detail: false, // true, false
-        driver_tip_view: 'options', // 'options', 'input',
+        driver_tip_view: 'options', // 'options', 'input', *already implemented
         eat_in_table_number: true, // true, false
         curbside_detail: {
           car_type: true, // true, false
