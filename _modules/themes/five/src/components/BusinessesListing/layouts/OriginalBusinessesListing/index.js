@@ -246,9 +246,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     if (preorderBusiness) setIsPreorder(true);
   }, [preorderBusiness]);
 
-  var OrdersSection = function OrdersSection(titleContent) {
+  var OrdersSection = function OrdersSection(_ref) {
     var _getCustomArray;
 
+    var titleContent = _ref.titleContent;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
       horizontal: true,
       isBusinessesPage: true,
