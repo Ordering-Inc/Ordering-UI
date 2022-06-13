@@ -50,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessReviewsUI = function BusinessReviewsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$layouts$busine4, _theme$layouts$busine5, _theme$layouts2, _theme$layouts2$busin, _theme$layouts2$busin2, _theme$layouts2$busin3, _theme$layouts2$busin4, _theme$layouts2$busin5, _theme$layouts3, _theme$layouts3$busin, _theme$layouts3$busin2, _theme$layouts3$busin3, _theme$layouts3$busin4, _theme$layouts3$busin5, _theme$layouts4, _theme$layouts4$busin, _theme$layouts4$busin2, _theme$layouts4$busin3, _theme$layouts4$busin4, _theme$layouts4$busin5, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _props$afterComponent, _props$afterElements;
 
   var stars = props.stars,
       reviewsList = props.reviewsList,
@@ -68,6 +68,12 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
     if (evt.target.value === '') handleClickOption('all');else handleClickOption(evt.target.value);
   };
 
+  var showRanking = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$busine = _theme$layouts.business_view) !== null && _theme$layouts$busine !== void 0 && (_theme$layouts$busine2 = _theme$layouts$busine.components) !== null && _theme$layouts$busine2 !== void 0 && (_theme$layouts$busine3 = _theme$layouts$busine2.reviews) !== null && _theme$layouts$busine3 !== void 0 && (_theme$layouts$busine4 = _theme$layouts$busine3.components) !== null && _theme$layouts$busine4 !== void 0 && (_theme$layouts$busine5 = _theme$layouts$busine4.ranking) !== null && _theme$layouts$busine5 !== void 0 && _theme$layouts$busine5.hidden);
+  var showReviewDate = !(theme !== null && theme !== void 0 && (_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$busin = _theme$layouts2.business_view) !== null && _theme$layouts2$busin !== void 0 && (_theme$layouts2$busin2 = _theme$layouts2$busin.components) !== null && _theme$layouts2$busin2 !== void 0 && (_theme$layouts2$busin3 = _theme$layouts2$busin2.reviews) !== null && _theme$layouts2$busin3 !== void 0 && (_theme$layouts2$busin4 = _theme$layouts2$busin3.components) !== null && _theme$layouts2$busin4 !== void 0 && (_theme$layouts2$busin5 = _theme$layouts2$busin4.review_date) !== null && _theme$layouts2$busin5 !== void 0 && _theme$layouts2$busin5.hidden);
+  var showCustomerComments = !(theme !== null && theme !== void 0 && (_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$busin = _theme$layouts3.business_view) !== null && _theme$layouts3$busin !== void 0 && (_theme$layouts3$busin2 = _theme$layouts3$busin.components) !== null && _theme$layouts3$busin2 !== void 0 && (_theme$layouts3$busin3 = _theme$layouts3$busin2.reviews) !== null && _theme$layouts3$busin3 !== void 0 && (_theme$layouts3$busin4 = _theme$layouts3$busin3.components) !== null && _theme$layouts3$busin4 !== void 0 && (_theme$layouts3$busin5 = _theme$layouts3$busin4.customer_comments) !== null && _theme$layouts3$busin5 !== void 0 && _theme$layouts3$busin5.hidden);
+  var showSearch = !(theme !== null && theme !== void 0 && (_theme$layouts4 = theme.layouts) !== null && _theme$layouts4 !== void 0 && (_theme$layouts4$busin = _theme$layouts4.business_view) !== null && _theme$layouts4$busin !== void 0 && (_theme$layouts4$busin2 = _theme$layouts4$busin.components) !== null && _theme$layouts4$busin2 !== void 0 && (_theme$layouts4$busin3 = _theme$layouts4$busin2.reviews) !== null && _theme$layouts4$busin3 !== void 0 && (_theme$layouts4$busin4 = _theme$layouts4$busin3.components) !== null && _theme$layouts4$busin4 !== void 0 && (_theme$layouts4$busin5 = _theme$layouts4$busin4.search) !== null && _theme$layouts4$busin5 !== void 0 && _theme$layouts4$busin5.hidden);
+  var hideElement = !(!showReviewDate && !showCustomerComments);
+  var reviewPoints = [t('TERRIBLE', 'Terrible'), t('BAD', 'Bad'), t('OKAY', 'Okay'), t('GOOD', 'Good'), t('GREAT', 'Great')];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -81,7 +87,7 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
   }, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsFillStarFill.default, null), /*#__PURE__*/_react.default.createElement("h2", null, "".concat(stars, " (").concat(reviewsList === null || reviewsList === void 0 ? void 0 : reviewsList.reviews.length, " ").concat(t('REVIEWS', 'Reviews'), ")"))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
     height: 30
-  })), /*#__PURE__*/_react.default.createElement(_styles.ReviewOf, null, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement(_styles.SearchContainer, null, /*#__PURE__*/_react.default.createElement("input", {
+  })), showSearch && /*#__PURE__*/_react.default.createElement(_styles.ReviewOf, null, !reviewsList.loading ? /*#__PURE__*/_react.default.createElement(_styles.SearchContainer, null, /*#__PURE__*/_react.default.createElement("input", {
     type: "number",
     min: "1",
     max: "5",
@@ -93,42 +99,26 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
   })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 30
-  })), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('REVIEW_ORDER', 'Review order')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressContent, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressBar, {
+  })), showRanking && /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('REVIEW_ORDER', 'Review order')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressContent, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressBar, {
     style: {
       width: "".concat(stars / 5 * 100, "%")
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
-    style: {
-      left: theme.rtl ? 'initial' : '0',
-      right: theme !== null && theme !== void 0 && theme.rtl ? '0' : 'initial'
-    }
-  }, t('TERRIBLE', 'Terrible')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
-    style: {
-      left: theme.rtl ? 'initial' : '25%',
-      right: theme !== null && theme !== void 0 && theme.rtl ? '25%' : 'initial'
-    }
-  }, t('BAD', 'Bad')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
-    style: {
-      left: theme.rtl ? 'initial' : '50%',
-      right: theme !== null && theme !== void 0 && theme.rtl ? '50%' : 'initial'
-    }
-  }, t('OKAY', 'Okay')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
-    style: {
-      left: theme.rtl ? 'initial' : '75%',
-      right: theme !== null && theme !== void 0 && theme.rtl ? '75%' : 'initial'
-    }
-  }, t('GOOD', 'Good')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
-    style: {
-      left: theme.rtl ? '0' : 'initial',
-      right: theme !== null && theme !== void 0 && theme.rtl ? 'initial' : '0'
-    }
-  }, t('GREAT', 'Great')))), /*#__PURE__*/_react.default.createElement(_styles.Content, {
+  }), reviewPoints.map(function (reviewPoint, i) {
+    var isLastReviewPoint = i === (reviewPoints === null || reviewPoints === void 0 ? void 0 : reviewPoints.length) - 1;
+    return /*#__PURE__*/_react.default.createElement(_styles.ReviewsMarkPoint, {
+      key: i,
+      style: {
+        left: theme.rtl !== isLastReviewPoint ? 'initial' : "".concat(25 * (isLastReviewPoint ? 0 : i), "%"),
+        right: theme.rtl !== isLastReviewPoint ? "".concat(25 * (isLastReviewPoint ? 0 : i), "%") : 'initial'
+      }
+    }, reviewPoint);
+  }))), hideElement && /*#__PURE__*/_react.default.createElement(_styles.Content, {
     id: "content"
   }, !reviewsList.loading ? reviewsList === null || reviewsList === void 0 ? void 0 : reviewsList.reviews.map(function (review) {
     return /*#__PURE__*/_react.default.createElement(_styles.Review, {
       key: review.id,
       id: "review"
-    }, /*#__PURE__*/_react.default.createElement(_styles.ReviewItemHeader, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewTime, null, (0, _moment.default)(review === null || review === void 0 ? void 0 : review.created_at).format('LLL'))), /*#__PURE__*/_react.default.createElement(_styles.ReviewItemContent, null, review === null || review === void 0 ? void 0 : review.comment));
+    }, showReviewDate && /*#__PURE__*/_react.default.createElement(_styles.ReviewItemHeader, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewTime, null, (0, _moment.default)(review === null || review === void 0 ? void 0 : review.created_at).format('LLL'))), showCustomerComments && /*#__PURE__*/_react.default.createElement(_styles.ReviewItemContent, null, review === null || review === void 0 ? void 0 : review.comment));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(2)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonContainer, {
       key: i
