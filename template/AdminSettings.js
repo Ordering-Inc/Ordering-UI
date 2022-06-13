@@ -74,7 +74,7 @@ export const AdminSettings = {
       },
       order_information: {
         product_images: true, // true, false
-        delivery_pickup_time: true, // true, false
+        delivery_pickup_time: true, // true, false // not implement
         comments: true // true, false
       },
       payments_options: 'options' // 'options', 'dropList'

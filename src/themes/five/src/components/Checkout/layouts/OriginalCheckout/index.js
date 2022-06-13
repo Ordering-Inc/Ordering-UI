@@ -487,6 +487,7 @@ const CheckoutUI = (props) => {
                 cart={cart}
                 isCheckout
                 isProducts={cart?.products?.length || 0}
+                AdminSettings={AdminSettings}
               />
             </CartContainer>
           )}

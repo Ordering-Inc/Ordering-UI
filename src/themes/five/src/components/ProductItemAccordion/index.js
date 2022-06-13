@@ -39,7 +39,8 @@ export const ProductItemAccordion = (props) => {
     offsetDisabled,
     onDeleteProduct,
     onEditProduct,
-    isCheckout
+    isCheckout,
+    AdminSettings
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -113,7 +114,7 @@ export const ProductItemAccordion = (props) => {
           onClick={(e) => toggleAccordion(e)}
         >
           <ProductInfo className='info'>
-            {product?.images && (
+            {product?.images && AdminSettings?.checkout_settings?.information_show_status?.order_information?.product_images && (
               <WrapperProductImage>
                 <ProductImage bgimage={product?.images} />
               </WrapperProductImage>

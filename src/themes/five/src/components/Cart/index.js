@@ -49,7 +49,8 @@ const CartUI = (props) => {
     handleChangeComment,
     commentState,
     handleRemoveOfferClick,
-    setPreorderBusiness
+    setPreorderBusiness,
+    AdminSettings
   } = props
 
   const theme = useTheme()
@@ -223,6 +224,7 @@ const CartUI = (props) => {
                 offsetDisabled={offsetDisabled}
                 onDeleteProduct={handleDeleteClick}
                 onEditProduct={handleEditProduct}
+                AdminSettings={AdminSettings}
               />
             ))}
             {cart?.valid_products && (
@@ -393,7 +395,7 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                {cart?.status !== 2 && (
+                {cart?.status !== 2 && AdminSettings?.checkout_settings?.information_show_status?.order_information?.comments && (
                   <table className='comments'>
                     <tbody>
                       <tr>
