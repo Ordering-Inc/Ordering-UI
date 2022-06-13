@@ -49,9 +49,9 @@ export const AdminSettings = {
       map: true, // true, false
       customer_information: {
         email: true, // true, false
-        phone_number: true, // true, false
+        phone: true, // true, false
         address: true, // true, false
-        profile_picture: true // true, false
+        photo: true // true, false
       },
       business_information: {
         logo: true, // true, false

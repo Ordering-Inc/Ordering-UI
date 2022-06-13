@@ -44,11 +44,24 @@ export const SideForm = styled.div`
     align-items: center;
   }
 `
-
+export const UserWrapper = styled.div`
+  display: flex;
+`
+export const UserLogo = styled.div`
+  width: 60px;
+  height: 60px;
+  ${({ img }) => img && css`
+    background-image: url(${img});
+    border-radius: 10px;
+    margin-right: 20px;
+    background-position: center;
+    background-size: contain;
+  `}
+`
 export const UserData = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  flex: 1;
   text-align: left;
   ${props => props.theme?.rtl && css`
     text-align: right;

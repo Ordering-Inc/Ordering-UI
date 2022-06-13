@@ -36,6 +36,9 @@ import {
   WrapperLeftContainer,
   UserDetailsContainer,
   BusinessDetailsContainer,
+  BusinessWrapper,
+  BuisnessLogo,
+  BuisnessContent,
   PaymentMethodContainer,
   DriverTipContainer,
   CartContainer,
@@ -322,12 +325,15 @@ const CheckoutUI = (props) => {
                 {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
                   <div>
                     <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                    <div>
-                      <p>{businessDetails?.business?.address}</p>
-                      <p>{businessDetails?.business?.name}</p>
-                      <p>{businessDetails?.business?.email}</p>
-                      <p>{businessDetails?.business?.cellphone}</p>
-                    </div>
+                    <BusinessWrapper>
+                      <BuisnessLogo img={businessDetails?.business?.logo} />
+                      <BuisnessContent>
+                        <p>{businessDetails?.business?.address}</p>
+                        <p>{businessDetails?.business?.name}</p>
+                        <p>{businessDetails?.business?.email}</p>
+                        <p>{businessDetails?.business?.cellphone}</p>
+                      </BuisnessContent>
+                    </BusinessWrapper>
                   </div>
                 )}
                 {businessDetails?.error && businessDetails?.error?.length > 0 && (

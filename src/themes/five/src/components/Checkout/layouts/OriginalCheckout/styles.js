@@ -68,7 +68,23 @@ export const BusinessDetailsContainer = styled(UserDetailsContainer)`
     }
   }
 `
-
+export const BusinessWrapper = styled.div`
+  display: flex;
+`
+export const BuisnessLogo = styled.div`
+  width: 60px;
+  height: 60px;
+  ${({ img }) => img && css`
+    background-image: url(${img});
+    border-radius: 10px;
+    margin-right: 20px;
+    background-position: center;
+    background-size: contain;
+  `}
+`
+export const BuisnessContent = styled.div`
+  flex: 1;
+`
 export const PaymentMethodContainer = styled.div`
   display: flex;
   flex-direction: column;

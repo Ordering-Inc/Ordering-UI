@@ -5,6 +5,8 @@ import {
   Container,
   Header,
   SideForm,
+  UserWrapper,
+  UserLogo,
   UserData,
   UserName,
   ModalIcon,
@@ -37,6 +39,7 @@ const UserDetailsUI = (props) => {
     isModal,
     setIsOpenUserData,
     isAddressFormOpen,
+    AdminSettings,
     onClose
   } = props
 
@@ -99,33 +102,38 @@ const UserDetailsUI = (props) => {
           </Header>
 
           {!isEdit ? (
-            <UserData>
-              {userData?.address && (
-                <p>{userData?.address}</p>
+            <UserWrapper>
+              {(userData?.photo && AdminSettings?.checkout_settings?.information_show_status?.customer_information?.photo) && (
+                <UserLogo img={userData?.photo} />
               )}
-              {(userData?.name || userData?.middle_name || userData?.lastname || userData?.second_lastname) && (
-                <UserName>
-                  {userData?.name} {userData?.middle_name} {userData?.lastname} {userData?.second_lastname}
-                </UserName>
-              )}
-              {userData?.email && (
-                <p>{userData?.email}</p>
-              )}
-              {(userData?.cellphone || user?.cellphone) && (
-                <PhoneContainer>
-                  <CountryFlag>
-                    {
-                      userData?.country_phone_code && (
-                        <PhoneInput onChange={() => {}} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code)} ${userData?.cellphone}`)?.country} />
-                      )
-                    }
-                  </CountryFlag>
-                  <p>
-                    {userData?.cellphone}
-                  </p>
-                </PhoneContainer>
-              )}
-            </UserData>
+              <UserData>
+                {userData?.address && AdminSettings?.checkout_settings?.information_show_status?.customer_information?.address && (
+                  <p>{userData?.address}</p>
+                )}
+                {(userData?.name || userData?.middle_name || userData?.lastname || userData?.second_lastname) && (
+                  <UserName>
+                    {userData?.name} {userData?.middle_name} {userData?.lastname} {userData?.second_lastname}
+                  </UserName>
+                )}
+                {userData?.email && AdminSettings?.checkout_settings?.information_show_status?.customer_information?.email && (
+                  <p>{userData?.email}</p>
+                )}
+                {(userData?.cellphone || user?.cellphone) && AdminSettings?.checkout_settings?.information_show_status?.customer_information?.phone && (
+                  <PhoneContainer>
+                    <CountryFlag>
+                      {
+                        userData?.country_phone_code && (
+                          <PhoneInput onChange={() => {}} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code)} ${userData?.cellphone}`)?.country} />
+                        )
+                      }
+                    </CountryFlag>
+                    <p>
+                      {userData?.cellphone}
+                    </p>
+                  </PhoneContainer>
+                )}
+              </UserData>
+            </UserWrapper>
           ) : (
             <SideForm>
               <UserFormDetailsUI
