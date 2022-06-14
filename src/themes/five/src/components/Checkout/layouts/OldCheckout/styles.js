@@ -1,41 +1,18 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: column;
-  min-height: auto;
-
-  @media (min-width: 769px) {
-    flex-direction: row;
-  }
-
-  @media (min-width: 993px) {
-    min-height: calc(100vh - 337px);
-    box-sizing: border-box;
-  }
+  width: 100%;
 `
 
-export const WrapperLeftContainer = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  padding: 40px 20px;
+export const WrappContainer = styled.div`
+  width: 90%;
+  margin: auto;
 
-  @media (min-width: 769px) {
-    width: 55%;
-    padding: 55px 60px 55px 40px;
-  }
-`
-
-export const WrapperRightContainer = styled.div`
-  width: 100%;
-  background: #F8F9FA;
-  box-sizing: border-box;
-  padding: 40px 20px;
-
-  @media (min-width: 769px) {
-    width: 45%;
-    padding: 55px 40px;
+  @media (min-width: 513px) {
+    width: 80%;
   }
 `
 
@@ -46,25 +23,16 @@ export const WrapperUserDetails = styled.div`
 export const UserDetailsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  margin: 30px 0px 20px;
   flex-wrap: wrap;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #E9ECEF;
 `
 
 export const BusinessDetailsContainer = styled(UserDetailsContainer)`
-  border: none;
   div {
     h1 {
       text-transform: capitalize;
       margin: 0px;
-      font-weight: 600;
-      font-size: 16px;
-    }
-    p {
-      font-size: 14px;
-      margin: 5px 0;
-      color: ${props => props.theme.colors.darkTextColor};
+      font-size: 24px;
     }
   }
 `
@@ -75,32 +43,24 @@ export const PaymentMethodContainer = styled.div`
   margin: 20px 0px 0px;
   h1 {
     margin: 0px;
-    font-weight: 500;
-    font-size: 20px;
-    color: ${props => props.theme.colors.darkTextColor};
+    font-size: 24px;
   }
 `
 
-export const DriverTipContainer = styled(PaymentMethodContainer)`
-  > p {
-    margin: 0;
-    font-size: 16px;
-    color: #909BA9;
-  }
-`
+export const DriverTipContainer = styled(PaymentMethodContainer)``
 
 export const CartContainer = styled(PaymentMethodContainer)`
   margin-bottom: 20px;
-`
-
-export const WalletPaymentOptionContainer = styled(PaymentMethodContainer)`
-  padding-top: 20px;
+  h1 {
+    margin: 20px 0px;
+  }
 `
 
 export const WrapperPlaceOrderButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin: 20px 0px 10px;
 
   button {
     width: 100%;
@@ -110,6 +70,12 @@ export const WrapperPlaceOrderButton = styled.div`
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+  }
+
+  @media (min-width: 513px) {
+    button {
+      width: 70%;
     }
   }
 `
@@ -171,40 +137,6 @@ export const WarningText = styled.p`
   color: ${props => props.theme.colors.primary};
 `
 
-export const WrapperLeftContent = styled.div`
-  width: 100%;
-
-  .checkout-title {
-    margin: 0;
-    font-weight: 600;
-    font-size: 32px;
-    color: ${props => props.theme?.colors.darkTextColor};
-  }
-`
-export const CheckOutDivider = styled.div`
-  height: 8px;
-  width: calc(100% + 40px);
-  margin-left: -20px;
-  background: #F8F9FA;
-
-  @media(min-width: 769px) {
-    width: calc(100% + 100px);
-    margin-left: -40px;
-  }
-`
-
-export const DriverTipDivider = styled.div`
-  height: 8px;
-  width: calc(100% + 40px);
-  margin-left: -20px;
-  background: #E9ECEF;
-
-  @media(min-width: 769px) {
-    width: calc(100% + 80px);
-    margin-left: -40px;
-  }
-`
-
 export const DeliveryOptionsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -214,61 +146,27 @@ export const DeliveryOptionsContainer = styled.div`
   #list {
     width: 100%;
   }
-
-  > div {
-    width: 100%;
-    background-color: #F8F9FA!important;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-    height: 44px;
-    border: none;
-    border-radius: 7.6px;
-    color: #909BA9 !important;
-
-    > div:first-child {
-      padding-top: 5px;
-      padding-bottom: 5px;
-      justify-content: space-between;
-    }
-    > div#list {
-      width: 100%;
-      background-color: #F8F9FA!important;
-      border: 1px solid #F8F9FA;
-      border-radius: 7.6px;
-      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-    }
-  }
 `
-
-export const CartHeader = styled.div`
+export const BusinessWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-direction: column;
-
-  h1 {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-  }
-
-  span {
-    font-size: 13px;
-    color: ${props => props.theme.colors.primary};
-    text-decoration: underline;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  h1, span {
-    margin: 5px 0px;
-  }
-
-  @media (min-width: 300px) {
-    flex-direction: row;
-    align-items: center;
-  }
 `
-
+export const BusinessLogo = styled.div`
+  width: 60px;
+  height: 60px;
+  ${({ img }) => img && css`
+    background-image: url(${img});
+    border-radius: 10px;
+    margin-right: 20px;
+    background-position: center;
+    background-size: contain;
+  `}
+`
+export const BusinessContent = styled.div`
+  flex: 1;
+`
 export const SelectSpotContainer = styled.div`
+  
+`
+export const CurbsideDetailWrapper = styled.div`
   
 `

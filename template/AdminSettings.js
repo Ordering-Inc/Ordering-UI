@@ -44,9 +44,9 @@ export const AdminSettings = {
     }
   },
   checkout_settings: {
-    layout: 'starbucks', // 'original', 'starbucks', 'old', 'appointments'
+    layout: 'old', // 'original', 'starbucks', 'old', 'appointments'
     information_show_status: {
-      map: true, // true, false
+      map: false, // true, false
       customer_information: {
         email: true, // true, false
         phone: true, // true, false
@@ -54,15 +54,15 @@ export const AdminSettings = {
         photo: true // true, false
       },
       business_information: {
-        logo: true, // true, false
-        email: true, // true, false
+        logo: false, // true, false
+        email: false, // true, false
         phone: true, // true, false
         address: true // true, false
       },
       delivery_type_special: {
         delivery_detail: false, // true, false
         // driver_tip_view: 'options', // 'options', 'input', *already implemented
-        eat_in_table_number: true, // true, false
+        eat_in_table_number: false, // true, false
         curbside_detail: {
           car_type: true, // true, false
           car_model: true, // true, false
@@ -72,11 +72,11 @@ export const AdminSettings = {
         }
       },
       order_information: {
-        product_images: false, // true, false
+        product_images: true, // true, false
         delivery_pickup_time: true, // true, false // not implement
-        comments: false // true, false
+        comments: true // true, false
       },
-      payments_options: 'options' // 'options', 'dropList'
+      payments_options: 'dropList' // 'options', 'dropList'
     }
   }
 }

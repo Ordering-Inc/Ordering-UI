@@ -18,17 +18,19 @@ import {
 } from 'ordering-components'
 
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
-import { CartContent } from '../../../../../../../components/CartContent'
-import { UpsellingPage } from '../../../../../../../components/UpsellingPage'
-import { NotFoundSource } from '../../../../../../../components/NotFoundSource'
-import { Alert } from '../../../../../../../components/Confirm'
-
-import { Button } from '../../../../../../../styles/Buttons'
-import { AddressDetails } from '../../../../../../../themes/six/src/components/AddressDetails'
-import { PaymentOptions } from '../../../../../../../themes/six/src/components/PaymentOptions'
-import { Cart } from '../../../../../../../themes/six/src/components/Cart'
-import { CartInfo } from '../../../../../../../themes/six/src/components/CartInfo'
-import { MomentContent } from '../../../../../../../themes/six/src/components/MomentContent'
+import { AddressDetails } from '../../../AddressDetails'
+import { PaymentOptions } from '../../../PaymentOptions'
+import { Cart } from '../../../Cart'
+import { CartInfo } from '../../../../../../six/src/components/CartInfo'
+import { MomentContent } from '../../../../../../six/src/components/MomentContent'
+import { CartContent } from '../../../CartContent'
+import { UpsellingPage } from '../../../UpsellingPage'
+import { NotFoundSource } from '../../../NotFoundSource'
+import { PlaceSpot } from '../../../PlaceSpot'
+import { Alert } from '../../../Confirm'
+import { Button } from '../../../../styles/Buttons'
+import { CurbsideDetail } from '../../../CurbsideDetail'
+import { DriverTips } from '../../../DriverTips'
 
 import {
   Container,
@@ -41,7 +43,11 @@ import {
   WarningText,
   MomentWrapper,
   WrappSumarry,
-  SectionTitle
+  SectionTitle,
+  SelectSpotContainer,
+  CurbsideDetailWrapper,
+  DriverTipContainer,
+  DriverTipDivider
 } from './styles'
 
 const mapConfigs = {
@@ -64,11 +70,12 @@ const CheckoutUI = (props) => {
     handleOrderRedirect,
     isCustomerMode,
     isResetPaymethod,
-    setIsResetPaymethod
+    setIsResetPaymethod,
+    AdminSettings
   } = props
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  const [{ loading }] = useOrder()
+  const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
@@ -79,6 +86,13 @@ const CheckoutUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const windowSize = useWindowSize()
   const [events] = useEvent()
+  const placeSpotTypes = [3, 4]
+  const placeSpotsEnabled = placeSpotTypes.includes(options?.type)
+  const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
+
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
       handlerClickPlaceOrder && handlerClickPlaceOrder()
@@ -182,7 +196,7 @@ const CheckoutUI = (props) => {
             </React.Fragment>))}
           {props.beforeComponentsSectionOne?.map((BeforeComponent, i) => (
             <BeforeComponent key={i} {...props} />))}
-          {!props.isHideSectionOne && (
+          {!props.isHideSectionOne && AdminSettings?.checkout_settings?.information_show_status?.map && (
             (businessDetails?.loading || cartState.loading) ? (
               <div style={{ width: '100%', marginBottom: '20px' }}>
                 <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -253,6 +267,7 @@ const CheckoutUI = (props) => {
                 handleOrderRedirect={handleOrderRedirect}
                 isCustomerMode={isCustomerMode}
                 paySelected={paymethodSelected}
+                AdminSettings={AdminSettings}
               />
             </PaymentMethodContainer>
           )}
@@ -262,6 +277,44 @@ const CheckoutUI = (props) => {
             </React.Fragment>))}
           {props.beforeComponentsSectionFour?.map((BeforeComponent, i) => (
             <BeforeComponent key={i} {...props} />))}
+          {!cartState.loading && placeSpotsEnabled && (hasBusinessPlaces === null || hasBusinessPlaces) && (options.type === 3) &&
+          AdminSettings?.checkout_settings?.information_show_status?.delivery_type_special?.eat_in_table_number && (
+            <SelectSpotContainer>
+              <PlaceSpot cart={cart} isCheckout setHasBusinessPlaces={setHasBusinessPlaces} />
+            </SelectSpotContainer>
+          )}
+          {!cartState.loading && placeSpotsEnabled && options.type === 4 && (
+            <CurbsideDetailWrapper>
+              <CurbsideDetail {...props} />
+            </CurbsideDetailWrapper>
+          )}
+          {!props.isHideSectionFour &&
+            !cartState.loading &&
+            cart &&
+            cart?.business_id &&
+            options.type === 1 &&
+            cart?.status !== 2 &&
+            validationFields?.fields?.checkout?.driver_tip?.enabled &&
+            driverTipsOptions.length > 0 &&
+            (
+              <>
+                <DriverTipContainer>
+                  <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                  <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                  <DriverTips
+                    businessId={cart?.business_id}
+                    driverTipsOptions={driverTipsOptions}
+                    isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                    isDriverTipUseCustom={configs?.driver_tip_use_custom?.value === '1'}
+                    driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1 || !!parseInt(configs?.driver_tip_use_custom?.value, 10)
+                      ? cart?.driver_tip
+                      : cart?.driver_tip_rate}
+                    useOrderContext
+                  />
+                </DriverTipContainer>
+                <DriverTipDivider />
+              </>
+            )}
           {!props.isHideSectionFour && !cartState.loading && cart && (
             <CartContainer>
               <SectionTitle>
@@ -272,6 +325,7 @@ const CheckoutUI = (props) => {
                 cart={cart}
                 isCheckout
                 isProducts={cart?.products?.length || 0}
+                AdminSettings={AdminSettings}
               />
             </CartContainer>
           )}

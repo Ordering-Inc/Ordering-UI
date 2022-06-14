@@ -82,7 +82,27 @@ export const PaymentMethodContainer = styled.div`
     font-weight: 300;
   }
 `
-export const DriverTipContainer = styled(PaymentMethodContainer)``
+export const DriverTipContainer = styled(PaymentMethodContainer)`
+  > p {
+    margin: 0;
+    font-size: 16px;
+    color: #909BA9;
+  }
+  > h1 {
+    font-size: 16px;
+  }
+`
+export const DriverTipDivider = styled.div`
+  height: 8px;
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  background: #E9ECEF;
+
+  @media(min-width: 769px) {
+    width: calc(100% + 80px);
+    margin-left: -40px;
+  }
+`
 export const CartContainer = styled(PaymentMethodContainer)`
   margin-bottom: 20px;
   h2 {
@@ -259,4 +279,10 @@ export const SectionTitle = styled.div`
     color: #495057;
     font-weight: 300;
   }
+`
+export const SelectSpotContainer = styled.div`
+  
+`
+export const CurbsideDetailWrapper = styled.div`
+  
 `
