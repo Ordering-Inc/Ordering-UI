@@ -44,7 +44,7 @@ export const AdminSettings = {
     }
   },
   checkout_settings: {
-    layout: 'old', // 'original', 'starbucks', 'old', 'appointments'
+    layout: 'original', // 'original', 'starbucks', 'old', 'appointments'
     information_show_status: {
       map: false, // true, false
       customer_information: {
