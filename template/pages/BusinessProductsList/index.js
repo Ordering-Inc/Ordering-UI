@@ -27,6 +27,7 @@ export const BusinessProductsList = (props) => {
   const businessProductsProps = {
     ...props,
     ordering,
+    avoidBusinessLoading: true,
     isCustomLayout: settings?.use_marketplace,
     isSearchByName: true,
     isSearchByDescription: true,
@@ -41,8 +42,8 @@ export const BusinessProductsList = (props) => {
       'name',
       'open',
       'about',
-      'description',
       'ribbon',
+      'description',
       'address',
       'location',
       'timezone',
