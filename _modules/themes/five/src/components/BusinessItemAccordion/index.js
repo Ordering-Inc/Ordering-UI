@@ -44,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessItemAccordion = function BusinessItemAccordion(props) {
-  var _theme$layouts, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _orderState$options, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$viewSt, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _theme$layouts2, _theme$layouts2$viewS, _theme$layouts2$viewS2, _theme$layouts2$viewS3, _theme$layouts2$viewS4, _theme$layouts2$viewS5, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _orderState$options, _props$afterComponent, _props$afterElements;
 
   var uuid = props.uuid,
       isCartPending = props.isCartPending,
@@ -109,12 +109,9 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   var businessDelete = (0, _react.useRef)(null);
   var changeStore = (0, _react.useRef)(null);
   var viewString = isStore ? 'business_view' : 'header';
-
-  var _theme$layouts$viewSt = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$viewSt2 = _theme$layouts[viewString]) === null || _theme$layouts$viewSt2 === void 0 ? void 0 : (_theme$layouts$viewSt3 = _theme$layouts$viewSt2.components) === null || _theme$layouts$viewSt3 === void 0 ? void 0 : (_theme$layouts$viewSt4 = _theme$layouts$viewSt3.cart) === null || _theme$layouts$viewSt4 === void 0 ? void 0 : (_theme$layouts$viewSt5 = _theme$layouts$viewSt4.components) === null || _theme$layouts$viewSt5 === void 0 ? void 0 : _theme$layouts$viewSt5.business,
-      logo = _theme$layouts$viewSt.logo,
-      time = _theme$layouts$viewSt.time;
-
-  var isHideBusinessLogo = logo === null || logo === void 0 ? void 0 : logo.hidden;
+  var logo = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$viewSt = _theme$layouts[viewString]) === null || _theme$layouts$viewSt === void 0 ? void 0 : (_theme$layouts$viewSt2 = _theme$layouts$viewSt.components) === null || _theme$layouts$viewSt2 === void 0 ? void 0 : (_theme$layouts$viewSt3 = _theme$layouts$viewSt2.cart) === null || _theme$layouts$viewSt3 === void 0 ? void 0 : (_theme$layouts$viewSt4 = _theme$layouts$viewSt3.components) === null || _theme$layouts$viewSt4 === void 0 ? void 0 : (_theme$layouts$viewSt5 = _theme$layouts$viewSt4.business) === null || _theme$layouts$viewSt5 === void 0 ? void 0 : _theme$layouts$viewSt5.logo;
+  var time = theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$viewS = _theme$layouts2[viewString]) === null || _theme$layouts2$viewS === void 0 ? void 0 : (_theme$layouts2$viewS2 = _theme$layouts2$viewS.components) === null || _theme$layouts2$viewS2 === void 0 ? void 0 : (_theme$layouts2$viewS3 = _theme$layouts2$viewS2.cart) === null || _theme$layouts2$viewS3 === void 0 ? void 0 : (_theme$layouts2$viewS4 = _theme$layouts2$viewS3.components) === null || _theme$layouts2$viewS4 === void 0 ? void 0 : (_theme$layouts2$viewS5 = _theme$layouts2$viewS4.business) === null || _theme$layouts2$viewS5 === void 0 ? void 0 : _theme$layouts2$viewS5.time;
+  var isHideBusinessLogo = logo === null || logo === void 0 ? void 0 : logo.time;
   var isHideBusinessTime = time === null || time === void 0 ? void 0 : time.hidden;
 
   var toggleAccordion = function toggleAccordion(e) {
