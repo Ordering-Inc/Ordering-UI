@@ -69,7 +69,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var filterSpecialStatus = ['prepared_in', 'delivered_in'];
+var filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime'];
 
 var MessagesUI = function MessagesUI(props) {
   var _messages$messages, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _theme$images2$dummie, _order$driver3, _order$business4, _order$driver4, _order$business5, _theme$images3, _theme$images3$dummie, _order$driver5, _messagesToShow$messa2;

@@ -37,6 +37,8 @@ var _Inputs = require("../../styles/Inputs");
 
 var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
 
+var _CartStoresListing = require("../../../../franchise/src/components/CartStoresListing");
+
 var _styles = require("./styles");
 
 var _utils = require("../../../../../utils");
@@ -166,6 +168,11 @@ var CartUI = function CartUI(props) {
       _useState14 = _slicedToArray(_useState13, 2),
       isUpselling = _useState14[0],
       setIsUpselling = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      openChangeStore = _useState16[0],
+      setOpenChangeStore = _useState16[1];
 
   var isCouponEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.coupon) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
   var cart = orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(props.cart.business_id)];
@@ -301,6 +308,10 @@ var CartUI = function CartUI(props) {
     });
   };
 
+  var handleChangeStore = function handleChangeStore() {
+    setOpenChangeStore(true);
+  };
+
   (0, _react.useEffect)(function () {
     if (isCustomMode) setIsUpselling(true);
   }, [isCustomMode]);
@@ -336,7 +347,8 @@ var CartUI = function CartUI(props) {
     total: cart === null || cart === void 0 ? void 0 : cart.total,
     handleClickCheckout: handleClickCheckout,
     checkoutButtonDisabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address),
-    setPreorderBusiness: setPreorderBusiness
+    setPreorderBusiness: setPreorderBusiness,
+    handleChangeStore: handleChangeStore
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,
@@ -598,6 +610,25 @@ var CartUI = function CartUI(props) {
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "70%",
+    title: t('CHANGE_STORE', 'Change store'),
+    open: openChangeStore,
+    padding: "20px",
+    closeOnBackdrop: true,
+    modalTitleStyle: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    onClose: function onClose() {
+      return setOpenChangeStore(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CartStoresListing.CartStoresListing, {
+    pageChangeStore: "business",
+    cartuuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
+    onClose: function onClose() {
+      return setOpenChangeStore(false);
+    }
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

@@ -549,7 +549,7 @@ var CheckoutUI = function CheckoutUI(props) {
 };
 
 var Checkout = function Checkout(props) {
-  var _Object$values2, _cartState$cart, _cartState$error, _cartState$cart2;
+  var _Object$values2, _cartState$error, _cartState$cart;
 
   var errors = props.errors,
       clearErrors = props.clearErrors,
@@ -787,7 +787,7 @@ var Checkout = function Checkout(props) {
   var checkoutProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CheckoutUI,
     cartState: cartState,
-    businessId: (_cartState$cart = cartState.cart) === null || _cartState$cart === void 0 ? void 0 : _cartState$cart.business_id,
+    uuid: cartUuid,
     isResetPaymethod: isResetPaymethod,
     setIsResetPaymethod: setIsResetPaymethod
   });
@@ -847,7 +847,7 @@ var Checkout = function Checkout(props) {
     }
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 25
-  }))), cartUuid && cartState.cart && ((_cartState$cart2 = cartState.cart) === null || _cartState$cart2 === void 0 ? void 0 : _cartState$cart2.status) !== 1 && /*#__PURE__*/_react.default.createElement(_orderingComponents.Checkout, checkoutProps), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+  }))), cartUuid && cartState.cart && ((_cartState$cart = cartState.cart) === null || _cartState$cart === void 0 ? void 0 : _cartState$cart.status) !== 1 && /*#__PURE__*/_react.default.createElement(_orderingComponents.Checkout, checkoutProps), (currentCart === null || currentCart === void 0 ? void 0 : currentCart.products) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business_id,
     cartProducts: currentCart === null || currentCart === void 0 ? void 0 : currentCart.products,
     business: currentCart === null || currentCart === void 0 ? void 0 : currentCart.business,
