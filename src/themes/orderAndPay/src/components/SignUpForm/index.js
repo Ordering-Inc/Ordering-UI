@@ -184,7 +184,9 @@ const SignUpFormUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    if (emailInput?.current) {
+      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
+    }
   }
 
   useEffect(() => {
@@ -423,14 +425,14 @@ const SignUpFormUI = (props) => {
               {Object.keys(configs).length > 0 ? (
                 <SocialButtons isPopup={isPopup}>
                   {(configs?.facebook_login?.value === 'true' ||
-                configs?.facebook_login?.value === '1') &&
-                configs?.facebook_id?.value &&
-                (
-                  <FacebookLoginButton
-                    appId={configs?.facebook_id?.value}
-                    handleSuccessFacebookLogin={handleSuccessFacebook}
-                  />
-                )}
+                    configs?.facebook_login?.value === '1') &&
+                    configs?.facebook_id?.value &&
+                    (
+                      <FacebookLoginButton
+                        appId={configs?.facebook_id?.value}
+                        handleSuccessFacebookLogin={handleSuccessFacebook}
+                      />
+                    )}
                   {configs?.apple_login_client_id?.value && (
                     <AppleLogin
                       onSuccess={handleSuccessApple}

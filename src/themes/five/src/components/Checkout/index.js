@@ -679,7 +679,7 @@ export const Checkout = (props) => {
     ...props,
     UIComponent: CheckoutUI,
     cartState,
-    businessId: cartState.cart?.business_id,
+    uuid: cartUuid,
     isResetPaymethod,
     setIsResetPaymethod
   }

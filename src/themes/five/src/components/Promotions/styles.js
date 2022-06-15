@@ -51,6 +51,13 @@ export const SingleOfferContainer = styled.div`
 
 export const Description = styled.p`
   color: #909BA9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; 
+  -webkit-box-orient: vertical;
+
 `
 export const ExpiresAt = styled.p`
   color: #414954;
@@ -65,6 +72,12 @@ export const OfferInformation = styled.div`
     width: 100%;
   `}
   h2{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2; 
+    -webkit-box-orient: vertical;
     font-size: 14px;
   }
   @media (min-width: 720px){

@@ -147,6 +147,32 @@
             }
           }
         },
+        "reviews": {
+          "components": {
+            "ranking": {
+              "hidden": false
+            },
+            "customer_comments": {
+              "hidden": true
+            },
+            "review_date": {
+              "hidden": false
+            },
+            "search": {
+              "hidden": true
+            }
+          }
+        },
+        "information": {
+          "components": {
+            "location": {
+              "hidden": false
+            },
+            "schedule": {
+              "hidden": false
+            }
+          }
+        },
         "order_view_button": {
           "hidden": true
         }
