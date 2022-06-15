@@ -100,8 +100,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
   var date = theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$order = _theme$layouts2.orders) === null || _theme$layouts2$order === void 0 ? void 0 : (_theme$layouts2$order2 = _theme$layouts2$order.components) === null || _theme$layouts2$order2 === void 0 ? void 0 : _theme$layouts2$order2.date;
   var map = theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$order = _theme$layouts3.orders) === null || _theme$layouts3$order === void 0 ? void 0 : (_theme$layouts3$order2 = _theme$layouts3$order.components) === null || _theme$layouts3$order2 === void 0 ? void 0 : _theme$layouts3$order2.map;
   var isHideBusinessLogo = businessLogo === null || businessLogo === void 0 ? void 0 : businessLogo.hidden;
-  var isHideDate = date.hidden;
-  var isHideMap = map.hidden;
+  var isHideDate = date === null || date === void 0 ? void 0 : date.hidden;
+  var isHideMap = map === null || map === void 0 ? void 0 : map.hidden;
 
   var Orders = function Orders() {
     var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
