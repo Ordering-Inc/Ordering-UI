@@ -20,10 +20,10 @@ export const HeroImageStyled = styled.div`
   top: -20px;
 
   ${({ bgimage }) => bgimage && css`
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
-    object-fit: cover;
-    background-attachment: fixed;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
   `}
   @media (min-width: 821px) {
     top: 0px;
