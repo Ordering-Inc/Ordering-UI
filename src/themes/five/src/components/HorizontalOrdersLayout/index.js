@@ -56,9 +56,11 @@ export const HorizontalOrdersLayout = (props) => {
     }
   }
 
-  // eslint-disable-next-line camelcase
-  const { business_logo, date, map } = theme?.layouts?.orders?.components
-  const isHideBusinessLogo = business_logo.hidden
+  const businessLogo = theme?.layouts?.orders?.components?.business_logo
+  const date = theme?.layouts?.orders?.components?.date
+  const map = theme?.layouts?.orders?.components?.map
+
+  const isHideBusinessLogo = businessLogo?.hidden
   const isHideDate = date.hidden
   const isHideMap = map.hidden
 
