@@ -63,7 +63,7 @@ import { bytesConverter, getTraduction } from '../../../../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
 
-const filterSpecialStatus = ['prepared_in', 'delivered_in']
+const filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime']
 
 const MessagesUI = (props) => {
   const {
