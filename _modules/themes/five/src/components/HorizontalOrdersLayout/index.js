@@ -42,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
-  var _theme$layouts, _theme$layouts$orders2;
+  var _theme$layouts, _theme$layouts$orders, _theme$layouts$orders2, _theme$layouts2, _theme$layouts2$order, _theme$layouts2$order2, _theme$layouts3, _theme$layouts3$order, _theme$layouts3$order2;
 
   var pagination = props.pagination,
       loadMoreOrders = props.loadMoreOrders,
@@ -94,15 +94,12 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         }
       });
     }
-  }; // eslint-disable-next-line camelcase
+  };
 
-
-  var _theme$layouts$orders = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$orders2 = _theme$layouts.orders) === null || _theme$layouts$orders2 === void 0 ? void 0 : _theme$layouts$orders2.components,
-      business_logo = _theme$layouts$orders.business_logo,
-      date = _theme$layouts$orders.date,
-      map = _theme$layouts$orders.map;
-
-  var isHideBusinessLogo = business_logo.hidden;
+  var businessLogo = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$orders = _theme$layouts.orders) === null || _theme$layouts$orders === void 0 ? void 0 : (_theme$layouts$orders2 = _theme$layouts$orders.components) === null || _theme$layouts$orders2 === void 0 ? void 0 : _theme$layouts$orders2.business_logo;
+  var date = theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$order = _theme$layouts2.orders) === null || _theme$layouts2$order === void 0 ? void 0 : (_theme$layouts2$order2 = _theme$layouts2$order.components) === null || _theme$layouts2$order2 === void 0 ? void 0 : _theme$layouts2$order2.date;
+  var map = theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$order = _theme$layouts3.orders) === null || _theme$layouts3$order === void 0 ? void 0 : (_theme$layouts3$order2 = _theme$layouts3$order.components) === null || _theme$layouts3$order2 === void 0 ? void 0 : _theme$layouts3$order2.map;
+  var isHideBusinessLogo = businessLogo === null || businessLogo === void 0 ? void 0 : businessLogo.hidden;
   var isHideDate = date.hidden;
   var isHideMap = map.hidden;
 
