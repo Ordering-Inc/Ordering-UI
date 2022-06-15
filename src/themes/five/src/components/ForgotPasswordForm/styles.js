@@ -38,7 +38,7 @@ export const FormInput = styled.form`
   display: flex;
   flex-direction: column;
 
-  * {
+  input, button {
     padding: 8px 20px;
     margin: 10px;
   }
@@ -108,4 +108,16 @@ export const RedirectLink = styled.div`
       font-size: 16px;
     `};
   }
+`
+
+export const ReCaptchaWrapper = styled.div`
+  margin: 12px auto;
+`
+
+export const ValidationText = styled.div`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${props => props.theme.colors.danger500};
+  padding: 0px 10px;
 `

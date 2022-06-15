@@ -1,15 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Alert } from '../Confirm'
 import {
   ForgotPasswordForm as ForgotPasswordController,
-  useLanguage
+  useLanguage,
+  ReCaptcha
 } from 'ordering-components'
+
 import {
   ForgotPasswordContainer,
   FormSide,
   FormInput,
-  RedirectLink
+  RedirectLink,
+  ReCaptchaWrapper,
+  ValidationText
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -23,14 +27,15 @@ const ForgotPasswordUI = (props) => {
     formState,
     formData,
     elementLinkToLogin,
-    isPopup
+    isPopup,
+    handleReCaptcha,
+    enableReCaptcha
   } = props
 
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, title: '', content: [], success: false })
   const [, t] = useLanguage()
   const theme = useTheme()
-  const emailInput = useRef(null)
 
   const onSubmit = () => {
     setAlertState({ ...alertState, success: true })
@@ -48,22 +53,7 @@ const ForgotPasswordUI = (props) => {
   const handleChangeInputEmail = (e) => {
     hanldeChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    if (emailInput?.current) {
-      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
-    }
   }
-
-  useEffect(() => {
-    if (Object.keys(formMethods.errors).length > 0) {
-      setAlertState({
-        ...alertState,
-        success: false,
-        open: true,
-        title: t('ERROR_UNKNOWN', 'An error has ocurred'),
-        content: Object.values(formMethods.errors).map(error => error.message)
-      })
-    }
-  }, [formMethods.errors])
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
@@ -80,20 +70,19 @@ const ForgotPasswordUI = (props) => {
         ...alertState,
         open: true,
         title: t('LINK_SEND_SUCCESSFULLY', 'Link Sent Successfully'),
-        content: `${t('SUCCESS_SEND_FORGOT_PASSWORD', 'Your link has been sent to the email')}: ${formData.email}`
+        content: t('IF_ACCOUNT_EXIST_EMAIL_SEND_PASSWORD', 'If an account exists with this email a password will be sent')
       })
     }
   }, [formState.loading])
 
   useEffect(() => {
-    formMethods.register('email', {
-      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-      }
-    })
-  }, [formMethods])
+    if (!formState.loading && formState.result?.error) {
+      setAlertState({
+        open: true,
+        content: formState.result?.result || [t('ERROR', 'Error')]
+      })
+    }
+  }, [formState])
 
   return (
     <>
@@ -118,17 +107,31 @@ const ForgotPasswordUI = (props) => {
               </React.Fragment>))}
             {props.beforeMidComponents?.map((BeforeMidComponents, i) => (
               <BeforeMidComponents key={i} {...props} />))}
+            {formMethods?.errors?.email && (
+              <ValidationText>
+                {formMethods.errors?.email?.message} {formMethods?.errors?.email?.type === 'required' && '*'}
+              </ValidationText>
+            )}
             <Input
               type='email'
               name='email'
               aria-label='email'
               placeholder={t('EMAIL', 'Email')}
-              ref={(e) => {
-                emailInput.current = e
-              }}
+              ref={formMethods.register({
+                required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+                }
+              })}
               onChange={handleChangeInputEmail}
               autoComplete='off'
             />
+            {props.isRecaptchaEnable && enableReCaptcha && (
+              <ReCaptchaWrapper>
+                <ReCaptcha handleReCaptcha={handleReCaptcha} />
+              </ReCaptchaWrapper>
+            )}
             {
               props.afterMidElements?.map((MidElement, i) => (
                 <React.Fragment key={i}>
@@ -155,7 +158,7 @@ const ForgotPasswordUI = (props) => {
           )}
         </FormSide>
         <Alert
-          title={alertState.title}
+          title={alertState?.title || t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')}
           content={alertState.content}
           acceptText={t('ACCEPT', 'Accept')}
           open={alertState.open}
@@ -177,6 +180,7 @@ const ForgotPasswordUI = (props) => {
 export const ForgotPasswordForm = (props) => {
   const ForgotPasswordProps = {
     ...props,
+    isRecaptchaEnable: true,
     UIComponent: ForgotPasswordUI
   }
   return <ForgotPasswordController {...ForgotPasswordProps} />
