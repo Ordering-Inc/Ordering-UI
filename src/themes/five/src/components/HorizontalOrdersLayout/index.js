@@ -61,8 +61,8 @@ export const HorizontalOrdersLayout = (props) => {
   const map = theme?.layouts?.orders?.components?.map
 
   const isHideBusinessLogo = businessLogo?.hidden
-  const isHideDate = date.hidden
-  const isHideMap = map.hidden
+  const isHideDate = date?.hidden
+  const isHideMap = map?.hidden
 
   const Orders = () => {
     return (
