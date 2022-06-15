@@ -48,14 +48,16 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ForgotPasswordUI = function ForgotPasswordUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _formMethods$errors, _formMethods$errors2, _formMethods$errors2$, _formMethods$errors3, _formMethods$errors3$, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var hanldeChangeInput = props.hanldeChangeInput,
       handleButtonForgotPasswordClick = props.handleButtonForgotPasswordClick,
       formState = props.formState,
       formData = props.formData,
       elementLinkToLogin = props.elementLinkToLogin,
-      isPopup = props.isPopup;
+      isPopup = props.isPopup,
+      handleReCaptcha = props.handleReCaptcha,
+      enableReCaptcha = props.enableReCaptcha;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useState = (0, _react.useState)({
@@ -73,7 +75,6 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-  var emailInput = (0, _react.useRef)(null);
 
   var onSubmit = function onSubmit() {
     setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
@@ -97,24 +98,8 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       }
     });
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
-
-    if (emailInput !== null && emailInput !== void 0 && emailInput.current) {
-      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
-    }
   };
 
-  (0, _react.useEffect)(function () {
-    if (Object.keys(formMethods.errors).length > 0) {
-      setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
-        success: false,
-        open: true,
-        title: t('ERROR_UNKNOWN', 'An error has ocurred'),
-        content: Object.values(formMethods.errors).map(function (error) {
-          return error.message;
-        })
-      }));
-    }
-  }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result3;
 
@@ -133,19 +118,22 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         open: true,
         title: t('LINK_SEND_SUCCESSFULLY', 'Link Sent Successfully'),
-        content: "".concat(t('SUCCESS_SEND_FORGOT_PASSWORD', 'Your link has been sent to the email'), ": ").concat(formData.email)
+        content: t('IF_ACCOUNT_EXIST_EMAIL_SEND_PASSWORD', 'If an account exists with this email a password will be sent')
       }));
     }
   }, [formState.loading]);
   (0, _react.useEffect)(function () {
-    formMethods.register('email', {
-      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-      }
-    });
-  }, [formMethods]);
+    var _formState$result4;
+
+    if (!formState.loading && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.error) {
+      var _formState$result5;
+
+      setAlertState({
+        open: true,
+        content: ((_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result) || [t('ERROR', 'Error')]
+      });
+    }
+  }, [formState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -176,17 +164,23 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors = formMethods.errors) === null || _formMethods$errors === void 0 ? void 0 : _formMethods$errors.email) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors2 = formMethods.errors) === null || _formMethods$errors2 === void 0 ? void 0 : (_formMethods$errors2$ = _formMethods$errors2.email) === null || _formMethods$errors2$ === void 0 ? void 0 : _formMethods$errors2$.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors3 = formMethods.errors) === null || _formMethods$errors3 === void 0 ? void 0 : (_formMethods$errors3$ = _formMethods$errors3.email) === null || _formMethods$errors3$ === void 0 ? void 0 : _formMethods$errors3$.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "email",
     name: "email",
     "aria-label": "email",
     placeholder: t('EMAIL', 'Email'),
-    ref: function ref(e) {
-      emailInput.current = e;
-    },
+    ref: formMethods.register({
+      required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
+      }
+    }),
     onChange: handleChangeInputEmail,
     autoComplete: "off"
-  }), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  }), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
+    handleReCaptcha: handleReCaptcha
+  })), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);
@@ -202,7 +196,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('SIGN_IN_MESSAGE', 'Do you want to sign in?')), elementLinkToLogin)), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: alertState.title,
+    title: (alertState === null || alertState === void 0 ? void 0 : alertState.title) || t('TITLE_FORGOT_PASSWORD', 'Forgot your password?'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -226,6 +220,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
 
 var ForgotPasswordForm = function ForgotPasswordForm(props) {
   var ForgotPasswordProps = _objectSpread(_objectSpread({}, props), {}, {
+    isRecaptchaEnable: true,
     UIComponent: ForgotPasswordUI
   });
 
