@@ -58,8 +58,9 @@ export const BusinessItemAccordion = (props) => {
   const changeStore = useRef(null)
 
   const viewString = isStore ? 'business_view' : 'header'
-  const { logo, time } = theme?.layouts?.[viewString]?.components?.cart?.components?.business
-  const isHideBusinessLogo = logo?.hidden
+  const logo = theme?.layouts?.[viewString]?.components?.cart?.components?.business?.logo
+  const time = theme?.layouts?.[viewString]?.components?.cart?.components?.business?.time
+  const isHideBusinessLogo = logo?.time
   const isHideBusinessTime = time?.hidden
 
   const toggleAccordion = (e) => {
