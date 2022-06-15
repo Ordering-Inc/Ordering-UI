@@ -82,15 +82,14 @@ export const ContentInfo = styled.div`
         margin: 0px;
       }
     `}
-
-    .change-store {
-      cursor: pointer;
-      text-decoration: underline;
-      color: ${props => props.theme.colors.primary};
-      font-size: 12px;
-      &:first-letter {
-        text-transform: uppercase;
-      }
+  }
+  .change-store {
+    cursor: pointer;
+    text-decoration: underline;
+    color: ${props => props.theme.colors.primary};
+    font-size: 12px;
+    &:first-letter {
+      text-transform: uppercase;
     }
   }
   ${props => props.theme?.rtl && css`

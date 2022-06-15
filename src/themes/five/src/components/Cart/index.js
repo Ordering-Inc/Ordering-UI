@@ -13,6 +13,7 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { TaxInformation } from '../TaxInformation'
 import { TextArea } from '../../styles/Inputs'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
+import { CartStoresListing } from '../../../../franchise/src/components/CartStoresListing'
 import {
   CartContainer,
   OrderBill,
@@ -69,6 +70,7 @@ const CartUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isUpselling, setIsUpselling] = useState(false)
+  const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
@@ -177,6 +179,10 @@ const CartUI = (props) => {
     })
   }
 
+  const handleChangeStore = () => {
+    setOpenChangeStore(true)
+  }
+
   useEffect(() => {
     if (isCustomMode) setIsUpselling(true)
   }, [isCustomMode])
@@ -212,6 +218,7 @@ const CartUI = (props) => {
             handleClickCheckout={handleClickCheckout}
             checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
             setPreorderBusiness={setPreorderBusiness}
+            handleChangeStore={handleChangeStore}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
@@ -544,6 +551,23 @@ const CartUI = (props) => {
             />
           )}
         </CartSticky>
+
+        <Modal
+          width='70%'
+          title={t('CHANGE_STORE', 'Change store')}
+          open={openChangeStore}
+          padding='20px'
+          closeOnBackdrop
+          modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+          onClose={() => setOpenChangeStore(false)}
+        >
+          <CartStoresListing
+            pageChangeStore='business'
+            cartuuid={cart?.uuid}
+            onClose={() => setOpenChangeStore(false)}
+          />
+        </Modal>
+
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
