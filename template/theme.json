@@ -154,6 +154,16 @@
             }
           }
         },
+        "information": {
+          "components": {
+            "location": {
+              "hidden": false
+            },
+            "schedule": {
+              "hidden": false
+            }
+          }
+        },
         "order_view_button": {
           "hidden": true
         }
