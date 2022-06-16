@@ -29,7 +29,7 @@ exports.HeroContainer = HeroContainer;
 
 var HeroImageStyled = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100vw;\n  height: 100%;\n  top: -20px;\n\n  ", "\n  @media (min-width: 821px) {\n    top: 0px;\n  }\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
-  return bgimage && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-attachment: fixed;\n  "])));
+  return bgimage && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    img {\n      max-width: 100%;\n      height: auto;\n    }\n  "])));
 });
 
 exports.HeroImageStyled = HeroImageStyled;
