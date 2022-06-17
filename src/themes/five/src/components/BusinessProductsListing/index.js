@@ -379,7 +379,7 @@ const BusinessProductsListingUI = (props) => {
       <Alert
         title={t('ERROR', 'Error')}
         open={alertState.open}
-        content={alertState.content}
+        content={t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.')}
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}
       />
