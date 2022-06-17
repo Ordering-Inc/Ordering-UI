@@ -48,7 +48,9 @@ export const SidebarMenu = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
 
-  const isWalletEnabled = configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+  const isWalletEnabled = configs?.cash_wallet?.value === '1' &&
+    configs?.wallet_enabled?.value === '1' &&
+    (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
 
   const closeModal = () => {
     setModalIsOpen(false)

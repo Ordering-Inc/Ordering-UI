@@ -203,9 +203,9 @@ const BusinessProductsListingUI = (props) => {
   }, [business?.schedule])
 
   useEffect(() => {
-    const adjustBusinessId = JSON.parse(window.localStorage.getItem('adjust-businessId'))
+    const adjustBusinessId = sessionStorage.getItem('adjust-cart-products')
     if (currentCart && adjustBusinessId) {
-      localStorage.removeItem('adjust-businessId')
+      sessionStorage.removeItem('adjust-cart-products')
       adjustBusiness(adjustBusinessId)
     }
   }, [currentCart])
@@ -379,7 +379,7 @@ const BusinessProductsListingUI = (props) => {
       <Alert
         title={t('ERROR', 'Error')}
         open={alertState.open}
-        content={alertState.content}
+        content={t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.')}
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}
       />

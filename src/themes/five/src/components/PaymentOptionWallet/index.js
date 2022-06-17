@@ -15,14 +15,17 @@ import {
   SectionLeftText
 } from './styles'
 
+import { Alert } from '../Confirm'
 import { Checkbox } from '../../../../../styles/Checkbox'
 
 const PaymentOptionWalletUI = (props) => {
   const {
-    businessConfigs,
     cart,
-    walletsState,
+    errorState,
+    setErrorState,
     selectWallet,
+    walletsState,
+    businessConfigs,
     deletetWalletSelected
   } = props
 
@@ -31,9 +34,10 @@ const PaymentOptionWalletUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
 
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [checkedState, setCheckedState] = useState(
     new Array(walletsState.result?.length).fill(false)
-  );
+  )
 
   const isWalletCashEnabled = configs?.wallet_cash_enabled?.value === '1'
   const isWalletPointsEnabled = configs?.wallet_credit_point_enabled?.value === '1'
@@ -52,10 +56,15 @@ const PaymentOptionWalletUI = (props) => {
     }
   }
 
+  const closeAlert = () => {
+    setAlertState({ open: false, content: [] })
+    setErrorState(null)
+  }
+
   const handleOnChange = (position, wallet) => {
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
-    );
+    )
 
     if (!checkedState[position]) {
       selectWallet(wallet)
@@ -63,8 +72,8 @@ const PaymentOptionWalletUI = (props) => {
       deletetWalletSelected(wallet)
     }
 
-    setCheckedState(updatedCheckedState);
-  };
+    setCheckedState(updatedCheckedState)
+  }
 
   useEffect(() => {
     if (!walletsState.loading) {
@@ -75,6 +84,12 @@ const PaymentOptionWalletUI = (props) => {
       )
     }
   }, [walletsState.result?.length])
+
+  useEffect(() => {
+    if (errorState) {
+      setAlertState({ open: true, content: errorState })
+    }
+  }, [errorState])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -106,9 +121,6 @@ const PaymentOptionWalletUI = (props) => {
                   >
                     {walletName[wallet.type]?.name}
                   </label>
-                  {/* {wallet.type === 'cash' && (
-                    <span>Click here to add more credits</span>
-                  )} */}
                 </SectionLeftText>
               </SectionLeft>
               <div>
@@ -135,6 +147,16 @@ const PaymentOptionWalletUI = (props) => {
           ))}
         </>
       )}
+
+      <Alert
+        title={t('WALLET_ERROR_MESSAGES', 'Wallet')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </div>
   )
 }
