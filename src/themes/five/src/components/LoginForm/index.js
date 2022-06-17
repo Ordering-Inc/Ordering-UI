@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -35,7 +35,8 @@ import {
   Title,
   ValidationText,
   LogotypeContainer,
-  HeroSide
+  HeroSide,
+  ResendCode
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -60,7 +61,6 @@ const LoginFormUI = (props) => {
   const {
     useLoginByEmail,
     useLoginByCellphone,
-    useLoginOtp,
     handleChangeInput,
     handleReCaptcha,
     handleChangeTab,
@@ -82,7 +82,9 @@ const LoginFormUI = (props) => {
     setOtpType,
     generateOtpCode,
     otpState,
-    setOtpState
+    setOtpState,
+    useLoginOtpEmail,
+    useLoginOtpCellphone
   } = props
   const numOtpInputs = loginTab === 'otp' ? 6 : 4
   const [ordering, { setOrdering }] = useApi()
@@ -90,8 +92,6 @@ const LoginFormUI = (props) => {
   const theme = useTheme()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
-
-  const emailInput = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
@@ -104,7 +104,8 @@ const LoginFormUI = (props) => {
 
   const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
-
+  const isOtpEmail = loginTab === 'otp' && otpType === 'email'
+  const isOtpCellphone = loginTab === 'otp' && otpType === 'cellphone'
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
     cookiepolicy: 'single_host_origin',
@@ -222,8 +223,15 @@ const LoginFormUI = (props) => {
           cellphone: cellphone,
           country_phone_code: countryPhoneCode
         })
+      } else {
+        onSubmit()
       }
     }
+  }
+
+  const handleChangeOtpType = (type) => {
+    handleChangeTab('otp')
+    setOtpType(type)
   }
 
   useEffect(() => {
@@ -284,6 +292,15 @@ const LoginFormUI = (props) => {
       resetOtpLeftTime()
     }
   }, [checkPhoneCodeState])
+
+  useEffect(() => {
+    if (otpLeftTime === 0) {
+      setAlertState({
+        open: true,
+        content: t('TIME_IS_UP_PLEASE_RESEND_CODE', 'Time is up. Please resend code again')
+      })
+    }
+  }, [otpLeftTime])
 
   useEffect(() => {
     if (verifyPhoneState?.result?.error) {
@@ -347,36 +364,20 @@ const LoginFormUI = (props) => {
                     {t('BY_PHONE', 'by Phone')}
                   </Tab>
                 )}
-                {useLoginOtp && (
+                {useLoginOtpEmail && (
                   <Tab
-                    onClick={() => handleChangeTab('otp')}
-                    active={loginTab === 'otp'}
-                    borderBottom={loginTab === 'otp'}
-                  >
-                    {t('BY_OTP', 'by Otp')}
-                  </Tab>
-                )}
-              </Tabs>
-            </LoginWith>
-          )}
-
-          {loginTab === 'otp' && (
-            <LoginWith isPopup={isPopup}>
-              <Tabs variant='primary'>
-                {useLoginOtp && (
-                  <Tab
-                    onClick={() => setOtpType('email')}
-                    active={otpType === 'email'}
-                    borderBottom={otpType === 'email'}
+                    onClick={() => handleChangeOtpType('email')}
+                    active={isOtpEmail}
+                    borderBottom={isOtpEmail}
                   >
                     {t('BY_OTP_EMAIL', 'by Otp Email')}
                   </Tab>
                 )}
-                {useLoginOtp && (
+                {useLoginOtpCellphone && (
                   <Tab
-                    onClick={() => setOtpType('cellphone')}
-                    active={otpType === 'cellphone'}
-                    borderBottom={otpType === 'cellphone'}
+                    onClick={() => handleChangeOtpType('cellphone')}
+                    active={isOtpCellphone}
+                    borderBottom={isOtpCellphone}
                   >
                     {t('BY_OTP_CELLPHONE', 'by Otp Cellphone')}
                   </Tab>
@@ -476,9 +477,6 @@ const LoginFormUI = (props) => {
                 <>
                   <CountdownTimer>
                     <span>{formatSeconds(otpLeftTime)}</span>
-                    <span onClick={handleSendOtp}>
-                      {t('RESEND_AGAIN', 'Resend again')}?
-                    </span>
                   </CountdownTimer>
 
                   <OtpWrapper>
@@ -493,7 +491,9 @@ const LoginFormUI = (props) => {
                       shouldAutoFocus
                     />
                   </OtpWrapper>
-
+                  <ResendCode disabled={otpLeftTime > 520} onClick={handleSendOtp}>
+                    {t('RESEND_AGAIN', 'Resend again')}?
+                  </ResendCode>
                   <Button
                     type='button'
                     color='secundary'
@@ -552,7 +552,7 @@ const LoginFormUI = (props) => {
                 props.afterMidComponents?.map((MidComponent, i) => (
                   <MidComponent key={i} {...props} />))
               }
-              {!loginWithOtpState && (
+              {!loginWithOtpState && loginTab !== 'otp' && (
                 <RedirectLink isPopup={isPopup}>
                   <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
                   {elementLinkToForgotPassword}
