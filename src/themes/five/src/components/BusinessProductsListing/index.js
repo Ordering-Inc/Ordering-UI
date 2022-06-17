@@ -203,9 +203,9 @@ const BusinessProductsListingUI = (props) => {
   }, [business?.schedule])
 
   useEffect(() => {
-    const adjustBusinessId = JSON.parse(window.localStorage.getItem('adjust-businessId'))
+    const adjustBusinessId = sessionStorage.getItem('adjust-cart-products')
     if (currentCart && adjustBusinessId) {
-      localStorage.removeItem('adjust-businessId')
+      sessionStorage.removeItem('adjust-cart-products')
       adjustBusiness(adjustBusinessId)
     }
   }, [currentCart])
