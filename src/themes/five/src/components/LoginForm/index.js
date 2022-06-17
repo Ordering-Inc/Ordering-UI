@@ -87,6 +87,7 @@ const LoginFormUI = (props) => {
     useLoginOtpCellphone
   } = props
   const numOtpInputs = loginTab === 'otp' ? 6 : 4
+  const otpPlaceholder = [...Array(numOtpInputs)].map((b, i) => i - i).join('')
   const [ordering, { setOrdering }] = useApi()
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -486,7 +487,7 @@ const LoginFormUI = (props) => {
                       numInputs={numOtpInputs}
                       containerStyle='otp-container'
                       inputStyle='otp-input'
-                      placeholder='000000'
+                      placeholder={otpPlaceholder}
                       isInputNum
                       shouldAutoFocus
                     />
