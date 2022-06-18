@@ -343,10 +343,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     };
   }, [business === null || business === void 0 ? void 0 : business.schedule]);
   (0, _react.useEffect)(function () {
-    var adjustBusinessId = JSON.parse(window.localStorage.getItem('adjust-businessId'));
+    var adjustBusinessId = sessionStorage.getItem('adjust-cart-products');
 
     if (currentCart && adjustBusinessId) {
-      localStorage.removeItem('adjust-businessId');
+      sessionStorage.removeItem('adjust-cart-products');
       adjustBusiness(adjustBusinessId);
     }
   }, [currentCart]);
@@ -466,7 +466,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,
-    content: alertState.content,
+    content: t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.'),
     onClose: function onClose() {
       return setAlertState({
         open: false,

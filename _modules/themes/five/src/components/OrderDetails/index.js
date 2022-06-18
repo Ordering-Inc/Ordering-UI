@@ -399,7 +399,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     if (outsideModal) {
       var _businessId = 'businessId:' + (businessData === null || businessData === void 0 ? void 0 : businessData.id);
 
-      localStorage.setItem('adjust-businessId', JSON.stringify(_businessId));
+      sessionStorage.setItem('adjust-cart-products', _businessId);
       handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
     }
   };
@@ -464,7 +464,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
           }
         });
       } else {
-        localStorage.setItem('adjust-businessId', JSON.stringify(_businessId));
+        sessionStorage.setItem('adjust-cart-products', _businessId);
         handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
       }
     }

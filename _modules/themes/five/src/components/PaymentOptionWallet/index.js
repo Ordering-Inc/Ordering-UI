@@ -17,6 +17,8 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
+var _Confirm = require("../Confirm");
+
 var _Checkbox = require("../../../../../styles/Checkbox");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -54,10 +56,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
   var _walletsState$result, _configs$wallet_cash_, _configs$wallet_credi, _businessConfigs$find, _businessConfigs$find2, _walletsState$result3, _walletsState$result4, _walletsState$result5;
 
-  var businessConfigs = props.businessConfigs,
-      cart = props.cart,
-      walletsState = props.walletsState,
+  var cart = props.cart,
+      errorState = props.errorState,
+      setErrorState = props.setErrorState,
       selectWallet = props.selectWallet,
+      walletsState = props.walletsState,
+      businessConfigs = props.businessConfigs,
       deletetWalletSelected = props.deletetWalletSelected;
   var theme = (0, _styledComponents.useTheme)();
 
@@ -73,10 +77,18 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
-  var _useState = (0, _react.useState)(new Array((_walletsState$result = walletsState.result) === null || _walletsState$result === void 0 ? void 0 : _walletsState$result.length).fill(false)),
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
       _useState2 = _slicedToArray(_useState, 2),
-      checkedState = _useState2[0],
-      setCheckedState = _useState2[1];
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(new Array((_walletsState$result = walletsState.result) === null || _walletsState$result === void 0 ? void 0 : _walletsState$result.length).fill(false)),
+      _useState4 = _slicedToArray(_useState3, 2),
+      checkedState = _useState4[0],
+      setCheckedState = _useState4[1];
 
   var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
   var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
@@ -95,6 +107,14 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
       name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet'),
       isActive: isWalletPointsEnabled && isBusinessWalletPointsEnabled
     }
+  };
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+    setErrorState(null);
   };
 
   var handleOnChange = function handleOnChange(position, wallet) {
@@ -124,6 +144,14 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
       }));
     }
   }, [(_walletsState$result3 = walletsState.result) === null || _walletsState$result3 === void 0 ? void 0 : _walletsState$result3.length]);
+  (0, _react.useEffect)(function () {
+    if (errorState) {
+      setAlertState({
+        open: true,
+        content: errorState
+      });
+    }
+  }, [errorState]);
   return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       display: 'flex',
@@ -160,7 +188,19 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 40
     }));
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('WALLET_ERROR_MESSAGES', 'Wallet'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 var PaymentOptionWallet = function PaymentOptionWallet(props) {
