@@ -459,7 +459,7 @@ const CheckoutUI = (props) => {
               validationFields?.fields?.checkout?.driver_tip?.required &&
               (Number(cart?.driver_tip) <= 0) && (
                 <WarningText>
-                  {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required')}
+                  {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
                 </WarningText>
               )}
 
