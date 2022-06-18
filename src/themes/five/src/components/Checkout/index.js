@@ -525,11 +525,13 @@ const CheckoutUI = (props) => {
               {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
             </WarningText>
           )}
+
           {placeSpotTypes.includes(options?.type) && !cart?.place && hasBusinessPlaces && (
             <WarningText>
               {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
             </WarningText>
           )}
+
           {options.type === 1 &&
           validationFields?.fields?.checkout?.driver_tip?.enabled &&
           validationFields?.fields?.checkout?.driver_tip?.required &&
