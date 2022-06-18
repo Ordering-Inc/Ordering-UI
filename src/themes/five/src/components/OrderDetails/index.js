@@ -191,7 +191,7 @@ const OrderDetailsUI = (props) => {
       !window.document.getElementById('app-modals').contains(e.target)
     if (outsideModal) {
       const _businessId = 'businessId:' + businessData?.id
-      localStorage.setItem('adjust-businessId', JSON.stringify(_businessId))
+      sessionStorage.setItem('adjust-cart-products', _businessId)
       handleBusinessRedirect(businessData?.slug)
     }
   }
@@ -243,7 +243,7 @@ const OrderDetailsUI = (props) => {
       if (available && reorderState?.result?.uuid) {
         handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
       } else {
-        localStorage.setItem('adjust-businessId', JSON.stringify(_businessId))
+        sessionStorage.setItem('adjust-cart-products', _businessId)
         handleBusinessRedirect(businessData?.slug)
       }
     }
