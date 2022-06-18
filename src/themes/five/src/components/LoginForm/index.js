@@ -4,8 +4,8 @@ import { useTheme } from 'styled-components'
 import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import Skeleton from 'react-loading-skeleton'
-import { LoginForm as LoginFormController } from './test'
 import {
+  LoginForm as LoginFormController,
   useLanguage,
   useConfig,
   useSession,
