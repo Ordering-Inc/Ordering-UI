@@ -4,9 +4,8 @@ import { useTheme } from 'styled-components'
 import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import Skeleton from 'react-loading-skeleton'
-
+import { LoginForm as LoginFormController } from './test'
 import {
-  LoginForm as LoginFormController,
   useLanguage,
   useConfig,
   useSession,
@@ -87,7 +86,7 @@ const LoginFormUI = (props) => {
     useLoginOtpCellphone
   } = props
   const numOtpInputs = loginTab === 'otp' ? 6 : 4
-  const otpPlaceholder = [...Array(numOtpInputs)].map((b, i) => i - i).join('')
+  const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
   const [ordering, { setOrdering }] = useApi()
   const [, t] = useLanguage()
   const theme = useTheme()
