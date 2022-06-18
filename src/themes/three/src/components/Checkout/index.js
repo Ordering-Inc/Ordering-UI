@@ -569,7 +569,11 @@ const CheckoutUI = (props) => {
                   <Button
                     rectangle
                     color={(!cart?.valid_maximum || !cart?.valid_minimum) ? 'primary' : 'secundary'}
-                    disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || !cart?.valid_minimum}
+                    disabled={!cart?.valid || !paymethodSelected || placing || errorCash || !cart?.valid_maximum || !cart?.valid_minimum ||
+                            (options.type === 1 &&
+                              validationFields?.fields?.checkout?.driver_tip?.enabled &&
+                              validationFields?.fields?.checkout?.driver_tip?.required &&
+                              (Number(cart?.driver_tip) <= 0))}
                     onClick={() => handlePlaceOrder()}
                   >
                     {!cart?.valid_maximum ? (
@@ -596,6 +600,15 @@ const CheckoutUI = (props) => {
               {!cart?.valid_products && cart?.status !== 2 && (
                 <WarningText>
                   {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
+                </WarningText>
+              )}
+
+              {options.type === 1 &&
+              validationFields?.fields?.checkout?.driver_tip?.enabled &&
+              validationFields?.fields?.checkout?.driver_tip?.required &&
+              (Number(cart?.driver_tip) <= 0) && (
+                <WarningText>
+                  {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required')}
                 </WarningText>
               )}
 

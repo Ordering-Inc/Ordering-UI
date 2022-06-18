@@ -119,7 +119,11 @@ const CheckoutUI = (props) => {
     loading ||
     !cart?.valid_maximum ||
     (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
-    (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces))
+    (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
+    (options.type === 1 &&
+      validationFields?.fields?.checkout?.driver_tip?.enabled &&
+      validationFields?.fields?.checkout?.driver_tip?.required &&
+      (Number(cart?.driver_tip) <= 0))
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -524,6 +528,14 @@ const CheckoutUI = (props) => {
           {placeSpotTypes.includes(options?.type) && !cart?.place && hasBusinessPlaces && (
             <WarningText>
               {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
+            </WarningText>
+          )}
+          {options.type === 1 &&
+          validationFields?.fields?.checkout?.driver_tip?.enabled &&
+          validationFields?.fields?.checkout?.driver_tip?.required &&
+          (Number(cart?.driver_tip) <= 0) && (
+            <WarningText>
+              {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required')}
             </WarningText>
           )}
         </WrapperRightContainer>
