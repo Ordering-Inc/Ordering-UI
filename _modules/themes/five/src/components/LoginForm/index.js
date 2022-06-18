@@ -73,13 +73,21 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var LoginFormUI = function LoginFormUI(props) {
   var _configs$google_login, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$google_login2, _configs$apple_login_, _configs$twilio_servi, _configs$twilio_servi2, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _props$beforeMidEleme, _props$beforeMidCompo, _formMethods$errors, _formMethods$errors$e, _formMethods$errors2, _formMethods$errors2$, _formMethods$errors3, _formMethods$errors3$, _formMethods$errors4, _formMethods$errors5, _formMethods$errors6, _formMethods$errors6$, _formMethods$errors7, _formMethods$errors7$, _formMethods$errors8, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag, _configs$facebook_log3, _configs$facebook_log4, _configs$facebook_id2, _configs$facebook_id3, _configs$google_login3, _configs$apple_login_2, _configs$twilio_servi3, _configs$twilio_servi4, _props$afterComponent, _props$afterElements;
@@ -102,8 +110,17 @@ var LoginFormUI = function LoginFormUI(props) {
       credentials = props.credentials,
       enableReCaptcha = props.enableReCaptcha,
       useRootPoint = props.useRootPoint,
-      isCustomerMode = props.isCustomerMode;
-  var numOtpInputs = 4;
+      isCustomerMode = props.isCustomerMode,
+      otpType = props.otpType,
+      setOtpType = props.setOtpType,
+      generateOtpCode = props.generateOtpCode,
+      otpState = props.otpState,
+      setOtpState = props.setOtpState,
+      useLoginOtpEmail = props.useLoginOtpEmail,
+      useLoginOtpCellphone = props.useLoginOtpCellphone;
+  var numOtpInputs = loginTab === 'otp' ? 6 : 4;
+
+  var otpPlaceholder = _toConsumableArray(Array(numOtpInputs)).fill(0).join('');
 
   var _useApi = (0, _orderingComponents.useApi)(),
       _useApi2 = _slicedToArray(_useApi, 2),
@@ -121,7 +138,6 @@ var LoginFormUI = function LoginFormUI(props) {
       configs = _useConfig2[0].configs;
 
   var formMethods = (0, _reactHookForm.useForm)();
-  var emailInput = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -165,17 +181,14 @@ var LoginFormUI = function LoginFormUI(props) {
       submitted = _useState14[0],
       setSubmitted = _useState14[1];
 
-  var _useState15 = (0, _react.useState)(''),
-      _useState16 = _slicedToArray(_useState15, 2),
-      otpState = _useState16[0],
-      setOtpState = _useState16[1];
-
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
       _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
       otpLeftTime = _useCountdownTimer2[0],
       _ = _useCountdownTimer2[1],
       resetOtpLeftTime = _useCountdownTimer2[2];
 
+  var isOtpEmail = loginTab === 'otp' && otpType === 'email';
+  var isOtpCellphone = loginTab === 'otp' && otpType === 'cellphone';
   var initParams = {
     client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
     cookiepolicy: 'single_host_origin',
@@ -185,16 +198,18 @@ var LoginFormUI = function LoginFormUI(props) {
 
   var onSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _parseNumber, cellphone, countryPhoneCode;
+
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!loginWithOtpState) {
-                _context.next = 7;
+              if (!(loginWithOtpState || loginTab === 'otp')) {
+                _context.next = 8;
                 break;
               }
 
-              if (validPhoneFieldState) {
+              if (!(!validPhoneFieldState && (loginTab !== 'otp' || otpType === 'cellphone' && loginTab === 'otp'))) {
                 _context.next = 4;
                 break;
               }
@@ -206,13 +221,22 @@ var LoginFormUI = function LoginFormUI(props) {
               return _context.abrupt("return");
 
             case 4:
+              if (loginTab === 'otp') {
+                if (otpType === 'cellphone') {
+                  _parseNumber = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone), cellphone = _parseNumber.cellphone, countryPhoneCode = _parseNumber.countryPhoneCode;
+                  generateOtpCode(cellphone, countryPhoneCode);
+                } else {
+                  generateOtpCode();
+                }
+              }
+
               setWillVerifyOtpState(true);
-              _context.next = 13;
+              _context.next = 14;
               break;
 
-            case 7:
+            case 8:
               if (!projectName) {
-                _context.next = 12;
+                _context.next = 13;
                 break;
               }
 
@@ -223,10 +247,10 @@ var LoginFormUI = function LoginFormUI(props) {
               setSubmitted(true);
               return _context.abrupt("return");
 
-            case 12:
+            case 13:
               handleButtonLoginClick();
 
-            case 13:
+            case 14:
             case "end":
               return _context.stop();
           }
@@ -322,16 +346,26 @@ var LoginFormUI = function LoginFormUI(props) {
 
   var handleSendOtp = function handleSendOtp() {
     if (willVerifyOtpState) {
-      var _parseNumber = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone),
-          cellphone = _parseNumber.cellphone,
-          countryPhoneCode = _parseNumber.countryPhoneCode;
+      var _parseNumber2 = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone),
+          cellphone = _parseNumber2.cellphone,
+          countryPhoneCode = _parseNumber2.countryPhoneCode;
 
       resetOtpLeftTime();
-      handleSendVerifyCode({
-        cellphone: cellphone,
-        country_phone_code: countryPhoneCode
-      });
+
+      if (loginTab !== 'otp') {
+        handleSendVerifyCode({
+          cellphone: cellphone,
+          country_phone_code: countryPhoneCode
+        });
+      } else {
+        onSubmit();
+      }
     }
+  };
+
+  var handleChangeOtpType = function handleChangeOtpType(type) {
+    handleChangeTab('otp');
+    setOtpType(type);
   };
 
   (0, _react.useEffect)(function () {
@@ -359,23 +393,29 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, [formMethods]);
   (0, _react.useEffect)(function () {
-    handleSendOtp();
+    if (loginTab !== 'otp') {
+      handleSendOtp();
+    }
   }, [willVerifyOtpState]);
   (0, _react.useEffect)(function () {
     if ((otpState === null || otpState === void 0 ? void 0 : otpState.length) === numOtpInputs) {
-      var _parseNumber2 = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone),
-          cellphone = _parseNumber2.cellphone,
-          countryPhoneCode = _parseNumber2.countryPhoneCode;
+      if (loginTab === 'otp') {
+        handleButtonLoginClick();
+      } else {
+        var _parseNumber3 = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone),
+            cellphone = _parseNumber3.cellphone,
+            countryPhoneCode = _parseNumber3.countryPhoneCode;
 
-      handleCheckPhoneCode({
-        cellphone: cellphone,
-        country_phone_code: countryPhoneCode,
-        code: otpState
-      });
+        handleCheckPhoneCode({
+          cellphone: cellphone,
+          country_phone_code: countryPhoneCode,
+          code: otpState
+        });
+      }
     }
   }, [otpState]);
   (0, _react.useEffect)(function () {
-    var _checkPhoneCodeState$2;
+    var _checkPhoneCodeState$2, _checkPhoneCodeState$4;
 
     if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$2 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$2 !== void 0 && _checkPhoneCodeState$2.error) {
       var _checkPhoneCodeState$3;
@@ -384,8 +424,22 @@ var LoginFormUI = function LoginFormUI(props) {
         open: true,
         content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$3 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$3 === void 0 ? void 0 : _checkPhoneCodeState$3.result) || [t('ERROR', 'Error')]
       });
-    } else resetOtpLeftTime();
+    } else if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$4 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$4 !== void 0 && _checkPhoneCodeState$4.result) {
+      setAlertState({
+        open: true,
+        content: t('CODE_SENT', 'The code has been sent')
+      });
+      resetOtpLeftTime();
+    }
   }, [checkPhoneCodeState]);
+  (0, _react.useEffect)(function () {
+    if (otpLeftTime === 0) {
+      setAlertState({
+        open: true,
+        content: t('TIME_IS_UP_PLEASE_RESEND_CODE', 'Time is up. Please resend code again')
+      });
+    }
+  }, [otpLeftTime]);
   (0, _react.useEffect)(function () {
     var _verifyPhoneState$res2;
 
@@ -446,7 +500,19 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     active: loginTab === 'cellphone',
     borderBottom: loginTab === 'cellphone'
-  }, t('BY_PHONE', 'by Phone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, t('BY_PHONE', 'by Phone')), useLoginOtpEmail && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return handleChangeOtpType('email');
+    },
+    active: isOtpEmail,
+    borderBottom: isOtpEmail
+  }, t('BY_OTP_EMAIL', 'by Otp Email')), useLoginOtpCellphone && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return handleChangeOtpType('cellphone');
+    },
+    active: isOtpCellphone,
+    borderBottom: isOtpCellphone
+  }, t('BY_OTP_CELLPHONE', 'by Otp Cellphone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup
   }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
@@ -470,7 +536,7 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     autoComplete: "off",
     autoCapitalize: "off"
-  }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowInRight, null))), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors = formMethods.errors) === null || _formMethods$errors === void 0 ? void 0 : (_formMethods$errors$e = _formMethods$errors.email) === null || _formMethods$errors$e === void 0 ? void 0 : _formMethods$errors$e.type) === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors2 = formMethods.errors) === null || _formMethods$errors2 === void 0 ? void 0 : (_formMethods$errors2$ = _formMethods$errors2.email) === null || _formMethods$errors2$ === void 0 ? void 0 : _formMethods$errors2$.message, " *"), ((_formMethods$errors3 = formMethods.errors) === null || _formMethods$errors3 === void 0 ? void 0 : (_formMethods$errors3$ = _formMethods$errors3.email) === null || _formMethods$errors3$ === void 0 ? void 0 : _formMethods$errors3$.type) === 'pattern' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowInRight, null))), (useLoginByEmail && loginTab === 'email' || loginTab === 'otp' && otpType === 'email') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors = formMethods.errors) === null || _formMethods$errors === void 0 ? void 0 : (_formMethods$errors$e = _formMethods$errors.email) === null || _formMethods$errors$e === void 0 ? void 0 : _formMethods$errors$e.type) === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors2 = formMethods.errors) === null || _formMethods$errors2 === void 0 ? void 0 : (_formMethods$errors2$ = _formMethods$errors2.email) === null || _formMethods$errors2$ === void 0 ? void 0 : _formMethods$errors2$.message, " *"), ((_formMethods$errors3 = formMethods.errors) === null || _formMethods$errors3 === void 0 ? void 0 : (_formMethods$errors3$ = _formMethods$errors3.email) === null || _formMethods$errors3$ === void 0 ? void 0 : _formMethods$errors3$.type) === 'pattern' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "email",
     name: "email",
     "aria-label": "email",
@@ -482,14 +548,12 @@ var LoginFormUI = function LoginFormUI(props) {
     onChange: handleChangeInputEmail,
     autoComplete: "off",
     isError: (_formMethods$errors4 = formMethods.errors) === null || _formMethods$errors4 === void 0 ? void 0 : _formMethods$errors4.email
-  }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null)))), useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors5 = formMethods.errors) === null || _formMethods$errors5 === void 0 ? void 0 : _formMethods$errors5.cellphone) && !(credentials !== null && credentials !== void 0 && credentials.cellphone) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors6 = formMethods.errors) === null || _formMethods$errors6 === void 0 ? void 0 : (_formMethods$errors6$ = _formMethods$errors6.cellphone) === null || _formMethods$errors6$ === void 0 ? void 0 : _formMethods$errors6$.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors7 = formMethods.errors) === null || _formMethods$errors7 === void 0 ? void 0 : (_formMethods$errors7$ = _formMethods$errors7.cellphone) === null || _formMethods$errors7$ === void 0 ? void 0 : _formMethods$errors7$.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null)))), (useLoginByCellphone && loginTab === 'cellphone' || loginTab === 'otp' && otpType === 'cellphone') && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors5 = formMethods.errors) === null || _formMethods$errors5 === void 0 ? void 0 : _formMethods$errors5.cellphone) && !(credentials !== null && credentials !== void 0 && credentials.cellphone) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors6 = formMethods.errors) === null || _formMethods$errors6 === void 0 ? void 0 : (_formMethods$errors6$ = _formMethods$errors6.cellphone) === null || _formMethods$errors6$ === void 0 ? void 0 : _formMethods$errors6$.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors7 = formMethods.errors) === null || _formMethods$errors7 === void 0 ? void 0 : (_formMethods$errors7$ = _formMethods$errors7.cellphone) === null || _formMethods$errors7$ === void 0 ? void 0 : _formMethods$errors7$.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     value: credentials === null || credentials === void 0 ? void 0 : credentials.cellphone,
     setValue: handleChangePhoneNumber,
     handleIsValid: function handleIsValid() {},
     isError: ((_formMethods$errors8 = formMethods.errors) === null || _formMethods$errors8 === void 0 ? void 0 : _formMethods$errors8.cellphone) && !(credentials !== null && credentials !== void 0 && credentials.cellphone)
-  })), !(verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.loading) && willVerifyOtpState && !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CountdownTimer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _utils.formatSeconds)(otpLeftTime)), /*#__PURE__*/_react.default.createElement("span", {
-    onClick: handleSendOtp
-  }, t('RESEND_AGAIN', 'Resend again'), "?")), /*#__PURE__*/_react.default.createElement(_styles.OtpWrapper, null, /*#__PURE__*/_react.default.createElement(_reactOtpInput.default, {
+  })), !(verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.loading) && willVerifyOtpState && !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CountdownTimer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _utils.formatSeconds)(otpLeftTime))), /*#__PURE__*/_react.default.createElement(_styles.OtpWrapper, null, /*#__PURE__*/_react.default.createElement(_reactOtpInput.default, {
     value: otpState,
     onChange: function onChange(otp) {
       return setOtpState(otp);
@@ -497,10 +561,13 @@ var LoginFormUI = function LoginFormUI(props) {
     numInputs: numOtpInputs,
     containerStyle: "otp-container",
     inputStyle: "otp-input",
-    placeholder: "0000",
+    placeholder: otpPlaceholder,
     isInputNum: true,
     shouldAutoFocus: true
-  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ResendCode, {
+    disabled: otpLeftTime > 520,
+    onClick: handleSendOtp
+  }, t('RESEND_AGAIN', 'Resend again'), "?"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "button",
     color: "secundary",
     disabled: formState.loading,
@@ -512,7 +579,7 @@ var LoginFormUI = function LoginFormUI(props) {
     style: {
       height: 160
     }
-  }), !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors9 = formMethods.errors) === null || _formMethods$errors9 === void 0 ? void 0 : _formMethods$errors9.password) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors10 = formMethods.errors) === null || _formMethods$errors10 === void 0 ? void 0 : (_formMethods$errors11 = _formMethods$errors10.password) === null || _formMethods$errors11 === void 0 ? void 0 : _formMethods$errors11.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors12 = formMethods.errors) === null || _formMethods$errors12 === void 0 ? void 0 : (_formMethods$errors13 = _formMethods$errors12.password) === null || _formMethods$errors13 === void 0 ? void 0 : _formMethods$errors13.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), !loginWithOtpState && loginTab !== 'otp' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors9 = formMethods.errors) === null || _formMethods$errors9 === void 0 ? void 0 : _formMethods$errors9.password) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors10 = formMethods.errors) === null || _formMethods$errors10 === void 0 ? void 0 : (_formMethods$errors11 = _formMethods$errors10.password) === null || _formMethods$errors11 === void 0 ? void 0 : _formMethods$errors11.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors12 = formMethods.errors) === null || _formMethods$errors12 === void 0 ? void 0 : (_formMethods$errors13 = _formMethods$errors12.password) === null || _formMethods$errors13 === void 0 ? void 0 : _formMethods$errors13.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: !passwordSee ? 'password' : 'text',
     name: "password",
     "aria-label": "password",
@@ -534,7 +601,7 @@ var LoginFormUI = function LoginFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }), !loginWithOtpState && loginTab !== 'otp' && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
     handleReCaptcha: handleReCaptcha
@@ -542,7 +609,7 @@ var LoginFormUI = function LoginFormUI(props) {
     color: "primary",
     onClick: formMethods.handleSubmit(onSubmit),
     disabled: formState.loading
-  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : loginWithOtpState ? t('GET_VERIFY_CODE', 'Get verify code') : t('LOGIN', 'Login')), loginWithOtpState && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : loginWithOtpState || loginTab === 'otp' ? t('GET_VERIFY_CODE', 'Get verify code') : t('LOGIN', 'Login')), loginWithOtpState && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "button",
     color: "secundary",
     disabled: formState.loading,
