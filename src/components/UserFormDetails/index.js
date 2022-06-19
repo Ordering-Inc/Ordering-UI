@@ -11,6 +11,7 @@ import { Button } from '../../styles/Buttons'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import { Alert } from '../Confirm'
 import { sortInputFields } from '../../utils'
+import { useTheme } from 'styled-components'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -31,7 +32,7 @@ export const UserFormDetailsUI = (props) => {
 
   const formMethods = useForm()
   const [, t] = useLanguage()
-
+  const theme = useTheme()
   const [{ user: userSession }] = useSession()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
@@ -50,6 +51,8 @@ export const UserFormDetailsUI = (props) => {
   }
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const showCustomerCellphone = !theme.layouts?.profile?.components?.cellphone?.hidden
+  const showCustomerPassword = !theme.layouts?.profile?.components?.password?.hidden
 
   const setUserCellPhone = (isEdit = false) => {
     if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
@@ -155,6 +158,10 @@ export const UserFormDetailsUI = (props) => {
     }
   }
 
+  const showFieldWithTheme = (name) => {
+    return !theme.layouts?.profile?.components?.[name]?.hidden
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -232,7 +239,7 @@ export const UserFormDetailsUI = (props) => {
                 <BeforeMidComponents key={i} {...props} />))
             }
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
-              showField && showField(field.code) && (
+              showField && showField(field.code) && showFieldWithTheme(field.code) && (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
                     <Input
@@ -279,7 +286,7 @@ export const UserFormDetailsUI = (props) => {
                 </React.Fragment>
               )
             )}
-            {!!showInputPhoneNumber && (
+            {!!showInputPhoneNumber && showCustomerCellphone && (
               <InputPhoneNumber
                 user={user}
                 value={userPhoneNumber}
@@ -288,7 +295,7 @@ export const UserFormDetailsUI = (props) => {
                 disabled={!isEdit}
               />
             )}
-            {!isCheckout && (
+            {!isCheckout && showCustomerPassword && (
               <Input
                 type='password'
                 name='password'
