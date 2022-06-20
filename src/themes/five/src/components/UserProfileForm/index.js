@@ -9,6 +9,7 @@ import {
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
+import { UserFormDetailsUI as UserFormDetailsOldUI } from '../../../../../components/UserFormDetails'
 import { Modal } from '../Modal'
 import { VerifyCodeForm } from '../VerifyCodeForm'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
@@ -60,6 +61,7 @@ const UserProfileFormUI = (props) => {
 
   const showCustomerPicture = !theme.layouts?.profile?.components?.picture?.hidden
   const showAddressList = !theme.layouts?.profile?.components?.address_list?.hidden
+  const userFormLayoutOld = theme.layouts?.profile?.components?.layout?.position === 'old'
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -197,12 +199,22 @@ const UserProfileFormUI = (props) => {
           )}
           <SideForm className='user-form'>
             <WrapperForm>
-              <UserFormDetailsUI
-                {...props}
-                onCancel={toggleEditState}
-                isHiddenAddress={isHiddenAddress}
-                setWillVerifyOtpState={setWillVerifyOtpState}
-              />
+              {userFormLayoutOld ? (
+                <UserFormDetailsOldUI
+                  {...props}
+                  onCancel={toggleEditState}
+                  isOriginalLayout
+                  isHiddenAddress={isHiddenAddress}
+                  isOldLayout
+                />
+              ) : (
+                <UserFormDetailsUI
+                  {...props}
+                  onCancel={toggleEditState}
+                  isHiddenAddress={isHiddenAddress}
+                  setWillVerifyOtpState={setWillVerifyOtpState}
+                />
+              )}
             </WrapperForm>
           </SideForm>
         </UserProfileContainer>

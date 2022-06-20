@@ -27,7 +27,8 @@ export const UserFormDetailsUI = (props) => {
     handleButtonUpdateClick,
     isCheckout,
     userData,
-    isCustomerMode
+    isCustomerMode,
+    isOriginalLayout
   } = props
 
   const formMethods = useForm()
@@ -325,7 +326,7 @@ export const UserFormDetailsUI = (props) => {
                 <MidComponent key={i} {...props} />))
             }
             <ActionsForm>
-              {onCancel && (
+              {onCancel && !isOriginalLayout && (
                 <Button
                   outline
                   type='button'

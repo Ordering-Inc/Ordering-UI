@@ -9,6 +9,7 @@ import {
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
+import { UserFormDetailsUI as UserFormDetailsFiveUI } from '../../themes/five/src/components/UserFormDetails'
 import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 
@@ -59,7 +60,7 @@ const UserProfileFormUI = (props) => {
   const showCustomerEmail = !theme.layouts?.profile?.components?.email?.hidden
   const showCustomerCellphone = !theme.layouts?.profile?.components?.cellphone?.hidden
   const showAddressList = !theme.layouts?.profile?.components?.address_list?.hidden
-
+  const userFormLayoutOriginal = theme.layouts?.profile?.components?.layout?.position === 'original'
   const showEditButton = showCustomerName || showCustomerLastName || showCustomerEmail || showCustomerCellphone
 
   const handleFiles = (files) => {
@@ -180,12 +181,22 @@ const UserProfileFormUI = (props) => {
               )
             ) : (
               <WrapperForm>
-                <UserFormDetailsUI
-                  {...props}
-                  onCancel={toggleEditState}
-                  onCloseProfile={() => setEdit(false)}
-                  isHiddenAddress={isHiddenAddress}
-                />
+                {userFormLayoutOriginal ? (
+                  <UserFormDetailsFiveUI
+                    {...props}
+                    onCancel={toggleEditState}
+                    onCloseProfile={() => setEdit(false)}
+                    isHiddenAddress={isHiddenAddress}
+                    isOldLayout
+                  />
+                ) : (
+                  <UserFormDetailsUI
+                    {...props}
+                    onCancel={toggleEditState}
+                    onCloseProfile={() => setEdit(false)}
+                    isHiddenAddress={isHiddenAddress}
+                  />
+                )}
               </WrapperForm>
             )}
 
