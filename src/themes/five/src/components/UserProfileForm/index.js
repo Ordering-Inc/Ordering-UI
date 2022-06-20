@@ -61,7 +61,7 @@ const UserProfileFormUI = (props) => {
 
   const showCustomerPicture = !theme.layouts?.profile?.components?.picture?.hidden
   const showAddressList = !theme.layouts?.profile?.components?.address_list?.hidden
-  const userFormLayoutOld = theme.layouts?.profile?.components?.layout?.position === 'old'
+  const userFormLayoutRow = theme.layouts?.profile?.components?.layout?.position === 'row'
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -199,7 +199,7 @@ const UserProfileFormUI = (props) => {
           )}
           <SideForm className='user-form'>
             <WrapperForm>
-              {userFormLayoutOld ? (
+              {userFormLayoutRow ? (
                 <UserFormDetailsOldUI
                   {...props}
                   onCancel={toggleEditState}
