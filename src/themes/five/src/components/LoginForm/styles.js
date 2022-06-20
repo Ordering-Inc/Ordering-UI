@@ -355,3 +355,11 @@ export const HeroSide = styled(Side)`
     }
   }
 `
+
+export const ResendCode = styled.span`
+  color: ${props => props.disabled ? props.theme.colors.disabled : props.theme.colors.primary};
+  font-size: 24px;
+  align-self: center;
+  margin-bottom: 10px;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+`
