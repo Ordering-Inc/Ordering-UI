@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Select } from '../../styles/Select'
-import { PlaceSpot as PlaceSpotController, useLanguage, useOrder } from 'ordering-components'
+import {
+  // PlaceSpot as PlaceSpotController,
+  useLanguage,
+  useOrder
+} from 'ordering-components'
+import { PlaceSpot as PlaceSpotController } from './test'
 import { PlaceGroupContainer, PlaceSpotContainer, Title, ButtonWrapper } from './styles'
 import Skeleton from 'react-loading-skeleton'
-import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
 
 const PlaceSpotUI = (props) => {
   const {
     cart,
+    orderTypes,
     placesState,
     handleChangePlace,
     onClose,
@@ -19,7 +24,7 @@ const PlaceSpotUI = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [placeGroupSelected, setPlaceGroupSelected] = useState(null)
-  const selectYourSpotString = orderState.options?.type === 3 ? t('SELECT_YOUR_TABLE', 'Select your table') : t('SELECT_YOUR_SPOT', 'Select your spot')
+  const selectYourSpotString = placeGroupSelected?.name === 'Tables' ? t('SELECT_YOUR_TABLE', 'Select your table') : t('SELECT_YOUR_SPOT', 'Select your spot')
 
   const getPlacesGroups = () => {
     const groups = placesState.placeGroups?.filter(group => group?.enabled && placesState?.places?.find(place => place?.enabled && place?.place_group_id === group?.id))
@@ -51,13 +56,7 @@ const PlaceSpotUI = (props) => {
   }, [placesState])
 
   return (
-    <PlaceSpotContainer isCheckout={isCheckout}>
-      {placesState.error && !placesState?.loading && (
-        <NotFoundSource
-          content={t('ERROR_FETCHING_PLACES', 'Error fetching places')}
-          id='not-found-source'
-        />
-      )}
+    <PlaceSpotContainer isCheckout={isCheckout} style={props.containerStyle}>
       {placesState?.loading && (
         <>
           <PlaceGroupContainer>
@@ -73,26 +72,41 @@ const PlaceSpotUI = (props) => {
       {!(placesState.error || placesState?.placeGroups?.length === 0) && !placesState?.loading && (
         <>
           <PlaceGroupContainer>
-            <Title>{t('PLACE_GROUP', 'Place group')}</Title>
-            <Select
-              isHomeStyle
-              placeholder={t('PLACE_GROUP', 'Place group')}
-              options={getPlacesGroups()}
-              onChange={(group) => setPlaceGroupSelected(group)}
-              defaultValue={placeGroupSelected ?? cart?.place}
-              disableOneOption
-            />
+            <Title>
+              {props.isSelectDisabled ? (
+                t('PLACE_GROUP', 'Place group')
+              ) : (
+                orderTypes[orderState?.options?.type]
+              )}
+            </Title>
+            {props.isSelectDisabled ? (
+              <div>
+                {placeGroupSelected?.name} - {placesState?.places?.find(place => place?.id === cart?.place_id)?.name}
+              </div>
+            ) : (
+              <Select
+                isHomeStyle={!props.isCancelHomeStyle}
+                isDisabled={props.isSelectDisabled}
+                options={getPlacesGroups()}
+                defaultValue={placeGroupSelected ?? cart?.place}
+                placeholder={t('PLACE_GROUP', 'Place group')}
+                isOneOption={getPlacesGroups()?.length === 1}
+                disableOneOption={getPlacesGroups()?.length > 1 || props.isSelectDisabled}
+                onChange={(group) => setPlaceGroupSelected(group)}
+              />
+            )}
           </PlaceGroupContainer>
-          {placeGroupSelected && (
+          {placeGroupSelected && !props.isSelectDisabled && (
             <div>
               <Title>{selectYourSpotString}</Title>
               <Select
-                isHomeStyle
-                placeholder={selectYourSpotString}
-                options={getPlaces()}
-                onChange={(place) => handleChangePlace(place)}
-                defaultValue={placesState?.places?.find(place => place?.id === cart?.place_id)}
                 disableOneOption
+                options={getPlaces()}
+                isHomeStyle={!props.isCancelHomeStyle}
+                isDisabled={props.isSelectDisabled}
+                placeholder={selectYourSpotString}
+                defaultValue={placesState?.places?.find(place => place?.id === cart?.place_id)}
+                onChange={(place) => handleChangePlace(place, props.isFetchOrder)}
               />
             </div>
           )}
@@ -114,9 +128,18 @@ const PlaceSpotUI = (props) => {
 }
 
 export const PlaceSpot = (props) => {
+  const [, t] = useLanguage()
+
   const placeSpotProps = {
     ...props,
-    UIComponent: PlaceSpotUI
+    UIComponent: PlaceSpotUI,
+    orderTypes: {
+      1: t('DELIVERY', 'Delivery'),
+      2: t('PICKUP', 'Pickup'),
+      3: t('EAT_IN', 'Eat in'),
+      4: t('CURBSIDE', 'Curbside'),
+      5: t('DRIVE_THRU', 'Drive thru')
+    }
   }
 
   return <PlaceSpotController {...placeSpotProps} />
