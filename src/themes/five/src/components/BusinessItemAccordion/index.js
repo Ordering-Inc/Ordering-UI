@@ -58,10 +58,8 @@ export const BusinessItemAccordion = (props) => {
   const changeStore = useRef(null)
 
   const viewString = isStore ? 'business_view' : 'header'
-  const logo = theme?.layouts?.[viewString]?.components?.cart?.components?.business?.logo
-  const time = theme?.layouts?.[viewString]?.components?.cart?.components?.business?.time
-  const isHideBusinessLogo = logo?.time
-  const isHideBusinessTime = time?.hidden
+  const showBusinessLogo = !theme?.layouts?.[viewString]?.components?.cart?.components?.business?.components?.logo?.hidden
+  const showBusinessTime = !theme?.layouts?.[viewString]?.components?.cart?.components?.business?.components?.time?.hidden
 
   const toggleAccordion = (e) => {
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target) || changeStore.current?.contains(e?.target)
@@ -143,14 +141,14 @@ export const BusinessItemAccordion = (props) => {
               onClick={(e) => toggleAccordion(e)}
             >
               <BusinessInfo>
-                {!isHideBusinessLogo && (
+                {!showBusinessLogo && (
                   <WrapperBusinessLogo>
                     <BusinessLogo bgimage={business?.logo || theme.images?.dummies?.businessLogo} />
                   </WrapperBusinessLogo>
                 )}
                 <ContentInfo className='info' isStore={isStore}>
                   <h2>{business?.name}</h2>
-                  {!isHideBusinessTime && (
+                  {!showBusinessTime && (
                     <TimeContainer>
                       {orderState?.options?.type === 1 ? (
                         <span>
