@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressListUI = function AddressListUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts$profil4, _theme$layouts$profil5, _theme$layouts2, _theme$layouts2$profi, _theme$layouts2$profi2, _theme$layouts2$profi3, _theme$layouts2$profi4, _theme$layouts2$profi5, _theme$layouts3, _theme$layouts3$profi, _theme$layouts3$profi2, _theme$layouts3$profi3, _theme$layouts3$profi4, _theme$layouts3$profi5, _theme$layouts4, _theme$layouts4$profi, _theme$layouts4$profi2, _theme$layouts4$profi3, _theme$layouts4$profi4, _theme$layouts4$profi5, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var actionStatus = props.actionStatus,
       addressList = props.addressList,
@@ -135,6 +135,10 @@ var AddressListUI = function AddressListUI(props) {
       return address.address === obj.address && address.address_notes === obj.address_notes && address.zipcode === obj.zipcode && address.internal_number === obj.internal_number;
     });
   }) || [];
+  var showAddress = !((_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$profil = _theme$layouts.profile) !== null && _theme$layouts$profil !== void 0 && (_theme$layouts$profil2 = _theme$layouts$profil.components) !== null && _theme$layouts$profil2 !== void 0 && (_theme$layouts$profil3 = _theme$layouts$profil2.address_list) !== null && _theme$layouts$profil3 !== void 0 && (_theme$layouts$profil4 = _theme$layouts$profil3.components) !== null && _theme$layouts$profil4 !== void 0 && (_theme$layouts$profil5 = _theme$layouts$profil4.address) !== null && _theme$layouts$profil5 !== void 0 && _theme$layouts$profil5.hidden);
+  var showIcons = !((_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$profi = _theme$layouts2.profile) !== null && _theme$layouts2$profi !== void 0 && (_theme$layouts2$profi2 = _theme$layouts2$profi.components) !== null && _theme$layouts2$profi2 !== void 0 && (_theme$layouts2$profi3 = _theme$layouts2$profi2.address_list) !== null && _theme$layouts2$profi3 !== void 0 && (_theme$layouts2$profi4 = _theme$layouts2$profi3.components) !== null && _theme$layouts2$profi4 !== void 0 && (_theme$layouts2$profi5 = _theme$layouts2$profi4.icons) !== null && _theme$layouts2$profi5 !== void 0 && _theme$layouts2$profi5.hidden);
+  var showZipcode = !((_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$profi = _theme$layouts3.profile) !== null && _theme$layouts3$profi !== void 0 && (_theme$layouts3$profi2 = _theme$layouts3$profi.components) !== null && _theme$layouts3$profi2 !== void 0 && (_theme$layouts3$profi3 = _theme$layouts3$profi2.address_list) !== null && _theme$layouts3$profi3 !== void 0 && (_theme$layouts3$profi4 = _theme$layouts3$profi3.components) !== null && _theme$layouts3$profi4 !== void 0 && (_theme$layouts3$profi5 = _theme$layouts3$profi4.zipcode) !== null && _theme$layouts3$profi5 !== void 0 && _theme$layouts3$profi5.hidden);
+  var showInternalNumber = !((_theme$layouts4 = theme.layouts) !== null && _theme$layouts4 !== void 0 && (_theme$layouts4$profi = _theme$layouts4.profile) !== null && _theme$layouts4$profi !== void 0 && (_theme$layouts4$profi2 = _theme$layouts4$profi.components) !== null && _theme$layouts4$profi2 !== void 0 && (_theme$layouts4$profi3 = _theme$layouts4$profi2.address_list) !== null && _theme$layouts4$profi3 !== void 0 && (_theme$layouts4$profi4 = _theme$layouts4$profi3.components) !== null && _theme$layouts4$profi4 !== void 0 && (_theme$layouts4$profi5 = _theme$layouts4$profi4.internal_number) !== null && _theme$layouts4$profi5 !== void 0 && _theme$layouts4$profi5.hidden);
 
   var openAddress = function openAddress(address) {
     setCurAddress(address);
@@ -331,11 +335,11 @@ var AddressListUI = function AddressListUI(props) {
         className: "radio"
       }, checkAddress(address) ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, {
         className: "address-checked"
-      }) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
+      }) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), showIcons && /*#__PURE__*/_react.default.createElement("span", {
         className: checkAddress(address) ? 'selected-tag tag' : 'tag'
-      }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
+      }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), (showAddress || showInternalNumber || showZipcode) && /*#__PURE__*/_react.default.createElement("div", {
         className: "address"
-      }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
+      }, showAddress && /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, showInternalNumber && address.internal_number, " ", showZipcode && address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
         className: "form"
       }, /*#__PURE__*/_react.default.createElement("a", {
         className: actionStatus.loading ? 'disabled' : '',

@@ -17,7 +17,11 @@ var _BsPerson = _interopRequireDefault(require("@meronex/icons/bs/BsPerson"));
 
 var _AiOutlineUnorderedList = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineUnorderedList"));
 
+var _FaAddressBook = _interopRequireDefault(require("@meronex/icons/fa/FaAddressBook"));
+
 var _orderingComponents = require("ordering-components");
+
+var _styledComponents = require("styled-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,6 +42,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProfileOptions = function ProfileOptions(_ref) {
+  var _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts$profil4, _theme$layouts$profil5;
+
   var value = _ref.value;
 
   var _useState = (0, _react.useState)(value),
@@ -51,6 +57,9 @@ var ProfileOptions = function ProfileOptions(_ref) {
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
+
+  var theme = (0, _styledComponents.useTheme)();
+  var showAddressListTab = ((_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$profil = _theme$layouts.profile) === null || _theme$layouts$profil === void 0 ? void 0 : (_theme$layouts$profil2 = _theme$layouts$profil.components) === null || _theme$layouts$profil2 === void 0 ? void 0 : (_theme$layouts$profil3 = _theme$layouts$profil2.address_list) === null || _theme$layouts$profil3 === void 0 ? void 0 : (_theme$layouts$profil4 = _theme$layouts$profil3.components) === null || _theme$layouts$profil4 === void 0 ? void 0 : (_theme$layouts$profil5 = _theme$layouts$profil4.layout) === null || _theme$layouts$profil5 === void 0 ? void 0 : _theme$layouts$profil5.position) === 'new_page';
 
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
@@ -66,7 +75,15 @@ var ProfileOptions = function ProfileOptions(_ref) {
         page: 'profile'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsPerson.default, null), " ", t('MY_ACCOUNT', 'My Account'))), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPerson.default, null), " ", t('MY_ACCOUNT', 'My Account'))), showAddressListTab && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    active: tabValue === 'addresses'
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'addresses'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_FaAddressBook.default, null), " ", t('MY_ADDRESSES', 'My Addresses'))), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     active: tabValue === 'orders'
   }, /*#__PURE__*/_react.default.createElement("a", {
     onClick: function onClick() {

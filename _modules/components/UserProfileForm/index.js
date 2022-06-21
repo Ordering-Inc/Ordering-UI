@@ -15,6 +15,8 @@ var _orderingComponents = require("ordering-components");
 
 var _UserFormDetails = require("../UserFormDetails");
 
+var _UserFormDetails2 = require("../../themes/five/src/components/UserFormDetails");
+
 var _AddressList = require("../AddressList");
 
 var _Confirm = require("../Confirm");
@@ -30,6 +32,8 @@ var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _styles = require("./styles");
+
+var _styledComponents = require("styled-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserProfileFormUI = function UserProfileFormUI(props) {
-  var _formState$changes2, _props$beforeElements, _props$beforeComponen, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result, _formState$changes6, _formState$changes7, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts2, _theme$layouts2$profi, _theme$layouts2$profi2, _theme$layouts2$profi3, _theme$layouts3, _theme$layouts3$profi, _theme$layouts3$profi2, _theme$layouts3$profi3, _theme$layouts4, _theme$layouts4$profi, _theme$layouts4$profi2, _theme$layouts4$profi3, _theme$layouts5, _theme$layouts5$profi, _theme$layouts5$profi2, _theme$layouts5$profi3, _theme$layouts6, _theme$layouts6$profi, _theme$layouts6$profi2, _theme$layouts6$profi3, _theme$layouts7, _theme$layouts7$profi, _theme$layouts7$profi2, _theme$layouts7$profi3, _formState$changes2, _props$beforeElements, _props$beforeComponen, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result, _formState$changes6, _formState$changes7, _props$afterComponent, _props$afterElements;
 
   var userData = props.userData,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
@@ -90,6 +94,15 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       setAlertState = _useState4[1];
 
   var inputRef = (0, _react.useRef)(null);
+  var theme = (0, _styledComponents.useTheme)();
+  var showCustomerPicture = !((_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$profil = _theme$layouts.profile) !== null && _theme$layouts$profil !== void 0 && (_theme$layouts$profil2 = _theme$layouts$profil.components) !== null && _theme$layouts$profil2 !== void 0 && (_theme$layouts$profil3 = _theme$layouts$profil2.picture) !== null && _theme$layouts$profil3 !== void 0 && _theme$layouts$profil3.hidden);
+  var showCustomerName = !((_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$profi = _theme$layouts2.profile) !== null && _theme$layouts2$profi !== void 0 && (_theme$layouts2$profi2 = _theme$layouts2$profi.components) !== null && _theme$layouts2$profi2 !== void 0 && (_theme$layouts2$profi3 = _theme$layouts2$profi2.name) !== null && _theme$layouts2$profi3 !== void 0 && _theme$layouts2$profi3.hidden);
+  var showCustomerLastName = !((_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$profi = _theme$layouts3.profile) !== null && _theme$layouts3$profi !== void 0 && (_theme$layouts3$profi2 = _theme$layouts3$profi.components) !== null && _theme$layouts3$profi2 !== void 0 && (_theme$layouts3$profi3 = _theme$layouts3$profi2.last_name) !== null && _theme$layouts3$profi3 !== void 0 && _theme$layouts3$profi3.hidden);
+  var showCustomerEmail = !((_theme$layouts4 = theme.layouts) !== null && _theme$layouts4 !== void 0 && (_theme$layouts4$profi = _theme$layouts4.profile) !== null && _theme$layouts4$profi !== void 0 && (_theme$layouts4$profi2 = _theme$layouts4$profi.components) !== null && _theme$layouts4$profi2 !== void 0 && (_theme$layouts4$profi3 = _theme$layouts4$profi2.email) !== null && _theme$layouts4$profi3 !== void 0 && _theme$layouts4$profi3.hidden);
+  var showCustomerCellphone = !((_theme$layouts5 = theme.layouts) !== null && _theme$layouts5 !== void 0 && (_theme$layouts5$profi = _theme$layouts5.profile) !== null && _theme$layouts5$profi !== void 0 && (_theme$layouts5$profi2 = _theme$layouts5$profi.components) !== null && _theme$layouts5$profi2 !== void 0 && (_theme$layouts5$profi3 = _theme$layouts5$profi2.cellphone) !== null && _theme$layouts5$profi3 !== void 0 && _theme$layouts5$profi3.hidden);
+  var showAddressList = !((_theme$layouts6 = theme.layouts) !== null && _theme$layouts6 !== void 0 && (_theme$layouts6$profi = _theme$layouts6.profile) !== null && _theme$layouts6$profi !== void 0 && (_theme$layouts6$profi2 = _theme$layouts6$profi.components) !== null && _theme$layouts6$profi2 !== void 0 && (_theme$layouts6$profi3 = _theme$layouts6$profi2.address_list) !== null && _theme$layouts6$profi3 !== void 0 && _theme$layouts6$profi3.hidden);
+  var userFormLayoutColumn = ((_theme$layouts7 = theme.layouts) === null || _theme$layouts7 === void 0 ? void 0 : (_theme$layouts7$profi = _theme$layouts7.profile) === null || _theme$layouts7$profi === void 0 ? void 0 : (_theme$layouts7$profi2 = _theme$layouts7$profi.components) === null || _theme$layouts7$profi2 === void 0 ? void 0 : (_theme$layouts7$profi3 = _theme$layouts7$profi2.layout) === null || _theme$layouts7$profi3 === void 0 ? void 0 : _theme$layouts7$profi3.position) === 'column';
+  var showEditButton = showCustomerName || showCustomerLastName || showCustomerEmail || showCustomerCellphone;
 
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
@@ -159,7 +172,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     value: "account"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
     mbottom: isHiddenAddress && 25
-  }, /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
+  }, showCustomerPicture && /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
     onClick: function onClick() {
@@ -203,23 +216,30 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
     height: 40
-  })) : /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement("h1", null, (userData === null || userData === void 0 ? void 0 : userData.name) || (user === null || user === void 0 ? void 0 : user.name), " ", (userData === null || userData === void 0 ? void 0 : userData.lastname) || (user === null || user === void 0 ? void 0 : user.lastname)), /*#__PURE__*/_react.default.createElement("p", null, (userData === null || userData === void 0 ? void 0 : userData.email) || user.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement("h1", null, showCustomerName && ((userData === null || userData === void 0 ? void 0 : userData.name) || (user === null || user === void 0 ? void 0 : user.name)), showCustomerLastName && ((userData === null || userData === void 0 ? void 0 : userData.lastname) || (user === null || user === void 0 ? void 0 : user.lastname))), /*#__PURE__*/_react.default.createElement("p", null, showCustomerEmail && ((userData === null || userData === void 0 ? void 0 : userData.email) || user.email)), showCustomerCellphone && ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement("p", {
     style: {
       direction: 'ltr'
     }
-  }, ((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code)) && "+".concat((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code), " "), (userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, ((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code)) && "+".concat((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (user === null || user === void 0 ? void 0 : user.country_phone_code), " "), (userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)), showEditButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     outline: true,
     onClick: function onClick() {
       return toggleEditState(true);
     }
-  }, t('EDIT', 'Edit'))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+  }, t('EDIT', 'Edit'))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, userFormLayoutColumn ? /*#__PURE__*/_react.default.createElement(_UserFormDetails2.UserFormDetailsUI, _extends({}, props, {
+    onCancel: toggleEditState,
+    onCloseProfile: function onCloseProfile() {
+      return setEdit(false);
+    },
+    isHiddenAddress: isHiddenAddress,
+    isOldLayout: true
+  })) : /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
     onCancel: toggleEditState,
     onCloseProfile: function onCloseProfile() {
       return setEdit(false);
     },
     isHiddenAddress: isHiddenAddress
-  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SAVED_PLACES', 'Saved places')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && showAddressList && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SAVED_PLACES', 'Saved places')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     addressList: user === null || user === void 0 ? void 0 : user.addresses
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {

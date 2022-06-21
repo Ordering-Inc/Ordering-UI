@@ -17,6 +17,8 @@ var _reactHookForm = require("react-hook-form");
 
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
+var _styledComponents = require("styled-components");
+
 var _styles = require("./styles");
 
 var _Inputs = require("../../styles/Inputs");
@@ -62,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _formState$result11, _formState$result12, _formState$result12$r, _formState$result12$r2, _formState$result12$r3, _formState$changes$se2, _formState$changes10, _formState$changes10$, _formState$changes10$2, _user$settings2, _user$settings2$notif, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts2, _theme$layouts2$profi, _theme$layouts2$profi2, _theme$layouts2$profi3, _theme$layouts3, _theme$layouts3$profi, _theme$layouts3$profi2, _theme$layouts3$profi3, _theme$layouts4, _theme$layouts4$profi, _theme$layouts4$profi2, _theme$layouts4$profi3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _formState$result11, _formState$result12, _formState$result12$r, _formState$result12$r2, _formState$result12$r3, _formState$changes$se2, _formState$changes10, _formState$changes10$, _formState$changes10$2, _user$settings2, _user$settings2$notif, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var isEdit = props.isEdit,
       formState = props.formState,
@@ -79,7 +81,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       isCustomerMode = props.isCustomerMode,
       setWillVerifyOtpState = props.setWillVerifyOtpState,
       isVerifiedPhone = props.isVerifiedPhone,
-      handleChangePromotions = props.handleChangePromotions;
+      handleChangePromotions = props.handleChangePromotions,
+      isOldLayout = props.isOldLayout;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -89,6 +92,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -118,6 +123,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
 
   var emailInput = (0, _react.useRef)(null);
   var user = userData || userSession;
+  var showCustomerCellphone = !((_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$profil = _theme$layouts.profile) !== null && _theme$layouts$profil !== void 0 && (_theme$layouts$profil2 = _theme$layouts$profil.components) !== null && _theme$layouts$profil2 !== void 0 && (_theme$layouts$profil3 = _theme$layouts$profil2.cellphone) !== null && _theme$layouts$profil3 !== void 0 && _theme$layouts$profil3.hidden);
+  var showCustomerPassword = !((_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$profi = _theme$layouts2.profile) !== null && _theme$layouts2$profi !== void 0 && (_theme$layouts2$profi2 = _theme$layouts2$profi.components) !== null && _theme$layouts2$profi2 !== void 0 && (_theme$layouts2$profi3 = _theme$layouts2$profi2.password) !== null && _theme$layouts2$profi3 !== void 0 && _theme$layouts2$profi3.hidden);
+  var showCustomerPromotions = !((_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$profi = _theme$layouts3.profile) !== null && _theme$layouts3$profi !== void 0 && (_theme$layouts3$profi2 = _theme$layouts3$profi.components) !== null && _theme$layouts3$profi2 !== void 0 && (_theme$layouts3$profi3 = _theme$layouts3$profi2.promotions) !== null && _theme$layouts3$profi3 !== void 0 && _theme$layouts3$profi3.hidden);
+  var showLangauges = !((_theme$layouts4 = theme.layouts) !== null && _theme$layouts4 !== void 0 && (_theme$layouts4$profi = _theme$layouts4.profile) !== null && _theme$layouts4$profi !== void 0 && (_theme$layouts4$profi2 = _theme$layouts4$profi.components) !== null && _theme$layouts4$profi2 !== void 0 && (_theme$layouts4$profi3 = _theme$layouts4$profi2.languages) !== null && _theme$layouts4$profi3 !== void 0 && _theme$layouts4$profi3.hidden);
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -270,6 +279,12 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   };
 
+  var showFieldWithTheme = function showFieldWithTheme(name) {
+    var _theme$layouts5, _theme$layouts5$profi, _theme$layouts5$profi2, _theme$layouts5$profi3;
+
+    return !((_theme$layouts5 = theme.layouts) !== null && _theme$layouts5 !== void 0 && (_theme$layouts5$profi = _theme$layouts5.profile) !== null && _theme$layouts5$profi !== void 0 && (_theme$layouts5$profi2 = _theme$layouts5$profi.components) !== null && _theme$layouts5$profi2 !== void 0 && (_theme$layouts5$profi3 = _theme$layouts5$profi2[name]) !== null && _theme$layouts5$profi3 !== void 0 && _theme$layouts5$profi3.hidden);
+  };
+
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
@@ -363,7 +378,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   }).map(function (field) {
     var _formState$result5, _formState$result6, _ref2, _formState$changes$fi, _formState$result7, _formState$result8, _ref3, _formState$changes$fi2;
 
-    return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+    return showField && showField(field.code) && showFieldWithTheme(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
     }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
@@ -394,13 +409,13 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     })));
-  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && showCustomerCellphone && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
     disabled: !isEdit
-  })), !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  })), !isCheckout && showCustomerPassword && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
     className: "form",
@@ -415,7 +430,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  })), !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.PromotionsWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
+  })), !isCheckout && showCustomerPromotions && /*#__PURE__*/_react.default.createElement(_styles.PromotionsWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
     name: "promotions",
     id: "promotions",
     onChange: function onChange() {
@@ -426,7 +441,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     defaultChecked: formState !== null && formState !== void 0 && (_formState$result11 = formState.result) !== null && _formState$result11 !== void 0 && _formState$result11.result ? !!(formState !== null && formState !== void 0 && (_formState$result12 = formState.result) !== null && _formState$result12 !== void 0 && (_formState$result12$r = _formState$result12.result) !== null && _formState$result12$r !== void 0 && (_formState$result12$r2 = _formState$result12$r.settings) !== null && _formState$result12$r2 !== void 0 && (_formState$result12$r3 = _formState$result12$r2.notification) !== null && _formState$result12$r3 !== void 0 && _formState$result12$r3.newsletter) : !!((_formState$changes$se2 = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : (_formState$changes10$ = _formState$changes10.settings) === null || _formState$changes10$ === void 0 ? void 0 : (_formState$changes10$2 = _formState$changes10$.notification) === null || _formState$changes10$2 === void 0 ? void 0 : _formState$changes10$2.newsletter) !== null && _formState$changes$se2 !== void 0 ? _formState$changes$se2 : user && (user === null || user === void 0 ? void 0 : (_user$settings2 = user.settings) === null || _user$settings2 === void 0 ? void 0 : (_user$settings2$notif = _user$settings2.notification) === null || _user$settings2$notif === void 0 ? void 0 : _user$settings2$notif.newsletter))
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "promotions"
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('RECEIVE_NEWS_EXCLUSIVE_PROMOTIONS', 'Receive newsletters and exclusive promotions')))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('RECEIVE_NEWS_EXCLUSIVE_PROMOTIONS', 'Receive newsletters and exclusive promotions')))), showLangauges && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);
@@ -434,7 +449,14 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, (formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && isEdit || (formState === null || formState === void 0 ? void 0 : formState.loading)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, onCancel && isOldLayout && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    type: "button",
+    onClick: function onClick() {
+      return onCancel(false);
+    },
+    disabled: formState.loading
+  }, t('CANCEL', 'Cancel')), (formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && isEdit || (formState === null || formState === void 0 ? void 0 : formState.loading)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "form-btn",
     color: "primary",
     type: "submit",

@@ -29,6 +29,8 @@ var _Confirm = require("../Confirm");
 
 var _utils = require("../../utils");
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -58,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts2, _theme$layouts2$profi, _theme$layouts2$profi2, _theme$layouts2$profi3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var isEdit = props.isEdit,
       formState = props.formState,
@@ -72,12 +74,15 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       handleButtonUpdateClick = props.handleButtonUpdateClick,
       isCheckout = props.isCheckout,
       userData = props.userData,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      isOriginalLayout = props.isOriginalLayout;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -121,6 +126,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   };
 
   var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+  var showCustomerCellphone = !((_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$profil = _theme$layouts.profile) !== null && _theme$layouts$profil !== void 0 && (_theme$layouts$profil2 = _theme$layouts$profil.components) !== null && _theme$layouts$profil2 !== void 0 && (_theme$layouts$profil3 = _theme$layouts$profil2.cellphone) !== null && _theme$layouts$profil3 !== void 0 && _theme$layouts$profil3.hidden);
+  var showCustomerPassword = !((_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$profi = _theme$layouts2.profile) !== null && _theme$layouts2$profi !== void 0 && (_theme$layouts2$profi2 = _theme$layouts2$profi.components) !== null && _theme$layouts2$profi2 !== void 0 && (_theme$layouts2$profi3 = _theme$layouts2$profi2.password) !== null && _theme$layouts2$profi3 !== void 0 && _theme$layouts2$profi3.hidden);
 
   var setUserCellPhone = function setUserCellPhone() {
     var isEdit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
@@ -251,6 +258,12 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   };
 
+  var showFieldWithTheme = function showFieldWithTheme(name) {
+    var _theme$layouts3, _theme$layouts3$profi, _theme$layouts3$profi2, _theme$layouts3$profi3;
+
+    return !((_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$profi = _theme$layouts3.profile) !== null && _theme$layouts3$profi !== void 0 && (_theme$layouts3$profi2 = _theme$layouts3$profi.components) !== null && _theme$layouts3$profi2 !== void 0 && (_theme$layouts3$profi3 = _theme$layouts3$profi2[name]) !== null && _theme$layouts3$profi3 !== void 0 && _theme$layouts3$profi3.hidden);
+  };
+
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
@@ -335,7 +348,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   }).map(function (field) {
     var _formState$result5, _formState$result6, _ref2, _formState$changes$fi, _formState$result7, _formState$result8, _ref3, _formState$changes$fi2;
 
-    return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+    return showField && showField(field.code) && showFieldWithTheme(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
     }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
@@ -364,13 +377,13 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     }));
-  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  }), !!showInputPhoneNumber && showCustomerCellphone && /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
     disabled: !isEdit
-  }), !isCheckout && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), !isCheckout && showCustomerPassword && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
     className: "form",
@@ -392,7 +405,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, onCancel && !isOriginalLayout && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     type: "button",
     onClick: function onClick() {

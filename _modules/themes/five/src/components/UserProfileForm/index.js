@@ -15,6 +15,8 @@ var _orderingComponents = require("ordering-components");
 
 var _UserFormDetails = require("../UserFormDetails");
 
+var _UserFormDetails2 = require("../../../../../components/UserFormDetails");
+
 var _Modal = require("../Modal");
 
 var _VerifyCodeForm = require("../VerifyCodeForm");
@@ -32,6 +34,8 @@ var _utils = require("../../../../../utils");
 var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
 
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
+
+var _styledComponents = require("styled-components");
 
 var _styles = require("./styles");
 
@@ -62,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserProfileFormUI = function UserProfileFormUI(props) {
-  var _formState$changes5, _checkPhoneCodeState$3, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts2, _theme$layouts2$profi, _theme$layouts2$profi2, _theme$layouts2$profi3, _theme$layouts3, _theme$layouts3$profi, _theme$layouts3$profi2, _theme$layouts3$profi3, _formState$changes5, _checkPhoneCodeState$3, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
 
   var userData = props.userData,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
@@ -81,35 +85,34 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      edit = _useState2[0],
-      setEdit = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      willVerifyOtpState = _useState4[0],
-      setWillVerifyOtpState = _useState4[1];
+      willVerifyOtpState = _useState2[0],
+      setWillVerifyOtpState = _useState2[1];
 
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
       _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
       otpLeftTime = _useCountdownTimer2[0],
       resetOtpLeftTime = _useCountdownTimer2[2];
 
-  var _useState5 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      alertState = _useState6[0],
-      setAlertState = _useState6[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
 
   var inputRef = (0, _react.useRef)(null);
-  console.log(edit);
+  var showCustomerPicture = !((_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$profil = _theme$layouts.profile) !== null && _theme$layouts$profil !== void 0 && (_theme$layouts$profil2 = _theme$layouts$profil.components) !== null && _theme$layouts$profil2 !== void 0 && (_theme$layouts$profil3 = _theme$layouts$profil2.picture) !== null && _theme$layouts$profil3 !== void 0 && _theme$layouts$profil3.hidden);
+  var showAddressList = !((_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$profi = _theme$layouts2.profile) !== null && _theme$layouts2$profi !== void 0 && (_theme$layouts2$profi2 = _theme$layouts2$profi.components) !== null && _theme$layouts2$profi2 !== void 0 && (_theme$layouts2$profi3 = _theme$layouts2$profi2.address_list) !== null && _theme$layouts2$profi3 !== void 0 && _theme$layouts2$profi3.hidden);
+  var userFormLayoutRow = ((_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$profi = _theme$layouts3.profile) === null || _theme$layouts3$profi === void 0 ? void 0 : (_theme$layouts3$profi2 = _theme$layouts3$profi.components) === null || _theme$layouts3$profi2 === void 0 ? void 0 : (_theme$layouts3$profi3 = _theme$layouts3$profi2.layout) === null || _theme$layouts3$profi3 === void 0 ? void 0 : _theme$layouts3$profi3.position) === 'row';
 
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
@@ -138,7 +141,6 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   };
 
   var toggleEditState = function toggleEditState(val) {
-    setEdit(val);
     toggleIsEdit();
 
     if (!val) {
@@ -232,7 +234,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     value: "account"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
     mbottom: isHiddenAddress && 25
-  }, /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
+  }, showCustomerPicture && /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
     onClick: function onClick() {
@@ -264,14 +266,16 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     loading: "lazy"
   })))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null))), /*#__PURE__*/_react.default.createElement(_styles.SideForm, {
     className: "user-form"
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, userFormLayoutRow ? /*#__PURE__*/_react.default.createElement(_UserFormDetails2.UserFormDetailsUI, _extends({}, props, {
     onCancel: toggleEditState,
-    onCloseProfile: function onCloseProfile() {
-      return setEdit(false);
-    },
+    isOriginalLayout: true,
+    isHiddenAddress: isHiddenAddress,
+    isOldLayout: true
+  })) : /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+    onCancel: toggleEditState,
     isHiddenAddress: isHiddenAddress,
     setWillVerifyOtpState: setWillVerifyOtpState
-  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ADDRESSES', 'My Saved places')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+  }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && showAddressList && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ADDRESSES', 'My Saved places')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     addressList: user === null || user === void 0 ? void 0 : user.addresses,
     isProfile: true

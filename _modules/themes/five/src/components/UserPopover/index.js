@@ -23,6 +23,8 @@ var _utils = require("../../../../../utils");
 
 var _AiOutlineMenu = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineMenu"));
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -62,7 +64,7 @@ var optionsDefault = [{
 }];
 
 var UserPopover = function UserPopover(props) {
-  var _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
+  var _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts$profil4, _theme$layouts$profil5, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       isHome = props.isHome,
@@ -86,11 +88,13 @@ var UserPopover = function UserPopover(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
+  var theme = (0, _styledComponents.useTheme)();
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
   var isWalletEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$cash_wallet = configs.cash_wallet) === null || _configs$cash_wallet === void 0 ? void 0 : _configs$cash_wallet.value) === '1' && (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && ((configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1');
   var isPromotionsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off = configs.advanced_offers_module) === null || _configs$advanced_off === void 0 ? void 0 : _configs$advanced_off.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off2 = configs.advanced_offers_module) === null || _configs$advanced_off2 === void 0 ? void 0 : _configs$advanced_off2.value) === true;
+  var isAddressListNewPage = ((_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$profil = _theme$layouts.profile) === null || _theme$layouts$profil === void 0 ? void 0 : (_theme$layouts$profil2 = _theme$layouts$profil.components) === null || _theme$layouts$profil2 === void 0 ? void 0 : (_theme$layouts$profil3 = _theme$layouts$profil2.address_list) === null || _theme$layouts$profil3 === void 0 ? void 0 : (_theme$layouts$profil4 = _theme$layouts$profil3.components) === null || _theme$layouts$profil4 === void 0 ? void 0 : (_theme$layouts$profil5 = _theme$layouts$profil4.layout) === null || _theme$layouts$profil5 === void 0 ? void 0 : _theme$layouts$profil5.position) === 'new_page';
   var extraOptions = [{
     name: 'profile',
     pathname: '/profile',
@@ -127,6 +131,12 @@ var UserPopover = function UserPopover(props) {
     displayName: 'sessions',
     key: 'sessions',
     isActive: true
+  }, {
+    name: 'addresses',
+    pathname: '/profile/addresses',
+    displayName: 'places',
+    key: 'places',
+    isActive: isAddressListNewPage
   }];
   var options = isCustomerMode ? optionsDefault.filter(function (option) {
     return option.name === 'profile';
