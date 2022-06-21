@@ -19,7 +19,7 @@ var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
 var _styles = require("./styles");
 
-var _inputs = require("../../styles/inputs");
+var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../../../../styles/Buttons");
 
@@ -337,7 +337,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
 
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
-    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_inputs.Input, {
+    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.type,
       name: field.code,
@@ -350,7 +350,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         emailInput.current = e;
       },
       autoComplete: "off"
-    }) : /*#__PURE__*/_react.default.createElement(_inputs.Input, {
+    }) : /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.type,
       name: field.code,
@@ -370,7 +370,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
     disabled: !isEdit
-  }), !isCheckout && /*#__PURE__*/_react.default.createElement(_inputs.Input, {
+  }), !isCheckout && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
     className: "form",

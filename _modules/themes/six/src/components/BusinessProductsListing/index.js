@@ -27,8 +27,6 @@ var _PageNotFound = require("../../../../../components/PageNotFound");
 
 var _Cart = require("../../../../../components/Cart");
 
-var _Select = require("../../../../../styles/Select");
-
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
 var _BusinessBasicInformation = require("../BusinessBasicInformation");
@@ -39,11 +37,11 @@ var _BusinessProductsList = require("../BusinessProductsList");
 
 var _ProductForm = require("../ProductForm");
 
-var _SearchBar = require("../SearchBar");
-
 var _CartFullPage = require("../CartFullPage");
 
 var _FlotingStatusBar = require("../FlotingStatusBar");
+
+var _SearchProducts = require("./SearchProducts");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -82,7 +80,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _props$beforeElements, _props$beforeComponen, _currentCart$products, _theme$defaultLanguag7, _businessState$busine, _business$categories, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _business$categories2, _theme$defaultLanguag12, _theme$defaultLanguag13, _currentCart$products2, _currentCart$products3, _currentCart$products4, _business$categories3, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _error$, _theme$defaultLanguag18, _props$afterComponent, _props$afterElements;
+  var _Object$values$find, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _props$beforeElements, _props$beforeComponen, _currentCart$products, _business$categories, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _business$categories2, _theme$defaultLanguag11, _theme$defaultLanguag12, _currentCart$products2, _currentCart$products3, _currentCart$products4, _business$categories3, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _error$, _theme$defaultLanguag17, _props$afterComponent, _props$afterElements;
 
   var errors = props.errors,
       isInitialRender = props.isInitialRender,
@@ -278,32 +276,28 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation
-  })), (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
-    onSearch: handleChangeSearch,
-    search: searchValue,
-    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.SEARCH_PRODUCTS) || 'Search Products'),
-    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended
-  }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    notAsync: true,
-    notReload: true,
-    options: sortByOptions,
-    defaultValue: sortByValue,
+  })), (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchProducts.SearchProducts, {
+    handleChangeSearch: handleChangeSearch,
+    searchValue: searchValue,
+    sortByOptions: sortByOptions,
+    sortByValue: sortByValue,
     onChange: function onChange(val) {
       return handleChangeSortBy && handleChangeSortBy(val);
-    }
+    },
+    businessState: businessState
   })), !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: windowSize.width > 850 ? [{
       id: null,
-      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.ALL) || 'All')
+      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.FEATURED) || 'Featured')
+      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.FEATURED) || 'Featured')
     }] : [{
       id: null,
-      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.ALL) || 'All')
+      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag11 = theme.defaultLanguages) === null || _theme$defaultLanguag11 === void 0 ? void 0 : _theme$defaultLanguag11.FEATURED) || 'Featured')
+      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.FEATURED) || 'Featured')
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
@@ -331,10 +325,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
     categories: [{
       id: null,
-      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag12 = theme.defaultLanguages) === null || _theme$defaultLanguag12 === void 0 ? void 0 : _theme$defaultLanguag12.ALL) || 'All')
+      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag11 = theme.defaultLanguages) === null || _theme$defaultLanguag11 === void 0 ? void 0 : _theme$defaultLanguag11.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag13 = theme.defaultLanguages) === null || _theme$defaultLanguag13 === void 0 ? void 0 : _theme$defaultLanguag13.FEATURED) || 'Featured')
+      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag12 = theme.defaultLanguages) === null || _theme$defaultLanguag12 === void 0 ? void 0 : _theme$defaultLanguag12.FEATURED) || 'Featured')
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
@@ -418,18 +412,18 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     isBusinessLoading: loading,
     errorQuantityProducts: errorQuantityProducts
   })))))), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('NOT_FOUND_BUSINESS_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag14 = theme.defaultLanguages) === null || _theme$defaultLanguag14 === void 0 ? void 0 : _theme$defaultLanguag14.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
-    btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag15 = theme.defaultLanguages) === null || _theme$defaultLanguag15 === void 0 ? void 0 : _theme$defaultLanguag15.SEARCH_REDIRECT) || 'Go to Businesses'),
+    content: t('NOT_FOUND_BUSINESS_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag13 = theme.defaultLanguages) === null || _theme$defaultLanguag13 === void 0 ? void 0 : _theme$defaultLanguag13.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
+    btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag14 = theme.defaultLanguages) === null || _theme$defaultLanguag14 === void 0 ? void 0 : _theme$defaultLanguag14.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: function onClickButton() {
       return handleSearchRedirect();
     }
   }), !loading && !business && location.pathname.includes('/store/') && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_NOT_FOUND_STORE', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ERROR_NOT_FOUND_STORE) || 'Sorry, an error has occurred with business selected.'),
-    btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag17 = theme.defaultLanguages) === null || _theme$defaultLanguag17 === void 0 ? void 0 : _theme$defaultLanguag17.SEARCH_REDIRECT) || 'Go to Businesses'),
+    content: t('ERROR_NOT_FOUND_STORE', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag15 = theme.defaultLanguages) === null || _theme$defaultLanguag15 === void 0 ? void 0 : _theme$defaultLanguag15.ERROR_NOT_FOUND_STORE) || 'Sorry, an error has occurred with business selected.'),
+    btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: handleSearchRedirect
   }), !loading && !business && !location.pathname.includes('/store/') && /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null), error && error.length > 0 && Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0],
-    btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag18 = theme.defaultLanguages) === null || _theme$defaultLanguag18 === void 0 ? void 0 : _theme$defaultLanguag18.SEARCH_REDIRECT) || 'Go to Businesses'),
+    btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag17 = theme.defaultLanguages) === null || _theme$defaultLanguag17 === void 0 ? void 0 : _theme$defaultLanguag17.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: handleSearchRedirect
   })), /*#__PURE__*/_react.default.createElement(_FlotingStatusBar.FlotingStatusBar, {
     currentCart: currentCart,

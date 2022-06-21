@@ -23,6 +23,8 @@ var _utils = require("../../../../../utils");
 
 var _styles = require("./styles");
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -42,7 +44,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var types = ['food', 'laundry', 'alcohol', 'groceries'];
 
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options, _business$reviews, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$layouts$busine4, _theme$layouts$busine5, _theme$layouts2, _theme$layouts2$busin, _theme$layouts2$busin2, _theme$layouts2$busin3, _theme$layouts2$busin4, _theme$layouts2$busin5, _theme$layouts3, _theme$layouts3$busin, _theme$layouts3$busin2, _theme$layouts3$busin3, _theme$layouts3$busin4, _theme$layouts3$busin5, _theme$layouts4, _theme$layouts4$busin, _theme$layouts4$busin2, _theme$layouts4$busin3, _theme$layouts4$busin4, _theme$layouts4$busin5, _theme$layouts5, _theme$layouts5$busin, _theme$layouts5$busin2, _theme$layouts5$busin3, _theme$layouts5$busin4, _theme$layouts5$busin5, _props$beforeElements, _props$beforeComponen, _orderState$options, _business$reviews, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       businessState = props.businessState;
@@ -63,6 +65,8 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       parsePrice = _useUtils2$.parsePrice,
       parseDistance = _useUtils2$.parseDistance;
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var getBusinessType = function getBusinessType() {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
     var _types = [];
@@ -74,6 +78,11 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     return _types.join(', ');
   };
 
+  var showDeliveryFee = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$busine = _theme$layouts.business_view) !== null && _theme$layouts$busine !== void 0 && (_theme$layouts$busine2 = _theme$layouts$busine.components) !== null && _theme$layouts$busine2 !== void 0 && (_theme$layouts$busine3 = _theme$layouts$busine2.basic_information) !== null && _theme$layouts$busine3 !== void 0 && (_theme$layouts$busine4 = _theme$layouts$busine3.components) !== null && _theme$layouts$busine4 !== void 0 && (_theme$layouts$busine5 = _theme$layouts$busine4.delivery_fee) !== null && _theme$layouts$busine5 !== void 0 && _theme$layouts$busine5.hidden);
+  var showTime = !(theme !== null && theme !== void 0 && (_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$busin = _theme$layouts2.business_view) !== null && _theme$layouts2$busin !== void 0 && (_theme$layouts2$busin2 = _theme$layouts2$busin.components) !== null && _theme$layouts2$busin2 !== void 0 && (_theme$layouts2$busin3 = _theme$layouts2$busin2.basic_information) !== null && _theme$layouts2$busin3 !== void 0 && (_theme$layouts2$busin4 = _theme$layouts2$busin3.components) !== null && _theme$layouts2$busin4 !== void 0 && (_theme$layouts2$busin5 = _theme$layouts2$busin4.time) !== null && _theme$layouts2$busin5 !== void 0 && _theme$layouts2$busin5.hidden);
+  var showBusinessInfo = !(theme !== null && theme !== void 0 && (_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$busin = _theme$layouts3.business_view) !== null && _theme$layouts3$busin !== void 0 && (_theme$layouts3$busin2 = _theme$layouts3$busin.components) !== null && _theme$layouts3$busin2 !== void 0 && (_theme$layouts3$busin3 = _theme$layouts3$busin2.basic_information) !== null && _theme$layouts3$busin3 !== void 0 && (_theme$layouts3$busin4 = _theme$layouts3$busin3.components) !== null && _theme$layouts3$busin4 !== void 0 && (_theme$layouts3$busin5 = _theme$layouts3$busin4.business_info) !== null && _theme$layouts3$busin5 !== void 0 && _theme$layouts3$busin5.hidden);
+  var showReviews = !(theme !== null && theme !== void 0 && (_theme$layouts4 = theme.layouts) !== null && _theme$layouts4 !== void 0 && (_theme$layouts4$busin = _theme$layouts4.business_view) !== null && _theme$layouts4$busin !== void 0 && (_theme$layouts4$busin2 = _theme$layouts4$busin.components) !== null && _theme$layouts4$busin2 !== void 0 && (_theme$layouts4$busin3 = _theme$layouts4$busin2.basic_information) !== null && _theme$layouts4$busin3 !== void 0 && (_theme$layouts4$busin4 = _theme$layouts4$busin3.components) !== null && _theme$layouts4$busin4 !== void 0 && (_theme$layouts4$busin5 = _theme$layouts4$busin4.reviews) !== null && _theme$layouts4$busin5 !== void 0 && _theme$layouts4$busin5.hidden);
+  var showDistance = !(theme !== null && theme !== void 0 && (_theme$layouts5 = theme.layouts) !== null && _theme$layouts5 !== void 0 && (_theme$layouts5$busin = _theme$layouts5.business_view) !== null && _theme$layouts5$busin !== void 0 && (_theme$layouts5$busin2 = _theme$layouts5$busin.components) !== null && _theme$layouts5$busin2 !== void 0 && (_theme$layouts5$busin3 = _theme$layouts5$busin2.basic_information) !== null && _theme$layouts5$busin3 !== void 0 && (_theme$layouts5$busin4 = _theme$layouts5$busin3.components) !== null && _theme$layouts5$busin4 !== void 0 && (_theme$layouts5$busin5 = _theme$layouts5$busin4.distance) !== null && _theme$layouts5$busin5 !== void 0 && _theme$layouts5$busin5.hidden);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -95,23 +104,23 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   }, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150,
     height: 30
-  })), /*#__PURE__*/_react.default.createElement("div", null, !loading ? /*#__PURE__*/_react.default.createElement("p", {
+  })), showBusinessInfo && /*#__PURE__*/_react.default.createElement("div", null, !loading ? /*#__PURE__*/_react.default.createElement("p", {
     className: "type"
   }, getBusinessType()) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "meta"
-  }, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, showTime && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_GrLocation.default, null), parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), showDistance && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_GrLocation.default, null), parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }), (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && showDeliveryFee && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  })), !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FaStar.default, {
+  })), showReviews && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FaStar.default, {
     className: "start"
   }), business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  })))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }))))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

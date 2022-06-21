@@ -78,7 +78,7 @@ Object.defineProperty(exports, "BusinessesMap", {
 Object.defineProperty(exports, "Buttons", {
   enumerable: true,
   get: function get() {
-    return _Buttons.Buttons;
+    return _Buttons.Button;
   }
 });
 Object.defineProperty(exports, "Cart", {
@@ -168,7 +168,7 @@ Object.defineProperty(exports, "InputPhoneNumber", {
 Object.defineProperty(exports, "Inputs", {
   enumerable: true,
   get: function get() {
-    return _Inputs.Inputs;
+    return _Inputs.Input;
   }
 });
 Object.defineProperty(exports, "LanguageSelector", {
@@ -270,7 +270,7 @@ Object.defineProperty(exports, "Select", {
 Object.defineProperty(exports, "Selects", {
   enumerable: true,
   get: function get() {
-    return _Selects.Selects;
+    return _Selects.Select;
   }
 });
 Object.defineProperty(exports, "SidebarMenu", {
@@ -306,7 +306,7 @@ Object.defineProperty(exports, "UserDetails", {
 Object.defineProperty(exports, "UserFormDetails", {
   enumerable: true,
   get: function get() {
-    return _UserFormDetails.UserFormDetails;
+    return _UserFormDetails.UserFormDetailsUI;
   }
 });
 Object.defineProperty(exports, "UserPopover", {

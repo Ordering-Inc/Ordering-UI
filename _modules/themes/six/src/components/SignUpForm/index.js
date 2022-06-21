@@ -23,7 +23,7 @@ var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
-var _inputs = require("../../styles/inputs");
+var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../../../../styles/Buttons");
 
@@ -352,7 +352,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }).map(function (field) {
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
-    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_inputs.Input, {
+    }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       type: field.type,
       name: field.code,
       "aria-label": field.code,
@@ -364,7 +364,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       },
       required: !!field.required,
       autoComplete: "off"
-    }) : /*#__PURE__*/_react.default.createElement(_inputs.Input, {
+    }) : /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       type: field.type,
       name: field.code,
       "aria-label": field.code,
@@ -378,7 +378,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber
-  }), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_inputs.Input, {
+  }), (!fieldsNotValid || fieldsNotValid && !fieldsNotValid.includes('password')) && /*#__PURE__*/_react.default.createElement(_styles.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: !passwordSee ? 'password' : 'text',
     name: "password",
     "aria-label": "password",

@@ -9,7 +9,7 @@ exports.SearchBar = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _inputs = require("../../styles/inputs");
+var _Inputs = require("../../styles/Inputs");
 
 var _ThemeContext = require("../../../../../contexts/ThemeContext");
 
@@ -97,7 +97,7 @@ var SearchBar = function SearchBar(props) {
     className: !isCustomLayout && 'search-bar',
     isCustomLayout: isCustomLayout,
     hasValue: (_el$current = el.current) === null || _el$current === void 0 ? void 0 : _el$current.value
-  }, /*#__PURE__*/_react.default.createElement(_inputs.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     ref: el,
     name: "search",
     "aria-label": "search",

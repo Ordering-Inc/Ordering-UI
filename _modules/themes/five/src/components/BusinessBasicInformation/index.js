@@ -72,7 +72,7 @@ _dayjs.default.extend(_isBetween.default);
 var types = ['food', 'laundry', 'alcohol', 'groceries'];
 
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _configs$preorder_sta, _props$beforeElements, _props$beforeComponen, _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc, _theme$images, _theme$images$dummies, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
+  var _configs$preorder_sta, _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$layouts$busine4, _theme$layouts$busine5, _theme$layouts2, _theme$layouts2$busin, _theme$layouts2$busin2, _theme$layouts2$busin3, _theme$layouts2$busin4, _theme$layouts2$busin5, _theme$layouts3, _theme$layouts3$busin, _theme$layouts3$busin2, _theme$layouts3$busin3, _theme$layouts3$busin4, _theme$layouts3$busin5, _theme$layouts4, _theme$layouts4$busin, _theme$layouts4$busin2, _theme$layouts4$busin3, _theme$layouts4$busin4, _theme$layouts4$busin5, _theme$layouts5, _theme$layouts5$busin, _theme$layouts5$busin2, _theme$layouts5$busin3, _theme$layouts5$busin4, _theme$layouts5$busin5, _theme$layouts6, _theme$layouts6$busin, _theme$layouts6$busin2, _theme$layouts6$busin3, _theme$layouts6$busin4, _theme$layouts6$busin5, _theme$layouts7, _theme$layouts7$busin, _theme$layouts7$busin2, _theme$layouts7$busin3, _theme$layouts7$busin4, _theme$layouts7$busin5, _theme$layouts8, _theme$layouts8$busin, _theme$layouts8$busin2, _theme$layouts8$busin3, _theme$layouts8$busin4, _theme$layouts8$busin5, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
       businessState = props.businessState,
@@ -125,6 +125,14 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       configs = _useConfig2[0].configs;
 
   var isPreOrderSetting = (configs === null || configs === void 0 ? void 0 : (_configs$preorder_sta = configs.preorder_status_enabled) === null || _configs$preorder_sta === void 0 ? void 0 : _configs$preorder_sta.value) === '1';
+  var showLogo = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$busine = _theme$layouts.business_view) !== null && _theme$layouts$busine !== void 0 && (_theme$layouts$busine2 = _theme$layouts$busine.components) !== null && _theme$layouts$busine2 !== void 0 && (_theme$layouts$busine3 = _theme$layouts$busine2.basic_information) !== null && _theme$layouts$busine3 !== void 0 && (_theme$layouts$busine4 = _theme$layouts$busine3.components) !== null && _theme$layouts$busine4 !== void 0 && (_theme$layouts$busine5 = _theme$layouts$busine4.logo) !== null && _theme$layouts$busine5 !== void 0 && _theme$layouts$busine5.hidden);
+  var showDeliveryFee = !(theme !== null && theme !== void 0 && (_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$busin = _theme$layouts2.business_view) !== null && _theme$layouts2$busin !== void 0 && (_theme$layouts2$busin2 = _theme$layouts2$busin.components) !== null && _theme$layouts2$busin2 !== void 0 && (_theme$layouts2$busin3 = _theme$layouts2$busin2.basic_information) !== null && _theme$layouts2$busin3 !== void 0 && (_theme$layouts2$busin4 = _theme$layouts2$busin3.components) !== null && _theme$layouts2$busin4 !== void 0 && (_theme$layouts2$busin5 = _theme$layouts2$busin4.delivery_fee) !== null && _theme$layouts2$busin5 !== void 0 && _theme$layouts2$busin5.hidden);
+  var showTime = !(theme !== null && theme !== void 0 && (_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$busin = _theme$layouts3.business_view) !== null && _theme$layouts3$busin !== void 0 && (_theme$layouts3$busin2 = _theme$layouts3$busin.components) !== null && _theme$layouts3$busin2 !== void 0 && (_theme$layouts3$busin3 = _theme$layouts3$busin2.basic_information) !== null && _theme$layouts3$busin3 !== void 0 && (_theme$layouts3$busin4 = _theme$layouts3$busin3.components) !== null && _theme$layouts3$busin4 !== void 0 && (_theme$layouts3$busin5 = _theme$layouts3$busin4.time) !== null && _theme$layouts3$busin5 !== void 0 && _theme$layouts3$busin5.hidden);
+  var showBusinessInfo = !(theme !== null && theme !== void 0 && (_theme$layouts4 = theme.layouts) !== null && _theme$layouts4 !== void 0 && (_theme$layouts4$busin = _theme$layouts4.business_view) !== null && _theme$layouts4$busin !== void 0 && (_theme$layouts4$busin2 = _theme$layouts4$busin.components) !== null && _theme$layouts4$busin2 !== void 0 && (_theme$layouts4$busin3 = _theme$layouts4$busin2.basic_information) !== null && _theme$layouts4$busin3 !== void 0 && (_theme$layouts4$busin4 = _theme$layouts4$busin3.components) !== null && _theme$layouts4$busin4 !== void 0 && (_theme$layouts4$busin5 = _theme$layouts4$busin4.business_info) !== null && _theme$layouts4$busin5 !== void 0 && _theme$layouts4$busin5.hidden);
+  var showReviews = !(theme !== null && theme !== void 0 && (_theme$layouts5 = theme.layouts) !== null && _theme$layouts5 !== void 0 && (_theme$layouts5$busin = _theme$layouts5.business_view) !== null && _theme$layouts5$busin !== void 0 && (_theme$layouts5$busin2 = _theme$layouts5$busin.components) !== null && _theme$layouts5$busin2 !== void 0 && (_theme$layouts5$busin3 = _theme$layouts5$busin2.basic_information) !== null && _theme$layouts5$busin3 !== void 0 && (_theme$layouts5$busin4 = _theme$layouts5$busin3.components) !== null && _theme$layouts5$busin4 !== void 0 && (_theme$layouts5$busin5 = _theme$layouts5$busin4.reviews) !== null && _theme$layouts5$busin5 !== void 0 && _theme$layouts5$busin5.hidden);
+  var showDistance = !(theme !== null && theme !== void 0 && (_theme$layouts6 = theme.layouts) !== null && _theme$layouts6 !== void 0 && (_theme$layouts6$busin = _theme$layouts6.business_view) !== null && _theme$layouts6$busin !== void 0 && (_theme$layouts6$busin2 = _theme$layouts6$busin.components) !== null && _theme$layouts6$busin2 !== void 0 && (_theme$layouts6$busin3 = _theme$layouts6$busin2.basic_information) !== null && _theme$layouts6$busin3 !== void 0 && (_theme$layouts6$busin4 = _theme$layouts6$busin3.components) !== null && _theme$layouts6$busin4 !== void 0 && (_theme$layouts6$busin5 = _theme$layouts6$busin4.distance) !== null && _theme$layouts6$busin5 !== void 0 && _theme$layouts6$busin5.hidden);
+  var showSort = !(theme !== null && theme !== void 0 && (_theme$layouts7 = theme.layouts) !== null && _theme$layouts7 !== void 0 && (_theme$layouts7$busin = _theme$layouts7.business_view) !== null && _theme$layouts7$busin !== void 0 && (_theme$layouts7$busin2 = _theme$layouts7$busin.components) !== null && _theme$layouts7$busin2 !== void 0 && (_theme$layouts7$busin3 = _theme$layouts7$busin2.basic_information) !== null && _theme$layouts7$busin3 !== void 0 && (_theme$layouts7$busin4 = _theme$layouts7$busin3.components) !== null && _theme$layouts7$busin4 !== void 0 && (_theme$layouts7$busin5 = _theme$layouts7$busin4.sort) !== null && _theme$layouts7$busin5 !== void 0 && _theme$layouts7$busin5.hidden);
+  var isInfoShrunken = (theme === null || theme === void 0 ? void 0 : (_theme$layouts8 = theme.layouts) === null || _theme$layouts8 === void 0 ? void 0 : (_theme$layouts8$busin = _theme$layouts8.business_view) === null || _theme$layouts8$busin === void 0 ? void 0 : (_theme$layouts8$busin2 = _theme$layouts8$busin.components) === null || _theme$layouts8$busin2 === void 0 ? void 0 : (_theme$layouts8$busin3 = _theme$layouts8$busin2.basic_information) === null || _theme$layouts8$busin3 === void 0 ? void 0 : (_theme$layouts8$busin4 = _theme$layouts8$busin3.components) === null || _theme$layouts8$busin4 === void 0 ? void 0 : (_theme$layouts8$busin5 = _theme$layouts8$busin4.layout) === null || _theme$layouts8$busin5 === void 0 ? void 0 : _theme$layouts8$busin5.position) === 'shrunken';
 
   var getBusinessType = function getBusinessType() {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
@@ -170,6 +178,82 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   (0, _react.useEffect)(function () {
     document.body.style.overflowY = openSearchProducts ? 'hidden' : 'auto';
   }, [openSearchProducts]);
+
+  var SearchComponent = function SearchComponent() {
+    return /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_styles.SearchIconWrapper, {
+      onClick: function onClick() {
+        return setOpenSearchProducts(true);
+      }
+    }, /*#__PURE__*/_react.default.createElement(_CgSearch.default, null)), showSort && /*#__PURE__*/_react.default.createElement(_Select.Select, {
+      notAsync: true,
+      notReload: true,
+      options: sortByOptions,
+      defaultValue: sortByValue,
+      onChange: function onChange(val) {
+        return handleChangeSortBy && handleChangeSortBy(val);
+      }
+    }));
+  };
+
+  var BusinessInfoComponent = function BusinessInfoComponent() {
+    var _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc;
+
+    return /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
+      className: "info"
+    }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, {
+      isInfoShrunken: isInfoShrunken
+    }, !loading ? /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h2", {
+      className: "bold"
+    }, business === null || business === void 0 ? void 0 : business.name), (business === null || business === void 0 ? void 0 : (_business$ribbon = business.ribbon) === null || _business$ribbon === void 0 ? void 0 : _business$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
+      bgColor: business === null || business === void 0 ? void 0 : (_business$ribbon2 = business.ribbon) === null || _business$ribbon2 === void 0 ? void 0 : _business$ribbon2.color,
+      isRoundRect: (business === null || business === void 0 ? void 0 : (_business$ribbon3 = business.ribbon) === null || _business$ribbon3 === void 0 ? void 0 : _business$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
+      isCapsule: (business === null || business === void 0 ? void 0 : (_business$ribbon4 = business.ribbon) === null || _business$ribbon4 === void 0 ? void 0 : _business$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
+    }, business === null || business === void 0 ? void 0 : (_business$ribbon5 = business.ribbon) === null || _business$ribbon5 === void 0 ? void 0 : _business$ribbon5.text)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: isCustomerMode ? 100 : 150,
+      height: isCustomerMode ? 35 : 'auto'
+    }), showBusinessInfo && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("p", {
+      className: "type"
+    }, getBusinessType()) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: isCustomerMode ? 100 : 150
+    })), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetail, {
+      isSkeleton: loading
+    }, (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && showDeliveryFee && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_FEE', 'Delivery fee')), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)), /*#__PURE__*/_react.default.createElement("span", {
+      className: "dot"
+    }, "\u2022")) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: isCustomerMode ? 70 : 50
+    })), showTime && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)), /*#__PURE__*/_react.default.createElement("span", {
+      className: "dot"
+    }, "\u2022")) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time)), /*#__PURE__*/_react.default.createElement("span", {
+      className: "dot"
+    }, "\u2022"))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: isCustomerMode ? 70 : 50
+    })), showDistance && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)), /*#__PURE__*/_react.default.createElement("span", {
+      className: "dot"
+    }, "\u2022")) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: isCustomerMode ? 70 : 50
+    })), showReviews && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("div", {
+      className: "review"
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, {
+      className: "start"
+    }), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: isCustomerMode ? 100 : 50
+    }))), !loading ? /*#__PURE__*/_react.default.createElement("div", {
+      className: "preorder-Reviews"
+    }, isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+      onClick: function onClick() {
+        return setIsPreOrder(true);
+      }
+    }, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement("span", {
+      className: "dot"
+    }, "\u2022")), ((_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.reviews) && /*#__PURE__*/_react.default.createElement("span", {
+      onClick: function onClick() {
+        return setIsBusinessReviews(true);
+      }
+    }, t('REVIEWS', 'Reviews'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: isCustomerMode ? 100 : 150
+    })))), ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && /*#__PURE__*/_react.default.createElement(SearchComponent, null));
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -184,84 +268,21 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       setOpenSearchProducts(false);
     },
     business: businessState.business
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
-    className: "info"
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h2", {
-    className: "bold"
-  }, business === null || business === void 0 ? void 0 : business.name), (business === null || business === void 0 ? void 0 : (_business$ribbon = business.ribbon) === null || _business$ribbon === void 0 ? void 0 : _business$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
-    bgColor: business === null || business === void 0 ? void 0 : (_business$ribbon2 = business.ribbon) === null || _business$ribbon2 === void 0 ? void 0 : _business$ribbon2.color,
-    isRoundRect: (business === null || business === void 0 ? void 0 : (_business$ribbon3 = business.ribbon) === null || _business$ribbon3 === void 0 ? void 0 : _business$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
-    isCapsule: (business === null || business === void 0 ? void 0 : (_business$ribbon4 = business.ribbon) === null || _business$ribbon4 === void 0 ? void 0 : _business$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
-  }, business === null || business === void 0 ? void 0 : (_business$ribbon5 = business.ribbon) === null || _business$ribbon5 === void 0 ? void 0 : _business$ribbon5.text)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: isCustomerMode ? 100 : 150,
-    height: isCustomerMode ? 35 : 'auto'
-  }), !loading ? /*#__PURE__*/_react.default.createElement("p", {
-    className: "type"
-  }, getBusinessType()) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: isCustomerMode ? 100 : 150
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetail, {
-    isSkeleton: loading
-  }, (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_FEE', 'Delivery fee')), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)), /*#__PURE__*/_react.default.createElement("span", {
-    className: "dot"
-  }, "\u2022")) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: isCustomerMode ? 70 : 50
-  })), !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)), /*#__PURE__*/_react.default.createElement("span", {
-    className: "dot"
-  }, "\u2022")) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time)), /*#__PURE__*/_react.default.createElement("span", {
-    className: "dot"
-  }, "\u2022"))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: isCustomerMode ? 70 : 50
-  }), !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)), /*#__PURE__*/_react.default.createElement("span", {
-    className: "dot"
-  }, "\u2022")) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: isCustomerMode ? 70 : 50
-  }), !loading ? /*#__PURE__*/_react.default.createElement("div", {
-    className: "review"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, {
-    className: "start"
-  }), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: isCustomerMode ? 100 : 50
-  })), !loading ? /*#__PURE__*/_react.default.createElement("div", {
-    className: "preorder-Reviews"
-  }, isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
-    onClick: function onClick() {
-      return setIsPreOrder(true);
-    }
-  }, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement("span", {
-    className: "dot"
-  }, "\u2022")), ((_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.reviews) && /*#__PURE__*/_react.default.createElement("span", {
-    onClick: function onClick() {
-      return setIsBusinessReviews(true);
-    }
-  }, t('REVIEWS', 'Reviews'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: isCustomerMode ? 100 : 150
-  })))), ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_styles.SearchIconWrapper, {
-    onClick: function onClick() {
-      return setOpenSearchProducts(true);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_CgSearch.default, null)), /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    notAsync: true,
-    notReload: true,
-    options: sortByOptions,
-    defaultValue: sortByValue,
-    onChange: function onChange(val) {
-      return handleChangeSortBy && handleChangeSortBy(val);
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
+  })), !isInfoShrunken && /*#__PURE__*/_react.default.createElement(BusinessInfoComponent, null), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
     bgimage: business === null || business === void 0 ? void 0 : business.header,
     isSkeleton: isSkeleton,
     id: "container",
     isClosed: !(business !== null && business !== void 0 && business.open)
-  }, !loading && !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed')), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+  }, !loading && !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed')), showLogo && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 70,
     width: 70
-  }))), !loading && /*#__PURE__*/_react.default.createElement(_styles.BusinessMoreDetail, {
+  }))), isInfoShrunken && /*#__PURE__*/_react.default.createElement(BusinessInfoComponent, null), !loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isInfoShrunken && /*#__PURE__*/_react.default.createElement(_styles.SearchComponentContainer, null, /*#__PURE__*/_react.default.createElement(SearchComponent, null)), /*#__PURE__*/_react.default.createElement(_styles.BusinessMoreDetail, null, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
     onClick: function onClick() {
       return setOpenBusinessInformation(true);
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, null)), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     open: openBusinessInformation,
     onClose: setOpenBusinessInformation,

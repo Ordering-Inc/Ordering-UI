@@ -29,13 +29,11 @@ var _Modal = require("../Modal");
 
 var _Cart = require("../Cart");
 
-var _SearchBar = require("../SearchBar");
-
 var _NotFoundSource = require("../NotFoundSource");
 
 var _Buttons = require("../../styles/Buttons");
 
-var _Select = require("../../styles/Select");
+var _SearchProducts = require("./SearchProducts");
 
 var _styles = require("./styles");
 
@@ -68,7 +66,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var layoutOne = 'groceries';
 
 var RenderProductsLayout = function RenderProductsLayout(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _theme$defaultLanguag, _businessState$busine, _business$categories, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _currentCart$products, _currentCart$products2, _currentCart$products3, _theme$defaultLanguag6, _businessState$busine2, _business$categories2, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _currentCart$products4, _currentCart$products5;
+  var _configs$use_parent_c, _configs$use_parent_c2, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _currentCart$products2, _currentCart$products3, _business$categories2, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products4, _currentCart$products5;
 
   var errors = props.errors,
       isError = props.isError,
@@ -139,26 +137,22 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation
-  }), !errorQuantityProducts ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (categoryState.products.length !== 0 || searchValue) && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
-    onSearch: handleChangeSearch,
-    search: searchValue,
-    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SEARCH_PRODUCTS) || 'Search Products'),
-    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended
-  }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    notAsync: true,
-    notReload: true,
-    options: sortByOptions,
-    defaultValue: sortByValue,
+  }), !errorQuantityProducts ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (categoryState.products.length !== 0 || searchValue) && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchProducts.SearchProducts, {
+    handleChangeSearch: handleChangeSearch,
+    searchValue: searchValue,
+    sortByOptions: sortByOptions,
+    sortByValue: sortByValue,
     onChange: function onChange(val) {
       return handleChangeSortBy && handleChangeSortBy(val);
-    }
+    },
+    businessState: businessState
   })), !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     categories: [{
       id: null,
-      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.ALL) || 'All')
+      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.FEATURED) || 'Featured')
+      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.FEATURED) || 'Featured')
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
@@ -169,10 +163,10 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
     categories: [{
       id: null,
-      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.ALL) || 'All')
+      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.FEATURED) || 'Featured')
+      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.FEATURED) || 'Featured')
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
@@ -212,27 +206,23 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     style: {
       visibility: (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts ? 'visible' : 'hidden'
     }
-  }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
-    onSearch: handleChangeSearch,
-    search: searchValue,
-    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.SEARCH_PRODUCTS) || 'Search Products'),
-    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.lazy_load_products_recommended
-  }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    notAsync: true,
-    notReload: true,
-    options: sortByOptions,
-    defaultValue: sortByValue,
+  }, /*#__PURE__*/_react.default.createElement(_SearchProducts.SearchProducts, {
+    handleChangeSearch: handleChangeSearch,
+    searchValue: searchValue,
+    sortByOptions: sortByOptions,
+    sortByValue: sortByValue,
     onChange: function onChange(val) {
       return handleChangeSortBy && handleChangeSortBy(val);
-    }
+    },
+    businessState: businessState
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoriesContainer, null, !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayout, {
     component: "categories",
     categories: [{
       id: null,
-      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.ALL) || 'All')
+      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.FEATURED) || 'Featured')
+      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.FEATURED) || 'Featured')
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
@@ -246,10 +236,10 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     component: "products_list",
     categories: [{
       id: null,
-      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.ALL) || 'All')
+      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.FEATURED) || 'Featured')
+      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.FEATURED) || 'Featured')
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),

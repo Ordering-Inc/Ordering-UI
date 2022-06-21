@@ -37,7 +37,7 @@ var _styles = require("./styles");
 
 var _Buttons = require("../../../../../styles/Buttons");
 
-var _inputs = require("../../styles/inputs");
+var _Inputs = require("../../styles/Inputs");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -598,7 +598,7 @@ var AddressFormUI = function AddressFormUI(props) {
       maxLimitLocation: maxLimitLocation
     }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
-    }, field.name !== 'address_notes' ? /*#__PURE__*/_react.default.createElement(_inputs.Input, {
+    }, field.name !== 'address_notes' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       className: field.name,
       placeholder: t(field.name.toUpperCase(), field.code),
       value: (_ref9 = (_formState$changes$fi2 = (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27[field.name]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : (_addressState$address13 = addressState.address) === null || _addressState$address13 === void 0 ? void 0 : _addressState$address13[field.name]) !== null && _ref9 !== void 0 ? _ref9 : '',
@@ -613,7 +613,7 @@ var AddressFormUI = function AddressFormUI(props) {
       },
       autoComplete: "new-field",
       maxLength: 30
-    }) : /*#__PURE__*/_react.default.createElement(_inputs.TextArea, {
+    }) : /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
       rows: 4,
       placeholder: t('ADDRESS_NOTES', 'Address Notes'),
       value: (_ref10 = (_formState$changes$ad5 = (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref10 !== void 0 ? _ref10 : '',

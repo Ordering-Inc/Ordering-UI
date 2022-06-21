@@ -17,6 +17,12 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _BusinessBasicInformation = require("../BusinessBasicInformation");
 
+var _seven = require("../../../../seven");
+
+var _six = require("../../../../six");
+
+var _BusinessBasicInformation2 = require("../../../../../components/BusinessBasicInformation");
+
 var _BusinessProductsCategories = require("../BusinessProductsCategories");
 
 var _BusinessProductsList = require("../BusinessProductsList");
@@ -25,8 +31,6 @@ var _groceries = require("../BusinessProductsCategories/layouts/groceries");
 
 var _groceries2 = require("../BusinessProductsList/layouts/groceries");
 
-var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
 var _Modal = require("../Modal");
 
 var _Cart = require("../Cart");
@@ -34,6 +38,10 @@ var _Cart = require("../Cart");
 var _Buttons = require("../../styles/Buttons");
 
 var _styles = require("./styles");
+
+var _SearchProducts = require("../../../../../components/RenderProductsLayout/SearchProducts");
+
+var _SearchProducts2 = require("../../../../six/src/components/BusinessProductsListing/SearchProducts");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -64,7 +72,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var layoutOne = 'groceries';
 
 var RenderProductsLayout = function RenderProductsLayout(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _business$categories2, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
+  var _configs$use_parent_c, _configs$use_parent_c2, _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$layouts$busine4, _theme$layouts$busine5, _theme$layouts2, _theme$layouts2$busin, _theme$layouts2$busin2, _theme$layouts2$busin3, _theme$layouts2$busin4, _theme$layouts2$busin5, _theme$layouts3, _theme$layouts3$busin, _theme$layouts3$busin2, _theme$layouts3$busin3, _theme$layouts3$busin4, _theme$layouts3$busin5, _theme$layouts4, _theme$layouts4$busin, _theme$layouts4$busin2, _theme$layouts4$busin3, _theme$layouts4$busin4, _theme$layouts4$busin5, _theme$layouts5, _theme$layouts5$busin, _theme$layouts5$busin2, _theme$layouts5$busin3, _theme$layouts5$busin4, _theme$layouts5$busin5, _theme$layouts6, _theme$layouts6$busin, _theme$layouts6$busin2, _theme$layouts6$busin3, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _business$categories2, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
 
   var errors = props.errors,
       isError = props.isError,
@@ -105,8 +113,6 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
-  var windowSize = (0, _useWindowSize.useWindowSize)();
-
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
@@ -117,11 +123,13 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       setisCartModal = _useState2[1];
 
   var isUseParentCategory = (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1';
+  var BusinessBasicInformationComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$busine = _theme$layouts.business_view) === null || _theme$layouts$busine === void 0 ? void 0 : (_theme$layouts$busine2 = _theme$layouts$busine.components) === null || _theme$layouts$busine2 === void 0 ? void 0 : (_theme$layouts$busine3 = _theme$layouts$busine2.basic_information) === null || _theme$layouts$busine3 === void 0 ? void 0 : (_theme$layouts$busine4 = _theme$layouts$busine3.components) === null || _theme$layouts$busine4 === void 0 ? void 0 : (_theme$layouts$busine5 = _theme$layouts$busine4.layout) === null || _theme$layouts$busine5 === void 0 ? void 0 : _theme$layouts$busine5.type) === 'red' ? _seven.BusinessBasicInformation : (theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$busin = _theme$layouts2.business_view) === null || _theme$layouts2$busin === void 0 ? void 0 : (_theme$layouts2$busin2 = _theme$layouts2$busin.components) === null || _theme$layouts2$busin2 === void 0 ? void 0 : (_theme$layouts2$busin3 = _theme$layouts2$busin2.basic_information) === null || _theme$layouts2$busin3 === void 0 ? void 0 : (_theme$layouts2$busin4 = _theme$layouts2$busin3.components) === null || _theme$layouts2$busin4 === void 0 ? void 0 : (_theme$layouts2$busin5 = _theme$layouts2$busin4.layout) === null || _theme$layouts2$busin5 === void 0 ? void 0 : _theme$layouts2$busin5.type) === 'starbucks' ? _six.BusinessBasicInformation : (theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$busin = _theme$layouts3.business_view) === null || _theme$layouts3$busin === void 0 ? void 0 : (_theme$layouts3$busin2 = _theme$layouts3$busin.components) === null || _theme$layouts3$busin2 === void 0 ? void 0 : (_theme$layouts3$busin3 = _theme$layouts3$busin2.basic_information) === null || _theme$layouts3$busin3 === void 0 ? void 0 : (_theme$layouts3$busin4 = _theme$layouts3$busin3.components) === null || _theme$layouts3$busin4 === void 0 ? void 0 : (_theme$layouts3$busin5 = _theme$layouts3$busin4.layout) === null || _theme$layouts3$busin5 === void 0 ? void 0 : _theme$layouts3$busin5.type) === 'old' ? _BusinessBasicInformation2.BusinessBasicInformation : _BusinessBasicInformation.BusinessBasicInformation;
+  var SearchProductsComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts4 = theme.layouts) === null || _theme$layouts4 === void 0 ? void 0 : (_theme$layouts4$busin = _theme$layouts4.business_view) === null || _theme$layouts4$busin === void 0 ? void 0 : (_theme$layouts4$busin2 = _theme$layouts4$busin.components) === null || _theme$layouts4$busin2 === void 0 ? void 0 : (_theme$layouts4$busin3 = _theme$layouts4$busin2.product_search) === null || _theme$layouts4$busin3 === void 0 ? void 0 : (_theme$layouts4$busin4 = _theme$layouts4$busin3.components) === null || _theme$layouts4$busin4 === void 0 ? void 0 : (_theme$layouts4$busin5 = _theme$layouts4$busin4.layout) === null || _theme$layouts4$busin5 === void 0 ? void 0 : _theme$layouts4$busin5.type) === 'old' ? _SearchProducts.SearchProducts : (theme === null || theme === void 0 ? void 0 : (_theme$layouts5 = theme.layouts) === null || _theme$layouts5 === void 0 ? void 0 : (_theme$layouts5$busin = _theme$layouts5.business_view) === null || _theme$layouts5$busin === void 0 ? void 0 : (_theme$layouts5$busin2 = _theme$layouts5$busin.components) === null || _theme$layouts5$busin2 === void 0 ? void 0 : (_theme$layouts5$busin3 = _theme$layouts5$busin2.product_search) === null || _theme$layouts5$busin3 === void 0 ? void 0 : (_theme$layouts5$busin4 = _theme$layouts5$busin3.components) === null || _theme$layouts5$busin4 === void 0 ? void 0 : (_theme$layouts5$busin5 = _theme$layouts5$busin4.layout) === null || _theme$layouts5$busin5 === void 0 ? void 0 : _theme$layouts5$busin5.type) === 'starbucks' ? _SearchProducts2.SearchProducts : null;
   var frontLayout = business === null || business === void 0 ? void 0 : business.front_layout;
   var businessLayout = {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   };
-  var showCartOnProductList = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$busine = _theme$layouts.business_view) !== null && _theme$layouts$busine !== void 0 && (_theme$layouts$busine2 = _theme$layouts$busine.components) !== null && _theme$layouts$busine2 !== void 0 && (_theme$layouts$busine3 = _theme$layouts$busine2.cart) !== null && _theme$layouts$busine3 !== void 0 && _theme$layouts$busine3.hidden);
+  var showCartOnProductList = !(theme !== null && theme !== void 0 && (_theme$layouts6 = theme.layouts) !== null && _theme$layouts6 !== void 0 && (_theme$layouts6$busin = _theme$layouts6.business_view) !== null && _theme$layouts6$busin !== void 0 && (_theme$layouts6$busin2 = _theme$layouts6$busin.components) !== null && _theme$layouts6$busin2 !== void 0 && (_theme$layouts6$busin3 = _theme$layouts6$busin2.cart) !== null && _theme$layouts6$busin3 !== void 0 && _theme$layouts6$busin3.hidden);
 
   var BusinessLayout = function BusinessLayout(props) {
     var components = {
@@ -136,7 +144,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     isCartOnProductsList: isCartOnProductsList
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "bp-list"
-  }, !isCustomLayout && /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, _extends({}, props, {
+  }, !isCustomLayout && /*#__PURE__*/_react.default.createElement(BusinessBasicInformationComponent, _extends({}, props, {
     businessState: businessState,
     setOpenBusinessInformation: setOpenBusinessInformation,
     openBusinessInformation: openBusinessInformation,
@@ -147,7 +155,16 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     categoryState: categoryState,
     errorQuantityProducts: errorQuantityProducts,
     sortByValue: sortByValue
-  })), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
+  })), !errorQuantityProducts && SearchProductsComponent && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(SearchProductsComponent, {
+    handleChangeSearch: handleChangeSearch,
+    searchValue: searchValue,
+    sortByOptions: sortByOptions,
+    sortByValue: sortByValue,
+    onChange: function onChange(val) {
+      return handleChangeSortBy && handleChangeSortBy(val);
+    },
+    businessState: businessState
+  }))), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, {
     showCartOnProductList: showCartOnProductList
@@ -255,7 +272,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     errorQuantityProducts: errorQuantityProducts,
     business: business,
     currentCart: currentCart
-  })))))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && /*#__PURE__*/_react.default.createElement(_BusinessBasicInformation.BusinessBasicInformation, {
+  })))))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && /*#__PURE__*/_react.default.createElement(BusinessBasicInformationComponent, {
     isSkeleton: true,
     handler: handler,
     businessState: {
