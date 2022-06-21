@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Select } from '../../styles/Select'
 import {
-  // PlaceSpot as PlaceSpotController,
+  PlaceSpot as PlaceSpotController,
   useLanguage,
   useOrder
 } from 'ordering-components'
-import { PlaceSpot as PlaceSpotController } from './test'
 import { PlaceGroupContainer, PlaceSpotContainer, Title, ButtonWrapper } from './styles'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
