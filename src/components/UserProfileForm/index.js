@@ -9,6 +9,7 @@ import {
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
+import { UserFormDetailsUI as UserFormDetailsFiveUI } from '../../themes/five/src/components/UserFormDetails'
 import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 
@@ -33,6 +34,7 @@ import {
   SkeletonWrapper,
   WrapperForm
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const UserProfileFormUI = (props) => {
   const {
@@ -50,6 +52,16 @@ const UserProfileFormUI = (props) => {
   const [edit, setEdit] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
+  const theme = useTheme()
+
+  const showCustomerPicture = !theme.layouts?.profile?.components?.picture?.hidden
+  const showCustomerName = !theme.layouts?.profile?.components?.name?.hidden
+  const showCustomerLastName = !theme.layouts?.profile?.components?.last_name?.hidden
+  const showCustomerEmail = !theme.layouts?.profile?.components?.email?.hidden
+  const showCustomerCellphone = !theme.layouts?.profile?.components?.cellphone?.hidden
+  const showAddressList = !theme.layouts?.profile?.components?.address_list?.hidden
+  const userFormLayoutColumn = theme.layouts?.profile?.components?.layout?.position === 'column'
+  const showEditButton = showCustomerName || showCustomerLastName || showCustomerEmail || showCustomerCellphone
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -112,29 +124,31 @@ const UserProfileFormUI = (props) => {
       )}
       <Container>
         <UserProfileContainer mbottom={isHiddenAddress && 25}>
-          <UserImage className='user-image'>
-            <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
-              <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
-                <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
-                  {formState.changes?.photo && formState.loading
-                    ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                    : ((!formState.changes?.photo || formState.result?.result === 'Network Error' || formState.result.error)
-                      ? user?.photo
-                        ? (<img src={user?.photo} alt='user image' width='200px' height='200px' loading='lazy' />)
-                        : (
-                          <UploadImageIcon>
-                            <BiImage />
-                            <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
-                          </UploadImageIcon>
-                        )
-                      : formState?.changes?.photo && formState.result.error &&
+          {showCustomerPicture && (
+            <UserImage className='user-image'>
+              <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
+                <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
+                  <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
+                    {formState.changes?.photo && formState.loading
+                      ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
+                      : ((!formState.changes?.photo || formState.result?.result === 'Network Error' || formState.result.error)
+                        ? user?.photo
+                          ? (<img src={user?.photo} alt='user image' width='200px' height='200px' loading='lazy' />)
+                          : (
+                            <UploadImageIcon>
+                              <BiImage />
+                              <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
+                            </UploadImageIcon>
+                          )
+                        : formState?.changes?.photo && formState.result.error &&
                         <img src={formState?.changes?.photo} alt='user image' loading='lazy' />
-                    )}
-                </DragAndDrop>
-              </ExamineClick>
-            </Image>
-            <Camera><FiCamera /></Camera>
-          </UserImage>
+                      )}
+                  </DragAndDrop>
+                </ExamineClick>
+              </Image>
+              <Camera><FiCamera /></Camera>
+            </UserImage>
+          )}
           <SideForm className='user-form'>
             {!edit ? (
               formState.loading ? (
@@ -146,34 +160,49 @@ const UserProfileFormUI = (props) => {
                 </UserData>
               ) : (
                 <UserData>
-                  <h1>{userData?.name || user?.name} {userData?.lastname || user?.lastname}</h1>
-                  <p>{userData?.email || user.email}</p>
-                  {(userData?.cellphone || user?.cellphone) && (
-                    <p style={{direction: 'ltr'}}>{(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}</p>
+                  <h1>
+                    {showCustomerName && (userData?.name || user?.name)}
+                    {showCustomerLastName && (userData?.lastname || user?.lastname)}
+                  </h1>
+                  <p>{(showCustomerEmail && (userData?.email || user.email))}</p>
+                  {(showCustomerCellphone && (userData?.cellphone || user?.cellphone)) && (
+                    <p style={{ direction: 'ltr' }}>{(userData?.country_phone_code || user?.country_phone_code) && `+${(userData?.country_phone_code || user?.country_phone_code)} `}{(userData?.cellphone || user?.cellphone)}</p>
                   )}
-                  <Button
-                    color='primary'
-                    outline
-                    onClick={() => toggleEditState(true)}
-                  >
-                    {t('EDIT', 'Edit')}
-                  </Button>
+                  {showEditButton && (
+                    <Button
+                      color='primary'
+                      outline
+                      onClick={() => toggleEditState(true)}
+                    >
+                      {t('EDIT', 'Edit')}
+                    </Button>
+                  )}
                 </UserData>
               )
             ) : (
               <WrapperForm>
-                <UserFormDetailsUI
-                  {...props}
-                  onCancel={toggleEditState}
-                  onCloseProfile={() => setEdit(false)}
-                  isHiddenAddress={isHiddenAddress}
-                />
+                {userFormLayoutColumn ? (
+                  <UserFormDetailsFiveUI
+                    {...props}
+                    onCancel={toggleEditState}
+                    onCloseProfile={() => setEdit(false)}
+                    isHiddenAddress={isHiddenAddress}
+                    isOldLayout
+                  />
+                ) : (
+                  <UserFormDetailsUI
+                    {...props}
+                    onCancel={toggleEditState}
+                    onCloseProfile={() => setEdit(false)}
+                    isHiddenAddress={isHiddenAddress}
+                  />
+                )}
               </WrapperForm>
             )}
 
           </SideForm>
         </UserProfileContainer>
-        {(userData?.addresses || user?.addresses) && !isHiddenAddress && (
+        {(userData?.addresses || user?.addresses) && !isHiddenAddress && showAddressList && (
           <SavedPlaces>
             <h1>{t('SAVED_PLACES', 'Saved places')}</h1>
             <AddressList isModal addressList={user?.addresses} />

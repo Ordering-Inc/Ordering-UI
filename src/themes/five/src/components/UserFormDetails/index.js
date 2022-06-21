@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useSession, useLanguage, useCustomer, useConfig } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
+import { useTheme } from 'styled-components'
 
 import {
   FormInput,
@@ -40,13 +41,14 @@ export const UserFormDetailsUI = (props) => {
     isCustomerMode,
     setWillVerifyOtpState,
     isVerifiedPhone,
-    handleChangePromotions
+    handleChangePromotions,
+    isOldLayout
   } = props
 
   const formMethods = useForm()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-
+  const theme = useTheme()
   const [{ user: userSession }] = useSession()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
@@ -55,6 +57,11 @@ export const UserFormDetailsUI = (props) => {
   const emailInput = useRef(null)
 
   const user = userData || userSession
+
+  const showCustomerCellphone = !theme.layouts?.profile?.components?.cellphone?.hidden
+  const showCustomerPassword = !theme.layouts?.profile?.components?.password?.hidden
+  const showCustomerPromotions = !theme.layouts?.profile?.components?.promotions?.hidden
+  const showLangauges = !theme.layouts?.profile?.components?.languages?.hidden
 
   const closeAlert = () => {
     setAlertState({
@@ -178,6 +185,10 @@ export const UserFormDetailsUI = (props) => {
     }
   }
 
+  const showFieldWithTheme = (name) => {
+    return !theme.layouts?.profile?.components?.[name]?.hidden
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -263,7 +274,7 @@ export const UserFormDetailsUI = (props) => {
             }
             <Divider />
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
-              showField && showField(field.code) && (
+              showField && showField(field.code) && showFieldWithTheme(field.code) && (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
                     <InputGroup>
@@ -318,7 +329,7 @@ export const UserFormDetailsUI = (props) => {
                 </React.Fragment>
               )
             )}
-            {!!showInputPhoneNumber && (
+            {!!showInputPhoneNumber && showCustomerCellphone && (
               <InputPhoneNumberWrapper>
                 <p>{t('PHONE', 'Phone')}</p>
                 <InputPhoneNumber
@@ -330,7 +341,7 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputPhoneNumberWrapper>
             )}
-            {!isCheckout && (
+            {!isCheckout && showCustomerPassword && (
               <InputGroup>
                 <p>{t('PASSWORD', 'Password')}</p>
                 <Input
@@ -353,7 +364,7 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputGroup>
             )}
-            {!isCheckout && (
+            {!isCheckout && showCustomerPromotions && (
               <PromotionsWrapper>
                 <Checkbox
                   name='promotions'
@@ -372,11 +383,15 @@ export const UserFormDetailsUI = (props) => {
                 </label>
               </PromotionsWrapper>
             )}
-            <Divider />
-            <LanguageSelectorWrapper>
-              <p>{t('LANGUAGE', 'Language')}</p>
-              <LanguageSelector />
-            </LanguageSelectorWrapper>
+            {showLangauges && (
+              <>
+                <Divider />
+                <LanguageSelectorWrapper>
+                  <p>{t('LANGUAGE', 'Language')}</p>
+                  <LanguageSelector />
+                </LanguageSelectorWrapper>
+              </>
+            )}
             {
               props.afterMidElements?.map((MidElement, i) => (
                 <React.Fragment key={i}>
@@ -388,6 +403,16 @@ export const UserFormDetailsUI = (props) => {
                 <MidComponent key={i} {...props} />))
             }
             <ActionsForm>
+              {onCancel && isOldLayout && (
+                <Button
+                  outline
+                  type='button'
+                  onClick={() => onCancel(false)}
+                  disabled={formState.loading}
+                >
+                  {t('CANCEL', 'Cancel')}
+                </Button>
+              )}
               {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
                 <Button
                   id='form-btn'

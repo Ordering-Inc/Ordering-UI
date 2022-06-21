@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  margin-bottom: 20px;
+`
 
 export const UserProfileContainer = styled.div`
   display: flex;

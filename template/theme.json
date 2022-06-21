@@ -30,7 +30,8 @@
     "subtitleHomeColor": "#FFFFFF",
     "warning100": "#FFF4CC",
     "warning500": "#FFC700",
-    "grayDividerColor": "#F8F9FA"
+    "grayDividerColor": "#F8F9FA",
+    "darkGray": "#CBCBCB"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
@@ -121,11 +122,13 @@
           "hidden": false,
           "components": {
             "business": {
-              "logo": {
-                "hidden": false
-              },
-              "time": {
-                "hidden": false
+              "components": {
+                "logo": {
+                  "hidden": false
+                },
+                "time": {
+                  "hidden": false
+                }
               }
             },
             "products": {
@@ -144,13 +147,13 @@
               "hidden": false
             },
             "customer_comments": {
-              "hidden": true
+              "hidden": false
             },
             "review_date": {
               "hidden": false
             },
             "search": {
-              "hidden": true
+              "hidden": false
             }
           }
         },
@@ -214,11 +217,11 @@
       "components": {
         "cart": {
           "hidden": false,
-          "open_strategy": {
-            "type": "popover",
-            "position": "right"
-          },
           "components": {
+            "open_strategy": {
+              "type": "popover",
+              "position": "right"
+            },
             "business": {
               "logo": {
                 "hidden": false
@@ -268,6 +271,75 @@
           "hidden": false
         },
         "map": {
+          "hidden": false
+        }
+      }
+    },
+    "profile": {
+      "hidden": false,
+      "components": {
+        "layout": {
+          "type": "original",
+          "position": "column"
+        },
+        "address_list": {
+          "hidden": false,
+          "components": {
+            "layout": {
+              "type": "original",
+              "position": "normal"
+            },
+            "address": {
+              "hidden": false
+            },
+            "icons": {
+              "hidden": false
+            },
+            "zipcode": {
+              "hidden": false
+            },
+            "internal_number": {
+              "hidden": false
+            },
+            "address_notes": {
+              "hidden": false
+            }
+          }
+        },
+        "picture": {
+          "hidden": false
+        },
+        "name": {
+          "hidden": false
+        },
+        "last_name": {
+          "hidden": false
+        },
+        "second_name": {
+          "hidden": false
+        },
+        "second_last_name": {
+          "hidden": false
+        },
+        "email": {
+          "hidden": false
+        },
+        "cellphone": {
+          "hidden": false
+        },
+        "password": {
+          "hidden": false
+        },
+        "birthday": {
+          "hidden": false
+        },
+        "promotions": {
+          "hidden": false
+        },
+        "notification_settings": {
+          "hidden": false
+        },
+        "languages": {
           "hidden": false
         }
       }
