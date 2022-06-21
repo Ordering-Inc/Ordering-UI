@@ -154,6 +154,44 @@
             }
           }
         },
+        "basic_information": {
+          "hidden": false,
+          "components": {
+            "layout": {
+              "type": "original",
+              "position": "normal"
+            },
+            "logo": {
+              "hidden": false
+            },
+            "delivery_fee": {
+              "hidden": false
+            },
+            "time": {
+              "hidden": false
+            },
+            "distance": {
+              "hidden": false
+            },
+            "reviews": {
+              "hidden": false
+            },
+            "business_info": {
+              "hidden": false
+            },
+            "sort": {
+              "hidden": false
+            }
+          }
+        },
+        "product_search": {
+          "hidden": false,
+          "components": {
+            "layout": {
+              "type": "original"
+            }
+          }
+        },
         "information": {
           "components": {
             "location": {
@@ -170,6 +208,9 @@
       }
     },
     "header": {
+      "layout": {
+        "type": "original"
+      },
       "components": {
         "cart": {
           "hidden": false,
