@@ -22,15 +22,14 @@ import {
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { Cart } from '../../../../../components/Cart'
-import { Select } from '../../../../../styles/Select'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { ProductForm } from '../ProductForm'
-import { SearchBar } from '../SearchBar'
 import { CartFullPage } from '../CartFullPage'
 import { FlotingStatusBar } from '../FlotingStatusBar'
+import { SearchProducts } from './SearchProducts'
 const PIXELS_TO_SCROLL = 300
 const BusinessProductsListingUI = (props) => {
   const {
@@ -174,18 +173,13 @@ const BusinessProductsListingUI = (props) => {
                   </>}
                 {(categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && (
                   <WrapperSearch>
-                    <SearchBar
-                      onSearch={handleChangeSearch}
-                      search={searchValue}
-                      placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
-                      lazyLoad={businessState?.business?.lazy_load_products_recommended}
-                    />
-                    <Select
-                      notAsync
-                      notReload
-                      options={sortByOptions}
-                      defaultValue={sortByValue}
+                    <SearchProducts
+                      handleChangeSearch={handleChangeSearch}
+                      searchValue={searchValue}
+                      sortByOptions={sortByOptions}
+                      sortByValue={sortByValue}
                       onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                      businessState={businessState}
                     />
                   </WrapperSearch>
                 )}

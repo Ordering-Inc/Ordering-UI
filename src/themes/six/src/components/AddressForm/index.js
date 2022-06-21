@@ -29,7 +29,7 @@ import {
   WrapperSkeleton
 } from './styles'
 import { Button } from '../../../../../styles/Buttons'
-import { Input, TextArea } from '../../styles/inputs'
+import { Input, TextArea } from '../../styles/Inputs'
 const inputNames = [
   { name: 'address', code: 'Address' },
   { name: 'internal_number', code: 'Internal number' },

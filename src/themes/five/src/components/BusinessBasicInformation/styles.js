@@ -131,10 +131,18 @@ export const BusinessInfoItem = styled.div`
       }
     }
   }
+
+  ${({ isInfoShrunken }) => isInfoShrunken && css`
+    color: #FFFFFF;
+    span, p, h5, svg {
+      color: #FFFFFF !important;
+    }
+  `}
 `
 
 export const BusinessInfoContainer = styled.div`
-  margin-bottom: 25px;
+  padding: 10px;
+  margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -329,5 +337,18 @@ export const SearchIconWrapper = styled.div`
 
   svg {
     font-size: 18px;
+  }
+`
+
+export const SearchComponentContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 60px;
+  color: ${({ theme }) => theme.colors.white};
+  #select-input {
+    color: #FFFFFF !important;
+  }
+  svg {
+    color: #FFFFFF;
   }
 `
