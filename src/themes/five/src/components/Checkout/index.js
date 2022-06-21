@@ -106,7 +106,7 @@ const CheckoutUI = (props) => {
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
   const isWalletCreditPointsEnabled = businessConfigs.find(config => config.key === 'wallet_credit_point_enabled')?.value === '1'
-  const isWalletEnabled = configs?.cash_wallet?.value === '1' && configs?.wallet_enabled?.value === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled)
+  const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled)
 
   const placeSpotTypes = [3, 4]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type)

@@ -26,7 +26,7 @@ import {
   TermsConditionWrapper
 } from './styles'
 
-import { Input } from '../../styles/inputs'
+import { Input } from '../../styles/Inputs'
 import { Button } from '../../../../../styles/Buttons'
 import { Checkbox } from '../../../../../styles/Checkbox'
 

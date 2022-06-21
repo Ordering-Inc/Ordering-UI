@@ -48,6 +48,13 @@ export const BusinessBasicInformation = (props) => {
     return _types.join(', ')
   }
 
+  const showLogo = !theme?.layouts?.business_view?.components?.basic_information?.components?.logo?.hidden
+  const showDeliveryFee = !theme?.layouts?.business_view?.components?.basic_information?.components?.delivery_fee?.hidden
+  const showTime = !theme?.layouts?.business_view?.components?.basic_information?.components?.time?.hidden
+  const showBusinessInfo = !theme?.layouts?.business_view?.components?.basic_information?.components?.business_info?.hidden
+  const showReviews = !theme?.layouts?.business_view?.components?.basic_information?.components?.reviews?.hidden
+  const showDistance = !theme?.layouts?.business_view?.components?.basic_information?.components?.distance?.hidden
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -59,13 +66,15 @@ export const BusinessBasicInformation = (props) => {
       <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open}>
         {!business?.open && <h1>{t('CLOSED', 'Closed')}</h1>}
         <BusinessContent>
-          <WrapperBusinessLogo>
-            {!loading ? (
-              <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-            ) : (
-              <Skeleton height={70} width={70} />
-            )}
-          </WrapperBusinessLogo>
+          {showLogo && (
+            <WrapperBusinessLogo>
+              {!loading ? (
+                <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+              ) : (
+                <Skeleton height={70} width={70} />
+              )}
+            </WrapperBusinessLogo>
+          )}
           <BusinessInfo className='info'>
             <BusinessInfoItem>
               <div>
@@ -74,50 +83,63 @@ export const BusinessBasicInformation = (props) => {
                 ) : (
                   <Skeleton width={100} />
                 )}
-                {!loading ? (
-                  <p>
-                    <FaStar className='start' />
-                    {business?.reviews?.total}
-                  </p>
-                ) : (
-                  <Skeleton width={100} />
-                )}
-              </div>
-              <div>
-                {!loading ? (
-                  <p className='type'>{getBusinessType()}</p>
-                ) : (
-                  <Skeleton width={100} />
-                )}
-              </div>
-              <div>
-                {!loading ? (
+                {showReviews && (
                   <>
-                    {orderState?.options?.type === 1 ? (
-                      <h5>
-                        <FiClock />
-                        {convertHoursToMinutes(business?.delivery_time)}
-                      </h5>
+                    {!loading ? (
+                      <p>
+                        <FaStar className='start' />
+                        {business?.reviews?.total}
+                      </p>
                     ) : (
-                      <h5>
-                        <FiClock />
-                        {convertHoursToMinutes(business?.pickup_time)}
-                      </h5>
+                      <Skeleton width={100} />
                     )}
                   </>
-                ) : (
-                  <Skeleton width={70} />
                 )}
-
-                {!loading ? (
-                  <h5>
-                    <GrLocation />
-                    {parseDistance(business?.distance || 0)}
-                  </h5>
-                ) : (
-                  <Skeleton width={70} />
+              </div>
+              {showBusinessInfo && (
+                <div>
+                  {!loading ? (
+                    <p className='type'>{getBusinessType()}</p>
+                  ) : (
+                    <Skeleton width={100} />
+                  )}
+                </div>
+              )}
+              <div>
+                {showTime && (
+                  <>
+                    {!loading ? (
+                      <>
+                        {orderState?.options?.type === 1 ? (
+                          <h5>
+                            <FiClock />
+                            {convertHoursToMinutes(business?.delivery_time)}
+                          </h5>
+                        ) : (
+                          <h5>
+                            <FiClock />
+                            {convertHoursToMinutes(business?.pickup_time)}
+                          </h5>
+                        )}
+                      </>
+                    ) : (
+                      <Skeleton width={70} />
+                    )}
+                  </>
                 )}
-                {orderState?.options.type === 1 && (
+                {showDistance && (
+                  <>
+                    {!loading ? (
+                      <h5>
+                        <GrLocation />
+                        {parseDistance(business?.distance || 0)}
+                      </h5>
+                    ) : (
+                      <Skeleton width={70} />
+                    )}
+                  </>
+                )}
+                {orderState?.options.type === 1 && showDeliveryFee && (
                   <>
                     {!loading ? (
                       <h5>
