@@ -350,72 +350,72 @@
       "hidden": false,
       "components": {
         "layout": {
-          "type": "old"
+          "type": "half"
         },
         "delivery_type": {
-          "hidden": true
+          "hidden": false
         },
         "delivery_date": {
-          "hidden": true
+          "hidden": false
         },
         "delivery_progress": {
-          "hidden": true
+          "hidden": false
         },
         "business_information": {
-          "hidden": true,
+          "hidden": false,
           "components": {
             "phone": {
-              "hidden": true
+              "hidden": false
             },
             "messages": {
-              "hidden": true
+              "hidden": false
             },
             "email": {
-              "hidden": true
+              "hidden": false
             },
             "address": {
-              "hidden": true
+              "hidden": false
             },
             "map": {
-              "hidden": true
+              "hidden": false
             },
             "logo": {
-              "hidden": true
+              "hidden": false
             }
           }
         },
         "driver_information": {
           "components": {
             "name": {
-              "hidden": true
+              "hidden": false
             },
             "phone": {
-              "hidden": true
+              "hidden": false
             },
             "messages": {
-              "hidden": true
+              "hidden": false
             },
             "email": {
-              "hidden": true
+              "hidden": false
             },
             "photo": {
-              "hidden": true
+              "hidden": false
             }
           }
         },
         "customer_information": {
           "components": {
             "phone": {
-              "hidden": true
+              "hidden": false
             },
             "address": {
-              "hidden": true
+              "hidden": false
             },
             "email": {
-              "hidden": true
+              "hidden": false
             },
             "photo": {
-              "hidden": true
+              "hidden": false
             }
           }
         },
@@ -424,7 +424,7 @@
             "products": {
               "components": {
                 "photo": {
-                  "hidden": true
+                  "hidden": false
                 }
               }
             }
