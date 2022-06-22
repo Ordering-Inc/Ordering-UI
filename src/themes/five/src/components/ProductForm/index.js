@@ -107,6 +107,7 @@ const ProductOptionsUI = (props) => {
   const [videoGallery, setVideoGallery] = useState(null)
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [isHaveWeight, setIsHaveWeight] = useState(false)
+  const [isScrollAvailable, setIsScrollAvailable] = useState(false)
   const [qtyBy, setQtyBy] = useState({
     weight_unit: false,
     pieces: true
@@ -195,6 +196,39 @@ const ProductOptionsUI = (props) => {
     handleChangeProductCartQuantity(quantity)
   }
 
+  const scrollDown = () => {
+    const isErrors = Object.values(errors).length > 0
+    if (!isErrors) {
+      return
+    }
+    const productContainer = document.getElementsByClassName('popup-dialog')[0]
+    const unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
+
+    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
+    if (unselectedFirstSubOption) {
+      productContainer.scrollTop -= 90
+    }
+  }
+
+  const handleSlideChange = () => {
+    var videos = document.querySelectorAll('iframe, video')
+    Array.prototype.forEach.call(videos, function (video) {
+      if (video.tagName.toLowerCase() === 'video') {
+        video.pause()
+      } else {
+        var src = video.src
+        video.src = src
+      }
+    })
+  }
+
+  useEffect(() => {
+    if (isScrollAvailable) {
+      setIsScrollAvailable(false)
+      scrollDown()
+    }
+  }, [errors])
+
   useEffect(() => {
     if (document.getElementById(`${tabValue}`)) {
       const extraHeight = windowSize.width < 769 ? 100 : 42
@@ -239,33 +273,6 @@ const ProductOptionsUI = (props) => {
       setPricePerWeightUnit(product?.price / product?.weight)
     }
   }, [product])
-
-  const scrollDown = () => {
-    const isErrors = Object.values(errors).length > 0
-    if (!isErrors) {
-      return
-    }
-    const productContainer = document.getElementsByClassName('popup-dialog')[0]
-    const errorCount = document.getElementsByClassName('error')?.length
-    let unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
-    if (errorCount > 1) {
-      unselectedFirstSubOption = document.getElementsByClassName('error')?.[1]
-    }
-    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
-    productContainer.scrollTop -= 100
-  }
-
-  const handleSlideChange = () => {
-    var videos = document.querySelectorAll('iframe, video')
-    Array.prototype.forEach.call(videos, function (video) {
-      if (video.tagName.toLowerCase() === 'video') {
-        video.pause()
-      } else {
-        var src = video.src
-        video.src = src
-      }
-    })
-  }
 
   return (
     <>
@@ -515,6 +522,7 @@ const ProductOptionsUI = (props) => {
                                           state={currentState}
                                           isSoldOut={isSoldOut}
                                           scrollDown={scrollDown}
+                                          setIsScrollAvailable={setIsScrollAvailable}
                                         />
                                       )
                                     })
