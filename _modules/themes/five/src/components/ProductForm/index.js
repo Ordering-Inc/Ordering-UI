@@ -178,26 +178,31 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       isHaveWeight = _useState14[0],
       setIsHaveWeight = _useState14[1];
 
-  var _useState15 = (0, _react.useState)({
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      isScrollAvailable = _useState16[0],
+      setIsScrollAvailable = _useState16[1];
+
+  var _useState17 = (0, _react.useState)({
     weight_unit: false,
     pieces: true
   }),
-      _useState16 = _slicedToArray(_useState15, 2),
-      qtyBy = _useState16[0],
-      setQtyBy = _useState16[1];
-
-  var _useState17 = (0, _react.useState)(null),
       _useState18 = _slicedToArray(_useState17, 2),
-      pricePerWeightUnit = _useState18[0],
-      setPricePerWeightUnit = _useState18[1];
+      qtyBy = _useState18[0],
+      setQtyBy = _useState18[1];
 
-  var _useState19 = (0, _react.useState)({
+  var _useState19 = (0, _react.useState)(null),
+      _useState20 = _slicedToArray(_useState19, 2),
+      pricePerWeightUnit = _useState20[0],
+      setPricePerWeightUnit = _useState20[1];
+
+  var _useState21 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState20 = _slicedToArray(_useState19, 2),
-      alertState = _useState20[0],
-      setAlertState = _useState20[1];
+      _useState22 = _slicedToArray(_useState21, 2),
+      alertState = _useState22[0],
+      setAlertState = _useState22[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
 
@@ -296,6 +301,42 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     handleChangeProductCartQuantity(quantity);
   };
 
+  var scrollDown = function scrollDown() {
+    var _document$getElements;
+
+    var isErrors = Object.values(errors).length > 0;
+
+    if (!isErrors) {
+      return;
+    }
+
+    var productContainer = document.getElementsByClassName('popup-dialog')[0];
+    var unselectedFirstSubOption = (_document$getElements = document.getElementsByClassName('error')) === null || _document$getElements === void 0 ? void 0 : _document$getElements[0];
+    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true);
+
+    if (unselectedFirstSubOption) {
+      productContainer.scrollTop -= 90;
+    }
+  };
+
+  var handleSlideChange = function handleSlideChange() {
+    var videos = document.querySelectorAll('iframe, video');
+    Array.prototype.forEach.call(videos, function (video) {
+      if (video.tagName.toLowerCase() === 'video') {
+        video.pause();
+      } else {
+        var src = video.src;
+        video.src = src;
+      }
+    });
+  };
+
+  (0, _react.useEffect)(function () {
+    if (isScrollAvailable) {
+      setIsScrollAvailable(false);
+      scrollDown();
+    }
+  }, [errors]);
   (0, _react.useEffect)(function () {
     if (document.getElementById("".concat(tabValue))) {
       var extraHeight = windowSize.width < 769 ? 100 : 42;
@@ -361,42 +402,6 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       setPricePerWeightUnit((product === null || product === void 0 ? void 0 : product.price) / (product === null || product === void 0 ? void 0 : product.weight));
     }
   }, [product]);
-
-  var scrollDown = function scrollDown() {
-    var _document$getElements, _document$getElements2;
-
-    var isErrors = Object.values(errors).length > 0;
-
-    if (!isErrors) {
-      return;
-    }
-
-    var productContainer = document.getElementsByClassName('popup-dialog')[0];
-    var errorCount = (_document$getElements = document.getElementsByClassName('error')) === null || _document$getElements === void 0 ? void 0 : _document$getElements.length;
-    var unselectedFirstSubOption = (_document$getElements2 = document.getElementsByClassName('error')) === null || _document$getElements2 === void 0 ? void 0 : _document$getElements2[0];
-
-    if (errorCount > 1) {
-      var _document$getElements3;
-
-      unselectedFirstSubOption = (_document$getElements3 = document.getElementsByClassName('error')) === null || _document$getElements3 === void 0 ? void 0 : _document$getElements3[1];
-    }
-
-    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true);
-    productContainer.scrollTop -= 100;
-  };
-
-  var handleSlideChange = function handleSlideChange() {
-    var videos = document.querySelectorAll('iframe, video');
-    Array.prototype.forEach.call(videos, function (video) {
-      if (video.tagName.toLowerCase() === 'video') {
-        video.pause();
-      } else {
-        var src = video.src;
-        video.src = src;
-      }
-    });
-  };
-
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -592,7 +597,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
           suboption: suboption,
           state: currentState,
           isSoldOut: isSoldOut,
-          scrollDown: scrollDown
+          scrollDown: scrollDown,
+          setIsScrollAvailable: setIsScrollAvailable
         });
       }))));
     });
