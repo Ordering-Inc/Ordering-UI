@@ -9,7 +9,7 @@ import {
   DriverTipLabel,
   WrapperTips
 } from './styles'
-import { Input } from '../../styles/inputs'
+import { Input } from '../../styles/Inputs'
 import { Button } from '../../../../../styles/Buttons'
 const DriverTipsUI = (props) => {
   const {

@@ -13,6 +13,7 @@ import {
   BusinessInfo,
   BusinessInfoItem
 } from './styles'
+import { useTheme } from 'styled-components'
 const types = ['food', 'laundry', 'alcohol', 'groceries']
 export const BusinessBasicInformation = (props) => {
   const {
@@ -23,6 +24,7 @@ export const BusinessBasicInformation = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance }] = useUtils()
+  const theme = useTheme()
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -31,6 +33,12 @@ export const BusinessBasicInformation = (props) => {
     ))
     return _types.join(', ')
   }
+
+  const showDeliveryFee = !theme?.layouts?.business_view?.components?.basic_information?.components?.delivery_fee?.hidden
+  const showTime = !theme?.layouts?.business_view?.components?.basic_information?.components?.time?.hidden
+  const showBusinessInfo = !theme?.layouts?.business_view?.components?.basic_information?.components?.business_info?.hidden
+  const showReviews = !theme?.layouts?.business_view?.components?.basic_information?.components?.reviews?.hidden
+  const showDistance = !theme?.layouts?.business_view?.components?.basic_information?.components?.distance?.hidden
 
   return (
     <>
@@ -58,40 +66,52 @@ export const BusinessBasicInformation = (props) => {
                   <Skeleton width={150} height={30} />
                 )}
               </div>
-              <div>
-                {!loading ? (
-                  <p className='type'>{getBusinessType()}</p>
-                ) : (
-                  <Skeleton width={100} />
-                )}
-              </div>
-              <div className='meta'>
-                {!loading ? (
-                  <>
-                    {orderState?.options?.type === 1 ? (
-                      <p>
-                        <FiClock />
-                        {convertHoursToMinutes(business?.delivery_time)}
-                      </p>
+              {
+                showBusinessInfo && (
+                  <div>
+                    {!loading ? (
+                      <p className='type'>{getBusinessType()}</p>
                     ) : (
-                      <p>
-                        <FiClock />
-                        {convertHoursToMinutes(business?.pickup_time)}
-                      </p>
+                      <Skeleton width={100} />
+                    )}
+                  </div>
+                )
+              }
+              <div className='meta'>
+                {showTime && (
+                  <>
+                    {!loading ? (
+                      <>
+                        {orderState?.options?.type === 1 ? (
+                          <p>
+                            <FiClock />
+                            {convertHoursToMinutes(business?.delivery_time)}
+                          </p>
+                        ) : (
+                          <p>
+                            <FiClock />
+                            {convertHoursToMinutes(business?.pickup_time)}
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <Skeleton width={50} />
                     )}
                   </>
-                ) : (
-                  <Skeleton width={50} />
                 )}
-                {!loading ? (
-                  <p>
-                    <GrLocation />
-                    {parseDistance(business?.distance || 0)}
-                  </p>
-                ) : (
-                  <Skeleton width={50} />
+                {showDistance && (
+                  <>
+                    {!loading ? (
+                      <p>
+                        <GrLocation />
+                        {parseDistance(business?.distance || 0)}
+                      </p>
+                    ) : (
+                      <Skeleton width={50} />
+                    )}
+                  </>
                 )}
-                {orderState?.options.type === 1 && (
+                {orderState?.options.type === 1 && showDeliveryFee && (
                   <>
                     {!loading ? (
                       <p>
@@ -103,13 +123,17 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 )}
-                {!loading ? (
-                  <p>
-                    <FaStar className='start' />
-                    {business?.reviews?.total}
-                  </p>
-                ) : (
-                  <Skeleton width={50} />
+                {showReviews && (
+                  <>
+                    {!loading ? (
+                      <p>
+                        <FaStar className='start' />
+                        {business?.reviews?.total}
+                      </p>
+                    ) : (
+                      <Skeleton width={50} />
+                    )}
+                  </>
                 )}
               </div>
             </BusinessInfoItem>

@@ -10,11 +10,9 @@ import { BusinessProductsCategories as CategoriesLayoutGroceries } from '../Busi
 import { BusinessProductsList as ProductListLayoutGroceries } from '../BusinessProductsList/layouts/groceries'
 import { Modal } from '../Modal'
 import { Cart } from '../Cart'
-import { SearchBar } from '../SearchBar'
 import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
-import { Select } from '../../styles/Select'
-
+import { SearchProducts } from './SearchProducts'
 import {
   Title,
   WrappLayout,
@@ -111,18 +109,13 @@ export const RenderProductsLayout = (props) => {
                   <>
                     {(categoryState.products.length !== 0 || searchValue) && (
                       <WrapperSearch>
-                        <SearchBar
-                          onSearch={handleChangeSearch}
-                          search={searchValue}
-                          placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
-                          lazyLoad={businessState?.business?.lazy_load_products_recommended}
-                        />
-                        <Select
-                          notAsync
-                          notReload
-                          options={sortByOptions}
-                          defaultValue={sortByValue}
+                        <SearchProducts
+                          handleChangeSearch={handleChangeSearch}
+                          searchValue={searchValue}
+                          sortByOptions={sortByOptions}
+                          sortByValue={sortByValue}
                           onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                          businessState={businessState}
                         />
                       </WrapperSearch>
                     )}
@@ -197,18 +190,13 @@ export const RenderProductsLayout = (props) => {
                         : 'hidden'
                     }}
                   >
-                    <SearchBar
-                      onSearch={handleChangeSearch}
-                      search={searchValue}
-                      placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
-                      lazyLoad={businessState?.business?.lazy_load_products_recommended}
-                    />
-                    <Select
-                      notAsync
-                      notReload
-                      options={sortByOptions}
-                      defaultValue={sortByValue}
+                    <SearchProducts
+                      handleChangeSearch={handleChangeSearch}
+                      searchValue={searchValue}
+                      sortByOptions={sortByOptions}
+                      sortByValue={sortByValue}
                       onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                      businessState={businessState}
                     />
                   </WrapperSearch>
                   <BusinessContent>

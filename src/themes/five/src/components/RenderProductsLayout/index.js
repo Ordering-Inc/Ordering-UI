@@ -4,11 +4,14 @@ import { useLanguage, useConfig, useUtils } from 'ordering-components'
 import { Cart3 } from 'react-bootstrap-icons'
 
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
+import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
+import { BusinessBasicInformation as BusinessBasicInformationStarbucks } from '../../../../six'
+import { BusinessBasicInformation as BusinessBasicInformationOld } from '../../../../../components/BusinessBasicInformation'
+
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { BusinessProductsCategories as CategoriesLayoutGroceries } from '../BusinessProductsCategories/layouts/groceries'
 import { BusinessProductsList as ProductListLayoutGroceries } from '../BusinessProductsList/layouts/groceries'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Modal } from '../Modal'
 
 import { Cart } from '../Cart'
@@ -25,8 +28,11 @@ import {
   BusinessCartContent,
   EmptyCart,
   EmptyBtnWrapper,
-  MobileCartViewWrapper
+  WrapperSearch
 } from './styles'
+
+import { SearchProducts as SearchProductsOld } from '../../../../../components/RenderProductsLayout/SearchProducts'
+import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/components/BusinessProductsListing/SearchProducts'
 
 const layoutOne = 'groceries'
 
@@ -66,11 +72,25 @@ export const RenderProductsLayout = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-  const windowSize = useWindowSize()
   const [{ parsePrice }] = useUtils()
   const [isCartModal, setisCartModal] = useState(false)
 
   const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
+  const BusinessBasicInformationComponent =
+    theme?.layouts?.business_view?.components?.basic_information?.components?.layout?.type === 'red'
+      ? BusinessBasicInformationRed
+      : theme?.layouts?.business_view?.components?.basic_information?.components?.layout?.type === 'starbucks'
+        ? BusinessBasicInformationStarbucks
+        : theme?.layouts?.business_view?.components?.basic_information?.components?.layout?.type === 'old'
+          ? BusinessBasicInformationOld
+          : BusinessBasicInformation
+
+  const SearchProductsComponent =
+    theme?.layouts?.business_view?.components?.product_search?.components?.layout?.type === 'old'
+      ? SearchProductsOld
+      : theme?.layouts?.business_view?.components?.product_search?.components?.layout?.type === 'starbucks'
+        ? SearchProductsStarbucks
+        : null
 
   const frontLayout = business?.front_layout
   const businessLayout = {
@@ -103,7 +123,7 @@ export const RenderProductsLayout = (props) => {
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
           <div className='bp-list'>
             {!isCustomLayout && (
-              <BusinessBasicInformation
+              <BusinessBasicInformationComponent
                 {...props}
                 businessState={businessState}
                 setOpenBusinessInformation={setOpenBusinessInformation}
@@ -116,6 +136,20 @@ export const RenderProductsLayout = (props) => {
                 errorQuantityProducts={errorQuantityProducts}
                 sortByValue={sortByValue}
               />
+            )}
+            {!errorQuantityProducts && SearchProductsComponent && (
+              <>
+                <WrapperSearch>
+                  <SearchProductsComponent
+                    handleChangeSearch={handleChangeSearch}
+                    searchValue={searchValue}
+                    sortByOptions={sortByOptions}
+                    sortByValue={sortByValue}
+                    onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                    businessState={businessState}
+                  />
+                </WrapperSearch>
+              </>
             )}
             {!businessLayout.layoutOne && (
               <BusinessContent isCustomLayout={isCustomLayout}>
@@ -262,7 +296,7 @@ export const RenderProductsLayout = (props) => {
       {isLoading && !isError && (
         <>
           {!isCustomLayout && (
-            <BusinessBasicInformation
+            <BusinessBasicInformationComponent
               isSkeleton
               handler={handler}
               businessState={{ business: {}, loading: true }}
