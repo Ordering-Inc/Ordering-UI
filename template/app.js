@@ -6,7 +6,7 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, Analytics, FacebookPixel, useConfig } from 'ordering-components'
+import { useSession, useLanguage, useOrder, Analytics, FacebookPixel, useConfig, useEvent } from 'ordering-components'
 
 import { Header } from '../src/themes/five/src/components/Header'
 import { Footer } from '../src/themes/five/src/components/Footer'
@@ -41,16 +41,20 @@ import { HelmetTags } from './components/HelmetTags'
 import settings from './config.json'
 
 export const App = () => {
-  const [{ auth, user, loading }, { login }] = useSession()
+  const [{ auth, user }, { login }] = useSession()
+  const [events] = useEvent()
   const theme = useTheme()
-  const [orderStatus] = useOrder()
-  const [{ configs }] = useConfig()
+  const [orderStatus, { changeType }] = useOrder()
+  const [{ configs, loading: configLoading }] = useConfig()
   const [, t] = useLanguage()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
+
+  const orderTypeSearchParam = parseInt(new URLSearchParams(useLocation()?.search)?.get('order_type') ?? 0, 10)
+  const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
@@ -107,16 +111,17 @@ export const App = () => {
   }
 
   useEffect(() => {
-    if (!loaded && !orderStatus.loading) {
+    if (!loaded && !orderStatus.loading && !configLoading) {
+      if (orderTypeSearchParam && configTypes.includes(orderTypeSearchParam)) {
+        changeType(parseInt(orderTypeSearchParam, 10))
+        if (orderStatus?.options?.type === parseInt(orderTypeSearchParam, 10)) {
+          setLoaded(true)
+        }
+        return
+      }
       setLoaded(true)
     }
-  }, [orderStatus])
-
-  useEffect(() => {
-    if (!loading) {
-      setLoaded(!auth)
-    }
-  }, [loading])
+  }, [orderStatus, configLoading])
 
   useEffect(() => {
     if (configs?.front_version?.value && loaded) {
@@ -129,6 +134,12 @@ export const App = () => {
       }
     }
   }, [configs, loaded])
+
+  useEffect(() => {
+    if (isHome && settings?.use_marketplace) {
+      events.emit('go_to_page', { page: 'business', params: { store: 'marketplace' } })
+    }
+  }, [])
 
   return (
     <>

@@ -13,11 +13,28 @@ export const BusinessProductsList = (props) => {
 
   let category
   let product
+  let tableNumber
 
   if (search) {
     const data = search.substring(1).split('&')
-    category = data[0]
-    product = data[1]
+    category = data[0].includes('category') && data[0]
+    product = data[1].includes('product') && data[1]
+    tableNumber = data[1].includes('table_number') && data[1]
+  }
+
+  if (tableNumber) {
+    const tableNumberFromStorage = window.localStorage.getItem('table_number')
+    if (tableNumberFromStorage) {
+      window.localStorage.removeItem('table_number')
+    }
+
+    window.localStorage.setItem(
+      'table_number',
+      JSON.stringify({
+        tableNumber: tableNumber.split('=')[1],
+        slug: store
+      })
+    )
   }
 
   const categoryId = category && category.split('=')[1]
