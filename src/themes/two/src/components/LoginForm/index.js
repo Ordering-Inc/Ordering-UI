@@ -5,7 +5,8 @@ import {
   LoginForm as LoginFormController,
   useLanguage,
   useConfig,
-  useSession
+  useSession,
+  ReCaptcha
 } from 'ordering-components'
 import { Alert } from '../../../../../components/Confirm'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
@@ -21,7 +22,8 @@ import {
   WrapperPassword,
   TogglePassword,
   OtpWrapper,
-  CountdownTimer
+  CountdownTimer,
+  ReCaptchaWrapper
 } from './styles'
 
 import { Tabs, Tab } from '../../../../../styles/Tabs'
@@ -55,7 +57,9 @@ const LoginFormUI = (props) => {
     checkPhoneCodeState,
     loginTab,
     isPopup,
-    credentials
+    credentials,
+    enableReCaptcha,
+    handleReCaptcha
   } = props
   const numOtpInputs = 4
   const theme = useTheme()
@@ -423,6 +427,11 @@ const LoginFormUI = (props) => {
                   {elementLinkToForgotPassword}
                 </RedirectLink>
               )}
+              {props.isRecaptchaEnable && enableReCaptcha && (
+                <ReCaptchaWrapper>
+                  <ReCaptcha handleReCaptcha={handleReCaptcha} />
+                </ReCaptchaWrapper>
+              )}
               {(!willVerifyOtpState &&
                 <Button
                   color='primary'
@@ -475,6 +484,7 @@ const LoginFormUI = (props) => {
 export const LoginForm = (props) => {
   const loginControllerProps = {
     ...props,
+    isRecaptchaEnable: true,
     UIComponent: LoginFormUI
   }
   return <LoginFormController {...loginControllerProps} />

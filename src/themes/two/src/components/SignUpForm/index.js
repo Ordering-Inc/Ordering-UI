@@ -9,7 +9,8 @@ import {
   SignupForm as SignUpController,
   useLanguage,
   useConfig,
-  useSession
+  useSession,
+  ReCaptcha
 } from 'ordering-components'
 import {
   SignUpContainer,
@@ -22,7 +23,8 @@ import {
   WrapperPassword,
   TogglePassword,
   OrDividerContainer,
-  TermsConditionWrapper
+  TermsConditionWrapper,
+  ReCaptchaWrapper
 } from './styles'
 
 import { Input } from '../../styles/Inputs'
@@ -53,7 +55,9 @@ const SignUpFormUI = (props) => {
     externalPhoneNumber,
     saveCustomerUser,
     fieldsNotValid,
-    signupData
+    signupData,
+    enableReCaptcha,
+    handleReCaptcha
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -387,6 +391,12 @@ const SignUpFormUI = (props) => {
               </TermsConditionWrapper>
             )}
 
+            {props.isRecaptchaEnable && enableReCaptcha && (
+                <ReCaptchaWrapper>
+                  <ReCaptcha handleReCaptcha={handleReCaptcha} />
+                </ReCaptchaWrapper>
+            )}
+
             <Button
               color='primary'
               type='submit'
@@ -419,6 +429,7 @@ const SignUpFormUI = (props) => {
 export const SignUpForm = (props) => {
   const loginControllerProps = {
     ...props,
+    isRecaptchaEnable: true,
     UIComponent: SignUpFormUI
   }
   return <SignUpController {...loginControllerProps} />
