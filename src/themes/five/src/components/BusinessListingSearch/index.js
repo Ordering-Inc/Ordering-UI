@@ -162,7 +162,7 @@ export const BusinessListingSearchUI = (props) => {
                   {filters?.franchise_ids?.includes(brand?.id) && <Check2 />}
                 </BrandItem>
               ))}
-              {!brandList?.loading && (brandList?.brands?.length === 0) && (
+              {!brandList?.loading && ((brandList?.brands?.filter(brand => brand?.enabled))?.length === 0) && (
                 <NoResult>{t('NO_RESULTS_FOUND', 'Sorry, no results found')}</NoResult>
               )}
             </BrandListWrapper>
