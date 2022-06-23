@@ -20,7 +20,9 @@ export const ActionsSection = (props) => {
     unreadAlert,
     setOpenMessages,
     readMessages,
-    setUnreadAlert
+    setUnreadAlert,
+    showPhone,
+    showMessages
   } = props
 
   const handleOpenMessages = (data) => {
@@ -35,7 +37,7 @@ export const ActionsSection = (props) => {
 
   return (
     <ActionsBlock>
-      {order?.[actionType] && order?.[actionType]?.phone &&
+      {order?.[actionType] && order?.[actionType]?.phone && showPhone &&
         <span onClick={() => window.open(`tel:${order?.[actionType]?.phone}`)}>
           <BsPhone />
         </span>}
@@ -44,14 +46,16 @@ export const ActionsSection = (props) => {
           <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
         </span>
       )}
-      <MessagesIcon onClick={() => handleOpenMessages({ driver: actionType === 'driver', business: actionType === 'business' })}>
-        {order?.unread_count > 0 && unreadAlert?.[actionType] && (
-          <ExclamationWrapper>
-            <AiFillExclamationCircle />
-          </ExclamationWrapper>
-        )}
-        <BiMessageRounded />
-      </MessagesIcon>
+      {showMessages && (
+        <MessagesIcon onClick={() => handleOpenMessages({ driver: actionType === 'driver', business: actionType === 'business' })}>
+          {order?.unread_count > 0 && unreadAlert?.[actionType] && (
+            <ExclamationWrapper>
+              <AiFillExclamationCircle />
+            </ExclamationWrapper>
+          )}
+          <BiMessageRounded />
+        </MessagesIcon>
+      )}
     </ActionsBlock>
   )
 }

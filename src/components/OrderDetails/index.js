@@ -105,6 +105,20 @@ const OrderDetailsUI = (props) => {
 
   const isFromCheckPage = JSON.parse(window.localStorage.getItem('business-address'))
 
+  const showDeliveryDate = !theme?.layouts?.confirmation?.components?.delivery_date?.hidden
+  const showDeliveryProgress = !theme?.layouts?.confirmation?.components?.delivery_progress?.hidden
+  const showBusinessMessages = !theme?.layouts?.confirmation?.components?.business_information?.components?.messages?.hidden
+  const showBusinessAddress = !theme?.layouts?.confirmation?.components?.business_information?.components?.address?.hidden
+  const showBusinessMap = !theme?.layouts?.confirmation?.components?.business_information?.components?.map?.hidden
+  const showBusinessLogo = !theme?.layouts?.confirmation?.components?.business_information?.components?.logo?.hidden
+  const showDriverName = !theme?.layouts?.confirmation?.components?.driver_information?.components?.name?.hidden
+  const showDriverPhone = !theme?.layouts?.confirmation?.components?.driver_information?.components?.phone?.hidden
+  const showDriverMessages = !theme?.layouts?.confirmation?.components?.driver_information?.components?.messages?.hidden
+  const showDriverEmail = !theme?.layouts?.confirmation?.components?.driver_information?.components?.email?.hidden
+  const showDriverPhoto = !theme?.layouts?.confirmation?.components?.driver_information?.components?.photo?.hidden
+  const showCustomerAddress = !theme?.layouts?.confirmation?.components?.customer_information?.components?.address?.hidden
+  const showCustomerPhoto = !theme?.layouts?.confirmation?.components?.customer_information?.components?.photo?.hidden
+
   const getOrderStatus = (s) => {
     const status = parseInt(s)
     const orderStatus = [
@@ -274,32 +288,42 @@ const OrderDetailsUI = (props) => {
               </Header>
               <OrderBusiness>
                 <BusinessWrapper>
-                  <LogoWrapper>
-                    <BusinessLogo bgimage={order?.business?.logo || theme.images?.dummies?.businessLogo} />
-                  </LogoWrapper>
+                  {showBusinessLogo && (
+                    <LogoWrapper>
+                      <BusinessLogo bgimage={order?.business?.logo || theme.images?.dummies?.businessLogo} />
+                    </LogoWrapper>
+                  )}
                   <BusinessInfo>
                     <h1>{order?.business?.name}</h1>
-                    <p>{order?.business?.address}</p>
-                    <p>{order?.business?.cellphone}</p>
-                    <p>{order?.business?.email}</p>
+                    {showBusinessAddress && (
+                      <p>{order?.business?.address}</p>
+                    )}
+                    {showDriverPhone && (
+                      <p>{order?.business?.cellphone}</p>
+                    )}
+                    {showDriverEmail && (
+                      <p>{order?.business?.email}</p>
+                    )}
                   </BusinessInfo>
                 </BusinessWrapper>
                 <ActionsBlock>
-                  {order?.driver && order?.driver.phone &&
+                  {order?.driver && order?.driver.phone && showDriverPhone &&
                     <span onClick={() => window.open(`tel:${order?.driver.phone}`)}>
                       <FiPhone />
                     </span>}
                   <span>
                     <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
                   </span>
-                  <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
-                    {order?.unread_count > 0 && unreadAlert.business && (
-                      <ExclamationWrapper>
-                        <AiFillExclamationCircle />
-                      </ExclamationWrapper>
-                    )}
-                    <HiOutlineChat />
-                  </MessagesIcon>
+                  {showBusinessMessages && (
+                    <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
+                      {order?.unread_count > 0 && unreadAlert.business && (
+                        <ExclamationWrapper>
+                          <AiFillExclamationCircle />
+                        </ExclamationWrapper>
+                      )}
+                      <HiOutlineChat />
+                    </MessagesIcon>
+                  )}
                 </ActionsBlock>
               </OrderBusiness>
 
@@ -309,38 +333,50 @@ const OrderDetailsUI = (props) => {
                   {order?.status !== 0 && order?.integration_id && (
                     <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
                   )}
-                  <p>{t('DATE_TIME_FOR_ORDER', theme?.defaultLanguages?.DATE_TIME_FOR_ORDER || 'Date and time for your order')}</p>
-                  <p className='date'>
-                    {
-                      order?.delivery_datetime_utc
-                        ? parseDate(order?.delivery_datetime_utc)
-                        : parseDate(order?.delivery_datetime, { utc: false })
-                    }
-                  </p>
-                  <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                  {showDeliveryDate && (
+                    <>
+                      <p>{t('DATE_TIME_FOR_ORDER', theme?.defaultLanguages?.DATE_TIME_FOR_ORDER || 'Date and time for your order')}</p>
+                      <p className='date'>
+                        {
+                          order?.delivery_datetime_utc
+                            ? parseDate(order?.delivery_datetime_utc)
+                            : parseDate(order?.delivery_datetime, { utc: false })
+                        }
+                      </p>
+                    </>
+                  )}
+                  {showDeliveryProgress && (
+                    <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                  )}
                 </OrderData>
-                <OrderStatus>
-                  <span>{getOrderStatus(order?.status)?.value}</span>
-                  <StatusImage>
-                    <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' loading='lazy' />
-                  </StatusImage>
-                </OrderStatus>
+                {showDeliveryProgress && (
+                  <OrderStatus>
+                    <span>{getOrderStatus(order?.status)?.value}</span>
+                    <StatusImage>
+                      <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' loading='lazy' />
+                    </StatusImage>
+                  </OrderStatus>
+                )}
               </OrderInfo>
 
               <SectionTitle>
                 {t('CUSTOMER', theme?.defaultLanguages?.CUSTOMER || 'Customer')}
               </SectionTitle>
               <OrderCustomer>
-                <div className='photo'>
-                  {order?.customer?.photo ? (
-                    <PhotoBlock src={order?.customer?.photo} width='80' height='80' />
-                  ) : (
-                    <FaUserCircle />
-                  )}
-                </div>
+                {showCustomerPhoto && (
+                  <div className='photo'>
+                    {order?.customer?.photo ? (
+                      <PhotoBlock src={order?.customer?.photo} width='80' height='80' />
+                    ) : (
+                      <FaUserCircle />
+                    )}
+                  </div>
+                )}
                 <InfoBlock>
                   <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
-                  <span>{order?.customer?.address}</span>
+                  {showCustomerAddress && (
+                    <span>{order?.customer?.address}</span>
+                  )}
                 </InfoBlock>
               </OrderCustomer>
               {order?.delivery_type === 1 && (
@@ -374,7 +410,7 @@ const OrderDetailsUI = (props) => {
 
               {order?.driver && (
                 <>
-                  {order?.driver?.location && parseInt(order?.status) === 9 && (
+                  {showBusinessMap && order?.driver?.location && parseInt(order?.status) === 9 && (
                     <Map>
                       <GoogleMapsMap
                         apiKey={configs?.google_maps_api_key?.value}
@@ -390,31 +426,37 @@ const OrderDetailsUI = (props) => {
                     </SectionTitle>
                     <OrderDriver>
                       <WrapperDriver>
-                        <div className='photo'>
-                          {order?.driver?.photo ? (
-                            <PhotoBlock src={order?.driver?.photo} width='70' height='70' />
-                          ) : (
-                            <RiUser2Fill />
-                          )}
-                        </div>
+                        {showDriverPhoto && (
+                          <div className='photo'>
+                            {order?.driver?.photo ? (
+                              <PhotoBlock src={order?.driver?.photo} width='70' height='70' />
+                            ) : (
+                              <RiUser2Fill />
+                            )}
+                          </div>
+                        )}
                         <InfoBlock>
-                          <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
+                          {showDriverName && (
+                            <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
+                          )}
                           <span>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</span>
                         </InfoBlock>
                       </WrapperDriver>
                       <ActionsBlock>
-                        {order.driver && order.driver?.phone &&
+                        {showDriverPhone && order.driver && order.driver?.phone &&
                           <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
                             <FiPhone />
                           </span>}
-                        <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
-                          {order?.unread_count > 0 && unreadAlert?.driver && (
-                            <ExclamationWrapper>
-                              <AiFillExclamationCircle />
-                            </ExclamationWrapper>
-                          )}
-                          <HiOutlineChat />
-                        </MessagesIcon>
+                        {showDriverMessages && (
+                          <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
+                            {order?.unread_count > 0 && unreadAlert?.driver && (
+                              <ExclamationWrapper>
+                                <AiFillExclamationCircle />
+                              </ExclamationWrapper>
+                            )}
+                            <HiOutlineChat />
+                          </MessagesIcon>
+                        )}
                       </ActionsBlock>
                     </OrderDriver>
                   </>
