@@ -224,7 +224,10 @@ var LoginFormUI = function LoginFormUI(props) {
               if (loginTab === 'otp') {
                 if (otpType === 'cellphone') {
                   _parseNumber = parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone), cellphone = _parseNumber.cellphone, countryPhoneCode = _parseNumber.countryPhoneCode;
-                  generateOtpCode(cellphone, countryPhoneCode);
+                  generateOtpCode({
+                    cellphone: cellphone,
+                    countryPhoneCode: countryPhoneCode
+                  });
                 } else {
                   generateOtpCode();
                 }

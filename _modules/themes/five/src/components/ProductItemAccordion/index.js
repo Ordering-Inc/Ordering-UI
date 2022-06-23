@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _theme$layouts, _theme$layouts$viewSt, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _theme$layouts$viewSt6, _props$beforeElements, _props$beforeComponen, _product$valid, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$viewSt, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _theme$layouts$viewSt6, _theme$layouts$viewSt7, _props$beforeElements, _props$beforeComponen, _product$valid, _props$afterComponent, _props$afterElements;
 
   var isCartPending = props.isCartPending,
       isCartProduct = props.isCartProduct,
@@ -67,7 +67,8 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       onDeleteProduct = props.onDeleteProduct,
       onEditProduct = props.onEditProduct,
       isCheckout = props.isCheckout,
-      isStore = props.isStore;
+      isStore = props.isStore,
+      isConfirmationPage = props.isConfirmationPage;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -103,8 +104,8 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var productSelect = (0, _react.useRef)(null);
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
-  var viewString = isStore ? 'business_view' : 'header';
-  var isHideProductImage = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$viewSt = _theme$layouts[viewString]) === null || _theme$layouts$viewSt === void 0 ? void 0 : (_theme$layouts$viewSt2 = _theme$layouts$viewSt.components) === null || _theme$layouts$viewSt2 === void 0 ? void 0 : (_theme$layouts$viewSt3 = _theme$layouts$viewSt2.cart) === null || _theme$layouts$viewSt3 === void 0 ? void 0 : (_theme$layouts$viewSt4 = _theme$layouts$viewSt3.components) === null || _theme$layouts$viewSt4 === void 0 ? void 0 : (_theme$layouts$viewSt5 = _theme$layouts$viewSt4.products) === null || _theme$layouts$viewSt5 === void 0 ? void 0 : (_theme$layouts$viewSt6 = _theme$layouts$viewSt5.image) === null || _theme$layouts$viewSt6 === void 0 ? void 0 : _theme$layouts$viewSt6.hidden;
+  var viewString = isConfirmationPage ? 'confirmation' : isStore ? 'business_view' : 'header';
+  var showProductImage = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$viewSt = _theme$layouts[viewString]) !== null && _theme$layouts$viewSt !== void 0 && (_theme$layouts$viewSt2 = _theme$layouts$viewSt.components) !== null && _theme$layouts$viewSt2 !== void 0 && (_theme$layouts$viewSt3 = _theme$layouts$viewSt2.cart) !== null && _theme$layouts$viewSt3 !== void 0 && (_theme$layouts$viewSt4 = _theme$layouts$viewSt3.components) !== null && _theme$layouts$viewSt4 !== void 0 && (_theme$layouts$viewSt5 = _theme$layouts$viewSt4.products) !== null && _theme$layouts$viewSt5 !== void 0 && (_theme$layouts$viewSt6 = _theme$layouts$viewSt5.components) !== null && _theme$layouts$viewSt6 !== void 0 && (_theme$layouts$viewSt7 = _theme$layouts$viewSt6.photo) !== null && _theme$layouts$viewSt7 !== void 0 && _theme$layouts$viewSt7.hidden);
 
   var productInfo = function productInfo() {
     if (isCartProduct) {
@@ -172,7 +173,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, {
     className: "info"
-  }, (product === null || product === void 0 ? void 0 : product.images) && !isHideProductImage && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
+  }, (product === null || product === void 0 ? void 0 : product.images) && showProductImage && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     bgimage: product === null || product === void 0 ? void 0 : product.images
   })), isCartProduct && !isCartPending && getProductMax ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, null), /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
     ref: productSelect,

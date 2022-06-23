@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TagsContainer = exports.SortItem = exports.SortContainer = exports.SingleBusinessSearch = exports.ProgressContentWrapper = exports.ProgressBar = exports.ProductsList = exports.NotFoundWrapper = exports.Metadata = exports.MaxItemContainer = exports.MaxItem = exports.MaxFilterContainer = exports.FiltersResultContainer = exports.FiltersContainer = exports.Filters = exports.BusinessesTitle = exports.BusinessProductsListWrapper = exports.BusinessProductsListContainer = exports.BusinessName = exports.BusinessLogo = exports.BusinessListingSearchContainer = exports.BusinessListWrapper = exports.BusinessList = exports.BusinessInfoItem = exports.BusinessInfo = exports.BusinessControllerSkeleton = void 0;
+exports.TagsContainer = exports.SortItem = exports.SortContainer = exports.SingleBusinessSearch = exports.ProgressContentWrapper = exports.ProgressBar = exports.ProductsList = exports.NotFoundWrapper = exports.NoResult = exports.Metadata = exports.MaxItemContainer = exports.MaxItem = exports.MaxFilterContainer = exports.FiltersResultContainer = exports.FiltersContainer = exports.Filters = exports.BusinessesTitle = exports.BusinessProductsListWrapper = exports.BusinessProductsListContainer = exports.BusinessName = exports.BusinessLogo = exports.BusinessListingSearchContainer = exports.BusinessListWrapper = exports.BusinessList = exports.BusinessInfoItem = exports.BusinessInfo = exports.BusinessControllerSkeleton = exports.BrandListWrapper = exports.BrandItem = exports.BrandContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -165,3 +165,23 @@ var BusinessesTitle = _styledComponents.default.h1(_templateObject31 || (_templa
 });
 
 exports.BusinessesTitle = BusinessesTitle;
+
+var BrandContainer = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  > h3 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin-top: 0px;\n    margin-bottom: 10px;\n  }\n"])));
+
+exports.BrandContainer = BrandContainer;
+
+var BrandListWrapper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  max-height: 300px;\n  overflow: auto;\n"])));
+
+exports.BrandListWrapper = BrandListWrapper;
+
+var BrandItem = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  cursor: pointer;\n  margin-bottom: 8px;\n\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    transition: all 0.3s linear;\n  }\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n  }\n  &:hover {\n    span {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.success500;
+}, function (props) {
+  return props.theme.colors.secundaryContrast;
+});
+
+exports.BrandItem = BrandItem;
+
+var NoResult = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  text-align: center;\n"])));
+
+exports.NoResult = NoResult;

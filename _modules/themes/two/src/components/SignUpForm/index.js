@@ -91,7 +91,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
       externalPhoneNumber = props.externalPhoneNumber,
       saveCustomerUser = props.saveCustomerUser,
       fieldsNotValid = props.fieldsNotValid,
-      signupData = props.signupData;
+      signupData = props.signupData,
+      enableReCaptcha = props.enableReCaptcha,
+      handleReCaptcha = props.handleReCaptcha;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -411,7 +413,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     href: configs === null || configs === void 0 ? void 0 : (_configs$terms_and_co2 = configs.terms_and_conditions_url) === null || _configs$terms_and_co2 === void 0 ? void 0 : _configs$terms_and_co2.value,
     target: "_blank",
     rel: "noopener noreferrer"
-  }, t('TERMS_AND_CONDITIONS', 'Terms & Conditions')))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('TERMS_AND_CONDITIONS', 'Terms & Conditions')))), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
+    handleReCaptcha: handleReCaptcha
+  })), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
     disabled: formState.loading || (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
@@ -440,6 +444,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
 
 var SignUpForm = function SignUpForm(props) {
   var loginControllerProps = _objectSpread(_objectSpread({}, props), {}, {
+    isRecaptchaEnable: true,
     UIComponent: SignUpFormUI
   });
 

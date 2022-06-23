@@ -35,7 +35,9 @@ var ActionsSection = function ActionsSection(props) {
       unreadAlert = props.unreadAlert,
       setOpenMessages = props.setOpenMessages,
       readMessages = props.readMessages,
-      setUnreadAlert = props.setUnreadAlert;
+      setUnreadAlert = props.setUnreadAlert,
+      showPhone = props.showPhone,
+      showMessages = props.showMessages;
 
   var handleOpenMessages = function handleOpenMessages(data) {
     setOpenMessages(data);
@@ -50,7 +52,7 @@ var ActionsSection = function ActionsSection(props) {
     }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, (order === null || order === void 0 ? void 0 : order[actionType]) && (order === null || order === void 0 ? void 0 : (_order$actionType = order[actionType]) === null || _order$actionType === void 0 ? void 0 : _order$actionType.phone) && /*#__PURE__*/_react.default.createElement("span", {
+  return /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, (order === null || order === void 0 ? void 0 : order[actionType]) && (order === null || order === void 0 ? void 0 : (_order$actionType = order[actionType]) === null || _order$actionType === void 0 ? void 0 : _order$actionType.phone) && showPhone && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       var _order$actionType2;
 
@@ -60,7 +62,7 @@ var ActionsSection = function ActionsSection(props) {
     onClick: function onClick() {
       return handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.MessagesIcon, {
+  })), showMessages && /*#__PURE__*/_react.default.createElement(_styles.MessagesIcon, {
     onClick: function onClick() {
       return handleOpenMessages({
         driver: actionType === 'driver',

@@ -21,6 +21,8 @@ var _useWindowSize = require("../../hooks/useWindowSize");
 
 var _styles = require("./styles");
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -56,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _props$beforeElements, _props$beforeComponen, _product$valid, _product$total, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$confir, _theme$layouts$confir2, _theme$layouts$confir3, _theme$layouts$confir4, _theme$layouts$confir5, _theme$layouts$confir6, _theme$layouts$confir7, _props$beforeElements, _props$beforeComponen, _product$valid, _product$total, _props$afterComponent, _props$afterElements;
 
   var isCartPending = props.isCartPending,
       isCartProduct = props.isCartProduct,
@@ -80,6 +82,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       parsePrice = _useUtils2[0].parsePrice;
 
   var windowSize = (0, _useWindowSize.useWindowSize)();
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -100,6 +103,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var productSelect = (0, _react.useRef)(null);
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
+  var showProductImage = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$confir = _theme$layouts.confirmation) !== null && _theme$layouts$confir !== void 0 && (_theme$layouts$confir2 = _theme$layouts$confir.components) !== null && _theme$layouts$confir2 !== void 0 && (_theme$layouts$confir3 = _theme$layouts$confir2.cart) !== null && _theme$layouts$confir3 !== void 0 && (_theme$layouts$confir4 = _theme$layouts$confir3.components) !== null && _theme$layouts$confir4 !== void 0 && (_theme$layouts$confir5 = _theme$layouts$confir4.products) !== null && _theme$layouts$confir5 !== void 0 && (_theme$layouts$confir6 = _theme$layouts$confir5.components) !== null && _theme$layouts$confir6 !== void 0 && (_theme$layouts$confir7 = _theme$layouts$confir6.photo) !== null && _theme$layouts$confir7 !== void 0 && _theme$layouts$confir7.hidden);
 
   var productInfo = function productInfo() {
     if (isCartProduct) {
@@ -177,7 +181,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       value: i,
       disabled: offsetDisabled(product) < i && i !== 0
     }, i === 0 ? t('REMOVE', 'Remove') : i);
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ProductQuantity, null, product === null || product === void 0 ? void 0 : product.quantity), (product === null || product === void 0 ? void 0 : product.images) && showProductImage && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     bgimage: product === null || product === void 0 ? void 0 : product.images
   })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), windowSize.width <= 410 && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, parsePrice((_product$total = product.total) !== null && _product$total !== void 0 ? _product$total : product.price)), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement("div", null, onEditProduct && /*#__PURE__*/_react.default.createElement("span", {
     ref: productActionsEdit
