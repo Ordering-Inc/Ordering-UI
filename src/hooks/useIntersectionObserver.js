@@ -26,7 +26,9 @@ export function useIntersectionObserver () {
         observer.disconnect()
       }
     })
-    observer.observe($element.current)
+    if ($element?.current) {
+      observer.observe($element.current)
+    }
   }, [$element])
 
   return [$element, isObserved]
