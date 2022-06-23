@@ -132,7 +132,7 @@ const LoginFormUI = (props) => {
       if (loginTab === 'otp') {
         if (otpType === 'cellphone') {
           const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
-          generateOtpCode(cellphone, countryPhoneCode)
+          generateOtpCode({ cellphone, countryPhoneCode })
         } else {
           generateOtpCode()
         }
