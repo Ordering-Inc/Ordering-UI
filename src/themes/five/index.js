@@ -5,6 +5,7 @@ import { AddressList } from './src/components/AddressList'
 import { AppleLogin } from './src/components/AppleLogin'
 import { AutoScroll } from './src/components/AutoScroll'
 import { BusinessBasicInformation } from './src/components/BusinessBasicInformation'
+import { BusinessBrandFilter } from './src/components/BusinessBrandFilter'
 import { BusinessController } from './src/components/BusinessController'
 import { BusinessesListing } from './src/components/BusinessesListing'
 import { BusinessInformation } from './src/components/BusinessInformation'
@@ -98,6 +99,7 @@ export {
   AppleLogin,
   AutoScroll,
   BusinessBasicInformation,
+  BusinessBrandFilter,
   BusinessController,
   BusinessesListing,
   BusinessInformation,

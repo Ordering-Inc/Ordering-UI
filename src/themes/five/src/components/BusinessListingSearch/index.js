@@ -34,6 +34,7 @@ import { useLanguage, useOrder, useUtils, BusinessSearchList } from 'ordering-co
 import { BusinessController } from '../BusinessController'
 import { AutoScroll } from '../AutoScroll'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
+import { BusinessBrandFilter } from '../BusinessBrandFilter'
 import { useTheme } from 'styled-components'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import { convertHoursToMinutes } from '../../../../../utils'
@@ -131,6 +132,10 @@ export const BusinessListingSearchUI = (props) => {
             <SortItem onClick={() => handleChangeFilters('orderBy', 'default')}>{t('RATING', 'Rating')}</SortItem> */}
 
           </SortContainer>
+          <BusinessBrandFilter
+            filters={filters}
+            handleChangeFilters={handleChangeFilters}
+          />
           {orderState?.options?.type === 1 && (
             <MaxSectionItem
               title={t('MAX_DELIVERY_FEE', 'Max delivery fee')}
