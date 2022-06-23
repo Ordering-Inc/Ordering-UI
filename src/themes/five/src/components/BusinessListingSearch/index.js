@@ -25,16 +25,19 @@ import {
   NotFoundWrapper,
   BusinessName,
   BusinessLogo,
-  BusinessesTitle
+  BusinessesTitle,
+  BrandContainer,
+  BrandListWrapper,
+  BrandItem,
+  NoResult
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
-
+import { Check2 } from 'react-bootstrap-icons'
 import { SearchBar } from '../SearchBar'
 import { useLanguage, useOrder, useUtils, BusinessSearchList } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { AutoScroll } from '../AutoScroll'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
-import { BusinessBrandFilter } from '../BusinessBrandFilter'
 import { useTheme } from 'styled-components'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import { convertHoursToMinutes } from '../../../../../utils'
@@ -54,7 +57,8 @@ export const BusinessListingSearchUI = (props) => {
     handleChangeTermValue,
     termValue,
     paginationProps,
-    handleSearchbusinessAndProducts
+    handleSearchbusinessAndProducts,
+    brandList
   } = props
 
   const [orderState] = useOrder()
@@ -73,6 +77,13 @@ export const BusinessListingSearchUI = (props) => {
   ]
 
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
+
+  const handleChangeBrandFilter = (brandId) => {
+    let franchiseIds = [...filters?.franchise_ids]
+    if (filters?.franchise_ids?.includes(brandId)) franchiseIds = filters?.franchise_ids?.filter(item => item !== brandId)
+    else franchiseIds.push(brandId)
+    handleChangeFilters && handleChangeFilters('franchise_ids', franchiseIds)
+  }
 
   const MaxSectionItem = ({ title, options, filter }) => {
     const parseValue = (option) => {
@@ -132,10 +143,30 @@ export const BusinessListingSearchUI = (props) => {
             <SortItem onClick={() => handleChangeFilters('orderBy', 'default')}>{t('RATING', 'Rating')}</SortItem> */}
 
           </SortContainer>
-          <BusinessBrandFilter
-            filters={filters}
-            handleChangeFilters={handleChangeFilters}
-          />
+          <BrandContainer>
+            <h3>{t('BRANDS', 'Brands')}</h3>
+            <BrandListWrapper>
+              {brandList?.loading && (
+                <>
+                  {[...Array(5).keys()].map(index => (
+                    <BrandItem key={index}>
+                      <Skeleton width={120} height={15} />
+                      <Skeleton width={16} height={16} />
+                    </BrandItem>
+                  ))}
+                </>
+              )}
+              {!brandList?.loading && brandList?.brands.map((brand, i) => brand?.enabled && (
+                <BrandItem key={i} onClick={() => handleChangeBrandFilter(brand?.id)}>
+                  <span>{brand?.name}</span>
+                  {filters?.franchise_ids?.includes(brand?.id) && <Check2 />}
+                </BrandItem>
+              ))}
+              {!brandList?.loading && (brandList?.brands?.length === 0) && (
+                <NoResult>{t('NO_RESULTS_FOUND', 'Sorry, no results found')}</NoResult>
+              )}
+            </BrandListWrapper>
+          </BrandContainer>
           {orderState?.options?.type === 1 && (
             <MaxSectionItem
               title={t('MAX_DELIVERY_FEE', 'Max delivery fee')}
