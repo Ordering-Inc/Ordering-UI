@@ -378,3 +378,37 @@ export const BrandItem = styled.div`
 export const NoResult = styled.div`
   text-align: center;
 `
+
+export const PriceFilterWrapper = styled.div``
+
+export const PriceFilterListWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: calc(100% + 10px);
+  margin-left: -5px;
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: -5px;
+  `}
+
+  > button {
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    line-height: 24px;
+    margin: 5px;
+
+    svg {
+      margin-left: 5px;
+      font-size: 12px;
+      ${props => props.theme.rtl && css`
+        margin-right: 5px;
+        margin-left: 0px;
+      `}
+    }
+  }
+`
