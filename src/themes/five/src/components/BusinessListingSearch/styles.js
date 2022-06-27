@@ -334,3 +334,81 @@ export const BusinessesTitle = styled.h1`
   color: ${props => props.theme?.colors.headingColor};
   margin-bottom: 20px;
 `
+
+export const BrandContainer = styled.div`
+  > h3 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+`
+
+export const BrandListWrapper = styled.div`
+  max-height: 300px;
+  overflow: auto;
+`
+
+export const BrandItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: 8px;
+
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    transition: all 0.3s linear;
+  }
+
+  svg {
+    color: ${props => props.theme.colors.success500};
+    font-size: 16px;
+  }
+  &:hover {
+    span {
+      color: ${props => props.theme.colors.secundaryContrast};
+    }
+  }
+`
+
+export const NoResult = styled.div`
+  text-align: center;
+`
+
+export const PriceFilterWrapper = styled.div``
+
+export const PriceFilterListWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: calc(100% + 10px);
+  margin-left: -5px;
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: -5px;
+  `}
+
+  > button {
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    line-height: 24px;
+    margin: 5px;
+
+    svg {
+      margin-left: 5px;
+      font-size: 12px;
+      ${props => props.theme.rtl && css`
+        margin-right: 5px;
+        margin-left: 0px;
+      `}
+    }
+  }
+`

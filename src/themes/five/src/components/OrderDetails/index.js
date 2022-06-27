@@ -7,7 +7,7 @@ import {
   useUtils,
   useConfig,
   useOrder,
-  useSession,
+  useCustomer,
   GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
@@ -23,7 +23,6 @@ import { ProductShare } from '../../../../../components/ProductShare'
 import { OrderBillSection } from './OrderBillSection'
 import { ActionsSection } from './ActionsSection'
 import { OrderPreferencesSection } from './OrderPreferencesSections'
-import { PlaceSpot } from '../PlaceSpot'
 
 import {
   Container,
@@ -35,7 +34,7 @@ import {
   BusinessInfo,
   OrderInfo,
   StatusBar,
-  // SectionTitle,
+  SectionTitle,
   OrderCustomer,
   PhotoBlock,
   Map,
@@ -47,32 +46,29 @@ import {
   ShareOrder,
   WrapperLeftContainer,
   WrapperRightContainer,
+  Divider,
   MyOrderActions,
   ReviewOrderLink,
   SkeletonWrapper,
   ReviewWrapper,
-  // NewOrder,
-  // OrderActions,
+  NewOrder,
+  OrderActions,
   TitleContainer,
   ReOrder,
-  // BusinessTitle,
+  BusinessTitle,
   SectionTitleContainer,
   OrderPreferences,
   HeaderTitle,
-  PlaceSpotSection,
-  BtsOrderStatus
+  PlaceSpotSection
 } from './styles'
 import { useTheme } from 'styled-components'
 import { ReviewProduct } from '../../../../../components/ReviewProduct'
 import { ReviewDriver } from '../../../../../components/ReviewDriver'
 import { TaxInformation } from '../TaxInformation'
 
-import { getGoogleMapImage } from '../../../../../utils'
-
 const OrderDetailsUI = (props) => {
   const {
     userCustomerId,
-    handleChangeOrderStatus,
     handleBusinessRedirect,
     handleOrderRedirect,
     googleMapsControls,
@@ -84,15 +80,16 @@ const OrderDetailsUI = (props) => {
     messagesReadList,
     reorderState,
     handleReorder,
+    isCustomerMode,
     orderTypes
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-  const [{ user }] = useSession()
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parsePrice, parseDate }] = useUtils()
-  const [{ carts, options }] = useOrder()
+  const [, { deleteUserCustomer }] = useCustomer()
+  const [{ carts }, { refreshOrderOptions }] = useOrder()
 
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
@@ -105,12 +102,24 @@ const OrderDetailsUI = (props) => {
 
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
-  const acceptedStatus = [1, 2, 5, 6, 10, 11, 12]
-  const placeSpotTypes = [3, 4]
-  const googleMapsApiKey = configs?.google_maps_api_key?.value
-  const placeSpotsEnabled = placeSpotTypes.includes(options?.type)
 
-  const showOrderActions = user?.level !== 3 && order?.delivery_type !== 1
+  const isOriginalLayout = theme?.layouts?.confirmation?.components?.layout?.type === 'original'
+  const showDeliveryType = !theme?.layouts?.confirmation?.components?.delivery_type?.hidden
+  const showDeliveryDate = !theme?.layouts?.confirmation?.components?.delivery_date?.hidden
+  const showDeliveryProgress = !theme?.layouts?.confirmation?.components?.delivery_progress?.hidden
+  const showBusinessPhone = !theme?.layouts?.confirmation?.components?.business_information?.components?.phone?.hidden
+  const showBusinessMessages = !theme?.layouts?.confirmation?.components?.business_information?.components?.messages?.hidden
+  const showBusinessEmail = !theme?.layouts?.confirmation?.components?.business_information?.components?.email?.hidden
+  const showBusinessAddress = !theme?.layouts?.confirmation?.components?.business_information?.components?.address?.hidden
+  const showBusinessMap = !theme?.layouts?.confirmation?.components?.business_information?.components?.map?.hidden
+  const showDriverName = !theme?.layouts?.confirmation?.components?.driver_information?.components?.name?.hidden
+  const showDriverPhone = !theme?.layouts?.confirmation?.components?.driver_information?.components?.phone?.hidden
+  const showDriverMessages = !theme?.layouts?.confirmation?.components?.driver_information?.components?.messages?.hidden
+  const showDriverEmail = !theme?.layouts?.confirmation?.components?.driver_information?.components?.email?.hidden
+  const showDriverPhoto = !theme?.layouts?.confirmation?.components?.driver_information?.components?.photo?.hidden
+  const showCustomerPhone = !theme?.layouts?.confirmation?.components?.customer_information?.components?.phone?.hidden
+  const showCustomerAddress = !theme?.layouts?.confirmation?.components?.customer_information?.components?.address?.hidden
+  const showCustomerEmail = !theme?.layouts?.confirmation?.components?.customer_information?.components?.email?.hidden
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -205,6 +214,12 @@ const OrderDetailsUI = (props) => {
     }
   }
 
+  const handleStartNewOrder = () => {
+    deleteUserCustomer(true)
+    refreshOrderOptions()
+    handleGoToPage({ page: 'home' })
+  }
+
   const ActionsSectionProps = {
     order,
     handleBusinessRedirect,
@@ -252,36 +267,23 @@ const OrderDetailsUI = (props) => {
     }
   }, [reorderState])
 
-  const OrderMapSection = (props) => {
-    const validStatuses = props.validStatuses ?? [9, 19, 23]
-    const location = props.location ?? order?.driver?.location
-    const mapConfigs = { zoom: 15 }
+  const OrderMapSection = () => {
+    const validStatuses = [9, 19, 23]
     return (
-      props.isMapImg ? (
-        <Map style={props.mapStyle}>
-          <img
-            src={getGoogleMapImage(location, googleMapsApiKey, mapConfigs)}
-            id='google-maps-image'
-            alt='google-maps-location'
-            width='100%'
-            height='100%'
-            loading='lazy'
-          />
-        </Map>
-      ) : (
-        location?.lat && location?.lng && validStatuses.includes(parseInt(order?.status)) ? (
+      <>
+        {showBusinessMap && order?.driver?.location?.lat && order?.driver?.location?.lng && validStatuses.includes(parseInt(order?.status)) && (
           <>
-            <Map style={props.mapStyle}>
+            <Map isCustomerMode={isCustomerMode || isOriginalLayout}>
               <GoogleMapsMap
                 apiKey={configs?.google_maps_api_key?.value}
-                location={location}
-                locations={!props.location && locations}
+                location={order?.driver?.location}
+                locations={locations}
                 mapControls={googleMapsControls}
               />
             </Map>
           </>
-        ) : null
-      )
+        )}
+      </>
     )
   }
 
@@ -313,93 +315,162 @@ const OrderDetailsUI = (props) => {
   }
 
   return (
-    <Container>
-      {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
-        <WrapperContainer>
-          <WrapperLeftContainer>
-            <OrderInfo>
-              <TitleContainer>
-                <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
-                {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-                  <Content className='order-content'>
-                    <ShareOrder>
-                      <div className='wrap'>
-                        <ProductShare
-                          defaultUrl={urlToShare(order?.hash_key)}
-                        />
-                      </div>
-                    </ShareOrder>
-                  </Content>
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))}
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))}
+      <Container isCustomerMode={isCustomerMode || isOriginalLayout}>
+        {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
+          <WrapperContainer isCustomerMode={isCustomerMode || isOriginalLayout}>
+            <WrapperLeftContainer isCustomerMode={isCustomerMode || isOriginalLayout}>
+              <OrderInfo>
+                {isCustomerMode || isOriginalLayout ? (
+                  <TitleContainer>
+                    <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                    {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
+                      <Content className='order-content' isCustomerMode={isCustomerMode || isOriginalLayout}>
+                        <ShareOrder>
+                          <div className='wrap'>
+                            <ProductShare
+                              defaultUrl={urlToShare(order?.hash_key)}
+                            />
+                          </div>
+                        </ShareOrder>
+                      </Content>
+                    )}
+                    {order?.status !== 0 && order?.integration_id && (
+                      <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                    )}
+                    {showDeliveryType && (
+                      <p className='types'>
+                        {orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
+                      </p>
+                    )}
+                    {showDeliveryDate && (
+                      <p className='date'>
+                        {
+                          order?.delivery_datetime_utc
+                            ? parseDate(order?.delivery_datetime_utc)
+                            : parseDate(order?.delivery_datetime, { utc: false })
+                        }
+                      </p>
+                    )}
+                    {!isOriginalLayout && (
+                      <ReOrder>
+                        <Button
+                          color='primary'
+                          onClick={() => handleStartNewOrder()}
+                        >
+                          {t('START_NEW_ORDER', 'Start new order')}
+                        </Button>
+                      </ReOrder>
+                    )}
+                  </TitleContainer>
+                ) : (
+                  <>
+                    <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                    {order?.status !== 0 && order?.integration_id && (
+                      <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                    )}
+                    {showDeliveryDate && (
+                      <p className='date'>
+                        {
+                          order?.delivery_datetime_utc
+                            ? parseDate(order?.delivery_datetime_utc)
+                            : parseDate(order?.delivery_datetime, { utc: false })
+                        }
+                      </p>
+                    )}
+                    <OrderActions>
+                      <ReviewOrderLink
+                        className='Review-order'
+                        active={(
+                          parseInt(order?.status) === 1 ||
+                          parseInt(order?.status) === 2 ||
+                          parseInt(order?.status) === 5 ||
+                          parseInt(order?.status) === 6 ||
+                          parseInt(order?.status) === 10 ||
+                          parseInt(order?.status) === 11 ||
+                          parseInt(order?.status) === 12
+                        ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
+                      >
+                        <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                      </ReviewOrderLink>
+                      {(
+                        parseInt(order?.status) === 1 ||
+                        parseInt(order?.status) === 2 ||
+                        parseInt(order?.status) === 5 ||
+                        parseInt(order?.status) === 6 ||
+                        parseInt(order?.status) === 10 ||
+                        parseInt(order?.status) === 11 ||
+                        parseInt(order?.status) === 12
+                      ) &&
+                        (
+                          <NewOrder>
+                            <Button
+                              color='primary'
+                              outline
+                              onClick={() => handleReorder(order.id)}
+                              disabled={reorderState?.loading}
+                            >
+                              {reorderState?.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
+                            </Button>
+                          </NewOrder>
+                        )}
+                    </OrderActions>
+                  </>
                 )}
-                {order?.status !== 0 && order?.integration_id && (
-                  <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                {showDeliveryProgress && (
+                  <>
+                    <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                    <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
+                  </>
                 )}
-                <p className='types'>
-                  {orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
-                </p>
-                <p className='date'>
-                  {
-                    order?.delivery_datetime_utc
-                      ? parseDate(order?.delivery_datetime_utc)
-                      : parseDate(order?.delivery_datetime, { utc: false })
-                  }
-                </p>
-                {acceptedStatus.includes(parseInt(order?.status, 10)) && (
-                  <ReOrder>
-                    <Button
-                      color='primary'
-                      outline
-                      onClick={() => handleReorder(order.id)}
-                      disabled={reorderState?.loading}
-                    >
-                      {reorderState?.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
-                    </Button>
-                  </ReOrder>
-                )}
-              </TitleContainer>
-              <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
-                <ReviewOrderLink
-                  className='Review-order'
-                  active={
-                    acceptedStatus.includes(parseInt(order?.status, 10)) &&
-                    (!order?.review || (order.driver && !order?.user_review)) &&
-                    (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
-                  }
-                >
-                  <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                </ReviewOrderLink>
-              </div>
-            </OrderInfo>
-            <OrderBusiness>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '50%'
-                }}
-              >
-                <BusinessWrapper
-                  w='calc(100% - 20px)'
-                  // borderBottom={showOrderActions}
-                >
-                  <img src={order?.business?.logo} />
-                  <BusinessInfo>
-                    <h2>{order?.business?.name}</h2>
-                    <ActionsSection
-                      {...ActionsSectionProps}
-                      actionType='business'
-                    />
-                    <p>{order?.business?.email}</p>
-                    <p>{order?.business?.cellphone}</p>
-                    <p>{order?.business?.address}</p>
+              </OrderInfo>
+              <Divider />
+              <OrderBusiness isCustomerMode={isCustomerMode || isOriginalLayout}>
+                <BusinessWrapper isCustomerMode={isCustomerMode || isOriginalLayout}>
+                  {isCustomerMode && <img src={order?.business?.logo} />}
+                  <BusinessInfo isCustomerMode={isCustomerMode || isOriginalLayout}>
+                    {isCustomerMode || isOriginalLayout ? (
+                      <>
+                        <BusinessTitle>
+                          <h2>{order?.business?.name}</h2>
+                          <ActionsSection
+                            {...ActionsSectionProps}
+                            showPhone={showBusinessPhone}
+                            showMessages={showBusinessMessages}
+                            actionType='business'
+                          />
+                        </BusinessTitle>
+                        {showBusinessEmail && (
+                          <p>{order?.business?.email}</p>
+                        )}
+                        {showBusinessPhone && (
+                          <p>{order?.business?.cellphone}</p>
+                        )}
+                        {showBusinessAddress && (
+                          <p>{order?.business?.address}</p>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <h2>{t('FROM', 'From')}</h2>
+                        <p>{order?.business?.name}</p>
+                        {showBusinessEmail && (
+                          <p>{order?.business?.email}</p>
+                        )}
+                        {showBusinessPhone && (
+                          <p>{order?.business?.cellphone}</p>
+                        )}
+                        {showBusinessAddress && (
+                          <p>{order?.business?.address}</p>
+                        )}
+                      </>
+                    )}
                     {order?.place?.name && (
                       <PlaceSpotSection>
                         <p>
@@ -409,234 +480,322 @@ const OrderDetailsUI = (props) => {
                     )}
                   </BusinessInfo>
                 </BusinessWrapper>
-
-                {placeSpotTypes.includes(order?.delivery_type) && order?.place && placeSpotsEnabled && (
-                  <BusinessWrapper
-                    w='calc(100% - 20px)'
-                    borderTop
-                  >
-                    <PlaceSpot
-                      isFetchOrder
-                      containerStyle={{ width: 'calc(100% - 20px)' }}
-                      isCheckout cart={order}
-                      isSelectDisabled={!showOrderActions}
-                      isCancelHomeStyle
-                    />
-                  </BusinessWrapper>
+                {isCustomerMode || isOriginalLayout ? (
+                  <OrderMapSection />
+                ) : (
+                  <ActionsSection
+                    {...ActionsSectionProps}
+                    actionType='business'
+                    showPhone={showBusinessPhone}
+                    showMessages={showBusinessMessages}
+                  />
                 )}
-
-                {showOrderActions && (
-                  <BusinessWrapper
-                    w='calc(100% - 20px)'
-                    borderTop
-                  >
-                    <BtsOrderStatus>
-                      <div>
-                        <Button
-                          style={{ fontSize: 14 }}
-                          color='primary'
-                          onClick={() => handleChangeOrderStatus(20)}
-                          disabled={order?.status === 20}
-                        >
-                          {getOrderStatus(20)?.value}
-                        </Button>
-                      </div>
-                      <div>
-                        <Button
-                          style={{ fontSize: 14 }}
-                          color='secundary'
-                          disabled={order?.status === 21}
-                          onClick={() => handleChangeOrderStatus(21)}
-                        >
-                          {getOrderStatus(21)?.value}
-                        </Button>
-                      </div>
-                    </BtsOrderStatus>
-                  </BusinessWrapper>
+              </OrderBusiness>
+              <Divider />
+              <OrderCustomer isCustomerMode={isCustomerMode || isOriginalLayout}>
+                {!(isCustomerMode || isOriginalLayout) && (
+                  <h2>{t('TO', 'To')}</h2>
                 )}
-
-              </div>
-              {googleMapsApiKey && (
-                <OrderMapSection
-                  isMapImg
-                  validStatuses={[order?.status]}
-                  location={order?.business?.location}
-                  mapStyle={{ width: '50%' }}
-                />
-              )}
-            </OrderBusiness>
-            <OrderCustomer>
-              <BusinessWrapper>
-                {order?.customer?.photo && (
-                  <img src={order?.customer?.photo} />
-                )}
-                <BusinessInfo>
-                  <p>{order?.customer?.name} {order?.customer?.lastname}</p>
+                <p>{order?.customer?.name} {order?.customer?.lastname}</p>
+                {showCustomerEmail && (
                   <p>{order?.customer?.email}</p>
+                )}
+                {showCustomerPhone && (
                   <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
+                )}
+                {showCustomerAddress && (
                   <p>{order?.customer?.address}</p>
-                </BusinessInfo>
-              </BusinessWrapper>
-            </OrderCustomer>
-            {order?.driver && (
-              <>
-                <OrderDriver>
-                  <SectionTitleContainer>
-                    <h2>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</h2>
-                    <ActionsSection
-                      {...ActionsSectionProps}
-                      actionType='driver'
-                    />
-                  </SectionTitleContainer>
-                  <WrapperDriver>
-                    <div className='photo'>
-                      {order?.driver?.photo ? (
-                        <PhotoBlock src={order?.driver?.photo} />
-                      ) : (
-                        <RiUser2Fill />
+                )}
+              </OrderCustomer>
+              {!(isCustomerMode || isOriginalLayout) && (
+                <OrderPreferencesSection order={order} />
+              )}
+              {order?.driver && (
+                <>
+                  {isCustomerMode || isOriginalLayout ? (
+                    <>
+                      <OrderDriver isCustomerMode={isCustomerMode || isOriginalLayout}>
+                        <SectionTitleContainer>
+                          <h2>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</h2>
+                          <ActionsSection
+                            {...ActionsSectionProps}
+                            actionType='driver'
+                            showPhone={showDriverPhone}
+                            showMessages={showDriverMessages}
+                          />
+                        </SectionTitleContainer>
+                        <WrapperDriver>
+                          {showDriverPhoto && (
+                            <div className='photo'>
+                              {order?.driver?.photo ? (
+                                <PhotoBlock isCustomerMode={isCustomerMode || isOriginalLayout} src={order?.driver?.photo} />
+                              ) : (
+                                <RiUser2Fill />
+                              )}
+                            </div>
+                          )}
+                          <div>
+                            {showDriverName && (
+                              <h2>{order?.driver?.name} {order?.driver?.lastname}</h2>
+                            )}
+                            {showDriverEmail && (
+                              <p>{order?.driver?.email}</p>
+                            )}
+                            {showDriverPhone && (
+                              <p>{order?.driver?.cellphone || order?.driver?.phone}</p>
+                            )}
+                          </div>
+                        </WrapperDriver>
+                      </OrderDriver>
+                      {!isOriginalLayout && (
+                        <OrderMapSection />
                       )}
-                    </div>
-                    <div>
-                      <h2>{order?.driver?.name} {order?.driver?.lastname}</h2>
-                      <p>{order?.driver?.email}</p>
-                      <p>{order?.driver?.cellphone || order?.driver?.phone}</p>
-                    </div>
-                  </WrapperDriver>
-                </OrderDriver>
-                <OrderMapSection />
-              </>
-            )}
-            {(order?.delivery_type === 1 || order?.comment) && (
-              <OrderPreferences>
-                <OrderPreferencesSection
-                  order={order}
-                  placeSpotTypes={placeSpotTypes}
-                />
-              </OrderPreferences>
-            )}
-          </WrapperLeftContainer>
-          <WrapperRightContainer>
-            <OrderProducts>
-              <HeaderTitle>
-                <OrderHeaderInfoSection />
-                <OrderActionsSection />
-              </HeaderTitle>
-              {order?.products?.length && order?.products.map(product => (
-                <ProductItemAccordion
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-              <OrderBillSection
-                order={order}
-                setOpenTaxModal={setOpenTaxModal}
-              />
-            </OrderProducts>
-          </WrapperRightContainer>
-        </WrapperContainer>
-      )}
+                    </>
+                  ) : (
+                    <>
+                      <Divider />
+                      <OrderMapSection />
+                      <SectionTitle>
+                        {t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}
+                      </SectionTitle>
+                      <OrderDriver>
+                        <WrapperDriver>
+                          {showDriverPhoto && (
+                            <div className='photo'>
+                              {order?.driver?.photo ? (
+                                <PhotoBlock src={order?.driver?.photo} width='48' height='48' />
+                              ) : (
+                                <RiUser2Fill />
+                              )}
+                            </div>
+                          )}
+                          {showDriverName && (
+                            <p>{order?.driver?.name} {order?.driver?.lastname}</p>
+                          )}
+                        </WrapperDriver>
+                        <ActionsSection
+                          {...ActionsSectionProps}
+                          actionType='driver'
+                          showPhone={showDriverPhone}
+                          showMessages={showDriverMessages}
+                        />
+                      </OrderDriver>
+                    </>
+                  )}
+                </>
+              )}
+              {(isCustomerMode || isOriginalLayout) && (
+                <OrderPreferences isCustomerMode={isCustomerMode || isOriginalLayout}>
+                  <OrderPreferencesSection order={order} />
+                </OrderPreferences>
+              )}
+            </WrapperLeftContainer>
+            <WrapperRightContainer isCustomerMode={isCustomerMode || isOriginalLayout}>
+              {!(isCustomerMode || isOriginalLayout) && (
+                <>
+                  <OrderHeaderInfoSection />
+                  <OrderActionsSection />
+                </>
+              )}
+              <OrderProducts isCustomerMode={isCustomerMode || isOriginalLayout}>
+                {(isCustomerMode || isOriginalLayout) && (
+                  <HeaderTitle>
+                    <OrderHeaderInfoSection />
+                    <OrderActionsSection />
+                  </HeaderTitle>
+                )}
+                {order?.products?.length && order?.products.map(product => (
+                  <ProductItemAccordion
+                    key={product.id}
+                    product={product}
+                    isConfirmationPage
+                  />
+                ))}
+                {(isCustomerMode || isOriginalLayout) && (
+                  <OrderBillSection
+                    order={order}
+                    isCustomerMode={isCustomerMode || isOriginalLayout}
+                    setOpenTaxModal={setOpenTaxModal}
+                  />
+                )}
+              </OrderProducts>
+              {!(isCustomerMode || isOriginalLayout) && (
+                <>
+                  <OrderBillSection
+                    order={order}
+                    setOpenTaxModal={setOpenTaxModal}
+                  />
+                  <Content className='order-content'>
+                    {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
+                      <ShareOrder>
+                        <div className='text'>
+                          <h1>{t('SHARE_THIS_DELIVERY', theme?.defaultLanguages?.SHARE_THIS_DELIVERY || 'Share this delivery')}</h1>
+                          <p>{t('LET_SOMEONE_FOLLOW_ALONG', theme?.defaultLanguages?.LET_SOMEONE_FOLLOW_ALONG || 'Let someone follow along')}</p>
+                        </div>
+                        <div className='wrap'>
+                          <ProductShare
+                            withBtn
+                            btnText={t('SHARE', theme?.defaultLanguages?.SHARE || 'Share')}
+                            defaultUrl={urlToShare(order?.hash_key)}
+                          />
+                        </div>
+                      </ShareOrder>
+                    )}
+                  </Content>
+                </>
+              )}
+            </WrapperRightContainer>
+          </WrapperContainer>
+        )}
 
-      {
-        (openMessages.driver || openMessages.business) && (
-          <Messages
-            orderId={order?.id}
-            order={order}
-            business={openMessages.business}
-            driver={openMessages.driver}
-            messages={messages}
-            setMessages={setMessages}
-            readMessages={readMessages}
-            onMessages={setOpenMessages}
-            onClose={() => setOpenMessages({ driver: false, business: false })}
-          />
-        )
-      }
+        {
+          (openMessages.driver || openMessages.business) && (
+            <Messages
+              orderId={order?.id}
+              order={order}
+              business={openMessages.business}
+              driver={openMessages.driver}
+              messages={messages}
+              setMessages={setMessages}
+              readMessages={readMessages}
+              onMessages={setOpenMessages}
+              onClose={() => setOpenMessages({ driver: false, business: false })}
+            />
+          )
+        }
 
-      {loading && !error && (
-        <SkeletonWrapper>
-          <>
-            <SkeletonBlockWrapp>
-              <SkeletonBlock width={90}>
-                <Skeleton height={40} width={300} />
-                <Skeleton height={15} width={120} />
-                <Skeleton height={15} />
-                <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
-                <Skeleton height={60} width={900} />
-                <Skeleton height={200} width={900} />
-                <Skeleton height={20} width={900} />
-                <Skeleton height={20} width={900} />
-                <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
-                <Skeleton height={40} width={900} />
-                <Skeleton height={20} width={900} />
-                <Skeleton height={20} width={900} />
-                <Skeleton height={20} width={900} />
-                <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
-              </SkeletonBlock>
-            </SkeletonBlockWrapp>
-          </>
-        </SkeletonWrapper>
-      )}
+        {loading && !error && !(isCustomerMode || isOriginalLayout) && (
+          <SkeletonWrapper>
+            <WrapperLeftContainer>
+              <SkeletonBlockWrapp>
+                <SkeletonBlock width={90}>
+                  <Skeleton height={40} width={230} />
+                  <Skeleton height={20} width={80} />
+                  <Skeleton height={15} />
+                  <Skeleton height={20} width={210} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={40} width={230} />
+                  <Skeleton height={20} width={180} />
+                  <Skeleton height={20} width={210} />
+                  <Skeleton height={20} width={150} />
+                  <Skeleton height={20} width={170} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={40} width={230} />
+                  <Skeleton height={20} width={180} />
+                  <Skeleton height={20} width={210} />
+                  <Skeleton height={20} width={150} />
+                  <Skeleton height={20} width={170} style={{ marginBottom: '50px' }} />
+                </SkeletonBlock>
+              </SkeletonBlockWrapp>
+            </WrapperLeftContainer>
+            <WrapperRightContainer>
+              <SkeletonBlockWrapp>
+                <SkeletonBlock width={90}>
+                  <Skeleton height={40} width={230} />
+                  <Skeleton height={20} />
+                  <Skeleton height={45} width={100} />
+                  <Skeleton height={60} />
+                  <Skeleton height={300} />
+                  <Skeleton height={60} />
+                  <Skeleton height={25} />
+                  <Skeleton height={25} />
+                  <Skeleton height={25} />
+                </SkeletonBlock>
+              </SkeletonBlockWrapp>
+            </WrapperRightContainer>
+          </SkeletonWrapper>
+        )}
 
-      {!loading && error && (
-        error.includes('ERROR_ACCESS_EXPIRED') ? (
-          <NotFoundSource
-            content={t(error[0], 'Sorry, the order has expired.')}
-          />
-        ) : (
-          <NotFoundSource
-            content={t('NOT_FOUND_ORDER', theme?.defaultLanguages?.NOT_FOUND_ORDER || 'Sorry, we couldn\'t find the requested order.')}
-            btnTitle={t('ORDERS_REDIRECT', theme?.defaultLanguages?.ORDERS_REDIRECT || 'Go to Orders')}
-            onClickButton={handleOrderRedirect}
-          />
-        )
-      )}
-      {
-        isReviewOpen && (
-          <Modal
-            open={isReviewOpen}
-            onClose={handleCloseReivew}
-            title={order
-              ? (reviewStatus?.order
-                ? t('REVIEW_ORDER', 'Review order')
-                : (reviewStatus?.product
-                  ? t('REVIEW_PRODUCT', 'Review Product')
-                  : t('REVIEW_DRIVER', 'Review Driver')))
-              : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
-          >
-            <ReviewWrapper>
-              {
-                reviewStatus?.order
-                  ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+        {loading && !error && (isCustomerMode || isOriginalLayout) && (
+          <SkeletonWrapper isCustomerMode={isCustomerMode || isOriginalLayout}>
+            <>
+              <SkeletonBlockWrapp>
+                <SkeletonBlock width={90} isCustomerMode={isCustomerMode || isOriginalLayout}>
+                  <Skeleton height={40} width={300} />
+                  <Skeleton height={15} width={120} />
+                  <Skeleton height={15} />
+                  <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={60} width={900} />
+                  <Skeleton height={200} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
+                  <Skeleton height={40} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} />
+                  <Skeleton height={20} width={900} style={{ marginBottom: '50px' }} />
+                </SkeletonBlock>
+              </SkeletonBlockWrapp>
+            </>
+          </SkeletonWrapper>
+        )}
+
+        {!loading && error && (
+          error.includes('ERROR_ACCESS_EXPIRED') ? (
+            <NotFoundSource
+              content={t(error[0], 'Sorry, the order has expired.')}
+            />
+          ) : (
+            <NotFoundSource
+              content={t('NOT_FOUND_ORDER', theme?.defaultLanguages?.NOT_FOUND_ORDER || 'Sorry, we couldn\'t find the requested order.')}
+              btnTitle={t('ORDERS_REDIRECT', theme?.defaultLanguages?.ORDERS_REDIRECT || 'Go to Orders')}
+              onClickButton={handleOrderRedirect}
+            />
+          )
+        )}
+        {
+          isReviewOpen && (
+            <Modal
+              open={isReviewOpen}
+              onClose={handleCloseReivew}
+              title={order
+                ? (reviewStatus?.order
+                  ? t('REVIEW_ORDER', 'Review order')
                   : (reviewStatus?.product
-                    ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
-                    : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
-              }
-            </ReviewWrapper>
+                    ? t('REVIEW_PRODUCT', 'Review Product')
+                    : t('REVIEW_DRIVER', 'Review Driver')))
+                : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
+            >
+              <ReviewWrapper>
+                {
+                  reviewStatus?.order
+                    ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+                    : (reviewStatus?.product
+                      ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
+                      : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
+                }
+              </ReviewWrapper>
 
-          </Modal>
-        )
+            </Modal>
+          )
+        }
+        <Modal
+          width='70%'
+          open={openTaxModal.open}
+          padding='20px'
+          closeOnBackdrop
+          title={`${openTaxModal.data?.name ||
+            t('INHERIT_FROM_BUSINESS', 'Inherit from business')} ${openTaxModal.data?.rate_type !== 2 ? `(${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`})` : ''}  `}
+          onClose={() => setOpenTaxModal({ open: false, tax: null, type: '' })}
+          modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <TaxInformation
+            type={openTaxModal.type}
+            data={openTaxModal.data}
+            products={order?.products}
+          />
+        </Modal>
+      </Container>
+      {
+        props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))
       }
-      <Modal
-        width='70%'
-        open={openTaxModal.open}
-        padding='20px'
-        closeOnBackdrop
-        title={`${openTaxModal.data?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')} ${openTaxModal.data?.rate_type !== 2
-            ? `(${typeof openTaxModal.data?.rate === 'number'
-              ? `${openTaxModal.data?.rate}%`
-              : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`})`
-            : ''}
-          `}
-        onClose={() => setOpenTaxModal({ open: false, tax: null, type: '' })}
-        modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
-      >
-        <TaxInformation
-          type={openTaxModal.type}
-          data={openTaxModal.data}
-          products={order?.products}
-        />
-      </Modal>
-    </Container>
+      {
+        props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))
+      }
+    </>
   )
 }
 
