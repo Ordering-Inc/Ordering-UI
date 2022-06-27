@@ -29,10 +29,12 @@ import {
   BrandContainer,
   BrandListWrapper,
   BrandItem,
-  NoResult
+  NoResult,
+  PriceFilterWrapper,
+  PriceFilterListWrapper
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
-import { Check2 } from 'react-bootstrap-icons'
+import { Check2, XLg as Close } from 'react-bootstrap-icons'
 import { SearchBar } from '../SearchBar'
 import { useLanguage, useOrder, useUtils, BusinessSearchList } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
@@ -76,6 +78,14 @@ export const BusinessListingSearchUI = (props) => {
     { text: t('PICKUP_TIME', 'Pickup time'), value: 'pickup_time' }
   ]
 
+  const priceList = [
+    { level: '1', content: '$' },
+    { level: '2', content: '$$' },
+    { level: '3', content: '$$$' },
+    { level: '4', content: '$$$$' },
+    { level: '5', content: '$$$$$' }
+  ]
+
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
 
   const handleChangeBrandFilter = (brandId) => {
@@ -83,6 +93,11 @@ export const BusinessListingSearchUI = (props) => {
     if (filters?.franchise_ids?.includes(brandId)) franchiseIds = filters?.franchise_ids?.filter(item => item !== brandId)
     else franchiseIds.push(brandId)
     handleChangeFilters && handleChangeFilters('franchise_ids', franchiseIds)
+  }
+
+  const handleChangePriceRange = (value) => {
+    if (value === filters?.price_level) handleChangeFilters('price_level', null)
+    else handleChangeFilters('price_level', value)
   }
 
   const MaxSectionItem = ({ title, options, filter }) => {
@@ -167,6 +182,21 @@ export const BusinessListingSearchUI = (props) => {
               )}
             </BrandListWrapper>
           </BrandContainer>
+          <PriceFilterWrapper>
+            <h3>{t('PRICE_RANGE', 'Price range')}</h3>
+            <PriceFilterListWrapper>
+              {priceList.map((price, i) => (
+                <Button
+                  key={i}
+                  color={(filters?.price_level === price?.level) ? 'primary' : 'lightGray'}
+                  onClick={() => handleChangePriceRange(price?.level)}
+                >
+                  {price.content}
+                  {(filters?.price_level === price?.level) && <Close />}
+                </Button>
+              ))}
+            </PriceFilterListWrapper>
+          </PriceFilterWrapper>
           {orderState?.options?.type === 1 && (
             <MaxSectionItem
               title={t('MAX_DELIVERY_FEE', 'Max delivery fee')}
