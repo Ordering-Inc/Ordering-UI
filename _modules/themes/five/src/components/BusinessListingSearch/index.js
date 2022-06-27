@@ -116,6 +116,22 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     text: t('PICKUP_TIME', 'Pickup time'),
     value: 'pickup_time'
   }];
+  var priceList = [{
+    level: '1',
+    content: '$'
+  }, {
+    level: '2',
+    content: '$$'
+  }, {
+    level: '3',
+    content: '$$$'
+  }, {
+    level: '4',
+    content: '$$$$'
+  }, {
+    level: '5',
+    content: '$$$$$'
+  }];
   var noResults = !businessesSearchList.loading && !businessesSearchList.lengthError && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList = businessesSearchList.businesses) === null || _businessesSearchList === void 0 ? void 0 : _businessesSearchList.length) === 0;
 
   var handleChangeBrandFilter = function handleChangeBrandFilter(brandId) {
@@ -127,6 +143,10 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
       return item !== brandId;
     });else franchiseIds.push(brandId);
     handleChangeFilters && handleChangeFilters('franchise_ids', franchiseIds);
+  };
+
+  var handleChangePriceRange = function handleChangePriceRange(value) {
+    if (value === (filters === null || filters === void 0 ? void 0 : filters.price_level)) handleChangeFilters('price_level', null);else handleChangeFilters('price_level', value);
   };
 
   var MaxSectionItem = function MaxSectionItem(_ref) {
@@ -198,7 +218,15 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     }, /*#__PURE__*/_react.default.createElement("span", null, brand === null || brand === void 0 ? void 0 : brand.name), (filters === null || filters === void 0 ? void 0 : (_filters$franchise_id3 = filters.franchise_ids) === null || _filters$franchise_id3 === void 0 ? void 0 : _filters$franchise_id3.includes(brand === null || brand === void 0 ? void 0 : brand.id)) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2, null));
   })), !(brandList !== null && brandList !== void 0 && brandList.loading) && (brandList === null || brandList === void 0 ? void 0 : (_brandList$brands = brandList.brands) === null || _brandList$brands === void 0 ? void 0 : (_brandList$brands$fil = _brandList$brands.filter(function (brand) {
     return brand === null || brand === void 0 ? void 0 : brand.enabled;
-  })) === null || _brandList$brands$fil === void 0 ? void 0 : _brandList$brands$fil.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.NoResult, null, t('NO_RESULTS_FOUND', 'Sorry, no results found')))), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && /*#__PURE__*/_react.default.createElement(MaxSectionItem, {
+  })) === null || _brandList$brands$fil === void 0 ? void 0 : _brandList$brands$fil.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.NoResult, null, t('NO_RESULTS_FOUND', 'Sorry, no results found')))), /*#__PURE__*/_react.default.createElement(_styles.PriceFilterWrapper, null, /*#__PURE__*/_react.default.createElement("h3", null, t('PRICE_RANGE', 'Price range')), /*#__PURE__*/_react.default.createElement(_styles.PriceFilterListWrapper, null, priceList.map(function (price, i) {
+    return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      key: i,
+      color: (filters === null || filters === void 0 ? void 0 : filters.price_level) === (price === null || price === void 0 ? void 0 : price.level) ? 'primary' : 'lightGray',
+      onClick: function onClick() {
+        return handleChangePriceRange(price === null || price === void 0 ? void 0 : price.level);
+      }
+    }, price.content, (filters === null || filters === void 0 ? void 0 : filters.price_level) === (price === null || price === void 0 ? void 0 : price.level) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null));
+  }))), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && /*#__PURE__*/_react.default.createElement(MaxSectionItem, {
     title: t('MAX_DELIVERY_FEE', 'Max delivery fee'),
     options: maxDeliveryFeeOptions,
     filter: "max_delivery_price"
