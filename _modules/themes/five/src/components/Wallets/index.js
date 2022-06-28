@@ -145,7 +145,7 @@ var WalletsUI = function WalletsUI(props) {
     }));
   })), !(transactionsList !== null && transactionsList !== void 0 && transactionsList.loading) && ((transactionsList === null || transactionsList === void 0 ? void 0 : transactionsList.error) || !((_transactionsList$lis5 = transactionsList.list) !== null && _transactionsList$lis5 !== void 0 && (_transactionsList$lis6 = _transactionsList$lis5["wallet:".concat(currentWalletSelected === null || currentWalletSelected === void 0 ? void 0 : currentWalletSelected.id)]) !== null && _transactionsList$lis6 !== void 0 && _transactionsList$lis6.length)) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: transactionsList !== null && transactionsList !== void 0 && transactionsList.error ? t('ERROR_NOT_FOUND_TRANSACTIONS', 'Sorry, an error has occurred') : t('NOT_FOUND_TRANSACTIONS', 'No transactions to show at this time.')
-  }))), !!loyaltyLevel && /*#__PURE__*/_react.default.createElement(_styles.LoyaltyContent, null, /*#__PURE__*/_react.default.createElement(_styles.LoyaltyWrapp, null, /*#__PURE__*/_react.default.createElement("span", {
+  }))), !!loyaltyLevel && tabSelected === 'credit_point' && /*#__PURE__*/_react.default.createElement(_styles.LoyaltyContent, null, /*#__PURE__*/_react.default.createElement(_styles.LoyaltyWrapp, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "loyalty_title"
   }, t('LOYALTY_LEVEL_TITLE', 'Your level is'), ":"), /*#__PURE__*/_react.default.createElement("img", {
     src: (_loyaltyLevel$image = loyaltyLevel.image) !== null && _loyaltyLevel$image !== void 0 ? _loyaltyLevel$image : theme.images.dummies.loyaltyLevel

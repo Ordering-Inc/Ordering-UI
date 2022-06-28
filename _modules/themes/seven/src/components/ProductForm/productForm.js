@@ -256,11 +256,11 @@ var ProductForm = function ProductForm(props) {
         var option = extra.options[j];
 
         for (var k = 0; k < ((_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : _option$suboptions.length); k++) {
-          var _option$suboptions, _productCart$options$, _productCart$options$2;
+          var _option$suboptions, _productCart$options, _productCart$options$;
 
           var suboption = option.suboptions[k];
 
-          if ((_productCart$options$ = productCart.options["id:".concat(option.id)]) !== null && _productCart$options$ !== void 0 && (_productCart$options$2 = _productCart$options$.suboptions["id:".concat(suboption.id)]) !== null && _productCart$options$2 !== void 0 && _productCart$options$2.selected) {
+          if ((_productCart$options = productCart.options["id:".concat(option.id)]) !== null && _productCart$options !== void 0 && (_productCart$options$ = _productCart$options.suboptions["id:".concat(suboption.id)]) !== null && _productCart$options$ !== void 0 && _productCart$options$.selected) {
             var suboptionState = productCart.options["id:".concat(option.id)].suboptions["id:".concat(suboption.id)];
             var quantity = option.allow_suboption_quantity ? suboptionState.quantity : 1;
             var price = option.with_half_option && suboption.half_price && suboptionState.position !== 'whole' ? suboption.half_price : suboption.price;
@@ -337,9 +337,9 @@ var ProductForm = function ProductForm(props) {
     product.product.extras.forEach(function (_extra) {
       _extra.options.forEach(function (_option) {
         if (_option.respect_to === suboptionId) {
-          var _productCart$options$3;
+          var _productCart$options2;
 
-          var suboptions = (_productCart$options$3 = productCart.options["id:".concat(_option.id)]) === null || _productCart$options$3 === void 0 ? void 0 : _productCart$options$3.suboptions;
+          var suboptions = (_productCart$options2 = productCart.options["id:".concat(_option.id)]) === null || _productCart$options2 === void 0 ? void 0 : _productCart$options2.suboptions;
 
           if (suboptions) {
             Object.keys(suboptions).map(function (suboptionKey) {
@@ -512,9 +512,9 @@ var ProductForm = function ProductForm(props) {
 
     product.product.extras.forEach(function (extra) {
       extra.options.map(function (option) {
-        var _productCart$options$4;
+        var _productCart$options3;
 
-        var suboptions = (_productCart$options$4 = productCart.options["id:".concat(option.id)]) === null || _productCart$options$4 === void 0 ? void 0 : _productCart$options$4.suboptions;
+        var suboptions = (_productCart$options3 = productCart.options["id:".concat(option.id)]) === null || _productCart$options3 === void 0 ? void 0 : _productCart$options3.suboptions;
         var quantity = suboptions ? Object.keys(suboptions).length : 0;
         var evaluateRespectTo = false;
 
@@ -522,11 +522,11 @@ var ProductForm = function ProductForm(props) {
           var options = productCart.options;
 
           for (var key in options) {
-            var _option$suboptions$;
+            var _option$suboptions2;
 
             var _option = options[key];
 
-            if ((_option$suboptions$ = _option.suboptions["id:".concat(option.respect_to)]) !== null && _option$suboptions$ !== void 0 && _option$suboptions$.selected) {
+            if ((_option$suboptions2 = _option.suboptions["id:".concat(option.respect_to)]) !== null && _option$suboptions2 !== void 0 && _option$suboptions2.selected) {
               evaluateRespectTo = true;
               break;
             }
@@ -659,11 +659,11 @@ var ProductForm = function ProductForm(props) {
         var options = productCart.options;
 
         for (var key in options) {
-          var _option$suboptions$2;
+          var _option$suboptions3;
 
           var _option = options[key];
 
-          if ((_option$suboptions$2 = _option.suboptions["id:".concat(option.respect_to)]) !== null && _option$suboptions$2 !== void 0 && _option$suboptions$2.selected) {
+          if ((_option$suboptions3 = _option.suboptions["id:".concat(option.respect_to)]) !== null && _option$suboptions3 !== void 0 && _option$suboptions3.selected) {
             showOption = true;
             break;
           }
