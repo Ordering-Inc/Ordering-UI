@@ -58,7 +58,7 @@ var AddressItemActions = _styledComponents.default.div(_templateObject9 || (_tem
 
 exports.AddressItemActions = AddressItemActions;
 
-var WrappNotAddresses = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  height: 270px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n  margin: 20px auto 10px;\n\n  img {\n    width: 200px;\n    height: auto;\n    aspect-ratio: attr(width) / attr(height)\n  }\n  h1 {\n    margin: 5px 0px 0px;\n    opacity: 0.5;\n    text-align: center;\n    font-size: 24px;\n  }\n"])));
+var WrappNotAddresses = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  height: 350px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n  margin: 20px auto 10px;\n\n  img {\n    width: 200px;\n    height: auto;\n    aspect-ratio: attr(width) / attr(height)\n  }\n  h1 {\n    margin: 5px 0px 0px;\n    opacity: 0.5;\n    text-align: center;\n    font-size: 24px;\n  }\n"])));
 
 exports.WrappNotAddresses = WrappNotAddresses;
 
@@ -98,9 +98,8 @@ var List = _styledComponents.default.div(_templateObject18 || (_templateObject18
 exports.List = List;
 
 var AddressFormContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  width: 50%;\n  position: sticky;\n  right: 0;\n  top: 0;\n  margin-top: ", ";\n  height: 100%;\n  padding-left: 10px;\n"])), function (_ref5) {
-  var isOpenUserData = _ref5.isOpenUserData,
-      isHeader = _ref5.isHeader;
-  return isOpenUserData ? '-30px' : isHeader ? '-222px' : '-190px';
+  var isCustomerMode = _ref5.isCustomerMode;
+  return isCustomerMode ? '-190px' : '0';
 });
 
 exports.AddressFormContainer = AddressFormContainer;

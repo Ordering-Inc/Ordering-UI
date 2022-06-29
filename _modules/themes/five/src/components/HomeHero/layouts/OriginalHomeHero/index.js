@@ -163,7 +163,6 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
       }));
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
     open: modals.listOpen,
     width: "70%",
     onClose: function onClose() {
