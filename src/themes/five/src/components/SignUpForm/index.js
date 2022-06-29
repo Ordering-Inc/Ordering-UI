@@ -523,7 +523,10 @@ const SignUpFormUI = (props) => {
                   {configs?.apple_login_client_id?.value && (
                     <AppleLogin
                       onSuccess={handleSuccessApple}
-                      onFailure={(data) => console.log('onFailure', data)}
+                      onFailure={(data) => setAlertState({
+                        open: true,
+                        content: data
+                      })}
                     />
                   )}
                   {configs?.google_login_client_id?.value && (

@@ -626,7 +626,10 @@ const LoginFormUI = (props) => {
                   (
                     <AppleLogin
                       onSuccess={handleSuccessApple}
-                      onFailure={(data) => console.log('onFailure', data)}
+                      onFailure={(data) => setAlertState({
+                        open: true,
+                        content: data
+                      })}
                     />
                   )}
                 {useLoginByCellphone && loginTab === 'cellphone' &&
