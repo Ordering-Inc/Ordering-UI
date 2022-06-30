@@ -258,10 +258,11 @@ const OrderDetailsUI = (props) => {
       const _businessId = 'businessId:' + businessData?.id
       const products = carts?.[_businessId]?.products
       const available = products.every(product => product.valid === true)
-      if (available && reorderState?.result?.uuid) {
+      if (available && reorderState?.result?.uuid && (products?.length === order?.products.length)) {
         handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
       } else {
         sessionStorage.setItem('adjust-cart-products', _businessId)
+        products?.length !== order?.products.length && sessionStorage.setItem('already-removed', 'removed')
         handleBusinessRedirect(businessData?.slug)
       }
     }
