@@ -261,7 +261,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(adjustBusinessId) {
       var _carts$adjustBusiness;
 
-      var _carts, products, unavailableProducts;
+      var _carts, products, unavailableProducts, alreadyRemoved;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
@@ -272,17 +272,36 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
               unavailableProducts = products.filter(function (product) {
                 return product.valid !== true;
               });
-              _context.t0 = unavailableProducts.length > 0 && multiRemoveProducts;
+              alreadyRemoved = sessionStorage.getItem('already-removed');
+              sessionStorage.removeItem('already-removed');
 
-              if (!_context.t0) {
-                _context.next = 7;
+              if (!(unavailableProducts.length > 0)) {
+                _context.next = 11;
                 break;
               }
 
-              _context.next = 7;
+              _context.t0 = multiRemoveProducts;
+
+              if (!_context.t0) {
+                _context.next = 10;
+                break;
+              }
+
+              _context.next = 10;
               return multiRemoveProducts(unavailableProducts, _carts);
 
-            case 7:
+            case 10:
+              return _context.abrupt("return");
+
+            case 11:
+              if (alreadyRemoved === 'removed') {
+                setAlertState({
+                  open: true,
+                  content: [t('NOT_AVAILABLE_PRODUCT', 'This product is not available.')]
+                });
+              }
+
+            case 12:
             case "end":
               return _context.stop();
           }

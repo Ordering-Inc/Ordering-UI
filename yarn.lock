@@ -1550,9 +1550,9 @@
     any-observable "^0.3.0"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.39.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.39.0.tgz#852ec26ad75b81094df6fc28dbe50b1b4a519bec"
-  integrity sha512-kkWFRctzlN0sa5s+V6UUh+iJ0TwCTHSNvo36x151nMVmK/74oW9Ilqyh6Gfsox5sghdFsZJRp1B0E98OIAnpCQ==
+  version "1.39.1"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.39.1.tgz#c4bb4bf379fd3f2307eed30adf50cb401131deab"
+  integrity sha512-FvuLECIcq6YjAGTPBjMjM6Rwk9eo6V17xTqZ1mE4j2KiOtgm3V6UGpurq2Q2a4SRe+kdJWZL27+N+UX7pUEhIw==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics.js-video-plugins" "^0.2.1"
@@ -4887,9 +4887,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.172:
-  version "1.4.173"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.173.tgz#48f128dda49cd7f6317e65ac0085bd3a6b9b6e3b"
-  integrity sha512-Qo3LnVW6JRNhD32viSdPebxKI7K+3WeBDjU1+Q2yZS83zAh8C2LyPpzTimlciv6U74KpY9n/0ESAhUByRke0jw==
+  version "1.4.174"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.174.tgz#ffdf57f26dd4558c5aabdb4b190c47af1c4e443b"
+  integrity sha512-JER+w+9MV2MBVFOXxP036bLlNOnzbYAWrWU8sNUwoOO69T3w4564WhM5H5atd8VVS8U4vpi0i0kdoYzm1NPQgQ==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -5275,9 +5275,9 @@ etag@~1.8.1:
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
 eventemitter2@^6.4.2:
-  version "6.4.5"
-  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.5.tgz#97380f758ae24ac15df8353e0cc27f8b95644655"
-  integrity sha512-bXE7Dyc1i6oQElDG0jMRZJrRAn9QR2xyyFGmBdZleNmyQX0FqGYmhZIrIrpPfm/w//LTo4tVQGOGQcGCb5q9uw==
+  version "6.4.6"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.6.tgz#92d56569cc147a4d9b9da9e942e89b20ce236b0a"
+  integrity sha512-OHqo4wbHX5VbvlbB6o6eDwhYmiTjrpWACjF8Pmof/GTD6rdBNdZFNck3xlhqOiQFGCOoq3uzHvA0cQpFHIGVAQ==
 
 eventemitter3@^4.0.0:
   version "4.0.7"
@@ -8229,7 +8229,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/46b23aa58820332b1148dbf6110982ea095ae416"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/2fcd297a10dff7877278a456b68789bb41ffd923"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

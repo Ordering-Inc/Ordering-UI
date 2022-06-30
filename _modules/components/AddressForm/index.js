@@ -521,7 +521,7 @@ var AddressFormUI = function AddressFormUI(props) {
       var _ref8, _formState$changes$fi, _formState$changes25, _addressState$address11;
 
       formMethods.register(field.name, {
-        required: isRequiredField(field.name) ? t("VALIDATION_ERROR_".concat(field.name, "_REQUIRED"), "The field ".concat(field.code, " is required")) : null
+        required: isRequiredField(field.name) && showField(field.name) ? t("VALIDATION_ERROR_".concat(field.name, "_REQUIRED"), "The field ".concat(field.code, " is required")) : null
       });
       formMethods.setValue(field.name, (_ref8 = (_formState$changes$fi = (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25[field.name]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11[field.name]) !== null && _ref8 !== void 0 ? _ref8 : '');
     });
