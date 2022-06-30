@@ -340,7 +340,7 @@ const AddressFormUI = (props) => {
   useEffect(() => {
     inputNames.forEach(field => {
       formMethods.register(field.name, {
-        required: isRequiredField(field.name)
+        required: isRequiredField(field.name) && showField(field.name)
           ? t(`VALIDATION_ERROR_${field.name}_REQUIRED`, `The field ${field.code} is required`)
           : null
       })
