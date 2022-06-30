@@ -72,7 +72,7 @@ var DescriptionModalContainer = _styledComponents.default.div(_templateObject11 
 
 exports.DescriptionModalContainer = DescriptionModalContainer;
 
-var DescriptionContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  height: 100%;\n  width: 100%;\n  overflow-y: auto;\n  div{\n    height: 300px;\n    overflow-x: auto;\n    ::-webkit-scrollbar {\n      width: 6px;\n      height: 6px;\n    }\n  }\n  p{\n    white-space: pre;\n  }\n"])));
+var DescriptionContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  height: 100%;\n  width: 100%;\n  overflow-y: auto;\n  overflow-x: hidden;\n  div{\n    height: 300px;\n    ::-webkit-scrollbar {\n      width: 6px;\n      height: 6px;\n    }\n  }\n  p{\n    white-space: pre-wrap;\n    overflow-wrap: break-word;\n  }\n"])));
 
 exports.DescriptionContainer = DescriptionContainer;
 
