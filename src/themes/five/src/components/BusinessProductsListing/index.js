@@ -158,7 +158,17 @@ const BusinessProductsListingUI = (props) => {
     const _carts = carts?.[adjustBusinessId]
     const products = carts?.[adjustBusinessId]?.products
     const unavailableProducts = products.filter(product => product.valid !== true)
-    unavailableProducts.length > 0 && multiRemoveProducts && await multiRemoveProducts(unavailableProducts, _carts)
+    const alreadyRemoved = sessionStorage.getItem('already-removed')
+    sessionStorage.removeItem('already-removed')
+
+    if (unavailableProducts.length > 0) {
+      multiRemoveProducts && await multiRemoveProducts(unavailableProducts, _carts)
+      return
+    }
+
+    if (alreadyRemoved === 'removed') {
+      setAlertState({ open: true, content: [t('NOT_AVAILABLE_PRODUCT', 'This product is not available.')] })
+    }
   }
 
   useEffect(() => {
