@@ -98,24 +98,13 @@ export const RenderProductsLayout = (props) => {
   }
   const showCartOnProductList = !theme?.layouts?.business_view?.components?.cart?.hidden
 
-  const BusinessLayout = (props) => {
-    const components = {
-      categories: businessLayout.layoutOne
-        ? CategoriesLayoutGroceries
-        : BusinessProductsCategories,
-      products_list: businessLayout.layoutOne
-        ? ProductListLayoutGroceries
-        : BusinessProductsList
-    }
+  const BusinessLayoutCategories = businessLayout.layoutOne
+    ? CategoriesLayoutGroceries
+    : BusinessProductsCategories
 
-    const ComponentToRender = props?.component && components[props?.component]
-
-    return (
-      props?.component && (
-        <ComponentToRender {...props} />
-      )
-    )
-  }
+  const BusinessLayoutProductsList = businessLayout.layoutOne
+    ? ProductListLayoutGroceries
+    : BusinessProductsList
 
   return (
     <>
@@ -155,8 +144,7 @@ export const RenderProductsLayout = (props) => {
               <BusinessContent isCustomLayout={isCustomLayout}>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
                   {!(business?.categories?.length === 0 && !categoryId) && (
-                    <BusinessLayout
-                      component='categories'
+                    <BusinessLayoutCategories
                       categories={[
                         { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
                         { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
@@ -177,8 +165,7 @@ export const RenderProductsLayout = (props) => {
                     </MobileCartViewWrapper>
                   )} */}
                   <WrapContent id='businessProductList'>
-                    <BusinessLayout
-                      component='products_list'
+                    <BusinessLayoutProductsList
                       categories={[
                         { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
                         { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
@@ -243,7 +230,7 @@ export const RenderProductsLayout = (props) => {
               <BusinessContent>
                 <BusinessCategoriesContainer>
                   {!(business?.categories?.length === 0 && !categoryId) && (
-                    <BusinessLayout
+                    <BusinessLayoutCategories
                       component='categories'
                       categories={[
                         { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
@@ -262,8 +249,7 @@ export const RenderProductsLayout = (props) => {
                 </BusinessCategoriesContainer>
                 <BusinessCategoryProductWrapper>
                   <WrapContent>
-                    <BusinessLayout
-                      component='products_list'
+                    <BusinessLayoutProductsList
                       categories={[
                         { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
                         { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
