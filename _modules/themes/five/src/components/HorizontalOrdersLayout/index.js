@@ -168,8 +168,9 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         color: "primary",
         className: "reorder",
         outline: true,
-        onClick: function onClick() {
-          return handleReorder(order.id);
+        onClick: function onClick(ev) {
+          ev.stopPropagation();
+          handleReorder(order.id);
         }
       }, t('REORDER', 'Reorder'))));
     }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.Card, {
