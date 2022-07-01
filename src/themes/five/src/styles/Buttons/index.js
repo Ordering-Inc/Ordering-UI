@@ -219,4 +219,15 @@ export const Button = styled.button`
       background: ${props => darken(0.07, props.theme.colors.grayDividerColor)};
     }
   `}
+  ${({ color }) => color === 'lightGray' && css`
+    background: ${props => props.theme.colors.gray200};
+    color: ${props => props.theme.colors.secondaryDark};
+    border-color: ${props => props.theme.colors.gray200};
+    &:active {
+      background: ${props => darken(0.05, props.theme.colors.gray200)};
+    }
+    &:hover {
+      background: ${props => darken(0.07, props.theme.colors.gray200)};
+    }
+  `}
 `

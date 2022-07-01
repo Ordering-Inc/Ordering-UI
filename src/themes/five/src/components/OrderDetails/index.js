@@ -103,6 +103,24 @@ const OrderDetailsUI = (props) => {
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
 
+  const isOriginalLayout = theme?.layouts?.confirmation?.components?.layout?.type === 'original'
+  const showDeliveryType = !theme?.layouts?.confirmation?.components?.delivery_type?.hidden
+  const showDeliveryDate = !theme?.layouts?.confirmation?.components?.delivery_date?.hidden
+  const showDeliveryProgress = !theme?.layouts?.confirmation?.components?.delivery_progress?.hidden
+  const showBusinessPhone = !theme?.layouts?.confirmation?.components?.business_information?.components?.phone?.hidden
+  const showBusinessMessages = !theme?.layouts?.confirmation?.components?.business_information?.components?.messages?.hidden
+  const showBusinessEmail = !theme?.layouts?.confirmation?.components?.business_information?.components?.email?.hidden
+  const showBusinessAddress = !theme?.layouts?.confirmation?.components?.business_information?.components?.address?.hidden
+  const showBusinessMap = !theme?.layouts?.confirmation?.components?.business_information?.components?.map?.hidden
+  const showDriverName = !theme?.layouts?.confirmation?.components?.driver_information?.components?.name?.hidden
+  const showDriverPhone = !theme?.layouts?.confirmation?.components?.driver_information?.components?.phone?.hidden
+  const showDriverMessages = !theme?.layouts?.confirmation?.components?.driver_information?.components?.messages?.hidden
+  const showDriverEmail = !theme?.layouts?.confirmation?.components?.driver_information?.components?.email?.hidden
+  const showDriverPhoto = !theme?.layouts?.confirmation?.components?.driver_information?.components?.photo?.hidden
+  const showCustomerPhone = !theme?.layouts?.confirmation?.components?.customer_information?.components?.phone?.hidden
+  const showCustomerAddress = !theme?.layouts?.confirmation?.components?.customer_information?.components?.address?.hidden
+  const showCustomerEmail = !theme?.layouts?.confirmation?.components?.customer_information?.components?.email?.hidden
+
   const getOrderStatus = (s) => {
     const status = parseInt(s)
     const orderStatus = [
@@ -240,10 +258,11 @@ const OrderDetailsUI = (props) => {
       const _businessId = 'businessId:' + businessData?.id
       const products = carts?.[_businessId]?.products
       const available = products.every(product => product.valid === true)
-      if (available && reorderState?.result?.uuid) {
+      if (available && reorderState?.result?.uuid && (products?.length === order?.products.length)) {
         handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
       } else {
         sessionStorage.setItem('adjust-cart-products', _businessId)
+        products?.length !== order?.products.length && sessionStorage.setItem('already-removed', 'removed')
         handleBusinessRedirect(businessData?.slug)
       }
     }
@@ -253,9 +272,9 @@ const OrderDetailsUI = (props) => {
     const validStatuses = [9, 19, 23]
     return (
       <>
-        {order?.driver?.location?.lat && order?.driver?.location?.lng && validStatuses.includes(parseInt(order?.status)) && (
+        {showBusinessMap && order?.driver?.location?.lat && order?.driver?.location?.lng && validStatuses.includes(parseInt(order?.status)) && (
           <>
-            <Map isCustomerMode={isCustomerMode}>
+            <Map isCustomerMode={isCustomerMode || isOriginalLayout}>
               <GoogleMapsMap
                 apiKey={configs?.google_maps_api_key?.value}
                 location={order?.driver?.location}
@@ -304,16 +323,16 @@ const OrderDetailsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Container isCustomerMode={isCustomerMode}>
+      <Container isCustomerMode={isCustomerMode || isOriginalLayout}>
         {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
-          <WrapperContainer isCustomerMode={isCustomerMode}>
-            <WrapperLeftContainer isCustomerMode={isCustomerMode}>
+          <WrapperContainer isCustomerMode={isCustomerMode || isOriginalLayout}>
+            <WrapperLeftContainer isCustomerMode={isCustomerMode || isOriginalLayout}>
               <OrderInfo>
-                {isCustomerMode ? (
+                {isCustomerMode || isOriginalLayout ? (
                   <TitleContainer>
                     <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
                     {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-                      <Content className='order-content' isCustomerMode={isCustomerMode}>
+                      <Content className='order-content' isCustomerMode={isCustomerMode || isOriginalLayout}>
                         <ShareOrder>
                           <div className='wrap'>
                             <ProductShare
@@ -326,24 +345,30 @@ const OrderDetailsUI = (props) => {
                     {order?.status !== 0 && order?.integration_id && (
                       <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
                     )}
-                    <p className='types'>
-                      {orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
-                    </p>
-                    <p className='date'>
-                      {
-                        order?.delivery_datetime_utc
-                          ? parseDate(order?.delivery_datetime_utc)
-                          : parseDate(order?.delivery_datetime, { utc: false })
-                      }
-                    </p>
-                    <ReOrder>
-                      <Button
-                        color='primary'
-                        onClick={() => handleStartNewOrder()}
-                      >
-                        {t('START_NEW_ORDER', 'Start new order')}
-                      </Button>
-                    </ReOrder>
+                    {showDeliveryType && (
+                      <p className='types'>
+                        {orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
+                      </p>
+                    )}
+                    {showDeliveryDate && (
+                      <p className='date'>
+                        {
+                          order?.delivery_datetime_utc
+                            ? parseDate(order?.delivery_datetime_utc)
+                            : parseDate(order?.delivery_datetime, { utc: false })
+                        }
+                      </p>
+                    )}
+                    {!isOriginalLayout && (
+                      <ReOrder>
+                        <Button
+                          color='primary'
+                          onClick={() => handleStartNewOrder()}
+                        >
+                          {t('START_NEW_ORDER', 'Start new order')}
+                        </Button>
+                      </ReOrder>
+                    )}
                   </TitleContainer>
                 ) : (
                   <>
@@ -351,13 +376,15 @@ const OrderDetailsUI = (props) => {
                     {order?.status !== 0 && order?.integration_id && (
                       <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
                     )}
-                    <p className='date'>
-                      {
-                        order?.delivery_datetime_utc
-                          ? parseDate(order?.delivery_datetime_utc)
-                          : parseDate(order?.delivery_datetime, { utc: false })
-                      }
-                    </p>
+                    {showDeliveryDate && (
+                      <p className='date'>
+                        {
+                          order?.delivery_datetime_utc
+                            ? parseDate(order?.delivery_datetime_utc)
+                            : parseDate(order?.delivery_datetime, { utc: false })
+                        }
+                      </p>
+                    )}
                     <OrderActions>
                       <ReviewOrderLink
                         className='Review-order'
@@ -397,34 +424,52 @@ const OrderDetailsUI = (props) => {
                     </OrderActions>
                   </>
                 )}
-                <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-                <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
+                {showDeliveryProgress && (
+                  <>
+                    <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                    <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
+                  </>
+                )}
               </OrderInfo>
               <Divider />
-              <OrderBusiness isCustomerMode={isCustomerMode}>
-                <BusinessWrapper isCustomerMode={isCustomerMode}>
+              <OrderBusiness isCustomerMode={isCustomerMode || isOriginalLayout}>
+                <BusinessWrapper isCustomerMode={isCustomerMode || isOriginalLayout}>
                   {isCustomerMode && <img src={order?.business?.logo} />}
-                  <BusinessInfo isCustomerMode={isCustomerMode}>
-                    {isCustomerMode ? (
+                  <BusinessInfo isCustomerMode={isCustomerMode || isOriginalLayout}>
+                    {isCustomerMode || isOriginalLayout ? (
                       <>
                         <BusinessTitle>
                           <h2>{order?.business?.name}</h2>
                           <ActionsSection
                             {...ActionsSectionProps}
+                            showPhone={showBusinessPhone}
+                            showMessages={showBusinessMessages}
                             actionType='business'
                           />
                         </BusinessTitle>
-                        <p>{order?.business?.email}</p>
-                        <p>{order?.business?.cellphone}</p>
-                        <p>{order?.business?.address}</p>
+                        {showBusinessEmail && (
+                          <p>{order?.business?.email}</p>
+                        )}
+                        {showBusinessPhone && (
+                          <p>{order?.business?.cellphone}</p>
+                        )}
+                        {showBusinessAddress && (
+                          <p>{order?.business?.address}</p>
+                        )}
                       </>
                     ) : (
                       <>
                         <h2>{t('FROM', 'From')}</h2>
                         <p>{order?.business?.name}</p>
-                        <p>{order?.business?.email}</p>
-                        <p>{order?.business?.cellphone}</p>
-                        <p>{order?.business?.address}</p>
+                        {showBusinessEmail && (
+                          <p>{order?.business?.email}</p>
+                        )}
+                        {showBusinessPhone && (
+                          <p>{order?.business?.cellphone}</p>
+                        )}
+                        {showBusinessAddress && (
+                          <p>{order?.business?.address}</p>
+                        )}
                       </>
                     )}
                     {order?.place?.name && (
@@ -436,56 +481,76 @@ const OrderDetailsUI = (props) => {
                     )}
                   </BusinessInfo>
                 </BusinessWrapper>
-                {isCustomerMode ? (
+                {isCustomerMode || isOriginalLayout ? (
                   <OrderMapSection />
                 ) : (
                   <ActionsSection
                     {...ActionsSectionProps}
                     actionType='business'
+                    showPhone={showBusinessPhone}
+                    showMessages={showBusinessMessages}
                   />
                 )}
               </OrderBusiness>
               <Divider />
-              <OrderCustomer isCustomerMode={isCustomerMode}>
-                {!isCustomerMode && (
+              <OrderCustomer isCustomerMode={isCustomerMode || isOriginalLayout}>
+                {!(isCustomerMode || isOriginalLayout) && (
                   <h2>{t('TO', 'To')}</h2>
                 )}
                 <p>{order?.customer?.name} {order?.customer?.lastname}</p>
-                <p>{order?.customer?.email}</p>
-                <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
-                <p>{order?.customer?.address}</p>
+                {showCustomerEmail && (
+                  <p>{order?.customer?.email}</p>
+                )}
+                {showCustomerPhone && (
+                  <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
+                )}
+                {showCustomerAddress && (
+                  <p>{order?.customer?.address}</p>
+                )}
               </OrderCustomer>
-              {!isCustomerMode && (
-                <OrderPreferencesSection />
+              {!(isCustomerMode || isOriginalLayout) && (
+                <OrderPreferencesSection order={order} />
               )}
               {order?.driver && (
                 <>
-                  {isCustomerMode ? (
+                  {isCustomerMode || isOriginalLayout ? (
                     <>
-                      <OrderDriver isCustomerMode={isCustomerMode}>
+                      <OrderDriver isCustomerMode={isCustomerMode || isOriginalLayout}>
                         <SectionTitleContainer>
                           <h2>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</h2>
                           <ActionsSection
                             {...ActionsSectionProps}
                             actionType='driver'
+                            showPhone={showDriverPhone}
+                            showMessages={showDriverMessages}
                           />
                         </SectionTitleContainer>
                         <WrapperDriver>
-                          <div className='photo'>
-                            {order?.driver?.photo ? (
-                              <PhotoBlock isCustomerMode={isCustomerMode} src={order?.driver?.photo} />
-                            ) : (
-                              <RiUser2Fill />
-                            )}
-                          </div>
+                          {showDriverPhoto && (
+                            <div className='photo'>
+                              {order?.driver?.photo ? (
+                                <PhotoBlock isCustomerMode={isCustomerMode || isOriginalLayout} src={order?.driver?.photo} />
+                              ) : (
+                                <RiUser2Fill />
+                              )}
+                            </div>
+                          )}
                           <div>
-                            <h2>{order?.driver?.name} {order?.driver?.lastname}</h2>
-                            <p>{order?.driver?.email}</p>
-                            <p>{order?.driver?.cellphone || order?.driver?.phone}</p>
+                            {showDriverName && (
+                              <h2>{order?.driver?.name} {order?.driver?.lastname}</h2>
+                            )}
+                            {showDriverEmail && (
+                              <p>{order?.driver?.email}</p>
+                            )}
+                            {showDriverPhone && (
+                              <p>{order?.driver?.cellphone || order?.driver?.phone}</p>
+                            )}
                           </div>
                         </WrapperDriver>
                       </OrderDriver>
-                      <OrderMapSection />
+                      {!isOriginalLayout && (
+                        <OrderMapSection />
+                      )}
                     </>
                   ) : (
                     <>
@@ -496,39 +561,45 @@ const OrderDetailsUI = (props) => {
                       </SectionTitle>
                       <OrderDriver>
                         <WrapperDriver>
-                          <div className='photo'>
-                            {order?.driver?.photo ? (
-                              <PhotoBlock src={order?.driver?.photo} width='48' height='48' />
-                            ) : (
-                              <RiUser2Fill />
-                            )}
-                          </div>
-                          <p>{order?.driver?.name} {order?.driver?.lastname}</p>
+                          {showDriverPhoto && (
+                            <div className='photo'>
+                              {order?.driver?.photo ? (
+                                <PhotoBlock src={order?.driver?.photo} width='48' height='48' />
+                              ) : (
+                                <RiUser2Fill />
+                              )}
+                            </div>
+                          )}
+                          {showDriverName && (
+                            <p>{order?.driver?.name} {order?.driver?.lastname}</p>
+                          )}
                         </WrapperDriver>
                         <ActionsSection
                           {...ActionsSectionProps}
                           actionType='driver'
+                          showPhone={showDriverPhone}
+                          showMessages={showDriverMessages}
                         />
                       </OrderDriver>
                     </>
                   )}
                 </>
               )}
-              {isCustomerMode && (
-                <OrderPreferences isCustomerMode={isCustomerMode}>
-                  <OrderPreferencesSection />
+              {(isCustomerMode || isOriginalLayout) && (
+                <OrderPreferences isCustomerMode={isCustomerMode || isOriginalLayout}>
+                  <OrderPreferencesSection order={order} />
                 </OrderPreferences>
               )}
             </WrapperLeftContainer>
-            <WrapperRightContainer isCustomerMode={isCustomerMode}>
-              {!isCustomerMode && (
+            <WrapperRightContainer isCustomerMode={isCustomerMode || isOriginalLayout}>
+              {!(isCustomerMode || isOriginalLayout) && (
                 <>
                   <OrderHeaderInfoSection />
                   <OrderActionsSection />
                 </>
               )}
-              <OrderProducts isCustomerMode={isCustomerMode}>
-                {isCustomerMode && (
+              <OrderProducts isCustomerMode={isCustomerMode || isOriginalLayout}>
+                {(isCustomerMode || isOriginalLayout) && (
                   <HeaderTitle>
                     <OrderHeaderInfoSection />
                     <OrderActionsSection />
@@ -538,17 +609,18 @@ const OrderDetailsUI = (props) => {
                   <ProductItemAccordion
                     key={product.id}
                     product={product}
+                    isConfirmationPage
                   />
                 ))}
-                {isCustomerMode && (
+                {(isCustomerMode || isOriginalLayout) && (
                   <OrderBillSection
                     order={order}
-                    isCustomerMode={isCustomerMode}
+                    isCustomerMode={isCustomerMode || isOriginalLayout}
                     setOpenTaxModal={setOpenTaxModal}
                   />
                 )}
               </OrderProducts>
-              {!isCustomerMode && (
+              {!(isCustomerMode || isOriginalLayout) && (
                 <>
                   <OrderBillSection
                     order={order}
@@ -593,7 +665,7 @@ const OrderDetailsUI = (props) => {
           )
         }
 
-        {loading && !error && !isCustomerMode && (
+        {loading && !error && !(isCustomerMode || isOriginalLayout) && (
           <SkeletonWrapper>
             <WrapperLeftContainer>
               <SkeletonBlockWrapp>
@@ -633,11 +705,11 @@ const OrderDetailsUI = (props) => {
           </SkeletonWrapper>
         )}
 
-        {loading && !error && isCustomerMode && (
-          <SkeletonWrapper isCustomerMode={isCustomerMode}>
+        {loading && !error && (isCustomerMode || isOriginalLayout) && (
+          <SkeletonWrapper isCustomerMode={isCustomerMode || isOriginalLayout}>
             <>
               <SkeletonBlockWrapp>
-                <SkeletonBlock width={90} isCustomerMode={isCustomerMode}>
+                <SkeletonBlock width={90} isCustomerMode={isCustomerMode || isOriginalLayout}>
                   <Skeleton height={40} width={300} />
                   <Skeleton height={15} width={120} />
                   <Skeleton height={15} />

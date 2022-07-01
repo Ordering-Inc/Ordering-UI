@@ -132,7 +132,7 @@ const LoginFormUI = (props) => {
       if (loginTab === 'otp') {
         if (otpType === 'cellphone') {
           const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
-          generateOtpCode(cellphone, countryPhoneCode)
+          generateOtpCode({ cellphone, countryPhoneCode })
         } else {
           generateOtpCode()
         }
@@ -626,7 +626,10 @@ const LoginFormUI = (props) => {
                   (
                     <AppleLogin
                       onSuccess={handleSuccessApple}
-                      onFailure={(data) => console.log('onFailure', data)}
+                      onFailure={(data) => setAlertState({
+                        open: true,
+                        content: data
+                      })}
                     />
                   )}
                 {useLoginByCellphone && loginTab === 'cellphone' &&

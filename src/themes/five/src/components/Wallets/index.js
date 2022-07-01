@@ -144,7 +144,7 @@ const WalletsUI = (props) => {
               </div>
             </Transactions>
 
-            {!!loyaltyLevel && (
+            {!!loyaltyLevel && tabSelected === 'credit_point' && (
               <LoyaltyContent>
                 <LoyaltyWrapp>
                   <span className='loyalty_title'>

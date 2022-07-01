@@ -30,7 +30,8 @@ import {
   BusinessMoreDetail,
   TitleWrapper,
   RibbonBox,
-  SearchIconWrapper
+  SearchIconWrapper,
+  SearchComponentContainer
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
 
@@ -70,6 +71,15 @@ export const BusinessBasicInformation = (props) => {
   const [{ configs }] = useConfig()
   const isPreOrderSetting = configs?.preorder_status_enabled?.value === '1'
 
+  const showLogo = !theme?.layouts?.business_view?.components?.basic_information?.components?.logo?.hidden
+  const showDeliveryFee = !theme?.layouts?.business_view?.components?.basic_information?.components?.delivery_fee?.hidden
+  const showTime = !theme?.layouts?.business_view?.components?.basic_information?.components?.time?.hidden
+  const showBusinessInfo = !theme?.layouts?.business_view?.components?.basic_information?.components?.business_info?.hidden
+  const showReviews = !theme?.layouts?.business_view?.components?.basic_information?.components?.reviews?.hidden
+  const showDistance = !theme?.layouts?.business_view?.components?.basic_information?.components?.distance?.hidden
+  const showSort = !theme?.layouts?.business_view?.components?.basic_information?.components?.sort?.hidden
+  const isInfoShrunken = theme?.layouts?.business_view?.components?.basic_information?.components?.layout?.position === 'shrunken'
+
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -107,28 +117,33 @@ export const BusinessBasicInformation = (props) => {
     document.body.style.overflowY = openSearchProducts ? 'hidden' : 'auto'
   }, [openSearchProducts])
 
-  return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      {openSearchProducts && (
-        <SearchProducts
-          {...props}
-          onClose={() => {
-            handleChangeSearch('')
-            setOpenSearchProducts(false)
-          }}
-          business={businessState.business}
-        />
-      )}
+  const SearchComponent = () => {
+    return (
+      <WrapperSearch>
+        <SearchIconWrapper
+          onClick={() => setOpenSearchProducts(true)}
+        >
+          <CgSearch />
+        </SearchIconWrapper>
+        {showSort && (
+          <Select
+            notAsync
+            notReload
+            options={sortByOptions}
+            defaultValue={sortByValue}
+            onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+          />
+        )}
+      </WrapperSearch>
+    )
+  }
+
+  const BusinessInfoComponent = () => {
+    return (
       <BusinessInfoContainer>
         <BusinessInfoContent>
           <BusinessInfo className='info'>
-            <BusinessInfoItem>
+            <BusinessInfoItem isInfoShrunken={isInfoShrunken}>
               {!loading ? (
                 <TitleWrapper>
                   <h2 className='bold'>{business?.name}</h2>
@@ -145,13 +160,17 @@ export const BusinessBasicInformation = (props) => {
               ) : (
                 <Skeleton width={isCustomerMode ? 100 : 150} height={isCustomerMode ? 35 : 'auto'} />
               )}
-              {!loading ? (
-                <p className='type'>{getBusinessType()}</p>
-              ) : (
-                <Skeleton width={isCustomerMode ? 100 : 150} />
+              {showBusinessInfo && (
+                <>
+                  {!loading ? (
+                    <p className='type'>{getBusinessType()}</p>
+                  ) : (
+                    <Skeleton width={isCustomerMode ? 100 : 150} />
+                  )}
+                </>
               )}
               <BusinessDetail isSkeleton={loading}>
-                {orderState?.options.type === 1 && (
+                {orderState?.options.type === 1 && showDeliveryFee && (
                   <>
                     {!loading ? (
                       <>
@@ -166,46 +185,56 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 )}
-                {!loading ? (
+                {showTime && (
                   <>
-                    {orderState?.options?.type === 1 ? (
+                    {!loading ? (
+                      <>
+                        {orderState?.options?.type === 1 ? (
+                          <>
+                            <h5>
+                              {convertHoursToMinutes(business?.delivery_time)}
+                            </h5>
+                            <span className='dot'>•</span>
+                          </>
+                        ) : (
+                          <>
+                            <h5>
+                              {convertHoursToMinutes(business?.pickup_time)}
+                            </h5>
+                            <span className='dot'>•</span>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <Skeleton width={isCustomerMode ? 70 : 50} />
+                    )}
+                  </>
+                )}
+                {showDistance && (
+                  <>
+                    {!loading ? (
                       <>
                         <h5>
-                          {convertHoursToMinutes(business?.delivery_time)}
+                          {parseDistance(business?.distance || 0)}
                         </h5>
                         <span className='dot'>•</span>
                       </>
                     ) : (
-                      <>
-                        <h5>
-                          {convertHoursToMinutes(business?.pickup_time)}
-                        </h5>
-                        <span className='dot'>•</span>
-                      </>
+                      <Skeleton width={isCustomerMode ? 70 : 50} />
                     )}
                   </>
-                ) : (
-                  <Skeleton width={isCustomerMode ? 70 : 50} />
                 )}
-
-                {!loading ? (
+                {showReviews && (
                   <>
-                    <h5>
-                      {parseDistance(business?.distance || 0)}
-                    </h5>
-                    <span className='dot'>•</span>
+                    {!loading ? (
+                      <div className='review'>
+                        <StarFill className='start' />
+                        <p>{business?.reviews?.total}</p>
+                      </div>
+                    ) : (
+                      <Skeleton width={isCustomerMode ? 100 : 50} />
+                    )}
                   </>
-
-                ) : (
-                  <Skeleton width={isCustomerMode ? 70 : 50} />
-                )}
-                {!loading ? (
-                  <div className='review'>
-                    <StarFill className='start' />
-                    <p>{business?.reviews?.total}</p>
-                  </div>
-                ) : (
-                  <Skeleton width={isCustomerMode ? 100 : 50} />
                 )}
               </BusinessDetail>
               {
@@ -226,38 +255,61 @@ export const BusinessBasicInformation = (props) => {
             </BusinessInfoItem>
           </BusinessInfo>
         </BusinessInfoContent>
-        {(categoryState?.products?.length !== 0 || searchValue) && !errorQuantityProducts && (
-          <WrapperSearch>
-            <SearchIconWrapper
-              onClick={() => setOpenSearchProducts(true)}
-            >
-              <CgSearch />
-            </SearchIconWrapper>
-            <Select
-              notAsync
-              notReload
-              options={sortByOptions}
-              defaultValue={sortByValue}
-              onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
-            />
-          </WrapperSearch>
+        {(categoryState?.products?.length !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && (
+          <SearchComponent />
         )}
       </BusinessInfoContainer>
+    )
+  }
+
+  return (
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))}
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))}
+      {openSearchProducts && (
+        <SearchProducts
+          {...props}
+          onClose={() => {
+            handleChangeSearch('')
+            setOpenSearchProducts(false)
+          }}
+          business={businessState.business}
+        />
+      )}
+      {!isInfoShrunken && (
+        <BusinessInfoComponent />
+      )}
       <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open}>
         {(!loading && !business?.open) && <h1>{t('CLOSED', 'Closed')}</h1>}
-        <BusinessContent>
-          <WrapperBusinessLogo>
-            {!loading ? (
-              <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-            ) : (
-              <Skeleton height={70} width={70} />
-            )}
-          </WrapperBusinessLogo>
-        </BusinessContent>
+        {showLogo && (
+          <BusinessContent>
+            <WrapperBusinessLogo>
+              {!loading ? (
+                <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+              ) : (
+                <Skeleton height={70} width={70} />
+              )}
+            </WrapperBusinessLogo>
+          </BusinessContent>
+        )}
+        {isInfoShrunken && (
+          <BusinessInfoComponent />
+        )}
         {!loading && (
-          <BusinessMoreDetail onClick={() => setOpenBusinessInformation(true)}>
-            <BsInfoCircle />
-          </BusinessMoreDetail>
+          <>
+            {isInfoShrunken && (
+              <SearchComponentContainer>
+                <SearchComponent />
+              </SearchComponentContainer>
+            )}
+            <BusinessMoreDetail>
+              <BsInfoCircle onClick={() => setOpenBusinessInformation(true)} />
+            </BusinessMoreDetail>
+          </>
         )}
         <Modal
           width='70%'

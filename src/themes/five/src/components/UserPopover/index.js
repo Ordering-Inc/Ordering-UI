@@ -16,6 +16,7 @@ import { DropDownCircleImage } from '../../../../../components/Dropdown/style'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { capitalize } from '../../../../../utils'
 import AiOutlineMenu from '@meronex/icons/ai/AiOutlineMenu'
+import { useTheme } from 'styled-components'
 
 const optionsDefault = [
   { name: 'search', pathname: '/explore', displayName: 'explore', key: 'explore' },
@@ -34,14 +35,14 @@ export const UserPopover = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
   const [{ configs }] = useConfig()
+  const theme = useTheme()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
 
-  const isWalletEnabled = configs?.cash_wallet?.value === '1' &&
-    configs?.wallet_enabled?.value === '1' &&
-    (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+  const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
+  const isAddressListNewPage = theme.layouts?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
 
   const extraOptions = [
     { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
@@ -50,7 +51,8 @@ export const UserPopover = (props) => {
     { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !isCustomerMode },
     { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true },
     { name: 'sessions', pathname: '/sessions', displayName: 'sessions', key: 'sessions', isActive: true },
-    { name: 'favorites', pathname: '/favorites', displayName: 'favorites', key: 'favorites', isActive: true }
+    { name: 'favorites', pathname: '/favorites', displayName: 'favorites', key: 'favorites', isActive: true },
+    { name: 'addresses', pathname: '/profile/addresses', displayName: 'places', key: 'places', isActive: isAddressListNewPage }
   ]
 
   const options = isCustomerMode

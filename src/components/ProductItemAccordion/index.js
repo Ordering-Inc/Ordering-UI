@@ -25,6 +25,7 @@ import {
   ProductOptionsList,
   ProductQuantity
 } from './styles'
+import { useTheme } from 'styled-components'
 
 export const ProductItemAccordion = (props) => {
   const {
@@ -41,7 +42,7 @@ export const ProductItemAccordion = (props) => {
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
   const windowSize = useWindowSize()
-
+  const theme = useTheme()
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
@@ -50,6 +51,8 @@ export const ProductItemAccordion = (props) => {
   const productSelect = useRef(null)
   const productActionsEdit = useRef(null)
   const productActionsDelete = useRef(null)
+
+  const showProductImage = !theme?.layouts?.confirmation?.components?.cart?.components?.products?.components?.photo?.hidden
 
   const productInfo = () => {
     if (isCartProduct) {
@@ -130,7 +133,7 @@ export const ProductItemAccordion = (props) => {
                 {product?.quantity}
               </ProductQuantity>
             )}
-            {product?.images && (
+            {product?.images && showProductImage && (
               <WrapperProductImage>
                 <ProductImage bgimage={product?.images} />
               </WrapperProductImage>

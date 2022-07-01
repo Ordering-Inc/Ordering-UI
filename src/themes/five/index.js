@@ -63,6 +63,7 @@ import { ProductIngredient } from './src/components/ProductIngredient'
 import { PhoneAutocomplete } from './src/components/PhoneAutocomplete'
 import { ProductOption } from './src/components/ProductOption'
 import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
+import { ProfileOptions } from './src/components/UserProfileForm/ProfileOptions'
 import { Promotions } from './src/components/Promotions'
 import { RenderProductsLayout } from './src/components/RenderProductsLayout'
 import { ResetPassword } from './src/components/ResetPassword'
@@ -155,6 +156,7 @@ export {
   ProductIngredient,
   ProductItemAccordion,
   ProductOption,
+  ProfileOptions,
   ProductOptionSubOption,
   Promotions,
   PhoneAutocomplete,

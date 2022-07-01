@@ -6,7 +6,7 @@ import parsePhoneNumber from 'libphonenumber-js'
 
 import { FormInput, ActionsForm, SkeletonForm } from './styles'
 
-import { Input } from '../../styles/inputs'
+import { Input } from '../../styles/Inputs'
 import { Button } from '../../../../../styles/Buttons'
 import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
 import { Alert } from '../../../../../components/Confirm'

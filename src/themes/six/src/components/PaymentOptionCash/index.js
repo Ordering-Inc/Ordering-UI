@@ -8,7 +8,7 @@ import {
   ErrorText
 } from './styles'
 
-import { Input } from '../../styles/inputs'
+import { Input } from '../../styles/Inputs'
 
 export const PaymentOptionCash = (props) => {
   const {

@@ -40,7 +40,8 @@ export const ProductItemAccordion = (props) => {
     onDeleteProduct,
     onEditProduct,
     isCheckout,
-    isStore
+    isStore,
+    isConfirmationPage
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -57,8 +58,8 @@ export const ProductItemAccordion = (props) => {
   const productActionsEdit = useRef(null)
   const productActionsDelete = useRef(null)
 
-  const viewString = isStore ? 'business_view' : 'header'
-  const isHideProductImage = theme?.layouts?.[viewString]?.components?.cart?.components?.products?.image?.hidden
+  const viewString = isConfirmationPage ? 'confirmation' : isStore ? 'business_view' : 'header'
+  const showProductImage = !theme?.layouts?.[viewString]?.components?.cart?.components?.products?.components?.photo?.hidden
 
   const productInfo = () => {
     if (isCartProduct) {
@@ -118,7 +119,7 @@ export const ProductItemAccordion = (props) => {
           onClick={(e) => toggleAccordion(e)}
         >
           <ProductInfo className='info'>
-            {product?.images && !isHideProductImage && (
+            {product?.images && showProductImage && (
               <WrapperProductImage>
                 <ProductImage bgimage={product?.images} />
               </WrapperProductImage>

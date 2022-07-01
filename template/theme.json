@@ -30,7 +30,8 @@
     "subtitleHomeColor": "#FFFFFF",
     "warning100": "#FFF4CC",
     "warning500": "#FFC700",
-    "grayDividerColor": "#F8F9FA"
+    "grayDividerColor": "#F8F9FA",
+    "darkGray": "#CBCBCB"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
@@ -121,16 +122,20 @@
           "hidden": false,
           "components": {
             "business": {
-              "logo": {
-                "hidden": false
-              },
-              "time": {
-                "hidden": false
+              "components": {
+                "logo": {
+                  "hidden": false
+                },
+                "time": {
+                  "hidden": false
+                }
               }
             },
             "products": {
-              "image": {
-                "hidden": false
+              "components": {
+                "photo": {
+                  "hidden": false
+                }
               }
             },
             "comments": {
@@ -144,13 +149,51 @@
               "hidden": false
             },
             "customer_comments": {
-              "hidden": true
+              "hidden": false
             },
             "review_date": {
               "hidden": false
             },
             "search": {
-              "hidden": true
+              "hidden": false
+            }
+          }
+        },
+        "basic_information": {
+          "hidden": false,
+          "components": {
+            "layout": {
+              "type": "original",
+              "position": "normal"
+            },
+            "logo": {
+              "hidden": false
+            },
+            "delivery_fee": {
+              "hidden": false
+            },
+            "time": {
+              "hidden": false
+            },
+            "distance": {
+              "hidden": false
+            },
+            "reviews": {
+              "hidden": false
+            },
+            "business_info": {
+              "hidden": false
+            },
+            "sort": {
+              "hidden": false
+            }
+          }
+        },
+        "product_search": {
+          "hidden": false,
+          "components": {
+            "layout": {
+              "type": "original"
             }
           }
         },
@@ -170,14 +213,17 @@
       }
     },
     "header": {
+      "layout": {
+        "type": "original"
+      },
       "components": {
         "cart": {
           "hidden": false,
-          "open_strategy": {
-            "type": "popover",
-            "position": "right"
-          },
           "components": {
+            "open_strategy": {
+              "type": "popover",
+              "position": "right"
+            },
             "business": {
               "logo": {
                 "hidden": false
@@ -228,6 +274,161 @@
         },
         "map": {
           "hidden": false
+        }
+      }
+    },
+    "profile": {
+      "hidden": false,
+      "components": {
+        "layout": {
+          "type": "original",
+          "position": "column"
+        },
+        "address_list": {
+          "hidden": false,
+          "components": {
+            "layout": {
+              "type": "original",
+              "position": "normal"
+            },
+            "address": {
+              "hidden": false
+            },
+            "icons": {
+              "hidden": false
+            },
+            "zipcode": {
+              "hidden": false
+            },
+            "internal_number": {
+              "hidden": false
+            },
+            "address_notes": {
+              "hidden": false
+            }
+          }
+        },
+        "picture": {
+          "hidden": false
+        },
+        "name": {
+          "hidden": false
+        },
+        "last_name": {
+          "hidden": false
+        },
+        "second_name": {
+          "hidden": false
+        },
+        "second_last_name": {
+          "hidden": false
+        },
+        "email": {
+          "hidden": false
+        },
+        "cellphone": {
+          "hidden": false
+        },
+        "password": {
+          "hidden": false
+        },
+        "birthday": {
+          "hidden": false
+        },
+        "promotions": {
+          "hidden": false
+        },
+        "notification_settings": {
+          "hidden": false
+        },
+        "languages": {
+          "hidden": false
+        }
+      }
+    },
+    "confirmation": {
+      "hidden": false,
+      "components": {
+        "layout": {
+          "type": "half"
+        },
+        "delivery_type": {
+          "hidden": false
+        },
+        "delivery_date": {
+          "hidden": false
+        },
+        "delivery_progress": {
+          "hidden": false
+        },
+        "business_information": {
+          "hidden": false,
+          "components": {
+            "phone": {
+              "hidden": false
+            },
+            "messages": {
+              "hidden": false
+            },
+            "email": {
+              "hidden": false
+            },
+            "address": {
+              "hidden": false
+            },
+            "map": {
+              "hidden": false
+            },
+            "logo": {
+              "hidden": false
+            }
+          }
+        },
+        "driver_information": {
+          "components": {
+            "name": {
+              "hidden": false
+            },
+            "phone": {
+              "hidden": false
+            },
+            "messages": {
+              "hidden": false
+            },
+            "email": {
+              "hidden": false
+            },
+            "photo": {
+              "hidden": false
+            }
+          }
+        },
+        "customer_information": {
+          "components": {
+            "phone": {
+              "hidden": false
+            },
+            "address": {
+              "hidden": false
+            },
+            "email": {
+              "hidden": false
+            },
+            "photo": {
+              "hidden": false
+            }
+          }
+        },
+        "cart": {
+          "components": {
+            "products": {
+              "components": {
+                "photo": {
+                  "hidden": false
+                }
+              }
+            }
+          }
         }
       }
     }

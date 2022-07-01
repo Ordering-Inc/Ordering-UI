@@ -28,7 +28,6 @@ import {
   AddressItem,
   AddressItemActions,
   WrappNotAddresses,
-  FormActions,
   ContinueButton,
   AddressTitle,
   AddressHalfContainer,
@@ -57,17 +56,13 @@ const AddressListUI = (props) => {
     isModal,
     isPopover,
     isProductForm,
-    onCancel,
-    onAccept,
     userId,
     userCustomerSetup,
     isEnableContinueButton,
     setCustomerModalOpen,
     isCustomerMode,
     isFromCheckout,
-    isOpenUserData,
     setIsAddressFormOpen,
-    isHeader,
     isProfile
   } = props
 
@@ -89,6 +84,11 @@ const AddressListUI = (props) => {
         address.zipcode === obj.zipcode &&
         address.internal_number === obj.internal_number
       )))) || []
+
+  const showAddress = !theme.layouts?.profile?.components?.address_list?.components?.address?.hidden
+  const showIcons = !theme.layouts?.profile?.components?.address_list?.components?.icons?.hidden
+  const showZipcode = !theme.layouts?.profile?.components?.address_list?.components?.zipcode?.hidden
+  const showInternalNumber = !theme.layouts?.profile?.components?.address_list?.components?.internal_number?.hidden
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -187,33 +187,6 @@ const AddressListUI = (props) => {
     }
   }, [])
 
-  const AddressButtons = () => {
-    return (
-      <>
-        {onCancel && onAccept && typeof orderState.options?.address === 'object' && (
-          <FormActions>
-            <Button
-              outline
-              type='button'
-              disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
-              onClick={() => onCancel()}
-            >
-              {t('CANCEL', 'Cancel')}
-            </Button>
-            <Button
-              disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
-              id='second-btn'
-              color='primary'
-              onClick={() => onAccept()}
-            >
-              {t('ACCEPT', 'Accept')}
-            </Button>
-          </FormActions>
-        )}
-      </>
-    )
-  }
-
   const AddressListCallcenterLayout = ({ children }) => {
     return (
       <AddressHalfContainer>
@@ -221,7 +194,7 @@ const AddressListUI = (props) => {
           {children}
         </List>
         {addressOpen && (
-          <AddressFormContainer isOpenUserData={isOpenUserData} isHeader={isHeader}>
+          <AddressFormContainer isCustomerMode={isCustomerMode}>
             <TitleFormContainer>
               <CloseIcon>
                 <MdClose onClick={() => handleCloseAddressForm()} />
@@ -239,7 +212,6 @@ const AddressListUI = (props) => {
             />
           </AddressFormContainer>
         )}
-        <AddressButtons />
       </AddressHalfContainer>
     )
   }
@@ -298,16 +270,24 @@ const AddressListUI = (props) => {
                     <span className='radio'>
                       {checkAddress(address) ? <RiRadioButtonFill className='address-checked' /> : <IosRadioButtonOff />}
                     </span>
-                    <span className={checkAddress(address) ? 'selected-tag tag' : 'tag'}>
-                      {address?.tag === 'home' && <House />}
-                      {address?.tag === 'office' && <Building />}
-                      {address?.tag === 'favorite' && <Heart />}
-                      {address?.tag === 'other' && <PlusLg />}
-                    </span>
-                    <div className='address'>
-                      <span>{address.address}</span>
-                      <span>{address.internal_number} {address.zipcode}</span>
-                    </div>
+                    {showIcons && (
+                      <span className={checkAddress(address) ? 'selected-tag tag' : 'tag'}>
+                        {address?.tag === 'home' && <House />}
+                        {address?.tag === 'office' && <Building />}
+                        {address?.tag === 'favorite' && <Heart />}
+                        {address?.tag === 'other' && <PlusLg />}
+                      </span>
+                    )}
+                    {(showAddress || showInternalNumber || showZipcode) && (
+                      <div className='address'>
+                        {
+                          showAddress && (
+                            <span>{address.address}</span>
+                          )
+                        }
+                        <span>{showInternalNumber && address.internal_number} {showZipcode && address.zipcode}</span>
+                      </div>
+                    )}
                   </div>
                   <AddressItemActions className='form'>
                     <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
@@ -360,11 +340,6 @@ const AddressListUI = (props) => {
             <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
           </AddressListUl>
         )}
-
-        {!isCustomerMode && (
-          <AddressButtons />
-        )}
-
       </>
     )
   }
