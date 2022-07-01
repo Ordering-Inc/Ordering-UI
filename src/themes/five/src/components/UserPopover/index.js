@@ -49,7 +49,8 @@ export const UserPopover = (props) => {
     { name: 'promotions', pathname: '/promotions', displayName: 'promotions', key: 'promotions', isActive: isPromotionsEnabled },
     { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !isCustomerMode },
     { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true },
-    { name: 'sessions', pathname: '/sessions', displayName: 'sessions', key: 'sessions', isActive: true }
+    { name: 'sessions', pathname: '/sessions', displayName: 'sessions', key: 'sessions', isActive: true },
+    { name: 'favorites', pathname: '/favorites', displayName: 'favorites', key: 'favorites', isActive: true }
   ]
 
   const options = isCustomerMode

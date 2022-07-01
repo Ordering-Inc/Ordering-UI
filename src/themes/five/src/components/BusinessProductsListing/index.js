@@ -7,13 +7,14 @@ import {
   Cart3
 } from 'react-bootstrap-icons'
 import {
-  BusinessAndProductList,
+  // BusinessAndProductList,
   useEvent,
   useLanguage,
   useOrder,
   useUtils,
   useSession
 } from 'ordering-components'
+import { BusinessAndProductList } from './naked'
 
 import {
   ProductsContainer,
@@ -66,7 +67,8 @@ const BusinessProductsListingUI = (props) => {
     multiRemoveProducts,
     setAlertState,
     alertState,
-    onCheckoutRedirect
+    onCheckoutRedirect,
+    handleUpdateProducts
   } = props
 
   const { business, loading, error } = businessState
@@ -245,6 +247,7 @@ const BusinessProductsListingUI = (props) => {
           setOpenBusinessInformation={setOpenBusinessInformation}
           handleCartOpen={(val) => setIsCartOpen(val)}
           setSubcategoriesSelected={setSubcategoriesSelected}
+          handleUpdateProducts={handleUpdateProducts}
         />
 
         {

@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage, useUtils, useOrder, useConfig } from 'ordering-components'
+import React, { useState, useRef } from 'react'
+import { useLanguage, useUtils, useOrder, useConfig } from 'ordering-components'
+import { BusinessController as BusinessSingleCard } from './naked'
 import Skeleton from 'react-loading-skeleton'
+import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
 import { convertHoursToMinutes, shape } from '../../../../../utils'
@@ -25,7 +27,8 @@ import {
   BusinessStarInfo,
   InfoLength,
   InfoDescription,
-  RibbonBox
+  RibbonBox,
+  FavoriteWrapper
   // CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
@@ -56,7 +59,9 @@ const BusinessControllerUI = (props) => {
     businessDeliveryPrice,
     businessDeliveryTime,
     businessPickupTime,
-    businessDistance
+    businessDistance,
+    deleteFavoriteBusiness,
+    addFavoriteBusiness
   } = props
   const [configState] = useConfig()
   const theme = useTheme()
@@ -67,13 +72,22 @@ const BusinessControllerUI = (props) => {
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
+  const favoriteRef = useRef(null)
+
   // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   // }
 
-  const handleBusinessClick = () => {
+  const handleBusinessClick = (e) => {
+    if (favoriteRef?.current?.contains(e.target)) return
+
     if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business)
     else handleClick(business)
+  }
+
+  const handleChangeFavorite = () => {
+    if (business?.favorite) deleteFavoriteBusiness()
+    else addFavoriteBusiness()
   }
 
   const hasInformationLength = (business?.available_drivers?.length + business?.busy_drivers?.length + business?.active_orders?.length) > 0
@@ -96,7 +110,7 @@ const BusinessControllerUI = (props) => {
         minWidthEnabled={minWidthEnabled}
       >
         {isObserved && (
-          <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && handleBusinessClick()}>
+          <WrapperBusinessCard isSkeleton={isSkeleton} onClick={(e) => !isSkeleton && handleClick && handleBusinessClick(e)}>
             {business?.ribbon?.enabled && (
               <RibbonBox
                 bgColor={business?.ribbon?.color}
@@ -150,6 +164,15 @@ const BusinessControllerUI = (props) => {
                   ) : (
                     <Skeleton width={50} />
                   )}
+                  <FavoriteWrapper ref={favoriteRef} onClick={handleChangeFavorite}>
+                    {!isSkeleton ? (
+                      <>
+                        {business?.favorite ? <Like /> : <DisLike />}
+                      </>
+                    ) : (
+                      <Skeleton width={16} height={16} />
+                    )}
+                  </FavoriteWrapper>
                 </BusinessStarInfo>
               </BusinessLogoWrapper>
               <BusinessInfo className='info'>

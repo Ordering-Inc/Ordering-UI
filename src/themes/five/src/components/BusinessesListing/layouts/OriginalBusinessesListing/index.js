@@ -7,9 +7,10 @@ import {
   useOrder,
   useSession,
   useLanguage,
-  useConfig,
-  BusinessList as BusinessListController
+  useConfig
+  // BusinessList as BusinessListController
 } from 'ordering-components'
+import { BusinessList as BusinessListController } from './naked'
 
 import {
   BusinessContainer,
@@ -56,7 +57,8 @@ const BusinessesListingUI = (props) => {
     handleChangeSearch,
     handleChangeBusinessType,
     handleBusinessClick,
-    onBusinessClick
+    onBusinessClick,
+    handleUpdateBusinessList
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -320,6 +322,7 @@ const BusinessesListingUI = (props) => {
                   businessDeliveryTime={business?.delivery_time}
                   businessPickupTime={business?.pickup_time}
                   businessDistance={business?.distance}
+                  handleUpdateBusinessList={handleUpdateBusinessList}
                 />
               ))
             }

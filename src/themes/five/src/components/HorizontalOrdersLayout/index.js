@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLanguage, useUtils, useConfig } from 'ordering-components'
+import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import {
   Content,
   Price,
@@ -8,7 +9,8 @@ import {
   ButtonWrapper,
   Logo,
   TitleContainer,
-  Map
+  Map,
+  FavoriteWrapper
 } from './styles'
 import {
   OrdersContainer,
@@ -48,12 +50,18 @@ export const HorizontalOrdersLayout = (props) => {
     ? orders.filter(order => businessesIds?.includes(order?.business_id))
     : orders
 
-  const handleClickCard = (uuid) => {
+  const handleClickCard = (e, uuid) => {
+    if (e.target.closest('.favorite')) return
+
     if (customArray) {
       onRedirectPage({ page: 'checkout', params: { cartUuid: uuid } })
     } else {
       onRedirectPage({ page: 'order_detail', params: { orderId: uuid } })
     }
+  }
+
+  const handleChangeFavorite = () => {
+    console.log('favorite')
   }
 
   const businessLogo = theme?.layouts?.orders?.components?.business_logo
@@ -79,7 +87,7 @@ export const HorizontalOrdersLayout = (props) => {
             id='order-card'
             isBusinessesPage={isBusinessesPage}
             isCustomerMode={isCustomerMode}
-            onClick={() => handleClickCard(order?.uuid)}
+            onClick={(e) => handleClickCard(e, order?.uuid)}
           >
             {(configs?.google_maps_api_key?.value || isBusinessesPage) && !isHideMap && (
               <Map isBusinessesPage={isBusinessesPage}>
@@ -148,24 +156,26 @@ export const HorizontalOrdersLayout = (props) => {
                   }
                 </Price>
               )}
-            </Content>
-            {pastOrders && !isCustomerMode && (
-              <ButtonWrapper>
-                <Button
-                  outline
-                  color='primary'
-                  onClick={() => handleClickCard(order.uuid)}
-                >
-                  {t('REVIEW', 'Review')}
-                </Button>
-                {order.cart && (
-                  <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
-                    {t('REORDER', 'Reorder')}
+              {pastOrders && !isCustomerMode && (
+                <ButtonWrapper>
+                  <Button
+                    outline
+                    color='primary'
+                    onClick={(e) => handleClickCard(e, order.uuid)}
+                  >
+                    {t('REVIEW', 'Review')}
                   </Button>
-                )}
-              </ButtonWrapper>
-            )}
-
+                  {order.cart && (
+                    <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
+                      {t('REORDER', 'Reorder')}
+                    </Button>
+                  )}
+                </ButtonWrapper>
+              )}
+              <FavoriteWrapper onClick={handleChangeFavorite} className='favorite'>
+                {order?.favorite ? <Like /> : <DisLike />}
+              </FavoriteWrapper>
+            </Content>
           </Card>
         ))}
         {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && (
