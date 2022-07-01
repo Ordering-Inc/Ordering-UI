@@ -41,12 +41,14 @@ const OrdersOptionUI = (props) => {
     setIsEmptyPast,
     setIsEmptyActive,
     setIsEmptyPreorder,
-    isCustomerMode
+    isCustomerMode,
+    reorderState,
+    handleReorder
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [, { reorder }] = useOrder()
+  const [{ carts }] = useOrder()
   const { loading, error, orders: values } = orderList
 
   const imageFails = activeOrders
@@ -58,20 +60,15 @@ const OrdersOptionUI = (props) => {
     ? orders && orders.length > 0 && !orders.map(order => businessesIds && businessesIds.includes(order.business_id)).every(i => !i)
     : orders.length > 0
 
-  const [reorderLoading, setReorderLoading] = useState(false)
   const [loadingOrders, setLoadingOrders] = useState(true)
 
-  const handleReorder = async (orderId) => {
-    setReorderLoading(true)
-    try {
-      const { error, result } = await reorder(orderId)
-      if (!error) {
-        onRedirectPage && onRedirectPage({ page: 'checkout', params: { cartUuid: result.uuid } })
-        return
-      }
-      setReorderLoading(false)
-    } catch (err) {
-      setReorderLoading(false)
+  const closeOrderModal = (e) => {
+    const outsideModal = !window.document.getElementById('app-modals') ||
+      !window.document.getElementById('app-modals').contains(e.target)
+    if (outsideModal) {
+      const _businessId = 'businessId:' + reorderState?.result?.business_id
+      sessionStorage.setItem('adjust-cart-products', _businessId)
+      onRedirectPage && onRedirectPage({ page: 'business', params: { store: reorderState?.result?.business?.slug } })
     }
   }
 
@@ -130,6 +127,30 @@ const OrdersOptionUI = (props) => {
       preOrders && setIsEmptyPreorder && setIsEmptyPreorder(true)
     }
   }, [orders, activeOrders, pastOrders, preOrders])
+
+  useEffect(() => {
+    if (reorderState?.error) {
+      window.addEventListener('click', closeOrderModal)
+      return () => {
+        window.removeEventListener('click', closeOrderModal)
+      }
+    }
+
+    if (!reorderState?.error && reorderState.loading === false && reorderState?.result?.business_id) {
+      const _businessId = 'businessId:' + reorderState?.result?.business_id
+      const cartProducts = carts?.[_businessId]?.products
+      const available = cartProducts.every(product => product.valid === true)
+      const orderProducts = orders.find(order => order?.id === reorderState?.result?.orderId)?.products
+
+      if (available && reorderState?.result?.uuid && (cartProducts?.length === orderProducts?.length)) {
+        onRedirectPage && onRedirectPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
+      } else {
+        sessionStorage.setItem('adjust-cart-products', _businessId)
+        cartProducts?.length !== orderProducts?.length && sessionStorage.setItem('already-removed', 'removed')
+        onRedirectPage && onRedirectPage({ page: 'business', params: { store: reorderState?.result?.business?.slug } })
+      }
+    }
+  }, [reorderState])
 
   return (
     <>
@@ -213,26 +234,24 @@ const OrdersOptionUI = (props) => {
 
       {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (
         horizontal ? (
-          <>
-            <HorizontalOrdersLayout
-              businessesIds={businessesIds}
-              orders={orders.filter(order => orderStatus.includes(order.status))}
-              pagination={pagination}
-              onRedirectPage={onRedirectPage}
-              loadMoreOrders={loadMoreOrders}
-              isBusinessesPage={isBusinessesPage}
-              reorderLoading={reorderLoading}
-              customArray={customArray}
-              getOrderStatus={getOrderStatus}
-              handleReorder={handleReorder}
-              activeOrders={activeOrders}
-              pastOrders={pastOrders}
-              isCustomerMode={isCustomerMode}
-            />
-          </>
+          <HorizontalOrdersLayout
+            businessesIds={businessesIds}
+            orders={orders.filter(order => orderStatus.includes(order.status))}
+            pagination={pagination}
+            onRedirectPage={onRedirectPage}
+            loadMoreOrders={loadMoreOrders}
+            isBusinessesPage={isBusinessesPage}
+            reorderLoading={reorderState?.loading}
+            customArray={customArray}
+            getOrderStatus={getOrderStatus}
+            handleReorder={handleReorder}
+            activeOrders={activeOrders}
+            pastOrders={pastOrders}
+            isCustomerMode={isCustomerMode}
+          />
         ) : (
           <VerticalOrdersLayout
-            reorderLoading={reorderLoading}
+            reorderLoading={reorderState?.loading}
             orders={orders.filter(order => orderStatus.includes(order.status))}
             pagination={pagination}
             loadMoreOrders={loadMoreOrders}
