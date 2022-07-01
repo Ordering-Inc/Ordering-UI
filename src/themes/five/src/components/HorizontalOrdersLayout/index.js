@@ -159,7 +159,7 @@ export const HorizontalOrdersLayout = (props) => {
                   {t('REVIEW', 'Review')}
                 </Button>
                 {order.cart && (
-                  <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
+                  <Button color='primary' className='reorder' outline onClick={(ev) => { ev.stopPropagation(); handleReorder(order.id) }}>
                     {t('REORDER', 'Reorder')}
                   </Button>
                 )}
