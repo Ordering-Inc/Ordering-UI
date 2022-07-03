@@ -130,16 +130,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   };
   var showCartOnProductList = !(theme !== null && theme !== void 0 && (_theme$layouts6 = theme.layouts) !== null && _theme$layouts6 !== void 0 && (_theme$layouts6$busin = _theme$layouts6.business_view) !== null && _theme$layouts6$busin !== void 0 && (_theme$layouts6$busin2 = _theme$layouts6$busin.components) !== null && _theme$layouts6$busin2 !== void 0 && (_theme$layouts6$busin3 = _theme$layouts6$busin2.cart) !== null && _theme$layouts6$busin3 !== void 0 && _theme$layouts6$busin3.hidden);
-
-  var BusinessLayout = function BusinessLayout(props) {
-    var components = {
-      categories: businessLayout.layoutOne ? _groceries.BusinessProductsCategories : _BusinessProductsCategories.BusinessProductsCategories,
-      products_list: businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList
-    };
-    var ComponentToRender = (props === null || props === void 0 ? void 0 : props.component) && components[props === null || props === void 0 ? void 0 : props.component];
-    return (props === null || props === void 0 ? void 0 : props.component) && /*#__PURE__*/_react.default.createElement(ComponentToRender, props);
-  };
-
+  var BusinessLayoutCategories = businessLayout.layoutOne ? _groceries.BusinessProductsCategories : _BusinessProductsCategories.BusinessProductsCategories;
+  var BusinessLayoutProductsList = businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -168,8 +160,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, {
     showCartOnProductList: showCartOnProductList
-  }, !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayout, {
-    component: "categories",
+  }, !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {
     categories: [{
       id: null,
       name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ALL) || 'All')
@@ -187,8 +178,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     currentCart: currentCart
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, {
     id: "businessProductList"
-  }, /*#__PURE__*/_react.default.createElement(BusinessLayout, {
-    component: "products_list",
+  }, /*#__PURE__*/_react.default.createElement(BusinessLayoutProductsList, {
     categories: [{
       id: null,
       name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.ALL) || 'All')
@@ -228,7 +218,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleCartOpen: handleCartOpen
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyCart, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "empty-content"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart'))))))), businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoriesContainer, null, !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayout, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart'))))))), businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoriesContainer, null, !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {
     component: "categories",
     categories: [{
       id: null,
@@ -246,8 +236,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     openCategories: openCategories,
     business: business,
     currentCart: currentCart
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(BusinessLayout, {
-    component: "products_list",
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(BusinessLayoutProductsList, {
     categories: [{
       id: null,
       name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.ALL) || 'All')

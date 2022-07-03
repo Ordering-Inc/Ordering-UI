@@ -84,7 +84,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _configs$google_login, _props$beforeElements, _props$beforeComponen, _credentials$cellphon, _credentials$cellphon2, _theme$images, _theme$images$logos, _theme$defaultLanguag, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag2, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login2, _configs$twilio_servi, _configs$twilio_servi2, _props$afterComponent, _props$afterElements;
+  var _configs$google_login, _configs$google_login2, _configs$google_login3, _props$beforeElements, _props$beforeComponen, _credentials$cellphon, _credentials$cellphon2, _theme$images, _theme$images$logos, _theme$defaultLanguag, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag2, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login4, _configs$twilio_servi, _configs$twilio_servi2, _props$afterComponent, _props$afterElements;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -161,8 +161,9 @@ var LoginFormUI = function LoginFormUI(props) {
       otpLeftTime = _useCountdownTimer2[0],
       resetOtpLeftTime = _useCountdownTimer2[2];
 
+  var googleLoginEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_enabled) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value) === '1' || !(configs !== null && configs !== void 0 && (_configs$google_login2 = configs.google_login_enabled) !== null && _configs$google_login2 !== void 0 && _configs$google_login2.enabled);
   var initParams = {
-    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
+    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login3 = configs.google_login_client_id) === null || _configs$google_login3 === void 0 ? void 0 : _configs$google_login3.value,
     cookiepolicy: 'single_host_origin',
     scope: 'profile'
   };
@@ -518,7 +519,7 @@ var LoginFormUI = function LoginFormUI(props) {
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleIdentity.GoogleIdentityButton, {
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login4 = configs.google_login_client_id) === null || _configs$google_login4 === void 0 ? void 0 : _configs$google_login4.value) && googleLoginEnabled && /*#__PURE__*/_react.default.createElement(_GoogleIdentity.GoogleIdentityButton, {
     initParams: initParams,
     handleSuccessGoogleLogin: handleSuccessGoogle
   }), useLoginByCellphone && loginTab === 'cellphone' && configs && Object.keys(configs).length > 0 && ((configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi = configs.twilio_service_enabled) === null || _configs$twilio_servi === void 0 ? void 0 : _configs$twilio_servi.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi2 = configs.twilio_service_enabled) === null || _configs$twilio_servi2 === void 0 ? void 0 : _configs$twilio_servi2.value) === '1') && /*#__PURE__*/_react.default.createElement(_SmsLogin.SmsLoginButton, {

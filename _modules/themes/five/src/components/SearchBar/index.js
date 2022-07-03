@@ -62,12 +62,18 @@ var SearchBar = function SearchBar(props) {
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
         onSearch(e.target.value);
-        el.current.value = e.target.value;
+
+        if (el.current) {
+          el.current.value = e.target.value;
+        }
       } else {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
           onSearch(e.target.value);
-          el.current.value = e.target.value;
+
+          if (el.current) {
+            el.current.value = e.target.value;
+          }
         }, 750);
       }
     }

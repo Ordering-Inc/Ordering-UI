@@ -80,7 +80,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _configs$facebook_log, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$google_login, _props$beforeElements, _props$beforeComponen, _configs$business_sig, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login2, _props$afterComponent, _props$afterElements;
+  var _configs$facebook_log, _configs$google_login, _configs$google_login2, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$google_login3, _props$beforeElements, _props$beforeComponen, _configs$business_sig, _theme$images, _theme$images$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login4, _props$afterComponent, _props$afterElements;
 
   var handleChangeInput = props.handleChangeInput,
       handleButtonSignupClick = props.handleButtonSignupClick,
@@ -124,6 +124,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   var theme = (0, _styledComponents.useTheme)();
   var emailInput = (0, _react.useRef)(null);
   var isFacebookLogin = (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) === 'true';
+  var googleLoginEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_enabled) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value) === '1' || !(configs !== null && configs !== void 0 && (_configs$google_login2 = configs.google_login_enabled) !== null && _configs$google_login2 !== void 0 && _configs$google_login2.enabled);
 
   var _useState3 = (0, _react.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -148,7 +149,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       setIsSignupBusiness = _useState10[1];
 
   var initParams = {
-    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
+    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login3 = configs.google_login_client_id) === null || _configs$google_login3 === void 0 ? void 0 : _configs$google_login3.value,
     cookiepolicy: 'single_host_origin',
     scope: 'profile'
   };
@@ -458,7 +459,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login4 = configs.google_login_client_id) === null || _configs$google_login4 === void 0 ? void 0 : _configs$google_login4.value) && googleLoginEnabled && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
     initParams: initParams,
     handleSuccessGoogleLogin: handleSuccessGoogle,
     onFailure: function onFailure(data) {

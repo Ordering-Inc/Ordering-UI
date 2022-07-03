@@ -17,11 +17,11 @@ var _orderingComponents = require("ordering-components");
 
 require("react-datepicker/dist/react-datepicker.css");
 
-require("react-calendar/dist/Calendar.css");
-
 var _BsCaretLeftFill = _interopRequireDefault(require("@meronex/icons/bs/BsCaretLeftFill"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _CustomLayout = require("./Layouts/CustomLayout");
 
 var _styles = require("./styles");
 
@@ -237,7 +237,7 @@ var MomentControlUI = function MomentControlUI(props) {
     onClick: function onClick() {
       return handleCheckBoxChange(null);
     }
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && (!props.isCustomLayout ? /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
     left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 0,
@@ -289,7 +289,15 @@ var MomentControlUI = function MomentControlUI(props) {
         return handleChangeTime(time.value);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))) : /*#__PURE__*/_react.default.createElement(_CustomLayout.CustomLayout, {
+    handleChangeDate: handleChangeDate,
+    datesList: datesList,
+    hoursList: hoursList,
+    isEnabled: isEnabled,
+    timeList: timeList,
+    timeSelected: timeSelected,
+    handleChangeTime: handleChangeTime
+  })), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return onClose();
