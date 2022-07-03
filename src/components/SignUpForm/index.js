@@ -70,6 +70,7 @@ const SignUpFormUI = (props) => {
   const theme = useTheme()
   const emailInput = useRef(null)
   const isFacebookLogin = configs?.facebook_login?.value === 'true'
+  const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
@@ -438,7 +439,7 @@ const SignUpFormUI = (props) => {
                       onFailure={(data) => console.log('onFailure', data)}
                     />
                   )}
-                  {configs?.google_login_client_id?.value && (
+                  {configs?.google_login_client_id?.value && googleLoginEnabled && (
                     <GoogleLoginButton
                       initParams={initParams}
                       handleSuccessGoogleLogin={handleSuccessGoogle}
