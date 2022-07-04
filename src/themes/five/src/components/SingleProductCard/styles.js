@@ -236,6 +236,7 @@ export const TitleWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     svg {
       color: ${props => props.theme.colors.danger500};
       font-size: 16px;

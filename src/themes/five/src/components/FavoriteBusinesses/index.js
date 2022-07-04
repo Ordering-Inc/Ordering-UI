@@ -70,16 +70,14 @@ const FavoriteBusinessesUI = (props) => {
       <Container>
         {
           !favoriteBusinessList?.loading && favoriteBusinessList?.businesses.length === 0 && (
-            <NotFoundSource
-              content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-            >
+            <NotFoundSource>
               <Button
                 outline
                 color='primary'
                 onClick={() => handleGoToBusinessList()}
                 style={{ height: '44px' }}
               >
-                {t('CHANGE_ADDRESS', 'Select other Address')}
+                {t('ADD_FAVORITE', 'Add favorite')}
               </Button>
             </NotFoundSource>
           )
@@ -120,8 +118,8 @@ const FavoriteBusinessesUI = (props) => {
             {!favoriteBusinessList?.loading && (
               <>
                 {
-                  favoriteBusinessList?.businesses?.map((business) => (
-                    <SwiperSlide key={business?.id}>
+                  favoriteBusinessList?.businesses?.map((business, i) => (
+                    <SwiperSlide key={i}>
                       <BusinessController
                         className='card'
                         business={business}
@@ -162,7 +160,7 @@ const FavoriteBusinessesUI = (props) => {
             )}
 
             {favoriteBusinessList?.loading && (
-              [...Array(8).keys()].map(i => (
+              [...Array(5).keys()].map(i => (
                 <SwiperSlide key={i}>
                   <BusinessController
                     className='card'

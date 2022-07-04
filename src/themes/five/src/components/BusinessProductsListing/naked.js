@@ -188,8 +188,6 @@ export const BusinessAndProductList = (props) => {
     }
   }
 
-  console.log(categoriesState, 'categoriesState')
-
   const getProducts = async () => {
     for (let i = 0; i < businessState?.business?.categories?.length ?? 0; i++) {
       const category = businessState?.business?.categories[i]

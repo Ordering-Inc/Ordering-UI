@@ -25,6 +25,7 @@ export const BusinessListWrapper = styled.div`
         width: 100% !important;
         margin: 0px !important;
         height: 100%;
+        cursor: default;
       }
     }
   }

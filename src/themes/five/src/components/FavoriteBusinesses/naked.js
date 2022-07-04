@@ -31,9 +31,11 @@ export const FavoriteBusinesses = (props) => {
    * @param {object} changes business info
    */
   const handleUpdateBusinessList = (businessId, changes) => {
-    if (changes?.enabled) return
+    if (changes?.favorite) return
 
-    const updatedBusinesses = favoriteBusinessList?.businesses.filter(business => business?.id !== businessId)
+    const updatedBusinesses = [...favoriteBusinessList?.businesses]
+    const index = favoriteBusinessList?.businesses.findIndex(business => business.id === businessId)
+    updatedBusinesses.splice(index, 1)
     setFavoriteBusinessList({
       ...favoriteBusinessList,
       businesses: updatedBusinesses

@@ -453,6 +453,7 @@ export const FavoriteWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   margin-left: 15px;
   ${props => props.theme.rtl && css`
     margin-right: 15px;

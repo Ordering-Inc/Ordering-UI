@@ -34,8 +34,6 @@ const FavoriteProductsUI = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
 
-  console.log(favoriteProductList, 'user')
-
   const handleGoToBusinessList = () => {
     events.emit('go_to_page', { page: 'search' })
   }
@@ -51,16 +49,14 @@ const FavoriteProductsUI = (props) => {
       <Container>
         {
           !favoriteProductList?.loading && favoriteProductList?.products?.length === 0 && (
-            <NotFoundSource
-              content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-            >
+            <NotFoundSource>
               <Button
                 outline
                 color='primary'
                 onClick={() => handleGoToBusinessList()}
                 style={{ height: '44px' }}
               >
-                {t('CHANGE_ADDRESS', 'Select other Address')}
+                {t('ADD_FAVORITE', 'Add favorite')}
               </Button>
             </NotFoundSource>
           )
@@ -70,7 +66,6 @@ const FavoriteProductsUI = (props) => {
             <MdKeyboardArrowLeft />
           </ArrowButtonWrapper>
           <Swiper
-            spaceBetween={0}
             breakpoints={{
               0: {
                 slidesPerView: 1,
@@ -130,7 +125,7 @@ const FavoriteProductsUI = (props) => {
             )}
 
             {favoriteProductList?.loading && (
-              [...Array(8).keys()].map(i => (
+              [...Array(5).keys()].map(i => (
                 <SwiperSlide key={i}>
                   <SingleProductCard
                     key={`skeleton:${i}`}

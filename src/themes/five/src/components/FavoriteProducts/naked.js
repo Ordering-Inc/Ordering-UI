@@ -21,12 +21,12 @@ export const FavoriteProducts = (props) => {
   })
 
   /**
-   * Method to update business list
-   * @param {number} businessId business id
-   * @param {object} changes business info
+   * Method to update product list
+   * @param {number} productId product id
+   * @param {object} changes product info
    */
-  const handleUpdateBusinessList = (productId, changes) => {
-    if (changes?.enabled) return
+  const handleUpdateProducts = (productId, changes) => {
+    if (changes?.favorite) return
 
     const updatedProducts = favoriteProductList?.products.filter(product => product?.id !== productId)
     setFavoriteProductList({
@@ -67,9 +67,10 @@ export const FavoriteProducts = (props) => {
         const productIds = content?.result?.reduce((ids, product) => [...ids, product?.object_id], [])
         const { error, result } = await getProductList(productIds)
         if (!error) {
+          const updatedResult = result.map(item => { return { ...item, favorite: true } })
           setFavoriteProductList({
             loading: false,
-            products: [...favoriteProductList?.products, ...result],
+            products: [...favoriteProductList?.products, ...updatedResult],
             error: null
           })
         } else {
@@ -130,7 +131,7 @@ export const FavoriteProducts = (props) => {
         <UIComponent
           {...props}
           favoriteProductList={favoriteProductList}
-          handleUpdateBusinessList={handleUpdateBusinessList}
+          handleUpdateProducts={handleUpdateProducts}
           pagination={pagination}
           getFavoriteProductList={getFavoriteProductList}
         />
