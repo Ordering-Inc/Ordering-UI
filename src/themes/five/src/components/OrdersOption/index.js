@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { OrderList, useLanguage, useOrder } from 'ordering-components'
+import { useLanguage, useOrder, OrderList } from 'ordering-components'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
-import { VerticalOrdersLayout } from '../VerticalOrdersLayout'
-import { NotFoundSource } from '../NotFoundSource'
+import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
+import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { useTheme } from 'styled-components'
 
@@ -13,7 +13,6 @@ import {
   OrdersContainer,
   SkeletonOrder,
   SkeletonCard,
-  SkeletonMap,
   SkeletonContent,
   SkeletonText,
   SkeletonInformation,
@@ -35,38 +34,42 @@ const OrdersOptionUI = (props) => {
     businessesIds,
     orderStatus,
     isCustomLayout,
-    isBusinessesLoading
+    isBusinessesLoading,
+    pastOrders,
+    preOrders,
+    selectItem,
+    setIsEmptyPast,
+    setIsEmptyActive,
+    setIsEmptyPreorder,
+    isCustomerMode,
+    handleUpdateOrderList,
+    reorderState,
+    handleReorder
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [, { reorder }] = useOrder()
+  const [{ carts }] = useOrder()
   const { loading, error, orders: values } = orderList
+
   const imageFails = activeOrders
     ? theme.images?.general?.emptyActiveOrders
     : theme.images?.general?.emptyPastOrders
 
   const orders = customArray || values || []
-  const [reorderLoading, setReorderLoading] = useState(false)
-  const [loadingOrders, setLoadingOrders] = useState(true)
-  const [filterForOrders, setFilterForOrders] = useState('active-orders')
-
-  const [ordersFiltered, setOrdersFiltered] = useState(orders.filter(order => orderStatus.includes(order.status)))
   const isShowTitles = businessesIds
     ? orders && orders.length > 0 && !orders.map(order => businessesIds && businessesIds.includes(order.business_id)).every(i => !i)
     : orders.length > 0
 
-  const handleReorder = async (orderId) => {
-    setReorderLoading(true)
-    try {
-      const { error, result } = await reorder(orderId)
-      if (!error) {
-        onRedirectPage && onRedirectPage({ page: 'checkout', params: { cartUuid: result.uuid } })
-        return
-      }
-      setReorderLoading(false)
-    } catch (err) {
-      setReorderLoading(false)
+  const [loadingOrders, setLoadingOrders] = useState(true)
+
+  const closeOrderModal = (e) => {
+    const outsideModal = !window.document.getElementById('app-modals') ||
+      !window.document.getElementById('app-modals').contains(e.target)
+    if (outsideModal) {
+      const _businessId = 'businessId:' + reorderState?.result?.business_id
+      sessionStorage.setItem('adjust-cart-products', _businessId)
+      onRedirectPage && onRedirectPage({ page: 'business', params: { store: reorderState?.result?.business?.slug } })
     }
   }
 
@@ -117,8 +120,38 @@ const OrdersOptionUI = (props) => {
   }, [])
 
   useEffect(() => {
-    setOrdersFiltered(filterForOrders === 'preorders' ? orders.filter(order => order.status === 13) : orders.filter(order => orderStatus.includes(order.status) && order.status !== 13))
-  }, [filterForOrders, orders])
+    if (loading) return
+
+    if (orders.length === 0) {
+      activeOrders && setIsEmptyActive && setIsEmptyActive(true)
+      pastOrders && setIsEmptyPast && setIsEmptyPast(true)
+      preOrders && setIsEmptyPreorder && setIsEmptyPreorder(true)
+    }
+  }, [orders, activeOrders, pastOrders, preOrders])
+
+  useEffect(() => {
+    if (reorderState?.error) {
+      window.addEventListener('click', closeOrderModal)
+      return () => {
+        window.removeEventListener('click', closeOrderModal)
+      }
+    }
+
+    if (!reorderState?.error && reorderState.loading === false && reorderState?.result?.business_id) {
+      const _businessId = 'businessId:' + reorderState?.result?.business_id
+      const cartProducts = carts?.[_businessId]?.products
+      const available = cartProducts.every(product => product.valid === true)
+      const orderProducts = orders.find(order => order?.id === reorderState?.result?.orderId)?.products
+
+      if (available && reorderState?.result?.uuid && (cartProducts?.length === orderProducts?.length)) {
+        onRedirectPage && onRedirectPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
+      } else {
+        sessionStorage.setItem('adjust-cart-products', _businessId)
+        cartProducts?.length !== orderProducts?.length && sessionStorage.setItem('already-removed', 'removed')
+        onRedirectPage && onRedirectPage({ page: 'business', params: { store: reorderState?.result?.business?.slug } })
+      }
+    }
+  }, [reorderState])
 
   return (
     <>
@@ -130,21 +163,16 @@ const OrdersOptionUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : (isShowTitles || !isBusinessesPage)) && (
         <>
-          <OptionTitle isBusinessesPage={isBusinessesPage} isActive={filterForOrders}>
-            <h1 onClick={() => setFilterForOrders('active-orders')}>
-              {titleContent || (activeOrders
-                ? t('ACTIVE_ORDERS', 'Active Orders')
-                : t('PREVIOUS_ORDERS', 'Previous Orders'))}
-            </h1>
-            {
-              horizontal && orders.filter(order => order.status === 13)?.length > 0 && (
-                <h1 onClick={() => setFilterForOrders('preorders')}>
-                  {t('PREORDERS', 'Preorders')}
-                </h1>
-              )
-            }
-          </OptionTitle>
-          {!loading && orders.length === 0 && (
+          {orders.length > 0 && (
+            <OptionTitle isBusinessesPage={isBusinessesPage}>
+              <h1>
+                {titleContent || (activeOrders
+                  ? t('ACTIVE', 'Active')
+                  : (pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))}
+              </h1>
+            </OptionTitle>
+          )}
+          {!loading && orders.length === 0 && selectItem !== 'all' && (
             <NotFoundSource
               image={imageFails}
               content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
@@ -164,9 +192,6 @@ const OrdersOptionUI = (props) => {
             <SkeletonOrder activeOrders={horizontal} isBusinessesPage={isBusinessesPage}>
               {[...Array(3)].map((item, i) => (
                 <SkeletonCard key={i}>
-                  <SkeletonMap>
-                    <Skeleton />
-                  </SkeletonMap>
                   <SkeletonContent activeOrders={horizontal}>
                     <div>
                       <Skeleton width={70} height={70} />
@@ -213,7 +238,7 @@ const OrdersOptionUI = (props) => {
           <>
             <HorizontalOrdersLayout
               businessesIds={businessesIds}
-              orders={ordersFiltered}
+              orders={orders.filter(order => orderStatus.includes(order.status))}
               pagination={pagination}
               onRedirectPage={onRedirectPage}
               loadMoreOrders={loadMoreOrders}
@@ -222,13 +247,16 @@ const OrdersOptionUI = (props) => {
               customArray={customArray}
               getOrderStatus={getOrderStatus}
               handleReorder={handleReorder}
-              isPreorders={filterForOrders === 'preorders'}
+              activeOrders={activeOrders}
+              handleUpdateOrderList={handleUpdateOrderList}
+              pastOrders={pastOrders}
+              isCustomerMode={isCustomerMode}
             />
           </>
         ) : (
           <VerticalOrdersLayout
-            reorderLoading={reorderLoading}
-            orders={ordersFiltered}
+            reorderLoading={reorderState?.loading}
+            orders={orders.filter(order => orderStatus.includes(order.status))}
             pagination={pagination}
             loadMoreOrders={loadMoreOrders}
             onRedirectPage={onRedirectPage}
@@ -252,8 +280,8 @@ export const OrdersOption = (props) => {
     ...props,
     UIComponent: OrdersOptionUI,
     orderStatus: props.activeOrders
-      ? [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21, 22, 23]
-      : [1, 2, 5, 6, 10, 11, 12, 16, 17],
+      ? [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23]
+      : (props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 15, 16, 17] : [13]),
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,

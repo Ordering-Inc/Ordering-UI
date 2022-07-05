@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OrdersOption = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -17,19 +15,19 @@ var _orderingComponents = require("ordering-components");
 
 var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
 
-var _VerticalOrdersLayout = require("../VerticalOrdersLayout");
+var _VerticalOrdersLayout = require("../../../../../components/VerticalOrdersLayout");
 
-var _NotFoundSource = require("../NotFoundSource");
+var _NotFoundSource = require("../../../../../components/NotFoundSource");
 
 var _styledComponents = require("styled-components");
 
 var _styles = require("./styles");
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -47,10 +45,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -64,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersOptionUI = function OrdersOptionUI(props) {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _props$beforeElements, _props$beforeComponen, _orders$filter, _props$afterComponent, _props$afterElements;
+  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var horizontal = props.horizontal,
       activeOrders = props.activeOrders,
@@ -78,7 +72,17 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       businessesIds = props.businessesIds,
       orderStatus = props.orderStatus,
       isCustomLayout = props.isCustomLayout,
-      isBusinessesLoading = props.isBusinessesLoading;
+      isBusinessesLoading = props.isBusinessesLoading,
+      pastOrders = props.pastOrders,
+      preOrders = props.preOrders,
+      selectItem = props.selectItem,
+      setIsEmptyPast = props.setIsEmptyPast,
+      setIsEmptyActive = props.setIsEmptyActive,
+      setIsEmptyPreorder = props.setIsEmptyPreorder,
+      isCustomerMode = props.isCustomerMode,
+      handleUpdateOrderList = props.handleUpdateOrderList,
+      reorderState = props.reorderState,
+      handleReorder = props.handleReorder;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -87,96 +91,42 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var theme = (0, _styledComponents.useTheme)();
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 2),
-      reorder = _useOrder2[1].reorder;
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      carts = _useOrder2[0].carts;
 
   var loading = orderList.loading,
       error = orderList.error,
       values = orderList.orders;
   var imageFails = activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders;
   var orders = customArray || values || [];
-
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      reorderLoading = _useState2[0],
-      setReorderLoading = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(true),
-      _useState4 = _slicedToArray(_useState3, 2),
-      loadingOrders = _useState4[0],
-      setLoadingOrders = _useState4[1];
-
-  var _useState5 = (0, _react.useState)('active-orders'),
-      _useState6 = _slicedToArray(_useState5, 2),
-      filterForOrders = _useState6[0],
-      setFilterForOrders = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(orders.filter(function (order) {
-    return orderStatus.includes(order.status);
-  })),
-      _useState8 = _slicedToArray(_useState7, 2),
-      ordersFiltered = _useState8[0],
-      setOrdersFiltered = _useState8[1];
-
   var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
     return businessesIds && businessesIds.includes(order.business_id);
   }).every(function (i) {
     return !i;
   }) : orders.length > 0;
 
-  var handleReorder = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(orderId) {
-      var _yield$reorder, _error, result;
+  var _useState = (0, _react.useState)(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      loadingOrders = _useState2[0],
+      setLoadingOrders = _useState2[1];
 
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              setReorderLoading(true);
-              _context.prev = 1;
-              _context.next = 4;
-              return reorder(orderId);
+  var closeOrderModal = function closeOrderModal(e) {
+    var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
 
-            case 4:
-              _yield$reorder = _context.sent;
-              _error = _yield$reorder.error;
-              result = _yield$reorder.result;
+    if (outsideModal) {
+      var _reorderState$result, _reorderState$result2, _reorderState$result3;
 
-              if (_error) {
-                _context.next = 10;
-                break;
-              }
+      var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result = reorderState.result) === null || _reorderState$result === void 0 ? void 0 : _reorderState$result.business_id);
 
-              onRedirectPage && onRedirectPage({
-                page: 'checkout',
-                params: {
-                  cartUuid: result.uuid
-                }
-              });
-              return _context.abrupt("return");
-
-            case 10:
-              setReorderLoading(false);
-              _context.next = 16;
-              break;
-
-            case 13:
-              _context.prev = 13;
-              _context.t0 = _context["catch"](1);
-              setReorderLoading(false);
-
-            case 16:
-            case "end":
-              return _context.stop();
-          }
+      sessionStorage.setItem('adjust-cart-products', _businessId);
+      onRedirectPage && onRedirectPage({
+        page: 'business',
+        params: {
+          store: reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result2 = reorderState.result) === null || _reorderState$result2 === void 0 ? void 0 : (_reorderState$result3 = _reorderState$result2.business) === null || _reorderState$result3 === void 0 ? void 0 : _reorderState$result3.slug
         }
-      }, _callee, null, [[1, 13]]);
-    }));
-
-    return function handleReorder(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
+      });
+    }
+  };
 
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
@@ -275,12 +225,60 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     };
   }, []);
   (0, _react.useEffect)(function () {
-    setOrdersFiltered(filterForOrders === 'preorders' ? orders.filter(function (order) {
-      return order.status === 13;
-    }) : orders.filter(function (order) {
-      return orderStatus.includes(order.status) && order.status !== 13;
-    }));
-  }, [filterForOrders, orders]);
+    if (loading) return;
+
+    if (orders.length === 0) {
+      activeOrders && setIsEmptyActive && setIsEmptyActive(true);
+      pastOrders && setIsEmptyPast && setIsEmptyPast(true);
+      preOrders && setIsEmptyPreorder && setIsEmptyPreorder(true);
+    }
+  }, [orders, activeOrders, pastOrders, preOrders]);
+  (0, _react.useEffect)(function () {
+    var _reorderState$result4;
+
+    if (reorderState !== null && reorderState !== void 0 && reorderState.error) {
+      window.addEventListener('click', closeOrderModal);
+      return function () {
+        window.removeEventListener('click', closeOrderModal);
+      };
+    }
+
+    if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && reorderState.loading === false && reorderState !== null && reorderState !== void 0 && (_reorderState$result4 = reorderState.result) !== null && _reorderState$result4 !== void 0 && _reorderState$result4.business_id) {
+      var _reorderState$result5, _carts$_businessId, _orders$find, _reorderState$result7;
+
+      var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result5 = reorderState.result) === null || _reorderState$result5 === void 0 ? void 0 : _reorderState$result5.business_id);
+
+      var cartProducts = carts === null || carts === void 0 ? void 0 : (_carts$_businessId = carts[_businessId]) === null || _carts$_businessId === void 0 ? void 0 : _carts$_businessId.products;
+      var available = cartProducts.every(function (product) {
+        return product.valid === true;
+      });
+      var orderProducts = (_orders$find = orders.find(function (order) {
+        var _reorderState$result6;
+
+        return (order === null || order === void 0 ? void 0 : order.id) === (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result6 = reorderState.result) === null || _reorderState$result6 === void 0 ? void 0 : _reorderState$result6.orderId);
+      })) === null || _orders$find === void 0 ? void 0 : _orders$find.products;
+
+      if (available && reorderState !== null && reorderState !== void 0 && (_reorderState$result7 = reorderState.result) !== null && _reorderState$result7 !== void 0 && _reorderState$result7.uuid && (cartProducts === null || cartProducts === void 0 ? void 0 : cartProducts.length) === (orderProducts === null || orderProducts === void 0 ? void 0 : orderProducts.length)) {
+        onRedirectPage && onRedirectPage({
+          page: 'checkout',
+          params: {
+            cartUuid: reorderState === null || reorderState === void 0 ? void 0 : reorderState.result.uuid
+          }
+        });
+      } else {
+        var _reorderState$result8, _reorderState$result9;
+
+        sessionStorage.setItem('adjust-cart-products', _businessId);
+        (cartProducts === null || cartProducts === void 0 ? void 0 : cartProducts.length) !== (orderProducts === null || orderProducts === void 0 ? void 0 : orderProducts.length) && sessionStorage.setItem('already-removed', 'removed');
+        onRedirectPage && onRedirectPage({
+          page: 'business',
+          params: {
+            store: reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result8 = reorderState.result) === null || _reorderState$result8 === void 0 ? void 0 : (_reorderState$result9 = _reorderState$result8.business) === null || _reorderState$result9 === void 0 ? void 0 : _reorderState$result9.slug
+          }
+        });
+      }
+    }
+  }, [reorderState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -289,20 +287,9 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
-    isBusinessesPage: isBusinessesPage,
-    isActive: filterForOrders
-  }, /*#__PURE__*/_react.default.createElement("h1", {
-    onClick: function onClick() {
-      return setFilterForOrders('active-orders');
-    }
-  }, titleContent || (activeOrders ? t('ACTIVE_ORDERS', 'Active Orders') : t('PREVIOUS_ORDERS', 'Previous Orders'))), horizontal && ((_orders$filter = orders.filter(function (order) {
-    return order.status === 13;
-  })) === null || _orders$filter === void 0 ? void 0 : _orders$filter.length) > 0 && /*#__PURE__*/_react.default.createElement("h1", {
-    onClick: function onClick() {
-      return setFilterForOrders('preorders');
-    }
-  }, t('PREORDERS', 'Preorders'))), !loading && orders.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : isShowTitles || !isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
+    isBusinessesPage: isBusinessesPage
+  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))), !loading && orders.length === 0 && selectItem !== 'all' && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true
@@ -316,7 +303,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   }, _toConsumableArray(Array(3)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SkeletonCard, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonMap, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, {
       activeOrders: horizontal
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 70,
@@ -343,7 +330,9 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   })), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (horizontal ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
     businessesIds: businessesIds,
-    orders: ordersFiltered,
+    orders: orders.filter(function (order) {
+      return orderStatus.includes(order.status);
+    }),
     pagination: pagination,
     onRedirectPage: onRedirectPage,
     loadMoreOrders: loadMoreOrders,
@@ -352,10 +341,15 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     customArray: customArray,
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder,
-    isPreorders: filterForOrders === 'preorders'
+    activeOrders: activeOrders,
+    handleUpdateOrderList: handleUpdateOrderList,
+    pastOrders: pastOrders,
+    isCustomerMode: isCustomerMode
   })) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
-    reorderLoading: reorderLoading,
-    orders: ordersFiltered,
+    reorderLoading: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading,
+    orders: orders.filter(function (order) {
+      return orderStatus.includes(order.status);
+    }),
     pagination: pagination,
     loadMoreOrders: loadMoreOrders,
     onRedirectPage: onRedirectPage,
@@ -375,7 +369,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
 var OrdersOption = function OrdersOption(props) {
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersOptionUI,
-    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21, 22, 23] : [1, 2, 5, 6, 10, 11, 12, 16, 17],
+    orderStatus: props.activeOrders ? [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23] : props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 15, 16, 17] : [13],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
