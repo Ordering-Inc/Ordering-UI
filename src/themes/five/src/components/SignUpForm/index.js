@@ -84,6 +84,7 @@ const SignUpFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const isFacebookLogin = configs?.facebook_login?.value === 'true'
+  const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
@@ -523,10 +524,13 @@ const SignUpFormUI = (props) => {
                   {configs?.apple_login_client_id?.value && (
                     <AppleLogin
                       onSuccess={handleSuccessApple}
-                      onFailure={(data) => console.log('onFailure', data)}
+                      onFailure={(data) => setAlertState({
+                        open: true,
+                        content: data
+                      })}
                     />
                   )}
-                  {configs?.google_login_client_id?.value && (
+                  {configs?.google_login_client_id?.value && googleLoginEnabled && (
                     <GoogleLoginButton
                       initParams={initParams}
                       handleSuccessGoogleLogin={handleSuccessGoogle}

@@ -112,6 +112,8 @@ const LoginFormUI = (props) => {
     scope: 'profile'
   }
 
+  const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
+
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
     configs?.google_login_client_id?.value ||
@@ -616,7 +618,7 @@ const LoginFormUI = (props) => {
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
-                {configs?.google_login_client_id?.value && (
+                {configs?.google_login_client_id?.value && googleLoginEnabled && (
                   <GoogleIdentityButton
                     initParams={initParams}
                     handleSuccessGoogleLogin={handleSuccessGoogle}
@@ -626,7 +628,10 @@ const LoginFormUI = (props) => {
                   (
                     <AppleLogin
                       onSuccess={handleSuccessApple}
-                      onFailure={(data) => console.log('onFailure', data)}
+                      onFailure={(data) => setAlertState({
+                        open: true,
+                        content: data
+                      })}
                     />
                   )}
                 {useLoginByCellphone && loginTab === 'cellphone' &&

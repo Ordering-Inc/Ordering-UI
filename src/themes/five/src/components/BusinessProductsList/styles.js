@@ -113,16 +113,17 @@ export const DescriptionContainer = styled.div`
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   div{
     height: 300px;
-    overflow-x: auto;
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
   }
   p{
-    white-space: pre;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
   }
 `
 
