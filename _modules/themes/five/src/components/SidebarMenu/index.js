@@ -33,6 +33,8 @@ var _BiHelpCircle = _interopRequireDefault(require("@meronex/icons/bi/BiHelpCirc
 
 var _SiJsonwebtokens = _interopRequireDefault(require("@meronex/icons/si/SiJsonwebtokens"));
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _orderingComponents = require("ordering-components");
 
 var _styledComponents = require("styled-components");
@@ -246,6 +248,16 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_BiHelpCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/help'
   }, t('HELP', 'help'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'favorite'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    active: window.location.pathname === '/favorite'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    active: window.location.pathname === '/favorite'
+  }, t('FAVORITE', 'Favorite'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'sessions'
