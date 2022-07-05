@@ -328,7 +328,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 80
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
-  })), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (horizontal ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
+  })), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
     businessesIds: businessesIds,
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);
@@ -337,7 +337,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     onRedirectPage: onRedirectPage,
     loadMoreOrders: loadMoreOrders,
     isBusinessesPage: isBusinessesPage,
-    reorderLoading: reorderLoading,
+    reorderLoading: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading,
     customArray: customArray,
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder,
@@ -345,7 +345,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     handleUpdateOrderList: handleUpdateOrderList,
     pastOrders: pastOrders,
     isCustomerMode: isCustomerMode
-  })) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
+  }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading,
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);

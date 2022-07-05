@@ -235,24 +235,22 @@ const OrdersOptionUI = (props) => {
 
       {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (
         horizontal ? (
-          <>
-            <HorizontalOrdersLayout
-              businessesIds={businessesIds}
-              orders={orders.filter(order => orderStatus.includes(order.status))}
-              pagination={pagination}
-              onRedirectPage={onRedirectPage}
-              loadMoreOrders={loadMoreOrders}
-              isBusinessesPage={isBusinessesPage}
-              reorderLoading={reorderLoading}
-              customArray={customArray}
-              getOrderStatus={getOrderStatus}
-              handleReorder={handleReorder}
-              activeOrders={activeOrders}
-              handleUpdateOrderList={handleUpdateOrderList}
-              pastOrders={pastOrders}
-              isCustomerMode={isCustomerMode}
-            />
-          </>
+          <HorizontalOrdersLayout
+            businessesIds={businessesIds}
+            orders={orders.filter(order => orderStatus.includes(order.status))}
+            pagination={pagination}
+            onRedirectPage={onRedirectPage}
+            loadMoreOrders={loadMoreOrders}
+            isBusinessesPage={isBusinessesPage}
+            reorderLoading={reorderState?.loading}
+            customArray={customArray}
+            getOrderStatus={getOrderStatus}
+            handleReorder={handleReorder}
+            activeOrders={activeOrders}
+            handleUpdateOrderList={handleUpdateOrderList}
+            pastOrders={pastOrders}
+            isCustomerMode={isCustomerMode}
+          />
         ) : (
           <VerticalOrdersLayout
             reorderLoading={reorderState?.loading}
