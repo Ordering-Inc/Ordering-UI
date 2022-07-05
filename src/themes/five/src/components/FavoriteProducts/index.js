@@ -1,6 +1,5 @@
 import React from 'react'
-import { useLanguage, useEvent } from 'ordering-components'
-import { FavoriteProducts as FavoriteProductsController } from './naked'
+import { useLanguage, useEvent, FavoriteProducts as FavoriteProductsController } from 'ordering-components'
 import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'

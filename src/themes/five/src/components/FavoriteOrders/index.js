@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useEvent, useOrder } from 'ordering-components'
-import { FavoriteOrders as FavoriteOrdersController } from './naked'
+import { useLanguage, useEvent, useOrder, FavoriteOrders as FavoriteOrdersController } from 'ordering-components'
 import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'

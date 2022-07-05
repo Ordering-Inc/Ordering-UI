@@ -7,10 +7,9 @@ import {
   useOrder,
   useSession,
   useLanguage,
-  useConfig
-  // BusinessList as BusinessListController
+  useConfig,
+  BusinessList as BusinessListController
 } from 'ordering-components'
-import { BusinessList as BusinessListController } from './naked'
 
 import {
   BusinessContainer,
@@ -73,6 +72,7 @@ const BusinessesListingUI = (props) => {
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
+  const [favoriteIds, setFavoriteIds] = useState([])
 
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
@@ -143,6 +143,17 @@ const BusinessesListingUI = (props) => {
   useEffect(() => {
     if (preorderBusiness) setIsPreorder(true)
   }, [preorderBusiness])
+
+  useEffect(() => {
+    if (!businessesList?.businesses?.length) return
+    const ids = [...favoriteIds]
+    businessesList.businesses.forEach(business => {
+      if (business?.favorite) {
+        ids.push(business.id)
+      }
+    })
+    setFavoriteIds([...new Set(ids)])
+  }, [businessesList?.businesses?.length])
 
   const OrdersSection = (titleContent) => {
     return (
@@ -231,6 +242,8 @@ const BusinessesListingUI = (props) => {
               setHasHighRatedBusiness={setHasHighRatedBusiness}
               onBusinessClick={onBusinessClick}
               isCustomerMode={isCustomerMode}
+              favoriteIds={favoriteIds}
+              setFavoriteIds={setFavoriteIds}
             />
             <Divider />
           </HightestRatedWrapper>
@@ -323,6 +336,8 @@ const BusinessesListingUI = (props) => {
                   businessPickupTime={business?.pickup_time}
                   businessDistance={business?.distance}
                   handleUpdateBusinessList={handleUpdateBusinessList}
+                  favoriteIds={favoriteIds}
+                  setFavoriteIds={setFavoriteIds}
                 />
               ))
             }

@@ -1,9 +1,8 @@
 import React, { useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useConfig, useOrder, useUtils } from 'ordering-components'
+import { useLanguage, useConfig, useOrder, useUtils, SingleProductCard as SingleProductCardController } from 'ordering-components'
 import { shape } from '../../../../../utils'
 import { useIntersectionObserver } from '../../../../../hooks/useIntersectionObserver'
-import { SingleProduct as SingleProductController } from './naked'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 
 import {
@@ -147,5 +146,5 @@ export const SingleProductCard = (props) => {
     ...props,
     UIComponent: SingleProductCardUI
   }
-  return <SingleProductController {...singleProductCardProps} />
+  return <SingleProductCardController {...singleProductCardProps} />
 }

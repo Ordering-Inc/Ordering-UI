@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useOrder } from 'ordering-components'
-import { OrderList } from './naked'
+import { useLanguage, useOrder, OrderList } from 'ordering-components'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'

@@ -1,6 +1,5 @@
 import React from 'react'
-import { SingleOrderCard as SingleOrderCardController } from './naked'
-import { useLanguage, useUtils, useConfig } from 'ordering-components'
+import { useLanguage, useUtils, useConfig, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { getGoogleMapImage } from '../../../../../utils'

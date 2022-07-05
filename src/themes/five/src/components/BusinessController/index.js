@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, useUtils, useOrder, useConfig } from 'ordering-components'
-import { BusinessController as BusinessSingleCard } from './naked'
+import { useLanguage, useUtils, useOrder, useConfig, BusinessController as BusinessSingleCard } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
@@ -167,7 +166,7 @@ const BusinessControllerUI = (props) => {
                   <FavoriteWrapper ref={favoriteRef} onClick={handleChangeFavorite}>
                     {!isSkeleton ? (
                       <>
-                        {business?.favorite ? <Like /> : <DisLike />}
+                        {(business?.favorite) ? <Like /> : <DisLike />}
                       </>
                     ) : (
                       <Skeleton width={16} height={16} />

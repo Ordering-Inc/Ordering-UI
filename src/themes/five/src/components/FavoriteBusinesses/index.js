@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useOrder, useEvent } from 'ordering-components'
-import { FavoriteBusinesses as FavoriteBusinessesController } from './naked'
+import { useLanguage, useOrder, useEvent, FavoriteBusinesses as FavoriteBusinessesController } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { NotFoundSource } from '../NotFoundSource'

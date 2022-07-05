@@ -31,7 +31,6 @@ import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
 import { Help } from './pages/Help'
-import { Favorite } from './pages/Favorite'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -264,17 +263,6 @@ export const App = () => {
                   <Route exact path='/help'>
                     {auth
                       ? <Help />
-                      : (
-                        <Redirect to={{
-                          pathname: '/login',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
-                      )}
-                  </Route>
-                  <Route exact path='/favorite'>
-                    {auth
-                      ? <Favorite />
                       : (
                         <Redirect to={{
                           pathname: '/login',
