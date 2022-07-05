@@ -26,12 +26,12 @@ const DriverTipsUI = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
 
-  const [value, setvalue] = useState(0)
+  const [value, setvalue] = useState('')
 
   const handleChangeDriverTip = (e) => {
-    let tip = parseFloat(e?.target?.value)
-    tip = isNaN(tip) ? 0 : tip
-    setvalue(tip)
+    const tip = Number(e?.target?.value)
+    if ((isNaN(tip) || tip < 0)) return
+    setvalue(e?.target?.value)
   }
 
   const placeholderCurrency = (configs?.currency_position?.value || 'left') === 'left'
@@ -77,16 +77,17 @@ const DriverTipsUI = (props) => {
               <Input
                 name='drivertip'
                 type='text'
+                value={value}
                 placeholder={placeholderCurrency}
                 onChange={handleChangeDriverTip}
               />
               <Button
                 rectangle
                 color='primary'
-                disabled={(!parseFloat(value || 0) > 0 && parseFloat(value || 0) !== driverTip) || !value}
+                disabled={(parseFloat(value || 0) < 0 && parseFloat(value || 0) !== driverTip) || value === ''}
                 onClick={() => {
                   handlerChangeOption(value)
-                  setvalue(0)
+                  setvalue('')
                 }}
               >
                 {t('APPLY_TIP', 'Apply Tip')}
