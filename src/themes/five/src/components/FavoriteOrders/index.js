@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useEvent, useOrder, FavoriteOrders as FavoriteOrdersController } from 'ordering-components'
+import { useLanguage, useEvent, useOrder, FavoriteList } from 'ordering-components'
 import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import MdKeyboardArrowLeft from '@meronex/icons/md/MdKeyboardArrowLeft'
@@ -25,10 +25,10 @@ SwiperCore.use([Navigation])
 
 const FavoriteOrdersUI = (props) => {
   const {
-    handleUpdateOrderList,
-    favoriteOrderList,
+    handleUpdateFavoriteList,
+    favoriteList,
     pagination,
-    getFavoriteOrderList
+    getFavoriteList
   } = props
 
   const [, t] = useLanguage()
@@ -106,7 +106,7 @@ const FavoriteOrdersUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <Container>
         {
-          !favoriteOrderList?.loading && favoriteOrderList?.orders?.length === 0 && (
+          !favoriteList?.loading && favoriteList?.favorites?.length === 0 && (
             <NotFoundSource>
               <Button
                 outline
@@ -120,7 +120,7 @@ const FavoriteOrdersUI = (props) => {
           )
         }
         <BusinessListWrapper>
-          <ArrowButtonWrapper className='swiper-button-prev' isLoading={favoriteOrderList?.loading}>
+          <ArrowButtonWrapper className='swiper-button-prev' isLoading={favoriteList?.loading}>
             <MdKeyboardArrowLeft />
           </ArrowButtonWrapper>
           <Swiper
@@ -148,10 +148,10 @@ const FavoriteOrdersUI = (props) => {
               prevEl: '.swiper-button-prev'
             }}
           >
-            {!favoriteOrderList?.loading && (
+            {!favoriteList?.loading && (
               <>
                 {
-                  favoriteOrderList?.orders?.map((order, i) => (
+                  favoriteList?.favorites?.map((order, i) => (
                     <SwiperSlide key={i}>
                       <SingleOrderCard
                         order={order}
@@ -159,7 +159,7 @@ const FavoriteOrdersUI = (props) => {
                         getOrderStatus={getOrderStatus}
                         pastOrders={pastOrders.includes(order?.status)}
                         handleReorder={handleReorder}
-                        handleUpdateOrderList={handleUpdateOrderList}
+                        handleUpdateOrderList={handleUpdateFavoriteList}
                       />
                     </SwiperSlide>
                   ))
@@ -170,7 +170,7 @@ const FavoriteOrdersUI = (props) => {
                       <Button
                         color='primary'
                         outline
-                        onClick={() => getFavoriteOrderList(pagination?.currentPage + 1)}
+                        onClick={() => getFavoriteList(pagination?.currentPage + 1)}
                       >
                         {t('LOAD_MORE_ORDERS', 'Load more orders')}
                       </Button>
@@ -180,7 +180,7 @@ const FavoriteOrdersUI = (props) => {
               </>
             )}
 
-            {favoriteOrderList?.loading && (
+            {favoriteList?.loading && (
               [...Array(5).keys()].map(i => (
                 <SwiperSlide key={i}>
                   <SingleOrderCard
@@ -194,12 +194,12 @@ const FavoriteOrdersUI = (props) => {
               ))
             )}
           </Swiper>
-          <ArrowButtonWrapper className='swiper-button-next' isLoading={favoriteOrderList?.loading}>
+          <ArrowButtonWrapper className='swiper-button-next' isLoading={favoriteList?.loading}>
             <MdKeyboardArrowRight />
           </ArrowButtonWrapper>
         </BusinessListWrapper>
-        {favoriteOrderList?.error && favoriteOrderList?.error.length > 0 && favoriteOrderList?.products?.length === 0 && (
-          favoriteOrderList?.error.map((e, i) => (
+        {favoriteList?.error && favoriteList?.error.length > 0 && favoriteList?.favorites?.length === 0 && (
+          favoriteList?.error.map((e, i) => (
             <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
           ))
         )}
@@ -217,7 +217,9 @@ const FavoriteOrdersUI = (props) => {
 export const FavoriteOrders = (props) => {
   const favoriteOrdersProps = {
     ...props,
-    UIComponent: FavoriteOrdersUI
+    UIComponent: FavoriteOrdersUI,
+    favoriteURL: 'favorite_orders',
+    originalURL: 'orders'
   }
-  return <FavoriteOrdersController {...favoriteOrdersProps} />
+  return <FavoriteList {...favoriteOrdersProps} />
 }

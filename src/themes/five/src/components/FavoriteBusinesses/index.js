@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useOrder, useEvent, FavoriteBusinesses as FavoriteBusinessesController } from 'ordering-components'
+import { useLanguage, useOrder, useEvent, FavoriteList } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { NotFoundSource } from '../NotFoundSource'
@@ -27,10 +27,10 @@ SwiperCore.use([Navigation])
 
 const FavoriteBusinessesUI = (props) => {
   const {
-    favoriteBusinessList,
-    handleUpdateBusinessList,
+    favoriteList,
+    handleUpdateFavoriteList,
     pagination,
-    getFavoriteBusinessList
+    getFavoriteList
   } = props
 
   const [, t] = useLanguage()
@@ -68,7 +68,7 @@ const FavoriteBusinessesUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <Container>
         {
-          !favoriteBusinessList?.loading && favoriteBusinessList?.businesses.length === 0 && (
+          !favoriteList?.loading && favoriteList?.favorites.length === 0 && (
             <NotFoundSource>
               <Button
                 outline
@@ -82,7 +82,7 @@ const FavoriteBusinessesUI = (props) => {
           )
         }
         <BusinessListWrapper>
-          <ArrowButtonWrapper className='swiper-button-prev' isLoading={favoriteBusinessList?.loading}>
+          <ArrowButtonWrapper className='swiper-button-prev' isLoading={favoriteList?.loading}>
             <MdKeyboardArrowLeft />
           </ArrowButtonWrapper>
           <Swiper
@@ -114,10 +114,10 @@ const FavoriteBusinessesUI = (props) => {
               prevEl: '.swiper-button-prev'
             }}
           >
-            {!favoriteBusinessList?.loading && (
+            {!favoriteList?.loading && (
               <>
                 {
-                  favoriteBusinessList?.businesses?.map((business, i) => (
+                  favoriteList?.favorites?.map((business, i) => (
                     <SwiperSlide key={i}>
                       <BusinessController
                         className='card'
@@ -137,7 +137,7 @@ const FavoriteBusinessesUI = (props) => {
                         businessDeliveryTime={business?.delivery_time}
                         businessPickupTime={business?.pickup_time}
                         businessDistance={business?.distance}
-                        handleUpdateBusinessList={handleUpdateBusinessList}
+                        handleUpdateBusinessList={handleUpdateFavoriteList}
                       />
                     </SwiperSlide>
                   ))
@@ -148,7 +148,7 @@ const FavoriteBusinessesUI = (props) => {
                       <Button
                         color='primary'
                         outline
-                        onClick={() => getFavoriteBusinessList(pagination?.currentPage + 1)}
+                        onClick={() => getFavoriteList(pagination?.currentPage + 1)}
                       >
                         {t('LOAD_MORE_BUSINESSES', 'Load more businesses')}
                       </Button>
@@ -158,7 +158,7 @@ const FavoriteBusinessesUI = (props) => {
               </>
             )}
 
-            {favoriteBusinessList?.loading && (
+            {favoriteList?.loading && (
               [...Array(5).keys()].map(i => (
                 <SwiperSlide key={i}>
                   <BusinessController
@@ -171,12 +171,12 @@ const FavoriteBusinessesUI = (props) => {
               ))
             )}
           </Swiper>
-          <ArrowButtonWrapper className='swiper-button-next' isLoading={favoriteBusinessList?.loading}>
+          <ArrowButtonWrapper className='swiper-button-next' isLoading={favoriteList?.loading}>
             <MdKeyboardArrowRight />
           </ArrowButtonWrapper>
         </BusinessListWrapper>
-        {favoriteBusinessList?.error && favoriteBusinessList?.error.length > 0 && favoriteBusinessList?.businesses.length === 0 && (
-          favoriteBusinessList?.error.map((e, i) => (
+        {favoriteList?.error && favoriteList?.error.length > 0 && favoriteList?.favorites.length === 0 && (
+          favoriteList?.error.map((e, i) => (
             <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
           ))
         )}
@@ -203,9 +203,15 @@ const FavoriteBusinessesUI = (props) => {
 }
 
 export const FavoriteBusinesses = (props) => {
+  const [orderState] = useOrder()
+
   const favoriteBusinessesProps = {
     ...props,
-    UIComponent: FavoriteBusinessesUI
+    UIComponent: FavoriteBusinessesUI,
+    favoriteURL: 'favorite_businesses',
+    originalURL: 'business',
+    location: `${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}`,
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'ribbon', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
   }
-  return <FavoriteBusinessesController {...favoriteBusinessesProps} />
+  return <FavoriteList {...favoriteBusinessesProps} />
 }
