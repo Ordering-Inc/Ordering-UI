@@ -259,6 +259,7 @@ const BusinessesListingUI = (props) => {
               isCustomLayout={isCustomLayout}
               placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
               onSearch={handleChangeSearch}
+              handleEnterClick={term => configs?.advanced_business_search_enabled?.value === '1' && onRedirectPage({ page: 'business_search', search: `?term=${term}` })}
             />
             {isCustomLayout && (
               <FiMap onClick={toggleMap} />

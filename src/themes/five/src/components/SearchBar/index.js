@@ -15,7 +15,8 @@ export const SearchBar = (props) => {
     search,
     placeholder,
     lazyLoad,
-    isCustomLayout
+    isCustomLayout,
+    handleEnterClick
   } = props
   const [theme] = useTheme()
   const [, t] = useLanguage()
@@ -23,7 +24,10 @@ export const SearchBar = (props) => {
   let previousSearch
   const el = useRef()
   const onChangeSearch = e => {
-    if (e.keyCode === 13) return
+    if (e.keyCode === 13) {
+      handleEnterClick && handleEnterClick(e.target.value)
+      return
+    }
 
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
@@ -88,6 +92,7 @@ export const SearchBar = (props) => {
           autoComplete='off'
           maxLength='500'
           style={{ backgroundImage: `url(${theme?.images?.general?.searchIcon})` }}
+          defaultValue={search}
         />
         <DeleteContent className='clear'>
           {el.current?.value && <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span>}

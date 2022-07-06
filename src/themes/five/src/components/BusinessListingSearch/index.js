@@ -139,7 +139,7 @@ export const BusinessListingSearchUI = (props) => {
         isCustomLayout
         placeholder={`${t('SEARCH_BUSINESSES', 'Search Businesses')} / ${t('PLEASE_TYPE_AT_LEAST_3_CHARACTERS', 'Please type at least 3 characters')}`}
         onSearch={(val) => handleChangeTermValue(val)}
-        value={termValue}
+        search={termValue}
       />
       <FiltersContainer>
         <Filters>
