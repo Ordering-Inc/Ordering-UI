@@ -42,7 +42,8 @@ var SearchBar = function SearchBar(props) {
       search = props.search,
       placeholder = props.placeholder,
       lazyLoad = props.lazyLoad,
-      isCustomLayout = props.isCustomLayout;
+      isCustomLayout = props.isCustomLayout,
+      handleCustomEnter = props.handleCustomEnter;
 
   var _useTheme = (0, _ThemeContext.useTheme)(),
       _useTheme2 = _slicedToArray(_useTheme, 1),
@@ -57,7 +58,10 @@ var SearchBar = function SearchBar(props) {
   var el = (0, _react.useRef)();
 
   var onChangeSearch = function onChangeSearch(e) {
-    if (e.keyCode === 13) return;
+    if (e.keyCode === 13) {
+      handleCustomEnter && handleCustomEnter(e.target.value);
+      return;
+    }
 
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
@@ -120,7 +124,8 @@ var SearchBar = function SearchBar(props) {
     maxLength: "500",
     style: {
       backgroundImage: "url(".concat(theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.searchIcon, ")")
-    }
+    },
+    defaultValue: search
   }), /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, {
     className: "clear"
   }, ((_el$current2 = el.current) === null || _el$current2 === void 0 ? void 0 : _el$current2.value) && /*#__PURE__*/_react.default.createElement("span", {

@@ -414,7 +414,15 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     search: searchValue,
     isCustomLayout: isCustomLayout,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
-    onSearch: handleChangeSearch
+    onSearch: handleChangeSearch,
+    handleCustomEnter: function handleCustomEnter(term) {
+      var _configs$advanced_bus;
+
+      return (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' && onRedirectPage({
+        page: 'business_search',
+        search: "?term=".concat(term)
+      });
+    }
   }), isCustomLayout && /*#__PURE__*/_react.default.createElement(_FiMap.default, {
     onClick: toggleMap
   })), isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {

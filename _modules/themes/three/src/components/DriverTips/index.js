@@ -63,17 +63,17 @@ var DriverTipsUI = function DriverTipsUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
-  var _useState = (0, _react.useState)(0),
+  var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       value = _useState2[0],
       setvalue = _useState2[1];
 
   var handleChangeDriverTip = function handleChangeDriverTip(e) {
-    var _e$target;
+    var _e$target, _e$target2;
 
-    var tip = parseFloat(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value);
-    tip = isNaN(tip) ? 0 : tip;
-    setvalue(tip);
+    var tip = Number(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value);
+    if (isNaN(tip) || tip < 0) return;
+    setvalue(e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value);
   };
 
   var placeholderCurrency = ((configs === null || configs === void 0 ? void 0 : (_configs$currency_pos = configs.currency_position) === null || _configs$currency_pos === void 0 ? void 0 : _configs$currency_pos.value) || 'left') === 'left' ? "".concat(configs === null || configs === void 0 ? void 0 : (_configs$format_numbe = configs.format_number_currency) === null || _configs$format_numbe === void 0 ? void 0 : _configs$format_numbe.value, "0") : "0".concat(configs === null || configs === void 0 ? void 0 : (_configs$format_numbe2 = configs.format_number_currency) === null || _configs$format_numbe2 === void 0 ? void 0 : _configs$format_numbe2.value);
@@ -98,15 +98,16 @@ var DriverTipsUI = function DriverTipsUI(props) {
   })), !driverTipsOptions.includes(driverTip) && driverTip > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option'))) : /*#__PURE__*/_react.default.createElement(_styles.FormDriverTip, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipLabel, null, t('CUSTOM_DRIVER_TIP_MESSAGE', '100% of these tips go directly to your driver')), /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "drivertip",
     type: "text",
+    value: value,
     placeholder: placeholderCurrency,
     onChange: handleChangeDriverTip
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     rectangle: true,
     color: "primary",
-    disabled: !parseFloat(value || 0) > 0 && parseFloat(value || 0) !== driverTip || !value,
+    disabled: parseFloat(value || 0) < 0 || parseFloat(value || 0) === driverTip || value === '',
     onClick: function onClick() {
       handlerChangeOption(value);
-      setvalue(0);
+      setvalue('');
     }
   }, t('APPLY_TIP', 'Apply Tip'))), parseFloat(driverTip || 0) > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount'), ": ", parsePrice(driverTip)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({

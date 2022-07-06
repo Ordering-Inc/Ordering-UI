@@ -182,7 +182,7 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     onSearch: function onSearch(val) {
       return handleChangeTermValue(val);
     },
-    value: termValue
+    search: termValue
   }), /*#__PURE__*/_react.default.createElement(_styles.FiltersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Filters, null, /*#__PURE__*/_react.default.createElement(_styles.SortContainer, null, /*#__PURE__*/_react.default.createElement("h3", null, t('SORT', 'Sort')), sortItems === null || sortItems === void 0 ? void 0 : (_sortItems$filter = sortItems.filter(function (item) {
     var _orderState$options, _orderState$options2;
 

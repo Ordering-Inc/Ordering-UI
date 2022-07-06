@@ -484,7 +484,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onSave: handlerProductAction
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
-    open: alertState.open,
+    open: alertState === null || alertState === void 0 ? void 0 : alertState.open,
     content: t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.'),
     onClose: function onClose() {
       return setAlertState({

@@ -84,7 +84,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _configs$advanced_bus, _orderState$options2, _orderState$options2$, _configs$advanced_bus2, _orderState$options3, _orderState$options3$, _businessesList$busin2, _businessesList$busin3, _orderState$options6, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _configs$advanced_bus2, _orderState$options2, _orderState$options2$, _configs$advanced_bus3, _orderState$options3, _orderState$options3$, _businessesList$busin2, _businessesList$busin3, _orderState$options6, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -300,8 +300,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     search: searchValue,
     isCustomLayout: isCustomLayout,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
-    onSearch: handleChangeSearch
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
+    onSearch: handleChangeSearch,
+    handleCustomEnter: function handleCustomEnter(term) {
+      var _configs$advanced_bus;
+
+      return (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' && onRedirectPage({
+        page: 'business_search',
+        search: "?term=".concat(term)
+      });
+    }
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus2 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus2 === void 0 ? void 0 : _configs$advanced_bus2.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
     onClick: function onClick() {
       return onRedirectPage({
         page: 'business_search'
@@ -334,7 +342,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isCustomLayout: isCustomLayout,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus2 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus2 === void 0 ? void 0 : _configs$advanced_bus2.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus3 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus3 === void 0 ? void 0 : _configs$advanced_bus3.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
     onClick: function onClick() {
       return onRedirectPage({
         page: 'business_search'
