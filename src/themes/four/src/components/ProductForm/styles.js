@@ -413,6 +413,7 @@ export const Properties = styled.div`
 `
 export const ProductDescription = styled.p`
   margin-top: 10px;
+  white-space: pre-wrap;
 `
 export const PriceContent = styled.p`
   font-size: 18px;

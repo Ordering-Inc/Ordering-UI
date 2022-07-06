@@ -406,6 +406,7 @@ export const Properties = styled.div`
 
 export const ProductDescription = styled.p`
   margin-top: 0px;
+  white-space: pre-wrap;
 `
 export const ProductTagsListContainer = styled.div`
   display: flex;
