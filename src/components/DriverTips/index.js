@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { DriverTips as DriverTipsController, useUtils, useLanguage, useConfig } from 'ordering-components'
-
+import { useUtils, useLanguage, useConfig } from 'ordering-components'
+import { DriverTips as DriverTipsController } from './naked'
 import {
   DriverTipContainer,
   TipCard,
@@ -83,7 +83,7 @@ const DriverTipsUI = (props) => {
               />
               <Button
                 color='primary'
-                disabled={(parseFloat(value || 0) < 0 && parseFloat(value || 0) !== driverTip) || value === ''}
+                disabled={parseFloat(value || 0) < 0 || parseFloat(value || 0) === driverTip || value === ''}
                 onClick={() => {
                   handlerChangeOption(value)
                   setvalue('')

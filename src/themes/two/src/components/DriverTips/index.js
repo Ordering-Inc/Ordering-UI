@@ -81,7 +81,7 @@ const DriverTipsUI = (props) => {
               />
               <Button
                 color='primary'
-                disabled={(parseFloat(value || 0) < 0 && parseFloat(value || 0) !== driverTip) || value === ''}
+                disabled={parseFloat(value || 0) < 0 || parseFloat(value || 0) === driverTip || value === ''}
                 onClick={() => {
                   handlerChangeOption(value)
                   setvalue('')
