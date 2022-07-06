@@ -16,7 +16,7 @@ export const SearchBar = (props) => {
     placeholder,
     lazyLoad,
     isCustomLayout,
-    handleEnterClick
+    handleCustomEnter
   } = props
   const [theme] = useTheme()
   const [, t] = useLanguage()
@@ -25,7 +25,7 @@ export const SearchBar = (props) => {
   const el = useRef()
   const onChangeSearch = e => {
     if (e.keyCode === 13) {
-      handleEnterClick && handleEnterClick(e.target.value)
+      handleCustomEnter && handleCustomEnter(e.target.value)
       return
     }
 
