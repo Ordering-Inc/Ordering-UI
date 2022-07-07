@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TitleContainer = exports.Price = exports.Map = exports.Logo = exports.FavoriteWrapper = exports.Content = exports.Card = exports.ButtonWrapper = exports.BusinessLogoWrapper = void 0;
+exports.TitleContainer = exports.Price = exports.Map = exports.Logo = exports.FavoriteWrapper = exports.Content = exports.Container = exports.ButtonWrapper = exports.BusinessLogoWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -23,57 +23,57 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Content = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  position: relative;\n  border-radius: 16px;\n  padding: 10px;\n  ", "\n"])), function (_ref) {
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n  margin: 10px;\n  position: relative;\n  background: white;\n  border-radius: 16px;\n  display: inline-block;\n  text-align: left;\n  transition: all 0.3s ease;\n\n  ", "\n\n  &:hover {\n    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;\n  }\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px) {\n    min-width: 430px;\n    max-height: ", ";\n    width: 430px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n"])), function (_ref) {
   var isCustomerMode = _ref.isCustomerMode;
-  return isCustomerMode ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    align-items: center;\n  "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    align-items: flex-start;\n    flex: 1;\n  "])));
-});
-
-exports.Content = Content;
-
-var Price = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 35%;\n  \n  ", "\n\n  h2 {\n    font-size: 16px;\n    margin-block-end: ", ";\n    margin-block-start: 0.1em;\n    font-weight: normal;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: ", ";\n    color: #ff9300;\n    font-size: 0.8em;\n    overflow:hidden;\n    text-overflow: ellipsis;\n    margin-left: 5px;\n  }\n\n  p[name='view-cart']{\n    color: ", ";\n    cursor: pointer;\n  }\n\n  @media (min-width: 480px) {\n    ", "\n  }\n"])), function (_ref2) {
-  var isCustomerMode = _ref2.isCustomerMode;
-  return isCustomerMode ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  text-align: end;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: flex-end;\n    flex-direction: column;\n    align-items: flex-end;\n  "])));
-}, function (_ref3) {
-  var isBusinessesPage = _ref3.isBusinessesPage;
-  return isBusinessesPage ? '0.1em' : '1em';
-}, function (_ref4) {
-  var isBusinessesPage = _ref4.isBusinessesPage;
-  return isBusinessesPage ? '0.1em' : '1em';
-}, function (props) {
-  return props.theme.colors.primary;
-}, function (_ref5) {
-  var isCustomerMode = _ref5.isCustomerMode;
-  return !isCustomerMode && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      flex-direction: row;\n      align-items: center;\n    "])));
-});
-
-exports.Price = Price;
-
-var Card = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  margin: 10px;\n  position: relative;\n  background: white;\n  border-radius: 16px;\n  display: inline-block;\n  text-align: left;\n  transition: all 0.3s ease;\n\n  ", "\n\n  &:hover {\n    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;\n  }\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px) {\n    min-width: 430px;\n    max-height: ", ";\n    width: 430px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n"])), function (_ref6) {
-  var isCustomerMode = _ref6.isCustomerMode;
-  return isCustomerMode ? (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    min-width: 300px;\n    width: 300px;\n    display: inline-block;\n  "]))) : (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    min-width: 380px;\n    width: 380px;\n    height: ", ";\n    max-height: ", ";\n  "])), function (_ref7) {
-    var isBusinessesPage = _ref7.isBusinessesPage;
+  return isCustomerMode ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    min-width: 300px;\n    width: 300px;\n    display: inline-block;\n  "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    min-width: 380px;\n    width: 380px;\n    height: ", ";\n    max-height: ", ";\n  "])), function (_ref2) {
+    var isBusinessesPage = _ref2.isBusinessesPage;
     return isBusinessesPage && '300px';
-  }, function (_ref8) {
-    var isBusinessesPage = _ref8.isBusinessesPage;
+  }, function (_ref3) {
+    var isBusinessesPage = _ref3.isBusinessesPage;
     return isBusinessesPage ? '300px' : '220px';
   });
 }, function (props) {
   var _props$theme;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    text-align: right;\n  "])));
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    text-align: right;\n  "])));
 }, function (props) {
-  return (props.nobg || props.isBusinessesPage) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background: transparent;\n  "])));
+  return (props.nobg || props.isBusinessesPage) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background: transparent;\n  "])));
 }, function (props) {
-  return props.flex && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  "])));
-}, function (_ref9) {
-  var isBusinessesPage = _ref9.isBusinessesPage;
+  return props.flex && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  "])));
+}, function (_ref4) {
+  var isBusinessesPage = _ref4.isBusinessesPage;
   return isBusinessesPage ? '300px' : '250px';
-}, function (_ref10) {
-  var isBusinessesPage = _ref10.isBusinessesPage;
-  return isBusinessesPage && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      margin: 30px 20px;\n      width: calc(33% - 40px);\n    "])));
+}, function (_ref5) {
+  var isBusinessesPage = _ref5.isBusinessesPage;
+  return isBusinessesPage && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin: 30px 20px;\n      width: calc(33% - 40px);\n    "])));
 });
 
-exports.Card = Card;
+exports.Container = Container;
+
+var Content = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  position: relative;\n  border-radius: 16px;\n  padding: 10px;\n  ", "\n"])), function (_ref6) {
+  var isCustomerMode = _ref6.isCustomerMode;
+  return isCustomerMode ? (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    align-items: center;\n  "]))) : (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    align-items: flex-start;\n    flex: 1;\n  "])));
+});
+
+exports.Content = Content;
+
+var Price = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 35%;\n  \n  ", "\n\n  h2 {\n    font-size: 16px;\n    margin-block-end: ", ";\n    margin-block-start: 0.1em;\n    font-weight: normal;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: ", ";\n    color: #ff9300;\n    font-size: 0.8em;\n    overflow:hidden;\n    text-overflow: ellipsis;\n    margin-left: 5px;\n  }\n\n  p[name='view-cart']{\n    color: ", ";\n    cursor: pointer;\n  }\n\n  @media (min-width: 480px) {\n    ", "\n  }\n"])), function (_ref7) {
+  var isCustomerMode = _ref7.isCustomerMode;
+  return isCustomerMode ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  text-align: end;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: flex-end;\n    flex-direction: column;\n    align-items: flex-end;\n  "])));
+}, function (_ref8) {
+  var isBusinessesPage = _ref8.isBusinessesPage;
+  return isBusinessesPage ? '0.1em' : '1em';
+}, function (_ref9) {
+  var isBusinessesPage = _ref9.isBusinessesPage;
+  return isBusinessesPage ? '0.1em' : '1em';
+}, function (props) {
+  return props.theme.colors.primary;
+}, function (_ref10) {
+  var isCustomerMode = _ref10.isCustomerMode;
+  return !isCustomerMode && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      flex-direction: row;\n      align-items: center;\n    "])));
+});
+
+exports.Price = Price;
 
 var BusinessLogoWrapperStyled = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 55px;\n  min-width: 55px;\n  height: 55px;\n  min-height: 55px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  justify-content: center;\n  align-items: center;\n  border-radius: 7.6px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n\n  margin-left: 8px;\n\n  ", "\n\n  @media (min-width: 576px) {\n    width: 86px;\n    min-width: 86px;\n    height: 86px;\n    min-height: 86px;\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 8px;\n  "])));
@@ -132,7 +132,7 @@ var Map = _styledComponents.default.div(_templateObject20 || (_templateObject20 
 
 exports.Map = Map;
 
-var FavoriteWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: absolute;\n  display: flex;\n  z-index: 10;\n  align-items: center;\n  justify-content: center;\n  top: 41px;\n  right: 10px;\n  ", "\n  svg {\n    color: ", ";\n    font-size: 16px;\n  }\n"])), function (props) {
+var FavoriteWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: absolute;\n  cursor: pointer;\n  display: flex;\n  z-index: 10;\n  align-items: center;\n  justify-content: center;\n  top: 41px;\n  right: 10px;\n  ", "\n  svg {\n    color: ", ";\n    font-size: 16px;\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    left: 10px;\n    right: initial;\n  "])));
 }, function (props) {
   return props.theme.colors.danger500;

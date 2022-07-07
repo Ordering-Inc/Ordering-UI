@@ -75,7 +75,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       currentCart = props.currentCart,
       setSubcategoriesSelected = props.setSubcategoriesSelected,
       subcategoriesSelected = props.subcategoriesSelected,
-      onClickCategory = props.onClickCategory;
+      onClickCategory = props.onClickCategory,
+      handleUpdateProducts = props.handleUpdateProducts;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -175,6 +176,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       businessId: businessId,
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList,
+      handleUpdateProducts: handleUpdateProducts,
       productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.reduce(function (productsLength, Cproduct) {
         return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
       }, 0)
@@ -193,6 +195,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       businessId: businessId,
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList,
+      handleUpdateProducts: handleUpdateProducts,
       productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.reduce(function (productsLength, Cproduct) {
         return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
       }, 0)
@@ -252,6 +255,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         product: product,
         onProductClick: onProductClick,
         isCartOnProductsList: isCartOnProductsList,
+        handleUpdateProducts: handleUpdateProducts,
         productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.reduce(function (productsLength, Cproduct) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
         }, 0)

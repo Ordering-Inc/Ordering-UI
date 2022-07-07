@@ -13,6 +13,8 @@ var _orderingComponents = require("ordering-components");
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styledComponents = require("styled-components");
 
 var _Confirm = require("../Confirm");
@@ -78,7 +80,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       businessDeliveryPrice = props.businessDeliveryPrice,
       businessDeliveryTime = props.businessDeliveryTime,
       businessPickupTime = props.businessPickupTime,
-      businessDistance = props.businessDistance;
+      businessDistance = props.businessDistance,
+      handleFavoriteBusiness = props.handleFavoriteBusiness;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -112,13 +115,21 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }),
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
-      setAlertState = _useState2[1]; // const handleShowAlert = () => {
+      setAlertState = _useState2[1];
+
+  var favoriteRef = (0, _react.useRef)(null); // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   // }
 
+  var handleBusinessClick = function handleBusinessClick(e) {
+    var _favoriteRef$current;
 
-  var handleBusinessClick = function handleBusinessClick() {
+    if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
     if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business);else handleClick(business);
+  };
+
+  var handleChangeFavorite = function handleChangeFavorite() {
+    handleFavoriteBusiness && handleFavoriteBusiness(!(business !== null && business !== void 0 && business.favorite));
   };
 
   var hasInformationLength = (business === null || business === void 0 ? void 0 : (_business$available_d = business.available_drivers) === null || _business$available_d === void 0 ? void 0 : _business$available_d.length) + (business === null || business === void 0 ? void 0 : (_business$busy_driver = business.busy_drivers) === null || _business$busy_driver === void 0 ? void 0 : _business$busy_driver.length) + (business === null || business === void 0 ? void 0 : (_business$active_orde = business.active_orders) === null || _business$active_orde === void 0 ? void 0 : _business$active_orde.length) > 0;
@@ -137,8 +148,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     minWidthEnabled: minWidthEnabled
   }, isObserved && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
     isSkeleton: isSkeleton,
-    onClick: function onClick() {
-      return !isSkeleton && handleClick && handleBusinessClick();
+    onClick: function onClick(e) {
+      return !isSkeleton && handleClick && handleBusinessClick(e);
     }
   }, (business === null || business === void 0 ? void 0 : (_business$ribbon = business.ribbon) === null || _business$ribbon === void 0 ? void 0 : _business$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
     bgColor: business === null || business === void 0 ? void 0 : (_business$ribbon2 = business.ribbon) === null || _business$ribbon2 === void 0 ? void 0 : _business$ribbon2.color,
@@ -165,7 +176,13 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "reviews"
   }, /*#__PURE__*/_react.default.createElement(_BisStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, businessReviews !== null && businessReviews !== void 0 ? businessReviews : business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.FavoriteWrapper, {
+    ref: favoriteRef,
+    onClick: handleChangeFavorite
+  }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, business !== null && business !== void 0 && business.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 16,
+    height: 16
+  })))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100

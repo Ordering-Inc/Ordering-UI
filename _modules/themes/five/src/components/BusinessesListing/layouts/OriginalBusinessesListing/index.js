@@ -53,6 +53,8 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -60,8 +62,6 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -84,7 +84,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _configs$advanced_bus2, _orderState$options2, _orderState$options2$, _configs$advanced_bus3, _orderState$options3, _orderState$options3$, _businessesList$busin2, _businessesList$busin3, _orderState$options6, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _configs$advanced_bus2, _orderState$options2, _orderState$options2$, _configs$advanced_bus3, _orderState$options3, _orderState$options3$, _businessesList$busin4, _businessesList$busin5, _orderState$options6, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -96,7 +96,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       handleChangeSearch = props.handleChangeSearch,
       handleChangeBusinessType = props.handleChangeBusinessType,
       handleBusinessClick = props.handleBusinessClick,
-      onBusinessClick = props.onBusinessClick;
+      onBusinessClick = props.onBusinessClick,
+      handleUpdateBusinessList = props.handleUpdateBusinessList;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -158,6 +159,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       setHasHighRatedBusiness = _useState14[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
+  var _useState15 = (0, _react.useState)([]),
+      _useState16 = _slicedToArray(_useState15, 2),
+      favoriteIds = _useState16[0],
+      setFavoriteIds = _useState16[1];
+
   var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
   }));
@@ -245,11 +252,24 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   (0, _react.useEffect)(function () {
     if (preorderBusiness) setIsPreorder(true);
   }, [preorderBusiness]);
+  (0, _react.useEffect)(function () {
+    var _businessesList$busin2;
 
-  var OrdersSection = function OrdersSection(_ref) {
+    if (!(businessesList !== null && businessesList !== void 0 && (_businessesList$busin2 = businessesList.businesses) !== null && _businessesList$busin2 !== void 0 && _businessesList$busin2.length)) return;
+
+    var ids = _toConsumableArray(favoriteIds);
+
+    businessesList.businesses.forEach(function (business) {
+      if (business !== null && business !== void 0 && business.favorite) {
+        ids.push(business.id);
+      }
+    });
+    setFavoriteIds(_toConsumableArray(new Set(ids)));
+  }, [businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length]);
+
+  var OrdersSection = function OrdersSection(titleContent) {
     var _getCustomArray;
 
-    var titleContent = _ref.titleContent;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
       horizontal: true,
       isBusinessesPage: true,
@@ -325,7 +345,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleClickAddress: handleClickAddress,
     setHasHighRatedBusiness: setHasHighRatedBusiness,
     onBusinessClick: onBusinessClick,
-    isCustomerMode: isCustomerMode
+    isCustomerMode: isCustomerMode,
+    favoriteIds: favoriteIds,
+    setFavoriteIds: setFavoriteIds
   }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     images: props.images,
     businessTypes: props.businessTypes,
@@ -354,7 +376,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     businessList: businessesList.businesses,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location,
     setErrors: setMapErrors
-  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(OrdersSection, null), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && isCustomerMode && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin2 = businessesList.businesses) === null || _businessesList$busin2 === void 0 ? void 0 : _businessesList$busin2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(OrdersSection, null), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && isCustomerMode && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin4 = businessesList.businesses) === null || _businessesList$busin4 === void 0 ? void 0 : _businessesList$busin4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
@@ -365,7 +387,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     style: {
       height: '44px'
     }
-  }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.map(function (business) {
+  }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin5 = businessesList.businesses) === null || _businessesList$busin5 === void 0 ? void 0 : _businessesList$busin5.map(function (business) {
     var _orderState$options4, _business$reviews;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
@@ -386,7 +408,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       businessDeliveryPrice: business === null || business === void 0 ? void 0 : business.delivery_price,
       businessDeliveryTime: business === null || business === void 0 ? void 0 : business.delivery_time,
       businessPickupTime: business === null || business === void 0 ? void 0 : business.pickup_time,
-      businessDistance: business === null || business === void 0 ? void 0 : business.distance
+      businessDistance: business === null || business === void 0 ? void 0 : business.distance,
+      handleUpdateBusinessList: handleUpdateBusinessList,
+      favoriteIds: favoriteIds,
+      setFavoriteIds: setFavoriteIds
     });
   }), businessesList.loading && _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.nextPageItems) > 4 ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
     var _orderState$options5;

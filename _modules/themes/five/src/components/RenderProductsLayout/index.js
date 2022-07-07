@@ -102,7 +102,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       isCustomLayout = props.isCustomLayout,
       setSubcategoriesSelected = props.setSubcategoriesSelected,
       subcategoriesSelected = props.subcategoriesSelected,
-      isLazy = props.isLazy;
+      isLazy = props.isLazy,
+      handleUpdateProducts = props.handleUpdateProducts;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -204,7 +205,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     currentCart: currentCart,
     setSubcategoriesSelected: setSubcategoriesSelected,
     subcategoriesSelected: subcategoriesSelected,
-    onClickCategory: onClickCategory
+    onClickCategory: onClickCategory,
+    handleUpdateProducts: handleUpdateProducts
   }))), showCartOnProductList && /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, {
     maxHeight: window.innerHeight - 100
   }, (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
@@ -260,7 +262,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleClearSearch: handleChangeSearch,
     errorQuantityProducts: errorQuantityProducts,
     business: business,
-    currentCart: currentCart
+    currentCart: currentCart,
+    handleUpdateProducts: handleUpdateProducts
   })))))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && /*#__PURE__*/_react.default.createElement(BusinessBasicInformationComponent, {
     isSkeleton: true,
     handler: handler,

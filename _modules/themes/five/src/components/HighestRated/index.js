@@ -31,6 +31,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -38,8 +40,6 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -54,14 +54,16 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HighestRatedUI = function HighestRatedUI(props) {
-  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _businessesList$busin4, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       handleBusinessClick = props.handleBusinessClick,
       isCustomLayout = props.isCustomLayout,
       handleClickAddress = props.handleClickAddress,
       setHasHighRatedBusiness = props.setHasHighRatedBusiness,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      favoriteIds = props.favoriteIds,
+      setFavoriteIds = props.setFavoriteIds;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -81,6 +83,20 @@ var HighestRatedUI = function HighestRatedUI(props) {
       setHasHighRatedBusiness(!isBusinessWithReviews);
     }
   }, [businessesList === null || businessesList === void 0 ? void 0 : businessesList.businesses]);
+  (0, _react.useEffect)(function () {
+    var _businessesList$busin2;
+
+    if (!(businessesList !== null && businessesList !== void 0 && (_businessesList$busin2 = businessesList.businesses) !== null && _businessesList$busin2 !== void 0 && _businessesList$busin2.length)) return;
+
+    var ids = _toConsumableArray(favoriteIds);
+
+    businessesList.businesses.forEach(function (business) {
+      if (business !== null && business !== void 0 && business.favorite) {
+        ids.push(business.id);
+      }
+    });
+    setFavoriteIds(_toConsumableArray(new Set(ids)));
+  }, [businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -99,7 +115,7 @@ var HighestRatedUI = function HighestRatedUI(props) {
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: "highestRated"
-  }, !(businessesList !== null && businessesList !== void 0 && businessesList.loading) && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin2 = businessesList.businesses) === null || _businessesList$busin2 === void 0 ? void 0 : _businessesList$busin2.map(function (business) {
+  }, !(businessesList !== null && businessesList !== void 0 && businessesList.loading) && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin4 = businessesList.businesses) === null || _businessesList$busin4 === void 0 ? void 0 : _businessesList$busin4.map(function (business) {
     var _business$reviews2, _orderState$options;
 
     return (business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total) > 0 && /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
@@ -110,7 +126,9 @@ var HighestRatedUI = function HighestRatedUI(props) {
       handleCustomClick: handleBusinessClick,
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type,
       isCustomLayout: isCustomLayout,
-      isCustomerMode: isCustomerMode
+      isCustomerMode: isCustomerMode,
+      favoriteIds: favoriteIds,
+      setFavoriteIds: setFavoriteIds
     });
   }))), businessesList.loading && _toConsumableArray(Array(8).keys()).map(function (i) {
     var _orderState$options2;

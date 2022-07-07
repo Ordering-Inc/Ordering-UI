@@ -80,6 +80,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       setIsEmptyActive = props.setIsEmptyActive,
       setIsEmptyPreorder = props.setIsEmptyPreorder,
       isCustomerMode = props.isCustomerMode,
+      handleUpdateOrderList = props.handleUpdateOrderList,
       reorderState = props.reorderState,
       handleReorder = props.handleReorder;
 
@@ -341,6 +342,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder,
     activeOrders: activeOrders,
+    handleUpdateOrderList: handleUpdateOrderList,
     pastOrders: pastOrders,
     isCustomerMode: isCustomerMode
   }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {

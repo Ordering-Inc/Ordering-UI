@@ -132,6 +132,12 @@ var UserPopover = function UserPopover(props) {
     key: 'sessions',
     isActive: true
   }, {
+    name: 'favorite',
+    pathname: '/favorite',
+    displayName: 'favorite',
+    key: 'favorite',
+    isActive: true
+  }, {
     name: 'addresses',
     pathname: '/profile/addresses',
     displayName: 'places',

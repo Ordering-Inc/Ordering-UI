@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SingleProductCard = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
@@ -15,11 +17,23 @@ var _utils = require("../../../../../utils");
 
 var _useIntersectionObserver = require("../../../../../hooks/useIntersectionObserver");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles = require("./styles");
 
 var _styledComponents = require("styled-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -41,7 +55,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var SingleProductCard = function SingleProductCard(props) {
+var SingleProductCardUI = function SingleProductCardUI(props) {
   var _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _theme$images, _theme$images$dummies, _product$ribbon6;
 
   var product = props.product,
@@ -53,7 +67,8 @@ var SingleProductCard = function SingleProductCard(props) {
       onCustomClick = props.onCustomClick,
       customText = props.customText,
       customStyle = props.customStyle,
-      productAddedToCartLength = props.productAddedToCartLength;
+      productAddedToCartLength = props.productAddedToCartLength,
+      handleFavoriteProduct = props.handleFavoriteProduct;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -79,6 +94,7 @@ var SingleProductCard = function SingleProductCard(props) {
       orderState = _useOrder2[0];
 
   var theme = (0, _styledComponents.useTheme)();
+  var favoriteRef = (0, _react.useRef)(null);
   var editMode = typeof (product === null || product === void 0 ? void 0 : product.code) !== 'undefined';
   var removeToBalance = editMode ? product === null || product === void 0 ? void 0 : product.quantity : 0;
   var cartProducts = Object.values(orderState.carts).reduce(function (products, _cart) {
@@ -92,20 +108,38 @@ var SingleProductCard = function SingleProductCard(props) {
   var maxCartProductInventory = (product !== null && product !== void 0 && product.inventoried ? product === null || product === void 0 ? void 0 : product.quantity : undefined) - totalBalance;
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig;
   var maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory);
+
+  var handleClickProduct = function handleClickProduct(e) {
+    var _favoriteRef$current;
+
+    if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
+    !isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product) || useCustomFunctionality && onCustomClick && onCustomClick();
+  };
+
+  var handleChangeFavorite = function handleChangeFavorite() {
+    handleFavoriteProduct && handleFavoriteProduct(!(product !== null && product !== void 0 && product.favorite));
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {
     ref: $element,
     soldOut: isSoldOut || maxProductQuantity <= 0,
-    onClick: function onClick() {
-      return !isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product) || useCustomFunctionality && onCustomClick && onCustomClick();
-    },
+    onClick: handleClickProduct,
     isCartOnProductsList: isCartOnProductsList,
     style: useCustomFunctionality && customStyle,
     className: "product-card"
   }, isObserved && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0
-  }, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : ''), !(isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement("span", {
+  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return handleChangeFavorite();
+    },
+    ref: favoriteRef
+  }, product !== null && product !== void 0 && product.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 16,
+    height: 16
+  })), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : ''), !(isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement("span", {
     className: "off-price"
   }, product !== null && product !== void 0 && product.offer_price && product !== null && product !== void 0 && product.in_offer ? parsePrice(product === null || product === void 0 ? void 0 : product.offer_price) : '')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
@@ -130,6 +164,14 @@ var SingleProductCard = function SingleProductCard(props) {
       fontWeight: 500
     }
   }, customText)));
+};
+
+var SingleProductCard = function SingleProductCard(props) {
+  var singleProductCardProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: SingleProductCardUI
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.SingleProductCard, singleProductCardProps);
 };
 
 exports.SingleProductCard = SingleProductCard;

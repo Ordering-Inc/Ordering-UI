@@ -177,6 +177,12 @@ Object.defineProperty(exports, "FacebookLoginButton", {
     return _FacebookLogin.FacebookLoginButton;
   }
 });
+Object.defineProperty(exports, "Favorite", {
+  enumerable: true,
+  get: function get() {
+    return _Favorite.Favorite;
+  }
+});
 Object.defineProperty(exports, "Footer", {
   enumerable: true,
   get: function get() {
@@ -603,6 +609,8 @@ var _Checkout = require("./src/components/Checkout");
 var _DriverTips = require("./src/components/DriverTips");
 
 var _FacebookLogin = require("./src/components/FacebookLogin");
+
+var _Favorite = require("./src/components/Favorite");
 
 var _Footer = require("./src/components/Footer");
 
