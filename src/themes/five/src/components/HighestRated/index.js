@@ -20,7 +20,9 @@ const HighestRatedUI = (props) => {
     isCustomLayout,
     handleClickAddress,
     setHasHighRatedBusiness,
-    isCustomerMode
+    isCustomerMode,
+    favoriteIds,
+    setFavoriteIds
   } = props
 
   const [, t] = useLanguage()
@@ -33,6 +35,17 @@ const HighestRatedUI = (props) => {
       setHasHighRatedBusiness(!isBusinessWithReviews)
     }
   }, [businessesList?.businesses])
+
+  useEffect(() => {
+    if (!businessesList?.businesses?.length) return
+    const ids = [...favoriteIds]
+    businessesList.businesses.forEach(business => {
+      if (business?.favorite) {
+        ids.push(business.id)
+      }
+    })
+    setFavoriteIds([...new Set(ids)])
+  }, [businessesList?.businesses?.length])
 
   return (
     <>
@@ -75,6 +88,8 @@ const HighestRatedUI = (props) => {
                       orderType={orderState?.options?.type}
                       isCustomLayout={isCustomLayout}
                       isCustomerMode={isCustomerMode}
+                      favoriteIds={favoriteIds}
+                      setFavoriteIds={setFavoriteIds}
                     />
                   )
                 ))

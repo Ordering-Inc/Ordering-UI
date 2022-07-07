@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useConfig, useOrder, useUtils } from 'ordering-components'
+import { useLanguage, useConfig, useOrder, useUtils, SingleProductCard as SingleProductCardController } from 'ordering-components'
 import { shape } from '../../../../../utils'
 import { useIntersectionObserver } from '../../../../../hooks/useIntersectionObserver'
+import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 
 import {
   CardContainer,
@@ -12,11 +13,12 @@ import {
   SoldOut,
   PriceWrapper,
   QuantityContainer,
-  RibbonBox
+  RibbonBox,
+  TitleWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 
-export const SingleProductCard = (props) => {
+const SingleProductCardUI = (props) => {
   const {
     product,
     isSoldOut,
@@ -27,7 +29,8 @@ export const SingleProductCard = (props) => {
     onCustomClick,
     customText,
     customStyle,
-    productAddedToCartLength
+    productAddedToCartLength,
+    handleFavoriteProduct
   } = props
 
   const [, t] = useLanguage()
@@ -36,6 +39,7 @@ export const SingleProductCard = (props) => {
   const [{ parsePrice, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
   const theme = useTheme()
+  const favoriteRef = useRef(null)
 
   const editMode = typeof product?.code !== 'undefined'
 
@@ -53,11 +57,22 @@ export const SingleProductCard = (props) => {
 
   const maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory)
 
+  const handleClickProduct = (e) => {
+    if (favoriteRef?.current?.contains(e.target)) return
+
+    (!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product)) ||
+    (useCustomFunctionality && onCustomClick && onCustomClick())
+  }
+
+  const handleChangeFavorite = () => {
+    handleFavoriteProduct && handleFavoriteProduct(!product?.favorite)
+  }
+
   return (
     <CardContainer
       ref={$element}
       soldOut={isSoldOut || maxProductQuantity <= 0}
-      onClick={() => ((!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product)) || (useCustomFunctionality && onCustomClick && onCustomClick()))}
+      onClick={handleClickProduct}
       isCartOnProductsList={isCartOnProductsList}
       style={useCustomFunctionality && customStyle}
       className='product-card'
@@ -72,7 +87,14 @@ export const SingleProductCard = (props) => {
                 </QuantityContainer>
               )}
               <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
-                {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
+                <TitleWrapper>
+                  {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
+                  {!isSkeleton ? (
+                    <span onClick={() => handleChangeFavorite()} ref={favoriteRef}>
+                      {product?.favorite ? <Like /> : <DisLike />}
+                    </span>
+                  ) : (<Skeleton width={16} height={16} />)}
+                </TitleWrapper>
                 {!isSkeleton ? (
                   <PriceWrapper>
                     <span>{product?.price ? parsePrice(product?.price) : ''}</span>
@@ -115,4 +137,12 @@ export const SingleProductCard = (props) => {
       )}
     </CardContainer>
   )
+}
+
+export const SingleProductCard = (props) => {
+  const singleProductCardProps = {
+    ...props,
+    UIComponent: SingleProductCardUI
+  }
+  return <SingleProductCardController {...singleProductCardProps} />
 }

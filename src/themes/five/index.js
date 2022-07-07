@@ -25,6 +25,7 @@ import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
 import { DriverTips } from './src/components/DriverTips'
 import { FacebookLoginButton } from './src/components/FacebookLogin'
+import { Favorite } from './src/components/Favorite'
 import { Footer } from './src/components/Footer'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { GoogleLoginButton } from './src/components/GoogleLogin'
@@ -119,6 +120,7 @@ export {
   Checkout,
   DriverTips,
   FacebookLoginButton,
+  Favorite,
   Footer,
   ForgotPasswordForm,
   GoogleLoginButton,
