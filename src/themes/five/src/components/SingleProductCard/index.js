@@ -30,8 +30,7 @@ const SingleProductCardUI = (props) => {
     customText,
     customStyle,
     productAddedToCartLength,
-    addFavoriteProduct,
-    deleteFavoriteProduct
+    handleFavoriteProduct
   } = props
 
   const [, t] = useLanguage()
@@ -66,8 +65,7 @@ const SingleProductCardUI = (props) => {
   }
 
   const handleChangeFavorite = () => {
-    if (product?.favorite) deleteFavoriteProduct()
-    else addFavoriteProduct()
+    handleFavoriteProduct && handleFavoriteProduct(!product?.favorite)
   }
 
   return (

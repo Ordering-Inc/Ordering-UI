@@ -59,8 +59,7 @@ const BusinessControllerUI = (props) => {
     businessDeliveryTime,
     businessPickupTime,
     businessDistance,
-    deleteFavoriteBusiness,
-    addFavoriteBusiness
+    handleFavoriteBusiness
   } = props
   const [configState] = useConfig()
   const theme = useTheme()
@@ -85,8 +84,7 @@ const BusinessControllerUI = (props) => {
   }
 
   const handleChangeFavorite = () => {
-    if (business?.favorite) deleteFavoriteBusiness()
-    else addFavoriteBusiness()
+    handleFavoriteBusiness && handleFavoriteBusiness(!business?.favorite)
   }
 
   const hasInformationLength = (business?.available_drivers?.length + business?.busy_drivers?.length + business?.active_orders?.length) > 0

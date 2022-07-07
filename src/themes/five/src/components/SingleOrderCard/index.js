@@ -33,8 +33,7 @@ const SingleOrderCardUI = (props) => {
     onRedirectPage,
     pastOrders,
     isCustomerMode,
-    deleteFavoriteOrder,
-    addFavoriteOrder,
+    handleFavoriteOrder,
     isSkeleton
   } = props
 
@@ -54,8 +53,7 @@ const SingleOrderCardUI = (props) => {
   }
 
   const handleChangeFavorite = (order) => {
-    if (order?.favorite) deleteFavoriteOrder(order.id)
-    else addFavoriteOrder(order.id)
+    handleFavoriteOrder && handleFavoriteOrder(!order?.favorite)
   }
 
   const businessLogo = theme?.layouts?.orders?.components?.business_logo
