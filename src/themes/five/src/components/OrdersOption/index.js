@@ -341,7 +341,7 @@ export const OrdersOption = (props) => {
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 10,
+      pageSize: getAllOrders ? 30 : 10,
       controlType: 'infinity'
     }
   }

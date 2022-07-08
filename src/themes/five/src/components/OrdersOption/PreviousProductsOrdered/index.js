@@ -7,7 +7,6 @@ import {
 
 import { AutoScroll } from '../../AutoScroll'
 import { SingleProductCard } from '../../SingleProductCard'
-// import Skeleton from 'react-loading-skeleton'
 
 export const PreviousProductsOrdered = (props) => {
   const {
