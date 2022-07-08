@@ -66,7 +66,8 @@ const BusinessProductsListingUI = (props) => {
     multiRemoveProducts,
     setAlertState,
     alertState,
-    onCheckoutRedirect
+    onCheckoutRedirect,
+    handleUpdateProducts
   } = props
 
   const { business, loading, error } = businessState
@@ -255,6 +256,7 @@ const BusinessProductsListingUI = (props) => {
           setOpenBusinessInformation={setOpenBusinessInformation}
           handleCartOpen={(val) => setIsCartOpen(val)}
           setSubcategoriesSelected={setSubcategoriesSelected}
+          handleUpdateProducts={handleUpdateProducts}
         />
 
         {

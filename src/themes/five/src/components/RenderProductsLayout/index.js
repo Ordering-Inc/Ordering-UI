@@ -66,7 +66,8 @@ export const RenderProductsLayout = (props) => {
     isCustomLayout,
     setSubcategoriesSelected,
     subcategoriesSelected,
-    isLazy
+    isLazy,
+    handleUpdateProducts
   } = props
 
   const theme = useTheme()
@@ -188,6 +189,7 @@ export const RenderProductsLayout = (props) => {
                       setSubcategoriesSelected={setSubcategoriesSelected}
                       subcategoriesSelected={subcategoriesSelected}
                       onClickCategory={onClickCategory}
+                      handleUpdateProducts={handleUpdateProducts}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
@@ -270,6 +272,7 @@ export const RenderProductsLayout = (props) => {
                       errorQuantityProducts={errorQuantityProducts}
                       business={business}
                       currentCart={currentCart}
+                      handleUpdateProducts={handleUpdateProducts}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>

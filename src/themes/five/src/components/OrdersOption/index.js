@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { OrderList, useLanguage, useOrder } from 'ordering-components'
+import { useLanguage, useOrder, OrderList } from 'ordering-components'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
@@ -49,6 +49,7 @@ const OrdersOptionUI = (props) => {
     setIsEmptyActive,
     setIsEmptyPreorder,
     isCustomerMode,
+    handleUpdateOrderList,
     reorderState,
     handleReorder,
     isBusiness,
@@ -298,6 +299,7 @@ const OrdersOptionUI = (props) => {
             getOrderStatus={getOrderStatus}
             handleReorder={handleReorder}
             activeOrders={activeOrders}
+            handleUpdateOrderList={handleUpdateOrderList}
             pastOrders={pastOrders}
             isCustomerMode={isCustomerMode}
             isBusiness={isBusiness}
