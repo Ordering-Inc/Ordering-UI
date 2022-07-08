@@ -34,7 +34,9 @@ export const HorizontalOrdersLayout = (props) => {
     businessesIds,
     activeOrders,
     pastOrders,
-    isCustomerMode
+    isCustomerMode,
+    isProducts,
+    isBusiness
   } = props
 
   const orders = customArray || props.orders
@@ -64,6 +66,8 @@ export const HorizontalOrdersLayout = (props) => {
   const isHideDate = date?.hidden
   const isHideMap = map?.hidden
 
+  const notOrders = isProducts || isBusiness
+
   const Orders = () => {
     return (
       <>
@@ -73,7 +77,7 @@ export const HorizontalOrdersLayout = (props) => {
           </React.Fragment>))}
         {props.beforeComponents?.map((BeforeComponent, i) => (
           <BeforeComponent key={i} {...props} />))}
-        {orders.length > 0 && ordersToShow.map(order => (
+        {orders.length > 0 && !notOrders && ordersToShow.map(order => (
           <Card
             key={order.id || order.uuid}
             id='order-card'
@@ -168,7 +172,7 @@ export const HorizontalOrdersLayout = (props) => {
 
           </Card>
         ))}
-        {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && (
+        {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && !notOrders && (
           <Card
             flex
             nobg
