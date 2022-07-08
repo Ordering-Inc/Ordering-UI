@@ -105,6 +105,7 @@ const SignUpFormUI = (props) => {
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
     configs?.google_login_client_id?.value ||
     configs?.apple_login_client_id?.value
+  const hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled
 
   const handleSuccessFacebook = (user) => {
     login({
@@ -506,7 +507,7 @@ const SignUpFormUI = (props) => {
                 )}
               </BussinessAndDriverSignUp>
             )}
-          {hasSocialLogin && (
+          {hasSocialLogin && hasSocialEnabled && (
             <LoginDivider>
               <DividerLine />
               <p>{t('OR', 'or')}</p>
