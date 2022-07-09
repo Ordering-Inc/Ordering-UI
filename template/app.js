@@ -8,7 +8,8 @@ import {
 } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, Analytics, useConfig, FacebookPixel } from 'ordering-components'
 
-import { Header } from '../src/components/Header'
+// import { Header } from '../src/components/Header'
+import { Header } from '../src/themes/five/src/components/Header'
 import { Footer } from '../src/components/Footer'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -31,6 +32,7 @@ import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
 import { Help } from './pages/Help'
+import { MultiBusinessesCheckout } from './pages/MultiBusinessesCheckout'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -235,6 +237,17 @@ export const App = () => {
                   <Route path='/checkout/:cartUuid?'>
                     {auth
                       ? <CheckoutPage />
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
+                  </Route>
+                  <Route path='/multi-businesses-checkout'>
+                    {auth
+                      ? <MultiBusinessesCheckout />
                       : (
                         <Redirect to={{
                           pathname: '/login',

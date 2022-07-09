@@ -24,6 +24,7 @@ export const ListenPageChanges = ({ children }) => {
     order_detail: '/orders/:orderId',
     checkout: '/checkout/:cartUuid',
     checkout_list: '/checkout',
+    multi_businesses_checkout: '/multi-businesses-checkout',
     business: '/store/:store',
     business_slug: '/:store',
     forgot_password: '/password/forgot',
