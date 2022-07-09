@@ -118,8 +118,8 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "multi_businesses_checkout": {
-    "title": "Multi businesses checkout",
+  "group_checkout": {
+    "title": "Group checkout",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

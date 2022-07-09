@@ -128,14 +128,19 @@ export const UserDetailsContainer = styled.div`
   padding-bottom: 20px;
   border-bottom: 1px solid #E9ECEF;
 `
-export const CheckOutDivider = styled.div`
-  height: 8px;
-  width: calc(100% + 40px);
-  margin-left: -20px;
-  background: #F8F9FA;
+export const WrapperPlaceOrderButton = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 
-  @media(min-width: 769px) {
-    width: calc(100% + 100px);
-    margin-left: -40px;
+  button {
+    width: 100%;
+    padding: 5px 20px;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 `
