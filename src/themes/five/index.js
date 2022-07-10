@@ -43,6 +43,7 @@ import { Messages } from './src/components/Messages'
 import { MessagesListing } from './src/components/MessagesListing'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
+import { MultiCheckout } from './src/components/MultiCheckout'
 import { MyOrders } from './src/components/MyOrders'
 import { NotFoundSource } from './src/components/NotFoundSource'
 import { NotNetworkConnectivity } from './src/components/NotNetworkConnectivity'
@@ -137,6 +138,7 @@ export {
   MessagesListing,
   MomentContent,
   MomentControl,
+  MultiCheckout,
   MyOrders,
   Modal,
   NotFoundSource,

@@ -6,7 +6,7 @@ import {
   useConfig,
   useSession,
   useValidationFields,
-  GroupCheckout as GroupCheckoutController
+  MultiCheckout as MultiCheckoutController
 } from 'ordering-components'
 
 import parsePhoneNumber from 'libphonenumber-js'
@@ -16,7 +16,7 @@ import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
 import { UserDetails } from '../UserDetails'
 import { AddressDetails } from '../AddressDetails'
-import { GroupCartsPaymethodsAndWallets } from '../GroupCartsPaymethodsAndWallets'
+import { MultiCartsPaymethodsAndWallets } from '../MultiCartsPaymethodsAndWallets'
 
 import {
   Container,
@@ -41,7 +41,7 @@ const mapConfigs = {
   }
 }
 
-const GroupCheckoutUI = (props) => {
+const MultiCheckoutUI = (props) => {
   const {
     placingState,
     isCustomerMode,
@@ -172,7 +172,7 @@ const GroupCheckoutUI = (props) => {
 
           <PaymentMethodContainer>
             <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
-            <GroupCartsPaymethodsAndWallets
+            <MultiCartsPaymethodsAndWallets
               openCarts={openCarts}
               paymethodSelectedState={paymethodSelectedState}
               handleSelectPaymethod={handleSelectPaymethod}
@@ -235,10 +235,10 @@ const GroupCheckoutUI = (props) => {
   )
 }
 
-export const GroupCheckout = (props) => {
-  const groupCheckoutProps = {
+export const MultiCheckout = (props) => {
+  const multiCheckoutProps = {
     ...props,
-    UIComponent: GroupCheckoutUI
+    UIComponent: MultiCheckoutUI
   }
-  return <GroupCheckoutController {...groupCheckoutProps} />
+  return <MultiCheckoutController {...multiCheckoutProps} />
 }

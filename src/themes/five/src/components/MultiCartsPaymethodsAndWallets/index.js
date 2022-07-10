@@ -3,7 +3,7 @@ import {
   useLanguage,
   useConfig,
   useUtils,
-  GroupCartsPaymethodsAndWallets as GroupCartsPaymethodsAndWalletsController
+  MultiCartsPaymethodsAndWallets as MultiCartsPaymethodsAndWalletsController
 } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import BilStripe from '@meronex/icons/bi/BilStripe'
@@ -51,7 +51,7 @@ const CreditCard2 = () => {
   )
 }
 
-const GroupCartsPaymethodsAndWalletsUI = (props) => {
+const MultiCartsPaymethodsAndWalletsUI = (props) => {
   const {
     paymethodsAndWallets,
     walletsState,
@@ -138,10 +138,10 @@ const GroupCartsPaymethodsAndWalletsUI = (props) => {
   )
 }
 
-export const GroupCartsPaymethodsAndWallets = (props) => {
-  const groupCartsPaymethodsAndWalletsProps = {
+export const MultiCartsPaymethodsAndWallets = (props) => {
+  const multiCartsPaymethodsAndWalletsProps = {
     ...props,
-    UIComponent: GroupCartsPaymethodsAndWalletsUI
+    UIComponent: MultiCartsPaymethodsAndWalletsUI
   }
-  return <GroupCartsPaymethodsAndWalletsController {...groupCartsPaymethodsAndWalletsProps} />
+  return <MultiCartsPaymethodsAndWalletsController {...multiCartsPaymethodsAndWalletsProps} />
 }

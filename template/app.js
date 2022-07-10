@@ -32,7 +32,7 @@ import { Profile } from './pages/Profile'
 import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
 import { Help } from './pages/Help'
-import { GroupCheckout } from './pages/GroupCheckout'
+import { MultiCheckout } from './pages/MultiCheckout'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -245,9 +245,9 @@ export const App = () => {
                         />
                       )}
                   </Route>
-                  <Route path='/group-checkout'>
+                  <Route path='/multi-checkout'>
                     {auth
-                      ? <GroupCheckout />
+                      ? <MultiCheckout />
                       : (
                         <Redirect to={{
                           pathname: '/login',
