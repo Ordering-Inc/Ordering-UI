@@ -74,6 +74,7 @@ const CartUI = (props) => {
   const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
+  const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
@@ -108,9 +109,13 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+    if (checkoutMultiBusinessEnabled) {
+      events.emit('go_to_page', { page: 'multi_checkout' })
+    } else {
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+      onClickCheckout && onClickCheckout()
+    }
     events.emit('cart_popover_closed')
-    onClickCheckout && onClickCheckout()
   }
 
   const handleStoreRedirect = (slug) => {
