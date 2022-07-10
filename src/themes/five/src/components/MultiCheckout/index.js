@@ -10,6 +10,7 @@ import {
 } from 'ordering-components'
 
 import parsePhoneNumber from 'libphonenumber-js'
+import { NotFoundSource } from '../NotFoundSource'
 import { ArrowLeft } from 'react-bootstrap-icons'
 import { Button } from '../../styles/Buttons'
 import { Cart } from '../Cart'
@@ -141,97 +142,105 @@ const MultiCheckoutUI = (props) => {
   }, [placingState.error])
 
   return (
-    <Container>
-      <WrapperLeftContainer>
-        <WrapperLeftContent>
-          <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
-          <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
+    <>
+      {openCarts.length === 0 ? (
+        <NotFoundSource
+          content={t('CARTS_NOT_FOUND', 'You don’t have carts available')}
+        />
+      ) : (
+        <Container>
+          <WrapperLeftContainer>
+            <WrapperLeftContent>
+              <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
+              <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
 
-          <AddressDetails
-            isMultiCheckout
-            openCarts={openCarts}
-            apiKey={configs?.google_maps_api_key?.value}
-            mapConfigs={mapConfigs}
-            isCustomerMode={isCustomerMode}
-          />
-
-          <UserDetailsContainer>
-            <WrapperUserDetails>
-              <UserDetails
-                isUserDetailsEdit={isUserDetailsEdit}
-                useValidationFields
-                useDefualtSessionManager
-                useSessionUser={!isCustomerMode}
-                isCustomerMode={isCustomerMode}
-                userData={isCustomerMode && customerState.user}
-                userId={isCustomerMode && customerState?.user?.id}
-                isCheckout
-              />
-            </WrapperUserDetails>
-          </UserDetailsContainer>
-
-          <PaymentMethodContainer>
-            <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
-            <MultiCartsPaymethodsAndWallets
-              openCarts={openCarts}
-              paymethodSelectedState={paymethodSelectedState}
-              handleSelectPaymethod={handleSelectPaymethod}
-              handleSelectWallet={handleSelectWallet}
-            />
-          </PaymentMethodContainer>
-
-        </WrapperLeftContent>
-      </WrapperLeftContainer>
-      <WrapperRightContainer>
-        <CartContainer>
-          <CartHeader>
-            <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
-          </CartHeader>
-          {openCarts.map(cart => (
-            <React.Fragment key={cart.uuid}>
-              <Cart
-                isCartPending={cart?.status === 2}
-                cart={cart}
+              <AddressDetails
                 isMultiCheckout
-                isProducts={cart?.products?.length || 0}
+                openCarts={openCarts}
+                apiKey={configs?.google_maps_api_key?.value}
+                mapConfigs={mapConfigs}
+                isCustomerMode={isCustomerMode}
               />
-              <DriverTipDivider />
-            </React.Fragment>
-          ))}
-          {openCarts.length > 0 && (
-            <MultiCartPriceContainer>
-              <div>
-                <h4>{t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')}</h4>
-                <h4>{parsePrice(totalCartsPrice)}</h4>
-              </div>
-              <p>
-                {t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')}
-              </p>
-            </MultiCartPriceContainer>
-          )}
-        </CartContainer>
 
-        <WrapperPlaceOrderButton>
-          <Button
-            color='primary'
-            disabled={isDisablePlaceOrderButton || placingState.loading}
-            onClick={handlePlaceOrder}
-          >
-            {placingState.loading ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
-          </Button>
-        </WrapperPlaceOrderButton>
-      </WrapperRightContainer>
+              <UserDetailsContainer>
+                <WrapperUserDetails>
+                  <UserDetails
+                    isUserDetailsEdit={isUserDetailsEdit}
+                    useValidationFields
+                    useDefualtSessionManager
+                    useSessionUser={!isCustomerMode}
+                    isCustomerMode={isCustomerMode}
+                    userData={isCustomerMode && customerState.user}
+                    userId={isCustomerMode && customerState?.user?.id}
+                    isCheckout
+                  />
+                </WrapperUserDetails>
+              </UserDetailsContainer>
 
-      <Alert
-        title={t('CHECKOUT ', 'Checkout')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-    </Container>
+              <PaymentMethodContainer>
+                <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+                <MultiCartsPaymethodsAndWallets
+                  openCarts={openCarts}
+                  paymethodSelectedState={paymethodSelectedState}
+                  handleSelectPaymethod={handleSelectPaymethod}
+                  handleSelectWallet={handleSelectWallet}
+                />
+              </PaymentMethodContainer>
+
+            </WrapperLeftContent>
+          </WrapperLeftContainer>
+          <WrapperRightContainer>
+            <CartContainer>
+              <CartHeader>
+                <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
+              </CartHeader>
+              {openCarts.map(cart => (
+                <React.Fragment key={cart.uuid}>
+                  <Cart
+                    isCartPending={cart?.status === 2}
+                    cart={cart}
+                    isMultiCheckout
+                    isProducts={cart?.products?.length || 0}
+                  />
+                  <DriverTipDivider />
+                </React.Fragment>
+              ))}
+              {openCarts.length > 0 && (
+                <MultiCartPriceContainer>
+                  <div>
+                    <h4>{t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')}</h4>
+                    <h4>{parsePrice(totalCartsPrice)}</h4>
+                  </div>
+                  <p>
+                    {t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')}
+                  </p>
+                </MultiCartPriceContainer>
+              )}
+            </CartContainer>
+
+            <WrapperPlaceOrderButton>
+              <Button
+                color='primary'
+                disabled={isDisablePlaceOrderButton || placingState.loading}
+                onClick={handlePlaceOrder}
+              >
+                {placingState.loading ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
+              </Button>
+            </WrapperPlaceOrderButton>
+          </WrapperRightContainer>
+
+          <Alert
+            title={t('CHECKOUT ', 'Checkout')}
+            content={alertState.content}
+            acceptText={t('ACCEPT', 'Accept')}
+            open={alertState.open}
+            onClose={() => closeAlert()}
+            onAccept={() => closeAlert()}
+            closeOnBackdrop={false}
+          />
+        </Container>
+      )}
+    </>
   )
 }
 
