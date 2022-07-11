@@ -85,6 +85,8 @@ const SignUpFormUI = (props) => {
   const [, { login }] = useSession()
   const isFacebookLogin = configs?.facebook_login?.value === 'true'
   const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
+  const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
+  const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
@@ -103,6 +105,7 @@ const SignUpFormUI = (props) => {
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
     configs?.google_login_client_id?.value ||
     configs?.apple_login_client_id?.value
+  const hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled
 
   const handleSuccessFacebook = (user) => {
     login({
@@ -504,7 +507,7 @@ const SignUpFormUI = (props) => {
                 )}
               </BussinessAndDriverSignUp>
             )}
-          {hasSocialLogin && (
+          {hasSocialLogin && hasSocialEnabled && (
             <LoginDivider>
               <DividerLine />
               <p>{t('OR', 'or')}</p>
@@ -515,13 +518,13 @@ const SignUpFormUI = (props) => {
             <>
               {Object.keys(configs).length > 0 ? (
                 <SocialButtons isPopup={isPopup}>
-                  {isFacebookLogin && configs?.facebook_id?.value && (
+                  {isFacebookLogin && configs?.facebook_id?.value && facebookLoginEnabled && (
                     <FacebookLoginButton
                       appId={configs?.facebook_id?.value}
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
-                  {configs?.apple_login_client_id?.value && (
+                  {configs?.apple_login_client_id?.value && appleLoginEnabled && (
                     <AppleLogin
                       onSuccess={handleSuccessApple}
                       onFailure={(data) => setAlertState({
