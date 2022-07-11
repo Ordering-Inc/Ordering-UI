@@ -243,7 +243,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       onClick: function onClick() {
         return setOpenDescription(category);
       }
-    }, t('SEE_MORE', 'See more'))), (category === null || category === void 0 ? void 0 : (_category$subcategori3 = category.subcategories) === null || _category$subcategori3 === void 0 ? void 0 : _category$subcategori3.length) > 0 && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
+    }, t('VIEW_MORE', 'View more'))), (category === null || category === void 0 ? void 0 : (_category$subcategori3 = category.subcategories) === null || _category$subcategori3 === void 0 ? void 0 : _category$subcategori3.length) > 0 && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
       category: category
     })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product, i) {
       var _currentCart$products3;
