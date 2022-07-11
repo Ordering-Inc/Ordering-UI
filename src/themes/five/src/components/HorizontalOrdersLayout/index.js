@@ -17,7 +17,9 @@ export const HorizontalOrdersLayout = (props) => {
     businessesIds,
     activeOrders,
     pastOrders,
-    isCustomerMode
+    isCustomerMode,
+    isProducts,
+    isBusiness
   } = props
 
   const orders = customArray || props.orders
@@ -28,6 +30,8 @@ export const HorizontalOrdersLayout = (props) => {
     ? orders.filter(order => businessesIds?.includes(order?.business_id))
     : orders
 
+  const notOrders = isProducts || isBusiness
+
   const Orders = () => {
     return (
       <>
@@ -37,14 +41,14 @@ export const HorizontalOrdersLayout = (props) => {
           </React.Fragment>))}
         {props.beforeComponents?.map((BeforeComponent, i) => (
           <BeforeComponent key={i} {...props} />))}
-        {orders.length > 0 && ordersToShow.map(order => (
+        {orders.length > 0 && !notOrders && ordersToShow.map(order => (
           <SingleOrderCard
             key={order.id}
             {...props}
             order={order}
           />
         ))}
-        {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && (
+        {pagination?.totalPages && !notOrders && pagination?.currentPage < pagination?.totalPages && !notOrders && (
           <Card
             flex
             nobg
