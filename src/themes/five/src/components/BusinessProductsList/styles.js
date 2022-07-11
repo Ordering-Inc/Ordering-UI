@@ -99,6 +99,7 @@ export const HeaderWrapper = styled.div``
 export const DescriptionModalContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0 10px;
   img{
     border-radius: 7.6px;
     width: 200px;
