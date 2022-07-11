@@ -60,7 +60,7 @@ const SingleProductCardUI = (props) => {
   const handleClickProduct = (e) => {
     if (favoriteRef?.current?.contains(e.target)) return
 
-    (!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product)) ||
+    (!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product, product?.business)) ||
     (useCustomFunctionality && onCustomClick && onCustomClick())
   }
 

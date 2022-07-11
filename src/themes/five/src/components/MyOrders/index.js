@@ -17,7 +17,8 @@ import { Tab, Tabs } from '../../styles/Tabs'
 export const MyOrders = (props) => {
   const {
     hideOrders,
-    businessesSearchList
+    businessesSearchList,
+    onProductRedirect
   } = props
 
   const [, t] = useLanguage()
@@ -157,7 +158,7 @@ export const MyOrders = (props) => {
           <OrdersOption
             {...props}
             titleContent={t('PREVIOUSLY_ORDERED', 'Previously ordered')}
-            hideOrders={hideOrders}
+            hideOrders
             horizontal
             isBusiness={selectedOption === 'business'}
             isProducts={selectedOption === 'products'}
@@ -168,6 +169,7 @@ export const MyOrders = (props) => {
             setIsEmptyBusinesses={setIsEmptyBusinesses}
             businessOrderIds={businessOrderIds}
             setBusinessOrderIds={setBusinessOrderIds}
+            onProductRedirect={onProductRedirect}
           />
         )}
       </Container>
