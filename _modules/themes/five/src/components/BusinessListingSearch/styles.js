@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TagsContainer = exports.SortItem = exports.SortContainer = exports.SingleBusinessSearch = exports.ProgressContentWrapper = exports.ProgressBar = exports.ProductsList = exports.PriceFilterWrapper = exports.PriceFilterListWrapper = exports.NotFoundWrapper = exports.NoResult = exports.Metadata = exports.MaxItemContainer = exports.MaxItem = exports.MaxFilterContainer = exports.FiltersResultContainer = exports.FiltersContainer = exports.Filters = exports.BusinessesTitle = exports.BusinessProductsListWrapper = exports.BusinessProductsListContainer = exports.BusinessName = exports.BusinessLogo = exports.BusinessListingSearchContainer = exports.BusinessListWrapper = exports.BusinessList = exports.BusinessInfoItem = exports.BusinessInfo = exports.BusinessControllerSkeleton = exports.BrandListWrapper = exports.BrandItem = exports.BrandContainer = void 0;
+exports.TagsContainer = exports.SortItem = exports.SortContainer = exports.SingleBusinessSearch = exports.ProgressContentWrapper = exports.ProgressBar = exports.ProductsList = exports.PriceFilterWrapper = exports.PriceFilterListWrapper = exports.PreviouslyOrderedContainer = exports.NotFoundWrapper = exports.NoResult = exports.Metadata = exports.MaxItemContainer = exports.MaxItem = exports.MaxFilterContainer = exports.FiltersResultContainer = exports.FiltersContainer = exports.Filters = exports.BusinessesTitle = exports.BusinessProductsListWrapper = exports.BusinessProductsListContainer = exports.BusinessName = exports.BusinessLogo = exports.BusinessListingSearchContainer = exports.BusinessListWrapper = exports.BusinessList = exports.BusinessInfoItem = exports.BusinessInfo = exports.BusinessControllerSkeleton = exports.BrandListWrapper = exports.BrandItem = exports.BrandContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -197,3 +197,7 @@ var PriceFilterListWrapper = _styledComponents.default.div(_templateObject37 || 
 });
 
 exports.PriceFilterListWrapper = PriceFilterListWrapper;
+
+var PreviouslyOrderedContainer = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n\n"])));
+
+exports.PreviouslyOrderedContainer = PreviouslyOrderedContainer;

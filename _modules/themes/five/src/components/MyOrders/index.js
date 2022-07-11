@@ -23,6 +23,8 @@ var _reactRouterDom = require("react-router-dom");
 
 var _styles = require("./styles");
 
+var _Tabs = require("../../styles/Tabs");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -45,6 +47,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MyOrders = function MyOrders(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+
+  var hideOrders = props.hideOrders,
+      businessesSearchList = props.businessesSearchList;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -72,6 +77,21 @@ var MyOrders = function MyOrders(props) {
       isEmptyPreorder = _useState8[0],
       setIsEmptyPreorder = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(!hideOrders ? 'orders' : 'business'),
+      _useState10 = _slicedToArray(_useState9, 2),
+      selectedOption = _useState10[0],
+      setSelectedOption = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isEmptyBusinesses = _useState12[0],
+      setIsEmptyBusinesses = _useState12[1];
+
+  var _useState13 = (0, _react.useState)([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      businessOrderIds = _useState14[0],
+      setBusinessOrderIds = _useState14[1];
+
   var filterList = [{
     key: 'all',
     value: t('ALL', 'All')
@@ -85,6 +105,18 @@ var MyOrders = function MyOrders(props) {
     key: 'preorder',
     value: t('PREORDERS', 'Preorders')
   }];
+  var MyOrdersMenu = [{
+    key: 'orders',
+    value: t('ORDERS', 'Orders')
+  }, {
+    key: 'business',
+    value: t('BUSINESS', 'Business')
+  }, {
+    key: 'products',
+    value: t('PRODUCTS', 'Products')
+  }];
+  var notOrderOptions = ['business', 'products'];
+  var allEmpty = isEmptyActive && isEmptyActive && isEmptyPreorder || (isEmptyBusinesses || (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) === 0) && hideOrders;
 
   var handleChangeFilter = function handleChangeFilter(key) {
     if (selectItem === key) setSelectItem('all');else setSelectItem(key);
@@ -98,9 +130,26 @@ var MyOrders = function MyOrders(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
+  }), hideOrders && !allEmpty && /*#__PURE__*/_react.default.createElement("h2", null, t('PREVIOUSLY_ORDERED', 'Previously ordered')), !hideOrders && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "orders"
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, ('MY_ORDERS', 'My orders')), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    hideOrders: hideOrders
+  }, !hideOrders && /*#__PURE__*/_react.default.createElement("h1", null, ('MY_ORDERS', 'My orders')), !allEmpty && /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
+    className: "category-lists"
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+    variant: "primary"
+  }, MyOrdersMenu.filter(function (option) {
+    return !hideOrders || option.key !== 'orders';
+  }).map(function (option) {
+    return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+      key: option.key,
+      onClick: function onClick() {
+        return setSelectedOption(option.key);
+      },
+      active: selectedOption === option.key,
+      borderBottom: true
+    }, option === null || option === void 0 ? void 0 : option.value);
+  }))), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: i,
       color: selectItem === order.key ? 'primary' : 'secundary',
@@ -108,7 +157,7 @@ var MyOrders = function MyOrders(props) {
         return handleChangeFilter(order.key);
       }
     }, order.value, selectItem === order.key && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
-  })), isEmptyActive && isEmptyPast && isEmptyPreorder ? /*#__PURE__*/_react.default.createElement(_styles.NoOrdersWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), selectedOption === 'orders' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEmptyActive && isEmptyPast && isEmptyPreorder ? /*#__PURE__*/_react.default.createElement(_styles.NoOrdersWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return history.push('/');
@@ -128,7 +177,20 @@ var MyOrders = function MyOrders(props) {
     horizontal: true,
     setIsEmptyPast: setIsEmptyPast,
     selectItem: selectItem
-  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)))), notOrderOptions.includes(selectedOption) && /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
+    titleContent: t('PREVIOUSLY_ORDERED', 'Previously ordered'),
+    hideOrders: hideOrders,
+    horizontal: true,
+    isBusiness: selectedOption === 'business',
+    isProducts: selectedOption === 'products',
+    activeOrders: true,
+    pastOrders: true,
+    preOrders: true,
+    businessesSearchList: businessesSearchList,
+    setIsEmptyBusinesses: setIsEmptyBusinesses,
+    businessOrderIds: businessOrderIds,
+    setBusinessOrderIds: setBusinessOrderIds
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

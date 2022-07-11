@@ -45,7 +45,9 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       businessesIds = props.businessesIds,
       activeOrders = props.activeOrders,
       pastOrders = props.pastOrders,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      isProducts = props.isProducts,
+      isBusiness = props.isBusiness;
   var orders = customArray || props.orders;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -55,6 +57,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
   var ordersToShow = businessesIds ? orders.filter(function (order) {
     return businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id);
   }) : orders;
+  var notOrders = isProducts || isBusiness;
 
   var Orders = function Orders() {
     var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
@@ -67,13 +70,13 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
         key: i
       }, props));
-    }), orders.length > 0 && ordersToShow.map(function (order) {
+    }), orders.length > 0 && !notOrders && ordersToShow.map(function (order) {
       return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, _extends({
         key: order.id
       }, props, {
         order: order
       }));
-    }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.Card, {
+    }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && !notOrders && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && !notOrders && /*#__PURE__*/_react.default.createElement(_styles.Card, {
       flex: true,
       nobg: true,
       isBusinessesPage: isBusinessesPage,
