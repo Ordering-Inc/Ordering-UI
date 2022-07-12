@@ -8205,7 +8205,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#multi-business-checkout":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a80c34a661bc0f06c32c7d42183394eb9e57111a"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/38eec3c49d425c2ab65d66e58ad93dbc5903b1fa"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

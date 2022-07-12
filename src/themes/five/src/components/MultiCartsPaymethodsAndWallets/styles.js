@@ -95,3 +95,34 @@ export const WalletOptionContainer = styled.div`
     margin: 0 10px;
   }
 `
+export const PayCardSelected = styled.div`
+  padding: 30px 0px 0px;
+`
+export const CardItemContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: bold;
+
+  span {
+    display: flex;
+  }
+
+  .checks svg {
+    color: ${props => props.theme.colors.primary};
+    font-size: 22px;
+  }
+
+  .brand svg {
+    font-size: 26px;
+  }
+
+  > * {
+    margin-right: 10px
+    ${props => props.theme?.rtl && css`
+      margin-left: 10px;
+      margin-right: 0;
+    `}
+  }
+`

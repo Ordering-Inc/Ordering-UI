@@ -11,16 +11,23 @@ import FaCcStripe from '@meronex/icons/fa/FaCcStripe'
 import FaStripeS from '@meronex/icons/fa/FaStripeS'
 import GrStripe from '@meronex/icons/gr/GrStripe'
 import EnPaypal from '@meronex/icons/en/EnPaypal'
+import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import { Cash, CreditCard } from 'react-bootstrap-icons'
 import { Checkbox } from '../../../../../styles/Checkbox'
+import { PaymentOptionStripe } from '../PaymentOptionStripe'
+import { getIconCard } from '../../../../../utils'
 
 import {
   Container,
   PaymethodsListContainer,
   PayCard,
   WalletPaymentOptionContainer,
-  WalletOptionContainer
+  WalletOptionContainer,
+  PayCardSelected,
+  CardItemContent
 } from './styles'
+
+const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
 
 const getPayIcon = (method) => {
   switch (method) {
@@ -53,11 +60,14 @@ const CreditCard2 = () => {
 
 const MultiCartsPaymethodsAndWalletsUI = (props) => {
   const {
+    businessIds,
     paymethodsAndWallets,
     walletsState,
-    paymethodSelectedState,
+    businessPaymethods,
+    paymethodSelected,
     handleSelectPaymethod,
-    handleSelectWallet
+    handleSelectWallet,
+    handlePaymethodDataChange
   } = props
 
   const [, t] = useLanguage()
@@ -88,18 +98,45 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
             </PayCard>
           ))
         ) : (
-          paymethodsAndWallets.paymethods.map(paymethod => (
+          businessPaymethods.result.filter(paymethod => paymethodsAndWallets.paymethods.find(item => item.id === paymethod.paymethod_id)).map(paymethod => (
             <PayCard
               key={paymethod.id}
-              isActive={paymethodSelectedState?.paymethod_id === paymethod.id}
-              onClick={() => handleSelectPaymethod(paymethod.id)}
+              isActive={paymethodSelected?.paymethod_id === paymethod.paymethod_id}
+              onClick={() => handleSelectPaymethod(paymethod)}
             >
-              <div>{getPayIcon(paymethod.id)}</div>
-              <p>{t(paymethod.gateway.toUpperCase(), paymethod.name)}</p>
+              <div>{getPayIcon(paymethod.paymethod_id)}</div>
+              <p>{t(paymethod?.paymethod?.gateway.toUpperCase(), paymethod?.paymethod?.name)}</p>
             </PayCard>
           ))
         )}
       </PaymethodsListContainer>
+      {paymethodSelected?.paymethod?.gateway === 'stripe' && (
+        <PaymentOptionStripe
+          paymethod={paymethodSelected?.paymethod}
+          businessId={businessIds[0]}
+          businessIds={businessIds}
+          publicKey={paymethodSelected?.paymethod?.credentials?.publishable}
+          payType={paymethodSelected?.paymethod?.name}
+          onSelectCard={handlePaymethodDataChange}
+        />
+      )}
+
+      {stripeOptions.includes(paymethodSelected?.paymethod?.gateway) && paymethodSelected?.paymethod_data?.card && (
+        <PayCardSelected>
+          <CardItemContent>
+            <span className='checks'>
+              <IosRadioButtonOn />
+            </span>
+            <span className='brand'>
+              <img src={getIconCard(paymethodSelected?.paymethod_data?.card.card?.brand)} alt='' />
+            </span>
+            <span>
+              XXXX-XXXX-XXXX-{paymethodSelected?.paymethod_data?.card?.last4}
+            </span>
+          </CardItemContent>
+        </PayCardSelected>
+      )}
+
       <WalletPaymentOptionContainer>
         {(paymethodsAndWallets.loading || walletsState.loading) ? (
           <>

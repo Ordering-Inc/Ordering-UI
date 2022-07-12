@@ -49,9 +49,10 @@ const MultiCheckoutUI = (props) => {
     openCarts,
     totalCartsPrice,
     handleGroupPlaceOrder,
-    paymethodSelectedState,
+    paymethodSelected,
     handleSelectPaymethod,
-    handleSelectWallet
+    handleSelectWallet,
+    handlePaymethodDataChange
   } = props
 
   const [, t] = useLanguage()
@@ -64,7 +65,7 @@ const MultiCheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const isDisablePlaceOrderButton = !(paymethodSelectedState?.paymethod_id || paymethodSelectedState?.wallet_id)
+  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id)
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -172,9 +173,10 @@ const MultiCheckoutUI = (props) => {
                 <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
                 <MultiCartsPaymethodsAndWallets
                   openCarts={openCarts}
-                  paymethodSelectedState={paymethodSelectedState}
+                  paymethodSelected={paymethodSelected}
                   handleSelectPaymethod={handleSelectPaymethod}
                   handleSelectWallet={handleSelectWallet}
+                  handlePaymethodDataChange={handlePaymethodDataChange}
                 />
               </PaymentMethodContainer>
 
