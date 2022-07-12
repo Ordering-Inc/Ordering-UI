@@ -96,47 +96,47 @@ const PaymentOptionWalletUI = (props) => {
       {!walletsState.loading &&
         !walletsState.error &&
         walletsState.result?.length > 0 &&
-      (
-        <>
-          {walletsState.result?.map((wallet, idx) => wallet.valid && wallet.balance >= 0 && walletName[wallet.type]?.isActive && (
-            <Container
-              key={wallet.id}
-              isBottomBorder={idx === walletsState.result?.length - 1}
-            >
-              <SectionLeft>
-                <Checkbox
-                  name={`payment_option_${wallet.type}`}
-                  id={`custom-checkbox-${idx}`}
-                  disabled={(cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0}
-                  checked={checkedState[idx]}
-                  value={`payment_option_${wallet.type}`}
-                  onChange={() => handleOnChange(idx, wallet)}
-                />
-                <SectionLeftText>
-                  <label
-                    style={{
-                      color: (cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0 ? theme.colors.darkGray : 'black'
-                    }}
-                    htmlFor={`custom-checkbox-${idx}`}
-                  >
-                    {walletName[wallet.type]?.name}
-                  </label>
-                </SectionLeftText>
-              </SectionLeft>
-              <div>
-                {wallet.type === 'cash' && (
-                  <span>{parsePrice(wallet?.balance)}</span>
-                )}
-                {wallet.type === 'credit_point' && (
-                  <span>
-                    <span style={{ color: theme.colors.primary }}>{`${wallet?.balance} ${t('POINTS', 'Points')}`}</span> {wallet?.balance > 0 && `= ${parsePrice(wallet?.balance / wallet?.redemption_rate)}`}
-                  </span>
-                )}
-              </div>
-            </Container>
-          ))}
-        </>
-      )}
+        (
+          <>
+            {walletsState.result?.map((wallet, idx) => wallet.valid && wallet.balance >= 0 && walletName[wallet.type]?.isActive && (
+              <Container
+                key={wallet.id}
+                isBottomBorder={idx === walletsState.result?.length - 1}
+              >
+                <SectionLeft>
+                  <Checkbox
+                    name={`payment_option_${wallet.type}`}
+                    id={`custom-checkbox-${idx}`}
+                    disabled={(cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0}
+                    checked={checkedState[idx]}
+                    value={`payment_option_${wallet.type}`}
+                    onChange={() => handleOnChange(idx, wallet)}
+                  />
+                  <SectionLeftText>
+                    <label
+                      style={{
+                        color: (cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0 ? theme.colors.darkGray : 'black'
+                      }}
+                      htmlFor={`custom-checkbox-${idx}`}
+                    >
+                      {walletName[wallet.type]?.name}
+                    </label>
+                  </SectionLeftText>
+                </SectionLeft>
+                <div>
+                  {wallet.type === 'cash' && (
+                    <span>{parsePrice(wallet?.balance, { isTruncable: true })}</span>
+                  )}
+                  {wallet.type === 'credit_point' && (
+                    <span>
+                      <span style={{ color: theme.colors.primary }}>{`${wallet?.balance} ${t('POINTS', 'Points')}`}</span> {wallet?.balance > 0 && `= ${parsePrice(wallet?.balance / wallet?.redemption_rate, { isTruncable: true })}`}
+                    </span>
+                  )}
+                </div>
+              </Container>
+            ))}
+          </>
+        )}
 
       {walletsState?.loading && (
         <>
