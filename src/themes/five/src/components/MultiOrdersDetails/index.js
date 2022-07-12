@@ -23,7 +23,7 @@ const MultiOrdersDetailsUI = (props) => {
   const {
     customer,
     paymentEvents,
-    totalPrice
+    ordersSummary
   } = props
 
   const { loading, orders, error } = props.ordersList
@@ -124,11 +124,11 @@ const MultiOrdersDetailsUI = (props) => {
             <tbody>
               <tr>
                 <td>{t('', 'Total before tax')}:</td>
-                <td></td>
+                <td>{parsePrice(ordersSummary?.subtotal)}</td>
               </tr>
               <tr>
                 <td>{t('', 'Estimated tax to be collected')}:</td>
-                <td></td>
+                <td>{parsePrice(ordersSummary?.tax)}</td>
               </tr>
             </tbody>
           </table>
@@ -137,7 +137,7 @@ const MultiOrdersDetailsUI = (props) => {
             <tbody>
               <tr>
                 <td>{t('PAYMENT_TOTAL', 'Payment total')}:</td>
-                <td>{parsePrice(totalPrice)}</td>
+                <td>{parsePrice(ordersSummary?.total)}</td>
               </tr>
             </tbody>
           </table>
