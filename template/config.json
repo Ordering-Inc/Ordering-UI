@@ -1,8 +1,8 @@
 {
   "app_id": "ordering-react",
-  "project": "jorgev4",
+  "project": "luisv4",
   "api": {
-    "url": "https://apiv4-staging.ordering.co",
+    "url": "https://apiv4.ordering.co",
     "language": "en",
     "version": "v400"
   },
