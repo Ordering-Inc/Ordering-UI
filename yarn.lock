@@ -1730,9 +1730,9 @@
     "@stdlib/fs-read-file" "^0.0.x"
 
 "@stdlib/assert-has-tostringtag-support@^0.0.x":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@stdlib/assert-has-tostringtag-support/-/assert-has-tostringtag-support-0.0.8.tgz#882f582164e8dd1e891b14a6b22a63e0a369cd33"
-  integrity sha512-VN5xtmXbXLd+HalAIWEt/YivJkTmY9cFkCuJAXaSZi7pzfUAxAkEWsufSR7U7pHqIZm4rdqyw6AETPV9K7XW/w==
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@stdlib/assert-has-tostringtag-support/-/assert-has-tostringtag-support-0.0.9.tgz#1080ef0a4be576a72d19a819498719265456f170"
+  integrity sha512-UTsqdkrnQ7eufuH5BeyWOJL3ska3u5nvDWKqw3onNNZ2mvdgkfoFD7wHutVGzAA2rkTsSJAMBHVwWLsm5SbKgw==
   dependencies:
     "@stdlib/assert-has-symbol-support" "^0.0.x"
     "@stdlib/cli-ctor" "^0.0.x"
@@ -1869,9 +1869,9 @@
     "@stdlib/utils-native-class" "^0.0.x"
 
 "@stdlib/assert-is-regexp-string@^0.0.x":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@stdlib/assert-is-regexp-string/-/assert-is-regexp-string-0.0.8.tgz#681d29695e139b84bd38613d3728f3f721b6225b"
-  integrity sha512-vw3J2JX9WbeNloRpGwe81AlAnjUgIo/rjc8LWXeq88mT835VqH2/axxShZNe3bNiyrTd2smlS7gSG/Zfou7Wiw==
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@stdlib/assert-is-regexp-string/-/assert-is-regexp-string-0.0.9.tgz#424f77b4aaa46a19f4b60ba4b671893a2e5df066"
+  integrity sha512-FYRJJtH7XwXEf//X6UByUC0Eqd0ZYK5AC8or5g5m5efQrgr2lOaONHyDQ3Scj1A2D6QLIJKZc9XBM4uq5nOPXA==
   dependencies:
     "@stdlib/assert-is-string" "^0.0.x"
     "@stdlib/cli-ctor" "^0.0.x"
@@ -1890,9 +1890,9 @@
     "@stdlib/utils-native-class" "^0.0.x"
 
 "@stdlib/assert-is-string@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/assert-is-string/-/assert-is-string-0.0.7.tgz#596f8cc64a0ab6905ae0203bf7d8d62cc3799d3f"
-  integrity sha512-Pt0fc5px+zgHFqBbjBj7nFwylY7ezKKglNCflUuvRbim+v4wC7OGdisHhYLlusw+CfL95vzYZvhLOdrBYQz6aQ==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/assert-is-string/-/assert-is-string-0.0.8.tgz#b07e4a4cbd93b13d38fa5ebfaa281ccd6ae9e43f"
+  integrity sha512-Uk+bR4cglGBbY0q7O7HimEJiW/DWnO1tSzr4iAGMxYgf+VM2PMYgI5e0TLy9jOSOzWon3YS39lc63eR3a9KqeQ==
   dependencies:
     "@stdlib/assert-has-tostringtag-support" "^0.0.x"
     "@stdlib/utils-define-nonenumerable-read-only-property" "^0.0.x"
@@ -1934,13 +1934,14 @@
     "@stdlib/assert-has-node-buffer-support" "^0.0.x"
 
 "@stdlib/buffer-from-string@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/buffer-from-string/-/buffer-from-string-0.0.7.tgz#7e477cfb0649c96be6a35d909c437228bf121f02"
-  integrity sha512-mpV3Q0ilEkjeVe5tpBHObGbXFmunmFDp+V/+tKp8nJkK4IDq+DH9pqIiiEQtZUmpbZYIGb0f/bGQNaxcwpOKhQ==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/buffer-from-string/-/buffer-from-string-0.0.8.tgz#0901a6e66c278db84836e483a7278502e2a33994"
+  integrity sha512-Dws5ZbK2M9l4Bkn/ODHFm3lNZ8tWko+NYXqGS/UH/RIQv3PGp+1tXFUSvjwjDneM6ppjQVExzVedUH1ftABs9A==
   dependencies:
     "@stdlib/assert-is-function" "^0.0.x"
     "@stdlib/assert-is-string" "^0.0.x"
     "@stdlib/buffer-ctor" "^0.0.x"
+    "@stdlib/string-format" "^0.0.x"
 
 "@stdlib/cli-ctor@^0.0.x":
   version "0.0.3"
@@ -2305,21 +2306,40 @@
   resolved "https://registry.yarnpkg.com/@stdlib/streams-node-stdin/-/streams-node-stdin-0.0.7.tgz#65ff09a2140999702a1ad885e6505334d947428f"
   integrity sha512-gg4lgrjuoG3V/L29wNs32uADMCqepIcmoOFHJCTAhVe0GtHDLybUVnLljaPfdvmpPZmTvmusPQtIcscbyWvAyg==
 
+"@stdlib/string-base-format-interpolate@^0.0.x":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@stdlib/string-base-format-interpolate/-/string-base-format-interpolate-0.0.2.tgz#a282747cc5729223a76351a655c229b3e0e8a92f"
+  integrity sha512-6hu7QAwB7U0Pti06grQ0RPFQHGEhBlqhgUonthpnNRjNLA2ECCsMxtYJ7CpK0120FwVhSN533neFPXAFQOJqng==
+
+"@stdlib/string-base-format-tokenize@^0.0.x":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@stdlib/string-base-format-tokenize/-/string-base-format-tokenize-0.0.2.tgz#33145c655f63cee27437c9f3805d495c2451e531"
+  integrity sha512-KpQR1W8L2jBjfgPEN7FVcxhtukXi5njalqx/afEn097h91+h/r6P5KbXa3vK7MlbTO2aM9fCkn7mn8ofHy+cVg==
+
+"@stdlib/string-format@^0.0.x":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@stdlib/string-format/-/string-format-0.0.3.tgz#e916a7be14d83c83716f5d30b1b1af94c4e105b9"
+  integrity sha512-1jiElUQXlI/tTkgRuzJi9jUz/EjrO9kzS8VWHD3g7gdc3ZpxlA5G9JrIiPXGw/qmZTi0H1pXl6KmX+xWQEQJAg==
+  dependencies:
+    "@stdlib/string-base-format-interpolate" "^0.0.x"
+    "@stdlib/string-base-format-tokenize" "^0.0.x"
+
 "@stdlib/string-lowercase@^0.0.x":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@stdlib/string-lowercase/-/string-lowercase-0.0.8.tgz#016fac9ee5997d009f75d4943c085a8583a212b9"
-  integrity sha512-D69oroC+VcZw8qLTJ49PfdIn0Pj1lac1ngxcJLardkmoEOkKtSUSAHiYZSOu554qNi50McIcGi9JWax9fLIgCA==
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@stdlib/string-lowercase/-/string-lowercase-0.0.9.tgz#487361a10364bd0d9b5ee44f5cc654c7da79b66d"
+  integrity sha512-tXFFjbhIlDak4jbQyV1DhYiSTO8b1ozS2g/LELnsKUjIXECDKxGFyWYcz10KuyAWmFotHnCJdIm8/blm2CfDIA==
   dependencies:
     "@stdlib/assert-is-string" "^0.0.x"
     "@stdlib/cli-ctor" "^0.0.x"
     "@stdlib/fs-read-file" "^0.0.x"
     "@stdlib/process-read-stdin" "^0.0.x"
     "@stdlib/streams-node-stdin" "^0.0.x"
+    "@stdlib/string-format" "^0.0.x"
 
 "@stdlib/string-replace@^0.0.x":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@stdlib/string-replace/-/string-replace-0.0.10.tgz#7614652305b73213e4af27fa30bd944564da7ac0"
-  integrity sha512-/hH4p4As5AeOIpGsVb4oz6kBLYRikdU/Z1WML5bP6xBZTKL6WfYXPwCa+Ev5rh7NRFYgSG9oz/QDlEZDsvwl3Q==
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@stdlib/string-replace/-/string-replace-0.0.11.tgz#5e8790cdf4d9805ab78cc5798ab3d364dfbf5016"
+  integrity sha512-F0MY4f9mRE5MSKpAUfL4HLbJMCbG6iUTtHAWnNeAXIvUX1XYIw/eItkA58R9kNvnr1l5B08bavnjrgTJGIKFFQ==
   dependencies:
     "@stdlib/assert-is-function" "^0.0.x"
     "@stdlib/assert-is-regexp" "^0.0.x"
@@ -2330,6 +2350,7 @@
     "@stdlib/process-read-stdin" "^0.0.x"
     "@stdlib/regexp-eol" "^0.0.x"
     "@stdlib/streams-node-stdin" "^0.0.x"
+    "@stdlib/string-format" "^0.0.x"
     "@stdlib/utils-escape-regexp-string" "^0.0.x"
     "@stdlib/utils-regexp-from-string" "^0.0.x"
 
@@ -2378,11 +2399,12 @@
     "@stdlib/types" "^0.0.x"
 
 "@stdlib/utils-escape-regexp-string@^0.0.x":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@stdlib/utils-escape-regexp-string/-/utils-escape-regexp-string-0.0.8.tgz#987e973490b800b37c5bc269c9f4f1a6ea14b943"
-  integrity sha512-ydhVgKPnDtUhOQnA2JkkKjKKQMyTppvTRq9wx6aiWQ/Owg9KP6K94TaZ6K/tlObCk9sEk7QJmTjJm7QVMmqBlw==
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@stdlib/utils-escape-regexp-string/-/utils-escape-regexp-string-0.0.9.tgz#36f25d78b2899384ca6c97f4064a8b48edfedb6e"
+  integrity sha512-E+9+UDzf2mlMLgb+zYrrPy2FpzbXh189dzBJY6OG+XZqEJAXcjWs7DURO5oGffkG39EG5KXeaQwDXUavcMDCIw==
   dependencies:
     "@stdlib/assert-is-string" "^0.0.x"
+    "@stdlib/string-format" "^0.0.x"
 
 "@stdlib/utils-get-prototype-of@^0.0.x":
   version "0.0.7"
@@ -2424,17 +2446,18 @@
   integrity sha512-l+hPl7+CgLPxk/gcWOXRxX/lNyfqcFCqhzzV/ZMvFCYLY/wI9lcWO4xTQNMALY2rp+kiV+qiAiO9zcO+hewwUg==
 
 "@stdlib/utils-noop@^0.0.x":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@stdlib/utils-noop/-/utils-noop-0.0.10.tgz#2d1471a9621ef209d33e3dd0f95ee13bb3d1d5bd"
-  integrity sha512-o1MmWXjMTzfipmUkVe+C57OioVikoxQQfTFePCwYQnzsujJmDqQ/azbwG6kJ4a4fuMWgV9duVn8mntzrzB7W9A==
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@stdlib/utils-noop/-/utils-noop-0.0.12.tgz#b986a8c6707268f68675136ca209e712c278f500"
+  integrity sha512-ED9ooLxM9gbvnXvQNC68WDW7P/pZle2Cuid2DzLW9kUuRKOEY8xYq0p7ZAtQSZ0UdQjmnqTB7kT14RjCjw8hWw==
 
 "@stdlib/utils-regexp-from-string@^0.0.x":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@stdlib/utils-regexp-from-string/-/utils-regexp-from-string-0.0.8.tgz#cfdc1476c92c6f12c0634e22afd919ab820224a0"
-  integrity sha512-u9T/aY/OW7NX6DzyG91oRV4aDRYmlbKLxZ6GROCRtTas+0PYE5ABsnk5tyrSPrNrh3KdaJ/FEn4NbeGDJDjNCw==
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@stdlib/utils-regexp-from-string/-/utils-regexp-from-string-0.0.9.tgz#fe4745a9a000157b365971c513fd7d4b2cb9ad6e"
+  integrity sha512-3rN0Mcyiarl7V6dXRjFAUMacRwe0/sYX7ThKYurf0mZkMW9tjTP+ygak9xmL9AL0QQZtbrFFwWBrDO+38Vnavw==
   dependencies:
     "@stdlib/assert-is-string" "^0.0.x"
     "@stdlib/regexp-regexp" "^0.0.x"
+    "@stdlib/string-format" "^0.0.x"
 
 "@stdlib/utils-type-of@^0.0.x":
   version "0.0.8"
@@ -8205,7 +8228,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#multi-business-checkout":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/38eec3c49d425c2ab65d66e58ad93dbc5903b1fa"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/730336daa57c3688c81fdb7c15d83aeece5a0d4f"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

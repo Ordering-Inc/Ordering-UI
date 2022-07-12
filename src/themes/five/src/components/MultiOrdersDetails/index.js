@@ -123,11 +123,11 @@ const MultiOrdersDetailsUI = (props) => {
           <table>
             <tbody>
               <tr>
-                <td>{t('', 'Total before tax')}:</td>
+                <td>{t('TOTAL_BEFORE_TAX', 'Total before tax')}:</td>
                 <td>{parsePrice(ordersSummary?.subtotal)}</td>
               </tr>
               <tr>
-                <td>{t('', 'Estimated tax to be collected')}:</td>
+                <td>{t('ESTIMATED_TAX_TO_BE_COLLECTED', 'Estimated tax to be collected')}:</td>
                 <td>{parsePrice(ordersSummary?.tax)}</td>
               </tr>
             </tbody>
