@@ -68,7 +68,7 @@ var HeaderWrapper = _styledComponents.default.div(_templateObject10 || (_templat
 
 exports.HeaderWrapper = HeaderWrapper;
 
-var DescriptionModalContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  img{\n    border-radius: 7.6px;\n    width: 200px;\n    height: 200px;\n    min-width: 200px;\n    min-height: 200px;\n    margin-bottom: 20px;\n  }\n"])));
+var DescriptionModalContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 0 10px;\n  img{\n    border-radius: 7.6px;\n    width: 200px;\n    height: 200px;\n    min-width: 200px;\n    min-height: 200px;\n    margin-bottom: 20px;\n  }\n"])));
 
 exports.DescriptionModalContainer = DescriptionModalContainer;
 
