@@ -113,6 +113,8 @@ const LoginFormUI = (props) => {
   }
 
   const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
+  const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
+  const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
 
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
@@ -120,6 +122,7 @@ const LoginFormUI = (props) => {
     configs?.apple_login_client_id?.value ||
     (loginTab === 'cellphone' && (configs?.twilio_service_enabled?.value === 'true' ||
       configs?.twilio_service_enabled?.value === '1'))
+  const hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled
 
   const onSubmit = async () => {
     if (loginWithOtpState || loginTab === 'otp') {
@@ -599,7 +602,7 @@ const LoginFormUI = (props) => {
               {elementLinkToSignup}
             </RedirectLink>
           )}
-          {hasSocialLogin && (
+          {hasSocialLogin && hasSocialEnabled && (
             <LoginDivider isPopup={isPopup}>
               <DividerLine />
               <p>{t('OR', 'or')}</p>
@@ -612,6 +615,7 @@ const LoginFormUI = (props) => {
                 {(configs?.facebook_login?.value === 'true' ||
                   configs?.facebook_login?.value === '1') &&
                   configs?.facebook_id?.value &&
+                  facebookLoginEnabled &&
                   (
                     <FacebookLoginButton
                       appId={configs?.facebook_id?.value}
@@ -624,7 +628,7 @@ const LoginFormUI = (props) => {
                     handleSuccessGoogleLogin={handleSuccessGoogle}
                   />
                 )}
-                {configs?.apple_login_client_id?.value &&
+                {configs?.apple_login_client_id?.value && appleLoginEnabled &&
                   (
                     <AppleLogin
                       onSuccess={handleSuccessApple}

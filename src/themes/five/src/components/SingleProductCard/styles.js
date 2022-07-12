@@ -72,19 +72,9 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: calc(100% - 90px);
+  width: calc(100% - 90px);
   > * {
     margin: 3px;
-  }
-
-  h1 {
-    font-size: 14px;
-    font-weight: 500;
-    text-align: left;
-    color: #263238;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   p {
@@ -224,4 +214,32 @@ export const RibbonBox = styled.div`
   ${({ isCapsule }) => isCapsule && css`
     border-radius: 50px;
   `}
+`
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    color: ${props => props.theme.colors.headingColor};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0px;
+  }
+
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    svg {
+      color: ${props => props.theme.colors.danger500};
+      font-size: 16px;
+    }
+  }
 `

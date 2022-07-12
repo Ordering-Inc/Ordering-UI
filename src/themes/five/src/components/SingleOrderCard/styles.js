@@ -1,63 +1,7 @@
 import styled, { css } from 'styled-components'
 import React from 'react'
 
-export const Content = styled.div`
-  display: flex;
-  position: relative;
-  border-radius: 16px;
-  padding: 10px;
-  ${({ isCustomerMode }) => isCustomerMode ? css`
-    align-items: center;
-  ` : css`
-    align-items: flex-start;
-    flex: 1;
-  `}
-`
-
-export const Price = styled.div`
-  width: 35%;
-  
-  ${({ isCustomerMode }) => isCustomerMode ? css`
-  text-align: end;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  ` : css`
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: flex-end;
-  `}
-
-  h2 {
-    font-size: 16px;
-    margin-block-end: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
-    margin-block-start: 0.1em;
-    font-weight: normal;
-  }
-  p {
-    margin-block-end: 0.1em;
-    margin-block-start: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
-    color: #ff9300;
-    font-size: 0.8em;
-    overflow:hidden;
-    text-overflow: ellipsis;
-    margin-left: 5px;
-  }
-
-  p[name='view-cart']{
-    color: ${props => props.theme.colors.primary};
-    cursor: pointer;
-  }
-
-  @media (min-width: 480px) {
-    ${({ isCustomerMode }) => !isCustomerMode && css`
-      flex-direction: row;
-      align-items: center;
-    `}
-  }
-`
-
-export const Card = styled.div`
+export const Container = styled.div`
   cursor: pointer;
   margin: 10px;
   position: relative;
@@ -114,6 +58,62 @@ export const Card = styled.div`
   }
 `
 
+export const Content = styled.div`
+  display: flex;
+  position: relative;
+  border-radius: 16px;
+  padding: 10px;
+  ${({ isCustomerMode }) => isCustomerMode ? css`
+    align-items: center;
+  ` : css`
+    align-items: flex-start;
+    flex: 1;
+  `}
+`
+
+export const Price = styled.div`
+  width: 35%;
+  
+  ${({ isCustomerMode }) => isCustomerMode ? css`
+  text-align: end;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  ` : css`
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+  `}
+
+  h2 {
+    font-size: 16px;
+    margin-block-end: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
+    margin-block-start: 0.1em;
+    font-weight: normal;
+  }
+  p {
+    margin-block-end: 0.1em;
+    margin-block-start: ${({ isBusinessesPage }) => isBusinessesPage ? '0.1em' : '1em'};
+    color: #ff9300;
+    font-size: 0.8em;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    margin-left: 5px;
+  }
+
+  p[name='view-cart']{
+    color: ${props => props.theme.colors.primary};
+    cursor: pointer;
+  }
+
+  @media (min-width: 480px) {
+    ${({ isCustomerMode }) => !isCustomerMode && css`
+      flex-direction: row;
+      align-items: center;
+    `}
+  }
+`
+
 const BusinessLogoWrapperStyled = styled.div`
   display: flex;
   width: 55px;
@@ -160,7 +160,6 @@ export const BusinessLogoWrapper = (props) => {
     </BusinessLogoWrapperStyled>
   )
 }
-
 export const ButtonWrapper = styled.div`
   position: absolute;
   right: 0px;
@@ -229,6 +228,7 @@ export const Map = styled.div`
 
 export const FavoriteWrapper = styled.div`
   position: absolute;
+  cursor: pointer;
   display: flex;
   z-index: 10;
   align-items: center;

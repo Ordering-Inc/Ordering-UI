@@ -315,3 +315,58 @@ export const NoOrdersWrapper = styled.div`
     height: 44px;
   }
 `
+
+export const BusinessListWrapper = styled.div`
+  overflow: auto hidden;
+  width: 100%;
+`
+
+export const BusinessList = styled.div`
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  ${({ noResults }) => noResults && css`
+    justify-content: center;
+  `}
+  @media (min-width: 480px){
+    flex-direction: row;
+  }
+  #searchlist {
+    > div {
+      width: calc(100vw - 40px);
+      min-width: calc(100vw - 40px);
+
+      @media (min-width: 681px) {
+        width: calc(50vw - 40px);
+        min-width: calc(50vw - 40px);
+      }
+      @media (min-width: 993px) {
+        width: calc(33vw - 40px);
+        min-width: calc(33vw - 40px);
+      }
+      @media (min-width: 1200px) {
+        width: calc(25vw - 40px);
+        min-width: calc(25vw - 40px);
+      }
+    }
+  }
+`
+
+export const BusinessControllerSkeleton = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  > div {
+    flex: 1;
+  }
+  @media (min-width: 681px){
+    flex-direction: row;
+  }
+`
+
+export const ProductsListing = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 45px;
+`

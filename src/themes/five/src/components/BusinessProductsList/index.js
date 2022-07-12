@@ -41,7 +41,8 @@ const BusinessProductsListUI = (props) => {
     currentCart,
     setSubcategoriesSelected,
     subcategoriesSelected,
-    onClickCategory
+    onClickCategory,
+    handleUpdateProducts
   } = props
 
   const [, t] = useLanguage()
@@ -131,6 +132,7 @@ const BusinessProductsListUI = (props) => {
                       businessId={businessId}
                       onProductClick={onProductClick}
                       isCartOnProductsList={isCartOnProductsList}
+                      handleUpdateProducts={handleUpdateProducts}
                       productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                     />
                   ))
@@ -155,6 +157,7 @@ const BusinessProductsListUI = (props) => {
                           businessId={businessId}
                           onProductClick={onProductClick}
                           isCartOnProductsList={isCartOnProductsList}
+                          handleUpdateProducts={handleUpdateProducts}
                           productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                         />
                       ))}
@@ -207,7 +210,7 @@ const BusinessProductsListUI = (props) => {
                               {shortCategoryDescription}
                             </p>
                             {category?.description?.length > 200 && (
-                              <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
+                              <span onClick={() => setOpenDescription(category)}>{t('VIEW_MORE', 'View more')}</span>
                             )}
                           </CategoryDescription>
                         )}
@@ -225,6 +228,7 @@ const BusinessProductsListUI = (props) => {
                               product={product}
                               onProductClick={onProductClick}
                               isCartOnProductsList={isCartOnProductsList}
+                              handleUpdateProducts={handleUpdateProducts}
                               productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                             />
                           ))
