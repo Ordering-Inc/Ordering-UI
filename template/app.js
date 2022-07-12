@@ -33,6 +33,7 @@ import { ResetPassword } from './pages/ResetPassword'
 import { SignUp } from './pages/SignUp'
 import { Help } from './pages/Help'
 import { MultiCheckout } from './pages/MultiCheckout'
+import { MultiOrdersDetails } from './pages/MultiOrdersDetails'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -248,6 +249,17 @@ export const App = () => {
                   <Route path='/multi-checkout'>
                     {auth
                       ? <MultiCheckout />
+                      : (
+                        <Redirect to={{
+                          pathname: '/login',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
+                  </Route>
+                  <Route path='/multi-orders'>
+                    {auth
+                      ? <MultiOrdersDetails />
                       : (
                         <Redirect to={{
                           pathname: '/login',

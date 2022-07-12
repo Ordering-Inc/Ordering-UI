@@ -113,9 +113,9 @@ const CartUI = (props) => {
       events.emit('go_to_page', { page: 'multi_checkout' })
     } else {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
-      onClickCheckout && onClickCheckout()
     }
     events.emit('cart_popover_closed')
+    onClickCheckout && onClickCheckout()
   }
 
   const handleStoreRedirect = (slug) => {

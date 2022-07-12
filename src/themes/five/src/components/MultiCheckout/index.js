@@ -44,7 +44,7 @@ const mapConfigs = {
 
 const MultiCheckoutUI = (props) => {
   const {
-    placingState,
+    placing,
     isCustomerMode,
     openCarts,
     totalCartsPrice,
@@ -132,15 +132,6 @@ const MultiCheckoutUI = (props) => {
     }
   }, [validationFields, user, customerState])
 
-  useEffect(() => {
-    if (placingState.error) {
-      setAlertState({
-        open: true,
-        content: placingState.error
-      })
-    }
-  }, [placingState.error])
-
   return (
     <>
       {openCarts.length === 0 ? (
@@ -221,10 +212,10 @@ const MultiCheckoutUI = (props) => {
             <WrapperPlaceOrderButton>
               <Button
                 color='primary'
-                disabled={isDisablePlaceOrderButton || placingState.loading}
+                disabled={isDisablePlaceOrderButton || placing}
                 onClick={handlePlaceOrder}
               >
-                {placingState.loading ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
+                {placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
               </Button>
             </WrapperPlaceOrderButton>
           </WrapperRightContainer>
