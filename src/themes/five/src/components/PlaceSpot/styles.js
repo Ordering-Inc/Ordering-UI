@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
 
 export const PlaceSpotContainer = styled.div`
-  min-height: 220px;
+  min-height: 80px;
   position: relative;
   #select-input, #list {
     width: 100%;
     color: #333 !important;
-    background-color: #F8F9FA !important;
+    background-color: #F8F9FA;
     border-radius: 7.6px;
     border: 0px;
   }
@@ -35,7 +35,6 @@ export const PlaceSpotContainer = styled.div`
 `
 
 export const PlaceGroupContainer = styled.div`
-  margin-bottom: 40px;
   margin-top: 20px;
 `
 
@@ -52,4 +51,27 @@ export const ButtonWrapper = styled.div`
   button{
     width: 100%;
   }
+`
+
+export const WrapperInput = styled.div`
+  input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  button {
+    margin-top: 16px;
+  }
+`
+
+export const WrapperOption = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const WrapperOptionList = styled.div`
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
 `

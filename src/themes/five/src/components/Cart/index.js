@@ -41,6 +41,7 @@ const CartUI = (props) => {
     removeProduct,
     onClickCheckout,
     isCheckout,
+    isMultiCheckout,
     isCartPending,
     isCartPopover,
     isForceOpenCart,
@@ -73,6 +74,7 @@ const CartUI = (props) => {
   const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
+  const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
@@ -107,7 +109,11 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+    if (checkoutMultiBusinessEnabled) {
+      events.emit('go_to_page', { page: 'multi_checkout' })
+    } else {
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+    }
     events.emit('cart_popover_closed')
     onClickCheckout && onClickCheckout()
   }
@@ -219,6 +225,7 @@ const CartUI = (props) => {
             checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
             setPreorderBusiness={setPreorderBusiness}
             handleChangeStore={handleChangeStore}
+            isMultiCheckout={isMultiCheckout}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
