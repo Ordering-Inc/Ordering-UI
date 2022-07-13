@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.PlaceSpotContainer = exports.PlaceGroupContainer = exports.ButtonWrapper = void 0;
+exports.WrapperOptionList = exports.WrapperOption = exports.WrapperInput = exports.Title = exports.PlaceSpotContainer = exports.PlaceGroupContainer = exports.ButtonWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -35,3 +35,15 @@ exports.Title = Title;
 var ButtonWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n\n  button{\n    width: 100%;\n  }\n"])));
 
 exports.ButtonWrapper = ButtonWrapper;
+
+var WrapperInput = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  input {\n    width: 100%;\n    box-sizing: border-box;\n  }\n\n  button {\n    margin-top: 16px;\n  }\n"])));
+
+exports.WrapperInput = WrapperInput;
+
+var WrapperOption = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
+
+exports.WrapperOption = WrapperOption;
+
+var WrapperOptionList = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display:grid;\n  grid-template-columns: 1fr 1fr;\n  grid-column-gap: 20px;\n  grid-row-gap: 20px;\n"])));
+
+exports.WrapperOptionList = WrapperOptionList;
