@@ -17,14 +17,14 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var PlaceSpotContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: 220px;\n  position: relative;\n  #select-input, #list {\n    width: 100%;\n    color: #333 !important;\n    background-color: #F8F9FA !important;\n    border-radius: 7.6px;\n    border: 0px;\n  }\n  #item {\n    background-color: #F8F9FA;\n    font-size: 14px;\n  }\n  #item:hover {\n    background-color: #ccc;\n  }\n  .title {\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n  img{\n    ", "\n  }\n  #not-found-source {\n    h1{\n      font-size: 16px;\n    }\n  }\n"])), function (_ref) {
+var PlaceSpotContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: 80px;\n  position: relative;\n  #select-input, #list {\n    width: 100%;\n    color: #333 !important;\n    background-color: #F8F9FA;\n    border-radius: 7.6px;\n    border: 0px;\n  }\n  #item {\n    background-color: #F8F9FA;\n    font-size: 14px;\n  }\n  #item:hover {\n    background-color: #ccc;\n  }\n  .title {\n    margin-top: 10px;\n    margin-bottom: 10px;\n  }\n  img{\n    ", "\n  }\n  #not-found-source {\n    h1{\n      font-size: 16px;\n    }\n  }\n"])), function (_ref) {
   var isCheckout = _ref.isCheckout;
   return isCheckout && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      width: 170px;\n      height: 150px;\n    "])));
 });
 
 exports.PlaceSpotContainer = PlaceSpotContainer;
 
-var PlaceGroupContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-bottom: 40px;\n  margin-top: 20px;\n"])));
+var PlaceGroupContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n"])));
 
 exports.PlaceGroupContainer = PlaceGroupContainer;
 

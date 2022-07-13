@@ -9,17 +9,19 @@ exports.PlaceSpot = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Select = require("../../styles/Select");
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _orderingComponents = require("ordering-components");
 
 var _styles = require("./styles");
 
-var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
-var _NotFoundSource = require("../NotFoundSource");
+var _Confirm = require("../Confirm");
 
 var _Buttons = require("../../styles/Buttons");
+
+var _Inputs = require("../../styles/Inputs");
+
+var _Select = require("../../styles/Select");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46,14 +48,23 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PlaceSpotUI = function PlaceSpotUI(props) {
-  var _orderState$options, _placesState$placeGro3, _placesState$places4, _placesState$places5;
+  var _orderState$options, _orderState$options2, _orderState$options3, _orderState$options4, _placesState$placeGro3, _orderState$options5, _placesState$places4, _placesState$places4$, _getPlacesGroups, _getPlacesGroups2, _placesState$places5, _placesState$places6;
 
   var cart = props.cart,
+      orderTypes = props.orderTypes,
       placesState = props.placesState,
-      handleChangePlace = props.handleChangePlace,
-      onClose = props.onClose,
+      spotNumber = props.spotNumber,
+      spotState = props.spotState,
       isCheckout = props.isCheckout,
+      vehicle = props.vehicle,
+      isInputMode = props.isInputMode,
+      onClose = props.onClose,
+      setSpotNumber = props.setSpotNumber,
+      setVehicle = props.setVehicle,
+      setSpotState = props.setSpotState,
+      handleChangeSpot = props.handleChangeSpot,
       setHasBusinessPlaces = props.setHasBusinessPlaces;
+  var el = (0, _react.useRef)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -68,7 +79,101 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
       placeGroupSelected = _useState2[0],
       setPlaceGroupSelected = _useState2[1];
 
-  var selectYourSpotString = ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 3 ? t('SELECT_YOUR_TABLE', 'Select your table') : t('SELECT_YOUR_SPOT', 'Select your spot');
+  var _useState3 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
+
+  var selectYourSpotString = (placeGroupSelected === null || placeGroupSelected === void 0 ? void 0 : placeGroupSelected.name) === 'Tables' ? t('SELECT_YOUR_TABLE', 'Select your table') : t('SELECT_YOUR_SPOT', 'Select your spot');
+  var vehicleInputAllowed = [4, 5];
+  var isEatin = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 3;
+  var placeholderText = isEatin ? t('EATIN_SPOT_NUMBER', 'Table number') : (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 5 ? t('DRIVE_THRU_SPOT_NUMBER', 'Drive thru lane') : t('CURBSIDE_SPOT_NUMBER', 'Spot number');
+  var vehicleTypeList = [{
+    key: 'car',
+    text: t('VEHICLE_TYPE_CAR', 'Car')
+  }, {
+    key: 'truck',
+    text: t('VEHICLE_TYPE_TRUCK', 'Truck')
+  }, {
+    key: 'suv',
+    text: t('VEHICLE_TYPE_SUV', 'SUV')
+  }, {
+    key: 'van',
+    text: t('VEHICLE_TYPE_VAN', 'Van')
+  }, {
+    key: 'motorcycle',
+    text: t('VEHICLE_TYPE_MOTORCYCLE', 'Motorcycle')
+  }, {
+    key: 'bike',
+    text: t('VEHICLE_TYPE_BIKE', 'Bike')
+  }];
+  var vehicleInputList = [{
+    key: 'model',
+    text: t('VEHICLE_MODEL', 'Model')
+  }, {
+    key: 'car_registration',
+    text: t('VEHICLE_CAR_REGISTRATION', 'Car registration')
+  }, {
+    key: 'color',
+    text: t('VEHICLE_COLOR', 'Color')
+  }];
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+    setSpotState(_objectSpread(_objectSpread({}, spotState), {}, {
+      error: null
+    }));
+  };
+
+  var getVehicleTypeList = function getVehicleTypeList() {
+    vehicleTypeList.unshift({
+      key: null,
+      text: t('SELECT_AN_OPTION', 'Select an option')
+    });
+    return vehicleTypeList.map(function (type) {
+      return {
+        value: type === null || type === void 0 ? void 0 : type.key,
+        content: type === null || type === void 0 ? void 0 : type.text,
+        showOnSelected: type === null || type === void 0 ? void 0 : type.text
+      };
+    });
+  };
+
+  var onChangeSpotNumber = function onChangeSpotNumber(e) {
+    var _e$target;
+
+    if (/^[\d]*$/.test(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value)) {
+      var _e$target2;
+
+      var _spotNumber = parseFloat(e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value);
+
+      _spotNumber = isNaN(_spotNumber) ? null : _spotNumber;
+      setSpotNumber(_spotNumber);
+    }
+  };
+
+  var onChangeSpot = function onChangeSpot() {
+    if (orderState.loading) return;
+    var isVehicle = Object.values(vehicle).every(function (e) {
+      return e;
+    });
+    var bodyToSend = {};
+    spotNumber && (bodyToSend.spot_number = spotNumber);
+    isVehicle && (bodyToSend.vehicle = vehicle);
+
+    if (Object.keys(bodyToSend).length) {
+      handleChangeSpot({
+        bodyToSend: bodyToSend,
+        isCheckout: !!isCheckout
+      });
+    }
+  };
 
   var getPlacesGroups = function getPlacesGroups() {
     var _placesState$placeGro;
@@ -127,12 +232,74 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
       }
     }
   }, [placesState]);
+  (0, _react.useEffect)(function () {
+    el.current && (el.current.onkeyup = onChangeSpotNumber);
+  }, []);
+  (0, _react.useEffect)(function () {
+    el.current && (el.current.value = spotNumber !== null && spotNumber !== void 0 ? spotNumber : '');
+  }, [spotNumber]);
+  (0, _react.useEffect)(function () {
+    if (spotState !== null && spotState !== void 0 && spotState.error) {}
+  }, [spotState]);
+  (0, _react.useEffect)(function () {
+    var _spotState$error;
+
+    if ((spotState === null || spotState === void 0 ? void 0 : (_spotState$error = spotState.error) === null || _spotState$error === void 0 ? void 0 : _spotState$error.length) > 0) {
+      setAlertState({
+        open: true,
+        content: spotState === null || spotState === void 0 ? void 0 : spotState.error
+      });
+    }
+  }, [spotState === null || spotState === void 0 ? void 0 : spotState.error]);
   return /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotContainer, {
-    isCheckout: isCheckout
-  }, placesState.error && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_FETCHING_PLACES', 'Error fetching places'),
-    id: "not-found-source"
-  }), (placesState === null || placesState === void 0 ? void 0 : placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    isCheckout: isCheckout,
+    style: props.containerStyle
+  }, isInputMode ? /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, orderTypes[orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type]), vehicleInputAllowed.includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) && /*#__PURE__*/_react.default.createElement(_styles.WrapperOptionList, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperOption, null, /*#__PURE__*/_react.default.createElement("p", null, t('VEHICLE_TYPE', 'Vehicle type')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    isHomeStyle: props.isHomeStyle,
+    options: getVehicleTypeList(),
+    defaultValue: (vehicle === null || vehicle === void 0 ? void 0 : vehicle.type) || null,
+    onChange: function onChange(type) {
+      return setVehicle(_objectSpread(_objectSpread({}, vehicle), {}, {
+        type: type !== null && type !== void 0 ? type : ''
+      }));
+    },
+    selectInputStyle: {
+      paddingTop: 3.5,
+      paddingBottom: 3.5
+    }
+  })), vehicleInputList.map(function (input) {
+    return /*#__PURE__*/_react.default.createElement(_styles.WrapperOption, {
+      key: input.key
+    }, /*#__PURE__*/_react.default.createElement("p", null, input.text), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+      type: "text",
+      placeholder: input.text,
+      defaultValue: vehicle[input.key],
+      onChange: function onChange(val) {
+        var _val$target;
+
+        return setVehicle(_objectSpread(_objectSpread({}, vehicle), {}, _defineProperty({}, input.key, val === null || val === void 0 ? void 0 : (_val$target = val.target) === null || _val$target === void 0 ? void 0 : _val$target.value)));
+      }
+    }));
+  })), /*#__PURE__*/_react.default.createElement("p", null, placeholderText), /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    ref: el,
+    name: "".concat(isEatin ? 'table' : 'spot', "_number"),
+    type: "text",
+    placeholder: placeholderText,
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[\d]*$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    outline: true,
+    disabled: !spotNumber && !Object.values(vehicle).every(function (e) {
+      return e;
+    }),
+    onClick: function onClick() {
+      return onChangeSpot();
+    }
+  }, t('UPDATE_SPOT_NUMBER', 'Update')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (placesState === null || placesState === void 0 ? void 0 : placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
     height: 25,
     className: "title"
@@ -144,27 +311,32 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     className: "title"
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 30
-  }))), !(placesState.error || (placesState === null || placesState === void 0 ? void 0 : (_placesState$placeGro3 = placesState.placeGroups) === null || _placesState$placeGro3 === void 0 ? void 0 : _placesState$placeGro3.length) === 0) && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('PLACE_GROUP', 'Place group')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    isHomeStyle: true,
-    placeholder: t('PLACE_GROUP', 'Place group'),
+  }))), !(placesState.error || (placesState === null || placesState === void 0 ? void 0 : (_placesState$placeGro3 = placesState.placeGroups) === null || _placesState$placeGro3 === void 0 ? void 0 : _placesState$placeGro3.length) === 0) && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, props.isSelectDisabled ? t('PLACE_GROUP', 'Place group') : orderTypes[orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type]), props.isSelectDisabled ? /*#__PURE__*/_react.default.createElement("div", null, placeGroupSelected === null || placeGroupSelected === void 0 ? void 0 : placeGroupSelected.name, " - ", placesState === null || placesState === void 0 ? void 0 : (_placesState$places4 = placesState.places) === null || _placesState$places4 === void 0 ? void 0 : (_placesState$places4$ = _placesState$places4.find(function (place) {
+    return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
+  })) === null || _placesState$places4$ === void 0 ? void 0 : _placesState$places4$.name) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    isHomeStyle: !props.isCancelHomeStyle,
+    isDisabled: props.isSelectDisabled,
     options: getPlacesGroups(),
+    defaultValue: placeGroupSelected !== null && placeGroupSelected !== void 0 ? placeGroupSelected : cart === null || cart === void 0 ? void 0 : cart.place,
+    placeholder: t('PLACE_GROUP', 'Place group'),
+    isOneOption: ((_getPlacesGroups = getPlacesGroups()) === null || _getPlacesGroups === void 0 ? void 0 : _getPlacesGroups.length) === 1,
+    disableOneOption: ((_getPlacesGroups2 = getPlacesGroups()) === null || _getPlacesGroups2 === void 0 ? void 0 : _getPlacesGroups2.length) > 1 || props.isSelectDisabled,
     onChange: function onChange(group) {
       return setPlaceGroupSelected(group);
-    },
-    defaultValue: placeGroupSelected !== null && placeGroupSelected !== void 0 ? placeGroupSelected : cart === null || cart === void 0 ? void 0 : cart.place,
-    disableOneOption: true
-  })), placeGroupSelected && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, selectYourSpotString), /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    isHomeStyle: true,
-    placeholder: selectYourSpotString,
+    }
+  })), placeGroupSelected && !props.isSelectDisabled && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, selectYourSpotString), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    disableOneOption: true,
     options: getPlaces(),
-    onChange: function onChange(place) {
-      return handleChangePlace(place);
-    },
-    defaultValue: placesState === null || placesState === void 0 ? void 0 : (_placesState$places4 = placesState.places) === null || _placesState$places4 === void 0 ? void 0 : _placesState$places4.find(function (place) {
+    isHomeStyle: !props.isCancelHomeStyle,
+    isDisabled: props.isSelectDisabled,
+    placeholder: selectYourSpotString,
+    defaultValue: placesState === null || placesState === void 0 ? void 0 : (_placesState$places5 = placesState.places) === null || _placesState$places5 === void 0 ? void 0 : _placesState$places5.find(function (place) {
       return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
     }),
-    disableOneOption: true
-  }))), placeGroupSelected && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places5 = placesState.places) === null || _placesState$places5 === void 0 ? void 0 : _placesState$places5.find(function (place) {
+    onChange: function onChange(place) {
+      return handleChangeSpot(place, props.isFetchOrder);
+    }
+  }))), placeGroupSelected && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places6 = placesState.places) === null || _placesState$places6 === void 0 ? void 0 : _placesState$places6.find(function (place) {
     return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
   })) && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: placesState !== null && placesState !== void 0 && placesState.loading ? 'secondary' : 'primary',
@@ -172,12 +344,46 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     onClick: function onClick() {
       return onClose && onClose();
     }
-  }, t('CONTINUE', 'Continue'))));
+  }, t('CONTINUE', 'Continue')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('PROFILE', 'Profile'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 var PlaceSpot = function PlaceSpot(props) {
+  var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
+
   var placeSpotProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: PlaceSpotUI
+    UIComponent: PlaceSpotUI,
+    onRemoveSpotNumber: function onRemoveSpotNumber(businessSlug) {
+      var _JSON$parse;
+
+      var spotNumberFromStorage = window.localStorage.getItem('table_number');
+      if (!spotNumberFromStorage) return;
+      var slug = (_JSON$parse = JSON.parse(spotNumberFromStorage)) === null || _JSON$parse === void 0 ? void 0 : _JSON$parse.slug;
+
+      if (businessSlug === slug) {
+        window.localStorage.removeItem('table_number');
+      }
+    },
+    orderTypes: {
+      1: t('DELIVERY', 'Delivery'),
+      2: t('PICKUP', 'Pickup'),
+      3: t('EAT_IN', 'Eat in'),
+      4: t('CURBSIDE', 'Curbside'),
+      5: t('DRIVE_THRU', 'Drive thru')
+    }
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PlaceSpot, placeSpotProps);

@@ -143,6 +143,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
       return setAddCardOpen(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_StripeElementsForm.StripeElementsForm, {
+    businessIds: props.businessIds,
     businessId: props.businessId,
     publicKey: props.publicKey,
     toSave: true,

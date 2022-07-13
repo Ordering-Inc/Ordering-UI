@@ -123,24 +123,26 @@ var Select = function Select(props) {
   };
 
   return isOneOption && !disableOneOption ? /*#__PURE__*/_react.default.createElement(_Selects.Select, {
+    id: "select-input",
     isHome: isHome
   }, /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, options[0].content))) : /*#__PURE__*/_react.default.createElement(_Selects.Select, {
     id: "select-input",
     isHome: isHome,
-    disabled: orderState.loading && !notReload,
+    disabled: orderState.loading && !notReload || props.isDisabled,
     onMouseUp: handleSelectClick
   }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, placeholder || ''), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, CustomArrow ? /*#__PURE__*/_react.default.createElement(CustomArrow, {
     id: "arrow"
-  }) : /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, (_selectedOption$showO = selectedOption.showOnSelected) !== null && _selectedOption$showO !== void 0 ? _selectedOption$showO : selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, CustomArrow ? /*#__PURE__*/_react.default.createElement(CustomArrow, {
+  }) : /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, (_selectedOption$showO = selectedOption.showOnSelected) !== null && _selectedOption$showO !== void 0 ? _selectedOption$showO : selectedOption.content), !props.isDisabled && /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, CustomArrow ? /*#__PURE__*/_react.default.createElement(CustomArrow, {
     id: "arrow"
   }) : /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     id: "list",
     position: "right",
-    ref: dropdownReference
-  }, options.map(function (option) {
+    ref: dropdownReference,
+    isHome: isHome
+  }, options.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
       id: "item",
-      key: option.value,
+      key: i,
       selected: value === option.value,
       onClick: function onClick() {
         return handleChangeOption(option);

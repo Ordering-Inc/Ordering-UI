@@ -35,6 +35,8 @@ var _ActionsSection = require("./ActionsSection");
 
 var _OrderPreferencesSections = require("./OrderPreferencesSections");
 
+var _PlaceSpot = require("../PlaceSpot");
+
 var _styles = require("./styles");
 
 var _styledComponents = require("styled-components");
@@ -44,6 +46,8 @@ var _ReviewProduct = require("../../../../../components/ReviewProduct");
 var _ReviewDriver = require("../../../../../components/ReviewDriver");
 
 var _TaxInformation = require("../TaxInformation");
+
+var _utils = require("../../../../../utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72,9 +76,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _theme$layouts, _theme$layouts$confir, _theme$layouts$confir2, _theme$layouts$confir3, _theme$layouts2, _theme$layouts2$confi, _theme$layouts2$confi2, _theme$layouts2$confi3, _theme$layouts3, _theme$layouts3$confi, _theme$layouts3$confi2, _theme$layouts3$confi3, _theme$layouts4, _theme$layouts4$confi, _theme$layouts4$confi2, _theme$layouts4$confi3, _theme$layouts5, _theme$layouts5$confi, _theme$layouts5$confi2, _theme$layouts5$confi3, _theme$layouts5$confi4, _theme$layouts5$confi5, _theme$layouts6, _theme$layouts6$confi, _theme$layouts6$confi2, _theme$layouts6$confi3, _theme$layouts6$confi4, _theme$layouts6$confi5, _theme$layouts7, _theme$layouts7$confi, _theme$layouts7$confi2, _theme$layouts7$confi3, _theme$layouts7$confi4, _theme$layouts7$confi5, _theme$layouts8, _theme$layouts8$confi, _theme$layouts8$confi2, _theme$layouts8$confi3, _theme$layouts8$confi4, _theme$layouts8$confi5, _theme$layouts9, _theme$layouts9$confi, _theme$layouts9$confi2, _theme$layouts9$confi3, _theme$layouts9$confi4, _theme$layouts9$confi5, _theme$layouts10, _theme$layouts10$conf, _theme$layouts10$conf2, _theme$layouts10$conf3, _theme$layouts10$conf4, _theme$layouts10$conf5, _theme$layouts11, _theme$layouts11$conf, _theme$layouts11$conf2, _theme$layouts11$conf3, _theme$layouts11$conf4, _theme$layouts11$conf5, _theme$layouts12, _theme$layouts12$conf, _theme$layouts12$conf2, _theme$layouts12$conf3, _theme$layouts12$conf4, _theme$layouts12$conf5, _theme$layouts13, _theme$layouts13$conf, _theme$layouts13$conf2, _theme$layouts13$conf3, _theme$layouts13$conf4, _theme$layouts13$conf5, _theme$layouts14, _theme$layouts14$conf, _theme$layouts14$conf2, _theme$layouts14$conf3, _theme$layouts14$conf4, _theme$layouts14$conf5, _theme$layouts15, _theme$layouts15$conf, _theme$layouts15$conf2, _theme$layouts15$conf3, _theme$layouts15$conf4, _theme$layouts15$conf5, _theme$layouts16, _theme$layouts16$conf, _theme$layouts16$conf2, _theme$layouts16$conf3, _theme$layouts16$conf4, _theme$layouts16$conf5, _theme$layouts17, _theme$layouts17$conf, _theme$layouts17$conf2, _theme$layouts17$conf3, _theme$layouts17$conf4, _theme$layouts17$conf5, _order$driver, _order$driver2, _theme$images, _theme$images$dummies, _order$business, _order$business2, _theme$images2, _theme$images2$dummie, _order$customer, _order$customer2, _theme$images3, _theme$images3$dummie, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag28, _configs$guest_uuid_a, _orderTypes$find, _theme$defaultLanguag29, _theme$defaultLanguag30, _getOrderStatus, _getOrderStatus2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$business11, _order$place, _order$place2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _theme$defaultLanguag31, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11, _order$driver12, _theme$defaultLanguag32, _order$driver13, _order$driver14, _order$driver15, _order$driver16, _order$products, _configs$guest_uuid_a2, _theme$defaultLanguag33, _theme$defaultLanguag34, _theme$defaultLanguag35, _theme$defaultLanguag36, _theme$defaultLanguag37, _theme$defaultLanguag38, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+  var _configs$google_maps_, _theme$layouts, _theme$layouts$confir, _theme$layouts$confir2, _theme$layouts$confir3, _theme$layouts2, _theme$layouts2$confi, _theme$layouts2$confi2, _theme$layouts2$confi3, _theme$layouts3, _theme$layouts3$confi, _theme$layouts3$confi2, _theme$layouts3$confi3, _theme$layouts4, _theme$layouts4$confi, _theme$layouts4$confi2, _theme$layouts4$confi3, _theme$layouts5, _theme$layouts5$confi, _theme$layouts5$confi2, _theme$layouts5$confi3, _theme$layouts5$confi4, _theme$layouts5$confi5, _theme$layouts6, _theme$layouts6$confi, _theme$layouts6$confi2, _theme$layouts6$confi3, _theme$layouts6$confi4, _theme$layouts6$confi5, _theme$layouts7, _theme$layouts7$confi, _theme$layouts7$confi2, _theme$layouts7$confi3, _theme$layouts7$confi4, _theme$layouts7$confi5, _theme$layouts8, _theme$layouts8$confi, _theme$layouts8$confi2, _theme$layouts8$confi3, _theme$layouts8$confi4, _theme$layouts8$confi5, _theme$layouts9, _theme$layouts9$confi, _theme$layouts9$confi2, _theme$layouts9$confi3, _theme$layouts9$confi4, _theme$layouts9$confi5, _theme$layouts10, _theme$layouts10$conf, _theme$layouts10$conf2, _theme$layouts10$conf3, _theme$layouts10$conf4, _theme$layouts10$conf5, _theme$layouts11, _theme$layouts11$conf, _theme$layouts11$conf2, _theme$layouts11$conf3, _theme$layouts11$conf4, _theme$layouts11$conf5, _theme$layouts12, _theme$layouts12$conf, _theme$layouts12$conf2, _theme$layouts12$conf3, _theme$layouts12$conf4, _theme$layouts12$conf5, _theme$layouts13, _theme$layouts13$conf, _theme$layouts13$conf2, _theme$layouts13$conf3, _theme$layouts13$conf4, _theme$layouts13$conf5, _theme$layouts14, _theme$layouts14$conf, _theme$layouts14$conf2, _theme$layouts14$conf3, _theme$layouts14$conf4, _theme$layouts14$conf5, _theme$layouts15, _theme$layouts15$conf, _theme$layouts15$conf2, _theme$layouts15$conf3, _theme$layouts15$conf4, _theme$layouts15$conf5, _theme$layouts16, _theme$layouts16$conf, _theme$layouts16$conf2, _theme$layouts16$conf3, _theme$layouts16$conf4, _theme$layouts16$conf5, _theme$layouts17, _theme$layouts17$conf, _theme$layouts17$conf2, _theme$layouts17$conf3, _theme$layouts17$conf4, _theme$layouts17$conf5, _order$driver, _order$driver2, _theme$images, _theme$images$dummies, _order$business, _order$business2, _theme$images2, _theme$images2$dummie, _order$customer, _order$customer2, _theme$images3, _theme$images3$dummie, _theme$defaultLanguag28, _configs$guest_uuid_a, _orderTypes$find, _getOrderStatus, _getOrderStatus2, _theme$defaultLanguag29, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _order$place, _order$place2, _getOrderStatus3, _getOrderStatus4, _order$business8, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _theme$defaultLanguag30, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$products, _theme$defaultLanguag31, _theme$defaultLanguag32, _theme$defaultLanguag33, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6;
 
   var userCustomerId = props.userCustomerId,
+      handleChangeOrderStatus = props.handleChangeOrderStatus,
       handleBusinessRedirect = props.handleBusinessRedirect,
       handleOrderRedirect = props.handleOrderRedirect,
       googleMapsControls = props.googleMapsControls,
@@ -86,7 +91,6 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       messagesReadList = props.messagesReadList,
       reorderState = props.reorderState,
       handleReorder = props.handleReorder,
-      isCustomerMode = props.isCustomerMode,
       orderTypes = props.orderTypes;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -177,6 +181,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       businessData = _props$order.businessData,
       error = _props$order.error;
   var yourSpotString = (order === null || order === void 0 ? void 0 : order.delivery_type) === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number');
+  var acceptedStatus = [1, 2, 5, 6, 10, 11, 12];
+  var placeSpotTypes = [3, 4, 5];
+  var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
+  var showOrderActions = (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1;
   var isOriginalLayout = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$confir = _theme$layouts.confirmation) === null || _theme$layouts$confir === void 0 ? void 0 : (_theme$layouts$confir2 = _theme$layouts$confir.components) === null || _theme$layouts$confir2 === void 0 ? void 0 : (_theme$layouts$confir3 = _theme$layouts$confir2.layout) === null || _theme$layouts$confir3 === void 0 ? void 0 : _theme$layouts$confir3.type) === 'original';
   var showDeliveryType = !(theme !== null && theme !== void 0 && (_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$confi = _theme$layouts2.confirmation) !== null && _theme$layouts2$confi !== void 0 && (_theme$layouts2$confi2 = _theme$layouts2$confi.components) !== null && _theme$layouts2$confi2 !== void 0 && (_theme$layouts2$confi3 = _theme$layouts2$confi2.delivery_type) !== null && _theme$layouts2$confi3 !== void 0 && _theme$layouts2$confi3.hidden);
   var showDeliveryDate = !(theme !== null && theme !== void 0 && (_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$confi = _theme$layouts3.confirmation) !== null && _theme$layouts3$confi !== void 0 && (_theme$layouts3$confi2 = _theme$layouts3$confi.components) !== null && _theme$layouts3$confi2 !== void 0 && (_theme$layouts3$confi3 = _theme$layouts3$confi2.delivery_date) !== null && _theme$layouts3$confi3 !== void 0 && _theme$layouts3$confi3.hidden);
@@ -421,7 +429,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   };
 
-  var handleStartNewOrder = function handleStartNewOrder() {
+  var handleStartNewOrder = function handleStartNewOrder(orderId) {
+    if (isOriginalLayout) {
+      handleReorder(orderId);
+      return;
+    }
+
     deleteUserCustomer(true);
     refreshOrderOptions();
     handleGoToPage({
@@ -488,18 +501,31 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   }, [reorderState]);
 
-  var OrderMapSection = function OrderMapSection() {
-    var _order$driver3, _order$driver3$locati, _order$driver4, _order$driver4$locati, _configs$google_maps_, _order$driver5;
+  var OrderMapSection = function OrderMapSection(props) {
+    var _props$validStatuses, _props$location, _order$driver3, _configs$google_maps_2;
 
-    var validStatuses = [9, 19, 23];
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showBusinessMap && (order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : (_order$driver3$locati = _order$driver3.location) === null || _order$driver3$locati === void 0 ? void 0 : _order$driver3$locati.lat) && (order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : (_order$driver4$locati = _order$driver4.location) === null || _order$driver4$locati === void 0 ? void 0 : _order$driver4$locati.lng) && validStatuses.includes(parseInt(order === null || order === void 0 ? void 0 : order.status)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Map, {
-      isCustomerMode: isCustomerMode || isOriginalLayout
+    var validStatuses = (_props$validStatuses = props.validStatuses) !== null && _props$validStatuses !== void 0 ? _props$validStatuses : [9, 19, 23];
+    var location = (_props$location = props.location) !== null && _props$location !== void 0 ? _props$location : order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.location;
+    var mapConfigs = {
+      zoom: 15
+    };
+    return showBusinessMap ? props.isMapImg ? /*#__PURE__*/_react.default.createElement(_styles.Map, {
+      style: props.mapStyle
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: (0, _utils.getGoogleMapImage)(location, googleMapsApiKey, mapConfigs),
+      id: "google-maps-image",
+      alt: "google-maps-location",
+      width: "100%",
+      height: "100%",
+      loading: "lazy"
+    })) : location !== null && location !== void 0 && location.lat && location !== null && location !== void 0 && location.lng && validStatuses.includes(parseInt(order === null || order === void 0 ? void 0 : order.status)) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Map, {
+      style: props.mapStyle
     }, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
-      apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
-      location: order === null || order === void 0 ? void 0 : (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.location,
-      locations: locations,
+      apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
+      location: location,
+      locations: !props.location && locations,
       mapControls: googleMapsControls
-    }))));
+    }))) : null : null;
   };
 
   var OrderHeaderInfoSection = function OrderHeaderInfoSection() {
@@ -522,23 +548,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }, t('YOUR_ORDERS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag27 = theme.defaultLanguages) === null || _theme$defaultLanguag27 === void 0 ? void 0 : _theme$defaultLanguag27.YOUR_ORDERS) || 'Your Orders'))));
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, !loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, isCustomerMode || isOriginalLayout ? /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag28 = theme.defaultLanguages) === null || _theme$defaultLanguag28 === void 0 ? void 0 : _theme$defaultLanguag28.ORDER) || 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), parseInt(configs === null || configs === void 0 ? void 0 : (_configs$guest_uuid_a = configs.guest_uuid_access) === null || _configs$guest_uuid_a === void 0 ? void 0 : _configs$guest_uuid_a.value, 10) && (order === null || order === void 0 ? void 0 : order.hash_key) && /*#__PURE__*/_react.default.createElement(_styles.Content, {
-    className: "order-content",
-    isCustomerMode: isCustomerMode || isOriginalLayout
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, !loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag28 = theme.defaultLanguages) === null || _theme$defaultLanguag28 === void 0 ? void 0 : _theme$defaultLanguag28.ORDER) || 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), parseInt(configs === null || configs === void 0 ? void 0 : (_configs$guest_uuid_a = configs.guest_uuid_access) === null || _configs$guest_uuid_a === void 0 ? void 0 : _configs$guest_uuid_a.value, 10) && (order === null || order === void 0 ? void 0 : order.hash_key) && /*#__PURE__*/_react.default.createElement(_styles.Content, {
+    className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles.ShareOrder, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "wrap"
   }, /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
@@ -551,104 +562,104 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     className: "date"
   }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
-  })), !isOriginalLayout && /*#__PURE__*/_react.default.createElement(_styles.ReOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    onClick: function onClick() {
-      return handleStartNewOrder();
-    }
-  }, t('START_NEW_ORDER', 'Start new order')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag29 = theme.defaultLanguages) === null || _theme$defaultLanguag29 === void 0 ? void 0 : _theme$defaultLanguag29.ORDER) || 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), (order === null || order === void 0 ? void 0 : order.status) !== 0 && (order === null || order === void 0 ? void 0 : order.integration_id) && /*#__PURE__*/_react.default.createElement("h1", null, t('TICKET', 'Ticket'), ": ", order === null || order === void 0 ? void 0 : order.integration_id), showDeliveryDate && /*#__PURE__*/_react.default.createElement("p", {
-    className: "date"
-  }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
-    utc: false
-  })), /*#__PURE__*/_react.default.createElement(_styles.OrderActions, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
-    className: "Review-order",
-    active: (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
-  }, /*#__PURE__*/_react.default.createElement("span", {
-    onClick: handleOpenReview
-  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag30 = theme.defaultLanguages) === null || _theme$defaultLanguag30 === void 0 ? void 0 : _theme$defaultLanguag30.REVIEW_ORDER) || 'Review your Order'))), (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && /*#__PURE__*/_react.default.createElement(_styles.NewOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), (acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) || !isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_styles.ReOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     outline: true,
     onClick: function onClick() {
-      return handleReorder(order.id);
+      return handleStartNewOrder(order.id);
     },
     disabled: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading
-  }, reorderState !== null && reorderState !== void 0 && reorderState.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order'))))), showDeliveryProgress && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
+  }, reorderState !== null && reorderState !== void 0 && reorderState.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')))), showDeliveryProgress && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
-  }), /*#__PURE__*/_react.default.createElement("p", {
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    }
+  }, /*#__PURE__*/_react.default.createElement("p", {
     className: "order-status"
-  }, (_getOrderStatus2 = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
+  }, (_getOrderStatus2 = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
+    className: "Review-order",
+    active: acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    onClick: handleOpenReview
+  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag29 = theme.defaultLanguages) === null || _theme$defaultLanguag29 === void 0 ? void 0 : _theme$defaultLanguag29.REVIEW_ORDER) || 'Review your Order')))))), /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '50%'
+    }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, isCustomerMode && /*#__PURE__*/_react.default.createElement("img", {
+    w: "calc(100% - 20px)" // borderBottom={showOrderActions}
+
+  }, /*#__PURE__*/_react.default.createElement("img", {
     src: order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, isCustomerMode || isOriginalLayout ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.name), /*#__PURE__*/_react.default.createElement(_ActionsSection.ActionsSection, _extends({}, ActionsSectionProps, {
-    showPhone: showBusinessPhone,
-    showMessages: showBusinessMessages,
-    actionType: "business"
-  }))), showBusinessEmail && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.email), showBusinessPhone && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.cellphone), showBusinessAddress && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.address)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", null, t('FROM', 'From')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business8 = order.business) === null || _order$business8 === void 0 ? void 0 : _order$business8.name), showBusinessEmail && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business9 = order.business) === null || _order$business9 === void 0 ? void 0 : _order$business9.email), showBusinessPhone && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business10 = order.business) === null || _order$business10 === void 0 ? void 0 : _order$business10.cellphone), showBusinessAddress && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business11 = order.business) === null || _order$business11 === void 0 ? void 0 : _order$business11.address)), (order === null || order === void 0 ? void 0 : (_order$place = order.place) === null || _order$place === void 0 ? void 0 : _order$place.name) && /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotSection, null, /*#__PURE__*/_react.default.createElement("p", null, yourSpotString, ": ", order === null || order === void 0 ? void 0 : (_order$place2 = order.place) === null || _order$place2 === void 0 ? void 0 : _order$place2.name)))), isCustomerMode || isOriginalLayout ? /*#__PURE__*/_react.default.createElement(OrderMapSection, null) : /*#__PURE__*/_react.default.createElement(_ActionsSection.ActionsSection, _extends({}, ActionsSectionProps, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h2", null, order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.name), /*#__PURE__*/_react.default.createElement(_ActionsSection.ActionsSection, _extends({}, ActionsSectionProps, {
     actionType: "business",
     showPhone: showBusinessPhone,
     showMessages: showBusinessMessages
-  }))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.OrderCustomer, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, !(isCustomerMode || isOriginalLayout) && /*#__PURE__*/_react.default.createElement("h2", null, t('TO', 'To')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name, " ", order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.lastname), showCustomerEmail && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.email), showCustomerPhone && /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.cellphone) || (order === null || order === void 0 ? void 0 : (_order$customer7 = order.customer) === null || _order$customer7 === void 0 ? void 0 : _order$customer7.phone)), showCustomerAddress && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer8 = order.customer) === null || _order$customer8 === void 0 ? void 0 : _order$customer8.address)), !(isCustomerMode || isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
-    order: order
-  }), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomerMode || isOriginalLayout ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderDriver, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, /*#__PURE__*/_react.default.createElement(_styles.SectionTitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag31 = theme.defaultLanguages) === null || _theme$defaultLanguag31 === void 0 ? void 0 : _theme$defaultLanguag31.DRIVER) || 'Driver')), /*#__PURE__*/_react.default.createElement(_ActionsSection.ActionsSection, _extends({}, ActionsSectionProps, {
+  })), showBusinessEmail && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.email), showBusinessPhone && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.cellphone), showBusinessAddress && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.address), (order === null || order === void 0 ? void 0 : (_order$place = order.place) === null || _order$place === void 0 ? void 0 : _order$place.name) && /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotSection, null, /*#__PURE__*/_react.default.createElement("p", null, yourSpotString, ": ", order === null || order === void 0 ? void 0 : (_order$place2 = order.place) === null || _order$place2 === void 0 ? void 0 : _order$place2.name)))), placeSpotTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
+    w: "calc(100% - 20px)",
+    borderTop: true
+  }, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
+    isInputMode: true,
+    cart: order,
+    containerStyle: {
+      width: 'calc(100% - 20px)'
+    },
+    spotNumberDefault: order === null || order === void 0 ? void 0 : order.spot_number,
+    vehicleDefault: order === null || order === void 0 ? void 0 : order.vehicle
+  })), showOrderActions && /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
+    w: "calc(100% - 20px)",
+    borderTop: true
+  }, /*#__PURE__*/_react.default.createElement(_styles.BtsOrderStatus, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    style: {
+      fontSize: 14
+    },
+    color: "primary",
+    onClick: function onClick() {
+      return handleChangeOrderStatus(20);
+    },
+    disabled: (order === null || order === void 0 ? void 0 : order.status) === 20
+  }, (_getOrderStatus3 = getOrderStatus(20)) === null || _getOrderStatus3 === void 0 ? void 0 : _getOrderStatus3.value)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    style: {
+      fontSize: 14
+    },
+    color: "secundary",
+    disabled: (order === null || order === void 0 ? void 0 : order.status) === 21,
+    onClick: function onClick() {
+      return handleChangeOrderStatus(21);
+    }
+  }, (_getOrderStatus4 = getOrderStatus(21)) === null || _getOrderStatus4 === void 0 ? void 0 : _getOrderStatus4.value))))), googleMapsApiKey && /*#__PURE__*/_react.default.createElement(OrderMapSection, {
+    isMapImg: true,
+    validStatuses: [order === null || order === void 0 ? void 0 : order.status],
+    location: order === null || order === void 0 ? void 0 : (_order$business8 = order.business) === null || _order$business8 === void 0 ? void 0 : _order$business8.location,
+    mapStyle: {
+      width: '50%'
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.OrderCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, null, (order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.photo) && /*#__PURE__*/_react.default.createElement("img", {
+    src: order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.photo
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.name, " ", order === null || order === void 0 ? void 0 : (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.lastname), showCustomerEmail && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer7 = order.customer) === null || _order$customer7 === void 0 ? void 0 : _order$customer7.email), showCustomerPhone && /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : (_order$customer8 = order.customer) === null || _order$customer8 === void 0 ? void 0 : _order$customer8.cellphone) || (order === null || order === void 0 ? void 0 : (_order$customer9 = order.customer) === null || _order$customer9 === void 0 ? void 0 : _order$customer9.phone)), showCustomerAddress && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer10 = order.customer) === null || _order$customer10 === void 0 ? void 0 : _order$customer10.address)))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderDriver, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag30 = theme.defaultLanguages) === null || _theme$defaultLanguag30 === void 0 ? void 0 : _theme$defaultLanguag30.DRIVER) || 'Driver')), /*#__PURE__*/_react.default.createElement(_ActionsSection.ActionsSection, _extends({}, ActionsSectionProps, {
     actionType: "driver",
     showPhone: showDriverPhone,
     showMessages: showDriverMessages
   }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperDriver, null, showDriverPhoto && /*#__PURE__*/_react.default.createElement("div", {
     className: "photo"
-  }, order !== null && order !== void 0 && (_order$driver6 = order.driver) !== null && _order$driver6 !== void 0 && _order$driver6.photo ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
-    isCustomerMode: isCustomerMode || isOriginalLayout,
-    src: order === null || order === void 0 ? void 0 : (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.photo
-  }) : /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)), /*#__PURE__*/_react.default.createElement("div", null, showDriverName && /*#__PURE__*/_react.default.createElement("h2", null, order === null || order === void 0 ? void 0 : (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.name, " ", order === null || order === void 0 ? void 0 : (_order$driver9 = order.driver) === null || _order$driver9 === void 0 ? void 0 : _order$driver9.lastname), showDriverEmail && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$driver10 = order.driver) === null || _order$driver10 === void 0 ? void 0 : _order$driver10.email), showDriverPhone && /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : (_order$driver11 = order.driver) === null || _order$driver11 === void 0 ? void 0 : _order$driver11.cellphone) || (order === null || order === void 0 ? void 0 : (_order$driver12 = order.driver) === null || _order$driver12 === void 0 ? void 0 : _order$driver12.phone))))), !isOriginalLayout && /*#__PURE__*/_react.default.createElement(OrderMapSection, null)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(OrderMapSection, null), /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag32 = theme.defaultLanguages) === null || _theme$defaultLanguag32 === void 0 ? void 0 : _theme$defaultLanguag32.DRIVER) || 'Driver')), /*#__PURE__*/_react.default.createElement(_styles.OrderDriver, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriver, null, showDriverPhoto && /*#__PURE__*/_react.default.createElement("div", {
-    className: "photo"
-  }, order !== null && order !== void 0 && (_order$driver13 = order.driver) !== null && _order$driver13 !== void 0 && _order$driver13.photo ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
-    src: order === null || order === void 0 ? void 0 : (_order$driver14 = order.driver) === null || _order$driver14 === void 0 ? void 0 : _order$driver14.photo,
-    width: "48",
-    height: "48"
-  }) : /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)), showDriverName && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$driver15 = order.driver) === null || _order$driver15 === void 0 ? void 0 : _order$driver15.name, " ", order === null || order === void 0 ? void 0 : (_order$driver16 = order.driver) === null || _order$driver16 === void 0 ? void 0 : _order$driver16.lastname)), /*#__PURE__*/_react.default.createElement(_ActionsSection.ActionsSection, _extends({}, ActionsSectionProps, {
-    actionType: "driver",
-    showPhone: showDriverPhone,
-    showMessages: showDriverMessages
-  }))))), (isCustomerMode || isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_styles.OrderPreferences, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
-    order: order
-  }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, !(isCustomerMode || isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(OrderHeaderInfoSection, null), /*#__PURE__*/_react.default.createElement(OrderActionsSection, null)), /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, (isCustomerMode || isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, /*#__PURE__*/_react.default.createElement(OrderHeaderInfoSection, null), /*#__PURE__*/_react.default.createElement(OrderActionsSection, null)), (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
+  }, order !== null && order !== void 0 && (_order$driver4 = order.driver) !== null && _order$driver4 !== void 0 && _order$driver4.photo ? /*#__PURE__*/_react.default.createElement(_styles.PhotoBlock, {
+    src: order === null || order === void 0 ? void 0 : (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.photo
+  }) : /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)), /*#__PURE__*/_react.default.createElement("div", null, showDriverName && /*#__PURE__*/_react.default.createElement("h2", null, order === null || order === void 0 ? void 0 : (_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.name, " ", order === null || order === void 0 ? void 0 : (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.lastname), showDriverEmail && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.email), showDriverPhone && /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : (_order$driver9 = order.driver) === null || _order$driver9 === void 0 ? void 0 : _order$driver9.cellphone) || (order === null || order === void 0 ? void 0 : (_order$driver10 = order.driver) === null || _order$driver10 === void 0 ? void 0 : _order$driver10.phone))))), !isOriginalLayout && /*#__PURE__*/_react.default.createElement(OrderMapSection, null)), ((order === null || order === void 0 ? void 0 : order.delivery_type) === 1 || (order === null || order === void 0 ? void 0 : order.comment)) && /*#__PURE__*/_react.default.createElement(_styles.OrderPreferences, null, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
+    order: order,
+    placeSpotTypes: placeSpotTypes
+  }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, /*#__PURE__*/_react.default.createElement(OrderHeaderInfoSection, null), /*#__PURE__*/_react.default.createElement(OrderActionsSection, null)), (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
-      product: product,
-      isConfirmationPage: true
+      product: product
     });
-  })), (isCustomerMode || isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_OrderBillSection.OrderBillSection, {
-    order: order,
-    isCustomerMode: isCustomerMode || isOriginalLayout,
-    setOpenTaxModal: setOpenTaxModal
-  })), !(isCustomerMode || isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrderBillSection.OrderBillSection, {
+  })), /*#__PURE__*/_react.default.createElement(_OrderBillSection.OrderBillSection, {
     order: order,
     setOpenTaxModal: setOpenTaxModal
-  }), /*#__PURE__*/_react.default.createElement(_styles.Content, {
-    className: "order-content"
-  }, parseInt(configs === null || configs === void 0 ? void 0 : (_configs$guest_uuid_a2 = configs.guest_uuid_access) === null || _configs$guest_uuid_a2 === void 0 ? void 0 : _configs$guest_uuid_a2.value, 10) && (order === null || order === void 0 ? void 0 : order.hash_key) && /*#__PURE__*/_react.default.createElement(_styles.ShareOrder, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "text"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('SHARE_THIS_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag33 = theme.defaultLanguages) === null || _theme$defaultLanguag33 === void 0 ? void 0 : _theme$defaultLanguag33.SHARE_THIS_DELIVERY) || 'Share this delivery')), /*#__PURE__*/_react.default.createElement("p", null, t('LET_SOMEONE_FOLLOW_ALONG', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag34 = theme.defaultLanguages) === null || _theme$defaultLanguag34 === void 0 ? void 0 : _theme$defaultLanguag34.LET_SOMEONE_FOLLOW_ALONG) || 'Let someone follow along'))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "wrap"
-  }, /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
-    withBtn: true,
-    btnText: t('SHARE', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag35 = theme.defaultLanguages) === null || _theme$defaultLanguag35 === void 0 ? void 0 : _theme$defaultLanguag35.SHARE) || 'Share'),
-    defaultUrl: urlToShare(order === null || order === void 0 ? void 0 : order.hash_key)
-  }))))))), (openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
+  })))), (openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     business: openMessages.business,
@@ -663,85 +674,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         business: false
       });
     }
-  }), loading && !error && !(isCustomerMode || isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+  }), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
-  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40,
-    width: 230
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 80
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 15
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 210,
-    style: {
-      marginBottom: '50px'
-    }
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40,
-    width: 230
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 180
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 210
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 150
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 170,
-    style: {
-      marginBottom: '50px'
-    }
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40,
-    width: 230
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 180
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 210
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 150
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20,
-    width: 170,
-    style: {
-      marginBottom: '50px'
-    }
-  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
-    width: 90
-  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 40,
-    width: 230
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 20
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 45,
-    width: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 60
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 300
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 60
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 25
-  }))))), loading && !error && (isCustomerMode || isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, {
-    isCustomerMode: isCustomerMode || isOriginalLayout
-  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlockWrapp, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
-    width: 90,
-    isCustomerMode: isCustomerMode || isOriginalLayout
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 40,
     width: 300
@@ -795,13 +729,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }))))), !loading && error && (error.includes('ERROR_ACCESS_EXPIRED') ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t(error[0], 'Sorry, the order has expired.')
   }) : /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('NOT_FOUND_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag36 = theme.defaultLanguages) === null || _theme$defaultLanguag36 === void 0 ? void 0 : _theme$defaultLanguag36.NOT_FOUND_ORDER) || 'Sorry, we couldn\'t find the requested order.'),
-    btnTitle: t('ORDERS_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag37 = theme.defaultLanguages) === null || _theme$defaultLanguag37 === void 0 ? void 0 : _theme$defaultLanguag37.ORDERS_REDIRECT) || 'Go to Orders'),
+    content: t('NOT_FOUND_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag31 = theme.defaultLanguages) === null || _theme$defaultLanguag31 === void 0 ? void 0 : _theme$defaultLanguag31.NOT_FOUND_ORDER) || 'Sorry, we couldn\'t find the requested order.'),
+    btnTitle: t('ORDERS_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag32 = theme.defaultLanguages) === null || _theme$defaultLanguag32 === void 0 ? void 0 : _theme$defaultLanguag32.ORDERS_REDIRECT) || 'Go to Orders'),
     onClickButton: handleOrderRedirect
   })), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isReviewOpen,
     onClose: handleCloseReivew,
-    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag38 = theme.defaultLanguages) === null || _theme$defaultLanguag38 === void 0 ? void 0 : _theme$defaultLanguag38.LOADING) || 'Loading...')
+    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag33 = theme.defaultLanguages) === null || _theme$defaultLanguag33 === void 0 ? void 0 : _theme$defaultLanguag33.LOADING) || 'Loading...')
   }, /*#__PURE__*/_react.default.createElement(_styles.ReviewWrapper, null, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
     closeReviewOrder: closeReviewOrder,
@@ -819,7 +753,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     open: openTaxModal.open,
     padding: "20px",
     closeOnBackdrop: true,
-    title: "".concat(((_openTaxModal$data = openTaxModal.data) === null || _openTaxModal$data === void 0 ? void 0 : _openTaxModal$data.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), " ").concat(((_openTaxModal$data2 = openTaxModal.data) === null || _openTaxModal$data2 === void 0 ? void 0 : _openTaxModal$data2.rate_type) !== 2 ? "(".concat(typeof ((_openTaxModal$data3 = openTaxModal.data) === null || _openTaxModal$data3 === void 0 ? void 0 : _openTaxModal$data3.rate) === 'number' ? "".concat((_openTaxModal$data4 = openTaxModal.data) === null || _openTaxModal$data4 === void 0 ? void 0 : _openTaxModal$data4.rate, "%") : "".concat(parsePrice((_openTaxModal$data$fi = (_openTaxModal$data5 = openTaxModal.data) === null || _openTaxModal$data5 === void 0 ? void 0 : _openTaxModal$data5.fixed) !== null && _openTaxModal$data$fi !== void 0 ? _openTaxModal$data$fi : 0), " + ").concat((_openTaxModal$data6 = openTaxModal.data) === null || _openTaxModal$data6 === void 0 ? void 0 : _openTaxModal$data6.percentage, "%"), ")") : '', "  "),
+    title: "".concat(((_openTaxModal$data = openTaxModal.data) === null || _openTaxModal$data === void 0 ? void 0 : _openTaxModal$data.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), " ").concat(((_openTaxModal$data2 = openTaxModal.data) === null || _openTaxModal$data2 === void 0 ? void 0 : _openTaxModal$data2.rate_type) !== 2 ? "(".concat(typeof ((_openTaxModal$data3 = openTaxModal.data) === null || _openTaxModal$data3 === void 0 ? void 0 : _openTaxModal$data3.rate) === 'number' ? "".concat((_openTaxModal$data4 = openTaxModal.data) === null || _openTaxModal$data4 === void 0 ? void 0 : _openTaxModal$data4.rate, "%") : "".concat(parsePrice((_openTaxModal$data$fi = (_openTaxModal$data5 = openTaxModal.data) === null || _openTaxModal$data5 === void 0 ? void 0 : _openTaxModal$data5.fixed) !== null && _openTaxModal$data$fi !== void 0 ? _openTaxModal$data$fi : 0), " + ").concat((_openTaxModal$data6 = openTaxModal.data) === null || _openTaxModal$data6 === void 0 ? void 0 : _openTaxModal$data6.percentage, "%"), ")") : '', "\n          "),
     onClose: function onClose() {
       return setOpenTaxModal({
         open: false,
@@ -835,15 +769,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     type: openTaxModal.type,
     data: openTaxModal.data,
     products: order === null || order === void 0 ? void 0 : order.products
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+  })));
 };
 
 var OrderDetails = function OrderDetails(props) {

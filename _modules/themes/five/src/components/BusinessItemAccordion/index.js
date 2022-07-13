@@ -64,7 +64,8 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       handleClickCheckout = props.handleClickCheckout,
       checkoutButtonDisabled = props.checkoutButtonDisabled,
       setPreorderBusiness = props.setPreorderBusiness,
-      handleChangeStore = props.handleChangeStore;
+      handleChangeStore = props.handleChangeStore,
+      isMultiCheckout = props.isMultiCheckout;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -234,7 +235,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     ref: changeStore,
     onClick: handleChangeStore,
     className: "change-store"
-  }, t('CHANGE_STORE', 'Change store')))), props.children), !setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && /*#__PURE__*/_react.default.createElement(_styles.PriceContainer, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('CHANGE_STORE', 'Change store')))), props.children), !setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && !isMultiCheckout && /*#__PURE__*/_react.default.createElement(_styles.PriceContainer, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleClickCheckout,
     color: "primary"
   }, t('CHECKOUT', 'Checkout')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {

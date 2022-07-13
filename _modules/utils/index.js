@@ -147,10 +147,12 @@ var capitalize = function capitalize(str) {
 
 exports.capitalize = capitalize;
 
-var getGoogleMapImage = function getGoogleMapImage(location, apiKey) {
+var getGoogleMapImage = function getGoogleMapImage(location, apiKey, mapConfigs) {
+  var _mapConfigs$size$w, _mapConfigs$size, _mapConfigs$size$h, _mapConfigs$size2, _mapConfigs$zoom, _mapConfigs$scale;
+
   var lat = location === null || location === void 0 ? void 0 : location.lat;
   var lng = location === null || location === void 0 ? void 0 : location.lng;
-  return "https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=".concat(lat, ",").concat(lng, "&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(lat, ",").concat(lng, "&key=").concat(apiKey);
+  return "https://maps.googleapis.com/maps/api/staticmap?size=".concat((_mapConfigs$size$w = mapConfigs === null || mapConfigs === void 0 ? void 0 : (_mapConfigs$size = mapConfigs.size) === null || _mapConfigs$size === void 0 ? void 0 : _mapConfigs$size.w) !== null && _mapConfigs$size$w !== void 0 ? _mapConfigs$size$w : 500, "x").concat((_mapConfigs$size$h = mapConfigs === null || mapConfigs === void 0 ? void 0 : (_mapConfigs$size2 = mapConfigs.size) === null || _mapConfigs$size2 === void 0 ? void 0 : _mapConfigs$size2.h) !== null && _mapConfigs$size$h !== void 0 ? _mapConfigs$size$h : 190, "&center=").concat(lat, ",").concat(lng, "&zoom=").concat((_mapConfigs$zoom = mapConfigs === null || mapConfigs === void 0 ? void 0 : mapConfigs.zoom) !== null && _mapConfigs$zoom !== void 0 ? _mapConfigs$zoom : 17, "&scale=").concat((_mapConfigs$scale = mapConfigs === null || mapConfigs === void 0 ? void 0 : mapConfigs.scale) !== null && _mapConfigs$scale !== void 0 ? _mapConfigs$scale : 2, "&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_75,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C").concat(lat, ",").concat(lng, "&key=").concat(apiKey);
 };
 /**
  * _Function to flat array of one level

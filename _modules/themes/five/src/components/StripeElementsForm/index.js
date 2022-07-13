@@ -86,7 +86,8 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
     toSave: toSave,
     requirements: requirements,
     businessId: businessId,
-    handleCancel: onCancel
+    handleCancel: onCancel,
+    businessIds: props.businessIds
   })) : /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('SOMETHING_WRONG', 'Something is wrong!')), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
