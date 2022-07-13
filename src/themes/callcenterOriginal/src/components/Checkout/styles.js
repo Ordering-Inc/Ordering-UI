@@ -239,7 +239,7 @@ export const DeliveryOptionsContainer = styled.div`
     }
     > div#list {
       width: 100%;
-      background-color: #F8F9FA!important;
+      background-color: #F8F9FA;
       border: 1px solid #F8F9FA;
       border-radius: 7.6px;
       box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);

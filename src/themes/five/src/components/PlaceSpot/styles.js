@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
 
 export const PlaceSpotContainer = styled.div`
-  min-height: 220px;
+  min-height: 80px;
   position: relative;
   #select-input, #list {
     width: 100%;
     color: #333 !important;
-    background-color: #F8F9FA !important;
+    background-color: #F8F9FA;
     border-radius: 7.6px;
     border: 0px;
   }
@@ -35,7 +35,6 @@ export const PlaceSpotContainer = styled.div`
 `
 
 export const PlaceGroupContainer = styled.div`
-  margin-bottom: 40px;
   margin-top: 20px;
 `
 
