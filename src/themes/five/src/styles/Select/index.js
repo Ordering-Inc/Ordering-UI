@@ -77,7 +77,7 @@ export const Select = (props) => {
 
   return (
     isOneOption && !disableOneOption ? (
-      <SelectInput isHome={isHome}>
+      <SelectInput id='select-input' isHome={isHome}>
         <Selected>
           <Header>
             {options[0].content}
@@ -88,7 +88,7 @@ export const Select = (props) => {
       <SelectInput
         id='select-input'
         isHome={isHome}
-        disabled={orderState.loading && !notReload}
+        disabled={(orderState.loading && !notReload) || props.isDisabled}
         onMouseUp={handleSelectClick}
       >
         {!selectedOption && <Selected><Header>{placeholder || ''}</Header><Chevron>{CustomArrow ? <CustomArrow id='arrow' /> : <BsChevronDown />}</Chevron></Selected>}
@@ -97,18 +97,20 @@ export const Select = (props) => {
             <Header>
               {selectedOption.showOnSelected ?? selectedOption.content}
             </Header>
-            <Chevron>
-              {CustomArrow ? <CustomArrow id='arrow' /> : <BsChevronDown />}
-            </Chevron>
+            {!props.isDisabled && (
+              <Chevron>
+                {CustomArrow ? <CustomArrow id='arrow' /> : <BsChevronDown />}
+              </Chevron>
+            )}
           </Selected>
         )}
         {open && options && (
-          <Options id='list' position='right' ref={dropdownReference}>
+          <Options id='list' position='right' ref={dropdownReference} isHome={isHome}>
             {
-              options.map(option => (
+              options.map((option, i) => (
                 <Option
                   id='item'
-                  key={option.value}
+                  key={i}
                   selected={value === option.value}
                   onClick={() => handleChangeOption(option)}
                 >
