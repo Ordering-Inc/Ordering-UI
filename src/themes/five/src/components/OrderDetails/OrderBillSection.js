@@ -253,7 +253,7 @@ export const OrderBillSection = (props) => {
                   )}
                 </div>
                 <span>
-                  -{parsePrice(event.amount)}
+                  -{parsePrice(event.amount, { isTruncable: true })}
                 </span>
               </div>
             ))}

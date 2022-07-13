@@ -448,3 +448,20 @@ export const RibbonBox = styled.div`
     border-radius: 50px;
   `}
 `
+
+export const FavoriteWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 15px;
+  ${props => props.theme.rtl && css`
+    margin-right: 15px;
+    margin-left: 0px;
+  `}
+
+  svg {
+    font-size: 16px;
+    color: ${props => props.theme.colors.danger500};
+  }
+`

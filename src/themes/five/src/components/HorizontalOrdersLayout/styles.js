@@ -3,6 +3,7 @@ import React from 'react'
 
 export const Content = styled.div`
   display: flex;
+  position: relative;
   border-radius: 16px;
   padding: 10px;
   ${({ isCustomerMode }) => isCustomerMode ? css`
@@ -170,7 +171,7 @@ export const ButtonWrapper = styled.div`
   button {
     border-radius: 50px;
     font-size: 10px;
-    line-height: 19px;
+    line-height: 15px;
     padding: 4px 8px;
     border: 1px solid ${props => props.theme.colors.primaryContrast};
     margin: 5px;
@@ -223,5 +224,23 @@ export const Map = styled.div`
   @media(min-width: 480px){
     height: ${({ isBusinessesPage }) => isBusinessesPage ? '200px' : '100px'};
     min-height: ${({ isBusinessesPage }) => isBusinessesPage && '200px'}
+  }
+`
+
+export const FavoriteWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  top: 41px;
+  right: 10px;
+  ${props => props.theme.rtl && css`
+    left: 10px;
+    right: initial;
+  `}
+  svg {
+    color: ${props => props.theme.colors.danger500};
+    font-size: 16px;
   }
 `

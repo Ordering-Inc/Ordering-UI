@@ -39,7 +39,8 @@ export const BusinessItemAccordion = (props) => {
     handleClickCheckout,
     checkoutButtonDisabled,
     setPreorderBusiness,
-    handleChangeStore
+    handleChangeStore,
+    isMultiCheckout
   } = props
 
   const [orderState] = useOrder()
@@ -236,7 +237,7 @@ export const BusinessItemAccordion = (props) => {
           )}
           {props.children}
         </AccordionContent>
-        {!setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && (
+        {!setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && !isMultiCheckout && (
           <PriceContainer>
             <h4>{parsePrice(total)}</h4>
             <Button onClick={handleClickCheckout} color='primary'>{t('CHECKOUT', 'Checkout')}</Button>

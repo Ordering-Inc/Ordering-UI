@@ -34,7 +34,8 @@ const BusinessProductsListUI = (props) => {
     errorQuantityProducts,
     categoriesState,
     onClickCategory,
-    currentCart
+    currentCart,
+    handleUpdateProducts
   } = props
 
   const [, t] = useLanguage()
@@ -86,6 +87,7 @@ const BusinessProductsListUI = (props) => {
                   businessId={businessId}
                   onProductClick={onProductClick}
                   isCartOnProductsList={isCartOnProductsList}
+                  handleUpdateProducts={handleUpdateProducts}
                   productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                 />
               ))
@@ -121,6 +123,7 @@ const BusinessProductsListUI = (props) => {
                     product={product}
                     businessId={businessId}
                     onProductClick={onProductClick}
+                    handleUpdateProducts={handleUpdateProducts}
                     isCartOnProductsList={isCartOnProductsList}
                     productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                   />
@@ -130,6 +133,7 @@ const BusinessProductsListUI = (props) => {
                     useCustomFunctionality
                     onCustomClick={() => onClickCategory(category)}
                     isCartOnProductsList={isCartOnProductsList}
+                    handleUpdateProducts={handleUpdateProducts}
                     customText={t('MORE', 'More')}
                     customStyle={{
                       display: 'flex',
@@ -203,6 +207,7 @@ const BusinessProductsListUI = (props) => {
                             businessId={businessId}
                             product={product}
                             onProductClick={onProductClick}
+                            handleUpdateProducts={handleUpdateProducts}
                             isCartOnProductsList={isCartOnProductsList}
                             productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                           />
@@ -213,6 +218,7 @@ const BusinessProductsListUI = (props) => {
                           useCustomFunctionality
                           onCustomClick={() => onClickCategory(category)}
                           isCartOnProductsList={isCartOnProductsList}
+                          handleUpdateProducts={handleUpdateProducts}
                           customText={t('MORE', 'More')}
                           customStyle={{
                             display: 'flex',

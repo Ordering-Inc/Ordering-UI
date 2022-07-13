@@ -104,6 +104,7 @@ const PaymentOptionStripeUI = (props) => {
           onClose={() => setAddCardOpen(false)}
         >
           <StripeElementsForm
+            businessIds={props.businessIds}
             businessId={props.businessId}
             publicKey={props.publicKey}
             toSave

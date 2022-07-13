@@ -25,6 +25,7 @@ import { CartPopover } from './src/components/CartPopover'
 import { Checkout } from './src/components/Checkout'
 import { DriverTips } from './src/components/DriverTips'
 import { FacebookLoginButton } from './src/components/FacebookLogin'
+import { Favorite } from './src/components/Favorite'
 import { Footer } from './src/components/Footer'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { GoogleLoginButton } from './src/components/GoogleLogin'
@@ -43,6 +44,8 @@ import { Messages } from './src/components/Messages'
 import { MessagesListing } from './src/components/MessagesListing'
 import { MomentContent } from './src/components/MomentContent'
 import { MomentControl } from './src/components/MomentControl'
+import { MultiCheckout } from './src/components/MultiCheckout'
+import { MultiOrdersDetails } from './src/components/MultiOrdersDetails'
 import { MyOrders } from './src/components/MyOrders'
 import { NotFoundSource } from './src/components/NotFoundSource'
 import { NotNetworkConnectivity } from './src/components/NotNetworkConnectivity'
@@ -119,6 +122,7 @@ export {
   Checkout,
   DriverTips,
   FacebookLoginButton,
+  Favorite,
   Footer,
   ForgotPasswordForm,
   GoogleLoginButton,
@@ -137,6 +141,8 @@ export {
   MessagesListing,
   MomentContent,
   MomentControl,
+  MultiCheckout,
+  MultiOrdersDetails,
   MyOrders,
   Modal,
   NotFoundSource,

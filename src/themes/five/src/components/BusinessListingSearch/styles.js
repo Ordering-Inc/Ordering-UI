@@ -412,3 +412,7 @@ export const PriceFilterListWrapper = styled.div`
     }
   }
 `
+
+export const PreviouslyOrderedContainer = styled.div`
+
+`

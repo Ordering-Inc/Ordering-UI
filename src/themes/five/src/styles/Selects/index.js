@@ -107,7 +107,6 @@ export const Select = styled.div`
   ${props => props.open && css`
     background-color: ${darken(0.07, '#CCC')};
   `}
-
   ${(props) => props.isHome && css`
       #item {
         background-color: #FFF !important;

@@ -66,7 +66,8 @@ const BusinessProductsListingUI = (props) => {
     multiRemoveProducts,
     setAlertState,
     alertState,
-    onCheckoutRedirect
+    onCheckoutRedirect,
+    handleUpdateProducts
   } = props
 
   const { business, loading, error } = businessState
@@ -255,6 +256,7 @@ const BusinessProductsListingUI = (props) => {
           setOpenBusinessInformation={setOpenBusinessInformation}
           handleCartOpen={(val) => setIsCartOpen(val)}
           setSubcategoriesSelected={setSubcategoriesSelected}
+          handleUpdateProducts={handleUpdateProducts}
         />
 
         {
@@ -388,7 +390,7 @@ const BusinessProductsListingUI = (props) => {
       </Modal>
       <Alert
         title={t('ERROR', 'Error')}
-        open={alertState.open}
+        open={alertState?.open}
         content={t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.')}
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}
