@@ -52,3 +52,26 @@ export const ButtonWrapper = styled.div`
     width: 100%;
   }
 `
+
+export const WrapperInput = styled.div`
+  input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  button {
+    margin-top: 16px;
+  }
+`
+
+export const WrapperOption = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const WrapperOptionList = styled.div`
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+`
