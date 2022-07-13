@@ -57,7 +57,8 @@ const OrdersOptionUI = (props) => {
     businessOrderIds,
     products,
     hideOrders,
-    onProductRedirect
+    onProductRedirect,
+    businessesSearchList
   } = props
 
   const [, t] = useLanguage()
@@ -88,7 +89,7 @@ const OrdersOptionUI = (props) => {
     }
   }
 
-  const showSkeletons = (!isBusiness && !isProducts && loading) || (businessLoading && isBusiness) || (products?.length === 0 && isProducts)
+  const showSkeletons = (!isBusiness && !isProducts && loading) || (businessLoading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -124,9 +125,9 @@ const OrdersOptionUI = (props) => {
     return objectStatus && objectStatus
   }
 
-  const onProductClick = (product, business) => {
+  const onProductClick = (product, slug) => {
     onProductRedirect({
-      slug: business?.slug,
+      slug,
       product: product.id,
       category: product.category_id
     })

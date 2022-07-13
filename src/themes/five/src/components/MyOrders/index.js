@@ -46,7 +46,7 @@ export const MyOrders = (props) => {
   ]
 
   const notOrderOptions = ['business', 'products']
-  const allEmpty = (isEmptyActive && isEmptyActive && isEmptyPreorder) || ((isEmptyBusinesses || businessOrderIds?.length === 0) && hideOrders)
+  const allEmpty = (isEmptyActive && isEmptyPast && isEmptyPreorder) || ((isEmptyBusinesses || businessOrderIds?.length === 0) && hideOrders)
 
   const handleChangeFilter = (key) => {
     if (selectItem === key) setSelectItem('all')
