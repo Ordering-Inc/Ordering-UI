@@ -1,5 +1,6 @@
 import React from 'react'
-import { AddressList as AddressListController, ProfileOptions } from '../../../src/themes/five/src/components/AddressList'
+import { AddressList as AddressListController } from '../../../src/themes/five/src/components/AddressList'
+import { ProfileOptions } from '../../../src/themes/five/src/components/UserProfileForm/ProfileOptions'
 import { useLanguage, useSession } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
 import { SavedPlaces } from './styles'
