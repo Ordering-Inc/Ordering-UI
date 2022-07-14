@@ -2,11 +2,18 @@ import React from 'react'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 import { OrderDetails } from '../../../src/themes/five/src/components/OrderDetails'
+import { OrderDetails as OrderDetailsOld } from '../../../src/components/OrderDetails'
+import { useTheme } from 'styled-components'
 
 export const OrderDetailsPage = (props) => {
   const history = useHistory()
   const { orderId } = useParams()
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
+  const theme = useTheme()
+  const OrderDetailsComponent =
+    theme?.layouts?.confirmation?.components?.layout?.type === 'old'
+      ? OrderDetailsOld
+      : OrderDetails
 
   const orderDetailsProps = {
     ...props,
@@ -23,7 +30,7 @@ export const OrderDetailsPage = (props) => {
   return (
     <>
       <HelmetTags page='order_details' helmetTitle={`Order #${orderId}`} />
-      <OrderDetails {...orderDetailsProps} />
+      <OrderDetailsComponent {...orderDetailsProps} />
     </>
   )
 }

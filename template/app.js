@@ -6,19 +6,23 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, Analytics, FacebookPixel, useConfig, useEvent } from 'ordering-components'
+import { useSession, useLanguage, useOrder, Analytics, FacebookPixel, useConfig, AnalyticsSegment, useEvent } from 'ordering-components'
 
 import { Header } from '../src/themes/five/src/components/Header'
 import { Footer } from '../src/themes/five/src/components/Footer'
 import { NotNetworkConnectivity } from '../src/themes/five/src/components/NotNetworkConnectivity'
 
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
+import { Header as HeaderOld } from '../src/components/Header'
+import { Header as HeaderRed } from '../src/themes/seven/src/components/Header'
+import { Header as HeaderStarbucks } from '../src/themes/six/src/components/Header'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { Alert } from '../src/components/Confirm'
 import { SmartAppBanner } from '../src/components/SmartAppBanner'
 
 import { useTheme } from 'styled-components'
 
+import { AddressList } from './pages/AddressList'
 import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
 import { CheckoutPage } from './pages/Checkout'
@@ -32,13 +36,20 @@ import { Profile } from './pages/Profile'
 import { Wallets } from './pages/Wallets'
 import { MessagesList } from './pages/MessagesList'
 import { Help } from './pages/Help'
+import { Favorite } from './pages/Favorite'
+import { SessionsList } from './pages/SessionsList'
 import { SignUpBusiness } from './pages/SignUpBusiness'
+import { SignUpDriver } from './pages/SignUpDriver'
 import { UserVerification } from './pages/UserVerification'
 import { BusinessListingSearch } from './pages/BusinessListingSearch'
+import { ResetPassword } from './pages/ResetPassword'
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
 import settings from './config.json'
+import { Promotions } from './pages/Promotions'
+import { MultiCheckout } from './pages/MultiCheckout'
+import { MultiOrdersDetails } from './pages/MultiOrdersDetails'
 
 export const App = () => {
   const [{ auth, user }, { login }] = useSession()
@@ -52,6 +63,15 @@ export const App = () => {
   const location = useLocation()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
+
+  const HeaderComponent =
+    theme?.layouts?.header?.layout?.type === 'old'
+      ? HeaderOld
+      : theme?.layouts?.header?.layout?.type === 'red'
+        ? HeaderRed
+        : theme?.layouts?.header?.layout?.type === 'starbucks'
+          ? HeaderStarbucks
+          : Header
 
   const orderTypeSearchParam = parseInt(new URLSearchParams(useLocation()?.search)?.get('order_type') ?? 0, 10)
   const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
@@ -77,7 +97,7 @@ export const App = () => {
   const isFooterPage = location.pathname === '/pages/footer'
 
   const handleSuccessSignup = (user) => {
-    if (!user?.enabled && configs?.business_signup_enabled_default?.value === '0') {
+    if (!user?.enabled && (configs?.business_signup_enabled_default?.value === '0' || configs?.driver_signup_enabled_default?.value === '0')) {
       setAlertState({
         open: true,
         content: [t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')]
@@ -146,6 +166,9 @@ export const App = () => {
       {!!configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
       )}
+      {!!configs?.segment_track_id?.value && (
+        <AnalyticsSegment writeKey={configs?.segment_track_id?.value} />
+      )}
       {!!configs?.facebook_id?.value && FacebookPixel && (
         <FacebookPixel trackId={configs?.facebook_id?.value} />
       )}
@@ -163,7 +186,7 @@ export const App = () => {
       {
         loaded && (
           <>
-            <Header
+            <HeaderComponent
               isHome={isHome}
               location={location}
               isCustomLayout={settings?.use_marketplace}
@@ -193,6 +216,15 @@ export const App = () => {
                         : <HomePage />
                     )}
                   </Route>
+                  <Route exact path='/wallets'>
+                    {auth
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : isWalletEnabled
+                          ? <Wallets />
+                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
+                  </Route>
                   <Route exact path='/signup_business'>
                     {!auth ? (
                       <SignUpBusiness
@@ -204,6 +236,26 @@ export const App = () => {
                       />
                     ) : (
                       <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                    )}
+                  </Route>
+                  <Route exact path='/signup-driver'>
+                    {!auth ? (
+                      <SignUpDriver
+                        elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
+                        useLoginByCellphone
+                        useChekoutFileds
+                        handleSuccessSignup={handleSuccessSignup}
+                        isRecaptchaEnable
+                      />
+                    ) : (
+                      <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                    )}
+                  </Route>
+                  <Route exact path='/password/reset'>
+                    {auth ? (
+                      <Redirect to='/' />
+                    ) : (
+                      <ResetPassword />
                     )}
                   </Route>
                   <Route exact path='/profile'>
@@ -218,20 +270,18 @@ export const App = () => {
                       ? <UserVerification />
                       : <Redirect to={auth ? settings?.use_marketplace ? '/marketplace' : '/search' : '/'} />}
                   </Route>
-                  <Route exact path='/wallets'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : isWalletEnabled
-                          ? <Wallets />
-                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
-                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
-                  </Route>
                   <Route exact path='/profile/orders'>
                     {auth
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<MyOrders />)
+                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
+                  </Route>
+                  <Route exact path='/profile/addresses'>
+                    {auth
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : (<AddressList />)
                       : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
                   </Route>
                   <Route exact path='/messages'>
@@ -241,8 +291,7 @@ export const App = () => {
                         : <MessagesList />
                       : (
                         <Redirect to={{
-                          pathname: '/login',
-                          state: { from: location.pathname || null }
+                          pathname: '/search'
                         }}
                         />
                       )}
@@ -277,7 +326,19 @@ export const App = () => {
                         <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
                       )
                     )}
-
+                  </Route>
+                  <Route exact path='/promotions'>
+                    {orderStatus.loading && !orderStatus.options?.address?.location ? (
+                      <SpinnerLoader />
+                    ) : (
+                      isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        orderStatus.options?.address?.location
+                          ? <Promotions />
+                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                      )
+                    )}
                   </Route>
                   <Route exact path='/store/:store'>
                     {isUserVerifyRequired ? (
@@ -291,6 +352,36 @@ export const App = () => {
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : <CheckoutPage />
+                      : (
+                        <Redirect to={{
+                          pathname: settings?.use_marketplace
+                            ? '/marketplace'
+                            : '/',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
+                  </Route>
+                  <Route path='/multi-checkout'>
+                    {auth
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <MultiCheckout />
+                      : (
+                        <Redirect to={{
+                          pathname: settings?.use_marketplace
+                            ? '/marketplace'
+                            : '/',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
+                  </Route>
+                  <Route path='/multi-orders'>
+                    {auth
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <MultiOrdersDetails />
                       : (
                         <Redirect to={{
                           pathname: settings?.use_marketplace
@@ -316,6 +407,21 @@ export const App = () => {
                         />
                       )}
                   </Route>
+                  <Route exact path='/promotions'>
+                    {(auth || hashKey)
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <Promotions />
+                      : (
+                        <Redirect to={{
+                          pathname: settings?.use_marketplace
+                            ? '/marketplace'
+                            : '/',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
+                  </Route>
                   <Route exact path='/pages/:pageSlug'>
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
@@ -330,7 +436,21 @@ export const App = () => {
                       <PagesList />
                     )}
                   </Route>
-                  <Route exact path='/:store'>
+                  <Route exact path='/favorite'>
+                    {auth
+                      ? <Favorite />
+                      : (
+                        <Redirect to='/' />
+                      )}
+                  </Route>
+                  <Route exact path='/sessions'>
+                    {auth
+                      ? <SessionsList />
+                      : (
+                        <Redirect to='/' />
+                      )}
+                  </Route>
+                  <Route path='/:store'>
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (

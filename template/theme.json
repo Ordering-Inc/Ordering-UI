@@ -2,18 +2,11 @@
   "fonts": {
     "primary": {
       "name": "Poppins",
-      "weights": [
-        300,
-        400,
-        500,
-        600
-      ]
+      "weights": [300, 400, 500, 600]
     },
     "special": {
       "name": "Lobster",
-      "weights": [
-        400
-      ]
+      "weights": [400]
     }
   },
   "colors": {
@@ -35,13 +28,17 @@
     "warning100": "#FFF4CC",
     "warning500": "#FFC700",
     "gray200": "#E9ECEF",
-    "links": "#2C7BE5"
+    "danger500": "#E63757",
+    "links": "#2C7BE5",
+    "success500": "#00D27A",
+    "secondaryDark": "#414954"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
     "SIGN_IN": "Sign in",
     "SIGN_UP": "Sign up",
     "ACCEPT": "Accept",
+
     "TITLE_HOME": "All We need is Food",
     "SUBTITLE_HOME": "Let's start to order food now",
     "TYPE_AN_ADDRESS": "Type an addres",
@@ -63,6 +60,7 @@
     "NOT_FOUND_BUSINESS_PRODUCTS": "No products to show at this business, please try with other business",
     "SEARCH_REDIRECT": "Go to Businesses",
     "ERROR_NOT_FOUND_STORE": "Sorry, an error has occurred with business selected",
+
     "SKU": "Sku",
     "INGREDIENTS": "Ingredients",
     "SPECIAL_COMMENT": "Special comment",
@@ -72,6 +70,7 @@
     "RESET_PASSWORD": "Reset password",
     "LOGIN": "Login",
     "LOGIN_SIGNUP": "Login / Sign Up",
+
     "PENDING": "Pending",
     "COMPLETED": "Completed",
     "REJECTED": "Rejected",
@@ -358,7 +357,7 @@
       "hidden": false,
       "components": {
         "layout": {
-          "type": "half"
+          "type": "old"
         },
         "delivery_type": {
           "hidden": false

@@ -30,6 +30,7 @@ import visa from './template/assets/images/visa.png'
 import mastercard from './template/assets/images/mastercard.png'
 import credit from './template/assets/images/credit.png'
 import businessSignUpHero from './template/assets/images/business_signup.png'
+import driverSignUpHero from './template/assets/images/driver-signup-hero.png'
 import loyaltyLevel from './template/assets/images/loyalty_level.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
@@ -96,6 +97,7 @@ theme.images = {
     mastercard,
     credit,
     businessSignUpHero,
+    driverSignUpHero,
     leftArrow,
     rightArrow
   },
