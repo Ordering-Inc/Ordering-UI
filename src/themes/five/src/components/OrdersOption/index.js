@@ -26,6 +26,7 @@ import { PreviousProductsOrdered } from './PreviousProductsOrdered'
 import { BusinessController } from '../BusinessController'
 import { SingleProductCard } from '../SingleProductCard'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { Alert } from '../Confirm'
 
 const OrdersOptionUI = (props) => {
   const {
@@ -79,6 +80,7 @@ const OrdersOptionUI = (props) => {
 
   const [loadingOrders, setLoadingOrders] = useState(true)
   const [businessLoading, setBusinessLoading] = useState(true)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const closeOrderModal = (e) => {
     const outsideModal = !window.document.getElementById('app-modals') ||
       !window.document.getElementById('app-modals').contains(e.target)
@@ -126,12 +128,19 @@ const OrdersOptionUI = (props) => {
   }
 
   const onProductClick = (product, slug) => {
-    onProductRedirect({
-      slug,
-      product: product.id,
-      category: product.category_id
-    })
-    events.emit('product_clicked', product)
+    if (slug) {
+      onProductRedirect({
+        slug,
+        product: product.product_id,
+        category: product.category_id
+      })
+      events.emit('product_clicked', product)
+    } else {
+      setAlertState({
+        open: true,
+        content: t('PRODUCT_HAS_NOT_BUSINESS_SLUG', 'The product selected has not business slug')
+      })
+    }
   }
 
   useEffect(() => {
@@ -329,6 +338,15 @@ const OrdersOptionUI = (props) => {
           />
         )
       )}
+      <Alert
+        title={t('MY_ORDERS', 'My orders')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
