@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useOrder, OrderList } from 'ordering-components'
+import { OrderList, useLanguage, useOrder, useEvent } from 'ordering-components'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
@@ -56,12 +56,15 @@ const OrdersOptionUI = (props) => {
     isProducts,
     businessOrderIds,
     products,
-    hideOrders
+    hideOrders,
+    onProductRedirect,
+    businessesSearchList
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ carts }] = useOrder()
+  const [events] = useEvent()
   const { width } = useWindowSize()
   const { loading, error, orders: values } = orderList
 
@@ -86,7 +89,7 @@ const OrdersOptionUI = (props) => {
     }
   }
 
-  const showSkeletons = (!isBusiness && !isProducts && loading) || (businessLoading && isBusiness) || (products?.length === 0 && isProducts)
+  const showSkeletons = (!isBusiness && !isProducts && loading) || (businessLoading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -120,6 +123,15 @@ const OrdersOptionUI = (props) => {
     const objectStatus = orderStatus.find((o) => o.key === status)
 
     return objectStatus && objectStatus
+  }
+
+  const onProductClick = (product, slug) => {
+    onProductRedirect({
+      slug,
+      product: product.id,
+      category: product.category_id
+    })
+    events.emit('product_clicked', product)
   }
 
   useEffect(() => {
@@ -206,7 +218,7 @@ const OrdersOptionUI = (props) => {
       )}
 
       {isProducts && (
-        <PreviousProductsOrdered products={products} onRedirectPage={onRedirectPage} />
+        <PreviousProductsOrdered products={products} onProductClick={onProductClick} />
       )}
 
       {(isCustomLayout ? (loadingOrders || loading || isBusinessesLoading) : showSkeletons) && (
@@ -285,7 +297,7 @@ const OrdersOptionUI = (props) => {
         </>
       )}
 
-      {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (
+      {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading && !hideOrders : !loading && !error && orders.length > 0 && !hideOrders) && (
         horizontal ? (
           <HorizontalOrdersLayout
             businessesIds={businessesIds}

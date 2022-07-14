@@ -10,7 +10,8 @@ import { SingleProductCard } from '../../SingleProductCard'
 
 export const PreviousProductsOrdered = (props) => {
   const {
-    products
+    products,
+    onProductClick
   } = props
 
   return (
@@ -23,6 +24,7 @@ export const PreviousProductsOrdered = (props) => {
               isSoldOut={(product.inventoried && !product.quantity)}
               product={product}
               businessId={product?.business?.id}
+              onProductClick={onProductClick}
             />
           ))}
         </AutoScroll>

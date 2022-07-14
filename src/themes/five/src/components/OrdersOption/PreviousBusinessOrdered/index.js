@@ -65,7 +65,8 @@ export const PreviousBusinessOrderedUI = (props) => {
 export const PreviousBusinessOrdered = (props) => {
   const previousBusinessOrderedController = {
     ...props,
-    UIComponent: PreviousBusinessOrderedUI
+    UIComponent: PreviousBusinessOrderedUI,
+    paginationSettings: { initialPage: 1, pageSize: 50, controlType: 'infinity' }
   }
 
   return (
