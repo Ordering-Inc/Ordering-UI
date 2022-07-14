@@ -100,13 +100,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     bgColor: category === null || category === void 0 ? void 0 : (_category$ribbon2 = category.ribbon) === null || _category$ribbon2 === void 0 ? void 0 : _category$ribbon2.color,
     isRoundRect: (category === null || category === void 0 ? void 0 : (_category$ribbon3 = category.ribbon) === null || _category$ribbon3 === void 0 ? void 0 : _category$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
     isCapsule: (category === null || category === void 0 ? void 0 : (_category$ribbon4 = category.ribbon) === null || _category$ribbon4 === void 0 ? void 0 : _category$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
-  }, category === null || category === void 0 ? void 0 : (_category$ribbon5 = category.ribbon) === null || _category$ribbon5 === void 0 ? void 0 : _category$ribbon5.text)), (category === null || category === void 0 ? void 0 : category.description) && /*#__PURE__*/_react.default.createElement("div", {
-    className: "category-description"
-  }, /*#__PURE__*/_react.default.createElement("p", null, shortCategoryDescriptionSelected, (category === null || category === void 0 ? void 0 : (_category$description3 = category.description) === null || _category$description3 === void 0 ? void 0 : _category$description3.length) > 200 && /*#__PURE__*/_react.default.createElement("span", {
+  }, category === null || category === void 0 ? void 0 : (_category$ribbon5 = category.ribbon) === null || _category$ribbon5 === void 0 ? void 0 : _category$ribbon5.text)), (category === null || category === void 0 ? void 0 : category.description) && /*#__PURE__*/_react.default.createElement(_styles.CategoryDescripion, null, /*#__PURE__*/_react.default.createElement("p", null, shortCategoryDescriptionSelected, (category === null || category === void 0 ? void 0 : (_category$description3 = category.description) === null || _category$description3 === void 0 ? void 0 : _category$description3.length) > 200 && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setOpenDescription(category);
     }
-  }, t('SEE_MORE', 'See more'))))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product, i) {
+  }, t('VIEW_MORE', 'View more'))))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.map(function (product, i) {
     var _currentCart$products;
 
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
@@ -194,23 +192,21 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       className: "wrap-header"
     }, /*#__PURE__*/_react.default.createElement(_styles.HeaderWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "category-title"
-    }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
       src: category.image
     }), /*#__PURE__*/_react.default.createElement("h3", null, category.name), (category === null || category === void 0 ? void 0 : (_category$ribbon6 = category.ribbon) === null || _category$ribbon6 === void 0 ? void 0 : _category$ribbon6.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
       bgColor: category === null || category === void 0 ? void 0 : (_category$ribbon7 = category.ribbon) === null || _category$ribbon7 === void 0 ? void 0 : _category$ribbon7.color,
       isRoundRect: (category === null || category === void 0 ? void 0 : (_category$ribbon8 = category.ribbon) === null || _category$ribbon8 === void 0 ? void 0 : _category$ribbon8.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
       isCapsule: (category === null || category === void 0 ? void 0 : (_category$ribbon9 = category.ribbon) === null || _category$ribbon9 === void 0 ? void 0 : _category$ribbon9.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
-    }, category === null || category === void 0 ? void 0 : (_category$ribbon10 = category.ribbon) === null || _category$ribbon10 === void 0 ? void 0 : _category$ribbon10.text)), (category === null || category === void 0 ? void 0 : category.description) && /*#__PURE__*/_react.default.createElement("div", {
-      className: "category-description"
-    }, /*#__PURE__*/_react.default.createElement("p", null, shortCategoryDescription, (category === null || category === void 0 ? void 0 : (_category$description6 = category.description) === null || _category$description6 === void 0 ? void 0 : _category$description6.length) > 200 && /*#__PURE__*/_react.default.createElement("span", {
-      onClick: function onClick() {
-        return setOpenDescription(category);
-      }
-    }, t('SEE_MORE', 'See more'))))), (products === null || products === void 0 ? void 0 : products.length) > 9 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, category === null || category === void 0 ? void 0 : (_category$ribbon10 = category.ribbon) === null || _category$ribbon10 === void 0 ? void 0 : _category$ribbon10.text)), (products === null || products === void 0 ? void 0 : products.length) > 9 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       onClick: function onClick() {
         return onClickCategory(category);
       }
-    }, t('MORE', 'More'))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.filter(function (p, index) {
+    }, t('MORE', 'More'))), (category === null || category === void 0 ? void 0 : category.description) && /*#__PURE__*/_react.default.createElement(_styles.CategoryDescripion, null, /*#__PURE__*/_react.default.createElement("p", null, shortCategoryDescription, (category === null || category === void 0 ? void 0 : (_category$description6 = category.description) === null || _category$description6 === void 0 ? void 0 : _category$description6.length) > 200 && /*#__PURE__*/_react.default.createElement("span", {
+      onClick: function onClick() {
+        return setOpenDescription(category);
+      }
+    }, t('VIEW_MORE', 'View more')))))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.filter(function (p, index) {
       return index < 9;
     }).map(function (product, i) {
       var _currentCart$products3;
@@ -268,7 +264,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.DescriptionModalContainer, null, (openDescription === null || openDescription === void 0 ? void 0 : openDescription.image) && /*#__PURE__*/_react.default.createElement("img", {
     src: openDescription.image
-  }), /*#__PURE__*/_react.default.createElement("p", null, openDescription === null || openDescription === void 0 ? void 0 : openDescription.description))));
+  }), /*#__PURE__*/_react.default.createElement(_styles.DescriptionContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, openDescription === null || openDescription === void 0 ? void 0 : openDescription.description))))));
 };
 
 var BusinessProductsList = function BusinessProductsList(props) {

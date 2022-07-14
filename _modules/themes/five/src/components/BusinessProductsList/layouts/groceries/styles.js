@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperNotFound = exports.WrapAllCategories = exports.RibbonBox = exports.ProductsListing = exports.ProductsContainer = exports.HeaderWrapper = exports.ErrorMessage = exports.DescriptionModalContainer = void 0;
+exports.WrapperNotFound = exports.WrapAllCategories = exports.RibbonBox = exports.ProductsListing = exports.ProductsContainer = exports.HeaderWrapper = exports.HeaderTitle = exports.ErrorMessage = exports.DescriptionModalContainer = exports.DescriptionContainer = exports.CategoryDescripion = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -31,7 +31,7 @@ var ProductsListing = _styledComponents.default.div(_templateObject3 || (_templa
 
 exports.ProductsListing = ProductsListing;
 
-var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    margin-left: 10px;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n    }\n  }\n  .category-description {\n    margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    p {\n      margin: 0;\n      color: #909BA9;\n      white-space: pre;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n    }\n  }\n\n  .wrap-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    button {\n      min-width: max-content;\n    }\n  }\n  h3 {\n    font-weight: 600;\n    font-size: 24px;\n    color: ", ";\n    margin-left: 10px;\n    ", "\n  }\n"])), function (props) {
+var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    margin-left: 10px;\n    width: 100%;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n    }\n  }\n  .category-description {\n    margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    p {\n      margin: 0;\n      color: #909BA9;\n      white-space: pre;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n    }\n  }\n\n  .wrap-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    width: 100%;\n    button {\n      min-width: max-content;\n    }\n  }\n  h3 {\n    font-weight: 600;\n    font-size: 24px;\n    color: ", ";\n    margin-left: 10px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
@@ -53,7 +53,7 @@ var WrapperNotFound = _styledComponents.default.div(_templateObject7 || (_templa
 
 exports.WrapperNotFound = WrapperNotFound;
 
-var HeaderWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral([""])));
+var HeaderWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 
 exports.HeaderWrapper = HeaderWrapper;
 
@@ -79,3 +79,20 @@ var RibbonBox = _styledComponents.default.div(_templateObject10 || (_templateObj
 });
 
 exports.RibbonBox = RibbonBox;
+
+var CategoryDescripion = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: flex-end;\n    p {\n      margin: 0;\n      color: #909BA9;\n      max-width: ", ";\n      overflow: hidden;\n      text-overflow: ellipsis;\n      overflow-wrap: anywhere;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n      white-space: nowrap;\n      overflow: visible;\n    }\n"])), function (_ref4) {
+  var maxWidth = _ref4.maxWidth;
+  return maxWidth ? "".concat(maxWidth - 200, "px") : 'initial';
+}, function (props) {
+  return props.theme.colors.primary;
+});
+
+exports.CategoryDescripion = CategoryDescripion;
+
+var DescriptionContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  height: 100%;\n  width: 100%;\n  overflow-y: auto;\n  overflow-x: hidden;\n  div{\n    height: 300px;\n    ::-webkit-scrollbar {\n      width: 6px;\n      height: 6px;\n    }\n  }\n  p{\n    white-space: pre-wrap;\n    overflow-wrap: break-word;\n  }\n"])));
+
+exports.DescriptionContainer = DescriptionContainer;
+
+var HeaderTitle = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n"])));
+
+exports.HeaderTitle = HeaderTitle;

@@ -110,10 +110,10 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   var maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory);
 
   var handleClickProduct = function handleClickProduct(e) {
-    var _favoriteRef$current;
+    var _favoriteRef$current, _product$business;
 
     if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
-    !isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product) || useCustomFunctionality && onCustomClick && onCustomClick();
+    !isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product, product === null || product === void 0 ? void 0 : (_product$business = product.business) === null || _product$business === void 0 ? void 0 : _product$business.slug) || useCustomFunctionality && onCustomClick && onCustomClick();
   };
 
   var handleChangeFavorite = function handleChangeFavorite() {

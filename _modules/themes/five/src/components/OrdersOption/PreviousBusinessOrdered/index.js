@@ -113,7 +113,12 @@ exports.PreviousBusinessOrderedUI = PreviousBusinessOrderedUI;
 
 var PreviousBusinessOrdered = function PreviousBusinessOrdered(props) {
   var previousBusinessOrderedController = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: PreviousBusinessOrderedUI
+    UIComponent: PreviousBusinessOrderedUI,
+    paginationSettings: {
+      initialPage: 1,
+      pageSize: 50,
+      controlType: 'infinity'
+    }
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, previousBusinessOrderedController);

@@ -82,7 +82,9 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
       termValue = props.termValue,
       paginationProps = props.paginationProps,
       handleSearchbusinessAndProducts = props.handleSearchbusinessAndProducts,
-      brandList = props.brandList;
+      brandList = props.brandList,
+      onRedirectPage = props.onRedirectPage,
+      onProductRedirect = props.onProductRedirect;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -246,7 +248,9 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     handleChangeFilters: handleChangeFilters
   }))), /*#__PURE__*/_react.default.createElement(_styles.FiltersResultContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PreviouslyOrderedContainer, null, /*#__PURE__*/_react.default.createElement(_MyOrders.MyOrders, {
     hideOrders: true,
-    businessesSearchList: businessesSearchList
+    businessesSearchList: businessesSearchList,
+    onRedirectPage: onRedirectPage,
+    onProductRedirect: onProductRedirect
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, ((_businessesSearchList2 = businessesSearchList.businesses) === null || _businessesSearchList2 === void 0 ? void 0 : _businessesSearchList2.length) > 0 && /*#__PURE__*/_react.default.createElement("h2", null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, {
     noResults: noResults
   }, noResults && /*#__PURE__*/_react.default.createElement(_styles.NotFoundWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

@@ -49,7 +49,8 @@ var MyOrders = function MyOrders(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var hideOrders = props.hideOrders,
-      businessesSearchList = props.businessesSearchList;
+      businessesSearchList = props.businessesSearchList,
+      onProductRedirect = props.onProductRedirect;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -116,7 +117,7 @@ var MyOrders = function MyOrders(props) {
     value: t('PRODUCTS', 'Products')
   }];
   var notOrderOptions = ['business', 'products'];
-  var allEmpty = isEmptyActive && isEmptyActive && isEmptyPreorder || (isEmptyBusinesses || (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) === 0) && hideOrders;
+  var allEmpty = isEmptyActive && isEmptyPast && isEmptyPreorder || (isEmptyBusinesses || (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) === 0) && hideOrders;
 
   var handleChangeFilter = function handleChangeFilter(key) {
     if (selectItem === key) setSelectItem('all');else setSelectItem(key);
@@ -179,7 +180,7 @@ var MyOrders = function MyOrders(props) {
     selectItem: selectItem
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)))), notOrderOptions.includes(selectedOption) && /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     titleContent: t('PREVIOUSLY_ORDERED', 'Previously ordered'),
-    hideOrders: hideOrders,
+    hideOrders: true,
     horizontal: true,
     isBusiness: selectedOption === 'business',
     isProducts: selectedOption === 'products',
@@ -189,7 +190,8 @@ var MyOrders = function MyOrders(props) {
     businessesSearchList: businessesSearchList,
     setIsEmptyBusinesses: setIsEmptyBusinesses,
     businessOrderIds: businessOrderIds,
-    setBusinessOrderIds: setBusinessOrderIds
+    setBusinessOrderIds: setBusinessOrderIds,
+    onProductRedirect: onProductRedirect
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

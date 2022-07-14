@@ -97,7 +97,9 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       isProducts = props.isProducts,
       businessOrderIds = props.businessOrderIds,
       products = props.products,
-      hideOrders = props.hideOrders;
+      hideOrders = props.hideOrders,
+      onProductRedirect = props.onProductRedirect,
+      businessesSearchList = props.businessesSearchList;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -108,6 +110,10 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       carts = _useOrder2[0].carts;
+
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -151,7 +157,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }
   };
 
-  var showSkeletons = !isBusiness && !isProducts && loading || businessLoading && isBusiness || (products === null || products === void 0 ? void 0 : products.length) === 0 && isProducts;
+  var showSkeletons = !isBusiness && !isProducts && loading || businessLoading && isBusiness || (products === null || products === void 0 ? void 0 : products.length) === 0 && isProducts && (!businessesSearchList && loading || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.loading));
 
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
@@ -234,6 +240,15 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       return o.key === status;
     });
     return objectStatus && objectStatus;
+  };
+
+  var onProductClick = function onProductClick(product, slug) {
+    onProductRedirect({
+      slug: slug,
+      product: product.id,
+      category: product.category_id
+    });
+    events.emit('product_clicked', product);
   };
 
   (0, _react.useEffect)(function () {
@@ -325,7 +340,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     isLoadingOrders: loading
   }), isProducts && /*#__PURE__*/_react.default.createElement(_PreviousProductsOrdered.PreviousProductsOrdered, {
     products: products,
-    onRedirectPage: onRedirectPage
+    onProductClick: onProductClick
   }), (isCustomLayout ? loadingOrders || loading || isBusinessesLoading : showSkeletons) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessLoading && isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.BusinessControllerSkeleton, null, _toConsumableArray(Array(3).keys()).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
@@ -374,7 +389,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 80
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
-  }))), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
+  }))), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading && !hideOrders : !loading && !error && orders.length > 0 && !hideOrders) && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
     businessesIds: businessesIds,
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);
