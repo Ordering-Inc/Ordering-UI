@@ -23,6 +23,7 @@ export const WrapAllCategories = styled.div`
     display: flex;
     align-items: center;
     margin-left: 10px;
+    width: 100%;
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
       margin-left: 0;
@@ -57,6 +58,7 @@ export const WrapAllCategories = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     button {
       min-width: max-content;
     }
@@ -80,7 +82,9 @@ export const WrapperNotFound = styled.div`
   }
 `
 
-export const HeaderWrapper = styled.div``
+export const HeaderWrapper = styled.div`
+  width: 100%;
+`
 
 export const DescriptionModalContainer = styled.div`
   display: flex;
@@ -129,4 +133,51 @@ export const RibbonBox = styled.div`
   ${({ isCapsule }) => isCapsule && css`
     border-radius: 50px;
   `}
+`
+
+export const CategoryDescripion = styled.div`
+    margin-left: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+    p {
+      margin: 0;
+      color: #909BA9;
+      max-width: ${({ maxWidth }) => maxWidth ? `${maxWidth - 200}px` : 'initial'};
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
+    }
+    span {
+      color: ${props => props.theme.colors.primary};
+      text-decoration: underline;
+      margin-left: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: visible;
+    }
+`
+
+export const DescriptionContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  div{
+    height: 300px;
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+  }
+  p{
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+  }
+`
+
+export const HeaderTitle = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `
