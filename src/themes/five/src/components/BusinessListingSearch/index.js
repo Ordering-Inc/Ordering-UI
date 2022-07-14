@@ -62,7 +62,9 @@ export const BusinessListingSearchUI = (props) => {
     termValue,
     paginationProps,
     handleSearchbusinessAndProducts,
-    brandList
+    brandList,
+    onRedirectPage,
+    onProductRedirect
   } = props
 
   const [orderState] = useOrder()
@@ -237,6 +239,8 @@ export const BusinessListingSearchUI = (props) => {
             <MyOrders
               hideOrders
               businessesSearchList={businessesSearchList}
+              onRedirectPage={onRedirectPage}
+              onProductRedirect={onProductRedirect}
             />
           </PreviouslyOrderedContainer>
           <BusinessListWrapper>
