@@ -5,37 +5,33 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrdersOption = void 0;
+exports.FavoriteList = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _orderingComponents = require("ordering-components");
-
-var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
-
-var _VerticalOrdersLayout = require("../../../../../components/VerticalOrdersLayout");
-
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
-
-var _styledComponents = require("styled-components");
-
-var _styles = require("./styles");
-
-var _PreviousBusinessOrdered = require("./PreviousBusinessOrdered");
-
-var _PreviousProductsOrdered = require("./PreviousProductsOrdered");
 
 var _BusinessController = require("../BusinessController");
 
-var _SingleProductCard = require("../SingleProductCard");
+var _BusinessPreorder = require("../BusinessPreorder");
+
+var _NotFoundSource = require("../NotFoundSource");
+
+var _Buttons = require("../../styles/Buttons");
+
+var _Modal = require("../Modal");
 
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
-var _Confirm = require("../Confirm");
+var _AutoScroll = require("../AutoScroll");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _SingleProductCard = require("../SingleProductCard");
+
+var _styledComponents = require("styled-components");
+
+var _SingleOrderCard = require("../SingleOrderCard");
+
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -69,49 +65,26 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var OrdersOptionUI = function OrdersOptionUI(props) {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+var FavoriteListUI = function FavoriteListUI(props) {
+  var _props$beforeElements, _props$beforeComponen, _favoriteList$favorit2, _favoriteList$favorit3, _favoriteList$favorit4, _favoriteList$favorit5, _props$afterComponent, _props$afterElements;
 
-  var horizontal = props.horizontal,
-      activeOrders = props.activeOrders,
-      orderList = props.orderList,
+  var favoriteList = props.favoriteList,
+      handleUpdateFavoriteList = props.handleUpdateFavoriteList,
       pagination = props.pagination,
-      isBusinessesPage = props.isBusinessesPage,
-      loadMoreOrders = props.loadMoreOrders,
-      titleContent = props.titleContent,
-      customArray = props.customArray,
-      onRedirectPage = props.onRedirectPage,
-      businessesIds = props.businessesIds,
-      orderStatus = props.orderStatus,
-      isCustomLayout = props.isCustomLayout,
-      isBusinessesLoading = props.isBusinessesLoading,
-      pastOrders = props.pastOrders,
-      preOrders = props.preOrders,
-      selectItem = props.selectItem,
-      setIsEmptyPast = props.setIsEmptyPast,
-      setIsEmptyActive = props.setIsEmptyActive,
-      setIsEmptyPreorder = props.setIsEmptyPreorder,
-      isCustomerMode = props.isCustomerMode,
-      handleUpdateOrderList = props.handleUpdateOrderList,
-      reorderState = props.reorderState,
-      handleReorder = props.handleReorder,
+      getFavoriteList = props.getFavoriteList,
       isBusiness = props.isBusiness,
-      isProducts = props.isProducts,
-      businessOrderIds = props.businessOrderIds,
-      products = props.products,
-      hideOrders = props.hideOrders,
-      onProductRedirect = props.onProductRedirect,
-      businessesSearchList = props.businessesSearchList;
+      isProduct = props.isProduct,
+      isOrder = props.isOrder,
+      handleReorder = props.handleReorder,
+      reorderState = props.reorderState;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var theme = (0, _styledComponents.useTheme)();
-
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
-      carts = _useOrder2[0].carts;
+      orderState = _useOrder2[0];
 
   var _useEvent = (0, _orderingComponents.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -120,54 +93,46 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
-  var loading = orderList.loading,
-      error = orderList.error,
-      values = orderList.orders;
-  var imageFails = activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders;
-  var orders = customArray || values || [];
-  var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
-    return businessesIds && businessesIds.includes(order.business_id);
-  }).every(function (i) {
-    return !i;
-  }) : orders.length > 0;
+  var theme = (0, _styledComponents.useTheme)();
 
-  var _useState = (0, _react.useState)(true),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      loadingOrders = _useState2[0],
-      setLoadingOrders = _useState2[1];
+      isPreorder = _useState2[0],
+      setIsPreorder = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(true),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      businessLoading = _useState4[0],
-      setBusinessLoading = _useState4[1];
+      preorderBusiness = _useState4[0],
+      setPreorderBusiness = _useState4[1];
 
-  var _useState5 = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      alertState = _useState6[0],
-      setAlertState = _useState6[1];
+  var pastOrders = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
 
-  var closeOrderModal = function closeOrderModal(e) {
-    var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
-
-    if (outsideModal) {
-      var _reorderState$result, _reorderState$result2, _reorderState$result3;
-
-      var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result = reorderState.result) === null || _reorderState$result === void 0 ? void 0 : _reorderState$result.business_id);
-
-      sessionStorage.setItem('adjust-cart-products', _businessId);
-      onRedirectPage && onRedirectPage({
-        page: 'business',
-        params: {
-          store: reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result2 = reorderState.result) === null || _reorderState$result2 === void 0 ? void 0 : (_reorderState$result3 = _reorderState$result2.business) === null || _reorderState$result3 === void 0 ? void 0 : _reorderState$result3.slug
-        }
-      });
-    }
+  var handleClickBusiness = function handleClickBusiness(business) {
+    events.emit('go_to_page', {
+      page: 'business',
+      params: {
+        store: business.slug
+      }
+    });
   };
 
-  var showSkeletons = !isBusiness && !isProducts && loading || businessLoading && isBusiness || (products === null || products === void 0 ? void 0 : products.length) === 0 && isProducts && (!businessesSearchList && loading || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.loading));
+  var handleGoToList = function handleGoToList() {
+    if (isOrder) {
+      events.emit('go_to_page', {
+        page: 'orders'
+      });
+      return;
+    }
+
+    events.emit('go_to_page', {
+      page: 'search'
+    });
+  };
+
+  var handleClosePreorder = function handleClosePreorder() {
+    setIsPreorder(false);
+    setPreorderBusiness(null);
+  };
 
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
@@ -252,46 +217,35 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return objectStatus && objectStatus;
   };
 
-  var onProductClick = function onProductClick(product, slug) {
-    if (slug) {
-      onProductRedirect({
-        slug: slug,
-        product: product.product_id,
-        category: product.category_id
-      });
-      events.emit('product_clicked', product);
-    } else {
-      setAlertState({
-        open: true,
-        content: t('PRODUCT_HAS_NOT_BUSINESS_SLUG', 'The product selected has not business slug')
+  var onRedirectPage = function onRedirectPage(data) {
+    events.emit('go_to_page', data);
+  };
+
+  var closeOrderModal = function closeOrderModal(e) {
+    var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
+
+    if (outsideModal) {
+      var _reorderState$result, _reorderState$result2, _reorderState$result3;
+
+      var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result = reorderState.result) === null || _reorderState$result === void 0 ? void 0 : _reorderState$result.business_id);
+
+      sessionStorage.setItem('adjust-cart-products', _businessId);
+      onRedirectPage && onRedirectPage({
+        page: 'business',
+        params: {
+          store: reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result2 = reorderState.result) === null || _reorderState$result2 === void 0 ? void 0 : (_reorderState$result3 = _reorderState$result2.business) === null || _reorderState$result3 === void 0 ? void 0 : _reorderState$result3.slug
+        }
       });
     }
   };
 
   (0, _react.useEffect)(function () {
-    var timeout;
-
-    if (isCustomLayout) {
-      timeout = setTimeout(function () {
-        setLoadingOrders(false);
-      }, 2000);
-    }
-
-    return function () {
-      typeof timeout === 'number' && clearTimeout(timeout);
-    };
-  }, []);
-  (0, _react.useEffect)(function () {
-    if (loading) return;
-
-    if (orders.length === 0) {
-      activeOrders && setIsEmptyActive && setIsEmptyActive(true);
-      pastOrders && setIsEmptyPast && setIsEmptyPast(true);
-      preOrders && setIsEmptyPreorder && setIsEmptyPreorder(true);
-    }
-  }, [orders, activeOrders, pastOrders, preOrders]);
+    if (preorderBusiness) setIsPreorder(true);
+  }, [preorderBusiness]);
   (0, _react.useEffect)(function () {
     var _reorderState$result4;
+
+    if (!isOrder) return;
 
     if (reorderState !== null && reorderState !== void 0 && reorderState.error) {
       window.addEventListener('click', closeOrderModal);
@@ -301,19 +255,19 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }
 
     if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && reorderState.loading === false && reorderState !== null && reorderState !== void 0 && (_reorderState$result4 = reorderState.result) !== null && _reorderState$result4 !== void 0 && _reorderState$result4.business_id) {
-      var _reorderState$result5, _carts$_businessId, _orders$find, _reorderState$result7;
+      var _reorderState$result5, _orderState$carts, _orderState$carts$_bu, _favoriteList$favorit, _reorderState$result7;
 
       var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result5 = reorderState.result) === null || _reorderState$result5 === void 0 ? void 0 : _reorderState$result5.business_id);
 
-      var cartProducts = carts === null || carts === void 0 ? void 0 : (_carts$_businessId = carts[_businessId]) === null || _carts$_businessId === void 0 ? void 0 : _carts$_businessId.products;
+      var cartProducts = orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : (_orderState$carts$_bu = _orderState$carts[_businessId]) === null || _orderState$carts$_bu === void 0 ? void 0 : _orderState$carts$_bu.products;
       var available = cartProducts.every(function (product) {
         return product.valid === true;
       });
-      var orderProducts = (_orders$find = orders.find(function (order) {
+      var orderProducts = favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit = favoriteList.favorites.find(function (order) {
         var _reorderState$result6;
 
         return (order === null || order === void 0 ? void 0 : order.id) === (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result6 = reorderState.result) === null || _reorderState$result6 === void 0 ? void 0 : _reorderState$result6.orderId);
-      })) === null || _orders$find === void 0 ? void 0 : _orders$find.products;
+      })) === null || _favoriteList$favorit === void 0 ? void 0 : _favoriteList$favorit.products;
 
       if (available && reorderState !== null && reorderState !== void 0 && (_reorderState$result7 = reorderState.result) !== null && _reorderState$result7 !== void 0 && _reorderState$result7.uuid && (cartProducts === null || cartProducts === void 0 ? void 0 : cartProducts.length) === (orderProducts === null || orderProducts === void 0 ? void 0 : orderProducts.length)) {
         onRedirectPage && onRedirectPage({
@@ -344,116 +298,109 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : (isShowTitles || !isBusinessesPage) && !hideOrders) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
-    isBusinessesPage: isBusinessesPage
-  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))), !loading && orders.length === 0 && selectItem !== 'all' && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    image: imageFails,
-    content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
-    conditioned: true
-  })), isBusiness && (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_PreviousBusinessOrdered.PreviousBusinessOrdered, {
-    businessId: businessOrderIds,
-    setBusinessLoading: setBusinessLoading,
-    onRedirectPage: onRedirectPage,
-    isLoadingOrders: loading
-  }), isProducts && /*#__PURE__*/_react.default.createElement(_PreviousProductsOrdered.PreviousProductsOrdered, {
-    products: products,
-    onProductClick: onProductClick
-  }), (isCustomLayout ? loadingOrders || loading || isBusinessesLoading : showSkeletons) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessLoading && isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.BusinessControllerSkeleton, null, _toConsumableArray(Array(3).keys()).map(function (item, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.favorites.length) === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    color: "primary",
+    onClick: function onClick() {
+      return handleGoToList();
+    },
+    style: {
+      height: '44px'
+    }
+  }, t('ADD_FAVORITE', 'Add favorite'))), /*#__PURE__*/_react.default.createElement(_styles.FavoriteListWrapper, {
+    isLoading: (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.loading) || (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit2 = favoriteList.favorites) === null || _favoriteList$favorit2 === void 0 ? void 0 : _favoriteList$favorit2.length) === 0
+  }, /*#__PURE__*/_react.default.createElement(_styles.FavoriteListing, {
+    isOrder: isOrder,
+    isProduct: isProduct
+  }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+    scrollId: "favorite"
+  }, isBusiness && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit3 = favoriteList.favorites) === null || _favoriteList$favorit3 === void 0 ? void 0 : _favoriteList$favorit3.map(function (business, i) {
+    var _orderState$options, _business$reviews;
+
+    return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
+      key: business.id,
+      className: "card",
+      business: business,
+      isBusinessOpen: business.open,
+      handleCustomClick: handleClickBusiness,
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type,
+      onPreorderBusiness: setPreorderBusiness,
+      businessHeader: business === null || business === void 0 ? void 0 : business.header,
+      businessFeatured: business === null || business === void 0 ? void 0 : business.featured,
+      businessOffers: business === null || business === void 0 ? void 0 : business.offers,
+      businessLogo: business === null || business === void 0 ? void 0 : business.logo,
+      businessReviews: business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total,
+      businessDeliveryPrice: business === null || business === void 0 ? void 0 : business.delivery_price,
+      businessDeliveryTime: business === null || business === void 0 ? void 0 : business.delivery_time,
+      businessPickupTime: business === null || business === void 0 ? void 0 : business.pickup_time,
+      businessDistance: business === null || business === void 0 ? void 0 : business.distance,
+      handleUpdateBusinessList: handleUpdateFavoriteList,
+      firstCard: i === 0 && width > 681
+    });
+  })), (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.loading) && _toConsumableArray(Array(5).keys()).map(function (i) {
+    var _orderState$options2;
+
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
       business: {},
       isSkeleton: true,
-      firstCard: i === 0 && width > 681
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
     });
-  })) : loading && isProducts ? /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, _toConsumableArray(Array(3).keys()).map(function (i) {
+  })), isProduct && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit4 = favoriteList.favorites) === null || _favoriteList$favorit4 === void 0 ? void 0 : _favoriteList$favorit4.map(function (product, i) {
+    return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+      key: "".concat(product.id, "_").concat(i),
+      isSoldOut: product.inventoried && !product.quantity,
+      product: product,
+      onProductClick: function onProductClick() {},
+      handleUpdateProducts: handleUpdateFavoriteList
+    });
+  })), (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.loading) && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: "skeleton:".concat(i),
       isSkeleton: true
     });
-  })) : /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
-    isSkeleton: true,
-    activeOrders: horizontal,
-    isBusinessesPage: isBusinessesPage
-  }, horizontal ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
-    activeOrders: horizontal,
-    isBusinessesPage: isBusinessesPage
-  }, _toConsumableArray(Array(3)).map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.SkeletonCard, {
+  })), isOrder && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit5 = favoriteList.favorites) === null || _favoriteList$favorit5 === void 0 ? void 0 : _favoriteList$favorit5.map(function (order, i) {
+    return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, {
+      key: "".concat(order === null || order === void 0 ? void 0 : order.id, "_").concat(i),
+      order: order,
+      onRedirectPage: onRedirectPage,
+      getOrderStatus: getOrderStatus,
+      pastOrders: pastOrders.includes(order === null || order === void 0 ? void 0 : order.status),
+      handleReorder: handleReorder,
+      handleUpdateOrderList: handleUpdateFavoriteList,
+      isFavorite: true
+    });
+  })), (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.loading) && _toConsumableArray(Array(5).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, {
+      key: i,
+      isSkeleton: true,
+      order: {},
+      onRedirectPage: onRedirectPage,
+      getOrderStatus: getOrderStatus,
+      handleReorder: handleReorder
+    });
+  })), !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.ReadMoreCard, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    outline: true,
+    onClick: function onClick() {
+      return getFavoriteList((pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) + 1);
+    }
+  }, t('LOAD_MORE_ITEMS', 'Load more items')))))), (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.error) && (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.error.length) > 0 && (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.favorites.length) === 0 && (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.error.map(function (e, i) {
+    return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, {
-      activeOrders: horizontal
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 70,
-      height: 70
-    })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonText, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 80
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 120
-    }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonButton, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)));
-  })) : _toConsumableArray(Array(3)).map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.SkeletonOrder, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.SkeletonContent, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonInformation, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 70,
-      height: 70
-    })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonText, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 120
-    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 80
-    }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
-  }))), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading && !hideOrders : !loading && !error && orders.length > 0 && !hideOrders) && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
-    businessesIds: businessesIds,
-    orders: orders.filter(function (order) {
-      return orderStatus.includes(order.status);
-    }),
-    pagination: pagination,
-    onRedirectPage: onRedirectPage,
-    loadMoreOrders: loadMoreOrders,
-    isBusinessesPage: isBusinessesPage,
-    reorderLoading: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading,
-    customArray: customArray,
-    getOrderStatus: getOrderStatus,
-    handleReorder: handleReorder,
-    activeOrders: activeOrders,
-    handleUpdateOrderList: handleUpdateOrderList,
-    pastOrders: pastOrders,
-    isCustomerMode: isCustomerMode,
-    isBusiness: isBusiness,
-    isProducts: isProducts
-  }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
-    reorderLoading: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading,
-    orders: orders.filter(function (order) {
-      return orderStatus.includes(order.status);
-    }),
-    pagination: pagination,
-    loadMoreOrders: loadMoreOrders,
-    onRedirectPage: onRedirectPage,
-    getOrderStatus: getOrderStatus,
-    handleReorder: handleReorder
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('MY_ORDERS', 'My orders'),
-    content: alertState.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: alertState.open,
+    }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: isPreorder,
+    width: "760px",
     onClose: function onClose() {
-      return setAlertState({
-        open: false,
-        content: []
-      });
-    },
-    onAccept: function onAccept() {
-      return setAlertState({
-        open: false,
-        content: []
-      });
-    },
-    closeOnBackdrop: false
-  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+      return handleClosePreorder();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
+    business: preorderBusiness,
+    handleClick: handleClickBusiness,
+    showButton: true
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
@@ -464,21 +411,12 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   }));
 };
 
-var OrdersOption = function OrdersOption(props) {
-  var getAllOrders = props.activeOrders && props.pastOrders && props.preOrders;
-
-  var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: OrdersOptionUI,
-    orderStatus: getAllOrders ? [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] : props.activeOrders ? [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23] : props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 15, 16, 17] : [13],
-    useDefualtSessionManager: true,
-    paginationSettings: {
-      initialPage: 1,
-      pageSize: getAllOrders ? 30 : 10,
-      controlType: 'infinity'
-    }
+var FavoriteList = function FavoriteList(props) {
+  var favoriteListProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: FavoriteListUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderList, orderListProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.FavoriteList, favoriteListProps);
 };
 
-exports.OrdersOption = OrdersOption;
+exports.FavoriteList = FavoriteList;

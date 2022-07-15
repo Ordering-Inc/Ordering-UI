@@ -59,7 +59,8 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
       pastOrders = props.pastOrders,
       isCustomerMode = props.isCustomerMode,
       handleFavoriteOrder = props.handleFavoriteOrder,
-      isSkeleton = props.isSkeleton;
+      isSkeleton = props.isSkeleton,
+      isFavorite = props.isFavorite;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -79,7 +80,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
       configs = _useConfig2[0].configs;
 
   var handleClickCard = function handleClickCard(e, uuid) {
-    if (e.target.closest('.favorite')) return;
+    if (e.target.closest('.favorite') || e.target.closest('.review')) return;
 
     if (customArray) {
       onRedirectPage({
@@ -96,6 +97,15 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
         }
       });
     }
+  };
+
+  var handleClickReview = function handleClickReview(uuid) {
+    onRedirectPage({
+      page: 'order_detail',
+      params: {
+        orderId: uuid
+      }
+    });
   };
 
   var handleChangeFavorite = function handleChangeFavorite(order) {
@@ -175,11 +185,12 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     isBusinessesPage: isBusinessesPage
   }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, !(isFavorite && !(order !== null && order !== void 0 && order.review)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
-    onClick: function onClick(e) {
-      return handleClickCard(e, order.uuid);
+    className: "review",
+    onClick: function onClick() {
+      return handleClickReview(order.uuid);
     }
   }, t('REVIEW', 'Review')), order.cart && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
