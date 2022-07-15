@@ -11,6 +11,10 @@ export const Container = styled.div`
   text-align: left;
   transition: all 0.3s ease;
 
+  > span {
+    display: flex;
+  }
+
   ${({ isCustomerMode }) => isCustomerMode ? css`
     min-width: 300px;
     width: 300px;

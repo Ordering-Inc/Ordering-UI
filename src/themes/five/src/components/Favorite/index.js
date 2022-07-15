@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage, useOrder } from 'ordering-components'
+import { FavoriteList } from '../FavoriteList'
 import { Tabs } from '../../styles/Tabs'
-import { FavoriteBusinesses } from '../FavoriteBusinesses'
 import {
   FavoritesContainer,
   Title,
@@ -9,11 +9,10 @@ import {
   Tab,
   ContentWrapper
 } from './styles'
-import { FavoriteProducts } from '../FavoriteProducts'
-import { FavoriteOrders } from '../FavoriteOrders'
 
 export const Favorite = (props) => {
   const [, t] = useLanguage()
+  const [orderState] = useOrder()
 
   const [tabSelected, setTabSelected] = useState('businesses')
 
@@ -48,9 +47,29 @@ export const Favorite = (props) => {
           </Tabs>
         </TabsContainer>
         <ContentWrapper>
-          {tabSelected === 'businesses' && <FavoriteBusinesses />}
-          {tabSelected === 'products' && <FavoriteProducts />}
-          {tabSelected === 'orders' && <FavoriteOrders />}
+          {tabSelected === 'businesses' && (
+            <FavoriteList
+              isBusiness
+              favoriteURL='favorite_businesses'
+              originalURL='business'
+              location={`${orderState.options?.address?.location?.lat},${orderState.options?.address?.location?.lng}`}
+              propsToFetch={['id', 'name', 'header', 'logo', 'location', 'address', 'ribbon', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']}
+            />
+          )}
+          {tabSelected === 'products' && (
+            <FavoriteList
+              favoriteURL='favorite_products'
+              originalURL='products'
+              isProduct
+            />
+          )}
+          {tabSelected === 'orders' && (
+            <FavoriteList
+              favoriteURL='favorite_orders'
+              originalURL='orders'
+              isOrder
+            />
+          )}
         </ContentWrapper>
       </FavoritesContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
