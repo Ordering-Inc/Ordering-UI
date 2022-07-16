@@ -46,10 +46,12 @@ const PlaceSpotUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const selectYourSpotString = placeGroupSelected?.name === 'Tables' ? t('SELECT_YOUR_TABLE', 'Select your table') : t('SELECT_YOUR_SPOT', 'Select your spot')
   const vehicleInputAllowed = [4, 5]
-  const isEatin = orderState?.options?.type === 3
+  const currentOrderType = isCheckout ? orderState?.options?.type : cart?.delivery_type
+  const isEatin = currentOrderType === 3
+  const isDriveThru = currentOrderType === 4
   const placeholderText = isEatin
     ? t('EATIN_SPOT_NUMBER', 'Table number')
-    : orderState?.options?.type === 5
+    : isDriveThru
       ? t('DRIVE_THRU_SPOT_NUMBER', 'Drive thru lane')
       : t('CURBSIDE_SPOT_NUMBER', 'Spot number')
 
@@ -58,8 +60,7 @@ const PlaceSpotUI = (props) => {
     { key: 'truck', text: t('VEHICLE_TYPE_TRUCK', 'Truck') },
     { key: 'suv', text: t('VEHICLE_TYPE_SUV', 'SUV') },
     { key: 'van', text: t('VEHICLE_TYPE_VAN', 'Van') },
-    { key: 'motorcycle', text: t('VEHICLE_TYPE_MOTORCYCLE', 'Motorcycle') },
-    { key: 'bike', text: t('VEHICLE_TYPE_BIKE', 'Bike') }
+    { key: 'motorcycle', text: t('VEHICLE_TYPE_MOTORCYCLE', 'Motorcycle') }
   ]
 
   const vehicleInputList = [
@@ -163,9 +164,9 @@ const PlaceSpotUI = (props) => {
       {isInputMode ? (
         <PlaceGroupContainer>
           <Title>
-            {orderTypes[orderState?.options?.type]}
+            {orderTypes[currentOrderType]}
           </Title>
-          {vehicleInputAllowed.includes(orderState?.options?.type) && (
+          {vehicleInputAllowed.includes(currentOrderType) && (
             <WrapperOptionList>
               <WrapperOption>
                 <p>
