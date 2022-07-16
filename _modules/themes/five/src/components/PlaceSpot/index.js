@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PlaceSpotUI = function PlaceSpotUI(props) {
-  var _orderState$options, _orderState$options2, _orderState$options3, _orderState$options4, _placesState$placeGro3, _orderState$options5, _placesState$places4, _placesState$places4$, _getPlacesGroups, _getPlacesGroups2, _placesState$places5, _placesState$places6;
+  var _orderState$options, _placesState$placeGro3, _orderState$options2, _placesState$places4, _placesState$places4$, _getPlacesGroups, _getPlacesGroups2, _placesState$places5, _placesState$places6;
 
   var cart = props.cart,
       orderTypes = props.orderTypes,
@@ -89,8 +89,10 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
 
   var selectYourSpotString = (placeGroupSelected === null || placeGroupSelected === void 0 ? void 0 : placeGroupSelected.name) === 'Tables' ? t('SELECT_YOUR_TABLE', 'Select your table') : t('SELECT_YOUR_SPOT', 'Select your spot');
   var vehicleInputAllowed = [4, 5];
-  var isEatin = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 3;
-  var placeholderText = isEatin ? t('EATIN_SPOT_NUMBER', 'Table number') : (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 5 ? t('DRIVE_THRU_SPOT_NUMBER', 'Drive thru lane') : t('CURBSIDE_SPOT_NUMBER', 'Spot number');
+  var currentOrderType = isCheckout ? orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type : cart === null || cart === void 0 ? void 0 : cart.delivery_type;
+  var isEatin = currentOrderType === 3;
+  var isDriveThru = currentOrderType === 4;
+  var placeholderText = isEatin ? t('EATIN_SPOT_NUMBER', 'Table number') : isDriveThru ? t('DRIVE_THRU_SPOT_NUMBER', 'Drive thru lane') : t('CURBSIDE_SPOT_NUMBER', 'Spot number');
   var vehicleTypeList = [{
     key: 'car',
     text: t('VEHICLE_TYPE_CAR', 'Car')
@@ -106,9 +108,6 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
   }, {
     key: 'motorcycle',
     text: t('VEHICLE_TYPE_MOTORCYCLE', 'Motorcycle')
-  }, {
-    key: 'bike',
-    text: t('VEHICLE_TYPE_BIKE', 'Bike')
   }];
   var vehicleInputList = [{
     key: 'model',
@@ -254,7 +253,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotContainer, {
     isCheckout: isCheckout,
     style: props.containerStyle
-  }, isInputMode ? /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, orderTypes[orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type]), vehicleInputAllowed.includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) && /*#__PURE__*/_react.default.createElement(_styles.WrapperOptionList, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperOption, null, /*#__PURE__*/_react.default.createElement("p", null, t('VEHICLE_TYPE', 'Vehicle type')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  }, isInputMode ? /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, orderTypes[currentOrderType]), vehicleInputAllowed.includes(currentOrderType) && /*#__PURE__*/_react.default.createElement(_styles.WrapperOptionList, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperOption, null, /*#__PURE__*/_react.default.createElement("p", null, t('VEHICLE_TYPE', 'Vehicle type')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     isHomeStyle: props.isHomeStyle,
     options: getVehicleTypeList(),
     defaultValue: (vehicle === null || vehicle === void 0 ? void 0 : vehicle.type) || null,
@@ -311,7 +310,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     className: "title"
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 30
-  }))), !(placesState.error || (placesState === null || placesState === void 0 ? void 0 : (_placesState$placeGro3 = placesState.placeGroups) === null || _placesState$placeGro3 === void 0 ? void 0 : _placesState$placeGro3.length) === 0) && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, props.isSelectDisabled ? t('PLACE_GROUP', 'Place group') : orderTypes[orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type]), props.isSelectDisabled ? /*#__PURE__*/_react.default.createElement("div", null, placeGroupSelected === null || placeGroupSelected === void 0 ? void 0 : placeGroupSelected.name, " - ", placesState === null || placesState === void 0 ? void 0 : (_placesState$places4 = placesState.places) === null || _placesState$places4 === void 0 ? void 0 : (_placesState$places4$ = _placesState$places4.find(function (place) {
+  }))), !(placesState.error || (placesState === null || placesState === void 0 ? void 0 : (_placesState$placeGro3 = placesState.placeGroups) === null || _placesState$placeGro3 === void 0 ? void 0 : _placesState$placeGro3.length) === 0) && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, props.isSelectDisabled ? t('PLACE_GROUP', 'Place group') : orderTypes[orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type]), props.isSelectDisabled ? /*#__PURE__*/_react.default.createElement("div", null, placeGroupSelected === null || placeGroupSelected === void 0 ? void 0 : placeGroupSelected.name, " - ", placesState === null || placesState === void 0 ? void 0 : (_placesState$places4 = placesState.places) === null || _placesState$places4 === void 0 ? void 0 : (_placesState$places4$ = _placesState$places4.find(function (place) {
     return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
   })) === null || _placesState$places4$ === void 0 ? void 0 : _placesState$places4$.name) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
     isHomeStyle: !props.isCancelHomeStyle,
