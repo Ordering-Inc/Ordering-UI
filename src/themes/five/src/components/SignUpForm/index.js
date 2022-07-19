@@ -103,8 +103,8 @@ const SignUpFormUI = (props) => {
 
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
-    configs?.google_login_client_id?.value ||
-    configs?.apple_login_client_id?.value
+    (configs?.google_login_client_id?.value && googleLoginEnabled) ||
+    (configs?.apple_login_client_id?.value && appleLoginEnabled)
   const hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled
 
   const handleSuccessFacebook = (user) => {

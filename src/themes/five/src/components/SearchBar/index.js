@@ -16,7 +16,8 @@ export const SearchBar = (props) => {
     placeholder,
     lazyLoad,
     isCustomLayout,
-    handleCustomEnter
+    handleCustomEnter,
+    forwardRef
   } = props
   const [theme] = useTheme()
   const [, t] = useLanguage()
@@ -85,7 +86,12 @@ export const SearchBar = (props) => {
         hasValue={el.current?.value}
       >
         <Input
-          ref={el}
+          ref={(ref) => {
+            el.current = ref
+            if (forwardRef) {
+              forwardRef.current = ref
+            }
+          }}
           name='search'
           aria-label='search'
           placeholder={placeholder}
