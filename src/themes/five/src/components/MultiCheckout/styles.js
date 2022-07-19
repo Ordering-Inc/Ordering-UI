@@ -144,3 +144,8 @@ export const WrapperPlaceOrderButton = styled.div`
     }
   }
 `
+export const WarningText = styled.p`
+  margin: 10px auto;
+  text-align: center;
+  color: ${props => props.theme.colors.danger500};
+`
