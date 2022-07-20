@@ -557,7 +557,7 @@ const LoginFormUI = (props) => {
                 props.afterMidComponents?.map((MidComponent, i) => (
                   <MidComponent key={i} {...props} />))
               }
-              {!loginWithOtpState && loginTab !== 'otp' && (
+              {!loginWithOtpState && loginTab !== 'otp' && elementLinkToForgotPassword && (
                 <RedirectLink isPopup={isPopup}>
                   <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
                   {elementLinkToForgotPassword}
@@ -602,7 +602,7 @@ const LoginFormUI = (props) => {
               {elementLinkToSignup}
             </RedirectLink>
           )}
-          {hasSocialLogin && hasSocialEnabled && (
+          {!props.isDisableButtons && hasSocialLogin && hasSocialEnabled && (
             <LoginDivider isPopup={isPopup}>
               <DividerLine />
               <p>{t('OR', 'or')}</p>
@@ -695,9 +695,14 @@ const LoginFormUI = (props) => {
 }
 
 export const LoginForm = (props) => {
+  const isKioskApp = props.useKioskApp
   const loginControllerProps = {
     ...props,
-    isRecaptchaEnable: true,
+    isRecaptchaEnable: !isKioskApp,
+    elementLinkToForgotPassword: isKioskApp ? null : props.elementLinkToForgotPassword,
+    useLoginByCellphone: isKioskApp ? null : props.useLoginByCellphone,
+    elementLinkToSignup: isKioskApp ? null : props.elementLinkToSignup,
+    isDisableButtons: isKioskApp ? true : props.isDisableButtons,
     UIComponent: LoginFormUI
   }
   return <LoginFormController {...loginControllerProps} />

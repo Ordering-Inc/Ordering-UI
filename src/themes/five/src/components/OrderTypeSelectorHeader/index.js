@@ -15,7 +15,7 @@ export const OrderTypeSelectorHeader = (props) => {
   const referenceElement = useRef()
 
   return (
-    <div className='order-type'>
+    <div className='order-type' style={props.containerStyle}>
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}

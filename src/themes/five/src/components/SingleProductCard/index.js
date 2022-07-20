@@ -29,6 +29,7 @@ const SingleProductCardUI = (props) => {
     onCustomClick,
     customText,
     customStyle,
+    useKioskApp,
     productAddedToCartLength,
     handleFavoriteProduct
   } = props
@@ -89,11 +90,13 @@ const SingleProductCardUI = (props) => {
               <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
                 <TitleWrapper>
                   {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-                  {!isSkeleton ? (
-                    <span onClick={() => handleChangeFavorite()} ref={favoriteRef}>
-                      {product?.favorite ? <Like /> : <DisLike />}
-                    </span>
-                  ) : (<Skeleton width={16} height={16} />)}
+                  {!useKioskApp && (
+                    !isSkeleton ? (
+                      <span onClick={() => handleChangeFavorite()} ref={favoriteRef}>
+                        {product?.favorite ? <Like /> : <DisLike />}
+                      </span>
+                    ) : (<Skeleton width={16} height={16} />)
+                  )}
                 </TitleWrapper>
                 {!isSkeleton ? (
                   <PriceWrapper>
