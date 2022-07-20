@@ -9,6 +9,7 @@ import {
 import { useSession, useLanguage, useOrder, Analytics, FacebookPixel, useConfig, AnalyticsSegment, useEvent } from 'ordering-components'
 
 import { Header } from '../src/themes/five/src/components/Header'
+import { Header as HeaderKiosk } from '../src/themes/five/src/components/Header/layouts/Kiosk'
 import { Footer } from '../src/themes/five/src/components/Footer'
 import { NotNetworkConnectivity } from '../src/themes/five/src/components/NotNetworkConnectivity'
 
@@ -63,23 +64,35 @@ export const App = () => {
   const location = useLocation()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
+  const isKioskApp = settings?.use_kiosk
+
+  const businessesSlug = {
+    marketplace: 'marketplace',
+    kiosk: settings?.businessSlug
+  }
+
+  const singleBusinessConfig = {
+    isActive: settings?.use_marketplace || isKioskApp,
+    businessSlug: businessesSlug[isKioskApp ? 'kiosk' : 'marketplace']
+  }
 
   const HeaderComponent =
-    theme?.layouts?.header?.layout?.type === 'old'
-      ? HeaderOld
-      : theme?.layouts?.header?.layout?.type === 'red'
-        ? HeaderRed
-        : theme?.layouts?.header?.layout?.type === 'starbucks'
-          ? HeaderStarbucks
-          : Header
+    isKioskApp ? HeaderKiosk
+      : theme?.layouts?.header?.layout?.type === 'old'
+        ? HeaderOld
+        : theme?.layouts?.header?.layout?.type === 'red'
+          ? HeaderRed
+          : theme?.layouts?.header?.layout?.type === 'starbucks'
+            ? HeaderStarbucks
+            : Header
 
   const orderTypeSearchParam = parseInt(new URLSearchParams(useLocation()?.search)?.get('order_type') ?? 0, 10)
   const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
-  const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+  const isWalletEnabled = (configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')) && !isKioskApp
   const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
   const isPhoneVerifyRequired = auth && configs?.verification_phone_required?.value === '1' && !user?.phone_verified
-  const isUserVerifyRequired = isEmailVerifyRequired || isPhoneVerifyRequired
+  const isUserVerifyRequired = (isEmailVerifyRequired || isPhoneVerifyRequired) && !isKioskApp
 
   const closeAlert = () => {
     setAlertState({
@@ -94,7 +107,7 @@ export const App = () => {
   }
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
-  const isFooterPage = location.pathname === '/pages/footer'
+  const isFooterPage = location.pathname === '/pages/footer' || isKioskApp
 
   const handleSuccessSignup = (user) => {
     if (!user?.enabled && (configs?.business_signup_enabled_default?.value === '0' || configs?.driver_signup_enabled_default?.value === '0')) {
@@ -130,6 +143,10 @@ export const App = () => {
     })
   }
 
+  const goToPage = (page, params) => {
+    events.emit('go_to_page', { page, params })
+  }
+
   useEffect(() => {
     if (!loaded && !orderStatus.loading && !configLoading) {
       if (orderTypeSearchParam && configTypes.includes(orderTypeSearchParam)) {
@@ -157,7 +174,7 @@ export const App = () => {
 
   useEffect(() => {
     if (isHome && settings?.use_marketplace) {
-      events.emit('go_to_page', { page: 'business', params: { store: 'marketplace' } })
+      goToPage('business', { store: 'marketplace' })
     }
   }, [])
 
@@ -173,11 +190,7 @@ export const App = () => {
         <FacebookPixel trackId={configs?.facebook_id?.value} />
       )}
       <ListenPageChanges />
-      {
-        !loaded && (
-          <SpinnerLoader />
-        )
-      }
+      {!loaded && <SpinnerLoader />}
       <SmartAppBanner
         storeAndroidId={settings?.store_android_id !== '0' ? settings?.store_android_id : false}
         storeAppleId={settings?.store_apple_id !== '0' ? settings?.store_apple_id : false}
@@ -186,11 +199,13 @@ export const App = () => {
       {
         loaded && (
           <>
-            <HeaderComponent
-              isHome={isHome}
-              location={location}
-              isCustomLayout={settings?.use_marketplace}
-            />
+            {!(isKioskApp && isHome) && (
+              <HeaderComponent
+                isHome={isHome}
+                location={location}
+                isCustomLayout={singleBusinessConfig.isActive}
+              />
+            )}
             <NotNetworkConnectivity />
             {onlineStatus && (
               <ScrollToTop>
@@ -200,20 +215,24 @@ export const App = () => {
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      orderStatus.options?.address?.location
-                        ? <Redirect to={settings?.use_marketplace ? '/marketplace' : '/search'} />
-                        : settings?.use_marketplace
-                          ? <Redirect to={settings?.use_marketplace ? '' : '/search'} />
-                          : <HomePage />
+                      isKioskApp
+                        ? <HomePage />
+                        : orderStatus.options?.address?.location
+                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
+                          : singleBusinessConfig.isActive
+                            ? <Redirect to={singleBusinessConfig.isActive ? '' : '/search'} />
+                            : <HomePage />
                     )}
                   </Route>
                   <Route exact path='/'>
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      orderStatus.options?.address?.location
-                        ? <Redirect to={settings?.use_marketplace ? '/marketplace' : '/search'} />
-                        : <HomePage />
+                      isKioskApp
+                        ? <HomePage />
+                        : orderStatus.options?.address?.location
+                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
+                          : <HomePage />
                     )}
                   </Route>
                   <Route exact path='/wallets'>
@@ -222,11 +241,11 @@ export const App = () => {
                         ? <Redirect to='/verify' />
                         : isWalletEnabled
                           ? <Wallets />
-                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
-                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
+                          : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
                   </Route>
                   <Route exact path='/signup_business'>
-                    {!auth ? (
+                    {!auth && !isKioskApp ? (
                       <SignUpBusiness
                         elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
                         useLoginByCellphone
@@ -235,11 +254,11 @@ export const App = () => {
                         isRecaptchaEnable
                       />
                     ) : (
-                      <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                      <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                     )}
                   </Route>
                   <Route exact path='/signup-driver'>
-                    {!auth ? (
+                    {!auth && !isKioskApp ? (
                       <SignUpDriver
                         elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
                         useLoginByCellphone
@@ -248,14 +267,16 @@ export const App = () => {
                         isRecaptchaEnable
                       />
                     ) : (
-                      <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                      <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                     )}
                   </Route>
                   <Route exact path='/password/reset'>
                     {auth ? (
                       <Redirect to='/' />
                     ) : (
-                      <ResetPassword />
+                      isKioskApp
+                        ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                        : <ResetPassword />
                     )}
                   </Route>
                   <Route exact path='/profile'>
@@ -263,26 +284,26 @@ export const App = () => {
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
-                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
+                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
                   </Route>
                   <Route exact path='/verify'>
                     {isUserVerifyRequired
                       ? <UserVerification />
-                      : <Redirect to={auth ? settings?.use_marketplace ? '/marketplace' : '/search' : '/'} />}
+                      : <Redirect to={(auth || isKioskApp) ? singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search' : '/'} />}
                   </Route>
                   <Route exact path='/profile/orders'>
                     {auth
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<MyOrders />)
-                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
+                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
                   </Route>
                   <Route exact path='/profile/addresses'>
                     {auth
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<AddressList />)
-                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
+                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
                   </Route>
                   <Route exact path='/messages'>
                     {auth
@@ -290,10 +311,9 @@ export const App = () => {
                         ? <Redirect to='/verify' />
                         : <MessagesList />
                       : (
-                        <Redirect to={{
-                          pathname: '/search'
-                        }}
-                        />
+                        isKioskApp
+                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                          : <Redirect to={{ pathname: '/search' }} />
                       )}
                   </Route>
                   <Route exact path='/help'>
@@ -301,29 +321,35 @@ export const App = () => {
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
                         : (<Help />)
-                      : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />}
+                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
                   </Route>
                   <Route exact path='/search'>
-                    {orderStatus.loading && !orderStatus.options?.address?.location ? (
-                      <SpinnerLoader />
-                    ) : (
-                      isUserVerifyRequired ? (
-                        <Redirect to='/verify' />
-                      ) : (
-                        orderStatus.options?.address?.location
-                          ? <BusinessesList />
-                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
-                      )
-                    )}
+                    {
+                      isKioskApp
+                        ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                        : (
+                          orderStatus.loading && !orderStatus.options?.address?.location ? (
+                            <SpinnerLoader />
+                          ) : (
+                            isUserVerifyRequired ? (
+                              <Redirect to='/verify' />
+                            ) : (
+                              orderStatus.options?.address?.location
+                                ? <BusinessesList />
+                                : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                            )
+                          )
+                        )
+                    }
                   </Route>
                   <Route exact path='/business_search'>
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      orderStatus.options?.address?.location ? (
+                      orderStatus.options?.address?.location && !isKioskApp ? (
                         <BusinessListingSearch />
                       ) : (
-                        <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                        <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                       )
                     )}
                   </Route>
@@ -334,9 +360,9 @@ export const App = () => {
                       isUserVerifyRequired ? (
                         <Redirect to='/verify' />
                       ) : (
-                        orderStatus.options?.address?.location
+                        orderStatus.options?.address?.location && !isKioskApp
                           ? <Promotions />
-                          : <Redirect to={settings?.use_marketplace ? '/marketplace' : '/'} />
+                          : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                       )
                     )}
                   </Route>
@@ -354,8 +380,8 @@ export const App = () => {
                         : <CheckoutPage />
                       : (
                         <Redirect to={{
-                          pathname: settings?.use_marketplace
-                            ? '/marketplace'
+                          pathname: singleBusinessConfig.isActive
+                            ? `/${singleBusinessConfig.businessSlug}`
                             : '/',
                           state: { from: location.pathname || null }
                         }}
@@ -369,8 +395,8 @@ export const App = () => {
                         : <MultiCheckout />
                       : (
                         <Redirect to={{
-                          pathname: settings?.use_marketplace
-                            ? '/marketplace'
+                          pathname: singleBusinessConfig.isActive
+                            ? `/${singleBusinessConfig.businessSlug}`
                             : '/',
                           state: { from: location.pathname || null }
                         }}
@@ -384,8 +410,8 @@ export const App = () => {
                         : <MultiOrdersDetails />
                       : (
                         <Redirect to={{
-                          pathname: settings?.use_marketplace
-                            ? '/marketplace'
+                          pathname: singleBusinessConfig.isActive
+                            ? `/${singleBusinessConfig.businessSlug}`
                             : '/',
                           state: { from: location.pathname || null }
                         }}
@@ -399,8 +425,8 @@ export const App = () => {
                         : <OrderDetailsPage />
                       : (
                         <Redirect to={{
-                          pathname: settings?.use_marketplace
-                            ? '/marketplace'
+                          pathname: singleBusinessConfig.isActive
+                            ? `/${singleBusinessConfig.businessSlug}`
                             : '/',
                           state: { from: location.pathname || null }
                         }}
@@ -414,8 +440,8 @@ export const App = () => {
                         : <Promotions />
                       : (
                         <Redirect to={{
-                          pathname: settings?.use_marketplace
-                            ? '/marketplace'
+                          pathname: singleBusinessConfig.isActive
+                            ? `/${singleBusinessConfig.businessSlug}`
                             : '/',
                           state: { from: location.pathname || null }
                         }}
@@ -437,14 +463,14 @@ export const App = () => {
                     )}
                   </Route>
                   <Route exact path='/favorite'>
-                    {auth
+                    {auth && !isKioskApp
                       ? <Favorite />
                       : (
                         <Redirect to='/' />
                       )}
                   </Route>
                   <Route exact path='/sessions'>
-                    {auth
+                    {auth && !isKioskApp
                       ? <SessionsList />
                       : (
                         <Redirect to='/' />

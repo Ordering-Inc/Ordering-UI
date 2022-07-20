@@ -14,5 +14,7 @@
   "store_android_id": "asd",
   "store_apple_id": "asd",
   "store_kindle_id": "asd",
-  "url_dashboard": "https://app.tryordering.com"
+  "url_dashboard": "https://app.tryordering.com",
+  "use_kiosk": false,
+  "businessSlug": ""
 }

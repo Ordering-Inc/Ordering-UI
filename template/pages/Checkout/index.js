@@ -5,6 +5,7 @@ import { HelmetTags } from '../../components/HelmetTags'
 
 import { Checkout } from '../../../src/themes/five/src/components/Checkout'
 import { useEvent, useOrder, useLanguage } from 'ordering-components'
+import settings from '../../config.json'
 
 export const CheckoutPage = (props) => {
   const { cartUuid } = useParams()
@@ -96,6 +97,7 @@ export const CheckoutPage = (props) => {
     clearErrors: () => setErrors([]),
     useValidationFields: true,
     validationFieldsType: 'checkout',
+    useKioskApp: settings?.use_kiosk,
     onPlaceOrderClick: (data, paymethod, cart) => {
       if (cart?.order?.uuid) {
         if (orderState?.options?.moment) {

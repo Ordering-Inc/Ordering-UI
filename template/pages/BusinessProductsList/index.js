@@ -46,6 +46,7 @@ export const BusinessProductsList = (props) => {
     ordering,
     avoidBusinessLoading: true,
     isCustomLayout: settings?.use_marketplace,
+    useKioskApp: settings?.use_kiosk,
     isSearchByName: true,
     isSearchByDescription: true,
     slug: store,
