@@ -30,10 +30,12 @@ import { Footer } from './src/components/Footer'
 import { ForgotPasswordForm } from './src/components/ForgotPasswordForm'
 import { GoogleLoginButton } from './src/components/GoogleLogin'
 import { Header } from './src/components/Header'
+import { Header as HeaderKiosk } from './src/components/Header/layouts/Kiosk'
 import { HeaderOption } from './src/components/HeaderOption'
 import { Help } from './src/components/Help'
 import { HelpStaticPage } from './src/components/HelpStaticPage'
 import { HomeHero } from './src/components/HomeHero'
+import { KioskHomeHero } from './src/components/HomeHero/layouts/KioskHomeHero'
 import { HighestRated } from './src/components/HighestRated'
 import { HorizontalOrdersLayout } from './src/components/HorizontalOrdersLayout'
 import { InputPhoneNumber } from './src/components/InputPhoneNumber'
@@ -51,6 +53,7 @@ import { NotFoundSource } from './src/components/NotFoundSource'
 import { NotNetworkConnectivity } from './src/components/NotNetworkConnectivity'
 import { Modal } from './src/components/Modal'
 import { OrderDetails } from './src/components/OrderDetails'
+import { OrderDetails as OrderDetailsKiosk } from './src/components/OrderDetails/layouts/Kiosk'
 import { OrdersOption } from './src/components/OrdersOption'
 import { OrderProgress } from './src/components/OrderProgress'
 import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorContent'
@@ -127,10 +130,12 @@ export {
   ForgotPasswordForm,
   GoogleLoginButton,
   Header,
+  HeaderKiosk,
   HeaderOption,
   Help,
   HelpStaticPage,
   HomeHero,
+  KioskHomeHero,
   HorizontalOrdersLayout,
   HighestRated,
   InputPhoneNumber,
@@ -148,6 +153,7 @@ export {
   NotFoundSource,
   NotNetworkConnectivity,
   OrderDetails,
+  OrderDetailsKiosk,
   OrdersOption,
   OrderTypeSelectorContent,
   OrderTypeSelectorHeader,

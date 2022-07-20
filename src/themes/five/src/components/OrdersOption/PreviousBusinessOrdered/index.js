@@ -12,7 +12,8 @@ export const PreviousBusinessOrderedUI = (props) => {
     setBusinessLoading,
     onRedirectPage,
     businessId,
-    isLoadingOrders
+    isLoadingOrders,
+    handleUpdateBusinessList
   } = props
 
   const [orderState] = useOrder()
@@ -53,6 +54,7 @@ export const PreviousBusinessOrderedUI = (props) => {
                 businessPickupTime={business?.pickup_time}
                 businessDistance={business?.distance}
                 firstCard={i === 0 && width > 681}
+                handleUpdateBusinessList={handleUpdateBusinessList}
               />
             ))
           }

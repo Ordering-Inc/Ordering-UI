@@ -62,6 +62,7 @@ const ModalUI = (props) => {
       slideBarPosition={slideBarPosition}
       open={props.open}
       disableOverflowX={disableOverflowX}
+      style={props.customStyle}
     >
       {isProductForm && (
         <ModalBackHeader />

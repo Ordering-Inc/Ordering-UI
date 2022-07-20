@@ -34,6 +34,7 @@ const BusinessProductsListUI = (props) => {
     onProductClick,
     handleSearchRedirect,
     featured,
+    useKioskApp,
     searchValue,
     isCartOnProductsList,
     handleClearSearch,
@@ -129,6 +130,7 @@ const BusinessProductsListUI = (props) => {
                       key={i}
                       isSoldOut={(product.inventoried && !product.quantity)}
                       product={product}
+                      useKioskApp={useKioskApp}
                       businessId={businessId}
                       onProductClick={onProductClick}
                       isCartOnProductsList={isCartOnProductsList}
@@ -154,6 +156,7 @@ const BusinessProductsListUI = (props) => {
                           key={i}
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
+                          useKioskApp={useKioskApp}
                           businessId={businessId}
                           onProductClick={onProductClick}
                           isCartOnProductsList={isCartOnProductsList}
@@ -226,6 +229,7 @@ const BusinessProductsListUI = (props) => {
                               isSoldOut={product.inventoried && !product.quantity}
                               businessId={businessId}
                               product={product}
+                              useKioskApp={useKioskApp}
                               onProductClick={onProductClick}
                               isCartOnProductsList={isCartOnProductsList}
                               handleUpdateProducts={handleUpdateProducts}

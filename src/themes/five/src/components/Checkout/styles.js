@@ -275,6 +275,13 @@ export const CartHeader = styled.div`
   }
 `
 
-export const SelectSpotContainer = styled.div`
-  
+export const SelectSpotContainer = styled.div``
+
+export const WrapperActionsInput = styled.div`
+  input {
+    width: 100%;
+  }
+  h1 {
+    font-size: 20px;
+  }
 `

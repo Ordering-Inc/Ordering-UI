@@ -200,3 +200,13 @@ export const WrapperSearch = styled.div`
     `}
   }
 `
+
+export const WrapperSearchAbsolute = styled.div`
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
