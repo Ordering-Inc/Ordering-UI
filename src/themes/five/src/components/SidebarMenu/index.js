@@ -295,7 +295,7 @@ export const SidebarMenu = (props) => {
                         window.location.pathname === '/favorite'
                       }
                     >
-                      {t('FAVORITE', 'Favorite')}
+                      {t('FAVORITES', 'Favorites')}
                     </TextInfo>
                   </MenuLinkText>
                   <MenuLinkSeparator>

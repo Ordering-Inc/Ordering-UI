@@ -4,6 +4,7 @@ import { useLanguage, useConfig, useOrder, useUtils, SingleProductCard as Single
 import { shape } from '../../../../../utils'
 import { useIntersectionObserver } from '../../../../../hooks/useIntersectionObserver'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
+import { useTheme } from 'styled-components'
 
 import {
   CardContainer,
@@ -16,7 +17,6 @@ import {
   RibbonBox,
   TitleWrapper
 } from './styles'
-import { useTheme } from 'styled-components'
 
 const SingleProductCardUI = (props) => {
   const {

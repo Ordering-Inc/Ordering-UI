@@ -11,7 +11,8 @@ import { SingleProductCard } from '../../SingleProductCard'
 export const PreviousProductsOrdered = (props) => {
   const {
     products,
-    onProductClick
+    onProductClick,
+    handleUpdateProducts
   } = props
 
   return (
@@ -25,6 +26,8 @@ export const PreviousProductsOrdered = (props) => {
               product={product}
               businessId={product?.business?.id}
               onProductClick={onProductClick}
+              handleUpdateProducts={handleUpdateProducts}
+              isProductId
             />
           ))}
         </AutoScroll>
