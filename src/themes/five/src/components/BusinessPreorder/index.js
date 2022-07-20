@@ -57,7 +57,9 @@ const BusinessPreorderUI = (props) => {
     handleChangeTime,
     showButton,
     isAsap,
-    handleAsap
+    handleAsap,
+    isProfessional,
+    isDisabled
   } = props
 
   const { pathname } = useLocation()
@@ -155,12 +157,14 @@ const BusinessPreorderUI = (props) => {
 
   return (
     <BusinessPreorderContainer>
-      <Title>{t('PREORDER', 'Preorder')}</Title>
-      <LogoWrapper>
-        <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-        <p>{business.name}</p>
-      </LogoWrapper>
-      {isPreOrderSetting && (
+      {!isProfessional && <Title>{t('PREORDER', 'Preorder')}</Title>}
+      {!isProfessional && (
+        <LogoWrapper>
+          <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+          <p>{business.name}</p>
+        </LogoWrapper>
+      )}
+      {!isProfessional && isPreOrderSetting && (
         <PreorderTypeWrapper>
           <p>{t('PREORDER_TYPE', 'Preorder type')}</p>
           <SelectWrapper>
@@ -173,7 +177,7 @@ const BusinessPreorderUI = (props) => {
           </SelectWrapper>
         </PreorderTypeWrapper>
       )}
-      {type === 'business_menu' && (
+      {!isProfessional && (type === 'business_menu') && (
         <BusinessMenuList
           businessId={business.id}
           setMenu={setMenu}
@@ -181,7 +185,7 @@ const BusinessPreorderUI = (props) => {
       )}
       {isPreOrderSetting && (
         <OrderTimeWrapper>
-          <p>{t('ORDER_TIME', 'Order time')}</p>
+          {!isProfessional && <p>{t('ORDER_TIME', 'Order time')}</p>}
           <DateWrapper>
             <MonthYearLayer>
               <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
@@ -242,6 +246,7 @@ const BusinessPreorderUI = (props) => {
                     key={i}
                     active={timeSelected === time.value}
                     onClick={() => handleChangeTime(time.value)}
+                    isDisabled={isDisabled}
                   >
                     <span>{time.text}</span>
                   </TimeItem>

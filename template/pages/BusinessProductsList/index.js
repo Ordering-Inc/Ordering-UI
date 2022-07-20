@@ -1,7 +1,8 @@
 import React from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import { useApi, useEvent } from 'ordering-components'
-import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
+import { BusinessProductsListing } from '../../../src/themes/five'
+// import { BusinessProductsListing } from '../../../src/components/BusinessProductsListing'
 import { HelmetTags } from '../../components/HelmetTags'
 import { capitalize } from '../../../src/utils'
 
@@ -61,7 +62,8 @@ export const BusinessProductsList = (props) => {
       'slug',
       'products',
       'zones',
-      'front_layout'
+      'front_layout',
+      'professionals'
     ],
     handleSearchRedirect: () => {
       events.emit('go_to_page', { page: 'search' })

@@ -186,6 +186,11 @@ export const DayName = styled.div`
   &:first-letter {
     text-transform: uppercase;
   }
+
+  ${({ isAppoint }) => isAppoint && css`
+    font-size: 12px;
+    line-height: 22px;
+  `}
 `
 
 export const DayNumber = styled.div`
@@ -193,6 +198,12 @@ export const DayNumber = styled.div`
   font-weight: 500;
   font-size: 20px;
   line-height: 30px;
+
+  ${({ isAppoint }) => isAppoint && css`
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+  `}
 `
 
 export const TimeItem = styled.div`
@@ -232,6 +243,13 @@ export const TimeItem = styled.div`
   @media (min-width: 769px) {
     width: calc(16.66% - 24px);
     min-width: calc(16.66% - 24px);
+    ${({ isAppoint }) => isAppoint && css`
+      width: calc(33.33% - 24px);
+      min-width: calc(33.33% - 24px);
+      span {
+        font-size: 12px;
+      }
+    `}
   }
 `
 

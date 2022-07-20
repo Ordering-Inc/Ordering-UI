@@ -200,3 +200,7 @@ export const WrapperSearch = styled.div`
     `}
   }
 `
+
+export const ProfessionalFilterWrapper = styled.div`
+  margin-bottom: 50px;
+`

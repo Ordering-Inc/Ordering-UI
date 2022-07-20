@@ -252,6 +252,17 @@ export const shape = {
 }
 
 /**
+ * List of price to filter businesses
+ */
+export const priceList = [
+  { level: '1', content: '$' },
+  { level: '2', content: '$$' },
+  { level: '3', content: '$$$' },
+  { level: '4', content: '$$$$' },
+  { level: '5', content: '$$$$$' }
+]
+
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary

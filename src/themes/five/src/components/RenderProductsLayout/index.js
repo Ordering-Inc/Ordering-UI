@@ -28,11 +28,13 @@ import {
   BusinessCartContent,
   EmptyCart,
   EmptyBtnWrapper,
-  WrapperSearch
+  WrapperSearch,
+  ProfessionalFilterWrapper
 } from './styles'
 
 import { SearchProducts as SearchProductsOld } from '../../../../../components/RenderProductsLayout/SearchProducts'
 import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/components/BusinessProductsListing/SearchProducts'
+import { ProfessionalFilter } from '../ProfessionalFilter'
 
 const layoutOne = 'groceries'
 
@@ -67,7 +69,9 @@ export const RenderProductsLayout = (props) => {
     setSubcategoriesSelected,
     subcategoriesSelected,
     isLazy,
-    handleUpdateProducts
+    handleUpdateProducts,
+    handleChangeProfessionalSelected,
+    professionalSelected
   } = props
 
   const theme = useTheme()
@@ -144,6 +148,15 @@ export const RenderProductsLayout = (props) => {
             {!businessLayout.layoutOne && (
               <BusinessContent isCustomLayout={isCustomLayout}>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
+                  {business?.professionals?.length > 0 && (
+                    <ProfessionalFilterWrapper>
+                      <ProfessionalFilter
+                        professionals={business?.professionals}
+                        professionalSelected={professionalSelected}
+                        handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                      />
+                    </ProfessionalFilterWrapper>
+                  )}
                   {!(business?.categories?.length === 0 && !categoryId) && (
                     <BusinessLayoutCategories
                       categories={[
@@ -190,6 +203,8 @@ export const RenderProductsLayout = (props) => {
                       subcategoriesSelected={subcategoriesSelected}
                       onClickCategory={onClickCategory}
                       handleUpdateProducts={handleUpdateProducts}
+                      professionalSelected={professionalSelected}
+                      handleChangeProfessionalSelected={handleChangeProfessionalSelected}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
@@ -273,6 +288,8 @@ export const RenderProductsLayout = (props) => {
                       business={business}
                       currentCart={currentCart}
                       handleUpdateProducts={handleUpdateProducts}
+                      professionalSelected={professionalSelected}
+                      handleChangeProfessionalSelected={handleChangeProfessionalSelected}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>

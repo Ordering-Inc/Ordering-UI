@@ -7,13 +7,14 @@ import {
   Cart3
 } from 'react-bootstrap-icons'
 import {
-  BusinessAndProductList,
+  // BusinessAndProductList,
   useEvent,
   useLanguage,
   useOrder,
   useUtils,
   useSession
 } from 'ordering-components'
+import { BusinessAndProductList } from './naked'
 
 import {
   ProductsContainer,
@@ -37,6 +38,7 @@ import { Cart } from '../Cart'
 import { Alert } from '../../../../../components/Confirm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
+import { ServiceForm } from '../ServiceForm'
 const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
@@ -67,7 +69,9 @@ const BusinessProductsListingUI = (props) => {
     setAlertState,
     alertState,
     onCheckoutRedirect,
-    handleUpdateProducts
+    handleUpdateProducts,
+    professionalSelected,
+    handleChangeProfessionalSelected
   } = props
 
   const { business, loading, error } = businessState
@@ -103,11 +107,13 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const onProductClick = (product) => {
-    onProductRedirect({
-      slug: business?.slug,
-      product: product.id,
-      category: product.category_id
-    })
+    if (product?.type !== 'service') {
+      onProductRedirect({
+        slug: business?.slug,
+        product: product.id,
+        category: product.category_id
+      })
+    }
     setCurProduct(product)
     setModalIsOpen(true)
     events.emit('product_clicked', product)
@@ -257,6 +263,8 @@ const BusinessProductsListingUI = (props) => {
           handleCartOpen={(val) => setIsCartOpen(val)}
           setSubcategoriesSelected={setSubcategoriesSelected}
           handleUpdateProducts={handleUpdateProducts}
+          professionalSelected={professionalSelected}
+          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
         />
 
         {
@@ -351,7 +359,7 @@ const BusinessProductsListingUI = (props) => {
       </Modal>
 
       <Modal
-        width='700px'
+        width='760px'
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
@@ -380,12 +388,26 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
         {(productModal.product || curProduct) && (
-          <ProductForm
-            businessSlug={business?.slug}
-            product={productModal.product || curProduct}
-            businessId={business?.id}
-            onSave={handlerProductAction}
-          />
+          <>
+            {((productModal?.product?.type === 'service') || (curProduct?.type === 'service')) ? (
+              <ServiceForm
+                businessSlug={business?.slug}
+                product={productModal.product || curProduct}
+                businessId={business?.id}
+                onSave={handlerProductAction}
+                professionalList={business?.professionals}
+                professionalSelected={professionalSelected}
+                handleChangeProfessional={handleChangeProfessionalSelected}
+              />
+            ) : (
+              <ProductForm
+                businessSlug={business?.slug}
+                product={productModal.product || curProduct}
+                businessId={business?.id}
+                onSave={handlerProductAction}
+              />
+            )}
+          </>
         )}
       </Modal>
       <Alert
