@@ -684,6 +684,7 @@ const ProductOptionsUI = (props) => {
                 }
                 useLoginByCellphone
                 isPopup
+                useKioskApp={props.useKioskApp}
               />
             )}
             {modalPageToShow === 'signup' && (
