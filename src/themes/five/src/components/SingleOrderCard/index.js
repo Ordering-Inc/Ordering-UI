@@ -150,10 +150,14 @@ const SingleOrderCardUI = (props) => {
                     </>
                   )}
                   {!isHideDate && (
-                    <p>{order?.delivery_datetime_utc
-                      ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY hh:mm A' })
-                      : parseDate(order?.delivery_datetime, { utc: false })}
-                    </p>
+                    <>
+                      <BsDot />
+                      <p>{order?.delivery_datetime_utc
+                        ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY hh:mm A' })
+                        : parseDate(order?.delivery_datetime, { utc: false })}
+                      </p>
+                    </>
+
                   )}
                 </div>
               )
