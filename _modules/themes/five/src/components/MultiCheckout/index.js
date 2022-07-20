@@ -118,7 +118,8 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       alertState = _useState6[0],
       setAlertState = _useState6[1];
 
-  var isDisablePlaceOrderButton = !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id);
+  var maximumCarts = 5;
+  var isDisablePlaceOrderButton = !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id) || openCarts.length > maximumCarts;
 
   var handlePlaceOrder = function handlePlaceOrder() {
     if (!userErrors.length) {
@@ -231,7 +232,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     color: "primary",
     disabled: isDisablePlaceOrderButton || placing,
     onClick: handlePlaceOrder
-  }, placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), openCarts.length > maximumCarts && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_MAXIMUM_CARTS', 'You can only pay for a maximum of 5 carts, please discard one or more to continue.'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CHECKOUT ', 'Checkout'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
