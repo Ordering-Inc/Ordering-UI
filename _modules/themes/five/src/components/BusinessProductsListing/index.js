@@ -370,7 +370,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       adjustBusiness(adjustBusinessId);
     }
   }, [currentCart]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !props.useKioskApp && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
     onClick: function onClick() {
       return handleGoToBusinessList();
     }
@@ -389,6 +389,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categoryState: categoryState,
     categoriesState: props.categoriesState,
     isCustomLayout: props.isCustomLayout,
+    useKioskApp: props.useKioskApp,
     categorySelected: categorySelected,
     openCategories: openCategories,
     openBusinessInformation: openBusinessInformation,
@@ -481,6 +482,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     content: t('ERROR_GET_PRODUCT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ERROR_GET_PRODUCT) || 'Sorry, we couldn\'t find the requested product.')
   }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     businessSlug: business === null || business === void 0 ? void 0 : business.slug,
+    useKioskApp: props.useKioskApp,
     product: productModal.product || curProduct,
     businessId: business === null || business === void 0 ? void 0 : business.id,
     onSave: handlerProductAction

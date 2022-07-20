@@ -50,7 +50,8 @@ var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
 
   var referenceElement = (0, _react.useRef)();
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "order-type"
+    className: "order-type",
+    style: props.containerStyle
   }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

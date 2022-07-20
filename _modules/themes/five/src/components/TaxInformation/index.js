@@ -60,6 +60,7 @@ var TaxInformation = function TaxInformation(props) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product.id,
       product: product,
+      useKioskApp: props.useKioskApp,
       isModal: true
     });
   }))));

@@ -50,7 +50,8 @@ var PreviousBusinessOrderedUI = function PreviousBusinessOrderedUI(props) {
       setBusinessLoading = props.setBusinessLoading,
       onRedirectPage = props.onRedirectPage,
       businessId = props.businessId,
-      isLoadingOrders = props.isLoadingOrders;
+      isLoadingOrders = props.isLoadingOrders,
+      handleUpdateBusinessList = props.handleUpdateBusinessList;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -104,7 +105,8 @@ var PreviousBusinessOrderedUI = function PreviousBusinessOrderedUI(props) {
       businessDeliveryTime: business === null || business === void 0 ? void 0 : business.delivery_time,
       businessPickupTime: business === null || business === void 0 ? void 0 : business.pickup_time,
       businessDistance: business === null || business === void 0 ? void 0 : business.distance,
-      firstCard: i === 0 && width > 681
+      firstCard: i === 0 && width > 681,
+      handleUpdateBusinessList: handleUpdateBusinessList
     });
   }))));
 };

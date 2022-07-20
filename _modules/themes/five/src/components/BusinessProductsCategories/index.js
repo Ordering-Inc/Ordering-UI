@@ -139,7 +139,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
     className: "category-lists",
-    featured: featured
+    featured: featured,
+    w: props.wContainerStyle
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, openBusinessInformation ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(ProductCategories, null)) : /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, /*#__PURE__*/_react.default.createElement(ProductCategories, null))) : /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {

@@ -101,7 +101,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       products = props.products,
       hideOrders = props.hideOrders,
       onProductRedirect = props.onProductRedirect,
-      businessesSearchList = props.businessesSearchList;
+      businessesSearchList = props.businessesSearchList,
+      handleUpdateProducts = props.handleUpdateProducts;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -357,7 +358,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     isLoadingOrders: loading
   }), isProducts && /*#__PURE__*/_react.default.createElement(_PreviousProductsOrdered.PreviousProductsOrdered, {
     products: products,
-    onProductClick: onProductClick
+    onProductClick: onProductClick,
+    handleUpdateProducts: handleUpdateProducts
   }), (isCustomLayout ? loadingOrders || loading || isBusinessesLoading : showSkeletons) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessLoading && isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.BusinessControllerSkeleton, null, _toConsumableArray(Array(3).keys()).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,

@@ -153,6 +153,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       errorCash = props.errorCash,
       isLoading = props.isLoading,
       isDisabled = props.isDisabled,
+      useKioskApp = props.useKioskApp,
       paymethodData = props.paymethodData,
       paymethodsList = props.paymethodsList,
       setPaymethodData = props.setPaymethodData,
@@ -185,6 +186,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
+  var includeKioskPaymethods = ['cash', 'card_delivery'];
+  var supportedMethods = paymethodsList.paymethods.filter(function (p) {
+    return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
+  });
 
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
     if ((cart === null || cart === void 0 ? void 0 : cart.balance) > 0) {
@@ -207,10 +212,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (paymethodsList.paymethods.length === 1) {
-      handlePaymethodClick && handlePaymethodClick(paymethodsList.paymethods[0]);
+    if (supportedMethods.length === 1) {
+      handlePaymethodClick && handlePaymethodClick(supportedMethods[0]);
     }
-  }, [paymethodsList.paymethods]);
+  }, [supportedMethods]);
   (0, _react.useEffect)(function () {
     if ((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'cash' && errorCash) {
       props.setErrorCash(false);
@@ -247,7 +252,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
     className: "payments-list"
-  }, paymethodsList.paymethods.length > 0 && paymethodsList.paymethods.sort(function (a, b) {
+  }, supportedMethods.length > 0 && supportedMethods.sort(function (a, b) {
     return a.id - b.id;
   }).map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -273,7 +278,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }));
   }), paymethodsList.error && paymethodsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$error = paymethodsList.error[0]) === null || _paymethodsList$error === void 0 ? void 0 : _paymethodsList$error.message) || (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0])
-  }), !(paymethodsList.loading || isLoading) && !paymethodsList.error && (!(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.paymethods) || paymethodsList.paymethods.length === 0) && /*#__PURE__*/_react.default.createElement("p", null, t('NO_PAYMENT_METHODS', 'No payment methods!'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
+  }), !(paymethodsList.loading || isLoading) && !paymethodsList.error && (!(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.paymethods) || supportedMethods.length === 0) && /*#__PURE__*/_react.default.createElement("p", null, t('NO_PAYMENT_METHODS', 'No payment methods!'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
     data: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.data,
     orderTotal: cart.total,
     defaultValue: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da2 = paymethodSelected.data) === null || _paymethodSelected$da2 === void 0 ? void 0 : _paymethodSelected$da2.cash,

@@ -84,7 +84,9 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
       handleSearchbusinessAndProducts = props.handleSearchbusinessAndProducts,
       brandList = props.brandList,
       onRedirectPage = props.onRedirectPage,
-      onProductRedirect = props.onProductRedirect;
+      onProductRedirect = props.onProductRedirect,
+      handleUpdateBusinessList = props.handleUpdateBusinessList,
+      _handleUpdateProducts = props.handleUpdateProducts;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -268,6 +270,7 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
       isBusinessOpen: business.open,
       handleCustomClick: onBusinessClick,
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.type,
+      handleUpdateBusinessList: handleUpdateBusinessList,
       firstCard: i === 0 && width > 681
     });
   }), !businessesSearchList.loading && (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) < (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
@@ -323,7 +326,10 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
           key: product === null || product === void 0 ? void 0 : product.id,
           isSoldOut: product.inventoried && !product.quantity,
           product: product,
-          businessId: business === null || business === void 0 ? void 0 : business.id
+          businessId: business === null || business === void 0 ? void 0 : business.id,
+          handleUpdateProducts: function handleUpdateProducts(productId, changes) {
+            return _handleUpdateProducts(productId, category === null || category === void 0 ? void 0 : category.id, business === null || business === void 0 ? void 0 : business.id, changes);
+          }
         });
       });
     })))));

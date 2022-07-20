@@ -134,8 +134,8 @@ var UserPopover = function UserPopover(props) {
   }, {
     name: 'favorite',
     pathname: '/favorite',
-    displayName: 'favorite',
-    key: 'favorite',
+    displayName: 'favorites',
+    key: 'favorites',
     isActive: true
   }, {
     name: 'addresses',

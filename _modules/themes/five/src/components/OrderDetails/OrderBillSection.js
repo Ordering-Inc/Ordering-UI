@@ -97,7 +97,7 @@ var OrderBillSection = function OrderBillSection(props) {
 
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id
-    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
+    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), setOpenTaxModal && /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
       onClick: function onClick() {
         return setOpenTaxModal({
           open: true,
@@ -116,7 +116,7 @@ var OrderBillSection = function OrderBillSection(props) {
 
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: tax === null || tax === void 0 ? void 0 : tax.id
-    }, /*#__PURE__*/_react.default.createElement("td", null, (tax === null || tax === void 0 ? void 0 : tax.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(tax === null || tax === void 0 ? void 0 : tax.rate, parseNumber), "%)")), /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
+    }, /*#__PURE__*/_react.default.createElement("td", null, (tax === null || tax === void 0 ? void 0 : tax.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(tax === null || tax === void 0 ? void 0 : tax.rate, parseNumber), "%)")), setOpenTaxModal && /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
       onClick: function onClick() {
         return setOpenTaxModal({
           open: true,
@@ -135,7 +135,7 @@ var OrderBillSection = function OrderBillSection(props) {
 
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: fee.id
-    }, /*#__PURE__*/_react.default.createElement("td", null, (fee === null || fee === void 0 ? void 0 : fee.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), "(", (fee === null || fee === void 0 ? void 0 : fee.fixed) > 0 && "".concat(parsePrice(fee === null || fee === void 0 ? void 0 : fee.fixed)).concat(fee.percentage > 0 ? ' + ' : ''), fee.percentage > 0 && "".concat(fee.percentage, "%"), ")", /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
+    }, /*#__PURE__*/_react.default.createElement("td", null, (fee === null || fee === void 0 ? void 0 : fee.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), "(", (fee === null || fee === void 0 ? void 0 : fee.fixed) > 0 && "".concat(parsePrice(fee === null || fee === void 0 ? void 0 : fee.fixed)).concat(fee.percentage > 0 ? ' + ' : ''), fee.percentage > 0 && "".concat(fee.percentage, "%"), ")", setOpenTaxModal && /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
       onClick: function onClick() {
         return setOpenTaxModal({
           open: true,
@@ -154,7 +154,7 @@ var OrderBillSection = function OrderBillSection(props) {
 
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id
-    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
+    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), setOpenTaxModal && /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
       onClick: function onClick() {
         return setOpenTaxModal({
           open: true,
@@ -173,7 +173,7 @@ var OrderBillSection = function OrderBillSection(props) {
 
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id
-    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
+    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), setOpenTaxModal && /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
       onClick: function onClick() {
         return setOpenTaxModal({
           open: true,

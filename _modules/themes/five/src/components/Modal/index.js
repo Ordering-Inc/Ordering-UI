@@ -93,7 +93,8 @@ var ModalUI = function ModalUI(props) {
     isSlideBar: isSlideBar,
     slideBarPosition: slideBarPosition,
     open: props.open,
-    disableOverflowX: disableOverflowX
+    disableOverflowX: disableOverflowX,
+    style: props.customStyle
   }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, null), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, {
     isProductForm: isProductForm
   }, authModal && onRemove ? /*#__PURE__*/_react.default.createElement(_MdClose.default, {

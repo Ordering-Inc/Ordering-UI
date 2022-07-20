@@ -701,7 +701,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       href: "#"
     }, t('RESET_PASSWORD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag12 = theme.defaultLanguages) === null || _theme$defaultLanguag12 === void 0 ? void 0 : _theme$defaultLanguag12.RESET_PASSWORD) || 'Reset password')),
     useLoginByCellphone: true,
-    isPopup: true
+    isPopup: true,
+    useKioskApp: props.useKioskApp
   }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
     elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {

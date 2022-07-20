@@ -85,6 +85,7 @@ var CartUI = function CartUI(props) {
       removeProduct = props.removeProduct,
       onClickCheckout = props.onClickCheckout,
       isCheckout = props.isCheckout,
+      useKioskApp = props.useKioskApp,
       isMultiCheckout = props.isMultiCheckout,
       isCartPending = props.isCartPending,
       isCartPopover = props.isCartPopover,
@@ -357,7 +358,7 @@ var CartUI = function CartUI(props) {
     handleClickCheckout: handleClickCheckout,
     checkoutButtonDisabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address),
     setPreorderBusiness: setPreorderBusiness,
-    handleChangeStore: handleChangeStore,
+    handleChangeStore: !useKioskApp && handleChangeStore,
     isMultiCheckout: isMultiCheckout
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
@@ -610,7 +611,8 @@ var CartUI = function CartUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_TaxInformation.TaxInformation, {
     type: openTaxModal.type,
     data: openTaxModal.data,
-    products: cart.products
+    products: cart.products,
+    useKioskApp: useKioskApp
   })), (openUpselling || isUpselling) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     businessId: cart.business_id,
     isCustomMode: isCustomMode,

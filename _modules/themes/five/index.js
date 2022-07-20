@@ -207,6 +207,12 @@ Object.defineProperty(exports, "Header", {
     return _Header.Header;
   }
 });
+Object.defineProperty(exports, "HeaderKiosk", {
+  enumerable: true,
+  get: function get() {
+    return _Kiosk.Header;
+  }
+});
 Object.defineProperty(exports, "HeaderOption", {
   enumerable: true,
   get: function get() {
@@ -253,6 +259,12 @@ Object.defineProperty(exports, "InputPhoneNumber", {
   enumerable: true,
   get: function get() {
     return _InputPhoneNumber.InputPhoneNumber;
+  }
+});
+Object.defineProperty(exports, "KioskHomeHero", {
+  enumerable: true,
+  get: function get() {
+    return _KioskHomeHero.KioskHomeHero;
   }
 });
 Object.defineProperty(exports, "LanguageSelector", {
@@ -337,6 +349,12 @@ Object.defineProperty(exports, "OrderDetails", {
   enumerable: true,
   get: function get() {
     return _OrderDetails.OrderDetails;
+  }
+});
+Object.defineProperty(exports, "OrderDetailsKiosk", {
+  enumerable: true,
+  get: function get() {
+    return _Kiosk2.OrderDetails;
   }
 });
 Object.defineProperty(exports, "OrderProgress", {
@@ -632,6 +650,8 @@ var _GoogleLogin = require("./src/components/GoogleLogin");
 
 var _Header = require("./src/components/Header");
 
+var _Kiosk = require("./src/components/Header/layouts/Kiosk");
+
 var _HeaderOption = require("./src/components/HeaderOption");
 
 var _Help = require("./src/components/Help");
@@ -639,6 +659,8 @@ var _Help = require("./src/components/Help");
 var _HelpStaticPage = require("./src/components/HelpStaticPage");
 
 var _HomeHero = require("./src/components/HomeHero");
+
+var _KioskHomeHero = require("./src/components/HomeHero/layouts/KioskHomeHero");
 
 var _HighestRated = require("./src/components/HighestRated");
 
@@ -673,6 +695,8 @@ var _NotNetworkConnectivity = require("./src/components/NotNetworkConnectivity")
 var _Modal = require("./src/components/Modal");
 
 var _OrderDetails = require("./src/components/OrderDetails");
+
+var _Kiosk2 = require("./src/components/OrderDetails/layouts/Kiosk");
 
 var _OrdersOption = require("./src/components/OrdersOption");
 
