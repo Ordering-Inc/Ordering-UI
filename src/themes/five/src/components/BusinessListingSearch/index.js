@@ -31,7 +31,8 @@ import {
   BrandItem,
   NoResult,
   PriceFilterWrapper,
-  PriceFilterListWrapper
+  PriceFilterListWrapper,
+  PreviouslyOrderedContainer
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 import { Check2, XLg as Close } from 'react-bootstrap-icons'
@@ -40,6 +41,7 @@ import { useLanguage, useOrder, useUtils, BusinessSearchList } from 'ordering-co
 import { BusinessController } from '../BusinessController'
 import { AutoScroll } from '../AutoScroll'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
+import { MyOrders } from '../MyOrders'
 import { useTheme } from 'styled-components'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import { convertHoursToMinutes } from '../../../../../utils'
@@ -60,7 +62,9 @@ export const BusinessListingSearchUI = (props) => {
     termValue,
     paginationProps,
     handleSearchbusinessAndProducts,
-    brandList
+    brandList,
+    onRedirectPage,
+    onProductRedirect
   } = props
 
   const [orderState] = useOrder()
@@ -231,7 +235,18 @@ export const BusinessListingSearchUI = (props) => {
           </TagsContainer>
         </Filters>
         <FiltersResultContainer>
+          <PreviouslyOrderedContainer>
+            <MyOrders
+              hideOrders
+              businessesSearchList={businessesSearchList}
+              onRedirectPage={onRedirectPage}
+              onProductRedirect={onProductRedirect}
+            />
+          </PreviouslyOrderedContainer>
           <BusinessListWrapper>
+            {businessesSearchList.businesses?.length > 0 && (
+              <h2>{t('BUSINESSES', 'Businesses')}</h2>
+            )}
             <BusinessList noResults={noResults}>
               {
                 noResults && (

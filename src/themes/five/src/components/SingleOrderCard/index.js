@@ -34,7 +34,8 @@ const SingleOrderCardUI = (props) => {
     pastOrders,
     isCustomerMode,
     handleFavoriteOrder,
-    isSkeleton
+    isSkeleton,
+    isFavorite
   } = props
 
   const [, t] = useLanguage()
@@ -43,13 +44,17 @@ const SingleOrderCardUI = (props) => {
   const [{ configs }] = useConfig()
 
   const handleClickCard = (e, uuid) => {
-    if (e.target.closest('.favorite')) return
+    if (e.target.closest('.favorite') || e.target.closest('.review')) return
 
     if (customArray) {
       onRedirectPage({ page: 'checkout', params: { cartUuid: uuid } })
     } else {
       onRedirectPage({ page: 'order_detail', params: { orderId: uuid } })
     }
+  }
+
+  const handleClickReview = (uuid) => {
+    onRedirectPage({ page: 'order_detail', params: { orderId: uuid } })
   }
 
   const handleChangeFavorite = (order) => {
@@ -168,13 +173,16 @@ const SingleOrderCardUI = (props) => {
           )}
           {pastOrders && !isCustomerMode && (
             <ButtonWrapper>
-              <Button
-                outline
-                color='primary'
-                onClick={(e) => handleClickCard(e, order.uuid)}
-              >
-                {t('REVIEW', 'Review')}
-              </Button>
+              {!(isFavorite && !order?.review) && (
+                <Button
+                  outline
+                  color='primary'
+                  className='review'
+                  onClick={() => handleClickReview(order.uuid)}
+                >
+                  {t('REVIEW', 'Review')}
+                </Button>
+              )}
               {order.cart && (
                 <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
                   {t('REORDER', 'Reorder')}

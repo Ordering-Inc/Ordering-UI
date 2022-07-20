@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useOrder, OrderList } from 'ordering-components'
+import { OrderList, useLanguage, useOrder, useEvent } from 'ordering-components'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
@@ -17,8 +17,16 @@ import {
   SkeletonText,
   SkeletonInformation,
   SkeletonReorder,
-  SkeletonButton
+  SkeletonButton,
+  BusinessControllerSkeleton,
+  ProductsListing
 } from './styles'
+import { PreviousBusinessOrdered } from './PreviousBusinessOrdered'
+import { PreviousProductsOrdered } from './PreviousProductsOrdered'
+import { BusinessController } from '../BusinessController'
+import { SingleProductCard } from '../SingleProductCard'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { Alert } from '../Confirm'
 
 const OrdersOptionUI = (props) => {
   const {
@@ -44,12 +52,21 @@ const OrdersOptionUI = (props) => {
     isCustomerMode,
     handleUpdateOrderList,
     reorderState,
-    handleReorder
+    handleReorder,
+    isBusiness,
+    isProducts,
+    businessOrderIds,
+    products,
+    hideOrders,
+    onProductRedirect,
+    businessesSearchList
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ carts }] = useOrder()
+  const [events] = useEvent()
+  const { width } = useWindowSize()
   const { loading, error, orders: values } = orderList
 
   const imageFails = activeOrders
@@ -62,7 +79,8 @@ const OrdersOptionUI = (props) => {
     : orders.length > 0
 
   const [loadingOrders, setLoadingOrders] = useState(true)
-
+  const [businessLoading, setBusinessLoading] = useState(true)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const closeOrderModal = (e) => {
     const outsideModal = !window.document.getElementById('app-modals') ||
       !window.document.getElementById('app-modals').contains(e.target)
@@ -72,6 +90,8 @@ const OrdersOptionUI = (props) => {
       onRedirectPage && onRedirectPage({ page: 'business', params: { store: reorderState?.result?.business?.slug } })
     }
   }
+
+  const showSkeletons = (!isBusiness && !isProducts && loading) || (businessLoading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -105,6 +125,22 @@ const OrdersOptionUI = (props) => {
     const objectStatus = orderStatus.find((o) => o.key === status)
 
     return objectStatus && objectStatus
+  }
+
+  const onProductClick = (product, slug) => {
+    if (slug) {
+      onProductRedirect({
+        slug,
+        product: product.product_id,
+        category: product.category_id
+      })
+      events.emit('product_clicked', product)
+    } else {
+      setAlertState({
+        open: true,
+        content: t('PRODUCT_HAS_NOT_BUSINESS_SLUG', 'The product selected has not business slug')
+      })
+    }
   }
 
   useEffect(() => {
@@ -161,7 +197,7 @@ const OrdersOptionUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : (isShowTitles || !isBusinessesPage)) && (
+      {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : ((isShowTitles || !isBusinessesPage) && !hideOrders)) && (
         <>
           {orders.length > 0 && (
             <OptionTitle isBusinessesPage={isBusinessesPage}>
@@ -181,59 +217,96 @@ const OrdersOptionUI = (props) => {
           )}
         </>
       )}
-
-      {(isCustomLayout ? (loadingOrders || loading || isBusinessesLoading) : loading) && (
-        <OrdersContainer
-          isSkeleton
-          activeOrders={horizontal}
-          isBusinessesPage={isBusinessesPage}
-        >
-          {horizontal ? (
-            <SkeletonOrder activeOrders={horizontal} isBusinessesPage={isBusinessesPage}>
-              {[...Array(3)].map((item, i) => (
-                <SkeletonCard key={i}>
-                  <SkeletonContent activeOrders={horizontal}>
-                    <div>
-                      <Skeleton width={70} height={70} />
-                    </div>
-                    <SkeletonText>
-                      <Skeleton width={100} />
-                      <Skeleton width={80} />
-                      <Skeleton width={120} />
-                    </SkeletonText>
-                  </SkeletonContent>
-                  <SkeletonButton>
-                    <Skeleton />
-                  </SkeletonButton>
-                </SkeletonCard>
-              ))}
-            </SkeletonOrder>
-          ) : (
-            [...Array(3)].map((item, i) => (
-              <SkeletonOrder key={i}>
-                <SkeletonContent>
-                  <SkeletonInformation>
-                    <div>
-                      <Skeleton width={70} height={70} />
-                    </div>
-                    <SkeletonText>
-                      <Skeleton width={100} />
-                      <Skeleton width={120} />
-                      <Skeleton width={80} />
-                    </SkeletonText>
-                  </SkeletonInformation>
-                  <SkeletonReorder>
-                    <Skeleton />
-                    <Skeleton />
-                  </SkeletonReorder>
-                </SkeletonContent>
-              </SkeletonOrder>
-            ))
-          )}
-        </OrdersContainer>
+      {isBusiness && businessOrderIds?.length > 0 && (
+        <PreviousBusinessOrdered
+          businessId={businessOrderIds}
+          setBusinessLoading={setBusinessLoading}
+          onRedirectPage={onRedirectPage}
+          isLoadingOrders={loading}
+        />
       )}
 
-      {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading : !loading && !error && orders.length > 0) && (
+      {isProducts && (
+        <PreviousProductsOrdered products={products} onProductClick={onProductClick} />
+      )}
+
+      {(isCustomLayout ? (loadingOrders || loading || isBusinessesLoading) : showSkeletons) && (
+        <>
+          {(businessLoading && isBusiness) ? (
+            <BusinessControllerSkeleton>
+              {[...Array(3).keys()].map((item, i) => (
+                <BusinessController
+                  key={i}
+                  className='card'
+                  business={{}}
+                  isSkeleton
+                  firstCard={i === 0 && width > 681}
+                />
+              ))}
+            </BusinessControllerSkeleton>
+          ) : loading && isProducts ? (
+            <ProductsListing>
+              {[...Array(3).keys()].map(i => (
+                <SingleProductCard
+                  key={`skeleton:${i}`}
+                  isSkeleton
+                />
+              ))}
+            </ProductsListing>
+          ) : (
+            <OrdersContainer
+              isSkeleton
+              activeOrders={horizontal}
+              isBusinessesPage={isBusinessesPage}
+            >
+              {horizontal ? (
+                <SkeletonOrder activeOrders={horizontal} isBusinessesPage={isBusinessesPage}>
+                  {[...Array(3)].map((item, i) => (
+                    <SkeletonCard key={i}>
+                      <SkeletonContent activeOrders={horizontal}>
+                        <div>
+                          <Skeleton width={70} height={70} />
+                        </div>
+                        <SkeletonText>
+                          <Skeleton width={100} />
+                          <Skeleton width={80} />
+                          <Skeleton width={120} />
+                        </SkeletonText>
+                      </SkeletonContent>
+                      <SkeletonButton>
+                        <Skeleton />
+                      </SkeletonButton>
+                    </SkeletonCard>
+                  ))}
+                </SkeletonOrder>
+              ) : (
+                [...Array(3)].map((item, i) => (
+                  <SkeletonOrder key={i}>
+                    <SkeletonContent>
+                      <SkeletonInformation>
+                        <div>
+                          <Skeleton width={70} height={70} />
+                        </div>
+                        <SkeletonText>
+                          <Skeleton width={100} />
+                          <Skeleton width={120} />
+                          <Skeleton width={80} />
+                        </SkeletonText>
+                      </SkeletonInformation>
+                      <SkeletonReorder>
+                        <Skeleton />
+                        <Skeleton />
+                      </SkeletonReorder>
+                    </SkeletonContent>
+                  </SkeletonOrder>
+                ))
+              )}
+            </OrdersContainer>
+          )}
+        </>
+      )}
+
+      {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading && !hideOrders : !loading && !error && orders.length > 0 && !hideOrders) && (
         horizontal ? (
           <HorizontalOrdersLayout
             businessesIds={businessesIds}
@@ -250,6 +323,8 @@ const OrdersOptionUI = (props) => {
             handleUpdateOrderList={handleUpdateOrderList}
             pastOrders={pastOrders}
             isCustomerMode={isCustomerMode}
+            isBusiness={isBusiness}
+            isProducts={isProducts}
           />
         ) : (
           <VerticalOrdersLayout
@@ -263,6 +338,15 @@ const OrdersOptionUI = (props) => {
           />
         )
       )}
+      <Alert
+        title={t('MY_ORDERS', 'My orders')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
@@ -274,16 +358,20 @@ const OrdersOptionUI = (props) => {
 }
 
 export const OrdersOption = (props) => {
+  const getAllOrders = props.activeOrders && props.pastOrders && props.preOrders
+
   const orderListProps = {
     ...props,
     UIComponent: OrdersOptionUI,
-    orderStatus: props.activeOrders
-      ? [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23]
-      : (props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 15, 16, 17] : [13]),
+    orderStatus: getAllOrders
+      ? [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+      : props.activeOrders
+        ? [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23]
+        : (props.pastOrders ? [1, 2, 5, 6, 10, 11, 12, 15, 16, 17] : [13]),
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 10,
+      pageSize: getAllOrders ? 30 : 10,
       controlType: 'infinity'
     }
   }

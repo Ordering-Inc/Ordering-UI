@@ -97,14 +97,19 @@ export const Select = styled.div`
   border-width: 1px;
   border-style: solid;
   border-color: #CCC;
-  background-color: ${({ isHome }) => isHome ? 'rgba(247,247,247,0.3)' : '#CCC'} !important;
-  color: ${({ isHome }) => isHome ? '#FFF' : '#333'} !important;
+  background-color: ${(props) => props.isHome ? '#FFF' : '#CCC'} !important;
+  color: ${(props) => props.isHome ? '#FFF' : '#333'} !important;
   position: relative;
   ${props => props.disabled && css`
     pointer-events: none;
   `}
   ${props => props.open && css`
     background-color: ${darken(0.07, '#CCC')};
+  `}
+  ${(props) => props.isHome && css`
+      #item {
+        background-color: #FFF !important;
+      }
   `}
 `
 

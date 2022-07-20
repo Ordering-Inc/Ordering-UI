@@ -9,7 +9,6 @@ import { verifyDecimals } from '../../../../../utils'
 
 import {
   OrderBill,
-  Divider,
   Exclamation
 } from './styles'
 
@@ -18,7 +17,6 @@ import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 export const OrderBillSection = (props) => {
   const {
     order,
-    isCustomerMode,
     setOpenTaxModal
   } = props
 
@@ -51,7 +49,7 @@ export const OrderBillSection = (props) => {
   }
 
   return (
-    <OrderBill isCustomerMode={isCustomerMode}>
+    <OrderBill>
       <table>
         <tbody>
           <tr>
@@ -91,14 +89,6 @@ export const OrderBillSection = (props) => {
               </tr>
             ))
           }
-          <tr>
-            <td>
-              <Divider />
-            </td>
-            <td>
-              <Divider />
-            </td>
-          </tr>
           {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
             <tr>
               <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
@@ -263,7 +253,7 @@ export const OrderBillSection = (props) => {
                   )}
                 </div>
                 <span>
-                  -{parsePrice(event.amount)}
+                  -{parsePrice(event.amount, { isTruncable: true })}
                 </span>
               </div>
             ))}
