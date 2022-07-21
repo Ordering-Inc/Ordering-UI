@@ -7,14 +7,13 @@ import {
   Cart3
 } from 'react-bootstrap-icons'
 import {
-  // BusinessAndProductList,
+  BusinessAndProductList,
   useEvent,
   useLanguage,
   useOrder,
   useUtils,
   useSession
 } from 'ordering-components'
-import { BusinessAndProductList } from './naked'
 
 import {
   ProductsContainer,
@@ -107,7 +106,7 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const onProductClick = (product) => {
-    if (product?.type !== 'service') {
+    if (!((product?.type === 'service') && professionalSelected)) {
       onProductRedirect({
         slug: business?.slug,
         product: product.id,
@@ -389,7 +388,7 @@ const BusinessProductsListingUI = (props) => {
         )}
         {(productModal.product || curProduct) && (
           <>
-            {((productModal?.product?.type === 'service') || (curProduct?.type === 'service')) ? (
+            {(((productModal?.product?.type === 'service') || (curProduct?.type === 'service')) && professionalSelected) ? (
               <ServiceForm
                 businessSlug={business?.slug}
                 product={productModal.product || curProduct}

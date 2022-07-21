@@ -59,7 +59,8 @@ const BusinessPreorderUI = (props) => {
     isAsap,
     handleAsap,
     isProfessional,
-    isDisabled
+    isDisabled,
+    maxDays
   } = props
 
   const { pathname } = useLocation()
@@ -151,7 +152,7 @@ const BusinessPreorderUI = (props) => {
   }, [type])
 
   useEffect(() => {
-    if (pathname.includes('store')) return
+    if (pathname.includes('store') || isProfessional) return
     handleAsap && handleAsap()
   }, [])
 
@@ -183,7 +184,7 @@ const BusinessPreorderUI = (props) => {
           setMenu={setMenu}
         />
       )}
-      {isPreOrderSetting && (
+      {(isPreOrderSetting || isProfessional) && (
         <OrderTimeWrapper>
           {!isProfessional && <p>{t('ORDER_TIME', 'Order time')}</p>}
           <DateWrapper>
@@ -218,7 +219,7 @@ const BusinessPreorderUI = (props) => {
                 preventClicksPropagation={false}
               >
                 {
-                  datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10)).map(date => {
+                  datesList.slice(0, Number(maxDays || configs?.max_days_preorder?.value || 6, 10)).map(date => {
                     const dateParts = date.split('-')
                     const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
                     const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2)
@@ -291,9 +292,10 @@ const BusinessPreorderUI = (props) => {
 }
 
 export const BusinessPreorder = (props) => {
+  const { maxDays } = props
   const [{ configs }] = useConfig()
 
-  const limitDays = parseInt(configs?.max_days_preorder?.value, 10)
+  const limitDays = maxDays ?? parseInt(configs?.max_days_preorder?.value, 10)
 
   const currentDate = new Date()
   const time = limitDays > 1

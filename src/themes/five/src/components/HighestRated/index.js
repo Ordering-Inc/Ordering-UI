@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { useLanguage, useOrder } from 'ordering-components'
-import { BusinessList as BusinessListController } from './naked'
+import { useLanguage, useOrder, BusinessList as BusinessListController } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { BusinessPreorder } from '../BusinessPreorder'
-import { useLanguage, useUtils, useOrder } from 'ordering-components'
+import { useLanguage, useUtils } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import {
   Container,
@@ -21,8 +21,7 @@ export const ProfessionalProfile = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ optimizeImage, parseDate }] = useUtils()
-  const [orderStatus] = useOrder()
+  const [{ optimizeImage }] = useUtils()
 
   const handleSelectProfessional = () => {
     handleChangeProfessionalSelected(currentProfessional)
@@ -49,16 +48,14 @@ export const ProfessionalProfile = (props) => {
             business={currentProfessional}
             isProfessional
             isDisabled
+            maxDays={50}
+            useOrderContext={false}
           />
         ) : (
           <p>{t('NO_SCHEDULE', 'No schedule')}</p>
         )}
       </ScheduleWrapper>
       <ButtonWrapper>
-        <span>{orderStatus.options?.moment
-          ? parseDate(orderStatus.options?.moment, { outputFormat: 'HH:mm a' })
-          : t('ASAP_ABBREVIATION', 'ASAP')}
-        </span>
         <Button
           onClick={() => handleSelectProfessional()}
           color='primary'

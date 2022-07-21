@@ -63,6 +63,7 @@ export const ProfessionalFilter = (props) => {
       <Modal
         open={open}
         width='760px'
+        padding='0'
         onClose={() => handleCloseProfile()}
       >
         <ProfessionalProfile

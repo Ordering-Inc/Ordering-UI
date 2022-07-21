@@ -3,6 +3,7 @@ import React from 'react'
 
 export const Container = styled.div`
   position: relative;
+  padding: 30px 20px 0px 20px;
 `
 
 export const PhotoWrapper = styled.div`
@@ -78,20 +79,14 @@ export const ScheduleWrapper = styled.div`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: sticky;
   background: ${props => props.theme.colors.backgroundPage};
-  padding: 11px 0px 30px 0px;
+  padding: 11px 0px 14px 0px;
   border-top: ${props => props.theme.colors.gray200};
-  bottom: -30px;
+  bottom: 0px;
   z-index: 1;
-
-  span {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-  }
 
   button {
     height: 44px;

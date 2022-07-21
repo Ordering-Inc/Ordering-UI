@@ -1,7 +1,13 @@
 import styled, { css } from 'styled-components'
 import React from 'react'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  max-height: 100vh;
+  position: relative;
+  @media (min-width: 1200px) {
+    max-height: calc(70vh - 20px);
+  }
+`
 
 export const ImageWrapper = styled.div`
   margin-top: 50px;
@@ -82,6 +88,7 @@ export const HeaderInfoWrapper = styled.div`
     font-size: 16px;
     margin: 0px;
     color: ${props => props.theme.colors.darkGray};
+    white-space: pre-wrap;
   }
 `
 
@@ -159,6 +166,10 @@ export const ButtonWrapper = styled.div`
     height: 44px;
     width: 100%;
     max-width: 300px;
+    &.soldout {
+      pointer-events: none;
+      background-color: hsl(0, 0%, 72%);
+    }
   }
 `
 
@@ -177,6 +188,7 @@ export const SelectedItem = styled.div`
 export const InfoWrapper = styled.div`
   display: flex;
   align-items: center;
+  flex: 1;
 
   svg {
     width: 42px;
@@ -210,6 +222,7 @@ export const ProfessionalPhoto = (props) => {
 
 export const NameWrapper = styled.div`
   margin-left: 25px;
+  flex: 1;
   ${props => props.theme.rtl && css`
     margin-right: 25px;
     margin-left: 0px;
@@ -220,13 +233,23 @@ export const NameWrapper = styled.div`
     line-height: 24px;
     margin: 0px;
   }
-  .time {
-    color: ${props => props.theme.colors.danger500};
+`
+
+export const StatusInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  span {
+    font-weight: 400;
     font-size: 12px;
     line-height: 18px;
+    &.status {
+      color: ${props => props.theme.colors.danger500};
+    }
   }
+
   ${({ available }) => available && css`
-    .time {
+    span.status {
       color: ${props => props.theme.colors.success500};
     }
   `}

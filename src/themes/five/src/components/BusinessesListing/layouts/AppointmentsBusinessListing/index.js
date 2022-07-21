@@ -4,11 +4,10 @@ import {
   useLanguage,
   useOrder,
   useSession,
-  useConfig
-  // BusinessList as BusinessListController
+  useConfig,
+  BusinessList as BusinessListController
 } from 'ordering-components'
 import { BusinessPreorder } from '../../../BusinessPreorder'
-import { BusinessList as BusinessListController } from './naked'
 import { BusinessTypeFilter } from '../../../BusinessTypeFilter'
 import { priceList } from '../../../../../../../utils'
 import { Button } from '../../../../styles/Buttons'
