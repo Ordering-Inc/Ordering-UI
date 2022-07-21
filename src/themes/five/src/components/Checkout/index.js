@@ -39,10 +39,12 @@ import {
   DeliveryOptionsContainer,
   WalletPaymentOptionContainer,
   CartHeader,
-  SelectSpotContainer
+  SelectSpotContainer,
+  WrapperActionsInput
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
+import { Input } from '../../styles/Inputs'
 
 import { NotFoundSource } from '../NotFoundSource'
 
@@ -71,6 +73,7 @@ const CheckoutUI = (props) => {
     errors,
     placing,
     cartState,
+    useKioskApp,
     businessDetails,
     paymethodSelected,
     handlePaymethodChange,
@@ -102,14 +105,15 @@ const CheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
+  const [behalfName, setBehalfName] = useState(null)
 
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
   const isWalletCreditPointsEnabled = businessConfigs.find(config => config.key === 'wallet_credit_point_enabled')?.value === '1'
-  const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled)
+  const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp
 
   const placeSpotTypes = [3, 4, 5]
-  const placeSpotsEnabled = placeSpotTypes.includes(options?.type)
+  const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
   const isDisablePlaceOrderButton = !cart?.valid ||
@@ -137,7 +141,11 @@ const CheckoutUI = (props) => {
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
-      handlerClickPlaceOrder && handlerClickPlaceOrder()
+      const body = {}
+      if (behalfName) {
+        body.on_behalf_of = behalfName
+      }
+      handlerClickPlaceOrder && handlerClickPlaceOrder(null, body)
       return
     }
     setAlertState({
@@ -242,83 +250,96 @@ const CheckoutUI = (props) => {
           )}
           <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
 
-          {(businessDetails?.loading || cartState.loading) ? (
-            <div style={{ width: '100%', marginBottom: '20px' }}>
-              <Skeleton height={35} style={{ marginBottom: '10px' }} />
-              <Skeleton height={150} />
-            </div>
-          ) : (
-            <AddressDetails
-              location={businessDetails?.business?.location}
-              businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
-              isCartPending={cart?.status === 2}
-              businessId={cart?.business_id}
-              apiKey={configs?.google_maps_api_key?.value}
-              mapConfigs={mapConfigs}
-              isCustomerMode={isCustomerMode}
-            />
-          )}
-
-          <UserDetailsContainer>
-            <WrapperUserDetails>
-              {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
-                <div>
+          {!useKioskApp ? (
+            <>
+              {(businessDetails?.loading || cartState.loading) ? (
+                <div style={{ width: '100%', marginBottom: '20px' }}>
                   <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                  <Skeleton height={150} />
                 </div>
               ) : (
-                <UserDetails
-                  isUserDetailsEdit={isUserDetailsEdit}
-                  cartStatus={cart?.status}
+                <AddressDetails
+                  location={businessDetails?.business?.location}
+                  businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
+                  isCartPending={cart?.status === 2}
                   businessId={cart?.business_id}
-                  useValidationFields
-                  useDefualtSessionManager
-                  useSessionUser={!isCustomerMode}
+                  apiKey={configs?.google_maps_api_key?.value}
+                  mapConfigs={mapConfigs}
                   isCustomerMode={isCustomerMode}
-                  userData={isCustomerMode && customerState.user}
-                  userId={isCustomerMode && customerState?.user?.id}
-                  isCheckout
                 />
               )}
-            </WrapperUserDetails>
-          </UserDetailsContainer>
-
-          <BusinessDetailsContainer>
-            {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
-              <div>
-                <div>
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                </div>
-              </div>
-            )}
-            {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
-              <div>
-                <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                <div>
-                  <p>{businessDetails?.business?.address}</p>
-                  <p>{businessDetails?.business?.name}</p>
-                  <p>{businessDetails?.business?.email}</p>
-                  <p>{businessDetails?.business?.cellphone}</p>
-                </div>
-              </div>
-            )}
-            {businessDetails?.error && businessDetails?.error?.length > 0 && (
-              <div>
-                <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                <NotFoundSource
-                  content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
-                />
-              </div>
-            )}
-          </BusinessDetailsContainer>
-          <CheckOutDivider />
+              <UserDetailsContainer>
+                <WrapperUserDetails>
+                  {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
+                    <div>
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                    </div>
+                  ) : (
+                    <UserDetails
+                      isUserDetailsEdit={isUserDetailsEdit}
+                      cartStatus={cart?.status}
+                      businessId={cart?.business_id}
+                      useValidationFields
+                      useDefualtSessionManager
+                      useSessionUser={!isCustomerMode}
+                      isCustomerMode={isCustomerMode}
+                      userData={isCustomerMode && customerState.user}
+                      userId={isCustomerMode && customerState?.user?.id}
+                      isCheckout
+                    />
+                  )}
+                </WrapperUserDetails>
+              </UserDetailsContainer>
+              <BusinessDetailsContainer>
+                {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
+                  <div>
+                    <div>
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                    </div>
+                  </div>
+                )}
+                {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
+                  <div>
+                    <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                    <div>
+                      <p>{businessDetails?.business?.address}</p>
+                      <p>{businessDetails?.business?.name}</p>
+                      <p>{businessDetails?.business?.email}</p>
+                      <p>{businessDetails?.business?.cellphone}</p>
+                    </div>
+                  </div>
+                )}
+                {businessDetails?.error && businessDetails?.error?.length > 0 && (
+                  <div>
+                    <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                    <NotFoundSource
+                      content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
+                    />
+                  </div>
+                )}
+              </BusinessDetailsContainer>
+              <CheckOutDivider />
+            </>
+          ) : (
+            <WrapperActionsInput>
+              <h1>
+                {t('WHATS_YOUR_NAME', "What's your name?")}
+              </h1>
+              <Input
+                placeholder={t('WRITE_YOUR_NAME', 'Write your name')}
+                autoComplete='off'
+                onChange={(e) => setBehalfName(e?.target?.value)}
+              />
+            </WrapperActionsInput>
+          )}
 
           {cartState.loading && (
             <div>
@@ -329,17 +350,21 @@ const CheckoutUI = (props) => {
             </div>
           )}
 
-          {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
-            <DeliveryOptionsContainer>
-              <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
-              <Select
-                defaultValue={deliveryOptionSelected}
-                options={deliveryOptions}
-                onChange={(val) => handleChangeDeliveryOption(val)}
-              />
-            </DeliveryOptionsContainer>
+          {!useKioskApp && (
+            <>
+              {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
+                <DeliveryOptionsContainer>
+                  <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
+                  <Select
+                    defaultValue={deliveryOptionSelected}
+                    options={deliveryOptions}
+                    onChange={(val) => handleChangeDeliveryOption(val)}
+                  />
+                </DeliveryOptionsContainer>
+              )}
+              <CheckOutDivider />
+            </>
           )}
-          <CheckOutDivider />
 
           {!cartState.loading && cart && (
             <PaymentMethodContainer>
@@ -354,6 +379,7 @@ const CheckoutUI = (props) => {
               )}
               <PaymentOptions
                 cart={cart}
+                useKioskApp={useKioskApp}
                 isDisabled={cart?.status === 2}
                 businessId={businessDetails?.business?.id}
                 isLoading={businessDetails.loading}
@@ -401,6 +427,7 @@ const CheckoutUI = (props) => {
           cart?.status !== 2 &&
           validationFields?.fields?.checkout?.driver_tip?.enabled &&
           driverTipsOptions.length > 0 &&
+          !useKioskApp &&
           (
             <>
               <DriverTipContainer>
@@ -432,6 +459,7 @@ const CheckoutUI = (props) => {
             <Cart
               isCartPending={cart?.status === 2}
               cart={cart}
+              useKioskApp={useKioskApp}
               isCheckout
               isProducts={cart?.products?.length || 0}
             />

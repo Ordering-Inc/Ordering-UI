@@ -78,7 +78,7 @@ const BusinessProductsCategoriesUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <CategoriesContainer className='category-lists' featured={featured}>
+      <CategoriesContainer className='category-lists' featured={featured} w={props.wContainerStyle}>
         {!isSkeleton ? (
           <Tabs variant='primary'>
             {openBusinessInformation ? (

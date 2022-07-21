@@ -79,9 +79,11 @@ export const OrderBillSection = (props) => {
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
-                  <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
-                    <BsInfoCircle size='20' color={theme.colors.primary} />
-                  </Exclamation>
+                  {setOpenTaxModal && (
+                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
+                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                    </Exclamation>
+                  )}
                 </td>
                 <td>
                   - {parsePrice(offer?.summary?.discount)}
@@ -127,9 +129,11 @@ export const OrderBillSection = (props) => {
                 <td>
                   {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                  <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
-                    <BsInfoCircle size='20' color={theme.colors.primary} />
-                  </Exclamation>
+                  {setOpenTaxModal && (
+                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
+                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                    </Exclamation>
+                  )}
                 </td>
                 <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
               </tr>
@@ -141,9 +145,11 @@ export const OrderBillSection = (props) => {
                 <td>
                   {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
-                  <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
-                    <BsInfoCircle size='20' color={theme.colors.primary} />
-                  </Exclamation>
+                  {setOpenTaxModal && (
+                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
+                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                    </Exclamation>
+                  )}
                 </td>
                 <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
               </tr>
@@ -157,9 +163,11 @@ export const OrderBillSection = (props) => {
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
-                  <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
-                    <BsInfoCircle size='20' color={theme.colors.primary} />
-                  </Exclamation>
+                  {setOpenTaxModal && (
+                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
+                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                    </Exclamation>
+                  )}
                 </td>
                 <td>
                   - {parsePrice(offer?.summary?.discount)}
@@ -181,9 +189,11 @@ export const OrderBillSection = (props) => {
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
-                  <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
-                    <BsInfoCircle size='20' color={theme.colors.primary} />
-                  </Exclamation>
+                  {setOpenTaxModal && (
+                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
+                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                    </Exclamation>
+                  )}
                 </td>
                 <td>
                   - {parsePrice(offer?.summary?.discount)}

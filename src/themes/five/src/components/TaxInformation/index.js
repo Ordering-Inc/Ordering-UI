@@ -58,6 +58,7 @@ export const TaxInformation = (props) => {
                 <SingleProductCard
                   key={product.id}
                   product={product}
+                  useKioskApp={props.useKioskApp}
                   isModal
                 />
               ))

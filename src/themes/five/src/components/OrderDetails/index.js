@@ -398,7 +398,7 @@ const OrderDetailsUI = (props) => {
                     >
                       {reorderState?.loading
                         ? t('LOADING', 'Loading...')
-                        : t('START_NEW_ORDER', 'Start new order')}
+                        : t('ORDER_AGAIN', 'Order Again')}
                     </Button>
                   </ReOrder>
                 )}

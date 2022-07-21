@@ -41,6 +41,7 @@ const CartUI = (props) => {
     removeProduct,
     onClickCheckout,
     isCheckout,
+    useKioskApp,
     isMultiCheckout,
     isCartPending,
     isCartPopover,
@@ -224,7 +225,7 @@ const CartUI = (props) => {
             handleClickCheckout={handleClickCheckout}
             checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
             setPreorderBusiness={setPreorderBusiness}
-            handleChangeStore={handleChangeStore}
+            handleChangeStore={!useKioskApp && handleChangeStore}
             isMultiCheckout={isMultiCheckout}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
@@ -543,6 +544,7 @@ const CartUI = (props) => {
               type={openTaxModal.type}
               data={openTaxModal.data}
               products={cart.products}
+              useKioskApp={useKioskApp}
             />
           </Modal>
           {(openUpselling || isUpselling) && (

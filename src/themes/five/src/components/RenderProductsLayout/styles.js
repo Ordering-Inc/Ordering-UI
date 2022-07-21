@@ -204,3 +204,13 @@ export const WrapperSearch = styled.div`
 export const ProfessionalFilterWrapper = styled.div`
   margin-bottom: 50px;
 `
+
+export const WrapperSearchAbsolute = styled.div`
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

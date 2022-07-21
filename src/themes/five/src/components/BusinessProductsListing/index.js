@@ -229,7 +229,9 @@ const BusinessProductsListingUI = (props) => {
   return (
     <>
       <ProductsContainer>
-        <ArrowLeft onClick={() => handleGoToBusinessList()} />
+        {!props.useKioskApp && (
+          <ArrowLeft onClick={() => handleGoToBusinessList()} />
+        )}
         <RenderProductsLayout
           errors={errors}
           isError={error}
@@ -245,6 +247,7 @@ const BusinessProductsListingUI = (props) => {
           categoryState={categoryState}
           categoriesState={props.categoriesState}
           isCustomLayout={props.isCustomLayout}
+          useKioskApp={props.useKioskApp}
           categorySelected={categorySelected}
           openCategories={openCategories}
           openBusinessInformation={openBusinessInformation}
@@ -391,6 +394,7 @@ const BusinessProductsListingUI = (props) => {
             {(((productModal?.product?.type === 'service') || (curProduct?.type === 'service')) && professionalSelected) ? (
               <ServiceForm
                 businessSlug={business?.slug}
+                useKioskApp={props.useKioskApp}
                 product={productModal.product || curProduct}
                 businessId={business?.id}
                 onSave={handlerProductAction}
@@ -401,6 +405,7 @@ const BusinessProductsListingUI = (props) => {
             ) : (
               <ProductForm
                 businessSlug={business?.slug}
+                useKioskApp={props.useKioskApp}
                 product={productModal.product || curProduct}
                 businessId={business?.id}
                 onSave={handlerProductAction}
