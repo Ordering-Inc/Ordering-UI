@@ -205,6 +205,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       setAlertState = _useState22[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+  var galleryLength = (gallery === null || gallery === void 0 ? void 0 : gallery.length) + (videoGallery === null || videoGallery === void 0 ? void 0 : videoGallery.length);
 
   var closeModal = function closeModal() {
     setModalIsOpen(false);
@@ -467,7 +468,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       },
       src: video
     }));
-  }))), /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
+  }))), galleryLength > 2 && /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     onSwiper: setThumbsSwiper,
     spaceBetween: 20,
     slidesPerView: 5,

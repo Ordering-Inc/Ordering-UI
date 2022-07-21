@@ -39,7 +39,7 @@ var PaymentDetails = _styledComponents.default.div(_templateObject5 || (_templat
 
 exports.PaymentDetails = PaymentDetails;
 
-var PhotoWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 75px;\n  height: 75px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    border-radius: 7.6px;\n  }\n  ", "\n"])), function (props) {
+var PhotoWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 75px;\n  height: 75px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    border-radius: 7.6px;\n  }\n  svg {\n    width: 80%;\n    height: 80%;\n  }\n  ", "\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    margin-left: 34px;\n  "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    margin-right: 34px;\n  "])));

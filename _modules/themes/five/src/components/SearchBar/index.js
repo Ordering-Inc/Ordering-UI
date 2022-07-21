@@ -43,7 +43,8 @@ var SearchBar = function SearchBar(props) {
       placeholder = props.placeholder,
       lazyLoad = props.lazyLoad,
       isCustomLayout = props.isCustomLayout,
-      handleCustomEnter = props.handleCustomEnter;
+      handleCustomEnter = props.handleCustomEnter,
+      forwardRef = props.forwardRef;
 
   var _useTheme = (0, _ThemeContext.useTheme)(),
       _useTheme2 = _slicedToArray(_useTheme, 1),
@@ -116,7 +117,13 @@ var SearchBar = function SearchBar(props) {
     isCustomLayout: isCustomLayout,
     hasValue: (_el$current = el.current) === null || _el$current === void 0 ? void 0 : _el$current.value
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    ref: el,
+    ref: function ref(_ref) {
+      el.current = _ref;
+
+      if (forwardRef) {
+        forwardRef.current = _ref;
+      }
+    },
     name: "search",
     "aria-label": "search",
     placeholder: placeholder,

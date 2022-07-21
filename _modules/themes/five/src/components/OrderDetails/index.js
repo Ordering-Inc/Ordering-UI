@@ -569,7 +569,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       return handleStartNewOrder(order.id);
     },
     disabled: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading
-  }, reorderState !== null && reorderState !== void 0 && reorderState.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')))), showDeliveryProgress && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
+  }, reorderState !== null && reorderState !== void 0 && reorderState.loading ? t('LOADING', 'Loading...') : t('ORDER_AGAIN', 'Order Again')))), showDeliveryProgress && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
   }), /*#__PURE__*/_react.default.createElement("div", {
     style: {
