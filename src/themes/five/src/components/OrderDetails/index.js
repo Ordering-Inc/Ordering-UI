@@ -98,6 +98,7 @@ const OrderDetailsUI = (props) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
+  const [isService, setIsService] = useState(false)
 
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
@@ -276,6 +277,12 @@ const OrderDetailsUI = (props) => {
     }
   }, [reorderState])
 
+  useEffect(() => {
+    if (!order) return
+    const _isService = order.products.some(product => product.type === 'service')
+    setIsService(_isService)
+  }, [order])
+
   const OrderMapSection = (props) => {
     const validStatuses = props.validStatuses ?? [9, 19, 23]
     const location = props.location ?? order?.driver?.location
@@ -314,8 +321,8 @@ const OrderDetailsUI = (props) => {
   const OrderHeaderInfoSection = () => {
     return (
       <HeaderInfo>
-        <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-        <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
+        <h1>{isService ? t('SERVICES', 'Services') : t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
+        <p>{!isService && t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
       </HeaderInfo>
     )
   }
@@ -330,7 +337,9 @@ const OrderDetailsUI = (props) => {
               outline
               onClick={() => handleGoToPage({ page: 'orders' })}
             >
-              {t('YOUR_ORDERS', theme?.defaultLanguages?.YOUR_ORDERS || 'Your Orders')}
+              {isService
+                ? t('YOUR_APPOINTMENTS', 'Your appointments')
+                : t('YOUR_ORDERS', theme?.defaultLanguages?.YOUR_ORDERS || 'Your Orders')}
             </Button>
           </MyOrderActions>
         )}
@@ -345,7 +354,7 @@ const OrderDetailsUI = (props) => {
           <WrapperLeftContainer>
             <OrderInfo>
               <TitleContainer>
-                <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                <h1>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
                 {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
                   <Content className='order-content'>
                     <ShareOrder>
@@ -362,7 +371,9 @@ const OrderDetailsUI = (props) => {
                 )}
                 {showDeliveryType && (
                   <p className='types'>
-                    {orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
+                    {isService
+                      ? t('SERVICE_AT_HOME', 'Service at home')
+                      : orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
                   </p>
                 )}
                 {showDeliveryDate && (

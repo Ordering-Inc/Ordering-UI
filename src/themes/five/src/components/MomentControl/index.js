@@ -49,7 +49,8 @@ const MomentControlUI = (props) => {
     handleAsap,
     handleChangeDate,
     handleChangeTime,
-    onClose
+    onClose,
+    isAppoint
   } = props
 
   const [{ configs }] = useConfig()
@@ -168,27 +169,31 @@ const MomentControlUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Title>{t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')}</Title>
-      <CheckBoxWrapper
-        highlight={isAsap && isASP}
-        onClick={() => handleCheckBoxChange(true)}
-        isLoading={orderState?.loading}
-      >
-        {isASP ? <CheckedIcon /> : <CgRadioCheck />}
-        <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} - {t('DELIVERY_TIME', 'delivery time')})</span>
-      </CheckBoxWrapper>
-      <CheckBoxWrapper
-        highlight={!isASP}
-        onClick={() => handleCheckBoxChange(null)}
-      >
-        {isASP ? <CgRadioCheck /> : <CheckedIcon />}
-        <span>{t('SCHEDULE_FOR_LATER', 'Schedule for later')}</span>
-      </CheckBoxWrapper>
+      {!isAppoint && (
+        <>
+          <Title>{t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')}</Title>
+          <CheckBoxWrapper
+            highlight={isAsap && isASP}
+            onClick={() => handleCheckBoxChange(true)}
+            isLoading={orderState?.loading}
+          >
+            {isASP ? <CheckedIcon /> : <CgRadioCheck />}
+            <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} - {t('DELIVERY_TIME', 'delivery time')})</span>
+          </CheckBoxWrapper>
+          <CheckBoxWrapper
+            highlight={!isASP}
+            onClick={() => handleCheckBoxChange(null)}
+          >
+            {isASP ? <CgRadioCheck /> : <CheckedIcon />}
+            <span>{t('SCHEDULE_FOR_LATER', 'Schedule for later')}</span>
+          </CheckBoxWrapper>
+        </>
+      )}
       {
-        !isASP && (
+        (!isASP || isAppoint) && (
           !props.isCustomLayout ? (
             <OrderTimeWrapper>
-              <p>{t('ORDER_TIME', 'Order time')}</p>
+              {!isAppoint && <p>{t('ORDER_TIME', 'Order time')}</p>}
               <DateWrapper>
                 <MonthYearLayer>
                   <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
@@ -229,8 +234,8 @@ const MomentControlUI = (props) => {
                         return (
                           <SwiperSlide key={dayNumber}>
                             <Day selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
-                              <DayName>{dayName}</DayName>
-                              <DayNumber>{dayNumber}</DayNumber>
+                              <DayName isAppoint={isAppoint}>{dayName}</DayName>
+                              <DayNumber isAppoint={isAppoint}>{dayNumber}</DayNumber>
                             </Day>
                           </SwiperSlide>
                         )
@@ -247,6 +252,7 @@ const MomentControlUI = (props) => {
                         key={i}
                         active={timeSelected === time.value}
                         onClick={() => handleChangeTime(time.value)}
+                        isAppoint={isAppoint}
                       >
                         <span>{time.text}</span>
                       </TimeItem>
@@ -270,16 +276,17 @@ const MomentControlUI = (props) => {
           )
         )
       }
-
-      <ButtonWrapper>
-        <Button
-          color='primary'
-          onClick={() => onClose()}
-        >
-          <span>{t('CONTINUE', 'Continue')}</span>
-          <ArrowRight />
-        </Button>
-      </ButtonWrapper>
+      {!isAppoint && (
+        <ButtonWrapper>
+          <Button
+            color='primary'
+            onClick={() => onClose()}
+          >
+            <span>{t('CONTINUE', 'Continue')}</span>
+            <ArrowRight />
+          </Button>
+        </ButtonWrapper>
+      )}
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
