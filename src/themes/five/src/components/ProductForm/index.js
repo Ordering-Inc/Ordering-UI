@@ -664,7 +664,7 @@ const ProductOptionsUI = (props) => {
           <Modal
             open={modalIsOpen}
             onClose={() => closeModal()}
-            width='50%'
+            width='760px'
           >
             {modalPageToShow === 'login' && (
               <LoginForm
