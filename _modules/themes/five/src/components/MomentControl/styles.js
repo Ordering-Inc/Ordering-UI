@@ -9,7 +9,7 @@ exports.Title = exports.TimeListWrapper = exports.TimeItem = exports.OrderTimeWr
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -94,23 +94,32 @@ var Day = _styledComponents.default.div(_templateObject17 || (_templateObject17 
 
 exports.Day = Day;
 
-var DayName = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  font-size: 14px;\n  line-height: 24px;\n  margin-bottom: 10px;\n  &:first-letter {\n    text-transform: uppercase;\n  }\n"])));
+var DayName = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  font-size: 14px;\n  line-height: 24px;\n  margin-bottom: 10px;\n  &:first-letter {\n    text-transform: uppercase;\n  }\n\n  ", "\n"])), function (_ref4) {
+  var isAppoint = _ref4.isAppoint;
+  return isAppoint && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    font-size: 12px;\n    line-height: 22px;\n  "])));
+});
 
 exports.DayName = DayName;
 
-var DayNumber = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  font-weight: 500;\n  font-size: 20px;\n  line-height: 30px;\n"])));
+var DayNumber = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  font-weight: 500;\n  font-size: 20px;\n  line-height: 30px;\n\n  ", "\n"])), function (_ref5) {
+  var isAppoint = _ref5.isAppoint;
+  return isAppoint && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    font-weight: 400;\n    font-size: 16px;\n    line-height: 26px;\n  "])));
+});
 
 exports.DayNumber = DayNumber;
 
-var TimeItem = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: #E9ECEF;\n  border-radius: 7.6px;\n  padding: 5px 15px;\n  margin: 12px;\n  width: calc(50% - 24px);\n  min-width: calc(50% - 24px);\n  box-sizing: border-box;\n  user-select: none;\n\n  ", "\n\n  span {\n    font-size: 14px;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 400px) {\n    width: calc(33.33% - 24px);\n    min-width: calc(33.33% - 24px);\n  }\n\n  @media (min-width: 576px) {\n    width: calc(25% - 24px);\n    min-width: calc(25% - 24px);\n  }\n\n  @media (min-width: 769px) {\n    width: calc(16.66% - 24px);\n    min-width: calc(16.66% - 24px);\n  }\n"])), function (_ref4) {
-  var active = _ref4.active;
-  return active && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    background: #F5F9FF;\n    color: ", ";\n  "])), function (props) {
+var TimeItem = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: #E9ECEF;\n  border-radius: 7.6px;\n  padding: 5px 15px;\n  margin: 12px;\n  width: calc(50% - 24px);\n  min-width: calc(50% - 24px);\n  box-sizing: border-box;\n  user-select: none;\n\n  ", "\n\n  span {\n    font-size: 14px;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 400px) {\n    width: calc(33.33% - 24px);\n    min-width: calc(33.33% - 24px);\n  }\n\n  @media (min-width: 576px) {\n    width: calc(25% - 24px);\n    min-width: calc(25% - 24px);\n  }\n\n  @media (min-width: 769px) {\n    width: calc(16.66% - 24px);\n    min-width: calc(16.66% - 24px);\n    ", "\n  }\n"])), function (_ref6) {
+  var active = _ref6.active;
+  return active && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    background: #F5F9FF;\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.primary;
   });
+}, function (_ref7) {
+  var isAppoint = _ref7.isAppoint;
+  return isAppoint && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n      width: calc(33.33% - 24px);\n      min-width: calc(33.33% - 24px);\n      span {\n        font-size: 12px;\n      }\n    "])));
 });
 
 exports.TimeItem = TimeItem;
 
-var ClosedBusinessMsg = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-size: 16px;\n  width: 100%;\n"])));
+var ClosedBusinessMsg = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-size: 16px;\n  width: 100%;\n"])));
 
 exports.ClosedBusinessMsg = ClosedBusinessMsg;

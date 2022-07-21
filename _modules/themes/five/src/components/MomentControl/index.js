@@ -76,7 +76,8 @@ var MomentControlUI = function MomentControlUI(props) {
       handleAsap = props.handleAsap,
       handleChangeDate = props.handleChangeDate,
       handleChangeTime = props.handleChangeTime,
-      onClose = props.onClose;
+      onClose = props.onClose,
+      isAppoint = props.isAppoint;
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -226,7 +227,7 @@ var MomentControlUI = function MomentControlUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
+  }), !isAppoint && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
     highlight: isAsap && isASP,
     onClick: function onClick() {
       return handleCheckBoxChange(true);
@@ -237,7 +238,7 @@ var MomentControlUI = function MomentControlUI(props) {
     onClick: function onClick() {
       return handleCheckBoxChange(null);
     }
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later'))), !isASP && (!props.isCustomLayout ? /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later')))), (!isASP || isAppoint) && (!props.isCustomLayout ? /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, !isAppoint && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
     left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 0,
@@ -280,14 +281,19 @@ var MomentControlUI = function MomentControlUI(props) {
       onClick: function onClick() {
         return handleChangeDate(date);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles.DayName, null, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, null, dayNumber)));
+    }, /*#__PURE__*/_react.default.createElement(_styles.DayName, {
+      isAppoint: isAppoint
+    }, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, {
+      isAppoint: isAppoint
+    }, dayNumber)));
   })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, isEnabled && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, timeList.map(function (time, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TimeItem, {
       key: i,
       active: timeSelected === time.value,
       onClick: function onClick() {
         return handleChangeTime(time.value);
-      }
+      },
+      isAppoint: isAppoint
     }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
   })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))) : /*#__PURE__*/_react.default.createElement(_CustomLayout.CustomLayout, {
     handleChangeDate: handleChangeDate,
@@ -297,7 +303,7 @@ var MomentControlUI = function MomentControlUI(props) {
     timeList: timeList,
     timeSelected: timeSelected,
     handleChangeTime: handleChangeTime
-  })), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), !isAppoint && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return onClose();

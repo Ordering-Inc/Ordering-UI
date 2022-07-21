@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
 
 var _orderingComponents = require("ordering-components");
 
@@ -361,12 +361,33 @@ var shape = {
   capsuleShape: 'capsule_shape'
 };
 /**
+ * List of price to filter businesses
+ */
+
+exports.shape = shape;
+var priceList = [{
+  level: '1',
+  content: '$'
+}, {
+  level: '2',
+  content: '$$'
+}, {
+  level: '3',
+  content: '$$$'
+}, {
+  level: '4',
+  content: '$$$$'
+}, {
+  level: '5',
+  content: '$$$$$'
+}];
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
  */
 
-exports.shape = shape;
+exports.priceList = priceList;
 
 var reviewCommentList = function reviewCommentList(type) {
   var _useLanguage5 = (0, _orderingComponents.useLanguage)(),

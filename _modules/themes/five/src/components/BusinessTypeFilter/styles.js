@@ -9,7 +9,7 @@ exports.TypeContainer = exports.SearchTypeContainer = exports.Divider = exports.
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -40,6 +40,10 @@ var Divider = _styledComponents.default.div(_templateObject6 || (_templateObject
 
 exports.Divider = Divider;
 
-var SearchTypeContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  box-sizing: border-box;\n  position: relative;\n  flex-wrap: wrap;\n  justify-content: center;\n  button {\n    overflow: hidden;\n    margin-right: 10px;\n    margin-top: 10px;\n    border-radius: 50px;\n  }\n"])));
+var SearchTypeContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  box-sizing: border-box;\n  position: relative;\n  flex-wrap: wrap;\n  justify-content: center;\n  width: calc(100% + 10px);\n  margin-left: -5px;\n\n  button {\n    border-radius: 50px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 12px;\n    line-height: 24px;\n    margin: 10px 5px 0px 5px;\n\n    svg {\n      margin-left: 5px;\n      font-size: 12px;\n      ", "\n    }\n  }\n\n  span {\n    margin-right: 10px;\n    border-radius: 50px;\n    ", "\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n        margin-right: 5px;\n        margin-left: 0px;\n      "])));
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0px;\n    "])));
+});
 
 exports.SearchTypeContainer = SearchTypeContainer;

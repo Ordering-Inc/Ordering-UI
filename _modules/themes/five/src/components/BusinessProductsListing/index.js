@@ -43,6 +43,8 @@ var _FloatingButton = require("../../../../../components/FloatingButton");
 
 var _UpsellingPage = require("../../../../../components/UpsellingPage");
 
+var _ServiceForm = require("../ServiceForm");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -76,7 +78,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _businessState$busine, _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$products, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products2, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _currentCart$products3, _currentCart$products4, _currentCart$products5, _productModal$error$, _theme$defaultLanguag16;
+  var _Object$values$find, _businessState$busine, _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$products, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products2, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _currentCart$products3, _currentCart$products4, _currentCart$products5, _productModal$error$, _theme$defaultLanguag16, _productModal$product2;
 
   var errors = props.errors,
       openCategories = props.openCategories,
@@ -104,7 +106,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       setAlertState = props.setAlertState,
       alertState = props.alertState,
       onCheckoutRedirect = props.onCheckoutRedirect,
-      handleUpdateProducts = props.handleUpdateProducts;
+      handleUpdateProducts = props.handleUpdateProducts,
+      professionalSelected = props.professionalSelected,
+      handleChangeProfessionalSelected = props.handleChangeProfessionalSelected;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -199,11 +203,14 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   var onProductClick = function onProductClick(product) {
-    onProductRedirect({
-      slug: business === null || business === void 0 ? void 0 : business.slug,
-      product: product.id,
-      category: product.category_id
-    });
+    if (!((product === null || product === void 0 ? void 0 : product.type) === 'service' && professionalSelected)) {
+      onProductRedirect({
+        slug: business === null || business === void 0 ? void 0 : business.slug,
+        product: product.id,
+        category: product.category_id
+      });
+    }
+
     setCurProduct(product);
     setModalIsOpen(true);
     events.emit('product_clicked', product);
@@ -408,7 +415,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return setIsCartOpen(val);
     },
     setSubcategoriesSelected: setSubcategoriesSelected,
-    handleUpdateProducts: handleUpdateProducts
+    handleUpdateProducts: handleUpdateProducts,
+    professionalSelected: professionalSelected,
+    handleChangeProfessionalSelected: handleChangeProfessionalSelected
   }), !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.SEARCH_REDIRECT) || 'Go to Businesses'),
@@ -464,7 +473,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyCart, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart')))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "700px",
+    width: "760px",
     open: openProduct,
     closeOnBackdrop: true,
     onClose: function onClose() {
@@ -480,13 +489,22 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     content: ((_productModal$error$ = productModal.error[0]) === null || _productModal$error$ === void 0 ? void 0 : _productModal$error$.message) || productModal.error[0]
   }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('ERROR_GET_PRODUCT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ERROR_GET_PRODUCT) || 'Sorry, we couldn\'t find the requested product.')
-  }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+  }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((productModal === null || productModal === void 0 ? void 0 : (_productModal$product2 = productModal.product) === null || _productModal$product2 === void 0 ? void 0 : _productModal$product2.type) === 'service' || (curProduct === null || curProduct === void 0 ? void 0 : curProduct.type) === 'service') && professionalSelected ? /*#__PURE__*/_react.default.createElement(_ServiceForm.ServiceForm, {
+    businessSlug: business === null || business === void 0 ? void 0 : business.slug,
+    useKioskApp: props.useKioskApp,
+    product: productModal.product || curProduct,
+    businessId: business === null || business === void 0 ? void 0 : business.id,
+    onSave: handlerProductAction,
+    professionalList: business === null || business === void 0 ? void 0 : business.professionals,
+    professionalSelected: professionalSelected,
+    handleChangeProfessional: handleChangeProfessionalSelected
+  }) : /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     businessSlug: business === null || business === void 0 ? void 0 : business.slug,
     useKioskApp: props.useKioskApp,
     product: productModal.product || curProduct,
     businessId: business === null || business === void 0 ? void 0 : business.id,
     onSave: handlerProductAction
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState === null || alertState === void 0 ? void 0 : alertState.open,
     content: t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.'),

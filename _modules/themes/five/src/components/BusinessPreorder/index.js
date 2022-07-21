@@ -79,7 +79,10 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
       handleChangeTime = props.handleChangeTime,
       showButton = props.showButton,
       isAsap = props.isAsap,
-      handleAsap = props.handleAsap;
+      handleAsap = props.handleAsap,
+      isProfessional = props.isProfessional,
+      isDisabled = props.isDisabled,
+      maxDays = props.maxDays;
 
   var _useLocation = (0, _reactRouterDom.useLocation)(),
       pathname = _useLocation.pathname;
@@ -206,22 +209,22 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     if (type === 'business_hours') setMenu(null);
   }, [type]);
   (0, _react.useEffect)(function () {
-    if (pathname.includes('store')) return;
+    if (pathname.includes('store') || isProfessional) return;
     handleAsap && handleAsap();
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessPreorderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessPreorderContainer, null, !isProfessional && /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('PREORDER', 'Preorder')), !isProfessional && /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
-  }), /*#__PURE__*/_react.default.createElement("p", null, business.name)), isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_styles.PreorderTypeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PREORDER_TYPE', 'Preorder type')), /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  }), /*#__PURE__*/_react.default.createElement("p", null, business.name)), !isProfessional && isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_styles.PreorderTypeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PREORDER_TYPE', 'Preorder type')), /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     defaultValue: type,
     options: preOrderType,
     placeholder: t('SELECT_A_TYPE', 'Select a type'),
     onChange: function onChange(value) {
       return setType(value);
     }
-  }))), type === 'business_menu' && /*#__PURE__*/_react.default.createElement(_BusinessMenuList.BusinessMenuList, {
+  }))), !isProfessional && type === 'business_menu' && /*#__PURE__*/_react.default.createElement(_BusinessMenuList.BusinessMenuList, {
     businessId: business.id,
     setMenu: setMenu
-  }), isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
+  }), (isPreOrderSetting || isProfessional) && /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, !isProfessional && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
     left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 0,
@@ -248,7 +251,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     watchSlidesProgress: true,
     className: "swiper-datelist",
     preventClicksPropagation: false
-  }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
+  }, datesList.slice(0, Number(maxDays || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
     var dateParts = date.split('-');
 
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
@@ -271,7 +274,8 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
       active: timeSelected === time.value,
       onClick: function onClick() {
         return handleChangeTime(time.value);
-      }
+      },
+      isDisabled: isDisabled
     }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
   })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))), !isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')), showButton && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
@@ -289,11 +293,13 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
 var BusinessPreorder = function BusinessPreorder(props) {
   var _configs$max_days_pre4;
 
+  var maxDays = props.maxDays;
+
   var _useConfig3 = (0, _orderingComponents.useConfig)(),
       _useConfig4 = _slicedToArray(_useConfig3, 1),
       configs = _useConfig4[0].configs;
 
-  var limitDays = parseInt(configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre4 = configs.max_days_preorder) === null || _configs$max_days_pre4 === void 0 ? void 0 : _configs$max_days_pre4.value, 10);
+  var limitDays = maxDays !== null && maxDays !== void 0 ? maxDays : parseInt(configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre4 = configs.max_days_preorder) === null || _configs$max_days_pre4 === void 0 ? void 0 : _configs$max_days_pre4.value, 10);
   var currentDate = new Date();
   var time = limitDays > 1 ? currentDate.getTime() + (limitDays - 1) * 24 * 60 * 60 * 1000 : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + 6 * 24 * 60 * 60 * 1000;
   currentDate.setTime(time);

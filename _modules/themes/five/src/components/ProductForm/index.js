@@ -682,7 +682,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClose: function onClose() {
       return closeModal();
     },
-    width: "50%"
+    width: "760px"
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {

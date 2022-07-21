@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _orderingComponents = require("ordering-components");
 
 var _Tabs = require("../../styles/Tabs");
@@ -63,7 +65,8 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       handleChangeBusinessType = props.handleChangeBusinessType,
       isSearchMode = props.isSearchMode,
       filters = props.filters,
-      handleChangeFilters = props.handleChangeFilters;
+      handleChangeFilters = props.handleChangeFilters,
+      isAppoint = props.isAppoint;
   var loading = typesState.loading,
       error = typesState.error,
       types = typesState.types;
@@ -78,6 +81,11 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       setLoad = _useState2[1];
 
   var handleChangeCategory = function handleChangeCategory(category) {
+    if (isAppoint && category === currentTypeSelected) {
+      handleChangeBusinessType(null);
+      return;
+    }
+
     handleChangeBusinessType && handleChangeBusinessType(category);
   };
 
@@ -107,19 +115,36 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), isSearchMode ? /*#__PURE__*/_react.default.createElement(_styles.SearchTypeContainer, {
+  }), isSearchMode && /*#__PURE__*/_react.default.createElement(_styles.SearchTypeContainer, {
     id: "container"
   }, types.map(function (type, i) {
     var _filters$business_typ2, _filters$business_typ3, _filters$business_typ4;
 
     return type.enabled && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: type === null || type === void 0 ? void 0 : type.id,
-      color: filters !== null && filters !== void 0 && (_filters$business_typ2 = filters.business_types) !== null && _filters$business_typ2 !== void 0 && _filters$business_typ2.includes(type === null || type === void 0 ? void 0 : type.id) || (type === null || type === void 0 ? void 0 : type.id) === null && (filters === null || filters === void 0 ? void 0 : (_filters$business_typ3 = filters.business_types) === null || _filters$business_typ3 === void 0 ? void 0 : _filters$business_typ3.length) === 0 ? 'primary' : 'secondary',
+      color: filters !== null && filters !== void 0 && (_filters$business_typ2 = filters.business_types) !== null && _filters$business_typ2 !== void 0 && _filters$business_typ2.includes(type === null || type === void 0 ? void 0 : type.id) || (type === null || type === void 0 ? void 0 : type.id) === null && (filters === null || filters === void 0 ? void 0 : (_filters$business_typ3 = filters.business_types) === null || _filters$business_typ3 === void 0 ? void 0 : _filters$business_typ3.length) === 0 ? 'primary' : 'lightGray',
       onClick: function onClick() {
         return handleChangeActiveBusinessType(type);
       }
-    }, t("BUSINESS_TYPE_".concat(type.name.replace(/\s/g, '_').toUpperCase()), type.name), " ", (filters === null || filters === void 0 ? void 0 : (_filters$business_typ4 = filters.business_types) === null || _filters$business_typ4 === void 0 ? void 0 : _filters$business_typ4.includes(type === null || type === void 0 ? void 0 : type.id)) && 'X');
-  })) : /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
+    }, t("BUSINESS_TYPE_".concat(type.name.replace(/\s/g, '_').toUpperCase()), type.name), " ", (filters === null || filters === void 0 ? void 0 : (_filters$business_typ4 = filters.business_types) === null || _filters$business_typ4 === void 0 ? void 0 : _filters$business_typ4.includes(type === null || type === void 0 ? void 0 : type.id)) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null));
+  })), isAppoint && /*#__PURE__*/_react.default.createElement(_styles.SearchTypeContainer, {
+    id: "container"
+  }, loading ? _toConsumableArray(Array(6)).map(function (_, i) {
+    return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      id: "skeleton",
+      key: i,
+      height: 28,
+      width: 70
+    });
+  }) : types.map(function (type, i) {
+    return type.enabled && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      key: type === null || type === void 0 ? void 0 : type.id,
+      color: type.id === currentTypeSelected ? 'primary' : 'lightGray',
+      onClick: function onClick() {
+        return handleChangeCategory(type.id);
+      }
+    }, t("BUSINESS_TYPE_".concat(type.name.replace(/\s/g, '_').toUpperCase()), type.name), " ", currentTypeSelected && type.id === currentTypeSelected && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null));
+  })), !isSearchMode && !isAppoint && /*#__PURE__*/_react.default.createElement(_styles.TypeContainer, {
     id: "container"
   }, loading && /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
