@@ -114,8 +114,8 @@ export const CardItemContent = styled.div`
     font-size: 22px;
   }
 
-  .brand svg {
-    font-size: 26px;
+  .brand img {
+    width: 24px;
   }
 
   > * {
