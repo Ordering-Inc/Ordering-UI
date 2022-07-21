@@ -71,11 +71,18 @@ export const PhotoWrapper = styled.div`
   height: 75px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 7.6px;
+  }
+  svg {
+    width: 80%;
+    height: 80%;
   }
   ${props => props.theme?.rtl ? css`
     margin-left: 34px;
