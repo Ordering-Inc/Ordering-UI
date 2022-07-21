@@ -49,7 +49,7 @@ const ServiceFormUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDate }] = useUtils()
-  const [{ auth, user }, { login }] = useSession()
+  const [{ auth }, { login }] = useSession()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
@@ -180,7 +180,6 @@ const ServiceFormUI = (props) => {
                     {isBusyTime() ? (
                       <>
                         <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
-                        <span>Earliest: Tue, Agu 31 · 10:00 AM</span>
                       </>
                     ) : (
                       <span className='status'>{t('AVAILABLE', 'Available')}</span>
