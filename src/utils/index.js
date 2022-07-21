@@ -85,10 +85,10 @@ export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
  * Function to return a static google maps image based in location
  * @param {object} param object with latitude and logitude
  */
-export const getGoogleMapImage = (location, apiKey) => {
+export const getGoogleMapImage = (location, apiKey, mapConfigs) => {
   const lat = location?.lat
   const lng = location?.lng
-  return `https://maps.googleapis.com/maps/api/staticmap?size=500x190&center=${lat},${lng}&zoom=17&scale=2&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_45,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${apiKey}`
+  return `https://maps.googleapis.com/maps/api/staticmap?size=${mapConfigs?.size?.w ?? 500}x${mapConfigs?.size?.h ?? 190}&center=${lat},${lng}&zoom=${mapConfigs?.zoom ?? 17}&scale=${mapConfigs?.scale ?? 2}&maptype=roadmap&&markers=icon:https://res.cloudinary.com/ditpjbrmz/image/upload/f_auto,q_auto,w_75,q_auto:best,q_auto:best/v1564675872/marker-customer_kvxric.png%7Ccolor:white%7C${lat},${lng}&key=${apiKey}`
 }
 
 /**
@@ -121,7 +121,8 @@ export const getTraduction = key => {
     ERROR_PLACE_PAY_WITH_CARD1: 'An error occurred while trying to pay by card',
     ERROR_PLACE_PAY_WITH_PAYPAL_CAPTURE: 'An error occurred while trying to pay by PayPal',
     ERROR_ADD_PRODUCT_VERY_FAR_FOR_DELIVERY: 'Error adding product, very far for delivery',
-    ERROR_INVALID_OFFER: 'The offer doesn\'t exist'
+    ERROR_INVALID_OFFER: 'The offer doesn\'t exist',
+    ERROR_CASH_WALLET_FEATURE_DISABLED: 'Cash wallet feature is disabled'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)
@@ -249,6 +250,17 @@ export const shape = {
   rectangleRound: 'rectangle_round',
   capsuleShape: 'capsule_shape'
 }
+
+/**
+ * List of price to filter businesses
+ */
+export const priceList = [
+  { level: '1', content: '$' },
+  { level: '2', content: '$$' },
+  { level: '3', content: '$$$' },
+  { level: '4', content: '$$$$' },
+  { level: '5', content: '$$$$$' }
+]
 
 /**
  * function to manage review comment list

@@ -14,7 +14,10 @@ import {
   WrapperNotFound,
   HeaderWrapper,
   DescriptionModalContainer,
-  RibbonBox
+  RibbonBox,
+  CategoryDescripion,
+  DescriptionContainer,
+  HeaderTitle
 } from './styles'
 
 const BusinessProductsListUI = (props) => {
@@ -34,7 +37,8 @@ const BusinessProductsListUI = (props) => {
     errorQuantityProducts,
     categoriesState,
     onClickCategory,
-    currentCart
+    currentCart,
+    handleUpdateProducts
   } = props
 
   const [, t] = useLanguage()
@@ -66,14 +70,14 @@ const BusinessProductsListUI = (props) => {
               )}
             </div>
             {category?.description && (
-              <div className='category-description'>
+              <CategoryDescripion>
                 <p>
                   {shortCategoryDescriptionSelected}
                   {category?.description?.length > 200 && (
-                    <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
+                    <span onClick={() => setOpenDescription(category)}>{t('VIEW_MORE', 'View more')}</span>
                   )}
                 </p>
-              </div>
+              </CategoryDescripion>
             )}
           </HeaderWrapper>
           <ProductsListing>
@@ -86,6 +90,7 @@ const BusinessProductsListUI = (props) => {
                   businessId={businessId}
                   onProductClick={onProductClick}
                   isCartOnProductsList={isCartOnProductsList}
+                  handleUpdateProducts={handleUpdateProducts}
                   productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                 />
               ))
@@ -121,6 +126,7 @@ const BusinessProductsListUI = (props) => {
                     product={product}
                     businessId={businessId}
                     onProductClick={onProductClick}
+                    handleUpdateProducts={handleUpdateProducts}
                     isCartOnProductsList={isCartOnProductsList}
                     productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                   />
@@ -130,6 +136,7 @@ const BusinessProductsListUI = (props) => {
                     useCustomFunctionality
                     onCustomClick={() => onClickCategory(category)}
                     isCartOnProductsList={isCartOnProductsList}
+                    handleUpdateProducts={handleUpdateProducts}
                     customText={t('MORE', 'More')}
                     customStyle={{
                       display: 'flex',
@@ -159,40 +166,43 @@ const BusinessProductsListUI = (props) => {
                     <div className='wrap-header'>
                       <HeaderWrapper>
                         <div className='category-title'>
-                          {
-                            category?.image && (
-                              <img src={category.image} />
-                            )
-                          }
-                          <h3>{category.name}</h3>
-                          {category?.ribbon?.enabled && (
-                            <RibbonBox
-                              bgColor={category?.ribbon?.color}
-                              isRoundRect={category?.ribbon?.shape === shape?.rectangleRound}
-                              isCapsule={category?.ribbon?.shape === shape?.capsuleShape}
+                          <HeaderTitle>
+                            {
+                              category?.image && (
+                                <img src={category.image} />
+                              )
+                            }
+                            <h3>{category.name}</h3>
+                            {category?.ribbon?.enabled && (
+                              <RibbonBox
+                                bgColor={category?.ribbon?.color}
+                                isRoundRect={category?.ribbon?.shape === shape?.rectangleRound}
+                                isCapsule={category?.ribbon?.shape === shape?.capsuleShape}
+                              >
+                                {category?.ribbon?.text}
+                              </RibbonBox>
+                            )}
+                          </HeaderTitle>
+                          {products?.length > 9 && (
+                            <Button
+                              onClick={() => onClickCategory(category)}
                             >
-                              {category?.ribbon?.text}
-                            </RibbonBox>
+                              {t('MORE', 'More')}
+                            </Button>
                           )}
                         </div>
                         {category?.description && (
-                          <div className='category-description'>
+                          <CategoryDescripion>
                             <p>
                               {shortCategoryDescription}
                               {category?.description?.length > 200 && (
-                                <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
+                                <span onClick={() => setOpenDescription(category)}>{t('VIEW_MORE', 'View more')}</span>
                               )}
                             </p>
-                          </div>
+                          </CategoryDescripion>
                         )}
                       </HeaderWrapper>
-                      {products?.length > 9 && (
-                        <Button
-                          onClick={() => onClickCategory(category)}
-                        >
-                          {t('MORE', 'More')}
-                        </Button>
-                      )}
+
                     </div>
                     <ProductsListing>
                       {
@@ -203,6 +213,7 @@ const BusinessProductsListUI = (props) => {
                             businessId={businessId}
                             product={product}
                             onProductClick={onProductClick}
+                            handleUpdateProducts={handleUpdateProducts}
                             isCartOnProductsList={isCartOnProductsList}
                             productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                           />
@@ -213,6 +224,7 @@ const BusinessProductsListUI = (props) => {
                           useCustomFunctionality
                           onCustomClick={() => onClickCategory(category)}
                           isCartOnProductsList={isCartOnProductsList}
+                          handleUpdateProducts={handleUpdateProducts}
                           customText={t('MORE', 'More')}
                           customStyle={{
                             display: 'flex',
@@ -278,7 +290,11 @@ const BusinessProductsListUI = (props) => {
               <img src={openDescription.image} />
             )
           }
-          <p>{openDescription?.description}</p>
+          <DescriptionContainer>
+            <div>
+              <p>{openDescription?.description}</p>
+            </div>
+          </DescriptionContainer>
         </DescriptionModalContainer>
       </Modal>
     </ProductsContainer>

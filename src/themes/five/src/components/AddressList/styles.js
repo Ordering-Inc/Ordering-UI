@@ -121,7 +121,7 @@ export const AddressItemActions = styled.div`
 `
 
 export const WrappNotAddresses = styled.div`
-  height: 270px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -212,7 +212,7 @@ export const AddressFormContainer = styled.div`
   position: sticky;
   right: 0;
   top: 0;
-  margin-top: ${({ isOpenUserData, isHeader }) => isOpenUserData ? '-30px' : isHeader ? '-222px' : '-190px'};
+  margin-top: ${({ isCustomerMode }) => isCustomerMode ? '-190px' : '0'};
   height: 100%;
   padding-left: 10px;
 `

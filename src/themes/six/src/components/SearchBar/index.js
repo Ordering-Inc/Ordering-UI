@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { Input } from '../../styles/inputs'
+import { Input } from '../../styles/Inputs'
 import { useTheme } from '../../../../../contexts/ThemeContext'
 import { useLanguage } from 'ordering-components'
 import {

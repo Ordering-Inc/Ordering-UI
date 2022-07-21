@@ -34,6 +34,7 @@ const BusinessProductsListUI = (props) => {
     onProductClick,
     handleSearchRedirect,
     featured,
+    useKioskApp,
     searchValue,
     isCartOnProductsList,
     handleClearSearch,
@@ -41,7 +42,8 @@ const BusinessProductsListUI = (props) => {
     currentCart,
     setSubcategoriesSelected,
     subcategoriesSelected,
-    onClickCategory
+    onClickCategory,
+    handleUpdateProducts
   } = props
 
   const [, t] = useLanguage()
@@ -128,9 +130,11 @@ const BusinessProductsListUI = (props) => {
                       key={i}
                       isSoldOut={(product.inventoried && !product.quantity)}
                       product={product}
+                      useKioskApp={useKioskApp}
                       businessId={businessId}
                       onProductClick={onProductClick}
                       isCartOnProductsList={isCartOnProductsList}
+                      handleUpdateProducts={handleUpdateProducts}
                       productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                     />
                   ))
@@ -152,9 +156,11 @@ const BusinessProductsListUI = (props) => {
                           key={i}
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
+                          useKioskApp={useKioskApp}
                           businessId={businessId}
                           onProductClick={onProductClick}
                           isCartOnProductsList={isCartOnProductsList}
+                          handleUpdateProducts={handleUpdateProducts}
                           productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                         />
                       ))}
@@ -207,7 +213,7 @@ const BusinessProductsListUI = (props) => {
                               {shortCategoryDescription}
                             </p>
                             {category?.description?.length > 200 && (
-                              <span onClick={() => setOpenDescription(category)}>{t('SEE_MORE', 'See more')}</span>
+                              <span onClick={() => setOpenDescription(category)}>{t('VIEW_MORE', 'View more')}</span>
                             )}
                           </CategoryDescription>
                         )}
@@ -223,8 +229,10 @@ const BusinessProductsListUI = (props) => {
                               isSoldOut={product.inventoried && !product.quantity}
                               businessId={businessId}
                               product={product}
+                              useKioskApp={useKioskApp}
                               onProductClick={onProductClick}
                               isCartOnProductsList={isCartOnProductsList}
+                              handleUpdateProducts={handleUpdateProducts}
                               productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                             />
                           ))

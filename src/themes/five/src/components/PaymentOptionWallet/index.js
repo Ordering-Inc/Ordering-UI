@@ -15,14 +15,17 @@ import {
   SectionLeftText
 } from './styles'
 
+import { Alert } from '../Confirm'
 import { Checkbox } from '../../../../../styles/Checkbox'
 
 const PaymentOptionWalletUI = (props) => {
   const {
-    businessConfigs,
     cart,
-    walletsState,
+    errorState,
+    setErrorState,
     selectWallet,
+    walletsState,
+    businessConfigs,
     deletetWalletSelected
   } = props
 
@@ -31,9 +34,10 @@ const PaymentOptionWalletUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
 
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [checkedState, setCheckedState] = useState(
     new Array(walletsState.result?.length).fill(false)
-  );
+  )
 
   const isWalletCashEnabled = configs?.wallet_cash_enabled?.value === '1'
   const isWalletPointsEnabled = configs?.wallet_credit_point_enabled?.value === '1'
@@ -52,10 +56,15 @@ const PaymentOptionWalletUI = (props) => {
     }
   }
 
+  const closeAlert = () => {
+    setAlertState({ open: false, content: [] })
+    setErrorState(null)
+  }
+
   const handleOnChange = (position, wallet) => {
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
-    );
+    )
 
     if (!checkedState[position]) {
       selectWallet(wallet)
@@ -63,8 +72,8 @@ const PaymentOptionWalletUI = (props) => {
       deletetWalletSelected(wallet)
     }
 
-    setCheckedState(updatedCheckedState);
-  };
+    setCheckedState(updatedCheckedState)
+  }
 
   useEffect(() => {
     if (!walletsState.loading) {
@@ -76,55 +85,58 @@ const PaymentOptionWalletUI = (props) => {
     }
   }, [walletsState.result?.length])
 
+  useEffect(() => {
+    if (errorState) {
+      setAlertState({ open: true, content: errorState })
+    }
+  }, [errorState])
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       {!walletsState.loading &&
         !walletsState.error &&
         walletsState.result?.length > 0 &&
-      (
-        <>
-          {walletsState.result?.map((wallet, idx) => wallet.valid && wallet.balance >= 0 && walletName[wallet.type]?.isActive && (
-            <Container
-              key={wallet.id}
-              isBottomBorder={idx === walletsState.result?.length - 1}
-            >
-              <SectionLeft>
-                <Checkbox
-                  name={`payment_option_${wallet.type}`}
-                  id={`custom-checkbox-${idx}`}
-                  disabled={(cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0}
-                  checked={checkedState[idx]}
-                  value={`payment_option_${wallet.type}`}
-                  onChange={() => handleOnChange(idx, wallet)}
-                />
-                <SectionLeftText>
-                  <label
-                    style={{
-                      color: (cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0 ? theme.colors.darkGray : 'black'
-                    }}
-                    htmlFor={`custom-checkbox-${idx}`}
-                  >
-                    {walletName[wallet.type]?.name}
-                  </label>
-                  {/* {wallet.type === 'cash' && (
-                    <span>Click here to add more credits</span>
-                  )} */}
-                </SectionLeftText>
-              </SectionLeft>
-              <div>
-                {wallet.type === 'cash' && (
-                  <span>{parsePrice(wallet?.balance)}</span>
-                )}
-                {wallet.type === 'credit_point' && (
-                  <span>
-                    <span style={{ color: theme.colors.primary }}>{`${wallet?.balance} ${t('POINTS', 'Points')}`}</span> {wallet?.balance > 0 && `= ${parsePrice(wallet?.balance / wallet?.redemption_rate)}`}
-                  </span>
-                )}
-              </div>
-            </Container>
-          ))}
-        </>
-      )}
+        (
+          <>
+            {walletsState.result?.map((wallet, idx) => wallet.valid && wallet.balance >= 0 && walletName[wallet.type]?.isActive && (
+              <Container
+                key={wallet.id}
+                isBottomBorder={idx === walletsState.result?.length - 1}
+              >
+                <SectionLeft>
+                  <Checkbox
+                    name={`payment_option_${wallet.type}`}
+                    id={`custom-checkbox-${idx}`}
+                    disabled={(cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0}
+                    checked={checkedState[idx]}
+                    value={`payment_option_${wallet.type}`}
+                    onChange={() => handleOnChange(idx, wallet)}
+                  />
+                  <SectionLeftText>
+                    <label
+                      style={{
+                        color: (cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0 ? theme.colors.darkGray : 'black'
+                      }}
+                      htmlFor={`custom-checkbox-${idx}`}
+                    >
+                      {walletName[wallet.type]?.name}
+                    </label>
+                  </SectionLeftText>
+                </SectionLeft>
+                <div>
+                  {wallet.type === 'cash' && (
+                    <span>{parsePrice(wallet?.balance, { isTruncable: true })}</span>
+                  )}
+                  {wallet.type === 'credit_point' && (
+                    <span>
+                      <span style={{ color: theme.colors.primary }}>{`${wallet?.balance} ${t('POINTS', 'Points')}`}</span> {wallet?.balance > 0 && `= ${parsePrice(wallet?.balance / wallet?.redemption_rate, { isTruncable: true })}`}
+                    </span>
+                  )}
+                </div>
+              </Container>
+            ))}
+          </>
+        )}
 
       {walletsState?.loading && (
         <>
@@ -135,6 +147,16 @@ const PaymentOptionWalletUI = (props) => {
           ))}
         </>
       )}
+
+      <Alert
+        title={t('WALLET_ERROR_MESSAGES', 'Wallet')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </div>
   )
 }

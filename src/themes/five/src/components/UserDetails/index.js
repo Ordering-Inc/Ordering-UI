@@ -100,9 +100,6 @@ const UserDetailsUI = (props) => {
 
           {!isEdit ? (
             <UserData>
-              {userData?.address && (
-                <p>{userData?.address}</p>
-              )}
               {(userData?.name || userData?.middle_name || userData?.lastname || userData?.second_lastname) && (
                 <UserName>
                   {userData?.name} {userData?.middle_name} {userData?.lastname} {userData?.second_lastname}

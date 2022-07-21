@@ -37,6 +37,7 @@ import { Cart } from '../Cart'
 import { Alert } from '../../../../../components/Confirm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
+import { ServiceForm } from '../ServiceForm'
 const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
@@ -66,7 +67,10 @@ const BusinessProductsListingUI = (props) => {
     multiRemoveProducts,
     setAlertState,
     alertState,
-    onCheckoutRedirect
+    onCheckoutRedirect,
+    handleUpdateProducts,
+    professionalSelected,
+    handleChangeProfessionalSelected
   } = props
 
   const { business, loading, error } = businessState
@@ -102,11 +106,13 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const onProductClick = (product) => {
-    onProductRedirect({
-      slug: business?.slug,
-      product: product.id,
-      category: product.category_id
-    })
+    if (!((product?.type === 'service') && professionalSelected)) {
+      onProductRedirect({
+        slug: business?.slug,
+        product: product.id,
+        category: product.category_id
+      })
+    }
     setCurProduct(product)
     setModalIsOpen(true)
     events.emit('product_clicked', product)
@@ -158,7 +164,17 @@ const BusinessProductsListingUI = (props) => {
     const _carts = carts?.[adjustBusinessId]
     const products = carts?.[adjustBusinessId]?.products
     const unavailableProducts = products.filter(product => product.valid !== true)
-    unavailableProducts.length > 0 && multiRemoveProducts && await multiRemoveProducts(unavailableProducts, _carts)
+    const alreadyRemoved = sessionStorage.getItem('already-removed')
+    sessionStorage.removeItem('already-removed')
+
+    if (unavailableProducts.length > 0) {
+      multiRemoveProducts && await multiRemoveProducts(unavailableProducts, _carts)
+      return
+    }
+
+    if (alreadyRemoved === 'removed') {
+      setAlertState({ open: true, content: [t('NOT_AVAILABLE_PRODUCT', 'This product is not available.')] })
+    }
   }
 
   useEffect(() => {
@@ -203,9 +219,9 @@ const BusinessProductsListingUI = (props) => {
   }, [business?.schedule])
 
   useEffect(() => {
-    const adjustBusinessId = JSON.parse(window.localStorage.getItem('adjust-businessId'))
+    const adjustBusinessId = sessionStorage.getItem('adjust-cart-products')
     if (currentCart && adjustBusinessId) {
-      localStorage.removeItem('adjust-businessId')
+      sessionStorage.removeItem('adjust-cart-products')
       adjustBusiness(adjustBusinessId)
     }
   }, [currentCart])
@@ -213,7 +229,9 @@ const BusinessProductsListingUI = (props) => {
   return (
     <>
       <ProductsContainer>
-        <ArrowLeft onClick={() => handleGoToBusinessList()} />
+        {!props.useKioskApp && (
+          <ArrowLeft onClick={() => handleGoToBusinessList()} />
+        )}
         <RenderProductsLayout
           errors={errors}
           isError={error}
@@ -229,6 +247,7 @@ const BusinessProductsListingUI = (props) => {
           categoryState={categoryState}
           categoriesState={props.categoriesState}
           isCustomLayout={props.isCustomLayout}
+          useKioskApp={props.useKioskApp}
           categorySelected={categorySelected}
           openCategories={openCategories}
           openBusinessInformation={openBusinessInformation}
@@ -245,6 +264,9 @@ const BusinessProductsListingUI = (props) => {
           setOpenBusinessInformation={setOpenBusinessInformation}
           handleCartOpen={(val) => setIsCartOpen(val)}
           setSubcategoriesSelected={setSubcategoriesSelected}
+          handleUpdateProducts={handleUpdateProducts}
+          professionalSelected={professionalSelected}
+          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
         />
 
         {
@@ -339,7 +361,7 @@ const BusinessProductsListingUI = (props) => {
       </Modal>
 
       <Modal
-        width='700px'
+        width='760px'
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
@@ -368,18 +390,34 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
         {(productModal.product || curProduct) && (
-          <ProductForm
-            businessSlug={business?.slug}
-            product={productModal.product || curProduct}
-            businessId={business?.id}
-            onSave={handlerProductAction}
-          />
+          <>
+            {(((productModal?.product?.type === 'service') || (curProduct?.type === 'service')) && professionalSelected) ? (
+              <ServiceForm
+                businessSlug={business?.slug}
+                useKioskApp={props.useKioskApp}
+                product={productModal.product || curProduct}
+                businessId={business?.id}
+                onSave={handlerProductAction}
+                professionalList={business?.professionals}
+                professionalSelected={professionalSelected}
+                handleChangeProfessional={handleChangeProfessionalSelected}
+              />
+            ) : (
+              <ProductForm
+                businessSlug={business?.slug}
+                useKioskApp={props.useKioskApp}
+                product={productModal.product || curProduct}
+                businessId={business?.id}
+                onSave={handlerProductAction}
+              />
+            )}
+          </>
         )}
       </Modal>
       <Alert
         title={t('ERROR', 'Error')}
-        open={alertState.open}
-        content={alertState.content}
+        open={alertState?.open}
+        content={t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.')}
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}
       />

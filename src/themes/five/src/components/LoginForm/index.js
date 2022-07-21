@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import Skeleton from 'react-loading-skeleton'
-
 import {
   LoginForm as LoginFormController,
   useLanguage,
@@ -35,7 +34,8 @@ import {
   Title,
   ValidationText,
   LogotypeContainer,
-  HeroSide
+  HeroSide,
+  ResendCode
 } from './styles'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -76,16 +76,22 @@ const LoginFormUI = (props) => {
     credentials,
     enableReCaptcha,
     useRootPoint,
-    isCustomerMode
+    isCustomerMode,
+    otpType,
+    setOtpType,
+    generateOtpCode,
+    otpState,
+    setOtpState,
+    useLoginOtpEmail,
+    useLoginOtpCellphone
   } = props
-  const numOtpInputs = 4
+  const numOtpInputs = loginTab === 'otp' ? 6 : 4
+  const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
   const [ordering, { setOrdering }] = useApi()
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
-
-  const emailInput = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
@@ -95,33 +101,46 @@ const LoginFormUI = (props) => {
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
   const [projectName, setProjectName] = useState(null)
   const [submitted, setSubmitted] = useState(false)
-  const [otpState, setOtpState] = useState('')
 
   const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
-
+  const isOtpEmail = loginTab === 'otp' && otpType === 'email'
+  const isOtpCellphone = loginTab === 'otp' && otpType === 'cellphone'
   const initParams = {
     client_id: configs?.google_login_client_id?.value,
     cookiepolicy: 'single_host_origin',
     scope: 'profile'
   }
 
+  const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
+  const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
+  const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
+
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
-    configs?.google_login_client_id?.value ||
-    configs?.apple_login_client_id?.value ||
+    (configs?.google_login_client_id?.value && googleLoginEnabled) ||
+    (configs?.apple_login_client_id?.value && appleLoginEnabled) ||
     (loginTab === 'cellphone' && (configs?.twilio_service_enabled?.value === 'true' ||
       configs?.twilio_service_enabled?.value === '1'))
+  const hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled
 
   const onSubmit = async () => {
-    if (loginWithOtpState) {
-      if (!validPhoneFieldState) {
+    if (loginWithOtpState || loginTab === 'otp') {
+      if (!validPhoneFieldState && (loginTab !== 'otp' || (otpType === 'cellphone' && loginTab === 'otp'))) {
         setAlertState({
           open: true,
           content: [t('INVALID_PHONE_NUMBER', 'Invalid phone number')]
         })
 
         return
+      }
+      if (loginTab === 'otp') {
+        if (otpType === 'cellphone') {
+          const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
+          generateOtpCode({ cellphone, countryPhoneCode })
+        } else {
+          generateOtpCode()
+        }
       }
       setWillVerifyOtpState(true)
     } else {
@@ -204,12 +223,20 @@ const LoginFormUI = (props) => {
       const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
 
       resetOtpLeftTime()
-
-      handleSendVerifyCode({
-        cellphone: cellphone,
-        country_phone_code: countryPhoneCode
-      })
+      if (loginTab !== 'otp') {
+        handleSendVerifyCode({
+          cellphone: cellphone,
+          country_phone_code: countryPhoneCode
+        })
+      } else {
+        onSubmit()
+      }
     }
+  }
+
+  const handleChangeOtpType = (type) => {
+    handleChangeTab('otp')
+    setOtpType(type)
   }
 
   useEffect(() => {
@@ -236,18 +263,23 @@ const LoginFormUI = (props) => {
   }, [formMethods])
 
   useEffect(() => {
-    handleSendOtp()
+    if (loginTab !== 'otp') {
+      handleSendOtp()
+    }
   }, [willVerifyOtpState])
 
   useEffect(() => {
     if (otpState?.length === numOtpInputs) {
-      const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
-
-      handleCheckPhoneCode({
-        cellphone: cellphone,
-        country_phone_code: countryPhoneCode,
-        code: otpState
-      })
+      if (loginTab === 'otp') {
+        handleButtonLoginClick()
+      } else {
+        const { cellphone, countryPhoneCode } = parseNumber(credentials?.cellphone)
+        handleCheckPhoneCode({
+          cellphone: cellphone,
+          country_phone_code: countryPhoneCode,
+          code: otpState
+        })
+      }
     }
   }, [otpState])
 
@@ -257,8 +289,23 @@ const LoginFormUI = (props) => {
         open: true,
         content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
       })
-    } else resetOtpLeftTime()
+    } else if (checkPhoneCodeState?.result?.result) {
+      setAlertState({
+        open: true,
+        content: t('CODE_SENT', 'The code has been sent')
+      })
+      resetOtpLeftTime()
+    }
   }, [checkPhoneCodeState])
+
+  useEffect(() => {
+    if (otpLeftTime === 0) {
+      setAlertState({
+        open: true,
+        content: t('TIME_IS_UP_PLEASE_RESEND_CODE', 'Time is up. Please resend code again')
+      })
+    }
+  }, [otpLeftTime])
 
   useEffect(() => {
     if (verifyPhoneState?.result?.error) {
@@ -322,6 +369,24 @@ const LoginFormUI = (props) => {
                     {t('BY_PHONE', 'by Phone')}
                   </Tab>
                 )}
+                {useLoginOtpEmail && (
+                  <Tab
+                    onClick={() => handleChangeOtpType('email')}
+                    active={isOtpEmail}
+                    borderBottom={isOtpEmail}
+                  >
+                    {t('BY_OTP_EMAIL', 'by Otp Email')}
+                  </Tab>
+                )}
+                {useLoginOtpCellphone && (
+                  <Tab
+                    onClick={() => handleChangeOtpType('cellphone')}
+                    active={isOtpCellphone}
+                    borderBottom={isOtpCellphone}
+                  >
+                    {t('BY_OTP_CELLPHONE', 'by Otp Cellphone')}
+                  </Tab>
+                )}
               </Tabs>
             </LoginWith>
           )}
@@ -363,7 +428,7 @@ const LoginFormUI = (props) => {
                   </InputBeforeIcon>
                 </InputWrapper>
               )}
-              {useLoginByEmail && loginTab === 'email' && (
+              {((useLoginByEmail && loginTab === 'email') || (loginTab === 'otp' && otpType === 'email')) && (
                 <>
                   {formMethods?.errors?.email?.type === 'required' && (
                     <ValidationText>
@@ -397,7 +462,7 @@ const LoginFormUI = (props) => {
                   </InputWrapper>
                 </>
               )}
-              {(useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState) && (
+              {(((useLoginByCellphone && loginTab === 'cellphone') || (loginTab === 'otp' && otpType === 'cellphone')) && !willVerifyOtpState) && (
                 <>
                   {formMethods.errors?.cellphone && !credentials?.cellphone && (
                     <ValidationText>
@@ -417,9 +482,6 @@ const LoginFormUI = (props) => {
                 <>
                   <CountdownTimer>
                     <span>{formatSeconds(otpLeftTime)}</span>
-                    <span onClick={handleSendOtp}>
-                      {t('RESEND_AGAIN', 'Resend again')}?
-                    </span>
                   </CountdownTimer>
 
                   <OtpWrapper>
@@ -429,12 +491,14 @@ const LoginFormUI = (props) => {
                       numInputs={numOtpInputs}
                       containerStyle='otp-container'
                       inputStyle='otp-input'
-                      placeholder='0000'
+                      placeholder={otpPlaceholder}
                       isInputNum
                       shouldAutoFocus
                     />
                   </OtpWrapper>
-
+                  <ResendCode disabled={otpLeftTime > 520} onClick={handleSendOtp}>
+                    {t('RESEND_AGAIN', 'Resend again')}?
+                  </ResendCode>
                   <Button
                     type='button'
                     color='secundary'
@@ -455,7 +519,7 @@ const LoginFormUI = (props) => {
                 />
               )}
 
-              {!loginWithOtpState && (
+              {!loginWithOtpState && loginTab !== 'otp' && (
                 <>
                   {formMethods.errors?.password && (
                     <ValidationText>
@@ -493,7 +557,7 @@ const LoginFormUI = (props) => {
                 props.afterMidComponents?.map((MidComponent, i) => (
                   <MidComponent key={i} {...props} />))
               }
-              {!loginWithOtpState && (
+              {!loginWithOtpState && loginTab !== 'otp' && elementLinkToForgotPassword && (
                 <RedirectLink isPopup={isPopup}>
                   <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
                   {elementLinkToForgotPassword}
@@ -512,7 +576,7 @@ const LoginFormUI = (props) => {
                 >
                   {formState.loading
                     ? `${t('LOADING', 'Loading')}...`
-                    : loginWithOtpState
+                    : loginWithOtpState || loginTab === 'otp'
                       ? t('GET_VERIFY_CODE', 'Get verify code')
                       : t('LOGIN', 'Login')}
                 </Button>
@@ -538,7 +602,7 @@ const LoginFormUI = (props) => {
               {elementLinkToSignup}
             </RedirectLink>
           )}
-          {hasSocialLogin && (
+          {!props.isDisableButtons && hasSocialLogin && hasSocialEnabled && (
             <LoginDivider isPopup={isPopup}>
               <DividerLine />
               <p>{t('OR', 'or')}</p>
@@ -551,23 +615,27 @@ const LoginFormUI = (props) => {
                 {(configs?.facebook_login?.value === 'true' ||
                   configs?.facebook_login?.value === '1') &&
                   configs?.facebook_id?.value &&
+                  facebookLoginEnabled &&
                   (
                     <FacebookLoginButton
                       appId={configs?.facebook_id?.value}
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
-                {configs?.google_login_client_id?.value && (
+                {configs?.google_login_client_id?.value && googleLoginEnabled && (
                   <GoogleIdentityButton
                     initParams={initParams}
                     handleSuccessGoogleLogin={handleSuccessGoogle}
                   />
                 )}
-                {configs?.apple_login_client_id?.value &&
+                {configs?.apple_login_client_id?.value && appleLoginEnabled &&
                   (
                     <AppleLogin
                       onSuccess={handleSuccessApple}
-                      onFailure={(data) => console.log('onFailure', data)}
+                      onFailure={(data) => setAlertState({
+                        open: true,
+                        content: data
+                      })}
                     />
                   )}
                 {useLoginByCellphone && loginTab === 'cellphone' &&
@@ -627,9 +695,14 @@ const LoginFormUI = (props) => {
 }
 
 export const LoginForm = (props) => {
+  const isKioskApp = props.useKioskApp
   const loginControllerProps = {
     ...props,
-    isRecaptchaEnable: true,
+    isRecaptchaEnable: !isKioskApp,
+    elementLinkToForgotPassword: isKioskApp ? null : props.elementLinkToForgotPassword,
+    useLoginByCellphone: isKioskApp ? null : props.useLoginByCellphone,
+    elementLinkToSignup: isKioskApp ? null : props.elementLinkToSignup,
+    isDisableButtons: isKioskApp ? true : props.isDisableButtons,
     UIComponent: LoginFormUI
   }
   return <LoginFormController {...loginControllerProps} />

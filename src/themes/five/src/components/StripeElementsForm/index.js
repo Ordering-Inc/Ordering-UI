@@ -55,6 +55,7 @@ const StripeElementsFormUI = (props) => {
               requirements={requirements}
               businessId={businessId}
               handleCancel={onCancel}
+              businessIds={props.businessIds}
             />
           )}
         </Elements>

@@ -219,4 +219,39 @@ export const Button = styled.button`
       background: ${props => darken(0.07, props.theme.colors.grayDividerColor)};
     }
   `}
+  ${({ color }) => color === 'lightGray' && css`
+    background: ${props => props.theme.colors.gray200};
+    color: ${props => props.theme.colors.secondaryDark};
+    border-color: ${props => props.theme.colors.gray200};
+    &:active {
+      background: ${props => darken(0.05, props.theme.colors.gray200)};
+    }
+    &:hover {
+      background: ${props => darken(0.07, props.theme.colors.gray200)};
+    }
+  `}
+  ${({ color }) => color === 'red' && css`
+    background: ${props => props.theme.colors.danger500};;
+    color: ${props => props.theme.colors.backgroundPage};
+    border-color: ${props => props.theme.colors.danger500};
+    &:active {
+      background: ${props => darken(0.05, props.theme.colors.danger500)};
+    }
+    &:hover {
+      background: ${props => darken(0.07, props.theme.colors.danger500)};
+    }
+    ${({ outline }) => outline && css`
+      background: ${props => props.theme.colors.backgroundPage};
+      color: ${props => props.theme.colors.danger500};
+      border-color: ${props => props.theme.colors.danger500};
+      &:active {
+        color: ${props => props.theme.colors.backgroundPage};
+        background: ${props => props.theme.colors.danger500};
+      }
+      &:hover {
+        background: ${props => darken(0.07, props.theme.colors.danger500)};
+        color: ${props => props.theme.colors.backgroundPage};
+      }
+    `}
+  `}
 `

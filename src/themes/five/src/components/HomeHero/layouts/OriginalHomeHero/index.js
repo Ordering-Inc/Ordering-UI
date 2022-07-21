@@ -89,7 +89,6 @@ export const OriginalHomeHero = (props) => {
           />
         </Modal>
         <Modal
-          title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
           open={modals.listOpen}
           width='70%'
           onClose={() => setModals({ ...modals, listOpen: false })}

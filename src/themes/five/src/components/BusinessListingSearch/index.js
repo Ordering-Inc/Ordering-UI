@@ -25,15 +25,23 @@ import {
   NotFoundWrapper,
   BusinessName,
   BusinessLogo,
-  BusinessesTitle
+  BusinessesTitle,
+  BrandContainer,
+  BrandListWrapper,
+  BrandItem,
+  NoResult,
+  PriceFilterWrapper,
+  PriceFilterListWrapper,
+  PreviouslyOrderedContainer
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
-
+import { Check2, XLg as Close } from 'react-bootstrap-icons'
 import { SearchBar } from '../SearchBar'
 import { useLanguage, useOrder, useUtils, BusinessSearchList } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { AutoScroll } from '../AutoScroll'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
+import { MyOrders } from '../MyOrders'
 import { useTheme } from 'styled-components'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import { convertHoursToMinutes } from '../../../../../utils'
@@ -53,7 +61,12 @@ export const BusinessListingSearchUI = (props) => {
     handleChangeTermValue,
     termValue,
     paginationProps,
-    handleSearchbusinessAndProducts
+    handleSearchbusinessAndProducts,
+    brandList,
+    onRedirectPage,
+    onProductRedirect,
+    handleUpdateBusinessList,
+    handleUpdateProducts
   } = props
 
   const [orderState] = useOrder()
@@ -71,7 +84,27 @@ export const BusinessListingSearchUI = (props) => {
     { text: t('PICKUP_TIME', 'Pickup time'), value: 'pickup_time' }
   ]
 
+  const priceList = [
+    { level: '1', content: '$' },
+    { level: '2', content: '$$' },
+    { level: '3', content: '$$$' },
+    { level: '4', content: '$$$$' },
+    { level: '5', content: '$$$$$' }
+  ]
+
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
+
+  const handleChangeBrandFilter = (brandId) => {
+    let franchiseIds = [...filters?.franchise_ids]
+    if (filters?.franchise_ids?.includes(brandId)) franchiseIds = filters?.franchise_ids?.filter(item => item !== brandId)
+    else franchiseIds.push(brandId)
+    handleChangeFilters && handleChangeFilters('franchise_ids', franchiseIds)
+  }
+
+  const handleChangePriceRange = (value) => {
+    if (value === filters?.price_level) handleChangeFilters('price_level', null)
+    else handleChangeFilters('price_level', value)
+  }
 
   const MaxSectionItem = ({ title, options, filter }) => {
     const parseValue = (option) => {
@@ -112,7 +145,7 @@ export const BusinessListingSearchUI = (props) => {
         isCustomLayout
         placeholder={`${t('SEARCH_BUSINESSES', 'Search Businesses')} / ${t('PLEASE_TYPE_AT_LEAST_3_CHARACTERS', 'Please type at least 3 characters')}`}
         onSearch={(val) => handleChangeTermValue(val)}
-        value={termValue}
+        search={termValue}
       />
       <FiltersContainer>
         <Filters>
@@ -131,6 +164,45 @@ export const BusinessListingSearchUI = (props) => {
             <SortItem onClick={() => handleChangeFilters('orderBy', 'default')}>{t('RATING', 'Rating')}</SortItem> */}
 
           </SortContainer>
+          <BrandContainer>
+            <h3>{t('BRANDS', 'Brands')}</h3>
+            <BrandListWrapper>
+              {brandList?.loading && (
+                <>
+                  {[...Array(5).keys()].map(index => (
+                    <BrandItem key={index}>
+                      <Skeleton width={120} height={15} />
+                      <Skeleton width={16} height={16} />
+                    </BrandItem>
+                  ))}
+                </>
+              )}
+              {!brandList?.loading && brandList?.brands.map((brand, i) => brand?.enabled && (
+                <BrandItem key={i} onClick={() => handleChangeBrandFilter(brand?.id)}>
+                  <span>{brand?.name}</span>
+                  {filters?.franchise_ids?.includes(brand?.id) && <Check2 />}
+                </BrandItem>
+              ))}
+              {!brandList?.loading && ((brandList?.brands?.filter(brand => brand?.enabled))?.length === 0) && (
+                <NoResult>{t('NO_RESULTS_FOUND', 'Sorry, no results found')}</NoResult>
+              )}
+            </BrandListWrapper>
+          </BrandContainer>
+          <PriceFilterWrapper>
+            <h3>{t('PRICE_RANGE', 'Price range')}</h3>
+            <PriceFilterListWrapper>
+              {priceList.map((price, i) => (
+                <Button
+                  key={i}
+                  color={(filters?.price_level === price?.level) ? 'primary' : 'lightGray'}
+                  onClick={() => handleChangePriceRange(price?.level)}
+                >
+                  {price.content}
+                  {(filters?.price_level === price?.level) && <Close />}
+                </Button>
+              ))}
+            </PriceFilterListWrapper>
+          </PriceFilterWrapper>
           {orderState?.options?.type === 1 && (
             <MaxSectionItem
               title={t('MAX_DELIVERY_FEE', 'Max delivery fee')}
@@ -165,7 +237,18 @@ export const BusinessListingSearchUI = (props) => {
           </TagsContainer>
         </Filters>
         <FiltersResultContainer>
+          <PreviouslyOrderedContainer>
+            <MyOrders
+              hideOrders
+              businessesSearchList={businessesSearchList}
+              onRedirectPage={onRedirectPage}
+              onProductRedirect={onProductRedirect}
+            />
+          </PreviouslyOrderedContainer>
           <BusinessListWrapper>
+            {businessesSearchList.businesses?.length > 0 && (
+              <h2>{t('BUSINESSES', 'Businesses')}</h2>
+            )}
             <BusinessList noResults={noResults}>
               {
                 noResults && (
@@ -186,6 +269,7 @@ export const BusinessListingSearchUI = (props) => {
                       isBusinessOpen={business.open}
                       handleCustomClick={onBusinessClick}
                       orderType={orderState?.options?.type}
+                      handleUpdateBusinessList={handleUpdateBusinessList}
                       firstCard={i === 0 && width > 681}
                     />
                   ))}
@@ -266,6 +350,7 @@ export const BusinessListingSearchUI = (props) => {
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
                           businessId={business?.id}
+                          handleUpdateProducts={(productId, changes) => handleUpdateProducts(productId, category?.id, business?.id, changes)}
                         />
                       )))}
                     </AutoScroll>

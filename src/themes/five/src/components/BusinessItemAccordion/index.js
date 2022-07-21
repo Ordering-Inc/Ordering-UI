@@ -38,7 +38,9 @@ export const BusinessItemAccordion = (props) => {
     total,
     handleClickCheckout,
     checkoutButtonDisabled,
-    setPreorderBusiness
+    setPreorderBusiness,
+    handleChangeStore,
+    isMultiCheckout
   } = props
 
   const [orderState] = useOrder()
@@ -54,14 +56,14 @@ export const BusinessItemAccordion = (props) => {
   const content = useRef(null)
   const businessStore = useRef(null)
   const businessDelete = useRef(null)
+  const changeStore = useRef(null)
 
   const viewString = isStore ? 'business_view' : 'header'
-  const { logo, time } = theme?.layouts?.[viewString]?.components?.cart?.components?.business
-  const isHideBusinessLogo = logo?.hidden
-  const isHideBusinessTime = time?.hidden
+  const showBusinessLogo = !theme?.layouts?.[viewString]?.components?.cart?.components?.business?.components?.logo?.hidden
+  const showBusinessTime = !theme?.layouts?.[viewString]?.components?.cart?.components?.business?.components?.time?.hidden
 
   const toggleAccordion = (e) => {
-    const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target)
+    const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target) || changeStore.current?.contains(e?.target)
     if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
     setRotateState(
@@ -140,14 +142,14 @@ export const BusinessItemAccordion = (props) => {
               onClick={(e) => toggleAccordion(e)}
             >
               <BusinessInfo>
-                {!isHideBusinessLogo && (
+                {!showBusinessLogo && (
                   <WrapperBusinessLogo>
                     <BusinessLogo bgimage={business?.logo || theme.images?.dummies?.businessLogo} />
                   </WrapperBusinessLogo>
                 )}
                 <ContentInfo className='info' isStore={isStore}>
                   <h2>{business?.name}</h2>
-                  {!isHideBusinessTime && (
+                  {!showBusinessTime && (
                     <TimeContainer>
                       {orderState?.options?.type === 1 ? (
                         <span>
@@ -185,6 +187,15 @@ export const BusinessItemAccordion = (props) => {
                       </>
                     )}
                   </div>
+                  {handleChangeStore && (
+                    <span
+                      ref={changeStore}
+                      onClick={handleChangeStore}
+                      className='change-store'
+                    >
+                      {t('CHANGE_STORE', 'Change store')}
+                    </span>
+                  )}
                 </ContentInfo>
               </BusinessInfo>
               {isClosed && !isStore && (
@@ -213,9 +224,22 @@ export const BusinessItemAccordion = (props) => {
           ref={content}
           style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
         >
+          {isCheckout && handleChangeStore && (
+            <BusinessInfo>
+              <ContentInfo className='info'>
+                <span
+                  ref={changeStore}
+                  onClick={handleChangeStore}
+                  className='change-store'
+                >
+                  {t('CHANGE_STORE', 'Change store')}
+                </span>
+              </ContentInfo>
+            </BusinessInfo>
+          )}
           {props.children}
         </AccordionContent>
-        {!setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && (
+        {!setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && !isMultiCheckout && (
           <PriceContainer>
             <h4>{parsePrice(total)}</h4>
             <Button onClick={handleClickCheckout} color='primary'>{t('CHECKOUT', 'Checkout')}</Button>

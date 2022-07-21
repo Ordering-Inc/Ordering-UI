@@ -5,27 +5,16 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  ${({ isCustomerMode }) => isCustomerMode && css`
-    align-items: center;
-  `}
+  align-items: center;
+  margin: 20px 0;
 `
 
 export const WrapperContainer = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   min-height: auto;
   position: relative;
-
-  ${({ isCustomerMode }) => isCustomerMode && css`
-    width: 50%;
-  `}
-
-  @media (min-width: 769px) {
-    ${({ isCustomerMode }) => !isCustomerMode && css`
-      flex-direction: row;
-    `}
-  }
 
   @media (min-width: 993px) {
     min-height: calc(100vh - 337px);
@@ -37,16 +26,13 @@ export const SkeletonWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  ${({ isCustomerMode }) => !isCustomerMode && css`
-    width: 100%;
-
-  `}
   @media (min-width: 768px) {
     flex-direction: row;
   }
 `
 
 export const HeaderInfo = styled.div`
+  width: 80%;
   margin-bottom: 20px;
 
   h1, p {
@@ -62,50 +48,60 @@ export const HeaderInfo = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  ${({ isCustomerMode }) => isCustomerMode ? css`
-    position: absolute;
-    right: 0;
-  ` : css`
-    margin: 10px 0px;
-  `}
+  position: absolute;
+  right: 0;
 `
 
 export const OrderBusiness = styled.div`
   display: flex;
-  ${({ isCustomerMode }) => isCustomerMode ? css`
-    box-sizing: border-box;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 7.6px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0px 4px 10px 0px #0000001F;
-  ` : css`
-    margin: 20px 0 35px 0;
-  `}
+  box-sizing: border-box;
+  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  border-radius: 7.6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 10px 0px #0000001F;
 `
 
 export const BusinessWrapper = styled.div`
   display: flex;
-  ${({ isCustomerMode }) => isCustomerMode ? css`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-    img {
-      width: 100px;
-      height: 100px;
-      border-radius: 7.6px;
-      margin-right: 40px;
-    }
-  ` : css`
-    width: 90%;
+  width: ${props => props.w ?? '100%'};
+  display: flex;
+  align-items: center;
+  ${props => props.borderBottom && css`
+    padding-bottom: 15px;
+    border-bottom: 1px solid ${props => props.theme.colors.lightGray};
   `}
+  ${props => props.borderTop && css`
+    margin-top: 15px;
+    border-top: 1px solid ${props => props.theme.colors.lightGray};
+  `}
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 7.6px;
+    margin-right: 40px;
+  }
+`
+
+export const BtsOrderStatus = styled.div`
+  width: calc(100% - 20px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+
+  div + div {
+    margin-left: 30px;
+  }
 `
 
 export const BusinessInfo = styled.div`
   width: 100%;
+  box-sizing: border-box;
+  margin-right: 15px;
   h1,
   p {
     margin: 0;
@@ -115,31 +111,19 @@ export const BusinessInfo = styled.div`
 
   h2 {
     font-weight: 500;
+    font-size: 18px;
+    margin: 0px 0px 5px 0px;
   }
   p {
     font-size: 14px;
     margin-bottom: 5px;
   }
-
-  ${({ isCustomerMode }) => isCustomerMode ? css`
-    box-sizing: border-box;
-    h2{
-      font-size: 18px;
-      margin: 0px 0px 5px 0px;
-    }
-  ` : css`
-    h2 {
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-  `}
 `
 
 export const ActionsBlock = styled.div`
-  width: 10%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   > * {
     margin-right: 5px;
@@ -158,7 +142,7 @@ export const ActionsBlock = styled.div`
     flex-direction: row;
 
     svg {
-      font-size: 24px;
+      font-size: 20px;
     }
   }
 `
@@ -225,10 +209,7 @@ const StatusBarStyled = styled.div`
 
 export const StatusBar = (props) => {
   return (
-    <StatusBarStyled
-      {...props}
-    // style={{ background: `linear-gradient(to right, #D81212 ${props.percentage}%, #BFBFBF ${props.percentage}%)` }}
-    >
+    <StatusBarStyled {...props}>
       {props.children}
     </StatusBarStyled>
   )
@@ -252,67 +233,37 @@ export const SectionTitleContainer = styled.div`
 `
 
 export const OrderCustomer = styled(BusinessInfo)`
-  ${({ isCustomerMode }) => isCustomerMode ? css`
-    display: flex;
-    flex-direction: column;
-    border-radius: 7.6px;
-    padding: 20px;
-    box-shadow: 0px 4px 10px 0px #0000001F;
-    margin-bottom: 30px;
-  ` : css`
-    margin: 25px 0px 35px;
-  `}
+  display: flex;
+  flex-direction: column;
+  border-radius: 7.6px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px 0px #0000001F;
+  margin-bottom: 30px;
 `
 
 export const PhotoBlock = styled.img`
-  ${({ isCustomerMode, theme }) => isCustomerMode ? css`
-    border-radius: 7.6px;
-    width: 100px;
-    height: 100px;
-    margin-right: 40px;
-  ` : css`
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 10px;
-    ${theme?.rtl && css`
-      margin-left: 10px;
-      margin-right: 0;
-    `}
-  `}
+  border-radius: 7.6px;
+  width: 100px;
+  height: 100px;
+  margin-right: 40px;
 `
 
 export const Map = styled.div`
   margin-bottom: 10px;
+  width: 100%;
+  height: 350px;
   > div {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
   }
 
-  ${({ isCustomerMode }) => isCustomerMode ? css`
-    width: 100%;
-    height: 350px;
-  ` : css`
-    width: calc(100% + 40px);
-    height: 300px;
-    margin-left: -20px;
-    @media (min-width: 768px) {
-      width: calc(100% + 80px);
-      margin-left: -40px;
-    }
-  `}
+  img {
+    object-fit: cover;
+  }
 `
 
-export const OrderDriver = styled(OrderCustomer)`
-  ${({ isCustomerMode }) => !isCustomerMode && css`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #E9ECEF;
-  `}
-`
+export const OrderDriver = styled(OrderCustomer)``
 
 export const WrapperDriver = styled.div`
   display: flex;
@@ -344,9 +295,7 @@ export const OrderBill = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;
-  ${({ isCustomerMode }) => isCustomerMode && css`
-    margin-top: 10px;
-  `}
+  margin-top: 10px;
   table {
     width: 100%;
     font-size: 14px;
@@ -402,9 +351,7 @@ export const SkeletonBlock = styled.div`
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  ${({ isCustomerMode }) => isCustomerMode && css`
-    align-items: center;
-  `}
+  align-items: center;
 `
 
 export const SkeletonBlockWrapp = styled.div`
@@ -546,24 +493,9 @@ export const ExclamationWrapper = styled.div`
 export const WrapperLeftContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  
-  ${({ isCustomerMode }) => !isCustomerMode && css`
-    padding: 20px;
-  `}
-
-  @media (min-width: 769px) {
-    ${({ isCustomerMode }) => !isCustomerMode && css`
-      width: 50%;
-      padding: 40px;
-    `}
-  }
 `
 
-export const WrapperRightContainer = styled(WrapperLeftContainer)`  
-  ${({ isCustomerMode }) => !isCustomerMode && css`
-    background: #F8F9FA;  
-  `}
-`
+export const WrapperRightContainer = styled(WrapperLeftContainer)``
 
 export const Divider = styled.div`
   height: 8px;
@@ -644,9 +576,10 @@ export const BusinessTitle = styled.div`
 export const OrderPreferences = styled(OrderCustomer)``
 
 export const HeaderTitle = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   h1{
     font-size: 20px;
     font-weight: 600;

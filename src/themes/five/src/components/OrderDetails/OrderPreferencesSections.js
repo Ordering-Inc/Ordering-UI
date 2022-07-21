@@ -9,12 +9,8 @@ import {
 } from './styles'
 
 export const OrderPreferencesSection = (props) => {
-  const {
-    order
-  } = props
+  const { order } = props
   const [, t] = useLanguage()
-
-  const placeSpotTypes = [3, 4]
 
   return (
     <>
@@ -28,12 +24,6 @@ export const OrderPreferencesSection = (props) => {
         <CommentContainer>
           <h3>{t('COMMENT', 'Comment')}</h3>
           <span>{order?.comment}</span>
-        </CommentContainer>
-      )}
-      {placeSpotTypes.includes(order?.delivery_type) && order?.place && (
-        <CommentContainer>
-          <h3>{t('SPOT', 'Spot')}</h3>
-          <span>{order?.place?.name}</span>
         </CommentContainer>
       )}
     </>
