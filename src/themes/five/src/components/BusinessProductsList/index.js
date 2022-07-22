@@ -18,7 +18,8 @@ import {
   SubCategoriesContainer,
   ContainerButton,
   CategoryDescription,
-  DescriptionContainer
+  DescriptionContainer,
+  SubcategorySearchContainer
 } from './styles'
 import { Button } from '../../styles/Buttons'
 
@@ -42,7 +43,8 @@ const BusinessProductsListUI = (props) => {
     setSubcategoriesSelected,
     subcategoriesSelected,
     onClickCategory,
-    handleUpdateProducts
+    handleUpdateProducts,
+    isSearchMode
   } = props
 
   const [, t] = useLanguage()
@@ -180,7 +182,7 @@ const BusinessProductsListUI = (props) => {
                 subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
               : _products
             const shortCategoryDescription = category?.description?.length > 200 ? `${category?.description?.substring(0, 200)}...` : category?.description
-
+            const isSubcategorySearch = isSearchMode && category?.subcategories?.length > 0 && category?.subcategories?.some(subcategory => products?.some(product => product?.category_id === subcategory?.id))
             return (
               <React.Fragment key={i}>
                 {
@@ -214,25 +216,44 @@ const BusinessProductsListUI = (props) => {
                             )}
                           </CategoryDescription>
                         )}
-                        {category?.subcategories?.length > 0 && (
+                        {category?.subcategories?.length > 0 && !isSearchMode && (
                           <SubcategoriesComponent category={category} />
                         )}
                       </HeaderWrapper>
-                      <ProductsListing>
-                        {
-                          products.map((product, i) => (
-                            <SingleProductCard
-                              key={i}
-                              isSoldOut={product.inventoried && !product.quantity}
-                              businessId={businessId}
-                              product={product}
-                              onProductClick={onProductClick}
-                              isCartOnProductsList={isCartOnProductsList}
-                              handleUpdateProducts={handleUpdateProducts}
-                              productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
-                            />
-                          ))
-                        }
+                      <ProductsListing isSubcategorySearch={isSubcategorySearch}>
+                        {isSearchMode && category?.subcategories?.length > 0 ? (
+                          <>
+                            {products?.filter(product => product?.category_id === category?.id)?.map((product, i) => (
+                              <SingleProductCard
+                                key={i}
+                                isSoldOut={product.inventoried && !product.quantity}
+                                businessId={businessId}
+                                product={product}
+                                onProductClick={onProductClick}
+                                isCartOnProductsList={isCartOnProductsList}
+                                handleUpdateProducts={handleUpdateProducts}
+                                productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                              />
+                            ))}
+                          </>
+                        ) : (
+                          <>
+                            {
+                              products.map((product, i) => (
+                                <SingleProductCard
+                                  key={i}
+                                  isSoldOut={product.inventoried && !product.quantity}
+                                  businessId={businessId}
+                                  product={product}
+                                  onProductClick={onProductClick}
+                                  isCartOnProductsList={isCartOnProductsList}
+                                  handleUpdateProducts={handleUpdateProducts}
+                                  productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                                />
+                              ))
+                            }
+                          </>
+                        )}
                         {
                           categoryState.loading && (i + 1) === _categories.length && [...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
                             <SingleProductCard
@@ -242,6 +263,25 @@ const BusinessProductsListUI = (props) => {
                           ))
                         }
                       </ProductsListing>
+                      {isSearchMode && category?.subcategories?.length > 0 && category?.subcategories?.filter(subcategory => products?.some(product => product?.category_id === subcategory?.id))?.map(subcategory => (
+                        <SubcategorySearchContainer key={subcategory?.id}>
+                          <h4>{subcategory?.name}</h4>
+                          <ProductsListing isSubcategorySearch={isSubcategorySearch}>
+                            {products?.filter(product => product?.category_id === subcategory?.id)?.map((product, i) => (
+                              <SingleProductCard
+                                key={i}
+                                isSoldOut={product.inventoried && !product.quantity}
+                                businessId={businessId}
+                                product={product}
+                                onProductClick={onProductClick}
+                                isCartOnProductsList={isCartOnProductsList}
+                                handleUpdateProducts={handleUpdateProducts}
+                                productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                              />
+                            ))}
+                          </ProductsListing>
+                        </SubcategorySearchContainer>
+                      ))}
                     </WrapAllCategories>
                   )
                 }

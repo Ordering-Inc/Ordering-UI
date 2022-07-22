@@ -16,7 +16,7 @@ export const ErrorMessage = styled.div`
 export const ProductsListing = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 45px;
+  margin-bottom: ${({ isSubcategorySearch }) => isSubcategorySearch ? '0px' : '45px'};
 `
 
 export const WrapAllCategories = styled.div`
@@ -173,4 +173,10 @@ export const ContainerButton = styled.div`
     border-radius: 50px;
     color: ${({ isSelected }) => isSelected ? '#fff' : '#414954'};
   }
+`
+
+export const SubcategorySearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
 `
