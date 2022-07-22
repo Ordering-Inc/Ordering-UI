@@ -73,6 +73,7 @@ export const SearchProducts = (props) => {
               category={categorySelected}
               businessId={business?.id}
               handleClearSearch={handleChangeSearch}
+              isSearchMode
             />
           </BusinessProductsListWrapper>
         </BusinessProductsListContainer>
