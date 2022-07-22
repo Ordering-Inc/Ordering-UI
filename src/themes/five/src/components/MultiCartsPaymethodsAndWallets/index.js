@@ -128,7 +128,7 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
               <IosRadioButtonOn />
             </span>
             <span className='brand'>
-              <img src={getIconCard(paymethodSelected?.paymethod_data?.card.card?.brand)} alt='' />
+              <img src={getIconCard(paymethodSelected?.paymethod_data?.card?.brand)} alt='' />
             </span>
             <span>
               XXXX-XXXX-XXXX-{paymethodSelected?.paymethod_data?.card?.last4}

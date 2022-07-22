@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { XLg as Close } from 'react-bootstrap-icons'
 import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 'ordering-components'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -15,13 +16,18 @@ const BusinessTypeFilterUI = (props) => {
     handleChangeBusinessType,
     isSearchMode,
     filters,
-    handleChangeFilters
+    handleChangeFilters,
+    isAppoint
   } = props
   const { loading, error, types } = typesState
   const [, t] = useLanguage()
   const [load, setLoad] = useState(false)
 
   const handleChangeCategory = (category) => {
+    if (isAppoint && category === currentTypeSelected) {
+      handleChangeBusinessType(null)
+      return
+    }
     handleChangeBusinessType && handleChangeBusinessType(category)
   }
 
@@ -48,19 +54,39 @@ const BusinessTypeFilterUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      {isSearchMode ? (
+      {isSearchMode && (
         <SearchTypeContainer id='container'>
           {types.map((type, i) => type.enabled && (
             <Button
               key={type?.id}
-              color={(filters?.business_types?.includes(type?.id) || (type?.id === null && filters?.business_types?.length === 0)) ? 'primary' : 'secondary'}
+              color={(filters?.business_types?.includes(type?.id) || (type?.id === null && filters?.business_types?.length === 0)) ? 'primary' : 'lightGray'}
               onClick={() => handleChangeActiveBusinessType(type)}
             >
-              {t(`BUSINESS_TYPE_${type.name.replace(/\s/g, '_').toUpperCase()}`, type.name)} {filters?.business_types?.includes(type?.id) && 'X'}
+              {t(`BUSINESS_TYPE_${type.name.replace(/\s/g, '_').toUpperCase()}`, type.name)} {filters?.business_types?.includes(type?.id) && <Close />}
             </Button>
           ))}
         </SearchTypeContainer>
-      ) : (
+      )}
+      {isAppoint && (
+        <SearchTypeContainer id='container'>
+          {loading ? (
+            [...Array(6)].map((_, i) => (
+              <Skeleton id='skeleton' key={i} height={28} width={70} />
+            ))
+          ) : (
+            types.map((type, i) => type.enabled && (
+              <Button
+                key={type?.id}
+                color={(type.id === currentTypeSelected) ? 'primary' : 'lightGray'}
+                onClick={() => handleChangeCategory(type.id)}
+              >
+                {t(`BUSINESS_TYPE_${type.name.replace(/\s/g, '_').toUpperCase()}`, type.name)} {(currentTypeSelected && (type.id === currentTypeSelected)) && <Close />}
+              </Button>
+            ))
+          )}
+        </SearchTypeContainer>
+      )}
+      {(!isSearchMode && !isAppoint) && (
         <TypeContainer id='container'>
           {loading && (
             <Tabs variant='primary'>

@@ -64,7 +64,9 @@ export const BusinessListingSearchUI = (props) => {
     handleSearchbusinessAndProducts,
     brandList,
     onRedirectPage,
-    onProductRedirect
+    onProductRedirect,
+    handleUpdateBusinessList,
+    handleUpdateProducts
   } = props
 
   const [orderState] = useOrder()
@@ -267,6 +269,7 @@ export const BusinessListingSearchUI = (props) => {
                       isBusinessOpen={business.open}
                       handleCustomClick={onBusinessClick}
                       orderType={orderState?.options?.type}
+                      handleUpdateBusinessList={handleUpdateBusinessList}
                       firstCard={i === 0 && width > 681}
                     />
                   ))}
@@ -347,6 +350,7 @@ export const BusinessListingSearchUI = (props) => {
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
                           businessId={business?.id}
+                          handleUpdateProducts={(productId, changes) => handleUpdateProducts(productId, category?.id, business?.id, changes)}
                         />
                       )))}
                     </AutoScroll>

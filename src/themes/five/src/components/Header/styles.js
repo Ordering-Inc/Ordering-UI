@@ -21,8 +21,8 @@ export const LogoHeader = styled.div`
   cursor: pointer;
 
   img {
-    width: 35px;
-    height: 45px;
+    width: ${props => props.imgW ?? '35px'};
+    height: ${props => props.imgH ?? '45px'};
     margin: 0;
     vertical-align: middle;
     margin-left: 10px;
@@ -33,13 +33,15 @@ export const LogoHeader = styled.div`
     `}
 
     @media (min-width: 768px) {
-      width: 150px;
+      width: ${props => props.imgW ?? '150px'};
     }
   }
 
-  img:nth-child(1) {
-    display: none;
-  }
+  ${props => !props.disabledResponsive && css`
+    img:nth-child(1) {
+      display: none;
+    }
+  `}
 
   @media (min-width: 768px) {
     img:nth-child(1) {

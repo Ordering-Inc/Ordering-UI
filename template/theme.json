@@ -125,6 +125,9 @@
   "layouts": {
     "business_view": {
       "components": {
+        "layout": {
+          "type": "original"
+        },
         "cart": {
           "hidden": false,
           "components": {
