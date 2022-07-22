@@ -81,10 +81,34 @@ export const SearchTypeContainer = styled.div`
   position: relative;
   flex-wrap: wrap;
   justify-content: center;
+  width: calc(100% + 10px);
+  margin-left: -5px;
+
   button {
-    overflow: hidden;
-    margin-right: 10px;
-    margin-top: 10px;
     border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    line-height: 24px;
+    margin: 10px 5px 0px 5px;
+
+    svg {
+      margin-left: 5px;
+      font-size: 12px;
+      ${props => props.theme.rtl && css`
+        margin-right: 5px;
+        margin-left: 0px;
+      `}
+    }
+  }
+
+  span {
+    margin-right: 10px;
+    border-radius: 50px;
+    ${props => props.theme.rtl && css`
+      margin-left: 10px;
+      margin-right: 0px;
+    `}
   }
 `

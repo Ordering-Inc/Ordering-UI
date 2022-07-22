@@ -187,13 +187,15 @@ export const BusinessItemAccordion = (props) => {
                       </>
                     )}
                   </div>
-                  <span
-                    ref={changeStore}
-                    onClick={handleChangeStore}
-                    className='change-store'
-                  >
-                    {t('CHANGE_STORE', 'Change store')}
-                  </span>
+                  {handleChangeStore && (
+                    <span
+                      ref={changeStore}
+                      onClick={handleChangeStore}
+                      className='change-store'
+                    >
+                      {t('CHANGE_STORE', 'Change store')}
+                    </span>
+                  )}
                 </ContentInfo>
               </BusinessInfo>
               {isClosed && !isStore && (

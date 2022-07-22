@@ -82,6 +82,7 @@ const PaymentOptionsUI = (props) => {
     errorCash,
     isLoading,
     isDisabled,
+    useKioskApp,
     paymethodData,
     paymethodsList,
     setPaymethodData,
@@ -105,6 +106,10 @@ const PaymentOptionsUI = (props) => {
 
   const stripeDirectMethods = ['stripe_direct', ...methodsPay]
 
+  const includeKioskPaymethods = ['cash', 'card_delivery']
+
+  const supportedMethods = paymethodsList.paymethods.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
+
   const handlePaymentMethodClick = (paymethod) => {
     if (cart?.balance > 0) {
       const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod?.gateway)
@@ -125,10 +130,10 @@ const PaymentOptionsUI = (props) => {
   }
 
   useEffect(() => {
-    if (paymethodsList.paymethods.length === 1) {
-      handlePaymethodClick && handlePaymethodClick(paymethodsList.paymethods[0])
+    if (supportedMethods.length === 1) {
+      handlePaymethodClick && handlePaymethodClick(supportedMethods[0])
     }
-  }, [paymethodsList.paymethods])
+  }, [supportedMethods])
 
   useEffect(() => {
     if (paymethodSelected?.gateway !== 'cash' && errorCash) {
@@ -162,8 +167,8 @@ const PaymentOptionsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
-          {paymethodsList.paymethods.length > 0 && (
-            paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
+          {supportedMethods.length > 0 && (
+            supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
               <React.Fragment key={paymethod.id}>
                 {
                   (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
@@ -201,7 +206,7 @@ const PaymentOptionsUI = (props) => {
 
           {!(paymethodsList.loading || isLoading) &&
             !paymethodsList.error &&
-            (!paymethodsList?.paymethods || paymethodsList.paymethods.length === 0) &&
+            (!paymethodsList?.paymethods || supportedMethods.length === 0) &&
             (
               <p>{t('NO_PAYMENT_METHODS', 'No payment methods!')}</p>
             )}

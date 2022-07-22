@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const Container = styled.div`
   ${({ zx }) => zx && css`
@@ -133,6 +134,20 @@ export const ModalIcon = styled.span`
   `}
   svg{
     /* background: rgba(255,255,255,0.5); */
+    transition: all .2s ease-in;
+
+    &:hover {
+      background-color: #1507260a;
+
+      > svg {
+        color:  #151b26;
+      }
+    }
+
+    &:active {
+      background-color: ${() => darken(0.07, '#CCC')};
+    }
+  
     border-radius: 50%;
   }
 

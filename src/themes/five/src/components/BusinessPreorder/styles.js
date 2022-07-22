@@ -169,6 +169,10 @@ export const TimeItem = styled.div`
     color: ${props => props.theme.colors.primary};
   `}
 
+  ${({ isDisabled }) => isDisabled && css`
+    pointer-events: none;
+  `}
+
   span {
     font-size: 14px;
   }

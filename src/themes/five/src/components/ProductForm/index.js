@@ -115,6 +115,7 @@ const ProductOptionsUI = (props) => {
   const [pricePerWeightUnit, setPricePerWeightUnit] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
+  const galleryLength = gallery?.length + videoGallery?.length
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -337,55 +338,57 @@ const ProductOptionsUI = (props) => {
                     </>
                   )}
                 </Swiper>
-                <Swiper
-                  onSwiper={setThumbsSwiper}
-                  spaceBetween={20}
-                  slidesPerView={5}
-                  breakpoints={{
-                    0: {
-                      slidesPerView: 3,
-                      spaceBetween: 20
-                    },
-                    300: {
-                      slidesPerView: 4,
-                      spaceBetween: 20
-                    },
-                    400: {
-                      slidesPerView: 5,
-                      spaceBetween: 20
-                    },
-                    550: {
-                      slidesPerView: 6,
-                      spaceBetween: 20
-                    },
-                    769: {
-                      slidesPerView: 6,
-                      spaceBetween: 20
-                    }
-                  }}
-                  freeMode
-                  watchSlidesProgress
-                  className='product-thumb'
-                  watchOverflow
-                >
-                  {gallery.map((img, i) => (
-                    <SwiperSlide key={i}>
-                      <img src={img} alt='' />
-                    </SwiperSlide>
-                  ))}
-                  {videoGallery && videoGallery.length > 0 && (
-                    <>
-                      {videoGallery.map((video, j) => (
-                        <SwiperSlide key={j}>
-                          <VideoGalleryWrapper>
-                            <img src={getOverFlowImage(video)} alt='' />
-                            <MdcPlayCircleOutline />
-                          </VideoGalleryWrapper>
-                        </SwiperSlide>
-                      ))}
-                    </>
-                  )}
-                </Swiper>
+                {galleryLength > 2 && (
+                  <Swiper
+                    onSwiper={setThumbsSwiper}
+                    spaceBetween={20}
+                    slidesPerView={5}
+                    breakpoints={{
+                      0: {
+                        slidesPerView: 3,
+                        spaceBetween: 20
+                      },
+                      300: {
+                        slidesPerView: 4,
+                        spaceBetween: 20
+                      },
+                      400: {
+                        slidesPerView: 5,
+                        spaceBetween: 20
+                      },
+                      550: {
+                        slidesPerView: 6,
+                        spaceBetween: 20
+                      },
+                      769: {
+                        slidesPerView: 6,
+                        spaceBetween: 20
+                      }
+                    }}
+                    freeMode
+                    watchSlidesProgress
+                    className='product-thumb'
+                    watchOverflow
+                  >
+                    {gallery.map((img, i) => (
+                      <SwiperSlide key={i}>
+                        <img src={img} alt='' />
+                      </SwiperSlide>
+                    ))}
+                    {videoGallery && videoGallery.length > 0 && (
+                      <>
+                        {videoGallery.map((video, j) => (
+                          <SwiperSlide key={j}>
+                            <VideoGalleryWrapper>
+                              <img src={getOverFlowImage(video)} alt='' />
+                              <MdcPlayCircleOutline />
+                            </VideoGalleryWrapper>
+                          </SwiperSlide>
+                        ))}
+                      </>
+                    )}
+                  </Swiper>
+                )}
               </SwiperWrapper>
             </WrapperImage>
             <ProductInfo>
@@ -661,7 +664,7 @@ const ProductOptionsUI = (props) => {
           <Modal
             open={modalIsOpen}
             onClose={() => closeModal()}
-            width='50%'
+            width='760px'
           >
             {modalPageToShow === 'login' && (
               <LoginForm
@@ -684,6 +687,7 @@ const ProductOptionsUI = (props) => {
                 }
                 useLoginByCellphone
                 isPopup
+                useKioskApp={props.useKioskApp}
               />
             )}
             {modalPageToShow === 'signup' && (

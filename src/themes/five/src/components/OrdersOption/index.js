@@ -59,7 +59,8 @@ const OrdersOptionUI = (props) => {
     products,
     hideOrders,
     onProductRedirect,
-    businessesSearchList
+    businessesSearchList,
+    handleUpdateProducts
   } = props
 
   const [, t] = useLanguage()
@@ -227,7 +228,11 @@ const OrdersOptionUI = (props) => {
       )}
 
       {isProducts && (
-        <PreviousProductsOrdered products={products} onProductClick={onProductClick} />
+        <PreviousProductsOrdered
+          products={products}
+          onProductClick={onProductClick}
+          handleUpdateProducts={handleUpdateProducts}
+        />
       )}
 
       {(isCustomLayout ? (loadingOrders || loading || isBusinessesLoading) : showSkeletons) && (

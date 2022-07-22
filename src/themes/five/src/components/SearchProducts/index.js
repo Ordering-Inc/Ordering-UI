@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useLanguage, useEvent } from 'ordering-components'
 // import { Input } from '../../styles/Inputs'
 import { SearchBar } from '../SearchBar'
@@ -30,9 +30,14 @@ export const SearchProducts = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [events] = useEvent()
+  const searchRef = useRef()
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
   }
+
+  useEffect(() => {
+    searchRef?.current?.focus && searchRef.current.focus()
+  }, [searchRef?.current])
 
   return (
     <Container>
@@ -50,6 +55,7 @@ export const SearchProducts = (props) => {
               search={searchValue}
               placeholder={t('SEARCH_PRODUCTS', 'Search Products')}
               lazyLoad={business?.lazy_load_products_recommended}
+              forwardRef={searchRef}
             />
           </SearchBarWrapper>
           <CancelButton

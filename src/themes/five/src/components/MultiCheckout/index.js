@@ -31,7 +31,8 @@ import {
   DriverTipDivider,
   MultiCartPriceContainer,
   PaymentMethodContainer,
-  WrapperPlaceOrderButton
+  WrapperPlaceOrderButton,
+  WarningText
 } from './styles'
 
 const mapConfigs = {
@@ -65,7 +66,8 @@ const MultiCheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id)
+  const maximumCarts = 5
+  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || openCarts.length > maximumCarts
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -220,6 +222,11 @@ const MultiCheckoutUI = (props) => {
                 {placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
               </Button>
             </WrapperPlaceOrderButton>
+            {openCarts.length > maximumCarts && (
+              <WarningText>
+                {t('WARNING_MAXIMUM_CARTS', 'You can only pay for a maximum of 5 carts, please discard one or more to continue.')}
+              </WarningText>
+            )}
           </WrapperRightContainer>
 
           <Alert

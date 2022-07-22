@@ -118,8 +118,8 @@ const LoginFormUI = (props) => {
 
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
-    configs?.google_login_client_id?.value ||
-    configs?.apple_login_client_id?.value ||
+    (configs?.google_login_client_id?.value && googleLoginEnabled) ||
+    (configs?.apple_login_client_id?.value && appleLoginEnabled) ||
     (loginTab === 'cellphone' && (configs?.twilio_service_enabled?.value === 'true' ||
       configs?.twilio_service_enabled?.value === '1'))
   const hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled
@@ -557,7 +557,7 @@ const LoginFormUI = (props) => {
                 props.afterMidComponents?.map((MidComponent, i) => (
                   <MidComponent key={i} {...props} />))
               }
-              {!loginWithOtpState && loginTab !== 'otp' && (
+              {!loginWithOtpState && loginTab !== 'otp' && elementLinkToForgotPassword && (
                 <RedirectLink isPopup={isPopup}>
                   <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
                   {elementLinkToForgotPassword}
@@ -602,7 +602,7 @@ const LoginFormUI = (props) => {
               {elementLinkToSignup}
             </RedirectLink>
           )}
-          {hasSocialLogin && hasSocialEnabled && (
+          {!props.isDisableButtons && hasSocialLogin && hasSocialEnabled && (
             <LoginDivider isPopup={isPopup}>
               <DividerLine />
               <p>{t('OR', 'or')}</p>
@@ -695,9 +695,14 @@ const LoginFormUI = (props) => {
 }
 
 export const LoginForm = (props) => {
+  const isKioskApp = props.useKioskApp
   const loginControllerProps = {
     ...props,
-    isRecaptchaEnable: true,
+    isRecaptchaEnable: !isKioskApp,
+    elementLinkToForgotPassword: isKioskApp ? null : props.elementLinkToForgotPassword,
+    useLoginByCellphone: isKioskApp ? null : props.useLoginByCellphone,
+    elementLinkToSignup: isKioskApp ? null : props.elementLinkToSignup,
+    isDisableButtons: isKioskApp ? true : props.isDisableButtons,
     UIComponent: LoginFormUI
   }
   return <LoginFormController {...loginControllerProps} />

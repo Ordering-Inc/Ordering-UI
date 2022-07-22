@@ -35,6 +35,7 @@ const BusinessProductsListUI = (props) => {
     onProductClick,
     handleSearchRedirect,
     featured,
+    useKioskApp,
     searchValue,
     isCartOnProductsList,
     handleClearSearch,
@@ -131,6 +132,7 @@ const BusinessProductsListUI = (props) => {
                       key={i}
                       isSoldOut={(product.inventoried && !product.quantity)}
                       product={product}
+                      useKioskApp={useKioskApp}
                       businessId={businessId}
                       onProductClick={onProductClick}
                       isCartOnProductsList={isCartOnProductsList}
@@ -156,6 +158,7 @@ const BusinessProductsListUI = (props) => {
                           key={i}
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
+                          useKioskApp={useKioskApp}
                           businessId={businessId}
                           onProductClick={onProductClick}
                           isCartOnProductsList={isCartOnProductsList}
@@ -230,6 +233,7 @@ const BusinessProductsListUI = (props) => {
                                 businessId={businessId}
                                 product={product}
                                 onProductClick={onProductClick}
+                                useKioskApp={useKioskApp}
                                 isCartOnProductsList={isCartOnProductsList}
                                 handleUpdateProducts={handleUpdateProducts}
                                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
@@ -246,6 +250,7 @@ const BusinessProductsListUI = (props) => {
                                   businessId={businessId}
                                   product={product}
                                   onProductClick={onProductClick}
+                                  useKioskApp={useKioskApp}
                                   isCartOnProductsList={isCartOnProductsList}
                                   handleUpdateProducts={handleUpdateProducts}
                                   productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
@@ -276,6 +281,7 @@ const BusinessProductsListUI = (props) => {
                                 onProductClick={onProductClick}
                                 isCartOnProductsList={isCartOnProductsList}
                                 handleUpdateProducts={handleUpdateProducts}
+                                useKioskApp={useKioskApp}
                                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                               />
                             ))}

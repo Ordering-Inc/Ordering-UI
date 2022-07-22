@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils } from 'ordering-components'
+import CgSearch from '@meronex/icons/cg/CgSearch'
 import { Cart3 } from 'react-bootstrap-icons'
 
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
@@ -28,11 +29,16 @@ import {
   BusinessCartContent,
   EmptyCart,
   EmptyBtnWrapper,
-  WrapperSearch
+  WrapperSearch,
+  ProfessionalFilterWrapper,
+  WrapperSearchAbsolute
 } from './styles'
 
+import { SearchProducts as SearchProductsOriginal } from '../../../../../themes/five/src/components/SearchProducts'
 import { SearchProducts as SearchProductsOld } from '../../../../../components/RenderProductsLayout/SearchProducts'
 import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/components/BusinessProductsListing/SearchProducts'
+import { ProfessionalFilter } from '../ProfessionalFilter'
+import { SearchIconWrapper } from '../BusinessBasicInformation/styles'
 
 const layoutOne = 'groceries'
 
@@ -64,10 +70,13 @@ export const RenderProductsLayout = (props) => {
     setOpenBusinessInformation,
     handleCartOpen,
     isCustomLayout,
+    useKioskApp,
     setSubcategoriesSelected,
     subcategoriesSelected,
     isLazy,
-    handleUpdateProducts
+    handleUpdateProducts,
+    handleChangeProfessionalSelected,
+    professionalSelected
   } = props
 
   const theme = useTheme()
@@ -75,8 +84,9 @@ export const RenderProductsLayout = (props) => {
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
   const [isCartModal, setisCartModal] = useState(false)
+  const [openSearchProducts, setOpenSearchProducts] = useState(false)
 
-  const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
+  const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1') && !useKioskApp
   const BusinessBasicInformationComponent =
     theme?.layouts?.business_view?.components?.basic_information?.components?.layout?.type === 'red'
       ? BusinessBasicInformationRed
@@ -112,7 +122,7 @@ export const RenderProductsLayout = (props) => {
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
           <div className='bp-list'>
-            {!isCustomLayout && (
+            {!isCustomLayout && !useKioskApp && (
               <BusinessBasicInformationComponent
                 {...props}
                 businessState={businessState}
@@ -127,7 +137,7 @@ export const RenderProductsLayout = (props) => {
                 sortByValue={sortByValue}
               />
             )}
-            {!errorQuantityProducts && SearchProductsComponent && (
+            {!errorQuantityProducts && SearchProductsComponent && !useKioskApp && (
               <>
                 <WrapperSearch>
                   <SearchProductsComponent
@@ -144,21 +154,63 @@ export const RenderProductsLayout = (props) => {
             {!businessLayout.layoutOne && (
               <BusinessContent isCustomLayout={isCustomLayout}>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
-                  {!(business?.categories?.length === 0 && !categoryId) && (
-                    <BusinessLayoutCategories
-                      categories={[
-                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                        ...business?.categories.sort((a, b) => a.rank - b.rank)
-                      ]}
-                      categorySelected={categorySelected}
-                      onClickCategory={onClickCategory}
-                      featured={featuredProducts}
-                      openBusinessInformation={openBusinessInformation}
-                      business={business}
-                      currentCart={currentCart}
-                    />
-                  )}
+                  <div style={{ position: 'relative' }}>
+                    {business?.professionals?.length > 0 && (
+                      <ProfessionalFilterWrapper>
+                        <ProfessionalFilter
+                          professionals={business?.professionals}
+                          professionalSelected={professionalSelected}
+                          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                        />
+                      </ProfessionalFilterWrapper>
+                    )}
+                    {!(business?.categories?.length === 0 && !categoryId) && (
+                      <BusinessLayoutCategories
+                        categories={[
+                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                          ...business?.categories.sort((a, b) => a.rank - b.rank)
+                        ]}
+                        categorySelected={categorySelected}
+                        onClickCategory={onClickCategory}
+                        featured={featuredProducts}
+                        openBusinessInformation={openBusinessInformation}
+                        business={business}
+                        currentCart={currentCart}
+                        wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
+                      />
+                    )}
+                    {useKioskApp && (
+                      <WrapperSearchAbsolute>
+                        <SearchIconWrapper
+                          onClick={() => setOpenSearchProducts(true)}
+                        >
+                          <CgSearch />
+                        </SearchIconWrapper>
+                        {openSearchProducts && (
+                          <SearchProductsOriginal
+                            {...props}
+                            businessState={businessState}
+                            setOpenBusinessInformation={setOpenBusinessInformation}
+                            openBusinessInformation={openBusinessInformation}
+                            handleChangeSearch={handleChangeSearch}
+                            searchValue={searchValue}
+                            sortByOptions={sortByOptions}
+                            handleChangeSortBy={handleChangeSortBy}
+                            categoryState={categoryState}
+                            errorQuantityProducts={errorQuantityProducts}
+                            sortByValue={sortByValue}
+                            onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                            business={businessState.business}
+                            onClose={() => {
+                              handleChangeSearch('')
+                              setOpenSearchProducts(false)
+                            }}
+                          />
+                        )}
+                      </WrapperSearchAbsolute>
+                    )}
+                  </div>
                   {/* {windowSize.width < 500 && (
                     <MobileCartViewWrapper>
                       <span>{currentCart?.products?.length > 0 ? parsePrice(currentCart?.total) : parsePrice(0)}</span>
@@ -175,6 +227,7 @@ export const RenderProductsLayout = (props) => {
                       isLazy={isLazy}
                       category={categorySelected}
                       categoryState={categoryState}
+                      useKioskApp={useKioskApp}
                       businessId={business?.id}
                       errors={errors}
                       onProductClick={onProductClick}
@@ -190,6 +243,8 @@ export const RenderProductsLayout = (props) => {
                       subcategoriesSelected={subcategoriesSelected}
                       onClickCategory={onClickCategory}
                       handleUpdateProducts={handleUpdateProducts}
+                      professionalSelected={professionalSelected}
+                      handleChangeProfessionalSelected={handleChangeProfessionalSelected}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
@@ -203,6 +258,7 @@ export const RenderProductsLayout = (props) => {
                             isStore
                             isCustomMode
                             isForceOpenCart
+                            useKioskApp={useKioskApp}
                             cart={currentCart}
                             isCartPending={currentCart?.status === 2}
                             isProducts={currentCart.products.length}
@@ -273,6 +329,8 @@ export const RenderProductsLayout = (props) => {
                       business={business}
                       currentCart={currentCart}
                       handleUpdateProducts={handleUpdateProducts}
+                      professionalSelected={professionalSelected}
+                      handleChangeProfessionalSelected={handleChangeProfessionalSelected}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
@@ -323,6 +381,7 @@ export const RenderProductsLayout = (props) => {
                 isCustomMode
                 isForceOpenCart
                 cart={currentCart}
+                useKioskApp={useKioskApp}
                 isCartPending={currentCart?.status === 2}
                 isProducts={currentCart.products.length}
                 isCartOnProductsList={isCartOnProductsList}
