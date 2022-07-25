@@ -549,6 +549,7 @@ const CartUI = (props) => {
           </Modal>
           {(openUpselling || isUpselling) && (
             <UpsellingPage
+              useKioskApp={useKioskApp}
               businessId={cart.business_id}
               isCustomMode={isCustomMode}
               cartProducts={cart.products}
