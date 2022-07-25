@@ -18,7 +18,7 @@ import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { HeaderOption } from '../../../HeaderOption'
 import { Modal } from '../../../Modal'
 import { LoginForm } from '../../../LoginForm'
-import { OrderTypeSelectorContent } from '../../../OrderTypeSelectorContent'
+import { OrderTypeSelectorContent } from '../../../OrderTypeSelectorContent/layouts/Kiosk'
 import { OrderTypeSelectorHeader } from '../../../OrderTypeSelectorHeader'
 
 export const Header = (props) => {
@@ -90,6 +90,7 @@ export const Header = (props) => {
         <Menu className='left-header'>
           {windowSize.width > 768 ? (
             <OrderTypeSelectorHeader
+              isFullClick
               containerStyle={{ margin: 'auto' }}
               orderTypeList={orderTypeList}
               onClick={() => openModal('delivery')}
@@ -130,6 +131,7 @@ export const Header = (props) => {
         >
           {modalSelected === 'delivery' && (
             <OrderTypeSelectorContent
+              title={t('PLEASE_SELECT_YOUR_ORDER_TYPE', 'Please select your order type')}
               onClose={() => setModalIsOpen(false)}
               configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
               defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}

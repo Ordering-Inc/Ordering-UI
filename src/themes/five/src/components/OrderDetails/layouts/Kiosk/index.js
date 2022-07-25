@@ -11,7 +11,6 @@ import {
   useToast, ToastType,
   useApi
 } from 'ordering-components'
-import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import AiFillCheckCircle from '@meronex/icons/ai/AiFillCheckCircle'
 
 import { Button } from '../../../../styles/Buttons'
@@ -24,15 +23,8 @@ import {
   Container,
   WrapperContainer,
   HeaderInfo,
-  OrderBusiness,
-  BusinessWrapper,
-  BusinessInfo,
   OrderInfo,
   StatusBar,
-  OrderCustomer,
-  PhotoBlock,
-  OrderDriver,
-  WrapperDriver,
   OrderProducts,
   SkeletonBlockWrapp,
   SkeletonBlock,
@@ -40,7 +32,6 @@ import {
   WrapperRightContainer,
   SkeletonWrapper,
   TitleContainer,
-  SectionTitleContainer,
   HeaderTitle,
   WrapperActions,
   WrapperActionsInput,
@@ -92,16 +83,6 @@ const OrderDetailsUI = (props) => {
   const showDeliveryType = !theme?.layouts?.confirmation?.components?.delivery_type?.hidden
   const showDeliveryDate = !theme?.layouts?.confirmation?.components?.delivery_date?.hidden
   const showDeliveryProgress = !theme?.layouts?.confirmation?.components?.delivery_progress?.hidden
-  const showBusinessPhone = !theme?.layouts?.confirmation?.components?.business_information?.components?.phone?.hidden
-  const showBusinessEmail = !theme?.layouts?.confirmation?.components?.business_information?.components?.email?.hidden
-  const showBusinessAddress = !theme?.layouts?.confirmation?.components?.business_information?.components?.address?.hidden
-  const showDriverName = !theme?.layouts?.confirmation?.components?.driver_information?.components?.name?.hidden
-  const showDriverPhone = !theme?.layouts?.confirmation?.components?.driver_information?.components?.phone?.hidden
-  const showDriverEmail = !theme?.layouts?.confirmation?.components?.driver_information?.components?.email?.hidden
-  const showDriverPhoto = !theme?.layouts?.confirmation?.components?.driver_information?.components?.photo?.hidden
-  const showCustomerPhone = !theme?.layouts?.confirmation?.components?.customer_information?.components?.phone?.hidden
-  const showCustomerAddress = !theme?.layouts?.confirmation?.components?.customer_information?.components?.address?.hidden
-  const showCustomerEmail = !theme?.layouts?.confirmation?.components?.customer_information?.components?.email?.hidden
 
   const locations = [
     { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
@@ -194,14 +175,14 @@ const OrderDetailsUI = (props) => {
   const OrderHeaderInfoSection = () => {
     return (
       <HeaderInfo>
+        {order?.on_behalf_of && (
+          <p className='behalf' style={{ marginBottom: 0, fontWeight: 'bold' }}>
+            {`${t('THANK_YOU', 'Thank you')} ${order?.on_behalf_of}`}
+          </p>
+        )}
         <h1>
           {t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Thank you for your order')}
         </h1>
-        {order?.on_behalf_of && (
-          <p className='behalf' style={{ marginTop: 0 }}>
-            <strong>{t('ON_BEHALF', 'On behalf')}:</strong>{` ${order?.on_behalf_of}`}
-          </p>
-        )}
       </HeaderInfo>
     )
   }
@@ -256,81 +237,6 @@ const OrderDetailsUI = (props) => {
                 </>
               )}
             </OrderInfo>
-            <OrderBusiness>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '50%'
-                }}
-              >
-                <BusinessWrapper
-                  w='calc(100% - 20px)'
-                >
-                  <img src={order?.business?.logo} />
-                  <BusinessInfo>
-                    <h2>{order?.business?.name}</h2>
-                    {showBusinessEmail && (
-                      <p>{order?.business?.email}</p>
-                    )}
-                    {showBusinessPhone && (
-                      <p>{order?.business?.cellphone}</p>
-                    )}
-                    {showBusinessAddress && (
-                      <p>{order?.business?.address}</p>
-                    )}
-                  </BusinessInfo>
-                </BusinessWrapper>
-              </div>
-            </OrderBusiness>
-            <OrderCustomer>
-              <BusinessWrapper>
-                {order?.customer?.photo && (
-                  <img src={order?.customer?.photo} />
-                )}
-                <BusinessInfo>
-                  <p>{order?.customer?.name} {order?.customer?.lastname}</p>
-                  {showCustomerEmail && (
-                    <p>{order?.customer?.email}</p>
-                  )}
-                  {showCustomerPhone && (
-                    <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
-                  )}
-                  {showCustomerAddress && (
-                    <p>{order?.customer?.address}</p>
-                  )}
-                </BusinessInfo>
-              </BusinessWrapper>
-            </OrderCustomer>
-            {order?.driver && (
-              <OrderDriver>
-                <SectionTitleContainer>
-                  <h2>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</h2>
-                </SectionTitleContainer>
-                <WrapperDriver>
-                  {showDriverPhoto && (
-                    <div className='photo'>
-                      {order?.driver?.photo ? (
-                        <PhotoBlock src={order?.driver?.photo} />
-                      ) : (
-                        <RiUser2Fill />
-                      )}
-                    </div>
-                  )}
-                  <div>
-                    {showDriverName && (
-                      <h2>{order?.driver?.name} {order?.driver?.lastname}</h2>
-                    )}
-                    {showDriverEmail && (
-                      <p>{order?.driver?.email}</p>
-                    )}
-                    {showDriverPhone && (
-                      <p>{order?.driver?.cellphone || order?.driver?.phone}</p>
-                    )}
-                  </div>
-                </WrapperDriver>
-              </OrderDriver>
-            )}
           </WrapperLeftContainer>
           <WrapperRightContainer>
             <OrderProducts>

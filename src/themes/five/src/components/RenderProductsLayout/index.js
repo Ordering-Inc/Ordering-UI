@@ -152,7 +152,7 @@ export const RenderProductsLayout = (props) => {
               </>
             )}
             {!businessLayout.layoutOne && (
-              <BusinessContent isCustomLayout={isCustomLayout}>
+              <BusinessContent isCustomLayout={isCustomLayout || useKioskApp}>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
                   <div style={{ position: 'relative' }}>
                     {business?.professionals?.length > 0 && (
@@ -174,6 +174,7 @@ export const RenderProductsLayout = (props) => {
                         categorySelected={categorySelected}
                         onClickCategory={onClickCategory}
                         featured={featuredProducts}
+                        useKioskApp={useKioskApp}
                         openBusinessInformation={openBusinessInformation}
                         business={business}
                         currentCart={currentCart}
@@ -181,7 +182,7 @@ export const RenderProductsLayout = (props) => {
                       />
                     )}
                     {useKioskApp && (
-                      <WrapperSearchAbsolute>
+                      <WrapperSearchAbsolute id='WrapperSearchAbsolute'>
                         <SearchIconWrapper
                           onClick={() => setOpenSearchProducts(true)}
                         >
@@ -249,7 +250,7 @@ export const RenderProductsLayout = (props) => {
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
                 {showCartOnProductList && (
-                  <BusinessCartContainer>
+                  <BusinessCartContainer id='BusinessCartContainer'>
                     <BusinessCartContent maxHeight={window.innerHeight - 100}>
                       {currentCart?.products?.length > 0 ? (
                         <>

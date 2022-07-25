@@ -90,6 +90,7 @@ export const KioskHomeHero = (props) => {
       >
         {modalIsOpen.page === 'types' && (
           <OrderTypeSelectorContent
+            title={t('PLEASE_SELECT_YOUR_ORDER_TYPE', 'Please select your order type')}
             onClose={() => {
               handleActionModal({ isClean: true })
               handleGoToBusiness && handleGoToBusiness()
