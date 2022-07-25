@@ -87,7 +87,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       handleChangeSearch = props.handleChangeSearch,
       handleChangeBusinessType = props.handleChangeBusinessType,
       handleBusinessClick = props.handleBusinessClick,
-      currentPageParam = props.currentPageParam;
+      currentPageParam = props.currentPageParam,
+      businessTypeSelected = props.businessTypeSelected;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -279,6 +280,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   };
 
   var changeBusinessType = function changeBusinessType(category) {
+    if (category === businessTypeSelected) return;
     setNextPage({
       loading: true,
       page: 1

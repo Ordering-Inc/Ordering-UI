@@ -25,7 +25,7 @@ exports.HomeContainer = HomeContainer;
 
 var HeroContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  padding-top: 0px;\n  position: relative;\n\n  ", "\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
-  return bgimage && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-image: url(", ");\n    background-size: contain;\n    object-fit: contain;\n    background-position: center;\n  "])), bgimage);
+  return bgimage && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  background-image: url(", ");\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n  "])), bgimage);
 });
 
 exports.HeroContainer = HeroContainer;

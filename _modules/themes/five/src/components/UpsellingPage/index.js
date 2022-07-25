@@ -217,6 +217,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     closeOnBackdrop: true,
     disableOverflowX: true
   }, actualProduct && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+    useKioskApp: props.useKioskApp,
     product: actualProduct,
     businessId: actualProduct.api.businessId,
     businessSlug: business.slug,

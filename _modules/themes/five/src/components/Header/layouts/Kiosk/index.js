@@ -25,7 +25,7 @@ var _Modal = require("../../../Modal");
 
 var _LoginForm = require("../../../LoginForm");
 
-var _OrderTypeSelectorContent = require("../../../OrderTypeSelectorContent");
+var _Kiosk = require("../../../OrderTypeSelectorContent/layouts/Kiosk");
 
 var _OrderTypeSelectorHeader = require("../../../OrderTypeSelectorHeader");
 
@@ -157,6 +157,7 @@ var Header = function Header(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     className: "left-header"
   }, windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
+    isFullClick: true,
     containerStyle: {
       margin: 'auto'
     },
@@ -188,7 +189,8 @@ var Header = function Header(props) {
       height: '100%',
       maxHeight: '100vh'
     }
-  }, modalSelected === 'delivery' && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorContent.OrderTypeSelectorContent, {
+  }, modalSelected === 'delivery' && /*#__PURE__*/_react.default.createElement(_Kiosk.OrderTypeSelectorContent, {
+    title: t('PLEASE_SELECT_YOUR_ORDER_TYPE', 'Please select your order type'),
     onClose: function onClose() {
       return setModalIsOpen(false);
     },

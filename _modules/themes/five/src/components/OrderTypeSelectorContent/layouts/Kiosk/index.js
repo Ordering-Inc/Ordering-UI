@@ -42,7 +42,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
-  var handleChangeOrderType = props.handleChangeOrderType,
+  var title = props.title,
+      handleChangeOrderType = props.handleChangeOrderType,
       orderTypes = props.orderTypes,
       onClose = props.onClose,
       configTypes = props.configTypes,
@@ -80,7 +81,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     style: {
       overflow: 'hidden'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), orderTypes && (configTypes ? orderTypes.filter(function (type) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, title !== null && title !== void 0 ? title : t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), orderTypes && (configTypes ? orderTypes.filter(function (type) {
     return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
   }) : orderTypes).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListItemContainer, {

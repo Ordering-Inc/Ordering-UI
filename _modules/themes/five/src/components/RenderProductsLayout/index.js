@@ -176,7 +176,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     },
     businessState: businessState
   }))), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
-    isCustomLayout: isCustomLayout
+    isCustomLayout: isCustomLayout || useKioskApp
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, {
     showCartOnProductList: showCartOnProductList
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -200,11 +200,14 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     categorySelected: categorySelected,
     onClickCategory: onClickCategory,
     featured: featuredProducts,
+    useKioskApp: useKioskApp,
     openBusinessInformation: openBusinessInformation,
     business: business,
     currentCart: currentCart,
     wContainerStyle: useKioskApp && 'calc(100% - 50px)'
-  }), useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearchAbsolute, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchIconWrapper, {
+  }), useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearchAbsolute, {
+    id: "WrapperSearchAbsolute"
+  }, /*#__PURE__*/_react.default.createElement(_styles2.SearchIconWrapper, {
     onClick: function onClick() {
       return setOpenSearchProducts(true);
     }
@@ -260,7 +263,9 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleUpdateProducts: handleUpdateProducts,
     professionalSelected: professionalSelected,
     handleChangeProfessionalSelected: handleChangeProfessionalSelected
-  }))), showCartOnProductList && /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, {
+  }))), showCartOnProductList && /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, {
+    id: "BusinessCartContainer"
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, {
     maxHeight: window.innerHeight - 100
   }, (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isStore: true,

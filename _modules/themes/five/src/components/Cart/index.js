@@ -614,6 +614,7 @@ var CartUI = function CartUI(props) {
     products: cart.products,
     useKioskApp: useKioskApp
   })), (openUpselling || isUpselling) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
+    useKioskApp: useKioskApp,
     businessId: cart.business_id,
     isCustomMode: isCustomMode,
     cartProducts: cart.products,

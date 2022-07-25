@@ -169,6 +169,7 @@ var KioskHomeHero = function KioskHomeHero(props) {
       borderRadius: 0
     }
   }, modalIsOpen.page === 'types' && /*#__PURE__*/_react.default.createElement(_Kiosk.OrderTypeSelectorContent, {
+    title: t('PLEASE_SELECT_YOUR_ORDER_TYPE', 'Please select your order type'),
     onClose: function onClose() {
       handleActionModal({
         isClean: true
