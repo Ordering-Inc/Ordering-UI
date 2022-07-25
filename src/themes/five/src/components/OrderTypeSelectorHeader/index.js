@@ -5,9 +5,7 @@ import {
 } from './styles'
 
 export const OrderTypeSelectorHeader = (props) => {
-  const {
-    orderTypeList
-  } = props
+  const { orderTypeList, isFullClick } = props
 
   const [{ configs }] = useConfig()
   const [orderStatus] = useOrder()
@@ -15,26 +13,23 @@ export const OrderTypeSelectorHeader = (props) => {
   const referenceElement = useRef()
 
   return (
-    <div className='order-type' style={props.containerStyle}>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
+    <div
+      className='order-type'
+      style={{
+        ...props.containerStyle,
+        ...(isFullClick && { width: '100%', padding: 0 })
+      }}
+      onClick={isFullClick && props.onClick}
+    >
       <HeaderItem
         ref={referenceElement}
-        onClick={configs?.max_days_preorder?.value === -1 || configs?.max_days_preorder?.value === 0 ? null : props.onClick}
+        onClick={configs?.max_days_preorder?.value === -1 || configs?.max_days_preorder?.value === 0 || isFullClick
+          ? null
+          : props.onClick}
         isHome={props.isHome}
       >
         {(orderTypeList && orderTypeList[orderStatus?.options.type - 1]) || t('DELIVERY', 'Delivery')}
       </HeaderItem>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </div>
   )
 }
