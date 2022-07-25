@@ -44,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessItemAccordion = function BusinessItemAccordion(props) {
-  var _theme$layouts, _theme$layouts$viewSt, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _theme$layouts$viewSt6, _theme$layouts$viewSt7, _theme$layouts2, _theme$layouts2$viewS, _theme$layouts2$viewS2, _theme$layouts2$viewS3, _theme$layouts2$viewS4, _theme$layouts2$viewS5, _theme$layouts2$viewS6, _theme$layouts2$viewS7, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _orderState$options, _props$afterComponent, _props$afterElements;
+  var _configs$cart_change_, _theme$layouts, _theme$layouts$viewSt, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _theme$layouts$viewSt6, _theme$layouts$viewSt7, _theme$layouts2, _theme$layouts2$viewS, _theme$layouts2$viewS2, _theme$layouts2$viewS3, _theme$layouts2$viewS4, _theme$layouts2$viewS5, _theme$layouts2$viewS6, _theme$layouts2$viewS7, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _orderState$options, _props$afterComponent, _props$afterElements;
 
   var uuid = props.uuid,
       isCartPending = props.isCartPending,
@@ -83,6 +83,10 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
   var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)(''),
@@ -105,6 +109,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       cartProductUpdated = _useState8[0],
       setCartProductUpdated = _useState8[1];
 
+  var isBusinessChangeEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$cart_change_ = configs.cart_change_business_validation) === null || _configs$cart_change_ === void 0 ? void 0 : _configs$cart_change_.value) === '1';
   var content = (0, _react.useRef)(null);
   var businessStore = (0, _react.useRef)(null);
   var businessDelete = (0, _react.useRef)(null);
@@ -215,7 +220,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       return handleClearProducts();
     },
     className: "clear-cart"
-  }, t('CLEAR_CART', 'Clear cart')))), handleChangeStore && /*#__PURE__*/_react.default.createElement("span", {
+  }, t('CLEAR_CART', 'Clear cart')))), isBusinessChangeEnabled && handleChangeStore && /*#__PURE__*/_react.default.createElement("span", {
     ref: changeStore,
     onClick: handleChangeStore,
     className: "change-store"
@@ -229,7 +234,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       minHeight: "".concat(setHeight),
       maxHeight: !setActive && '0px'
     }
-  }, isCheckout && handleChangeStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
+  }, isBusinessChangeEnabled && isCheckout && handleChangeStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement("span", {
     ref: changeStore,

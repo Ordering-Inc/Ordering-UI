@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperNotFound = exports.WrapAllCategories = exports.SubCategoriesContainer = exports.RibbonBox = exports.ProductsListing = exports.ProductsContainer = exports.HeaderWrapper = exports.ErrorMessage = exports.DescriptionModalContainer = exports.DescriptionContainer = exports.ContainerButton = exports.CategoryDescription = void 0;
+exports.WrapperNotFound = exports.WrapAllCategories = exports.SubcategorySearchContainer = exports.SubCategoriesContainer = exports.RibbonBox = exports.ProductsListing = exports.ProductsContainer = exports.HeaderWrapper = exports.ErrorMessage = exports.DescriptionModalContainer = exports.DescriptionContainer = exports.ContainerButton = exports.CategoryDescription = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -27,7 +27,10 @@ var ErrorMessage = _styledComponents.default.div(_templateObject2 || (_templateO
 
 exports.ErrorMessage = ErrorMessage;
 
-var ProductsListing = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  margin-bottom: 45px;\n"])));
+var ProductsListing = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  margin-bottom: ", ";\n"])), function (_ref) {
+  var isSubcategorySearch = _ref.isSubcategorySearch;
+  return isSubcategorySearch ? '0px' : '45px';
+});
 
 exports.ProductsListing = ProductsListing;
 
@@ -51,8 +54,8 @@ var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_temp
 
 exports.WrapAllCategories = WrapAllCategories;
 
-var CategoryDescription = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: flex-end;\n    p {\n      margin: 0;\n      color: #909BA9;\n      white-space: pre;\n      max-width: ", ";\n      overflow: hidden;\n      text-overflow: ellipsis;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n      white-space: nowrap;\n    }\n"])), function (_ref) {
-  var maxWidth = _ref.maxWidth;
+var CategoryDescription = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: flex-end;\n    p {\n      margin: 0;\n      color: #909BA9;\n      white-space: pre;\n      max-width: ", ";\n      overflow: hidden;\n      text-overflow: ellipsis;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n      white-space: nowrap;\n    }\n"])), function (_ref2) {
+  var maxWidth = _ref2.maxWidth;
   return maxWidth ? "".concat(maxWidth - 200, "px") : 'initial';
 }, function (props) {
   return props.theme.colors.primary;
@@ -82,14 +85,14 @@ var RibbonBox = _styledComponents.default.div(_templateObject13 || (_templateObj
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 5px;\n  "])));
-}, function (_ref2) {
-  var bgColor = _ref2.bgColor;
-  return bgColor && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
 }, function (_ref3) {
-  var isRoundRect = _ref3.isRoundRect;
-  return isRoundRect && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+  var bgColor = _ref3.bgColor;
+  return bgColor && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
 }, function (_ref4) {
-  var isCapsule = _ref4.isCapsule;
+  var isRoundRect = _ref4.isRoundRect;
+  return isRoundRect && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+}, function (_ref5) {
+  var isCapsule = _ref5.isCapsule;
   return isCapsule && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
 });
 
@@ -99,9 +102,13 @@ var SubCategoriesContainer = _styledComponents.default.div(_templateObject18 || 
 
 exports.SubCategoriesContainer = SubCategoriesContainer;
 
-var ContainerButton = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  button {\n    overflow: hidden;\n    margin-right: 10px;\n    margin-top: 10px;\n    border-radius: 50px;\n    color: ", ";\n  }\n"])), function (_ref5) {
-  var isSelected = _ref5.isSelected;
+var ContainerButton = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  button {\n    overflow: hidden;\n    margin-right: 10px;\n    margin-top: 10px;\n    border-radius: 50px;\n    color: ", ";\n  }\n"])), function (_ref6) {
+  var isSelected = _ref6.isSelected;
   return isSelected ? '#fff' : '#414954';
 });
 
 exports.ContainerButton = ContainerButton;
+
+var SubcategorySearchContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-left: 30px;\n"])));
+
+exports.SubcategorySearchContainer = SubcategorySearchContainer;

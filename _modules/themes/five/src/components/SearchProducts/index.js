@@ -109,7 +109,8 @@ var SearchProducts = function SearchProducts(props) {
     featured: featuredProducts,
     category: categorySelected,
     businessId: business === null || business === void 0 ? void 0 : business.id,
-    handleClearSearch: handleChangeSearch
+    handleClearSearch: handleChangeSearch,
+    isSearchMode: true
   })))), /*#__PURE__*/_react.default.createElement(_styles.BackDropContainer, {
     onClick: onClose
   }));
