@@ -313,10 +313,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
     var productContainer = document.getElementsByClassName('popup-dialog')[0];
     var unselectedFirstSubOption = (_document$getElements = document.getElementsByClassName('error')) === null || _document$getElements === void 0 ? void 0 : _document$getElements[0];
-    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true);
 
     if (unselectedFirstSubOption) {
       productContainer.scrollTop -= 90;
+      unselectedFirstSubOption.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
 
