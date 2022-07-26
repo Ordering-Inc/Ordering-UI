@@ -205,9 +205,9 @@ const ProductOptionsUI = (props) => {
     const productContainer = document.getElementsByClassName('popup-dialog')[0]
     const unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
 
-    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
     if (unselectedFirstSubOption) {
       productContainer.scrollTop -= 90
+      unselectedFirstSubOption.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
