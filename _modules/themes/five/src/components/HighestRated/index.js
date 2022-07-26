@@ -88,14 +88,14 @@ var HighestRatedUI = function HighestRatedUI(props) {
 
     if (!(businessesList !== null && businessesList !== void 0 && (_businessesList$busin2 = businessesList.businesses) !== null && _businessesList$busin2 !== void 0 && _businessesList$busin2.length)) return;
 
-    var ids = _toConsumableArray(favoriteIds);
+    var ids = _toConsumableArray(favoriteIds !== null && favoriteIds !== void 0 ? favoriteIds : []);
 
     businessesList.businesses.forEach(function (business) {
       if (business !== null && business !== void 0 && business.favorite) {
         ids.push(business.id);
       }
     });
-    setFavoriteIds(_toConsumableArray(new Set(ids)));
+    setFavoriteIds && setFavoriteIds(_toConsumableArray(new Set(ids)));
   }, [businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
