@@ -185,7 +185,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     isBusinessesPage: isBusinessesPage
   }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, !(isFavorite && order !== null && order !== void 0 && order.review) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, !isFavorite && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     className: "review",

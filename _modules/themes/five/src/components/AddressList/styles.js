@@ -9,7 +9,9 @@ exports.WrappNotAddresses = exports.TitleFormContainer = exports.TitleAddress = 
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
+var _polished = require("polished");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -104,14 +106,23 @@ var AddressFormContainer = _styledComponents.default.div(_templateObject19 || (_
 
 exports.AddressFormContainer = AddressFormContainer;
 
-var CloseIcon = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  svg{\n    width: 30px;\n    height: 30px;\n  }\n"])));
+var CloseIcon = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 2;\n  ", "\n  ", "\n  svg{\n    /* background: rgba(255,255,255,0.5); */\n    transition: all .2s ease-in;\n\n    &:hover {\n      background-color: #1507260a;\n\n      > svg {\n        color:  #151b26;\n      }\n    }\n\n    &:active {\n      background-color: ", ";\n    }\n  \n    border-radius: 50%;\n  }\n"])), function (props) {
+  var _props$theme6;
+
+  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    right: 25px;\n    left: initial;\n  "])));
+}, function (_ref6) {
+  var isProductForm = _ref6.isProductForm;
+  return isProductForm && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    top: 18px;\n  "])));
+}, function () {
+  return (0, _polished.darken)(0.07, '#CCC');
+});
 
 exports.CloseIcon = CloseIcon;
 
-var TitleFormContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: center;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n"])));
+var TitleFormContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: center;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n"])));
 
 exports.TitleFormContainer = TitleFormContainer;
 
-var TitleAddress = _styledComponents.default.h1(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin: auto;\n  font-size: 24px;\n  margin-bottom: 20px;\n"])));
+var TitleAddress = _styledComponents.default.h1(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin: auto;\n  font-size: 24px;\n  margin-bottom: 20px;\n"])));
 
 exports.TitleAddress = TitleAddress;
