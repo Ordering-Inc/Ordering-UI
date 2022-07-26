@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const AddressListContainer = styled.div`
   display: flex;
@@ -218,10 +219,34 @@ export const AddressFormContainer = styled.div`
 `
 
 export const CloseIcon = styled.div`
+
+  font-size: 30px;
   cursor: pointer;
+  z-index: 2;
+  ${props => props.theme?.rtl && css`
+    right: 25px;
+    left: initial;
+  `}
+  ${({ isProductForm }) => isProductForm && css`
+    top: 18px;
+  `}
   svg{
-    width: 30px;
-    height: 30px;
+    /* background: rgba(255,255,255,0.5); */
+    transition: all .2s ease-in;
+
+    &:hover {
+      background-color: #1507260a;
+
+      > svg {
+        color:  #151b26;
+      }
+    }
+
+    &:active {
+      background-color: ${() => darken(0.07, '#CCC')};
+    }
+  
+    border-radius: 50%;
   }
 `
 
