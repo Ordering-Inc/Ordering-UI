@@ -200,6 +200,7 @@ const UpsellingPageUI = (props) => {
       >
         {actualProduct && (
           <ProductForm
+            useKioskApp={props.useKioskApp}
             product={actualProduct}
             businessId={actualProduct.api.businessId}
             businessSlug={business.slug}

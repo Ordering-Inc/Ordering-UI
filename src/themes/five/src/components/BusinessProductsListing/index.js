@@ -361,7 +361,7 @@ const BusinessProductsListingUI = (props) => {
       </Modal>
 
       <Modal
-        width='760px'
+        width={props.useKioskApp ? '80%' : '760px'}
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
@@ -373,7 +373,7 @@ const BusinessProductsListingUI = (props) => {
         {productModal.loading && !productModal.error && (
           <ProductLoading>
             <SkeletonItem>
-              <Skeleton height={45} count={8} />
+              <Skeleton height={45} count={props.useKioskApp ? 12 : 8} />
             </SkeletonItem>
           </ProductLoading>
         )}
