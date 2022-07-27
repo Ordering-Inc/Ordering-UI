@@ -75,7 +75,8 @@ const SignUpFormUI = (props) => {
     signupData,
     enableReCaptcha,
     closeModal,
-    handleChangePromotions
+    handleChangePromotions,
+    isCustomerMode
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -486,7 +487,7 @@ const SignUpFormUI = (props) => {
           )}
           {Object.keys(configs).length > 0 && (
             configs?.business_signup_allow?.value === '1' || configs?.driver_signup_allow?.value === '1'
-          ) &&
+          ) && !isCustomerMode &&
             (
               <BussinessAndDriverSignUp>
                 {configs?.business_signup_allow?.value === '1' && (
