@@ -178,7 +178,7 @@ const PhoneAutocompleteUI = (props) => {
           saveCustomerUser={saveCustomerUser}
           fieldsNotValid={props.fieldsNotValid}
           useChekoutFileds
-          isCustomerMode={props.isCustomerMode}
+          isCustomerMode
         />
       </Modal>
       <Modal
