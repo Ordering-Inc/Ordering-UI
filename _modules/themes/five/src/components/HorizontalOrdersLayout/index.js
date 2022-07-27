@@ -71,9 +71,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         key: i
       }, props));
     }), orders.length > 0 && !notOrders && ordersToShow.map(function (order) {
-      return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, _extends({
-        key: order.id
-      }, props, {
+      return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, _extends({}, props, {
+        key: order.id,
         order: order
       }));
     }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && !notOrders && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && !notOrders && /*#__PURE__*/_react.default.createElement(_styles.Card, {
@@ -105,9 +104,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
   }, !isBusinessesPage ? /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: activeOrders ? 'activeOrders' : pastOrders ? 'pastOrders' : 'prevOrders'
   }, orders.length > 0 && ordersToShow.map(function (order) {
-    return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, _extends({
-      key: order.id
-    }, props, {
+    return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, _extends({}, props, {
+      key: order.id,
       order: order
     }));
   }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.Card, {

@@ -95,7 +95,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       signupData = props.signupData,
       enableReCaptcha = props.enableReCaptcha,
       closeModal = props.closeModal,
-      handleChangePromotions = props.handleChangePromotions;
+      handleChangePromotions = props.handleChangePromotions,
+      isCustomerMode = props.isCustomerMode;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -442,7 +443,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SIGN_UP', 'Sign up'))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), Object.keys(configs).length > 0 && ((configs === null || configs === void 0 ? void 0 : (_configs$business_sig = configs.business_signup_allow) === null || _configs$business_sig === void 0 ? void 0 : _configs$business_sig.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$driver_signu = configs.driver_signup_allow) === null || _configs$driver_signu === void 0 ? void 0 : _configs$driver_signu.value) === '1') && /*#__PURE__*/_react.default.createElement(_styles.BussinessAndDriverSignUp, null, (configs === null || configs === void 0 ? void 0 : (_configs$business_sig2 = configs.business_signup_allow) === null || _configs$business_sig2 === void 0 ? void 0 : _configs$business_sig2.value) === '1' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), Object.keys(configs).length > 0 && ((configs === null || configs === void 0 ? void 0 : (_configs$business_sig = configs.business_signup_allow) === null || _configs$business_sig === void 0 ? void 0 : _configs$business_sig.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$driver_signu = configs.driver_signup_allow) === null || _configs$driver_signu === void 0 ? void 0 : _configs$driver_signu.value) === '1') && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.BussinessAndDriverSignUp, null, (configs === null || configs === void 0 ? void 0 : (_configs$business_sig2 = configs.business_signup_allow) === null || _configs$business_sig2 === void 0 ? void 0 : _configs$business_sig2.value) === '1' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primaryContrast",
     onClick: function onClick() {
       return handleGoToPage({

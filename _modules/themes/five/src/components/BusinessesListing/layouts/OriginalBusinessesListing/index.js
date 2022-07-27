@@ -267,9 +267,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setFavoriteIds(_toConsumableArray(new Set(ids)));
   }, [businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length]);
 
-  var OrdersSection = function OrdersSection(titleContent) {
+  var OrdersSection = function OrdersSection(_ref) {
     var _getCustomArray;
 
+    var titleContent = _ref.titleContent;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
       horizontal: true,
       isBusinessesPage: true,
