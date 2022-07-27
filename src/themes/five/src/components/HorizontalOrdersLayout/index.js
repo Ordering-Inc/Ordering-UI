@@ -43,8 +43,8 @@ export const HorizontalOrdersLayout = (props) => {
           <BeforeComponent key={i} {...props} />))}
         {orders.length > 0 && !notOrders && ordersToShow.map(order => (
           <SingleOrderCard
-            key={order.id}
             {...props}
+            key={order.id}
             order={order}
           />
         ))}
@@ -87,8 +87,8 @@ export const HorizontalOrdersLayout = (props) => {
           <AutoScroll scrollId={activeOrders ? 'activeOrders' : (pastOrders ? 'pastOrders' : 'prevOrders')}>
             {orders.length > 0 && ordersToShow.map(order => (
               <SingleOrderCard
-                key={order.id}
                 {...props}
+                key={order.id}
                 order={order}
               />
             ))}
