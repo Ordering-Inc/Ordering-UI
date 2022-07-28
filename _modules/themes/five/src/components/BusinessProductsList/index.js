@@ -153,9 +153,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   };
 
   var productsCategorySelected = (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.filter(function (product) {
-    return !subcategoriesSelected.find(function (subcategory) {
+    return !(subcategoriesSelected !== null && subcategoriesSelected !== void 0 && subcategoriesSelected.find(function (subcategory) {
       return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id) === (category === null || category === void 0 ? void 0 : category.id);
-    }) || (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.some(function (subcategory) {
+    })) || (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.some(function (subcategory) {
       return subcategory.id === (product === null || product === void 0 ? void 0 : product.category_id);
     }));
   });

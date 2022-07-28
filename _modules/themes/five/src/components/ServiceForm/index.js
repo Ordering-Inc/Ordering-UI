@@ -169,7 +169,12 @@ var ServiceFormUI = function ServiceFormUI(props) {
       return;
     }
 
-    handleSave();
+    var values = {
+      serviceTime: parseDate(dateSelected, {
+        outputFormat: 'YYYY-MM-DD HH:mm:00'
+      })
+    };
+    handleSave(values);
   };
 
   var isBusyTime = function isBusyTime() {
