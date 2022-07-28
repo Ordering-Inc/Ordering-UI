@@ -97,6 +97,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   var theme = (0, _styledComponents.useTheme)();
   var favoriteRef = (0, _react.useRef)(null);
   var editMode = typeof (product === null || product === void 0 ? void 0 : product.code) !== 'undefined';
+  var isObservedValidation = isObserved || useKioskApp;
   var removeToBalance = editMode ? product === null || product === void 0 ? void 0 : product.quantity : 0;
   var cartProducts = Object.values(orderState.carts).reduce(function (products, _cart) {
     return [].concat(_toConsumableArray(products), _toConsumableArray(_cart === null || _cart === void 0 ? void 0 : _cart.products));
@@ -128,7 +129,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     isCartOnProductsList: isCartOnProductsList,
     style: useCustomFunctionality && customStyle,
     className: "product-card"
-  }, isObserved && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
+  }, isObservedValidation && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0
   }, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
