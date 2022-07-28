@@ -43,6 +43,7 @@ const SingleProductCardUI = (props) => {
   const favoriteRef = useRef(null)
 
   const editMode = typeof product?.code !== 'undefined'
+  const isObservedValidation = isObserved || useKioskApp
 
   const removeToBalance = editMode ? product?.quantity : 0
 
@@ -78,7 +79,7 @@ const SingleProductCardUI = (props) => {
       style={useCustomFunctionality && customStyle}
       className='product-card'
     >
-      {isObserved && (
+      {isObservedValidation && (
         <>
           {!useCustomFunctionality && (
             <>
