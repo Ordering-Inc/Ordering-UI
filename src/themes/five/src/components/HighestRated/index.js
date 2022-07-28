@@ -38,13 +38,13 @@ const HighestRatedUI = (props) => {
 
   useEffect(() => {
     if (!businessesList?.businesses?.length) return
-    const ids = [...favoriteIds]
+    const ids = [...(favoriteIds ?? [])]
     businessesList.businesses.forEach(business => {
       if (business?.favorite) {
         ids.push(business.id)
       }
     })
-    setFavoriteIds([...new Set(ids)])
+    setFavoriteIds && setFavoriteIds([...new Set(ids)])
   }, [businessesList?.businesses?.length])
 
   return (
