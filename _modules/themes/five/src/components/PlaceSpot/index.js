@@ -91,7 +91,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
   var vehicleInputAllowed = [4, 5];
   var currentOrderType = isCheckout ? orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type : cart === null || cart === void 0 ? void 0 : cart.delivery_type;
   var isEatin = currentOrderType === 3;
-  var isDriveThru = currentOrderType === 4;
+  var isDriveThru = currentOrderType === 5;
   var placeholderText = isEatin ? t('EATIN_SPOT_NUMBER', 'Table number') : isDriveThru ? t('DRIVE_THRU_SPOT_NUMBER', 'Drive thru lane') : t('CURBSIDE_SPOT_NUMBER', 'Spot number');
   var vehicleTypeList = [{
     key: 'car',
