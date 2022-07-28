@@ -205,9 +205,9 @@ const ProductOptionsUI = (props) => {
     const productContainer = document.getElementsByClassName('popup-dialog')[0]
     const unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
 
-    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
     if (unselectedFirstSubOption) {
       productContainer.scrollTop -= 90
+      unselectedFirstSubOption.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
@@ -276,52 +276,87 @@ const ProductOptionsUI = (props) => {
   }, [product])
 
   return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <ProductContainer className='product-container' ref={productContainerRef}>
-        {loading && !error && (
-          <SkeletonBlock width={90}>
-            <Skeleton variant='rect' height={50} />
-            <Skeleton variant='rect' height={50} />
-            <Skeleton variant='rect' height={200} />
-          </SkeletonBlock>
-        )}
+    <ProductContainer
+      className='product-container'
+      ref={productContainerRef}
+      useKioskApp={props.useKioskApp}
+    >
+      {loading && !error && (
+        <SkeletonBlock width={90}>
+          <Skeleton variant='rect' height={50} />
+          <Skeleton variant='rect' height={50} />
+          <Skeleton variant='rect' height={200} />
+        </SkeletonBlock>
+      )}
 
-        {product && !loading && !error && (
-          <ProductShareWrapper>
-            <ProductShare
-              slug={businessSlug}
-              categoryId={product?.category_id}
-              productId={product?.id}
-            />
-          </ProductShareWrapper>
+      {product && !loading && !error && !props.useKioskApp && (
+        <ProductShareWrapper>
+          <ProductShare
+            slug={businessSlug}
+            categoryId={product?.category_id}
+            productId={product?.id}
+          />
+        </ProductShareWrapper>
 
-        )}
-        {
-          props.beforeMidElements?.map((BeforeMidElements, i) => (
-            <React.Fragment key={i}>
-              {BeforeMidElements}
-            </React.Fragment>))
-        }
-        {
-          props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-            <BeforeMidComponents key={i} {...props} />))
-        }
-        {!loading && !error && product && (
-          <>
-            <WrapperImage>
-              <SwiperWrapper isSoldOut={isSoldOut}>
+      )}
+
+      {!loading && !error && product && (
+        <>
+          <WrapperImage>
+            <SwiperWrapper isSoldOut={isSoldOut}>
+              <Swiper
+                spaceBetween={10}
+                navigation
+                watchOverflow
+                thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+                onSlideChange={() => handleSlideChange()}
+              >
+                {gallery.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' />
+                  </SwiperSlide>
+                ))}
+                {videoGallery && videoGallery.length > 0 && (
+                  <>
+                    {videoGallery.map((video, j) => (
+                      <SwiperSlide key={j}>
+                        <iframe style={{ border: 'none', width: '100%', height: '100%' }} src={video} />
+                      </SwiperSlide>
+                    ))}
+                  </>
+                )}
+              </Swiper>
+              {galleryLength > 2 && (
                 <Swiper
-                  spaceBetween={10}
-                  navigation
+                  onSwiper={setThumbsSwiper}
+                  spaceBetween={20}
+                  slidesPerView={5}
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 3,
+                      spaceBetween: 20
+                    },
+                    300: {
+                      slidesPerView: 4,
+                      spaceBetween: 20
+                    },
+                    400: {
+                      slidesPerView: 5,
+                      spaceBetween: 20
+                    },
+                    550: {
+                      slidesPerView: 6,
+                      spaceBetween: 20
+                    },
+                    769: {
+                      slidesPerView: 6,
+                      spaceBetween: 20
+                    }
+                  }}
+                  freeMode
+                  watchSlidesProgress
+                  className='product-thumb'
                   watchOverflow
-                  thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
-                  onSlideChange={() => handleSlideChange()}
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
@@ -332,418 +367,364 @@ const ProductOptionsUI = (props) => {
                     <>
                       {videoGallery.map((video, j) => (
                         <SwiperSlide key={j}>
-                          <iframe style={{ border: 'none', width: '100%', height: '100%' }} src={video} />
+                          <VideoGalleryWrapper>
+                            <img src={getOverFlowImage(video)} alt='' />
+                            <MdcPlayCircleOutline />
+                          </VideoGalleryWrapper>
                         </SwiperSlide>
                       ))}
                     </>
                   )}
                 </Swiper>
-                {galleryLength > 2 && (
-                  <Swiper
-                    onSwiper={setThumbsSwiper}
-                    spaceBetween={20}
-                    slidesPerView={5}
-                    breakpoints={{
-                      0: {
-                        slidesPerView: 3,
-                        spaceBetween: 20
-                      },
-                      300: {
-                        slidesPerView: 4,
-                        spaceBetween: 20
-                      },
-                      400: {
-                        slidesPerView: 5,
-                        spaceBetween: 20
-                      },
-                      550: {
-                        slidesPerView: 6,
-                        spaceBetween: 20
-                      },
-                      769: {
-                        slidesPerView: 6,
-                        spaceBetween: 20
-                      }
-                    }}
-                    freeMode
-                    watchSlidesProgress
-                    className='product-thumb'
-                    watchOverflow
-                  >
-                    {gallery.map((img, i) => (
-                      <SwiperSlide key={i}>
-                        <img src={img} alt='' />
-                      </SwiperSlide>
-                    ))}
-                    {videoGallery && videoGallery.length > 0 && (
-                      <>
-                        {videoGallery.map((video, j) => (
-                          <SwiperSlide key={j}>
-                            <VideoGalleryWrapper>
-                              <img src={getOverFlowImage(video)} alt='' />
-                              <MdcPlayCircleOutline />
-                            </VideoGalleryWrapper>
-                          </SwiperSlide>
-                        ))}
-                      </>
-                    )}
-                  </Swiper>
+              )}
+            </SwiperWrapper>
+          </WrapperImage>
+          <ProductInfo>
+            <ProductFormTitle>
+              <ProductName>
+                <span>{product?.name}</span>
+                {product?.calories && (<span className='calories'>{product?.calories}{' '}cal</span>)}
+              </ProductName>
+              <Properties>
+                {isHaveWeight ? (
+                  <PriceContent>{parsePrice(pricePerWeightUnit)} / {product?.weight_unit}</PriceContent>
+                ) : (
+                  <PriceContent>
+                    {product?.price ? parsePrice(product?.price) : ''}
+                    {product?.in_offer && (<span className='offer-price'>{product?.offer_price ? parsePrice(product?.offer_price) : ''}</span>)}
+                  </PriceContent>
                 )}
-              </SwiperWrapper>
-            </WrapperImage>
-            <ProductInfo>
-              <ProductFormTitle>
-                <ProductName>
-                  <span>{product?.name}</span>
-                  {product?.calories && (<span className='calories'>{product?.calories}{' '}cal</span>)}
-                </ProductName>
-                <Properties>
-                  {isHaveWeight ? (
-                    <PriceContent>{parsePrice(pricePerWeightUnit)} / {product?.weight_unit}</PriceContent>
-                  ) : (
-                    <PriceContent>
-                      {product?.price ? parsePrice(product?.price) : ''}
-                      {product?.in_offer && (<span className='offer-price'>{product?.offer_price ? parsePrice(product?.offer_price) : ''}</span>)}
-                    </PriceContent>
+                <ProductMeta>
+                  {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
+                    <SkuContent>
+                      <span>{t('SKU', theme?.defaultLanguages?.SKU || 'Sku')}&nbsp;</span>
+                      <span>{product?.sku}</span>
+                    </SkuContent>
                   )}
-                  <ProductMeta>
-                    {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && (
-                      <SkuContent>
-                        <span>{t('SKU', theme?.defaultLanguages?.SKU || 'Sku')}&nbsp;</span>
-                        <span>{product?.sku}</span>
-                      </SkuContent>
-                    )}
-                    {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && product?.estimated_person && (
-                      <span>&nbsp;&#183;&nbsp;</span>
-                    )}
-                    {product?.estimated_person && (
-                      <EstimatedPersons>
-                        <span>{product?.estimated_person}&nbsp;</span>
-                        <span>{t('ESTIMATED_PERSONS', 'persons')}</span>
-                      </EstimatedPersons>
-                    )}
-                  </ProductMeta>
-                </Properties>
-                {product?.description && (
-                  <ProductDescription>
-                    <LinkableText
-                      text={product?.description}
-                    />
-                  </ProductDescription>
-                )}
-              </ProductFormTitle>
-              <ProductTagsListContainer>
-                {product.tags.map(tag => (
-                  <ProductTagWrapper key={tag.id}>
-                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
-                    <span>{tag.name}</span>
-                  </ProductTagWrapper>
-                ))}
-              </ProductTagsListContainer>
-              <Divider />
-              <ProductEdition>
-                {
-                  (product?.ingredients.length > 0 || product?.extras.length > 0) && (
-                    <ProductTabContainer id='all'>
-                      <Tabs variant='primary'>
-                        <Tab
-                          key='all'
-                          active={tabValue === 'all'}
-                          onClick={() => handleChangeTabValue('all')}
-                          borderBottom
-                        >
-                          {t('ALL', 'All')}
-                        </Tab>
-                        {
-                          product?.ingredients.length > 0 && (
-                            <Tab
-                              key='ingredients'
-                              active={tabValue === 'ingredients'}
-                              onClick={() => handleChangeTabValue('ingredients')}
-                              borderBottom
-                            >
-                              {t('INGREDIENTS', 'ingredients')}
-                            </Tab>
-                          )
-                        }
-                        {
-                          product?.extras.length > 0 && (
-                            <Tab
-                              key='extra'
-                              active={tabValue === 'extra'}
-                              onClick={() => handleChangeTabValue('extra')}
-                              borderBottom
-                            >
-                              {t('EXTRA', 'Extra')}
-                            </Tab>
-                          )
-                        }
-                      </Tabs>
-                    </ProductTabContainer>
-                  )
-                }
+                  {product?.sku && product?.sku !== '-1' && product?.sku !== '1' && product?.estimated_person && (
+                    <span>&nbsp;&#183;&nbsp;</span>
+                  )}
+                  {product?.estimated_person && (
+                    <EstimatedPersons>
+                      <span>{product?.estimated_person}&nbsp;</span>
+                      <span>{t('ESTIMATED_PERSONS', 'persons')}</span>
+                    </EstimatedPersons>
+                  )}
+                </ProductMeta>
+              </Properties>
+              {product?.description && (
+                <ProductDescription>
+                  <LinkableText
+                    text={product?.description}
+                  />
+                </ProductDescription>
+              )}
+            </ProductFormTitle>
+            <ProductTagsListContainer>
+              {product.tags.map(tag => (
+                <ProductTagWrapper key={tag.id}>
+                  <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                  <span>{tag.name}</span>
+                </ProductTagWrapper>
+              ))}
+            </ProductTagsListContainer>
+            <Divider />
+            <ProductEdition>
+              {
+                (product?.ingredients.length > 0 || product?.extras.length > 0) && (
+                  <ProductTabContainer id='all'>
+                    <Tabs variant='primary'>
+                      <Tab
+                        key='all'
+                        active={tabValue === 'all'}
+                        onClick={() => handleChangeTabValue('all')}
+                        borderBottom
+                      >
+                        {t('ALL', 'All')}
+                      </Tab>
+                      {
+                        product?.ingredients.length > 0 && (
+                          <Tab
+                            key='ingredients'
+                            active={tabValue === 'ingredients'}
+                            onClick={() => handleChangeTabValue('ingredients')}
+                            borderBottom
+                          >
+                            {t('INGREDIENTS', 'ingredients')}
+                          </Tab>
+                        )
+                      }
+                      {
+                        product?.extras.length > 0 && (
+                          <Tab
+                            key='extra'
+                            active={tabValue === 'extra'}
+                            onClick={() => handleChangeTabValue('extra')}
+                            borderBottom
+                          >
+                            {t('EXTRA', 'Extra')}
+                          </Tab>
+                        )
+                      }
+                    </Tabs>
+                  </ProductTabContainer>
+                )
+              }
 
-                <div id='ingredients'>
-                  {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
-                  <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
-                    {product?.ingredients.map(ingredient => (
-                      <ProductIngredient
-                        key={ingredient?.id}
-                        ingredient={ingredient}
-                        state={productCart.ingredients[`id:${ingredient?.id}`]}
-                        onChange={handleChangeIngredientState}
-                        isSoldOut={isSoldOut}
-                      />
-                    ))}
-                  </WrapperIngredients>
-                </div>
-                <div id='extra'>
-                  {
-                    product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
-                      const currentState = productCart.options[`id:${option?.id}`] || {}
-                      return (
-                        <div key={option?.id}>
-                          {
-                            showOption(option) && (
-                              <ProductOption
-                                option={option}
-                                currentState={currentState}
-                                error={errors[`id:${option?.id}`]}
-                              >
-                                <WrapperSubOption className={isError(option?.id)}>
-                                  {
-                                    option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
-                                      const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
-                                      const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                      return (
-                                        <ProductOptionSubOption
-                                          key={suboption?.id}
-                                          onChange={handleChangeSuboptionState}
-                                          balance={balance}
-                                          option={option}
-                                          suboption={suboption}
-                                          state={currentState}
-                                          isSoldOut={isSoldOut}
-                                          scrollDown={scrollDown}
-                                          setIsScrollAvailable={setIsScrollAvailable}
-                                        />
-                                      )
-                                    })
-                                  }
-                                </WrapperSubOption>
-                              </ProductOption>
-                            )
-                          }
-                        </div>
-                      )
-                    }))
-                  }
-                </div>
-                {!product?.hide_special_instructions && (
-                  <ProductComment>
-                    <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
-                    <TextArea
-                      rows={4}
-                      placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
-                      defaultValue={productCart.comment}
-                      onChange={handleChangeCommentState}
-                      disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+              <div id='ingredients'>
+                {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
+                <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
+                  {product?.ingredients.map(ingredient => (
+                    <ProductIngredient
+                      key={ingredient?.id}
+                      ingredient={ingredient}
+                      state={productCart.ingredients[`id:${ingredient?.id}`]}
+                      onChange={handleChangeIngredientState}
+                      isSoldOut={isSoldOut}
                     />
-                  </ProductComment>
-                )}
+                  ))}
+                </WrapperIngredients>
+              </div>
+              <div id='extra'>
                 {
-                  props.afterMidElements?.map((MidElement, i) => (
-                    <React.Fragment key={i}>
-                      {MidElement}
-                    </React.Fragment>))
-                }
-                {
-                  props.afterMidComponents?.map((MidComponent, i) => (
-                    <MidComponent key={i} {...props} />))
-                }
-              </ProductEdition>
-              <ProductActions>
-                <div className='price-amount-block'>
-                  <div className='price'>
-                    <h4>{productCart.total && parsePrice(productCart.total)}</h4>
-                    {product?.minimum_per_order && productCart?.quantity < product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
-                    {product?.maximum_per_order && productCart?.quantity > product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
-                  </div>
-                  {
-                    productCart && !isSoldOut && maxProductQuantity > 0 && (
-                      <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
-                        <FiMinusCircle
-                          onClick={decrement}
-                          className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
-                        />
+                  product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
+                    const currentState = productCart.options[`id:${option?.id}`] || {}
+                    return (
+                      <div key={option?.id}>
                         {
-                          qtyBy?.pieces && (
-                            <Input
-                              className='qty'
-                              value={productCart?.quantity || ''}
-                              onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
-                              onKeyPress={(e) => {
-                                if (!/^[0-9.]$/.test(e.key)) {
-                                  e.preventDefault()
+                          showOption(option) && (
+                            <ProductOption
+                              option={option}
+                              currentState={currentState}
+                              error={errors[`id:${option?.id}`]}
+                            >
+                              <WrapperSubOption className={isError(option?.id)}>
+                                {
+                                  option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
+                                    const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                    const balance = productCart.options[`id:${option?.id}`]?.balance || 0
+                                    return (
+                                      <ProductOptionSubOption
+                                        key={suboption?.id}
+                                        onChange={handleChangeSuboptionState}
+                                        balance={balance}
+                                        option={option}
+                                        suboption={suboption}
+                                        state={currentState}
+                                        isSoldOut={isSoldOut}
+                                        scrollDown={scrollDown}
+                                        setIsScrollAvailable={setIsScrollAvailable}
+                                      />
+                                    )
+                                  })
                                 }
-                              }}
-                            />
+                              </WrapperSubOption>
+                            </ProductOption>
                           )
                         }
-                        {qtyBy?.weight_unit && (
-                          <Input className='qty' value={(productCart.quantity * product?.weight).toFixed(2)} />
-                        )}
-                        <FiPlusCircle
-                          onClick={increment}
-                          className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
-                        />
-                        {isHaveWeight && (
-                          <WeightUnitSwitch>
-                            <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
-                            <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
-                          </WeightUnitSwitch>
-                        )}
                       </div>
                     )
-                  }
+                  }))
+                }
+              </div>
+              {!product?.hide_special_instructions && (
+                <ProductComment>
+                  <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
+                  <TextArea
+                    rows={4}
+                    placeholder={t('SPECIAL_COMMENT', theme?.defaultLanguages?.SPECIAL_COMMENT || 'Special comment')}
+                    defaultValue={productCart.comment}
+                    onChange={handleChangeCommentState}
+                    disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                  />
+                </ProductComment>
+              )}
+              {
+                props.afterMidElements?.map((MidElement, i) => (
+                  <React.Fragment key={i}>
+                    {MidElement}
+                  </React.Fragment>))
+              }
+              {
+                props.afterMidComponents?.map((MidComponent, i) => (
+                  <MidComponent key={i} {...props} />))
+              }
+            </ProductEdition>
+            <ProductActions>
+              <div className='price-amount-block'>
+                <div className='price'>
+                  <h4>{productCart.total && parsePrice(productCart.total)}</h4>
+                  {product?.minimum_per_order && productCart?.quantity < product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
+                  {product?.maximum_per_order && productCart?.quantity > product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
                 </div>
-
-                {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
-                  <Button
-                    className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
-                    color='primary'
-                    onClick={() => handleSaveProduct()}
-                    disabled={orderState.loading || productCart?.quantity === 0 || (product?.minimum_per_order && (productCart?.quantity < product?.minimum_per_order)) || (product?.maximum_per_order && (productCart?.quantity > product?.maximum_per_order))}
-                  >
-                    {orderState.loading ? (
-                      <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
-                    ) : (
-                      <span>
-                        {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD', theme?.defaultLanguages?.ADD || 'Add')}
-                      </span>
-                    )}
-                  </Button>
-                )}
-
-                {auth && !orderState.options?.address_id && (
-                  orderState.loading ? (
-                    <Button
-                      className='add'
-                      color='primary'
-                      disabled
-                    >
-                      {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
-                    </Button>
-                  ) : (
-                    <AddressList
-                      isModal
-                      userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-                      addressList={isNaN(userCustomer?.id) ? user.addresses : null}
-                      isProductForm
-                    />
+                {
+                  productCart && !isSoldOut && maxProductQuantity > 0 && (
+                    <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
+                      <FiMinusCircle
+                        onClick={decrement}
+                        className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
+                      />
+                      {
+                        qtyBy?.pieces && (
+                          <Input
+                            className='qty'
+                            value={productCart?.quantity || ''}
+                            onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
+                            onKeyPress={(e) => {
+                              if (!/^[0-9.]$/.test(e.key)) {
+                                e.preventDefault()
+                              }
+                            }}
+                          />
+                        )
+                      }
+                      {qtyBy?.weight_unit && (
+                        <Input className='qty' value={(productCart.quantity * product?.weight).toFixed(2)} />
+                      )}
+                      <FiPlusCircle
+                        onClick={increment}
+                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
+                      />
+                      {isHaveWeight && (
+                        <WeightUnitSwitch>
+                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
+                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
+                        </WeightUnitSwitch>
+                      )}
+                    </div>
                   )
-                )}
+                }
+              </div>
 
-                {(!auth || isSoldOut || maxProductQuantity <= 0) && (
+              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
+                <Button
+                  className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
+                  color='primary'
+                  onClick={() => handleSaveProduct()}
+                  disabled={orderState.loading || productCart?.quantity === 0 || (product?.minimum_per_order && (productCart?.quantity < product?.minimum_per_order)) || (product?.maximum_per_order && (productCart?.quantity > product?.maximum_per_order))}
+                >
+                  {orderState.loading ? (
+                    <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
+                  ) : (
+                    <span>
+                      {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD', theme?.defaultLanguages?.ADD || 'Add')}
+                    </span>
+                  )}
+                </Button>
+              )}
+
+              {auth && !orderState.options?.address_id && (
+                orderState.loading ? (
                   <Button
-                    className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
+                    className='add'
                     color='primary'
-                    outline
-                    disabled={isSoldOut || maxProductQuantity <= 0}
-                    onClick={() => setModalIsOpen(true)}
+                    disabled
                   >
-                    {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
+                    {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
                   </Button>
-                )}
-              </ProductActions>
-            </ProductInfo>
-          </>
-        )}
+                ) : (
+                  <AddressList
+                    isModal
+                    userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+                    addressList={isNaN(userCustomer?.id) ? user.addresses : null}
+                    isProductForm
+                  />
+                )
+              )}
 
-        {modalIsOpen && !auth && (
-          <Modal
-            open={modalIsOpen}
-            onClose={() => closeModal()}
-            width='760px'
-          >
-            {modalPageToShow === 'login' && (
-              <LoginForm
-                handleSuccessLogin={handleSuccessLogin}
-                elementLinkToSignup={
-                  <a
-                    onClick={
-                      (e) => handleCustomModalClick(e, { page: 'signup' })
-                    } href='#'
-                  >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
-                  </a>
-                }
-                elementLinkToForgotPassword={
-                  <a
-                    onClick={
-                      (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
-                    } href='#'
-                  >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
-                  </a>
-                }
-                useLoginByCellphone
-                isPopup
-                useKioskApp={props.useKioskApp}
-              />
-            )}
-            {modalPageToShow === 'signup' && (
-              <SignUpForm
-                elementLinkToLogin={
-                  <a
-                    onClick={
-                      (e) => handleCustomModalClick(e, { page: 'login' })
-                    } href='#'
-                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
-                  </a>
-                }
-                useLoginByCellphone
-                useChekoutFileds
-                handleSuccessSignup={handleSuccessSignup}
-                isPopup
-              />
-            )}
-            {modalPageToShow === 'forgotpassword' && (
-              <ForgotPasswordForm
-                elementLinkToLogin={
-                  <a
-                    onClick={
-                      (e) => handleCustomModalClick(e, { page: 'login' })
-                    } href='#'
-                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
-                  </a>
-                }
-                isPopup
-              />
-            )}
-          </Modal>
-        )}
+              {(!auth || isSoldOut || maxProductQuantity <= 0) && (
+                <Button
+                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
+                  color='primary'
+                  outline
+                  disabled={isSoldOut || maxProductQuantity <= 0}
+                  onClick={() => setModalIsOpen(true)}
+                >
+                  {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
+                </Button>
+              )}
+            </ProductActions>
+          </ProductInfo>
+        </>
+      )}
 
-        {error && error.length > 0 && (
-          <NotFoundSource
-            content={error[0]?.message || error[0]}
-          />
-        )}
-        <Alert
-          title={t('SEARCH', 'Search')}
-          content={alertState.content}
-          acceptText={t('ACCEPT', 'Accept')}
-          open={alertState.open}
-          onClose={() => setAlertState({ open: false, content: [] })}
-          onAccept={() => setAlertState({ open: false, content: [] })}
-          closeOnBackdrop={false}
+      {modalIsOpen && !auth && (
+        <Modal
+          open={modalIsOpen}
+          onClose={() => closeModal()}
+          width='760px'
+        >
+          {modalPageToShow === 'login' && (
+            <LoginForm
+              handleSuccessLogin={handleSuccessLogin}
+              elementLinkToSignup={
+                <a
+                  onClick={
+                    (e) => handleCustomModalClick(e, { page: 'signup' })
+                  } href='#'
+                >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
+                </a>
+              }
+              elementLinkToForgotPassword={
+                <a
+                  onClick={
+                    (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                  } href='#'
+                >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+                </a>
+              }
+              useLoginByCellphone
+              isPopup
+              useKioskApp={props.useKioskApp}
+            />
+          )}
+          {modalPageToShow === 'signup' && (
+            <SignUpForm
+              elementLinkToLogin={
+                <a
+                  onClick={
+                    (e) => handleCustomModalClick(e, { page: 'login' })
+                  } href='#'
+                >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                </a>
+              }
+              useLoginByCellphone
+              useChekoutFileds
+              handleSuccessSignup={handleSuccessSignup}
+              isPopup
+            />
+          )}
+          {modalPageToShow === 'forgotpassword' && (
+            <ForgotPasswordForm
+              elementLinkToLogin={
+                <a
+                  onClick={
+                    (e) => handleCustomModalClick(e, { page: 'login' })
+                  } href='#'
+                >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                </a>
+              }
+              isPopup
+            />
+          )}
+        </Modal>
+      )}
+
+      {error && error.length > 0 && (
+        <NotFoundSource
+          content={error[0]?.message || error[0]}
         />
-      </ProductContainer>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
-    </>
+      )}
+      <Alert
+        title={t('SEARCH', 'Search')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
+    </ProductContainer>
   )
 }
 

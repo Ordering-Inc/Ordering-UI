@@ -105,6 +105,11 @@ const BusinessProductsListUI = (props) => {
     )
   }
 
+  const productsCategorySelected = categoryState.products
+    ?.filter(product =>
+      !subcategoriesSelected?.find(subcategory => subcategory?.parent_category_id === category?.id) ||
+      subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -117,16 +122,14 @@ const BusinessProductsListUI = (props) => {
         {category?.id && (
           <>
             <HeaderWrapper>
-              {category?.subcategories?.length > 0 && (
+              {category?.subcategories?.length > 0 && !isSearchMode && (
                 <SubcategoriesComponent category={category} />
               )}
             </HeaderWrapper>
             <ProductsListing>
               {
-                categoryState.products
-                  ?.filter(product =>
-                    !subcategoriesSelected.find(subcategory => subcategory?.parent_category_id === category?.id) ||
-                    subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
+                productsCategorySelected
+                  ?.filter(product => product?.category_id === category?.id)
                   ?.map((product, i) => (
                     <SingleProductCard
                       key={i}
@@ -142,6 +145,26 @@ const BusinessProductsListUI = (props) => {
                   ))
               }
             </ProductsListing>
+            {isSearchMode && category?.subcategories?.length > 0 && category?.subcategories?.filter(subcategory => productsCategorySelected?.some(product => product?.category_id === subcategory?.id))?.map(subcategory => (
+              <SubcategorySearchContainer key={subcategory?.id}>
+                <h4>{subcategory?.name}</h4>
+                <ProductsListing isSubcategorySearch>
+                  {productsCategorySelected?.filter(product => product?.category_id === subcategory?.id)?.map((product, i) => (
+                    <SingleProductCard
+                      key={i}
+                      isSoldOut={product.inventoried && !product.quantity}
+                      businessId={businessId}
+                      product={product}
+                      onProductClick={onProductClick}
+                      isCartOnProductsList={isCartOnProductsList}
+                      handleUpdateProducts={handleUpdateProducts}
+                      useKioskApp={useKioskApp}
+                      productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                    />
+                  ))}
+                </ProductsListing>
+              </SubcategorySearchContainer>
+            ))}
           </>
         )}
 

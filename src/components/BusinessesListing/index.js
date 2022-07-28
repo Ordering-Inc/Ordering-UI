@@ -45,7 +45,8 @@ const BusinessesListingUI = (props) => {
     handleChangeSearch,
     handleChangeBusinessType,
     handleBusinessClick,
-    currentPageParam
+    currentPageParam,
+    businessTypeSelected
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -153,6 +154,7 @@ const BusinessesListingUI = (props) => {
   }
 
   const changeBusinessType = (category) => {
+    if (category === businessTypeSelected) return
     setNextPage({ loading: true, page: 1 })
     setPrevPage({ loading: true, page: 1 })
     const params = new URLSearchParams({ page: 1 })

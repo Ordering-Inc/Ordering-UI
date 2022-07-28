@@ -48,7 +48,7 @@ const PlaceSpotUI = (props) => {
   const vehicleInputAllowed = [4, 5]
   const currentOrderType = isCheckout ? orderState?.options?.type : cart?.delivery_type
   const isEatin = currentOrderType === 3
-  const isDriveThru = currentOrderType === 4
+  const isDriveThru = currentOrderType === 5
   const placeholderText = isEatin
     ? t('EATIN_SPOT_NUMBER', 'Table number')
     : isDriveThru

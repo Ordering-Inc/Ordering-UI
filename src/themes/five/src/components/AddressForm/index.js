@@ -80,6 +80,7 @@ const AddressFormUI = (props) => {
 
   const isHideMap = theme?.layouts?.header?.components?.address_form?.components?.map?.hidden
   const isHideIcons = theme?.layouts?.header?.components?.address_form?.components?.icons?.hidden
+
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
