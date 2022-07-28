@@ -96,7 +96,8 @@ const ServiceFormUI = (props) => {
       })
       return
     }
-    handleSave()
+    const values = { serviceTime: parseDate(dateSelected, { outputFormat: 'YYYY-MM-DD HH:mm:00' }) }
+    handleSave(values)
   }
 
   const isBusyTime = () => {
