@@ -37,7 +37,8 @@ const UserDetailsUI = (props) => {
     isModal,
     setIsOpenUserData,
     isAddressFormOpen,
-    onClose
+    onClose,
+    requiredFields
   } = props
 
   const [, t] = useLanguage()
@@ -59,6 +60,12 @@ const UserDetailsUI = (props) => {
     cleanFormState({ changes: {} })
   }
 
+  useEffect(() => {
+    if (!isEdit && requiredFields) {
+      onClose && onClose()
+    }
+  }, [isEdit, requiredFields])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -79,24 +86,28 @@ const UserDetailsUI = (props) => {
         <Container>
           {isModal && (
             <TitleContainer isAddressFormOpen={isAddressFormOpen && !isEdit}>
-              <ModalIcon>
-                <MdClose onClick={() => onClose()} />
-              </ModalIcon>
+              {!requiredFields && (
+                <ModalIcon>
+                  <MdClose onClick={() => onClose()} />
+                </ModalIcon>
+              )}
               <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
             </TitleContainer>
           )}
-          <Header className='user-form'>
-            {!isModal && (
-              <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
-            )}
-            {cartStatus !== 2 && (
-              !isEdit ? (
-                <span onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</span>
-              ) : (
-                <FcCancel className='cancel' onClick={() => toggleEditState()} />
-              )
-            )}
-          </Header>
+          {!requiredFields && (
+            <Header className='user-form'>
+              {!isModal && (
+                <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
+              )}
+              {cartStatus !== 2 && (
+                !isEdit ? (
+                  <span onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</span>
+                ) : (
+                  <FcCancel className='cancel' onClick={() => toggleEditState()} />
+                )
+              )}
+            </Header>
+          )}
 
           {!isEdit ? (
             <UserData>
