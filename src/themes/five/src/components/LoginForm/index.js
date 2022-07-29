@@ -348,7 +348,7 @@ const LoginFormUI = (props) => {
             <Title>{t('LOGIN', 'Login')}</Title>
           )}
 
-          {(useLoginByEmail && useLoginByCellphone && !loginWithOtpState) && (
+          {((Number(useLoginByEmail) + Number(useLoginByCellphone) + Number(useLoginOtpEmail) + Number(useLoginOtpCellphone) > 1) && !loginWithOtpState) && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 {useLoginByEmail && (
