@@ -322,7 +322,7 @@ const BusinessProductsListUI = (props) => {
         {
           (categoryState.loading || isBusinessLoading) && (
             <ProductsListing>
-              {[...Array(categoryState.pagination.nextPageItems).keys()].map(i => (
+              {[...Array(useKioskApp ? 24 : categoryState.pagination.nextPageItems).keys()].map(i => (
                 <SingleProductCard
                   key={`skeleton:${i}`}
                   isSkeleton
