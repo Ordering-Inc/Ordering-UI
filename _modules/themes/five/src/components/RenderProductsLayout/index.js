@@ -325,7 +325,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleUpdateProducts: handleUpdateProducts,
     professionalSelected: professionalSelected,
     handleChangeProfessionalSelected: handleChangeProfessionalSelected
-  })))))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && /*#__PURE__*/_react.default.createElement(BusinessBasicInformationComponent, {
+  })))))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && !useKioskApp && /*#__PURE__*/_react.default.createElement(BusinessBasicInformationComponent, {
     isSkeleton: true,
     handler: handler,
     businessState: {
@@ -339,6 +339,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     openBusinessInformation: openBusinessInformation
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
     categories: [],
+    useKioskApp: useKioskApp,
     category: categorySelected,
     categoryState: categoryState,
     isBusinessLoading: isLoading,

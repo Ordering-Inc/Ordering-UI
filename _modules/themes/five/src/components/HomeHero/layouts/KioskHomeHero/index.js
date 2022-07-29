@@ -108,15 +108,8 @@ var KioskHomeHero = function KioskHomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
-    contentPosition: "top",
-    style: {
-      zIndex: modalIsOpen.open ? 0 : 9999
-    }
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      alignItems: 'center'
-    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeroContent, null, /*#__PURE__*/_react.default.createElement("div", {
+    id: "logo"
   }, /*#__PURE__*/_react.default.createElement(_styles2.LogoHeader, {
     disabledResponsive: true,
     imgW: "250px",
@@ -143,12 +136,8 @@ var KioskHomeHero = function KioskHomeHero(props) {
         }
       }) : {};
     }
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
-    contentPosition: "bottom"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      alignItems: 'center'
-    }
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    id: "button"
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     name: "find-business",

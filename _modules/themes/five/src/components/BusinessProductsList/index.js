@@ -359,7 +359,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         });
       })));
     }))));
-  }), (categoryState.loading || isBusinessLoading) && /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, _toConsumableArray(Array(categoryState.pagination.nextPageItems).keys()).map(function (i) {
+  }), (categoryState.loading || isBusinessLoading) && /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, _toConsumableArray(Array(useKioskApp ? 24 : categoryState.pagination.nextPageItems).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: "skeleton:".concat(i),
       isSkeleton: true
