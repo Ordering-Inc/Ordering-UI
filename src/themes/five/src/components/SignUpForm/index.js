@@ -36,6 +36,8 @@ import {
   ValidationText,
   InputContainer
 } from './styles'
+import { LoginWith } from '../LoginForm/styles'
+import { Tabs, Tab } from '../../styles/Tabs'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -76,7 +78,14 @@ const SignUpFormUI = (props) => {
     enableReCaptcha,
     closeModal,
     handleChangePromotions,
-    isCustomerMode
+    isCustomerMode,
+    setOtpType,
+    otpType,
+    handleChangeTab,
+    signUpTab,
+    useSignUpFullDetails,
+    useSignUpOtpEmail,
+    useSignUpOtpCellphone
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -89,10 +98,13 @@ const SignUpFormUI = (props) => {
   const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
   const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
 
+  const [loginWithOtpState, setLoginWithOtpState] = useState(false)
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
   const [fieldNumber, setFieldNumber] = useState(1)
+  const isOtpEmail = signUpTab === 'otp' && otpType === 'email'
+  const isOtpCellphone = signUpTab === 'otp' && otpType === 'cellphone'
 
   const showInputPhoneNumber = (validationFields?.fields?.checkout?.cellphone?.enabled ?? false) || configs?.verification_phone_required?.value === '1'
 
@@ -107,6 +119,11 @@ const SignUpFormUI = (props) => {
     (configs?.google_login_client_id?.value && googleLoginEnabled) ||
     (configs?.apple_login_client_id?.value && appleLoginEnabled)
   const hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled
+
+  const handleChangeOtpType = (type) => {
+    handleChangeTab('otp')
+    setOtpType(type)
+  }
 
   const handleSuccessFacebook = (user) => {
     login({
@@ -149,8 +166,8 @@ const SignUpFormUI = (props) => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
     if (!userPhoneNumber &&
       ((validationFields?.fields?.checkout?.cellphone?.enabled &&
-      validationFields?.fields?.checkout?.cellphone?.required) ||
-      configs?.verification_phone_required?.value === '1')
+        validationFields?.fields?.checkout?.cellphone?.required) ||
+        configs?.verification_phone_required?.value === '1')
     ) {
       setAlertState({
         open: true,
@@ -260,6 +277,37 @@ const SignUpFormUI = (props) => {
       <SignUpContainer isPopup={isPopup}>
         <FormSide isPopup={isPopup}>
           <Title>{t('SIGN_UP', 'Sign up')}</Title>
+          {(useSignUpFullDetails && !loginWithOtpState) && (
+            <LoginWith isPopup={isPopup}>
+              <Tabs variant='primary'>
+                <Tab
+                  onClick={() => handleChangeTab('default')}
+                  active={signUpTab === 'default'}
+                  borderBottom={signUpTab === 'default'}
+                >
+                  {t('DEFAULT', 'Default')}
+                </Tab>
+                {useSignUpOtpEmail && (
+                  <Tab
+                    onClick={() => handleChangeOtpType('email')}
+                    active={isOtpEmail}
+                    borderBottom={isOtpEmail}
+                  >
+                    {t('BY_OTP_EMAIL', 'by Otp Email')}
+                  </Tab>
+                )}
+                {useSignUpOtpCellphone && (
+                  <Tab
+                    onClick={() => handleChangeOtpType('cellphone')}
+                    active={isOtpCellphone}
+                    borderBottom={isOtpCellphone}
+                  >
+                    {t('BY_OTP_CELLPHONE', 'by Otp Cellphone')}
+                  </Tab>
+                )}
+              </Tabs>
+            </LoginWith>
+          )}
           <FormInput
             noValidate
             isPopup={isPopup}

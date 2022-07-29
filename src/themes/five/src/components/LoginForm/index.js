@@ -391,210 +391,208 @@ const LoginFormUI = (props) => {
             </LoginWith>
           )}
 
-          {(useLoginByCellphone || useLoginByEmail) && (
-            <FormInput
-              noValidate
-              isPopup={isPopup}
-            >
-              {
-                props.beforeMidElements?.map((BeforeMidElements, i) => (
-                  <React.Fragment key={i}>
-                    {BeforeMidElements}
-                  </React.Fragment>))
-              }
-              {
-                props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-                  <BeforeMidComponents key={i} {...props} />))
-              }
-              {useRootPoint && (
+          <FormInput
+            noValidate
+            isPopup={isPopup}
+          >
+            {
+              props.beforeMidElements?.map((BeforeMidElements, i) => (
+                <React.Fragment key={i}>
+                  {BeforeMidElements}
+                </React.Fragment>))
+            }
+            {
+              props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+                <BeforeMidComponents key={i} {...props} />))
+            }
+            {useRootPoint && (
+              <InputWrapper>
+                <Input
+                  type='text'
+                  name='project'
+                  aria-label='project'
+                  placeholder={t('PROJECT', 'Project')}
+                  ref={formMethods.register({
+                    required: t(
+                      'VALIDATION_ERROR_REQUIRED',
+                      'Project is required'
+                    ).replace('_attribute_', t('PROJECT', 'Project'))
+                  })}
+                  onChange={(e) => handleChangeProject(e)}
+                  autoComplete='off'
+                  autoCapitalize='off'
+                />
+                <InputBeforeIcon>
+                  <BoxArrowInRight />
+                </InputBeforeIcon>
+              </InputWrapper>
+            )}
+            {((useLoginByEmail && loginTab === 'email') || (loginTab === 'otp' && otpType === 'email')) && (
+              <>
+                {formMethods?.errors?.email?.type === 'required' && (
+                  <ValidationText>
+                    {formMethods.errors?.email?.message} *
+                  </ValidationText>
+                )}
+                {formMethods.errors?.email?.type === 'pattern' && (
+                  <ValidationText>
+                    {t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))}
+                  </ValidationText>
+                )}
                 <InputWrapper>
                   <Input
-                    type='text'
-                    name='project'
-                    aria-label='project'
-                    placeholder={t('PROJECT', 'Project')}
+                    type='email'
+                    name='email'
+                    aria-label='email'
+                    placeholder={t('EMAIL', 'Email')}
                     ref={formMethods.register({
-                      required: t(
-                        'VALIDATION_ERROR_REQUIRED',
-                        'Project is required'
-                      ).replace('_attribute_', t('PROJECT', 'Project'))
+                      required: loginTab === 'email'
+                        ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
+                        : null,
+                      pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                     })}
-                    onChange={(e) => handleChangeProject(e)}
+                    onChange={handleChangeInputEmail}
                     autoComplete='off'
-                    autoCapitalize='off'
+                    isError={formMethods.errors?.email}
                   />
                   <InputBeforeIcon>
-                    <BoxArrowInRight />
+                    <Envelope />
                   </InputBeforeIcon>
                 </InputWrapper>
-              )}
-              {((useLoginByEmail && loginTab === 'email') || (loginTab === 'otp' && otpType === 'email')) && (
-                <>
-                  {formMethods?.errors?.email?.type === 'required' && (
-                    <ValidationText>
-                      {formMethods.errors?.email?.message} *
-                    </ValidationText>
-                  )}
-                  {formMethods.errors?.email?.type === 'pattern' && (
-                    <ValidationText>
-                      {t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))}
-                    </ValidationText>
-                  )}
-                  <InputWrapper>
-                    <Input
-                      type='email'
-                      name='email'
-                      aria-label='email'
-                      placeholder={t('EMAIL', 'Email')}
-                      ref={formMethods.register({
-                        required: loginTab === 'email'
-                          ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
-                          : null,
-                        pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-                      })}
-                      onChange={handleChangeInputEmail}
-                      autoComplete='off'
-                      isError={formMethods.errors?.email}
-                    />
-                    <InputBeforeIcon>
-                      <Envelope />
-                    </InputBeforeIcon>
-                  </InputWrapper>
-                </>
-              )}
-              {(((useLoginByCellphone && loginTab === 'cellphone') || (loginTab === 'otp' && otpType === 'cellphone')) && !willVerifyOtpState) && (
-                <>
-                  {formMethods.errors?.cellphone && !credentials?.cellphone && (
-                    <ValidationText>
-                      {formMethods.errors?.cellphone?.message} {formMethods?.errors?.cellphone?.type === 'required' && '*'}
-                    </ValidationText>
-                  )}
-                  <InputPhoneNumber
-                    value={credentials?.cellphone}
-                    setValue={handleChangePhoneNumber}
-                    handleIsValid={() => { }}
-                    isError={formMethods.errors?.cellphone && !credentials?.cellphone}
-                  />
-                </>
-              )}
-
-              {(!verifyPhoneState?.loading && willVerifyOtpState && !checkPhoneCodeState?.loading) && (
-                <>
-                  <CountdownTimer>
-                    <span>{formatSeconds(otpLeftTime)}</span>
-                  </CountdownTimer>
-
-                  <OtpWrapper>
-                    <OtpInput
-                      value={otpState}
-                      onChange={otp => setOtpState(otp)}
-                      numInputs={numOtpInputs}
-                      containerStyle='otp-container'
-                      inputStyle='otp-input'
-                      placeholder={otpPlaceholder}
-                      isInputNum
-                      shouldAutoFocus
-                    />
-                  </OtpWrapper>
-                  <ResendCode disabled={otpLeftTime > 520} onClick={handleSendOtp}>
-                    {t('RESEND_AGAIN', 'Resend again')}?
-                  </ResendCode>
-                  <Button
-                    type='button'
-                    color='secundary'
-                    disabled={formState.loading}
-                    onClick={() => {
-                      setLoginWithOtpState(false)
-                      setWillVerifyOtpState(false)
-                    }}
-                  >
-                    {t('CANCEL', 'Cancel')}
-                  </Button>
-                </>
-              )}
-
-              {(verifyPhoneState?.loading || checkPhoneCodeState?.loading) && (
-                <SpinnerLoader
-                  style={{ height: 160 }}
+              </>
+            )}
+            {(((useLoginByCellphone && loginTab === 'cellphone') || (loginTab === 'otp' && otpType === 'cellphone')) && !willVerifyOtpState) && (
+              <>
+                {formMethods.errors?.cellphone && !credentials?.cellphone && (
+                  <ValidationText>
+                    {formMethods.errors?.cellphone?.message} {formMethods?.errors?.cellphone?.type === 'required' && '*'}
+                  </ValidationText>
+                )}
+                <InputPhoneNumber
+                  value={credentials?.cellphone}
+                  setValue={handleChangePhoneNumber}
+                  handleIsValid={() => { }}
+                  isError={formMethods.errors?.cellphone && !credentials?.cellphone}
                 />
-              )}
+              </>
+            )}
 
-              {!loginWithOtpState && loginTab !== 'otp' && (
-                <>
-                  {formMethods.errors?.password && (
-                    <ValidationText>
-                      {formMethods.errors?.password?.message} {formMethods?.errors?.password?.type === 'required' && '*'}
-                    </ValidationText>
-                  )}
-                  <InputWrapper>
-                    <Input
-                      type={!passwordSee ? 'password' : 'text'}
-                      name='password'
-                      aria-label='password'
-                      placeholder={t('PASSWORD', 'Password')}
-                      ref={formMethods.register({
-                        required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                      })}
-                      onChange={(e) => handleChangeInput(e)}
-                      isError={formMethods.errors?.password}
-                    />
-                    <TogglePassword onClick={togglePasswordView}>
-                      {!passwordSee ? <Eye /> : <EyeSlash />}
-                    </TogglePassword>
-                    <InputBeforeIcon>
-                      <Lock />
-                    </InputBeforeIcon>
-                  </InputWrapper>
-                </>
-              )}
-              {
-                props.afterMidElements?.map((MidElement, i) => (
-                  <React.Fragment key={i}>
-                    {MidElement}
-                  </React.Fragment>))
-              }
-              {
-                props.afterMidComponents?.map((MidComponent, i) => (
-                  <MidComponent key={i} {...props} />))
-              }
-              {!loginWithOtpState && loginTab !== 'otp' && elementLinkToForgotPassword && (
-                <RedirectLink isPopup={isPopup}>
-                  <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
-                  {elementLinkToForgotPassword}
-                </RedirectLink>
-              )}
-              {props.isRecaptchaEnable && enableReCaptcha && (
-                <ReCaptchaWrapper>
-                  <ReCaptcha handleReCaptcha={handleReCaptcha} />
-                </ReCaptchaWrapper>
-              )}
-              {(!willVerifyOtpState &&
-                <Button
-                  color='primary'
-                  onClick={formMethods.handleSubmit(onSubmit)}
-                  disabled={formState.loading}
-                >
-                  {formState.loading
-                    ? `${t('LOADING', 'Loading')}...`
-                    : loginWithOtpState || loginTab === 'otp'
-                      ? t('GET_VERIFY_CODE', 'Get verify code')
-                      : t('LOGIN', 'Login')}
-                </Button>
-              )}
-              {(loginWithOtpState && !willVerifyOtpState) && (
+            {(!verifyPhoneState?.loading && willVerifyOtpState && !checkPhoneCodeState?.loading) && (
+              <>
+                <CountdownTimer>
+                  <span>{formatSeconds(otpLeftTime)}</span>
+                </CountdownTimer>
+
+                <OtpWrapper>
+                  <OtpInput
+                    value={otpState}
+                    onChange={otp => setOtpState(otp)}
+                    numInputs={numOtpInputs}
+                    containerStyle='otp-container'
+                    inputStyle='otp-input'
+                    placeholder={otpPlaceholder}
+                    isInputNum
+                    shouldAutoFocus
+                  />
+                </OtpWrapper>
+                <ResendCode disabled={otpLeftTime > 520} onClick={handleSendOtp}>
+                  {t('RESEND_AGAIN', 'Resend again')}?
+                </ResendCode>
                 <Button
                   type='button'
                   color='secundary'
                   disabled={formState.loading}
                   onClick={() => {
                     setLoginWithOtpState(false)
+                    setWillVerifyOtpState(false)
                   }}
                 >
                   {t('CANCEL', 'Cancel')}
                 </Button>
-              )}
-            </FormInput>
-          )}
+              </>
+            )}
+
+            {(verifyPhoneState?.loading || checkPhoneCodeState?.loading) && (
+              <SpinnerLoader
+                style={{ height: 160 }}
+              />
+            )}
+
+            {!loginWithOtpState && loginTab !== 'otp' && (
+              <>
+                {formMethods.errors?.password && (
+                  <ValidationText>
+                    {formMethods.errors?.password?.message} {formMethods?.errors?.password?.type === 'required' && '*'}
+                  </ValidationText>
+                )}
+                <InputWrapper>
+                  <Input
+                    type={!passwordSee ? 'password' : 'text'}
+                    name='password'
+                    aria-label='password'
+                    placeholder={t('PASSWORD', 'Password')}
+                    ref={formMethods.register({
+                      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                    })}
+                    onChange={(e) => handleChangeInput(e)}
+                    isError={formMethods.errors?.password}
+                  />
+                  <TogglePassword onClick={togglePasswordView}>
+                    {!passwordSee ? <Eye /> : <EyeSlash />}
+                  </TogglePassword>
+                  <InputBeforeIcon>
+                    <Lock />
+                  </InputBeforeIcon>
+                </InputWrapper>
+              </>
+            )}
+            {
+              props.afterMidElements?.map((MidElement, i) => (
+                <React.Fragment key={i}>
+                  {MidElement}
+                </React.Fragment>))
+            }
+            {
+              props.afterMidComponents?.map((MidComponent, i) => (
+                <MidComponent key={i} {...props} />))
+            }
+            {!loginWithOtpState && loginTab !== 'otp' && elementLinkToForgotPassword && (
+              <RedirectLink isPopup={isPopup}>
+                <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
+                {elementLinkToForgotPassword}
+              </RedirectLink>
+            )}
+            {props.isRecaptchaEnable && enableReCaptcha && (
+              <ReCaptchaWrapper>
+                <ReCaptcha handleReCaptcha={handleReCaptcha} />
+              </ReCaptchaWrapper>
+            )}
+            {(!willVerifyOtpState &&
+              <Button
+                color='primary'
+                onClick={formMethods.handleSubmit(onSubmit)}
+                disabled={formState.loading}
+              >
+                {formState.loading
+                  ? `${t('LOADING', 'Loading')}...`
+                  : loginWithOtpState || loginTab === 'otp'
+                    ? t('GET_VERIFY_CODE', 'Get verify code')
+                    : t('LOGIN', 'Login')}
+              </Button>
+            )}
+            {(loginWithOtpState && !willVerifyOtpState) && (
+              <Button
+                type='button'
+                color='secundary'
+                disabled={formState.loading}
+                onClick={() => {
+                  setLoginWithOtpState(false)
+                }}
+              >
+                {t('CANCEL', 'Cancel')}
+              </Button>
+            )}
+          </FormInput>
 
           {(elementLinkToSignup && !loginWithOtpState) && (
             <RedirectLink register isPopup={isPopup} className='new-account'>
