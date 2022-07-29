@@ -16,7 +16,7 @@ export const HeroContainer = styled.div`
   ${({ bgimage }) => bgimage && css`
   background-image: url(${bgimage});
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
   `}
 `
