@@ -289,15 +289,18 @@ const ProductOptionsUI = (props) => {
         </SkeletonBlock>
       )}
 
-      {product && !loading && !error && !props.useKioskApp && (
+      {product && !loading && !error && (
         <ProductShareWrapper>
-          <ProductShare
-            slug={businessSlug}
-            categoryId={product?.category_id}
-            productId={product?.id}
-          />
+          {!props.useKioskApp ? (
+            <ProductShare
+              slug={businessSlug}
+              categoryId={product?.category_id}
+              productId={product?.id}
+            />
+          ) : (
+            <div style={{ height: 30 }} />
+          )}
         </ProductShareWrapper>
-
       )}
 
       {!loading && !error && product && (

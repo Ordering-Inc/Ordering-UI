@@ -343,7 +343,7 @@ export const RenderProductsLayout = (props) => {
 
       {isLoading && !isError && (
         <>
-          {!isCustomLayout && (
+          {!isCustomLayout && !useKioskApp && (
             <BusinessBasicInformationComponent
               isSkeleton
               handler={handler}
@@ -359,6 +359,7 @@ export const RenderProductsLayout = (props) => {
           <WrapContent>
             <BusinessProductsList
               categories={[]}
+              useKioskApp={useKioskApp}
               category={categorySelected}
               categoryState={categoryState}
               isBusinessLoading={isLoading}
