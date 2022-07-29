@@ -4,7 +4,7 @@ import { useLanguage, useConfig, useSession } from 'ordering-components'
 import {
   HomeContainer,
   HeroContainer,
-  ContentWrapper
+  HeroContent
 } from './styles'
 
 import { LogoHeader } from '../../../Header/styles'
@@ -43,8 +43,8 @@ export const KioskHomeHero = (props) => {
       })}
     >
       <HeroContainer bgimage={theme.images?.general?.homeHero}>
-        <ContentWrapper contentPosition='top' style={{ zIndex: modalIsOpen.open ? 0 : 9999 }}>
-          <div style={{ alignItems: 'center' }}>
+        <HeroContent>
+          <div id='logo'>
             <LogoHeader
               disabledResponsive
               imgW='250px'
@@ -65,9 +65,7 @@ export const KioskHomeHero = (props) => {
               />
             </LogoHeader>
           </div>
-        </ContentWrapper>
-        <ContentWrapper contentPosition='bottom'>
-          <div style={{ alignItems: 'center' }}>
+          <div id='button'>
             <Button
               color='primary'
               name='find-business'
@@ -76,7 +74,7 @@ export const KioskHomeHero = (props) => {
               {t('TOUCH_ANYWHERE_TO_ORDER', theme?.defaultLanguages?.TOUCH_ANYWHERE_TO_ORDER || 'Touch anywhere to order')}
             </Button>
           </div>
-        </ContentWrapper>
+        </HeroContent>
       </HeroContainer>
       <Modal
         open={modalIsOpen.open}
