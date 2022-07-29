@@ -177,7 +177,7 @@ const SingleOrderCardUI = (props) => {
           )}
           {pastOrders && !isCustomerMode && (
             <ButtonWrapper>
-              {!(isFavorite && order?.review) && (
+              {!isFavorite && (!order?.review || (order.driver && !order?.user_review)) && (
                 <Button
                   outline
                   color='primary'

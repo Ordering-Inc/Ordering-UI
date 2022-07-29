@@ -15,7 +15,9 @@ export const ProductContainer = styled.div`
 
   @media (min-width: 1200px) {
     flex-wrap: nowrap;
-    max-height: 70vh;
+    ${props => !props.useKioskApp && css`
+      max-height: 70vh;
+    `}
     padding-bottom: 0;
   }
 `
@@ -237,11 +239,6 @@ export const ProductActions = styled.div`
     justify-content: space-between;
     width: 80%
   }
-  /* div:last-child {
-    width: 100%;
-    display: flex;
-    align-items: center;
-  } */
 
   svg {
     color: ${props => props.theme.colors.primary};

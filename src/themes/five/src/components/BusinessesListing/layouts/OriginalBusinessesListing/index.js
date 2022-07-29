@@ -155,7 +155,7 @@ const BusinessesListingUI = (props) => {
     setFavoriteIds([...new Set(ids)])
   }, [businessesList?.businesses?.length])
 
-  const OrdersSection = (titleContent) => {
+  const OrdersSection = ({ titleContent }) => {
     return (
       <>
         {isCustomLayout && onRedirectPage && (

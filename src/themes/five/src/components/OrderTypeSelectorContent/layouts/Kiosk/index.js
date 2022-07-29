@@ -14,6 +14,7 @@ import {
 
 export const OrderTypeSelectorContentUI = (props) => {
   const {
+    title,
     handleChangeOrderType,
     orderTypes,
     onClose,
@@ -40,7 +41,9 @@ export const OrderTypeSelectorContentUI = (props) => {
   return (
     <div className='order-type' style={{ overflow: 'hidden' }}>
       <OrderTypeSelectorContainer>
-        <OrderTypeListTitle>{t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')}</OrderTypeListTitle>
+        <OrderTypeListTitle>
+          {title ?? t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')}
+        </OrderTypeListTitle>
         {
           orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value)) : orderTypes).map((item, i) => (
             <OrderTypeListItemContainer

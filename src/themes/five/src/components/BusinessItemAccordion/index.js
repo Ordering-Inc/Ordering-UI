@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import TiArrowSortedUp from '@meronex/icons/ti/TiArrowSortedUp'
-import { useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
+import { useOrder, useLanguage, useEvent, useUtils, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FiClock from '@meronex/icons/fi/FiClock'
 import {
@@ -47,11 +47,13 @@ export const BusinessItemAccordion = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
   const [{ parsePrice }] = useUtils()
+  const [{ configs }] = useConfig()
   const theme = useTheme()
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
   const [cartProductUpdated, setCartProductUpdated] = useState(null)
+  const isBusinessChangeEnabled = configs?.cart_change_business_validation?.value === '1'
 
   const content = useRef(null)
   const businessStore = useRef(null)
@@ -187,7 +189,7 @@ export const BusinessItemAccordion = (props) => {
                       </>
                     )}
                   </div>
-                  {handleChangeStore && (
+                  {isBusinessChangeEnabled && handleChangeStore && (
                     <span
                       ref={changeStore}
                       onClick={handleChangeStore}
@@ -224,7 +226,7 @@ export const BusinessItemAccordion = (props) => {
           ref={content}
           style={{ minHeight: `${setHeight}`, maxHeight: !setActive && '0px' }}
         >
-          {isCheckout && handleChangeStore && (
+          {isBusinessChangeEnabled && isCheckout && handleChangeStore && (
             <BusinessInfo>
               <ContentInfo className='info'>
                 <span

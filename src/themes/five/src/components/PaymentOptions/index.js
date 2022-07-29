@@ -215,7 +215,7 @@ const PaymentOptionsUI = (props) => {
         {paymethodSelected?.gateway === 'cash' && (
           <PaymentOptionCash
             data={paymethodSelected?.data}
-            orderTotal={cart.total}
+            orderTotal={cart?.balance ?? cart?.total}
             defaultValue={paymethodSelected?.data?.cash}
             onChangeData={handlePaymethodDataChange}
             setErrorCash={props.setErrorCash}
