@@ -123,7 +123,7 @@ export const UserFormDetailsUI = (props) => {
       })
       return
     }
-    if (formState?.changes?.cellphone && !isVerifiedPhone) {
+    if (formState?.changes?.cellphone && !isVerifiedPhone && configs?.verification_phone_required?.value === '1') {
       setAlertState({
         open: true,
         content: [t('VERIFY_ERROR_PHONE_NUMBER', 'The Phone Number field is not verified')]
@@ -246,10 +246,10 @@ export const UserFormDetailsUI = (props) => {
   }, [formMethods])
 
   useEffect(() => {
-    if (userPhoneNumber && isValidPhoneNumber && formState?.changes?.country_phone_code && formState?.changes?.cellphone) {
+    if (!isVerifiedPhone && userPhoneNumber && isValidPhoneNumber && formState?.changes?.country_phone_code && formState?.changes?.cellphone && configs?.verification_phone_required?.value === '1') {
       setWillVerifyOtpState(true)
     }
-  }, [isValidPhoneNumber, userPhoneNumber])
+  }, [isValidPhoneNumber, userPhoneNumber, configs?.verification_phone_required?.value, isVerifiedPhone])
 
   return (
     <>

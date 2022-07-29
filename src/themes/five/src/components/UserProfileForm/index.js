@@ -150,6 +150,20 @@ const UserProfileFormUI = (props) => {
   }, [willVerifyOtpState])
 
   useEffect(() => {
+    if (otpLeftTime === 0) {
+      setAlertState({
+        open: true,
+        content: t('TIME_IS_UP_PLEASE_RESEND_CODE', 'Time is up. Please resend code again')
+      })
+    }
+  }, [otpLeftTime])
+
+  const handleSendPhoneCode = (values) => {
+    setWillVerifyOtpState(false)
+    handleCheckPhoneCode(values)
+  }
+
+  useEffect(() => {
     if (isVerifiedPhone) setWillVerifyOtpState(false)
   }, [isVerifiedPhone])
 
@@ -212,6 +226,7 @@ const UserProfileFormUI = (props) => {
                   {...props}
                   onCancel={toggleEditState}
                   isHiddenAddress={isHiddenAddress}
+                  isVerifiedPhone={isVerifiedPhone}
                   setWillVerifyOtpState={setWillVerifyOtpState}
                 />
               )}
@@ -245,7 +260,7 @@ const UserProfileFormUI = (props) => {
           otpLeftTime={otpLeftTime}
           credentials={formState?.changes}
           handleSendOtp={handleSendOtp}
-          handleCheckPhoneCode={handleCheckPhoneCode}
+          handleCheckPhoneCode={handleSendPhoneCode}
           email={(userData?.email || user?.email)}
         />
       </Modal>
