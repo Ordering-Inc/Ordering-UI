@@ -107,7 +107,7 @@ const BusinessProductsListUI = (props) => {
 
   const productsCategorySelected = categoryState.products
     ?.filter(product =>
-      !subcategoriesSelected.find(subcategory => subcategory?.parent_category_id === category?.id) ||
+      !subcategoriesSelected?.find(subcategory => subcategory?.parent_category_id === category?.id) ||
       subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
 
   return (

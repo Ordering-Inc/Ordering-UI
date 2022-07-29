@@ -42,7 +42,8 @@ export const UserFormDetailsUI = (props) => {
     setWillVerifyOtpState,
     isVerifiedPhone,
     handleChangePromotions,
-    isOldLayout
+    isOldLayout,
+    requiredFields
   } = props
 
   const formMethods = useForm()
@@ -234,6 +235,7 @@ export const UserFormDetailsUI = (props) => {
   }, [validationFields, emailInput.current])
 
   useEffect(() => {
+    if (requiredFields) return
     formMethods.register('email', {
       required: isRequiredField('email')
         ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
@@ -250,6 +252,10 @@ export const UserFormDetailsUI = (props) => {
       setWillVerifyOtpState(true)
     }
   }, [isValidPhoneNumber, userPhoneNumber])
+
+  useEffect(() => {
+    if (requiredFields && !requiredFields.includes('mobile_phone')) setIsValidPhoneNumber(true)
+  }, [requiredFields])
 
   return (
     <>
@@ -272,64 +278,67 @@ export const UserFormDetailsUI = (props) => {
               props.beforeMidComponents?.map((BeforeMidComponents, i) => (
                 <BeforeMidComponents key={i} {...props} />))
             }
-            <Divider />
+            {!requiredFields && <Divider />}
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
               showField && showField(field.code) && showFieldWithTheme(field.code) && (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
-                    <InputGroup>
-                      <p>{t(field.code.toUpperCase(), field?.name)}</p>
-                      <Input
-                        key={field.id}
-                        type={field.type}
-                        name={field.code}
-                        className='form'
-                        borderBottom
-                        disabled={!isEdit}
-                        placeholder={t(field.code.toUpperCase(), field?.name)}
-                        defaultValue={
-                          formState?.result?.result
-                            ? formState?.result?.result[field.code]
-                            : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
-                        }
-                        onChange={handleChangeInputEmail}
-                        ref={(e) => {
-                          emailInput.current = e
-                        }}
-                        autoComplete='off'
-                      />
-                    </InputGroup>
+                    ((requiredFields && requiredFields.includes(field.code)) || !requiredFields) && (
+                      <InputGroup>
+                        <p>{t(field.code.toUpperCase(), field?.name)}</p>
+                        <Input
+                          key={field.id}
+                          type={field.type}
+                          name={field.code}
+                          className='form'
+                          borderBottom
+                          disabled={!isEdit}
+                          placeholder={t(field.code.toUpperCase(), field?.name)}
+                          defaultValue={
+                            formState?.result?.result
+                              ? formState?.result?.result[field.code]
+                              : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                          }
+                          onChange={handleChangeInputEmail}
+                          ref={(e) => {
+                            emailInput.current = e
+                          }}
+                          autoComplete='off'
+                        />
+                      </InputGroup>
+                    )
                   ) : (
-                    <InputGroup>
-                      <p>{t(field.code.toUpperCase(), field?.name)}</p>
-                      <Input
-                        key={field.id}
-                        type={field.type}
-                        borderBottom
-                        name={field.code}
-                        className='form'
-                        disabled={!isEdit}
-                        placeholder={t(field.code.toUpperCase(), field?.name)}
-                        defaultValue={
-                          formState?.result?.result
-                            ? formState?.result?.result[field.code]
-                            : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
-                        }
-                        onChange={handleChangeInput}
-                        ref={formMethods.register({
-                          required: isRequiredField(field.code)
-                            ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
-                            : null
-                        })}
-                        autoComplete='off'
-                      />
-                    </InputGroup>
+                    ((requiredFields && requiredFields.includes(field.code)) || !requiredFields) && (
+                      <InputGroup>
+                        <p>{t(field.code.toUpperCase(), field?.name)}</p>
+                        <Input
+                          key={field.id}
+                          type={field.type}
+                          borderBottom
+                          name={field.code}
+                          className='form'
+                          disabled={!isEdit}
+                          placeholder={t(field.code.toUpperCase(), field?.name)}
+                          defaultValue={
+                            formState?.result?.result
+                              ? formState?.result?.result[field.code]
+                              : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                          }
+                          onChange={handleChangeInput}
+                          ref={formMethods.register({
+                            required: isRequiredField(field.code)
+                              ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
+                              : null
+                          })}
+                          autoComplete='off'
+                        />
+                      </InputGroup>
+                    )
                   )}
-
                 </React.Fragment>
               )
             )}
-            {!!showInputPhoneNumber && showCustomerCellphone && (
+            {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('mobile_phone')) || !requiredFields) && (
               <InputPhoneNumberWrapper>
                 <p>{t('PHONE', 'Phone')}</p>
                 <InputPhoneNumber
@@ -341,7 +350,7 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputPhoneNumberWrapper>
             )}
-            {!isCheckout && showCustomerPassword && (
+            {!isCheckout && showCustomerPassword && !requiredFields && (
               <InputGroup>
                 <p>{t('PASSWORD', 'Password')}</p>
                 <Input
@@ -383,7 +392,7 @@ export const UserFormDetailsUI = (props) => {
                 </label>
               </PromotionsWrapper>
             )}
-            {showLangauges && (
+            {showLangauges && !requiredFields && (
               <>
                 <Divider />
                 <LanguageSelectorWrapper>
@@ -413,7 +422,7 @@ export const UserFormDetailsUI = (props) => {
                   {t('CANCEL', 'Cancel')}
                 </Button>
               )}
-              {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
+              {!requiredFields && ((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
                 <Button
                   id='form-btn'
                   color='primary'
@@ -421,6 +430,16 @@ export const UserFormDetailsUI = (props) => {
                   disabled={formState.loading}
                 >
                   {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
+                </Button>
+              )}
+              {requiredFields && (
+                <Button
+                  id='form-btn'
+                  color='primary'
+                  type='submit'
+                  disabled={formState.loading}
+                >
+                  {formState.loading ? t('UPDATING', 'Updating...') : t('CONTINUE', 'Continue')}
                 </Button>
               )}
             </ActionsForm>
