@@ -158,8 +158,6 @@ const UserProfileFormUI = (props) => {
     })
   }
 
-  console.log(formState, 'formState')
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -254,6 +252,7 @@ const UserProfileFormUI = (props) => {
           handleSendOtp={handleSendOtp}
           handleCheckPhoneCode={handleSendPhoneCode}
           email={(userData?.email || user?.email)}
+          isPhone
         />
       </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (

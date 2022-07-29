@@ -232,6 +232,7 @@ const UserDetailsUI = (props) => {
           handleSendOtp={handleSendOtp}
           handleCheckPhoneCode={handleSendPhoneCode}
           email={(userData?.email || user?.email)}
+          isPhone
         />
       </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
