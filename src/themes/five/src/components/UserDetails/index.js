@@ -41,12 +41,10 @@ const UserDetailsUI = (props) => {
     setIsOpenUserData,
     isAddressFormOpen,
     onClose,
-    isVerifiedPhone,
-    checkPhoneCodeState,
     handleSendVerifyCode,
     verifyPhoneState,
-    handleCheckPhoneCode,
-    requiredFields
+    requiredFields,
+    setFormState
   } = props
 
   const [, t] = useLanguage()
@@ -56,7 +54,7 @@ const UserDetailsUI = (props) => {
 
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
-    600, !checkPhoneCodeState?.loading && willVerifyOtpState)
+    600, willVerifyOtpState)
 
   useEffect(() => {
     if (isUserDetailsEdit) {
@@ -67,15 +65,6 @@ const UserDetailsUI = (props) => {
   useEffect(() => {
     setIsOpenUserData && setIsOpenUserData(isEdit)
   }, [isEdit])
-
-  useEffect(() => {
-    if (checkPhoneCodeState?.result?.error) {
-      setAlertState({
-        open: true,
-        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
-      })
-    } else { resetOtpLeftTime() }
-  }, [checkPhoneCodeState?.result?.result])
 
   useEffect(() => {
     if (verifyPhoneState?.result?.error) {
@@ -113,7 +102,13 @@ const UserDetailsUI = (props) => {
 
   const handleSendPhoneCode = (values) => {
     setWillVerifyOtpState(false)
-    handleCheckPhoneCode(values)
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState?.changes,
+        verification_code: values?.code
+      }
+    })
   }
 
   useEffect(() => {
@@ -129,9 +124,6 @@ const UserDetailsUI = (props) => {
     handleSendOtp()
   }, [willVerifyOtpState])
 
-  useEffect(() => {
-    if (isVerifiedPhone) setWillVerifyOtpState(false)
-  }, [isVerifiedPhone])
   useEffect(() => {
     if (!isEdit && requiredFields) {
       onClose && onClose()
@@ -212,7 +204,6 @@ const UserDetailsUI = (props) => {
                 {...props}
                 userData={userData}
                 isCustomerMode={isCustomerMode}
-                isVerifiedPhone={isVerifiedPhone}
                 setWillVerifyOtpState={setWillVerifyOtpState}
               />
             </SideForm>
