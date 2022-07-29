@@ -15,6 +15,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _styledComponents = require("styled-components");
 
+var _Modal = require("../Modal");
+
 var _orderingComponents = require("ordering-components");
 
 var _UpsellingPage = require("../UpsellingPage");
@@ -100,7 +102,7 @@ var mapConfigs = {
 };
 
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _businessDetails$busi3, _businessDetails$busi4, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$busi11, _cartState$cart$spot_, _cartState$cart, _validationFields$fie15, _validationFields$fie16, _validationFields$fie17, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cart$products2, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23;
+  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _businessDetails$busi3, _businessDetails$busi4, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$busi11, _cartState$cart$spot_, _cartState$cart, _validationFields$fie15, _validationFields$fie16, _validationFields$fie17, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cart$products2, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3;
 
   var cart = props.cart,
       errors = props.errors,
@@ -187,6 +189,16 @@ var CheckoutUI = function CheckoutUI(props) {
       behalfName = _useState10[0],
       setBehalfName = _useState10[1];
 
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isOpen = _useState12[0],
+      setIsOpen = _useState12[1];
+
+  var _useState13 = (0, _react.useState)([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      requiredFields = _useState14[0],
+      setRequiredFields = _useState14[1];
+
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
   var isWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
     return config.key === 'wallet_cash_enabled';
@@ -212,7 +224,7 @@ var CheckoutUI = function CheckoutUI(props) {
   }));
 
   var handlePlaceOrder = function handlePlaceOrder() {
-    if (!userErrors.length) {
+    if (!userErrors.length && !(requiredFields !== null && requiredFields !== void 0 && requiredFields.length)) {
       var body = {};
 
       if (behalfName) {
@@ -220,6 +232,11 @@ var CheckoutUI = function CheckoutUI(props) {
       }
 
       handlerClickPlaceOrder && handlerClickPlaceOrder(null, body);
+      return;
+    }
+
+    if (requiredFields !== null && requiredFields !== void 0 && requiredFields.length) {
+      setIsOpen(true);
       return;
     }
 
@@ -247,13 +264,15 @@ var CheckoutUI = function CheckoutUI(props) {
     var errors = [];
     var notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes'];
     var userSelected = isCustomerMode ? customerState.user : user;
+    var _requiredFields = [];
     Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie7 = validationFields.fields) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.checkout).map(function (field) {
       if (field !== null && field !== void 0 && field.enabled && field !== null && field !== void 0 && field.required && !notFields.includes(field.code)) {
         if (userSelected && !userSelected[field === null || field === void 0 ? void 0 : field.code]) {
-          errors.push(t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "The field ".concat(field === null || field === void 0 ? void 0 : field.name, " is required")));
+          _requiredFields.push(field === null || field === void 0 ? void 0 : field.code);
         }
       }
     });
+    setRequiredFields(_requiredFields);
 
     if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (validationFields !== null && validationFields !== void 0 && (_validationFields$fie8 = validationFields.fields) !== null && _validationFields$fie8 !== void 0 && (_validationFields$fie9 = _validationFields$fie8.checkout) !== null && _validationFields$fie9 !== void 0 && (_validationFields$fie10 = _validationFields$fie9.cellphone) !== null && _validationFields$fie10 !== void 0 && _validationFields$fie10.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie11 = validationFields.fields) !== null && _validationFields$fie11 !== void 0 && (_validationFields$fie12 = _validationFields$fie11.checkout) !== null && _validationFields$fie12 !== void 0 && (_validationFields$fie13 = _validationFields$fie12.cellphone) !== null && _validationFields$fie13 !== void 0 && _validationFields$fie13.required || (configs === null || configs === void 0 ? void 0 : (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
       errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'));
@@ -493,7 +512,30 @@ var CheckoutUI = function CheckoutUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: isOpen,
+    width: "760px",
+    onClose: function onClose() {
+      return setIsOpen(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+    isUserDetailsEdit: isUserDetailsEdit,
+    cartStatus: cart === null || cart === void 0 ? void 0 : cart.status,
+    businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
+    useValidationFields: true,
+    useDefualtSessionManager: true,
+    useSessionUser: !isCustomerMode,
+    isCustomerMode: isCustomerMode,
+    userData: isCustomerMode && customerState.user,
+    userId: isCustomerMode && (customerState === null || customerState === void 0 ? void 0 : (_customerState$user3 = customerState.user) === null || _customerState$user3 === void 0 ? void 0 : _customerState$user3.id),
+    requiredFields: requiredFields,
+    isCheckout: true,
+    isEdit: true,
+    isModal: true,
+    onClose: function onClose() {
+      return setIsOpen(false);
+    }
+  })));
 };
 
 var Checkout = function Checkout(props) {
@@ -524,42 +566,42 @@ var Checkout = function Checkout(props) {
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
-  var _useState11 = (0, _react.useState)({
+  var _useState15 = (0, _react.useState)({
     loading: true,
     error: null,
     cart: null
   }),
-      _useState12 = _slicedToArray(_useState11, 2),
-      cartState = _useState12[0],
-      setCartState = _useState12[1];
-
-  var _useState13 = (0, _react.useState)(false),
-      _useState14 = _slicedToArray(_useState13, 2),
-      openUpselling = _useState14[0],
-      setOpenUpselling = _useState14[1];
-
-  var _useState15 = (0, _react.useState)(false),
       _useState16 = _slicedToArray(_useState15, 2),
-      canOpenUpselling = _useState16[0],
-      setCanOpenUpselling = _useState16[1];
+      cartState = _useState16[0],
+      setCartState = _useState16[1];
 
-  var _useState17 = (0, _react.useState)(null),
+  var _useState17 = (0, _react.useState)(false),
       _useState18 = _slicedToArray(_useState17, 2),
-      currentCart = _useState18[0],
-      setCurrentCart = _useState18[1];
+      openUpselling = _useState18[0],
+      setOpenUpselling = _useState18[1];
 
-  var _useState19 = (0, _react.useState)({
+  var _useState19 = (0, _react.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      canOpenUpselling = _useState20[0],
+      setCanOpenUpselling = _useState20[1];
+
+  var _useState21 = (0, _react.useState)(null),
+      _useState22 = _slicedToArray(_useState21, 2),
+      currentCart = _useState22[0],
+      setCurrentCart = _useState22[1];
+
+  var _useState23 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState20 = _slicedToArray(_useState19, 2),
-      alertState = _useState20[0],
-      setAlertState = _useState20[1];
+      _useState24 = _slicedToArray(_useState23, 2),
+      alertState = _useState24[0],
+      setAlertState = _useState24[1];
 
-  var _useState21 = (0, _react.useState)(false),
-      _useState22 = _slicedToArray(_useState21, 2),
-      isResetPaymethod = _useState22[0],
-      setIsResetPaymethod = _useState22[1];
+  var _useState25 = (0, _react.useState)(false),
+      _useState26 = _slicedToArray(_useState25, 2),
+      isResetPaymethod = _useState26[0],
+      setIsResetPaymethod = _useState26[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;

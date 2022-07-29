@@ -66,7 +66,8 @@ var UserDetailsUI = function UserDetailsUI(props) {
       isModal = props.isModal,
       setIsOpenUserData = props.setIsOpenUserData,
       isAddressFormOpen = props.isAddressFormOpen,
-      onClose = props.onClose;
+      onClose = props.onClose,
+      requiredFields = props.requiredFields;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -93,6 +94,11 @@ var UserDetailsUI = function UserDetailsUI(props) {
     });
   };
 
+  (0, _react.useEffect)(function () {
+    if (!isEdit && requiredFields) {
+      onClose && onClose();
+    }
+  }, [isEdit, requiredFields]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -112,11 +118,11 @@ var UserDetailsUI = function UserDetailsUI(props) {
     height: 25
   })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
     isAddressFormOpen: isAddressFormOpen && !isEdit
-  }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+  }, !requiredFields && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onClose();
     }
-  })), /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details'))), /*#__PURE__*/_react.default.createElement(_styles.Header, {
+  })), /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details'))), !requiredFields && /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "user-form"
   }, !isModal && /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
