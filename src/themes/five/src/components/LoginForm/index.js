@@ -348,7 +348,7 @@ const LoginFormUI = (props) => {
             <Title>{t('LOGIN', 'Login')}</Title>
           )}
 
-          {((Number(useLoginByEmail) + Number(useLoginByCellphone) + Number(useLoginOtpEmail) + Number(useLoginOtpCellphone) > 1) && !loginWithOtpState) && (
+          {((Number(useLoginByEmail) + Number(useLoginByCellphone) + Number(useLoginOtpEmail) + Number(useLoginOtpCellphone) > 1) && !loginWithOtpState && !willVerifyOtpState) && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 {useLoginByEmail && (
@@ -427,7 +427,7 @@ const LoginFormUI = (props) => {
                 </InputBeforeIcon>
               </InputWrapper>
             )}
-            {((useLoginByEmail && loginTab === 'email') || (loginTab === 'otp' && otpType === 'email')) && (
+            {(((useLoginByEmail && loginTab === 'email') || (loginTab === 'otp' && otpType === 'email')) && !willVerifyOtpState) && (
               <>
                 {formMethods?.errors?.email?.type === 'required' && (
                   <ValidationText>
