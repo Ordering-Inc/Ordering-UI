@@ -254,7 +254,7 @@ export const UserFormDetailsUI = (props) => {
   }, [isValidPhoneNumber, userPhoneNumber])
 
   useEffect(() => {
-    if (requiredFields && !requiredFields.includes('cellphone')) setIsValidPhoneNumber(true)
+    if (requiredFields && !requiredFields.includes('mobile_phone')) setIsValidPhoneNumber(true)
   }, [requiredFields])
 
   return (
@@ -338,7 +338,7 @@ export const UserFormDetailsUI = (props) => {
                 </React.Fragment>
               )
             )}
-            {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('cellphone')) || !requiredFields) && (
+            {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('mobile_phone')) || !requiredFields) && (
               <InputPhoneNumberWrapper>
                 <p>{t('PHONE', 'Phone')}</p>
                 <InputPhoneNumber
