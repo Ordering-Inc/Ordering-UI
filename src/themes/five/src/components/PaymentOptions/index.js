@@ -130,7 +130,7 @@ const PaymentOptionsUI = (props) => {
   }
 
   useEffect(() => {
-    if (supportedMethods.length === 1) {
+    if (supportedMethods.length === 1 && useKioskApp) {
       handlePaymethodClick && handlePaymethodClick(supportedMethods[0])
     }
   }, [supportedMethods])
