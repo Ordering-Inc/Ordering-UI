@@ -34,7 +34,7 @@ import { GoogleLoginButton } from '../GoogleLogin'
 import { AppleLogin } from '../AppleLogin'
 import { Alert } from '../Confirm'
 
-import { LoginWith, CountdownTimer, OtpWrapper, ResendCode } from '../LoginForm/styles'
+import { LoginWith as SignupWith, CountdownTimer, OtpWrapper, ResendCode } from '../LoginForm/styles'
 
 import {
   SignUpContainer,
@@ -307,7 +307,7 @@ const SignUpFormUI = (props) => {
         <FormSide isPopup={isPopup}>
           <Title>{t('SIGN_UP', 'Sign up')}</Title>
           {(useSignUpFullDetails && !willVerifyOtpState) && (
-            <LoginWith isPopup={isPopup}>
+            <SignupWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 <Tab
                   onClick={() => setSignUpTab('default')}
@@ -335,7 +335,7 @@ const SignUpFormUI = (props) => {
                   </Tab>
                 )}
               </Tabs>
-            </LoginWith>
+            </SignupWith>
           )}
           {(!willVerifyOtpState) && (
             <FormInput
