@@ -198,11 +198,12 @@ export const Header = (props) => {
                     </span>
                   </CustomerInfo>
                 )}
-                {!configState?.loading && configTypes.length > 0 && (
-                  <OrderTypeSelecWrapper>
-                    <OrderTypeSelectorHeader configTypes={configTypes} />
-                  </OrderTypeSelecWrapper>
-                )}
+                <OrderTypeSelecWrapper>
+                  <OrderTypeSelectorHeader
+                    configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+                    defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
+                  />
+                </OrderTypeSelecWrapper>
                 {onlineStatus && windowSize.width > 820 && (
                   <>
                     {(isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
