@@ -62,6 +62,7 @@ import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { PaymentOptionStripe } from './src/components/PaymentOptionStripe'
 import { PaymentOptionWallet } from './src/components/PaymentOptionWallet'
+import { PlaceSpot } from './src/components/PlaceSpot'
 import { ProductForm } from './src/components/ProductForm'
 import { ProductItemAccordion } from './src/components/ProductItemAccordion'
 import { ProductIngredient } from './src/components/ProductIngredient'
@@ -162,6 +163,7 @@ export {
   PaymentOptionStripe,
   PaymentOptionWallet,
   PaymentOptions,
+  PlaceSpot,
   ProductForm,
   ProductIngredient,
   ProductItemAccordion,
