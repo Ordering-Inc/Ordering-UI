@@ -184,7 +184,6 @@ const CheckoutUI = (props) => {
         }
       }
     })
-    setRequiredFields(_requiredFields)
 
     if (
       userSelected &&
@@ -193,8 +192,9 @@ const CheckoutUI = (props) => {
         validationFields?.fields?.checkout?.cellphone?.required) ||
         configs?.verification_phone_required?.value === '1')
     ) {
-      errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'))
+      _requiredFields.push('cellphone')
     }
+    setRequiredFields(_requiredFields)
 
     if (userSelected && userSelected?.cellphone) {
       if (userSelected?.country_phone_code) {

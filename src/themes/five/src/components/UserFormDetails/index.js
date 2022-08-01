@@ -40,7 +40,6 @@ export const UserFormDetailsUI = (props) => {
     userData,
     isCustomerMode,
     setWillVerifyOtpState,
-    isVerifiedPhone,
     handleChangePromotions,
     isOldLayout,
     requiredFields
@@ -55,6 +54,7 @@ export const UserFormDetailsUI = (props) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { setUserCustomer }] = useCustomer()
+  const [isChanged, setIsChanged] = useState(false)
   const emailInput = useRef(null)
 
   const user = userData || userSession
@@ -124,13 +124,6 @@ export const UserFormDetailsUI = (props) => {
       })
       return
     }
-    if (formState?.changes?.cellphone && !isVerifiedPhone) {
-      setAlertState({
-        open: true,
-        content: [t('VERIFY_ERROR_PHONE_NUMBER', 'The Phone Number field is not verified')]
-      })
-      return
-    }
     if (Object.keys(formState.changes).length > 0 && isPhoneNumberValid) {
       let changes = null
       if (user?.cellphone && !userPhoneNumber) {
@@ -148,6 +141,7 @@ export const UserFormDetailsUI = (props) => {
 
   const handleChangePhoneNumber = (number, isValid) => {
     setUserPhoneNumber(number)
+    setIsChanged(true)
 
     let phoneNumberParser = null
     let phoneNumber = {
@@ -248,13 +242,13 @@ export const UserFormDetailsUI = (props) => {
   }, [formMethods])
 
   useEffect(() => {
-    if (userPhoneNumber && isValidPhoneNumber && formState?.changes?.country_phone_code && formState?.changes?.cellphone) {
+    if (isChanged && userPhoneNumber && isValidPhoneNumber && formState?.changes?.country_phone_code && formState?.changes?.cellphone && configs?.verification_phone_required?.value === '1') {
       setWillVerifyOtpState(true)
     }
-  }, [isValidPhoneNumber, userPhoneNumber])
+  }, [isValidPhoneNumber, userPhoneNumber, configs?.verification_phone_required?.value, isChanged])
 
   useEffect(() => {
-    if (requiredFields && !requiredFields.includes('mobile_phone')) setIsValidPhoneNumber(true)
+    if (requiredFields && !requiredFields.includes('cellphone')) setIsValidPhoneNumber(true)
   }, [requiredFields])
 
   return (
@@ -294,11 +288,7 @@ export const UserFormDetailsUI = (props) => {
                           borderBottom
                           disabled={!isEdit}
                           placeholder={t(field.code.toUpperCase(), field?.name)}
-                          defaultValue={
-                            formState?.result?.result
-                              ? formState?.result?.result[field.code]
-                              : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
-                          }
+                          defaultValue={formState?.changes[field.code] ?? (user && user[field.code]) ?? ''}
                           onChange={handleChangeInputEmail}
                           ref={(e) => {
                             emailInput.current = e
@@ -319,11 +309,7 @@ export const UserFormDetailsUI = (props) => {
                           className='form'
                           disabled={!isEdit}
                           placeholder={t(field.code.toUpperCase(), field?.name)}
-                          defaultValue={
-                            formState?.result?.result
-                              ? formState?.result?.result[field.code]
-                              : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
-                          }
+                          defaultValue={formState?.changes[field.code] ?? (user && user[field.code]) ?? ''}
                           onChange={handleChangeInput}
                           ref={formMethods.register({
                             required: isRequiredField(field.code)
@@ -338,7 +324,7 @@ export const UserFormDetailsUI = (props) => {
                 </React.Fragment>
               )
             )}
-            {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('mobile_phone')) || !requiredFields) && (
+            {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('cellphone')) || !requiredFields) && (
               <InputPhoneNumberWrapper>
                 <p>{t('PHONE', 'Phone')}</p>
                 <InputPhoneNumber

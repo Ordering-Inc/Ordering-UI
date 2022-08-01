@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js/pure'
 import { useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
-
 import { Checkout } from '../../../src/components/Checkout'
 import { useEvent, useOrder, useLanguage } from 'ordering-components'
 
