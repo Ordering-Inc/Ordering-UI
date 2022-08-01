@@ -42,7 +42,8 @@ var VerifyCodeForm = function VerifyCodeForm(props) {
       handleSendOtp = props.handleSendOtp,
       handleCheckPhoneCode = props.handleCheckPhoneCode,
       credentials = props.credentials,
-      email = props.email;
+      email = props.email,
+      isPhone = props.isPhone;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -65,7 +66,7 @@ var VerifyCodeForm = function VerifyCodeForm(props) {
       });
     }
   }, [otpState]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("p", null, t('SENT_VERIFY_CODE_ON_EMAIL', 'We sent you a verication code on _email_').replace('_email_', email)), /*#__PURE__*/_react.default.createElement(_styles.DownTimer, null, (0, _utils.formatSeconds)(otpLeftTime)), /*#__PURE__*/_react.default.createElement(_styles.OtpWrapper, null, /*#__PURE__*/_react.default.createElement(_reactOtpInput.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("p", null, t('SENT_VERIFY_CODE_ON_EMAIL', 'We sent you a verication code on _email_').replace('_email_', isPhone ? credentials === null || credentials === void 0 ? void 0 : credentials.cellphone : email)), /*#__PURE__*/_react.default.createElement(_styles.DownTimer, null, (0, _utils.formatSeconds)(otpLeftTime)), /*#__PURE__*/_react.default.createElement(_styles.OtpWrapper, null, /*#__PURE__*/_react.default.createElement(_reactOtpInput.default, {
     value: otpState,
     onChange: function onChange(otp) {
       return setOtpState(otp);

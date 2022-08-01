@@ -272,11 +272,12 @@ var CheckoutUI = function CheckoutUI(props) {
         }
       }
     });
-    setRequiredFields(_requiredFields);
 
     if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (validationFields !== null && validationFields !== void 0 && (_validationFields$fie8 = validationFields.fields) !== null && _validationFields$fie8 !== void 0 && (_validationFields$fie9 = _validationFields$fie8.checkout) !== null && _validationFields$fie9 !== void 0 && (_validationFields$fie10 = _validationFields$fie9.cellphone) !== null && _validationFields$fie10 !== void 0 && _validationFields$fie10.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie11 = validationFields.fields) !== null && _validationFields$fie11 !== void 0 && (_validationFields$fie12 = _validationFields$fie11.checkout) !== null && _validationFields$fie12 !== void 0 && (_validationFields$fie13 = _validationFields$fie12.cellphone) !== null && _validationFields$fie13 !== void 0 && _validationFields$fie13.required || (configs === null || configs === void 0 ? void 0 : (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
-      errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'));
+      _requiredFields.push('cellphone');
     }
+
+    setRequiredFields(_requiredFields);
 
     if (userSelected && userSelected !== null && userSelected !== void 0 && userSelected.cellphone) {
       if (userSelected !== null && userSelected !== void 0 && userSelected.country_phone_code) {

@@ -100,7 +100,10 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessTags, null, (business === null || business === void 0 ? void 0 : business.featured) && /*#__PURE__*/_react.default.createElement("span", {
     className: "crown"
   }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), /*#__PURE__*/_react.default.createElement("div", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'PreOrder')))), !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 100
+    height: 165,
+    style: {
+      display: 'flex'
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

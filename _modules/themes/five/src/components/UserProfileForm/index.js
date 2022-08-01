@@ -45,13 +45,13 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserProfileFormUI = function UserProfileFormUI(props) {
-  var _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts2, _theme$layouts2$profi, _theme$layouts2$profi2, _theme$layouts2$profi3, _theme$layouts3, _theme$layouts3$profi, _theme$layouts3$profi2, _theme$layouts3$profi3, _formState$changes5, _checkPhoneCodeState$3, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts2, _theme$layouts2$profi, _theme$layouts2$profi2, _theme$layouts2$profi3, _theme$layouts3, _theme$layouts3$profi, _theme$layouts3$profi2, _theme$layouts3$profi3, _formState$changes5, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
 
   var userData = props.userData,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
@@ -75,11 +75,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       cleanFormState = props.cleanFormState,
       toggleIsEdit = props.toggleIsEdit,
       isHiddenAddress = props.isHiddenAddress,
-      checkPhoneCodeState = props.checkPhoneCodeState,
       handleSendVerifyCode = props.handleSendVerifyCode,
-      handleCheckPhoneCode = props.handleCheckPhoneCode,
       verifyPhoneState = props.verifyPhoneState,
-      isVerifiedPhone = props.isVerifiedPhone;
+      setFormState = props.setFormState;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -96,7 +94,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       willVerifyOtpState = _useState2[0],
       setWillVerifyOtpState = _useState2[1];
 
-  var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
+  var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, willVerifyOtpState),
       _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
       otpLeftTime = _useCountdownTimer2[0],
       resetOtpLeftTime = _useCountdownTimer2[2];
@@ -186,20 +184,6 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     }
   }, [(_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.photo]);
   (0, _react.useEffect)(function () {
-    var _checkPhoneCodeState$;
-
-    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) {
-      var _checkPhoneCodeState$2;
-
-      setAlertState({
-        open: true,
-        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
-      });
-    } else {
-      resetOtpLeftTime();
-    }
-  }, [checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$3 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$3 === void 0 ? void 0 : _checkPhoneCodeState$3.result]);
-  (0, _react.useEffect)(function () {
     var _verifyPhoneState$res;
 
     if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) {
@@ -220,8 +204,23 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     handleSendOtp();
   }, [willVerifyOtpState]);
   (0, _react.useEffect)(function () {
-    if (isVerifiedPhone) setWillVerifyOtpState(false);
-  }, [isVerifiedPhone]);
+    if (otpLeftTime === 0) {
+      setAlertState({
+        open: true,
+        content: t('TIME_IS_UP_PLEASE_RESEND_CODE', 'Time is up. Please resend code again')
+      });
+    }
+  }, [otpLeftTime]);
+
+  var handleSendPhoneCode = function handleSendPhoneCode(values) {
+    setWillVerifyOtpState(false);
+    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+      changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, {
+        verification_code: values === null || values === void 0 ? void 0 : values.code
+      })
+    }));
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -303,8 +302,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     otpLeftTime: otpLeftTime,
     credentials: formState === null || formState === void 0 ? void 0 : formState.changes,
     handleSendOtp: handleSendOtp,
-    handleCheckPhoneCode: handleCheckPhoneCode,
-    email: (userData === null || userData === void 0 ? void 0 : userData.email) || (user === null || user === void 0 ? void 0 : user.email)
+    handleCheckPhoneCode: handleSendPhoneCode,
+    email: (userData === null || userData === void 0 ? void 0 : userData.email) || (user === null || user === void 0 ? void 0 : user.email),
+    isPhone: true
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
