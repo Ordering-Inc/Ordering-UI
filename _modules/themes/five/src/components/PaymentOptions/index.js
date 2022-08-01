@@ -212,7 +212,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (supportedMethods.length === 1) {
+    if (supportedMethods.length === 1 && !paymethodSelected) {
       handlePaymethodClick && handlePaymethodClick(supportedMethods[0]);
     }
   }, [supportedMethods]);

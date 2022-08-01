@@ -411,6 +411,12 @@ Object.defineProperty(exports, "PhoneAutocomplete", {
     return _PhoneAutocomplete.PhoneAutocomplete;
   }
 });
+Object.defineProperty(exports, "PlaceSpot", {
+  enumerable: true,
+  get: function get() {
+    return _PlaceSpot.PlaceSpot;
+  }
+});
 Object.defineProperty(exports, "ProductForm", {
   enumerable: true,
   get: function get() {
@@ -713,6 +719,8 @@ var _PaymentOptions = require("./src/components/PaymentOptions");
 var _PaymentOptionStripe = require("./src/components/PaymentOptionStripe");
 
 var _PaymentOptionWallet = require("./src/components/PaymentOptionWallet");
+
+var _PlaceSpot = require("./src/components/PlaceSpot");
 
 var _ProductForm = require("./src/components/ProductForm");
 
