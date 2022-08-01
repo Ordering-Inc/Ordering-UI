@@ -43,11 +43,9 @@ const UserProfileFormUI = (props) => {
     cleanFormState,
     toggleIsEdit,
     isHiddenAddress,
-    checkPhoneCodeState,
     handleSendVerifyCode,
-    handleCheckPhoneCode,
     verifyPhoneState,
-    isVerifiedPhone
+    setFormState
   } = props
 
   const [, t] = useLanguage()
@@ -55,7 +53,7 @@ const UserProfileFormUI = (props) => {
   const [{ user }] = useSession()
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
-    600, !checkPhoneCodeState?.loading && willVerifyOtpState)
+    600, willVerifyOtpState)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
 
@@ -124,15 +122,6 @@ const UserProfileFormUI = (props) => {
   }, [formState.changes?.photo])
 
   useEffect(() => {
-    if (checkPhoneCodeState?.result?.error) {
-      setAlertState({
-        open: true,
-        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
-      })
-    } else { resetOtpLeftTime() }
-  }, [checkPhoneCodeState?.result?.result])
-
-  useEffect(() => {
     if (verifyPhoneState?.result?.error) {
       setAlertState({
         open: true,
@@ -150,8 +139,24 @@ const UserProfileFormUI = (props) => {
   }, [willVerifyOtpState])
 
   useEffect(() => {
-    if (isVerifiedPhone) setWillVerifyOtpState(false)
-  }, [isVerifiedPhone])
+    if (otpLeftTime === 0) {
+      setAlertState({
+        open: true,
+        content: t('TIME_IS_UP_PLEASE_RESEND_CODE', 'Time is up. Please resend code again')
+      })
+    }
+  }, [otpLeftTime])
+
+  const handleSendPhoneCode = (values) => {
+    setWillVerifyOtpState(false)
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState?.changes,
+        verification_code: values?.code
+      }
+    })
+  }
 
   return (
     <>
@@ -245,8 +250,9 @@ const UserProfileFormUI = (props) => {
           otpLeftTime={otpLeftTime}
           credentials={formState?.changes}
           handleSendOtp={handleSendOtp}
-          handleCheckPhoneCode={handleCheckPhoneCode}
+          handleCheckPhoneCode={handleSendPhoneCode}
           email={(userData?.email || user?.email)}
+          isPhone
         />
       </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
