@@ -167,13 +167,13 @@ export const App = () => {
                           />
                         )
                         : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader />
-                        )
+                          orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                            orderStatus.options?.address?.location
+                              ? <Redirect to='/search' />
+                              : <Redirect to='/' />
+                          ) : (
+                            <SpinnerLoader />
+                          )
                         )
                     }
                   </Route>
@@ -189,13 +189,13 @@ export const App = () => {
                           />
                         )
                         : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader />
-                        )
+                          orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                            orderStatus.options?.address?.location
+                              ? <Redirect to='/search' />
+                              : <Redirect to='/' />
+                          ) : (
+                            <SpinnerLoader />
+                          )
                         )
                     }
                   </Route>
