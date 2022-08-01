@@ -72,7 +72,7 @@ const BusinessControllerUI = (props) => {
                 {!business?.open && <h1>{t('CLOSED', 'Closed')}</h1>}
               </BusinessHeader>
             ) : (
-              <Skeleton height={100} />
+              <Skeleton height={165} style={{ display: 'flex' }} />
             )}
           </BusinessHero>
           <BusinessContent>
