@@ -195,6 +195,16 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     }));
   };
 
+  var SocialNetWork = function SocialNetWork(_ref) {
+    var url = _ref.url,
+        icon = _ref.icon;
+    return /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, {
+      href: url,
+      target: "_blank",
+      rel: "noopener noreferrer"
+    }, icon);
+  };
+
   var BusinessInfoComponent = function BusinessInfoComponent() {
     var _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc;
 
@@ -208,7 +218,25 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       bgColor: business === null || business === void 0 ? void 0 : (_business$ribbon2 = business.ribbon) === null || _business$ribbon2 === void 0 ? void 0 : _business$ribbon2.color,
       isRoundRect: (business === null || business === void 0 ? void 0 : (_business$ribbon3 = business.ribbon) === null || _business$ribbon3 === void 0 ? void 0 : _business$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
       isCapsule: (business === null || business === void 0 ? void 0 : (_business$ribbon4 = business.ribbon) === null || _business$ribbon4 === void 0 ? void 0 : _business$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
-    }, business === null || business === void 0 ? void 0 : (_business$ribbon5 = business.ribbon) === null || _business$ribbon5 === void 0 ? void 0 : _business$ribbon5.text)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, business === null || business === void 0 ? void 0 : (_business$ribbon5 = business.ribbon) === null || _business$ribbon5 === void 0 ? void 0 : _business$ribbon5.text), /*#__PURE__*/_react.default.createElement(_styles.SocialList, null, (business === null || business === void 0 ? void 0 : business.facebook_profile) && /*#__PURE__*/_react.default.createElement(SocialNetWork, {
+      url: business === null || business === void 0 ? void 0 : business.facebook_profile,
+      icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Facebook, null)
+    }), (business === null || business === void 0 ? void 0 : business.instagram_profile) && /*#__PURE__*/_react.default.createElement(SocialNetWork, {
+      url: business === null || business === void 0 ? void 0 : business.instagram_profile,
+      icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Instagram, null)
+    }), (business === null || business === void 0 ? void 0 : business.tiktok_profile) && /*#__PURE__*/_react.default.createElement(SocialNetWork, {
+      url: business === null || business === void 0 ? void 0 : business.tiktok_profile,
+      icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Tiktok, null)
+    }), (business === null || business === void 0 ? void 0 : business.pinterest_profile) && /*#__PURE__*/_react.default.createElement(SocialNetWork, {
+      url: business === null || business === void 0 ? void 0 : business.pinterest_profile,
+      icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pinterest, null)
+    }), (business === null || business === void 0 ? void 0 : business.whatsapp_number) && /*#__PURE__*/_react.default.createElement(SocialNetWork, {
+      url: business === null || business === void 0 ? void 0 : business.whatsapp_number,
+      icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Whatsapp, null)
+    }), (business === null || business === void 0 ? void 0 : business.snapchat_profile) && /*#__PURE__*/_react.default.createElement(SocialNetWork, {
+      url: business === null || business === void 0 ? void 0 : business.snapchat_profile,
+      icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Snapchat, null)
+    }))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: isCustomerMode ? 100 : 150,
       height: isCustomerMode ? 35 : 'auto'
     }), showBusinessInfo && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("p", {
