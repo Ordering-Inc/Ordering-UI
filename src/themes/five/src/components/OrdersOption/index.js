@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import moment from 'moment'
 import { OrderList, useLanguage, useOrder, useEvent } from 'ordering-components'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
@@ -315,7 +316,7 @@ const OrdersOptionUI = (props) => {
         horizontal ? (
           <HorizontalOrdersLayout
             businessesIds={businessesIds}
-            orders={orders.filter(order => orderStatus.includes(order.status))}
+            orders={orders.filter(order => orderStatus.includes(order.status)).sort((a, b) => moment(b?.delivery_datetime_utc).valueOf() - moment(a?.delivery_datetime_utc).valueOf())}
             pagination={pagination}
             onRedirectPage={onRedirectPage}
             loadMoreOrders={loadMoreOrders}
@@ -334,7 +335,7 @@ const OrdersOptionUI = (props) => {
         ) : (
           <VerticalOrdersLayout
             reorderLoading={reorderState?.loading}
-            orders={orders.filter(order => orderStatus.includes(order.status))}
+            orders={orders.filter(order => orderStatus.includes(order.status)).sort((a, b) => moment(b?.delivery_datetime_utc).valueOf() - moment(a?.delivery_datetime_utc).valueOf())}
             pagination={pagination}
             loadMoreOrders={loadMoreOrders}
             onRedirectPage={onRedirectPage}
