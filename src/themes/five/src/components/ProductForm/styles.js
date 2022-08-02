@@ -347,7 +347,9 @@ export const ProductTabContainer = styled.div`
   top: 0px;
   background: white;
   z-index: 900;
-
+  .swiper-slide {
+    width: auto;
+  }
   > div {
     div {
       padding: 9px 15px;
