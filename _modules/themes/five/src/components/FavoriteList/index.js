@@ -221,6 +221,46 @@ var FavoriteListUI = function FavoriteListUI(props) {
     events.emit('go_to_page', data);
   };
 
+  var _onProductClick = function onProductClick(product) {
+    var _product$category, _product$category$bus, _product$category2;
+
+    var slug = product === null || product === void 0 ? void 0 : (_product$category = product.category) === null || _product$category === void 0 ? void 0 : (_product$category$bus = _product$category.business) === null || _product$category$bus === void 0 ? void 0 : _product$category$bus.slug;
+    var categoryId = product === null || product === void 0 ? void 0 : (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.id;
+    var productId = product === null || product === void 0 ? void 0 : product.id;
+
+    if (!categoryId && !productId) {
+      return window.location.pathname.includes('/store/') ? events.emit('go_to_page', {
+        page: 'business',
+        params: {
+          store: slug
+        },
+        replace: true
+      }) : events.emit('go_to_page', {
+        page: 'business_slug',
+        params: {
+          store: slug
+        },
+        replace: true
+      });
+    }
+
+    return window.location.pathname.includes('/store/') ? events.emit('go_to_page', {
+      page: 'business',
+      params: {
+        store: slug
+      },
+      search: "?category=".concat(categoryId, "&product=").concat(productId),
+      replace: true
+    }) : events.emit('go_to_page', {
+      page: 'business_slug',
+      params: {
+        store: slug
+      },
+      search: "?category=".concat(categoryId, "&product=").concat(productId),
+      replace: true
+    });
+  };
+
   var closeOrderModal = function closeOrderModal(e) {
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
 
@@ -352,8 +392,11 @@ var FavoriteListUI = function FavoriteListUI(props) {
       key: "".concat(product.id, "_").concat(i),
       isSoldOut: product.inventoried && !product.quantity,
       product: product,
-      onProductClick: function onProductClick() {},
-      handleUpdateProducts: handleUpdateFavoriteList
+      onProductClick: function onProductClick() {
+        return _onProductClick(product);
+      },
+      handleUpdateProducts: handleUpdateFavoriteList,
+      isFavorite: true
     });
   })), (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.loading) && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {

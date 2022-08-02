@@ -69,7 +69,8 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
       customStyle = props.customStyle,
       useKioskApp = props.useKioskApp,
       productAddedToCartLength = props.productAddedToCartLength,
-      handleFavoriteProduct = props.handleFavoriteProduct;
+      handleFavoriteProduct = props.handleFavoriteProduct,
+      isFavorite = props.isFavorite;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -115,6 +116,12 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     var _favoriteRef$current, _product$business;
 
     if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
+
+    if (isFavorite) {
+      onProductClick && onProductClick();
+      return;
+    }
+
     !isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product, product === null || product === void 0 ? void 0 : (_product$business = product.business) === null || _product$business === void 0 ? void 0 : _product$business.slug) || useCustomFunctionality && onCustomClick && onCustomClick();
   };
 
