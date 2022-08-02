@@ -435,65 +435,40 @@ const ProductOptionsUI = (props) => {
               {
                 (product?.ingredients.length > 0 || product?.extras.length > 0) && (
                   <ProductTabContainer id='all'>
-                    <Swiper
-                      spaceBetween={5}
-                      slidesPerView='auto'
-                      freeMode
-                      watchSlidesProgress
-                      className='option-tabs'
-                      watchOverflow
-                    >
-                      <SwiperSlide key='option-tabs-all'>
-                        <Tab
-                          key='all'
-                          active={tabValue === 'all'}
-                          onClick={() => handleChangeTabValue('all')}
-                          borderBottom
-                        >
-                          {t('ALL', 'All')}
-                        </Tab>
-                      </SwiperSlide>
+                    <Tabs variant='primary'>
+                      <Tab
+                        key='all'
+                        active={tabValue === 'all'}
+                        onClick={() => handleChangeTabValue('all')}
+                        borderBottom
+                      >
+                        {t('ALL', 'All')}
+                      </Tab>
                       {
                         product?.ingredients.length > 0 && (
-                          <SwiperSlide key='option-tabs-ingredients'>
-                            <Tab
-                              key='ingredients'
-                              active={tabValue === 'ingredients'}
-                              onClick={() => handleChangeTabValue('ingredients')}
-                              borderBottom
-                            >
-                              {t('INGREDIENTS', 'ingredients')}
-                            </Tab>
-                          </SwiperSlide>
+                          <Tab
+                            key='ingredients'
+                            active={tabValue === 'ingredients'}
+                            onClick={() => handleChangeTabValue('ingredients')}
+                            borderBottom
+                          >
+                            {t('INGREDIENTS', 'ingredients')}
+                          </Tab>
                         )
                       }
                       {
                         product?.extras.length > 0 && (
-                          <SwiperSlide key='option-tabs-extra'>
-                            <Tab
-                              key='extra'
-                              active={tabValue === 'extra'}
-                              onClick={() => handleChangeTabValue('extra')}
-                              borderBottom
-                            >
-                              {t('EXTRA', 'Extra')}
-                            </Tab>
-                          </SwiperSlide>
-                        )
-                      }
-                      {product?.extras.length > 0 && product?.extras.sort((a, b) => a.rank - b.rank).map(options => options.options.sort((a, b) => a.rank - b.rank).map(option => (
-                        <SwiperSlide key={`option-tabs-${option?.name}_${option?.id}`}>
                           <Tab
-                            key={`${option?.name}_${option?.id}`}
-                            active={tabValue === `${option?.name}_${option?.id}`}
-                            onClick={() => handleChangeTabValue(`${option?.name}_${option?.id}`)}
+                            key='extra'
+                            active={tabValue === 'extra'}
+                            onClick={() => handleChangeTabValue('extra')}
                             borderBottom
                           >
-                            {option?.name}
+                            {t('EXTRA', 'Extra')}
                           </Tab>
-                        </SwiperSlide>))
-                      )}
-                    </Swiper>
+                        )
+                      }
+                    </Tabs>
                   </ProductTabContainer>
                 )
               }
