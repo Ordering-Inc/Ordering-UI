@@ -31,7 +31,8 @@ const SingleProductCardUI = (props) => {
     customStyle,
     useKioskApp,
     productAddedToCartLength,
-    handleFavoriteProduct
+    handleFavoriteProduct,
+    isFavorite
   } = props
 
   const [, t] = useLanguage()
@@ -62,6 +63,10 @@ const SingleProductCardUI = (props) => {
   const handleClickProduct = (e) => {
     if (favoriteRef?.current?.contains(e.target)) return
 
+    if (isFavorite) {
+      onProductClick && onProductClick()
+      return
+    }
     (!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product, product?.business?.slug)) ||
     (useCustomFunctionality && onCustomClick && onCustomClick())
   }
