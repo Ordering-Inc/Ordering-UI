@@ -103,18 +103,18 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     }
 
     if (!subCategory) {
-      setSubcategoriesSelected(subcategoriesSelected.filter(function (_subcategory) {
+      setSubcategoriesSelected(subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.filter(function (_subcategory) {
         return (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.parent_category_id) !== (parentCategory === null || parentCategory === void 0 ? void 0 : parentCategory.id);
       }));
       return;
     }
 
-    var categoryFounded = subcategoriesSelected.find(function (_subcategory) {
+    var categoryFounded = subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.find(function (_subcategory) {
       return (subCategory === null || subCategory === void 0 ? void 0 : subCategory.id) === (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.id);
     });
 
     if (categoryFounded) {
-      setSubcategoriesSelected(subcategoriesSelected.filter(function (_subcategory) {
+      setSubcategoriesSelected(subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.filter(function (_subcategory) {
         return (subCategory === null || subCategory === void 0 ? void 0 : subCategory.id) !== (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.id);
       }));
     } else {
@@ -253,9 +253,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     })) !== null && _categoryState$produc6 !== void 0 ? _categoryState$produc6 : [];
 
     var products = (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.length) > 0 ? _products === null || _products === void 0 ? void 0 : _products.filter(function (product) {
-      return !subcategoriesSelected.find(function (subcategory) {
+      return !(subcategoriesSelected !== null && subcategoriesSelected !== void 0 && subcategoriesSelected.find(function (subcategory) {
         return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id) === (category === null || category === void 0 ? void 0 : category.id);
-      }) || (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.some(function (subcategory) {
+      })) || (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.some(function (subcategory) {
         return subcategory.id === (product === null || product === void 0 ? void 0 : product.category_id);
       }));
     }) : _products;
