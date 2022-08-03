@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TitleContainer = exports.Price = exports.Map = exports.Logo = exports.FavoriteWrapper = exports.Content = exports.Container = exports.ButtonWrapper = exports.BusinessLogoWrapper = void 0;
+exports.TitleContainer = exports.ReviewWrapper = exports.Price = exports.Map = exports.Logo = exports.FavoriteWrapper = exports.Content = exports.Container = exports.ButtonWrapper = exports.BusinessLogoWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -139,3 +139,7 @@ var FavoriteWrapper = _styledComponents.default.div(_templateObject21 || (_templ
 });
 
 exports.FavoriteWrapper = FavoriteWrapper;
+
+var ReviewWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  .review-sent {\n    border-radius: 7.6px;\n  }\n"])));
+
+exports.ReviewWrapper = ReviewWrapper;

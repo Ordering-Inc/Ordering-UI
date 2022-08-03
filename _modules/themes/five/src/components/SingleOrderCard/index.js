@@ -1,15 +1,23 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SingleOrderCard = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _ReviewOrder = require("../../../../../components/ReviewOrder");
+
+var _ReviewProduct = require("../../../../../components/ReviewProduct");
+
+var _ReviewDriver = require("../../../../../components/ReviewDriver");
 
 var _styledComponents = require("styled-components");
 
@@ -21,11 +29,17 @@ var _Buttons = require("../../styles/Buttons");
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _Modal = require("../Modal");
+
 var _styles = require("./styles");
 
 var _styles2 = require("../OrdersOption/styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -79,6 +93,35 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isReviewOpen = _useState2[0],
+      setIsReviewOpen = _useState2[1];
+
+  var _useState3 = (0, _react.useState)({
+    order: false,
+    product: false,
+    driver: false
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      reviewStatus = _useState4[0],
+      setReviewStatus = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isOrderReviewed = _useState6[0],
+      setIsOrderReviewed = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isProductReviewed = _useState8[0],
+      setIsProductReviewed = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isDriverReviewed = _useState10[0],
+      setIsDriverReviewed = _useState10[1];
+
   var handleClickCard = function handleClickCard(e, uuid) {
     if (e.target.closest('.favorite') || e.target.closest('.review')) return;
 
@@ -99,13 +142,49 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     }
   };
 
-  var handleClickReview = function handleClickReview(uuid) {
-    onRedirectPage({
-      page: 'order_detail',
-      params: {
-        orderId: uuid
-      }
+  var closeReviewOrder = function closeReviewOrder() {
+    if (!isProductReviewed) setReviewStatus({
+      order: false,
+      product: true,
+      driver: false
+    });else if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true
+    });else handleCloseReivew();
+  };
+
+  var closeReviewProduct = function closeReviewProduct() {
+    if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true
+    });else {
+      setIsDriverReviewed(true);
+      handleCloseReivew();
+    }
+  };
+
+  var handleOpenOrderReview = function handleOpenOrderReview() {
+    setReviewStatus({
+      order: true,
+      product: false,
+      driver: false
     });
+    setIsReviewOpen(true);
+  };
+
+  var handleCloseReivew = function handleCloseReivew() {
+    setReviewStatus({
+      order: false,
+      product: false,
+      driver: false
+    });
+    setIsReviewOpen(false);
+  };
+
+  var handleClickReview = function handleClickReview(order) {
+    handleOpenOrderReview && handleOpenOrderReview();
   };
 
   var handleChangeFavorite = function handleChangeFavorite(order) {
@@ -185,12 +264,12 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     isBusinessesPage: isBusinessesPage
   }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, !isFavorite && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, !isOrderReviewed && !isFavorite && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     className: "review",
     onClick: function onClick() {
-      return handleClickReview(order.uuid);
+      return handleClickReview(order);
     }
   }, t('REVIEW', 'Review')), order.cart && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
@@ -207,7 +286,23 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 20,
     height: 20
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, order !== null && order !== void 0 && order.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, order !== null && order !== void 0 && order.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))))), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: isReviewOpen,
+    onClose: handleCloseReivew,
+    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', 'Loading...')
+  }, /*#__PURE__*/_react.default.createElement(_styles.ReviewWrapper, null, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
+    order: order,
+    closeReviewOrder: closeReviewOrder,
+    setIsReviewed: setIsOrderReviewed
+  }) : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? /*#__PURE__*/_react.default.createElement(_ReviewProduct.ReviewProduct, {
+    order: order,
+    closeReviewProduct: closeReviewProduct,
+    setIsProductReviewed: setIsProductReviewed
+  }) : /*#__PURE__*/_react.default.createElement(_ReviewDriver.ReviewDriver, {
+    order: order,
+    closeReviewDriver: handleCloseReivew,
+    setIsDriverReviewed: setIsDriverReviewed
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

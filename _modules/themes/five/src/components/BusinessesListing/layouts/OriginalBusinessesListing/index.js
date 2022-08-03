@@ -326,8 +326,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       var _configs$advanced_bus;
 
       return (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' && onRedirectPage({
-        page: 'business_search',
-        search: "?term=".concat(term)
+        page: 'business_search'
       });
     }
   }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus2 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus2 === void 0 ? void 0 : _configs$advanced_bus2.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {

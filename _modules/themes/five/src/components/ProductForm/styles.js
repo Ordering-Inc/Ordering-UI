@@ -91,7 +91,7 @@ var WrapperIngredients = _styledComponents.default.div(_templateObject15 || (_te
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var ProductTabContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 900;\n\n  > div {\n    div {\n      padding: 9px 15px;\n      &:first-child {\n        padding-left: 0px;\n        ", "\n      }\n    }\n  }\n"])), function (props) {
+var ProductTabContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 900;\n  .swiper-slide {\n    width: auto;\n  }\n  > div {\n    div {\n      padding: 9px 15px;\n      &:first-child {\n        padding-left: 0px;\n        ", "\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n          padding-right: 0px;\n          padding-left: 15px;\n        "])));

@@ -1,11 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BusinessListingSearchUI = exports.BusinessListingSearch = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _styles = require("./styles");
 
@@ -43,7 +45,15 @@ var _BisDownArrow = _interopRequireDefault(require("@meronex/icons/bi/BisDownArr
 
 var _BisUpArrow = _interopRequireDefault(require("@meronex/icons/bi/BisUpArrow"));
 
+var _Modal = require("../Modal");
+
+var _ProductForm = require("../ProductForm");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -72,7 +82,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
-  var _businessesSearchList, _sortItems$filter, _brandList$brands, _brandList$brands$fil, _orderState$options3, _orderState$options4, _orderState$options5, _businessesSearchList2, _businessesSearchList3, _businessesSearchList5;
+  var _businessesSearchList, _sortItems$filter, _brandList$brands, _brandList$brands$fil, _orderState$options3, _orderState$options4, _orderState$options5, _businessesSearchList2, _businessesSearchList3, _businessesSearchList5, _curProduct$business, _curProduct$business2, _curProduct$product, _curProduct$product2;
 
   var businessesSearchList = props.businessesSearchList,
       onBusinessClick = props.onBusinessClick,
@@ -97,6 +107,14 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
+
+  var _useState = (0, _react.useState)({
+    business: null,
+    product: null
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      curProduct = _useState2[0],
+      setCurProduct = _useState2[1];
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -155,6 +173,28 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     if (value === (filters === null || filters === void 0 ? void 0 : filters.price_level)) handleChangeFilters('price_level', null);else handleChangeFilters('price_level', value);
   };
 
+  var _onProductClick = function onProductClick(product, business) {
+    setCurProduct({
+      business: business,
+      product: product
+    });
+  };
+
+  var handleRedirectToCart = function handleRedirectToCart(product, code) {
+    setCurProduct({
+      business: null,
+      product: null
+    });
+    onBusinessClick(curProduct === null || curProduct === void 0 ? void 0 : curProduct.business);
+  };
+
+  var closeModalProductForm = function closeModalProductForm() {
+    setCurProduct({
+      business: null,
+      product: null
+    });
+  };
+
   var MaxSectionItem = function MaxSectionItem(_ref) {
     var _ref2;
 
@@ -184,6 +224,7 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessListingSearchContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('SEARCH', 'Search')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     isCustomLayout: true,
+    forceFocus: true,
     placeholder: "".concat(t('SEARCH_BUSINESSES', 'Search Businesses'), " / ").concat(t('PLEASE_TYPE_AT_LEAST_3_CHARACTERS', 'Please type at least 3 characters')),
     onSearch: function onSearch(val) {
       return handleChangeTermValue(val);
@@ -327,6 +368,9 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
           isSoldOut: product.inventoried && !product.quantity,
           product: product,
           businessId: business === null || business === void 0 ? void 0 : business.id,
+          onProductClick: function onProductClick(product) {
+            return _onProductClick(product, business);
+          },
           handleUpdateProducts: function handleUpdateProducts(productId, changes) {
             return _handleUpdateProducts(productId, category === null || category === void 0 ? void 0 : category.id, business === null || business === void 0 ? void 0 : business.id, changes);
           }
@@ -352,7 +396,24 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
         isSkeleton: true
       });
     }))));
-  })))));
+  })))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: props !== null && props !== void 0 && props.useKioskApp ? '80%' : '760px',
+    open: !!(curProduct !== null && curProduct !== void 0 && curProduct.product),
+    closeOnBackdrop: true,
+    onClose: function onClose() {
+      return closeModalProductForm();
+    },
+    padding: "0",
+    isProductForm: true,
+    disableOverflowX: true
+  }, !!(curProduct !== null && curProduct !== void 0 && curProduct.product) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+    businessSlug: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business = curProduct.business) === null || _curProduct$business === void 0 ? void 0 : _curProduct$business.slug,
+    useKioskApp: props === null || props === void 0 ? void 0 : props.useKioskApp,
+    businessId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business2 = curProduct.business) === null || _curProduct$business2 === void 0 ? void 0 : _curProduct$business2.id,
+    categoryId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$product = curProduct.product) === null || _curProduct$product === void 0 ? void 0 : _curProduct$product.category_id,
+    productId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$product2 = curProduct.product) === null || _curProduct$product2 === void 0 ? void 0 : _curProduct$product2.id,
+    onSave: handleRedirectToCart
+  })));
 };
 
 exports.BusinessListingSearchUI = BusinessListingSearchUI;

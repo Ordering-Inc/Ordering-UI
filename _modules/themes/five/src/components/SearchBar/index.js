@@ -132,7 +132,10 @@ var SearchBar = function SearchBar(props) {
     style: {
       backgroundImage: "url(".concat(theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.searchIcon, ")")
     },
-    defaultValue: search
+    defaultValue: search,
+    onClick: function onClick() {
+      return handleCustomEnter && handleCustomEnter();
+    }
   }), /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, {
     className: "clear"
   }, ((_el$current2 = el.current) === null || _el$current2 === void 0 ? void 0 : _el$current2.value) && /*#__PURE__*/_react.default.createElement("span", {

@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _moment = _interopRequireDefault(require("moment"));
+
 var _orderingComponents = require("ordering-components");
 
 var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
@@ -412,6 +414,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     businessesIds: businessesIds,
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);
+    }).sort(function (a, b) {
+      return (0, _moment.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf() - (0, _moment.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf();
     }),
     pagination: pagination,
     onRedirectPage: onRedirectPage,
@@ -431,6 +435,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     reorderLoading: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading,
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);
+    }).sort(function (a, b) {
+      return (0, _moment.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf() - (0, _moment.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf();
     }),
     pagination: pagination,
     loadMoreOrders: loadMoreOrders,

@@ -305,6 +305,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   var scrollDown = function scrollDown() {
     var _document$getElements;
 
+    var _adjustHeight = 120;
     var isErrors = Object.values(errors).length > 0;
 
     if (!isErrors) {
@@ -315,10 +316,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     var unselectedFirstSubOption = (_document$getElements = document.getElementsByClassName('error')) === null || _document$getElements === void 0 ? void 0 : _document$getElements[0];
 
     if (unselectedFirstSubOption) {
-      productContainer.scrollTop -= 90;
-      unselectedFirstSubOption.scrollIntoView({
-        behavior: 'smooth'
-      });
+      unselectedFirstSubOption.scrollIntoView();
+      productContainer.scrollTop -= _adjustHeight;
     }
   };
 
@@ -342,14 +341,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }, [errors]);
   (0, _react.useEffect)(function () {
     if (document.getElementById("".concat(tabValue))) {
-      var extraHeight = windowSize.width < 769 ? 100 : 42;
+      var extraHeight = windowSize.width < 769 ? 100 : 100;
       var top = tabValue === 'all' ? 0 : document.getElementById("".concat(tabValue)).offsetTop - extraHeight;
       var scrollElement = document.querySelector('.popup-dialog');
-
-      if (windowSize.width >= 1200) {
-        scrollElement = productContainerRef.current;
-      }
-
       scrollElement.scrollTo({
         top: top,
         behavior: 'smooth'
@@ -565,7 +559,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }).map(function (option) {
       var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
-        key: option === null || option === void 0 ? void 0 : option.id
+        key: option === null || option === void 0 ? void 0 : option.id,
+        id: "".concat(option === null || option === void 0 ? void 0 : option.name, "_").concat(option === null || option === void 0 ? void 0 : option.id)
       }, showOption(option) && /*#__PURE__*/_react.default.createElement(_ProductOption.ProductOption, {
         option: option,
         currentState: currentState,
