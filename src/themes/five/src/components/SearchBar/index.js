@@ -99,6 +99,7 @@ export const SearchBar = (props) => {
           maxLength='500'
           style={{ backgroundImage: `url(${theme?.images?.general?.searchIcon})` }}
           defaultValue={search}
+          onClick={() => handleCustomEnter && handleCustomEnter()}
         />
         <DeleteContent className='clear'>
           {el.current?.value && <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span>}
