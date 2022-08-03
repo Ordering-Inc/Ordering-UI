@@ -16,7 +16,8 @@ export const VerifyCodeForm = (props) => {
     handleSendOtp,
     handleCheckPhoneCode,
     credentials,
-    email
+    email,
+    isPhone
   } = props
 
   const [, t] = useLanguage()
@@ -38,7 +39,7 @@ export const VerifyCodeForm = (props) => {
 
   return (
     <Container>
-      <p>{t('SENT_VERIFY_CODE_ON_EMAIL', 'We sent you a verication code on _email_').replace('_email_', email)}</p>
+      <p>{t('SENT_VERIFY_CODE_ON_EMAIL', 'We sent you a verication code on _email_').replace('_email_', isPhone ? credentials?.cellphone : email)}</p>
       <DownTimer>{formatSeconds(otpLeftTime)}</DownTimer>
       <OtpWrapper>
         <OtpInput

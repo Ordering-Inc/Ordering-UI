@@ -141,7 +141,7 @@ export const BusinessInfoItem = styled.div`
 `
 
 export const BusinessInfoContainer = styled.div`
-  padding: 10px;
+  padding: 10px 0px;
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
@@ -350,5 +350,42 @@ export const SearchComponentContainer = styled.div`
   }
   svg {
     color: #FFFFFF;
+  }
+`
+
+export const SocialList = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  ${props => props.theme.rtl && css`
+    margin-right: 15px;
+    margin-left: 0px;
+  `}
+`
+
+export const IconWrapper = styled.a`
+  margin: 0px 3px 10px 3px;
+  border-radius: 3px;
+  border: 0.5px solid ${props => props.theme.colors.gray200};
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s linear;
+
+  svg {
+    height: 18px;
+    font-size: 18px;
+    transition: all 0.2s ease-in;
+    color: ${props => props.theme.colors.headingColor};
+  }
+  &:hover {
+    background-color: ${props => props.theme.colors.gray200};
+    svg {
+      transform: scale(1.07);
+    }
   }
 `

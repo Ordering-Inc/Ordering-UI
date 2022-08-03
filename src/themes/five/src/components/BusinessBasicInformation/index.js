@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { StarFill } from 'react-bootstrap-icons'
+import { StarFill, Facebook, Tiktok, Pinterest, Whatsapp, Instagram, Snapchat } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
@@ -31,7 +31,9 @@ import {
   TitleWrapper,
   RibbonBox,
   SearchIconWrapper,
-  SearchComponentContainer
+  SearchComponentContainer,
+  SocialList,
+  IconWrapper
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
 
@@ -138,6 +140,14 @@ export const BusinessBasicInformation = (props) => {
     )
   }
 
+  const SocialNetWork = ({ url, icon }) => {
+    return (
+      <IconWrapper href={url} target='_blank' rel='noopener noreferrer'>
+        {icon}
+      </IconWrapper>
+    )
+  }
+
   const BusinessInfoComponent = () => {
     return (
       <BusinessInfoContainer>
@@ -156,6 +166,44 @@ export const BusinessBasicInformation = (props) => {
                       {business?.ribbon?.text}
                     </RibbonBox>
                   )}
+                  <SocialList>
+                    {business?.facebook_profile && (
+                      <SocialNetWork
+                        url={business?.facebook_profile}
+                        icon={<Facebook />}
+                      />
+                    )}
+                    {business?.instagram_profile && (
+                      <SocialNetWork
+                        url={business?.instagram_profile}
+                        icon={<Instagram />}
+                      />
+                    )}
+                    {business?.tiktok_profile && (
+                      <SocialNetWork
+                        url={business?.tiktok_profile}
+                        icon={<Tiktok />}
+                      />
+                    )}
+                    {business?.pinterest_profile && (
+                      <SocialNetWork
+                        url={business?.pinterest_profile}
+                        icon={<Pinterest />}
+                      />
+                    )}
+                    {business?.whatsapp_number && (
+                      <SocialNetWork
+                        url={business?.whatsapp_number}
+                        icon={<Whatsapp />}
+                      />
+                    )}
+                    {business?.snapchat_profile && (
+                      <SocialNetWork
+                        url={business?.snapchat_profile}
+                        icon={<Snapchat />}
+                      />
+                    )}
+                  </SocialList>
                 </TitleWrapper>
               ) : (
                 <Skeleton width={isCustomerMode ? 100 : 150} height={isCustomerMode ? 35 : 'auto'} />
