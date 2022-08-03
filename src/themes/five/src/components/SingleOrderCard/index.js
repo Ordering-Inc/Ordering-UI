@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLanguage, useUtils, useConfig, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
+import { ReviewOrder } from '../../../../../components/ReviewOrder'
+import { ReviewProduct } from '../../../../../components/ReviewProduct'
+import { ReviewDriver } from '../../../../../components/ReviewDriver'
 import { useTheme } from 'styled-components'
 import { getGoogleMapImage } from '../../../../../utils'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
-
+import { Modal } from '../Modal'
 import {
   Container,
   Content,
@@ -16,7 +19,8 @@ import {
   Logo,
   TitleContainer,
   Map,
-  FavoriteWrapper
+  FavoriteWrapper,
+  ReviewWrapper
 } from './styles'
 
 import {
@@ -42,6 +46,11 @@ const SingleOrderCardUI = (props) => {
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
   const [{ configs }] = useConfig()
+  const [isReviewOpen, setIsReviewOpen] = useState(false)
+  const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
+  const [isOrderReviewed, setIsOrderReviewed] = useState(false)
+  const [isProductReviewed, setIsProductReviewed] = useState(false)
+  const [isDriverReviewed, setIsDriverReviewed] = useState(false)
 
   const handleClickCard = (e, uuid) => {
     if (e.target.closest('.favorite') || e.target.closest('.review')) return
@@ -53,8 +62,30 @@ const SingleOrderCardUI = (props) => {
     }
   }
 
-  const handleClickReview = (uuid) => {
-    onRedirectPage({ page: 'order_detail', params: { orderId: uuid } })
+  const closeReviewOrder = () => {
+    if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else handleCloseReivew()
+  }
+
+  const closeReviewProduct = () => {
+    if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else {
+      setIsDriverReviewed(true)
+      handleCloseReivew()
+    }
+  }
+  const handleOpenOrderReview = () => {
+    setReviewStatus({ order: true, product: false, driver: false })
+    setIsReviewOpen(true)
+  }
+  const handleCloseReivew = () => {
+    setReviewStatus({ order: false, product: false, driver: false })
+    setIsReviewOpen(false)
+  }
+
+  const handleClickReview = (order) => {
+    handleOpenOrderReview && handleOpenOrderReview()
   }
 
   const handleChangeFavorite = (order) => {
@@ -177,12 +208,12 @@ const SingleOrderCardUI = (props) => {
           )}
           {pastOrders && !isCustomerMode && (
             <ButtonWrapper>
-              {!isFavorite && (!order?.review || (order.driver && !order?.user_review)) && (
+              {!isOrderReviewed && !isFavorite && (!order?.review || (order.driver && !order?.user_review)) && (
                 <Button
                   outline
                   color='primary'
                   className='review'
-                  onClick={() => handleClickReview(order.uuid)}
+                  onClick={() => handleClickReview(order)}
                 >
                   {t('REVIEW', 'Review')}
                 </Button>
@@ -203,6 +234,30 @@ const SingleOrderCardUI = (props) => {
           </FavoriteWrapper>
         </Content>
       </Container>
+      {isReviewOpen && (
+        <Modal
+          open={isReviewOpen}
+          onClose={handleCloseReivew}
+          title={order
+            ? (reviewStatus?.order
+              ? t('REVIEW_ORDER', 'Review order')
+              : (reviewStatus?.product
+                ? t('REVIEW_PRODUCT', 'Review Product')
+                : t('REVIEW_DRIVER', 'Review Driver')))
+            : t('LOADING', 'Loading...')}
+        >
+          <ReviewWrapper>
+            {
+              reviewStatus?.order
+                ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+                : (reviewStatus?.product
+                  ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
+                  : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
+            }
+          </ReviewWrapper>
+
+        </Modal>
+      )}
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
