@@ -108,7 +108,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       onCheckoutRedirect = props.onCheckoutRedirect,
       handleUpdateProducts = props.handleUpdateProducts,
       professionalSelected = props.professionalSelected,
-      handleChangeProfessionalSelected = props.handleChangeProfessionalSelected;
+      handleChangeProfessionalSelected = props.handleChangeProfessionalSelected,
+      onChangeMetaTag = props.onChangeMetaTag;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -349,6 +350,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     events.emit('get_current_view');
   }, []);
   (0, _react.useEffect)(function () {
+    if (openProduct) {
+      onChangeMetaTag(curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_title, curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_description, curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_keywords);
+    } else {
+      onChangeMetaTag(business === null || business === void 0 ? void 0 : business.slug, business === null || business === void 0 ? void 0 : business.description, business === null || business === void 0 ? void 0 : business.name);
+    }
+
     events.on('change_view', handleChangePage);
     return function () {
       events.off('change_view', handleChangePage);
