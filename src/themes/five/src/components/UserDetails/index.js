@@ -188,7 +188,7 @@ const UserDetailsUI = (props) => {
                   <CountryFlag>
                     {
                       userData?.country_phone_code && (
-                        <PhoneInput onChange={() => {}} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code)} ${userData?.cellphone}`)?.country} />
+                        <PhoneInput onChange={() => {}} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.cellphone}`)?.country} />
                       )
                     }
                   </CountryFlag>
