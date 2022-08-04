@@ -60,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _userState$result, _formState$result, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _parsePhoneNumber, _props$afterComponent, _props$afterElements;
+  var _userState$result, _formState$result, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _parsePhoneNumber, _userData$country_pho, _props$afterComponent, _props$afterElements;
 
   var isEdit = props.isEdit,
       formState = props.formState,
@@ -222,7 +222,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     }
   }))), !isEdit ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, ((userData === null || userData === void 0 ? void 0 : userData.name) || (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (userData === null || userData === void 0 ? void 0 : userData.lastname) || (userData === null || userData === void 0 ? void 0 : userData.second_lastname)) && /*#__PURE__*/_react.default.createElement(_styles.UserName, null, userData === null || userData === void 0 ? void 0 : userData.name, " ", userData === null || userData === void 0 ? void 0 : userData.middle_name, " ", userData === null || userData === void 0 ? void 0 : userData.lastname, " ", userData === null || userData === void 0 ? void 0 : userData.second_lastname), (userData === null || userData === void 0 ? void 0 : userData.email) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CountryFlag, null, (userData === null || userData === void 0 ? void 0 : userData.country_phone_code) && /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     onChange: function onChange() {},
-    defaultCountry: (_parsePhoneNumber = (0, _libphonenumberJs.parsePhoneNumber)("+".concat(userData === null || userData === void 0 ? void 0 : userData.country_phone_code, " ").concat(userData === null || userData === void 0 ? void 0 : userData.cellphone))) === null || _parsePhoneNumber === void 0 ? void 0 : _parsePhoneNumber.country
+    defaultCountry: (_parsePhoneNumber = (0, _libphonenumberJs.parsePhoneNumber)("+".concat(userData === null || userData === void 0 ? void 0 : (_userData$country_pho = userData.country_phone_code) === null || _userData$country_pho === void 0 ? void 0 : _userData$country_pho.replace('+', ''), " ").concat(userData === null || userData === void 0 ? void 0 : userData.cellphone))) === null || _parsePhoneNumber === void 0 ? void 0 : _parsePhoneNumber.country
   })), /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.cellphone))) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
     userData: userData,
     isCustomerMode: isCustomerMode,

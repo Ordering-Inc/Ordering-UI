@@ -31,7 +31,10 @@ var ProductsListing = _styledComponents.default.div(_templateObject3 || (_templa
 
 exports.ProductsListing = ProductsListing;
 
-var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    margin-left: 10px;\n    width: 100%;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n    }\n  }\n  .category-description {\n    margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    p {\n      margin: 0;\n      color: #909BA9;\n      white-space: pre;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n    }\n  }\n\n  .wrap-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    width: 100%;\n    button {\n      min-width: max-content;\n    }\n  }\n  h3 {\n    font-weight: 600;\n    font-size: 24px;\n    color: ", ";\n    margin-left: 10px;\n    ", "\n  }\n"])), function (props) {
+var WrapAllCategories = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    justify-content: ", ";\n    margin-left: 10px;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n    }\n  }\n  .category-description {\n    margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    p {\n      margin: 0;\n      color: #909BA9;\n      white-space: pre;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n    }\n  }\n\n  .wrap-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    width: 100%;\n    button {\n      min-width: max-content;\n    }\n  }\n  h3 {\n    font-weight: 600;\n    font-size: 24px;\n    color: ", ";\n    margin-left: 10px;\n    ", "\n  }\n"])), function (_ref) {
+  var isCategorySelected = _ref.isCategorySelected;
+  return isCategorySelected ? 'flex-start' : 'space-between';
+}, function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
@@ -67,21 +70,21 @@ var RibbonBox = _styledComponents.default.div(_templateObject10 || (_templateObj
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 5px;\n  "])));
-}, function (_ref) {
-  var bgColor = _ref.bgColor;
-  return bgColor && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
 }, function (_ref2) {
-  var isRoundRect = _ref2.isRoundRect;
-  return isRoundRect && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+  var bgColor = _ref2.bgColor;
+  return bgColor && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
 }, function (_ref3) {
-  var isCapsule = _ref3.isCapsule;
+  var isRoundRect = _ref3.isRoundRect;
+  return isRoundRect && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+}, function (_ref4) {
+  var isCapsule = _ref4.isCapsule;
   return isCapsule && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
 });
 
 exports.RibbonBox = RibbonBox;
 
-var CategoryDescripion = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: flex-end;\n    p {\n      margin: 0;\n      color: #909BA9;\n      max-width: ", ";\n      overflow: hidden;\n      text-overflow: ellipsis;\n      overflow-wrap: anywhere;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n      white-space: nowrap;\n      overflow: visible;\n    }\n"])), function (_ref4) {
-  var maxWidth = _ref4.maxWidth;
+var CategoryDescripion = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: flex-end;\n    p {\n      margin: 0;\n      color: #909BA9;\n      max-width: ", ";\n      overflow: hidden;\n      text-overflow: ellipsis;\n      overflow-wrap: anywhere;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n      white-space: nowrap;\n      overflow: visible;\n    }\n"])), function (_ref5) {
+  var maxWidth = _ref5.maxWidth;
   return maxWidth ? "".concat(maxWidth - 200, "px") : 'initial';
 }, function (props) {
   return props.theme.colors.primary;
