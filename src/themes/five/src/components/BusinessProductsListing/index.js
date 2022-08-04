@@ -200,9 +200,9 @@ const BusinessProductsListingUI = (props) => {
   useEffect(() => {
     if (loading) return
     if (openProduct) {
-      onChangeMetaTag(curProduct?.seo_title, curProduct?.seo_description, curProduct?.seo_keywords)
+      onChangeMetaTag && onChangeMetaTag(curProduct?.seo_title, curProduct?.seo_description, curProduct?.seo_keywords)
     } else {
-      onChangeMetaTag(business?.slug, business?.description, business?.name)
+      onChangeMetaTag && onChangeMetaTag(business?.slug, business?.description, business?.name)
     }
   }, [openProduct, loading, business, curProduct])
 
