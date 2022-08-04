@@ -50,7 +50,7 @@ const BusinessProductsListUI = (props) => {
   return (
     <ProductsContainer>
       {category?.id && (
-        <WrapAllCategories id='container'>
+        <WrapAllCategories id='container' isCategorySelected>
           <HeaderWrapper>
             <div className='category-title'>
               {
