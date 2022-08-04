@@ -137,6 +137,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       auth = _useSession2[0].auth;
 
+  var _useSite = (0, _orderingComponents.useSite)(),
+      _useSite2 = _slicedToArray(_useSite, 1),
+      site = _useSite2[0].site;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       openProduct = _useState2[0],
@@ -204,10 +208,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var onProductClick = function onProductClick(product) {
     if (!((product === null || product === void 0 ? void 0 : product.type) === 'service' && professionalSelected)) {
+      var _product$category;
+
       onProductRedirect({
         slug: business === null || business === void 0 ? void 0 : business.slug,
-        product: product.id,
-        category: product.category_id
+        product: site.product_url_template.includes('product_slug') ? product === null || product === void 0 ? void 0 : product.slug : product.id,
+        category: site.product_url_template.includes('category_slug') ? product === null || product === void 0 ? void 0 : (_product$category = product.category) === null || _product$category === void 0 ? void 0 : _product$category.slug : product.category_id
       });
     }
 
