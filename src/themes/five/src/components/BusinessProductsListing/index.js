@@ -71,7 +71,8 @@ const BusinessProductsListingUI = (props) => {
     onCheckoutRedirect,
     handleUpdateProducts,
     professionalSelected,
-    handleChangeProfessionalSelected
+    handleChangeProfessionalSelected,
+    onChangeMetaTag
   } = props
 
   const { business, loading, error } = businessState
@@ -197,6 +198,11 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
+    if (openProduct) {
+      onChangeMetaTag(curProduct?.seo_title, curProduct?.seo_description, curProduct?.seo_keywords)
+    } else {
+      onChangeMetaTag(business?.slug, business?.description, business?.name)
+    }
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
