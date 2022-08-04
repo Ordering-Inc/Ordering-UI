@@ -198,11 +198,15 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
+    if (loading) return
     if (openProduct) {
       onChangeMetaTag(curProduct?.seo_title, curProduct?.seo_description, curProduct?.seo_keywords)
     } else {
       onChangeMetaTag(business?.slug, business?.description, business?.name)
     }
+  }, [openProduct, loading, business, curProduct])
+
+  useEffect(() => {
     events.on('change_view', handleChangePage)
     return () => {
       events.off('change_view', handleChangePage)
