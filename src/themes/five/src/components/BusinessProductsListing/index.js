@@ -12,7 +12,8 @@ import {
   useLanguage,
   useOrder,
   useUtils,
-  useSession
+  useSession,
+  useSite
 } from 'ordering-components'
 
 import {
@@ -82,6 +83,7 @@ const BusinessProductsListingUI = (props) => {
   const location = useLocation()
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
+  const [{ site }] = useSite()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
@@ -109,8 +111,8 @@ const BusinessProductsListingUI = (props) => {
     if (!((product?.type === 'service') && professionalSelected)) {
       onProductRedirect({
         slug: business?.slug,
-        product: product.id,
-        category: product.category_id
+        product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
+        category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
       })
     }
     setCurProduct(product)
