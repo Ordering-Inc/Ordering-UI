@@ -287,7 +287,7 @@ const SignUpFormUI = (props) => {
     } else {
       formMethods.unregister('cellphone')
     }
-  }, [formMethods])
+  }, [formMethods, signUpTab])
 
   useEffect(() => {
     if (checkPhoneCodeState?.result?.error) {
