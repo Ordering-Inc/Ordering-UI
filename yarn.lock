@@ -80,9 +80,9 @@
     semver "^6.3.0"
 
 "@babel/generator@^7.18.10", "@babel/generator@^7.4.4":
-  version "7.18.10"
-  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.18.10.tgz#794f328bfabdcbaf0ebf9bf91b5b57b61fa77a2a"
-  integrity sha512-0+sW7e3HjQbiHbj1NeU/vN8ornohYlacAfZIaXhdoGweQqgcNy69COVciYYqEXJ/v+9OBA7Frxm4CVAuNqKeNA==
+  version "7.18.12"
+  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.18.12.tgz#fa58daa303757bd6f5e4bbca91b342040463d9f4"
+  integrity sha512-dfQ8ebCN98SvyL7IxNMCUtZQSq5R7kxgN+r8qYTGDmmSion1hX2C0zq2yo1bsCDhXixokv1SAWTZUMYbO/V5zg==
   dependencies:
     "@babel/types" "^7.18.10"
     "@jridgewell/gen-mapping" "^0.3.2"
@@ -1576,9 +1576,9 @@
     tslib "^2.4.0"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.42.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.42.0.tgz#a13b16b68b541a817f323e2dc0948d74830f737d"
-  integrity sha512-nSF6HNBU+bfUUEtAWOrzYH3uv/5Jy2wBnOe21qrDV6cwygeWgbhyQfuWdfCKhTs6rrafoOMM7CzXaXbZByV4pA==
+  version "1.42.1"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.42.1.tgz#50284f465068f41aca9b007c4c2354763a35b27b"
+  integrity sha512-KvAwGJMUpEuFT3+5Y2CY18j27SilGw6eAbvDf3tt0Btw/HSx8VlY9gE1wvFe3/nTtBQBHJKA4GOm98n+6Oe0rQ==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics-core" "1.0.1"
@@ -2556,9 +2556,9 @@
   integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
 
 "@types/node@*":
-  version "18.6.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.6.3.tgz#4e4a95b6fe44014563ceb514b2598b3e623d1c98"
-  integrity sha512-6qKpDtoaYLM+5+AFChLhHermMQxc3TOEFIDzrZLPRGHPrLEwqFkkT5Kx3ju05g6X7uDPazz3jHbKPX0KzCjntg==
+  version "18.6.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.6.4.tgz#fd26723a8a3f8f46729812a7f9b4fc2d1608ed39"
+  integrity sha512-I4BD3L+6AWiUobfxZ49DlU43gtI+FTHSv9pE2Zekg6KjMpre4ByusaljW3vYSLJrvQ1ck1hUaeVu8HVlY3vzHg==
 
 "@types/node@12.12.50":
   version "12.12.50"
@@ -5982,9 +5982,9 @@ get-symbol-description@^1.0.0:
     get-intrinsic "^1.1.1"
 
 get-user-locale@^1.2.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/get-user-locale/-/get-user-locale-1.5.0.tgz#5f5881197185a6c9f4fe35019a3c68430738ef7c"
-  integrity sha512-+KdoVdvyIVrv7HIcAaxKWyS3ulDgcblBt0SvjMwxbH3xi10JCEIt1LcRsN1RW+O6kKSFGTFUAtXmromAf3YkOw==
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/get-user-locale/-/get-user-locale-1.5.1.tgz#18a9ba2cfeed0e713ea00968efa75d620523a5ea"
+  integrity sha512-WiNpoFRcHn1qxP9VabQljzGwkAQDrcpqUtaP0rNBEkFxJdh4f3tik6MfZsMYZc+UgQJdGCxWEjL9wnCUlRQXag==
   dependencies:
     lodash.memoize "^4.1.1"
 
@@ -8293,7 +8293,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/105bfe2268f0e2f74f40ed47e495f5af6d78e329"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/f7c3e75afc004c4d7b9e86bd12378bf670e358fb"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -9619,9 +9619,9 @@ sass-loader@^9.0.2:
     semver "^7.3.2"
 
 sass@^1.26.10:
-  version "1.54.2"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.2.tgz#574cad83814c930ef2475921b9cb5d8203ae8867"
-  integrity sha512-wbVV26sejsCIbBScZZtNkvnrB/bVCQ8hSlZ01D9nzsVh9zLqCkWrlpvTb3YEb6xsuNi9cx75hncqwikHFSz7tw==
+  version "1.54.3"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.3.tgz#37baa2652f7f1fdadb73240ee9a2b9b81fabb5c4"
+  integrity sha512-fLodey5Qd41Pxp/Tk7Al97sViYwF/TazRc5t6E65O7JOk4XF8pzwIW7CvCxYVOfJFFI/1x5+elDyBIixrp+zrw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"

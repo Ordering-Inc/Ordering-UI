@@ -238,6 +238,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
     }
   };
 
+  var handleSignUpTab = function handleSignUpTab(tab) {
+    setSignUpTab(tab);
+    formMethods.clearErrors();
+  };
+
   var onSubmit = function onSubmit() {
     var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _validationFields$fie10, _configs$verification2;
 
@@ -355,10 +360,14 @@ var SignUpFormUI = function SignUpFormUI(props) {
     setFieldNumber(fieldnum);
   }, [validationFields]);
   (0, _react.useEffect)(function () {
-    formMethods.register('cellphone', {
-      required: isRequiredField('cellphone') ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone')) : null
-    });
-  }, [formMethods]);
+    if (signUpTab === 'default' || signUpTab === 'otpCellphone') {
+      formMethods.register('cellphone', {
+        required: isRequiredField('cellphone') ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone')) : null
+      });
+    } else {
+      formMethods.unregister('cellphone');
+    }
+  }, [formMethods, signUpTab]);
   (0, _react.useEffect)(function () {
     var _checkPhoneCodeState$, _checkPhoneCodeState$3, _checkPhoneCodeState$4, _checkPhoneCodeState$5;
 
@@ -395,19 +404,19 @@ var SignUpFormUI = function SignUpFormUI(props) {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
-      return setSignUpTab('default');
+      return handleSignUpTab('default');
     },
     active: signUpTab === 'default',
     borderBottom: signUpTab === 'default'
   }, t('DEFAULT', 'Default')), useSignUpOtpEmail && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
-      return setSignUpTab('otpEmail');
+      return handleSignUpTab('otpEmail');
     },
     active: signUpTab === 'otpEmail',
     borderBottom: signUpTab === 'otpEmail'
   }, t('BY_OTP_EMAIL', 'by Otp Email')), useSignUpOtpCellphone && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
-      return setSignUpTab('otpCellphone');
+      return handleSignUpTab('otpCellphone');
     },
     active: signUpTab === 'otpCellphone',
     borderBottom: signUpTab === 'otpCellphone'
