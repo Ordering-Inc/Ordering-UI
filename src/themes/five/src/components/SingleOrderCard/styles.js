@@ -248,3 +248,8 @@ export const FavoriteWrapper = styled.div`
     font-size: 16px;
   }
 `
+export const ReviewWrapper = styled.div`
+  .review-sent {
+    border-radius: 7.6px;
+  }
+`

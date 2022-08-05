@@ -202,6 +202,7 @@ const ProductOptionsUI = (props) => {
   }
 
   const scrollDown = () => {
+    const _adjustHeight = 120
     const isErrors = Object.values(errors).length > 0
     if (!isErrors) {
       return
@@ -210,8 +211,8 @@ const ProductOptionsUI = (props) => {
     const unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
 
     if (unselectedFirstSubOption) {
-      productContainer.scrollTop -= 90
-      unselectedFirstSubOption.scrollIntoView({ behavior: 'smooth' })
+      unselectedFirstSubOption.scrollIntoView()
+      productContainer.scrollTop -= _adjustHeight
     }
   }
 
@@ -236,12 +237,10 @@ const ProductOptionsUI = (props) => {
 
   useEffect(() => {
     if (document.getElementById(`${tabValue}`)) {
-      const extraHeight = windowSize.width < 769 ? 100 : 42
+      const extraHeight = windowSize.width < 769 ? 100 : 100
       const top = (tabValue === 'all') ? 0 : document.getElementById(`${tabValue}`).offsetTop - extraHeight
-      let scrollElement = document.querySelector('.popup-dialog')
-      if (windowSize.width >= 1200) {
-        scrollElement = productContainerRef.current
-      }
+      const scrollElement = document.querySelector('.popup-dialog')
+
       scrollElement.scrollTo({
         top: top,
         behavior: 'smooth'
@@ -529,7 +528,7 @@ const ProductOptionsUI = (props) => {
                   product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                     const currentState = productCart.options[`id:${option?.id}`] || {}
                     return (
-                      <div key={option?.id}>
+                      <div key={option?.id} id={`${option?.name}_${option?.id}`}>
                         {
                           showOption(option) && (
                             <ProductOption

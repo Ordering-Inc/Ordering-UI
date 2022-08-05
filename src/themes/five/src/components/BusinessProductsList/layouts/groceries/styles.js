@@ -22,8 +22,8 @@ export const WrapAllCategories = styled.div`
   .category-title {
     display: flex;
     align-items: center;
+    justify-content: ${({ isCategorySelected }) => isCategorySelected ? 'flex-start' : 'space-between'};
     margin-left: 10px;
-    width: 100%;
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
       margin-left: 0;

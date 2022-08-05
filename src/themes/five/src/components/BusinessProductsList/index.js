@@ -58,12 +58,12 @@ const BusinessProductsListUI = (props) => {
       onClickCategory(parentCategory)
     }
     if (!subCategory) {
-      setSubcategoriesSelected(subcategoriesSelected.filter(_subcategory => _subcategory?.parent_category_id !== parentCategory?.id))
+      setSubcategoriesSelected(subcategoriesSelected?.filter(_subcategory => _subcategory?.parent_category_id !== parentCategory?.id))
       return
     }
-    const categoryFounded = subcategoriesSelected.find(_subcategory => subCategory?.id === _subcategory?.id)
+    const categoryFounded = subcategoriesSelected?.find(_subcategory => subCategory?.id === _subcategory?.id)
     if (categoryFounded) {
-      setSubcategoriesSelected(subcategoriesSelected.filter(_subcategory => subCategory?.id !== _subcategory?.id))
+      setSubcategoriesSelected(subcategoriesSelected?.filter(_subcategory => subCategory?.id !== _subcategory?.id))
     } else {
       setSubcategoriesSelected([...subcategoriesSelected, subCategory])
     }
@@ -204,7 +204,7 @@ const BusinessProductsListUI = (props) => {
               : categoryState?.products?.filter(product => category?.children?.some(cat => cat.category_id === product?.category_id)) ?? []
             const products = subcategoriesSelected?.length > 0
               ? _products?.filter(product =>
-                !subcategoriesSelected.find(subcategory => subcategory?.parent_category_id === category?.id) ||
+                !subcategoriesSelected?.find(subcategory => subcategory?.parent_category_id === category?.id) ||
                 subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
               : _products
             const shortCategoryDescription = category?.description?.length > 200 ? `${category?.description?.substring(0, 200)}...` : category?.description

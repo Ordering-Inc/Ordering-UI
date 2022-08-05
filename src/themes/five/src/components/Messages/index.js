@@ -189,6 +189,23 @@ const MessagesUI = (props) => {
     }
   }
 
+  const getLogisticTagStatus = (status) => {
+    switch (status) {
+      case 0:
+        return t('PENDING', 'Pending')
+      case 1:
+        return t('IN_PROGRESS', 'In Progress')
+      case 2:
+        return t('IN_QUEUE', 'In Queue')
+      case 3:
+        return t('EXPIRED', 'Logistic expired')
+      case 4:
+        return t('RESOLVED', 'Resolved')
+      default:
+        return status
+    }
+  }
+
   const getStatus = (s) => {
     const status = parseInt(s)
     switch (status) {
@@ -318,10 +335,10 @@ const MessagesUI = (props) => {
                           <>
                             {message.change.old !== null && (
                               <>
-                                <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                                <strong>{message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
                               </>
                             )}
-                            <> {t('TO', 'to')} {' '} <strong>{t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
+                            <> {t('TO', 'to')} {' '} <strong>{message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
                           </>
                         )}
                         <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
