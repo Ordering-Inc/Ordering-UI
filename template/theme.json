@@ -31,7 +31,8 @@
     "warning100": "#FFF4CC",
     "warning500": "#FFC700",
     "grayDividerColor": "#F8F9FA",
-    "darkGray": "#CBCBCB"
+    "darkGray": "#CBCBCB",
+    "gray200": "#E9ECEF"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
@@ -353,7 +354,7 @@
       "hidden": false,
       "components": {
         "layout": {
-          "type": "half"
+          "type": "original"
         },
         "delivery_type": {
           "hidden": false
@@ -431,6 +432,11 @@
                 }
               }
             }
+          }
+        },
+        "delivery_types": {
+          "components":{
+            "hidden": false
           }
         }
       }

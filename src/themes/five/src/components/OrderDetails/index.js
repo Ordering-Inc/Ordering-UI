@@ -125,6 +125,7 @@ const OrderDetailsUI = (props) => {
   const showCustomerPhone = !theme?.layouts?.confirmation?.components?.customer_information?.components?.phone?.hidden
   const showCustomerAddress = !theme?.layouts?.confirmation?.components?.customer_information?.components?.address?.hidden
   const showCustomerEmail = !theme?.layouts?.confirmation?.components?.customer_information?.components?.email?.hidden
+  const showDeliveryTypes = !theme?.layouts?.confirmation?.components?.delivery_types?.components?.hidden
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -468,7 +469,7 @@ const OrderDetailsUI = (props) => {
                   </BusinessInfo>
                 </BusinessWrapper>
 
-                {placeSpotTypes.includes(order?.delivery_type) && (
+                {showDeliveryTypes && placeSpotTypes.includes(order?.delivery_type) && (
                   <BusinessWrapper
                     w='calc(100% - 20px)'
                     borderTop
