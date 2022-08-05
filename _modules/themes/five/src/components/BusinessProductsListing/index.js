@@ -108,7 +108,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       onCheckoutRedirect = props.onCheckoutRedirect,
       handleUpdateProducts = props.handleUpdateProducts,
       professionalSelected = props.professionalSelected,
-      handleChangeProfessionalSelected = props.handleChangeProfessionalSelected;
+      handleChangeProfessionalSelected = props.handleChangeProfessionalSelected,
+      onChangeMetaTag = props.onChangeMetaTag;
   var business = businessState.business,
       loading = businessState.loading,
       error = businessState.error;
@@ -136,6 +137,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       auth = _useSession2[0].auth;
+
+  var _useSite = (0, _orderingComponents.useSite)(),
+      _useSite2 = _slicedToArray(_useSite, 1),
+      site = _useSite2[0].site;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -204,11 +209,21 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
   var onProductClick = function onProductClick(product) {
     if (!((product === null || product === void 0 ? void 0 : product.type) === 'service' && professionalSelected)) {
-      onProductRedirect({
-        slug: business === null || business === void 0 ? void 0 : business.slug,
-        product: product.id,
-        category: product.category_id
-      });
+      if (site !== null && site !== void 0 && site.product_url_template) {
+        var _product$category;
+
+        onProductRedirect({
+          slug: business === null || business === void 0 ? void 0 : business.slug,
+          product: site.product_url_template.includes('product_slug') ? product === null || product === void 0 ? void 0 : product.slug : product.id,
+          category: site.product_url_template.includes('category_slug') ? product === null || product === void 0 ? void 0 : (_product$category = product.category) === null || _product$category === void 0 ? void 0 : _product$category.slug : product.category_id
+        });
+      } else {
+        onProductRedirect({
+          slug: business === null || business === void 0 ? void 0 : business.slug,
+          product: product.id,
+          category: product.category_id
+        });
+      }
     }
 
     setCurProduct(product);
@@ -342,6 +357,15 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 
     events.emit('get_current_view');
   }, []);
+  (0, _react.useEffect)(function () {
+    if (loading) return;
+
+    if (openProduct) {
+      onChangeMetaTag && onChangeMetaTag(curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_title, curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_description, curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_keywords);
+    } else {
+      onChangeMetaTag && onChangeMetaTag(business === null || business === void 0 ? void 0 : business.slug, business === null || business === void 0 ? void 0 : business.description, business === null || business === void 0 ? void 0 : business.name);
+    }
+  }, [openProduct, loading, business, curProduct]);
   (0, _react.useEffect)(function () {
     events.on('change_view', handleChangePage);
     return function () {

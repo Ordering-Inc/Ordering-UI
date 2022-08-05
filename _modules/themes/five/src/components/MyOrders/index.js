@@ -135,7 +135,7 @@ var MyOrders = function MyOrders(props) {
     value: "orders"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     hideOrders: hideOrders
-  }, !hideOrders && /*#__PURE__*/_react.default.createElement("h1", null, ('MY_ORDERS', 'My orders')), !allEmpty && /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
+  }, !hideOrders && /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ORDERS', 'My orders')), !allEmpty && /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
     className: "category-lists"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"

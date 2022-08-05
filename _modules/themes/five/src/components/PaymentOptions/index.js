@@ -187,13 +187,14 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
   var includeKioskPaymethods = ['cash', 'card_delivery'];
+  var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
   var supportedMethods = paymethodsList.paymethods.filter(function (p) {
     return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
   });
 
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
     if ((cart === null || cart === void 0 ? void 0 : cart.balance) > 0) {
-      var isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway);
+      var isPopupMethod = popupMethods.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway);
       handlePaymethodClick(paymethod, isPopupMethod);
       return;
     }
@@ -212,7 +213,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (supportedMethods.length === 1 && !paymethodSelected) {
+    var _supportedMethods$;
+
+    if (supportedMethods.length === 1 && !paymethodSelected && !popupMethods.includes((_supportedMethods$ = supportedMethods[0]) === null || _supportedMethods$ === void 0 ? void 0 : _supportedMethods$.gateway)) {
       handlePaymethodClick && handlePaymethodClick(supportedMethods[0]);
     }
   }, [supportedMethods]);

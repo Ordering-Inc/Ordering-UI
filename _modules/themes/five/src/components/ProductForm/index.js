@@ -146,63 +146,74 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
-  var _useState3 = (0, _react.useState)('login'),
-      _useState4 = _slicedToArray(_useState3, 2),
-      modalPageToShow = _useState4[0],
-      setModalPageToShow = _useState4[1];
+  var _useSite = (0, _orderingComponents.useSite)(),
+      _useSite2 = _slicedToArray(_useSite, 1),
+      site = _useSite2[0].site;
 
-  var _useState5 = (0, _react.useState)('all'),
+  var productUrlTemplate = site === null || site === void 0 ? void 0 : site.product_url_template;
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      urlToShare = _useState4[0],
+      setUrlToShare = _useState4[1];
+
+  var _useState5 = (0, _react.useState)('login'),
       _useState6 = _slicedToArray(_useState5, 2),
-      tabValue = _useState6[0],
-      setTabValue = _useState6[1];
+      modalPageToShow = _useState6[0],
+      setModalPageToShow = _useState6[1];
+
+  var _useState7 = (0, _react.useState)('all'),
+      _useState8 = _slicedToArray(_useState7, 2),
+      tabValue = _useState8[0],
+      setTabValue = _useState8[1];
 
   var productContainerRef = (0, _react.useRef)(null);
 
-  var _useState7 = (0, _react.useState)([]),
-      _useState8 = _slicedToArray(_useState7, 2),
-      gallery = _useState8[0],
-      setGallery = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(null),
+  var _useState9 = (0, _react.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      videoGallery = _useState10[0],
-      setVideoGallery = _useState10[1];
+      gallery = _useState10[0],
+      setGallery = _useState10[1];
 
   var _useState11 = (0, _react.useState)(null),
       _useState12 = _slicedToArray(_useState11, 2),
-      thumbsSwiper = _useState12[0],
-      setThumbsSwiper = _useState12[1];
+      videoGallery = _useState12[0],
+      setVideoGallery = _useState12[1];
 
-  var _useState13 = (0, _react.useState)(false),
+  var _useState13 = (0, _react.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
-      isHaveWeight = _useState14[0],
-      setIsHaveWeight = _useState14[1];
+      thumbsSwiper = _useState14[0],
+      setThumbsSwiper = _useState14[1];
 
   var _useState15 = (0, _react.useState)(false),
       _useState16 = _slicedToArray(_useState15, 2),
-      isScrollAvailable = _useState16[0],
-      setIsScrollAvailable = _useState16[1];
+      isHaveWeight = _useState16[0],
+      setIsHaveWeight = _useState16[1];
 
-  var _useState17 = (0, _react.useState)({
+  var _useState17 = (0, _react.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      isScrollAvailable = _useState18[0],
+      setIsScrollAvailable = _useState18[1];
+
+  var _useState19 = (0, _react.useState)({
     weight_unit: false,
     pieces: true
   }),
-      _useState18 = _slicedToArray(_useState17, 2),
-      qtyBy = _useState18[0],
-      setQtyBy = _useState18[1];
-
-  var _useState19 = (0, _react.useState)(null),
       _useState20 = _slicedToArray(_useState19, 2),
-      pricePerWeightUnit = _useState20[0],
-      setPricePerWeightUnit = _useState20[1];
+      qtyBy = _useState20[0],
+      setQtyBy = _useState20[1];
 
-  var _useState21 = (0, _react.useState)({
+  var _useState21 = (0, _react.useState)(null),
+      _useState22 = _slicedToArray(_useState21, 2),
+      pricePerWeightUnit = _useState22[0],
+      setPricePerWeightUnit = _useState22[1];
+
+  var _useState23 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState22 = _slicedToArray(_useState21, 2),
-      alertState = _useState22[0],
-      setAlertState = _useState22[1];
+      _useState24 = _slicedToArray(_useState23, 2),
+      alertState = _useState24[0],
+      setAlertState = _useState24[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var galleryLength = (gallery === null || gallery === void 0 ? void 0 : gallery.length) + (videoGallery === null || videoGallery === void 0 ? void 0 : videoGallery.length);
@@ -399,6 +410,47 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       setPricePerWeightUnit((product === null || product === void 0 ? void 0 : product.price) / (product === null || product === void 0 ? void 0 : product.weight));
     }
   }, [product]);
+  (0, _react.useEffect)(function () {
+    var _product$category;
+
+    var _urlToShare = null;
+    var productSlug = product === null || product === void 0 ? void 0 : product.slug;
+    var categorySlug = product === null || product === void 0 ? void 0 : (_product$category = product.category) === null || _product$category === void 0 ? void 0 : _product$category.slug;
+    var categoryId = product === null || product === void 0 ? void 0 : product.category_id;
+    var productId = product === null || product === void 0 ? void 0 : product.id;
+
+    if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug') {
+      _urlToShare = "".concat(window.location.origin, "/store/").concat(businessSlug, "/").concat(categorySlug, "/").concat(productSlug);
+    }
+
+    if (/\/store\/:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug/.test(productUrlTemplate)) {
+      var businessParameter = productUrlTemplate.replace('/store/:category_slug/:product_slug?', '').replace('=:business_slug', '');
+      _urlToShare = "".concat(window.location.origin, "/store/").concat(categorySlug, "/").concat(productSlug, "?").concat(businessParameter, "=").concat(businessSlug);
+    }
+
+    if (/\/store\/:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id/.test(productUrlTemplate)) {
+      var ids = productUrlTemplate.split('?')[1].split('&');
+      var categoryParameter = ids[0].replace('=:category_id', '');
+      var productParameter = ids[1].replace('=:product_id', '');
+      _urlToShare = "".concat(window.location.origin, "/store/").concat(businessSlug, "?").concat(categoryParameter, "=").concat(categoryId, "&").concat(productParameter, "=").concat(productId);
+    }
+
+    if (/\/:business_slug\/:category_slug\/:product_slug/.test(productUrlTemplate) && productUrlTemplate.indexOf('/store') !== 0) {
+      _urlToShare = "".concat(window.location.origin, "/").concat(businessSlug, "/").concat(categorySlug, "/").concat(productSlug);
+    }
+
+    if (/\/:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id/.test(productUrlTemplate) && productUrlTemplate.indexOf('/store') !== 0) {
+      var _ids = productUrlTemplate.split('?')[1].split('&');
+
+      var _categoryParameter = _ids[0].replace('=:category_id', '');
+
+      var _productParameter = _ids[1].replace('=:product_id', '');
+
+      _urlToShare = "".concat(window.location.origin, "/").concat(businessSlug, "?").concat(_categoryParameter, "=").concat(categoryId, "&").concat(_productParameter, "=").concat(productId);
+    }
+
+    setUrlToShare(_urlToShare);
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
     className: "product-container",
     ref: productContainerRef,
@@ -415,6 +467,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     variant: "rect",
     height: 200
   })), product && !loading && !error && /*#__PURE__*/_react.default.createElement(_styles.ProductShareWrapper, null, !props.useKioskApp ? /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
+    defaultUrl: urlToShare,
     slug: businessSlug,
     categoryId: product === null || product === void 0 ? void 0 : product.category_id,
     productId: product === null || product === void 0 ? void 0 : product.id
