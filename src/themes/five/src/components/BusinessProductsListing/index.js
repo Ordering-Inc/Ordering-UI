@@ -110,11 +110,19 @@ const BusinessProductsListingUI = (props) => {
 
   const onProductClick = (product) => {
     if (!((product?.type === 'service') && professionalSelected)) {
-      onProductRedirect({
-        slug: business?.slug,
-        product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
-        category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
-      })
+      if (site?.product_url_template) {
+        onProductRedirect({
+          slug: business?.slug,
+          product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
+          category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
+        })
+      } else {
+        onProductRedirect({
+          slug: business?.slug,
+          product: product.id,
+          category: product.category_id
+        })
+      }
     }
     setCurProduct(product)
     setModalIsOpen(true)
