@@ -166,44 +166,6 @@ export const BusinessBasicInformation = (props) => {
                       {business?.ribbon?.text}
                     </RibbonBox>
                   )}
-                  <SocialList>
-                    {business?.facebook_profile && (
-                      <SocialNetWork
-                        url={business?.facebook_profile}
-                        icon={<Facebook />}
-                      />
-                    )}
-                    {business?.instagram_profile && (
-                      <SocialNetWork
-                        url={business?.instagram_profile}
-                        icon={<Instagram />}
-                      />
-                    )}
-                    {business?.tiktok_profile && (
-                      <SocialNetWork
-                        url={business?.tiktok_profile}
-                        icon={<Tiktok />}
-                      />
-                    )}
-                    {business?.pinterest_profile && (
-                      <SocialNetWork
-                        url={business?.pinterest_profile}
-                        icon={<Pinterest />}
-                      />
-                    )}
-                    {business?.whatsapp_number && (
-                      <SocialNetWork
-                        url={business?.whatsapp_number}
-                        icon={<Whatsapp />}
-                      />
-                    )}
-                    {business?.snapchat_profile && (
-                      <SocialNetWork
-                        url={business?.snapchat_profile}
-                        icon={<Snapchat />}
-                      />
-                    )}
-                  </SocialList>
                 </TitleWrapper>
               ) : (
                 <Skeleton width={isCustomerMode ? 100 : 150} height={isCustomerMode ? 35 : 'auto'} />
@@ -216,6 +178,54 @@ export const BusinessBasicInformation = (props) => {
                     <Skeleton width={isCustomerMode ? 100 : 150} />
                   )}
                 </>
+              )}
+              {!loading ? (
+                <SocialList>
+                  {business?.facebook_profile && (
+                    <SocialNetWork
+                      url={business?.facebook_profile}
+                      icon={<Facebook />}
+                    />
+                  )}
+                  {business?.instagram_profile && (
+                    <SocialNetWork
+                      url={business?.instagram_profile}
+                      icon={<Instagram />}
+                    />
+                  )}
+                  {business?.tiktok_profile && (
+                    <SocialNetWork
+                      url={business?.tiktok_profile}
+                      icon={<Tiktok />}
+                    />
+                  )}
+                  {business?.pinterest_profile && (
+                    <SocialNetWork
+                      url={business?.pinterest_profile}
+                      icon={<Pinterest />}
+                    />
+                  )}
+                  {business?.whatsapp_number && (
+                    <SocialNetWork
+                      url={business?.whatsapp_number}
+                      icon={<Whatsapp />}
+                    />
+                  )}
+                  {business?.snapchat_profile && (
+                    <SocialNetWork
+                      url={business?.snapchat_profile}
+                      icon={<Snapchat />}
+                    />
+                  )}
+                </SocialList>
+              ) : (
+                <SocialList>
+                  {[...Array(5).keys()].map(i => (
+                    <IconWrapper isSkeleton key={i}>
+                      <Skeleton width={27} height={27} />
+                    </IconWrapper>
+                  ))}
+                </SocialList>
               )}
               <BusinessDetail isSkeleton={loading}>
                 {orderState?.options.type === 1 && showDeliveryFee && (
