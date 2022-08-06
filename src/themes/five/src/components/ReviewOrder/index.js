@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-
 import { useLanguage, useUtils, OrderReview as ReviewOrderController } from 'ordering-components'
 import MdClose from '@meronex/icons/md/MdClose'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
@@ -10,6 +9,7 @@ import {
   ReviewStarWrapper,
   StarWrapper,
   Comments,
+  PlacedDate,
   Send,
   BusinessLogo,
   BusinessName,
@@ -33,12 +33,13 @@ import { reviewCommentList } from '../../../../../utils'
 const ReviewOrderUI = (props) => {
   const { stars, order, handleSendReview, formState, closeReviewOrder, setIsReviewed, setStars } = props
   const [, t] = useLanguage()
-  const [{ optimizeImage }] = useUtils()
+  const [{ optimizeImage, parseDate }] = useUtils()
   const theme = useTheme()
   const { handleSubmit, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
   const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
+  const placedOnDate = parseDate(order?.delivery_datetime, { outputFormat: 'dddd MMMM DD, YYYY' })
 
   const commentsList = reviewCommentList('order')
 
@@ -170,6 +171,7 @@ const ReviewOrderUI = (props) => {
               </StarWrapper>
             </ReviewStarWrapper>
           </ReviewsProgressWrapper>
+          <PlacedDate>{t('DONOT_FORGET_RATE_YOUR_ORDER', 'Do not forget to rate your order placed on ')} <strong>{placedOnDate}</strong></PlacedDate>
           {false && (
             <CommentsList>
               <p>{commentsList[stars?.quality || 1]?.title}</p>

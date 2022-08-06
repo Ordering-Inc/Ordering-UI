@@ -17,6 +17,10 @@ export const StarWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  
+  > svg {
+    cursor: pointer
+  }
 `
 export const Comments = styled.div`
   display: flex;
@@ -36,7 +40,9 @@ export const Comments = styled.div`
     min-height: 104px;
   }
 `
-
+export const PlacedDate = styled.p`
+  text-align: center;
+`
 export const Send = styled.div`
   position: relative;
   display: flex;
