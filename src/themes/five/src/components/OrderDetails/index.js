@@ -18,7 +18,9 @@ import { NotFoundSource } from '../NotFoundSource'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
-import { ReviewOrder } from '../../../../../components/ReviewOrder'
+import { ReviewOrder } from '../ReviewOrder'
+import { ReviewProduct } from '../ReviewProduct'
+import { ReviewDriver } from '../ReviewDriver'
 import { ProductShare } from '../../../../../components/ProductShare'
 import { OrderBillSection } from './OrderBillSection'
 import { ActionsSection } from './ActionsSection'
@@ -59,8 +61,6 @@ import {
   BtsOrderStatus
 } from './styles'
 import { useTheme } from 'styled-components'
-import { ReviewProduct } from '../../../../../components/ReviewProduct'
-import { ReviewDriver } from '../../../../../components/ReviewDriver'
 import { TaxInformation } from '../TaxInformation'
 
 import { getGoogleMapImage } from '../../../../../utils'
@@ -390,19 +390,19 @@ const OrderDetailsUI = (props) => {
                   acceptedStatus.includes(parseInt(order?.status, 10)) ||
                   !isOriginalLayout
                 ) && (
-                  <ReOrder>
-                    <Button
-                      color='primary'
-                      outline
-                      onClick={() => handleStartNewOrder(order.id)}
-                      disabled={reorderState?.loading}
-                    >
-                      {reorderState?.loading
-                        ? t('LOADING', 'Loading...')
-                        : t('ORDER_AGAIN', 'Order Again')}
-                    </Button>
-                  </ReOrder>
-                )}
+                    <ReOrder>
+                      <Button
+                        color='primary'
+                        outline
+                        onClick={() => handleStartNewOrder(order.id)}
+                        disabled={reorderState?.loading}
+                      >
+                        {reorderState?.loading
+                          ? t('LOADING', 'Loading...')
+                          : t('ORDER_AGAIN', 'Order Again')}
+                      </Button>
+                    </ReOrder>
+                  )}
               </TitleContainer>
               {showDeliveryProgress && (
                 <>
@@ -439,7 +439,7 @@ const OrderDetailsUI = (props) => {
               >
                 <BusinessWrapper
                   w='calc(100% - 20px)'
-                  // borderBottom={showOrderActions}
+                // borderBottom={showOrderActions}
                 >
                   <img src={order?.business?.logo} />
                   <BusinessInfo>
@@ -699,10 +699,10 @@ const OrderDetailsUI = (props) => {
         padding='20px'
         closeOnBackdrop
         title={`${openTaxModal.data?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')} ${openTaxModal.data?.rate_type !== 2
-            ? `(${typeof openTaxModal.data?.rate === 'number'
-              ? `${openTaxModal.data?.rate}%`
-              : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`})`
-            : ''}
+          ? `(${typeof openTaxModal.data?.rate === 'number'
+            ? `${openTaxModal.data?.rate}%`
+            : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`})`
+          : ''}
           `}
         onClose={() => setOpenTaxModal({ open: false, tax: null, type: '' })}
         modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
