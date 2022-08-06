@@ -8,7 +8,7 @@ import { BusinessInformation } from '../BusinessInformation'
 import { BusinessReviews } from '../BusinessReviews'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
-import { useUtils, useOrder, useLanguage, useConfig } from 'ordering-components'
+import { useUtils, useOrder, useLanguage, useConfig, useOrderingTheme } from 'ordering-components'
 
 import { convertHoursToMinutes, shape } from '../../../../../utils'
 import { Select } from '../../styles/Select'
@@ -67,20 +67,21 @@ export const BusinessBasicInformation = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
+  const [orderingTheme] = useOrderingTheme()
   const [isBusinessReviews, setIsBusinessReviews] = useState(false)
   const [isPreOrder, setIsPreOrder] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
   const [{ configs }] = useConfig()
   const isPreOrderSetting = configs?.preorder_status_enabled?.value === '1'
 
-  const showLogo = !theme?.layouts?.business_view?.components?.basic_information?.components?.logo?.hidden
-  const showDeliveryFee = !theme?.layouts?.business_view?.components?.basic_information?.components?.delivery_fee?.hidden
-  const showTime = !theme?.layouts?.business_view?.components?.basic_information?.components?.time?.hidden
-  const showBusinessInfo = !theme?.layouts?.business_view?.components?.basic_information?.components?.business_info?.hidden
-  const showReviews = !theme?.layouts?.business_view?.components?.basic_information?.components?.reviews?.hidden
-  const showDistance = !theme?.layouts?.business_view?.components?.basic_information?.components?.distance?.hidden
-  const showSort = !theme?.layouts?.business_view?.components?.basic_information?.components?.sort?.hidden
-  const isInfoShrunken = theme?.layouts?.business_view?.components?.basic_information?.components?.layout?.position === 'shrunken'
+  const showLogo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
+  const showDeliveryFee = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
+  const showTime = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
+  const showBusinessInfo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
+  const showReviews = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
+  const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
+  const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
+  const isInfoShrunken = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')

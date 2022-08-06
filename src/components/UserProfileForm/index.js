@@ -5,7 +5,8 @@ import {
   useLanguage,
   useSession,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  useOrderingTheme
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
@@ -34,7 +35,6 @@ import {
   SkeletonWrapper,
   WrapperForm
 } from './styles'
-import { useTheme } from 'styled-components'
 
 const UserProfileFormUI = (props) => {
   const {
@@ -52,15 +52,15 @@ const UserProfileFormUI = (props) => {
   const [edit, setEdit] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
-  const theme = useTheme()
+  const [orderingTheme] = useOrderingTheme()
 
-  const showCustomerPicture = !theme.layouts?.profile?.components?.picture?.hidden
-  const showCustomerName = !theme.layouts?.profile?.components?.name?.hidden
-  const showCustomerLastName = !theme.layouts?.profile?.components?.last_name?.hidden
-  const showCustomerEmail = !theme.layouts?.profile?.components?.email?.hidden
-  const showCustomerCellphone = !theme.layouts?.profile?.components?.cellphone?.hidden
-  const showAddressList = !theme.layouts?.profile?.components?.address_list?.hidden
-  const userFormLayoutColumn = theme.layouts?.profile?.components?.layout?.position === 'column'
+  const showCustomerPicture = !orderingTheme?.theme?.profile?.components?.picture?.hidden
+  const showCustomerName = !orderingTheme?.theme?.profile?.components?.name?.hidden
+  const showCustomerLastName = !orderingTheme?.theme?.profile?.components?.last_name?.hidden
+  const showCustomerEmail = !orderingTheme?.theme?.profile?.components?.email?.hidden
+  const showCustomerCellphone = !orderingTheme?.theme?.profile?.components?.cellphone?.hidden
+  const showAddressList = !orderingTheme?.theme?.profile?.components?.address_list?.hidden
+  const userFormLayoutColumn = orderingTheme?.theme?.profile?.components?.layout?.position === 'column'
   const showEditButton = showCustomerName || showCustomerLastName || showCustomerEmail || showCustomerCellphone
 
   const handleFiles = (files) => {

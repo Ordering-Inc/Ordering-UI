@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
-import { useLanguage, useConfig, useUtils } from 'ordering-components'
+import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
 import { Cart3 } from 'react-bootstrap-icons'
 
@@ -83,23 +83,24 @@ export const RenderProductsLayout = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
+  const [orderingTheme] = useOrderingTheme()
   const [isCartModal, setisCartModal] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
 
   const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1') && !useKioskApp
   const BusinessBasicInformationComponent =
-    theme?.layouts?.business_view?.components?.basic_information?.components?.layout?.type === 'red'
+    orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'red'
       ? BusinessBasicInformationRed
-      : theme?.layouts?.business_view?.components?.basic_information?.components?.layout?.type === 'starbucks'
+      : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'starbucks'
         ? BusinessBasicInformationStarbucks
-        : theme?.layouts?.business_view?.components?.basic_information?.components?.layout?.type === 'old'
+        : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'old'
           ? BusinessBasicInformationOld
           : BusinessBasicInformation
 
   const SearchProductsComponent =
-    theme?.layouts?.business_view?.components?.product_search?.components?.layout?.type === 'old'
+    orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type === 'old'
       ? SearchProductsOld
-      : theme?.layouts?.business_view?.components?.product_search?.components?.layout?.type === 'starbucks'
+      : orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type === 'starbucks'
         ? SearchProductsStarbucks
         : null
 
@@ -107,7 +108,7 @@ export const RenderProductsLayout = (props) => {
   const businessLayout = {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
-  const showCartOnProductList = !theme?.layouts?.business_view?.components?.cart?.hidden
+  const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
 
   const BusinessLayoutCategories = businessLayout.layoutOne
     ? CategoriesLayoutGroceries
