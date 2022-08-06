@@ -241,7 +241,7 @@ const SingleOrderCardUI = (props) => {
           onClose={handleCloseReivew}
           title={order
             ? (reviewStatus?.order
-              ? t('REVIEW_ORDER', 'Review order')
+              ? t('HEY', 'Hey! ') + t('HOW_WAS_YOUR_ORDER', 'How was your order?')
               : (reviewStatus?.product
                 ? t('REVIEW_PRODUCT', 'Review Product')
                 : t('REVIEW_DRIVER', 'Review Driver')))

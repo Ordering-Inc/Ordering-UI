@@ -8,7 +8,16 @@ export const ReviewOrderContainer = styled.form`
   align-items: center;
   width: 100%;
 `
-
+export const ReviewStarWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`
+export const StarWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+`
 export const Comments = styled.div`
   display: flex;
   width: 100%;
@@ -29,17 +38,23 @@ export const Comments = styled.div`
 `
 
 export const Send = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 30px;
   width: 100%;
-
   span {
     cursor: pointer;
+    position: absolute;
     font-weight: 600;
     font-size: 16px;
     user-select: none;
+    top: 45px;
+    @media (min-width: 440px){
+      left: 0;
+      top: 0;
+    }
   }
 
   button {
@@ -95,6 +110,11 @@ export const BusinessLogo = (props) => {
   )
 }
 
+export const BusinessName = styled.p`
+  text-align: center;
+  font-weight: 600;
+  font-size: 17px;
+`
 export const WrapperBusinessLogo = styled.div`
   align-self: center;
   width: 124px;
@@ -107,8 +127,8 @@ export const WrapperBusinessLogo = styled.div`
 
 export const ReviewsProgressWrapper = styled.div`
   width: 100%;
-  margin-top: 50px;
-  margin-bottom: 35px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 
   p {
     margin-top: 0;
