@@ -75,7 +75,7 @@ const BusinessProductsCategoriesUI = (props) => {
               <>
                 {[...Array(4).keys()].map(i => (
                   <Tab key={i}>
-                    <Skeleton width={100} />
+                    <Skeleton width={150} height={25} />
                   </Tab>
                 ))}
               </>

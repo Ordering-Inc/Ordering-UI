@@ -203,6 +203,9 @@ export const WrapperSearch = styled.div`
 
 export const ProfessionalFilterWrapper = styled.div`
   margin-bottom: 50px;
+  ${({ isTop }) => isTop && css`
+    margin-top: 30px;
+  `}
 `
 
 export const WrapperSearchAbsolute = styled.div`

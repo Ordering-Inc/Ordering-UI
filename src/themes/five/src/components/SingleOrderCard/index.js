@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useLanguage, useUtils, useConfig, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
-import { ReviewOrder } from '../../../../../components/ReviewOrder'
-import { ReviewProduct } from '../../../../../components/ReviewProduct'
-import { ReviewDriver } from '../../../../../components/ReviewDriver'
+import { ReviewOrder } from '../ReviewOrder'
+import { ReviewProduct } from '../ReviewProduct'
+import { ReviewDriver } from '../ReviewDriver'
+
 import { useTheme } from 'styled-components'
 import { getGoogleMapImage } from '../../../../../utils'
 import BsDot from '@meronex/icons/bs/BsDot'
@@ -240,7 +241,7 @@ const SingleOrderCardUI = (props) => {
           onClose={handleCloseReivew}
           title={order
             ? (reviewStatus?.order
-              ? t('REVIEW_ORDER', 'Review order')
+              ? t('HEY', 'Hey! ') + t('HOW_WAS_YOUR_ORDER', 'How was your order?')
               : (reviewStatus?.product
                 ? t('REVIEW_PRODUCT', 'Review Product')
                 : t('REVIEW_DRIVER', 'Review Driver')))
