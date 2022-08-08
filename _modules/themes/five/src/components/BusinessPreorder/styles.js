@@ -113,7 +113,7 @@ exports.TypeContent = TypeContent;
 
 var Layer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  ", "\n  position: absolute;\n  top: 0;\n  width: 100%;\n  height: ", ";\n  ", "\n"])), function (_ref3) {
   var nobg = _ref3.nobg;
-  return !nobg && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    background-color: rgba(255, 255, 255, 0.7);\n  "])));
+  return !nobg && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    background-color: rgba(255, 255, 255, 0.7);\n    z-index: 1;\n  "])));
 }, function (_ref4) {
   var height = _ref4.height;
   return height || '100vh';

@@ -13,11 +13,11 @@ var _orderingComponents = require("ordering-components");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _ReviewOrder = require("../../../../../components/ReviewOrder");
+var _ReviewOrder = require("../ReviewOrder");
 
-var _ReviewProduct = require("../../../../../components/ReviewProduct");
+var _ReviewProduct = require("../ReviewProduct");
 
-var _ReviewDriver = require("../../../../../components/ReviewDriver");
+var _ReviewDriver = require("../ReviewDriver");
 
 var _styledComponents = require("styled-components");
 
@@ -289,7 +289,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, order !== null && order !== void 0 && order.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))))), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isReviewOpen,
     onClose: handleCloseReivew,
-    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', 'Loading...')
+    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('HEY', 'Hey! ') + t('HOW_WAS_YOUR_ORDER', 'How was your order?') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', 'Loading...')
   }, /*#__PURE__*/_react.default.createElement(_styles.ReviewWrapper, null, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
     closeReviewOrder: closeReviewOrder,

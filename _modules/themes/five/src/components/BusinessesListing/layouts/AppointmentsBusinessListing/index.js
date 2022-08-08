@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _SearchBar = require("../../../SearchBar");
 
+var _FiFilter = _interopRequireDefault(require("@meronex/icons/fi/FiFilter"));
+
 var _orderingComponents = require("ordering-components");
 
 var _BusinessPreorder = require("../../../BusinessPreorder");
@@ -40,6 +42,8 @@ var _styles = require("./styles");
 var _MomentControl = require("../../../MomentControl");
 
 var _HighestRated = require("../../../HighestRated");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -74,7 +78,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessListingUI = function BusinessListingUI(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _businessesList$busin2, _orderState$options, _orderState$options$a, _businessesList$busin3, _orderState$options4;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _businessesList$busin2, _configState$configs6, _configState$configs7, _orderState$options, _orderState$options$a, _businessesList$busin3, _orderState$options4;
 
   var handleChangeBusinessType = props.handleChangeBusinessType,
       priceLevelSelected = props.priceLevelSelected,
@@ -89,7 +93,8 @@ var BusinessListingUI = function BusinessListingUI(props) {
       handleChangeSearch = props.handleChangeSearch,
       handleBusinessClick = props.handleBusinessClick,
       businessTypeSelected = props.businessTypeSelected,
-      handleUpdateBusinessList = props.handleUpdateBusinessList;
+      handleUpdateBusinessList = props.handleUpdateBusinessList,
+      onRedirectPage = props.onRedirectPage;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -188,13 +193,26 @@ var BusinessListingUI = function BusinessListingUI(props) {
     lazyLoad: true,
     search: searchValue,
     onSearch: handleChangeSearch,
-    placeholder: t('SEARCH_BUSINESSES', 'Search Businesses')
+    placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
+    handleCustomEnter: function handleCustomEnter(term) {
+      var _configState$configs4, _configState$configs5;
+
+      return (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.advanced_business_search_enabled) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === '1' && onRedirectPage({
+        page: 'business_search'
+      });
+    }
+  }), (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.advanced_business_search_enabled) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
+    onClick: function onClick() {
+      return onRedirectPage({
+        page: 'business_search'
+      });
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles.FilterWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.TypeFilterWrapper, null, /*#__PURE__*/_react.default.createElement("h3", null, t('POPULAR_SERVICES', 'Popular services')), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     businessTypes: props.businessTypes,
     defaultBusinessType: props.defaultBusinessType,
     handleChangeBusinessType: handleChangeBusinessType,
     isAppoint: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.PriceFilterWrapper, null, /*#__PURE__*/_react.default.createElement("h3", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.PriceFilterListWrapper, null, _utils.priceList.slice(0, 3).map(function (price, i) {
+  })), /*#__PURE__*/_react.default.createElement(_styles.PriceFilterWrapper, null, /*#__PURE__*/_react.default.createElement("h3", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.PriceFilterListWrapper, null, _utils.priceList.map(function (price, i) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: i,
       color: priceLevelSelected === (price === null || price === void 0 ? void 0 : price.level) ? 'primary' : 'lightGray',
@@ -202,7 +220,7 @@ var BusinessListingUI = function BusinessListingUI(props) {
         return handleChangePriceLevel(price === null || price === void 0 ? void 0 : price.level);
       }
     }, price.content, priceLevelSelected === (price === null || price === void 0 ? void 0 : price.level) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.PreorderAndBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.PreorderWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.PreorderContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('AVAILABLE_POINTS', 'Available points')), /*#__PURE__*/_react.default.createElement(_styles.AddressWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.AddressHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement("span", {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.PreorderAndBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.PreorderWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.PreorderContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('AVAILABLE_APPOINTMENTS', 'Available appointments')), /*#__PURE__*/_react.default.createElement(_styles.AddressWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.AddressHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setModalIsOpen(true);
     }
@@ -212,7 +230,7 @@ var BusinessListingUI = function BusinessListingUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SERVICE_TYPE', 'Service type')), /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     configTypes: !(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0 ? configTypes : null,
     defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0) && 1
-  }))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, {
+  }))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, businessesList.businesses.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, {
     noHeight: !hasHighRatedBusiness
   }, /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
     handleClickAddress: handleClickAddress,

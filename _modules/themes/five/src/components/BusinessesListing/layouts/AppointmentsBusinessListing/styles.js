@@ -21,7 +21,7 @@ var BusinessListContainer = _styledComponents.default.div(_templateObject || (_t
 
 exports.BusinessListContainer = BusinessListContainer;
 
-var WrapperSearch = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  input {\n    width: 100%;\n  }\n"])));
+var WrapperSearch = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  > svg {\n    margin: 0px 5px\n  }\n  input {\n    width: 100%;\n  }\n"])));
 
 exports.WrapperSearch = WrapperSearch;
 
@@ -57,7 +57,7 @@ var PreorderAndBusinessWrapper = _styledComponents.default.div(_templateObject13
 
 exports.PreorderAndBusinessWrapper = PreorderAndBusinessWrapper;
 
-var PreorderWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  min-width: 250px;\n  margin-left: auto;\n  margin-right: auto;\n\n  @media (min-width: 576px) {\n    width: 75%;\n  }\n\n  @media (min-width: 800px) {\n    width: 300px;\n  }\n"])));
+var PreorderWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  min-width: 250px;\n  margin-left: auto;\n  margin-right: auto;\n\n  @media (min-width: 576px) {\n    width: 75%;\n  }\n\n  @media (min-width: 800px) {\n    width: 350px;\n    min-width: 350px;\n  }\n"])));
 
 exports.PreorderWrapper = PreorderWrapper;
 
@@ -101,7 +101,7 @@ var SelectWrapper = _styledComponents.default.div(_templateObject22 || (_templat
 
 exports.SelectWrapper = SelectWrapper;
 
-var BusinessList = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%;\n  margin: 0px;\n\n  @media (min-width: 576px) {\n    margin-left: -20px;\n    width: calc(100% + 40px);\n  }\n"])));
+var BusinessList = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%;\n  margin: 0px;\n\n  @media (min-width: 576px) {\n    margin-left: -20px;\n    width: 100%;\n  }\n"])));
 
 exports.BusinessList = BusinessList;
 

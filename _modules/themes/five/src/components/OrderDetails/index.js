@@ -25,7 +25,11 @@ var _Modal = require("../Modal");
 
 var _Messages = require("../Messages");
 
-var _ReviewOrder = require("../../../../../components/ReviewOrder");
+var _ReviewOrder = require("../ReviewOrder");
+
+var _ReviewProduct = require("../ReviewProduct");
+
+var _ReviewDriver = require("../ReviewDriver");
 
 var _ProductShare = require("../../../../../components/ProductShare");
 
@@ -40,10 +44,6 @@ var _PlaceSpot = require("../PlaceSpot");
 var _styles = require("./styles");
 
 var _styledComponents = require("styled-components");
-
-var _ReviewProduct = require("../../../../../components/ReviewProduct");
-
-var _ReviewDriver = require("../../../../../components/ReviewDriver");
 
 var _TaxInformation = require("../TaxInformation");
 
@@ -750,7 +750,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   })), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isReviewOpen,
     onClose: handleCloseReivew,
-    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag33 = theme.defaultLanguages) === null || _theme$defaultLanguag33 === void 0 ? void 0 : _theme$defaultLanguag33.LOADING) || 'Loading...')
+    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('HEY', 'Hey! ') + t('HOW_WAS_YOUR_ORDER', 'How was your order?') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag33 = theme.defaultLanguages) === null || _theme$defaultLanguag33 === void 0 ? void 0 : _theme$defaultLanguag33.LOADING) || 'Loading...')
   }, /*#__PURE__*/_react.default.createElement(_styles.ReviewWrapper, null, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
     closeReviewOrder: closeReviewOrder,

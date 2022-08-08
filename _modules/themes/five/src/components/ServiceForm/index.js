@@ -79,7 +79,8 @@ var ServiceFormUI = function ServiceFormUI(props) {
       handleSave = props.handleSave,
       isSoldOut = props.isSoldOut,
       maxProductQuantity = props.maxProductQuantity,
-      productCart = props.productCart;
+      productCart = props.productCart,
+      professionalList = props.professionalList;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -106,6 +107,18 @@ var ServiceFormUI = function ServiceFormUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       modalIsOpen = _useState4[0],
       setModalIsOpen = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isDropDown = _useState6[0],
+      setIsDropDown = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      currentProfessional = _useState8[0],
+      setCurrentProfessional = _useState8[1];
+
+  var dropDownRef = (0, _react.useRef)();
 
   var closeModal = function closeModal() {
     setModalIsOpen(false);
@@ -134,26 +147,26 @@ var ServiceFormUI = function ServiceFormUI(props) {
     closeModal();
   };
 
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      gallery = _useState6[0],
-      setGallery = _useState6[1];
+  var _useState9 = (0, _react.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      gallery = _useState10[0],
+      setGallery = _useState10[1];
 
-  var _useState7 = (0, _react.useState)({
+  var _useState11 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      alertState = _useState8[0],
-      setAlertState = _useState8[1];
+      _useState12 = _slicedToArray(_useState11, 2),
+      alertState = _useState12[0],
+      setAlertState = _useState12[1];
 
-  var _useState9 = (0, _react.useState)(null),
-      _useState10 = _slicedToArray(_useState9, 2),
-      dateSelected = _useState10[0],
-      setDateSelected = _useState10[1];
+  var _useState13 = (0, _react.useState)(null),
+      _useState14 = _slicedToArray(_useState13, 2),
+      dateSelected = _useState14[0],
+      setDateSelected = _useState14[1];
 
   var handleAddProduct = function handleAddProduct() {
-    if (!(professionalSelected !== null && professionalSelected !== void 0 && professionalSelected.id)) {
+    if (!(currentProfessional !== null && currentProfessional !== void 0 && currentProfessional.id)) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_PROFESSIONAL_REQUIRED', 'The field professional is required')]
@@ -172,19 +185,30 @@ var ServiceFormUI = function ServiceFormUI(props) {
     var values = {
       serviceTime: parseDate(dateSelected, {
         outputFormat: 'YYYY-MM-DD HH:mm:00'
-      })
+      }),
+      professional: currentProfessional
     };
     handleSave(values);
   };
 
-  var isBusyTime = function isBusyTime() {
-    var _professionalSelected;
+  var isBusyTime = function isBusyTime(professional) {
+    var _professional$busy_ti;
 
-    if ((professionalSelected === null || professionalSelected === void 0 ? void 0 : (_professionalSelected = professionalSelected.busy_times) === null || _professionalSelected === void 0 ? void 0 : _professionalSelected.length) === 0 || !dateSelected) return false;
-    var valid = professionalSelected === null || professionalSelected === void 0 ? void 0 : professionalSelected.busy_times.some(function (item) {
+    if ((professional === null || professional === void 0 ? void 0 : (_professional$busy_ti = professional.busy_times) === null || _professional$busy_ti === void 0 ? void 0 : _professional$busy_ti.length) === 0 || !dateSelected) return false;
+    var valid = professional === null || professional === void 0 ? void 0 : professional.busy_times.some(function (item) {
       return (0, _moment.default)(item === null || item === void 0 ? void 0 : item.start).valueOf() <= (0, _moment.default)(dateSelected).valueOf() && (0, _moment.default)(dateSelected).valueOf() <= (0, _moment.default)(item === null || item === void 0 ? void 0 : item.end).valueOf();
     });
     return valid;
+  };
+
+  var handleClickOutside = function handleClickOutside(e) {
+    if (dropDownRef !== null && dropDownRef !== void 0 && dropDownRef.current.contains(e.target)) return;
+    setIsDropDown(false);
+  };
+
+  var handleChangeProfessional = function handleChangeProfessional(professional) {
+    setIsDropDown(false);
+    setCurrentProfessional(professional);
   };
 
   (0, _react.useEffect)(function () {
@@ -214,6 +238,16 @@ var ServiceFormUI = function ServiceFormUI(props) {
 
     setGallery(imageList);
   }, [product]);
+  (0, _react.useEffect)(function () {
+    window.addEventListener('mouseup', handleClickOutside);
+    return function () {
+      window.removeEventListener('mouseup', handleClickOutside);
+    };
+  }, [open]);
+  (0, _react.useEffect)(function () {
+    if (!professionalSelected) return;
+    setCurrentProfessional(professionalSelected);
+  }, [professionalSelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ImageWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SwiperWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ArrowButtonWrapper, {
     className: "button-prev"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronLeft, null)), /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
@@ -237,16 +271,41 @@ var ServiceFormUI = function ServiceFormUI(props) {
     className: "button-next"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)))), /*#__PURE__*/_react.default.createElement(_styles.HeaderInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, product === null || product === void 0 ? void 0 : product.name), /*#__PURE__*/_react.default.createElement(_styles.PriceAndDuration, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
-  }, "\u2022"), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.duration, "min")), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProfessionalInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PROFESSIONALS', 'Professionals')), /*#__PURE__*/_react.default.createElement("span", null, t('REQUIRED', 'Required'))), /*#__PURE__*/_react.default.createElement(_styles.ProfessionalSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SelectedItem, null, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, professionalSelected !== null && professionalSelected !== void 0 && professionalSelected.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
-    bgimage: professionalSelected === null || professionalSelected === void 0 ? void 0 : professionalSelected.photo
-  }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.NameWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, professionalSelected === null || professionalSelected === void 0 ? void 0 : professionalSelected.name, " ", professionalSelected === null || professionalSelected === void 0 ? void 0 : professionalSelected.lastname), /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, {
+  }, "\u2022"), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.duration, "min")), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProfessionalInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PROFESSIONALS', 'Professionals')), /*#__PURE__*/_react.default.createElement("span", null, t('REQUIRED', 'Required'))), /*#__PURE__*/_react.default.createElement(_styles.ProfessionalSelectWrapper, {
+    ref: dropDownRef
+  }, /*#__PURE__*/_react.default.createElement(_styles.SelectedItem, {
+    onClick: function onClick() {
+      return setIsDropDown(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, currentProfessional !== null && currentProfessional !== void 0 && currentProfessional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
+    bgimage: currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.photo
+  }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.NameWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.name, " ", currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.lastname), /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, {
     available: !isBusyTime()
-  }, isBusyTime() ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+  }, isBusyTime(currentProfessional) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "status"
   }, t('BUSY_ON_SELECTED_TIME', 'Busy on selected time'))) : /*#__PURE__*/_react.default.createElement("span", {
     className: "status"
-  }, t('AVAILABLE', 'Available')))))))), /*#__PURE__*/_react.default.createElement(_styles.ScheduleWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SCHEDULE', 'Schedule')), /*#__PURE__*/_react.default.createElement("span", null, t('REQUIRED', 'Required'))), /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
-    business: professionalSelected,
+  }, t('AVAILABLE', 'Available'))))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, null)), isDropDown && /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DropDownTitle, null, t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')), professionalList === null || professionalList === void 0 ? void 0 : professionalList.map(function (professional) {
+    var _professional$product;
+
+    return (professional === null || professional === void 0 ? void 0 : (_professional$product = professional.products) === null || _professional$product === void 0 ? void 0 : _professional$product.includes(product === null || product === void 0 ? void 0 : product.id)) && /*#__PURE__*/_react.default.createElement(_styles.SelectedItem, {
+      key: professional === null || professional === void 0 ? void 0 : professional.id,
+      isDropDown: true,
+      active: (professional === null || professional === void 0 ? void 0 : professional.id) === (currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.id),
+      onClick: function onClick() {
+        return handleChangeProfessional(professional);
+      }
+    }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, professional !== null && professional !== void 0 && professional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
+      bgimage: professional === null || professional === void 0 ? void 0 : professional.photo
+    }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.NameWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, professional === null || professional === void 0 ? void 0 : professional.name, " ", professional === null || professional === void 0 ? void 0 : professional.lastname), /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, {
+      available: !isBusyTime(professional)
+    }, isBusyTime(professional) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+      className: "status"
+    }, t('BUSY_ON_SELECTED_TIME', 'Busy on selected time'))) : /*#__PURE__*/_react.default.createElement("span", {
+      className: "status"
+    }, t('AVAILABLE', 'Available'))))));
+  })))), /*#__PURE__*/_react.default.createElement(_styles.ScheduleWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SCHEDULE', 'Schedule')), /*#__PURE__*/_react.default.createElement("span", null, t('REQUIRED', 'Required'))), currentProfessional && /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
+    business: currentProfessional,
     isProfessional: true,
     maxDays: 50,
     onChangeMoment: setDateSelected,
@@ -257,7 +316,8 @@ var ServiceFormUI = function ServiceFormUI(props) {
     onClick: function onClick() {
       return handleAddProduct();
     },
-    color: "primary"
+    color: "primary",
+    disabled: isBusyTime(currentProfessional)
   }, t('BOOK', 'Book')), (!auth || isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add ".concat(!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''),
     color: "primary",

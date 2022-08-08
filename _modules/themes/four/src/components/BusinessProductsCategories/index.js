@@ -77,7 +77,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
+      width: 150,
+      height: 25
     }));
   })))));
 };

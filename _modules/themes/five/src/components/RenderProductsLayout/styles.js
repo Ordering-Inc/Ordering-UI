@@ -9,7 +9,7 @@ exports.WrapperSearchAbsolute = exports.WrapperSearch = exports.WrappLayout = ex
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -88,10 +88,13 @@ var WrapperSearch = _styledComponents.default.div(_templateObject13 || (_templat
 
 exports.WrapperSearch = WrapperSearch;
 
-var ProfessionalFilterWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-bottom: 50px;\n"])));
+var ProfessionalFilterWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-bottom: 50px;\n  ", "\n"])), function (_ref4) {
+  var isTop = _ref4.isTop;
+  return isTop && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-top: 30px;\n  "])));
+});
 
 exports.ProfessionalFilterWrapper = ProfessionalFilterWrapper;
 
-var WrapperSearchAbsolute = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 5px;\n  top: 10px;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])));
+var WrapperSearchAbsolute = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 5px;\n  top: 10px;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])));
 
 exports.WrapperSearchAbsolute = WrapperSearchAbsolute;
