@@ -256,6 +256,7 @@ export const TypeContent = styled.div`
 export const Layer = styled.div`
   ${({ nobg }) => !nobg && css`
     background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1;
   `}
   position: absolute;
   top: 0;
