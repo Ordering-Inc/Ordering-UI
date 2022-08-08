@@ -27,6 +27,7 @@ import {
 import {
   BusinessInformation
 } from '../OrdersOption/styles'
+import { useOrderingTheme } from 'ordering-components/_modules/contexts/OrderingThemeContext'
 
 const SingleOrderCardUI = (props) => {
   const {
@@ -47,6 +48,7 @@ const SingleOrderCardUI = (props) => {
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
   const [{ configs }] = useConfig()
+  const [orderingTheme] = useOrderingTheme()
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
@@ -93,13 +95,9 @@ const SingleOrderCardUI = (props) => {
     handleFavoriteOrder && handleFavoriteOrder(!order?.favorite)
   }
 
-  const businessLogo = theme?.layouts?.orders?.components?.business_logo
-  const date = theme?.layouts?.orders?.components?.date
-  const map = theme?.layouts?.orders?.components?.map
-
-  const isHideBusinessLogo = businessLogo?.hidden
-  const isHideDate = date?.hidden
-  const isHideMap = map?.hidden
+  const showBusinessLogo = !orderingTheme?.theme?.orders?.components?.business_logo?.hidden
+  const showDate = !orderingTheme?.theme?.orders?.components?.date?.hidden
+  const showMap = !orderingTheme?.theme?.orders?.components?.map?.hidden
 
   return (
     <>
@@ -115,7 +113,7 @@ const SingleOrderCardUI = (props) => {
         isCustomerMode={isCustomerMode}
         onClick={(e) => handleClickCard(e, order?.uuid)}
       >
-        {(configs?.google_maps_api_key?.value || isBusinessesPage) && !isHideMap && (
+        {(configs?.google_maps_api_key?.value || isBusinessesPage) && showMap && (
           <>
             {isSkeleton ? (
               <Skeleton height={80} />
@@ -140,10 +138,10 @@ const SingleOrderCardUI = (props) => {
             <Skeleton width={60} height={60} />
           ) : (
             <>
-              {!isCustomerMode && !isHideBusinessLogo && (
+              {!isCustomerMode && showBusinessLogo && (
                 <BusinessLogoWrapper bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} />
               )}
-              {isCustomerMode && !isHideBusinessLogo && (
+              {isCustomerMode && showBusinessLogo && (
                 <>
                   {(order.business?.logo || theme.images?.dummies?.businessLogo) && (
                     <Logo>
@@ -181,7 +179,7 @@ const SingleOrderCardUI = (props) => {
                       <p name='order_number'>{t('ORDER_NUM', 'Order No.')} {order.id}</p>
                     </>
                   )}
-                  {!isHideDate && (
+                  {showDate && (
                     <>
                       <BsDot />
                       <p>{order?.delivery_datetime_utc

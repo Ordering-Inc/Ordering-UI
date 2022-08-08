@@ -5,7 +5,8 @@ import {
   useLanguage,
   useSession,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  useOrderingTheme
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
@@ -51,15 +52,16 @@ const UserProfileFormUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ user }] = useSession()
+  const [orderingTheme] = useOrderingTheme()
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
     600, willVerifyOtpState)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
 
-  const showCustomerPicture = !theme.layouts?.profile?.components?.picture?.hidden
-  const showAddressList = !theme.layouts?.profile?.components?.address_list?.hidden
-  const userFormLayoutRow = theme.layouts?.profile?.components?.layout?.position === 'row'
+  const showCustomerPicture = !orderingTheme?.theme?.profile?.components?.picture?.hidden
+  const showAddressList = !orderingTheme?.theme?.profile?.components?.address_list?.hidden
+  const userFormLayoutRow = orderingTheme?.theme?.profile?.components?.layout?.position === 'row'
 
   const handleFiles = (files) => {
     if (files.length === 1) {

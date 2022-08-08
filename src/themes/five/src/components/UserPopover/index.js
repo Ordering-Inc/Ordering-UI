@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer, useConfig } from 'ordering-components'
+import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer, useConfig, useOrderingTheme } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
@@ -16,7 +16,6 @@ import { DropDownCircleImage } from '../../../../../components/Dropdown/style'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { capitalize } from '../../../../../utils'
 import AiOutlineMenu from '@meronex/icons/ai/AiOutlineMenu'
-import { useTheme } from 'styled-components'
 
 const optionsDefault = [
   { name: 'search', pathname: '/explore', displayName: 'explore', key: 'explore' },
@@ -35,14 +34,14 @@ export const UserPopover = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
   const [{ configs }] = useConfig()
-  const theme = useTheme()
+  const [orderingTheme] = useOrderingTheme()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
 
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
-  const isAddressListNewPage = theme.layouts?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
+  const isAddressListNewPage = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
 
   const extraOptions = [
     { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
