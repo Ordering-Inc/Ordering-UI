@@ -356,9 +356,9 @@ export const SearchComponentContainer = styled.div`
 export const SocialList = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 15px;
+  margin-left: -3px;
   ${props => props.theme.rtl && css`
-    margin-right: 15px;
+    margin-right: -3px;
     margin-left: 0px;
   `}
 `
@@ -375,6 +375,10 @@ export const IconWrapper = styled.a`
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s linear;
+
+  ${({ isSkeleton }) => isSkeleton && css`
+    border: none;
+  `}
 
   svg {
     height: 18px;

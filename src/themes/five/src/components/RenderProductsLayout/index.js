@@ -287,56 +287,68 @@ export const RenderProductsLayout = (props) => {
             )}
 
             {businessLayout.layoutOne && (
-              <BusinessContent>
-                <BusinessCategoriesContainer>
-                  {!(business?.categories?.length === 0 && !categoryId) && (
-                    <BusinessLayoutCategories
-                      component='categories'
-                      categories={[
-                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                        ...business?.categories.sort((a, b) => a.rank - b.rank)
-                      ]}
-                      categorySelected={categorySelected}
-                      onClickCategory={onClickCategory}
-                      featured={featuredProducts}
-                      openBusinessInformation={openBusinessInformation}
-                      openCategories={openCategories}
-                      business={business}
-                      currentCart={currentCart}
-                    />
-                  )}
-                </BusinessCategoriesContainer>
-                <BusinessCategoryProductWrapper>
-                  <WrapContent>
-                    <BusinessLayoutProductsList
-                      categories={[
-                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                        ...business?.categories.sort((a, b) => a.rank - b.rank)
-                      ]}
-                      category={categorySelected}
-                      onClickCategory={onClickCategory}
-                      categoriesState={props.categoriesState}
-                      categoryState={categoryState}
-                      businessId={business?.id}
-                      errors={errors}
-                      onProductClick={onProductClick}
-                      handleSearchRedirect={handleSearchRedirect}
-                      featured={featuredProducts}
-                      searchValue={searchValue}
-                      isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                      handleClearSearch={handleChangeSearch}
-                      errorQuantityProducts={errorQuantityProducts}
-                      business={business}
-                      currentCart={currentCart}
-                      handleUpdateProducts={handleUpdateProducts}
+              <>
+                {business?.professionals?.length > 0 && (
+                  <ProfessionalFilterWrapper isTop>
+                    <ProfessionalFilter
+                      professionals={business?.professionals}
                       professionalSelected={professionalSelected}
                       handleChangeProfessionalSelected={handleChangeProfessionalSelected}
                     />
-                  </WrapContent>
-                </BusinessCategoryProductWrapper>
-              </BusinessContent>
+                  </ProfessionalFilterWrapper>
+                )}
+                <BusinessContent>
+                  <BusinessCategoriesContainer>
+                    {!(business?.categories?.length === 0 && !categoryId) && (
+                      <BusinessLayoutCategories
+                        component='categories'
+                        categories={[
+                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                          ...business?.categories.sort((a, b) => a.rank - b.rank)
+                        ]}
+                        categorySelected={categorySelected}
+                        onClickCategory={onClickCategory}
+                        featured={featuredProducts}
+                        openBusinessInformation={openBusinessInformation}
+                        openCategories={openCategories}
+                        business={business}
+                        currentCart={currentCart}
+                      />
+                    )}
+                  </BusinessCategoriesContainer>
+                  <BusinessCategoryProductWrapper>
+                    <WrapContent>
+                      <BusinessLayoutProductsList
+                        categories={[
+                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                          ...business?.categories.sort((a, b) => a.rank - b.rank)
+                        ]}
+                        category={categorySelected}
+                        onClickCategory={onClickCategory}
+                        categoriesState={props.categoriesState}
+                        categoryState={categoryState}
+                        businessId={business?.id}
+                        errors={errors}
+                        onProductClick={onProductClick}
+                        handleSearchRedirect={handleSearchRedirect}
+                        featured={featuredProducts}
+                        searchValue={searchValue}
+                        isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                        handleClearSearch={handleChangeSearch}
+                        errorQuantityProducts={errorQuantityProducts}
+                        business={business}
+                        currentCart={currentCart}
+                        handleUpdateProducts={handleUpdateProducts}
+                        professionalSelected={professionalSelected}
+                        handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                      />
+                    </WrapContent>
+                  </BusinessCategoryProductWrapper>
+                </BusinessContent>
+              </>
+
             )}
           </div>
         </WrappLayout>

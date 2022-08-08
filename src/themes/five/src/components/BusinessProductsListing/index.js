@@ -13,6 +13,7 @@ import {
   useOrder,
   useUtils,
   useSession,
+  useSite,
   useOrderingTheme
 } from 'ordering-components'
 
@@ -71,7 +72,8 @@ const BusinessProductsListingUI = (props) => {
     onCheckoutRedirect,
     handleUpdateProducts,
     professionalSelected,
-    handleChangeProfessionalSelected
+    handleChangeProfessionalSelected,
+    onChangeMetaTag
   } = props
 
   const { business, loading, error } = businessState
@@ -83,6 +85,7 @@ const BusinessProductsListingUI = (props) => {
   const location = useLocation()
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
+  const [{ site }] = useSite()
   const [orderingTheme] = useOrderingTheme()
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
@@ -108,11 +111,19 @@ const BusinessProductsListingUI = (props) => {
 
   const onProductClick = (product) => {
     if (!((product?.type === 'service') && professionalSelected)) {
-      onProductRedirect({
-        slug: business?.slug,
-        product: product.id,
-        category: product.category_id
-      })
+      if (site?.product_url_template) {
+        onProductRedirect({
+          slug: business?.slug,
+          product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
+          category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
+        })
+      } else {
+        onProductRedirect({
+          slug: business?.slug,
+          product: product.id,
+          category: product.category_id
+        })
+      }
     }
     setCurProduct(product)
     setModalIsOpen(true)
@@ -194,6 +205,15 @@ const BusinessProductsListingUI = (props) => {
     }
     events.emit('get_current_view')
   }, [])
+
+  useEffect(() => {
+    if (loading) return
+    if (openProduct) {
+      onChangeMetaTag && onChangeMetaTag(curProduct?.seo_title, curProduct?.seo_description, curProduct?.seo_keywords)
+    } else {
+      onChangeMetaTag && onChangeMetaTag(business?.slug, business?.description, business?.name)
+    }
+  }, [openProduct, loading, business, curProduct])
 
   useEffect(() => {
     events.on('change_view', handleChangePage)

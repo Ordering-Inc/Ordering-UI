@@ -172,6 +172,11 @@ const SignUpFormUI = (props) => {
     }
   }
 
+  const handleSignUpTab = (tab) => {
+    setSignUpTab(tab)
+    formMethods.clearErrors()
+  }
+
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
     if (!userPhoneNumber &&
@@ -273,12 +278,16 @@ const SignUpFormUI = (props) => {
   }, [validationFields])
 
   useEffect(() => {
-    formMethods.register('cellphone', {
-      required: isRequiredField('cellphone')
-        ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
-        : null
-    })
-  }, [formMethods])
+    if (signUpTab === 'default' || signUpTab === 'otpCellphone') {
+      formMethods.register('cellphone', {
+        required: isRequiredField('cellphone')
+          ? t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required').replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+          : null
+      })
+    } else {
+      formMethods.unregister('cellphone')
+    }
+  }, [formMethods, signUpTab])
 
   useEffect(() => {
     if (checkPhoneCodeState?.result?.error) {
@@ -310,7 +319,7 @@ const SignUpFormUI = (props) => {
             <SignupWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 <Tab
-                  onClick={() => setSignUpTab('default')}
+                  onClick={() => handleSignUpTab('default')}
                   active={signUpTab === 'default'}
                   borderBottom={signUpTab === 'default'}
                 >
@@ -318,7 +327,7 @@ const SignUpFormUI = (props) => {
                 </Tab>
                 {useSignUpOtpEmail && (
                   <Tab
-                    onClick={() => setSignUpTab('otpEmail')}
+                    onClick={() => handleSignUpTab('otpEmail')}
                     active={signUpTab === 'otpEmail'}
                     borderBottom={signUpTab === 'otpEmail'}
                   >
@@ -327,7 +336,7 @@ const SignUpFormUI = (props) => {
                 )}
                 {useSignUpOtpCellphone && (
                   <Tab
-                    onClick={() => setSignUpTab('otpCellphone')}
+                    onClick={() => handleSignUpTab('otpCellphone')}
                     active={signUpTab === 'otpCellphone'}
                     borderBottom={signUpTab === 'otpCellphone'}
                   >
