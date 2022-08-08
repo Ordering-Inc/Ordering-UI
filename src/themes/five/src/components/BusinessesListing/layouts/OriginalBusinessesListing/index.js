@@ -217,7 +217,7 @@ const BusinessesListingUI = (props) => {
                 isCustomLayout={isCustomLayout}
                 placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
                 onSearch={handleChangeSearch}
-                handleCustomEnter={term => configs?.advanced_business_search_enabled?.value === '1' && onRedirectPage({ page: 'business_search', search: `?term=${term}` })}
+                handleCustomEnter={term => configs?.advanced_business_search_enabled?.value === '1' && onRedirectPage({ page: 'business_search' })}
               />
               {configs?.advanced_business_search_enabled?.value === '1' && (
                 <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />

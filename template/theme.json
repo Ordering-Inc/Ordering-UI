@@ -439,6 +439,11 @@
               }
             }
           }
+        },
+        "delivery_types": {
+          "components":{
+            "hidden": false
+          }
         }
       }
     }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   BusinessListingSearchContainer,
   FiltersContainer,
@@ -51,6 +51,8 @@ import { NotFoundSource } from '../NotFoundSource'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 import BisUpArrow from '@meronex/icons/bi/BisUpArrow'
+import { Modal } from '../Modal'
+import { ProductForm } from '../ProductForm'
 
 export const BusinessListingSearchUI = (props) => {
   const {
@@ -72,6 +74,7 @@ export const BusinessListingSearchUI = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [curProduct, setCurProduct] = useState({ business: null, product: null })
   const [{ parsePrice, optimizeImage, parseDistance }] = useUtils()
   const { width } = useWindowSize()
   const maxDeliveryFeeOptions = [15, 25, 35, 'default']
@@ -104,6 +107,19 @@ export const BusinessListingSearchUI = (props) => {
   const handleChangePriceRange = (value) => {
     if (value === filters?.price_level) handleChangeFilters('price_level', null)
     else handleChangeFilters('price_level', value)
+  }
+
+  const onProductClick = (product, business) => {
+    setCurProduct({ business: business, product: product })
+  }
+
+  const handleRedirectToCart = (product, code) => {
+    setCurProduct({ business: null, product: null })
+    onBusinessClick(curProduct?.business)
+  }
+
+  const closeModalProductForm = () => {
+    setCurProduct({ business: null, product: null })
   }
 
   const MaxSectionItem = ({ title, options, filter }) => {
@@ -143,6 +159,7 @@ export const BusinessListingSearchUI = (props) => {
       <SearchBar
         lazyLoad
         isCustomLayout
+        forceFocus
         placeholder={`${t('SEARCH_BUSINESSES', 'Search Businesses')} / ${t('PLEASE_TYPE_AT_LEAST_3_CHARACTERS', 'Please type at least 3 characters')}`}
         onSearch={(val) => handleChangeTermValue(val)}
         search={termValue}
@@ -350,6 +367,7 @@ export const BusinessListingSearchUI = (props) => {
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
                           businessId={business?.id}
+                          onProductClick={(product) => onProductClick(product, business)}
                           handleUpdateProducts={(productId, changes) => handleUpdateProducts(productId, category?.id, business?.id, changes)}
                         />
                       )))}
@@ -392,6 +410,26 @@ export const BusinessListingSearchUI = (props) => {
           </ProductsList>
         </FiltersResultContainer>
       </FiltersContainer>
+      <Modal
+        width={props?.useKioskApp ? '80%' : '760px'}
+        open={!!curProduct?.product}
+        closeOnBackdrop
+        onClose={() => closeModalProductForm()}
+        padding='0'
+        isProductForm
+        disableOverflowX
+      >
+        {(!!curProduct?.product) && (
+          <ProductForm
+            businessSlug={curProduct?.business?.slug}
+            useKioskApp={props?.useKioskApp}
+            businessId={curProduct?.business?.id}
+            categoryId={curProduct?.product?.category_id}
+            productId={curProduct?.product?.id}
+            onSave={handleRedirectToCart}
+          />
+        )}
+      </Modal>
     </BusinessListingSearchContainer>
   )
 }

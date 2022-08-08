@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { SearchBar } from '../../../SearchBar'
+import FiFilter from '@meronex/icons/fi/FiFilter'
 import {
   useLanguage,
   useOrder,
@@ -63,7 +64,8 @@ const BusinessListingUI = (props) => {
     handleChangeSearch,
     handleBusinessClick,
     businessTypeSelected,
-    handleUpdateBusinessList
+    handleUpdateBusinessList,
+    onRedirectPage
   } = props
 
   const [, t] = useLanguage()
@@ -137,7 +139,11 @@ const BusinessListingUI = (props) => {
             search={searchValue}
             onSearch={handleChangeSearch}
             placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+            handleCustomEnter={term => configState?.configs?.advanced_business_search_enabled?.value === '1' && onRedirectPage({ page: 'business_search' })}
           />
+          {configState?.configs?.advanced_business_search_enabled?.value === '1' && (
+            <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
+          )}
         </WrapperSearch>
         <FilterWrapper>
           <TypeFilterWrapper>
@@ -152,7 +158,7 @@ const BusinessListingUI = (props) => {
           <PriceFilterWrapper>
             <h3>{t('PRICE', 'Price')}</h3>
             <PriceFilterListWrapper>
-              {priceList.slice(0, 3).map((price, i) => (
+              {priceList.map((price, i) => (
                 <Button
                   key={i}
                   color={(priceLevelSelected === price?.level) ? 'primary' : 'lightGray'}
@@ -168,7 +174,7 @@ const BusinessListingUI = (props) => {
         <PreorderAndBusinessWrapper>
           <PreorderWrapper>
             <PreorderContent>
-              <h2>{t('AVAILABLE_POINTS', 'Available points')}</h2>
+              <h2>{t('AVAILABLE_APPOINTMENTS', 'Available appointments')}</h2>
               <AddressWrapper>
                 <AddressHeader>
                   <h2>{t('ADDRESS', 'Address')}</h2>
@@ -197,18 +203,20 @@ const BusinessListingUI = (props) => {
             </PreorderContent>
           </PreorderWrapper>
           <BusinessListWrapper>
-            <HightestRatedWrapper noHeight={!hasHighRatedBusiness}>
-              <HighestRated
-                handleClickAddress={handleClickAddress}
-                setHasHighRatedBusiness={setHasHighRatedBusiness}
-                onBusinessClick={onBusinessClick}
-                isCustomerMode={isCustomerMode}
-                favoriteIds={favoriteIds}
-                initialBuisnessType={businessTypeSelected}
-                initialPricelevel={priceLevelSelected}
-                setFavoriteIds={setFavoriteIds}
-              />
-            </HightestRatedWrapper>
+            {businessesList.businesses.length > 0 && (
+              <HightestRatedWrapper noHeight={!hasHighRatedBusiness}>
+                <HighestRated
+                  handleClickAddress={handleClickAddress}
+                  setHasHighRatedBusiness={setHasHighRatedBusiness}
+                  onBusinessClick={onBusinessClick}
+                  isCustomerMode={isCustomerMode}
+                  favoriteIds={favoriteIds}
+                  initialBuisnessType={businessTypeSelected}
+                  initialPricelevel={priceLevelSelected}
+                  setFavoriteIds={setFavoriteIds}
+                />
+              </HightestRatedWrapper>
+            )}
             <h2>{t('ALL_BUSINESSES', 'All businesses')}</h2>
             <BusinessList>
               {

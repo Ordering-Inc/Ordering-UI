@@ -12,6 +12,11 @@ export const BusinessListContainer = styled.div`
 `
 
 export const WrapperSearch = styled.div`
+  display: flex;
+  align-items: center;
+  > svg {
+    margin: 0px 5px
+  }
   input {
     width: 100%;
   }
@@ -118,7 +123,8 @@ export const PreorderWrapper = styled.div`
   }
 
   @media (min-width: 800px) {
-    width: 300px;
+    width: 350px;
+    min-width: 350px;
   }
 `
 
@@ -222,7 +228,7 @@ export const BusinessList = styled.div`
 
   @media (min-width: 576px) {
     margin-left: -20px;
-    width: calc(100% + 40px);
+    width: 100%;
   }
 `
 
