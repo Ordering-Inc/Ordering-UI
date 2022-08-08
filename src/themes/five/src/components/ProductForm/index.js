@@ -10,7 +10,8 @@ import {
   useSession,
   useLanguage,
   useOrder,
-  useUtils
+  useUtils,
+  useSite
 } from 'ordering-components'
 
 import { scrollTo } from '../../../../../utils'
@@ -100,6 +101,9 @@ const ProductOptionsUI = (props) => {
   const [orderState] = useOrder()
   const [{ optimizeImage, parsePrice }] = useUtils()
   const theme = useTheme()
+  const [{ site }] = useSite()
+  const productUrlTemplate = site?.product_url_template
+  const [urlToShare, setUrlToShare] = useState(null)
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [tabValue, setTabValue] = useState('all')
   const productContainerRef = useRef(null)
@@ -274,6 +278,37 @@ const ProductOptionsUI = (props) => {
     }
   }, [product])
 
+  useEffect(() => {
+    let _urlToShare = null
+    const productSlug = product?.slug
+    const categorySlug = product?.category?.slug
+    const categoryId = product?.category_id
+    const productId = product?.id
+    if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug') {
+      _urlToShare = `${window.location.origin}/store/${businessSlug}/${categorySlug}/${productSlug}`
+    }
+    if (/\/store\/:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug/.test(productUrlTemplate)) {
+      const businessParameter = productUrlTemplate.replace('/store/:category_slug/:product_slug?', '').replace('=:business_slug', '')
+      _urlToShare = `${window.location.origin}/store/${categorySlug}/${productSlug}?${businessParameter}=${businessSlug}`
+    }
+    if (/\/store\/:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id/.test(productUrlTemplate)) {
+      const ids = productUrlTemplate.split('?')[1].split('&')
+      const categoryParameter = ids[0].replace('=:category_id', '')
+      const productParameter = ids[1].replace('=:product_id', '')
+      _urlToShare = `${window.location.origin}/store/${businessSlug}?${categoryParameter}=${categoryId}&${productParameter}=${productId}`
+    }
+    if (/\/:business_slug\/:category_slug\/:product_slug/.test(productUrlTemplate) && productUrlTemplate.indexOf('/store') !== 0) {
+      _urlToShare = `${window.location.origin}/${businessSlug}/${categorySlug}/${productSlug}`
+    }
+    if (/\/:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id/.test(productUrlTemplate) && productUrlTemplate.indexOf('/store') !== 0) {
+      const ids = productUrlTemplate.split('?')[1].split('&')
+      const categoryParameter = ids[0].replace('=:category_id', '')
+      const productParameter = ids[1].replace('=:product_id', '')
+      _urlToShare = `${window.location.origin}/${businessSlug}?${categoryParameter}=${categoryId}&${productParameter}=${productId}`
+    }
+    setUrlToShare(_urlToShare)
+  }, [])
+
   return (
     <ProductContainer
       className='product-container'
@@ -292,6 +327,7 @@ const ProductOptionsUI = (props) => {
         <ProductShareWrapper>
           {!props.useKioskApp ? (
             <ProductShare
+              defaultUrl={urlToShare}
               slug={businessSlug}
               categoryId={product?.category_id}
               productId={product?.id}

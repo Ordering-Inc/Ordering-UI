@@ -69,7 +69,7 @@ export const MyOrders = (props) => {
       )}
       <Container hideOrders={hideOrders}>
         {!hideOrders && (
-          <h1>{('MY_ORDERS', 'My orders')}</h1>
+          <h1>{t('MY_ORDERS', 'My orders')}</h1>
         )}
         {!allEmpty && (
           <MyOrdersMenuContainer className='category-lists'>
