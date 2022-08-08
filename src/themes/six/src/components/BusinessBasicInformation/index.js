@@ -4,7 +4,7 @@ import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import FaStar from '@meronex/icons/fa/FaStar'
-import { useUtils, useOrder, useLanguage } from 'ordering-components'
+import { useUtils, useOrder, useLanguage, useOrderingTheme } from 'ordering-components'
 import { convertHoursToMinutes } from '../../../../../utils'
 
 import {
@@ -13,7 +13,6 @@ import {
   BusinessInfo,
   BusinessInfoItem
 } from './styles'
-import { useTheme } from 'styled-components'
 const types = ['food', 'laundry', 'alcohol', 'groceries']
 export const BusinessBasicInformation = (props) => {
   const {
@@ -24,7 +23,7 @@ export const BusinessBasicInformation = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance }] = useUtils()
-  const theme = useTheme()
+  const [orderingTheme] = useOrderingTheme()
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -34,11 +33,11 @@ export const BusinessBasicInformation = (props) => {
     return _types.join(', ')
   }
 
-  const showDeliveryFee = !theme?.layouts?.business_view?.components?.basic_information?.components?.delivery_fee?.hidden
-  const showTime = !theme?.layouts?.business_view?.components?.basic_information?.components?.time?.hidden
-  const showBusinessInfo = !theme?.layouts?.business_view?.components?.basic_information?.components?.business_info?.hidden
-  const showReviews = !theme?.layouts?.business_view?.components?.basic_information?.components?.reviews?.hidden
-  const showDistance = !theme?.layouts?.business_view?.components?.basic_information?.components?.distance?.hidden
+  const showDeliveryFee = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
+  const showTime = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
+  const showBusinessInfo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
+  const showReviews = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
+  const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
 
   return (
     <>

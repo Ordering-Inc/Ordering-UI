@@ -8,7 +8,8 @@ import {
   useConfig,
   useOrder,
   useCustomer,
-  GoogleMapsMap
+  GoogleMapsMap,
+  useOrderingTheme
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 
@@ -89,7 +90,7 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseDate }] = useUtils()
   const [, { deleteUserCustomer }] = useCustomer()
   const [{ carts }, { refreshOrderOptions }] = useOrder()
-
+  const [orderingTheme] = useOrderingTheme()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
   const [isProductReviewed, setIsProductReviewed] = useState(false)
@@ -108,24 +109,23 @@ const OrderDetailsUI = (props) => {
 
   const showOrderActions = order?.delivery_type !== 1
 
-  const isOriginalLayout = theme?.layouts?.confirmation?.components?.layout?.type === 'original'
-  const showDeliveryType = !theme?.layouts?.confirmation?.components?.delivery_type?.hidden
-  const showDeliveryDate = !theme?.layouts?.confirmation?.components?.delivery_date?.hidden
-  const showDeliveryProgress = !theme?.layouts?.confirmation?.components?.delivery_progress?.hidden
-  const showBusinessPhone = !theme?.layouts?.confirmation?.components?.business_information?.components?.phone?.hidden
-  const showBusinessMessages = !theme?.layouts?.confirmation?.components?.business_information?.components?.messages?.hidden
-  const showBusinessEmail = !theme?.layouts?.confirmation?.components?.business_information?.components?.email?.hidden
-  const showBusinessAddress = !theme?.layouts?.confirmation?.components?.business_information?.components?.address?.hidden
-  const showBusinessMap = !theme?.layouts?.confirmation?.components?.business_information?.components?.map?.hidden
-  const showDriverName = !theme?.layouts?.confirmation?.components?.driver_information?.components?.name?.hidden
-  const showDriverPhone = !theme?.layouts?.confirmation?.components?.driver_information?.components?.phone?.hidden
-  const showDriverMessages = !theme?.layouts?.confirmation?.components?.driver_information?.components?.messages?.hidden
-  const showDriverEmail = !theme?.layouts?.confirmation?.components?.driver_information?.components?.email?.hidden
-  const showDriverPhoto = !theme?.layouts?.confirmation?.components?.driver_information?.components?.photo?.hidden
-  const showCustomerPhone = !theme?.layouts?.confirmation?.components?.customer_information?.components?.phone?.hidden
-  const showCustomerAddress = !theme?.layouts?.confirmation?.components?.customer_information?.components?.address?.hidden
-  const showCustomerEmail = !theme?.layouts?.confirmation?.components?.customer_information?.components?.email?.hidden
-  const showDeliveryTypes = !theme?.layouts?.confirmation?.components?.delivery_types?.components?.hidden
+  const isOriginalLayout = orderingTheme?.theme?.confirmation?.components?.layout?.type === 'original'
+  const showDeliveryType = !orderingTheme?.theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
+  const showDeliveryDate = !orderingTheme?.theme?.confirmation?.components?.order?.components?.date?.hidden
+  const showDeliveryProgress = !orderingTheme?.theme?.confirmation?.components?.order?.components?.progress?.hidden
+  const showBusinessPhone = !orderingTheme?.theme?.confirmation?.components?.business?.components?.phone?.hidden
+  const showBusinessMessages = !orderingTheme?.theme?.confirmation?.components?.business?.components?.messages?.hidden
+  const showBusinessEmail = !orderingTheme?.theme?.confirmation?.components?.business?.components?.email?.hidden
+  const showBusinessAddress = !orderingTheme?.theme?.confirmation?.components?.business?.components?.address?.hidden
+  const showBusinessMap = !orderingTheme?.theme?.confirmation?.components?.business?.components?.map?.hidden
+  const showDriverName = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.name?.hidden
+  const showDriverPhone = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.phone?.hidden
+  const showDriverMessages = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.messages?.hidden
+  const showDriverEmail = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.email?.hidden
+  const showDriverPhoto = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.photo?.hidden
+  const showCustomerPhone = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.phone?.hidden
+  const showCustomerAddress = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.address?.hidden
+  const showCustomerEmail = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.email?.hidden
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -469,7 +469,7 @@ const OrderDetailsUI = (props) => {
                   </BusinessInfo>
                 </BusinessWrapper>
 
-                {showDeliveryTypes && placeSpotTypes.includes(order?.delivery_type) && (
+                {showDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
                   <BusinessWrapper
                     w='calc(100% - 20px)'
                     borderTop

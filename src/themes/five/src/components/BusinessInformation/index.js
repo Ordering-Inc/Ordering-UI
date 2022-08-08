@@ -4,7 +4,8 @@ import {
   BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
   useLanguage,
-  useConfig
+  useConfig,
+  useOrderingTheme
 } from 'ordering-components'
 import { Modal } from '../Modal'
 import {
@@ -25,7 +26,6 @@ import {
   Divider
 } from './styles'
 import MdClose from '@meronex/icons/md/MdClose'
-import { useTheme } from 'styled-components'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -51,10 +51,10 @@ export const BusinessInformationUI = (props) => {
   ]
   const [modalImage, setModalImage] = useState(false)
   const [image, setImage] = useState('')
-  const theme = useTheme()
+  const [orderingTheme] = useOrderingTheme()
 
-  const showLocation = !theme?.layouts?.business_view?.components?.information?.components?.location?.hidden
-  const showSchedule = !theme?.layouts?.business_view?.components?.information?.components?.schedule?.hidden
+  const showLocation = !orderingTheme?.theme?.business_view?.components?.information?.components?.location?.hidden
+  const showSchedule = !orderingTheme?.theme?.business_view?.components?.information?.components?.schedule?.hidden
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
