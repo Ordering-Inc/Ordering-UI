@@ -44,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessItemAccordion = function BusinessItemAccordion(props) {
-  var _configs$cart_change_, _theme$layouts, _theme$layouts$viewSt, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _theme$layouts$viewSt6, _theme$layouts$viewSt7, _theme$layouts2, _theme$layouts2$viewS, _theme$layouts2$viewS2, _theme$layouts2$viewS3, _theme$layouts2$viewS4, _theme$layouts2$viewS5, _theme$layouts2$viewS6, _theme$layouts2$viewS7, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _orderState$options, _props$afterComponent, _props$afterElements;
+  var _configs$cart_change_, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _orderingTheme$theme$7, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _orderState$options, _props$afterComponent, _props$afterElements;
 
   var uuid = props.uuid,
       isCartPending = props.isCartPending,
@@ -89,6 +89,10 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
+
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       setActive = _useState2[0],
@@ -115,8 +119,8 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   var businessDelete = (0, _react.useRef)(null);
   var changeStore = (0, _react.useRef)(null);
   var viewString = isStore ? 'business_view' : 'header';
-  var showBusinessLogo = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$viewSt = _theme$layouts[viewString]) !== null && _theme$layouts$viewSt !== void 0 && (_theme$layouts$viewSt2 = _theme$layouts$viewSt.components) !== null && _theme$layouts$viewSt2 !== void 0 && (_theme$layouts$viewSt3 = _theme$layouts$viewSt2.cart) !== null && _theme$layouts$viewSt3 !== void 0 && (_theme$layouts$viewSt4 = _theme$layouts$viewSt3.components) !== null && _theme$layouts$viewSt4 !== void 0 && (_theme$layouts$viewSt5 = _theme$layouts$viewSt4.business) !== null && _theme$layouts$viewSt5 !== void 0 && (_theme$layouts$viewSt6 = _theme$layouts$viewSt5.components) !== null && _theme$layouts$viewSt6 !== void 0 && (_theme$layouts$viewSt7 = _theme$layouts$viewSt6.logo) !== null && _theme$layouts$viewSt7 !== void 0 && _theme$layouts$viewSt7.hidden);
-  var showBusinessTime = !(theme !== null && theme !== void 0 && (_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$viewS = _theme$layouts2[viewString]) !== null && _theme$layouts2$viewS !== void 0 && (_theme$layouts2$viewS2 = _theme$layouts2$viewS.components) !== null && _theme$layouts2$viewS2 !== void 0 && (_theme$layouts2$viewS3 = _theme$layouts2$viewS2.cart) !== null && _theme$layouts2$viewS3 !== void 0 && (_theme$layouts2$viewS4 = _theme$layouts2$viewS3.components) !== null && _theme$layouts2$viewS4 !== void 0 && (_theme$layouts2$viewS5 = _theme$layouts2$viewS4.business) !== null && _theme$layouts2$viewS5 !== void 0 && (_theme$layouts2$viewS6 = _theme$layouts2$viewS5.components) !== null && _theme$layouts2$viewS6 !== void 0 && (_theme$layouts2$viewS7 = _theme$layouts2$viewS6.time) !== null && _theme$layouts2$viewS7 !== void 0 && _theme$layouts2$viewS7.hidden);
+  var showBusinessLogo = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme[viewString]) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cart) !== null && _orderingTheme$theme$3 !== void 0 && (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) !== null && _orderingTheme$theme$4 !== void 0 && (_orderingTheme$theme$5 = _orderingTheme$theme$4.business) !== null && _orderingTheme$theme$5 !== void 0 && (_orderingTheme$theme$6 = _orderingTheme$theme$5.components) !== null && _orderingTheme$theme$6 !== void 0 && (_orderingTheme$theme$7 = _orderingTheme$theme$6.logo) !== null && _orderingTheme$theme$7 !== void 0 && _orderingTheme$theme$7.hidden);
+  var showBusinessTime = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2[viewString]) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.cart) !== null && _orderingTheme$theme5 !== void 0 && (_orderingTheme$theme6 = _orderingTheme$theme5.components) !== null && _orderingTheme$theme6 !== void 0 && (_orderingTheme$theme7 = _orderingTheme$theme6.business) !== null && _orderingTheme$theme7 !== void 0 && (_orderingTheme$theme8 = _orderingTheme$theme7.components) !== null && _orderingTheme$theme8 !== void 0 && (_orderingTheme$theme9 = _orderingTheme$theme8.time) !== null && _orderingTheme$theme9 !== void 0 && _orderingTheme$theme9.hidden);
 
   var toggleAccordion = function toggleAccordion(e) {
     var _businessStore$curren, _businessDelete$curre, _changeStore$current;

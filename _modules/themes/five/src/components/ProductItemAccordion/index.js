@@ -17,8 +17,6 @@ var _orderingComponents = require("ordering-components");
 
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
-var _styledComponents = require("styled-components");
-
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -56,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _theme$layouts, _theme$layouts$viewSt, _theme$layouts$viewSt2, _theme$layouts$viewSt3, _theme$layouts$viewSt4, _theme$layouts$viewSt5, _theme$layouts$viewSt6, _theme$layouts$viewSt7, _props$beforeElements, _props$beforeComponen, _product$valid, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _orderingTheme$theme$7, _props$beforeElements, _props$beforeComponen, _product$valid, _props$afterComponent, _props$afterElements;
 
   var isCartPending = props.isCartPending,
       isCartProduct = props.isCartProduct,
@@ -82,8 +80,11 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
-  var theme = (0, _styledComponents.useTheme)();
   var windowSize = (0, _useWindowSize.useWindowSize)();
+
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -105,7 +106,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
   var viewString = isConfirmationPage ? 'confirmation' : isStore ? 'business_view' : 'header';
-  var showProductImage = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$viewSt = _theme$layouts[viewString]) !== null && _theme$layouts$viewSt !== void 0 && (_theme$layouts$viewSt2 = _theme$layouts$viewSt.components) !== null && _theme$layouts$viewSt2 !== void 0 && (_theme$layouts$viewSt3 = _theme$layouts$viewSt2.cart) !== null && _theme$layouts$viewSt3 !== void 0 && (_theme$layouts$viewSt4 = _theme$layouts$viewSt3.components) !== null && _theme$layouts$viewSt4 !== void 0 && (_theme$layouts$viewSt5 = _theme$layouts$viewSt4.products) !== null && _theme$layouts$viewSt5 !== void 0 && (_theme$layouts$viewSt6 = _theme$layouts$viewSt5.components) !== null && _theme$layouts$viewSt6 !== void 0 && (_theme$layouts$viewSt7 = _theme$layouts$viewSt6.photo) !== null && _theme$layouts$viewSt7 !== void 0 && _theme$layouts$viewSt7.hidden);
+  var showProductImage = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme[viewString]) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cart) !== null && _orderingTheme$theme$3 !== void 0 && (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) !== null && _orderingTheme$theme$4 !== void 0 && (_orderingTheme$theme$5 = _orderingTheme$theme$4.products) !== null && _orderingTheme$theme$5 !== void 0 && (_orderingTheme$theme$6 = _orderingTheme$theme$5.components) !== null && _orderingTheme$theme$6 !== void 0 && (_orderingTheme$theme$7 = _orderingTheme$theme$6.image) !== null && _orderingTheme$theme$7 !== void 0 && _orderingTheme$theme$7.hidden);
 
   var productInfo = function productInfo() {
     if (isCartProduct) {

@@ -35,6 +35,8 @@ var _styles = require("./styles");
 
 var _styles2 = require("../OrdersOption/styles");
 
+var _OrderingThemeContext = require("ordering-components/_modules/contexts/OrderingThemeContext");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -62,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleOrderCardUI = function SingleOrderCardUI(props) {
-  var _theme$layouts, _theme$layouts$orders, _theme$layouts$orders2, _theme$layouts2, _theme$layouts2$order, _theme$layouts2$order2, _theme$layouts3, _theme$layouts3$order, _theme$layouts3$order2, _props$beforeElements, _props$beforeComponen, _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _theme$images4, _theme$images4$dummie, _order$business7, _order$summary, _order$business8, _getOrderStatus, _order$summary2, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _props$beforeElements, _props$beforeComponen, _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _theme$images4, _theme$images4$dummie, _order$business7, _order$summary, _order$business8, _getOrderStatus, _order$summary2, _props$afterComponent, _props$afterElements;
 
   var order = props.order,
       getOrderStatus = props.getOrderStatus,
@@ -92,6 +94,10 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
+
+  var _useOrderingTheme = (0, _OrderingThemeContext.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -191,12 +197,9 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     handleFavoriteOrder && handleFavoriteOrder(!(order !== null && order !== void 0 && order.favorite));
   };
 
-  var businessLogo = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$orders = _theme$layouts.orders) === null || _theme$layouts$orders === void 0 ? void 0 : (_theme$layouts$orders2 = _theme$layouts$orders.components) === null || _theme$layouts$orders2 === void 0 ? void 0 : _theme$layouts$orders2.business_logo;
-  var date = theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$order = _theme$layouts2.orders) === null || _theme$layouts2$order === void 0 ? void 0 : (_theme$layouts2$order2 = _theme$layouts2$order.components) === null || _theme$layouts2$order2 === void 0 ? void 0 : _theme$layouts2$order2.date;
-  var map = theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$order = _theme$layouts3.orders) === null || _theme$layouts3$order === void 0 ? void 0 : (_theme$layouts3$order2 = _theme$layouts3$order.components) === null || _theme$layouts3$order2 === void 0 ? void 0 : _theme$layouts3$order2.map;
-  var isHideBusinessLogo = businessLogo === null || businessLogo === void 0 ? void 0 : businessLogo.hidden;
-  var isHideDate = date === null || date === void 0 ? void 0 : date.hidden;
-  var isHideMap = map === null || map === void 0 ? void 0 : map.hidden;
+  var showBusinessLogo = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.orders) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.business_logo) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
+  var showDate = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.orders) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.date) !== null && _orderingTheme$theme5 !== void 0 && _orderingTheme$theme5.hidden);
+  var showMap = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme6 = orderingTheme.theme) !== null && _orderingTheme$theme6 !== void 0 && (_orderingTheme$theme7 = _orderingTheme$theme6.orders) !== null && _orderingTheme$theme7 !== void 0 && (_orderingTheme$theme8 = _orderingTheme$theme7.components) !== null && _orderingTheme$theme8 !== void 0 && (_orderingTheme$theme9 = _orderingTheme$theme8.map) !== null && _orderingTheme$theme9 !== void 0 && _orderingTheme$theme9.hidden);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -212,7 +215,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     onClick: function onClick(e) {
       return handleClickCard(e, order === null || order === void 0 ? void 0 : order.uuid);
     }
-  }, ((configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value) || isBusinessesPage) && !isHideMap && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, ((configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value) || isBusinessesPage) && showMap && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 80
   }) : /*#__PURE__*/_react.default.createElement(_styles.Map, {
     isBusinessesPage: isBusinessesPage
@@ -226,9 +229,9 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 60,
     height: 60
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomerMode && !isHideBusinessLogo && /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomerMode && showBusinessLogo && /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, {
     bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_400,c_limit')
-  }), isCustomerMode && !isHideBusinessLogo && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
+  }), isCustomerMode && showBusinessLogo && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
     src: ((_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo) || ((_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$dummie = _theme$images4.dummies) === null || _theme$images4$dummie === void 0 ? void 0 : _theme$images4$dummie.businessLogo),
     alt: "business-logo",
     width: "75px",
@@ -252,7 +255,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     className: "orders-detail"
   }, (order === null || order === void 0 ? void 0 : order.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", {
     name: "order_number"
-  }, t('ORDER_NUM', 'Order No.'), " ", order.id)), !isHideDate && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
+  }, t('ORDER_NUM', 'Order No.'), " ", order.id)), showDate && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
     outputFormat: 'MM/DD/YY hh:mm A'
   }) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false

@@ -19,8 +19,6 @@ var _reactHookForm = require("react-hook-form");
 
 var _orderingComponents = require("ordering-components");
 
-var _styledComponents = require("styled-components");
-
 var _Confirm = require("../Confirm");
 
 var _GoogleGpsButton = require("../../../../../components/GoogleGpsButton");
@@ -80,7 +78,7 @@ var inputNames = [{
 }];
 
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$layouts$header4, _theme$layouts$header5, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts2$heade4, _theme$layouts2$heade5, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
 
   var addressesList = props.addressesList,
       googleMapsControls = props.googleMapsControls,
@@ -113,7 +111,9 @@ var AddressFormUI = function AddressFormUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       auth = _useSession2[0].auth;
 
-  var theme = (0, _styledComponents.useTheme)();
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
 
   var _useState = (0, _react.useState)({
     selectedFromAutocomplete: true
@@ -154,8 +154,8 @@ var AddressFormUI = function AddressFormUI(props) {
       locationChange = _useState12[0],
       setLocationChange = _useState12[1];
 
-  var isHideMap = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$header = _theme$layouts.header) === null || _theme$layouts$header === void 0 ? void 0 : (_theme$layouts$header2 = _theme$layouts$header.components) === null || _theme$layouts$header2 === void 0 ? void 0 : (_theme$layouts$header3 = _theme$layouts$header2.address_form) === null || _theme$layouts$header3 === void 0 ? void 0 : (_theme$layouts$header4 = _theme$layouts$header3.components) === null || _theme$layouts$header4 === void 0 ? void 0 : (_theme$layouts$header5 = _theme$layouts$header4.map) === null || _theme$layouts$header5 === void 0 ? void 0 : _theme$layouts$header5.hidden;
-  var isHideIcons = theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$heade = _theme$layouts2.header) === null || _theme$layouts2$heade === void 0 ? void 0 : (_theme$layouts2$heade2 = _theme$layouts2$heade.components) === null || _theme$layouts2$heade2 === void 0 ? void 0 : (_theme$layouts2$heade3 = _theme$layouts2$heade2.address_form) === null || _theme$layouts2$heade3 === void 0 ? void 0 : (_theme$layouts2$heade4 = _theme$layouts2$heade3.components) === null || _theme$layouts2$heade4 === void 0 ? void 0 : (_theme$layouts2$heade5 = _theme$layouts2$heade4.icons) === null || _theme$layouts2$heade5 === void 0 ? void 0 : _theme$layouts2$heade5.hidden;
+  var isHideMap = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.address_form) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.map) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.hidden;
+  var isHideIcons = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.header) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.address_form) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.components) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.icons) === null || _orderingTheme$theme7 === void 0 ? void 0 : _orderingTheme$theme7.hidden;
   var maxLimitLocation = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.meters_to_change_address) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
   var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value;
   var isLocationRequired = ((_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.google_autocomplete_selection_required) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === '1' || ((_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.google_autocomplete_selection_required) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === 'true';
@@ -403,9 +403,9 @@ var AddressFormUI = function AddressFormUI(props) {
   };
 
   var showFieldWithTheme = function showFieldWithTheme(name) {
-    var _theme$layouts3, _theme$layouts3$heade, _theme$layouts3$heade2, _theme$layouts3$heade3, _theme$layouts3$heade4, _theme$layouts3$heade5;
+    var _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13;
 
-    return !(theme !== null && theme !== void 0 && (_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$heade = _theme$layouts3.header) !== null && _theme$layouts3$heade !== void 0 && (_theme$layouts3$heade2 = _theme$layouts3$heade.components) !== null && _theme$layouts3$heade2 !== void 0 && (_theme$layouts3$heade3 = _theme$layouts3$heade2.address_form) !== null && _theme$layouts3$heade3 !== void 0 && (_theme$layouts3$heade4 = _theme$layouts3$heade3.components) !== null && _theme$layouts3$heade4 !== void 0 && (_theme$layouts3$heade5 = _theme$layouts3$heade4[name]) !== null && _theme$layouts3$heade5 !== void 0 && _theme$layouts3$heade5.hidden);
+    return !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme8 = orderingTheme.theme) !== null && _orderingTheme$theme8 !== void 0 && (_orderingTheme$theme9 = _orderingTheme$theme8.header) !== null && _orderingTheme$theme9 !== void 0 && (_orderingTheme$theme10 = _orderingTheme$theme9.components) !== null && _orderingTheme$theme10 !== void 0 && (_orderingTheme$theme11 = _orderingTheme$theme10.address_form) !== null && _orderingTheme$theme11 !== void 0 && (_orderingTheme$theme12 = _orderingTheme$theme11.components) !== null && _orderingTheme$theme12 !== void 0 && (_orderingTheme$theme13 = _orderingTheme$theme12[name]) !== null && _orderingTheme$theme13 !== void 0 && _orderingTheme$theme13.hidden);
   };
 
   (0, _react.useEffect)(function () {

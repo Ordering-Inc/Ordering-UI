@@ -30,6 +30,6 @@ var HeroContainer = _styledComponents.default.div(_templateObject2 || (_template
 
 exports.HeroContainer = HeroContainer;
 
-var HeroContent = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100vw;\n  height: 100vh;\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 1fr 1fr;\n\n  #logo {\n    display: flex;\n    align-items: flex-start;\n    justify-content: center;\n    padding-top: 20px;\n  }\n  #button {\n    display: flex;\n    align-items: flex-end;\n    justify-content: center;\n    padding-bottom: 30px;\n  }\n"])));
+var HeroContent = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100vw;\n  height: 100vh;\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 1fr 1fr;\n\n  #logo {\n    display: flex;\n    align-items: flex-start;\n    justify-content: center;\n    padding-top: 20px;\n  }\n  #button {\n    display: flex;\n    align-items: flex-end;\n    justify-content: center;\n    padding-bottom: 60px;\n  }\n"])));
 
 exports.HeroContent = HeroContent;

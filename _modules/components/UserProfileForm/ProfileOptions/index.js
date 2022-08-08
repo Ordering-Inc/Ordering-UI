@@ -21,8 +21,6 @@ var _FaAddressBook = _interopRequireDefault(require("@meronex/icons/fa/FaAddress
 
 var _orderingComponents = require("ordering-components");
 
-var _styledComponents = require("styled-components");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -42,7 +40,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProfileOptions = function ProfileOptions(_ref) {
-  var _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts$profil4, _theme$layouts$profil5;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5;
 
   var value = _ref.value;
 
@@ -58,8 +56,11 @@ var ProfileOptions = function ProfileOptions(_ref) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
-  var theme = (0, _styledComponents.useTheme)();
-  var showAddressListTab = ((_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$profil = _theme$layouts.profile) === null || _theme$layouts$profil === void 0 ? void 0 : (_theme$layouts$profil2 = _theme$layouts$profil.components) === null || _theme$layouts$profil2 === void 0 ? void 0 : (_theme$layouts$profil3 = _theme$layouts$profil2.address_list) === null || _theme$layouts$profil3 === void 0 ? void 0 : (_theme$layouts$profil4 = _theme$layouts$profil3.components) === null || _theme$layouts$profil4 === void 0 ? void 0 : (_theme$layouts$profil5 = _theme$layouts$profil4.layout) === null || _theme$layouts$profil5 === void 0 ? void 0 : _theme$layouts$profil5.position) === 'new_page';
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
+
+  var showAddressListTab = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.profile) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.address_list) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.layout) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.position) === 'new_page';
 
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);

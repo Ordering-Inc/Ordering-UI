@@ -74,6 +74,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   var handleChangeCategory = function handleChangeCategory(category) {
     var _document$getElementB, _document$getElementB2;
 
+    var isBlockScroll = window.location.search.includes('category') && window.location.search.includes('product');
+
     if (business !== null && business !== void 0 && business.lazy_load_products_recommended) {
       handlerClickCategory(_objectSpread({}, category));
       return;
@@ -81,11 +83,14 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
 
     var topPos = 0;
     if (!(category !== null && category !== void 0 && category.id)) topPos = (_document$getElementB = document.getElementById('businessProductList')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.offsetTop;else topPos = (_document$getElementB2 = document.getElementById("category".concat(category.id))) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.offsetTop;
-    window.scroll({
-      top: topPos - 60,
-      left: 0,
-      behavior: 'smooth'
-    });
+
+    if (!isBlockScroll) {
+      window.scroll({
+        top: topPos - 60,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
   };
 
   var ProductCategories = function ProductCategories() {

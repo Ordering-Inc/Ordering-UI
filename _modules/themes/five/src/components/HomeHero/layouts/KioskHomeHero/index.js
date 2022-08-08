@@ -142,7 +142,8 @@ var KioskHomeHero = function KioskHomeHero(props) {
     color: "primary",
     name: "find-business",
     style: {
-      width: 'auto'
+      width: 'auto',
+      padding: '5px 20px'
     }
   }, t('TOUCH_ANYWHERE_TO_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TOUCH_ANYWHERE_TO_ORDER) || 'Touch anywhere to order'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen.open,

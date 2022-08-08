@@ -21,8 +21,6 @@ var _useWindowSize = require("../../hooks/useWindowSize");
 
 var _styles = require("./styles");
 
-var _styledComponents = require("styled-components");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -58,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _theme$layouts, _theme$layouts$confir, _theme$layouts$confir2, _theme$layouts$confir3, _theme$layouts$confir4, _theme$layouts$confir5, _theme$layouts$confir6, _theme$layouts$confir7, _props$beforeElements, _props$beforeComponen, _product$valid, _product$total, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _orderingTheme$theme$7, _props$beforeElements, _props$beforeComponen, _product$valid, _product$total, _props$afterComponent, _props$afterElements;
 
   var isCartPending = props.isCartPending,
       isCartProduct = props.isCartProduct,
@@ -82,7 +80,10 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       parsePrice = _useUtils2[0].parsePrice;
 
   var windowSize = (0, _useWindowSize.useWindowSize)();
-  var theme = (0, _styledComponents.useTheme)();
+
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -103,7 +104,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var productSelect = (0, _react.useRef)(null);
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
-  var showProductImage = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$confir = _theme$layouts.confirmation) !== null && _theme$layouts$confir !== void 0 && (_theme$layouts$confir2 = _theme$layouts$confir.components) !== null && _theme$layouts$confir2 !== void 0 && (_theme$layouts$confir3 = _theme$layouts$confir2.cart) !== null && _theme$layouts$confir3 !== void 0 && (_theme$layouts$confir4 = _theme$layouts$confir3.components) !== null && _theme$layouts$confir4 !== void 0 && (_theme$layouts$confir5 = _theme$layouts$confir4.products) !== null && _theme$layouts$confir5 !== void 0 && (_theme$layouts$confir6 = _theme$layouts$confir5.components) !== null && _theme$layouts$confir6 !== void 0 && (_theme$layouts$confir7 = _theme$layouts$confir6.photo) !== null && _theme$layouts$confir7 !== void 0 && _theme$layouts$confir7.hidden);
+  var showProductImage = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.confirmation) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cart) !== null && _orderingTheme$theme$3 !== void 0 && (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) !== null && _orderingTheme$theme$4 !== void 0 && (_orderingTheme$theme$5 = _orderingTheme$theme$4.products) !== null && _orderingTheme$theme$5 !== void 0 && (_orderingTheme$theme$6 = _orderingTheme$theme$5.components) !== null && _orderingTheme$theme$6 !== void 0 && (_orderingTheme$theme$7 = _orderingTheme$theme$6.image) !== null && _orderingTheme$theme$7 !== void 0 && _orderingTheme$theme$7.hidden);
 
   var productInfo = function productInfo() {
     if (isCartProduct) {

@@ -64,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _theme$layouts, _theme$layouts$profil, _theme$layouts$profil2, _theme$layouts$profil3, _theme$layouts2, _theme$layouts2$profi, _theme$layouts2$profi2, _theme$layouts2$profi3, _theme$layouts3, _theme$layouts3$profi, _theme$layouts3$profi2, _theme$layouts3$profi3, _theme$layouts4, _theme$layouts4$profi, _theme$layouts4$profi2, _theme$layouts4$profi3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _formState$result7, _formState$result8, _formState$result8$re, _formState$result8$re2, _formState$result8$re3, _formState$changes$se2, _formState$changes9, _formState$changes9$s, _formState$changes9$s2, _user$settings2, _user$settings2$notif, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _formState$result7, _formState$result8, _formState$result8$re, _formState$result8$re2, _formState$result8$re3, _formState$changes$se2, _formState$changes9, _formState$changes9$s, _formState$changes9$s2, _user$settings2, _user$settings2$notif, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var isEdit = props.isEdit,
       formState = props.formState,
@@ -99,6 +99,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       userSession = _useSession2[0].user;
 
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
+
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       isValidPhoneNumber = _useState2[0],
@@ -128,10 +132,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
 
   var emailInput = (0, _react.useRef)(null);
   var user = userData || userSession;
-  var showCustomerCellphone = !((_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$profil = _theme$layouts.profile) !== null && _theme$layouts$profil !== void 0 && (_theme$layouts$profil2 = _theme$layouts$profil.components) !== null && _theme$layouts$profil2 !== void 0 && (_theme$layouts$profil3 = _theme$layouts$profil2.cellphone) !== null && _theme$layouts$profil3 !== void 0 && _theme$layouts$profil3.hidden);
-  var showCustomerPassword = !((_theme$layouts2 = theme.layouts) !== null && _theme$layouts2 !== void 0 && (_theme$layouts2$profi = _theme$layouts2.profile) !== null && _theme$layouts2$profi !== void 0 && (_theme$layouts2$profi2 = _theme$layouts2$profi.components) !== null && _theme$layouts2$profi2 !== void 0 && (_theme$layouts2$profi3 = _theme$layouts2$profi2.password) !== null && _theme$layouts2$profi3 !== void 0 && _theme$layouts2$profi3.hidden);
-  var showCustomerPromotions = !((_theme$layouts3 = theme.layouts) !== null && _theme$layouts3 !== void 0 && (_theme$layouts3$profi = _theme$layouts3.profile) !== null && _theme$layouts3$profi !== void 0 && (_theme$layouts3$profi2 = _theme$layouts3$profi.components) !== null && _theme$layouts3$profi2 !== void 0 && (_theme$layouts3$profi3 = _theme$layouts3$profi2.promotions) !== null && _theme$layouts3$profi3 !== void 0 && _theme$layouts3$profi3.hidden);
-  var showLangauges = !((_theme$layouts4 = theme.layouts) !== null && _theme$layouts4 !== void 0 && (_theme$layouts4$profi = _theme$layouts4.profile) !== null && _theme$layouts4$profi !== void 0 && (_theme$layouts4$profi2 = _theme$layouts4$profi.components) !== null && _theme$layouts4$profi2 !== void 0 && (_theme$layouts4$profi3 = _theme$layouts4$profi2.languages) !== null && _theme$layouts4$profi3 !== void 0 && _theme$layouts4$profi3.hidden);
+  var showCustomerCellphone = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.profile) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cellphone) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
+  var showCustomerPassword = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.profile) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.password) !== null && _orderingTheme$theme5 !== void 0 && _orderingTheme$theme5.hidden);
+  var showCustomerPromotions = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme6 = orderingTheme.theme) !== null && _orderingTheme$theme6 !== void 0 && (_orderingTheme$theme7 = _orderingTheme$theme6.profile) !== null && _orderingTheme$theme7 !== void 0 && (_orderingTheme$theme8 = _orderingTheme$theme7.components) !== null && _orderingTheme$theme8 !== void 0 && (_orderingTheme$theme9 = _orderingTheme$theme8.promotions) !== null && _orderingTheme$theme9 !== void 0 && _orderingTheme$theme9.hidden);
+  var showLangauges = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme10 = orderingTheme.theme) !== null && _orderingTheme$theme10 !== void 0 && (_orderingTheme$theme11 = _orderingTheme$theme10.profile) !== null && _orderingTheme$theme11 !== void 0 && (_orderingTheme$theme12 = _orderingTheme$theme11.components) !== null && _orderingTheme$theme12 !== void 0 && (_orderingTheme$theme13 = _orderingTheme$theme12.languages) !== null && _orderingTheme$theme13 !== void 0 && _orderingTheme$theme13.hidden);
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -278,9 +282,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   };
 
   var showFieldWithTheme = function showFieldWithTheme(name) {
-    var _theme$layouts5, _theme$layouts5$profi, _theme$layouts5$profi2, _theme$layouts5$profi3;
+    var _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17;
 
-    return !((_theme$layouts5 = theme.layouts) !== null && _theme$layouts5 !== void 0 && (_theme$layouts5$profi = _theme$layouts5.profile) !== null && _theme$layouts5$profi !== void 0 && (_theme$layouts5$profi2 = _theme$layouts5$profi.components) !== null && _theme$layouts5$profi2 !== void 0 && (_theme$layouts5$profi3 = _theme$layouts5$profi2[name]) !== null && _theme$layouts5$profi3 !== void 0 && _theme$layouts5$profi3.hidden);
+    return !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme14 = orderingTheme.theme) !== null && _orderingTheme$theme14 !== void 0 && (_orderingTheme$theme15 = _orderingTheme$theme14.profile) !== null && _orderingTheme$theme15 !== void 0 && (_orderingTheme$theme16 = _orderingTheme$theme15.components) !== null && _orderingTheme$theme16 !== void 0 && (_orderingTheme$theme17 = _orderingTheme$theme16[name]) !== null && _orderingTheme$theme17 !== void 0 && _orderingTheme$theme17.hidden);
   };
 
   (0, _react.useEffect)(function () {
