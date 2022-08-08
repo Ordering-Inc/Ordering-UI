@@ -145,7 +145,7 @@ const BusinessPreorderUI = (props) => {
     const selectedMenu = menu ? (menu?.use_business_schedule ? business : menu) : business
     const _times = getTimes(dateSelected, selectedMenu)
     setTimeList(_times)
-  }, [dateSelected, menu])
+  }, [dateSelected, menu, business])
 
   useEffect(() => {
     if (type === 'business_hours') setMenu(null)
@@ -254,7 +254,11 @@ const BusinessPreorderUI = (props) => {
                 ))}
               </>
             ) : (
-              <ClosedBusinessMsg>{t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')}</ClosedBusinessMsg>
+              <ClosedBusinessMsg>
+                {!isProfessional
+                  ? t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')
+                  : t('PROFESSIONAL_NOT_AVAILABLE', 'Professional is not available at the moment')}
+              </ClosedBusinessMsg>
             )}
           </TimeListWrapper>
         </OrderTimeWrapper>
@@ -275,7 +279,7 @@ const BusinessPreorderUI = (props) => {
         </ButtonWrapper>
       )}
       {orderState?.loading && (
-        <Layer>
+        <Layer nobg={!!isProfessional}>
           {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (
             <SpinnerLoader
               style={{

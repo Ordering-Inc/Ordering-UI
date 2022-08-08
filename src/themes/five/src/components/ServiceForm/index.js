@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useUtils, useLanguage, useSession, ProductForm as ProductFormController } from 'ordering-components'
 import { Alert } from '../Confirm'
@@ -8,7 +8,7 @@ import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { useTheme } from 'styled-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons'
+import { ChevronLeft, ChevronRight, ChevronDown } from 'react-bootstrap-icons'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { Button } from '../../styles/Buttons'
 import SwiperCore, { Navigation } from 'swiper'
@@ -31,7 +31,9 @@ import {
   InfoWrapper,
   ProfessionalPhoto,
   NameWrapper,
-  StatusInfo
+  StatusInfo,
+  DropDownWrapper,
+  DropDownTitle
 } from './styles'
 import moment from 'moment'
 SwiperCore.use([Navigation])
@@ -43,7 +45,8 @@ const ServiceFormUI = (props) => {
     handleSave,
     isSoldOut,
     maxProductQuantity,
-    productCart
+    productCart,
+    professionalList
   } = props
 
   const theme = useTheme()
@@ -52,6 +55,10 @@ const ServiceFormUI = (props) => {
   const [{ auth }, { login }] = useSession()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [isDropDown, setIsDropDown] = useState(false)
+  const [currentProfessional, setCurrentProfessional] = useState(null)
+
+  const dropDownRef = useRef()
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -82,7 +89,7 @@ const ServiceFormUI = (props) => {
   const [dateSelected, setDateSelected] = useState(null)
 
   const handleAddProduct = () => {
-    if (!professionalSelected?.id) {
+    if (!currentProfessional?.id) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_PROFESSIONAL_REQUIRED', 'The field professional is required')]
@@ -96,17 +103,30 @@ const ServiceFormUI = (props) => {
       })
       return
     }
-    const values = { serviceTime: parseDate(dateSelected, { outputFormat: 'YYYY-MM-DD HH:mm:00' }) }
+    const values = {
+      serviceTime: parseDate(dateSelected, { outputFormat: 'YYYY-MM-DD HH:mm:00' }),
+      professional: currentProfessional
+    }
     handleSave(values)
   }
 
-  const isBusyTime = () => {
-    if (professionalSelected?.busy_times?.length === 0 || !dateSelected) return false
-    const valid = professionalSelected?.busy_times.some(item => {
+  const isBusyTime = (professional) => {
+    if (professional?.busy_times?.length === 0 || !dateSelected) return false
+    const valid = professional?.busy_times.some(item => {
       return moment(item?.start).valueOf() <= moment(dateSelected).valueOf() &&
         moment(dateSelected).valueOf() <= moment(item?.end).valueOf()
     })
     return valid
+  }
+
+  const handleClickOutside = (e) => {
+    if (dropDownRef?.current.contains(e.target)) return
+    setIsDropDown(false)
+  }
+
+  const handleChangeProfessional = (professional) => {
+    setIsDropDown(false)
+    setCurrentProfessional(professional)
   }
 
   useEffect(() => {
@@ -121,6 +141,18 @@ const ServiceFormUI = (props) => {
     }
     setGallery(imageList)
   }, [product])
+
+  useEffect(() => {
+    window.addEventListener('mouseup', handleClickOutside)
+    return () => {
+      window.removeEventListener('mouseup', handleClickOutside)
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (!professionalSelected) return
+    setCurrentProfessional(professionalSelected)
+  }, [professionalSelected])
 
   return (
     <>
@@ -167,18 +199,18 @@ const ServiceFormUI = (props) => {
             <h2>{t('PROFESSIONALS', 'Professionals')}</h2>
             <span>{t('REQUIRED', 'Required')}</span>
           </SectionHeader>
-          <ProfessionalSelectWrapper>
-            <SelectedItem>
+          <ProfessionalSelectWrapper ref={dropDownRef}>
+            <SelectedItem onClick={() => setIsDropDown(true)}>
               <InfoWrapper>
-                {professionalSelected?.photo ? (
+                {currentProfessional?.photo ? (
                   <ProfessionalPhoto
-                    bgimage={professionalSelected?.photo}
+                    bgimage={currentProfessional?.photo}
                   />
                 ) : <FaUserAlt />}
                 <NameWrapper>
-                  <p>{professionalSelected?.name} {professionalSelected?.lastname}</p>
+                  <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
                   <StatusInfo available={!isBusyTime()}>
-                    {isBusyTime() ? (
+                    {isBusyTime(currentProfessional) ? (
                       <>
                         <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
                       </>
@@ -188,7 +220,42 @@ const ServiceFormUI = (props) => {
                   </StatusInfo>
                 </NameWrapper>
               </InfoWrapper>
+              <ChevronDown />
             </SelectedItem>
+            {isDropDown && (
+              <DropDownWrapper>
+                <DropDownTitle>{t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')}</DropDownTitle>
+                {professionalList?.map((professional) => professional?.products?.includes(product?.id) && (
+                  <SelectedItem
+                    key={professional?.id}
+                    isDropDown
+                    active={professional?.id === currentProfessional?.id}
+                    onClick={() => handleChangeProfessional(professional)}
+                  >
+                    <InfoWrapper>
+                      {professional?.photo ? (
+                        <ProfessionalPhoto
+                          bgimage={professional?.photo}
+                        />
+                      ) : <FaUserAlt />}
+                      <NameWrapper>
+                        <p>{professional?.name} {professional?.lastname}</p>
+                        <StatusInfo available={!isBusyTime(professional)}>
+                          {isBusyTime(professional) ? (
+                            <>
+                              <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                            </>
+                          ) : (
+                            <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                          )}
+                        </StatusInfo>
+                      </NameWrapper>
+                    </InfoWrapper>
+                  </SelectedItem>
+                ))}
+              </DropDownWrapper>
+            )}
+
           </ProfessionalSelectWrapper>
         </ProfessionalInfoWrapper>
         <ScheduleWrapper>
@@ -196,13 +263,15 @@ const ServiceFormUI = (props) => {
             <h2>{t('SCHEDULE', 'Schedule')}</h2>
             <span>{t('REQUIRED', 'Required')}</span>
           </SectionHeader>
-          <BusinessPreorder
-            business={professionalSelected}
-            isProfessional
-            maxDays={50}
-            onChangeMoment={setDateSelected}
-            useOrderContext={false}
-          />
+          {currentProfessional && (
+            <BusinessPreorder
+              business={currentProfessional}
+              isProfessional
+              maxDays={50}
+              onChangeMoment={setDateSelected}
+              useOrderContext={false}
+            />
+          )}
         </ScheduleWrapper>
         <ButtonWrapper>
           <span>{dateSelected
@@ -213,6 +282,7 @@ const ServiceFormUI = (props) => {
             <Button
               onClick={() => handleAddProduct()}
               color='primary'
+              disabled={isBusyTime(currentProfessional)}
             >
               {t('BOOK', 'Book')}
             </Button>

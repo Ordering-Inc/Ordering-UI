@@ -154,7 +154,7 @@ export const ButtonWrapper = styled.div`
   padding: 11px 20px 30px 20px;
   border-top: ${props => props.theme.colors.gray200};
   bottom: 0px;
-  z-index: 1;
+  z-index: 11;
 
   span {
     font-weight: 500;
@@ -173,7 +173,23 @@ export const ButtonWrapper = styled.div`
   }
 `
 
-export const ProfessionalSelectWrapper = styled.div``
+export const ProfessionalSelectWrapper = styled.div`
+  position: relative;
+`
+
+export const DropDownWrapper = styled.div`
+  position: absolute;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 7.6px;
+  top: 100%;
+  margin-top: 5px;
+  border: 1px solid ${props => props.theme.colors.gray200};
+  background-color: ${props => props.theme.colors.backgroundPage};
+  padding: 18px 16px;
+  width: 100%;
+  z-index: 10;
+  box-sizing: border-box;
+`
 
 export const SelectedItem = styled.div`
   display: flex;
@@ -183,6 +199,30 @@ export const SelectedItem = styled.div`
 
   border: 1px solid ${props => props.theme.colors.gray200};
   border-radius: 7.6px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+
+  ${({ isDropDown }) => isDropDown && css`
+    border: none;
+    padding: 12px 0px;
+    border-top: 1px solid ${props => props.theme.colors.gray200};
+    border-radius: 0px;
+    &:hover {
+      background-color: ${props => props.theme.colors.grayDividerColor};
+    }
+  `}
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.gray200};
+  `}
+`
+
+export const DropDownTitle = styled.h1`
+  margin-top: 0px;
+  margin-bottom: 18px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
 `
 
 export const InfoWrapper = styled.div`
