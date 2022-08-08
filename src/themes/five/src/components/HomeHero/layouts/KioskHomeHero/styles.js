@@ -38,6 +38,6 @@ export const HeroContent = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding-bottom: 30px;
+    padding-bottom: 60px;
   }
 `
