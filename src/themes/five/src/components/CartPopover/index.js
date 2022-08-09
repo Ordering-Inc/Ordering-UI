@@ -41,6 +41,11 @@ export const CartPopover = (props) => {
   const { styles, attributes, forceUpdate } = popper
 
   const isSlideBar = theme.layouts?.header?.components?.cart?.open_strategy?.type === 'slide'
+  const isCartButtonPF = theme?.layouts?.header?.components?.cart?.components?.layout?.type === 'pfchangs'
+  const showCartText = !theme?.layouts?.header?.components?.cart?.components?.text?.hidden
+  const cartButtonBackgroundColor = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.style?.backgroundColor
+  const cartButtonTextcolor = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.style?.textColor
+  const cartButtonIcon = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.image
 
   useEffect(() => {
     // forceUpdate && forceUpdate()
@@ -101,11 +106,33 @@ export const CartPopover = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <div style={{ overflow: 'hidden' }}>
-        <HeaderItem ref={referenceElement} onClick={props.onClick} name='cart-popover'>
-          <span>
-            <Cart3 />
-            {props.carts?.length > 0 && <span>{props.carts?.length}</span>}
-          </span>
+        <HeaderItem
+          ref={referenceElement}
+          onClick={props.onClick}
+          name='cart-popover'
+          isHideCartText={!showCartText}
+        >
+          {isCartButtonPF ? (
+            <Button style={{
+              backgroundColor: cartButtonBackgroundColor || '',
+              color: cartButtonTextcolor || ''
+            }}
+            >
+              <>
+                {showCartText && (
+                  <>{t('CART', 'Cart')}</>
+                )}
+                {cartButtonIcon && (
+                  <img alt='cart-icon' width='14px' height='17px' src={cartButtonIcon} loading='lazy' />
+                )}
+              </>
+            </Button>
+          ) : (
+            <span>
+              <Cart3 />
+              {props.carts?.length > 0 && <span>{props.carts?.length}</span>}
+            </span>
+          )}
         </HeaderItem>
         {isSlideBar ? (
           <Modal

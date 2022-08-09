@@ -3,7 +3,7 @@ import { useConfig } from 'ordering-components'
 import { OriginalHomeHero } from './layouts/OriginalHomeHero'
 import { RedHomeHero } from './layouts/RedHomeHero'
 import { StarbucksHomeHero } from './layouts/StarbucksHomeHero'
-
+import { PFChangsHomeHero } from './layouts/PFChangsHomeHero'
 export const HomeHero = (props) => {
   const [{ configs }] = useConfig()
 
@@ -31,6 +31,7 @@ export const HomeHero = (props) => {
       {(layout === 'original') && <OriginalHomeHero {...homeLayoutProps} />}
       {(layout === 'starbucks') && <StarbucksHomeHero {...homeLayoutProps} />}
       {(layout === 'red') && <RedHomeHero {...homeLayoutProps} />}
+      {(layout === 'pfchangs') && <PFChangsHomeHero {...homeLayoutProps} />}
     </>
   )
 }

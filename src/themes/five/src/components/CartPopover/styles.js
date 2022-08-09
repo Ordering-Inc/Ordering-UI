@@ -23,6 +23,14 @@ export const HeaderItem = styled.div`
       font-size: 16px;
     }
   }
+  button{
+    margin-left: 20px;
+    img {
+      margin-left: ${({ isHideCartText }) => isHideCartText ? '0px' : '4px'};
+      position: relative;
+      top: 2px;
+    }
+  }
 `
 
 export const PopoverBody = styled.div`

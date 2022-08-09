@@ -4,7 +4,8 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: ${({ headerBorderBottom }) => headerBorderBottom || '1px solid #E9ECEF'};
+  background-color: ${({ headerBackgroundColor }) => headerBackgroundColor || ''};
 `
 
 export const InnerHeader = styled.div`
@@ -384,4 +385,9 @@ export const FarAwayMessage = styled.div`
 export const Divider = styled.div`
   border: 1px solid #DEE2E6;
   height: 100%;
+`
+
+export const LoginButton = styled.div`
+  display: flex;
+  align-items: center;
 `

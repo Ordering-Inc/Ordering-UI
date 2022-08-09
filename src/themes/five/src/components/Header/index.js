@@ -24,7 +24,8 @@ import {
   AddressMenu,
   MomentMenu,
   FarAwayMessage,
-  Divider
+  Divider,
+  LoginButton
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -90,6 +91,13 @@ export const Header = (props) => {
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
+
+  const headerBackgroundColor = theme?.layouts?.header?.components?.style?.backgroundColor
+  const headerBorderBottom = theme?.layouts?.header?.components?.style?.borderBottom
+  const headerLogo = theme?.layouts?.header?.components?.logo?.components?.image
+  const isloginSignupLayoutPF = theme?.layouts?.header?.components?.login_signup?.components?.layout?.type === 'pfchangs'
+  const loginSignupIcon = theme?.layouts?.header?.components?.login_signup?.components?.icon?.components?.image
+  const cartAlwaysShowed = theme?.layouts?.header?.components?.cart?.components?.open_strategy?.alwaysShowed
 
   const handleSuccessSignup = (user) => {
     login({
@@ -209,7 +217,10 @@ export const Header = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <HeaderContainer>
+      <HeaderContainer
+        headerBackgroundColor={headerBackgroundColor}
+        headerBorderBottom={headerBorderBottom}
+      >
         <InnerHeader>
           <LeftHeader>
             <SidebarMenu
@@ -221,8 +232,10 @@ export const Header = (props) => {
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
             >
-              <img alt='Logotype' width='170px' height='45px' src={theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
+              <img alt='Logotype' width='170px' height='45px' src={headerLogo || theme?.images?.logos?.logotype} loading='lazy' />
+              {!headerLogo && (
+                <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
+              )}
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && !props.isCustomLayout && (
@@ -305,16 +318,54 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 920 && (
                     <>
-                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} style={{ whiteSpace: 'nowrap' }} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
-                      {!isHideSignup && (
-                        <MenuLink
-                          onClick={() => handleOpenLoginSignUp('signup')}
-                          highlight={1}
-                          style={{ whiteSpace: 'nowrap' }}
-                          name='signup'
-                        >
-                          {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
-                        </MenuLink>
+                      {isloginSignupLayoutPF ? (
+                        <>
+                          <LoginButton onClick={() => handleOpenLoginSignUp('login')}>
+                            {loginSignupIcon && (
+                              <img alt='login-icon' width='28px' height='28px' src={loginSignupIcon} loading='lazy' />
+                            )}
+                            <p>{t('SIGN_IN_JOIN', 'Sign In/Join')}</p>
+                          </LoginButton>
+                        </>
+                      ) : (
+                        <>
+                          <MenuLink onClick={() => handleOpenLoginSignUp('login')} style={{ whiteSpace: 'nowrap' }} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
+                          {!isHideSignup && (
+                            <MenuLink
+                              onClick={() => handleOpenLoginSignUp('signup')}
+                              highlight={1}
+                              style={{ whiteSpace: 'nowrap' }}
+                              name='signup'
+                            >
+                              {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
+                            </MenuLink>
+                          )}
+                        </>
+                      )}
+
+                    </>
+                  )
+                }
+                {
+                  cartAlwaysShowed && (
+                    <>
+                      {windowSize.width > 768 ? (
+                        <CartPopover
+                          open={openPopover.cart}
+                          carts={cartsWithProducts}
+                          onClick={() => handleTogglePopover('cart')}
+                          onClose={() => handleClosePopover('cart')}
+                          auth={auth}
+                          location={location}
+                          isCustomerMode={isCustomerMode}
+                          setPreorderBusiness={setPreorderBusiness}
+                        />
+                      ) : (
+                        <HeaderOption
+                          variant='cart'
+                          totalCarts={cartsWithProducts?.length}
+                          onClick={(variant) => openModal(variant)}
+                        />
                       )}
                     </>
                   )
@@ -322,7 +373,7 @@ export const Header = (props) => {
                 {
                   auth && (
                     <>
-                      {isShowOrderOptions && (
+                      {!cartAlwaysShowed && isShowOrderOptions && (
                         windowSize.width > 768 ? (
                           <CartPopover
                             open={openPopover.cart}
