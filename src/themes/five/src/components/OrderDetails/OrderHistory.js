@@ -2,6 +2,7 @@ import React from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
 import { CheckCircleFill } from 'react-bootstrap-icons'
 import { Button } from '../../styles/Buttons'
+import { getTraduction } from '../../../../../utils'
 import {
   OrderHistoryContainer,
   HistoryItemWrapper,
