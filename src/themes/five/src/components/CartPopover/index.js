@@ -14,6 +14,8 @@ import { useTheme } from 'styled-components'
 import { CartContent } from '../CartContent'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
+import { Button as ButtonPF } from '../../styles/Buttons/theme/pfchangs'
+
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 
 export const CartPopover = (props) => {
@@ -114,10 +116,11 @@ export const CartPopover = (props) => {
           isHideCartText={!showCartText}
         >
           {isCartButtonPF ? (
-            <Button style={{
-              backgroundColor: cartButtonBackgroundColor || '',
-              color: cartButtonTextcolor || ''
-            }}
+            <ButtonPF
+              color={cartButtonTextcolor || ''}
+              style={{
+                backgroundColor: cartButtonBackgroundColor || ''
+              }}
             >
               <>
                 {showCartText && (
@@ -127,7 +130,7 @@ export const CartPopover = (props) => {
                   <img alt='cart-icon' width='14px' height='17px' src={cartButtonIcon} loading='lazy' />
                 )}
               </>
-            </Button>
+            </ButtonPF>
           ) : (
             <span>
               <Cart3 />

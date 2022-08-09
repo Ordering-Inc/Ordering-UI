@@ -98,6 +98,8 @@ export const Header = (props) => {
   const isloginSignupLayoutPF = theme?.layouts?.header?.components?.login_signup?.components?.layout?.type === 'pfchangs'
   const loginSignupIcon = theme?.layouts?.header?.components?.login_signup?.components?.icon?.components?.image
   const cartAlwaysShowed = theme?.layouts?.header?.components?.cart?.components?.open_strategy?.alwaysShowed
+  const showAddressForm = !theme?.layouts?.header?.components?.address_form?.hidden
+  const showOrderTypes = !theme?.layouts?.header?.components?.order_types?.hidden
 
   const handleSuccessSignup = (user) => {
     login({
@@ -276,7 +278,7 @@ export const Header = (props) => {
               )}
               {onlineStatus && windowSize.width > 820 && (
                 <>
-                  {!isCustomerMode && (
+                  {!isCustomerMode && showAddressForm && (
                     <AddressMenu
                       onClick={() => openModal('address')}
                     >
@@ -298,17 +300,21 @@ export const Header = (props) => {
                   )}
                 </>
               )}
-              {windowSize.width > 768 ? (
-                <OrderTypeSelectorHeader
-                  orderTypeList={orderTypeList}
-                  onClick={() => openModal('delivery')}
-                />
-              ) : (
-                <HeaderOption
-                  variant='delivery'
-                  onClick={(variant) => openModal(variant)}
-                  orderTypeList={orderTypeList}
-                />
+              {showOrderTypes && (
+                <>
+                  {windowSize.width > 768 ? (
+                    <OrderTypeSelectorHeader
+                      orderTypeList={orderTypeList}
+                      onClick={() => openModal('delivery')}
+                    />
+                  ) : (
+                    <HeaderOption
+                      variant='delivery'
+                      onClick={(variant) => openModal(variant)}
+                      orderTypeList={orderTypeList}
+                    />
+                  )}
+                </>
               )}
             </Menu>
           )}
