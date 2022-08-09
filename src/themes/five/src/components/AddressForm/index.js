@@ -16,9 +16,9 @@ import {
   GoogleMapsMap,
   useSession,
   useOrder,
-  useConfig
+  useConfig,
+  useOrderingTheme
 } from 'ordering-components'
-import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
 
@@ -63,8 +63,7 @@ const AddressFormUI = (props) => {
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
-  const theme = useTheme()
-
+  const [orderingTheme] = useOrderingTheme()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -78,8 +77,8 @@ const AddressFormUI = (props) => {
       : formState.changes?.location ?? null
   )
 
-  const isHideMap = theme?.layouts?.header?.components?.address_form?.components?.map?.hidden
-  const isHideIcons = theme?.layouts?.header?.components?.address_form?.components?.icons?.hidden
+  const isHideMap = orderingTheme?.theme?.header?.components?.address_form?.components?.map?.hidden
+  const isHideIcons = orderingTheme?.theme?.header?.components?.address_form?.components?.icons?.hidden
 
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
@@ -253,7 +252,7 @@ const AddressFormUI = (props) => {
   }
 
   const showFieldWithTheme = (name) => {
-    return !theme?.layouts?.header?.components?.address_form?.components?.[name]?.hidden
+    return !orderingTheme?.theme?.header?.components?.address_form?.components?.[name]?.hidden
   }
 
   useEffect(() => {

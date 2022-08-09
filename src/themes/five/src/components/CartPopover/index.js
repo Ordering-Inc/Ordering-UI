@@ -9,7 +9,7 @@ import {
   Title
 } from './styles'
 
-import { useOrder, useEvent, useLanguage } from 'ordering-components'
+import { useOrder, useEvent, useLanguage, useOrderingTheme } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import { CartContent } from '../CartContent'
 import { Modal } from '../Modal'
@@ -22,6 +22,7 @@ export const CartPopover = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [, t] = useLanguage()
+  const [orderingTheme] = useOrderingTheme()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -40,7 +41,7 @@ export const CartPopover = (props) => {
 
   const { styles, attributes, forceUpdate } = popper
 
-  const isSlideBar = theme.layouts?.header?.components?.cart?.open_strategy?.type === 'slide'
+  const isSlideBar = orderingTheme?.theme?.header?.components?.cart?.open_strategy?.type === 'slide'
   const isCartButtonPF = theme?.layouts?.header?.components?.cart?.components?.layout?.type === 'pfchangs'
   const showCartText = !theme?.layouts?.header?.components?.cart?.components?.text?.hidden
   const cartButtonBackgroundColor = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.style?.backgroundColor
@@ -140,7 +141,7 @@ export const CartPopover = (props) => {
             onClose={props.onClose}
             hideCloseDefault
             isSlideBar
-            slideBarPosition={theme.layouts?.header?.componets?.cart?.open_strategy?.position}
+            slideBarPosition={orderingTheme?.theme?.header?.components?.cart?.open_strategy?.position}
           >
             <TitleContainer>
               <Title>{t('MY_CART', 'My cart')}</Title>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useSession, useLanguage, useCustomer, useConfig } from 'ordering-components'
+import { useSession, useLanguage, useCustomer, useConfig, useOrderingTheme } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useTheme } from 'styled-components'
@@ -50,6 +50,7 @@ export const UserFormDetailsUI = (props) => {
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [{ user: userSession }] = useSession()
+  const [orderingTheme] = useOrderingTheme()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -59,10 +60,10 @@ export const UserFormDetailsUI = (props) => {
 
   const user = userData || userSession
 
-  const showCustomerCellphone = !theme.layouts?.profile?.components?.cellphone?.hidden
-  const showCustomerPassword = !theme.layouts?.profile?.components?.password?.hidden
-  const showCustomerPromotions = !theme.layouts?.profile?.components?.promotions?.hidden
-  const showLangauges = !theme.layouts?.profile?.components?.languages?.hidden
+  const showCustomerCellphone = !orderingTheme?.theme?.profile?.components?.cellphone?.hidden
+  const showCustomerPassword = !orderingTheme?.theme?.profile?.components?.password?.hidden
+  const showCustomerPromotions = !orderingTheme?.theme?.profile?.components?.promotions?.hidden
+  const showLangauges = !orderingTheme?.theme?.profile?.components?.languages?.hidden
 
   const closeAlert = () => {
     setAlertState({
@@ -181,7 +182,7 @@ export const UserFormDetailsUI = (props) => {
   }
 
   const showFieldWithTheme = (name) => {
-    return !theme.layouts?.profile?.components?.[name]?.hidden
+    return !orderingTheme?.theme?.profile?.components?.[name]?.hidden
   }
 
   useEffect(() => {

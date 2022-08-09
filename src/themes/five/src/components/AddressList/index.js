@@ -19,7 +19,8 @@ import {
   useLanguage,
   useOrder,
   useCustomer,
-  useEvent
+  useEvent,
+  useOrderingTheme
 } from 'ordering-components'
 
 import {
@@ -73,6 +74,7 @@ const AddressListUI = (props) => {
   const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
+  const [orderingTheme] = useOrderingTheme()
   const [{ user }] = useCustomer()
   const { width } = useWindowSize()
   const isCompletedLayout = width < 769 || isProfile
@@ -85,10 +87,10 @@ const AddressListUI = (props) => {
         address.internal_number === obj.internal_number
       )))) || []
 
-  const showAddress = !theme.layouts?.profile?.components?.address_list?.components?.address?.hidden
-  const showIcons = !theme.layouts?.profile?.components?.address_list?.components?.icons?.hidden
-  const showZipcode = !theme.layouts?.profile?.components?.address_list?.components?.zipcode?.hidden
-  const showInternalNumber = !theme.layouts?.profile?.components?.address_list?.components?.internal_number?.hidden
+  const showAddress = !orderingTheme?.theme?.profile?.components?.address_list?.components?.address?.hidden
+  const showIcons = !orderingTheme?.theme?.profile?.components?.address_list?.components?.icons?.hidden
+  const showZipcode = !orderingTheme?.theme?.profile?.components?.address_list?.components?.zipcode?.hidden
+  const showInternalNumber = !orderingTheme?.theme?.profile?.components?.address_list?.components?.internal_number?.hidden
 
   const openAddress = (address) => {
     setCurAddress(address)
