@@ -172,6 +172,7 @@ const BusinessesListingUI = (props) => {
               isCustomLayout
               isBusinessesLoading={businessesList.loading}
               isCustomerMode={isCustomerMode}
+              franchiseId={props.franchiseId}
             />
             <OrdersOption
               horizontal
@@ -184,7 +185,7 @@ const BusinessesListingUI = (props) => {
               titleContent={titleContent}
               isBusinessesLoading={businessesList.loading}
               isCustomerMode={isCustomerMode}
-
+              franchiseId={props.franchiseId}
             />
           </>
         )}
@@ -203,7 +204,12 @@ const BusinessesListingUI = (props) => {
       <BusinessContainer>
         <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
         <OrderProgressWrapper>
-          <OrderProgress userCustomerId={userCustomer?.id} asDashboard={isCustomerMode} isCustomerMode={isCustomerMode} />
+          <OrderProgress
+            franchiseId={props.franchiseId}
+            userCustomerId={userCustomer?.id}
+            asDashboard={isCustomerMode}
+            isCustomerMode={isCustomerMode}
+          />
         </OrderProgressWrapper>
         {isCustomerMode && (
           <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />
@@ -235,7 +241,7 @@ const BusinessesListingUI = (props) => {
             )}
           </>
         )}
-        {hasHighRatedBusiness && (
+        {hasHighRatedBusiness && !props.franchiseId && (
           <HightestRatedWrapper>
             <Divider />
             <HighestRated
