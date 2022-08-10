@@ -49,6 +49,8 @@ var _TaxInformation = require("../TaxInformation");
 
 var _utils = require("../../../../../utils");
 
+var _OrderHistory = require("./OrderHistory");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -183,6 +185,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       _useState18 = _slicedToArray(_useState17, 2),
       isService = _useState18[0],
       setIsService = _useState18[1];
+
+  var _useState19 = (0, _react.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      isOrderHistory = _useState20[0],
+      setIsOrderHistory = _useState20[1];
 
   var _props$order = props.order,
       order = _props$order.order,
@@ -597,12 +604,19 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement("p", {
     className: "order-status"
-  }, (_getOrderStatus2 = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
+  }, (_getOrderStatus2 = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.LinkWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
+    active: true,
+    isMargin: true
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return setIsOrderHistory(true);
+    }
+  }, t('VIEW_DETAILS', 'View details'))), /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
     className: "Review-order",
     active: acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
   }, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleOpenReview
-  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag29 = theme.defaultLanguages) === null || _theme$defaultLanguag29 === void 0 ? void 0 : _theme$defaultLanguag29.REVIEW_ORDER) || 'Review your Order')))))), /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement("div", {
+  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag29 = theme.defaultLanguages) === null || _theme$defaultLanguag29 === void 0 ? void 0 : _theme$defaultLanguag29.REVIEW_ORDER) || 'Review your Order'))))))), /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -787,6 +801,21 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     type: openTaxModal.type,
     data: openTaxModal.data,
     products: order === null || order === void 0 ? void 0 : order.products
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: isOrderHistory,
+    width: "760px",
+    onClose: function onClose() {
+      return setIsOrderHistory(false);
+    },
+    title: t('DETAILS_OF_ORDER', 'Details of Order_NUMBER_').replace('_NUMBER_', " # ".concat(order === null || order === void 0 ? void 0 : order.id))
+  }, /*#__PURE__*/_react.default.createElement(_OrderHistory.OrderHistory, {
+    messages: messages,
+    order: order,
+    handleOpenReview: handleOpenReview,
+    onClose: function onClose() {
+      return setIsOrderHistory(false);
+    },
+    enableReview: acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
   })));
 };
 
