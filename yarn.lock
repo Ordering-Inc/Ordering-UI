@@ -1510,9 +1510,9 @@
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
 "@react-native-async-storage/async-storage@^1.13.1":
-  version "1.17.8"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.8.tgz#1ccff16dd02a85117b569f36eabaa2e49be40bbd"
-  integrity sha512-GoM/11oiSQrTcb6OycIPc6yv9HdWO12WbjsZX82v0xkAwefxJ0nPEHPhaeJiUnoOlCxj44+KoEPzlHG0Y8eRhA==
+  version "1.17.7"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.7.tgz#f9213e8cc6202a8c29df5a4da1db588f3b0fa8a9"
+  integrity sha512-mDtWhCcpxzrZhA95f6zi0pnBsjBEZW1LKZWfxVXG0UfaWpPxDBCKowNk2xjRTytckZeVhjmPJPtBU+8QNQcR0A==
   dependencies:
     merge-options "^3.0.4"
 
@@ -1523,20 +1523,12 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@segment/analytics-core@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.0.1.tgz#fbc8aa363f786bf94dea31a4cd98b08ea804b460"
-  integrity sha512-aty64DNqhigwnKYWR5YFYV5t61x8KfVKM5w9M25Cpxoy8UPz5pnCNl7+leGHJlnIUO5ULQ2PH7Db+LF10apuYA==
-  dependencies:
-    tslib "^2.4.0"
-
 "@segment/analytics-next@^1.35.1":
-  version "1.42.1"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.42.1.tgz#50284f465068f41aca9b007c4c2354763a35b27b"
-  integrity sha512-KvAwGJMUpEuFT3+5Y2CY18j27SilGw6eAbvDf3tt0Btw/HSx8VlY9gE1wvFe3/nTtBQBHJKA4GOm98n+6Oe0rQ==
+  version "1.40.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.40.0.tgz#703d2389340e5511b4080ea003668cd0bcb32024"
+  integrity sha512-Kg5C55BCB+/jRcFTWU2vEZdUb7nPaKutkAHobSQRld/RQWX24RcMzx20jtspZ8m0FCXQrg0Mm8Khpk2sNvh3Hg==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
-    "@segment/analytics-core" "1.0.1"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
     "@segment/tsub" "^0.1.12"
@@ -1625,7 +1617,7 @@
     "@sentry/types" "5.30.0"
     tslib "^1.9.3"
 
-"@sentry/react@^5.25.0", "@sentry/react@^5.27.1":
+"@sentry/react@^5.25.0":
   version "5.30.0"
   resolved "https://registry.yarnpkg.com/@sentry/react/-/react-5.30.0.tgz#320e05f766b6a26faefa8d76d1101fd50c69f541"
   integrity sha512-dvn4mqCgbeEuUXEGp5P9PaW5j4GWTFUSdx/yG8f9IxNZv5zM+7otjog9ukrubFZvlxVxD/PrIxK0MhadfFY/Dw==
@@ -1637,7 +1629,7 @@
     hoist-non-react-statics "^3.3.2"
     tslib "^1.9.3"
 
-"@sentry/tracing@^5.25.0", "@sentry/tracing@^5.27.1":
+"@sentry/tracing@^5.25.0":
   version "5.30.0"
   resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-5.30.0.tgz#501d21f00c3f3be7f7635d8710da70d9419d4e1f"
   integrity sha512-dUFowCr0AIMwiLD7Fs314Mdzcug+gBVo/+NCMyDw8tFxJkwWAKl7Qa2OZxLQ0ZHjakcj1hNKfCQJ9rhyfOl4Aw==
@@ -4496,9 +4488,9 @@ date-fns@^2.24.0:
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
 dayjs@^1.9.3:
-  version "1.11.4"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.4.tgz#3b3c10ca378140d8917e06ebc13a4922af4f433e"
-  integrity sha512-Zj/lPM5hOvQ1Bf7uAvewDaUcsJoI6JmNqmHhHl3nyumwe0XHwt8sWdOVAPACJzCebL8gQCi+K49w7iKWnGwX9g==
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.3.tgz#4754eb694a624057b9ad2224b67b15d552589258"
+  integrity sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==
 
 debug-log@^1.0.0:
   version "1.0.1"
@@ -6700,17 +6692,10 @@ is-ci@^2.0.0:
   dependencies:
     ci-info "^2.0.0"
 
-is-core-module@^2.8.1:
+is-core-module@^2.8.1, is-core-module@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.9.0.tgz#e1c34429cd51c6dd9e09e0799e396e27b19a9c69"
   integrity sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A==
-  dependencies:
-    has "^1.0.3"
-
-is-core-module@^2.9.0:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.10.0.tgz#9012ede0a91c69587e647514e1d5277019e728ed"
-  integrity sha512-Erxj2n/LDAZ7H8WNJXd9tw38GYM3dv8rk8Zcs+jJuxYTW7sozH+SS8NtrSjVL1/vpLvWi1hxy96IzjJ3EHTJJg==
   dependencies:
     has "^1.0.3"
 
@@ -7274,9 +7259,9 @@ levn@^0.3.0, levn@~0.3.0:
     type-check "~0.3.2"
 
 libphonenumber-js@^1.9.17:
-  version "1.10.11"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.11.tgz#0078756857bcc5c9dfe097123c6e04ea930e309b"
-  integrity sha512-ehoihx4HpRXO6FH/uJ0EnaEV4dVU+FDny+jv0S6k9JPyPsAIr0eXDAFvGRMBKE1daCtyHAaFSKCiuCxrOjVAzQ==
+  version "1.10.8"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.8.tgz#21925db0f16d4f1553dff2bbc62afdaeb03f21f0"
+  integrity sha512-MGgHrKRGE7sg7y0DikHybRDgTXcYv4HL+WwhDm5UAiChCNb5tcy5OEaU8XTTt5bDBwhZGCJNxoGMVBpZ4RfhIg==
 
 libphonenumber-js@^1.9.4, libphonenumber-js@^1.9.52:
   version "1.9.53"
@@ -8241,15 +8226,13 @@ optionator@^0.8.3:
   dependencies:
     "@babel/runtime" "^7.10.4"
 
-"ordering-components@github:Ordering-Inc/ordering-components#development":
+"ordering-components@github:Ordering-Inc/ordering-components#booking-functionality":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a25c092504dbd72b68f1842907fc01f73c5f84f9"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/51e030a65b5a44330e593267e7fc81b89e4f5a64"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
     "@segment/analytics-next" "^1.35.1"
-    "@sentry/react" "^5.27.1"
-    "@sentry/tracing" "^5.27.1"
     "@stripe/react-stripe-js" "^1.1.2"
     "@stripe/stripe-js" "^1.9.0"
     dayjs "^1.9.3"
