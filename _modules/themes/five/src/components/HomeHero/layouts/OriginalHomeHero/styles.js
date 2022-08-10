@@ -46,7 +46,11 @@ var HeroContainer = function HeroContainer(props) {
 
 exports.HeroContainer = HeroContainer;
 
-var Title = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 50px;\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  opacity: 1;\n\n  ", "\n\n  @media (min-width: 400px) {\n    font-size: 65px;\n  }\n\n  @media (min-width: 576px) {\n    font-size: 72px;\n  }\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-weight: 500;\n  font-size: 50px;\n  letter-spacing: 0px;\n  color: ", ";\n  opacity: 1;\n\n  ", "\n\n  @media (min-width: 400px) {\n    font-size: 65px;\n  }\n\n  @media (min-width: 576px) {\n    font-size: 72px;\n  }\n"])), function (props) {
+  var _props$theme$colors$t;
+
+  return (_props$theme$colors$t = props.theme.colors.titleHomeColor) !== null && _props$theme$colors$t !== void 0 ? _props$theme$colors$t : '#FFFFFF';
+}, function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      text-align: right;\n  "])));
@@ -54,7 +58,11 @@ var Title = _styledComponents.default.h1(_templateObject3 || (_templateObject3 =
 
 exports.Title = Title;
 
-var Slogan = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-size: 24px;\n  letter-spacing: 0px;\n  color: #FFFFFF;\n  opacity: 1;\n  margin-bottom: 37px;\n\n  ", "\n\n  @media (min-width: 480px) {\n    font-size: 24px;\n  }\n"])), function (props) {
+var Slogan = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-align: left;\n  font-size: 24px;\n  letter-spacing: 0px;\n  color: ", ";\n  opacity: 1;\n  margin-bottom: 37px;\n\n  ", "\n\n  @media (min-width: 480px) {\n    font-size: 24px;\n  }\n"])), function (props) {
+  var _props$theme$colors$s;
+
+  return (_props$theme$colors$s = props.theme.colors.subtitleHomeColor) !== null && _props$theme$colors$s !== void 0 ? _props$theme$colors$s : '#FFFFFF';
+}, function (props) {
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      text-align: right;\n  "])));
