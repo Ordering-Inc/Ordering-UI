@@ -640,5 +640,18 @@ export const ButtonWrapper = styled.div`
   button {
     width: 100%;
     height: 44px;
+    position: relative;
+
+    svg {
+      position: absolute;
+      top: 10px;
+      font-size: 22px;
+      right: 16px;
+      ${props => props.theme.rtl && css`
+        left: 16px;
+        right: initial;
+        transform: rotate(180deg);
+      `}
+    }
   }
 `

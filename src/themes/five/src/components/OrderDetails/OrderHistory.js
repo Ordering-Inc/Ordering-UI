@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
-import { CheckCircleFill } from 'react-bootstrap-icons'
+import { ArrowRight, CheckCircleFill } from 'react-bootstrap-icons'
 import { Button } from '../../styles/Buttons'
 import { getTraduction } from '../../../../../utils'
 import {
@@ -150,6 +150,7 @@ export const OrderHistory = (props) => {
           color='primary'
         >
           {enableReview ? t('REVIEW_ORDER', 'Review order') : t('CONTINUE', 'Continue')}
+          <ArrowRight />
         </Button>
       </ButtonWrapper>
     </OrderHistoryContainer>
