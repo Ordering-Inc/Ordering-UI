@@ -426,6 +426,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }), isCustomLayout && /*#__PURE__*/_react.default.createElement(_FiMap.default, {
     onClick: toggleMap
   })), isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    franchiseId: props.franchiseId,
     horizontal: true,
     isBusinessesPage: true,
     onRedirectPage: onRedirectPage,
@@ -437,6 +438,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isCustomLayout: true,
     isBusinessesLoading: businessesList.loading
   }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    ranchiseId: props.franchiseId,
     horizontal: true,
     asDashboard: true,
     isBusinessesPage: true,

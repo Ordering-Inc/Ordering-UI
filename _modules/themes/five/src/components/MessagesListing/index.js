@@ -31,6 +31,8 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -442,17 +444,17 @@ var MessagesListing = function MessagesListing(props) {
     onClick: function onClick() {
       return setOrderByOption('id');
     }
-  }, t('ORDER_NUMBER', 'Order number'))))), /*#__PURE__*/_react.default.createElement(_styles.OrderListContainer, null, orderByOption === 'id' && /*#__PURE__*/_react.default.createElement(IdOrderList, {
+  }, t('ORDER_NUMBER', 'Order number'))))), /*#__PURE__*/_react.default.createElement(_styles.OrderListContainer, null, orderByOption === 'id' && /*#__PURE__*/_react.default.createElement(IdOrderList, _extends({}, props, {
     handleOrderCardClick: handleOrderCardClick,
     selectedOrderCard: selectedOrder,
     handleOpenOrderDetail: handleOpenOrderDetail,
     setOrderListStatus: setOrderListStatus
-  }), orderByOption === 'last_direct_message_at' && /*#__PURE__*/_react.default.createElement(NewestOrderList, {
+  })), orderByOption === 'last_direct_message_at' && /*#__PURE__*/_react.default.createElement(NewestOrderList, _extends({}, props, {
     handleOrderCardClick: handleOrderCardClick,
     selectedOrderCard: selectedOrder,
     handleOpenOrderDetail: handleOpenOrderDetail,
     setOrderListStatus: setOrderListStatus
-  }))), /*#__PURE__*/_react.default.createElement(_styles.MessageContainer, null, selectedOrder && /*#__PURE__*/_react.default.createElement(MessageControler, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.MessageContainer, null, selectedOrder && /*#__PURE__*/_react.default.createElement(MessageControler, {
     order: selectedOrder,
     orderListStatus: orderListStatus
   }), !selectedOrder && !(orderListStatus !== null && orderListStatus !== void 0 && orderListStatus.loading) && (orderListStatus === null || orderListStatus === void 0 ? void 0 : orderListStatus.orders.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

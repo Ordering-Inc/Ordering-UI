@@ -52,8 +52,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var optionsDefault = [{
   name: 'search',
   pathname: '/explore',
-  displayName: 'explore',
-  key: 'explore'
+  displayName: 'My home',
+  key: 'my_home'
+}, {
+  name: 'business_search',
+  pathname: '/business_search',
+  displayName: 'Browse & Search',
+  key: 'browse_search'
 }, {
   name: 'orders',
   pathname: '/profile/orders',

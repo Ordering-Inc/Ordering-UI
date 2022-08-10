@@ -282,7 +282,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       }),
       isCustomLayout: true,
       isBusinessesLoading: businessesList.loading,
-      isCustomerMode: isCustomerMode
+      isCustomerMode: isCustomerMode,
+      franchiseId: props.franchiseId
     }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
       horizontal: true,
       asDashboard: true,
@@ -293,7 +294,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       isCustomLayout: true,
       titleContent: titleContent,
       isBusinessesLoading: businessesList.loading,
-      isCustomerMode: isCustomerMode
+      isCustomerMode: isCustomerMode,
+      franchiseId: props.franchiseId
     })));
   };
 
@@ -308,6 +310,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.businessHero
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderProgress.OrderProgress, {
+    franchiseId: props.franchiseId,
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     asDashboard: isCustomerMode,
     isCustomerMode: isCustomerMode
@@ -341,7 +344,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     businessList: businessesList.businesses,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.location,
     setErrors: setMapErrors
-  })), hasHighRatedBusiness && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
+  })), hasHighRatedBusiness && !props.franchiseId && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
     handleClickAddress: handleClickAddress,
     setHasHighRatedBusiness: setHasHighRatedBusiness,
     onBusinessClick: onBusinessClick,

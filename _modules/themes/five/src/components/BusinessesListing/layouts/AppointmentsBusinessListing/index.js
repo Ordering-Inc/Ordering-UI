@@ -230,7 +230,7 @@ var BusinessListingUI = function BusinessListingUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SERVICE_TYPE', 'Service type')), /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     configTypes: !(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0 ? configTypes : null,
     defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0) && 1
-  }))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, businessesList.businesses.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, {
+  }))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, businessesList.businesses.length > 0 && !props.franchiseId && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, {
     noHeight: !hasHighRatedBusiness
   }, /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
     handleClickAddress: handleClickAddress,

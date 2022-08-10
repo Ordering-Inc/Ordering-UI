@@ -2556,9 +2556,9 @@
   integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
 
 "@types/node@*":
-  version "18.6.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.6.5.tgz#06caea822caf9e59d5034b695186ee74154d2802"
-  integrity sha512-Xjt5ZGUa5WusGZJ4WJPbOT8QOqp6nDynVFRKcUt32bOgvXEoc6o085WNkYTMO7ifAj2isEfQQ2cseE+wT6jsRw==
+  version "18.7.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.1.tgz#352bee64f93117d867d05f7406642a52685cbca6"
+  integrity sha512-GKX1Qnqxo4S+Z/+Z8KKPLpH282LD7jLHWJcVryOflnsnH+BtSDfieR6ObwBMwpnNws0bUK8GI7z0unQf9bARNQ==
 
 "@types/node@12.12.50":
   version "12.12.50"
@@ -8293,7 +8293,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a25c092504dbd72b68f1842907fc01f73c5f84f9"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/7fbcbf8dbbb96a97b849da45de6a37c441a8fa4a"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

@@ -82,7 +82,7 @@ var Help = function Help(props) {
         return setSelectedPage(page);
       }
     }, page === null || page === void 0 ? void 0 : page.title));
-  })), /*#__PURE__*/_react.default.createElement(_styles.LastOrdersListWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('LAST_ORDER', 'Last order')), /*#__PURE__*/_react.default.createElement(_LastOrders.LastOrders, null)))), (selectedPage === null || selectedPage === void 0 ? void 0 : selectedPage.id) === 1 && /*#__PURE__*/_react.default.createElement(_HelpStaticPage.HelpStaticPage, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.LastOrdersListWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('LAST_ORDER', 'Last order')), /*#__PURE__*/_react.default.createElement(_LastOrders.LastOrders, props)))), (selectedPage === null || selectedPage === void 0 ? void 0 : selectedPage.id) === 1 && /*#__PURE__*/_react.default.createElement(_HelpStaticPage.HelpStaticPage, {
     slug: "helpOrder"
   }), (selectedPage === null || selectedPage === void 0 ? void 0 : selectedPage.id) === 2 && /*#__PURE__*/_react.default.createElement(_HelpStaticPage.HelpStaticPage, {
     slug: "helpAccountAndPayment"

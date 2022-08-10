@@ -349,7 +349,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return cart.products.length > 0;
     }),
     isCustomLayout: true,
-    isBusinessesLoading: businessesList.loading
+    isBusinessesLoading: businessesList.loading,
+    franchiseId: props.franchiseId
   }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
     horizontal: true,
     asDashboard: true,
@@ -358,7 +359,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onRedirectPage: onRedirectPage,
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     isCustomLayout: true,
-    isBusinessesLoading: businessesList.loading
+    isBusinessesLoading: businessesList.loading,
+    franchiseId: props.franchiseId
   })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin4 = businessesList.businesses) === null || _businessesList$busin4 === void 0 ? void 0 : _businessesList$busin4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,

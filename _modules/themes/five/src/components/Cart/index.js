@@ -74,7 +74,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartUI = function CartUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _orderState$carts, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _cart$payment_events, _cart$payment_events2, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _Object$values, _orderState$carts, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products2, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _cart$payment_events, _cart$payment_events2, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
 
   var currentCartUuid = props.currentCartUuid,
       clearCart = props.clearCart,
@@ -182,6 +182,11 @@ var CartUI = function CartUI(props) {
 
   var isCouponEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.coupon) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
   var checkoutMultiBusinessEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
+  var openCarts = ((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
+    var _cart$products;
+
+    return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (cart === null || cart === void 0 ? void 0 : cart.valid_schedule) && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.valid_maximum) && (cart === null || cart === void 0 ? void 0 : cart.valid_minimum);
+  })) || null || [];
   var cart = orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(props.cart.business_id)];
   var viewString = isStore ? 'business_view' : 'header';
   var hideCartComments = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme[viewString]) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.cart) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.comments) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.hidden;
@@ -216,7 +221,7 @@ var CartUI = function CartUI(props) {
   };
 
   var handleClickCheckout = function handleClickCheckout() {
-    if (checkoutMultiBusinessEnabled) {
+    if (checkoutMultiBusinessEnabled && openCarts.length > 1) {
       events.emit('go_to_page', {
         page: 'multi_checkout'
       });
@@ -364,7 +369,7 @@ var CartUI = function CartUI(props) {
     setPreorderBusiness: setPreorderBusiness,
     handleChangeStore: !useKioskApp && handleChangeStore,
     isMultiCheckout: isMultiCheckout
-  }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
+  }, (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,
       isCartPending: isCartPending,
