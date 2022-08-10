@@ -77,6 +77,7 @@ const CartUI = (props) => {
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
+  const openCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum) || null) || []
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
@@ -111,7 +112,7 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    if (checkoutMultiBusinessEnabled) {
+    if (checkoutMultiBusinessEnabled && openCarts.length > 1) {
       events.emit('go_to_page', { page: 'multi_checkout' })
     } else {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })

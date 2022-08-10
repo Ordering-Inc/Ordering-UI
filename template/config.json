@@ -9,7 +9,12 @@
   "socket": {
     "url": "https://socket.ordering.co"
   },
+  "use_marketplace": false,
   "store_android_id": "",
   "store_apple_id": "",
-  "store_kindle_id": ""
+  "store_kindle_id": "",
+  "url_dashboard": "https://app.tryordering.com",
+  "use_kiosk": false,
+  "businessSlug": "",
+  "franchiseSlug": null
 }

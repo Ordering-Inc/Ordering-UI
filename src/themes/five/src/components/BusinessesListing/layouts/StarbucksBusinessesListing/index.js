@@ -275,6 +275,7 @@ const BusinessesListingUI = (props) => {
               }
               isCustomLayout
               isBusinessesLoading={businessesList.loading}
+              franchiseId={props.franchiseId}
             />
             <OrdersOption
               horizontal
@@ -285,6 +286,7 @@ const BusinessesListingUI = (props) => {
               userCustomerId={userCustomer?.id}
               isCustomLayout
               isBusinessesLoading={businessesList.loading}
+              franchiseId={props.franchiseId}
             />
           </>
         )}
