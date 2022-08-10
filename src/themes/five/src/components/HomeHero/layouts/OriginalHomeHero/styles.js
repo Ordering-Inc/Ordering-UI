@@ -45,7 +45,7 @@ export const Title = styled.h1`
   font-weight: 500;
   font-size: 50px;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: ${props => props.theme.colors.titleHomeColor ?? '#FFFFFF'};
   opacity: 1;
 
   ${props => props.theme?.rtl && css`
@@ -66,7 +66,7 @@ export const Slogan = styled.p`
   text-align: left;
   font-size: 24px;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: ${props => props.theme.colors.subtitleHomeColor ?? '#FFFFFF'};
   opacity: 1;
   margin-bottom: 37px;
 

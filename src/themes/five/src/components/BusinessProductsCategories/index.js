@@ -20,6 +20,9 @@ const BusinessProductsCategoriesUI = (props) => {
   const [selectedCategory, setSelectedCateogry] = useState({ id: null })
 
   const handleChangeCategory = (category) => {
+    const isBlockScroll = window.location.search.includes('category') &&
+      window.location.search.includes('product')
+
     if (business?.lazy_load_products_recommended) {
       handlerClickCategory({ ...category })
       return
@@ -27,11 +30,13 @@ const BusinessProductsCategoriesUI = (props) => {
     let topPos = 0
     if (!category?.id) topPos = document.getElementById('businessProductList')?.offsetTop
     else topPos = document.getElementById(`category${category.id}`)?.offsetTop
-    window.scroll({
-      top: topPos - 60,
-      left: 0,
-      behavior: 'smooth'
-    })
+    if (!isBlockScroll) {
+      window.scroll({
+        top: topPos - 60,
+        left: 0,
+        behavior: 'smooth'
+      })
+    }
   }
 
   const ProductCategories = () => {

@@ -3,7 +3,7 @@ import React from 'react'
 import { Select } from '../../../styles/Select'
 import { SearchBar } from '../../SearchBar'
 import { useTheme } from 'styled-components'
-import { useLanguage } from 'ordering-components'
+import { useLanguage, useOrderingTheme } from 'ordering-components'
 
 export const SearchProducts = (props) => {
   const {
@@ -17,7 +17,8 @@ export const SearchProducts = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const showSort = !theme?.layouts?.business_view?.components?.basic_information?.components?.sort?.hidden
+  const [orderingTheme] = useOrderingTheme()
+  const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
 
   return (
     <>

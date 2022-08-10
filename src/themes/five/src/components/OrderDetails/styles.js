@@ -196,6 +196,9 @@ export const ReviewOrderLink = styled.span`
       pointer-events: none;
     }
   `}
+  ${({ isMargin }) => isMargin && css`
+    margin: 0px 10px;
+  `}
 `
 
 const StatusBarStyled = styled.div`
@@ -589,4 +592,66 @@ export const HeaderTitle = styled.div`
 
 export const PlaceSpotSection = styled.div`
 
+`
+
+export const LinkWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const OrderHistoryContainer = styled.div``
+
+export const HistoryItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 28px 23px;
+  border-bottom: 1px solid ${props => props.theme.colors.gray200};
+
+  > svg {
+    width: 24px;
+    height: 24px;
+    color: ${props => props.theme.colors.primary};
+  }
+`
+
+export const DetailWrapper = styled.div`
+  margin-left: 50px;
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: 50px;
+  `}
+
+  h3 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0px;
+  }
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0px;
+  }
+`
+
+export const ButtonWrapper = styled.div`
+  margin-top: 40px;
+  button {
+    width: 100%;
+    height: 44px;
+    position: relative;
+
+    svg {
+      position: absolute;
+      top: 10px;
+      font-size: 22px;
+      right: 16px;
+      ${props => props.theme.rtl && css`
+        left: 16px;
+        right: initial;
+        transform: rotate(180deg);
+      `}
+    }
+  }
 `

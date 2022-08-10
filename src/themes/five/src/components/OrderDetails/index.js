@@ -8,7 +8,8 @@ import {
   useConfig,
   useOrder,
   useCustomer,
-  GoogleMapsMap
+  GoogleMapsMap,
+  useOrderingTheme
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 
@@ -58,12 +59,14 @@ import {
   OrderPreferences,
   HeaderTitle,
   PlaceSpotSection,
-  BtsOrderStatus
+  BtsOrderStatus,
+  LinkWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
 
 import { getGoogleMapImage } from '../../../../../utils'
+import { OrderHistory } from './OrderHistory'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -89,7 +92,7 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseDate }] = useUtils()
   const [, { deleteUserCustomer }] = useCustomer()
   const [{ carts }, { refreshOrderOptions }] = useOrder()
-
+  const [orderingTheme] = useOrderingTheme()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
   const [isProductReviewed, setIsProductReviewed] = useState(false)
@@ -99,6 +102,7 @@ const OrderDetailsUI = (props) => {
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isService, setIsService] = useState(false)
+  const [isOrderHistory, setIsOrderHistory] = useState(false)
 
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
@@ -108,24 +112,23 @@ const OrderDetailsUI = (props) => {
 
   const showOrderActions = order?.delivery_type !== 1
 
-  const isOriginalLayout = theme?.layouts?.confirmation?.components?.layout?.type === 'original'
-  const showDeliveryType = !theme?.layouts?.confirmation?.components?.delivery_type?.hidden
-  const showDeliveryDate = !theme?.layouts?.confirmation?.components?.delivery_date?.hidden
-  const showDeliveryProgress = !theme?.layouts?.confirmation?.components?.delivery_progress?.hidden
-  const showBusinessPhone = !theme?.layouts?.confirmation?.components?.business_information?.components?.phone?.hidden
-  const showBusinessMessages = !theme?.layouts?.confirmation?.components?.business_information?.components?.messages?.hidden
-  const showBusinessEmail = !theme?.layouts?.confirmation?.components?.business_information?.components?.email?.hidden
-  const showBusinessAddress = !theme?.layouts?.confirmation?.components?.business_information?.components?.address?.hidden
-  const showBusinessMap = !theme?.layouts?.confirmation?.components?.business_information?.components?.map?.hidden
-  const showDriverName = !theme?.layouts?.confirmation?.components?.driver_information?.components?.name?.hidden
-  const showDriverPhone = !theme?.layouts?.confirmation?.components?.driver_information?.components?.phone?.hidden
-  const showDriverMessages = !theme?.layouts?.confirmation?.components?.driver_information?.components?.messages?.hidden
-  const showDriverEmail = !theme?.layouts?.confirmation?.components?.driver_information?.components?.email?.hidden
-  const showDriverPhoto = !theme?.layouts?.confirmation?.components?.driver_information?.components?.photo?.hidden
-  const showCustomerPhone = !theme?.layouts?.confirmation?.components?.customer_information?.components?.phone?.hidden
-  const showCustomerAddress = !theme?.layouts?.confirmation?.components?.customer_information?.components?.address?.hidden
-  const showCustomerEmail = !theme?.layouts?.confirmation?.components?.customer_information?.components?.email?.hidden
-  const showDeliveryTypes = !theme?.layouts?.confirmation?.components?.delivery_types?.components?.hidden
+  const isOriginalLayout = orderingTheme?.theme?.confirmation?.components?.layout?.type === 'original'
+  const showDeliveryType = !orderingTheme?.theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
+  const showDeliveryDate = !orderingTheme?.theme?.confirmation?.components?.order?.components?.date?.hidden
+  const showDeliveryProgress = !orderingTheme?.theme?.confirmation?.components?.order?.components?.progress?.hidden
+  const showBusinessPhone = !orderingTheme?.theme?.confirmation?.components?.business?.components?.phone?.hidden
+  const showBusinessMessages = !orderingTheme?.theme?.confirmation?.components?.business?.components?.messages?.hidden
+  const showBusinessEmail = !orderingTheme?.theme?.confirmation?.components?.business?.components?.email?.hidden
+  const showBusinessAddress = !orderingTheme?.theme?.confirmation?.components?.business?.components?.address?.hidden
+  const showBusinessMap = !orderingTheme?.theme?.confirmation?.components?.business?.components?.map?.hidden
+  const showDriverName = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.name?.hidden
+  const showDriverPhone = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.phone?.hidden
+  const showDriverMessages = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.messages?.hidden
+  const showDriverEmail = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.email?.hidden
+  const showDriverPhoto = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.photo?.hidden
+  const showCustomerPhone = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.phone?.hidden
+  const showCustomerAddress = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.address?.hidden
+  const showCustomerEmail = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.email?.hidden
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -415,16 +418,25 @@ const OrderDetailsUI = (props) => {
                     }}
                   >
                     <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
-                    <ReviewOrderLink
-                      className='Review-order'
-                      active={
-                        acceptedStatus.includes(parseInt(order?.status, 10)) &&
-                        (!order?.review || (order.driver && !order?.user_review)) &&
-                        (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
-                      }
-                    >
-                      <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                    </ReviewOrderLink>
+                    <LinkWrapper>
+                      <ReviewOrderLink
+                        active
+                        isMargin
+                      >
+                        <span onClick={() => setIsOrderHistory(true)}>{t('VIEW_DETAILS', 'View details')}</span>
+                      </ReviewOrderLink>
+                      <ReviewOrderLink
+                        className='Review-order'
+                        active={
+                          acceptedStatus.includes(parseInt(order?.status, 10)) &&
+                          (!order?.review || (order.driver && !order?.user_review)) &&
+                          (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
+                        }
+                      >
+                        <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                      </ReviewOrderLink>
+                    </LinkWrapper>
+
                   </div>
                 </>
               )}
@@ -469,7 +481,7 @@ const OrderDetailsUI = (props) => {
                   </BusinessInfo>
                 </BusinessWrapper>
 
-                {showDeliveryTypes && placeSpotTypes.includes(order?.delivery_type) && (
+                {showDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
                   <BusinessWrapper
                     w='calc(100% - 20px)'
                     borderTop
@@ -711,6 +723,24 @@ const OrderDetailsUI = (props) => {
           type={openTaxModal.type}
           data={openTaxModal.data}
           products={order?.products}
+        />
+      </Modal>
+      <Modal
+        open={isOrderHistory}
+        width='760px'
+        onClose={() => setIsOrderHistory(false)}
+        title={t('DETAILS_OF_ORDER', 'Details of Order_NUMBER_').replace('_NUMBER_', ` # ${order?.id}`)}
+      >
+        <OrderHistory
+          messages={messages}
+          order={order}
+          handleOpenReview={handleOpenReview}
+          onClose={() => setIsOrderHistory(false)}
+          enableReview={
+            acceptedStatus.includes(parseInt(order?.status, 10)) &&
+            (!order?.review || (order.driver && !order?.user_review)) &&
+            (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
+          }
         />
       </Modal>
     </Container>

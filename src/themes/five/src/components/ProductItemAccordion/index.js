@@ -4,9 +4,8 @@ import {
   Pencil,
   Trash
 } from 'react-bootstrap-icons'
-import { useUtils, useLanguage, useOrder } from 'ordering-components'
+import { useUtils, useLanguage, useOrder, useOrderingTheme } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import { useTheme } from 'styled-components'
 import {
   AccordionSection,
   Accordion,
@@ -46,9 +45,8 @@ export const ProductItemAccordion = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
-  const theme = useTheme()
   const windowSize = useWindowSize()
-
+  const [orderingTheme] = useOrderingTheme()
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
@@ -59,7 +57,7 @@ export const ProductItemAccordion = (props) => {
   const productActionsDelete = useRef(null)
 
   const viewString = isConfirmationPage ? 'confirmation' : isStore ? 'business_view' : 'header'
-  const showProductImage = !theme?.layouts?.[viewString]?.components?.cart?.components?.products?.components?.photo?.hidden
+  const showProductImage = !orderingTheme?.theme?.[viewString]?.components?.cart?.components?.products?.components?.image?.hidden
 
   const productInfo = () => {
     if (isCartProduct) {

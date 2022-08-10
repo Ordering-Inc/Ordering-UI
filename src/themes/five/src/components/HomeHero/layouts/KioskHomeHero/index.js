@@ -69,7 +69,7 @@ export const KioskHomeHero = (props) => {
             <Button
               color='primary'
               name='find-business'
-              style={{ width: 'auto' }}
+              style={{ width: 'auto', padding: '5px 20px' }}
             >
               {t('TOUCH_ANYWHERE_TO_ORDER', theme?.defaultLanguages?.TOUCH_ANYWHERE_TO_ORDER || 'Touch anywhere to order')}
             </Button>
