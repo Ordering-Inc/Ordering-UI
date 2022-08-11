@@ -10,8 +10,6 @@ export const ContainerCard = styled.div`
   border-radius: 10px;
   margin: 30px 20px;
 
-  width: calc(100% - 40px);
-
   ${({ isCustomerMode }) => isCustomerMode && css`
     max-height: 400px;
     height: ${({ isSkeleton }) => isSkeleton ? 'auto' : '400px'};
@@ -34,22 +32,29 @@ export const ContainerCard = styled.div`
   ${({ firstCard }) => firstCard && css`
     margin-left: 0;
   `}
+  
+  ${({ businessRows }) => businessRows ? css`
+    width: ${() => businessRows === 4 ? 'calc(25% - 40px)' : businessRows === 3 ? 'calc(33% - 40px)' : 'calc(50% - 40px)'};
+  ` : css`
+    width: calc(100% - 40px);
 
-  @media (min-width: 481px) {
-    max-height: ${({ isCustomerMode }) => isCustomerMode ? '360px' : '320px'};
-  }
+    @media (min-width: 481px) {
+      max-height: ${({ isCustomerMode }) => isCustomerMode ? '360px' : '320px'};
+    }
 
-  @media (min-width: 681px) {
-    width: calc(50% - 40px);
-  }
+    @media (min-width: 681px) {
+      width: calc(50% - 40px);
+    }
 
-  @media (min-width: 993px) {
-    width: calc(33% - 40px);
-  }
+    @media (min-width: 993px) {
+      width: calc(33% - 40px);
+    }
 
-  @media (min-width: 1200px) {
-    width: calc(25% - 40px);
-  }
+    @media (min-width: 1200px) {
+      width: calc(25% - 40px);
+    }
+  `}
+  
 `
 
 export const WrapperBusinessCard = styled.div`

@@ -695,7 +695,7 @@ const OrderDetailsUI = (props) => {
             <ReviewWrapper>
               {
                 reviewStatus?.order
-                  ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+                  ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} skipReview={handleCloseReivew} setIsReviewed={setIsOrderReviewed} />
                   : (reviewStatus?.product
                     ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
                     : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)

@@ -213,9 +213,8 @@ export const UserFormDetailsUI = (props) => {
     }
     if ((user || !isEdit) && !formState?.loading) {
       setUserCellPhone()
-      if (!isEdit && !formState?.loading) {
+      if (!isEdit) {
         cleanFormState && cleanFormState({ changes: {} })
-        setUserCellPhone(true)
       }
     }
     if (!isEdit) onCancel && onCancel()
