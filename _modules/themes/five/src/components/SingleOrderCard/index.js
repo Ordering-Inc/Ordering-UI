@@ -171,12 +171,23 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     }
   };
 
-  var handleOpenOrderReview = function handleOpenOrderReview() {
-    setReviewStatus({
+  var handleOpenReview = function handleOpenReview() {
+    if (!(order !== null && order !== void 0 && order.review) && !isOrderReviewed) setReviewStatus({
       order: true,
       product: false,
       driver: false
-    });
+    });else if (!isProductReviewed) setReviewStatus({
+      order: false,
+      product: true,
+      driver: false
+    });else if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true
+    });else {
+      setIsReviewOpen(false);
+      return;
+    }
     setIsReviewOpen(true);
   };
 
@@ -190,7 +201,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   };
 
   var handleClickReview = function handleClickReview(order) {
-    handleOpenOrderReview && handleOpenOrderReview();
+    handleOpenReview && handleOpenReview();
   };
 
   var handleChangeFavorite = function handleChangeFavorite(order) {
@@ -296,6 +307,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.ReviewWrapper, null, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
     closeReviewOrder: closeReviewOrder,
+    skipReview: handleCloseReivew,
     setIsReviewed: setIsOrderReviewed
   }) : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? /*#__PURE__*/_react.default.createElement(_ReviewProduct.ReviewProduct, {
     order: order,

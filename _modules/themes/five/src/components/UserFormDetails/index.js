@@ -323,11 +323,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     if ((user || !isEdit) && !(formState !== null && formState !== void 0 && formState.loading)) {
       setUserCellPhone();
 
-      if (!isEdit && !(formState !== null && formState !== void 0 && formState.loading)) {
+      if (!isEdit) {
         cleanFormState && cleanFormState({
           changes: {}
         });
-        setUserCellPhone(true);
       }
     }
 

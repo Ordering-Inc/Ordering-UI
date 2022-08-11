@@ -398,11 +398,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles2.FormSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('SIGN_UP', 'Sign up')), useSignUpFullDetails && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('SIGN_UP', 'Sign up')), Number(useSignUpFullDetails) + Number(useSignUpOtpEmail) + Number(useSignUpOtpCellphone) > 1 && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
-  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+  }, useSignUpFullDetails && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
       return handleSignUpTab('default');
     },

@@ -73,6 +73,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       handleSendReview = props.handleSendReview,
       formState = props.formState,
       closeReviewOrder = props.closeReviewOrder,
+      skipReview = props.skipReview,
       setIsReviewed = props.setIsReviewed,
       setStars = props.setStars;
 
@@ -322,13 +323,16 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Send, null, /*#__PURE__*/_react.default.createElement("span", {
-    onClick: closeReviewOrder
+    onClick: skipReview,
+    style: {
+      textIndent: '10px'
+    }
   }, t('SKIP', 'Skip')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !formState.loading ? 'primary' : 'secondary',
     type: "submit",
     disabled: formState.loading,
     className: "review-sent"
-  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.ContinueContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('GOTO_REVIEW', 'Go to review')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.ContinueContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('CONTINUE_REVIEW', 'Continue Review')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ORDER_REVIEW', 'Order Review'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
