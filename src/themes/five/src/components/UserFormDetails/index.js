@@ -213,9 +213,8 @@ export const UserFormDetailsUI = (props) => {
     }
     if ((user || !isEdit) && !formState?.loading) {
       setUserCellPhone()
-      if (!isEdit && !formState?.loading) {
+      if (!isEdit) {
         cleanFormState && cleanFormState({ changes: {} })
-        setUserCellPhone(true)
       }
     }
     if (!isEdit) onCancel && onCancel()
@@ -251,6 +250,10 @@ export const UserFormDetailsUI = (props) => {
   useEffect(() => {
     if (requiredFields && !requiredFields.includes('cellphone')) setIsValidPhoneNumber(true)
   }, [requiredFields])
+
+  console.log(user, 'user')
+  console.log(formState, 'formState')
+  console.log(userPhoneNumber, 'userPhoneNumber')
 
   return (
     <>
