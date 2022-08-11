@@ -180,6 +180,15 @@ export const BusinessBasicInformation = (props) => {
                   )}
                 </>
               )}
+              {showBusinessInfo && business?.city?.name && (
+                <>
+                  {!loading ? (
+                    <p className='type'>{business?.city?.name}</p>
+                  ) : (
+                    <Skeleton width={isCustomerMode ? 100 : 150} />
+                  )}
+                </>
+              )}
               {!loading ? (
                 <SocialList>
                   {business?.facebook_profile && (

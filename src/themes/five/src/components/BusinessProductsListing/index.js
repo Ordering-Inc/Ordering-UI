@@ -73,7 +73,8 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateProducts,
     professionalSelected,
     handleChangeProfessionalSelected,
-    onChangeMetaTag
+    onChangeMetaTag,
+    onBusinessClick
   } = props
 
   const { business, loading, error } = businessState
@@ -288,6 +289,7 @@ const BusinessProductsListingUI = (props) => {
           handleUpdateProducts={handleUpdateProducts}
           professionalSelected={professionalSelected}
           handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+          onBusinessClick={onBusinessClick}
         />
 
         {

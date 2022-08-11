@@ -2,25 +2,36 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+  min-height: 108px;  
+  background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
+  border: 1px solid #E9ECEF;
   padding: 10px;
-  margin: 10px 0px;
   border-radius: 7.6px;
+  box-sizing: border-box;
   cursor: pointer;
   position: relative;
-  border: 1px solid #E9ECEF;
-  box-sizing: border-box;
-  min-height: 108px;
 
-  background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
-
-  @media (min-width: 576px) {
-    margin: 10px;
-    width: calc(100% - 40px);
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  ${({ productsRows }) => productsRows ? css`
+    width: ${() => productsRows === 3 ? 'calc(33% - 40px)' : 'calc(50% - 40px)'};
+    margin: 10px;
+
+  ` : css`
+    width: 100%;
+    margin: 10px 0px;
+    @media (min-width: 576px) {
+      margin: 10px;
+      width: calc(100% - 40px);
+    }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {
@@ -43,6 +54,9 @@ export const CardContainer = styled.div`
       `}
     }
   `}
+  
+  `}
+
 `
 
 export const SoldOut = styled.span`
