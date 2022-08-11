@@ -63,14 +63,6 @@ export const FavoriteListing = styled.div`
       }
     }
   `}
-
-  ${({ isProduct }) => isProduct && css`
-    #favorite {
-      > div {
-        cursor: default;
-      }
-    }
-  `}
 `
 
 export const ReadMoreCard = styled.div`
