@@ -229,30 +229,18 @@ var FavoriteListUI = function FavoriteListUI(props) {
     var productId = product === null || product === void 0 ? void 0 : product.id;
 
     if (!categoryId && !productId) {
-      return window.location.pathname.includes('/store/') ? events.emit('go_to_page', {
+      events.emit('go_to_page', {
         page: 'business',
         params: {
           store: slug
         },
         replace: true
-      }) : events.emit('go_to_page', {
-        page: 'business_slug',
-        params: {
-          store: slug
-        },
-        replace: true
       });
+      return;
     }
 
-    return window.location.pathname.includes('/store/') ? events.emit('go_to_page', {
+    events.emit('go_to_page', {
       page: 'business',
-      params: {
-        store: slug
-      },
-      search: "?category=".concat(categoryId, "&product=").concat(productId),
-      replace: true
-    }) : events.emit('go_to_page', {
-      page: 'business_slug',
       params: {
         store: slug
       },
@@ -294,7 +282,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
       };
     }
 
-    if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && reorderState.loading === false && reorderState !== null && reorderState !== void 0 && (_reorderState$result4 = reorderState.result) !== null && _reorderState$result4 !== void 0 && _reorderState$result4.business_id) {
+    if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && (reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading) === false && reorderState !== null && reorderState !== void 0 && (_reorderState$result4 = reorderState.result) !== null && _reorderState$result4 !== void 0 && _reorderState$result4.business_id) {
       var _reorderState$result5, _orderState$carts, _orderState$carts$_bu, _favoriteList$favorit, _reorderState$result7;
 
       var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result5 = reorderState.result) === null || _reorderState$result5 === void 0 ? void 0 : _reorderState$result5.business_id);
@@ -350,8 +338,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
   }, t('ADD_FAVORITE', 'Add favorite'))), /*#__PURE__*/_react.default.createElement(_styles.FavoriteListWrapper, {
     isLoading: (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.loading) || (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit2 = favoriteList.favorites) === null || _favoriteList$favorit2 === void 0 ? void 0 : _favoriteList$favorit2.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.FavoriteListing, {
-    isOrder: isOrder,
-    isProduct: isProduct
+    isOrder: isOrder
   }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: "favorite"
   }, isBusiness && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit3 = favoriteList.favorites) === null || _favoriteList$favorit3 === void 0 ? void 0 : _favoriteList$favorit3.map(function (business, i) {
