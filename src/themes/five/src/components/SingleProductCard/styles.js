@@ -2,7 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
-  min-height: 160px;
+  min-height: 162px;
+  max-height: 162px;
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
   border: 1px solid #E9ECEF;
   padding: 10px;
@@ -10,13 +11,11 @@ export const CardContainer = styled.div`
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
-
   > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-
   button {
     width: 100%;
     margin-top: 10px;
@@ -24,7 +23,6 @@ export const CardContainer = styled.div`
   ${({ productsRows }) => productsRows ? css`
     width: ${() => productsRows === 3 ? 'calc(33% - 40px)' : 'calc(50% - 40px)'};
     margin: 10px;
-
   ` : css`
     width: 100%;
     margin: 10px 0px;
@@ -32,7 +30,6 @@ export const CardContainer = styled.div`
       margin: 10px;
       width: calc(100% - 40px);
     }
-
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {
       width: calc(50% - 40px);
@@ -45,7 +42,6 @@ export const CardContainer = styled.div`
     @media (min-width: 681px) {
       width: calc(49% - 40px);
     }
-
     @media (min-width: 1440px) {
       width: calc(33% - 40px);
       margin: 10px 20px 10px 0px;
@@ -75,7 +71,6 @@ export const SoldOut = styled.span`
   &:first-letter {
     text-transform: uppercase;
   }
-
   ${({ isBottom }) => isBottom && css`
     bottom: 7px;
     top: initial;
@@ -85,11 +80,12 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(100% - 90px);
+  ${({ isBgimage }) => css`
+    width: ${isBgimage ? 'calc(100% - 90px)' : '100%'};
+  `}
   > * {
     margin: 3px;
   }
-
   p {
     color: #909BA9;
     text-align: left;
@@ -97,24 +93,20 @@ export const CardInfo = styled.div`
     ${props => props.theme?.rtl && css`
       text-align: right;
     `}
-
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
     white-space: pre-wrap;
   }
-
   span {
     color: ${props => props.theme.colors.darkTextColor};
     font-size: 14px;
   }
-
   @media (min-width: 1024px) {
     p {
       font-size: 12px;
     }
-
     span {
       font-size: 14px;
     }
@@ -126,7 +118,9 @@ export const WrapLogo = styled.div`
   max-width: 86px;
   max-height: 86px;
   height: 86px;
-  width: 86px;
+  ${({ isBgimage }) => isBgimage && css`
+    width: 86px;
+  `}
   margin-left: 5px;
   ${props => props.theme?.rtl && css`
     margin-right: 5px;
@@ -162,18 +156,15 @@ export const CardLogo = (props) => {
 export const PriceWrapper = styled.div`
   display: flex;
   align-items: center;
-
   .off-price {
     font-size: 10px;
     color: #909BA9;
     margin-left: 5px;
     text-decoration: line-through;
-
     ${props => props.theme.rtl && css`
       margin-right: 5px;
       margin-left: 0;
     `}
-
     @media (min-width: 1024px) {
       font-size: 13px;
     }
@@ -210,20 +201,16 @@ export const RibbonBox = styled.div`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-
   ${props => props.theme.rtl && css`
     left: -3px;
     right: initial;
   `}
-
   ${({ bgColor }) => bgColor && css`
     background-color: ${bgColor};
   `}
-
   ${({ isRoundRect }) => isRoundRect && css`
     border-radius: 7.6px;
   `}
-
   ${({ isCapsule }) => isCapsule && css`
     border-radius: 50px;
   `}
@@ -233,7 +220,6 @@ export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   h1 {
     font-size: 14px;
     font-weight: 500;
@@ -244,7 +230,6 @@ export const TitleWrapper = styled.div`
     white-space: nowrap;
     margin: 0px;
   }
-
   > span {
     display: flex;
     align-items: center;
@@ -255,4 +240,23 @@ export const TitleWrapper = styled.div`
       font-size: 16px;
     }
   }
+`
+export const SkeletonCardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 90px);
+  > * {
+    margin: 3px;
+  }
+`
+export const SkeletonCardLogo = styled.div`
+  max-width: 86px;
+  max-height: 86px;
+  width: 86px;
+  height: 86px;
+  margin-left: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
 `

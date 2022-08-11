@@ -16,7 +16,6 @@ export const WrapperSearch = styled.div`
   margin: 10px 20px 0px;
   display: flex;
   justify-content: flex-end;
-
   svg{
     align-self: center;
     cursor: pointer;
@@ -52,7 +51,6 @@ export const WrapperSearch = styled.div`
       width: 75%;
       padding: 0;
     }
-
     @media(min-width: 1201px){
       width: 50%;
     }
@@ -90,7 +88,6 @@ export const BusinessHeroImgStyled = styled.div`
   margin-bottom: 30px;
   width: 100%;
   height: 230px;
-
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
     background-size: cover;
@@ -100,7 +97,6 @@ export const BusinessHeroImgStyled = styled.div`
   @media (min-width: 450px) {
     height: 370px;
   }
-
   @media (min-width: 821px) {
     height: 650px;
   }
