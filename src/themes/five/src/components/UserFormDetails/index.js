@@ -251,10 +251,6 @@ export const UserFormDetailsUI = (props) => {
     if (requiredFields && !requiredFields.includes('cellphone')) setIsValidPhoneNumber(true)
   }, [requiredFields])
 
-  console.log(user, 'user')
-  console.log(formState, 'formState')
-  console.log(userPhoneNumber, 'userPhoneNumber')
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
