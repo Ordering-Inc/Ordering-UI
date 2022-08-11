@@ -324,7 +324,7 @@ const SignUpFormUI = (props) => {
                     active={signUpTab === 'default'}
                     borderBottom={signUpTab === 'default'}
                   >
-                    {t('BY_FULL_DETAILS', 'by Full Details')}
+                    {t('DEFAULT', 'Default')}
                   </Tab>
                 )}
                 {useSignUpOtpEmail && (
