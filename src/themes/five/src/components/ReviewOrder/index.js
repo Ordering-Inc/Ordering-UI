@@ -31,7 +31,7 @@ import { useTheme } from 'styled-components'
 import { reviewCommentList } from '../../../../../utils'
 
 const ReviewOrderUI = (props) => {
-  const { stars, order, handleSendReview, formState, closeReviewOrder, setIsReviewed, setStars } = props
+  const { stars, order, handleSendReview, formState, closeReviewOrder, skipReview, setIsReviewed, setStars } = props
   const [, t] = useLanguage()
   const [{ optimizeImage, parseDate }] = useUtils()
   const theme = useTheme()
@@ -216,7 +216,7 @@ const ReviewOrderUI = (props) => {
               <MidComponent key={i} {...props} />))
           }
           <Send>
-            <span onClick={closeReviewOrder}>{t('SKIP', 'Skip')}</span>
+            <span onClick={skipReview} style={{ textIndent: '10px' }}>{t('SKIP', 'Skip')}</span>
             <Button
               color={!formState.loading ? 'primary' : 'secondary'}
               type='submit'
@@ -224,7 +224,7 @@ const ReviewOrderUI = (props) => {
               className='review-sent'
             >
               {!formState.loading ? (
-                <ContinueContainer><p>{t('GOTO_REVIEW', 'Go to review')}</p><BsArrowRight /></ContinueContainer>
+                <ContinueContainer><p>{t('CONTINUE_REVIEW', 'Continue Review')}</p><BsArrowRight /></ContinueContainer>
               ) : t('LOADING', 'Loading')}
             </Button>
           </Send>
