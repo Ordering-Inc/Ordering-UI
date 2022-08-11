@@ -315,16 +315,18 @@ const SignUpFormUI = (props) => {
       <SignUpContainer isPopup={isPopup}>
         <FormSide isPopup={isPopup}>
           <Title>{t('SIGN_UP', 'Sign up')}</Title>
-          {(useSignUpFullDetails && !willVerifyOtpState) && (
+          {((Number(useSignUpFullDetails) + Number(useSignUpOtpEmail) + Number(useSignUpOtpCellphone)) > 1 && !willVerifyOtpState) && (
             <SignupWith isPopup={isPopup}>
               <Tabs variant='primary'>
-                <Tab
-                  onClick={() => handleSignUpTab('default')}
-                  active={signUpTab === 'default'}
-                  borderBottom={signUpTab === 'default'}
-                >
-                  {t('DEFAULT', 'Default')}
-                </Tab>
+                {useSignUpFullDetails && (
+                  <Tab
+                    onClick={() => handleSignUpTab('default')}
+                    active={signUpTab === 'default'}
+                    borderBottom={signUpTab === 'default'}
+                  >
+                    {t('BY_FULL_DETAILS', 'by Full Details')}
+                  </Tab>
+                )}
                 {useSignUpOtpEmail && (
                   <Tab
                     onClick={() => handleSignUpTab('otpEmail')}
