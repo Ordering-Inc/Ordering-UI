@@ -2,12 +2,14 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { useTheme } from 'styled-components'
 import FiMap from '@meronex/icons/fi/FiMap'
 import FiFilter from '@meronex/icons/fi/FiFilter'
-
+import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
+import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
 import {
   useOrder,
   useSession,
   useLanguage,
   useConfig,
+  useOrderingTheme,
   BusinessList as BusinessListController
 } from 'ordering-components'
 
@@ -21,7 +23,11 @@ import {
   HightestRatedWrapper,
   Divider,
   OrderProgressWrapper,
-  SearchContainer
+  SearchContainer,
+  BusinessCityList,
+  CityItem,
+  BusinessLogo,
+  BusinessLogosContainer
 } from './styles'
 
 import { Button } from '../../../../styles/Buttons'
@@ -42,6 +48,8 @@ import { HighestRated } from '../../../HighestRated'
 import { BusinessPreorder } from '../../../BusinessPreorder'
 import { OrderProgress } from '../../../OrderProgress'
 
+import Skeleton from 'react-loading-skeleton'
+
 const PIXELS_TO_SCROLL = 300
 
 const BusinessesListingUI = (props) => {
@@ -57,14 +65,20 @@ const BusinessesListingUI = (props) => {
     handleChangeBusinessType,
     handleBusinessClick,
     onBusinessClick,
-    handleUpdateBusinessList
+    handleUpdateBusinessList,
+    getCities,
+    citiesState,
+    logosLayout,
+    actualSlug
   } = props
+
   const [, t] = useLanguage()
-  const [orderState] = useOrder()
+  const [orderState, { changeCityFilter }] = useOrder()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const theme = useTheme()
-  const [modals, setModals] = useState({ listOpen: false, formOpen: false })
+  const [orderingTheme] = useOrderingTheme()
+  const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
   const [mapErrors, setMapErrors] = useState('')
@@ -73,6 +87,7 @@ const BusinessesListingUI = (props) => {
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [favoriteIds, setFavoriteIds] = useState([])
+  const showCities = !orderingTheme?.theme?.business_listing_view?.components?.cities?.hidden
 
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
@@ -140,6 +155,13 @@ const BusinessesListingUI = (props) => {
     setPreorderBusiness(null)
   }
 
+  const handleOpenCities = () => {
+    if (!citiesState?.cities?.length) {
+      getCities()
+    }
+    setModals({ ...modals, citiesOpen: true })
+  }
+
   useEffect(() => {
     if (preorderBusiness) setIsPreorder(true)
   }, [preorderBusiness])
@@ -172,6 +194,7 @@ const BusinessesListingUI = (props) => {
               isCustomLayout
               isBusinessesLoading={businessesList.loading}
               isCustomerMode={isCustomerMode}
+              franchiseId={props.franchiseId}
             />
             <OrdersOption
               horizontal
@@ -184,11 +207,33 @@ const BusinessesListingUI = (props) => {
               titleContent={titleContent}
               isBusinessesLoading={businessesList.loading}
               isCustomerMode={isCustomerMode}
-
+              franchiseId={props.franchiseId}
             />
           </>
         )}
       </>
+    )
+  }
+
+  if (logosLayout) {
+    return (
+      <BusinessLogosContainer>
+        {businessesList?.loading ? (
+          <Skeleton count={12} height={75} width={75} />
+        ) : (
+          <>
+            {businessesList.businesses
+              ?.filter(business => business?.slug !== actualSlug && business?.open)
+              ?.map(business => (
+                <BusinessLogo
+                  key={business?.id}
+                  bgimage={business?.logo || theme.images?.dummies?.businessLogo}
+                  onClick={() => onBusinessClick(business)}
+                />
+              ))}
+          </>
+        )}
+      </BusinessLogosContainer>
     )
   }
 
@@ -203,7 +248,12 @@ const BusinessesListingUI = (props) => {
       <BusinessContainer>
         <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
         <OrderProgressWrapper>
-          <OrderProgress userCustomerId={userCustomer?.id} asDashboard={isCustomerMode} isCustomerMode={isCustomerMode} />
+          <OrderProgress
+            franchiseId={props.franchiseId}
+            userCustomerId={userCustomer?.id}
+            asDashboard={isCustomerMode}
+            isCustomerMode={isCustomerMode}
+          />
         </OrderProgressWrapper>
         {isCustomerMode && (
           <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />
@@ -219,6 +269,11 @@ const BusinessesListingUI = (props) => {
                 onSearch={handleChangeSearch}
                 handleCustomEnter={term => configs?.advanced_business_search_enabled?.value === '1' && onRedirectPage({ page: 'business_search' })}
               />
+              {showCities && citiesState?.cities?.length > 0 && (
+                <Button color='primary' onClick={handleOpenCities}>
+                  {citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)?.name || t('SELECT_A_CITY', 'Select a city')}
+                </Button>
+              )}
               {configs?.advanced_business_search_enabled?.value === '1' && (
                 <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
               )}
@@ -235,7 +290,7 @@ const BusinessesListingUI = (props) => {
             )}
           </>
         )}
-        {hasHighRatedBusiness && (
+        {hasHighRatedBusiness && !props.franchiseId && (
           <HightestRatedWrapper>
             <Divider />
             <HighestRated
@@ -400,6 +455,31 @@ const BusinessesListingUI = (props) => {
             onAccept={() => handleFindBusinesses()}
             isCustomerMode={isCustomerMode}
           />
+        </Modal>
+        <Modal
+          title={t('FILTER_BUSINESS_BY_CITY', 'Filter business by city')}
+          open={modals.citiesOpen}
+          width='70%'
+          onClose={() => setModals({ ...modals, citiesOpen: false })}
+        >
+          <BusinessCityList>
+            {
+              orderState?.loading ? (
+                <Skeleton height={40} count={3} style={{ marginBottom: '10px' }} />
+              ) : (
+                <>
+                  {citiesState?.cities?.map(city => (
+                    <CityItem key={city?.id} onClick={() => changeCityFilter(city?.id)}>
+                      <span className='radio'>
+                        {city?.id === orderState?.options?.city_id ? <RiRadioButtonFill className='city-checked' /> : <IosRadioButtonOff />}
+                      </span>
+                      {city?.name}
+                    </CityItem>
+                  ))}
+                </>
+              )
+            }
+          </BusinessCityList>
         </Modal>
 
         <Alert

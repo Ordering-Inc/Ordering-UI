@@ -82,6 +82,7 @@ export const BusinessBasicInformation = (props) => {
   const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
   const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
   const isInfoShrunken = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
+  const showCity = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
@@ -175,6 +176,15 @@ export const BusinessBasicInformation = (props) => {
                 <>
                   {!loading ? (
                     <p className='type'>{getBusinessType()}</p>
+                  ) : (
+                    <Skeleton width={isCustomerMode ? 100 : 150} />
+                  )}
+                </>
+              )}
+              {showCity && business?.city?.name && (
+                <>
+                  {!loading ? (
+                    <p className='type'>{business?.city?.name}</p>
                   ) : (
                     <Skeleton width={isCustomerMode ? 100 : 150} />
                   )}

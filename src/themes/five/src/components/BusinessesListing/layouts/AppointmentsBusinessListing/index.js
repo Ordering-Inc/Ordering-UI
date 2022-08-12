@@ -203,7 +203,7 @@ const BusinessListingUI = (props) => {
             </PreorderContent>
           </PreorderWrapper>
           <BusinessListWrapper>
-            {businessesList.businesses.length > 0 && (
+            {businessesList.businesses.length > 0 && !props.franchiseId && (
               <HightestRatedWrapper noHeight={!hasHighRatedBusiness}>
                 <HighestRated
                   handleClickAddress={handleClickAddress}

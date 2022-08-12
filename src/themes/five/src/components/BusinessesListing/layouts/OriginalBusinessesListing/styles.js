@@ -24,6 +24,10 @@ export const WrapperSearch = styled.div`
     color: ${props => props.theme?.colors?.primary};
     margin-left: 10px;
   }
+  button {
+    width: 250px;
+    margin-left: 10px;
+  }
   ${({ isCustomLayout, isCustomerMode }) => isCustomLayout && css`
     box-sizing: border-box;
     display: flex;
@@ -131,4 +135,65 @@ export const SearchContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`
+
+export const BusinessCityList = styled.div`
+  
+`
+
+export const CityItem = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px 0px;
+  border-top: 1px solid #E9ECEF;
+  span {
+    margin-right: 15px;
+  }
+  .city-checked{
+    color: ${props => props.theme.colors.primary};
+  }
+`
+
+const BusinessLogoStyled = styled.div`
+  display: flex;
+  min-width: 75px;
+  min-height: 75px;
+  height: 75px;
+  width: 75px;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  border-radius: 7.6px;
+  margin-right: 15px;
+  cursor: pointer;
+`
+
+export const BusinessLogo = (props) => {
+  const style = {}
+  if (props.bgimage) {
+    style.backgroundImage = `url(${props.bgimage})`
+  }
+
+  return (
+    <BusinessLogoStyled {...props} style={style}>
+      {props.children}
+    </BusinessLogoStyled>
+  )
+}
+
+export const BusinessLogosContainer = styled.div`
+  display: flex;
+  overflow: auto;
+  padding-bottom: 10px;
+  span {
+    margin-right: 15px;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
 `

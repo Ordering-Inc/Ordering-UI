@@ -14,7 +14,7 @@ import { BusinessProductsList } from '../BusinessProductsList'
 import { BusinessProductsCategories as CategoriesLayoutGroceries } from '../BusinessProductsCategories/layouts/groceries'
 import { BusinessProductsList as ProductListLayoutGroceries } from '../BusinessProductsList/layouts/groceries'
 import { Modal } from '../Modal'
-
+import { BusinessesListing } from '../BusinessesListing'
 import { Cart } from '../Cart'
 import { Button } from '../../styles/Buttons'
 
@@ -31,7 +31,8 @@ import {
   EmptyBtnWrapper,
   WrapperSearch,
   ProfessionalFilterWrapper,
-  WrapperSearchAbsolute
+  WrapperSearchAbsolute,
+  NearBusiness
 } from './styles'
 
 import { SearchProducts as SearchProductsOriginal } from '../../../../../themes/five/src/components/SearchProducts'
@@ -76,7 +77,8 @@ export const RenderProductsLayout = (props) => {
     isLazy,
     handleUpdateProducts,
     handleChangeProfessionalSelected,
-    professionalSelected
+    professionalSelected,
+    onBusinessClick
   } = props
 
   const theme = useTheme()
@@ -109,6 +111,7 @@ export const RenderProductsLayout = (props) => {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
   const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
+  const showBusinessNearCity = !theme?.layouts?.business_view?.components?.near_business?.hidden
 
   const BusinessLayoutCategories = businessLayout.layoutOne
     ? CategoriesLayoutGroceries
@@ -122,6 +125,17 @@ export const RenderProductsLayout = (props) => {
     <>
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
+          {showBusinessNearCity && (
+            <NearBusiness>
+              <BusinessesListing
+                logosLayout
+                propsToFetch={['id', 'logo', 'location', 'timezone', 'schedule', 'open', 'slug']}
+                cityId={businessState?.business?.city_id}
+                onBusinessClick={onBusinessClick}
+                actualSlug={businessState?.business?.slug}
+              />
+            </NearBusiness>
+          )}
           <div className='bp-list'>
             {!isCustomLayout && !useKioskApp && (
               <BusinessBasicInformationComponent

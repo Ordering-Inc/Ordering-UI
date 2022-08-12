@@ -123,6 +123,17 @@
     "PHONE_NUMBER": "Phone number"
   },
   "layouts": {
+    "business_listing_view": {
+      "components": {
+        "layout": {
+          "type": "original",
+          "rows": 3
+        },
+        "cities": {
+          "hidden": false
+        }
+      }
+    },
     "business_view": {
       "components": {
         "layout": {
@@ -144,6 +155,9 @@
             "products": {
               "components": {
                 "photo": {
+                  "hidden": false
+                },
+                "add_to_cart_button": {
                   "hidden": false
                 }
               }
@@ -196,6 +210,9 @@
             },
             "sort": {
               "hidden": false
+            },
+            "city": {
+              "hidden": false
             }
           }
         },
@@ -217,8 +234,21 @@
             }
           }
         },
+        "products": {
+          "components": {
+            "layout": {
+              "rows": 3
+            },
+            "add_to_cart_button": {
+              "hidden": false
+            }
+          }
+        },
         "order_view_button": {
           "hidden": true
+        },
+        "near_business": {
+          "hidden": false
         }
       }
     },

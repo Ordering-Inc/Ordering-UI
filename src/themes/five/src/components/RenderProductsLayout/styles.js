@@ -217,3 +217,7 @@ export const WrapperSearchAbsolute = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+export const NearBusiness = styled.div`
+  width: 100%;
+`
