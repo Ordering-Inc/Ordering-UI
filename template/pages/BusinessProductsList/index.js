@@ -110,6 +110,9 @@ export const BusinessProductsList = (props) => {
     },
     onCheckoutRedirect: (cartUuid) => {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid } })
+    },
+    onBusinessClick: (business) => {
+      events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     }
   }
 
