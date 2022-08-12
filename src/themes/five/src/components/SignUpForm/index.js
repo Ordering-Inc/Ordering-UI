@@ -665,7 +665,7 @@ const SignUpFormUI = (props) => {
                       })}
                     />
                   )}
-                  {configs?.google_login_client_id?.value && googleLoginEnabled && (
+                  {configs?.google_login_client_id?.value && configs?.google_login_auth_domain?.value && configs?.google_login_api_key?.value && googleLoginEnabled && (
                     <GoogleLoginButton
                       initParams={initParams}
                       handleSuccessGoogleLogin={handleSuccessGoogle}
