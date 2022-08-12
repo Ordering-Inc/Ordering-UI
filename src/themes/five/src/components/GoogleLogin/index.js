@@ -1,20 +1,17 @@
 import React from 'react'
-import {
-  GoogleLoginButton as GoogleLoginController,
-  useLanguage
-} from 'ordering-components'
+import { useLanguage, FirebaseGoogleLoginButton as GoogleLoginController } from 'ordering-components'
 import FcGoogle from '@meronex/icons/fc/FcGoogle'
 import { GoogleButton } from './styles'
 
-export const GoogleLoginButtonUI = (props) => {
+const GoogleLoginButtonUI = (props) => {
   const [, t] = useLanguage()
-  const { signIn } = props
+  const { signInWithGoogle } = props
 
   return (
     <GoogleButton
       initialIcon
       color='secondary'
-      onClick={signIn}
+      onClick={signInWithGoogle}
     >
       <FcGoogle />
       <div>{t('CONTINUE_WITH_GOOGLE', 'Continue with Google')}</div>
