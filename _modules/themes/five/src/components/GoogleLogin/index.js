@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GoogleLoginButtonUI = exports.GoogleLoginButton = void 0;
+exports.GoogleLoginButton = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -38,22 +38,20 @@ var GoogleLoginButtonUI = function GoogleLoginButtonUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var signIn = props.signIn;
+  var signInWithGoogle = props.signInWithGoogle;
   return /*#__PURE__*/_react.default.createElement(_styles.GoogleButton, {
     initialIcon: true,
     color: "secondary",
-    onClick: signIn
+    onClick: signInWithGoogle
   }, /*#__PURE__*/_react.default.createElement(_FcGoogle.default, null), /*#__PURE__*/_react.default.createElement("div", null, t('CONTINUE_WITH_GOOGLE', 'Continue with Google')));
 };
-
-exports.GoogleLoginButtonUI = GoogleLoginButtonUI;
 
 var GoogleLoginButton = function GoogleLoginButton(props) {
   var googleLoginProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: GoogleLoginButtonUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleLoginButton, googleLoginProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.FirebaseGoogleLoginButton, googleLoginProps);
 };
 
 exports.GoogleLoginButton = GoogleLoginButton;
