@@ -133,7 +133,6 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     handleFavoriteProduct && handleFavoriteProduct(!(product !== null && product !== void 0 && product.favorite));
   };
 
-  console.log(productsRows);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {
     ref: $element,
     soldOut: isSoldOut || maxProductQuantity <= 0,

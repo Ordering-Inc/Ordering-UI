@@ -127,43 +127,42 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
           setSelectedCateogry(category);
         }
       });
+      var navbar = document.getElementById('category-lists');
+      var cart = document.getElementById('BusinessCartContainer');
+      var search = document.getElementById('WrapperSearchAbsolute');
+      var wrapperCategories = document.getElementById('wrapper-categories');
+      var styleSheet = document.getElementById('styles').sheet;
+      var style0 = '.sticky-prod-cat {';
+      style0 += 'position: fixed !important;';
+      style0 += 'top: 0 !important;';
+      style0 += 'width: 65.5% !important;';
+      style0 += '}';
+      var style1 = '.sticky-prod-cart {';
+      style1 += 'position: fixed !important;';
+      style1 += 'top: 0 !important;';
+      style1 += 'right: 2.5% !important;';
+      style1 += 'width: 28.5% !important;';
+      style1 += '}';
+      var style2 = '.sticky-search {';
+      style2 += 'position: fixed !important;';
+      style2 += 'top: 10px !important;';
+      style2 += 'right: 32% !important;';
+      style2 += 'height: 50px !important;';
+      style2 += 'z-index: 9999 !important;';
+      style2 += '}';
+      styleSheet.insertRule(style0, 0);
+      styleSheet.insertRule(style1, 1);
+      styleSheet.insertRule(style2, 2);
+      var limit = window.pageYOffset >= (wrapperCategories === null || wrapperCategories === void 0 ? void 0 : wrapperCategories.offsetTop) && window.pageYOffset > 0;
 
-      if (props.useKioskApp) {
-        var navbar = document.getElementById('category-lists');
-        var cart = document.getElementById('BusinessCartContainer');
-        var search = document.getElementById('WrapperSearchAbsolute');
-        var styleSheet = document.getElementById('styles').sheet;
-        var style0 = '.sticky-prod-cat {';
-        style0 += 'position: fixed !important;';
-        style0 += 'top: 0 !important;';
-        style0 += 'width: 65.5% !important;';
-        style0 += '}';
-        var style1 = '.sticky-prod-cart {';
-        style1 += 'position: fixed !important;';
-        style1 += 'top: 0 !important;';
-        style1 += 'right: 2.5% !important;';
-        style1 += 'width: 28.5% !important;';
-        style1 += '}';
-        var style2 = '.sticky-search {';
-        style2 += 'position: fixed !important;';
-        style2 += 'top: 10px !important;';
-        style2 += 'right: 32% !important;';
-        style2 += 'height: 50px !important;';
-        style2 += 'z-index: 9999 !important;';
-        style2 += '}';
-        styleSheet.insertRule(style0, 0);
-        styleSheet.insertRule(style1, 1);
-        styleSheet.insertRule(style2, 2);
-
-        if (window.pageYOffset >= (navbar === null || navbar === void 0 ? void 0 : navbar.offsetTop) && window.pageYOffset > 0) {
-          navbar.classList.add('sticky-prod-cat');
-          cart.classList.add('sticky-prod-cart');
-          search.classList.add('sticky-search');
-        } else {
-          navbar.classList.remove('sticky-prod-cat');
-          cart.classList.remove('sticky-prod-cart');
-          search.classList.remove('sticky-search');
-        }
+      if (limit) {
+        navbar && navbar.classList.add('sticky-prod-cat');
+        cart && cart.classList.add('sticky-prod-cart');
+        search && search.classList.add('sticky-search');
+      } else {
+        navbar && navbar.classList.remove('sticky-prod-cat');
+        cart && cart.classList.remove('sticky-prod-cart');
+        search && search.classList.remove('sticky-search');
       }
     };
 

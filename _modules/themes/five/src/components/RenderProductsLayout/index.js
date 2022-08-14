@@ -161,7 +161,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   var BusinessLayoutProductsList = businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList
-  }, showBusinessNearCity && /*#__PURE__*/_react.default.createElement(_styles.NearBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessesListing.BusinessesListing, {
+  }, showBusinessNearCity && !useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.NearBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessesListing.BusinessesListing, {
     logosLayout: true,
     propsToFetch: ['id', 'logo', 'location', 'timezone', 'schedule', 'open', 'slug'],
     cityId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.city_id,
@@ -190,7 +190,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     },
     businessState: businessState
   }))), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
-    isCustomLayout: isCustomLayout || useKioskApp
+    isCustomLayout: isCustomLayout || useKioskApp,
+    id: "wrapper-categories"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, {
     showCartOnProductList: showCartOnProductList
   }, /*#__PURE__*/_react.default.createElement("div", {
