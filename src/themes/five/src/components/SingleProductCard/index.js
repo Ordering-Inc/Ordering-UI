@@ -78,7 +78,7 @@ const SingleProductCardUI = (props) => {
   const handleChangeFavorite = () => {
     handleFavoriteProduct && handleFavoriteProduct(!product?.favorite)
   }
-  console.log(productsRows)
+
   return (
     <>
       <CardContainer
