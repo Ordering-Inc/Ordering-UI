@@ -246,7 +246,7 @@ const SingleOrderCardUI = (props) => {
           onClose={handleCloseReivew}
           title={order
             ? (reviewStatus?.order
-              ? t('HEY', 'Hey! ') + t('HOW_WAS_YOUR_ORDER', 'How was your order?')
+              ? t('REVIEW_ORDER', 'Review order')
               : (reviewStatus?.product
                 ? t('REVIEW_PRODUCT', 'Review Product')
                 : t('REVIEW_DRIVER', 'Review Driver')))
@@ -255,7 +255,7 @@ const SingleOrderCardUI = (props) => {
           <ReviewWrapper>
             {
               reviewStatus?.order
-                ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} skipReview={handleCloseReivew} setIsReviewed={setIsOrderReviewed} />
+                ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
                 : (reviewStatus?.product
                   ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
                   : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
