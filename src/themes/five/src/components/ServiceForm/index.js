@@ -147,7 +147,7 @@ const ServiceFormUI = (props) => {
     return () => {
       window.removeEventListener('mouseup', handleClickOutside)
     }
-  }, [open])
+  }, [isDropDown])
 
   useEffect(() => {
     if (!professionalSelected) return
@@ -200,7 +200,7 @@ const ServiceFormUI = (props) => {
             <span>{t('REQUIRED', 'Required')}</span>
           </SectionHeader>
           <ProfessionalSelectWrapper ref={dropDownRef}>
-            <SelectedItem onClick={() => setIsDropDown(true)}>
+            <SelectedItem onClick={() => setIsDropDown(prev => !prev)}>
               <InfoWrapper>
                 {currentProfessional?.photo ? (
                   <ProfessionalPhoto
