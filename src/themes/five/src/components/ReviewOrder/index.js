@@ -234,7 +234,7 @@ export const ReviewOrder = (props) => {
     ...props,
     UIComponent: ReviewOrderUI,
     isToast: true,
-    defaultStar: 0
+    defaultStar: props?.defaultStar ?? 0
   }
 
   return <ReviewOrderController {...ReviewOrderProps} />
