@@ -243,7 +243,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
     return function () {
       window.removeEventListener('mouseup', handleClickOutside);
     };
-  }, [open]);
+  }, [isDropDown]);
   (0, _react.useEffect)(function () {
     if (!professionalSelected) return;
     setCurrentProfessional(professionalSelected);
@@ -275,7 +275,9 @@ var ServiceFormUI = function ServiceFormUI(props) {
     ref: dropDownRef
   }, /*#__PURE__*/_react.default.createElement(_styles.SelectedItem, {
     onClick: function onClick() {
-      return setIsDropDown(true);
+      return setIsDropDown(function (prev) {
+        return !prev;
+      });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, currentProfessional !== null && currentProfessional !== void 0 && currentProfessional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
     bgimage: currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.photo

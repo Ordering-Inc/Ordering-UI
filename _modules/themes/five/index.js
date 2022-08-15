@@ -495,6 +495,12 @@ Object.defineProperty(exports, "ReviewProduct", {
     return _ReviewProduct.ReviewProduct;
   }
 });
+Object.defineProperty(exports, "ReviewTrigger", {
+  enumerable: true,
+  get: function get() {
+    return _ReviewTrigger.ReviewTrigger;
+  }
+});
 Object.defineProperty(exports, "SearchBar", {
   enumerable: true,
   get: function get() {
@@ -795,6 +801,8 @@ var _Wallets = require("./src/components/Wallets");
 var _WalletTransactionItem = require("./src/components/WalletTransactionItem");
 
 var _BusinessListingSearch = require("./src/components/BusinessListingSearch");
+
+var _ReviewTrigger = require("./src/components/ReviewTrigger");
 
 var _ReviewOrder = require("./src/components/ReviewOrder");
 

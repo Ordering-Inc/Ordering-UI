@@ -17,8 +17,6 @@ var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _styles = require("./styles");
 
 var _Confirm = require("../Confirm");
@@ -66,14 +64,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReviewOrderUI = function ReviewOrderUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _order$business3, _order$business4, _commentsList, _commentsList2, _commentsList2$list, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _commentsList, _commentsList2, _commentsList2$list, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var stars = props.stars,
       order = props.order,
       handleSendReview = props.handleSendReview,
       formState = props.formState,
       closeReviewOrder = props.closeReviewOrder,
-      skipReview = props.skipReview,
       setIsReviewed = props.setIsReviewed,
       setStars = props.setStars;
 
@@ -83,9 +80,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
 
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      optimizeImage = _useUtils2$.optimizeImage,
-      parseDate = _useUtils2$.parseDate;
+      optimizeImage = _useUtils2[0].optimizeImage;
 
   var theme = (0, _styledComponents.useTheme)();
 
@@ -112,9 +107,6 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       extraComment = _useState6[0],
       setExtraComment = _useState6[1];
 
-  var placedOnDate = parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
-    outputFormat: 'dddd MMMM DD, YYYY'
-  });
   var commentsList = (0, _utils.reviewCommentList)('order');
   var qualificationList = [{
     key: 1,
@@ -261,7 +253,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LogoAndReviewWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, ((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit')
-  })), (order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name) && /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.name), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressWrapper, null, false && /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressContent, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressBar, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('HOW_WAS_YOUR_ORDER', 'How was your order?')), /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressContent, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsProgressBar, {
     style: {
       width: "".concat(((stars === null || stars === void 0 ? void 0 : stars.quality) === 0 ? 0 : ((stars === null || stars === void 0 ? void 0 : stars.quality) - 1) / 4) * 100, "%")
     }
@@ -279,24 +271,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
         return handleChangeStars(qualification === null || qualification === void 0 ? void 0 : qualification.key);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, qualification === null || qualification === void 0 ? void 0 : qualification.text, /*#__PURE__*/_react.default.createElement("span", null)));
-  })), /*#__PURE__*/_react.default.createElement(_styles.ReviewStarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StarWrapper, null, _toConsumableArray(Array(5).keys()).map(function (index) {
-    var _theme$colors;
-
-    return index <= (stars === null || stars === void 0 ? void 0 : stars.quality) - 1 ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, {
-      size: 40,
-      key: "star-symbol-".concat(index),
-      onClick: function onClick() {
-        return handleChangeStars(index + 1);
-      },
-      color: theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Star, {
-      size: 40,
-      key: "star-symbol-".concat(index),
-      onClick: function onClick() {
-        return handleChangeStars(index + 1);
-      }
-    });
-  })))), /*#__PURE__*/_react.default.createElement(_styles.PlacedDate, null, t('DONOT_FORGET_RATE_YOUR_ORDER', 'Do not forget to rate your order placed on '), " ", /*#__PURE__*/_react.default.createElement("strong", null, placedOnDate)), false && /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, (_commentsList = commentsList[(stars === null || stars === void 0 ? void 0 : stars.quality) || 1]) === null || _commentsList === void 0 ? void 0 : _commentsList.title), (_commentsList2 = commentsList[(stars === null || stars === void 0 ? void 0 : stars.quality) || 1]) === null || _commentsList2 === void 0 ? void 0 : (_commentsList2$list = _commentsList2.list) === null || _commentsList2$list === void 0 ? void 0 : _commentsList2$list.map(function (commentItem, i) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, (_commentsList = commentsList[(stars === null || stars === void 0 ? void 0 : stars.quality) || 1]) === null || _commentsList === void 0 ? void 0 : _commentsList.title), (_commentsList2 = commentsList[(stars === null || stars === void 0 ? void 0 : stars.quality) || 1]) === null || _commentsList2 === void 0 ? void 0 : (_commentsList2$list = _commentsList2.list) === null || _commentsList2$list === void 0 ? void 0 : _commentsList2$list.map(function (commentItem, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.CommentButton, {
       key: i,
       active: isSelectedComment(commentItem === null || commentItem === void 0 ? void 0 : commentItem.key),
@@ -307,7 +282,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     }, commentItem.content, isSelectedComment(commentItem === null || commentItem === void 0 ? void 0 : commentItem.key) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
   }))), /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderContainer, {
     onSubmit: handleSubmit(onSubmit)
-  }, false && /*#__PURE__*/_react.default.createElement(_styles.Comments, null, /*#__PURE__*/_react.default.createElement("p", null, t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Comments, null, /*#__PURE__*/_react.default.createElement("p", null, t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     name: "comments",
     value: extraComment,
     onChange: function onChange(e) {
@@ -323,16 +298,13 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Send, null, /*#__PURE__*/_react.default.createElement("span", {
-    onClick: skipReview,
-    style: {
-      textIndent: '10px'
-    }
+    onClick: closeReviewOrder
   }, t('SKIP', 'Skip')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !formState.loading ? 'primary' : 'secondary',
     type: "submit",
     disabled: formState.loading,
     className: "review-sent"
-  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.ContinueContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('CONTINUE_REVIEW', 'Continue Review')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.ContinueContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ORDER_REVIEW', 'Order Review'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -356,10 +328,12 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
 };
 
 var ReviewOrder = function ReviewOrder(props) {
+  var _props$defaultStar;
+
   var ReviewOrderProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ReviewOrderUI,
     isToast: true,
-    defaultStar: 5
+    defaultStar: (_props$defaultStar = props === null || props === void 0 ? void 0 : props.defaultStar) !== null && _props$defaultStar !== void 0 ? _props$defaultStar : 0
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderReview, ReviewOrderProps);

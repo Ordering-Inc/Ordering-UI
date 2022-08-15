@@ -51,7 +51,7 @@ var Divider = _styledComponents.default.div(_templateObject5 || (_templateObject
 
 exports.Divider = Divider;
 
-var ScheduleWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n\n  > div {\n    padding: 0px;\n  }\n  h2 {\n    font-weight: 600;\n    font-size: 20px;\n    line-height: 30px;\n    margin-bottom: 20px;\n    margin-top: 0px;\n  }\n"])));
+var ScheduleWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n  margin-bottom: 15px;\n\n  > div {\n    padding: 0px;\n  }\n  h2 {\n    font-weight: 600;\n    font-size: 20px;\n    line-height: 30px;\n    margin-bottom: 20px;\n    margin-top: 0px;\n  }\n"])));
 
 exports.ScheduleWrapper = ScheduleWrapper;
 

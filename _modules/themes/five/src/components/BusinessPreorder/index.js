@@ -277,7 +277,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
       },
       isDisabled: isDisabled
     }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, !isProfessional ? t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment') : t('PROFESSIONAL_NOT_AVAILABLE', 'Professional is not available at the moment')))), !isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')), showButton && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, !isProfessional ? t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment') : t('PROFESSIONAL_NOT_AVAILABLE', 'Professional is not available at the moment')))), !isPreOrderSetting && !isProfessional && /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')), showButton && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: goToBusinessPage,
     disabled: isAsap || !(dateSelected && timeSelected)

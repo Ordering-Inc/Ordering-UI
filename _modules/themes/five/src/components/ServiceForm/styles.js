@@ -67,7 +67,7 @@ var SectionHeader = _styledComponents.default.div(_templateObject9 || (_template
 
 exports.SectionHeader = SectionHeader;
 
-var ScheduleWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  padding: 0px 20px;\n  margin-top: 35px;\n  > div:last-child {\n    padding: 0px;\n  }\n"])));
+var ScheduleWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  padding: 0px 20px;\n  margin-top: 35px;\n  margin-bottom: 15px;\n  > div:last-child {\n    padding: 0px;\n  }\n"])));
 
 exports.ScheduleWrapper = ScheduleWrapper;
 
