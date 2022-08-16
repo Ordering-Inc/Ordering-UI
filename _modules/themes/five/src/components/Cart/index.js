@@ -131,6 +131,10 @@ var CartUI = function CartUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
+  var _useSite = (0, _orderingComponents.useSite)(),
+      _useSite2 = _slicedToArray(_useSite, 1),
+      site = _useSite2[0].site;
+
   var windowSize = (0, _useWindowSize.useWindowSize)();
 
   var _useState = (0, _react.useState)({
@@ -180,6 +184,7 @@ var CartUI = function CartUI(props) {
       openChangeStore = _useState16[0],
       setOpenChangeStore = _useState16[1];
 
+  var businessUrlTemplate = (site === null || site === void 0 ? void 0 : site.business_url_template) || '/store/:business_slug';
   var isCouponEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.coupon) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
   var checkoutMultiBusinessEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var openCarts = ((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
@@ -239,12 +244,19 @@ var CartUI = function CartUI(props) {
   };
 
   var handleStoreRedirect = function handleStoreRedirect(slug) {
-    events.emit('go_to_page', {
-      page: 'business',
-      params: {
-        store: slug
-      }
-    });
+    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      events.emit('go_to_page', {
+        page: 'business',
+        params: {
+          business_slug: slug
+        }
+      });
+    } else {
+      events.emit('go_to_page', {
+        page: 'business',
+        search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(slug)
+      });
+    }
 
     if (windowSize.width <= 768) {
       onClickCheckout && onClickCheckout();

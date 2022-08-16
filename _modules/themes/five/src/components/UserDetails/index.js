@@ -78,7 +78,8 @@ var UserDetailsUI = function UserDetailsUI(props) {
       handleSendVerifyCode = props.handleSendVerifyCode,
       verifyPhoneState = props.verifyPhoneState,
       requiredFields = props.requiredFields,
-      setFormState = props.setFormState;
+      setFormState = props.setFormState,
+      setIsSuccess = props.setIsSuccess;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -183,6 +184,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }, [willVerifyOtpState]);
   (0, _react.useEffect)(function () {
     if (!isEdit && requiredFields) {
+      setIsSuccess && setIsSuccess(true);
       onClose && onClose();
     }
   }, [isEdit, requiredFields]);
