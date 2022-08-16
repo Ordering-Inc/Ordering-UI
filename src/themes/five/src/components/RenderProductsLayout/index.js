@@ -125,7 +125,7 @@ export const RenderProductsLayout = (props) => {
     <>
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
-          {showBusinessNearCity && (
+          {showBusinessNearCity && !useKioskApp && (
             <NearBusiness>
               <BusinessesListing
                 logosLayout
@@ -167,7 +167,7 @@ export const RenderProductsLayout = (props) => {
               </>
             )}
             {!businessLayout.layoutOne && (
-              <BusinessContent isCustomLayout={isCustomLayout || useKioskApp}>
+              <BusinessContent isCustomLayout={isCustomLayout || useKioskApp} id='wrapper-categories'>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
                   <div style={{ position: 'relative' }}>
                     {business?.professionals?.length > 0 && (

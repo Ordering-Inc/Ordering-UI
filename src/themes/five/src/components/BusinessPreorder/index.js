@@ -263,7 +263,7 @@ const BusinessPreorderUI = (props) => {
           </TimeListWrapper>
         </OrderTimeWrapper>
       )}
-      {!isPreOrderSetting && (
+      {!isPreOrderSetting && !isProfessional && (
         <ClosedBusinessMsg>{t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')}</ClosedBusinessMsg>
       )}
       {showButton && (
