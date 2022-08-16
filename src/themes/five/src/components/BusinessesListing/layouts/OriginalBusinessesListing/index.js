@@ -240,7 +240,7 @@ const BusinessesListingUI = (props) => {
       </BusinessLogosContainer>
     )
   }
-  console.log(configs)
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
