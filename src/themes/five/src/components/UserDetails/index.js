@@ -44,7 +44,8 @@ const UserDetailsUI = (props) => {
     handleSendVerifyCode,
     verifyPhoneState,
     requiredFields,
-    setFormState
+    setFormState,
+    setIsSuccess
   } = props
 
   const [, t] = useLanguage()
@@ -126,6 +127,7 @@ const UserDetailsUI = (props) => {
 
   useEffect(() => {
     if (!isEdit && requiredFields) {
+      setIsSuccess && setIsSuccess(true)
       onClose && onClose()
     }
   }, [isEdit, requiredFields])
