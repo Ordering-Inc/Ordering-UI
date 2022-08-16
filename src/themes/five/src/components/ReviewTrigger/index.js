@@ -4,7 +4,6 @@ import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import { Star, StarFill } from 'react-bootstrap-icons'
 import {
   ReviewOrderContainer,
-  ReviewStarWrapper,
   StarWrapper,
   PlacedDate,
   Send,
@@ -44,14 +43,12 @@ export const ReviewTrigger = (props) => {
           </WrapperBusinessLogo>
           {order?.business?.name && <BusinessName>{order?.business?.name}</BusinessName>}
           <ReviewsProgressWrapper>
-            <ReviewStarWrapper>
-              <StarWrapper>
-                {[...Array(5).keys()].map((index) => (
-                  index <= (star - 1)) ? <StarFill size={40} key={`star-symbol-${index}`} onClick={() => setStar(index + 1)} color={theme?.colors?.primary} />
-                  : <Star size={40} key={`star-symbol-${index}`} onClick={() => setStar(index + 1)} />
-                )}
-              </StarWrapper>
-            </ReviewStarWrapper>
+            <StarWrapper>
+              {[...Array(5).keys()].map((index) => (
+                index <= (star - 1)) ? <StarFill size={40} key={`star-symbol-${index}`} onClick={() => setStar(index + 1)} color={theme?.colors?.primary} />
+                : <Star size={40} key={`star-symbol-${index}`} onClick={() => setStar(index + 1)} />
+              )}
+            </StarWrapper>
           </ReviewsProgressWrapper>
           <PlacedDate>{t('DONOT_FORGET_RATE_YOUR_ORDER', 'Do not forget to rate your order placed on ')} <strong>{placedOnDate}</strong></PlacedDate>
         </LogoAndReviewWrapper>
