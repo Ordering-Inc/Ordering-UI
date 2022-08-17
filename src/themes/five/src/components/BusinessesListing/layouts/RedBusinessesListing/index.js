@@ -269,6 +269,7 @@ const BusinessesListingUI = (props) => {
           {isCustomLayout && onRedirectPage && (
             <>
               <OrdersOption
+                franchiseId={props.franchiseId}
                 horizontal
                 isBusinessesPage
                 onRedirectPage={onRedirectPage}
@@ -281,6 +282,7 @@ const BusinessesListingUI = (props) => {
                 isBusinessesLoading={businessesList.loading}
               />
               <OrdersOption
+                ranchiseId={props.franchiseId}
                 horizontal
                 asDashboard
                 isBusinessesPage

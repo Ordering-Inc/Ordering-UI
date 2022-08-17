@@ -78,17 +78,24 @@ const SingleOrderCardUI = (props) => {
       handleCloseReivew()
     }
   }
-  const handleOpenOrderReview = () => {
-    setReviewStatus({ order: true, product: false, driver: false })
+  const handleOpenReview = () => {
+    if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
+    else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    else {
+      setIsReviewOpen(false)
+      return
+    }
     setIsReviewOpen(true)
   }
+
   const handleCloseReivew = () => {
     setReviewStatus({ order: false, product: false, driver: false })
     setIsReviewOpen(false)
   }
 
   const handleClickReview = (order) => {
-    handleOpenOrderReview && handleOpenOrderReview()
+    handleOpenReview && handleOpenReview()
   }
 
   const handleChangeFavorite = (order) => {
@@ -239,7 +246,7 @@ const SingleOrderCardUI = (props) => {
           onClose={handleCloseReivew}
           title={order
             ? (reviewStatus?.order
-              ? t('HEY', 'Hey! ') + t('HOW_WAS_YOUR_ORDER', 'How was your order?')
+              ? t('REVIEW_ORDER', 'Review order')
               : (reviewStatus?.product
                 ? t('REVIEW_PRODUCT', 'Review Product')
                 : t('REVIEW_DRIVER', 'Review Driver')))

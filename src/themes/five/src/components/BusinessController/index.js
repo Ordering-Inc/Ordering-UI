@@ -72,6 +72,8 @@ const BusinessControllerUI = (props) => {
 
   const favoriteRef = useRef(null)
 
+  const businessRows = theme?.layouts?.business_listing_view?.components?.layout?.rows
+
   // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   // }
@@ -105,6 +107,7 @@ const BusinessControllerUI = (props) => {
         isCustomerMode={isCustomerMode && hasInformationLength}
         firstCard={firstCard}
         minWidthEnabled={minWidthEnabled}
+        businessRows={businessRows}
       >
         {isObserved && (
           <WrapperBusinessCard isSkeleton={isSkeleton} onClick={(e) => !isSkeleton && handleClick && handleBusinessClick(e)}>

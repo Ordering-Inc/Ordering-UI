@@ -47,7 +47,7 @@ import { AppleLogin } from '../AppleLogin'
 import { SmsLoginButton } from '../../../../../components/SmsLogin'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { formatSeconds } from '../../../../../utils'
-import { GoogleIdentityButton } from '../GoogleIdentity'
+import { GoogleLoginButton } from '../GoogleLogin'
 import {
   Envelope,
   Lock,
@@ -118,7 +118,7 @@ const LoginFormUI = (props) => {
 
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
-    (configs?.google_login_client_id?.value && googleLoginEnabled) ||
+    (configs?.google_login_client_id?.value && configs?.google_login_auth_domain?.value && configs?.google_login_api_key?.value && googleLoginEnabled) ||
     (configs?.apple_login_client_id?.value && appleLoginEnabled) ||
     (loginTab === 'cellphone' && (configs?.twilio_service_enabled?.value === 'true' ||
       configs?.twilio_service_enabled?.value === '1'))
@@ -620,8 +620,8 @@ const LoginFormUI = (props) => {
                       handleSuccessFacebookLogin={handleSuccessFacebook}
                     />
                   )}
-                {configs?.google_login_client_id?.value && googleLoginEnabled && (
-                  <GoogleIdentityButton
+                {configs?.google_login_client_id?.value && configs?.google_login_auth_domain?.value && configs?.google_login_api_key?.value && googleLoginEnabled && (
+                  <GoogleLoginButton
                     initParams={initParams}
                     handleSuccessGoogleLogin={handleSuccessGoogle}
                   />

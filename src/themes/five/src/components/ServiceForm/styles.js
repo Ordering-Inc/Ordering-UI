@@ -140,6 +140,7 @@ export const SectionHeader = styled.div`
 export const ScheduleWrapper = styled.div`
   padding: 0px 20px;
   margin-top: 35px;
+  margin-bottom: 15px;
   > div:last-child {
     padding: 0px;
   }

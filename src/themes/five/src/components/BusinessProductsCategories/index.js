@@ -71,47 +71,48 @@ const BusinessProductsCategoriesUI = (props) => {
         }
       })
 
-      if (props.useKioskApp) {
-        const navbar = document.getElementById('category-lists')
-        const cart = document.getElementById('BusinessCartContainer')
-        const search = document.getElementById('WrapperSearchAbsolute')
+      const navbar = document.getElementById('category-lists')
+      const cart = document.getElementById('BusinessCartContainer')
+      const search = document.getElementById('WrapperSearchAbsolute')
+      const wrapperCategories = document.getElementById('wrapper-categories')
 
-        const styleSheet = document.getElementById('styles').sheet
+      const styleSheet = document.getElementById('styles').sheet
 
-        let style0 = '.sticky-prod-cat {'
-        style0 += 'position: fixed !important;'
-        style0 += 'top: 0 !important;'
-        style0 += 'width: 65.5% !important;'
-        style0 += '}'
+      let style0 = '.sticky-prod-cat {'
+      style0 += 'position: fixed !important;'
+      style0 += 'top: 0 !important;'
+      style0 += 'width: 65.5% !important;'
+      style0 += '}'
 
-        let style1 = '.sticky-prod-cart {'
-        style1 += 'position: fixed !important;'
-        style1 += 'top: 0 !important;'
-        style1 += 'right: 2.5% !important;'
-        style1 += 'width: 28.5% !important;'
-        style1 += '}'
+      let style1 = '.sticky-prod-cart {'
+      style1 += 'position: fixed !important;'
+      style1 += 'top: 0 !important;'
+      style1 += 'right: 2.5% !important;'
+      style1 += 'width: 28.5% !important;'
+      style1 += '}'
 
-        let style2 = '.sticky-search {'
-        style2 += 'position: fixed !important;'
-        style2 += 'top: 10px !important;'
-        style2 += 'right: 32% !important;'
-        style2 += 'height: 50px !important;'
-        style2 += 'z-index: 9999 !important;'
-        style2 += '}'
+      let style2 = '.sticky-search {'
+      style2 += 'position: fixed !important;'
+      style2 += 'top: 10px !important;'
+      style2 += 'right: 32% !important;'
+      style2 += 'height: 50px !important;'
+      style2 += 'z-index: 9999 !important;'
+      style2 += '}'
 
-        styleSheet.insertRule(style0, 0)
-        styleSheet.insertRule(style1, 1)
-        styleSheet.insertRule(style2, 2)
+      styleSheet.insertRule(style0, 0)
+      styleSheet.insertRule(style1, 1)
+      styleSheet.insertRule(style2, 2)
 
-        if (window.pageYOffset >= navbar?.offsetTop && window.pageYOffset > 0) {
-          navbar.classList.add('sticky-prod-cat')
-          cart.classList.add('sticky-prod-cart')
-          search.classList.add('sticky-search')
-        } else {
-          navbar.classList.remove('sticky-prod-cat')
-          cart.classList.remove('sticky-prod-cart')
-          search.classList.remove('sticky-search')
-        }
+      const limit = window.pageYOffset >= wrapperCategories?.offsetTop && window.pageYOffset > 0
+
+      if (limit) {
+        navbar && navbar.classList.add('sticky-prod-cat')
+        cart && cart.classList.add('sticky-prod-cart')
+        search && search.classList.add('sticky-search')
+      } else {
+        navbar && navbar.classList.remove('sticky-prod-cat')
+        cart && cart.classList.remove('sticky-prod-cart')
+        search && search.classList.remove('sticky-search')
       }
     }
     window.addEventListener('scroll', handleScroll)

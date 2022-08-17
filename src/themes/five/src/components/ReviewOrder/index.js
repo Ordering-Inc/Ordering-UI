@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+
 import { useLanguage, useUtils, OrderReview as ReviewOrderController } from 'ordering-components'
 import MdClose from '@meronex/icons/md/MdClose'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
-import { Star, StarFill } from 'react-bootstrap-icons'
 import {
   ReviewOrderContainer,
-  ReviewStarWrapper,
-  StarWrapper,
   Comments,
-  PlacedDate,
   Send,
   BusinessLogo,
-  BusinessName,
   WrapperBusinessLogo,
   ReviewsProgressWrapper,
   ReviewsProgressContent,
@@ -33,13 +29,12 @@ import { reviewCommentList } from '../../../../../utils'
 const ReviewOrderUI = (props) => {
   const { stars, order, handleSendReview, formState, closeReviewOrder, setIsReviewed, setStars } = props
   const [, t] = useLanguage()
-  const [{ optimizeImage, parseDate }] = useUtils()
+  const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
   const { handleSubmit, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
   const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
-  const placedOnDate = parseDate(order?.delivery_datetime, { outputFormat: 'dddd MMMM DD, YYYY' })
 
   const commentsList = reviewCommentList('order')
 
@@ -138,73 +133,58 @@ const ReviewOrderUI = (props) => {
               <BusinessLogo bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
             )}
           </WrapperBusinessLogo>
-          {order?.business?.name && <BusinessName>{order?.business?.name}</BusinessName>}
           <ReviewsProgressWrapper>
-            {false && (
-              <ReviewsProgressContent>
-                <ReviewsProgressBar style={{ width: `${(stars?.quality === 0 ? 0 : (stars?.quality - 1) / 4) * 100}%` }} />
-                {
-                  qualificationList?.map(qualification => (
-                    <ReviewsMarkPoint
-                      key={qualification?.key}
-                      style={{
-                        left: theme?.rtl ? (qualification?.middleNode ? 'initial' : qualification?.right) : qualification?.left,
-                        right: theme?.rtl ? qualification?.left : (qualification?.middleNode ? 'initial' : qualification?.right)
-                      }}
-                      active={stars?.quality === qualification?.key}
-                      pass={stars?.quality >= qualification?.key}
-                      className={qualification?.middleNode ? 'mark-point' : ''}
-                      onClick={() => handleChangeStars(qualification?.key)}
-                    >
-                      <span>{qualification?.text}<span /></span>
-                    </ReviewsMarkPoint>
-                  ))
-                }
-              </ReviewsProgressContent>
-            )}
-            <ReviewStarWrapper>
-              <StarWrapper>
-                {[...Array(5).keys()].map((index) => (
-                  index <= (stars?.quality - 1)) ? <StarFill size={40} key={`star-symbol-${index}`} onClick={() => handleChangeStars(index + 1)} color={theme?.colors?.primary} />
-                  : <Star size={40} key={`star-symbol-${index}`} onClick={() => handleChangeStars(index + 1)} />
-                )}
-              </StarWrapper>
-            </ReviewStarWrapper>
-          </ReviewsProgressWrapper>
-          <PlacedDate>{t('DONOT_FORGET_RATE_YOUR_ORDER', 'Do not forget to rate your order placed on ')} <strong>{placedOnDate}</strong></PlacedDate>
-          {false && (
-            <CommentsList>
-              <p>{commentsList[stars?.quality || 1]?.title}</p>
+            <p>{t('HOW_WAS_YOUR_ORDER', 'How was your order?')}</p>
+            <ReviewsProgressContent>
+              <ReviewsProgressBar style={{ width: `${(stars?.quality === 0 ? 0 : (stars?.quality - 1) / 4) * 100}%` }} />
               {
-                commentsList[stars?.quality || 1]?.list?.map((commentItem, i) => (
-                  <CommentButton
-                    key={i}
-                    active={isSelectedComment(commentItem?.key)}
-                    onClick={() => handleChangeComment(commentItem)}
-                    initialIcon
+                qualificationList?.map(qualification => (
+                  <ReviewsMarkPoint
+                    key={qualification?.key}
+                    style={{
+                      left: theme?.rtl ? (qualification?.middleNode ? 'initial' : qualification?.right) : qualification?.left,
+                      right: theme?.rtl ? qualification?.left : (qualification?.middleNode ? 'initial' : qualification?.right)
+                    }}
+                    active={stars?.quality === qualification?.key}
+                    pass={stars?.quality >= qualification?.key}
+                    className={qualification?.middleNode ? 'mark-point' : ''}
+                    onClick={() => handleChangeStars(qualification?.key)}
                   >
-                    {commentItem.content}
-                    {
-                      isSelectedComment(commentItem?.key) && <MdClose />
-                    }
-                  </CommentButton>
+                    <span>{qualification?.text}<span /></span>
+                  </ReviewsMarkPoint>
                 ))
               }
-            </CommentsList>
-          )}
+            </ReviewsProgressContent>
+          </ReviewsProgressWrapper>
+          <CommentsList>
+            <p>{commentsList[stars?.quality || 1]?.title}</p>
+            {
+              commentsList[stars?.quality || 1]?.list?.map((commentItem, i) => (
+                <CommentButton
+                  key={i}
+                  active={isSelectedComment(commentItem?.key)}
+                  onClick={() => handleChangeComment(commentItem)}
+                  initialIcon
+                >
+                  {commentItem.content}
+                  {
+                    isSelectedComment(commentItem?.key) && <MdClose />
+                  }
+                </CommentButton>
+              ))
+            }
+          </CommentsList>
         </LogoAndReviewWrapper>
         <ReviewOrderContainer onSubmit={handleSubmit(onSubmit)}>
-          {false && (
-            <Comments>
-              <p>{t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')}</p>
-              <TextArea
-                name='comments'
-                value={extraComment}
-                onChange={(e) => setExtraComment(e.target.value)}
-                autoComplete='off'
-              />
-            </Comments>
-          )}
+          <Comments>
+            <p>{t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')}</p>
+            <TextArea
+              name='comments'
+              value={extraComment}
+              onChange={(e) => setExtraComment(e.target.value)}
+              autoComplete='off'
+            />
+          </Comments>
           {
             props.afterMidElements?.map((MidElement, i) => (
               <React.Fragment key={i}>
@@ -224,7 +204,7 @@ const ReviewOrderUI = (props) => {
               className='review-sent'
             >
               {!formState.loading ? (
-                <ContinueContainer><p>{t('GOTO_REVIEW', 'Go to review')}</p><BsArrowRight /></ContinueContainer>
+                <ContinueContainer><p>{t('CONTINUE', 'Continue')}</p><BsArrowRight /></ContinueContainer>
               ) : t('LOADING', 'Loading')}
             </Button>
           </Send>
@@ -254,7 +234,7 @@ export const ReviewOrder = (props) => {
     ...props,
     UIComponent: ReviewOrderUI,
     isToast: true,
-    defaultStar: 5
+    defaultStar: props?.defaultStar ?? 0
   }
 
   return <ReviewOrderController {...ReviewOrderProps} />

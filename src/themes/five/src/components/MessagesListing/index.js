@@ -380,6 +380,7 @@ export const MessagesListing = (props) => {
         <OrderListContainer>
           {orderByOption === 'id' && (
             <IdOrderList
+              {...props}
               handleOrderCardClick={handleOrderCardClick}
               selectedOrderCard={selectedOrder}
               handleOpenOrderDetail={handleOpenOrderDetail}
@@ -388,6 +389,7 @@ export const MessagesListing = (props) => {
           )}
           {orderByOption === 'last_direct_message_at' && (
             <NewestOrderList
+              {...props}
               handleOrderCardClick={handleOrderCardClick}
               selectedOrderCard={selectedOrder}
               handleOpenOrderDetail={handleOpenOrderDetail}

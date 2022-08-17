@@ -102,7 +102,7 @@ const SignUpFormUI = (props) => {
   const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
-  const isFacebookLogin = configs?.facebook_login?.value === 'true'
+  const isFacebookLogin = configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1'
   const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
   const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
   const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
@@ -124,7 +124,7 @@ const SignUpFormUI = (props) => {
 
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
-    (configs?.google_login_client_id?.value && googleLoginEnabled) ||
+    (configs?.google_login_client_id?.value && configs?.google_login_auth_domain?.value && configs?.google_login_api_key?.value && googleLoginEnabled) ||
     (configs?.apple_login_client_id?.value && appleLoginEnabled)
   const hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled
 
@@ -315,16 +315,18 @@ const SignUpFormUI = (props) => {
       <SignUpContainer isPopup={isPopup}>
         <FormSide isPopup={isPopup}>
           <Title>{t('SIGN_UP', 'Sign up')}</Title>
-          {(useSignUpFullDetails && !willVerifyOtpState) && (
+          {((Number(useSignUpFullDetails) + Number(useSignUpOtpEmail) + Number(useSignUpOtpCellphone)) > 1 && !willVerifyOtpState) && (
             <SignupWith isPopup={isPopup}>
               <Tabs variant='primary'>
-                <Tab
-                  onClick={() => handleSignUpTab('default')}
-                  active={signUpTab === 'default'}
-                  borderBottom={signUpTab === 'default'}
-                >
-                  {t('DEFAULT', 'Default')}
-                </Tab>
+                {useSignUpFullDetails && (
+                  <Tab
+                    onClick={() => handleSignUpTab('default')}
+                    active={signUpTab === 'default'}
+                    borderBottom={signUpTab === 'default'}
+                  >
+                    {t('DEFAULT', 'Default')}
+                  </Tab>
+                )}
                 {useSignUpOtpEmail && (
                   <Tab
                     onClick={() => handleSignUpTab('otpEmail')}
@@ -665,7 +667,7 @@ const SignUpFormUI = (props) => {
                       })}
                     />
                   )}
-                  {configs?.google_login_client_id?.value && googleLoginEnabled && (
+                  {configs?.google_login_client_id?.value && configs?.google_login_auth_domain?.value && configs?.google_login_api_key?.value && googleLoginEnabled && (
                     <GoogleLoginButton
                       initParams={initParams}
                       handleSuccessGoogleLogin={handleSuccessGoogle}

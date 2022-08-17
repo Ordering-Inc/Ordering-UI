@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig, useOrderingTheme } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig, useOrderingTheme, useSite } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
@@ -64,6 +64,7 @@ const CartUI = (props) => {
   const [orderingTheme] = useOrderingTheme()
   const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
+  const [{ site }] = useSite()
   const windowSize = useWindowSize()
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -75,8 +76,11 @@ const CartUI = (props) => {
   const [isUpselling, setIsUpselling] = useState(false)
   const [openChangeStore, setOpenChangeStore] = useState(false)
 
+  const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
+
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
+  const openCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum) || null) || []
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
@@ -111,7 +115,7 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    if (checkoutMultiBusinessEnabled) {
+    if (checkoutMultiBusinessEnabled && openCarts.length > 1) {
       events.emit('go_to_page', { page: 'multi_checkout' })
     } else {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
@@ -121,7 +125,12 @@ const CartUI = (props) => {
   }
 
   const handleStoreRedirect = (slug) => {
-    events.emit('go_to_page', { page: 'business', params: { store: slug } })
+    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
+    } else {
+      events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}` })
+    }
+
     if (windowSize.width <= 768) {
       onClickCheckout && onClickCheckout()
     }
