@@ -162,6 +162,10 @@ const BusinessesListingUI = (props) => {
     setModals({ ...modals, citiesOpen: true })
   }
 
+  const handleChangeCity = (cityId) => {
+    changeCityFilter(cityId === orderState?.options?.city_id ? null : cityId)
+  }
+
   useEffect(() => {
     if (preorderBusiness) setIsPreorder(true)
   }, [preorderBusiness])
@@ -267,7 +271,7 @@ const BusinessesListingUI = (props) => {
                 isCustomLayout={isCustomLayout}
                 placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
                 onSearch={handleChangeSearch}
-                handleCustomEnter={term => configs?.advanced_business_search_enabled?.value === '1' && onRedirectPage({ page: 'business_search' })}
+                handleCustomEnter={() => onRedirectPage({ page: 'business_search' })}
               />
               {showCities && citiesState?.cities?.length > 0 && (
                 <Button color='primary' onClick={handleOpenCities}>
@@ -469,7 +473,7 @@ const BusinessesListingUI = (props) => {
               ) : (
                 <>
                   {citiesState?.cities?.map(city => (
-                    <CityItem key={city?.id} onClick={() => changeCityFilter(city?.id)}>
+                    <CityItem key={city?.id} onClick={() => handleChangeCity(city?.id)}>
                       <span className='radio'>
                         {city?.id === orderState?.options?.city_id ? <RiRadioButtonFill className='city-checked' /> : <IosRadioButtonOff />}
                       </span>
