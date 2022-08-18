@@ -60,7 +60,9 @@ import {
   HeaderTitle,
   PlaceSpotSection,
   BtsOrderStatus,
-  LinkWrapper
+  LinkWrapper,
+  MapWrapper,
+  BusinessExternalWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
@@ -107,6 +109,7 @@ const OrderDetailsUI = (props) => {
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
   const acceptedStatus = [1, 2, 5, 6, 10, 11, 12]
+  const completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const placeSpotTypes = [3, 4, 5]
   const googleMapsApiKey = configs?.google_maps_api_key?.value
 
@@ -393,19 +396,29 @@ const OrderDetailsUI = (props) => {
                   acceptedStatus.includes(parseInt(order?.status, 10)) ||
                   !isOriginalLayout
                 ) && (
-                    <ReOrder>
+                  <ReOrder>
+                    <Button
+                      color='primary'
+                      outline
+                      onClick={() => handleStartNewOrder(order.id)}
+                      disabled={reorderState?.loading}
+                    >
+                      {t('START_NEW_ORDER', 'Start new order')}
+                    </Button>
+                    {completedStatus.includes(parseInt(order?.status, 10)) && (
                       <Button
                         color='primary'
                         outline
-                        onClick={() => handleStartNewOrder(order.id)}
+                        onClick={() => handleReorder(order.id)}
                         disabled={reorderState?.loading}
                       >
                         {reorderState?.loading
                           ? t('LOADING', 'Loading...')
-                          : t('ORDER_AGAIN', 'Order Again')}
+                          : t('REORDER', 'Reorder')}
                       </Button>
-                    </ReOrder>
-                  )}
+                    )}
+                  </ReOrder>
+                )}
               </TitleContainer>
               {showDeliveryProgress && (
                 <>
@@ -436,19 +449,12 @@ const OrderDetailsUI = (props) => {
                         <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                       </ReviewOrderLink>
                     </LinkWrapper>
-
                   </div>
                 </>
               )}
             </OrderInfo>
             <OrderBusiness>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '50%'
-                }}
-              >
+              <BusinessExternalWrapper>
                 <BusinessWrapper
                   w='calc(100% - 20px)'
                 // borderBottom={showOrderActions}
@@ -505,7 +511,7 @@ const OrderDetailsUI = (props) => {
                       <div>
                         <Button
                           style={{ fontSize: 14 }}
-                          color='primary'
+                          color={order?.status === 20 ? 'secundary' : 'primary'}
                           onClick={() => handleChangeOrderStatus(20)}
                           disabled={order?.status === 20}
                         >
@@ -515,7 +521,7 @@ const OrderDetailsUI = (props) => {
                       <div>
                         <Button
                           style={{ fontSize: 14 }}
-                          color='secundary'
+                          color={order?.status === 20 ? 'primary' : 'secundary'}
                           disabled={order?.status === 21}
                           onClick={() => handleChangeOrderStatus(21)}
                         >
@@ -525,15 +531,16 @@ const OrderDetailsUI = (props) => {
                     </BtsOrderStatus>
                   </BusinessWrapper>
                 )}
-
-              </div>
+              </BusinessExternalWrapper>
               {googleMapsApiKey && (
-                <OrderMapSection
-                  isMapImg
-                  validStatuses={[order?.status]}
-                  location={order?.business?.location}
-                  mapStyle={{ width: '50%' }}
-                />
+                <MapWrapper>
+                  <OrderMapSection
+                    isMapImg
+                    validStatuses={[order?.status]}
+                    location={order?.business?.location}
+                    mapStyle={{ width: '100%' }}
+                  />
+                </MapWrapper>
               )}
             </OrderBusiness>
             <OrderCustomer>
