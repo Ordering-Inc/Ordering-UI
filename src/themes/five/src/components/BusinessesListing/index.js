@@ -6,16 +6,17 @@ import { BusinessListing as AppointmentsBusinessListing } from './layouts/Appoin
 // import { useOrderingTheme } from 'ordering-components'
 
 export const BusinessesListing = (props) => {
+  const { logosLayout } = props
   // const [orderingTheme] = useOrderingTheme()
   const layout = 'appointments'
   // const layout = orderingTheme?.theme?.business_listing_view?.components?.layout?.type || 'original'
 
   return (
     <>
-      {(layout === 'original') && <OriginalBusinessesListing {...props} />}
-      {(layout === 'starbucks') && <StarbucksBusinessesListing {...props} />}
-      {(layout === 'red') && <RedBusinessesListing {...props} />}
-      {(layout === 'appointments') && <AppointmentsBusinessListing {...props} />}
+      {(layout === 'original' || logosLayout) && <OriginalBusinessesListing {...props} />}
+      {(layout === 'starbucks') && !logosLayout && <StarbucksBusinessesListing {...props} />}
+      {(layout === 'red') && !logosLayout && <RedBusinessesListing {...props} />}
+      {(layout === 'appointments') && !logosLayout && <AppointmentsBusinessListing {...props} />}
     </>
   )
 }
