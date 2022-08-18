@@ -153,6 +153,7 @@ export const ProductFormTitle = styled.div`
 
 export const ProductEdition = styled.div`
   margin-top: 20px;
+  margin-bottom: 20px;
 `
 
 export const SectionTitle = styled.h3`
@@ -196,7 +197,7 @@ export const ProductActions = styled.div`
   align-items: center;
   padding: 10px 0px;
   width: 100%;
-  z-index: 999;
+  z-index: 9999997;
 
   position: fixed;
   bottom: 0;
@@ -346,20 +347,25 @@ export const ProductTabContainer = styled.div`
   position: sticky;
   top: 0px;
   background: white;
-  z-index: 900;
-  .swiper-slide {
-    width: auto;
+  z-index: 9999996;
+  overflow: scroll hidden;
+  width: 100%;
+  ::-webkit-scrollbar {
+    height: 0px;
   }
-  > div {
-    div {
-      padding: 9px 15px;
-      &:first-child {
-        padding-left: 0px;
-        ${props => props.theme?.rtl && css`
-          padding-right: 0px;
-          padding-left: 15px;
-        `}
-      }
+
+  #optionList {
+    > div {
+      white-space: nowrap;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 10px 0px;
+      margin-right: 25px;
+      ${props => props.theme.rtl && css`
+        margin-right: 0px;
+        margin-left: 25px;
+      `}
     }
   }
 `

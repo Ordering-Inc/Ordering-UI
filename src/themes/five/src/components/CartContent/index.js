@@ -53,7 +53,7 @@ export const CartContent = (props) => {
                   isCartPending={cart?.status === 2}
                   cart={cart}
                   isCartPopover={isCartPopover}
-                  isCheckout={window.location.pathname === `/checkout/${cart?.uuid}`}
+                  isCheckout={window.location.pathname === `/checkout/${cart?.uuid}` && !isCartPopover}
                   isForceOpenCart={isForceOpenCart}
                   currentCartUuid={currentCartUuid}
                   isProducts={cart.products.length}
