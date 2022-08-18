@@ -45,7 +45,7 @@ var ProductFormTitle = _styledComponents.default.div(_templateObject7 || (_templ
 
 exports.ProductFormTitle = ProductFormTitle;
 
-var ProductEdition = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n"])));
+var ProductEdition = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  margin-bottom: 20px;\n"])));
 
 exports.ProductEdition = ProductEdition;
 
@@ -59,7 +59,7 @@ var ProductComment = _styledComponents.default.div(_templateObject10 || (_templa
 
 exports.ProductComment = ProductComment;
 
-var ProductActions = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 10px 0px;\n  width: 100%;\n  z-index: 999;\n\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  div.price {\n    padding-top: 10px;\n    color: ", ";\n    h4 {\n      margin: 0;\n      font-weight: 600;\n      font-size: 20px;\n      line-height: 20px;\n    }\n    span {\n      font-size: 13px;\n      color: #D83520;\n      line-height: 15px;\n    }\n  }\n\n  div.incdec-control {\n    width: 135px;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    position: relative;\n\n    svg {\n      width: 25px;\n      height: 25px;\n      cursor: pointer;\n    }\n  }\n\n  div.price-amount-block {\n    display: flex;\n    justify-content: space-between;\n    width: 80%\n  }\n\n  svg {\n    color: ", ";\n  }\n\n  svg.disabled {\n    pointer-events: none;\n    color: #CED4DA;\n  }\n\n  button:disabled,\n  button.disabled {\n    background: #E9ECEF;\n    border: 1px solid #E9ECEF;\n    color: #B1BCCC;\n  }\n\n  button.add {\n    width: 90%;\n    padding: 5px 10px;\n    margin-top: 10px;\n    position: relative;\n\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n  .qty {\n    flex: 1;\n    text-align: center;\n    display: flex;\n    align-items: center;\n    height: 38px;\n    min-width: 60px;\n    box-sizing: border-box;\n    padding: 0;\n    margin: 0 10px;\n  }\n\n  @media (min-width: 577px) {\n    position: sticky;\n  }\n\n  @media (min-width: 1200px) {\n    bottom: 0px;\n    flex-direction: row;\n    justify-content: space-between;\n    border-top: 1px solid #E9ECEF;\n    width: calc(100% + 40px);\n    transform: translateX(-20px);\n    padding: 10px 20px;\n    box-sizing: border-box;\n\n    div.price {\n      width: 25%;\n    }\n\n    button.add {\n      width: 35%;\n      margin-top: 0;\n    }\n\n    div.incdec-control {\n      padding-right: 18%;\n      &.show-weight-unit{\n        width: 30%;\n      }\n    }\n  }\n"])), function (props) {
+var ProductActions = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 10px 0px;\n  width: 100%;\n  z-index: 9999997;\n\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  div.price {\n    padding-top: 10px;\n    color: ", ";\n    h4 {\n      margin: 0;\n      font-weight: 600;\n      font-size: 20px;\n      line-height: 20px;\n    }\n    span {\n      font-size: 13px;\n      color: #D83520;\n      line-height: 15px;\n    }\n  }\n\n  div.incdec-control {\n    width: 135px;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    position: relative;\n\n    svg {\n      width: 25px;\n      height: 25px;\n      cursor: pointer;\n    }\n  }\n\n  div.price-amount-block {\n    display: flex;\n    justify-content: space-between;\n    width: 80%\n  }\n\n  svg {\n    color: ", ";\n  }\n\n  svg.disabled {\n    pointer-events: none;\n    color: #CED4DA;\n  }\n\n  button:disabled,\n  button.disabled {\n    background: #E9ECEF;\n    border: 1px solid #E9ECEF;\n    color: #B1BCCC;\n  }\n\n  button.add {\n    width: 90%;\n    padding: 5px 10px;\n    margin-top: 10px;\n    position: relative;\n\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n  .qty {\n    flex: 1;\n    text-align: center;\n    display: flex;\n    align-items: center;\n    height: 38px;\n    min-width: 60px;\n    box-sizing: border-box;\n    padding: 0;\n    margin: 0 10px;\n  }\n\n  @media (min-width: 577px) {\n    position: sticky;\n  }\n\n  @media (min-width: 1200px) {\n    bottom: 0px;\n    flex-direction: row;\n    justify-content: space-between;\n    border-top: 1px solid #E9ECEF;\n    width: calc(100% + 40px);\n    transform: translateX(-20px);\n    padding: 10px 20px;\n    box-sizing: border-box;\n\n    div.price {\n      width: 25%;\n    }\n\n    button.add {\n      width: 35%;\n      margin-top: 0;\n    }\n\n    div.incdec-control {\n      padding-right: 18%;\n      &.show-weight-unit{\n        width: 30%;\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.colors.darkTextColor;
@@ -91,10 +91,8 @@ var WrapperIngredients = _styledComponents.default.div(_templateObject15 || (_te
 
 exports.WrapperIngredients = WrapperIngredients;
 
-var ProductTabContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 900;\n  .swiper-slide {\n    width: auto;\n  }\n  > div {\n    div {\n      padding: 9px 15px;\n      &:first-child {\n        padding-left: 0px;\n        ", "\n      }\n    }\n  }\n"])), function (props) {
-  var _props$theme2;
-
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n          padding-right: 0px;\n          padding-left: 15px;\n        "])));
+var ProductTabContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 9999996;\n  overflow: scroll hidden;\n  width: 100%;\n  ::-webkit-scrollbar {\n    height: 0px;\n  }\n\n  #optionList {\n    > div {\n      white-space: nowrap;\n      max-width: 200px;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      padding: 10px 0px;\n      margin-right: 25px;\n      ", "\n    }\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n        margin-right: 0px;\n        margin-left: 25px;\n      "])));
 });
 
 exports.ProductTabContainer = ProductTabContainer;
@@ -104,9 +102,9 @@ var Divider = _styledComponents.default.div(_templateObject19 || (_templateObjec
 exports.Divider = Divider;
 
 var ProductShareWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  justify-content: flex-end;\n  padding-right: 20px;\n  ", "\n\n  > div {\n    > svg {\n      margin: 0px !important;\n    }\n  }\n\n  @media (max-width: 768px) {\n    > div {\n      right: 16px;\n      top: 25px;\n      left: auto;\n    }\n  }\n\n"])), function (props) {
-  var _props$theme3;
+  var _props$theme2;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    padding-left: 20px;\n    padding-right: 0;\n  "])));
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    padding-left: 20px;\n    padding-right: 0;\n  "])));
 });
 
 exports.ProductShareWrapper = ProductShareWrapper;
@@ -140,17 +138,17 @@ var ProductTagsListContainer = _styledComponents.default.div(_templateObject28 |
 exports.ProductTagsListContainer = ProductTagsListContainer;
 
 var ProductTagWrapper = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n\n  img {\n    width: 32px;\n    height: 32px;\n    border-radius: 8px;\n    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  }\n\n  span {\n    font-size: 14px;\n    ", "\n  }\n"])), function (props) {
-  var _props$theme4;
+  var _props$theme3;
 
-  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n      margin: 0 10px 0 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n      margin: 0 20px 0 10px;\n    "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n      margin: 0 10px 0 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n      margin: 0 20px 0 10px;\n    "])));
 });
 
 exports.ProductTagWrapper = ProductTagWrapper;
 
 var WeightUnitSwitch = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: auto;\n  margin-left: 10px;\n  \n  ", "\n"])), function (props) {
-  var _props$theme5;
+  var _props$theme4;
 
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0;\n "])));
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0;\n "])));
 });
 
 exports.WeightUnitSwitch = WeightUnitSwitch;

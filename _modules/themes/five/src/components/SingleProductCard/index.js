@@ -21,6 +21,14 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styledComponents = require("styled-components");
 
+var _Modal = require("../Modal");
+
+var _LoginForm = require("../LoginForm");
+
+var _SignUpForm = require("../SignUpForm");
+
+var _ForgotPasswordForm = require("../ForgotPasswordForm");
+
 var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
@@ -58,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleProductCardUI = function SingleProductCardUI(props) {
-  var _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$layouts$busine4, _theme$layouts$busine5, _theme$layouts2, _theme$layouts2$busin, _theme$layouts2$busin2, _theme$layouts2$busin3, _theme$layouts2$busin4, _theme$layouts2$busin5, _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _theme$images, _theme$images$dummies, _product$ribbon6;
+  var _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$layouts$busine4, _theme$layouts$busine5, _theme$layouts2, _theme$layouts2$busin, _theme$layouts2$busin2, _theme$layouts2$busin3, _theme$layouts2$busin4, _theme$layouts2$busin5, _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _theme$images, _theme$images$dummies, _product$ribbon6, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
 
   var product = props.product,
       isSoldOut = props.isSoldOut,
@@ -97,8 +105,24 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 2),
+      auth = _useSession2[0].auth,
+      login = _useSession2[1].login;
+
   var theme = (0, _styledComponents.useTheme)();
   var favoriteRef = (0, _react.useRef)(null);
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isModalOpen = _useState2[0],
+      setIsModalOpen = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      modalPageToShow = _useState4[0],
+      setModalPageToShow = _useState4[1];
+
   var editMode = typeof (product === null || product === void 0 ? void 0 : product.code) !== 'undefined';
   var isObservedValidation = isObserved || useKioskApp;
   var removeToBalance = editMode ? product === null || product === void 0 ? void 0 : product.quantity : 0;
@@ -130,7 +154,38 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   };
 
   var handleChangeFavorite = function handleChangeFavorite() {
-    handleFavoriteProduct && handleFavoriteProduct(!(product !== null && product !== void 0 && product.favorite));
+    if (auth) {
+      handleFavoriteProduct && handleFavoriteProduct(!(product !== null && product !== void 0 && product.favorite));
+    } else {
+      setModalPageToShow('login');
+      setIsModalOpen(true);
+    }
+  };
+
+  var closeAuthModal = function closeAuthModal() {
+    setIsModalOpen(false);
+    setModalPageToShow(null);
+  };
+
+  var handleSuccessLogin = function handleSuccessLogin(user) {
+    if (user) {
+      closeAuthModal();
+    }
+  };
+
+  var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
+    var page = _ref.page;
+    e.preventDefault();
+    setModalPageToShow(page);
+  };
+
+  var handleSuccessSignup = function handleSuccessSignup(user) {
+    var _user$session;
+
+    login({
+      user: user,
+      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+    });
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CardContainer, {
@@ -180,7 +235,63 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   }, customText)), !useCustomFunctionality && showAddButton && !isSkeleton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary"
-  }, t('ADD', 'Add'))));
+  }, t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: isModalOpen,
+    onRemove: function onRemove() {
+      return closeAuthModal();
+    },
+    onClose: function onClose() {
+      return closeAuthModal();
+    },
+    width: "50%",
+    authModal: true
+  }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+    handleSuccessLogin: handleSuccessLogin,
+    elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'signup'
+        });
+      },
+      href: "#"
+    }, t('CREATE_ACCOUNT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.CREATE_ACCOUNT) || 'Create account')),
+    elementLinkToForgotPassword: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'forgotpassword'
+        });
+      },
+      href: "#"
+    }, t('RESET_PASSWORD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.RESET_PASSWORD) || 'Reset password')),
+    useLoginByCellphone: true,
+    isPopup: true
+  }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.LOGIN) || 'Login')),
+    useLoginByCellphone: true,
+    useChekoutFileds: true,
+    handleSuccessSignup: handleSuccessSignup,
+    isPopup: true,
+    closeModal: function closeModal() {
+      return closeAuthModal();
+    }
+  }), modalPageToShow === 'forgotpassword' && /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.LOGIN) || 'Login')),
+    isPopup: true
+  })));
 };
 
 var SingleProductCard = function SingleProductCard(props) {

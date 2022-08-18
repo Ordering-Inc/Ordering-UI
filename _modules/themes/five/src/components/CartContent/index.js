@@ -82,7 +82,7 @@ var CartContent = function CartContent(props) {
       isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
       cart: cart,
       isCartPopover: isCartPopover,
-      isCheckout: window.location.pathname === "/checkout/".concat(cart === null || cart === void 0 ? void 0 : cart.uuid),
+      isCheckout: window.location.pathname === "/checkout/".concat(cart === null || cart === void 0 ? void 0 : cart.uuid) && !isCartPopover,
       isForceOpenCart: isForceOpenCart,
       currentCartUuid: currentCartUuid,
       isProducts: cart.products.length,

@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperRightContainer = exports.WrapperLeftContainer = exports.WrapperDriver = exports.WrapperContainer = exports.TitleContainer = exports.StatusBar = exports.SkeletonWrapper = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.ShareOrder = exports.SectionTitleContainer = exports.SectionTitle = exports.ReviewWrapper = exports.ReviewOrderLink = exports.ReOrder = exports.PlaceSpotSection = exports.PhotoBlock = exports.OrderProducts = exports.OrderPreferences = exports.OrderInfo = exports.OrderHistoryContainer = exports.OrderDriver = exports.OrderCustomer = exports.OrderBusiness = exports.OrderBill = exports.OrderActions = exports.NewOrder = exports.MyOrderActions = exports.MessagesIcon = exports.Map = exports.LinkWrapper = exports.HistoryItemWrapper = exports.HeaderTitle = exports.HeaderInfo = exports.ExclamationWrapper = exports.Exclamation = exports.Divider = exports.DetailWrapper = exports.Content = exports.Container = exports.CommentContainer = exports.ButtonWrapper = exports.BusinessWrapper = exports.BusinessTitle = exports.BusinessInfo = exports.BtsOrderStatus = exports.ActionsBlock = void 0;
+exports.WrapperRightContainer = exports.WrapperLeftContainer = exports.WrapperDriver = exports.WrapperContainer = exports.TitleContainer = exports.StatusBar = exports.SkeletonWrapper = exports.SkeletonBlockWrapp = exports.SkeletonBlock = exports.ShareOrder = exports.SectionTitleContainer = exports.SectionTitle = exports.ReviewWrapper = exports.ReviewOrderLink = exports.ReOrder = exports.PlaceSpotSection = exports.PhotoBlock = exports.OrderProducts = exports.OrderPreferences = exports.OrderInfo = exports.OrderHistoryContainer = exports.OrderDriver = exports.OrderCustomer = exports.OrderBusiness = exports.OrderBill = exports.OrderActions = exports.NewOrder = exports.MyOrderActions = exports.MessagesIcon = exports.MapWrapper = exports.Map = exports.LinkWrapper = exports.HistoryItemWrapper = exports.HeaderTitle = exports.HeaderInfo = exports.ExclamationWrapper = exports.Exclamation = exports.Divider = exports.DetailWrapper = exports.Content = exports.Container = exports.CommentContainer = exports.ButtonWrapper = exports.BusinessWrapper = exports.BusinessTitle = exports.BusinessInfo = exports.BusinessExternalWrapper = exports.BtsOrderStatus = exports.ActionsBlock = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -43,7 +43,7 @@ var Content = _styledComponents.default.div(_templateObject5 || (_templateObject
 
 exports.Content = Content;
 
-var OrderBusiness = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  box-sizing: border-box;\n  width: 100%;\n  flex-direction: row;\n  align-items: flex-start;\n  border-radius: 7.6px;\n  padding: 20px;\n  margin-bottom: 20px;\n  box-shadow: 0px 4px 10px 0px #0000001F;\n"])));
+var OrderBusiness = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  box-sizing: border-box;\n  width: 100%;\n  flex-direction: column;\n  align-items: flex-start;\n  border-radius: 7.6px;\n  padding: 20px;\n  margin-bottom: 20px;\n  box-shadow: 0px 4px 10px 0px #0000001F;\n\n  @media (min-width: 769px) {\n    flex-direction: row;\n  }\n"])));
 
 exports.OrderBusiness = OrderBusiness;
 
@@ -222,7 +222,7 @@ var TitleContainer = _styledComponents.default.div(_templateObject46 || (_templa
 
 exports.TitleContainer = TitleContainer;
 
-var ReOrder = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  margin-bottom: 20px;\n\n  button {\n    padding: 5px 16px;\n    min-width: unset;\n  }\n"])));
+var ReOrder = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 20px;\n  margin-bottom: 20px;\n\n  button {\n    padding: 5px 16px;\n    min-width: unset;\n    margin: 0px 5px;\n  }\n"])));
 
 exports.ReOrder = ReOrder;
 
@@ -267,3 +267,11 @@ var ButtonWrapper = _styledComponents.default.div(_templateObject57 || (_templat
 });
 
 exports.ButtonWrapper = ButtonWrapper;
+
+var MapWrapper = _styledComponents.default.div(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 20px;\n\n  @media (min-width: 769px) {\n    width: 50%;\n    margin-top: 0px;\n  }\n"])));
+
+exports.MapWrapper = MapWrapper;
+
+var BusinessExternalWrapper = _styledComponents.default.div(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n\n  @media (min-width: 769px) {\n    width: 50%;\n  }\n"])));
+
+exports.BusinessExternalWrapper = BusinessExternalWrapper;

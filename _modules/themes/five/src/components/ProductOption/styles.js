@@ -21,7 +21,7 @@ var WrapHeader = _styledComponents.default.div(_templateObject2 || (_templateObj
 
 exports.WrapHeader = WrapHeader;
 
-var TitleContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  width: 70%;\n  display: flex;\n  align-items: center;  \n\n  *:first-child {\n    margin-right: 8px;\n  }\n"])));
+var TitleContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  width: 60%;\n  display: flex;\n  align-items: center;  \n\n  *:first-child {\n    margin-right: 8px;\n  }\n\n  @media (min-width: 576px) {\n    width: 70%;\n  }\n"])));
 
 exports.TitleContainer = TitleContainer;
 

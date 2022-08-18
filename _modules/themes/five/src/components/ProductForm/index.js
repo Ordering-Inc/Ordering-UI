@@ -19,6 +19,8 @@ var _MdcPlayCircleOutline = _interopRequireDefault(require("@meronex/icons/mdc/M
 
 var _LinkableText = require("../LinkableText");
 
+var _AutoScroll = require("../AutoScroll");
+
 var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../../../../utils");
@@ -285,7 +287,15 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   };
 
   var handleChangeTabValue = function handleChangeTabValue(value) {
-    setTabValue(value);
+    if (document.getElementById("".concat(value))) {
+      var extraHeight = windowSize.width < 769 ? 80 : 55;
+      var top = value === 'all' ? 0 : document.getElementById("".concat(value)).offsetTop - extraHeight;
+      var scrollElement = document.querySelector('.popup-dialog');
+      scrollElement.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      });
+    }
   };
 
   var handleSwitchQtyUnit = function handleSwitchQtyUnit(val) {
@@ -316,7 +326,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   var scrollDown = function scrollDown() {
     var _document$getElements;
 
-    var _adjustHeight = 120;
+    var adjustHeight = (windowSize === null || windowSize === void 0 ? void 0 : windowSize.width) > 768 ? 90 : 100;
     var isErrors = Object.values(errors).length > 0;
 
     if (!isErrors) {
@@ -327,8 +337,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     var unselectedFirstSubOption = (_document$getElements = document.getElementsByClassName('error')) === null || _document$getElements === void 0 ? void 0 : _document$getElements[0];
 
     if (unselectedFirstSubOption) {
-      unselectedFirstSubOption.scrollIntoView();
-      productContainer.scrollTop -= _adjustHeight;
+      var top = unselectedFirstSubOption.offsetTop;
+      productContainer.scrollTo({
+        top: top - adjustHeight,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -351,16 +364,58 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
   }, [errors]);
   (0, _react.useEffect)(function () {
-    if (document.getElementById("".concat(tabValue))) {
-      var extraHeight = windowSize.width < 769 ? 100 : 100;
-      var top = tabValue === 'all' ? 0 : document.getElementById("".concat(tabValue)).offsetTop - extraHeight;
-      var scrollElement = document.querySelector('.popup-dialog');
-      scrollElement.scrollTo({
-        top: top,
-        behavior: 'smooth'
-      });
-    }
-  }, [tabValue]);
+    var scrollElement = document.querySelector('.popup-dialog');
+
+    var handleScroll = function handleScroll() {
+      if ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || (product === null || product === void 0 ? void 0 : product.extras.length) > 0) {
+        var _product$ingredients, _product$extras;
+
+        var adjustHeight = (windowSize === null || windowSize === void 0 ? void 0 : windowSize.width) > 768 ? 55 : 80;
+        var menuList = ['all'];
+        if ((product === null || product === void 0 ? void 0 : (_product$ingredients = product.ingredients) === null || _product$ingredients === void 0 ? void 0 : _product$ingredients.length) > 0) menuList.push('ingredients');
+        (product === null || product === void 0 ? void 0 : (_product$extras = product.extras) === null || _product$extras === void 0 ? void 0 : _product$extras.length) > 0 && product.extras.sort(function (a, b) {
+          return a.rank - b.rank;
+        }).forEach(function (extra) {
+          var _extra$options;
+
+          ((_extra$options = extra.options) === null || _extra$options === void 0 ? void 0 : _extra$options.length) > 0 && extra.options.sort(function (a, b) {
+            return a.rank - b.rank;
+          }).forEach(function (option) {
+            menuList.push("id_".concat(option === null || option === void 0 ? void 0 : option.id));
+          });
+        });
+        menuList.forEach(function (menu) {
+          var elementTop = scrollElement.scrollTop;
+          var topPos = document.getElementById(menu).offsetTop;
+
+          if (elementTop >= topPos - adjustHeight) {
+            setTabValue(menu);
+            var elementLeft = document.getElementById("menu_".concat(menu)).offsetLeft;
+            var scrollLeft = document.getElementById('all').scrollLeft;
+
+            if (elementLeft < scrollLeft) {
+              document.getElementById('all').scrollTo({
+                left: elementLeft,
+                behavior: 'smooth'
+              });
+            }
+
+            if (elementLeft < scrollLeft + scrollElement.clientWidth) {
+              document.getElementById('all').scrollTo({
+                left: elementLeft - scrollElement.clientWidth / 2,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      }
+    };
+
+    scrollElement && scrollElement.addEventListener('scroll', handleScroll);
+    return function () {
+      return scrollElement && scrollElement.removeEventListener('scroll', handleScroll);
+    };
+  }, [windowSize === null || windowSize === void 0 ? void 0 : windowSize.width]);
   (0, _react.useEffect)(function () {
     var _theme$images, _theme$images$dummies, _product$gallery;
 
@@ -481,6 +536,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     spaceBetween: 10,
     navigation: true,
     watchOverflow: true,
+    observer: true,
+    observeParents: true,
+    parallax: true,
     thumbs: {
       swiper: thumbsSwiper
     },
@@ -535,7 +593,10 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     freeMode: true,
     watchSlidesProgress: true,
     className: "product-thumb",
-    watchOverflow: true
+    watchOverflow: true,
+    observer: true,
+    observeParents: true,
+    parallax: true
   }, gallery.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: i
@@ -567,10 +628,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }), /*#__PURE__*/_react.default.createElement("span", null, tag.name));
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || (product === null || product === void 0 ? void 0 : product.extras.length) > 0) && /*#__PURE__*/_react.default.createElement(_styles.ProductTabContainer, {
     id: "all"
-  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
-    variant: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+    scrollId: "optionList"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     key: "all",
+    id: "menu_all",
     active: tabValue === 'all',
     onClick: function onClick() {
       return handleChangeTabValue('all');
@@ -578,19 +640,29 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     borderBottom: true
   }, t('ALL', 'All')), (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     key: "ingredients",
+    id: "menu_ingredients",
     active: tabValue === 'ingredients',
     onClick: function onClick() {
       return handleChangeTabValue('ingredients');
     },
     borderBottom: true
-  }, t('INGREDIENTS', 'ingredients')), (product === null || product === void 0 ? void 0 : product.extras.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
-    key: "extra",
-    active: tabValue === 'extra',
-    onClick: function onClick() {
-      return handleChangeTabValue('extra');
-    },
-    borderBottom: true
-  }, t('EXTRA', 'Extra')))), /*#__PURE__*/_react.default.createElement("div", {
+  }, t('INGREDIENTS', 'ingredients')), product === null || product === void 0 ? void 0 : product.extras.sort(function (a, b) {
+    return a.rank - b.rank;
+  }).map(function (extra) {
+    return extra.options.sort(function (a, b) {
+      return a.rank - b.rank;
+    }).map(function (option) {
+      return showOption(option) && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+        key: option === null || option === void 0 ? void 0 : option.id,
+        id: "menu_id_".concat(option === null || option === void 0 ? void 0 : option.id),
+        active: tabValue === "id_".concat(option === null || option === void 0 ? void 0 : option.id),
+        onClick: function onClick() {
+          return handleChangeTabValue("id_".concat(option === null || option === void 0 ? void 0 : option.id));
+        },
+        borderBottom: true
+      }, option === null || option === void 0 ? void 0 : option.name);
+    });
+  })))), /*#__PURE__*/_react.default.createElement("div", {
     id: "ingredients"
   }, (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.INGREDIENTS) || 'Ingredients')), /*#__PURE__*/_react.default.createElement(_styles.WrapperIngredients, {
     isProductSoldout: isSoldOut || maxProductQuantity <= 0
@@ -602,9 +674,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       onChange: handleChangeIngredientState,
       isSoldOut: isSoldOut
     });
-  }))), /*#__PURE__*/_react.default.createElement("div", {
-    id: "extra"
-  }, product === null || product === void 0 ? void 0 : product.extras.sort(function (a, b) {
+  }))), /*#__PURE__*/_react.default.createElement("div", null, product === null || product === void 0 ? void 0 : product.extras.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (extra) {
     return extra.options.sort(function (a, b) {
@@ -613,7 +683,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
         key: option === null || option === void 0 ? void 0 : option.id,
-        id: "".concat(option === null || option === void 0 ? void 0 : option.name, "_").concat(option === null || option === void 0 ? void 0 : option.id)
+        id: "id_".concat(option === null || option === void 0 ? void 0 : option.id)
       }, showOption(option) && /*#__PURE__*/_react.default.createElement(_ProductOption.ProductOption, {
         option: option,
         currentState: currentState,

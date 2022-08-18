@@ -68,6 +68,7 @@ var SearchProducts = function SearchProducts(props) {
 
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
+    document.body.style.overflowY = 'auto';
   };
 
   (0, _react.useEffect)(function () {
