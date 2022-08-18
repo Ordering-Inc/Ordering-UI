@@ -90,7 +90,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _businessesList$busin, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _theme$images2, _theme$images2$genera, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus2, _orderState$options3, _orderState$options3$, _configs$advanced_bus3, _orderState$options4, _orderState$options4$, _businessesList$busin6, _businessesList$busin7, _orderState$options7, _citiesState$cities4, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _businessesList$busin, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _theme$images2, _theme$images2$genera, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _orderState$options5, _orderState$options5$, _businessesList$busin6, _businessesList$busin7, _orderState$options8, _citiesState$cities4, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -278,6 +278,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }));
   };
 
+  var handleChangeCity = function handleChangeCity(cityId) {
+    var _orderState$options2;
+
+    changeCityFilter(cityId === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.city_id) ? null : cityId);
+  };
+
   (0, _react.useEffect)(function () {
     if (preorderBusiness) setIsPreorder(true);
   }, [preorderBusiness]);
@@ -376,10 +382,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isCustomLayout: isCustomLayout,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch,
-    handleCustomEnter: function handleCustomEnter(term) {
-      var _configs$advanced_bus;
-
-      return (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' && onRedirectPage({
+    handleCustomEnter: function handleCustomEnter() {
+      return onRedirectPage({
         page: 'business_search'
       });
     }
@@ -387,10 +391,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     color: "primary",
     onClick: handleOpenCities
   }, (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities3 = citiesState.cities) === null || _citiesState$cities3 === void 0 ? void 0 : (_citiesState$cities3$ = _citiesState$cities3.find(function (city) {
-    var _orderState$options2;
+    var _orderState$options3;
 
-    return (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.city_id);
-  })) === null || _citiesState$cities3$ === void 0 ? void 0 : _citiesState$cities3$.name) || t('SELECT_A_CITY', 'Select a city')), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus2 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus2 === void 0 ? void 0 : _configs$advanced_bus2.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
+    return (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.city_id);
+  })) === null || _citiesState$cities3$ === void 0 ? void 0 : _citiesState$cities3$.name) || t('SELECT_A_CITY', 'Select a city')), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
     onClick: function onClick() {
       return onRedirectPage({
         page: 'business_search'
@@ -400,7 +404,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: toggleMap
   })), activeMap && /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
-    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location,
+    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location,
     setErrors: setMapErrors
   })), hasHighRatedBusiness && !props.franchiseId && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
     handleClickAddress: handleClickAddress,
@@ -425,7 +429,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isCustomLayout: isCustomLayout,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus3 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus3 === void 0 ? void 0 : _configs$advanced_bus3.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus2 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus2 === void 0 ? void 0 : _configs$advanced_bus2.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
     onClick: function onClick() {
       return onRedirectPage({
         page: 'business_search'
@@ -435,7 +439,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: toggleMap
   }))), isCustomerMode && activeMap && /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
-    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location,
+    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.location,
     setErrors: setMapErrors
   }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(OrdersSection, null), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && isCustomerMode && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin6 = businessesList.businesses) === null || _businessesList$busin6 === void 0 ? void 0 : _businessesList$busin6.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
@@ -449,7 +453,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       height: '44px'
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin7 = businessesList.businesses) === null || _businessesList$busin7 === void 0 ? void 0 : _businessesList$busin7.map(function (business) {
-    var _orderState$options5, _business$reviews;
+    var _orderState$options6, _business$reviews;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
@@ -457,7 +461,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       business: business,
       isBusinessOpen: business.open,
       handleCustomClick: handleBusinessClick,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type,
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.type,
       isCustomLayout: isCustomLayout,
       isCustomerMode: isCustomerMode,
       onPreorderBusiness: setPreorderBusiness,
@@ -475,14 +479,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       setFavoriteIds: setFavoriteIds
     });
   }), businessesList.loading && _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.nextPageItems) > 4 ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
-    var _orderState$options6;
+    var _orderState$options7;
 
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.type
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.type
     });
   }), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
@@ -508,7 +512,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
@@ -562,16 +566,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       marginBottom: '10px'
     }
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities4 = citiesState.cities) === null || _citiesState$cities4 === void 0 ? void 0 : _citiesState$cities4.map(function (city) {
-    var _orderState$options8;
+    var _orderState$options9;
 
     return /*#__PURE__*/_react.default.createElement(_styles.CityItem, {
       key: city === null || city === void 0 ? void 0 : city.id,
       onClick: function onClick() {
-        return changeCityFilter(city === null || city === void 0 ? void 0 : city.id);
+        return handleChangeCity(city === null || city === void 0 ? void 0 : city.id);
       }
     }, /*#__PURE__*/_react.default.createElement("span", {
       className: "radio"
-    }, (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.city_id) ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, {
+    }, (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.city_id) ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, {
       className: "city-checked"
     }) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), city === null || city === void 0 ? void 0 : city.name);
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
