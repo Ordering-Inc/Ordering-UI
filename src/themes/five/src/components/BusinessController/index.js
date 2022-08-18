@@ -1,9 +1,13 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, useUtils, useOrder, useConfig, BusinessController as BusinessSingleCard } from 'ordering-components'
+import { useLanguage, useUtils, useOrder, useConfig, useSession, BusinessController as BusinessSingleCard } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { Alert } from '../Confirm'
+import { Modal } from '../Modal'
+import { LoginForm } from '../LoginForm'
+import { SignUpForm } from '../SignUpForm'
+import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { convertHoursToMinutes, shape } from '../../../../../utils'
 import { useIntersectionObserver } from '../../../../../hooks/useIntersectionObserver'
 
@@ -64,11 +68,14 @@ const BusinessControllerUI = (props) => {
   const [configState] = useConfig()
   const theme = useTheme()
   const [, t] = useLanguage()
+  const [{ auth }, { login }] = useSession()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
   const [$element, isObserved] = useIntersectionObserver()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalPageToShow, setModalPageToShow] = useState(null)
 
   const favoriteRef = useRef(null)
 
@@ -86,7 +93,35 @@ const BusinessControllerUI = (props) => {
   }
 
   const handleChangeFavorite = () => {
-    handleFavoriteBusiness && handleFavoriteBusiness(!business?.favorite)
+    if (auth) {
+      handleFavoriteBusiness && handleFavoriteBusiness(!business?.favorite)
+    } else {
+      setModalPageToShow('login')
+      setIsModalOpen(true)
+    }
+  }
+
+  const closeAuthModal = () => {
+    setIsModalOpen(false)
+    setModalPageToShow(null)
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) {
+      closeAuthModal()
+    }
+  }
+
+  const handleCustomModalClick = (e, { page }) => {
+    e.preventDefault()
+    setModalPageToShow(page)
+  }
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
   }
 
   const hasInformationLength = (business?.available_drivers?.length + business?.busy_drivers?.length + business?.active_orders?.length) > 0
@@ -257,6 +292,67 @@ const BusinessControllerUI = (props) => {
         onAccept={() => setAlertState({ open: false, content: [] })}
         closeOnBackdrop={false}
       />
+      <Modal
+        open={isModalOpen}
+        onRemove={() => closeAuthModal()}
+        onClose={() => closeAuthModal()}
+        width='50%'
+        authModal
+      >
+        {modalPageToShow === 'login' && (
+          <LoginForm
+            handleSuccessLogin={handleSuccessLogin}
+            elementLinkToSignup={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'signup' })
+                } href='#'
+              >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
+              </a>
+            }
+            elementLinkToForgotPassword={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                } href='#'
+              >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+              </a>
+            }
+            useLoginByCellphone
+            isPopup
+          />
+        )}
+        {modalPageToShow === 'signup' && (
+          <SignUpForm
+            elementLinkToLogin={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'login' })
+                } href='#'
+              >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+              </a>
+            }
+            useLoginByCellphone
+            useChekoutFileds
+            handleSuccessSignup={handleSuccessSignup}
+            isPopup
+            closeModal={() => closeAuthModal()}
+          />
+        )}
+        {modalPageToShow === 'forgotpassword' && (
+          <ForgotPasswordForm
+            elementLinkToLogin={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'login' })
+                } href='#'
+              >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+              </a>
+            }
+            isPopup
+          />
+        )}
+      </Modal>
     </>
   )
 }

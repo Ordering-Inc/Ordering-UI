@@ -20,12 +20,16 @@ export const TitleContainer = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  width: 70%;
+  width: 60%;
   display: flex;
   align-items: center;  
 
   *:first-child {
     margin-right: 8px;
+  }
+
+  @media (min-width: 576px) {
+    width: 70%;
   }
 `
 

@@ -4,6 +4,7 @@ import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
 import MdcPlayCircleOutline from '@meronex/icons/mdc/MdcPlayCircleOutline'
 import { LinkableText } from '../LinkableText'
+import { AutoScroll } from '../AutoScroll'
 
 import {
   ProductForm as ProductOptions,
@@ -176,7 +177,16 @@ const ProductOptionsUI = (props) => {
   }
 
   const handleChangeTabValue = (value) => {
-    setTabValue(value)
+    if (document.getElementById(`${value}`)) {
+      const extraHeight = windowSize.width < 769 ? 80 : 55
+      const top = (value === 'all') ? 0 : document.getElementById(`${value}`).offsetTop - extraHeight
+      const scrollElement = document.querySelector('.popup-dialog')
+
+      scrollElement.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      })
+    }
   }
 
   const handleSwitchQtyUnit = (val) => {
@@ -202,7 +212,7 @@ const ProductOptionsUI = (props) => {
   }
 
   const scrollDown = () => {
-    const _adjustHeight = 120
+    const adjustHeight = windowSize?.width > 768 ? 90 : 100
     const isErrors = Object.values(errors).length > 0
     if (!isErrors) {
       return
@@ -211,8 +221,11 @@ const ProductOptionsUI = (props) => {
     const unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
 
     if (unselectedFirstSubOption) {
-      unselectedFirstSubOption.scrollIntoView()
-      productContainer.scrollTop -= _adjustHeight
+      const top = unselectedFirstSubOption.offsetTop
+      productContainer.scrollTo({
+        top: top - adjustHeight,
+        behavior: 'smooth'
+      })
     }
   }
 
@@ -236,17 +249,44 @@ const ProductOptionsUI = (props) => {
   }, [errors])
 
   useEffect(() => {
-    if (document.getElementById(`${tabValue}`)) {
-      const extraHeight = windowSize.width < 769 ? 100 : 100
-      const top = (tabValue === 'all') ? 0 : document.getElementById(`${tabValue}`).offsetTop - extraHeight
-      const scrollElement = document.querySelector('.popup-dialog')
-
-      scrollElement.scrollTo({
-        top: top,
-        behavior: 'smooth'
-      })
+    const scrollElement = document.querySelector('.popup-dialog')
+    const handleScroll = () => {
+      if (product?.ingredients.length > 0 || product?.extras.length > 0) {
+        const adjustHeight = windowSize?.width > 768 ? 55 : 80
+        const menuList = ['all']
+        if (product?.ingredients?.length > 0) menuList.push('ingredients')
+        product?.extras?.length > 0 && product.extras.sort((a, b) => a.rank - b.rank).forEach(extra => {
+          extra.options?.length > 0 && extra.options.sort((a, b) => a.rank - b.rank).forEach(option => {
+            menuList.push(`id_${option?.id}`)
+          })
+        })
+        menuList.forEach(menu => {
+          const elementTop = scrollElement.scrollTop
+          const topPos = document.getElementById(menu).offsetTop
+          if (elementTop >= topPos - adjustHeight) {
+            setTabValue(menu)
+            const elementLeft = document.getElementById(`menu_${menu}`).offsetLeft
+            const scrollLeft = document.getElementById('all').scrollLeft
+            if (elementLeft < scrollLeft) {
+              document.getElementById('all').scrollTo({
+                left: elementLeft,
+                behavior: 'smooth'
+              })
+            }
+            if (elementLeft < scrollLeft + scrollElement.clientWidth) {
+              document.getElementById('all').scrollTo({
+                left: elementLeft - scrollElement.clientWidth / 2,
+                behavior: 'smooth'
+              })
+            }
+          }
+        })
+      }
     }
-  }, [tabValue])
+    scrollElement && scrollElement.addEventListener('scroll', handleScroll)
+
+    return () => scrollElement && scrollElement.removeEventListener('scroll', handleScroll)
+  }, [windowSize?.width])
 
   useEffect(() => {
     const imageList = []
@@ -346,6 +386,9 @@ const ProductOptionsUI = (props) => {
                 spaceBetween={10}
                 navigation
                 watchOverflow
+                observer
+                observeParents
+                parallax
                 thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
                 onSlideChange={() => handleSlideChange()}
               >
@@ -395,6 +438,9 @@ const ProductOptionsUI = (props) => {
                   watchSlidesProgress
                   className='product-thumb'
                   watchOverflow
+                  observer
+                  observeParents
+                  parallax
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
@@ -471,44 +517,52 @@ const ProductOptionsUI = (props) => {
               {
                 (product?.ingredients.length > 0 || product?.extras.length > 0) && (
                   <ProductTabContainer id='all'>
-                    <Tabs variant='primary'>
-                      <Tab
-                        key='all'
-                        active={tabValue === 'all'}
-                        onClick={() => handleChangeTabValue('all')}
-                        borderBottom
-                      >
-                        {t('ALL', 'All')}
-                      </Tab>
-                      {
-                        product?.ingredients.length > 0 && (
-                          <Tab
-                            key='ingredients'
-                            active={tabValue === 'ingredients'}
-                            onClick={() => handleChangeTabValue('ingredients')}
-                            borderBottom
-                          >
-                            {t('INGREDIENTS', 'ingredients')}
-                          </Tab>
-                        )
-                      }
-                      {
-                        product?.extras.length > 0 && (
-                          <Tab
-                            key='extra'
-                            active={tabValue === 'extra'}
-                            onClick={() => handleChangeTabValue('extra')}
-                            borderBottom
-                          >
-                            {t('EXTRA', 'Extra')}
-                          </Tab>
-                        )
-                      }
+                    <Tabs>
+                      <AutoScroll scrollId='optionList'>
+                        <Tab
+                          key='all'
+                          id='menu_all'
+                          active={tabValue === 'all'}
+                          onClick={() => handleChangeTabValue('all')}
+                          borderBottom
+                        >
+                          {t('ALL', 'All')}
+                        </Tab>
+                        {
+                          product?.ingredients.length > 0 && (
+                            <Tab
+                              key='ingredients'
+                              id='menu_ingredients'
+                              active={tabValue === 'ingredients'}
+                              onClick={() => handleChangeTabValue('ingredients')}
+                              borderBottom
+                            >
+                              {t('INGREDIENTS', 'ingredients')}
+                            </Tab>
+                          )
+                        }
+                        {
+                          product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
+                            return (
+                              showOption(option) && (
+                                <Tab
+                                  key={option?.id}
+                                  id={`menu_id_${option?.id}`}
+                                  active={tabValue === `id_${option?.id}`}
+                                  onClick={() => handleChangeTabValue(`id_${option?.id}`)}
+                                  borderBottom
+                                >
+                                  {option?.name}
+                                </Tab>
+                              )
+                            )
+                          }))
+                        }
+                      </AutoScroll>
                     </Tabs>
                   </ProductTabContainer>
                 )
               }
-
               <div id='ingredients'>
                 {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                 <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
@@ -523,12 +577,12 @@ const ProductOptionsUI = (props) => {
                   ))}
                 </WrapperIngredients>
               </div>
-              <div id='extra'>
+              <div>
                 {
                   product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                     const currentState = productCart.options[`id:${option?.id}`] || {}
                     return (
-                      <div key={option?.id} id={`${option?.name}_${option?.id}`}>
+                      <div key={option?.id} id={`id_${option?.id}`}>
                         {
                           showOption(option) && (
                             <ProductOption
