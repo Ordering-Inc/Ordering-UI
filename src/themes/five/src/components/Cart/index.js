@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig, useOrderingTheme } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig, useOrderingTheme, useSite } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
@@ -64,6 +64,7 @@ const CartUI = (props) => {
   const [orderingTheme] = useOrderingTheme()
   const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
+  const [{ site }] = useSite()
   const windowSize = useWindowSize()
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -74,6 +75,8 @@ const CartUI = (props) => {
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isUpselling, setIsUpselling] = useState(false)
   const [openChangeStore, setOpenChangeStore] = useState(false)
+
+  const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
@@ -122,7 +125,12 @@ const CartUI = (props) => {
   }
 
   const handleStoreRedirect = (slug) => {
-    events.emit('go_to_page', { page: 'business', params: { store: slug } })
+    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
+    } else {
+      events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}` })
+    }
+
     if (windowSize.width <= 768) {
       onClickCheckout && onClickCheckout()
     }

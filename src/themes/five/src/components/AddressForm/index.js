@@ -423,7 +423,7 @@ const AddressFormUI = (props) => {
                       mapControls={googleMapsControls}
                       handleChangeAddressMap={handleChangeAddress}
                       setErrors={setMapErrors}
-                      maxLimitLocation={maxLimitLocation}
+                      maxLimitLocation={parseInt(maxLimitLocation, 10)}
                     />
                   </WrapperMap>
                 )}

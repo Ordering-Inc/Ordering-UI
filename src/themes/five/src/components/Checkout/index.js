@@ -109,6 +109,7 @@ const CheckoutUI = (props) => {
   const [behalfName, setBehalfName] = useState(null)
   const [isOpen, setIsOpen] = useState(false)
   const [requiredFields, setRequiredFields] = useState([])
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
@@ -298,6 +299,7 @@ const CheckoutUI = (props) => {
                       isCustomerMode={isCustomerMode}
                       userData={isCustomerMode && customerState.user}
                       userId={isCustomerMode && customerState?.user?.id}
+                      isSuccess={isSuccess}
                       isCheckout
                     />
                   )}
@@ -536,6 +538,7 @@ const CheckoutUI = (props) => {
       <Modal
         open={isOpen}
         width='760px'
+        padding='30px'
         onClose={() => setIsOpen(false)}
       >
         <UserDetails
@@ -549,6 +552,7 @@ const CheckoutUI = (props) => {
           userData={isCustomerMode && customerState.user}
           userId={isCustomerMode && customerState?.user?.id}
           requiredFields={requiredFields}
+          setIsSuccess={setIsSuccess}
           isCheckout
           isEdit
           isModal
