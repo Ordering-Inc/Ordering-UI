@@ -23,6 +23,7 @@ var BusinessesListing = function BusinessesListing(props) {
 
   var layout = 'appointments'; // const layout = orderingTheme?.theme?.business_listing_view?.components?.layout?.type || 'original'
 
+  console.log(logosLayout, 'logosLayout');
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (layout === 'original' || logosLayout) && /*#__PURE__*/_react.default.createElement(_OriginalBusinessesListing.OriginalBusinessesListing, props), layout === 'starbucks' && !logosLayout && /*#__PURE__*/_react.default.createElement(_StarbucksBusinessesListing.StarbucksBusinessesListing, props), layout === 'red' && !logosLayout && /*#__PURE__*/_react.default.createElement(_RedBusinessesListing.RedBusinessesListing, props), layout === 'appointments' && !logosLayout && /*#__PURE__*/_react.default.createElement(_AppointmentsBusinessListing.BusinessListing, props));
 };
 

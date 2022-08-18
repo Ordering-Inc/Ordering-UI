@@ -10,6 +10,7 @@ export const BusinessesListing = (props) => {
   // const [orderingTheme] = useOrderingTheme()
   const layout = 'appointments'
   // const layout = orderingTheme?.theme?.business_listing_view?.components?.layout?.type || 'original'
+  console.log(logosLayout, 'logosLayout')
 
   return (
     <>
