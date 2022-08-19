@@ -153,7 +153,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     onClick: function onClick() {
       return setOpenBusinessInformation(true);
     }
-  })))))), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  })))))), !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.SEARCH_PRODUCTS) || 'Search Products'),
@@ -166,10 +166,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     onChange: function onChange(val) {
       return handleChangeSortBy && handleChangeSortBy(val);
     }
-  }))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 300,
-    height: 40
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     open: openBusinessInformation,
     onClose: setOpenBusinessInformation,

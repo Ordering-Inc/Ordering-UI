@@ -196,7 +196,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       customText: t('MORE', 'More'),
       customStyle: {
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+        boxShadow: 'rgba(0, 0, 0, 0.1) 0px 2px 8px'
       }
     }), (categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading) && i + 1 === _categories.length && _toConsumableArray(Array(categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$pagina = categoryState.pagination) === null || _categoryState$pagina === void 0 ? void 0 : _categoryState$pagina.nextPageItems).keys()).map(function (i) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
