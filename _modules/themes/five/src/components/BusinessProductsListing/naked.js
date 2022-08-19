@@ -1161,6 +1161,12 @@ var BusinessAndProductList = function BusinessAndProductList(props) {
     loadProducts();
   }, [slug]);
   (0, _react.useEffect)(function () {
+    console.log(!orderState.loading, '!orderState.loading');
+    console.log(orderOptions, 'orderOptions');
+    console.log(!languageState.loading, '!languageState.loading');
+    console.log(!props.avoidBusinessLoading, '!props.avoidBusinessLoading');
+    console.log(professionalSelected, 'professionalSelected');
+
     if (!orderState.loading && orderOptions && !languageState.loading && !props.avoidBusinessLoading) {
       getBusiness();
     }
@@ -1169,7 +1175,7 @@ var BusinessAndProductList = function BusinessAndProductList(props) {
     if (!orderState.loading && orderOptions && !languageState.loading && !businessState.loading && props.avoidBusinessLoading) {
       getBusiness();
     }
-  }, [orderOptions, languageState.loading, slug, filterByMenus, professionalSelected]);
+  }, [orderOptions, languageState.loading, slug, filterByMenus]);
   /**
    * getBusiness if orderState is loading the first time when is rendered
    */
