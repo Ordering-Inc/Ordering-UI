@@ -51,7 +51,7 @@ export const LastOrdersUI = (props) => {
                 <p>
                   <span>{t('TUTORIAL_ORDER_COMPLETED', 'Order Completed')} {('ON', 'on')} </span>
                   {order?.delivery_datetime_utc
-                    ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MMM DD, YY - hh:mm A' })
+                    ? parseDate(order?.delivery_datetime_utc)
                     : parseDate(order?.delivery_datetime, { utc: false })}
                 </p>
               )}

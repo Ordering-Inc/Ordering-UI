@@ -7,15 +7,10 @@ export const ReviewOrderContainer = styled.div`
   align-items: center;
   width: 100%;
 `
-export const ReviewStarWrapper = styled.div`
-  position: relative;
-  width: 100%;
-`
 export const StarWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
   
   > svg {
     cursor: pointer
@@ -100,9 +95,9 @@ export const WrapperBusinessLogo = styled.div`
 `
 
 export const ReviewsProgressWrapper = styled.div`
-  width: 100%;
   margin-top: 20px;
   margin-bottom: 20px;
+  padding: 0 10px;
   p {
     margin-top: 0;
     margin-bottom: 17px;

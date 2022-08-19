@@ -159,28 +159,22 @@ export const BusinessBasicInformation = (props) => {
               </BusinessInfoItem>
             </BusinessInfo>
           </BusinessContent>
-          {!isSkeleton ? (
-            <>
-              {(categoryState.products.length !== 0 || searchValue) && !errorQuantityProducts && (
-                <WrapperSearch>
-                  <SearchBar
-                    onSearch={handleChangeSearch}
-                    search={searchValue}
-                    placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
-                    lazyLoad={businessState?.business?.lazy_load_products_recommended}
-                  />
-                  <Select
-                    notAsync
-                    notReload
-                    options={sortByOptions}
-                    defaultValue={sortByValue}
-                    onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
-                  />
-                </WrapperSearch>
-              )}
-            </>
-          ) : (
-            <Skeleton width={300} height={40} />
+          {!errorQuantityProducts && (
+            <WrapperSearch>
+              <SearchBar
+                onSearch={handleChangeSearch}
+                search={searchValue}
+                placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
+                lazyLoad={businessState?.business?.lazy_load_products_recommended}
+              />
+              <Select
+                notAsync
+                notReload
+                options={sortByOptions}
+                defaultValue={sortByValue}
+                onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+              />
+            </WrapperSearch>
           )}
         </BusinessInnerContainer>
 

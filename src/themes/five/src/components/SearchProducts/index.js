@@ -31,8 +31,10 @@ export const SearchProducts = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
   const searchRef = useRef()
+
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
+    document.body.style.overflowY = 'auto'
   }
 
   useEffect(() => {
