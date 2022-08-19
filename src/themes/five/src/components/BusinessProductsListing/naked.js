@@ -732,7 +732,7 @@ export const BusinessAndProductList = (props) => {
     console.log(orderOptions, 'orderOptions')
     console.log(!languageState.loading, '!languageState.loading')
     console.log(!props.avoidBusinessLoading, '!props.avoidBusinessLoading')
-    console.log(professionalSelected, 'professionalSelected')
+    console.log(professionalSelected, 'professionalSelected______Prev__________________________')
 
     if (!orderState.loading && orderOptions && !languageState.loading && !props.avoidBusinessLoading) {
       getBusiness()
@@ -740,10 +740,15 @@ export const BusinessAndProductList = (props) => {
   }, [orderOptions, languageState.loading, slug, filterByMenus, professionalSelected])
 
   useEffect(() => {
+    console.log(!orderState.loading, '!orderState.loading')
+    console.log(orderOptions, 'orderOptions')
+    console.log(!languageState.loading, '!languageState.loading')
+    console.log(!props.avoidBusinessLoading, '!props.avoidBusinessLoading')
+    console.log(professionalSelected, 'professionalSelected______Next__________________________')
     if (!orderState.loading && orderOptions && !languageState.loading && !businessState.loading && props.avoidBusinessLoading) {
       getBusiness()
     }
-  }, [orderOptions, languageState.loading, slug, filterByMenus])
+  }, [orderOptions, languageState.loading, slug, filterByMenus, professionalSelected])
 
   /**
    * getBusiness if orderState is loading the first time when is rendered
