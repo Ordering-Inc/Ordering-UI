@@ -3,14 +3,12 @@ import { OriginalBusinessesListing } from './layouts/OriginalBusinessesListing'
 import { RedBusinessesListing } from './layouts/RedBusinessesListing'
 import { StarbucksBusinessesListing } from './layouts/StarbucksBusinessesListing'
 import { BusinessListing as AppointmentsBusinessListing } from './layouts/AppointmentsBusinessListing'
-// import { useOrderingTheme } from 'ordering-components'
+import { useOrderingTheme } from 'ordering-components'
 
 export const BusinessesListing = (props) => {
   const { logosLayout } = props
-  // const [orderingTheme] = useOrderingTheme()
-  const layout = 'appointments'
-  // const layout = orderingTheme?.theme?.business_listing_view?.components?.layout?.type || 'original'
-  console.log(logosLayout, 'logosLayout')
+  const [orderingTheme] = useOrderingTheme()
+  const layout = orderingTheme?.theme?.business_listing_view?.components?.layout?.type || 'original'
 
   return (
     <>

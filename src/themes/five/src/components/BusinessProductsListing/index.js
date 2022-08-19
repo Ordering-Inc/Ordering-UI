@@ -7,7 +7,7 @@ import {
   Cart3
 } from 'react-bootstrap-icons'
 import {
-  BusinessAndProductList,
+  // BusinessAndProductList,
   useEvent,
   useLanguage,
   useOrder,
@@ -16,6 +16,7 @@ import {
   useSite,
   useOrderingTheme
 } from 'ordering-components'
+import { BusinessAndProductList } from './naked'
 
 import {
   ProductsContainer,

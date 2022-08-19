@@ -36,6 +36,7 @@ import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
 import { HelmetTags } from './components/HelmetTags'
 import settings from './config.json'
+import { BusinessListingSearch } from './pages/BusinessListingSearch'
 
 export const App = () => {
   const [{ auth, user, loading }, { login }] = useSession()
@@ -215,9 +216,9 @@ export const App = () => {
                       ? (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
                       : <Redirect to='/login' />}
                   </Route>
-                  <Route exact path='/profile/orders'>
+                  <Route exact path='/business_search'>
                     {auth
-                      ? (<MyOrders />)
+                      ? (<BusinessListingSearch />)
                       : <Redirect to='/login' />}
                   </Route>
                   <Route exact path='/search'>

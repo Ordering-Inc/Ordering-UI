@@ -21,6 +21,8 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _orderingComponents = require("ordering-components");
 
+var _naked = require("./naked");
+
 var _styles = require("./styles");
 
 var _NotFoundSource = require("../NotFoundSource");
@@ -575,7 +577,7 @@ var BusinessProductsListing = function BusinessProductsListing(props) {
     }
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessAndProductList, businessProductslistingProps);
+  return /*#__PURE__*/_react.default.createElement(_naked.BusinessAndProductList, businessProductslistingProps);
 };
 
 exports.BusinessProductsListing = BusinessProductsListing;
