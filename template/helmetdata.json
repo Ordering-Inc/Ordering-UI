@@ -13,13 +13,6 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "business_search": {
-    "title": "Business Search",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "index, follow",
-    "canonicalUrl": ""
-  },
   "login": {
     "title": "Login",
     "description": "a dummy description about this page",
