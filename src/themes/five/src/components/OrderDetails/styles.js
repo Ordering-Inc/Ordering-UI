@@ -56,12 +56,16 @@ export const OrderBusiness = styled.div`
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   border-radius: 7.6px;
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0px 4px 10px 0px #0000001F;
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+  }
 `
 
 export const BusinessWrapper = styled.div`
@@ -562,12 +566,15 @@ export const TitleContainer = styled.div`
 `
 
 export const ReOrder = styled.div`
+  display: flex;
+  align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
 
   button {
     padding: 5px 16px;
     min-width: unset;
+    margin: 0px 5px;
   }
 `
 
@@ -653,5 +660,25 @@ export const ButtonWrapper = styled.div`
         transform: rotate(180deg);
       `}
     }
+  }
+`
+
+export const MapWrapper = styled.div`
+  width: 100%;
+  margin-top: 20px;
+
+  @media (min-width: 769px) {
+    width: 50%;
+    margin-top: 0px;
+  }
+`
+
+export const BusinessExternalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: 769px) {
+    width: 50%;
   }
 `

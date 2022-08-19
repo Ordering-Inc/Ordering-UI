@@ -64,6 +64,7 @@ export const Divider = styled.div`
 
 export const ScheduleWrapper = styled.div`
   margin-top: 30px;
+  margin-bottom: 15px;
 
   > div {
     padding: 0px;

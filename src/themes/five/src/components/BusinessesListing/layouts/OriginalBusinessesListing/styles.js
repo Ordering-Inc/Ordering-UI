@@ -147,6 +147,7 @@ export const CityItem = styled.div`
   align-items: center;
   padding: 15px 0px;
   border-top: 1px solid #E9ECEF;
+  cursor: pointer;
   span {
     margin-right: 15px;
   }

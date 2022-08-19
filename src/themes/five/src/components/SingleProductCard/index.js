@@ -1,10 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useConfig, useOrder, useUtils, SingleProductCard as SingleProductCardController } from 'ordering-components'
+import { useLanguage, useConfig, useOrder, useUtils, useSession, SingleProductCard as SingleProductCardController } from 'ordering-components'
 import { shape } from '../../../../../utils'
 import { useIntersectionObserver } from '../../../../../hooks/useIntersectionObserver'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
+import { Modal } from '../Modal'
+import { LoginForm } from '../LoginForm'
+import { SignUpForm } from '../SignUpForm'
+import { ForgotPasswordForm } from '../ForgotPasswordForm'
 
 import {
   CardContainer,
@@ -41,8 +45,12 @@ const SingleProductCardUI = (props) => {
   const [stateConfig] = useConfig()
   const [{ parsePrice, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
+  const [{ auth }, { login }] = useSession()
   const theme = useTheme()
   const favoriteRef = useRef(null)
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalPageToShow, setModalPageToShow] = useState(null)
 
   const editMode = typeof product?.code !== 'undefined'
   const isObservedValidation = isObserved || useKioskApp
@@ -76,9 +84,37 @@ const SingleProductCardUI = (props) => {
   }
 
   const handleChangeFavorite = () => {
-    handleFavoriteProduct && handleFavoriteProduct(!product?.favorite)
+    if (auth) {
+      handleFavoriteProduct && handleFavoriteProduct(!product?.favorite)
+    } else {
+      setModalPageToShow('login')
+      setIsModalOpen(true)
+    }
   }
-  console.log(productsRows)
+
+  const closeAuthModal = () => {
+    setIsModalOpen(false)
+    setModalPageToShow(null)
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) {
+      closeAuthModal()
+    }
+  }
+
+  const handleCustomModalClick = (e, { page }) => {
+    e.preventDefault()
+    setModalPageToShow(page)
+  }
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+  }
+
   return (
     <>
       <CardContainer
@@ -156,6 +192,67 @@ const SingleProductCardUI = (props) => {
           </Button>
         )}
       </CardContainer>
+      <Modal
+        open={isModalOpen}
+        onRemove={() => closeAuthModal()}
+        onClose={() => closeAuthModal()}
+        width='50%'
+        authModal
+      >
+        {modalPageToShow === 'login' && (
+          <LoginForm
+            handleSuccessLogin={handleSuccessLogin}
+            elementLinkToSignup={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'signup' })
+                } href='#'
+              >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
+              </a>
+            }
+            elementLinkToForgotPassword={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                } href='#'
+              >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+              </a>
+            }
+            useLoginByCellphone
+            isPopup
+          />
+        )}
+        {modalPageToShow === 'signup' && (
+          <SignUpForm
+            elementLinkToLogin={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'login' })
+                } href='#'
+              >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+              </a>
+            }
+            useLoginByCellphone
+            useChekoutFileds
+            handleSuccessSignup={handleSuccessSignup}
+            isPopup
+            closeModal={() => closeAuthModal()}
+          />
+        )}
+        {modalPageToShow === 'forgotpassword' && (
+          <ForgotPasswordForm
+            elementLinkToLogin={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'login' })
+                } href='#'
+              >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+              </a>
+            }
+            isPopup
+          />
+        )}
+      </Modal>
     </>
   )
 }

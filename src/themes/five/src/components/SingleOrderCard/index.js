@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useUtils, useConfig, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
+import { useLanguage, useUtils, useConfig, useOrder, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { ReviewOrder } from '../ReviewOrder'
 import { ReviewProduct } from '../ReviewProduct'
@@ -11,6 +11,7 @@ import BsDot from '@meronex/icons/bs/BsDot'
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../Modal'
+import { Confirm } from '../Confirm'
 import {
   Container,
   Content,
@@ -41,22 +42,26 @@ const SingleOrderCardUI = (props) => {
     isCustomerMode,
     handleFavoriteOrder,
     isSkeleton,
-    isFavorite
+    isFavorite,
+    handleRemoveCart,
+    cartState
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [{ carts }] = useOrder()
   const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
   const [{ configs }] = useConfig()
   const [orderingTheme] = useOrderingTheme()
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
   const [isProductReviewed, setIsProductReviewed] = useState(false)
   const [isDriverReviewed, setIsDriverReviewed] = useState(false)
 
   const handleClickCard = (e, uuid) => {
-    if (e.target.closest('.favorite') || e.target.closest('.review')) return
+    if (e.target.closest('.favorite') || e.target.closest('.review') || e.target.closest('.reorder')) return
 
     if (customArray) {
       onRedirectPage({ page: 'checkout', params: { cartUuid: uuid } })
@@ -100,6 +105,26 @@ const SingleOrderCardUI = (props) => {
 
   const handleChangeFavorite = (order) => {
     handleFavoriteOrder && handleFavoriteOrder(!order?.favorite)
+  }
+
+  const handleClickReorder = (order) => {
+    if (carts[`businessId:${order?.business_id}`] && carts[`businessId:${order?.business_id}`]?.products?.length > 0) {
+      setConfirm({
+        open: true,
+        content: t('QUESTION_DELETE_PRODUCTS_FROM_CART', 'Are you sure that you want to delete all products from cart?'),
+        handleOnAccept: async () => {
+          handleRemoveCart()
+          setConfirm({ ...confirm, open: false })
+        }
+      })
+    } else {
+      handleReorder(order.id)
+    }
+  }
+
+  const handleOriginalReorder = () => {
+    setConfirm({ ...confirm, open: false })
+    handleReorder(order.id)
   }
 
   const showBusinessLogo = !orderingTheme?.theme?.orders?.components?.business_logo?.hidden
@@ -225,8 +250,8 @@ const SingleOrderCardUI = (props) => {
                 </Button>
               )}
               {order.cart && (
-                <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
-                  {t('REORDER', 'Reorder')}
+                <Button color='primary' className='reorder' outline onClick={() => handleClickReorder(order)}>
+                  {cartState?.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
                 </Button>
               )}
             </ButtonWrapper>
@@ -246,7 +271,7 @@ const SingleOrderCardUI = (props) => {
           onClose={handleCloseReivew}
           title={order
             ? (reviewStatus?.order
-              ? t('HEY', 'Hey! ') + t('HOW_WAS_YOUR_ORDER', 'How was your order?')
+              ? t('REVIEW_ORDER', 'Review order')
               : (reviewStatus?.product
                 ? t('REVIEW_PRODUCT', 'Review Product')
                 : t('REVIEW_DRIVER', 'Review Driver')))
@@ -255,7 +280,7 @@ const SingleOrderCardUI = (props) => {
           <ReviewWrapper>
             {
               reviewStatus?.order
-                ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} skipReview={handleCloseReivew} setIsReviewed={setIsOrderReviewed} />
+                ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
                 : (reviewStatus?.product
                   ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
                   : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
@@ -264,6 +289,16 @@ const SingleOrderCardUI = (props) => {
 
         </Modal>
       )}
+      <Confirm
+        title={t('ORDER', 'Order')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => handleOriginalReorder()}
+        onCancel={() => handleOriginalReorder()}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
