@@ -26,7 +26,6 @@ export const ListenPageChanges = ({ children }) => {
     checkout_list: '/checkout',
     business: '/store/:store',
     business_slug: '/:store',
-    business_search: '/business_search',
     forgot_password: '/password/forgot',
     reset_password: '/password/reset',
     help: '/help'
