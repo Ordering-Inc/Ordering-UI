@@ -100,6 +100,8 @@ export const Header = (props) => {
   const cartAlwaysShowed = theme?.layouts?.header?.components?.cart?.components?.open_strategy?.alwaysShowed
   const showAddressForm = !theme?.layouts?.header?.components?.address_form?.hidden
   const showOrderTypes = !theme?.layouts?.header?.components?.order_types?.hidden
+  const showMoment = !theme?.layouts?.header?.components?.moment?.hidden
+  const showOrderOptionsByTheme = showMoment || showOrderTypes || showAddressForm
 
   const handleSuccessSignup = (user) => {
     login({
@@ -233,6 +235,9 @@ export const Header = (props) => {
             />
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
+              disabledResponsive={!!headerLogo}
+              imgW={windowSize.width <= 768 && headerLogo ? '95px' : null}
+              imgH={windowSize.width <= 768 && headerLogo ? '21px' : null}
             >
               <img alt='Logotype' width='170px' height='45px' src={headerLogo || theme?.images?.logos?.logotype} loading='lazy' />
               {!headerLogo && (
@@ -240,7 +245,7 @@ export const Header = (props) => {
               )}
             </LogoHeader>
           </LeftHeader>
-          {isShowOrderOptions && !props.isCustomLayout && (
+          {showOrderOptionsByTheme && isShowOrderOptions && !props.isCustomLayout && (
             <Menu className='left-header' isCustomerMode={isCustomerMode}>
               {windowSize.width > 820 && isFarAway && (
                 <FarAwayMessage>
@@ -248,7 +253,7 @@ export const Header = (props) => {
                   <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
                 </FarAwayMessage>
               )}
-              {isCustomerMode && (
+              {isCustomerMode && showAddressForm && (
                 <>
                   <AddressMenu
                     isCustomerMode={isCustomerMode}
@@ -285,7 +290,7 @@ export const Header = (props) => {
                       <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
                     </AddressMenu>
                   )}
-                  {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+                  {showMoment && !isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                     <MomentMenu
                       onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
                         ? null
@@ -418,7 +423,7 @@ export const Header = (props) => {
             </RightHeader>
           )}
         </InnerHeader>
-        {onlineStatus && isShowOrderOptions && !props.isCustomLayout && !isCustomerMode && (
+        {onlineStatus && showOrderOptionsByTheme && isShowOrderOptions && !props.isCustomLayout && !isCustomerMode && (
           windowSize.width > 768 && windowSize.width <= 820 ? (
             <SubMenu>
               {isFarAway && (
@@ -432,7 +437,7 @@ export const Header = (props) => {
               >
                 <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               </AddressMenu>
-              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+              {showMoment && !isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
                   variant='moment'
                   momentState={orderState?.options?.moment}
@@ -444,18 +449,22 @@ export const Header = (props) => {
             </SubMenu>
           ) : (
             <SubMenu>
-              {isFarAway && (
-                <FarAwayMessage>
-                  <TiWarningOutline />
-                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
-                </FarAwayMessage>
+              {showAddressForm && (
+                <>
+                  {isFarAway && (
+                    <FarAwayMessage>
+                      <TiWarningOutline />
+                      <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
+                    </FarAwayMessage>
+                  )}
+                  <HeaderOption
+                    variant='address'
+                    addressState={orderState?.options?.address?.address?.split(',')?.[0]}
+                    onClick={(variant) => openModal(variant)}
+                  />
+                </>
               )}
-              <HeaderOption
-                variant='address'
-                addressState={orderState?.options?.address?.address?.split(',')?.[0]}
-                onClick={(variant) => openModal(variant)}
-              />
-              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+              {showMoment && !isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
                   variant='moment'
                   momentState={orderState?.options?.moment}

@@ -3,7 +3,6 @@ import { darken } from 'polished'
 
 export const Button = styled.button`
   background: #CCC;
-  border: 1px solid #CCC;
   line-height: 30px;
   padding: 0 20px;
   font-size: 16px;
@@ -11,7 +10,9 @@ export const Button = styled.button`
   outline: none;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 125px;
   color: ${({ color }) => color || '#FFF'};
+  font-size: 14px;
   &:active {
     background: ${() => darken(0.07, '#CCC')};
   }
@@ -37,5 +38,67 @@ export const Button = styled.button`
         padding-left: 0
     `}
     }
+  `}
+  ${({ outline }) => outline && css`
+      background: transparent;
+      color: ${props => props.theme.colors.primaryContrast};
+      border-color: ${props => props.theme.colors.primaryContrast};
+      text-align: center;
+      &:active {
+        background: ${props => props.theme.colors.primaryContrast};
+        color: ${props => props.theme.colors.secundaryContrast};
+      }
+    `}
+
+  ${({ color }) => color === 'primary' && css`
+    background: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primaryContrast};
+    border-color: ${props => props.theme.colors.primary};
+    &:active {
+      background: ${props => darken(0.07, props.theme.colors.primary)};
+    }
+    ${({ outline }) => outline && css`
+      background: #FFF;
+      color: ${props => props.theme.colors.primary};
+      border-color: ${props => props.theme.colors.primary};
+      &:active {
+        color: ${props => props.theme.colors.primaryContrast};
+        background: ${props => props.theme.colors.primary};
+      }
+      &:hover {
+        background: ${props => darken(0.07, props.theme.colors.primary)};
+        color: #FFF;
+      }
+    `}
+    ${({ circle }) => circle && css`
+      background: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.primaryContrast};
+      border-color: ${props => props.theme.colors.primary};
+      padding: 0;
+      width: 34px;
+      height: 34px;
+      line-height: 34px;
+      text-align: center;
+      border-radius: 50%;
+      &:active {
+        border-color: ${props => darken(0.07, props.theme.colors.primary)};
+        background: ${props => darken(0.07, props.theme.colors.primary)};
+      }
+    `}
+    ${({ circle, outline }) => circle && outline && css`
+      background: #FFF;
+      color: ${props => props.theme.colors.primary};
+      border-color: ${props => props.theme.colors.primary};
+      padding: 0;
+      width: 34px;
+      height: 34px;
+      line-height: 34px;
+      text-align: center;
+      border-radius: 50%;
+      &:active {
+        border-color: ${props => props.theme.colors.primary};
+        background: ${props => props.theme.colors.primary};
+      }
+    `}
   `}
 `

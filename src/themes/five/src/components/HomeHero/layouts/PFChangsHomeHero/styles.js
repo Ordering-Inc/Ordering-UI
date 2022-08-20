@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components'
 
 export const HeroContainerStyled = styled.div`
   width: 100%;
-
+  box-sizing: border-box;
+  height: calc(100vh - 97px);
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
     background-size: cover;
@@ -75,15 +76,14 @@ export const WrapInput = styled.div`
   border: 1px solid #DEE2E6;
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-  border-radius: 50px;
   display: flex;
   align-items: center;
   margin-bottom: 27px;
+  margin-right: 10px;
 
   ${({ withIcon }) => withIcon && css`
-    width: calc(100% - 20px);
     box-sizing: border-box;
-
+    flex: 1;
     &::before {
       content: "";
       position: absolute;
@@ -130,6 +130,10 @@ export const ContentWrapper = styled.div`
 
 export const SearchLocationsContainer = styled.div`
   padding: 40px 20px 20px;
+  overflow: auto;
+  height: calc(100vh - 97px);
+  box-sizing: border-box;
+
   div {
     margin: 20px 0 0;
     p{
@@ -185,4 +189,30 @@ export const DeliveryPickupContainer = styled.div`
       
     `
   }
+`
+
+export const AddressInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  button {
+    height: 46px;
+    margin-left: 10px;
+  }
+`
+
+export const ViewLocationsContainer = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  button { 
+    width: 100%;
+  }
+`
+
+export const Diviver = styled.hr`
+  background-color: rgb(230, 230, 230);
+  display: block;
+  height: 1px;
+  margin: 24px 0px;
 `

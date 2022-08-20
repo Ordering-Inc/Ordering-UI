@@ -10,7 +10,6 @@ export const Header = styled.div`
 
 export const InnerHeader = styled.div`
   display: flex;
-  width: 100%;
   color: #FFF;
   justify-content: space-between;
   width: 98%;
@@ -20,7 +19,8 @@ export const InnerHeader = styled.div`
 
 export const LogoHeader = styled.div`
   cursor: pointer;
-
+  display: flex;
+  align-items: center;
   img {
     width: ${props => props.imgW ?? '35px'};
     height: ${props => props.imgH ?? '45px'};

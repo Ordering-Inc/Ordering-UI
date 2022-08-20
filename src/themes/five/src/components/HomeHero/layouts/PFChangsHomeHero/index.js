@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
-import { useSession, useOrder, useLanguage } from 'ordering-components'
+import { useSession, useOrder, useLanguage, useEvent, useSite, useOrderingTheme } from 'ordering-components'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import {
   HeroContainer,
@@ -10,13 +10,17 @@ import {
   WrapInput,
   SearchLocationsContainer,
   DelvieryPickupContainer,
-  DeliveryPickupContainer
+  DeliveryPickupContainer,
+  AddressInputContainer,
+  ViewLocationsContainer,
+  Diviver
 } from './styles'
 
 import { Modal } from '../../../Modal'
 import { Button } from '../../../../styles/Buttons/theme/pfchangs'
 import { AddressForm } from '../../../AddressForm'
 import { AddressList } from '../../../AddressList'
+import { PFChangsBusinesListing } from '../../../BusinessesListing/layouts/PFChangsBusinessListing'
 
 export const PFChangsHomeHero = (props) => {
   const { onFindBusiness, contentPosition } = props
@@ -24,20 +28,41 @@ export const PFChangsHomeHero = (props) => {
   const [{ auth }] = useSession()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const [events] = useEvent()
+  const [{ site }] = useSite()
+  const [orderingTheme] = useOrderingTheme()
+
+  const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
+
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const [orderTypeSelected, setOrderTypeSelected] = useState(1)
+  const [showAllLocations, setShowAllLocations] = useState(false)
   const theme = useTheme()
+
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
 
-  const homeBackgroundImage = theme?.layouts?.homepage_view?.components?.image
+  const homeBackgroundImage = theme?.layouts?.homepage_view?.components?.home_header?.components?.image
+  const showCities = !orderingTheme?.theme?.business_listing_view?.components?.cities?.hidden
 
+  const businessListingProps = {
+    onBusinessClick: (business) => {
+      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+        events.emit('go_to_page', { page: 'business', params: { business_slug: business.slug } })
+      } else {
+        events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${business.slug}` })
+      }
+    },
+    currentPageParam: 0,
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'city', 'city_id'],
+    onRedirectPage: (data) => events.emit('go_to_page', data)
+  }
   const handleFindBusinesses = () => {
+    setShowAllLocations(false)
     if (!orderState?.options?.address?.location) {
       setModals({ ...modals, formOpen: true })
       return
     }
     setModals({ listOpen: false, formOpen: false })
-    onFindBusiness && onFindBusiness()
   }
 
   const handleAddressInput = () => {
@@ -80,19 +105,40 @@ export const PFChangsHomeHero = (props) => {
             </DeliveryPickupContainer>
             {/* <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
             <Slogan>{t('SUBTITLE_HOME', theme?.defaultLanguages?.SUBTITLE_HOME || 'Let\'s start to order food now')}</Slogan> */}
-            <WrapInput onClick={handleAddressInput} withIcon>
-              <HiOutlineLocationMarker />
-              <p>
-                {orderState?.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
-              </p>
-            </WrapInput>
-            <Button
-              color='primary'
-              name='find-business'
-              onClick={handleFindBusinesses}
-            >
-              {t('FIND_BUSINESSES', theme?.defaultLanguages?.FIND_BUSINESSES || 'Find businesses')}
-            </Button>
+            <AddressInputContainer>
+              <WrapInput onClick={handleAddressInput} withIcon>
+                <HiOutlineLocationMarker />
+                <p>
+                  {orderState?.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                </p>
+              </WrapInput>
+              <div>
+                <Button
+                  color='primary'
+                  name='Search'
+                  onClick={handleFindBusinesses}
+                >
+                  {t('SEARCH', 'Search')}
+                </Button>
+              </div>
+            </AddressInputContainer>
+            {showCities && (
+              <ViewLocationsContainer>
+                <Button
+                  color='primary'
+                  style={{ width: '100%' }}
+                  onClick={() => setShowAllLocations(true)}
+                >
+                  {t('VIEW_ALL_LOCATIONS', 'View all locations')}
+                </Button>
+              </ViewLocationsContainer>
+            )}
+            <Diviver />
+            <PFChangsBusinesListing
+              {...businessListingProps}
+              filterByAddress={orderState?.options?.address?.location}
+              filterByCity={showAllLocations}
+            />
           </SearchLocationsContainer>
           <div> {/** mapa */}
 

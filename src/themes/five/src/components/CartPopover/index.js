@@ -117,9 +117,9 @@ export const CartPopover = (props) => {
         >
           {isCartButtonPF ? (
             <ButtonPF
-              color={cartButtonTextcolor || ''}
+              color='primary'
               style={{
-                backgroundColor: cartButtonBackgroundColor || ''
+                height: '40px'
               }}
             >
               <>
