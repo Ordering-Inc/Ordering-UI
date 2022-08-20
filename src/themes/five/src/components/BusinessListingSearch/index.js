@@ -260,6 +260,7 @@ export const BusinessListingSearchUI = (props) => {
               businessesSearchList={businessesSearchList}
               onRedirectPage={onRedirectPage}
               onProductRedirect={onProductRedirect}
+              onBusinessClick={onBusinessClick}
             />
           </PreviouslyOrderedContainer>
           <BusinessListWrapper>
