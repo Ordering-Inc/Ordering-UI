@@ -74,9 +74,9 @@ export const BusinessListingSearchUI = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ auth }] = useSession()
   const [curProduct, setCurProduct] = useState({ business: null, product: null })
   const [{ parsePrice, optimizeImage, parseDistance }] = useUtils()
+  const [{ auth }] = useSession()
   const { width } = useWindowSize()
   const maxDeliveryFeeOptions = [15, 25, 35, 'default']
   // const maxProductPriceOptions = [5, 10, 15, 'default']
@@ -262,6 +262,7 @@ export const BusinessListingSearchUI = (props) => {
                 businessesSearchList={businessesSearchList}
                 onRedirectPage={onRedirectPage}
                 onProductRedirect={onProductRedirect}
+                onBusinessClick={onBusinessClick}
               />
             </PreviouslyOrderedContainer>
           )}
