@@ -12,7 +12,8 @@ import {
   useLanguage,
   useOrder,
   useUtils,
-  useSite
+  useSite,
+  useConfig
 } from 'ordering-components'
 
 import { scrollTo } from '../../../../../utils'
@@ -121,6 +122,9 @@ const ProductOptionsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const galleryLength = gallery?.length + videoGallery?.length
+
+  const [{ configs }] = useConfig()
+  const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -688,7 +692,7 @@ const ProductOptionsUI = (props) => {
                 }
               </div>
 
-              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
+              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && (orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)) && (
                 <Button
                   className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                   color='primary'
@@ -705,7 +709,7 @@ const ProductOptionsUI = (props) => {
                 </Button>
               )}
 
-              {auth && !orderState.options?.address_id && (
+              {auth && !(orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)) && (
                 orderState.loading ? (
                   <Button
                     className='add'
