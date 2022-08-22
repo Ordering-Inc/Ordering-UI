@@ -81,7 +81,8 @@ const BusinessProductsCategoriesUI = (props) => {
       let style0 = '.sticky-prod-cat {'
       style0 += 'position: fixed !important;'
       style0 += 'top: 0 !important;'
-      style0 += 'width: 65.5% !important;'
+      style0 += 'width: 97% !important;'
+      style0 += 'padding: 15px 5px 0px 0px;'
       style0 += '}'
 
       let style1 = '.sticky-prod-cart {'
