@@ -293,7 +293,8 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     hideOrders: true,
     businessesSearchList: businessesSearchList,
     onRedirectPage: onRedirectPage,
-    onProductRedirect: onProductRedirect
+    onProductRedirect: onProductRedirect,
+    onBusinessClick: onBusinessClick
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, ((_businessesSearchList2 = businessesSearchList.businesses) === null || _businessesSearchList2 === void 0 ? void 0 : _businessesSearchList2.length) > 0 && /*#__PURE__*/_react.default.createElement("h2", null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, {
     noResults: noResults
   }, noResults && /*#__PURE__*/_react.default.createElement(_styles.NotFoundWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
