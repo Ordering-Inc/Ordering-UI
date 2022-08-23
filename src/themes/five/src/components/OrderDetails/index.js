@@ -396,29 +396,29 @@ const OrderDetailsUI = (props) => {
                   acceptedStatus.includes(parseInt(order?.status, 10)) ||
                   !isOriginalLayout
                 ) && (
-                  <ReOrder>
-                    <Button
-                      color='primary'
-                      outline
-                      onClick={() => handleStartNewOrder(order.id)}
-                      disabled={reorderState?.loading}
-                    >
-                      {t('START_NEW_ORDER', 'Start new order')}
-                    </Button>
-                    {completedStatus.includes(parseInt(order?.status, 10)) && (
+                    <ReOrder>
                       <Button
                         color='primary'
                         outline
-                        onClick={() => handleReorder(order.id)}
+                        onClick={() => handleStartNewOrder(order.id)}
                         disabled={reorderState?.loading}
                       >
-                        {reorderState?.loading
-                          ? t('LOADING', 'Loading...')
-                          : t('REORDER', 'Reorder')}
+                        {t('START_NEW_ORDER', 'Start new order')}
                       </Button>
-                    )}
-                  </ReOrder>
-                )}
+                      {completedStatus.includes(parseInt(order?.status, 10)) && (
+                        <Button
+                          color='primary'
+                          outline
+                          onClick={() => handleReorder(order.id)}
+                          disabled={reorderState?.loading}
+                        >
+                          {reorderState?.loading
+                            ? t('LOADING', 'Loading...')
+                            : t('REORDER', 'Reorder')}
+                        </Button>
+                      )}
+                    </ReOrder>
+                  )}
               </TitleContainer>
               {showDeliveryProgress && (
                 <>
