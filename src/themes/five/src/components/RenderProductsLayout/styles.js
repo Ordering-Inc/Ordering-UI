@@ -4,6 +4,7 @@ export const Title = styled.h1`
   font-weight: 600;
   font-size: 20px;
   color: ${props => props.theme.colors.darkTextColor};
+  margin-top: 0;
   margin-bottom: 18px;
 `
 
@@ -64,6 +65,7 @@ export const BusinessCategoriesContainer = styled.div`
 
 export const BusinessCartContainer = styled(BusinessCategoriesContainer)`
   display: none;
+  margin-top: 70px;
 
   @media (min-width: 900px) {
     display: block;
