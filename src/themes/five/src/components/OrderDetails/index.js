@@ -27,6 +27,7 @@ import { OrderBillSection } from './OrderBillSection'
 import { ActionsSection } from './ActionsSection'
 import { OrderPreferencesSection } from './OrderPreferencesSections'
 import { PlaceSpot } from '../PlaceSpot'
+import { Confirm } from '../Confirm'
 
 import {
   Container,
@@ -85,7 +86,8 @@ const OrderDetailsUI = (props) => {
     messagesReadList,
     reorderState,
     handleReorder,
-    orderTypes
+    orderTypes,
+    handleRemoveCart
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -105,6 +107,7 @@ const OrderDetailsUI = (props) => {
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isService, setIsService] = useState(false)
   const [isOrderHistory, setIsOrderHistory] = useState(false)
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
@@ -234,6 +237,26 @@ const OrderDetailsUI = (props) => {
     deleteUserCustomer(true)
     refreshOrderOptions()
     handleGoToPage({ page: 'home' })
+  }
+
+  const handleClickReorder = (order) => {
+    if (carts[`businessId:${order?.business_id}`] && carts[`businessId:${order?.business_id}`]?.products?.length > 0) {
+      setConfirm({
+        open: true,
+        content: t('QUESTION_DELETE_PRODUCTS_FROM_CART', 'Are you sure that you want to delete all products from cart?'),
+        handleOnAccept: async () => {
+          handleRemoveCart()
+          setConfirm({ ...confirm, open: false })
+        }
+      })
+    } else {
+      handleReorder(order.id)
+    }
+  }
+
+  const handleOriginalReorder = () => {
+    setConfirm({ ...confirm, open: false })
+    handleReorder(order.id)
   }
 
   const ActionsSectionProps = {
@@ -396,29 +419,29 @@ const OrderDetailsUI = (props) => {
                   acceptedStatus.includes(parseInt(order?.status, 10)) ||
                   !isOriginalLayout
                 ) && (
-                  <ReOrder>
-                    <Button
-                      color='primary'
-                      outline
-                      onClick={() => handleStartNewOrder(order.id)}
-                      disabled={reorderState?.loading}
-                    >
-                      {t('START_NEW_ORDER', 'Start new order')}
-                    </Button>
-                    {completedStatus.includes(parseInt(order?.status, 10)) && (
+                    <ReOrder>
                       <Button
                         color='primary'
                         outline
-                        onClick={() => handleReorder(order.id)}
+                        onClick={() => handleStartNewOrder(order.id)}
                         disabled={reorderState?.loading}
                       >
-                        {reorderState?.loading
-                          ? t('LOADING', 'Loading...')
-                          : t('REORDER', 'Reorder')}
+                        {t('START_NEW_ORDER', 'Start new order')}
                       </Button>
-                    )}
-                  </ReOrder>
-                )}
+                      {completedStatus.includes(parseInt(order?.status, 10)) && (
+                        <Button
+                          color='primary'
+                          outline
+                          onClick={() => handleClickReorder(order)}
+                          disabled={reorderState?.loading}
+                        >
+                          {reorderState?.loading
+                            ? t('LOADING', 'Loading...')
+                            : t('REORDER', 'Reorder')}
+                        </Button>
+                      )}
+                    </ReOrder>
+                  )}
               </TitleContainer>
               {showDeliveryProgress && (
                 <>
@@ -750,6 +773,16 @@ const OrderDetailsUI = (props) => {
           }
         />
       </Modal>
+      <Confirm
+        title={t('ORDER', 'Order')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => handleOriginalReorder()}
+        onCancel={() => handleOriginalReorder()}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }
