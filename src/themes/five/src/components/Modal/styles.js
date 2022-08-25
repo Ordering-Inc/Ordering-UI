@@ -86,6 +86,11 @@ export const ModalActions = styled.div`
 `
 export const ModalHeader = styled.div`
   display: flex;
+  margin-top: 30px;
+
+  @media(min-width: 450px){
+    margin-top: 0;
+  }
 
 `
 

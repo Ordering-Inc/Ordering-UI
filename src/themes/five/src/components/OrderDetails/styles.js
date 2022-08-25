@@ -70,9 +70,11 @@ export const OrderBusiness = styled.div`
 
 export const BusinessWrapper = styled.div`
   display: flex;
-  width: ${props => props.w ?? '100%'};
+  width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
+
   ${props => props.borderBottom && css`
     padding-bottom: 15px;
     border-bottom: 1px solid ${props => props.theme.colors.lightGray};
@@ -85,7 +87,16 @@ export const BusinessWrapper = styled.div`
     width: 100px;
     height: 100px;
     border-radius: 7.6px;
-    margin-right: 40px;
+    margin-right: 0;
+
+    @media (min-width: 400px) {
+      margin-right: 40px;
+    }
+  }
+
+  @media (min-width: 400px) {
+    flex-direction: row;
+    width: ${props => props.w ?? '100%'};
   }
 `
 
@@ -105,12 +116,14 @@ export const BtsOrderStatus = styled.div`
 export const BusinessInfo = styled.div`
   width: 100%;
   box-sizing: border-box;
-  margin-right: 15px;
+  margin-right: 0;
+  margin-top: 10px;
+
   h1,
   p {
     margin: 0;
     color: ${props => props.theme.colors.darkTextColor};
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
   }
 
   h2 {
@@ -122,13 +135,17 @@ export const BusinessInfo = styled.div`
     font-size: 14px;
     margin-bottom: 5px;
   }
+
+  @media (min-width: 400px) {
+    margin-right: 15px;
+    margin-top: 0;
+  }
 `
 
 export const ActionsBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  flex-direction: column;
   > * {
     margin-right: 5px;
     ${props => props.theme?.rtl && css`
@@ -143,8 +160,6 @@ export const ActionsBlock = styled.div`
   }
 
   @media (min-width: 380px) {
-    flex-direction: row;
-
     svg {
       font-size: 20px;
     }
@@ -563,6 +578,9 @@ export const TitleContainer = styled.div`
     min-width: 200px;
     max-height: 53px;
   }
+  > h1 {
+    text-align: center;
+  }
 `
 
 export const ReOrder = styled.div`
@@ -570,11 +588,20 @@ export const ReOrder = styled.div`
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
+  flex-direction: column;
 
   button {
     padding: 5px 16px;
     min-width: unset;
-    margin: 0px 5px;
+    margin: 5px 5px;
+
+    @media (min-width: 650px) {
+      margin: 0px 5px;
+    }
+  }
+
+  @media (min-width: 650px) {
+    flex-direction: row;
   }
 `
 
