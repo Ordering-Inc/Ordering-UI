@@ -182,8 +182,8 @@ const ProductOptionsUI = (props) => {
 
   const handleChangeTabValue = (value) => {
     if (document.getElementById(`${value}`)) {
-      const extraHeight = windowSize.width < 769 ? 80 : 55
-      const top = (value === 'all') ? 0 : document.getElementById(`${value}`).offsetTop - extraHeight
+      const extraHeight = 55
+      const top = document.getElementById(`${value}`).offsetTop - extraHeight
       const scrollElement = document.querySelector('.popup-dialog')
 
       scrollElement.scrollTo({
@@ -216,7 +216,7 @@ const ProductOptionsUI = (props) => {
   }
 
   const scrollDown = () => {
-    const adjustHeight = windowSize?.width > 768 ? 90 : 100
+    const adjustHeight = windowSize?.width > 768 ? 95 : 100
     const isErrors = Object.values(errors).length > 0
     if (!isErrors) {
       return
@@ -255,19 +255,19 @@ const ProductOptionsUI = (props) => {
   useEffect(() => {
     const scrollElement = document.querySelector('.popup-dialog')
     const handleScroll = () => {
+      const extraHeight = 60
       if (product?.ingredients.length > 0 || product?.extras.length > 0) {
-        const adjustHeight = windowSize?.width > 768 ? 55 : 80
-        const menuList = ['all']
+        const menuList = []
         if (product?.ingredients?.length > 0) menuList.push('ingredients')
         product?.extras?.length > 0 && product.extras.sort((a, b) => a.rank - b.rank).forEach(extra => {
           extra.options?.length > 0 && extra.options.sort((a, b) => a.rank - b.rank).forEach(option => {
-            menuList.push(`id_${option?.id}`)
+            showOption(option) && menuList.push(`id_${option?.id}`)
           })
         })
         menuList.forEach(menu => {
           const elementTop = scrollElement.scrollTop
           const topPos = document.getElementById(menu).offsetTop
-          if (elementTop >= topPos - adjustHeight) {
+          if (Math.abs(elementTop - topPos) < extraHeight) {
             setTabValue(menu)
             const elementLeft = document.getElementById(`menu_${menu}`).offsetLeft
             const scrollLeft = document.getElementById('all').scrollLeft
@@ -290,7 +290,7 @@ const ProductOptionsUI = (props) => {
     scrollElement && scrollElement.addEventListener('scroll', handleScroll)
 
     return () => scrollElement && scrollElement.removeEventListener('scroll', handleScroll)
-  }, [windowSize?.width])
+  }, [showOption])
 
   useEffect(() => {
     const imageList = []
@@ -523,15 +523,6 @@ const ProductOptionsUI = (props) => {
                   <ProductTabContainer id='all'>
                     <Tabs>
                       <AutoScroll scrollId='optionList'>
-                        <Tab
-                          key='all'
-                          id='menu_all'
-                          active={tabValue === 'all'}
-                          onClick={() => handleChangeTabValue('all')}
-                          borderBottom
-                        >
-                          {t('ALL', 'All')}
-                        </Tab>
                         {
                           product?.ingredients.length > 0 && (
                             <Tab
@@ -567,28 +558,30 @@ const ProductOptionsUI = (props) => {
                   </ProductTabContainer>
                 )
               }
-              <div id='ingredients'>
-                {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
-                <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
-                  {product?.ingredients.map(ingredient => (
-                    <ProductIngredient
-                      key={ingredient?.id}
-                      ingredient={ingredient}
-                      state={productCart.ingredients[`id:${ingredient?.id}`]}
-                      onChange={handleChangeIngredientState}
-                      isSoldOut={isSoldOut}
-                    />
-                  ))}
-                </WrapperIngredients>
-              </div>
+              {product?.ingredients.length > 0 && (
+                <div id='ingredients'>
+                  {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
+                  <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
+                    {product?.ingredients.map(ingredient => (
+                      <ProductIngredient
+                        key={ingredient?.id}
+                        ingredient={ingredient}
+                        state={productCart.ingredients[`id:${ingredient?.id}`]}
+                        onChange={handleChangeIngredientState}
+                        isSoldOut={isSoldOut}
+                      />
+                    ))}
+                  </WrapperIngredients>
+                </div>
+              )}
               <div>
                 {
                   product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                     const currentState = productCart.options[`id:${option?.id}`] || {}
                     return (
-                      <div key={option?.id} id={`id_${option?.id}`}>
-                        {
-                          showOption(option) && (
+                      <React.Fragment key={option?.id}>
+                        {showOption(option) && (
+                          <div id={`id_${option?.id}`}>
                             <ProductOption
                               option={option}
                               currentState={currentState}
@@ -616,9 +609,8 @@ const ProductOptionsUI = (props) => {
                                 }
                               </WrapperSubOption>
                             </ProductOption>
-                          )
-                        }
-                      </div>
+                          </div>)}
+                      </React.Fragment>
                     )
                   }))
                 }
