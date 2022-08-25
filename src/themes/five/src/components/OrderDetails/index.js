@@ -38,6 +38,7 @@ import {
   BusinessWrapper,
   BusinessInfo,
   OrderInfo,
+  OrderIdSec,
   StatusBar,
   OrderCustomer,
   PhotoBlock,
@@ -61,6 +62,7 @@ import {
   HeaderTitle,
   PlaceSpotSection,
   BtsOrderStatus,
+  OrderStatusAndLinkContainer,
   LinkWrapper,
   MapWrapper,
   BusinessExternalWrapper
@@ -405,7 +407,7 @@ const OrderDetailsUI = (props) => {
           <WrapperLeftContainer>
             <OrderInfo>
               <TitleContainer>
-                <h1>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                <OrderIdSec>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</OrderIdSec>
                 {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
                   <Content className='order-content'>
                     <ShareOrder>
@@ -440,40 +442,34 @@ const OrderDetailsUI = (props) => {
                   acceptedStatus.includes(parseInt(order?.status, 10)) ||
                   !isOriginalLayout
                 ) && (
-                    <ReOrder>
+                  <ReOrder>
+                    <Button
+                      color='primary'
+                      outline
+                      onClick={() => handleStartNewOrder(order.id)}
+                      disabled={reorderState?.loading}
+                    >
+                      {t('START_NEW_ORDER', 'Start new order')}
+                    </Button>
+                    {completedStatus.includes(parseInt(order?.status, 10)) && (
                       <Button
                         color='primary'
                         outline
-                        onClick={() => handleStartNewOrder(order.id)}
+                        onClick={() => handleClickReorder(order)}
                         disabled={reorderState?.loading}
                       >
-                        {t('START_NEW_ORDER', 'Start new order')}
+                        {reorderState?.loading
+                          ? t('LOADING', 'Loading...')
+                          : t('REORDER', 'Reorder')}
                       </Button>
-                      {completedStatus.includes(parseInt(order?.status, 10)) && (
-                        <Button
-                          color='primary'
-                          outline
-                          onClick={() => handleClickReorder(order)}
-                          disabled={reorderState?.loading}
-                        >
-                          {reorderState?.loading
-                            ? t('LOADING', 'Loading...')
-                            : t('REORDER', 'Reorder')}
-                        </Button>
-                      )}
-                    </ReOrder>
-                  )}
+                    )}
+                  </ReOrder>
+                )}
               </TitleContainer>
               {showDeliveryProgress && (
                 <>
                   <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between'
-                    }}
-                  >
+                  <OrderStatusAndLinkContainer>
                     <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
                     <LinkWrapper>
                       <ReviewOrderLink
@@ -493,7 +489,7 @@ const OrderDetailsUI = (props) => {
                         <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                       </ReviewOrderLink>
                     </LinkWrapper>
-                  </div>
+                  </OrderStatusAndLinkContainer>
                 </>
               )}
             </OrderInfo>
