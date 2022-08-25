@@ -143,6 +143,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       style1 += 'top: 0 !important;';
       style1 += 'right: 2.5% !important;';
       style1 += 'width: 28.5% !important;';
+      style1 += 'margin-top: 32px !important;';
       style1 += '}';
       var style2 = '.sticky-search {';
       style2 += 'position: fixed !important;';
