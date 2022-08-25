@@ -216,13 +216,13 @@ const ProductOptionsUI = (props) => {
   }
 
   const scrollDown = () => {
-    const adjustHeight = windowSize?.width > 768 ? 95 : 100
+    const adjustHeight = windowSize?.width > 768 ? 50 : 55
     const isErrors = Object.values(errors).length > 0
     if (!isErrors) {
       return
     }
     const productContainer = document.getElementsByClassName('popup-dialog')[0]
-    const unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
+    const unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]?.parentNode
 
     if (unselectedFirstSubOption) {
       const top = unselectedFirstSubOption.offsetTop
@@ -581,35 +581,33 @@ const ProductOptionsUI = (props) => {
                     return (
                       <React.Fragment key={option?.id}>
                         {showOption(option) && (
-                          <div id={`id_${option?.id}`}>
-                            <ProductOption
-                              option={option}
-                              currentState={currentState}
-                              error={errors[`id:${option?.id}`]}
-                            >
-                              <WrapperSubOption className={isError(option?.id)}>
-                                {
-                                  option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
-                                    const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
-                                    const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                    return (
-                                      <ProductOptionSubOption
-                                        key={suboption?.id}
-                                        onChange={handleChangeSuboptionState}
-                                        balance={balance}
-                                        option={option}
-                                        suboption={suboption}
-                                        state={currentState}
-                                        isSoldOut={isSoldOut}
-                                        scrollDown={scrollDown}
-                                        setIsScrollAvailable={setIsScrollAvailable}
-                                      />
-                                    )
-                                  })
-                                }
-                              </WrapperSubOption>
-                            </ProductOption>
-                          </div>)}
+                          <ProductOption
+                            option={option}
+                            currentState={currentState}
+                            error={errors[`id:${option?.id}`]}
+                          >
+                            <WrapperSubOption className={isError(option?.id)}>
+                              {
+                                option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
+                                  const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                  const balance = productCart.options[`id:${option?.id}`]?.balance || 0
+                                  return (
+                                    <ProductOptionSubOption
+                                      key={suboption?.id}
+                                      onChange={handleChangeSuboptionState}
+                                      balance={balance}
+                                      option={option}
+                                      suboption={suboption}
+                                      state={currentState}
+                                      isSoldOut={isSoldOut}
+                                      scrollDown={scrollDown}
+                                      setIsScrollAvailable={setIsScrollAvailable}
+                                    />
+                                  )
+                                })
+                              }
+                            </WrapperSubOption>
+                          </ProductOption>)}
                       </React.Fragment>
                     )
                   }))
