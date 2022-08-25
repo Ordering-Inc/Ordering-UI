@@ -100,7 +100,7 @@ export const CheckoutAction = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
-
+  flex-direction: column;
   p {
     margin: 0;
     font-weight: 600;
@@ -116,6 +116,10 @@ export const CheckoutAction = styled.div`
       opacity: 0.5;
       cursor: not-allowed
     }
+  }
+
+  @media (min-width: 1070px) {
+    flex-direction: row;
   }
 `
 
