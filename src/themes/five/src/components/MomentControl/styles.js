@@ -8,7 +8,6 @@ export const Title = styled.div`
   color: ${props => props.theme.colors?.darkTextColor};
 
   @media (max-width: 450px) {
-    padding-left: 30px;
     ${props => props.theme.rtl && css`
       padding-right: 30px;
       padding-left: 0;
