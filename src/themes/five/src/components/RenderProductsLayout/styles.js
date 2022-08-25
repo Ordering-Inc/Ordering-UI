@@ -66,8 +66,8 @@ export const BusinessCategoriesContainer = styled.div`
 export const BusinessCartContainer = styled(BusinessCategoriesContainer)`
   display: none;
   margin-top: 70px;
-
-  @media (min-width: 900px) {
+  min-width: 325px;
+  @media (min-width: 1000px) {
     display: block;
   }
 `
