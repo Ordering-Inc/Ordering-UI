@@ -18,6 +18,7 @@ const BusinessProductsCategoriesUI = (props) => {
   } = props
 
   const [selectedCategory, setSelectedCateogry] = useState({ id: null })
+  const [scrollChange, setScrollChange] = useState(0)
 
   const handleChangeCategory = (category) => {
     const isBlockScroll = window.location.search.includes('category') &&
@@ -44,6 +45,7 @@ const BusinessProductsCategoriesUI = (props) => {
       categories && categories.length && categories.map((category, i) => (
         <Tab
           key={i}
+          id={`category-menu${category?.id || '-all'}`}
           className={`category ${category.id === 'featured' ? 'special' : ''}`}
           active={business?.lazy_load_products_recommended ? (categorySelected?.id === category.id) : (selectedCategory?.id === category.id)}
           onClick={() => handleChangeCategory(category)}
@@ -55,71 +57,90 @@ const BusinessProductsCategoriesUI = (props) => {
     )
   }
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (business?.lazy_load_products_recommended) return
-      const featuredElement = document.getElementById('categoryfeatured')
-      const _categories = featuredElement ? [...categories] : categories.filter(category => category.id !== 'featured')
-      _categories?.length && _categories.forEach(category => {
-        const windowTop = window.scrollY
-        let topPos = 0
-        if (!category?.id) topPos = document.getElementById('businessProductList')?.offsetTop
-        else topPos = document.getElementById(`category${category.id}`)?.offsetTop
+  const handleScroll = () => {
+    if (business?.lazy_load_products_recommended) return
+    const featuredElement = document.getElementById('categoryfeatured')
+    const _categories = featuredElement ? [...categories] : categories.filter(category => category.id !== 'featured')
+    _categories?.length && _categories.some(category => {
+      const windowTop = window.scrollY
+      const topPos = category?.id ? document.getElementById(`category${category.id}`)?.offsetTop
+        : document.getElementById('businessProductList')?.offsetTop
 
-        if (windowTop >= (topPos - 60)) {
-          setSelectedCateogry(category)
+      if (Math.abs(topPos - windowTop) < 60 && category?.id) {
+        const _diff = -50
+        const _moveDiff = 30
+        const categoryListsElement = document.getElementById('category-lists')
+        const selectedCategory = document.getElementById(`category-menu${category?.id || '-all'}`)
+
+        const categoryAreaWidth = categoryListsElement?.clientWidth || 0
+        const selectedCategoryLeft = selectedCategory?.offsetLeft || 0
+        if (selectedCategoryLeft - categoryAreaWidth - scrollChange > _diff || scrollChange - selectedCategoryLeft > 0) {
+          const moveAmount = (selectedCategoryLeft < 100) ? 0 : selectedCategoryLeft - _moveDiff
+          if (moveAmount !== scrollChange) {
+            setScrollChange(moveAmount)
+            categoryListsElement.scrollTo({
+              top: 0,
+              left: moveAmount,
+              behavior: 'smooth'
+            })
+          }
         }
-      })
-
-      const navbar = document.getElementById('category-lists')
-      const cart = document.getElementById('BusinessCartContainer')
-      const search = document.getElementById('WrapperSearchAbsolute')
-      const wrapperCategories = document.getElementById('wrapper-categories')
-
-      const styleSheet = document.getElementById('styles').sheet
-
-      let style0 = '.sticky-prod-cat {'
-      style0 += 'position: fixed !important;'
-      style0 += 'top: 0 !important;'
-      style0 += 'width: 97% !important;'
-      style0 += 'padding: 15px 5px 0px 0px;'
-      style0 += '}'
-
-      let style1 = '.sticky-prod-cart {'
-      style1 += 'position: fixed !important;'
-      style1 += 'top: 0 !important;'
-      style1 += 'right: 2.5% !important;'
-      style1 += 'width: 28.5% !important;'
-      style1 += 'margin-top: 32px !important;'
-      style1 += '}'
-
-      let style2 = '.sticky-search {'
-      style2 += 'position: fixed !important;'
-      style2 += 'top: 10px !important;'
-      style2 += 'right: 32% !important;'
-      style2 += 'height: 50px !important;'
-      style2 += 'z-index: 9999 !important;'
-      style2 += '}'
-
-      styleSheet.insertRule(style0, 0)
-      styleSheet.insertRule(style1, 1)
-      styleSheet.insertRule(style2, 2)
-
-      const limit = window.pageYOffset >= wrapperCategories?.offsetTop && window.pageYOffset > 0
-
-      if (limit) {
-        navbar && navbar.classList.add('sticky-prod-cat')
-        cart && cart.classList.add('sticky-prod-cart')
-        search && search.classList.add('sticky-search')
-      } else {
-        navbar && navbar.classList.remove('sticky-prod-cat')
-        cart && cart.classList.remove('sticky-prod-cart')
-        search && search.classList.remove('sticky-search')
+        setSelectedCateogry(category)
+        return true
       }
+    })
+
+    const navbar = document.getElementById('category-lists')
+    const cart = document.getElementById('BusinessCartContainer')
+    const search = document.getElementById('WrapperSearchAbsolute')
+    const wrapperCategories = document.getElementById('wrapper-categories')
+
+    const styleSheet = document.getElementById('styles').sheet
+
+    let style0 = '.sticky-prod-cat {'
+    style0 += 'position: fixed !important;'
+    style0 += 'top: 0 !important;'
+    style0 += 'width: 97% !important;'
+    style0 += 'padding: 15px 5px 0px 0px;'
+    style0 += '}'
+
+    let style1 = '.sticky-prod-cart {'
+    style1 += 'position: fixed !important;'
+    style1 += 'top: 0 !important;'
+    style1 += 'right: 2.5% !important;'
+    style1 += 'width: 28.5% !important;'
+    style1 += 'margin-top: 32px !important;'
+    style1 += '}'
+
+    let style2 = '.sticky-search {'
+    style2 += 'position: fixed !important;'
+    style2 += 'top: 10px !important;'
+    style2 += 'right: 32% !important;'
+    style2 += 'height: 50px !important;'
+    style2 += 'z-index: 9999 !important;'
+    style2 += '}'
+
+    styleSheet.insertRule(style0, 0)
+    styleSheet.insertRule(style1, 1)
+    styleSheet.insertRule(style2, 2)
+
+    const limit = window.pageYOffset >= wrapperCategories?.offsetTop && window.pageYOffset > 0
+
+    if (limit) {
+      navbar && navbar.classList.add('sticky-prod-cat')
+      cart && cart.classList.add('sticky-prod-cart')
+      search && search.classList.add('sticky-search')
+    } else {
+      navbar && navbar.classList.remove('sticky-prod-cat')
+      cart && cart.classList.remove('sticky-prod-cart')
+      search && search.classList.remove('sticky-search')
     }
+  }
+
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [scrollChange])
 
   return (
     <>
