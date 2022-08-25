@@ -2033,9 +2033,9 @@
     tslib "^2.4.0"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.42.3"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.42.3.tgz#7b292fad79a3fb207b509a79a4c292089b5a527a"
-  integrity sha512-/H0f+inK/3XSyvngUUG2CxSpIWuCiRh7/386mXr5aV2ZBSzUzAW7w2PsexU4MiR1zvXYey5uDNhgTTQ/CdsiVQ==
+  version "1.43.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.43.0.tgz#75315115bbc1fc79985596aacaaf68ad734d2334"
+  integrity sha512-jGj+9Iv3rKYmXqCkF0bPnXIOS1QasCvPOjSkjUkU6o4JlAtDQ0DuuKej5N3NOATD3F3ckeL4cwMcuSh+s+MD3A==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics-core" "1.0.1"
@@ -4288,9 +4288,9 @@ camelize@^1.0.0:
   integrity sha512-W2lPwkBkMZwFlPCXhIlYgxu+7gC/NUlCtdK652DAJ1JdgV0sTrvuPFshNPrFa1TY2JOkLhgdeEBplB4ezEa+xg==
 
 caniuse-lite@^1.0.30001370:
-  version "1.0.30001382"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001382.tgz#4d37f0d0b6fffb826c8e5e1c0f4bf8ce592db949"
-  integrity sha512-2rtJwDmSZ716Pxm1wCtbPvHtbDWAreTPxXbkc5RkKglow3Ig/4GNGazDI9/BVnXbG/wnv6r3B5FEbkfg9OcTGg==
+  version "1.0.30001383"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001383.tgz#aecf317ccd940690725ae3ae4f28293c5fb8050e"
+  integrity sha512-swMpEoTp5vDoGBZsYZX7L7nXHe6dsHxi9o6/LKf/f0LukVtnrxly5GVb/fWdCDTqi/yw6Km6tiJ0pmBacm0gbg==
 
 canvg@^3.0.6:
   version "3.0.10"
@@ -5417,9 +5417,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.202:
-  version "1.4.229"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.229.tgz#506107e357a59e3241f69cdd1a179626164ddd86"
-  integrity sha512-kdye32s/padLGpiLzhrMraBBs/M5hDspB8PCdCP6L11AJ6dw3Gg3xdvT4b4pqWaW5tc5oAwCfKCS+PAsZM3ipw==
+  version "1.4.230"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.230.tgz#666909fdf5765acb1348b69752ee9955dc1664b7"
+  integrity sha512-3pwjAK0qHSDN9+YAF4fJknsSruP7mpjdWzUSruIJD/JCH77pEh0SorEyb3xVaKkfwk2tzjOt2D8scJ0KAdfXLA==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -8831,13 +8831,13 @@ optionator@^0.8.3:
 
 "ordering-api-sdk@github:Ordering-Inc/ordering-api-sdk#release":
   version "0.0.4"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-api-sdk/tar.gz/9372fe3eb504d0ea11231a18a0e12e847b6fe941"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-api-sdk/tar.gz/d6d17da2de5ef46e8cc72cab2ef007093720efbe"
   dependencies:
     "@babel/runtime" "^7.10.4"
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/b21f80646ea3c35e771cf7a1ca3985d414738501"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/f9d346dce053bbb4e07e9fc02c925b3d241d9cab"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
