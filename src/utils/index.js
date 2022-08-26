@@ -224,6 +224,16 @@ export const convertToRadian = (value) => {
 }
 
 /**
+ * Function to check URL
+ * @param {string} url URL of page
+ * @param {string} fallback default URL
+ */
+export const checkSiteUrl = (url, fallback) => {
+  if (!url) return fallback
+  return url[0] === '/' ? url : `/${url}`
+}
+
+/**
  * Function to calculate distance
  * @param {*} lat1 lat from fist point
  * @param {*} lon1 lon from fist point
