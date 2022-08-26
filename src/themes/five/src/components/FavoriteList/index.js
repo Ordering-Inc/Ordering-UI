@@ -48,7 +48,6 @@ const FavoriteListUI = (props) => {
   const pastOrders = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
 
   const handleClickBusiness = (business) => {
-    // events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
       events.emit('go_to_page', { page: 'business', params: { business_slug: business.slug } })
     } else {
@@ -113,7 +112,6 @@ const FavoriteListUI = (props) => {
     const productId = product?.id
 
     if (!categoryId && !productId) {
-      // events.emit('go_to_page', { page: 'business', params: { store: slug }, replace: true })
       if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
         events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
       } else {
@@ -121,12 +119,6 @@ const FavoriteListUI = (props) => {
       }
       return
     }
-    // events.emit('go_to_page', {
-    //   page: 'business',
-    //   params: { store: slug },
-    //   search: `?category=${categoryId}&product=${productId}`,
-    //   replace: true
-    // })
     if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
       return events.emit('go_to_page', {
         page: 'product',
@@ -134,8 +126,7 @@ const FavoriteListUI = (props) => {
           business_slug: slug,
           category_slug: categoryId,
           product_slug: productId
-        },
-        replace: true
+        }
       })
     }
     if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
@@ -146,8 +137,7 @@ const FavoriteListUI = (props) => {
           category_slug: categoryId,
           product_slug: productId
         },
-        search: `?${businessParameter}=${slug}`,
-        replace: true
+        search: `?${businessParameter}=${slug}`
       })
     }
     if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
@@ -159,8 +149,7 @@ const FavoriteListUI = (props) => {
         params: {
           business_slug: slug
         },
-        search: `?${categoryParameter}=${categoryId}&${productParameter}=${productId}`,
-        replace: true
+        search: `?${categoryParameter}=${categoryId}&${productParameter}=${productId}`
       })
     }
     if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
@@ -172,8 +161,7 @@ const FavoriteListUI = (props) => {
         params: {
           business_slug: slug
         },
-        search: `?${categoryParameter}=${categoryId}&${productParameter}=${productId}`,
-        replace: true
+        search: `?${categoryParameter}=${categoryId}&${productParameter}=${productId}`
       })
     }
   }

@@ -114,7 +114,6 @@ var FavoriteListUI = function FavoriteListUI(props) {
   var pastOrders = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
 
   var handleClickBusiness = function handleClickBusiness(business) {
-    // events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
     if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
       events.emit('go_to_page', {
         page: 'business',
@@ -243,7 +242,6 @@ var FavoriteListUI = function FavoriteListUI(props) {
     var productId = product === null || product === void 0 ? void 0 : product.id;
 
     if (!categoryId && !productId) {
-      // events.emit('go_to_page', { page: 'business', params: { store: slug }, replace: true })
       if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
         events.emit('go_to_page', {
           page: 'business',
@@ -259,13 +257,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
       }
 
       return;
-    } // events.emit('go_to_page', {
-    //   page: 'business',
-    //   params: { store: slug },
-    //   search: `?category=${categoryId}&product=${productId}`,
-    //   replace: true
-    // })
-
+    }
 
     if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
       return events.emit('go_to_page', {
@@ -274,8 +266,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
           business_slug: slug,
           category_slug: categoryId,
           product_slug: productId
-        },
-        replace: true
+        }
       });
     }
 
@@ -287,8 +278,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
           category_slug: categoryId,
           product_slug: productId
         },
-        search: "?".concat(businessParameter, "=").concat(slug),
-        replace: true
+        search: "?".concat(businessParameter, "=").concat(slug)
       });
     }
 
@@ -301,8 +291,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
         params: {
           business_slug: slug
         },
-        search: "?".concat(categoryParameter, "=").concat(categoryId, "&").concat(productParameter, "=").concat(productId),
-        replace: true
+        search: "?".concat(categoryParameter, "=").concat(categoryId, "&").concat(productParameter, "=").concat(productId)
       });
     }
 
@@ -318,8 +307,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
         params: {
           business_slug: slug
         },
-        search: "?".concat(_categoryParameter, "=").concat(categoryId, "&").concat(_productParameter, "=").concat(productId),
-        replace: true
+        search: "?".concat(_categoryParameter, "=").concat(categoryId, "&").concat(_productParameter, "=").concat(productId)
       });
     }
   };
