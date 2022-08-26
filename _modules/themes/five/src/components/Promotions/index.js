@@ -23,6 +23,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _NotFoundSource = require("../NotFoundSource");
 
+var _utils = require("../../../../../utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -83,18 +85,31 @@ var PromotionsUI = function PromotionsUI(props) {
       openModal = _useState2[0],
       setOpenModal = _useState2[1];
 
+  var _useSite = (0, _orderingComponents.useSite)(),
+      _useSite2 = _slicedToArray(_useSite, 1),
+      site = _useSite2[0].site;
+
+  var businessUrlTemplate = (0, _utils.checkSiteUrl)(site === null || site === void 0 ? void 0 : site.business_url_template, '/store/:business_slug');
+
   var handleClickOffer = function handleClickOffer(offer) {
     setOpenModal(true);
     setOfferSelected(offer);
   };
 
   var handleBusinessClick = function handleBusinessClick(business) {
-    events.emit('go_to_page', {
-      page: 'business',
-      params: {
-        store: business.slug
-      }
-    });
+    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      events.emit('go_to_page', {
+        page: 'business',
+        params: {
+          business_slug: business.slug
+        }
+      });
+    } else {
+      events.emit('go_to_page', {
+        page: 'business',
+        search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(business.slug)
+      });
+    }
   };
 
   var filteredOffers = offersState === null || offersState === void 0 ? void 0 : (_offersState$offers = offersState.offers) === null || _offersState$offers === void 0 ? void 0 : _offersState$offers.filter(function (offer) {
