@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
-  min-height: 108px;  
+  min-height: 160px;
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
   border: 1px solid #E9ECEF;
   padding: 10px;
@@ -46,7 +46,7 @@ export const CardContainer = styled.div`
       width: calc(49% - 20px);
     }
 
-    @media (min-width: 1200px) {
+    @media (min-width: 1440px) {
       width: calc(33% - 20px);
       margin: 10px 20px 10px 0px;
       ${props => props.theme?.rtl && css`
@@ -56,7 +56,6 @@ export const CardContainer = styled.div`
   `}
   
   `}
-
 `
 
 export const SoldOut = styled.span`

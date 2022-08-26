@@ -67,7 +67,7 @@ const SingleProductCardUI = (props) => {
   const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
 
   const showAddButton = !theme?.layouts?.business_view?.components?.products?.components?.add_to_cart_button?.hidden
-  const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
+  // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
   let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - totalBalance
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig
@@ -126,7 +126,7 @@ const SingleProductCardUI = (props) => {
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
         className='product-card'
-        productsRows={productsRows}
+      // productsRows={productsRows}
       >
         {isObservedValidation && (
           <div>

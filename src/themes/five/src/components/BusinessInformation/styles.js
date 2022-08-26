@@ -87,7 +87,7 @@ export const SectionTitle = styled.h3`
   font-weight: 500;
   font-size: 16px;
   color: ${props => props.theme.colors.darkTextColor};
-  margin: 25px 0 20px 0;
+  margin: 10px 0 10px 0;
 `
 
 export const Map = styled.div`
@@ -264,9 +264,9 @@ export const BusinessTitle = styled.h2`
   color: ${props => props.theme.colors.darkTextColor};
   text-align: center;
   margin-top: 0;
-  margin-bottom: 36px;
+  margin-bottom: 0;
   padding-left: 30px;
-
+  padding-top: 25px;
   ${props => props.theme?.rtl && css`
     padding-right: 30px;
     padding-left: 0;
