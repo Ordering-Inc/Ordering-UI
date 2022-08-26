@@ -27,7 +27,7 @@ var WrappLayout = _styledComponents.default.div(_templateObject2 || (_templateOb
 
 exports.WrappLayout = WrappLayout;
 
-var WrapContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n\n  @media (min-width: 576px) {\n    padding: 0px;\n  }\n\n  &#businessProductList {\n    > div {\n      margin-top: 30px;\n    }\n  }\n"])), function (props) {
+var WrapContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 5px;\n  margin-top: 70px;\n  background: ", ";\n\n  @media (min-width: 576px) {\n    padding: 0px;\n  }\n\n  &#businessProductList {\n    > div {\n      margin-top: 30px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 });
 
@@ -39,7 +39,7 @@ var BusinessContent = _styledComponents.default.div(_templateObject4 || (_templa
 
 exports.BusinessContent = BusinessContent;
 
-var BusinessCategoryProductWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  /* Hide scrollbar for Chrome, Safari and Opera */\n  .category-lists::-webkit-scrollbar {\n    display: none;\n  }\n\n  /* Hide scrollbar for IE, Edge and Firefox */\n  .category-lists {\n    -ms-overflow-style: none;\n    scrollbar-width: none;\n  }\n\n  @media (min-width: 993px) {\n    width: ", ";\n  }\n"])), function (_ref) {
+var BusinessCategoryProductWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  /* Hide scrollbar for Chrome, Safari and Opera */\n  .category-lists::-webkit-scrollbar {\n    display: none;\n  }\n\n  /* Hide scrollbar for IE, Edge and Firefox */\n  .category-lists {\n    -ms-overflow-style: none;\n    scrollbar-width: none;\n  }\n\n  @media (min-width: 1000px) {\n    width: ", ";\n  }\n"])), function (_ref) {
   var showCartOnProductList = _ref.showCartOnProductList;
   return showCartOnProductList ? '70%' : '100%';
 });
@@ -49,7 +49,7 @@ exports.BusinessCategoryProductWrapper = BusinessCategoryProductWrapper;
 var BusinessCategoriesContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin: 0;\n  margin-right: 10px;\n  width: 100%;\n  @media (min-width: 993px) {\n    width: calc(31% - 25px);\n  }\n"])));
 
 exports.BusinessCategoriesContainer = BusinessCategoriesContainer;
-var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: 70px;\n\n  @media (min-width: 900px) {\n    display: block;\n  }\n"])));
+var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: 70px;\n  min-width: 325px;\n  @media (min-width: 1000px) {\n    display: block;\n  }\n"])));
 exports.BusinessCartContainer = BusinessCartContainer;
 
 var BusinessCartContent = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 30px;\n  position: relative;\n  margin-bottom: 30px;\n  max-height: ", ";\n  overflow: auto;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  /* .accordion.active {\n    padding-bottom: 10px;\n  } */\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref2) {

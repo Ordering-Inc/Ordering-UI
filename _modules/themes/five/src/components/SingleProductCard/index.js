@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleProductCardUI = function SingleProductCardUI(props) {
-  var _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$layouts$busine4, _theme$layouts$busine5, _theme$layouts2, _theme$layouts2$busin, _theme$layouts2$busin2, _theme$layouts2$busin3, _theme$layouts2$busin4, _theme$layouts2$busin5, _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _theme$images, _theme$images$dummies, _product$ribbon6, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
+  var _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$layouts$busine4, _theme$layouts$busine5, _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _theme$images, _theme$images$dummies, _product$ribbon6, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
 
   var product = props.product,
       isSoldOut = props.isSoldOut,
@@ -134,8 +134,8 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   }, 0);
   var totalBalance = (productBalance || 0) - removeToBalance;
   var maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance;
-  var showAddButton = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$busine = _theme$layouts.business_view) !== null && _theme$layouts$busine !== void 0 && (_theme$layouts$busine2 = _theme$layouts$busine.components) !== null && _theme$layouts$busine2 !== void 0 && (_theme$layouts$busine3 = _theme$layouts$busine2.products) !== null && _theme$layouts$busine3 !== void 0 && (_theme$layouts$busine4 = _theme$layouts$busine3.components) !== null && _theme$layouts$busine4 !== void 0 && (_theme$layouts$busine5 = _theme$layouts$busine4.add_to_cart_button) !== null && _theme$layouts$busine5 !== void 0 && _theme$layouts$busine5.hidden);
-  var productsRows = theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$busin = _theme$layouts2.business_view) === null || _theme$layouts2$busin === void 0 ? void 0 : (_theme$layouts2$busin2 = _theme$layouts2$busin.components) === null || _theme$layouts2$busin2 === void 0 ? void 0 : (_theme$layouts2$busin3 = _theme$layouts2$busin2.products) === null || _theme$layouts2$busin3 === void 0 ? void 0 : (_theme$layouts2$busin4 = _theme$layouts2$busin3.components) === null || _theme$layouts2$busin4 === void 0 ? void 0 : (_theme$layouts2$busin5 = _theme$layouts2$busin4.layout) === null || _theme$layouts2$busin5 === void 0 ? void 0 : _theme$layouts2$busin5.rows;
+  var showAddButton = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$busine = _theme$layouts.business_view) !== null && _theme$layouts$busine !== void 0 && (_theme$layouts$busine2 = _theme$layouts$busine.components) !== null && _theme$layouts$busine2 !== void 0 && (_theme$layouts$busine3 = _theme$layouts$busine2.products) !== null && _theme$layouts$busine3 !== void 0 && (_theme$layouts$busine4 = _theme$layouts$busine3.components) !== null && _theme$layouts$busine4 !== void 0 && (_theme$layouts$busine5 = _theme$layouts$busine4.add_to_cart_button) !== null && _theme$layouts$busine5 !== void 0 && _theme$layouts$busine5.hidden); // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
+
   var maxCartProductInventory = (product !== null && product !== void 0 && product.inventoried ? product === null || product === void 0 ? void 0 : product.quantity : undefined) - totalBalance;
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig;
   var maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory);
@@ -194,8 +194,8 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     onClick: handleClickProduct,
     isCartOnProductsList: isCartOnProductsList,
     style: useCustomFunctionality && customStyle,
-    className: "product-card",
-    productsRows: productsRows
+    className: "product-card" // productsRows={productsRows}
+
   }, isObservedValidation && /*#__PURE__*/_react.default.createElement("div", null, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0
   }, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

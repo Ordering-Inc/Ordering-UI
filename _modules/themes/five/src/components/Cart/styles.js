@@ -49,7 +49,7 @@ var CouponContainer = _styledComponents.default.div(_templateObject6 || (_templa
 
 exports.CouponContainer = CouponContainer;
 
-var CheckoutAction = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  box-sizing: border-box;\n  flex-direction: column;\n  p {\n    margin: 0;\n    font-weight: 600;\n    font-size: 18px;\n    color: ", ";\n  }\n\n  button {\n    padding: 10px 30px;\n    min-width: 150px;\n    width: 50%;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n\n  @media (min-width: 1070px) {\n    flex-direction: row;\n  }\n"])), function (props) {
+var CheckoutAction = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  box-sizing: border-box;\n  p {\n    margin: 0;\n    font-weight: 600;\n    font-size: 18px;\n    color: ", ";\n  }\n\n  button {\n    padding: 10px 30px;\n    min-width: 150px;\n    width: 50%;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 

@@ -71,6 +71,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       selectedCategory = _useState2[0],
       setSelectedCateogry = _useState2[1];
 
+  var scrollTopSpan = 60;
+
   var handleChangeCategory = function handleChangeCategory(category) {
     var _document$getElementB, _document$getElementB2;
 
@@ -86,7 +88,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
 
     if (!isBlockScroll) {
       window.scroll({
-        top: topPos - 60,
+        top: topPos - scrollTopSpan,
         left: 0,
         behavior: 'smooth'
       });
@@ -97,6 +99,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     return categories && categories.length && categories.map(function (category, i) {
       return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
         key: i,
+        id: "category-menu".concat((category === null || category === void 0 ? void 0 : category.id) || '-all'),
         className: "category ".concat(category.id === 'featured' ? 'special' : ''),
         active: business !== null && business !== void 0 && business.lazy_load_products_recommended ? (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id : (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === category.id,
         onClick: function onClick() {
@@ -107,67 +110,90 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     });
   };
 
-  (0, _react.useEffect)(function () {
-    var handleScroll = function handleScroll() {
-      if (business !== null && business !== void 0 && business.lazy_load_products_recommended) return;
-      var featuredElement = document.getElementById('categoryfeatured');
+  var handleScroll = function handleScroll() {
+    if (business !== null && business !== void 0 && business.lazy_load_products_recommended) return;
+    var featuredElement = document.getElementById('categoryfeatured');
 
-      var _categories = featuredElement ? _toConsumableArray(categories) : categories.filter(function (category) {
-        return category.id !== 'featured';
-      });
+    var _categories = featuredElement ? _toConsumableArray(categories) : categories.filter(function (category) {
+      return category.id !== 'featured';
+    });
 
-      (_categories === null || _categories === void 0 ? void 0 : _categories.length) && _categories.forEach(function (category) {
-        var _document$getElementB3, _document$getElementB4;
+    var windowTop = window.scrollY;
+    var categoryListsElement = document.getElementById('category-lists');
+    var categoryAreaWidth = (categoryListsElement === null || categoryListsElement === void 0 ? void 0 : categoryListsElement.clientWidth) || 0;
+    var categoryScrollChange = categoryListsElement === null || categoryListsElement === void 0 ? void 0 : categoryListsElement.scrollLeft;
 
-        var windowTop = window.scrollY;
-        var topPos = 0;
-        if (!(category !== null && category !== void 0 && category.id)) topPos = (_document$getElementB3 = document.getElementById('businessProductList')) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.offsetTop;else topPos = (_document$getElementB4 = document.getElementById("category".concat(category.id))) === null || _document$getElementB4 === void 0 ? void 0 : _document$getElementB4.offsetTop;
+    var _diff = -50;
 
-        if (windowTop >= topPos - 60) {
-          setSelectedCateogry(category);
+    var _moveDiff = 30;
+    (_categories === null || _categories === void 0 ? void 0 : _categories.length) && _categories.some(function (category) {
+      var _document$getElementB3, _document$getElementB4;
+
+      var topPos = category !== null && category !== void 0 && category.id ? (_document$getElementB3 = document.getElementById("category".concat(category.id))) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.offsetTop : (_document$getElementB4 = document.getElementById('businessProductList')) === null || _document$getElementB4 === void 0 ? void 0 : _document$getElementB4.offsetTop;
+
+      if (topPos - windowTop < scrollTopSpan + 5 && topPos - windowTop > 0 && category !== null && category !== void 0 && category.id) {
+        var choosedCategory = document.getElementById("category-menu".concat((category === null || category === void 0 ? void 0 : category.id) || '-all'));
+        var choosedCategoryLeft = (choosedCategory === null || choosedCategory === void 0 ? void 0 : choosedCategory.offsetLeft) || 0;
+
+        if (choosedCategoryLeft - categoryAreaWidth - categoryScrollChange > _diff || categoryScrollChange - choosedCategoryLeft > 0) {
+          var moveAmount = choosedCategoryLeft < 100 ? 0 : choosedCategoryLeft - _moveDiff;
+          categoryListsElement.scrollTo({
+            top: 0,
+            left: moveAmount,
+            behavior: 'smooth'
+          });
         }
-      });
-      var navbar = document.getElementById('category-lists');
-      var cart = document.getElementById('BusinessCartContainer');
-      var search = document.getElementById('WrapperSearchAbsolute');
-      var wrapperCategories = document.getElementById('wrapper-categories');
-      var styleSheet = document.getElementById('styles').sheet;
-      var style0 = '.sticky-prod-cat {';
-      style0 += 'position: fixed !important;';
-      style0 += 'top: 0 !important;';
-      style0 += 'width: 97% !important;';
-      style0 += 'padding: 15px 5px 0px 0px;';
-      style0 += '}';
-      var style1 = '.sticky-prod-cart {';
-      style1 += 'position: fixed !important;';
-      style1 += 'top: 0 !important;';
-      style1 += 'right: 2.5% !important;';
-      style1 += 'width: 28.5% !important;';
-      style1 += 'margin-top: 32px !important;';
-      style1 += '}';
-      var style2 = '.sticky-search {';
-      style2 += 'position: fixed !important;';
-      style2 += 'top: 10px !important;';
-      style2 += 'right: 32% !important;';
-      style2 += 'height: 50px !important;';
-      style2 += 'z-index: 9999 !important;';
-      style2 += '}';
-      styleSheet.insertRule(style0, 0);
-      styleSheet.insertRule(style1, 1);
-      styleSheet.insertRule(style2, 2);
-      var limit = window.pageYOffset >= (wrapperCategories === null || wrapperCategories === void 0 ? void 0 : wrapperCategories.offsetTop) && window.pageYOffset > 0;
 
-      if (limit) {
+        setSelectedCateogry(category);
+        return true;
+      }
+    });
+    var navbar = document.getElementById('category-lists');
+    var cart = document.getElementById('BusinessCartContainer');
+    var search = document.getElementById('WrapperSearchAbsolute');
+    var wrapperCategories = document.getElementById('wrapper-categories');
+    var limit = window.pageYOffset >= (wrapperCategories === null || wrapperCategories === void 0 ? void 0 : wrapperCategories.offsetTop) && window.pageYOffset > 0;
+
+    if (limit) {
+      var classAdded = navbar.classList.contains('sticky-prod-cat');
+
+      if (!classAdded) {
         navbar && navbar.classList.add('sticky-prod-cat');
         cart && cart.classList.add('sticky-prod-cart');
         search && search.classList.add('sticky-search');
-      } else {
-        navbar && navbar.classList.remove('sticky-prod-cat');
-        cart && cart.classList.remove('sticky-prod-cart');
-        search && search.classList.remove('sticky-search');
       }
-    };
+    } else {
+      navbar && navbar.classList.remove('sticky-prod-cat');
+      cart && cart.classList.remove('sticky-prod-cart');
+      search && search.classList.remove('sticky-search');
+    }
+  };
 
+  (0, _react.useEffect)(function () {
+    var styleSheet = document.getElementById('styles').sheet;
+    var style0 = '.sticky-prod-cat {';
+    style0 += 'position: fixed !important;';
+    style0 += 'top: 0 !important;';
+    style0 += 'width: 97% !important;';
+    style0 += 'padding: 15px 5px 0px 0px;';
+    style0 += '}';
+    var style1 = '.sticky-prod-cart {';
+    style1 += 'position: fixed !important;';
+    style1 += 'top: 0 !important;';
+    style1 += 'right: 2.5% !important;';
+    style1 += 'width: 28.5% !important;';
+    style1 += 'margin-top: 32px !important;';
+    style1 += '}';
+    var style2 = '.sticky-search {';
+    style2 += 'position: fixed !important;';
+    style2 += 'top: 10px !important;';
+    style2 += 'right: 32% !important;';
+    style2 += 'height: 50px !important;';
+    style2 += 'z-index: 9999 !important;';
+    style2 += '}';
+    styleSheet.insertRule(style0, 0);
+    styleSheet.insertRule(style1, 1);
+    styleSheet.insertRule(style2, 2);
     window.addEventListener('scroll', handleScroll);
     return function () {
       return window.removeEventListener('scroll', handleScroll);
