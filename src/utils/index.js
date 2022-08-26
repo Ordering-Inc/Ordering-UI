@@ -225,6 +225,8 @@ export const convertToRadian = (value) => {
 
 /**
  * Function to check URL
+ * @param {string} url URL of page
+ * @param {string} fallback default URL
  */
 export const checkSiteUrl = (url, fallback) => {
   if (!url) return fallback
