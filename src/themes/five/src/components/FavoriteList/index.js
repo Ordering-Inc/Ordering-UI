@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useOrder, useEvent, FavoriteList as FavoriteListController } from 'ordering-components'
+import { useLanguage, useOrder, useSite, useEvent, FavoriteList as FavoriteListController } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { NotFoundSource } from '../NotFoundSource'
@@ -10,6 +10,7 @@ import { AutoScroll } from '../AutoScroll'
 import { SingleProductCard } from '../SingleProductCard'
 import { useTheme } from 'styled-components'
 import { SingleOrderCard } from '../SingleOrderCard'
+import { checkSiteUrl } from '../../../../../utils'
 
 import {
   Container,
@@ -35,8 +36,12 @@ const FavoriteListUI = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
+  const [{ site }] = useSite()
   const { width } = useWindowSize()
   const theme = useTheme()
+
+  const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
+  const productUrlTemplate = checkSiteUrl(site?.product_url_template, '/store/:business_slug?category=:category_id&product=:product_id')
 
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
@@ -44,7 +49,11 @@ const FavoriteListUI = (props) => {
   const pastOrders = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
 
   const handleClickBusiness = (business) => {
-    events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
+    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      events.emit('go_to_page', { page: 'business', params: { business_slug: business.slug } })
+    } else {
+      events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${business.slug}` })
+    }
   }
 
   const handleGoToList = () => {
@@ -104,15 +113,58 @@ const FavoriteListUI = (props) => {
     const productId = product?.id
 
     if (!categoryId && !productId) {
-      events.emit('go_to_page', { page: 'business', params: { store: slug }, replace: true })
+      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+        events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
+      } else {
+        events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}` })
+      }
       return
     }
-    events.emit('go_to_page', {
-      page: 'business',
-      params: { store: slug },
-      search: `?category=${categoryId}&product=${productId}`,
-      replace: true
-    })
+    if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
+      return events.emit('go_to_page', {
+        page: 'product',
+        params: {
+          business_slug: slug,
+          category_slug: categoryId,
+          product_slug: productId
+        }
+      })
+    }
+    if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
+      const businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '')
+      return events.emit('go_to_page', {
+        page: 'product',
+        params: {
+          category_slug: categoryId,
+          product_slug: productId
+        },
+        search: `?${businessParameter}=${slug}`
+      })
+    }
+    if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
+      const ids = productUrlTemplate.split('?')[1].split('&')
+      const categoryParameter = ids[0].replace('=:category_id', '')
+      const productParameter = ids[1].replace('=:product_id', '')
+      return events.emit('go_to_page', {
+        page: 'product',
+        params: {
+          business_slug: slug
+        },
+        search: `?${categoryParameter}=${categoryId}&${productParameter}=${productId}`
+      })
+    }
+    if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
+      const ids = productUrlTemplate.split('?')[1].split('&')
+      const categoryParameter = ids[0].replace('=:category_id', '')
+      const productParameter = ids[1].replace('=:product_id', '')
+      return events.emit('go_to_page', {
+        page: 'product',
+        params: {
+          business_slug: slug
+        },
+        search: `?${categoryParameter}=${categoryId}&${productParameter}=${productId}`
+      })
+    }
   }
 
   const closeOrderModal = (e) => {
