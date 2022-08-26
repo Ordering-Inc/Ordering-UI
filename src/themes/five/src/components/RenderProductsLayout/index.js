@@ -40,6 +40,7 @@ import { SearchProducts as SearchProductsOld } from '../../../../../components/R
 import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/components/BusinessProductsListing/SearchProducts'
 import { ProfessionalFilter } from '../ProfessionalFilter'
 import { SearchIconWrapper } from '../BusinessBasicInformation/styles'
+import { OrderItAgain } from '../OrderItAgain'
 
 const layoutOne = 'groceries'
 
@@ -234,6 +235,10 @@ export const RenderProductsLayout = (props) => {
                     </MobileCartViewWrapper>
                   )} */}
                   <WrapContent id='businessProductList'>
+                    <OrderItAgain
+                      onProductClick={onProductClick}
+                      business={business}
+                    />
                     <BusinessLayoutProductsList
                       categories={[
                         { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
@@ -333,6 +338,11 @@ export const RenderProductsLayout = (props) => {
                   </BusinessCategoriesContainer>
                   <BusinessCategoryProductWrapper>
                     <WrapContent>
+                      <OrderItAgain
+                        onProductClick={onProductClick}
+                        business={business}
+                        isGroceries
+                      />
                       <BusinessLayoutProductsList
                         categories={[
                           { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
