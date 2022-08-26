@@ -21,6 +21,8 @@ import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../NotFoundSource'
+import { checkSiteUrl } from '../../../../../utils'
+
 const PromotionsUI = (props) => {
   const {
     offersState,
@@ -35,7 +37,7 @@ const PromotionsUI = (props) => {
   const [openModal, setOpenModal] = useState(false)
   const [{ site }] = useSite()
 
-  const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
+  const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
 
   const handleClickOffer = (offer) => {
     setOpenModal(true)

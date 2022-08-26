@@ -10,6 +10,7 @@ import { AutoScroll } from '../AutoScroll'
 import { SingleProductCard } from '../SingleProductCard'
 import { useTheme } from 'styled-components'
 import { SingleOrderCard } from '../SingleOrderCard'
+import { checkSiteUrl } from '../../../../../utils'
 
 import {
   Container,
@@ -39,8 +40,8 @@ const FavoriteListUI = (props) => {
   const { width } = useWindowSize()
   const theme = useTheme()
 
-  const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
-  const productUrlTemplate = site?.product_url_template || '/store/:business_slug?category=:category_id&product=:product_id'
+  const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
+  const productUrlTemplate = checkSiteUrl(site?.product_url_template, '/store/:business_slug?category=:category_id&product=:product_id')
 
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
