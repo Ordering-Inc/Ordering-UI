@@ -20,6 +20,7 @@ import {
   QuantityContainer,
   RibbonBox,
   TitleWrapper,
+  LastOrder,
   SkeletonCardInfo,
   SkeletonCardLogo
 } from './styles'
@@ -39,13 +40,14 @@ const SingleProductCardUI = (props) => {
     useKioskApp,
     productAddedToCartLength,
     handleFavoriteProduct,
-    isFavorite
+    isFavorite,
+    isPreviously
   } = props
 
   const [, t] = useLanguage()
   const [$element, isObserved] = useIntersectionObserver()
   const [stateConfig] = useConfig()
-  const [{ parsePrice, optimizeImage }] = useUtils()
+  const [{ parsePrice, optimizeImage, parseDate }] = useUtils()
   const [orderState] = useOrder()
   const [{ auth }, { login }] = useSession()
   const [orderingTheme] = useOrderingTheme()
@@ -67,7 +69,7 @@ const SingleProductCardUI = (props) => {
 
   const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
 
-  const hideAddButton = orderingTheme?.theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden
+  const hideAddButton = orderingTheme?.theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden ?? true
   // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
   let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - totalBalance
@@ -127,6 +129,7 @@ const SingleProductCardUI = (props) => {
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
         className='product-card'
+        isShowAddButt={!useCustomFunctionality && !hideAddButton && !isSkeleton}
       // productsRows={productsRows}
       >
         {isObservedValidation ? (
@@ -138,10 +141,10 @@ const SingleProductCardUI = (props) => {
                     <span>{productAddedToCartLength}</span>
                   </QuantityContainer>
                 )}
-                <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} isBgimage={optimizeImage(product?.images, 'h_86,c_limit')}>
+                <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} isBgimage={optimizeImage(product?.images, 'h_86,c_limit')} oneLine={isPreviously}>
                   <TitleWrapper>
                     {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-                    {!useKioskApp && (
+                    {!useKioskApp && !isPreviously && (
                       !isSkeleton ? (
                         <span onClick={() => handleChangeFavorite()} ref={favoriteRef}>
                           {product?.favorite ? <Like /> : <DisLike />}
@@ -160,6 +163,7 @@ const SingleProductCardUI = (props) => {
                     <Skeleton width={100} />
                   )}
                   {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+                  {isPreviously && (!isSkeleton ? (<LastOrder>{t('LAST_ORDERED_ON', 'Last ordered on')} {parseDate(product?.last_ordered_date, { outputFormat: 'MMM DD, YYYY' })}</LastOrder>) : (<Skeleton width={80} />))}
                 </CardInfo>
                 {!isSkeleton ? (
                   <WrapLogo isBgimage={optimizeImage(product?.images, 'h_86,c_limit')}>
@@ -200,7 +204,7 @@ const SingleProductCardUI = (props) => {
             </SkeletonCardLogo>
           </div>
         )}
-        {!useCustomFunctionality && typeof hideAddButton !== 'undefined' && !hideAddButton && !isSkeleton && (
+        {!useCustomFunctionality && !hideAddButton && !isSkeleton && (
           <Button outline color='primary'>
             {t('ADD', 'Add')}
           </Button>

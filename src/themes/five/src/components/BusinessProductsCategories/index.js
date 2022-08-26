@@ -74,12 +74,14 @@ const BusinessProductsCategoriesUI = (props) => {
 
     const _diff = -50
     const _moveDiff = 30
+    const _paddDiff = scrollTopSpan + 10
 
     _categories?.length && _categories.some(category => {
       const topPos = category?.id ? document.getElementById(`category${category.id}`)?.offsetTop
         : document.getElementById('businessProductList')?.offsetTop
-
-      if (topPos - windowTop < scrollTopSpan + 5 && topPos - windowTop > 0 && category?.id) {
+      const HeightOfEle = category?.id ? document.getElementById(`category${category.id}`)?.clientHeight : 0
+      if ((windowTop > topPos - _paddDiff && windowTop < topPos + HeightOfEle - _paddDiff) &&
+        category?.id) {
         const choosedCategory = document.getElementById(`category-menu${category?.id || '-all'}`)
         const choosedCategoryLeft = choosedCategory?.offsetLeft || 0
 
