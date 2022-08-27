@@ -168,7 +168,9 @@ const BusinessProductsListUI = (props) => {
                           customText={t('MORE', 'More')}
                           customStyle={{
                             display: 'flex',
-                            justifyContent: 'center'
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            boxShadow: 'rgba(0, 0, 0, 0.1) 0px 2px 8px'
                           }}
                         />
                       )}

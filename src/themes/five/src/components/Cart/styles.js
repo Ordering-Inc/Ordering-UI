@@ -100,7 +100,6 @@ export const CheckoutAction = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   box-sizing: border-box;
-
   p {
     margin: 0;
     font-weight: 600;

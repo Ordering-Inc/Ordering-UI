@@ -4,6 +4,7 @@ export const Title = styled.h1`
   font-weight: 600;
   font-size: 20px;
   color: ${props => props.theme.colors.darkTextColor};
+  margin-top: 0;
   margin-bottom: 18px;
 `
 
@@ -11,6 +12,7 @@ export const WrappLayout = styled.div``
 
 export const WrapContent = styled.div`
   padding: 5px;
+  margin-top: 70px;
   background: ${props => props.theme.colors.backgroundPage};
 
   @media (min-width: 576px) {
@@ -48,7 +50,7 @@ export const BusinessCategoryProductWrapper = styled.div`
     scrollbar-width: none;
   }
 
-  @media (min-width: 993px) {
+  @media (min-width: 1000px) {
     width: ${({ showCartOnProductList }) => showCartOnProductList ? '70%' : '100%'};
   }
 `
@@ -64,8 +66,9 @@ export const BusinessCategoriesContainer = styled.div`
 
 export const BusinessCartContainer = styled(BusinessCategoriesContainer)`
   display: none;
-
-  @media (min-width: 500px) {
+  margin-top: 70px;
+  min-width: 325px;
+  @media (min-width: 1000px) {
     display: block;
   }
 `

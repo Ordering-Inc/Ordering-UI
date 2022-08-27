@@ -27,6 +27,7 @@ import { OrderBillSection } from './OrderBillSection'
 import { ActionsSection } from './ActionsSection'
 import { OrderPreferencesSection } from './OrderPreferencesSections'
 import { PlaceSpot } from '../PlaceSpot'
+import { Confirm } from '../Confirm'
 
 import {
   Container,
@@ -60,7 +61,9 @@ import {
   HeaderTitle,
   PlaceSpotSection,
   BtsOrderStatus,
-  LinkWrapper
+  LinkWrapper,
+  MapWrapper,
+  BusinessExternalWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
@@ -83,7 +86,8 @@ const OrderDetailsUI = (props) => {
     messagesReadList,
     reorderState,
     handleReorder,
-    orderTypes
+    orderTypes,
+    handleRemoveCart
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -103,10 +107,12 @@ const OrderDetailsUI = (props) => {
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isService, setIsService] = useState(false)
   const [isOrderHistory, setIsOrderHistory] = useState(false)
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
   const acceptedStatus = [1, 2, 5, 6, 10, 11, 12]
+  const completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const placeSpotTypes = [3, 4, 5]
   const googleMapsApiKey = configs?.google_maps_api_key?.value
 
@@ -231,6 +237,26 @@ const OrderDetailsUI = (props) => {
     deleteUserCustomer(true)
     refreshOrderOptions()
     handleGoToPage({ page: 'home' })
+  }
+
+  const handleClickReorder = (order) => {
+    if (carts[`businessId:${order?.business_id}`] && carts[`businessId:${order?.business_id}`]?.products?.length > 0) {
+      setConfirm({
+        open: true,
+        content: t('QUESTION_DELETE_PRODUCTS_FROM_CART', 'Are you sure that you want to delete all products from cart?'),
+        handleOnAccept: async () => {
+          handleRemoveCart()
+          setConfirm({ ...confirm, open: false })
+        }
+      })
+    } else {
+      handleReorder(order.id)
+    }
+  }
+
+  const handleOriginalReorder = () => {
+    setConfirm({ ...confirm, open: false })
+    handleReorder(order.id)
   }
 
   const ActionsSectionProps = {
@@ -400,10 +426,20 @@ const OrderDetailsUI = (props) => {
                         onClick={() => handleStartNewOrder(order.id)}
                         disabled={reorderState?.loading}
                       >
-                        {reorderState?.loading
-                          ? t('LOADING', 'Loading...')
-                          : t('ORDER_AGAIN', 'Order Again')}
+                        {t('START_NEW_ORDER', 'Start new order')}
                       </Button>
+                      {completedStatus.includes(parseInt(order?.status, 10)) && (
+                        <Button
+                          color='primary'
+                          outline
+                          onClick={() => handleClickReorder(order)}
+                          disabled={reorderState?.loading}
+                        >
+                          {reorderState?.loading
+                            ? t('LOADING', 'Loading...')
+                            : t('REORDER', 'Reorder')}
+                        </Button>
+                      )}
                     </ReOrder>
                   )}
               </TitleContainer>
@@ -436,19 +472,12 @@ const OrderDetailsUI = (props) => {
                         <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                       </ReviewOrderLink>
                     </LinkWrapper>
-
                   </div>
                 </>
               )}
             </OrderInfo>
             <OrderBusiness>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '50%'
-                }}
-              >
+              <BusinessExternalWrapper>
                 <BusinessWrapper
                   w='calc(100% - 20px)'
                 // borderBottom={showOrderActions}
@@ -505,7 +534,7 @@ const OrderDetailsUI = (props) => {
                       <div>
                         <Button
                           style={{ fontSize: 14 }}
-                          color='primary'
+                          color={order?.status === 20 ? 'secundary' : 'primary'}
                           onClick={() => handleChangeOrderStatus(20)}
                           disabled={order?.status === 20}
                         >
@@ -515,7 +544,7 @@ const OrderDetailsUI = (props) => {
                       <div>
                         <Button
                           style={{ fontSize: 14 }}
-                          color='secundary'
+                          color={order?.status === 20 ? 'primary' : 'secundary'}
                           disabled={order?.status === 21}
                           onClick={() => handleChangeOrderStatus(21)}
                         >
@@ -525,15 +554,16 @@ const OrderDetailsUI = (props) => {
                     </BtsOrderStatus>
                   </BusinessWrapper>
                 )}
-
-              </div>
+              </BusinessExternalWrapper>
               {googleMapsApiKey && (
-                <OrderMapSection
-                  isMapImg
-                  validStatuses={[order?.status]}
-                  location={order?.business?.location}
-                  mapStyle={{ width: '50%' }}
-                />
+                <MapWrapper>
+                  <OrderMapSection
+                    isMapImg
+                    validStatuses={[order?.status]}
+                    location={order?.business?.location}
+                    mapStyle={{ width: '100%' }}
+                  />
+                </MapWrapper>
               )}
             </OrderBusiness>
             <OrderCustomer>
@@ -743,6 +773,16 @@ const OrderDetailsUI = (props) => {
           }
         />
       </Modal>
+      <Confirm
+        title={t('ORDER', 'Order')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => handleOriginalReorder()}
+        onCancel={() => handleOriginalReorder()}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }
