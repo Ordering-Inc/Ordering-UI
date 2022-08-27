@@ -29,8 +29,6 @@ var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
 var _utils = require("../../../../../utils");
 
-var _useIntersectionObserver = require("../../../../../hooks/useIntersectionObserver");
-
 var _styles = require("./styles");
 
 var _GoPrimitiveDot = _interopRequireDefault(require("@meronex/icons/go/GoPrimitiveDot"));
@@ -117,11 +115,6 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
 
-  var _useIntersectionObser = (0, _useIntersectionObserver.useIntersectionObserver)(),
-      _useIntersectionObser2 = _slicedToArray(_useIntersectionObser, 2),
-      $element = _useIntersectionObser2[0],
-      isObserved = _useIntersectionObser2[1];
-
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -196,13 +189,12 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ContainerCard, {
-    ref: $element,
     isSkeleton: isSkeleton,
     isCustomerMode: isCustomerMode && hasInformationLength,
     firstCard: firstCard,
     minWidthEnabled: minWidthEnabled,
     businessRows: businessRows
-  }, isObserved && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
     isSkeleton: isSkeleton,
     onClick: function onClick(e) {
       return !isSkeleton && handleClick && handleBusinessClick(e);
