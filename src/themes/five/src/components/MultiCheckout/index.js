@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import {
   useLanguage,
   useUtils,
@@ -62,6 +63,7 @@ const MultiCheckoutUI = (props) => {
   const [customerState] = useCustomer()
   const [validationFields] = useValidationFields()
   const [{ user }] = useSession()
+  const history = useHistory()
 
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
