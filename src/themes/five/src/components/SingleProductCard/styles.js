@@ -86,7 +86,9 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(100% - 90px);
+  ${({ isBgimage }) => css`
+    width: ${isBgimage ? 'calc(100% - 90px)' : '100%'};
+  `}
   > * {
     margin: 3px;
   }
@@ -127,7 +129,9 @@ export const WrapLogo = styled.div`
   max-width: 86px;
   max-height: 86px;
   height: 86px;
-  width: 86px;
+  ${({ isBgimage }) => isBgimage && css`
+    width: 86px;
+  `}
   margin-left: 5px;
   ${props => props.theme?.rtl && css`
     margin-right: 5px;
@@ -256,4 +260,24 @@ export const TitleWrapper = styled.div`
       font-size: 16px;
     }
   }
+`
+export const SkeletonCardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 90px);
+  > * {
+    margin: 3px;
+  }
+`
+export const SkeletonCardLogo = styled.div`
+  max-width: 86px;
+  max-height: 86px;
+  width: 86px;
+  height: 86px;
+
+  margin-left: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
 `
