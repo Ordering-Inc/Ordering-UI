@@ -2,7 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
-  min-height: 160px;
+  min-height: 162px;
+  max-height: 162px;
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
   border: 1px solid #E9ECEF;
   padding: 10px;
