@@ -19,7 +19,9 @@ import {
   PriceWrapper,
   QuantityContainer,
   RibbonBox,
-  TitleWrapper
+  TitleWrapper,
+  SkeletonCardInfo,
+  SkeletonCardLogo
 } from './styles'
 import { Button } from '../../styles/Buttons'
 
@@ -126,7 +128,7 @@ const SingleProductCardUI = (props) => {
         className='product-card'
       // productsRows={productsRows}
       >
-        {isObservedValidation && (
+        {isObservedValidation ? (
           <div>
             {!useCustomFunctionality && (
               <>
@@ -135,7 +137,7 @@ const SingleProductCardUI = (props) => {
                     <span>{productAddedToCartLength}</span>
                   </QuantityContainer>
                 )}
-                <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
+                <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} isBgimage={optimizeImage(product?.images, 'h_86,c_limit')}>
                   <TitleWrapper>
                     {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
                     {!useKioskApp && (
@@ -159,7 +161,7 @@ const SingleProductCardUI = (props) => {
                   {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
                 </CardInfo>
                 {!isSkeleton ? (
-                  <WrapLogo>
+                  <WrapLogo isBgimage={optimizeImage(product?.images, 'h_86,c_limit')}>
                     {product?.ribbon?.enabled && (
                       <RibbonBox
                         bgColor={product?.ribbon?.color}
@@ -172,7 +174,7 @@ const SingleProductCardUI = (props) => {
                     <CardLogo
                       className='image'
                       soldOut={isSoldOut || maxProductQuantity <= 0}
-                      bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
+                      bgimage={optimizeImage(product?.images, 'h_86,c_limit')}
                     />
                   </WrapLogo>
                 ) : (
@@ -184,6 +186,17 @@ const SingleProductCardUI = (props) => {
             {useCustomFunctionality && customText && (
               <span style={{ fontSize: 16, fontWeight: 500 }}>{customText}</span>
             )}
+          </div>
+        ) : (
+          <div>
+            <SkeletonCardInfo>
+              <Skeleton width={100} />
+              <Skeleton width={100} />
+              <Skeleton width={100} />
+            </SkeletonCardInfo>
+            <SkeletonCardLogo>
+              <Skeleton height={75} width={75} />
+            </SkeletonCardLogo>
           </div>
         )}
         {!useCustomFunctionality && showAddButton && !isSkeleton && (
