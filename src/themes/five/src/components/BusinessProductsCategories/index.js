@@ -18,7 +18,7 @@ const BusinessProductsCategoriesUI = (props) => {
   } = props
 
   const [selectedCategory, setSelectedCateogry] = useState({ id: null })
-  const scrollTopSpan = 60
+  const scrollTopSpan = 116
 
   const handleChangeCategory = (category) => {
     const isBlockScroll = window.location.search.includes('category') &&
@@ -118,14 +118,14 @@ const BusinessProductsCategoriesUI = (props) => {
 
     let style0 = '.sticky-prod-cat {'
     style0 += 'position: fixed !important;'
-    style0 += 'top: 0 !important;'
+    style0 += 'top: 56px !important;'
     style0 += 'width: 97% !important;'
     style0 += 'padding: 15px 5px 0px 0px;'
     style0 += '}'
 
     let style1 = '.sticky-prod-cart {'
     style1 += 'position: fixed !important;'
-    style1 += 'top: 0 !important;'
+    style1 += 'top: 56px !important;'
     style1 += 'right: 2.5% !important;'
     style1 += 'width: 28.5% !important;'
     style1 += 'margin-top: 32px !important;'
