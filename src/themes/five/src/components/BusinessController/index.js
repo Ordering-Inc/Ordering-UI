@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, useUtils, useOrder, useConfig, useSession, BusinessController as BusinessSingleCard } from 'ordering-components'
+import { useLanguage, useUtils, useOrder, useConfig, useSession, useOrderingTheme, BusinessController as BusinessSingleCard } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
@@ -77,7 +77,7 @@ const BusinessControllerUI = (props) => {
 
   const favoriteRef = useRef(null)
 
-  const businessRows = theme?.layouts?.business_listing_view?.components?.layout?.rows
+  const businessRows = orderingTheme?.theme?.business_listing_view?.components?.layout?.rows
 
   // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
