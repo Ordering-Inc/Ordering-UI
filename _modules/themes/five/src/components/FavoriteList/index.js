@@ -31,6 +31,8 @@ var _styledComponents = require("styled-components");
 
 var _SingleOrderCard = require("../SingleOrderCard");
 
+var _utils = require("../../../../../utils");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -90,10 +92,16 @@ var FavoriteListUI = function FavoriteListUI(props) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
+  var _useSite = (0, _orderingComponents.useSite)(),
+      _useSite2 = _slicedToArray(_useSite, 1),
+      site = _useSite2[0].site;
+
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
   var theme = (0, _styledComponents.useTheme)();
+  var businessUrlTemplate = (0, _utils.checkSiteUrl)(site === null || site === void 0 ? void 0 : site.business_url_template, '/store/:business_slug');
+  var productUrlTemplate = (0, _utils.checkSiteUrl)(site === null || site === void 0 ? void 0 : site.product_url_template, '/store/:business_slug?category=:category_id&product=:product_id');
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -108,12 +116,19 @@ var FavoriteListUI = function FavoriteListUI(props) {
   var pastOrders = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
 
   var handleClickBusiness = function handleClickBusiness(business) {
-    events.emit('go_to_page', {
-      page: 'business',
-      params: {
-        store: business.slug
-      }
-    });
+    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      events.emit('go_to_page', {
+        page: 'business',
+        params: {
+          business_slug: business.slug
+        }
+      });
+    } else {
+      events.emit('go_to_page', {
+        page: 'business',
+        search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(business.slug)
+      });
+    }
   };
 
   var handleGoToList = function handleGoToList() {
@@ -229,24 +244,74 @@ var FavoriteListUI = function FavoriteListUI(props) {
     var productId = product === null || product === void 0 ? void 0 : product.id;
 
     if (!categoryId && !productId) {
-      events.emit('go_to_page', {
-        page: 'business',
-        params: {
-          store: slug
-        },
-        replace: true
-      });
+      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+        events.emit('go_to_page', {
+          page: 'business',
+          params: {
+            business_slug: slug
+          }
+        });
+      } else {
+        events.emit('go_to_page', {
+          page: 'business',
+          search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(slug)
+        });
+      }
+
       return;
     }
 
-    events.emit('go_to_page', {
-      page: 'business',
-      params: {
-        store: slug
-      },
-      search: "?category=".concat(categoryId, "&product=").concat(productId),
-      replace: true
-    });
+    if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
+      return events.emit('go_to_page', {
+        page: 'product',
+        params: {
+          business_slug: slug,
+          category_slug: categoryId,
+          product_slug: productId
+        }
+      });
+    }
+
+    if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
+      var businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '');
+      return events.emit('go_to_page', {
+        page: 'product',
+        params: {
+          category_slug: categoryId,
+          product_slug: productId
+        },
+        search: "?".concat(businessParameter, "=").concat(slug)
+      });
+    }
+
+    if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
+      var ids = productUrlTemplate.split('?')[1].split('&');
+      var categoryParameter = ids[0].replace('=:category_id', '');
+      var productParameter = ids[1].replace('=:product_id', '');
+      return events.emit('go_to_page', {
+        page: 'product',
+        params: {
+          business_slug: slug
+        },
+        search: "?".concat(categoryParameter, "=").concat(categoryId, "&").concat(productParameter, "=").concat(productId)
+      });
+    }
+
+    if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
+      var _ids = productUrlTemplate.split('?')[1].split('&');
+
+      var _categoryParameter = _ids[0].replace('=:category_id', '');
+
+      var _productParameter = _ids[1].replace('=:product_id', '');
+
+      return events.emit('go_to_page', {
+        page: 'product',
+        params: {
+          business_slug: slug
+        },
+        search: "?".concat(_categoryParameter, "=").concat(categoryId, "&").concat(_productParameter, "=").concat(productId)
+      });
+    }
   };
 
   var closeOrderModal = function closeOrderModal(e) {

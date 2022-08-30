@@ -23,7 +23,7 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: 108px;  \n  background: ", ";\n  border: 1px solid #E9ECEF;\n  padding: 10px;\n  border-radius: 7.6px;\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n\n  > div {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n  }\n  ", "\n\n"])), function (_ref) {
+var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: 160px;\n  background: ", ";\n  border: 1px solid #E9ECEF;\n  padding: 10px;\n  border-radius: 7.6px;\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n\n  > div {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n  }\n  ", "\n"])), function (_ref) {
   var soldOut = _ref.soldOut;
   return soldOut ? '#6c757d33' : '#FFF';
 }, function (_ref2) {
@@ -36,7 +36,7 @@ var CardContainer = _styledComponents.default.div(_templateObject || (_templateO
       var _props$theme;
 
       return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        margin: 10px 0px 10px 20px;\n      "])));
-    }) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    @media (min-width: 681px) {\n      width: calc(49% - 40px);\n    }\n\n    @media (min-width: 1200px) {\n      width: calc(33% - 40px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
+    }) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    @media (min-width: 681px) {\n      width: calc(49% - 40px);\n    }\n\n    @media (min-width: 1440px) {\n      width: calc(33% - 40px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
       var _props$theme2;
 
       return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin: 10px 0px 10px 20px;\n      "])));
