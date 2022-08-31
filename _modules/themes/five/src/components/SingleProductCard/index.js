@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleProductCardUI = function SingleProductCardUI(props) {
-  var _orderingTheme, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _product$ribbon6, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _product$ribbon6, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
 
   var product = props.product,
       isSoldOut = props.isSoldOut,
@@ -110,6 +110,10 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
       auth = _useSession2[0].auth,
       login = _useSession2[1].login;
 
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
+
   var theme = (0, _styledComponents.useTheme)();
   var favoriteRef = (0, _react.useRef)(null);
 
@@ -134,7 +138,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   }, 0);
   var totalBalance = (productBalance || 0) - removeToBalance;
   var maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance;
-  var hideAddButton = (_orderingTheme = orderingTheme) === null || _orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = _orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.products) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.add_to_cart_button) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.hidden; // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
+  var hideAddButton = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.products) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.add_to_cart_button) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.hidden; // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
   var maxCartProductInventory = (product !== null && product !== void 0 && product.inventoried ? product === null || product === void 0 ? void 0 : product.quantity : undefined) - totalBalance;
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig;
