@@ -7,7 +7,6 @@ import {
   Cart3
 } from 'react-bootstrap-icons'
 import {
-  BusinessAndProductList,
   useEvent,
   useLanguage,
   useOrder,
@@ -16,7 +15,7 @@ import {
   useSite,
   useOrderingTheme
 } from 'ordering-components'
-
+import { BusinessAndProductList } from './test'
 import {
   ProductsContainer,
   ProductLoading,
@@ -31,6 +30,7 @@ import {
 import { NotFoundSource } from '../NotFoundSource'
 import { PageNotFound } from '../../../../../components/PageNotFound'
 import { ProductForm } from '../ProductForm'
+import { ProductForm as ProductFormPFChangs } from '../ProductForm/layouts/pfchangs'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
@@ -105,6 +105,10 @@ const BusinessProductsListingUI = (props) => {
     { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
     { value: 'a-z', content: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z'), showOnSelected: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z') }
   ]
+
+  const pfchangs = theme?.layouts?.business_view?.components?.layout?.type === 'pfchangs'
+
+  const ProductFormComponent = pfchangs ? ProductFormPFChangs : ProductForm
 
   const handler = () => {
     setOpenBusinessInformation(true)
@@ -250,8 +254,8 @@ const BusinessProductsListingUI = (props) => {
 
   return (
     <>
-      <ProductsContainer>
-        {!props.useKioskApp && (
+      <ProductsContainer pfchangs={pfchangs}>
+        {!props.useKioskApp && !pfchangs && (
           <ArrowLeft onClick={() => handleGoToBusinessList()} />
         )}
         <RenderProductsLayout
@@ -384,15 +388,15 @@ const BusinessProductsListingUI = (props) => {
       </Modal>
 
       <Modal
-        width={props.useKioskApp ? '80%' : '760px'}
+        width={pfchangs ? '60%' : props.useKioskApp ? '80%' : '760px'}
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
         padding='0'
         isProductForm
         disableOverflowX
+        hideCloseDefault={pfchangs}
       >
-
         {productModal.loading && !productModal.error && (
           <ProductLoading>
             <SkeletonItem>
@@ -426,12 +430,13 @@ const BusinessProductsListingUI = (props) => {
                 handleChangeProfessional={handleChangeProfessionalSelected}
               />
             ) : (
-              <ProductForm
+              <ProductFormComponent
                 businessSlug={business?.slug}
                 useKioskApp={props.useKioskApp}
                 product={productModal.product || curProduct}
                 businessId={business?.id}
                 onSave={handlerProductAction}
+                closeModalProductForm={closeModalProductForm}
               />
             )}
           </>

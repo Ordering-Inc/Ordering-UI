@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const HeroContainerStyled = styled.div`
   width: 100%;
@@ -28,58 +29,20 @@ export const HeroContainer = (props) => {
   )
 }
 
-export const Title = styled.h1`
-  margin: 0px;
-  text-align: left;
-  font-weight: 500;
-  font-size: 50px;
-  letter-spacing: 0px;
-  color: #FFFFFF;
-  opacity: 1;
-
-  ${props => props.theme?.rtl && css`
-      text-align: right;
-  `}
-
-  @media (min-width: 400px) {
-    font-size: 65px;
-  }
-
-  @media (min-width: 576px) {
-    font-size: 72px;
-  }
-`
-
-export const Slogan = styled.p`
-  margin: 0px;
-  text-align: left;
-  font-size: 24px;
-  letter-spacing: 0px;
-  color: #FFFFFF;
-  opacity: 1;
-  margin-bottom: 37px;
-
-  ${props => props.theme?.rtl && css`
-      text-align: right;
-  `}
-
-  @media (min-width: 480px) {
-    font-size: 24px;
-  }
-`
-
 export const WrapInput = styled.div`
   position: relative;
   cursor: pointer;
-  padding: 10px 25px;
+  padding: 10px 5px;
   background: #FFFFFF;
   border: 1px solid #DEE2E6;
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-  display: flex;
   align-items: center;
   margin-bottom: 27px;
   margin-right: 10px;
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
 
   ${({ withIcon }) => withIcon && css`
     box-sizing: border-box;
@@ -100,9 +63,11 @@ export const WrapInput = styled.div`
   `}
   
   p {
-    color: ${props => props.theme.colors.darkTextColor};
+    color: #000 !important;
     position: relative;
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   svg {
@@ -122,25 +87,30 @@ export const WrapInput = styled.div`
 
 export const ContentWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  min-height: 100vh;
+  flex-direction: column;
   position: relative;
-
+  @media (min-width: 768px){
+    flex-direction: row;
+    min-height: 100vh;
+  }
 `
 
 export const SearchLocationsContainer = styled.div`
   padding: 40px 20px 20px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: calc(100vh - 97px);
   box-sizing: border-box;
-
+  h1 {
+    color: #fff;
+  }
   div {
     margin: 20px 0 0;
     p{
       color: ${({ theme }) => theme.colors.titleHomeColor};
     }
   }
-  @media (min-width: 768){
+  @media (min-width: 768px){
     width: 50%;
   }
 
@@ -154,7 +124,7 @@ export const DeliveryPickupContainer = styled.div`
   display: flex;
   position: relative;
   border-radius: 0px;
-  border: 1px solid rgb(161, 124, 50);
+  border: 1px solid ${({ theme }) => theme.colors.gold};
   height: 52px;
   background-color: transparent;
 
@@ -170,7 +140,7 @@ export const DeliveryPickupContainer = styled.div`
   &::after {
     ${({ orderTypeSelected }) => orderTypeSelected === 2 ? css`
       content: "";
-      background: rgb(161, 124, 50);
+      background:  ${({ theme }) => theme.colors.gold};
       position: absolute;
       transition: all 0.2s linear 0s;
       left: 6px;
@@ -179,7 +149,7 @@ export const DeliveryPickupContainer = styled.div`
       width: calc(50% - 6px);
     ` : css`
       content: "";
-      background: rgb(161, 124, 50);
+      background: ${({ theme }) => theme.colors.gold};
       position: absolute;
       transition: all 0.2s linear 0s;
       bottom: 5px;
@@ -215,4 +185,39 @@ export const Diviver = styled.hr`
   display: block;
   height: 1px;
   margin: 24px 0px;
+`
+
+export const WrapperMap = styled.div`
+  flex: 1;
+  height: calc(100vh - 97px);
+  > div {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 15px;
+  }
+  .btn-choose-store {
+    line-height: 30px;
+    padding: 0 10px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 80px;
+    height: 38px;
+    font-size: 14px;
+    background: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primaryContrast};
+    border-color: ${props => props.theme.colors.primary};
+    &:active {
+      background: ${props => darken(0.07, props.theme.colors.primary)};
+    }
+  }
+  .btn-address-map {
+    cursor: pointer;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 `

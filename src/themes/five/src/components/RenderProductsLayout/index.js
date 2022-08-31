@@ -12,7 +12,10 @@ import { BusinessBasicInformation as BusinessBasicInformationOld } from '../../.
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
 import { BusinessProductsCategories as CategoriesLayoutGroceries } from '../BusinessProductsCategories/layouts/groceries'
+import { BusinessProductsCategories as CategoriesLayoutPFChangs } from '../BusinessProductsCategories/layouts/pfchangs'
+
 import { BusinessProductsList as ProductListLayoutGroceries } from '../BusinessProductsList/layouts/groceries'
+import { BusinessProductsList as ProductListLayoutPFChangs } from '../BusinessProductsList/layouts/pfchangs'
 import { Modal } from '../Modal'
 import { BusinessesListing } from '../BusinessesListing'
 import { Cart } from '../Cart'
@@ -40,6 +43,7 @@ import { SearchProducts as SearchProductsOld } from '../../../../../components/R
 import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/components/BusinessProductsListing/SearchProducts'
 import { ProfessionalFilter } from '../ProfessionalFilter'
 import { SearchIconWrapper } from '../BusinessBasicInformation/styles'
+import { BusinessBasicInformationPFChangs } from '../BusinessBasicInformation/layouts/pfchangs'
 
 const layoutOne = 'groceries'
 
@@ -88,7 +92,7 @@ export const RenderProductsLayout = (props) => {
   const [orderingTheme] = useOrderingTheme()
   const [isCartModal, setisCartModal] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
-
+  const [subcategorySelected, setSubcategorySelected] = useState(null)
   const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1') && !useKioskApp
   const BusinessBasicInformationComponent =
     orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'red'
@@ -97,7 +101,9 @@ export const RenderProductsLayout = (props) => {
         ? BusinessBasicInformationStarbucks
         : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'old'
           ? BusinessBasicInformationOld
-          : BusinessBasicInformation
+          : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'pfchangs'
+            ? BusinessBasicInformationPFChangs
+            : BusinessBasicInformation // cambiar
 
   const SearchProductsComponent =
     orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type === 'old'
@@ -110,15 +116,27 @@ export const RenderProductsLayout = (props) => {
   const businessLayout = {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
-  const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
+  const showCartOnProductList = false // !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
   const showBusinessNearCity = !theme?.layouts?.business_view?.components?.near_business?.hidden
+  const headerType = 'pfchangs' || orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type // cambiar
 
-  const BusinessLayoutCategories = businessLayout.layoutOne
-    ? CategoriesLayoutGroceries
+  const BusinessLayoutCategories = headerType === 'pfchangs'
+    ? CategoriesLayoutPFChangs : businessLayout.layoutOne
+      ? CategoriesLayoutGroceries
+      : BusinessProductsCategories
+
+  const BusinessLayoutProductsList = headerType === 'pfchangs'
+    ? ProductListLayoutPFChangs
+    : businessLayout.layoutOne
+      ? ProductListLayoutGroceries
+      : BusinessProductsList
+
+  const BusinessLayoutCategoriesSkeleton = headerType === 'pfchangs'
+    ? CategoriesLayoutPFChangs
     : BusinessProductsCategories
 
-  const BusinessLayoutProductsList = businessLayout.layoutOne
-    ? ProductListLayoutGroceries
+  const BusinessLayoutProductsListSkeleton = headerType === 'pfchangs'
+    ? ProductListLayoutPFChangs
     : BusinessProductsList
 
   return (
@@ -166,11 +184,11 @@ export const RenderProductsLayout = (props) => {
                 </WrapperSearch>
               </>
             )}
-            {!businessLayout.layoutOne && (
+            {(!businessLayout.layoutOne || headerType === 'pfchangs') && (
               <BusinessContent isCustomLayout={isCustomLayout || useKioskApp} id='wrapper-categories'>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
                   <div style={{ position: 'relative' }}>
-                    {business?.professionals?.length > 0 && (
+                    {business?.professionals?.length > 0 && headerType !== 'pfchangs' && (
                       <ProfessionalFilterWrapper>
                         <ProfessionalFilter
                           professionals={business?.professionals}
@@ -181,11 +199,15 @@ export const RenderProductsLayout = (props) => {
                     )}
                     {!(business?.categories?.length === 0 && !categoryId) && (
                       <BusinessLayoutCategories
-                        categories={[
-                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                          ...business?.categories.sort((a, b) => a.rank - b.rank)
-                        ]}
+                        categories={headerType === 'pfchangs'
+                          ? [
+                            { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                            ...business?.categories.filter(category => category?.subcategories?.length > 0).sort((a, b) => a.rank - b.rank)
+                          ]
+                          : [
+                            { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                            { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                            ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                         categorySelected={categorySelected}
                         onClickCategory={onClickCategory}
                         featured={featuredProducts}
@@ -194,6 +216,27 @@ export const RenderProductsLayout = (props) => {
                         business={business}
                         currentCart={currentCart}
                         wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
+                        setSubcategoriesSelected={setSubcategoriesSelected}
+                        subcategoriesSelected={subcategoriesSelected}
+                        PFChangsCategoriesLayout={headerType === 'pfchangs'}
+                      />
+                    )}
+                    {categorySelected?.subcategories?.length > 0 && headerType === 'pfchangs' && (
+                      <BusinessLayoutCategories
+                        categories={
+                          categorySelected?.subcategories?.sort((a, b) => a.rank - b.rank)
+                        }
+                        categorySelected={categorySelected}
+                        onClickCategory={onClickCategory}
+                        featured={featuredProducts}
+                        useKioskApp={useKioskApp}
+                        openBusinessInformation={openBusinessInformation}
+                        business={business}
+                        currentCart={currentCart}
+                        wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
+                        subcategoriesLayout
+                        subcategorySelected={subcategorySelected}
+                        setSubcategorySelected={setSubcategorySelected}
                       />
                     )}
                     {useKioskApp && (
@@ -233,35 +276,69 @@ export const RenderProductsLayout = (props) => {
                       <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
                     </MobileCartViewWrapper>
                   )} */}
-                  <WrapContent id='businessProductList'>
-                    <BusinessLayoutProductsList
-                      categories={[
-                        { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                        { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                        ...business?.categories.sort((a, b) => a.rank - b.rank)
-                      ]}
-                      isLazy={isLazy}
-                      category={categorySelected}
-                      categoryState={categoryState}
-                      useKioskApp={useKioskApp}
-                      businessId={business?.id}
-                      errors={errors}
-                      onProductClick={onProductClick}
-                      handleSearchRedirect={handleSearchRedirect}
-                      featured={featuredProducts}
-                      searchValue={searchValue}
-                      isCartOnProductsList={isCartOnProductsList}
-                      handleClearSearch={handleChangeSearch}
-                      errorQuantityProducts={errorQuantityProducts}
-                      business={business}
-                      currentCart={currentCart}
-                      setSubcategoriesSelected={setSubcategoriesSelected}
-                      subcategoriesSelected={subcategoriesSelected}
-                      onClickCategory={onClickCategory}
-                      handleUpdateProducts={handleUpdateProducts}
-                      professionalSelected={professionalSelected}
-                      handleChangeProfessionalSelected={handleChangeProfessionalSelected}
-                    />
+                  <WrapContent id='businessProductList' pfchangs={headerType === 'pfchangs'}>
+                    {headerType === 'pfchangs' ? (
+                      <BusinessLayoutProductsList
+                        categories={categorySelected?.id
+                          ? [
+                            ...categorySelected?.subcategories?.sort((a, b) => a.rank - b.rank)?.map(category => ({
+                              ...category,
+                              products: categorySelected?.products?.filter(product => product?.category_id === category?.id)
+                            }))
+                          ]
+                          : [...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                        isLazy={isLazy}
+                        category={categorySelected}
+                        categoryState={categoryState}
+                        useKioskApp={useKioskApp}
+                        businessId={business?.id}
+                        errors={errors}
+                        onProductClick={onProductClick}
+                        handleSearchRedirect={handleSearchRedirect}
+                        featured={featuredProducts}
+                        searchValue={searchValue}
+                        isCartOnProductsList={isCartOnProductsList}
+                        handleClearSearch={handleChangeSearch}
+                        errorQuantityProducts={errorQuantityProducts}
+                        business={business}
+                        currentCart={currentCart}
+                        setSubcategoriesSelected={setSubcategoriesSelected}
+                        subcategoriesSelected={subcategoriesSelected}
+                        onClickCategory={onClickCategory}
+                        handleUpdateProducts={handleUpdateProducts}
+                        professionalSelected={professionalSelected}
+                        handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                      />
+                    ) : (
+                      <BusinessLayoutProductsList
+                        categories={[
+                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                          ...business?.categories.sort((a, b) => a.rank - b.rank)
+                        ]}
+                        isLazy={isLazy}
+                        category={categorySelected}
+                        categoryState={categoryState}
+                        useKioskApp={useKioskApp}
+                        businessId={business?.id}
+                        errors={errors}
+                        onProductClick={onProductClick}
+                        handleSearchRedirect={handleSearchRedirect}
+                        featured={featuredProducts}
+                        searchValue={searchValue}
+                        isCartOnProductsList={isCartOnProductsList}
+                        handleClearSearch={handleChangeSearch}
+                        errorQuantityProducts={errorQuantityProducts}
+                        business={business}
+                        currentCart={currentCart}
+                        setSubcategoriesSelected={setSubcategoriesSelected}
+                        subcategoriesSelected={subcategoriesSelected}
+                        onClickCategory={onClickCategory}
+                        handleUpdateProducts={handleUpdateProducts}
+                        professionalSelected={professionalSelected}
+                        handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                      />
+                    )}
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
                 {showCartOnProductList && (
@@ -300,7 +377,7 @@ export const RenderProductsLayout = (props) => {
               </BusinessContent>
             )}
 
-            {businessLayout.layoutOne && (
+            {businessLayout.layoutOne && headerType !== 'pfchangs' && (
               <>
                 {business?.professionals?.length > 0 && (
                   <ProfessionalFilterWrapper isTop>
@@ -357,6 +434,7 @@ export const RenderProductsLayout = (props) => {
                         handleUpdateProducts={handleUpdateProducts}
                         professionalSelected={professionalSelected}
                         handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                        subcategorySelected={subcategorySelected}
                       />
                     </WrapContent>
                   </BusinessCategoryProductWrapper>
@@ -378,13 +456,13 @@ export const RenderProductsLayout = (props) => {
               openBusinessInformation={openBusinessInformation}
             />
           )}
-          <BusinessProductsCategories
+          <BusinessLayoutCategoriesSkeleton
             isSkeleton
             categories={[]}
             openBusinessInformation={openBusinessInformation}
           />
           <WrapContent>
-            <BusinessProductsList
+            <BusinessLayoutProductsListSkeleton
               categories={[]}
               useKioskApp={useKioskApp}
               category={categorySelected}

@@ -6,7 +6,8 @@ import {
   PopoverBody,
   PopoverArrow,
   TitleContainer,
-  Title
+  Title,
+  CartLength
 } from './styles'
 
 import { useOrder, useEvent, useLanguage, useOrderingTheme } from 'ordering-components'
@@ -41,13 +42,11 @@ export const CartPopover = (props) => {
     ]
   })
 
-  const { styles, attributes, forceUpdate } = popper
+  const { styles, attributes } = popper
 
   const isSlideBar = orderingTheme?.theme?.header?.components?.cart?.open_strategy?.type === 'slide'
   const isCartButtonPF = theme?.layouts?.header?.components?.cart?.components?.layout?.type === 'pfchangs'
   const showCartText = !theme?.layouts?.header?.components?.cart?.components?.text?.hidden
-  const cartButtonBackgroundColor = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.style?.backgroundColor
-  const cartButtonTextcolor = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.style?.textColor
   const cartButtonIcon = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.image
 
   useEffect(() => {
@@ -126,8 +125,14 @@ export const CartPopover = (props) => {
                 {showCartText && (
                   <>{t('CART', 'Cart')}</>
                 )}
-                {cartButtonIcon && (
-                  <img alt='cart-icon' width='14px' height='17px' src={cartButtonIcon} loading='lazy' />
+                {props.carts?.length > 0 ? (
+                  <CartLength>{props.carts?.length}</CartLength>
+                ) : (
+                  <>
+                    {cartButtonIcon && (
+                      <img alt='cart-icon' width='14px' height='17px' src={cartButtonIcon} loading='lazy' />
+                    )}
+                  </>
                 )}
               </>
             </ButtonPF>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils } from 'ordering-components'
@@ -92,6 +91,7 @@ export const Header = (props) => {
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
 
+  const headerLayout = theme?.layouts?.header?.components?.layout?.type
   const headerBackgroundColor = theme?.layouts?.header?.components?.style?.backgroundColor
   const headerBorderBottom = theme?.layouts?.header?.components?.style?.borderBottom
   const headerLogo = theme?.layouts?.header?.components?.logo?.components?.image
@@ -234,7 +234,7 @@ export const Header = (props) => {
               isCustomerMode={isCustomerMode}
             />
             <LogoHeader
-              onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
+              onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode && headerLayout !== 'pfchangs' ? 'search' : 'home' })}
               disabledResponsive={!!headerLogo}
               imgW={windowSize.width <= 768 && headerLogo ? '95px' : null}
               imgH={windowSize.width <= 768 && headerLogo ? '21px' : null}

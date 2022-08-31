@@ -1,0 +1,335 @@
+import React, { useState, useEffect } from 'react'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useConfig, useSite } from 'ordering-components'
+import { Button } from '../../../../styles/Buttons'
+import { ProductItemAccordion as ProductItemAccordionPFChangs } from '../../../ProductItemAccordion/layouts/pfchangs'
+import { BusinessItemAccordion as BusinessItemAccordionPFChangs } from '../../../BusinessItemAccordion/layouts/pfchangs'
+import { Confirm } from '../../../Confirm'
+import { Modal } from '../../../Modal'
+
+import { ProductForm as ProductFormPFChangs } from '../../../ProductForm/layouts/pfchangs'
+import { UpsellingPage } from '../../../UpsellingPage/layouts/pfchangs'
+import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
+import { TaxInformation } from '../../../TaxInformation'
+import { CartStoresListing } from '../../../../../../franchise/src/components/CartStoresListing'
+import {
+  CartContainer,
+  CheckoutAction,
+  CartSticky,
+  Divider,
+  NoValidProductMessage
+} from './styles'
+
+const CartUI = (props) => {
+  const {
+    currentCartUuid,
+    clearCart,
+    isProducts,
+    changeQuantity,
+    getProductMax,
+    offsetDisabled,
+    removeProduct,
+    onClickCheckout,
+    isCheckout,
+    useKioskApp,
+    isMultiCheckout,
+    isCartPending,
+    isForceOpenCart,
+    isCartOnProductsList,
+    handleCartOpen,
+    isCustomMode,
+    isStore,
+    setPreorderBusiness
+  } = props
+
+  const [, t] = useLanguage()
+  const [orderState] = useOrder()
+  const [events] = useEvent()
+  const [{ parsePrice, parseDate }] = useUtils()
+  const [{ configs }] = useConfig()
+  const [{ site }] = useSite()
+  const windowSize = useWindowSize()
+
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [openProduct, setModalIsOpen] = useState(false)
+  const [curProduct, setCurProduct] = useState({})
+  const [openUpselling, setOpenUpselling] = useState(false)
+  const [canOpenUpselling, setCanOpenUpselling] = useState(false)
+  const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
+  const [isUpselling, setIsUpselling] = useState(false)
+  const [openChangeStore, setOpenChangeStore] = useState(false)
+  const [setActive, setActiveState] = useState('')
+  const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
+
+  const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
+  const openCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum) || null) || []
+
+  const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
+
+  const momentFormatted = !orderState?.option?.moment
+    ? t('RIGHT_NOW', 'Right Now')
+    : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
+
+  const handleDeleteClick = (product) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
+      handleOnAccept: () => {
+        removeProduct(product, cart)
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
+
+  const handleEditProduct = (product) => {
+    setCurProduct(product)
+    setModalIsOpen(true)
+  }
+
+  const handleClickCheckout = () => {
+    if (checkoutMultiBusinessEnabled && openCarts.length > 1) {
+      events.emit('go_to_page', { page: 'multi_checkout' })
+    } else {
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+    }
+    events.emit('cart_popover_closed')
+    onClickCheckout && onClickCheckout()
+  }
+
+  const handleStoreRedirect = (slug) => {
+    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
+    } else {
+      events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}` })
+    }
+
+    if (windowSize.width <= 768) {
+      onClickCheckout && onClickCheckout()
+    }
+  }
+
+  useEffect(() => {
+    events.emit('get_current_view')
+    return () => {
+      setConfirm({ ...confirm, open: false })
+    }
+  }, [])
+
+  const handlerProductAction = (product) => {
+    if (Object.keys(product).length) {
+      setModalIsOpen(false)
+    }
+  }
+
+  const handleClearProducts = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCTS', 'Are you sure that you want to delete all products?'),
+      handleOnAccept: () => {
+        clearCart(cart?.uuid)
+        setConfirm({ ...confirm, open: false })
+      }
+    })
+  }
+
+  const handleUpsellingPage = () => {
+    setOpenUpselling(false)
+    setCanOpenUpselling(false)
+    handleClickCheckout()
+  }
+
+  const checkOutBtnClick = () => {
+    handleClickCheckout()
+  }
+
+  const handleChangeStore = () => {
+    setOpenChangeStore(true)
+  }
+
+  const closeModalProductForm = () => {
+    setModalIsOpen(false)
+  }
+
+  useEffect(() => {
+    if (isCustomMode) setIsUpselling(true)
+  }, [isCustomMode])
+
+  return (
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>
+          {BeforeElement}
+        </React.Fragment>))}
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />))}
+      <CartContainer className='cart'>
+        <CartSticky isCartOnProductsList={isCartOnProductsList}>
+          <BusinessItemAccordionPFChangs
+            isCartPending={isCartPending}
+            currentCartUuid={currentCartUuid}
+            uuid={cart?.uuid}
+            isCheckout={isCheckout}
+            orderTotal={cart?.total}
+            business={cart?.business}
+            isClosed={!cart?.valid_schedule}
+            moment={momentFormatted}
+            isProducts={isProducts}
+            isValidProducts={cart?.valid_products}
+            isForceOpenAccordion={isForceOpenCart}
+            isCartOnProductsList={isCartOnProductsList}
+            handleClearProducts={handleClearProducts}
+            handleStoreRedirect={handleStoreRedirect}
+            handleCartOpen={handleCartOpen}
+            isStore={isStore}
+            total={cart?.total}
+            handleClickCheckout={handleClickCheckout}
+            checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
+            setPreorderBusiness={setPreorderBusiness}
+            handleChangeStore={!useKioskApp && handleChangeStore}
+            isMultiCheckout={isMultiCheckout}
+            setActiveState={setActiveState}
+            setActive={setActive}
+          >
+            {cart?.products?.length > 0 && cart?.products.map(product => (
+              <ProductItemAccordionPFChangs
+                key={product.code}
+                isCartPending={isCartPending}
+                isCartProduct
+                product={product}
+                isCheckout={isCheckout}
+                changeQuantity={changeQuantity}
+                getProductMax={getProductMax}
+                offsetDisabled={offsetDisabled}
+                onDeleteProduct={handleDeleteClick}
+                onEditProduct={handleEditProduct}
+                isStore={isStore}
+              />
+            ))}
+            {!cart?.valid_products && (
+              <NoValidProductMessage>
+                {t('REMOVE_NOT_AVAILABLE_CART_PRODUCTS', 'To continue with your checkout, please remove from your cart the products that are not available.')}
+              </NoValidProductMessage>
+            )}
+            {setActive === 'active' && (
+              <>
+                <UpsellingPage business={cart?.business} businessId={cart?.business_id} cartProducts={cart?.products} />
+                {!isStore && <Divider />}
+              </>
+            )}
+            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
+              <CheckoutAction>
+                <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
+                <Button
+                  color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
+                  onClick={checkOutBtnClick}
+                  disabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
+                >
+                  {!cart?.valid_address ? (
+                    t('OUT_OF_COVERAGE', 'Out of Coverage')
+                  ) : !cart?.valid_maximum ? (
+                    `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
+                  ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
+                    `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+                  ) : !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
+                </Button>
+              </CheckoutAction>
+            )}
+          </BusinessItemAccordionPFChangs>
+          <Confirm
+            title={t('PRODUCT', 'Product')}
+            content={confirm.content}
+            acceptText={t('ACCEPT', 'Accept')}
+            open={confirm.open}
+            onClose={() => setConfirm({ ...confirm, open: false })}
+            onCancel={() => setConfirm({ ...confirm, open: false })}
+            onAccept={confirm.handleOnAccept}
+            closeOnBackdrop={false}
+          />
+          <Modal
+            width='60%'
+            open={openProduct}
+            padding='0'
+            closeOnBackdrop
+            onClose={() => closeModalProductForm()}
+            disableOverflowX
+            hideCloseDefault
+          >
+            <ProductFormPFChangs
+              isCartProduct
+              productCart={curProduct}
+              businessSlug={cart?.business?.slug}
+              businessId={cart?.business_id}
+              categoryId={curProduct?.category_id}
+              productId={curProduct?.id}
+              onSave={handlerProductAction}
+              closeModalProductForm={closeModalProductForm}
+            />
+          </Modal>
+          <Modal
+            width='70%'
+            open={openTaxModal.open}
+            padding='20px'
+            closeOnBackdrop
+            title={`${openTaxModal.data?.name ||
+              t('INHERIT_FROM_BUSINESS', 'Inherit from business')} ${openTaxModal.data?.rate_type !== 2 ? `(${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`})` : ''}  `}
+            onClose={() => setOpenTaxModal({ open: false, data: null, type: '' })}
+            modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+          >
+            <TaxInformation
+              type={openTaxModal.type}
+              data={openTaxModal.data}
+              products={cart.products}
+              useKioskApp={useKioskApp}
+            />
+          </Modal>
+          {(openUpselling || isUpselling) && (
+            <UpsellingPage
+              useKioskApp={useKioskApp}
+              businessId={cart.business_id}
+              isCustomMode={isCustomMode}
+              cartProducts={cart.products}
+              business={cart.business}
+              handleUpsellingPage={handleUpsellingPage}
+              openUpselling={openUpselling}
+              canOpenUpselling={canOpenUpselling}
+              setCanOpenUpselling={setCanOpenUpselling}
+            />
+          )}
+        </CartSticky>
+
+        <Modal
+          width='70%'
+          title={t('CHANGE_STORE', 'Change store')}
+          open={openChangeStore}
+          padding='20px'
+          closeOnBackdrop
+          modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+          onClose={() => setOpenChangeStore(false)}
+        >
+          <CartStoresListing
+            pageChangeStore='business'
+            cartuuid={cart?.uuid}
+            onClose={() => setOpenChangeStore(false)}
+          />
+        </Modal>
+
+      </CartContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />))}
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>
+          {AfterElement}
+        </React.Fragment>))}
+    </>
+  )
+}
+
+export const Cart = (props) => {
+  const cartProps = {
+    ...props,
+    UIComponent: CartUI
+  }
+
+  return (
+    <CartController {...cartProps} />
+  )
+}

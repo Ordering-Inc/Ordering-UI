@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ProductsContainer = styled.div`
   width: 95%;
@@ -10,6 +10,9 @@ export const ProductsContainer = styled.div`
     cursor: pointer;
     margin-bottom: 5px;
   }
+  ${({ pfchangs, theme }) => pfchangs && css`
+    background: ${theme.colors.backgroundPage};
+  `}
 `
 
 export const ProductLoading = styled.div`

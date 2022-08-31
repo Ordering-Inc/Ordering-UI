@@ -4,6 +4,7 @@ import { useLanguage, useEvent } from 'ordering-components'
 import { Container, NotCarts, Title } from './styles'
 
 import { Cart } from '../Cart'
+import { Cart as CartPFChangs } from '../Cart/layouts/pfchangs'
 
 export const CartContent = (props) => {
   const {
@@ -19,6 +20,7 @@ export const CartContent = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [events] = useEvent()
+  const cartLayout = theme?.layouts?.header?.components?.cart?.components?.layout?.type
 
   const [currentCartUuid, setCurrentCartUuid] = useState(null)
 
@@ -29,6 +31,10 @@ export const CartContent = (props) => {
   const handleSetCurrentCartUuid = () => {
     setCurrentCartUuid(null)
   }
+
+  const CartComponents = cartLayout === 'pfchangs'
+    ? CartPFChangs
+    : Cart
 
   useEffect(() => {
     events.on('cart_popover_closed', handleSetCurrentCartUuid)
@@ -49,7 +55,7 @@ export const CartContent = (props) => {
           carts.map(cart => (
             <React.Fragment key={cart.uuid}>
               {cart.products.length > 0 && (
-                <Cart
+                <CartComponents
                   isCartPending={cart?.status === 2}
                   cart={cart}
                   isCartPopover={isCartPopover}

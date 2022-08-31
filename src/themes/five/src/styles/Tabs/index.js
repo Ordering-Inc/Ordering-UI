@@ -13,8 +13,9 @@ export const Tab = styled.div`
   cursor: pointer;
   ${({ active }) => active && css`
     ${({ borderBottom }) => borderBottom && css`
-      border-bottom: 1px solid;
+      border-bottom: 1px solid ${({ activeColor }) => activeColor || ''};
     `}
+    color: ${({ activeColor }) => activeColor || ''};
   `}
 
   ${({ active }) => !active && css`

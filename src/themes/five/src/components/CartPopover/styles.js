@@ -78,3 +78,11 @@ export const TitleContainer = styled.div`
     }
   }
 `
+
+export const CartLength = styled.span`
+  padding: 1px 7px 1px 7px;
+  color: #000;
+  background: #fff;
+  border-radius: 50%;
+  margin-left: 5px;
+`
