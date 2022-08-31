@@ -402,7 +402,7 @@ const CartUI = (props) => {
                     )}
                   </tbody>
                 </table>
-                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
+                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && (
                   <CouponContainer>
                     <CouponControl
                       businessId={cart.business_id}
