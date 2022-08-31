@@ -14,6 +14,7 @@ import { TaxInformation } from '../TaxInformation'
 import { TextArea } from '../../styles/Inputs'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { CartStoresListing } from '../../../../franchise/src/components/CartStoresListing'
+import { DriverTips } from '../DriverTips'
 import {
   CartContainer,
   OrderBill,
@@ -24,7 +25,8 @@ import {
   Spinner,
   CommentContainer,
   IconContainer,
-  NoValidProductMessage
+  NoValidProductMessage,
+  DriverTipContainer
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
@@ -66,6 +68,10 @@ const CartUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ site }] = useSite()
   const windowSize = useWindowSize()
+
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
@@ -410,6 +416,35 @@ const CartUI = (props) => {
                     />
                   </CouponContainer>
                 )}
+                {
+                  isMultiCheckout &&
+                  cart &&
+                  cart?.business_id &&
+                  orderState?.options?.type === 1 &&
+                  cart?.status !== 2 &&
+                  validationFields?.fields?.checkout?.driver_tip?.enabled &&
+                  driverTipsOptions.length > 0 &&
+                  !useKioskApp &&
+                  (
+                    <>
+                      <DriverTipContainer>
+                        <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                        <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                        <DriverTips
+                          businessId={cart?.business_id}
+                          driverTipsOptions={driverTipsOptions}
+                          isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                          isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                          driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                            ? cart?.driver_tip
+                            : cart?.driver_tip_rate}
+                          cart={cart}
+                          useOrderContext
+                        />
+                      </DriverTipContainer>
+                    </>
+                  )
+                }
                 <table className='total'>
                   <tbody>
                     <tr>
