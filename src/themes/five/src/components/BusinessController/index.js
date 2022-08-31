@@ -70,7 +70,7 @@ const BusinessControllerUI = (props) => {
   const [{ auth }, { login }] = useSession()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
-
+  const [orderingTheme] = useOrderingTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
