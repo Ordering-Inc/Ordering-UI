@@ -207,3 +207,20 @@ export const SpotSelect = styled.select`
 export const NoValidProductMessage = styled.p`
   font-size: 14px;
 `
+export const DriverTipContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px 0px;
+  h1 {
+    margin: 0px;
+    font-weight: 500;
+    font-size: 20px;
+    color: ${props => props.theme.colors.darkTextColor};
+  }
+  > p {
+    margin: 0;
+    font-size: 16px;
+    color: #909BA9;
+  }
+`
