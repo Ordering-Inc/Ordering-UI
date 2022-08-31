@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
+import { useTheme } from 'styled-components'
 
 import { CategoriesContainer } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -17,6 +18,7 @@ const BusinessProductsCategoriesUI = (props) => {
     categorySelected
   } = props
 
+  const theme = useTheme()
   const [selectedCategory, setSelectedCateogry] = useState({ id: null })
   const scrollTopSpan = 116
 
@@ -133,10 +135,12 @@ const BusinessProductsCategoriesUI = (props) => {
 
     let style2 = '.sticky-search {'
     style2 += 'position: fixed !important;'
-    style2 += 'top: 10px !important;'
-    style2 += 'right: 32% !important;'
-    style2 += 'height: 50px !important;'
+    style2 += 'top: 0px !important;'
+    style2 += 'right: 0% !important;'
+    style2 += 'height: 56px !important;'
     style2 += 'z-index: 9999 !important;'
+    style2 += 'width: 100% !important;'
+    style2 += `background-color: ${theme.colors.backgroundPage} !important;`
     style2 += '}'
 
     styleSheet.insertRule(style0, 0)
