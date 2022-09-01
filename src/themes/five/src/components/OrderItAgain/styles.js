@@ -2,13 +2,15 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   padding-top: 30px;
-  ${({ isGroceries }) => isGroceries && css`
-    padding-top: 0px;
-  `}
   margin-right: 30px;
   ${props => props.theme.rtl && css`
     margin-left: 30px;
     margin-right: 0px;
+  `}
+  ${({ isGroceries }) => isGroceries && css`
+    padding-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
   `}
 `
 
