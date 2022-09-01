@@ -13,13 +13,14 @@ export const OrderItAgain = (props) => {
   const {
     onProductClick,
     isGroceries,
-    business
+    productList,
+    businessId
   } = props
 
   const [, t] = useLanguage()
-  console.log(business?.previously_products)
+
   return (
-    <Container>
+    <Container isGroceries={isGroceries}>
       <ContentHeader isGroceries={isGroceries}>
         <h2>{t('ORDER_IT_AGAIN', 'Order it again')}</h2>
         <p>{t('ORDER_IT_AGAIN_DESC', 'Quickly add items from your past orders.')}</p>
@@ -27,26 +28,16 @@ export const OrderItAgain = (props) => {
       <ProductListWrapper>
         <ProductList>
           <AutoScroll scrollId='orderItAgain'>
-            {business?.loading ? (
-              Array(5).keys().map(i => (
-                <SingleProductCard
-                  key={i}
-                  isSkeleton
-                  isPreviously
-                />
-              ))
-            ) : (
-              business?.previously_products?.length > 0 && business?.previously_products?.map((product, i) => (
-                <SingleProductCard
-                  key={i}
-                  isSoldOut={product.inventoried && !product.quantity}
-                  businessId={business?.id}
-                  product={product}
-                  onProductClick={onProductClick}
-                  isPreviously
-                />
-              ))
-            )}
+            {productList.map((product, i) => (
+              <SingleProductCard
+                key={i}
+                isSoldOut={product.inventoried && !product.quantity}
+                businessId={businessId}
+                product={product}
+                onProductClick={onProductClick}
+                isPreviously
+              />
+            ))}
           </AutoScroll>
         </ProductList>
       </ProductListWrapper>

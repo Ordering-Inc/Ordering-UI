@@ -235,10 +235,13 @@ export const RenderProductsLayout = (props) => {
                     </MobileCartViewWrapper>
                   )} */}
                   <WrapContent id='businessProductList'>
-                    <OrderItAgain
-                      onProductClick={onProductClick}
-                      business={business}
-                    />
+                    {!business?.loading && business?.previously_products?.length > 0 && (
+                      <OrderItAgain
+                        onProductClick={onProductClick}
+                        productList={business?.previously_products}
+                        businessId={business?.id}
+                      />
+                    )}
                     <BusinessLayoutProductsList
                       categories={[
                         { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
@@ -337,12 +340,15 @@ export const RenderProductsLayout = (props) => {
                     )}
                   </BusinessCategoriesContainer>
                   <BusinessCategoryProductWrapper>
-                    <WrapContent>
-                      <OrderItAgain
-                        onProductClick={onProductClick}
-                        business={business}
-                        isGroceries
-                      />
+                    <WrapContent isGroceries>
+                      {!business?.loading && business?.previously_products?.length > 0 && (
+                        <OrderItAgain
+                          onProductClick={onProductClick}
+                          productList={business?.previously_products}
+                          businessId={business?.id}
+                          isGroceries
+                        />
+                      )}
                       <BusinessLayoutProductsList
                         categories={[
                           { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },

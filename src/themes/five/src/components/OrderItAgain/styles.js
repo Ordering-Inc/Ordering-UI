@@ -1,7 +1,15 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  // width: 100%;
+  padding-top: 30px;
+  ${({ isGroceries }) => isGroceries && css`
+    padding-top: 0px;
+  `}
+  margin-right: 30px;
+  ${props => props.theme.rtl && css`
+    margin-left: 30px;
+    margin-right: 0px;
+  `}
 `
 
 export const ContentHeader = styled.div`
@@ -32,6 +40,10 @@ export const ContentHeader = styled.div`
 export const ProductListWrapper = styled.div`
   overflow: auto hidden;
   width: 100%;
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
 `
 
 export const ProductList = styled.div`

@@ -12,8 +12,11 @@ export const WrappLayout = styled.div``
 
 export const WrapContent = styled.div`
   padding: 5px;
-  margin-top: 70px;
   background: ${props => props.theme.colors.backgroundPage};
+
+  ${({ isGroceries }) => !isGroceries && css`
+    margin-top: 70px;
+  `}
 
   @media (min-width: 576px) {
     padding: 0px;
@@ -51,7 +54,7 @@ export const BusinessCategoryProductWrapper = styled.div`
   }
 
   @media (min-width: 1000px) {
-    width: ${({ showCartOnProductList }) => showCartOnProductList ? '70%' : '100%'};
+    width: ${({ showCartOnProductList }) => showCartOnProductList ? '70%' : '85%'};
   }
 `
 
