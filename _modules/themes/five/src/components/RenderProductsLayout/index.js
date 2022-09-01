@@ -84,7 +84,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var layoutOne = 'groceries';
 
 var RenderProductsLayout = function RenderProductsLayout(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _orderingTheme$theme21, _orderingTheme$theme22, _orderingTheme$theme23, _orderingTheme$theme24, _orderingTheme$theme25, _orderingTheme$theme26, _orderingTheme$theme27, _orderingTheme$theme28, _orderingTheme$theme29, _orderingTheme$theme30, _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _businessState$busine, _businessState$busine2, _business$professiona, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _business$professiona2, _business$categories2, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
+  var _configs$use_parent_c, _configs$use_parent_c2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _orderingTheme$theme21, _orderingTheme$theme22, _orderingTheme$theme23, _orderingTheme$theme24, _orderingTheme$theme25, _orderingTheme$theme26, _orderingTheme$theme27, _orderingTheme$theme28, _orderingTheme$theme29, _orderingTheme$theme30, _orderingTheme$theme31, _orderingTheme$theme32, _orderingTheme$theme33, _orderingTheme$theme34, _businessState$busine, _businessState$busine2, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _business$professiona, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _business$professiona2, _business$categories2, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
 
   var errors = props.errors,
       isError = props.isError,
@@ -156,12 +156,12 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   };
   var showCartOnProductList = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme26 = orderingTheme.theme) !== null && _orderingTheme$theme26 !== void 0 && (_orderingTheme$theme27 = _orderingTheme$theme26.business_view) !== null && _orderingTheme$theme27 !== void 0 && (_orderingTheme$theme28 = _orderingTheme$theme27.components) !== null && _orderingTheme$theme28 !== void 0 && (_orderingTheme$theme29 = _orderingTheme$theme28.cart) !== null && _orderingTheme$theme29 !== void 0 && (_orderingTheme$theme30 = _orderingTheme$theme29.components) !== null && _orderingTheme$theme30 !== void 0 && _orderingTheme$theme30.hidden);
-  var showBusinessNearCity = !(theme !== null && theme !== void 0 && (_theme$layouts = theme.layouts) !== null && _theme$layouts !== void 0 && (_theme$layouts$busine = _theme$layouts.business_view) !== null && _theme$layouts$busine !== void 0 && (_theme$layouts$busine2 = _theme$layouts$busine.components) !== null && _theme$layouts$busine2 !== void 0 && (_theme$layouts$busine3 = _theme$layouts$busine2.near_business) !== null && _theme$layouts$busine3 !== void 0 && _theme$layouts$busine3.hidden);
+  var hideBusinessNearCity = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme31 = orderingTheme.theme) === null || _orderingTheme$theme31 === void 0 ? void 0 : (_orderingTheme$theme32 = _orderingTheme$theme31.business_view) === null || _orderingTheme$theme32 === void 0 ? void 0 : (_orderingTheme$theme33 = _orderingTheme$theme32.components) === null || _orderingTheme$theme33 === void 0 ? void 0 : (_orderingTheme$theme34 = _orderingTheme$theme33.near_business) === null || _orderingTheme$theme34 === void 0 ? void 0 : _orderingTheme$theme34.hidden;
   var BusinessLayoutCategories = businessLayout.layoutOne ? _groceries.BusinessProductsCategories : _BusinessProductsCategories.BusinessProductsCategories;
   var BusinessLayoutProductsList = businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList
-  }, showBusinessNearCity && !useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.NearBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessesListing.BusinessesListing, {
+  }, typeof hideBusinessNearCity !== 'undefined' && !hideBusinessNearCity && !useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.NearBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessesListing.BusinessesListing, {
     logosLayout: true,
     propsToFetch: ['id', 'logo', 'location', 'timezone', 'schedule', 'open', 'slug'],
     cityId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.city_id,
@@ -198,11 +198,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     style: {
       position: 'relative'
     }
-  }, (business === null || business === void 0 ? void 0 : (_business$professiona = business.professionals) === null || _business$professiona === void 0 ? void 0 : _business$professiona.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProfessionalFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_ProfessionalFilter.ProfessionalFilter, {
-    professionals: business === null || business === void 0 ? void 0 : business.professionals,
-    professionalSelected: professionalSelected,
-    handleChangeProfessionalSelected: handleChangeProfessionalSelected
-  })), !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {
+  }, !((business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {
     categories: [{
       id: null,
       name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ALL) || 'All')
@@ -247,7 +243,11 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     }
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, {
     id: "businessProductList"
-  }, /*#__PURE__*/_react.default.createElement(BusinessLayoutProductsList, {
+  }, (business === null || business === void 0 ? void 0 : (_business$professiona = business.professionals) === null || _business$professiona === void 0 ? void 0 : _business$professiona.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProfessionalFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_ProfessionalFilter.ProfessionalFilter, {
+    professionals: business === null || business === void 0 ? void 0 : business.professionals,
+    professionalSelected: professionalSelected,
+    handleChangeProfessionalSelected: handleChangeProfessionalSelected
+  })), /*#__PURE__*/_react.default.createElement(BusinessLayoutProductsList, {
     categories: [{
       id: null,
       name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.ALL) || 'All')

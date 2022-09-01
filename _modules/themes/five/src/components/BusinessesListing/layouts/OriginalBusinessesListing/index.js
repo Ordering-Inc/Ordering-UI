@@ -181,7 +181,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       favoriteIds = _useState16[0],
       setFavoriteIds = _useState16[1];
 
-  var showCities = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.business_listing_view) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cities) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
+  var hideCities = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_listing_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.cities) === null || _orderingTheme$theme$3 === void 0 ? void 0 : _orderingTheme$theme$3.hidden;
   var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
   }));
@@ -387,7 +387,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
         page: 'business_search'
       });
     }
-  }), showCities && (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities2 = citiesState.cities) === null || _citiesState$cities2 === void 0 ? void 0 : _citiesState$cities2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), typeof hideCities !== 'undefined' && !hideCities && (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities2 = citiesState.cities) === null || _citiesState$cities2 === void 0 ? void 0 : _citiesState$cities2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: handleOpenCities
   }, (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities3 = citiesState.cities) === null || _citiesState$cities3 === void 0 ? void 0 : (_citiesState$cities3$ = _citiesState$cities3.find(function (city) {
