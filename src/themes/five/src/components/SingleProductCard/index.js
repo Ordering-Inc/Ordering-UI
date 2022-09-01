@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useConfig, useOrder, useUtils, useSession, SingleProductCard as SingleProductCardController } from 'ordering-components'
+import { useLanguage, useConfig, useOrder, useUtils, useSession, useOrderingTheme, SingleProductCard as SingleProductCardController } from 'ordering-components'
 import { shape } from '../../../../../utils'
 import { useIntersectionObserver } from '../../../../../hooks/useIntersectionObserver'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
@@ -20,7 +20,9 @@ import {
   QuantityContainer,
   RibbonBox,
   TitleWrapper,
-  LastOrder
+  LastOrder,
+  SkeletonCardInfo,
+  SkeletonCardLogo
 } from './styles'
 import { Button } from '../../styles/Buttons'
 
@@ -48,6 +50,7 @@ const SingleProductCardUI = (props) => {
   const [{ parsePrice, optimizeImage, parseDate }] = useUtils()
   const [orderState] = useOrder()
   const [{ auth }, { login }] = useSession()
+  const [orderingTheme] = useOrderingTheme()
   const theme = useTheme()
   const favoriteRef = useRef(null)
 
@@ -66,7 +69,7 @@ const SingleProductCardUI = (props) => {
 
   const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
 
-  const showAddButton = !theme?.layouts?.business_view?.components?.products?.components?.add_to_cart_button?.hidden
+  const hideAddButton = orderingTheme?.theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden
   // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
   let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - totalBalance
@@ -128,7 +131,7 @@ const SingleProductCardUI = (props) => {
         className='product-card'
       // productsRows={productsRows}
       >
-        {isObservedValidation && (
+        {isObservedValidation ? (
           <div>
             {!useCustomFunctionality && (
               <>
@@ -137,7 +140,7 @@ const SingleProductCardUI = (props) => {
                     <span>{productAddedToCartLength}</span>
                   </QuantityContainer>
                 )}
-                <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} oneLine={isPreviously}>
+                <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} isBgimage={optimizeImage(product?.images, 'h_86,c_limit')} oneLine={isPreviously}>
                   <TitleWrapper>
                     {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
                     {!useKioskApp && !isPreviously && (
@@ -162,7 +165,7 @@ const SingleProductCardUI = (props) => {
                   {isPreviously && (!isSkeleton ? (<LastOrder>{t('LAST_ORDERED_ON', 'Last ordered on')} {parseDate(product?.last_ordered_date, { outputFormat: 'MMM DD, YYYY' })}</LastOrder>) : (<Skeleton width={80} />))}
                 </CardInfo>
                 {!isSkeleton ? (
-                  <WrapLogo>
+                  <WrapLogo isBgimage={optimizeImage(product?.images, 'h_86,c_limit')}>
                     {product?.ribbon?.enabled && (
                       <RibbonBox
                         bgColor={product?.ribbon?.color}
@@ -175,7 +178,7 @@ const SingleProductCardUI = (props) => {
                     <CardLogo
                       className='image'
                       soldOut={isSoldOut || maxProductQuantity <= 0}
-                      bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_200,c_limit')}
+                      bgimage={optimizeImage(product?.images, 'h_86,c_limit')}
                     />
                   </WrapLogo>
                 ) : (
@@ -188,8 +191,19 @@ const SingleProductCardUI = (props) => {
               <span style={{ fontSize: 16, fontWeight: 500 }}>{customText}</span>
             )}
           </div>
+        ) : (
+          <div>
+            <SkeletonCardInfo>
+              <Skeleton width={100} />
+              <Skeleton width={100} />
+              <Skeleton width={100} />
+            </SkeletonCardInfo>
+            <SkeletonCardLogo>
+              <Skeleton height={75} width={75} />
+            </SkeletonCardLogo>
+          </div>
         )}
-        {!useCustomFunctionality && showAddButton && !isSkeleton && (
+        {!useCustomFunctionality && typeof hideAddButton !== 'undefined' && !hideAddButton && !isSkeleton && (
           <Button outline color='primary'>
             {t('ADD', 'Add')}
           </Button>

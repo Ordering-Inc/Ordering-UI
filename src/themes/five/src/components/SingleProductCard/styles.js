@@ -2,7 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
-  min-height: 160px;
+  min-height: 162px;
+  max-height: 162px;
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
   border: 1px solid #E9ECEF;
   padding: 10px;
@@ -85,7 +86,9 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(100% - 90px);
+  ${({ isBgimage }) => css`
+    width: ${isBgimage ? 'calc(100% - 90px)' : '100%'};
+  `}
   > * {
     margin: 3px;
   }
@@ -132,7 +135,9 @@ export const WrapLogo = styled.div`
   max-width: 86px;
   max-height: 86px;
   height: 86px;
-  width: 86px;
+  ${({ isBgimage }) => isBgimage && css`
+    width: 86px;
+  `}
   margin-left: 5px;
   ${props => props.theme?.rtl && css`
     margin-right: 5px;
@@ -262,10 +267,23 @@ export const TitleWrapper = styled.div`
     }
   }
 `
+export const SkeletonCardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 90px);
+  > * {
+    margin: 3px;
+  }
+`
+export const SkeletonCardLogo = styled.div`
+  max-width: 86px;
+  max-height: 86px;
+  width: 86px;
+  height: 86px;
 
-export const LastOrder = styled.span`
-  color: ${props => props.theme.colors.primary};
-  font-weight: 400;
-  font-size: 10px !important;
-  margin: 0px 3px;
+  margin-left: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
 `
