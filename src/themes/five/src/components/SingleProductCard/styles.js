@@ -240,6 +240,13 @@ export const RibbonBox = styled.div`
   `}
 `
 
+export const LastOrder = styled.span`
+  color: ${props => props.theme.colors.primary};
+  font-weight: 400;
+  font-size: 10px !important;
+  margin: 0px 3px;
+`
+
 export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
