@@ -30,6 +30,13 @@ export const TipCard = styled.div`
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
   }
+
+  ${({ pfchangs }) => pfchangs && css`
+    border-radius: 0;
+    padding: 10px;
+    height: 40px;
+    max-width: 125px;
+  `}
 `
 
 export const FormDriverTip = styled.div`
@@ -87,4 +94,32 @@ export const WrapperTips = styled.div`
   > div {
     margin: 5px;
   }
+
+  
+  ${({ pfchangs }) => pfchangs && css`
+    > div {
+      margin: 0
+    }
+  `}
+`
+
+export const DriverCustomContainer = styled.div`
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  align-items: center;
+
+    button, input {
+      width: 50%;
+      height: 42px;
+      box-sizing: border-box;
+      border-radius: 0;
+      border: none;
+    }
+`
+
+export const WrapperContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `

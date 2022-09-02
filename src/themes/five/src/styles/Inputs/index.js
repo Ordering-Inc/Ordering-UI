@@ -5,8 +5,8 @@ import { Button } from '../Buttons'
 export const Input = styled.input`
   background: #FFF;
   color: #010300;
-  border: 1px solid #DBDCDB;
-  border-radius: 7.6px;
+  border: ${({ pfchangs }) => pfchangs ? 'none' : '1px solid #DBDCDB'};
+  border-radius: ${({ pfchangs }) => pfchangs ? '0px' : '7.6px'};
   font-size: 16px;
   padding: 7px 15px;
   outline: none;
@@ -76,8 +76,8 @@ export const InputGroupLeft = styled.div`
 export const TextArea = styled.textarea`
   background: #FFF;
   color: #010300;
-  border: 1px solid #DBDCDB;
-  border-radius: 7.6px;
+  border: ${({ pfchangs }) => pfchangs ? 'none' : '1px solid #DBDCDB'};
+  border-radius: ${({ pfchangs }) => pfchangs ? '0px' : '7.6px'};
   font-size: 16px;
   padding: 7px 15px;
   outline: none;

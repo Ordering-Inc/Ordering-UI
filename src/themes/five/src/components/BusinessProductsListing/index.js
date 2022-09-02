@@ -13,9 +13,9 @@ import {
   useUtils,
   useSession,
   useSite,
-  useOrderingTheme
+  useOrderingTheme,
+  BusinessAndProductList
 } from 'ordering-components'
-import { BusinessAndProductList } from './test'
 import {
   ProductsContainer,
   ProductLoading,

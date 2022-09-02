@@ -178,6 +178,10 @@ export const QuantityContainer = styled.div`
   text-align: center;
   border-radius: 50%;
   transform: translate(-50%, 50%);
+  span { 
+    position: relative;
+    top: 2px;
+  }
 `
 
 export const RibbonBox = styled.div`

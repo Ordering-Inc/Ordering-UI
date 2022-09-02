@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useConfig, useSite } from 'ordering-components'
-import { Button } from '../../../../styles/Buttons'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useConfig, useSite, useValidationFields, useOrderingTheme } from 'ordering-components'
+import { Button } from '../../../../styles/Buttons/theme/pfchangs'
 import { ProductItemAccordion as ProductItemAccordionPFChangs } from '../../../ProductItemAccordion/layouts/pfchangs'
 import { BusinessItemAccordion as BusinessItemAccordionPFChangs } from '../../../BusinessItemAccordion/layouts/pfchangs'
 import { Confirm } from '../../../Confirm'
@@ -11,13 +11,26 @@ import { UpsellingPage } from '../../../UpsellingPage/layouts/pfchangs'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { TaxInformation } from '../../../TaxInformation'
 import { CartStoresListing } from '../../../../../../franchise/src/components/CartStoresListing'
+import { CouponControl } from '../../../../../../../components/CouponControl'
 import {
   CartContainer,
   CheckoutAction,
   CartSticky,
   Divider,
-  NoValidProductMessage
+  NoValidProductMessage,
+  OrderBill,
+  IconContainer,
+  CouponContainer,
+  Spinner,
+  CommentSection
 } from './styles'
+import { verifyDecimals } from '../../../../../../../utils'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
+import MdCloseCircle from '@meronex/icons/ios/MdCloseCircle'
+import { useTheme } from 'styled-components'
+import { CommentContainer } from '../../styles'
+import { TextArea } from '../../../../styles/Inputs'
+import { SpinnerLoader } from '../../../../../../../components/SpinnerLoader'
 
 const CartUI = (props) => {
   const {
@@ -38,16 +51,23 @@ const CartUI = (props) => {
     handleCartOpen,
     isCustomMode,
     isStore,
-    setPreorderBusiness
+    setPreorderBusiness,
+    handleRemoveOfferClick,
+    handleChangeComment,
+    commentState
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
-  const [{ parsePrice, parseDate }] = useUtils()
+  const [{ parsePrice, parseDate, parseNumber }] = useUtils()
   const [{ configs }] = useConfig()
   const [{ site }] = useSite()
+  const [orderingTheme] = useOrderingTheme()
+  const [validationFields] = useValidationFields()
   const windowSize = useWindowSize()
+  const viewString = isStore ? 'business_view' : 'header'
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
@@ -59,11 +79,22 @@ const CartUI = (props) => {
   const [openChangeStore, setOpenChangeStore] = useState(false)
   const [setActive, setActiveState] = useState('')
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
+  const hideCartComments = orderingTheme?.theme?.[viewString]?.components?.cart?.components?.comments?.hidden
 
+  const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
   const openCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum) || null) || []
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
+
+  const walletName = {
+    cash: {
+      name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
+    },
+    credit_point: {
+      name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
+    }
+  }
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -149,6 +180,32 @@ const CartUI = (props) => {
     setModalIsOpen(false)
   }
 
+  const getIncludedTaxes = () => {
+    if (cart?.taxes === null) {
+      return cart.business.tax_type === 1 ? cart?.tax : 0
+    } else {
+      return cart?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
+  const getIncludedTaxesDiscounts = () => {
+    return cart?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
+  }
+
+  const onRemoveOffer = (id) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_OFFER', 'Are you sure that you want to delete the offer?'),
+      title: t('OFFER', 'Offer'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleRemoveOfferClick(id)
+      }
+    })
+  }
+
   useEffect(() => {
     if (isCustomMode) setIsUpselling(true)
   }, [isCustomMode])
@@ -209,11 +266,273 @@ const CartUI = (props) => {
                 {t('REMOVE_NOT_AVAILABLE_CART_PRODUCTS', 'To continue with your checkout, please remove from your cart the products that are not available.')}
               </NoValidProductMessage>
             )}
-            {setActive === 'active' && (
+            {setActive === 'active' && !isCheckout && (
               <>
                 <UpsellingPage business={cart?.business} businessId={cart?.business_id} cartProducts={cart?.products} />
                 {!isStore && <Divider />}
               </>
+            )}
+            {cart?.valid_products && isCheckout && (
+              <OrderBill isCheckout={isCheckout}>
+                <table className='order-info'>
+                  <tbody>
+                    <tr>
+                      <td>{t('SUBTOTAL', 'Subtotal')}</td>
+                      <td>{parsePrice(cart?.subtotal + getIncludedTaxes())}</td>
+                    </tr>
+                    {cart?.discount > 0 && cart?.total >= 0 && cart?.offers?.length === 0 && (
+                      <tr>
+                        {cart?.discount_type === 1 ? (
+                          <td>
+                            {t('DISCOUNT', 'Discount')}{' '}
+                            <span>{`(${verifyDecimals(cart?.discount_rate, parsePrice)}%)`}</span>
+                          </td>
+                        ) : (
+                          <td>{t('DISCOUNT', 'Discount')}</td>
+                        )}
+                        <td>- {parsePrice(cart?.discount || 0)}</td>
+                      </tr>
+                    )}
+                    {
+                      cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
+                        <tr key={offer.id}>
+                          <td className='icon'>
+                            {offer.name}
+                            {offer.rate_type === 1 && (
+                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            )}
+                            <IconContainer>
+                              <BsInfoCircle size='20' color={theme.colors.white} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })} />
+                              <MdCloseCircle size='24' color={theme.colors.white} onClick={() => onRemoveOffer(offer?.id)} />
+                            </IconContainer>
+                          </td>
+                          <td>
+                            - {parsePrice(offer?.summary?.discount)}
+                          </td>
+                        </tr>
+                      ))
+                    }
+                    {
+                      cart?.offers?.filter(offer => offer?.target === 1)?.length > 0 &&
+                      cart?.subtotal_with_discount > 0 &&
+                      cart?.discount > 0 &&
+                      cart?.total >= 0 &&
+                      (
+                        <tr>
+                          <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                          {cart?.business?.tax_type === 1 ? (
+                            <td>{parsePrice(cart?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0)}</td>
+                          ) : (
+                            <td>{parsePrice(cart?.subtotal_with_discount ?? 0)}</td>
+                          )}
+                        </tr>
+                      )
+                    }
+                    {
+                      cart?.taxes?.length > 0 && cart?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
+                        <tr key={tax?.id}>
+                          <td className='icon'>
+                            {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
+                              <BsInfoCircle size='20' color={theme.colors.white} />
+                            </IconContainer>
+                          </td>
+                          <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
+                        </tr>
+                      ))
+                    }
+                    {
+                      cart?.fees?.length > 0 && cart?.fees?.filter(fee => !(fee.fixed === 0 && fee.percentage === 0)).map((fee, i) => (
+                        <tr key={fee.id ?? i}>
+                          <td className='icon'>
+                            {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                            ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
+                              <BsInfoCircle size='20' color={theme.colors.white} />
+                            </IconContainer>
+                          </td>
+                          <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
+                        </tr>
+                      ))
+                    }
+                    {
+                      cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
+                        <tr key={offer.id}>
+                          <td className='icon'>
+                            {offer.name}
+                            {offer?.rate_type === 1 && (
+                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            )}
+                            <IconContainer>
+                              <BsInfoCircle size='20' color={theme.colors.white} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })} />
+                              <MdCloseCircle size='24' color={theme.colors.white} onClick={() => onRemoveOffer(offer?.id)} />
+                            </IconContainer>
+                          </td>
+                          <td>
+                            - {parsePrice(offer?.summary?.discount)}
+                          </td>
+                        </tr>
+                      ))
+                    }
+                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
+                      <tr>
+                        <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                        <td>{parsePrice(cart?.delivery_price)}</td>
+                      </tr>
+                    )}
+                    {
+                      cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
+                        <tr key={offer.id}>
+                          <td className='icon'>
+                            {offer.name}
+                            {offer?.rate_type === 1 && (
+                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            )}
+                            <IconContainer>
+                              <BsInfoCircle size='20' color={theme.colors.white} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })} />
+                              <MdCloseCircle size='24' color={theme.colors.white} onClick={() => onRemoveOffer(offer?.id)} />
+                            </IconContainer>
+                          </td>
+                          <td>
+                            - {parsePrice(offer?.summary?.discount)}
+                          </td>
+                        </tr>
+                      ))
+                    }
+                    {cart?.driver_tip > 0 && (
+                      <tr>
+                        <td>
+                          {t('DRIVER_TIP', 'Driver tip')}{' '}
+                          {cart?.driver_tip_rate > 0 &&
+                            parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
+                            !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
+                            (
+                              <span>{`(${verifyDecimals(cart?.driver_tip_rate, parseNumber)}%)`}</span>
+                            )}
+                        </td>
+                        <td>{parsePrice(cart?.driver_tip)}</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+                {/* {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
+                  <CouponContainer>
+                    <CouponControl
+                      businessId={cart.business_id}
+                      price={cart.total}
+                    />
+                  </CouponContainer>
+                )} */}
+                <table className='total'>
+                  <tbody>
+                    <tr>
+                      <td>{t('TOTAL', 'Total')}</td>
+                      <td>{parsePrice(cart?.total >= 0 ? cart?.total : 0)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                {/* {cart?.status !== 2 && !hideCartComments && (
+                  <table className='comments'>
+                    <tbody>
+                      <tr>
+                        <td>{t('COMMENTS', 'Comments')}</td>
+                      </tr>
+                      <tr>
+                        <CommentContainer>
+                          <TextArea
+                            defaultValue={cart?.comment}
+                            placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
+                            onChange={(e) => handleChangeComment(e.target.value)}
+                          />
+                          {commentState?.loading && (
+                            <Spinner>
+                              <SpinnerLoader
+                                style={{ height: 100 }}
+                              />
+                            </Spinner>
+                          )}
+                        </CommentContainer>
+                      </tr>
+                    </tbody>
+                  </table>
+                )} */}
+
+                {cart?.payment_events?.length > 0 && (
+                  <div
+                    style={{
+                      width: '100%',
+                      marginTop: 10
+                    }}
+                  >
+                    {cart?.payment_events?.map(event => (
+                      <div
+                        key={event.id}
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          marginBottom: 10
+                        }}
+                      >
+                        <span>
+                          {walletName[cart?.wallets?.find(wallet => wallet.id === event.wallet_id)?.type]?.name}
+                        </span>
+                        <span>
+                          -{parsePrice(event.amount, { isTruncable: true })}
+                        </span>
+                      </div>
+                    ))}
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        marginBottom: 10
+                      }}
+                    >
+                      <span
+                        style={{ fontWeight: 'bold' }}
+                      >
+                        {t('TOTAL_TO_PAY', 'Total to pay')}
+                      </span>
+                      <span
+                        style={{ fontWeight: 'bold' }}
+                      >
+                        {parsePrice(cart?.balance)}
+                      </span>
+                    </div>
+                  </div>
+                )}
+                {cart?.status !== 2 && !hideCartComments && isCheckout && (
+                  <CommentSection>
+                    <h2>{t('YOUR_ORDER_COMMENTS', 'Your Order Comments')}</h2>
+                    <CommentContainer>
+                      <TextArea
+                        defaultValue={cart?.comment}
+                        placeholder={t('YOUR_ORDER_COMMENTS', 'Your Order Comments')}
+                        onChange={(e) => handleChangeComment(e.target.value)}
+                        pfchangs
+                      />
+                      {commentState?.loading && (
+                        <Spinner>
+                          <SpinnerLoader
+                            style={{ height: 100 }}
+                          />
+                        </Spinner>
+                      )}
+                    </CommentContainer>
+                  </CommentSection>
+                )}
+              </OrderBill>
+            )}
+            {isCouponEnabled && isCheckout && (
+              <CouponContainer>
+                <CouponControl
+                  businessId={cart.business_id}
+                  price={cart.total}
+                />
+              </CouponContainer>
             )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
               <CheckoutAction>
@@ -275,6 +594,7 @@ const CartUI = (props) => {
             modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
           >
             <TaxInformation
+              pfchangs
               type={openTaxModal.type}
               data={openTaxModal.data}
               products={cart.products}

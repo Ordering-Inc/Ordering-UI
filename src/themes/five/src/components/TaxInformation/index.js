@@ -2,12 +2,13 @@ import React from 'react'
 import { useLanguage } from 'ordering-components'
 import { SingleProductCard } from '../SingleProductCard'
 import { TaxInformationContainer, ProductContainer } from './styles'
-
+import { SingleProductCard as SingleProductCardPFChangs } from '../SingleProductCard/layouts/pfchangs'
 export const TaxInformation = (props) => {
   const {
     data,
     products,
-    type
+    type,
+    pfchangs
   } = props
 
   const [, t] = useLanguage()
@@ -17,6 +18,10 @@ export const TaxInformation = (props) => {
   const hideProductsSectionOffers = offersHideArray.includes(type)
   const dataHideArray = ['platform', 'business']
   const hideProductsSectionData = dataHideArray.includes(data.type)
+
+  const SingleProductCardComponent = pfchangs
+    ? SingleProductCardPFChangs
+    : SingleProductCard
 
   const getFilterValidation = (product) => {
     return (
@@ -55,7 +60,7 @@ export const TaxInformation = (props) => {
           <ProductContainer>
             {
               products.filter(product => getFilterValidation(product)).map(product => (
-                <SingleProductCard
+                <SingleProductCardComponent
                   key={product.id}
                   product={product}
                   useKioskApp={props.useKioskApp}

@@ -17,7 +17,8 @@ import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 export const OrderBillSection = (props) => {
   const {
     order,
-    setOpenTaxModal
+    setOpenTaxModal,
+    pfchangs
   } = props
 
   const [, t] = useLanguage()
@@ -81,7 +82,7 @@ export const OrderBillSection = (props) => {
                   )}
                   {setOpenTaxModal && (
                     <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                      <BsInfoCircle size='20' color={pfchangs ? theme.colors.white : theme.colors.primary} />
                     </Exclamation>
                   )}
                 </td>
@@ -131,7 +132,7 @@ export const OrderBillSection = (props) => {
                   <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                   {setOpenTaxModal && (
                     <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                      <BsInfoCircle size='20' color={pfchangs ? theme.colors.white : theme.colors.primary} />
                     </Exclamation>
                   )}
                 </td>
@@ -147,7 +148,7 @@ export const OrderBillSection = (props) => {
                   ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
                   {setOpenTaxModal && (
                     <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                      <BsInfoCircle size='20' color={pfchangs ? theme.colors.white : theme.colors.primary} />
                     </Exclamation>
                   )}
                 </td>
@@ -165,7 +166,7 @@ export const OrderBillSection = (props) => {
                   )}
                   {setOpenTaxModal && (
                     <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                      <BsInfoCircle size='20' color={pfchangs ? theme.colors.white : theme.colors.primary} />
                     </Exclamation>
                   )}
                 </td>
@@ -191,7 +192,7 @@ export const OrderBillSection = (props) => {
                   )}
                   {setOpenTaxModal && (
                     <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                      <BsInfoCircle size='20' color={pfchangs ? theme.colors.white : theme.colors.primary} />
                     </Exclamation>
                   )}
                 </td>

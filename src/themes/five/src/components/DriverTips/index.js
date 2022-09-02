@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { DriverTips as DriverTipsController, useUtils, useLanguage, useConfig } from 'ordering-components'
 
 import {
@@ -7,10 +7,13 @@ import {
   FormDriverTip,
   WrapperInput,
   DriverTipMessage,
-  WrapperTips
+  WrapperTips,
+  DriverCustomContainer,
+  WrapperContainer
 } from './styles'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
+import { Button as ButtonPF } from '../../styles/Buttons/theme/pfchangs'
 
 const DriverTipsUI = (props) => {
   const {
@@ -18,7 +21,8 @@ const DriverTipsUI = (props) => {
     driverTipsOptions,
     cart,
     isDriverTipUseCustom,
-    handlerChangeOption
+    handlerChangeOption,
+    pfchangs
   } = props
   const [{ parsePrice }] = useUtils()
   const [, t] = useLanguage()
@@ -26,7 +30,10 @@ const DriverTipsUI = (props) => {
 
   const [value, setvalue] = useState('')
   const isFixedPriceType = parseInt(configs?.driver_tip_type?.value, 10) === 1
+  let timeout = null
+  let previousSearch
 
+  const el = useRef()
   const handleChangeDriverTip = (e) => {
     const tip = Number(e?.target?.value)
     if ((isNaN(tip) || tip < 0)) return
@@ -36,6 +43,32 @@ const DriverTipsUI = (props) => {
   const placeholderCurrency = (configs?.currency_position?.value || 'left') === 'left'
     ? `${configs?.format_number_currency?.value}0`
     : `0${configs?.format_number_currency?.value}`
+
+  const onChangeCustomValue = e => {
+    if (previousSearch !== e?.target?.value) {
+      clearTimeout(timeout)
+      timeout = setTimeout(function () {
+        handlerChangeOption(e.target?.value || 0)
+        if (el.current) {
+          el.current.value = e.target?.value
+        }
+      }, 750)
+    }
+    previousSearch = e.target?.value
+  }
+
+  const handleClickCustomButton = (value) => {
+    el.current.value = previousSearch = value
+    handlerChangeOption(value)
+  }
+
+  useEffect(() => {
+    if (el?.current) {
+      el.current.onkeyup = onChangeCustomValue
+      el.current.value = cart?.driver_tip || ''
+      previousSearch = cart?.driver_tip
+    }
+  }, [el.current])
 
   return (
     <>
@@ -63,6 +96,9 @@ const DriverTipsUI = (props) => {
                   onClick={() => {
                     handlerChangeOption(value)
                     setvalue('')
+                    if (el?.current?.value) {
+                      el.current.value = ''
+                    }
                   }}
                 >
                   {t('APPLY_TIP', 'Apply Tip')}
@@ -75,22 +111,47 @@ const DriverTipsUI = (props) => {
               )}
             </FormDriverTip>
           ) : (
-            <WrapperTips>
-              {driverTipsOptions.map((option, i) => (
-                <TipCard
-                  key={i}
-                  className={`${option === driverTip ? 'active' : ''}`}
-                  onClick={() => handlerChangeOption(option)}
-                >
-                  {`${isFixedPriceType ? parsePrice(option) : `${option}%`}`}
-                </TipCard>
-              ))}
-            </WrapperTips>
+            <WrapperContainer pfchangs={pfchangs}>
+              <WrapperTips pfchangs={pfchangs}>
+                {driverTipsOptions.map((option, i) => (
+                  <TipCard
+                    key={i}
+                    className={`${option === driverTip ? 'active' : ''}`}
+                    onClick={() => {
+                      handlerChangeOption(option)
+                      if (el?.current) {
+                        previousSearch = ''
+                        el.current.value = ''
+                      }
+                    }}
+                    pfchangs={pfchangs}
+                  >
+                    {`${isFixedPriceType ? parsePrice(option) : `${option}%`}`}
+                  </TipCard>
+                ))}
+              </WrapperTips>
+              {pfchangs && (
+                <DriverCustomContainer>
+                  <ButtonPF color={el?.current?.value ? 'primary' : ''} onClick={() => !previousSearch && handleClickCustomButton(5.01)}>
+                    {t('CUSTOM', 'Custom')}
+                  </ButtonPF>
+                  <Input
+                    name='drivertip'
+                    type='text'
+                    defaultValue=''
+                    placeholder={configs.format_number_currency?.value || '$'}
+                    ref={(ref) => {
+                      el.current = ref
+                    }}
+                  />
+                </DriverCustomContainer>
+              )}
+            </WrapperContainer>
           )}
         </>
         {/* {isDriverTipUseCustom && !driverTipsOptions.includes(driverTip) && driverTip > 0 && (
           <DriverTipMessage>
-            {t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')}
+          {t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')}
           </DriverTipMessage>
         )} */}
       </DriverTipContainer>

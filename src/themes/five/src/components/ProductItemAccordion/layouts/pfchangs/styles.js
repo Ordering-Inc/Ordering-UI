@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const AccordionSection = styled.div`
@@ -8,7 +7,10 @@ export const AccordionSection = styled.div`
   padding: 10px 0px;
   background: #FFF;
   border-bottom: 1px solid #D9D9D9;
-  background: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
+  background: ${readOnlyMode => readOnlyMode ? 'transparent' : '#FFF'};
+  ${({ readOnlyMode }) => readOnlyMode && css`
+    color: #fff;
+  `}
 `
 
 export const ContentInfo = styled.div`
@@ -182,6 +184,16 @@ export const ProductTitle = styled.div`
   p {
     font-size: 14px;
   }
+  @media (min-width: 768px){
+    h3{
+        max-width: 250px;
+    }
+  }
+  ${({ readOnlyMode }) => readOnlyMode && css`
+    h3, p, div {
+      color: white;
+    }
+  `}
 `
 
 export const PriceContainer = styled.div`

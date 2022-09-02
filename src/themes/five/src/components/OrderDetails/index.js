@@ -14,9 +14,11 @@ import {
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 
 import { Button } from '../../styles/Buttons'
+import { Button as ButtonPF } from '../../styles/Buttons/theme/pfchangs'
 import { NotFoundSource } from '../NotFoundSource'
 
 import { ProductItemAccordion } from '../ProductItemAccordion'
+import { ProductItemAccordion as ProductItemAccordionPFChangs } from '../ProductItemAccordion/layouts/pfchangs'
 import { Modal } from '../Modal'
 import { Messages } from '../Messages'
 import { ReviewOrder } from '../ReviewOrder'
@@ -115,7 +117,7 @@ const OrderDetailsUI = (props) => {
 
   const showOrderActions = order?.delivery_type !== 1
 
-  const isOriginalLayout = orderingTheme?.theme?.confirmation?.components?.layout?.type === 'original'
+  const layout = 'pfchangs' || orderingTheme?.theme?.confirmation?.components?.layout?.type // cambiar
   const showDeliveryType = !orderingTheme?.theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
   const showDeliveryDate = !orderingTheme?.theme?.confirmation?.components?.order?.components?.date?.hidden
   const showDeliveryProgress = !orderingTheme?.theme?.confirmation?.components?.order?.components?.progress?.hidden
@@ -132,6 +134,8 @@ const OrderDetailsUI = (props) => {
   const showCustomerPhone = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.phone?.hidden
   const showCustomerAddress = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.address?.hidden
   const showCustomerEmail = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.email?.hidden
+
+  const defaultLayoutThemes = ['original', 'pfchangs']
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -227,7 +231,7 @@ const OrderDetailsUI = (props) => {
   }
 
   const handleStartNewOrder = (orderId) => {
-    if (isOriginalLayout) {
+    if (layout.includes(defaultLayoutThemes)) {
       handleReorder(orderId)
       return
     }
@@ -290,6 +294,14 @@ const OrderDetailsUI = (props) => {
     setIsService(_isService)
   }, [order])
 
+  const ButtonComponent = layout === 'pfchangs'
+    ? ButtonPF
+    : Button
+
+  const ProductItemAccordionComponent = layout === 'pfchangs'
+    ? ProductItemAccordionPFChangs
+    : ProductItemAccordion
+
   const OrderMapSection = (props) => {
     const validStatuses = props.validStatuses ?? [9, 19, 23]
     const location = props.location ?? order?.driver?.location
@@ -327,7 +339,7 @@ const OrderDetailsUI = (props) => {
 
   const OrderHeaderInfoSection = () => {
     return (
-      <HeaderInfo>
+      <HeaderInfo pfchangs={layout === 'pfchangs'}>
         <h1>{isService ? t('SERVICES', 'Services') : t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
         <p>{!isService && t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
       </HeaderInfo>
@@ -338,8 +350,8 @@ const OrderDetailsUI = (props) => {
     return (
       <>
         {!userCustomerId && (
-          <MyOrderActions>
-            <Button
+          <MyOrderActions pfchangs={layout === 'pfchangs'}>
+            <ButtonComponent
               color='primary'
               outline
               onClick={() => handleGoToPage({ page: 'orders' })}
@@ -347,7 +359,7 @@ const OrderDetailsUI = (props) => {
               {isService
                 ? t('YOUR_APPOINTMENTS', 'Your appointments')
                 : t('YOUR_ORDERS', theme?.defaultLanguages?.YOUR_ORDERS || 'Your Orders')}
-            </Button>
+            </ButtonComponent>
           </MyOrderActions>
         )}
       </>
@@ -355,14 +367,14 @@ const OrderDetailsUI = (props) => {
   }
 
   return (
-    <Container>
+    <Container pfchangs={layout === 'pfchangs'}>
       {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
         <WrapperContainer>
           <WrapperLeftContainer>
             <OrderInfo>
-              <TitleContainer>
+              <TitleContainer pfchangs={layout === 'pfchangs'}>
                 <h1>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
-                {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
+                {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && layout !== 'pfchangs' && (
                   <Content className='order-content'>
                     <ShareOrder>
                       <div className='wrap'>
@@ -392,33 +404,35 @@ const OrderDetailsUI = (props) => {
                     }
                   </p>
                 )}
-                {(
-                  acceptedStatus.includes(parseInt(order?.status, 10)) ||
-                  !isOriginalLayout
-                ) && (
-                  <ReOrder>
-                    <Button
-                      color='primary'
-                      outline
-                      onClick={() => handleStartNewOrder(order.id)}
-                      disabled={reorderState?.loading}
-                    >
-                      {t('START_NEW_ORDER', 'Start new order')}
-                    </Button>
-                    {completedStatus.includes(parseInt(order?.status, 10)) && (
-                      <Button
+                {
+                  (
+                    acceptedStatus.includes(parseInt(order?.status, 10)) ||
+                    !layout.includes(defaultLayoutThemes)
+                  ) && (
+                    <ReOrder>
+                      <ButtonComponent
                         color='primary'
                         outline
-                        onClick={() => handleReorder(order.id)}
+                        onClick={() => handleStartNewOrder(order.id)}
                         disabled={reorderState?.loading}
                       >
-                        {reorderState?.loading
-                          ? t('LOADING', 'Loading...')
-                          : t('REORDER', 'Reorder')}
-                      </Button>
-                    )}
-                  </ReOrder>
-                )}
+                        {t('START_NEW_ORDER', 'Start new order')}
+                      </ButtonComponent>
+                      {completedStatus.includes(parseInt(order?.status, 10)) && (
+                        <ButtonComponent
+                          color='primary'
+                          outline
+                          onClick={() => handleReorder(order.id)}
+                          disabled={reorderState?.loading}
+                        >
+                          {reorderState?.loading
+                            ? t('LOADING', 'Loading...')
+                            : t('REORDER', 'Reorder')}
+                        </ButtonComponent>
+                      )}
+                    </ReOrder>
+                  )
+                }
               </TitleContainer>
               {showDeliveryProgress && (
                 <>
@@ -453,7 +467,7 @@ const OrderDetailsUI = (props) => {
                 </>
               )}
             </OrderInfo>
-            <OrderBusiness>
+            <OrderBusiness pfchangs={layout === 'pfchangs'}>
               <BusinessExternalWrapper>
                 <BusinessWrapper
                   w='calc(100% - 20px)'
@@ -509,24 +523,24 @@ const OrderDetailsUI = (props) => {
                   >
                     <BtsOrderStatus>
                       <div>
-                        <Button
+                        <ButtonComponent
                           style={{ fontSize: 14 }}
                           color={order?.status === 20 ? 'secundary' : 'primary'}
                           onClick={() => handleChangeOrderStatus(20)}
                           disabled={order?.status === 20}
                         >
                           {getOrderStatus(20)?.value}
-                        </Button>
+                        </ButtonComponent>
                       </div>
                       <div>
-                        <Button
+                        <ButtonComponent
                           style={{ fontSize: 14 }}
                           color={order?.status === 20 ? 'primary' : 'secundary'}
                           disabled={order?.status === 21}
                           onClick={() => handleChangeOrderStatus(21)}
                         >
                           {getOrderStatus(21)?.value}
-                        </Button>
+                        </ButtonComponent>
                       </div>
                     </BtsOrderStatus>
                   </BusinessWrapper>
@@ -597,7 +611,7 @@ const OrderDetailsUI = (props) => {
                     </div>
                   </WrapperDriver>
                 </OrderDriver>
-                {!isOriginalLayout && (
+                {layout !== 'original' && (
                   <OrderMapSection />
                 )}
               </>
@@ -618,14 +632,16 @@ const OrderDetailsUI = (props) => {
                 <OrderActionsSection />
               </HeaderTitle>
               {order?.products?.length && order?.products.map(product => (
-                <ProductItemAccordion
+                <ProductItemAccordionComponent
                   key={product.id}
                   product={product}
+                  isOrderDetails
                 />
               ))}
               <OrderBillSection
                 order={order}
                 setOpenTaxModal={setOpenTaxModal}
+                pfchangs={layout === 'pfchangs'}
               />
             </OrderProducts>
           </WrapperRightContainer>
@@ -730,6 +746,7 @@ const OrderDetailsUI = (props) => {
           type={openTaxModal.type}
           data={openTaxModal.data}
           products={order?.products}
+          pfchangs={layout === 'pfchangs'}
         />
       </Modal>
       <Modal

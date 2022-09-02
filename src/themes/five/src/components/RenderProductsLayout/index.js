@@ -103,7 +103,7 @@ export const RenderProductsLayout = (props) => {
           ? BusinessBasicInformationOld
           : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'pfchangs'
             ? BusinessBasicInformationPFChangs
-            : BusinessBasicInformation // cambiar
+            : BusinessBasicInformationPFChangs // cambiar
 
   const SearchProductsComponent =
     orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type === 'old'

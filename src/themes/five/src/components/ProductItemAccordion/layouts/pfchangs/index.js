@@ -23,12 +23,13 @@ export const ProductItemAccordion = (props) => {
     product,
     onDeleteProduct,
     onEditProduct,
-    isCheckout
+    isCheckout,
+    isOrderDetails
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ parsePrice }] = useUtils()
-
+  const readOnlyMode = isOrderDetails || isCheckout
   const productInfo = () => {
     if (isCartProduct) {
       const ingredients = JSON.parse(JSON.stringify(Object.values(product.ingredients ?? {})))
@@ -53,10 +54,10 @@ export const ProductItemAccordion = (props) => {
   }
 
   return (
-    <AccordionSection isCheckout={isCheckout}>
+    <AccordionSection readOnlyMode={readOnlyMode}>
       <ProductInfo className='info'>
         <ContentInfo>
-          <ProductTitle>
+          <ProductTitle readOnlyMode={readOnlyMode}>
             <div>
               {product?.quantity}
               <h3
@@ -67,10 +68,12 @@ export const ProductItemAccordion = (props) => {
             </div>
             <PriceContainer>
               <ProductPrice>{parsePrice(product.total || product.price)}</ProductPrice>
-              <MdClose
-                onClick={() => onDeleteProduct(product)}
-                disabled={orderState.loading}
-              />
+              {!readOnlyMode && (
+                <MdClose
+                  onClick={() => onDeleteProduct(product)}
+                  disabled={orderState.loading}
+                />
+              )}
             </PriceContainer>
           </ProductTitle>
           <ProductOptionsContainer>

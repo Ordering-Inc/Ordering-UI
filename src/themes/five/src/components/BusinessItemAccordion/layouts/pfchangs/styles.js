@@ -103,7 +103,7 @@ export const ContentInfo = styled.div`
   h2, span {
     margin: 0px;
   }
-  
+
   h2, h4 {
     width: 200px
   }
@@ -115,7 +115,7 @@ export const ContentInfo = styled.div`
   h2 {
     color: ${props => props.theme.colors.darkTextColor};
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: underline;
     margin: 0;
   }

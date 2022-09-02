@@ -100,3 +100,123 @@ export const SpotSelect = styled.select`
 export const NoValidProductMessage = styled.p`
   font-size: 14px;
 `
+
+export const OrderBill = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 0px;
+  background-color: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
+  table {
+    width: 100%;
+    font-size: 14px;
+    color: #fff;
+    td span {
+      unicode-bidi: bidi-override;
+    }
+
+    tr td:nth-child(2) {
+      text-align: right;
+      ${props => props.theme?.rtl && css`
+        text-align: left;
+    `}
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      max-height: 25px;
+    }
+  }
+  table.total {
+    border-top: 1px solid #EAEAEA;
+    padding-top: 10px;
+    tr {
+      td {
+        font-weight: bold;
+        color: #fff;
+        font-size: 16px;
+      }
+    }
+  }
+  table.comments {
+    margin-top: 20px;
+    tr {
+      padding: 0;
+      td:nth-child(1) {
+        padding: 0;
+        font-weight: bold;
+      }
+    }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      height: 77px;
+      padding-right: 60px;
+    }
+  }
+  table.spot {
+    tr {
+      td:nth-child(1) {
+        font-weight: bold;
+      }
+      td:nth-child(2) {
+        font-weight: bold;
+        color: ${({ theme }) => theme.colors.primary};
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+`
+
+export const CouponContainer = styled.div`
+  width: 100%;
+  margin: 0px;
+  input {
+    flex: 1;
+  }
+
+  input, button {
+    border-radius: 0;
+    border: 0;
+    height: 44px;
+    box-sizing: border-box;
+  }
+
+`
+
+export const IconContainer = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  height: 20px;
+  svg:nth-child(1){
+    position: relative;
+    top: -1px;
+  }
+  svg:nth-child(2){
+    position: relative;
+    top: -3px;
+  }
+`
+
+export const Spinner = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-20%, 15%);
+`
+
+export const CommentSection = styled.div`
+  width: 100%;
+  h2 {
+    font-size: 16px;
+    color: #fff;
+  }
+  textarea {
+    width: 100%;
+    height: 76px;
+  }
+`

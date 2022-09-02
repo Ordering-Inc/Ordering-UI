@@ -43,7 +43,6 @@ const ProductOptionSubOptionUI = (props) => {
     <Container onClick={() => handleSuboptionClick()} isSelected={state?.selected} disabled={isDisabled}>
       <Text>
         <div>{suboption?.name}</div>
-        <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option?.max}`}</span>
       </Text>
       <SuboptionPrice>
         {price > 0 && (

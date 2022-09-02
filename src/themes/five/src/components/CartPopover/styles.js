@@ -80,7 +80,7 @@ export const TitleContainer = styled.div`
 `
 
 export const CartLength = styled.span`
-  padding: 1px 7px 1px 7px;
+  padding: 2px 6px 2px 6px;
   color: #000;
   background: #fff;
   border-radius: 50%;

@@ -26,7 +26,8 @@ const PaymentOptionWalletUI = (props) => {
     selectWallet,
     walletsState,
     businessConfigs,
-    deletetWalletSelected
+    deletetWalletSelected,
+    setHasWallets
   } = props
 
   const theme = useTheme()
@@ -82,6 +83,8 @@ const PaymentOptionWalletUI = (props) => {
           return !!cart?.wallets?.find(w => w.id === wallet.id)
         })
       )
+      const length = walletsState.result?.map((wallet, idx) => wallet.valid && wallet.balance >= 0 && walletName[wallet.type]?.isActive)
+      setHasWallets && setHasWallets(length > 0)
     }
   }, [walletsState.result?.length])
 

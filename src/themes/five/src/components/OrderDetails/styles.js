@@ -7,6 +7,9 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 20px 0;
+  ${({ pfchangs }) => pfchangs && css`
+    color: #fff;
+  `}
 `
 
 export const WrapperContainer = styled.div`

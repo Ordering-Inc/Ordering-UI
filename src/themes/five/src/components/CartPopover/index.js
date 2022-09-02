@@ -44,7 +44,7 @@ export const CartPopover = (props) => {
 
   const { styles, attributes } = popper
 
-  const isSlideBar = orderingTheme?.theme?.header?.components?.cart?.open_strategy?.type === 'slide'
+  const isSlideBar = 'slide' || orderingTheme?.theme?.header?.components?.cart?.open_strategy?.type === 'slide' // cambiar
   const isCartButtonPF = theme?.layouts?.header?.components?.cart?.components?.layout?.type === 'pfchangs'
   const showCartText = !theme?.layouts?.header?.components?.cart?.components?.text?.hidden
   const cartButtonIcon = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.image
