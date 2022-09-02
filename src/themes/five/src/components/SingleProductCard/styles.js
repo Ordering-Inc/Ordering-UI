@@ -23,7 +23,7 @@ export const CardContainer = styled.div`
     margin-top: 10px;
   }
   ${({ productsRows }) => productsRows ? css`
-    width: ${() => productsRows === 3 ? 'calc(33% - 40px)' : 'calc(50% - 40px)'};
+    width: ${() => productsRows === 3 ? 'calc(33% - 20px)' : 'calc(50% - 20px)'};
     margin: 10px;
 
   ` : css`
@@ -31,12 +31,12 @@ export const CardContainer = styled.div`
     margin: 10px 0px;
     @media (min-width: 576px) {
       margin: 10px;
-      width: calc(100% - 40px);
+      width: calc(100% - 20px);
     }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {
-      width: calc(50% - 40px);
+      width: calc(50% - 20px);
       margin: 10px 20px 10px 0px;
       ${props => props.theme?.rtl && css`
         margin: 10px 0px 10px 20px;
@@ -44,11 +44,11 @@ export const CardContainer = styled.div`
     }
   ` : css`
     @media (min-width: 681px) {
-      width: calc(49% - 40px);
+      width: calc(49% - 20px);
     }
 
     @media (min-width: 1440px) {
-      width: calc(33% - 40px);
+      width: calc(33% - 20px);
       margin: 10px 20px 10px 0px;
       ${props => props.theme?.rtl && css`
         margin: 10px 0px 10px 20px;
@@ -112,6 +112,12 @@ export const CardInfo = styled.div`
     color: ${props => props.theme.colors.darkTextColor};
     font-size: 14px;
   }
+
+  ${({ oneLine }) => oneLine && css`
+    p {
+      -webkit-line-clamp: 1;
+    }
+  `}
 
   @media (min-width: 1024px) {
     p {
@@ -232,6 +238,13 @@ export const RibbonBox = styled.div`
   ${({ isCapsule }) => isCapsule && css`
     border-radius: 50px;
   `}
+`
+
+export const LastOrder = styled.span`
+  color: ${props => props.theme.colors.primary};
+  font-weight: 400;
+  font-size: 10px !important;
+  margin: 0px 3px;
 `
 
 export const TitleWrapper = styled.div`
