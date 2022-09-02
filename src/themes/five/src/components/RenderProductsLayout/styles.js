@@ -214,11 +214,15 @@ export const ProfessionalFilterWrapper = styled.div`
 export const WrapperSearchAbsolute = styled.div`
   position: absolute;
   right: 5px;
-  top: 10px;
-  height: 100%;
+  top: 0px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  width: 40px;
+  height: 52px;
+  background-color: ${props => props.theme.colors.backgroundPage};
+  box-sizing: border-box;
+  padding-bottom: 5px;
 `
 
 export const NearBusiness = styled.div`
