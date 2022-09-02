@@ -95,7 +95,7 @@ import { ReviewTrigger } from './src/components/ReviewTrigger'
 import { ReviewOrder } from './src/components/ReviewOrder'
 import { ReviewDriver } from './src/components/ReviewDriver'
 import { ReviewProduct } from './src/components/ReviewProduct'
-
+import { Checkout as PFChangsCheckout } from './src/components/Checkout/layouts/pfchangs'
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
@@ -199,7 +199,7 @@ export {
   ReviewOrder,
   ReviewDriver,
   ReviewProduct,
-
+  PFChangsCheckout,
   // styles
   Button,
   Input,
