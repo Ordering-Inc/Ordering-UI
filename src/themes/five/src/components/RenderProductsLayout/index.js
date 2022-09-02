@@ -40,6 +40,7 @@ import { SearchProducts as SearchProductsOld } from '../../../../../components/R
 import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/components/BusinessProductsListing/SearchProducts'
 import { ProfessionalFilter } from '../ProfessionalFilter'
 import { SearchIconWrapper } from '../BusinessBasicInformation/styles'
+import { OrderItAgain } from '../OrderItAgain'
 
 const layoutOne = 'groceries'
 
@@ -234,6 +235,13 @@ export const RenderProductsLayout = (props) => {
                         />
                       </ProfessionalFilterWrapper>
                     )}
+                    {!business?.loading && business?.previously_products?.length > 0 && (
+                      <OrderItAgain
+                        onProductClick={onProductClick}
+                        productList={business?.previously_products}
+                        businessId={business?.id}
+                      />
+                    )}
                     <BusinessLayoutProductsList
                       categories={[
                         { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
@@ -332,7 +340,15 @@ export const RenderProductsLayout = (props) => {
                     )}
                   </BusinessCategoriesContainer>
                   <BusinessCategoryProductWrapper>
-                    <WrapContent>
+                    <WrapContent isGroceries>
+                      {!business?.loading && business?.previously_products?.length > 0 && (
+                        <OrderItAgain
+                          onProductClick={onProductClick}
+                          productList={business?.previously_products}
+                          businessId={business?.id}
+                          isGroceries
+                        />
+                      )}
                       <BusinessLayoutProductsList
                         categories={[
                           { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
