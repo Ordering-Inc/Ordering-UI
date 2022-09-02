@@ -140,7 +140,7 @@ export const BusinessBasicInformation = (props) => {
 
   useEffect(() => {
     window.scroll({
-      top: window.scrollY + 1,
+      top: window.scrollY - 1,
       left: 0
     })
   }, [sortByValue])
@@ -370,7 +370,7 @@ export const BusinessBasicInformation = (props) => {
             handleChangeSearch('')
             setOpenSearchProducts(false)
             window.scroll({
-              top: window.scrollY + 1,
+              top: window.scrollY - 1,
               left: 0
             })
           }}

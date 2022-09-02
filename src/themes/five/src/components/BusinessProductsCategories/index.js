@@ -127,7 +127,7 @@ const BusinessProductsCategoriesUI = (props) => {
     style0 += 'top: 0px !important;'
     style0 += 'left: 0px !important;'
     style0 += 'padding: 5px 5px 0px 5px !important;'
-    style0 += (useKioskApp) ? 'width: calc(100% - 50px) !important;' : 'width: calc(100% - 155px) !important;'
+    style0 += `width: calc(100% - ${useKioskApp ? '50px' : '155px'}) !important;`
     style0 += '}'
 
     let style1 = '.sticky-prod-cart {'
