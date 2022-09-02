@@ -159,6 +159,7 @@ export const WrapperSearch = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  box-sizing: border-box;
 
   .search-bar {
     margin-right: 10px;
@@ -191,6 +192,16 @@ export const WrapperSearch = styled.div`
     #list {
       border-radius: 8px;
     }
+  }
+  &.fixed-search {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1002;
+    width: 100vw;
+    margin-top: 0px;
+    background-color: ${props => props.theme.colors.backgroundPage};
+    padding: 10px;
   }
 `
 

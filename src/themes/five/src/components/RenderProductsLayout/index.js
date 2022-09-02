@@ -336,6 +336,7 @@ export const RenderProductsLayout = (props) => {
                         openCategories={openCategories}
                         business={business}
                         currentCart={currentCart}
+                        useKioskApp={useKioskApp}
                       />
                     )}
                   </BusinessCategoriesContainer>
