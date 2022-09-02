@@ -80,7 +80,8 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
       useKioskApp = props.useKioskApp,
       productAddedToCartLength = props.productAddedToCartLength,
       handleFavoriteProduct = props.handleFavoriteProduct,
-      isFavorite = props.isFavorite;
+      isFavorite = props.isFavorite,
+      isPreviously = props.isPreviously;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -99,7 +100,8 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
-      optimizeImage = _useUtils2$.optimizeImage;
+      optimizeImage = _useUtils2$.optimizeImage,
+      parseDate = _useUtils2$.parseDate;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -202,10 +204,11 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
 
   }, isObservedValidation ? /*#__PURE__*/_react.default.createElement("div", null, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0,
-    isBgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_86,c_limit')
+    isBgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_86,c_limit'),
+    oneLine: isPreviously
   }, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), !useKioskApp && (!isSkeleton ? /*#__PURE__*/_react.default.createElement("span", {
+  }), !useKioskApp && !isPreviously && (!isSkeleton ? /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return handleChangeFavorite();
     },
@@ -219,7 +222,11 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     width: 100
   }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, {
+  }), isPreviously && (!isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.LastOrder, null, t('LAST_ORDERED_ON', 'Last ordered on'), " ", parseDate(product === null || product === void 0 ? void 0 : product.last_ordered_date, {
+    outputFormat: 'MMM DD, YYYY'
+  })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 80
+  }))), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, {
     isBgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_86,c_limit')
   }, (product === null || product === void 0 ? void 0 : (_product$ribbon = product.ribbon) === null || _product$ribbon === void 0 ? void 0 : _product$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
     bgColor: product === null || product === void 0 ? void 0 : (_product$ribbon2 = product.ribbon) === null || _product$ribbon2 === void 0 ? void 0 : _product$ribbon2.color,

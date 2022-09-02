@@ -90,7 +90,7 @@ var BusinessInfoContent = _styledComponents.default.div(_templateObject14 || (_t
 
 exports.BusinessInfoContent = BusinessInfoContent;
 
-var WrapperSearch = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: flex-end;\n  justify-content: flex-end;\n\n  .search-bar {\n    margin-right: 10px;\n    ", "\n    input {\n      width: 100%;\n\n      @media (min-width: 500px) {\n        width: 250px;\n      }\n    }\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n\n  #select-input {\n    background-color: transparent !important;\n    border: none;\n    color: #748194 !important;\n\n    #list {\n      border-radius: 8px;\n    }\n  }\n"])), function (props) {
+var WrapperSearch = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: flex-end;\n  justify-content: flex-end;\n  box-sizing: border-box;\n\n  .search-bar {\n    margin-right: 10px;\n    ", "\n    input {\n      width: 100%;\n\n      @media (min-width: 500px) {\n        width: 250px;\n      }\n    }\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n\n  #select-input {\n    background-color: transparent !important;\n    border: none;\n    color: #748194 !important;\n\n    #list {\n      border-radius: 8px;\n    }\n  }\n  &.fixed-search {\n    position: fixed;\n    top: 0;\n    left: 0;\n    z-index: 1002;\n    width: 100vw;\n    margin-top: 0px;\n    background-color: ", ";\n    padding: 10px;\n  }\n"])), function (props) {
   var _props$theme4;
 
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "])));
@@ -98,6 +98,8 @@ var WrapperSearch = _styledComponents.default.div(_templateObject15 || (_templat
   var _props$theme5;
 
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      text-align: left;\n    "])));
+}, function (props) {
+  return props.theme.colors.backgroundPage;
 });
 
 exports.WrapperSearch = WrapperSearch;

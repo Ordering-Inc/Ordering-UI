@@ -192,8 +192,36 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     document.body.style.overflowY = openSearchProducts ? 'hidden' : 'auto';
   }, [openSearchProducts]);
 
+  var handleScroll = function handleScroll() {
+    var searchElement = document.getElementById('search-component');
+    if (!searchElement) return;
+    var limit = window.pageYOffset >= (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) && window.pageYOffset > 0;
+
+    if (limit) {
+      var classAdded = searchElement.classList.contains('fixed-search');
+      !classAdded && searchElement.classList.add('fixed-search');
+    } else {
+      searchElement && searchElement.classList.remove('fixed-search');
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    window.addEventListener('scroll', handleScroll);
+    return function () {
+      return window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  (0, _react.useEffect)(function () {
+    window.scroll({
+      top: window.scrollY - 1,
+      left: 0
+    });
+  }, [sortByValue]);
+
   var SearchComponent = function SearchComponent() {
-    return /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_styles.SearchIconWrapper, {
+    return /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
+      id: "search-component"
+    }, /*#__PURE__*/_react.default.createElement(_styles.SearchIconWrapper, {
       onClick: function onClick() {
         return setOpenSearchProducts(true);
       }
@@ -319,6 +347,10 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     onClose: function onClose() {
       handleChangeSearch('');
       setOpenSearchProducts(false);
+      window.scroll({
+        top: window.scrollY - 1,
+        left: 0
+      });
     },
     business: businessState.business
   })), !isInfoShrunken && /*#__PURE__*/_react.default.createElement(BusinessInfoComponent, null), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
