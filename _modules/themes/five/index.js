@@ -381,6 +381,12 @@ Object.defineProperty(exports, "OrdersOption", {
     return _OrdersOption.OrdersOption;
   }
 });
+Object.defineProperty(exports, "PFChangsCheckout", {
+  enumerable: true,
+  get: function get() {
+    return _pfchangs.Checkout;
+  }
+});
 Object.defineProperty(exports, "PaymentOptionCash", {
   enumerable: true,
   get: function get() {
@@ -809,6 +815,8 @@ var _ReviewOrder = require("./src/components/ReviewOrder");
 var _ReviewDriver = require("./src/components/ReviewDriver");
 
 var _ReviewProduct = require("./src/components/ReviewProduct");
+
+var _pfchangs = require("./src/components/Checkout/layouts/pfchangs");
 
 var _Buttons = require("./src/styles/Buttons");
 
