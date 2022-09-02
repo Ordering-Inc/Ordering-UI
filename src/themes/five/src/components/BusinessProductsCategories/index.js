@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
 import { useTheme } from 'styled-components'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import { CategoriesContainer } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -15,12 +16,14 @@ const BusinessProductsCategoriesUI = (props) => {
     openBusinessInformation,
     business,
     handlerClickCategory,
-    categorySelected
+    categorySelected,
+    useKioskApp
   } = props
 
   const theme = useTheme()
   const [selectedCategory, setSelectedCateogry] = useState({ id: null })
-  const scrollTopSpan = 116
+  const { width } = useWindowSize()
+  const scrollTopSpan = 60
 
   const handleChangeCategory = (category) => {
     const isBlockScroll = window.location.search.includes('category') &&
@@ -116,13 +119,15 @@ const BusinessProductsCategoriesUI = (props) => {
   }
 
   useEffect(() => {
+    if (typeof useKioskApp === 'undefined') return
     const styleSheet = document.getElementById('styles').sheet
 
     let style0 = '.sticky-prod-cat {'
     style0 += 'position: fixed !important;'
-    style0 += 'top: 56px !important;'
-    style0 += 'width: 97% !important;'
-    style0 += 'padding: 15px 5px 0px 0px;'
+    style0 += 'top: 0px !important;'
+    style0 += 'left: 0px !important;'
+    style0 += 'padding: 5px 5px 0px 5px !important;'
+    style0 += (useKioskApp) ? 'width: calc(100% - 50px) !important;' : 'width: calc(100% - 155px) !important;'
     style0 += '}'
 
     let style1 = '.sticky-prod-cart {'
@@ -137,9 +142,8 @@ const BusinessProductsCategoriesUI = (props) => {
     style2 += 'position: fixed !important;'
     style2 += 'top: 0px !important;'
     style2 += 'right: 0% !important;'
-    style2 += 'height: 56px !important;'
     style2 += 'z-index: 9999 !important;'
-    style2 += 'width: 100% !important;'
+    style2 += 'width: 50px !important;'
     style2 += `background-color: ${theme.colors.backgroundPage} !important;`
     style2 += '}'
 
@@ -149,7 +153,7 @@ const BusinessProductsCategoriesUI = (props) => {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [useKioskApp])
 
   return (
     <>
