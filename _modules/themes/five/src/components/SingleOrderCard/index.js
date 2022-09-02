@@ -37,8 +37,6 @@ var _styles = require("./styles");
 
 var _styles2 = require("../OrdersOption/styles");
 
-var _OrderingThemeContext = require("ordering-components/_modules/contexts/OrderingThemeContext");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -109,7 +107,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
-  var _useOrderingTheme = (0, _OrderingThemeContext.useOrderingTheme)(),
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
       _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
       orderingTheme = _useOrderingTheme2[0];
 
