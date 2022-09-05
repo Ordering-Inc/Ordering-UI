@@ -11,7 +11,7 @@ import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
 import SiJsonwebtokens from '@meronex/icons/si/SiJsonwebtokens'
-import { Heart } from 'react-bootstrap-icons'
+import { Heart, Tag } from 'react-bootstrap-icons'
 
 import { useEvent, useLanguage, useOrder, useSession, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
@@ -50,6 +50,7 @@ export const SidebarMenu = (props) => {
   const [modalPageToShow, setModalPageToShow] = useState(null)
 
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+  const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -251,6 +252,36 @@ export const SidebarMenu = (props) => {
                   </WrappContent>
                 </MenuLink>
               )}
+              {isPromotionsEnabled && (
+                <MenuLink
+                  onClick={() => handleGoToPage({ page: 'promotions' })}
+                >
+                  <WrappContent>
+                    <MenuLinkIcon
+                      active={
+                        window.location.pathname === '/promotions'
+                      }
+                    >
+                      <Tag />
+                    </MenuLinkIcon>
+                    <MenuLinkText>
+                      <TextInfo
+                        active={
+                          window.location.pathname === '/promotions'
+                        }
+                      >
+                        {t('PROMOTIONS', 'Promotions')}
+                      </TextInfo>
+                    </MenuLinkText>
+                    <MenuLinkSeparator>
+                      <div>
+                        <hr />
+                      </div>
+                    </MenuLinkSeparator>
+                  </WrappContent>
+                </MenuLink>
+              )}
+
               <MenuLink
                 onClick={() => handleGoToPage({ page: 'help' })}
               >
