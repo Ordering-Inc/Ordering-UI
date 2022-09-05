@@ -317,7 +317,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     openBusinessInformation: openBusinessInformation,
     openCategories: openCategories,
     business: business,
-    currentCart: currentCart
+    currentCart: currentCart,
+    useKioskApp: useKioskApp
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(BusinessLayoutProductsList, {
     categories: [{
       id: null,

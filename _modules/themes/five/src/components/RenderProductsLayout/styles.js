@@ -95,7 +95,9 @@ var ProfessionalFilterWrapper = _styledComponents.default.div(_templateObject16 
 
 exports.ProfessionalFilterWrapper = ProfessionalFilterWrapper;
 
-var WrapperSearchAbsolute = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 5px;\n  top: 10px;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])));
+var WrapperSearchAbsolute = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 5px;\n  top: 0px;\n  display: flex;\n  justify-content: center;\n  align-items: flex-end;\n  width: 40px;\n  height: 52px;\n  background-color: ", ";\n  box-sizing: border-box;\n  padding-bottom: 5px;\n"])), function (props) {
+  return props.theme.colors.backgroundPage;
+});
 
 exports.WrapperSearchAbsolute = WrapperSearchAbsolute;
 
