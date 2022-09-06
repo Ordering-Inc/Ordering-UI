@@ -98,6 +98,10 @@ export const AddressItem = styled.li`
   &:last-child {
     border-bottom: 1px solid #E9ECEF;
   }
+
+  ${({ theme, isProfile }) => isProfile && theme?.profile?.components?.layout?.type === 'pfchangs' && css`
+    padding: 15px;
+  `}
 `
 
 export const AddressItemActions = styled.div`
@@ -192,6 +196,13 @@ export const AddressTitle = styled.span`
   text-align: left;
   ${props => props.theme?.rtl && css`
     text-align: right;
+  `}
+  ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
+    padding: 30px 15px;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    border-bottom: 1px solid #fff;
+    font-weight: 600;
   `}
 `
 

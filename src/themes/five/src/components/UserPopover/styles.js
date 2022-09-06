@@ -35,6 +35,13 @@ export const HeaderItem = styled.div`
     height: 42px;
     border-radius: 7.6px;
   }
+
+  ${({ theme, isOpen }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    border: 1px solid #fff;
+    svg {
+      color: ${isOpen ? '#000' : '#fff'};
+    }
+  `}
 `
 
 export const PopoverBody = styled.div`

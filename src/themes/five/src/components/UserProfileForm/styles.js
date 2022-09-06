@@ -25,6 +25,10 @@ export const UserImage = styled.div`
   width: 100%;
   position: relative;
 
+  ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
+    display: none;
+  `}
+
   @media (min-width: 768px){
     width: auto;
     align-items: flex-end;
@@ -142,6 +146,14 @@ export const SavedPlaces = styled.div`
     align-self: center;
   }
 
+  ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
+      width: 100%;
+      * {
+        color: #fff;
+      }
+    `
+  }
+
   @media (min-width: 768px){
     width: 90%;
     margin-top: 40px;
@@ -155,6 +167,31 @@ export const SavedPlaces = styled.div`
       width: 50%;
       align-self: flex-end;
     }
+    ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
+      width: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 25px auto auto;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      button { 
+        display: none;
+      }
+      > div {
+        padding: 0;
+      }
+      h1 { 
+        display: none;
+      }
+      ul {
+        box-sizing: border-box;
+        border: 1px solid #fff;
+        padding: 0px;
+        width: 70%;
+        margin: 30px 0 0 30px;
+      }
+    `}
   }
 
 `

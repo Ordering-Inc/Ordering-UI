@@ -17,6 +17,12 @@ export const Container = styled.div`
     text-transform: capitalize;
   }
 
+  ${({ pfchangs }) => pfchangs && css`
+    > h1 {
+      color: #fff;
+    }
+  `}
+
   @media (min-width: 769px) {
     ${({ hideOrders }) => !hideOrders ? css`
       padding: 40px;
@@ -127,6 +133,26 @@ export const MyOrdersMenuContainer = styled.div`
       display: none
     `}
   }
+
+  ${({ pfchangs }) => pfchangs && css`
+      border-bottom: 1px solid #fff;
+      div{
+        flex: 1;
+        div{
+          flex: 1;
+          display: flex; 
+          justify-content: center;
+          padding: 20px;
+          border-bottom-width: 3px;
+        }
+      }
+      a{
+        font-size: 24px;
+        svg {
+          display: none;
+        }
+      }
+  `}
 
   @media (min-width: 381px) {
     padding: 15px 0px 0px 0px;

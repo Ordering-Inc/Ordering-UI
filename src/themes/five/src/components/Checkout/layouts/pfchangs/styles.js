@@ -368,3 +368,10 @@ export const GoBackContainer = styled.div`
     color: #fff;
   }
 `
+
+export const TipsSkeleton = styled.div`
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`

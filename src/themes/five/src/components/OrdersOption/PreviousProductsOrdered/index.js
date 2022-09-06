@@ -7,8 +7,11 @@ import {
 
 import { AutoScroll } from '../../AutoScroll'
 import { SingleProductCard } from '../../SingleProductCard'
+import { SingleProductCard as SingleProductCardPF } from '../../SingleProductCard/layouts/pfchangs'
 import { Modal } from '../../Modal'
 import { ProductForm } from '../../ProductForm'
+import { ProductForm as ProductFormPFChangs } from '../../ProductForm/layouts/pfchangs'
+import { useTheme } from 'styled-components'
 
 export const PreviousProductsOrdered = (props) => {
   const {
@@ -17,6 +20,13 @@ export const PreviousProductsOrdered = (props) => {
     onBusinessClick
   } = props
   const [curProduct, setCurProduct] = useState(null)
+  const theme = useTheme()
+  const layout = theme?.layouts?.business_view?.components?.layout?.type
+  const SingleProductCardComponent = layout === 'pfchangs'
+    ? SingleProductCardPF
+    : SingleProductCard
+
+  const ProductFormComponent = layout === 'pfchangs' ? ProductFormPFChangs : ProductForm
 
   const closeModalProductForm = () => {
     setCurProduct(null)
@@ -36,7 +46,7 @@ export const PreviousProductsOrdered = (props) => {
       <ProductsList>
         <AutoScroll>
           {products?.map(product => (
-            <SingleProductCard
+            <SingleProductCardComponent
               key={product?.id}
               isSoldOut={(product.inventoried && !product.quantity)}
               product={product}
@@ -58,7 +68,7 @@ export const PreviousProductsOrdered = (props) => {
         disableOverflowX
       >
         {(!!curProduct) && (
-          <ProductForm
+          <ProductFormComponent
             businessSlug={curProduct?.business?.slug}
             useKioskApp={props?.useKioskApp}
             businessId={curProduct?.businessId}

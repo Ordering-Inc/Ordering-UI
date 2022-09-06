@@ -20,7 +20,8 @@ import {
   SkeletonReorder,
   SkeletonButton,
   BusinessControllerSkeleton,
-  ProductsListing
+  ProductsListing,
+  Divider
 } from './styles'
 import { PreviousBusinessOrdered } from './PreviousBusinessOrdered'
 import { PreviousProductsOrdered } from './PreviousProductsOrdered'
@@ -62,7 +63,8 @@ const OrdersOptionUI = (props) => {
     onProductRedirect,
     businessesSearchList,
     handleUpdateProducts,
-    onBusinessClick
+    onBusinessClick,
+    pfchangs
   } = props
 
   const [, t] = useLanguage()
@@ -203,7 +205,7 @@ const OrdersOptionUI = (props) => {
       {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : ((isShowTitles || !isBusinessesPage) && !hideOrders)) && (
         <>
           {orders.length > 0 && (
-            <OptionTitle isBusinessesPage={isBusinessesPage}>
+            <OptionTitle isBusinessesPage={isBusinessesPage} pfchangs={pfchangs}>
               <h1>
                 {titleContent || (activeOrders
                   ? t('ACTIVE', 'Active')
@@ -345,6 +347,9 @@ const OrdersOptionUI = (props) => {
             handleReorder={handleReorder}
           />
         )
+      )}
+      {orders.length > 0 && (
+        <Divider />
       )}
       <Alert
         title={t('MY_ORDERS', 'My orders')}

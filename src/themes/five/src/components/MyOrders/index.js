@@ -13,17 +13,19 @@ import {
   MyOrdersMenuContainer
 } from './styles'
 import { Tab, Tabs } from '../../styles/Tabs'
+import { useTheme } from 'styled-components'
 
 export const MyOrders = (props) => {
   const {
     hideOrders,
     businessesSearchList,
-    onProductRedirect
+    onProductRedirect,
+    pfchangs
   } = props
 
   const [, t] = useLanguage()
   const history = useHistory()
-
+  const theme = useTheme()
   const [selectItem, setSelectItem] = useState('all')
   const [isEmptyActive, setIsEmptyActive] = useState(false)
   const [isEmptyPast, setIsEmptyPast] = useState(false)
@@ -53,6 +55,13 @@ export const MyOrders = (props) => {
     else setSelectItem(key)
   }
 
+  const pfchangsTabProps = pfchangs ? {
+    borderBottom: true,
+    pfchangs: true,
+    activeColor: theme.colors?.gold,
+    color: theme.colors?.gold
+  } : {}
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -65,14 +74,14 @@ export const MyOrders = (props) => {
         <h2>{t('PREVIOUSLY_ORDERED', 'Previously ordered')}</h2>
       )}
       {!hideOrders && (
-        <ProfileOptions value='orders' />
+        <ProfileOptions value='orders' pfchangs={pfchangs} />
       )}
-      <Container hideOrders={hideOrders}>
+      <Container hideOrders={hideOrders} pfchangs={pfchangs}>
         {!hideOrders && (
           <h1>{t('MY_ORDERS', 'My orders')}</h1>
         )}
         {!allEmpty && (
-          <MyOrdersMenuContainer className='category-lists'>
+          <MyOrdersMenuContainer className='category-lists' pfchangs={pfchangs}>
             <Tabs variant='primary'>
               {MyOrdersMenu.filter(option => !hideOrders || option.key !== 'orders').map(option => (
                 <Tab
@@ -80,6 +89,7 @@ export const MyOrders = (props) => {
                   onClick={() => setSelectedOption(option.key)}
                   active={selectedOption === option.key}
                   borderBottom
+                  {...pfchangsTabProps}
                 >
                   {option?.value}
                 </Tab>
@@ -87,7 +97,7 @@ export const MyOrders = (props) => {
             </Tabs>
           </MyOrdersMenuContainer>
         )}
-        {!(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && (
+        {!(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && !pfchangs && (
           <OrderGroupFilterWrapper>
             {filterList?.map((order, i) => (
               <Button
@@ -123,7 +133,6 @@ export const MyOrders = (props) => {
                       setIsEmptyPreorder={setIsEmptyPreorder}
                       selectItem={selectItem}
                     />
-                    <Divider />
                   </>
                 )}
                 {(selectItem === 'all' || selectItem === 'active') && (
@@ -135,7 +144,6 @@ export const MyOrders = (props) => {
                       setIsEmptyActive={setIsEmptyActive}
                       selectItem={selectItem}
                     />
-                    <Divider />
                   </>
                 )}
                 {(selectItem === 'all' || selectItem === 'past') && (
@@ -147,7 +155,6 @@ export const MyOrders = (props) => {
                       setIsEmptyPast={setIsEmptyPast}
                       selectItem={selectItem}
                     />
-                    <Divider />
                   </>
                 )}
               </>

@@ -23,6 +23,23 @@ export const Input = styled.input`
   &:-ms-input-placeholder {
     color: #DBDCDB;
   }
+  ${({ theme }) => theme?.general?.components?.inputs?.borderRadius && css`
+    border-radius: ${theme?.general?.components?.inputs?.borderRadius};
+  `}
+
+  ${({ theme }) => theme?.general?.components?.inputs?.color && css`
+    color: ${theme?.general?.components?.inputs?.color};
+  `}
+
+  ${({ theme }) => theme?.general?.components?.inputs?.borderColor && css`
+    border: 1px solid ${theme?.general?.components?.inputs?.borderColor};
+    &::placeholder,
+    &::-webkit-input-placeholder,
+    &:-ms-input-placeholder {
+      color: ${theme?.general?.components?.inputs?.borderColor};
+    }
+  `}
+
   ${({ borderBottom }) => borderBottom && css`
     border: none;
     border-radius: 0px;
@@ -95,6 +112,22 @@ export const TextArea = styled.textarea`
   &:-ms-input-placeholder {
     color: #DBDCDB;
   }
+  ${({ theme }) => theme?.general?.components?.inputs?.borderRadius && css`
+    border-radius: ${theme?.general?.components?.inputs?.borderRadius};
+  `}
+
+  ${({ theme }) => theme?.general?.components?.inputs?.color && css`
+    color: ${theme?.general?.components?.inputs?.color};
+  `}
+
+  ${({ theme }) => theme?.general?.components?.inputs?.borderColor && css`
+    border: 1px solid ${theme?.general?.components?.inputs?.borderColor};
+    &::placeholder,
+    &::-webkit-input-placeholder,
+    &:-ms-input-placeholder {
+      color: ${theme?.general?.components?.inputs?.borderColor};
+    }
+  `}
 `
 
 export const InputGroupRight = styled(InputGroupLeft)`

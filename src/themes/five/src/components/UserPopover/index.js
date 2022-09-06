@@ -16,12 +16,7 @@ import { DropDownCircleImage } from '../../../../../components/Dropdown/style'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { capitalize } from '../../../../../utils'
 import AiOutlineMenu from '@meronex/icons/ai/AiOutlineMenu'
-
-const optionsDefault = [
-  { name: 'search', pathname: '/explore', displayName: 'My home', key: 'my_home' },
-  { name: 'business_search', pathname: '/business_search', displayName: 'Browse & Search', key: 'browse_search' },
-  { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders' },
-]
+import { useTheme } from 'styled-components'
 
 export const UserPopover = (props) => {
   const {
@@ -36,6 +31,7 @@ export const UserPopover = (props) => {
   const [events] = useEvent()
   const [{ configs }] = useConfig()
   const [orderingTheme] = useOrderingTheme()
+  const theme = useTheme()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -43,6 +39,13 @@ export const UserPopover = (props) => {
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
   const isAddressListNewPage = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
+  const pfchangs = theme?.general?.components?.layout?.type === 'pfchangs'
+
+  const optionsDefault = [
+    { name: 'search', pathname: '/explore', displayName: 'My home', key: 'my_home', isActive: !pfchangs },
+    { name: 'business_search', pathname: '/business_search', displayName: 'Browse & Search', key: 'browse_search', isActive: true },
+    { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders', isActive: true }
+  ]
 
   const extraOptions = [
     { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
@@ -57,7 +60,7 @@ export const UserPopover = (props) => {
 
   const options = isCustomerMode
     ? optionsDefault.filter(option => option.name === 'profile')
-    : optionsList || optionsDefault
+    : optionsList || optionsDefault.filter(option => option.isActive)
   const popper = usePopper(referenceElement.current, popperElement.current, {
     placement: 'auto',
     modifiers: [

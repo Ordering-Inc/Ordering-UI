@@ -125,6 +125,12 @@ export const HeaderOnline = styled.div`
     font-size: 10px;
     font-weight: 300;
   }
+
+  ${({ theme, rightContainer }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    span, h1 {
+      color: ${rightContainer ? '#fff' : '#000'};
+    }
+  `}
 `
 
 export const Chat = styled.div`
@@ -181,6 +187,10 @@ export const BubbleConsole = styled.div`
   @media (min-width: 1024px){
     max-width: 30%
   }
+    
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    color: #000;
+  `}
 `
 
 export const BubbleBusines = styled.div`
@@ -382,6 +392,10 @@ export const Send = styled.form`
       padding-left: 15px;
       padding-right: 30px;
     `}
+      
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    border: 1px solid #000;
+  `}
   }
 `
 

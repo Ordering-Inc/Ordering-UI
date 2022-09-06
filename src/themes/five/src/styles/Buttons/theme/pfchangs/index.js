@@ -70,35 +70,5 @@ export const Button = styled.button`
         color: #FFF;
       }
     `}
-    ${({ circle }) => circle && css`
-      background: ${props => props.theme.colors.primary};
-      color: ${props => props.theme.colors.primaryContrast};
-      border-color: ${props => props.theme.colors.primary};
-      padding: 0;
-      width: 34px;
-      height: 34px;
-      line-height: 34px;
-      text-align: center;
-      border-radius: 50%;
-      &:active {
-        border-color: ${props => darken(0.07, props.theme.colors.primary)};
-        background: ${props => darken(0.07, props.theme.colors.primary)};
-      }
-    `}
-    ${({ circle, outline }) => circle && outline && css`
-      background: #FFF;
-      color: ${props => props.theme.colors.primary};
-      border-color: ${props => props.theme.colors.primary};
-      padding: 0;
-      width: 34px;
-      height: 34px;
-      line-height: 34px;
-      text-align: center;
-      border-radius: 50%;
-      &:active {
-        border-color: ${props => props.theme.colors.primary};
-        background: ${props => props.theme.colors.primary};
-      }
-    `}
   `}
 `

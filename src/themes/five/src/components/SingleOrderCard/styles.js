@@ -48,6 +48,11 @@ export const Container = styled.div`
     justify-content: center;
   `}
 
+  
+  ${({ theme }) => theme?.layouts?.orders?.components?.layout?.type === 'pfchangs' && css`
+      border-radius: 0px;
+  `}
+
   @media (min-width: 480px) {
     min-width: 430px;
     max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '250px'};
@@ -67,6 +72,20 @@ export const Content = styled.div`
   position: relative;
   border-radius: 16px;
   padding: 10px;
+
+  ${({ theme }) => theme?.layouts?.orders?.components?.layout?.type === 'pfchangs' && css`
+      background: #000;
+      color: #fff;
+      border-radius: 0;
+      border: 1px solid #fff;
+      .order-status {
+        color: ${theme?.colors?.gold};
+      }
+      .orders-detail {
+        margin-top: 5px;
+      }
+  `}
+
   ${({ isCustomerMode }) => isCustomerMode ? css`
     align-items: center;
   ` : css`
@@ -186,6 +205,21 @@ export const ButtonWrapper = styled.div`
       }
     }
   }
+  ${({ theme }) => theme?.layouts?.orders?.components?.layout?.type === 'pfchangs' && css`
+      button {
+        border: 0;
+        border-radius: 0;
+        color: #fff;
+        background: ${theme?.colors?.primary};
+        
+        &.reorder {
+          background: ${theme?.colors?.primary};
+          &:hover {
+            background: #b92d1b;
+          }
+        }
+      }
+  `}
 `
 
 export const Logo = styled.div`

@@ -146,8 +146,9 @@ export const Spinner = styled.div`
   transform: translate(-20%, 15%);
 `
 
-export const CommentContainer = styled.td`
+export const CommentContainer = styled.div`
   position: relative;
+  width: 100%;
   .spinner-content > div{
     width: 50px;
     height: 50px;

@@ -48,7 +48,8 @@ import {
   DriverCustomContainer,
   BusinessDetails,
   ItemHeader,
-  GoBackContainer
+  GoBackContainer,
+  TipsSkeleton
 } from './styles'
 
 import { Button } from '../../../../styles/Buttons'
@@ -274,7 +275,7 @@ const CheckoutUI = (props) => {
             <UserDetailsContainer>
               <WrapperUserDetails>
                 {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
-                  <div>
+                  <div style={{ marginTop: '50px' }}>
                     <Skeleton height={35} style={{ marginBottom: '10px' }} />
                     <Skeleton height={35} style={{ marginBottom: '10px' }} />
                     <Skeleton height={35} style={{ marginBottom: '10px' }} />
@@ -298,19 +299,31 @@ const CheckoutUI = (props) => {
                 )}
               </WrapperUserDetails>
             </UserDetailsContainer>
-            <HandoffContainer>
-              <ItemHeader>
-                <h1>{t('HANDOFF_DETAILS', 'Handoff Details')}</h1>
-              </ItemHeader>
-              <HandoffContent>
-                <h1>{t('YOUR_ADDRESS', 'Your Address')}</h1>
-                <AddressForm
-                  useValidationFileds
-                  address={options?.address || {}}
-                />
-              </HandoffContent>
-            </HandoffContainer>
+            {!cartState?.loading ? (
+              <HandoffContainer>
+                <ItemHeader>
+                  <h1>{t('HANDOFF_DETAILS', 'Handoff Details')}</h1>
+                </ItemHeader>
+                <HandoffContent>
+                  <h1>{t('YOUR_ADDRESS', 'Your Address')}</h1>
+                  <AddressForm
+                    useValidationFileds
+                    address={options?.address || {}}
+                  />
+                </HandoffContent>
+              </HandoffContainer>
+            ) : (
+              <div>
+                <Skeleton height={30} style={{ margin: '10px 0px' }} />
+                <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                <Skeleton height={30} style={{ marginBottom: '10px' }} />
+                <Skeleton height={30} style={{ marginBottom: '10px' }} />
+                <Skeleton height={55} style={{ marginBottom: '10px' }} />
+              </div>
+            )}
+
           </>
+
           {
             !cartState.loading &&
             cart &&
@@ -679,7 +692,7 @@ export const Checkout = (props) => {
 
       {cartState.loading && !(window.location.pathname === '/checkout') && (
         <Container>
-          <WrapperLeftContainer>
+          <WrapperLeftContainer style={{ marginTop: '70px' }}>
             <Skeleton height={30} />
             <Skeleton height={100} style={{ marginBottom: '15px' }} />
             <Skeleton height={25} />
@@ -688,8 +701,22 @@ export const Checkout = (props) => {
             <Skeleton height={50} style={{ marginBottom: '15px' }} />
             <Skeleton height={25} />
             <Skeleton height={25} />
+            <TipsSkeleton>
+              <Skeleton height={55} width={65} style={{ marginBottom: '10px' }} />
+              <Skeleton height={55} width={65} style={{ marginBottom: '10px' }} />
+              <Skeleton height={55} width={65} style={{ marginBottom: '10px' }} />
+              <Skeleton height={55} width={65} style={{ marginBottom: '10px' }} />
+            </TipsSkeleton>
+            <Skeleton height={50} style={{ marginTop: '45px', marginBottom: '10px' }} />
+            <Skeleton height={35} style={{ marginBottom: '10px' }} />
+            <Skeleton height={35} style={{ marginBottom: '10px' }} />
           </WrapperLeftContainer>
           <WrapperRightContainer>
+            <Skeleton height={200} style={{ marginBottom: '20px' }} />
+            <Skeleton height={25} />
+            <Skeleton height={60} />
+            <Skeleton height={80} style={{ marginBottom: '20px' }} />
+            <Skeleton height={25} />
             <Skeleton height={25} />
             <Skeleton height={50} style={{ marginBottom: '20px' }} />
             <Skeleton height={25} />

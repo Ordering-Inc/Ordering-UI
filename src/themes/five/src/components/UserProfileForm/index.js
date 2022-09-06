@@ -11,13 +11,14 @@ import {
 
 import { UserFormDetailsUI } from '../UserFormDetails'
 import { UserFormDetailsUI as UserFormDetailsOldUI } from '../../../../../components/UserFormDetails'
+import { UserFormDetailsUI as UserFormDetailsPFChangs } from '../UserFormDetails/layouts/pfchangs'
 import { Modal } from '../Modal'
 import { VerifyCodeForm } from '../VerifyCodeForm'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 
-import { ProfileOptions } from './ProfileOptions'
+import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { bytesConverter } from '../../../../../utils'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -32,7 +33,8 @@ import {
   SavedPlaces,
   UploadImageIcon,
   SkeletonWrapper,
-  WrapperForm
+  WrapperForm,
+  LanguageSelectorWrapper
 } from './styles'
 
 const UserProfileFormUI = (props) => {
@@ -62,6 +64,11 @@ const UserProfileFormUI = (props) => {
   const showCustomerPicture = !orderingTheme?.theme?.profile?.components?.picture?.hidden
   const showAddressList = !orderingTheme?.theme?.profile?.components?.address_list?.hidden
   const userFormLayoutRow = orderingTheme?.theme?.profile?.components?.layout?.position === 'row'
+  const pfchangs = theme?.profile?.components?.layout?.type === 'pfchangs'
+
+  const UserFormDetailComponent = pfchangs
+    ? UserFormDetailsPFChangs
+    : UserFormDetailsUI
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -169,7 +176,7 @@ const UserProfileFormUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       {!isHiddenAddress && (
-        <ProfileOptions value='account' />
+        <ProfileOptions value='account' pfchangs={pfchangs} />
       )}
       <Container>
         <UserProfileContainer mbottom={isHiddenAddress && 25}>
@@ -215,7 +222,7 @@ const UserProfileFormUI = (props) => {
                   isOldLayout
                 />
               ) : (
-                <UserFormDetailsUI
+                <UserFormDetailComponent
                   {...props}
                   onCancel={toggleEditState}
                   isHiddenAddress={isHiddenAddress}
@@ -228,7 +235,7 @@ const UserProfileFormUI = (props) => {
         {(userData?.addresses || user?.addresses) && !isHiddenAddress && showAddressList && (
           <SavedPlaces>
             <h1>{t('MY_ADDRESSES', 'My Saved places')}</h1>
-            <AddressList isModal addressList={user?.addresses} isProfile />
+            <AddressList isModal addressList={user?.addresses} isProfile pfchangs={pfchangs} />
           </SavedPlaces>
         )}
       </Container>

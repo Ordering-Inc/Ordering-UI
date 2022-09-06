@@ -11,6 +11,12 @@ export const OptionTitle = styled.div`
     margin: 18px 0;
   }
 
+  ${({ theme }) => theme?.layouts?.general?.components?.layout?.type === 'pfchangs' && css`
+    h1{
+      color: #fff;
+    }  
+  `}
+
   @media (min-width: 768px){
     padding: 0;
     width: 100%;
@@ -369,4 +375,15 @@ export const ProductsListing = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 45px;
+`
+
+export const Divider = styled.div`
+  margin-top: 25px;
+  background: #F8F9FA;
+  height: 8px;
+  width: 100%;
+  ${({ theme }) => theme?.layouts?.orders?.components?.layout?.type === 'pfchangs' && css`
+    height: 3px;
+    background: #fff;
+  `}
 `

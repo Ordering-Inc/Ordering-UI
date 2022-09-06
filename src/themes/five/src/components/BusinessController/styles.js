@@ -174,6 +174,12 @@ export const BusinessContent = styled.div`
   padding: 0 20px 20px 20px;
   height: calc(100% - 145px);
 
+  ${({ theme }) => theme?.layouts?.orders?.components?.layout?.type === 'pfchangs' && css`
+    * {
+      color: #fff !important;
+    }
+  `}
+
   @media (min-width: 481px) {
     height: calc(100% - 165px);
   }

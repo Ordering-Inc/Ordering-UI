@@ -545,13 +545,13 @@ const MessagesUI = (props) => {
                 }
               </Image>
               {business && (
-                <HeaderOnline>
+                <HeaderOnline rightContainer>
                   <h1>{order.business?.name}</h1>
                   <span>{t('BUSINESS', 'Business')}</span>
                 </HeaderOnline>
               )}
               {driver && (
-                <HeaderOnline>
+                <HeaderOnline rightContainer>
                   <h1>{order.driver?.name}</h1>
                   <span>{t('DRIVER', 'Driver')}</span>
                 </HeaderOnline>

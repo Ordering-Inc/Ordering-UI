@@ -48,7 +48,7 @@ export const HorizontalOrdersLayout = (props) => {
             order={order}
           />
         ))}
-        {pagination?.totalPages && !notOrders && pagination?.currentPage < pagination?.totalPages && !notOrders && (
+        {pagination?.totalPages && !notOrders && pagination?.currentPage < pagination?.totalPages && (
           <Card
             flex
             nobg

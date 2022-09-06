@@ -267,7 +267,7 @@ const AddressListUI = (props) => {
             <AddressListUl id='list'>
               <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
               {uniqueAddressesList.map(address => (
-                <AddressItem key={address?.id}>
+                <AddressItem key={address?.id} isProfile={isProfile}>
                   <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
                     <span className='radio'>
                       {checkAddress(address) ? <RiRadioButtonFill className='address-checked' /> : <IosRadioButtonOff />}
