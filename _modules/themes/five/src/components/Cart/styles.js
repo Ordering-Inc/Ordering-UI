@@ -67,7 +67,7 @@ var Spinner = _styledComponents.default.div(_templateObject10 || (_templateObjec
 
 exports.Spinner = Spinner;
 
-var CommentContainer = _styledComponents.default.td(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  .spinner-content > div{\n    width: 50px;\n    height: 50px;\n  }\n"])));
+var CommentContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  .spinner-content > div{\n    width: 50px;\n    height: 50px;\n  }\n"])));
 
 exports.CommentContainer = CommentContainer;
 

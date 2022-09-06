@@ -15,9 +15,15 @@ var _AutoScroll = require("../../AutoScroll");
 
 var _SingleProductCard = require("../../SingleProductCard");
 
+var _pfchangs = require("../../SingleProductCard/layouts/pfchangs");
+
 var _Modal = require("../../Modal");
 
 var _ProductForm = require("../../ProductForm");
+
+var _pfchangs2 = require("../../ProductForm/layouts/pfchangs");
+
+var _styledComponents = require("styled-components");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -36,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PreviousProductsOrdered = function PreviousProductsOrdered(props) {
-  var _curProduct$business;
+  var _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _curProduct$business;
 
   var products = props.products,
       handleUpdateProducts = props.handleUpdateProducts,
@@ -46,6 +52,11 @@ var PreviousProductsOrdered = function PreviousProductsOrdered(props) {
       _useState2 = _slicedToArray(_useState, 2),
       curProduct = _useState2[0],
       setCurProduct = _useState2[1];
+
+  var theme = (0, _styledComponents.useTheme)();
+  var layout = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$busine = _theme$layouts.business_view) === null || _theme$layouts$busine === void 0 ? void 0 : (_theme$layouts$busine2 = _theme$layouts$busine.components) === null || _theme$layouts$busine2 === void 0 ? void 0 : (_theme$layouts$busine3 = _theme$layouts$busine2.layout) === null || _theme$layouts$busine3 === void 0 ? void 0 : _theme$layouts$busine3.type;
+  var SingleProductCardComponent = layout === 'pfchangs' ? _pfchangs.SingleProductCard : _SingleProductCard.SingleProductCard;
+  var ProductFormComponent = layout === 'pfchangs' ? _pfchangs2.ProductForm : _ProductForm.ProductForm;
 
   var closeModalProductForm = function closeModalProductForm() {
     setCurProduct(null);
@@ -65,7 +76,7 @@ var PreviousProductsOrdered = function PreviousProductsOrdered(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductsList, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, products === null || products === void 0 ? void 0 : products.map(function (product) {
     var _product$business;
 
-    return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+    return /*#__PURE__*/_react.default.createElement(SingleProductCardComponent, {
       key: product === null || product === void 0 ? void 0 : product.id,
       isSoldOut: product.inventoried && !product.quantity,
       product: product,
@@ -86,7 +97,7 @@ var PreviousProductsOrdered = function PreviousProductsOrdered(props) {
     padding: "0",
     isProductForm: true,
     disableOverflowX: true
-  }, !!curProduct && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+  }, !!curProduct && /*#__PURE__*/_react.default.createElement(ProductFormComponent, {
     businessSlug: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business = curProduct.business) === null || _curProduct$business === void 0 ? void 0 : _curProduct$business.slug,
     useKioskApp: props === null || props === void 0 ? void 0 : props.useKioskApp,
     businessId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.businessId,

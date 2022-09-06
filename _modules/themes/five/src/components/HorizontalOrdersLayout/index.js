@@ -75,7 +75,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         key: order.id,
         order: order
       }));
-    }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && !notOrders && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && !notOrders && /*#__PURE__*/_react.default.createElement(_styles.Card, {
+    }), (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && !notOrders && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.Card, {
       flex: true,
       nobg: true,
       isBusinessesPage: isBusinessesPage,

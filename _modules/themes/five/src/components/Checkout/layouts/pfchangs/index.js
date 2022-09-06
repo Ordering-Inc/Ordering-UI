@@ -352,7 +352,11 @@ var CheckoutUI = function CheckoutUI(props) {
     onClick: function onClick() {
       return history.goBack();
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserDetails, null, cartState.loading || isCustomerMode && !(customerState !== null && customerState !== void 0 && (_customerState$user = customerState.user) !== null && _customerState$user !== void 0 && _customerState$user.id) ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserDetails, null, cartState.loading || isCustomerMode && !(customerState !== null && customerState !== void 0 && (_customerState$user = customerState.user) !== null && _customerState$user !== void 0 && _customerState$user.id) ? /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      marginTop: '50px'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 35,
     style: {
       marginBottom: '10px'
@@ -389,10 +393,35 @@ var CheckoutUI = function CheckoutUI(props) {
     userId: isCustomerMode && (customerState === null || customerState === void 0 ? void 0 : (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id),
     isSuccess: isSuccess,
     isCheckout: true
-  }))), /*#__PURE__*/_react.default.createElement(_styles.HandoffContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ItemHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('HANDOFF_DETAILS', 'Handoff Details'))), /*#__PURE__*/_react.default.createElement(_styles.HandoffContent, null, /*#__PURE__*/_react.default.createElement("h1", null, t('YOUR_ADDRESS', 'Your Address')), /*#__PURE__*/_react.default.createElement(_pfchangs3.AddressForm, {
+  }))), !(cartState !== null && cartState !== void 0 && cartState.loading) ? /*#__PURE__*/_react.default.createElement(_styles.HandoffContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ItemHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('HANDOFF_DETAILS', 'Handoff Details'))), /*#__PURE__*/_react.default.createElement(_styles.HandoffContent, null, /*#__PURE__*/_react.default.createElement("h1", null, t('YOUR_ADDRESS', 'Your Address')), /*#__PURE__*/_react.default.createElement(_pfchangs3.AddressForm, {
     useValidationFileds: true,
     address: (options === null || options === void 0 ? void 0 : options.address) || {}
-  })))), !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && driverTipsOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ItemHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_TIP', 'Add Tip'))), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+  }))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 30,
+    style: {
+      margin: '10px 0px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 35,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 30,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 30,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 55,
+    style: {
+      marginBottom: '10px'
+    }
+  }))), !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && driverTipsOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ItemHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_TIP', 'Add Tip'))), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
     isFixedPrice: parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 1,
@@ -762,7 +791,11 @@ var Checkout = function Checkout(props) {
     content: t('ERROR_CART_SELECTED', 'Sorry, the selected cart was not found.'),
     btnTitle: t('CHECKOUT_REDIRECT', 'Go to Checkout list'),
     onClickButton: handleCheckoutListRedirect
-  }), cartState.loading && !(window.location.pathname === '/checkout') && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), cartState.loading && !(window.location.pathname === '/checkout') && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, {
+    style: {
+      marginTop: '70px'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 30
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100,
@@ -787,7 +820,63 @@ var Checkout = function Checkout(props) {
     height: 25
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 25
+  }), /*#__PURE__*/_react.default.createElement(_styles.TipsSkeleton, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 55,
+    width: 65,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 55,
+    width: 65,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 55,
+    width: 65,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 55,
+    width: 65,
+    style: {
+      marginBottom: '10px'
+    }
+  })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 50,
+    style: {
+      marginTop: '45px',
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 35,
+    style: {
+      marginBottom: '10px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 35,
+    style: {
+      marginBottom: '10px'
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 200,
+    style: {
+      marginBottom: '20px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 25
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 60
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 80,
+    style: {
+      marginBottom: '20px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 25
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 25
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50,

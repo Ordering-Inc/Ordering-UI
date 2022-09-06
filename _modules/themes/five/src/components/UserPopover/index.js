@@ -23,6 +23,8 @@ var _utils = require("../../../../../utils");
 
 var _AiOutlineMenu = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineMenu"));
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -49,25 +51,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var optionsDefault = [{
-  name: 'search',
-  pathname: '/explore',
-  displayName: 'My home',
-  key: 'my_home'
-}, {
-  name: 'business_search',
-  pathname: '/business_search',
-  displayName: 'Browse & Search',
-  key: 'browse_search'
-}, {
-  name: 'orders',
-  pathname: '/profile/orders',
-  displayName: 'orders',
-  key: 'orders'
-}];
-
 var UserPopover = function UserPopover(props) {
-  var _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
+  var _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _theme$general, _theme$general$compon, _theme$general$compon2, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       isHome = props.isHome,
@@ -95,12 +80,33 @@ var UserPopover = function UserPopover(props) {
       _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
       orderingTheme = _useOrderingTheme2[0];
 
+  var theme = (0, _styledComponents.useTheme)();
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
   var isWalletEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$cash_wallet = configs.cash_wallet) === null || _configs$cash_wallet === void 0 ? void 0 : _configs$cash_wallet.value) && (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && ((configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1');
   var isPromotionsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off = configs.advanced_offers_module) === null || _configs$advanced_off === void 0 ? void 0 : _configs$advanced_off.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off2 = configs.advanced_offers_module) === null || _configs$advanced_off2 === void 0 ? void 0 : _configs$advanced_off2.value) === true;
   var isAddressListNewPage = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.profile) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.address_list) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.layout) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.position) === 'new_page';
+  var pfchangs = (theme === null || theme === void 0 ? void 0 : (_theme$general = theme.general) === null || _theme$general === void 0 ? void 0 : (_theme$general$compon = _theme$general.components) === null || _theme$general$compon === void 0 ? void 0 : (_theme$general$compon2 = _theme$general$compon.layout) === null || _theme$general$compon2 === void 0 ? void 0 : _theme$general$compon2.type) === 'pfchangs';
+  var optionsDefault = [{
+    name: 'search',
+    pathname: '/explore',
+    displayName: 'My home',
+    key: 'my_home',
+    isActive: !pfchangs
+  }, {
+    name: 'business_search',
+    pathname: '/business_search',
+    displayName: 'Browse & Search',
+    key: 'browse_search',
+    isActive: true
+  }, {
+    name: 'orders',
+    pathname: '/profile/orders',
+    displayName: 'orders',
+    key: 'orders',
+    isActive: true
+  }];
   var extraOptions = [{
     name: 'profile',
     pathname: '/profile',
@@ -152,7 +158,9 @@ var UserPopover = function UserPopover(props) {
   }];
   var options = isCustomerMode ? optionsDefault.filter(function (option) {
     return option.name === 'profile';
-  }) : optionsList || optionsDefault;
+  }) : optionsList || optionsDefault.filter(function (option) {
+    return option.isActive;
+  });
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
     placement: 'auto',
     modifiers: [{

@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperPlaceOrderButton = exports.WrapperLeftContent = exports.WrapperLeftContainer = exports.WrapperActionsInput = exports.WarningText = exports.WarningMessage = exports.WalletPaymentOptionContainer = exports.UserDetailsContainer = exports.SelectSpotContainer = exports.PaymentMethodContainer = exports.NotFoundImage = exports.ItemHeader = exports.HandoffContent = exports.HandoffContainer = exports.GoBackContainer = exports.DriverTipDivider = exports.DriverTipContainer = exports.DeliveryOptionsContainer = exports.Container = exports.CheckOutDivider = exports.CartsList = exports.CartHeader = exports.CartContainer = exports.BusinessDetailsContainer = exports.BusinessDetails = void 0;
+exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperPlaceOrderButton = exports.WrapperLeftContent = exports.WrapperLeftContainer = exports.WrapperActionsInput = exports.WarningText = exports.WarningMessage = exports.WalletPaymentOptionContainer = exports.UserDetailsContainer = exports.TipsSkeleton = exports.SelectSpotContainer = exports.PaymentMethodContainer = exports.NotFoundImage = exports.ItemHeader = exports.HandoffContent = exports.HandoffContainer = exports.GoBackContainer = exports.DriverTipDivider = exports.DriverTipContainer = exports.DeliveryOptionsContainer = exports.Container = exports.CheckOutDivider = exports.CartsList = exports.CartHeader = exports.CartContainer = exports.BusinessDetailsContainer = exports.BusinessDetails = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -139,3 +139,7 @@ exports.BusinessDetails = BusinessDetails;
 var GoBackContainer = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  width: 100%;\n  position: relative;\n  top: 25px;\n  .back-arrow {\n    font-size: 24px;\n    cursor: pointer;\n    margin-bottom: 5px;\n    color: #fff;\n  }\n"])));
 
 exports.GoBackContainer = GoBackContainer;
+
+var TipsSkeleton = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n"])));
+
+exports.TipsSkeleton = TipsSkeleton;

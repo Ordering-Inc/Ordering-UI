@@ -25,6 +25,8 @@ var _styles = require("./styles");
 
 var _Tabs = require("../../styles/Tabs");
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -46,17 +48,19 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MyOrders = function MyOrders(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$colors, _theme$colors2, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var hideOrders = props.hideOrders,
       businessesSearchList = props.businessesSearchList,
-      onProductRedirect = props.onProductRedirect;
+      onProductRedirect = props.onProductRedirect,
+      pfchangs = props.pfchangs;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
   var history = (0, _reactRouterDom.useHistory)();
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)('all'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -123,6 +127,12 @@ var MyOrders = function MyOrders(props) {
     if (selectItem === key) setSelectItem('all');else setSelectItem(key);
   };
 
+  var pfchangsTabProps = pfchangs ? {
+    borderBottom: true,
+    pfchangs: true,
+    activeColor: (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold,
+    color: (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold
+  } : {};
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -132,25 +142,28 @@ var MyOrders = function MyOrders(props) {
       key: i
     }, props));
   }), hideOrders && !allEmpty && /*#__PURE__*/_react.default.createElement("h2", null, t('PREVIOUSLY_ORDERED', 'Previously ordered')), !hideOrders && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
-    value: "orders"
+    value: "orders",
+    pfchangs: pfchangs
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
-    hideOrders: hideOrders
+    hideOrders: hideOrders,
+    pfchangs: pfchangs
   }, !hideOrders && /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ORDERS', 'My orders')), !allEmpty && /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
-    className: "category-lists"
+    className: "category-lists",
+    pfchangs: pfchangs
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, MyOrdersMenu.filter(function (option) {
     return !hideOrders || option.key !== 'orders';
   }).map(function (option) {
-    return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, _extends({
       key: option.key,
       onClick: function onClick() {
         return setSelectedOption(option.key);
       },
       active: selectedOption === option.key,
       borderBottom: true
-    }, option === null || option === void 0 ? void 0 : option.value);
-  }))), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
+    }, pfchangsTabProps), option === null || option === void 0 ? void 0 : option.value);
+  }))), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && !pfchangs && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: i,
       color: selectItem === order.key ? 'primary' : 'secundary',
@@ -168,17 +181,17 @@ var MyOrders = function MyOrders(props) {
     horizontal: true,
     setIsEmptyPreorder: setIsEmptyPreorder,
     selectItem: selectItem
-  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'active') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
+  }))), (selectItem === 'all' || selectItem === 'active') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     activeOrders: true,
     horizontal: true,
     setIsEmptyActive: setIsEmptyActive,
     selectItem: selectItem
-  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'past') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
+  }))), (selectItem === 'all' || selectItem === 'past') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     pastOrders: true,
     horizontal: true,
     setIsEmptyPast: setIsEmptyPast,
     selectItem: selectItem
-  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)))), notOrderOptions.includes(selectedOption) && /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
+  }))))), notOrderOptions.includes(selectedOption) && /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     titleContent: t('PREVIOUSLY_ORDERED', 'Previously ordered'),
     hideOrders: true,
     horizontal: true,

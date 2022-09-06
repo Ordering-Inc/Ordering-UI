@@ -105,7 +105,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       onProductRedirect = props.onProductRedirect,
       businessesSearchList = props.businessesSearchList,
       handleUpdateProducts = props.handleUpdateProducts,
-      onBusinessClick = props.onBusinessClick;
+      onBusinessClick = props.onBusinessClick,
+      pfchangs = props.pfchangs;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -349,7 +350,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       key: i
     }, props));
   }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : (isShowTitles || !isBusinessesPage) && !hideOrders) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
-    isBusinessesPage: isBusinessesPage
+    isBusinessesPage: isBusinessesPage,
+    pfchangs: pfchangs
   }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))), !loading && orders.length === 0 && selectItem !== 'all' && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
@@ -445,7 +447,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     onRedirectPage: onRedirectPage,
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), orders.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('MY_ORDERS', 'My orders'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

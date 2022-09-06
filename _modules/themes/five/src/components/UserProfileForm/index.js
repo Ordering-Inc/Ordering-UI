@@ -17,6 +17,8 @@ var _UserFormDetails = require("../UserFormDetails");
 
 var _UserFormDetails2 = require("../../../../../components/UserFormDetails");
 
+var _pfchangs = require("../UserFormDetails/layouts/pfchangs");
+
 var _Modal = require("../Modal");
 
 var _VerifyCodeForm = require("../VerifyCodeForm");
@@ -27,7 +29,7 @@ var _AddressList = require("../AddressList");
 
 var _Confirm = require("../Confirm");
 
-var _ProfileOptions = require("./ProfileOptions");
+var _ProfileOptions = require("../../../../../components/UserProfileForm/ProfileOptions");
 
 var _utils = require("../../../../../utils");
 
@@ -66,7 +68,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserProfileFormUI = function UserProfileFormUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _formState$changes5, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _theme$profile, _theme$profile$compon, _theme$profile$compon2, _formState$changes5, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
 
   var userData = props.userData,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
@@ -115,6 +117,8 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   var showCustomerPicture = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.profile) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.picture) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
   var showAddressList = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.profile) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.address_list) !== null && _orderingTheme$theme5 !== void 0 && _orderingTheme$theme5.hidden);
   var userFormLayoutRow = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme6 = orderingTheme.theme) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.profile) === null || _orderingTheme$theme7 === void 0 ? void 0 : (_orderingTheme$theme8 = _orderingTheme$theme7.components) === null || _orderingTheme$theme8 === void 0 ? void 0 : (_orderingTheme$theme9 = _orderingTheme$theme8.layout) === null || _orderingTheme$theme9 === void 0 ? void 0 : _orderingTheme$theme9.position) === 'row';
+  var pfchangs = (theme === null || theme === void 0 ? void 0 : (_theme$profile = theme.profile) === null || _theme$profile === void 0 ? void 0 : (_theme$profile$compon = _theme$profile.components) === null || _theme$profile$compon === void 0 ? void 0 : (_theme$profile$compon2 = _theme$profile$compon.layout) === null || _theme$profile$compon2 === void 0 ? void 0 : _theme$profile$compon2.type) === 'pfchangs';
+  var UserFormDetailComponent = pfchangs ? _pfchangs.UserFormDetailsUI : _UserFormDetails.UserFormDetailsUI;
 
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
@@ -234,7 +238,8 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       key: i
     }, props));
   }), !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
-    value: "account"
+    value: "account",
+    pfchangs: pfchangs
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
     mbottom: isHiddenAddress && 25
   }, showCustomerPicture && /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
@@ -274,14 +279,15 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     isOriginalLayout: true,
     isHiddenAddress: isHiddenAddress,
     isOldLayout: true
-  })) : /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+  })) : /*#__PURE__*/_react.default.createElement(UserFormDetailComponent, _extends({}, props, {
     onCancel: toggleEditState,
     isHiddenAddress: isHiddenAddress,
     setWillVerifyOtpState: setWillVerifyOtpState
   }))))), ((userData === null || userData === void 0 ? void 0 : userData.addresses) || (user === null || user === void 0 ? void 0 : user.addresses)) && !isHiddenAddress && showAddressList && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ADDRESSES', 'My Saved places')), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     addressList: user === null || user === void 0 ? void 0 : user.addresses,
-    isProfile: true
+    isProfile: true,
+    pfchangs: pfchangs
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PROFILE', 'Profile'),
     content: alertState.content,
