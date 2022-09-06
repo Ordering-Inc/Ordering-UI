@@ -87,7 +87,7 @@ const BusinessesListingUI = (props) => {
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [favoriteIds, setFavoriteIds] = useState([])
-  const showCities = !orderingTheme?.theme?.business_listing_view?.components?.cities?.hidden
+  const hideCities = orderingTheme?.theme?.business_listing_view?.components?.cities?.hidden
 
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
@@ -273,7 +273,7 @@ const BusinessesListingUI = (props) => {
                 onSearch={handleChangeSearch}
                 handleCustomEnter={() => onRedirectPage({ page: 'business_search' })}
               />
-              {showCities && citiesState?.cities?.length > 0 && (
+              {typeof hideCities !== 'undefined' && !hideCities && citiesState?.cities?.length > 0 && (
                 <Button color='primary' onClick={handleOpenCities}>
                   {citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)?.name || t('SELECT_A_CITY', 'Select a city')}
                 </Button>

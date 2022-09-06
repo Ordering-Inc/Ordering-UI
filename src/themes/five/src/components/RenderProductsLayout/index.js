@@ -44,6 +44,7 @@ import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/c
 import { ProfessionalFilter } from '../ProfessionalFilter'
 import { SearchIconWrapper } from '../BusinessBasicInformation/styles'
 import { BusinessBasicInformationPFChangs } from '../BusinessBasicInformation/layouts/pfchangs'
+import { OrderItAgain } from '../OrderItAgain'
 
 const layoutOne = 'groceries'
 
@@ -116,8 +117,8 @@ export const RenderProductsLayout = (props) => {
   const businessLayout = {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
-  const showCartOnProductList = false // !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
-  const showBusinessNearCity = !theme?.layouts?.business_view?.components?.near_business?.hidden
+  const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
+  const hideBusinessNearCity = orderingTheme?.theme?.business_view?.components?.near_business?.hidden
   const headerType = 'pfchangs' || orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type // cambiar
 
   const BusinessLayoutCategories = headerType === 'pfchangs'
@@ -143,7 +144,7 @@ export const RenderProductsLayout = (props) => {
     <>
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
-          {showBusinessNearCity && !useKioskApp && (
+          {typeof hideBusinessNearCity !== 'undefined' && !hideBusinessNearCity && !useKioskApp && (
             <NearBusiness>
               <BusinessesListing
                 logosLayout
@@ -188,87 +189,95 @@ export const RenderProductsLayout = (props) => {
               <BusinessContent isCustomLayout={isCustomLayout || useKioskApp} id='wrapper-categories'>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
                   <div style={{ position: 'relative' }}>
-                    {business?.professionals?.length > 0 && headerType !== 'pfchangs' && (
-                      <ProfessionalFilterWrapper>
-                        <ProfessionalFilter
-                          professionals={business?.professionals}
-                          professionalSelected={professionalSelected}
-                          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
-                        />
-                      </ProfessionalFilterWrapper>
-                    )}
-                    {!(business?.categories?.length === 0 && !categoryId) && (
-                      <BusinessLayoutCategories
-                        categories={headerType === 'pfchangs'
-                          ? [
-                            { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                            ...business?.categories.filter(category => category?.subcategories?.length > 0).sort((a, b) => a.rank - b.rank)
-                          ]
-                          : [
-                            { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                            { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                            ...business?.categories.sort((a, b) => a.rank - b.rank)]}
-                        categorySelected={categorySelected}
-                        onClickCategory={onClickCategory}
-                        featured={featuredProducts}
-                        useKioskApp={useKioskApp}
-                        openBusinessInformation={openBusinessInformation}
-                        business={business}
-                        currentCart={currentCart}
-                        wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
-                        setSubcategoriesSelected={setSubcategoriesSelected}
-                        subcategoriesSelected={subcategoriesSelected}
-                        PFChangsCategoriesLayout={headerType === 'pfchangs'}
-                      />
-                    )}
-                    {categorySelected?.subcategories?.length > 0 && headerType === 'pfchangs' && (
-                      <BusinessLayoutCategories
-                        categories={
-                          categorySelected?.subcategories?.sort((a, b) => a.rank - b.rank)
-                        }
-                        categorySelected={categorySelected}
-                        onClickCategory={onClickCategory}
-                        featured={featuredProducts}
-                        useKioskApp={useKioskApp}
-                        openBusinessInformation={openBusinessInformation}
-                        business={business}
-                        currentCart={currentCart}
-                        wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
-                        subcategoriesLayout
-                        subcategorySelected={subcategorySelected}
-                        setSubcategorySelected={setSubcategorySelected}
-                      />
-                    )}
-                    {useKioskApp && (
-                      <WrapperSearchAbsolute id='WrapperSearchAbsolute'>
-                        <SearchIconWrapper
-                          onClick={() => setOpenSearchProducts(true)}
-                        >
-                          <CgSearch />
-                        </SearchIconWrapper>
-                        {openSearchProducts && (
-                          <SearchProductsOriginal
-                            {...props}
-                            businessState={businessState}
-                            setOpenBusinessInformation={setOpenBusinessInformation}
-                            openBusinessInformation={openBusinessInformation}
-                            handleChangeSearch={handleChangeSearch}
-                            searchValue={searchValue}
-                            sortByOptions={sortByOptions}
-                            handleChangeSortBy={handleChangeSortBy}
-                            categoryState={categoryState}
-                            errorQuantityProducts={errorQuantityProducts}
-                            sortByValue={sortByValue}
-                            onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
-                            business={businessState.business}
-                            onClose={() => {
-                              handleChangeSearch('')
-                              setOpenSearchProducts(false)
-                            }}
+                    {
+                      business?.professionals?.length > 0 && headerType !== 'pfchangs' && (
+                        <ProfessionalFilterWrapper>
+                          <ProfessionalFilter
+                            professionals={business?.professionals}
+                            professionalSelected={professionalSelected}
+                            handleChangeProfessionalSelected={handleChangeProfessionalSelected}
                           />
-                        )}
-                      </WrapperSearchAbsolute>
-                    )}
+                        </ProfessionalFilterWrapper>
+                      )
+                    }
+                    {
+                      !(business?.categories?.length === 0 && !categoryId) && (
+                        <BusinessLayoutCategories
+                          categories={headerType === 'pfchangs'
+                            ? [
+                              { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                              ...business?.categories.filter(category => category?.subcategories?.length > 0).sort((a, b) => a.rank - b.rank)
+                            ]
+                            : [
+                              { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                              { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                              ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                          categorySelected={categorySelected}
+                          onClickCategory={onClickCategory}
+                          featured={featuredProducts}
+                          useKioskApp={useKioskApp}
+                          openBusinessInformation={openBusinessInformation}
+                          business={business}
+                          currentCart={currentCart}
+                          wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
+                          setSubcategoriesSelected={setSubcategoriesSelected}
+                          subcategoriesSelected={subcategoriesSelected}
+                          PFChangsCategoriesLayout={headerType === 'pfchangs'}
+                        />
+                      )
+                    }
+                    {
+                      categorySelected?.subcategories?.length > 0 && headerType === 'pfchangs' && (
+                        <BusinessLayoutCategories
+                          categories={
+                            categorySelected?.subcategories?.sort((a, b) => a.rank - b.rank)
+                          }
+                          categorySelected={categorySelected}
+                          onClickCategory={onClickCategory}
+                          featured={featuredProducts}
+                          useKioskApp={useKioskApp}
+                          openBusinessInformation={openBusinessInformation}
+                          business={business}
+                          currentCart={currentCart}
+                          wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
+                          subcategoriesLayout
+                          subcategorySelected={subcategorySelected}
+                          setSubcategorySelected={setSubcategorySelected}
+                        />
+                      )
+                    }
+                    {
+                      useKioskApp && (
+                        <WrapperSearchAbsolute id='WrapperSearchAbsolute'>
+                          <SearchIconWrapper
+                            onClick={() => setOpenSearchProducts(true)}
+                          >
+                            <CgSearch />
+                          </SearchIconWrapper>
+                          {openSearchProducts && (
+                            <SearchProductsOriginal
+                              {...props}
+                              businessState={businessState}
+                              setOpenBusinessInformation={setOpenBusinessInformation}
+                              openBusinessInformation={openBusinessInformation}
+                              handleChangeSearch={handleChangeSearch}
+                              searchValue={searchValue}
+                              sortByOptions={sortByOptions}
+                              handleChangeSortBy={handleChangeSortBy}
+                              categoryState={categoryState}
+                              errorQuantityProducts={errorQuantityProducts}
+                              sortByValue={sortByValue}
+                              onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                              business={businessState.business}
+                              onClose={() => {
+                                handleChangeSearch('')
+                                setOpenSearchProducts(false)
+                              }}
+                            />
+                          )}
+                        </WrapperSearchAbsolute>
+                      )
+                    }
                   </div>
                   {/* {windowSize.width < 500 && (
                     <MobileCartViewWrapper>
@@ -277,6 +286,22 @@ export const RenderProductsLayout = (props) => {
                     </MobileCartViewWrapper>
                   )} */}
                   <WrapContent id='businessProductList' pfchangs={headerType === 'pfchangs'}>
+                    {business?.professionals?.length > 0 && (
+                      <ProfessionalFilterWrapper>
+                        <ProfessionalFilter
+                          professionals={business?.professionals}
+                          professionalSelected={professionalSelected}
+                          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                        />
+                      </ProfessionalFilterWrapper>
+                    )}
+                    {!business?.loading && business?.previously_products?.length > 0 && (
+                      <OrderItAgain
+                        onProductClick={onProductClick}
+                        productList={business?.previously_products}
+                        businessId={business?.id}
+                      />
+                    )}
                     {headerType === 'pfchangs' ? (
                       <BusinessLayoutProductsList
                         categories={categorySelected?.id
@@ -341,138 +366,153 @@ export const RenderProductsLayout = (props) => {
                     )}
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
-                {showCartOnProductList && (
-                  <BusinessCartContainer id='BusinessCartContainer'>
-                    <BusinessCartContent maxHeight={window.innerHeight - 100}>
-                      {currentCart?.products?.length > 0 ? (
-                        <>
-                          <Title>{t('YOUR_CART', 'Your cart')}</Title>
-                          <Cart
-                            isStore
-                            isCustomMode
-                            isForceOpenCart
-                            useKioskApp={useKioskApp}
-                            cart={currentCart}
-                            isCartPending={currentCart?.status === 2}
-                            isProducts={currentCart.products.length}
-                            isCartOnProductsList={isCartOnProductsList}
-                            handleCartOpen={handleCartOpen}
-                          />
-                        </>
-                      ) : (
-                        <EmptyCart>
-                          <div className='empty-content'>
-                            <Cart3 />
-                            <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
-                          </div>
-                          <EmptyBtnWrapper>
-                            <span>{parsePrice(0)}</span>
-                            <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
-                          </EmptyBtnWrapper>
-                        </EmptyCart>
-                      )}
-                    </BusinessCartContent>
-                  </BusinessCartContainer>
-                )}
+                {
+                  showCartOnProductList && (
+                    <BusinessCartContainer id='BusinessCartContainer'>
+                      <BusinessCartContent maxHeight={window.innerHeight - 100}>
+                        {currentCart?.products?.length > 0 ? (
+                          <>
+                            <Title>{t('YOUR_CART', 'Your cart')}</Title>
+                            <Cart
+                              isStore
+                              isCustomMode
+                              isForceOpenCart
+                              useKioskApp={useKioskApp}
+                              cart={currentCart}
+                              isCartPending={currentCart?.status === 2}
+                              isProducts={currentCart.products.length}
+                              isCartOnProductsList={isCartOnProductsList}
+                              handleCartOpen={handleCartOpen}
+                            />
+                          </>
+                        ) : (
+                          <EmptyCart>
+                            <div className='empty-content'>
+                              <Cart3 />
+                              <p>{t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}</p>
+                            </div>
+                            <EmptyBtnWrapper>
+                              <span>{parsePrice(0)}</span>
+                              <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
+                            </EmptyBtnWrapper>
+                          </EmptyCart>
+                        )}
+                      </BusinessCartContent>
+                    </BusinessCartContainer>
+                  )
+                }
               </BusinessContent>
             )}
 
-            {businessLayout.layoutOne && headerType !== 'pfchangs' && (
-              <>
-                {business?.professionals?.length > 0 && (
-                  <ProfessionalFilterWrapper isTop>
-                    <ProfessionalFilter
-                      professionals={business?.professionals}
-                      professionalSelected={professionalSelected}
-                      handleChangeProfessionalSelected={handleChangeProfessionalSelected}
-                    />
-                  </ProfessionalFilterWrapper>
-                )}
-                <BusinessContent>
-                  <BusinessCategoriesContainer>
-                    {!(business?.categories?.length === 0 && !categoryId) && (
-                      <BusinessLayoutCategories
-                        component='categories'
-                        categories={[
-                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                          ...business?.categories.sort((a, b) => a.rank - b.rank)
-                        ]}
-                        categorySelected={categorySelected}
-                        onClickCategory={onClickCategory}
-                        featured={featuredProducts}
-                        openBusinessInformation={openBusinessInformation}
-                        openCategories={openCategories}
-                        business={business}
-                        currentCart={currentCart}
-                      />
-                    )}
-                  </BusinessCategoriesContainer>
-                  <BusinessCategoryProductWrapper>
-                    <WrapContent>
-                      <BusinessLayoutProductsList
-                        categories={[
-                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                          ...business?.categories.sort((a, b) => a.rank - b.rank)
-                        ]}
-                        category={categorySelected}
-                        onClickCategory={onClickCategory}
-                        categoriesState={props.categoriesState}
-                        categoryState={categoryState}
-                        businessId={business?.id}
-                        errors={errors}
-                        onProductClick={onProductClick}
-                        handleSearchRedirect={handleSearchRedirect}
-                        featured={featuredProducts}
-                        searchValue={searchValue}
-                        isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                        handleClearSearch={handleChangeSearch}
-                        errorQuantityProducts={errorQuantityProducts}
-                        business={business}
-                        currentCart={currentCart}
-                        handleUpdateProducts={handleUpdateProducts}
+            {
+              businessLayout.layoutOne && headerType !== 'pfchangs' && (
+                <>
+                  {business?.professionals?.length > 0 && (
+                    <ProfessionalFilterWrapper isTop>
+                      <ProfessionalFilter
+                        professionals={business?.professionals}
                         professionalSelected={professionalSelected}
                         handleChangeProfessionalSelected={handleChangeProfessionalSelected}
-                        subcategorySelected={subcategorySelected}
                       />
-                    </WrapContent>
-                  </BusinessCategoryProductWrapper>
-                </BusinessContent>
-              </>
+                    </ProfessionalFilterWrapper>
+                  )}
+                  <BusinessContent>
+                    <BusinessCategoriesContainer>
+                      {!(business?.categories?.length === 0 && !categoryId) && (
+                        <BusinessLayoutCategories
+                          component='categories'
+                          categories={[
+                            { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                            { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                            ...business?.categories.sort((a, b) => a.rank - b.rank)
+                          ]}
+                          categorySelected={categorySelected}
+                          onClickCategory={onClickCategory}
+                          featured={featuredProducts}
+                          openBusinessInformation={openBusinessInformation}
+                          openCategories={openCategories}
+                          business={business}
+                          currentCart={currentCart}
+                          useKioskApp={useKioskApp}
+                        />
+                      )}
+                    </BusinessCategoriesContainer>
+                    <BusinessCategoryProductWrapper>
+                      <WrapContent isGroceries>
+                        {!business?.loading && business?.previously_products?.length > 0 && (
+                          <OrderItAgain
+                            onProductClick={onProductClick}
+                            productList={business?.previously_products}
+                            businessId={business?.id}
+                            isGroceries
+                          />
+                        )}
+                        <BusinessLayoutProductsList
+                          categories={[
+                            { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                            { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                            ...business?.categories.sort((a, b) => a.rank - b.rank)
+                          ]}
+                          category={categorySelected}
+                          onClickCategory={onClickCategory}
+                          categoriesState={props.categoriesState}
+                          categoryState={categoryState}
+                          businessId={business?.id}
+                          errors={errors}
+                          onProductClick={onProductClick}
+                          handleSearchRedirect={handleSearchRedirect}
+                          featured={featuredProducts}
+                          searchValue={searchValue}
+                          isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                          handleClearSearch={handleChangeSearch}
+                          errorQuantityProducts={errorQuantityProducts}
+                          business={business}
+                          currentCart={currentCart}
+                          handleUpdateProducts={handleUpdateProducts}
+                          professionalSelected={professionalSelected}
+                          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                          subcategorySelected={subcategorySelected}
+                        />
+                      </WrapContent>
+                    </BusinessCategoryProductWrapper>
+                  </BusinessContent>
+                </>
 
-            )}
+              )
+            }
           </div>
         </WrappLayout>
       )}
 
-      {isLoading && !isError && (
-        <>
-          {!isCustomLayout && !useKioskApp && (
-            <BusinessBasicInformationComponent
+      {
+        isLoading && !isError && (
+          <>
+            {!isCustomLayout && !useKioskApp && (
+              <BusinessBasicInformationComponent
+                isSkeleton
+                handler={handler}
+                businessState={{ business: {}, loading: true }}
+                openBusinessInformation={openBusinessInformation}
+              />
+            )}
+            <BusinessLayoutCategoriesSkeleton
               isSkeleton
-              handler={handler}
-              businessState={{ business: {}, loading: true }}
+              categories={[]}
               openBusinessInformation={openBusinessInformation}
             />
-          )}
-          <BusinessLayoutCategoriesSkeleton
-            isSkeleton
-            categories={[]}
-            openBusinessInformation={openBusinessInformation}
-          />
-          <WrapContent>
-            <BusinessLayoutProductsListSkeleton
-              categories={[]}
-              useKioskApp={useKioskApp}
-              category={categorySelected}
-              categoryState={categoryState}
-              isBusinessLoading={isLoading}
-              errorQuantityProducts={errorQuantityProducts}
-            />
-          </WrapContent>
-        </>
-      )}
+            <WrapContent>
+              <BusinessLayoutProductsListSkeleton
+                categories={[]}
+                useKioskApp={useKioskApp}
+                category={categorySelected}
+                categoryState={categoryState}
+                isBusinessLoading={isLoading}
+                errorQuantityProducts={errorQuantityProducts}
+              />
+            </WrapContent>
+          </>
+        )
+      }
       <Modal
         width='40%'
         open={isCartModal}

@@ -345,7 +345,7 @@ const BusinessProductsListingUI = (props) => {
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
       )}
-      {windowSize.width < 500 && currentCart?.products?.length > 0 && (
+      {windowSize.width < 1000 && currentCart?.products?.length > 0 && (
         <MobileCartViewWrapper>
           <span>{parsePrice(currentCart?.total)}</span>
           <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>

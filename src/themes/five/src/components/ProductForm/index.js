@@ -12,7 +12,8 @@ import {
   useLanguage,
   useOrder,
   useUtils,
-  useSite
+  useSite,
+  useConfig
 } from 'ordering-components'
 
 import { scrollTo } from '../../../../../utils'
@@ -122,6 +123,9 @@ const ProductOptionsUI = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const galleryLength = gallery?.length + videoGallery?.length
 
+  const [{ configs }] = useConfig()
+  const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
+
   const closeModal = () => {
     setModalIsOpen(false)
     setModalPageToShow('login')
@@ -178,8 +182,8 @@ const ProductOptionsUI = (props) => {
 
   const handleChangeTabValue = (value) => {
     if (document.getElementById(`${value}`)) {
-      const extraHeight = windowSize.width < 769 ? 80 : 55
-      const top = (value === 'all') ? 0 : document.getElementById(`${value}`).offsetTop - extraHeight
+      const extraHeight = 55
+      const top = document.getElementById(`${value}`).offsetTop - extraHeight
       const scrollElement = document.querySelector('.popup-dialog')
 
       scrollElement.scrollTo({
@@ -212,13 +216,13 @@ const ProductOptionsUI = (props) => {
   }
 
   const scrollDown = () => {
-    const adjustHeight = windowSize?.width > 768 ? 90 : 100
+    const adjustHeight = windowSize?.width > 768 ? 50 : 55
     const isErrors = Object.values(errors).length > 0
     if (!isErrors) {
       return
     }
     const productContainer = document.getElementsByClassName('popup-dialog')[0]
-    const unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
+    const unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]?.parentNode
 
     if (unselectedFirstSubOption) {
       const top = unselectedFirstSubOption.offsetTop
@@ -251,19 +255,19 @@ const ProductOptionsUI = (props) => {
   useEffect(() => {
     const scrollElement = document.querySelector('.popup-dialog')
     const handleScroll = () => {
+      const extraHeight = 60
       if (product?.ingredients.length > 0 || product?.extras.length > 0) {
-        const adjustHeight = windowSize?.width > 768 ? 55 : 80
-        const menuList = ['all']
+        const menuList = []
         if (product?.ingredients?.length > 0) menuList.push('ingredients')
         product?.extras?.length > 0 && product.extras.sort((a, b) => a.rank - b.rank).forEach(extra => {
           extra.options?.length > 0 && extra.options.sort((a, b) => a.rank - b.rank).forEach(option => {
-            menuList.push(`id_${option?.id}`)
+            showOption(option) && menuList.push(`id_${option?.id}`)
           })
         })
         menuList.forEach(menu => {
           const elementTop = scrollElement.scrollTop
           const topPos = document.getElementById(menu).offsetTop
-          if (elementTop >= topPos - adjustHeight) {
+          if (Math.abs(elementTop - topPos) < extraHeight) {
             setTabValue(menu)
             const elementLeft = document.getElementById(`menu_${menu}`).offsetLeft
             const scrollLeft = document.getElementById('all').scrollLeft
@@ -286,7 +290,7 @@ const ProductOptionsUI = (props) => {
     scrollElement && scrollElement.addEventListener('scroll', handleScroll)
 
     return () => scrollElement && scrollElement.removeEventListener('scroll', handleScroll)
-  }, [windowSize?.width])
+  }, [showOption])
 
   useEffect(() => {
     const imageList = []
@@ -519,15 +523,6 @@ const ProductOptionsUI = (props) => {
                   <ProductTabContainer id='all'>
                     <Tabs>
                       <AutoScroll scrollId='optionList'>
-                        <Tab
-                          key='all'
-                          id='menu_all'
-                          active={tabValue === 'all'}
-                          onClick={() => handleChangeTabValue('all')}
-                          borderBottom
-                        >
-                          {t('ALL', 'All')}
-                        </Tab>
                         {
                           product?.ingredients.length > 0 && (
                             <Tab
@@ -563,58 +558,57 @@ const ProductOptionsUI = (props) => {
                   </ProductTabContainer>
                 )
               }
-              <div id='ingredients'>
-                {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
-                <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
-                  {product?.ingredients.map(ingredient => (
-                    <ProductIngredient
-                      key={ingredient?.id}
-                      ingredient={ingredient}
-                      state={productCart.ingredients[`id:${ingredient?.id}`]}
-                      onChange={handleChangeIngredientState}
-                      isSoldOut={isSoldOut}
-                    />
-                  ))}
-                </WrapperIngredients>
-              </div>
+              {product?.ingredients.length > 0 && (
+                <div id='ingredients'>
+                  {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
+                  <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
+                    {product?.ingredients.map(ingredient => (
+                      <ProductIngredient
+                        key={ingredient?.id}
+                        ingredient={ingredient}
+                        state={productCart.ingredients[`id:${ingredient?.id}`]}
+                        onChange={handleChangeIngredientState}
+                        isSoldOut={isSoldOut}
+                      />
+                    ))}
+                  </WrapperIngredients>
+                </div>
+              )}
               <div>
                 {
                   product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                     const currentState = productCart.options[`id:${option?.id}`] || {}
                     return (
-                      <div key={option?.id} id={`id_${option?.id}`}>
-                        {
-                          showOption(option) && (
-                            <ProductOption
-                              option={option}
-                              currentState={currentState}
-                              error={errors[`id:${option?.id}`]}
-                            >
-                              <WrapperSubOption className={isError(option?.id)}>
-                                {
-                                  option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
-                                    const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
-                                    const balance = productCart.options[`id:${option?.id}`]?.balance || 0
-                                    return (
-                                      <ProductOptionSubOption
-                                        key={suboption?.id}
-                                        onChange={handleChangeSuboptionState}
-                                        balance={balance}
-                                        option={option}
-                                        suboption={suboption}
-                                        state={currentState}
-                                        isSoldOut={isSoldOut}
-                                        scrollDown={scrollDown}
-                                        setIsScrollAvailable={setIsScrollAvailable}
-                                      />
-                                    )
-                                  })
-                                }
-                              </WrapperSubOption>
-                            </ProductOption>
-                          )
-                        }
-                      </div>
+                      <React.Fragment key={option?.id}>
+                        {showOption(option) && (
+                          <ProductOption
+                            option={option}
+                            currentState={currentState}
+                            error={errors[`id:${option?.id}`]}
+                          >
+                            <WrapperSubOption className={isError(option?.id)}>
+                              {
+                                option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
+                                  const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
+                                  const balance = productCart.options[`id:${option?.id}`]?.balance || 0
+                                  return (
+                                    <ProductOptionSubOption
+                                      key={suboption?.id}
+                                      onChange={handleChangeSuboptionState}
+                                      balance={balance}
+                                      option={option}
+                                      suboption={suboption}
+                                      state={currentState}
+                                      isSoldOut={isSoldOut}
+                                      scrollDown={scrollDown}
+                                      setIsScrollAvailable={setIsScrollAvailable}
+                                    />
+                                  )
+                                })
+                              }
+                            </WrapperSubOption>
+                          </ProductOption>)}
+                      </React.Fragment>
                     )
                   }))
                 }
@@ -688,7 +682,7 @@ const ProductOptionsUI = (props) => {
                 }
               </div>
 
-              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
+              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && (orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)) && (
                 <Button
                   className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                   color='primary'
@@ -705,7 +699,7 @@ const ProductOptionsUI = (props) => {
                 </Button>
               )}
 
-              {auth && !orderState.options?.address_id && (
+              {auth && !(orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)) && (
                 orderState.loading ? (
                   <Button
                     className='add'
@@ -823,6 +817,7 @@ const ProductOptionsUI = (props) => {
 export const ProductForm = (props) => {
   const productOptionsProps = {
     ...props,
+    productCart: { quantity: props?.product?.minimum_per_order || 1 },
     UIComponent: ProductOptionsUI
   }
 

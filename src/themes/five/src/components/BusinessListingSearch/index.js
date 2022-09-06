@@ -37,7 +37,7 @@ import {
 import Skeleton from 'react-loading-skeleton'
 import { Check2, XLg as Close } from 'react-bootstrap-icons'
 import { SearchBar } from '../SearchBar'
-import { useLanguage, useOrder, useUtils, BusinessSearchList } from 'ordering-components'
+import { useLanguage, useOrder, useUtils, useSession, BusinessSearchList } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { AutoScroll } from '../AutoScroll'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
@@ -76,6 +76,7 @@ export const BusinessListingSearchUI = (props) => {
   const theme = useTheme()
   const [curProduct, setCurProduct] = useState({ business: null, product: null })
   const [{ parsePrice, optimizeImage, parseDistance }] = useUtils()
+  const [{ auth }] = useSession()
   const { width } = useWindowSize()
   const maxDeliveryFeeOptions = [15, 25, 35, 'default']
   // const maxProductPriceOptions = [5, 10, 15, 'default']
@@ -254,14 +255,17 @@ export const BusinessListingSearchUI = (props) => {
           </TagsContainer>
         </Filters>
         <FiltersResultContainer>
-          <PreviouslyOrderedContainer>
-            <MyOrders
-              hideOrders
-              businessesSearchList={businessesSearchList}
-              onRedirectPage={onRedirectPage}
-              onProductRedirect={onProductRedirect}
-            />
-          </PreviouslyOrderedContainer>
+          {auth && (
+            <PreviouslyOrderedContainer>
+              <MyOrders
+                hideOrders
+                businessesSearchList={businessesSearchList}
+                onRedirectPage={onRedirectPage}
+                onProductRedirect={onProductRedirect}
+                onBusinessClick={onBusinessClick}
+              />
+            </PreviouslyOrderedContainer>
+          )}
           <BusinessListWrapper>
             {businessesSearchList.businesses?.length > 0 && (
               <h2>{t('BUSINESSES', 'Businesses')}</h2>

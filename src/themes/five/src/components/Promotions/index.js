@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PromotionsController, useLanguage, useUtils, useEvent } from 'ordering-components'
+import { PromotionsController, useLanguage, useSite, useUtils, useEvent } from 'ordering-components'
 import {
   PromotionsContainer,
   PromotionTitle,
@@ -21,6 +21,8 @@ import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../NotFoundSource'
+import { checkSiteUrl } from '../../../../../utils'
+
 const PromotionsUI = (props) => {
   const {
     offersState,
@@ -33,6 +35,9 @@ const PromotionsUI = (props) => {
   const [{ parseDate, parsePrice }] = useUtils()
   const [events] = useEvent()
   const [openModal, setOpenModal] = useState(false)
+  const [{ site }] = useSite()
+
+  const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
 
   const handleClickOffer = (offer) => {
     setOpenModal(true)
@@ -40,7 +45,11 @@ const PromotionsUI = (props) => {
   }
 
   const handleBusinessClick = (business) => {
-    events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
+    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      events.emit('go_to_page', { page: 'business', params: { business_slug: business.slug } })
+    } else {
+      events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${business.slug}` })
+    }
   }
 
   const filteredOffers = offersState?.offers?.filter(offer => offer?.name?.toLowerCase()?.includes(searchValue?.toLowerCase()))

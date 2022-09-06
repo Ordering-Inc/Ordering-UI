@@ -54,6 +54,7 @@ import { NotNetworkConnectivity } from './src/components/NotNetworkConnectivity'
 import { Modal } from './src/components/Modal'
 import { OrderDetails } from './src/components/OrderDetails'
 import { OrderDetails as OrderDetailsKiosk } from './src/components/OrderDetails/layouts/Kiosk'
+import { OrderItAgain } from './src/components/OrderItAgain'
 import { OrdersOption } from './src/components/OrdersOption'
 import { OrderProgress } from './src/components/OrderProgress'
 import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorContent'
@@ -158,6 +159,7 @@ export {
   NotFoundSource,
   NotNetworkConnectivity,
   OrderDetails,
+  OrderItAgain,
   OrderDetailsKiosk,
   OrdersOption,
   OrderTypeSelectorContent,
