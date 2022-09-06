@@ -2,7 +2,7 @@
   "name": "ordering-ui",
   "version": "1.1.0",
   "description": "Ordering UI Components",
-  "main": "./src/index.js",
+  "main": "./_modules/index.js",
   "exports": {
     ".": "./_modules/index.js",
     "./theme_two": "./_modules/themes/two/index.js",
