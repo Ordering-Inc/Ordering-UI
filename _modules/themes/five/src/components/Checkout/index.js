@@ -301,15 +301,6 @@ var CheckoutUI = function CheckoutUI(props) {
     setUserErrors(errors);
   };
 
-  var handleGoToStore = function handleGoToStore(slug) {
-    events.emit('go_to_page', {
-      page: 'business',
-      params: {
-        store: slug
-      }
-    });
-  };
-
   (0, _react.useEffect)(function () {
     var _validationFields$fie14;
 
@@ -493,7 +484,7 @@ var CheckoutUI = function CheckoutUI(props) {
     onClick: function onClick() {
       var _cart$business2, _cart$business3;
 
-      return (cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.slug) && handleGoToStore(cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.slug);
+      return (cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.slug) && handleStoreRedirect && handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.slug);
     }
   }, ('ADD_PRODUCTS', 'Add products'))), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,

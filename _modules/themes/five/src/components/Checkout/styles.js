@@ -21,7 +21,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var WrapperLeftContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  padding: 30px 20px;\n\n  @media (min-width: 769px) {\n    width: 55%;\n    padding: 30px 60px 55px 40px;\n  }\n"])));
+var WrapperLeftContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  padding: 55px 20px 30px;\n\n  @media (min-width: 769px) {\n    width: 55%;\n    padding: 55px 60px 55px 40px;\n  }\n\n  @media (min-width: 820px) {\n    padding: 30px 60px 55px 40px;\n  }\n"])));
 
 exports.WrapperLeftContainer = WrapperLeftContainer;
 
