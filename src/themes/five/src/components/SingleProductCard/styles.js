@@ -2,8 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
-  min-height: 162px;
-  max-height: 162px;
+  ${({ hasAddButt }) => css`
+    min-height: ${hasAddButt ? '162px' : '110px'};
+    max-height: ${hasAddButt ? '162px' : '110px'};
+  `}
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
   border: 1px solid #E9ECEF;
   padding: 10px;

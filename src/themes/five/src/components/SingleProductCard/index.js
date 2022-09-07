@@ -129,6 +129,7 @@ const SingleProductCardUI = (props) => {
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
         className='product-card'
+        hasAddButt={!useCustomFunctionality && typeof hideAddButton !== 'undefined' && !hideAddButton && !isSkeleton}
       // productsRows={productsRows}
       >
         {isObservedValidation ? (
