@@ -69,7 +69,7 @@ const SingleProductCardUI = (props) => {
 
   const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
 
-  const hideAddButton = orderingTheme?.theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden
+  const hideAddButton = orderingTheme?.theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden ?? true
   // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
   let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - totalBalance
@@ -129,7 +129,7 @@ const SingleProductCardUI = (props) => {
         isCartOnProductsList={isCartOnProductsList}
         style={useCustomFunctionality && customStyle}
         className='product-card'
-        isShowAddButt={!useCustomFunctionality && typeof hideAddButton !== 'undefined' && !hideAddButton && !isSkeleton}
+        isShowAddButt={!useCustomFunctionality && !hideAddButton && !isSkeleton}
       // productsRows={productsRows}
       >
         {isObservedValidation ? (
@@ -204,7 +204,7 @@ const SingleProductCardUI = (props) => {
             </SkeletonCardLogo>
           </div>
         )}
-        {!useCustomFunctionality && typeof hideAddButton !== 'undefined' && !hideAddButton && !isSkeleton && (
+        {!useCustomFunctionality && !hideAddButton && !isSkeleton && (
           <Button outline color='primary'>
             {t('ADD', 'Add')}
           </Button>
