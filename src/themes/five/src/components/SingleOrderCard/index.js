@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useUtils, useConfig, useOrder, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
+import { useLanguage, useUtils, useConfig, useOrder, useOrderingTheme, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { ReviewOrder } from '../ReviewOrder'
 import { ReviewProduct } from '../ReviewProduct'
@@ -28,7 +28,6 @@ import {
 import {
   BusinessInformation
 } from '../OrdersOption/styles'
-import { useOrderingTheme } from 'ordering-components/_modules/contexts/OrderingThemeContext'
 
 const SingleOrderCardUI = (props) => {
   const {
