@@ -32,9 +32,14 @@ export const ProfessionalItem = styled.div`
     height: 42px;
     width: 42px;
     min-width: 42px;
+    margin-right: 12px;
+    ${props => props.theme.rtl && css`
+      margin-left: 12px;
+      margin-right: 0px;
+    `}
   }
 
-  > p {
+  p {
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
@@ -42,14 +47,6 @@ export const ProfessionalItem = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    &.name {
-      margin-left: 12px;
-      ${props => props.theme.rtl && css`
-        margin-right: 12px;
-        margin-left: 0px;
-      `}
-    }
   }
 
   ${({ active }) => active && css`
@@ -68,6 +65,11 @@ const ProfessionalPhotoStyled = styled.div`
   width: 42px;
   min-width: 42px;
   border-radius: 7.6px;
+  margin-right: 12px;
+  ${props => props.theme.rtl && css`
+    margin-left: 12px;
+    margin-right: 0px;
+  `}
 `
 export const ProfessionalPhoto = (props) => {
   const style = {}
@@ -88,4 +90,17 @@ export const ContentWrapper = styled.div`
 
 export const ProfessionalListing = styled.div`
   display: flex;
+`
+
+export const InfoWrapper = styled.div`
+  width: calc(100% - 54px);
+`
+
+export const HeartIconWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  svg {
+    color: ${props => props.theme.colors.danger500};
+      font-size: 16px;
+  }
 `

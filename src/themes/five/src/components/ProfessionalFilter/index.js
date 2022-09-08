@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import {
   Container,
   ProfessionalItem,
   ProfessionalPhoto,
   ContentWrapper,
-  ProfessionalListing
+  ProfessionalListing,
+  InfoWrapper,
+  HeartIconWrapper
 } from './styles'
 import { Modal } from '../Modal'
 import { ProfessionalProfile } from '../ProfessionalProfile'
@@ -53,7 +56,12 @@ export const ProfessionalFilter = (props) => {
                   onClick={() => handleOpenProfile(professional)}
                 >
                   {professional?.photo ? <ProfessionalPhoto bgimage={professional?.photo} /> : <FaUserAlt />}
-                  <p className='name'>{professional?.name} {professional?.lastname}</p>
+                  <InfoWrapper>
+                    <p className='name'>{professional?.name} {professional?.lastname}</p>
+                    <HeartIconWrapper>
+                      {professional?.favorite ? <Like /> : <DisLike />}
+                    </HeartIconWrapper>
+                  </InfoWrapper>
                 </ProfessionalItem>
               ))}
             </AutoScroll>
