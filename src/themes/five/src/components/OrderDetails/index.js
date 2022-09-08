@@ -189,26 +189,18 @@ const OrderDetailsUI = (props) => {
         resolve(false)
       }
       try {
-        const image = new Image();
+        const image = new Image()
         image.src = src
-        if (image.complete) {
-          resolve(true)
-        } else {
-          resolve(false)
-        }
+        image.complete ? resolve(true) : resolve(false)
       } catch (err) {
         resolve(false)
       }
     })
-  };
+  }
 
   const businessLogoUrlValidation = async () => {
     const isValidImage = await validateImage(order?.business?.logo)
-    if (isValidImage) {
-      setIsShowBusinessLogo(true)
-    } else {
-      setIsShowBusinessLogo(false)
-    }
+    setIsShowBusinessLogo(isValidImage)
   }
 
   const locations = [
