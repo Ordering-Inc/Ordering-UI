@@ -80,6 +80,7 @@ import { SidebarMenu } from './src/components/SidebarMenu'
 import { SignUpForm } from './src/components/SignUpForm'
 import { SignUpBusiness } from './src/components/SignUpBusiness'
 import { SignUpDriver } from './src/components/SignUpDriver'
+import { SignUpApproval } from './src/components/SignUpApproval'
 import { SingleProductCard } from './src/components/SingleProductCard'
 import { StripeElementsForm } from './src/components/StripeElementsForm'
 import { StripeRedirectForm } from './src/components/StripeRedirectForm'
@@ -186,6 +187,7 @@ export {
   SignUpForm,
   SignUpBusiness,
   SignUpDriver,
+  SignUpApproval,
   SingleProductCard,
   StripeElementsForm,
   StripeRedirectForm,
