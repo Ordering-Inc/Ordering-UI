@@ -33,7 +33,8 @@ import {
   NameWrapper,
   StatusInfo,
   DropDownWrapper,
-  DropDownTitle
+  DropDownTitle,
+  EmptyProfessional
 } from './styles'
 import moment from 'moment'
 SwiperCore.use([Navigation])
@@ -201,31 +202,35 @@ const ServiceFormUI = (props) => {
           </SectionHeader>
           <ProfessionalSelectWrapper ref={dropDownRef}>
             <SelectedItem onClick={() => setIsDropDown(prev => !prev)}>
-              <InfoWrapper>
-                {currentProfessional?.photo ? (
-                  <ProfessionalPhoto
-                    bgimage={currentProfessional?.photo}
-                  />
-                ) : <FaUserAlt />}
-                <NameWrapper>
-                  <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
-                  <StatusInfo available={!isBusyTime()}>
-                    {isBusyTime(currentProfessional) ? (
-                      <>
-                        <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
-                      </>
-                    ) : (
-                      <span className='status'>{t('AVAILABLE', 'Available')}</span>
-                    )}
-                  </StatusInfo>
-                </NameWrapper>
-              </InfoWrapper>
+              {currentProfessional ? (
+                <InfoWrapper>
+                  {currentProfessional?.photo ? (
+                    <ProfessionalPhoto
+                      bgimage={currentProfessional?.photo}
+                    />
+                  ) : <FaUserAlt />}
+                  <NameWrapper>
+                    <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
+                    <StatusInfo available={!isBusyTime()}>
+                      {isBusyTime(currentProfessional) ? (
+                        <>
+                          <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                        </>
+                      ) : (
+                        <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                      )}
+                    </StatusInfo>
+                  </NameWrapper>
+                </InfoWrapper>
+              ) : (
+                <p>{t('SELECT_PROFESSIONAL', 'Select professional')}</p>
+              )}
               <ChevronDown />
             </SelectedItem>
             {isDropDown && (
               <DropDownWrapper>
                 <DropDownTitle>{t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')}</DropDownTitle>
-                {professionalList?.map((professional) => professional?.products?.includes(product?.id) && (
+                {professionalList?.map((professional) => (
                   <SelectedItem
                     key={professional?.id}
                     isDropDown
@@ -263,7 +268,7 @@ const ServiceFormUI = (props) => {
             <h2>{t('SCHEDULE', 'Schedule')}</h2>
             <span>{t('REQUIRED', 'Required')}</span>
           </SectionHeader>
-          {currentProfessional && (
+          {currentProfessional ? (
             <BusinessPreorder
               business={currentProfessional}
               isProfessional
@@ -271,6 +276,10 @@ const ServiceFormUI = (props) => {
               onChangeMoment={setDateSelected}
               useOrderContext={false}
             />
+          ) : (
+            <EmptyProfessional>
+              {t('NO_SCHEDULE', 'No schedule')}
+            </EmptyProfessional>
           )}
         </ScheduleWrapper>
         <ButtonWrapper>
