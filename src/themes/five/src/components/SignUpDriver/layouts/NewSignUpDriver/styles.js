@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
-import React from 'react'
 
-export const SignupBusinessContainer = styled.div`
+export const SignUpDriverContainer = styled.div`
   ${({ bgImage }) => bgImage && css`
     background-image: url(${bgImage});
     background-repeat: no-repeat;
@@ -23,6 +22,7 @@ export const SignupBusinessContainer = styled.div`
 
   @media (min-width: 993px) {
     flex-direction: row;
+    align-items: center;
     padding: 120px 130px;
     > div {
       width: calc(50% - 12px);
@@ -75,6 +75,7 @@ export const SignupDescriptionContent = styled.div`
     font-size: 24px;
   }
 `
+
 export const FormInput = styled.form`
   width: 100%;
   display: flex;
@@ -94,10 +95,12 @@ export const FormInput = styled.form`
     margin-top: 10px;
     padding: 5px;
   }
+
   > input {
     font-size: 20px;
     box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);
   }
+  
   > .formStyle {
     & > .phone_number {
       border-radius: 7.6px;
@@ -110,6 +113,7 @@ export const FormInput = styled.form`
       box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);
     }
   }
+
   > .formButton {
     width: 128px;
     padding: 15px 0;
@@ -119,6 +123,7 @@ export const FormInput = styled.form`
     line-height: 30px;
   }
 `
+
 export const PhoneNumberWrapper = styled.div`
   .PhoneInput {
     border: 1px solid #DEE2E6;
@@ -221,6 +226,7 @@ export const FormSide = styled.div`
   align-items: center;
   margin: auto;
   padding: 25px 30px 25px;
+
   > h1 {
     width: 100%;
     margin-bottom: 25px;

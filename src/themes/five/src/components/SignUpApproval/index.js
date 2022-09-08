@@ -25,9 +25,10 @@ export const SignUpApproval = (props) => {
   const contactEmail = 'support@ordering.co'
   const showDomain = false
 
-  const logoImgUrl = businessType === 'business' ?
-    approvalType === 'automatic' ? theme.images?.general?.CongratulationApproval : theme.images?.general?.CongratulationNoApproval
+  const logoImgUrl = businessType === '2'
+    ? approvalType === 'automatic' ? theme.images?.general?.CongratulationApproval : theme.images?.general?.CongratulationNoApproval
     : approvalType === 'automatic' ? theme.images?.general?.driverCongratulationApproval : theme.images?.general?.driverCongratulationNoApproval
+  const userType = businessType === '2' ? 'business' : 'driver'
   return (
     <Container>
       <HeaderSection>
@@ -39,7 +40,7 @@ export const SignUpApproval = (props) => {
       </HeaderSection>
       {approvalType === 'automatic' ? (
         <BodySection>
-          {businessType === 'business' ? (
+          {userType === 'business' ? (
             <DescriptionContainer>
               <Description>{t('GET_IN_OUR_DASHBOARD_USING_OWNER_ACCOUNT', 'Get in our Dashboard using the business owner account you just created.')}</Description>
               <Description><span className='bigger'>{t('VERY_IMPORTANT', 'Very important')}</span> {t('USE_PROJECT_TO', 'use the project')} (<span className='italic'>{project}</span>) {t('TO_SETUP_YOUR_STORE', ', to get inside and set up your store.')}</Description>
@@ -98,7 +99,7 @@ export const SignUpApproval = (props) => {
             {t('ACCEPT', 'Accept')}
           </Button>
         </ActionGroup>
-        {(approvalType === 'automatic' && businessType === 'business') && (
+        {(approvalType === 'automatic' && userType === 'business') && (
           <ContactSection>{t('CONTACT_US_QUESTIONS', 'If you have some questions do no hestitate to contact us at ')} <a className='green-text' href={`mailto:${contactEmail}`}>{contactEmail}</a></ContactSection>
         )}
       </FooterSection>
