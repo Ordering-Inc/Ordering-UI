@@ -112,7 +112,20 @@ import {
   scrollTo,
   bytesConverter,
   formatSeconds,
-  verifyDecimals
+  verifyDecimals,
+  getDistance,
+  checkSiteUrl,
+  convertToRadian,
+  fieldsToSort,
+  flatArray,
+  formatUrlVideo,
+  getGoogleMapImage,
+  getHourMin,
+  getIconCard,
+  getTraduction,
+  priceList,
+  reviewCommentList,
+  shape
 } from './utils'
 
 export {
@@ -244,5 +257,18 @@ export {
   scrollTo,
   bytesConverter,
   formatSeconds,
-  verifyDecimals
+  verifyDecimals,
+  getDistance,
+  checkSiteUrl,
+  convertToRadian,
+  fieldsToSort,
+  flatArray,
+  formatUrlVideo,
+  getGoogleMapImage,
+  getHourMin,
+  getIconCard,
+  getTraduction,
+  priceList,
+  reviewCommentList,
+  shape
 }
