@@ -108,7 +108,7 @@ const OrderDetailsUI = (props) => {
   const [isService, setIsService] = useState(false)
   const [isOrderHistory, setIsOrderHistory] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-
+  const [isShowBusinessLogo, setIsShowBusinessLogo] = useState(true)
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
   const acceptedStatus = [1, 2, 5, 6, 10, 11, 12]
@@ -181,6 +181,26 @@ const OrderDetailsUI = (props) => {
     const business = unreadedMessages.some(message => message?.can_see?.includes(2))
     const driver = unreadedMessages.some(message => message?.can_see?.includes(4))
     setUnreadAlert({ business, driver })
+  }
+
+  const validateImage = (src) => {
+    return new Promise((resolve, reject) => {
+      if (!src || typeof src !== 'string') {
+        resolve(false)
+      }
+      try {
+        const image = new Image()
+        image.src = src
+        image.complete ? resolve(true) : resolve(false)
+      } catch (err) {
+        resolve(false)
+      }
+    })
+  }
+
+  const businessLogoUrlValidation = async () => {
+    const isValidImage = await validateImage(order?.business?.logo)
+    setIsShowBusinessLogo(isValidImage)
   }
 
   const locations = [
@@ -311,6 +331,7 @@ const OrderDetailsUI = (props) => {
     if (!order) return
     const _isService = order.products.some(product => product.type === 'service')
     setIsService(_isService)
+    businessLogoUrlValidation()
   }, [order])
 
   const OrderMapSection = (props) => {
@@ -482,7 +503,7 @@ const OrderDetailsUI = (props) => {
                   w='calc(100% - 20px)'
                 // borderBottom={showOrderActions}
                 >
-                  <img src={order?.business?.logo} />
+                  {isShowBusinessLogo && <img src={order?.business?.logo} />}
                   <BusinessInfo>
                     <h2>{order?.business?.name}</h2>
                     <ActionsSection
