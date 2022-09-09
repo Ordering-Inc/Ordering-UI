@@ -105,6 +105,7 @@ const BusinessProductsCategoriesUI = (props) => {
       ))
     )
   }
+
   useEffect(() => {
     const handleScroll = () => {
       if (business?.lazy_load_products_recommended || PFChangsCategoriesLayout) return
@@ -130,13 +131,13 @@ const BusinessProductsCategoriesUI = (props) => {
 
       let style0 = '.sticky-prod-cat {'
       style0 += 'position: fixed !important;'
-      style0 += 'top: 0 !important;'
+      style0 += 'top: 80px !important;'
       style0 += `width: ${subcategoriesLayout ? '100%' : '65.5%'} !important;`
       style0 += '}'
 
       let style1 = '.sticky-prod-cart {'
       style1 += 'position: fixed !important;'
-      style1 += 'top: 0 !important;'
+      style1 += 'top: 80px !important;'
       style1 += 'right: 2.5% !important;'
       style1 += 'width: 28.5% !important;'
       style1 += '}'
@@ -167,11 +168,11 @@ const BusinessProductsCategoriesUI = (props) => {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [categorySelected])
 
   return (
     <>
-      <CategoriesWrapper>
+      <CategoriesWrapper hide={categories?.length === 0}>
         {PFChangsCategoriesLayout ? (
           <CategoriesContainer pfchangs>
             <TabsComponent>
@@ -201,7 +202,7 @@ const BusinessProductsCategoriesUI = (props) => {
               <Tabs variant='primary'>
                 {[...Array(4).keys()].map(i => (
                   <Tab key={i}>
-                    <Skeleton width={100} />
+                    <Skeleton width={300} height={70} />
                   </Tab>
                 ))}
               </Tabs>

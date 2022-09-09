@@ -25,7 +25,7 @@ export const ModalDialog = styled.div`
   @media (min-width: 769px) {
     width: ${({ width }) => width || '50%'};
     max-height: 90vh;
-    border-radius: 10px;
+    border-radius: ${({ theme }) => theme?.general?.components?.modal?.components?.style?.borderRadius || '10px'};
     height: auto;
     ${({ isSlideBar, slideBarPosition, open }) => isSlideBar && css`
       position: fixed;

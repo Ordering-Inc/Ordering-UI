@@ -117,9 +117,9 @@ export const RenderProductsLayout = (props) => {
   const businessLayout = {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
-  const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
-  const hideBusinessNearCity = orderingTheme?.theme?.business_view?.components?.near_business?.hidden
-  const headerType = 'pfchangs' || orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type // cambiar
+  const showCartOnProductList = !theme?.business_view?.components?.cart?.hidden
+  const hideBusinessNearCity = theme?.business_view?.components?.near_business?.hidden
+  const headerType = theme?.business_view?.components?.header?.components?.layout?.type
 
   const BusinessLayoutCategories = headerType === 'pfchangs'
     ? CategoriesLayoutPFChangs : businessLayout.layoutOne
@@ -204,10 +204,7 @@ export const RenderProductsLayout = (props) => {
                       !(business?.categories?.length === 0 && !categoryId) && (
                         <BusinessLayoutCategories
                           categories={headerType === 'pfchangs'
-                            ? [
-                              { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                              ...business?.categories.filter(category => category?.subcategories?.length > 0).sort((a, b) => a.rank - b.rank)
-                            ]
+                            ? business?.categories.filter(category => category?.subcategories?.length > 0).sort((a, b) => a.rank - b.rank)
                             : [
                               { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
                               { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
@@ -223,6 +220,7 @@ export const RenderProductsLayout = (props) => {
                           setSubcategoriesSelected={setSubcategoriesSelected}
                           subcategoriesSelected={subcategoriesSelected}
                           PFChangsCategoriesLayout={headerType === 'pfchangs'}
+                          setSubcategorySelected={setSubcategorySelected}
                         />
                       )
                     }
@@ -286,7 +284,7 @@ export const RenderProductsLayout = (props) => {
                     </MobileCartViewWrapper>
                   )} */}
                   <WrapContent id='businessProductList' pfchangs={headerType === 'pfchangs'}>
-                    {business?.professionals?.length > 0 && (
+                    {business?.professionals?.length > 0 && headerType !== 'pfchangs' && (
                       <ProfessionalFilterWrapper>
                         <ProfessionalFilter
                           professionals={business?.professionals}

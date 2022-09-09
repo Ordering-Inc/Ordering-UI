@@ -6,6 +6,12 @@ export const Header = styled.div`
   width: 100%;
   border-bottom: ${({ headerBorderBottom }) => headerBorderBottom || '1px solid #E9ECEF'};
   background-color: ${({ headerBackgroundColor }) => headerBackgroundColor || ''};
+
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  `}
 `
 
 export const InnerHeader = styled.div`

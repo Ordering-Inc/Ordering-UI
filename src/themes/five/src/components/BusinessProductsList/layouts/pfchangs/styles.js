@@ -54,10 +54,13 @@ export const WrapAllCategories = styled.div`
   }
 
   h3 {
-    font-weight: 600;
+    font-weight: bold;
     font-size: 24px;
-    color: ${props => props.theme?.colors.darkTextColor};
+    color: #fff;
     margin: 0px 0px 0px 10px;
+    font-size: 32px;
+    font-family: 'TrajanPro-Bold', Arial, Helvetica;
+    text-transform: uppercase;
     ${props => props.theme?.rtl && css`
       margin: 0px 10px 0px 0px;
     `}

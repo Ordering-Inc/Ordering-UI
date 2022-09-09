@@ -5,11 +5,17 @@ export const CategoriesContainer = styled.div`
   overflow-x: auto;
   padding: 5px 0px 0px 0px;
   background: ${props => props.theme.colors.backgroundPage};
-  z-index: 1000;
+  z-index: 100;
   position: sticky;
   top: 0;
-  border-bottom: ${({ subcategoriesLayout }) => subcategoriesLayout ? 'none' : '1px solid #D9D9D9'};
   text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  ${({ subcategoriesLayout }) => subcategoriesLayout ? css`
+    border-bottom: ${({ subcategoriesLayout }) => subcategoriesLayout ? 'none' : '1px solid #D9D9D9'};
+    ` : css`
+    justify-content: center;
+  `}
   width: ${props => props.w ?? '100%'};
   ${({ pfchangs }) => !pfchangs && css`
   div.category {
@@ -26,13 +32,12 @@ export const CategoriesContainer = styled.div`
       `}
     }
   `}
-
   div.special {
     ${props => !props.featured && css`
-      display: none
+    display: none
     `}
   }
-
+  
   @media (min-width: 381px) {
     padding: 15px 0px 0px 0px;
   }
@@ -57,4 +62,7 @@ export const CategoryPFChangs = styled.div`
 export const CategoriesWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  ${({ hide }) => hide && css`
+    display: none;
+  `}
 `

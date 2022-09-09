@@ -181,6 +181,7 @@ export const QuantityContainer = styled.div`
   span { 
     position: relative;
     top: 2px;
+    font-size: 12px;
   }
 `
 
@@ -226,6 +227,7 @@ export const TitleWrapper = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   flex: 1;
+  overflow: hidden;
   h1 {
     font-size: 14px;
     font-weight: 500;
@@ -235,6 +237,7 @@ export const TitleWrapper = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     margin: 0px;
+    width: 100%;
   }
 
   > span {

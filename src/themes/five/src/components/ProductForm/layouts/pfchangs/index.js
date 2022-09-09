@@ -18,7 +18,7 @@ import { scrollTo } from '../../../../../../../utils'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 
 import { ProductIngredient } from '../../../ProductIngredient/layouts/pfchangs'
-import { ProductOption } from '../../../ProductOption'
+import { ProductOption } from '../../../ProductOption/layouts/pfchangs'
 import { ProductOptionSubOption } from '../../../ProductOptionSubOption/layouts/pfchangs'
 import { LoginForm } from '../../../LoginForm'
 import { SignUpForm } from '../../../SignUpForm'
@@ -49,11 +49,13 @@ import {
   ProductDescription,
   ProductTagsListContainer,
   ProductTagWrapper,
-  ModalIcon
+  ModalIcon,
+  SwiperWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { Input, TextArea } from '../../../../styles/Inputs'
 import { NotFoundSource } from '../../../NotFoundSource'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, {
   Navigation,
   Thumbs
@@ -79,7 +81,8 @@ const ProductOptionsUI = (props) => {
     handleChangeIngredientState,
     handleChangeSuboptionState,
     handleChangeCommentState,
-    closeModalProductForm
+    closeModalProductForm,
+    handleCustomSave
   } = props
 
   const { product, loading, error } = productObject
@@ -114,6 +117,7 @@ const ProductOptionsUI = (props) => {
     const isErrors = Object.values(errors).length > 0
     if (!isErrors) {
       handleSave && handleSave()
+      handleCustomSave && handleCustomSave()
       return
     }
     const myElement = document.getElementsByClassName('error')[0]
@@ -233,7 +237,23 @@ const ProductOptionsUI = (props) => {
             <MdClose onClick={() => closeModalProductForm()} />
           </ModalIcon>
           <WrapperImage>
-            <img src={gallery[0]} alt='' />
+            <SwiperWrapper isSoldOut={isSoldOut}>
+              <Swiper
+                spaceBetween={10}
+                navigation
+                watchOverflow
+                observer
+                observeParents
+                parallax
+                className='mySwiper2'
+              >
+                {gallery.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </SwiperWrapper>
           </WrapperImage>
           <ProductInfo>
             <ProductFormTitle>
@@ -302,6 +322,7 @@ const ProductOptionsUI = (props) => {
                               option={option}
                               currentState={currentState}
                               error={errors[`id:${option?.id}`]}
+                              pfchangs
                             >
                               <WrapperSubOption className={isError(option?.id)}>
                                 {

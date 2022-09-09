@@ -52,7 +52,9 @@ const BusinessesListingUI = (props) => {
     businessesLocations,
     setBusinessClikedId,
     currentLocation,
-    orderTypeSelected
+    canBeRedirected,
+    businessClikedId,
+    mapActivated
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -179,9 +181,22 @@ const BusinessesListingUI = (props) => {
     )
   }
 
+  useEffect(() => {
+    if (
+      canBeRedirected &&
+      filterByAddress &&
+      orderState?.options?.address?.location &&
+      businessesSearchList.businesses?.length === 1 &&
+      !businessesSearchList.loading &&
+      !orderState?.loading
+    ) {
+      onBusinessClick({ slug: businessesSearchList.businesses[0].slug })
+    }
+  }, [businessesSearchList.businesses, orderState?.options?.address?.location])
+
   const SingleBusinessController = ({ business }) => {
     return (
-      <SingleBusinessContainer onClick={() => setBusinessClikedId(business?.id)}>
+      <SingleBusinessContainer isSelected={businessClikedId === business?.id} onClick={() => mapActivated && setBusinessClikedId(business?.id)}>
         <LeftContainer>
           <h2>{business?.name}</h2>
           <BusinessAddress onClick={() => handleGotoMaps(business)}>{business?.address}</BusinessAddress>
@@ -191,7 +206,7 @@ const BusinessesListingUI = (props) => {
         </LeftContainer>
         <RightContainer>
           <Button color='primary' onClick={() => onBusinessClick(business)}>
-            {t('ORDER_PICKUP', 'Order Pickup')}
+            {t('GO_TO_BUSINESS', 'Go to business')}
           </Button>
         </RightContainer>
       </SingleBusinessContainer>
@@ -200,169 +215,166 @@ const BusinessesListingUI = (props) => {
 
   return (
     <>
-      {orderTypeSelected === 1 ? (
-        <DeliveryTextWrapper>
-          <p>{t('ENTER_FULL_ADDRESS_TO_ORDER', 'Enter your full street address to start your delivery order.')}</p>
-        </DeliveryTextWrapper>
-      ) : (
-        <BusinessContainer alignCenter={!businessesSearchList.loading && businessesSearchList.businesses.length === 0}>
-          {currentLocation && (
-            <Button className='search-area' color='primary' onClick={() => handleSearchbusinessAndProducts(true, { location: currentLocation })}>
-              {t('SEARCH_THIS_AREA', 'Search This Area')}
-            </Button>
+      <DeliveryTextWrapper>
+        <p>{t('ENTER_FULL_ADDRESS_TO_ORDER', 'Enter your full street address to start your delivery order.')}</p>
+      </DeliveryTextWrapper>
+      <BusinessContainer alignCenter={!businessesSearchList.loading && businessesSearchList.businesses.length === 0}>
+        {currentLocation && (
+          <Button className='search-area' color='primary' onClick={() => handleSearchbusinessAndProducts(true, { location: currentLocation })}>
+            {t('SEARCH_THIS_AREA', 'Search This Area')}
+          </Button>
+        )}
+        <>
+          {filterByAddress && orderState?.options?.address?.location && (
+            <p>
+              {t('SHOWING', 'Showing')} {businessNearestLength} {t('LOCATIONS_WITHIN', 'locations within')} {' '}
+              <LocationSelect value={distanceSelected} onChange={(e) => handleChangeDistance(e.target.value)}>
+                {distanceOptions?.map((distance, i, hash) => (
+                  <option key={distance} value={distance}>
+                    {distance === 'default' ? `+ ${distanceOptions[i - 1] / 1000}` : distance / 1000} {t('KM', 'Km')}
+                  </option>
+                ))}
+              </LocationSelect>
+              {' '}
+              {t('OF_YOUR_LOCATION', 'of your location')}{':'}
+            </p>
+          )}
+          {filterByCity && (
+            <>
+              {citiesState?.cities?.filter(city => businessesSearchList.businesses?.some(business => business?.city_id === city?.id))?.map(city => (
+                <div key={city?.id}>
+                  <CityContainer
+                    isSelected={citySelected?.id === city?.id}
+                    onClick={() => setCitySelected(citySelected?.id === city?.id ? null : city)}
+                  >
+                    <h3>
+                      {city?.name}
+                    </h3>
+                    <RiArrowDropDownLine size={18} />
+                  </CityContainer>
+                  {citySelected?.id === city?.id && (
+                    <>
+                      {
+                        businessesSearchList.businesses?.filter(business => business?.city_id === city?.id)?.map((business) => (
+                          <SingleBusinessController key={business?.id} business={business} />
+                        ))
+                      }
+                      {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
+                        <LoadMoreButtonCityWrap>
+                          <Button
+                            onClick={() => handleSearchbusinessAndProducts()}
+                            color='primary'
+                          >
+                            {t('LOAD_MORE_BUSINESSES', 'Load more businesses')}
+                          </Button>
+                        </LoadMoreButtonCityWrap>
+                      )}
+                    </>
+                  )}
+                </div>
+              ))}
+            </>
           )}
           <>
-            {filterByAddress && (
-              <p>
-                {t('SHOWING', 'Showing')} {businessNearestLength} {t('LOCATIONS_WITHIN', 'locations within')} {' '}
-                <LocationSelect value={distanceSelected} onChange={(e) => handleChangeDistance(e.target.value)}>
-                  {distanceOptions?.map((distance, i, hash) => (
-                    <option key={distance} value={distance}>
-                      {distance === 'default' ? `+ ${distanceOptions[i - 1] / 1000}` : distance / 1000} {t('KM', 'Km')}
-                    </option>
-                  ))}
-                </LocationSelect>
-                {' '}
-                {t('OF_YOUR_LOCATION', 'of your location')}{':'}
-              </p>
-            )}
-            {filterByCity && (
-              <>
-                {citiesState?.cities?.filter(city => businessesSearchList.businesses?.some(business => business?.city_id === city?.id))?.map(city => (
-                  <div key={city?.id}>
-                    <CityContainer
-                      isSelected={citySelected?.id === city?.id}
-                      onClick={() => setCitySelected(citySelected?.id === city?.id ? null : city)}
-                    >
-                      <h3>
-                        {city?.name}
-                      </h3>
-                      <RiArrowDropDownLine size={18} />
-                    </CityContainer>
-                    {citySelected?.id === city?.id && (
-                      <>
-                        {
-                          businessesSearchList.businesses?.filter(business => business?.city_id === city?.id)?.map((business) => (
-                            <SingleBusinessController key={business?.id} business={business} />
-                          ))
-                        }
-                        {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
-                          <LoadMoreButtonCityWrap>
-                            <Button
-                              onClick={() => handleSearchbusinessAndProducts()}
-                              color='primary'
-                            >
-                              {t('LOAD_MORE_BUSINESSES', 'Load more businesses')}
-                            </Button>
-                          </LoadMoreButtonCityWrap>
-                        )}
-                      </>
-                    )}
-                  </div>
-                ))}
-              </>
-            )}
-            <>
-              {
-                filterByAddress && !filterByCity && businessesSearchList.businesses?.map((business) => (
-                  <SingleBusinessController key={business?.id} business={business} />
-                ))
-              }
-              {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
-                <LoadMoreButtonWrap>
-                  <Button
-                    onClick={() => handleSearchbusinessAndProducts()}
-                    color='primary'
-                  >
-                    {t('LOAD_MORE_BUSINESSES', 'Load more businesses')}
-                  </Button>
-                </LoadMoreButtonWrap>
-              )}
-            </>
-            {filterByAddress && businessesSearchList.loading && (
-              [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
-                <SingleBusinessContainer key={i}>
-                  <LeftContainer>
-                    <Skeleton width={230} height={16} />
-                    <Skeleton width={180} height={10} />
-                    <Skeleton width={130} height={10} />
-                    <Skeleton width={70} height={10} />
-                    <Skeleton width={150} height={10} />
-                  </LeftContainer>
-                  <RightContainer>
-                    <Skeleton width={100} height={30} />
-                  </RightContainer>
-                </SingleBusinessContainer>
-              ))
-            )}
             {
-              !businessesSearchList.loading && businessesSearchList.businesses.length === 0 && (
-                <NotFoundSourceWrapper>
-                  <NotFoundSource
-                    content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-                  />
-                </NotFoundSourceWrapper>
-              )
-            }
-            {!businessesSearchList.loading && businessesSearchList.error && businessesSearchList.error.length > 0 && businessesSearchList.businesses.length === 0 && (
-              businessesSearchList.error.map((e, i) => (
-                <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+              filterByAddress && !filterByCity && orderState?.options?.address?.location && businessesSearchList.businesses?.map((business) => (
+                <SingleBusinessController key={business?.id} business={business} />
               ))
+            }
+            {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
+              <LoadMoreButtonWrap>
+                <Button
+                  onClick={() => handleSearchbusinessAndProducts()}
+                  color='primary'
+                >
+                  {t('LOAD_MORE_BUSINESSES', 'Load more businesses')}
+                </Button>
+              </LoadMoreButtonWrap>
             )}
           </>
-          <Modal
-            open={isPreorder}
-            width='760px'
-            onClose={() => handleClosePreorder()}
-          >
-            <BusinessPreorder
-              business={preorderBusiness}
-              handleClick={handleBusinessClick}
-              showButton
-            />
-          </Modal>
-
-          <Modal
-            title={t('ADDRESS_FORM', 'Address Form')}
-            open={modals.formOpen}
-            onClose={() => setModals({ ...modals, formOpen: false })}
-          >
-            <AddressForm
-              useValidationFileds
-              address={orderState?.options?.address || {}}
-              onClose={() => setModals({ ...modals, formOpen: false })}
-              onCancel={() => setModals({ ...modals, formOpen: false })}
-              onSaveAddress={() => setModals({ ...modals, formOpen: false })}
-            />
-          </Modal>
-
-          <Modal
-            title={t('ADDRESSES', 'Address List')}
-            open={modals.listOpen}
-            width='70%'
-            onClose={() => setModals({ ...modals, listOpen: false })}
-          >
-            <AddressList
-              isModal
-              changeOrderAddressWithDefault
-              userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-              onCancel={() => setModals({ ...modals, listOpen: false })}
-              onAccept={() => handleFindBusinesses()}
-              isCustomerMode={isCustomerMode}
-            />
-          </Modal>
-
-          <Alert
-            title={!mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map')}
-            content={alertState.content}
-            acceptText={t('ACCEPT', 'Accept')}
-            open={alertState.open}
-            onClose={() => handleCloseAlerts()}
-            onAccept={() => handleCloseAlerts()}
-            closeOnBackdrop={false}
+          {filterByAddress && businessesSearchList.loading && (
+            [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
+              <SingleBusinessContainer key={i}>
+                <LeftContainer>
+                  <Skeleton width={230} height={16} />
+                  <Skeleton width={180} height={10} />
+                  <Skeleton width={130} height={10} />
+                  <Skeleton width={70} height={10} />
+                  <Skeleton width={150} height={10} />
+                </LeftContainer>
+                <RightContainer>
+                  <Skeleton width={100} height={30} />
+                </RightContainer>
+              </SingleBusinessContainer>
+            ))
+          )}
+          {
+            !businessesSearchList.loading && businessesSearchList.businesses.length === 0 && (
+              <NotFoundSourceWrapper>
+                <NotFoundSource
+                  content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
+                />
+              </NotFoundSourceWrapper>
+            )
+          }
+          {!businessesSearchList.loading && businessesSearchList.error && businessesSearchList.error.length > 0 && businessesSearchList.businesses.length === 0 && (
+            businessesSearchList.error.map((e, i) => (
+              <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+            ))
+          )}
+        </>
+        <Modal
+          open={isPreorder}
+          width='760px'
+          onClose={() => handleClosePreorder()}
+        >
+          <BusinessPreorder
+            business={preorderBusiness}
+            handleClick={handleBusinessClick}
+            showButton
           />
-        </BusinessContainer>
-      )}
+        </Modal>
+
+        <Modal
+          title={t('ADDRESS_FORM', 'Address Form')}
+          open={modals.formOpen}
+          onClose={() => setModals({ ...modals, formOpen: false })}
+        >
+          <AddressForm
+            useValidationFileds
+            address={orderState?.options?.address || {}}
+            onClose={() => setModals({ ...modals, formOpen: false })}
+            onCancel={() => setModals({ ...modals, formOpen: false })}
+            onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+          />
+        </Modal>
+
+        <Modal
+          title={t('ADDRESSES', 'Address List')}
+          open={modals.listOpen}
+          width='70%'
+          onClose={() => setModals({ ...modals, listOpen: false })}
+        >
+          <AddressList
+            isModal
+            changeOrderAddressWithDefault
+            userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+            onCancel={() => setModals({ ...modals, listOpen: false })}
+            onAccept={() => handleFindBusinesses()}
+            isCustomerMode={isCustomerMode}
+          />
+        </Modal>
+
+        <Alert
+          title={!mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => handleCloseAlerts()}
+          onAccept={() => handleCloseAlerts()}
+          closeOnBackdrop={false}
+        />
+      </BusinessContainer>
 
     </>
   )

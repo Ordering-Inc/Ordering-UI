@@ -23,14 +23,19 @@ export const HeaderItem = styled.div`
       font-size: 16px;
     }
   }
-  button{
-    margin-left: 20px;
-    img {
-      margin-left: ${({ isHideCartText }) => isHideCartText ? '0px' : '4px'};
-      position: relative;
-      top: 2px;
+  ${({ isCartButtonPF }) => isCartButtonPF && css`
+    button {
+      margin-left: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        position: relative;
+        margin-left: ${({ isHideCartText }) => isHideCartText ? '0px' : '7px'};
+        top: -2px;
+      }
     }
-  }
+  `}
 `
 
 export const PopoverBody = styled.div`
@@ -80,9 +85,16 @@ export const TitleContainer = styled.div`
 `
 
 export const CartLength = styled.span`
-  padding: 2px 6px 2px 6px;
   color: #000;
   background: #fff;
   border-radius: 50%;
   margin-left: 5px;
+  width: 20px;
+  height: 20px;
+  p{
+    margin: 0;
+    position: relative;
+    font-size: 12px;
+    bottom: 3px;
+  }
 `

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useSession, useOrder, useLanguage, useEvent, useSite, useOrderingTheme, useConfig, GoogleMapsMap } from 'ordering-components'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
+import FiMap from '@meronex/icons/fi/FiMap'
+import IosSend from '@meronex/icons/ios/IosSend'
 import {
   HeroContainer,
   ContentWrapper,
@@ -11,7 +13,8 @@ import {
   AddressInputContainer,
   ViewLocationsContainer,
   Diviver,
-  WrapperMap
+  WrapperMap,
+  ActiveMapContainer
 } from './styles'
 
 import { Modal } from '../../../Modal'
@@ -19,6 +22,7 @@ import { Button } from '../../../../styles/Buttons/theme/pfchangs'
 import { AddressForm } from '../../../AddressForm'
 import { AddressList } from '../../../AddressList'
 import { PFChangsBusinesListing } from '../../../BusinessesListing/layouts/PFChangsBusinessListing'
+import { getGoogleMapImage } from '../../../../../../../utils'
 
 export const PFChangsHomeHero = (props) => {
   const { contentPosition } = props
@@ -40,6 +44,9 @@ export const PFChangsHomeHero = (props) => {
   const [currentLocation, setCurrentLocation] = useState(null)
   const [businessClikedId, setBusinessClikedId] = useState(null)
   const [isMapReady, setIsMapReady] = useState(false)
+  const [mapActivated, setMapActivated] = useState(false)
+  const [imageMapDimensions, setImageMapDimension] = useState({})
+  const [canBeRedirected, setCanBeRedirected] = useState(false)
   const theme = useTheme()
 
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
@@ -76,6 +83,7 @@ export const PFChangsHomeHero = (props) => {
 
   const handleFindBusinesses = () => {
     setShowAllLocations(false)
+    setCanBeRedirected(true)
     if (!orderState?.options?.address?.location) {
       setModals({ ...modals, formOpen: true })
       return
@@ -96,10 +104,23 @@ export const PFChangsHomeHero = (props) => {
     changeType(orderType)
   }
 
+  const handleSaveAddress = () => {
+    setCanBeRedirected(true)
+    setModals({ ...modals, formOpen: false })
+  }
+
   const defaultLocation = { lat: 19.432241, lng: -99.177254 }
 
   useEffect(() => {
     return () => setModals({ listOpen: false, formOpen: false })
+  }, [])
+
+  useEffect(() => {
+    const imageMapDimensions = document.getElementById('wrapper-map-id')
+    setImageMapDimension({
+      w: imageMapDimensions.clientWidth,
+      h: imageMapDimensions.clientHeight
+    })
   }, [])
 
   return (
@@ -125,7 +146,7 @@ export const PFChangsHomeHero = (props) => {
                 onClick={() => handleChangeOrderType(1)}
                 disabled={orderState?.loading}
               >
-                {t('DELIVERY', 'Delivery')}
+                {t('DELIVERY_UPPER', 'Delivery')}
               </Button>
             </DeliveryPickupContainer>
             {/* <Title>{t('TITLE_HOME', theme?.defaultLanguages?.TITLE_HOME || 'All We need is Food.')}</Title>
@@ -137,9 +158,10 @@ export const PFChangsHomeHero = (props) => {
                   {orderState?.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
                 </p>
               </WrapInput>
+              <IosSend className='geolocation-button' />
             </AddressInputContainer>
             <>
-              {showCities && orderState?.options?.address?.location && orderTypeSelected === 2 && (
+              {showCities && (
                 <ViewLocationsContainer>
                   <Button
                     color='primary'
@@ -158,34 +180,68 @@ export const PFChangsHomeHero = (props) => {
                 setBusinessesLocations={setBusinessesLocations}
                 businessesLocations={businessesLocations}
                 isMapReady={isMapReady}
+                businessClikedId={businessClikedId}
                 setBusinessClikedId={setBusinessClikedId}
                 currentLocation={currentLocation}
                 defaultLocation={defaultLocation}
                 orderTypeSelected={orderTypeSelected}
+                canBeRedirected={canBeRedirected}
+                mapActivated={mapActivated}
               />
             </>
           </SearchLocationsContainer>
           {/** mapa */}
-          <WrapperMap>
-            {!!googleMapsApiKey && (
+          {!mapActivated && (
+            <WrapperMap id='wrapper-map-id'>
+              <div>
+                <ActiveMapContainer>
+                  <Button
+                    outline
+                    color='primary'
+                    onClick={() => setMapActivated(true)}
+                  >
+                    <FiMap />
+                    <p>{t('OPEN_MAP', 'OPEN MAP')}</p>
+                  </Button>
+                </ActiveMapContainer>
+                {imageMapDimensions.w && imageMapDimensions.h && (
+                  <img
+                    src={getGoogleMapImage(
+                      orderState?.options?.address?.location || defaultLocation,
+                      configState?.configs?.google_maps_api_key?.value,
+                      {
+                        size: {
+                          w: imageMapDimensions.w,
+                          h: imageMapDimensions.h
+                        },
+                        zoom: 17
+                      }
+                    )}
+                    alt='google-maps-img'
+                    height='100%'
+                    width='100%'
+                  />
+                )}
+              </div>
+            </WrapperMap>
+          )}
+          {!!googleMapsApiKey && mapActivated && (
+            <WrapperMap>
               <GoogleMapsMap
                 apiKey={googleMapsApiKey}
                 location={orderState?.options?.address?.location || defaultLocation}
-                locations={businessesLocations}
+                locations={showAllLocations || orderState?.options?.address?.location ? businessesLocations : []}
                 setCurrentLocation={setCurrentLocation}
                 businessMap
                 pfchangs
                 noDistanceValidation
-                // fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
                 mapControls={googleMapsControls}
-                // handleChangeAddressMap={handleChangeAddress}
-                // setErrors={setMapErrors}
                 maxLimitLocation={parseInt(configState?.configs?.meters_to_change_address?.value)}
                 setIsMapReady={setIsMapReady}
                 businessClikedId={businessClikedId}
               />
-            )}
-          </WrapperMap>
+            </WrapperMap>
+          )}
         </ContentWrapper>
         <Modal
           title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
@@ -196,7 +252,7 @@ export const PFChangsHomeHero = (props) => {
             useValidationFileds
             address={orderState?.options?.address || {}}
             onClose={() => setModals({ ...modals, formOpen: false })}
-            onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+            onSaveAddress={() => handleSaveAddress()}
             onCancel={() => setModals({ ...modals, formOpen: false })}
           />
         </Modal>

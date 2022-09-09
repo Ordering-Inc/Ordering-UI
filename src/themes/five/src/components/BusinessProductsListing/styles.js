@@ -139,3 +139,33 @@ export const EmptyBtnWrapper = styled.div`
     padding-right: 25px;
   }
 `
+
+export const BottomToast = styled.div`
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: ${({ theme }) => theme?.colors?.gold};
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 10000;
+  p{
+    flex: 1;
+    text-align: center;
+  }
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 100%;
+    background: #AE9056;
+    cursor: pointer;
+    svg {
+      color: #fff;
+    }
+  }
+`

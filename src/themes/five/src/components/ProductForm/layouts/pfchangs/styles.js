@@ -337,3 +337,109 @@ export const ModalIcon = styled.span`
     border-radius: 50%;
   }
 `
+
+export const SwiperWrapper = styled.div`
+  position: relative;
+  width: 100%;
+
+  img{
+    ${props => props.isSoldOut && css`
+        filter: grayscale(1);
+    `}
+  }
+  .mySwiper2 {
+    height: 250px;
+    width: 100%;
+
+    .swiper-slide-active {
+      border-radius: 0px;
+      img {
+        border-radius: 0px;
+      }
+    }
+
+    @media (min-width: 576px) {
+      height: 320px;
+    }
+  }
+
+
+  .swiper {
+    width: 100%;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .product-thumb {
+    box-sizing: border-box;
+    padding: 30px 0px;
+    margin: 0px 20px;
+
+    .swiper-slide {
+      display: flex;
+      opacity: 0.8;
+      border-radius: 7.6px;
+      height: auto;
+      cursor: pointer;
+      overflow: hidden;
+
+      img {
+        border-radius: 7.6px;
+        max-height: 70px;
+      }
+    }
+
+    .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-button-next {
+    background-image: url(${props => props.theme.images.general.rightArrow});
+    background-color: #d1d0d04d;
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    width: 32px;
+    height: 32px;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .swiper-button-prev {
+    background-image: url(${props => props.theme.images.general.leftArrow});
+    background-color: #d1d0d04d;
+    background-repeat: no-repeat;
+    background-position: 45% center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: rgb(0 0 0 / 7%) 0px 4px 10px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .swiper-button-next::after, .swiper-button-prev::after {
+    display: none;
+  }
+`

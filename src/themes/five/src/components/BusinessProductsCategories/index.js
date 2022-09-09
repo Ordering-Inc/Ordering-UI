@@ -142,7 +142,7 @@ const BusinessProductsCategoriesUI = (props) => {
     style2 += 'position: fixed !important;'
     style2 += 'top: 0px !important;'
     style2 += 'right: 0% !important;'
-    style2 += 'z-index: 9999 !important;'
+    style2 += 'z-index: 100 !important;'
     style2 += 'width: 50px !important;'
     style2 += `background-color: ${theme.colors.backgroundPage} !important;`
     style2 += '}'

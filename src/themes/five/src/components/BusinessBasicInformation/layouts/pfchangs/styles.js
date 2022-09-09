@@ -21,6 +21,7 @@ export const BusinessContainer = styled.div`
   border-radius: 0;
   position: absolute;
   left: 0;
+  border-bottom: 1px solid #fff;
   ${props => props.isSkeleton && css`
     background-color: #cccccc;
   `}
@@ -52,6 +53,7 @@ export const DeliveryPickupContainer = styled.div`
   margin-top: 20px;
   display: flex;
   position: relative;
+  flex-direction: row-reverse;
   border-radius: 0px;
   border: 1px solid ${({ theme }) => theme.colors.gold};
   height: 52px;
@@ -68,7 +70,7 @@ export const DeliveryPickupContainer = styled.div`
   }
 
   &::after {
-    ${({ orderTypeSelected }) => orderTypeSelected === 2 ? css`
+    ${({ orderTypeSelected }) => orderTypeSelected === 1 ? css`
       content: "";
       background:  ${({ theme }) => theme.colors.gold};
       position: absolute;
@@ -102,5 +104,12 @@ export const TitleContainer = styled.div`
     font-size: 34px;
     color: ${({ theme }) => theme.colors.gold};
     cursor: pointer;
+  }
+
+  span {
+    position: relative;
+    bottom: 5px;
+    margin-top: 15px;
+    margin-bottom: 5px;
   }
 `

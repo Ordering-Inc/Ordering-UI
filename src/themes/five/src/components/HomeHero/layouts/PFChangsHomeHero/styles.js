@@ -68,6 +68,7 @@ export const WrapInput = styled.div`
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    align-self: flex-end;
   }
 
   svg {
@@ -122,6 +123,7 @@ export const SearchLocationsContainer = styled.div`
 export const DeliveryPickupContainer = styled.div`
   margin-top: 20px;
   display: flex;
+  flex-direction: row-reverse;
   position: relative;
   border-radius: 0px;
   border: 1px solid ${({ theme }) => theme.colors.gold};
@@ -138,7 +140,7 @@ export const DeliveryPickupContainer = styled.div`
   }
 
   &::after {
-    ${({ orderTypeSelected }) => orderTypeSelected === 2 ? css`
+    ${({ orderTypeSelected }) => orderTypeSelected === 1 ? css`
       content: "";
       background:  ${({ theme }) => theme.colors.gold};
       position: absolute;
@@ -166,9 +168,18 @@ export const AddressInputContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  position: relative;
   button {
     height: 46px;
     margin-left: 10px;
+  }
+  .geolocation-button {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
   }
 `
 
@@ -218,6 +229,40 @@ export const WrapperMap = styled.div`
     cursor: pointer;
     &:hover{
       text-decoration: underline;
+    }
+  }
+`
+
+export const ActiveMapContainer = styled.span`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  svg {
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
+  }
+  p{
+    margin-top: 21px;
+  }
+
+  @media (min-width: 1024px){
+    button{ 
+      width: 40%;
+      font-size: 18px;
     }
   }
 `

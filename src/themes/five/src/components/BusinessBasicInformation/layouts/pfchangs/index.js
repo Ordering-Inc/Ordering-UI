@@ -1,5 +1,5 @@
 import { useLanguage, useOrder, useUtils } from 'ordering-components'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../../../../styles/Buttons/theme/pfchangs'
 import { BusinessInfoContainer, BusinessContainer, DeliveryPickupContainer, TitleContainer } from './styles'
 import RiArrowDropDownLine from '@meronex/icons/ri/RiArrowDropDownLine'
@@ -8,6 +8,7 @@ import { BusinessInformation } from '../../../BusinessInformation/layouts/pfchan
 import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import isBetween from 'dayjs/plugin/isBetween'
+import Skeleton from 'react-loading-skeleton'
 
 dayjs.extend(timezone)
 dayjs.extend(isBetween)
@@ -25,6 +26,7 @@ export const BusinessBasicInformationPFChangs = (props) => {
 
   const types = ['food', 'laundry', 'alcohol', 'groceries']
   const [{ optimizeImage }] = useUtils()
+  const [orderTypeSelected, setOrderTypeSelected] = useState(orderState?.options?.type)
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
@@ -35,26 +37,44 @@ export const BusinessBasicInformationPFChangs = (props) => {
     return _types.join(', ')
   }
 
+  const handleChangeOrderType = (orderType) => {
+    setOrderTypeSelected(orderType)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      changeType(orderTypeSelected)
+    }, 250)
+  }, [orderTypeSelected])
+
   return (
     <BusinessInfoContainer>
       <TitleContainer>
-        <h2 className='bold'>{business?.name}</h2>
-        <RiArrowDropDownLine onClick={() => setOpenBusinessInformation(true)} />
+        {isSkeleton ? (
+          <>
+            <Skeleton width={75} />
+          </>
+        ) : (
+          <>
+            <h2 className='bold'>{business?.name}</h2>
+            <RiArrowDropDownLine onClick={() => setOpenBusinessInformation(true)} />
+          </>
+        )}
       </TitleContainer>
-      <DeliveryPickupContainer orderTypeSelected={orderState?.options?.type}>
+      <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
         <Button
-          color={orderState?.options?.type === 2 ? '#000' : '#FFF'}
-          onClick={() => changeType(2)}
+          color={orderTypeSelected === 2 ? '#000' : '#FFF'}
+          onClick={() => handleChangeOrderType(2)}
           disabled={orderState?.loading}
         >
           {t('PICKUP', 'Pickup')}
         </Button>
         <Button
-          color={orderState?.options?.type === 1 ? '#000' : '#FFF'}
-          onClick={() => changeType(1)}
+          color={orderTypeSelected === 1 ? '#000' : '#FFF'}
+          onClick={() => handleChangeOrderType(1)}
           disabled={orderState?.loading}
         >
-          {t('DELIVERY', 'Delivery')}
+          {t('DELIVERY_UPPER', 'Delivery')}
         </Button>
       </DeliveryPickupContainer>
       <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open} />

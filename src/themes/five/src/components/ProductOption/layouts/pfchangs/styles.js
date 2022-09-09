@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   &.error {
@@ -10,9 +10,9 @@ export const WrapHeader = styled.div`
   padding: 7px 0px;
   margin-top: 15px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   background-color: #FFF;
+  flex-direction: column;
 `
 
 export const TitleContainer = styled.div`
@@ -20,22 +20,17 @@ export const TitleContainer = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  width: 60%;
   display: flex;
   align-items: center;  
-
+  margin-bottom: 10px;
   *:first-child {
     margin-right: 8px;
-  }
-
-  @media (min-width: 576px) {
-    width: 70%;
   }
 `
 
 export const Title = styled.h3`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 24px;
   display: flex;
   flex-direction: column;
@@ -54,7 +49,7 @@ export const Flag = styled.span`
   font-size: 13px;
   margin: 0px;
   text-transform: capitalize;
-  color: ${props => props.required ? '#E63757' : props.theme.colors.grayTextColor};
+  color: ${(props) => props.required ? props.theme?.colors?.gold : '#000'};
   font-weight: 500;
 
   @media (min-width: 381px) {

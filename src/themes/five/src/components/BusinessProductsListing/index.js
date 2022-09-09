@@ -6,6 +6,7 @@ import {
   ArrowLeft,
   Cart3
 } from 'react-bootstrap-icons'
+import GrFormClose from '@meronex/icons/gr/GrFormClose'
 import {
   useEvent,
   useLanguage,
@@ -24,7 +25,8 @@ import {
   BusinessCartContent,
   EmptyCart,
   EmptyBtnWrapper,
-  Title
+  Title,
+  BottomToast
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -96,7 +98,7 @@ const BusinessProductsListingUI = (props) => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
   const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
-
+  const [openBottomToast, setOpenBottomToast] = useState(false)
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
   const showViewOrderButton = !orderingTheme?.theme?.business_view?.components?.order_view_button?.hidden
@@ -191,6 +193,15 @@ const BusinessProductsListingUI = (props) => {
 
     if (alreadyRemoved === 'removed') {
       setAlertState({ open: true, content: [t('NOT_AVAILABLE_PRODUCT', 'This product is not available.')] })
+    }
+  }
+
+  const handleCustomSave = () => {
+    if (pfchangs) {
+      setOpenBottomToast(true)
+      setTimeout(() => {
+        setOpenBottomToast(false)
+      }, 5000)
     }
   }
 
@@ -330,6 +341,14 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </ProductsContainer>
+      {openBottomToast && (
+        <BottomToast>
+          <p>{t('ITEM_ADDED_TO_YOUR_CART', 'An item has added to your cart')}</p>
+          <div>
+            <GrFormClose />
+          </div>
+        </BottomToast>
+      )}
       {currentCart?.products?.length > 0 && auth && !isCartOpen && showViewOrderButton && (
         <FloatingButton
           btnText={
@@ -388,7 +407,7 @@ const BusinessProductsListingUI = (props) => {
       </Modal>
 
       <Modal
-        width={pfchangs ? '60%' : props.useKioskApp ? '80%' : '760px'}
+        width={pfchangs ? '920px' : props.useKioskApp ? '80%' : '760px'}
         open={openProduct}
         closeOnBackdrop
         onClose={() => closeModalProductForm()}
@@ -437,6 +456,7 @@ const BusinessProductsListingUI = (props) => {
                 businessId={business?.id}
                 onSave={handlerProductAction}
                 closeModalProductForm={closeModalProductForm}
+                handleCustomSave={handleCustomSave}
               />
             )}
           </>

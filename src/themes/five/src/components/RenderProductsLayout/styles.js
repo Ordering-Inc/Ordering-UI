@@ -54,7 +54,12 @@ export const BusinessCategoryProductWrapper = styled.div`
   }
 
   @media (min-width: 1000px) {
-    width: ${({ showCartOnProductList }) => showCartOnProductList ? '70%' : '85%'};
+    width: ${({ showCartOnProductList, theme }) => theme?.business_view?.components?.header?.components?.layout?.type === 'pfchangs'
+    ? '100%'
+    : showCartOnProductList
+      ? '70%'
+      : '85%'
+  };
   }
 `
 

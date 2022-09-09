@@ -47,6 +47,9 @@ export const SingleBusinessContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
   align-items: center;
+  ${({ isSelected, theme }) => isSelected && css`
+    border: 1px solid ${theme?.colors?.gold};
+  `}
   @media(min-width: 768px){
     align-items: flex-start;
     flex-direction: row;
@@ -58,7 +61,7 @@ export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0;
-  width: 65%;
+  width: 70%;
   color: #fff;
   padding-right: 10px;
   overflow: hidden;
@@ -85,9 +88,12 @@ export const RightContainer = styled.div`
     height: 40px;
     margin-bottom: 5px;
     width: 100%;
+    font-size: 14px;
+    padding: 0;
+    height: 44px;
   }
   @media (min-width: 768px){
-    width: 35%;
+    width: 30%;
   }
 `
 

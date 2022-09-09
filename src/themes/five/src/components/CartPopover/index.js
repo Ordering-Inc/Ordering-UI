@@ -113,20 +113,23 @@ export const CartPopover = (props) => {
           onClick={props.onClick}
           name='cart-popover'
           isHideCartText={!showCartText}
+          isCartButtonPF={isCartButtonPF}
         >
           {isCartButtonPF ? (
             <ButtonPF
               color='primary'
               style={{
-                height: '40px'
+                height: '46px'
               }}
             >
               <>
                 {showCartText && (
-                  <>{t('CART', 'Cart')}</>
+                  <p>{t('CART', 'Cart')}</p>
                 )}
                 {props.carts?.length > 0 ? (
-                  <CartLength>{props.carts?.length}</CartLength>
+                  <CartLength>
+                    <p>{props.carts?.length > 9 ? '9+' : props.carts?.length}</p>
+                  </CartLength>
                 ) : (
                   <>
                     {cartButtonIcon && (

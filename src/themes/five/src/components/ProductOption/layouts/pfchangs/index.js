@@ -13,7 +13,8 @@ import {
 const ProductOptionUI = (props) => {
   const {
     children,
-    option
+    option,
+    pfchangs
   } = props
 
   const [, t] = useLanguage()
@@ -29,31 +30,25 @@ const ProductOptionUI = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <Container>
-        <WrapHeader>
-          <TitleContainer>
+      <Container id={`id_${option?.id}`}>
+        <WrapHeader pfchangs={pfchangs}>
+          <TitleContainer pfchangs={pfchangs}>
             {option.image && option.image !== '-' && (
               <OptionThumbnail src={option.image} />
             )}
             <Title><span>{option.name}</span></Title>
+            {option?.min > 0 && (
+              <Flag required={option?.min > 0}>{t('REQUIRED', 'Required')}</Flag>
+            )}
           </TitleContainer>
-
-          <Flag required={option?.min > 0}>{maxMin}</Flag>
+          {!(option.min === 1 && option.max === 1) ? (
+            <Flag>{maxMin}</Flag>
+          ) : (
+            <Flag>{t('SELECT_1_OPTION', 'Select 1 option')}</Flag>
+          )}
         </WrapHeader>
         {children}
       </Container>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }
