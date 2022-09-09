@@ -83,7 +83,8 @@ var AddressListUI = function AddressListUI(props) {
       isCustomerMode = props.isCustomerMode,
       isFromCheckout = props.isFromCheckout,
       setIsAddressFormOpen = props.setIsAddressFormOpen,
-      isProfile = props.isProfile;
+      isProfile = props.isProfile,
+      onAccept = props.onAccept;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -175,6 +176,7 @@ var AddressListUI = function AddressListUI(props) {
     }
 
     handleCloseAddressForm();
+    onAccept && onAccept();
   };
 
   var handleSetAddress = function handleSetAddress(address) {
@@ -189,6 +191,7 @@ var AddressListUI = function AddressListUI(props) {
 
     handleCloseAddressForm();
     handleSetDefault(address, userCustomerSetup);
+    onAccept && onAccept();
   };
 
   var handleDeleteClick = function handleDeleteClick(address) {

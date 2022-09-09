@@ -19,8 +19,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -34,10 +32,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductOptionUI = function ProductOptionUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
-
   var children = props.children,
-      option = props.option;
+      option = props.option,
+      pfchangs = props.pfchangs;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -53,27 +50,17 @@ var ProductOptionUI = function ProductOptionUI(props) {
     maxMin = "".concat(t('MIN', 'Min'), ". ").concat(option.min, ")");
   }
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapHeader, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, option.image && option.image !== '-' && /*#__PURE__*/_react.default.createElement(_styles.OptionThumbnail, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    id: "id_".concat(option === null || option === void 0 ? void 0 : option.id)
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapHeader, {
+    pfchangs: pfchangs
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
+    pfchangs: pfchangs
+  }, option.image && option.image !== '-' && /*#__PURE__*/_react.default.createElement(_styles.OptionThumbnail, {
     src: option.image
-  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("span", null, option.name))), /*#__PURE__*/_react.default.createElement(_styles.Flag, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("span", null, option.name)), (option === null || option === void 0 ? void 0 : option.min) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Flag, {
     required: (option === null || option === void 0 ? void 0 : option.min) > 0
-  }, maxMin)), children), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+  }, t('REQUIRED', 'Required'))), !(option.min === 1 && option.max === 1) ? /*#__PURE__*/_react.default.createElement(_styles.Flag, null, maxMin) : /*#__PURE__*/_react.default.createElement(_styles.Flag, null, t('SELECT_1_OPTION', 'Select 1 option'))), children));
 };
 
 var ProductOption = function ProductOption(props) {

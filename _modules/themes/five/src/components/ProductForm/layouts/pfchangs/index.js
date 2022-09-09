@@ -27,9 +27,9 @@ var _useWindowSize = require("../../../../../../../hooks/useWindowSize");
 
 var _pfchangs = require("../../../ProductIngredient/layouts/pfchangs");
 
-var _ProductOption = require("../../../ProductOption");
+var _pfchangs2 = require("../../../ProductOption/layouts/pfchangs");
 
-var _pfchangs2 = require("../../../ProductOptionSubOption/layouts/pfchangs");
+var _pfchangs3 = require("../../../ProductOptionSubOption/layouts/pfchangs");
 
 var _LoginForm = require("../../../LoginForm");
 
@@ -52,6 +52,8 @@ var _styledComponents = require("styled-components");
 var _Inputs = require("../../../../styles/Inputs");
 
 var _NotFoundSource = require("../../../NotFoundSource");
+
+var _react2 = require("swiper/react");
 
 var _swiper = _interopRequireWildcard(require("swiper"));
 
@@ -106,7 +108,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       handleChangeIngredientState = props.handleChangeIngredientState,
       handleChangeSuboptionState = props.handleChangeSuboptionState,
       handleChangeCommentState = props.handleChangeCommentState,
-      closeModalProductForm = props.closeModalProductForm;
+      closeModalProductForm = props.closeModalProductForm,
+      handleCustomSave = props.handleCustomSave;
   var product = productObject.product,
       loading = productObject.loading,
       error = productObject.error;
@@ -183,6 +186,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
     if (!isErrors) {
       handleSave && handleSave();
+      handleCustomSave && handleCustomSave();
       return;
     }
 
@@ -335,10 +339,24 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClick: function onClick() {
       return closeModalProductForm();
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: gallery[0],
-    alt: ""
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name)), /*#__PURE__*/_react.default.createElement(_styles.Properties, null, /*#__PURE__*/_react.default.createElement(_styles.ProductMeta, null, (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku'), "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.sku)), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement("span", null, "\xA0\xB7\xA0"), (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement(_styles.EstimatedPersons, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.estimated_person, "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_PERSONS', 'persons'))))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement(_styles.ProductDescription, null, /*#__PURE__*/_react.default.createElement(_LinkableText.LinkableText, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.SwiperWrapper, {
+    isSoldOut: isSoldOut
+  }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
+    spaceBetween: 10,
+    navigation: true,
+    watchOverflow: true,
+    observer: true,
+    observeParents: true,
+    parallax: true,
+    className: "mySwiper2"
+  }, gallery.map(function (img, i) {
+    return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: img,
+      alt: ""
+    }));
+  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name)), /*#__PURE__*/_react.default.createElement(_styles.Properties, null, /*#__PURE__*/_react.default.createElement(_styles.ProductMeta, null, (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku'), "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.sku)), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement("span", null, "\xA0\xB7\xA0"), (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement(_styles.EstimatedPersons, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.estimated_person, "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_PERSONS', 'persons'))))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement(_styles.ProductDescription, null, /*#__PURE__*/_react.default.createElement(_LinkableText.LinkableText, {
     text: product === null || product === void 0 ? void 0 : product.description
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductTagsListContainer, null, product.tags.map(function (tag) {
     var _theme$images2, _theme$images2$dummie;
@@ -371,10 +389,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return /*#__PURE__*/_react.default.createElement("div", {
         key: option === null || option === void 0 ? void 0 : option.id,
         id: "id_".concat(option === null || option === void 0 ? void 0 : option.id)
-      }, showOption(option) && /*#__PURE__*/_react.default.createElement(_ProductOption.ProductOption, {
+      }, showOption(option) && /*#__PURE__*/_react.default.createElement(_pfchangs2.ProductOption, {
         option: option,
         currentState: currentState,
-        error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)]
+        error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)],
+        pfchangs: true
       }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
         className: isError(option === null || option === void 0 ? void 0 : option.id)
       }, option.suboptions.filter(function (suboptions) {
@@ -386,7 +405,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
         var currentState = ((_productCart$options = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options === void 0 ? void 0 : _productCart$options.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
         var balance = ((_productCart$options2 = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options2 === void 0 ? void 0 : _productCart$options2.balance) || 0;
-        return /*#__PURE__*/_react.default.createElement(_pfchangs2.ProductOptionSubOption, {
+        return /*#__PURE__*/_react.default.createElement(_pfchangs3.ProductOptionSubOption, {
           key: suboption === null || suboption === void 0 ? void 0 : suboption.id,
           onChange: handleChangeSuboptionState,
           balance: balance,

@@ -168,12 +168,12 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       var styleSheet = document.getElementById('styles').sheet;
       var style0 = '.sticky-prod-cat {';
       style0 += 'position: fixed !important;';
-      style0 += 'top: 0 !important;';
+      style0 += 'top: 80px !important;';
       style0 += "width: ".concat(subcategoriesLayout ? '100%' : '65.5%', " !important;");
       style0 += '}';
       var style1 = '.sticky-prod-cart {';
       style1 += 'position: fixed !important;';
-      style1 += 'top: 0 !important;';
+      style1 += 'top: 80px !important;';
       style1 += 'right: 2.5% !important;';
       style1 += 'width: 28.5% !important;';
       style1 += '}';
@@ -204,8 +204,10 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     return function () {
       return window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoriesWrapper, null, PFChangsCategoriesLayout ? /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
+  }, [categorySelected]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoriesWrapper, {
+    hide: (categories === null || categories === void 0 ? void 0 : categories.length) === 0
+  }, PFChangsCategoriesLayout ? /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
     pfchangs: true
   }, /*#__PURE__*/_react.default.createElement(TabsComponent, null, /*#__PURE__*/_react.default.createElement(ProductCategories, {
     pfchangs: true
@@ -226,7 +228,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
+      width: 300,
+      height: 70
     }));
   })))));
 };

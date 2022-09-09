@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CartPopover = function CartPopover(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$layouts$header4, _theme$layouts$header5, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts2$heade4, _theme$layouts2$heade5, _theme$layouts3, _theme$layouts3$heade, _theme$layouts3$heade2, _theme$layouts3$heade3, _theme$layouts3$heade4, _theme$layouts3$heade5, _theme$layouts3$heade6, _props$beforeElements, _props$beforeComponen, _props$carts, _props$carts2, _props$carts3, _props$carts4, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$layouts$header4, _theme$layouts$header5, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts2$heade4, _theme$layouts2$heade5, _theme$layouts3, _theme$layouts3$heade, _theme$layouts3$heade2, _theme$layouts3$heade3, _theme$layouts3$heade4, _theme$layouts3$heade5, _theme$layouts3$heade6, _props$beforeElements, _props$beforeComponen, _props$carts, _props$carts2, _props$carts3, _props$carts4, _props$carts5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       auth = props.auth,
@@ -183,19 +183,20 @@ var CartPopover = function CartPopover(props) {
     ref: referenceElement,
     onClick: props.onClick,
     name: "cart-popover",
-    isHideCartText: !showCartText
+    isHideCartText: !showCartText,
+    isCartButtonPF: isCartButtonPF
   }, isCartButtonPF ? /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     color: "primary",
     style: {
-      height: '40px'
+      height: '46px'
     }
-  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCartText && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('CART', 'Cart')), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.CartLength, null, (_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cartButtonIcon && /*#__PURE__*/_react.default.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCartText && /*#__PURE__*/_react.default.createElement("p", null, t('CART', 'Cart')), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.CartLength, null, /*#__PURE__*/_react.default.createElement("p", null, ((_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length) > 9 ? '9+' : (_props$carts3 = props.carts) === null || _props$carts3 === void 0 ? void 0 : _props$carts3.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cartButtonIcon && /*#__PURE__*/_react.default.createElement("img", {
     alt: "cart-icon",
     width: "14px",
     height: "17px",
     src: cartButtonIcon,
     loading: "lazy"
-  })))) : /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), ((_props$carts3 = props.carts) === null || _props$carts3 === void 0 ? void 0 : _props$carts3.length) > 0 && /*#__PURE__*/_react.default.createElement("span", null, (_props$carts4 = props.carts) === null || _props$carts4 === void 0 ? void 0 : _props$carts4.length))), isSlideBar ? /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })))) : /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), ((_props$carts4 = props.carts) === null || _props$carts4 === void 0 ? void 0 : _props$carts4.length) > 0 && /*#__PURE__*/_react.default.createElement("span", null, (_props$carts5 = props.carts) === null || _props$carts5 === void 0 ? void 0 : _props$carts5.length))), isSlideBar ? /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: open,
     onClose: props.onClose,
     hideCloseDefault: true,

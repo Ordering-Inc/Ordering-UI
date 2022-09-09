@@ -15,6 +15,10 @@ var _orderingComponents = require("ordering-components");
 
 var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
 
+var _FiMap = _interopRequireDefault(require("@meronex/icons/fi/FiMap"));
+
+var _IosSend = _interopRequireDefault(require("@meronex/icons/ios/IosSend"));
+
 var _styles = require("./styles");
 
 var _Modal = require("../../../Modal");
@@ -26,6 +30,8 @@ var _AddressForm = require("../../../AddressForm");
 var _AddressList = require("../../../AddressList");
 
 var _PFChangsBusinessListing = require("../../../BusinessesListing/layouts/PFChangsBusinessListing");
+
+var _utils = require("../../../../../../../utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PFChangsHomeHero = function PFChangsHomeHero(props) {
-  var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _theme$images, _theme$images$general, _orderState$options3, _orderState$options3$, _orderState$options4, _orderState$options4$, _orderState$options5, _orderState$options5$, _configState$configs2, _configState$configs3, _orderState$options6;
+  var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _theme$images, _theme$images$general, _orderState$options3, _orderState$options3$, _orderState$options4, _orderState$options4$, _configState$configs2, _configState$configs3, _orderState$options5, _orderState$options5$, _orderState$options6, _orderState$options6$, _configState$configs4, _configState$configs5, _orderState$options7;
 
   var contentPosition = props.contentPosition;
 
@@ -129,6 +135,21 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       isMapReady = _useState14[0],
       setIsMapReady = _useState14[1];
 
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      mapActivated = _useState16[0],
+      setMapActivated = _useState16[1];
+
+  var _useState17 = (0, _react.useState)({}),
+      _useState18 = _slicedToArray(_useState17, 2),
+      imageMapDimensions = _useState18[0],
+      setImageMapDimension = _useState18[1];
+
+  var _useState19 = (0, _react.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      canBeRedirected = _useState20[0],
+      setCanBeRedirected = _useState20[1];
+
   var theme = (0, _styledComponents.useTheme)();
   var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
   var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
@@ -174,6 +195,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     var _orderState$options2, _orderState$options2$;
 
     setShowAllLocations(false);
+    setCanBeRedirected(true);
 
     if (!(orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2$ = _orderState$options2.address) !== null && _orderState$options2$ !== void 0 && _orderState$options2$.location)) {
       setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -205,6 +227,13 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     changeType(orderType);
   };
 
+  var handleSaveAddress = function handleSaveAddress() {
+    setCanBeRedirected(true);
+    setModals(_objectSpread(_objectSpread({}, modals), {}, {
+      formOpen: false
+    }));
+  };
+
   var defaultLocation = {
     lat: 19.432241,
     lng: -99.177254
@@ -216,6 +245,13 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
         formOpen: false
       });
     };
+  }, []);
+  (0, _react.useEffect)(function () {
+    var imageMapDimensions = document.getElementById('wrapper-map-id');
+    setImageMapDimension({
+      w: imageMapDimensions.clientWidth,
+      h: imageMapDimensions.clientHeight
+    });
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: homeBackgroundImage || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero)
@@ -235,10 +271,12 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       return handleChangeOrderType(1);
     },
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, t('DELIVERY', 'Delivery'))), /*#__PURE__*/_react.default.createElement(_styles.AddressInputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
+  }, t('DELIVERY_UPPER', 'Delivery'))), /*#__PURE__*/_react.default.createElement(_styles.AddressInputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
     onClick: handleAddressInput,
     withIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCities && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location) && orderTypeSelected === 2 && /*#__PURE__*/_react.default.createElement(_styles.ViewLocationsContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_IosSend.default, {
+    className: "geolocation-button"
+  })), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCities && /*#__PURE__*/_react.default.createElement(_styles.ViewLocationsContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     color: "primary",
     style: {
       width: '100%'
@@ -252,23 +290,42 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     setBusinessesLocations: setBusinessesLocations,
     businessesLocations: businessesLocations,
     isMapReady: isMapReady,
+    businessClikedId: businessClikedId,
     setBusinessClikedId: setBusinessClikedId,
     currentLocation: currentLocation,
     defaultLocation: defaultLocation,
-    orderTypeSelected: orderTypeSelected
-  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, !!googleMapsApiKey && /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+    orderTypeSelected: orderTypeSelected,
+    canBeRedirected: canBeRedirected,
+    mapActivated: mapActivated
+  })))), !mapActivated && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
+    id: "wrapper-map-id"
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.ActiveMapContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    outline: true,
+    color: "primary",
+    onClick: function onClick() {
+      return setMapActivated(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_FiMap.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('OPEN_MAP', 'OPEN MAP')))), imageMapDimensions.w && imageMapDimensions.h && /*#__PURE__*/_react.default.createElement("img", {
+    src: (0, _utils.getGoogleMapImage)((orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location) || defaultLocation, configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value, {
+      size: {
+        w: imageMapDimensions.w,
+        h: imageMapDimensions.h
+      },
+      zoom: 17
+    }),
+    alt: "google-maps-img",
+    height: "100%",
+    width: "100%"
+  }))), !!googleMapsApiKey && mapActivated && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
     apiKey: googleMapsApiKey,
     location: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.location) || defaultLocation,
-    locations: businessesLocations,
+    locations: showAllLocations || orderState !== null && orderState !== void 0 && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.location ? businessesLocations : [],
     setCurrentLocation: setCurrentLocation,
     businessMap: true,
     pfchangs: true,
-    noDistanceValidation: true // fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
-    ,
-    mapControls: googleMapsControls // handleChangeAddressMap={handleChangeAddress}
-    // setErrors={setMapErrors}
-    ,
-    maxLimitLocation: parseInt(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.meters_to_change_address) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value),
+    noDistanceValidation: true,
+    mapControls: googleMapsControls,
+    maxLimitLocation: parseInt(configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.meters_to_change_address) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value),
     setIsMapReady: setIsMapReady,
     businessClikedId: businessClikedId
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
@@ -281,16 +338,14 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
       }));
     },
     onSaveAddress: function onSaveAddress() {
-      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: false
-      }));
+      return handleSaveAddress();
     },
     onCancel: function onCancel() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {

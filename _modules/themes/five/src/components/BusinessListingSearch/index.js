@@ -123,6 +123,10 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
       optimizeImage = _useUtils2$.optimizeImage,
       parseDistance = _useUtils2$.parseDistance;
 
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      auth = _useSession2[0].auth;
+
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
@@ -289,11 +293,12 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     isSearchMode: true,
     filters: filters,
     handleChangeFilters: handleChangeFilters
-  }))), /*#__PURE__*/_react.default.createElement(_styles.FiltersResultContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PreviouslyOrderedContainer, null, /*#__PURE__*/_react.default.createElement(_MyOrders.MyOrders, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.FiltersResultContainer, null, auth && /*#__PURE__*/_react.default.createElement(_styles.PreviouslyOrderedContainer, null, /*#__PURE__*/_react.default.createElement(_MyOrders.MyOrders, {
     hideOrders: true,
     businessesSearchList: businessesSearchList,
     onRedirectPage: onRedirectPage,
-    onProductRedirect: onProductRedirect
+    onProductRedirect: onProductRedirect,
+    onBusinessClick: onBusinessClick
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, ((_businessesSearchList2 = businessesSearchList.businesses) === null || _businessesSearchList2 === void 0 ? void 0 : _businessesSearchList2.length) > 0 && /*#__PURE__*/_react.default.createElement("h2", null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, {
     noResults: noResults
   }, noResults && /*#__PURE__*/_react.default.createElement(_styles.NotFoundWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

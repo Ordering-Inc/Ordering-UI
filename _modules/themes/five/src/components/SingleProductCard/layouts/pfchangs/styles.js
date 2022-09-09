@@ -99,7 +99,7 @@ var PriceWrapper = _styledComponents.default.div(_templateObject14 || (_template
 
 exports.PriceWrapper = PriceWrapper;
 
-var QuantityContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n  span { \n    position: relative;\n    top: 2px;\n  }\n"])), function (_ref5) {
+var QuantityContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n  span { \n    position: relative;\n    top: 2px;\n    font-size: 12px;\n  }\n"])), function (_ref5) {
   var theme = _ref5.theme;
   return theme.colors.primary;
 }, function (_ref6) {
@@ -128,7 +128,7 @@ var RibbonBox = _styledComponents.default.div(_templateObject17 || (_templateObj
 
 exports.RibbonBox = RibbonBox;
 
-var TitleWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: flex-start;\n  flex: 1;\n  h1 {\n    font-size: 14px;\n    font-weight: 500;\n    text-align: left;\n    color: #fff;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    margin: 0px;\n  }\n\n  > span {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    svg {\n      color: ", ";\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
+var TitleWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: flex-start;\n  flex: 1;\n  overflow: hidden;\n  h1 {\n    font-size: 14px;\n    font-weight: 500;\n    text-align: left;\n    color: #fff;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    margin: 0px;\n    width: 100%;\n  }\n\n  > span {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    svg {\n      color: ", ";\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.danger500;
 });
 

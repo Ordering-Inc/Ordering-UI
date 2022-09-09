@@ -68,7 +68,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _citiesState$cities, _citiesState$cities$f, _businessesSearchList9, _orderState$options2;
+  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _orderState$options3, _orderState$options3$, _orderState$options4, _orderState$options4$, _citiesState$cities, _citiesState$cities$f, _orderState$options5, _orderState$options5$, _businessesSearchList10, _orderState$options6;
 
   var businessesSearchList = props.businessesSearchList,
       paginationProps = props.paginationProps,
@@ -84,7 +84,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       businessesLocations = props.businessesLocations,
       setBusinessClikedId = props.setBusinessClikedId,
       currentLocation = props.currentLocation,
-      orderTypeSelected = props.orderTypeSelected;
+      canBeRedirected = props.canBeRedirected,
+      businessClikedId = props.businessClikedId,
+      mapActivated = props.mapActivated;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -280,13 +282,24 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     window.open("https://www.google.com/maps/search/?api=1&query=".concat(business.address), '_blank');
   };
 
+  (0, _react.useEffect)(function () {
+    var _orderState$options2, _orderState$options2$, _businessesSearchList6;
+
+    if (canBeRedirected && filterByAddress && orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2$ = _orderState$options2.address) !== null && _orderState$options2$ !== void 0 && _orderState$options2$.location && ((_businessesSearchList6 = businessesSearchList.businesses) === null || _businessesSearchList6 === void 0 ? void 0 : _businessesSearchList6.length) === 1 && !businessesSearchList.loading && !(orderState !== null && orderState !== void 0 && orderState.loading)) {
+      onBusinessClick({
+        slug: businessesSearchList.businesses[0].slug
+      });
+    }
+  }, [businessesSearchList.businesses, orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location]);
+
   var SingleBusinessController = function SingleBusinessController(_ref2) {
     var _business$city;
 
     var business = _ref2.business;
     return /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessContainer, {
+      isSelected: businessClikedId === (business === null || business === void 0 ? void 0 : business.id),
       onClick: function onClick() {
-        return setBusinessClikedId(business === null || business === void 0 ? void 0 : business.id);
+        return mapActivated && setBusinessClikedId(business === null || business === void 0 ? void 0 : business.id);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.LeftContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement(_styles.BusinessAddress, {
       onClick: function onClick() {
@@ -297,10 +310,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       onClick: function onClick() {
         return onBusinessClick(business);
       }
-    }, t('ORDER_PICKUP', 'Order Pickup'))));
+    }, t('GO_TO_BUSINESS', 'Go to business'))));
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orderTypeSelected === 1 ? /*#__PURE__*/_react.default.createElement(_styles.DeliveryTextWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ENTER_FULL_ADDRESS_TO_ORDER', 'Enter your full street address to start your delivery order.'))) : /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryTextWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ENTER_FULL_ADDRESS_TO_ORDER', 'Enter your full street address to start your delivery order.'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
     alignCenter: !businessesSearchList.loading && businessesSearchList.businesses.length === 0
   }, currentLocation && /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     className: "search-area",
@@ -310,7 +323,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
         location: currentLocation
       });
     }
-  }, t('SEARCH_THIS_AREA', 'Search This Area')), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterByAddress && /*#__PURE__*/_react.default.createElement("p", null, t('SHOWING', 'Showing'), " ", businessNearestLength, " ", t('LOCATIONS_WITHIN', 'locations within'), " ", ' ', /*#__PURE__*/_react.default.createElement(_styles.LocationSelect, {
+  }, t('SEARCH_THIS_AREA', 'Search This Area')), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterByAddress && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location) && /*#__PURE__*/_react.default.createElement("p", null, t('SHOWING', 'Showing'), " ", businessNearestLength, " ", t('LOCATIONS_WITHIN', 'locations within'), " ", ' ', /*#__PURE__*/_react.default.createElement(_styles.LocationSelect, {
     value: distanceSelected,
     onChange: function onChange(e) {
       return handleChangeDistance(e.target.value);
@@ -321,13 +334,13 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       value: distance
     }, distance === 'default' ? "+ ".concat(distanceOptions[i - 1] / 1000) : distance / 1000, " ", t('KM', 'Km'));
   })), ' ', t('OF_YOUR_LOCATION', 'of your location'), ':'), filterByCity && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities = citiesState.cities) === null || _citiesState$cities === void 0 ? void 0 : (_citiesState$cities$f = _citiesState$cities.filter(function (city) {
-    var _businessesSearchList6;
+    var _businessesSearchList7;
 
-    return (_businessesSearchList6 = businessesSearchList.businesses) === null || _businessesSearchList6 === void 0 ? void 0 : _businessesSearchList6.some(function (business) {
+    return (_businessesSearchList7 = businessesSearchList.businesses) === null || _businessesSearchList7 === void 0 ? void 0 : _businessesSearchList7.some(function (business) {
       return (business === null || business === void 0 ? void 0 : business.city_id) === (city === null || city === void 0 ? void 0 : city.id);
     });
   })) === null || _citiesState$cities$f === void 0 ? void 0 : _citiesState$cities$f.map(function (city) {
-    var _businessesSearchList7, _businessesSearchList8;
+    var _businessesSearchList8, _businessesSearchList9;
 
     return /*#__PURE__*/_react.default.createElement("div", {
       key: city === null || city === void 0 ? void 0 : city.id
@@ -338,9 +351,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("h3", null, city === null || city === void 0 ? void 0 : city.name), /*#__PURE__*/_react.default.createElement(_RiArrowDropDownLine.default, {
       size: 18
-    })), (citySelected === null || citySelected === void 0 ? void 0 : citySelected.id) === (city === null || city === void 0 ? void 0 : city.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_businessesSearchList7 = businessesSearchList.businesses) === null || _businessesSearchList7 === void 0 ? void 0 : (_businessesSearchList8 = _businessesSearchList7.filter(function (business) {
+    })), (citySelected === null || citySelected === void 0 ? void 0 : citySelected.id) === (city === null || city === void 0 ? void 0 : city.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_businessesSearchList8 = businessesSearchList.businesses) === null || _businessesSearchList8 === void 0 ? void 0 : (_businessesSearchList9 = _businessesSearchList8.filter(function (business) {
       return (business === null || business === void 0 ? void 0 : business.city_id) === (city === null || city === void 0 ? void 0 : city.id);
-    })) === null || _businessesSearchList8 === void 0 ? void 0 : _businessesSearchList8.map(function (business) {
+    })) === null || _businessesSearchList9 === void 0 ? void 0 : _businessesSearchList9.map(function (business) {
       return /*#__PURE__*/_react.default.createElement(SingleBusinessController, {
         key: business === null || business === void 0 ? void 0 : business.id,
         business: business
@@ -351,7 +364,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       },
       color: "primary"
     }, t('LOAD_MORE_BUSINESSES', 'Load more businesses')))));
-  })), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterByAddress && !filterByCity && ((_businessesSearchList9 = businessesSearchList.businesses) === null || _businessesSearchList9 === void 0 ? void 0 : _businessesSearchList9.map(function (business) {
+  })), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterByAddress && !filterByCity && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.location) && ((_businessesSearchList10 = businessesSearchList.businesses) === null || _businessesSearchList10 === void 0 ? void 0 : _businessesSearchList10.map(function (business) {
     return /*#__PURE__*/_react.default.createElement(SingleBusinessController, {
       key: business === null || business === void 0 ? void 0 : business.id,
       business: business
@@ -409,7 +422,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false

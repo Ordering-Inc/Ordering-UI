@@ -1,5 +1,7 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -7,7 +9,7 @@ exports.BusinessBasicInformationPFChangs = void 0;
 
 var _orderingComponents = require("ordering-components");
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _pfchangs = require("../../../../styles/Buttons/theme/pfchangs");
 
@@ -25,7 +27,13 @@ var _timezone = _interopRequireDefault(require("dayjs/plugin/timezone"));
 
 var _isBetween = _interopRequireDefault(require("dayjs/plugin/isBetween"));
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -44,7 +52,7 @@ _dayjs.default.extend(_timezone.default);
 _dayjs.default.extend(_isBetween.default);
 
 var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs(props) {
-  var _orderState$options, _orderState$options2, _orderState$options3;
+  var _orderState$options;
 
   var businessState = props.businessState,
       isSkeleton = props.isSkeleton,
@@ -67,6 +75,11 @@ var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs
       _useUtils2 = _slicedToArray(_useUtils, 1),
       optimizeImage = _useUtils2[0].optimizeImage;
 
+  var _useState = (0, _react.useState)(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type),
+      _useState2 = _slicedToArray(_useState, 2),
+      orderTypeSelected = _useState2[0],
+      setOrderTypeSelected = _useState2[1];
+
   var getBusinessType = function getBusinessType() {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
     var _types = [];
@@ -78,27 +91,38 @@ var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs
     return _types.join(', ');
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", {
+  var handleChangeOrderType = function handleChangeOrderType(orderType) {
+    setOrderTypeSelected(orderType);
+  };
+
+  (0, _react.useEffect)(function () {
+    setTimeout(function () {
+      changeType(orderTypeSelected);
+    }, 250);
+  }, [orderTypeSelected]);
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 75
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", {
     className: "bold"
   }, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement(_RiArrowDropDownLine.default, {
     onClick: function onClick() {
       return setOpenBusinessInformation(true);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
-    orderTypeSelected: orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type
+  }))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
+    orderTypeSelected: orderTypeSelected
   }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 2 ? '#000' : '#FFF',
+    color: orderTypeSelected === 2 ? '#000' : '#FFF',
     onClick: function onClick() {
-      return changeType(2);
+      return handleChangeOrderType(2);
     },
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 ? '#000' : '#FFF',
+    color: orderTypeSelected === 1 ? '#000' : '#FFF',
     onClick: function onClick() {
-      return changeType(1);
+      return handleChangeOrderType(1);
     },
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, t('DELIVERY', 'Delivery'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
+  }, t('DELIVERY_UPPER', 'Delivery'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
     bgimage: business === null || business === void 0 ? void 0 : business.header,
     isSkeleton: isSkeleton,
     id: "container",

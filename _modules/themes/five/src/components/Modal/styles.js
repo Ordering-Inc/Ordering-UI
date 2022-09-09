@@ -26,7 +26,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 0px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: ", ";;\n  max-height: 100vh;\n  overflow: auto;\n  overflow-x: ", ";\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: 10px;\n    height: auto;\n    ", "\n  }\n"])), function (_ref2) {
+var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 0px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: ", ";;\n  max-height: 100vh;\n  overflow: auto;\n  overflow-x: ", ";\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: ", ";\n    height: auto;\n    ", "\n  }\n"])), function (_ref2) {
   var isTransparent = _ref2.isTransparent;
   return isTransparent ? 'transparent' : '#FFF';
 }, function (_ref3) {
@@ -42,9 +42,14 @@ var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateOb
   var width = _ref6.width;
   return width || '50%';
 }, function (_ref7) {
-  var isSlideBar = _ref7.isSlideBar,
-      slideBarPosition = _ref7.slideBarPosition,
-      open = _ref7.open;
+  var _theme$general, _theme$general$compon, _theme$general$compon2, _theme$general$compon3, _theme$general$compon4;
+
+  var theme = _ref7.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$general = theme.general) === null || _theme$general === void 0 ? void 0 : (_theme$general$compon = _theme$general.components) === null || _theme$general$compon === void 0 ? void 0 : (_theme$general$compon2 = _theme$general$compon.modal) === null || _theme$general$compon2 === void 0 ? void 0 : (_theme$general$compon3 = _theme$general$compon2.components) === null || _theme$general$compon3 === void 0 ? void 0 : (_theme$general$compon4 = _theme$general$compon3.style) === null || _theme$general$compon4 === void 0 ? void 0 : _theme$general$compon4.borderRadius) || '10px';
+}, function (_ref8) {
+  var isSlideBar = _ref8.isSlideBar,
+      slideBarPosition = _ref8.slideBarPosition,
+      open = _ref8.open;
   return isSlideBar && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      position: fixed;\n      max-height: 100vh;\n      height: 100%;\n      min-width: 0px;\n      width: 0%;\n      right: ", ";\n      left: ", ";\n\n      ", "\n\n\n      @-webkit-keyframes slide-in {\n       100% { width: 25%; min-width: 400px; }\n      }\n\n      @keyframes slide-in {\n        100% { width: 25%; min-width: 400px; }\n      }\n\n      @keyframes slide-out {\n        0% { width: 25%; min-width: 400px; }\n        100% { width: 0%; min-width: 0px; }\n      }\n\n      @-webkit-keyframes slide-out {\n        0% { width: 25%; min-width: 400px; }\n        100% { width: 0%; min-width: 0px; }\n      }\n    "])), slideBarPosition !== 'left' ? 0 : 'initial', slideBarPosition === 'left' ? 0 : 'initial', open ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        animation: slide-in 0.25s forwards;\n        -webkit-animation: slide-in 0.25s forwards;\n      "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        animation: slide-out 0.25s forwards;\n        -webkit-animation: slide-out 0.25s forwards; \n      "]))));
 });
 
@@ -58,7 +63,7 @@ var ModalActions = _styledComponents.default.div(_templateObject7 || (_templateO
 
 exports.ModalActions = ModalActions;
 
-var ModalHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n\n"])));
+var ModalHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 30px;\n\n  @media(min-width: 450px){\n    margin-top: 0;\n  }\n\n"])));
 
 exports.ModalHeader = ModalHeader;
 
@@ -82,8 +87,8 @@ var ModalIcon = _styledComponents.default.span(_templateObject14 || (_templateOb
   var _props$theme4;
 
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    right: 25px;\n    left: initial;\n  "])));
-}, function (_ref8) {
-  var isProductForm = _ref8.isProductForm;
+}, function (_ref9) {
+  var isProductForm = _ref9.isProductForm;
   return isProductForm && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    top: 18px;\n  "])));
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');

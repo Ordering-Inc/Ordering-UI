@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.SkeletonItem = exports.ProductsContainer = exports.ProductLoading = exports.MobileCartViewWrapper = exports.EmptyCart = exports.EmptyBtnWrapper = exports.BusinessCartContent = void 0;
+exports.Title = exports.SkeletonItem = exports.ProductsContainer = exports.ProductLoading = exports.MobileCartViewWrapper = exports.EmptyCart = exports.EmptyBtnWrapper = exports.BusinessCartContent = exports.BottomToast = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -64,3 +64,12 @@ var EmptyBtnWrapper = _styledComponents.default.div(_templateObject10 || (_templ
 });
 
 exports.EmptyBtnWrapper = EmptyBtnWrapper;
+
+var BottomToast = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: 0;\n  height: 40px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: ", ";\n  color: #fff;\n  width: 100%;\n  box-sizing: border-box;\n  z-index: 10000;\n  p{\n    flex: 1;\n    text-align: center;\n  }\n  div {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 60px;\n    height: 100%;\n    background: #AE9056;\n    cursor: pointer;\n    svg {\n      color: #fff;\n    }\n  }\n"])), function (_ref4) {
+  var _theme$colors;
+
+  var theme = _ref4.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold;
+});
+
+exports.BottomToast = BottomToast;

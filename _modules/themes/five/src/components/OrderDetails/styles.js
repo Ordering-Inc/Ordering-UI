@@ -50,11 +50,7 @@ var OrderBusiness = _styledComponents.default.div(_templateObject7 || (_template
 
 exports.OrderBusiness = OrderBusiness;
 
-var BusinessWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  width: ", ";\n  display: flex;\n  align-items: center;\n  ", "\n  ", "\n  img {\n    width: 100px;\n    height: 100px;\n    border-radius: 7.6px;\n    margin-right: 40px;\n  }\n"])), function (props) {
-  var _props$w;
-
-  return (_props$w = props.w) !== null && _props$w !== void 0 ? _props$w : '100%';
-}, function (props) {
+var BusinessWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n\n  ", "\n  ", "\n  img {\n    width: 100px;\n    height: 100px;\n    border-radius: 7.6px;\n    margin-right: 0;\n\n    @media (min-width: 400px) {\n      margin-right: 40px;\n    }\n  }\n\n  @media (min-width: 400px) {\n    flex-direction: row;\n    width: ", ";\n  }\n"])), function (props) {
   return props.borderBottom && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    padding-bottom: 15px;\n    border-bottom: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.lightGray;
   });
@@ -62,6 +58,10 @@ var BusinessWrapper = _styledComponents.default.div(_templateObject8 || (_templa
   return props.borderTop && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    margin-top: 15px;\n    border-top: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.lightGray;
   });
+}, function (props) {
+  var _props$w;
+
+  return (_props$w = props.w) !== null && _props$w !== void 0 ? _props$w : '100%';
 });
 
 exports.BusinessWrapper = BusinessWrapper;
@@ -70,13 +70,13 @@ var BtsOrderStatus = _styledComponents.default.div(_templateObject11 || (_templa
 
 exports.BtsOrderStatus = BtsOrderStatus;
 
-var BusinessInfo = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  margin-right: 15px;\n  h1,\n  p {\n    margin: 0;\n    color: ", ";\n    overflow-wrap: break-word;\n  }\n\n  h2 {\n    font-weight: 500;\n    font-size: 18px;\n    margin: 0px 0px 5px 0px;\n  }\n  p {\n    font-size: 14px;\n    margin-bottom: 5px;\n  }\n"])), function (props) {
+var BusinessInfo = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  margin-right: 0;\n  margin-top: 10px;\n\n  h1,\n  p {\n    margin: 0;\n    color: ", ";\n    overflow-wrap: anywhere;\n  }\n\n  h2 {\n    font-weight: 500;\n    font-size: 18px;\n    margin: 0px 0px 5px 0px;\n  }\n  p {\n    font-size: 14px;\n    margin-bottom: 5px;\n  }\n\n  @media (min-width: 400px) {\n    margin-right: 15px;\n    margin-top: 0;\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
 exports.BusinessInfo = BusinessInfo;
 
-var ActionsBlock = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-start;\n  flex-direction: column;\n  > * {\n    margin-right: 5px;\n    ", "\n  }\n  svg {\n    font-size: 20px;\n    cursor: pointer;\n    color: #B1BCCC;\n  }\n\n  @media (min-width: 380px) {\n    flex-direction: row;\n\n    svg {\n      font-size: 20px;\n    }\n  }\n"])), function (props) {
+var ActionsBlock = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-start;\n  > * {\n    margin-right: 5px;\n    ", "\n  }\n  svg {\n    font-size: 20px;\n    cursor: pointer;\n    color: #B1BCCC;\n  }\n\n  @media (min-width: 380px) {\n    svg {\n      font-size: 20px;\n    }\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n  "])));
@@ -221,11 +221,11 @@ var OrderActions = _styledComponents.default.div(_templateObject46 || (_template
 
 exports.OrderActions = OrderActions;
 
-var TitleContainer = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 50%;\n  margin: auto;\n  button {\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    justify-content: space-around;\n    min-width: 200px;\n    max-height: 53px;\n  }\n"])));
+var TitleContainer = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 50%;\n  margin: auto;\n  button {\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    justify-content: space-around;\n    min-width: 200px;\n    max-height: 53px;\n  }\n  > h1 {\n    text-align: center;\n  }\n"])));
 
 exports.TitleContainer = TitleContainer;
 
-var ReOrder = _styledComponents.default.div(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 20px;\n  margin-bottom: 20px;\n\n  button {\n    padding: 5px 16px;\n    min-width: unset;\n    margin: 0px 5px;\n  }\n"])));
+var ReOrder = _styledComponents.default.div(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  flex-direction: column;\n\n  button {\n    padding: 5px 16px;\n    min-width: unset;\n    margin: 5px 5px;\n\n    @media (min-width: 650px) {\n      margin: 0px 5px;\n    }\n  }\n\n  @media (min-width: 650px) {\n    flex-direction: row;\n  }\n"])));
 
 exports.ReOrder = ReOrder;
 

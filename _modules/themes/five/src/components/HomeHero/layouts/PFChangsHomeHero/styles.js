@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperMap = exports.WrapInput = exports.ViewLocationsContainer = exports.SearchLocationsContainer = exports.HeroContainerStyled = exports.HeroContainer = exports.Diviver = exports.DeliveryPickupContainer = exports.ContentWrapper = exports.AddressInputContainer = void 0;
+exports.WrapperMap = exports.WrapInput = exports.ViewLocationsContainer = exports.SearchLocationsContainer = exports.HeroContainerStyled = exports.HeroContainer = exports.Diviver = exports.DeliveryPickupContainer = exports.ContentWrapper = exports.AddressInputContainer = exports.ActiveMapContainer = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,7 +13,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -48,7 +48,7 @@ var HeroContainer = function HeroContainer(props) {
 
 exports.HeroContainer = HeroContainer;
 
-var WrapInput = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  padding: 10px 5px;\n  background: #FFFFFF;\n  border: 1px solid #DEE2E6;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  align-items: center;\n  margin-bottom: 27px;\n  margin-right: 10px;\n  display: flex;\n  overflow: hidden;\n  white-space: nowrap;\n\n  ", "\n  \n  p {\n    color: #000 !important;\n    position: relative;\n    margin: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  svg {\n    color: ", ";\n    width: 22px;\n    height: 22px;\n    min-width: 22px;\n\n    ", "\n\n  }\n"])), function (_ref2) {
+var WrapInput = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  padding: 10px 5px;\n  background: #FFFFFF;\n  border: 1px solid #DEE2E6;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  align-items: center;\n  margin-bottom: 27px;\n  margin-right: 10px;\n  display: flex;\n  overflow: hidden;\n  white-space: nowrap;\n\n  ", "\n  \n  p {\n    color: #000 !important;\n    position: relative;\n    margin: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    align-self: flex-end;\n  }\n\n  svg {\n    color: ", ";\n    width: 22px;\n    height: 22px;\n    min-width: 22px;\n\n    ", "\n\n  }\n"])), function (_ref2) {
   var withIcon = _ref2.withIcon;
   return withIcon && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    box-sizing: border-box;\n    flex: 1;\n    &::before {\n      content: \"\";\n      position: absolute;\n      right: 5px;\n      top: 0;\n      bottom: 18px;\n      width: 15px;\n\n      ", "\n    }\n  "])), function (props) {
     var _props$theme;
@@ -76,12 +76,12 @@ var SearchLocationsContainer = _styledComponents.default.div(_templateObject9 ||
 
 exports.SearchLocationsContainer = SearchLocationsContainer;
 
-var DeliveryPickupContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  position: relative;\n  border-radius: 0px;\n  border: 1px solid ", ";\n  height: 52px;\n  background-color: transparent;\n\n  button {\n    outline: none;\n    background: none;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    z-index: 1;\n  }\n\n  &::after {\n    ", "\n"])), function (_ref4) {
+var DeliveryPickupContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  flex-direction: row-reverse;\n  position: relative;\n  border-radius: 0px;\n  border: 1px solid ", ";\n  height: 52px;\n  background-color: transparent;\n\n  button {\n    outline: none;\n    background: none;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    z-index: 1;\n  }\n\n  &::after {\n    ", "\n"])), function (_ref4) {
   var theme = _ref4.theme;
   return theme.colors.gold;
 }, function (_ref5) {
   var orderTypeSelected = _ref5.orderTypeSelected;
-  return orderTypeSelected === 2 ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      content: \"\";\n      background:  ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      left: 6px;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n    "])), function (_ref6) {
+  return orderTypeSelected === 1 ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      content: \"\";\n      background:  ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      left: 6px;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n    "])), function (_ref6) {
     var theme = _ref6.theme;
     return theme.colors.gold;
   }) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      content: \"\";\n      background: ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n      left: 50%;\n      \n    "])), function (_ref7) {
@@ -92,7 +92,7 @@ var DeliveryPickupContainer = _styledComponents.default.div(_templateObject10 ||
 
 exports.DeliveryPickupContainer = DeliveryPickupContainer;
 
-var AddressInputContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n  button {\n    height: 46px;\n    margin-left: 10px;\n  }\n"])));
+var AddressInputContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n  position: relative;\n  button {\n    height: 46px;\n    margin-left: 10px;\n  }\n  .geolocation-button {\n    position: absolute;\n    top: 30px;\n    right: 10px;\n    width: 25px;\n    height: 25px;\n    cursor: pointer;\n  }\n"])));
 
 exports.AddressInputContainer = AddressInputContainer;
 
@@ -115,3 +115,7 @@ var WrapperMap = _styledComponents.default.div(_templateObject16 || (_templateOb
 });
 
 exports.WrapperMap = WrapperMap;
+
+var ActiveMapContainer = _styledComponents.default.span(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background: rgba(0,0,0,0.4);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  button {\n    width: 60%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    height: 45px;\n    font-size: 16px;\n    font-weight: bold;\n  }\n  svg {\n    margin-right: 20px;\n    width: 30px;\n    height: 30px;\n  }\n  p{\n    margin-top: 21px;\n  }\n\n  @media (min-width: 1024px){\n    button{ \n      width: 40%;\n      font-size: 18px;\n    }\n  }\n"])));
+
+exports.ActiveMapContainer = ActiveMapContainer;

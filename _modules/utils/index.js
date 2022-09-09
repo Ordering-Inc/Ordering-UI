@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = void 0;
 
 var _orderingComponents = require("ordering-components");
 
@@ -328,6 +328,19 @@ var convertToRadian = function convertToRadian(value) {
   return value * Math.PI / 180;
 };
 /**
+ * Function to check URL
+ * @param {string} url URL of page
+ * @param {string} fallback default URL
+ */
+
+
+exports.convertToRadian = convertToRadian;
+
+var checkSiteUrl = function checkSiteUrl(url, fallback) {
+  if (!url) return fallback;
+  return url[0] === '/' ? url : "/".concat(url);
+};
+/**
  * Function to calculate distance
  * @param {*} lat1 lat from fist point
  * @param {*} lon1 lon from fist point
@@ -336,7 +349,7 @@ var convertToRadian = function convertToRadian(value) {
  */
 
 
-exports.convertToRadian = convertToRadian;
+exports.checkSiteUrl = checkSiteUrl;
 
 var getDistance = function getDistance(lat1, lon1, lat2, lon2) {
   var R = 6371; // km
