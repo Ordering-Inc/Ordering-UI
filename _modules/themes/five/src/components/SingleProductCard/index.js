@@ -66,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleProductCardUI = function SingleProductCardUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _product$ribbon6, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
+  var _orderingTheme$theme$, _orderingTheme$theme, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _product$ribbon6, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
 
   var product = props.product,
       isSoldOut = props.isSoldOut,
@@ -80,7 +80,8 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
       useKioskApp = props.useKioskApp,
       productAddedToCartLength = props.productAddedToCartLength,
       handleFavoriteProduct = props.handleFavoriteProduct,
-      isFavorite = props.isFavorite;
+      isFavorite = props.isFavorite,
+      isPreviously = props.isPreviously;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -99,7 +100,8 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
-      optimizeImage = _useUtils2$.optimizeImage;
+      optimizeImage = _useUtils2$.optimizeImage,
+      parseDate = _useUtils2$.parseDate;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -138,7 +140,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   }, 0);
   var totalBalance = (productBalance || 0) - removeToBalance;
   var maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance;
-  var hideAddButton = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.products) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.add_to_cart_button) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.hidden; // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
+  var hideAddButton = (_orderingTheme$theme$ = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme.business_view) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.components) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.products) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.components) === null || _orderingTheme$theme$5 === void 0 ? void 0 : (_orderingTheme$theme$6 = _orderingTheme$theme$5.add_to_cart_button) === null || _orderingTheme$theme$6 === void 0 ? void 0 : _orderingTheme$theme$6.hidden) !== null && _orderingTheme$theme$ !== void 0 ? _orderingTheme$theme$ : true; // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
   var maxCartProductInventory = (product !== null && product !== void 0 && product.inventoried ? product === null || product === void 0 ? void 0 : product.quantity : undefined) - totalBalance;
   maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig;
@@ -198,14 +200,16 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     onClick: handleClickProduct,
     isCartOnProductsList: isCartOnProductsList,
     style: useCustomFunctionality && customStyle,
-    className: "product-card" // productsRows={productsRows}
+    className: "product-card",
+    isShowAddButt: !useCustomFunctionality && !hideAddButton && !isSkeleton // productsRows={productsRows}
 
   }, isObservedValidation ? /*#__PURE__*/_react.default.createElement("div", null, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0,
-    isBgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_86,c_limit')
+    isBgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_86,c_limit'),
+    oneLine: isPreviously
   }, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), !useKioskApp && (!isSkeleton ? /*#__PURE__*/_react.default.createElement("span", {
+  }), !useKioskApp && !isPreviously && (!isSkeleton ? /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return handleChangeFavorite();
     },
@@ -219,7 +223,11 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     width: 100
   }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, {
+  }), isPreviously && (!isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.LastOrder, null, t('LAST_ORDERED_ON', 'Last ordered on'), " ", parseDate(product === null || product === void 0 ? void 0 : product.last_ordered_date, {
+    outputFormat: 'MMM DD, YYYY'
+  })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 80
+  }))), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, {
     isBgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_86,c_limit')
   }, (product === null || product === void 0 ? void 0 : (_product$ribbon = product.ribbon) === null || _product$ribbon === void 0 ? void 0 : _product$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
     bgColor: product === null || product === void 0 ? void 0 : (_product$ribbon2 = product.ribbon) === null || _product$ribbon2 === void 0 ? void 0 : _product$ribbon2.color,
@@ -248,7 +256,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonCardLogo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 75,
     width: 75
-  }))), !useCustomFunctionality && typeof hideAddButton !== 'undefined' && !hideAddButton && !isSkeleton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), !useCustomFunctionality && !hideAddButton && !isSkeleton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary"
   }, t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {

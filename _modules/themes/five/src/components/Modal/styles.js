@@ -58,7 +58,7 @@ var ModalActions = _styledComponents.default.div(_templateObject7 || (_templateO
 
 exports.ModalActions = ModalActions;
 
-var ModalHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n\n"])));
+var ModalHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 30px;\n\n  @media(min-width: 450px){\n    margin-top: 0;\n  }\n\n"])));
 
 exports.ModalHeader = ModalHeader;
 

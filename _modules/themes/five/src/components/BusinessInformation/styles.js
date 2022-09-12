@@ -63,7 +63,7 @@ var BusinessContent = _styledComponents.default.div(_templateObject7 || (_templa
 
 exports.BusinessContent = BusinessContent;
 
-var SectionTitle = _styledComponents.default.h3(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  font-weight: 500;\n  font-size: 16px;\n  color: ", ";\n  margin: 25px 0 20px 0;\n"])), function (props) {
+var SectionTitle = _styledComponents.default.h3(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  font-weight: 500;\n  font-size: 16px;\n  color: ", ";\n  margin: 10px 0 10px 0;\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
@@ -129,7 +129,7 @@ var ImageContainer = _styledComponents.default.div(_templateObject21 || (_templa
 
 exports.ImageContainer = ImageContainer;
 
-var BusinessTitle = _styledComponents.default.h2(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  text-align: center;\n  margin-top: 0;\n  margin-bottom: 36px;\n  padding-left: 30px;\n\n  ", "\n"])), function (props) {
+var BusinessTitle = _styledComponents.default.h2(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  text-align: center;\n  margin-top: 0;\n  margin-bottom: 0;\n  padding-left: 30px;\n  padding-top: 25px;\n  ", "\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   var _props$theme7;

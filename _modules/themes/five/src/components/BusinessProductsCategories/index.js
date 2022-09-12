@@ -135,12 +135,16 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     var _diff = -50;
 
     var _moveDiff = 30;
+
+    var _paddDiff = scrollTopSpan + 10;
+
     (_categories === null || _categories === void 0 ? void 0 : _categories.length) && _categories.some(function (category) {
-      var _document$getElementB3, _document$getElementB4;
+      var _document$getElementB3, _document$getElementB4, _document$getElementB5;
 
       var topPos = category !== null && category !== void 0 && category.id ? (_document$getElementB3 = document.getElementById("category".concat(category.id))) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.offsetTop : (_document$getElementB4 = document.getElementById('businessProductList')) === null || _document$getElementB4 === void 0 ? void 0 : _document$getElementB4.offsetTop;
+      var HeightOfEle = category !== null && category !== void 0 && category.id ? (_document$getElementB5 = document.getElementById("category".concat(category.id))) === null || _document$getElementB5 === void 0 ? void 0 : _document$getElementB5.clientHeight : 0;
 
-      if (topPos - windowTop < scrollTopSpan + 5 && topPos - windowTop > 0 && category !== null && category !== void 0 && category.id) {
+      if (windowTop > topPos - _paddDiff && windowTop < topPos + HeightOfEle - _paddDiff && category !== null && category !== void 0 && category.id) {
         var choosedCategory = document.getElementById("category-menu".concat((category === null || category === void 0 ? void 0 : category.id) || '-all'));
         var choosedCategoryLeft = (choosedCategory === null || choosedCategory === void 0 ? void 0 : choosedCategory.offsetLeft) || 0;
 
