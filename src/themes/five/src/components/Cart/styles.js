@@ -148,9 +148,14 @@ export const Spinner = styled.div`
 export const CommentContainer = styled.div`
   position: relative;
   width: 100%;
+  box-sizing: border-box;
   .spinner-content > div{
     width: 50px;
     height: 50px;
+  }
+  textarea{
+    box-sizing: border-box;
+    color: #000;
   }
 `
 

@@ -24,7 +24,7 @@ export const Accordion = styled.div`
   cursor: ${({ isClosed }) => isClosed ? 'not-allowed' : 'pointer'};
   transition: background-color 0.6s ease;
   position: relative;
-  padding: 10px 0px;
+  padding: 20px;
   box-sizing: border-box;
 
   ${props => props.isClosed && css`
@@ -50,18 +50,7 @@ export const ContentInfo = styled.div`
   > div {
     display: flex;
     align-items: center;
-
-    .go-store {
-      user-select: none;
-      text-decoration: underline;
-      color: ${props => props.theme.colors.primary};
-      margin-right: 5px;
-      ${props => props.theme?.rtl && css`
-        margin-left: 5px;
-        margin-right: 0;
-      `}
-    }
-
+    justify-content: flex-start;
     .clear-cart {
       user-select: none;
       text-decoration: underline;
@@ -104,7 +93,7 @@ export const ContentInfo = styled.div`
     margin: 0px;
   }
 
-  h2, h4 {
+  h2 {
     width: 200px
   }
 
@@ -145,7 +134,6 @@ export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
   width: 80%;
-
   h2 {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -223,10 +211,17 @@ export const PriceContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 20px;
   button{ 
     padding: 10px 30px;
     min-width: 150px;
     width: 50%;
     height: 50px;
   }
+`
+
+export const Divider = styled.div`
+  width: 100%;
+  height: 5px;
+  background: rgb(244,245,246);
 `

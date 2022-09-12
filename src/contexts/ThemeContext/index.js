@@ -58,6 +58,9 @@ export const ThemeProvider = ({ children, ...props }) => {
         direction: rtl;
       `}
       -webkit-overflow-scrolling: auto;
+      ${({ theme }) => theme?.layouts?.general?.components?.layout?.type === 'pfchangs' && css`
+        background-image: url(${theme?.layouts?.homepage_view?.components?.homepage_header?.components?.image});
+      `}
     }
     input, textarea, button {
       font-family: inherit;

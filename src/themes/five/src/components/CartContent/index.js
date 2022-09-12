@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useEvent } from 'ordering-components'
-import { Container, NotCarts, Title } from './styles'
+import { BackToMenuButton, Container, NotCarts, NotCartsPFChangs, Title } from './styles'
 
 import { Cart } from '../Cart'
 import { Cart as CartPFChangs } from '../Cart/layouts/pfchangs'
+import { Button } from '../../styles/Buttons'
 
 export const CartContent = (props) => {
   const {
@@ -14,7 +15,8 @@ export const CartContent = (props) => {
     isForceOpenCart,
     setPreorderBusiness,
     isOpenCart,
-    isSlideBar
+    isSlideBar,
+    onClose
   } = props
 
   const [, t] = useLanguage()
@@ -71,11 +73,30 @@ export const CartContent = (props) => {
             </React.Fragment>
           ))}
         {(!carts || carts?.length === 0) && (
-          <NotCarts>
-            <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='122px' loading='lazy' />
-            <h1>{t('NO_PRODUCTS_TO_CART', 'You have no products added to the cart')}</h1>
-          </NotCarts>
+          <>
+            {cartLayout === 'pfchangs' ? (
+              <NotCartsPFChangs>
+                <h1>{t('YOUR_CART_IS_EMPTY', 'Your cart is empty')}</h1>
+                <h2>{t('GET_STARTED_ADD_TASTY_FOOD', 'Get started and add some tasty food')}</h2>
+                <Button onClick={onClose}>
+                  {t('BACK', 'Back')}
+                </Button>
+              </NotCartsPFChangs>
+            ) : (
+              <NotCarts>
+                <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='122px' loading='lazy' />
+                <h1>{t('NO_PRODUCTS_TO_CART', 'You have no products added to the cart')}</h1>
+              </NotCarts>
+            )}
+          </>
         )}
+        {(carts?.length > 0 && isSlideBar && (
+          <BackToMenuButton onClick={onClose}>
+            <p>
+              {t('BACK_TO_MENU', 'Back to menu')}
+            </p>
+          </BackToMenuButton>
+        ))}
       </Container>
     </>
   )

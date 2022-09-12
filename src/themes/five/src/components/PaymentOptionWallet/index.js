@@ -115,11 +115,10 @@ const PaymentOptionWalletUI = (props) => {
                     value={`payment_option_${wallet.type}`}
                     onChange={() => handleOnChange(idx, wallet)}
                   />
-                  <SectionLeftText>
+                  <SectionLeftText
+                    disabled={(cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0}
+                  >
                     <label
-                      style={{
-                        color: (cart?.balance === 0 && !checkedState[idx]) || wallet.balance === 0 ? theme.colors.darkGray : 'black'
-                      }}
                       htmlFor={`custom-checkbox-${idx}`}
                     >
                       {walletName[wallet.type]?.name}

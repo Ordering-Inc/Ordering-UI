@@ -89,6 +89,9 @@ export const Transactions = styled.div`
     h2 {
       text-align: center;
     }
+    ${({ theme }) => theme?.layouts?.general?.components?.layout?.type === 'pfchangs' && css`
+        color: #fff;
+    `}
   }
 
   @media (min-width: 768px) {

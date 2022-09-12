@@ -263,13 +263,15 @@ export const UserFormDetailsUI = (props) => {
   return (
     <>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} isCheckout={isCheckout}>
-        <Title>
-          <h2>{t('CONTACT_INFORMATION', 'Contact information')}</h2>
-        </Title>
+        {!isCheckout && (
+          <Title>
+            <h2>{t('CONTACT_INFORMATION', 'Contact information')}</h2>
+          </Title>
+        )}
         {!validationFields?.loading ? (
           <>
             {editEnabled ? (
-              <FormContainer>
+              <FormContainer isCheckout={isCheckout}>
                 {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
                   showField && showField(field.code) && showFieldWithTheme(field.code) && (
                     <React.Fragment key={field.id}>
@@ -356,13 +358,11 @@ export const UserFormDetailsUI = (props) => {
                     />
                   </InputGroup>
                 )}
-                {showLangauges && !requiredFields && (
-                  <>
-                    <LanguageSelectorWrapper>
-                      <p>{t('LANGUAGE', 'Language')}</p>
-                      <LanguageSelector />
-                    </LanguageSelectorWrapper>
-                  </>
+                {showLangauges && !requiredFields && !isCheckout && (
+                  <LanguageSelectorWrapper isCheckout={isCheckout}>
+                    <p>{t('LANGUAGE', 'Language')}</p>
+                    <LanguageSelector />
+                  </LanguageSelectorWrapper>
                 )}
                 <ActionsForm>
                   <Button
@@ -386,7 +386,7 @@ export const UserFormDetailsUI = (props) => {
                 </ActionsForm>
               </FormContainer>
             ) : (
-              <UserInformationContainer>
+              <UserInformationContainer isCheckout={isCheckout}>
                 <Info>
                   <p>{user?.name} {user?.lastname}</p>
                   <p>{user?.email}</p>

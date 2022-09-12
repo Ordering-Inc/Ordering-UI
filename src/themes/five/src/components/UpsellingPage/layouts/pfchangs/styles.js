@@ -13,12 +13,15 @@ export const SkeletonContainer = styled.div`
 `
 
 export const VerticalUpsellingContainer = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   max-height: 300px;
   overflow-y: auto;
   width: 100%;
   margin-top: 20px;
+  padding: 20px;
+  background: rgb(244, 245, 246);
 `
 
 export const HorizontalItem = styled.div`
@@ -29,6 +32,7 @@ export const HorizontalItem = styled.div`
   box-sizing: border-box;
   margin-bottom: 10px;
   padding-bottom: 0 !important;
+  background: #fff;
   @media (min-width: 768px){
     justify-content: space-between;
   }
@@ -122,4 +126,11 @@ export const ProductInfo = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  box-sizing: border-box;
+
+  p {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+  }
 `

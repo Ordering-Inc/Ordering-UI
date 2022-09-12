@@ -113,13 +113,12 @@ export const CartPopover = (props) => {
           onClick={props.onClick}
           name='cart-popover'
           isHideCartText={!showCartText}
-          isCartButtonPF={isCartButtonPF}
         >
           {isCartButtonPF ? (
             <ButtonPF
               color='primary'
               style={{
-                height: '46px'
+                height: '50px'
               }}
             >
               <>
@@ -153,12 +152,19 @@ export const CartPopover = (props) => {
             hideCloseDefault
             isSlideBar
             slideBarPosition={orderingTheme?.theme?.header?.components?.cart?.open_strategy?.position}
+            padding={isCartButtonPF && '0'}
           >
             <TitleContainer>
-              <Title>{t('MY_CART', 'My cart')}</Title>
-              <Button outline color='primary' onClick={props.onClose}>
-                <AiOutlineClose /> {t('CLOSE', 'Close')}
-              </Button>
+              {isCartButtonPF ? (
+                <AiOutlineClose onClick={props.onClose} />
+              ) : (
+                <>
+                  <Title>{t('MY_CART', 'My cart')}</Title>
+                  <Button outline color='primary' onClick={props.onClose}>
+                    <AiOutlineClose /> {t('CLOSE', 'Close')}
+                  </Button>
+                </>
+              )}
             </TitleContainer>
             <CartContent
               isCartPopover

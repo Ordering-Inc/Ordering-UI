@@ -66,6 +66,11 @@ export const OrderBusiness = styled.div`
   margin-bottom: 20px;
   box-shadow: 0px 4px 10px 0px #0000001F;
 
+  ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
+    border: 1px solid #fff;
+    padding: 30px;
+  `}
+
   @media (min-width: 769px) {
     flex-direction: row;
   }
@@ -202,6 +207,13 @@ export const OrderInfo = styled.div`
     font-weight: 600;
     font-size: 16px;
   }
+
+    
+  ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
+    border: 1px solid #fff;
+    padding: 30px;
+    box-sizing: border-box;
+  `}
 `
 
 export const ReviewOrderLink = styled.span`
@@ -264,6 +276,11 @@ export const OrderCustomer = styled(BusinessInfo)`
   padding: 20px;
   box-shadow: 0px 4px 10px 0px #0000001F;
   margin-bottom: 30px;
+
+  ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
+    border: 1px solid #fff;
+    padding: 30px;
+  `}
 `
 
 export const PhotoBlock = styled.img`

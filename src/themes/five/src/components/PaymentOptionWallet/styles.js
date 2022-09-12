@@ -21,6 +21,9 @@ export const SectionLeftText = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+  label{ 
+      color: ${({ disabled, theme }) => disabled ? theme.colors.darkGray : theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' ? '#fff' : '#000'};
+    }
 `
 
 export const SectionWrapper = styled.div`

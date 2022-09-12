@@ -89,6 +89,7 @@ export const MyOrders = (props) => {
                   onClick={() => setSelectedOption(option.key)}
                   active={selectedOption === option.key}
                   borderBottom
+                  activeColor={theme?.layouts?.general?.components?.layout?.type === 'pfchangs' ? theme?.colors?.gold : ''}
                   {...pfchangsTabProps}
                 >
                   {option?.value}

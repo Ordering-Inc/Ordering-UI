@@ -11,7 +11,11 @@ export const ProductsContainer = styled.div`
     margin-bottom: 5px;
   }
   ${({ pfchangs, theme }) => pfchangs && css`
+    width: 100%;
     background: ${theme.colors.backgroundPage};
+    margin: 0px;
+    padding: 0 20px;
+    box-sizing: border-box;
   `}
 `
 

@@ -40,7 +40,7 @@ export const Header = styled.div`
 
 export const SideForm = styled.div`
   width: 100%;
-  margin-top: 25px;
+  margin-top: 10px;
   @media (min-width: 768px) {
     display: flex;
     align-items: center;
@@ -67,6 +67,11 @@ export const UserData = styled.div`
     font-size: 14px;
     color: #fff;
   }
+
+  ${({ isCheckout }) => isCheckout && css`
+    border: 0;
+    padding: 0;
+  `}
 `
 
 export const UserName = styled.p`

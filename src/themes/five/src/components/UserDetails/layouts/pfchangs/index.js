@@ -24,7 +24,7 @@ import {
 } from 'ordering-components'
 import { Alert } from '../../../Confirm'
 import { Modal } from '../../../Modal'
-import { UserFormDetailsUI } from '../../../UserFormDetails'
+import { UserFormDetailsUI } from '../../../UserFormDetails/layouts/pfchangs'
 
 const UserDetailsUI = (props) => {
   const {
@@ -45,7 +45,8 @@ const UserDetailsUI = (props) => {
     verifyPhoneState,
     requiredFields,
     setFormState,
-    setIsSuccess
+    setIsSuccess,
+    isCheckout
   } = props
 
   const [, t] = useLanguage()
@@ -154,7 +155,7 @@ const UserDetailsUI = (props) => {
               <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
             </TitleContainer>
           )}
-          {!requiredFields && (
+          {!requiredFields && !isCheckout && (
             <Header className='user-form'>
               {!isModal && (
                 <h1>{t('YOUR_INFORMATION', 'Your Information')}</h1>
@@ -170,12 +171,15 @@ const UserDetailsUI = (props) => {
           )}
 
           {!isEdit ? (
-            <UserData>
-              {(userData?.name || userData?.middle_name || userData?.lastname || userData?.second_lastname) && (
-                <UserName>
-                  {userData?.name} {userData?.middle_name} {userData?.lastname} {userData?.second_lastname}
-                </UserName>
-              )}
+            <UserData isCheckout={isCheckout}>
+              <>
+                {(userData?.name || userData?.middle_name || userData?.lastname || userData?.second_lastname) && (
+                  <UserName>
+                    {userData?.name} {userData?.middle_name} {userData?.lastname} {userData?.second_lastname}
+                  </UserName>
+                )}
+                <span onClick={() => toggleEditState()}>{t('CHANGE', 'Change')}</span>
+              </>
               {userData?.email && (
                 <p>{userData?.email}</p>
               )}
@@ -184,7 +188,7 @@ const UserDetailsUI = (props) => {
                   <CountryFlag>
                     {
                       userData?.country_phone_code && (
-                        <PhoneInput onChange={() => {}} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.cellphone}`)?.country} />
+                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.cellphone}`)?.country} />
                       )
                     }
                   </CountryFlag>

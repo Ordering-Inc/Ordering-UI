@@ -6,8 +6,18 @@ export const Container = styled.div`
   flex-direction: column;
   min-height: auto;
 
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+  position: relative;
+    * {
+      color: #fff;
+    }
+  `}
+
   @media (min-width: 769px) {
     flex-direction: row;
+    ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+      justify-content: center;
+    `}
   }
 
   @media (min-width: 993px) {
@@ -24,6 +34,10 @@ export const WrapperLeftContainer = styled.div`
   @media (min-width: 769px) {
     width: 55%;
     padding: 30px 60px 55px 40px;
+    ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+      max-width: 700px;
+      padding: 30px 20px 20px 30px;
+    `}
   }
 `
 
@@ -36,6 +50,13 @@ export const WrapperRightContainer = styled.div`
   @media (min-width: 769px) {
     width: 45%;
     padding: 55px 40px;
+    ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+      padding: 30px 20px 20px 30px;
+      width: 50%;
+      max-width: 500px;
+      background: transparent;
+      margin-top: 50px;
+    `}
   }
 `
 
@@ -50,6 +71,15 @@ export const UserDetailsContainer = styled.div`
   flex-wrap: wrap;
   padding-bottom: 20px;
   border-bottom: 1px solid #E9ECEF;
+
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    padding: 0px 30px 30px 30px;
+    margin-top: 0;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    margin-bottom: 20px;
+  `}
 `
 
 export const BusinessDetailsContainer = styled(UserDetailsContainer)`
@@ -67,6 +97,12 @@ export const BusinessDetailsContainer = styled(UserDetailsContainer)`
       color: ${props => props.theme.colors.darkTextColor};
     }
   }
+
+    
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    border: 1px solid #fff;
+    padding: 30px;
+  `}
 `
 
 export const PaymentMethodContainer = styled.div`
@@ -79,6 +115,12 @@ export const PaymentMethodContainer = styled.div`
     font-size: 20px;
     color: ${props => props.theme.colors.darkTextColor};
   }
+
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    border: 1px solid #fff;
+    padding: 30px;
+    margin: 0;
+  `}
 `
 
 export const DriverTipContainer = styled(PaymentMethodContainer)`
@@ -87,14 +129,23 @@ export const DriverTipContainer = styled(PaymentMethodContainer)`
     font-size: 16px;
     color: #909BA9;
   }
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    margin-bottom: 20px;
+  `}
 `
 
 export const CartContainer = styled(PaymentMethodContainer)`
   margin-bottom: 20px;
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    padding: 0;
+  `}
 `
 
 export const WalletPaymentOptionContainer = styled(PaymentMethodContainer)`
   padding-top: 20px;
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    border-top: none;
+  `}
 `
 
 export const WrapperPlaceOrderButton = styled.div`
@@ -186,6 +237,11 @@ export const WrapperLeftContent = styled.div`
     cursor: pointer;
     margin-bottom: 5px;
   }
+
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+      box-sizing: border-box;
+      margin-top: 50px;
+    `}
 `
 export const CheckOutDivider = styled.div`
   height: 8px;
@@ -243,6 +299,29 @@ export const DeliveryOptionsContainer = styled.div`
       box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
     }
   }
+
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    padding: 20px 20px;
+    border: 1px solid #fff;
+    margin-bottom: 20px;
+    #select-input {
+      margin-bottom: 0px;
+    }
+    > div {
+      background-color: #000!important;
+      border: 1px solid #fff;
+      border-radius: 0px;
+      color: #fff !important;
+      padding: 0px 10px;
+      box-sizing: border-box;
+
+      > div#list {
+        background-color: #000 !important;
+        border: 1px solid #fff;
+        border-radius: 0px;
+      }
+    }
+  `}
 `
 
 export const CartHeader = styled.div`
@@ -269,6 +348,12 @@ export const CartHeader = styled.div`
     margin: 5px 0px;
   }
 
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    span {
+      color: #fff;
+    }
+  `}
+
   @media (min-width: 300px) {
     flex-direction: row;
     align-items: center;
@@ -283,5 +368,66 @@ export const WrapperActionsInput = styled.div`
   }
   h1 {
     font-size: 20px;
+  }
+`
+
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    top: 22px;
+    svg{
+      margin-right: 10px;
+    }
+  `}
+`
+
+export const SubtitleContainer = styled.div`
+  padding: 20px 20px 20px 30px;
+  border-left: 1px solid #fff;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  h2 {
+    font-size: 16px;
+    margin: 0;
+  }
+`
+
+export const ItemHeader = styled.div`
+  border: 1px solid #fff;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+`
+
+export const BusinessDetails = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  color: #fff;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+
+  img{
+    width: 100%;
+    height: 200px;
+  }
+  > div {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2  {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0;
+    }
+    span {
+      text-decoration: underline;
+      font-size: 16px;
+    }
   }
 `

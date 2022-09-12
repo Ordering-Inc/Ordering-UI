@@ -11,6 +11,13 @@ export const MessagesListingContainer = styled.div`
     flex-direction: row;
     height: calc(100vh - 105px);
   }
+
+  ${({ theme }) => theme?.layouts?.general?.components?.layout?.type === 'pfchangs' && css`
+    p, h1, h2, h3 {
+      color: #fff;
+    }
+  `}
+  
 `
 export const OrderListItems = styled.div`
   border: 1px solid rgb(233, 236, 239);
@@ -133,6 +140,9 @@ export const OrderHeader = styled.div`
     font-size: 14px;
     margin-top: 5px;
     color: ${props => props.theme.colors.colorPage};
+    ${({ theme }) => theme?.layouts?.general?.components?.layout?.type === 'pfchangs' && css`
+      color: #ccc;
+  `}
   }
 `
 export const ViewDetails = styled.a`

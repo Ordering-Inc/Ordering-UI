@@ -4,10 +4,11 @@ export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10px 0px;
+  padding: 20px;
   background: #FFF;
   border-bottom: 1px solid #D9D9D9;
   background: ${readOnlyMode => readOnlyMode ? 'transparent' : '#FFF'};
+  box-sizing: border-box;
   ${({ readOnlyMode }) => readOnlyMode && css`
     color: #fff;
   `}

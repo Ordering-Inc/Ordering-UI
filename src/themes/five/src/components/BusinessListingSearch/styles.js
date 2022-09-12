@@ -14,6 +14,13 @@ export const BusinessListingSearchContainer = styled.div`
     margin-bottom: 10px;
     margin-top: 20px;
   }
+  
+  ${({ theme }) => theme?.layouts?.business_listing_search?.components?.layout?.type === 'pfchangs' && css`
+    p, h1, h2, h3 {
+      color: #fff;
+    }
+  `}
+  
 `
 
 export const FiltersContainer = styled.div`
@@ -67,6 +74,9 @@ export const ProgressBar = styled.div`
   height: 4px;
   border-radius: 50px;
   background: #344050;
+  ${({ theme }) => theme?.layouts?.business_listing_search?.components?.layout?.type === 'pfchangs' && css`
+    background: ${theme?.colors?.gold};
+  `}
 `
 
 export const MaxItemContainer = styled.div`
@@ -343,6 +353,12 @@ export const BrandContainer = styled.div`
     margin-top: 0px;
     margin-bottom: 10px;
   }
+
+  ${({ theme }) => theme?.layouts?.business_listing_search?.components?.layout?.type === 'pfchangs' && css`
+    span {
+      color: #fff;
+    }
+  `}
 `
 
 export const BrandListWrapper = styled.div`
@@ -410,6 +426,12 @@ export const PriceFilterListWrapper = styled.div`
         margin-left: 0px;
       `}
     }
+    ${({ theme }) => theme?.layouts?.business_listing_search?.components?.layout?.type === 'pfchangs' && css`
+      > button {
+        color: #000;
+      }
+  `}
+  
   }
 `
 

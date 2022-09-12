@@ -41,7 +41,11 @@ import {
   WalletPaymentOptionContainer,
   CartHeader,
   SelectSpotContainer,
-  WrapperActionsInput
+  WrapperActionsInput,
+  TitleContainer,
+  SubtitleContainer,
+  ItemHeader,
+  BusinessDetails
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -51,10 +55,13 @@ import { NotFoundSource } from '../NotFoundSource'
 
 import { AddressDetails } from '../AddressDetails'
 import { UserDetails } from '../UserDetails'
+import { UserDetails as UserDetailsPF } from '../UserDetails/layouts/pfchangs'
 import { PaymentOptions } from '../PaymentOptions'
 import { PaymentOptionWallet } from '../PaymentOptionWallet'
 import { DriverTips } from '../DriverTips'
 import { Cart } from '../Cart'
+import { Cart as CartPF } from '../Cart/layouts/pfchangs'
+
 import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
@@ -115,7 +122,7 @@ const CheckoutUI = (props) => {
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
   const isWalletCreditPointsEnabled = businessConfigs.find(config => config.key === 'wallet_credit_point_enabled')?.value === '1'
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp
-
+  const layout = theme?.layouts?.checkout?.components?.layout?.type
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
@@ -142,6 +149,17 @@ const CheckoutUI = (props) => {
       value: option?.id, content: t(option?.name.toUpperCase().replace(/\s/g, '_'), option?.name), showOnSelected: t(option?.name.toUpperCase().replace(/\s/g, '_'), option?.name)
     }
   })
+
+  const deliveryTipsAvailable = !cartState.loading && cart &&
+    cart?.business_id &&
+    options.type === 1 &&
+    cart?.status !== 2 &&
+    validationFields?.fields?.checkout?.driver_tip?.enabled &&
+    driverTipsOptions.length > 0 &&
+    !useKioskApp
+
+  const businessInformationLoading = (businessDetails?.loading || cartState.loading) && !businessDetails?.error
+  const businessInformationAvailable = !cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0
 
   const handlePlaceOrder = () => {
     if (!userErrors.length && !requiredFields?.length) {
@@ -245,21 +263,35 @@ const CheckoutUI = (props) => {
     handleStoreRedirect(cart?.business?.slug)
   }, [cart?.products])
 
+  const CartComponent = layout === 'pfchangs'
+    ? CartPF
+    : Cart
+
+  const UserDetailsComponent = layout === 'pfchangs'
+    ? UserDetailsPF
+    : UserDetails
+
   return (
     <Container>
       <WrapperLeftContainer>
         <WrapperLeftContent>
-          <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
-          {!cartState.loading && cart?.status === 2 && (
-            <WarningMessage>
-              <VscWarning />
-              <h1>
-                {t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page')}
-              </h1>
-            </WarningMessage>
+          <TitleContainer>
+            <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
+            {!cartState.loading && cart?.status === 2 && (
+              <WarningMessage>
+                <VscWarning />
+                <h1>
+                  {t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page')}
+                </h1>
+              </WarningMessage>
+            )}
+            <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
+          </TitleContainer>
+          {layout === 'pfchangs' && (
+            <SubtitleContainer>
+              <h2>{t('YOUR_INFORMATION', 'Your Information')}</h2>
+            </SubtitleContainer>
           )}
-          <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
-
           {!useKioskApp ? (
             <>
               {(businessDetails?.loading || cartState.loading) ? (
@@ -289,7 +321,7 @@ const CheckoutUI = (props) => {
                       <Skeleton height={35} style={{ marginBottom: '10px' }} />
                     </div>
                   ) : (
-                    <UserDetails
+                    <UserDetailsComponent
                       isUserDetailsEdit={isUserDetailsEdit}
                       cartStatus={cart?.status}
                       businessId={cart?.business_id}
@@ -301,43 +333,48 @@ const CheckoutUI = (props) => {
                       userId={isCustomerMode && customerState?.user?.id}
                       isSuccess={isSuccess}
                       isCheckout
+                      isEdit={layout === 'pfchangs'}
                     />
                   )}
                 </WrapperUserDetails>
               </UserDetailsContainer>
-              <BusinessDetailsContainer>
-                {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
-                  <div>
+              {layout !== 'pfchangs' && (
+                <BusinessDetailsContainer>
+                  {businessInformationLoading && (
                     <div>
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <div>
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      </div>
                     </div>
-                  </div>
-                )}
-                {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
-                  <div>
-                    <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                  )}
+                  {businessInformationAvailable && layout !== 'pfchangs' && (
                     <div>
-                      <p>{businessDetails?.business?.address}</p>
-                      <p>{businessDetails?.business?.name}</p>
-                      <p>{businessDetails?.business?.email}</p>
-                      <p>{businessDetails?.business?.cellphone}</p>
+                      <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                      <div>
+                        <p>{businessDetails?.business?.address}</p>
+                        <p>{businessDetails?.business?.name}</p>
+                        <p>{businessDetails?.business?.email}</p>
+                        <p>{businessDetails?.business?.cellphone}</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-                {businessDetails?.error && businessDetails?.error?.length > 0 && (
-                  <div>
-                    <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                    <NotFoundSource
-                      content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
-                    />
-                  </div>
-                )}
-              </BusinessDetailsContainer>
-              <CheckOutDivider />
+                  )}
+                  {businessDetails?.error && businessDetails?.error?.length > 0 && (
+                    <div>
+                      <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                      <NotFoundSource
+                        content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
+                      />
+                    </div>
+                  )}
+                </BusinessDetailsContainer>
+              )}
+              {layout !== 'pfchangs' && (
+                <CheckOutDivider />
+              )}
             </>
           ) : (
             <WrapperActionsInput>
@@ -364,47 +401,91 @@ const CheckoutUI = (props) => {
           {!useKioskApp && (
             <>
               {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
-                <DeliveryOptionsContainer>
-                  <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
-                  <Select
-                    defaultValue={deliveryOptionSelected}
-                    options={deliveryOptions}
-                    onChange={(val) => handleChangeDeliveryOption(val)}
-                  />
-                </DeliveryOptionsContainer>
+                <>
+                  {layout === 'pfchangs' && (
+                    <SubtitleContainer>
+                      <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
+                    </SubtitleContainer>
+                  )}
+                  <DeliveryOptionsContainer>
+                    {layout !== 'pfchangs' && (
+                      <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
+                    )}
+                    <Select
+                      defaultValue={deliveryOptionSelected}
+                      options={deliveryOptions}
+                      onChange={(val) => handleChangeDeliveryOption(val)}
+                    />
+                  </DeliveryOptionsContainer>
+                </>
               )}
-              <CheckOutDivider />
+              {layout !== 'pfchangs' && (
+                <CheckOutDivider />
+              )}
             </>
           )}
 
+          {
+            deliveryTipsAvailable &&
+            layout === 'pfchangs' && (
+              <>
+                <SubtitleContainer>
+                  <h2>{t('ADD_TIP', 'Add Tip')}</h2>
+                </SubtitleContainer>
+                <DriverTipContainer>
+                  <DriverTips
+                    businessId={cart?.business_id}
+                    driverTipsOptions={driverTipsOptions}
+                    isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                    driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                      ? cart?.driver_tip
+                      : cart?.driver_tip_rate}
+                    cart={cart}
+                    useOrderContext
+                    pfchangs
+                  />
+                </DriverTipContainer>
+              </>
+            )
+          }
+
           {!cartState.loading && cart && (
-            <PaymentMethodContainer>
-              <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
-              {!cartState.loading && cart?.status === 4 && (
-                <WarningMessage style={{ marginTop: 20 }}>
-                  <VscWarning />
-                  <h1>
-                    {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
-                  </h1>
-                </WarningMessage>
+            <>
+              {layout === 'pfchangs' && (
+                <SubtitleContainer>
+                  <h2>{t('PAYMENT_METHODS', 'Payment Methods')}</h2>
+                </SubtitleContainer>
               )}
-              <PaymentOptions
-                cart={cart}
-                useKioskApp={useKioskApp}
-                isDisabled={cart?.status === 2}
-                businessId={businessDetails?.business?.id}
-                isLoading={businessDetails.loading}
-                paymethods={businessDetails?.business?.paymethods}
-                onPaymentChange={handlePaymethodChange}
-                errorCash={errorCash}
-                setErrorCash={setErrorCash}
-                handleOrderRedirect={handleOrderRedirect}
-                isCustomerMode={isCustomerMode}
-                paySelected={paymethodSelected}
-                handlePlaceOrder={handlePlaceOrder}
-                onPlaceOrderClick={onPlaceOrderClick}
-              />
-            </PaymentMethodContainer>
+              <PaymentMethodContainer>
+                {layout !== 'pfchangs' && (
+                  <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+                )}
+                {!cartState.loading && cart?.status === 4 && (
+                  <WarningMessage style={{ marginTop: 20 }}>
+                    <VscWarning />
+                    <h1>
+                      {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
+                    </h1>
+                  </WarningMessage>
+                )}
+                <PaymentOptions
+                  cart={cart}
+                  useKioskApp={useKioskApp}
+                  isDisabled={cart?.status === 2}
+                  businessId={businessDetails?.business?.id}
+                  isLoading={businessDetails.loading}
+                  paymethods={businessDetails?.business?.paymethods}
+                  onPaymentChange={handlePaymethodChange}
+                  errorCash={errorCash}
+                  setErrorCash={setErrorCash}
+                  handleOrderRedirect={handleOrderRedirect}
+                  isCustomerMode={isCustomerMode}
+                  paySelected={paymethodSelected}
+                  handlePlaceOrder={handlePlaceOrder}
+                  onPlaceOrderClick={onPlaceOrderClick}
+                />
+              </PaymentMethodContainer>
+            </>
           )}
 
           {isWalletEnabled && !businessDetails?.loading && (
@@ -418,6 +499,27 @@ const CheckoutUI = (props) => {
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
+        {layout === 'pfchangs' && (
+          <>
+            {businessInformationLoading && (
+              <div>
+                <div>
+                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                </div>
+              </div>
+            )}
+            {businessInformationAvailable && (
+              <BusinessDetails>
+                <img src={businessDetails?.business?.header} />
+                <div>
+                  <h2>{businessDetails?.business?.name}</h2>
+                  <span onClick={() => cart?.business?.slug && handleGoToStore(cart?.business?.slug)}>{('GO_TO_BUSINESS', 'Go to business')}</span>
+                </div>
+              </BusinessDetails>
+            )}
+          </>
+        )}
         {!cartState.loading && placeSpotsEnabled && (
           <SelectSpotContainer>
             <PlaceSpot
@@ -431,15 +533,8 @@ const CheckoutUI = (props) => {
           </SelectSpotContainer>
         )}
         {
-          !cartState.loading &&
-          cart &&
-          cart?.business_id &&
-          options.type === 1 &&
-          cart?.status !== 2 &&
-          validationFields?.fields?.checkout?.driver_tip?.enabled &&
-          driverTipsOptions.length > 0 &&
-          !useKioskApp &&
-          (
+          deliveryTipsAvailable &&
+          layout !== 'pfchangs' && (
             <>
               <DriverTipContainer>
                 <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
@@ -463,11 +558,13 @@ const CheckoutUI = (props) => {
 
         {!cartState.loading && cart && (
           <CartContainer>
-            <CartHeader>
-              <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
-              <span onClick={() => cart?.business?.slug && handleGoToStore(cart?.business?.slug)}>{('ADD_PRODUCTS', 'Add products')}</span>
-            </CartHeader>
-            <Cart
+            {layout !== 'pfchangs' && (
+              <CartHeader>
+                <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
+                <span onClick={() => cart?.business?.slug && handleGoToStore(cart?.business?.slug)}>{('ADD_PRODUCTS', 'Add products')}</span>
+              </CartHeader>
+            )}
+            <CartComponent
               isCartPending={cart?.status === 2}
               cart={cart}
               useKioskApp={useKioskApp}
@@ -518,13 +615,13 @@ const CheckoutUI = (props) => {
         )} */}
 
         {options.type === 1 &&
-        validationFields?.fields?.checkout?.driver_tip?.enabled &&
-        validationFields?.fields?.checkout?.driver_tip?.required &&
-        (Number(cart?.driver_tip) <= 0) && (
-          <WarningText>
-            {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
-          </WarningText>
-        )}
+          validationFields?.fields?.checkout?.driver_tip?.enabled &&
+          validationFields?.fields?.checkout?.driver_tip?.required &&
+          (Number(cart?.driver_tip) <= 0) && (
+            <WarningText>
+              {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
+            </WarningText>
+          )}
       </WrapperRightContainer>
       <Alert
         title={t('CUSTOMER_DETAILS', 'Customer Details')}

@@ -13,6 +13,12 @@ export const PromotionsContainer = styled.div`
     width: 60%;
     padding: 0px;
   }
+
+  ${({ theme }) => theme?.layouts?.general?.components?.layout?.type === 'pfchangs' && css`
+    p, h1, h2, h3 {
+      color: #fff;
+    }
+  `}
 `
 
 export const PromotionTitle = styled.h1`

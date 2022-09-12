@@ -22,8 +22,9 @@ export const CheckoutAction = styled.div`
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
+  padding: 20px;
   box-sizing: border-box;
-
+  box-shadow: rgb(0 0 0 / 10%) 0px -1px 4px 0px;
   p {
     margin: 0;
     font-weight: 600;
@@ -105,8 +106,9 @@ export const OrderBill = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 10px 0px;
+  padding: 20px;
   background-color: ${isCheckout => isCheckout ? 'transparent' : '#FFF'};
+  box-sizing: border-box;
   table {
     width: 100%;
     font-size: 14px;
@@ -173,6 +175,8 @@ export const OrderBill = styled.div`
 export const CouponContainer = styled.div`
   width: 100%;
   margin: 0px;
+  padding: 0 20px;
+  box-sizing: border-box;
   input {
     flex: 1;
   }
@@ -211,6 +215,7 @@ export const Spinner = styled.div`
 
 export const CommentSection = styled.div`
   width: 100%;
+  box-sizing: border-box;
   h2 {
     font-size: 16px;
     color: #fff;
@@ -218,5 +223,13 @@ export const CommentSection = styled.div`
   textarea {
     width: 100%;
     height: 76px;
+  }
+`
+
+export const SelectedItemsTitle = styled.div`
+  padding: 0 20px;
+  margin: 10px 0px;
+  h2{ 
+    font-size: 18px;
   }
 `

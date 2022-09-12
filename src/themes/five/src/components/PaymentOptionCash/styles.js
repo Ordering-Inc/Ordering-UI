@@ -35,6 +35,9 @@ export const WrapperInput = styled.div`
     width: 100%;
     box-sizing: border-box;
     height: 44px;
+    ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+      color: #000;
+    `}
   }
 `
 

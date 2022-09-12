@@ -15,6 +15,9 @@ export const FormInput = styled.form`
     width: 100%;
     padding: 7px 0;
   }
+  ${({ isCheckout }) => isCheckout && css`
+    border: none;
+  `}
 `
 
 export const ActionsForm = styled.div`
@@ -117,6 +120,9 @@ export const LanguageSelectorWrapper = styled(InputGroup)`
   margin-bottom: 20px;
   width: 150px;
   padding: 0;
+  * {
+    color: #000 !important;
+  }
   > div {
     width: 100%;
     border-radius: 0;
@@ -203,6 +209,9 @@ export const UserInformationContainer = styled.div`
     cursor: pointer;
     text-decoration: underline;
   }
+  ${({ isCheckout }) => isCheckout && css`
+    padding: 0;
+  `}
 `
 
 export const PhoneContainer = styled.div`
@@ -250,6 +259,11 @@ export const FormContainer = styled.div`
       cursor: not-allowed;
     }
   }
+  ${({ isCheckout }) => isCheckout && css`
+    input {
+      color: #000 !important;
+    }
+  `}
   @media (min-width: 768px){
     flex-direction: row;
     justify-content: center;

@@ -4,6 +4,14 @@ export const AddressContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+    
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    padding: 30px 30px 10px 30px;
+    margin-bottom: 0;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
+    border-right: 1px solid #fff;
+  `}
 `
 
 export const Header = styled.div``
@@ -58,5 +66,9 @@ export const Text = styled.div`
       margin-right: 10px;
       margin-left: initial;
     `}
+    ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+        color: ${theme?.colors?.gold};
+        font-size: 16px!important;
+      `}
   }
 `

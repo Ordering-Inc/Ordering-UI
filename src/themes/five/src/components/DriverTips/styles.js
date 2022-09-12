@@ -116,6 +116,9 @@ export const DriverCustomContainer = styled.div`
       border-radius: 0;
       border: none;
     }
+    input {
+      color: #000;
+    }
 `
 
 export const WrapperContainer = styled.div`

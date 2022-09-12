@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import TiArrowSortedUp from '@meronex/icons/ti/TiArrowSortedUp'
 import { useOrder, useLanguage, useEvent, useUtils } from 'ordering-components'
 import {
@@ -9,7 +9,8 @@ import {
   BusinessInfo,
   BusinessTotal,
   BusinessActions,
-  PriceContainer
+  PriceContainer,
+  Divider
 } from './styles'
 import { Button } from '../../../../styles/Buttons'
 
@@ -32,7 +33,9 @@ export const BusinessItemAccordion = (props) => {
     checkoutButtonDisabled,
     isMultiCheckout,
     setActive,
-    setActiveState
+    setActiveState,
+    isCartPending,
+    handleClearProducts
   } = props
 
   const [orderState] = useOrder()
@@ -41,9 +44,12 @@ export const BusinessItemAccordion = (props) => {
   const [{ parsePrice }] = useUtils()
   const [setRotate, setRotateState] = useState('accordion__icon')
   const [cartProductUpdated, setCartProductUpdated] = useState(null)
+  const businessDelete = useRef(null)
 
   const toggleAccordion = (e) => {
-    if (isClosed || !isProducts) return
+    const isActionsClick = businessDelete.current?.contains(e?.target)
+
+    if (isClosed || !isProducts || isActionsClick) return
     setActiveState(setActive === '' ? 'active' : '')
     setRotateState(
       setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
@@ -126,7 +132,18 @@ export const BusinessItemAccordion = (props) => {
                   {(business?.cellphone || business?.phone) && (
                     <h3>{business?.cellphone || business?.phone}</h3>
                   )}
-                  <h4 onClick={(e) => handleGoToHome(e)}>{t('CHANGE_LOCATION', 'Change location')}</h4>
+                  <div>
+                    <h4 onClick={(e) => handleGoToHome(e)}>{t('CHANGE_LOCATION', 'Change location')}</h4>
+                    {!isClosed && !!isProducts && !isCartPending && (
+                      <h4
+                        ref={businessDelete}
+                        onClick={() => handleClearProducts()}
+                        className='clear-cart'
+                      >
+                        {t('CLEAR_CART', 'Clear cart')}
+                      </h4>
+                    )}
+                  </div>
                 </ContentInfo>
               </BusinessInfo>
               {isClosed && !isStore && (
@@ -151,6 +168,9 @@ export const BusinessItemAccordion = (props) => {
             </Accordion>
           )
         }
+        {setActive && !isCheckout && (
+          <Divider />
+        )}
         <AccordionContent
           style={{ minHeight: '0px', maxHeight: !setActive && '0px' }}
         >
@@ -161,6 +181,9 @@ export const BusinessItemAccordion = (props) => {
             <h4>{parsePrice(total)}</h4>
             <Button onClick={handleClickCheckout} color='primary'>{t('CHECKOUT', 'Checkout')}</Button>
           </PriceContainer>
+        )}
+        {!setActive && (
+          <Divider />
         )}
       </AccordionSection>
     </>

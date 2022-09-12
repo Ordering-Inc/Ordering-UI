@@ -22,7 +22,8 @@ import {
   IconContainer,
   CouponContainer,
   Spinner,
-  CommentSection
+  CommentSection,
+  SelectedItemsTitle
 } from './styles'
 import { verifyDecimals } from '../../../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
@@ -246,31 +247,39 @@ const CartUI = (props) => {
             setActiveState={setActiveState}
             setActive={setActive}
           >
-            {cart?.products?.length > 0 && cart?.products.map(product => (
-              <ProductItemAccordionPFChangs
-                key={product.code}
-                isCartPending={isCartPending}
-                isCartProduct
-                product={product}
-                isCheckout={isCheckout}
-                changeQuantity={changeQuantity}
-                getProductMax={getProductMax}
-                offsetDisabled={offsetDisabled}
-                onDeleteProduct={handleDeleteClick}
-                onEditProduct={handleEditProduct}
-                isStore={isStore}
-              />
-            ))}
+            <>
+              {cart?.products?.length > 0 && (
+                <>
+                  {!isCheckout && (
+                    <SelectedItemsTitle>
+                      <h2>{t('SELECTED_ITEMS', 'Selected Items')}</h2>
+                    </SelectedItemsTitle>
+                  )}
+                  {cart?.products.map(product => (
+                    <ProductItemAccordionPFChangs
+                      key={product.code}
+                      isCartPending={isCartPending}
+                      isCartProduct
+                      product={product}
+                      isCheckout={isCheckout}
+                      changeQuantity={changeQuantity}
+                      getProductMax={getProductMax}
+                      offsetDisabled={offsetDisabled}
+                      onDeleteProduct={handleDeleteClick}
+                      onEditProduct={handleEditProduct}
+                      isStore={isStore}
+                    />
+                  ))}
+                </>
+              )}
+            </>
             {!cart?.valid_products && (
               <NoValidProductMessage>
                 {t('REMOVE_NOT_AVAILABLE_CART_PRODUCTS', 'To continue with your checkout, please remove from your cart the products that are not available.')}
               </NoValidProductMessage>
             )}
             {setActive === 'active' && !isCheckout && (
-              <>
-                <UpsellingPage business={cart?.business} businessId={cart?.business_id} cartProducts={cart?.products} />
-                {!isStore && <Divider />}
-              </>
+              <UpsellingPage business={cart?.business} businessId={cart?.business_id} cartProducts={cart?.products} />
             )}
             {cart?.valid_products && isCheckout && (
               <OrderBill isCheckout={isCheckout}>
@@ -416,14 +425,6 @@ const CartUI = (props) => {
                     )}
                   </tbody>
                 </table>
-                {/* {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
-                  <CouponContainer>
-                    <CouponControl
-                      businessId={cart.business_id}
-                      price={cart.total}
-                    />
-                  </CouponContainer>
-                )} */}
                 <table className='total'>
                   <tbody>
                     <tr>
@@ -432,31 +433,6 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                {/* {cart?.status !== 2 && !hideCartComments && (
-                  <table className='comments'>
-                    <tbody>
-                      <tr>
-                        <td>{t('COMMENTS', 'Comments')}</td>
-                      </tr>
-                      <tr>
-                        <CommentContainer>
-                          <TextArea
-                            defaultValue={cart?.comment}
-                            placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
-                            onChange={(e) => handleChangeComment(e.target.value)}
-                          />
-                          {commentState?.loading && (
-                            <Spinner>
-                              <SpinnerLoader
-                                style={{ height: 100 }}
-                              />
-                            </Spinner>
-                          )}
-                        </CommentContainer>
-                      </tr>
-                    </tbody>
-                  </table>
-                )} */}
 
                 {cart?.payment_events?.length > 0 && (
                   <div

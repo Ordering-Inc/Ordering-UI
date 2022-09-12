@@ -78,6 +78,7 @@ const WalletsUI = (props) => {
                 onClick={() => handleChangeTab(wallet)}
                 borderBottom
                 className='tab_title'
+                activeColor={theme?.layouts?.general?.components?.layout?.type === 'pfchangs' ? theme?.colors?.gold : ''}
               >
                 {walletName[wallet.type]?.name}
               </Tab>

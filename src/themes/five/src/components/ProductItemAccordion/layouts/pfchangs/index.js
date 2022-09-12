@@ -54,7 +54,7 @@ export const ProductItemAccordion = (props) => {
   }
 
   return (
-    <AccordionSection readOnlyMode={readOnlyMode}>
+    <AccordionSection readOnlyMode={readOnlyMode} isCheckout={isCheckout}>
       <ProductInfo className='info'>
         <ContentInfo>
           <ProductTitle readOnlyMode={readOnlyMode}>

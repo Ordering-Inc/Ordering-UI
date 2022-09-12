@@ -23,7 +23,7 @@ export const HeaderItem = styled.div`
       font-size: 16px;
     }
   }
-  ${({ isCartButtonPF }) => isCartButtonPF && css`
+  ${({ theme }) => theme?.layouts?.header?.components?.cart?.components?.layout?.type === 'pfchangs' && css`
     button {
       margin-left: 20px;
       display: flex;
@@ -82,6 +82,16 @@ export const TitleContainer = styled.div`
       margin-right: 5px;
     }
   }
+
+  ${({ theme }) => theme?.layouts?.header?.components?.cart?.components?.layout?.type === 'pfchangs' && css`
+    justify-content: flex-end;
+    margin: 20px 20px 0 0;
+    svg{ 
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+  `}
 `
 
 export const CartLength = styled.span`
