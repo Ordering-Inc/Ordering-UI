@@ -38,6 +38,7 @@ import {
   BusinessWrapper,
   BusinessInfo,
   OrderInfo,
+  OrderIdSec,
   StatusBar,
   OrderCustomer,
   PhotoBlock,
@@ -61,6 +62,7 @@ import {
   HeaderTitle,
   PlaceSpotSection,
   BtsOrderStatus,
+  OrderStatusAndLinkContainer,
   LinkWrapper,
   MapWrapper,
   BusinessExternalWrapper
@@ -405,7 +407,7 @@ const OrderDetailsUI = (props) => {
           <WrapperLeftContainer>
             <OrderInfo>
               <TitleContainer>
-                <h1>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                <OrderIdSec>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</OrderIdSec>
                 {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
                   <Content className='order-content'>
                     <ShareOrder>
@@ -467,13 +469,7 @@ const OrderDetailsUI = (props) => {
               {showDeliveryProgress && (
                 <>
                   <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between'
-                    }}
-                  >
+                  <OrderStatusAndLinkContainer>
                     <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
                     <LinkWrapper>
                       <ReviewOrderLink
@@ -493,7 +489,7 @@ const OrderDetailsUI = (props) => {
                         <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
                       </ReviewOrderLink>
                     </LinkWrapper>
-                  </div>
+                  </OrderStatusAndLinkContainer>
                 </>
               )}
             </OrderInfo>
