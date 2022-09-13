@@ -549,6 +549,12 @@ Object.defineProperty(exports, "SearchBar", {
     return _SearchBar.SearchBar;
   }
 });
+Object.defineProperty(exports, "SearchProducts", {
+  enumerable: true,
+  get: function get() {
+    return _SearchProducts.SearchProducts;
+  }
+});
 Object.defineProperty(exports, "Select", {
   enumerable: true,
   get: function get() {
@@ -1019,6 +1025,8 @@ var _GoogleLogin = require("./components/GoogleLogin");
 var _SmsLogin = require("./components/SmsLogin");
 
 var _AppleLogin = require("./components/AppleLogin");
+
+var _SearchProducts = require("./components/RenderProductsLayout/SearchProducts");
 
 var _ThemeContext = require("./contexts/ThemeContext");
 

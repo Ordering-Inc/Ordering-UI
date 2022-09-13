@@ -9,7 +9,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = require("styled-components");
 
-var _theme_five = require("ordering-ui/theme_five");
+var _Buttons = require("../../styles/Buttons");
 
 var _orderingComponents = require("ordering-components");
 
@@ -84,14 +84,14 @@ var SignUpApproval = function SignUpApproval(props) {
   }, t('REQUEST_TO_START_UNDER_APPROVAL', 'Your request to start as a driver is under approval.'))), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('FEEL_FREE_CONTACT_US', 'feel free to contact us at '), " ", /*#__PURE__*/_react.default.createElement("a", {
     className: "green-text",
     href: "mailto:".concat(contactEmail)
-  }, contactEmail)))), /*#__PURE__*/_react.default.createElement(_styles.FooterSection, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroup, null, /*#__PURE__*/_react.default.createElement(_theme_five.Button, {
+  }, contactEmail)))), /*#__PURE__*/_react.default.createElement(_styles.FooterSection, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     type: "button",
     onClick: function onClick() {
       return onCancel();
     }
-  }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_theme_five.Button, {
+  }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "button",
     onClick: function onClick() {
