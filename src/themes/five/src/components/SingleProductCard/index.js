@@ -69,7 +69,7 @@ const SingleProductCardUI = (props) => {
 
   const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
 
-  const hideAddButton = orderingTheme?.theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden ?? true
+  const hideAddButton = theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden ?? true
   // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
   let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - totalBalance
