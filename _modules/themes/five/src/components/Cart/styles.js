@@ -67,7 +67,7 @@ var Spinner = _styledComponents.default.div(_templateObject10 || (_templateObjec
 
 exports.Spinner = Spinner;
 
-var CommentContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  .spinner-content > div{\n    width: 50px;\n    height: 50px;\n  }\n"])));
+var CommentContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  box-sizing: border-box;\n  .spinner-content > div{\n    width: 50px;\n    height: 50px;\n  }\n  textarea{\n    box-sizing: border-box;\n    color: #000;\n  }\n"])));
 
 exports.CommentContainer = CommentContainer;
 

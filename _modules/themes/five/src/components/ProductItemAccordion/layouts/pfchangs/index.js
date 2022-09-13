@@ -90,7 +90,8 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, {
-    readOnlyMode: readOnlyMode
+    readOnlyMode: readOnlyMode,
+    isCheckout: isCheckout
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTitle, {

@@ -179,10 +179,9 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
       onChange: function onChange() {
         return handleOnChange(idx, wallet);
       }
-    }), /*#__PURE__*/_react.default.createElement(_styles.SectionLeftText, null, /*#__PURE__*/_react.default.createElement("label", {
-      style: {
-        color: (cart === null || cart === void 0 ? void 0 : cart.balance) === 0 && !checkedState[idx] || wallet.balance === 0 ? theme.colors.darkGray : 'black'
-      },
+    }), /*#__PURE__*/_react.default.createElement(_styles.SectionLeftText, {
+      disabled: (cart === null || cart === void 0 ? void 0 : cart.balance) === 0 && !checkedState[idx] || wallet.balance === 0
+    }, /*#__PURE__*/_react.default.createElement("label", {
       htmlFor: "custom-checkbox-".concat(idx)
     }, (_walletName$wallet$ty3 = walletName[wallet.type]) === null || _walletName$wallet$ty3 === void 0 ? void 0 : _walletName$wallet$ty3.name))), /*#__PURE__*/_react.default.createElement("div", null, wallet.type === 'cash' && /*#__PURE__*/_react.default.createElement("span", null, parsePrice(wallet === null || wallet === void 0 ? void 0 : wallet.balance, {
       isTruncable: true

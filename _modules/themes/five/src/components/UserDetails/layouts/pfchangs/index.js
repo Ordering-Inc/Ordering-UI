@@ -31,7 +31,7 @@ var _Confirm = require("../../../Confirm");
 
 var _Modal = require("../../../Modal");
 
-var _UserFormDetails = require("../../../UserFormDetails");
+var _pfchangs = require("../../../UserFormDetails/layouts/pfchangs");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79,7 +79,8 @@ var UserDetailsUI = function UserDetailsUI(props) {
       verifyPhoneState = props.verifyPhoneState,
       requiredFields = props.requiredFields,
       setFormState = props.setFormState,
-      setIsSuccess = props.setIsSuccess;
+      setIsSuccess = props.setIsSuccess,
+      isCheckout = props.isCheckout;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -203,12 +204,18 @@ var UserDetailsUI = function UserDetailsUI(props) {
     onClick: function onClick() {
       return onClose();
     }
-  })), /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details'))), !requiredFields && /*#__PURE__*/_react.default.createElement(_styles.Header, {
+  })), /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details'))), !requiredFields && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "user-form"
-  }, !isModal && /*#__PURE__*/_react.default.createElement("h1", null, t('YOUR_INFORMATION', 'Your Information'))), !isEdit ? /*#__PURE__*/_react.default.createElement(_styles.UserData, null, ((userData === null || userData === void 0 ? void 0 : userData.name) || (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (userData === null || userData === void 0 ? void 0 : userData.lastname) || (userData === null || userData === void 0 ? void 0 : userData.second_lastname)) && /*#__PURE__*/_react.default.createElement(_styles.UserName, null, userData === null || userData === void 0 ? void 0 : userData.name, " ", userData === null || userData === void 0 ? void 0 : userData.middle_name, " ", userData === null || userData === void 0 ? void 0 : userData.lastname, " ", userData === null || userData === void 0 ? void 0 : userData.second_lastname), (userData === null || userData === void 0 ? void 0 : userData.email) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CountryFlag, null, (userData === null || userData === void 0 ? void 0 : userData.country_phone_code) && /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
+  }, !isModal && /*#__PURE__*/_react.default.createElement("h1", null, t('YOUR_INFORMATION', 'Your Information'))), !isEdit ? /*#__PURE__*/_react.default.createElement(_styles.UserData, {
+    isCheckout: isCheckout
+  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((userData === null || userData === void 0 ? void 0 : userData.name) || (userData === null || userData === void 0 ? void 0 : userData.middle_name) || (userData === null || userData === void 0 ? void 0 : userData.lastname) || (userData === null || userData === void 0 ? void 0 : userData.second_lastname)) && /*#__PURE__*/_react.default.createElement(_styles.UserName, null, userData === null || userData === void 0 ? void 0 : userData.name, " ", userData === null || userData === void 0 ? void 0 : userData.middle_name, " ", userData === null || userData === void 0 ? void 0 : userData.lastname, " ", userData === null || userData === void 0 ? void 0 : userData.second_lastname), /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return toggleEditState();
+    }
+  }, t('CHANGE', 'Change'))), (userData === null || userData === void 0 ? void 0 : userData.email) && /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.email), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (user === null || user === void 0 ? void 0 : user.cellphone)) && /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CountryFlag, null, (userData === null || userData === void 0 ? void 0 : userData.country_phone_code) && /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     onChange: function onChange() {},
     defaultCountry: (_parsePhoneNumber = (0, _libphonenumberJs.parsePhoneNumber)("+".concat(userData === null || userData === void 0 ? void 0 : (_userData$country_pho = userData.country_phone_code) === null || _userData$country_pho === void 0 ? void 0 : _userData$country_pho.replace('+', ''), " ").concat(userData === null || userData === void 0 ? void 0 : userData.cellphone))) === null || _parsePhoneNumber === void 0 ? void 0 : _parsePhoneNumber.country
-  })), /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.cellphone))) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+  })), /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.cellphone))) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_pfchangs.UserFormDetailsUI, _extends({}, props, {
     userData: userData,
     isCustomerMode: isCustomerMode,
     setWillVerifyOtpState: setWillVerifyOtpState

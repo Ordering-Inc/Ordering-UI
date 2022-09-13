@@ -22,7 +22,7 @@ var ProductsContainer = _styledComponents.default.div(_templateObject || (_templ
 }, function (_ref) {
   var pfchangs = _ref.pfchangs,
       theme = _ref.theme;
-  return pfchangs && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background: ", ";\n  "])), theme.colors.backgroundPage);
+  return pfchangs && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n    background: ", ";\n    margin: 0px;\n    padding: 0 20px;\n    box-sizing: border-box;\n  "])), theme.colors.backgroundPage);
 });
 
 exports.ProductsContainer = ProductsContainer;

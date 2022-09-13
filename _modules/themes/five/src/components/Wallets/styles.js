@@ -9,7 +9,7 @@ exports.WrapContent = exports.TransactionsWrapper = exports.Transactions = expor
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -45,17 +45,22 @@ var WrapContent = _styledComponents.default.div(_templateObject7 || (_templateOb
 
 exports.WrapContent = WrapContent;
 
-var Transactions = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  .transactions_list {\n    margin-top: 20px;\n\n    h2 {\n      text-align: center;\n    }\n  }\n\n  @media (min-width: 768px) {\n    width: 60%;\n    margin: ", ";\n\n    .transactions_list h2 {\n      text-align: left;\n    }\n  }\n"])), function (props) {
+var Transactions = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  .transactions_list {\n    margin-top: 20px;\n\n    h2 {\n      text-align: center;\n    }\n    ", "\n  }\n\n  @media (min-width: 768px) {\n    width: 60%;\n    margin: ", ";\n\n    .transactions_list h2 {\n      text-align: left;\n    }\n  }\n"])), function (_ref) {
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3;
+
+  var theme = _ref.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        color: #fff;\n    "])));
+}, function (props) {
   return props.isLoyaltyLevel ? 0 : '0 auto';
 });
 
 exports.Transactions = Transactions;
 
-var LoyaltyContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 20px;\n\n  @media (min-width: 768px) {\n    width: 38%;\n  }\n"])));
+var LoyaltyContent = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 20px;\n\n  @media (min-width: 768px) {\n    width: 38%;\n  }\n"])));
 
 exports.LoyaltyContent = LoyaltyContent;
 
-var LoyaltyWrapp = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n\n  img {\n    width: 100%;\n  }\n\n  span.loyalty_title {\n    font-size: 20px;\n  }\n\n  span.loyalty_name {\n    font-size: 25px;\n    font-weight: bold;\n    text-transform: uppercase;\n    color: ", "\n  }\n"])), function (props) {
+var LoyaltyWrapp = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n\n  img {\n    width: 100%;\n  }\n\n  span.loyalty_title {\n    font-size: 20px;\n  }\n\n  span.loyalty_name {\n    font-size: 25px;\n    font-weight: bold;\n    text-transform: uppercase;\n    color: ", "\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 

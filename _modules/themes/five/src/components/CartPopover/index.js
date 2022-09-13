@@ -183,12 +183,11 @@ var CartPopover = function CartPopover(props) {
     ref: referenceElement,
     onClick: props.onClick,
     name: "cart-popover",
-    isHideCartText: !showCartText,
-    isCartButtonPF: isCartButtonPF
+    isHideCartText: !showCartText
   }, isCartButtonPF ? /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     color: "primary",
     style: {
-      height: '46px'
+      height: '50px'
     }
   }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCartText && /*#__PURE__*/_react.default.createElement("p", null, t('CART', 'Cart')), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.CartLength, null, /*#__PURE__*/_react.default.createElement("p", null, ((_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length) > 9 ? '9+' : (_props$carts3 = props.carts) === null || _props$carts3 === void 0 ? void 0 : _props$carts3.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cartButtonIcon && /*#__PURE__*/_react.default.createElement("img", {
     alt: "cart-icon",
@@ -201,12 +200,15 @@ var CartPopover = function CartPopover(props) {
     onClose: props.onClose,
     hideCloseDefault: true,
     isSlideBar: true,
-    slideBarPosition: orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.header) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.cart) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.open_strategy) === null || _orderingTheme$theme6 === void 0 ? void 0 : _orderingTheme$theme6.position
-  }, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('MY_CART', 'My cart')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    slideBarPosition: orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.header) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.cart) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.open_strategy) === null || _orderingTheme$theme6 === void 0 ? void 0 : _orderingTheme$theme6.position,
+    padding: isCartButtonPF && '0'
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, isCartButtonPF ? /*#__PURE__*/_react.default.createElement(_AiOutlineClose.default, {
+    onClick: props.onClose
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('MY_CART', 'My cart')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     onClick: props.onClose
-  }, /*#__PURE__*/_react.default.createElement(_AiOutlineClose.default, null), " ", t('CLOSE', 'Close'))), /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineClose.default, null), " ", t('CLOSE', 'Close')))), /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
     isCartPopover: true,
     carts: props.carts,
     isOrderStateCarts: !!orderState.carts,

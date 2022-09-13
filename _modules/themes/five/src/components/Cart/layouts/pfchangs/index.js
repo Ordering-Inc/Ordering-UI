@@ -393,7 +393,7 @@ var CartUI = function CartUI(props) {
     isMultiCheckout: isMultiCheckout,
     setActiveState: setActiveState,
     setActive: setActive
-  }, (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
+  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.SelectedItemsTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SELECTED_ITEMS', 'Selected Items'))), cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_pfchangs2.ProductItemAccordion, {
       key: product.code,
       isCartPending: isCartPending,
@@ -407,11 +407,11 @@ var CartUI = function CartUI(props) {
       onEditProduct: handleEditProduct,
       isStore: isStore
     });
-  })), !(cart !== null && cart !== void 0 && cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.NoValidProductMessage, null, t('REMOVE_NOT_AVAILABLE_CART_PRODUCTS', 'To continue with your checkout, please remove from your cart the products that are not available.')), setActive === 'active' && !isCheckout && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_pfchangs5.UpsellingPage, {
+  }))), !(cart !== null && cart !== void 0 && cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.NoValidProductMessage, null, t('REMOVE_NOT_AVAILABLE_CART_PRODUCTS', 'To continue with your checkout, please remove from your cart the products that are not available.')), setActive === 'active' && !isCheckout && /*#__PURE__*/_react.default.createElement(_pfchangs5.UpsellingPage, {
     business: cart === null || cart === void 0 ? void 0 : cart.business,
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     cartProducts: cart === null || cart === void 0 ? void 0 : cart.products
-  }), !isStore && /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (cart === null || cart === void 0 ? void 0 : cart.valid_products) && isCheckout && /*#__PURE__*/_react.default.createElement(_styles.OrderBill, {
+  }), (cart === null || cart === void 0 ? void 0 : cart.valid_products) && isCheckout && /*#__PURE__*/_react.default.createElement(_styles.OrderBill, {
     isCheckout: isCheckout
   }, /*#__PURE__*/_react.default.createElement("table", {
     className: "order-info"

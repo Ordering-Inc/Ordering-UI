@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var AccordionSection = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 10px 0px;\n  background: #FFF;\n  border-bottom: 1px solid #D9D9D9;\n  background: ", ";\n  ", "\n"])), function (readOnlyMode) {
+var AccordionSection = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 20px;\n  background: #FFF;\n  border-bottom: 1px solid #D9D9D9;\n  background: ", ";\n  box-sizing: border-box;\n  ", "\n"])), function (readOnlyMode) {
   return readOnlyMode ? 'transparent' : '#FFF';
 }, function (_ref) {
   var readOnlyMode = _ref.readOnlyMode;

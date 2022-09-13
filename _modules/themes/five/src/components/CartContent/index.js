@@ -19,6 +19,8 @@ var _Cart = require("../Cart");
 
 var _pfchangs = require("../Cart/layouts/pfchangs");
 
+var _Buttons = require("../../styles/Buttons");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -44,7 +46,8 @@ var CartContent = function CartContent(props) {
       isForceOpenCart = props.isForceOpenCart,
       setPreorderBusiness = props.setPreorderBusiness,
       isOpenCart = props.isOpenCart,
-      isSlideBar = props.isSlideBar;
+      isSlideBar = props.isSlideBar,
+      onClose = props.onClose;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -95,13 +98,17 @@ var CartContent = function CartContent(props) {
       setPreorderBusiness: setPreorderBusiness,
       isOpenCart: isOpenCart
     }));
-  }), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0) && /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
+  }), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cartLayout === 'pfchangs' ? /*#__PURE__*/_react.default.createElement(_styles.NotCartsPFChangs, null, /*#__PURE__*/_react.default.createElement("h1", null, t('YOUR_CART_IS_EMPTY', 'Your cart is empty')), /*#__PURE__*/_react.default.createElement("h2", null, t('GET_STARTED_ADD_TASTY_FOOD', 'Get started and add some tasty food')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    onClick: onClose
+  }, t('BACK', 'Back'))) : /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
     alt: "Not Found",
     width: "200px",
     height: "122px",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement("h1", null, t('NO_PRODUCTS_TO_CART', 'You have no products added to the cart')))));
+  }), /*#__PURE__*/_react.default.createElement("h1", null, t('NO_PRODUCTS_TO_CART', 'You have no products added to the cart')))), (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && isSlideBar && /*#__PURE__*/_react.default.createElement(_styles.BackToMenuButton, {
+    onClick: onClose
+  }, /*#__PURE__*/_react.default.createElement("p", null, t('BACK_TO_MENU', 'Back to menu')))));
 };
 
 exports.CartContent = CartContent;

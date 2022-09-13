@@ -21,11 +21,11 @@ var SkeletonContainer = _styledComponents.default.div(_templateObject || (_templ
 
 exports.SkeletonContainer = SkeletonContainer;
 
-var VerticalUpsellingContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  max-height: 300px;\n  overflow-y: auto;\n  width: 100%;\n  margin-top: 20px;\n"])));
+var VerticalUpsellingContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  max-height: 300px;\n  overflow-y: auto;\n  width: 100%;\n  margin-top: 20px;\n  padding: 20px;\n  background: rgb(244, 245, 246);\n"])));
 
 exports.VerticalUpsellingContainer = VerticalUpsellingContainer;
 
-var HorizontalItem = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 99%;\n  display: flex;\n  justify-content: flex-start;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  margin-bottom: 10px;\n  padding-bottom: 0 !important;\n  @media (min-width: 768px){\n    justify-content: space-between;\n  }\n"])));
+var HorizontalItem = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 99%;\n  display: flex;\n  justify-content: flex-start;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  margin-bottom: 10px;\n  padding-bottom: 0 !important;\n  background: #fff;\n  @media (min-width: 768px){\n    justify-content: space-between;\n  }\n"])));
 
 exports.HorizontalItem = HorizontalItem;
 
@@ -52,6 +52,6 @@ var Divider = _styledComponents.default.div(_templateObject8 || (_templateObject
 
 exports.Divider = Divider;
 
-var ProductInfo = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  height: 100%;\n"])));
+var ProductInfo = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  height: 100%;\n  box-sizing: border-box;\n\n  p {\n    width: 100%;\n    text-overflow: ellipsis;\n    overflow-wrap: anywhere;\n  }\n"])));
 
 exports.ProductInfo = ProductInfo;

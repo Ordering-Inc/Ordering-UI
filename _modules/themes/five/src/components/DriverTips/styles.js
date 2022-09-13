@@ -61,7 +61,7 @@ var WrapperTips = _styledComponents.default.div(_templateObject9 || (_templateOb
 
 exports.WrapperTips = WrapperTips;
 
-var DriverCustomContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 20px;\n  width: 100%;\n  align-items: center;\n\n    button, input {\n      width: 50%;\n      height: 42px;\n      box-sizing: border-box;\n      border-radius: 0;\n      border: none;\n    }\n"])));
+var DriverCustomContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 20px;\n  width: 100%;\n  align-items: center;\n\n    button, input {\n      width: 50%;\n      height: 42px;\n      box-sizing: border-box;\n      border-radius: 0;\n      border: none;\n    }\n    input {\n      color: #000;\n    }\n"])));
 
 exports.DriverCustomContainer = DriverCustomContainer;
 

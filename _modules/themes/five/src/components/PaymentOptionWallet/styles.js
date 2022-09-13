@@ -31,7 +31,13 @@ var SectionLeft = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.SectionLeft = SectionLeft;
 
-var SectionLeftText = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-left: 10px;\n"])));
+var SectionLeftText = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-left: 10px;\n  label{ \n      color: ", ";\n    }\n"])), function (_ref) {
+  var _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3;
+
+  var disabled = _ref.disabled,
+      theme = _ref.theme;
+  return disabled ? theme.colors.darkGray : (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$checko = _theme$layouts.checkout) === null || _theme$layouts$checko === void 0 ? void 0 : (_theme$layouts$checko2 = _theme$layouts$checko.components) === null || _theme$layouts$checko2 === void 0 ? void 0 : (_theme$layouts$checko3 = _theme$layouts$checko2.layout) === null || _theme$layouts$checko3 === void 0 ? void 0 : _theme$layouts$checko3.type) === 'pfchangs' ? '#fff' : '#000';
+});
 
 exports.SectionLeftText = SectionLeftText;
 

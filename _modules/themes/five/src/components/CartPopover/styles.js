@@ -9,7 +9,7 @@ exports.TitleContainer = exports.Title = exports.PopoverBody = exports.PopoverAr
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -24,8 +24,10 @@ var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObje
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n        margin-right: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n      "])));
 }, function (_ref) {
-  var isCartButtonPF = _ref.isCartButtonPF;
-  return isCartButtonPF && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    button {\n      margin-left: 20px;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      img {\n        position: relative;\n        margin-left: ", ";\n        top: -2px;\n      }\n    }\n  "])), function (_ref2) {
+  var _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$layouts$header4, _theme$layouts$header5;
+
+  var theme = _ref.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$header = _theme$layouts.header) === null || _theme$layouts$header === void 0 ? void 0 : (_theme$layouts$header2 = _theme$layouts$header.components) === null || _theme$layouts$header2 === void 0 ? void 0 : (_theme$layouts$header3 = _theme$layouts$header2.cart) === null || _theme$layouts$header3 === void 0 ? void 0 : (_theme$layouts$header4 = _theme$layouts$header3.components) === null || _theme$layouts$header4 === void 0 ? void 0 : (_theme$layouts$header5 = _theme$layouts$header4.layout) === null || _theme$layouts$header5 === void 0 ? void 0 : _theme$layouts$header5.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    button {\n      margin-left: 20px;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      img {\n        position: relative;\n        margin-left: ", ";\n        top: -2px;\n      }\n    }\n  "])), function (_ref2) {
     var isHideCartText = _ref2.isHideCartText;
     return isHideCartText ? '0px' : '7px';
   });
@@ -47,10 +49,15 @@ var Title = _styledComponents.default.h1(_templateObject7 || (_templateObject7 =
 
 exports.Title = Title;
 
-var TitleContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  button {\n    display: flex;\n    align-items: center;\n    border-radius: 16px;\n    svg{\n      margin-right: 5px;\n    }\n  }\n"])));
+var TitleContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  button {\n    display: flex;\n    align-items: center;\n    border-radius: 16px;\n    svg{\n      margin-right: 5px;\n    }\n  }\n\n  ", "\n"])), function (_ref3) {
+  var _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts2$heade4, _theme$layouts2$heade5;
+
+  var theme = _ref3.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$heade = _theme$layouts2.header) === null || _theme$layouts2$heade === void 0 ? void 0 : (_theme$layouts2$heade2 = _theme$layouts2$heade.components) === null || _theme$layouts2$heade2 === void 0 ? void 0 : (_theme$layouts2$heade3 = _theme$layouts2$heade2.cart) === null || _theme$layouts2$heade3 === void 0 ? void 0 : (_theme$layouts2$heade4 = _theme$layouts2$heade3.components) === null || _theme$layouts2$heade4 === void 0 ? void 0 : (_theme$layouts2$heade5 = _theme$layouts2$heade4.layout) === null || _theme$layouts2$heade5 === void 0 ? void 0 : _theme$layouts2$heade5.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    justify-content: flex-end;\n    margin: 20px 20px 0 0;\n    svg{ \n      width: 24px;\n      height: 24px;\n      cursor: pointer;\n    }\n  "])));
+});
 
 exports.TitleContainer = TitleContainer;
 
-var CartLength = _styledComponents.default.span(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  color: #000;\n  background: #fff;\n  border-radius: 50%;\n  margin-left: 5px;\n  width: 20px;\n  height: 20px;\n  p{\n    margin: 0;\n    position: relative;\n    font-size: 12px;\n    bottom: 3px;\n  }\n"])));
+var CartLength = _styledComponents.default.span(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  color: #000;\n  background: #fff;\n  border-radius: 50%;\n  margin-left: 5px;\n  width: 20px;\n  height: 20px;\n  p{\n    margin: 0;\n    position: relative;\n    font-size: 12px;\n    bottom: 3px;\n  }\n"])));
 
 exports.CartLength = CartLength;

@@ -155,13 +155,16 @@ var MyOrders = function MyOrders(props) {
   }, MyOrdersMenu.filter(function (option) {
     return !hideOrders || option.key !== 'orders';
   }).map(function (option) {
+    var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _theme$colors3;
+
     return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, _extends({
       key: option.key,
       onClick: function onClick() {
         return setSelectedOption(option.key);
       },
       active: selectedOption === option.key,
-      borderBottom: true
+      borderBottom: true,
+      activeColor: (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.gold : ''
     }, pfchangsTabProps), option === null || option === void 0 ? void 0 : option.value);
   }))), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && !pfchangs && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

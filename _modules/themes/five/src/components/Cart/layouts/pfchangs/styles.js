@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SpotSelect = exports.Spinner = exports.SavedContainer = exports.OrderBill = exports.NoValidProductMessage = exports.IconContainer = exports.Exclamation = exports.Divider = exports.CouponContainer = exports.CommentSection = exports.CheckoutAction = exports.CartSticky = exports.CartContainer = void 0;
+exports.SpotSelect = exports.Spinner = exports.SelectedItemsTitle = exports.SavedContainer = exports.OrderBill = exports.NoValidProductMessage = exports.IconContainer = exports.Exclamation = exports.Divider = exports.CouponContainer = exports.CommentSection = exports.CheckoutAction = exports.CartSticky = exports.CartContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -30,7 +30,7 @@ var CartSticky = _styledComponents.default.div(_templateObject2 || (_templateObj
 
 exports.CartSticky = CartSticky;
 
-var CheckoutAction = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  box-sizing: border-box;\n\n  p {\n    margin: 0;\n    font-weight: 600;\n    font-size: 18px;\n    color: ", ";\n  }\n\n  button {\n    padding: 10px 30px;\n    min-width: 150px;\n    width: 50%;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n"])), function (props) {
+var CheckoutAction = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  padding: 20px;\n  box-sizing: border-box;\n  box-shadow: rgb(0 0 0 / 10%) 0px -1px 4px 0px;\n  p {\n    margin: 0;\n    font-weight: 600;\n    font-size: 18px;\n    color: ", ";\n  }\n\n  button {\n    padding: 10px 30px;\n    min-width: 150px;\n    width: 50%;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
@@ -77,7 +77,7 @@ var NoValidProductMessage = _styledComponents.default.p(_templateObject12 || (_t
 
 exports.NoValidProductMessage = NoValidProductMessage;
 
-var OrderBill = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  padding: 10px 0px;\n  background-color: ", ";\n  table {\n    width: 100%;\n    font-size: 14px;\n    color: #fff;\n    td span {\n      unicode-bidi: bidi-override;\n    }\n\n    tr td:nth-child(2) {\n      text-align: right;\n      ", "\n    }\n\n    .icon {\n      display: flex;\n      align-items: center;\n      max-height: 25px;\n    }\n  }\n  table.total {\n    border-top: 1px solid #EAEAEA;\n    padding-top: 10px;\n    tr {\n      td {\n        font-weight: bold;\n        color: #fff;\n        font-size: 16px;\n      }\n    }\n  }\n  table.comments {\n    margin-top: 20px;\n    tr {\n      padding: 0;\n      td:nth-child(1) {\n        padding: 0;\n        font-weight: bold;\n      }\n    }\n    textarea {\n      width: 100%;\n      box-sizing: border-box;\n      height: 77px;\n      padding-right: 60px;\n    }\n  }\n  table.spot {\n    tr {\n      td:nth-child(1) {\n        font-weight: bold;\n      }\n      td:nth-child(2) {\n        font-weight: bold;\n        color: ", ";\n        text-decoration: underline;\n        cursor: pointer;\n      }\n    }\n  }\n"])), function (isCheckout) {
+var OrderBill = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  padding: 20px;\n  background-color: ", ";\n  box-sizing: border-box;\n  table {\n    width: 100%;\n    font-size: 14px;\n    color: #fff;\n    td span {\n      unicode-bidi: bidi-override;\n    }\n\n    tr td:nth-child(2) {\n      text-align: right;\n      ", "\n    }\n\n    .icon {\n      display: flex;\n      align-items: center;\n      max-height: 25px;\n    }\n  }\n  table.total {\n    border-top: 1px solid #EAEAEA;\n    padding-top: 10px;\n    tr {\n      td {\n        font-weight: bold;\n        color: #fff;\n        font-size: 16px;\n      }\n    }\n  }\n  table.comments {\n    margin-top: 20px;\n    tr {\n      padding: 0;\n      td:nth-child(1) {\n        padding: 0;\n        font-weight: bold;\n      }\n    }\n    textarea {\n      width: 100%;\n      box-sizing: border-box;\n      height: 77px;\n      padding-right: 60px;\n    }\n  }\n  table.spot {\n    tr {\n      td:nth-child(1) {\n        font-weight: bold;\n      }\n      td:nth-child(2) {\n        font-weight: bold;\n        color: ", ";\n        text-decoration: underline;\n        cursor: pointer;\n      }\n    }\n  }\n"])), function (isCheckout) {
   return isCheckout ? 'transparent' : '#FFF';
 }, function (props) {
   var _props$theme5;
@@ -90,7 +90,7 @@ var OrderBill = _styledComponents.default.div(_templateObject13 || (_templateObj
 
 exports.OrderBill = OrderBill;
 
-var CouponContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px;\n  input {\n    flex: 1;\n  }\n\n  input, button {\n    border-radius: 0;\n    border: 0;\n    height: 44px;\n    box-sizing: border-box;\n  }\n\n"])));
+var CouponContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px;\n  padding: 0 20px;\n  box-sizing: border-box;\n  input {\n    flex: 1;\n  }\n\n  input, button {\n    border-radius: 0;\n    border: 0;\n    height: 44px;\n    box-sizing: border-box;\n  }\n\n"])));
 
 exports.CouponContainer = CouponContainer;
 
@@ -102,6 +102,10 @@ var Spinner = _styledComponents.default.div(_templateObject17 || (_templateObjec
 
 exports.Spinner = Spinner;
 
-var CommentSection = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  h2 {\n    font-size: 16px;\n    color: #fff;\n  }\n  textarea {\n    width: 100%;\n    height: 76px;\n  }\n"])));
+var CommentSection = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  h2 {\n    font-size: 16px;\n    color: #fff;\n  }\n  textarea {\n    width: 100%;\n    height: 76px;\n  }\n"])));
 
 exports.CommentSection = CommentSection;
+
+var SelectedItemsTitle = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  padding: 0 20px;\n  margin: 10px 0px;\n  h2{ \n    font-size: 18px;\n  }\n"])));
+
+exports.SelectedItemsTitle = SelectedItemsTitle;

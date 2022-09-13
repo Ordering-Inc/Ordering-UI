@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = require("styled-components");
 
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
 
 var _excluded = ["children"];
 
@@ -76,13 +76,18 @@ var ThemeProvider = function ThemeProvider(_ref) {
     }
   };
 
-  var GlobalStyle = (0, _styledComponents.createGlobalStyle)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    @media (min-width: 578px) {\n      /** Mozilla scrollbar*/\n      * {\n        scrollbar-color: #CCC !important;\n        scrollbar-width: thin !important;\n      }\n      /** Scrollbar for browser based on webkit */\n      ::-webkit-scrollbar {\n        width: 6px;\n        height: 0px;\n      }\n      ::-webkit-scrollbar-thumb {\n        background: #CCCCCC;\n      }\n      ::-webkit-scrollbar-thumb:hover {\n        background: #AFAFAF;\n      }\n      ::-webkit-scrollbar-thumb:active {\n        background: #6b6b6b;\n      }\n      ::-webkit-scrollbar-track {\n        background: rgba(204, 204, 204, 0.3);\n      }\n    }\n    body {\n      font-family: '", "', sans-serif;\n      margin: 0;\n      background-color: ", ";\n      color: ", ";\n      direction: ltr;\n      ", "\n      -webkit-overflow-scrolling: auto;\n    }\n    input, textarea, button {\n      font-family: inherit;\n    }\n    h1,p,span {\n      ", "\n    }\n    .popup-backdrop {\n      background-color: rgba(0, 0, 0, 0.4);\n      position: fixed;\n      top: 0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      z-index: 2000;\n    }\n    .popup-component {\n      background-color: rgba(0, 0, 0, 0.3);\n      display: flex;\n      justify-content: center;\n      align-items: center;\n    }\n  "])), ((_theme$fonts$primary = theme.fonts.primary) === null || _theme$fonts$primary === void 0 ? void 0 : _theme$fonts$primary.name) || 'Helvetica', theme.colors.backgroundPage, getThemeColor(), theme.rtl && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n        direction: rtl;\n      "]))), props.isDarkTextColor && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        color: ", "\n      "])), theme.colors.darkTextColor));
+  var GlobalStyle = (0, _styledComponents.createGlobalStyle)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    @media (min-width: 578px) {\n      /** Mozilla scrollbar*/\n      * {\n        scrollbar-color: #CCC !important;\n        scrollbar-width: thin !important;\n      }\n      /** Scrollbar for browser based on webkit */\n      ::-webkit-scrollbar {\n        width: 6px;\n        height: 0px;\n      }\n      ::-webkit-scrollbar-thumb {\n        background: #CCCCCC;\n      }\n      ::-webkit-scrollbar-thumb:hover {\n        background: #AFAFAF;\n      }\n      ::-webkit-scrollbar-thumb:active {\n        background: #6b6b6b;\n      }\n      ::-webkit-scrollbar-track {\n        background: rgba(204, 204, 204, 0.3);\n      }\n    }\n    body {\n      font-family: '", "', sans-serif;\n      margin: 0;\n      background-color: ", ";\n      color: ", ";\n      direction: ltr;\n      ", "\n      -webkit-overflow-scrolling: auto;\n      ", "\n    }\n    input, textarea, button {\n      font-family: inherit;\n    }\n    h1,p,span {\n      ", "\n    }\n    .popup-backdrop {\n      background-color: rgba(0, 0, 0, 0.4);\n      position: fixed;\n      top: 0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      z-index: 2000;\n    }\n    .popup-component {\n      background-color: rgba(0, 0, 0, 0.3);\n      display: flex;\n      justify-content: center;\n      align-items: center;\n    }\n  "])), ((_theme$fonts$primary = theme.fonts.primary) === null || _theme$fonts$primary === void 0 ? void 0 : _theme$fonts$primary.name) || 'Helvetica', theme.colors.backgroundPage, getThemeColor(), theme.rtl && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n        direction: rtl;\n      "]))), function (_ref2) {
+    var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _theme$layouts2, _theme$layouts2$homep, _theme$layouts2$homep2, _theme$layouts2$homep3, _theme$layouts2$homep4;
+
+    var theme = _ref2.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        background-image: url(", ");\n      "])), theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$homep = _theme$layouts2.homepage_view) === null || _theme$layouts2$homep === void 0 ? void 0 : (_theme$layouts2$homep2 = _theme$layouts2$homep.components) === null || _theme$layouts2$homep2 === void 0 ? void 0 : (_theme$layouts2$homep3 = _theme$layouts2$homep2.homepage_header) === null || _theme$layouts2$homep3 === void 0 ? void 0 : (_theme$layouts2$homep4 = _theme$layouts2$homep3.components) === null || _theme$layouts2$homep4 === void 0 ? void 0 : _theme$layouts2$homep4.image);
+  }, props.isDarkTextColor && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n        color: ", "\n      "])), theme.colors.darkTextColor));
   (0, _react.useEffect)(function () {
     var fonts = Object.entries(theme.fonts || {});
-    fonts.forEach(function (_ref2) {
-      var _ref3 = _slicedToArray(_ref2, 2),
-          name = _ref3[0],
-          fontFamily = _ref3[1];
+    fonts.forEach(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+          name = _ref4[0],
+          fontFamily = _ref4[1];
 
       if (!window.document.getElementById("".concat(name, "-font-styles"))) {
         var font = window.document.createElement('link');

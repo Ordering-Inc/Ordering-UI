@@ -53,7 +53,9 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       checkoutButtonDisabled = props.checkoutButtonDisabled,
       isMultiCheckout = props.isMultiCheckout,
       setActive = props.setActive,
-      setActiveState = props.setActiveState;
+      setActiveState = props.setActiveState,
+      isCartPending = props.isCartPending,
+      handleClearProducts = props.handleClearProducts;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -81,8 +83,13 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       cartProductUpdated = _useState4[0],
       setCartProductUpdated = _useState4[1];
 
+  var businessDelete = (0, _react.useRef)(null);
+
   var toggleAccordion = function toggleAccordion(e) {
-    if (isClosed || !isProducts) return;
+    var _businessDelete$curre;
+
+    var isActionsClick = (_businessDelete$curre = businessDelete.current) === null || _businessDelete$curre === void 0 ? void 0 : _businessDelete$curre.contains(e === null || e === void 0 ? void 0 : e.target);
+    if (isClosed || !isProducts || isActionsClick) return;
     setActiveState(setActive === '' ? 'active' : '');
     setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
   };
@@ -170,15 +177,21 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     onClick: function onClick(e) {
       return handleGoToStore(e, business === null || business === void 0 ? void 0 : business.slug);
     }
-  }, business === null || business === void 0 ? void 0 : business.name), ((business === null || business === void 0 ? void 0 : business.cellphone) || (business === null || business === void 0 ? void 0 : business.phone)) && /*#__PURE__*/_react.default.createElement("h3", null, (business === null || business === void 0 ? void 0 : business.cellphone) || (business === null || business === void 0 ? void 0 : business.phone)), /*#__PURE__*/_react.default.createElement("h4", {
+  }, business === null || business === void 0 ? void 0 : business.name), ((business === null || business === void 0 ? void 0 : business.cellphone) || (business === null || business === void 0 ? void 0 : business.phone)) && /*#__PURE__*/_react.default.createElement("h3", null, (business === null || business === void 0 ? void 0 : business.cellphone) || (business === null || business === void 0 ? void 0 : business.phone)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", {
     onClick: function onClick(e) {
       return handleGoToHome(e);
     }
-  }, t('CHANGE_LOCATION', 'Change location')))), isClosed && !isStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
+  }, t('CHANGE_LOCATION', 'Change location')), !isClosed && !!isProducts && !isCartPending && /*#__PURE__*/_react.default.createElement("h4", {
+    ref: businessDelete,
+    onClick: function onClick() {
+      return handleClearProducts();
+    },
+    className: "clear-cart"
+  }, t('CLEAR_CART', 'Clear cart'))))), isClosed && !isStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, {
     className: "closed"
   }, /*#__PURE__*/_react.default.createElement("p", null, t('CLOSED', 'Closed'), " ", moment)), !isClosed && !isProducts && !isStore && /*#__PURE__*/_react.default.createElement(_styles.BusinessTotal, null, /*#__PURE__*/_react.default.createElement("p", null, t('NO_PRODUCTS', 'No products'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessActions, null, !isClosed && !!isProducts && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_TiArrowSortedUp.default, {
     className: "".concat(setRotate)
-  })))), /*#__PURE__*/_react.default.createElement(_styles.AccordionContent, {
+  })))), setActive && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.AccordionContent, {
     style: {
       minHeight: '0px',
       maxHeight: !setActive && '0px'
@@ -186,7 +199,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   }, props.children), !setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && !isMultiCheckout && /*#__PURE__*/_react.default.createElement(_styles.PriceContainer, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleClickCheckout,
     color: "primary"
-  }, t('CHECKOUT', 'Checkout')))));
+  }, t('CHECKOUT', 'Checkout'))), !setActive && /*#__PURE__*/_react.default.createElement(_styles.Divider, null)));
 };
 
 exports.BusinessItemAccordion = BusinessItemAccordion;

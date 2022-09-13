@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -23,119 +23,129 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BusinessListingSearchContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  padding: 20px;\n  box-sizing: border-box;\n\n  h3{\n    font-size: 16px;\n    font-weight: 600;\n    margin-bottom: 10px;\n    margin-top: 20px;\n  }\n"])));
+var BusinessListingSearchContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  padding: 20px;\n  box-sizing: border-box;\n\n  h3{\n    font-size: 16px;\n    font-weight: 600;\n    margin-bottom: 10px;\n    margin-top: 20px;\n  }\n  \n  ", "\n  \n"])), function (_ref) {
+  var _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3;
+
+  var theme = _ref.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$busine = _theme$layouts.business_listing_search) === null || _theme$layouts$busine === void 0 ? void 0 : (_theme$layouts$busine2 = _theme$layouts$busine.components) === null || _theme$layouts$busine2 === void 0 ? void 0 : (_theme$layouts$busine3 = _theme$layouts$busine2.layout) === null || _theme$layouts$busine3 === void 0 ? void 0 : _theme$layouts$busine3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    p, h1, h2, h3 {\n      color: #fff;\n    }\n  "])));
+});
 
 exports.BusinessListingSearchContainer = BusinessListingSearchContainer;
 
-var FiltersContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  \n  flex-direction: column;\n  @media (min-width: 993px){\n    flex-direction: row;\n    display: flex;\n    width: 100%;\n  }\n"])));
+var FiltersContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  \n  flex-direction: column;\n  @media (min-width: 993px){\n    flex-direction: row;\n    display: flex;\n    width: 100%;\n  }\n"])));
 
 exports.FiltersContainer = FiltersContainer;
 
-var Filters = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 100%;\n  @media (min-width: 993px){\n    width: 25%;\n    max-width: 25%;\n    margin-right: 20px;\n  }\n"])));
+var Filters = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 100%;\n  @media (min-width: 993px){\n    width: 25%;\n    max-width: 25%;\n    margin-right: 20px;\n  }\n"])));
 
 exports.Filters = Filters;
 
-var FiltersResultContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 100%;\n  @media (min-width: 993px){\n    width: 75%;\n    max-width: 75%;\n  }\n"])));
+var FiltersResultContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 100%;\n  @media (min-width: 993px){\n    width: 75%;\n    max-width: 75%;\n  }\n"])));
 
 exports.FiltersResultContainer = FiltersResultContainer;
 
-var SortContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n\n"])));
+var SortContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n\n"])));
 
 exports.SortContainer = SortContainer;
 
-var MaxFilterContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n\n"])));
+var MaxFilterContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n\n"])));
 
 exports.MaxFilterContainer = MaxFilterContainer;
 
-var TagsContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n\n"])));
+var TagsContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n\n"])));
 
 exports.TagsContainer = TagsContainer;
 
-var ProgressContentWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 12px;\n  background: #F8F9FA;\n"])));
+var ProgressContentWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 12px;\n  background: #F8F9FA;\n"])));
 
 exports.ProgressContentWrapper = ProgressContentWrapper;
 
-var ProgressBar = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  height: 4px;\n  border-radius: 50px;\n  background: #344050;\n"])));
+var ProgressBar = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  height: 4px;\n  border-radius: 50px;\n  background: #344050;\n  ", "\n"])), function (_ref2) {
+  var _theme$layouts2, _theme$layouts2$busin, _theme$layouts2$busin2, _theme$layouts2$busin3, _theme$colors;
+
+  var theme = _ref2.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$busin = _theme$layouts2.business_listing_search) === null || _theme$layouts2$busin === void 0 ? void 0 : (_theme$layouts2$busin2 = _theme$layouts2$busin.components) === null || _theme$layouts2$busin2 === void 0 ? void 0 : (_theme$layouts2$busin3 = _theme$layouts2$busin2.layout) === null || _theme$layouts2$busin3 === void 0 ? void 0 : _theme$layouts2$busin3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    background: ", ";\n  "])), theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold);
+});
 
 exports.ProgressBar = ProgressBar;
 
-var MaxItemContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
+var MaxItemContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
 
 exports.MaxItemContainer = MaxItemContainer;
 
-var BusinessList = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  box-sizing: border-box;\n  align-items: center;\n  ", "\n  @media (min-width: 480px){\n    flex-direction: row;\n  }\n  #searchlist {\n    > div {\n      width: calc(100vw - 40px);\n      min-width: calc(100vw - 40px);\n\n      @media (min-width: 681px) {\n        width: calc(50vw - 40px);\n        min-width: calc(50vw - 40px);\n      }\n      @media (min-width: 993px) {\n        width: calc(33vw - 40px);\n        min-width: calc(33vw - 40px);\n      }\n      @media (min-width: 1200px) {\n        width: calc(25vw - 40px);\n        min-width: calc(25vw - 40px);\n      }\n    }\n  }\n"])), function (_ref) {
-  var noResults = _ref.noResults;
-  return noResults && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    justify-content: center;\n  "])));
+var BusinessList = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  box-sizing: border-box;\n  align-items: center;\n  ", "\n  @media (min-width: 480px){\n    flex-direction: row;\n  }\n  #searchlist {\n    > div {\n      width: calc(100vw - 40px);\n      min-width: calc(100vw - 40px);\n\n      @media (min-width: 681px) {\n        width: calc(50vw - 40px);\n        min-width: calc(50vw - 40px);\n      }\n      @media (min-width: 993px) {\n        width: calc(33vw - 40px);\n        min-width: calc(33vw - 40px);\n      }\n      @media (min-width: 1200px) {\n        width: calc(25vw - 40px);\n        min-width: calc(25vw - 40px);\n      }\n    }\n  }\n"])), function (_ref3) {
+  var noResults = _ref3.noResults;
+  return noResults && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    justify-content: center;\n  "])));
 });
 
 exports.BusinessList = BusinessList;
 
-var MaxItem = _styledComponents.default.p(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  margin-top: 0;\n  font-size: 14px;\n  font-weight: ", ";\n"])), function (_ref2) {
-  var active = _ref2.active;
+var MaxItem = _styledComponents.default.p(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  margin-top: 0;\n  font-size: 14px;\n  font-weight: ", ";\n"])), function (_ref4) {
+  var active = _ref4.active;
   return active ? '600' : '400';
 });
 
 exports.MaxItem = MaxItem;
 
-var SortItem = _styledComponents.default.p(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: ", ";\n"])), function (_ref3) {
-  var active = _ref3.active;
+var SortItem = _styledComponents.default.p(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: ", ";\n"])), function (_ref5) {
+  var active = _ref5.active;
   return active ? '600' : '400';
 });
 
 exports.SortItem = SortItem;
 
-var ProductsList = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n"])));
+var ProductsList = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n"])));
 
 exports.ProductsList = ProductsList;
 
-var BusinessInfo = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  button {\n    height: 25px;\n    font-size: 10px;\n    white-space: nowrap;\n    line-height: 0;\n    max-width: 80px;\n  }\n  @media (min-width: 380px){\n    button{\n      max-width: initial;\n    }\n  }\n  @media (min-width: 480px){\n    button {\n      line-height: 30px;\n      height: 44px;\n      overflow: initial;\n      font-size: 16px;\n    }\n  }\n"])));
+var BusinessInfo = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  button {\n    height: 25px;\n    font-size: 10px;\n    white-space: nowrap;\n    line-height: 0;\n    max-width: 80px;\n  }\n  @media (min-width: 380px){\n    button{\n      max-width: initial;\n    }\n  }\n  @media (min-width: 480px){\n    button {\n      line-height: 30px;\n      height: 44px;\n      overflow: initial;\n      font-size: 16px;\n    }\n  }\n"])));
 
 exports.BusinessInfo = BusinessInfo;
 
-var Metadata = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin-top: 5px;\n  display: flex;\n  font-weight: 300;\n  font-size: 10px;\n  color: #909BA9;\n  flex-wrap: wrap;\n  ", "\n  p {\n    color: #909BA9;\n    svg {\n      font-size: 7px;\n      min-width: 6px;\n      margin: 0 3px;\n    }\n\n    span {\n      margin-right: 10px;\n      ", "\n    }\n  }\n\n  @media (min-width: 481px) {\n    font-size: 14px;\n  }\n"])), function (_ref4) {
-  var isSkeleton = _ref4.isSkeleton;
-  return isSkeleton && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n  "])));
+var Metadata = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-top: 5px;\n  display: flex;\n  font-weight: 300;\n  font-size: 10px;\n  color: #909BA9;\n  flex-wrap: wrap;\n  ", "\n  p {\n    color: #909BA9;\n    svg {\n      font-size: 7px;\n      min-width: 6px;\n      margin: 0 3px;\n    }\n\n    span {\n      margin-right: 10px;\n      ", "\n    }\n  }\n\n  @media (min-width: 481px) {\n    font-size: 14px;\n  }\n"])), function (_ref6) {
+  var isSkeleton = _ref6.isSkeleton;
+  return isSkeleton && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n  "])));
 }, function (props) {
   var _props$theme;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
 });
 
 exports.Metadata = Metadata;
 
-var BusinessInfoItem = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  font-size: 12px;\n  margin-left: 10px;\n  div {\n    display: flex;\n    p {\n      margin-right: 5px;\n      ", "\n      text-transform: capitalize;\n      display: flex;\n      align-items: center;\n      margin: 0px;\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n    }\n    p.bold {\n      font-weight: bold;\n    }\n  }\n  @media (min-width: 480px) {\n    width: 100%;\n  }\n"])), function (props) {
+var BusinessInfoItem = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  font-size: 12px;\n  margin-left: 10px;\n  div {\n    display: flex;\n    p {\n      margin-right: 5px;\n      ", "\n      text-transform: capitalize;\n      display: flex;\n      align-items: center;\n      margin: 0px;\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n    }\n    p.bold {\n      font-weight: bold;\n    }\n  }\n  @media (min-width: 480px) {\n    width: 100%;\n  }\n"])), function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n        margin-left: 5px;\n        margin-right: 0;\n    "])));
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n        margin-left: 5px;\n        margin-right: 0;\n    "])));
 });
 
 exports.BusinessInfoItem = BusinessInfoItem;
 
-var SingleBusinessSearch = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  margin: 20px 0;\n"])));
+var SingleBusinessSearch = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  margin: 20px 0;\n"])));
 
 exports.SingleBusinessSearch = SingleBusinessSearch;
 
-var BusinessProductsListContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  box-sizing: border-box;\n\n  .product-card {\n    width: 270px;\n    max-width: 270px;\n  }\n\n  @media(min-width: 480px){\n    .product-card {\n      width: 400px;\n      max-width: 400px;\n    }\n  }\n"])));
+var BusinessProductsListContainer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  box-sizing: border-box;\n\n  .product-card {\n    width: 270px;\n    max-width: 270px;\n  }\n\n  @media(min-width: 480px){\n    .product-card {\n      width: 400px;\n      max-width: 400px;\n    }\n  }\n"])));
 
 exports.BusinessProductsListContainer = BusinessProductsListContainer;
 
-var BusinessListWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  overflow: scroll hidden;\n  width: 100%;\n"])));
+var BusinessListWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  overflow: scroll hidden;\n  width: 100%;\n"])));
 
 exports.BusinessListWrapper = BusinessListWrapper;
-var BusinessProductsListWrapper = (0, _styledComponents.default)(BusinessListWrapper)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral([""])));
+var BusinessProductsListWrapper = (0, _styledComponents.default)(BusinessListWrapper)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral([""])));
 exports.BusinessProductsListWrapper = BusinessProductsListWrapper;
 
-var BusinessControllerSkeleton = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  flex-direction: column;\n  > div {\n    flex: 1;\n  }\n  @media (min-width: 681px){\n    flex-direction: row;\n  }\n"])));
+var BusinessControllerSkeleton = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  flex-direction: column;\n  > div {\n    flex: 1;\n  }\n  @media (min-width: 681px){\n    flex-direction: row;\n  }\n"])));
 
 exports.BusinessControllerSkeleton = BusinessControllerSkeleton;
 
-var NotFoundWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  padding-top: 50px;\n"])));
+var NotFoundWrapper = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  padding-top: 50px;\n"])));
 
 exports.NotFoundWrapper = NotFoundWrapper;
 
-var BusinessLogoStyled = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 48px;\n  height: 48px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  min-height: 48px;\n  border-radius: 7.6px;\n\n  ", "\n\n  @media (min-width: 681px){\n    min-width: 75px;\n    min-height: 75px;\n    height: 75px;\n    width: 75px;\n    min-height: 75px;\n  }\n\n"])), function (_ref5) {
-  var isSkeleton = _ref5.isSkeleton;
-  return isSkeleton && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    span {\n      min-width: 45px;\n      min-height: 45px;\n      height: 45px;\n      width: 45px;\n      min-height: 45px;\n    }\n      @media (min-width: 681px){\n        span {\n          min-width: 75px;\n          min-height: 75px;\n          height: 75px;\n          width: 75px;\n          min-height: 75px;\n      }\n    }\n  "])));
+var BusinessLogoStyled = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 48px;\n  height: 48px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  min-height: 48px;\n  border-radius: 7.6px;\n\n  ", "\n\n  @media (min-width: 681px){\n    min-width: 75px;\n    min-height: 75px;\n    height: 75px;\n    width: 75px;\n    min-height: 75px;\n  }\n\n"])), function (_ref7) {
+  var isSkeleton = _ref7.isSkeleton;
+  return isSkeleton && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    span {\n      min-width: 45px;\n      min-height: 45px;\n      height: 45px;\n      width: 45px;\n      min-height: 45px;\n    }\n      @media (min-width: 681px){\n        span {\n          min-width: 75px;\n          min-height: 75px;\n          height: 75px;\n          width: 75px;\n          min-height: 75px;\n      }\n    }\n  "])));
 });
 
 var BusinessLogo = function BusinessLogo(props) {
@@ -152,13 +162,13 @@ var BusinessLogo = function BusinessLogo(props) {
 
 exports.BusinessLogo = BusinessLogo;
 
-var BusinessName = _styledComponents.default.h6(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  font-weight: 500;\n  margin-block-start: 0;\n  margin-block-end: 0;\n  color: ", ";\n  @media (min-width: 681px){\n    font-size: 16px;\n  }\n"])), function (props) {
+var BusinessName = _styledComponents.default.h6(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  font-weight: 500;\n  margin-block-start: 0;\n  margin-block-end: 0;\n  color: ", ";\n  @media (min-width: 681px){\n    font-size: 16px;\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
 exports.BusinessName = BusinessName;
 
-var BusinessesTitle = _styledComponents.default.h1(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  margin-bottom: 20px;\n"])), function (props) {
+var BusinessesTitle = _styledComponents.default.h1(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  margin-bottom: 20px;\n"])), function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.headingColor;
@@ -166,15 +176,20 @@ var BusinessesTitle = _styledComponents.default.h1(_templateObject31 || (_templa
 
 exports.BusinessesTitle = BusinessesTitle;
 
-var BrandContainer = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  > h3 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin-top: 0px;\n    margin-bottom: 10px;\n  }\n"])));
+var BrandContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  > h3 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin-top: 0px;\n    margin-bottom: 10px;\n  }\n\n  ", "\n"])), function (_ref8) {
+  var _theme$layouts3, _theme$layouts3$busin, _theme$layouts3$busin2, _theme$layouts3$busin3;
+
+  var theme = _ref8.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$busin = _theme$layouts3.business_listing_search) === null || _theme$layouts3$busin === void 0 ? void 0 : (_theme$layouts3$busin2 = _theme$layouts3$busin.components) === null || _theme$layouts3$busin2 === void 0 ? void 0 : (_theme$layouts3$busin3 = _theme$layouts3$busin2.layout) === null || _theme$layouts3$busin3 === void 0 ? void 0 : _theme$layouts3$busin3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    span {\n      color: #fff;\n    }\n  "])));
+});
 
 exports.BrandContainer = BrandContainer;
 
-var BrandListWrapper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  max-height: 300px;\n  overflow: auto;\n"])));
+var BrandListWrapper = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  max-height: 300px;\n  overflow: auto;\n"])));
 
 exports.BrandListWrapper = BrandListWrapper;
 
-var BrandItem = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  cursor: pointer;\n  margin-bottom: 8px;\n\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    transition: all 0.3s linear;\n  }\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n  }\n  &:hover {\n    span {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var BrandItem = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  cursor: pointer;\n  margin-bottom: 8px;\n\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    transition: all 0.3s linear;\n  }\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n  }\n  &:hover {\n    span {\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.success500;
 }, function (props) {
   return props.theme.colors.secundaryContrast;
@@ -182,22 +197,27 @@ var BrandItem = _styledComponents.default.div(_templateObject34 || (_templateObj
 
 exports.BrandItem = BrandItem;
 
-var NoResult = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  text-align: center;\n"])));
+var NoResult = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  text-align: center;\n"])));
 
 exports.NoResult = NoResult;
 
-var PriceFilterWrapper = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral([""])));
+var PriceFilterWrapper = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral([""])));
 
 exports.PriceFilterWrapper = PriceFilterWrapper;
 
-var PriceFilterListWrapper = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  width: calc(100% + 10px);\n  margin-left: -5px;\n  ", "\n\n  > button {\n    border-radius: 50px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 12px;\n    line-height: 24px;\n    margin: 5px;\n\n    svg {\n      margin-left: 5px;\n      font-size: 12px;\n      ", "\n    }\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: -5px;\n  "])));
+var PriceFilterListWrapper = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  width: calc(100% + 10px);\n  margin-left: -5px;\n  ", "\n\n  > button {\n    border-radius: 50px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 12px;\n    line-height: 24px;\n    margin: 5px;\n\n    svg {\n      margin-left: 5px;\n      font-size: 12px;\n      ", "\n    }\n    ", "\n  \n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: -5px;\n  "])));
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n        margin-right: 5px;\n        margin-left: 0px;\n      "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n        margin-right: 5px;\n        margin-left: 0px;\n      "])));
+}, function (_ref9) {
+  var _theme$layouts4, _theme$layouts4$busin, _theme$layouts4$busin2, _theme$layouts4$busin3;
+
+  var theme = _ref9.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts4 = theme.layouts) === null || _theme$layouts4 === void 0 ? void 0 : (_theme$layouts4$busin = _theme$layouts4.business_listing_search) === null || _theme$layouts4$busin === void 0 ? void 0 : (_theme$layouts4$busin2 = _theme$layouts4$busin.components) === null || _theme$layouts4$busin2 === void 0 ? void 0 : (_theme$layouts4$busin3 = _theme$layouts4$busin2.layout) === null || _theme$layouts4$busin3 === void 0 ? void 0 : _theme$layouts4$busin3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n      > button {\n        color: #000;\n      }\n  "])));
 });
 
 exports.PriceFilterListWrapper = PriceFilterListWrapper;
 
-var PreviouslyOrderedContainer = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n\n"])));
+var PreviouslyOrderedContainer = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n\n"])));
 
 exports.PreviouslyOrderedContainer = PreviouslyOrderedContainer;

@@ -370,7 +370,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     isCheckout: isCheckout
-  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("h2", null, t('CONTACT_INFORMATION', 'Contact information'))), !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, editEnabled ? /*#__PURE__*/_react.default.createElement(_styles.FormContainer, null, (0, _utils.sortInputFields)({
+  }, !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("h2", null, t('CONTACT_INFORMATION', 'Contact information'))), !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, editEnabled ? /*#__PURE__*/_react.default.createElement(_styles.FormContainer, {
+    isCheckout: isCheckout
+  }, (0, _utils.sortInputFields)({
     values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout
   }).map(function (field) {
     var _ref2, _formState$changes$fi, _ref3, _formState$changes$fi2;
@@ -427,7 +429,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  })), showLangauges && !requiredFields && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  })), showLangauges && !requiredFields && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, {
+    isCheckout: isCheckout
+  }, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     outline: true,
     type: "button",
     onClick: function onClick() {
@@ -439,7 +443,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     color: "primary",
     type: "submit",
     disabled: formState.loading
-  }, formState.loading ? t('UPDATING', 'Updating...') : t('SUBMIT', 'Submit')))) : /*#__PURE__*/_react.default.createElement(_styles.UserInformationContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Info, null, /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email), /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CountryFlag, null, (user === null || user === void 0 ? void 0 : user.country_phone_code) && /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
+  }, formState.loading ? t('UPDATING', 'Updating...') : t('SUBMIT', 'Submit')))) : /*#__PURE__*/_react.default.createElement(_styles.UserInformationContainer, {
+    isCheckout: isCheckout
+  }, /*#__PURE__*/_react.default.createElement(_styles.Info, null, /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email), /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CountryFlag, null, (user === null || user === void 0 ? void 0 : user.country_phone_code) && /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     onChange: function onChange() {},
     defaultCountry: (_parsePhoneNumber = (0, _libphonenumberJs.default)("+".concat(user === null || user === void 0 ? void 0 : (_user$country_phone_c = user.country_phone_code) === null || _user$country_phone_c === void 0 ? void 0 : _user$country_phone_c.replace('+', ''), " ").concat(user === null || user === void 0 ? void 0 : user.cellphone))) === null || _parsePhoneNumber === void 0 ? void 0 : _parsePhoneNumber.country
   })), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone)), /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", {

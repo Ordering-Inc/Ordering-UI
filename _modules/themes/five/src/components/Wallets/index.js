@@ -110,7 +110,7 @@ var WalletsUI = function WalletsUI(props) {
     variant: "primary",
     className: "tabs"
   }, (_walletList$wallets4 = walletList.wallets) === null || _walletList$wallets4 === void 0 ? void 0 : _walletList$wallets4.map(function (wallet) {
-    var _walletName$wallet$ty, _walletName$wallet$ty2;
+    var _walletName$wallet$ty, _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _theme$colors, _walletName$wallet$ty2;
 
     return ((_walletName$wallet$ty = walletName[wallet.type]) === null || _walletName$wallet$ty === void 0 ? void 0 : _walletName$wallet$ty.isActive) && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       key: wallet.id,
@@ -119,7 +119,8 @@ var WalletsUI = function WalletsUI(props) {
         return handleChangeTab(wallet);
       },
       borderBottom: true,
-      className: "tab_title"
+      className: "tab_title",
+      activeColor: (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold : ''
     }, (_walletName$wallet$ty2 = walletName[wallet.type]) === null || _walletName$wallet$ty2 === void 0 ? void 0 : _walletName$wallet$ty2.name);
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(_styles.Transactions, {
     isLoyaltyLevel: !!loyaltyLevel
