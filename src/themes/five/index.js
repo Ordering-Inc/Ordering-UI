@@ -96,6 +96,11 @@ import { ReviewTrigger } from './src/components/ReviewTrigger'
 import { ReviewOrder } from './src/components/ReviewOrder'
 import { ReviewDriver } from './src/components/ReviewDriver'
 import { ReviewProduct } from './src/components/ReviewProduct'
+import { ServiceForm } from './src/components/ServiceForm'
+import { ProfessionalFilter } from './src/components/ProfessionalFilter'
+import { SearchProducts } from './src/components/SearchProducts'
+import { MultiCartsPaymethodsAndWallets } from './src/components/MultiCartsPaymethodsAndWallets'
+import { ProfessionalProfile } from './src/components/ProfessionalProfile'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -201,6 +206,11 @@ export {
   ReviewOrder,
   ReviewDriver,
   ReviewProduct,
+  ServiceForm,
+  ProfessionalFilter,
+  SearchProducts,
+  MultiCartsPaymethodsAndWallets,
+  ProfessionalProfile,
 
   // styles
   Button,
