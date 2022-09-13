@@ -92,6 +92,7 @@ import { VerticalOrdersLayout } from './components/VerticalOrdersLayout'
 import { GoogleLoginButton } from './components/GoogleLogin'
 import { SmsLoginButton } from './components/SmsLogin'
 import { AppleLogin } from './components/AppleLogin'
+import { SearchProducts } from './components/RenderProductsLayout/SearchProducts'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
@@ -112,7 +113,20 @@ import {
   scrollTo,
   bytesConverter,
   formatSeconds,
-  verifyDecimals
+  verifyDecimals,
+  getDistance,
+  checkSiteUrl,
+  convertToRadian,
+  fieldsToSort,
+  flatArray,
+  formatUrlVideo,
+  getGoogleMapImage,
+  getHourMin,
+  getIconCard,
+  getTraduction,
+  priceList,
+  reviewCommentList,
+  shape
 } from './utils'
 
 export {
@@ -197,6 +211,7 @@ export {
   ReviewDriver,
   RenderProductsLayout,
   SearchBar,
+  SearchProducts,
   SignUpForm,
   SingleProductCard,
   SmartAppBanner,
@@ -244,5 +259,18 @@ export {
   scrollTo,
   bytesConverter,
   formatSeconds,
-  verifyDecimals
+  verifyDecimals,
+  getDistance,
+  checkSiteUrl,
+  convertToRadian,
+  fieldsToSort,
+  flatArray,
+  formatUrlVideo,
+  getGoogleMapImage,
+  getHourMin,
+  getIconCard,
+  getTraduction,
+  priceList,
+  reviewCommentList,
+  shape
 }

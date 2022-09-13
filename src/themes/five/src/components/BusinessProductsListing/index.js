@@ -111,7 +111,7 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const onProductClick = (product) => {
-    if (!((product?.type === 'service') && professionalSelected)) {
+    if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
       if (site?.product_url_template) {
         onProductRedirect({
           slug: business?.slug,
@@ -414,7 +414,7 @@ const BusinessProductsListingUI = (props) => {
         )}
         {(productModal.product || curProduct) && (
           <>
-            {(((productModal?.product?.type === 'service') || (curProduct?.type === 'service')) && professionalSelected) ? (
+            {(((productModal?.product?.type === 'service') || (curProduct?.type === 'service')) && business?.professionals?.length > 0) ? (
               <ServiceForm
                 businessSlug={business?.slug}
                 useKioskApp={props.useKioskApp}

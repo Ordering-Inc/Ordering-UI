@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  padding-top: 30px;
+  padding-top: 5px;
   margin-right: 30px;
   ${props => props.theme.rtl && css`
     margin-left: 30px;
@@ -15,7 +15,7 @@ export const Container = styled.div`
 `
 
 export const ContentHeader = styled.div`
-  margin-bottom: 27px;
+  margin-bottom: 15px;
 
   > h2 {
     font-weight: 600;
