@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
+import { useTheme } from 'styled-components'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import { CategoriesContainer } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -14,10 +16,13 @@ const BusinessProductsCategoriesUI = (props) => {
     openBusinessInformation,
     business,
     handlerClickCategory,
-    categorySelected
+    categorySelected,
+    useKioskApp
   } = props
 
+  const theme = useTheme()
   const [selectedCategory, setSelectedCateogry] = useState({ id: null })
+  const { width } = useWindowSize()
   const scrollTopSpan = 60
 
   const handleChangeCategory = (category) => {
@@ -69,12 +74,14 @@ const BusinessProductsCategoriesUI = (props) => {
 
     const _diff = -50
     const _moveDiff = 30
+    const _paddDiff = scrollTopSpan + 10
 
     _categories?.length && _categories.some(category => {
       const topPos = category?.id ? document.getElementById(`category${category.id}`)?.offsetTop
         : document.getElementById('businessProductList')?.offsetTop
-
-      if (topPos - windowTop < scrollTopSpan + 5 && topPos - windowTop > 0 && category?.id) {
+      const HeightOfEle = category?.id ? document.getElementById(`category${category.id}`)?.clientHeight : 0
+      if ((windowTop > topPos - _paddDiff && windowTop < topPos + HeightOfEle - _paddDiff) &&
+        category?.id) {
         const choosedCategory = document.getElementById(`category-menu${category?.id || '-all'}`)
         const choosedCategoryLeft = choosedCategory?.offsetLeft || 0
 
@@ -112,18 +119,20 @@ const BusinessProductsCategoriesUI = (props) => {
   }
 
   useEffect(() => {
+    if (typeof useKioskApp === 'undefined') return
     const styleSheet = document.getElementById('styles').sheet
 
     let style0 = '.sticky-prod-cat {'
     style0 += 'position: fixed !important;'
-    style0 += 'top: 0 !important;'
-    style0 += 'width: 97% !important;'
-    style0 += 'padding: 15px 5px 0px 0px;'
+    style0 += 'top: 0px !important;'
+    style0 += 'left: 0px !important;'
+    style0 += 'padding: 5px 5px 0px 5px !important;'
+    style0 += `width: calc(100% - ${useKioskApp ? '50px' : '155px'}) !important;`
     style0 += '}'
 
     let style1 = '.sticky-prod-cart {'
     style1 += 'position: fixed !important;'
-    style1 += 'top: 0 !important;'
+    style1 += 'top: 38px !important;'
     style1 += 'right: 2.5% !important;'
     style1 += 'width: 28.5% !important;'
     style1 += 'margin-top: 32px !important;'
@@ -131,10 +140,11 @@ const BusinessProductsCategoriesUI = (props) => {
 
     let style2 = '.sticky-search {'
     style2 += 'position: fixed !important;'
-    style2 += 'top: 10px !important;'
-    style2 += 'right: 32% !important;'
-    style2 += 'height: 50px !important;'
+    style2 += 'top: 0px !important;'
+    style2 += 'right: 0% !important;'
     style2 += 'z-index: 9999 !important;'
+    style2 += 'width: 50px !important;'
+    style2 += `background-color: ${theme.colors.backgroundPage} !important;`
     style2 += '}'
 
     styleSheet.insertRule(style0, 0)
@@ -143,7 +153,7 @@ const BusinessProductsCategoriesUI = (props) => {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [useKioskApp])
 
   return (
     <>

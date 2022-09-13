@@ -14,6 +14,7 @@ import { TaxInformation } from '../TaxInformation'
 import { TextArea } from '../../styles/Inputs'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { CartStoresListing } from '../../../../franchise/src/components/CartStoresListing'
+import { DriverTips } from '../DriverTips'
 import {
   CartContainer,
   OrderBill,
@@ -24,7 +25,8 @@ import {
   Spinner,
   CommentContainer,
   IconContainer,
-  NoValidProductMessage
+  NoValidProductMessage,
+  DriverTipContainer
 } from './styles'
 import { verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
@@ -67,6 +69,10 @@ const CartUI = (props) => {
   const [{ site }] = useSite()
   const windowSize = useWindowSize()
 
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
+
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState({})
@@ -80,7 +86,7 @@ const CartUI = (props) => {
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
-  const openCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum) || null) || []
+  const openCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && !cart?.wallets) || null) || []
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
@@ -402,7 +408,7 @@ const CartUI = (props) => {
                     )}
                   </tbody>
                 </table>
-                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover) && !(isCheckout && isCartPopover)) && (
+                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && (
                   <CouponContainer>
                     <CouponControl
                       businessId={cart.business_id}
@@ -410,6 +416,35 @@ const CartUI = (props) => {
                     />
                   </CouponContainer>
                 )}
+                {
+                  isMultiCheckout &&
+                  cart &&
+                  cart?.business_id &&
+                  orderState?.options?.type === 1 &&
+                  cart?.status !== 2 &&
+                  validationFields?.fields?.checkout?.driver_tip?.enabled &&
+                  driverTipsOptions.length > 0 &&
+                  !useKioskApp &&
+                  (
+                    <>
+                      <DriverTipContainer>
+                        <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                        <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                        <DriverTips
+                          businessId={cart?.business_id}
+                          driverTipsOptions={driverTipsOptions}
+                          isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                          isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                          driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                            ? cart?.driver_tip
+                            : cart?.driver_tip_rate}
+                          cart={cart}
+                          useOrderContext
+                        />
+                      </DriverTipContainer>
+                    </>
+                  )
+                }
                 <table className='total'>
                   <tbody>
                     <tr>

@@ -82,7 +82,7 @@ export const BusinessBasicInformation = (props) => {
   const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
   const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
   const isInfoShrunken = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
-  const showCity = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
+  const hideCity = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
@@ -121,9 +121,33 @@ export const BusinessBasicInformation = (props) => {
     document.body.style.overflowY = openSearchProducts ? 'hidden' : 'auto'
   }, [openSearchProducts])
 
+  const handleScroll = () => {
+    const searchElement = document.getElementById('search-component')
+    if (!searchElement) return
+    const limit = window.pageYOffset >= searchElement?.offsetTop && window.pageYOffset > 0
+    if (limit) {
+      const classAdded = searchElement.classList.contains('fixed-search')
+      !classAdded && searchElement.classList.add('fixed-search')
+    } else {
+      searchElement && searchElement.classList.remove('fixed-search')
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    window.scroll({
+      top: window.scrollY - 1,
+      left: 0
+    })
+  }, [sortByValue])
+
   const SearchComponent = () => {
     return (
-      <WrapperSearch>
+      <WrapperSearch id='search-component'>
         <SearchIconWrapper
           onClick={() => setOpenSearchProducts(true)}
         >
@@ -181,7 +205,7 @@ export const BusinessBasicInformation = (props) => {
                   )}
                 </>
               )}
-              {showCity && business?.city?.name && (
+              {typeof hideCity !== 'undefined' && !hideCity && business?.city?.name && (
                 <>
                   {!loading ? (
                     <p className='type'>{business?.city?.name}</p>
@@ -345,6 +369,10 @@ export const BusinessBasicInformation = (props) => {
           onClose={() => {
             handleChangeSearch('')
             setOpenSearchProducts(false)
+            window.scroll({
+              top: window.scrollY - 1,
+              left: 0
+            })
           }}
           business={businessState.business}
         />

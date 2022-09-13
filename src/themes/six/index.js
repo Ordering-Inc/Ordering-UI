@@ -52,6 +52,7 @@ import { ProductIngredient } from './src/components/ProductIngredient'
 import { GoogleLoginButton } from './src/components/GoogleLogin'
 import { AppleLogin } from './src/components/AppleLogin'
 import { SmsLoginButton } from './src/components/SmsLogin'
+import { SearchProducts } from './src/components/BusinessProductsListing/SearchProducts'
 
 import { Input as Inputs } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
@@ -115,6 +116,7 @@ export {
   GoogleLoginButton,
   AppleLogin,
   SmsLoginButton,
+  SearchProducts,
   // styles
   Inputs,
   Select,

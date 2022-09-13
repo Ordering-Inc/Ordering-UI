@@ -40,6 +40,7 @@ import { SearchProducts as SearchProductsOld } from '../../../../../components/R
 import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/components/BusinessProductsListing/SearchProducts'
 import { ProfessionalFilter } from '../ProfessionalFilter'
 import { SearchIconWrapper } from '../BusinessBasicInformation/styles'
+import { OrderItAgain } from '../OrderItAgain'
 
 const layoutOne = 'groceries'
 
@@ -111,7 +112,7 @@ export const RenderProductsLayout = (props) => {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
   const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
-  const showBusinessNearCity = !theme?.layouts?.business_view?.components?.near_business?.hidden
+  const hideBusinessNearCity = orderingTheme?.theme?.business_view?.components?.near_business?.hidden
 
   const BusinessLayoutCategories = businessLayout.layoutOne
     ? CategoriesLayoutGroceries
@@ -125,7 +126,7 @@ export const RenderProductsLayout = (props) => {
     <>
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
-          {showBusinessNearCity && !useKioskApp && (
+          {typeof hideBusinessNearCity !== 'undefined' && !hideBusinessNearCity && !useKioskApp && (
             <NearBusiness>
               <BusinessesListing
                 logosLayout
@@ -170,15 +171,6 @@ export const RenderProductsLayout = (props) => {
               <BusinessContent isCustomLayout={isCustomLayout || useKioskApp} id='wrapper-categories'>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
                   <div style={{ position: 'relative' }}>
-                    {business?.professionals?.length > 0 && (
-                      <ProfessionalFilterWrapper>
-                        <ProfessionalFilter
-                          professionals={business?.professionals}
-                          professionalSelected={professionalSelected}
-                          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
-                        />
-                      </ProfessionalFilterWrapper>
-                    )}
                     {!(business?.categories?.length === 0 && !categoryId) && (
                       <BusinessLayoutCategories
                         categories={[
@@ -234,6 +226,22 @@ export const RenderProductsLayout = (props) => {
                     </MobileCartViewWrapper>
                   )} */}
                   <WrapContent id='businessProductList'>
+                    {business?.professionals?.length > 0 && (
+                      <ProfessionalFilterWrapper>
+                        <ProfessionalFilter
+                          professionals={business?.professionals}
+                          professionalSelected={professionalSelected}
+                          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                        />
+                      </ProfessionalFilterWrapper>
+                    )}
+                    {!business?.loading && business?.previously_products?.length > 0 && (
+                      <OrderItAgain
+                        onProductClick={onProductClick}
+                        productList={business?.previously_products}
+                        businessId={business?.id}
+                      />
+                    )}
                     <BusinessLayoutProductsList
                       categories={[
                         { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
@@ -328,11 +336,20 @@ export const RenderProductsLayout = (props) => {
                         openCategories={openCategories}
                         business={business}
                         currentCart={currentCart}
+                        useKioskApp={useKioskApp}
                       />
                     )}
                   </BusinessCategoriesContainer>
                   <BusinessCategoryProductWrapper>
-                    <WrapContent>
+                    <WrapContent isGroceries>
+                      {!business?.loading && business?.previously_products?.length > 0 && (
+                        <OrderItAgain
+                          onProductClick={onProductClick}
+                          productList={business?.previously_products}
+                          businessId={business?.id}
+                          isGroceries
+                        />
+                      )}
                       <BusinessLayoutProductsList
                         categories={[
                           { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },

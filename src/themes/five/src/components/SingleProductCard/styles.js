@@ -2,7 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
-  min-height: 160px;
+  ${({ isShowAddButt }) => css`
+    min-height: ${isShowAddButt ? '162px' : '110px'};
+    max-height: ${isShowAddButt ? '162px' : '110px'};
+  `}
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
   border: 1px solid #E9ECEF;
   padding: 10px;
@@ -22,7 +25,7 @@ export const CardContainer = styled.div`
     margin-top: 10px;
   }
   ${({ productsRows }) => productsRows ? css`
-    width: ${() => productsRows === 3 ? 'calc(33% - 40px)' : 'calc(50% - 40px)'};
+    width: ${() => productsRows === 3 ? 'calc(33% - 20px)' : 'calc(50% - 20px)'};
     margin: 10px;
 
   ` : css`
@@ -30,12 +33,12 @@ export const CardContainer = styled.div`
     margin: 10px 0px;
     @media (min-width: 576px) {
       margin: 10px;
-      width: calc(100% - 40px);
+      width: calc(100% - 20px);
     }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {
-      width: calc(50% - 40px);
+      width: calc(50% - 20px);
       margin: 10px 20px 10px 0px;
       ${props => props.theme?.rtl && css`
         margin: 10px 0px 10px 20px;
@@ -43,11 +46,11 @@ export const CardContainer = styled.div`
     }
   ` : css`
     @media (min-width: 681px) {
-      width: calc(49% - 40px);
+      width: calc(49% - 20px);
     }
 
     @media (min-width: 1440px) {
-      width: calc(33% - 40px);
+      width: calc(33% - 20px);
       margin: 10px 20px 10px 0px;
       ${props => props.theme?.rtl && css`
         margin: 10px 0px 10px 20px;
@@ -85,7 +88,9 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(100% - 90px);
+  ${({ isBgimage }) => css`
+    width: ${isBgimage ? 'calc(100% - 90px)' : '100%'};
+  `}
   > * {
     margin: 3px;
   }
@@ -110,6 +115,12 @@ export const CardInfo = styled.div`
     font-size: 14px;
   }
 
+  ${({ oneLine }) => oneLine && css`
+    p {
+      -webkit-line-clamp: 1;
+    }
+  `}
+
   @media (min-width: 1024px) {
     p {
       font-size: 12px;
@@ -126,7 +137,9 @@ export const WrapLogo = styled.div`
   max-width: 86px;
   max-height: 86px;
   height: 86px;
-  width: 86px;
+  ${({ isBgimage }) => isBgimage && css`
+    width: 86px;
+  `}
   margin-left: 5px;
   ${props => props.theme?.rtl && css`
     margin-right: 5px;
@@ -229,6 +242,13 @@ export const RibbonBox = styled.div`
   `}
 `
 
+export const LastOrder = styled.span`
+  color: ${props => props.theme.colors.primary};
+  font-weight: 400;
+  font-size: 10px !important;
+  margin: 0px 3px;
+`
+
 export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -255,4 +275,24 @@ export const TitleWrapper = styled.div`
       font-size: 16px;
     }
   }
+`
+export const SkeletonCardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 90px);
+  > * {
+    margin: 3px;
+  }
+`
+export const SkeletonCardLogo = styled.div`
+  max-width: 86px;
+  max-height: 86px;
+  width: 86px;
+  height: 86px;
+
+  margin-left: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
 `
