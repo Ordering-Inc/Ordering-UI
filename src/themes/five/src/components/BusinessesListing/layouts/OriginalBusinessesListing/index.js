@@ -9,7 +9,6 @@ import {
   useSession,
   useLanguage,
   useConfig,
-  useOrderingTheme,
   BusinessList as BusinessListController
 } from 'ordering-components'
 
@@ -77,7 +76,6 @@ const BusinessesListingUI = (props) => {
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const theme = useTheme()
-  const [orderingTheme] = useOrderingTheme()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
@@ -87,7 +85,7 @@ const BusinessesListingUI = (props) => {
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [favoriteIds, setFavoriteIds] = useState([])
-  const hideCities = orderingTheme?.theme?.business_listing_view?.components?.cities?.hidden
+  const hideCities = theme?.business_listing_view?.components?.cities?.hidden ?? true
 
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
@@ -273,7 +271,7 @@ const BusinessesListingUI = (props) => {
                 onSearch={handleChangeSearch}
                 handleCustomEnter={() => onRedirectPage({ page: 'business_search' })}
               />
-              {typeof hideCities !== 'undefined' && !hideCities && citiesState?.cities?.length > 0 && (
+              {!hideCities && citiesState?.cities?.length > 0 && (
                 <Button color='primary' onClick={handleOpenCities}>
                   {citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)?.name || t('SELECT_A_CITY', 'Select a city')}
                 </Button>
