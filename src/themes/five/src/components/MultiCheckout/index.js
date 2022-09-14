@@ -207,7 +207,7 @@ const MultiCheckoutUI = (props) => {
               ))}
               {walletCarts.length > 0 && (
                 <WarningText>
-                  {t('WARNING_', 'One or more carts can`t be processed in multi checkout and requires to be paid individuality')}
+                  {t('WARNING_PARTIAL_WALLET_CARTS', 'Important: One or more carts can`t be completed due a partial payment with cash/points wallet and requires to be paid individually')}
                 </WarningText>
               )}
               {openCarts.length > 0 && (

@@ -148,4 +148,5 @@ export const WarningText = styled.p`
   margin: 10px auto;
   text-align: center;
   color: ${props => props.theme.colors.danger500};
+  font-size: 14px;
 `
