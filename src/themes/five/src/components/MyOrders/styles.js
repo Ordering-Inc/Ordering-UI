@@ -156,6 +156,9 @@ export const MyOrdersMenuContainer = styled.div`
 
   @media (min-width: 381px) {
     padding: 15px 0px 0px 0px;
+    ${({ pfchangs }) => pfchangs && css`
+      padding: 0;
+    `}
   }
   @media (min-width: 992px) {
     width: auto;

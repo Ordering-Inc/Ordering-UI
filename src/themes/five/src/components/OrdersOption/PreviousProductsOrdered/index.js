@@ -66,6 +66,7 @@ export const PreviousProductsOrdered = (props) => {
         padding='0'
         isProductForm
         disableOverflowX
+        hideCloseDefault={layout === 'pfchangs'}
       >
         {(!!curProduct) && (
           <ProductFormComponent
@@ -75,6 +76,7 @@ export const PreviousProductsOrdered = (props) => {
             categoryId={curProduct?.category_id}
             productId={curProduct?.product_id}
             onSave={handleRedirectToCart}
+            closeModalProductForm={closeModalProductForm}
           />
         )}
       </Modal>

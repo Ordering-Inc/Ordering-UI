@@ -31,8 +31,9 @@ import {
   PayCardSelected,
   CardItemContent
 } from './styles'
+import { PaymentOptionOpenPay } from '../PaymentOptionOpenPay'
 
-const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
+const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect', 'openpay']
 const stripeRedirectOptions = [
   { name: 'Bancontact', value: 'bancontact' },
   { name: 'Alipay', value: 'alipay' },
@@ -94,10 +95,12 @@ const PaymentOptionsUI = (props) => {
     onPaymentChange,
     setCreateOrder,
     onPlaceOrderClick,
-    handlePlaceOrder
+    handlePlaceOrder,
+    brandInformation,
+    wowPoints
   } = props
   const [, t] = useLanguage()
-  const [{ token }] = useSession()
+  const [{ token, user }] = useSession()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
@@ -110,7 +113,7 @@ const PaymentOptionsUI = (props) => {
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
   const supportedMethods = paymethodsList.paymethods.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
-
+  const isDisabledWowPoints = (paymethod) => paymethod.gateway === 'wow_rewards' && (wowPoints.loading || wowPoints.error || wowPoints?.points < cart?.total)
   const handlePaymentMethodClick = (paymethod) => {
     if (cart?.balance > 0) {
       const isPopupMethod = popupMethods.includes(paymethod?.gateway)
@@ -144,10 +147,20 @@ const PaymentOptionsUI = (props) => {
 
   useEffect(() => {
     if (props.paySelected && props.paySelected?.data) {
-      setPaymethodData(props.paySelected?.data)
       const isRequiredModal = ['paypal']
+      const isIncludeBrands = ['wow_rewards']
       if (isRequiredModal.includes(paymethodSelected?.gateway)) {
         handlePaymentMethodClick(null)
+      }
+      if (isIncludeBrands.includes(paymethodSelected?.gateway)) {
+        setPaymethodData({
+          ...props.paySelected?.data,
+          email: user.email,
+          brand_id: brandInformation?.brand_id,
+          branch_id: brandInformation?.branch_id
+        })
+      } else {
+        setPaymethodData(props.paySelected?.data)
       }
     }
   }, [props.paySelected])
@@ -174,7 +187,7 @@ const PaymentOptionsUI = (props) => {
                 {
                   (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
                     <PayCard
-                      isDisabled={isDisabled}
+                      isDisabled={isDisabled || isDisabledWowPoints(paymethod)}
                       className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
                       onClick={() => handlePaymentMethodClick(paymethod)}
                     >
@@ -183,6 +196,11 @@ const PaymentOptionsUI = (props) => {
                       </div>
                       <p>
                         {t(paymethod.gateway.toUpperCase(), paymethod.name)}
+                        {paymethod.gateway === 'wow_rewards' && wowPoints?.points >= 0 && (
+                          <>
+                            {' '}({wowPoints.points || 0} {t('PTS', 'pts')})
+                          </>
+                        )}
                       </p>
                     </PayCard>
                   )
@@ -242,7 +260,7 @@ const PaymentOptionsUI = (props) => {
                 <IosRadioButtonOn />
               </span>
               <span className='brand'>
-                <img src={getIconCard(paymethodData?.card?.brand)} alt={paymethodData?.card?.brand} />
+                <img src={getIconCard(paymethodData?.card?.brand || paymethodData?.brandCardName)} alt={paymethodData?.card?.brand || paymethodData?.brandCardName} />
               </span>
               <span>
                 XXXX-XXXX-XXXX-{paymethodData?.card?.last4}
@@ -352,6 +370,26 @@ const PaymentOptionsUI = (props) => {
             setCreateOrder={setCreateOrder}
           />
         </Modal>
+        <Modal
+          title={t('SELECT_YOUR_CARD', 'Select your card')}
+          open={isOpenMethod?.paymethod?.gateway === 'openpay' && !paymethodData.id}
+          className='modal-info'
+          onClose={() => handlePaymethodClick(null)}
+        >
+          <PaymentOptionOpenPay
+            methodsPay={methodsPay}
+            paymethod={isOpenMethod?.paymethod?.gateway}
+            businessId={props.businessId}
+            cart={cart}
+            onSelectCard={handlePaymethodDataChange}
+            onCancel={() => handlePaymethodClick(null)}
+            handlePlaceOrder={handlePlaceOrder}
+            merchantId='mz86y3z3qbpmxukfefll'
+            publicKey='pk_e871b3211d924956ad7de33c87af6ef9'
+            isSandbox
+          />
+        </Modal>
+
         <Alert
           title={t('PAYMENT_METHODS', 'Payment methods')}
           content={alertState.content}

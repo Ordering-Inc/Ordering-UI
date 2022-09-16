@@ -44,7 +44,6 @@ import {
   WrapperActionsInput,
   TitleContainer,
   SubtitleContainer,
-  ItemHeader,
   BusinessDetails
 } from './styles'
 
@@ -125,6 +124,10 @@ const CheckoutUI = (props) => {
   const layout = theme?.layouts?.checkout?.components?.layout?.type
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
+  const brandInformation = {
+    brand_id: businessDetails?.business?.brand_id,
+    branch_id: businessDetails?.business?.integration_id
+  }
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
   const isDisablePlaceOrderButton = !cart?.valid ||
@@ -164,10 +167,17 @@ const CheckoutUI = (props) => {
   const handlePlaceOrder = () => {
     if (!userErrors.length && !requiredFields?.length) {
       const body = {}
+      let paymentOptions = null
       if (behalfName) {
         body.on_behalf_of = behalfName
       }
-      handlerClickPlaceOrder && handlerClickPlaceOrder(null, body)
+      if (paymethodSelected.gateway === 'wow_rewards') {
+        paymentOptions = {
+          email: user?.email,
+          ...brandInformation
+        }
+      }
+      handlerClickPlaceOrder && handlerClickPlaceOrder(paymentOptions, body)
       return
     }
     if (requiredFields?.length) {
@@ -483,6 +493,7 @@ const CheckoutUI = (props) => {
                   paySelected={paymethodSelected}
                   handlePlaceOrder={handlePlaceOrder}
                   onPlaceOrderClick={onPlaceOrderClick}
+                  brandInformation={brandInformation}
                 />
               </PaymentMethodContainer>
             </>

@@ -29,7 +29,6 @@ export const Accordion = styled.div`
 
   ${props => props.isClosed && css`
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-    padding: 10px 5px;
   `}
 
   .rotate {

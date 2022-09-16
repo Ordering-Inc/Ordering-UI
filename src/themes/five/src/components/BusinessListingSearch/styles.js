@@ -68,6 +68,9 @@ export const ProgressContentWrapper = styled.div`
   width: 100%;
   height: 12px;
   background: #F8F9FA;
+  ${({ theme }) => theme?.layouts?.business_listing_search?.components?.layout?.type === 'pfchangs' && css`
+    background: #000;
+  `}
 `
 
 export const ProgressBar = styled.div`
@@ -393,6 +396,9 @@ export const BrandItem = styled.div`
 
 export const NoResult = styled.div`
   text-align: center;
+  ${({ theme }) => theme?.layouts?.business_listing_search?.components?.layout?.type === 'pfchangs' && css`
+    color: #fff;
+  `}
 `
 
 export const PriceFilterWrapper = styled.div``

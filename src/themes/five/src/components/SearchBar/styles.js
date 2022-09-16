@@ -17,7 +17,9 @@ export const BusinessSearch = styled.div`
     padding-left: 30px;
     padding-right: 50px;
     background-color: ${props => props.theme?.colors?.backgroundPage};
-
+    ${({ theme }) => theme?.general?.components?.search_bar?.color && css`
+      color: ${theme?.general?.components?.search_bar?.color};
+    `};
     ${props => props.theme?.rtl ? css`
       background-position: right center;
     ` : css`
