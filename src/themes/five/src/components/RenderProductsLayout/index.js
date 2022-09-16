@@ -112,7 +112,7 @@ export const RenderProductsLayout = (props) => {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
   const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
-  const hideBusinessNearCity = orderingTheme?.theme?.business_view?.components?.near_business?.hidden
+  const hideBusinessNearCity = theme?.business_view?.components?.near_business?.hidden ?? true
 
   const BusinessLayoutCategories = businessLayout.layoutOne
     ? CategoriesLayoutGroceries
@@ -126,7 +126,7 @@ export const RenderProductsLayout = (props) => {
     <>
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
-          {typeof hideBusinessNearCity !== 'undefined' && !hideBusinessNearCity && !useKioskApp && (
+          {!hideBusinessNearCity && !useKioskApp && (
             <NearBusiness>
               <BusinessesListing
                 logosLayout

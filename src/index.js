@@ -92,6 +92,7 @@ import { VerticalOrdersLayout } from './components/VerticalOrdersLayout'
 import { GoogleLoginButton } from './components/GoogleLogin'
 import { SmsLoginButton } from './components/SmsLogin'
 import { AppleLogin } from './components/AppleLogin'
+import { SearchProducts } from './components/RenderProductsLayout/SearchProducts'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
@@ -210,6 +211,7 @@ export {
   ReviewDriver,
   RenderProductsLayout,
   SearchBar,
+  SearchProducts,
   SignUpForm,
   SingleProductCard,
   SmartAppBanner,
