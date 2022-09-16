@@ -94,6 +94,7 @@ const LoginFormUI = (props) => {
   const formMethods = useForm()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: 'v3', siteKey: '' })
   const [, { login }] = useSession()
   const [passwordSee, setPasswordSee] = useState(false)
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
@@ -241,6 +242,15 @@ const LoginFormUI = (props) => {
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
+      if (formState.result?.result?.[0] === 'ERROR_AUTH_VERIFICATION_CODE') {
+        setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+        setAlertState({
+          open: true,
+          content: [t('TRY_AGAIN', 'Please try again')]
+        })
+        setSubmitted(false)
+        return
+      }
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
@@ -324,6 +334,24 @@ const LoginFormUI = (props) => {
     if (ordering.project === null || !submitted || !useRootPoint) return
     handleButtonLoginClick()
   }, [ordering, submitted])
+
+  useEffect(() => {
+    if (configs && Object.keys(configs).length > 0 &&
+      configs?.security_recaptcha_type?.value === 'v3' &&
+      configs?.security_recaptcha_score_v3?.value > 0 &&
+      configs?.security_recaptcha_site_key_v3?.value
+    ) {
+      setRecaptchaVersion({ version: 'v3', siteKey: configs?.security_recaptcha_site_key_v3?.value })
+      return
+    }
+    if (configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_site_key?.value) {
+      setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+      return
+    }
+    if (configs && Object.keys(configs).length > 0) {
+      throw new Error('ReCaptcha component: the config doesn\'t have recaptcha site key')
+    }
+  }, [configs])
 
   return (
     <>
@@ -564,7 +592,7 @@ const LoginFormUI = (props) => {
             )}
             {props.isRecaptchaEnable && enableReCaptcha && (
               <ReCaptchaWrapper>
-                <ReCaptcha handleReCaptcha={handleReCaptcha} />
+                <ReCaptcha handleReCaptcha={handleReCaptcha} reCaptchaVersion={reCaptchaVersion} />
               </ReCaptchaWrapper>
             )}
             {(!willVerifyOtpState &&
