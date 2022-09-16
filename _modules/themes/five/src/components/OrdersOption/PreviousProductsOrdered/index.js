@@ -96,14 +96,16 @@ var PreviousProductsOrdered = function PreviousProductsOrdered(props) {
     },
     padding: "0",
     isProductForm: true,
-    disableOverflowX: true
+    disableOverflowX: true,
+    hideCloseDefault: layout === 'pfchangs'
   }, !!curProduct && /*#__PURE__*/_react.default.createElement(ProductFormComponent, {
     businessSlug: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business = curProduct.business) === null || _curProduct$business === void 0 ? void 0 : _curProduct$business.slug,
     useKioskApp: props === null || props === void 0 ? void 0 : props.useKioskApp,
     businessId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.businessId,
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.product_id,
-    onSave: handleRedirectToCart
+    onSave: handleRedirectToCart,
+    closeModalProductForm: closeModalProductForm
   })));
 };
 

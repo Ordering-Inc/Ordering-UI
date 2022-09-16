@@ -49,17 +49,13 @@ var _PaymentOptionSquare = require("../../../../../components/PaymentOptionSquar
 
 var _styles = require("./styles");
 
+var _PaymentOptionOpenPay = require("../PaymentOptionOpenPay");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -70,6 +66,12 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -83,7 +85,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect'];
+var stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect', 'openpay'];
 var stripeRedirectOptions = [{
   name: 'Bancontact',
   value: 'bancontact'
@@ -147,7 +149,7 @@ var paypalBtnStyle = {
 };
 
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance2, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance2, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errorCash = props.errorCash,
@@ -165,7 +167,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       onPaymentChange = props.onPaymentChange,
       setCreateOrder = props.setCreateOrder,
       onPlaceOrderClick = props.onPlaceOrderClick,
-      handlePlaceOrder = props.handlePlaceOrder;
+      handlePlaceOrder = props.handlePlaceOrder,
+      brandInformation = props.brandInformation,
+      wowPoints = props.wowPoints;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -173,7 +177,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
-      token = _useSession2[0].token;
+      _useSession2$ = _useSession2[0],
+      token = _useSession2$.token,
+      user = _useSession2$.user;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -191,6 +197,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var supportedMethods = paymethodsList.paymethods.filter(function (p) {
     return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
   });
+
+  var isDisabledWowPoints = function isDisabledWowPoints(paymethod) {
+    return paymethod.gateway === 'wow_rewards' && (wowPoints.loading || wowPoints.error || (wowPoints === null || wowPoints === void 0 ? void 0 : wowPoints.points) < (cart === null || cart === void 0 ? void 0 : cart.total));
+  };
 
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
     if ((cart === null || cart === void 0 ? void 0 : cart.balance) > 0) {
@@ -228,13 +238,25 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     var _props$paySelected;
 
     if (props.paySelected && (_props$paySelected = props.paySelected) !== null && _props$paySelected !== void 0 && _props$paySelected.data) {
-      var _props$paySelected2;
-
-      setPaymethodData((_props$paySelected2 = props.paySelected) === null || _props$paySelected2 === void 0 ? void 0 : _props$paySelected2.data);
       var isRequiredModal = ['paypal'];
+      var isIncludeBrands = ['wow_rewards'];
 
       if (isRequiredModal.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway)) {
         handlePaymentMethodClick(null);
+      }
+
+      if (isIncludeBrands.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway)) {
+        var _props$paySelected2;
+
+        setPaymethodData(_objectSpread(_objectSpread({}, (_props$paySelected2 = props.paySelected) === null || _props$paySelected2 === void 0 ? void 0 : _props$paySelected2.data), {}, {
+          email: user.email,
+          brand_id: brandInformation === null || brandInformation === void 0 ? void 0 : brandInformation.brand_id,
+          branch_id: brandInformation === null || brandInformation === void 0 ? void 0 : brandInformation.branch_id
+        }));
+      } else {
+        var _props$paySelected3;
+
+        setPaymethodData((_props$paySelected3 = props.paySelected) === null || _props$paySelected3 === void 0 ? void 0 : _props$paySelected3.data);
       }
     }
   }, [props.paySelected]);
@@ -261,12 +283,12 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: paymethod.id
     }, (!isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
-      isDisabled: isDisabled,
+      isDisabled: isDisabled || isDisabledWowPoints(paymethod),
       className: "card ".concat((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id ? 'active' : ''),
       onClick: function onClick() {
         return handlePaymentMethodClick(paymethod);
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod.gateway.toUpperCase(), paymethod.name))));
+    }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod.gateway.toUpperCase(), paymethod.name), paymethod.gateway === 'wow_rewards' && (wowPoints === null || wowPoints === void 0 ? void 0 : wowPoints.points) >= 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ' ', "(", wowPoints.points || 0, " ", t('PTS', 'pts'), ")"))));
   }), (paymethodsList.loading || isLoading) && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       key: i,
@@ -302,8 +324,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null)), /*#__PURE__*/_react.default.createElement("span", {
     className: "brand"
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: (0, _utils.getIconCard)(paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand),
-    alt: paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.brand
+    src: (0, _utils.getIconCard)((paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand) || (paymethodData === null || paymethodData === void 0 ? void 0 : paymethodData.brandCardName)),
+    alt: (paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.brand) || (paymethodData === null || paymethodData === void 0 ? void 0 : paymethodData.brandCardName)
   })), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card3 = paymethodData.card) === null || _paymethodData$card3 === void 0 ? void 0 : _paymethodData$card3.last4))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     className: "modal-info",
     open: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth6 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth6 === void 0 ? void 0 : _isOpenMethod$paymeth6.gateway) === 'paypal' && !paymethodData.id,
@@ -389,6 +411,26 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     },
     onPlaceOrderClick: onPlaceOrderClick,
     setCreateOrder: setCreateOrder
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('SELECT_YOUR_CARD', 'Select your card'),
+    open: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth28 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth28 === void 0 ? void 0 : _isOpenMethod$paymeth28.gateway) === 'openpay' && !paymethodData.id,
+    className: "modal-info",
+    onClose: function onClose() {
+      return handlePaymethodClick(null);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_PaymentOptionOpenPay.PaymentOptionOpenPay, {
+    methodsPay: methodsPay,
+    paymethod: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth29 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth29 === void 0 ? void 0 : _isOpenMethod$paymeth29.gateway,
+    businessId: props.businessId,
+    cart: cart,
+    onSelectCard: handlePaymethodDataChange,
+    onCancel: function onCancel() {
+      return handlePaymethodClick(null);
+    },
+    handlePlaceOrder: handlePlaceOrder,
+    merchantId: "mz86y3z3qbpmxukfefll",
+    publicKey: "pk_e871b3211d924956ad7de33c87af6ef9",
+    isSandbox: true
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PAYMENT_METHODS', 'Payment methods'),
     content: alertState.content,

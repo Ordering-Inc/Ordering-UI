@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var AutoscrollContainer = _styledComponents.default.span(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: ", ";\n  width: ", ";\n  \n  svg{\n    background: #D9D9D9;\n    display: inline-block;\n    border-radius: 50%;\n    width: 16px;\n    min-width: 16px;\n    height: 16px;\n    align-self: center;\n    top: ", ";\n    position: sticky;\n    color: #000000;\n    border: 1px solid #D9D9D9;\n    opacity: 0.8;\n  }\n\n  #right-autoscroll{\n    ", "\n  }\n  #left-autoscroll{\n    ", "    \n  }\n  svg:active{\n    border: 0\n  }\n  svg.hidden{\n    opacity: 0;\n  }\n\n  @media (min-width: 480px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n    }\n  }\n\n  @media (min-width: 768px){\n    width: ", ";\n    display: inherit;\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n  }\n  }\n"])), function (props) {
+var AutoscrollContainer = _styledComponents.default.span(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: ", ";\n  width: ", ";\n  \n  svg{\n    background: #D9D9D9;\n    display: inline-block;\n    border-radius: 50%;\n    width: 16px;\n    min-width: 16px;\n    height: 16px;\n    align-self: center;\n    top: ", ";\n    position: sticky;\n    color: #000000;\n    border: 1px solid #D9D9D9;\n    opacity: 0.8;\n    z-index: 120;\n  }\n\n  #right-autoscroll{\n    ", "\n  }\n  #left-autoscroll{\n    ", "    \n  }\n  svg:active{\n    border: 0\n  }\n  svg.hidden{\n    opacity: 0;\n  }\n\n  @media (min-width: 480px){\n    #right-autoscroll{\n    ", "\n   }\n    #left-autoscroll{\n      ", "\n    }\n  }\n\n  @media (min-width: 768px){\n    width: ", ";\n    display: inherit;\n    ", "\n  }\n\n  @media (min-width: 1024px){\n    #right-autoscroll {\n      ", "\n    }\n    #left-autoscroll {\n      ", "\n    }\n  }\n"])), function (props) {
   return props.modal ? 'flex' : 'inherit';
 }, function (props) {
   return props.modal ? '300vw' : 'initial';
@@ -42,11 +42,11 @@ var AutoscrollContainer = _styledComponents.default.span(_templateObject || (_te
 }, function (props) {
   return props.modal && '100%';
 }, function (props) {
-  return props.modal && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      #left-autoscroll{\n        opacity: 0;\n      }\n      #right-autoscroll{\n        opacity: 0;\n      }\n    "])));
+  return props.modal && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      #left-autoscroll {\n        opacity: 0;\n      }\n      #right-autoscroll {\n        opacity: 0;\n      }\n    "])));
 }, function (props) {
   var _props$theme5;
 
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      left: 97%;\n    "])));
+  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        left: 97%;\n      "])));
 }, function (props) {
   var _props$theme6;
 

@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProfessionalPhoto = exports.ProfessionalListing = exports.ProfessionalItem = exports.ContentWrapper = exports.Container = void 0;
+exports.ProfessionalPhoto = exports.ProfessionalListing = exports.ProfessionalItem = exports.InfoWrapper = exports.HeartIconWrapper = exports.ContentWrapper = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27,12 +27,12 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var ProfessionalItem = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 11px;\n  border: 1px solid ", ";\n  border-radius: 7.6px;\n  cursor: pointer;\n  margin: 0px 6px;\n  transition: all 0.3s linear;\n  width: 205px;\n  min-width: 205px;\n  box-sizing: border-box;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  > svg {\n    height: 42px;\n    width: 42px;\n    min-width: 42px;\n  }\n\n  > p {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin: 0px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n\n    &.name {\n      margin-left: 12px;\n      ", "\n    }\n  }\n\n  ", "\n"])), function (props) {
+var ProfessionalItem = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 11px;\n  border: 1px solid ", ";\n  border-radius: 7.6px;\n  cursor: pointer;\n  margin: 0px 6px;\n  transition: all 0.3s linear;\n  width: 205px;\n  min-width: 205px;\n  box-sizing: border-box;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  > svg {\n    height: 42px;\n    width: 42px;\n    min-width: 42px;\n    margin-right: 12px;\n    ", "\n  }\n\n  p {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin: 0px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.gray200;
 }, function (props) {
   return props.theme.colors.primaryContrast;
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        margin-right: 12px;\n        margin-left: 0px;\n      "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      margin-left: 12px;\n      margin-right: 0px;\n    "])));
 }, function (_ref) {
   var active = _ref.active;
   return active && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), function (props) {
@@ -42,7 +42,9 @@ var ProfessionalItem = _styledComponents.default.div(_templateObject2 || (_templ
 
 exports.ProfessionalItem = ProfessionalItem;
 
-var ProfessionalPhotoStyled = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  height: 42px;\n  width: 42px;\n  min-width: 42px;\n  border-radius: 7.6px;\n"])));
+var ProfessionalPhotoStyled = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  height: 42px;\n  width: 42px;\n  min-width: 42px;\n  border-radius: 7.6px;\n  margin-right: 12px;\n  ", "\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    margin-left: 12px;\n    margin-right: 0px;\n  "])));
+});
 
 var ProfessionalPhoto = function ProfessionalPhoto(props) {
   var style = {};
@@ -58,10 +60,20 @@ var ProfessionalPhoto = function ProfessionalPhoto(props) {
 
 exports.ProfessionalPhoto = ProfessionalPhoto;
 
-var ContentWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow: auto hidden;\n  width: 100%;\n"])));
+var ContentWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  overflow: auto hidden;\n  width: 100%;\n"])));
 
 exports.ContentWrapper = ContentWrapper;
 
-var ProfessionalListing = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
+var ProfessionalListing = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 
 exports.ProfessionalListing = ProfessionalListing;
+
+var InfoWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: calc(100% - 54px);\n"])));
+
+exports.InfoWrapper = InfoWrapper;
+
+var HeartIconWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  svg {\n    color: ", ";\n      font-size: 16px;\n  }\n"])), function (props) {
+  return props.theme.colors.danger500;
+});
+
+exports.HeartIconWrapper = HeartIconWrapper;

@@ -11,17 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _OrderContext = require("../../contexts/OrderContext");
-
-var _ConfigContext = require("../../contexts/ConfigContext");
-
-var _ApiContext = require("../../contexts/ApiContext");
-
-var _SessionContext = require("../../contexts/SessionContext");
-
-var _ToastContext = require("../../contexts/ToastContext");
-
-var _LanguageContext = require("../../contexts/LanguageContext");
+var _orderingComponents = require("ordering-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76,11 +66,11 @@ var Checkout = function Checkout(props) {
       onPlaceOrderClick = props.onPlaceOrderClick,
       UIComponent = props.UIComponent;
 
-  var _useApi = (0, _ApiContext.useApi)(),
+  var _useApi = (0, _orderingComponents.useApi)(),
       _useApi2 = _slicedToArray(_useApi, 1),
       ordering = _useApi2[0];
 
-  var _useConfig = (0, _ConfigContext.useConfig)(),
+  var _useConfig = (0, _orderingComponents.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 2),
       refreshConfigs = _useConfig2[1].refreshConfigs;
 
@@ -98,7 +88,7 @@ var Checkout = function Checkout(props) {
    */
 
 
-  var _useLanguage = (0, _LanguageContext.useLanguage)(),
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
   /**
@@ -106,7 +96,7 @@ var Checkout = function Checkout(props) {
    */
 
 
-  var _useOrder = (0, _OrderContext.useOrder)(),
+  var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 2),
       orderState = _useOrder2[0],
       placeCart = _useOrder2[1].placeCart;
@@ -115,7 +105,7 @@ var Checkout = function Checkout(props) {
    */
 
 
-  var _useSession = (0, _SessionContext.useSession)(),
+  var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       token = _useSession2[0].token;
   /**
@@ -123,7 +113,7 @@ var Checkout = function Checkout(props) {
    */
 
 
-  var _useToast = (0, _ToastContext.useToast)(),
+  var _useToast = (0, _orderingComponents.useToast)(),
       _useToast2 = _slicedToArray(_useToast, 2),
       showToast = _useToast2[1].showToast;
   /**
@@ -449,7 +439,7 @@ var Checkout = function Checkout(props) {
                     error: true,
                     result: result
                   }));
-                  showToast(_ToastContext.ToastType.Error, result);
+                  showToast(_orderingComponents.ToastType.Error, result);
                   return _context3.abrupt("return");
 
                 case 14:
@@ -475,7 +465,7 @@ var Checkout = function Checkout(props) {
         error: true,
         result: err.message
       }));
-      showToast(_ToastContext.ToastType.Error, err.message);
+      showToast(_orderingComponents.ToastType.Error, err.message);
     }
   };
 
@@ -524,7 +514,7 @@ var Checkout = function Checkout(props) {
                 error: true,
                 result: result
               });
-              showToast(_ToastContext.ToastType.Error, result);
+              showToast(_orderingComponents.ToastType.Error, result);
               _context4.next = 20;
               break;
 
@@ -536,7 +526,7 @@ var Checkout = function Checkout(props) {
                 error: true,
                 result: _context4.t0.message
               });
-              showToast(_ToastContext.ToastType.Error, _context4.t0.message);
+              showToast(_orderingComponents.ToastType.Error, _context4.t0.message);
 
             case 20:
             case "end":
@@ -584,7 +574,7 @@ var Checkout = function Checkout(props) {
               setDeliveryOptionSelected(result === null || result === void 0 ? void 0 : result.delivery_option_id);
 
               if (error) {
-                showToast(_ToastContext.ToastType.Error, result);
+                showToast(_orderingComponents.ToastType.Error, result);
               }
 
               _context5.next = 16;
@@ -593,7 +583,7 @@ var Checkout = function Checkout(props) {
             case 13:
               _context5.prev = 13;
               _context5.t0 = _context5["catch"](0);
-              showToast(_ToastContext.ToastType.Error, _context5.t0.message);
+              showToast(_orderingComponents.ToastType.Error, _context5.t0.message);
 
             case 16:
             case "end":

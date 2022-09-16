@@ -90,7 +90,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _businessesList$busin, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _theme$images2, _theme$images2$genera, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _orderState$options5, _orderState$options5$, _businessesList$busin6, _businessesList$busin7, _orderState$options8, _citiesState$cities4, _props$afterComponent, _props$afterElements;
+  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _businessesList$busin, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _theme$images2, _theme$images2$genera, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _orderState$options5, _orderState$options5$, _businessesList$busin6, _businessesList$busin7, _orderState$options8, _citiesState$cities4, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -127,10 +127,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       configs = _useConfig2[0].configs;
 
   var theme = (0, _styledComponents.useTheme)();
-
-  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-      orderingTheme = _useOrderingTheme2[0];
 
   var _useState = (0, _react.useState)({
     listOpen: false,
@@ -181,7 +177,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       favoriteIds = _useState16[0],
       setFavoriteIds = _useState16[1];
 
-  var hideCities = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_listing_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.cities) === null || _orderingTheme$theme$3 === void 0 ? void 0 : _orderingTheme$theme$3.hidden;
+  var hideCities = (_theme$business_listi = theme === null || theme === void 0 ? void 0 : (_theme$business_listi2 = theme.business_listing_view) === null || _theme$business_listi2 === void 0 ? void 0 : (_theme$business_listi3 = _theme$business_listi2.components) === null || _theme$business_listi3 === void 0 ? void 0 : (_theme$business_listi4 = _theme$business_listi3.cities) === null || _theme$business_listi4 === void 0 ? void 0 : _theme$business_listi4.hidden) !== null && _theme$business_listi !== void 0 ? _theme$business_listi : true;
   var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
   }));
@@ -387,7 +383,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
         page: 'business_search'
       });
     }
-  }), typeof hideCities !== 'undefined' && !hideCities && (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities2 = citiesState.cities) === null || _citiesState$cities2 === void 0 ? void 0 : _citiesState$cities2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), !hideCities && (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities2 = citiesState.cities) === null || _citiesState$cities2 === void 0 ? void 0 : _citiesState$cities2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: handleOpenCities
   }, (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities3 = citiesState.cities) === null || _citiesState$cities3 === void 0 ? void 0 : (_citiesState$cities3$ = _citiesState$cities3.find(function (city) {

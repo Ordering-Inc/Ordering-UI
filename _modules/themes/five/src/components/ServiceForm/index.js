@@ -279,7 +279,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
         return !prev;
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, currentProfessional !== null && currentProfessional !== void 0 && currentProfessional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
+  }, currentProfessional ? /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, currentProfessional !== null && currentProfessional !== void 0 && currentProfessional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
     bgimage: currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.photo
   }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.NameWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.name, " ", currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.lastname), /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, {
     available: !isBusyTime()
@@ -287,10 +287,8 @@ var ServiceFormUI = function ServiceFormUI(props) {
     className: "status"
   }, t('BUSY_ON_SELECTED_TIME', 'Busy on selected time'))) : /*#__PURE__*/_react.default.createElement("span", {
     className: "status"
-  }, t('AVAILABLE', 'Available'))))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, null)), isDropDown && /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DropDownTitle, null, t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')), professionalList === null || professionalList === void 0 ? void 0 : professionalList.map(function (professional) {
-    var _professional$product;
-
-    return (professional === null || professional === void 0 ? void 0 : (_professional$product = professional.products) === null || _professional$product === void 0 ? void 0 : _professional$product.includes(product === null || product === void 0 ? void 0 : product.id)) && /*#__PURE__*/_react.default.createElement(_styles.SelectedItem, {
+  }, t('AVAILABLE', 'Available'))))) : /*#__PURE__*/_react.default.createElement("p", null, t('SELECT_PROFESSIONAL', 'Select professional')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, null)), isDropDown && /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DropDownTitle, null, t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')), professionalList === null || professionalList === void 0 ? void 0 : professionalList.map(function (professional) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SelectedItem, {
       key: professional === null || professional === void 0 ? void 0 : professional.id,
       isDropDown: true,
       active: (professional === null || professional === void 0 ? void 0 : professional.id) === (currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.id),
@@ -306,13 +304,13 @@ var ServiceFormUI = function ServiceFormUI(props) {
     }, t('BUSY_ON_SELECTED_TIME', 'Busy on selected time'))) : /*#__PURE__*/_react.default.createElement("span", {
       className: "status"
     }, t('AVAILABLE', 'Available'))))));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ScheduleWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SCHEDULE', 'Schedule')), /*#__PURE__*/_react.default.createElement("span", null, t('REQUIRED', 'Required'))), currentProfessional && /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.ScheduleWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SCHEDULE', 'Schedule')), /*#__PURE__*/_react.default.createElement("span", null, t('REQUIRED', 'Required'))), currentProfessional ? /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
     business: currentProfessional,
     isProfessional: true,
     maxDays: 50,
     onChangeMoment: setDateSelected,
     useOrderContext: false
-  })), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, dateSelected ? parseDate(dateSelected, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.EmptyProfessional, null, t('NO_SCHEDULE', 'No schedule'))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, dateSelected ? parseDate(dateSelected, {
     outputFormat: 'hh:mm a'
   }) : t('ASAP_ABBREVIATION', 'ASAP')), !isSoldOut && maxProductQuantity > 0 && auth && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {

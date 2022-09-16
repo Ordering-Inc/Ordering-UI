@@ -9,7 +9,7 @@ exports.OrderGroupFilterWrapper = exports.NoOrdersWrapper = exports.MyOrdersMenu
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -43,7 +43,7 @@ var NoOrdersWrapper = _styledComponents.default.div(_templateObject9 || (_templa
 
 exports.NoOrdersWrapper = NoOrdersWrapper;
 
-var MyOrdersMenuContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 1000;\n  position: sticky;\n  top: 0;\n  border-bottom: 1px solid #D9D9D9;\n  text-align: center;\n  width: 100%;\n  margin-bottom: 30px;\n  div.category {\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding: 10px 0px;\n    margin: 0 15px;\n    &:nth-of-type(1) {\n      margin-left: 0;\n      ", "\n    }\n  }\n\n  div.special {\n    ", "\n  }\n\n  ", "\n\n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  }\n  @media (min-width: 992px) {\n    width: auto;\n  }\n"])), function (props) {
+var MyOrdersMenuContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 1000;\n  position: sticky;\n  top: 0;\n  border-bottom: 1px solid #D9D9D9;\n  text-align: center;\n  width: 100%;\n  margin-bottom: 30px;\n  div.category {\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding: 10px 0px;\n    margin: 0 15px;\n    &:nth-of-type(1) {\n      margin-left: 0;\n      ", "\n    }\n  }\n\n  div.special {\n    ", "\n  }\n\n  ", "\n\n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n    ", "\n  }\n  @media (min-width: 992px) {\n    width: auto;\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        margin-left: 15px;\n        margin-right: 15px;\n      "])));
@@ -52,6 +52,9 @@ var MyOrdersMenuContainer = _styledComponents.default.div(_templateObject10 || (
 }, function (_ref3) {
   var pfchangs = _ref3.pfchangs;
   return pfchangs && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid #fff;\n      div{\n        flex: 1;\n        div{\n          flex: 1;\n          display: flex; \n          justify-content: center;\n          padding: 20px;\n          border-bottom-width: 3px;\n        }\n      }\n      a{\n        font-size: 24px;\n        svg {\n          display: none;\n        }\n      }\n  "])));
+}, function (_ref4) {
+  var pfchangs = _ref4.pfchangs;
+  return pfchangs && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      padding: 0;\n    "])));
 });
 
 exports.MyOrdersMenuContainer = MyOrdersMenuContainer;

@@ -28,7 +28,7 @@ var Accordion = _styledComponents.default.div(_templateObject3 || (_templateObje
   var isClosed = _ref2.isClosed;
   return isClosed ? 'not-allowed' : 'pointer';
 }, function (props) {
-  return props.isClosed && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));\n    padding: 10px 5px;\n  "])));
+  return props.isClosed && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));\n  "])));
 });
 
 exports.Accordion = Accordion;
