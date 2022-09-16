@@ -96,6 +96,7 @@ const BusinessProductsListingUI = (props) => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
   const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
+  const [isMounted, setIsMounted] = useState(false)
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
@@ -248,6 +249,10 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [currentCart])
 
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   return (
     <>
       <ProductsContainer>
@@ -293,7 +298,7 @@ const BusinessProductsListingUI = (props) => {
         />
 
         {
-          !loading && business && !Object.keys(business).length && (
+          isMounted && !loading && business && !Object.keys(business).length && (
             <NotFoundSource
               content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
               btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
