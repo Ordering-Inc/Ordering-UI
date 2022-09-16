@@ -55,7 +55,8 @@ const MultiCheckoutUI = (props) => {
     paymethodSelected,
     handleSelectPaymethod,
     handleSelectWallet,
-    handlePaymethodDataChange
+    handlePaymethodDataChange,
+    onRedirectPage
   } = props
 
   const [, t] = useLanguage()
@@ -139,6 +140,11 @@ const MultiCheckoutUI = (props) => {
       checkValidationFields()
     }
   }, [validationFields, user, customerState])
+
+  useEffect(() => {
+    if (openCarts.length) return
+    onRedirectPage && onRedirectPage({ page: 'search' })
+  }, [openCarts])
 
   return (
     <>
