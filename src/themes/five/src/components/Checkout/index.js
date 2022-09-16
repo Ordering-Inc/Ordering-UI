@@ -241,10 +241,6 @@ const CheckoutUI = (props) => {
     setUserErrors(errors)
   }
 
-  const handleGoToStore = (slug) => {
-    events.emit('go_to_page', { page: 'business', params: { store: slug } })
-  }
-
   useEffect(() => {
     if (validationFields && validationFields?.fields?.checkout) {
       checkValidationFields()
@@ -525,7 +521,7 @@ const CheckoutUI = (props) => {
                 <img src={businessDetails?.business?.header} />
                 <div>
                   <h2>{businessDetails?.business?.name}</h2>
-                  <span onClick={() => cart?.business?.slug && handleGoToStore(cart?.business?.slug)}>{('GO_TO_BUSINESS', 'Go to business')}</span>
+                  <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business?.slug)}>{('GO_TO_BUSINESS', 'Go to business')}</span>
                 </div>
               </BusinessDetails>
             )}
@@ -572,7 +568,7 @@ const CheckoutUI = (props) => {
             {layout !== 'pfchangs' && (
               <CartHeader>
                 <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
-                <span onClick={() => cart?.business?.slug && handleGoToStore(cart?.business?.slug)}>{('ADD_PRODUCTS', 'Add products')}</span>
+                <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business?.slug)}>{('ADD_PRODUCTS', 'Add products')}</span>
               </CartHeader>
             )}
             <CartComponent

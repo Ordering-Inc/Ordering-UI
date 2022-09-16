@@ -190,6 +190,8 @@ export const DropDownWrapper = styled.div`
   width: 100%;
   z-index: 10;
   box-sizing: border-box;
+  max-height: 263px;
+  overflow: auto;
 `
 
 export const SelectedItem = styled.div`
@@ -202,6 +204,11 @@ export const SelectedItem = styled.div`
   border-radius: 7.6px;
   cursor: pointer;
   transition: all 0.3s linear;
+
+  > p {
+    margin: 0px;
+    line-height: 42px;
+  }
 
   ${({ isDropDown }) => isDropDown && css`
     border: none;
@@ -294,4 +301,13 @@ export const StatusInfo = styled.div`
       color: ${props => props.theme.colors.success500};
     }
   `}
+`
+
+export const EmptyProfessional = styled.div`
+  min-height: 100px;
+  margin-bottom: 100px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

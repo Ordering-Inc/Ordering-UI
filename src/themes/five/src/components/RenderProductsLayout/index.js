@@ -118,7 +118,7 @@ export const RenderProductsLayout = (props) => {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
   const showCartOnProductList = !theme?.business_view?.components?.cart?.hidden
-  const hideBusinessNearCity = theme?.business_view?.components?.near_business?.hidden
+  const hideBusinessNearCity = theme?.business_view?.components?.near_business?.hidden ?? true
   const headerType = theme?.business_view?.components?.header?.components?.layout?.type
 
   const BusinessLayoutCategories = headerType === 'pfchangs'
@@ -144,7 +144,7 @@ export const RenderProductsLayout = (props) => {
     <>
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
-          {typeof hideBusinessNearCity !== 'undefined' && !hideBusinessNearCity && !useKioskApp && (
+          {!hideBusinessNearCity && !useKioskApp && (
             <NearBusiness>
               <BusinessesListing
                 logosLayout

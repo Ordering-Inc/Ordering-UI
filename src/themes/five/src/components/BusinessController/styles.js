@@ -33,9 +33,7 @@ export const ContainerCard = styled.div`
     margin-left: 0;
   `}
   
-  ${({ businessRows }) => businessRows ? css`
-    width: ${() => businessRows === 4 ? 'calc(25% - 40px)' : businessRows === 3 ? 'calc(33% - 40px)' : 'calc(50% - 40px)'};
-  ` : css`
+  ${({ businessRows }) => css`
     width: calc(100% - 40px);
 
     @media (min-width: 481px) {
@@ -51,7 +49,7 @@ export const ContainerCard = styled.div`
     }
 
     @media (min-width: 1200px) {
-      width: calc(25% - 40px);
+      width: ${() => businessRows === 4 ? 'calc(25% - 40px)' : businessRows === 3 ? 'calc(33% - 40px)' : 'calc(50% - 40px)'};
     }
   `}
   
@@ -160,8 +158,7 @@ export const BusinessTags = styled.div`
         margin-left: 0px;
     ` : css`
         margin-right: 0px;
-    `
-  }
+    `}
     }
   }
 `
