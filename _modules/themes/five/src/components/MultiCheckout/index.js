@@ -76,7 +76,8 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       paymethodSelected = props.paymethodSelected,
       handleSelectPaymethod = props.handleSelectPaymethod,
       handleSelectWallet = props.handleSelectWallet,
-      handlePaymethodDataChange = props.handlePaymethodDataChange;
+      handlePaymethodDataChange = props.handlePaymethodDataChange,
+      onRedirectPage = props.onRedirectPage;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -200,6 +201,12 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       checkValidationFields();
     }
   }, [validationFields, user, customerState]);
+  (0, _react.useEffect)(function () {
+    if (openCarts.length) return;
+    onRedirectPage && onRedirectPage({
+      page: 'search'
+    });
+  }, [openCarts]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openCarts.length === 0 ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('CARTS_NOT_FOUND', 'You don’t have carts available')
   }) : /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
@@ -241,7 +248,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       isMultiCheckout: true,
       isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) || 0
     }), /*#__PURE__*/_react.default.createElement(_styles.DriverTipDivider, null));
-  }), walletCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_', 'One or more carts can`t be processed in multi checkout and requires to be paid individuality')), openCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(totalCartsPrice))), /*#__PURE__*/_react.default.createElement("p", null, t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')))), /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), walletCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_PARTIAL_WALLET_CARTS', 'Important: One or more carts can`t be completed due a partial payment with cash/points wallet and requires to be paid individually')), openCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(totalCartsPrice))), /*#__PURE__*/_react.default.createElement("p", null, t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')))), /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     disabled: isDisablePlaceOrderButton || placing,
     onClick: handlePlaceOrder

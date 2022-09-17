@@ -62,9 +62,12 @@ var BusinessesTitle = _styledComponents.default.h1(_templateObject9 || (_templat
 
 exports.BusinessesTitle = BusinessesTitle;
 
-var BusinessHeroImgStyled = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-bottom: 30px;\n  width: 100%;\n  height: 230px;\n\n  ", "\n  @media (min-width: 450px) {\n    height: 370px;\n  }\n\n  @media (min-width: 821px) {\n    height: 650px;\n  }\n"])), function (_ref3) {
+var BusinessHeroImgStyled = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-bottom: 30px;\n  width: 100%;\n  height: 230px;\n\n  ", "\n  @media (min-width: 450px) {\n    height: 370px;\n  }\n\n  @media (min-width: 821px) {\n    height: ", ";\n  }\n"])), function (_ref3) {
   var bgimage = _ref3.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
+}, function (_ref4) {
+  var height = _ref4.height;
+  return height || '650px';
 });
 
 exports.BusinessHeroImgStyled = BusinessHeroImgStyled;

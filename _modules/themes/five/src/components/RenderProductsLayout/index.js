@@ -368,11 +368,20 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       loading: true
     },
     openBusinessInformation: openBusinessInformation
-  }), /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
+    isCustomLayout: isCustomLayout || useKioskApp,
+    id: "wrapper-categories"
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, {
+    showCartOnProductList: showCartOnProductList
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     isSkeleton: true,
     categories: [],
     openBusinessInformation: openBusinessInformation
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
     categories: [],
     useKioskApp: useKioskApp,
     category: categorySelected,
