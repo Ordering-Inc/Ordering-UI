@@ -395,11 +395,17 @@ export const RenderProductsLayout = (props) => {
               openBusinessInformation={openBusinessInformation}
             />
           )}
-          <BusinessProductsCategories
-            isSkeleton
-            categories={[]}
-            openBusinessInformation={openBusinessInformation}
-          />
+          <BusinessContent isCustomLayout={isCustomLayout || useKioskApp} id='wrapper-categories'>
+            <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
+              <div style={{ position: 'relative' }}>
+                <BusinessProductsCategories
+                  isSkeleton
+                  categories={[]}
+                  openBusinessInformation={openBusinessInformation}
+                />
+              </div>
+            </BusinessCategoryProductWrapper>
+          </BusinessContent>
           <WrapContent>
             <BusinessProductsList
               categories={[]}
