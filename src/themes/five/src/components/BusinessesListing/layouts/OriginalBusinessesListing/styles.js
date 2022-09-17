@@ -98,7 +98,7 @@ export const BusinessHeroImgStyled = styled.div`
     height: 370px;
   }
   @media (min-width: 821px) {
-    height: 650px;
+    height: ${({ height }) => height || '650px'};
   }
 `
 
