@@ -248,7 +248,10 @@ const BusinessesListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
-        <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
+        <BusinessHeroImg
+          bgimage={theme.images?.general?.businessHero}
+          height={orderingTheme?.theme?.business_listing_view?.components?.business_hero?.style?.height}
+        />
         <OrderProgressWrapper>
           <OrderProgress
             franchiseId={props.franchiseId}
