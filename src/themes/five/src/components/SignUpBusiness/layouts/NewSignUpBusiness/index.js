@@ -62,6 +62,7 @@ const SignUpBusinessUI = (props) => {
   const [{ configs }] = useConfig()
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: 'v3', siteKey: '' })
   const emailInput = useRef(null)
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
@@ -149,6 +150,15 @@ const SignUpBusinessUI = (props) => {
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
+      if (formState.result?.result?.[0] === 'ERROR_AUTH_VERIFICATION_CODE') {
+        setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+        setAlertState({
+          open: true,
+          content: [t('TRY_AGAIN', 'Please try again')]
+        })
+        return
+      }
+
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
@@ -203,6 +213,24 @@ const SignUpBusinessUI = (props) => {
       handleChangePhoneNumber(externalPhoneNumber, true)
     }
   }, [externalPhoneNumber])
+
+  useEffect(() => {
+    if (configs && Object.keys(configs).length > 0 &&
+      configs?.security_recaptcha_type?.value === 'v3' &&
+      configs?.security_recaptcha_score_v3?.value > 0 &&
+      configs?.security_recaptcha_site_key_v3?.value
+    ) {
+      setRecaptchaVersion({ version: 'v3', siteKey: configs?.security_recaptcha_site_key_v3?.value })
+      return
+    }
+    if (configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_site_key?.value) {
+      setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+      return
+    }
+    if (configs && Object.keys(configs).length > 0) {
+      throw new Error('ReCaptcha component: the config doesn\'t have recaptcha site key')
+    }
+  }, [configs])
 
   useEffect(() => {
     handleChangeInput({
@@ -322,7 +350,7 @@ const SignUpBusinessUI = (props) => {
           }
           {props.isRecaptchaEnable && enableReCaptcha && (
             <ReCaptchaWrapper>
-              <ReCaptcha handleReCaptcha={handleReCaptcha} />
+              <ReCaptcha handleReCaptcha={handleReCaptcha} reCaptchaVersion={reCaptchaVersion} />
             </ReCaptchaWrapper>
           )}
 
