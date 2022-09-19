@@ -34,6 +34,7 @@ import { ProductForm } from '../ProductForm'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { useIsMounted } from '../../../../../hooks/useIsMounted'
 import { RenderProductsLayout } from '../RenderProductsLayout'
 import { Cart } from '../Cart'
 import { Alert } from '../../../../../components/Confirm'
@@ -96,7 +97,7 @@ const BusinessProductsListingUI = (props) => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
   const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
-  const [isMounted, setIsMounted] = useState(false)
+  const isMounted = useIsMounted()
 
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
@@ -248,10 +249,6 @@ const BusinessProductsListingUI = (props) => {
       adjustBusiness(adjustBusinessId)
     }
   }, [currentCart])
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
   return (
     <>
