@@ -813,6 +813,12 @@ Object.defineProperty(exports, "useIntersectionObserver", {
     return _useIntersectionObserver.useIntersectionObserver;
   }
 });
+Object.defineProperty(exports, "useIsMounted", {
+  enumerable: true,
+  get: function get() {
+    return _useIsMounted.useIsMounted;
+  }
+});
 Object.defineProperty(exports, "useOnlineStatus", {
   enumerable: true,
   get: function get() {
@@ -1037,6 +1043,8 @@ var _useWindowSize = require("./hooks/useWindowSize");
 var _useCountdownTimer = require("./hooks/useCountdownTimer");
 
 var _useIntersectionObserver = require("./hooks/useIntersectionObserver");
+
+var _useIsMounted = require("./hooks/useIsMounted");
 
 var _Buttons = require("./styles/Buttons");
 
