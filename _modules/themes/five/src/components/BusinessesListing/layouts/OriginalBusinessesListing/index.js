@@ -90,7 +90,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _businessesList$busin, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _theme$images2, _theme$images2$genera, _orderingTheme, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _orderState$options5, _orderState$options5$, _businessesList$busin6, _businessesList$busin7, _orderState$options8, _citiesState$cities4, _props$afterComponent, _props$afterElements;
+  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _businessesList$busin, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _theme$images2, _theme$images2$genera, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _orderState$options5, _orderState$options5$, _businessesList$busin6, _businessesList$busin7, _orderState$options8, _citiesState$cities4, _props$afterComponent, _props$afterElements;
 
   var businessesList = props.businessesList,
       paginationProps = props.paginationProps,
@@ -126,6 +126,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
+  var orderingTheme = (0, _orderingComponents.useOrderingTheme)();
   var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({
@@ -362,7 +363,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
     bgimage: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.businessHero,
-    height: (_orderingTheme = orderingTheme) === null || _orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = _orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_listing_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.business_hero) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.style) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.height
+    height: orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_listing_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.business_hero) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.style) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.height
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderProgress.OrderProgress, {
     franchiseId: props.franchiseId,
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
