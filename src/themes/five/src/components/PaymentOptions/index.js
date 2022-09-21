@@ -10,7 +10,9 @@ import { Cash, CreditCard } from 'react-bootstrap-icons'
 import {
   PaymentOptions as PaymentOptionsController,
   useLanguage,
-  useSession
+  useSession,
+  useOrder,
+  useConfig
 } from 'ordering-components'
 
 import { Modal } from '../Modal'
@@ -101,6 +103,8 @@ const PaymentOptionsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [{ token, user }] = useSession()
+  const [ , { applyCoupon, removeOffer }] = useOrder()
+  const [{ configs }] = useConfig()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
@@ -168,6 +172,19 @@ const PaymentOptionsUI = (props) => {
   useEffect(() => {
     if (methodsPay.includes(paymethodSelected?.gateway) && paymethodData?.id && paymethodSelected?.data?.card) {
       handlePlaceOrder()
+    }
+    if (paymethodSelected?.gateway !== 'openpay' && cart?.offers.length > 0) {
+      if (!configs?.advanced_offers_module?.value) {
+        applyCoupon({
+          business_id: props?.businessId,
+          coupon: null
+        })
+      } else {
+        removeOffer({
+          business_id: props?.businessId,
+          offer_id: cart?.offers[0].id
+        })
+      }
     }
   }, [paymethodData, paymethodSelected])
 

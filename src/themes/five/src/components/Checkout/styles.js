@@ -435,3 +435,15 @@ export const BusinessDetails = styled.div`
     }
   }
 `
+export const MasterCardCoupon = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 1px solid #fff;
+  padding: 0px !important;
+  width: 100%;
+  box-sizing: border-box;
+
+  img {
+    width: 100%
+  }
+`

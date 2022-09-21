@@ -44,7 +44,8 @@ import {
   WrapperActionsInput,
   TitleContainer,
   SubtitleContainer,
-  BusinessDetails
+  BusinessDetails,
+  MasterCardCoupon
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -474,6 +475,9 @@ const CheckoutUI = (props) => {
                     </h1>
                   </WarningMessage>
                 )}
+                <MasterCardCoupon>
+                  <img src={"https://d2gjwc6pypyhyf.cloudfront.net/banners/mastercard_alt.png"} />
+                </MasterCardCoupon>
                 <PaymentOptions
                   cart={cart}
                   useKioskApp={useKioskApp}
