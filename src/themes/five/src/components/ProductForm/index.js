@@ -669,7 +669,7 @@ const ProductOptionsUI = (props) => {
                       )}
                       <FiPlusCircle
                         onClick={increment}
-                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
+                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || productCart.quantity >= product?.maximum_per_order || isSoldOut ? 'disabled' : ''}`}
                       />
                       {isHaveWeight && (
                         <WeightUnitSwitch>
@@ -817,7 +817,7 @@ const ProductOptionsUI = (props) => {
 export const ProductForm = (props) => {
   const productOptionsProps = {
     ...props,
-    productCart: { quantity: props?.product?.minimum_per_order || 1 },
+    productCart: { quantity: props?.product?.maximum_per_order || 1 },
     UIComponent: ProductOptionsUI
   }
 
