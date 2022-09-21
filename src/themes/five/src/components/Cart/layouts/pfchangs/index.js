@@ -306,7 +306,7 @@ const CartUI = (props) => {
                       cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
                         <tr key={offer.id}>
                           <td className='icon'>
-                            {offer.name}
+                            {offer.description || offer.name}
                             {offer.rate_type === 1 && (
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
