@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
+import { Heart as DisLike, HeartFill as Like, InfoCircle } from 'react-bootstrap-icons'
 import {
   Container,
   ProfessionalItem,
@@ -9,11 +9,13 @@ import {
   ContentWrapper,
   ProfessionalListing,
   InfoWrapper,
-  HeartIconWrapper
+  HeartIconWrapper,
+  IconWrapper
 } from './styles'
 import { Modal } from '../Modal'
 import { ProfessionalProfile } from '../ProfessionalProfile'
 import { AutoScroll } from '../AutoScroll'
+import { ProfessionalInfo } from '../ProfessionalInfo'
 
 export const ProfessionalFilter = (props) => {
   const {
@@ -24,16 +26,24 @@ export const ProfessionalFilter = (props) => {
 
   const [, t] = useLanguage()
   const [open, setOpen] = useState(false)
+  const [reviewOpen, setReviewOpen] = useState(false)
   const [currentProfessional, setCurrentProfessional] = useState(null)
 
-  const handleOpenProfile = (professional) => {
+  const handleOpenProfile = (e, professional) => {
+    if (e.target.closest('.info')) return
     setCurrentProfessional(professional)
     setOpen(true)
+  }
+
+  const handleOpenReview = (professional) => {
+    setReviewOpen(true)
+    setCurrentProfessional(professional)
   }
 
   const handleCloseProfile = () => {
     setCurrentProfessional(null)
     setOpen(false)
+    setReviewOpen(false)
   }
 
   return (
@@ -53,14 +63,17 @@ export const ProfessionalFilter = (props) => {
                 <ProfessionalItem
                   key={i}
                   active={professional?.id === professionalSelected?.id}
-                  onClick={() => handleOpenProfile(professional)}
+                  onClick={(e) => handleOpenProfile(e, professional)}
                 >
                   {professional?.photo ? <ProfessionalPhoto bgimage={professional?.photo} /> : <FaUserAlt />}
                   <InfoWrapper>
                     <p className='name'>{professional?.name} {professional?.lastname}</p>
-                    <HeartIconWrapper>
-                      {professional?.favorite ? <Like /> : <DisLike />}
-                    </HeartIconWrapper>
+                    <IconWrapper>
+                      <InfoCircle className='info' onClick={() => handleOpenReview(professional)} />
+                      <HeartIconWrapper>
+                        {professional?.favorite ? <Like /> : <DisLike />}
+                      </HeartIconWrapper>
+                    </IconWrapper>
                   </InfoWrapper>
                 </ProfessionalItem>
               ))}
@@ -78,6 +91,16 @@ export const ProfessionalFilter = (props) => {
           currentProfessional={currentProfessional}
           onClose={handleCloseProfile}
           handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+        />
+      </Modal>
+      <Modal
+        open={reviewOpen}
+        width='760px'
+        padding='0'
+        onClose={() => handleCloseProfile()}
+      >
+        <ProfessionalInfo
+          userId={currentProfessional?.id}
         />
       </Modal>
     </>
