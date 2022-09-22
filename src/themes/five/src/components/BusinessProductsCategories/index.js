@@ -17,7 +17,8 @@ const BusinessProductsCategoriesUI = (props) => {
     business,
     handlerClickCategory,
     categorySelected,
-    useKioskApp
+    useKioskApp,
+    isProfessional
   } = props
 
   const theme = useTheme()
@@ -155,6 +156,13 @@ const BusinessProductsCategoriesUI = (props) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [useKioskApp])
 
+  useEffect(() => {
+    if (business?.professionals?.length > 0 && !useKioskApp) {
+      const element = document.getElementById('category-lists')
+      element.setAttribute('style', 'width: 100% !important')
+    }
+  }, [business?.professionals, useKioskApp])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -163,7 +171,7 @@ const BusinessProductsCategoriesUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <CategoriesContainer id='category-lists' className='category-lists' featured={featured} w={props.wContainerStyle}>
+      <CategoriesContainer id='category-lists' className='category-lists' featured={featured} w={props.wContainerStyle} isProfessional={isProfessional}>
         {!isSkeleton ? (
           <Tabs variant='primary'>
             {openBusinessInformation ? (

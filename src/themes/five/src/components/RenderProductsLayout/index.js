@@ -41,6 +41,7 @@ import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/c
 import { ProfessionalFilter } from '../ProfessionalFilter'
 import { SearchIconWrapper } from '../BusinessBasicInformation/styles'
 import { OrderItAgain } from '../OrderItAgain'
+import { ProfessionalBusinessFilter } from '../ProfessionalBusinessFilter'
 
 const layoutOne = 'groceries'
 
@@ -79,7 +80,9 @@ export const RenderProductsLayout = (props) => {
     handleUpdateProducts,
     handleChangeProfessionalSelected,
     professionalSelected,
-    onBusinessClick
+    onBusinessClick,
+    handleChangePriceFilterValues,
+    priceFilterValues
   } = props
 
   const theme = useTheme()
@@ -170,6 +173,26 @@ export const RenderProductsLayout = (props) => {
             {!businessLayout.layoutOne && (
               <BusinessContent isCustomLayout={isCustomLayout || useKioskApp} id='wrapper-categories'>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
+                  {business?.professionals?.length > 0 && !useKioskApp && (
+                    <>
+                      <ProfessionalBusinessFilter
+                        sortByOptions={sortByOptions}
+                        handleChangeSortBy={handleChangeSortBy}
+                        sortByValue={sortByValue}
+                        handleChangeSearch={handleChangeSearch}
+                        business={business}
+                        handleChangePriceFilterValues={handleChangePriceFilterValues}
+                        priceFilterValues={priceFilterValues}
+                      />
+                      <ProfessionalFilterWrapper>
+                        <ProfessionalFilter
+                          professionals={business?.professionals}
+                          professionalSelected={professionalSelected}
+                          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                        />
+                      </ProfessionalFilterWrapper>
+                    </>
+                  )}
                   <div style={{ position: 'relative' }}>
                     {!(business?.categories?.length === 0 && !categoryId) && (
                       <BusinessLayoutCategories
@@ -186,6 +209,7 @@ export const RenderProductsLayout = (props) => {
                         business={business}
                         currentCart={currentCart}
                         wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
+                        isProfessional={business?.professionals?.length > 0 && !useKioskApp}
                       />
                     )}
                     {useKioskApp && (
@@ -226,15 +250,6 @@ export const RenderProductsLayout = (props) => {
                     </MobileCartViewWrapper>
                   )} */}
                   <WrapContent id='businessProductList'>
-                    {business?.professionals?.length > 0 && (
-                      <ProfessionalFilterWrapper>
-                        <ProfessionalFilter
-                          professionals={business?.professionals}
-                          professionalSelected={professionalSelected}
-                          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
-                        />
-                      </ProfessionalFilterWrapper>
-                    )}
                     {!business?.loading && business?.previously_products?.length > 0 && (
                       <OrderItAgain
                         onProductClick={onProductClick}
@@ -273,7 +288,7 @@ export const RenderProductsLayout = (props) => {
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
                 {showCartOnProductList && (
-                  <BusinessCartContainer id='BusinessCartContainer'>
+                  <BusinessCartContainer id='BusinessCartContainer' isProfessional={business?.professionals?.length > 0 && !useKioskApp}>
                     <BusinessCartContent maxHeight={window.innerHeight - 100}>
                       {currentCart?.products?.length > 0 ? (
                         <>
