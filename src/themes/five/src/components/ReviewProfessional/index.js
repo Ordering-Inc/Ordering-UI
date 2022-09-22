@@ -10,7 +10,7 @@ import { Button } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
 
 import {
-  ReviewDriverContainer,
+  ReviewProfessionalContainer,
   Comments,
   ActionBtnWrapper,
   DriverPhoto,
@@ -129,115 +129,101 @@ const ReviewProfessionalUI = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <>
-        <LogoAndReviewWrapper>
-          <WrapperDriverPhoto>
-            {(order?.products[0]?.calendar_event?.professional?.photo) ? (
-              <DriverPhoto bgimage={optimizeImage(order?.products[0]?.calendar_event?.professional?.photo, 'h_200,c_limit')} />
-            ) : <FaUserAlt />}
-          </WrapperDriverPhoto>
-          {
-            order?.products[0]?.calendar_event?.professional?.name && (
-              <DriverInfoBlock>{order?.products[0]?.calendar_event?.professional?.name}</DriverInfoBlock>
-            )
-          }
-          <ReviewsProgressWrapper>
-            <p>{t('HOW_WAS_YOUR_SERVICE', 'How was your service?')}</p>
-            <ReviewsProgressContent>
-              <ReviewsProgressBar style={{ width: `${(dirverReviews?.qualification === 0 ? 0 : (dirverReviews?.qualification - 1) / 4) * 100}%` }} />
-              {
-                qualificationList?.map(qualification => (
-                  <ReviewsMarkPoint
-                    key={qualification?.key}
-                    style={{
-                      left: theme.rtl ? (qualification?.middleNode ? 'initial' : qualification?.right) : qualification?.left,
-                      right: theme?.rtl ? qualification?.left : (qualification?.middleNode ? 'initial' : qualification?.right)
-                    }}
-                    active={dirverReviews?.qualification === qualification?.key}
-                    pass={dirverReviews?.qualification >= qualification?.key}
-                    className={qualification?.middleNode ? 'mark-point' : ''}
-                    onClick={() => handleChangeReviews(qualification?.key)}
-                  >
-                    <span>{qualification?.text}<span /></span>
-                  </ReviewsMarkPoint>
-                ))
-              }
-            </ReviewsProgressContent>
-          </ReviewsProgressWrapper>
-          <CommentsList>
-            <p>{commentsList[dirverReviews?.qualification || 1]?.title}</p>
+      <LogoAndReviewWrapper>
+        <WrapperDriverPhoto>
+          {(order?.products[0]?.calendar_event?.professional?.photo) ? (
+            <DriverPhoto bgimage={optimizeImage(order?.products[0]?.calendar_event?.professional?.photo, 'h_200,c_limit')} />
+          ) : <FaUserAlt />}
+        </WrapperDriverPhoto>
+        {
+          order?.products[0]?.calendar_event?.professional?.name && (
+            <DriverInfoBlock>{order?.products[0]?.calendar_event?.professional?.name}</DriverInfoBlock>
+          )
+        }
+        <ReviewsProgressWrapper>
+          <p>{t('HOW_WAS_YOUR_SERVICE', 'How was your service?')}</p>
+          <ReviewsProgressContent>
+            <ReviewsProgressBar style={{ width: `${(dirverReviews?.qualification === 0 ? 0 : (dirverReviews?.qualification - 1) / 4) * 100}%` }} />
             {
-              commentsList[dirverReviews?.qualification || 1]?.list?.map((commentItem, i) => (
-                <CommentButton
-                  key={i}
-                  active={isSelectedComment(commentItem.key)}
-                  onClick={() => handleChangeComment(commentItem)}
-                  initialIcon
+              qualificationList?.map(qualification => (
+                <ReviewsMarkPoint
+                  key={qualification?.key}
+                  style={{
+                    left: theme.rtl ? (qualification?.middleNode ? 'initial' : qualification?.right) : qualification?.left,
+                    right: theme?.rtl ? qualification?.left : (qualification?.middleNode ? 'initial' : qualification?.right)
+                  }}
+                  active={dirverReviews?.qualification === qualification?.key}
+                  pass={dirverReviews?.qualification >= qualification?.key}
+                  className={qualification?.middleNode ? 'mark-point' : ''}
+                  onClick={() => handleChangeReviews(qualification?.key)}
                 >
-                  {commentItem.content}
-                  {
-                    isSelectedComment(commentItem.key) && <MdClose />
-                  }
-                </CommentButton>
+                  <span>{qualification?.text}<span /></span>
+                </ReviewsMarkPoint>
               ))
             }
-          </CommentsList>
-        </LogoAndReviewWrapper>
-        <ReviewDriverContainer onSubmit={handleSubmit(onSubmit)}>
-          <Comments>
-            <p>{t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')}</p>
-            <TextArea
-              name='comment'
-              value={extraComment}
-              onChange={(e) => setExtraComment(e.target.value)}
-              autoComplete='off'
-            />
-          </Comments>
+          </ReviewsProgressContent>
+        </ReviewsProgressWrapper>
+        <CommentsList>
+          <p>{commentsList[dirverReviews?.qualification || 1]?.title}</p>
           {
-            props.afterMidElements?.map((MidElement, i) => (
-              <React.Fragment key={i}>
-                {MidElement}
-              </React.Fragment>))
+            commentsList[dirverReviews?.qualification || 1]?.list?.map((commentItem, i) => (
+              <CommentButton
+                key={i}
+                active={isSelectedComment(commentItem.key)}
+                onClick={() => handleChangeComment(commentItem)}
+                initialIcon
+              >
+                {commentItem.content}
+                {
+                  isSelectedComment(commentItem.key) && <MdClose />
+                }
+              </CommentButton>
+            ))
           }
-          {
-            props.afterMidComponents?.map((MidComponent, i) => (
-              <MidComponent key={i} {...props} />))
-          }
-          <ActionBtnWrapper>
-            <Button
-              color={!formState.loading ? 'primary' : 'secondary'}
-              type='submit'
-              disabled={formState.loading}
-              className='review-sent'
-            >
-              {!formState.loading ? (
-                t('SEND_REVIEW', 'Send review')
-              ) : t('LOADING', 'Loading')}
-            </Button>
-          </ActionBtnWrapper>
-          <Alert
-            title={t('DRIVER_REVIEW', 'Driver Review')}
-            content={alertState.content}
-            acceptText={t('ACCEPT', 'Accept')}
-            open={alertState.open}
-            onClose={() => closeAlert()}
-            onAccept={() => closeAlert()}
-            closeOnBackdrop={false}
+        </CommentsList>
+      </LogoAndReviewWrapper>
+      <ReviewProfessionalContainer onSubmit={handleSubmit(onSubmit)}>
+        <Comments>
+          <p>{t('DO_YOU_WANT_TO_ADD_SOMETHING', 'Do you want to add something?')}</p>
+          <TextArea
+            name='comment'
+            value={extraComment}
+            onChange={(e) => setExtraComment(e.target.value)}
+            autoComplete='off'
           />
-        </ReviewDriverContainer>
-      </>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
+        </Comments>
+        {
+          props.afterMidElements?.map((MidElement, i) => (
+            <React.Fragment key={i}>
+              {MidElement}
+            </React.Fragment>))
+        }
+        {
+          props.afterMidComponents?.map((MidComponent, i) => (
+            <MidComponent key={i} {...props} />))
+        }
+        <ActionBtnWrapper>
+          <Button
+            color={!formState.loading ? 'primary' : 'secondary'}
+            type='submit'
+            disabled={formState.loading}
+            className='review-sent'
+          >
+            {!formState.loading ? (
+              t('SEND_REVIEW', 'Send review')
+            ) : t('LOADING', 'Loading')}
+          </Button>
+        </ActionBtnWrapper>
+        <Alert
+          title={t('DRIVER_REVIEW', 'Driver Review')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
+          closeOnBackdrop={false}
+        />
+      </ReviewProfessionalContainer>
     </>
   )
 }

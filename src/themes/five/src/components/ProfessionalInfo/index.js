@@ -30,20 +30,15 @@ const ProfessionalInfoUI = (props) => {
   const [, t] = useLanguage()
 
   const getReviewPercent = (quality) => {
-    switch (quality) {
-      case 1:
-        return 0
-      case 2:
-        return 25
-      case 3:
-        return 50
-      case 4:
-        return 75
-      case 5:
-        return 100
-      default:
-        return quality / 5 * 100
+    const reviewPercents = {
+      1: 0,
+      2: 25,
+      3: 50,
+      4: 75,
+      5: 100
     }
+    if (typeof reviewPercents[quality] !== 'undefined') return reviewPercents[quality]
+    else return quality / 5 * 100
   }
 
   return (

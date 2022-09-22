@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Button } from '../../styles/Buttons'
 
-export const ReviewDriverContainer = styled.form`
+export const ReviewProfessionalContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
