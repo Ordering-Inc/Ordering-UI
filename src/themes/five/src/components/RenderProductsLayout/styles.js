@@ -71,6 +71,11 @@ export const BusinessCartContainer = styled(BusinessCategoriesContainer)`
   display: none;
   margin-top: 70px;
   min-width: 325px;
+  @media (min-width: 769px) {
+    ${({ isProfessional }) => isProfessional && css`
+      margin-top: 0px;
+    `}
+  }
   @media (min-width: 1000px) {
     display: block;
   }
@@ -208,7 +213,7 @@ export const WrapperSearch = styled.div`
 `
 
 export const ProfessionalFilterWrapper = styled.div`
-  margin-bottom: 50px;
+  padding-bottom: 35px;
   ${({ isTop }) => isTop && css`
     margin-top: 30px;
   `}

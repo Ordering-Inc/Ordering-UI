@@ -72,6 +72,7 @@ import { TaxInformation } from '../TaxInformation'
 
 import { getGoogleMapImage } from '../../../../../utils'
 import { OrderHistory } from './OrderHistory'
+import { ReviewProfessional } from '../ReviewProfessional'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -103,9 +104,10 @@ const OrderDetailsUI = (props) => {
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
   const [isProductReviewed, setIsProductReviewed] = useState(false)
   const [isDriverReviewed, setIsDriverReviewed] = useState(false)
+  const [isProReviewed, setIsProReviewed] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
   const [isReviewOpen, setIsReviewOpen] = useState(false)
-  const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
+  const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false, professional: false })
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isService, setIsService] = useState(false)
   const [isOrderHistory, setIsOrderHistory] = useState(false)
@@ -212,9 +214,10 @@ const OrderDetailsUI = (props) => {
   ]
 
   const handleOpenReview = () => {
-    if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
-    else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
-    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false, professional: false })
+    else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false, professional: false })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true, professional: false })
+    else if (isService && !isProReviewed) setReviewStatus({ order: false, product: false, driver: false, professional: true })
     else {
       setIsReviewOpen(false)
       return
@@ -223,18 +226,19 @@ const OrderDetailsUI = (props) => {
   }
 
   const handleCloseReivew = () => {
-    setReviewStatus({ order: false, product: false, driver: false })
+    setReviewStatus({ order: false, product: false, driver: false, professional: false })
     setIsReviewOpen(false)
   }
 
   const closeReviewOrder = () => {
-    if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
-    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false, professional: false })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true, professional: false })
     else handleCloseReivew()
   }
 
   const closeReviewProduct = () => {
-    if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
+    if (isService && !isProReviewed) setReviewStatus({ order: false, product: false, driver: false, professional: true })
+    else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true, professional: false })
     else {
       setIsDriverReviewed(true)
       handleCloseReivew()
@@ -483,7 +487,7 @@ const OrderDetailsUI = (props) => {
                         active={
                           acceptedStatus.includes(parseInt(order?.status, 10)) &&
                           (!order?.review || (order.driver && !order?.user_review)) &&
-                          (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
+                          (!isOrderReviewed || !isProductReviewed || (isService && !isProReviewed) || !isDriverReviewed)
                         }
                       >
                         <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
@@ -736,7 +740,9 @@ const OrderDetailsUI = (props) => {
                 ? t('REVIEW_ORDER', 'Review order')
                 : (reviewStatus?.product
                   ? t('REVIEW_PRODUCT', 'Review Product')
-                  : t('REVIEW_DRIVER', 'Review Driver')))
+                  : (reviewStatus?.professional
+                    ? t('PROFESSIONAL_REVIEW', 'Professional review')
+                    : t('REVIEW_DRIVER', 'Review Driver'))))
               : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
           >
             <ReviewWrapper>
@@ -745,7 +751,9 @@ const OrderDetailsUI = (props) => {
                   ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
                   : (reviewStatus?.product
                     ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
-                    : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
+                    : (reviewStatus?.professional
+                      ? <ReviewProfessional order={order} closeReviewProfessional={handleCloseReivew} setIsProfessionalReviewed={setIsProReviewed} isProfessional />
+                      : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />))
               }
             </ReviewWrapper>
 
