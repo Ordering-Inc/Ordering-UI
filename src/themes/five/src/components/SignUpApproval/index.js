@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
-import { Button } from 'ordering-ui/theme_five'
+import { Button } from '../../styles/Buttons'
 
 import { useLanguage } from 'ordering-components'
 

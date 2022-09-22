@@ -115,7 +115,7 @@ export const RenderProductsLayout = (props) => {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
   const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
-  const hideBusinessNearCity = orderingTheme?.theme?.business_view?.components?.near_business?.hidden
+  const hideBusinessNearCity = theme?.business_view?.components?.near_business?.hidden ?? true
 
   const BusinessLayoutCategories = businessLayout.layoutOne
     ? CategoriesLayoutGroceries
@@ -129,7 +129,7 @@ export const RenderProductsLayout = (props) => {
     <>
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
-          {typeof hideBusinessNearCity !== 'undefined' && !hideBusinessNearCity && !useKioskApp && (
+          {!hideBusinessNearCity && !useKioskApp && (
             <NearBusiness>
               <BusinessesListing
                 logosLayout
@@ -410,11 +410,17 @@ export const RenderProductsLayout = (props) => {
               openBusinessInformation={openBusinessInformation}
             />
           )}
-          <BusinessProductsCategories
-            isSkeleton
-            categories={[]}
-            openBusinessInformation={openBusinessInformation}
-          />
+          <BusinessContent isCustomLayout={isCustomLayout || useKioskApp} id='wrapper-categories'>
+            <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
+              <div style={{ position: 'relative' }}>
+                <BusinessProductsCategories
+                  isSkeleton
+                  categories={[]}
+                  openBusinessInformation={openBusinessInformation}
+                />
+              </div>
+            </BusinessCategoryProductWrapper>
+          </BusinessContent>
           <WrapContent>
             <BusinessProductsList
               categories={[]}

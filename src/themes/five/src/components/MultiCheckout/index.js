@@ -7,6 +7,7 @@ import {
   useConfig,
   useSession,
   useValidationFields,
+  useOrder,
   MultiCheckout as MultiCheckoutController
 } from 'ordering-components'
 
@@ -54,7 +55,8 @@ const MultiCheckoutUI = (props) => {
     paymethodSelected,
     handleSelectPaymethod,
     handleSelectWallet,
-    handlePaymethodDataChange
+    handlePaymethodDataChange,
+    onRedirectPage
   } = props
 
   const [, t] = useLanguage()
@@ -63,6 +65,7 @@ const MultiCheckoutUI = (props) => {
   const [customerState] = useCustomer()
   const [validationFields] = useValidationFields()
   const [{ user }] = useSession()
+  const [orderState] = useOrder()
   const history = useHistory()
 
   const [userErrors, setUserErrors] = useState([])
@@ -70,6 +73,7 @@ const MultiCheckoutUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const maximumCarts = 5
   const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || openCarts.length > maximumCarts
+  const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -137,6 +141,11 @@ const MultiCheckoutUI = (props) => {
     }
   }, [validationFields, user, customerState])
 
+  useEffect(() => {
+    if (openCarts.length) return
+    onRedirectPage && onRedirectPage({ page: 'search' })
+  }, [openCarts])
+
   return (
     <>
       {openCarts.length === 0 ? (
@@ -202,6 +211,11 @@ const MultiCheckoutUI = (props) => {
                   <DriverTipDivider />
                 </React.Fragment>
               ))}
+              {walletCarts.length > 0 && (
+                <WarningText>
+                  {t('WARNING_PARTIAL_WALLET_CARTS', 'Important: One or more carts can`t be completed due a partial payment with cash/points wallet and requires to be paid individually')}
+                </WarningText>
+              )}
               {openCarts.length > 0 && (
                 <MultiCartPriceContainer>
                   <div>

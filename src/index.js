@@ -92,12 +92,14 @@ import { VerticalOrdersLayout } from './components/VerticalOrdersLayout'
 import { GoogleLoginButton } from './components/GoogleLogin'
 import { SmsLoginButton } from './components/SmsLogin'
 import { AppleLogin } from './components/AppleLogin'
+import { SearchProducts } from './components/RenderProductsLayout/SearchProducts'
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
 import { useCountdownTimer } from './hooks/useCountdownTimer'
 import { useIntersectionObserver } from './hooks/useIntersectionObserver'
+import { useIsMounted } from './hooks/useIsMounted'
 
 import { Button } from './styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
@@ -210,6 +212,7 @@ export {
   ReviewDriver,
   RenderProductsLayout,
   SearchBar,
+  SearchProducts,
   SignUpForm,
   SingleProductCard,
   SmartAppBanner,
@@ -236,6 +239,7 @@ export {
   useWindowSize,
   useCountdownTimer,
   useIntersectionObserver,
+  useIsMounted,
   // Styles
   Button,
   Input,
