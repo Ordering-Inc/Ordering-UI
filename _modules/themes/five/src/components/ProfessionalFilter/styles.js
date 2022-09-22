@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProfessionalPhoto = exports.ProfessionalListing = exports.ProfessionalItem = exports.InfoWrapper = exports.HeartIconWrapper = exports.ContentWrapper = exports.Container = void 0;
+exports.ProfessionalPhoto = exports.ProfessionalListing = exports.ProfessionalItem = exports.InfoWrapper = exports.IconWrapper = exports.HeartIconWrapper = exports.ContentWrapper = exports.Container = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72,8 +72,14 @@ var InfoWrapper = _styledComponents.default.div(_templateObject9 || (_templateOb
 
 exports.InfoWrapper = InfoWrapper;
 
-var HeartIconWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  svg {\n    color: ", ";\n      font-size: 16px;\n  }\n"])), function (props) {
+var HeartIconWrapper = _styledComponents.default.span(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  svg {\n    color: ", ";\n      font-size: 16px;\n  }\n"])), function (props) {
   return props.theme.colors.danger500;
 });
 
 exports.HeartIconWrapper = HeartIconWrapper;
+
+var IconWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  .info {\n    margin-right: 10px;\n    ", "\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0px;\n    "])));
+});
+
+exports.IconWrapper = IconWrapper;

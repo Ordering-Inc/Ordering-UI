@@ -53,6 +53,8 @@ var _utils = require("../../../../../utils");
 
 var _OrderHistory = require("./OrderHistory");
 
+var _ReviewProfessional = require("../ReviewProfessional");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -160,59 +162,65 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       isDriverReviewed = _useState8[0],
       setIsDriverReviewed = _useState8[1];
 
-  var _useState9 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isProReviewed = _useState10[0],
+      setIsProReviewed = _useState10[1];
+
+  var _useState11 = (0, _react.useState)({
     business: false,
     driver: false
   }),
-      _useState10 = _slicedToArray(_useState9, 2),
-      unreadAlert = _useState10[0],
-      setUnreadAlert = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      isReviewOpen = _useState12[0],
-      setIsReviewOpen = _useState12[1];
+      unreadAlert = _useState12[0],
+      setUnreadAlert = _useState12[1];
 
-  var _useState13 = (0, _react.useState)({
-    order: false,
-    product: false,
-    driver: false
-  }),
+  var _useState13 = (0, _react.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      reviewStatus = _useState14[0],
-      setReviewStatus = _useState14[1];
+      isReviewOpen = _useState14[0],
+      setIsReviewOpen = _useState14[1];
 
   var _useState15 = (0, _react.useState)({
+    order: false,
+    product: false,
+    driver: false,
+    professional: false
+  }),
+      _useState16 = _slicedToArray(_useState15, 2),
+      reviewStatus = _useState16[0],
+      setReviewStatus = _useState16[1];
+
+  var _useState17 = (0, _react.useState)({
     open: false,
     tax: null
   }),
-      _useState16 = _slicedToArray(_useState15, 2),
-      openTaxModal = _useState16[0],
-      setOpenTaxModal = _useState16[1];
-
-  var _useState17 = (0, _react.useState)(false),
       _useState18 = _slicedToArray(_useState17, 2),
-      isService = _useState18[0],
-      setIsService = _useState18[1];
+      openTaxModal = _useState18[0],
+      setOpenTaxModal = _useState18[1];
 
   var _useState19 = (0, _react.useState)(false),
       _useState20 = _slicedToArray(_useState19, 2),
-      isOrderHistory = _useState20[0],
-      setIsOrderHistory = _useState20[1];
+      isService = _useState20[0],
+      setIsService = _useState20[1];
 
-  var _useState21 = (0, _react.useState)({
+  var _useState21 = (0, _react.useState)(false),
+      _useState22 = _slicedToArray(_useState21, 2),
+      isOrderHistory = _useState22[0],
+      setIsOrderHistory = _useState22[1];
+
+  var _useState23 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
-      _useState22 = _slicedToArray(_useState21, 2),
-      confirm = _useState22[0],
-      setConfirm = _useState22[1];
-
-  var _useState23 = (0, _react.useState)(true),
       _useState24 = _slicedToArray(_useState23, 2),
-      isShowBusinessLogo = _useState24[0],
-      setIsShowBusinessLogo = _useState24[1];
+      confirm = _useState24[0],
+      setConfirm = _useState24[1];
+
+  var _useState25 = (0, _react.useState)(true),
+      _useState26 = _slicedToArray(_useState25, 2),
+      isShowBusinessLogo = _useState26[0],
+      setIsShowBusinessLogo = _useState26[1];
 
   var _props$order = props.order,
       order = _props$order.order,
@@ -455,15 +463,23 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     if (!(order !== null && order !== void 0 && order.review) && !isOrderReviewed) setReviewStatus({
       order: true,
       product: false,
-      driver: false
+      driver: false,
+      professional: false
     });else if (!isProductReviewed) setReviewStatus({
       order: false,
       product: true,
-      driver: false
+      driver: false,
+      professional: false
     });else if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
       order: false,
       product: false,
-      driver: true
+      driver: true,
+      professional: false
+    });else if (isService && !isProReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: false,
+      professional: true
     });else {
       setIsReviewOpen(false);
       return;
@@ -475,7 +491,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setReviewStatus({
       order: false,
       product: false,
-      driver: false
+      driver: false,
+      professional: false
     });
     setIsReviewOpen(false);
   };
@@ -484,19 +501,27 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     if (!isProductReviewed) setReviewStatus({
       order: false,
       product: true,
-      driver: false
+      driver: false,
+      professional: false
     });else if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
       order: false,
       product: false,
-      driver: true
+      driver: true,
+      professional: false
     });else handleCloseReivew();
   };
 
   var closeReviewProduct = function closeReviewProduct() {
-    if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+    if (isService && !isProReviewed) setReviewStatus({
       order: false,
       product: false,
-      driver: true
+      driver: false,
+      professional: true
+    });else if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
+      order: false,
+      product: false,
+      driver: true,
+      professional: false
     });else {
       setIsDriverReviewed(true);
       handleCloseReivew();
@@ -729,7 +754,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   }, t('VIEW_DETAILS', 'View details'))), /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
     className: "Review-order",
-    active: acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
+    active: acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || isService && !isProReviewed || !isDriverReviewed)
   }, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleOpenReview
   }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag29 = theme.defaultLanguages) === null || _theme$defaultLanguag29 === void 0 ? void 0 : _theme$defaultLanguag29.REVIEW_ORDER) || 'Review your Order'))))))), /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessExternalWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
@@ -877,7 +902,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   })), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isReviewOpen,
     onClose: handleCloseReivew,
-    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag33 = theme.defaultLanguages) === null || _theme$defaultLanguag33 === void 0 ? void 0 : _theme$defaultLanguag33.LOADING) || 'Loading...')
+    title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.professional ? t('PROFESSIONAL_REVIEW', 'Professional review') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag33 = theme.defaultLanguages) === null || _theme$defaultLanguag33 === void 0 ? void 0 : _theme$defaultLanguag33.LOADING) || 'Loading...')
   }, /*#__PURE__*/_react.default.createElement(_styles.ReviewWrapper, null, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
     closeReviewOrder: closeReviewOrder,
@@ -886,6 +911,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     order: order,
     closeReviewProduct: closeReviewProduct,
     setIsProductReviewed: setIsProductReviewed
+  }) : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.professional ? /*#__PURE__*/_react.default.createElement(_ReviewProfessional.ReviewProfessional, {
+    order: order,
+    closeReviewProfessional: handleCloseReivew,
+    setIsProfessionalReviewed: setIsProReviewed,
+    isProfessional: true
   }) : /*#__PURE__*/_react.default.createElement(_ReviewDriver.ReviewDriver, {
     order: order,
     closeReviewDriver: handleCloseReivew,

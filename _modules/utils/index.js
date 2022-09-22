@@ -729,6 +729,109 @@ var reviewCommentList = function reviewCommentList(type) {
         }]
       }
     },
+    professional: {
+      1: {
+        title: t('PROFESSIONAL_QUICK_COMMENT_TITLE_1', 'What went wrong?'),
+        list: [{
+          key: 0,
+          content: t('PROFESSIONAL_QUICK_COMMENT_1_0', 'Not handled with care')
+        }, {
+          key: 1,
+          content: t('PROFESSIONAL_QUICK_COMMENT_1_1', 'Poor communication')
+        }, {
+          key: 2,
+          content: t('PROFESSIONAL_QUICK_COMMENT_1_2', 'COVID-19 issue')
+        }, {
+          key: 3,
+          content: t('PROFESSIONAL_QUICK_COMMENT_1_3', 'Didn\'t follow instructions')
+        }, {
+          key: 4,
+          content: t('PROFESSIONAL_QUICK_COMMENT_1_4', 'Rude')
+        }, {
+          key: 5,
+          content: t('PROFESSIONAL_QUICK_COMMENT_1_5', 'Not on-time')
+        }]
+      },
+      2: {
+        title: t('PROFESSIONAL_QUICK_COMMENT_TITLE_2', 'What went wrong?'),
+        list: [{
+          key: 0,
+          content: t('PROFESSIONAL_QUICK_COMMENT_2_0', 'Not handled with care')
+        }, {
+          key: 1,
+          content: t('PROFESSIONAL_QUICK_COMMENT_2_1', 'Poor communication')
+        }, {
+          key: 2,
+          content: t('PROFESSIONAL_QUICK_COMMENT_2_2', 'COVID-19 issue')
+        }, {
+          key: 3,
+          content: t('PROFESSIONAL_QUICK_COMMENT_2_3', 'Didn\'t follow instructions')
+        }, {
+          key: 4,
+          content: t('PROFESSIONAL_QUICK_COMMENT_2_4', 'Rude')
+        }, {
+          key: 5,
+          content: t('PROFESSIONAL_QUICK_COMMENT_2_5', 'Not on-time')
+        }]
+      },
+      3: {
+        title: t('PROFESSIONAL_QUICK_COMMENT_TITLE_3', 'What could have been better?'),
+        list: [{
+          key: 0,
+          content: t('PROFESSIONAL_QUICK_COMMENT_3_0', 'Not handled with care')
+        }, {
+          key: 1,
+          content: t('PROFESSIONAL_QUICK_COMMENT_3_1', 'Poor communication')
+        }, {
+          key: 2,
+          content: t('PROFESSIONAL_QUICK_COMMENT_3_2', 'COVID-19 issue')
+        }, {
+          key: 3,
+          content: t('PROFESSIONAL_QUICK_COMMENT_3_3', 'Didn\'t follow instructions')
+        }, {
+          key: 4,
+          content: t('PROFESSIONAL_QUICK_COMMENT_3_4', 'Rude')
+        }, {
+          key: 5,
+          content: t('PROFESSIONAL_QUICK_COMMENT_3_5', 'Not on-time')
+        }]
+      },
+      4: {
+        title: t('PROFESSIONAL_QUICK_COMMENT_TITLE_4', ' Tell us more'),
+        list: [{
+          key: 0,
+          content: t('PROFESSIONAL_QUICK_COMMENT_4_0', 'Not handled with care')
+        }, {
+          key: 1,
+          content: t('PROFESSIONAL_QUICK_COMMENT_4_1', 'Poor communication')
+        }, {
+          key: 2,
+          content: t('PROFESSIONAL_QUICK_COMMENT_4_2', 'COVID-19 issue')
+        }, {
+          key: 3,
+          content: t('PROFESSIONAL_QUICK_COMMENT_4_3', 'Didn\'t follow instructions')
+        }, {
+          key: 4,
+          content: t('PROFESSIONAL_QUICK_COMMENT_4_4', 'Rude')
+        }, {
+          key: 5,
+          content: t('PROFESSIONAL_QUICK_COMMENT_4_5', 'Not on-time')
+        }]
+      },
+      5: {
+        title: t('PROFESSIONAL_QUICK_COMMENT_TITLE_5', 'What went well?'),
+        list: [{
+          key: 0,
+          content: t('PROFESSIONAL_QUICK_COMMENT_5_0', 'Perfect service')
+        }, {
+          key: 1,
+          content: t('PROFESSIONAL_QUICK_COMMENT_5_1', 'Excellent communication')
+        }, {
+          key: 2,
+          content: t('PROFESSIONAL_QUICK_COMMENT_5_2', 'Cordial service')
+        }]
+      }
+    },
     product: {
       like: [{
         key: 0,
