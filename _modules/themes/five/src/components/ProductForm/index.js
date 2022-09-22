@@ -751,7 +751,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     value: (productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)).toFixed(2)
   }), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
-    className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
+    className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || productCart.quantity >= (product === null || product === void 0 ? void 0 : product.maximum_per_order) || isSoldOut ? 'disabled' : '')
   }), isHaveWeight && /*#__PURE__*/_react.default.createElement(_styles.WeightUnitSwitch, null, /*#__PURE__*/_react.default.createElement(_styles.WeightUnitItem, {
     onClick: function onClick() {
       return handleSwitchQtyUnit('pieces');
@@ -864,7 +864,7 @@ var ProductForm = function ProductForm(props) {
 
   var productOptionsProps = _objectSpread(_objectSpread({}, props), {}, {
     productCart: {
-      quantity: (props === null || props === void 0 ? void 0 : (_props$product = props.product) === null || _props$product === void 0 ? void 0 : _props$product.minimum_per_order) || 1
+      quantity: (props === null || props === void 0 ? void 0 : (_props$product = props.product) === null || _props$product === void 0 ? void 0 : _props$product.maximum_per_order) || 1
     },
     UIComponent: ProductOptionsUI
   });
