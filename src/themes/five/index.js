@@ -72,7 +72,9 @@ import { ProductOption } from './src/components/ProductOption'
 import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
 import { ProfileOptions } from './src/components/UserProfileForm/ProfileOptions'
 import { Promotions } from './src/components/Promotions'
+import { ProfessionalInfo } from './src/components/ProfessionalInfo'
 import { RenderProductsLayout } from './src/components/RenderProductsLayout'
+import { ReviewProfessional } from './src/components/ReviewProfessional'
 import { ResetPassword } from './src/components/ResetPassword'
 import { SearchBar } from './src/components/SearchBar'
 import { SessionsList } from './src/components/SessionsList'
@@ -178,7 +180,9 @@ export {
   ProfileOptions,
   ProductOptionSubOption,
   Promotions,
+  ProfessionalInfo,
   PhoneAutocomplete,
+  ReviewProfessional,
   RenderProductsLayout,
   ResetPassword,
   SearchBar,
