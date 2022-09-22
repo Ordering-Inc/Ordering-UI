@@ -38,7 +38,7 @@ const ProfessionalInfoUI = (props) => {
       5: 100
     }
     if (typeof reviewPercents[quality] !== 'undefined') return reviewPercents[quality]
-    else return quality / 5 * 100
+    return quality / 5 * 100
   }
 
   return (
