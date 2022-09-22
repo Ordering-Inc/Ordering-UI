@@ -336,20 +336,17 @@ const LoginFormUI = (props) => {
   }, [ordering, submitted])
 
   useEffect(() => {
-    if (configs && Object.keys(configs).length > 0 &&
-      configs?.security_recaptcha_type?.value === 'v3' &&
-      configs?.security_recaptcha_score_v3?.value > 0 &&
-      configs?.security_recaptcha_site_key_v3?.value
-    ) {
-      setRecaptchaVersion({ version: 'v3', siteKey: configs?.security_recaptcha_site_key_v3?.value })
-      return
-    }
-    if (configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_site_key?.value) {
-      setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
-      return
-    }
-    if (configs && Object.keys(configs).length > 0) {
-      throw new Error('ReCaptcha component: the config doesn\'t have recaptcha site key')
+    if (configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_auth?.value === '1') {
+      if (configs?.security_recaptcha_type?.value === 'v3' &&
+        configs?.security_recaptcha_score_v3?.value > 0 &&
+        configs?.security_recaptcha_site_key_v3?.value
+      ) {
+        setRecaptchaVersion({ version: 'v3', siteKey: configs?.security_recaptcha_site_key_v3?.value })
+        return
+      }
+      if (configs?.security_recaptcha_site_key?.value) {
+        setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+      }
     }
   }, [configs])
 
