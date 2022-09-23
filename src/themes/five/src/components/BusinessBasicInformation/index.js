@@ -348,7 +348,7 @@ export const BusinessBasicInformation = (props) => {
             </BusinessInfoItem>
           </BusinessInfo>
         </BusinessInfoContent>
-        {(categoryState?.products?.length !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && (
+        {(categoryState?.products?.length !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && !business?.professionals?.length && (
           <SearchComponent />
         )}
       </BusinessInfoContainer>

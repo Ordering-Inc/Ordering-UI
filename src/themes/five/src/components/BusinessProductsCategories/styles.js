@@ -36,6 +36,11 @@ export const CategoriesContainer = styled.div`
   /* @media (min-width: 381px) {
     padding: 15px 0px 0px 0px;
   } */
+  @media (min-width: 769px) {
+    ${({ isProfessional }) => isProfessional && css`
+      width: 100%;
+    `}
+  }
   @media (min-width: 992px) {
     width: ${props => props.w ?? 'auto'};
   }

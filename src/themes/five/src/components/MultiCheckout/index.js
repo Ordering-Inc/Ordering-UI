@@ -55,7 +55,8 @@ const MultiCheckoutUI = (props) => {
     paymethodSelected,
     handleSelectPaymethod,
     handleSelectWallet,
-    handlePaymethodDataChange
+    handlePaymethodDataChange,
+    onRedirectPage
   } = props
 
   const [, t] = useLanguage()
@@ -140,6 +141,11 @@ const MultiCheckoutUI = (props) => {
     }
   }, [validationFields, user, customerState])
 
+  useEffect(() => {
+    if (openCarts.length) return
+    onRedirectPage && onRedirectPage({ page: 'search' })
+  }, [openCarts])
+
   return (
     <>
       {openCarts.length === 0 ? (
@@ -207,7 +213,7 @@ const MultiCheckoutUI = (props) => {
               ))}
               {walletCarts.length > 0 && (
                 <WarningText>
-                  {t('WARNING_', 'One or more carts can`t be processed in multi checkout and requires to be paid individuality')}
+                  {t('WARNING_PARTIAL_WALLET_CARTS', 'Important: One or more carts can`t be completed due a partial payment with cash/points wallet and requires to be paid individually')}
                 </WarningText>
               )}
               {openCarts.length > 0 && (
