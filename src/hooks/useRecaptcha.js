@@ -32,7 +32,7 @@ export const useRecaptcha = (enableRecaptcha) => {
         })
         return
       }
-      showToast(ToastType.Error, t('CONFIG_DOENNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key'))
+      showToast(ToastType.Error, t('CONFIG_DOESNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key'))
     }
   }, [configs, enableRecaptcha])
 
