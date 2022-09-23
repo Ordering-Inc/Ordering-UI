@@ -46,6 +46,8 @@ import { FacebookLoginButton } from '../FacebookLogin'
 import { AppleLogin } from '../AppleLogin'
 import { SmsLoginButton } from '../../../../../components/SmsLogin'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
+import { useRecaptcha } from '../../../../../hooks/useRecaptcha'
+
 import { formatSeconds } from '../../../../../utils'
 import { GoogleLoginButton } from '../GoogleLogin'
 import {
@@ -92,9 +94,9 @@ const LoginFormUI = (props) => {
   const theme = useTheme()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
-
+  const [recaptchaConfig] = useRecaptcha(enableReCaptcha)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: 'v3', siteKey: '' })
+  const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: '', siteKey: '' })
   const [, { login }] = useSession()
   const [passwordSee, setPasswordSee] = useState(false)
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
@@ -243,10 +245,18 @@ const LoginFormUI = (props) => {
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       if (formState.result?.result?.[0] === 'ERROR_AUTH_VERIFICATION_CODE') {
-        setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+        if (configs?.security_recaptcha_site_key?.value) {
+          setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+          setAlertState({
+            open: true,
+            content: [t('TRY_AGAIN', 'Please try again')]
+          })
+          setSubmitted(false)
+          return
+        }
         setAlertState({
           open: true,
-          content: [t('TRY_AGAIN', 'Please try again')]
+          content: [t('CONFIG_DOESNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key')]
         })
         setSubmitted(false)
         return
@@ -336,22 +346,10 @@ const LoginFormUI = (props) => {
   }, [ordering, submitted])
 
   useEffect(() => {
-    if (configs && Object.keys(configs).length > 0 &&
-      configs?.security_recaptcha_type?.value === 'v3' &&
-      configs?.security_recaptcha_score_v3?.value > 0 &&
-      configs?.security_recaptcha_site_key_v3?.value
-    ) {
-      setRecaptchaVersion({ version: 'v3', siteKey: configs?.security_recaptcha_site_key_v3?.value })
-      return
+    if (recaptchaConfig?.siteKey) {
+      setRecaptchaVersion({ version: recaptchaConfig?.version, siteKey: recaptchaConfig?.siteKey })
     }
-    if (configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_site_key?.value) {
-      setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
-      return
-    }
-    if (configs && Object.keys(configs).length > 0) {
-      throw new Error('ReCaptcha component: the config doesn\'t have recaptcha site key')
-    }
-  }, [configs])
+  }, [recaptchaConfig])
 
   return (
     <>
