@@ -202,7 +202,9 @@ const BusinessesListingUI = (props) => {
           <BusinessAddress onClick={() => handleGotoMaps(business)}>{business?.address}</BusinessAddress>
           <p>{business?.city?.name}</p>
           <p>{business?.cellphone}</p>
-          <p>{t('OPEN_UNTIL', 'Open until')} {getScheduleOpen(business)}</p>
+          {getScheduleOpen(business) && (
+            <p>{t('OPEN_UNTIL', 'Open until')} {getScheduleOpen(business)}</p>
+          )}
         </LeftContainer>
         <RightContainer>
           <Button color='primary' onClick={() => onBusinessClick(business)}>
@@ -309,7 +311,7 @@ const BusinessesListingUI = (props) => {
             ))
           )}
           {
-            !businessesSearchList.loading && businessesSearchList.businesses.length === 0 && (
+            !businessesSearchList.loading && businessesSearchList?.businesses?.length === 0 && (
               <NotFoundSourceWrapper>
                 <NotFoundSource
                   content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
@@ -317,8 +319,8 @@ const BusinessesListingUI = (props) => {
               </NotFoundSourceWrapper>
             )
           }
-          {!businessesSearchList.loading && businessesSearchList.error && businessesSearchList.error.length > 0 && businessesSearchList.businesses.length === 0 && (
-            businessesSearchList.error.map((e, i) => (
+          {!businessesSearchList.loading && businessesSearchList?.error && businessesSearchList?.error?.length > 0 && businessesSearchList?.businesses?.length === 0 && (
+            businessesSearchList?.error?.map((e, i) => (
               <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
             ))
           )}

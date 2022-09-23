@@ -42,7 +42,9 @@ import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../UserDetails'
 import { Confirm } from '../Confirm'
 import { LoginForm } from '../LoginForm'
+import { LoginForm as LoginFormPF } from '../LoginForm/layouts/pfchangs'
 import { SignUpForm } from '../SignUpForm'
+import { SignUpForm as SignUpFormPF } from '../SignUpForm/layouts/pfchangs'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { getDistance } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
@@ -65,6 +67,7 @@ export const Header = (props) => {
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
   const [configState] = useConfig()
+  const [ordering] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
 
   const clearCustomer = useRef(null)
@@ -76,9 +79,10 @@ export const Header = (props) => {
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
-
+  const [otpDataUser, setOtpDataUser] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
+  const isAlsea = ordering.project === 'alsea'
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
@@ -103,10 +107,18 @@ export const Header = (props) => {
   const showMoment = !theme?.layouts?.header?.components?.moment?.hidden
   const showOrderOptionsByTheme = showMoment || showOrderTypes || showAddressForm
 
+  const LoginFormComponent = isloginSignupLayoutPF
+    ? LoginFormPF
+    : LoginForm
+
+  const SignFormComponent = isloginSignupLayoutPF
+    ? SignUpFormPF
+    : SignUpForm
+
   const handleSuccessSignup = (user) => {
     login({
       user,
-      token: user?.session?.access_token
+      token: user?.session?.access_token || otpDataUser?.token
     })
   }
 
@@ -160,9 +172,13 @@ export const Header = (props) => {
     setModalPageToShow(page)
   }
 
-  const closeAuthModal = () => {
+  const closeAuthModal = (deleteUser) => {
     setAuthModalOpen(false)
     setModalPageToShow(null)
+    setOtpDataUser(null)
+    if (otpDataUser && deleteUser) {
+      deleteOtpUser()
+    }
   }
 
   const handleSuccessLogin = (user) => {
@@ -186,6 +202,25 @@ export const Header = (props) => {
 
   const handleBusinessClick = (business) => {
     events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
+  }
+
+  const deleteOtpUser = async () => {
+    try {
+      await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging'}.ordering.co/alseaplatform/delete_new_user.php`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: otpDataUser.id,
+          token: otpDataUser.token
+        })
+      })
+    } catch (err) {
+      setConfirm({
+        ...confirm,
+        content: err.message,
+        open: true
+      })
+    }
   }
 
   useEffect(() => {
@@ -212,6 +247,19 @@ export const Header = (props) => {
       maximumAge: 0
     })
   }, [orderState?.options?.address?.location, pathname])
+
+  useEffect(() => {
+    if (!otpDataUser && isloginSignupLayoutPF && modalPageToShow === 'signup') {
+      setAuthModalOpen(false)
+      setModalPageToShow(null)
+    }
+  }, [otpDataUser, modalPageToShow, authModalOpen])
+
+  useEffect(() => {
+    if (auth && isloginSignupLayoutPF) {
+      setOtpDataUser(null)
+    }
+  }, [auth])
 
   return (
     <>
@@ -563,13 +611,13 @@ export const Header = (props) => {
         {authModalOpen && !auth && (
           <Modal
             open={authModalOpen}
-            onRemove={() => closeAuthModal()}
-            onClose={() => closeAuthModal()}
+            onRemove={() => closeAuthModal(true)}
+            onClose={() => closeAuthModal(true)}
             width='50%'
             authModal
           >
             {modalPageToShow === 'login' && (
-              <LoginForm
+              <LoginFormComponent
                 handleSuccessLogin={handleSuccessLogin}
                 elementLinkToSignup={
                   <a
@@ -589,10 +637,13 @@ export const Header = (props) => {
                 }
                 useLoginByCellphone
                 isPopup
+                defaultLoginTab={isloginSignupLayoutPF && 'otp'}
+                setOtpDataUser={setOtpDataUser}
+                handleOpenSignup={() => setModalPageToShow('signup')}
               />
             )}
             {modalPageToShow === 'signup' && (
-              <SignUpForm
+              <SignFormComponent
                 elementLinkToLogin={
                   <a
                     onClick={
@@ -606,6 +657,7 @@ export const Header = (props) => {
                 handleSuccessSignup={handleSuccessSignup}
                 isPopup
                 closeModal={() => closeAuthModal()}
+                otpDataUser={otpDataUser}
               />
             )}
             {modalPageToShow === 'forgotpassword' && (
