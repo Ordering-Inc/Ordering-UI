@@ -67,7 +67,7 @@ var WrapperPlaceOrderButton = _styledComponents.default.div(_templateObject12 ||
 
 exports.WrapperPlaceOrderButton = WrapperPlaceOrderButton;
 
-var WarningText = _styledComponents.default.p(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin: 10px auto;\n  text-align: center;\n  color: ", ";\n"])), function (props) {
+var WarningText = _styledComponents.default.p(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin: 10px auto;\n  text-align: center;\n  color: ", ";\n  font-size: 14px;\n"])), function (props) {
   return props.theme.colors.danger500;
 });
 

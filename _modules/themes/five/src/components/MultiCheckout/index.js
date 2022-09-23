@@ -66,7 +66,7 @@ var mapConfigs = {
 };
 
 var MultiCheckoutUI = function MultiCheckoutUI(props) {
-  var _configs$google_maps_, _customerState$user;
+  var _Object$values, _configs$google_maps_, _customerState$user;
 
   var placing = props.placing,
       isCustomerMode = props.isCustomerMode,
@@ -76,7 +76,8 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       paymethodSelected = props.paymethodSelected,
       handleSelectPaymethod = props.handleSelectPaymethod,
       handleSelectWallet = props.handleSelectWallet,
-      handlePaymethodDataChange = props.handlePaymethodDataChange;
+      handlePaymethodDataChange = props.handlePaymethodDataChange,
+      onRedirectPage = props.onRedirectPage;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -102,6 +103,10 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
 
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 1),
+      orderState = _useOrder2[0];
+
   var history = (0, _reactRouterDom.useHistory)();
 
   var _useState = (0, _react.useState)([]),
@@ -124,6 +129,11 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
 
   var maximumCarts = 5;
   var isDisablePlaceOrderButton = !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id) || openCarts.length > maximumCarts;
+  var walletCarts = ((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
+    var _cart$products;
+
+    return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (cart === null || cart === void 0 ? void 0 : cart.valid_schedule) && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.valid_maximum) && (cart === null || cart === void 0 ? void 0 : cart.valid_minimum) && (cart === null || cart === void 0 ? void 0 : cart.wallets);
+  })) || null || [];
 
   var handlePlaceOrder = function handlePlaceOrder() {
     if (!userErrors.length) {
@@ -191,6 +201,12 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       checkValidationFields();
     }
   }, [validationFields, user, customerState]);
+  (0, _react.useEffect)(function () {
+    if (openCarts.length) return;
+    onRedirectPage && onRedirectPage({
+      page: 'search'
+    });
+  }, [openCarts]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openCarts.length === 0 ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('CARTS_NOT_FOUND', 'You don’t have carts available')
   }) : /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
@@ -222,7 +238,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     handleSelectWallet: handleSelectWallet,
     handlePaymethodDataChange: handlePaymethodDataChange
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CartHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MOBILE_FRONT_YOUR_ORDER', 'Your order'))), openCarts.map(function (cart) {
-    var _cart$products;
+    var _cart$products2;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: cart.uuid
@@ -230,9 +246,9 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
       cart: cart,
       isMultiCheckout: true,
-      isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) || 0
+      isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) || 0
     }), /*#__PURE__*/_react.default.createElement(_styles.DriverTipDivider, null));
-  }), openCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(totalCartsPrice))), /*#__PURE__*/_react.default.createElement("p", null, t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')))), /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), walletCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_PARTIAL_WALLET_CARTS', 'Important: One or more carts can`t be completed due a partial payment with cash/points wallet and requires to be paid individually')), openCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(totalCartsPrice))), /*#__PURE__*/_react.default.createElement("p", null, t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')))), /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     disabled: isDisablePlaceOrderButton || placing,
     onClick: handlePlaceOrder
