@@ -9,7 +9,7 @@ import { Input } from '../../../../styles/Inputs'
 import { Button } from '../../../../styles/Buttons'
 import { Checkbox } from '../../../../../../../styles/Checkbox'
 import { sortInputFields } from '../../../../../../../utils'
-
+import { useRecaptcha } from '../../../../../../../hooks/useRecaptcha'
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
 
@@ -60,7 +60,8 @@ const SignUpBusinessUI = (props) => {
   const [{ configs }] = useConfig()
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: 'v3', siteKey: '' })
+  const [recaptchaConfig] = useRecaptcha(enableReCaptcha)
+  const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: '', siteKey: '' })
   const emailInput = useRef(null)
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
@@ -149,10 +150,17 @@ const SignUpBusinessUI = (props) => {
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       if (formState.result?.result?.[0] === 'ERROR_AUTH_VERIFICATION_CODE') {
-        setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+        if (configs?.security_recaptcha_site_key?.value) {
+          setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+          setAlertState({
+            open: true,
+            content: [t('TRY_AGAIN', 'Please try again')]
+          })
+          return
+        }
         setAlertState({
           open: true,
-          content: [t('TRY_AGAIN', 'Please try again')]
+          content: [t('CONFIG_DOENNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key')]
         })
         return
       }
@@ -213,19 +221,10 @@ const SignUpBusinessUI = (props) => {
   }, [externalPhoneNumber])
 
   useEffect(() => {
-    if (configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_signup?.value === '1') {
-      if (configs?.security_recaptcha_type?.value === 'v3' &&
-        configs?.security_recaptcha_score_v3?.value > 0 &&
-        configs?.security_recaptcha_site_key_v3?.value
-      ) {
-        setRecaptchaVersion({ version: 'v3', siteKey: configs?.security_recaptcha_site_key_v3?.value })
-        return
-      }
-      if (configs?.security_recaptcha_site_key?.value) {
-        setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
-      }
+    if (recaptchaConfig?.siteKey) {
+      setRecaptchaVersion({ version: recaptchaConfig?.version, siteKey: recaptchaConfig?.siteKey })
     }
-  }, [configs])
+  }, [recaptchaConfig])
 
   useEffect(() => {
     handleChangeInput({
