@@ -68,7 +68,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _orderState$options3, _orderState$options3$, _orderState$options4, _orderState$options4$, _citiesState$cities, _citiesState$cities$f, _orderState$options5, _orderState$options5$, _businessesSearchList10, _orderState$options6;
+  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _orderState$options3, _orderState$options3$, _orderState$options4, _orderState$options4$, _citiesState$cities, _citiesState$cities$f, _orderState$options5, _orderState$options5$, _businessesSearchList10, _businessesSearchList11, _businessesSearchList12, _businessesSearchList13, _businessesSearchList14, _orderState$options6;
 
   var businessesSearchList = props.businessesSearchList,
       paginationProps = props.paginationProps,
@@ -305,7 +305,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       onClick: function onClick() {
         return handleGotoMaps(business);
       }
-    }, business === null || business === void 0 ? void 0 : business.address), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.cellphone), /*#__PURE__*/_react.default.createElement("p", null, t('OPEN_UNTIL', 'Open until'), " ", getScheduleOpen(business))), /*#__PURE__*/_react.default.createElement(_styles.RightContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    }, business === null || business === void 0 ? void 0 : business.address), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.cellphone), getScheduleOpen(business) && /*#__PURE__*/_react.default.createElement("p", null, t('OPEN_UNTIL', 'Open until'), " ", getScheduleOpen(business))), /*#__PURE__*/_react.default.createElement(_styles.RightContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
       color: "primary",
       onClick: function onClick() {
         return onBusinessClick(business);
@@ -396,13 +396,13 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       width: 100,
       height: 30
     })));
-  }), !businessesSearchList.loading && businessesSearchList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList11 = businessesSearchList.businesses) === null || _businessesSearchList11 === void 0 ? void 0 : _businessesSearchList11.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
-  })), !businessesSearchList.loading && businessesSearchList.error && businessesSearchList.error.length > 0 && businessesSearchList.businesses.length === 0 && businessesSearchList.error.map(function (e, i) {
+  })), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList12 = businessesSearchList.error) === null || _businessesSearchList12 === void 0 ? void 0 : _businessesSearchList12.length) > 0 && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList13 = businessesSearchList.businesses) === null || _businessesSearchList13 === void 0 ? void 0 : _businessesSearchList13.length) === 0 && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList14 = businessesSearchList.error) === null || _businessesSearchList14 === void 0 ? void 0 : _businessesSearchList14.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isPreorder,
     width: "760px",
     onClose: function onClose() {

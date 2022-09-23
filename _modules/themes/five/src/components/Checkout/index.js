@@ -59,6 +59,8 @@ var _Select = require("../../styles/Select");
 
 var _PlaceSpot = require("../PlaceSpot");
 
+var _VaXMiCuenta = require("../VaXMiCuenta");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -125,7 +127,11 @@ var CheckoutUI = function CheckoutUI(props) {
       instructionsOptions = props.instructionsOptions,
       deliveryOptionSelected = props.deliveryOptionSelected,
       handleStoreRedirect = props.handleStoreRedirect,
-      onPlaceOrderClick = props.onPlaceOrderClick;
+      onPlaceOrderClick = props.onPlaceOrderClick,
+      defaultOptionsVaXMiCuenta = props.defaultOptionsVaXMiCuenta,
+      vaXMiCuenta = props.vaXMiCuenta,
+      handleChangeVaXMiCuenta = props.handleChangeVaXMiCuenta,
+      uberDirect = props.uberDirect;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
@@ -207,6 +213,11 @@ var CheckoutUI = function CheckoutUI(props) {
       _useState16 = _slicedToArray(_useState15, 2),
       isSuccess = _useState16[0],
       setIsSuccess = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      isHideCash = _useState18[0],
+      setHideCash = _useState18[1];
 
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
   var isWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
@@ -341,6 +352,15 @@ var CheckoutUI = function CheckoutUI(props) {
       setIsResetPaymethod(true); // changePaymethod(cart?.business_id, null, null)
     }
   }, [isResetPaymethod]);
+  (0, _react.useEffect)(function () {
+    if (uberDirect !== null && uberDirect !== void 0 && uberDirect.amountToHide && !(cart.total <= uberDirect.amountToHide) && (options === null || options === void 0 ? void 0 : options.type) === 1) {
+      setHideCash(true);
+      handlePaymethodChange(null);
+      setIsResetPaymethod(true);
+    } else {
+      setHideCash(false);
+    }
+  }, [uberDirect, cart, options]);
   (0, _react.useEffect)(function () {
     var _cart$products, _cart$business;
 
@@ -477,7 +497,9 @@ var CheckoutUI = function CheckoutUI(props) {
     style: {
       marginTop: 20
     }
-  }, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again'))), /*#__PURE__*/_react.default.createElement(_PaymentOptions.PaymentOptions, {
+  }, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again'))), /*#__PURE__*/_react.default.createElement(_styles.MasterCardCoupon, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: "https://d2gjwc6pypyhyf.cloudfront.net/banners/mastercard_alt.png"
+  })), /*#__PURE__*/_react.default.createElement(_PaymentOptions.PaymentOptions, {
     cart: cart,
     useKioskApp: useKioskApp,
     isDisabled: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
@@ -492,7 +514,8 @@ var CheckoutUI = function CheckoutUI(props) {
     paySelected: paymethodSelected,
     handlePlaceOrder: handlePlaceOrder,
     onPlaceOrderClick: onPlaceOrderClick,
-    brandInformation: brandInformation
+    brandInformation: brandInformation,
+    isHideCash: isHideCash
   }))), isWalletEnabled && !(businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart,
     businessConfigs: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi13 = businessDetails.business) === null || _businessDetails$busi13 === void 0 ? void 0 : _businessDetails$busi13.configs
@@ -506,7 +529,11 @@ var CheckoutUI = function CheckoutUI(props) {
     style: {
       marginBottom: '10px'
     }
-  }))), businessInformationAvailable && /*#__PURE__*/_react.default.createElement(_styles.BusinessDetails, null, /*#__PURE__*/_react.default.createElement("img", {
+  }))), !vaXMiCuenta.loading && defaultOptionsVaXMiCuenta.enable && /*#__PURE__*/_react.default.createElement(_VaXMiCuenta.VaXMiCuenta, {
+    defaultOptionsVaXMiCuenta: defaultOptionsVaXMiCuenta,
+    vaXMiCuenta: vaXMiCuenta,
+    handleChangeVaXMiCuenta: handleChangeVaXMiCuenta
+  }), businessInformationAvailable && /*#__PURE__*/_react.default.createElement(_styles.BusinessDetails, null, /*#__PURE__*/_react.default.createElement("img", {
     src: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi14 = businessDetails.business) === null || _businessDetails$busi14 === void 0 ? void 0 : _businessDetails$busi14.header
   }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi15 = businessDetails.business) === null || _businessDetails$busi15 === void 0 ? void 0 : _businessDetails$busi15.name), /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
@@ -615,42 +642,42 @@ var Checkout = function Checkout(props) {
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
-  var _useState17 = (0, _react.useState)({
+  var _useState19 = (0, _react.useState)({
     loading: true,
     error: null,
     cart: null
   }),
-      _useState18 = _slicedToArray(_useState17, 2),
-      cartState = _useState18[0],
-      setCartState = _useState18[1];
-
-  var _useState19 = (0, _react.useState)(false),
       _useState20 = _slicedToArray(_useState19, 2),
-      openUpselling = _useState20[0],
-      setOpenUpselling = _useState20[1];
+      cartState = _useState20[0],
+      setCartState = _useState20[1];
 
   var _useState21 = (0, _react.useState)(false),
       _useState22 = _slicedToArray(_useState21, 2),
-      canOpenUpselling = _useState22[0],
-      setCanOpenUpselling = _useState22[1];
+      openUpselling = _useState22[0],
+      setOpenUpselling = _useState22[1];
 
-  var _useState23 = (0, _react.useState)(null),
+  var _useState23 = (0, _react.useState)(false),
       _useState24 = _slicedToArray(_useState23, 2),
-      currentCart = _useState24[0],
-      setCurrentCart = _useState24[1];
+      canOpenUpselling = _useState24[0],
+      setCanOpenUpselling = _useState24[1];
 
-  var _useState25 = (0, _react.useState)({
+  var _useState25 = (0, _react.useState)(null),
+      _useState26 = _slicedToArray(_useState25, 2),
+      currentCart = _useState26[0],
+      setCurrentCart = _useState26[1];
+
+  var _useState27 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState26 = _slicedToArray(_useState25, 2),
-      alertState = _useState26[0],
-      setAlertState = _useState26[1];
-
-  var _useState27 = (0, _react.useState)(false),
       _useState28 = _slicedToArray(_useState27, 2),
-      isResetPaymethod = _useState28[0],
-      setIsResetPaymethod = _useState28[1];
+      alertState = _useState28[0],
+      setAlertState = _useState28[1];
+
+  var _useState29 = (0, _react.useState)(false),
+      _useState30 = _slicedToArray(_useState29, 2),
+      isResetPaymethod = _useState30[0],
+      setIsResetPaymethod = _useState30[1];
 
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;

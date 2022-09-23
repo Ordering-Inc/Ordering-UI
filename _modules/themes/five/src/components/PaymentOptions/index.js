@@ -169,7 +169,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       onPlaceOrderClick = props.onPlaceOrderClick,
       handlePlaceOrder = props.handlePlaceOrder,
       brandInformation = props.brandInformation,
-      wowPoints = props.wowPoints;
+      wowPoints = props.wowPoints,
+      isHideCash = props.isHideCash;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -180,6 +181,16 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       _useSession2$ = _useSession2[0],
       token = _useSession2$.token,
       user = _useSession2$.user;
+
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+      _useOrder2 = _slicedToArray(_useOrder, 2),
+      _useOrder2$ = _useOrder2[1],
+      applyCoupon = _useOrder2$.applyCoupon,
+      removeOffer = _useOrder2$.removeOffer;
+
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -192,10 +203,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
-  var includeKioskPaymethods = ['cash', 'card_delivery'];
+  var excludePaymethods = ['cash'];
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
   var supportedMethods = paymethodsList.paymethods.filter(function (p) {
-    return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
+    return isHideCash ? !excludePaymethods.includes(p.gateway) : p;
   });
 
   var isDisabledWowPoints = function isDisabledWowPoints(paymethod) {
@@ -265,6 +276,22 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
 
     if (methodsPay.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && paymethodData !== null && paymethodData !== void 0 && paymethodData.id && paymethodSelected !== null && paymethodSelected !== void 0 && (_paymethodSelected$da = paymethodSelected.data) !== null && _paymethodSelected$da !== void 0 && _paymethodSelected$da.card) {
       handlePlaceOrder();
+    }
+
+    if ((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay' && (cart === null || cart === void 0 ? void 0 : cart.offers.length) > 0) {
+      var _configs$advanced_off;
+
+      if (!(configs !== null && configs !== void 0 && (_configs$advanced_off = configs.advanced_offers_module) !== null && _configs$advanced_off !== void 0 && _configs$advanced_off.value)) {
+        applyCoupon({
+          business_id: props === null || props === void 0 ? void 0 : props.businessId,
+          coupon: null
+        });
+      } else {
+        removeOffer({
+          business_id: props === null || props === void 0 ? void 0 : props.businessId,
+          offer_id: cart === null || cart === void 0 ? void 0 : cart.offers[0].id
+        });
+      }
     }
   }, [paymethodData, paymethodSelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {

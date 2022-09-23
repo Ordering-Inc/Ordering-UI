@@ -93,35 +93,36 @@ var PaymentOptionOpenPay = function PaymentOptionOpenPay(props) {
 
   var isAlsea = ordering.project === 'alsea';
   (0, _react.useEffect)(function () {
-    var _window;
+    var _window, _window$OpenPay, _window$OpenPay$devic;
 
     if (!merchantId || !publicKey) return;
 
-    if ((_window = window) !== null && _window !== void 0 && _window.OpenPay) {
+    if ((_window = window) !== null && _window !== void 0 && (_window$OpenPay = _window.OpenPay) !== null && _window$OpenPay !== void 0 && (_window$OpenPay$devic = _window$OpenPay.deviceData) !== null && _window$OpenPay$devic !== void 0 && _window$OpenPay$devic.setup) {
       setIsSdkReady(true);
       return;
     }
 
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://resources.openpay.mx/lib/openpay-js/1.2.38/openpay.v1.min.js';
-    script.async = true;
+    var scripts = ['https://js.openpay.mx/openpay.v1.min.js', 'https://js.openpay.mx/openpay-data.v1.min.js'];
+    scripts.forEach(function (s) {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = s;
+      script.defer = true;
+      script.async = true;
 
-    script.onload = function () {
-      setIsSdkReady(true);
-      window.OpenPay.setId(merchantId);
-      window.OpenPay.setApiKey(publicKey);
-      window.OpenPay.setSandboxMode(isSandbox);
-    };
+      script.onload = function () {
+        window.OpenPay.setId(merchantId);
+        window.OpenPay.setApiKey(publicKey);
+        window.OpenPay.setSandboxMode(isSandbox);
+        setIsSdkReady(true);
+      };
 
-    script.onerror = function () {
-      throw new Error('Open pay SDK could not be loaded.');
-    };
+      script.onerror = function () {
+        throw new Error('Open pay SDK could not be loaded.');
+      };
 
-    document.body.appendChild(script);
-    return function () {
-      script.onload = null;
-    };
+      document.body.appendChild(script);
+    });
   }, [merchantId, publicKey]);
 
   var getCards = /*#__PURE__*/function () {
