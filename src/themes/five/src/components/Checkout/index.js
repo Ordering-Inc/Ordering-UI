@@ -66,6 +66,7 @@ import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
 import { PlaceSpot } from '../PlaceSpot'
+import { VaXMiCuenta } from '../VaXMiCuenta'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -94,7 +95,10 @@ const CheckoutUI = (props) => {
     instructionsOptions,
     deliveryOptionSelected,
     handleStoreRedirect,
-    onPlaceOrderClick
+    onPlaceOrderClick,
+    defaultOptionsVaXMiCuenta,
+    vaXMiCuenta,
+    handleChangeVaXMiCuenta
   } = props
 
   const theme = useTheme()
@@ -519,6 +523,13 @@ const CheckoutUI = (props) => {
                   <Skeleton height={35} style={{ marginBottom: '10px' }} />
                 </div>
               </div>
+            )}
+            {!vaXMiCuenta.loading && defaultOptionsVaXMiCuenta.enable && (
+              <VaXMiCuenta
+                defaultOptionsVaXMiCuenta={defaultOptionsVaXMiCuenta}
+                vaXMiCuenta={vaXMiCuenta}
+                handleChangeVaXMiCuenta={handleChangeVaXMiCuenta}
+              />
             )}
             {businessInformationAvailable && (
               <BusinessDetails>

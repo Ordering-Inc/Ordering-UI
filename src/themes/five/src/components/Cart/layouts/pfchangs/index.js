@@ -423,6 +423,12 @@ const CartUI = (props) => {
                         <td>{parsePrice(cart?.driver_tip)}</td>
                       </tr>
                     )}
+                    {cart?.va_por_mi_cuenta && (
+                      <tr>
+                        <td><img src='https://d2gjwc6pypyhyf.cloudfront.net/va-por-mi-cuenta.svg'></img></td>
+                        <td>{parsePrice(cart?.va_por_mi_cuenta.amount)}</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
                 <table className='total'>
