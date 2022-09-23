@@ -98,7 +98,8 @@ const CheckoutUI = (props) => {
     onPlaceOrderClick,
     defaultOptionsVaXMiCuenta,
     vaXMiCuenta,
-    handleChangeVaXMiCuenta
+    handleChangeVaXMiCuenta,
+    uberDirect
   } = props
 
   const theme = useTheme()
@@ -121,6 +122,7 @@ const CheckoutUI = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [requiredFields, setRequiredFields] = useState([])
   const [isSuccess, setIsSuccess] = useState(false)
+  const [isHideCash, setHideCash] = useState(false)
 
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
@@ -268,6 +270,16 @@ const CheckoutUI = (props) => {
       // changePaymethod(cart?.business_id, null, null)
     }
   }, [isResetPaymethod])
+
+  useEffect(() => {
+    if (uberDirect?.amountToHide && !(cart.total <= uberDirect.amountToHide) && options?.type === 1) {
+      setHideCash(true)
+      handlePaymethodChange(null)
+      setIsResetPaymethod(true)
+    } else {
+      setHideCash(false)
+    }
+  }, [uberDirect, cart, options])
 
   useEffect(() => {
     if (cart?.products?.length) return
@@ -498,6 +510,7 @@ const CheckoutUI = (props) => {
                   handlePlaceOrder={handlePlaceOrder}
                   onPlaceOrderClick={onPlaceOrderClick}
                   brandInformation={brandInformation}
+                  isHideCash={isHideCash}
                 />
               </PaymentMethodContainer>
             </>
