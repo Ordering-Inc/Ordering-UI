@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useOrder, useSite, useEvent, FavoriteList as FavoriteListController } from 'ordering-components'
+import { useLanguage, useOrder, useSite, useEvent } from 'ordering-components'
+import { FavoriteList as FavoriteListController } from './naked'
 import { BusinessController } from '../BusinessController'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { NotFoundSource } from '../NotFoundSource'
@@ -11,6 +12,7 @@ import { SingleProductCard } from '../SingleProductCard'
 import { useTheme } from 'styled-components'
 import { SingleOrderCard } from '../SingleOrderCard'
 import { checkSiteUrl } from '../../../../../utils'
+import { SingleProfessionalCard } from '../SingleProfessionalCard'
 
 import {
   Container,
@@ -29,6 +31,7 @@ const FavoriteListUI = (props) => {
     isBusiness,
     isProduct,
     isOrder,
+    isProfessional,
     handleReorder,
     reorderState
   } = props
@@ -318,6 +321,27 @@ const FavoriteListUI = (props) => {
                         onRedirectPage={onRedirectPage}
                         getOrderStatus={getOrderStatus}
                         handleReorder={handleReorder}
+                      />
+                    ))
+                  )}
+                </>
+              )}
+              {isProfessional && (
+                <>
+                  {
+                    !favoriteList?.loading && favoriteList?.favorites?.map((professional, i) => (
+                      <SingleProfessionalCard
+                        key={i}
+                        professional={professional}
+                      />
+                    ))
+                  }
+                  {favoriteList?.loading && (
+                    [...Array(5).keys()].map(i => (
+                      <SingleProfessionalCard
+                        key={i}
+                        professional={{}}
+                        isSkeleton
                       />
                     ))
                   )}

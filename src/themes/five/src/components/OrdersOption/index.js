@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
-import { OrderList, useLanguage, useOrder, useEvent } from 'ordering-components'
+import { useLanguage, useOrder, useEvent } from 'ordering-components'
+import { OrderList } from './naked'
 
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
@@ -28,6 +29,7 @@ import { BusinessController } from '../BusinessController'
 import { SingleProductCard } from '../SingleProductCard'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Alert } from '../Confirm'
+import { PreviousProfessionalOrdered } from './PreviousProfessionalOrdered'
 
 const OrdersOptionUI = (props) => {
   const {
@@ -56,13 +58,15 @@ const OrdersOptionUI = (props) => {
     handleReorder,
     isBusiness,
     isProducts,
+    isProfessionals,
     businessOrderIds,
     products,
     hideOrders,
     onProductRedirect,
     businessesSearchList,
     handleUpdateProducts,
-    onBusinessClick
+    onBusinessClick,
+    professionals
   } = props
 
   const [, t] = useLanguage()
@@ -235,6 +239,12 @@ const OrdersOptionUI = (props) => {
           onProductClick={onProductClick}
           handleUpdateProducts={handleUpdateProducts}
           onBusinessClick={onBusinessClick}
+        />
+      )}
+
+      {isProfessionals && (
+        <PreviousProfessionalOrdered
+          professionals={professionals}
         />
       )}
 

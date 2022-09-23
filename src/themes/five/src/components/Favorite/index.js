@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useOrder } from 'ordering-components'
+import { useLanguage, useOrder, useOrderingTheme } from 'ordering-components'
 import { FavoriteList } from '../FavoriteList'
 import { Tabs } from '../../styles/Tabs'
 import {
@@ -12,7 +12,9 @@ import {
 
 export const Favorite = (props) => {
   const [, t] = useLanguage()
+  const [orderingTheme] = useOrderingTheme()
   const [orderState] = useOrder()
+  const layout = orderingTheme?.theme?.favorite?.components?.layout?.type || 'original'
 
   const [tabSelected, setTabSelected] = useState('businesses')
 
@@ -44,6 +46,15 @@ export const Favorite = (props) => {
                 {item?.name}
               </Tab>
             ))}
+            {layout === 'original' && (
+              <Tab
+                borderBottom
+                active={tabSelected === 'professionals'}
+                onClick={() => setTabSelected('professionals')}
+              >
+                {t('PROFESSIONALS', 'Professionals')}
+              </Tab>
+            )}
           </Tabs>
         </TabsContainer>
         <ContentWrapper>
@@ -68,6 +79,13 @@ export const Favorite = (props) => {
               favoriteURL='favorite_orders'
               originalURL='orders'
               isOrder
+            />
+          )}
+          {tabSelected === 'professionals' && (
+            <FavoriteList
+              favoriteURL='favorite_users'
+              originalURL='users'
+              isProfessional
             />
           )}
         </ContentWrapper>
