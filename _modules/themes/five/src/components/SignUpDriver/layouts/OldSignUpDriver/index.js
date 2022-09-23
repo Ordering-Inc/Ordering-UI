@@ -29,6 +29,8 @@ var _Checkbox = require("../../../../../../../styles/Checkbox");
 
 var _utils = require("../../../../../../../utils");
 
+var _useRecaptcha3 = require("../../../../../../../hooks/useRecaptcha");
+
 var _AiOutlineEye = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEye"));
 
 var _AiOutlineEyeInvisible = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineEyeInvisible"));
@@ -111,8 +113,12 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var _useRecaptcha = (0, _useRecaptcha3.useRecaptcha)(enableReCaptcha),
+      _useRecaptcha2 = _slicedToArray(_useRecaptcha, 1),
+      recaptchaConfig = _useRecaptcha2[0];
+
   var _useState3 = (0, _react.useState)({
-    version: 'v3',
+    version: '',
     siteKey: ''
   }),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -234,13 +240,23 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
       if (((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re[0]) === 'ERROR_AUTH_VERIFICATION_CODE') {
         var _configs$security_rec;
 
-        setRecaptchaVersion({
-          version: 'v2',
-          siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec = configs.security_recaptcha_site_key) === null || _configs$security_rec === void 0 ? void 0 : _configs$security_rec.value
-        });
+        if (configs !== null && configs !== void 0 && (_configs$security_rec = configs.security_recaptcha_site_key) !== null && _configs$security_rec !== void 0 && _configs$security_rec.value) {
+          var _configs$security_rec2;
+
+          setRecaptchaVersion({
+            version: 'v2',
+            siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_site_key) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value
+          });
+          setAlertState({
+            open: true,
+            content: [t('TRY_AGAIN', 'Please try again')]
+          });
+          return;
+        }
+
         setAlertState({
           open: true,
-          content: [t('TRY_AGAIN', 'Please try again')]
+          content: [t('CONFIG_DOESNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key')]
         });
         return;
       }
@@ -294,32 +310,13 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
     }
   }, [externalPhoneNumber]);
   (0, _react.useEffect)(function () {
-    var _configs$security_rec2, _configs$security_rec3, _configs$security_rec4, _configs$security_rec6;
-
-    if (configs && Object.keys(configs).length > 0 && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_type) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value) === 'v3' && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec3 = configs.security_recaptcha_score_v3) === null || _configs$security_rec3 === void 0 ? void 0 : _configs$security_rec3.value) > 0 && configs !== null && configs !== void 0 && (_configs$security_rec4 = configs.security_recaptcha_site_key_v3) !== null && _configs$security_rec4 !== void 0 && _configs$security_rec4.value) {
-      var _configs$security_rec5;
-
+    if (recaptchaConfig !== null && recaptchaConfig !== void 0 && recaptchaConfig.siteKey) {
       setRecaptchaVersion({
-        version: 'v3',
-        siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec5 = configs.security_recaptcha_site_key_v3) === null || _configs$security_rec5 === void 0 ? void 0 : _configs$security_rec5.value
+        version: recaptchaConfig === null || recaptchaConfig === void 0 ? void 0 : recaptchaConfig.version,
+        siteKey: recaptchaConfig === null || recaptchaConfig === void 0 ? void 0 : recaptchaConfig.siteKey
       });
-      return;
     }
-
-    if (configs && Object.keys(configs).length > 0 && configs !== null && configs !== void 0 && (_configs$security_rec6 = configs.security_recaptcha_site_key) !== null && _configs$security_rec6 !== void 0 && _configs$security_rec6.value) {
-      var _configs$security_rec7;
-
-      setRecaptchaVersion({
-        version: 'v2',
-        siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec7 = configs.security_recaptcha_site_key) === null || _configs$security_rec7 === void 0 ? void 0 : _configs$security_rec7.value
-      });
-      return;
-    }
-
-    if (configs && Object.keys(configs).length > 0) {
-      throw new Error('ReCaptcha component: the config doesn\'t have recaptcha site key');
-    }
-  }, [configs]);
+  }, [recaptchaConfig]);
   (0, _react.useEffect)(function () {
     handleChangeInput({
       target: {
