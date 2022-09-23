@@ -11,6 +11,8 @@ import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
 import SiJsonwebtokens from '@meronex/icons/si/SiJsonwebtokens'
+import BiMessageDetail from '@meronex/icons/bi/BiMessageDetail'
+import BsSearch from '@meronex/icons/bs/BsSearch'
 import { Heart, Tag } from 'react-bootstrap-icons'
 
 import { useEvent, useLanguage, useOrder, useSession, useConfig } from 'ordering-components'
@@ -197,6 +199,64 @@ export const SidebarMenu = (props) => {
           {auth && (
             <>
               <MenuLink
+                onClick={() => handleGoToPage({ page: 'business_search' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    active={
+                      window.location.pathname === '/business_search'
+                    }
+                  >
+                    <BsSearch />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      active={
+                        window.location.pathname === '/business_search'
+                      }
+                    >
+                      {t('BROWSE_SEARCH', 'Browse & Search')}
+                    </TextInfo>
+                  </MenuLinkText>
+                  <MenuLinkSeparator>
+                    <div>
+                      <hr />
+                    </div>
+                  </MenuLinkSeparator>
+                </WrappContent>
+              </MenuLink>
+              {
+                !isCustomerMode && (
+                  <MenuLink
+                    onClick={() => handleGoToPage({ page: 'orders' })}
+                  >
+                    <WrappContent>
+                      <MenuLinkIcon
+                        active={
+                          window.location.pathname === '/profile/orders'
+                        }
+                      >
+                        <FaRegListAlt />
+                      </MenuLinkIcon>
+                      <MenuLinkText>
+                        <TextInfo
+                          active={
+                            window.location.pathname === '/profile/orders'
+                          }
+                        >
+                          {t('ORDERS', 'Orders')}
+                        </TextInfo>
+                      </MenuLinkText>
+                      <MenuLinkSeparator>
+                        <div>
+                          <hr />
+                        </div>
+                      </MenuLinkSeparator>
+                    </WrappContent>
+                  </MenuLink>
+                )
+              }
+              <MenuLink
                 onClick={() => handleGoToPage({ page: 'profile' })}
               >
                 <WrappContent>
@@ -213,7 +273,7 @@ export const SidebarMenu = (props) => {
                         window.location.pathname === '/profile'
                       }
                     >
-                      {t('PROFILE', 'Profile')}
+                      {t('VIEW_ACCOUNT', 'View account')}
                     </TextInfo>
                   </MenuLinkText>
                   <MenuLinkSeparator>
@@ -283,6 +343,34 @@ export const SidebarMenu = (props) => {
               )}
 
               <MenuLink
+                onClick={() => handleGoToPage({ page: 'messages' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    active={
+                      window.location.pathname === '/messages'
+                    }
+                  >
+                    <BiMessageDetail />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      active={
+                        window.location.pathname === '/messages'
+                      }
+                    >
+                      {t('MESSAGES', 'Messages')}
+                    </TextInfo>
+                  </MenuLinkText>
+                  <MenuLinkSeparator>
+                    <div>
+                      <hr />
+                    </div>
+                  </MenuLinkSeparator>
+                </WrappContent>
+              </MenuLink>
+
+              <MenuLink
                 onClick={() => handleGoToPage({ page: 'help' })}
               >
                 <WrappContent>
@@ -300,33 +388,6 @@ export const SidebarMenu = (props) => {
                       }
                     >
                       {t('HELP', 'help')}
-                    </TextInfo>
-                  </MenuLinkText>
-                  <MenuLinkSeparator>
-                    <div>
-                      <hr />
-                    </div>
-                  </MenuLinkSeparator>
-                </WrappContent>
-              </MenuLink>
-              <MenuLink
-                onClick={() => handleGoToPage({ page: 'favorite' })}
-              >
-                <WrappContent>
-                  <MenuLinkIcon
-                    active={
-                      window.location.pathname === '/favorite'
-                    }
-                  >
-                    <Heart />
-                  </MenuLinkIcon>
-                  <MenuLinkText>
-                    <TextInfo
-                      active={
-                        window.location.pathname === '/favorite'
-                      }
-                    >
-                      {t('FAVORITES', 'Favorites')}
                     </TextInfo>
                   </MenuLinkText>
                   <MenuLinkSeparator>
@@ -363,38 +424,33 @@ export const SidebarMenu = (props) => {
                   </MenuLinkSeparator>
                 </WrappContent>
               </MenuLink>
-              {
-                !isCustomerMode && (
-                  <MenuLink
-                    onClick={() => handleGoToPage({ page: 'orders' })}
+              <MenuLink
+                onClick={() => handleGoToPage({ page: 'favorite' })}
+              >
+                <WrappContent>
+                  <MenuLinkIcon
+                    active={
+                      window.location.pathname === '/favorite'
+                    }
                   >
-                    <WrappContent>
-                      <MenuLinkIcon
-                        active={
-                          window.location.pathname === '/profile/orders'
-                        }
-                      >
-                        <FaRegListAlt />
-                      </MenuLinkIcon>
-                      <MenuLinkText>
-                        <TextInfo
-                          active={
-                            window.location.pathname === '/profile/orders'
-                          }
-                        >
-                          {t('ORDERS', 'Orders')}
-                        </TextInfo>
-                      </MenuLinkText>
-                      <MenuLinkSeparator>
-                        <div>
-                          <hr />
-                        </div>
-                      </MenuLinkSeparator>
-                    </WrappContent>
-                  </MenuLink>
-                )
-              }
-
+                    <Heart />
+                  </MenuLinkIcon>
+                  <MenuLinkText>
+                    <TextInfo
+                      active={
+                        window.location.pathname === '/favorite'
+                      }
+                    >
+                      {t('FAVORITES', 'Favorites')}
+                    </TextInfo>
+                  </MenuLinkText>
+                  <MenuLinkSeparator>
+                    <div>
+                      <hr />
+                    </div>
+                  </MenuLinkSeparator>
+                </WrappContent>
+              </MenuLink>
               <LogoutButton onCustomClick={() => actionSidebar(false)} />
             </>
           )}
