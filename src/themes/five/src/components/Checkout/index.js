@@ -624,19 +624,26 @@ export const Checkout = (props) => {
 
   const getOrder = async (cartId) => {
     try {
-      setCartState({ ...cartState, loading: true })
+      let result = {}
+      const cart = cartsWithProducts.find(cart => cart.uuid === cartId)
       const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-      const url = userCustomer
-        ? `${ordering.root}/carts/${cartId}?user_id=${userCustomer?.id}`
-        : `${ordering.root}/carts/${cartId}`
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      })
-      const { result } = await response.json()
+      if (cart && !userCustomer) {
+        result = { ...cart }
+      } else {
+        setCartState({ ...cartState, loading: true })
+        const url = userCustomer
+          ? `${ordering.root}/carts/${cartId}?user_id=${userCustomer?.id}`
+          : `${ordering.root}/carts/${cartId}`
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
+        const content = await response.json()
+        result = content.result
+      }
 
       if (result.status === 1 && result.order?.uuid) {
         handleOrderRedirect(result.order.uuid)
