@@ -22,7 +22,7 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
-import { ProductShare } from '../../../../../components/ProductShare'
+import { ProductShare } from '../ProductShare'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
@@ -375,6 +375,7 @@ const ProductOptionsUI = (props) => {
               slug={businessSlug}
               categoryId={product?.category_id}
               productId={product?.id}
+              product={product}
             />
           ) : (
             <div style={{ height: 30 }} />
