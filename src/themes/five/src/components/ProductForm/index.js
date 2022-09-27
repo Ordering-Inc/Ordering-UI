@@ -640,15 +640,15 @@ const ProductOptionsUI = (props) => {
               <div className='price-amount-block'>
                 <div className='price'>
                   <h4>{productCart.total && parsePrice(productCart.total)}</h4>
-                  {product?.minimum_per_order && productCart?.quantity < product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
-                  {product?.maximum_per_order && productCart?.quantity > product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
+                  {product?.minimum_per_order && productCart?.quantity <= product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
+                  {product?.maximum_per_order && productCart?.quantity >= product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
                 </div>
                 {
                   productCart && !isSoldOut && maxProductQuantity > 0 && (
                     <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
                       <FiMinusCircle
                         onClick={decrement}
-                        className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
+                        className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut || (productCart?.quantity <= product?.minimum_per_order) ? 'disabled' : ''}`}
                       />
                       {
                         qtyBy?.pieces && (
@@ -817,7 +817,7 @@ const ProductOptionsUI = (props) => {
 export const ProductForm = (props) => {
   const productOptionsProps = {
     ...props,
-    productCart: { quantity: props?.product?.maximum_per_order || 1 },
+    productCart: { quantity: props?.product?.maximum_per_order || props?.product?.minimum_per_order || 1 },
     UIComponent: ProductOptionsUI
   }
 

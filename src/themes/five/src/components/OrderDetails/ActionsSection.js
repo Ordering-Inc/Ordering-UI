@@ -33,6 +33,7 @@ export const ActionsSection = (props) => {
         ? setUnreadAlert({ ...unreadAlert, business: false })
         : setUnreadAlert({ ...unreadAlert, driver: false })
     }
+    window.scrollTo(0, 0)
   }
 
   return (

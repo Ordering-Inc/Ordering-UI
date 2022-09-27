@@ -385,3 +385,8 @@ export const Divider = styled.div`
   border: 1px solid #DEE2E6;
   height: 100%;
 `
+export const AddressFormWrapper = styled.div`
+  @media (min-width: 450px) {
+    margin-top: 20px;
+  }
+`

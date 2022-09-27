@@ -203,7 +203,11 @@ export const QuantityContainer = styled.div`
   height: 25px;
   text-align: center;
   border-radius: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-20px, 50%);
+
+  @media (min-width: 768px) {
+    transform: translate(-50%, 50%);
+  }
 `
 
 export const RibbonBox = styled.div`

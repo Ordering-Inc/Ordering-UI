@@ -7,7 +7,8 @@ import {
   ModalTitle,
   ModalIcon,
   ModalHeader,
-  ModalBackHeader
+  ModalBackHeader,
+  ModalIconWrapper
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -68,11 +69,13 @@ const ModalUI = (props) => {
         <ModalBackHeader />
       )}
       {!hideCloseDefault && (
-        <ModalIcon isProductForm={isProductForm}>
-          {
-            (authModal && onRemove) ? <MdClose onClick={() => onRemove()} /> : <MdClose onClick={() => onClose()} />
-          }
-        </ModalIcon>
+        <ModalIconWrapper>
+          <ModalIcon isProductForm={isProductForm}>
+            {
+              (authModal && onRemove) ? <MdClose onClick={() => onRemove()} /> : <MdClose onClick={() => onClose()} />
+            }
+          </ModalIcon>
+        </ModalIconWrapper>
       )}
       <ModalHeader>
         {title && (
