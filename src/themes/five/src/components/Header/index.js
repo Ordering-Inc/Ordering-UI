@@ -24,7 +24,8 @@ import {
   AddressMenu,
   MomentMenu,
   FarAwayMessage,
-  Divider
+  Divider,
+  AddressFormWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -433,13 +434,15 @@ export const Header = (props) => {
                   isCustomerMode={isCustomerMode}
                 />
               ) : (
-                <AddressForm
-                  useValidationFileds
-                  address={orderState?.options?.address || {}}
-                  onCancel={() => setModalIsOpen(false)}
-                  onSaveAddress={() => setModalIsOpen(false)}
-                  isCustomerMode={isCustomerMode}
-                />
+                <AddressFormWrapper>
+                  <AddressForm
+                    useValidationFileds
+                    address={orderState?.options?.address || {}}
+                    onCancel={() => setModalIsOpen(false)}
+                    onSaveAddress={() => setModalIsOpen(false)}
+                    isCustomerMode={isCustomerMode}
+                  />
+                </AddressFormWrapper>
               )
             )}
             {modalSelected === 'moment' && (
