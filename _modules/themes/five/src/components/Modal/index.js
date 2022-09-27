@@ -95,7 +95,7 @@ var ModalUI = function ModalUI(props) {
     open: props.open,
     disableOverflowX: disableOverflowX,
     style: props.customStyle
-  }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, null), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, {
+  }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, null), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIconWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, {
     isProductForm: isProductForm
   }, authModal && onRemove ? /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
@@ -105,7 +105,7 @@ var ModalUI = function ModalUI(props) {
     onClick: function onClick() {
       return onClose();
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.ModalHeader, null, title && /*#__PURE__*/_react.default.createElement(_styles.ModalTitle, null, title)), children, (onCancel || onAccept) && /*#__PURE__*/_react.default.createElement(_styles.ModalActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ModalHeader, null, title && /*#__PURE__*/_react.default.createElement(_styles.ModalTitle, null, title)), children, (onCancel || onAccept) && /*#__PURE__*/_react.default.createElement(_styles.ModalActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     onClick: function onClick() {
       return onCancel();

@@ -494,7 +494,7 @@ var Header = function Header(props) {
       return setModalIsOpen(false);
     },
     isCustomerMode: isCustomerMode
-  }) : /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.AddressFormWrapper, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
     address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options16 = orderState.options) === null || _orderState$options16 === void 0 ? void 0 : _orderState$options16.address) || {},
     onCancel: function onCancel() {
@@ -504,7 +504,7 @@ var Header = function Header(props) {
       return setModalIsOpen(false);
     },
     isCustomerMode: isCustomerMode
-  })), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, {
+  }))), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, {
     onClose: function onClose() {
       return setModalIsOpen(false);
     }

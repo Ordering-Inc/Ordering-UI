@@ -113,7 +113,7 @@ var PriceWrapper = _styledComponents.default.div(_templateObject20 || (_template
 
 exports.PriceWrapper = PriceWrapper;
 
-var QuantityContainer = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n"])), function (_ref9) {
+var QuantityContainer = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-20px, 50%);\n\n  @media (min-width: 768px) {\n    transform: translate(-50%, 50%);\n  }\n"])), function (_ref9) {
   var theme = _ref9.theme;
   return theme.colors.primary;
 }, function (_ref10) {
