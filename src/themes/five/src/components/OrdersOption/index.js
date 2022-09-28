@@ -82,7 +82,7 @@ const OrdersOptionUI = (props) => {
   const _orders = customArray || values || []
   const orders = pastOrders && wowPointsList?.length > 0 ? _orders.map(order => ({
     ...order,
-    wow_points: wowPointsList.find(wowOrder => wowOrder.ordering_id === order?.id)
+    wow_points: wowPointsList.find(wowOrder => wowOrder.ordering_id === order?.id)?.points
   })) : _orders
 
   const isShowTitles = businessesIds
