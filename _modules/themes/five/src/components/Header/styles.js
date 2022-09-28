@@ -41,13 +41,13 @@ var LogoHeader = _styledComponents.default.div(_templateObject4 || (_templateObj
 
   return (_props$imgW = props.imgW) !== null && _props$imgW !== void 0 ? _props$imgW : '35px';
 }, function (props) {
-  var _props$imgH;
+  var _props$theme, _props$theme$layouts, _props$theme$layouts$, _props$theme$layouts$2, _props$theme$layouts$3, _props$imgH;
 
-  return (_props$imgH = props.imgH) !== null && _props$imgH !== void 0 ? _props$imgH : '45px';
+  return (props === null || props === void 0 ? void 0 : (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$layouts = _props$theme.layouts) === null || _props$theme$layouts === void 0 ? void 0 : (_props$theme$layouts$ = _props$theme$layouts.header) === null || _props$theme$layouts$ === void 0 ? void 0 : (_props$theme$layouts$2 = _props$theme$layouts$.components) === null || _props$theme$layouts$2 === void 0 ? void 0 : (_props$theme$layouts$3 = _props$theme$layouts$2.layout) === null || _props$theme$layouts$3 === void 0 ? void 0 : _props$theme$layouts$3.type) === 'pfchangs' ? '30px' : (_props$imgH = props.imgH) !== null && _props$imgH !== void 0 ? _props$imgH : '45px';
 }, function (props) {
-  var _props$theme;
+  var _props$theme2;
 
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
 }, function (props) {
   var _props$imgW2;
 
@@ -112,9 +112,9 @@ var AddressMenu = _styledComponents.default.div(_templateObject17 || (_templateO
 
   return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.lightGray;
 }, function (props) {
-  var _props$theme2;
+  var _props$theme3;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "])));
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "])));
 }, function (_ref7) {
   var isCustomerMode = _ref7.isCustomerMode;
   return !isCustomerMode && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      width: 80%;\n    "])));
@@ -134,21 +134,21 @@ var FarAwayMessage = _styledComponents.default.div(_templateObject24 || (_templa
 }, function (props) {
   return props.theme.colors.warning500;
 }, function (props) {
-  var _props$theme3;
+  var _props$theme4;
 
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    right: 5px;\n    left: initial;\n  "])));
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    right: 5px;\n    left: initial;\n  "])));
 }, function (props) {
   return props.theme.colors.warning500;
 }, function (props) {
-  var _props$theme4;
+  var _props$theme5;
 
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      margin-right: auto;\n      margin-left: 10px;\n    "])));
+  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      margin-right: auto;\n      margin-left: 10px;\n    "])));
 }, function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
-  var _props$theme5;
+  var _props$theme6;
 
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      right: 10px;\n      left: initial;\n    "])));
+  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      right: 10px;\n      left: initial;\n    "])));
 });
 
 exports.FarAwayMessage = FarAwayMessage;

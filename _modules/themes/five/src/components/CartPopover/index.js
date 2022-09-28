@@ -187,7 +187,8 @@ var CartPopover = function CartPopover(props) {
   }, isCartButtonPF ? /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     color: "primary",
     style: {
-      height: '50px'
+      height: '50px',
+      display: location.pathname.includes('/checkout/') ? 'none' : 'flex'
     }
   }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCartText && /*#__PURE__*/_react.default.createElement("p", null, t('CART', 'Cart')), ((_props$carts = props.carts) === null || _props$carts === void 0 ? void 0 : _props$carts.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.CartLength, null, /*#__PURE__*/_react.default.createElement("p", null, ((_props$carts2 = props.carts) === null || _props$carts2 === void 0 ? void 0 : _props$carts2.length) > 9 ? '9+' : (_props$carts3 = props.carts) === null || _props$carts3 === void 0 ? void 0 : _props$carts3.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cartButtonIcon && /*#__PURE__*/_react.default.createElement("img", {
     alt: "cart-icon",
