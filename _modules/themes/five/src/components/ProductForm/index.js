@@ -33,7 +33,7 @@ var _ProductOption = require("../ProductOption");
 
 var _ProductOptionSubOption = require("../ProductOptionSubOption");
 
-var _ProductShare = require("../../../../../components/ProductShare");
+var _ProductShare = require("../ProductShare");
 
 var _LoginForm = require("../LoginForm");
 
@@ -534,7 +534,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     defaultUrl: urlToShare,
     slug: businessSlug,
     categoryId: product === null || product === void 0 ? void 0 : product.category_id,
-    productId: product === null || product === void 0 ? void 0 : product.id
+    productId: product === null || product === void 0 ? void 0 : product.id,
+    product: product
   }) : /*#__PURE__*/_react.default.createElement("div", {
     style: {
       height: 30
@@ -730,7 +731,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     className: "price-amount-block"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "price"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, productCart.total && parsePrice(productCart.total)), (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) <= (product === null || product === void 0 ? void 0 : product.minimum_per_order) && /*#__PURE__*/_react.default.createElement("span", null, t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product === null || product === void 0 ? void 0 : product.minimum_per_order)), (product === null || product === void 0 ? void 0 : product.maximum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) >= (product === null || product === void 0 ? void 0 : product.maximum_per_order) && /*#__PURE__*/_react.default.createElement("span", null, t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product === null || product === void 0 ? void 0 : product.maximum_per_order)))), productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, productCart.total && parsePrice(productCart.total)), (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) <= (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) !== 1 && /*#__PURE__*/_react.default.createElement("span", null, t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product === null || product === void 0 ? void 0 : product.minimum_per_order)), (product === null || product === void 0 ? void 0 : product.maximum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) >= (product === null || product === void 0 ? void 0 : product.maximum_per_order) && /*#__PURE__*/_react.default.createElement("span", null, t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product === null || product === void 0 ? void 0 : product.maximum_per_order)))), productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
     className: isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'
   }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     onClick: decrement,
@@ -751,7 +752,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     value: (productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)).toFixed(2)
   }), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
-    className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || productCart.quantity >= (product === null || product === void 0 ? void 0 : product.maximum_per_order) || isSoldOut ? 'disabled' : '')
+    className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || productCart.quantity >= (product === null || product === void 0 ? void 0 : product.maximum_per_order) && product !== null && product !== void 0 && product.maximum_per_order || isSoldOut ? 'disabled' : '')
   }), isHaveWeight && /*#__PURE__*/_react.default.createElement(_styles.WeightUnitSwitch, null, /*#__PURE__*/_react.default.createElement(_styles.WeightUnitItem, {
     onClick: function onClick() {
       return handleSwitchQtyUnit('pieces');
