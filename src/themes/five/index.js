@@ -109,6 +109,7 @@ import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
 import { Checkbox } from '../../styles/Checkbox'
+import { NavigationBar } from './src/components/NavigationBar'
 
 export {
   AccordionDropdown,
@@ -223,5 +224,6 @@ export {
   Input,
   TextArea,
   Select,
-  Checkbox
+  Checkbox,
+  NavigationBar
 }

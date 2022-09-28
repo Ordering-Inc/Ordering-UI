@@ -22,7 +22,7 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { ProductIngredient } from '../ProductIngredient'
 import { ProductOption } from '../ProductOption'
 import { ProductOptionSubOption } from '../ProductOptionSubOption'
-import { ProductShare } from '../../../../../components/ProductShare'
+import { ProductShare } from '../ProductShare'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
@@ -375,6 +375,7 @@ const ProductOptionsUI = (props) => {
               slug={businessSlug}
               categoryId={product?.category_id}
               productId={product?.id}
+              product={product}
             />
           ) : (
             <div style={{ height: 30 }} />
@@ -640,7 +641,7 @@ const ProductOptionsUI = (props) => {
               <div className='price-amount-block'>
                 <div className='price'>
                   <h4>{productCart.total && parsePrice(productCart.total)}</h4>
-                  {product?.minimum_per_order && productCart?.quantity <= product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
+                  {product?.minimum_per_order && productCart?.quantity <= product?.minimum_per_order && productCart?.quantity !== 1 && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
                   {product?.maximum_per_order && productCart?.quantity >= product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
                 </div>
                 {
@@ -669,7 +670,7 @@ const ProductOptionsUI = (props) => {
                       )}
                       <FiPlusCircle
                         onClick={increment}
-                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || productCart.quantity >= product?.maximum_per_order || isSoldOut ? 'disabled' : ''}`}
+                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || (productCart.quantity >= product?.maximum_per_order && product?.maximum_per_order) || isSoldOut ? 'disabled' : ''}`}
                       />
                       {isHaveWeight && (
                         <WeightUnitSwitch>
