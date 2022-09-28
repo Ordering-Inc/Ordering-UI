@@ -64,7 +64,8 @@ const OrdersOptionUI = (props) => {
     businessesSearchList,
     handleUpdateProducts,
     onBusinessClick,
-    pfchangs
+    pfchangs,
+    wowPointsList
   } = props
 
   const [, t] = useLanguage()
@@ -78,7 +79,12 @@ const OrdersOptionUI = (props) => {
     ? theme.images?.general?.emptyActiveOrders
     : theme.images?.general?.emptyPastOrders
 
-  const orders = customArray || values || []
+  const _orders = customArray || values || []
+  const orders = pastOrders && wowPointsList?.length > 0 ? _orders.map(order => ({
+    ...order,
+    wow_points: wowPointsList.find(wowOrder => wowOrder.ordering_id === order?.id)
+  })) : _orders
+
   const isShowTitles = businessesIds
     ? orders && orders.length > 0 && !orders.map(order => businessesIds && businessesIds.includes(order.business_id)).every(i => !i)
     : orders.length > 0
@@ -335,6 +341,7 @@ const OrdersOptionUI = (props) => {
             isCustomerMode={isCustomerMode}
             isBusiness={isBusiness}
             isProducts={isProducts}
+            wowPointsList={wowPointsList}
           />
         ) : (
           <VerticalOrdersLayout

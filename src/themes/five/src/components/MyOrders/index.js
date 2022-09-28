@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components'
+import React, { useEffect, useState } from 'react'
+import { useLanguage, useSession } from 'ordering-components'
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { OrdersOption } from '../OrdersOption'
 import { Button } from '../../styles/Buttons'
@@ -26,6 +26,7 @@ export const MyOrders = (props) => {
   const [, t] = useLanguage()
   const history = useHistory()
   const theme = useTheme()
+  const [{ user, token }] = useSession()
   const [selectItem, setSelectItem] = useState('all')
   const [isEmptyActive, setIsEmptyActive] = useState(false)
   const [isEmptyPast, setIsEmptyPast] = useState(false)
@@ -33,7 +34,7 @@ export const MyOrders = (props) => {
   const [selectedOption, setSelectedOption] = useState(!hideOrders ? 'orders' : 'business')
   const [isEmptyBusinesses, setIsEmptyBusinesses] = useState(false)
   const [businessOrderIds, setBusinessOrderIds] = useState([])
-
+  const [wowPointsList, setWowPointsList] = useState([])
   const filterList = [
     { key: 'all', value: t('ALL', 'All') },
     { key: 'active', value: t('ACTIVE', 'Active') },
@@ -55,12 +56,43 @@ export const MyOrders = (props) => {
     else setSelectItem(key)
   }
 
+  const getWowPoints = async () => {
+    try {
+      const response = await fetch(`https://alsea-plugins-staging.ordering.co/alseaplatform/wowcheckin_allowed.php?email=${user?.email}`, {
+        method: 'GET',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+      const result = await response.json()
+      if (result.content.allowed) {
+        const responsePoints = await fetch('https://alsea-plugins-staging.ordering.co/alseaplatform/wow_movimientos_amount.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: user?.wow_rewards_user_id,
+            startDate: '2020-01-12'
+          })
+        })
+        const resultPoints = await responsePoints.json()
+        setWowPointsList(resultPoints.past_orders)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const pfchangsTabProps = pfchangs ? {
     borderBottom: true,
     pfchangs: true,
     activeColor: theme.colors?.gold,
     color: theme.colors?.gold
   } : {}
+
+  useEffect(() => {
+    if (user.email) {
+      getWowPoints()
+    }
+  }, [user.email])
 
   return (
     <>
@@ -155,6 +187,7 @@ export const MyOrders = (props) => {
                       horizontal
                       setIsEmptyPast={setIsEmptyPast}
                       selectItem={selectItem}
+                      wowPointsList={wowPointsList}
                     />
                   </>
                 )}

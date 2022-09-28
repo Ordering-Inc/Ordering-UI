@@ -40,6 +40,7 @@ export const UserPopover = (props) => {
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
   const isAddressListNewPage = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
   const pfchangs = theme?.general?.components?.layout?.type === 'pfchangs'
+  const loginSignupIcon = theme?.layouts?.header?.components?.login_signup?.components?.icon?.components?.image
 
   const optionsDefault = [
     { name: 'search', pathname: '/explore', displayName: 'My home', key: 'my_home', isActive: !pfchangs },
@@ -133,7 +134,9 @@ export const UserPopover = (props) => {
           <RoundMark />
           <DropDownCircleImage
             src={sessionState?.user?.photo}
-            fallback={<FaUserAlt />}
+            fallback={pfchangs
+              ? <img alt='login-icon' width='40px' height='40px' src={loginSignupIcon} loading='lazy' />
+              : <FaUserAlt />}
           />
         </UserImgWrapper>
 

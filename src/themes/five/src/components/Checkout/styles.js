@@ -432,6 +432,7 @@ export const BusinessDetails = styled.div`
     span {
       text-decoration: underline;
       font-size: 16px;
+      cursor: pointer;
     }
   }
 `
@@ -445,5 +446,35 @@ export const MasterCardCoupon = styled.div`
 
   img {
     width: 100%
+  }
+`
+
+export const GoToMenu = styled.div`
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 200px;
+  transform: translateY(30%);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  p {
+    font-size: 14px;
+  }
+  svg {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+  }
+  @media (min-width: 768px) {
+    left: 230px;
+    transform: translateY(40%);
+    p {
+     font-size: 16px;
+    }
+    svg {
+      width: 22px;
+      height: 22px;
+    }
   }
 `

@@ -29,7 +29,7 @@ export const LogoHeader = styled.div`
   align-items: center;
   img {
     width: ${props => props.imgW ?? '35px'};
-    height: ${props => props.imgH ?? '45px'};
+    height: ${(props) => props?.theme?.layouts?.header?.components?.layout?.type === 'pfchangs' ? '30px' : props.imgH ?? '45px'};
     margin: 0;
     vertical-align: middle;
     margin-left: 10px;

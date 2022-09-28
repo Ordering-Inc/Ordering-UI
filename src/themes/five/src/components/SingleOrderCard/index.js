@@ -22,7 +22,8 @@ import {
   TitleContainer,
   Map,
   FavoriteWrapper,
-  ReviewWrapper
+  ReviewWrapper,
+  WowPointsWrapper
 } from './styles'
 
 import {
@@ -262,6 +263,11 @@ const SingleOrderCardUI = (props) => {
               </>
             )}
           </FavoriteWrapper>
+          {order?.wow_points && (
+            <WowPointsWrapper>
+              <p className='order-wowpoints'>{isSkeleton ? <Skeleton width={80} /> : `+${order?.wow_points || 0} ${t('PTS', 'pts')}`}</p>
+            </WowPointsWrapper>
+          )}
         </Content>
       </Container>
       {isReviewOpen && (

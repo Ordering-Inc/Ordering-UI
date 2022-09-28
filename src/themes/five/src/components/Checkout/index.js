@@ -18,7 +18,7 @@ import {
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useHistory } from 'react-router-dom'
-import { ArrowLeft } from 'react-bootstrap-icons'
+import { ArrowLeft, ArrowLeftCircle } from 'react-bootstrap-icons'
 
 import {
   Container,
@@ -45,7 +45,8 @@ import {
   TitleContainer,
   SubtitleContainer,
   BusinessDetails,
-  MasterCardCoupon
+  MasterCardCoupon,
+  GoToMenu
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -299,7 +300,9 @@ const CheckoutUI = (props) => {
       <WrapperLeftContainer>
         <WrapperLeftContent>
           <TitleContainer>
-            <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
+            {layout !== 'pfchangs' && (
+              <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
+            )}
             {!cartState.loading && cart?.status === 2 && (
               <WarningMessage>
                 <VscWarning />
@@ -311,9 +314,17 @@ const CheckoutUI = (props) => {
             <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
           </TitleContainer>
           {layout === 'pfchangs' && (
-            <SubtitleContainer>
-              <h2>{t('YOUR_INFORMATION', 'Your Information')}</h2>
-            </SubtitleContainer>
+            <>
+              {cart?.business?.slug && (
+                <GoToMenu onClick={() => handleStoreRedirect(cart?.business?.slug)}>
+                  <ArrowLeftCircle color={theme.colors.primary} />
+                  <p>{t('MENU', 'Menu')}</p>
+                </GoToMenu>
+              )}
+              <SubtitleContainer>
+                <h2>{t('YOUR_INFORMATION', 'Your Information')}</h2>
+              </SubtitleContainer>
+            </>
           )}
           {!useKioskApp ? (
             <>
@@ -596,7 +607,7 @@ const CheckoutUI = (props) => {
             {layout !== 'pfchangs' && (
               <CartHeader>
                 <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
-                <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business?.slug)}>{('ADD_PRODUCTS', 'Add products')}</span>
+                <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business)}>{('ADD_PRODUCTS', 'Add products')}</span>
               </CartHeader>
             )}
             <CartComponent

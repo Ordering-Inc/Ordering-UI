@@ -287,3 +287,14 @@ export const ReviewWrapper = styled.div`
     border-radius: 7.6px;
   }
 `
+
+export const WowPointsWrapper = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 58px;
+  p{
+    color: ${({ theme }) => theme?.colors?.gold};
+    margin: 0;
+    font-size: 14px;
+  }
+`

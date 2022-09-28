@@ -118,7 +118,8 @@ export const CartPopover = (props) => {
             <ButtonPF
               color='primary'
               style={{
-                height: '50px'
+                height: '50px',
+                display: location.pathname.includes('/checkout/') ? 'none' : 'flex'
               }}
             >
               <>
