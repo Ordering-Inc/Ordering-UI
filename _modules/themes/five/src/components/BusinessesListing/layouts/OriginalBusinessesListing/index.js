@@ -126,6 +126,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
+  var orderingTheme = (0, _orderingComponents.useOrderingTheme)();
   var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({

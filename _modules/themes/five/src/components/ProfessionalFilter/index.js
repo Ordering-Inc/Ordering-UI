@@ -23,6 +23,8 @@ var _ProfessionalProfile = require("../ProfessionalProfile");
 
 var _AutoScroll = require("../AutoScroll");
 
+var _ProfessionalInfo = require("../ProfessionalInfo");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -55,19 +57,31 @@ var ProfessionalFilter = function ProfessionalFilter(props) {
       open = _useState2[0],
       setOpen = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(null),
+  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      currentProfessional = _useState4[0],
-      setCurrentProfessional = _useState4[1];
+      reviewOpen = _useState4[0],
+      setReviewOpen = _useState4[1];
 
-  var handleOpenProfile = function handleOpenProfile(professional) {
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      currentProfessional = _useState6[0],
+      setCurrentProfessional = _useState6[1];
+
+  var handleOpenProfile = function handleOpenProfile(e, professional) {
+    if (e.target.closest('.info')) return;
     setCurrentProfessional(professional);
     setOpen(true);
+  };
+
+  var handleOpenReview = function handleOpenReview(professional) {
+    setReviewOpen(true);
+    setCurrentProfessional(professional);
   };
 
   var handleCloseProfile = function handleCloseProfile() {
     setCurrentProfessional(null);
     setOpen(false);
+    setReviewOpen(false);
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PROFESSIONALS', 'Professionals')), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProfessionalListing, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
@@ -81,14 +95,19 @@ var ProfessionalFilter = function ProfessionalFilter(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.ProfessionalItem, {
       key: i,
       active: (professional === null || professional === void 0 ? void 0 : professional.id) === (professionalSelected === null || professionalSelected === void 0 ? void 0 : professionalSelected.id),
-      onClick: function onClick() {
-        return handleOpenProfile(professional);
+      onClick: function onClick(e) {
+        return handleOpenProfile(e, professional);
       }
     }, professional !== null && professional !== void 0 && professional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
       bgimage: professional === null || professional === void 0 ? void 0 : professional.photo
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "name"
-    }, professional === null || professional === void 0 ? void 0 : professional.name, " ", professional === null || professional === void 0 ? void 0 : professional.lastname), /*#__PURE__*/_react.default.createElement(_styles.HeartIconWrapper, null, professional !== null && professional !== void 0 && professional.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))));
+    }, professional === null || professional === void 0 ? void 0 : professional.name, " ", professional === null || professional === void 0 ? void 0 : professional.lastname), /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, {
+      className: "info",
+      onClick: function onClick() {
+        return handleOpenReview(professional);
+      }
+    }), /*#__PURE__*/_react.default.createElement(_styles.HeartIconWrapper, null, professional !== null && professional !== void 0 && professional.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)))));
   }))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: open,
     width: "760px",
@@ -100,6 +119,15 @@ var ProfessionalFilter = function ProfessionalFilter(props) {
     currentProfessional: currentProfessional,
     onClose: handleCloseProfile,
     handleChangeProfessionalSelected: handleChangeProfessionalSelected
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: reviewOpen,
+    width: "760px",
+    padding: "0",
+    onClose: function onClose() {
+      return handleCloseProfile();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ProfessionalInfo.ProfessionalInfo, {
+    userId: currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.id
   })));
 };
 

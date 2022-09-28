@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var MyOrders = function MyOrders(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var hideOrders = props.hideOrders,
       businessesSearchList = props.businessesSearchList,
@@ -57,6 +57,12 @@ var MyOrders = function MyOrders(props) {
       t = _useLanguage2[1];
 
   var history = (0, _reactRouterDom.useHistory)();
+
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
+
+  var layout = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.orders) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : _orderingTheme$theme$3.type) || 'original';
 
   var _useState = (0, _react.useState)('all'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -135,7 +141,7 @@ var MyOrders = function MyOrders(props) {
     value: "orders"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     hideOrders: hideOrders
-  }, !hideOrders && /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ORDERS', 'My orders')), !allEmpty && /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
+  }, !hideOrders && /*#__PURE__*/_react.default.createElement("h1", null, layout === 'appointments' ? t('MY_APPOINTMENTS', 'My appointments') : t('MY_ORDERS', 'My orders')), !allEmpty && /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
     className: "category-lists"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
@@ -150,7 +156,7 @@ var MyOrders = function MyOrders(props) {
       active: selectedOption === option.key,
       borderBottom: true
     }, option === null || option === void 0 ? void 0 : option.value);
-  }))), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
+  }))), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && layout !== 'appointments' && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: i,
       color: selectItem === order.key ? 'primary' : 'secundary',

@@ -67,7 +67,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       business = props.business,
       handlerClickCategory = props.handlerClickCategory,
       categorySelected = props.categorySelected,
-      useKioskApp = props.useKioskApp;
+      useKioskApp = props.useKioskApp,
+      isProfessional = props.isProfessional;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({
@@ -215,6 +216,14 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [useKioskApp]);
+  (0, _react.useEffect)(function () {
+    var _business$professiona;
+
+    if ((business === null || business === void 0 ? void 0 : (_business$professiona = business.professionals) === null || _business$professiona === void 0 ? void 0 : _business$professiona.length) > 0 && !useKioskApp) {
+      var element = document.getElementById('category-lists');
+      element.setAttribute('style', 'width: 100% !important');
+    }
+  }, [business === null || business === void 0 ? void 0 : business.professionals, useKioskApp]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -227,7 +236,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     id: "category-lists",
     className: "category-lists",
     featured: featured,
-    w: props.wContainerStyle
+    w: props.wContainerStyle,
+    isProfessional: isProfessional
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, openBusinessInformation ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(ProductCategories, null)) : /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, /*#__PURE__*/_react.default.createElement(ProductCategories, null))) : /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
