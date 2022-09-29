@@ -53,7 +53,6 @@ import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 import BisUpArrow from '@meronex/icons/bi/BisUpArrow'
 import { Modal } from '../Modal'
 import { ProductForm } from '../ProductForm'
-import { MaxSectionItem } from './MaxSectionItem'
 
 export const BusinessListingSearchUI = (props) => {
   const {
@@ -122,6 +121,35 @@ export const BusinessListingSearchUI = (props) => {
 
   const closeModalProductForm = () => {
     setCurProduct({ business: null, product: null })
+  }
+
+  const MaxSectionItem = ({ title, options, filter }) => {
+    const parseValue = (option) => {
+      return filter === 'max_distance'
+        ? `${option / 1000} ${t('KM', 'Km')}`
+        : filter === 'max_eta'
+          ? `${option} ${t('MIN', 'min')}`
+          : parsePrice(option)
+    }
+    return (
+      <MaxFilterContainer>
+        <h3>{title}</h3>
+        <ProgressContentWrapper>
+          <ProgressBar style={{ width: `${((options.indexOf(filters?.[filter]) / 3) * 100) ?? 100}%` }} />
+        </ProgressContentWrapper>
+        <MaxItemContainer>
+          {options.map((option, i) => (
+            <MaxItem
+              key={option}
+              active={filters?.[filter] === option || (option === 'default' && (filters?.[filter] === 'default' || !filters?.[filter]))}
+              onClick={() => handleChangeFilters(filter, option)}
+            >
+              {option === 'default' ? `${parseValue(options[i - 1])}+` : parseValue(option)}
+            </MaxItem>
+          ))}
+        </MaxItemContainer>
+      </MaxFilterContainer>
+    )
   }
 
   return (
@@ -198,8 +226,6 @@ export const BusinessListingSearchUI = (props) => {
               title={t('MAX_DELIVERY_FEE', 'Max delivery fee')}
               options={maxDeliveryFeeOptions}
               filter='max_delivery_price'
-              filters={filters}
-              handleChangeFilters={handleChangeFilters}
             />
           )}
           {[1, 2].includes(orderState?.options?.type) && (
@@ -207,16 +233,12 @@ export const BusinessListingSearchUI = (props) => {
               title={orderState?.options?.type === 1 ? t('MAX_DELIVERY_TIME', 'Max delivery time') : t('MAX_PICKUP_TIME', 'Max pickup time')}
               options={maxTimeOptions}
               filter='max_eta'
-              filters={filters}
-              handleChangeFilters={handleChangeFilters}
             />
           )}
           <MaxSectionItem
             title={t('MAX_DISTANCE', 'Max distance')}
             options={maxDistanceOptions}
             filter='max_distance'
-            filters={filters}
-            handleChangeFilters={handleChangeFilters}
           />
           {/* <MaxSectionItem
               title={t('MAX_PRODUCT_PRICE', 'Max product price')}
@@ -233,7 +255,7 @@ export const BusinessListingSearchUI = (props) => {
           </TagsContainer>
         </Filters>
         <FiltersResultContainer>
-          {auth && termValue?.length === 0 && (
+          {auth && (
             <PreviouslyOrderedContainer>
               <MyOrders
                 hideOrders
