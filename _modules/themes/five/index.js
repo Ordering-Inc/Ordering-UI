@@ -339,6 +339,12 @@ Object.defineProperty(exports, "MyOrders", {
     return _MyOrders.MyOrders;
   }
 });
+Object.defineProperty(exports, "NavigationBar", {
+  enumerable: true,
+  get: function get() {
+    return _NavigationBar.NavigationBar;
+  }
+});
 Object.defineProperty(exports, "NotFoundSource", {
   enumerable: true,
   get: function get() {
@@ -889,3 +895,5 @@ var _Inputs = require("./src/styles/Inputs");
 var _Select = require("./src/styles/Select");
 
 var _Checkbox = require("../../styles/Checkbox");
+
+var _NavigationBar = require("./src/components/NavigationBar");
