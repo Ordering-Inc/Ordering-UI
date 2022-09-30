@@ -203,11 +203,13 @@ export const RibbonBox = styled.div`
   top: -4px;
   right: -3px;
   background-color: ${props => props.theme.colors.primary};
-  max-width: 50px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  max-width: 70px;
+  word-break: break-all;
+
   ${props => props.theme.rtl && css`
     left: -3px;
     right: initial;
