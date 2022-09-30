@@ -11,6 +11,7 @@ import { SingleProductCard } from '../SingleProductCard'
 import { useTheme } from 'styled-components'
 import { SingleOrderCard } from '../SingleOrderCard'
 import { checkSiteUrl } from '../../../../../utils'
+import { SingleProfessionalCard } from '../SingleProfessionalCard'
 
 import {
   Container,
@@ -29,6 +30,7 @@ const FavoriteListUI = (props) => {
     isBusiness,
     isProduct,
     isOrder,
+    isProfessional,
     handleReorder,
     reorderState
   } = props
@@ -318,6 +320,28 @@ const FavoriteListUI = (props) => {
                         onRedirectPage={onRedirectPage}
                         getOrderStatus={getOrderStatus}
                         handleReorder={handleReorder}
+                      />
+                    ))
+                  )}
+                </>
+              )}
+              {isProfessional && (
+                <>
+                  {
+                    !favoriteList?.loading && favoriteList?.favorites?.map((professional, i) => (
+                      <SingleProfessionalCard
+                        key={i}
+                        professional={professional}
+                        handleUpdateProfessionals={handleUpdateFavoriteList}
+                      />
+                    ))
+                  }
+                  {favoriteList?.loading && (
+                    [...Array(5).keys()].map(i => (
+                      <SingleProfessionalCard
+                        key={i}
+                        professional={{}}
+                        isSkeleton
                       />
                     ))
                   )}
