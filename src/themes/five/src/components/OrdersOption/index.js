@@ -65,7 +65,8 @@ const OrdersOptionUI = (props) => {
     handleUpdateProducts,
     onBusinessClick,
     professionals,
-    handleUpdateProfessionals
+    handleUpdateProfessionals,
+    businesses
   } = props
 
   const [, t] = useLanguage()
@@ -85,7 +86,6 @@ const OrdersOptionUI = (props) => {
     : orders.length > 0
 
   const [loadingOrders, setLoadingOrders] = useState(true)
-  const [businessLoading, setBusinessLoading] = useState(true)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const closeOrderModal = (e) => {
     const outsideModal = !window.document.getElementById('app-modals') ||
@@ -97,7 +97,7 @@ const OrdersOptionUI = (props) => {
     }
   }
 
-  const showSkeletons = (!isBusiness && !isProducts && loading) || (businessLoading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
+  const showSkeletons = (!isBusiness && !isProducts && loading) || (businesses?.loading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -225,8 +225,7 @@ const OrdersOptionUI = (props) => {
       )}
       {isBusiness && businessOrderIds?.length > 0 && (
         <PreviousBusinessOrdered
-          businessId={businessOrderIds}
-          setBusinessLoading={setBusinessLoading}
+          businesses={businesses}
           onRedirectPage={onRedirectPage}
           isLoadingOrders={loading}
         />
@@ -248,9 +247,9 @@ const OrdersOptionUI = (props) => {
         />
       )}
 
-      {(isCustomLayout ? (loadingOrders || loading || isBusinessesLoading) : showSkeletons) && (
+      {(isCustomLayout ? (loadingOrders || loading || businesses?.loading) : showSkeletons) && (
         <>
-          {(businessLoading && isBusiness) ? (
+          {(businesses?.loading && isBusiness) ? (
             <BusinessControllerSkeleton>
               {[...Array(3).keys()].map((item, i) => (
                 <BusinessController

@@ -617,9 +617,11 @@ const CartUI = (props) => {
           onClose={() => setOpenChangeStore(false)}
         >
           <CartStoresListing
+            isStore={isStore}
             pageChangeStore='business'
             cartuuid={cart?.uuid}
             onClose={() => setOpenChangeStore(false)}
+            handleCustomStoreRedirect={handleStoreRedirect}
           />
         </Modal>
 
