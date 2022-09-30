@@ -27,13 +27,6 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "favorite": {
-    "title": "Favorite",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "index, follow",
-    "canonicalUrl": ""
-  },
   "forgotpassword": {
     "title": "Forgot Password",
     "description": "a dummy description about this page",

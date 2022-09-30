@@ -15,7 +15,6 @@ import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { Alert } from '../src/components/Confirm'
 import { SmartAppBanner } from '../src/components/SmartAppBanner'
-import { Favorite } from './pages/Favorite'
 
 import { BusinessesList } from './pages/BusinessesList'
 import { BusinessProductsList } from './pages/BusinessProductsList'
@@ -232,9 +231,6 @@ export const App = () => {
                   </Route>
                   <Route exact path='/store/:store'>
                     <BusinessProductsList />
-                  </Route>
-                  <Route exact path='/favorite'>
-                    <Favorite />
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
