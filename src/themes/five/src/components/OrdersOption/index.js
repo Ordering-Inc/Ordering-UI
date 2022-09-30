@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
-import { useLanguage, useOrder, useEvent } from 'ordering-components'
-import { OrderList } from './naked'
-
+import { useLanguage, useOrder, useEvent, OrderList } from 'ordering-components'
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -66,7 +64,8 @@ const OrdersOptionUI = (props) => {
     businessesSearchList,
     handleUpdateProducts,
     onBusinessClick,
-    professionals
+    professionals,
+    handleUpdateProfessionals
   } = props
 
   const [, t] = useLanguage()
@@ -245,6 +244,7 @@ const OrdersOptionUI = (props) => {
       {isProfessionals && (
         <PreviousProfessionalOrdered
           professionals={professionals}
+          handleUpdateProfessionals={handleUpdateProfessionals}
         />
       )}
 

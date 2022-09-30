@@ -46,7 +46,7 @@ export const Favorite = (props) => {
                 {item?.name}
               </Tab>
             ))}
-            {layout === 'original' && (
+            {layout === 'appointments' && (
               <Tab
                 borderBottom
                 active={tabSelected === 'professionals'}

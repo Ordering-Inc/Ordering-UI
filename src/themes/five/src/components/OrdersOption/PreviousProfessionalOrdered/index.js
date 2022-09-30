@@ -10,7 +10,8 @@ import { SingleProfessionalCard } from '../../SingleProfessionalCard'
 
 export const PreviousProfessionalOrdered = (props) => {
   const {
-    professionals
+    professionals,
+    handleUpdateProfessionals
   } = props
 
   return (
@@ -21,6 +22,7 @@ export const PreviousProfessionalOrdered = (props) => {
             <SingleProfessionalCard
               key={professional?.id}
               professional={professional}
+              handleUpdateProfessionals={handleUpdateProfessionals}
             />
           ))}
         </AutoScroll>

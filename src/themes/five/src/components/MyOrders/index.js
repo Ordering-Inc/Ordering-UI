@@ -45,8 +45,7 @@ export const MyOrders = (props) => {
   const MyOrdersMenu = [
     { key: 'orders', value: t('ORDERS', 'Orders') },
     { key: 'business', value: t('BUSINESS', 'Business') },
-    { key: 'products', value: t('PRODUCTS', 'Products') },
-    { key: 'professionals', value: t('PROFESSIONALS', 'Professionals') }
+    { key: 'products', value: t('PRODUCTS', 'Products') }
   ]
 
   const notOrderOptions = ['business', 'products', 'professionals']
@@ -88,6 +87,15 @@ export const MyOrders = (props) => {
                   {option?.value}
                 </Tab>
               ))}
+              {layout === 'appointments' && (
+                <Tab
+                  onClick={() => setSelectedOption('professionals')}
+                  active={selectedOption === 'professionals'}
+                  borderBottom
+                >
+                  {t('PROFESSIONALS', 'Professionals')}
+                </Tab>
+              )}
             </Tabs>
           </MyOrdersMenuContainer>
         )}

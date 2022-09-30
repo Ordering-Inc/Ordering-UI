@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useOrder, useSite, useEvent } from 'ordering-components'
-import { FavoriteList as FavoriteListController } from './naked'
+import { useLanguage, useOrder, useSite, useEvent, FavoriteList as FavoriteListController } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { NotFoundSource } from '../NotFoundSource'
@@ -333,6 +332,7 @@ const FavoriteListUI = (props) => {
                       <SingleProfessionalCard
                         key={i}
                         professional={professional}
+                        handleUpdateProfessionals={handleUpdateFavoriteList}
                       />
                     ))
                   }

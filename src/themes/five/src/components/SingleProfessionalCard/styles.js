@@ -42,7 +42,7 @@ export const UserPhoto = (props) => {
 }
 
 export const InfoWrapper = styled.div`
-  flex: 1;
+  width: calc(100% - 106px);
   margin-left: 20px;
   ${props => props.theme.rtl && css`
     margin-left: 0px;
@@ -53,6 +53,9 @@ export const InfoWrapper = styled.div`
     font-size: 14px;
     line-height: 24px;
     margin: 0px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   p {
     margin-top: 2px;
@@ -66,7 +69,8 @@ export const ActionWrapper = styled.div`
   margin-top: 15px;
   display: flex;
   align-items: center;
-  > svg {
+  > .info {
+    cursor: pointer;
     font-size: 16px;
     margin-right: 7px;
     ${props => props.theme.rtl && css`

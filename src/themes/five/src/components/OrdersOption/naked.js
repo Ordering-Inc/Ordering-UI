@@ -260,6 +260,19 @@ export const OrderList = props => {
     }
   }
 
+  const handleUpdateProfessionals = (id, changes) => {
+    const updateProfessionals = professionals.map(professional => {
+      if (professional?.id === id) {
+        return {
+          ...professional,
+          ...changes
+        }
+      }
+      return professional
+    })
+    setProfessionals(updateProfessionals)
+  }
+
   useEffect(() => {
     if (orders || customArray) {
       setOrderList({
@@ -491,6 +504,7 @@ export const OrderList = props => {
           handleUpdateOrderList={handleUpdateOrderList}
           handleUpdateProducts={handleUpdateProducts}
           professionals={professionals}
+          handleUpdateProfessionals={handleUpdateProfessionals}
         />
       )}
     </>
