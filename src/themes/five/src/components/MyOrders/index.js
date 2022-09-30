@@ -48,7 +48,7 @@ export const MyOrders = (props) => {
     { key: 'products', value: t('PRODUCTS', 'Products') }
   ]
 
-  const notOrderOptions = ['business', 'products']
+  const notOrderOptions = ['business', 'products', 'professionals']
   const allEmpty = (isEmptyActive && isEmptyPast && isEmptyPreorder) || ((isEmptyBusinesses || businessOrderIds?.length === 0) && hideOrders)
 
   const handleChangeFilter = (key) => {
@@ -87,6 +87,15 @@ export const MyOrders = (props) => {
                   {option?.value}
                 </Tab>
               ))}
+              {layout === 'appointments' && (
+                <Tab
+                  onClick={() => setSelectedOption('professionals')}
+                  active={selectedOption === 'professionals'}
+                  borderBottom
+                >
+                  {t('PROFESSIONALS', 'Professionals')}
+                </Tab>
+              )}
             </Tabs>
           </MyOrdersMenuContainer>
         )}
@@ -165,6 +174,7 @@ export const MyOrders = (props) => {
             horizontal
             isBusiness={selectedOption === 'business'}
             isProducts={selectedOption === 'products'}
+            isProfessionals={selectedOption === 'professionals'}
             activeOrders
             pastOrders
             preOrders

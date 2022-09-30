@@ -84,6 +84,7 @@ import { SignUpBusiness } from './src/components/SignUpBusiness'
 import { SignUpDriver } from './src/components/SignUpDriver'
 import { SignUpApproval } from './src/components/SignUpApproval'
 import { SingleProductCard } from './src/components/SingleProductCard'
+import { SingleProfessionalCard } from './src/components/SingleProfessionalCard'
 import { StripeElementsForm } from './src/components/StripeElementsForm'
 import { StripeRedirectForm } from './src/components/StripeRedirectForm'
 import { UpsellingPage } from './src/components/UpsellingPage'
@@ -199,6 +200,7 @@ export {
   SignUpDriver,
   SignUpApproval,
   SingleProductCard,
+  SingleProfessionalCard,
   StripeElementsForm,
   StripeRedirectForm,
   UpsellingPage,
