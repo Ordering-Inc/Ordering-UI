@@ -36,15 +36,21 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Favorite = function Favorite(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options2, _orderState$options2$, _orderState$options2$2, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options2, _orderState$options2$, _orderState$options2$2, _props$afterComponent, _props$afterElements;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
+
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 1),
       orderState = _useOrder2[0];
+
+  var layout = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.favorite) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : _orderingTheme$theme$3.type) || 'original';
 
   var _useState = (0, _react.useState)('businesses'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -80,7 +86,13 @@ var Favorite = function Favorite(props) {
         return setTabSelected(item.key);
       }
     }, item === null || item === void 0 ? void 0 : item.name);
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, tabSelected === 'businesses' && /*#__PURE__*/_react.default.createElement(_FavoriteList.FavoriteList, {
+  }), layout === 'appointments' && /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+    borderBottom: true,
+    active: tabSelected === 'professionals',
+    onClick: function onClick() {
+      return setTabSelected('professionals');
+    }
+  }, t('PROFESSIONALS', 'Professionals')))), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, tabSelected === 'businesses' && /*#__PURE__*/_react.default.createElement(_FavoriteList.FavoriteList, {
     isBusiness: true,
     favoriteURL: "favorite_businesses",
     originalURL: "business",
@@ -94,6 +106,10 @@ var Favorite = function Favorite(props) {
     favoriteURL: "favorite_orders",
     originalURL: "orders",
     isOrder: true
+  }), tabSelected === 'professionals' && /*#__PURE__*/_react.default.createElement(_FavoriteList.FavoriteList, {
+    favoriteURL: "favorite_users",
+    originalURL: "users",
+    isProfessional: true
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

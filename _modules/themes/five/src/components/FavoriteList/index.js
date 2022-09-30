@@ -33,6 +33,8 @@ var _SingleOrderCard = require("../SingleOrderCard");
 
 var _utils = require("../../../../../utils");
 
+var _SingleProfessionalCard = require("../SingleProfessionalCard");
+
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -68,7 +70,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var FavoriteListUI = function FavoriteListUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _favoriteList$favorit2, _favoriteList$favorit3, _favoriteList$favorit4, _favoriteList$favorit5, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _favoriteList$favorit2, _favoriteList$favorit3, _favoriteList$favorit4, _favoriteList$favorit5, _favoriteList$favorit6, _props$afterComponent, _props$afterElements;
 
   var favoriteList = props.favoriteList,
       handleUpdateFavoriteList = props.handleUpdateFavoriteList,
@@ -77,6 +79,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
       isBusiness = props.isBusiness,
       isProduct = props.isProduct,
       isOrder = props.isOrder,
+      isProfessional = props.isProfessional,
       handleReorder = props.handleReorder,
       reorderState = props.reorderState;
 
@@ -474,6 +477,18 @@ var FavoriteListUI = function FavoriteListUI(props) {
       onRedirectPage: onRedirectPage,
       getOrderStatus: getOrderStatus,
       handleReorder: handleReorder
+    });
+  })), isProfessional && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit6 = favoriteList.favorites) === null || _favoriteList$favorit6 === void 0 ? void 0 : _favoriteList$favorit6.map(function (professional, i) {
+    return /*#__PURE__*/_react.default.createElement(_SingleProfessionalCard.SingleProfessionalCard, {
+      key: i,
+      professional: professional,
+      handleUpdateProfessionals: handleUpdateFavoriteList
+    });
+  })), (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.loading) && _toConsumableArray(Array(5).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_SingleProfessionalCard.SingleProfessionalCard, {
+      key: i,
+      professional: {},
+      isSkeleton: true
     });
   })), !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) < (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.ReadMoreCard, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",

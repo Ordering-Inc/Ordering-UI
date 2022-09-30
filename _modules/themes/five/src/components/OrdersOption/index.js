@@ -37,6 +37,8 @@ var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
 var _Confirm = require("../Confirm");
 
+var _PreviousProfessionalOrdered = require("./PreviousProfessionalOrdered");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -99,6 +101,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       handleReorder = props.handleReorder,
       isBusiness = props.isBusiness,
       isProducts = props.isProducts,
+      isProfessionals = props.isProfessionals,
       businessOrderIds = props.businessOrderIds,
       products = props.products,
       hideOrders = props.hideOrders,
@@ -106,6 +109,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       businessesSearchList = props.businessesSearchList,
       handleUpdateProducts = props.handleUpdateProducts,
       onBusinessClick = props.onBusinessClick,
+      professionals = props.professionals,
+      handleUpdateProfessionals = props.handleUpdateProfessionals,
       businesses = props.businesses;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -359,6 +364,9 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     onProductClick: onProductClick,
     handleUpdateProducts: handleUpdateProducts,
     onBusinessClick: onBusinessClick
+  }), isProfessionals && /*#__PURE__*/_react.default.createElement(_PreviousProfessionalOrdered.PreviousProfessionalOrdered, {
+    professionals: professionals,
+    handleUpdateProfessionals: handleUpdateProfessionals
   }), (isCustomLayout ? loadingOrders || loading || (businesses === null || businesses === void 0 ? void 0 : businesses.loading) : showSkeletons) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businesses !== null && businesses !== void 0 && businesses.loading && isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.BusinessControllerSkeleton, null, _toConsumableArray(Array(3).keys()).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,

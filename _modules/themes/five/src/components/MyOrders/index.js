@@ -122,7 +122,7 @@ var MyOrders = function MyOrders(props) {
     key: 'products',
     value: t('PRODUCTS', 'Products')
   }];
-  var notOrderOptions = ['business', 'products'];
+  var notOrderOptions = ['business', 'products', 'professionals'];
   var allEmpty = isEmptyActive && isEmptyPast && isEmptyPreorder || (isEmptyBusinesses || (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) === 0) && hideOrders;
 
   var handleChangeFilter = function handleChangeFilter(key) {
@@ -156,7 +156,13 @@ var MyOrders = function MyOrders(props) {
       active: selectedOption === option.key,
       borderBottom: true
     }, option === null || option === void 0 ? void 0 : option.value);
-  }))), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && layout !== 'appointments' && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
+  }), layout === 'appointments' && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return setSelectedOption('professionals');
+    },
+    active: selectedOption === 'professionals',
+    borderBottom: true
+  }, t('PROFESSIONALS', 'Professionals')))), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && layout !== 'appointments' && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: i,
       color: selectItem === order.key ? 'primary' : 'secundary',
@@ -190,6 +196,7 @@ var MyOrders = function MyOrders(props) {
     horizontal: true,
     isBusiness: selectedOption === 'business',
     isProducts: selectedOption === 'products',
+    isProfessionals: selectedOption === 'professionals',
     activeOrders: true,
     pastOrders: true,
     preOrders: true,
