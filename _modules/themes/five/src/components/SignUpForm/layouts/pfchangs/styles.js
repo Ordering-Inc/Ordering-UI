@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ValidationText = exports.Title = exports.TermsConditionWrapper = exports.SkeletonWrapper = exports.SkeletonSocialWrapper = exports.SignUpContainer = exports.ReCaptchaWrapper = exports.PromotionsWrapper = exports.InputWrapper = exports.InputContainer = exports.InputBeforeIcon = exports.FormSide = exports.FormInput = exports.DateContainer = exports.CheckboxArea = void 0;
+exports.WrapperButtons = exports.ValidationText = exports.Title = exports.TermsConditionWrapper = exports.Subtitle = exports.SkeletonWrapper = exports.SkeletonSocialWrapper = exports.SignUpContainer = exports.SendCodeContainer = exports.ReCaptchaWrapper = exports.PromotionsWrapper = exports.OtpContainer = exports.InputWrapper = exports.InputContainer = exports.InputBeforeIcon = exports.FormSide = exports.FormInput = exports.DateContainer = exports.CheckboxArea = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -123,3 +123,21 @@ exports.ValidationText = ValidationText;
 var DateContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  input{\n    width: 100%;\n    box-sizing: border-box;\n  }\n"])));
 
 exports.DateContainer = DateContainer;
+
+var WrapperButtons = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  flex: 1;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  button {\n    flex: 1;\n    margin: 10px;\n    width: 250px\n  }\n  svg{\n    margin-right: 20px;\n    position: relative;\n    top: 3px;\n  }\n"])));
+
+exports.WrapperButtons = WrapperButtons;
+
+var OtpContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  width: 100%;\n"])));
+
+exports.OtpContainer = OtpContainer;
+
+var SendCodeContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  padding: 10px;\n  text-align: center;\n  flex-direction: column;\n"])));
+
+exports.SendCodeContainer = SendCodeContainer;
+
+var Subtitle = _styledComponents.default.h2(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 18px;\n  margin-bottom: 30px;\n  color: ", ";\n"])), function (props) {
+  return props.theme.colors.darkTextColor;
+});
+
+exports.Subtitle = Subtitle;

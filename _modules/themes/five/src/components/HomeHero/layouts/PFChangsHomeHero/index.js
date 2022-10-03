@@ -62,13 +62,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PFChangsHomeHero = function PFChangsHomeHero(props) {
   var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _theme$images, _theme$images$general, _orderState$options3, _orderState$options3$, _orderState$options4, _orderState$options4$, _configState$configs2, _configState$configs3, _orderState$options5, _orderState$options5$, _orderState$options6, _orderState$options6$, _configState$configs4, _configState$configs5, _orderState$options7;
 
-  var contentPosition = props.contentPosition;
+  var contentPosition = props.contentPosition,
+      brandId = props.brandId;
 
   var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
+      _useSession2 = _slicedToArray(_useSession, 2),
       _useSession2$ = _useSession2[0],
       auth = _useSession2$.auth,
-      user = _useSession2$.user;
+      user = _useSession2$.user,
+      refreshUserInfo = _useSession2[1].refreshUserInfo;
 
   var _useOrder = (0, _orderingComponents.useOrder)(),
       _useOrder2 = _slicedToArray(_useOrder, 2),
@@ -175,7 +177,8 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'city', 'city_id'],
     onRedirectPage: function onRedirectPage(data) {
       return events.emit('go_to_page', data);
-    }
+    },
+    brandId: brandId
   };
   var googleMapsControls = {
     defaultZoom: 17,
@@ -253,6 +256,11 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       h: imageMapDimensions.clientHeight
     });
   }, []);
+  (0, _react.useEffect)(function () {
+    if ((user === null || user === void 0 ? void 0 : user.name) === null) {
+      refreshUserInfo();
+    }
+  }, [user === null || user === void 0 ? void 0 : user.name]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: homeBackgroundImage || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero)
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {

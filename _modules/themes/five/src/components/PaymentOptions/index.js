@@ -149,7 +149,7 @@ var paypalBtnStyle = {
 };
 
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance2, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance2, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _configs$openpay_clie, _configs$openpay_clie2, _configs$openpay_clie3, _configs$openpay_clie4, _configs$openpay_clie5, _configs$openpay_clie6, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errorCash = props.errorCash,
@@ -455,9 +455,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       return handlePaymethodClick(null);
     },
     handlePlaceOrder: handlePlaceOrder,
-    merchantId: "mz86y3z3qbpmxukfefll",
-    publicKey: "pk_e871b3211d924956ad7de33c87af6ef9",
-    isSandbox: true
+    merchantId: (_configs$openpay_clie = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie2 = configs.openpay_client_id) === null || _configs$openpay_clie2 === void 0 ? void 0 : _configs$openpay_clie2.key) !== null && _configs$openpay_clie !== void 0 ? _configs$openpay_clie : 'mz86y3z3qbpmxukfefll',
+    publicKey: (_configs$openpay_clie3 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie4 = configs.openpay_client_id) === null || _configs$openpay_clie4 === void 0 ? void 0 : _configs$openpay_clie4.value) !== null && _configs$openpay_clie3 !== void 0 ? _configs$openpay_clie3 : 'pk_e871b3211d924956ad7de33c87af6ef9',
+    isSandbox: (_configs$openpay_clie5 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie6 = configs.openpay_client_id) === null || _configs$openpay_clie6 === void 0 ? void 0 : _configs$openpay_clie6.sandbox) !== null && _configs$openpay_clie5 !== void 0 ? _configs$openpay_clie5 : true
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PAYMENT_METHODS', 'Payment methods'),
     content: alertState.content,

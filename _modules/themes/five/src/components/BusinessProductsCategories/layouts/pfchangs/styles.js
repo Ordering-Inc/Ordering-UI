@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CategoriesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 100;\n  position: sticky;\n  top: 0;\n  text-align: center;\n  text-transform: uppercase;\n  font-weight: bold;\n  ", "\n  width: ", ";\n  ", "\n  div.special {\n    ", "\n  }\n  \n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  }\n  @media (min-width: 992px) {\n    width: ", ";\n  }\n"])), function (props) {
+var CategoriesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 100;\n  position: sticky;\n  top: 0;\n  text-align: center;\n  text-transform: uppercase;\n  font-weight: bold;\n  ", "\n  width: ", ";\n  ", "\n  div.special {\n    ", "\n  }\n  &.category-lists{\n    left: 0;\n  }\n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  }\n  @media (min-width: 992px) {\n    width: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (_ref) {
   var subcategoriesLayout = _ref.subcategoriesLayout;

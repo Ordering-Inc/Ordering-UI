@@ -648,7 +648,7 @@ var LoginForm = function LoginForm(props) {
   }();
 
   var alseaOtpInitialize = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(values, type) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(values, type, social) {
       var body, requestParams, params, result, responseOtp, resultOtp, _responseOtp, _resultOtp;
 
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
@@ -664,11 +664,13 @@ var LoginForm = function LoginForm(props) {
                 type: type
               };
 
-              if (otpType === 'cellphone') {
+              if (social !== null && social !== void 0 && social.cellphone || otpType === 'cellphone') {
                 body.user = (values === null || values === void 0 ? void 0 : values.cellphone) || (credentials === null || credentials === void 0 ? void 0 : credentials.cellphone);
                 body.cellphone = (values === null || values === void 0 ? void 0 : values.cellphone) || (credentials === null || credentials === void 0 ? void 0 : credentials.cellphone);
                 body.country_code = values === null || values === void 0 ? void 0 : values.countryPhoneCode;
-              } else {
+              }
+
+              if (social !== null && social !== void 0 && social.email && !(social !== null && social !== void 0 && social.cellphone) || otpType === 'email') {
                 body.email = (values === null || values === void 0 ? void 0 : values.email) || (credentials === null || credentials === void 0 ? void 0 : credentials.email);
                 body.user = (values === null || values === void 0 ? void 0 : values.email) || (credentials === null || credentials === void 0 ? void 0 : credentials.email);
               }
@@ -681,35 +683,46 @@ var LoginForm = function LoginForm(props) {
                 body: JSON.stringify(body)
               };
               params = "pass=q7i1rcljnv3roqv72sleodqt9mi0udrrotqau4rhi81274q2ejt".concat(body.cellphone ? "&cellphone=".concat(body.cellphone) : '').concat(body.country_code ? "&country_phone_code=".concat(body.country_code) : '').concat(body.email ? "&mail=".concat(body.email) : '');
-              _context5.next = 9;
-              return alseaOtpConsult(params);
+              _context5.next = 10;
+              return alseaOtpConsult(params, social);
 
-            case 9:
+            case 10:
               result = _context5.sent;
 
+              if (!social) {
+                _context5.next = 14;
+                break;
+              }
+
+              setCheckPhoneCodeState(_objectSpread(_objectSpread({}, checkPhoneCodeState), {}, {
+                loading: false
+              }));
+              return _context5.abrupt("return");
+
+            case 14:
               if (!(result === 'new_user')) {
-                _context5.next = 30;
+                _context5.next = 34;
                 break;
               }
 
               if (!(otpType === 'cellphone')) {
-                _context5.next = 25;
+                _context5.next = 29;
                 break;
               }
 
-              _context5.next = 14;
+              _context5.next = 18;
               return fetch("https://alsea-plugins-staging.ordering.co/alseaplatform/cellphone_new_user_code.php", requestParams);
 
-            case 14:
+            case 18:
               responseOtp = _context5.sent;
-              _context5.next = 17;
+              _context5.next = 21;
               return responseOtp.json();
 
-            case 17:
+            case 21:
               resultOtp = _context5.sent;
 
               if (!resultOtp.error) {
-                _context5.next = 21;
+                _context5.next = 25;
                 break;
               }
 
@@ -721,7 +734,7 @@ var LoginForm = function LoginForm(props) {
               }));
               return _context5.abrupt("return", false);
 
-            case 21:
+            case 25:
               setCheckPhoneCodeState(_objectSpread(_objectSpread({}, checkPhoneCodeState), {}, {
                 result: {
                   result: resultOtp.result
@@ -729,10 +742,10 @@ var LoginForm = function LoginForm(props) {
                 loading: false
               }));
               setCreateOtpUser(true);
-              _context5.next = 27;
+              _context5.next = 31;
               break;
 
-            case 25:
+            case 29:
               setCheckPhoneCodeState(_objectSpread(_objectSpread({}, checkPhoneCodeState), {}, {
                 result: {
                   error: t('EMAIL_DOES_NOT_EXIST', 'The email doesn\'t exist')
@@ -741,28 +754,28 @@ var LoginForm = function LoginForm(props) {
               }));
               setOtpType('cellphone');
 
-            case 27:
+            case 31:
               return _context5.abrupt("return", true);
 
-            case 30:
+            case 34:
               if (!(result === 'existing_user')) {
-                _context5.next = 45;
+                _context5.next = 49;
                 break;
               }
 
-              _context5.next = 33;
+              _context5.next = 37;
               return fetch("https://alsea-plugins-staging.ordering.co/alseaplatform/otp_create.php", requestParams);
 
-            case 33:
+            case 37:
               _responseOtp = _context5.sent;
-              _context5.next = 36;
+              _context5.next = 40;
               return _responseOtp.json();
 
-            case 36:
+            case 40:
               _resultOtp = _context5.sent;
 
               if (!_resultOtp.error) {
-                _context5.next = 40;
+                _context5.next = 44;
                 break;
               }
 
@@ -774,7 +787,7 @@ var LoginForm = function LoginForm(props) {
               }));
               return _context5.abrupt("return", false);
 
-            case 40:
+            case 44:
               setCheckPhoneCodeState(_objectSpread(_objectSpread({}, checkPhoneCodeState), {}, {
                 result: {
                   result: _resultOtp.result
@@ -786,7 +799,7 @@ var LoginForm = function LoginForm(props) {
               }));
               return _context5.abrupt("return", true);
 
-            case 45:
+            case 49:
               setCheckPhoneCodeState(_objectSpread(_objectSpread({}, checkPhoneCodeState), {}, {
                 result: {
                   error: result.result
@@ -795,12 +808,12 @@ var LoginForm = function LoginForm(props) {
               }));
               return _context5.abrupt("return", false);
 
-            case 47:
-              _context5.next = 52;
+            case 51:
+              _context5.next = 56;
               break;
 
-            case 49:
-              _context5.prev = 49;
+            case 53:
+              _context5.prev = 53;
               _context5.t0 = _context5["catch"](0);
               setCheckPhoneCodeState(_objectSpread(_objectSpread({}, checkPhoneCodeState), {}, {
                 result: {
@@ -809,15 +822,15 @@ var LoginForm = function LoginForm(props) {
                 loading: false
               }));
 
-            case 52:
+            case 56:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[0, 49]]);
+      }, _callee5, null, [[0, 53]]);
     }));
 
-    return function alseaOtpInitialize(_x5, _x6) {
+    return function alseaOtpInitialize(_x5, _x6, _x7) {
       return _ref5.apply(this, arguments);
     };
   }();
@@ -864,7 +877,7 @@ var LoginForm = function LoginForm(props) {
       }, _callee6, null, [[0, 10]]);
     }));
 
-    return function alseaOtpConsult(_x7) {
+    return function alseaOtpConsult(_x8) {
       return _ref6.apply(this, arguments);
     };
   }();
@@ -956,8 +969,95 @@ var LoginForm = function LoginForm(props) {
       }, _callee7, null, [[0, 18]]);
     }));
 
-    return function alseaOtpCreateUser(_x8) {
+    return function alseaOtpCreateUser(_x9) {
       return _ref7.apply(this, arguments);
+    };
+  }();
+
+  var handleLoginFacebookAlsea = /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(fbdata) {
+      var _fbdata$authResponse, fbBody, responsefb, _yield$responsefb$jso, result, error, redirect, _result$session2;
+
+      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              _context8.prev = 0;
+              fbBody = JSON.stringify({
+                access_token: fbdata === null || fbdata === void 0 ? void 0 : (_fbdata$authResponse = fbdata.authResponse) === null || _fbdata$authResponse === void 0 ? void 0 : _fbdata$authResponse.accessToken,
+                social_id: fbdata === null || fbdata === void 0 ? void 0 : fbdata.social_id
+              });
+              _context8.next = 4;
+              return fetch("https://alsea-plugins-staging.ordering.co/alseaplatform/api/facebook.php", {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: fbBody
+              });
+
+            case 4:
+              responsefb = _context8.sent;
+              _context8.next = 7;
+              return responsefb.json();
+
+            case 7:
+              _yield$responsefb$jso = _context8.sent;
+              result = _yield$responsefb$jso.result;
+              error = _yield$responsefb$jso.error;
+              redirect = _yield$responsefb$jso.redirect;
+
+              if (!error) {
+                _context8.next = 14;
+                break;
+              }
+
+              setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+                loading: false,
+                result: {
+                  error: true,
+                  result: result
+                }
+              }));
+              return _context8.abrupt("return");
+
+            case 14:
+              if (redirect) {
+                setOtpDataUser(_objectSpread(_objectSpread({}, result), {}, {
+                  social: true
+                }));
+                handleOpenSignup();
+              } else {
+                login({
+                  user: result,
+                  token: result === null || result === void 0 ? void 0 : (_result$session2 = result.session) === null || _result$session2 === void 0 ? void 0 : _result$session2.access_token
+                });
+              }
+
+              _context8.next = 20;
+              break;
+
+            case 17:
+              _context8.prev = 17;
+              _context8.t0 = _context8["catch"](0);
+              setFormState({
+                result: {
+                  error: true,
+                  result: _context8.t0.message
+                },
+                loading: false
+              });
+
+            case 20:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8, null, [[0, 17]]);
+    }));
+
+    return function handleLoginFacebookAlsea(_x10) {
+      return _ref8.apply(this, arguments);
     };
   }();
 
@@ -987,7 +1087,9 @@ var LoginForm = function LoginForm(props) {
     useLoginOtpCellphone: useLoginOtpCellphone,
     alseaOtpInitialize: alseaOtpInitialize,
     createOtpUser: createOtpUser,
-    alseaOtpCreateUser: alseaOtpCreateUser
+    alseaOtpCreateUser: alseaOtpCreateUser // handleCheckFacebookInfo={handleCheckFacebookInfo}
+    ,
+    handleLoginFacebookAlsea: handleLoginFacebookAlsea
   })));
 };
 

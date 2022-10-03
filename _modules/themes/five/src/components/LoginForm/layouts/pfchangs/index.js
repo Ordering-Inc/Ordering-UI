@@ -113,7 +113,8 @@ var LoginFormUI = function LoginFormUI(props) {
       setOtpState = props.setOtpState,
       alseaOtpInitialize = props.alseaOtpInitialize,
       alseaOtpCreateUser = props.alseaOtpCreateUser,
-      createOtpUser = props.createOtpUser;
+      createOtpUser = props.createOtpUser,
+      handleLoginFacebookAlsea = props.handleLoginFacebookAlsea;
   var numOtpInputs = 4;
 
   var otpPlaceholder = _toConsumableArray(Array(numOtpInputs)).fill(0).join('');
@@ -256,7 +257,7 @@ var LoginFormUI = function LoginFormUI(props) {
     };
   }();
 
-  var handleSuccessFacebook = function handleSuccessFacebook(user) {
+  var handleSuccessApple = function handleSuccessApple(user) {
     var _user$session;
 
     login({
@@ -265,21 +266,12 @@ var LoginFormUI = function LoginFormUI(props) {
     });
   };
 
-  var handleSuccessApple = function handleSuccessApple(user) {
+  var handleSuccessGoogle = function handleSuccessGoogle(user) {
     var _user$session2;
 
     login({
       user: user,
       token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
-    });
-  };
-
-  var handleSuccessGoogle = function handleSuccessGoogle(user) {
-    var _user$session3;
-
-    login({
-      user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session3 = user.session) === null || _user$session3 === void 0 ? void 0 : _user$session3.access_token
     });
   };
 
@@ -543,7 +535,7 @@ var LoginFormUI = function LoginFormUI(props) {
     isPopup: isPopup
   }, ((configs === null || configs === void 0 ? void 0 : (_configs$facebook_log5 = configs.facebook_login) === null || _configs$facebook_log5 === void 0 ? void 0 : _configs$facebook_log5.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log6 = configs.facebook_login) === null || _configs$facebook_log6 === void 0 ? void 0 : _configs$facebook_log6.value) === '1') && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value) && facebookLoginEnabled && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id3 = configs.facebook_id) === null || _configs$facebook_id3 === void 0 ? void 0 : _configs$facebook_id3.value,
-    handleSuccessFacebookLogin: handleSuccessFacebook
+    handleButtonFacebookLoginClick: handleLoginFacebookAlsea
   }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login7 = configs.google_login_client_id) === null || _configs$google_login7 === void 0 ? void 0 : _configs$google_login7.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login8 = configs.google_login_auth_domain) === null || _configs$google_login8 === void 0 ? void 0 : _configs$google_login8.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login9 = configs.google_login_api_key) === null || _configs$google_login9 === void 0 ? void 0 : _configs$google_login9.value) && googleLoginEnabled && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
     initParams: initParams,
     handleSuccessGoogleLogin: handleSuccessGoogle

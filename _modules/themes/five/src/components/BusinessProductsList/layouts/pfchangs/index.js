@@ -19,6 +19,8 @@ var _Modal = require("../../../Modal");
 
 var _styles = require("./styles");
 
+var _styledComponents = require("styled-components");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -50,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _categoryState$produc2;
+  var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _categoryState$produc, _categoryState$produc2;
 
   var errors = props.errors,
       businessId = props.businessId,
@@ -79,6 +81,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
+  var theme = (0, _styledComponents.useTheme)();
   var isUseParentCategory = (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1';
 
   var _useState = (0, _react.useState)(null),
@@ -87,6 +90,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       setOpenDescription = _useState2[1];
 
   var headerRef = (0, _react.useRef)();
+  var categoriesMode = theme === null || theme === void 0 ? void 0 : (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 ? void 0 : (_theme$business_view$ = _theme$business_view.components) === null || _theme$business_view$ === void 0 ? void 0 : (_theme$business_view$2 = _theme$business_view$.categories) === null || _theme$business_view$2 === void 0 ? void 0 : (_theme$business_view$3 = _theme$business_view$2.components) === null || _theme$business_view$3 === void 0 ? void 0 : (_theme$business_view$4 = _theme$business_view$3.layout) === null || _theme$business_view$4 === void 0 ? void 0 : _theme$business_view$4.type;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.find(function (product) {
     return product.featured;
   })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
@@ -114,7 +118,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   }).map(function (category, i, _categories) {
     var _categoryState$produc3, _categoryState$produc4, _categoryState$produc5, _categoryState$produc6, _category$description, _category$description2, _category$subcategori, _category$subcategori2, _headerRef$current, _category$description3, _category$subcategori3, _products$filter, _category$subcategori4, _category$subcategori5, _category$subcategori6;
 
-    var _products = !isUseParentCategory ? (_categoryState$produc3 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.filter(function (product) {
+    var _products = categoriesMode === 'twocategories' ? category === null || category === void 0 ? void 0 : category.products : !isUseParentCategory ? (_categoryState$produc3 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
     })) !== null && _categoryState$produc3 !== void 0 ? _categoryState$produc3 : [] : (_categoryState$produc5 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc6 = categoryState.products) === null || _categoryState$produc6 === void 0 ? void 0 : _categoryState$produc6.filter(function (product) {
       var _category$children;
@@ -124,7 +128,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       });
     })) !== null && _categoryState$produc5 !== void 0 ? _categoryState$produc5 : [];
 
-    var products = (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.length) > 0 ? _products === null || _products === void 0 ? void 0 : _products.filter(function (product) {
+    var products = categoriesMode !== 'twocategories' && (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.length) > 0 ? _products === null || _products === void 0 ? void 0 : _products.filter(function (product) {
       return !(subcategoriesSelected !== null && subcategoriesSelected !== void 0 && subcategoriesSelected.find(function (subcategory) {
         return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id) === (category === null || category === void 0 ? void 0 : category.id);
       })) || (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.some(function (subcategory) {
