@@ -96,15 +96,15 @@ export const RenderProductsLayout = (props) => {
   const [subcategorySelected, setSubcategorySelected] = useState(null)
   const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1') && !useKioskApp
   const BusinessBasicInformationComponent =
-    orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'red'
+    theme?.business_view?.components?.header?.components?.layout?.type === 'red'
       ? BusinessBasicInformationRed
-      : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'starbucks'
+      : theme?.business_view?.components?.header?.components?.layout?.type === 'starbucks'
         ? BusinessBasicInformationStarbucks
-        : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'old'
+        : theme?.business_view?.components?.header?.components?.layout?.type === 'old'
           ? BusinessBasicInformationOld
-          : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'pfchangs'
+          : theme?.business_view?.components?.header?.components?.layout?.type === 'pfchangs'
             ? BusinessBasicInformationPFChangs
-            : BusinessBasicInformationPFChangs // cambiar
+            : BusinessBasicInformation
 
   const SearchProductsComponent =
     orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type === 'old'
@@ -120,6 +120,20 @@ export const RenderProductsLayout = (props) => {
   const showCartOnProductList = !theme?.business_view?.components?.cart?.hidden
   const hideBusinessNearCity = theme?.business_view?.components?.near_business?.hidden ?? true
   const headerType = theme?.business_view?.components?.header?.components?.layout?.type
+  const categoriesMode = theme?.business_view?.components?.categories?.components?.layout?.type
+
+  const pfChangsCategories = [
+    {
+      name: t('CATERING_MENU', 'Catering Menu'),
+      id: 1
+    },
+    {
+      name: t('TAKEOUT_MENU', 'Takeout Menu'),
+      id: 2
+    }
+  ]
+
+  const pfchangsSubcategories = business?.categories?.filter(category => categorySelected?.name === t('CATERING_MENU', 'Catering Menu') ? category?.name?.toLowerCase()?.includes(t('CATERING', 'catering')) : !category?.name?.toLowerCase()?.includes(t('CATERING', 'catering')))?.sort((a, b) => a.rank - b.rank)
 
   const BusinessLayoutCategories = headerType === 'pfchangs'
     ? CategoriesLayoutPFChangs : businessLayout.layoutOne
@@ -203,12 +217,15 @@ export const RenderProductsLayout = (props) => {
                     {
                       !(business?.categories?.length === 0 && !categoryId) && (
                         <BusinessLayoutCategories
-                          categories={headerType === 'pfchangs'
-                            ? business?.categories.filter(category => category?.subcategories?.length > 0).sort((a, b) => a.rank - b.rank)
-                            : [
-                              { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                              { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                              ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                          categories={
+                            categoriesMode === 'twocategories'
+                              ? pfChangsCategories
+                              : headerType === 'pfchangs'
+                                ? business?.categories.filter(category => category?.subcategories?.length > 0).sort((a, b) => a.rank - b.rank)
+                                : [
+                                  { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                                  { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                                  ...business?.categories.sort((a, b) => a.rank - b.rank)]}
                           categorySelected={categorySelected}
                           onClickCategory={onClickCategory}
                           featured={featuredProducts}
@@ -225,10 +242,12 @@ export const RenderProductsLayout = (props) => {
                       )
                     }
                     {
-                      categorySelected?.subcategories?.length > 0 && headerType === 'pfchangs' && (
+                      ((categorySelected?.subcategories?.length > 0 && headerType === 'pfchangs') || categoriesMode === 'twocategories') && (
                         <BusinessLayoutCategories
                           categories={
-                            categorySelected?.subcategories?.sort((a, b) => a.rank - b.rank)
+                            categoriesMode === 'twocategories'
+                              ? pfchangsSubcategories
+                              : categorySelected?.subcategories?.sort((a, b) => a.rank - b.rank)
                           }
                           categorySelected={categorySelected}
                           onClickCategory={onClickCategory}
@@ -302,14 +321,19 @@ export const RenderProductsLayout = (props) => {
                     )}
                     {headerType === 'pfchangs' ? (
                       <BusinessLayoutProductsList
-                        categories={categorySelected?.id
-                          ? [
-                            ...categorySelected?.subcategories?.sort((a, b) => a.rank - b.rank)?.map(category => ({
-                              ...category,
-                              products: categorySelected?.products?.filter(product => product?.category_id === category?.id)
-                            }))
-                          ]
-                          : [...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                        categories={categoriesMode !== 'twocategories'
+                          ? categorySelected?.id
+                            ? [
+                              ...categorySelected?.sort((a, b) => a.rank - b.rank)?.map(category => ({
+                                ...category,
+                                products: categorySelected?.products?.filter(product => product?.category_id === category?.id)
+                              }))
+                            ]
+                            : business?.categories.sort((a, b) => a.rank - b.rank)
+                          : pfchangsSubcategories.map(category => ({
+                            ...category,
+                            products: category.products
+                          }))}
                         isLazy={isLazy}
                         category={categorySelected}
                         categoryState={categoryState}

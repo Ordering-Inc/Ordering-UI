@@ -25,9 +25,9 @@ import { PFChangsBusinesListing } from '../../../BusinessesListing/layouts/PFCha
 import { getGoogleMapImage } from '../../../../../../../utils'
 
 export const PFChangsHomeHero = (props) => {
-  const { contentPosition } = props
+  const { contentPosition, brandId } = props
 
-  const [{ auth, user }] = useSession()
+  const [{ auth, user }, { refreshUserInfo }] = useSession()
   const [orderState, { changeType }] = useOrder()
   const [, t] = useLanguage()
   const [events] = useEvent()
@@ -65,7 +65,8 @@ export const PFChangsHomeHero = (props) => {
     },
     currentPageParam: 0,
     propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'city', 'city_id'],
-    onRedirectPage: (data) => events.emit('go_to_page', data)
+    onRedirectPage: (data) => events.emit('go_to_page', data),
+    brandId: brandId
   }
 
   const googleMapsControls = {
@@ -122,6 +123,12 @@ export const PFChangsHomeHero = (props) => {
       h: imageMapDimensions.clientHeight
     })
   }, [])
+
+  useEffect(() => {
+    if (user?.name === null) {
+      refreshUserInfo()
+    }
+  }, [user?.name])
 
   return (
     <>

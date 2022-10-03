@@ -402,9 +402,9 @@ const PaymentOptionsUI = (props) => {
             onSelectCard={handlePaymethodDataChange}
             onCancel={() => handlePaymethodClick(null)}
             handlePlaceOrder={handlePlaceOrder}
-            merchantId='mz86y3z3qbpmxukfefll'
-            publicKey='pk_e871b3211d924956ad7de33c87af6ef9'
-            isSandbox
+            merchantId={configs?.openpay_client_id?.key ?? 'mz86y3z3qbpmxukfefll'}
+            publicKey={configs?.openpay_client_id?.value ?? 'pk_e871b3211d924956ad7de33c87af6ef9'}
+            isSandbox={configs?.openpay_client_id?.sandbox ?? true}
           />
         </Modal>
 

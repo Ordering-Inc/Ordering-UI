@@ -17,6 +17,7 @@ import {
   DescriptionContainer,
   SubcategorySearchContainer
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const BusinessProductsListUI = (props) => {
   const {
@@ -42,9 +43,11 @@ const BusinessProductsListUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
+  const theme = useTheme()
   const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
   const [openDescription, setOpenDescription] = useState(null)
   const headerRef = useRef()
+  const categoriesMode = theme?.business_view?.components?.categories?.components?.layout?.type
 
   return (
     <>
@@ -82,10 +85,12 @@ const BusinessProductsListUI = (props) => {
 
         {
           categories.filter(category => category?.id !== null).map((category, i, _categories) => {
-            const _products = !isUseParentCategory
-              ? categoryState?.products?.filter(product => product?.category_id === category?.id) ?? []
-              : categoryState?.products?.filter(product => category?.children?.some(cat => cat.category_id === product?.category_id)) ?? []
-            const products = subcategoriesSelected?.length > 0
+            const _products = categoriesMode === 'twocategories'
+              ? category?.products
+              : !isUseParentCategory
+                ? categoryState?.products?.filter(product => product?.category_id === category?.id) ?? []
+                : categoryState?.products?.filter(product => category?.children?.some(cat => cat.category_id === product?.category_id)) ?? []
+            const products = categoriesMode !== 'twocategories' && subcategoriesSelected?.length > 0
               ? _products?.filter(product =>
                 !subcategoriesSelected?.find(subcategory => subcategory?.parent_category_id === category?.id) ||
                 subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))

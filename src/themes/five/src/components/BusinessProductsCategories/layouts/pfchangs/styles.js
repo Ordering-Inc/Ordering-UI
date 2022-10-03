@@ -37,7 +37,9 @@ export const CategoriesContainer = styled.div`
     display: none
     `}
   }
-  
+  &.category-lists{
+    left: 0;
+  }
   @media (min-width: 381px) {
     padding: 15px 0px 0px 0px;
   }

@@ -199,3 +199,44 @@ export const DateContainer = styled.div`
     box-sizing: border-box;
   }
 `
+
+export const WrapperButtons = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    flex: 1;
+    margin: 10px;
+    width: 250px
+  }
+  svg{
+    margin-right: 20px;
+    position: relative;
+    top: 3px;
+  }
+`
+
+export const OtpContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+`
+
+export const SendCodeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+  flex-direction: column;
+`
+
+export const Subtitle = styled.h2`
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: ${props => props.theme.colors.darkTextColor};
+`

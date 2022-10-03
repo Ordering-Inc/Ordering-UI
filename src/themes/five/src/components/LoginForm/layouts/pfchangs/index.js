@@ -77,7 +77,8 @@ const LoginFormUI = (props) => {
     setOtpState,
     alseaOtpInitialize,
     alseaOtpCreateUser,
-    createOtpUser
+    createOtpUser,
+    handleLoginFacebookAlsea
   } = props
   const numOtpInputs = 4
   const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
@@ -138,13 +139,6 @@ const LoginFormUI = (props) => {
         setWillVerifyOtpState(true)
       }
     }
-  }
-
-  const handleSuccessFacebook = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
   }
 
   const handleSuccessApple = (user) => {
@@ -501,7 +495,7 @@ const LoginFormUI = (props) => {
                   (
                     <FacebookLoginButton
                       appId={configs?.facebook_id?.value}
-                      handleSuccessFacebookLogin={handleSuccessFacebook}
+                      handleButtonFacebookLoginClick={handleLoginFacebookAlsea}
                     />
                   )}
                 {configs?.google_login_client_id?.value && configs?.google_login_auth_domain?.value && configs?.google_login_api_key?.value && googleLoginEnabled && (
