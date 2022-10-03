@@ -1,22 +1,21 @@
 import React from 'react'
 import { AddressList as AddressListController } from '../../../src/themes/five/src/components/AddressList'
 import { ProfileOptions } from '../../../src/themes/five/src/components/UserProfileForm/ProfileOptions'
-import { useLanguage, useSession } from 'ordering-components'
+import { useLanguage, useSession, useOrderingTheme } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
 import { SavedPlaces } from './styles'
-import { useTheme } from 'styled-components'
 
 export const AddressList = (props) => {
   const [{ user }] = useSession()
   const [, t] = useLanguage()
-  const theme = useTheme()
+  const [orderingTheme] = useOrderingTheme()
   const addressListParams = {
     ...props,
     addressList: user?.addresses,
     isProfile: true,
     isModal: true
   }
-  const showProfileOptions = theme.layouts?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
+  const showProfileOptions = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
 
   return (
     <>

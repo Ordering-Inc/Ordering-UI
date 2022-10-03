@@ -1,20 +1,20 @@
 import React from 'react'
 import { useHistory, useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
+import { useOrderingTheme } from 'ordering-components'
 import { OrderDetails } from '../../../src/themes/five/src/components/OrderDetails'
 import { OrderDetails as OrderDetailsKiosk } from '../../../src/themes/five/src/components/OrderDetails/layouts/Kiosk'
 import { OrderDetails as OrderDetailsOld } from '../../../src/components/OrderDetails'
-import { useTheme } from 'styled-components'
-import settings from '../../config.json'
+import settings from '../../config'
 
 export const OrderDetailsPage = (props) => {
   const history = useHistory()
   const { orderId } = useParams()
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
-  const theme = useTheme()
+  const [orderingTheme] = useOrderingTheme()
   const useKioskApp = settings?.use_kiosk
   const OrderDetailsComponent = useKioskApp ? OrderDetailsKiosk
-    : theme?.layouts?.confirmation?.components?.layout?.type === 'old'
+    : orderingTheme?.theme?.confirmation?.components?.layout?.type === 'old'
       ? OrderDetailsOld
       : OrderDetails
 

@@ -4,8 +4,9 @@ import { useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 
 import { Checkout } from '../../../src/themes/five/src/components/Checkout'
-import { useEvent, useOrder, useLanguage } from 'ordering-components'
-import settings from '../../config.json'
+import { useEvent, useOrder, useLanguage, useSite } from 'ordering-components'
+import settings from '../../config'
+import { checkSiteUrl } from '../../Utils'
 
 export const CheckoutPage = (props) => {
   const { cartUuid } = useParams()
@@ -13,7 +14,9 @@ export const CheckoutPage = (props) => {
   const [errors, setErrors] = useState([])
   const [orderState, { confirmCart, changeMoment }] = useOrder()
   const [, t] = useLanguage()
+  const [{ site }] = useSite()
   const stripePayments = ['stripe', 'stripe_connect', 'stripe_direct', 'google_pay', 'apple_pay']
+  const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search)
@@ -118,8 +121,12 @@ export const CheckoutPage = (props) => {
     handleCheckoutListRedirect: () => {
       events.emit('go_to_page', { page: 'checkout_list' })
     },
-    handleStoreRedirect: (store) => {
-      events.emit('go_to_page', { page: 'business', params: { store } })
+    handleStoreRedirect: (slug) => {
+      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+        events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
+      } else {
+        events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}` })
+      }
     }
   }
   return (

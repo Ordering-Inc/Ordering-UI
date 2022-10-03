@@ -2,7 +2,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { useEvent } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
-import { ResetPassword as ResetPasswordController } from '../../../src/components/ResetPassword'
+import { ResetPassword as ResetPasswordController } from '../../../src/themes/five/src/components/ResetPassword'
 
 export const ResetPassword = (props) => {
   const [events] = useEvent()

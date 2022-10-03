@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useApi, useEvent } from 'ordering-components'
+import { useApi, useEvent, useSite } from 'ordering-components'
 import { HomeHero } from '../../../src/themes/five/src/components/HomeHero'
 import { KioskHomeHero } from '../../../src/themes/five/src/components/HomeHero/layouts/KioskHomeHero'
 import { useHistory } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 import Skeleton from 'react-loading-skeleton'
-import settings from '../../config.json'
+import settings from '../../config'
 
 import {
   HomeContainer,
@@ -15,21 +15,29 @@ import {
   SkeletonInformation,
   SkeletonSide
 } from './styles'
+import { checkSiteUrl } from '../../Utils'
 
 export const HomePage = (props) => {
   const history = useHistory()
   const [homeState, setHomeState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
   const [events] = useEvent()
+  const [{ site }] = useSite()
+
   const requestsState = {}
   const isKioskApp = settings?.use_kiosk
+  const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
 
   const handlerFindBusiness = () => {
     history.push('/search')
   }
 
   const handleGoToBusiness = () => {
-    events.emit('go_to_page', { page: 'business', params: { store: settings?.businessSlug } })
+    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      events.emit('go_to_page', { page: 'business', params: { business_slug: settings?.businessSlug } })
+    } else {
+      events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${settings?.businessSlug}` })
+    }
   }
 
   const getPage = async () => {

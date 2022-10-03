@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useEvent, useLanguage } from 'ordering-components'
+import { useEvent, useLanguage, useSite } from 'ordering-components'
 import { useTheme } from '../../../src/contexts/ThemeContext'
+import { checkSiteUrl } from '../../Utils'
 
 export const ListenPageChanges = ({ children }) => {
   const history = useHistory()
   const [events] = useEvent()
   const [languageState] = useLanguage()
   const [theme, { merge }] = useTheme()
+  const [{ site }] = useSite()
+
+  const businessUrlChecked = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
+  const businessUrl = businessUrlChecked.includes('?') ? businessUrlChecked.split('?')[0] : businessUrlChecked
+
+  const productUrlTemplate = checkSiteUrl(site?.product_url_template, '/store/:business_slug?category=:category_id&product=:product_id')
+  const productUrl = productUrlTemplate.includes('?') ? productUrlTemplate.split('?')[0] : productUrlTemplate
 
   const routes = {
     home: '/',
@@ -18,13 +26,22 @@ export const ListenPageChanges = ({ children }) => {
     wallets: '/wallets',
     help: '/help',
     signup_business: '/signup_business',
+    signup_driver: '/signup-driver',
     orders: '/profile/orders',
     order_detail: '/orders/:orderId',
     checkout: '/checkout/:cartUuid',
     checkout_list: '/checkout',
-    business: '/store/:store',
+    multi_checkout: '/multi-checkout',
+    multi_orders: '/multi-orders',
+    business: businessUrl,
     business_slug: '/:store',
-    business_search: '/business_search'
+    product: productUrl,
+    business_search: '/business_search',
+    reset_password: '/password/reset',
+    sessions: '/sessions',
+    promotions: '/promotions',
+    addresses: '/profile/addresses',
+    favorite: '/favorite'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

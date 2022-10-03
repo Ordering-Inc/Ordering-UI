@@ -1,25 +1,60 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
-import { useApi, useEvent } from 'ordering-components'
+import { useApi, useEvent, useSite } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/themes/five/src/components/BusinessProductsListing'
 import { HelmetTags } from '../../components/HelmetTags'
 import { capitalize } from '../../../src/utils'
-import settings from '../../config.json'
+import settings from '../../config'
+import { checkSiteUrl } from '../../Utils'
 
 export const BusinessProductsList = (props) => {
-  const { store } = useParams()
-  const [ordering] = useApi()
+  const [{ site }] = useSite()
   const { search } = useLocation()
+  const [helmetMetaTags, setHelmetMetaTags] = useState({
+    title: '',
+    description: '',
+    keywords: ''
+  })
 
-  let category
-  let product
+  let businessSlug = ''
+  const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
+  const productUrlTemplate = checkSiteUrl(site?.product_url_template, '/store/:business_slug?category=:category_id&product=:product_id')
+  
+  if (businessUrlTemplate.includes('?')) {
+    const businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '')
+    const params = new URLSearchParams(search)
+    businessSlug = params.get(businessParameter)
+  } else {
+    const { business_slug } = useParams()
+    businessSlug = business_slug
+  }
+  const [ordering] = useApi()
+
+  let categoryId
+  let productId
   let tableNumber
 
-  if (search) {
-    const data = search.substring(1).split('&')
-    category = data[0].includes('category') && data[0]
-    product = data[1].includes('product') && data[1]
-    tableNumber = data[1].includes('table_number') && data[1]
+  if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' ||
+    productUrlTemplate === '/:business_slug/:category_slug/:product_slug' ||
+    productUrlTemplate.includes('/store/:category_slug/:product_slug')
+  ) {
+    const { category_slug, product_slug } = useParams()
+    categoryId = category_slug
+    productId = product_slug
+  }
+
+  if ((productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id') ||
+    (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')))
+  ) {
+    if (search) {
+      const ids = productUrlTemplate.split('?')[1].split('&')
+      const categoryParameter = ids[0].replace('=:category_id', '')
+      const productParameter = ids[1].replace('=:product_id', '')
+      const params = new URLSearchParams(search)
+      categoryId = params.get(categoryParameter)
+      productId = params.get(productParameter)
+      tableNumber = params.get('table_number')
+    }
   }
 
   if (tableNumber) {
@@ -32,13 +67,11 @@ export const BusinessProductsList = (props) => {
       'table_number',
       JSON.stringify({
         tableNumber: tableNumber.split('=')[1],
-        slug: store
+        slug: businessSlug
       })
     )
   }
 
-  const categoryId = category && category.split('=')[1]
-  const productId = product && product.split('=')[1]
   const [events] = useEvent()
 
   const businessProductsProps = {
@@ -49,7 +82,7 @@ export const BusinessProductsList = (props) => {
     useKioskApp: settings?.use_kiosk,
     isSearchByName: true,
     isSearchByDescription: true,
-    slug: store,
+    slug: businessSlug,
     categoryId,
     productId,
     businessProps: [
@@ -83,42 +116,108 @@ export const BusinessProductsList = (props) => {
       'products',
       'zones',
       'front_layout',
-      'professionals'
+      'professionals',
+      'facebook_profile',
+      'instagram_profile',
+      'tiktok_profile',
+      'pinterest_profile',
+      'whatsapp_number',
+      'snapchat_profile',
+      'previously_products'
     ],
     handleSearchRedirect: () => {
       events.emit('go_to_page', { page: 'search' })
     },
     onProductRedirect: ({ slug, category, product }) => {
       if (!category && !product) {
-        return window.location.pathname.includes('/store/')
-          ? events.emit('go_to_page', { page: 'business', params: { store: slug }, replace: true })
-          : events.emit('go_to_page', { page: 'business_slug', params: { store: slug }, replace: true })
+        if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+          return events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
+        } else {
+          return events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}` })
+        }
       }
-      return window.location.pathname.includes('/store/')
-        ? events.emit('go_to_page', {
-          page: 'business',
-          params: { store: slug },
-          search: `?category=${category}&product=${product}`,
+      if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug,
+            category_slug: category,
+            product_slug: product
+          },
           replace: true
         })
-        : events.emit('go_to_page', {
-          page: 'business_slug',
-          params: { store: slug },
-          search: `?category=${category}&product=${product}`,
+      }
+      if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
+        const businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '')
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            category_slug: category,
+            product_slug: product
+          },
+          search: `?${businessParameter}=${slug}`,
           replace: true
         })
+      }
+      if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
+        const ids = productUrlTemplate.split('?')[1].split('&')
+        const categoryParameter = ids[0].replace('=:category_id', '')
+        const productParameter = ids[1].replace('=:product_id', '')
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug,
+          },
+          search: `?${categoryParameter}=${category}&${productParameter}=${product}`,
+          replace: true
+        })
+      }
+      if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
+        const ids = productUrlTemplate.split('?')[1].split('&')
+        const categoryParameter = ids[0].replace('=:category_id', '')
+        const productParameter = ids[1].replace('=:product_id', '')
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug,
+          },
+          search: `?${categoryParameter}=${category}&${productParameter}=${product}`,
+          replace: true
+        })
+      }
     },
     onCheckoutRedirect: (cartUuid) => {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid } })
     },
+    onChangeMetaTag: (title, description, keywords) => {
+      setHelmetMetaTags({
+        title: title,
+        description: description,
+        keywords: keywords
+      })
+    },
     onBusinessClick: (business) => {
-      events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
+      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+        events.emit('go_to_page', { page: 'business', params: { business_slug: business.slug } })
+      } else {
+        events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${business.slug}` })
+      }
     }
   }
 
+  useEffect(() => {
+    if (businessSlug) {
+      const metaTitle = capitalize(businessSlug)
+      setHelmetMetaTags({
+        ...helmetMetaTags,
+        title: metaTitle,
+      })
+    }
+  }, [businessSlug])
+
   return (
     <>
-      <HelmetTags page='business' helmetTitle={capitalize(store)} />
+      <HelmetTags page='business' helmetMetaTags={helmetMetaTags} />
       <BusinessProductsListing {...businessProductsProps} />
     </>
   )

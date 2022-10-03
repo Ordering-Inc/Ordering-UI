@@ -67,7 +67,9 @@
     "url-loader": "^4.1.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.2.0",
+    "workbox-webpack-plugin": "^6.5.3"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.4",
@@ -90,6 +92,7 @@
     "react-datepicker": "^4.1.1",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.8.1",
+    "react-ios-pwa-prompt": "^1.8.4",
     "react-linkify": "^1.0.0-alpha",
     "react-loading-skeleton": "^2.1.1",
     "react-otp-input": "^2.3.0",
