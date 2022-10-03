@@ -43,6 +43,7 @@ export const Options = styled.div`
   border-color: #CCC;
   border-radius: 15px;
   overflow: hidden;
+
   ${({ position }) => position?.toLowerCase() === 'left' && css`
     left: 0;
     margin-left: -1px;

@@ -1,12 +1,25 @@
 import React from 'react'
-import { UserProfileForm } from '../../../src/components/UserProfileForm'
+import { UserProfileForm as UserProfileFormOriginal } from '../../../src/themes/five/src/components/UserProfileForm'
+import { UserProfileForm as UserProfileFormOld } from '../../../src/components/UserProfileForm'
 import { HelmetTags } from '../../components/HelmetTags'
-
+import { useOrderingTheme } from 'ordering-components'
 export const Profile = (props) => {
+  const profileProps = {
+    ...props,
+    refreshSessionUser: true
+  }
+
+  const [orderingTheme] = useOrderingTheme()
+  const layout = orderingTheme?.theme?.profile?.components?.layout?.type
+
   return (
     <>
       <HelmetTags page='profile' />
-      <UserProfileForm {...props} />
+      {layout === 'old' ? (
+        <UserProfileFormOld {...profileProps} />
+      ) : (
+        <UserProfileFormOriginal {...profileProps} />
+      )}
     </>
   )
 }
