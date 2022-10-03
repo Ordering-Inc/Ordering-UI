@@ -146,9 +146,9 @@ var Header = function Header(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configState = _useConfig2[0];
 
-  var _useConfig3 = (0, _orderingComponents.useConfig)(),
-      _useConfig4 = _slicedToArray(_useConfig3, 1),
-      ordering = _useConfig4[0];
+  var _useApi = (0, _orderingComponents.useApi)(),
+      _useApi2 = _slicedToArray(_useApi, 1),
+      ordering = _useApi2[0];
 
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
       _useCustomer2 = _slicedToArray(_useCustomer, 2),

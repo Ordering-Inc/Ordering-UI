@@ -41,7 +41,7 @@ var FormSide = (0, _styledComponents.default)(Side)(_templateObject4 || (_templa
 exports.FormSide = FormSide;
 
 var Title = _styledComponents.default.h1(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  margin-top: 0;\n  margin-bottom: 30px;\n  color: ", ";\n"])), function (props) {
-  return props.theme.colors.darkTextColor;
+  return props.theme.colors.secondaryDark;
 });
 
 exports.Title = Title;
