@@ -204,7 +204,7 @@ const BusinessProductsListUI = (props) => {
         }
 
         {
-          !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && !((searchValue && errorQuantityProducts) || (!searchValue && !errorQuantityProducts)) && (
+          !categoryState.loading && !isBusinessLoading && (categoryState.products.length === 0 && (category?.products === 0 || categoriesMode !== 'twocategories')) && !((searchValue && errorQuantityProducts) || (!searchValue && !errorQuantityProducts)) && (
             <WrapperNotFound>
               <NotFoundSource
                 content={!searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.')}
