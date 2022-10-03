@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components'
+import { useLanguage, useOrderingTheme } from 'ordering-components'
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { OrdersOption } from '../OrdersOption'
 import { Button } from '../../styles/Buttons'
@@ -24,6 +24,9 @@ export const MyOrders = (props) => {
   const [, t] = useLanguage()
   const history = useHistory()
 
+  const [orderingTheme] = useOrderingTheme()
+  const layout = orderingTheme?.theme?.orders?.components?.layout?.type || 'original'
+
   const [selectItem, setSelectItem] = useState('all')
   const [isEmptyActive, setIsEmptyActive] = useState(false)
   const [isEmptyPast, setIsEmptyPast] = useState(false)
@@ -45,7 +48,7 @@ export const MyOrders = (props) => {
     { key: 'products', value: t('PRODUCTS', 'Products') }
   ]
 
-  const notOrderOptions = ['business', 'products']
+  const notOrderOptions = ['business', 'products', 'professionals']
   const allEmpty = (isEmptyActive && isEmptyPast && isEmptyPreorder) || ((isEmptyBusinesses || businessOrderIds?.length === 0) && hideOrders)
 
   const handleChangeFilter = (key) => {
@@ -69,7 +72,7 @@ export const MyOrders = (props) => {
       )}
       <Container hideOrders={hideOrders}>
         {!hideOrders && (
-          <h1>{t('MY_ORDERS', 'My orders')}</h1>
+          <h1>{layout === 'appointments' ? t('MY_APPOINTMENTS', 'My appointments') : t('MY_ORDERS', 'My orders')}</h1>
         )}
         {!allEmpty && (
           <MyOrdersMenuContainer className='category-lists'>
@@ -84,10 +87,19 @@ export const MyOrders = (props) => {
                   {option?.value}
                 </Tab>
               ))}
+              {layout === 'appointments' && (
+                <Tab
+                  onClick={() => setSelectedOption('professionals')}
+                  active={selectedOption === 'professionals'}
+                  borderBottom
+                >
+                  {t('PROFESSIONALS', 'Professionals')}
+                </Tab>
+              )}
             </Tabs>
           </MyOrdersMenuContainer>
         )}
-        {!(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && (
+        {!(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && layout !== 'appointments' && (
           <OrderGroupFilterWrapper>
             {filterList?.map((order, i) => (
               <Button
@@ -162,6 +174,7 @@ export const MyOrders = (props) => {
             horizontal
             isBusiness={selectedOption === 'business'}
             isProducts={selectedOption === 'products'}
+            isProfessionals={selectedOption === 'professionals'}
             activeOrders
             pastOrders
             preOrders

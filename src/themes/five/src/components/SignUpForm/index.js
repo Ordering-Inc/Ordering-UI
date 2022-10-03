@@ -21,6 +21,7 @@ import {
   useEvent
 } from 'ordering-components'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
+import { useRecaptcha } from '../../../../../hooks/useRecaptcha'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -101,6 +102,8 @@ const SignUpFormUI = (props) => {
   const formMethods = useForm()
   const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [recaptchaConfig] = useRecaptcha(enableReCaptcha)
+  const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: '', siteKey: '' })
   const [, { login }] = useSession()
   const isFacebookLogin = configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1'
   const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
@@ -246,6 +249,22 @@ const SignUpFormUI = (props) => {
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
+      if (formState.result?.result?.[0] === 'ERROR_AUTH_VERIFICATION_CODE') {
+        if (configs?.security_recaptcha_site_key?.value) {
+          setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+          setAlertState({
+            open: true,
+            content: [t('TRY_AGAIN', 'Please try again')]
+          })
+          return
+        }
+        setAlertState({
+          open: true,
+          content: [t('CONFIG_DOESNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key')]
+        })
+        return
+      }
+
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
@@ -303,6 +322,12 @@ const SignUpFormUI = (props) => {
       resetOtpLeftTime()
     }
   }, [checkPhoneCodeState])
+
+  useEffect(() => {
+    if (recaptchaConfig?.siteKey) {
+      setRecaptchaVersion({ version: recaptchaConfig?.version, siteKey: recaptchaConfig?.siteKey })
+    }
+  }, [recaptchaConfig])
 
   return (
     <>
@@ -514,7 +539,7 @@ const SignUpFormUI = (props) => {
               }
               {props.isRecaptchaEnable && enableReCaptcha && (
                 <ReCaptchaWrapper>
-                  <ReCaptcha handleReCaptcha={handleReCaptcha} />
+                  <ReCaptcha handleReCaptcha={handleReCaptcha} reCaptchaVersion={reCaptchaVersion} />
                 </ReCaptchaWrapper>
               )}
 

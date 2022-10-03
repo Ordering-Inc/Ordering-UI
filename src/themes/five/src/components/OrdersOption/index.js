@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
-import { OrderList, useLanguage, useOrder, useEvent } from 'ordering-components'
-
+import { useLanguage, useOrder, useEvent, OrderList } from 'ordering-components'
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
@@ -28,6 +27,7 @@ import { BusinessController } from '../BusinessController'
 import { SingleProductCard } from '../SingleProductCard'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Alert } from '../Confirm'
+import { PreviousProfessionalOrdered } from './PreviousProfessionalOrdered'
 
 const OrdersOptionUI = (props) => {
   const {
@@ -56,13 +56,17 @@ const OrdersOptionUI = (props) => {
     handleReorder,
     isBusiness,
     isProducts,
+    isProfessionals,
     businessOrderIds,
     products,
     hideOrders,
     onProductRedirect,
     businessesSearchList,
     handleUpdateProducts,
-    onBusinessClick
+    onBusinessClick,
+    professionals,
+    handleUpdateProfessionals,
+    businesses
   } = props
 
   const [, t] = useLanguage()
@@ -82,7 +86,6 @@ const OrdersOptionUI = (props) => {
     : orders.length > 0
 
   const [loadingOrders, setLoadingOrders] = useState(true)
-  const [businessLoading, setBusinessLoading] = useState(true)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const closeOrderModal = (e) => {
     const outsideModal = !window.document.getElementById('app-modals') ||
@@ -94,7 +97,7 @@ const OrdersOptionUI = (props) => {
     }
   }
 
-  const showSkeletons = (!isBusiness && !isProducts && loading) || (businessLoading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
+  const showSkeletons = (!isBusiness && !isProducts && loading) || (businesses?.loading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -222,8 +225,7 @@ const OrdersOptionUI = (props) => {
       )}
       {isBusiness && businessOrderIds?.length > 0 && (
         <PreviousBusinessOrdered
-          businessId={businessOrderIds}
-          setBusinessLoading={setBusinessLoading}
+          businesses={businesses}
           onRedirectPage={onRedirectPage}
           isLoadingOrders={loading}
         />
@@ -238,9 +240,16 @@ const OrdersOptionUI = (props) => {
         />
       )}
 
-      {(isCustomLayout ? (loadingOrders || loading || isBusinessesLoading) : showSkeletons) && (
+      {isProfessionals && (
+        <PreviousProfessionalOrdered
+          professionals={professionals}
+          handleUpdateProfessionals={handleUpdateProfessionals}
+        />
+      )}
+
+      {(isCustomLayout ? (loadingOrders || loading || businesses?.loading) : showSkeletons) && (
         <>
-          {(businessLoading && isBusiness) ? (
+          {(businesses?.loading && isBusiness) ? (
             <BusinessControllerSkeleton>
               {[...Array(3).keys()].map((item, i) => (
                 <BusinessController

@@ -96,11 +96,24 @@ export const InfoWrapper = styled.div`
   width: calc(100% - 54px);
 `
 
-export const HeartIconWrapper = styled.div`
+export const HeartIconWrapper = styled.span`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   svg {
     color: ${props => props.theme.colors.danger500};
       font-size: 16px;
+  }
+`
+
+export const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  .info {
+    margin-right: 10px;
+    ${props => props.theme.rtl && css`
+      margin-left: 10px;
+      margin-right: 0px;
+    `}
   }
 `

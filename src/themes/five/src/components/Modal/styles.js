@@ -86,7 +86,7 @@ export const ModalActions = styled.div`
 `
 export const ModalHeader = styled.div`
   display: flex;
-  margin-top: 30px;
+  margin-top: 40px;
 
   @media(min-width: 450px){
     margin-top: 0;
@@ -170,5 +170,19 @@ export const ModalBackHeader = styled.div`
 
   @media (min-width: 769px) {
     display: none;
+  }
+`
+export const ModalIconWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: ${props => props.theme.colors.backgroundPage};
+  z-index: 100;
+  height: 70px;
+
+  @media (min-width: 450px) {
+    position: initial;
+    height: initial;
   }
 `

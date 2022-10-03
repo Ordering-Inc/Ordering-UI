@@ -9,6 +9,7 @@ import {
   useSession,
   useLanguage,
   useConfig,
+  useOrderingTheme,
   BusinessList as BusinessListController
 } from 'ordering-components'
 
@@ -75,6 +76,7 @@ const BusinessesListingUI = (props) => {
   const [orderState, { changeCityFilter }] = useOrder()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
+  const orderingTheme = useOrderingTheme()
   const theme = useTheme()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -248,7 +250,10 @@ const BusinessesListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
-        <BusinessHeroImg bgimage={theme.images?.general?.businessHero} />
+        <BusinessHeroImg
+          bgimage={theme.images?.general?.businessHero}
+          height={orderingTheme?.theme?.business_listing_view?.components?.business_hero?.style?.height}
+        />
         <OrderProgressWrapper>
           <OrderProgress
             franchiseId={props.franchiseId}

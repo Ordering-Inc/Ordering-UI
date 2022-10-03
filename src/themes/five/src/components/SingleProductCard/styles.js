@@ -203,7 +203,11 @@ export const QuantityContainer = styled.div`
   height: 25px;
   text-align: center;
   border-radius: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-20px, 50%);
+
+  @media (min-width: 768px) {
+    transform: translate(-50%, 50%);
+  }
 `
 
 export const RibbonBox = styled.div`
@@ -218,11 +222,12 @@ export const RibbonBox = styled.div`
   top: -4px;
   right: -3px;
   background-color: ${props => props.theme.colors.primary};
-  max-width: 50px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  max-width: 70px;
+  word-break: break-all;
 
   ${props => props.theme.rtl && css`
     left: -3px;
