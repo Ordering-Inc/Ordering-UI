@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useApi } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import { LanguageSelector } from '../LanguageSelector'
@@ -67,7 +67,7 @@ export const Header = (props) => {
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
   const [configState] = useConfig()
-  const [ordering] = useConfig()
+  const [ordering] = useApi()
   const [customerState, { deleteUserCustomer }] = useCustomer()
 
   const clearCustomer = useRef(null)
