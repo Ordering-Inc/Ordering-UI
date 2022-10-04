@@ -32,7 +32,7 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
 
 exports.Option = Option;
 
-var Options = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #CCC;\n  margin-top: 7px;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  border-radius: 15px;\n  overflow: hidden;\n  ", "\n  ", "\n"])), function (_ref2) {
+var Options = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #CCC;\n  margin-top: 7px;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  border-radius: 15px;\n  overflow: hidden;\n\n  ", "\n  ", "\n"])), function (_ref2) {
   var position = _ref2.position;
   return (position === null || position === void 0 ? void 0 : position.toLowerCase()) === 'left' && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    left: 0;\n    margin-left: -1px;\n    ", "\n  "])), function (props) {
     var _props$theme2;
