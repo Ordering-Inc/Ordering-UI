@@ -162,16 +162,39 @@ export const RibbonBox = styled.div`
 `
 
 export const SubCategoriesContainer = styled.div`
+  overflow: auto hidden;
+  margin-top: 10px;
+  width: 100%;
+  ::-webkit-scrollbar {
+      opacity: 0;
+  }
+  @media (min-width: 993px) {
+    width: calc(100% - 30px);
+  }
+`
+
+export const SubCategoriesInnerContainer = styled.div`
   display: flex;
 `
 
 export const ContainerButton = styled.div`
   button {
+    white-space: nowrap;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
     overflow: hidden;
     margin-right: 10px;
-    margin-top: 10px;
     border-radius: 50px;
-    color: ${({ isSelected }) => isSelected ? '#fff' : '#414954'};
+
+    svg {
+      margin-left: 5px;
+      font-size: 13px;
+      ${props => props.theme.rtl && css`
+        margin-right: 5px;
+        margin-left: 0px;
+      `}
+    }
   }
 `
 
