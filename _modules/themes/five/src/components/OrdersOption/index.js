@@ -105,7 +105,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       onProductRedirect = props.onProductRedirect,
       businessesSearchList = props.businessesSearchList,
       handleUpdateProducts = props.handleUpdateProducts,
-      onBusinessClick = props.onBusinessClick;
+      onBusinessClick = props.onBusinessClick,
+      businesses = props.businesses;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -140,18 +141,13 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       loadingOrders = _useState2[0],
       setLoadingOrders = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(true),
-      _useState4 = _slicedToArray(_useState3, 2),
-      businessLoading = _useState4[0],
-      setBusinessLoading = _useState4[1];
-
-  var _useState5 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      alertState = _useState6[0],
-      setAlertState = _useState6[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
 
   var closeOrderModal = function closeOrderModal(e) {
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
@@ -171,7 +167,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }
   };
 
-  var showSkeletons = !isBusiness && !isProducts && loading || businessLoading && isBusiness || (products === null || products === void 0 ? void 0 : products.length) === 0 && isProducts && (!businessesSearchList && loading || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.loading));
+  var showSkeletons = !isBusiness && !isProducts && loading || (businesses === null || businesses === void 0 ? void 0 : businesses.loading) && isBusiness || (products === null || products === void 0 ? void 0 : products.length) === 0 && isProducts && (!businessesSearchList && loading || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.loading));
 
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
@@ -355,8 +351,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true
   })), isBusiness && (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_PreviousBusinessOrdered.PreviousBusinessOrdered, {
-    businessId: businessOrderIds,
-    setBusinessLoading: setBusinessLoading,
+    businesses: businesses,
     onRedirectPage: onRedirectPage,
     isLoadingOrders: loading
   }), isProducts && /*#__PURE__*/_react.default.createElement(_PreviousProductsOrdered.PreviousProductsOrdered, {
@@ -364,7 +359,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     onProductClick: onProductClick,
     handleUpdateProducts: handleUpdateProducts,
     onBusinessClick: onBusinessClick
-  }), (isCustomLayout ? loadingOrders || loading || isBusinessesLoading : showSkeletons) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessLoading && isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.BusinessControllerSkeleton, null, _toConsumableArray(Array(3).keys()).map(function (item, i) {
+  }), (isCustomLayout ? loadingOrders || loading || (businesses === null || businesses === void 0 ? void 0 : businesses.loading) : showSkeletons) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businesses !== null && businesses !== void 0 && businesses.loading && isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.BusinessControllerSkeleton, null, _toConsumableArray(Array(3).keys()).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",

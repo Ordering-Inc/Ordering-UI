@@ -49,6 +49,8 @@ var _Modal = require("../Modal");
 
 var _ProductForm = require("../ProductForm");
 
+var _MaxSectionItem = require("./MaxSectionItem");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -199,32 +201,6 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     });
   };
 
-  var MaxSectionItem = function MaxSectionItem(_ref) {
-    var _ref2;
-
-    var title = _ref.title,
-        options = _ref.options,
-        filter = _ref.filter;
-
-    var parseValue = function parseValue(option) {
-      return filter === 'max_distance' ? "".concat(option / 1000, " ").concat(t('KM', 'Km')) : filter === 'max_eta' ? "".concat(option, " ").concat(t('MIN', 'min')) : parsePrice(option);
-    };
-
-    return /*#__PURE__*/_react.default.createElement(_styles.MaxFilterContainer, null, /*#__PURE__*/_react.default.createElement("h3", null, title), /*#__PURE__*/_react.default.createElement(_styles.ProgressContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressBar, {
-      style: {
-        width: "".concat((_ref2 = options.indexOf(filters === null || filters === void 0 ? void 0 : filters[filter]) / 3 * 100) !== null && _ref2 !== void 0 ? _ref2 : 100, "%")
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles.MaxItemContainer, null, options.map(function (option, i) {
-      return /*#__PURE__*/_react.default.createElement(_styles.MaxItem, {
-        key: option,
-        active: (filters === null || filters === void 0 ? void 0 : filters[filter]) === option || option === 'default' && ((filters === null || filters === void 0 ? void 0 : filters[filter]) === 'default' || !(filters !== null && filters !== void 0 && filters[filter])),
-        onClick: function onClick() {
-          return handleChangeFilters(filter, option);
-        }
-      }, option === 'default' ? "".concat(parseValue(options[i - 1]), "+") : parseValue(option));
-    })));
-  };
-
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessListingSearchContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('SEARCH', 'Search')), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     isCustomLayout: true,
@@ -277,23 +253,29 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
         return handleChangePriceRange(price === null || price === void 0 ? void 0 : price.level);
       }
     }, price.content, (filters === null || filters === void 0 ? void 0 : filters.price_level) === (price === null || price === void 0 ? void 0 : price.level) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null));
-  }))), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && /*#__PURE__*/_react.default.createElement(MaxSectionItem, {
+  }))), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && /*#__PURE__*/_react.default.createElement(_MaxSectionItem.MaxSectionItem, {
     title: t('MAX_DELIVERY_FEE', 'Max delivery fee'),
     options: maxDeliveryFeeOptions,
-    filter: "max_delivery_price"
-  }), [1, 2].includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) && /*#__PURE__*/_react.default.createElement(MaxSectionItem, {
+    filter: "max_delivery_price",
+    filters: filters,
+    handleChangeFilters: handleChangeFilters
+  }), [1, 2].includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) && /*#__PURE__*/_react.default.createElement(_MaxSectionItem.MaxSectionItem, {
     title: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type) === 1 ? t('MAX_DELIVERY_TIME', 'Max delivery time') : t('MAX_PICKUP_TIME', 'Max pickup time'),
     options: maxTimeOptions,
-    filter: "max_eta"
-  }), /*#__PURE__*/_react.default.createElement(MaxSectionItem, {
+    filter: "max_eta",
+    filters: filters,
+    handleChangeFilters: handleChangeFilters
+  }), /*#__PURE__*/_react.default.createElement(_MaxSectionItem.MaxSectionItem, {
     title: t('MAX_DISTANCE', 'Max distance'),
     options: maxDistanceOptions,
-    filter: "max_distance"
+    filter: "max_distance",
+    filters: filters,
+    handleChangeFilters: handleChangeFilters
   }), /*#__PURE__*/_react.default.createElement(_styles.TagsContainer, null, /*#__PURE__*/_react.default.createElement("h3", null, t('BUSINESS_CATEGORIES', 'Business categories')), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     isSearchMode: true,
     filters: filters,
     handleChangeFilters: handleChangeFilters
-  }))), /*#__PURE__*/_react.default.createElement(_styles.FiltersResultContainer, null, auth && /*#__PURE__*/_react.default.createElement(_styles.PreviouslyOrderedContainer, null, /*#__PURE__*/_react.default.createElement(_MyOrders.MyOrders, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.FiltersResultContainer, null, auth && (termValue === null || termValue === void 0 ? void 0 : termValue.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.PreviouslyOrderedContainer, null, /*#__PURE__*/_react.default.createElement(_MyOrders.MyOrders, {
     hideOrders: true,
     businessesSearchList: businessesSearchList,
     onRedirectPage: onRedirectPage,
