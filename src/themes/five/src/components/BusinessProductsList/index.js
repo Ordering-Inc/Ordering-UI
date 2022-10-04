@@ -5,6 +5,8 @@ import { SingleProductCard } from '../SingleProductCard'
 import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
 import { shape } from '../../../../../utils'
+import { AutoScroll } from '../AutoScroll'
+import { XLg as Close } from 'react-bootstrap-icons'
 
 import {
   ProductsContainer,
@@ -19,7 +21,8 @@ import {
   ContainerButton,
   CategoryDescription,
   DescriptionContainer,
-  SubcategorySearchContainer
+  SubcategorySearchContainer,
+  SubCategoriesInnerContainer
 } from './styles'
 import { Button } from '../../styles/Buttons'
 
@@ -74,33 +77,37 @@ const BusinessProductsListUI = (props) => {
 
     return (
       <SubCategoriesContainer>
-        <ContainerButton
-          isSelected={allsubcategorySelected}
-        >
-          <Button
-            onClick={() => onClickSubcategory(null, category)}
-            color={allsubcategorySelected ? 'primary' : 'secondary'}
-          >
-            {t('ALL', 'All')} {allsubcategorySelected && 'X'}
-          </Button>
-        </ContainerButton>
-        {category?.subcategories?.map(subcategory => {
-          const isSubcategorySelected = subcategoriesSelected?.find(_subcategory => _subcategory?.id === subcategory?.id)
-          return (
+        <SubCategoriesInnerContainer>
+          <AutoScroll scrollId={`scroll_${category?.id}`}>
             <ContainerButton
-              key={subcategory?.id}
-              isSelected={isSubcategorySelected}
+              isSelected={allsubcategorySelected}
             >
               <Button
-                onClick={() => onClickSubcategory(subcategory, category)}
-                color={isSubcategorySelected ? 'primary' : 'secondary'}
+                onClick={() => onClickSubcategory(null, category)}
+                color={allsubcategorySelected ? 'primary' : 'lightGray'}
               >
-                {subcategory?.name} {isSubcategorySelected && 'X'}
+                {t('ALL', 'All')} {allsubcategorySelected && <Close />}
               </Button>
             </ContainerButton>
-          )
-        }
-        )}
+            {category?.subcategories?.map(subcategory => {
+              const isSubcategorySelected = subcategoriesSelected?.find(_subcategory => _subcategory?.id === subcategory?.id)
+              return (
+                <ContainerButton
+                  key={subcategory?.id}
+                  isSelected={isSubcategorySelected}
+                >
+                  <Button
+                    onClick={() => onClickSubcategory(subcategory, category)}
+                    color={isSubcategorySelected ? 'primary' : 'lightGray'}
+                  >
+                    {subcategory?.name} {isSubcategorySelected && <Close />}
+                  </Button>
+                </ContainerButton>
+              )
+            }
+            )}
+          </AutoScroll>
+        </SubCategoriesInnerContainer>
       </SubCategoriesContainer>
     )
   }
