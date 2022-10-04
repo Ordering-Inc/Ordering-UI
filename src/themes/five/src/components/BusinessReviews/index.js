@@ -19,10 +19,12 @@ import {
   ReviewTime,
   ReviewItemHeader,
   ReviewItemContent,
-  SearchContainer
+  SearchContainer,
+  ReviewStars
 } from './styles'
 
 import BsFillStarFill from '@meronex/icons/bs/BsFillStarFill'
+import { StarFill } from 'react-bootstrap-icons'
 
 export const BusinessReviewsUI = (props) => {
   const { stars, reviewsList, handleClickOption } = props
@@ -40,7 +42,7 @@ export const BusinessReviewsUI = (props) => {
   const showSearch = !orderingTheme?.theme?.business_view?.components?.reviews?.components?.search?.hidden
   const hideElement = !(!showReviewDate && !showCustomerComments)
 
-  const reviewPoints = [t('TERRIBLE', 'Terrible'), t('BAD', 'Bad'), t('OKAY', 'Okay'), t('GOOD', 'Good'), t('GREAT', 'Great')]
+  const reviewPoints = [1, 2, 3, 4, 5]
 
   return (
     <>
@@ -98,7 +100,10 @@ export const BusinessReviewsUI = (props) => {
                           right: theme.rtl !== isLastReviewPoint ? `${25 * (isLastReviewPoint ? 0 : i)}%` : 'initial'
                         }}
                       >
-                        {reviewPoint}
+                        <ReviewStars>
+                          {reviewPoint}
+                          <StarFill className='start' />
+                        </ReviewStars>
                       </ReviewsMarkPoint>
                     )
                   })}

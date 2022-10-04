@@ -93,6 +93,12 @@ export const ReviewsHeaderWrapper = styled.div`
   `}
 `
 
+export const ReviewStars = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+`
+
 export const ReviewsProgressWrapper = styled.div`
   p {
     margin-top: 0;
