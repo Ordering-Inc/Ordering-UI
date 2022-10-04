@@ -254,7 +254,7 @@ export const TitleFormContainer = styled.div`
   display: flex; 
   align-items: center;
   h1 {
-    margin: auto;
+    margin: 0 auto;
     font-size: 24px;
   }
 `
