@@ -121,6 +121,7 @@ export const ReviewsMarkPoint = styled.span`
   top: 15px;
   font-size: 12px;
   color: #CED4DA;
+  cursor: pointer;
 `
 
 export const ReviewTime = styled.p`
