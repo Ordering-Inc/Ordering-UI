@@ -30,8 +30,11 @@ export const BusinessReviewsUI = (props) => {
   const [theme] = useTheme()
   const [orderingTheme] = useOrderingTheme()
   const handleOnChange = (evt) => {
-    if (evt.target.value === '') handleClickOption('all')
-    else handleClickOption(evt.target.value)
+    if (evt.target.value) handleClickOption(parseInt(evt.target.value))
+    else handleClickOption('all')
+  }
+  const handleClickRaiting = (raiting) => {
+    if (raiting) handleClickOption(raiting)
   }
 
   const showRanking = !orderingTheme?.theme?.business_view?.components?.reviews?.components?.ranking?.hidden
@@ -71,9 +74,12 @@ export const BusinessReviewsUI = (props) => {
                   ? (
                     <SearchContainer>
                       <input
-                        type='number'
-                        min='1'
-                        max='5'
+                        onInput={(e) => {
+                          e.target.value = e.target.value
+                            .replace(/[^1-5]$/, '')
+                            .replace(/(\..*)\./g, '$1')
+                        }}
+                        maxLength={1}
                         onChange={handleOnChange}
                         placeholder={t('SEARCH', 'Search')}
                         style={{ backgroundImage: `url(${theme?.images?.general?.searchIcon})` }}
@@ -93,6 +99,7 @@ export const BusinessReviewsUI = (props) => {
                     return (
                       <ReviewsMarkPoint
                         key={i}
+                        onClick={() => handleClickRaiting(i + 1)}
                         style={{
                           left: theme.rtl !== isLastReviewPoint ? 'initial' : `${25 * (isLastReviewPoint ? 0 : i)}%`,
                           right: theme.rtl !== isLastReviewPoint ? `${25 * (isLastReviewPoint ? 0 : i)}%` : 'initial'
