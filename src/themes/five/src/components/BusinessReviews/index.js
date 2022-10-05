@@ -27,13 +27,13 @@ import BsFillStarFill from '@meronex/icons/bs/BsFillStarFill'
 import { StarFill } from 'react-bootstrap-icons'
 
 export const BusinessReviewsUI = (props) => {
-  const { stars, reviewsList, handleClickOption } = props
+  const { stars, reviewsList, handleClickOption, onChangeReview } = props
   const [, t] = useLanguage()
   const [theme] = useTheme()
   const [orderingTheme] = useOrderingTheme()
   const handleOnChange = (evt) => {
-    if (evt.target.value) handleClickOption(parseInt(evt.target.value))
-    else handleClickOption('all')
+    if (evt.target.value) onChangeReview(evt.target.value)
+    else onChangeReview('')
   }
   const handleClickRaiting = (raiting) => {
     if (raiting) handleClickOption(raiting)
@@ -76,12 +76,7 @@ export const BusinessReviewsUI = (props) => {
                   ? (
                     <SearchContainer>
                       <input
-                        onInput={(e) => {
-                          e.target.value = e.target.value
-                            .replace(/[^1-5]$/, '')
-                            .replace(/(\..*)\./g, '$1')
-                        }}
-                        maxLength={1}
+                        type= 'text'
                         onChange={handleOnChange}
                         placeholder={t('SEARCH', 'Search')}
                         style={{ backgroundImage: `url(${theme?.images?.general?.searchIcon})` }}
