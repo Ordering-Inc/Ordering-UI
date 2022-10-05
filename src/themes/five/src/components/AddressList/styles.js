@@ -252,9 +252,9 @@ export const CloseIcon = styled.div`
 
 export const TitleFormContainer = styled.div`
   display: flex; 
-  align-items: center;
+  align-items: felx-start;
   h1 {
-    margin: auto;
+    margin: 0 auto;
     font-size: 24px;
   }
 `
