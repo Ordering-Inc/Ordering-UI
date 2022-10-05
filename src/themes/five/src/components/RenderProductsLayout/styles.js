@@ -76,7 +76,7 @@ export const BusinessCartContainer = styled(BusinessCategoriesContainer)`
       margin-top: 0px;
     `}
   }
-  @media (min-width: 1000px) {
+  @media (min-width: 1000px) and (min-height: 600px) {
     display: block;
   }
 `
