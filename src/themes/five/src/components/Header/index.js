@@ -413,9 +413,10 @@ export const Header = (props) => {
         )}
         {modalIsOpen && (
           <Modal
+            title={(!auth && modalSelected === 'address') && t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
-            width={modalSelected === 'address' ? '70%' : '700px'}
+            width={modalSelected === 'address' ? '50%' : '700px'}
           >
             {modalSelected === 'cart' && (
               <CartContent
