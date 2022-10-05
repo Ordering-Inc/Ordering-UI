@@ -160,3 +160,9 @@ export const SearchContainer = styled.div`
     `}
   }
 `
+
+export const ReviewStars = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+`
