@@ -85,7 +85,7 @@ export const BusinessReviewsUI = (props) => {
             )}
             {showRanking && (
               <ReviewsProgressWrapper>
-                <p>{t('REVIEW_ORDER', 'Review order')}</p>
+                <p>{t('CUSTOMER_REVIEWS', 'Customers reviews')}</p>
                 <ReviewsProgressContent>
                   <ReviewsProgressBar style={{ width: `${(stars / 5) * 100}%` }} />
                   {reviewPoints.map((reviewPoint, i) => {
