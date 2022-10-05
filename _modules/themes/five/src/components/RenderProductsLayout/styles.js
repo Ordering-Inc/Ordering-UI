@@ -52,7 +52,7 @@ exports.BusinessCategoryProductWrapper = BusinessCategoryProductWrapper;
 var BusinessCategoriesContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin: 0;\n  margin-right: 10px;\n  width: 100%;\n  @media (min-width: 993px) {\n    width: calc(31% - 25px);\n  }\n"])));
 
 exports.BusinessCategoriesContainer = BusinessCategoriesContainer;
-var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: 70px;\n  min-width: 325px;\n  @media (min-width: 769px) {\n    ", "\n  }\n  @media (min-width: 1000px) {\n    display: block;\n  }\n"])), function (_ref3) {
+var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: 70px;\n  min-width: 325px;\n  @media (min-width: 769px) {\n    ", "\n  }\n  @media (min-width: 1000px) and (min-height: 600px) {\n    display: block;\n  }\n"])), function (_ref3) {
   var isProfessional = _ref3.isProfessional;
   return isProfessional && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin-top: 0px;\n    "])));
 });
