@@ -505,6 +505,7 @@ export const Header = (props) => {
             onClose={() => closeAuthModal()}
             width='50%'
             authModal
+            closeOnBackdrop={false}
           >
             {modalPageToShow === 'login' && (
               <LoginForm
