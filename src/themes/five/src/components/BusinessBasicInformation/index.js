@@ -380,7 +380,7 @@ export const BusinessBasicInformation = (props) => {
       {!isInfoShrunken && (
         <BusinessInfoComponent />
       )}
-      <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open}>
+      <BusinessContainer bgimage={business?.header || theme?.images?.dummies?.businessHeader} isSkeleton={isSkeleton} id='container' isClosed={!business?.open}>
         {(!loading && !business?.open) && <h1>{t('CLOSED', 'Closed')}</h1>}
         {showLogo && (
           <BusinessContent>
