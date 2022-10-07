@@ -413,6 +413,7 @@ export const Header = (props) => {
         )}
         {modalIsOpen && (
           <Modal
+            title={(!auth && modalSelected === 'address') && t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
             width={modalSelected === 'address' ? '70%' : '700px'}
@@ -504,6 +505,7 @@ export const Header = (props) => {
             onClose={() => closeAuthModal()}
             width='50%'
             authModal
+            closeOnBackdrop={false}
           >
             {modalPageToShow === 'login' && (
               <LoginForm

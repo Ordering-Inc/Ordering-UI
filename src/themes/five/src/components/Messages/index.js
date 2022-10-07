@@ -4,7 +4,8 @@ import {
   Messages as MessagesController,
   useUtils,
   useLanguage,
-  useSession
+  useSession,
+  useEvent
 } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import IosSend from '@meronex/icons/ios/IosSend'
@@ -90,6 +91,7 @@ const MessagesUI = (props) => {
   const { handleSubmit, register, errors, setValue } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
+  const [events] = useEvent()
   const [{ parseDate, parseTime }] = useUtils()
   const buttonRef = useRef(null)
   const [modalImage, setModalImage] = useState({ open: false, src: '' })
@@ -297,6 +299,10 @@ const MessagesUI = (props) => {
       open: false,
       content: []
     })
+  }
+
+  const goToBusiness = () => {
+    events.emit('go_to_page', { page: 'search' })
   }
 
   const MapMessages = ({ messages }) => {
@@ -575,7 +581,7 @@ const MessagesUI = (props) => {
                       onClick={() => onMessages({ business: true, driver: false })}
                       isCursor
                     >
-                      <Image>
+                      <Image onClick={() => goToBusiness()}>
                         <ImageWithFallback
                           src={order.business?.logo || theme.images?.dummies?.businessLogo}
                           fallback={<FaUserAlt />}

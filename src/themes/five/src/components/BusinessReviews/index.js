@@ -19,19 +19,24 @@ import {
   ReviewTime,
   ReviewItemHeader,
   ReviewItemContent,
-  SearchContainer
+  SearchContainer,
+  ReviewStars
 } from './styles'
 
 import BsFillStarFill from '@meronex/icons/bs/BsFillStarFill'
+import { StarFill } from 'react-bootstrap-icons'
 
 export const BusinessReviewsUI = (props) => {
-  const { stars, reviewsList, handleClickOption } = props
+  const { stars, reviewsList, handleClickOption, onChangeReview } = props
   const [, t] = useLanguage()
   const [theme] = useTheme()
   const [orderingTheme] = useOrderingTheme()
   const handleOnChange = (evt) => {
-    if (evt.target.value === '') handleClickOption('all')
-    else handleClickOption(evt.target.value)
+    if (evt.target.value) onChangeReview(evt.target.value)
+    else onChangeReview('')
+  }
+  const handleClickRaiting = (raiting) => {
+    if (raiting) handleClickOption(raiting)
   }
 
   const showRanking = !orderingTheme?.theme?.business_view?.components?.reviews?.components?.ranking?.hidden
@@ -40,7 +45,7 @@ export const BusinessReviewsUI = (props) => {
   const showSearch = !orderingTheme?.theme?.business_view?.components?.reviews?.components?.search?.hidden
   const hideElement = !(!showReviewDate && !showCustomerComments)
 
-  const reviewPoints = [t('TERRIBLE', 'Terrible'), t('BAD', 'Bad'), t('OKAY', 'Okay'), t('GOOD', 'Good'), t('GREAT', 'Great')]
+  const reviewPoints = [1, 2, 3, 4, 5]
 
   return (
     <>
@@ -71,9 +76,7 @@ export const BusinessReviewsUI = (props) => {
                   ? (
                     <SearchContainer>
                       <input
-                        type='number'
-                        min='1'
-                        max='5'
+                        type= 'text'
                         onChange={handleOnChange}
                         placeholder={t('SEARCH', 'Search')}
                         style={{ backgroundImage: `url(${theme?.images?.general?.searchIcon})` }}
@@ -85,7 +88,7 @@ export const BusinessReviewsUI = (props) => {
             )}
             {showRanking && (
               <ReviewsProgressWrapper>
-                <p>{t('REVIEW_ORDER', 'Review order')}</p>
+                <p>{t('CUSTOMER_REVIEWS', 'Customers reviews')}</p>
                 <ReviewsProgressContent>
                   <ReviewsProgressBar style={{ width: `${(stars / 5) * 100}%` }} />
                   {reviewPoints.map((reviewPoint, i) => {
@@ -93,12 +96,16 @@ export const BusinessReviewsUI = (props) => {
                     return (
                       <ReviewsMarkPoint
                         key={i}
+                        onClick={() => handleClickRaiting(i + 1)}
                         style={{
                           left: theme.rtl !== isLastReviewPoint ? 'initial' : `${25 * (isLastReviewPoint ? 0 : i)}%`,
                           right: theme.rtl !== isLastReviewPoint ? `${25 * (isLastReviewPoint ? 0 : i)}%` : 'initial'
                         }}
                       >
-                        {reviewPoint}
+                        <ReviewStars>
+                          {reviewPoint}
+                          <StarFill className='start' />
+                        </ReviewStars>
                       </ReviewsMarkPoint>
                     )
                   })}
