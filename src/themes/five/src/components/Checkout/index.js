@@ -461,7 +461,7 @@ const CheckoutUI = (props) => {
           <CartContainer>
             <CartHeader>
               <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
-              <span onClick={() => cart?.business?.slug && handleStoreRedirect && handleStoreRedirect(cart?.business?.slug)}>{('ADD_PRODUCTS', 'Add products')}</span>
+              <span onClick={() => cart?.business?.slug && handleStoreRedirect && handleStoreRedirect(cart?.business?.slug)}>{t('ADD_PRODUCTS', 'Add products')}</span>
             </CartHeader>
             <Cart
               isCartPending={cart?.status === 2}
