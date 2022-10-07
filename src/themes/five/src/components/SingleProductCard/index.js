@@ -157,7 +157,7 @@ const SingleProductCardUI = (props) => {
                     <span>{productAddedToCartLength}</span>
                   </QuantityContainer>
                 )}
-                <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} isBgimage={optimizeImage(product?.images, 'h_86,c_limit')} oneLine={isPreviously}>
+                <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')} oneLine={isPreviously}>
                   <TitleWrapper>
                     {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
                     {!useKioskApp && !isPreviously && (
@@ -182,7 +182,7 @@ const SingleProductCardUI = (props) => {
                   {isPreviously && (!isSkeleton ? (<LastOrder>{t('LAST_ORDERED_ON', 'Last ordered on')} {parseDate(product?.last_ordered_date, { outputFormat: 'MMM DD, YYYY' })}</LastOrder>) : (<Skeleton width={80} />))}
                 </CardInfo>
                 {!isSkeleton ? (
-                  <WrapLogo isBgimage={optimizeImage(product?.images, 'h_86,c_limit')}>
+                  <WrapLogo isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}>
                     {product?.ribbon?.enabled && (
                       <RibbonBox
                         bgColor={product?.ribbon?.color}
@@ -195,7 +195,7 @@ const SingleProductCardUI = (props) => {
                     <CardLogo
                       className='image'
                       soldOut={isSoldOut || maxProductQuantity <= 0}
-                      bgimage={optimizeImage(product?.images, 'h_86,c_limit')}
+                      bgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}
                     />
                   </WrapLogo>
                 ) : (

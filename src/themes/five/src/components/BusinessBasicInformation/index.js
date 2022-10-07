@@ -84,7 +84,8 @@ export const BusinessBasicInformation = (props) => {
   const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
   const isInfoShrunken = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
   const hideCity = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
-
+  const layoutsWithOldSearch = ['starbucks', 'old']
+  const hideSearch = layoutsWithOldSearch.includes(orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type)
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -349,7 +350,7 @@ export const BusinessBasicInformation = (props) => {
             </BusinessInfoItem>
           </BusinessInfo>
         </BusinessInfoContent>
-        {(categoryState?.products?.length !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && !business?.professionals?.length && (
+        {!hideSearch && (categoryState?.products?.length !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && !business?.professionals?.length && (
           <SearchComponent />
         )}
       </BusinessInfoContainer>

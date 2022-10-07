@@ -157,7 +157,7 @@ const BusinessControllerUI = (props) => {
             {isSkeleton ? (
               <Skeleton height={isCustomerMode ? 100 : 140} />
             ) : (
-              <BusinessHeader bgimage={optimizeImage((businessHeader || business?.header || theme.images?.dummies?.businessLogo), 'h_400,c_limit')} isClosed={!isBusinessOpen}>
+              <BusinessHeader bgimage={optimizeImage((businessHeader || business?.header || theme.images?.dummies?.businessHeader), 'h_400,c_limit')} isClosed={!isBusinessOpen}>
                 <BusinessTags>
                   {(businessFeatured ?? business?.featured) &&
                     <span className='crown'>

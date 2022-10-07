@@ -91,7 +91,7 @@ const AddressListUI = (props) => {
   const showIcons = !orderingTheme?.theme?.profile?.components?.address_list?.components?.icons?.hidden
   const showZipcode = !orderingTheme?.theme?.profile?.components?.address_list?.components?.zipcode?.hidden
   const showInternalNumber = !orderingTheme?.theme?.profile?.components?.address_list?.components?.internal_number?.hidden
-
+  const notFoundImage = orderingTheme?.theme?.profile?.components?.address_list?.components?.image
   const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
@@ -326,6 +326,7 @@ const AddressListUI = (props) => {
         {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
           addressList.error.length > 0 && (
             <NotFoundSource
+              image={notFoundImage}
               content={addressList.error[0]?.message || addressList.error[0]}
             />
           )

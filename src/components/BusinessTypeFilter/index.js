@@ -19,7 +19,7 @@ const BusinessTypeFilterUI = (props) => {
   const theme = useTheme()
   const [load, setLoad] = useState(false)
 
-  const defaultImage = theme.images?.categories?.all
+  const defaultImage = (name) => theme.images?.categories?.[name.toLowerCase()]
 
   const handleChangeCategory = (category) => {
     handleChangeBusinessType && handleChangeBusinessType(category)
@@ -59,7 +59,7 @@ const BusinessTypeFilterUI = (props) => {
                     load={load}
                   >
                     <img
-                      src={type.image || defaultImage}
+                      src={type.image || defaultImage(type.name)}
                       alt={type.name.toLowerCase()}
                       onLoad={() => setLoad(true)}
                       onClick={() => handleChangeCategory(type.id)}

@@ -29,6 +29,7 @@ import {
   ScheduleInfoWrapper,
   ScheduleInfo
 } from './styles'
+import { useTheme } from 'styled-components'
 
 export const ProductItemAccordion = (props) => {
   const {
@@ -44,6 +45,7 @@ export const ProductItemAccordion = (props) => {
     isStore,
     isConfirmationPage
   } = props
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [{ parsePrice, parseDate }] = useUtils()
@@ -119,9 +121,9 @@ export const ProductItemAccordion = (props) => {
           onClick={(e) => toggleAccordion(e)}
         >
           <ProductInfo className='info'>
-            {product?.images && showProductImage && (
+            {(product?.images || theme?.images?.dummies?.product) && showProductImage && (
               <WrapperProductImage>
-                <ProductImage bgimage={product?.images} />
+                <ProductImage bgimage={product?.images || theme?.images?.dummies?.product} />
               </WrapperProductImage>
             )}
             {product?.calendar_event ? (
