@@ -475,6 +475,7 @@ var Header = function Header(props) {
       return openModal(variant);
     }
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: !auth && modalSelected === 'address' && t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
     open: modalIsOpen,
     onClose: function onClose() {
       return setModalIsOpen(false);
@@ -553,7 +554,8 @@ var Header = function Header(props) {
       return closeAuthModal();
     },
     width: "50%",
-    authModal: true
+    authModal: true,
+    closeOnBackdrop: false
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {

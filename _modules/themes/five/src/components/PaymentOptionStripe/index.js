@@ -23,6 +23,8 @@ var _Confirm = require("../Confirm");
 
 var _StripeElementsForm = require("../StripeElementsForm");
 
+var _utils = require("../../../../../utils");
+
 var _NotFoundSource = require("../NotFoundSource");
 
 var _styles = require("./styles");
@@ -206,24 +208,6 @@ var PaymentCard = function PaymentCard(props) {
   var cardActionsRef = (0, _react.useRef)(null);
   var actionWrapperRef = (0, _react.useRef)(null);
 
-  var getIconCard = function getIconCard() {
-    var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$genera;
-
-    var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var value = brand.toLowerCase();
-
-    switch (value) {
-      case 'visa':
-        return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.visa;
-
-      case 'mastercard':
-        return (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.mastercard;
-
-      default:
-        return (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.credit;
-    }
-  };
-
   var handleClickOutside = function handleClickOutside(e) {
     var _cardActionsRef$curre;
 
@@ -260,7 +244,7 @@ var PaymentCard = function PaymentCard(props) {
     onClick: handleChangeDefaultCard,
     isCursor: true
   }, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
-    src: getIconCard(card === null || card === void 0 ? void 0 : card.brand),
+    src: (0, _utils.getIconCard)(card === null || card === void 0 ? void 0 : card.brand),
     alt: card === null || card === void 0 ? void 0 : card.brand
   })), /*#__PURE__*/_react.default.createElement("span", null, card === null || card === void 0 ? void 0 : card.brand, " ", card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemActionsWrapper, {
     ref: actionWrapperRef

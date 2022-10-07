@@ -69,6 +69,6 @@ var WrapperMap = _styledComponents.default.div(_templateObject11 || (_templateOb
 
 exports.WrapperMap = WrapperMap;
 
-var WrapperSkeleton = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 10px;\n\n  span {\n    width: 100%;\n  }\n"])));
+var WrapperSkeleton = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 9px 10px;\n\n  span {\n    width: 100%;\n  }\n"])));
 
 exports.WrapperSkeleton = WrapperSkeleton;

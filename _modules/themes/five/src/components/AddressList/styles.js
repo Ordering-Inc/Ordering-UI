@@ -119,7 +119,7 @@ var CloseIcon = _styledComponents.default.div(_templateObject20 || (_templateObj
 
 exports.CloseIcon = CloseIcon;
 
-var TitleFormContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: center;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n"])));
+var TitleFormContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: flex-start;\n  h1 {\n    margin: 0 auto;\n    font-size: 24px;\n  }\n"])));
 
 exports.TitleFormContainer = TitleFormContainer;
 

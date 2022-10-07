@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SkeletonContainer = exports.SearchContainer = exports.ReviewsProgressWrapper = exports.ReviewsProgressContent = exports.ReviewsProgressBar = exports.ReviewsNotFound = exports.ReviewsMarkPoint = exports.ReviewsHeaderWrapper = exports.ReviewTime = exports.ReviewOf = exports.ReviewItemHeader = exports.ReviewItemContent = exports.Review = exports.Content = exports.BusinessReviewsContainer = void 0;
+exports.SkeletonContainer = exports.SearchContainer = exports.ReviewsProgressWrapper = exports.ReviewsProgressContent = exports.ReviewsProgressBar = exports.ReviewsNotFound = exports.ReviewsMarkPoint = exports.ReviewsHeaderWrapper = exports.ReviewTime = exports.ReviewStars = exports.ReviewOf = exports.ReviewItemHeader = exports.ReviewItemContent = exports.Review = exports.Content = exports.BusinessReviewsContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -82,7 +82,7 @@ var ReviewsProgressBar = _styledComponents.default.div(_templateObject13 || (_te
 
 exports.ReviewsProgressBar = ReviewsProgressBar;
 
-var ReviewsMarkPoint = _styledComponents.default.span(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 15px;\n  font-size: 12px;\n  color: #CED4DA;\n"])));
+var ReviewsMarkPoint = _styledComponents.default.span(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 15px;\n  font-size: 12px;\n  color: #CED4DA;\n  cursor: pointer\n"])));
 
 exports.ReviewsMarkPoint = ReviewsMarkPoint;
 
@@ -109,3 +109,7 @@ var SearchContainer = _styledComponents.default.div(_templateObject18 || (_templ
 });
 
 exports.SearchContainer = SearchContainer;
+
+var ReviewStars = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n    gap: 5px;\n"])));
+
+exports.ReviewStars = ReviewStars;

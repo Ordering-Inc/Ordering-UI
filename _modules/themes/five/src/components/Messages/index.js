@@ -114,6 +114,10 @@ var MessagesUI = function MessagesUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
 
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
@@ -397,6 +401,12 @@ var MessagesUI = function MessagesUI(props) {
     });
   };
 
+  var goToBusiness = function goToBusiness() {
+    events.emit('go_to_page', {
+      page: 'search'
+    });
+  };
+
   var MapMessages = function MapMessages(_ref) {
     var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
@@ -507,7 +517,11 @@ var MessagesUI = function MessagesUI(props) {
       });
     },
     isCursor: true
-  }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement(_Image.Image, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    onClick: function onClick() {
+      return goToBusiness();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
     src: ((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   }))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_styles.MessageType, {
