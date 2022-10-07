@@ -204,7 +204,7 @@ export const WrapperMap = styled.div`
 export const WrapperSkeleton = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 9px 10px;
 
   span {
     width: 100%;

@@ -4,14 +4,7 @@ import { useTheme } from 'styled-components'
 export const getIconCard = (brand = '') => {
   const value = brand.toLowerCase()
   const theme = useTheme()
-  switch (value) {
-    case 'visa':
-      return theme.images?.general?.visa
-    case 'mastercard':
-      return theme.images?.general?.mastercard
-    default:
-      return theme.images?.general?.credit
-  }
+    return theme.images?.general?.[value] ?? theme.images?.general?.credit
 }
 
 /**
