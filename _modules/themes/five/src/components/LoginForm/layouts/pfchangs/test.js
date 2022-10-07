@@ -1061,6 +1061,62 @@ var LoginForm = function LoginForm(props) {
     };
   }();
 
+  var handleLoginGoogleAlsea = /*#__PURE__*/function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(user) {
+      var params, response, _user$session, _user$session2;
+
+      return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              params = 'pass=q7i1rcljnv3roqv72sleodqt9mi0udrrotqau4rhi81274q2ejt';
+
+              if (user.email) {
+                params = params + "".concat(user.email ? "&mail=".concat(user.email) : '');
+              }
+
+              if (user.cellphone && user.country_code) {
+                params = params + "".concat(user.cellphone ? "&cellphone=".concat(user.cellphone) : '').concat(user.country_code ? "&country_phone_code=".concat(user.country_code) : '');
+              }
+
+              _context9.next = 5;
+              return alseaOtpConsult(params);
+
+            case 5:
+              response = _context9.sent;
+
+              if (response === 'new_user') {
+                setOtpDataUser({
+                  name: user.name,
+                  lastname: user.lastname,
+                  email: user.email,
+                  cellphone: user.cellphone,
+                  country_code: user.country_code,
+                  id: user === null || user === void 0 ? void 0 : user.id,
+                  token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token,
+                  social: true
+                });
+                handleOpenSignup();
+              } else if (response === 'existing_user') {
+                login({
+                  user: user,
+                  token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
+                });
+              }
+
+            case 7:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9);
+    }));
+
+    return function handleLoginGoogleAlsea(_x11) {
+      return _ref9.apply(this, arguments);
+    };
+  }();
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, UIComponent && /*#__PURE__*/_react.default.createElement(UIComponent, _extends({}, props, {
     formState: formState,
     loginTab: loginTab,
@@ -1089,7 +1145,9 @@ var LoginForm = function LoginForm(props) {
     createOtpUser: createOtpUser,
     alseaOtpCreateUser: alseaOtpCreateUser // handleCheckFacebookInfo={handleCheckFacebookInfo}
     ,
-    handleLoginFacebookAlsea: handleLoginFacebookAlsea
+    handleLoginFacebookAlsea: handleLoginFacebookAlsea,
+    alseaOtpConsult: alseaOtpConsult,
+    handleLoginGoogleAlsea: handleLoginGoogleAlsea
   })));
 };
 

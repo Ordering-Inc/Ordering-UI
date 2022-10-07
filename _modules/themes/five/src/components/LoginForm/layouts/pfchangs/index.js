@@ -114,7 +114,8 @@ var LoginFormUI = function LoginFormUI(props) {
       alseaOtpInitialize = props.alseaOtpInitialize,
       alseaOtpCreateUser = props.alseaOtpCreateUser,
       createOtpUser = props.createOtpUser,
-      handleLoginFacebookAlsea = props.handleLoginFacebookAlsea;
+      handleLoginFacebookAlsea = props.handleLoginFacebookAlsea,
+      handleLoginGoogleAlsea = props.handleLoginGoogleAlsea;
   var numOtpInputs = 4;
 
   var otpPlaceholder = _toConsumableArray(Array(numOtpInputs)).fill(0).join('');
@@ -263,15 +264,6 @@ var LoginFormUI = function LoginFormUI(props) {
     login({
       user: user,
       token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
-    });
-  };
-
-  var handleSuccessGoogle = function handleSuccessGoogle(user) {
-    var _user$session2;
-
-    login({
-      user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
     });
   };
 
@@ -540,7 +532,7 @@ var LoginFormUI = function LoginFormUI(props) {
     handleButtonFacebookLoginClick: handleLoginFacebookAlsea
   }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login7 = configs.google_login_client_id) === null || _configs$google_login7 === void 0 ? void 0 : _configs$google_login7.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login8 = configs.google_login_auth_domain) === null || _configs$google_login8 === void 0 ? void 0 : _configs$google_login8.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login9 = configs.google_login_api_key) === null || _configs$google_login9 === void 0 ? void 0 : _configs$google_login9.value) && googleLoginEnabled && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
     initParams: initParams,
-    handleSuccessGoogleLogin: handleSuccessGoogle
+    handleSuccessGoogleLogin: handleLoginGoogleAlsea
   }), (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_4 = configs.apple_login_client_id) === null || _configs$apple_login_4 === void 0 ? void 0 : _configs$apple_login_4.value) && appleLoginEnabled && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
     onSuccess: handleSuccessApple,
     onFailure: function onFailure(data) {
