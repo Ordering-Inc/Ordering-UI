@@ -210,7 +210,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }, business === null || business === void 0 ? void 0 : (_business$ribbon5 = business.ribbon) === null || _business$ribbon5 === void 0 ? void 0 : _business$ribbon5.text), /*#__PURE__*/_react.default.createElement(_styles.BusinessHero, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: isCustomerMode ? 100 : 140
   }) : /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
-    bgimage: optimizeImage(businessHeader || (business === null || business === void 0 ? void 0 : business.header) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_400,c_limit'),
+    bgimage: optimizeImage(businessHeader || (business === null || business === void 0 ? void 0 : business.header) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessHeader), 'h_400,c_limit'),
     isClosed: !isBusinessOpen
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessTags, null, (businessFeatured !== null && businessFeatured !== void 0 ? businessFeatured : business === null || business === void 0 ? void 0 : business.featured) && /*#__PURE__*/_react.default.createElement("span", {
     className: "crown"

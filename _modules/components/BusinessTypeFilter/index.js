@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
-  var _theme$images, _theme$images$categor, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var typesState = props.typesState,
       currentTypeSelected = props.currentTypeSelected,
@@ -76,7 +76,11 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       load = _useState2[0],
       setLoad = _useState2[1];
 
-  var defaultImage = (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$categor = _theme$images.categories) === null || _theme$images$categor === void 0 ? void 0 : _theme$images$categor.all;
+  var defaultImage = function defaultImage(name) {
+    var _theme$images, _theme$images$categor;
+
+    return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$categor = _theme$images.categories) === null || _theme$images$categor === void 0 ? void 0 : _theme$images$categor[name.toLowerCase()];
+  };
 
   var handleChangeCategory = function handleChangeCategory(category) {
     handleChangeBusinessType && handleChangeBusinessType(category);
@@ -116,7 +120,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       active: type.id === currentTypeSelected,
       load: load
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: type.image || defaultImage,
+      src: type.image || defaultImage(type.name),
       alt: type.name.toLowerCase(),
       onLoad: function onLoad() {
         return setLoad(true);

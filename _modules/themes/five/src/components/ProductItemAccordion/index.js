@@ -19,6 +19,8 @@ var _useWindowSize = require("../../../../../hooks/useWindowSize");
 
 var _styles = require("./styles");
 
+var _styledComponents = require("styled-components");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -54,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _orderingTheme$theme$7, _props$beforeElements, _props$beforeComponen, _product$valid, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _orderingTheme$theme$7, _props$beforeElements, _props$beforeComponen, _product$valid, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _props$afterComponent, _props$afterElements;
 
   var isCartPending = props.isCartPending,
       isCartProduct = props.isCartProduct,
@@ -67,6 +69,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       isCheckout = props.isCheckout,
       isStore = props.isStore,
       isConfirmationPage = props.isConfirmationPage;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -174,8 +177,8 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, {
     className: "info"
-  }, (product === null || product === void 0 ? void 0 : product.images) && showProductImage && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
-    bgimage: product === null || product === void 0 ? void 0 : product.images
+  }, ((product === null || product === void 0 ? void 0 : product.images) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product)) && showProductImage && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
+    bgimage: (product === null || product === void 0 ? void 0 : product.images) || (theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.product)
   })), isCartProduct && !isCartPending && getProductMax ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, null), /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
     ref: productSelect,
     value: product.quantity,
