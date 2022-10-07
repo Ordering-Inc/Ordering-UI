@@ -620,7 +620,7 @@ const LoginFormUI = (props) => {
             )}
           </FormInput>
 
-          {(elementLinkToSignup && !loginWithOtpState) && (
+          {(elementLinkToSignup && !loginWithOtpState  && loginTab !== 'otp') && (
             <RedirectLink register isPopup={isPopup} className='new-account'>
               <span>{t('NEW_ON_PLATFORM', theme?.defaultLanguages?.NEW_ON_PLATFORM || 'New on Ordering?')}</span>
               {elementLinkToSignup}

@@ -121,6 +121,7 @@ export const ReviewsMarkPoint = styled.span`
   top: 15px;
   font-size: 12px;
   color: #CED4DA;
+  cursor: pointer
 `
 
 export const ReviewTime = styled.p`
@@ -158,4 +159,10 @@ export const SearchContainer = styled.div`
       background-position: right center;
     `}
   }
+`
+
+export const ReviewStars = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 5px;
 `
