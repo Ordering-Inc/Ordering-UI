@@ -11,7 +11,8 @@ import {
   useSession,
   useLanguage,
   useOrder,
-  useUtils
+  useUtils,
+  useApi
 } from 'ordering-components'
 
 import { scrollTo } from '../../../../../../../utils'
@@ -20,8 +21,8 @@ import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { ProductIngredient } from '../../../ProductIngredient/layouts/pfchangs'
 import { ProductOption } from '../../../ProductOption/layouts/pfchangs'
 import { ProductOptionSubOption } from '../../../ProductOptionSubOption/layouts/pfchangs'
-import { LoginForm } from '../../../LoginForm'
-import { SignUpForm } from '../../../SignUpForm'
+import { LoginForm } from '../../../LoginForm/layouts/pfchangs'
+import { SignUpForm } from '../../../SignUpForm/layouts/pfchangs'
 import { ForgotPasswordForm } from '../../../ForgotPasswordForm'
 import { AddressList } from '../../../AddressList'
 
@@ -94,17 +95,24 @@ const ProductOptionsUI = (props) => {
   const [orderState] = useOrder()
   const [{ optimizeImage, parsePrice }] = useUtils()
   const theme = useTheme()
+  const [ordering] = useApi()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const productContainerRef = useRef(null)
   const [gallery, setGallery] = useState([])
   const [isScrollAvailable, setIsScrollAvailable] = useState(false)
+  const [otpDataUser, setOtpDataUser] = useState(null)
+  const isAlsea = ordering.project === 'alsea'
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
-  const closeModal = () => {
+  const closeModal = (deleteUser) => {
     setModalIsOpen(false)
     setModalPageToShow('login')
+    setOtpDataUser(null)
+    if (otpDataUser && deleteUser) {
+      deleteOtpUser()
+    }
   }
 
   const handleSuccessLogin = (user) => {
@@ -141,7 +149,7 @@ const ProductOptionsUI = (props) => {
   const handleSuccessSignup = (user) => {
     login({
       user,
-      token: user?.session?.access_token
+      token: user?.session?.access_token || otpDataUser?.token
     })
     closeModal()
   }
@@ -186,6 +194,25 @@ const ProductOptionsUI = (props) => {
     }
   }
 
+  const deleteOtpUser = async () => {
+    try {
+      await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging'}.ordering.co/alseaplatform/delete_new_user.php`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: otpDataUser.id,
+          token: otpDataUser.token
+        })
+      })
+    } catch (err) {
+      setAlertState({
+        ...alertState,
+        content: err.message,
+        open: true
+      })
+    }
+  }
+
   useEffect(() => {
     if (isScrollAvailable) {
       setIsScrollAvailable(false)
@@ -216,6 +243,18 @@ const ProductOptionsUI = (props) => {
     }
     setGallery(imageList)
   }, [product])
+
+  useEffect(() => {
+    if (!otpDataUser && modalPageToShow === 'signup') {
+      setModalPageToShow(null)
+    }
+  }, [otpDataUser, modalPageToShow])
+
+  useEffect(() => {
+    if (auth) {
+      setOtpDataUser(null)
+    }
+  }, [auth])
 
   return (
     <ProductContainer
@@ -472,7 +511,7 @@ const ProductOptionsUI = (props) => {
       {modalIsOpen && !auth && (
         <Modal
           open={modalIsOpen}
-          onClose={() => closeModal()}
+          onClose={() => closeModal(true)}
           width='760px'
         >
           {modalPageToShow === 'login' && (
@@ -497,6 +536,9 @@ const ProductOptionsUI = (props) => {
               useLoginByCellphone
               isPopup
               useKioskApp={props.useKioskApp}
+              defaultLoginTab='otp'
+              setOtpDataUser={setOtpDataUser}
+              handleOpenSignup={() => setModalPageToShow('signup')}
             />
           )}
           {modalPageToShow === 'signup' && (
@@ -513,6 +555,8 @@ const ProductOptionsUI = (props) => {
               useChekoutFileds
               handleSuccessSignup={handleSuccessSignup}
               isPopup
+              otpDataUser={otpDataUser}
+              closeModal={() => closeModal()}
             />
           )}
           {modalPageToShow === 'forgotpassword' && (

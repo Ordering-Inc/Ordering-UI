@@ -78,7 +78,8 @@ const LoginFormUI = (props) => {
     alseaOtpInitialize,
     alseaOtpCreateUser,
     createOtpUser,
-    handleLoginFacebookAlsea
+    handleLoginFacebookAlsea,
+    handleLoginGoogleAlsea
   } = props
   const numOtpInputs = 4
   const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
@@ -142,13 +143,6 @@ const LoginFormUI = (props) => {
   }
 
   const handleSuccessApple = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
-  }
-
-  const handleSuccessGoogle = (user) => {
     login({
       user,
       token: user?.session?.access_token
@@ -503,7 +497,7 @@ const LoginFormUI = (props) => {
                 {configs?.google_login_client_id?.value && configs?.google_login_auth_domain?.value && configs?.google_login_api_key?.value && googleLoginEnabled && (
                   <GoogleLoginButton
                     initParams={initParams}
-                    handleSuccessGoogleLogin={handleSuccessGoogle}
+                    handleSuccessGoogleLogin={handleLoginGoogleAlsea}
                   />
                 )}
                 {configs?.apple_login_client_id?.value && appleLoginEnabled &&
