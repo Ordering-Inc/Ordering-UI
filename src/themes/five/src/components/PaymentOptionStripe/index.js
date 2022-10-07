@@ -11,7 +11,7 @@ import { useTheme } from 'styled-components'
 import { Modal } from '../Modal'
 import { Confirm } from '../Confirm'
 import { StripeElementsForm } from '../StripeElementsForm'
-
+import { getIconCard } from '../../../../../utils'
 import { NotFoundSource } from '../NotFoundSource'
 
 import {
@@ -148,35 +148,13 @@ export const PaymentCard = (props) => {
     handleDeleteCard,
     card,
     handleCardClick,
-    onSelectCard
+    onSelectCard 
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
   const [isShowActions, setIsShowActions] = useState(false)
   const cardActionsRef = useRef(null)
   const actionWrapperRef = useRef(null)
-
-  const getIconCard = (brand = '') => {
-    const value = brand.toLowerCase()
-    switch (value) {
-      case 'visa':
-        return theme.images?.general?.visa
-      case 'mastercard':
-        return theme.images?.general?.mastercard
-      case 'amex':
-        return theme.images?.general?.amex
-      case 'diners':
-        return theme.images?.general?.diners
-      case 'discover':
-        return theme.images?.general?.discover
-      case 'jcb':
-        return theme.images?.general?.jcb
-      case 'unionpay':
-        return theme.images?.general?.unionpay
-      default:
-        return theme.images?.general?.credit
-    }
-  }
 
   const handleClickOutside = (e) => {
     if (!isShowActions) return
