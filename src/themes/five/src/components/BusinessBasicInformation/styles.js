@@ -14,9 +14,8 @@ export const BusinessContainer = styled.div`
   object-fit: cover;
   background-position: center;
   min-height: 200px;
-  justify-content: center;
+  justify-content: start;
   align-items: flex-end;
-  border-radius: 7.6px;
 
   ${props => props.isSkeleton && css`
     background-color: #cccccc;
@@ -40,27 +39,45 @@ export const BusinessContainer = styled.div`
     padding: 0;
   }
 
-  @media (min-width: 490px) {
-    justify-content: flex-start;
+  @media (min-width: 576px) {
+    border-radius: 7.6px;
   }
+
+
 `
 
 export const BusinessContent = styled.div`
-  border-radius: 10px;
-  margin: 10px;
-  max-height: 124px;
-  width: 124px;
+  margin: 0;
+  margin-left: 35px;
+  margin-bottom: -35px;
+  max-height: 80px;
+  width: 80px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
-  @media (min-width: 426px) {
+  @media (min-width: 576px) {
+    border-radius: 10px;
+    margin: 10px;
+    max-height: 124px;
+    width: 124px;
+  }
+
+  @media (min-width: 768px) {
     margin: 25px;
   }
 `
 
 export const WrapperBusinessLogo = styled.div`
-  max-width: 124px;
-  max-height: 124px;
-  height: 124px;
-  width: 124px;
+  max-width: 80px;
+  max-height: 80px;
+  width: 80px;
+  height: 80px;
+  
+  @media (min-width: 576px) {
+    max-width: 124px;
+    max-height: 124px;
+    height: 124px;
+    width: 124px;
+  }
 `
 
 const BusinessLogoStyled = styled.div`
@@ -73,8 +90,11 @@ const BusinessLogoStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  min-height: 124px;
+  min-height: 80px;
   border-radius: 7.6px;
+  @media (min-width: 576px) {
+    min-height: 124px;
+  }
 `
 export const BusinessLogo = (props) => {
   const style = {}
@@ -141,18 +161,31 @@ export const BusinessInfoItem = styled.div`
 `
 
 export const BusinessInfoContainer = styled.div`
-  padding: 10px 0px;
-  margin-bottom: 15px;
+  padding-top: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  box-sizing: border-box;
+  align-items: flex-end;
 
-  @media (min-width: 700px) {
+  @media (min-width: 576px) {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: 10px;
+  }
+
+  @media (min-width: 768px) {
     flex-direction: row;
+    margin-bottom: 25px;
   }
 `
 
-export const BusinessInfoContent = styled.div``
+export const BusinessInfoContent = styled.div`
+  width: 100%;
+`
 
 export const WrapperSearch = styled.div`
   margin: 15px 0px 0px;
@@ -296,9 +329,17 @@ export const TitleWrapper = styled.div`
   flex-wrap: wrap;
 
   h2 {
-    font-weight: 600;
-    font-size: 32px;
+    font-size: 24px;
+    line-height: 36px;
     margin: 0 0 10px 0;
+    font-weight: 600;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    @media (min-width: 768px) {
+      font-size: 32px;
+    }
   }
 `
 
@@ -402,5 +443,13 @@ export const IconWrapper = styled.a`
     svg {
       transform: scale(1.07);
     }
+  }
+`
+
+export const BusinessInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  @media (min-width: 768px) {
+    flex-direction: column;
   }
 `

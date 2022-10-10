@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useApi } from 'ordering-components'
 
+import { Container } from './styles'
+
 export const Footer = () => {
   const [footerState, setfooterState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
@@ -35,15 +37,17 @@ export const Footer = () => {
   }, [])
 
   return (
-    <>
+    <Container>
       {
         footerState.body && (
-          <div style={{ wordBreak: 'break-all', padding: '0px 10px'}} dangerouslySetInnerHTML={{
-            __html: footerState.body
-          }}
+          <div
+            style={{ wordBreak: 'break-all', padding: '0px 10px' }}
+            dangerouslySetInnerHTML={{
+              __html: footerState.body
+            }}
           />
         )
       }
-    </>
+    </Container>
   )
 }

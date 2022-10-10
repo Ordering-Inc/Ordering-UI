@@ -139,8 +139,8 @@ export const App = () => {
 
   const handleSuccessSignup = (user) => {
     if (!user?.enabled && (configs?.business_signup_enabled_default?.value === '0' || configs?.driver_signup_enabled_default?.value === '0')) {
-      signUplayout === 'new' ?
-        setBusinessSignUpSuccessed({
+      signUplayout === 'new'
+        ? setBusinessSignUpSuccessed({
           open: true,
           content: {
             approvalType: 'no_automatic',
@@ -306,7 +306,7 @@ export const App = () => {
         window.localStorage.getItem('country-code')
 
       if (localCountryCode) {
-        ordering?.setCountryCode(localCountryCode)
+        ordering.setCountryCode && ordering.setCountryCode(localCountryCode)
       }
     }
   }, [orderStatus])
@@ -332,7 +332,7 @@ export const App = () => {
         loaded && (
           <ThemeProvider theme={themeUpdated}>
             <ListenPageChanges />
-            {!(isKioskApp && isHome) && (
+            {!(isKioskApp && isHome) && windowSize.width > 576 && (
               <HeaderComponent
                 isHome={isHome}
                 location={location}
@@ -653,12 +653,12 @@ export const App = () => {
               </ScrollToTop>
             )}
             {!navigator.userAgent.match('CriOS') && (
-              <PWAPrompt promptOnVisit={1} timesToShow={100} copyClosePrompt="Close" permanentlyHideOnDismiss={false} />
+              <PWAPrompt promptOnVisit={1} timesToShow={100} copyClosePrompt='Close' permanentlyHideOnDismiss={false} />
             )}
             {!isFooterPage && (
               <Footer />
             )}
-            {(windowSize.width < 576 && auth) && (
+            {(windowSize.width < 576 && onlineStatus) && (
               <NavigationBar />
             )}
             <Alert
@@ -696,7 +696,7 @@ export const App = () => {
               open={businessSignUpSuccessed?.open}
               onClose={() => setBusinessSignUpSuccessed({ open: false, content: {} })}
               title={t('CONGRATULATIONS', 'Congratulations')}
-              width={'990px'}
+              width='990px'
             >
               <SignUpApproval
                 content={businessSignUpSuccessed?.content}

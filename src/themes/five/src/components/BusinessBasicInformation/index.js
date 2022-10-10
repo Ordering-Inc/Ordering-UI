@@ -33,7 +33,8 @@ import {
   SearchIconWrapper,
   SearchComponentContainer,
   SocialList,
-  IconWrapper
+  IconWrapper,
+  BusinessInfoWrapper
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
 
@@ -377,81 +378,83 @@ export const BusinessBasicInformation = (props) => {
           business={businessState.business}
         />
       )}
-      {!isInfoShrunken && (
-        <BusinessInfoComponent />
-      )}
-      <BusinessContainer bgimage={business?.header || theme?.images?.dummies?.businessHeader} isSkeleton={isSkeleton} id='container' isClosed={!business?.open}>
-        {(!loading && !business?.open) && <h1>{t('CLOSED', 'Closed')}</h1>}
-        {showLogo && (
-          <BusinessContent>
-            <WrapperBusinessLogo>
-              {!loading ? (
-                <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-              ) : (
-                <Skeleton height={70} width={70} />
-              )}
-            </WrapperBusinessLogo>
-          </BusinessContent>
-        )}
-        {isInfoShrunken && (
+      <BusinessInfoWrapper>
+        {!isInfoShrunken && (
           <BusinessInfoComponent />
         )}
-        {!loading && (
-          <>
-            {isInfoShrunken && (
-              <SearchComponentContainer>
-                <SearchComponent />
-              </SearchComponentContainer>
-            )}
-            <BusinessMoreDetail>
-              <BsInfoCircle onClick={() => setOpenBusinessInformation(true)} />
-            </BusinessMoreDetail>
-          </>
-        )}
-        <Modal
-          width='70%'
-          open={openBusinessInformation}
-          onClose={setOpenBusinessInformation}
-          padding='0'
-          hideCloseDefault
-          isTransparent
-        >
-          <BusinessInformation
-            business={business}
-            getBusinessType={getBusinessType}
-            optimizeImage={optimizeImage}
-            onClose={setOpenBusinessInformation}
-          />
-        </Modal>
-        <Modal
-          width='70%'
-          open={isBusinessReviews}
-          onClose={() => setIsBusinessReviews(false)}
-          padding='20px'
-        >
-          <BusinessReviews
-            businessId={business.id}
-            reviews={business.reviews?.reviews}
-            businessName={business.name}
-            stars={business.reviews?.total}
-          />
-        </Modal>
-        <Modal
-          open={isPreOrder}
-          width={isCustomerMode ? '700px' : '760px'}
-          onClose={() => setIsPreOrder(false)}
-          padding={isCustomerMode && '20px'}
-        >
-          {isCustomerMode ? (
-            <MomentContent onClose={() => setIsPreOrder(false)} />
-          ) : (
-            <BusinessPreorder
-              business={business}
-              handleClick={() => setIsPreOrder(false)}
-            />
+        <BusinessContainer bgimage={business?.header || theme?.images?.dummies?.businessHeader} isSkeleton={isSkeleton} id='container' isClosed={!business?.open}>
+          {(!loading && !business?.open) && <h1>{t('CLOSED', 'Closed')}</h1>}
+          {showLogo && (
+            <BusinessContent>
+              <WrapperBusinessLogo>
+                {!loading ? (
+                  <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                ) : (
+                  <Skeleton height={70} width={70} />
+                )}
+              </WrapperBusinessLogo>
+            </BusinessContent>
           )}
-        </Modal>
-      </BusinessContainer>
+          {isInfoShrunken && (
+            <BusinessInfoComponent />
+          )}
+          {!loading && (
+            <>
+              {isInfoShrunken && (
+                <SearchComponentContainer>
+                  <SearchComponent />
+                </SearchComponentContainer>
+              )}
+              <BusinessMoreDetail>
+                <BsInfoCircle onClick={() => setOpenBusinessInformation(true)} />
+              </BusinessMoreDetail>
+            </>
+          )}
+          <Modal
+            width='70%'
+            open={openBusinessInformation}
+            onClose={setOpenBusinessInformation}
+            padding='0'
+            hideCloseDefault
+            isTransparent
+          >
+            <BusinessInformation
+              business={business}
+              getBusinessType={getBusinessType}
+              optimizeImage={optimizeImage}
+              onClose={setOpenBusinessInformation}
+            />
+          </Modal>
+          <Modal
+            width='70%'
+            open={isBusinessReviews}
+            onClose={() => setIsBusinessReviews(false)}
+            padding='20px'
+          >
+            <BusinessReviews
+              businessId={business.id}
+              reviews={business.reviews?.reviews}
+              businessName={business.name}
+              stars={business.reviews?.total}
+            />
+          </Modal>
+          <Modal
+            open={isPreOrder}
+            width={isCustomerMode ? '700px' : '760px'}
+            onClose={() => setIsPreOrder(false)}
+            padding={isCustomerMode && '20px'}
+          >
+            {isCustomerMode ? (
+              <MomentContent onClose={() => setIsPreOrder(false)} />
+            ) : (
+              <BusinessPreorder
+                business={business}
+                handleClick={() => setIsPreOrder(false)}
+              />
+            )}
+          </Modal>
+        </BusinessContainer>
+      </BusinessInfoWrapper>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
