@@ -32,48 +32,69 @@ export const NavigationBar = () => {
   }
 
   const handleChangeExplore = () => {
-    if (auth) handleGoToPage({ page: 'search' })
-    else setIsAddress(true)
+    auth
+      ? handleGoToPage({ page: 'search' })
+      : setIsAddress(true)
+  }
+
+  const itemlist = {
+    home: {
+      key: 'home',
+      text: t('HOME', 'Home'),
+      active: location.pathname === '/search' || isAddress,
+      onClick: handleChangeExplore
+    },
+    browse: {
+      key: 'browse',
+      active: location.pathname === '/business_search',
+      onClick: () => handleGoToPage({ page: 'business_search' }),
+      text: t('EXPLORE', 'Explore')
+    },
+    cart: {
+      key: 'cart',
+      active: isCart,
+      text: t('MY_CART', 'My cart'),
+      onClick: () => setIsCart(true)
+    },
+    orders: {
+      key: 'orders',
+      active: location.pathname === '/profile/orders',
+      text: t('ORDERS', 'Orders'),
+      onClick: () => handleGoToPage({ page: 'orders' })
+    },
+    profile: {
+      key: 'profile',
+      active: location.pathname === '/profile',
+      text: t('PROFILE', 'Profile'),
+      onClick: () => handleGoToPage({ page: 'profile' })
+    }
+  }
+
+  const getIcon = (icon) => {
+    return icon === 'home'
+      ? <BsHouse />
+      : icon === 'browse'
+        ? <BsSearch />
+        : icon === 'orders'
+          ? <BsCardChecklist />
+          : icon === 'cart'
+            ? <AiOutlineShoppingCart />
+            : <FaRegUser />
   }
 
   return (
     <>
       <NavigationBarContainer>
-        <NavigationLink
-          active={location.pathname === '/search' || isAddress}
-          onClick={handleChangeExplore}
-        >
-          <BsHouse />
-          <p>{t('HOME', 'Home')}</p>
-        </NavigationLink>
-        <NavigationLink
-          active={location.pathname === '/business_search'}
-          onClick={() => handleGoToPage({ page: 'business_search' })}
-        >
-          <BsSearch />
-          <p>{t('BROWSE', 'Browse')}</p>
-        </NavigationLink>
-        <NavigationLink
-          active={location.pathname === '/profile/orders'}
-          onClick={() => handleGoToPage({ page: 'orders' })}
-        >
-          <BsCardChecklist />
-          <p>{t('ORDERS', 'Orders')}</p>
-        </NavigationLink>
-        <NavigationLink
-          active={isCart}
-          onClick={() => setIsCart(true)}
-        >
-          <AiOutlineShoppingCart />
-          <p>{t('MY_CART', 'My cart')}</p>
-        </NavigationLink>
-        <NavigationLink
-          active={location.pathname === '/profile'}
-          onClick={() => handleGoToPage({ page: 'profile' })}
-        >
-          <FaRegUser />
-          <p>{t('PROFILE', 'Profile')}</p>
-        </NavigationLink>
+        {Object.values(itemlist).map(item => (
+          <NavigationLink
+            key={item.key}
+            active={item.active}
+            onClick={() => item.onClick()}
+          >
+            {getIcon(item.key)}
+            <p>{item.text}</p>
+          </NavigationLink>
+        ))}
       </NavigationBarContainer>
       <Modal
         open={isCart}
