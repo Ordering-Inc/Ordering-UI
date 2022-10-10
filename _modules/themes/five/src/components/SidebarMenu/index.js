@@ -18,6 +18,8 @@ var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
 var _BiHelpCircle = _interopRequireDefault(require("@meronex/icons/bi/BiHelpCircle"));
 var _SiJsonwebtokens = _interopRequireDefault(require("@meronex/icons/si/SiJsonwebtokens"));
+var _BiMessageDetail = _interopRequireDefault(require("@meronex/icons/bi/BiMessageDetail"));
+var _BsSearch = _interopRequireDefault(require("@meronex/icons/bs/BsSearch"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
@@ -163,6 +165,26 @@ var SidebarMenu = function SidebarMenu(props) {
   }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
+        page: 'business_search'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    active: window.location.pathname === '/business_search'
+  }, /*#__PURE__*/_react.default.createElement(_BsSearch.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    active: window.location.pathname === '/business_search'
+  }, t('BROWSE_SEARCH', 'Browse & Search'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'orders'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    active: window.location.pathname === '/profile/orders'
+  }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    active: window.location.pathname === '/profile/orders'
+  }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    onClick: function onClick() {
+      return handleGoToPage({
         page: 'profile'
       });
     }
@@ -170,7 +192,7 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/profile'
   }, /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/profile'
-  }, t('PROFILE', 'Profile'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), isWalletEnabled && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('VIEW_ACCOUNT', 'View account'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), isWalletEnabled && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'wallets'
@@ -193,6 +215,16 @@ var SidebarMenu = function SidebarMenu(props) {
   }, t('PROMOTIONS', 'Promotions'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
+        page: 'messages'
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+    active: window.location.pathname === '/messages'
+  }, /*#__PURE__*/_react.default.createElement(_BiMessageDetail.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    active: window.location.pathname === '/messages'
+  }, t('MESSAGES', 'Messages'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    onClick: function onClick() {
+      return handleGoToPage({
         page: 'help'
       });
     }
@@ -203,16 +235,6 @@ var SidebarMenu = function SidebarMenu(props) {
   }, t('HELP', 'help'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
-        page: 'favorite'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    active: window.location.pathname === '/favorite'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    active: window.location.pathname === '/favorite'
-  }, t('FAVORITES', 'Favorites'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    onClick: function onClick() {
-      return handleGoToPage({
         page: 'sessions'
       });
     }
@@ -220,17 +242,17 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/sessions'
   }, /*#__PURE__*/_react.default.createElement(_SiJsonwebtokens.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/sessions'
-  }, t('SESSIONS', 'Sessions'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, t('SESSIONS', 'Sessions'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
-        page: 'orders'
+        page: 'favorite'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    active: window.location.pathname === '/profile/orders'
-  }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    active: window.location.pathname === '/profile/orders'
-  }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
+    active: window.location.pathname === '/favorite'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+    active: window.location.pathname === '/favorite'
+  }, t('FAVORITES', 'Favorites'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
     onCustomClick: function onCustomClick() {
       return actionSidebar(false);
     }

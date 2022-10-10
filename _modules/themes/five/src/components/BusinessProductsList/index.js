@@ -11,6 +11,8 @@ var _SingleProductCard = require("../SingleProductCard");
 var _NotFoundSource = require("../NotFoundSource");
 var _Modal = require("../Modal");
 var _utils = require("../../../../../utils");
+var _AutoScroll = require("../AutoScroll");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
 var _Buttons = require("../../styles/Buttons");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -91,14 +93,16 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     var allsubcategorySelected = !(subcategoriesSelected !== null && subcategoriesSelected !== void 0 && subcategoriesSelected.some(function (subcategory) {
       return (category === null || category === void 0 ? void 0 : category.id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id);
     }));
-    return /*#__PURE__*/_react.default.createElement(_styles.SubCategoriesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContainerButton, {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubCategoriesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SubCategoriesInnerContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+      scrollId: "scroll_".concat(category === null || category === void 0 ? void 0 : category.id)
+    }, /*#__PURE__*/_react.default.createElement(_styles.ContainerButton, {
       isSelected: allsubcategorySelected
     }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       onClick: function onClick() {
         return onClickSubcategory(null, category);
       },
-      color: allsubcategorySelected ? 'primary' : 'secondary'
-    }, t('ALL', 'All'), " ", allsubcategorySelected && 'X')), category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.map(function (subcategory) {
+      color: allsubcategorySelected ? 'primary' : 'lightGray'
+    }, t('ALL', 'All'), " ", allsubcategorySelected && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.map(function (subcategory) {
       var isSubcategorySelected = subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.find(function (_subcategory) {
         return (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
       });
@@ -109,9 +113,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         onClick: function onClick() {
           return onClickSubcategory(subcategory, category);
         },
-        color: isSubcategorySelected ? 'primary' : 'secondary'
-      }, subcategory === null || subcategory === void 0 ? void 0 : subcategory.name, " ", isSubcategorySelected && 'X'));
-    }));
+        color: isSubcategorySelected ? 'primary' : 'lightGray'
+      }, subcategory === null || subcategory === void 0 ? void 0 : subcategory.name, " ", isSubcategorySelected && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)));
+    }))));
   };
   var productsCategorySelected = (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.filter(function (product) {
     return !(subcategoriesSelected !== null && subcategoriesSelected !== void 0 && subcategoriesSelected.find(function (subcategory) {

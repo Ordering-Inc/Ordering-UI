@@ -36,6 +36,7 @@ var ActionsSection = function ActionsSection(props) {
         driver: false
       }));
     }
+    window.scrollTo(0, 0);
   };
   return /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, (order === null || order === void 0 ? void 0 : order[actionType]) && (order === null || order === void 0 ? void 0 : (_order$actionType = order[actionType]) === null || _order$actionType === void 0 ? void 0 : _order$actionType.phone) && showPhone && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {

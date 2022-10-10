@@ -550,18 +550,30 @@ var Checkout = function Checkout(props) {
   }, [errors]);
   var getOrder = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(cartId) {
-      var _result$order, userCustomer, url, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart, spotNumberFromStorage, _JSON$parse, _JSON$parse2, _cart, _cart$business4, spotNumber, slug;
+      var _result$order, result, cart, userCustomer, url, response, content, _confirmCartRes$resul, confirmCartRes, _cart, spotNumberFromStorage, _JSON$parse, _JSON$parse2, _cart2, _cart2$business, spotNumber, slug;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
+              result = {};
+              cart = cartsWithProducts.find(function (cart) {
+                return cart.uuid === cartId;
+              });
+              userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+              if (!(cart && !userCustomer)) {
+                _context.next = 8;
+                break;
+              }
+              result = _objectSpread({}, cart);
+              _context.next = 17;
+              break;
+            case 8:
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: true
               }));
-              userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
               url = userCustomer ? "".concat(ordering.root, "/carts/").concat(cartId, "?user_id=").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) : "".concat(ordering.root, "/carts/").concat(cartId);
-              _context.next = 6;
+              _context.next = 12;
               return fetch(url, {
                 method: 'GET',
                 headers: {
@@ -569,32 +581,33 @@ var Checkout = function Checkout(props) {
                   Authorization: "Bearer ".concat(token)
                 }
               });
-            case 6:
+            case 12:
               response = _context.sent;
-              _context.next = 9;
+              _context.next = 15;
               return response.json();
-            case 9:
-              _yield$response$json = _context.sent;
-              result = _yield$response$json.result;
+            case 15:
+              content = _context.sent;
+              result = content.result;
+            case 17:
               if (!(result.status === 1 && (_result$order = result.order) !== null && _result$order !== void 0 && _result$order.uuid)) {
-                _context.next = 16;
+                _context.next = 22;
                 break;
               }
               handleOrderRedirect(result.order.uuid);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false
               }));
-              _context.next = 35;
+              _context.next = 41;
               break;
-            case 16:
+            case 22:
               if (!(result.status === 2)) {
-                _context.next = 31;
+                _context.next = 37;
                 break;
               }
-              _context.prev = 17;
-              _context.next = 20;
+              _context.prev = 23;
+              _context.next = 26;
               return confirmCart(cartUuid);
-            case 20:
+            case 26:
               confirmCartRes = _context.sent;
               if (confirmCartRes.error) {
                 setAlertState({
@@ -610,51 +623,51 @@ var Checkout = function Checkout(props) {
                 loading: false,
                 cart: result
               }));
-              _context.next = 29;
+              _context.next = 35;
               break;
-            case 26:
-              _context.prev = 26;
-              _context.t0 = _context["catch"](17);
+            case 32:
+              _context.prev = 32;
+              _context.t0 = _context["catch"](23);
               setAlertState({
                 open: true,
                 content: [_context.t0.message]
               });
-            case 29:
-              _context.next = 35;
+            case 35:
+              _context.next = 41;
               break;
-            case 31:
-              cart = Array.isArray(result) ? null : result;
+            case 37:
+              _cart = Array.isArray(result) ? null : result;
               spotNumberFromStorage = window.localStorage.getItem('table_number');
               if (spotNumberFromStorage) {
                 spotNumber = (_JSON$parse = JSON.parse(spotNumberFromStorage)) === null || _JSON$parse === void 0 ? void 0 : _JSON$parse.tableNumber;
                 slug = (_JSON$parse2 = JSON.parse(spotNumberFromStorage)) === null || _JSON$parse2 === void 0 ? void 0 : _JSON$parse2.slug;
-                if (((_cart = cart) === null || _cart === void 0 ? void 0 : (_cart$business4 = _cart.business) === null || _cart$business4 === void 0 ? void 0 : _cart$business4.slug) === slug) {
-                  cart = _objectSpread(_objectSpread({}, cart), {}, {
+                if (((_cart2 = _cart) === null || _cart2 === void 0 ? void 0 : (_cart2$business = _cart2.business) === null || _cart2$business === void 0 ? void 0 : _cart2$business.slug) === slug) {
+                  _cart = _objectSpread(_objectSpread({}, _cart), {}, {
                     spot_number: parseInt(spotNumber, 10)
                   });
                 }
               }
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
-                cart: cart,
-                error: cart ? null : result
+                cart: _cart,
+                error: _cart ? null : result
               }));
-            case 35:
-              _context.next = 40;
+            case 41:
+              _context.next = 46;
               break;
-            case 37:
-              _context.prev = 37;
+            case 43:
+              _context.prev = 43;
               _context.t1 = _context["catch"](0);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
                 error: [_context.t1.toString()]
               }));
-            case 40:
+            case 46:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 37], [17, 26]]);
+      }, _callee, null, [[0, 43], [23, 32]]);
     }));
     return function getOrder(_x) {
       return _ref.apply(this, arguments);

@@ -588,11 +588,13 @@ var CartUI = function CartUI(props) {
       return setOpenChangeStore(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_CartStoresListing.CartStoresListing, {
+    isStore: isStore,
     pageChangeStore: "business",
     cartuuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
     onClose: function onClose() {
       return setOpenChangeStore(false);
-    }
+    },
+    handleCustomStoreRedirect: handleStoreRedirect
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
