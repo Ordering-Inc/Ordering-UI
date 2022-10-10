@@ -169,7 +169,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       var style0 = '.sticky-prod-cat {';
       style0 += 'position: fixed !important;';
       style0 += 'top: 80px !important;';
-      style0 += "width: ".concat(subcategoriesLayout ? '100%' : '65.5%', " !important;");
+      style0 += 'width: 100% !important;';
       style0 += '}';
       var style1 = '.sticky-prod-cart {';
       style1 += 'position: fixed !important;';
@@ -181,7 +181,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       style2 += 'position: fixed !important;';
       style2 += 'top: 10px !important;';
       style2 += 'right: 32% !important;';
-      style2 += 'height: 50px !important;';
+      style2 += 'height: 70px !important;';
       style2 += 'z-index: 9999 !important;';
       style2 += '}';
       styleSheet.insertRule(style0, 0);
@@ -207,11 +207,11 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   }, [categorySelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoriesWrapper, {
     hide: (categories === null || categories === void 0 ? void 0 : categories.length) === 0
-  }, PFChangsCategoriesLayout ? /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
+  }, PFChangsCategoriesLayout ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
     pfchangs: true
   }, /*#__PURE__*/_react.default.createElement(TabsComponent, null, /*#__PURE__*/_react.default.createElement(ProductCategories, {
     pfchangs: true
-  }))) : /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Diviver, null)) : /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
     id: "category-lists",
     className: "category-lists",
     featured: featured,

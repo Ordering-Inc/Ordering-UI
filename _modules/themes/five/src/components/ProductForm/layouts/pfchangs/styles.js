@@ -107,7 +107,7 @@ var ProductTagWrapper = _styledComponents.default.div(_templateObject21 || (_tem
 
 exports.ProductTagWrapper = ProductTagWrapper;
 
-var ModalIcon = _styledComponents.default.span(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  z-index: 10;\n  position: sticky;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  top: 30px;\n  cursor: pointer;\n  svg {\n    width: 30px;\n    height: 30px;\n    position: relative;\n    top: 5px;\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n"])));
+var ModalIcon = _styledComponents.default.span(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  z-index: 10;\n  position: sticky;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  top: 30px;\n  right: 0;\n  cursor: pointer;\n  float: right;\n  svg {\n    width: 30px;\n    height: 30px;\n    position: relative;\n    top: 5px;\n    background: rgba(255,255,255,0.5);\n    border-radius: 50%;\n  }\n"])));
 
 exports.ModalIcon = ModalIcon;
 

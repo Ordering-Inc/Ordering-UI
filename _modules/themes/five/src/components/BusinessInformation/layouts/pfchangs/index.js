@@ -63,12 +63,15 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   var scheduleFormatted = function scheduleFormatted(_ref) {
     var hour = _ref.hour,
         minute = _ref.minute;
+    var AmOrPm = hour >= 12 ? 'pm' : 'am';
+
+    var _hour = hour % 12 || 12;
 
     var checkTime = function checkTime(val) {
       return val < 10 ? "0".concat(val) : val;
     };
 
-    return "".concat(checkTime(hour), ":").concat(checkTime(minute));
+    return "".concat(checkTime(_hour), ":").concat(checkTime(minute)).concat(AmOrPm);
   };
 
   var handleGoToHome = function handleGoToHome() {

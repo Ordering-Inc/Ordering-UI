@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n  padding: 10px 0px;\n  cursor: pointer;\n  max-width: 270px;\n  border: 2px solid rgb(244,245,246);\n  padding: 20px 10px;\n  width: 100%;\n  margin: 0 10px 10px 10px;\n  height: 100px;\n  max-height: 100px;\n  box-sizing: border-box;\n  -webkit-touch-callout: none;\n    -webkit-user-select: none;\n     -khtml-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n  ", "\n  ", "\n"])), function (_ref) {
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n  padding: 10px 0px;\n  cursor: pointer;\n  max-width: 270px;\n  border: 2px solid rgb(244,245,246);\n  padding: 20px 10px;\n  width: 100%;\n  margin: 0 10px 10px 10px;\n  min-height: 100px;\n  box-sizing: border-box;\n  -webkit-touch-callout: none;\n    -webkit-user-select: none;\n     -khtml-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n  ", "\n  ", "\n"])), function (_ref) {
   var _theme$colors;
 
   var isSelected = _ref.isSelected,
@@ -30,7 +30,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var Text = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  font-weight: 300;\n  color: #000;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 5px;\n\n  div {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 14px;\n    color: #000;\n  }\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    ", "\n  }\n"])), function (props) {
+var Text = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  font-weight: 300;\n  color: #000;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 5px;\n  font-size: 14px;\n  div {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 14px;\n    color: #000;\n  }\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;

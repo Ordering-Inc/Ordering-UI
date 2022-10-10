@@ -78,7 +78,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     },
     isSelected: state === null || state === void 0 ? void 0 : state.selected,
     disabled: isDisabled
-  }, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name)), /*#__PURE__*/_react.default.createElement(_styles.SuboptionPrice, null, price > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "+ ", parsePrice(price))));
+  }, /*#__PURE__*/_react.default.createElement(_styles.Text, null, suboption === null || suboption === void 0 ? void 0 : suboption.name), /*#__PURE__*/_react.default.createElement(_styles.SuboptionPrice, null, price > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "+ ", parsePrice(price))));
 };
 
 var ProductOptionSubOption = function ProductOptionSubOption(props) {

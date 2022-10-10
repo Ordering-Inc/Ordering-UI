@@ -35,7 +35,7 @@ var FormSide = (0, _styledComponents.default)(Side)(_templateObject3 || (_templa
 });
 exports.FormSide = FormSide;
 
-var FormInput = _styledComponents.default.form(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  input {\n    &::placeholder, .PhoneInputInput::placeholder {\n      color: ", " !important;\n    }\n\n    &:-ms-input-placeholder, .PhoneInputInput:-ms-input-placeholder {\n      color: ", " !important;\n    }\n\n    &::-ms-input-placeholder, .PhoneInputInput::-ms-input-placeholder {\n      color: ", " !important;\n    }\n  }\n\n  div.phone_number {\n    margin: 10px 0px;\n    width: 100%;\n  }\n\n  input.form:not(:last-child) {\n    margin: 5px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n    width: 100%;\n  }\n"])), function (_ref4) {
+var FormInput = _styledComponents.default.form(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  input {\n    &::placeholder, .PhoneInputInput::placeholder {\n      color: ", " !important;\n    }\n\n    &:-ms-input-placeholder, .PhoneInputInput:-ms-input-placeholder {\n      color: ", " !important;\n    }\n\n    &::-ms-input-placeholder, .PhoneInputInput::-ms-input-placeholder {\n      color: ", " !important;\n    }\n  }\n\n  div.phone_number {\n    margin: 10px 0px;\n    width: 100%;\n  }\n\n  input.form:not(:last-child) {\n    margin: 5px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n    width: 100%;\n    background: ", ";\n    color: #000;\n    border-color: ", ";\n  }\n"])), function (_ref4) {
   var isPopup = _ref4.isPopup;
   return isPopup ? '100%' : '80%';
 }, function (props) {
@@ -50,6 +50,12 @@ var FormInput = _styledComponents.default.form(_templateObject4 || (_templateObj
   var _props$theme$colors3;
 
   return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.lightGray;
+}, function (_ref5) {
+  var theme = _ref5.theme;
+  return theme === null || theme === void 0 ? void 0 : theme.colors.gold;
+}, function (_ref6) {
+  var theme = _ref6.theme;
+  return theme === null || theme === void 0 ? void 0 : theme.colors.gold;
 });
 
 exports.FormInput = FormInput;
@@ -63,8 +69,8 @@ exports.Title = Title;
 var SkeletonWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  span{\n    margin: 10px 0;\n    border-radius: 30px;\n  }\n"])));
 
 exports.SkeletonWrapper = SkeletonWrapper;
-var SkeletonSocialWrapper = (0, _styledComponents.default)(SkeletonWrapper)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    margin-top: 0;\n  }\n"])), function (_ref5) {
-  var isPopup = _ref5.isPopup;
+var SkeletonSocialWrapper = (0, _styledComponents.default)(SkeletonWrapper)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    margin-top: 0;\n  }\n"])), function (_ref7) {
+  var isPopup = _ref7.isPopup;
   return isPopup ? '100%' : '80%';
 });
 exports.SkeletonSocialWrapper = SkeletonSocialWrapper;
@@ -73,8 +79,8 @@ var ReCaptchaWrapper = _styledComponents.default.div(_templateObject8 || (_templ
 
 exports.ReCaptchaWrapper = ReCaptchaWrapper;
 
-var InputContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  margin: 5px 0px;\n\n  \n  @media (min-width: 800px) {\n    ", "\n  }\n"])), function (_ref6) {
-  var isHalf = _ref6.isHalf;
+var InputContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  margin: 5px 0px;\n\n  \n  @media (min-width: 800px) {\n    ", "\n  }\n"])), function (_ref8) {
+  var isHalf = _ref8.isHalf;
   return isHalf && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      width: 48%;\n    "])));
 });
 

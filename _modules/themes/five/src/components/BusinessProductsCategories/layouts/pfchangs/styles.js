@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CategoryPFChangs = exports.CategoriesWrapper = exports.CategoriesContainer = void 0;
+exports.Diviver = exports.CategoryPFChangs = exports.CategoriesWrapper = exports.CategoriesContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CategoriesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 100;\n  position: sticky;\n  top: 0;\n  text-align: center;\n  text-transform: uppercase;\n  font-weight: bold;\n  ", "\n  width: ", ";\n  ", "\n  div.special {\n    ", "\n  }\n  &.category-lists{\n    left: 0;\n  }\n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  }\n  @media (min-width: 992px) {\n    width: ", ";\n  }\n"])), function (props) {
+var CategoriesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 100;\n  position: sticky;\n  top: 0;\n  text-align: center;\n  text-transform: uppercase;\n  font-weight: bold;\n  ", "\n  width: ", ";\n  position: relative;\n  ", "\n  div.special {\n    ", "\n  }\n  &.category-lists{\n    left: 0;\n    display: flex;\n    justify-content: center;\n  }\n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  }\n  @media (min-width: 992px) {\n    width: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (_ref) {
   var subcategoriesLayout = _ref.subcategoriesLayout;
@@ -31,7 +31,7 @@ var CategoriesContainer = _styledComponents.default.div(_templateObject || (_tem
   return (_props$w = props.w) !== null && _props$w !== void 0 ? _props$w : '100%';
 }, function (_ref3) {
   var pfchangs = _ref3.pfchangs;
-  return !pfchangs && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  div.category {\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding: 10px 0px;\n    margin: 0 15px;\n    &:nth-of-type(1) {\n      margin-left: 0;\n      ", "\n    }\n  "])), function (props) {
+  return !pfchangs && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  div.category {\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding: 10px 0px;\n    margin: 0 15px;\n    color: #000;\n    &:nth-of-type(1) {\n      margin-left: 0;\n      ", "\n    }\n  "])), function (props) {
     return props.theme.rtl && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        margin-left: 15px;\n        margin-right: 15px;\n      "])));
   });
 }, function (props) {
@@ -60,3 +60,7 @@ var CategoriesWrapper = _styledComponents.default.div(_templateObject9 || (_temp
 });
 
 exports.CategoriesWrapper = CategoriesWrapper;
+
+var Diviver = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: absolute;\n  height: 1px;\n  background: #fff;\n  width: calc(100% + 40px);\n  bottom: 50px;\n  z-index: 1000;\n  left: -20px;\n"])));
+
+exports.Diviver = Diviver;

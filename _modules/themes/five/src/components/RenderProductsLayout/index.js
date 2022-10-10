@@ -98,7 +98,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var layoutOne = 'groceries';
 
 var RenderProductsLayout = function RenderProductsLayout(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view5, _theme$business_view6, _theme$business_view7, _theme$business_view8, _theme$business_view9, _theme$business_view10, _theme$business_view11, _theme$business_view12, _theme$business_view13, _theme$business_view14, _theme$business_view15, _theme$business_view16, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _theme$business_view17, _theme$business_view18, _theme$business_view19, _theme$business_view$5, _theme$business_view20, _theme$business_view21, _theme$business_view22, _theme$business_view23, _theme$business_view24, _theme$business_view25, _theme$business_view26, _theme$business_view27, _theme$business_view28, _theme$business_view29, _theme$business_view30, _theme$business_view31, _theme$business_view32, _business$categories, _business$categories$, _businessState$busine, _businessState$busine2, _business$professiona, _business$categories2, _theme$defaultLanguag, _theme$defaultLanguag2, _categorySelected$sub, _categorySelected$sub2, _business$professiona2, _business$previously_, _categorySelected$sor, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _business$professiona3, _business$categories3, _theme$defaultLanguag5, _theme$defaultLanguag6, _business$previously_2, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
+  var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view$5, _theme$business_view5, _theme$business_view6, _theme$business_view7, _theme$business_view8, _theme$business_view9, _theme$business_view10, _theme$business_view11, _theme$business_view12, _business$categories, _business$categories$, _businessState$busine, _businessState$busine2, _business$professiona, _business$categories2, _theme$defaultLanguag, _theme$defaultLanguag2, _categorySelected$sub, _categorySelected$sub2, _business$professiona2, _business$previously_, _categorySelected$sor, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _business$professiona3, _business$categories3, _theme$defaultLanguag5, _theme$defaultLanguag6, _business$previously_2, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
 
   var errors = props.errors,
       isError = props.isError,
@@ -133,7 +133,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       handleUpdateProducts = props.handleUpdateProducts,
       handleChangeProfessionalSelected = props.handleChangeProfessionalSelected,
       professionalSelected = props.professionalSelected,
-      onBusinessClick = props.onBusinessClick;
+      onBusinessClick = props.onBusinessClick,
+      pfChangsCategories = props.pfChangsCategories;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -167,24 +168,22 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       subcategorySelected = _useState6[0],
       setSubcategorySelected = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      showGoTopButton = _useState8[0],
+      setShowGoTopButton = _useState8[1];
+
   var isUseParentCategory = ((configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1') && !useKioskApp;
-  var BusinessBasicInformationComponent = (theme === null || theme === void 0 ? void 0 : (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 ? void 0 : (_theme$business_view$ = _theme$business_view.components) === null || _theme$business_view$ === void 0 ? void 0 : (_theme$business_view$2 = _theme$business_view$.header) === null || _theme$business_view$2 === void 0 ? void 0 : (_theme$business_view$3 = _theme$business_view$2.components) === null || _theme$business_view$3 === void 0 ? void 0 : (_theme$business_view$4 = _theme$business_view$3.layout) === null || _theme$business_view$4 === void 0 ? void 0 : _theme$business_view$4.type) === 'red' ? _seven.BusinessBasicInformation : (theme === null || theme === void 0 ? void 0 : (_theme$business_view2 = theme.business_view) === null || _theme$business_view2 === void 0 ? void 0 : (_theme$business_view3 = _theme$business_view2.components) === null || _theme$business_view3 === void 0 ? void 0 : (_theme$business_view4 = _theme$business_view3.header) === null || _theme$business_view4 === void 0 ? void 0 : (_theme$business_view5 = _theme$business_view4.components) === null || _theme$business_view5 === void 0 ? void 0 : (_theme$business_view6 = _theme$business_view5.layout) === null || _theme$business_view6 === void 0 ? void 0 : _theme$business_view6.type) === 'starbucks' ? _six.BusinessBasicInformation : (theme === null || theme === void 0 ? void 0 : (_theme$business_view7 = theme.business_view) === null || _theme$business_view7 === void 0 ? void 0 : (_theme$business_view8 = _theme$business_view7.components) === null || _theme$business_view8 === void 0 ? void 0 : (_theme$business_view9 = _theme$business_view8.header) === null || _theme$business_view9 === void 0 ? void 0 : (_theme$business_view10 = _theme$business_view9.components) === null || _theme$business_view10 === void 0 ? void 0 : (_theme$business_view11 = _theme$business_view10.layout) === null || _theme$business_view11 === void 0 ? void 0 : _theme$business_view11.type) === 'old' ? _BusinessBasicInformation2.BusinessBasicInformation : (theme === null || theme === void 0 ? void 0 : (_theme$business_view12 = theme.business_view) === null || _theme$business_view12 === void 0 ? void 0 : (_theme$business_view13 = _theme$business_view12.components) === null || _theme$business_view13 === void 0 ? void 0 : (_theme$business_view14 = _theme$business_view13.header) === null || _theme$business_view14 === void 0 ? void 0 : (_theme$business_view15 = _theme$business_view14.components) === null || _theme$business_view15 === void 0 ? void 0 : (_theme$business_view16 = _theme$business_view15.layout) === null || _theme$business_view16 === void 0 ? void 0 : _theme$business_view16.type) === 'pfchangs' ? _pfchangs3.BusinessBasicInformationPFChangs : _BusinessBasicInformation.BusinessBasicInformation;
+  var headerType = theme === null || theme === void 0 ? void 0 : (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 ? void 0 : (_theme$business_view$ = _theme$business_view.components) === null || _theme$business_view$ === void 0 ? void 0 : (_theme$business_view$2 = _theme$business_view$.header) === null || _theme$business_view$2 === void 0 ? void 0 : (_theme$business_view$3 = _theme$business_view$2.components) === null || _theme$business_view$3 === void 0 ? void 0 : (_theme$business_view$4 = _theme$business_view$3.layout) === null || _theme$business_view$4 === void 0 ? void 0 : _theme$business_view$4.type;
+  var BusinessBasicInformationComponent = headerType === 'red' ? _seven.BusinessBasicInformation : headerType === 'starbucks' ? _six.BusinessBasicInformation : headerType === 'old' ? _BusinessBasicInformation2.BusinessBasicInformation : headerType === 'pfchangs' ? _pfchangs3.BusinessBasicInformationPFChangs : _BusinessBasicInformation.BusinessBasicInformation;
   var SearchProductsComponent = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.product_search) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.layout) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.type) === 'old' ? _SearchProducts2.SearchProducts : (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.business_view) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.product_search) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.components) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.layout) === null || _orderingTheme$theme7 === void 0 ? void 0 : _orderingTheme$theme7.type) === 'starbucks' ? _SearchProducts3.SearchProducts : null;
   var frontLayout = business === null || business === void 0 ? void 0 : business.front_layout;
   var businessLayout = {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   };
-  var showCartOnProductList = !(theme !== null && theme !== void 0 && (_theme$business_view17 = theme.business_view) !== null && _theme$business_view17 !== void 0 && (_theme$business_view18 = _theme$business_view17.components) !== null && _theme$business_view18 !== void 0 && (_theme$business_view19 = _theme$business_view18.cart) !== null && _theme$business_view19 !== void 0 && _theme$business_view19.hidden);
-  var hideBusinessNearCity = (_theme$business_view$5 = theme === null || theme === void 0 ? void 0 : (_theme$business_view20 = theme.business_view) === null || _theme$business_view20 === void 0 ? void 0 : (_theme$business_view21 = _theme$business_view20.components) === null || _theme$business_view21 === void 0 ? void 0 : (_theme$business_view22 = _theme$business_view21.near_business) === null || _theme$business_view22 === void 0 ? void 0 : _theme$business_view22.hidden) !== null && _theme$business_view$5 !== void 0 ? _theme$business_view$5 : true;
-  var headerType = theme === null || theme === void 0 ? void 0 : (_theme$business_view23 = theme.business_view) === null || _theme$business_view23 === void 0 ? void 0 : (_theme$business_view24 = _theme$business_view23.components) === null || _theme$business_view24 === void 0 ? void 0 : (_theme$business_view25 = _theme$business_view24.header) === null || _theme$business_view25 === void 0 ? void 0 : (_theme$business_view26 = _theme$business_view25.components) === null || _theme$business_view26 === void 0 ? void 0 : (_theme$business_view27 = _theme$business_view26.layout) === null || _theme$business_view27 === void 0 ? void 0 : _theme$business_view27.type;
-  var categoriesMode = theme === null || theme === void 0 ? void 0 : (_theme$business_view28 = theme.business_view) === null || _theme$business_view28 === void 0 ? void 0 : (_theme$business_view29 = _theme$business_view28.components) === null || _theme$business_view29 === void 0 ? void 0 : (_theme$business_view30 = _theme$business_view29.categories) === null || _theme$business_view30 === void 0 ? void 0 : (_theme$business_view31 = _theme$business_view30.components) === null || _theme$business_view31 === void 0 ? void 0 : (_theme$business_view32 = _theme$business_view31.layout) === null || _theme$business_view32 === void 0 ? void 0 : _theme$business_view32.type;
-  var pfChangsCategories = [{
-    name: t('CATERING_MENU', 'Catering Menu'),
-    id: 1
-  }, {
-    name: t('TAKEOUT_MENU', 'Takeout Menu'),
-    id: 2
-  }];
+  var showCartOnProductList = !(theme !== null && theme !== void 0 && (_theme$business_view2 = theme.business_view) !== null && _theme$business_view2 !== void 0 && (_theme$business_view3 = _theme$business_view2.components) !== null && _theme$business_view3 !== void 0 && (_theme$business_view4 = _theme$business_view3.cart) !== null && _theme$business_view4 !== void 0 && _theme$business_view4.hidden);
+  var hideBusinessNearCity = (_theme$business_view$5 = theme === null || theme === void 0 ? void 0 : (_theme$business_view5 = theme.business_view) === null || _theme$business_view5 === void 0 ? void 0 : (_theme$business_view6 = _theme$business_view5.components) === null || _theme$business_view6 === void 0 ? void 0 : (_theme$business_view7 = _theme$business_view6.near_business) === null || _theme$business_view7 === void 0 ? void 0 : _theme$business_view7.hidden) !== null && _theme$business_view$5 !== void 0 ? _theme$business_view$5 : true;
+  var categoriesMode = theme === null || theme === void 0 ? void 0 : (_theme$business_view8 = theme.business_view) === null || _theme$business_view8 === void 0 ? void 0 : (_theme$business_view9 = _theme$business_view8.components) === null || _theme$business_view9 === void 0 ? void 0 : (_theme$business_view10 = _theme$business_view9.categories) === null || _theme$business_view10 === void 0 ? void 0 : (_theme$business_view11 = _theme$business_view10.components) === null || _theme$business_view11 === void 0 ? void 0 : (_theme$business_view12 = _theme$business_view11.layout) === null || _theme$business_view12 === void 0 ? void 0 : _theme$business_view12.type;
   var pfchangsSubcategories = business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : (_business$categories$ = _business$categories.filter(function (category) {
     var _category$name, _category$name$toLowe, _category$name2, _category$name2$toLow;
 
@@ -196,6 +195,32 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   var BusinessLayoutProductsList = headerType === 'pfchangs' ? _pfchangs2.BusinessProductsList : businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
   var BusinessLayoutCategoriesSkeleton = headerType === 'pfchangs' ? _pfchangs.BusinessProductsCategories : _BusinessProductsCategories.BusinessProductsCategories;
   var BusinessLayoutProductsListSkeleton = headerType === 'pfchangs' ? _pfchangs2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
+
+  var handleScrollToTop = function handleScrollToTop() {
+    setTimeout(function () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 300);
+  };
+
+  var handleShowGoTopButton = function handleShowGoTopButton() {
+    if (window.scrollY > 500) {
+      setShowGoTopButton(true);
+    } else {
+      setShowGoTopButton(false);
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    if (headerType === 'pfchangs') {
+      window.addEventListener('scroll', handleShowGoTopButton);
+      return function () {
+        return window.removeEventListener('scroll', handleShowGoTopButton);
+      };
+    }
+  }, [headerType]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList
   }, !hideBusinessNearCity && !useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.NearBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessesListing.BusinessesListing, {
@@ -255,7 +280,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
-    categorySelected: categorySelected,
+    categorySelected: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === null && categoriesMode === 'twocategories' ? pfChangsCategories[1] : categorySelected,
     onClickCategory: onClickCategory,
     featured: featuredProducts,
     useKioskApp: useKioskApp,
@@ -314,7 +339,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     professionals: business === null || business === void 0 ? void 0 : business.professionals,
     professionalSelected: professionalSelected,
     handleChangeProfessionalSelected: handleChangeProfessionalSelected
-  })), !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_ = business.previously_products) === null || _business$previously_ === void 0 ? void 0 : _business$previously_.length) > 0 && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
+  })), !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_ = business.previously_products) === null || _business$previously_ === void 0 ? void 0 : _business$previously_.length) > 0 && headerType !== 'pfchangs' && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
     onProductClick: onProductClick,
     productList: business === null || business === void 0 ? void 0 : business.previously_products,
     businessId: business === null || business === void 0 ? void 0 : business.id
@@ -465,7 +490,11 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     professionalSelected: professionalSelected,
     handleChangeProfessionalSelected: handleChangeProfessionalSelected,
     subcategorySelected: subcategorySelected
-  }))))))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && !useKioskApp && /*#__PURE__*/_react.default.createElement(BusinessBasicInformationComponent, {
+  })))))), showGoTopButton && /*#__PURE__*/_react.default.createElement(_styles.BackToTop, {
+    onClick: function onClick() {
+      return handleScrollToTop();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretUpFill, null), t('BACK_TO_TOP', 'Back to top'))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && !useKioskApp && /*#__PURE__*/_react.default.createElement(BusinessBasicInformationComponent, {
     isSkeleton: true,
     handler: handler,
     businessState: {

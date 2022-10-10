@@ -128,7 +128,7 @@ var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs
     id: "container",
     isClosed: !(business !== null && business !== void 0 && business.open)
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "70%",
+    width: window.innerWidth > 1200 ? '50%' : '70%',
     open: openBusinessInformation,
     onClose: setOpenBusinessInformation,
     padding: "0",

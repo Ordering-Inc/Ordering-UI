@@ -23,14 +23,20 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: 400px;  \n  background: ", ";\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n  }\n\n    width: 100%;\n    margin: 10px 0px;\n    @media (min-width: 576px) {\n      margin: 10px;\n      width: calc(100% - 40px);\n    }\n\n  ", "\n\n"])), function (_ref) {
+var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: 400px;  \n  background: ", ";\n  border: 1px solid ", ";\n  outline: 2px solid transparent;\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n  }\n\n    width: 100%;\n    margin: 10px 0px;\n    @media (min-width: 576px) {\n      margin: 10px;\n      width: calc(100% - 40px);\n    }\n\n  @keyframes borderGold {\n    from { outline-color: transparent }\n    to { outline-color: ", "}\n  }\n  \n  &:hover{\n    animation-name: borderGold;\n    animation-duration: 1s;\n    outline-color: ", "\n  }\n\n  ", "\n\n"])), function (_ref) {
   var soldOut = _ref.soldOut;
   return soldOut ? '#6c757d33' : '#000';
 }, function (_ref2) {
   var theme = _ref2.theme;
   return theme.colors.gold;
 }, function (_ref3) {
-  var isCartOnProductsList = _ref3.isCartOnProductsList;
+  var theme = _ref3.theme;
+  return theme.colors.gold;
+}, function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.colors.gold;
+}, function (_ref5) {
+  var isCartOnProductsList = _ref5.isCartOnProductsList;
   return isCartOnProductsList ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    @media (min-width: 993px) {\n      width: calc(50% - 40px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
     var _props$theme;
 
@@ -52,8 +58,8 @@ var SoldOut = _styledComponents.default.span(_templateObject7 || (_templateObjec
   var _props$theme4;
 
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    left: 0px;\n    right: initial;\n  "])));
-}, function (_ref4) {
-  var isBottom = _ref4.isBottom;
+}, function (_ref6) {
+  var isBottom = _ref6.isBottom;
   return isBottom && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    bottom: 7px;\n    top: initial;\n  "])));
 });
 
@@ -99,11 +105,11 @@ var PriceWrapper = _styledComponents.default.div(_templateObject14 || (_template
 
 exports.PriceWrapper = PriceWrapper;
 
-var QuantityContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n  span { \n    position: relative;\n    top: 2px;\n    font-size: 12px;\n  }\n"])), function (_ref5) {
-  var theme = _ref5.theme;
+var QuantityContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n  span { \n    position: relative;\n    top: 2px;\n    font-size: 12px;\n  }\n"])), function (_ref7) {
+  var theme = _ref7.theme;
   return theme.colors.primary;
-}, function (_ref6) {
-  var theme = _ref6.theme;
+}, function (_ref8) {
+  var theme = _ref8.theme;
   return theme.colors.primaryContrast;
 });
 
@@ -115,14 +121,14 @@ var RibbonBox = _styledComponents.default.div(_templateObject17 || (_templateObj
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    left: -3px;\n    right: initial;\n  "])));
-}, function (_ref7) {
-  var bgColor = _ref7.bgColor;
-  return bgColor && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
-}, function (_ref8) {
-  var isRoundRect = _ref8.isRoundRect;
-  return isRoundRect && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
 }, function (_ref9) {
-  var isCapsule = _ref9.isCapsule;
+  var bgColor = _ref9.bgColor;
+  return bgColor && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
+}, function (_ref10) {
+  var isRoundRect = _ref10.isRoundRect;
+  return isRoundRect && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+}, function (_ref11) {
+  var isCapsule = _ref11.isCapsule;
   return isCapsule && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
 });
 

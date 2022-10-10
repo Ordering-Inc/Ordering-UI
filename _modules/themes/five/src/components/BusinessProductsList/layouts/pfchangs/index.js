@@ -52,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _categoryState$produc, _categoryState$produc2;
+  var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _theme$images, _theme$images$general, _categoryState$produc, _categoryState$produc2;
 
   var errors = props.errors,
       businessId = props.businessId,
@@ -91,7 +91,10 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
 
   var headerRef = (0, _react.useRef)();
   var categoriesMode = theme === null || theme === void 0 ? void 0 : (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 ? void 0 : (_theme$business_view$ = _theme$business_view.components) === null || _theme$business_view$ === void 0 ? void 0 : (_theme$business_view$2 = _theme$business_view$.categories) === null || _theme$business_view$2 === void 0 ? void 0 : (_theme$business_view$3 = _theme$business_view$2.components) === null || _theme$business_view$3 === void 0 ? void 0 : (_theme$business_view$4 = _theme$business_view$3.layout) === null || _theme$business_view$4 === void 0 ? void 0 : _theme$business_view$4.type;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.find(function (product) {
+  var homeBackgroundImage = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$homepa = _theme$layouts.homepage_view) === null || _theme$layouts$homepa === void 0 ? void 0 : (_theme$layouts$homepa2 = _theme$layouts$homepa.components) === null || _theme$layouts$homepa2 === void 0 ? void 0 : (_theme$layouts$homepa3 = _theme$layouts$homepa2.homepage_header) === null || _theme$layouts$homepa3 === void 0 ? void 0 : (_theme$layouts$homepa4 = _theme$layouts$homepa3.components) === null || _theme$layouts$homepa4 === void 0 ? void 0 : _theme$layouts$homepa4.image;
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, {
+    bgimage: homeBackgroundImage || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero)
+  }, !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.find(function (product) {
     return product.featured;
   })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
     id: "categoryfeatured"
@@ -232,7 +235,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       key: "skeleton:".concat(i),
       isSkeleton: true
     });
-  })), !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && ((category === null || category === void 0 ? void 0 : category.products) === 0 || categoriesMode !== 'twocategories') && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), !categoryState.loading && !isBusinessLoading && (categoryState.products.length === 0 && categoriesMode !== 'twocategories' || (category === null || category === void 0 ? void 0 : category.products) === 0 && categoriesMode === 'twocategories') && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
     btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
     onClickButton: function onClickButton() {

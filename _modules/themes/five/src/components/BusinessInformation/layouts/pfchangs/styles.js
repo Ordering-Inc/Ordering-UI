@@ -59,22 +59,18 @@ var ScheduleBlock = _styledComponents.default.div(_templateObject8 || (_template
 
 exports.ScheduleBlock = ScheduleBlock;
 
-var ModalIcon = _styledComponents.default.span(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  position: absolute;\n  width: 30px;\n  height: 30px;\n  font-size: 30px;\n  cursor: pointer;\n  color: ", ";\n  border-radius: 50%;\n  left: 5px;\n  top: 5px;\n  z-index: 1;\n  ", "\n  @media (min-width: 578px){\n    right: 10px;\n    ", "\n  }\n  @media (min-width: 768px){\n    left: 25px;\n    top: 30px;\n    ", "\n  }\n"])), function (props) {
+var ModalIcon = _styledComponents.default.span(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  position: absolute;\n  width: 30px;\n  height: 30px;\n  font-size: 30px;\n  cursor: pointer;\n  color: #000;\n  border-radius: 50%;\n  right: 5px;\n  top: 5px;\n  z-index: 1;\n  ", "\n  @media (min-width: 578px){\n    ", "\n  }\n  @media (min-width: 768px){\n    right: 25px;\n    top: 30px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme3;
 
-  return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.headingColor;
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    right: initial;\n    left: 5px;\n  "])));
 }, function (props) {
   var _props$theme4;
 
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    left: 5px;\n    right: initial;\n  "])));
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    right: initial;\n    left: 10px;\n  "])));
 }, function (props) {
   var _props$theme5;
 
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    left: 10px;\n    right: initial;\n  "])));
-}, function (props) {
-  var _props$theme6;
-
-  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    right: 25px;\n    left: initial;\n  "])));
+  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    left: 25px;\n    right: initial;\n  "])));
 });
 
 exports.ModalIcon = ModalIcon;
@@ -86,9 +82,9 @@ exports.Description = Description;
 var BusinessTitle = _styledComponents.default.h2(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  text-align: center;\n  margin-top: 0;\n  margin-bottom: 36px;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
-  var _props$theme7;
+  var _props$theme6;
 
-  return ((_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.rtl) && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    padding-right: 30px;\n    padding-left: 0;\n  "])));
+  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    padding-right: 30px;\n    padding-left: 0;\n  "])));
 });
 
 exports.BusinessTitle = BusinessTitle;
@@ -97,7 +93,7 @@ var Divider = _styledComponents.default.div(_templateObject17 || (_templateObjec
 
 exports.Divider = Divider;
 
-var BusinessContent = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  p {\n    margin: 5px 0;\n  }\n"])));
+var BusinessContent = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  p {\n    margin: 5px 0;\n    text-align: center;\n  }\n"])));
 
 exports.BusinessContent = BusinessContent;
 
