@@ -5,6 +5,7 @@ export const CardContainer = styled.div`
   min-height: 400px;  
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#000'};
   border: 1px solid ${({ theme }) => theme.colors.gold};
+  outline: 2px solid transparent;
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
@@ -22,6 +23,17 @@ export const CardContainer = styled.div`
       margin: 10px;
       width: calc(100% - 40px);
     }
+
+  @keyframes borderGold {
+    from { outline-color: transparent }
+    to { outline-color: ${({ theme }) => theme.colors.gold}}
+  }
+  
+  &:hover{
+    animation-name: borderGold;
+    animation-duration: 1s;
+    outline-color: ${({ theme }) => theme.colors.gold}
+  }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
     @media (min-width: 993px) {

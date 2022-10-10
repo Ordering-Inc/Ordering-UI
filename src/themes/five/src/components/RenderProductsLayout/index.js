@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
-import { Cart3 } from 'react-bootstrap-icons'
+import { Cart3, CaretUpFill } from 'react-bootstrap-icons'
 
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
@@ -35,7 +35,8 @@ import {
   WrapperSearch,
   ProfessionalFilterWrapper,
   WrapperSearchAbsolute,
-  NearBusiness
+  NearBusiness,
+  BackToTop
 } from './styles'
 
 import { SearchProducts as SearchProductsOriginal } from '../../../../../themes/five/src/components/SearchProducts'
@@ -83,7 +84,8 @@ export const RenderProductsLayout = (props) => {
     handleUpdateProducts,
     handleChangeProfessionalSelected,
     professionalSelected,
-    onBusinessClick
+    onBusinessClick,
+    pfChangsCategories
   } = props
 
   const theme = useTheme()
@@ -94,15 +96,18 @@ export const RenderProductsLayout = (props) => {
   const [isCartModal, setisCartModal] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
   const [subcategorySelected, setSubcategorySelected] = useState(null)
+  const [showGoTopButton, setShowGoTopButton] = useState(false)
   const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1') && !useKioskApp
+  const headerType = theme?.business_view?.components?.header?.components?.layout?.type
+
   const BusinessBasicInformationComponent =
-    theme?.business_view?.components?.header?.components?.layout?.type === 'red'
+    headerType === 'red'
       ? BusinessBasicInformationRed
-      : theme?.business_view?.components?.header?.components?.layout?.type === 'starbucks'
+      : headerType === 'starbucks'
         ? BusinessBasicInformationStarbucks
-        : theme?.business_view?.components?.header?.components?.layout?.type === 'old'
+        : headerType === 'old'
           ? BusinessBasicInformationOld
-          : theme?.business_view?.components?.header?.components?.layout?.type === 'pfchangs'
+          : headerType === 'pfchangs'
             ? BusinessBasicInformationPFChangs
             : BusinessBasicInformation
 
@@ -119,19 +124,7 @@ export const RenderProductsLayout = (props) => {
   }
   const showCartOnProductList = !theme?.business_view?.components?.cart?.hidden
   const hideBusinessNearCity = theme?.business_view?.components?.near_business?.hidden ?? true
-  const headerType = theme?.business_view?.components?.header?.components?.layout?.type
   const categoriesMode = theme?.business_view?.components?.categories?.components?.layout?.type
-
-  const pfChangsCategories = [
-    {
-      name: t('CATERING_MENU', 'Catering Menu'),
-      id: 1
-    },
-    {
-      name: t('TAKEOUT_MENU', 'Takeout Menu'),
-      id: 2
-    }
-  ]
 
   const pfchangsSubcategories = business?.categories?.filter(category => categorySelected?.name === t('CATERING_MENU', 'Catering Menu') ? category?.name?.toLowerCase()?.includes(t('CATERING', 'catering')) : !category?.name?.toLowerCase()?.includes(t('CATERING', 'catering')))?.sort((a, b) => a.rank - b.rank)
 
@@ -153,6 +146,31 @@ export const RenderProductsLayout = (props) => {
   const BusinessLayoutProductsListSkeleton = headerType === 'pfchangs'
     ? ProductListLayoutPFChangs
     : BusinessProductsList
+
+  const handleScrollToTop = () => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }, 300)
+  }
+
+  const handleShowGoTopButton = () => {
+    if (window.scrollY > 500) {
+      setShowGoTopButton(true)
+    } else {
+      setShowGoTopButton(false)
+    }
+  }
+
+  useEffect(() => {
+    if (headerType === 'pfchangs') {
+      window.addEventListener('scroll', handleShowGoTopButton)
+      return () =>
+        window.removeEventListener('scroll', handleShowGoTopButton)
+    }
+  }, [headerType])
 
   return (
     <>
@@ -226,7 +244,7 @@ export const RenderProductsLayout = (props) => {
                                   { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
                                   { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
                                   ...business?.categories.sort((a, b) => a.rank - b.rank)]}
-                          categorySelected={categorySelected}
+                          categorySelected={categorySelected?.id === null && categoriesMode === 'twocategories' ? pfChangsCategories[1] : categorySelected}
                           onClickCategory={onClickCategory}
                           featured={featuredProducts}
                           useKioskApp={useKioskApp}
@@ -312,7 +330,7 @@ export const RenderProductsLayout = (props) => {
                         />
                       </ProfessionalFilterWrapper>
                     )}
-                    {!business?.loading && business?.previously_products?.length > 0 && (
+                    {!business?.loading && business?.previously_products?.length > 0 && headerType !== 'pfchangs' && (
                       <OrderItAgain
                         onProductClick={onProductClick}
                         productList={business?.previously_products}
@@ -503,6 +521,12 @@ export const RenderProductsLayout = (props) => {
               )
             }
           </div>
+          {showGoTopButton && (
+            <BackToTop onClick={() => handleScrollToTop()}>
+              <CaretUpFill />
+              {t('BACK_TO_TOP', 'Back to top')}
+            </BackToTop>
+          )}
         </WrappLayout>
       )}
 

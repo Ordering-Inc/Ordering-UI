@@ -93,7 +93,7 @@ export const ContentInfo = styled.div`
   }
 
   h2 {
-    width: 200px
+    width: 200px;
   }
 
   h2:hover, h4:hover {

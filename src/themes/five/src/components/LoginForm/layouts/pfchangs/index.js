@@ -305,7 +305,7 @@ const LoginFormUI = (props) => {
                   onClick={() => handleChangeOtpType('email')}
                   active={isOtpEmail}
                   borderBottom={isOtpEmail}
-                  activeColor={theme?.colors?.secondaryDark}
+                  activeColor={theme?.colors?.gold}
                 >
                   {t('BY_OTP_EMAIL', 'by Otp Email')}
                 </Tab>
@@ -313,7 +313,7 @@ const LoginFormUI = (props) => {
                   onClick={() => handleChangeOtpType('cellphone')}
                   active={isOtpCellphone}
                   borderBottom={isOtpCellphone}
-                  activeColor={theme?.colors?.secondaryDark}
+                  activeColor={theme?.colors?.gold}
                 >
                   {t('BY_OTP_CELLPHONE', 'by Otp Cellphone')}
                 </Tab>

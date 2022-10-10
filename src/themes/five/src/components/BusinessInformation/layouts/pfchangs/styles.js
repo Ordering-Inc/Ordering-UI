@@ -98,28 +98,27 @@ export const ModalIcon = styled.span`
   height: 30px;
   font-size: 30px;
   cursor: pointer;
-  color: ${props => props.theme?.colors.headingColor};
+  color: #000;
   border-radius: 50%;
-  left: 5px;
+  right: 5px;
   top: 5px;
   z-index: 1;
   ${props => props.theme?.rtl && css`
-    left: 5px;
     right: initial;
+    left: 5px;
   `}
   @media (min-width: 578px){
-    right: 10px;
     ${props => props.theme?.rtl && css`
-    left: 10px;
     right: initial;
+    left: 10px;
   `}
   }
   @media (min-width: 768px){
-    left: 25px;
+    right: 25px;
     top: 30px;
     ${props => props.theme?.rtl && css`
-    right: 25px;
-    left: initial;
+    left: 25px;
+    right: initial;
   `}
   }
 `
@@ -160,6 +159,7 @@ export const BusinessContent = styled.div`
   align-items: center;
   p {
     margin: 5px 0;
+    text-align: center;
   }
 `
 

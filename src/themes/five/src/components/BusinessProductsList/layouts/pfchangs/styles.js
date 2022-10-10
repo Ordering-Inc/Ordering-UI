@@ -1,8 +1,27 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const ProductsContainer = styled.div`
-  background: ${props => props.theme.colors.backgroundPage};
+export const ProductsContainerStyled = styled.div`
+  ${({ bgimage }) => bgimage && css`
+    background-position: center;
+    background-size: contain;
+  `}
 `
+
+export const ProductsContainer = (props) => {
+  const style = {}
+  if (props.bgimage && !props.isClosed) {
+    style.backgroundImage = `url(${props.bgimage})`
+  } else {
+    style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage})`
+  }
+
+  return (
+    <ProductsContainerStyled {...props} style={style}>
+      {props.children}
+    </ProductsContainerStyled>
+  )
+}
 
 export const ErrorMessage = styled.div`
   padding: 20px;
@@ -17,6 +36,10 @@ export const ProductsListing = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: ${({ isSubcategorySearch }) => isSubcategorySearch ? '0px' : '45px'};
+  ${({ theme }) => theme?.business_view?.components?.categories?.components?.layout?.type === 'twocategories' && css`
+    margin-bottom: 0;
+    padding-bottom: 45px;
+  `}
 `
 
 export const WrapAllCategories = styled.div`

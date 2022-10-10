@@ -327,7 +327,9 @@ export const ModalIcon = styled.span`
   height: 30px;
   text-align: center;
   top: 30px;
+  right: 0;
   cursor: pointer;
+  float: right;
   svg {
     width: 30px;
     height: 30px;

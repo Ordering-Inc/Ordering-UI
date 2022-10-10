@@ -44,6 +44,9 @@ export const ModalDialog = styled.div`
         -webkit-animation: slide-out 0.25s forwards; 
       `}
 
+      > h1, > h2 {
+        text-align: center;
+      }
 
       @-webkit-keyframes slide-in {
        100% { width: 25%; min-width: 400px; }
@@ -130,7 +133,7 @@ export const ModalIcon = styled.span`
   font-size: 30px;
   cursor: pointer;
   z-index: 2;
-  ${props => props.theme?.rtl && css`
+  ${props => (props.theme?.rtl || props.theme?.layouts?.general?.components?.layout?.type === 'pfchangs') && css`
     right: 25px;
     left: initial;
   `}

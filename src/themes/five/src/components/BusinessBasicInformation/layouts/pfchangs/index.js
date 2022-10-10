@@ -79,7 +79,7 @@ export const BusinessBasicInformationPFChangs = (props) => {
       </DeliveryPickupContainer>
       <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open} />
       <Modal
-        width='70%'
+        width={window.innerWidth > 1200 ? '50%' : '70%'}
         open={openBusinessInformation}
         onClose={setOpenBusinessInformation}
         padding='0'

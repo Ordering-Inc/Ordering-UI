@@ -84,6 +84,9 @@ export const FormInput = styled.form`
   button {
     margin-top: 10px;
     padding: 5px;
+    background: ${({ theme }) => theme?.colors.gold};
+    color: #000;
+    border-color: ${({ theme }) => theme?.colors.gold};
   }
 
   .phone_number {

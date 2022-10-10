@@ -50,8 +50,10 @@ export const BusinessInformationUI = (props) => {
   const showSchedule = !orderingTheme?.theme?.business_view?.components?.information?.components?.schedule?.hidden
 
   const scheduleFormatted = ({ hour, minute }) => {
+    const AmOrPm = hour >= 12 ? 'pm' : 'am'
+    const _hour = (hour % 12) || 12
     const checkTime = (val) => val < 10 ? `0${val}` : val
-    return `${checkTime(hour)}:${checkTime(minute)}`
+    return `${checkTime(_hour)}:${checkTime(minute)}${AmOrPm}`
   }
 
   const handleGoToHome = () => {

@@ -11,8 +11,7 @@ export const Container = styled.div`
   padding: 20px 10px;
   width: 100%;
   margin: 0 10px 10px 10px;
-  height: 100px;
-  max-height: 100px;
+  min-height: 100px;
   box-sizing: border-box;
   -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -29,14 +28,14 @@ export const Container = styled.div`
   `}
 `
 
-export const Text = styled.div`
+export const Text = styled.p`
   display: flex;
   font-weight: 300;
   color: #000;
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 5px;
-
+  font-size: 14px;
   div {
     overflow: hidden;
     text-overflow: ellipsis;

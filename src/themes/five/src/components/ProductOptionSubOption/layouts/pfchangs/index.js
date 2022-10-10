@@ -42,7 +42,7 @@ const ProductOptionSubOptionUI = (props) => {
   return (
     <Container onClick={() => handleSuboptionClick()} isSelected={state?.selected} disabled={isDisabled}>
       <Text>
-        <div>{suboption?.name}</div>
+        {suboption?.name}
       </Text>
       <SuboptionPrice>
         {price > 0 && (

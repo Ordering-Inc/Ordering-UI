@@ -17,6 +17,7 @@ export const CategoriesContainer = styled.div`
     justify-content: center;
   `}
   width: ${props => props.w ?? '100%'};
+  position: relative;
   ${({ pfchangs }) => !pfchangs && css`
   div.category {
     text-overflow: ellipsis;
@@ -24,6 +25,7 @@ export const CategoriesContainer = styled.div`
     overflow: hidden;
     padding: 10px 0px;
     margin: 0 15px;
+    color: #000;
     &:nth-of-type(1) {
       margin-left: 0;
       ${props => props.theme.rtl && css`
@@ -39,6 +41,8 @@ export const CategoriesContainer = styled.div`
   }
   &.category-lists{
     left: 0;
+    display: flex;
+    justify-content: center;
   }
   @media (min-width: 381px) {
     padding: 15px 0px 0px 0px;
@@ -67,4 +71,14 @@ export const CategoriesWrapper = styled.div`
   ${({ hide }) => hide && css`
     display: none;
   `}
+`
+
+export const Diviver = styled.div`
+  position: absolute;
+  height: 1px;
+  background: #fff;
+  width: calc(100% + 40px);
+  bottom: 50px;
+  z-index: 1000;
+  left: -20px;
 `

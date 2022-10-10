@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../../../components/AutoScroll'
 
-import { CategoriesContainer, CategoriesWrapper, CategoryPFChangs } from './styles'
+import { CategoriesContainer, CategoriesWrapper, CategoryPFChangs, Diviver } from './styles'
 import { Tabs, Tab } from '../../../../styles/Tabs'
 import { Tabs as TabsPF, Tab as TabPF } from '../../../../styles/Tabs/theme/pfchangs'
 import { useTheme } from 'styled-components'
@@ -67,6 +67,7 @@ const BusinessProductsCategoriesUI = (props) => {
       </>
     )
   }
+
   const Category = ({ category, pfchangs }) => {
     return (
       <TabComponent
@@ -132,7 +133,7 @@ const BusinessProductsCategoriesUI = (props) => {
       let style0 = '.sticky-prod-cat {'
       style0 += 'position: fixed !important;'
       style0 += 'top: 80px !important;'
-      style0 += `width: ${subcategoriesLayout ? '100%' : '65.5%'} !important;`
+      style0 += 'width: 100% !important;'
       style0 += '}'
 
       let style1 = '.sticky-prod-cart {'
@@ -146,7 +147,7 @@ const BusinessProductsCategoriesUI = (props) => {
       style2 += 'position: fixed !important;'
       style2 += 'top: 10px !important;'
       style2 += 'right: 32% !important;'
-      style2 += 'height: 50px !important;'
+      style2 += 'height: 70px !important;'
       style2 += 'z-index: 9999 !important;'
       style2 += '}'
 
@@ -174,11 +175,14 @@ const BusinessProductsCategoriesUI = (props) => {
     <>
       <CategoriesWrapper hide={categories?.length === 0}>
         {PFChangsCategoriesLayout ? (
-          <CategoriesContainer pfchangs>
-            <TabsComponent>
-              <ProductCategories pfchangs />
-            </TabsComponent>
-          </CategoriesContainer>
+          <>
+            <CategoriesContainer pfchangs>
+              <TabsComponent>
+                <ProductCategories pfchangs />
+              </TabsComponent>
+            </CategoriesContainer>
+            <Diviver />
+          </>
         ) : (
           <CategoriesContainer
             id='category-lists'

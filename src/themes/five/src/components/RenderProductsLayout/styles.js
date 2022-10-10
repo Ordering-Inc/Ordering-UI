@@ -18,14 +18,18 @@ export const WrapContent = styled.div`
     margin-top: 70px;
   `}
 
+  ${({ theme }) => theme?.business_view?.components?.header?.components?.layout?.type === 'pfchangs' ? css`
+      margin-top: 0;
+  ` : css`
+    &#businessProductList {
+      > div {
+        margin-top: 30px;
+      }
+    }
+  `}
+
   @media (min-width: 576px) {
     padding: 0px;
-  }
-
-  &#businessProductList {
-    > div {
-      margin-top: 30px;
-    }
   }
 `
 
@@ -235,4 +239,21 @@ export const WrapperSearchAbsolute = styled.div`
 
 export const NearBusiness = styled.div`
   width: 100%;
+`
+
+export const BackToTop = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  background: ${({ theme }) => theme.colors.gold};
+  border-radius: 6px;
+  cursor: pointer;
 `
