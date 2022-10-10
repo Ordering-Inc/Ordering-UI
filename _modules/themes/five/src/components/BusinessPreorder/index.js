@@ -1,132 +1,87 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BusinessPreorder = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _orderingComponents = require("ordering-components");
-
 var _reactRouterDom = require("react-router-dom");
-
 var _moment = _interopRequireDefault(require("moment"));
-
 var _styledComponents = require("styled-components");
-
 var _Select = require("../../styles/Select");
-
 var _Buttons = require("../../styles/Buttons");
-
 var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
-
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
 var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
-
 var _BsCaretLeftFill = _interopRequireDefault(require("@meronex/icons/bs/BsCaretLeftFill"));
-
 var _styles = require("./styles");
-
 var _BusinessMenuList = require("../BusinessMenuList");
-
 var _react2 = require("swiper/react");
-
 var _swiper = _interopRequireWildcard(require("swiper"));
-
 require("swiper/swiper-bundle.min.css");
-
 require("swiper/swiper.min.css");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 _swiper.default.use([_swiper.Navigation]);
-
 var BusinessPreorderUI = function BusinessPreorderUI(props) {
   var _configs$dates_moment, _configs$dates_moment2, _configs$preorder_sta, _theme$images, _theme$images$dummies, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _orderState$options, _orderState$options$a;
-
   var business = props.business,
-      handleClick = props.handleClick,
-      datesList = props.datesList,
-      dateSelected = props.dateSelected,
-      timeSelected = props.timeSelected,
-      handleChangeDate = props.handleChangeDate,
-      handleChangeTime = props.handleChangeTime,
-      showButton = props.showButton,
-      isAsap = props.isAsap,
-      handleAsap = props.handleAsap,
-      isProfessional = props.isProfessional,
-      isDisabled = props.isDisabled,
-      maxDays = props.maxDays;
-
+    handleClick = props.handleClick,
+    datesList = props.datesList,
+    dateSelected = props.dateSelected,
+    timeSelected = props.timeSelected,
+    handleChangeDate = props.handleChangeDate,
+    handleChangeTime = props.handleChangeTime,
+    showButton = props.showButton,
+    isAsap = props.isAsap,
+    handleAsap = props.handleAsap,
+    isProfessional = props.isProfessional,
+    isDisabled = props.isDisabled,
+    maxDays = props.maxDays;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
-      pathname = _useLocation.pathname;
-
+    pathname = _useLocation.pathname;
   var _useUtils = (0, _orderingComponents.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      optimizeImage = _useUtils2[0].optimizeImage;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    optimizeImage = _useUtils2[0].optimizeImage;
   var theme = (0, _styledComponents.useTheme)();
-
   var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      orderState = _useOrder2[0];
-
+    _useOrder2 = _slicedToArray(_useOrder, 1),
+    orderState = _useOrder2[0];
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var windowSize = (0, _useWindowSize.useWindowSize)();
-
   var _useState = (0, _react.useState)('business_hours'),
-      _useState2 = _slicedToArray(_useState, 2),
-      type = _useState2[0],
-      setType = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    type = _useState2[0],
+    setType = _useState2[1];
   var _useState3 = (0, _react.useState)(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      menu = _useState4[0],
-      setMenu = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    menu = _useState4[0],
+    setMenu = _useState4[1];
   var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      timeList = _useState6[0],
-      setTimeList = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    timeList = _useState6[0],
+    setTimeList = _useState6[1];
   var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isEnabled = _useState8[0],
-      setIsEnabled = _useState8[1];
-
+    _useState8 = _slicedToArray(_useState7, 2),
+    isEnabled = _useState8[0],
+    setIsEnabled = _useState8[1];
   var is12Hours = configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : (_configs$dates_moment2 = _configs$dates_moment.value) === null || _configs$dates_moment2 === void 0 ? void 0 : _configs$dates_moment2.includes('hh:mm');
   var isPreOrderSetting = (configs === null || configs === void 0 ? void 0 : (_configs$preorder_sta = configs.preorder_status_enabled) === null || _configs$preorder_sta === void 0 ? void 0 : _configs$preorder_sta.value) === '1';
   var preOrderType = [{
@@ -136,23 +91,19 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     value: 'business_hours',
     content: /*#__PURE__*/_react.default.createElement(_styles.TypeContent, null, t('BUSINESS_HOURS', 'Business hours'))
   }];
-
   var goToBusinessPage = function goToBusinessPage() {
     handleClick && handleClick(business);
   };
-
   var validateSelectedDate = function validateSelectedDate(curdate, menu) {
     var day = (0, _moment.default)(curdate).format('d');
     setIsEnabled(menu.schedule[day].enabled || false);
   };
-
   var getTimes = function getTimes(curdate, menu) {
     validateSelectedDate(curdate, menu);
     var date = new Date();
     var dateParts = curdate.split('-');
     var dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     var times = [];
-
     for (var k = 0; k < menu.schedule[dateSeleted.getDay()].lapses.length; k++) {
       var open = {
         hour: menu.schedule[dateSeleted.getDay()].lapses[k].open.hour,
@@ -162,7 +113,6 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
         hour: menu.schedule[dateSeleted.getDay()].lapses[k].close.hour,
         minute: menu.schedule[dateSeleted.getDay()].lapses[k].close.minute
       };
-
       for (var i = open.hour; i <= close.hour; i++) {
         if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
           var hour = '';
@@ -182,7 +132,6 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
               meridian = ' ' + t('PM', 'PM');
             }
           }
-
           for (var j = i === open.hour ? open.minute : 0; j <= (i === close.hour ? close.minute : 59); j += 15) {
             if (i !== date.getHours() || j >= date.getMinutes() || date.getDate() !== dateSeleted.getDate()) {
               times.push({
@@ -194,15 +143,11 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
         }
       }
     }
-
     return times;
   };
-
   (0, _react.useEffect)(function () {
     var selectedMenu = menu ? menu !== null && menu !== void 0 && menu.use_business_schedule ? business : menu : business;
-
     var _times = getTimes(dateSelected, selectedMenu);
-
     setTimeList(_times);
   }, [dateSelected, menu, business]);
   (0, _react.useEffect)(function () {
@@ -253,13 +198,9 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     preventClicksPropagation: false
   }, datesList.slice(0, Number(maxDays || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
     var dateParts = date.split('-');
-
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-
     var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2);
-
     var dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate();
-
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: dayNumber
     }, /*#__PURE__*/_react.default.createElement(_styles.Day, {
@@ -291,29 +232,22 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     }
   })));
 };
-
 var BusinessPreorder = function BusinessPreorder(props) {
   var _configs$max_days_pre4;
-
   var maxDays = props.maxDays;
-
   var _useConfig3 = (0, _orderingComponents.useConfig)(),
-      _useConfig4 = _slicedToArray(_useConfig3, 1),
-      configs = _useConfig4[0].configs;
-
+    _useConfig4 = _slicedToArray(_useConfig3, 1),
+    configs = _useConfig4[0].configs;
   var limitDays = maxDays !== null && maxDays !== void 0 ? maxDays : parseInt(configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre4 = configs.max_days_preorder) === null || _configs$max_days_pre4 === void 0 ? void 0 : _configs$max_days_pre4.value, 10);
   var currentDate = new Date();
   var time = limitDays > 1 ? currentDate.getTime() + (limitDays - 1) * 24 * 60 * 60 * 1000 : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + 6 * 24 * 60 * 60 * 1000;
   currentDate.setTime(time);
   currentDate.setHours(23);
   currentDate.setMinutes(59);
-
   var businessPreorderProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessPreorderUI,
     maxDate: currentDate
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.MomentOption, businessPreorderProps);
 };
-
 exports.BusinessPreorder = BusinessPreorder;

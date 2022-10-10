@@ -843,217 +843,110 @@ Object.defineProperty(exports, "verifyDecimals", {
     return _utils.verifyDecimals;
   }
 });
-
 var _AccordionDropdown = require("./components/AccordionDropdown");
-
 var _AddressDetails = require("./components/AddressDetails");
-
 var _AddressesPopover = require("./components/AddressesPopover");
-
 var _AddressForm = require("./components/AddressForm");
-
 var _AddressList = require("./components/AddressList");
-
 var _AutoScroll = require("./components/AutoScroll");
-
 var _BusinessBasicInformation = require("./components/BusinessBasicInformation");
-
 var _BusinessController = require("./components/BusinessController");
-
 var _BusinessesListing = require("./components/BusinessesListing");
-
 var _BusinessesMap = require("./components/BusinessesMap");
-
 var _BusinessInformation = require("./components/BusinessInformation");
-
 var _BusinessItemAccordion = require("./components/BusinessItemAccordion");
-
 var _BusinessProductsCategories = require("./components/BusinessProductsCategories");
-
 var _groceries = require("./components/BusinessProductsCategories/layouts/groceries");
-
 var _BusinessProductsList = require("./components/BusinessProductsList");
-
 var _groceries2 = require("./components/BusinessProductsList/layouts/groceries");
-
 var _BusinessProductsListing = require("./components/BusinessProductsListing");
-
 var _BusinessReviews = require("./components/BusinessReviews");
-
 var _BusinessTypeFilter = require("./components/BusinessTypeFilter");
-
 var _CardForm = require("./components/CardForm");
-
 var _Cart = require("./components/Cart");
-
 var _CartContent = require("./components/CartContent");
-
 var _CartPopover = require("./components/CartPopover");
-
 var _Checkout = require("./components/Checkout");
-
 var _Cms = require("./components/Cms");
-
 var _Confirm = require("./components/Confirm");
-
 var _CouponControl = require("./components/CouponControl");
-
 var _DriverTips = require("./components/DriverTips");
-
 var _Dropdown = require("./components/Dropdown");
-
 var _FacebookLogin = require("./components/FacebookLogin");
-
 var _FloatingButton = require("./components/FloatingButton");
-
 var _Footer = require("./components/Footer");
-
 var _ForgotPasswordForm = require("./components/ForgotPasswordForm");
-
 var _GoogleGpsButton = require("./components/GoogleGpsButton");
-
 var _Header = require("./components/Header");
-
 var _Help = require("./components/Help");
-
 var _HelpStaticPage = require("./components/HelpStaticPage");
-
 var _HeaderOption = require("./components/HeaderOption");
-
 var _HomeHero = require("./components/HomeHero");
-
 var _HorizontalOrdersLayout = require("./components/HorizontalOrdersLayout");
-
 var _Image = require("./components/Image");
-
 var _InputPhoneNumber = require("./components/InputPhoneNumber");
-
 var _LastOrders = require("./components/LastOrders");
-
 var _LanguageSelector = require("./components/LanguageSelector");
-
 var _LoginForm = require("./components/LoginForm");
-
 var _LogoutButton = require("./components/LogoutButton");
-
 var _Messages = require("./components/Messages");
-
 var _Modal = require("./components/Modal");
-
 var _MomentContent = require("./components/MomentContent");
-
 var _MomentControl = require("./components/MomentControl");
-
 var _MomentPopover = require("./components/MomentPopover");
-
 var _MyOrders = require("./components/MyOrders");
-
 var _NotFoundSource = require("./components/NotFoundSource");
-
 var _NotNetworkConnectivity = require("./components/NotNetworkConnectivity");
-
 var _OrderDetails = require("./components/OrderDetails");
-
 var _OrdersOption = require("./components/OrdersOption");
-
 var _OrderSuccessModal = require("./components/OrderSuccessModal");
-
 var _OrderTypeSelectorHeader = require("./components/OrderTypeSelectorHeader");
-
 var _PageNotFound = require("./components/PageNotFound");
-
 var _PagesList = require("./components/PagesList");
-
 var _PaymentOptionCash = require("./components/PaymentOptionCash");
-
 var _PaymentOptionPaypal = require("./components/PaymentOptionPaypal");
-
 var _PaymentOptions = require("./components/PaymentOptions");
-
 var _PaymentOptionStripe = require("./components/PaymentOptionStripe");
-
 var _PhoneAutocomplete = require("./components/PhoneAutocomplete");
-
 var _ProductForm = require("./components/ProductForm");
-
 var _ProductIngredient = require("./components/ProductIngredient");
-
 var _ProductItemAccordion = require("./components/ProductItemAccordion");
-
 var _ProductOption = require("./components/ProductOption");
-
 var _ProductOptionSubOption = require("./components/ProductOptionSubOption");
-
 var _ProductShare = require("./components/ProductShare");
-
 var _ResetPassword = require("./components/ResetPassword");
-
 var _ReviewOrder = require("./components/ReviewOrder");
-
 var _ReviewProduct = require("./components/ReviewProduct");
-
 var _ReviewDriver = require("./components/ReviewDriver");
-
 var _RenderProductsLayout = require("./components/RenderProductsLayout");
-
 var _SearchBar = require("./components/SearchBar");
-
 var _SidebarMenu = require("./components/SidebarMenu");
-
 var _SignUpForm = require("./components/SignUpForm");
-
 var _SingleProductCard = require("./components/SingleProductCard");
-
 var _SmartAppBanner = require("./components/SmartAppBanner");
-
 var _SpinnerLoader = require("./components/SpinnerLoader");
-
 var _StripeElementsForm = require("./components/StripeElementsForm");
-
 var _StripeRedirectForm = require("./components/StripeRedirectForm");
-
 var _TaxInformation = require("./components/TaxInformation");
-
 var _UpsellingPage = require("./components/UpsellingPage");
-
 var _UserDetails = require("./components/UserDetails");
-
 var _UserFormDetails = require("./components/UserFormDetails");
-
 var _UserPopover = require("./components/UserPopover");
-
 var _UserProfileForm = require("./components/UserProfileForm");
-
 var _VerticalOrdersLayout = require("./components/VerticalOrdersLayout");
-
 var _GoogleLogin = require("./components/GoogleLogin");
-
 var _SmsLogin = require("./components/SmsLogin");
-
 var _AppleLogin = require("./components/AppleLogin");
-
 var _SearchProducts = require("./components/RenderProductsLayout/SearchProducts");
-
 var _ThemeContext = require("./contexts/ThemeContext");
-
 var _useOnlineStatus = require("./hooks/useOnlineStatus");
-
 var _useWindowSize = require("./hooks/useWindowSize");
-
 var _useCountdownTimer = require("./hooks/useCountdownTimer");
-
 var _useIntersectionObserver = require("./hooks/useIntersectionObserver");
-
 var _useIsMounted = require("./hooks/useIsMounted");
-
 var _Buttons = require("./styles/Buttons");
-
 var _Inputs = require("./styles/Inputs");
-
 var _Select = require("./styles/Select");
-
 var _Tabs = require("./styles/Tabs");
-
 var _Toast = require("./styles/Toast");
-
 var _utils = require("./utils");

@@ -1,15 +1,10 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
-
 var _react2 = require("@cypress/react");
-
 var _AddressDetails = require("../components/AddressDetails");
-
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var address = '5th av. New York.';
 describe('Mounting Address details component', function () {
   it('Component UI', function () {
