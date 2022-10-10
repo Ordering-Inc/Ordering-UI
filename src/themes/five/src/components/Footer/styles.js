@@ -1,14 +1,10 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  border-top: 1px solid #d9d9d9;
-  padding: 15px;
-  background: #F8F9FA;
+  display: none;
 
   @media (min-width: 768px) {
-    padding: 30px 40px 30px;
+    display: block;
   }
 `
 

@@ -4,6 +4,7 @@ import FiMap from '@meronex/icons/fi/FiMap'
 import FiFilter from '@meronex/icons/fi/FiFilter'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
 import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
+import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 import {
   useOrder,
   useSession,
@@ -26,9 +27,14 @@ import {
   BusinessCityList,
   CityItem,
   BusinessLogo,
-  BusinessLogosContainer
+  BusinessLogosContainer,
+  BusinessBanner,
+  BusinessFeatures,
+  AddressMenu,
+  FeatureItems,
+  ItemInline
 } from './styles'
-
+import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { Button } from '../../../../styles/Buttons'
 import { NotFoundSource } from '../../../NotFoundSource'
 
@@ -48,6 +54,8 @@ import { BusinessPreorder } from '../../../BusinessPreorder'
 import { OrderProgress } from '../../../OrderProgress'
 
 import Skeleton from 'react-loading-skeleton'
+import { MomentPopover } from '../../../../../../pwa/src/components/MomentPopover'
+import { OrderTypeSelectorHeader } from '../../../../../../../components/OrderTypeSelectorHeader'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -75,10 +83,12 @@ const BusinessesListingUI = (props) => {
   const [orderState, { changeCityFilter }] = useOrder()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
+  const windowSize = useWindowSize()
   const theme = useTheme()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
+  const [openPopover, setOpenPopover] = useState({})
   const [mapErrors, setMapErrors] = useState('')
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
@@ -110,6 +120,20 @@ const BusinessesListingUI = (props) => {
     } else {
       setModals({ ...modals, formOpen: true })
     }
+  }
+
+  const handleTogglePopover = (type) => {
+    setOpenPopover({
+      ...openPopover,
+      [type]: !openPopover[type]
+    })
+  }
+
+  const handleClosePopover = (type) => {
+    setOpenPopover({
+      ...openPopover,
+      [type]: false
+    })
   }
 
   const handleFindBusinesses = () => {
@@ -248,10 +272,34 @@ const BusinessesListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
-        <BusinessHeroImg
-          bgimage={theme.images?.general?.businessHero}
-          height={theme?.business_listing_view?.components?.business_hero?.style?.height}
-        />
+        <BusinessBanner>
+          {windowSize.width < 576 && (
+            <BusinessFeatures>
+              <AddressMenu
+                onClick={() => handleClickAddress()}
+              >
+                <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
+              </AddressMenu>
+              <FeatureItems>
+                <ItemInline>
+                  <OrderTypeSelectorHeader />
+                </ItemInline>
+                <ItemInline>
+                  <MomentPopover
+                    open={openPopover.moment}
+                    onClick={() => handleTogglePopover('moment')}
+                    onClose={() => handleClosePopover('moment')}
+                    isBanner
+                  />
+                </ItemInline>
+              </FeatureItems>
+            </BusinessFeatures>
+          )}
+          <BusinessHeroImg
+            bgimage={theme.images?.general?.businessHero}
+            height={theme?.business_listing_view?.components?.business_hero?.style?.height}
+          />
+        </BusinessBanner>
         <OrderProgressWrapper>
           <OrderProgress
             franchiseId={props.franchiseId}
