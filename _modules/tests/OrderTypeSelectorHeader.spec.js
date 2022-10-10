@@ -1,19 +1,13 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
-
 var _react2 = require("@cypress/react");
-
 var _OrderTypeSelectorHeader = require("../components/OrderTypeSelectorHeader");
-
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var Block = function Block(props) {
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, props.text));
 };
-
 var configTypes = [1, 2, 3];
 var defaultValue = 2;
 var orderTypes = [{
