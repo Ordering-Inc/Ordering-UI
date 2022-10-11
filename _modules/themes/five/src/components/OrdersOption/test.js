@@ -76,7 +76,8 @@ var OrderList = function OrderList(props) {
       businessesSearchList = props.businessesSearchList,
       setIsEmptyBusinesses = props.setIsEmptyBusinesses,
       businessOrderIds = props.businessOrderIds,
-      setBusinessOrderIds = props.setBusinessOrderIds;
+      setBusinessOrderIds = props.setBusinessOrderIds,
+      brandId = props.brandId;
 
   var _useApi = (0, _orderingComponents.useApi)(),
       _useApi2 = _slicedToArray(_useApi, 1),

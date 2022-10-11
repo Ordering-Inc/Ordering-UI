@@ -108,7 +108,8 @@ var Header = function Header(props) {
       location = props.location,
       isShowOrderOptions = props.isShowOrderOptions,
       isHideSignup = props.isHideSignup,
-      isCustomerMode = props.isCustomerMode;
+      isCustomerMode = props.isCustomerMode,
+      franchiseId = props.franchiseId;
 
   var _useLocation = (0, _reactRouterDom.useLocation)(),
       pathname = _useLocation.pathname;
@@ -218,9 +219,9 @@ var Header = function Header(props) {
 
   var isAlsea = ordering.project === 'alsea';
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
-    var _cart$products;
+    var _cart$products, _cart$business;
 
-    return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0;
+    return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && ((cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.franchiseId) === franchiseId || !franchiseId);
   }) || null;
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
@@ -563,6 +564,7 @@ var Header = function Header(props) {
     auth: auth,
     location: location,
     isCustomerMode: isCustomerMode,
+    franchiseId: franchiseId,
     setPreorderBusiness: setPreorderBusiness
   }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "cart",

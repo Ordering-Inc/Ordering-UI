@@ -353,7 +353,7 @@ var CheckoutUI = function CheckoutUI(props) {
     }
   }, [isResetPaymethod]);
   (0, _react.useEffect)(function () {
-    if (uberDirect !== null && uberDirect !== void 0 && uberDirect.amountToHide && !(cart.total <= uberDirect.amountToHide) && (options === null || options === void 0 ? void 0 : options.type) === 1) {
+    if (uberDirect !== null && uberDirect !== void 0 && uberDirect.amountToHide && !((cart === null || cart === void 0 ? void 0 : cart.total) <= uberDirect.amountToHide) && (options === null || options === void 0 ? void 0 : options.type) === 1) {
       setHideCash(true);
       handlePaymethodChange(null);
       setIsResetPaymethod(true);
