@@ -146,6 +146,8 @@ var getTraduction = function getTraduction(key) {
     ERROR_MISSING_PAYMETHOD_HOOK: 'Missing payment method hook',
     INVALID_CODE: 'Invalid verify code',
     ERROR_YOU_HAVE_NOT_CART: 'Cart not found',
+    ERROR_PLACE_GROUP_PAY_WITH_CARD: 'An Error place group pay with card',
+    ERROR_PLACE_GROUP_CART_TOTAL_DIFFERENT: 'Error, place group cart total different',
     ERROR_PLACE_PAY_WITH_REDIRECT: 'An error occurred while trying to pay by redirect',
     ERROR_PLACE_PAY_WITH_CARD1: 'An error occurred while trying to pay by card',
     ERROR_PLACE_PAY_WITH_PAYPAL_CAPTURE: 'An error occurred while trying to pay by PayPal',
