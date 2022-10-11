@@ -7,8 +7,8 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 45px 0 20px;
-  ${({ pfchangs }) => pfchangs && css`
-    color: #fff;,
+  ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
+    color: #fff;
     margin: 20px 0;
   `}
 
@@ -46,6 +46,9 @@ export const HeaderInfo = styled.div`
   h1, p {
     margin: 0;
     color: ${props => props.theme.colors.darkTextColor};
+    ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
+      color: #fff;
+    `}
   }
 
   h1 {
@@ -144,6 +147,9 @@ export const BusinessInfo = styled.div`
     margin: 0;
     color: ${props => props.theme.colors.darkTextColor};
     overflow-wrap: anywhere;
+    ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
+      color: #fff;
+    `}
   }
 
   h2 {
@@ -193,6 +199,9 @@ export const OrderInfo = styled.div`
   h1, p {
     margin: 0px;
     color: ${props => props.theme.colors.darkTextColor};
+    ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
+      color: #fff;
+    `}
   }
   h1 {
     margin-bottom: 5px;

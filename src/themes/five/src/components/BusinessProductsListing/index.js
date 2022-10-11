@@ -14,7 +14,6 @@ import {
   useUtils,
   useSession,
   useSite,
-  useOrderingTheme,
   BusinessAndProductList
 } from 'ordering-components'
 import {
@@ -90,7 +89,6 @@ const BusinessProductsListingUI = (props) => {
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [{ site }] = useSite()
-  const [orderingTheme] = useOrderingTheme()
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
@@ -102,7 +100,7 @@ const BusinessProductsListingUI = (props) => {
   const [openBottomToast, setOpenBottomToast] = useState(false)
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
-  const showViewOrderButton = !orderingTheme?.theme?.business_view?.components?.order_view_button?.hidden
+  const showViewOrderButton = !theme?.business_view?.components?.order_view_button?.hidden
   const sortByOptions = [
     { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
     { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },

@@ -273,7 +273,7 @@ const CheckoutUI = (props) => {
   }, [isResetPaymethod])
 
   useEffect(() => {
-    if (uberDirect?.amountToHide && !(cart.total <= uberDirect.amountToHide) && options?.type === 1) {
+    if (uberDirect?.amountToHide && !(cart?.total <= uberDirect.amountToHide) && options?.type === 1) {
       setHideCash(true)
       handlePaymethodChange(null)
       setIsResetPaymethod(true)

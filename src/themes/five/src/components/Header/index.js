@@ -55,7 +55,8 @@ export const Header = (props) => {
     location,
     isShowOrderOptions,
     isHideSignup,
-    isCustomerMode
+    isCustomerMode,
+    franchiseId
   } = props
 
   const { pathname } = useLocation()
@@ -84,7 +85,7 @@ export const Header = (props) => {
   const [isFarAway, setIsFarAway] = useState(false)
   const isAlsea = ordering.project === 'alsea'
 
-  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
+  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.franchiseId === franchiseId || !franchiseId))) || null
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
@@ -442,6 +443,7 @@ export const Header = (props) => {
                             auth={auth}
                             location={location}
                             isCustomerMode={isCustomerMode}
+                            franchiseId={franchiseId}
                             setPreorderBusiness={setPreorderBusiness}
                           />
                         ) : (
