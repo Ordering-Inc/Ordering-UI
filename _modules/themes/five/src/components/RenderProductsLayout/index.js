@@ -280,7 +280,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),
-    categorySelected: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === null && categoriesMode === 'twocategories' ? pfChangsCategories[1] : categorySelected,
+    categorySelected: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === null && categoriesMode === 'twocategories' ? pfChangsCategories[0] : categorySelected,
     onClickCategory: onClickCategory,
     featured: featuredProducts,
     useKioskApp: useKioskApp,
