@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react'
-import { useLanguage, useEvent } from 'ordering-components'
-// import { Input } from '../../styles/Inputs'
+import { useLanguage, useEvent, useConfig } from 'ordering-components'
 import { SearchBar } from '../SearchBar'
 import { useTheme } from 'styled-components'
 import { BusinessProductsList } from '../BusinessProductsList'
+import { BusinessProductsList as ProductListLayoutGroceries } from '../BusinessProductsList/layouts/groceries'
 
 import {
   Container,
@@ -16,6 +16,8 @@ import {
   BusinessProductsListContainer,
   BusinessProductsListWrapper
 } from './styles'
+
+const layoutOne = 'groceries'
 
 export const SearchProducts = (props) => {
   const {
@@ -30,12 +32,23 @@ export const SearchProducts = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [events] = useEvent()
+  const [{ configs }] = useConfig()
   const searchRef = useRef()
+
+  const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1')
+  const frontLayout = business?.front_layout
+  const businessLayout = {
+    layoutOne: frontLayout === layoutOne && isUseParentCategory
+  }
 
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
     document.body.style.overflowY = 'auto'
   }
+
+  const BusinessLayoutProductsList = businessLayout.layoutOne
+    ? ProductListLayoutGroceries
+    : BusinessProductsList
 
   useEffect(() => {
     searchRef?.current?.focus && searchRef.current.focus()
@@ -70,7 +83,7 @@ export const SearchProducts = (props) => {
       {searchValue && (
         <BusinessProductsListContainer>
           <BusinessProductsListWrapper>
-            <BusinessProductsList
+            <BusinessLayoutProductsList
               {...props}
               categories={[
                 { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
