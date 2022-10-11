@@ -244,7 +244,7 @@ export const RenderProductsLayout = (props) => {
                                   { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
                                   { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
                                   ...business?.categories.sort((a, b) => a.rank - b.rank)]}
-                          categorySelected={categorySelected?.id === null && categoriesMode === 'twocategories' ? pfChangsCategories[1] : categorySelected}
+                          categorySelected={categorySelected?.id === null && categoriesMode === 'twocategories' ? pfChangsCategories[0] : categorySelected}
                           onClickCategory={onClickCategory}
                           featured={featuredProducts}
                           useKioskApp={useKioskApp}
