@@ -37,7 +37,6 @@ export const HeaderItem = styled.div`
   }
 
   ${({ theme, isOpen }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
-    border: 1px solid #fff;
     svg, .menu-list {
       color: ${isOpen ? '#000' : '#fff'};
     }

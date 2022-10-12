@@ -128,6 +128,7 @@ export const BusinessItemAccordion = (props) => {
             >
               <BusinessInfo>
                 <ContentInfo className='info' isStore={isStore}>
+                  <h3>{t('ORDERING_FROM', 'Ordering from')}:</h3>
                   <h2 onClick={(e) => handleGoToStore(e, business?.slug)}>{business?.name}</h2>
                   {(business?.cellphone || business?.phone) && (
                     <h3>{business?.cellphone || business?.phone}</h3>

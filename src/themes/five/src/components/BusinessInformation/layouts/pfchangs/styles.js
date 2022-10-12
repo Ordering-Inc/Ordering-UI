@@ -47,7 +47,7 @@ export const ScheduleContainer = styled.div`
   width: 100%;
 
   @media (min-width: 576px) {
-    width: 200px;
+    width: 300px;
   }
 `
 
@@ -58,7 +58,7 @@ export const ScheduleBlock = styled.div`
   justify-content: space-between;
 
   h4 {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     line-height: 24px;
     color: ${props => props.theme.colors.darkTextColor};
@@ -128,7 +128,7 @@ export const Description = styled.p`
 `
 
 export const BusinessTitle = styled.h2`
-  font-weight: 600;
+  font-weight: 400;
   font-size: 24px;
   color: ${props => props.theme.colors.darkTextColor};
   text-align: center;
@@ -158,7 +158,7 @@ export const BusinessContent = styled.div`
   flex-direction: column;
   align-items: center;
   p {
-    margin: 5px 0;
+    margin: 5px 20px;
     text-align: center;
   }
 `

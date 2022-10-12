@@ -204,3 +204,8 @@ export const PriceContainer = styled.div`
     height: 20px;
   }
 `
+
+export const Quantity = styled.div`
+  font-size: 12px;
+  margin-left: 10px;
+`

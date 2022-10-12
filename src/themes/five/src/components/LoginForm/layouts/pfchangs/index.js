@@ -302,20 +302,20 @@ const LoginFormUI = (props) => {
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 <Tab
-                  onClick={() => handleChangeOtpType('email')}
-                  active={isOtpEmail}
-                  borderBottom={isOtpEmail}
-                  activeColor={theme?.colors?.gold}
-                >
-                  {t('BY_OTP_EMAIL', 'by Otp Email')}
-                </Tab>
-                <Tab
                   onClick={() => handleChangeOtpType('cellphone')}
                   active={isOtpCellphone}
                   borderBottom={isOtpCellphone}
                   activeColor={theme?.colors?.gold}
                 >
                   {t('BY_OTP_CELLPHONE', 'by Otp Cellphone')}
+                </Tab>
+                <Tab
+                  onClick={() => handleChangeOtpType('email')}
+                  active={isOtpEmail}
+                  borderBottom={isOtpEmail}
+                  activeColor={theme?.colors?.gold}
+                >
+                  {t('BY_OTP_EMAIL', 'by Otp Email')}
                 </Tab>
               </Tabs>
             </LoginWith>
@@ -545,6 +545,7 @@ export const LoginForm = (props) => {
     useLoginByCellphone: isKioskApp ? null : props.useLoginByCellphone,
     elementLinkToSignup: isKioskApp ? null : props.elementLinkToSignup,
     isDisableButtons: isKioskApp ? true : props.isDisableButtons,
+    isPFChangsLayout: true,
     UIComponent: LoginFormUI
   }
   return <LoginFormController {...loginControllerProps} />

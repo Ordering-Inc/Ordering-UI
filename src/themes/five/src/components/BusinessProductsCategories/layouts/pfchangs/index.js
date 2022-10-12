@@ -84,6 +84,7 @@ const BusinessProductsCategoriesUI = (props) => {
         pfchangs={pfchangs}
         activeColor={theme.colors?.gold}
         color={theme.colors?.gold}
+        hover={subcategoriesLayout}
       >
         {category.name}
       </TabComponent>

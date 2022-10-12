@@ -7,7 +7,8 @@ import {
   PopoverArrow,
   TitleContainer,
   Title,
-  CartLength
+  CartLength,
+  CloseButton
 } from './styles'
 
 import { useOrder, useEvent, useLanguage, useOrderingTheme } from 'ordering-components'
@@ -157,7 +158,9 @@ export const CartPopover = (props) => {
           >
             <TitleContainer>
               {isCartButtonPF ? (
-                <AiOutlineClose onClick={props.onClose} />
+                <CloseButton onClick={props.onClose}>
+                  <AiOutlineClose />
+                </CloseButton>
               ) : (
                 <>
                   <Title>{t('MY_CART', 'My cart')}</Title>

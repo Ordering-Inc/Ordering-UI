@@ -40,9 +40,9 @@ export const CategoriesContainer = styled.div`
     `}
   }
   &.category-lists{
-    left: 0;
     display: flex;
     justify-content: center;
+    width: 102%;
   }
   @media (min-width: 381px) {
     padding: 15px 0px 0px 0px;
@@ -74,11 +74,10 @@ export const CategoriesWrapper = styled.div`
 `
 
 export const Diviver = styled.div`
-  position: absolute;
+  position: relative;
   height: 1px;
   background: #fff;
   width: calc(100% + 40px);
-  bottom: 50px;
-  z-index: 1000;
+  z-index: 1;
   left: -20px;
 `

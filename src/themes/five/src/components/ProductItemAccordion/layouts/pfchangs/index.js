@@ -13,7 +13,8 @@ import {
   ProductOptionsList,
   ProductOptionsContainer,
   ProductTitle,
-  PriceContainer
+  PriceContainer,
+  Quantity
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -59,7 +60,6 @@ export const ProductItemAccordion = (props) => {
         <ContentInfo>
           <ProductTitle readOnlyMode={readOnlyMode}>
             <div>
-              {product?.quantity}
               <h3
                 onClick={() => onEditProduct(product)}
               >
@@ -76,6 +76,9 @@ export const ProductItemAccordion = (props) => {
               )}
             </PriceContainer>
           </ProductTitle>
+          <Quantity>
+            {t('QUANTITY', 'Quantity')}: {product?.quantity}
+          </Quantity>
           <ProductOptionsContainer>
             {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
               <ProductOptionsList>

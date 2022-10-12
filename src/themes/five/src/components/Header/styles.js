@@ -80,6 +80,10 @@ export const Menu = styled.div`
   display: flex;
   align-items: center;
 
+  ${({ theme }) => theme?.layouts?.header?.components?.layout?.type === 'pfchangs' && css`
+    flex-direction: row-reverse;
+  `}
+
   #select-input {
     border-radius: 7.6px;
     

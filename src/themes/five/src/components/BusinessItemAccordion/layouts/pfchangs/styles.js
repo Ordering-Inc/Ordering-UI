@@ -108,6 +108,11 @@ export const ContentInfo = styled.div`
     margin: 0;
   }
 
+  h3{
+    font-size: 14px;
+    margin: 0;
+  }
+
   h4{
     text-decoration: underline;
     margin: 0;

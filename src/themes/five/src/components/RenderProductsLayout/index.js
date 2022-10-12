@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
-import { Cart3, CaretUpFill } from 'react-bootstrap-icons'
-
+import { Cart3 } from 'react-bootstrap-icons'
+import EnChevronThinUp from '@meronex/icons/en/EnChevronThinUp';
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
 import { BusinessBasicInformation as BusinessBasicInformationStarbucks } from '../../../../six'
@@ -523,7 +523,7 @@ export const RenderProductsLayout = (props) => {
           </div>
           {showGoTopButton && (
             <BackToTop onClick={() => handleScrollToTop()}>
-              <CaretUpFill />
+              <EnChevronThinUp />
               {t('BACK_TO_TOP', 'Back to top')}
             </BackToTop>
           )}
