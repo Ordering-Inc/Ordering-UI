@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CategoriesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 100;\n  position: sticky;\n  top: 0;\n  text-align: center;\n  text-transform: uppercase;\n  font-weight: bold;\n  ", "\n  width: ", ";\n  position: relative;\n  ", "\n  div.special {\n    ", "\n  }\n  &.category-lists{\n    left: 0;\n    display: flex;\n    justify-content: center;\n  }\n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  }\n  @media (min-width: 992px) {\n    width: ", ";\n  }\n"])), function (props) {
+var CategoriesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 100;\n  position: sticky;\n  top: 0;\n  text-align: center;\n  text-transform: uppercase;\n  font-weight: bold;\n  ", "\n  width: ", ";\n  position: relative;\n  ", "\n  div.special {\n    ", "\n  }\n  &.category-lists{\n    display: flex;\n    justify-content: center;\n    width: 102%;\n  }\n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  }\n  @media (min-width: 992px) {\n    width: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (_ref) {
   var subcategoriesLayout = _ref.subcategoriesLayout;
@@ -61,6 +61,6 @@ var CategoriesWrapper = _styledComponents.default.div(_templateObject9 || (_temp
 
 exports.CategoriesWrapper = CategoriesWrapper;
 
-var Diviver = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: absolute;\n  height: 1px;\n  background: #fff;\n  width: calc(100% + 40px);\n  bottom: 50px;\n  z-index: 1000;\n  left: -20px;\n"])));
+var Diviver = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  height: 1px;\n  background: #fff;\n  width: calc(100% + 40px);\n  z-index: 1;\n  left: -20px;\n"])));
 
 exports.Diviver = Diviver;

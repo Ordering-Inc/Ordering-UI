@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperPlaceOrderButton = exports.WrapperLeftContent = exports.WrapperLeftContainer = exports.WrapperActionsInput = exports.WarningText = exports.WarningMessage = exports.WalletPaymentOptionContainer = exports.UserDetailsContainer = exports.TitleContainer = exports.SubtitleContainer = exports.SelectSpotContainer = exports.PaymentMethodContainer = exports.NotFoundImage = exports.MasterCardCoupon = exports.ItemHeader = exports.GoToMenu = exports.DriverTipDivider = exports.DriverTipContainer = exports.DeliveryOptionsContainer = exports.Container = exports.CheckOutDivider = exports.CartsList = exports.CartHeader = exports.CartContainer = exports.BusinessDetailsContainer = exports.BusinessDetails = void 0;
+exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperPlaceOrderButton = exports.WrapperLeftContent = exports.WrapperLeftContainer = exports.WrapperActionsInput = exports.WarningText = exports.WarningMessage = exports.WalletPaymentOptionContainer = exports.UserDetailsContainer = exports.TitleContainer = exports.SubtitleContainer = exports.SelectSpotContainer = exports.PaymentMethodContainer = exports.NotFoundImage = exports.MasterCardCoupon = exports.ItemHeader = exports.GoToMenu = exports.DriverTipDivider = exports.DriverTipContainer = exports.DeliveryOptionsContainer = exports.Container = exports.CheckOutDivider = exports.CartsList = exports.CartHeader = exports.CartContainer = exports.BusinessDetailsContainer = exports.BusinessDetails = exports.BackIcon = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -203,6 +203,15 @@ var MasterCardCoupon = _styledComponents.default.div(_templateObject42 || (_temp
 
 exports.MasterCardCoupon = MasterCardCoupon;
 
-var GoToMenu = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  position: fixed;\n  z-index: 10000;\n  top: 0;\n  left: 200px;\n  transform: translateY(30%);\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  p {\n    font-size: 14px;\n  }\n  svg {\n    margin-right: 10px;\n    width: 20px;\n    height: 20px;\n  }\n  @media (min-width: 768px) {\n    left: 230px;\n    transform: translateY(40%);\n    p {\n     font-size: 16px;\n    }\n    svg {\n      width: 22px;\n      height: 22px;\n    }\n  }\n"])));
+var GoToMenu = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  position: fixed;\n  z-index: 10000;\n  top: 0;\n  left: 200px;\n  transform: translateY(30%);\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  p {\n    font-size: 14px;\n  }\n  svg {\n    margin-right: 10px;\n    width: 20px;\n    height: 20px;\n  }\n  @media (min-width: 768px) {\n    left: 230px;\n    transform: translateY(100%);\n    p {\n      margin: 0;\n      font-size: 16px;\n    }\n    svg {\n      width: 22px;\n      height: 22px;\n      position: relative;\n      top: 4px;\n    }\n  }\n"])));
 
 exports.GoToMenu = GoToMenu;
+
+var BackIcon = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  * {\n    color: ", ";\n  }\n"])), function (_ref15) {
+  var _theme$colors;
+
+  var theme = _ref15.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
+});
+
+exports.BackIcon = BackIcon;

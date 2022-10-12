@@ -96,7 +96,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTitle, {
     readOnlyMode: readOnlyMode
-  }, /*#__PURE__*/_react.default.createElement("div", null, product === null || product === void 0 ? void 0 : product.quantity, /*#__PURE__*/_react.default.createElement("h3", {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
     onClick: function onClick() {
       return onEditProduct(product);
     }
@@ -105,7 +105,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       return onDeleteProduct(product);
     },
     disabled: orderState.loading
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsContainer, null, productInfo().ingredients.length > 0 && productInfo().ingredients.some(function (ingredient) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Quantity, null, t('QUANTITY', 'Quantity'), ": ", product === null || product === void 0 ? void 0 : product.quantity), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsContainer, null, productInfo().ingredients.length > 0 && productInfo().ingredients.some(function (ingredient) {
     return !ingredient.selected;
   }) && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('INGREDIENTS', 'Ingredients'), ":", ' ', productInfo().ingredients.map(function (ingredient) {
     return !ingredient.selected && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

@@ -173,7 +173,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
     className: "info",
     isStore: isStore
-  }, /*#__PURE__*/_react.default.createElement("h2", {
+  }, /*#__PURE__*/_react.default.createElement("h3", null, t('ORDERING_FROM', 'Ordering from'), ":"), /*#__PURE__*/_react.default.createElement("h2", {
     onClick: function onClick(e) {
       return handleGoToStore(e, business === null || business === void 0 ? void 0 : business.slug);
     }

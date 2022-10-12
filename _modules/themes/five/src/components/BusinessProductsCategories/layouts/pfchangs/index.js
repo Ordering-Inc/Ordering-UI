@@ -121,7 +121,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       borderBottom: true,
       pfchangs: pfchangs,
       activeColor: (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold,
-      color: (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold
+      color: (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold,
+      hover: subcategoriesLayout
     }, category.name);
   };
 

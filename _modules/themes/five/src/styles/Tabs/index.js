@@ -9,7 +9,7 @@ exports.Tabs = exports.Tab = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -26,21 +26,38 @@ var Tabs = _styledComponents.default.div(_templateObject || (_templateObject = _
 
 exports.Tabs = Tabs;
 
-var Tab = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  cursor: pointer;\n  ", "\n\n  ", "\n"])), function (_ref2) {
-  var active = _ref2.active;
-  return active && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    ", "\n    color: ", ";\n  "])), function (_ref3) {
-    var borderBottom = _ref3.borderBottom;
-    return borderBottom && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid ", ";\n    "])), function (_ref4) {
-      var activeColor = _ref4.activeColor;
+var Tab = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (_ref2) {
+  var hover = _ref2.hover;
+  return hover && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border: 1px solid transparent;\n    @keyframes hoverTab {\n      from { \n        color: ", ";\n      }\n      to { \n        color: ", ";\n      }\n    }\n    \n    &:hover{\n      animation-name: hoverTab;\n      animation-duration: 1s;\n      color: ", ";\n      ", "\n    }\n  "])), function (props) {
+    return props.theme.colors.darkGray;
+  }, function (_ref3) {
+    var activeColor = _ref3.activeColor;
+    return activeColor || '';
+  }, function (_ref4) {
+    var activeColor = _ref4.activeColor;
+    return activeColor || '';
+  }, function (_ref5) {
+    var borderBottom = _ref5.borderBottom;
+    return borderBottom && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        border-bottom: 1px solid ", ";\n      "])), function (_ref6) {
+      var activeColor = _ref6.activeColor;
       return activeColor || '';
     });
-  }, function (_ref5) {
-    var activeColor = _ref5.activeColor;
+  });
+}, function (_ref7) {
+  var active = _ref7.active;
+  return active && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    ", "\n    color: ", ";\n  "])), function (_ref8) {
+    var borderBottom = _ref8.borderBottom;
+    return borderBottom && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid ", ";\n    "])), function (_ref9) {
+      var activeColor = _ref9.activeColor;
+      return activeColor || '';
+    });
+  }, function (_ref10) {
+    var activeColor = _ref10.activeColor;
     return activeColor || '';
   });
-}, function (_ref6) {
-  var active = _ref6.active;
-  return !active && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+}, function (_ref11) {
+  var active = _ref11.active;
+  return !active && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.darkGray;
   });
 });

@@ -62,7 +62,8 @@ var LoginForm = function LoginForm(props) {
       handleCustomLogin = props.handleCustomLogin,
       notificationState = props.notificationState,
       setOtpDataUser = props.setOtpDataUser,
-      handleOpenSignup = props.handleOpenSignup;
+      handleOpenSignup = props.handleOpenSignup,
+      isPFChangsLayout = props.isPFChangsLayout;
 
   var _useApi = (0, _orderingComponents.useApi)(),
       _useApi2 = _slicedToArray(_useApi, 1),
@@ -139,7 +140,7 @@ var LoginForm = function LoginForm(props) {
       loginTab = _useState14[0],
       setLoginTab = _useState14[1];
 
-  var _useState15 = (0, _react.useState)(!useLoginOtpEmail && useLoginOtpCellphone ? 'cellphone' : 'email'),
+  var _useState15 = (0, _react.useState)(!useLoginOtpEmail && useLoginOtpCellphone || isPFChangsLayout ? 'cellphone' : 'email'),
       _useState16 = _slicedToArray(_useState15, 2),
       otpType = _useState16[0],
       setOtpType = _useState16[1];

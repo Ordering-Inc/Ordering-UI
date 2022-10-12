@@ -43,11 +43,11 @@ var ScheduleSection = _styledComponents.default.div(_templateObject6 || (_templa
 
 exports.ScheduleSection = ScheduleSection;
 
-var ScheduleContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  @media (min-width: 576px) {\n    width: 200px;\n  }\n"])));
+var ScheduleContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  @media (min-width: 576px) {\n    width: 300px;\n  }\n"])));
 
 exports.ScheduleContainer = ScheduleContainer;
 
-var ScheduleBlock = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 16px;\n  align-items: center;\n  justify-content: space-between;\n\n  h4 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    color: ", ";\n    margin: 0;\n    margin-right: 3px;\n  }\n\n  p {\n    font-size: 14px;\n    margin: 0;\n    color: ", ";\n\n    &.close {\n      color: #E63757;\n      margin-right: 20px;\n      ", "\n    }\n  }\n\n  > div {\n    display: flex;\n    align-items: center;\n\n    > div {\n      margin: 0 5px;\n    }\n  }\n"])), function (props) {
+var ScheduleBlock = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 16px;\n  align-items: center;\n  justify-content: space-between;\n\n  h4 {\n    font-weight: 400;\n    font-size: 16px;\n    line-height: 24px;\n    color: ", ";\n    margin: 0;\n    margin-right: 3px;\n  }\n\n  p {\n    font-size: 14px;\n    margin: 0;\n    color: ", ";\n\n    &.close {\n      color: #E63757;\n      margin-right: 20px;\n      ", "\n    }\n  }\n\n  > div {\n    display: flex;\n    align-items: center;\n\n    > div {\n      margin: 0 5px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   return props.theme.colors.darkTextColor;
@@ -79,7 +79,7 @@ var Description = _styledComponents.default.p(_templateObject14 || (_templateObj
 
 exports.Description = Description;
 
-var BusinessTitle = _styledComponents.default.h2(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  text-align: center;\n  margin-top: 0;\n  margin-bottom: 36px;\n\n  ", "\n"])), function (props) {
+var BusinessTitle = _styledComponents.default.h2(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  font-weight: 400;\n  font-size: 24px;\n  color: ", ";\n  text-align: center;\n  margin-top: 0;\n  margin-bottom: 36px;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (props) {
   var _props$theme6;
@@ -93,7 +93,7 @@ var Divider = _styledComponents.default.div(_templateObject17 || (_templateObjec
 
 exports.Divider = Divider;
 
-var BusinessContent = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  p {\n    margin: 5px 0;\n    text-align: center;\n  }\n"])));
+var BusinessContent = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  p {\n    margin: 5px 20px;\n    text-align: center;\n  }\n"])));
 
 exports.BusinessContent = BusinessContent;
 

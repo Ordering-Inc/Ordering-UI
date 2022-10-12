@@ -440,19 +440,19 @@ var LoginFormUI = function LoginFormUI(props) {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
-      return handleChangeOtpType('email');
-    },
-    active: isOtpEmail,
-    borderBottom: isOtpEmail,
-    activeColor: theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold
-  }, t('BY_OTP_EMAIL', 'by Otp Email')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
-    onClick: function onClick() {
       return handleChangeOtpType('cellphone');
     },
     active: isOtpCellphone,
     borderBottom: isOtpCellphone,
+    activeColor: theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold
+  }, t('BY_OTP_CELLPHONE', 'by Otp Cellphone')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return handleChangeOtpType('email');
+    },
+    active: isOtpEmail,
+    borderBottom: isOtpEmail,
     activeColor: theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold
-  }, t('BY_OTP_CELLPHONE', 'by Otp Cellphone')))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, t('BY_OTP_EMAIL', 'by Otp Email')))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup
   }, (useLoginByEmail && loginTab === 'email' || loginTab === 'otp' && otpType === 'email') && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors = formMethods.errors) === null || _formMethods$errors === void 0 ? void 0 : (_formMethods$errors$e = _formMethods$errors.email) === null || _formMethods$errors$e === void 0 ? void 0 : _formMethods$errors$e.type) === 'required' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors2 = formMethods.errors) === null || _formMethods$errors2 === void 0 ? void 0 : (_formMethods$errors2$ = _formMethods$errors2.email) === null || _formMethods$errors2$ === void 0 ? void 0 : _formMethods$errors2$.message, " *"), ((_formMethods$errors3 = formMethods.errors) === null || _formMethods$errors3 === void 0 ? void 0 : (_formMethods$errors3$ = _formMethods$errors3.email) === null || _formMethods$errors3$ === void 0 ? void 0 : _formMethods$errors3$.type) === 'pattern' && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
@@ -571,6 +571,7 @@ var LoginForm = function LoginForm(props) {
     useLoginByCellphone: isKioskApp ? null : props.useLoginByCellphone,
     elementLinkToSignup: isKioskApp ? null : props.elementLinkToSignup,
     isDisableButtons: isKioskApp ? true : props.isDisableButtons,
+    isPFChangsLayout: true,
     UIComponent: LoginFormUI
   });
 

@@ -27,6 +27,8 @@ var _reactRouterDom = require("react-router-dom");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
+var _EnChevronWithCircleLeft = _interopRequireDefault(require("@meronex/icons/en/EnChevronWithCircleLeft"));
+
 var _styles = require("./styles");
 
 var _Buttons = require("../../styles/Buttons");
@@ -382,9 +384,9 @@ var CheckoutUI = function CheckoutUI(props) {
 
       return handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.slug);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeftCircle, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BackIcon, null, /*#__PURE__*/_react.default.createElement(_EnChevronWithCircleLeft.default, {
     color: theme.colors.primary
-  }), /*#__PURE__*/_react.default.createElement("p", null, t('MENU', 'Menu'))), /*#__PURE__*/_react.default.createElement(_styles.SubtitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('YOUR_INFORMATION', 'Your Information')))), !useKioskApp ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessDetails !== null && businessDetails !== void 0 && businessDetails.loading || cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
+  })), /*#__PURE__*/_react.default.createElement("p", null, t('MENU', 'Menu'))), /*#__PURE__*/_react.default.createElement(_styles.SubtitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('YOUR_INFORMATION', 'Your Information')))), !useKioskApp ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessDetails !== null && businessDetails !== void 0 && businessDetails.loading || cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: '100%',
       marginBottom: '20px'

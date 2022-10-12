@@ -34,7 +34,7 @@ var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObje
 
   var theme = _ref3.theme,
       isOpen = _ref3.isOpen;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$general = theme.general) === null || _theme$general === void 0 ? void 0 : (_theme$general$compon = _theme$general.components) === null || _theme$general$compon === void 0 ? void 0 : (_theme$general$compon2 = _theme$general$compon.layout) === null || _theme$general$compon2 === void 0 ? void 0 : _theme$general$compon2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border: 1px solid #fff;\n    svg, .menu-list {\n      color: ", ";\n    }\n  "])), isOpen ? '#000' : '#fff');
+  return (theme === null || theme === void 0 ? void 0 : (_theme$general = theme.general) === null || _theme$general === void 0 ? void 0 : (_theme$general$compon = _theme$general.components) === null || _theme$general$compon === void 0 ? void 0 : (_theme$general$compon2 = _theme$general$compon.layout) === null || _theme$general$compon2 === void 0 ? void 0 : _theme$general$compon2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    svg, .menu-list {\n      color: ", ";\n    }\n  "])), isOpen ? '#000' : '#fff');
 });
 
 exports.HeaderItem = HeaderItem;

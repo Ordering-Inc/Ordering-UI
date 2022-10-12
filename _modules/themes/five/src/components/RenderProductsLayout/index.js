@@ -17,6 +17,8 @@ var _CgSearch = _interopRequireDefault(require("@meronex/icons/cg/CgSearch"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
+var _EnChevronThinUp = _interopRequireDefault(require("@meronex/icons/en/EnChevronThinUp"));
+
 var _BusinessBasicInformation = require("../BusinessBasicInformation");
 
 var _seven = require("../../../../seven");
@@ -494,7 +496,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     onClick: function onClick() {
       return handleScrollToTop();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretUpFill, null), t('BACK_TO_TOP', 'Back to top'))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && !useKioskApp && /*#__PURE__*/_react.default.createElement(BusinessBasicInformationComponent, {
+  }, /*#__PURE__*/_react.default.createElement(_EnChevronThinUp.default, null), t('BACK_TO_TOP', 'Back to top'))), isLoading && !isError && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomLayout && !useKioskApp && /*#__PURE__*/_react.default.createElement(BusinessBasicInformationComponent, {
     isSkeleton: true,
     handler: handler,
     businessState: {

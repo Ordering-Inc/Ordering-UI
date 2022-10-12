@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TitleContainer = exports.Title = exports.PopoverBody = exports.PopoverArrow = exports.HeaderItem = exports.CartLength = void 0;
+exports.TitleContainer = exports.Title = exports.PopoverBody = exports.PopoverArrow = exports.HeaderItem = exports.CloseButton = exports.CartLength = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -61,3 +61,7 @@ exports.TitleContainer = TitleContainer;
 var CartLength = _styledComponents.default.span(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  color: #000;\n  background: #fff;\n  border-radius: 50%;\n  margin-left: 5px;\n  width: 20px;\n  height: 20px;\n  p{\n    margin: 0;\n    position: relative;\n    font-size: 12px;\n    bottom: 3px;\n  }\n"])));
 
 exports.CartLength = CartLength;
+
+var CloseButton = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 50px;\n  height: 50px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  box-shadow: 1px 0px 8px 2px #ccc;\n"])));
+
+exports.CloseButton = CloseButton;
