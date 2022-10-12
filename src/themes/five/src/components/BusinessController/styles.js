@@ -449,6 +449,14 @@ export const RibbonBox = styled.div`
   ${({ isCapsule }) => isCapsule && css`
     border-radius: 50px;
   `}
+
+  ${({ colorText }) => colorText && css`
+    color: ${colorText};
+  `}
+
+  ${({ borderRibbon }) => borderRibbon && css`
+    border: 1px solid ${borderRibbon};
+  `}
 `
 
 export const FavoriteWrapper = styled.div`
