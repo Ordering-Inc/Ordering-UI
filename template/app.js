@@ -243,8 +243,9 @@ export const App = () => {
   }
 
   const closeReviewOrder = () => {
-    if (!lastOrderReview?.reviewed?.isProductReviewed) setLastOrderReview({ ...lastOrderReview, reviewStatus: { order: false, product: true, driver: false } })
-    else if (lastOrderReview?.order?.driver && !lastOrderReview?.order?.user_review && !lastOrderReview?.reviewed?.isDriverReviewed) setLastOrderReview({ ...lastOrderReview, reviewStatus: { order: false, product: false, driver: true } })
+    const enableProduct = lastOrderReview?.order?.products.some(product => !product?.deleted)
+    if (!lastOrderReview?.reviewed?.isProductReviewed && enableProduct) setLastOrderReview({ ...lastOrderReview, reviewStatus: { order: false, product: true, driver: false } })
+    else if ((lastOrderReview?.order?.driver || enableProduct) && !lastOrderReview?.order?.user_review && !lastOrderReview?.reviewed?.isDriverReviewed) setLastOrderReview({ ...lastOrderReview, reviewStatus: { order: false, product: false, driver: true } })
     else handleCloseReivew()
   }
 
