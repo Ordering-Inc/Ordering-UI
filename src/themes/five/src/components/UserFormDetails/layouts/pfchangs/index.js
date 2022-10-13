@@ -69,7 +69,7 @@ export const UserFormDetailsUI = (props) => {
   const user = userData || userSession
 
   const showCustomerCellphone = !orderingTheme?.theme?.profile?.components?.cellphone?.hidden
-  const showCustomerPassword = !orderingTheme?.theme?.profile?.components?.password?.hidden
+  const showCustomerPassword = !theme?.profile?.components?.password?.hidden
   const showCustomerPromotions = !orderingTheme?.theme?.profile?.components?.promotions?.hidden
   const showLangauges = !orderingTheme?.theme?.profile?.components?.languages?.hidden
 
