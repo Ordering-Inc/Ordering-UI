@@ -77,6 +77,7 @@ export const OrderBusiness = styled.div`
   ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
     border: 1px solid #fff;
     padding: 30px;
+    background: ${props => props.theme.colors.primaryContrast};
   `}
 
   @media (min-width: 769px) {
@@ -142,13 +143,12 @@ export const BusinessInfo = styled.div`
   margin-right: 0;
   margin-top: 10px;
 
-  h1,
-  p {
+  div, h1, h2, h3, p, span, td {
     margin: 0;
     color: ${props => props.theme.colors.darkTextColor};
     overflow-wrap: anywhere;
     ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
-      color: #fff;
+      color: ${props => props.theme.colors.secundaryContrast + '!important'};
     `}
   }
 
@@ -196,11 +196,12 @@ export const OrderInfo = styled.div`
   width: 100%;
   margin: 0px 0px 35px;
   position: relative;
+  background: ${props => props.theme.colors.primaryContrast};
   h1, p {
     margin: 0px;
     color: ${props => props.theme.colors.darkTextColor};
     ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
-      color: #fff;
+      color: ${props => props.theme.colors.secundaryContrast};
     `}
   }
   h1 {
@@ -304,6 +305,7 @@ export const OrderCustomer = styled(BusinessInfo)`
   margin-bottom: 30px;
 
   ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
+    background: ${props => props.theme.colors.primaryContrast};
     border: 1px solid #fff;
     padding: 30px;
   `}
