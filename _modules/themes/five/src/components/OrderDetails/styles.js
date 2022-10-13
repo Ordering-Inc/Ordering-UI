@@ -57,7 +57,9 @@ var OrderBusiness = _styledComponents.default.div(_templateObject8 || (_template
   var _theme$layouts, _theme$layouts$confir, _theme$layouts$confir2, _theme$layouts$confir3;
 
   var theme = _ref3.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$confir = _theme$layouts.confirmation) === null || _theme$layouts$confir === void 0 ? void 0 : (_theme$layouts$confir2 = _theme$layouts$confir.components) === null || _theme$layouts$confir2 === void 0 ? void 0 : (_theme$layouts$confir3 = _theme$layouts$confir2.layout) === null || _theme$layouts$confir3 === void 0 ? void 0 : _theme$layouts$confir3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    border: 1px solid #fff;\n    padding: 30px;\n  "])));
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$confir = _theme$layouts.confirmation) === null || _theme$layouts$confir === void 0 ? void 0 : (_theme$layouts$confir2 = _theme$layouts$confir.components) === null || _theme$layouts$confir2 === void 0 ? void 0 : (_theme$layouts$confir3 = _theme$layouts$confir2.layout) === null || _theme$layouts$confir3 === void 0 ? void 0 : _theme$layouts$confir3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    border: 1px solid #fff;\n    padding: 30px;\n    background: ", ";\n  "])), function (props) {
+    return props.theme.colors.primaryContrast;
+  });
 });
 
 exports.OrderBusiness = OrderBusiness;
@@ -82,13 +84,15 @@ var BtsOrderStatus = _styledComponents.default.div(_templateObject13 || (_templa
 
 exports.BtsOrderStatus = BtsOrderStatus;
 
-var BusinessInfo = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  margin-right: 0;\n  margin-top: 10px;\n\n  h1,\n  p {\n    margin: 0;\n    color: ", ";\n    overflow-wrap: anywhere;\n    ", "\n  }\n\n  h2 {\n    font-weight: 500;\n    font-size: 18px;\n    margin: 0px 0px 5px 0px;\n  }\n  p {\n    font-size: 14px;\n    margin-bottom: 5px;\n  }\n\n  @media (min-width: 400px) {\n    margin-right: 15px;\n    margin-top: 0;\n  }\n"])), function (props) {
+var BusinessInfo = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  margin-right: 0;\n  margin-top: 10px;\n\n  div, h1, h2, h3, p, span, td {\n    margin: 0;\n    color: ", ";\n    overflow-wrap: anywhere;\n    ", "\n  }\n\n  h2 {\n    font-weight: 500;\n    font-size: 18px;\n    margin: 0px 0px 5px 0px;\n  }\n  p {\n    font-size: 14px;\n    margin-bottom: 5px;\n  }\n\n  @media (min-width: 400px) {\n    margin-right: 15px;\n    margin-top: 0;\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 }, function (_ref4) {
   var _theme$confirmation3, _theme$confirmation3$, _theme$confirmation3$2;
 
   var theme = _ref4.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$confirmation3 = theme.confirmation) === null || _theme$confirmation3 === void 0 ? void 0 : (_theme$confirmation3$ = _theme$confirmation3.components) === null || _theme$confirmation3$ === void 0 ? void 0 : (_theme$confirmation3$2 = _theme$confirmation3$.layout) === null || _theme$confirmation3$2 === void 0 ? void 0 : _theme$confirmation3$2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      color: #fff;\n    "])));
+  return (theme === null || theme === void 0 ? void 0 : (_theme$confirmation3 = theme.confirmation) === null || _theme$confirmation3 === void 0 ? void 0 : (_theme$confirmation3$ = _theme$confirmation3.components) === null || _theme$confirmation3$ === void 0 ? void 0 : (_theme$confirmation3$2 = _theme$confirmation3$.layout) === null || _theme$confirmation3$2 === void 0 ? void 0 : _theme$confirmation3$2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), function (props) {
+    return props.theme.colors.secundaryContrast + '!important';
+  });
 });
 
 exports.BusinessInfo = BusinessInfo;
@@ -101,13 +105,17 @@ var ActionsBlock = _styledComponents.default.div(_templateObject16 || (_template
 
 exports.ActionsBlock = ActionsBlock;
 
-var OrderInfo = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px 0px 35px;\n  position: relative;\n  h1, p {\n    margin: 0px;\n    color: ", ";\n    ", "\n  }\n  h1 {\n    margin-bottom: 5px;\n    font-weight: 600;\n    font-size: 32px;\n  }\n  p {\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n  }\n\n  .date {\n    margin-bottom: 6px;\n  }\n\n  .types {\n    margin-bottom: 6px;\n    font-size: 16px;\n  }\n\n  .order-status {\n    font-weight: 600;\n    font-size: 16px;\n  }\n\n    \n  ", "\n"])), function (props) {
+var OrderInfo = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px 0px 35px;\n  position: relative;\n  background: ", ";\n  h1, p {\n    margin: 0px;\n    color: ", ";\n    ", "\n  }\n  h1 {\n    margin-bottom: 5px;\n    font-weight: 600;\n    font-size: 32px;\n  }\n  p {\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    white-space: nowrap;\n  }\n\n  .date {\n    margin-bottom: 6px;\n  }\n\n  .types {\n    margin-bottom: 6px;\n    font-size: 16px;\n  }\n\n  .order-status {\n    font-weight: 600;\n    font-size: 16px;\n  }\n\n    \n  ", "\n"])), function (props) {
+  return props.theme.colors.primaryContrast;
+}, function (props) {
   return props.theme.colors.darkTextColor;
 }, function (_ref5) {
   var _theme$confirmation4, _theme$confirmation4$, _theme$confirmation4$2;
 
   var theme = _ref5.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$confirmation4 = theme.confirmation) === null || _theme$confirmation4 === void 0 ? void 0 : (_theme$confirmation4$ = _theme$confirmation4.components) === null || _theme$confirmation4$ === void 0 ? void 0 : (_theme$confirmation4$2 = _theme$confirmation4$.layout) === null || _theme$confirmation4$2 === void 0 ? void 0 : _theme$confirmation4$2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n      color: #fff;\n    "])));
+  return (theme === null || theme === void 0 ? void 0 : (_theme$confirmation4 = theme.confirmation) === null || _theme$confirmation4 === void 0 ? void 0 : (_theme$confirmation4$ = _theme$confirmation4.components) === null || _theme$confirmation4$ === void 0 ? void 0 : (_theme$confirmation4$2 = _theme$confirmation4$.layout) === null || _theme$confirmation4$2 === void 0 ? void 0 : _theme$confirmation4$2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), function (props) {
+    return props.theme.colors.secundaryContrast;
+  });
 }, function (_ref6) {
   var _theme$layouts2, _theme$layouts2$confi, _theme$layouts2$confi2, _theme$layouts2$confi3;
 
@@ -160,7 +168,9 @@ var OrderCustomer = (0, _styledComponents.default)(BusinessInfo)(_templateObject
   var _theme$layouts3, _theme$layouts3$confi, _theme$layouts3$confi2, _theme$layouts3$confi3;
 
   var theme = _ref9.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$confi = _theme$layouts3.confirmation) === null || _theme$layouts3$confi === void 0 ? void 0 : (_theme$layouts3$confi2 = _theme$layouts3$confi.components) === null || _theme$layouts3$confi2 === void 0 ? void 0 : (_theme$layouts3$confi3 = _theme$layouts3$confi2.layout) === null || _theme$layouts3$confi3 === void 0 ? void 0 : _theme$layouts3$confi3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    border: 1px solid #fff;\n    padding: 30px;\n  "])));
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$confi = _theme$layouts3.confirmation) === null || _theme$layouts3$confi === void 0 ? void 0 : (_theme$layouts3$confi2 = _theme$layouts3$confi.components) === null || _theme$layouts3$confi2 === void 0 ? void 0 : (_theme$layouts3$confi3 = _theme$layouts3$confi2.layout) === null || _theme$layouts3$confi3 === void 0 ? void 0 : _theme$layouts3$confi3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    background: ", ";\n    border: 1px solid #fff;\n    padding: 30px;\n  "])), function (props) {
+    return props.theme.colors.primaryContrast;
+  });
 });
 exports.OrderCustomer = OrderCustomer;
 
