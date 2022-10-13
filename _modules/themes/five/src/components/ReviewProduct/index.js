@@ -220,7 +220,7 @@ var ReviewProductUI = function ReviewProductUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.ReviewProductContainer, {
     onSubmit: handleSubmit(onSubmit)
   }, (order === null || order === void 0 ? void 0 : order.products) && order.products.length > 0 && order.products.map(function (product, i) {
-    return /*#__PURE__*/_react.default.createElement(SingleProductReview, _extends({}, props, {
+    return !(product !== null && product !== void 0 && product.deleted) && /*#__PURE__*/_react.default.createElement(SingleProductReview, _extends({}, props, {
       key: i,
       product: product
     }));
