@@ -101,11 +101,7 @@ export const SignUpApproval = (props) => {
           </Button>
         </ActionGroup>
         {(approvalType === 'automatic' && userType === 'business') && (
-<<<<<<< HEAD
           <ContactSection>{t('CONTACT_US_QUESTIONS', 'If you have some questions do no hestitate to contact us at ')} <a className='green-text' href={`mailto:${t('SIGNUP_DRIVER_EMAIL', contactEmail)}`}>{t('SIGNUP_DRIVER_EMAIL', contactEmail)}</a></ContactSection>
-=======
-          <ContactSection>{t('CONTACT_US_QUESTIONS', 'If you have some questions do no hestitate to contact us at ')} <a className='green-text' href={`mailto:${t('SIGNUP_DRIVER_EMAIL', contactEmail)}`}>{contactEmail}</a></ContactSection>
->>>>>>> master
         )}
       </FooterSection>
     </Container>
