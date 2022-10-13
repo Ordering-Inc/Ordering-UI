@@ -387,3 +387,29 @@ export const ProductOptionsList = styled.ul`
 export const ProductQuantity = styled.span`
   margin: 0 5px;
 `
+
+export const ScheduleInfoWrapper = styled.div`
+  width: calc(100% - 65px);
+  box-sizing: border-box;
+  h3 {
+    margin: 0px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  padding-left: 10px;
+  ${props => props.theme.rtl && css`
+    padding-left: 0px;
+    padding-right: 10px;
+  `}
+`
+
+export const ScheduleInfo = styled.div`
+  span {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: ${props => props.theme.colors.darkGray};
+  }
+`
