@@ -300,14 +300,16 @@ const BusinessesListingUI = (props) => {
             height={theme?.business_listing_view?.components?.business_hero?.style?.height}
           />
         </BusinessBanner>
-        <OrderProgressWrapper>
-          <OrderProgress
-            franchiseId={props.franchiseId}
-            userCustomerId={userCustomer?.id}
-            asDashboard={isCustomerMode}
-            isCustomerMode={isCustomerMode}
-          />
-        </OrderProgressWrapper>
+        {!!Object.values(orderState?.carts)?.length && (
+          <OrderProgressWrapper>
+            <OrderProgress
+              franchiseId={props.franchiseId}
+              userCustomerId={userCustomer?.id}
+              asDashboard={isCustomerMode}
+              isCustomerMode={isCustomerMode}
+            />
+          </OrderProgressWrapper>
+        )}
         {isCustomerMode && (
           <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />
         )}
@@ -461,11 +463,6 @@ const BusinessesListingUI = (props) => {
                 />
               ))
             )}
-            {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
-              businessesList.error.map((e, i) => (
-                <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
-              ))
-            )}
           </BusinessList>
         </>
         <Modal
@@ -561,6 +558,5 @@ export const OriginalBusinessesListing = (props) => {
     UIComponent: BusinessesListingUI,
     paginationSettings: { initialPage: 1, pageSize: 25, controlType: 'infinity' }
   }
-
   return <BusinessListController {...businessListingProps} />
 }

@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { Button } from '../../styles/Buttons'
 
@@ -156,3 +157,45 @@ export const ButtonCustomized = styled(Button)`
     color: white;
   `}
 `
+export const WrapperProductLogo = styled.div`
+  width: 124px;
+  height: 124px;
+  min-height: 124px;
+  max-width: 124px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 7.6px;
+  margin: 0 auto;
+`
+
+const ProductLogoStyled = styled.div`
+  display: flex;
+  width: 124px;
+  height: 124px;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  min-height: 124px;
+  border-radius: 7.6px;
+
+  @media (min-width: 481px){
+    width: 100%;
+    height: 100%;
+    min-height: 124px;
+  }
+`
+
+export const ProductLogo = (props) => {
+  const style = {}
+  if (props.bgimage) {
+    style.backgroundImage = `url(${props.bgimage})`
+  }
+
+  return (
+    <ProductLogoStyled {...props} style={style}>
+      {props.children}
+    </ProductLogoStyled>
+  )
+}

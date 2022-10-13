@@ -13,7 +13,9 @@ import {
   AdditionCommentsWrapper,
   AddCommentHideShow,
   Comments,
-  CommentsList
+  CommentsList,
+  WrapperProductLogo,
+  ProductLogo,
 } from './styles'
 import AiOutlineLike from '@meronex/icons/ai/AiOutlineLike'
 import AiOutlineDislike from '@meronex/icons/ai/AiOutlineDislike'
@@ -89,7 +91,12 @@ const SingleProductReview = (props) => {
 
   return (
     <SingleProductReviewContainer>
-      <HandReviewWrapper>
+        {(product?.images || theme.images?.dummies?.businessLogo) && (
+          <WrapperProductLogo>
+                  <ProductLogo bgimage={product?.images || theme.images?.dummies?.businessLogo} />
+          </WrapperProductLogo>
+        )}
+        <HandReviewWrapper>
         <p>{product?.name}</p>
         <HandReviewContent>
           <HandIconWrapper onClick={() => setIsLike(true)} active={isLike}>
@@ -201,7 +208,7 @@ const ReviewProductUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ReviewProductContainer onSubmit={handleSubmit(onSubmit)}>
-        {order?.products && order.products.length > 0 && order.products.map((product, i) => (
+        {order?.products && order.products.length > 0 && order.products.map((product, i) => !product?.deleted && (
           <SingleProductReview
             {...props}
             key={i}
