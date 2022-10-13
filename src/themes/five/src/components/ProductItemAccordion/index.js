@@ -25,7 +25,9 @@ import {
   ProductSelect,
   ProductOptionsList,
   ProductQuantity,
-  ProductSelectWrapper
+  ProductSelectWrapper,
+  ScheduleInfoWrapper,
+  ScheduleInfo
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -44,7 +46,7 @@ export const ProductItemAccordion = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const [{ parsePrice }] = useUtils()
+  const [{ parsePrice, parseDate }] = useUtils()
   const windowSize = useWindowSize()
   const [orderingTheme] = useOrderingTheme()
   const [setActive, setActiveState] = useState('')
@@ -122,61 +124,73 @@ export const ProductItemAccordion = (props) => {
                 <ProductImage bgimage={product?.images} />
               </WrapperProductImage>
             )}
-            {isCartProduct && !isCartPending && getProductMax ? (
-              <ProductSelectWrapper>
-                <IosArrowDown />
-                <ProductSelect
-                  ref={productSelect}
-                  value={product.quantity}
-                  isCheckout={isCheckout}
-                  onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-                >
-                  {[...Array(getProductMax(product) + 1)].map((v, i) => (
-                    <option
-                      key={i}
-                      value={i}
-                      disabled={offsetDisabled(product) < i && i !== 0}
-                    >
-                      {i === 0 ? t('REMOVE', 'Remove') : i}
-                    </option>
-                  ))}
-                </ProductSelect>
-              </ProductSelectWrapper>
+            {product?.calendar_event ? (
+              <ScheduleInfoWrapper>
+                <h3>{product.name}</h3>
+                <ScheduleInfo>
+                  <span>{parseDate(product?.calendar_event?.start, { outputFormat: 'hh:mm a' })} - {parseDate(product?.calendar_event?.end, { outputFormat: 'hh:mm a' })}</span>
+                </ScheduleInfo>
+              </ScheduleInfoWrapper>
             ) : (
-              <ProductQuantity>
-                {product?.quantity}
-              </ProductQuantity>
+              <>
+                {isCartProduct && !isCartPending && getProductMax ? (
+                  <ProductSelectWrapper>
+                    <IosArrowDown />
+                    <ProductSelect
+                      ref={productSelect}
+                      value={product.quantity}
+                      isCheckout={isCheckout}
+                      onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+                    >
+                      {[...Array(getProductMax(product) + 1)].map((v, i) => (
+                        <option
+                          key={i}
+                          value={i}
+                          disabled={offsetDisabled(product) < i && i !== 0}
+                        >
+                          {i === 0 ? t('REMOVE', 'Remove') : i}
+                        </option>
+                      ))}
+                    </ProductSelect>
+                  </ProductSelectWrapper>
+                ) : (
+                  <ProductQuantity>
+                    {product?.quantity}
+                  </ProductQuantity>
+                )}
+
+                <ContentInfo>
+                  <div>
+                    <h3>{product.name}</h3>
+                    {
+                      product?.comment && (
+                        <p>{product?.comment}</p>
+                      )
+                    }
+                  </div>
+                  {windowSize.width <= 410 && (
+                    <span>
+                      <p>{parsePrice(product.total || product.price)}</p>
+                      {isCartProduct && !isCartPending && (
+                        <div>
+                          {onEditProduct && (
+                            <span ref={productActionsEdit}>
+                              <Pencil color='#B1BCCC' onClick={() => onEditProduct(product)} />
+                            </span>
+                          )}
+                          {onDeleteProduct && (
+                            <span ref={productActionsDelete}>
+                              <Trash color='#B1BCCC' onClick={() => onDeleteProduct(product)} />
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </span>
+                  )}
+                </ContentInfo>
+              </>
             )}
 
-            <ContentInfo>
-              <div>
-                <h3>{product.name}</h3>
-                {
-                  product?.comment && (
-                    <p>{product?.comment}</p>
-                  )
-                }
-              </div>
-              {windowSize.width <= 410 && (
-                <span>
-                  <p>{parsePrice(product.total || product.price)}</p>
-                  {isCartProduct && !isCartPending && (
-                    <div>
-                      {onEditProduct && (
-                        <span ref={productActionsEdit}>
-                          <Pencil color='#B1BCCC' onClick={() => onEditProduct(product)} />
-                        </span>
-                      )}
-                      {onDeleteProduct && (
-                        <span ref={productActionsDelete}>
-                          <Trash color='#B1BCCC' onClick={() => onDeleteProduct(product)} />
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </span>
-              )}
-            </ContentInfo>
           </ProductInfo>
 
           {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
