@@ -80,7 +80,7 @@ export const DriverTipMessage = styled.p`
 export const WrapperTips = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
 
