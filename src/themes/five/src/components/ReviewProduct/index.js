@@ -201,7 +201,7 @@ const ReviewProductUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ReviewProductContainer onSubmit={handleSubmit(onSubmit)}>
-        {order?.products && order.products.length > 0 && order.products.map((product, i) => (
+        {order?.products && order.products.length > 0 && order.products.map((product, i) => !product?.deleted && (
           <SingleProductReview
             {...props}
             key={i}
