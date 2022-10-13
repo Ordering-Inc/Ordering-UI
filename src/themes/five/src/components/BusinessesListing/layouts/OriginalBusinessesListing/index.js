@@ -300,7 +300,7 @@ const BusinessesListingUI = (props) => {
             height={theme?.business_listing_view?.components?.business_hero?.style?.height}
           />
         </BusinessBanner>
-        {Object.values(orderState?.carts)?.length && (
+        {!!Object.values(orderState?.carts)?.length && (
           <OrderProgressWrapper>
             <OrderProgress
               franchiseId={props.franchiseId}
@@ -463,11 +463,6 @@ const BusinessesListingUI = (props) => {
                 />
               ))
             )}
-            {/* {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
-              businessesList.error.map((e, i) => (
-                <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
-              ))
-            )} */}
           </BusinessList>
         </>
         <Modal

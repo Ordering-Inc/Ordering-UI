@@ -91,11 +91,11 @@ const SingleProductReview = (props) => {
 
   return (
     <SingleProductReviewContainer>
-        <WrapperProductLogo>
-          {(product?.images || theme.images?.dummies?.businessLogo) && (
-                <ProductLogo bgimage={product?.images || theme.images?.dummies?.businessLogo} />
-              )}
-        </WrapperProductLogo>
+        {(product?.images || theme.images?.dummies?.businessLogo) && (
+          <WrapperProductLogo>
+                  <ProductLogo bgimage={product?.images || theme.images?.dummies?.businessLogo} />
+          </WrapperProductLogo>
+        )}
         <HandReviewWrapper>
         <p>{product?.name}</p>
         <HandReviewContent>

@@ -8,7 +8,7 @@ import { Modal } from '../Modal'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
-import { convertHoursToMinutes, shape } from '../../../../../utils'
+import { convertHoursToMinutes, LightenDarkenColor, shape } from '../../../../../utils'
 
 import {
   ContainerCard,
@@ -132,15 +132,6 @@ const BusinessControllerUI = (props) => {
     )
   }
 
-  const getContrast = (ribbonColor) => {
-    let hexa = [...ribbonColor]
-    let count = 0
-    for(let i = 1; i < hexa.length; i++){
-        if(hexa[i] === "f") count++
-      }
-      return count >= 2 ? theme.colors.primary : "#ffffff" 
-  }
-
   return (
     <>
       <ContainerCard
@@ -154,8 +145,8 @@ const BusinessControllerUI = (props) => {
           {business?.ribbon?.enabled && (
             <RibbonBox
               bgColor={business?.ribbon?.color}
-              colorText={getContrast(business?.ribbon?.color)}
-              borderRibbon={getContrast(business?.ribbon?.color) !== theme.colors.primary ? "" : theme.colors.primary}
+              colorText={LightenDarkenColor(business?.ribbon?.color, -200)}
+              borderRibbon={LightenDarkenColor(business?.ribbon?.color, -200)}
               isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}
               isCapsule={business?.ribbon?.shape === shape?.capsuleShape}
             >
