@@ -2088,9 +2088,9 @@
     tslib "^2.4.0"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.43.2"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.43.2.tgz#fd64bbbc8c97239629719be8ef5a541e2ba5ff0f"
-  integrity sha512-Gz+CfIQF5jWZ7Ec4LExy/oSf0tPZReBurVx7MR5eqUX3cKTXyNnEgDRK34X3xPf+tWrfa9oA4Xxs+mqQBGqVhg==
+  version "1.44.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.44.0.tgz#09d004dfe1f83c563c1b2a5d401ef72addbfd093"
+  integrity sha512-88h+zFtcrj3HiiUZ8Y+mkWCO+AmvUSTSmnii3ayWe1vBGrZ2OxMG9UDuj5PEmsErGM0c+KRyyGlO+anF4M01iw==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics-core" "1.1.0"
@@ -10105,9 +10105,9 @@ regenerator-runtime@^0.12.0:
   integrity sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==
 
 regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
-  version "0.13.9"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
-  integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
+  version "0.13.10"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.10.tgz#ed07b19616bcbec5da6274ebc75ae95634bfc2ee"
+  integrity sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==
 
 regenerator-transform@^0.15.0:
   version "0.15.0"
@@ -10687,9 +10687,9 @@ shebang-regex@^3.0.0:
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
 shell-quote@^1.4.2, shell-quote@^1.6.1:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.3.tgz#aa40edac170445b9a431e17bb62c0b881b9c4123"
-  integrity sha512-Vpfqwm4EnqGdlsBFNmHhxhElJYrdfcxPThu+ryKS5J8L/fhAwLazFZtq+S+TWZ9ANj2piSQLGj6NQg+lKPmxrw==
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.4.tgz#33fe15dee71ab2a81fcbd3a52106c5cfb9fb75d8"
+  integrity sha512-8o/QEhSSRb1a5i7TFR0iM4G16Z0vYB2OQVs4G3aAFXjn3T6yEx8AZxy1PgDF7I00LZHYA3WxaSYIf5e5sAX8Rw==
 
 shelljs@^0.8.5:
   version "0.8.5"

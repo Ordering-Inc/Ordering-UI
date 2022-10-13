@@ -63,12 +63,12 @@ var SignUpApproval = function SignUpApproval(props) {
   }, t('YOUR_STORE_UNDER_APPROVAL', 'Your store is under approval'))), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('FEEL_FREE_CONTACT_US', 'feel free to contact us at '), " ", /*#__PURE__*/_react.default.createElement("a", {
     className: "green-text",
     href: "mailto:".concat(t('SIGNUP_DRIVER_EMAIL', contactEmail))
-  }, contactEmail))) : /*#__PURE__*/_react.default.createElement(_styles.DescriptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Description, null, /*#__PURE__*/_react.default.createElement("span", {
+  }, t('SIGNUP_DRIVER_EMAIL', contactEmail)))) : /*#__PURE__*/_react.default.createElement(_styles.DescriptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Description, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "bigger"
   }, t('REQUEST_TO_START_UNDER_APPROVAL', 'Your request to start as a driver is under approval.'))), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('FEEL_FREE_CONTACT_US', 'feel free to contact us at '), " ", /*#__PURE__*/_react.default.createElement("a", {
     className: "green-text",
     href: "mailto:".concat(t('SIGNUP_DRIVER_EMAIL', contactEmail))
-  }, contactEmail)))), /*#__PURE__*/_react.default.createElement(_styles.FooterSection, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('SIGNUP_DRIVER_EMAIL', contactEmail))))), /*#__PURE__*/_react.default.createElement(_styles.FooterSection, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     type: "button",
@@ -84,6 +84,6 @@ var SignUpApproval = function SignUpApproval(props) {
   }, t('ACCEPT', 'Accept'))), approvalType === 'automatic' && userType === 'business' && /*#__PURE__*/_react.default.createElement(_styles.ContactSection, null, t('CONTACT_US_QUESTIONS', 'If you have some questions do no hestitate to contact us at '), " ", /*#__PURE__*/_react.default.createElement("a", {
     className: "green-text",
     href: "mailto:".concat(t('SIGNUP_DRIVER_EMAIL', contactEmail))
-  }, contactEmail))));
+  }, t('SIGNUP_DRIVER_EMAIL', contactEmail)))));
 };
 exports.SignUpApproval = SignUpApproval;
