@@ -12,7 +12,7 @@ export const NavigationBarContainer = styled.div`
   left: 0px;
   width: 100%;
   box-sizing: border-box;
-  z-index: 100;
+  z-index: 1005;
 `
 
 export const NavigationLink = styled.div`
