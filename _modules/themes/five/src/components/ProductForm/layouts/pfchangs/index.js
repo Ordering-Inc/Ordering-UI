@@ -523,18 +523,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }, t('QTY', 'QTY'), "."), /*#__PURE__*/_react.default.createElement(_AiFillMinusCircle.default, {
     onClick: decrement,
     className: "".concat(productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : '')
-  }), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    className: "qty",
-    value: (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) || '',
-    onChange: function onChange(e) {
-      return onChangeProductCartQuantity(parseInt(e.target.value));
-    },
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    }
-  }), /*#__PURE__*/_react.default.createElement(_AiFillPlusCircle.default, {
+  }), /*#__PURE__*/_react.default.createElement("p", {
+    className: "qtyval"
+  }, productCart === null || productCart === void 0 ? void 0 : productCart.quantity), /*#__PURE__*/_react.default.createElement(_AiFillPlusCircle.default, {
     onClick: increment,
     className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
   })))), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

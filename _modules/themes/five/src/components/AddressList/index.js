@@ -304,7 +304,8 @@ var AddressListUI = function AddressListUI(props) {
       onSaveAddress: handleSaveAddress,
       userCustomerSetup: userCustomerSetup
     }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
-      id: "list"
+      id: "list",
+      isProfile: isProfile
     }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), uniqueAddressesList.map(function (address) {
       return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
         key: address === null || address === void 0 ? void 0 : address.id,

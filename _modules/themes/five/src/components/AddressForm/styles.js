@@ -23,12 +23,18 @@ var FormActions = _styledComponents.default.div(_templateObject || (_templateObj
 
 exports.FormActions = FormActions;
 
-var FormControl = _styledComponents.default.form(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n\n  input {\n    box-sizing: border-box;\n    margin: 10px 0px;\n    height: 43px;\n    width: 100%;\n    &.internal_number,\n    &.zipcode {\n      flex: auto;\n    }\n    &::placeholder{\n      color: #CBCBCB\n    }\n  }\n\n  textarea {\n    width: 100%;\n    margin: 10px 0;\n    border-radius: 7.6px;\n  }\n\n  .input-autocomplete {\n    width: 100%;\n    background: #FFF;\n    border: 1px solid #BBB;\n    border-radius: 30px;\n    font-size: 16px;\n    padding: 7px 15px;\n    outline: none;\n    ::placeholder {\n      color: #DBDCDB;\n    }\n\n    &:-ms-input-placeholder {\n      color: #DBDCDB;\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      color: #DBDCDB;\n    }\n    &:focus {\n      border-color: ", ";\n    }\n  }\n\n  .google-control {\n    .gps-button {\n      border-radius: 7.6px;\n    }\n\n    input {\n      border-radius: 7.6px;\n      border: 1px solid ", ";\n\n      &:focus {\n        border: 1px solid ", ";\n      }\n    }\n  }\n\n  .internal_number {\n    width: 45%;\n    ", "\n  }\n\n  .zipcode {\n    width: 45%;\n  }\n\n  @media (min-width: 481px) {\n    padding: 10px;\n  }\n"])), function () {
+var FormControl = _styledComponents.default.form(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n\n  input {\n    box-sizing: border-box;\n    margin: 10px 0px;\n    height: 43px;\n    width: 100%;\n    border: 1px solid ", ";\n    &.internal_number,\n    &.zipcode {\n      flex: auto;\n    }\n    &::placeholder{\n      color: #959895\n    }\n  }\n\n  textarea {\n    width: 100%;\n    margin: 10px 0;\n    border-radius: 7.6px;\n    border: 1px solid ", ";\n    &::placeholder{\n      color: #959895\n    }\n  }\n\n  .input-autocomplete {\n    width: 100%;\n    background: #FFF;\n    border: 1px solid ", ";\n    border-radius: 30px;\n    font-size: 16px;\n    padding: 7px 15px;\n    outline: none;\n    ::placeholder {\n      color: #959895;\n    }\n\n    &:-ms-input-placeholder {\n      color: #959895;\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      color: #959895;\n    }\n    &:focus {\n      border-color: ", ";\n    }\n  }\n\n  .google-control {\n    .gps-button {\n      border-radius: 7.6px;\n    }\n\n    input {\n      border-radius: 7.6px;\n      border: 1px solid ", ";\n\n      &:focus {\n        border: 1px solid ", ";\n      }\n    }\n  }\n\n  .internal_number {\n    width: 45%;\n    ", "\n  }\n\n  .zipcode {\n    width: 45%;\n  }\n\n  @media (min-width: 481px) {\n    padding: 10px;\n  }\n"])), function (props) {
+  return props.theme.colors.gold;
+}, function (props) {
+  return props.theme.colors.gold;
+}, function (props) {
+  return props.theme.colors.gold;
+}, function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (props) {
-  return props.theme.colors.primary;
+  return props.theme.colors.gold;
 }, function (props) {
-  return props.theme.colors.primary;
+  return props.theme.colors.gold;
 }, function (props) {
   var _props$theme;
 

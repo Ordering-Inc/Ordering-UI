@@ -219,9 +219,9 @@ var Header = function Header(props) {
 
   var isAlsea = ordering.project === 'alsea';
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
-    var _cart$products, _cart$business;
+    var _cart$products, _cart$business, _cart$business2;
 
-    return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && ((cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.franchiseId) === franchiseId || !franchiseId);
+    return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && ((cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.franchise_id) === franchiseId || !franchiseId || !(cart !== null && cart !== void 0 && (_cart$business2 = cart.business) !== null && _cart$business2 !== void 0 && _cart$business2.franchiseId));
   }) || null;
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
@@ -506,17 +506,7 @@ var Header = function Header(props) {
     orderTypeList: orderTypeList
   }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     isCustomerMode: isCustomerMode
-  }, !auth && windowSize.width > 920 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isloginSignupLayoutPF ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LoginButton, {
-    onClick: function onClick() {
-      return handleOpenLoginSignUp('login');
-    }
-  }, loginSignupIcon && /*#__PURE__*/_react.default.createElement("img", {
-    alt: "login-icon",
-    width: "28px",
-    height: "28px",
-    src: loginSignupIcon,
-    loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement("p", null, t('SIGN_IN_JOIN', 'Sign In/Join')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, !auth && windowSize.width > 920 && !isloginSignupLayoutPF && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
     },
@@ -533,7 +523,7 @@ var Header = function Header(props) {
       whiteSpace: 'nowrap'
     },
     name: "signup"
-  }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up')))), cartAlwaysShowed && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
+  }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up'))), cartAlwaysShowed && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
     carts: cartsWithProducts,
     onClick: function onClick() {
@@ -552,7 +542,17 @@ var Header = function Header(props) {
     onClick: function onClick(variant) {
       return openModal(variant);
     }
-  })), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartAlwaysShowed && isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
+  })), !auth && isloginSignupLayoutPF && windowSize.width > 920 && /*#__PURE__*/_react.default.createElement(_styles.LoginButton, {
+    onClick: function onClick() {
+      return handleOpenLoginSignUp('login');
+    }
+  }, loginSignupIcon && /*#__PURE__*/_react.default.createElement("img", {
+    alt: "login-icon",
+    width: "28px",
+    height: "28px",
+    src: loginSignupIcon,
+    loading: "lazy"
+  }), /*#__PURE__*/_react.default.createElement("p", null, t('SIGN_IN_JOIN', 'Sign In/Join'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartAlwaysShowed && isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
     carts: cartsWithProducts,
     onClick: function onClick() {

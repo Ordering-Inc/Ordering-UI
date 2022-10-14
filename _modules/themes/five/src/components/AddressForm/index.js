@@ -25,7 +25,7 @@ var _GoogleGpsButton = require("../../../../../components/GoogleGpsButton");
 
 var _styles = require("./styles");
 
-var _Buttons = require("../../styles/Buttons");
+var _pfchangs = require("../../styles/Buttons/theme/pfchangs");
 
 var _Inputs = require("../../styles/Inputs");
 
@@ -634,28 +634,28 @@ var AddressFormUI = function AddressFormUI(props) {
     style: {
       color: '#c10000'
     }
-  }, formState.error), !isHideIcons && /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, formState.error), !isHideIcons && /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     className: addressTag === 'home' ? 'active' : '',
     bgtransparent: true,
     type: "button",
     onClick: function onClick() {
       return handleAddressTag('home');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null))), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     className: addressTag === 'office' ? 'active' : '',
     bgtransparent: true,
     type: "button",
     onClick: function onClick() {
       return handleAddressTag('office');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null))), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     className: addressTag === 'favorite' ? 'active' : '',
     bgtransparent: true,
     type: "button",
     onClick: function onClick() {
       return handleAddressTag('favorite');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     className: addressTag === 'other' ? 'active' : '',
     bgtransparent: true,
     type: "button",
@@ -670,14 +670,14 @@ var AddressFormUI = function AddressFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    outline: true,
+  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 && /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    color: "primary",
     type: "button",
     disabled: formState.loading,
     onClick: function onClick() {
       return onCancel();
     }
-  }, t('CANCEL', 'Cancel')), Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('CANCEL', 'Cancel')), Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     id: "submit-btn",
     type: "submit",
     disabled: formState.loading,

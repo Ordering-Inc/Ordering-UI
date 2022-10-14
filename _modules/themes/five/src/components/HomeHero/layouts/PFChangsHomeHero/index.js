@@ -60,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PFChangsHomeHero = function PFChangsHomeHero(props) {
-  var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _theme$images, _theme$images$general, _orderState$options3, _orderState$options3$, _orderState$options4, _orderState$options4$, _configState$configs2, _configState$configs3, _orderState$options5, _orderState$options5$, _orderState$options6, _orderState$options6$, _configState$configs4, _configState$configs5, _orderState$options7;
+  var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _theme$images, _theme$images$general, _orderState$options3, _orderState$options3$, _orderState$options4, _orderState$options4$, _configState$configs2, _configState$configs3, _orderState$options5, _orderState$options5$, _orderState$options6, _orderState$options6$, _configState$configs4, _configState$configs5, _theme$images2, _theme$images2$genera, _orderState$options7;
 
   var contentPosition = props.contentPosition,
       brandId = props.brandId;
@@ -335,7 +335,8 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     mapControls: googleMapsControls,
     maxLimitLocation: parseInt(configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.meters_to_change_address) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value),
     setIsMapReady: setIsMapReady,
-    businessClikedId: businessClikedId
+    businessClikedId: businessClikedId,
+    locationPin: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.pfLocationPin
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
     open: modals.formOpen,

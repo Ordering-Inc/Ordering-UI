@@ -33,7 +33,7 @@ var Accordion = _styledComponents.default.div(_templateObject3 || (_templateObje
 
 exports.Accordion = Accordion;
 
-var ContentInfo = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  width: 100%;\n\n  > div {\n    display: flex;\n    align-items: center;\n    justify-content: flex-start;\n    .clear-cart {\n      user-select: none;\n      text-decoration: underline;\n      color: #d81212;\n      margin-left: 5px;\n      ", "\n      &:first-letter {\n        text-transform: uppercase;\n      }\n    }\n\n    ", "\n  }\n  .change-store {\n    cursor: pointer;\n    text-decoration: underline;\n    color: ", ";\n    font-size: 12px;\n    &:first-letter {\n      text-transform: uppercase;\n    }\n  }\n  ", "\n\n  span {\n    cursor: pointer;\n  }\n\n  h2, span {\n    margin: 0px;\n  }\n\n  h2 {\n    width: 200px;\n  }\n\n  h2:hover, h4:hover {\n    opacity: 0.5;\n  } \n\n  h2 {\n    color: ", ";\n    font-size: 16px;\n    font-weight: 600;\n    text-decoration: underline;\n    margin: 0;\n  }\n\n  h3{\n    font-size: 14px;\n    margin: 0;\n  }\n\n  h4{\n    text-decoration: underline;\n    margin: 0;\n    font-size: 14px;\n  }\n\n  @media (min-width: 576px) {\n    h2 {\n      font-size: 18px;\n    }\n    span {\n      font-size: 13px;\n    }\n  }\n"])), function (props) {
+var ContentInfo = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  width: 100%;\n\n  > div {\n    display: flex;\n    align-items: center;\n    justify-content: flex-start;\n    .clear-cart {\n      user-select: none;\n      text-decoration: underline;\n      margin-left: 5px;\n      ", "\n      &:first-letter {\n        text-transform: uppercase;\n      }\n    }\n\n    ", "\n  }\n  .change-store {\n    cursor: pointer;\n    text-decoration: underline;\n    color: ", ";\n    font-size: 12px;\n    &:first-letter {\n      text-transform: uppercase;\n    }\n  }\n  ", "\n\n  span {\n    cursor: pointer;\n  }\n\n  h2, span {\n    margin: 0px;\n  }\n\n  h2 {\n    width: 200px;\n  }\n\n  h2:hover, h4:hover {\n    opacity: 0.5;\n  } \n\n  h2 {\n    color: ", ";\n    font-size: 16px;\n    font-weight: 600;\n    text-decoration: underline;\n    margin: 0;\n  }\n\n  h3{\n    font-size: 14px;\n    margin: 0;\n  }\n\n  h4{\n    text-decoration: underline;\n    margin: 0;\n    font-size: 14px;\n    color: ", ";\n  }\n\n  @media (min-width: 576px) {\n    h2 {\n      font-size: 18px;\n    }\n    span {\n      font-size: 13px;\n    }\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-right: 5px;\n        margin-left: 0;\n      "])));
@@ -47,7 +47,9 @@ var ContentInfo = _styledComponents.default.div(_templateObject5 || (_templateOb
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0;\n  "])));
 }, function (props) {
-  return props.theme.colors.darkTextColor;
+  return props.theme.colors.gold;
+}, function (props) {
+  return props.theme.colors.gold;
 });
 
 exports.ContentInfo = ContentInfo;
