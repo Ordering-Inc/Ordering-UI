@@ -113,7 +113,7 @@ export const OriginalHomeHero = (props) => {
         </HeroContent>
       </ContentWrapper>
 
-      {windowSize.width < 576 && (
+      {windowSize.width < 576 && !auth && (
         <UseAccount>
           <SectionHeader>
             {t('YOUR_ACCOUNT', 'Use your account')}
