@@ -23,6 +23,8 @@ var _utils = require("../../../../../utils");
 
 var _AiOutlineMenu = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineMenu"));
 
+var _EnChevronSmallDown = _interopRequireDefault(require("@meronex/icons/en/EnChevronSmallDown"));
+
 var _styledComponents = require("styled-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31,7 +33,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -52,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserPopover = function UserPopover(props) {
-  var _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _theme$general, _theme$general$compon, _theme$general$compon2, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$layouts$header4, _theme$layouts$header5, _theme$layouts$header6, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
+  var _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _theme$general, _theme$general$compon, _theme$general$compon2, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$layouts$header4, _theme$layouts$header5, _theme$layouts$header6, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _sessionState$user3, _sessionState$user4, _props$afterComponent, _props$afterElements;
 
   var open = props.open,
       isHome = props.isHome,
@@ -96,8 +98,8 @@ var UserPopover = function UserPopover(props) {
     key: 'my_home',
     isActive: !pfchangs
   }, {
-    name: 'business_search',
-    pathname: '/business_search',
+    name: pfchangs ? 'home' : 'business_search',
+    pathname: pfchangs ? '/' : '/business_search',
     displayName: 'Browse & Search',
     key: 'browse_search',
     isActive: true
@@ -125,19 +127,19 @@ var UserPopover = function UserPopover(props) {
     pathname: '/promotions',
     displayName: 'promotions',
     key: 'promotions',
-    isActive: isPromotionsEnabled
+    isActive: isPromotionsEnabled && !pfchangs
   }, {
     name: 'messages',
     pathname: '/messages',
     displayName: 'messages',
     key: 'messages',
-    isActive: !isCustomerMode
+    isActive: !isCustomerMode && !pfchangs
   }, {
     name: 'help',
     pathname: '/help',
     displayName: 'help',
     key: 'help',
-    isActive: true
+    isActive: true && !pfchangs
   }, {
     name: 'sessions',
     pathname: '/sessions',
@@ -149,7 +151,7 @@ var UserPopover = function UserPopover(props) {
     pathname: '/favorite',
     displayName: 'favorites',
     key: 'favorites',
-    isActive: true
+    isActive: !pfchangs
   }, {
     name: 'addresses',
     pathname: '/profile/addresses',
@@ -242,10 +244,21 @@ var UserPopover = function UserPopover(props) {
     ref: referenceElement,
     isOpen: open,
     onClick: props.onClick
-  }, /*#__PURE__*/_react.default.createElement(_AiOutlineMenu.default, {
+  }, pfchangs ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UserImgWrapper, null, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
+    fallback: /*#__PURE__*/_react.default.createElement("img", {
+      alt: "login-icon",
+      width: "28px",
+      height: "28px",
+      src: loginSignupIcon,
+      loading: "lazy"
+    })
+  })), /*#__PURE__*/_react.default.createElement("p", null, t('HI', 'Hi'), ", ", (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name), /*#__PURE__*/_react.default.createElement(_EnChevronSmallDown.default, {
+    width: 20,
+    height: 20
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_AiOutlineMenu.default, {
     className: "menu-list"
   }), /*#__PURE__*/_react.default.createElement(_styles.UserImgWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.RoundMark, null), /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
-    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo,
+    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.photo,
     fallback: pfchangs ? /*#__PURE__*/_react.default.createElement("img", {
       alt: "login-icon",
       width: "40px",
@@ -253,10 +266,10 @@ var UserPopover = function UserPopover(props) {
       src: loginSignupIcon,
       loading: "lazy"
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  }))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  })))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, options && options.length > 0 && options.map(function (option, i) {
+  }, attributes.popper), pfchangs && /*#__PURE__*/_react.default.createElement("h1", null, t('HI', 'Hi'), ", ", (_sessionState$user4 = sessionState.user) === null || _sessionState$user4 === void 0 ? void 0 : _sessionState$user4.name), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, options && options.length > 0 && options.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
       key: i,
       active: window.location.pathname === option.pathname,

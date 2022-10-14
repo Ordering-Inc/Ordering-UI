@@ -41,7 +41,7 @@ var Title = _styledComponents.default.h1(_templateObject5 || (_templateObject5 =
 
 exports.Title = Title;
 
-var NotCartsPFChangs = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: 80vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  h1{\n    text-transform: uppercase;\n    margin: 5px;\n    font-weight: bold;\n  }\n  h2{\n    font-size: 16px;\n  }\n  button{\n    width: 100%;\n    background: ", ";\n    height: 46px;\n    color: #000;\n  }\n"])), function (_ref3) {
+var NotCartsPFChangs = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: 80vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n  padding: 0 20px;\n  h1{\n    text-transform: uppercase;\n    margin: 5px;\n    font-weight: bold;\n  }\n  h2{\n    font-size: 16px;\n  }\n  button{\n    width: 100%;\n    background: ", ";\n    height: 46px;\n    color: #000;\n  }\n"])), function (_ref3) {
   var _theme$colors;
 
   var theme = _ref3.theme;

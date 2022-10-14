@@ -56,8 +56,6 @@ var ThemeContext = /*#__PURE__*/(0, _react.createContext)();
 exports.ThemeContext = ThemeContext;
 
 var ThemeProvider = function ThemeProvider(_ref) {
-  var _theme$fonts$primary;
-
   var children = _ref.children,
       props = _objectWithoutProperties(_ref, _excluded);
 
@@ -76,7 +74,7 @@ var ThemeProvider = function ThemeProvider(_ref) {
     }
   };
 
-  var GlobalStyle = (0, _styledComponents.createGlobalStyle)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    @media (min-width: 578px) {\n      /** Mozilla scrollbar*/\n      * {\n        scrollbar-color: #CCC !important;\n        scrollbar-width: thin !important;\n      }\n      /** Scrollbar for browser based on webkit */\n      ::-webkit-scrollbar {\n        width: 6px;\n        height: 0px;\n      }\n      ::-webkit-scrollbar-thumb {\n        background: #CCCCCC;\n      }\n      ::-webkit-scrollbar-thumb:hover {\n        background: #AFAFAF;\n      }\n      ::-webkit-scrollbar-thumb:active {\n        background: #6b6b6b;\n      }\n      ::-webkit-scrollbar-track {\n        background: rgba(204, 204, 204, 0.3);\n      }\n    }\n    body {\n      font-family: '", "', sans-serif;\n      margin: 0;\n      background-color: ", ";\n      color: ", ";\n      direction: ltr;\n      ", "\n      -webkit-overflow-scrolling: auto;\n      ", "\n    }\n    input, textarea, button {\n      font-family: inherit;\n    }\n    h1,p,span {\n      ", "\n    }\n    .popup-backdrop {\n      background-color: rgba(0, 0, 0, 0.4);\n      position: fixed;\n      top: 0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      z-index: 2000;\n    }\n    .popup-component {\n      background-color: rgba(0, 0, 0, 0.3);\n      display: flex;\n      justify-content: center;\n      align-items: center;\n    }\n  "])), ((_theme$fonts$primary = theme.fonts.primary) === null || _theme$fonts$primary === void 0 ? void 0 : _theme$fonts$primary.name) || 'Helvetica', theme.colors.backgroundPage, getThemeColor(), theme.rtl && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n        direction: rtl;\n      "]))), function (_ref2) {
+  var GlobalStyle = (0, _styledComponents.createGlobalStyle)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    @media (min-width: 578px) {\n      /** Mozilla scrollbar*/\n      * {\n        scrollbar-color: #CCC !important;\n        scrollbar-width: thin !important;\n      }\n      /** Scrollbar for browser based on webkit */\n      ::-webkit-scrollbar {\n        width: 6px;\n        height: 0px;\n      }\n      ::-webkit-scrollbar-thumb {\n        background: #CCCCCC;\n      }\n      ::-webkit-scrollbar-thumb:hover {\n        background: #AFAFAF;\n      }\n      ::-webkit-scrollbar-thumb:active {\n        background: #6b6b6b;\n      }\n      ::-webkit-scrollbar-track {\n        background: rgba(204, 204, 204, 0.3);\n      }\n    }\n    \n    body {\n      font-family: 'AvernirNext-Pro-Regular';\n      margin: 0;\n      background-color: ", ";\n      color: ", ";\n      direction: ltr;\n      ", "\n      -webkit-overflow-scrolling: auto;\n      ", "\n      @font-face {\n        font-family: 'TrajanPro-Regular';\n        font-style: normal;\n        font-weight: 100;\n        font-display: swap;\n        src: url('https://alsea-plugins-staging.ordering.co/alseaplatform/font/TrajanPro-Regular.woff2') format('truetype');\n  \n    }\n    input, textarea, button {\n      font-family: inherit;\n    }\n    h1,p,span {\n      ", "\n    }\n    .popup-backdrop {\n      background-color: rgba(0, 0, 0, 0.4);\n      position: fixed;\n      top: 0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      z-index: 2000;\n    }\n    .popup-component {\n      background-color: rgba(0, 0, 0, 0.3);\n      display: flex;\n      justify-content: center;\n      align-items: center;\n    }\n  "])), theme.colors.backgroundPage, getThemeColor(), theme.rtl && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n        direction: rtl;\n      "]))), function (_ref2) {
     var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _theme$layouts2, _theme$layouts2$homep, _theme$layouts2$homep2, _theme$layouts2$homep3, _theme$layouts2$homep4;
 
     var theme = _ref2.theme;
@@ -95,7 +93,7 @@ var ThemeProvider = function ThemeProvider(_ref) {
         font.rel = 'stylesheet';
         font.async = true;
         font.defer = true;
-        font.href = "https://fonts.googleapis.com/css2?family=".concat(fontFamily.name, ":wght@").concat(fontFamily.weights.join(';'), "&display=swap");
+        font.href = fontFamily.href || "https://fonts.googleapis.com/css2?family=".concat(fontFamily.name, ":wght@").concat(fontFamily.weights.join(';'), "&display=swap");
         window.document.body.appendChild(font);
       }
     });
