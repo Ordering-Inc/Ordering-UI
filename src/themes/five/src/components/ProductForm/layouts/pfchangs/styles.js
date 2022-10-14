@@ -188,6 +188,10 @@ export const ProductActions = styled.div`
     margin: 0 10px;
   }
 
+  .qtyval {
+    margin: 0 10px;
+  }
+
   @media (min-width: 769px) {
     position: sticky;
   }

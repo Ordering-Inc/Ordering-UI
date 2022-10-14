@@ -436,16 +436,9 @@ const ProductOptionsUI = (props) => {
                           onClick={decrement}
                           className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
                         />
-                        <Input
-                          className='qty'
-                          value={productCart?.quantity || ''}
-                          onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
-                          onKeyPress={(e) => {
-                            if (!/^[0-9.]$/.test(e.key)) {
-                              e.preventDefault()
-                            }
-                          }}
-                        />
+                        <p className='qtyval'>
+                          {productCart?.quantity}
+                        </p>
                         <AiFillPlusCircle
                           onClick={increment}
                           className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}

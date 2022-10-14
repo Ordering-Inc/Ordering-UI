@@ -53,7 +53,6 @@ export const ContentInfo = styled.div`
     .clear-cart {
       user-select: none;
       text-decoration: underline;
-      color: #d81212;
       margin-left: 5px;
       ${props => props.theme?.rtl && css`
         margin-right: 5px;
@@ -101,7 +100,7 @@ export const ContentInfo = styled.div`
   } 
 
   h2 {
-    color: ${props => props.theme.colors.darkTextColor};
+    color: ${props => props.theme.colors.gold};
     font-size: 16px;
     font-weight: 600;
     text-decoration: underline;
@@ -117,6 +116,7 @@ export const ContentInfo = styled.div`
     text-decoration: underline;
     margin: 0;
     font-size: 14px;
+    color: ${props => props.theme.colors.gold};
   }
 
   @media (min-width: 576px) {

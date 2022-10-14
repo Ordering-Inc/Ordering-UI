@@ -85,7 +85,7 @@ export const Header = (props) => {
   const [isFarAway, setIsFarAway] = useState(false)
   const isAlsea = ordering.project === 'alsea'
 
-  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.franchiseId === franchiseId || !franchiseId))) || null
+  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.franchise_id === franchiseId || !franchiseId || !cart?.business?.franchiseId))) || null
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
@@ -376,33 +376,19 @@ export const Header = (props) => {
             <RightHeader>
               <Menu isCustomerMode={isCustomerMode}>
                 {
-                  !auth && windowSize.width > 920 && (
+                  !auth && windowSize.width > 920 && !isloginSignupLayoutPF && (
                     <>
-                      {isloginSignupLayoutPF ? (
-                        <>
-                          <LoginButton onClick={() => handleOpenLoginSignUp('login')}>
-                            {loginSignupIcon && (
-                              <img alt='login-icon' width='28px' height='28px' src={loginSignupIcon} loading='lazy' />
-                            )}
-                            <p>{t('SIGN_IN_JOIN', 'Sign In/Join')}</p>
-                          </LoginButton>
-                        </>
-                      ) : (
-                        <>
-                          <MenuLink onClick={() => handleOpenLoginSignUp('login')} style={{ whiteSpace: 'nowrap' }} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
-                          {!isHideSignup && (
-                            <MenuLink
-                              onClick={() => handleOpenLoginSignUp('signup')}
-                              highlight={1}
-                              style={{ whiteSpace: 'nowrap' }}
-                              name='signup'
-                            >
-                              {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
-                            </MenuLink>
-                          )}
-                        </>
+                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} style={{ whiteSpace: 'nowrap' }} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
+                      {!isHideSignup && (
+                        <MenuLink
+                          onClick={() => handleOpenLoginSignUp('signup')}
+                          highlight={1}
+                          style={{ whiteSpace: 'nowrap' }}
+                          name='signup'
+                        >
+                          {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
+                        </MenuLink>
                       )}
-
                     </>
                   )
                 }
@@ -428,6 +414,16 @@ export const Header = (props) => {
                         />
                       )}
                     </>
+                  )
+                }
+                {
+                  !auth && isloginSignupLayoutPF && windowSize.width > 920 && (
+                    <LoginButton onClick={() => handleOpenLoginSignUp('login')}>
+                      {loginSignupIcon && (
+                        <img alt='login-icon' width='28px' height='28px' src={loginSignupIcon} loading='lazy' />
+                      )}
+                      <p>{t('SIGN_IN_JOIN', 'Sign In/Join')}</p>
+                    </LoginButton>
                   )
                 }
                 {
