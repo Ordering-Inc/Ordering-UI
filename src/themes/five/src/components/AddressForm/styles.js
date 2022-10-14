@@ -28,12 +28,13 @@ export const FormControl = styled.form`
     margin: 10px 0px;
     height: 43px;
     width: 100%;
+    border: 1px solid ${props => props.theme.colors.gold};
     &.internal_number,
     &.zipcode {
       flex: auto;
     }
     &::placeholder{
-      color: #CBCBCB
+      color: #959895
     }
   }
 
@@ -41,26 +42,30 @@ export const FormControl = styled.form`
     width: 100%;
     margin: 10px 0;
     border-radius: 7.6px;
+    border: 1px solid ${props => props.theme.colors.gold};
+    &::placeholder{
+      color: #959895
+    }
   }
 
   .input-autocomplete {
     width: 100%;
     background: #FFF;
-    border: 1px solid #BBB;
+    border: 1px solid ${props => props.theme.colors.gold};
     border-radius: 30px;
     font-size: 16px;
     padding: 7px 15px;
     outline: none;
     ::placeholder {
-      color: #DBDCDB;
+      color: #959895;
     }
 
     &:-ms-input-placeholder {
-      color: #DBDCDB;
+      color: #959895;
     }
 
     &::-ms-input-placeholder { /* Microsoft Edge */
-      color: #DBDCDB;
+      color: #959895;
     }
     &:focus {
       border-color: ${() => darken(0.07, '#CCC')};
@@ -74,10 +79,10 @@ export const FormControl = styled.form`
 
     input {
       border-radius: 7.6px;
-      border: 1px solid ${props => props.theme.colors.primary};
+      border: 1px solid ${props => props.theme.colors.gold};
 
       &:focus {
-        border: 1px solid ${props => props.theme.colors.primary};
+        border: 1px solid ${props => props.theme.colors.gold};
       }
     }
   }

@@ -267,7 +267,7 @@ const AddressListUI = (props) => {
           addressList?.addresses?.length > 0 &&
           typeof orderState.options?.address === 'object' &&
           ((!addressOpen && isPopover) || isModal) && (
-            <AddressListUl id='list'>
+            <AddressListUl id='list' isProfile={isProfile}>
               <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
               {uniqueAddressesList.map(address => (
                 <AddressItem key={address?.id} isProfile={isProfile}>

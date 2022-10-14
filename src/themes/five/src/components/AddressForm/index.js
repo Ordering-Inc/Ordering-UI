@@ -32,7 +32,7 @@ import {
   WrapperSkeleton
 } from './styles'
 
-import { Button } from '../../styles/Buttons'
+import { Button } from '../../styles/Buttons/theme/pfchangs'
 import { Input, TextArea } from '../../styles/Inputs'
 
 const inputNames = [
@@ -494,7 +494,7 @@ const AddressFormUI = (props) => {
             {
               Object.keys(formState?.changes).length === 0 && (
                 <Button
-                  outline
+                  color='primary'
                   type='button'
                   disabled={formState.loading}
                   onClick={() => onCancel()}

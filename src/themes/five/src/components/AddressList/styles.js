@@ -27,7 +27,7 @@ export const AddressListUl = styled.ul`
   padding: 0px;
   margin-top: 40px;
 
-  ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
+  ${props => props.theme?.profile?.components?.layout?.type === 'pfchangs' && props.isProfile && css`
     background: ${props => props.theme.colors.secundaryContrast};
   `}
 `
@@ -118,7 +118,7 @@ export const AddressItemActions = styled.div`
     font-size: 20px;
     
     svg {
-      color: #B1BCCC;
+      color: #959895;
     }
   }
   a.disabled {
