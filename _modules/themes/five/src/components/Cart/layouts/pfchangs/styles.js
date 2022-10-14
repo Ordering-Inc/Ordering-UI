@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SpotSelect = exports.Spinner = exports.SelectedItemsTitle = exports.SavedContainer = exports.OrderBill = exports.NoValidProductMessage = exports.IconContainer = exports.Exclamation = exports.Divider = exports.CouponContainer = exports.CommentSection = exports.CheckoutAction = exports.CartSticky = exports.CartContainer = void 0;
+exports.SpotSelect = exports.Spinner = exports.SelectedItemsTitle = exports.SavedContainer = exports.OrderBill = exports.NoValidProductMessage = exports.IconContainer = exports.Exclamation = exports.Divider = exports.CouponContainer = exports.CommentSection = exports.CheckoutAction = exports.CartSticky = exports.CartError = exports.CartContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -30,7 +30,7 @@ var CartSticky = _styledComponents.default.div(_templateObject2 || (_templateObj
 
 exports.CartSticky = CartSticky;
 
-var CheckoutAction = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  padding: 20px;\n  box-sizing: border-box;\n  box-shadow: rgb(0 0 0 / 10%) 0px -1px 4px 0px;\n  p {\n    margin: 0;\n    font-weight: 600;\n    font-size: 18px;\n    color: ", ";\n  }\n\n  button {\n    padding: 10px 30px;\n    min-width: 150px;\n    width: 50%;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n"])), function (props) {
+var CheckoutAction = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  padding: 20px;\n  box-sizing: border-box;\n  h4 {\n    margin: 0;\n    font-weight: 600;\n    font-size: 16px;\n    color: ", ";\n  }\n\n  button {\n    padding: 10px 30px;\n    min-width: 150px;\n    width: 50%;\n    height: 50px;\n    font-size: 16px;\n    &:disabled{\n      opacity: 0.5;\n      cursor: not-allowed\n    }\n  }\n"])), function (props) {
   return props.theme.colors.darkTextColor;
 });
 
@@ -109,3 +109,12 @@ exports.CommentSection = CommentSection;
 var SelectedItemsTitle = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  padding: 0 20px;\n  margin: 10px 0px;\n  h2{ \n    font-size: 18px;\n  }\n"])));
 
 exports.SelectedItemsTitle = SelectedItemsTitle;
+
+var CartError = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  padding: 0 20px;\n  p{\n    width: 50%;\n    text-align: center;\n    font-size: 14px;\n    margin: 0;\n    color: ", ";\n  }\n"])), function (_ref4) {
+  var _theme$colors;
+
+  var theme = _ref4.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
+});
+
+exports.CartError = CartError;
