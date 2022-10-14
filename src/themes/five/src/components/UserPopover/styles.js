@@ -36,9 +36,19 @@ export const HeaderItem = styled.div`
     border-radius: 7.6px;
   }
 
-  ${({ theme, isOpen }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
-    svg, .menu-list {
-      color: ${isOpen ? '#000' : '#fff'};
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    background: #000;
+    .menu-list {
+      color: #000;
+    }
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #fff;
+    }
+    img {
+      width: 28px;
+      height: 28px;
     }
   `}
 `
@@ -52,6 +62,14 @@ export const PopoverBody = styled.div`
   min-width: 300px !important;
   z-index: 1001;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    border-radius: 0px;
+    h1{
+      font-size: 18px;
+      padding: 0 15px;
+    }
+  `}
 `
 
 export const PopoverList = styled.div`
@@ -84,6 +102,9 @@ const PopoverListItemStyles = css`
   :last-child {
     border-bottom: 0;
   }
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    color: ${theme?.colors?.gold};
+  `}
 `
 
 export const PopoverListItem = styled.div`
@@ -97,6 +118,7 @@ export const PopoverListLink = styled.a`
   ${({ active }) => active && css`
     background-color: #eee;
   `}
+  
 `
 
 export const ExtraOptions = styled.div`

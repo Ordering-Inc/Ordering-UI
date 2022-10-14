@@ -83,6 +83,7 @@ export const UserDetailsContainer = styled.div`
     border-bottom: 1px solid #fff;
     border-right: 1px solid #fff;
     margin-bottom: 20px;
+    background: #000;
   `}
 `
 
@@ -105,6 +106,7 @@ export const BusinessDetailsContainer = styled(UserDetailsContainer)`
     
   ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
     border: 1px solid #fff;
+    background: #000;
     padding: 30px;
   `}
 `
@@ -122,6 +124,7 @@ export const PaymentMethodContainer = styled.div`
 
   ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
     border: 1px solid #fff;
+    background: #000;
     padding: 30px;
     margin: 0;
   `}
@@ -308,6 +311,7 @@ export const DeliveryOptionsContainer = styled.div`
     padding: 20px 20px;
     border: 1px solid #fff;
     margin-bottom: 20px;
+    background: #000;
     #select-input {
       margin-bottom: 0px;
     }
@@ -394,6 +398,7 @@ export const SubtitleContainer = styled.div`
   border-left: 1px solid #fff;
   border-top: 1px solid #fff;
   border-right: 1px solid #fff;
+  background: #000;
   h2 {
     font-size: 16px;
     margin: 0;
@@ -405,6 +410,7 @@ export const ItemHeader = styled.div`
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
+  background: #000;
 `
 
 export const BusinessDetails = styled.div`
@@ -414,7 +420,7 @@ export const BusinessDetails = styled.div`
   border-top: 1px solid #fff;
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
-
+  background: #000;
   img{
     width: 100%;
     height: 200px;
@@ -443,7 +449,7 @@ export const MasterCardCoupon = styled.div`
   padding: 0px !important;
   width: 100%;
   box-sizing: border-box;
-
+  background: #000;
   img {
     width: 100%
   }
@@ -454,27 +460,44 @@ export const GoToMenu = styled.div`
   z-index: 10000;
   top: 0;
   left: 200px;
-  transform: translateY(30%);
+  transform: translateY(75%);
   display: flex;
   align-items: center;
   cursor: pointer;
   p {
     font-size: 14px;
+    margin: 0;
   }
   svg {
     margin-right: 10px;
     width: 20px;
     height: 20px;
+    top: 4px;
+    position: relative;
   }
   @media (min-width: 768px) {
     left: 230px;
-    transform: translateY(40%);
+    transform: translateY(100%);
     p {
-     font-size: 16px;
+      font-size: 16px;
     }
     svg {
       width: 22px;
       height: 22px;
     }
   }
+`
+
+export const BackIcon = styled.div`
+  * {
+    color: ${({ theme }) => theme?.colors?.primary};
+  }
+`
+
+export const ColumnDivider = styled.div`
+  height: 30px;
+  width: 1px;
+  background: #fff;
+  position: relative;
+  right: 20px;
 `

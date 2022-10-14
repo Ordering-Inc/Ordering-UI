@@ -9,7 +9,6 @@ import {
   useLanguage,
   useConfig,
   useSession,
-  ReCaptcha,
   useApi
 } from 'ordering-components'
 import { Alert } from '../../../Confirm'
@@ -24,7 +23,6 @@ import {
   SkeletonSocialWrapper,
   OtpWrapper,
   CountdownTimer,
-  ReCaptchaWrapper,
   InputBeforeIcon,
   InputWrapper,
   LoginDivider,
@@ -57,7 +55,6 @@ const LoginFormUI = (props) => {
     useLoginByEmail,
     useLoginByCellphone,
     handleChangeInput,
-    handleReCaptcha,
     handleChangeTab,
     handleButtonLoginClick,
     handleCheckPhoneCode,
@@ -68,7 +65,6 @@ const LoginFormUI = (props) => {
     loginTab,
     isPopup,
     credentials,
-    enableReCaptcha,
     useRootPoint,
     isCustomerMode,
     otpType,
@@ -413,11 +409,6 @@ const LoginFormUI = (props) => {
                 {elementLinkToForgotPassword}
               </RedirectLink>
             )}
-            {props.isRecaptchaEnable && enableReCaptcha && (
-              <ReCaptchaWrapper>
-                <ReCaptcha handleReCaptcha={handleReCaptcha} />
-              </ReCaptchaWrapper>
-            )}
             {otpType === 'email' ? (
               <>
                 <Button
@@ -540,7 +531,7 @@ export const LoginForm = (props) => {
   const isKioskApp = props.useKioskApp
   const loginControllerProps = {
     ...props,
-    isRecaptchaEnable: !isKioskApp,
+    isRecaptchaEnable: false,
     elementLinkToForgotPassword: isKioskApp ? null : props.elementLinkToForgotPassword,
     useLoginByCellphone: isKioskApp ? null : props.useLoginByCellphone,
     elementLinkToSignup: isKioskApp ? null : props.elementLinkToSignup,

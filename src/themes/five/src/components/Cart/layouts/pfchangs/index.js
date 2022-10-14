@@ -4,6 +4,7 @@ import { Button } from '../../../../styles/Buttons/theme/pfchangs'
 import { ProductItemAccordion as ProductItemAccordionPFChangs } from '../../../ProductItemAccordion/layouts/pfchangs'
 import { BusinessItemAccordion as BusinessItemAccordionPFChangs } from '../../../BusinessItemAccordion/layouts/pfchangs'
 import { Confirm } from '../../../Confirm'
+import { Confirm as ConfirmPF } from '../../../Confirm/layouts/pfchangs'
 import { Modal } from '../../../Modal'
 
 import { ProductForm as ProductFormPFChangs } from '../../../ProductForm/layouts/pfchangs'
@@ -101,10 +102,14 @@ const CartUI = (props) => {
     ? t('RIGHT_NOW', 'Right Now')
     : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
 
+  const ConfirmComponent = theme?.general?.components?.layout?.type === 'pfchangs'
+    ? ConfirmPF
+    : Confirm
+
   const handleDeleteClick = (product) => {
     setConfirm({
       open: true,
-      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
+      content: t('QUESTION_DELETE', 'Are you sure that you want to delete') + ` \n${product?.name}`,
       handleOnAccept: () => {
         removeProduct(product, cart)
         setConfirm({ ...confirm, open: false })
@@ -535,7 +540,7 @@ const CartUI = (props) => {
               </CheckoutAction>
             )}
           </BusinessItemAccordionPFChangs>
-          <Confirm
+          <ConfirmComponent
             title={t('PRODUCT', 'Product')}
             content={confirm.content}
             acceptText={t('ACCEPT', 'Accept')}

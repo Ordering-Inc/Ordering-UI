@@ -12,7 +12,6 @@ import {
 import {
   useLanguage,
   useConfig,
-  ReCaptcha,
   SignupForm as SignUpController
 } from 'ordering-components'
 import { SpinnerLoader } from '../../../../../../../components/SpinnerLoader'
@@ -29,7 +28,6 @@ import {
   FormSide,
   FormInput,
   SkeletonWrapper,
-  ReCaptchaWrapper,
   Title,
   InputWrapper,
   InputBeforeIcon,
@@ -53,7 +51,6 @@ const notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 
 const SignUpFormUI = (props) => {
   const {
     handleChangeInput,
-    handleReCaptcha,
     useChekoutFileds,
     validationFields,
     showField,
@@ -64,7 +61,6 @@ const SignUpFormUI = (props) => {
     externalPhoneNumber,
     saveCustomerUser,
     signupData,
-    enableReCaptcha,
     handleChangePromotions,
     checkPhoneCodeState,
     otpDataUser,
@@ -464,11 +460,6 @@ const SignUpFormUI = (props) => {
                     </>
                   )
                 }
-                {props.isRecaptchaEnable && enableReCaptcha && (
-                  <ReCaptchaWrapper>
-                    <ReCaptcha handleReCaptcha={handleReCaptcha} />
-                  </ReCaptchaWrapper>
-                )}
 
                 <CheckboxArea>
                   <PromotionsWrapper>
@@ -613,7 +604,7 @@ export const SignUpForm = (props) => {
   const _numOtpInputs = 4
   const loginControllerProps = {
     ...props,
-    isRecaptchaEnable: true,
+    isRecaptchaEnable: false,
     numOtpInputs: _numOtpInputs,
     UIComponent: SignUpFormUI
   }

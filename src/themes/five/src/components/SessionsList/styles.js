@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const SessionsListContainer = styled.div`
   width: 100%;
@@ -7,6 +7,10 @@ export const SessionsListContainer = styled.div`
   padding: 30px 15px 15px 15px;
   box-sizing: border-box;
   min-height: calc(100vh - 280px);
+
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    color: #fff;
+  `}
 
   @media (min-width: 769px) {
     width: 70%;

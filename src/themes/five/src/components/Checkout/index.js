@@ -18,8 +18,8 @@ import {
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useHistory } from 'react-router-dom'
-import { ArrowLeft, ArrowLeftCircle } from 'react-bootstrap-icons'
-
+import { ArrowLeft } from 'react-bootstrap-icons'
+import EnChevronWithCircleLeft from '@meronex/icons/en/EnChevronWithCircleLeft'
 import {
   Container,
   WrapperLeftContainer,
@@ -46,7 +46,9 @@ import {
   SubtitleContainer,
   BusinessDetails,
   MasterCardCoupon,
-  GoToMenu
+  GoToMenu,
+  BackIcon,
+  ColumnDivider
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -317,7 +319,10 @@ const CheckoutUI = (props) => {
             <>
               {cart?.business?.slug && (
                 <GoToMenu onClick={() => handleStoreRedirect(cart?.business?.slug)}>
-                  <ArrowLeftCircle color={theme.colors.primary} />
+                  <ColumnDivider />
+                  <BackIcon>
+                    <EnChevronWithCircleLeft color={theme.colors.primary} />
+                  </BackIcon>
                   <p>{t('MENU', 'Menu')}</p>
                 </GoToMenu>
               )}

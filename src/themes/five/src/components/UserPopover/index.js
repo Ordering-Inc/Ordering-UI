@@ -16,6 +16,7 @@ import { DropDownCircleImage } from '../../../../../components/Dropdown/style'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { capitalize } from '../../../../../utils'
 import AiOutlineMenu from '@meronex/icons/ai/AiOutlineMenu'
+import EnChevronSmallDown from '@meronex/icons/en/EnChevronSmallDown'
 import { useTheme } from 'styled-components'
 
 export const UserPopover = (props) => {
@@ -44,18 +45,18 @@ export const UserPopover = (props) => {
 
   const optionsDefault = [
     { name: 'search', pathname: '/explore', displayName: 'My home', key: 'my_home', isActive: !pfchangs },
-    { name: 'business_search', pathname: '/business_search', displayName: 'Browse & Search', key: 'browse_search', isActive: true },
+    { name: pfchangs ? 'home' : 'business_search', pathname: pfchangs ? '/' : '/business_search', displayName: 'Browse & Search', key: 'browse_search', isActive: true },
     { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders', isActive: true }
   ]
 
   const extraOptions = [
     { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
     { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: isWalletEnabled && !isCustomerMode },
-    { name: 'promotions', pathname: '/promotions', displayName: 'promotions', key: 'promotions', isActive: isPromotionsEnabled },
-    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !isCustomerMode },
-    { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true },
+    { name: 'promotions', pathname: '/promotions', displayName: 'promotions', key: 'promotions', isActive: isPromotionsEnabled && !pfchangs },
+    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !isCustomerMode && !pfchangs },
+    { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true && !pfchangs },
     { name: 'sessions', pathname: '/sessions', displayName: 'sessions', key: 'sessions', isActive: true },
-    { name: 'favorite', pathname: '/favorite', displayName: 'favorites', key: 'favorites', isActive: true },
+    { name: 'favorite', pathname: '/favorite', displayName: 'favorites', key: 'favorites', isActive: !pfchangs },
     { name: 'addresses', pathname: '/profile/addresses', displayName: 'places', key: 'places', isActive: isAddressListNewPage }
   ]
 
@@ -129,19 +130,36 @@ export const UserPopover = (props) => {
         isOpen={open}
         onClick={props.onClick}
       >
-        <AiOutlineMenu className='menu-list' />
-        <UserImgWrapper>
-          <RoundMark />
-          <DropDownCircleImage
-            src={sessionState?.user?.photo}
-            fallback={pfchangs
-              ? <img alt='login-icon' width='40px' height='40px' src={loginSignupIcon} loading='lazy' />
-              : <FaUserAlt />}
-          />
-        </UserImgWrapper>
+        {
+          pfchangs ? (
+            <>
+              <UserImgWrapper>
+                <DropDownCircleImage
+                  fallback={<img alt='login-icon' width='28px' height='28px' src={loginSignupIcon} loading='lazy' />}
+                />
+              </UserImgWrapper>
+              {<p>{t('HI', 'Hi')}, {sessionState.user?.name}</p>}
+              <EnChevronSmallDown width={20} height={20} />
+            </>
+          ) : (
+            <>
+              <AiOutlineMenu className='menu-list' />
+              <UserImgWrapper>
+                <RoundMark />
+                <DropDownCircleImage
+                  src={sessionState?.user?.photo}
+                  fallback={pfchangs
+                    ? <img alt='login-icon' width='40px' height='40px' src={loginSignupIcon} loading='lazy' />
+                    : <FaUserAlt />}
+                />
+              </UserImgWrapper>
+            </>
+          )
+        }
 
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
+        {pfchangs && <h1>{t('HI', 'Hi')}, {sessionState.user?.name}</h1>}
         <PopoverList>
           {options && options.length > 0 && (
             options.map((option, i) => (

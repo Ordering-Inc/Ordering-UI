@@ -86,10 +86,10 @@ export const TitleContainer = styled.div`
   ${({ theme }) => theme?.layouts?.header?.components?.cart?.components?.layout?.type === 'pfchangs' && css`
     justify-content: flex-end;
     margin: 20px 20px 0 0;
+    cursor: pointer;
     svg{ 
       width: 24px;
       height: 24px;
-      cursor: pointer;
     }
   `}
 `

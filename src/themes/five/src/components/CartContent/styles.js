@@ -63,6 +63,8 @@ export const NotCartsPFChangs = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 0 20px;
   h1{
     text-transform: uppercase;
     margin: 5px;
