@@ -51,8 +51,8 @@ var ModalUI = function ModalUI(props) {
       var scrollbarWidth = window.innerWidth - document.body.clientWidth;
       var bodyPaddingRight = window.document.body.style.paddingRight;
       document.body.style.paddingRight = props.open ? "".concat(bodyPaddingRight + scrollbarWidth, "px") : "".concat(bodyPaddingRight, "px");
+      document.body.style.overflow = props.open ? 'hidden' : 'auto';
     }
-    document.body.style.overflow = props.open ? 'hidden' : 'auto';
     if (props.open) {
       window.addEventListener('keydown', handleKeyDown);
       return function () {
