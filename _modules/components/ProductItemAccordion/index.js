@@ -35,7 +35,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -104,7 +104,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var productSelect = (0, _react.useRef)(null);
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
-  var showProductImage = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.confirmation) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cart) !== null && _orderingTheme$theme$3 !== void 0 && (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) !== null && _orderingTheme$theme$4 !== void 0 && (_orderingTheme$theme$5 = _orderingTheme$theme$4.products) !== null && _orderingTheme$theme$5 !== void 0 && (_orderingTheme$theme$6 = _orderingTheme$theme$5.components) !== null && _orderingTheme$theme$6 !== void 0 && (_orderingTheme$theme$7 = _orderingTheme$theme$6.photo) !== null && _orderingTheme$theme$7 !== void 0 && _orderingTheme$theme$7.hidden);
+  var showProductImage = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.confirmation) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cart) !== null && _orderingTheme$theme$3 !== void 0 && (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) !== null && _orderingTheme$theme$4 !== void 0 && (_orderingTheme$theme$5 = _orderingTheme$theme$4.products) !== null && _orderingTheme$theme$5 !== void 0 && (_orderingTheme$theme$6 = _orderingTheme$theme$5.components) !== null && _orderingTheme$theme$6 !== void 0 && (_orderingTheme$theme$7 = _orderingTheme$theme$6.image) !== null && _orderingTheme$theme$7 !== void 0 && _orderingTheme$theme$7.hidden);
 
   var productInfo = function productInfo() {
     if (isCartProduct) {

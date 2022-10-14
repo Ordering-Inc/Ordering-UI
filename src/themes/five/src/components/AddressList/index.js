@@ -201,9 +201,9 @@ const AddressListUI = (props) => {
         {addressOpen && (
           <AddressFormContainer isCustomerMode={isCustomerMode}>
             <TitleFormContainer>
-              <CloseIcon>
+              {/* <CloseIcon>
                 <MdClose onClick={() => handleCloseAddressForm()} />
-              </CloseIcon>
+              </CloseIcon> */}
               <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
             </TitleFormContainer>
             <AddressForm
