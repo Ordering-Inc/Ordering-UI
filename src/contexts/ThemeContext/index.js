@@ -86,17 +86,17 @@ export const ThemeProvider = ({ children, ...props }) => {
       align-items: center;
     }
   `
-
+  const fontsArray = ['https://alsea-plugins-staging.ordering.co/alseaplatform/font/styles.css', 'https://alsea-plugins-staging.ordering.co/alseaplatform/font/styles2.css']
   useEffect(() => {
     const fonts = Object.entries(theme.fonts || {})
-    fonts.forEach(([name, fontFamily]) => {
+    fonts.forEach(([name, fontFamily], i) => {
       if (!window.document.getElementById(`${name}-font-styles`)) {
         const font = window.document.createElement('link')
         font.id = `${name}-font-styles`
         font.rel = 'stylesheet'
         font.async = true
         font.defer = true
-        font.href = fontFamily.href || `https://fonts.googleapis.com/css2?family=${fontFamily.name}:wght@${fontFamily.weights.join(';')}&display=swap`
+        font.href = fontsArray[i] || fontFamily.href || `https://fonts.googleapis.com/css2?family=${fontFamily.name}:wght@${fontFamily.weights.join(';')}&display=swap`
         window.document.body.appendChild(font)
       }
     })
