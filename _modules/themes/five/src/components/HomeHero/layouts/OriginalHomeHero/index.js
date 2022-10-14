@@ -132,7 +132,7 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
     color: "primary",
     name: "find-business",
     onClick: handleFindBusinesses
-  }, t('FIND_BUSINESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.FIND_BUSINESSES) || 'Find businesses')))), windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_styles.UseAccount, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, t('YOUR_ACCOUNT', 'Use your account')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('FIND_BUSINESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.FIND_BUSINESSES) || 'Find businesses')))), windowSize.width < 576 && !auth && /*#__PURE__*/_react.default.createElement(_styles.UseAccount, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, t('YOUR_ACCOUNT', 'Use your account')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
