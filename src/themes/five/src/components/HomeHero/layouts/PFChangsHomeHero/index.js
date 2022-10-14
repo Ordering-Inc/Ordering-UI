@@ -246,6 +246,7 @@ export const PFChangsHomeHero = (props) => {
                 maxLimitLocation={parseInt(configState?.configs?.meters_to_change_address?.value)}
                 setIsMapReady={setIsMapReady}
                 businessClikedId={businessClikedId}
+                locationPin={theme.images?.general?.pfLocationPin}
               />
             </WrapperMap>
           )}

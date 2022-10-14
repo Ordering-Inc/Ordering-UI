@@ -56,6 +56,7 @@ import categoryGroceries from './template/assets/images/categories/category-groc
 import categoryAlcohol from './template/assets/images/categories/category-alcohol.png'
 import categoryLaundry from './template/assets/images/categories/category-laundry.png'
 import categoryAll from './template/assets/images/categories/category-all.png'
+import pfLocationPin from './template/assets/pf-location-pin.png'
 
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
@@ -84,7 +85,8 @@ theme.images = {
     creatingOrder,
     successOrder,
     leftArrow,
-    rightArrow
+    rightArrow,
+    pfLocationPin
   },
 
   order: {

@@ -66,6 +66,9 @@ export const Image = styled.div`
 export const SideForm = styled.div`
   width: 100%;
 
+  ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
+    background: ${props => props.theme.colors.secundaryContrast};
+  `}
   @media (min-width: 768px) {
     width: 70%;
     display: flex;
@@ -147,6 +150,7 @@ export const SavedPlaces = styled.div`
   }
 
   ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
+      background: ${props => props.theme.colors.secundaryContrast};
       width: 100%;
       * {
         color: #fff;

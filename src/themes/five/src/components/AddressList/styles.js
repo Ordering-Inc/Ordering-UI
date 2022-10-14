@@ -26,6 +26,10 @@ export const AddressListUl = styled.ul`
   flex-direction: column;
   padding: 0px;
   margin-top: 40px;
+
+  ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
+    background: ${props => props.theme.colors.secundaryContrast};
+  `}
 `
 
 export const AddressItem = styled.li`
