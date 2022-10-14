@@ -77,6 +77,7 @@ export const OrderBusiness = styled.div`
   ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
     border: 1px solid #fff;
     padding: 30px;
+    background: ${props => props.theme.colors.secundaryContrast};
   `}
 
   @media (min-width: 769px) {
@@ -196,6 +197,7 @@ export const OrderInfo = styled.div`
   width: 100%;
   margin: 0px 0px 35px;
   position: relative;
+  background: ${props => props.theme.colors.secundaryContrast};
   h1, p {
     margin: 0px;
     color: ${props => props.theme.colors.darkTextColor};
@@ -304,6 +306,7 @@ export const OrderCustomer = styled(BusinessInfo)`
   margin-bottom: 30px;
 
   ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
+    background: ${props => props.theme.colors.secundaryContrast};
     border: 1px solid #fff;
     padding: 30px;
   `}

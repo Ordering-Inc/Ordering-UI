@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const Button = styled.button`
-  background: #CCC;
+  background: ${props => darken(0.07, props.theme.colors.primary)};
   line-height: 30px;
   padding: 0 20px;
   font-size: 16px;
@@ -35,7 +35,7 @@ export const Button = styled.button`
       padding-left: 15%
       ${props => props.theme?.rtl && css`
         padding-right: 15%;
-        padding-left: 0
+        padding-left: 0;
     `}
     }
   `}
@@ -48,21 +48,21 @@ export const Button = styled.button`
         background: ${props => props.theme.colors.primaryContrast};
         color: ${props => props.theme.colors.secundaryContrast};
       }
-    `}
+  `}
 
   ${({ color }) => color === 'primary' && css`
     background: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.primaryContrast};
+    color: #FFF;
     border-color: ${props => props.theme.colors.primary};
     &:active {
       background: ${props => darken(0.07, props.theme.colors.primary)};
     }
     ${({ outline }) => outline && css`
-      background: #FFF;
-      color: ${props => props.theme.colors.primary};
+      background: ${props => props.theme.colors.primary};
+      color: #FFF;
       border-color: ${props => props.theme.colors.primary};
       &:active {
-        color: ${props => props.theme.colors.primaryContrast};
+        color: ${props => props.theme.colors.primary};
         background: ${props => props.theme.colors.primary};
       }
       &:hover {
