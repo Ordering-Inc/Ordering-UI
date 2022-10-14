@@ -40,7 +40,7 @@ import { Tabs, Tab } from '../../../../styles/Tabs'
 import { Input } from '../../../../styles/Inputs'
 import { Button } from '../../../../styles/Buttons'
 import { FacebookLoginButton } from '../../../FacebookLogin'
-import { AppleLogin } from '../../../AppleLogin'
+// import { AppleLogin } from '../../../AppleLogin'
 import { useCountdownTimer } from '../../../../../../../hooks/useCountdownTimer'
 import { formatSeconds } from '../../../../../../../utils'
 import { GoogleLoginButton } from '../../../GoogleLogin'
@@ -491,7 +491,7 @@ const LoginFormUI = (props) => {
                     handleSuccessGoogleLogin={handleLoginGoogleAlsea}
                   />
                 )}
-                {configs?.apple_login_client_id?.value && appleLoginEnabled &&
+                {/* {configs?.apple_login_client_id?.value && appleLoginEnabled &&
                   (
                     <AppleLogin
                       onSuccess={handleSuccessApple}
@@ -500,7 +500,7 @@ const LoginFormUI = (props) => {
                         content: data
                       })}
                     />
-                  )}
+                  )} */}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>
