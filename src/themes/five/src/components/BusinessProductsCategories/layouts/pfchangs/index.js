@@ -38,7 +38,7 @@ const BusinessProductsCategoriesUI = (props) => {
     else topPos = document.getElementById(`category${category.id}`)?.offsetTop
     if (!isBlockScroll) {
       window.scroll({
-        top: topPos - 60,
+        top: topPos - 200,
         left: 0,
         behavior: 'smooth'
       })
@@ -119,7 +119,7 @@ const BusinessProductsCategoriesUI = (props) => {
         if (!category?.id) topPos = document.getElementById('businessProductList')?.offsetTop
         else topPos = document.getElementById(`category${category.id}`)?.offsetTop
 
-        if (windowTop >= (topPos - 60)) {
+        if (windowTop >= (topPos - 200)) {
           subcategoriesLayout ? setSubcategorySelected(category) : setSelectedCategory(category)
         }
       })

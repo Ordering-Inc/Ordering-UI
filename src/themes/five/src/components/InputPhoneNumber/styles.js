@@ -10,6 +10,9 @@ export const Container = styled.div`
   .PhoneInput {
     display: flex;
     align-items: center;
+    &::placeholder{
+      color: ${props => props.theme.colors.darkGray};
+    }
   }
 
   .PhoneInputInput {

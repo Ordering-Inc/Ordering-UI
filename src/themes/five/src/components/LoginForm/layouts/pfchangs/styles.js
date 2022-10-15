@@ -220,6 +220,9 @@ export const InputWrapper = styled.div`
     padding-right: 40px !important;
     padding-left: 40px !important;
     margin: 10px 0;
+    &::placeholder{
+      color: ${props => props.theme.colors.darkGray};
+    }
   }
 `
 
