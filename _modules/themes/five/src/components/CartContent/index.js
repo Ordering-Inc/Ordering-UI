@@ -61,6 +61,10 @@ var CartContent = function CartContent(props) {
 
   var cartLayout = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$header = _theme$layouts.header) === null || _theme$layouts$header === void 0 ? void 0 : (_theme$layouts$header2 = _theme$layouts$header.components) === null || _theme$layouts$header2 === void 0 ? void 0 : (_theme$layouts$header3 = _theme$layouts$header2.cart) === null || _theme$layouts$header3 === void 0 ? void 0 : (_theme$layouts$header4 = _theme$layouts$header3.components) === null || _theme$layouts$header4 === void 0 ? void 0 : (_theme$layouts$header5 = _theme$layouts$header4.layout) === null || _theme$layouts$header5 === void 0 ? void 0 : _theme$layouts$header5.type;
 
+  var _useSession = (0, _orderingComponents.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      auth = _useSession2[0].auth;
+
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       currentCartUuid = _useState2[0],
@@ -83,7 +87,7 @@ var CartContent = function CartContent(props) {
       events.off('cart_product_added', handleAddProduct);
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, !isSlideBar && /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), isOrderStateCarts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && carts.map(function (cart) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, !isSlideBar && /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), isOrderStateCarts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && auth && carts.map(function (cart) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: cart.uuid
     }, cart.products.length > 0 && /*#__PURE__*/_react.default.createElement(CartComponents, {
@@ -98,7 +102,7 @@ var CartContent = function CartContent(props) {
       setPreorderBusiness: setPreorderBusiness,
       isOpenCart: isOpenCart
     }));
-  }), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cartLayout === 'pfchangs' ? /*#__PURE__*/_react.default.createElement(_styles.NotCartsPFChangs, null, /*#__PURE__*/_react.default.createElement("h1", null, t('YOUR_CART_IS_EMPTY', 'Your cart is empty')), /*#__PURE__*/_react.default.createElement("h2", null, t('GET_STARTED_ADD_TASTY_FOOD', 'Get started and add some tasty food')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0 || !auth && cartLayout === 'pfchangs') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cartLayout === 'pfchangs' ? /*#__PURE__*/_react.default.createElement(_styles.NotCartsPFChangs, null, /*#__PURE__*/_react.default.createElement("h1", null, t('YOUR_CART_IS_EMPTY', 'Your cart is empty')), /*#__PURE__*/_react.default.createElement("h2", null, t('GET_STARTED_ADD_TASTY_FOOD', 'Get started and add some tasty food')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: onClose
   }, t('BACK', 'Back'))) : /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,

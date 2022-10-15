@@ -82,7 +82,6 @@ var ThemeProvider = function ThemeProvider(_ref) {
     var theme = _ref2.theme;
     return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        background-image: url(", ");\n      "])), theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$homep = _theme$layouts2.homepage_view) === null || _theme$layouts2$homep === void 0 ? void 0 : (_theme$layouts2$homep2 = _theme$layouts2$homep.components) === null || _theme$layouts2$homep2 === void 0 ? void 0 : (_theme$layouts2$homep3 = _theme$layouts2$homep2.homepage_header) === null || _theme$layouts2$homep3 === void 0 ? void 0 : (_theme$layouts2$homep4 = _theme$layouts2$homep3.components) === null || _theme$layouts2$homep4 === void 0 ? void 0 : _theme$layouts2$homep4.image);
   }, props.isDarkTextColor && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n        color: ", "\n      "])), theme.colors.darkTextColor));
-  var fontsArray = ['https://alsea-plugins-staging.ordering.co/alseaplatform/font/styles.css', 'https://alsea-plugins-staging.ordering.co/alseaplatform/font/styles2.css'];
   (0, _react.useEffect)(function () {
     var fonts = Object.entries(theme.fonts || {});
     fonts.forEach(function (_ref3, i) {
@@ -96,7 +95,7 @@ var ThemeProvider = function ThemeProvider(_ref) {
         font.rel = 'stylesheet';
         font.async = true;
         font.defer = true;
-        font.href = fontsArray[i] || fontFamily.href || "https://fonts.googleapis.com/css2?family=".concat(fontFamily.name, ":wght@").concat(fontFamily.weights.join(';'), "&display=swap");
+        font.href = fontFamily.href || "https://fonts.googleapis.com/css2?family=".concat(fontFamily.name, ":wght@").concat(fontFamily.weights.join(';'), "&display=swap");
         window.document.body.appendChild(font);
       }
     });
