@@ -49,21 +49,24 @@ var CategoriesContainer = _styledComponents.default.div(_templateObject || (_tem
 
 exports.CategoriesContainer = CategoriesContainer;
 
-var CategoryPFChangs = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  ", "\n"])), function (_ref5) {
+var CategoryPFChangs = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  ", "\n  ", "\n"])), function (_ref5) {
   var active = _ref5.active;
-  return active ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    span {\n      background: ", ";\n      margin: 0 40px;\n      height: 4px;\n      margin-bottom: 10px;\n    }\n  "])), function (_ref6) {
+  return active && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    span {\n      background: ", ";\n      margin: 0 40px;\n      height: 4px;\n      margin-bottom: 10px;\n    }\n  "])), function (_ref6) {
     var theme = _ref6.theme;
     return theme.colors.primary;
-  }) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    span {\n      &:hover {\n        background: ", ";\n        margin: 0 40px;\n        height: 4px;\n        margin-bottom: 10px;\n      }\n    }\n  "])), function (_ref7) {
-    var theme = _ref7.theme;
+  });
+}, function (_ref7) {
+  var hover = _ref7.hover;
+  return hover && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    span:hover {\n      background: ", ";\n      margin: 0 40px;\n      height: 4px;\n      margin-bottom: 10px;\n    }\n  "])), function (_ref8) {
+    var theme = _ref8.theme;
     return theme.colors.primary;
   });
 });
 
 exports.CategoryPFChangs = CategoryPFChangs;
 
-var CategoriesWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  ", "\n"])), function (_ref8) {
-  var hide = _ref8.hide;
+var CategoriesWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  ", "\n"])), function (_ref9) {
+  var hide = _ref9.hide;
   return hide && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    display: none;\n  "])));
 });
 
