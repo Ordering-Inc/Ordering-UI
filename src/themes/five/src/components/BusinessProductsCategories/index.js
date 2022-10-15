@@ -100,7 +100,6 @@ const BusinessProductsCategoriesUI = (props) => {
     })
 
     const navbar = document.getElementById('category-lists')
-    const cart = document.getElementById('BusinessCartContainer')
     const search = document.getElementById('WrapperSearchAbsolute')
     const wrapperCategories = document.getElementById('wrapper-categories')
     const limit = window.pageYOffset >= wrapperCategories?.offsetTop && window.pageYOffset > 0
@@ -109,12 +108,10 @@ const BusinessProductsCategoriesUI = (props) => {
       const classAdded = navbar.classList.contains('sticky-prod-cat')
       if (!classAdded) {
         navbar && navbar.classList.add('sticky-prod-cat')
-        cart && cart.classList.add('sticky-prod-cart')
         search && search.classList.add('sticky-search')
       }
     } else {
       navbar && navbar.classList.remove('sticky-prod-cat')
-      cart && cart.classList.remove('sticky-prod-cart')
       search && search.classList.remove('sticky-search')
     }
   }
@@ -131,26 +128,17 @@ const BusinessProductsCategoriesUI = (props) => {
     style0 += `width: calc(100% - ${useKioskApp ? '50px' : '155px'}) !important;`
     style0 += '}'
 
-    let style1 = '.sticky-prod-cart {'
+    let style1 = '.sticky-search {'
     style1 += 'position: fixed !important;'
-    style1 += 'top: 38px !important;'
-    style1 += 'right: 2.5% !important;'
-    style1 += 'width: 28.5% !important;'
-    style1 += 'margin-top: 32px !important;'
+    style1 += 'top: 0px !important;'
+    style1 += 'right: 0% !important;'
+    style1 += 'z-index: 9999 !important;'
+    style1 += 'width: 50px !important;'
+    style1 += `background-color: ${theme.colors.backgroundPage} !important;`
     style1 += '}'
-
-    let style2 = '.sticky-search {'
-    style2 += 'position: fixed !important;'
-    style2 += 'top: 0px !important;'
-    style2 += 'right: 0% !important;'
-    style2 += 'z-index: 9999 !important;'
-    style2 += 'width: 50px !important;'
-    style2 += `background-color: ${theme.colors.backgroundPage} !important;`
-    style2 += '}'
 
     styleSheet.insertRule(style0, 0)
     styleSheet.insertRule(style1, 1)
-    styleSheet.insertRule(style2, 2)
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)

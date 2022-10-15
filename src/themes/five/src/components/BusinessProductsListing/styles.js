@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 export const ProductsContainer = styled.div`
   width: 95%;
   margin: 20px auto 0px;
-  overflow-x: hidden;
   > svg {
     color: ${props => props.theme.colors.headingColor};
     font-size: 24px;
