@@ -16,7 +16,7 @@ export const ProductContainer = styled.div`
   @media (min-width: 1200px) {
     flex-wrap: nowrap;
     ${props => !props.useKioskApp && css`
-      max-height: 70vh;
+      max-height: 90vh;
     `}
     padding-bottom: 0;
   }

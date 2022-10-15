@@ -489,7 +489,6 @@ const ProductOptionsUI = (props) => {
                 <Button
                   className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
                   color='primary'
-                  outline
                   disabled={isSoldOut || maxProductQuantity <= 0}
                   onClick={() => setModalIsOpen(true)}
                 >

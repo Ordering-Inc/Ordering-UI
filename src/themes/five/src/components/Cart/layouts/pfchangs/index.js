@@ -24,7 +24,8 @@ import {
   CouponContainer,
   Spinner,
   CommentSection,
-  SelectedItemsTitle
+  SelectedItemsTitle,
+  CartError
 } from './styles'
 import { verifyDecimals } from '../../../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
@@ -430,7 +431,7 @@ const CartUI = (props) => {
                     )}
                     {cart?.va_por_mi_cuenta && (
                       <tr>
-                        <td><img src='https://d2gjwc6pypyhyf.cloudfront.net/va-por-mi-cuenta.svg'></img></td>
+                        <td><img src='https://d2gjwc6pypyhyf.cloudfront.net/va-por-mi-cuenta.svg' /></td>
                         <td>{parsePrice(cart?.va_por_mi_cuenta.amount)}</td>
                       </tr>
                     )}
@@ -523,12 +524,19 @@ const CartUI = (props) => {
             )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
               <CheckoutAction>
-                <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
+                <h4>{cart?.total >= 1 && parsePrice(cart?.total)}</h4>
                 <Button
-                  color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
+                  color='primary'
                   onClick={checkOutBtnClick}
                   disabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
                 >
+                  {!openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
+                </Button>
+              </CheckoutAction>
+            )}
+            {((openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) && (
+              <CartError>
+                <p>
                   {!cart?.valid_address ? (
                     t('OUT_OF_COVERAGE', 'Out of Coverage')
                   ) : !cart?.valid_maximum ? (
@@ -536,8 +544,8 @@ const CartUI = (props) => {
                   ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
                     `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
                   ) : !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
-                </Button>
-              </CheckoutAction>
+                </p>
+              </CartError>
             )}
           </BusinessItemAccordionPFChangs>
           <ConfirmComponent

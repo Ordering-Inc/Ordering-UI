@@ -127,7 +127,7 @@ export const CartPopover = (props) => {
                 {showCartText && (
                   <p>{t('CART', 'Cart')}</p>
                 )}
-                {props.carts?.length > 0 ? (
+                {props.carts?.length > 0 && auth ? (
                   <CartLength>
                     <p>{props.carts?.length > 9 ? '9+' : props.carts?.length}</p>
                   </CartLength>

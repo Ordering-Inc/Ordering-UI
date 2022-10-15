@@ -54,12 +54,12 @@ const UpsellingPageUI = (props) => {
 
   return (
     <>
-      <VerticalUpsellingContainer>
+      <VerticalUpsellingContainer showUpselling={(Object.keys(upsellingProducts.error)?.length === 0 && upsellingProducts.products.length > 0) || upsellingProducts.loading}>
         {
           !upsellingProducts.loading ? (
             <>
               {
-                (Object.keys(upsellingProducts.error)?.length === 0 && upsellingProducts.products.length > 0) ? upsellingProducts.products.map((product, i) => (
+                (Object.keys(upsellingProducts.error)?.length === 0 && upsellingProducts.products.length > 0) && upsellingProducts.products.map((product, i) => (
                   <HorizontalItem key={product.id} name={product.name}>
                     <HorizontalImage>
                       <img src={product.images} alt={`product-${i}`} loading='lazy' />
@@ -73,11 +73,7 @@ const UpsellingPageUI = (props) => {
                       <AiOutlinePlusCircle onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</AiOutlinePlusCircle>
                     </HorizontalDetails>
                   </HorizontalItem>
-                )) : (
-                  <div>
-                    {upsellingProducts.message || t('NO_UPSELLING_PRODUCTS', 'There are no upselling products')}
-                  </div>
-                )
+                ))
               }
             </>
           ) : [...Array(8)].map((item, i) => (

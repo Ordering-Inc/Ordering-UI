@@ -82,7 +82,7 @@ export const WrapAllCategories = styled.div`
     color: #fff;
     margin: 0px 0px 0px 10px;
     font-size: 32px;
-    font-family: 'TrajanPro-Bold', Arial, Helvetica;
+    font-family: ${({ theme }) => theme.fonts?.special?.name}, Arial, Helvetica;
     text-transform: uppercase;
     ${props => props.theme?.rtl && css`
       margin: 0px 10px 0px 0px;
@@ -124,7 +124,9 @@ export const WrapperNotFound = styled.div`
   }
 `
 
-export const HeaderWrapper = styled.div``
+export const HeaderWrapper = styled.div`
+  font-family: ${({ theme }) => theme.fonts?.special?.name}, Arial, Helvetica;
+`
 
 export const DescriptionModalContainer = styled.div`
   display: flex;

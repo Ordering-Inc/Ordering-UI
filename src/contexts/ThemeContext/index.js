@@ -89,7 +89,7 @@ export const ThemeProvider = ({ children, ...props }) => {
 
   useEffect(() => {
     const fonts = Object.entries(theme.fonts || {})
-    fonts.forEach(([name, fontFamily], i) => {
+    fonts.forEach(([name, fontFamily]) => {
       if (!window.document.getElementById(`${name}-font-styles`)) {
         const font = window.document.createElement('link')
         font.id = `${name}-font-styles`

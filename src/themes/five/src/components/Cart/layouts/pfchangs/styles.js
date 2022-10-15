@@ -24,11 +24,10 @@ export const CheckoutAction = styled.div`
   margin-bottom: 10px;
   padding: 20px;
   box-sizing: border-box;
-  box-shadow: rgb(0 0 0 / 10%) 0px -1px 4px 0px;
-  p {
+  h4 {
     margin: 0;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
     color: ${props => props.theme.colors.darkTextColor};
   }
 
@@ -36,6 +35,8 @@ export const CheckoutAction = styled.div`
     padding: 10px 30px;
     min-width: 150px;
     width: 50%;
+    height: 50px;
+    font-size: 16px;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed
@@ -231,5 +232,18 @@ export const SelectedItemsTitle = styled.div`
   margin: 10px 0px;
   h2{ 
     font-size: 18px;
+  }
+`
+
+export const CartError = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+  p{
+    width: 50%;
+    text-align: center;
+    font-size: 14px;
+    margin: 0;
+    color: ${({ theme }) => theme?.colors?.primary};
   }
 `

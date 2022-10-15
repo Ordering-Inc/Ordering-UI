@@ -22,6 +22,9 @@ export const VerticalUpsellingContainer = styled.div`
   margin-top: 20px;
   padding: 20px;
   background: rgb(244, 245, 246);
+  ${({ showUpselling }) => !showUpselling && css`
+    display: none;
+  `}
 `
 
 export const HorizontalItem = styled.div`

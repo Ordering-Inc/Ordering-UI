@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
-import { useLanguage, useEvent } from 'ordering-components'
+import { useLanguage, useEvent, useSession } from 'ordering-components'
 import { BackToMenuButton, Container, NotCarts, NotCartsPFChangs, Title } from './styles'
 
 import { Cart } from '../Cart'
@@ -23,9 +23,9 @@ export const CartContent = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const cartLayout = theme?.layouts?.header?.components?.cart?.components?.layout?.type
-
+  const [{ auth }] = useSession()
   const [currentCartUuid, setCurrentCartUuid] = useState(null)
-
+  const showCarts = cartLayout === 'pfchangs' ? auth && isOrderStateCarts && carts?.length > 0 : isOrderStateCarts && carts?.length > 0
   const handleAddProduct = (product, cart) => {
     setCurrentCartUuid(cart?.uuid)
   }
@@ -53,7 +53,7 @@ export const CartContent = (props) => {
         {!isSlideBar && (
           <Title>{t('YOUR_CART', 'Your cart')}</Title>
         )}
-        {isOrderStateCarts && carts?.length > 0 &&
+        {showCarts &&
           carts.map(cart => (
             <React.Fragment key={cart.uuid}>
               {cart.products.length > 0 && (
@@ -72,7 +72,7 @@ export const CartContent = (props) => {
               )}
             </React.Fragment>
           ))}
-        {(!carts || carts?.length === 0) && (
+        {((!carts || carts?.length === 0) || (!auth && cartLayout === 'pfchangs')) && (
           <>
             {cartLayout === 'pfchangs' ? (
               <NotCartsPFChangs>
