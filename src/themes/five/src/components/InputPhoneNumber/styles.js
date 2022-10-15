@@ -10,14 +10,14 @@ export const Container = styled.div`
   .PhoneInput {
     display: flex;
     align-items: center;
-    &::placeholder{
-      color: ${props => props.theme.colors.darkGray};
-    }
   }
 
   .PhoneInputInput {
     flex: 1;
     min-width: 0;
+    &::placeholder{
+      color: ${props => props.theme.colors.darkGray};
+    }
   }
 
   .PhoneInputCountryIcon {
