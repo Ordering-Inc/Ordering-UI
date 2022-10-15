@@ -119,7 +119,7 @@ const BusinessProductsCategoriesUI = (props) => {
         if (!category?.id) topPos = document.getElementById('businessProductList')?.offsetTop
         else topPos = document.getElementById(`category${category.id}`)?.offsetTop
 
-        if (windowTop >= (topPos - 60)) {
+        if (windowTop >= (topPos - 20)) {
           subcategoriesLayout ? setSubcategorySelected(category) : setSelectedCategory(category)
         }
       })

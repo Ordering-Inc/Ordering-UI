@@ -56,12 +56,21 @@ export const CategoriesContainer = styled.div`
 export const CategoryPFChangs = styled.div`
   display: flex;
   flex-direction: column;
-  ${({ active }) => active && css`
+  ${({ active }) => active ? css`
     span {
       background: ${({ theme }) => theme.colors.primary};
       margin: 0 40px;
       height: 4px;
       margin-bottom: 10px;
+    }
+  ` : css`
+    span {
+      &:hover {
+        background: ${({ theme }) => theme.colors.primary};
+        margin: 0 40px;
+        height: 4px;
+        margin-bottom: 10px;
+      }
     }
   `}
 `
