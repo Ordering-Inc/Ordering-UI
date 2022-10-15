@@ -11,7 +11,7 @@ export const CategoriesContainer = styled.div`
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
-  font-family: font-family: ${({ theme }) => theme.fonts?.special?.name}, Arial, Helvetica;
+  font-family: ${({ theme }) => theme.fonts?.special?.name}, Arial, Helvetica;
   ${({ subcategoriesLayout }) => subcategoriesLayout ? css`
     border-bottom: ${({ subcategoriesLayout }) => subcategoriesLayout ? 'none' : '1px solid #D9D9D9'};
     ` : css`
