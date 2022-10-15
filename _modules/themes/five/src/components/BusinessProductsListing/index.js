@@ -534,8 +534,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     padding: "0",
     isProductForm: true,
     disableOverflowX: true,
-    hideCloseDefault: pfchangs,
-    height: "90vh"
+    hideCloseDefault: pfchangs
   }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45,
     count: props.useKioskApp ? 12 : 8

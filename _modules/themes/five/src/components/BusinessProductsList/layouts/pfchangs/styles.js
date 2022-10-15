@@ -62,7 +62,7 @@ var ProductsListing = _styledComponents.default.div(_templateObject4 || (_templa
 
 exports.ProductsListing = ProductsListing;
 
-var WrapAllCategories = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-wrap: wrap;\n    padding-top: 5px;\n    padding-bottom: 12px;\n    margin-left: 10px;\n    color: #fff;\n    font-size: 26px;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n      margin-right: 10px;\n      ", "\n    }\n\n    @media (min-width: 993px) {\n      margin: 0px;\n    }\n  }\n\n  h3 {\n    font-weight: bold;\n    font-size: 24px;\n    color: #fff;\n    margin: 0px 0px 0px 10px;\n    font-size: 32px;\n    font-family: 'TrajanPro-Bold', Arial, Helvetica;\n    text-transform: uppercase;\n    ", "\n\n    @media (min-width: 993px) {\n      margin: 0px;\n    }\n  }\n"])), function (props) {
+var WrapAllCategories = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  .category-title {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-wrap: wrap;\n    padding-top: 5px;\n    padding-bottom: 12px;\n    margin-left: 10px;\n    color: #fff;\n    font-size: 26px;\n    ", "\n\n    img {\n      border-radius: 7.6px;\n      min-width: 41px;\n      min-height: 41px;\n      height: 41px;\n      width: 41px;\n      margin-right: 10px;\n      ", "\n    }\n\n    @media (min-width: 993px) {\n      margin: 0px;\n    }\n  }\n\n  h3 {\n    font-weight: bold;\n    font-size: 24px;\n    color: #fff;\n    margin: 0px 0px 0px 10px;\n    font-size: 32px;\n    font-family: ", ", Arial, Helvetica;\n    text-transform: uppercase;\n    ", "\n\n    @media (min-width: 993px) {\n      margin: 0px;\n    }\n  }\n"])), function (props) {
   var _props$theme;
 
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
@@ -70,6 +70,11 @@ var WrapAllCategories = _styledComponents.default.div(_templateObject6 || (_temp
   var _props$theme2;
 
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
+}, function (_ref4) {
+  var _theme$fonts, _theme$fonts$special;
+
+  var theme = _ref4.theme;
+  return (_theme$fonts = theme.fonts) === null || _theme$fonts === void 0 ? void 0 : (_theme$fonts$special = _theme$fonts.special) === null || _theme$fonts$special === void 0 ? void 0 : _theme$fonts$special.name;
 }, function (props) {
   var _props$theme3;
 
@@ -78,8 +83,8 @@ var WrapAllCategories = _styledComponents.default.div(_templateObject6 || (_temp
 
 exports.WrapAllCategories = WrapAllCategories;
 
-var CategoryDescription = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: flex-end;\n    justify-content: center;\n    p {\n      margin: 0;\n      color: #fff;\n      white-space: pre;\n      max-width: ", ";\n      overflow: hidden;\n      text-overflow: ellipsis;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n      white-space: nowrap;\n    }\n"])), function (_ref4) {
-  var maxWidth = _ref4.maxWidth;
+var CategoryDescription = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-left: 15px;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: flex-end;\n    justify-content: center;\n    p {\n      margin: 0;\n      color: #fff;\n      white-space: pre;\n      max-width: ", ";\n      overflow: hidden;\n      text-overflow: ellipsis;\n    }\n    span {\n      color: ", ";\n      text-decoration: underline;\n      margin-left: 10px;\n      cursor: pointer;\n      white-space: nowrap;\n    }\n"])), function (_ref5) {
+  var maxWidth = _ref5.maxWidth;
   return maxWidth ? "".concat(maxWidth - 200, "px") : 'initial';
 }, function (props) {
   return props.theme.colors.primary;
@@ -91,7 +96,12 @@ var WrapperNotFound = _styledComponents.default.div(_templateObject11 || (_templ
 
 exports.WrapperNotFound = WrapperNotFound;
 
-var HeaderWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral([""])));
+var HeaderWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  font-family: ", ", Arial, Helvetica;\n"])), function (_ref6) {
+  var _theme$fonts2, _theme$fonts2$special;
+
+  var theme = _ref6.theme;
+  return (_theme$fonts2 = theme.fonts) === null || _theme$fonts2 === void 0 ? void 0 : (_theme$fonts2$special = _theme$fonts2.special) === null || _theme$fonts2$special === void 0 ? void 0 : _theme$fonts2$special.name;
+});
 
 exports.HeaderWrapper = HeaderWrapper;
 

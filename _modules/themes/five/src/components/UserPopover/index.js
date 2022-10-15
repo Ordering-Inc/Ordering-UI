@@ -75,9 +75,8 @@ var UserPopover = function UserPopover(props) {
       events = _useEvent2[0];
 
   var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 2),
-      configs = _useConfig2[0].configs,
-      refreshOrderOptions = _useConfig2[1].refreshOrderOptions;
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
       _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
@@ -310,10 +309,6 @@ var LogoutActionUI = function LogoutActionUI(props) {
       _useCustomer2 = _slicedToArray(_useCustomer, 2),
       deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
 
-  var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 2),
-      refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
-
   var handleClick = function handleClick() {
     var _window, _window$gapi, _window$gapi$auth;
 
@@ -329,7 +324,6 @@ var LogoutActionUI = function LogoutActionUI(props) {
       }
     }
 
-    refreshOrderOptions();
     deleteUserCustomer(true);
     props.handleLogoutClick();
     props.onClose && props.onClose();

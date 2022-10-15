@@ -84,7 +84,7 @@ var ThemeProvider = function ThemeProvider(_ref) {
   }, props.isDarkTextColor && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n        color: ", "\n      "])), theme.colors.darkTextColor));
   (0, _react.useEffect)(function () {
     var fonts = Object.entries(theme.fonts || {});
-    fonts.forEach(function (_ref3, i) {
+    fonts.forEach(function (_ref3) {
       var _ref4 = _slicedToArray(_ref3, 2),
           name = _ref4[0],
           fontFamily = _ref4[1];

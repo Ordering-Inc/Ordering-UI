@@ -70,6 +70,8 @@ var CartContent = function CartContent(props) {
       currentCartUuid = _useState2[0],
       setCurrentCartUuid = _useState2[1];
 
+  var showCarts = cartLayout === 'pfchangs' ? auth && isOrderStateCarts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 : isOrderStateCarts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0;
+
   var handleAddProduct = function handleAddProduct(product, cart) {
     setCurrentCartUuid(cart === null || cart === void 0 ? void 0 : cart.uuid);
   };
@@ -87,7 +89,7 @@ var CartContent = function CartContent(props) {
       events.off('cart_product_added', handleAddProduct);
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, !isSlideBar && /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), isOrderStateCarts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && auth && carts.map(function (cart) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, !isSlideBar && /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), showCarts && carts.map(function (cart) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: cart.uuid
     }, cart.products.length > 0 && /*#__PURE__*/_react.default.createElement(CartComponents, {

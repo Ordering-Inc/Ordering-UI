@@ -17,20 +17,25 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var CategoriesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 100;\n  position: sticky;\n  top: 0;\n  text-align: center;\n  text-transform: uppercase;\n  font-weight: bold;\n  ", "\n  width: ", ";\n  position: relative;\n  ", "\n  div.special {\n    ", "\n  }\n  &.category-lists{\n    display: flex;\n    justify-content: center;\n    width: 102%;\n  }\n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  }\n  @media (min-width: 992px) {\n    width: ", ";\n  }\n"])), function (props) {
+var CategoriesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 100;\n  position: sticky;\n  top: 0;\n  text-align: center;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: ", ", Arial, Helvetica;\n  ", "\n  width: ", ";\n  position: relative;\n  ", "\n  div.special {\n    ", "\n  }\n  &.category-lists{\n    display: flex;\n    justify-content: center;\n    width: 102%;\n  }\n  @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  }\n  @media (min-width: 992px) {\n    width: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (_ref) {
-  var subcategoriesLayout = _ref.subcategoriesLayout;
-  return subcategoriesLayout ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    border-bottom: ", ";\n    "])), function (_ref2) {
-    var subcategoriesLayout = _ref2.subcategoriesLayout;
+  var _theme$fonts, _theme$fonts$special;
+
+  var theme = _ref.theme;
+  return (_theme$fonts = theme.fonts) === null || _theme$fonts === void 0 ? void 0 : (_theme$fonts$special = _theme$fonts.special) === null || _theme$fonts$special === void 0 ? void 0 : _theme$fonts$special.name;
+}, function (_ref2) {
+  var subcategoriesLayout = _ref2.subcategoriesLayout;
+  return subcategoriesLayout ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    border-bottom: ", ";\n    "])), function (_ref3) {
+    var subcategoriesLayout = _ref3.subcategoriesLayout;
     return subcategoriesLayout ? 'none' : '1px solid #D9D9D9';
   }) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    justify-content: center;\n  "])));
 }, function (props) {
   var _props$w;
 
   return (_props$w = props.w) !== null && _props$w !== void 0 ? _props$w : '100%';
-}, function (_ref3) {
-  var pfchangs = _ref3.pfchangs;
+}, function (_ref4) {
+  var pfchangs = _ref4.pfchangs;
   return !pfchangs && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  div.category {\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding: 10px 0px;\n    margin: 0 15px;\n    color: #000;\n    &:nth-of-type(1) {\n      margin-left: 0;\n      ", "\n    }\n  "])), function (props) {
     return props.theme.rtl && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        margin-left: 15px;\n        margin-right: 15px;\n      "])));
   });
@@ -44,18 +49,18 @@ var CategoriesContainer = _styledComponents.default.div(_templateObject || (_tem
 
 exports.CategoriesContainer = CategoriesContainer;
 
-var CategoryPFChangs = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  ", "\n"])), function (_ref4) {
-  var active = _ref4.active;
-  return active && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    span {\n      background: ", ";\n      margin: 0 40px;\n      height: 4px;\n      margin-bottom: 10px;\n    }\n  "])), function (_ref5) {
-    var theme = _ref5.theme;
+var CategoryPFChangs = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  ", "\n"])), function (_ref5) {
+  var active = _ref5.active;
+  return active && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    span {\n      background: ", ";\n      margin: 0 40px;\n      height: 4px;\n      margin-bottom: 10px;\n    }\n  "])), function (_ref6) {
+    var theme = _ref6.theme;
     return theme.colors.primary;
   });
 });
 
 exports.CategoryPFChangs = CategoryPFChangs;
 
-var CategoriesWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  ", "\n"])), function (_ref6) {
-  var hide = _ref6.hide;
+var CategoriesWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  ", "\n"])), function (_ref7) {
+  var hide = _ref7.hide;
   return hide && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    display: none;\n  "])));
 });
 
