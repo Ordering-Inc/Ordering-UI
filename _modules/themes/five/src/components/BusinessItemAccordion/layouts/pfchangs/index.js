@@ -199,7 +199,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   }, props.children), !setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && !isMultiCheckout && /*#__PURE__*/_react.default.createElement(_styles.PriceContainer, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleClickCheckout,
     color: "primary"
-  }, t('CHECKOUT', 'Checkout')))));
+  }, t('CHECKOUT', 'Checkout'))), !setActive && /*#__PURE__*/_react.default.createElement(_styles.Divider, null)));
 };
 
 exports.BusinessItemAccordion = BusinessItemAccordion;

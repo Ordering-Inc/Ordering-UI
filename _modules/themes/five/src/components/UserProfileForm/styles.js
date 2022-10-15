@@ -77,9 +77,7 @@ var SavedPlaces = _styledComponents.default.div(_templateObject12 || (_templateO
   var _theme$profile3, _theme$profile3$compo, _theme$profile3$compo2;
 
   var theme = _ref3.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$profile3 = theme.profile) === null || _theme$profile3 === void 0 ? void 0 : (_theme$profile3$compo = _theme$profile3.components) === null || _theme$profile3$compo === void 0 ? void 0 : (_theme$profile3$compo2 = _theme$profile3$compo.layout) === null || _theme$profile3$compo2 === void 0 ? void 0 : _theme$profile3$compo2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      background: ", ";\n      width: 100%;\n      * {\n        color: #fff;\n      }\n    "])), function (props) {
-    return props.theme.colors.secundaryContrast;
-  });
+  return (theme === null || theme === void 0 ? void 0 : (_theme$profile3 = theme.profile) === null || _theme$profile3 === void 0 ? void 0 : (_theme$profile3$compo = _theme$profile3.components) === null || _theme$profile3$compo === void 0 ? void 0 : (_theme$profile3$compo2 = _theme$profile3$compo.layout) === null || _theme$profile3$compo2 === void 0 ? void 0 : _theme$profile3$compo2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      width: 100%;\n      * {\n        color: #fff;\n      }\n    "])));
 }, function (_ref4) {
   var _theme$profile4, _theme$profile4$compo, _theme$profile4$compo2;
 
