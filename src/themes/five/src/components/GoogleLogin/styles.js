@@ -5,6 +5,7 @@ export const GoogleButton = styled(Button)`
   border: 1px solid #000000;
   background: transparent;
   border-radius: 7.6px;
+  border-color: ${props => props.theme.colors.gold};
   font-size: 16px;
   font-weight: 400;
   display: flex;

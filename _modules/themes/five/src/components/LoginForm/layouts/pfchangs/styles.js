@@ -122,7 +122,9 @@ var TogglePassword = _styledComponents.default.span(_templateObject15 || (_templ
 
 exports.TogglePassword = TogglePassword;
 
-var InputWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-bottom: 5px;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n    padding-right: 40px !important;\n    padding-left: 40px !important;\n    margin: 10px 0;\n  }\n"])));
+var InputWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-bottom: 5px;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n    padding-right: 40px !important;\n    padding-left: 40px !important;\n    margin: 10px 0;\n    &::placeholder{\n      color: ", ";\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.darkGray;
+});
 
 exports.InputWrapper = InputWrapper;
 

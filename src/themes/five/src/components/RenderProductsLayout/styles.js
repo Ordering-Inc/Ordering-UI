@@ -256,4 +256,9 @@ export const BackToTop = styled.div`
   background: ${({ theme }) => theme.colors.gold};
   border-radius: 6px;
   cursor: pointer;
+  font-weight: 900;
+
+  svg {
+    font-size: 25px;
+  }
 `
