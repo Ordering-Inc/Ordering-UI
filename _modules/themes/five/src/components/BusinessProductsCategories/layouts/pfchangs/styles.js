@@ -57,7 +57,7 @@ var CategoryPFChangs = _styledComponents.default.div(_templateObject7 || (_templ
   });
 }, function (_ref7) {
   var hover = _ref7.hover;
-  return hover && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    &:hover {\n      background: ", ";\n      margin: 0 40px;\n      height: 4px;\n      margin-bottom: 10px;\n    }\n  "])), function (_ref8) {
+  return hover && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n   span:hover {\n      background: ", ";\n      margin: 0 40px;\n      height: 4px;\n      margin-bottom: 10px;\n    }\n  "])), function (_ref8) {
     var theme = _ref8.theme;
     return theme.colors.primary;
   });

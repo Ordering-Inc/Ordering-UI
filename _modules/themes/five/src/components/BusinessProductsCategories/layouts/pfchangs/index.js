@@ -92,7 +92,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
 
     if (!isBlockScroll) {
       window.scroll({
-        top: topPos - 200,
+        top: topPos - 60,
         left: 0,
         behavior: 'smooth'
       });
@@ -132,7 +132,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: category === null || category === void 0 ? void 0 : category.id
       }, pfchangs ? /*#__PURE__*/_react.default.createElement(_styles.CategoryPFChangs, {
-        active: business !== null && business !== void 0 && business.lazy_load_products_recommended || PFChangsCategoriesLayout ? (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id : (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === category.id
+        active: business !== null && business !== void 0 && business.lazy_load_products_recommended || PFChangsCategoriesLayout ? (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id : (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === category.id,
+        hover: true
       }, /*#__PURE__*/_react.default.createElement(Category, {
         category: category,
         pfchangs: true

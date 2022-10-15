@@ -65,7 +65,7 @@ export const CategoryPFChangs = styled.div`
     }
   `}
   ${({ hover }) => hover && css`
-    &:hover {
+   span:hover {
       background: ${({ theme }) => theme.colors.primary};
       margin: 0 40px;
       height: 4px;

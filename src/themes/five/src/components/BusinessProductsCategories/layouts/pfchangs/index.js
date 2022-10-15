@@ -38,7 +38,7 @@ const BusinessProductsCategoriesUI = (props) => {
     else topPos = document.getElementById(`category${category.id}`)?.offsetTop
     if (!isBlockScroll) {
       window.scroll({
-        top: topPos - 200,
+        top: topPos - 60,
         left: 0,
         behavior: 'smooth'
       })
@@ -96,7 +96,7 @@ const BusinessProductsCategoriesUI = (props) => {
       categories && categories.length && categories.map((category, i) => (
         <React.Fragment key={category?.id}>
           {pfchangs ? (
-            <CategoryPFChangs active={business?.lazy_load_products_recommended || PFChangsCategoriesLayout ? (categorySelected?.id === category.id) : (selectedCategory?.id === category.id)}>
+            <CategoryPFChangs active={business?.lazy_load_products_recommended || PFChangsCategoriesLayout ? (categorySelected?.id === category.id) : (selectedCategory?.id === category.id)} hover>
               <Category category={category} pfchangs />
               <span />
             </CategoryPFChangs>
