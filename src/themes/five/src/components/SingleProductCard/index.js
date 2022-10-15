@@ -9,6 +9,7 @@ import { Modal } from '../Modal'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
+import { Alert } from '../Confirm'
 
 import {
   CardContainer,
@@ -56,6 +57,7 @@ const SingleProductCardUI = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const editMode = typeof product?.code !== 'undefined'
   const isObservedValidation = isObserved || useKioskApp
@@ -79,6 +81,13 @@ const SingleProductCardUI = (props) => {
 
   const handleClickProduct = (e) => {
     if (favoriteRef?.current?.contains(e.target)) return
+    if (productAddedToCartLength && product?.maximum_per_order && productAddedToCartLength >= product?.maximum_per_order) {
+      setAlertState({
+        open: true,
+        content: [t('PRODUCT_ON_MAXIMUM_ORDER', 'The product is on maximum order')]
+      })
+      return
+    }
 
     if (isFavorite) {
       onProductClick && onProductClick()
@@ -86,6 +95,13 @@ const SingleProductCardUI = (props) => {
     }
     (!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product, product?.business?.slug)) ||
       (useCustomFunctionality && onCustomClick && onCustomClick())
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
   const handleChangeFavorite = () => {
@@ -205,7 +221,7 @@ const SingleProductCardUI = (props) => {
           </div>
         )}
         {!useCustomFunctionality && !hideAddButton && !isSkeleton && (
-          <Button outline color='primary'>
+          <Button outline color='primary' disabled={productAddedToCartLength && product?.maximum_per_order && productAddedToCartLength >= product?.maximum_per_order}>
             {t('ADD', 'Add')}
           </Button>
         )}
@@ -271,6 +287,15 @@ const SingleProductCardUI = (props) => {
           />
         )}
       </Modal>
+      <Alert
+        title={t('PRODUCT', 'Product')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
