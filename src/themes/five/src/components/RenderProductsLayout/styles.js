@@ -65,12 +65,15 @@ export const BusinessCategoriesContainer = styled.div`
   @media (min-width: 993px) {
     width: calc(31% - 25px);
   }
+  position: sticky;
+  top: 65px;
 `
 
 export const BusinessCartContainer = styled(BusinessCategoriesContainer)`
   display: none;
   margin-top: 70px;
   min-width: 325px;
+  height: fit-content;
   @media (min-width: 769px) {
     ${({ isProfessional }) => isProfessional && css`
       margin-top: 0px;
