@@ -21,7 +21,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponents = require("ordering-components");
 
-var _Confirm = require("../../../Confirm");
+var _pfchangs = require("../../../Confirm/layouts/pfchangs");
 
 var _InputPhoneNumber = require("../../../InputPhoneNumber");
 
@@ -533,7 +533,7 @@ var LoginFormUI = function LoginFormUI(props) {
     height: 43
   }), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 43
-  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })))), /*#__PURE__*/_react.default.createElement(_pfchangs.Alert, {
     title: t('LOGIN', 'Login'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

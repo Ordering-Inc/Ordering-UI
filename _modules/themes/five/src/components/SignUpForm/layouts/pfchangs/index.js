@@ -35,7 +35,7 @@ var _utils = require("../../../../../../../utils");
 
 var _InputPhoneNumber = require("../../../InputPhoneNumber");
 
-var _Confirm = require("../../../Confirm");
+var _pfchangs = require("../../../Confirm/layouts/pfchangs");
 
 var _Modal = require("../../../Modal");
 
@@ -575,7 +575,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       return openVerifyState('sms');
     },
     disabled: formState.loading || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)
-  }, /*#__PURE__*/_react.default.createElement(_FaSms.default, null), t('SMS', 'Sms'))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_FaSms.default, null), t('SMS', 'Sms'))))), /*#__PURE__*/_react.default.createElement(_pfchangs.Alert, {
     title: t('SIGN_UP', 'Sign up'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
