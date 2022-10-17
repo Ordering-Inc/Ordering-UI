@@ -66,7 +66,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     handleSave = props.handleSave,
     handleChangeIngredientState = props.handleChangeIngredientState,
     handleChangeSuboptionState = props.handleChangeSuboptionState,
-    handleChangeCommentState = props.handleChangeCommentState;
+    handleChangeCommentState = props.handleChangeCommentState,
+    productAddedToCartLength = props.productAddedToCartLength;
   var product = productObject.product,
     loading = productObject.loading,
     error = productObject.error;
@@ -600,11 +601,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     className: "price-amount-block"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "price"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, productCart.total && parsePrice(productCart.total)), (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) <= (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) !== 1 && /*#__PURE__*/_react.default.createElement("span", null, t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product === null || product === void 0 ? void 0 : product.minimum_per_order)), (product === null || product === void 0 ? void 0 : product.maximum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) >= (product === null || product === void 0 ? void 0 : product.maximum_per_order) && /*#__PURE__*/_react.default.createElement("span", null, t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product === null || product === void 0 ? void 0 : product.maximum_per_order)))), productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, productCart.total && parsePrice(productCart.total)), (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) + productAddedToCartLength <= (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) !== 1 && /*#__PURE__*/_react.default.createElement("span", null, t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product === null || product === void 0 ? void 0 : product.minimum_per_order)), (product === null || product === void 0 ? void 0 : product.maximum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) + productAddedToCartLength >= (product === null || product === void 0 ? void 0 : product.maximum_per_order) && /*#__PURE__*/_react.default.createElement("span", null, t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product === null || product === void 0 ? void 0 : product.maximum_per_order)))), productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement("div", {
     className: isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'
   }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     onClick: decrement,
-    className: "".concat(productCart.quantity === 1 || !productCart.quantity || isSoldOut || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) <= (product === null || product === void 0 ? void 0 : product.minimum_per_order) ? 'disabled' : '')
+    className: "".concat(productCart.quantity === 1 || !productCart.quantity || isSoldOut || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) + productAddedToCartLength <= (product === null || product === void 0 ? void 0 : product.minimum_per_order) ? 'disabled' : '')
   }), (qtyBy === null || qtyBy === void 0 ? void 0 : qtyBy.pieces) && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     className: "qty",
     value: (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) || '',
@@ -621,7 +622,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     value: (productCart.quantity * (product === null || product === void 0 ? void 0 : product.weight)).toFixed(2)
   }), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     onClick: increment,
-    className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || productCart.quantity >= (product === null || product === void 0 ? void 0 : product.maximum_per_order) && product !== null && product !== void 0 && product.maximum_per_order || isSoldOut ? 'disabled' : '')
+    className: "".concat(maxProductQuantity <= 0 || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) + productAddedToCartLength >= maxProductQuantity || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) + productAddedToCartLength >= (product === null || product === void 0 ? void 0 : product.maximum_per_order) && product !== null && product !== void 0 && product.maximum_per_order || isSoldOut ? 'disabled' : '')
   }), isHaveWeight && /*#__PURE__*/_react.default.createElement(_styles.WeightUnitSwitch, null, /*#__PURE__*/_react.default.createElement(_styles.WeightUnitItem, {
     onClick: function onClick() {
       return handleSwitchQtyUnit('pieces');
@@ -638,7 +639,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClick: function onClick() {
       return handleSaveProduct();
     },
-    disabled: orderState.loading || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) === 0 || (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) < (product === null || product === void 0 ? void 0 : product.minimum_per_order) || (product === null || product === void 0 ? void 0 : product.maximum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) > (product === null || product === void 0 ? void 0 : product.maximum_per_order)
+    disabled: orderState.loading || (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) === 0 || (product === null || product === void 0 ? void 0 : product.minimum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) + productAddedToCartLength < (product === null || product === void 0 ? void 0 : product.minimum_per_order) || (product === null || product === void 0 ? void 0 : product.maximum_per_order) && (productCart === null || productCart === void 0 ? void 0 : productCart.quantity) + productAddedToCartLength > (product === null || product === void 0 ? void 0 : product.maximum_per_order)
   }, orderState.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.LOADING) || 'Loading')) : /*#__PURE__*/_react.default.createElement("span", null, editMode ? t('UPDATE', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.UPDATE) || 'Update') : t('ADD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.ADD) || 'Add'))), auth && !((_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && _orderState$options3.address_id || unaddressedTypes.includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type)) && (orderState.loading ? /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     color: "primary",
