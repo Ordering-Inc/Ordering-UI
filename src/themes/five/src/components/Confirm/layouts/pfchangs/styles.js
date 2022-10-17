@@ -26,7 +26,7 @@ export const PopupWrap = styled.div`
 export const PopupDialog = styled.div`
   background-color: #FFF;
   padding: 20px;
-  width: 55%;
+  width: 40%;
   border-radius: 10px;
 `
 
@@ -49,6 +49,7 @@ export const PopupActions = styled.div`
       color: ${({ theme }) => theme?.colors?.gold};
     }
     &:last-child {
+      color: #fff;
       ${props => props.theme?.rtl ? css`
         margin-left: 0;
       ` : css`

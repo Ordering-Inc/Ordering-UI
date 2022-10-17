@@ -11,7 +11,7 @@ import {
   useSession,
   useApi
 } from 'ordering-components'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/layouts/pfchangs'
 import { InputPhoneNumber } from '../../../InputPhoneNumber'
 import {
   LoginContainer,

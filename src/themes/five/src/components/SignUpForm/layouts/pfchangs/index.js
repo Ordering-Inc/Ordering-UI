@@ -21,7 +21,7 @@ import { Button } from '../../../../styles/Buttons'
 import { Checkbox } from '../../../../../../../styles/Checkbox'
 import { sortInputFields, formatSeconds } from '../../../../../../../utils'
 import { InputPhoneNumber } from '../../../InputPhoneNumber'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/layouts/pfchangs'
 import { Modal } from '../../../Modal'
 import {
   SignUpContainer,
