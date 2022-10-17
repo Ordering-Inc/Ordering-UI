@@ -243,83 +243,43 @@ Object.defineProperty(exports, "UserProfileForm", {
     return _UserProfileForm.UserProfileForm;
   }
 });
-
 var _AddressDetails = require("./src/components/AddressDetails");
-
 var _AddressForm = require("./src/components/AddressForm");
-
 var _AddressList = require("./src/components/AddressList");
-
 var _AppleLogin = require("./src/components/AppleLogin");
-
 var _AutoScroll = require("./src/components/AutoScroll");
-
 var _BusinessCart = require("./src/components/BusinessCart");
-
 var _BusinessController = require("./src/components/BusinessController");
-
 var _BusinessesListing = require("./src/components/BusinessesListing");
-
 var _BusinessItemAccordion = require("./src/components/BusinessItemAccordion");
-
 var _BusinessProductsList = require("./src/components/BusinessProductsList");
-
 var _BusinessProductsListing = require("./src/components/BusinessProductsListing");
-
 var _Cart = require("./src/components/Cart");
-
 var _CartStoresListing = require("./src/components/CartStoresListing");
-
 var _CartContent = require("./src/components/CartContent");
-
 var _CartPopover = require("./src/components/CartPopover");
-
 var _Checkout = require("./src/components/Checkout");
-
 var _FacebookLogin = require("./src/components/FacebookLogin");
-
 var _Footer = require("./src/components/Footer");
-
 var _GoogleLogin = require("./src/components/GoogleLogin");
-
 var _Header = require("./src/components/Header");
-
 var _HeaderOption = require("./src/components/HeaderOption");
-
 var _HomeHero = require("./src/components/HomeHero");
-
 var _LanguageSelector = require("./src/components/LanguageSelector");
-
 var _LoginForm = require("./src/components/LoginForm");
-
 var _MomentContent = require("./src/components/MomentContent");
-
 var _MomentControl = require("./src/components/MomentControl");
-
 var _NavBar = require("./src/components/NavBar");
-
 var _OrderDetails = require("./src/components/OrderDetails");
-
 var _OrderTypeSelectorHeader = require("./src/components/OrderTypeSelectorHeader");
-
 var _PaymentOptions = require("./src/components/PaymentOptions");
-
 var _ProductForm = require("./src/components/ProductForm");
-
 var _ProductIngredient = require("./src/components/ProductIngredient");
-
 var _ProductItemAccordion = require("./src/components/ProductItemAccordion");
-
 var _ProductOption = require("./src/components/ProductOption");
-
 var _ProductOptionSubOption = require("./src/components/ProductOptionSubOption");
-
 var _SidebarMenu = require("./src/components/SidebarMenu");
-
 var _SignUpForm = require("./src/components/SignUpForm");
-
 var _SingleProductCard = require("./src/components/SingleProductCard");
-
 var _UpsellingPage = require("./src/components/UpsellingPage");
-
 var _UserProfileForm = require("./src/components/UserProfileForm");

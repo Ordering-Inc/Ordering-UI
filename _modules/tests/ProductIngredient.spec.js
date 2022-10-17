@@ -1,15 +1,10 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
-
 var _react2 = require("@cypress/react");
-
 var _ProductIngredient = require("../components/ProductIngredient");
-
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var ingredient = {
   id: 7,
   product_id: 1318,

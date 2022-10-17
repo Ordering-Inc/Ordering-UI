@@ -15,6 +15,9 @@ export const Container = styled.div`
   .PhoneInputInput {
     flex: 1;
     min-width: 0;
+    &::placeholder{
+      color: ${props => props.theme.colors.darkGray};
+    }
   }
 
   .PhoneInputCountryIcon {

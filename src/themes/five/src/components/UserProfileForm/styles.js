@@ -150,7 +150,6 @@ export const SavedPlaces = styled.div`
   }
 
   ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
-      background: ${props => props.theme.colors.secundaryContrast};
       width: 100%;
       * {
         color: #fff;

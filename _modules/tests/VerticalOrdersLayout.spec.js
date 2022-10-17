@@ -1,27 +1,19 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
-
 var _react2 = require("@cypress/react");
-
 var _VerticalOrdersLayout = require("../components/VerticalOrdersLayout");
-
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var getOrderStatus = function getOrderStatus() {
   console.log('get order status fn');
 };
-
 var loadMoreOrders = function loadMoreOrders() {
   console.log('load more orders fn');
 };
-
 var onOrderClick = function onOrderClick() {
   console.log('on order click fn');
 };
-
 var pagination = {};
 var orders = [{
   id: 1,

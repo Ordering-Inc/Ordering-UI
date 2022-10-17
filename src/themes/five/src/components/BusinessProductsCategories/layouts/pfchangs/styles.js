@@ -64,6 +64,16 @@ export const CategoryPFChangs = styled.div`
       margin-bottom: 10px;
     }
   `}
+  &:hover {
+    ${({ hover }) => hover && css`
+      span {
+          background: ${({ theme }) => theme.colors.primary};
+          margin: 0 40px;
+          height: 4px;
+          margin-bottom: 10px;
+        }
+    `}
+  }
 `
 
 export const CategoriesWrapper = styled.div`

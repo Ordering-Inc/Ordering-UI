@@ -1,202 +1,140 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ProductForm = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _FiMinusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiMinusCircle"));
-
 var _FiPlusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiPlusCircle"));
-
 var _orderingComponents = require("ordering-components");
-
 var _utils = require("../../../../../utils");
-
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
 var _ProductIngredient = require("../../../../../components/ProductIngredient");
-
 var _ForgotPasswordForm = require("../../../../../components/ForgotPasswordForm");
-
 var _AddressList = require("../../../../../components/AddressList");
-
 var _Buttons = require("../../../../../styles/Buttons");
-
 var _Inputs = require("../../../../../styles/Inputs");
-
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
-
 var _Modal = require("../Modal");
-
 var _ProductOption = require("../ProductOption");
-
 var _ProductOptionSubOption = require("../ProductOptionSubOption");
-
 var _LoginForm = require("../LoginForm");
-
 var _SignUpForm = require("../SignUpForm");
-
 var _ProductShare = require("../ProductShare");
-
 var _styles = require("./styles");
-
 var _styledComponents = require("styled-components");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var ProductOptionsUI = function ProductOptionsUI(props) {
   var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$images, _theme$images$dummies, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _props$afterMidElemen, _props$afterMidCompon, _orderState$options, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _orderState$options2, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _error$, _props$afterComponent, _props$afterElements;
-
   var businessSlug = props.businessSlug,
-      editMode = props.editMode,
-      isSoldOut = props.isSoldOut,
-      productObject = props.productObject,
-      productCart = props.productCart,
-      increment = props.increment,
-      decrement = props.decrement,
-      showOption = props.showOption,
-      maxProductQuantity = props.maxProductQuantity,
-      errors = props.errors,
-      handleSave = props.handleSave,
-      handleChangeIngredientState = props.handleChangeIngredientState,
-      handleChangeSuboptionState = props.handleChangeSuboptionState,
-      handleChangeCommentState = props.handleChangeCommentState,
-      isIndividualBusinessCart = props.isIndividualBusinessCart;
+    editMode = props.editMode,
+    isSoldOut = props.isSoldOut,
+    productObject = props.productObject,
+    productCart = props.productCart,
+    increment = props.increment,
+    decrement = props.decrement,
+    showOption = props.showOption,
+    maxProductQuantity = props.maxProductQuantity,
+    errors = props.errors,
+    handleSave = props.handleSave,
+    handleChangeIngredientState = props.handleChangeIngredientState,
+    handleChangeSuboptionState = props.handleChangeSuboptionState,
+    handleChangeCommentState = props.handleChangeCommentState,
+    isIndividualBusinessCart = props.isIndividualBusinessCart;
   var product = productObject.product,
-      loading = productObject.loading,
-      error = productObject.error;
+    loading = productObject.loading,
+    error = productObject.error;
   var windowSize = (0, _useWindowSize.useWindowSize)();
-
   var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 2),
-      _useSession2$ = _useSession2[0],
-      auth = _useSession2$.auth,
-      user = _useSession2$.user,
-      login = _useSession2[1].login;
-
+    _useSession2 = _slicedToArray(_useSession, 2),
+    _useSession2$ = _useSession2[0],
+    auth = _useSession2$.auth,
+    user = _useSession2$.user,
+    login = _useSession2[1].login;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useUtils = (0, _orderingComponents.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      optimizeImage = _useUtils2[0].optimizeImage;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    optimizeImage = _useUtils2[0].optimizeImage;
   var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      modalIsOpen = _useState2[0],
-      setModalIsOpen = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    modalIsOpen = _useState2[0],
+    setModalIsOpen = _useState2[1];
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      orderState = _useOrder2[0];
-
+    _useOrder2 = _slicedToArray(_useOrder, 1),
+    orderState = _useOrder2[0];
   var theme = (0, _styledComponents.useTheme)();
-
   var _useState3 = (0, _react.useState)('login'),
-      _useState4 = _slicedToArray(_useState3, 2),
-      modalPageToShow = _useState4[0],
-      setModalPageToShow = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    modalPageToShow = _useState4[0],
+    setModalPageToShow = _useState4[1];
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
-
   var closeModal = function closeModal() {
     setModalIsOpen(false);
     setModalPageToShow('login');
   };
-
   var handleSuccessLogin = function handleSuccessLogin(user) {
     if (user) {
       closeModal();
     }
   };
-
   var handleSaveProduct = function handleSaveProduct() {
     var isErrors = Object.values(errors).length > 0;
-
     if (!isErrors) {
       handleSave && handleSave();
       return;
     }
-
     var myElement = document.getElementsByClassName('error')[0];
     var productContainer = document.getElementsByClassName('product-container')[0];
-
     if (!myElement || !productContainer) {
       return;
     }
-
     var topPos = myElement.offsetTop - productContainer.offsetTop;
-
     if (windowSize.width <= 768) {
       var productImage = document.getElementById('product_image');
       topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0);
     }
-
     (0, _utils.scrollTo)(productContainer, topPos, 1250);
   };
-
   var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
     var page = _ref.page;
     e.preventDefault();
     setModalPageToShow(page);
   };
-
   var handleSuccessSignup = function handleSuccessSignup(user) {
     var _user$session;
-
     login({
       user: user,
       token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
     });
     closeModal();
   };
-
   var isError = function isError(id) {
     var classnames = '';
-
     if (errors["id:".concat(id)]) {
       classnames = 'error';
     }
-
     if (isSoldOut || maxProductQuantity <= 0) {
       classnames += ' soldout';
     }
-
     return classnames;
   };
-
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -240,13 +178,11 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     loading: "lazy",
     onError: function onError(e) {
       var _theme$images2, _theme$images2$dummie;
-
       e.target.onerror = null;
       e.target.src = (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.product;
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku')), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.sku))), /*#__PURE__*/_react.default.createElement(_styles.ProductTagsListContainer, null, product.tags.map(function (tag) {
     var _theme$images3, _theme$images3$dummie;
-
     return /*#__PURE__*/_react.default.createElement(_styles.ProductTagWrapper, {
       key: tag.id
     }, /*#__PURE__*/_react.default.createElement("img", {
@@ -277,7 +213,6 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         return suboptions.enabled;
       }).map(function (suboption) {
         var _productCart$options, _productCart$options2;
-
         var currentState = ((_productCart$options = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options === void 0 ? void 0 : _productCart$options.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
         var balance = ((_productCart$options2 = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options2 === void 0 ? void 0 : _productCart$options2.balance) || 0;
         return /*#__PURE__*/_react.default.createElement(_ProductOptionSubOption.ProductOptionSubOption, {
@@ -399,13 +334,10 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }, AfterElement);
   }));
 };
-
 var ProductForm = function ProductForm(props) {
   var productOptionsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProductOptionsUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductForm, productOptionsProps);
 };
-
 exports.ProductForm = ProductForm;

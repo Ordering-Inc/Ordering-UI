@@ -9,8 +9,11 @@ import {
 } from './styles'
 
 export const OrderPreferencesSection = (props) => {
-  const { order } = props
+  const layouts = ['pfchangs'] // add layouts here to hide comments
+  const { order, layout } = props
   const [, t] = useLanguage()
+
+  const isShowComment = !(order?.comment && !order?.comment.includes('Enpoint:') && layouts.includes(layout))
 
   return (
     <>
@@ -20,7 +23,7 @@ export const OrderPreferencesSection = (props) => {
           <span>{order?.delivery_option?.name ? t(order?.delivery_option?.name.toUpperCase().replace(/\s/g, '_'), order?.delivery_option?.name) : t('EITHER_WAY', 'Either way')}</span>
         </CommentContainer>
       )}
-      {order?.comment && (
+      {(order?.comment && isShowComment) && (
         <CommentContainer>
           <h3>{t('COMMENT', 'Comment')}</h3>
           <span>{order?.comment}</span>

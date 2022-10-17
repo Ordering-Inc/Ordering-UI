@@ -661,6 +661,7 @@ const OrderDetailsUI = (props) => {
                 <OrderPreferencesSection
                   order={order}
                   placeSpotTypes={placeSpotTypes}
+                  layout={layout}
                 />
               </OrderPreferences>
             )}
