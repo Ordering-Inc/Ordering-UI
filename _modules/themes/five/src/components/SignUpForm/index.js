@@ -13,6 +13,7 @@ var _reactOtpInput = _interopRequireDefault(require("react-otp-input"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _orderingComponents = require("ordering-components");
 var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
+var _useRecaptcha3 = require("../../../../../hooks/useRecaptcha");
 var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
 var _Tabs = require("../../styles/Tabs");
 var _Inputs = require("../../styles/Inputs");
@@ -94,6 +95,16 @@ var SignUpFormUI = function SignUpFormUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
+  var _useRecaptcha = (0, _useRecaptcha3.useRecaptcha)(enableReCaptcha),
+    _useRecaptcha2 = _slicedToArray(_useRecaptcha, 1),
+    recaptchaConfig = _useRecaptcha2[0];
+  var _useState3 = (0, _react.useState)({
+      version: '',
+      siteKey: ''
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    reCaptchaVersion = _useState4[0],
+    setRecaptchaVersion = _useState4[1];
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 2),
     login = _useSession2[1].login;
@@ -107,22 +118,22 @@ var SignUpFormUI = function SignUpFormUI(props) {
     otpLeftTime = _useCountdownTimer2[0],
     _ = _useCountdownTimer2[1],
     resetOtpLeftTime = _useCountdownTimer2[2];
-  var _useState3 = (0, _react.useState)(''),
-    _useState4 = _slicedToArray(_useState3, 2),
-    userPhoneNumber = _useState4[0],
-    setUserPhoneNumber = _useState4[1];
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)(''),
     _useState6 = _slicedToArray(_useState5, 2),
-    isValidPhoneNumber = _useState6[0],
-    setIsValidPhoneNumber = _useState6[1];
-  var _useState7 = (0, _react.useState)(false),
+    userPhoneNumber = _useState6[0],
+    setUserPhoneNumber = _useState6[1];
+  var _useState7 = (0, _react.useState)(null),
     _useState8 = _slicedToArray(_useState7, 2),
-    passwordSee = _useState8[0],
-    setPasswordSee = _useState8[1];
-  var _useState9 = (0, _react.useState)(1),
+    isValidPhoneNumber = _useState8[0],
+    setIsValidPhoneNumber = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
-    fieldNumber = _useState10[0],
-    setFieldNumber = _useState10[1];
+    passwordSee = _useState10[0],
+    setPasswordSee = _useState10[1];
+  var _useState11 = (0, _react.useState)(1),
+    _useState12 = _slicedToArray(_useState11, 2),
+    fieldNumber = _useState12[0],
+    setFieldNumber = _useState12[1];
   var showInputPhoneNumber = ((_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false) || (configs === null || configs === void 0 ? void 0 : (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1';
   var initParams = {
     client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login3 = configs.google_login_client_id) === null || _configs$google_login3 === void 0 ? void 0 : _configs$google_login3.value,
@@ -241,16 +252,36 @@ var SignUpFormUI = function SignUpFormUI(props) {
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
   };
   (0, _react.useEffect)(function () {
-    var _formState$result, _formState$result3, _formState$result4;
+    var _formState$result, _formState$result4, _formState$result5;
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
-      var _formState$result2;
+      var _formState$result2, _formState$result2$re, _formState$result3;
+      if (((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re[0]) === 'ERROR_AUTH_VERIFICATION_CODE') {
+        var _configs$security_rec;
+        if (configs !== null && configs !== void 0 && (_configs$security_rec = configs.security_recaptcha_site_key) !== null && _configs$security_rec !== void 0 && _configs$security_rec.value) {
+          var _configs$security_rec2;
+          setRecaptchaVersion({
+            version: 'v2',
+            siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_site_key) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value
+          });
+          setAlertState({
+            open: true,
+            content: [t('TRY_AGAIN', 'Please try again')]
+          });
+          return;
+        }
+        setAlertState({
+          open: true,
+          content: [t('CONFIG_DOESNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key')]
+        });
+        return;
+      }
       setAlertState({
         open: true,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
+        content: ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) || [t('ERROR', 'Error')]
       });
-    } else if (!formState.loading && !((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.result) {
-      var _formState$result5;
-      saveCustomerUser && saveCustomerUser((_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result);
+    } else if (!formState.loading && !((_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.error) && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result) {
+      var _formState$result6;
+      saveCustomerUser && saveCustomerUser((_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : _formState$result6.result);
     }
   }, [formState]);
   (0, _react.useEffect)(function () {
@@ -300,6 +331,14 @@ var SignUpFormUI = function SignUpFormUI(props) {
       resetOtpLeftTime();
     }
   }, [checkPhoneCodeState]);
+  (0, _react.useEffect)(function () {
+    if (recaptchaConfig !== null && recaptchaConfig !== void 0 && recaptchaConfig.siteKey) {
+      setRecaptchaVersion({
+        version: recaptchaConfig === null || recaptchaConfig === void 0 ? void 0 : recaptchaConfig.version,
+        siteKey: recaptchaConfig === null || recaptchaConfig === void 0 ? void 0 : recaptchaConfig.siteKey
+      });
+    }
+  }, [recaptchaConfig]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -421,7 +460,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
       height: 43
     }));
   })), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles2.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
-    handleReCaptcha: handleReCaptcha
+    handleReCaptcha: handleReCaptcha,
+    reCaptchaVersion: reCaptchaVersion
   })), /*#__PURE__*/_react.default.createElement(_styles2.CheckboxArea, null, signUpTab === 'default' && /*#__PURE__*/_react.default.createElement(_styles2.PromotionsWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
     name: "promotions",
     id: "promotions",
