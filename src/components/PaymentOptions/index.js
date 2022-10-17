@@ -8,9 +8,10 @@ import FaCcStripe from '@meronex/icons/fa/FaCcStripe'
 import FaStripeS from '@meronex/icons/fa/FaStripeS'
 import GrStripe from '@meronex/icons/gr/GrStripe'
 import EnPaypal from '@meronex/icons/en/EnPaypal'
-import {
+import { 
   PaymentOptions as PaymentOptionsController,
   useLanguage,
+  useOrder,
   useSession
 } from 'ordering-components'
 
@@ -83,10 +84,20 @@ const PaymentOptionsUI = (props) => {
     setCardData,
     onPlaceOrderClick,
     setCreateOrder,
-    handlePlaceOrder
+    handlePlaceOrder,
+    paymethods
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
+  const [{loading}] = useOrder()
+
+  const payMethodsLists = () => {
+    let list = []
+    for(let i = 0; i < paymethods?.length; i++){
+      list.push(paymethods[i].paymethod)
+    }
+    return list
+  }
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
@@ -100,10 +111,10 @@ const PaymentOptionsUI = (props) => {
   }
 
   useEffect(() => {
-    if (paymethodsList.paymethods.length === 1) {
-      handlePaymethodClick && handlePaymethodClick(paymethodsList.paymethods[0])
+    if (payMethodsLists().length === 1) {
+      handlePaymethodClick && handlePaymethodClick(payMethodsLists()[0])
     }
-  }, [paymethodsList.paymethods])
+  }, [payMethodsLists()])
 
   useEffect(() => {
     if (paymethodSelected?.gateway !== 'cash' && errorCash) {
@@ -134,8 +145,9 @@ const PaymentOptionsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
-          {paymethodsList.paymethods.length > 0 && (
-            paymethodsList.paymethods.sort((a, b) => a.id - b.id).map(paymethod => (
+          {!(paymethodsList.loading || isLoading || loading) &&
+          payMethodsLists()?.length > 0 && (
+            payMethodsLists()?.sort((a, b) => a.id - b.id).map(paymethod => (
               <React.Fragment key={paymethod.id}>
                 {
                   (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
@@ -154,8 +166,7 @@ const PaymentOptionsUI = (props) => {
               </React.Fragment>
             ))
           )}
-
-          {(paymethodsList.loading || isLoading) && (
+          {(paymethodsList.loading || isLoading || loading) && (
             [...Array(5).keys()].map(i => (
               <PayCard key={i} isSkeleton>
                 <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />
@@ -169,9 +180,9 @@ const PaymentOptionsUI = (props) => {
             />
           )}
 
-          {!(paymethodsList.loading || isLoading) &&
+          {!(paymethodsList.loading || isLoading || loading) &&
             !paymethodsList.error &&
-            (!paymethodsList?.paymethods || paymethodsList.paymethods.length === 0) &&
+            (!payMethodsLists() || payMethodsLists().length === 0) &&
             (
               <p>{t('NO_PAYMENT_METHODS', 'No payment methods!')}</p>
             )}

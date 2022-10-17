@@ -10,6 +10,7 @@ import { Cash, CreditCard } from 'react-bootstrap-icons'
 import {
   PaymentOptions as PaymentOptionsController,
   useLanguage,
+  useOrder,
   useSession
 } from 'ordering-components'
 
@@ -94,10 +95,12 @@ const PaymentOptionsUI = (props) => {
     onPaymentChange,
     setCreateOrder,
     onPlaceOrderClick,
-    handlePlaceOrder
+    handlePlaceOrder,
+    paymethods
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
+  const [{loading}] = useOrder()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
@@ -108,8 +111,16 @@ const PaymentOptionsUI = (props) => {
 
   const includeKioskPaymethods = ['cash', 'card_delivery']
 
+  const payMethodsLists = () => {
+    let list = []
+    for(let i = 0; i < paymethods?.length; i++){
+      list.push(paymethods[i].paymethod)
+    }
+    return list
+  }
+
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
-  const supportedMethods = paymethodsList.paymethods.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
+  const supportedMethods = payMethodsLists()?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
 
   const handlePaymentMethodClick = (paymethod) => {
     if (cart?.balance > 0) {
@@ -168,7 +179,8 @@ const PaymentOptionsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
-          {supportedMethods.length > 0 && (
+          {!(paymethodsList.loading || isLoading || loading) &&
+          supportedMethods.length > 0 && (
             supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
               <React.Fragment key={paymethod.id}>
                 {
@@ -191,7 +203,7 @@ const PaymentOptionsUI = (props) => {
             ))
           )}
 
-          {(paymethodsList.loading || isLoading) && (
+          {(paymethodsList.loading || isLoading || loading) && (
             [...Array(5).keys()].map(i => (
               <PayCard key={i} isSkeleton>
                 <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />
@@ -205,7 +217,7 @@ const PaymentOptionsUI = (props) => {
             />
           )}
 
-          {!(paymethodsList.loading || isLoading) &&
+          {!(paymethodsList.loading || isLoading || loading) &&
             !paymethodsList.error &&
             (!paymethodsList?.paymethods || supportedMethods.length === 0) &&
             (
