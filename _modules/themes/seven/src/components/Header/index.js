@@ -1,150 +1,100 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SignUpIcon = exports.SignInIcon = exports.Header = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _reactRouterDom = require("react-router-dom");
-
 var _orderingComponents = require("ordering-components");
-
 var _styledComponents = require("styled-components");
-
 var _styles = require("./styles");
-
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
-
 var _useOnlineStatus = require("../../../../../hooks/useOnlineStatus");
-
 var _utils = require("../../../../../utils");
-
 var _Modal = require("../../../../../components/Modal");
-
 var _UserDetails = require("../../../../../components/UserDetails");
-
 var _Confirm = require("../../../../../components/Confirm");
-
 var _OrderTypeSelectorHeader = require("../OrderTypeSelectorHeader");
-
 var _LanguageSelector = require("../LanguageSelector");
-
 var _HeaderOption = require("../HeaderOption");
-
 var _UserPopover = require("../UserPopover");
-
 var _CartPopover = require("../CartPopover");
-
 var _CartContent = require("../CartContent");
-
 var _AddressList = require("../AddressList");
-
 var _AddressForm = require("../AddressForm");
-
 var _SidebarMenu = require("../SidebarMenu");
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var Header = function Header(props) {
   var _configState$configs, _configState$configs$, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _orderState$options2, _orderState$options2$, _orderState$options2$2, _orderState$options2$3, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options3, _orderState$options3$, _orderState$options3$2, _orderState$options3$3, _orderState$options4, _customerState$user2, _customerState$user3, _theme$defaultLanguag3, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
-
   var isHome = props.isHome,
-      location = props.location,
-      closeCartPopover = props.closeCartPopover,
-      isShowOrderOptions = props.isShowOrderOptions,
-      isHideSignup = props.isHideSignup,
-      isCustomerMode = props.isCustomerMode;
-
+    location = props.location,
+    closeCartPopover = props.closeCartPopover,
+    isShowOrderOptions = props.isShowOrderOptions,
+    isHideSignup = props.isHideSignup,
+    isCustomerMode = props.isCustomerMode;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
-      pathname = _useLocation.pathname;
-
+    pathname = _useLocation.pathname;
   var _useEvent = (0, _orderingComponents.useEvent)(),
-      _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0];
-
+    _useEvent2 = _slicedToArray(_useEvent, 1),
+    events = _useEvent2[0];
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
-
+    _useSession2 = _slicedToArray(_useSession, 1),
+    auth = _useSession2[0].auth;
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 2),
-      orderState = _useOrder2[0],
-      refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
-
+    _useOrder2 = _slicedToArray(_useOrder, 2),
+    orderState = _useOrder2[0],
+    refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
   var _useState = (0, _react.useState)({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      openPopover = _useState2[0],
-      setOpenPopover = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    openPopover = _useState2[0],
+    setOpenPopover = _useState2[1];
   var theme = (0, _styledComponents.useTheme)();
-
   var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
-
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configState = _useConfig2[0];
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
-      _useCustomer2 = _slicedToArray(_useCustomer, 2),
-      customerState = _useCustomer2[0],
-      deleteUserCustomer = _useCustomer2[1].deleteUserCustomer; // const clearCustomer = useRef(null)
-
-
+    _useCustomer2 = _slicedToArray(_useCustomer, 2),
+    customerState = _useCustomer2[0],
+    deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+  // const clearCustomer = useRef(null)
   var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      modalIsOpen = _useState4[0],
-      setModalIsOpen = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    modalIsOpen = _useState4[0],
+    setModalIsOpen = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      customerModalOpen = _useState6[0],
-      setCustomerModalOpen = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    customerModalOpen = _useState6[0],
+    setCustomerModalOpen = _useState6[1];
   var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      modalSelected = _useState8[0],
-      setModalSelected = _useState8[1];
-
+    _useState8 = _slicedToArray(_useState7, 2),
+    modalSelected = _useState8[0],
+    setModalSelected = _useState8[1];
   var _useState9 = (0, _react.useState)({
-    open: false,
-    content: null,
-    handleOnAccept: null
-  }),
-      _useState10 = _slicedToArray(_useState9, 2),
-      confirm = _useState10[0],
-      setConfirm = _useState10[1];
-
+      open: false,
+      content: null,
+      handleOnAccept: null
+    }),
+    _useState10 = _slicedToArray(_useState9, 2),
+    confirm = _useState10[0],
+    setConfirm = _useState10[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
-
     return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0;
   }) || null;
   var windowSize = (0, _useWindowSize.useWindowSize)();
@@ -153,40 +103,32 @@ var Header = function Header(props) {
   var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
     return Number(value);
   })) || [];
-
   var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isSubmit = _useState12[0],
-      setIsSubmit = _useState12[1];
-
+    _useState12 = _slicedToArray(_useState11, 2),
+    isSubmit = _useState12[0],
+    setIsSubmit = _useState12[1];
   var openModal = function openModal(opt) {
     setModalSelected(opt);
     setModalIsOpen(true);
   };
-
   var handleTogglePopover = function handleTogglePopover(type) {
     setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, !openPopover[type])));
   };
-
   var handleClosePopover = function handleClosePopover(type) {
     setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
   };
-
   var handleAddProduct = function handleAddProduct() {
     if (!closeCartPopover) {
       handleTogglePopover('cart');
     }
   };
-
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
-
     if (isCustomerMode && pathname.includes('/orders')) {
       deleteUserCustomer(true);
       refreshOrderOptions();
     }
   };
-
   (0, _react.useEffect)(function () {
     events.on('cart_product_added', handleAddProduct);
     return function () {
@@ -199,19 +141,15 @@ var Header = function Header(props) {
     }
   }, [customerState === null || customerState === void 0 ? void 0 : (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.address]);
   var history = (0, _reactRouterDom.useHistory)();
-
   var handleGotoHome = function handleGotoHome() {
     history.push('/home');
   };
-
   var handleSaveAdress = function handleSaveAdress() {
     setIsSubmit(true);
     setModalIsOpen(false);
   };
-
   (0, _react.useEffect)(function () {
     var _orderState$options, _orderState$options$a;
-
     if (orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.address && isSubmit && isHome) {
       history.push('/search');
     }
@@ -371,7 +309,8 @@ var Header = function Header(props) {
     address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
-    } // onSaveAddress={() => setModalIsOpen(false)}
+    }
+    // onSaveAddress={() => setModalIsOpen(false)}
     ,
     onSaveAddress: function onSaveAddress() {
       return handleSaveAdress();
@@ -419,12 +358,10 @@ var Header = function Header(props) {
     }, AfterElement);
   }));
 };
-
 exports.Header = Header;
 Header.defaultProps = {
   isShowOrderOptions: true
 };
-
 var SignInIcon = function SignInIcon() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     height: "512pt",
@@ -435,9 +372,7 @@ var SignInIcon = function SignInIcon() {
     d: "m512 80v352c0 44.113281-35.886719 80-80 80h-201c-44.113281 0-80-35.886719-80-80v-40c0-11.046875 8.953125-20 20-20s20 8.953125 20 20v40c0 22.054688 17.945312 40 40 40h201c22.054688 0 40-17.945312 40-40v-352c0-22.054688-17.945312-40-40-40h-201c-22.054688 0-40 17.945312-40 40v40c0 11.046875-8.953125 20-20 20s-20-8.953125-20-20v-40c0-44.113281 35.886719-80 80-80h201c44.113281 0 80 35.886719 80 80zm-286.085938 227.800781c-7.839843 7.78125-7.890624 20.445313-.113281 28.285157 3.910157 3.941406 9.054688 5.914062 14.199219 5.914062 5.09375 0 10.1875-1.933594 14.085938-5.800781l45.144531-44.789063c9.523437-9.449218 14.769531-22.023437 14.769531-35.410156s-5.246094-25.960938-14.769531-35.410156l-45.144531-44.789063c-7.839844-7.777343-20.503907-7.730469-28.285157.113281-7.777343 7.839844-7.726562 20.503907.113281 28.28125l32.054688 31.804688h-237.96875c-11.046875 0-20 8.953125-20 20s8.953125 20 20 20h237.96875zm0 0"
   }));
 };
-
 exports.SignInIcon = SignInIcon;
-
 var SignUpIcon = function SignUpIcon() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     version: "1.1",
@@ -454,5 +389,4 @@ var SignUpIcon = function SignUpIcon() {
     d: "M492,397h-55v-55c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v55h-55c-11.046,0-20,8.954-20,20 c0,11.046,8.954,20,20,20h55v55c0,11.046,8.954,20,20,20c11.046,0,20-8.954,20-20v-55h55c11.046,0,20-8.954,20-20 C512,405.954,503.046,397,492,397z"
   }))));
 };
-
 exports.SignUpIcon = SignUpIcon;
