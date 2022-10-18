@@ -17,6 +17,7 @@ import {
 
 import { Modal } from '../Modal'
 import { Alert } from '../Confirm'
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
@@ -34,6 +35,7 @@ import {
   CardItemContent
 } from './styles'
 import { PaymentOptionOpenPay } from '../PaymentOptionOpenPay'
+import { useTheme } from 'styled-components'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect', 'openpay']
 const stripeRedirectOptions = [
@@ -103,10 +105,15 @@ const PaymentOptionsUI = (props) => {
     isHideCash
   } = props
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [{ token, user }] = useSession()
   const [ , { applyCoupon, removeOffer }] = useOrder()
   const [{ configs }] = useConfig()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
@@ -408,7 +415,7 @@ const PaymentOptionsUI = (props) => {
           />
         </Modal>
 
-        <Alert
+        <AlertComponent
           title={t('PAYMENT_METHODS', 'Payment methods')}
           content={alertState.content}
           acceptText={t('ACCEPT', 'Accept')}

@@ -61,6 +61,7 @@ import MdClose from '@meronex/icons/md/MdClose'
 import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import { bytesConverter, getTraduction } from '../../../../../utils'
 import { Alert } from '../Confirm'
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 import { Modal } from '../Modal'
 
 const filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime']
@@ -94,6 +95,10 @@ const MessagesUI = (props) => {
   const buttonRef = useRef(null)
   const [modalImage, setModalImage] = useState({ open: false, src: '' })
   const imageRef = useRef(null)
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
 
   const quickMessageList = [
     { key: 'message_1', text: t('CUSTOMER_MESSAGE_1', 'Lorem ipsum 1') },
@@ -746,7 +751,7 @@ const MessagesUI = (props) => {
             )}
         </MessagesRightLayout>
       </MessagesLayoutWrapper>
-      <Alert
+      <AlertComponent
         title={t('ERROR', 'Error')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}

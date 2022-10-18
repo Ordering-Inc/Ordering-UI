@@ -24,6 +24,7 @@ const BusinessProductsCategoriesUI = (props) => {
   } = props
 
   const [selectedCategory, setSelectedCategory] = useState({ id: null })
+  const [centerAutoscroll, setCenterAutoscroll] = useState(false)
   const theme = useTheme()
   const handleChangeCategory = (category) => {
     const isBlockScroll = window.location.search.includes('category') &&
@@ -71,7 +72,7 @@ const BusinessProductsCategoriesUI = (props) => {
   const Category = ({ category, pfchangs }) => {
     return (
       <TabComponent
-        className={`category${subcategoriesLayout ? category?.id : category.id === ' featured' ? ' special' : ''}`}
+        className={`center category${subcategoriesLayout ? category?.id : category.id === ' featured' ? ' special' : ''}`}
         active={
           subcategoriesLayout
             ? subcategorySelected?.id === category?.id
@@ -109,6 +110,11 @@ const BusinessProductsCategoriesUI = (props) => {
   }
 
   useEffect(() => {
+    const autoscrollWidth = document.getElementById('autoscroll')?.clientWidth
+    const screenWidth = window.innerWidth
+    if (screenWidth > autoscrollWidth) {
+      setCenterAutoscroll(true)
+    }
     const handleScroll = () => {
       if (business?.lazy_load_products_recommended || PFChangsCategoriesLayout) return
       const featuredElement = document.getElementById('categoryfeatured')
@@ -192,6 +198,7 @@ const BusinessProductsCategoriesUI = (props) => {
             w={props.wContainerStyle}
             pfchangs
             subcategoriesLayout={subcategoriesLayout}
+            centerAutoscroll={centerAutoscroll}
           >
             {!isSkeleton ? (
               <Tabs variant='primary'>

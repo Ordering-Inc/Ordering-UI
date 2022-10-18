@@ -12,6 +12,7 @@ import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../Modal'
 import { Confirm } from '../Confirm'
+import { Confirm as ConfirmPFChangs } from '../Confirm/layouts/pfchangs'
 import {
   Container,
   Content,
@@ -59,7 +60,9 @@ const SingleOrderCardUI = (props) => {
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
   const [isProductReviewed, setIsProductReviewed] = useState(false)
   const [isDriverReviewed, setIsDriverReviewed] = useState(false)
-
+  const ConfirmComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? ConfirmPFChangs
+    : Confirm
   const handleClickCard = (e, uuid) => {
     if (e.target.closest('.favorite') || e.target.closest('.review') || e.target.closest('.reorder')) return
 
@@ -294,7 +297,7 @@ const SingleOrderCardUI = (props) => {
 
         </Modal>
       )}
-      <Confirm
+      <ConfirmComponent
         title={t('ORDER', 'Order')}
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}

@@ -2,11 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { GoogleIdentityButton as GoogleIdentityButtonController, useLanguage } from 'ordering-components'
 import { GoogleButton } from './styles'
 import { Alert } from '../Confirm'
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
+import { useTheme } from 'styled-components'
 
 export const GoogleLoginButtonUI = (props) => {
   const { initParams, handleSigninSuccess, formState } = props
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
 
   useEffect(() => {
     window.handleCredentialResponse = (response) => {
@@ -42,7 +49,7 @@ export const GoogleLoginButtonUI = (props) => {
           data-locale='en'
         />
       </GoogleButton>
-      <Alert
+      <AlertComponent
         open={alertState.open}
         title={t('GOOGLE_LOGIN_ERROR', 'Google Login error')}
         content={alertState?.result}

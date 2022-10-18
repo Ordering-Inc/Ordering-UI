@@ -66,6 +66,7 @@ import { Cart } from '../Cart'
 import { Cart as CartPF } from '../Cart/layouts/pfchangs'
 
 import { Alert } from '../Confirm'
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
 import { PlaceSpot } from '../PlaceSpot'
@@ -132,6 +133,9 @@ const CheckoutUI = (props) => {
   const isWalletCreditPointsEnabled = businessConfigs.find(config => config.key === 'wallet_credit_point_enabled')?.value === '1'
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp
   const layout = theme?.layouts?.checkout?.components?.layout?.type
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
   const brandInformation = {
@@ -565,7 +569,7 @@ const CheckoutUI = (props) => {
                 <img src={businessDetails?.business?.header} />
                 <div>
                   <h2>{businessDetails?.business?.name}</h2>
-                  <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business?.slug)}>{('GO_TO_BUSINESS', 'Go to business')}</span>
+                  <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business?.slug)}>{t('GO_TO_BUSINESS', 'Go to business')}</span>
                 </div>
               </BusinessDetails>
             )}
@@ -674,7 +678,7 @@ const CheckoutUI = (props) => {
             </WarningText>
           )}
       </WrapperRightContainer>
-      <Alert
+      <AlertComponent
         title={t('CUSTOMER_DETAILS', 'Customer Details')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
@@ -727,6 +731,7 @@ export const Checkout = (props) => {
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
+  const theme = useTheme()
 
   const [cartState, setCartState] = useState({ loading: true, error: null, cart: null })
 
@@ -737,7 +742,9 @@ export const Checkout = (props) => {
   const [isResetPaymethod, setIsResetPaymethod] = useState(false)
 
   const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length) || null)
-
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -927,7 +934,7 @@ export const Checkout = (props) => {
         />
       )}
 
-      <Alert
+      <AlertComponent
         title={t('CHECKOUT ', 'Checkout')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}

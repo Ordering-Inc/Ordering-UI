@@ -17,6 +17,7 @@ import { VerifyCodeForm } from '../VerifyCodeForm'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { bytesConverter } from '../../../../../utils'
@@ -69,6 +70,10 @@ const UserProfileFormUI = (props) => {
   const UserFormDetailComponent = pfchangs
     ? UserFormDetailsPFChangs
     : UserFormDetailsUI
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -239,7 +244,7 @@ const UserProfileFormUI = (props) => {
           </SavedPlaces>
         )}
       </Container>
-      <Alert
+      <AlertComponent
         title={t('PROFILE', 'Profile')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}

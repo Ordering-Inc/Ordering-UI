@@ -11,7 +11,9 @@ import {
 
 import { Modal } from '../Modal'
 import { Alert } from '../Confirm'
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 import { AddressList } from '../AddressList'
+import { useTheme } from 'styled-components'
 
 const AddressDetailsUI = (props) => {
   const {
@@ -29,10 +31,15 @@ const AddressDetailsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [{ user }] = useCustomer()
+  const theme = useTheme()
 
   useEffect(() => {
     return () => setOpenModal(false)
   }, [])
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
 
   return (
     <>
@@ -74,7 +81,7 @@ const AddressDetailsUI = (props) => {
           />
         </Modal>
 
-        <Alert
+        <AlertComponent
           title={t('SEARCH', 'Search')}
           content={alertState.content}
           acceptText={t('ACCEPT', 'Accept')}

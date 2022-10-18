@@ -27,7 +27,7 @@ import { ForgotPasswordForm } from '../../../ForgotPasswordForm'
 import { AddressList } from '../../../AddressList'
 
 import { Modal } from '../../../Modal'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/layouts/pfchangs'
 import { Button } from '../../../../styles/Buttons'
 
 import {

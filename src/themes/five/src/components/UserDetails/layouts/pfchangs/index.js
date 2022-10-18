@@ -22,7 +22,7 @@ import {
   useLanguage,
   useSession
 } from 'ordering-components'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/layouts/pfchangs'
 import { Modal } from '../../../Modal'
 import { UserFormDetailsUI } from '../../../UserFormDetails/layouts/pfchangs'
 
@@ -170,44 +170,15 @@ const UserDetailsUI = (props) => {
             </Header>
           )}
 
-          {!isEdit ? (
-            <UserData isCheckout={isCheckout}>
-              <>
-                {(userData?.name || userData?.middle_name || userData?.lastname || userData?.second_lastname) && (
-                  <UserName>
-                    {userData?.name} {userData?.middle_name} {userData?.lastname} {userData?.second_lastname}
-                  </UserName>
-                )}
-                <span onClick={() => toggleEditState()}>{t('CHANGE', 'Change')}</span>
-              </>
-              {userData?.email && (
-                <p>{userData?.email}</p>
-              )}
-              {(userData?.cellphone || user?.cellphone) && (
-                <PhoneContainer>
-                  <CountryFlag>
-                    {
-                      userData?.country_phone_code && (
-                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.cellphone}`)?.country} />
-                      )
-                    }
-                  </CountryFlag>
-                  <p>
-                    {userData?.cellphone}
-                  </p>
-                </PhoneContainer>
-              )}
-            </UserData>
-          ) : (
-            <SideForm>
-              <UserFormDetailsUI
-                {...props}
-                userData={userData}
-                isCustomerMode={isCustomerMode}
-                setWillVerifyOtpState={setWillVerifyOtpState}
-              />
-            </SideForm>
-          )}
+          <SideForm>
+            <UserFormDetailsUI
+              {...props}
+              userData={userData}
+              isCustomerMode={isCustomerMode}
+              setWillVerifyOtpState={setWillVerifyOtpState}
+              isEdit
+            />
+          </SideForm>
         </Container>
       )}
       <Alert

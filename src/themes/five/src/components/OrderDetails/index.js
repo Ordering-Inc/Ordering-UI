@@ -30,6 +30,7 @@ import { ActionsSection } from './ActionsSection'
 import { OrderPreferencesSection } from './OrderPreferencesSections'
 import { PlaceSpot } from '../PlaceSpot'
 import { Confirm } from '../Confirm'
+import { Confirm as ConfirmPFChangs } from '../Confirm/layouts/pfchangs'
 
 import {
   Container,
@@ -140,6 +141,9 @@ const OrderDetailsUI = (props) => {
   const showCustomerAddress = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.address?.hidden
   const showCustomerEmail = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.email?.hidden
 
+  const ConfirmComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? ConfirmPFChangs
+    : Confirm
   const defaultLayoutThemes = ['original', 'pfchangs']
 
   const getOrderStatus = (s) => {
@@ -808,7 +812,7 @@ const OrderDetailsUI = (props) => {
           }
         />
       </Modal>
-      <Confirm
+      <ConfirmComponent
         title={t('ORDER', 'Order')}
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}

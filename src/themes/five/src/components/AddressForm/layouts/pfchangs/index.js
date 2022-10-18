@@ -14,7 +14,7 @@ import {
   useConfig,
   useOrderingTheme
 } from 'ordering-components'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/layouts/pfchangs'
 import { GoogleGpsButton } from '../../../../../../../components/GoogleGpsButton'
 
 import {

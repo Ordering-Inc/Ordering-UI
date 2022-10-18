@@ -44,6 +44,7 @@ import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
 import { Confirm } from '../Confirm'
+import { Confirm as ConfirmPFChangs } from '../Confirm/layouts/pfchangs'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../../../../utils'
 
@@ -92,6 +93,9 @@ const AddressListUI = (props) => {
   const showIcons = !orderingTheme?.theme?.profile?.components?.address_list?.components?.icons?.hidden
   const showZipcode = !orderingTheme?.theme?.profile?.components?.address_list?.components?.zipcode?.hidden
   const showInternalNumber = !orderingTheme?.theme?.profile?.components?.address_list?.components?.internal_number?.hidden
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? ConfirmPFChangs
+    : Confirm
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -149,6 +153,7 @@ const AddressListUI = (props) => {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_ADDRESS', 'Are you sure that you want to delete the address?'),
+      title: t('DELETE_ADDRESS', 'Delete Address'),
       handleOnAccept: () => {
         handleDelete(address)
         setConfirm({ ...confirm, open: false })
@@ -384,8 +389,8 @@ const AddressListUI = (props) => {
             </Modal>
           )
         }
-        <Confirm
-          title={t('SEARCH', 'Search')}
+        <AlertComponent
+          title={confirm.title || t('SEARCH', 'Search')}
           content={confirm.content}
           acceptText={t('ACCEPT', 'Accept')}
           open={confirm.open}

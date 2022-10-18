@@ -160,7 +160,9 @@ export const CardLogo = (props) => {
 export const PriceWrapper = styled.div`
   display: flex;
   align-items: center;
-  color: #fff;
+  span {
+    color: #fff;
+  }
 
   .off-price {
     font-size: 10px;

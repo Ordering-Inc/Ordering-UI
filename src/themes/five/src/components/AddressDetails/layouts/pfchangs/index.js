@@ -8,7 +8,7 @@ import {
 } from './styles'
 
 import { Modal } from '../../../Modal'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/layouts/pfchangs'
 import { AddressList } from '../../../AddressList'
 
 const AddressDetailsUI = (props) => {

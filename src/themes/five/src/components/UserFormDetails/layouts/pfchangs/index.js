@@ -27,7 +27,7 @@ import { Input } from '../../../../styles/Inputs'
 import { Button } from '../../../../styles/Buttons/theme/pfchangs'
 import { InputPhoneNumber } from '../../../../../../../components/InputPhoneNumber'
 import { LanguageSelector } from '../../../../../../../components/LanguageSelector'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/layouts/pfchangs'
 import { sortInputFields } from '../../../../../../../utils'
 import { Checkbox } from '../../../../../../../styles/Checkbox'
 
@@ -335,35 +335,12 @@ export const UserFormDetailsUI = (props) => {
                     />
                   </InputPhoneNumberWrapper>
                 )}
-                {!isCheckout && showCustomerPassword && !requiredFields && (
-                  <InputGroup>
-                    <p>{t('PASSWORD', 'Password')}</p>
-                    <Input
-                      type='password'
-                      name='password'
-                      className='form'
-                      disabled={!isEdit}
-                      borderBottom
-                      placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
-                      onChange={handleChangeInput}
-                      ref={formMethods.register({
-                        required: isRequiredField('password')
-                          ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                          : null,
-                        minLength: {
-                          value: 8,
-                          message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                        }
-                      })}
-                    />
-                  </InputGroup>
-                )}
-                {showLangauges && !requiredFields && !isCheckout && (
+                {/* {showLangauges && !requiredFields && !isCheckout && (
                   <LanguageSelectorWrapper isCheckout={isCheckout}>
                     <p>{t('LANGUAGE', 'Language')}</p>
                     <LanguageSelector />
                   </LanguageSelectorWrapper>
-                )}
+                )} */}
                 <ActionsForm>
                   <Button
                     outline
@@ -402,10 +379,10 @@ export const UserFormDetailsUI = (props) => {
                       {user?.cellphone}
                     </p>
                   </PhoneContainer>
-                  <LanguageSelectorWrapper>
+                  {/* <LanguageSelectorWrapper>
                     <p>{t('LANGUAGE', 'Language')}</p>
                     <LanguageSelector />
-                  </LanguageSelectorWrapper>
+                  </LanguageSelectorWrapper> */}
                 </Info>
                 <div>
                   <span onClick={() => setEditEnabled(true)}>

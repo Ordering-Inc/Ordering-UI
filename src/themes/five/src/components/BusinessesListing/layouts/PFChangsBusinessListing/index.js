@@ -26,7 +26,7 @@ import { Button } from '../../../../styles/Buttons/theme/pfchangs'
 import { NotFoundSource } from '../../../NotFoundSource'
 
 import { Modal } from '../../../Modal'
-import { Alert } from '../../../Confirm'
+import { Alert } from '../../../Confirm/layouts/pfchangs'
 import { AddressForm } from '../../../AddressForm'
 import { AddressList } from '../../../AddressList'
 

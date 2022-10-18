@@ -42,8 +42,15 @@ export const CategoriesContainer = styled.div`
   }
   &.category-lists{
     display: flex;
-    justify-content: center;
     width: 102%;
+    ${({ centerAutoscroll }) => centerAutoscroll && css`
+      width: 100%;
+      justify-content: center;
+    `}
+  }
+  div.center {
+    display: flex;
+    align-items: center;
   }
   @media (min-width: 381px) {
     padding: 15px 0px 0px 0px;

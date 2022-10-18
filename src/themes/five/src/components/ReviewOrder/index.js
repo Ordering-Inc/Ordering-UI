@@ -20,7 +20,7 @@ import {
   ContinueContainer
 } from './styles'
 import { Alert } from '../Confirm'
-
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 import { TextArea } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
@@ -35,6 +35,10 @@ const ReviewOrderUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
   const [comments, setComments] = useState([])
   const [extraComment, setExtraComment] = useState('')
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
 
   const commentsList = reviewCommentList('order')
 
@@ -208,7 +212,7 @@ const ReviewOrderUI = (props) => {
               ) : t('LOADING', 'Loading')}
             </Button>
           </Send>
-          <Alert
+          <AlertComponent
             title={t('ORDER_REVIEW', 'Order Review')}
             content={alertState.content}
             acceptText={t('ACCEPT', 'Accept')}

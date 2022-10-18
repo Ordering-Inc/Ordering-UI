@@ -4,7 +4,7 @@ import MdClose from '@meronex/icons/md/MdClose'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../styles/Buttons'
 import { Alert, Confirm } from '../Confirm'
-
+import { Alert as AlertPFChangs, Confirm as ConfirmPFChangs } from '../Confirm/layouts/pfchangs'
 import {
   SessionsListContainer,
   Title,
@@ -16,6 +16,7 @@ import {
   NoSessionsContainer,
   ButtonsGroup
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const SessionsListUI = (props) => {
   const {
@@ -28,8 +29,17 @@ const SessionsListUI = (props) => {
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [{ parseDate }] = useUtils()
+  const theme = useTheme()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
+
+  const ConfirmComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? ConfirmPFChangs
+    : Confirm
 
   const onDeleteSession = (session) => {
     setConfirm({
@@ -136,7 +146,7 @@ const SessionsListUI = (props) => {
           </Button>
         </NoSessionsContainer>
       )}
-      <Confirm
+      <ConfirmComponent
         title={t('WEB_APPNAME', 'Ordering')}
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}
@@ -146,7 +156,7 @@ const SessionsListUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
-      <Alert
+      <AlertComponent
         title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}

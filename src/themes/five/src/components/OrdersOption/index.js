@@ -29,6 +29,7 @@ import { BusinessController } from '../BusinessController'
 import { SingleProductCard } from '../SingleProductCard'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Alert } from '../Confirm'
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 
 const OrdersOptionUI = (props) => {
   const {
@@ -103,6 +104,10 @@ const OrdersOptionUI = (props) => {
   }
 
   const showSkeletons = (!isBusiness && !isProducts && loading) || (businessLoading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -358,7 +363,7 @@ const OrdersOptionUI = (props) => {
       {orders.length > 0 && (
         <Divider />
       )}
-      <Alert
+      <AlertComponent
         title={t('MY_ORDERS', 'My orders')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}

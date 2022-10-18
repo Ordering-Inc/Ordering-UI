@@ -16,6 +16,7 @@ import {
 } from './styles'
 
 import { Alert } from '../Confirm'
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 import { Checkbox } from '../../../../../styles/Checkbox'
 
 const PaymentOptionWalletUI = (props) => {
@@ -39,6 +40,10 @@ const PaymentOptionWalletUI = (props) => {
   const [checkedState, setCheckedState] = useState(
     new Array(walletsState.result?.length).fill(false)
   )
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
 
   const isWalletCashEnabled = configs?.wallet_cash_enabled?.value === '1'
   const isWalletPointsEnabled = configs?.wallet_credit_point_enabled?.value === '1'
@@ -150,7 +155,7 @@ const PaymentOptionWalletUI = (props) => {
         </>
       )}
 
-      <Alert
+      <AlertComponent
         title={t('WALLET_ERROR_MESSAGES', 'Wallet')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}

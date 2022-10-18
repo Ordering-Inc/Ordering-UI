@@ -41,6 +41,7 @@ import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../UserDetails'
 import { Confirm } from '../Confirm'
+import { Confirm as ConfirmPFChangs } from '../Confirm/layouts/pfchangs'
 import { LoginForm } from '../LoginForm'
 import { LoginForm as LoginFormPF } from '../LoginForm/layouts/pfchangs'
 import { SignUpForm } from '../SignUpForm'
@@ -115,6 +116,10 @@ export const Header = (props) => {
   const SignFormComponent = isloginSignupLayoutPF
     ? SignUpFormPF
     : SignUpForm
+
+  const ConfirmComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? ConfirmPFChangs
+    : Confirm
 
   const handleSuccessSignup = (user) => {
     login({
@@ -673,7 +678,7 @@ export const Header = (props) => {
             )}
           </Modal>
         )}
-        <Confirm
+        <ConfirmComponent
           title={t('CUSTOMER', theme?.defaultLanguages?.CUSTOMER || 'Customer')}
           content={confirm.content}
           acceptText={t('ACCEPT', theme?.defaultLanguages?.ACCEPT || 'Accept')}

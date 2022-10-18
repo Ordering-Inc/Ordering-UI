@@ -20,6 +20,7 @@ import {
   useOrderingTheme
 } from 'ordering-components'
 import { Alert } from '../Confirm'
+import { Alert as AlertPFchangs } from '../Confirm/layouts/pfchangs'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
 
 import {
@@ -34,6 +35,7 @@ import {
 
 import { Button } from '../../styles/Buttons/theme/pfchangs'
 import { Input, TextArea } from '../../styles/Inputs'
+import { useTheme } from 'styled-components'
 
 const inputNames = [
   { name: 'address', code: 'Address' },
@@ -64,6 +66,7 @@ const AddressFormUI = (props) => {
   const formMethods = useForm()
   const [{ auth }] = useSession()
   const [orderingTheme] = useOrderingTheme()
+  const theme = useTheme()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -79,6 +82,9 @@ const AddressFormUI = (props) => {
 
   const isHideMap = orderingTheme?.theme?.header?.components?.address_form?.components?.map?.hidden
   const isHideIcons = orderingTheme?.theme?.header?.components?.address_form?.components?.icons?.hidden
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFchangs
+    : Alert
 
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
@@ -528,7 +534,7 @@ const AddressFormUI = (props) => {
         </FormControl>
       )}
 
-      <Alert
+      <AlertComponent
         title={t('ADDRESS', 'Address')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}

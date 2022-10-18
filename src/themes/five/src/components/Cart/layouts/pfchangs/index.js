@@ -3,8 +3,7 @@ import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useC
 import { Button } from '../../../../styles/Buttons/theme/pfchangs'
 import { ProductItemAccordion as ProductItemAccordionPFChangs } from '../../../ProductItemAccordion/layouts/pfchangs'
 import { BusinessItemAccordion as BusinessItemAccordionPFChangs } from '../../../BusinessItemAccordion/layouts/pfchangs'
-import { Confirm } from '../../../Confirm'
-import { Confirm as ConfirmPF } from '../../../Confirm/layouts/pfchangs'
+import { Confirm } from '../../../Confirm/layouts/pfchangs'
 import { Modal } from '../../../Modal'
 
 import { ProductForm as ProductFormPFChangs } from '../../../ProductForm/layouts/pfchangs'
@@ -102,10 +101,6 @@ const CartUI = (props) => {
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
     : parseDate(orderState?.option?.moment, { outputFormat: 'YYYY-MM-DD HH:mm' })
-
-  const ConfirmComponent = theme?.general?.components?.layout?.type === 'pfchangs'
-    ? ConfirmPF
-    : Confirm
 
   const handleDeleteClick = (product) => {
     setConfirm({
@@ -317,7 +312,6 @@ const CartUI = (props) => {
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <IconContainer>
-                              <BsInfoCircle size='20' color={theme.colors.white} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })} />
                               <MdCloseCircle size='24' color={theme.colors.white} onClick={() => onRemoveOffer(offer?.id)} />
                             </IconContainer>
                           </td>
@@ -349,9 +343,6 @@ const CartUI = (props) => {
                           <td className='icon'>
                             {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
-                              <BsInfoCircle size='20' color={theme.colors.white} />
-                            </IconContainer>
                           </td>
                           <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
                         </tr>
@@ -363,9 +354,6 @@ const CartUI = (props) => {
                           <td className='icon'>
                             {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
-                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
-                              <BsInfoCircle size='20' color={theme.colors.white} />
-                            </IconContainer>
                           </td>
                           <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
                         </tr>
@@ -380,7 +368,6 @@ const CartUI = (props) => {
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <IconContainer>
-                              <BsInfoCircle size='20' color={theme.colors.white} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })} />
                               <MdCloseCircle size='24' color={theme.colors.white} onClick={() => onRemoveOffer(offer?.id)} />
                             </IconContainer>
                           </td>
@@ -405,7 +392,6 @@ const CartUI = (props) => {
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <IconContainer>
-                              <BsInfoCircle size='20' color={theme.colors.white} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })} />
                               <MdCloseCircle size='24' color={theme.colors.white} onClick={() => onRemoveOffer(offer?.id)} />
                             </IconContainer>
                           </td>
@@ -548,7 +534,7 @@ const CartUI = (props) => {
               </CartError>
             )}
           </BusinessItemAccordionPFChangs>
-          <ConfirmComponent
+          <Confirm
             title={t('PRODUCT', 'Product')}
             content={confirm.content}
             acceptText={t('ACCEPT', 'Accept')}

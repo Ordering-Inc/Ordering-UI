@@ -38,6 +38,7 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { RenderProductsLayout } from '../RenderProductsLayout'
 import { Cart } from '../Cart'
 import { Alert } from '../../../../../components/Confirm'
+import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { ServiceForm } from '../ServiceForm'
@@ -108,6 +109,10 @@ const BusinessProductsListingUI = (props) => {
   ]
 
   const pfchangs = theme?.layouts?.business_view?.components?.layout?.type === 'pfchangs'
+
+  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+    ? AlertPFChangs
+    : Alert
 
   const ProductFormComponent = pfchangs ? ProductFormPFChangs : ProductForm
 
@@ -462,7 +467,7 @@ const BusinessProductsListingUI = (props) => {
           </>
         )}
       </Modal>
-      <Alert
+      <AlertComponent
         title={t('ERROR', 'Error')}
         open={alertState?.open}
         content={t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.')}
