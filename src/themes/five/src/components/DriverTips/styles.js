@@ -86,5 +86,6 @@ export const WrapperTips = styled.div`
 
   > div {
     margin: 5px;
+    text-align: center;
   }
 `
