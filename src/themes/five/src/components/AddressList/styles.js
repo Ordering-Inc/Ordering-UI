@@ -208,6 +208,9 @@ export const AddressTitle = styled.span`
     border-bottom: 1px solid #fff;
     font-weight: 600;
   `}
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    font-family: ${theme?.fonts?.special?.name};
+  `}
 `
 
 export const AddressHalfContainer = styled.div`
@@ -271,6 +274,9 @@ export const TitleFormContainer = styled.div`
   h1 {
     margin: auto;
     font-size: 24px;
+    ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+      font-family: ${theme?.fonts?.special?.name};
+    `}
   }
 `
 
@@ -279,4 +285,7 @@ export const TitleAddress = styled.h1`
   margin: auto;
   font-size: 24px;
   margin-bottom: 20px;
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    font-family: ${theme?.fonts?.special?.name};
+  `}
 `

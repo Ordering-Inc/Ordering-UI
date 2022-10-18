@@ -114,6 +114,9 @@ export const ModalTitle = styled.h2`
     padding-right: 10px;
     padding-left: 0px;
   `}
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    font-family: ${theme?.fonts?.special?.name};
+  `}
   &::first-letter {
     text-transform: capitalize;
   }

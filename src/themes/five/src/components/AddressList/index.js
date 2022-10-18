@@ -93,7 +93,7 @@ const AddressListUI = (props) => {
   const showIcons = !orderingTheme?.theme?.profile?.components?.address_list?.components?.icons?.hidden
   const showZipcode = !orderingTheme?.theme?.profile?.components?.address_list?.components?.zipcode?.hidden
   const showInternalNumber = !orderingTheme?.theme?.profile?.components?.address_list?.components?.internal_number?.hidden
-  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+  const AlertComponent = theme?.general?.components?.layout?.type === 'pfchangs'
     ? ConfirmPFChangs
     : Confirm
 

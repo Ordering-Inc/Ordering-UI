@@ -69,6 +69,7 @@ export const NotCartsPFChangs = styled.div`
     text-transform: uppercase;
     margin: 5px;
     font-weight: bold;
+    font-family: ${({ theme }) => theme?.fonts?.special?.name};
   }
   h2{
     font-size: 16px;

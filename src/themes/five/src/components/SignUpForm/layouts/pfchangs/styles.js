@@ -78,6 +78,7 @@ export const Title = styled.h1`
   margin-top: 0;
   margin-bottom: 30px;
   color: ${props => props.theme.colors.darkTextColor};
+  font-family: ${({ theme }) => theme?.fonts?.special?.name};
 `
 
 export const SkeletonWrapper = styled.div`

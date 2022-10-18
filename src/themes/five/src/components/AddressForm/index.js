@@ -82,7 +82,7 @@ const AddressFormUI = (props) => {
 
   const isHideMap = orderingTheme?.theme?.header?.components?.address_form?.components?.map?.hidden
   const isHideIcons = orderingTheme?.theme?.header?.components?.address_form?.components?.icons?.hidden
-  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+  const AlertComponent = theme?.general?.components?.layout?.type === 'pfchangs'
     ? AlertPFchangs
     : Alert
 

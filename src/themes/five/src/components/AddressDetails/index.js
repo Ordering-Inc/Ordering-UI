@@ -37,7 +37,7 @@ const AddressDetailsUI = (props) => {
     return () => setOpenModal(false)
   }, [])
 
-  const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
+  const AlertComponent = theme?.general?.components?.layout?.type === 'pfchangs'
     ? AlertPFChangs
     : Alert
 

@@ -12,6 +12,9 @@ export const HeroContainerStyled = styled.div`
     object-fit: cover;
     background-position: center;
   `}
+  .firstHeading {
+    font-family: ${({ theme }) => theme?.fonts?.special?.name};
+  }
 `
 
 export const HeroContainer = (props) => {
@@ -104,6 +107,7 @@ export const SearchLocationsContainer = styled.div`
   box-sizing: border-box;
   h1 {
     color: #fff;
+    font-family: ${({ theme }) => theme?.fonts?.special?.name};
   }
   div {
     margin: 20px 0 0;
