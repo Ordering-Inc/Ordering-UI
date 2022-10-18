@@ -41,6 +41,8 @@ var _utils = require("../../../../../utils");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 var _Modal = require("../Modal");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -72,7 +74,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime'];
 
 var MessagesUI = function MessagesUI(props) {
-  var _messages$messages, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _theme$images2$dummie, _order$driver3, _order$business4, _order$driver4, _order$business5, _theme$images3, _theme$images3$dummie, _order$driver5, _messagesToShow$messa2;
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _messages$messages, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _theme$images2$dummie, _order$driver3, _order$business4, _order$driver4, _order$business5, _theme$images3, _theme$images3$dummie, _order$driver5, _messagesToShow$messa2;
 
   var order = props.order,
       messages = props.messages,
@@ -131,6 +133,7 @@ var MessagesUI = function MessagesUI(props) {
       setModalImage = _useState4[1];
 
   var imageRef = (0, _react.useRef)(null);
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
   var quickMessageList = [{
     key: 'message_1',
     text: t('CUSTOMER_MESSAGE_1', 'Lorem ipsum 1')
@@ -587,7 +590,7 @@ var MessagesUI = function MessagesUI(props) {
     type: "submit",
     disabled: (sendMessage === null || sendMessage === void 0 ? void 0 : sendMessage.loading) || message === '' && !image || (messages === null || messages === void 0 ? void 0 : messages.loading),
     ref: buttonRef
-  }, /*#__PURE__*/_react.default.createElement(_IosSend.default, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement("span", null, t('SEND', 'Send')))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_IosSend.default, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement("span", null, t('SEND', 'Send')))))))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('ERROR', 'Error'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

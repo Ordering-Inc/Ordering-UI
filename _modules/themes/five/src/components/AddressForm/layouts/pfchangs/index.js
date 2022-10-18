@@ -19,13 +19,13 @@ var _reactHookForm = require("react-hook-form");
 
 var _orderingComponents = require("ordering-components");
 
-var _Confirm = require("../../../Confirm");
+var _pfchangs = require("../../../Confirm/layouts/pfchangs");
 
 var _GoogleGpsButton = require("../../../../../../../components/GoogleGpsButton");
 
 var _styles = require("./styles");
 
-var _pfchangs = require("../../../../styles/Buttons/theme/pfchangs");
+var _pfchangs2 = require("../../../../styles/Buttons/theme/pfchangs");
 
 var _Inputs = require("../../../../styles/Inputs");
 
@@ -591,12 +591,12 @@ var AddressFormUI = function AddressFormUI(props) {
     style: {
       color: '#c10000'
     }
-  }, formState.error), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  }, formState.error), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
     id: "submit-btn",
     type: "submit",
     disabled: formState.loading,
     color: "primary"
-  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('UPDATE', 'Update')) : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('UPDATE', 'Update')) : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_pfchangs.Alert, {
     title: t('ADDRESS', 'Address'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

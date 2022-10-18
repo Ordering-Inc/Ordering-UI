@@ -55,13 +55,15 @@ var _UserDetails = require("../UserDetails");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 var _LoginForm = require("../LoginForm");
 
-var _pfchangs = require("../LoginForm/layouts/pfchangs");
+var _pfchangs2 = require("../LoginForm/layouts/pfchangs");
 
 var _SignUpForm = require("../SignUpForm");
 
-var _pfchangs2 = require("../SignUpForm/layouts/pfchangs");
+var _pfchangs3 = require("../SignUpForm/layouts/pfchangs");
 
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
 
@@ -102,7 +104,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts3, _theme$layouts3$heade, _theme$layouts3$heade2, _theme$layouts3$heade3, _theme$layouts4, _theme$layouts4$heade, _theme$layouts4$heade2, _theme$layouts4$heade3, _theme$layouts4$heade4, _theme$layouts5, _theme$layouts5$heade, _theme$layouts5$heade2, _theme$layouts5$heade3, _theme$layouts5$heade4, _theme$layouts5$heade5, _theme$layouts6, _theme$layouts6$heade, _theme$layouts6$heade2, _theme$layouts6$heade3, _theme$layouts6$heade4, _theme$layouts6$heade5, _theme$layouts6$heade6, _theme$layouts7, _theme$layouts7$heade, _theme$layouts7$heade2, _theme$layouts7$heade3, _theme$layouts7$heade4, _theme$layouts7$heade5, _theme$layouts8, _theme$layouts8$heade, _theme$layouts8$heade2, _theme$layouts8$heade3, _theme$layouts9, _theme$layouts9$heade, _theme$layouts9$heade2, _theme$layouts9$heade3, _theme$layouts10, _theme$layouts10$head, _theme$layouts10$head2, _theme$layouts10$head3, _customerState$user, _orderState$options3, _orderState$options3$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options5, _orderState$options5$, _orderState$options5$2, _orderState$options5$3, _orderState$options6, _orderState$options6$, _orderState$options6$2, _orderState$options6$3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options7, _orderState$options8, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options9, _orderState$options9$, _orderState$options9$2, _orderState$options9$3, _configState$configs12, _configState$configs13, _orderState$options10, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options11, _orderState$options12, _orderState$options13, _orderState$options14, _configState$configs18, _configState$configs19, _orderState$options15, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options16, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts3, _theme$layouts3$heade, _theme$layouts3$heade2, _theme$layouts3$heade3, _theme$layouts4, _theme$layouts4$heade, _theme$layouts4$heade2, _theme$layouts4$heade3, _theme$layouts4$heade4, _theme$layouts5, _theme$layouts5$heade, _theme$layouts5$heade2, _theme$layouts5$heade3, _theme$layouts5$heade4, _theme$layouts5$heade5, _theme$layouts6, _theme$layouts6$heade, _theme$layouts6$heade2, _theme$layouts6$heade3, _theme$layouts6$heade4, _theme$layouts6$heade5, _theme$layouts6$heade6, _theme$layouts7, _theme$layouts7$heade, _theme$layouts7$heade2, _theme$layouts7$heade3, _theme$layouts7$heade4, _theme$layouts7$heade5, _theme$layouts8, _theme$layouts8$heade, _theme$layouts8$heade2, _theme$layouts8$heade3, _theme$layouts9, _theme$layouts9$heade, _theme$layouts9$heade2, _theme$layouts9$heade3, _theme$layouts10, _theme$layouts10$head, _theme$layouts10$head2, _theme$layouts10$head3, _theme$layouts11, _theme$layouts11$gene, _theme$layouts11$gene2, _theme$layouts11$gene3, _customerState$user, _orderState$options3, _orderState$options3$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options5, _orderState$options5$, _orderState$options5$2, _orderState$options5$3, _orderState$options6, _orderState$options6$, _orderState$options6$2, _orderState$options6$3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options7, _orderState$options8, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options9, _orderState$options9$, _orderState$options9$2, _orderState$options9$3, _configState$configs12, _configState$configs13, _orderState$options10, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options11, _orderState$options12, _orderState$options13, _orderState$options14, _configState$configs18, _configState$configs19, _orderState$options15, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options16, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
 
   var isHome = props.isHome,
       location = props.location,
@@ -242,8 +244,9 @@ var Header = function Header(props) {
   var showOrderTypes = !(theme !== null && theme !== void 0 && (_theme$layouts9 = theme.layouts) !== null && _theme$layouts9 !== void 0 && (_theme$layouts9$heade = _theme$layouts9.header) !== null && _theme$layouts9$heade !== void 0 && (_theme$layouts9$heade2 = _theme$layouts9$heade.components) !== null && _theme$layouts9$heade2 !== void 0 && (_theme$layouts9$heade3 = _theme$layouts9$heade2.order_types) !== null && _theme$layouts9$heade3 !== void 0 && _theme$layouts9$heade3.hidden);
   var showMoment = !(theme !== null && theme !== void 0 && (_theme$layouts10 = theme.layouts) !== null && _theme$layouts10 !== void 0 && (_theme$layouts10$head = _theme$layouts10.header) !== null && _theme$layouts10$head !== void 0 && (_theme$layouts10$head2 = _theme$layouts10$head.components) !== null && _theme$layouts10$head2 !== void 0 && (_theme$layouts10$head3 = _theme$layouts10$head2.moment) !== null && _theme$layouts10$head3 !== void 0 && _theme$layouts10$head3.hidden);
   var showOrderOptionsByTheme = showMoment || showOrderTypes || showAddressForm;
-  var LoginFormComponent = isloginSignupLayoutPF ? _pfchangs.LoginForm : _LoginForm.LoginForm;
-  var SignFormComponent = isloginSignupLayoutPF ? _pfchangs2.SignUpForm : _SignUpForm.SignUpForm;
+  var LoginFormComponent = isloginSignupLayoutPF ? _pfchangs2.LoginForm : _LoginForm.LoginForm;
+  var SignFormComponent = isloginSignupLayoutPF ? _pfchangs3.SignUpForm : _SignUpForm.SignUpForm;
+  var ConfirmComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts11 = theme.layouts) === null || _theme$layouts11 === void 0 ? void 0 : (_theme$layouts11$gene = _theme$layouts11.general) === null || _theme$layouts11$gene === void 0 ? void 0 : (_theme$layouts11$gene2 = _theme$layouts11$gene.components) === null || _theme$layouts11$gene2 === void 0 ? void 0 : (_theme$layouts11$gene3 = _theme$layouts11$gene2.layout) === null || _theme$layouts11$gene3 === void 0 ? void 0 : _theme$layouts11$gene3.type) === 'pfchangs' ? _pfchangs.Confirm : _Confirm.Confirm;
 
   var handleSuccessSignup = function handleSuccessSignup(user) {
     var _user$session;
@@ -736,7 +739,7 @@ var Header = function Header(props) {
       href: "#"
     }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.LOGIN) || 'Login')),
     isPopup: true
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+  })), /*#__PURE__*/_react.default.createElement(ConfirmComponent, {
     title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.CUSTOMER) || 'Customer'),
     content: confirm.content,
     acceptText: t('ACCEPT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.ACCEPT) || 'Accept'),

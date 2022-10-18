@@ -15,7 +15,7 @@ var _styles = require("./styles");
 
 var _Modal = require("../../../Modal");
 
-var _Confirm = require("../../../Confirm");
+var _pfchangs = require("../../../Confirm/layouts/pfchangs");
 
 var _AddressList = require("../../../AddressList");
 
@@ -101,7 +101,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     userCustomerSetup: isCustomerMode && user,
     isFromCheckout: isFromCheckout,
     isCustomerMode: isCustomerMode
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), /*#__PURE__*/_react.default.createElement(_pfchangs.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

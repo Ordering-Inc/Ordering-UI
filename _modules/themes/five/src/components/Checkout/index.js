@@ -55,6 +55,8 @@ var _pfchangs2 = require("../Cart/layouts/pfchangs");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs3 = require("../Confirm/layouts/pfchangs");
+
 var _CartContent = require("../CartContent");
 
 var _Select = require("../../styles/Select");
@@ -110,7 +112,7 @@ var mapConfigs = {
 };
 
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3, _businessDetails$busi3, _businessDetails$busi4, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _Object$values, _cart$business2, _businessDetails$busi5, _businessDetails$busi6, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$erro, _businessDetails$erro2, _configs$driver_tip_t, _configs$driver_tip_t2, _businessDetails$busi11, _businessDetails$busi12, _businessDetails$busi13, _businessDetails$busi14, _businessDetails$busi15, _cartState$cart$spot_, _cartState$cart, _configs$driver_tip_t3, _configs$driver_tip_u, _configs$driver_tip_t4, _cart$products2, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3;
+  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3, _theme$layouts2, _theme$layouts2$gener, _theme$layouts2$gener2, _theme$layouts2$gener3, _businessDetails$busi3, _businessDetails$busi4, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _Object$values, _cart$business2, _businessDetails$busi5, _businessDetails$busi6, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$erro, _businessDetails$erro2, _configs$driver_tip_t, _configs$driver_tip_t2, _businessDetails$busi11, _businessDetails$busi12, _businessDetails$busi13, _businessDetails$busi14, _businessDetails$busi15, _cartState$cart$spot_, _cartState$cart, _configs$driver_tip_t3, _configs$driver_tip_u, _configs$driver_tip_t4, _cart$products2, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3;
 
   var cart = props.cart,
       errors = props.errors,
@@ -230,6 +232,7 @@ var CheckoutUI = function CheckoutUI(props) {
   })) === null || _businessConfigs$find2 === void 0 ? void 0 : _businessConfigs$find2.value) === '1';
   var isWalletEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$cash_wallet = configs.cash_wallet) === null || _configs$cash_wallet === void 0 ? void 0 : _configs$cash_wallet.value) && (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp;
   var layout = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$checko = _theme$layouts.checkout) === null || _theme$layouts$checko === void 0 ? void 0 : (_theme$layouts$checko2 = _theme$layouts$checko.components) === null || _theme$layouts$checko2 === void 0 ? void 0 : (_theme$layouts$checko3 = _theme$layouts$checko2.layout) === null || _theme$layouts$checko3 === void 0 ? void 0 : _theme$layouts$checko3.type;
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$gener = _theme$layouts2.general) === null || _theme$layouts2$gener === void 0 ? void 0 : (_theme$layouts2$gener2 = _theme$layouts2$gener.components) === null || _theme$layouts2$gener2 === void 0 ? void 0 : (_theme$layouts2$gener3 = _theme$layouts2$gener2.layout) === null || _theme$layouts2$gener3 === void 0 ? void 0 : _theme$layouts2$gener3.type) === 'pfchangs' ? _pfchangs3.Alert : _Confirm.Alert;
   var placeSpotTypes = [3, 4, 5];
   var placeSpotsEnabled = placeSpotTypes.includes(options === null || options === void 0 ? void 0 : options.type) && !useKioskApp;
   var brandInformation = {
@@ -551,7 +554,7 @@ var CheckoutUI = function CheckoutUI(props) {
 
       return (cart === null || cart === void 0 ? void 0 : (_cart$business4 = cart.business) === null || _cart$business4 === void 0 ? void 0 : _cart$business4.slug) && handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business5 = cart.business) === null || _cart$business5 === void 0 ? void 0 : _cart$business5.slug);
     }
-  }, ('GO_TO_BUSINESS', 'Go to business'))))), !cartState.loading && placeSpotsEnabled && /*#__PURE__*/_react.default.createElement(_styles.SelectSpotContainer, null, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
+  }, t('GO_TO_BUSINESS', 'Go to business'))))), !cartState.loading && placeSpotsEnabled && /*#__PURE__*/_react.default.createElement(_styles.SelectSpotContainer, null, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
     isCheckout: true,
     isInputMode: true,
     isHomeStyle: true,
@@ -584,7 +587,7 @@ var CheckoutUI = function CheckoutUI(props) {
     onClick: function onClick() {
       return handlePlaceOrder();
     }
-  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')), options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie18 = validationFields.fields) === null || _validationFields$fie18 === void 0 ? void 0 : (_validationFields$fie19 = _validationFields$fie18.checkout) === null || _validationFields$fie19 === void 0 ? void 0 : (_validationFields$fie20 = _validationFields$fie19.driver_tip) === null || _validationFields$fie20 === void 0 ? void 0 : _validationFields$fie20.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie21 = validationFields.fields) === null || _validationFields$fie21 === void 0 ? void 0 : (_validationFields$fie22 = _validationFields$fie21.checkout) === null || _validationFields$fie22 === void 0 ? void 0 : (_validationFields$fie23 = _validationFields$fie22.driver_tip) === null || _validationFields$fie23 === void 0 ? void 0 : _validationFields$fie23.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')), options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie18 = validationFields.fields) === null || _validationFields$fie18 === void 0 ? void 0 : (_validationFields$fie19 = _validationFields$fie18.checkout) === null || _validationFields$fie19 === void 0 ? void 0 : (_validationFields$fie20 = _validationFields$fie19.driver_tip) === null || _validationFields$fie20 === void 0 ? void 0 : _validationFields$fie20.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie21 = validationFields.fields) === null || _validationFields$fie21 === void 0 ? void 0 : (_validationFields$fie22 = _validationFields$fie21.checkout) === null || _validationFields$fie22 === void 0 ? void 0 : (_validationFields$fie23 = _validationFields$fie22.driver_tip) === null || _validationFields$fie23 === void 0 ? void 0 : _validationFields$fie23.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.'))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('CUSTOMER_DETAILS', 'Customer Details'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -625,7 +628,7 @@ var CheckoutUI = function CheckoutUI(props) {
 };
 
 var Checkout = function Checkout(props) {
-  var _Object$values2, _cartState$error, _cartState$cart2;
+  var _Object$values2, _theme$layouts3, _theme$layouts3$gener, _theme$layouts3$gener2, _theme$layouts3$gener3, _cartState$error, _cartState$cart2;
 
   var errors = props.errors,
       clearErrors = props.clearErrors,
@@ -651,6 +654,8 @@ var Checkout = function Checkout(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState19 = (0, _react.useState)({
     loading: true,
@@ -694,6 +699,7 @@ var Checkout = function Checkout(props) {
 
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);
   })) || null);
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$gener = _theme$layouts3.general) === null || _theme$layouts3$gener === void 0 ? void 0 : (_theme$layouts3$gener2 = _theme$layouts3$gener.components) === null || _theme$layouts3$gener2 === void 0 ? void 0 : (_theme$layouts3$gener3 = _theme$layouts3$gener2.layout) === null || _theme$layouts3$gener3 === void 0 ? void 0 : _theme$layouts3$gener3.type) === 'pfchangs' ? _pfchangs3.Alert : _Confirm.Alert;
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -944,7 +950,7 @@ var Checkout = function Checkout(props) {
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
-  }), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('CHECKOUT ', 'Checkout'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

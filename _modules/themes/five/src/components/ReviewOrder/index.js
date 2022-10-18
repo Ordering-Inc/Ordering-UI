@@ -21,6 +21,8 @@ var _styles = require("./styles");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 var _Inputs = require("../../styles/Inputs");
 
 var _Buttons = require("../../styles/Buttons");
@@ -64,7 +66,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReviewOrderUI = function ReviewOrderUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _commentsList, _commentsList2, _commentsList2$list, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _props$beforeElements, _props$beforeComponen, _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _commentsList, _commentsList2, _commentsList2$list, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
 
   var stars = props.stars,
       order = props.order,
@@ -107,6 +109,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       extraComment = _useState6[0],
       setExtraComment = _useState6[1];
 
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
   var commentsList = (0, _utils.reviewCommentList)('order');
   var qualificationList = [{
     key: 1,
@@ -304,7 +307,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     type: "submit",
     disabled: formState.loading,
     className: "review-sent"
-  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.ContinueContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.ContinueContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)) : t('LOADING', 'Loading'))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('ORDER_REVIEW', 'Order Review'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

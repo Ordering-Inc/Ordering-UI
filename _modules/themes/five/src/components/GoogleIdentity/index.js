@@ -15,6 +15,10 @@ var _styles = require("./styles");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
+var _styledComponents = require("styled-components");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -38,6 +42,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var GoogleLoginButtonUI = function GoogleLoginButtonUI(props) {
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3;
+
   var initParams = props.initParams,
       handleSigninSuccess = props.handleSigninSuccess,
       formState = props.formState;
@@ -45,6 +51,8 @@ var GoogleLoginButtonUI = function GoogleLoginButtonUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -54,6 +62,7 @@ var GoogleLoginButtonUI = function GoogleLoginButtonUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
   (0, _react.useEffect)(function () {
     window.handleCredentialResponse = function (response) {
       handleSigninSuccess(response.credential);
@@ -82,7 +91,7 @@ var GoogleLoginButtonUI = function GoogleLoginButtonUI(props) {
     "data-shape": "pill",
     "data-text": "signin_with",
     "data-locale": "en"
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     open: alertState.open,
     title: t('GOOGLE_LOGIN_ERROR', 'Google Login error'),
     content: alertState === null || alertState === void 0 ? void 0 : alertState.result,

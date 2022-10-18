@@ -19,6 +19,8 @@ var _styles = require("./styles");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 var _Checkbox = require("../../../../../styles/Checkbox");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -54,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
-  var _walletsState$result, _configs$wallet_cash_, _configs$wallet_credi, _businessConfigs$find, _businessConfigs$find2, _walletsState$result4, _walletsState$result5, _walletsState$result6;
+  var _walletsState$result, _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _configs$wallet_cash_, _configs$wallet_credi, _businessConfigs$find, _businessConfigs$find2, _walletsState$result4, _walletsState$result5, _walletsState$result6;
 
   var cart = props.cart,
       errorState = props.errorState,
@@ -91,6 +93,7 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
       checkedState = _useState4[0],
       setCheckedState = _useState4[1];
 
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
   var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
   var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
   var isBusinessWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
@@ -198,7 +201,7 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 40
     }));
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('WALLET_ERROR_MESSAGES', 'Wallet'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

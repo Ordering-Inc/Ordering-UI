@@ -31,6 +31,8 @@ var _Modal = require("../Modal");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 var _PaymentOptionCash = require("../PaymentOptionCash");
 
 var _PaymentOptionStripe = require("../PaymentOptionStripe");
@@ -50,6 +52,8 @@ var _PaymentOptionSquare = require("../../../../../components/PaymentOptionSquar
 var _styles = require("./styles");
 
 var _PaymentOptionOpenPay = require("../PaymentOptionOpenPay");
+
+var _styledComponents = require("styled-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -149,7 +153,7 @@ var paypalBtnStyle = {
 };
 
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance2, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _configs$openpay_clie, _configs$openpay_clie2, _configs$openpay_clie3, _configs$openpay_clie4, _configs$openpay_clie5, _configs$openpay_clie6, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance2, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _configs$openpay_clie, _configs$openpay_clie2, _configs$openpay_clie3, _configs$openpay_clie4, _configs$openpay_clie5, _configs$openpay_clie6, _props$afterComponent, _props$afterElements;
 
   var cart = props.cart,
       errorCash = props.errorCash,
@@ -176,6 +180,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       _useSession2$ = _useSession2[0],
@@ -200,6 +206,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
@@ -458,7 +465,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     merchantId: (_configs$openpay_clie = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie2 = configs.openpay_client_id) === null || _configs$openpay_clie2 === void 0 ? void 0 : _configs$openpay_clie2.key) !== null && _configs$openpay_clie !== void 0 ? _configs$openpay_clie : 'mz86y3z3qbpmxukfefll',
     publicKey: (_configs$openpay_clie3 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie4 = configs.openpay_client_id) === null || _configs$openpay_clie4 === void 0 ? void 0 : _configs$openpay_clie4.value) !== null && _configs$openpay_clie3 !== void 0 ? _configs$openpay_clie3 : 'pk_e871b3211d924956ad7de33c87af6ef9',
     isSandbox: (_configs$openpay_clie5 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie6 = configs.openpay_client_id) === null || _configs$openpay_clie6 === void 0 ? void 0 : _configs$openpay_clie6.sandbox) !== null && _configs$openpay_clie5 !== void 0 ? _configs$openpay_clie5 : true
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('PAYMENT_METHODS', 'Payment methods'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

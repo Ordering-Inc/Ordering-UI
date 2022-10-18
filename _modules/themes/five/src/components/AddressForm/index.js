@@ -21,13 +21,17 @@ var _orderingComponents = require("ordering-components");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 var _GoogleGpsButton = require("../../../../../components/GoogleGpsButton");
 
 var _styles = require("./styles");
 
-var _pfchangs = require("../../styles/Buttons/theme/pfchangs");
+var _pfchangs2 = require("../../styles/Buttons/theme/pfchangs");
 
 var _Inputs = require("../../styles/Inputs");
+
+var _styledComponents = require("styled-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78,7 +82,7 @@ var inputNames = [{
 }];
 
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
 
   var addressesList = props.addressesList,
       googleMapsControls = props.googleMapsControls,
@@ -114,6 +118,8 @@ var AddressFormUI = function AddressFormUI(props) {
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
       _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
       orderingTheme = _useOrderingTheme2[0];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)({
     selectedFromAutocomplete: true
@@ -156,6 +162,7 @@ var AddressFormUI = function AddressFormUI(props) {
 
   var isHideMap = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.address_form) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.map) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.hidden;
   var isHideIcons = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.header) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.address_form) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.components) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.icons) === null || _orderingTheme$theme7 === void 0 ? void 0 : _orderingTheme$theme7.hidden;
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
   var maxLimitLocation = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.meters_to_change_address) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
   var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value;
   var isLocationRequired = ((_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.google_autocomplete_selection_required) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === '1' || ((_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.google_autocomplete_selection_required) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === 'true';
@@ -634,28 +641,28 @@ var AddressFormUI = function AddressFormUI(props) {
     style: {
       color: '#c10000'
     }
-  }, formState.error), !isHideIcons && /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  }, formState.error), !isHideIcons && /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
     className: addressTag === 'home' ? 'active' : '',
     bgtransparent: true,
     type: "button",
     onClick: function onClick() {
       return handleAddressTag('home');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null))), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null))), /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
     className: addressTag === 'office' ? 'active' : '',
     bgtransparent: true,
     type: "button",
     onClick: function onClick() {
       return handleAddressTag('office');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null))), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null))), /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
     className: addressTag === 'favorite' ? 'active' : '',
     bgtransparent: true,
     type: "button",
     onClick: function onClick() {
       return handleAddressTag('favorite');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
     className: addressTag === 'other' ? 'active' : '',
     bgtransparent: true,
     type: "button",
@@ -670,19 +677,19 @@ var AddressFormUI = function AddressFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 && /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 && /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
     color: "primary",
     type: "button",
     disabled: formState.loading,
     onClick: function onClick() {
       return onCancel();
     }
-  }, t('CANCEL', 'Cancel')), Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  }, t('CANCEL', 'Cancel')), Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
     id: "submit-btn",
     type: "submit",
     disabled: formState.loading,
     color: "primary"
-  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.address ? t('UPDATE', 'Update') : t('ADD_ADDRESS', 'Add address')) : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.address ? t('UPDATE', 'Update') : t('ADD_ADDRESS', 'Add address')) : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('ADDRESS', 'Address'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

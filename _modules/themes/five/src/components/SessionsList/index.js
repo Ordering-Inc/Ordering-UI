@@ -19,7 +19,11 @@ var _Buttons = require("../../styles/Buttons");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 var _styles = require("./styles");
+
+var _styledComponents = require("styled-components");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54,6 +58,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SessionsListUI = function SessionsListUI(props) {
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _theme$layouts2, _theme$layouts2$gener, _theme$layouts2$gener2, _theme$layouts2$gener3;
+
   var sessionsList = props.sessionsList,
       actionState = props.actionState,
       handleDeleteSession = props.handleDeleteSession,
@@ -71,6 +77,8 @@ var SessionsListUI = function SessionsListUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parseDate = _useUtils2[0].parseDate;
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var _useState = (0, _react.useState)({
     open: false,
     content: null,
@@ -87,6 +95,9 @@ var SessionsListUI = function SessionsListUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       alertState = _useState4[0],
       setAlertState = _useState4[1];
+
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
+  var ConfirmComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$gener = _theme$layouts2.general) === null || _theme$layouts2$gener === void 0 ? void 0 : (_theme$layouts2$gener2 = _theme$layouts2$gener.components) === null || _theme$layouts2$gener2 === void 0 ? void 0 : (_theme$layouts2$gener3 = _theme$layouts2$gener2.layout) === null || _theme$layouts2$gener3 === void 0 ? void 0 : _theme$layouts2$gener3.type) === 'pfchangs' ? _pfchangs.Confirm : _Confirm.Confirm;
 
   var onDeleteSession = function onDeleteSession(session) {
     setConfirm({
@@ -159,7 +170,7 @@ var SessionsListUI = function SessionsListUI(props) {
     onClick: function onClick() {
       return onDeleteAllSessions(true, false);
     }
-  }, t('ACTIVE_SESSIONS', 'Active sessions'))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+  }, t('ACTIVE_SESSIONS', 'Active sessions'))), /*#__PURE__*/_react.default.createElement(ConfirmComponent, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -176,7 +187,7 @@ var SessionsListUI = function SessionsListUI(props) {
     },
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
-  }), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

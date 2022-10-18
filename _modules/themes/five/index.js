@@ -27,6 +27,12 @@ Object.defineProperty(exports, "AddressList", {
     return _AddressList.AddressList;
   }
 });
+Object.defineProperty(exports, "AlertPFChangs", {
+  enumerable: true,
+  get: function get() {
+    return _pfchangs2.Alert;
+  }
+});
 Object.defineProperty(exports, "AppleLogin", {
   enumerable: true,
   get: function get() {
@@ -913,6 +919,8 @@ var _SearchProducts = require("./src/components/SearchProducts");
 var _MultiCartsPaymethodsAndWallets = require("./src/components/MultiCartsPaymethodsAndWallets");
 
 var _ProfessionalProfile = require("./src/components/ProfessionalProfile");
+
+var _pfchangs2 = require("./src/components/Confirm/layouts/pfchangs");
 
 var _Buttons = require("./src/styles/Buttons");
 

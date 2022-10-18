@@ -23,7 +23,7 @@ var _NotFoundSource = require("../../../NotFoundSource");
 
 var _Modal = require("../../../Modal");
 
-var _Confirm = require("../../../Confirm");
+var _pfchangs2 = require("../../../Confirm/layouts/pfchangs");
 
 var _AddressForm = require("../../../AddressForm");
 
@@ -460,7 +460,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return handleFindBusinesses();
     },
     isCustomerMode: isCustomerMode
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), /*#__PURE__*/_react.default.createElement(_pfchangs2.Alert, {
     title: !mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

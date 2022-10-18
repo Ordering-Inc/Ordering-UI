@@ -37,6 +37,8 @@ var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -72,7 +74,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersOptionUI = function OrdersOptionUI(props) {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
 
   var horizontal = props.horizontal,
       activeOrders = props.activeOrders,
@@ -185,6 +187,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   };
 
   var showSkeletons = !isBusiness && !isProducts && loading || businessLoading && isBusiness || (products === null || products === void 0 ? void 0 : products.length) === 0 && isProducts && (!businessesSearchList && loading || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.loading));
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
 
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
@@ -460,7 +463,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     onRedirectPage: onRedirectPage,
     getOrderStatus: getOrderStatus,
     handleReorder: handleReorder
-  })), orders.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), orders.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('MY_ORDERS', 'My orders'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

@@ -17,7 +17,11 @@ var _Modal = require("../Modal");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 var _AddressList = require("../AddressList");
+
+var _styledComponents = require("styled-components");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -44,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options2, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options2, _props$afterComponent, _props$afterElements;
 
   var addressToShow = props.addressToShow,
       isCartPending = props.isCartPending,
@@ -80,11 +84,13 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       _useCustomer2 = _slicedToArray(_useCustomer, 1),
       user = _useCustomer2[0].user;
 
+  var theme = (0, _styledComponents.useTheme)();
   (0, _react.useEffect)(function () {
     return function () {
       return setOpenModal(false);
     };
   }, []);
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -120,7 +126,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     userCustomerSetup: isCustomerMode && user,
     isFromCheckout: isFromCheckout,
     isCustomerMode: isCustomerMode
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

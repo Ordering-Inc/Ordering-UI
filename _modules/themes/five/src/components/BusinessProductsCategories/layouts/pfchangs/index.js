@@ -75,6 +75,11 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       selectedCategory = _useState2[0],
       setSelectedCategory = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      centerAutoscroll = _useState4[0],
+      setCenterAutoscroll = _useState4[1];
+
   var theme = (0, _styledComponents.useTheme)();
 
   var handleChangeCategory = function handleChangeCategory(category) {
@@ -113,7 +118,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     var category = _ref.category,
         pfchangs = _ref.pfchangs;
     return /*#__PURE__*/_react.default.createElement(TabComponent, {
-      className: "category".concat(subcategoriesLayout ? category === null || category === void 0 ? void 0 : category.id : category.id === ' featured' ? ' special' : ''),
+      className: "center category".concat(subcategoriesLayout ? category === null || category === void 0 ? void 0 : category.id : category.id === ' featured' ? ' special' : ''),
       active: subcategoriesLayout ? (subcategorySelected === null || subcategorySelected === void 0 ? void 0 : subcategorySelected.id) === (category === null || category === void 0 ? void 0 : category.id) : business !== null && business !== void 0 && business.lazy_load_products_recommended ? (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id : (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === category.id,
       onClick: function onClick() {
         return handleChangeCategory(category);
@@ -144,6 +149,15 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   };
 
   (0, _react.useEffect)(function () {
+    var _document$getElementB3;
+
+    var autoscrollWidth = (_document$getElementB3 = document.getElementById('autoscroll')) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.clientWidth;
+    var screenWidth = window.innerWidth;
+
+    if (screenWidth > autoscrollWidth) {
+      setCenterAutoscroll(true);
+    }
+
     var handleScroll = function handleScroll() {
       if (business !== null && business !== void 0 && business.lazy_load_products_recommended || PFChangsCategoriesLayout) return;
       var featuredElement = document.getElementById('categoryfeatured');
@@ -153,11 +167,11 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       });
 
       (_categories === null || _categories === void 0 ? void 0 : _categories.length) && _categories.forEach(function (category) {
-        var _document$getElementB3, _document$getElementB4;
+        var _document$getElementB4, _document$getElementB5;
 
         var windowTop = window.scrollY;
         var topPos = 0;
-        if (!(category !== null && category !== void 0 && category.id)) topPos = (_document$getElementB3 = document.getElementById('businessProductList')) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.offsetTop;else topPos = (_document$getElementB4 = document.getElementById("category".concat(category.id))) === null || _document$getElementB4 === void 0 ? void 0 : _document$getElementB4.offsetTop;
+        if (!(category !== null && category !== void 0 && category.id)) topPos = (_document$getElementB4 = document.getElementById('businessProductList')) === null || _document$getElementB4 === void 0 ? void 0 : _document$getElementB4.offsetTop;else topPos = (_document$getElementB5 = document.getElementById("category".concat(category.id))) === null || _document$getElementB5 === void 0 ? void 0 : _document$getElementB5.offsetTop;
 
         if (windowTop >= topPos - 200) {
           subcategoriesLayout ? setSubcategorySelected(category) : setSelectedCategory(category);
@@ -219,7 +233,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     featured: featured,
     w: props.wContainerStyle,
     pfchangs: true,
-    subcategoriesLayout: subcategoriesLayout
+    subcategoriesLayout: subcategoriesLayout,
+    centerAutoscroll: centerAutoscroll
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, openBusinessInformation ? /*#__PURE__*/_react.default.createElement(ProductCategories, null) : /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, /*#__PURE__*/_react.default.createElement(ProductCategories, {

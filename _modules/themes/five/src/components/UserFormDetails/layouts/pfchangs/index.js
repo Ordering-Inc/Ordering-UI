@@ -31,7 +31,7 @@ var _InputPhoneNumber = require("../../../../../../../components/InputPhoneNumbe
 
 var _LanguageSelector = require("../../../../../../../components/LanguageSelector");
 
-var _Confirm = require("../../../Confirm");
+var _pfchangs2 = require("../../../Confirm/layouts/pfchangs");
 
 var _utils = require("../../../../../../../utils");
 
@@ -414,24 +414,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
     disabled: !isEdit
-  })), !isCheckout && showCustomerPassword && !requiredFields && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    type: "password",
-    name: "password",
-    className: "form",
-    disabled: !isEdit,
-    borderBottom: true,
-    placeholder: t('FRONT_VISUALS_PASSWORD', 'Password'),
-    onChange: handleChangeInput,
-    ref: formMethods.register({
-      required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')) : null,
-      minLength: {
-        value: 8,
-        message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-      }
-    })
-  })), showLangauges && !requiredFields && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, {
-    isCheckout: isCheckout
-  }, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     outline: true,
     type: "button",
     onClick: function onClick() {
@@ -448,7 +431,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Info, null, /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email), /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CountryFlag, null, (user === null || user === void 0 ? void 0 : user.country_phone_code) && /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     onChange: function onChange() {},
     defaultCountry: (_parsePhoneNumber = (0, _libphonenumberJs.default)("+".concat(user === null || user === void 0 ? void 0 : (_user$country_phone_c = user.country_phone_code) === null || _user$country_phone_c === void 0 ? void 0 : _user$country_phone_c.replace('+', ''), " ").concat(user === null || user === void 0 ? void 0 : user.cellphone))) === null || _parsePhoneNumber === void 0 ? void 0 : _parsePhoneNumber.country
-  })), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone)), /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", {
+  })), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setEditEnabled(true);
     }
@@ -456,7 +439,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i
     });
-  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })))), /*#__PURE__*/_react.default.createElement(_pfchangs2.Alert, {
     title: t('PROFILE', 'Profile'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

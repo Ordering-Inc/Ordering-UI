@@ -41,7 +41,7 @@ var _AddressList = require("../../../AddressList");
 
 var _Modal = require("../../../Modal");
 
-var _Confirm = require("../../../Confirm");
+var _pfchangs6 = require("../../../Confirm/layouts/pfchangs");
 
 var _Buttons = require("../../../../styles/Buttons");
 
@@ -612,7 +612,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     isPopup: true
   })), error && error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_error$ = error[0]) === null || _error$ === void 0 ? void 0 : _error$.message) || error[0]
-  }), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }), /*#__PURE__*/_react.default.createElement(_pfchangs6.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

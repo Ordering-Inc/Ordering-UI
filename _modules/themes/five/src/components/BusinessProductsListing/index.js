@@ -43,6 +43,8 @@ var _Cart = require("../Cart");
 
 var _Confirm = require("../../../../../components/Confirm");
 
+var _pfchangs2 = require("../Confirm/layouts/pfchangs");
+
 var _FloatingButton = require("../../../../../components/FloatingButton");
 
 var _UpsellingPage = require("../../../../../components/UpsellingPage");
@@ -82,7 +84,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _businessState$busine, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _currentCart$products, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products2, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _currentCart$products3, _currentCart$products4, _currentCart$products5, _productModal$error$, _theme$defaultLanguag16, _productModal$product2, _business$professiona2;
+  var _Object$values$find, _businessState$busine, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _theme$layouts2, _theme$layouts2$gener, _theme$layouts2$gener2, _theme$layouts2$gener3, _currentCart$products, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products2, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _currentCart$products3, _currentCart$products4, _currentCart$products5, _productModal$error$, _theme$defaultLanguag16, _productModal$product2, _business$professiona2;
 
   var errors = props.errors,
       openCategories = props.openCategories,
@@ -214,6 +216,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     showOnSelected: t('A_to_Z', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.A_to_Z) || 'A-Z')
   }];
   var pfchangs = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$busine = _theme$layouts.business_view) === null || _theme$layouts$busine === void 0 ? void 0 : (_theme$layouts$busine2 = _theme$layouts$busine.components) === null || _theme$layouts$busine2 === void 0 ? void 0 : (_theme$layouts$busine3 = _theme$layouts$busine2.layout) === null || _theme$layouts$busine3 === void 0 ? void 0 : _theme$layouts$busine3.type) === 'pfchangs';
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$gener = _theme$layouts2.general) === null || _theme$layouts2$gener === void 0 ? void 0 : (_theme$layouts2$gener2 = _theme$layouts2$gener.components) === null || _theme$layouts2$gener2 === void 0 ? void 0 : (_theme$layouts2$gener3 = _theme$layouts2$gener2.layout) === null || _theme$layouts2$gener3 === void 0 ? void 0 : _theme$layouts2$gener3.type) === 'pfchangs' ? _pfchangs2.Alert : _Confirm.Alert;
   var ProductFormComponent = pfchangs ? _pfchangs.ProductForm : _ProductForm.ProductForm;
 
   var handler = function handler() {
@@ -559,7 +562,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onSave: handlerProductAction,
     closeModalProductForm: closeModalProductForm,
     handleCustomSave: handleCustomSave
-  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('ERROR', 'Error'),
     open: alertState === null || alertState === void 0 ? void 0 : alertState.open,
     content: t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.'),

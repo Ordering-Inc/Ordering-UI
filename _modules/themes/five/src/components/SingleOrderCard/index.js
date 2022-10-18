@@ -33,6 +33,8 @@ var _Modal = require("../Modal");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs = require("../Confirm/layouts/pfchangs");
+
 var _styles = require("./styles");
 
 var _styles2 = require("../OrdersOption/styles");
@@ -70,7 +72,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleOrderCardUI = function SingleOrderCardUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _props$beforeElements, _props$beforeComponen, _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _theme$images4, _theme$images4$dummie, _order$business7, _order$summary, _order$business8, _getOrderStatus, _order$summary2, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _props$beforeElements, _props$beforeComponen, _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _theme$images4, _theme$images4$dummie, _order$business7, _order$summary, _order$business8, _getOrderStatus, _order$summary2, _props$afterComponent, _props$afterElements;
 
   var order = props.order,
       getOrderStatus = props.getOrderStatus,
@@ -148,6 +150,8 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
       _useState12 = _slicedToArray(_useState11, 2),
       isDriverReviewed = _useState12[0],
       setIsDriverReviewed = _useState12[1];
+
+  var ConfirmComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Confirm : _Confirm.Confirm;
 
   var handleClickCard = function handleClickCard(e, uuid) {
     if (e.target.closest('.favorite') || e.target.closest('.review') || e.target.closest('.reorder')) return;
@@ -386,7 +390,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     order: order,
     closeReviewDriver: handleCloseReivew,
     setIsDriverReviewed: setIsDriverReviewed
-  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+  }))), /*#__PURE__*/_react.default.createElement(ConfirmComponent, {
     title: t('ORDER', 'Order'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),

@@ -29,6 +29,8 @@ var _AddressList = require("../AddressList");
 
 var _Confirm = require("../Confirm");
 
+var _pfchangs2 = require("../Confirm/layouts/pfchangs");
+
 var _ProfileOptions = require("../../../../../components/UserProfileForm/ProfileOptions");
 
 var _utils = require("../../../../../utils");
@@ -68,7 +70,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserProfileFormUI = function UserProfileFormUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _theme$profile, _theme$profile$compon, _theme$profile$compon2, _formState$changes5, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _theme$profile, _theme$profile$compon, _theme$profile$compon2, _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _formState$changes5, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
 
   var userData = props.userData,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
@@ -119,6 +121,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   var userFormLayoutRow = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme6 = orderingTheme.theme) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.profile) === null || _orderingTheme$theme7 === void 0 ? void 0 : (_orderingTheme$theme8 = _orderingTheme$theme7.components) === null || _orderingTheme$theme8 === void 0 ? void 0 : (_orderingTheme$theme9 = _orderingTheme$theme8.layout) === null || _orderingTheme$theme9 === void 0 ? void 0 : _orderingTheme$theme9.position) === 'row';
   var pfchangs = (theme === null || theme === void 0 ? void 0 : (_theme$profile = theme.profile) === null || _theme$profile === void 0 ? void 0 : (_theme$profile$compon = _theme$profile.components) === null || _theme$profile$compon === void 0 ? void 0 : (_theme$profile$compon2 = _theme$profile$compon.layout) === null || _theme$profile$compon2 === void 0 ? void 0 : _theme$profile$compon2.type) === 'pfchangs';
   var UserFormDetailComponent = pfchangs ? _pfchangs.UserFormDetailsUI : _UserFormDetails.UserFormDetailsUI;
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs2.Alert : _Confirm.Alert;
 
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
@@ -288,7 +291,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     addressList: user === null || user === void 0 ? void 0 : user.addresses,
     isProfile: true,
     pfchangs: pfchangs
-  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('PROFILE', 'Profile'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
