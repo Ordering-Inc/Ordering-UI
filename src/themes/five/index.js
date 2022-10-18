@@ -108,6 +108,7 @@ import { ProfessionalFilter } from './src/components/ProfessionalFilter'
 import { SearchProducts } from './src/components/SearchProducts'
 import { MultiCartsPaymethodsAndWallets } from './src/components/MultiCartsPaymethodsAndWallets'
 import { ProfessionalProfile } from './src/components/ProfessionalProfile'
+import { Alert as AlertPFChangs } from './src/components/Confirm/layouts/pfchangs'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -119,6 +120,7 @@ export {
   AddressDetails,
   AddressForm,
   AddressList,
+  AlertPFChangs,
   AppleLogin,
   AutoScroll,
   BusinessBasicInformation,
