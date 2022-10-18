@@ -46,6 +46,7 @@ export const HeroText = styled.div`
       line-height: 24px;
       font-weight: 100;
       margin: 0;
+      max-width: 560px;
   }
 
   .terms {
@@ -77,6 +78,7 @@ export const Content = styled.div`
     font-size: x-large;
     color: ${props => props.theme.colors.headingColor};
     margin: 0;
+    max-width: 600px;
   }
 
   button {
@@ -90,11 +92,16 @@ export const Segment = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
+  text-align: center:
+  width: 100%;
+  text-align: center;
 
   p {
     font-size: x-large;
-    color: #394555;
+    color: ${props => props.theme.colors.headingColor};
     margin: 0;
+    max-width: 660px;
+    margin-bottom: 30px;
   }
 `
 

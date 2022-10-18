@@ -17,5 +17,6 @@
   "url_dashboard": "https://app.tryordering.com",
   "use_kiosk": false,
   "businessSlug": "",
-  "franchiseSlug": null
+  "franchiseSlug": null,
+  "isCancellation" : false
 }
