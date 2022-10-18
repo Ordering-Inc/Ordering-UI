@@ -31,5 +31,5 @@ var DriverTipMessage = _styledComponents.default.p(_templateObject7 || (_templat
   return props.theme.colors.primary;
 });
 exports.DriverTipMessage = DriverTipMessage;
-var WrapperTips = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n\n  > div {\n    margin: 5px;\n  }\n"])));
+var WrapperTips = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n\n  > div {\n    margin: 5px;\n    text-align: center;\n  }\n"])));
 exports.WrapperTips = WrapperTips;

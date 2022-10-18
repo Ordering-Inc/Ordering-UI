@@ -113,13 +113,17 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     onPaymentChange = props.onPaymentChange,
     setCreateOrder = props.setCreateOrder,
     onPlaceOrderClick = props.onPlaceOrderClick,
-    handlePlaceOrder = props.handlePlaceOrder;
+    handlePlaceOrder = props.handlePlaceOrder,
+    paymethods = props.paymethods;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     token = _useSession2[0].token;
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+    _useOrder2 = _slicedToArray(_useOrder, 1),
+    loadingOptions = _useOrder2[0].loading;
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -131,8 +135,11 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
   var includeKioskPaymethods = ['cash', 'card_delivery'];
+  var list = paymethods ? paymethods === null || paymethods === void 0 ? void 0 : paymethods.map(function (pay) {
+    return pay.paymethod;
+  }) : paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods;
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
-  var supportedMethods = paymethodsList.paymethods.filter(function (p) {
+  var supportedMethods = list === null || list === void 0 ? void 0 : list.filter(function (p) {
     return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
   });
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
@@ -154,7 +161,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   };
   (0, _react.useEffect)(function () {
     var _supportedMethods$;
-    if (supportedMethods.length === 1 && !paymethodSelected && !popupMethods.includes((_supportedMethods$ = supportedMethods[0]) === null || _supportedMethods$ === void 0 ? void 0 : _supportedMethods$.gateway)) {
+    if ((supportedMethods === null || supportedMethods === void 0 ? void 0 : supportedMethods.length) === 1 && !paymethodSelected && !popupMethods.includes((_supportedMethods$ = supportedMethods[0]) === null || _supportedMethods$ === void 0 ? void 0 : _supportedMethods$.gateway)) {
       handlePaymethodClick && handlePaymethodClick(supportedMethods[0]);
     }
   }, [supportedMethods]);
@@ -190,7 +197,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
     className: "payments-list"
-  }, supportedMethods.length > 0 && supportedMethods.sort(function (a, b) {
+  }, !(paymethodsList.loading || isLoading || loadingOptions) && supportedMethods.length > 0 && supportedMethods.sort(function (a, b) {
     return a.id - b.id;
   }).map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -202,7 +209,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
         return handlePaymentMethodClick(paymethod);
       }
     }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod.gateway.toUpperCase(), paymethod.name))));
-  }), (paymethodsList.loading || isLoading) && _toConsumableArray(Array(5).keys()).map(function (i) {
+  }), (paymethodsList.loading || isLoading || loadingOptions) && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       key: i,
       isSkeleton: true
@@ -216,7 +223,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }));
   }), paymethodsList.error && paymethodsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$error = paymethodsList.error[0]) === null || _paymethodsList$error === void 0 ? void 0 : _paymethodsList$error.message) || (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0])
-  }), !(paymethodsList.loading || isLoading) && !paymethodsList.error && (!(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.paymethods) || supportedMethods.length === 0) && /*#__PURE__*/_react.default.createElement("p", null, t('NO_PAYMENT_METHODS', 'No payment methods!'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
+  }), !(paymethodsList.loading || isLoading || loadingOptions) && !paymethodsList.error && (!(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.paymethods) || supportedMethods.length === 0) && /*#__PURE__*/_react.default.createElement("p", null, t('NO_PAYMENT_METHODS', 'No payment methods!'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
     data: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.data,
     orderTotal: (_cart$balance = cart === null || cart === void 0 ? void 0 : cart.balance) !== null && _cart$balance !== void 0 ? _cart$balance : cart === null || cart === void 0 ? void 0 : cart.total,
     defaultValue: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da2 = paymethodSelected.data) === null || _paymethodSelected$da2 === void 0 ? void 0 : _paymethodSelected$da2.cash,
