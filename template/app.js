@@ -61,6 +61,9 @@ import settings from './config'
 import { Promotions } from './pages/Promotions'
 import { MultiCheckout } from './pages/MultiCheckout'
 import { MultiOrdersDetails } from './pages/MultiOrdersDetails'
+import { CancellationComponent } from '../src/components/CancellationComponent'
+import { Button } from '../src/themes/five/src/styles/Buttons'
+import { Input } from '../src/themes/five/src/styles/Inputs'
 
 export const App = () => {
   const [{ auth, user }, { login }] = useSession()
@@ -319,376 +322,382 @@ export const App = () => {
     }
   }, [orderStatus])
 
-  return (
-    <div style={{ marginBottom: windowSize.width < 576 && onlineStatus ? 80 : 0 }}>
-      {!!configs?.track_id_google_analytics?.value && (
-        <Analytics trackId={configs?.track_id_google_analytics?.value} />
-      )}
-      {!!configs?.segment_track_id?.value && (
-        <AnalyticsSegment writeKey={configs?.segment_track_id?.value} />
-      )}
-      {!!configs?.facebook_id?.value && FacebookPixel && (
-        <FacebookPixel trackId={configs?.facebook_id?.value} />
-      )}
-      {!loaded && <SpinnerLoader />}
-      <SmartAppBanner
-        storeAndroidId={settings?.store_android_id !== '0' ? settings?.store_android_id : false}
-        storeAppleId={settings?.store_apple_id !== '0' ? settings?.store_apple_id : false}
-        storeKindleId={settings?.store_kindle_id !== '0' ? settings?.store_kindle_id : false}
-      />
-      {
-        loaded && (
-          <ThemeProvider theme={themeUpdated}>
-            <ListenPageChanges />
-            {!(isKioskApp && isHome) && windowSize.width > 576 && (
-              <HeaderComponent
-                isHome={isHome}
-                location={location}
-                isCustomLayout={singleBusinessConfig.isActive}
-              />
-            )}
-            <NotNetworkConnectivity />
-            {onlineStatus && (
-              <ScrollToTop>
-                <HelmetTags />
-                <Switch>
-                  <Route exact path='/home'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      isKioskApp
-                        ? <HomePage />
-                        : orderStatus.options?.address?.location
-                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
-                          : singleBusinessConfig.isActive
-                            ? <Redirect to={singleBusinessConfig.isActive ? '' : '/search'} />
+  return settings.isCancellation ? (
+    <CancellationComponent
+      ButtonComponent={Button}
+      InputComponent={Input}
+    />
+  )
+    : (
+      <div style={{ marginBottom: windowSize.width < 576 && onlineStatus ? 80 : 0 }}>
+        {!!configs?.track_id_google_analytics?.value && (
+          <Analytics trackId={configs?.track_id_google_analytics?.value} />
+        )}
+        {!!configs?.segment_track_id?.value && (
+          <AnalyticsSegment writeKey={configs?.segment_track_id?.value} />
+        )}
+        {!!configs?.facebook_id?.value && FacebookPixel && (
+          <FacebookPixel trackId={configs?.facebook_id?.value} />
+        )}
+        {!loaded && <SpinnerLoader />}
+        <SmartAppBanner
+          storeAndroidId={settings?.store_android_id !== '0' ? settings?.store_android_id : false}
+          storeAppleId={settings?.store_apple_id !== '0' ? settings?.store_apple_id : false}
+          storeKindleId={settings?.store_kindle_id !== '0' ? settings?.store_kindle_id : false}
+        />
+        {
+          loaded && (
+            <ThemeProvider theme={themeUpdated}>
+              <ListenPageChanges />
+              {!(isKioskApp && isHome) && windowSize.width > 576 && (
+                <HeaderComponent
+                  isHome={isHome}
+                  location={location}
+                  isCustomLayout={singleBusinessConfig.isActive}
+                />
+              )}
+              <NotNetworkConnectivity />
+              {onlineStatus && (
+                <ScrollToTop>
+                  <HelmetTags />
+                  <Switch>
+                    <Route exact path='/home'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        isKioskApp
+                          ? <HomePage />
+                          : orderStatus.options?.address?.location
+                            ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
+                            : singleBusinessConfig.isActive
+                              ? <Redirect to={singleBusinessConfig.isActive ? '' : '/search'} />
+                              : <HomePage />
+                      )}
+                    </Route>
+                    <Route exact path='/'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        isKioskApp
+                          ? <HomePage />
+                          : orderStatus.options?.address?.location
+                            ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                             : <HomePage />
-                    )}
-                  </Route>
-                  <Route exact path='/'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      isKioskApp
-                        ? <HomePage />
-                        : orderStatus.options?.address?.location
-                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
-                          : <HomePage />
-                    )}
-                  </Route>
-                  <Route exact path='/wallets'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : isWalletEnabled
-                          ? <Wallets />
-                          : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
-                  </Route>
-                  <Route exact path='/signup_business'>
-                    {!auth && !isKioskApp ? (
-                      <SignUpBusiness
-                        elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
-                        useLoginByCellphone
-                        useChekoutFileds
-                        handleSuccessSignup={handleSuccessSignup}
-                        layout={signUpBusinesslayout}
-                        isRecaptchaEnable
-                      />
-                    ) : (
-                      <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                    )}
-                  </Route>
-                  <Route exact path='/signup-driver'>
-                    {!auth && !isKioskApp ? (
-                      <SignUpDriver
-                        layout={signUpDriverlayout}
-                        elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
-                        useLoginByCellphone
-                        useChekoutFileds
-                        handleSuccessSignup={handleSuccessSignup}
-                        isRecaptchaEnable
-                      />
-                    ) : (
-                      <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                    )}
-                  </Route>
-                  <Route exact path='/password/reset'>
-                    {auth ? (
-                      <Redirect to='/' />
-                    ) : (
-                      isKioskApp
-                        ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                        : <ResetPassword />
-                    )}
-                  </Route>
-                  <Route exact path='/profile'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
-                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
-                  </Route>
-                  <Route exact path='/verify'>
-                    {isUserVerifyRequired
-                      ? <UserVerification />
-                      : <Redirect to={(auth || isKioskApp) ? singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search' : '/'} />}
-                  </Route>
-                  <Route exact path='/profile/orders'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : (<MyOrders />)
-                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
-                  </Route>
-                  <Route exact path='/profile/addresses'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : (<AddressList />)
-                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
-                  </Route>
-                  <Route exact path='/messages'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : <MessagesList />
-                      : (
+                      )}
+                    </Route>
+                    <Route exact path='/wallets'>
+                      {auth
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : isWalletEnabled
+                            ? <Wallets />
+                            : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                        : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
+                    </Route>
+                    <Route exact path='/signup_business'>
+                      {!auth && !isKioskApp ? (
+                        <SignUpBusiness
+                          elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
+                          useLoginByCellphone
+                          useChekoutFileds
+                          handleSuccessSignup={handleSuccessSignup}
+                          layout={signUpBusinesslayout}
+                          isRecaptchaEnable
+                        />
+                      ) : (
+                        <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                      )}
+                    </Route>
+                    <Route exact path='/signup-driver'>
+                      {!auth && !isKioskApp ? (
+                        <SignUpDriver
+                          layout={signUpDriverlayout}
+                          elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
+                          useLoginByCellphone
+                          useChekoutFileds
+                          handleSuccessSignup={handleSuccessSignup}
+                          isRecaptchaEnable
+                        />
+                      ) : (
+                        <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                      )}
+                    </Route>
+                    <Route exact path='/password/reset'>
+                      {auth ? (
+                        <Redirect to='/' />
+                      ) : (
                         isKioskApp
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                          : <Redirect to={{ pathname: '/search' }} />
+                          : <ResetPassword />
                       )}
-                  </Route>
-                  <Route exact path='/help'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : (<Help />)
-                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
-                  </Route>
-                  <Route exact path='/search'>
-                    {
-                      isKioskApp
-                        ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                    </Route>
+                    <Route exact path='/profile'>
+                      {auth
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
+                        : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
+                    </Route>
+                    <Route exact path='/verify'>
+                      {isUserVerifyRequired
+                        ? <UserVerification />
+                        : <Redirect to={(auth || isKioskApp) ? singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search' : '/'} />}
+                    </Route>
+                    <Route exact path='/profile/orders'>
+                      {auth
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : (<MyOrders />)
+                        : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
+                    </Route>
+                    <Route exact path='/profile/addresses'>
+                      {auth
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : (<AddressList />)
+                        : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
+                    </Route>
+                    <Route exact path='/messages'>
+                      {auth
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : <MessagesList />
                         : (
-                          orderStatus.loading && !orderStatus.options?.address?.location ? (
-                            <SpinnerLoader />
-                          ) : (
-                            isUserVerifyRequired ? (
-                              <Redirect to='/verify' />
+                          isKioskApp
+                            ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                            : <Redirect to={{ pathname: '/search' }} />
+                        )}
+                    </Route>
+                    <Route exact path='/help'>
+                      {auth
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : (<Help />)
+                        : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
+                    </Route>
+                    <Route exact path='/search'>
+                      {
+                        isKioskApp
+                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                          : (
+                            orderStatus.loading && !orderStatus.options?.address?.location ? (
+                              <SpinnerLoader />
                             ) : (
+                              isUserVerifyRequired ? (
+                                <Redirect to='/verify' />
+                              ) : (
                               orderStatus.options?.address?.location
                                 ? <BusinessesList />
                                 : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                              )
                             )
                           )
-                        )
-                    }
-                  </Route>
-                  <Route exact path='/business_search'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
+                      }
+                    </Route>
+                    <Route exact path='/business_search'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
                       orderStatus.options?.address?.location && !isKioskApp ? (
                         <BusinessListingSearch />
                       ) : (
                         <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                       )
-                    )}
-                  </Route>
-                  <Route exact path='/promotions'>
-                    {orderStatus.loading && !orderStatus.options?.address?.location ? (
-                      <SpinnerLoader />
-                    ) : (
-                      isUserVerifyRequired ? (
-                        <Redirect to='/verify' />
+                      )}
+                    </Route>
+                    <Route exact path='/promotions'>
+                      {orderStatus.loading && !orderStatus.options?.address?.location ? (
+                        <SpinnerLoader />
                       ) : (
+                        isUserVerifyRequired ? (
+                          <Redirect to='/verify' />
+                        ) : (
                         orderStatus.options?.address?.location && !isKioskApp
                           ? <Promotions />
                           : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                      )
-                    )}
-                  </Route>
-                  <Route path='/checkout/:cartUuid?'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : <CheckoutPage />
-                      : (
-                        <Redirect to={{
-                          pathname: singleBusinessConfig.isActive
-                            ? `/${singleBusinessConfig.businessSlug}`
-                            : '/',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
+                        )
                       )}
-                  </Route>
-                  <Route path='/multi-checkout'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : <MultiCheckout />
-                      : (
-                        <Redirect to={{
-                          pathname: singleBusinessConfig.isActive
-                            ? `/${singleBusinessConfig.businessSlug}`
-                            : '/',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
+                    </Route>
+                    <Route path='/checkout/:cartUuid?'>
+                      {auth
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : <CheckoutPage />
+                        : (
+                          <Redirect to={{
+                            pathname: singleBusinessConfig.isActive
+                              ? `/${singleBusinessConfig.businessSlug}`
+                              : '/',
+                            state: { from: location.pathname || null }
+                          }}
+                          />
+                        )}
+                    </Route>
+                    <Route path='/multi-checkout'>
+                      {auth
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : <MultiCheckout />
+                        : (
+                          <Redirect to={{
+                            pathname: singleBusinessConfig.isActive
+                              ? `/${singleBusinessConfig.businessSlug}`
+                              : '/',
+                            state: { from: location.pathname || null }
+                          }}
+                          />
+                        )}
+                    </Route>
+                    <Route path='/multi-orders'>
+                      {auth
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : <MultiOrdersDetails />
+                        : (
+                          <Redirect to={{
+                            pathname: singleBusinessConfig.isActive
+                              ? `/${singleBusinessConfig.businessSlug}`
+                              : '/',
+                            state: { from: location.pathname || null }
+                          }}
+                          />
+                        )}
+                    </Route>
+                    <Route exact path='/orders/:orderId'>
+                      {(auth || hashKey)
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : <OrderDetailsPage />
+                        : (
+                          <Redirect to={{
+                            pathname: singleBusinessConfig.isActive
+                              ? `/${singleBusinessConfig.businessSlug}`
+                              : '/',
+                            state: { from: location.pathname || null }
+                          }}
+                          />
+                        )}
+                    </Route>
+                    <Route exact path='/promotions'>
+                      {(auth || hashKey)
+                        ? isUserVerifyRequired
+                          ? <Redirect to='/verify' />
+                          : <Promotions />
+                        : (
+                          <Redirect to={{
+                            pathname: singleBusinessConfig.isActive
+                              ? `/${singleBusinessConfig.businessSlug}`
+                              : '/',
+                            state: { from: location.pathname || null }
+                          }}
+                          />
+                        )}
+                    </Route>
+                    <Route exact path='/pages/:pageSlug'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <Cms />
                       )}
-                  </Route>
-                  <Route path='/multi-orders'>
-                    {auth
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : <MultiOrdersDetails />
-                      : (
-                        <Redirect to={{
-                          pathname: singleBusinessConfig.isActive
-                            ? `/${singleBusinessConfig.businessSlug}`
-                            : '/',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
+                    </Route>
+                    <Route exact path='/pages'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <PagesList />
                       )}
-                  </Route>
-                  <Route exact path='/orders/:orderId'>
-                    {(auth || hashKey)
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : <OrderDetailsPage />
-                      : (
-                        <Redirect to={{
-                          pathname: singleBusinessConfig.isActive
-                            ? `/${singleBusinessConfig.businessSlug}`
-                            : '/',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
+                    </Route>
+                    <Route exact path='/favorite'>
+                      {auth && !isKioskApp
+                        ? <Favorite />
+                        : (
+                          <Redirect to='/' />
+                        )}
+                    </Route>
+                    <Route exact path='/sessions'>
+                      {auth && !isKioskApp
+                        ? <SessionsList />
+                        : (
+                          <Redirect to='/' />
+                        )}
+                    </Route>
+                    <Route exact path='/store'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
                       )}
-                  </Route>
-                  <Route exact path='/promotions'>
-                    {(auth || hashKey)
-                      ? isUserVerifyRequired
-                        ? <Redirect to='/verify' />
-                        : <Promotions />
-                      : (
-                        <Redirect to={{
-                          pathname: singleBusinessConfig.isActive
-                            ? `/${singleBusinessConfig.businessSlug}`
-                            : '/',
-                          state: { from: location.pathname || null }
-                        }}
-                        />
+                    </Route>
+                    <Route exact path='/:business_slug'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
                       )}
-                  </Route>
-                  <Route exact path='/pages/:pageSlug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <Cms />
-                    )}
-                  </Route>
-                  <Route exact path='/pages'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <PagesList />
-                    )}
-                  </Route>
-                  <Route exact path='/favorite'>
-                    {auth && !isKioskApp
-                      ? <Favorite />
-                      : (
-                        <Redirect to='/' />
+                    </Route>
+                    <Route exact path='/:business_slug/:category_slug/:product_slug'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
                       )}
-                  </Route>
-                  <Route exact path='/sessions'>
-                    {auth && !isKioskApp
-                      ? <SessionsList />
-                      : (
-                        <Redirect to='/' />
+                    </Route>
+                    <Route exact path='/store/:business_slug'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
                       )}
-                  </Route>
-                  <Route exact path='/store'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
-                  </Route>
-                  <Route exact path='/:business_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
-                  </Route>
-                  <Route exact path='/:business_slug/:category_slug/:product_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
-                  </Route>
-                  <Route exact path='/store/:business_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
-                  </Route>
-                  <Route exact path='/store/:business_slug/:category_slug/:product_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
-                  </Route>
-                  <Route exact path='/store/:category_slug/:product_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
-                  </Route>
-                  <Route path='*'>
-                    <PageNotFound />
-                  </Route>
-                </Switch>
-              </ScrollToTop>
-            )}
-            {!navigator.userAgent.match('CriOS') && (
-              <PWAPrompt promptOnVisit={1} timesToShow={100} copyClosePrompt='Close' permanentlyHideOnDismiss={false} />
-            )}
-            {!isFooterPage && (
-              <Footer />
-            )}
-            {windowSize.width < 576 && onlineStatus && (
-              <NavigationBar />
-            )}
-            <Alert
-              title={t('INFORMATION', 'Information')}
-              content={alertState.content}
-              links={alertState.links}
-              acceptText={t('ACCEPT', 'Accept')}
-              open={alertState.open}
-              onClose={() => closeAlert()}
-              onCancel={() => closeAlert()}
-              onAccept={() => alertState?.isOnlyAlert ? closeAlert() : acceptAlert()}
-              closeOnBackdrop={false}
-            />
-            {lastOrderReview?.isReviewOpen && (
-              <Modal
-                open={lastOrderReview?.isReviewOpen}
-                onClose={handleCloseReivew}
-                title={lastOrderReview?.order && reviewModalTitle()}
-                width={lastOrderReview?.reviewStatus?.trigger ? '680px' : null}
-              >
-                <div>
-                  {
+                    </Route>
+                    <Route exact path='/store/:business_slug/:category_slug/:product_slug'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
+                      )}
+                    </Route>
+                    <Route exact path='/store/:category_slug/:product_slug'>
+                      {isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
+                      )}
+                    </Route>
+                    <Route path='*'>
+                      <PageNotFound />
+                    </Route>
+                  </Switch>
+                </ScrollToTop>
+              )}
+              {!navigator.userAgent.match('CriOS') && (
+                <PWAPrompt promptOnVisit={1} timesToShow={100} copyClosePrompt='Close' permanentlyHideOnDismiss={false} />
+              )}
+              {!isFooterPage && (
+                <Footer />
+              )}
+              {windowSize.width < 576 && onlineStatus && (
+                <NavigationBar />
+              )}
+              <Alert
+                title={t('INFORMATION', 'Information')}
+                content={alertState.content}
+                links={alertState.links}
+                acceptText={t('ACCEPT', 'Accept')}
+                open={alertState.open}
+                onClose={() => closeAlert()}
+                onCancel={() => closeAlert()}
+                onAccept={() => alertState?.isOnlyAlert ? closeAlert() : acceptAlert()}
+                closeOnBackdrop={false}
+              />
+              {lastOrderReview?.isReviewOpen && (
+                <Modal
+                  open={lastOrderReview?.isReviewOpen}
+                  onClose={handleCloseReivew}
+                  title={lastOrderReview?.order && reviewModalTitle()}
+                  width={lastOrderReview?.reviewStatus?.trigger ? '680px' : null}
+                >
+                  <div>
+                    {
                     lastOrderReview?.reviewStatus?.trigger
                       ? <ReviewTrigger order={lastOrderReview?.order} handleOpenOrderReview={handleOpenOrderReview} />
                       : lastOrderReview?.reviewStatus?.order
@@ -696,25 +705,25 @@ export const App = () => {
                         : (lastOrderReview?.reviewStatus?.product
                           ? <ReviewProduct order={lastOrderReview?.order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={() => setIsReviewed('isProductReviewed')} />
                           : <ReviewDriver order={lastOrderReview?.order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={() => setIsReviewed('isDriverReviewed')} />)
-                  }
-                </div>
+                    }
+                  </div>
+                </Modal>
+              )}
+              <Modal
+                open={businessSignUpSuccessed?.open}
+                onClose={() => setBusinessSignUpSuccessed({ open: false, content: {} })}
+                title={t('CONGRATULATIONS', 'Congratulations')}
+                width='990px'
+              >
+                <SignUpApproval
+                  content={businessSignUpSuccessed?.content}
+                  onAccept={() => acceptAlert()}
+                  onCancel={() => setBusinessSignUpSuccessed({ open: false, content: {} })}
+                />
               </Modal>
-            )}
-            <Modal
-              open={businessSignUpSuccessed?.open}
-              onClose={() => setBusinessSignUpSuccessed({ open: false, content: {} })}
-              title={t('CONGRATULATIONS', 'Congratulations')}
-              width='990px'
-            >
-              <SignUpApproval
-                content={businessSignUpSuccessed?.content}
-                onAccept={() => acceptAlert()}
-                onCancel={() => setBusinessSignUpSuccessed({ open: false, content: {} })}
-              />
-            </Modal>
-          </ThemeProvider>
-        )
-      }
-    </div>
-  )
+            </ThemeProvider>
+          )
+        }
+      </div>
+    )
 }
