@@ -25,9 +25,14 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  height: calc(100vh - 97px);\n  ", "\n"])), function (_ref) {
+var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  height: calc(100vh - 97px);\n  ", "\n  .firstHeading {\n    font-family: ", ";\n  }\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
+}, function (_ref2) {
+  var _theme$fonts, _theme$fonts$special;
+
+  var theme = _ref2.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$fonts = theme.fonts) === null || _theme$fonts === void 0 ? void 0 : (_theme$fonts$special = _theme$fonts.special) === null || _theme$fonts$special === void 0 ? void 0 : _theme$fonts$special.name;
 });
 
 exports.HeroContainerStyled = HeroContainerStyled;
@@ -48,8 +53,8 @@ var HeroContainer = function HeroContainer(props) {
 
 exports.HeroContainer = HeroContainer;
 
-var WrapInput = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  padding: 10px 5px;\n  background: #FFFFFF;\n  border: 1px solid #DEE2E6;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  align-items: center;\n  margin-bottom: 27px;\n  margin-right: 10px;\n  display: flex;\n  overflow: hidden;\n  white-space: nowrap;\n\n  ", "\n  \n  p {\n    color: #000 !important;\n    position: relative;\n    margin: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    align-self: flex-end;\n  }\n\n  svg {\n    color: ", ";\n    width: 22px;\n    height: 22px;\n    min-width: 22px;\n\n    ", "\n\n  }\n"])), function (_ref2) {
-  var withIcon = _ref2.withIcon;
+var WrapInput = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  padding: 10px 5px;\n  background: #FFFFFF;\n  border: 1px solid #DEE2E6;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  align-items: center;\n  margin-bottom: 27px;\n  margin-right: 10px;\n  display: flex;\n  overflow: hidden;\n  white-space: nowrap;\n\n  ", "\n  \n  p {\n    color: #000 !important;\n    position: relative;\n    margin: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    align-self: flex-end;\n  }\n\n  svg {\n    color: ", ";\n    width: 22px;\n    height: 22px;\n    min-width: 22px;\n\n    ", "\n\n  }\n"])), function (_ref3) {
+  var withIcon = _ref3.withIcon;
   return withIcon && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    box-sizing: border-box;\n    flex: 1;\n    &::before {\n      content: \"\";\n      position: absolute;\n      right: 5px;\n      top: 0;\n      bottom: 18px;\n      width: 15px;\n\n      ", "\n    }\n  "])), function (props) {
     var _props$theme;
 
@@ -69,23 +74,28 @@ var ContentWrapper = _styledComponents.default.div(_templateObject8 || (_templat
 
 exports.ContentWrapper = ContentWrapper;
 
-var SearchLocationsContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 40px 20px 20px;\n  overflow-y: auto;\n  overflow-x: hidden;\n  height: calc(100vh - 97px);\n  box-sizing: border-box;\n  h1 {\n    color: #fff;\n  }\n  div {\n    margin: 20px 0 0;\n    p{\n      color: ", ";\n    }\n  }\n  @media (min-width: 768px){\n    width: 50%;\n  }\n\n  @media (min-width: 1024px){\n    width: 500px;\n  }\n"])), function (_ref3) {
-  var theme = _ref3.theme;
+var SearchLocationsContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 40px 20px 20px;\n  overflow-y: auto;\n  overflow-x: hidden;\n  height: calc(100vh - 97px);\n  box-sizing: border-box;\n  h1 {\n    color: #fff;\n    font-family: ", ";\n  }\n  div {\n    margin: 20px 0 0;\n    p{\n      color: ", ";\n    }\n  }\n  @media (min-width: 768px){\n    width: 50%;\n  }\n\n  @media (min-width: 1024px){\n    width: 500px;\n  }\n"])), function (_ref4) {
+  var _theme$fonts2, _theme$fonts2$special;
+
+  var theme = _ref4.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$fonts2 = theme.fonts) === null || _theme$fonts2 === void 0 ? void 0 : (_theme$fonts2$special = _theme$fonts2.special) === null || _theme$fonts2$special === void 0 ? void 0 : _theme$fonts2$special.name;
+}, function (_ref5) {
+  var theme = _ref5.theme;
   return theme.colors.titleHomeColor;
 });
 
 exports.SearchLocationsContainer = SearchLocationsContainer;
 
-var DeliveryPickupContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  flex-direction: row-reverse;\n  position: relative;\n  border-radius: 0px;\n  border: 1px solid ", ";\n  height: 52px;\n  background-color: transparent;\n\n  button {\n    outline: none;\n    background: none;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    z-index: 1;\n  }\n\n  &::after {\n    ", "\n"])), function (_ref4) {
-  var theme = _ref4.theme;
+var DeliveryPickupContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  flex-direction: row-reverse;\n  position: relative;\n  border-radius: 0px;\n  border: 1px solid ", ";\n  height: 52px;\n  background-color: transparent;\n\n  button {\n    outline: none;\n    background: none;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    z-index: 1;\n  }\n\n  &::after {\n    ", "\n"])), function (_ref6) {
+  var theme = _ref6.theme;
   return theme.colors.gold;
-}, function (_ref5) {
-  var orderTypeSelected = _ref5.orderTypeSelected;
-  return orderTypeSelected === 1 ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      content: \"\";\n      background:  ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      left: 6px;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n    "])), function (_ref6) {
-    var theme = _ref6.theme;
+}, function (_ref7) {
+  var orderTypeSelected = _ref7.orderTypeSelected;
+  return orderTypeSelected === 1 ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      content: \"\";\n      background:  ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      left: 6px;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n    "])), function (_ref8) {
+    var theme = _ref8.theme;
     return theme.colors.gold;
-  }) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      content: \"\";\n      background: ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n      left: 50%;\n      \n    "])), function (_ref7) {
-    var theme = _ref7.theme;
+  }) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      content: \"\";\n      background: ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n      left: 50%;\n      \n    "])), function (_ref9) {
+    var theme = _ref9.theme;
     return theme.colors.gold;
   });
 });

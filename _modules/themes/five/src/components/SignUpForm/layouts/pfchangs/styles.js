@@ -60,8 +60,13 @@ var FormInput = _styledComponents.default.form(_templateObject4 || (_templateObj
 
 exports.FormInput = FormInput;
 
-var Title = _styledComponents.default.h1(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  margin-top: 0;\n  margin-bottom: 30px;\n  color: ", ";\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  margin-top: 0;\n  margin-bottom: 30px;\n  color: ", ";\n  font-family: ", ";\n"])), function (props) {
   return props.theme.colors.darkTextColor;
+}, function (_ref7) {
+  var _theme$fonts, _theme$fonts$special;
+
+  var theme = _ref7.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$fonts = theme.fonts) === null || _theme$fonts === void 0 ? void 0 : (_theme$fonts$special = _theme$fonts.special) === null || _theme$fonts$special === void 0 ? void 0 : _theme$fonts$special.name;
 });
 
 exports.Title = Title;
@@ -69,8 +74,8 @@ exports.Title = Title;
 var SkeletonWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  span{\n    margin: 10px 0;\n    border-radius: 30px;\n  }\n"])));
 
 exports.SkeletonWrapper = SkeletonWrapper;
-var SkeletonSocialWrapper = (0, _styledComponents.default)(SkeletonWrapper)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    margin-top: 0;\n  }\n"])), function (_ref7) {
-  var isPopup = _ref7.isPopup;
+var SkeletonSocialWrapper = (0, _styledComponents.default)(SkeletonWrapper)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    margin-top: 0;\n  }\n"])), function (_ref8) {
+  var isPopup = _ref8.isPopup;
   return isPopup ? '100%' : '80%';
 });
 exports.SkeletonSocialWrapper = SkeletonSocialWrapper;
@@ -79,8 +84,8 @@ var ReCaptchaWrapper = _styledComponents.default.div(_templateObject8 || (_templ
 
 exports.ReCaptchaWrapper = ReCaptchaWrapper;
 
-var InputContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  margin: 5px 0px;\n\n  \n  @media (min-width: 800px) {\n    ", "\n  }\n"])), function (_ref8) {
-  var isHalf = _ref8.isHalf;
+var InputContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  margin: 5px 0px;\n\n  \n  @media (min-width: 800px) {\n    ", "\n  }\n"])), function (_ref9) {
+  var isHalf = _ref9.isHalf;
   return isHalf && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      width: 48%;\n    "])));
 });
 
