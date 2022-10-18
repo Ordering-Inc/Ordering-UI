@@ -61,6 +61,9 @@ import settings from './config'
 import { Promotions } from './pages/Promotions'
 import { MultiCheckout } from './pages/MultiCheckout'
 import { MultiOrdersDetails } from './pages/MultiOrdersDetails'
+import { CancellationComponent } from '../src/components/CancellationComponent'
+import { Button } from '../src/themes/five/src/styles/Buttons'
+import { Input } from '../src/themes/five/src/styles/Inputs'
 
 export const App = () => {
   const [{ auth, user }, { login }] = useSession()
@@ -312,8 +315,13 @@ export const App = () => {
     }
   }, [orderStatus])
 
-  return (
-    <>
+  return settings.isCancellation ? (
+      <CancellationComponent 
+        ButtonComponent={Button}
+        InputComponent={Input}
+      />
+  ) :
+    (<>
       {!!configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
       )}
@@ -708,6 +716,5 @@ export const App = () => {
           </ThemeProvider>
         )
       }
-    </>
-  )
+    </>)
 }
