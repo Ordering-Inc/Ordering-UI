@@ -70,6 +70,14 @@ export const FormInput = styled.form`
     color: #000;
     border-color: ${({ theme }) => theme?.colors.gold};
   }
+  
+  .PhoneInputCountry {
+    border-color: ${({ theme }) => theme?.colors.gold};
+  }
+
+  .PhoneInputInput {
+    border-color: ${({ theme }) => theme?.colors.gold} !important;
+  }
 `
 
 export const Title = styled.h1`
@@ -127,6 +135,7 @@ export const InputWrapper = styled.div`
       padding-left: 40px !important;
     `}
     margin: 10px 0;
+    border: 1px solid ${({ theme }) => theme?.colors?.gold};
   }
 `
 export const InputBeforeIcon = styled.div`

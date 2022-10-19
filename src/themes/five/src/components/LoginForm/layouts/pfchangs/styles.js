@@ -93,6 +93,14 @@ export const FormInput = styled.form`
   .phone_number {
     margin: 10px 0;
   }
+
+  .PhoneInputCountry {
+    border-color: ${({ theme }) => theme?.colors.gold};
+  }
+
+  .PhoneInputInput {
+    border-color: ${({ theme }) => theme?.colors.gold} !important;
+  }
 `
 
 export const RedirectLink = styled.div`
@@ -224,6 +232,7 @@ export const InputWrapper = styled.div`
     &::placeholder{
       color: ${props => props.theme.colors.darkGray};
     }
+    border: 1px solid ${({ theme }) => theme?.colors?.gold};
   }
 `
 
