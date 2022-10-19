@@ -316,12 +316,12 @@ export const App = () => {
   }, [orderStatus])
 
   return settings.isCancellation ? (
-      <CancellationComponent 
-        ButtonComponent={Button}
-        InputComponent={Input}
-      />
-  ) :
-    (<>
+    <CancellationComponent
+      ButtonComponent={Button}
+      InputComponent={Input}
+    />
+  ) : (
+    <div style={{ marginBottom: windowSize.width < 576 && onlineStatus ? 80 : 0 }}>
       {!!configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
       )}
@@ -716,5 +716,6 @@ export const App = () => {
           </ThemeProvider>
         )
       }
-    </>)
+    </div>
+  )
 }
