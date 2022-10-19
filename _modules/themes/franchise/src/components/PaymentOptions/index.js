@@ -1,37 +1,66 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.PaymentOptions = void 0;
+
 var _react = _interopRequireWildcard(require("react"));
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _IosRadioButtonOn = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOn"));
+
 var _orderingComponents = require("ordering-components");
+
 var _Modal = require("../Modal");
+
 var _PaymentOptionStripe = require("../PaymentOptionStripe");
+
 var _PaymentOptionPaypal = require("../../../../../components/PaymentOptionPaypal");
+
 var _StripeElementsForm = require("../StripeElementsForm");
+
 var _StripeRedirectForm = require("../StripeRedirectForm");
+
 var _NotFoundSource = require("../../../../../components/NotFoundSource");
+
 var _utils = require("../../../../../utils");
+
 var _PaymentOptionCash = require("../PaymentOptionCash");
+
 var _Select = require("../../styles/Select");
+
 var _styles = require("./styles");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect'];
 var stripeRedirectOptions = [{
   name: 'Bancontact',
@@ -52,36 +81,44 @@ var paypalBtnStyle = {
   label: 'paypal',
   size: 'responsive'
 };
+
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _paymethodSelected$da, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _props$afterComponent, _props$afterElements;
+
   var cart = props.cart,
-    errorCash = props.errorCash,
-    isLoading = props.isLoading,
-    isDisabled = props.isDisabled,
-    paymethodData = props.paymethodData,
-    paymethodsList = props.paymethodsList,
-    setPaymethodData = props.setPaymethodData,
-    handleOrderRedirect = props.handleOrderRedirect,
-    handlePaymethodClick = props.handlePaymethodClick,
-    handlePaymethodDataChange = props.handlePaymethodDataChange,
-    isCustomerMode = props.isCustomerMode,
-    isOpenMethod = props.isOpenMethod,
-    onPaymentChange = props.onPaymentChange;
+      errorCash = props.errorCash,
+      isLoading = props.isLoading,
+      isDisabled = props.isDisabled,
+      paymethodData = props.paymethodData,
+      paymethodsList = props.paymethodsList,
+      setPaymethodData = props.setPaymethodData,
+      handleOrderRedirect = props.handleOrderRedirect,
+      handlePaymethodClick = props.handlePaymethodClick,
+      handlePaymethodDataChange = props.handlePaymethodDataChange,
+      isCustomerMode = props.isCustomerMode,
+      isOpenMethod = props.isOpenMethod,
+      onPaymentChange = props.onPaymentChange;
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useSession = (0, _orderingComponents.useSession)(),
-    _useSession2 = _slicedToArray(_useSession, 1),
-    token = _useSession2[0].token;
+      _useSession2 = _slicedToArray(_useSession, 1),
+      token = _useSession2[0].token;
+
   var _useState = (0, _react.useState)([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    paymethodsOptions = _useState2[0],
-    setPaymethodsOptions = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      paymethodsOptions = _useState2[0],
+      setPaymethodsOptions = _useState2[1];
+
   var paymethodSelected = props.paySelected || props.paymethodSelected;
+
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
     var isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal'].includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway);
     handlePaymethodClick(paymethod, isPopupMethod);
   };
+
   var handleChangePaymethod = function handleChangePaymethod(paymethodId) {
     if (isDisabled) return;
     var selectedPaymethod = paymethodsList.paymethods.find(function (paymethod) {
@@ -89,6 +126,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     });
     handlePaymentMethodClick(selectedPaymethod);
   };
+
   (0, _react.useEffect)(function () {
     if (paymethodsList.paymethods.length === 1) {
       handlePaymethodClick && handlePaymethodClick(paymethodsList.paymethods[0]);
@@ -101,24 +139,29 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   }, [paymethodSelected]);
   (0, _react.useEffect)(function () {
     var _props$paySelected;
+
     if (props.paySelected && (_props$paySelected = props.paySelected) !== null && _props$paySelected !== void 0 && _props$paySelected.data) {
       var _props$paySelected2;
+
       setPaymethodData((_props$paySelected2 = props.paySelected) === null || _props$paySelected2 === void 0 ? void 0 : _props$paySelected2.data);
     }
   }, [props.paySelected]);
   (0, _react.useEffect)(function () {
     if (paymethodsList.loading) return;
+
     var _filteredPaymethods = paymethodsList.paymethods.sort(function (a, b) {
       return a.id - b.id;
     }).filter(function (paymethod) {
       return !isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash');
     });
+
     var _paymethodsOptions = _filteredPaymethods.map(function (paymethod) {
       return {
         value: paymethod.id,
         content: /*#__PURE__*/_react.default.createElement(_styles.PayCardOption, null, t(paymethod.gateway.toUpperCase(), paymethod.name))
       };
     });
+
     setPaymethodsOptions(_paymethodsOptions);
   }, [paymethodsList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -236,10 +279,13 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }, AfterElement);
   }));
 };
+
 var PaymentOptions = function PaymentOptions(props) {
   var paymentOptions = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PaymentOptionsUI
   });
+
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PaymentOptions, paymentOptions);
 };
+
 exports.PaymentOptions = PaymentOptions;
