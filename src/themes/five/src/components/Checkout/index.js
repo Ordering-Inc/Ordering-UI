@@ -125,6 +125,7 @@ const CheckoutUI = (props) => {
     placing ||
     errorCash ||
     loading ||
+    (options?.type === 3 && !(cartState?.cart?.spot_number || cart?.spot_number)) ||
     !cart?.valid_maximum ||
     (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
     // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
@@ -142,6 +143,9 @@ const CheckoutUI = (props) => {
       value: option?.id, content: t(option?.name.toUpperCase().replace(/\s/g, '_'), option?.name), showOnSelected: t(option?.name.toUpperCase().replace(/\s/g, '_'), option?.name)
     }
   })
+
+  console.log(isDisablePlaceOrderButton)
+  console.log(options)
 
   const handlePlaceOrder = () => {
     if (!userErrors.length && !requiredFields?.length) {
@@ -240,6 +244,8 @@ const CheckoutUI = (props) => {
     if (cart?.products?.length) return
     handleStoreRedirect(cart?.business?.slug)
   }, [cart?.products])
+
+  console.log(cart)
 
   return (
     <Container>
@@ -507,11 +513,11 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
-        {/* {placeSpotTypes.includes(options?.type) && !cart?.place && hasBusinessPlaces && (
+        {options?.type === 3 && !cart?.spot_number && (
           <WarningText>
             {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
           </WarningText>
-        )} */}
+        )}
 
         {options.type === 1 &&
         validationFields?.fields?.checkout?.driver_tip?.enabled &&
