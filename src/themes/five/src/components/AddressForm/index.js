@@ -57,7 +57,8 @@ const AddressFormUI = (props) => {
     handleChangeInput,
     saveAddress,
     setIsEdit,
-    userCustomerSetup
+    userCustomerSetup,
+    pfchangs
   } = props
 
   const [configState] = useConfig()
@@ -81,11 +82,11 @@ const AddressFormUI = (props) => {
   )
 
   const isHideMap = orderingTheme?.theme?.header?.components?.address_form?.components?.map?.hidden
-  const isHideIcons = orderingTheme?.theme?.header?.components?.address_form?.components?.icons?.hidden
+  const isHideIcons = theme?.header?.components?.address_form?.components?.icons?.hidden
   const AlertComponent = theme?.general?.components?.layout?.type === 'pfchangs'
     ? AlertPFchangs
     : Alert
-
+  const isHideAddressComponents = pfchangs && !auth
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
@@ -436,7 +437,7 @@ const AddressFormUI = (props) => {
               </React.Fragment>
             ) : (
               <React.Fragment key={field.name}>
-                {(isRequiredField(field.name) || showFieldWithTheme(field.name)) && (
+                {(isRequiredField(field.name) || showFieldWithTheme(field.name)) && !isHideAddressComponents && (
                   <>
                     {field.name !== 'address_notes' ? (
                       <Input
@@ -470,7 +471,7 @@ const AddressFormUI = (props) => {
           ))}
 
           {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
-          {!isHideIcons && (
+          {(!isHideIcons && !isHideAddressComponents) && (
             <AddressTagSection>
               <Button className={addressTag === 'home' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('home')}>
                 <span><House /></span>
