@@ -25,7 +25,7 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  height: calc(100vh - 97px);\n  ", "\n  .firstHeading {\n    font-family: ", ";\n  }\n"])), function (_ref) {
+var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  height: calc(100vh - 97px);\n  ", "\n\n  .firstHeading {\n    font-family: ", ";\n  }\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 }, function (_ref2) {

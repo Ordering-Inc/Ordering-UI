@@ -64,7 +64,7 @@ var LoginWith = _styledComponents.default.div(_templateObject6 || (_templateObje
 
 exports.LoginWith = LoginWith;
 
-var FormInput = _styledComponents.default.form(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  input:not(:last-child) {\n    margin: 5px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n    background: ", ";\n    color: #000;\n    border-color: ", ";\n  }\n\n  .phone_number {\n    margin: 10px 0;\n  }\n"])), function (_ref9) {
+var FormInput = _styledComponents.default.form(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n\n  input:not(:last-child) {\n    margin: 5px 0px;\n    padding: 8px 20px;\n  }\n\n  button {\n    margin-top: 10px;\n    padding: 5px;\n    background: ", ";\n    color: #000;\n    border-color: ", ";\n  }\n\n  .phone_number {\n    margin: 10px 0;\n  }\n\n  .PhoneInputCountry {\n    border-color: ", ";\n  }\n\n  .PhoneInputInput {\n    border-color: ", " !important;\n  }\n"])), function (_ref9) {
   var isPopup = _ref9.isPopup;
   return isPopup ? '100%' : '80%';
 }, function (_ref10) {
@@ -72,6 +72,12 @@ var FormInput = _styledComponents.default.form(_templateObject8 || (_templateObj
   return theme === null || theme === void 0 ? void 0 : theme.colors.gold;
 }, function (_ref11) {
   var theme = _ref11.theme;
+  return theme === null || theme === void 0 ? void 0 : theme.colors.gold;
+}, function (_ref12) {
+  var theme = _ref12.theme;
+  return theme === null || theme === void 0 ? void 0 : theme.colors.gold;
+}, function (_ref13) {
+  var theme = _ref13.theme;
   return theme === null || theme === void 0 ? void 0 : theme.colors.gold;
 });
 
@@ -87,31 +93,31 @@ var RedirectLink = _styledComponents.default.div(_templateObject9 || (_templateO
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primary;
-}, function (_ref12) {
-  var register = _ref12.register;
-  return register && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    width: calc(95% - 20px);\n\n    @media (min-width: 481px) {\n      width: ", ";\n    }\n  "])), function (_ref13) {
-    var isPopup = _ref13.isPopup;
+}, function (_ref14) {
+  var register = _ref14.register;
+  return register && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    width: calc(95% - 20px);\n\n    @media (min-width: 481px) {\n      width: ", ";\n    }\n  "])), function (_ref15) {
+    var isPopup = _ref15.isPopup;
     return isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)';
   });
-}, function (_ref14) {
-  var isPopup = _ref14.isPopup;
+}, function (_ref16) {
+  var isPopup = _ref16.isPopup;
   return isPopup ? '13px' : '18px';
-}, function (_ref15) {
-  var isPopup = _ref15.isPopup;
+}, function (_ref17) {
+  var isPopup = _ref17.isPopup;
   return isPopup && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      font-size: 16px;\n    "])));
 });
 
 exports.RedirectLink = RedirectLink;
 
-var SocialButtons = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n   width: ", ";\n   margin-top: 10px;\n\n  button {\n    width: 100%;\n    padding: 6px 40px;\n    color: #000000;\n\n    img {\n      width: 16px;\n    }\n\n    div {\n      font-size: 16px;\n    }\n  }\n"])), function (_ref16) {
-  var isPopup = _ref16.isPopup;
+var SocialButtons = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n   width: ", ";\n   margin-top: 10px;\n\n  button {\n    width: 100%;\n    padding: 6px 40px;\n    color: #000000;\n\n    img {\n      width: 16px;\n    }\n\n    div {\n      font-size: 16px;\n    }\n  }\n"])), function (_ref18) {
+  var isPopup = _ref18.isPopup;
   return isPopup ? '100%' : '80%';
 });
 
 exports.SocialButtons = SocialButtons;
 
-var SkeletonSocialWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    border-radius: 30px;\n    margin-bottom: 10px\n  }\n"])), function (_ref17) {
-  var isPopup = _ref17.isPopup;
+var SkeletonSocialWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: ", ";\n  span{\n    border-radius: 30px;\n    margin-bottom: 10px\n  }\n"])), function (_ref19) {
+  var isPopup = _ref19.isPopup;
   return isPopup ? '100%' : '80%';
 });
 
@@ -127,8 +133,13 @@ var TogglePassword = _styledComponents.default.span(_templateObject15 || (_templ
 
 exports.TogglePassword = TogglePassword;
 
-var InputWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-bottom: 5px;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n    padding-right: 40px !important;\n    padding-left: 40px !important;\n    margin: 10px 0;\n    &::placeholder{\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var InputWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-bottom: 5px;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n    padding-right: 40px !important;\n    padding-left: 40px !important;\n    margin: 10px 0;\n    &::placeholder{\n      color: ", ";\n    }\n    border: 1px solid ", ";\n  }\n"])), function (props) {
   return props.theme.colors.darkGray;
+}, function (_ref20) {
+  var _theme$colors;
+
+  var theme = _ref20.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold;
 });
 
 exports.InputWrapper = InputWrapper;
@@ -159,8 +170,8 @@ var InputBeforeIcon = _styledComponents.default.div(_templateObject21 || (_templ
 
 exports.InputBeforeIcon = InputBeforeIcon;
 
-var LoginDivider = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: ", ";\n  margin: 30px 0;\n\n  p {\n    margin: 0;\n    width: 70px;\n    font-size: 14px;\n    color: #748194;\n    text-align: center;\n  }\n"])), function (_ref18) {
-  var isPopup = _ref18.isPopup;
+var LoginDivider = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: ", ";\n  margin: 30px 0;\n\n  p {\n    margin: 0;\n    width: 70px;\n    font-size: 14px;\n    color: #748194;\n    text-align: center;\n  }\n"])), function (_ref21) {
+  var isPopup = _ref21.isPopup;
   return isPopup ? '100%' : '80%';
 });
 
