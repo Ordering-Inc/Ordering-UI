@@ -135,7 +135,7 @@ export const MyOrders = (props) => {
                       setIsEmptyPreorder={setIsEmptyPreorder}
                       selectItem={selectItem}
                     />
-                    <Divider />
+                    {!isEmptyPreorder && <Divider />}
                   </>
                 )}
                 {(selectItem === 'all' || selectItem === 'active') && (
@@ -147,7 +147,7 @@ export const MyOrders = (props) => {
                       setIsEmptyActive={setIsEmptyActive}
                       selectItem={selectItem}
                     />
-                    <Divider />
+                    {!isEmptyActive && <Divider />}
                   </>
                 )}
                 {(selectItem === 'all' || selectItem === 'past') && (
@@ -159,7 +159,7 @@ export const MyOrders = (props) => {
                       setIsEmptyPast={setIsEmptyPast}
                       selectItem={selectItem}
                     />
-                    <Divider />
+                    {!isEmptyPast && <Divider />}
                   </>
                 )}
               </>
