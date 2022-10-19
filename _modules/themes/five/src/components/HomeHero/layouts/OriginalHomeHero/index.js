@@ -121,7 +121,9 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
-  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
+    mb: !auth && '30vh'
+  }, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotypeInvert,
     loading: "lazy"
