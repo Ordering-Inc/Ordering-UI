@@ -100,6 +100,7 @@ import { useWindowSize } from './hooks/useWindowSize'
 import { useCountdownTimer } from './hooks/useCountdownTimer'
 import { useIntersectionObserver } from './hooks/useIntersectionObserver'
 import { useIsMounted } from './hooks/useIsMounted'
+import { CancellationComponent } from './components/CancellationComponent'
 
 import { Button } from './styles/Buttons'
 import { Input, InputGroup, InputPrimary, InputGroupLeft, InputGroupPrimary, InputGroupRight, InputSecundary, TextArea } from './styles/Inputs'
@@ -150,6 +151,7 @@ export {
   BusinessesMap,
   BusinessReviews,
   BusinessTypeFilter,
+  CancellationComponent,
   CardForm,
   Cart,
   CartContent,
