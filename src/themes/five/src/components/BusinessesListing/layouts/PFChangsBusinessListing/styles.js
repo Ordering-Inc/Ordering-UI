@@ -75,6 +75,7 @@ export const LeftContainer = styled.div`
     margin: 0 0 10px 0;
     overflow: hidden;
     font-size: 18px;
+    font-family: ${({ theme }) => theme?.fonts?.special?.name};
   }
   @media (min-width: 768px){
     text-align: start;

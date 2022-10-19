@@ -208,9 +208,6 @@ export const AddressTitle = styled.span`
     border-bottom: 1px solid #fff;
     font-weight: 600;
   `}
-  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
-    font-family: ${theme?.fonts?.special?.name};
-  `}
 `
 
 export const AddressHalfContainer = styled.div`

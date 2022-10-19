@@ -243,7 +243,7 @@ export const TitleWrapper = styled.div`
   flex: 1;
   overflow: hidden;
   h1 {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     text-align: left;
     color: #fff;
