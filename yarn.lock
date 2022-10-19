@@ -2763,15 +2763,16 @@
     "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/number-float64-base-normalize@^0.0.x":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@stdlib/number-float64-base-normalize/-/number-float64-base-normalize-0.0.6.tgz#897083ba2ed4af43250c20cd65bfde2b798bf25d"
-  integrity sha512-+RvDf+vQdtGOg7lwz2vGFYL2hA0FyfAJyWVjBkesfHyyKL8nQclA83NJp6bjh+pVkOW3obBDX9zi8Gir4ORm1g==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/number-float64-base-normalize/-/number-float64-base-normalize-0.0.8.tgz#981149317bd34921c653ed526376718b961e17e9"
+  integrity sha512-4P3c7YD0hahCgflxxTWrjR8457o2ViYu32MH/M166Aj6nkPj0ZovYj/X1DdyiYAAMHhVePGGMl0JAL3X141FVQ==
   dependencies:
     "@stdlib/constants-float64-smallest-normal" "^0.0.x"
     "@stdlib/math-base-assert-is-infinite" "^0.0.x"
     "@stdlib/math-base-assert-is-nan" "^0.0.x"
     "@stdlib/math-base-special-abs" "^0.0.x"
     "@stdlib/types" "^0.0.x"
+    "@stdlib/utils-define-nonenumerable-read-only-property" "^0.0.x"
 
 "@stdlib/number-float64-base-to-float32@^0.0.x":
   version "0.0.7"
