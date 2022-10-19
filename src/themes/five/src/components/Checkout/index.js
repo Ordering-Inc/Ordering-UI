@@ -144,9 +144,6 @@ const CheckoutUI = (props) => {
     }
   })
 
-  console.log(isDisablePlaceOrderButton)
-  console.log(options)
-
   const handlePlaceOrder = () => {
     if (!userErrors.length && !requiredFields?.length) {
       const body = {}
@@ -244,8 +241,6 @@ const CheckoutUI = (props) => {
     if (cart?.products?.length) return
     handleStoreRedirect(cart?.business?.slug)
   }, [cart?.products])
-
-  console.log(cart)
 
   return (
     <Container>
