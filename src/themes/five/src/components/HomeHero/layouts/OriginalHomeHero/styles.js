@@ -6,7 +6,9 @@ export const HeroContainerStyled = styled.div`
   height: fit-content;
   height: 374px;
   position:relative;
-  margin-bottom: 30vh;
+  ${({ mb }) => mb && css`
+    margin-bottom: ${mb};
+  `}
 
 
   ${({ bgimage }) => bgimage && css`

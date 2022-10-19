@@ -87,7 +87,7 @@ export const OriginalHomeHero = (props) => {
 
   return (
     <HeroContainer bgimage={theme.images?.general?.homeHero}>
-      <ContentWrapper>
+      <ContentWrapper mb={!auth && '30vh'}>
         {windowSize.width < 576 && (
           <LogoWrapper>
             <img alt='Logotype' src={theme?.images?.logos?.logotypeInvert} loading='lazy' />
