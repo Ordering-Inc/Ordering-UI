@@ -47,6 +47,7 @@ export const CustomerInfoContainer = styled.div`
   padding: 30px 25px;
   margin-top: 48px;
   display: flex;
+  flex-wrap: wrap;
 `
 export const CustomerDetails = styled.div`
   flex: 1;
