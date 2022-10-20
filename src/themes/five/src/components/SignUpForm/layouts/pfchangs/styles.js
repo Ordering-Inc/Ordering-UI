@@ -136,6 +136,9 @@ export const InputWrapper = styled.div`
     `}
     margin: 10px 0;
     border: 1px solid ${({ theme }) => theme?.colors?.gold};
+    &:focus {
+      border-color: ${({ theme }) => theme?.colors?.gold};
+    }
   }
 `
 export const InputBeforeIcon = styled.div`

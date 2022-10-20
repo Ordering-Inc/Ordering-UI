@@ -180,7 +180,6 @@ const BusinessesListingUI = (props) => {
       `https://www.google.com/maps/search/?api=1&query=${business.address}`, '_blank'
     )
   }
-
   useEffect(() => {
     if (
       canBeRedirected &&
@@ -320,9 +319,17 @@ const BusinessesListingUI = (props) => {
             )
           }
           {!businessesSearchList.loading && businessesSearchList?.error && businessesSearchList?.error?.length > 0 && businessesSearchList?.businesses?.length === 0 && (
-            businessesSearchList?.error?.map((e, i) => (
-              <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
-            ))
+            <>
+              {typeof businessesSearchList?.error === 'string' ? (
+                <ErrorMessage>{t('ERROR', 'ERROR')}: {businessesSearchList?.error}</ErrorMessage>
+              ) : (
+                <>
+                  {businessesSearchList?.error?.map((e, i) => (
+                    <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+                  ))}
+                </>
+              )}
+            </>
           )}
         </>
         <Modal

@@ -232,6 +232,9 @@ export const InputWrapper = styled.div`
     &::placeholder{
       color: ${props => props.theme.colors.darkGray};
     }
+    &:focus {
+      border-color: ${({ theme }) => theme?.colors?.gold};
+    }
     border: 1px solid ${({ theme }) => theme?.colors?.gold};
   }
 `

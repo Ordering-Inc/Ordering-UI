@@ -233,7 +233,7 @@ export const RenderProductsLayout = (props) => {
                       )
                     }
                     {
-                      !(business?.categories?.length === 0 && !categoryId) && (
+                      !(business?.categories?.length === 0 && !categoryId) && headerType !== 'pfchangs' && ( // delete headerType !== 'pfchangs' when alsea wants
                         <BusinessLayoutCategories
                           categories={
                             categoriesMode === 'twocategories'

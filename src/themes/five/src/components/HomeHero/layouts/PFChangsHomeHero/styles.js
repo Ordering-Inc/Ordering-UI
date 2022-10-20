@@ -12,6 +12,7 @@ export const HeroContainerStyled = styled.div`
     object-fit: cover;
     background-position: center;
   `}
+
   .firstHeading {
     font-family: ${({ theme }) => theme?.fonts?.special?.name};
   }
