@@ -207,26 +207,23 @@ const SingleOrderCardUI = (props) => {
                   <Skeleton width={150} />
                 </div>
               ) : (
-                <div className='orders-detail'>
+                <>
                   {order?.id && (
-                    <>
-                      <BsDot />
+                    <div className='orders-detail'>
                       <p name='order_number'>{t('ORDER_NUM', 'Order No.')} {order.id}</p>
-                    </>
+                    </div>
                   )}
-                  {showDate && (
-                    <>
-                      <BsDot />
-                      <p>{order?.delivery_datetime_utc
-                        ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY hh:mm A' })
-                        : parseDate(order?.delivery_datetime, { utc: false })}
-                      </p>
-                    </>
-
-                  )}
-                </div>
+                </>
               )
             }
+            {showDate && (
+              <div className='orders-detail'>
+                <p>{order?.delivery_datetime_utc
+                  ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY hh:mm A' })
+                  : parseDate(order?.delivery_datetime, { utc: false })}
+                </p>
+              </div>
+            )}
             <p className='order-status'>{isSkeleton ? <Skeleton width={80} /> : getOrderStatus(order.status)?.value}</p>
           </BusinessInformation>
           {!isCustomerMode && (

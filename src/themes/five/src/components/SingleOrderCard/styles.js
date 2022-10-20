@@ -80,6 +80,7 @@ export const Content = styled.div`
       border: 1px solid #fff;
       .order-status {
         color: ${theme?.colors?.gold};
+        width: 230px;
       }
       .orders-detail {
         margin-top: 5px;
@@ -153,7 +154,7 @@ const BusinessLogoWrapperStyled = styled.div`
   align-items: center;
   border-radius: 7.6px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-
+  align-self: center;
   margin-left: 8px;
 
   ${props => props.theme.rtl && css`

@@ -180,6 +180,13 @@ export const CouponContainer = styled.div`
   box-sizing: border-box;
   input {
     flex: 1;
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      color: #aaa;
+    }
+    &:-ms-input-placeholder {
+      color: #aaa;
+    }
   }
 
   input, button {
@@ -224,6 +231,13 @@ export const CommentSection = styled.div`
   textarea {
     width: 100%;
     height: 76px;
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      color: #aaa;
+    }
+    &:-ms-input-placeholder {
+      color: #aaa;
+    }
   }
 `
 
