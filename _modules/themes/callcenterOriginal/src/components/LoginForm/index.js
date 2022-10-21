@@ -17,6 +17,7 @@ var _Tabs = require("../../styles/Tabs");
 var _Inputs = require("../../styles/Inputs");
 var _Buttons = require("../../styles/Buttons");
 var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
+var _useRecaptcha3 = require("../../../../../hooks/useRecaptcha");
 var _utils = require("../../../../../utils");
 var _Confirm = require("../Confirm");
 var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
@@ -60,47 +61,60 @@ var LoginFormUI = function LoginFormUI(props) {
     _useApi2 = _slicedToArray(_useApi, 2),
     ordering = _useApi2[0],
     setOrdering = _useApi2[1].setOrdering;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
   var formMethods = (0, _reactHookForm.useForm)();
-  var emailInput = (0, _react.useRef)(null);
+  var _useRecaptcha = (0, _useRecaptcha3.useRecaptcha)(enableReCaptcha),
+    _useRecaptcha2 = _slicedToArray(_useRecaptcha, 1),
+    recaptchaConfig = _useRecaptcha2[0];
   var _useState = (0, _react.useState)({
+      version: '',
+      siteKey: ''
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    reCaptchaVersion = _useState2[0],
+    setRecaptchaVersion = _useState2[1];
+  var emailInput = (0, _react.useRef)(null);
+  var _useState3 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState2 = _slicedToArray(_useState, 2),
-    alertState = _useState2[0],
-    setAlertState = _useState2[1];
-  var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    passwordSee = _useState4[0],
-    setPasswordSee = _useState4[1];
+    alertState = _useState4[0],
+    setAlertState = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    loginWithOtpState = _useState6[0],
-    setLoginWithOtpState = _useState6[1];
+    passwordSee = _useState6[0],
+    setPasswordSee = _useState6[1];
   var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    willVerifyOtpState = _useState8[0],
-    setWillVerifyOtpState = _useState8[1];
+    loginWithOtpState = _useState8[0],
+    setLoginWithOtpState = _useState8[1];
   var _useState9 = (0, _react.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
-    validPhoneFieldState = _useState10[0],
-    setValidPhoneField = _useState10[1];
-  var _useState11 = (0, _react.useState)(null),
+    willVerifyOtpState = _useState10[0],
+    setWillVerifyOtpState = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
     _useState12 = _slicedToArray(_useState11, 2),
-    projectName = _useState12[0],
-    setProjectName = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
+    validPhoneFieldState = _useState12[0],
+    setValidPhoneField = _useState12[1];
+  var _useState13 = (0, _react.useState)(null),
     _useState14 = _slicedToArray(_useState13, 2),
-    submitted = _useState14[0],
-    setSubmitted = _useState14[1];
-  var _useState15 = (0, _react.useState)(''),
+    projectName = _useState14[0],
+    setProjectName = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    otpState = _useState16[0],
-    setOtpState = _useState16[1];
+    submitted = _useState16[0],
+    setSubmitted = _useState16[1];
+  var _useState17 = (0, _react.useState)(''),
+    _useState18 = _slicedToArray(_useState17, 2),
+    otpState = _useState18[0],
+    setOtpState = _useState18[1];
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
     _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
     otpLeftTime = _useCountdownTimer2[0],
@@ -217,10 +231,32 @@ var LoginFormUI = function LoginFormUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result;
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
-      var _formState$result2;
+      var _formState$result2, _formState$result2$re, _formState$result3;
+      if (((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re[0]) === 'ERROR_AUTH_VERIFICATION_CODE') {
+        var _configs$security_rec;
+        if (configs !== null && configs !== void 0 && (_configs$security_rec = configs.security_recaptcha_site_key) !== null && _configs$security_rec !== void 0 && _configs$security_rec.value) {
+          var _configs$security_rec2;
+          setRecaptchaVersion({
+            version: 'v2',
+            siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_site_key) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value
+          });
+          setAlertState({
+            open: true,
+            content: [t('TRY_AGAIN', 'Please try again')]
+          });
+          setSubmitted(false);
+          return;
+        }
+        setAlertState({
+          open: true,
+          content: [t('CONFIG_DOESNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key')]
+        });
+        setSubmitted(false);
+        return;
+      }
       setAlertState({
         open: true,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
+        content: ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) || [t('ERROR', 'Error')]
       });
       setSubmitted(false);
     }
@@ -291,6 +327,14 @@ var LoginFormUI = function LoginFormUI(props) {
     if (ordering.project === null || !submitted || !useRootPoint) return;
     handleButtonLoginClick();
   }, [ordering, submitted]);
+  (0, _react.useEffect)(function () {
+    if (recaptchaConfig !== null && recaptchaConfig !== void 0 && recaptchaConfig.siteKey) {
+      setRecaptchaVersion({
+        version: recaptchaConfig === null || recaptchaConfig === void 0 ? void 0 : recaptchaConfig.version,
+        siteKey: recaptchaConfig === null || recaptchaConfig === void 0 ? void 0 : recaptchaConfig.siteKey
+      });
+    }
+  }, [recaptchaConfig]);
   return /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement("img", {
@@ -394,7 +438,8 @@ var LoginFormUI = function LoginFormUI(props) {
   }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null)), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Lock, null))), !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     RedirectLinkisPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
-    handleReCaptcha: handleReCaptcha
+    handleReCaptcha: handleReCaptcha,
+    reCaptchaVersion: reCaptchaVersion
   })), /*#__PURE__*/_react.default.createElement(_styles.ButtonContainer, null, !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: formMethods.handleSubmit(onSubmit),

@@ -14,7 +14,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 exports.Container = Container;
 var HeaderContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  h1 {\n    font-size: 24px;\n    line-height: 36px;\n    font-weight: 400;\n    margin: 0;\n    span.name {\n      font-weight: 700;\n      margin: 0 10px;\n    }\n  }\n  p {\n    font-size: 14px;\n    margin: 6px 0;\n  }\n"])));
 exports.HeaderContainer = HeaderContainer;
-var CustomerInfoContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-radius: 7.6px;\n  border: 1px solid ", ";\n  padding: 30px 25px;\n  margin-top: 48px;\n  display: flex;\n"])), function (props) {
+var CustomerInfoContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-radius: 7.6px;\n  border: 1px solid ", ";\n  padding: 30px 25px;\n  margin-top: 48px;\n  display: flex;\n  flex-wrap: wrap;\n"])), function (props) {
   return props.theme.colors.gray200;
 });
 exports.CustomerInfoContainer = CustomerInfoContainer;
@@ -49,7 +49,7 @@ var SingleOrderContainer = _styledComponents.default.div(_templateObject14 || (_
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      text-align: left;\n    "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      text-align: right;\n    "])));
 });
 exports.SingleOrderContainer = SingleOrderContainer;
-var SingleOrderHeader = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  > div {\n    > div {\n      display: flex;\n      align-items: center;\n      p {\n        line-height: 24px;\n        font-size: 14px;\n        margin: 3px 0;\n        &.date {\n          margin: 0 5px;\n        }\n      }\n    }\n  }\n\n  button {\n    height: 43px;\n  }\n"])));
+var SingleOrderHeader = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  > div {\n    > div {\n      display: flex;\n      flex-direction: column;\n      align-items: center; \n      @media (min-width: 769px) {\n        flex-direction: row;\n      }\n      p {\n        line-height: 24px;\n        font-size: 14px;\n        margin: 3px 0;\n        &.date {\n          margin: 0 5px;\n        }\n      }\n    }\n  }\n\n  button {\n    height: 43px;\n  }\n"])));
 exports.SingleOrderHeader = SingleOrderHeader;
 var OrderBusinessDetails = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin: 50px 0;\n"])));
 exports.OrderBusinessDetails = OrderBusinessDetails;

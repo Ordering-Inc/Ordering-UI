@@ -19,7 +19,7 @@ var BusinessBanner = _styledComponents.default.div(_templateObject2 || (_templat
 exports.BusinessBanner = BusinessBanner;
 var BusinessFeatures = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10%;\n  width: 100%;\n  padding: 0 15px;\n  box-sizing: border-box;\n"])));
 exports.BusinessFeatures = BusinessFeatures;
-var AddressMenu = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  display: flex;\n  align-items: center;\n  background-color: #fff;\n  color: #344050;\n  font-weight: 600;\n  border-radius: 50px;\n  padding: 13px 19px;\n  margin-bottom: 10px;\n  svg {\n    margin-right: 5px;\n    color: #B1BCCC;\n    ", "\n  }\n"])), function (props) {
+var AddressMenu = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  display: flex;\n  align-items: center;\n  background-color: #fff;\n  color: #344050;\n  font-weight: 600;\n  border-radius: 50px;\n  padding: 13px 19px;\n  margin-bottom: 10px;\n\n  span {\n    width: 100%;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n  svg {\n    margin-right: 5px;\n    color: #B1BCCC;\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0;\n    "])));
 });

@@ -59,7 +59,7 @@ var RedirectLink = _styledComponents.default.div(_templateObject5 || (_templateO
   return isPopup && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      font-size: 16px;\n    "])));
 });
 exports.RedirectLink = RedirectLink;
-var SocialButtons = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: ", ";\n\n  button {\n    width: 100%;\n    padding: 5px 30px;\n    color: #000000;\n    margin-bottom: 15px;\n\n    img {\n      width: 30px;\n    }\n\n    div {\n      font-size: 16px;\n    }\n  }\n"])), function (_ref9) {
+var SocialButtons = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: ", ";\n\n  button {\n    width: 100%;\n    padding: 5px;\n    color: #000000;\n    margin-bottom: 15px;\n\n    img {\n      width: 30px;\n    }\n\n    div {\n      font-size: 16px;\n    }\n  }\n"])), function (_ref9) {
   var isPopup = _ref9.isPopup;
   return isPopup ? '100%' : '80%';
 });
@@ -116,7 +116,7 @@ var TermsConditionWrapper = _styledComponents.default.div(_templateObject26 || (
 exports.TermsConditionWrapper = TermsConditionWrapper;
 var PromotionsWrapper = (0, _styledComponents.default)(TermsConditionWrapper)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral([""])));
 exports.PromotionsWrapper = PromotionsWrapper;
-var BussinessAndDriverSignUp = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-direction: column;\n\n  @media (min-width: 481px) {\n    width: ", ";\n  }\n  \n  @media (min-width: 993px) {\n    flex-direction: row;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 15px;\n    padding: 5px;\n    margin: 0 10px;\n  }\n"])), function (_ref12) {
+var BussinessAndDriverSignUp = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-direction: column;\n\n  button:first-child {\n    margin-bottom: 10px;\n  }\n\n  @media (min-width: 481px) {\n    width: ", ";\n  }\n\n  @media (min-width: 993px) {\n    flex-direction: row;\n    button:first-child {\n      margin-bottom: 0px;\n    }\n  }\n\n  button {\n    width: 100%;\n    margin-top: 15px;\n    padding: 5px;\n    margin: 0 10px;\n  }\n"])), function (_ref12) {
   var isPopup = _ref12.isPopup;
   return isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)';
 });
