@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponents = require("ordering-components");
 
+var _styledComponents = require("styled-components");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -40,6 +42,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Footer = function Footer() {
+  var _theme$footer, _theme$footer$compone;
+
   var _useState = (0, _react.useState)({
     body: null,
     loading: false,
@@ -54,6 +58,8 @@ var Footer = function Footer() {
       ordering = _useApi2[0];
 
   var requestsState = {};
+  var theme = (0, _styledComponents.useTheme)();
+  var footerPageSlug = theme === null || theme === void 0 ? void 0 : (_theme$footer = theme.footer) === null || _theme$footer === void 0 ? void 0 : (_theme$footer$compone = _theme$footer.components) === null || _theme$footer$compone === void 0 ? void 0 : _theme$footer$compone.slug;
 
   var getPage = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -70,7 +76,7 @@ var Footer = function Footer() {
               source = {};
               requestsState.page = source;
               _context.next = 6;
-              return ordering.pages('footer').get({
+              return ordering.pages(footerPageSlug || 'footer').get({
                 cancelToken: source
               });
 
