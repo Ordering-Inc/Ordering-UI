@@ -178,7 +178,11 @@ export const SingleOrderHeader = styled.div`
   > div {
     > div {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: center; 
+      @media (min-width: 769px) {
+        flex-direction: row;
+      }
       p {
         line-height: 24px;
         font-size: 14px;
