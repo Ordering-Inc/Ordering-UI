@@ -105,7 +105,7 @@ const LoginFormUI = (props) => {
   const [projectName, setProjectName] = useState(null)
   const [submitted, setSubmitted] = useState(false)
 
-  const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
+  const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
   const isOtpEmail = loginTab === 'otp' && otpType === 'email'
   const isOtpCellphone = loginTab === 'otp' && otpType === 'cellphone'
@@ -620,7 +620,7 @@ const LoginFormUI = (props) => {
             )}
           </FormInput>
 
-          {(elementLinkToSignup && !loginWithOtpState  && loginTab !== 'otp') && (
+          {(elementLinkToSignup && !loginWithOtpState && loginTab !== 'otp') && (
             <RedirectLink register isPopup={isPopup} className='new-account'>
               <span>{t('NEW_ON_PLATFORM', theme?.defaultLanguages?.NEW_ON_PLATFORM || 'New on Ordering?')}</span>
               {elementLinkToSignup}

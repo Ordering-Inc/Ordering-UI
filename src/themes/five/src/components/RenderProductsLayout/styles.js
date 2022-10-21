@@ -62,11 +62,13 @@ export const BusinessCategoriesContainer = styled.div`
   margin: 0;
   margin-right: 10px;
   width: 100%;
+  ${(props) => !props.offSticky && css`
+    top: 65px;
+    position: sticky;
+  `}
   @media (min-width: 993px) {
     width: calc(31% - 25px);
   }
-  position: sticky;
-  top: 65px;
 `
 
 export const BusinessCartContainer = styled(BusinessCategoriesContainer)`

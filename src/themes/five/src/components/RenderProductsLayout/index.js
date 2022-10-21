@@ -335,7 +335,7 @@ export const RenderProductsLayout = (props) => {
                   </ProfessionalFilterWrapper>
                 )}
                 <BusinessContent>
-                  <BusinessCategoriesContainer>
+                  <BusinessCategoriesContainer offSticky>
                     {!(business?.categories?.length === 0 && !categoryId) && (
                       <BusinessLayoutCategories
                         component='categories'

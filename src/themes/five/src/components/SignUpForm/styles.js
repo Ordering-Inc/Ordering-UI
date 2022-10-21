@@ -137,7 +137,7 @@ export const SocialButtons = styled.div`
 
   button {
     width: 100%;
-    padding: 5px 30px;
+    padding: 5px;
     color: #000000;
     margin-bottom: 15px;
 
@@ -319,12 +319,19 @@ export const BussinessAndDriverSignUp = styled.div`
   justify-content: space-between;
   flex-direction: column;
 
+  button:first-child {
+    margin-bottom: 10px;
+  }
+
   @media (min-width: 481px) {
     width: ${({ isPopup }) => isPopup ? 'calc(100% - 20px)' : 'calc(80% - 20px)'};
   }
-  
+
   @media (min-width: 993px) {
     flex-direction: row;
+    button:first-child {
+      margin-bottom: 0px;
+    }
   }
 
   button {
