@@ -177,6 +177,9 @@ const OrderDetailsUI = (props) => {
     return objectStatus && objectStatus
   }
 
+  const validTrackingStatus = [9, 19, 23]
+  const mapConfigs = { zoom: 15 }
+
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)
   }
@@ -382,41 +385,6 @@ const OrderDetailsUI = (props) => {
     businessLogoUrlValidation()
   }, [order])
 
-  const OrderMapSection = (props) => {
-    const validStatuses = props.validStatuses ?? [9, 19, 23]
-    const location = props.location ?? order?.driver?.location
-    const mapConfigs = { zoom: 15 }
-    return (
-      showBusinessMap ? (
-        props.isMapImg ? (
-          <Map style={props.mapStyle}>
-            <img
-              src={getGoogleMapImage(location, googleMapsApiKey, mapConfigs)}
-              id='google-maps-image'
-              alt='google-maps-location'
-              width='100%'
-              height='100%'
-              loading='lazy'
-            />
-          </Map>
-        ) : (
-          location?.lat && location?.lng && validStatuses.includes(parseInt(order?.status)) ? (
-            <>
-              <Map style={props.mapStyle}>
-                <GoogleMapsMap
-                  apiKey={configs?.google_maps_api_key?.value}
-                  location={location}
-                  locations={!props.location && locations}
-                  mapControls={googleMapsControls}
-                />
-              </Map>
-            </>
-          ) : null
-        )
-      ) : null
-    )
-  }
-
   const OrderHeaderInfoSection = () => {
     return (
       <HeaderInfo>
@@ -618,14 +586,18 @@ const OrderDetailsUI = (props) => {
                   </BusinessWrapper>
                 )}
               </BusinessExternalWrapper>
-              {googleMapsApiKey && (
+              {googleMapsApiKey && showBusinessMap && (
                 <MapWrapper>
-                  <OrderMapSection
-                    isMapImg
-                    validStatuses={[order?.status]}
-                    location={order?.business?.location}
-                    mapStyle={{ width: '100%' }}
-                  />
+                  <Map style={{ width: '100%' }}>
+                    <img
+                      src={getGoogleMapImage(order?.business?.location, googleMapsApiKey, mapConfigs)}
+                      id='google-maps-image'
+                      alt='google-maps-location'
+                      width='100%'
+                      height='100%'
+                      loading='lazy'
+                    />
+                  </Map>
                 </MapWrapper>
               )}
             </OrderBusiness>
@@ -683,8 +655,18 @@ const OrderDetailsUI = (props) => {
                     </div>
                   </WrapperDriver>
                 </OrderDriver>
-                {!isOriginalLayout && (
-                  <OrderMapSection />
+                {!isOriginalLayout &&
+                  order?.driver?.location?.lat && order?.driver?.location?.lng &&
+                  validTrackingStatus.includes(parseInt(order?.status)) &&
+                (
+                  <Map style={{ width: '100%' }}>
+                    <GoogleMapsMap
+                      location={order?.driver?.location}
+                      locations={locations}
+                      mapControls={googleMapsControls}
+                      apiKey={configs?.google_maps_api_key?.value}
+                    />
+                  </Map>
                 )}
               </>
             )}
