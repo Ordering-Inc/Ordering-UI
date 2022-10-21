@@ -98,13 +98,20 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     setCardData = props.setCardData,
     onPlaceOrderClick = props.onPlaceOrderClick,
     setCreateOrder = props.setCreateOrder,
-    handlePlaceOrder = props.handlePlaceOrder;
+    handlePlaceOrder = props.handlePlaceOrder,
+    paymethods = props.paymethods;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     token = _useSession2[0].token;
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+    _useOrder2 = _slicedToArray(_useOrder, 1),
+    loadingOptions = _useOrder2[0].loading;
+  var list = paymethods ? paymethods === null || paymethods === void 0 ? void 0 : paymethods.map(function (pay) {
+    return pay.paymethod;
+  }) : paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods;
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
@@ -113,10 +120,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     handlePaymethodClick(paymethod, isPopupMethod);
   };
   (0, _react.useEffect)(function () {
-    if (paymethodsList.paymethods.length === 1) {
-      handlePaymethodClick && handlePaymethodClick(paymethodsList.paymethods[0]);
+    if ((list === null || list === void 0 ? void 0 : list.length) === 1) {
+      handlePaymethodClick && handlePaymethodClick(list[0]);
     }
-  }, [paymethodsList.paymethods]);
+  }, [list]);
   (0, _react.useEffect)(function () {
     if ((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'cash' && errorCash) {
       props.setErrorCash(false);
@@ -146,7 +153,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
     className: "payments-list"
-  }, paymethodsList.paymethods.length > 0 && paymethodsList.paymethods.sort(function (a, b) {
+  }, !(paymethodsList.loading || isLoading || loadingOptions) && (list === null || list === void 0 ? void 0 : list.length) > 0 && (list === null || list === void 0 ? void 0 : list.sort(function (a, b) {
     return a.id - b.id;
   }).map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -158,7 +165,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
         return handlePaymentMethodClick(paymethod);
       }
     }, getPayIcon(paymethod.id), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod.gateway.toUpperCase(), paymethod.name))));
-  }), (paymethodsList.loading || isLoading) && _toConsumableArray(Array(5).keys()).map(function (i) {
+  })), (paymethodsList.loading || isLoading || loadingOptions) && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       key: i,
       isSkeleton: true
@@ -172,7 +179,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }));
   }), paymethodsList.error && paymethodsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$error = paymethodsList.error[0]) === null || _paymethodsList$error === void 0 ? void 0 : _paymethodsList$error.message) || (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0])
-  }), !(paymethodsList.loading || isLoading) && !paymethodsList.error && (!(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.paymethods) || paymethodsList.paymethods.length === 0) && /*#__PURE__*/_react.default.createElement("p", null, t('NO_PAYMENT_METHODS', 'No payment methods!'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
+  }), !(paymethodsList.loading || isLoading || loadingOptions) && !paymethodsList.error && !(list || list !== null && list !== void 0 && list.length) && /*#__PURE__*/_react.default.createElement("p", null, t('NO_PAYMENT_METHODS', 'No payment methods!'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
     data: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.data,
     orderTotal: cart.total,
     defaultValue: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da2 = paymethodSelected.data) === null || _paymethodSelected$da2 === void 0 ? void 0 : _paymethodSelected$da2.cash,
