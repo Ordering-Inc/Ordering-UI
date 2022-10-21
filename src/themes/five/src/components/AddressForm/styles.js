@@ -28,13 +28,12 @@ export const FormControl = styled.form`
     margin: 10px 0px;
     height: 43px;
     width: 100%;
-    border: 1px solid ${props => props.theme.colors.gold};
     &.internal_number,
     &.zipcode {
       flex: auto;
     }
     &::placeholder{
-      color: #959895
+      color: #CBCBCB
     }
   }
 
@@ -44,28 +43,28 @@ export const FormControl = styled.form`
     border-radius: 7.6px;
     border: 1px solid ${props => props.theme.colors.gold};
     &::placeholder{
-      color: #959895
+      color: #CBCBCB
     }
   }
 
   .input-autocomplete {
     width: 100%;
     background: #FFF;
-    border: 1px solid ${props => props.theme.colors.gold};
+    border: 1px solid #BBB;
     border-radius: 30px;
     font-size: 16px;
     padding: 7px 15px;
     outline: none;
     ::placeholder {
-      color: #959895;
+      color: #DBDCDB;
     }
 
     &:-ms-input-placeholder {
-      color: #959895;
+      color: #DBDCDB;
     }
 
     &::-ms-input-placeholder { /* Microsoft Edge */
-      color: #959895;
+      color: #DBDCDB;
     }
     &:focus {
       border-color: ${() => darken(0.07, '#CCC')};
@@ -78,7 +77,7 @@ export const FormControl = styled.form`
     }
 
     input {
-      border-radius: 7.6px;
+      border-radius: ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' ? '0px' : '7.6px'};
       border: 1px solid ${props => props.theme.colors.gold};
 
       &:focus {
@@ -89,16 +88,37 @@ export const FormControl = styled.form`
 
   .internal_number {
     width: 45%;
-    ${props => props.theme?.rtl ? css`
+    ${({ removeInternalNumberMargin }) => !removeInternalNumberMargin && css`
+      ${props => props.theme?.rtl ? css`
       margin-left: 15px;
-    ` : css`
+      ` : css`
       margin-right: 15px;
+      `}
     `}
   }
 
   .zipcode {
     width: 45%;
   }
+
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    input, textarea, .input-autocomplete {
+      border: 1px solid ${props => props.theme.colors.gold};
+      border-radius: 0;
+      &::placeholder{
+        color: #959895
+      }
+      &:focus{
+        border-color: ${props => props.theme.colors.gold};
+      }
+      &:-ms-input-placeholder {
+        color: #959895;
+      }
+      &::-ms-input-placeholder { /* Microsoft Edge */
+        color: #959895;
+      }
+    }
+    `}
 
   @media (min-width: 481px) {
     padding: 10px;

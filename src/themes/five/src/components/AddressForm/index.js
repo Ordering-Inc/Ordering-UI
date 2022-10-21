@@ -374,6 +374,7 @@ const AddressFormUI = (props) => {
           onSubmit={formMethods.handleSubmit(onSubmit)}
           onKeyDown={(e) => checkKeyDown(e)}
           autoComplete='off'
+          removeInternalNumberMargin={!showField('zipcode')}
         >
           {
             props.beforeMidElements?.map((BeforeMidElements, i) => (
