@@ -47,6 +47,7 @@ export const CustomerInfoContainer = styled.div`
   padding: 30px 25px;
   margin-top: 48px;
   display: flex;
+  flex-wrap: wrap;
 `
 export const CustomerDetails = styled.div`
   flex: 1;
@@ -158,7 +159,11 @@ export const SingleOrderHeader = styled.div`
   > div {
     > div {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: center; 
+      @media (min-width: 769px) {
+        flex-direction: row;
+      }
       p {
         line-height: 24px;
         font-size: 14px;
