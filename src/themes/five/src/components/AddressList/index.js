@@ -79,7 +79,7 @@ const AddressListUI = (props) => {
   const { width } = useWindowSize()
   const isCompletedLayout = width < 769 || isProfile
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
-    (address, i, self) =>
+    (address, i, self) => address.address &&
       i === self.findIndex(obj => (
         address.address === obj.address &&
         address.address_notes === obj.address_notes &&

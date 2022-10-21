@@ -240,7 +240,7 @@ export const Header = (props) => {
                     isCustomerMode={isCustomerMode}
                     onClick={(e) => handleClickUserCustomer(e)}
                   >
-                    <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                    <GeoAlt /> {orderState.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
                   </AddressMenu>
                   <Divider />
                 </>
@@ -268,7 +268,7 @@ export const Header = (props) => {
                     <AddressMenu
                       onClick={() => openModal('address')}
                     >
-                      <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                      <GeoAlt /> {orderState.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
                     </AddressMenu>
                   )}
                   {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
@@ -374,7 +374,7 @@ export const Header = (props) => {
               <AddressMenu
                 onClick={() => openModal('address')}
               >
-                <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                <GeoAlt /> {orderState.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               </AddressMenu>
               {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption
@@ -396,7 +396,7 @@ export const Header = (props) => {
               )}
               <HeaderOption
                 variant='address'
-                addressState={orderState?.options?.address?.address?.split(',')?.[0]}
+                addressState={orderState?.options?.address?.address}
                 onClick={(variant) => openModal(variant)}
               />
               {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
