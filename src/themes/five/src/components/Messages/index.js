@@ -301,8 +301,8 @@ const MessagesUI = (props) => {
     })
   }
 
-  const goToBusiness = () => {
-    events.emit('go_to_page', { page: 'search' })
+  const goToBusiness = (slug) => {
+    events.emit('go_to_page', { page: 'business', params: { business_slug: slug} })
   }
 
   const MapMessages = ({ messages }) => {
@@ -581,7 +581,7 @@ const MessagesUI = (props) => {
                       onClick={() => onMessages({ business: true, driver: false })}
                       isCursor
                     >
-                      <Image onClick={() => goToBusiness()}>
+                      <Image onClick={() => goToBusiness(order?.business?.slug)}>
                         <ImageWithFallback
                           src={order.business?.logo || theme.images?.dummies?.businessLogo}
                           fallback={<FaUserAlt />}
