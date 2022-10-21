@@ -122,7 +122,7 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     var hasMore = !((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) === (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage));
     if (badScrollPosition || businessesSearchList !== null && businessesSearchList !== void 0 && businessesSearchList.loading || ((_businessesSearchList2 = businessesSearchList.error) === null || _businessesSearchList2 === void 0 ? void 0 : _businessesSearchList2.length) > 0 || !hasMore) return;
     handleSearchbusinessAndProducts();
-  }, [businessesList.loading, paginationProps]);
+  }, [businessesSearchList.loading, paginationProps]);
   var handleChangeBrandFilter = function handleChangeBrandFilter(brandId) {
     var _filters$franchise_id, _filters$franchise_id2;
     var franchiseIds = _toConsumableArray(filters === null || filters === void 0 ? void 0 : filters.franchise_ids);
