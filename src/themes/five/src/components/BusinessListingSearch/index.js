@@ -107,7 +107,7 @@ export const BusinessListingSearchUI = (props) => {
     const hasMore = !(paginationProps?.totalPages === paginationProps?.currentPage)
     if (badScrollPosition || businessesSearchList?.loading || businessesSearchList.error?.length > 0 || !hasMore) return
     handleSearchbusinessAndProducts()
-  }, [businessesList.loading, paginationProps])
+  }, [paginationProps])
 
   const handleChangeBrandFilter = (brandId) => {
     let franchiseIds = [...filters?.franchise_ids]
