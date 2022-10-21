@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
+import moment from 'moment'
 import { Modal } from '../Modal'
 import {
   Checkout as CheckoutController,
@@ -103,7 +104,8 @@ const CheckoutUI = (props) => {
     defaultOptionsVaXMiCuenta,
     vaXMiCuenta,
     handleChangeVaXMiCuenta,
-    uberDirect
+    uberDirect,
+    applyCoupon
   } = props
 
   const theme = useTheme()
@@ -143,6 +145,9 @@ const CheckoutUI = (props) => {
     branch_id: businessDetails?.business?.integration_id
   }
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
+
+  const daysForApplyCoupon = [0,2,4] // Domingo 0
+  const isApplyMasterCoupon = daysForApplyCoupon.includes(moment().days());
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -287,6 +292,15 @@ const CheckoutUI = (props) => {
       setHideCash(false)
     }
   }, [uberDirect, cart, options, paymethodSelected])
+
+  useEffect(() => {
+    if (!configs?.advanced_offers_module?.value && paymethodSelected?.gateway !== 'openpay' && !cartState.loading && cart?.coupon && cart?.coupon === 'DLVMASTER30') {
+      applyCoupon({
+        business_id: cart?.business_id,
+        coupon: null
+      })
+    }
+  }, [paymethodSelected, cartState.loading])
 
   useEffect(() => {
     if (cart?.products?.length) return
@@ -511,9 +525,11 @@ const CheckoutUI = (props) => {
                     </h1>
                   </WarningMessage>
                 )}
-                <MasterCardCoupon>
-                  <img src={"https://d2gjwc6pypyhyf.cloudfront.net/banners/mastercard_alt.png"} />
-                </MasterCardCoupon>
+                {isApplyMasterCoupon && (
+                  <MasterCardCoupon>
+                    <img src={"https://d347gjkxx0g7x1.cloudfront.net/wow-plus/banners/dev/Banner_APP_Wow_MasterCard.jpg"} />
+                  </MasterCardCoupon>
+                )}
                 <PaymentOptions
                   cart={cart}
                   useKioskApp={useKioskApp}
@@ -531,6 +547,7 @@ const CheckoutUI = (props) => {
                   onPlaceOrderClick={onPlaceOrderClick}
                   brandInformation={brandInformation}
                   isHideCash={isHideCash}
+                  isApplyMasterCoupon={isApplyMasterCoupon}
                 />
               </PaymentMethodContainer>
             </>
@@ -727,7 +744,7 @@ export const Checkout = (props) => {
     handleCheckoutListRedirect
   } = props
 
-  const [orderState, { confirmCart }] = useOrder()
+  const [orderState, { confirmCart, applyCoupon }] = useOrder()
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
@@ -867,7 +884,8 @@ export const Checkout = (props) => {
     cartState,
     uuid: cartUuid,
     isResetPaymethod,
-    setIsResetPaymethod
+    setIsResetPaymethod,
+    applyCoupon
   }
 
   return (
