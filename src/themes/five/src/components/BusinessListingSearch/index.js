@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {
   BusinessListingSearchContainer,
   FiltersContainer,
@@ -55,6 +55,8 @@ import { Modal } from '../Modal'
 import { ProductForm } from '../ProductForm'
 import { MaxSectionItem } from './MaxSectionItem'
 
+const PIXELS_TO_SCROLL = 300
+
 export const BusinessListingSearchUI = (props) => {
   const {
     businessesSearchList,
@@ -99,6 +101,14 @@ export const BusinessListingSearchUI = (props) => {
 
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
 
+  const handleScroll = useCallback(() => {
+    const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
+    const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
+    const hasMore = !(paginationProps?.totalPages === paginationProps?.currentPage)
+    if (badScrollPosition || businessesSearchList?.loading || businessesSearchList.error?.length > 0 || !hasMore) return
+    handleSearchbusinessAndProducts()
+  }, [businessesSearchList.loading, paginationProps])
+
   const handleChangeBrandFilter = (brandId) => {
     let franchiseIds = [...filters?.franchise_ids]
     if (filters?.franchise_ids?.includes(brandId)) franchiseIds = filters?.franchise_ids?.filter(item => item !== brandId)
@@ -123,6 +133,11 @@ export const BusinessListingSearchUI = (props) => {
   const closeModalProductForm = () => {
     setCurProduct({ business: null, product: null })
   }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   return (
     <BusinessListingSearchContainer>

@@ -275,6 +275,10 @@ export const AddressMenu = styled.div`
   align-items: center;
   position: relative;
 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
   ${({ isCustomerMode }) => isCustomerMode ? css`
   flex: 0.8;
   ` : css`
