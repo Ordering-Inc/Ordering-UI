@@ -9,6 +9,7 @@ import {
   useOrderingTheme
 } from 'ordering-components'
 
+import { useWindowSize } from '../../hooks/useWindowSize'
 import { UserFormDetailsUI } from '../UserFormDetails'
 import { UserFormDetailsUI as UserFormDetailsFiveUI } from '../../themes/five/src/components/UserFormDetails'
 import { AddressList } from '../AddressList'
@@ -35,6 +36,7 @@ import {
   SkeletonWrapper,
   WrapperForm
 } from './styles'
+import { LogoutButton } from '../LogoutButton'
 
 const UserProfileFormUI = (props) => {
   const {
@@ -53,6 +55,7 @@ const UserProfileFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
   const [orderingTheme] = useOrderingTheme()
+  const windowSize = useWindowSize()
 
   const showCustomerPicture = !orderingTheme?.theme?.profile?.components?.picture?.hidden
   const showCustomerName = !orderingTheme?.theme?.profile?.components?.name?.hidden
@@ -141,7 +144,7 @@ const UserProfileFormUI = (props) => {
                             </UploadImageIcon>
                           )
                         : formState?.changes?.photo && formState.result.error &&
-                        <img src={formState?.changes?.photo} alt='user image' loading='lazy' />
+                          <img src={formState?.changes?.photo} alt='user image' loading='lazy' />
                       )}
                   </DragAndDrop>
                 </ExamineClick>
@@ -176,6 +179,13 @@ const UserProfileFormUI = (props) => {
                     >
                       {t('EDIT', 'Edit')}
                     </Button>
+                  )}
+                  {windowSize.width <= 576 && props.showLogout && (
+                    <LogoutButton
+                      hideText
+                      styleContainer={{ margin: 'auto', width: 24 }}
+                      styleWrappContent={{ paddingRight: 0, paddingLeft: 0 }}
+                    />
                   )}
                 </UserData>
               )

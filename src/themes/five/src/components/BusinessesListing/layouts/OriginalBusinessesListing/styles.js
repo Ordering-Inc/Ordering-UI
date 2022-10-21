@@ -37,6 +37,13 @@ export const AddressMenu = styled.div`
   border-radius: 50px;
   padding: 13px 19px;
   margin-bottom: 10px;
+
+  span {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   svg {
     margin-right: 5px;
     color: #B1BCCC;

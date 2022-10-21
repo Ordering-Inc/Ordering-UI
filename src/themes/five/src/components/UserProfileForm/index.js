@@ -14,6 +14,7 @@ import { UserFormDetailsUI as UserFormDetailsOldUI } from '../../../../../compon
 import { Modal } from '../Modal'
 import { VerifyCodeForm } from '../VerifyCodeForm'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 
@@ -21,7 +22,6 @@ import { ProfileOptions } from './ProfileOptions'
 import { bytesConverter } from '../../../../../utils'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { useTheme } from 'styled-components'
 import {
   Container,
   UserProfileContainer,
@@ -34,6 +34,7 @@ import {
   SkeletonWrapper,
   WrapperForm
 } from './styles'
+import { LogoutButton } from '../../../../../components/LogoutButton'
 
 const UserProfileFormUI = (props) => {
   const {
@@ -50,7 +51,6 @@ const UserProfileFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
   const [{ user }] = useSession()
   const [orderingTheme] = useOrderingTheme()
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
@@ -58,6 +58,7 @@ const UserProfileFormUI = (props) => {
     600, willVerifyOtpState)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
+  const windowSize = useWindowSize()
 
   const showCustomerPicture = !orderingTheme?.theme?.profile?.components?.picture?.hidden
   const showAddressList = !orderingTheme?.theme?.profile?.components?.address_list?.hidden
@@ -203,6 +204,9 @@ const UserProfileFormUI = (props) => {
               </Image>
               <Camera><FiCamera /></Camera>
             </UserImage>
+          )}
+          {windowSize.width <= 576 && (
+            <LogoutButton styleWrappContent={{ paddingRight: 0, paddingLeft: 0 }} />
           )}
           <SideForm className='user-form'>
             <WrapperForm>
