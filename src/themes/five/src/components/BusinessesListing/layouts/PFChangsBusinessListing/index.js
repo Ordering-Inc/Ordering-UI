@@ -191,7 +191,7 @@ const BusinessesListingUI = (props) => {
     ) {
       onBusinessClick({ slug: businessesSearchList.businesses[0].slug })
     }
-  }, [businessesSearchList.businesses, orderState?.options?.address?.location])
+  }, [businessesSearchList.businesses[0]])
 
   const SingleBusinessController = ({ business }) => {
     return (
