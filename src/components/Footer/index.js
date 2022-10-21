@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { useApi } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 export const Footer = () => {
   const [footerState, setfooterState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
   const requestsState = {}
+  const theme = useTheme()
+  const footerPageSlug = theme?.footer?.components?.slug
 
   const getPage = async () => {
     setfooterState({ ...footerState, loading: true })
     try {
       const source = {}
       requestsState.page = source
-      const { content: { error, result } } = await ordering.pages('footer').get({ cancelToken: source })
+      const { content: { error, result } } = await ordering.pages(footerPageSlug || 'footer').get({ cancelToken: source })
       setfooterState({ ...footerState, loading: false })
       if (!error) {
         setfooterState({ ...footerState, body: result.body })
