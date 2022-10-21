@@ -317,3 +317,7 @@ export const TermsConditionWrapper = styled.div`
     }
   }
 `
+
+export const ReCaptchaWrapper = styled.div`
+  margin: 12px auto;
+`

@@ -350,3 +350,7 @@ export const Line = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors?.grayColor};
   flex: 1;
 `
+
+export const ReCaptchaWrapper = styled.div`
+  margin: 12px auto;
+`
