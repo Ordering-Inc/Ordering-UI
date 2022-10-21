@@ -8,6 +8,7 @@ export const VaXMiCuentaContainer = styled.div`
   border-top: 1px solid #fff;
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
+  background: ${props => props.theme.colors.secundaryContrast};
 
   img {
     width: 100%;
