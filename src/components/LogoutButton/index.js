@@ -13,7 +13,7 @@ import {
 } from '../SidebarMenu/styles'
 
 const LogoutButtonUI = (props) => {
-  const { onCustomClick } = props
+  const { onCustomClick, hideText } = props
   const [, t] = useLanguage()
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
@@ -40,16 +40,18 @@ const LogoutButtonUI = (props) => {
   }
 
   return (
-    <MenuLink onClick={handleLogOutClick} isHome={isHome}>
-      <WrappContent>
+    <MenuLink id='logoutbtn' onClick={handleLogOutClick} isHome={isHome} style={props.styleContainer}>
+      <WrappContent style={props.styleWrappContent}>
         <MenuLinkIcon isHome={isHome}>
           <FaSignOutAlt />
         </MenuLinkIcon>
-        <MenuLinkText>
-          <TextInfo isHome={isHome}>
-            {t('LOGOUT', 'Logout')}
-          </TextInfo>
-        </MenuLinkText>
+        {!hideText && (
+          <MenuLinkText>
+            <TextInfo isHome={isHome}>
+              {t('LOGOUT', 'Logout')}
+            </TextInfo>
+          </MenuLinkText>
+        )}
         <MenuLinkSeparator>
           <div>
             <hr />

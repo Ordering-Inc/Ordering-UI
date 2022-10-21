@@ -110,7 +110,7 @@ export const UserData = styled.div`
     font-size: 20px
   }
 
-  > * {
+  > *:not(#logoutbtn) {
     margin: 5px 0;
     width: 75%;
   }

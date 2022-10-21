@@ -278,7 +278,8 @@ const BusinessesListingUI = (props) => {
               <AddressMenu
                 onClick={() => handleClickAddress()}
               >
-                <FaMapMarkerAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}
+                <FaMapMarkerAlt />
+                <span>{orderState.options?.address?.address || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}</span>
               </AddressMenu>
               <FeatureItems>
                 <ItemInline>
