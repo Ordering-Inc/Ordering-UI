@@ -8,6 +8,7 @@ import {
   LoginForm as LoginFormController,
   useLanguage,
   ReCaptcha,
+  useConfig,
   useApi
 } from 'ordering-components'
 
@@ -41,6 +42,7 @@ import { Tabs, Tab } from '../../styles/Tabs'
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
+import { useRecaptcha } from '../../../../../hooks/useRecaptcha'
 import { formatSeconds } from '../../../../../utils'
 import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
@@ -69,10 +71,12 @@ const LoginFormUI = (props) => {
   const numOtpInputs = 4
 
   const [ordering, { setOrdering }] = useApi()
+  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
   const theme = useTheme()
   const formMethods = useForm()
-
+  const [recaptchaConfig] = useRecaptcha(enableReCaptcha)
+  const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: '', siteKey: '' })
   const emailInput = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -171,6 +175,23 @@ const LoginFormUI = (props) => {
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
+      if (formState.result?.result?.[0] === 'ERROR_AUTH_VERIFICATION_CODE') {
+        if (configs?.security_recaptcha_site_key?.value) {
+          setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+          setAlertState({
+            open: true,
+            content: [t('TRY_AGAIN', 'Please try again')]
+          })
+          setSubmitted(false)
+          return
+        }
+        setAlertState({
+          open: true,
+          content: [t('CONFIG_DOESNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key')]
+        })
+        setSubmitted(false)
+        return
+      }
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
@@ -248,6 +269,12 @@ const LoginFormUI = (props) => {
     if (ordering.project === null || !submitted || !useRootPoint) return
     handleButtonLoginClick()
   }, [ordering, submitted])
+
+  useEffect(() => {
+    if (recaptchaConfig?.siteKey) {
+      setRecaptchaVersion({ version: recaptchaConfig?.version, siteKey: recaptchaConfig?.siteKey })
+    }
+  }, [recaptchaConfig])
 
   return (
     <LoginContainer isPopup={isPopup}>
@@ -405,7 +432,7 @@ const LoginFormUI = (props) => {
             )}
             {props.isRecaptchaEnable && enableReCaptcha && (
               <ReCaptchaWrapper>
-                <ReCaptcha handleReCaptcha={handleReCaptcha} />
+                <ReCaptcha handleReCaptcha={handleReCaptcha} reCaptchaVersion={reCaptchaVersion} />
               </ReCaptchaWrapper>
             )}
             <ButtonContainer>
