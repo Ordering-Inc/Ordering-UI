@@ -552,7 +552,8 @@ var AddressFormUI = function AddressFormUI(props) {
     onKeyDown: function onKeyDown(e) {
       return checkKeyDown(e);
     },
-    autoComplete: "off"
+    autoComplete: "off",
+    removeInternalNumberMargin: !showField('zipcode')
   }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
