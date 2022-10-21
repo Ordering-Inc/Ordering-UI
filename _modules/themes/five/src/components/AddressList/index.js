@@ -88,7 +88,7 @@ var AddressListUI = function AddressListUI(props) {
     width = _useWindowSize.width;
   var isCompletedLayout = width < 769 || isProfile;
   var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
-    return i === self.findIndex(function (obj) {
+    return address.address && i === self.findIndex(function (obj) {
       return address.address === obj.address && address.address_notes === obj.address_notes && address.zipcode === obj.zipcode && address.internal_number === obj.internal_number;
     });
   }) || [];
