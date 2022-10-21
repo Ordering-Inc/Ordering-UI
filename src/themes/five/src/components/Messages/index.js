@@ -63,7 +63,6 @@ import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import { bytesConverter, getTraduction } from '../../../../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
-import { useHistory } from 'react-router-dom'
 
 const filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime']
 
@@ -89,7 +88,6 @@ const MessagesUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const history = useHistory()
   const { handleSubmit, register, errors, setValue } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
@@ -304,7 +302,7 @@ const MessagesUI = (props) => {
   }
 
   const goToBusiness = (slug) => {
-      history.push(slug)
+    events.emit('go_to_page', { page: 'business', params: { business_slug: slug} })
   }
 
   const MapMessages = ({ messages }) => {
