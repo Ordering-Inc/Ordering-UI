@@ -63,6 +63,7 @@ import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import { bytesConverter, getTraduction } from '../../../../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
+import { useHistory } from 'react-router-dom'
 
 const filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime']
 
@@ -88,6 +89,7 @@ const MessagesUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const history = useHistory()
   const { handleSubmit, register, errors, setValue } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
@@ -301,8 +303,8 @@ const MessagesUI = (props) => {
     })
   }
 
-  const goToBusiness = () => {
-    events.emit('go_to_page', { page: 'search' })
+  const goToBusiness = (slug) => {
+      history.push(slug)
   }
 
   const MapMessages = ({ messages }) => {
@@ -581,7 +583,7 @@ const MessagesUI = (props) => {
                       onClick={() => onMessages({ business: true, driver: false })}
                       isCursor
                     >
-                      <Image onClick={() => goToBusiness()}>
+                      <Image onClick={() => goToBusiness(order?.business?.slug)}>
                         <ImageWithFallback
                           src={order.business?.logo || theme.images?.dummies?.businessLogo}
                           fallback={<FaUserAlt />}
