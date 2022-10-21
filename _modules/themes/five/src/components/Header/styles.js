@@ -58,7 +58,7 @@ var CustomerInfo = _styledComponents.default.div(_templateObject14 || (_template
 exports.CustomerInfo = CustomerInfo;
 var UserEdit = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  > :first-child{\n     margin-bottom: 20px;  \n  }\n"])));
 exports.UserEdit = UserEdit;
-var AddressMenu = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 600;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  position: relative;\n\n  ", "\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n    margin-right: 10px;\n    ", "\n  }\n  @media (min-width: 765px) {\n    ", "\n  }\n  @media (min-width: 820px) {\n    ", "\n  }\n"])), function (props) {
+var AddressMenu = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 600;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  position: relative;\n\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n\n  ", "\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n    margin-right: 10px;\n    ", "\n  }\n  @media (min-width: 765px) {\n    ", "\n  }\n  @media (min-width: 820px) {\n    ", "\n  }\n"])), function (props) {
   var _props$theme$colors;
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
 }, function (_ref3) {
