@@ -321,7 +321,7 @@ export const App = () => {
       InputComponent={Input}
     />
   ) : (
-    <div style={{ marginBottom: windowSize.width < 576 && onlineStatus ? 80 : 0, overflowX: windowSize.width < 576 && 'hidden' }}>
+    <div style={{ marginBottom: windowSize.width < 576 && onlineStatus ? 80 : 0 }}>
       {!!configs?.track_id_google_analytics?.value && (
         <Analytics trackId={configs?.track_id_google_analytics?.value} />
       )}
