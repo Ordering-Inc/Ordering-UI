@@ -266,7 +266,10 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     professionals: business === null || business === void 0 ? void 0 : business.professionals,
     professionalSelected: professionalSelected,
     handleChangeProfessionalSelected: handleChangeProfessionalSelected
-  })), !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {
+  })), !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && headerType !== 'pfchangs' &&
+  /*#__PURE__*/
+  // delete headerType !== 'pfchangs' when alsea wants
+  _react.default.createElement(BusinessLayoutCategories, {
     categories: categoriesMode === 'twocategories' ? pfChangsCategories : headerType === 'pfchangs' ? business === null || business === void 0 ? void 0 : business.categories.filter(function (category) {
       var _category$subcategori;
 

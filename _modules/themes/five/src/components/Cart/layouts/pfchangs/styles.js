@@ -90,7 +90,7 @@ var OrderBill = _styledComponents.default.div(_templateObject13 || (_templateObj
 
 exports.OrderBill = OrderBill;
 
-var CouponContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px;\n  padding: 0 20px;\n  box-sizing: border-box;\n  input {\n    flex: 1;\n  }\n\n  input, button {\n    border-radius: 0;\n    border: 0;\n    height: 44px;\n    box-sizing: border-box;\n  }\n\n"])));
+var CouponContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px;\n  padding: 0 20px;\n  box-sizing: border-box;\n  input {\n    flex: 1;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n  }\n\n  input, button {\n    border-radius: 0;\n    border: 0;\n    height: 44px;\n    box-sizing: border-box;\n  }\n\n"])));
 
 exports.CouponContainer = CouponContainer;
 
@@ -102,7 +102,7 @@ var Spinner = _styledComponents.default.div(_templateObject17 || (_templateObjec
 
 exports.Spinner = Spinner;
 
-var CommentSection = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  h2 {\n    font-size: 16px;\n    color: #fff;\n  }\n  textarea {\n    width: 100%;\n    height: 76px;\n  }\n"])));
+var CommentSection = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  h2 {\n    font-size: 16px;\n    color: #fff;\n  }\n  textarea {\n    width: 100%;\n    height: 76px;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n  }\n"])));
 
 exports.CommentSection = CommentSection;
 

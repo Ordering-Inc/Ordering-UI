@@ -97,13 +97,18 @@ var InputContainer = _styledComponents.default.div(_templateObject9 || (_templat
 
 exports.InputContainer = InputContainer;
 
-var InputWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n\n    ", "\n    margin: 10px 0;\n    border: 1px solid ", ";\n  }\n"])), function (props) {
+var InputWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n\n    ", "\n    margin: 10px 0;\n    border: 1px solid ", ";\n    &:focus {\n      border-color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      padding-right: 40px !important;\n    "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n      padding-left: 40px !important;\n    "])));
 }, function (_ref12) {
   var _theme$colors;
 
   var theme = _ref12.theme;
   return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold;
+}, function (_ref13) {
+  var _theme$colors2;
+
+  var theme = _ref13.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold;
 });
 
 exports.InputWrapper = InputWrapper;

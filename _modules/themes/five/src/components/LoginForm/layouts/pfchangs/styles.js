@@ -133,13 +133,18 @@ var TogglePassword = _styledComponents.default.span(_templateObject15 || (_templ
 
 exports.TogglePassword = TogglePassword;
 
-var InputWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-bottom: 5px;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n    padding-right: 40px !important;\n    padding-left: 40px !important;\n    margin: 10px 0;\n    &::placeholder{\n      color: ", ";\n    }\n    border: 1px solid ", ";\n  }\n"])), function (props) {
+var InputWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-bottom: 5px;\n  \n  input{\n    box-sizing: border-box;\n    width: 100%;\n    padding-right: 40px !important;\n    padding-left: 40px !important;\n    margin: 10px 0;\n    &::placeholder{\n      color: ", ";\n    }\n    &:focus {\n      border-color: ", ";\n    }\n    border: 1px solid ", ";\n  }\n"])), function (props) {
   return props.theme.colors.darkGray;
 }, function (_ref20) {
   var _theme$colors;
 
   var theme = _ref20.theme;
   return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold;
+}, function (_ref21) {
+  var _theme$colors2;
+
+  var theme = _ref21.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold;
 });
 
 exports.InputWrapper = InputWrapper;
@@ -170,8 +175,8 @@ var InputBeforeIcon = _styledComponents.default.div(_templateObject21 || (_templ
 
 exports.InputBeforeIcon = InputBeforeIcon;
 
-var LoginDivider = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: ", ";\n  margin: 30px 0;\n\n  p {\n    margin: 0;\n    width: 70px;\n    font-size: 14px;\n    color: #748194;\n    text-align: center;\n  }\n"])), function (_ref21) {
-  var isPopup = _ref21.isPopup;
+var LoginDivider = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: ", ";\n  margin: 30px 0;\n\n  p {\n    margin: 0;\n    width: 70px;\n    font-size: 14px;\n    color: #748194;\n    text-align: center;\n  }\n"])), function (_ref22) {
+  var isPopup = _ref22.isPopup;
   return isPopup ? '100%' : '80%';
 });
 
