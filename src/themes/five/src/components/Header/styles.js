@@ -343,6 +343,7 @@ export const FarAwayMessage = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
+  z-index: 30001;
   top: 100%;
   background: ${props => props.theme.colors.warning100};
   border: 1px solid ${props => props.theme.colors.warning500};

@@ -6,7 +6,8 @@ import { useOrderingTheme } from 'ordering-components'
 export const Profile = (props) => {
   const profileProps = {
     ...props,
-    refreshSessionUser: true
+    refreshSessionUser: true,
+    showLogout: true
   }
 
   const [orderingTheme] = useOrderingTheme()

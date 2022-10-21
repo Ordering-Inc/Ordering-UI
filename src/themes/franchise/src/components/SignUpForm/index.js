@@ -39,6 +39,7 @@ import { sortInputFields } from '../../../../../utils'
 import { FacebookLoginButton } from '../FacebookLogin'
 import { GoogleLoginButton } from '../GoogleLogin'
 import { AppleLogin } from '../AppleLogin'
+import { useRecaptcha } from '../../../../../hooks/useRecaptcha'
 
 import AiOutlineEye from '@meronex/icons/ai/AiOutlineEye'
 import AiOutlineEyeInvisible from '@meronex/icons/ai/AiOutlineEyeInvisible'
@@ -73,6 +74,8 @@ const SignUpFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { login }] = useSession()
   const emailInput = useRef(null)
+  const [recaptchaConfig] = useRecaptcha(enableReCaptcha)
+  const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: '', siteKey: '' })
 
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
@@ -185,6 +188,22 @@ const SignUpFormUI = (props) => {
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
+      if (formState.result?.result?.[0] === 'ERROR_AUTH_VERIFICATION_CODE') {
+        if (configs?.security_recaptcha_site_key?.value) {
+          setRecaptchaVersion({ version: 'v2', siteKey: configs?.security_recaptcha_site_key?.value })
+          setAlertState({
+            open: true,
+            content: [t('TRY_AGAIN', 'Please try again')]
+          })
+          return
+        }
+        setAlertState({
+          open: true,
+          content: [t('CONFIG_DOESNOT_RECAPTCHA_KEY', 'the config doesn\'t have recaptcha site key')]
+        })
+        return
+      }
+
       setAlertState({
         open: true,
         content: formState.result?.result || [t('ERROR', 'Error')]
@@ -239,6 +258,12 @@ const SignUpFormUI = (props) => {
       handleChangePhoneNumber(externalPhoneNumber, true)
     }
   }, [externalPhoneNumber])
+
+  useEffect(() => {
+    if (recaptchaConfig?.siteKey) {
+      setRecaptchaVersion({ version: recaptchaConfig?.version, siteKey: recaptchaConfig?.siteKey })
+    }
+  }, [recaptchaConfig])
 
   return (
     <>
@@ -363,7 +388,7 @@ const SignUpFormUI = (props) => {
             }
             {props.isRecaptchaEnable && enableReCaptcha && (
               <ReCaptchaWrapper>
-                <ReCaptcha handleReCaptcha={handleReCaptcha} />
+                <ReCaptcha handleReCaptcha={handleReCaptcha} reCaptchaVersion={reCaptchaVersion} />
               </ReCaptchaWrapper>
             )}
 

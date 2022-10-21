@@ -51,6 +51,14 @@ export const LoginWith = styled.div`
   border-bottom: 1px solid #E9ECEF;
   font-size: 14px;
   margin-bottom: 10px;
+  overflow-x: auto;
+
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (min-width: 425px) {
     font-size: 18px;
