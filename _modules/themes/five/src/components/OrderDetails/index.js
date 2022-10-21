@@ -1,164 +1,230 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.OrderDetails = void 0;
+
 var _react = _interopRequireWildcard(require("react"));
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _orderingComponents = require("ordering-components");
+
 var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
+
 var _Buttons = require("../../styles/Buttons");
+
 var _pfchangs = require("../../styles/Buttons/theme/pfchangs");
+
 var _NotFoundSource = require("../NotFoundSource");
+
 var _ProductItemAccordion = require("../ProductItemAccordion");
+
 var _pfchangs2 = require("../ProductItemAccordion/layouts/pfchangs");
+
 var _Modal = require("../Modal");
+
 var _Messages = require("../Messages");
+
 var _ReviewOrder = require("../ReviewOrder");
+
 var _ReviewProduct = require("../ReviewProduct");
+
 var _ReviewDriver = require("../ReviewDriver");
+
 var _ProductShare = require("../../../../../components/ProductShare");
+
 var _OrderBillSection = require("./OrderBillSection");
+
 var _ActionsSection = require("./ActionsSection");
+
 var _OrderPreferencesSections = require("./OrderPreferencesSections");
+
 var _PlaceSpot = require("../PlaceSpot");
+
 var _Confirm = require("../Confirm");
+
 var _pfchangs3 = require("../Confirm/layouts/pfchangs");
+
 var _styles = require("./styles");
+
 var _styledComponents = require("styled-components");
+
 var _TaxInformation = require("../TaxInformation");
+
 var _utils = require("../../../../../utils");
+
 var _OrderHistory = require("./OrderHistory");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator.return && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, catch: function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var OrderDetailsUI = function OrderDetailsUI(props) {
   var _configs$google_maps_, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _orderingTheme$theme21, _orderingTheme$theme22, _orderingTheme$theme23, _orderingTheme$theme24, _orderingTheme$theme25, _orderingTheme$theme26, _orderingTheme$theme27, _orderingTheme$theme28, _orderingTheme$theme29, _orderingTheme$theme30, _orderingTheme$theme31, _orderingTheme$theme32, _orderingTheme$theme33, _orderingTheme$theme34, _orderingTheme$theme35, _orderingTheme$theme36, _orderingTheme$theme37, _orderingTheme$theme38, _orderingTheme$theme39, _orderingTheme$theme40, _orderingTheme$theme41, _orderingTheme$theme42, _orderingTheme$theme43, _orderingTheme$theme44, _orderingTheme$theme45, _orderingTheme$theme46, _orderingTheme$theme47, _orderingTheme$theme48, _orderingTheme$theme49, _orderingTheme$theme50, _orderingTheme$theme51, _orderingTheme$theme52, _orderingTheme$theme53, _orderingTheme$theme54, _orderingTheme$theme55, _orderingTheme$theme56, _orderingTheme$theme57, _orderingTheme$theme58, _orderingTheme$theme59, _orderingTheme$theme60, _orderingTheme$theme61, _orderingTheme$theme62, _orderingTheme$theme63, _orderingTheme$theme64, _orderingTheme$theme65, _orderingTheme$theme66, _orderingTheme$theme67, _orderingTheme$theme68, _orderingTheme$theme69, _orderingTheme$theme70, _orderingTheme$theme71, _orderingTheme$theme72, _orderingTheme$theme73, _orderingTheme$theme74, _orderingTheme$theme75, _orderingTheme$theme76, _orderingTheme$theme77, _orderingTheme$theme78, _orderingTheme$theme79, _orderingTheme$theme80, _orderingTheme$theme81, _orderingTheme$theme82, _orderingTheme$theme83, _orderingTheme$theme84, _orderingTheme$theme85, _orderingTheme$theme86, _orderingTheme$theme87, _orderingTheme$theme88, _orderingTheme$theme89, _orderingTheme$theme90, _orderingTheme$theme91, _orderingTheme$theme92, _orderingTheme$theme93, _orderingTheme$theme94, _orderingTheme$theme95, _orderingTheme$theme96, _orderingTheme$theme97, _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _order$driver, _order$driver2, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _theme$images2, _theme$images2$dummie, _order$customer, _order$customer2, _theme$images3, _theme$images3$dummie, _theme$defaultLanguag28, _configs$guest_uuid_a, _orderTypes$find, _getOrderStatus, _getOrderStatus2, _theme$defaultLanguag29, _order$business4, _order$business5, _order$business6, _order$business7, _order$business8, _order$place, _order$place2, _getOrderStatus3, _getOrderStatus4, _order$business9, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _theme$defaultLanguag30, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$products, _theme$defaultLanguag31, _theme$defaultLanguag32, _theme$defaultLanguag33, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6;
+
   var userCustomerId = props.userCustomerId,
-    handleChangeOrderStatus = props.handleChangeOrderStatus,
-    handleBusinessRedirect = props.handleBusinessRedirect,
-    handleOrderRedirect = props.handleOrderRedirect,
-    googleMapsControls = props.googleMapsControls,
-    driverLocation = props.driverLocation,
-    urlToShare = props.urlToShare,
-    messages = props.messages,
-    setMessages = props.setMessages,
-    readMessages = props.readMessages,
-    messagesReadList = props.messagesReadList,
-    reorderState = props.reorderState,
-    handleReorder = props.handleReorder,
-    orderTypes = props.orderTypes,
-    handleRemoveCart = props.handleRemoveCart;
+      handleChangeOrderStatus = props.handleChangeOrderStatus,
+      handleBusinessRedirect = props.handleBusinessRedirect,
+      handleOrderRedirect = props.handleOrderRedirect,
+      googleMapsControls = props.googleMapsControls,
+      driverLocation = props.driverLocation,
+      urlToShare = props.urlToShare,
+      messages = props.messages,
+      setMessages = props.setMessages,
+      readMessages = props.readMessages,
+      messagesReadList = props.messagesReadList,
+      reorderState = props.reorderState,
+      handleReorder = props.handleReorder,
+      orderTypes = props.orderTypes,
+      handleRemoveCart = props.handleRemoveCart;
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useConfig = (0, _orderingComponents.useConfig)(),
-    _useConfig2 = _slicedToArray(_useConfig, 1),
-    configs = _useConfig2[0].configs;
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
   var theme = (0, _styledComponents.useTheme)();
+
   var _useEvent = (0, _orderingComponents.useEvent)(),
-    _useEvent2 = _slicedToArray(_useEvent, 1),
-    events = _useEvent2[0];
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
-    _useUtils2 = _slicedToArray(_useUtils, 1),
-    _useUtils2$ = _useUtils2[0],
-    parsePrice = _useUtils2$.parsePrice,
-    parseDate = _useUtils2$.parseDate;
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      parseDate = _useUtils2$.parseDate;
+
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
-    _useCustomer2 = _slicedToArray(_useCustomer, 2),
-    deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+      _useCustomer2 = _slicedToArray(_useCustomer, 2),
+      deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+
   var _useOrder = (0, _orderingComponents.useOrder)(),
-    _useOrder2 = _slicedToArray(_useOrder, 2),
-    carts = _useOrder2[0].carts,
-    refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
+      _useOrder2 = _slicedToArray(_useOrder, 2),
+      carts = _useOrder2[0].carts,
+      refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
+
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
+
   var _useState = (0, _react.useState)({
-      business: false,
-      driver: false
-    }),
-    _useState2 = _slicedToArray(_useState, 2),
-    openMessages = _useState2[0],
-    setOpenMessages = _useState2[1];
+    business: false,
+    driver: false
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      openMessages = _useState2[0],
+      setOpenMessages = _useState2[1];
+
   var _useState3 = (0, _react.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    isOrderReviewed = _useState4[0],
-    setIsOrderReviewed = _useState4[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      isOrderReviewed = _useState4[0],
+      setIsOrderReviewed = _useState4[1];
+
   var _useState5 = (0, _react.useState)(false),
-    _useState6 = _slicedToArray(_useState5, 2),
-    isProductReviewed = _useState6[0],
-    setIsProductReviewed = _useState6[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      isProductReviewed = _useState6[0],
+      setIsProductReviewed = _useState6[1];
+
   var _useState7 = (0, _react.useState)(false),
-    _useState8 = _slicedToArray(_useState7, 2),
-    isDriverReviewed = _useState8[0],
-    setIsDriverReviewed = _useState8[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      isDriverReviewed = _useState8[0],
+      setIsDriverReviewed = _useState8[1];
+
   var _useState9 = (0, _react.useState)({
-      business: false,
-      driver: false
-    }),
-    _useState10 = _slicedToArray(_useState9, 2),
-    unreadAlert = _useState10[0],
-    setUnreadAlert = _useState10[1];
+    business: false,
+    driver: false
+  }),
+      _useState10 = _slicedToArray(_useState9, 2),
+      unreadAlert = _useState10[0],
+      setUnreadAlert = _useState10[1];
+
   var _useState11 = (0, _react.useState)(false),
-    _useState12 = _slicedToArray(_useState11, 2),
-    isReviewOpen = _useState12[0],
-    setIsReviewOpen = _useState12[1];
+      _useState12 = _slicedToArray(_useState11, 2),
+      isReviewOpen = _useState12[0],
+      setIsReviewOpen = _useState12[1];
+
   var _useState13 = (0, _react.useState)({
-      order: false,
-      product: false,
-      driver: false
-    }),
-    _useState14 = _slicedToArray(_useState13, 2),
-    reviewStatus = _useState14[0],
-    setReviewStatus = _useState14[1];
+    order: false,
+    product: false,
+    driver: false
+  }),
+      _useState14 = _slicedToArray(_useState13, 2),
+      reviewStatus = _useState14[0],
+      setReviewStatus = _useState14[1];
+
   var _useState15 = (0, _react.useState)({
-      open: false,
-      tax: null
-    }),
-    _useState16 = _slicedToArray(_useState15, 2),
-    openTaxModal = _useState16[0],
-    setOpenTaxModal = _useState16[1];
+    open: false,
+    tax: null
+  }),
+      _useState16 = _slicedToArray(_useState15, 2),
+      openTaxModal = _useState16[0],
+      setOpenTaxModal = _useState16[1];
+
   var _useState17 = (0, _react.useState)(false),
-    _useState18 = _slicedToArray(_useState17, 2),
-    isService = _useState18[0],
-    setIsService = _useState18[1];
+      _useState18 = _slicedToArray(_useState17, 2),
+      isService = _useState18[0],
+      setIsService = _useState18[1];
+
   var _useState19 = (0, _react.useState)(false),
-    _useState20 = _slicedToArray(_useState19, 2),
-    isOrderHistory = _useState20[0],
-    setIsOrderHistory = _useState20[1];
+      _useState20 = _slicedToArray(_useState19, 2),
+      isOrderHistory = _useState20[0],
+      setIsOrderHistory = _useState20[1];
+
   var _useState21 = (0, _react.useState)({
-      open: false,
-      content: null,
-      handleOnAccept: null
-    }),
-    _useState22 = _slicedToArray(_useState21, 2),
-    confirm = _useState22[0],
-    setConfirm = _useState22[1];
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
+      _useState22 = _slicedToArray(_useState21, 2),
+      confirm = _useState22[0],
+      setConfirm = _useState22[1];
+
   var _useState23 = (0, _react.useState)(true),
-    _useState24 = _slicedToArray(_useState23, 2),
-    isShowBusinessLogo = _useState24[0],
-    setIsShowBusinessLogo = _useState24[1];
+      _useState24 = _slicedToArray(_useState23, 2),
+      isShowBusinessLogo = _useState24[0],
+      setIsShowBusinessLogo = _useState24[1];
+
   var _props$order = props.order,
-    order = _props$order.order,
-    loading = _props$order.loading,
-    businessData = _props$order.businessData,
-    error = _props$order.error;
+      order = _props$order.order,
+      loading = _props$order.loading,
+      businessData = _props$order.businessData,
+      error = _props$order.error;
   var yourSpotString = (order === null || order === void 0 ? void 0 : order.delivery_type) === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number');
   var acceptedStatus = [1, 2, 5, 6, 10, 11, 12];
   var completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
@@ -166,6 +232,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var showOrderActions = (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1;
   var layout = 'pfchangs' || (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.confirmation) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : _orderingTheme$theme$3.type); // cambiar
+
   var showDeliveryType = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.confirmation) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.order) !== null && _orderingTheme$theme5 !== void 0 && (_orderingTheme$theme6 = _orderingTheme$theme5.components) !== null && _orderingTheme$theme6 !== void 0 && (_orderingTheme$theme7 = _orderingTheme$theme6.delivery_type) !== null && _orderingTheme$theme7 !== void 0 && _orderingTheme$theme7.hidden);
   var showDeliveryDate = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme8 = orderingTheme.theme) !== null && _orderingTheme$theme8 !== void 0 && (_orderingTheme$theme9 = _orderingTheme$theme8.confirmation) !== null && _orderingTheme$theme9 !== void 0 && (_orderingTheme$theme10 = _orderingTheme$theme9.components) !== null && _orderingTheme$theme10 !== void 0 && (_orderingTheme$theme11 = _orderingTheme$theme10.order) !== null && _orderingTheme$theme11 !== void 0 && (_orderingTheme$theme12 = _orderingTheme$theme11.components) !== null && _orderingTheme$theme12 !== void 0 && (_orderingTheme$theme13 = _orderingTheme$theme12.date) !== null && _orderingTheme$theme13 !== void 0 && _orderingTheme$theme13.hidden);
   var showDeliveryProgress = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme14 = orderingTheme.theme) !== null && _orderingTheme$theme14 !== void 0 && (_orderingTheme$theme15 = _orderingTheme$theme14.confirmation) !== null && _orderingTheme$theme15 !== void 0 && (_orderingTheme$theme16 = _orderingTheme$theme15.components) !== null && _orderingTheme$theme16 !== void 0 && (_orderingTheme$theme17 = _orderingTheme$theme16.order) !== null && _orderingTheme$theme17 !== void 0 && (_orderingTheme$theme18 = _orderingTheme$theme17.components) !== null && _orderingTheme$theme18 !== void 0 && (_orderingTheme$theme19 = _orderingTheme$theme18.progress) !== null && _orderingTheme$theme19 !== void 0 && _orderingTheme$theme19.hidden);
@@ -184,8 +251,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var showCustomerEmail = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme92 = orderingTheme.theme) !== null && _orderingTheme$theme92 !== void 0 && (_orderingTheme$theme93 = _orderingTheme$theme92.confirmation) !== null && _orderingTheme$theme93 !== void 0 && (_orderingTheme$theme94 = _orderingTheme$theme93.components) !== null && _orderingTheme$theme94 !== void 0 && (_orderingTheme$theme95 = _orderingTheme$theme94.customer) !== null && _orderingTheme$theme95 !== void 0 && (_orderingTheme$theme96 = _orderingTheme$theme95.components) !== null && _orderingTheme$theme96 !== void 0 && (_orderingTheme$theme97 = _orderingTheme$theme96.email) !== null && _orderingTheme$theme97 !== void 0 && _orderingTheme$theme97.hidden);
   var ConfirmComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs3.Confirm : _Confirm.Confirm;
   var defaultLayoutThemes = ['original', 'pfchangs'];
+
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
+
     var status = parseInt(s);
     var orderStatus = [{
       key: 0,
@@ -313,19 +382,23 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
     return objectStatus && objectStatus;
   };
+
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
   };
+
   var unreadMessages = function unreadMessages() {
     var length = messages === null || messages === void 0 ? void 0 : messages.messages.length;
     var unreadLength = order === null || order === void 0 ? void 0 : order.unread_count;
     var unreadedMessages = messages.messages.slice(length - unreadLength, length);
     var business = unreadedMessages.some(function (message) {
       var _message$can_see;
+
       return message === null || message === void 0 ? void 0 : (_message$can_see = message.can_see) === null || _message$can_see === void 0 ? void 0 : _message$can_see.includes(2);
     });
     var driver = unreadedMessages.some(function (message) {
       var _message$can_see2;
+
       return message === null || message === void 0 ? void 0 : (_message$can_see2 = message.can_see) === null || _message$can_see2 === void 0 ? void 0 : _message$can_see2.includes(4);
     });
     setUnreadAlert({
@@ -333,11 +406,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       driver: driver
     });
   };
+
   var validateImage = function validateImage(src) {
     return new Promise(function (resolve, reject) {
       if (!src || typeof src !== 'string') {
         resolve(false);
       }
+
       try {
         var image = new Image();
         image.src = src;
@@ -347,9 +422,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       }
     });
   };
+
   var businessLogoUrlValidation = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _order$business;
+
       var isValidImage;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
@@ -357,9 +434,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
             case 0:
               _context.next = 2;
               return validateImage(order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo);
+
             case 2:
               isValidImage = _context.sent;
               setIsShowBusinessLogo(isValidImage);
+
             case 4:
             case "end":
               return _context.stop();
@@ -367,10 +446,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         }
       }, _callee);
     }));
+
     return function businessLogoUrlValidation() {
       return _ref.apply(this, arguments);
     };
   }();
+
   var locations = [_objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.location), {}, {
     icon: (order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.driverPhoto)
   }), _objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.location), {}, {
@@ -378,6 +459,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }), _objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.location), {}, {
     icon: (order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.customerPhoto)
   })];
+
   var handleOpenReview = function handleOpenReview() {
     if (!(order !== null && order !== void 0 && order.review) && !isOrderReviewed) setReviewStatus({
       order: true,
@@ -397,6 +479,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
     setIsReviewOpen(true);
   };
+
   var handleCloseReivew = function handleCloseReivew() {
     setReviewStatus({
       order: false,
@@ -405,6 +488,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
     setIsReviewOpen(false);
   };
+
   var closeReviewOrder = function closeReviewOrder() {
     if (!isProductReviewed) setReviewStatus({
       order: false,
@@ -416,6 +500,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       driver: true
     });else handleCloseReivew();
   };
+
   var closeReviewProduct = function closeReviewProduct() {
     if (order !== null && order !== void 0 && order.driver && !(order !== null && order !== void 0 && order.user_review) && !isDriverReviewed) setReviewStatus({
       order: false,
@@ -426,27 +511,34 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       handleCloseReivew();
     }
   };
+
   var closeOrderModal = function closeOrderModal(e) {
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
+
     if (outsideModal) {
       var _businessId = 'businessId:' + (businessData === null || businessData === void 0 ? void 0 : businessData.id);
+
       sessionStorage.setItem('adjust-cart-products', _businessId);
       handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
     }
   };
+
   var handleStartNewOrder = function handleStartNewOrder(orderId) {
     if (layout.includes(defaultLayoutThemes)) {
       handleReorder(orderId);
       return;
     }
+
     deleteUserCustomer(true);
     refreshOrderOptions();
     handleGoToPage({
       page: 'home'
     });
   };
+
   var handleClickReorder = function handleClickReorder(order) {
     var _carts, _carts$products;
+
     if (carts["businessId:".concat(order === null || order === void 0 ? void 0 : order.business_id)] && ((_carts = carts["businessId:".concat(order === null || order === void 0 ? void 0 : order.business_id)]) === null || _carts === void 0 ? void 0 : (_carts$products = _carts.products) === null || _carts$products === void 0 ? void 0 : _carts$products.length) > 0) {
       setConfirm({
         open: true,
@@ -461,6 +553,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
                     setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
                       open: false
                     }));
+
                   case 2:
                   case "end":
                     return _context2.stop();
@@ -468,9 +561,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
               }
             }, _callee2);
           }));
+
           function handleOnAccept() {
             return _handleOnAccept.apply(this, arguments);
           }
+
           return handleOnAccept;
         }()
       });
@@ -478,12 +573,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       handleReorder(order.id);
     }
   };
+
   var handleOriginalReorder = function handleOriginalReorder() {
     setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
       open: false
     }));
     handleReorder(order.id);
   };
+
   var ActionsSectionProps = {
     order: order,
     handleBusinessRedirect: handleBusinessRedirect,
@@ -517,13 +614,17 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         window.removeEventListener('click', closeOrderModal);
       };
     }
+
     if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && reorderState.loading === false && businessData !== null && businessData !== void 0 && businessData.id) {
       var _carts$_businessId, _reorderState$result;
+
       var _businessId = 'businessId:' + (businessData === null || businessData === void 0 ? void 0 : businessData.id);
+
       var products = carts === null || carts === void 0 ? void 0 : (_carts$_businessId = carts[_businessId]) === null || _carts$_businessId === void 0 ? void 0 : _carts$_businessId.products;
       var available = products.every(function (product) {
         return product.valid === true;
       });
+
       if (available && reorderState !== null && reorderState !== void 0 && (_reorderState$result = reorderState.result) !== null && _reorderState$result !== void 0 && _reorderState$result.uuid && (products === null || products === void 0 ? void 0 : products.length) === (order === null || order === void 0 ? void 0 : order.products.length)) {
         handleGoToPage({
           page: 'checkout',
@@ -540,16 +641,20 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, [reorderState]);
   (0, _react.useEffect)(function () {
     if (!order) return;
+
     var _isService = order.products.some(function (product) {
       return product.type === 'service';
     });
+
     setIsService(_isService);
     businessLogoUrlValidation();
   }, [order]);
   var ButtonComponent = layout === 'pfchangs' ? _pfchangs.Button : _Buttons.Button;
   var ProductItemAccordionComponent = layout === 'pfchangs' ? _pfchangs2.ProductItemAccordion : _ProductItemAccordion.ProductItemAccordion;
+
   var OrderMapSection = function OrderMapSection(props) {
     var _props$validStatuses, _props$location, _order$driver3, _configs$google_maps_2;
+
     var validStatuses = (_props$validStatuses = props.validStatuses) !== null && _props$validStatuses !== void 0 ? _props$validStatuses : [9, 19, 23];
     var location = (_props$location = props.location) !== null && _props$location !== void 0 ? _props$location : order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.location;
     var mapConfigs = {
@@ -573,14 +678,18 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       mapControls: googleMapsControls
     }))) : null : null;
   };
+
   var OrderHeaderInfoSection = function OrderHeaderInfoSection() {
     var _theme$defaultLanguag25, _theme$defaultLanguag26;
+
     return /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, {
       pfchangs: layout === 'pfchangs'
     }, /*#__PURE__*/_react.default.createElement("h1", null, isService ? t('SERVICES', 'Services') : t('ORDER_MESSAGE_RECEIVED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag25 = theme.defaultLanguages) === null || _theme$defaultLanguag25 === void 0 ? void 0 : _theme$defaultLanguag25.ORDER_MESSAGE_RECEIVED) || 'Your order has been received')), /*#__PURE__*/_react.default.createElement("p", null, !isService && t('ORDER_MESSAGE_HEADER_TEXT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.ORDER_MESSAGE_HEADER_TEXT) || 'Once business accepts your order, we will send you an email, thank you!')));
   };
+
   var OrderActionsSection = function OrderActionsSection() {
     var _theme$defaultLanguag27;
+
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !userCustomerId && /*#__PURE__*/_react.default.createElement(_styles.MyOrderActions, {
       pfchangs: layout === 'pfchangs'
     }, /*#__PURE__*/_react.default.createElement(ButtonComponent, {
@@ -593,6 +702,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       }
     }, isService ? t('YOUR_APPOINTMENTS', 'Your appointments') : t('YOUR_ORDERS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag27 = theme.defaultLanguages) === null || _theme$defaultLanguag27 === void 0 ? void 0 : _theme$defaultLanguag27.YOUR_ORDERS) || 'Your Orders'))));
   };
+
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     pfchangs: layout === 'pfchangs'
   }, !loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
@@ -644,8 +754,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag29 = theme.defaultLanguages) === null || _theme$defaultLanguag29 === void 0 ? void 0 : _theme$defaultLanguag29.REVIEW_ORDER) || 'Review your Order'))))))), /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, {
     pfchangs: layout === 'pfchangs'
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessExternalWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
-    w: "calc(100% - 20px)"
-    // borderBottom={showOrderActions}
+    w: "calc(100% - 20px)" // borderBottom={showOrderActions}
+
   }, isShowBusinessLogo && /*#__PURE__*/_react.default.createElement("img", {
     src: order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h2", null, order === null || order === void 0 ? void 0 : (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.name), /*#__PURE__*/_react.default.createElement(_ActionsSection.ActionsSection, _extends({}, ActionsSectionProps, {
@@ -856,11 +966,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     closeOnBackdrop: false
   }));
 };
+
 var OrderDetails = function OrderDetails(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
-    _useLanguage4 = _slicedToArray(_useLanguage3, 2),
-    t = _useLanguage4[1];
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
+
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     googleMapsControls: {
@@ -893,6 +1006,8 @@ var OrderDetails = function OrderDetails(props) {
     }],
     UIComponent: OrderDetailsUI
   });
+
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetails, orderDetailsProps);
 };
+
 exports.OrderDetails = OrderDetails;

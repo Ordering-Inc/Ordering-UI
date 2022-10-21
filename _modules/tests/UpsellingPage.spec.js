@@ -1,10 +1,15 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
+
 var _react2 = require("@cypress/react");
+
 var _UpsellingPage = require("../components/UpsellingPage");
+
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 describe('Mounting Upselling Page component', function () {
   var business = {
     currency: 'USD',

@@ -1,109 +1,158 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.OrderDetails = void 0;
+
 var _react = _interopRequireWildcard(require("react"));
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _orderingComponents = require("ordering-components");
+
 var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
+
 var _BiStoreAlt = _interopRequireDefault(require("@meronex/icons/bi/BiStoreAlt"));
+
 var _AiFillExclamationCircle = _interopRequireDefault(require("@meronex/icons/ai/AiFillExclamationCircle"));
+
 var _BsPhone = _interopRequireDefault(require("@meronex/icons/bs/BsPhone"));
+
 var _BiMessageRounded = _interopRequireDefault(require("@meronex/icons/bi/BiMessageRounded"));
+
 var _BsArrowLeft = _interopRequireDefault(require("@meronex/icons/bs/BsArrowLeft"));
+
 var _Buttons = require("../../styles/Buttons");
+
 var _NotFoundSource = require("../NotFoundSource");
+
 var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCircle"));
+
 var _ProductItemAccordion = require("../ProductItemAccordion");
+
 var _Modal = require("../Modal");
+
 var _Messages = require("../Messages");
+
 var _ProductShare = require("../ProductShare");
+
 var _styles = require("./styles");
+
 var _styledComponents = require("styled-components");
+
 var _utils = require("../../../../../utils");
+
 var _TaxInformation = require("../TaxInformation");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var OrderDetailsUI = function OrderDetailsUI(props) {
   var _order$driver, _order$driver2, _theme$images, _theme$images$dummies, _order$business, _order$business2, _theme$images2, _theme$images2$dummie, _order$customer, _order$customer2, _theme$images3, _theme$images3$dummie, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag25, _configs$guest_uuid_a, _orderTypes$find, _getOrderStatus, _getOrderStatus2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _order$driver3, _configs$google_maps_, _order$driver4, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _theme$defaultLanguag26, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11, _order$delivery_optio, _order$delivery_optio2, _theme$defaultLanguag27, _theme$defaultLanguag28, _theme$defaultLanguag29, _order$products, _theme$defaultLanguag30, _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _theme$defaultLanguag31, _theme$defaultLanguag32, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$offers3$filter, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$fees3$filter, _order$offers4, _order$offers5, _order$offers5$filter, _order$summary12, _theme$defaultLanguag33, _order$summary13, _order$offers6, _order$offers7, _order$offers7$filter, _order$summary14, _theme$defaultLanguag34, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _theme$defaultLanguag35, _order$summary$total, _order$summary17, _theme$defaultLanguag36, _theme$defaultLanguag37, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+
   var userCustomerId = props.userCustomerId,
-    handleBusinessRedirect = props.handleBusinessRedirect,
-    handleOrderRedirect = props.handleOrderRedirect,
-    googleMapsControls = props.googleMapsControls,
-    driverLocation = props.driverLocation,
-    urlToShare = props.urlToShare,
-    messages = props.messages,
-    setMessages = props.setMessages,
-    readMessages = props.readMessages,
-    messagesReadList = props.messagesReadList,
-    orderTypes = props.orderTypes;
+      handleBusinessRedirect = props.handleBusinessRedirect,
+      handleOrderRedirect = props.handleOrderRedirect,
+      googleMapsControls = props.googleMapsControls,
+      driverLocation = props.driverLocation,
+      urlToShare = props.urlToShare,
+      messages = props.messages,
+      setMessages = props.setMessages,
+      readMessages = props.readMessages,
+      messagesReadList = props.messagesReadList,
+      orderTypes = props.orderTypes;
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useConfig = (0, _orderingComponents.useConfig)(),
-    _useConfig2 = _slicedToArray(_useConfig, 1),
-    configs = _useConfig2[0].configs;
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
   var theme = (0, _styledComponents.useTheme)();
+
   var _useEvent = (0, _orderingComponents.useEvent)(),
-    _useEvent2 = _slicedToArray(_useEvent, 1),
-    events = _useEvent2[0];
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
-    _useUtils2 = _slicedToArray(_useUtils, 1),
-    _useUtils2$ = _useUtils2[0],
-    parsePrice = _useUtils2$.parsePrice,
-    parseNumber = _useUtils2$.parseNumber,
-    parseDate = _useUtils2$.parseDate;
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      _useUtils2$ = _useUtils2[0],
+      parsePrice = _useUtils2$.parsePrice,
+      parseNumber = _useUtils2$.parseNumber,
+      parseDate = _useUtils2$.parseDate;
+
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
-    _useCustomer2 = _slicedToArray(_useCustomer, 2),
-    customerState = _useCustomer2[0],
-    deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+      _useCustomer2 = _slicedToArray(_useCustomer, 2),
+      customerState = _useCustomer2[0],
+      deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
+
   var _useOrder = (0, _orderingComponents.useOrder)(),
-    _useOrder2 = _slicedToArray(_useOrder, 2),
-    orderState = _useOrder2[0],
-    refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
+      _useOrder2 = _slicedToArray(_useOrder, 2),
+      orderState = _useOrder2[0],
+      refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
+
   var _useState = (0, _react.useState)({
-      business: false,
-      driver: false
-    }),
-    _useState2 = _slicedToArray(_useState, 2),
-    openMessages = _useState2[0],
-    setOpenMessages = _useState2[1];
+    business: false,
+    driver: false
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      openMessages = _useState2[0],
+      setOpenMessages = _useState2[1];
+
   var _useState3 = (0, _react.useState)({
-      business: false,
-      driver: false
-    }),
-    _useState4 = _slicedToArray(_useState3, 2),
-    unreadAlert = _useState4[0],
-    setUnreadAlert = _useState4[1];
+    business: false,
+    driver: false
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      unreadAlert = _useState4[0],
+      setUnreadAlert = _useState4[1];
+
   var _useState5 = (0, _react.useState)({
-      open: false,
-      tax: null,
-      type: ''
-    }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    openTaxModal = _useState6[0],
-    setOpenTaxModal = _useState6[1];
+    open: false,
+    tax: null,
+    type: ''
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      openTaxModal = _useState6[0],
+      setOpenTaxModal = _useState6[1];
+
   var _props$order = props.order,
-    order = _props$order.order,
-    loading = _props$order.loading,
-    businessData = _props$order.businessData,
-    error = _props$order.error;
+      order = _props$order.order,
+      loading = _props$order.loading,
+      businessData = _props$order.businessData,
+      error = _props$order.error;
+
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
+
     var status = parseInt(s);
     var orderStatus = [{
       key: 0,
@@ -231,12 +280,15 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
     return objectStatus && objectStatus;
   };
+
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
   };
+
   var handleOpenMessages = function handleOpenMessages(data) {
     setOpenMessages(data);
     readMessages();
+
     if ((order === null || order === void 0 ? void 0 : order.unread_count) > 0) {
       data.business ? setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
         business: false
@@ -245,16 +297,19 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       }));
     }
   };
+
   var unreadMessages = function unreadMessages() {
     var length = messages === null || messages === void 0 ? void 0 : messages.messages.length;
     var unreadLength = order === null || order === void 0 ? void 0 : order.unread_count;
     var unreadedMessages = messages.messages.slice(length - unreadLength, length);
     var business = unreadedMessages.some(function (message) {
       var _message$can_see;
+
       return message === null || message === void 0 ? void 0 : (_message$can_see = message.can_see) === null || _message$can_see === void 0 ? void 0 : _message$can_see.includes(2);
     });
     var driver = unreadedMessages.some(function (message) {
       var _message$can_see2;
+
       return message === null || message === void 0 ? void 0 : (_message$can_see2 = message.can_see) === null || _message$can_see2 === void 0 ? void 0 : _message$can_see2.includes(4);
     });
     setUnreadAlert({
@@ -262,6 +317,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       driver: driver
     });
   };
+
   var locations = [_objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.location), {}, {
     icon: (order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.driverPhoto)
   }), _objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.location), {}, {
@@ -269,27 +325,35 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }), _objectSpread(_objectSpread({}, order === null || order === void 0 ? void 0 : (_order$customer = order.customer) === null || _order$customer === void 0 ? void 0 : _order$customer.location), {}, {
     icon: (order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.customerPhoto)
   })];
+
   var getIncludedTaxes = function getIncludedTaxes() {
     var _order$taxes;
+
     if ((order === null || order === void 0 ? void 0 : (_order$taxes = order.taxes) === null || _order$taxes === void 0 ? void 0 : _order$taxes.length) === 0) {
       var _order$summary$tax, _order$summary;
+
       return order.tax_type === 1 ? (_order$summary$tax = order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.tax) !== null && _order$summary$tax !== void 0 ? _order$summary$tax : 0 : 0;
     } else {
       return order === null || order === void 0 ? void 0 : order.taxes.reduce(function (taxIncluded, tax) {
         var _tax$summary;
+
         return taxIncluded + (tax.type === 1 ? (_tax$summary = tax.summary) === null || _tax$summary === void 0 ? void 0 : _tax$summary.tax : 0);
       }, 0);
     }
   };
+
   var getIncludedTaxesDiscounts = function getIncludedTaxesDiscounts() {
     var _order$taxes2, _order$taxes2$filter;
+
     return order === null || order === void 0 ? void 0 : (_order$taxes2 = order.taxes) === null || _order$taxes2 === void 0 ? void 0 : (_order$taxes2$filter = _order$taxes2.filter(function (tax) {
       return (tax === null || tax === void 0 ? void 0 : tax.type) === 1;
     })) === null || _order$taxes2$filter === void 0 ? void 0 : _order$taxes2$filter.reduce(function (carry, tax) {
       var _tax$summary$tax_afte, _tax$summary2, _tax$summary3;
+
       return carry + ((_tax$summary$tax_afte = tax === null || tax === void 0 ? void 0 : (_tax$summary2 = tax.summary) === null || _tax$summary2 === void 0 ? void 0 : _tax$summary2.tax_after_discount) !== null && _tax$summary$tax_afte !== void 0 ? _tax$summary$tax_afte : tax === null || tax === void 0 ? void 0 : (_tax$summary3 = tax.summary) === null || _tax$summary3 === void 0 ? void 0 : _tax$summary3.tax);
     }, 0);
   };
+
   var handleStartNewOrder = function handleStartNewOrder() {
     deleteUserCustomer(true);
     refreshOrderOptions();
@@ -297,6 +361,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       page: 'home'
     });
   };
+
   (0, _react.useEffect)(function () {
     if (driverLocation) {
       locations[0] = driverLocation;
@@ -399,6 +464,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     return (offer === null || offer === void 0 ? void 0 : offer.target) === 1;
   })) === null || _order$offers3$filter === void 0 ? void 0 : _order$offers3$filter.map(function (offer) {
     var _offer$summary;
+
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id
     }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
@@ -417,6 +483,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     return (tax === null || tax === void 0 ? void 0 : tax.type) === 2 && (tax === null || tax === void 0 ? void 0 : tax.rate) !== 0;
   }).map(function (tax) {
     var _ref3, _tax$summary$tax_afte2, _tax$summary4, _tax$summary5;
+
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: tax === null || tax === void 0 ? void 0 : tax.id
     }, /*#__PURE__*/_react.default.createElement("td", null, (tax === null || tax === void 0 ? void 0 : tax.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(tax === null || tax === void 0 ? void 0 : tax.rate, parseNumber), "%)")), /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
@@ -435,6 +502,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     return !((fee === null || fee === void 0 ? void 0 : fee.fixed) === 0 && (fee === null || fee === void 0 ? void 0 : fee.percentage) === 0);
   })) === null || _order$fees3$filter === void 0 ? void 0 : _order$fees3$filter.map(function (fee) {
     var _ref4, _fee$summary, _fee$summary$percenta, _fee$summary2, _fee$summary3;
+
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: fee.id
     }, /*#__PURE__*/_react.default.createElement("td", null, (fee === null || fee === void 0 ? void 0 : fee.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), "(", (fee === null || fee === void 0 ? void 0 : fee.fixed) > 0 && "".concat(parsePrice(fee === null || fee === void 0 ? void 0 : fee.fixed), " + "), fee.percentage, "%)", /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
@@ -453,6 +521,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     return (offer === null || offer === void 0 ? void 0 : offer.target) === 3;
   })) === null || _order$offers5$filter === void 0 ? void 0 : _order$offers5$filter.map(function (offer) {
     var _offer$summary2;
+
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id
     }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
@@ -471,6 +540,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     return (offer === null || offer === void 0 ? void 0 : offer.target) === 2;
   })) === null || _order$offers7$filter === void 0 ? void 0 : _order$offers7$filter.map(function (offer) {
     var _offer$summary3;
+
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: offer.id
     }, /*#__PURE__*/_react.default.createElement("td", null, offer.name, offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)")), /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
@@ -591,11 +661,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }, AfterElement);
   }));
 };
+
 var OrderDetails = function OrderDetails(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
-    _useLanguage4 = _slicedToArray(_useLanguage3, 2),
-    t = _useLanguage4[1];
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
+
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     googleMapsControls: {
@@ -628,6 +701,8 @@ var OrderDetails = function OrderDetails(props) {
     }],
     UIComponent: OrderDetailsUI
   });
+
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetails, orderDetailsProps);
 };
+
 exports.OrderDetails = OrderDetails;

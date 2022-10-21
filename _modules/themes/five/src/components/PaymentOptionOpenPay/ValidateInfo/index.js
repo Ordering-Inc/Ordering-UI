@@ -4,11 +4,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = validateInfo;
+
 var _cardValidator = _interopRequireDefault(require("card-validator"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function validateInfo(values) {
   var errors = {};
+
   var creditCard = _cardValidator.default.number(values.cardNumber);
+
   creditCard.expirationMonth = _cardValidator.default.expirationMonth(values.cardMonth);
   creditCard.expirationYear = _cardValidator.default.expirationYear(values.cardYear);
   creditCard.cvv = _cardValidator.default.cvv(values.cardSecurityCode);
@@ -22,18 +27,17 @@ function validateInfo(values) {
   errors.cnumber = false;
   errors.month = false;
   errors.year = false;
-  errors.ccvv = false;
+  errors.ccvv = false; // Card CVV expiration
 
-  // Card CVV expiration
   if (values.cardSecurityCode === null || !values.cardSecurityCode.trim()) {
     errors.message = 'Credit card CVC is not complete';
   } else if (creditCard.cvv.isValid) {
     errors.ccvv = true;
   } else {
     errors.message = 'Credit card CVC is invalid';
-  }
+  } // Card Expiration Verification
 
-  // Card Expiration Verification
+
   if (values.cardMonth === null || !values.cardMonth.trim()) {
     errors.message = 'Credit card expiration month is not complete';
   } else if (creditCard.expirationMonth.isValid) {
@@ -41,15 +45,14 @@ function validateInfo(values) {
   } else {
     errors.message = 'Credit card expiration month is invalid';
   }
+
   if (values.cardYear === null || !values.cardYear.trim()) {
     errors.message = 'Credit card expiration year is not complete';
   } else if (creditCard.expirationYear.isValid) {
     errors.year = true;
   } else {
     errors.message = 'Credit card expiration year is invalid';
-  }
-
-  // //Card Type Verification
+  } // //Card Type Verification
   // if (
   //   values.cardType === null ||
   //   !values.cardType.trim() ||
@@ -64,17 +67,18 @@ function validateInfo(values) {
   // } else {
   //   errors.message = 'Credit card type is invalid'
   // }
-
   // Card Number Verification
+
+
   if (values.cardNumber === null || !values.cardNumber.trim()) {
     errors.message = 'Credit card number is not complete';
   } else if (creditCard.isValid) {
     errors.cnumber = true;
   } else {
     errors.message = 'Credit card number is invalid';
-  }
+  } // Cardholder Name Verification
 
-  // Cardholder Name Verification
+
   if (values.cardName === null || !values.cardName.trim()) {
     errors.message = 'Cardholder name is not complete';
   } else if (creditCard.cardholderName.isValid) {
@@ -82,9 +86,11 @@ function validateInfo(values) {
   } else {
     errors.message = 'Cardholder name is invalid';
   }
+
   if (errors.cname && errors.cnumber && errors.year && errors.month && errors.ccvv) {
     errors.variant = 'success';
     errors.message = 'Credit Card is valid';
   }
+
   return errors;
 }
