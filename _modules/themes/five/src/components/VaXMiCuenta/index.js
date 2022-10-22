@@ -24,7 +24,7 @@ var VaXMiCuenta = function VaXMiCuenta(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.VaXMiCuentaContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "\xBFDeseas donar a ", /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
     src: "https://d2gjwc6pypyhyf.cloudfront.net/va-por-mi-cuenta.svg"
   })), " ?"), /*#__PURE__*/_react.default.createElement("p", null, t('VA_POR_MI_CUENTA', 'VA_POR_MI_CUENTA'), " ", /*#__PURE__*/_react.default.createElement("a", {
-    href: "{t('VA_POR_MI_CUENTA_, URL','VA_POR_MI_CUENTA')}",
+    href: "{t('VA_POR_MI_CUENTA_URL','VA_POR_MI_CUENTA')}",
     target: "_blank"
   }, " ", t('VA_POR_MI_CUENTA_URL_NAME', 'VA_POR_MI_CUENTA_URL_NAME'))), /*#__PURE__*/_react.default.createElement("div", null, Object.values(defaultOptionsVaXMiCuenta === null || defaultOptionsVaXMiCuenta === void 0 ? void 0 : defaultOptionsVaXMiCuenta.donation_values[0]).map(function (value, index) {
     return /*#__PURE__*/_react.default.createElement("div", {
