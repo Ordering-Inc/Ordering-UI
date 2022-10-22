@@ -86,7 +86,7 @@ export const Header = (props) => {
   const [isFarAway, setIsFarAway] = useState(false)
   const isAlsea = ordering.project === 'alsea'
 
-  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.franchise_id === franchiseId || !franchiseId || !cart?.business?.franchiseId))) || null
+  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.slug.includes('pf_changs')))) || null // change filter includes pf_changs for cart?.business?.franchise_id === franchiseId || !franchiseId || !cart?.business?.franchiseId) DON'T MERGE THIS TO MASTER
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()

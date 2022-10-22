@@ -333,49 +333,95 @@ Object.defineProperty(exports, "VerticalOrdersLayout", {
     return _VerticalOrdersLayout.VerticalOrdersLayout;
   }
 });
+
 var _AddressDetails = require("./src/components/AddressDetails");
+
 var _AddressesPopover = require("./src/components/AddressesPopover");
+
 var _AddressForm = require("./src/components/AddressForm");
+
 var _AddressList = require("./src/components/AddressList");
+
 var _BusinessBasicInformation = require("./src/components/BusinessBasicInformation");
+
 var _BusinessController = require("./src/components/BusinessController");
+
 var _BusinessesListing = require("./src/components/BusinessesListing");
+
 var _BusinessItemAccordion = require("./src/components/BusinessItemAccordion");
+
 var _BusinessProductsList = require("./src/components/BusinessProductsList");
+
 var _BusinessProductsListing = require("./src/components/BusinessProductsListing");
+
 var _Cart = require("./src/components/Cart");
+
 var _CartContent = require("./src/components/CartContent");
+
 var _CartPopover = require("./src/components/CartPopover");
+
 var _Checkout = require("./src/components/Checkout");
+
 var _Confirm = require("./src/components/Confirm");
+
 var _CouponControl = require("./src/components/CouponControl");
+
 var _DriverTips = require("./src/components/DriverTips");
+
 var _FloatingButton = require("./src/components/FloatingButton");
+
 var _Footer = require("./src/components/Footer");
+
 var _ForgotPasswordForm = require("./src/components/ForgotPasswordForm");
+
 var _Header = require("./src/components/Header");
+
 var _Help = require("./src/components/Help");
+
 var _HelpStaticPage = require("./src/components/HelpStaticPage");
+
 var _HomeHero = require("./src/components/HomeHero");
+
 var _HorizontalOrdersLayout = require("./src/components/HorizontalOrdersLayout");
+
 var _LastOrders = require("./src/components/LastOrders");
+
 var _LoginForm = require("./src/components/LoginForm");
+
 var _MomentContent = require("./src/components/MomentContent");
+
 var _MomentControl = require("./src/components/MomentControl");
+
 var _MomentPopover = require("./src/components/MomentPopover");
+
 var _MyOrders = require("./src/components/MyOrders");
+
 var _OrderDetails = require("./src/components/OrderDetails");
+
 var _OrdersOption = require("./src/components/OrdersOption");
+
 var _PaymentOptions = require("./src/components/PaymentOptions");
+
 var _ProductForm = require("./src/components/ProductForm");
+
 var _ProductItemAccordion = require("./src/components/ProductItemAccordion");
+
 var _ProductOption = require("./src/components/ProductOption");
+
 var _SidebarMenu = require("./src/components/SidebarMenu");
+
 var _SignUpForm = require("./src/components/SignUpForm");
+
 var _SingleProductCard = require("./src/components/SingleProductCard");
+
 var _UserDetails = require("./src/components/UserDetails");
+
 var _VerticalOrdersLayout = require("./src/components/VerticalOrdersLayout");
+
 var _Buttons = require("./src/styles/Buttons");
+
 var _Inputs = require("./src/styles/Inputs");
+
 var _Select = require("./src/styles/Select");
+
 var _Tabs = require("./src/styles/Tabs");

@@ -1,13 +1,19 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
+
 var _react2 = require("@cypress/react");
+
 var _BusinessController = require("../components/BusinessController");
+
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var handleBusinessClick = function handleBusinessClick() {
   console.log('handle business click');
 };
+
 var business = {
   header: 'https://picsum.photos/1920/700',
   logo: 'https://picsum.photos/200',

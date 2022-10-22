@@ -1,10 +1,15 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
+
 var _react2 = require("@cypress/react");
+
 var _HeaderOption = require("../components/HeaderOption");
+
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var variant = 'moment';
 describe('Mounting Header Option component', function () {
   it('Component UI', function () {
