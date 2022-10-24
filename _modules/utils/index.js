@@ -17,18 +17,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var getIconCard = function getIconCard() {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$genera;
+  var _theme$images$general, _theme$images, _theme$images$general2, _theme$images2, _theme$images2$genera;
   var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var value = brand.toLowerCase();
   var theme = (0, _styledComponents.useTheme)();
-  switch (value) {
-    case 'visa':
-      return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.visa;
-    case 'mastercard':
-      return (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.mastercard;
-    default:
-      return (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.credit;
-  }
+  return (_theme$images$general = (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general2 = _theme$images.general) === null || _theme$images$general2 === void 0 ? void 0 : _theme$images$general2[value]) !== null && _theme$images$general !== void 0 ? _theme$images$general : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.credit;
 };
 
 /**

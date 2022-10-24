@@ -48,7 +48,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _customerState$user, _orderState$options3, _orderState$options3$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options5, _orderState$options5$, _orderState$options6, _orderState$options6$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options7, _orderState$options8, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options9, _orderState$options9$, _configState$configs12, _configState$configs13, _orderState$options10, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options11, _orderState$options12, _configState$configs18, _configState$configs19, _orderState$options13, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options14, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _customerState$user, _orderState$options3, _orderState$options3$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options5, _orderState$options5$, _orderState$options6, _orderState$options6$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options7, _orderState$options8, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options9, _orderState$options9$, _configState$configs12, _configState$configs13, _orderState$options10, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options11, _orderState$options12, _configState$configs18, _configState$configs19, _orderState$options13, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options14, _orderState$options15, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
   var isHome = props.isHome,
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
@@ -385,11 +385,12 @@ var Header = function Header(props) {
       return openModal(variant);
     }
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: !auth && modalSelected === 'address' && t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
     open: modalIsOpen,
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
-    width: modalSelected === 'address' ? '70%' : '700px'
+    width: modalSelected === 'address' ? orderState !== null && orderState !== void 0 && (_orderState$options14 = orderState.options) !== null && _orderState$options14 !== void 0 && _orderState$options14.user_id ? '70%' : '50%' : '700px'
   }, modalSelected === 'cart' && /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
     carts: cartsWithProducts,
     isOrderStateCarts: !!orderState.carts,
@@ -406,7 +407,7 @@ var Header = function Header(props) {
     isCustomerMode: isCustomerMode
   }) : /*#__PURE__*/_react.default.createElement(_styles.AddressFormWrapper, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options14 = orderState.options) === null || _orderState$options14 === void 0 ? void 0 : _orderState$options14.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options15 = orderState.options) === null || _orderState$options15 === void 0 ? void 0 : _orderState$options15.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },
@@ -463,7 +464,8 @@ var Header = function Header(props) {
       return closeAuthModal();
     },
     width: "50%",
-    authModal: true
+    authModal: true,
+    closeOnBackdrop: false
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {

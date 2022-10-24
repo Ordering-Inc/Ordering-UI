@@ -567,7 +567,7 @@ var LoginFormUI = function LoginFormUI(props) {
     onClick: function onClick() {
       setLoginWithOtpState(false);
     }
-  }, t('CANCEL', 'Cancel'))), elementLinkToSignup && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }, t('CANCEL', 'Cancel'))), elementLinkToSignup && !loginWithOtpState && loginTab !== 'otp' && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup,
     className: "new-account"

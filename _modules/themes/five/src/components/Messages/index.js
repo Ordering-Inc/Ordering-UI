@@ -38,7 +38,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime'];
 var MessagesUI = function MessagesUI(props) {
-  var _messages$messages, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _theme$images2$dummie, _order$driver3, _order$business4, _order$driver4, _order$business5, _theme$images3, _theme$images3$dummie, _order$driver5, _messagesToShow$messa2;
+  var _messages$messages, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _theme$images2$dummie, _order$driver3, _order$business4, _order$driver4, _order$business6, _theme$images3, _theme$images3$dummie, _order$driver5, _messagesToShow$messa2;
   var order = props.order,
     messages = props.messages,
     handleSend = props.handleSend,
@@ -74,6 +74,9 @@ var MessagesUI = function MessagesUI(props) {
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+    _useEvent2 = _slicedToArray(_useEvent, 1),
+    events = _useEvent2[0];
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
@@ -296,6 +299,14 @@ var MessagesUI = function MessagesUI(props) {
       content: []
     });
   };
+  var goToBusiness = function goToBusiness(slug) {
+    events.emit('go_to_page', {
+      page: 'business',
+      params: {
+        business_slug: slug
+      }
+    });
+  };
   var MapMessages = function MapMessages(_ref) {
     var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
     var messages = _ref.messages;
@@ -403,8 +414,13 @@ var MessagesUI = function MessagesUI(props) {
       });
     },
     isCursor: true
-  }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: ((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
+  }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    onClick: function onClick() {
+      var _order$business5;
+      return goToBusiness(order === null || order === void 0 ? void 0 : (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.slug);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
+    src: ((_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   }))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_styles.MessageType, {
     active: driver,
