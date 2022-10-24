@@ -182,6 +182,12 @@ export const OrderBillSection = (props) => {
               <td>{parsePrice(order?.summary?.delivery_price)}</td>
             </tr>
           )}
+          {order?.va_por_mi_cuenta && (
+            <tr>
+              <td><img src='https://d2gjwc6pypyhyf.cloudfront.net/va-por-mi-cuenta.svg' /></td>
+              <td>{parsePrice(order?.va_por_mi_cuenta.amount)}</td>
+            </tr>
+          )}
           {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
               <tr key={offer.id}>
@@ -255,7 +261,7 @@ export const OrderBillSection = (props) => {
                   <span>
                     {event?.wallet_event
                       ? walletName[event?.wallet_event?.wallet?.type]?.name
-                      : event?.paymethod?.name}
+                      : t(event?.paymethod?.gateway.toUpperCase(), event?.paymethod?.name)}
                   </span>
                   {event?.data?.charge_id && (
                     <span>
