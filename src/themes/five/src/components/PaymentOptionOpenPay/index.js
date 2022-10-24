@@ -273,6 +273,10 @@ export const PaymentCard = (props) => {
       card: {
         brand: card.brand,
         last4: card.last4
+      },
+      data: {
+        card_id: card.id,
+        device_session_id: window?.OpenPay?.deviceData?.setup?.()
       }
     })
   }
