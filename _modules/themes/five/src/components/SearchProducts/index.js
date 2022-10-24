@@ -10,6 +10,7 @@ var _orderingComponents = require("ordering-components");
 var _SearchBar = require("../SearchBar");
 var _styledComponents = require("styled-components");
 var _BusinessProductsList = require("../BusinessProductsList");
+var _groceries = require("../BusinessProductsList/layouts/groceries");
 var _styles = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -24,8 +25,9 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var layoutOne = 'groceries';
 var SearchProducts = function SearchProducts(props) {
-  var _theme$images, _theme$images$logos, _theme$defaultLanguag, _theme$defaultLanguag2;
+  var _configs$use_parent_c, _configs$use_parent_c2, _theme$images, _theme$images$logos, _theme$defaultLanguag, _theme$defaultLanguag2;
   var onClose = props.onClose,
     searchValue = props.searchValue,
     handleChangeSearch = props.handleChangeSearch,
@@ -39,11 +41,20 @@ var SearchProducts = function SearchProducts(props) {
   var _useEvent = (0, _orderingComponents.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var searchRef = (0, _react.useRef)();
+  var isUseParentCategory = (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1';
+  var frontLayout = business === null || business === void 0 ? void 0 : business.front_layout;
+  var businessLayout = {
+    layoutOne: frontLayout === layoutOne && isUseParentCategory
+  };
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
     document.body.style.overflowY = 'auto';
   };
+  var BusinessLayoutProductsList = businessLayout.layoutOne ? _groceries.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
   (0, _react.useEffect)(function () {
     var _searchRef$current;
     (searchRef === null || searchRef === void 0 ? void 0 : (_searchRef$current = searchRef.current) === null || _searchRef$current === void 0 ? void 0 : _searchRef$current.focus) && searchRef.current.focus();
@@ -69,7 +80,7 @@ var SearchProducts = function SearchProducts(props) {
     forwardRef: searchRef
   })), /*#__PURE__*/_react.default.createElement(_styles.CancelButton, {
     onClick: onClose
-  }, t('CANCEL', 'Cancel')))), searchValue && /*#__PURE__*/_react.default.createElement(_styles.BusinessProductsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductsListWrapper, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, _extends({}, props, {
+  }, t('CANCEL', 'Cancel')))), searchValue && /*#__PURE__*/_react.default.createElement(_styles.BusinessProductsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductsListWrapper, null, /*#__PURE__*/_react.default.createElement(BusinessLayoutProductsList, _extends({}, props, {
     categories: [{
       id: null,
       name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ALL) || 'All')

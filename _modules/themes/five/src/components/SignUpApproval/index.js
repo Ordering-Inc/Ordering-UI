@@ -32,8 +32,8 @@ var SignUpApproval = function SignUpApproval(props) {
     onCancel = props.onCancel;
   var contactEmail = 'support@ordering.co';
   var showDomain = false;
-  var logoImgUrl = businessType === '2' ? approvalType === 'automatic' ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.CongratulationApproval : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.CongratulationNoApproval : approvalType === 'automatic' ? (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.driverCongratulationApproval : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$genera = _theme$images4.general) === null || _theme$images4$genera === void 0 ? void 0 : _theme$images4$genera.driverCongratulationNoApproval;
-  var userType = businessType === '2' ? 'business' : 'driver';
+  var logoImgUrl = businessType === 2 ? approvalType === 'automatic' ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.CongratulationApproval : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.CongratulationNoApproval : approvalType === 'automatic' ? (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.driverCongratulationApproval : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$genera = _theme$images4.general) === null || _theme$images4$genera === void 0 ? void 0 : _theme$images4$genera.driverCongratulationNoApproval;
+  var userType = businessType === 2 ? 'business' : 'driver';
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderSection, null, showDomain && /*#__PURE__*/_react.default.createElement(_styles.Title, null, "Domain or Brand"), /*#__PURE__*/_react.default.createElement(_styles.LogoImage, {
     approvalType: approvalType === 'automatic',
     src: logoImgUrl
@@ -58,16 +58,16 @@ var SignUpApproval = function SignUpApproval(props) {
     href: dashboardLoginUrl,
     target: "_blank",
     rel: "noopener noreferrer"
-  }, dashboardUrl)))))) : /*#__PURE__*/_react.default.createElement(_styles.BodySection, null, businessType === 'business' ? /*#__PURE__*/_react.default.createElement(_styles.DescriptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Description, null, /*#__PURE__*/_react.default.createElement("span", {
+  }, dashboardUrl)))))) : /*#__PURE__*/_react.default.createElement(_styles.BodySection, null, userType === 'business' ? /*#__PURE__*/_react.default.createElement(_styles.DescriptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Description, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "bigger"
   }, t('YOUR_STORE_UNDER_APPROVAL', 'Your store is under approval'))), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('FEEL_FREE_CONTACT_US', 'feel free to contact us at '), " ", /*#__PURE__*/_react.default.createElement("a", {
     className: "green-text",
-    href: "mailto:".concat(contactEmail)
+    href: "mailto:".concat(t('SIGNUP_DRIVER_EMAIL', contactEmail))
   }, contactEmail))) : /*#__PURE__*/_react.default.createElement(_styles.DescriptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Description, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "bigger"
   }, t('REQUEST_TO_START_UNDER_APPROVAL', 'Your request to start as a driver is under approval.'))), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('FEEL_FREE_CONTACT_US', 'feel free to contact us at '), " ", /*#__PURE__*/_react.default.createElement("a", {
     className: "green-text",
-    href: "mailto:".concat(contactEmail)
+    href: "mailto:".concat(t('SIGNUP_DRIVER_EMAIL', contactEmail))
   }, contactEmail)))), /*#__PURE__*/_react.default.createElement(_styles.FooterSection, null, /*#__PURE__*/_react.default.createElement(_styles.ActionGroup, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
@@ -83,7 +83,7 @@ var SignUpApproval = function SignUpApproval(props) {
     }
   }, t('ACCEPT', 'Accept'))), approvalType === 'automatic' && userType === 'business' && /*#__PURE__*/_react.default.createElement(_styles.ContactSection, null, t('CONTACT_US_QUESTIONS', 'If you have some questions do no hestitate to contact us at '), " ", /*#__PURE__*/_react.default.createElement("a", {
     className: "green-text",
-    href: "mailto:".concat(contactEmail)
+    href: "mailto:".concat(t('SIGNUP_DRIVER_EMAIL', contactEmail))
   }, contactEmail))));
 };
 exports.SignUpApproval = SignUpApproval;

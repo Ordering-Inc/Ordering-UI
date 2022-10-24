@@ -16,6 +16,7 @@ var _Modal = require("../Modal");
 var _LoginForm = require("../LoginForm");
 var _SignUpForm = require("../SignUpForm");
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
+var _Confirm = require("../Confirm");
 var _styles = require("./styles");
 var _Buttons = require("../../styles/Buttons");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -86,6 +87,13 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     modalPageToShow = _useState4[0],
     setModalPageToShow = _useState4[1];
+  var _useState5 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    alertState = _useState6[0],
+    setAlertState = _useState6[1];
   var editMode = typeof (product === null || product === void 0 ? void 0 : product.code) !== 'undefined';
   var isObservedValidation = isObserved || useKioskApp;
   var removeToBalance = editMode ? product === null || product === void 0 ? void 0 : product.quantity : 0;
@@ -106,11 +114,24 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   var handleClickProduct = function handleClickProduct(e) {
     var _favoriteRef$current, _product$business;
     if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
+    if (productAddedToCartLength && product !== null && product !== void 0 && product.maximum_per_order && productAddedToCartLength >= (product === null || product === void 0 ? void 0 : product.maximum_per_order)) {
+      setAlertState({
+        open: true,
+        content: [t('PRODUCT_ON_MAXIMUM_ORDER', 'The product is on maximum order')]
+      });
+      return;
+    }
     if (isFavorite) {
       onProductClick && onProductClick();
       return;
     }
     !isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product, product === null || product === void 0 ? void 0 : (_product$business = product.business) === null || _product$business === void 0 ? void 0 : _product$business.slug) || useCustomFunctionality && onCustomClick && onCustomClick();
+  };
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
   };
   var handleChangeFavorite = function handleChangeFavorite() {
     if (auth) {
@@ -205,7 +226,8 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     width: 75
   }))), !useCustomFunctionality && !hideAddButton && !isSkeleton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
-    color: "primary"
+    color: "primary",
+    disabled: productAddedToCartLength && (product === null || product === void 0 ? void 0 : product.maximum_per_order) && productAddedToCartLength >= (product === null || product === void 0 ? void 0 : product.maximum_per_order)
   }, t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isModalOpen,
     onRemove: function onRemove() {
@@ -262,7 +284,19 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
       href: "#"
     }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.LOGIN) || 'Login')),
     isPopup: true
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('PRODUCT', 'Product'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
 };
 var SingleProductCard = function SingleProductCard(props) {
   var singleProductCardProps = _objectSpread(_objectSpread({}, props), {}, {

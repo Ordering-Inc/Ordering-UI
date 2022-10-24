@@ -115,7 +115,6 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       }
     });
     var navbar = document.getElementById('category-lists');
-    var cart = document.getElementById('BusinessCartContainer');
     var search = document.getElementById('WrapperSearchAbsolute');
     var wrapperCategories = document.getElementById('wrapper-categories');
     var limit = window.pageYOffset >= (wrapperCategories === null || wrapperCategories === void 0 ? void 0 : wrapperCategories.offsetTop) && window.pageYOffset > 0;
@@ -123,12 +122,10 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       var classAdded = navbar.classList.contains('sticky-prod-cat');
       if (!classAdded) {
         navbar && navbar.classList.add('sticky-prod-cat');
-        cart && cart.classList.add('sticky-prod-cart');
         search && search.classList.add('sticky-search');
       }
     } else {
       navbar && navbar.classList.remove('sticky-prod-cat');
-      cart && cart.classList.remove('sticky-prod-cart');
       search && search.classList.remove('sticky-search');
     }
   };
@@ -142,24 +139,16 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     style0 += 'padding: 5px 5px 0px 5px !important;';
     style0 += "width: calc(100% - ".concat(useKioskApp ? '50px' : '155px', ") !important;");
     style0 += '}';
-    var style1 = '.sticky-prod-cart {';
+    var style1 = '.sticky-search {';
     style1 += 'position: fixed !important;';
-    style1 += 'top: 38px !important;';
-    style1 += 'right: 2.5% !important;';
-    style1 += 'width: 28.5% !important;';
-    style1 += 'margin-top: 32px !important;';
+    style1 += 'top: 0px !important;';
+    style1 += 'right: 0% !important;';
+    style1 += 'z-index: 9999 !important;';
+    style1 += 'width: 50px !important;';
+    style1 += "background-color: ".concat(theme.colors.backgroundPage, " !important;");
     style1 += '}';
-    var style2 = '.sticky-search {';
-    style2 += 'position: fixed !important;';
-    style2 += 'top: 0px !important;';
-    style2 += 'right: 0% !important;';
-    style2 += 'z-index: 9999 !important;';
-    style2 += 'width: 50px !important;';
-    style2 += "background-color: ".concat(theme.colors.backgroundPage, " !important;");
-    style2 += '}';
     styleSheet.insertRule(style0, 0);
     styleSheet.insertRule(style1, 1);
-    styleSheet.insertRule(style2, 2);
     window.addEventListener('scroll', handleScroll);
     return function () {
       return window.removeEventListener('scroll', handleScroll);

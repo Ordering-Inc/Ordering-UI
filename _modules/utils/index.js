@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = exports.LightenDarkenColor = void 0;
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -153,6 +153,8 @@ var getTraduction = function getTraduction(key) {
     ERROR_MISSING_PAYMETHOD_HOOK: 'Missing payment method hook',
     INVALID_CODE: 'Invalid verify code',
     ERROR_YOU_HAVE_NOT_CART: 'Cart not found',
+    ERROR_PLACE_GROUP_PAY_WITH_CARD: 'An Error place group pay with card',
+    ERROR_PLACE_GROUP_CART_TOTAL_DIFFERENT: 'Error, place group cart total different',
     ERROR_PLACE_PAY_WITH_REDIRECT: 'An error occurred while trying to pay by redirect',
     ERROR_PLACE_PAY_WITH_CARD1: 'An error occurred while trying to pay by card',
     ERROR_PLACE_PAY_WITH_PAYPAL_CAPTURE: 'An error occurred while trying to pay by PayPal',
@@ -173,9 +175,29 @@ var bytesConverter = function bytesConverter(bytes) {
 };
 
 /**
- * Function to get time in 12 hours format.
+ * Function to get colors darker/lighten.
  */
 exports.bytesConverter = bytesConverter;
+var LightenDarkenColor = function LightenDarkenColor(col, amt) {
+  var usePound = false;
+  if (col[0] == "#") {
+    col = col.slice(1);
+    usePound = true;
+  }
+  var num = parseInt(col, 16);
+  var r = (num >> 16) + amt;
+  if (r > 255) r = 255;else if (r < 0) r = 0;
+  var b = (num >> 8 & 0x00FF) + amt;
+  if (b > 255) b = 255;else if (b < 0) b = 0;
+  var g = (num & 0x0000FF) + amt;
+  if (g > 255) g = 255;else if (g < 0) g = 0;
+  return (usePound ? "#" : "") + (g | b << 8 | r << 16).toString(16);
+};
+
+/**
+ * Function to get time in 12 hours format.
+ */
+exports.LightenDarkenColor = LightenDarkenColor;
 var getHourMin = function getHourMin(hour, min) {
   var _hour;
   if (hour < 12) {

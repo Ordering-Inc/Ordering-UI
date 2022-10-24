@@ -57,40 +57,68 @@ var NavigationBar = function NavigationBar() {
     events.emit('go_to_page', data);
   };
   var handleChangeExplore = function handleChangeExplore() {
-    if (auth) handleGoToPage({
+    auth ? handleGoToPage({
       page: 'search'
-    });else setIsAddress(true);
+    }) : setIsAddress(true);
   };
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.NavigationBarContainer, null, /*#__PURE__*/_react.default.createElement(_styles.NavigationLink, {
-    active: location.pathname === '/search' || isAddress,
-    onClick: handleChangeExplore
-  }, /*#__PURE__*/_react.default.createElement(_BsHouse.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.NavigationLink, {
-    active: location.pathname === '/business_search',
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'business_search'
-      });
+  var itemlist = {
+    home: {
+      key: 'home',
+      text: t('HOME', 'Home'),
+      active: location.pathname === '/search' || isAddress,
+      onClick: handleChangeExplore
+    },
+    browse: {
+      key: 'browse',
+      active: location.pathname === '/business_search',
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: 'business_search'
+        });
+      },
+      text: t('EXPLORE', 'Explore')
+    },
+    cart: {
+      key: 'cart',
+      active: isCart,
+      text: t('MY_CART', 'My cart'),
+      onClick: function onClick() {
+        return setIsCart(true);
+      }
+    },
+    orders: {
+      key: 'orders',
+      active: location.pathname === '/profile/orders',
+      text: t('ORDERS', 'Orders'),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: 'orders'
+        });
+      }
+    },
+    profile: {
+      key: 'profile',
+      active: location.pathname === '/profile',
+      text: t('PROFILE', 'Profile'),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: 'profile'
+        });
+      }
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsSearch.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('BROWSE', 'Browse'))), /*#__PURE__*/_react.default.createElement(_styles.NavigationLink, {
-    active: location.pathname === '/profile/orders',
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'orders'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_BsCardChecklist.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.NavigationLink, {
-    active: isCart,
-    onClick: function onClick() {
-      return setIsCart(true);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_AiOutlineShoppingCart.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('MY_CART', 'My cart'))), /*#__PURE__*/_react.default.createElement(_styles.NavigationLink, {
-    active: location.pathname === '/profile',
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'profile'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_FaRegUser.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('PROFILE', 'Profile')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  };
+  var getIcon = function getIcon(icon) {
+    return icon === 'home' ? /*#__PURE__*/_react.default.createElement(_BsHouse.default, null) : icon === 'browse' ? /*#__PURE__*/_react.default.createElement(_BsSearch.default, null) : icon === 'orders' ? /*#__PURE__*/_react.default.createElement(_BsCardChecklist.default, null) : icon === 'cart' ? /*#__PURE__*/_react.default.createElement(_AiOutlineShoppingCart.default, null) : /*#__PURE__*/_react.default.createElement(_FaRegUser.default, null);
+  };
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.NavigationBarContainer, null, Object.values(itemlist).map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.NavigationLink, {
+      key: item.key,
+      active: item.active,
+      onClick: function onClick() {
+        return item.onClick();
+      }
+    }, getIcon(item.key), /*#__PURE__*/_react.default.createElement("p", null, item.text));
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isCart,
     onClose: function onClose() {
       return setIsCart(false);
