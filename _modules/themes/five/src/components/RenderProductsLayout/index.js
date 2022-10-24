@@ -1,180 +1,122 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.RenderProductsLayout = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _styledComponents = require("styled-components");
-
 var _orderingComponents = require("ordering-components");
-
 var _CgSearch = _interopRequireDefault(require("@meronex/icons/cg/CgSearch"));
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _EnChevronThinUp = _interopRequireDefault(require("@meronex/icons/en/EnChevronThinUp"));
-
 var _BusinessBasicInformation = require("../BusinessBasicInformation");
-
 var _seven = require("../../../../seven");
-
 var _six = require("../../../../six");
-
 var _BusinessBasicInformation2 = require("../../../../../components/BusinessBasicInformation");
-
 var _BusinessProductsCategories = require("../BusinessProductsCategories");
-
 var _BusinessProductsList = require("../BusinessProductsList");
-
 var _groceries = require("../BusinessProductsCategories/layouts/groceries");
-
 var _pfchangs = require("../BusinessProductsCategories/layouts/pfchangs");
-
 var _groceries2 = require("../BusinessProductsList/layouts/groceries");
-
 var _pfchangs2 = require("../BusinessProductsList/layouts/pfchangs");
-
 var _Modal = require("../Modal");
-
 var _BusinessesListing = require("../BusinessesListing");
-
 var _Cart = require("../Cart");
-
 var _Buttons = require("../../styles/Buttons");
-
 var _styles = require("./styles");
-
 var _SearchProducts = require("../../../../../themes/five/src/components/SearchProducts");
-
 var _SearchProducts2 = require("../../../../../components/RenderProductsLayout/SearchProducts");
-
 var _SearchProducts3 = require("../../../../six/src/components/BusinessProductsListing/SearchProducts");
-
 var _ProfessionalFilter = require("../ProfessionalFilter");
-
 var _styles2 = require("../BusinessBasicInformation/styles");
-
 var _pfchangs3 = require("../BusinessBasicInformation/layouts/pfchangs");
-
 var _OrderItAgain = require("../OrderItAgain");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var layoutOne = 'groceries';
-
 var RenderProductsLayout = function RenderProductsLayout(props) {
   var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view$5, _theme$business_view5, _theme$business_view6, _theme$business_view7, _theme$business_view8, _theme$business_view9, _theme$business_view10, _theme$business_view11, _theme$business_view12, _business$categories, _business$categories$, _businessState$busine, _businessState$busine2, _business$professiona, _business$categories2, _theme$defaultLanguag, _theme$defaultLanguag2, _categorySelected$sub, _categorySelected$sub2, _business$professiona2, _business$previously_, _categorySelected$sor, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _business$professiona3, _business$categories3, _theme$defaultLanguag5, _theme$defaultLanguag6, _business$previously_2, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
-
   var errors = props.errors,
-      isError = props.isError,
-      isLoading = props.isLoading,
-      business = props.business,
-      categoryId = props.categoryId,
-      searchValue = props.searchValue,
-      sortByValue = props.sortByValue,
-      currentCart = props.currentCart,
-      businessState = props.businessState,
-      sortByOptions = props.sortByOptions,
-      categoryState = props.categoryState,
-      categorySelected = props.categorySelected,
-      openCategories = props.openCategories,
-      openBusinessInformation = props.openBusinessInformation,
-      isCartOnProductsList = props.isCartOnProductsList,
-      handleChangeSortBy = props.handleChangeSortBy,
-      errorQuantityProducts = props.errorQuantityProducts,
-      handler = props.handler,
-      onClickCategory = props.onClickCategory,
-      featuredProducts = props.featuredProducts,
-      onProductClick = props.onProductClick,
-      handleSearchRedirect = props.handleSearchRedirect,
-      handleChangeSearch = props.handleChangeSearch,
-      setOpenBusinessInformation = props.setOpenBusinessInformation,
-      handleCartOpen = props.handleCartOpen,
-      isCustomLayout = props.isCustomLayout,
-      useKioskApp = props.useKioskApp,
-      setSubcategoriesSelected = props.setSubcategoriesSelected,
-      subcategoriesSelected = props.subcategoriesSelected,
-      isLazy = props.isLazy,
-      handleUpdateProducts = props.handleUpdateProducts,
-      handleChangeProfessionalSelected = props.handleChangeProfessionalSelected,
-      professionalSelected = props.professionalSelected,
-      onBusinessClick = props.onBusinessClick,
-      pfChangsCategories = props.pfChangsCategories;
+    isError = props.isError,
+    isLoading = props.isLoading,
+    business = props.business,
+    categoryId = props.categoryId,
+    searchValue = props.searchValue,
+    sortByValue = props.sortByValue,
+    currentCart = props.currentCart,
+    businessState = props.businessState,
+    sortByOptions = props.sortByOptions,
+    categoryState = props.categoryState,
+    categorySelected = props.categorySelected,
+    openCategories = props.openCategories,
+    openBusinessInformation = props.openBusinessInformation,
+    isCartOnProductsList = props.isCartOnProductsList,
+    handleChangeSortBy = props.handleChangeSortBy,
+    errorQuantityProducts = props.errorQuantityProducts,
+    handler = props.handler,
+    onClickCategory = props.onClickCategory,
+    featuredProducts = props.featuredProducts,
+    onProductClick = props.onProductClick,
+    handleSearchRedirect = props.handleSearchRedirect,
+    handleChangeSearch = props.handleChangeSearch,
+    setOpenBusinessInformation = props.setOpenBusinessInformation,
+    handleCartOpen = props.handleCartOpen,
+    isCustomLayout = props.isCustomLayout,
+    useKioskApp = props.useKioskApp,
+    setSubcategoriesSelected = props.setSubcategoriesSelected,
+    subcategoriesSelected = props.subcategoriesSelected,
+    isLazy = props.isLazy,
+    handleUpdateProducts = props.handleUpdateProducts,
+    handleChangeProfessionalSelected = props.handleChangeProfessionalSelected,
+    professionalSelected = props.professionalSelected,
+    onBusinessClick = props.onBusinessClick,
+    pfChangsCategories = props.pfChangsCategories;
   var theme = (0, _styledComponents.useTheme)();
-
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useUtils = (0, _orderingComponents.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    parsePrice = _useUtils2[0].parsePrice;
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-      orderingTheme = _useOrderingTheme2[0];
-
+    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+    orderingTheme = _useOrderingTheme2[0];
   var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isCartModal = _useState2[0],
-      setisCartModal = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    isCartModal = _useState2[0],
+    setisCartModal = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      openSearchProducts = _useState4[0],
-      setOpenSearchProducts = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    openSearchProducts = _useState4[0],
+    setOpenSearchProducts = _useState4[1];
   var _useState5 = (0, _react.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      subcategorySelected = _useState6[0],
-      setSubcategorySelected = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    subcategorySelected = _useState6[0],
+    setSubcategorySelected = _useState6[1];
   var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      showGoTopButton = _useState8[0],
-      setShowGoTopButton = _useState8[1];
-
+    _useState8 = _slicedToArray(_useState7, 2),
+    showGoTopButton = _useState8[0],
+    setShowGoTopButton = _useState8[1];
   var isUseParentCategory = ((configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1') && !useKioskApp;
   var headerType = theme === null || theme === void 0 ? void 0 : (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 ? void 0 : (_theme$business_view$ = _theme$business_view.components) === null || _theme$business_view$ === void 0 ? void 0 : (_theme$business_view$2 = _theme$business_view$.header) === null || _theme$business_view$2 === void 0 ? void 0 : (_theme$business_view$3 = _theme$business_view$2.components) === null || _theme$business_view$3 === void 0 ? void 0 : (_theme$business_view$4 = _theme$business_view$3.layout) === null || _theme$business_view$4 === void 0 ? void 0 : _theme$business_view$4.type;
   var BusinessBasicInformationComponent = headerType === 'red' ? _seven.BusinessBasicInformation : headerType === 'starbucks' ? _six.BusinessBasicInformation : headerType === 'old' ? _BusinessBasicInformation2.BusinessBasicInformation : headerType === 'pfchangs' ? _pfchangs3.BusinessBasicInformationPFChangs : _BusinessBasicInformation.BusinessBasicInformation;
@@ -188,7 +130,6 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   var categoriesMode = theme === null || theme === void 0 ? void 0 : (_theme$business_view8 = theme.business_view) === null || _theme$business_view8 === void 0 ? void 0 : (_theme$business_view9 = _theme$business_view8.components) === null || _theme$business_view9 === void 0 ? void 0 : (_theme$business_view10 = _theme$business_view9.categories) === null || _theme$business_view10 === void 0 ? void 0 : (_theme$business_view11 = _theme$business_view10.components) === null || _theme$business_view11 === void 0 ? void 0 : (_theme$business_view12 = _theme$business_view11.layout) === null || _theme$business_view12 === void 0 ? void 0 : _theme$business_view12.type;
   var pfchangsSubcategories = business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : (_business$categories$ = _business$categories.filter(function (category) {
     var _category$name, _category$name$toLowe, _category$name2, _category$name2$toLow;
-
     return (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name) === t('CATERING_MENU', 'Catering Menu') ? category === null || category === void 0 ? void 0 : (_category$name = category.name) === null || _category$name === void 0 ? void 0 : (_category$name$toLowe = _category$name.toLowerCase()) === null || _category$name$toLowe === void 0 ? void 0 : _category$name$toLowe.includes(t('CATERING', 'catering')) : !(category !== null && category !== void 0 && (_category$name2 = category.name) !== null && _category$name2 !== void 0 && (_category$name2$toLow = _category$name2.toLowerCase()) !== null && _category$name2$toLow !== void 0 && _category$name2$toLow.includes(t('CATERING', 'catering')));
   })) === null || _business$categories$ === void 0 ? void 0 : _business$categories$.sort(function (a, b) {
     return a.rank - b.rank;
@@ -197,7 +138,6 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   var BusinessLayoutProductsList = headerType === 'pfchangs' ? _pfchangs2.BusinessProductsList : businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
   var BusinessLayoutCategoriesSkeleton = headerType === 'pfchangs' ? _pfchangs.BusinessProductsCategories : _BusinessProductsCategories.BusinessProductsCategories;
   var BusinessLayoutProductsListSkeleton = headerType === 'pfchangs' ? _pfchangs2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
-
   var handleScrollToTop = function handleScrollToTop() {
     setTimeout(function () {
       window.scrollTo({
@@ -206,7 +146,6 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       });
     }, 300);
   };
-
   var handleShowGoTopButton = function handleShowGoTopButton() {
     if (window.scrollY > 500) {
       setShowGoTopButton(true);
@@ -214,7 +153,6 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       setShowGoTopButton(false);
     }
   };
-
   (0, _react.useEffect)(function () {
     if (headerType === 'pfchangs') {
       window.addEventListener('scroll', handleShowGoTopButton);
@@ -272,7 +210,6 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   _react.default.createElement(BusinessLayoutCategories, {
     categories: categoriesMode === 'twocategories' ? pfChangsCategories : headerType === 'pfchangs' ? business === null || business === void 0 ? void 0 : business.categories.filter(function (category) {
       var _category$subcategori;
-
       return (category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0;
     }).sort(function (a, b) {
       return a.rank - b.rank;
@@ -353,7 +290,6 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       return a.rank - b.rank;
     })) === null || _categorySelected$sor === void 0 ? void 0 : _categorySelected$sor.map(function (category) {
       var _categorySelected$pro;
-
       return _objectSpread(_objectSpread({}, category), {}, {
         products: categorySelected === null || categorySelected === void 0 ? void 0 : (_categorySelected$pro = categorySelected.products) === null || _categorySelected$pro === void 0 ? void 0 : _categorySelected$pro.filter(function (product) {
           return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
@@ -546,5 +482,4 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart')))))));
 };
-
 exports.RenderProductsLayout = RenderProductsLayout;
