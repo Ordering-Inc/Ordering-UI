@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HomeHero = void 0;
 var _react = _interopRequireDefault(require("react"));
+var _styledComponents = require("styled-components");
 var _OriginalHomeHero = require("./layouts/OriginalHomeHero");
 var _RedHomeHero = require("./layouts/RedHomeHero");
 var _StarbucksHomeHero = require("./layouts/StarbucksHomeHero");
@@ -13,12 +14,13 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 var HomeHero = function HomeHero(props) {
-  var _HomeLayoutConfig$hom, _HomeLayoutConfig$hom2, _HomeLayoutConfig$hom3, _HomeLayoutConfig$hom4;
+  var _theme$homepage_view, _theme$homepage_view$, _theme$homepage_view$2, _theme$homepage_view2, _theme$homepage_view3, _theme$homepage_view4, _HomeLayoutConfig$hom, _HomeLayoutConfig$hom2, _HomeLayoutConfig$hom3, _HomeLayoutConfig$hom4;
+  var theme = (0, _styledComponents.useTheme)();
   var HomeLayoutConfig = {
     homepage_settings: {
-      layout: 'original',
+      layout: (theme === null || theme === void 0 ? void 0 : (_theme$homepage_view = theme.homepage_view) === null || _theme$homepage_view === void 0 ? void 0 : (_theme$homepage_view$ = _theme$homepage_view.components) === null || _theme$homepage_view$ === void 0 ? void 0 : (_theme$homepage_view$2 = _theme$homepage_view$.layout) === null || _theme$homepage_view$2 === void 0 ? void 0 : _theme$homepage_view$2.type) || 'original',
       // 'original', 'starbucks', 'red'
-      contentPosition: 'left' // 'left', 'right', top, 'bottom', 'center'
+      contentPosition: (theme === null || theme === void 0 ? void 0 : (_theme$homepage_view2 = theme.homepage_view) === null || _theme$homepage_view2 === void 0 ? void 0 : (_theme$homepage_view3 = _theme$homepage_view2.components) === null || _theme$homepage_view3 === void 0 ? void 0 : (_theme$homepage_view4 = _theme$homepage_view3.layout) === null || _theme$homepage_view4 === void 0 ? void 0 : _theme$homepage_view4.position) || 'left' // 'left', 'right', top, 'bottom', 'center'
     }
   };
 
