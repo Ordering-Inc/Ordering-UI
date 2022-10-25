@@ -171,7 +171,7 @@ const BusinessControllerUI = (props) => {
                     <span className='crown'>
                       <FaCrown />
                     </span>}
-                  {!isCustomLayout && (configState?.configs?.preorder_status_enabled?.value === '1') && (
+                  {!hideBusinessOffer && !isCustomLayout && (configState?.configs?.preorder_status_enabled?.value === '1') && (
                     <div>
                       {getBusinessOffer((businessOffers ?? business?.offers)) && <span>{getBusinessOffer((businessOffers ?? business?.offers)) || parsePrice(0)}</span>}
                       {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
@@ -234,7 +234,7 @@ const BusinessControllerUI = (props) => {
                   )}
                 </div>
                 <Medadata isCustomerMode={isCustomerMode} isSkeleton={isSkeleton}>
-                  {orderType === 1 && (
+                  {!hideBusinessFee && orderType === 1 && (
                     <>
                       {(businessDeliveryPrice ?? business?.delivery_price) >= 0 ? (
                         <p>
@@ -246,21 +246,29 @@ const BusinessControllerUI = (props) => {
                       )}
                     </>
                   )}
-                  {Object.keys(business).length > 0 ? (
-                    <p className='bullet'>
-                      <GoPrimitiveDot />
-                      {convertHoursToMinutes(orderState?.options?.type === 1 ? (businessDeliveryTime ?? business?.delivery_time) : (businessPickupTime ?? business?.pickup_time)) || <Skeleton width={100} />}
-                    </p>
-                  ) : (
-                    <Skeleton width={65} />
+                  {!hideBusinessTime && (
+                    <>
+                      {Object.keys(business).length > 0 ? (
+                        <p className='bullet'>
+                          <GoPrimitiveDot />
+                          {convertHoursToMinutes(orderState?.options?.type === 1 ? (businessDeliveryTime ?? business?.delivery_time) : (businessPickupTime ?? business?.pickup_time)) || <Skeleton width={100} />}
+                        </p>
+                      ) : (
+                        <Skeleton width={65} />
+                      )}
+                    </>
                   )}
-                  {(businessDistance ?? business?.distance) >= 0 ? (
-                    <p className='bullet'>
-                      <GoPrimitiveDot />
-                      {parseDistance((businessDistance ?? business?.distance))}
-                    </p>
-                  ) : (
-                    <Skeleton width={65} />
+                  {!hideBusinessDistance && (
+                    <>
+                      {(businessDistance ?? business?.distance) >= 0 ? (
+                        <p className='bullet'>
+                          <GoPrimitiveDot />
+                          {parseDistance((businessDistance ?? business?.distance))}
+                        </p>
+                      ) : (
+                        <Skeleton width={65} />
+                      )}
+                    </>
                   )}
                   {isCustomerMode && hasInformationLength && (
                     <CallCenterInformation>

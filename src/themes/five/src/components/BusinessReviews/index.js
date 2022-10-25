@@ -39,10 +39,10 @@ export const BusinessReviewsUI = (props) => {
     if (raiting) handleClickOption(raiting)
   }
 
-  const showRanking = !orderingTheme?.theme?.business_view?.components?.reviews?.components?.ranking?.hidden
-  const showReviewDate = !orderingTheme?.theme?.business_view?.components?.reviews?.components?.review_date?.hidden
-  const showCustomerComments = !orderingTheme?.theme?.business_view?.components?.reviews?.components?.customer_comments?.hidden
-  const showSearch = !orderingTheme?.theme?.business_view?.components?.reviews?.components?.search?.hidden
+  const showRanking = !orderingTheme?.theme?.business_view?.components?.review?.components?.ranking?.hidden
+  const showReviewDate = !orderingTheme?.theme?.business_view?.components?.review?.components?.review_date?.hidden
+  const showCustomerComments = !orderingTheme?.theme?.business_view?.components?.review?.components?.customer_comments?.hidden
+  const showSearch = !orderingTheme?.theme?.business_view?.components?.review?.components?.search?.hidden
   const hideElement = !(!showReviewDate && !showCustomerComments)
 
   const reviewPoints = [1, 2, 3, 4, 5]

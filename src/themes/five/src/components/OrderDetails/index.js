@@ -143,6 +143,7 @@ const OrderDetailsUI = (props) => {
   const showCustomerPhone = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.phone?.hidden
   const showCustomerAddress = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.address?.hidden
   const showCustomerEmail = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.email?.hidden
+  const showCustomerPhoto = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.photo?.hidden
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -595,7 +596,7 @@ const OrderDetailsUI = (props) => {
             </OrderBusiness>
             <OrderCustomer>
               <BusinessWrapper>
-                {order?.customer?.photo && (
+                {showCustomerPhoto && order?.customer?.photo && (
                   <img src={order?.customer?.photo} />
                 )}
                 <BusinessInfo>
