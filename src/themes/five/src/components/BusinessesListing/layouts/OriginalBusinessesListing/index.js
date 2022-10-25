@@ -96,7 +96,9 @@ const BusinessesListingUI = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [favoriteIds, setFavoriteIds] = useState([])
   const hideCities = theme?.business_listing_view?.components?.cities?.hidden ?? true
-
+  const hideSearch = theme?.business_listing_view?.components?.search?.hidden
+  const hideFilter = theme?.business_listing_view?.components?.filter?.hidden
+  const hideSearchSection = hideCities && hideSearch && hideFilter
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
@@ -313,23 +315,25 @@ const BusinessesListingUI = (props) => {
         {isCustomerMode && (
           <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />
         )}
-        {!isCustomerMode && (
+        {!isCustomerMode && !hideSearchSection && (
           <>
             <WrapperSearch isCustomLayout={isCustomLayout} isCustomerMode={isCustomerMode}>
-              <SearchBar
-                lazyLoad
-                search={searchValue}
-                isCustomLayout={isCustomLayout}
-                placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-                onSearch={handleChangeSearch}
-                handleCustomEnter={() => onRedirectPage({ page: 'business_search' })}
-              />
+              {!hideSearch && (
+                <SearchBar
+                  lazyLoad
+                  search={searchValue}
+                  isCustomLayout={isCustomLayout}
+                  placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                  onSearch={handleChangeSearch}
+                  handleCustomEnter={() => onRedirectPage({ page: 'business_search' })}
+                />
+              )}
               {!hideCities && citiesState?.cities?.length > 0 && (
                 <Button color='primary' onClick={handleOpenCities}>
                   {citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)?.name || t('SELECT_A_CITY', 'Select a city')}
                 </Button>
               )}
-              {configs?.advanced_business_search_enabled?.value === '1' && (
+              {!hideFilter && configs?.advanced_business_search_enabled?.value === '1' && (
                 <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
               )}
               {isCustomLayout && (
