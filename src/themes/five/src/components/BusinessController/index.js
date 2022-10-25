@@ -78,6 +78,13 @@ const BusinessControllerUI = (props) => {
   const favoriteRef = useRef(null)
 
   const businessRows = orderingTheme?.theme?.business_listing_view?.components?.layout?.rows
+  const hideBusinessLogo = theme?.business_listing_view?.components?.business?.components?.logo?.hidden
+  const hideBusinessFee = theme?.business_listing_view?.components?.business?.components?.fee?.hidden
+  const hideBusinessTime = theme?.business_listing_view?.components?.business?.components?.time?.hidden
+  const hideBusinessDistance = theme?.business_listing_view?.components?.business?.components?.distance?.hidden
+  const hideBusinessReviews = theme?.business_listing_view?.components?.business?.components?.reviews?.hidden
+  const hideBusinessFavorite = theme?.business_listing_view?.components?.business?.components?.favorite?.hidden
+  const hideBusinessOffer = theme?.business_listing_view?.components?.business?.components?.offer?.hidden
 
   // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
@@ -163,7 +170,7 @@ const BusinessControllerUI = (props) => {
                     <span className='crown'>
                       <FaCrown />
                     </span>}
-                  {!isCustomLayout && (configState?.configs?.preorder_status_enabled?.value === '1') && (
+                  {!hideBusinessOffer && !isCustomLayout && (configState?.configs?.preorder_status_enabled?.value === '1') && (
                     <div>
                       {getBusinessOffer((businessOffers ?? business?.offers)) && <span>{getBusinessOffer((businessOffers ?? business?.offers)) || parsePrice(0)}</span>}
                       {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
@@ -179,33 +186,41 @@ const BusinessControllerUI = (props) => {
           </BusinessHero>
           <BusinessContent>
             <BusinessLogoWrapper>
-              <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
-                {!isSkeleton && (businessLogo || business?.logo || theme.images?.dummies?.businessLogo) ? (
-                  <BusinessLogo bgimage={optimizeImage((businessLogo || business?.logo || theme.images?.dummies?.businessLogo), 'h_200,c_limit')} />
-                ) : (
-                  <Skeleton height={70} width={70} />
-                )}
-              </WrapperBusinessLogo>
-              <BusinessStarInfo>
-                {!isSkeleton ? (
-                  (businessReviews ?? business?.reviews?.total) > 0 && (
-                    <div className='reviews'>
-                      <BisStar />
-                      <span>{(businessReviews ?? business?.reviews?.total)}</span>
-                    </div>
-                  )
-                ) : (
-                  <Skeleton width={50} />
-                )}
-                <FavoriteWrapper ref={favoriteRef} onClick={handleChangeFavorite}>
-                  {!isSkeleton ? (
-                    <>
-                      {(business?.favorite) ? <Like /> : <DisLike />}
-                    </>
+              {!hideBusinessLogo && (
+                <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
+                  {!isSkeleton && (businessLogo || business?.logo || theme.images?.dummies?.businessLogo) ? (
+                    <BusinessLogo bgimage={optimizeImage((businessLogo || business?.logo || theme.images?.dummies?.businessLogo), 'h_200,c_limit')} />
                   ) : (
-                    <Skeleton width={16} height={16} />
+                    <Skeleton height={70} width={70} />
                   )}
-                </FavoriteWrapper>
+                </WrapperBusinessLogo>
+              )}
+              <BusinessStarInfo>
+                {!hideBusinessReviews && (
+                  <>
+                    {!isSkeleton ? (
+                      (businessReviews ?? business?.reviews?.total) > 0 && (
+                        <div className='reviews'>
+                          <BisStar />
+                          <span>{(businessReviews ?? business?.reviews?.total)}</span>
+                        </div>
+                      )
+                    ) : (
+                      <Skeleton width={50} />
+                    )}
+                  </>
+                )}
+                {!hideBusinessFavorite && (
+                  <FavoriteWrapper ref={favoriteRef} onClick={handleChangeFavorite}>
+                    {!isSkeleton ? (
+                      <>
+                        {(business?.favorite) ? <Like /> : <DisLike />}
+                      </>
+                    ) : (
+                      <Skeleton width={16} height={16} />
+                    )}
+                  </FavoriteWrapper>
+                )}
               </BusinessStarInfo>
             </BusinessLogoWrapper>
             <BusinessInfo className='info'>
@@ -218,7 +233,7 @@ const BusinessControllerUI = (props) => {
                   )}
                 </div>
                 <Medadata isCustomerMode={isCustomerMode} isSkeleton={isSkeleton}>
-                  {orderType === 1 && (
+                  {!hideBusinessFee && orderType === 1 && (
                     <>
                       {(businessDeliveryPrice ?? business?.delivery_price) >= 0 ? (
                         <p>
@@ -230,21 +245,29 @@ const BusinessControllerUI = (props) => {
                       )}
                     </>
                   )}
-                  {Object.keys(business).length > 0 ? (
-                    <p className='bullet'>
-                      <GoPrimitiveDot />
-                      {convertHoursToMinutes(orderState?.options?.type === 1 ? (businessDeliveryTime ?? business?.delivery_time) : (businessPickupTime ?? business?.pickup_time)) || <Skeleton width={100} />}
-                    </p>
-                  ) : (
-                    <Skeleton width={65} />
+                  {!hideBusinessTime && (
+                    <>
+                      {Object.keys(business).length > 0 ? (
+                        <p className='bullet'>
+                          <GoPrimitiveDot />
+                          {convertHoursToMinutes(orderState?.options?.type === 1 ? (businessDeliveryTime ?? business?.delivery_time) : (businessPickupTime ?? business?.pickup_time)) || <Skeleton width={100} />}
+                        </p>
+                      ) : (
+                        <Skeleton width={65} />
+                      )}
+                    </>
                   )}
-                  {(businessDistance ?? business?.distance) >= 0 ? (
-                    <p className='bullet'>
-                      <GoPrimitiveDot />
-                      {parseDistance((businessDistance ?? business?.distance))}
-                    </p>
-                  ) : (
-                    <Skeleton width={65} />
+                  {!hideBusinessDistance && (
+                    <>
+                      {(businessDistance ?? business?.distance) >= 0 ? (
+                        <p className='bullet'>
+                          <GoPrimitiveDot />
+                          {parseDistance((businessDistance ?? business?.distance))}
+                        </p>
+                      ) : (
+                        <Skeleton width={65} />
+                      )}
+                    </>
                   )}
                   {isCustomerMode && hasInformationLength && (
                     <CallCenterInformation>

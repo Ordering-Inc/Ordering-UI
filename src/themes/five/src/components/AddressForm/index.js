@@ -77,8 +77,8 @@ const AddressFormUI = (props) => {
       : formState.changes?.location ?? null
   )
 
-  const isHideMap = orderingTheme?.theme?.header?.components?.address_form?.components?.map?.hidden
-  const isHideIcons = orderingTheme?.theme?.header?.components?.address_form?.components?.icons?.hidden
+  const isHideMap = orderingTheme?.theme?.address?.components?.map?.hidden
+  const isHideIcons = orderingTheme?.theme?.address?.components?.icons?.hidden
 
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
