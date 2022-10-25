@@ -296,7 +296,7 @@ const PaymentOptionsUI = (props) => {
               paymethod={isOpenMethod?.paymethod}
               businessId={props.businessId}
               publicKey={isOpenMethod?.paymethod?.credentials?.stripe?.publishable}
-              clientSecret={isOpenMethod?.paymethod?.credentials.publishable}
+              clientSecret={isOpenMethod?.paymethod?.credentials?.publishable}
               payType={paymethodsList?.name}
               onSelectCard={handlePaymethodDataChange}
               onCancel={() => handlePaymethodClick(null)}
