@@ -105,7 +105,7 @@ const ServiceFormUI = (props) => {
       return
     }
     const values = {
-      serviceTime: parseDate(dateSelected, { outputFormat: 'YYYY-MM-DD HH:mm:00' }),
+      serviceTime: moment(dateSelected).utc().format('YYYY-MM-DD HH:mm:00'),
       professional: currentProfessional
     }
     handleSave(values)
