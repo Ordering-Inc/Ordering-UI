@@ -12,9 +12,38 @@ export const InnerHeader = styled.div`
   width: 100%;
   color: #FFF;
   justify-content: space-between;
-  width: 98%;
-  margin: 15px auto;
+  margin: 15px 0;
   align-items: center;
+
+  #left-side {
+    width: 20%;
+    justify-content: flex-start;
+  }
+  #right-side {
+    width: 20%;
+    justify-content: flex-end;
+  }
+  #center-side {
+    width: calc(60% - 30px);
+  }
+
+  @media (min-width: 1024px) {
+    #center-side {
+      width: calc(60% - 140px);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    #center-side {
+      width: calc(60% - 200px);
+    }
+  }
+
+  @media (min-width: 1500px) {
+    #center-side {
+      width: calc(60% - 260px);
+    }
+  }
 `
 
 export const LogoHeader = styled.div`
@@ -75,7 +104,7 @@ export const Menu = styled.div`
 
   #select-input {
     border-radius: 7.6px;
-    
+
     #list {
       border-radius: 7.6px;
     }
@@ -85,7 +114,7 @@ export const Menu = styled.div`
       height: 40px;
       border-color: #CCC;
       background-color: #CCC !important;
-      
+
       svg {
         font-size: 16px;
       }
@@ -126,7 +155,7 @@ export const Menu = styled.div`
       padding: 0 20px;
       margin: 0 70px;
     }
-    
+
     @media (min-width: 1200px) {
       padding: 0 30px;
       margin: 0 100px;
@@ -275,14 +304,21 @@ export const AddressMenu = styled.div`
   align-items: center;
   position: relative;
 
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  span {
+    width: 85%;
+    p {
+      margin: 0;
+      padding: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
 
   ${({ isCustomerMode }) => isCustomerMode ? css`
-  flex: 0.8;
+    flex: 0.8;
   ` : css`
-    width: 100%;
+    width: 50%;
   `}
 
   svg {
@@ -301,7 +337,7 @@ export const AddressMenu = styled.div`
   }
   @media (min-width: 820px) {
     ${({ isCustomerMode }) => !isCustomerMode && css`
-      width: 100%;
+      width: 50%;
     `}
   }
 `
