@@ -129,9 +129,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
       return;
     }
     var values = {
-      serviceTime: parseDate(dateSelected, {
-        outputFormat: 'YYYY-MM-DD HH:mm:00'
-      }),
+      serviceTime: (0, _moment.default)(dateSelected).utc().format('YYYY-MM-DD HH:mm:00'),
       professional: currentProfessional
     };
     handleSave(values);

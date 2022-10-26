@@ -38,7 +38,8 @@ var SmartAppBanneUI = function SmartAppBanneUI(props) {
       android: t('FREE', 'Free'),
       windows: t('FREE', 'Free'),
       kindle: t('FREE', 'Free')
-    }
+    },
+    ignoreIosVersion: true
   }));
 };
 var SmartAppBanner = function SmartAppBanner(props) {
