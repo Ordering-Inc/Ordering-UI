@@ -22,11 +22,13 @@ export const OrderTypeSelectorContentUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderStatus] = useOrder()
-
+  const theme = useTheme()
   const handleClickOrderType = (orderType) => {
     onClose && onClose()
     handleChangeOrderType && handleChangeOrderType(orderType)
   }
+
+  const orderTypeImage = (type) => theme?.header?.components?.order_types?.components?.[type]?.components?.image
 
   return (
     <div className='order-type' style={{ overflow: 'hidden' }}>
@@ -42,7 +44,7 @@ export const OrderTypeSelectorContentUI = (props) => {
           orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value)) : orderTypes).map((item, i) => (
             <OrderTypeListItemContainer
               key={i}
-              bgimage={item?.image}
+              bgimage={orderTypeImage(item?.text?.replace(' ', '_')?.toLowerCase()) || item?.image}
               onClick={() => handleClickOrderType(item.value)}
               active={orderStatus?.options?.type === item?.value}
             >
