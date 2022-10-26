@@ -819,7 +819,7 @@ const ProductOptionsUI = (props) => {
 export const ProductForm = (props) => {
   const productOptionsProps = {
     ...props,
-    productCart: { quantity: props?.product?.maximum_per_order || props?.product?.minimum_per_order || 1 },
+    productCart: { quantity: props?.product?.minimum_per_order || 1 },
     UIComponent: ProductOptionsUI
   }
 
