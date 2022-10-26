@@ -25,6 +25,7 @@ const SmartAppBanneUI = (props) => {
           windows: t('FREE', 'Free'),
           kindle: t('FREE', 'Free')
         }}
+        ignoreIosVersion
       />
     </>
   )
