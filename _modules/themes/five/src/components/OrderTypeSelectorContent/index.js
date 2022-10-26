@@ -32,9 +32,14 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderStatus = _useOrder2[0];
+  var theme = (0, _styledComponents.useTheme)();
   var handleClickOrderType = function handleClickOrderType(orderType) {
     onClose && onClose();
     handleChangeOrderType && handleChangeOrderType(orderType);
+  };
+  var orderTypeImage = function orderTypeImage(type) {
+    var _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _theme$header$compone4, _theme$header$compone5;
+    return theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.order_types) === null || _theme$header$compone2 === void 0 ? void 0 : (_theme$header$compone3 = _theme$header$compone2.components) === null || _theme$header$compone3 === void 0 ? void 0 : (_theme$header$compone4 = _theme$header$compone3[type]) === null || _theme$header$compone4 === void 0 ? void 0 : (_theme$header$compone5 = _theme$header$compone4.components) === null || _theme$header$compone5 === void 0 ? void 0 : _theme$header$compone5.image;
   };
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "order-type",
@@ -52,10 +57,10 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), orderTypes && (configTypes ? orderTypes.filter(function (type) {
     return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
   }) : orderTypes).map(function (item, i) {
-    var _orderStatus$options;
+    var _item$text, _item$text$replace, _orderStatus$options;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListItemContainer, {
       key: i,
-      bgimage: item === null || item === void 0 ? void 0 : item.image,
+      bgimage: orderTypeImage(item === null || item === void 0 ? void 0 : (_item$text = item.text) === null || _item$text === void 0 ? void 0 : (_item$text$replace = _item$text.replace(' ', '_')) === null || _item$text$replace === void 0 ? void 0 : _item$text$replace.toLowerCase()) || (item === null || item === void 0 ? void 0 : item.image),
       onClick: function onClick() {
         return handleClickOrderType(item.value);
       },
