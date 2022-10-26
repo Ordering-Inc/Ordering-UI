@@ -32,7 +32,7 @@ var Title = _styledComponents.default.h1(_templateObject5 || (_templateObject5 =
   return props.theme.colors.darkTextColor;
 });
 exports.Title = Title;
-var LoginWith = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-bottom: 1px solid #E9ECEF;\n  font-size: 14px;\n  margin-bottom: 10px;\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (_ref5) {
+var LoginWith = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: ", ";\n  border-bottom: 1px solid #E9ECEF;\n  font-size: 14px;\n  margin-bottom: 10px;\n  overflow-x: auto;\n\n  -ms-overflow-style: none;  /* IE and Edge */\n  scrollbar-width: none;  /* Firefox */\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: ", ";\n  }\n\n  @media (min-width: 1200px) {\n    ", ";\n  }\n"])), function (_ref5) {
   var isPopup = _ref5.isPopup;
   return isPopup ? '100%' : '80%';
 }, function (_ref6) {

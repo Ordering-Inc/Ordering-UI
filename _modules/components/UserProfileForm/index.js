@@ -8,6 +8,7 @@ exports.UserProfileForm = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponents = require("ordering-components");
+var _useWindowSize = require("../../hooks/useWindowSize");
 var _UserFormDetails = require("../UserFormDetails");
 var _UserFormDetails2 = require("../../themes/five/src/components/UserFormDetails");
 var _AddressList = require("../AddressList");
@@ -18,6 +19,7 @@ var _utils = require("../../utils");
 var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 var _styles = require("./styles");
+var _LogoutButton = require("../LogoutButton");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -61,6 +63,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
+  var windowSize = (0, _useWindowSize.useWindowSize)();
   var showCustomerPicture = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.profile) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.picture) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
   var showCustomerName = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.profile) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.name) !== null && _orderingTheme$theme5 !== void 0 && _orderingTheme$theme5.hidden);
   var showCustomerLastName = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme6 = orderingTheme.theme) !== null && _orderingTheme$theme6 !== void 0 && (_orderingTheme$theme7 = _orderingTheme$theme6.profile) !== null && _orderingTheme$theme7 !== void 0 && (_orderingTheme$theme8 = _orderingTheme$theme7.components) !== null && _orderingTheme$theme8 !== void 0 && (_orderingTheme$theme9 = _orderingTheme$theme8.last_name) !== null && _orderingTheme$theme9 !== void 0 && _orderingTheme$theme9.hidden);
@@ -181,7 +184,17 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     onClick: function onClick() {
       return toggleEditState(true);
     }
-  }, t('EDIT', 'Edit'))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, userFormLayoutColumn ? /*#__PURE__*/_react.default.createElement(_UserFormDetails2.UserFormDetailsUI, _extends({}, props, {
+  }, t('EDIT', 'Edit')), windowSize.width <= 576 && props.showLogout && /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
+    hideText: true,
+    styleContainer: {
+      margin: 'auto',
+      width: 24
+    },
+    styleWrappContent: {
+      paddingRight: 0,
+      paddingLeft: 0
+    }
+  })) : /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, userFormLayoutColumn ? /*#__PURE__*/_react.default.createElement(_UserFormDetails2.UserFormDetailsUI, _extends({}, props, {
     onCancel: toggleEditState,
     onCloseProfile: function onCloseProfile() {
       return setEdit(false);

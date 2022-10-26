@@ -136,7 +136,6 @@ var LoginFormUI = function LoginFormUI(props) {
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
     _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
     otpLeftTime = _useCountdownTimer2[0],
-    _ = _useCountdownTimer2[1],
     resetOtpLeftTime = _useCountdownTimer2[2];
   var isOtpEmail = loginTab === 'otp' && otpType === 'email';
   var isOtpCellphone = loginTab === 'otp' && otpType === 'cellphone';

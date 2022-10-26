@@ -269,7 +269,9 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     professionals: business === null || business === void 0 ? void 0 : business.professionals,
     professionalSelected: professionalSelected,
     handleChangeProfessionalSelected: handleChangeProfessionalSelected
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoriesContainer, null, !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoriesContainer, {
+    offSticky: true
+  }, !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {
     component: "categories",
     categories: [{
       id: null,
