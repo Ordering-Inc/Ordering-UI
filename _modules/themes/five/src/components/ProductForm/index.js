@@ -730,10 +730,10 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }));
 };
 var ProductForm = function ProductForm(props) {
-  var _props$product, _props$product2;
+  var _props$product;
   var productOptionsProps = _objectSpread(_objectSpread({}, props), {}, {
     productCart: {
-      quantity: (props === null || props === void 0 ? void 0 : (_props$product = props.product) === null || _props$product === void 0 ? void 0 : _props$product.maximum_per_order) || (props === null || props === void 0 ? void 0 : (_props$product2 = props.product) === null || _props$product2 === void 0 ? void 0 : _props$product2.minimum_per_order) || 1
+      quantity: (props === null || props === void 0 ? void 0 : (_props$product = props.product) === null || _props$product === void 0 ? void 0 : _props$product.minimum_per_order) || 1
     },
     UIComponent: ProductOptionsUI
   });
