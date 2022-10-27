@@ -4,9 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.useOutsideClick = void 0;
-
 var _react = require("react");
-
 /**
  * Execute the cb function when an event click
  * is triggered outside ref component
@@ -18,12 +16,10 @@ var useOutsideClick = function useOutsideClick(ref, cb) {
     var handleClickOutside = function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) cb();
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return function () {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);
 };
-
 exports.useOutsideClick = useOutsideClick;
