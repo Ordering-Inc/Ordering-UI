@@ -114,6 +114,8 @@ const OrderDetailsUI = (props) => {
   const [isOrderHistory, setIsOrderHistory] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isShowBusinessLogo, setIsShowBusinessLogo] = useState(true)
+  const [dateTimeETA, setDateTimeETA] = useState(null)
+  const statusDelayInfo = JSON.parse(configs.eta_messages_config.value);
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
   const acceptedStatus = [1, 2, 5, 6, 10, 11, 12]
@@ -145,6 +147,8 @@ const OrderDetailsUI = (props) => {
     ? ConfirmPFChangs
     : Confirm
   const defaultLayoutThemes = ['original', 'pfchangs']
+
+  let delayedETA = 0
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -299,6 +303,41 @@ const OrderDetailsUI = (props) => {
     setUnreadAlert
   }
 
+  const verifyOrderOnTime = () => {
+      let updated_at = null
+      delayedETA = 0
+      if (order.updated_at) {
+        updated_at = new Date(order.updated_at+' UTC');
+      }
+      if (order.updated_at && (order.delivery_type == 1 && statusDelayInfo[order.status].Show_delay_delivery || order.delivery_type == 2 && statusDelayInfo[order.status].Show_delay_pick_up)) {
+        let currentTime = new Date()
+        let delayETA = currentTime.getTime() - updated_at.getTime()
+        delayETA = Math.floor(delayETA / 60000)
+        if (delayETA > order.eta_current_status_time) {
+          delayETA = delayETA - order.eta_current_status_time
+          delayedETA = delayETA
+          return true
+        }
+        return false
+      }
+      return false
+  }
+
+  const getEstimatedDeliveryTime = () => {
+    if (layout === 'pfchangs') {
+      let estimatedDeliverytime = new Date(order.delivery_datetime)
+      if (verifyOrderOnTime()) {
+        estimatedDeliverytime.setMinutes(estimatedDeliverytime.getMinutes() + order.eta_drive_time + delayedETA);
+        return setDateTimeETA(parseDate(estimatedDeliverytime))
+      } else {
+        estimatedDeliverytime.setMinutes(estimatedDeliverytime.getMinutes() + order.eta_drive_time);
+        return setDateTimeETA(parseDate(estimatedDeliverytime))
+      }
+    } else {
+      return setDateTimeETA(order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false }))
+    }
+  }
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -343,6 +382,14 @@ const OrderDetailsUI = (props) => {
     setIsService(_isService)
     businessLogoUrlValidation()
   }, [order])
+
+  useEffect(() => {
+    if (loading) return
+    const intervalETA = setInterval(() => getEstimatedDeliveryTime(), 1000);
+    return () => {
+      clearInterval(intervalETA)
+    }
+  }, [loading]);
 
   const ButtonComponent = layout === 'pfchangs'
     ? ButtonPF
@@ -447,11 +494,7 @@ const OrderDetailsUI = (props) => {
                 )}
                 {showDeliveryDate && (
                   <p className='date'>
-                    {
-                      order?.delivery_datetime_utc
-                        ? parseDate(order?.delivery_datetime_utc)
-                        : parseDate(order?.delivery_datetime, { utc: false })
-                    }
+                    { dateTimeETA }
                   </p>
                 )}
                 {
