@@ -7,14 +7,17 @@ import {
   TitleContainer,
   Title,
   Flag,
-  OptionThumbnail
+  OptionThumbnail,
+  RedFlag
 } from './styles'
 
 const ProductOptionUI = (props) => {
   const {
     children,
     option,
-    pfchangs
+    pfchangs,
+    error,
+    showRedFlags
   } = props
 
   const [, t] = useLanguage()
@@ -45,6 +48,11 @@ const ProductOptionUI = (props) => {
             <Flag>{maxMin}</Flag>
           ) : (
             <Flag>{t('SELECT_1_OPTION', 'Select 1 option')}</Flag>
+          )}
+          {error && showRedFlags && (
+            <RedFlag>
+              {t('PLEASE_MAKE_THE_REQUIRED_SELECTION', 'Please make the required selection')}: {t('CHOOSE', 'Choose')} {option.min}
+            </RedFlag>
           )}
         </WrapHeader>
         {children}

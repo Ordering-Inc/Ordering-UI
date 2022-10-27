@@ -72,6 +72,7 @@ import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
 import { PlaceSpot } from '../PlaceSpot'
 import { VaXMiCuenta } from '../VaXMiCuenta'
+import { MomentContent as MomentContentPF } from '../MomentContent/layouts/pfchangs'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -105,7 +106,8 @@ const CheckoutUI = (props) => {
     vaXMiCuenta,
     handleChangeVaXMiCuenta,
     uberDirect,
-    applyCoupon
+    applyCoupon,
+    hasCateringProducts
   } = props
 
   const theme = useTheme()
@@ -146,7 +148,7 @@ const CheckoutUI = (props) => {
   }
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
-  const daysForApplyCoupon = [0,2,4] // Domingo 0
+  const daysForApplyCoupon = [0, 2, 4] // Domingo 0
   const isApplyMasterCoupon = daysForApplyCoupon.includes(moment().days());
 
   const isDisablePlaceOrderButton = !cart?.valid ||
@@ -457,6 +459,14 @@ const CheckoutUI = (props) => {
 
           {!useKioskApp && (
             <>
+              {layout === 'pfchangs' && (
+                <>
+                  <SubtitleContainer>
+                    <h2>{t('PREORDER_CONFIGUTARION', 'Preorder configuration')}</h2>
+                  </SubtitleContainer>
+                  <MomentContentPF hasCateringProducts={hasCateringProducts} />
+                </>
+              )}
               {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
                 <>
                   {layout === 'pfchangs' && (

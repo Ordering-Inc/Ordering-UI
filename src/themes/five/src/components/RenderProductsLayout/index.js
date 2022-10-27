@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
 import { Cart3 } from 'react-bootstrap-icons'
-import EnChevronThinUp from '@meronex/icons/en/EnChevronThinUp';
+import EnChevronThinUp from '@meronex/icons/en/EnChevronThinUp'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
 import { BusinessBasicInformation as BusinessBasicInformationStarbucks } from '../../../../six'
@@ -85,7 +85,8 @@ export const RenderProductsLayout = (props) => {
     handleChangeProfessionalSelected,
     professionalSelected,
     onBusinessClick,
-    pfChangsCategories
+    pfChangsCategories,
+    enabledCatering
   } = props
 
   const theme = useTheme()
@@ -99,7 +100,9 @@ export const RenderProductsLayout = (props) => {
   const [showGoTopButton, setShowGoTopButton] = useState(false)
   const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1') && !useKioskApp
   const headerType = theme?.business_view?.components?.header?.components?.layout?.type
-
+  const showPrincipalCategories = headerType === 'pfchangs'
+    ? !(business?.categories?.length === 0 && !categoryId) && enabledCatering && headerType === 'pfchangs'
+    : !(business?.categories?.length === 0 && !categoryId)
   const BusinessBasicInformationComponent =
     headerType === 'red'
       ? BusinessBasicInformationRed
@@ -233,7 +236,7 @@ export const RenderProductsLayout = (props) => {
                       )
                     }
                     {
-                      !(business?.categories?.length === 0 && !categoryId) && headerType !== 'pfchangs' && ( // delete headerType !== 'pfchangs' when alsea wants
+                      showPrincipalCategories && (
                         <BusinessLayoutCategories
                           categories={
                             categoriesMode === 'twocategories'

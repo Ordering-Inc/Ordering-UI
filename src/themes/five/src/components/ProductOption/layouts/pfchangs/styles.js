@@ -69,3 +69,7 @@ export const OptionThumbnail = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+export const RedFlag = styled.p`
+  color: ${({ theme }) => theme?.colors?.primary};
+`

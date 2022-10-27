@@ -101,6 +101,7 @@ const ProductOptionsUI = (props) => {
   const [gallery, setGallery] = useState([])
   const [isScrollAvailable, setIsScrollAvailable] = useState(false)
   const [otpDataUser, setOtpDataUser] = useState(null)
+  const [showRedFlags, setShowRedFlags] = useState(false)
   const isAlsea = ordering.project === 'alsea'
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -128,17 +129,8 @@ const ProductOptionsUI = (props) => {
       handleCustomSave && handleCustomSave()
       return
     }
-    const myElement = document.getElementsByClassName('error')[0]
-    const productContainer = document.getElementsByClassName('product-container')[0]
-    if (!myElement || !productContainer) {
-      return
-    }
-    let topPos = myElement.offsetTop - productContainer.offsetTop
-    if (windowSize.width <= 768) {
-      const productImage = document.getElementById('product_image')
-      topPos = topPos + (myElement.offsetTop < productImage?.clientHeight ? productImage?.clientHeight : 0)
-    }
-    scrollTo(productContainer, topPos, 1250)
+    setShowRedFlags(true)
+    scrollDown()
   }
 
   const handleCustomModalClick = (e, { page }) => {
@@ -362,6 +354,7 @@ const ProductOptionsUI = (props) => {
                               currentState={currentState}
                               error={errors[`id:${option?.id}`]}
                               pfchangs
+                              showRedFlags={showRedFlags}
                             >
                               <WrapperSubOption className={isError(option?.id)}>
                                 {
@@ -451,7 +444,7 @@ const ProductOptionsUI = (props) => {
 
               {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                 <Button
-                  className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
+                  className={`add ${maxProductQuantity === 0 ? 'disabled' : ''}`}
                   color='primary'
                   onClick={() => handleSaveProduct()}
                   disabled={orderState.loading || productCart?.quantity === 0 || (product?.minimum_per_order && (productCart?.quantity < product?.minimum_per_order)) || (product?.maximum_per_order && (productCart?.quantity > product?.maximum_per_order))}
