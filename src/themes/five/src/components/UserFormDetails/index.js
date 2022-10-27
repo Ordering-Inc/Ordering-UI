@@ -13,8 +13,11 @@ import {
   Divider,
   InputPhoneNumberWrapper,
   LanguageSelectorWrapper,
-  PromotionsWrapper
+  SwitchWrapper,
+  NotificationsGroupSwitchWrapper
 } from './styles'
+
+import { Switch } from '../../../../../styles/Switch'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
@@ -42,7 +45,8 @@ export const UserFormDetailsUI = (props) => {
     setWillVerifyOtpState,
     handleChangePromotions,
     isOldLayout,
-    requiredFields
+    requiredFields,
+    handleChangeNotifications
   } = props
 
   const formMethods = useForm()
@@ -57,13 +61,26 @@ export const UserFormDetailsUI = (props) => {
   const [, { setUserCustomer }] = useCustomer()
   const [isChanged, setIsChanged] = useState(false)
   const emailInput = useRef(null)
-
+  
   const user = userData || userSession
-
+  
+  const [notificationList, setNotificationList] = useState({
+    email: formState?.result?.result
+      ? !!formState?.result?.result?.settings?.email?.newsletter
+      : !!(formState?.changes?.settings?.email?.newsletter ?? (user && user?.settings?.email?.newsletter)),
+    sms: formState?.result?.result
+      ? !!formState?.result?.result?.settings?.sms?.newsletter
+      : !!(formState?.changes?.settings?.sms?.newsletter ?? (user && user?.settings?.sms?.newsletter)),
+    notification: formState?.result?.result
+      ? !!formState?.result?.result?.settings?.notification?.newsletter
+      : !!(formState?.changes?.settings?.notification?.newsletter ?? (user && user?.settings?.notification?.newsletter))
+  })
+  
   const showCustomerCellphone = !orderingTheme?.theme?.profile?.components?.cellphone?.hidden
   const showCustomerPassword = !orderingTheme?.theme?.profile?.components?.password?.hidden
   const showCustomerPromotions = !orderingTheme?.theme?.profile?.components?.promotions?.hidden
   const showLangauges = !orderingTheme?.theme?.profile?.components?.languages?.hidden
+  const showNotifications = !orderingTheme?.theme?.profile?.components?.notification_settings?.hidden
 
   const closeAlert = () => {
     setAlertState({
@@ -251,6 +268,17 @@ export const UserFormDetailsUI = (props) => {
     if (requiredFields && !requiredFields.includes('cellphone')) setIsValidPhoneNumber(true)
   }, [requiredFields])
 
+  const handleEditNotifications = (key, value) => {
+    setNotificationList({
+      ...notificationList,
+      [key]: value
+    })
+  }
+
+  useEffect(()=> {
+    isEdit && handleChangeNotifications(notificationList)
+  },[notificationList])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -359,28 +387,36 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputGroup>
             )}
-            {!isCheckout && showCustomerPromotions && (
-              <PromotionsWrapper>
-                <Checkbox
-                  name='promotions'
-                  id='promotions'
-                  onChange={() => handleChangePromotions(!(formState?.result?.result
-                    ? !!formState?.result?.result?.settings?.notification?.newsletter
-                    : formState?.changes?.settings?.notification?.newsletter ?? (user && user?.settings?.notification?.newsletter)))}
-                  defaultChecked={formState?.result?.result
-                    ? !!formState?.result?.result?.settings?.notification?.newsletter
-                    : !!(formState?.changes?.settings?.notification?.newsletter ?? (user && user?.settings?.notification?.newsletter))}
-                />
-                <label
-                  htmlFor='promotions'
-                >
-                  <span>{t('RECEIVE_NEWS_EXCLUSIVE_PROMOTIONS', 'Receive newsletters and exclusive promotions')}</span>
-                </label>
-              </PromotionsWrapper>
+            {showNotifications && showCustomerPromotions && !requiredFields && (
+              <>
+                <NotificationsGroupSwitchWrapper>
+                  <p>{t('MARKETING_NOTIFICATIONS', 'Marketing Notifications')}</p>
+                  <SwitchWrapper>
+                    <p>{t('EMAILS', 'Emails')}</p>
+                    <Switch
+                      onChange={value => handleEditNotifications('email', value)}
+                      defaultChecked={notificationList?.email}
+                    />
+                  </SwitchWrapper>
+                  <SwitchWrapper>
+                    <p>{t('SMS', 'Sms')}</p>
+                    <Switch
+                      onChange={value => handleEditNotifications('sms', value)}
+                      defaultChecked={notificationList?.sms}
+                    />
+                  </SwitchWrapper>
+                  <SwitchWrapper>
+                    <p>{t('PUSH_NOTIFICATIONS', 'Push Notifications')}</p>
+                    <Switch
+                      onChange={value => handleEditNotifications('notification', value)}
+                      defaultChecked={notificationList?.notification}
+                    />
+                  </SwitchWrapper>
+                </NotificationsGroupSwitchWrapper>
+              </>
             )}
             {showLangauges && !requiredFields && (
               <>
-                <Divider />
                 <LanguageSelectorWrapper>
                   <p>{t('LANGUAGE', 'Language')}</p>
                   <LanguageSelector />
