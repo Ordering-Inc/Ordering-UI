@@ -1,19 +1,13 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
-
 var _react2 = require("@cypress/react");
-
 var _BusinessBasicInformation = require("../components/BusinessBasicInformation");
-
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var setOpenBusinessInformation = function setOpenBusinessInformation() {
   console.log('set open business information');
 };
-
 var businessState = {
   loading: false,
   business: {

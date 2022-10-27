@@ -1,15 +1,10 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
-
 var _react2 = require("@cypress/react");
-
 var _OrderDetails = require("../components/OrderDetails");
-
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var order = {
   id: 598,
   uuid: 'dd4f7670-bac2-41c7-8243-d78da84d07b5',
