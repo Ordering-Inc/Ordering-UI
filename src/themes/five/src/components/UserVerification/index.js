@@ -51,7 +51,7 @@ const UserVerificationUI = (props) => {
     sendVerifyPhoneCode,
     checkVerifyEmailCode,
     checkVerifyPhoneCode,
-    cleanErrorsState,
+    cleanErrorsState
   } = props
 
   const [, t] = useLanguage()
@@ -70,7 +70,7 @@ const UserVerificationUI = (props) => {
   const phoneLength = phoneState?.cellphone && phoneState?.country_phone_code && phoneState?.cellphone?.split('')?.length
   const lastNumbers = phoneState?.cellphone && phoneState?.country_phone_code && phoneState?.cellphone?.split('').fill('*', 0, phoneLength - 2).join('')
 
-  const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(
+  const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
     600,
     isEmailVerifyRequired
       ? verificationState.email
@@ -119,7 +119,6 @@ const UserVerificationUI = (props) => {
           country_phone_code: +(phoneState?.country_phone_code),
           code: otpState
         })
-        return
       }
     }
   }, [otpState])
@@ -128,18 +127,18 @@ const UserVerificationUI = (props) => {
     if (verifyEmailState?.errorSendCode || verifyEmailState?.errorCheckCode) {
       setAlertState({
         open: true,
-        content: verifyEmailState?.errorSendCode?.[0]
-          ?? verifyEmailState?.errorCheckCode?.[0]
-          ?? t('ERROR', 'Error')
+        content: verifyEmailState?.errorSendCode?.[0] ??
+          verifyEmailState?.errorCheckCode?.[0] ??
+          t('ERROR', 'Error')
       })
     }
 
     if (verifyPhoneState?.errorSendCode || verifyPhoneState?.errorCheckCode) {
       setAlertState({
         open: true,
-        content: verifyPhoneState?.errorSendCode?.[0]
-          ?? verifyPhoneState?.errorCheckCode?.[0]
-          ?? t('ERROR', 'Error')
+        content: verifyPhoneState?.errorSendCode?.[0] ??
+          verifyPhoneState?.errorCheckCode?.[0] ??
+          t('ERROR', 'Error')
       })
     }
   }, [verifyEmailState, verifyPhoneState])
@@ -158,6 +157,12 @@ const UserVerificationUI = (props) => {
       })
     }
   }, [verifyEmailState, verifyPhoneState])
+
+  useEffect(() => {
+    if (otpState) {
+      setOtpState('')
+    }
+  }, [verificationState])
 
   useEffect(() => {
     setupUserPhoneNumber()
@@ -275,8 +280,8 @@ const UserVerificationUI = (props) => {
                     user={user}
                     value={phoneState?.formatted}
                     disabled={!!phoneState?.formatted}
-                    setValue={() =>{}}
-                    handleIsValid={() =>{}}
+                    setValue={() => {}}
+                    handleIsValid={() => {}}
                   />
                 </InputWrapper>
                 <Button
