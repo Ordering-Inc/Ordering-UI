@@ -257,7 +257,7 @@ export const BackToTop = styled.div`
   border-radius: 6px;
   cursor: pointer;
   font-weight: 900;
-
+  opacity: 0.9;
   svg {
     font-size: 25px;
   }

@@ -44,7 +44,8 @@ const MomentControlUI = (props) => {
     handleChangeDate,
     handleChangeTime,
     isAppoint,
-    hasCateringProducts
+    hasCateringProducts,
+    cateringHours
   } = props
 
   const [{ configs }] = useConfig()
@@ -202,7 +203,7 @@ const MomentControlUI = (props) => {
     let _timeLists = []
     if (!scheduleList) {
       _timeLists = hoursList
-        .filter(hour => moment(addHours(3)) < moment(dateSelected + ` ${hour.startTime}`) || !hasCateringProducts)
+        .filter(hour => moment(addHours(cateringHours || 3)) < moment(dateSelected + ` ${hour.startTime}`) || !hasCateringProducts)
         .map(hour => {
           return {
             value: hour.startTime,
@@ -223,7 +224,7 @@ const MomentControlUI = (props) => {
   }, [dateSelected, hoursList, scheduleList, hasCateringProducts])
 
   useEffect(() => {
-    handleCheckBoxChange(isAsap)
+    handleCheckBoxChange(hasCateringProducts ? null : isAsap) // hasCateringProducts ? null : isAsap
   }, [isAsap])
 
   useEffect(() => {
@@ -242,7 +243,7 @@ const MomentControlUI = (props) => {
 
   return (
     <div id='moment_control'>
-      {!isAppoint && (
+      {!isAppoint && !hasCateringProducts && (
         <SelectContainer>
           <Select
             placeholder={t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')}

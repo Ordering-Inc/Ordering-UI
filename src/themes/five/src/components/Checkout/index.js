@@ -107,7 +107,8 @@ const CheckoutUI = (props) => {
     handleChangeVaXMiCuenta,
     uberDirect,
     applyCoupon,
-    hasCateringProducts
+    hasCateringProducts,
+    cateringHours
   } = props
 
   const theme = useTheme()
@@ -464,7 +465,7 @@ const CheckoutUI = (props) => {
                   <SubtitleContainer>
                     <h2>{t('PREORDER_CONFIGUTARION', 'Preorder configuration')}</h2>
                   </SubtitleContainer>
-                  <MomentContentPF hasCateringProducts={hasCateringProducts} />
+                  <MomentContentPF hasCateringProducts={hasCateringProducts} cateringHours={cateringHours} />
                 </>
               )}
               {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (

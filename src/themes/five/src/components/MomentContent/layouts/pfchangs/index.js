@@ -35,6 +35,7 @@ export const MomentContent = (props) => {
           {...momentProps}
           onClose={props.onClose}
           hasCateringProducts={props.hasCateringProducts}
+          cateringHours={props.cateringHours}
         />
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
