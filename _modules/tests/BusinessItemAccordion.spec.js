@@ -1,10 +1,15 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
+
 var _react2 = require("@cypress/react");
+
 var _BusinessItemAccordion = require("../components/BusinessItemAccordion");
+
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var cart = {
   uuid: '9c99f26b-4600-4456-bd22-259120e5d666',
   total: 10,
