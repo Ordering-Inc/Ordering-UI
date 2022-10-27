@@ -430,7 +430,7 @@ const BusinessProductsListingUI = (props) => {
                 professionalList={business?.professionals}
                 professionalSelected={professionalSelected}
                 handleChangeProfessional={handleChangeProfessionalSelected}
-                productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0)}
+                productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0) || 0}
               />
             ) : (
               <ProductForm
@@ -439,7 +439,7 @@ const BusinessProductsListingUI = (props) => {
                 product={productModal.product || curProduct}
                 businessId={business?.id}
                 onSave={handlerProductAction}
-                productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0)}
+                productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0) || 0}
               />
             )}
           </>

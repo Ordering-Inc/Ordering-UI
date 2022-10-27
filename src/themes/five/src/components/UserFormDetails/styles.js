@@ -182,3 +182,29 @@ export const PromotionsWrapper = styled.div`
     }
   }
 `
+
+export const NotificationsGroupSwitchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #E9ECEF;
+  
+  > p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 20px;
+    color: ${props => props.theme.colors.darkTextColor};
+    width: 100%;
+    text-align: left;
+  }
+`
+
+export const SwitchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`
