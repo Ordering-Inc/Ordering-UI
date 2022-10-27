@@ -34,7 +34,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductOptionUI = function ProductOptionUI(props) {
   var children = props.children,
       option = props.option,
-      pfchangs = props.pfchangs;
+      pfchangs = props.pfchangs,
+      error = props.error,
+      showRedFlags = props.showRedFlags;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -60,7 +62,7 @@ var ProductOptionUI = function ProductOptionUI(props) {
     src: option.image
   }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("span", null, option.name)), (option === null || option === void 0 ? void 0 : option.min) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Flag, {
     required: (option === null || option === void 0 ? void 0 : option.min) > 0
-  }, t('REQUIRED', 'Required'))), !(option.min === 1 && option.max === 1) ? /*#__PURE__*/_react.default.createElement(_styles.Flag, null, maxMin) : /*#__PURE__*/_react.default.createElement(_styles.Flag, null, t('SELECT_1_OPTION', 'Select 1 option'))), children));
+  }, t('REQUIRED', 'Required'))), !(option.min === 1 && option.max === 1) ? /*#__PURE__*/_react.default.createElement(_styles.Flag, null, maxMin) : /*#__PURE__*/_react.default.createElement(_styles.Flag, null, t('SELECT_1_OPTION', 'Select 1 option')), error && showRedFlags && /*#__PURE__*/_react.default.createElement(_styles.RedFlag, null, t('PLEASE_MAKE_THE_REQUIRED_SELECTION', 'Please make the required selection'), ": ", t('CHOOSE', 'Choose'), " ", option.min)), children));
 };
 
 var ProductOption = function ProductOption(props) {

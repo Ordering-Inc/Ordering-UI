@@ -175,15 +175,20 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       otpDataUser = _useState10[0],
       setOtpDataUser = _useState10[1];
 
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      showRedFlags = _useState12[0],
+      setShowRedFlags = _useState12[1];
+
   var isAlsea = ordering.project === 'alsea';
 
-  var _useState11 = (0, _react.useState)({
+  var _useState13 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState12 = _slicedToArray(_useState11, 2),
-      alertState = _useState12[0],
-      setAlertState = _useState12[1];
+      _useState14 = _slicedToArray(_useState13, 2),
+      alertState = _useState14[0],
+      setAlertState = _useState14[1];
 
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
 
@@ -212,21 +217,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return;
     }
 
-    var myElement = document.getElementsByClassName('error')[0];
-    var productContainer = document.getElementsByClassName('product-container')[0];
-
-    if (!myElement || !productContainer) {
-      return;
-    }
-
-    var topPos = myElement.offsetTop - productContainer.offsetTop;
-
-    if (windowSize.width <= 768) {
-      var productImage = document.getElementById('product_image');
-      topPos = topPos + (myElement.offsetTop < (productImage === null || productImage === void 0 ? void 0 : productImage.clientHeight) ? productImage === null || productImage === void 0 ? void 0 : productImage.clientHeight : 0);
-    }
-
-    (0, _utils.scrollTo)(productContainer, topPos, 1250);
+    setShowRedFlags(true);
+    scrollDown();
   };
 
   var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
@@ -470,7 +462,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         option: option,
         currentState: currentState,
         error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)],
-        pfchangs: true
+        pfchangs: true,
+        showRedFlags: showRedFlags
       }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
         className: isError(option === null || option === void 0 ? void 0 : option.id)
       }, option.suboptions.filter(function (suboptions) {
@@ -529,7 +522,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onClick: increment,
     className: "".concat(maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : '')
   })))), productCart && !isSoldOut && maxProductQuantity > 0 && auth && ((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    className: "add ".concat(maxProductQuantity === 0 || Object.keys(errors).length > 0 ? 'disabled' : ''),
+    className: "add ".concat(maxProductQuantity === 0 ? 'disabled' : ''),
     color: "primary",
     onClick: function onClick() {
       return handleSaveProduct();

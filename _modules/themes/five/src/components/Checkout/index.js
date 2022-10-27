@@ -67,6 +67,8 @@ var _PlaceSpot = require("../PlaceSpot");
 
 var _VaXMiCuenta = require("../VaXMiCuenta");
 
+var _pfchangs4 = require("../MomentContent/layouts/pfchangs");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -138,7 +140,8 @@ var CheckoutUI = function CheckoutUI(props) {
       vaXMiCuenta = props.vaXMiCuenta,
       handleChangeVaXMiCuenta = props.handleChangeVaXMiCuenta,
       uberDirect = props.uberDirect,
-      applyCoupon = props.applyCoupon;
+      applyCoupon = props.applyCoupon,
+      hasCateringProducts = props.hasCateringProducts;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
@@ -508,7 +511,9 @@ var CheckoutUI = function CheckoutUI(props) {
     style: {
       marginBottom: '10px'
     }
-  }))), !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartState.loading && deliveryOptionSelected !== undefined && (options === null || options === void 0 ? void 0 : options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_styles.SubtitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_DETAILS', 'Delivery Details'))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryOptionsContainer, null, layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_DETAILS', 'Delivery Details')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  }))), !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SubtitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PREORDER_CONFIGUTARION', 'Preorder configuration'))), /*#__PURE__*/_react.default.createElement(_pfchangs4.MomentContent, {
+    hasCateringProducts: hasCateringProducts
+  })), !cartState.loading && deliveryOptionSelected !== undefined && (options === null || options === void 0 ? void 0 : options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_styles.SubtitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_DETAILS', 'Delivery Details'))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryOptionsContainer, null, layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_DETAILS', 'Delivery Details')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     defaultValue: deliveryOptionSelected,
     options: deliveryOptions,
     onChange: function onChange(val) {
