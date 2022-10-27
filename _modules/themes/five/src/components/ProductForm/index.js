@@ -18,7 +18,7 @@ var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _ProductIngredient = require("../ProductIngredient");
 var _ProductOption = require("../ProductOption");
 var _ProductOptionSubOption = require("../ProductOptionSubOption");
-var _ProductShare = require("../../../../../components/ProductShare");
+var _ProductShare = require("../ProductShare");
 var _LoginForm = require("../LoginForm");
 var _SignUpForm = require("../SignUpForm");
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
@@ -406,7 +406,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     defaultUrl: urlToShare,
     slug: businessSlug,
     categoryId: product === null || product === void 0 ? void 0 : product.category_id,
-    productId: product === null || product === void 0 ? void 0 : product.id
+    productId: product === null || product === void 0 ? void 0 : product.id,
+    product: product
   }) : /*#__PURE__*/_react.default.createElement("div", {
     style: {
       height: 30
