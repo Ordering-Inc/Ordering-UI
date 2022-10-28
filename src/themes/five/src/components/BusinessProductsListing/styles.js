@@ -31,12 +31,12 @@ export const MobileCartViewWrapper = styled.div`
   left: 0;
   bottom: 0;
   background-color: white;
-  padding: 10px 25px;
+  padding: 15px 25px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  z-index: 1000;
+  z-index: 1006;
   box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
 
   span {
