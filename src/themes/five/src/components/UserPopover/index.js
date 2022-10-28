@@ -20,7 +20,7 @@ import AiOutlineMenu from '@meronex/icons/ai/AiOutlineMenu'
 const optionsDefault = [
   { name: 'search', pathname: '/explore', displayName: 'My home', key: 'my_home' },
   { name: 'business_search', pathname: '/business_search', displayName: 'Browse & Search', key: 'browse_search' },
-  { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders' },
+  { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders' }
 ]
 
 export const UserPopover = (props) => {

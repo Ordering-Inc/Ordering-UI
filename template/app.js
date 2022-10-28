@@ -667,7 +667,7 @@ export const App = () => {
             {!isFooterPage && (
               <Footer />
             )}
-            {(windowSize.width < 576 && onlineStatus) && (
+            {windowSize.width < 576 && onlineStatus && (
               <NavigationBar />
             )}
             <Alert
