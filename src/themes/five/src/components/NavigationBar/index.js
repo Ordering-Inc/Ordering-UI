@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTheme } from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import { useLanguage, useEvent, useOrder, useSession } from 'ordering-components'
 import BsHouse from '@meronex/icons/bs/BsHouse'
@@ -10,6 +11,9 @@ import FaRegUser from '@meronex/icons/fa/FaRegUser'
 import { CartContent } from '../CartContent'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
+import { LoginForm } from '../LoginForm'
+import { SignUpForm } from '../SignUpForm'
+import { ForgotPasswordForm } from '../ForgotPasswordForm'
 
 import {
   NavigationBarContainer,
@@ -17,24 +21,54 @@ import {
 } from './styles'
 
 export const NavigationBar = () => {
+  const theme = useTheme()
   const [, t] = useLanguage()
   const location = useLocation()
   const [events] = useEvent()
   const [orderState] = useOrder()
-  const [{ auth }] = useSession()
+  const [{ auth }, { login }] = useSession()
   const [isCart, setIsCart] = useState(false)
   const [isAddress, setIsAddress] = useState(false)
+  const [modalPageToShow, setModalPageToShow] = useState(null)
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
   const handleGoToPage = (data) => {
-    events.emit('go_to_page', data)
+    auth
+      ? events.emit('go_to_page', data)
+      : handleOpenLoginSignUp('login')
   }
 
   const handleChangeExplore = () => {
     auth
       ? handleGoToPage({ page: 'search' })
       : setIsAddress(true)
+  }
+
+  const handleOpenLoginSignUp = (index) => {
+    setModalPageToShow(index)
+  }
+
+  const handleCustomModalClick = (e, { page }) => {
+    e.preventDefault()
+    setModalPageToShow(page)
+  }
+
+  const closeAuthModal = () => {
+    setModalPageToShow(null)
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) {
+      closeAuthModal()
+    }
+  }
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
   }
 
   const itemlist = {
@@ -119,6 +153,65 @@ export const NavigationBar = () => {
           onCancel={() => setIsAddress(false)}
           onSaveAddress={() => setIsAddress(false)}
         />
+      </Modal>
+      <Modal
+        open={modalPageToShow && !auth}
+        onRemove={() => closeAuthModal()}
+        width='50%'
+        authModal
+      >
+        {modalPageToShow === 'login' && (
+          <LoginForm
+            handleSuccessLogin={handleSuccessLogin}
+            elementLinkToSignup={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'signup' })
+                } href='#'
+              >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
+              </a>
+            }
+            elementLinkToForgotPassword={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                } href='#'
+              >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+              </a>
+            }
+            useLoginByCellphone
+            isPopup
+          />
+        )}
+        {modalPageToShow === 'signup' && (
+          <SignUpForm
+            elementLinkToLogin={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'login' })
+                } href='#'
+              >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+              </a>
+            }
+            useLoginByCellphone
+            useChekoutFileds
+            handleSuccessSignup={handleSuccessSignup}
+            isPopup
+          />
+        )}
+        {modalPageToShow === 'forgotpassword' && (
+          <ForgotPasswordForm
+            elementLinkToLogin={
+              <a
+                onClick={
+                  (e) => handleCustomModalClick(e, { page: 'login' })
+                } href='#'
+              >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+              </a>
+            }
+            isPopup
+          />
+        )}
       </Modal>
     </>
   )
