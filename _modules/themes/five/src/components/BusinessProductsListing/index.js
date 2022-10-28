@@ -447,20 +447,20 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     professionalList: business === null || business === void 0 ? void 0 : business.professionals,
     professionalSelected: professionalSelected,
     handleChangeProfessional: handleChangeProfessionalSelected,
-    productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.reduce(function (productsLength, Cproduct) {
+    productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.reduce(function (productsLength, Cproduct) {
       var _ref2;
       return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === ((_ref2 = productModal.product || curProduct) === null || _ref2 === void 0 ? void 0 : _ref2.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-    }, 0)
+    }, 0)) || 0
   }) : /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     businessSlug: business === null || business === void 0 ? void 0 : business.slug,
     useKioskApp: props.useKioskApp,
     product: productModal.product || curProduct,
     businessId: business === null || business === void 0 ? void 0 : business.id,
     onSave: handlerProductAction,
-    productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products7 = currentCart.products) === null || _currentCart$products7 === void 0 ? void 0 : _currentCart$products7.reduce(function (productsLength, Cproduct) {
+    productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products7 = currentCart.products) === null || _currentCart$products7 === void 0 ? void 0 : _currentCart$products7.reduce(function (productsLength, Cproduct) {
       var _ref3;
       return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === ((_ref3 = productModal.product || curProduct) === null || _ref3 === void 0 ? void 0 : _ref3.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-    }, 0)
+    }, 0)) || 0
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState === null || alertState === void 0 ? void 0 : alertState.open,
