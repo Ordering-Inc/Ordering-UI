@@ -47,23 +47,42 @@ export const CustomerInfoContainer = styled.div`
   padding: 30px 25px;
   margin-top: 48px;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  @media (min-width: 576px) {
+    flex-direction: row;
+  }
 `
+
 export const CustomerDetails = styled.div`
   flex: 1;
   > div {
     display: flex;
+    flex-direction: column;
     margin-top: 24px;
+  }
+
+  @media (min-width: 576px) {
+    > div {
+      flex-direction: row;
+    }
   }
 `
 export const PaymentDetails = styled.div`
   flex: 1;
-  h3.address {
+  h3 {
     margin-top: 30px;
   }
   p {
     font-size: 14px;
     line-height: 24px;
     margin: 10px 0;
+  }
+
+  @media (min-width: 576px) {
+    h3:not(.address) {
+      margin-top: 0;
+    }
   }
 `
 export const PhotoWrapper = styled.div`
@@ -154,6 +173,7 @@ export const SingleOrderHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
 
   > div {
     > div {
@@ -173,6 +193,10 @@ export const SingleOrderHeader = styled.div`
   button {
     height: 43px;
   }
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+  }
 `
 export const OrderBusinessDetails = styled.div`
   display: flex;
@@ -181,8 +205,14 @@ export const OrderBusinessDetails = styled.div`
 `
 export const OrderBusinessWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+  }
 `
 export const BusinessData = styled.div`
+  margin-top: 10px;
   p {
     font-size: 14px;
     line-height: 21px;
@@ -190,6 +220,9 @@ export const BusinessData = styled.div`
     &.bold {
       font-weight: 500;
     }
+  }
+  @media (min-width: 576px) {
+    margin-top: 0px;
   }
 `
 export const ActionsBlock = styled.div`
