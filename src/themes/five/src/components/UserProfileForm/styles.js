@@ -17,6 +17,55 @@ export const UserProfileContainer = styled.div`
   }
 `
 
+export const ProfileOptionsList = styled.div`
+  width: 100%;
+
+  a, div {
+    font-weight: normal;
+  }
+`
+
+const PopoverListItemStyles = css`
+  display: flex;
+  padding: 10px 0;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #000000;
+  border-radius: 7.6px;
+
+  svg {
+    margin-right: 5px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 5px;
+      margin-right: 0px;
+    `}
+  }
+
+  :hover {
+    cursor: pointer;
+    background-color: #f8f8f8;
+  }
+
+  :last-child {
+    border-bottom: 0;
+  }
+`
+
+export const ListItem = styled.div`
+  ${PopoverListItemStyles}
+  margin-bottom: 10px;
+`
+
+export const ListLink = styled.a`
+  ${PopoverListItemStyles}
+  text-decoration: none;
+
+  ${({ active }) => active && css`
+    background-color: #eee;
+  `}
+`
+
 export const UserImage = styled.div`
   display: flex;
   flex-direction: column;

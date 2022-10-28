@@ -243,12 +243,6 @@ export const RenderProductsLayout = (props) => {
                       </WrapperSearchAbsolute>
                     )}
                   </div>
-                  {/* {windowSize.width < 500 && (
-                    <MobileCartViewWrapper>
-                      <span>{currentCart?.products?.length > 0 ? parsePrice(currentCart?.total) : parsePrice(0)}</span>
-                      <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>
-                    </MobileCartViewWrapper>
-                  )} */}
                   <WrapContent id='businessProductList'>
                     {!business?.loading && business?.previously_products?.length > 0 && (
                       <OrderItAgain

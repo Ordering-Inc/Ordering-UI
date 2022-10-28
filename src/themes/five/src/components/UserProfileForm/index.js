@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   UserFormDetails as UserProfileController,
+  LogoutAction as LogoutActionController,
+  useConfig,
+  useEvent,
+  useCustomer,
   useLanguage,
   useSession,
   DragAndDrop,
@@ -19,7 +23,7 @@ import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 
 import { ProfileOptions } from './ProfileOptions'
-import { bytesConverter } from '../../../../../utils'
+import { bytesConverter, capitalize } from '../../../../../utils'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
 import {
@@ -32,9 +36,45 @@ import {
   SavedPlaces,
   UploadImageIcon,
   SkeletonWrapper,
-  WrapperForm
+  WrapperForm,
+  ProfileOptionsList,
+  ListLink,
+  ListItem
 } from './styles'
-import { LogoutButton } from '../../../../../components/LogoutButton'
+
+const LogoutActionUI = (props) => {
+  const [, t] = useLanguage()
+  const [, { deleteUserCustomer }] = useCustomer()
+
+  const handleClick = () => {
+    const GoogleAuth = window?.gapi?.auth2?.getAuthInstance()
+    if (GoogleAuth) {
+      const signedIn = GoogleAuth.isSignedIn.get()
+      if (signedIn) {
+        GoogleAuth.signOut().then(() => {
+          GoogleAuth.disconnect()
+        })
+      }
+    }
+
+    deleteUserCustomer(true)
+    props.handleLogoutClick()
+  }
+  return (
+    <ListItem onClick={handleClick}>
+      {t('LOGOUT', 'Logout')}
+    </ListItem>
+  )
+}
+
+const ListItemLogout = () => {
+  const logoutActionProps = {
+    UIComponent: LogoutActionUI
+  }
+  return (
+    <LogoutActionController {...logoutActionProps} />
+  )
+}
 
 const UserProfileFormUI = (props) => {
   const {
@@ -44,6 +84,7 @@ const UserProfileFormUI = (props) => {
     formState,
     cleanFormState,
     toggleIsEdit,
+    isCustomerMode,
     isHiddenAddress,
     handleSendVerifyCode,
     verifyPhoneState,
@@ -51,7 +92,9 @@ const UserProfileFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [events] = useEvent()
   const [{ user }] = useSession()
+  const [{ configs }] = useConfig()
   const [orderingTheme] = useOrderingTheme()
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
@@ -63,6 +106,22 @@ const UserProfileFormUI = (props) => {
   const showCustomerPicture = !orderingTheme?.theme?.profile?.components?.picture?.hidden
   const showAddressList = !orderingTheme?.theme?.profile?.components?.address_list?.hidden
   const userFormLayoutRow = orderingTheme?.theme?.profile?.components?.layout?.position === 'row'
+
+  const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
+  const isAddressListNewPage = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
+  const isWalletEnabled = configs?.cash_wallet?.value &&
+    configs?.wallet_enabled?.value === '1' &&
+    (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
+
+  const profileOptions = [
+    { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: isWalletEnabled && !isCustomerMode },
+    { name: 'promotions', pathname: '/promotions', displayName: 'promotions', key: 'promotions', isActive: isPromotionsEnabled },
+    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !isCustomerMode },
+    { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true },
+    { name: 'sessions', pathname: '/sessions', displayName: 'sessions', key: 'sessions', isActive: true },
+    { name: 'favorite', pathname: '/favorite', displayName: 'favorites', key: 'favorites', isActive: true },
+    { name: 'addresses', pathname: '/profile/addresses', displayName: 'places', key: 'places', isActive: isAddressListNewPage }
+  ]
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -117,6 +176,10 @@ const UserProfileFormUI = (props) => {
     }
   }
 
+  const handleGoToPage = (page) => {
+    events.emit('go_to_page', { page })
+  }
+
   useEffect(() => {
     if (formState.changes?.photo) {
       const isImage = true
@@ -169,7 +232,7 @@ const UserProfileFormUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      {!isHiddenAddress && (
+      {!isHiddenAddress && !props.hideOptions && (
         <ProfileOptions value='account' />
       )}
       <Container>
@@ -206,7 +269,18 @@ const UserProfileFormUI = (props) => {
             </UserImage>
           )}
           {windowSize.width <= 576 && (
-            <LogoutButton styleWrappContent={{ paddingRight: 0, paddingLeft: 0 }} />
+            <ProfileOptionsList>
+              {profileOptions.map((option, i) => option.isActive && (
+                <ListLink
+                  key={i}
+                  active={window.location.pathname === option.pathname}
+                  onClick={() => handleGoToPage(option.name)}
+                >
+                  {t((option.key || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
+                </ListLink>
+              ))}
+              <ListItemLogout />
+            </ProfileOptionsList>
           )}
           <SideForm className='user-form'>
             <WrapperForm>

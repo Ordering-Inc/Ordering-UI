@@ -4,16 +4,19 @@ import { MyOrders as MyOrdersController } from '../../../src/themes/five/src/com
 import { HelmetTags } from '../../components/HelmetTags'
 import settings from '../../config'
 import { checkSiteUrl } from '../../Utils'
+import { useWindowSize } from '../../../src/hooks/useWindowSize'
 
 export const MyOrders = (props) => {
   const [events] = useEvent()
   const [{ site }] = useSite()
+  const windowSize = useWindowSize()
   const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
   const productUrlTemplate = checkSiteUrl(site?.product_url_template, '/store/:business_slug?category=:category_id&product=:product_id')
 
   const ordersProps = {
     ...props,
     franchiseId: settings?.franchiseSlug,
+    hideOptions: windowSize.width < 576,
     onRedirectPage: (data) => {
       if (data.page === 'business') {
         const businessSlug = data.params?.store
@@ -91,7 +94,7 @@ export const MyOrders = (props) => {
       } else {
         events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${business.slug}` })
       }
-    },
+    }
   }
   return (
     <>
