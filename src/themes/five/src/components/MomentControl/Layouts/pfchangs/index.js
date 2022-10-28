@@ -225,7 +225,7 @@ const MomentControlUI = (props) => {
 
   useEffect(() => {
     handleCheckBoxChange(hasCateringProducts ? null : isAsap) // hasCateringProducts ? null : isAsap
-  }, [isAsap])
+  }, [isAsap, hasCateringProducts])
 
   useEffect(() => {
     if (!pathname.includes('store')) {

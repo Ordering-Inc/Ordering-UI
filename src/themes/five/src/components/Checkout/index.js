@@ -460,12 +460,12 @@ const CheckoutUI = (props) => {
 
           {!useKioskApp && (
             <>
-              {layout === 'pfchangs' && (
+              {layout === 'pfchangs' && !hasCateringProducts.loading && (
                 <>
                   <SubtitleContainer>
                     <h2>{t('PREORDER_CONFIGUTARION', 'Preorder configuration')}</h2>
                   </SubtitleContainer>
-                  <MomentContentPF hasCateringProducts={hasCateringProducts} cateringHours={cateringHours} />
+                  <MomentContentPF hasCateringProducts={hasCateringProducts.result} cateringHours={cateringHours} />
                 </>
               )}
               {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
