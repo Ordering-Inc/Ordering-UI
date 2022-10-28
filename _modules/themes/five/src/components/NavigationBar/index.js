@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.NavigationBar = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _styledComponents = require("styled-components");
 var _reactRouterDom = require("react-router-dom");
 var _orderingComponents = require("ordering-components");
 var _BsHouse = _interopRequireDefault(require("@meronex/icons/bs/BsHouse"));
@@ -16,6 +17,9 @@ var _FaRegUser = _interopRequireDefault(require("@meronex/icons/fa/FaRegUser"));
 var _CartContent = require("../CartContent");
 var _Modal = require("../Modal");
 var _AddressForm = require("../AddressForm");
+var _LoginForm = require("../LoginForm");
+var _SignUpForm = require("../SignUpForm");
+var _ForgotPasswordForm = require("../ForgotPasswordForm");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -27,7 +31,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var NavigationBar = function NavigationBar() {
-  var _orderState$options;
+  var _orderState$options, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
+  var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -39,8 +44,9 @@ var NavigationBar = function NavigationBar() {
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
   var _useSession = (0, _orderingComponents.useSession)(),
-    _useSession2 = _slicedToArray(_useSession, 1),
-    auth = _useSession2[0].auth;
+    _useSession2 = _slicedToArray(_useSession, 2),
+    auth = _useSession2[0].auth,
+    login = _useSession2[1].login;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isCart = _useState2[0],
@@ -49,17 +55,44 @@ var NavigationBar = function NavigationBar() {
     _useState4 = _slicedToArray(_useState3, 2),
     isAddress = _useState4[0],
     setIsAddress = _useState4[1];
+  var _useState5 = (0, _react.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    modalPageToShow = _useState6[0],
+    setModalPageToShow = _useState6[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
     return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0;
   }) || null;
   var handleGoToPage = function handleGoToPage(data) {
-    events.emit('go_to_page', data);
+    auth ? events.emit('go_to_page', data) : handleOpenLoginSignUp('login');
   };
   var handleChangeExplore = function handleChangeExplore() {
     auth ? handleGoToPage({
       page: 'search'
     }) : setIsAddress(true);
+  };
+  var handleOpenLoginSignUp = function handleOpenLoginSignUp(index) {
+    setModalPageToShow(index);
+  };
+  var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
+    var page = _ref.page;
+    e.preventDefault();
+    setModalPageToShow(page);
+  };
+  var closeAuthModal = function closeAuthModal() {
+    setModalPageToShow(null);
+  };
+  var handleSuccessLogin = function handleSuccessLogin(user) {
+    if (user) {
+      closeAuthModal();
+    }
+  };
+  var handleSuccessSignup = function handleSuccessSignup(user) {
+    var _user$session;
+    login({
+      user: user,
+      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+    });
   };
   var itemlist = {
     home: {
@@ -146,6 +179,56 @@ var NavigationBar = function NavigationBar() {
     onSaveAddress: function onSaveAddress() {
       return setIsAddress(false);
     }
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: modalPageToShow && !auth,
+    onRemove: function onRemove() {
+      return closeAuthModal();
+    },
+    width: "50%",
+    authModal: true
+  }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+    handleSuccessLogin: handleSuccessLogin,
+    elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'signup'
+        });
+      },
+      href: "#"
+    }, t('CREATE_ACCOUNT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.CREATE_ACCOUNT) || 'Create account')),
+    elementLinkToForgotPassword: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'forgotpassword'
+        });
+      },
+      href: "#"
+    }, t('RESET_PASSWORD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.RESET_PASSWORD) || 'Reset password')),
+    useLoginByCellphone: true,
+    isPopup: true
+  }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.LOGIN) || 'Login')),
+    useLoginByCellphone: true,
+    useChekoutFileds: true,
+    handleSuccessSignup: handleSuccessSignup,
+    isPopup: true
+  }), modalPageToShow === 'forgotpassword' && /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
+    elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'login'
+        });
+      },
+      href: "#"
+    }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.LOGIN) || 'Login')),
+    isPopup: true
   })));
 };
 exports.NavigationBar = NavigationBar;
