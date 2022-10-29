@@ -516,7 +516,8 @@ const LoginFormUI = (props) => {
 export const LoginForm = (props) => {
   const loginControllerProps = {
     ...props,
-    UIComponent: LoginFormUI
+    UIComponent: LoginFormUI,
+    isRecaptchaEnable: true
   }
   return <LoginFormController {...loginControllerProps} />
 }
