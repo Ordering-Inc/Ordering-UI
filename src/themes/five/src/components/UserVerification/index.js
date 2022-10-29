@@ -147,12 +147,14 @@ const UserVerificationUI = (props) => {
     if (!verifyEmailState?.loadingSendCode && isEmailVerifyRequired) {
       setVerificationState({
         ...verificationState,
+        phone: false,
         email: !!verifyEmailState?.resultSendCode
       })
     }
     if (!verifyPhoneState?.loadingSendCode && isPhoneVerifyRequired && !isEmailVerifyRequired) {
       setVerificationState({
         ...verificationState,
+        email: false,
         phone: !!verifyPhoneState?.resultSendCode
       })
     }
