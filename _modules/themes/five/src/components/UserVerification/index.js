@@ -160,11 +160,13 @@ var UserVerificationUI = function UserVerificationUI(props) {
   (0, _react.useEffect)(function () {
     if (!(verifyEmailState !== null && verifyEmailState !== void 0 && verifyEmailState.loadingSendCode) && isEmailVerifyRequired) {
       setVerificationState(_objectSpread(_objectSpread({}, verificationState), {}, {
+        phone: false,
         email: !!(verifyEmailState !== null && verifyEmailState !== void 0 && verifyEmailState.resultSendCode)
       }));
     }
     if (!(verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.loadingSendCode) && isPhoneVerifyRequired && !isEmailVerifyRequired) {
       setVerificationState(_objectSpread(_objectSpread({}, verificationState), {}, {
+        email: false,
         phone: !!(verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.resultSendCode)
       }));
     }
