@@ -73,6 +73,22 @@ export const PayCard = styled.div`
     width: calc(20% - 30px);
   }
 
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    align-self: flex-start;
+    p {
+      white-space: pre-wrap;
+    }
+    @media (min-width: 768px) {
+      width: calc(25% - 10px);
+    }
+    @media (min-width: 1024px) {
+      width: calc(20% - 20px);
+    }
+    @media (min-width: 1200px) {
+      width: calc(20% - 30px);
+    }
+  `}
+  
   &.active {
     > div {
       border: 1px solid ${props => props.theme.colors.primary};

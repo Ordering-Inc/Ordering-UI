@@ -6,6 +6,12 @@ export const Tabs = styled.div`
     color: ${props => props.theme.colors.darkTextColor};
   `}
   
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    width: 100%;
+    @media (min-width: 768px){
+      width: initial;
+    }
+  `}
 `
 
 export const Tab = styled.div`

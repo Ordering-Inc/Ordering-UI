@@ -286,6 +286,7 @@ export const Header = (props) => {
               isHideSignup={isHideSignup}
               userCustomer={userCustomer}
               isCustomerMode={isCustomerMode}
+              handleOpenLoginSignUpCustom={handleOpenLoginSignUp}
             />
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode && headerLayout !== 'pfchangs' ? 'search' : 'home' })}
@@ -411,7 +412,7 @@ export const Header = (props) => {
                           isCustomerMode={isCustomerMode}
                           setPreorderBusiness={setPreorderBusiness}
                         />
-                      ) : (
+                      ) : headerLayout !== 'pfchangs' && !pathname.includes('/checkout') && (
                         <HeaderOption
                           variant='cart'
                           totalCarts={cartsWithProducts?.length}

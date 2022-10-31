@@ -35,7 +35,8 @@ export const BusinessItemAccordion = (props) => {
     setActive,
     setActiveState,
     isCartPending,
-    handleClearProducts
+    handleClearProducts,
+    onClose
   } = props
 
   const [orderState] = useOrder()
@@ -74,11 +75,13 @@ export const BusinessItemAccordion = (props) => {
 
   const handleGoToStore = (e, slug) => {
     e.stopPropagation()
+    onClose && onClose()
     handleStoreRedirect(slug)
   }
 
   const handleGoToHome = (e) => {
     e.stopPropagation()
+    onClose && onClose()
     events.emit('go_to_page', { page: 'home' })
   }
 

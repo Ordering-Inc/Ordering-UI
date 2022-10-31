@@ -47,13 +47,15 @@ export const SingleBusinessContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
   align-items: center;
+  height: 220px;
+  justify-content: space-between;
   ${({ isSelected, theme }) => isSelected && css`
     border: 1px solid ${theme?.colors?.gold};
   `}
   @media(min-width: 768px){
     align-items: flex-start;
     flex-direction: row;
-    height: 220px;
+    justify-content: stretch;
   }
 `
 
@@ -77,6 +79,9 @@ export const LeftContainer = styled.div`
     font-size: 18px;
     font-family: ${({ theme }) => theme?.fonts?.special?.name};
   }
+  @media (min-width: 1024px){
+
+  }
   @media (min-width: 768px){
     text-align: start;
     align-items: flex-start;
@@ -84,7 +89,6 @@ export const LeftContainer = styled.div`
 `
 
 export const RightContainer = styled.div`
-  width: 100%;
   button {
     height: 40px;
     margin-bottom: 5px;
@@ -93,7 +97,15 @@ export const RightContainer = styled.div`
     padding: 0;
     height: 44px;
   }
+  width: 100%;
   @media (min-width: 768px){
+    width: initial;
+    button{
+      width: 70px;
+      height: 50px;
+    }
+  }
+  @media (min-width: 920px){
     width: 30%;
   }
 `

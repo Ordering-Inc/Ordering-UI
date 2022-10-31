@@ -221,6 +221,9 @@ const MomentControlUI = (props) => {
       _timeLists = getTimes(dateSelected, scheduleList)
     }
     setTimeList(_timeLists)
+    if (hasCateringProducts) {
+      handleChangeTime(_timeLists[0]?.value)
+    }
   }, [dateSelected, hoursList, scheduleList, hasCateringProducts])
 
   useEffect(() => {

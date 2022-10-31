@@ -50,7 +50,9 @@ export const WrapperRightContainer = styled.div`
   background: #F8F9FA;
   box-sizing: border-box;
   padding: 40px 20px;
-
+  ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
+    background: transparent;
+  `}
   @media (min-width: 769px) {
     width: 45%;
     padding: 55px 40px;
@@ -58,7 +60,6 @@ export const WrapperRightContainer = styled.div`
       padding: 30px 20px 20px 30px;
       width: 50%;
       max-width: 500px;
-      background: transparent;
       margin-top: 50px;
     `}
   }
@@ -457,7 +458,7 @@ export const MasterCardCoupon = styled.div`
 
 export const GoToMenu = styled.div`
   position: fixed;
-  z-index: 10000;
+  z-index: 2000;
   top: 0;
   left: 200px;
   transform: translateY(75%);

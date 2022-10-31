@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 export const BusinessInfoContainer = styled.div`
-  margin-bottom: 420px;
+  margin-bottom: ${({ bgimage }) => bgimage ? '420px' : '0px'};
 `
 
 export const BusinessContainer = styled.div`
@@ -34,16 +34,9 @@ export const BusinessContainer = styled.div`
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage});
   `}
 
-  h1 {
-    color: #FFF;
-    opacity: 0.5;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0 10px;
-    padding: 0;
-  }
-
+  ${props => !props.bgimage && css`
+    display: none;
+  `}
   @media (min-width: 490px) {
     justify-content: flex-start;
   }

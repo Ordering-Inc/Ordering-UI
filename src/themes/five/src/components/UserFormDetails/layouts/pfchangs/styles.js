@@ -208,6 +208,8 @@ export const UserInformationContainer = styled.div`
     color: ${({ theme }) => theme?.colors?.gold};
     cursor: pointer;
     text-decoration: underline;
+    text-align: right;
+    display: flex;
   }
   ${({ isCheckout }) => isCheckout && css`
     padding: 0;

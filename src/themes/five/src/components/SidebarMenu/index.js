@@ -37,7 +37,13 @@ import {
 } from './styles'
 
 export const SidebarMenu = (props) => {
-  const { auth, isHideSignup, userCustomer, isCustomerMode } = props
+  const {
+    auth,
+    isHideSignup,
+    userCustomer,
+    isCustomerMode,
+    handleOpenLoginSignUpCustom
+  } = props
   const [, { login }] = useSession()
   const [events] = useEvent()
   const [{ configs }] = useConfig()
@@ -51,6 +57,7 @@ export const SidebarMenu = (props) => {
 
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
+  const layout = theme?.general?.components?.layout?.type
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -65,6 +72,10 @@ export const SidebarMenu = (props) => {
   }
 
   const handleOpenLoginSignUp = (index) => {
+    if (layout === 'pfchangs') {
+      handleOpenLoginSignUpCustom(index)
+      return
+    }
     setModalPageToShow(index)
     setModalIsOpen(true)
   }
@@ -104,6 +115,12 @@ export const SidebarMenu = (props) => {
       }
     }
   }, [width])
+
+  useEffect(() => {
+    if (layout === 'pfchangs' && auth) {
+      actionSidebar(false)
+    }
+  }, [auth])
 
   return (
     <>
@@ -155,7 +172,7 @@ export const SidebarMenu = (props) => {
           )}
 
           <MenuLink
-            onClick={() => handleGoToPage({ page: options?.address?.location ? 'search' : 'home' })}
+            onClick={() => handleGoToPage({ page: options?.address?.location && layout !== 'pfchangs' ? 'search' : 'home' })}
           >
             <WrappContent>
               <MenuLinkIcon
@@ -223,7 +240,7 @@ export const SidebarMenu = (props) => {
                   </MenuLinkSeparator>
                 </WrappContent>
               </MenuLink>
-              {isWalletEnabled && (
+              {isWalletEnabled && layout !== 'pfchangs' && (
                 <MenuLink
                   onClick={() => handleGoToPage({ page: 'wallets' })}
                 >
@@ -252,7 +269,7 @@ export const SidebarMenu = (props) => {
                   </WrappContent>
                 </MenuLink>
               )}
-              {isPromotionsEnabled && (
+              {isPromotionsEnabled && layout !== 'pfchangs' && (
                 <MenuLink
                   onClick={() => handleGoToPage({ page: 'promotions' })}
                 >
@@ -281,61 +298,64 @@ export const SidebarMenu = (props) => {
                   </WrappContent>
                 </MenuLink>
               )}
-
-              <MenuLink
-                onClick={() => handleGoToPage({ page: 'help' })}
-              >
-                <WrappContent>
-                  <MenuLinkIcon
-                    active={
-                      window.location.pathname === '/help'
-                    }
-                  >
-                    <BiHelpCircle />
-                  </MenuLinkIcon>
-                  <MenuLinkText>
-                    <TextInfo
+              {layout !== 'pfchangs' && (
+                <MenuLink
+                  onClick={() => handleGoToPage({ page: 'help' })}
+                >
+                  <WrappContent>
+                    <MenuLinkIcon
                       active={
                         window.location.pathname === '/help'
                       }
                     >
-                      {t('HELP', 'help')}
-                    </TextInfo>
-                  </MenuLinkText>
-                  <MenuLinkSeparator>
-                    <div>
-                      <hr />
-                    </div>
-                  </MenuLinkSeparator>
-                </WrappContent>
-              </MenuLink>
-              <MenuLink
-                onClick={() => handleGoToPage({ page: 'favorite' })}
-              >
-                <WrappContent>
-                  <MenuLinkIcon
-                    active={
-                      window.location.pathname === '/favorite'
-                    }
-                  >
-                    <Heart />
-                  </MenuLinkIcon>
-                  <MenuLinkText>
-                    <TextInfo
+                      <BiHelpCircle />
+                    </MenuLinkIcon>
+                    <MenuLinkText>
+                      <TextInfo
+                        active={
+                          window.location.pathname === '/help'
+                        }
+                      >
+                        {t('HELP', 'help')}
+                      </TextInfo>
+                    </MenuLinkText>
+                    <MenuLinkSeparator>
+                      <div>
+                        <hr />
+                      </div>
+                    </MenuLinkSeparator>
+                  </WrappContent>
+                </MenuLink>
+              )}
+              {layout !== 'pfchangs' && (
+                <MenuLink
+                  onClick={() => handleGoToPage({ page: 'favorite' })}
+                >
+                  <WrappContent>
+                    <MenuLinkIcon
                       active={
                         window.location.pathname === '/favorite'
                       }
                     >
-                      {t('FAVORITES', 'Favorites')}
-                    </TextInfo>
-                  </MenuLinkText>
-                  <MenuLinkSeparator>
-                    <div>
-                      <hr />
-                    </div>
-                  </MenuLinkSeparator>
-                </WrappContent>
-              </MenuLink>
+                      <Heart />
+                    </MenuLinkIcon>
+                    <MenuLinkText>
+                      <TextInfo
+                        active={
+                          window.location.pathname === '/favorite'
+                        }
+                      >
+                        {t('FAVORITES', 'Favorites')}
+                      </TextInfo>
+                    </MenuLinkText>
+                    <MenuLinkSeparator>
+                      <div>
+                        <hr />
+                      </div>
+                    </MenuLinkSeparator>
+                  </WrappContent>
+                </MenuLink>
+              )}
               <MenuLink
                 onClick={() => handleGoToPage({ page: 'sessions' })}
               >
@@ -423,7 +443,7 @@ export const SidebarMenu = (props) => {
                   </MenuLinkSeparator>
                 </WrappContent>
               </MenuLink>
-              {!isHideSignup && (
+              {!isHideSignup && layout !== 'pfchangs' && (
                 <MenuLink
                   onClick={() => handleOpenLoginSignUp('signup')}
                 >
@@ -451,7 +471,7 @@ export const SidebarMenu = (props) => {
             </>
           )}
         </SidebarContent>
-        {modalIsOpen && !auth && (
+        {modalIsOpen && !auth && layout !== 'pfchangs' && (
           <Modal
             open={modalIsOpen}
             onClose={() => closeModal()}

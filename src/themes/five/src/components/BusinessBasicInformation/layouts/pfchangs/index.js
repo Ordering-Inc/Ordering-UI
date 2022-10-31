@@ -23,7 +23,6 @@ export const BusinessBasicInformationPFChangs = (props) => {
   const { business } = businessState
   const [, t] = useLanguage()
   const [orderState, { changeType }] = useOrder()
-
   const types = ['food', 'laundry', 'alcohol', 'groceries']
   const [{ optimizeImage }] = useUtils()
   const [orderTypeSelected, setOrderTypeSelected] = useState(orderState?.options?.type)
@@ -48,7 +47,7 @@ export const BusinessBasicInformationPFChangs = (props) => {
   }, [orderTypeSelected])
 
   return (
-    <BusinessInfoContainer>
+    <BusinessInfoContainer bgimage={business?.header}>
       <TitleContainer>
         {isSkeleton ? (
           <>

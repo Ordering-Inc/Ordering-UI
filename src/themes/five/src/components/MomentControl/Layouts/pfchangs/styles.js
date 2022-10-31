@@ -24,7 +24,7 @@ export const SelectContainer = styled.div`
     width: 100%;
     background-color: #F8F9FA!important;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-    height: 44px;
+    min-height: 44px;
     border: none;
     border-radius: 7.6px;
     color: #909BA9 !important;
@@ -48,6 +48,9 @@ export const SelectContainer = styled.div`
     #select-input {
       margin-bottom: 0px;
     }
+    div {
+      white-space: pre-wrap;
+    }
     > div {
       background-color: #000!important;
       border: 1px solid #fff;
@@ -55,7 +58,7 @@ export const SelectContainer = styled.div`
       color: #fff !important;
       padding: 0px 10px;
       box-sizing: border-box;
-
+      height: auto;
       > div#list {
         background-color: #000 !important;
         border: 1px solid #fff;

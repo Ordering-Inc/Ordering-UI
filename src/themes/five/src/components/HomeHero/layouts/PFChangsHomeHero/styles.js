@@ -5,16 +5,17 @@ import { darken } from 'polished'
 export const HeroContainerStyled = styled.div`
   width: 100%;
   box-sizing: border-box;
-  height: calc(100vh - 97px);
   ${({ bgimage }) => bgimage && css`
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
     object-fit: cover;
     background-position: center;
   `}
 
   .firstHeading {
     font-family: ${({ theme }) => theme?.fonts?.special?.name};
+  }
+
+  @media (min-width: 768px){
+    height: calc(100vh - 97px);
   }
 `
 
@@ -104,7 +105,6 @@ export const SearchLocationsContainer = styled.div`
   padding: 40px 20px 20px;
   overflow-y: auto;
   overflow-x: hidden;
-  height: calc(100vh - 97px);
   box-sizing: border-box;
   h1 {
     color: #fff;
@@ -118,6 +118,7 @@ export const SearchLocationsContainer = styled.div`
   }
   @media (min-width: 768px){
     width: 50%;
+    height: calc(100vh - 97px);
   }
 
   @media (min-width: 1024px){
@@ -163,9 +164,8 @@ export const DeliveryPickupContainer = styled.div`
       height: calc(100% - 10px);
       width: calc(50% - 6px);
       left: 50%;
-      
     `
-  }
+  }}
 `
 
 export const AddressInputContainer = styled.div`
@@ -204,8 +204,7 @@ export const Diviver = styled.hr`
 `
 
 export const WrapperMap = styled.div`
-  flex: 1;
-  height: calc(100vh - 97px);
+  height: calc(80vh - 97px);
   > div {
     position: relative !important;
     width: 100% !important;
@@ -236,6 +235,10 @@ export const WrapperMap = styled.div`
       text-decoration: underline;
     }
   }
+  @media (min-width: 768px){
+    flex: 1;
+    height: calc(100vh - 97px);
+  }
 `
 
 export const ActiveMapContainer = styled.span`
@@ -251,7 +254,7 @@ export const ActiveMapContainer = styled.span`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 45px;
+    height: auto;
     font-size: 16px;
     font-weight: bold;
   }
@@ -269,5 +272,12 @@ export const ActiveMapContainer = styled.span`
       width: 40%;
       font-size: 18px;
     }
+  }
+`
+
+export const ContainerResponsiveWrapper = styled.div`
+  padding: 20px;
+  p {
+    color: #fff;
   }
 `

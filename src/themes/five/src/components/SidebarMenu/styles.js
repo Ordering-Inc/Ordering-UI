@@ -162,7 +162,7 @@ export const MenuLinkIcon = styled.div`
     color: #000;
     width: 24px;
     height: 24px;
-    color: ${({ active, theme }) => active ? theme.colors.primary : '#000'}
+    color: ${({ active, theme }) => active ? theme.colors.primary : theme.general?.components?.layout?.type === 'pfchangs' ? '#fff' : '#000'}
   }
 `
 
@@ -189,7 +189,7 @@ export const TextInfo = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${({ active, theme }) => active ? theme.colors.primary : '#000'}
+  color: ${({ active, theme }) => active ? theme.colors.primary : theme.general?.components?.layout?.type === 'pfchangs' ? '#fff' : '#000'}
 
   ${props => props.theme?.rtl && css`
     text-align: right;

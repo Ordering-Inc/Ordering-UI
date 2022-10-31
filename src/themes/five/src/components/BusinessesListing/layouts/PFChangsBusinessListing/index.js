@@ -54,7 +54,8 @@ const BusinessesListingUI = (props) => {
     currentLocation,
     canBeRedirected,
     businessClikedId,
-    mapActivated
+    mapActivated,
+    isResponsive
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -216,9 +217,11 @@ const BusinessesListingUI = (props) => {
 
   return (
     <>
-      <DeliveryTextWrapper>
-        <p>{t('ENTER_FULL_ADDRESS_TO_ORDER', 'Enter your full street address to start your delivery order.')}</p>
-      </DeliveryTextWrapper>
+      {isResponsive && (
+        <DeliveryTextWrapper>
+          <p>{t('ENTER_FULL_ADDRESS_TO_ORDER', 'Enter your full street address to start your delivery order.')}</p>
+        </DeliveryTextWrapper>
+      )}
       <BusinessContainer alignCenter={!businessesSearchList.loading && businessesSearchList.businesses.length === 0}>
         {currentLocation && (
           <Button className='search-area' color='primary' onClick={() => handleSearchbusinessAndProducts(true, { location: currentLocation })}>
@@ -282,7 +285,7 @@ const BusinessesListingUI = (props) => {
                 <SingleBusinessController key={business?.id} business={business} />
               ))
             }
-            {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
+            {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && businessesSearchList?.businesses?.length > 0 && (
               <LoadMoreButtonWrap>
                 <Button
                   onClick={() => handleSearchbusinessAndProducts()}

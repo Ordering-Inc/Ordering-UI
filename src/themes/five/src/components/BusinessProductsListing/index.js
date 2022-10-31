@@ -352,7 +352,7 @@ const BusinessProductsListingUI = (props) => {
         <BottomToast>
           <p>{t('ITEM_ADDED_TO_YOUR_CART', 'An item has added to your cart')}</p>
           <div>
-            <GrFormClose />
+            <GrFormClose onClick={() => setOpenBottomToast(false)} />
           </div>
         </BottomToast>
       )}
@@ -371,7 +371,7 @@ const BusinessProductsListingUI = (props) => {
           disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
         />
       )}
-      {windowSize.width < 1000 && currentCart?.products?.length > 0 && (
+      {windowSize.width < 1000 && currentCart?.products?.length > 0 && showViewOrderButton && (
         <MobileCartViewWrapper>
           <span>{parsePrice(currentCart?.total)}</span>
           <Button color='primary' onClick={() => setisCartModal(true)}>{t('VIEW_CART', 'View cart')}</Button>

@@ -65,7 +65,7 @@ export const SectionTitle = styled.h3`
   padding: 7px 0px;
   margin-bottom: 0px;
   margin-top: 15px;
-  color: ${props => props.theme.colors.headingColor};
+  color: #000;
 `
 
 export const ProductComment = styled.div`
@@ -83,7 +83,7 @@ export const ProductComment = styled.div`
   }
 
   @media (min-width: 577px) {
-    margin-bottom: 62px;
+    margin-bottom: 90px;
   }
 
   @media (min-width: 769px) {
@@ -104,7 +104,7 @@ export const ProductActions = styled.div`
   right: 0;
   width: 100%;
   background-color: #FFF;
-
+  box-sizing: border-box;
   div.price {
     color: #000;
     h4 {

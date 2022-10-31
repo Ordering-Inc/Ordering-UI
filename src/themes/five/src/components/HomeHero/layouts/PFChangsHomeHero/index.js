@@ -14,7 +14,8 @@ import {
   ViewLocationsContainer,
   Diviver,
   WrapperMap,
-  ActiveMapContainer
+  ActiveMapContainer,
+  ContainerResponsiveWrapper
 } from './styles'
 
 import { Modal } from '../../../Modal'
@@ -47,8 +48,9 @@ export const PFChangsHomeHero = (props) => {
   const [mapActivated, setMapActivated] = useState(false)
   const [imageMapDimensions, setImageMapDimension] = useState({})
   const [canBeRedirected, setCanBeRedirected] = useState(false)
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth)
   const theme = useTheme()
-
+  const isResponsive = innerWidth < 768
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
@@ -130,13 +132,22 @@ export const PFChangsHomeHero = (props) => {
     }
   }, [user?.name])
 
+  useEffect(() => {
+    const resizeEvent = window.addEventListener('resize', (e) => {
+      setInnerWidth(e.target.innerWidth)
+    })
+
+    return () => {
+      window.removeEventListener('resize', resizeEvent)
+    }
+  }, [])
+
   return (
     <>
       <HeroContainer bgimage={homeBackgroundImage || theme.images?.general?.homeHero}>
         <ContentWrapper contentPosition={contentPosition}>
           <SearchLocationsContainer>
             <h1>{auth ? `${t('WELCOME_BACK', 'Welcome back')} ${user?.name}` : t('WELCOME', 'Welcome')}</h1>
-
             <div>
               <p>{t('SEARCH_OR_VIEW_LOCATIONS_BELOW', 'Search or view nearby locations below')}</p>
             </div>
@@ -167,35 +178,38 @@ export const PFChangsHomeHero = (props) => {
               </WrapInput>
               <IosSend className='geolocation-button' />
             </AddressInputContainer>
-            <>
-              {showCities && (
-                <ViewLocationsContainer>
-                  <Button
-                    color='primary'
-                    style={{ width: '100%' }}
-                    onClick={() => setShowAllLocations(true)}
-                  >
-                    {t('VIEW_ALL_CITIES', 'View all cities')}
-                  </Button>
-                </ViewLocationsContainer>
-              )}
-              <Diviver />
-              <PFChangsBusinesListing
-                {...businessListingProps}
-                filterByAddress
-                filterByCity={showAllLocations}
-                setBusinessesLocations={setBusinessesLocations}
-                businessesLocations={businessesLocations}
-                isMapReady={isMapReady}
-                businessClikedId={businessClikedId}
-                setBusinessClikedId={setBusinessClikedId}
-                currentLocation={currentLocation}
-                defaultLocation={defaultLocation}
-                orderTypeSelected={orderTypeSelected}
-                canBeRedirected={canBeRedirected}
-                mapActivated={mapActivated}
-              />
-            </>
+            {!isResponsive && (
+              <>
+                {showCities && (
+                  <ViewLocationsContainer>
+                    <Button
+                      color='primary'
+                      style={{ width: '100%' }}
+                      onClick={() => setShowAllLocations(true)}
+                    >
+                      {t('VIEW_ALL_CITIES', 'View all cities')}
+                    </Button>
+                  </ViewLocationsContainer>
+                )}
+                <Diviver />
+                <PFChangsBusinesListing
+                  {...businessListingProps}
+                  filterByAddress
+                  filterByCity={showAllLocations}
+                  setBusinessesLocations={setBusinessesLocations}
+                  businessesLocations={businessesLocations}
+                  isMapReady={isMapReady}
+                  businessClikedId={businessClikedId}
+                  setBusinessClikedId={setBusinessClikedId}
+                  currentLocation={currentLocation}
+                  defaultLocation={defaultLocation}
+                  orderTypeSelected={orderTypeSelected}
+                  canBeRedirected={canBeRedirected}
+                  mapActivated={mapActivated}
+                  isResponsive={isResponsive}
+                />
+              </>
+            )}
           </SearchLocationsContainer>
           {/** mapa */}
           {!mapActivated && (
@@ -249,6 +263,37 @@ export const PFChangsHomeHero = (props) => {
                 locationPin={theme.images?.general?.pfLocationPin}
               />
             </WrapperMap>
+          )}
+          {isResponsive && (
+            <ContainerResponsiveWrapper>
+              {showCities && (
+                <ViewLocationsContainer>
+                  <Button
+                    color='primary'
+                    style={{ width: '100%' }}
+                    onClick={() => setShowAllLocations(true)}
+                  >
+                    {t('VIEW_ALL_CITIES', 'View all cities')}
+                  </Button>
+                </ViewLocationsContainer>
+              )}
+              <Diviver />
+              <PFChangsBusinesListing
+                {...businessListingProps}
+                filterByAddress
+                filterByCity={showAllLocations}
+                setBusinessesLocations={setBusinessesLocations}
+                businessesLocations={businessesLocations}
+                isMapReady={isMapReady}
+                businessClikedId={businessClikedId}
+                setBusinessClikedId={setBusinessClikedId}
+                currentLocation={currentLocation}
+                defaultLocation={defaultLocation}
+                orderTypeSelected={orderTypeSelected}
+                canBeRedirected={canBeRedirected}
+                mapActivated={mapActivated}
+              />
+            </ContainerResponsiveWrapper>
           )}
         </ContentWrapper>
         <Modal

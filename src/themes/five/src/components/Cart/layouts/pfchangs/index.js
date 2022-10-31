@@ -56,7 +56,8 @@ const CartUI = (props) => {
     setPreorderBusiness,
     handleRemoveOfferClick,
     handleChangeComment,
-    commentState
+    commentState,
+    onClose
   } = props
 
   const theme = useTheme()
@@ -247,6 +248,7 @@ const CartUI = (props) => {
             isMultiCheckout={isMultiCheckout}
             setActiveState={setActiveState}
             setActive={setActive}
+            onClose={onClose}
           >
             <>
               {cart?.products?.length > 0 && (
