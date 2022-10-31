@@ -730,13 +730,16 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }));
 };
 var ProductForm = function ProductForm(props) {
-  var _props$product;
+  var _props$productCart, _props$productCart2, _props$product;
   var productOptionsProps = _objectSpread(_objectSpread({}, props), {}, {
     productCart: _objectSpread(_objectSpread({}, props.productCart), {}, {
-      quantity: (props === null || props === void 0 ? void 0 : (_props$product = props.product) === null || _props$product === void 0 ? void 0 : _props$product.minimum_per_order) || 1
+      quantity: (_props$productCart = props.productCart) !== null && _props$productCart !== void 0 && _props$productCart.code ? (_props$productCart2 = props.productCart) === null || _props$productCart2 === void 0 ? void 0 : _props$productCart2.quantity : (props === null || props === void 0 ? void 0 : (_props$product = props.product) === null || _props$product === void 0 ? void 0 : _props$product.minimum_per_order) || 1
     }),
     UIComponent: ProductOptionsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductForm, productOptionsProps);
 };
 exports.ProductForm = ProductForm;
+ProductForm.defaultProps = {
+  productAddedToCartLength: 0
+};
