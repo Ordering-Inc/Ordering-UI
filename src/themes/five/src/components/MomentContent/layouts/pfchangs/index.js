@@ -36,6 +36,8 @@ export const MomentContent = (props) => {
           onClose={props.onClose}
           hasCateringProducts={props.hasCateringProducts}
           cateringHours={props.cateringHours}
+          cateringDayError={props.cateringDayError}
+          setCateringDayError={props.setCateringDayError}
         />
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (

@@ -314,3 +314,8 @@ export const ClosedBusinessMsg = styled.div`
   font-size: 16px;
   width: 100%;
 `
+
+export const MomentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`

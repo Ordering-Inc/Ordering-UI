@@ -21,7 +21,8 @@ import {
   DayNumber,
   TimeItem,
   ClosedBusinessMsg,
-  SelectContainer
+  SelectContainer,
+  MomentContainer
 } from './styles'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, {
@@ -45,7 +46,9 @@ const MomentControlUI = (props) => {
     handleChangeTime,
     isAppoint,
     hasCateringProducts,
-    cateringHours
+    cateringHours,
+    setCateringDayError,
+    cateringDayError
   } = props
 
   const [{ configs }] = useConfig()
@@ -58,7 +61,6 @@ const MomentControlUI = (props) => {
   const [timeList, setTimeList] = useState([])
   const [scheduleList, setScheduleList] = useState(null)
   const [isEnabled, setIsEnabled] = useState(true)
-
   const handleCheckBoxChange = (index) => {
     if (index) {
       !orderState.loading && handleAsap()
@@ -221,8 +223,12 @@ const MomentControlUI = (props) => {
       _timeLists = getTimes(dateSelected, scheduleList)
     }
     setTimeList(_timeLists)
-    if (hasCateringProducts) {
+    if (hasCateringProducts && _timeLists?.length > 0) {
       handleChangeTime(_timeLists[0]?.value)
+      setCateringDayError(false)
+    }
+    if (_timeLists?.length === 0 && hasCateringProducts) {
+      setCateringDayError(true)
     }
   }, [dateSelected, hoursList, scheduleList, hasCateringProducts])
 
@@ -245,18 +251,25 @@ const MomentControlUI = (props) => {
   }, [])
 
   return (
-    <div id='moment_control'>
-      {!isAppoint && !hasCateringProducts && (
-        <SelectContainer>
-          <Select
-            placeholder={t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')}
-            defaultValue={isASP ? true : null}
-            options={momentOptions}
-            onChange={(val) => handleCheckBoxChange(val)}
-          />
-        </SelectContainer>
-      )}
-      {
+    <MomentContainer id='moment_control'>
+      <p>
+        {cateringDayError
+          ? t('WARNING_CATERING_BUSINESS_CLOSED', 'The Business will be closed before preparing catering')
+          : hasCateringProducts
+            ? t('DISCLAIMER_CATERING', 'Disclaimer Catering')
+            : asapText}
+      </p>
+      {/* {!isAppoint && !hasCateringProducts && (
+        <SelectContainer> */}
+      {/* <Select
+        placeholder={t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')}
+        defaultValue={isASP ? true : null}
+        options={momentOptions}
+        onChange={(val) => handleCheckBoxChange(val)}
+      /> */}
+      {/* </SelectContainer>
+      )} */}
+      {/* {
         (!isASP || isAppoint) && (
           <OrderTimeWrapper>
             {!isAppoint && <p>{t('ORDER_TIME', 'Order time')}</p>}
@@ -329,9 +342,8 @@ const MomentControlUI = (props) => {
               )}
             </TimeListWrapper>
           </OrderTimeWrapper>
-
         )
-      }
+      } */}
       {/* {!isAppoint && (
         <ButtonWrapper>
           <Button
@@ -343,7 +355,7 @@ const MomentControlUI = (props) => {
           </Button>
         </ButtonWrapper>
       )} */}
-    </div>
+    </MomentContainer>
   )
 }
 

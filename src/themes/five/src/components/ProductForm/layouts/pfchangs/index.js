@@ -398,16 +398,6 @@ const ProductOptionsUI = (props) => {
                   />
                 </ProductComment>
               )}
-              {
-                props.afterMidElements?.map((MidElement, i) => (
-                  <React.Fragment key={i}>
-                    {MidElement}
-                  </React.Fragment>))
-              }
-              {
-                props.afterMidComponents?.map((MidComponent, i) => (
-                  <MidComponent key={i} {...props} />))
-              }
             </ProductEdition>
             <ProductActions>
               <div className='price-amount-block'>

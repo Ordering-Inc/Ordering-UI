@@ -132,6 +132,7 @@ const CheckoutUI = (props) => {
   const [requiredFields, setRequiredFields] = useState([])
   const [isSuccess, setIsSuccess] = useState(false)
   const [isHideCash, setHideCash] = useState(false)
+  const [cateringDayError, setCateringDayError] = useState(false)
 
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
@@ -163,7 +164,9 @@ const CheckoutUI = (props) => {
     (options.type === 1 &&
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
       validationFields?.fields?.checkout?.driver_tip?.required &&
-      (Number(cart?.driver_tip) <= 0))
+      (Number(cart?.driver_tip) <= 0)) ||
+    cateringDayError ||
+    hasCateringProducts.loading
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -465,7 +468,12 @@ const CheckoutUI = (props) => {
                   <SubtitleContainer>
                     <h2>{t('PREORDER_CONFIGUTARION', 'Preorder configuration')}</h2>
                   </SubtitleContainer>
-                  <MomentContentPF hasCateringProducts={hasCateringProducts.result} cateringHours={cateringHours} />
+                  <MomentContentPF
+                    hasCateringProducts={hasCateringProducts.result}
+                    cateringHours={cateringHours}
+                    cateringDayError={cateringDayError}
+                    setCateringDayError={setCateringDayError}
+                  />
                 </>
               )}
               {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
@@ -691,6 +699,12 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
+        {cateringDayError && (
+          <WarningText>
+            {t('WARNING_CATERING_BUSINESS_CLOSED', 'The Business will be closed before preparing catering')}
+          </WarningText>
+        )}
+
         {/* {placeSpotTypes.includes(options?.type) && !cart?.place && hasBusinessPlaces && (
           <WarningText>
             {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
@@ -770,6 +784,7 @@ export const Checkout = (props) => {
   const [isResetPaymethod, setIsResetPaymethod] = useState(false)
 
   const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length) || null)
+  const isPfchangs = theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs'
   const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
     ? AlertPFChangs
     : Alert
@@ -896,7 +911,8 @@ export const Checkout = (props) => {
     uuid: cartUuid,
     isResetPaymethod,
     setIsResetPaymethod,
-    applyCoupon
+    applyCoupon,
+    isPfchangs
   }
 
   return (
