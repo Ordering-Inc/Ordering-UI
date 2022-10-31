@@ -12,6 +12,7 @@ import {
   useOrderingTheme
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -63,7 +64,8 @@ import {
   OrderStatusAndLinkContainer,
   LinkWrapper,
   MapWrapper,
-  BusinessExternalWrapper
+  BusinessExternalWrapper,
+  ProfessionalWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
@@ -634,6 +636,14 @@ const OrderDetailsUI = (props) => {
                   handleGoToPage={handleGoToPage}
                 />
               </HeaderTitle>
+              {isService && order?.products[0]?.calendar_event?.professional && (
+                <ProfessionalWrapper>
+                  {order?.products[0]?.calendar_event?.professional?.photo
+                    ? <img src={order?.products[0]?.calendar_event?.professional?.photo} alt='' />
+                    : <FaUserAlt />}
+                  <p>{order?.products[0]?.calendar_event?.professional?.name} {order?.products[0]?.calendar_event?.professional?.lastname}</p>
+                </ProfessionalWrapper>
+              )}
               {order?.products?.length && order?.products.map(product => (
                 <ProductItemAccordion
                   key={product.id}
