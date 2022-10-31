@@ -732,9 +732,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 var ProductForm = function ProductForm(props) {
   var _props$product;
   var productOptionsProps = _objectSpread(_objectSpread({}, props), {}, {
-    productCart: {
+    productCart: _objectSpread(_objectSpread({}, props.productCart), {}, {
       quantity: (props === null || props === void 0 ? void 0 : (_props$product = props.product) === null || _props$product === void 0 ? void 0 : _props$product.minimum_per_order) || 1
-    },
+    }),
     UIComponent: ProductOptionsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductForm, productOptionsProps);
