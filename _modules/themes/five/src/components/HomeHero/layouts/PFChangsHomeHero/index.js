@@ -104,7 +104,12 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     _useState20 = _slicedToArray(_useState19, 2),
     canBeRedirected = _useState20[0],
     setCanBeRedirected = _useState20[1];
+  var _useState21 = (0, _react.useState)(window.innerWidth),
+    _useState22 = _slicedToArray(_useState21, 2),
+    innerWidth = _useState22[0],
+    setInnerWidth = _useState22[1];
   var theme = (0, _styledComponents.useTheme)();
+  var isResponsive = innerWidth < 768;
   var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
   var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
   var homeBackgroundImage = theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$homepa = _theme$layouts.homepage_view) === null || _theme$layouts$homepa === void 0 ? void 0 : (_theme$layouts$homepa2 = _theme$layouts$homepa.components) === null || _theme$layouts$homepa2 === void 0 ? void 0 : (_theme$layouts$homepa3 = _theme$layouts$homepa2.homepage_header) === null || _theme$layouts$homepa3 === void 0 ? void 0 : (_theme$layouts$homepa4 = _theme$layouts$homepa3.components) === null || _theme$layouts$homepa4 === void 0 ? void 0 : _theme$layouts$homepa4.image;
@@ -205,6 +210,14 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       refreshUserInfo();
     }
   }, [user === null || user === void 0 ? void 0 : user.name]);
+  (0, _react.useEffect)(function () {
+    var resizeEvent = window.addEventListener('resize', function (e) {
+      setInnerWidth(e.target.innerWidth);
+    });
+    return function () {
+      window.removeEventListener('resize', resizeEvent);
+    };
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: homeBackgroundImage || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero)
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
@@ -228,7 +241,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     withIcon: true
   }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_IosSend.default, {
     className: "geolocation-button"
-  })), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCities && /*#__PURE__*/_react.default.createElement(_styles.ViewLocationsContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  })), !isResponsive && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCities && /*#__PURE__*/_react.default.createElement(_styles.ViewLocationsContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     color: "primary",
     style: {
       width: '100%'
@@ -248,7 +261,8 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     defaultLocation: defaultLocation,
     orderTypeSelected: orderTypeSelected,
     canBeRedirected: canBeRedirected,
-    mapActivated: mapActivated
+    mapActivated: mapActivated,
+    isResponsive: isResponsive
   })))), !mapActivated && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
     id: "wrapper-map-id"
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.ActiveMapContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
@@ -281,7 +295,28 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     setIsMapReady: setIsMapReady,
     businessClikedId: businessClikedId,
     locationPin: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.pfLocationPin
-  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), isResponsive && /*#__PURE__*/_react.default.createElement(_styles.ContainerResponsiveWrapper, null, showCities && /*#__PURE__*/_react.default.createElement(_styles.ViewLocationsContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    color: "primary",
+    style: {
+      width: '100%'
+    },
+    onClick: function onClick() {
+      return setShowAllLocations(true);
+    }
+  }, t('VIEW_ALL_CITIES', 'View all cities'))), /*#__PURE__*/_react.default.createElement(_styles.Diviver, null), /*#__PURE__*/_react.default.createElement(_PFChangsBusinessListing.PFChangsBusinesListing, _extends({}, businessListingProps, {
+    filterByAddress: true,
+    filterByCity: showAllLocations,
+    setBusinessesLocations: setBusinessesLocations,
+    businessesLocations: businessesLocations,
+    isMapReady: isMapReady,
+    businessClikedId: businessClikedId,
+    setBusinessClikedId: setBusinessClikedId,
+    currentLocation: currentLocation,
+    defaultLocation: defaultLocation,
+    orderTypeSelected: orderTypeSelected,
+    canBeRedirected: canBeRedirected,
+    mapActivated: mapActivated
+  })))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'),
     open: modals.formOpen,
     onClose: function onClose() {

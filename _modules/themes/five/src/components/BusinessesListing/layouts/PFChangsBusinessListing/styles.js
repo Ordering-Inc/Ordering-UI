@@ -19,7 +19,7 @@ var ErrorMessage = _styledComponents.default.span(_templateObject2 || (_template
 exports.ErrorMessage = ErrorMessage;
 var PreviousOrders = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  margin: 10px 20px 0px;\n"])));
 exports.PreviousOrders = PreviousOrders;
-var SingleBusinessContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  border: 1px solid rgb(230, 230, 230);\n  background: ", ";\n  margin: 0 0 20px;\n  padding: 20px;\n  width: 100%;\n  box-sizing: border-box;\n  align-items: center;\n  ", "\n  @media(min-width: 768px){\n    align-items: flex-start;\n    flex-direction: row;\n    height: 220px;\n  }\n"])), function (_ref2) {
+var SingleBusinessContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  border: 1px solid rgb(230, 230, 230);\n  background: ", ";\n  margin: 0 0 20px;\n  padding: 20px;\n  width: 100%;\n  box-sizing: border-box;\n  align-items: center;\n  height: 220px;\n  justify-content: space-between;\n  ", "\n  @media(min-width: 768px){\n    align-items: flex-start;\n    flex-direction: row;\n    justify-content: stretch;\n  }\n"])), function (_ref2) {
   var theme = _ref2.theme;
   return theme.colors.secundaryContrast;
 }, function (_ref3) {
@@ -29,13 +29,13 @@ var SingleBusinessContainer = _styledComponents.default.div(_templateObject4 || 
   return isSelected && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold);
 });
 exports.SingleBusinessContainer = SingleBusinessContainer;
-var LeftContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin: 0;\n  width: 70%;\n  color: #fff;\n  padding-right: 10px;\n  overflow: hidden;\n  text-align: center;\n  align-items: center;\n  p {\n    margin: 0;\n    overflow: hidden;\n  }\n  h2{\n    margin: 0 0 10px 0;\n    overflow: hidden;\n    font-size: 18px;\n    font-family: ", ";\n  }\n  @media (min-width: 768px){\n    text-align: start;\n    align-items: flex-start;\n  }\n"])), function (_ref4) {
+var LeftContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin: 0;\n  width: 70%;\n  color: #fff;\n  padding-right: 10px;\n  overflow: hidden;\n  text-align: center;\n  align-items: center;\n  p {\n    margin: 0;\n    overflow: hidden;\n  }\n  h2{\n    margin: 0 0 10px 0;\n    overflow: hidden;\n    font-size: 18px;\n    font-family: ", ";\n  }\n  @media (min-width: 1024px){\n\n  }\n  @media (min-width: 768px){\n    text-align: start;\n    align-items: flex-start;\n  }\n"])), function (_ref4) {
   var _theme$fonts, _theme$fonts$special;
   var theme = _ref4.theme;
   return theme === null || theme === void 0 ? void 0 : (_theme$fonts = theme.fonts) === null || _theme$fonts === void 0 ? void 0 : (_theme$fonts$special = _theme$fonts.special) === null || _theme$fonts$special === void 0 ? void 0 : _theme$fonts$special.name;
 });
 exports.LeftContainer = LeftContainer;
-var RightContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 100%;\n  button {\n    height: 40px;\n    margin-bottom: 5px;\n    width: 100%;\n    font-size: 14px;\n    padding: 0;\n    height: 44px;\n  }\n  @media (min-width: 768px){\n    width: 30%;\n  }\n"])));
+var RightContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  button {\n    height: 40px;\n    margin-bottom: 5px;\n    width: 100%;\n    font-size: 14px;\n    padding: 0;\n    height: 44px;\n  }\n  width: 100%;\n  @media (min-width: 768px){\n    width: initial;\n    button{\n      width: 70px;\n      height: 50px;\n    }\n  }\n  @media (min-width: 920px){\n    width: 30%;\n  }\n"])));
 exports.RightContainer = RightContainer;
 var CityContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid #fff;\n  height: 70px;\n  margin: 0;\n  box-sizing: border-box;\n  h3, svg {\n    color: #fff;\n  }\n  h3{\n    font-size: 16px;\n  }\n  ", "\n"])), function (_ref5) {
   var isSelected = _ref5.isSelected;

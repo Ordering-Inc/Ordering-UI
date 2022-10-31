@@ -180,6 +180,10 @@ var MomentControlUI = function MomentControlUI(props) {
       _timeLists = getTimes(dateSelected, scheduleList);
     }
     setTimeList(_timeLists);
+    if (hasCateringProducts) {
+      var _timeLists$;
+      handleChangeTime((_timeLists$ = _timeLists[0]) === null || _timeLists$ === void 0 ? void 0 : _timeLists$.value);
+    }
   }, [dateSelected, hoursList, scheduleList, hasCateringProducts]);
   (0, _react.useEffect)(function () {
     handleCheckBoxChange(hasCateringProducts ? null : isAsap); // hasCateringProducts ? null : isAsap

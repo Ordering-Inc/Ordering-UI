@@ -61,7 +61,8 @@ var CartUI = function CartUI(props) {
     setPreorderBusiness = props.setPreorderBusiness,
     handleRemoveOfferClick = props.handleRemoveOfferClick,
     handleChangeComment = props.handleChangeComment,
-    commentState = props.commentState;
+    commentState = props.commentState,
+    onClose = props.onClose;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -315,7 +316,8 @@ var CartUI = function CartUI(props) {
     handleChangeStore: !useKioskApp && handleChangeStore,
     isMultiCheckout: isMultiCheckout,
     setActiveState: setActiveState,
-    setActive: setActive
+    setActive: setActive,
+    onClose: onClose
   }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.SelectedItemsTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SELECTED_ITEMS', 'Selected Items'))), cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_pfchangs2.ProductItemAccordion, {
       key: product.code,

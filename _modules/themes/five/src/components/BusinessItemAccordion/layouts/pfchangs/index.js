@@ -39,7 +39,8 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     setActive = props.setActive,
     setActiveState = props.setActiveState,
     isCartPending = props.isCartPending,
-    handleClearProducts = props.handleClearProducts;
+    handleClearProducts = props.handleClearProducts,
+    onClose = props.onClose;
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
@@ -86,10 +87,12 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
   };
   var handleGoToStore = function handleGoToStore(e, slug) {
     e.stopPropagation();
+    onClose && onClose();
     handleStoreRedirect(slug);
   };
   var handleGoToHome = function handleGoToHome(e) {
     e.stopPropagation();
+    onClose && onClose();
     events.emit('go_to_page', {
       page: 'home'
     });

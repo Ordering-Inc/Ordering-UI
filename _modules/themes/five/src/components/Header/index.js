@@ -346,7 +346,8 @@ var Header = function Header(props) {
     auth: auth,
     isHideSignup: isHideSignup,
     userCustomer: userCustomer,
-    isCustomerMode: isCustomerMode
+    isCustomerMode: isCustomerMode,
+    handleOpenLoginSignUpCustom: handleOpenLoginSignUp
   }), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
       var _orderState$options4, _orderState$options4$;
@@ -436,7 +437,7 @@ var Header = function Header(props) {
     location: location,
     isCustomerMode: isCustomerMode,
     setPreorderBusiness: setPreorderBusiness
-  }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }) : headerLayout !== 'pfchangs' && !pathname.includes('/checkout') && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "cart",
     totalCarts: cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length,
     onClick: function onClick(variant) {

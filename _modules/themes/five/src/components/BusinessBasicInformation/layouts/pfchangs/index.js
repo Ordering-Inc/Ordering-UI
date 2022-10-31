@@ -66,7 +66,9 @@ var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs
       changeType(orderTypeSelected);
     }, 250);
   }, [orderTypeSelected]);
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, {
+    bgimage: business === null || business === void 0 ? void 0 : business.header
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 75
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", {
     className: "bold"

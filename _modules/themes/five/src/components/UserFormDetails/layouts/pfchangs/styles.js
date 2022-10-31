@@ -42,7 +42,7 @@ var PromotionsWrapper = _styledComponents.default.div(_templateObject10 || (_tem
 exports.PromotionsWrapper = PromotionsWrapper;
 var Title = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  border-bottom: 1px solid #fff;\n  display: flex;\n  justify-content: flex-start;\n  color: #fff;\n  padding: 15px;\n  h2{\n    font-size: 16px;\n  }\n"])));
 exports.Title = Title;
-var UserInformationContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  color: #fff;\n  width: 100%;\n  display: flex;\n  flex-direction: row;\n  padding: 15px;\n  box-sizing: border-box;\n  justify-content: space-between;\n  align-items: center;\n  text-align: left;\n  p{\n    margin: 2px 0;\n  }\n  span {\n    color: ", ";\n    cursor: pointer;\n    text-decoration: underline;\n  }\n  ", "\n"])), function (_ref2) {
+var UserInformationContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  color: #fff;\n  width: 100%;\n  display: flex;\n  flex-direction: row;\n  padding: 15px;\n  box-sizing: border-box;\n  justify-content: space-between;\n  align-items: center;\n  text-align: left;\n  p{\n    margin: 2px 0;\n  }\n  span {\n    color: ", ";\n    cursor: pointer;\n    text-decoration: underline;\n    text-align: right;\n    display: flex;\n  }\n  ", "\n"])), function (_ref2) {
   var _theme$colors;
   var theme = _ref2.theme;
   return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold;

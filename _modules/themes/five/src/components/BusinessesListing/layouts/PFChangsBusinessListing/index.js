@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _orderState$options3, _orderState$options3$, _citiesState$cities, _citiesState$cities$f, _orderState$options4, _orderState$options4$, _businessesSearchList10, _businessesSearchList11, _businessesSearchList12, _businessesSearchList13, _businessesSearchList14, _orderState$options5;
+  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _orderState$options3, _orderState$options3$, _citiesState$cities, _citiesState$cities$f, _orderState$options4, _orderState$options4$, _businessesSearchList10, _businessesSearchList11, _businessesSearchList12, _businessesSearchList13, _businessesSearchList14, _businessesSearchList15, _orderState$options5;
   var businessesSearchList = props.businessesSearchList,
     paginationProps = props.paginationProps,
     isCustomerMode = props.isCustomerMode,
@@ -53,7 +53,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     currentLocation = props.currentLocation,
     canBeRedirected = props.canBeRedirected,
     businessClikedId = props.businessClikedId,
-    mapActivated = props.mapActivated;
+    mapActivated = props.mapActivated,
+    isResponsive = props.isResponsive;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -236,7 +237,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       }
     }, t('GO_TO_BUSINESS', 'Go to business'))));
   };
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryTextWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ENTER_FULL_ADDRESS_TO_ORDER', 'Enter your full street address to start your delivery order.'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isResponsive && /*#__PURE__*/_react.default.createElement(_styles.DeliveryTextWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('ENTER_FULL_ADDRESS_TO_ORDER', 'Enter your full street address to start your delivery order.'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
     alignCenter: !businessesSearchList.loading && businessesSearchList.businesses.length === 0
   }, currentLocation && /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     className: "search-area",
@@ -290,7 +291,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       key: business === null || business === void 0 ? void 0 : business.id,
       business: business
     });
-  })), (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) < (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.LoadMoreButtonWrap, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  })), (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) < (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList11 = businessesSearchList.businesses) === null || _businessesSearchList11 === void 0 ? void 0 : _businessesSearchList11.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.LoadMoreButtonWrap, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     onClick: function onClick() {
       return handleSearchbusinessAndProducts();
     },
@@ -317,9 +318,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       width: 100,
       height: 30
     })));
-  }), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList11 = businessesSearchList.businesses) === null || _businessesSearchList11 === void 0 ? void 0 : _businessesSearchList11.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList12 = businessesSearchList.businesses) === null || _businessesSearchList12 === void 0 ? void 0 : _businessesSearchList12.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
-  })), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList12 = businessesSearchList.error) === null || _businessesSearchList12 === void 0 ? void 0 : _businessesSearchList12.length) > 0 && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList13 = businessesSearchList.businesses) === null || _businessesSearchList13 === void 0 ? void 0 : _businessesSearchList13.length) === 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, typeof (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) === 'string' ? /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('ERROR', 'ERROR'), ": ", businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList14 = businessesSearchList.error) === null || _businessesSearchList14 === void 0 ? void 0 : _businessesSearchList14.map(function (e, i) {
+  })), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList13 = businessesSearchList.error) === null || _businessesSearchList13 === void 0 ? void 0 : _businessesSearchList13.length) > 0 && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList14 = businessesSearchList.businesses) === null || _businessesSearchList14 === void 0 ? void 0 : _businessesSearchList14.length) === 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, typeof (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) === 'string' ? /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('ERROR', 'ERROR'), ": ", businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList15 = businessesSearchList.error) === null || _businessesSearchList15 === void 0 ? void 0 : _businessesSearchList15.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
