@@ -469,6 +469,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
 };
 var SignUpForm = function SignUpForm(props) {
   var loginControllerProps = _objectSpread(_objectSpread({}, props), {}, {
+    isRecaptchaEnable: true,
     UIComponent: SignUpFormUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.SignupForm, loginControllerProps);
