@@ -519,6 +519,7 @@ const SignUpFormUI = (props) => {
 export const SignUpForm = (props) => {
   const loginControllerProps = {
     ...props,
+    isRecaptchaEnable: true,
     UIComponent: SignUpFormUI
   }
   return <SignUpController {...loginControllerProps} />
