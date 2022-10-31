@@ -43,8 +43,8 @@ export const BusinessProductsList = (props) => {
     productId = product_slug
   }
 
-  if ((productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id') ||
-    (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')))
+  if ((productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) ||
+    (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store'))
   ) {
     if (search) {
       const ids = productUrlTemplate.split('?')[1].split('&')
@@ -53,8 +53,12 @@ export const BusinessProductsList = (props) => {
       const params = new URLSearchParams(search)
       categoryId = params.get(categoryParameter)
       productId = params.get(productParameter)
-      tableNumber = params.get('table_number')
     }
+  }
+
+  if (search) {
+    const params = new URLSearchParams(search)
+    tableNumber = params.get('table_number')
   }
 
   if (tableNumber) {
@@ -66,7 +70,7 @@ export const BusinessProductsList = (props) => {
     window.localStorage.setItem(
       'table_number',
       JSON.stringify({
-        tableNumber: tableNumber.split('=')[1],
+        tableNumber,
         slug: businessSlug
       })
     )
