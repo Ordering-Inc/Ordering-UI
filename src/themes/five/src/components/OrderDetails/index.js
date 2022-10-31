@@ -65,7 +65,8 @@ import {
   OrderStatusAndLinkContainer,
   LinkWrapper,
   MapWrapper,
-  BusinessExternalWrapper
+  BusinessExternalWrapper,
+  DirectionButtonWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
@@ -496,6 +497,16 @@ const OrderDetailsUI = (props) => {
                           {yourSpotString}: {order?.place?.name}
                         </p>
                       </PlaceSpotSection>
+                    )}
+                    {showOrderActions && (
+                      <DirectionButtonWrapper>
+                        <Button
+                          color='primary'
+                          onClick={() => window.open(`http://maps.google.com/?q=${order?.business?.address}`)}
+                        >
+                          {t('GET_DIRECTIONS', 'Get Directions')}
+                        </Button>
+                      </DirectionButtonWrapper>
                     )}
                   </BusinessInfo>
                 </BusinessWrapper>

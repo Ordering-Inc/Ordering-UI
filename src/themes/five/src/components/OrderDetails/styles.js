@@ -737,3 +737,6 @@ export const BusinessExternalWrapper = styled.div`
     width: 50%;
   }
 `
+export const DirectionButtonWrapper = styled.div`
+  margin-top: 30px;
+`
