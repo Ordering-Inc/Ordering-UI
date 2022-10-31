@@ -101,7 +101,7 @@ var MyOrders = function MyOrders(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), hideOrders && !allEmpty && /*#__PURE__*/_react.default.createElement("h2", null, t('PREVIOUSLY_ORDERED', 'Previously ordered')), !hideOrders && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
+  }), hideOrders && !allEmpty && /*#__PURE__*/_react.default.createElement("h2", null, t('PREVIOUSLY_ORDERED', 'Previously ordered')), !hideOrders && !props.hideOptions && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "orders"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     hideOrders: hideOrders

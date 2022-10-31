@@ -13,8 +13,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var CategoriesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n  padding: 5px 0px 0px 0px;\n  background: ", ";\n  z-index: 1002;\n  position: absolute;\n  top: 0;\n  border-bottom: 1px solid #D9D9D9;\n  text-align: center;\n  width: ", ";\n\n  div.category {\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding: 10px 0px;\n    margin: 0 15px;\n    &:nth-of-type(1) {\n      margin-left: 0;\n      ", "\n    }\n  }\n\n  div.special {\n    ", "\n  }\n\n  /* @media (min-width: 381px) {\n    padding: 15px 0px 0px 0px;\n  } */\n  @media (min-width: 769px) {\n    ", "\n  }\n  @media (min-width: 992px) {\n    width: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (props) {
-  var _props$w;
-  return (_props$w = props.w) !== null && _props$w !== void 0 ? _props$w : '100%';
+  return props.w || '100%';
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n        margin-left: 15px;\n        margin-right: 15px;\n      "])));
 }, function (props) {
@@ -23,7 +22,7 @@ var CategoriesContainer = _styledComponents.default.div(_templateObject || (_tem
   var isProfessional = _ref.isProfessional;
   return isProfessional && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      width: 100%;\n    "])));
 }, function (props) {
-  var _props$w2;
-  return (_props$w2 = props.w) !== null && _props$w2 !== void 0 ? _props$w2 : 'auto';
+  var _props$w;
+  return (_props$w = props.w) !== null && _props$w !== void 0 ? _props$w : 'auto';
 });
 exports.CategoriesContainer = CategoriesContainer;

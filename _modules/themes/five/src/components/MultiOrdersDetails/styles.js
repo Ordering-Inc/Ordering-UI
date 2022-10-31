@@ -14,13 +14,13 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 exports.Container = Container;
 var HeaderContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  h1 {\n    font-size: 24px;\n    line-height: 36px;\n    font-weight: 400;\n    margin: 0;\n    span.name {\n      font-weight: 700;\n      margin: 0 10px;\n    }\n  }\n  p {\n    font-size: 14px;\n    margin: 6px 0;\n  }\n"])));
 exports.HeaderContainer = HeaderContainer;
-var CustomerInfoContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-radius: 7.6px;\n  border: 1px solid ", ";\n  padding: 30px 25px;\n  margin-top: 48px;\n  display: flex;\n"])), function (props) {
+var CustomerInfoContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-radius: 7.6px;\n  border: 1px solid ", ";\n  padding: 30px 25px;\n  margin-top: 48px;\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  @media (min-width: 576px) {\n    flex-direction: row;\n  }\n"])), function (props) {
   return props.theme.colors.gray200;
 });
 exports.CustomerInfoContainer = CustomerInfoContainer;
-var CustomerDetails = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex: 1;\n  > div {\n    display: flex;\n    margin-top: 24px;\n  }\n"])));
+var CustomerDetails = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex: 1;\n  > div {\n    display: flex;\n    flex-direction: column;\n    margin-top: 24px;\n  }\n\n  @media (min-width: 576px) {\n    > div {\n      flex-direction: row;\n    }\n  }\n"])));
 exports.CustomerDetails = CustomerDetails;
-var PaymentDetails = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex: 1;\n  h3.address {\n    margin-top: 30px;\n  }\n  p {\n    font-size: 14px;\n    line-height: 24px;\n    margin: 10px 0;\n  }\n"])));
+var PaymentDetails = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex: 1;\n  h3 {\n    margin-top: 30px;\n  }\n  p {\n    font-size: 14px;\n    line-height: 24px;\n    margin: 10px 0;\n  }\n\n  @media (min-width: 576px) {\n    h3:not(.address) {\n      margin-top: 0;\n    }\n  }\n"])));
 exports.PaymentDetails = PaymentDetails;
 var PhotoWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 75px;\n  height: 75px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    border-radius: 7.6px;\n  }\n  svg {\n    width: 80%;\n    height: 80%;\n  }\n  ", "\n"])), function (props) {
   var _props$theme;
@@ -49,13 +49,13 @@ var SingleOrderContainer = _styledComponents.default.div(_templateObject14 || (_
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      text-align: left;\n    "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      text-align: right;\n    "])));
 });
 exports.SingleOrderContainer = SingleOrderContainer;
-var SingleOrderHeader = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  > div {\n    > div {\n      display: flex;\n      align-items: center;\n      p {\n        line-height: 24px;\n        font-size: 14px;\n        margin: 3px 0;\n        &.date {\n          margin: 0 5px;\n        }\n      }\n    }\n  }\n\n  button {\n    height: 43px;\n  }\n"])));
+var SingleOrderHeader = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  flex-direction: column;\n\n  > div {\n    > div {\n      display: flex;\n      align-items: center;\n      p {\n        line-height: 24px;\n        font-size: 14px;\n        margin: 3px 0;\n        &.date {\n          margin: 0 5px;\n        }\n      }\n    }\n  }\n\n  button {\n    height: 43px;\n  }\n\n  @media (min-width: 576px) {\n    flex-direction: row;\n  }\n"])));
 exports.SingleOrderHeader = SingleOrderHeader;
 var OrderBusinessDetails = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin: 50px 0;\n"])));
 exports.OrderBusinessDetails = OrderBusinessDetails;
-var OrderBusinessWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
+var OrderBusinessWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 576px) {\n    flex-direction: row;\n  }\n"])));
 exports.OrderBusinessWrapper = OrderBusinessWrapper;
-var BusinessData = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  p {\n    font-size: 14px;\n    line-height: 21px;\n    margin: 2px 0;\n    &.bold {\n      font-weight: 500;\n    }\n  }\n"])));
+var BusinessData = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n  p {\n    font-size: 14px;\n    line-height: 21px;\n    margin: 2px 0;\n    &.bold {\n      font-weight: 500;\n    }\n  }\n  @media (min-width: 576px) {\n    margin-top: 0px;\n  }\n"])));
 exports.BusinessData = BusinessData;
 var ActionsBlock = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  span {\n    cursor: pointer;\n    font-size: 16px;\n    color: ", ";\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
