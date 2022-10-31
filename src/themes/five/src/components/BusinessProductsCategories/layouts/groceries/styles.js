@@ -48,6 +48,9 @@ export const CategoryTab = styled.div`
 
   span {
     width: 90%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   ${({ active }) => active && css`
