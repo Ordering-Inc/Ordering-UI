@@ -740,8 +740,8 @@ const CheckoutUI = (props) => {
         closeOnBackdrop={false}
       />
       <AlertComponent
-        title={t('CATERING', 'Catering')}
-        content={t('DISCLAIMER_CATERING_TITLE', 'Disclaimer Catering title')}
+        title={t('DISCLAIMER_CATERING_TITLE', 'Disclaimer catering title')}
+        content={t('DISCLAIMER_CATERING', 'Disclaimer Catering')}
         acceptText={t('ACCEPT', 'Accept')}
         open={openAlertCatering}
         onClose={() => closeCateringAlert()}

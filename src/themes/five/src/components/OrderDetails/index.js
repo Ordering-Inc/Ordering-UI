@@ -338,6 +338,8 @@ const OrderDetailsUI = (props) => {
     }
   }
 
+  const preorderMetafieldEnabled = order?.metafields?.find(metafield => metafield.key === 'preorder')?.value
+
   useEffect(() => {
     if (driverLocation) {
       locations[0] = driverLocation
@@ -496,6 +498,9 @@ const OrderDetailsUI = (props) => {
                   <p className='date'>
                     { dateTimeETA }
                   </p>
+                )}
+                {preorderMetafieldEnabled && (
+                  <p className='types'>{t('DISCLAIMER_CATERING', 'Disclaimer Catering')}</p>
                 )}
                 {
                   (
