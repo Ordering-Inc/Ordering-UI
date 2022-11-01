@@ -740,3 +740,48 @@ export const BusinessExternalWrapper = styled.div`
 export const DirectionButtonWrapper = styled.div`
   margin-top: 30px;
 `
+
+export const ProfessionalWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0px 10px 10px 10px;
+
+  > img {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  > svg {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+  }
+
+  > p {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 26px;
+    margin-left: 14px;
+
+    ${props => props.theme.rtl && css`
+      margin-left: 0px;
+      margin-right: 14px;
+    `}
+  }
+
+  @media (min-width: 411px) {
+    > img {
+      width: 65px;
+      height: 65px;
+      min-width: 65px;
+    }
+    > svg {
+      width: 65px;
+      height: 65px;
+      min-width: 65px;
+    }
+  }
+`
