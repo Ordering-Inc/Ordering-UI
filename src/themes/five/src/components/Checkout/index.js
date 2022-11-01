@@ -133,7 +133,7 @@ const CheckoutUI = (props) => {
   const [isSuccess, setIsSuccess] = useState(false)
   const [isHideCash, setHideCash] = useState(false)
   const [cateringDayError, setCateringDayError] = useState(false)
-
+  const [openAlertCatering, setOpenAlertCatering] = useState(false)
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
   const isWalletCreditPointsEnabled = businessConfigs.find(config => config.key === 'wallet_credit_point_enabled')?.value === '1'
@@ -224,6 +224,10 @@ const CheckoutUI = (props) => {
     setIsUserDetailsEdit(false)
   }
 
+  const closeCateringAlert = () => {
+    setOpenAlertCatering(false)
+  }
+
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
@@ -312,6 +316,12 @@ const CheckoutUI = (props) => {
     if (cart?.products?.length) return
     handleStoreRedirect(cart?.business?.slug)
   }, [cart?.products])
+
+  useEffect(() => {
+    if (hasCateringProducts.result) {
+      setOpenAlertCatering(true)
+    }
+  }, [hasCateringProducts])
 
   const CartComponent = layout === 'pfchangs'
     ? CartPF
@@ -465,9 +475,9 @@ const CheckoutUI = (props) => {
             <>
               {layout === 'pfchangs' && !hasCateringProducts.loading && (
                 <>
-                  <SubtitleContainer>
+                  {/* <SubtitleContainer>
                     <h2>{t('PREORDER_CONFIGUTARION', 'Preorder configuration')}</h2>
-                  </SubtitleContainer>
+                  </SubtitleContainer> */}
                   <MomentContentPF
                     hasCateringProducts={hasCateringProducts.result}
                     cateringHours={cateringHours}
@@ -727,6 +737,15 @@ const CheckoutUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+      <AlertComponent
+        title={t('CATERING', 'Catering')}
+        content={t('DISCLAIMER_CATERING', 'Disclaimer Catering')}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={openAlertCatering}
+        onClose={() => closeCateringAlert()}
+        onAccept={() => closeCateringAlert()}
         closeOnBackdrop={false}
       />
       <Modal

@@ -30,7 +30,7 @@ export const MomentContent = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Container isLoading={orderState?.loading}>
+      <>
         <MomentControl
           {...momentProps}
           onClose={props.onClose}
@@ -39,7 +39,7 @@ export const MomentContent = (props) => {
           cateringDayError={props.cateringDayError}
           setCateringDayError={props.setCateringDayError}
         />
-      </Container>
+      </>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

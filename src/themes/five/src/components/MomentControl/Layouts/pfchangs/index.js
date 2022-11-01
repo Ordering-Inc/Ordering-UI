@@ -252,13 +252,13 @@ const MomentControlUI = (props) => {
 
   return (
     <MomentContainer id='moment_control'>
-      <p>
+      {/* <p>
         {cateringDayError
           ? t('WARNING_CATERING_BUSINESS_CLOSED', 'The Business will be closed before preparing catering')
           : hasCateringProducts
             ? t('DISCLAIMER_CATERING', 'Disclaimer Catering')
             : asapText}
-      </p>
+      </p> */}
       {/* {!isAppoint && !hasCateringProducts && (
         <SelectContainer> */}
       {/* <Select
