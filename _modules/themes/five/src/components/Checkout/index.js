@@ -157,6 +157,14 @@ var CheckoutUI = function CheckoutUI(props) {
     _useState18 = _slicedToArray(_useState17, 2),
     isHideCash = _useState18[0],
     setHideCash = _useState18[1];
+  var _useState19 = (0, _react.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    cateringDayError = _useState20[0],
+    setCateringDayError = _useState20[1];
+  var _useState21 = (0, _react.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    openAlertCatering = _useState22[0],
+    setOpenAlertCatering = _useState22[1];
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
   var isWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
     return config.key === 'wallet_cash_enabled';
@@ -179,7 +187,7 @@ var CheckoutUI = function CheckoutUI(props) {
   var isApplyMasterCoupon = daysForApplyCoupon.includes((0, _moment.default)().days());
   var isDisablePlaceOrderButton = !(cart !== null && cart !== void 0 && cart.valid) || !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 || placing || errorCash || loading || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ||
   // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
-  options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.driver_tip) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.checkout) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.driver_tip) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0;
+  options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.driver_tip) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.checkout) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.driver_tip) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 || cateringDayError || hasCateringProducts.loading;
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var deliveryOptions = (instructionsOptions === null || instructionsOptions === void 0 ? void 0 : instructionsOptions.result) && (instructionsOptions === null || instructionsOptions === void 0 ? void 0 : (_instructionsOptions$ = instructionsOptions.result) === null || _instructionsOptions$ === void 0 ? void 0 : (_instructionsOptions$2 = _instructionsOptions$.filter(function (option) {
     return option === null || option === void 0 ? void 0 : option.enabled;
@@ -226,6 +234,9 @@ var CheckoutUI = function CheckoutUI(props) {
       content: []
     });
     setIsUserDetailsEdit(false);
+  };
+  var closeCateringAlert = function closeCateringAlert() {
+    setOpenAlertCatering(false);
   };
   var checkValidationFields = function checkValidationFields() {
     var _validationFields$fie10, _validationFields$fie11, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _validationFields$fie15, _validationFields$fie16, _configs$verification;
@@ -303,6 +314,11 @@ var CheckoutUI = function CheckoutUI(props) {
     if (cart !== null && cart !== void 0 && (_cart$products = cart.products) !== null && _cart$products !== void 0 && _cart$products.length) return;
     handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug);
   }, [cart === null || cart === void 0 ? void 0 : cart.products]);
+  (0, _react.useEffect)(function () {
+    if (hasCateringProducts.result) {
+      setOpenAlertCatering(true);
+    }
+  }, [hasCateringProducts]);
   var CartComponent = layout === 'pfchangs' ? _pfchangs2.Cart : _Cart.Cart;
   var UserDetailsComponent = layout === 'pfchangs' ? _pfchangs.UserDetails : _UserDetails.UserDetails;
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
@@ -421,9 +437,11 @@ var CheckoutUI = function CheckoutUI(props) {
     style: {
       marginBottom: '10px'
     }
-  }))), !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, layout === 'pfchangs' && !hasCateringProducts.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SubtitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PREORDER_CONFIGUTARION', 'Preorder configuration'))), /*#__PURE__*/_react.default.createElement(_pfchangs4.MomentContent, {
+  }))), !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, layout === 'pfchangs' && !hasCateringProducts.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_pfchangs4.MomentContent, {
     hasCateringProducts: hasCateringProducts.result,
-    cateringHours: cateringHours
+    cateringHours: cateringHours,
+    cateringDayError: cateringDayError,
+    setCateringDayError: setCateringDayError
   })), !cartState.loading && deliveryOptionSelected !== undefined && (options === null || options === void 0 ? void 0 : options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_styles.SubtitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_DETAILS', 'Delivery Details'))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryOptionsContainer, null, layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_DETAILS', 'Delivery Details')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     defaultValue: deliveryOptionSelected,
     options: deliveryOptions,
@@ -518,7 +536,7 @@ var CheckoutUI = function CheckoutUI(props) {
     onClick: function onClick() {
       return handlePlaceOrder();
     }
-  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')), options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie18 = validationFields.fields) === null || _validationFields$fie18 === void 0 ? void 0 : (_validationFields$fie19 = _validationFields$fie18.checkout) === null || _validationFields$fie19 === void 0 ? void 0 : (_validationFields$fie20 = _validationFields$fie19.driver_tip) === null || _validationFields$fie20 === void 0 ? void 0 : _validationFields$fie20.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie21 = validationFields.fields) === null || _validationFields$fie21 === void 0 ? void 0 : (_validationFields$fie22 = _validationFields$fie21.checkout) === null || _validationFields$fie22 === void 0 ? void 0 : (_validationFields$fie23 = _validationFields$fie22.driver_tip) === null || _validationFields$fie23 === void 0 ? void 0 : _validationFields$fie23.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.'))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
+  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')), cateringDayError && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_CATERING_BUSINESS_CLOSED', 'The Business will be closed before preparing catering')), options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie18 = validationFields.fields) === null || _validationFields$fie18 === void 0 ? void 0 : (_validationFields$fie19 = _validationFields$fie18.checkout) === null || _validationFields$fie19 === void 0 ? void 0 : (_validationFields$fie20 = _validationFields$fie19.driver_tip) === null || _validationFields$fie20 === void 0 ? void 0 : _validationFields$fie20.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie21 = validationFields.fields) === null || _validationFields$fie21 === void 0 ? void 0 : (_validationFields$fie22 = _validationFields$fie21.checkout) === null || _validationFields$fie22 === void 0 ? void 0 : (_validationFields$fie23 = _validationFields$fie22.driver_tip) === null || _validationFields$fie23 === void 0 ? void 0 : _validationFields$fie23.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.'))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('CUSTOMER_DETAILS', 'Customer Details'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -528,6 +546,18 @@ var CheckoutUI = function CheckoutUI(props) {
     },
     onAccept: function onAccept() {
       return closeAlert();
+    },
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(AlertComponent, {
+    title: t('DISCLAIMER_CATERING_TITLE', 'Disclaimer catering title'),
+    content: t('DISCLAIMER_CATERING', 'Disclaimer Catering'),
+    acceptText: t('ACCEPT', 'Accept'),
+    open: openAlertCatering,
+    onClose: function onClose() {
+      return closeCateringAlert();
+    },
+    onAccept: function onAccept() {
+      return closeCateringAlert();
     },
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
@@ -558,7 +588,7 @@ var CheckoutUI = function CheckoutUI(props) {
   })));
 };
 var Checkout = function Checkout(props) {
-  var _Object$values2, _theme$layouts3, _theme$layouts3$gener, _theme$layouts3$gener2, _theme$layouts3$gener3, _cartState$error, _cartState$cart2;
+  var _Object$values2, _theme$layouts3, _theme$layouts3$check, _theme$layouts3$check2, _theme$layouts3$check3, _theme$layouts4, _theme$layouts4$gener, _theme$layouts4$gener2, _theme$layouts4$gener3, _cartState$error, _cartState$cart2;
   var errors = props.errors,
     clearErrors = props.clearErrors,
     cartUuid = props.cartUuid,
@@ -582,42 +612,43 @@ var Checkout = function Checkout(props) {
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
   var theme = (0, _styledComponents.useTheme)();
-  var _useState19 = (0, _react.useState)({
+  var _useState23 = (0, _react.useState)({
       loading: true,
       error: null,
       cart: null
     }),
-    _useState20 = _slicedToArray(_useState19, 2),
-    cartState = _useState20[0],
-    setCartState = _useState20[1];
-  var _useState21 = (0, _react.useState)(false),
-    _useState22 = _slicedToArray(_useState21, 2),
-    openUpselling = _useState22[0],
-    setOpenUpselling = _useState22[1];
-  var _useState23 = (0, _react.useState)(false),
     _useState24 = _slicedToArray(_useState23, 2),
-    canOpenUpselling = _useState24[0],
-    setCanOpenUpselling = _useState24[1];
-  var _useState25 = (0, _react.useState)(null),
+    cartState = _useState24[0],
+    setCartState = _useState24[1];
+  var _useState25 = (0, _react.useState)(false),
     _useState26 = _slicedToArray(_useState25, 2),
-    currentCart = _useState26[0],
-    setCurrentCart = _useState26[1];
-  var _useState27 = (0, _react.useState)({
+    openUpselling = _useState26[0],
+    setOpenUpselling = _useState26[1];
+  var _useState27 = (0, _react.useState)(false),
+    _useState28 = _slicedToArray(_useState27, 2),
+    canOpenUpselling = _useState28[0],
+    setCanOpenUpselling = _useState28[1];
+  var _useState29 = (0, _react.useState)(null),
+    _useState30 = _slicedToArray(_useState29, 2),
+    currentCart = _useState30[0],
+    setCurrentCart = _useState30[1];
+  var _useState31 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState28 = _slicedToArray(_useState27, 2),
-    alertState = _useState28[0],
-    setAlertState = _useState28[1];
-  var _useState29 = (0, _react.useState)(false),
-    _useState30 = _slicedToArray(_useState29, 2),
-    isResetPaymethod = _useState30[0],
-    setIsResetPaymethod = _useState30[1];
+    _useState32 = _slicedToArray(_useState31, 2),
+    alertState = _useState32[0],
+    setAlertState = _useState32[1];
+  var _useState33 = (0, _react.useState)(false),
+    _useState34 = _slicedToArray(_useState33, 2),
+    isResetPaymethod = _useState34[0],
+    setIsResetPaymethod = _useState34[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);
   })) || null);
-  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$gener = _theme$layouts3.general) === null || _theme$layouts3$gener === void 0 ? void 0 : (_theme$layouts3$gener2 = _theme$layouts3$gener.components) === null || _theme$layouts3$gener2 === void 0 ? void 0 : (_theme$layouts3$gener3 = _theme$layouts3$gener2.layout) === null || _theme$layouts3$gener3 === void 0 ? void 0 : _theme$layouts3$gener3.type) === 'pfchangs' ? _pfchangs3.Alert : _Confirm.Alert;
+  var isPfchangs = (theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$check = _theme$layouts3.checkout) === null || _theme$layouts3$check === void 0 ? void 0 : (_theme$layouts3$check2 = _theme$layouts3$check.components) === null || _theme$layouts3$check2 === void 0 ? void 0 : (_theme$layouts3$check3 = _theme$layouts3$check2.layout) === null || _theme$layouts3$check3 === void 0 ? void 0 : _theme$layouts3$check3.type) === 'pfchangs';
+  var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts4 = theme.layouts) === null || _theme$layouts4 === void 0 ? void 0 : (_theme$layouts4$gener = _theme$layouts4.general) === null || _theme$layouts4$gener === void 0 ? void 0 : (_theme$layouts4$gener2 = _theme$layouts4$gener.components) === null || _theme$layouts4$gener2 === void 0 ? void 0 : (_theme$layouts4$gener3 = _theme$layouts4$gener2.layout) === null || _theme$layouts4$gener3 === void 0 ? void 0 : _theme$layouts4$gener3.type) === 'pfchangs' ? _pfchangs3.Alert : _Confirm.Alert;
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -775,7 +806,8 @@ var Checkout = function Checkout(props) {
     uuid: cartUuid,
     isResetPaymethod: isResetPaymethod,
     setIsResetPaymethod: setIsResetPaymethod,
-    applyCoupon: applyCoupon
+    applyCoupon: applyCoupon,
+    isPfchangs: isPfchangs
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartUuid && orderState.carts && cartsWithProducts && (cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length) === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.'),

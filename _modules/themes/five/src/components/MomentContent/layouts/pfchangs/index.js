@@ -41,12 +41,12 @@ var MomentContent = function MomentContent(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
-    isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_pfchangs.MomentControl, _extends({}, momentProps, {
+  }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_pfchangs.MomentControl, _extends({}, momentProps, {
     onClose: props.onClose,
     hasCateringProducts: props.hasCateringProducts,
-    cateringHours: props.cateringHours
+    cateringHours: props.cateringHours,
+    cateringDayError: props.cateringDayError,
+    setCateringDayError: props.setCateringDayError
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

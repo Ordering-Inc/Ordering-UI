@@ -31,7 +31,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var MomentControlUI = function MomentControlUI(props) {
-  var _configs$dates_moment, _configs$dates_moment2, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3;
+  var _configs$dates_moment, _configs$dates_moment2;
   var isAsap = props.isAsap,
     datesList = props.datesList,
     hoursList = props.hoursList,
@@ -42,7 +42,9 @@ var MomentControlUI = function MomentControlUI(props) {
     handleChangeTime = props.handleChangeTime,
     isAppoint = props.isAppoint,
     hasCateringProducts = props.hasCateringProducts,
-    cateringHours = props.cateringHours;
+    cateringHours = props.cateringHours,
+    setCateringDayError = props.setCateringDayError,
+    cateringDayError = props.cateringDayError;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
@@ -161,6 +163,7 @@ var MomentControlUI = function MomentControlUI(props) {
     });
   };
   (0, _react.useEffect)(function () {
+    var _timeLists2, _timeLists3;
     var _timeLists = [];
     if (!scheduleList) {
       _timeLists = hoursList.filter(function (hour) {
@@ -180,9 +183,13 @@ var MomentControlUI = function MomentControlUI(props) {
       _timeLists = getTimes(dateSelected, scheduleList);
     }
     setTimeList(_timeLists);
-    if (hasCateringProducts) {
+    if (hasCateringProducts && ((_timeLists2 = _timeLists) === null || _timeLists2 === void 0 ? void 0 : _timeLists2.length) > 0) {
       var _timeLists$;
       handleChangeTime((_timeLists$ = _timeLists[0]) === null || _timeLists$ === void 0 ? void 0 : _timeLists$.value);
+      setCateringDayError(false);
+    }
+    if (((_timeLists3 = _timeLists) === null || _timeLists3 === void 0 ? void 0 : _timeLists3.length) === 0 && hasCateringProducts) {
+      setCateringDayError(true);
     }
   }, [dateSelected, hoursList, scheduleList, hasCateringProducts]);
   (0, _react.useEffect)(function () {
@@ -199,69 +206,9 @@ var MomentControlUI = function MomentControlUI(props) {
   (0, _react.useEffect)(function () {
     setLocalMoment();
   }, []);
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_styles.MomentContainer, {
     id: "moment_control"
-  }, !isAppoint && !hasCateringProducts && /*#__PURE__*/_react.default.createElement(_styles.SelectContainer, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    placeholder: t('WHEN_DO_WE_DELIVERY', 'When do we delivery?'),
-    defaultValue: isASP ? true : null,
-    options: momentOptions,
-    onChange: function onChange(val) {
-      return handleCheckBoxChange(val);
-    }
-  })), (!isASP || isAppoint) && /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, !isAppoint && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
-    left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
-  }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
-    spaceBetween: 0,
-    navigation: true,
-    breakpoints: {
-      0: {
-        slidesPerView: 4,
-        spaceBetween: 0
-      },
-      400: {
-        slidesPerView: 5,
-        spaceBetween: 0
-      },
-      550: {
-        slidesPerView: 6,
-        spaceBetween: 0
-      },
-      769: {
-        slidesPerView: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) < 7 ? configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value : 7,
-        spaceBetween: 0
-      }
-    },
-    freeMode: true,
-    watchSlidesProgress: true,
-    className: "swiper-datelist",
-    preventClicksPropagation: false
-  }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
-    var dateParts = date.split('-');
-    var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2);
-    var dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate();
-    return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
-      key: dayNumber
-    }, /*#__PURE__*/_react.default.createElement(_styles.Day, {
-      selected: dateSelected === date,
-      onClick: function onClick() {
-        return handleChangeDate(date);
-      }
-    }, /*#__PURE__*/_react.default.createElement(_styles.DayName, {
-      isAppoint: isAppoint
-    }, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, {
-      isAppoint: isAppoint
-    }, dayNumber)));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, isEnabled && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, timeList.map(function (time, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.TimeItem, {
-      key: i,
-      active: timeSelected === time.value,
-      onClick: function onClick() {
-        return handleChangeTime(time.value);
-      },
-      isAppoint: isAppoint
-    }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))));
+  });
 };
 var MomentControl = function MomentControl(props) {
   var momentProps = _objectSpread(_objectSpread({}, props), {}, {
