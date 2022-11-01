@@ -88,6 +88,7 @@ export const App = () => {
     reviewStatus: { trigger: false, order: false, product: false, driver: false },
     reviewed: { isOrderReviewed: false, isProductReviewed: false, isDriverReviewed: false }
   })
+  const isShowReviewsPopupEnabled = configs?.show_reviews_popups_enabled?.value === '1'
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
   const isKioskApp = settings?.use_kiosk
 
@@ -268,6 +269,7 @@ export const App = () => {
   }
 
   useEffect(() => {
+    if (!isShowReviewsPopupEnabled) return
     const _user = window.localStorage.getItem('user')
     const _token = window.localStorage.getItem('token')
     const _reviewRequired = window.sessionStorage.getItem('review-required')
@@ -278,7 +280,7 @@ export const App = () => {
     if (!(_user || _token)) {
       window.sessionStorage.removeItem('review-required')
     }
-  }, [auth])
+  }, [auth, isShowReviewsPopupEnabled])
 
   useEffect(() => {
     if (!loaded && !orderStatus.loading && !configLoading && !siteLoading && !orderingTheme?.loading) {
