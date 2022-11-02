@@ -65,6 +65,7 @@ import {
   LinkWrapper,
   MapWrapper,
   BusinessExternalWrapper,
+  DirectionButtonWrapper,
   ProfessionalWrapper,
   ProfessionalBlock
 } from './styles'
@@ -519,6 +520,16 @@ const OrderDetailsUI = (props) => {
                           {yourSpotString}: {order?.place?.name}
                         </p>
                       </PlaceSpotSection>
+                    )}
+                    {showOrderActions && (
+                      <DirectionButtonWrapper>
+                        <Button
+                          color='primary'
+                          onClick={() => window.open(`http://maps.google.com/?q=${order?.business?.address}`)}
+                        >
+                          {t('GET_DIRECTIONS', 'Get Directions')}
+                        </Button>
+                      </DirectionButtonWrapper>
                     )}
                   </BusinessInfo>
                 </BusinessWrapper>
