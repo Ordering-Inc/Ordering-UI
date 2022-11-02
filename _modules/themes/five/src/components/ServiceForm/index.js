@@ -8,6 +8,7 @@ exports.ServiceForm = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _react2 = require("swiper/react");
 var _orderingComponents = require("ordering-components");
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Confirm = require("../Confirm");
 var _Modal = require("../Modal");
 var _LoginForm = require("../LoginForm");
@@ -38,14 +39,18 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var ServiceFormUI = function ServiceFormUI(props) {
-  var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6;
-  var product = props.product,
+  var _professionalListStat3, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6;
+  var productObject = props.productObject,
     professionalSelected = props.professionalSelected,
     handleSave = props.handleSave,
     isSoldOut = props.isSoldOut,
     maxProductQuantity = props.maxProductQuantity,
     productCart = props.productCart,
-    professionalList = props.professionalList;
+    isCartProduct = props.isCartProduct,
+    professionalListState = props.professionalListState;
+  var product = productObject.product,
+    loading = productObject.loading,
+    error = productObject.error;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -179,10 +184,31 @@ var ServiceFormUI = function ServiceFormUI(props) {
     };
   }, [isDropDown]);
   (0, _react.useEffect)(function () {
-    if (!professionalSelected) return;
+    if (!(professionalSelected !== null && professionalSelected !== void 0 && professionalSelected.schedule)) return;
     setCurrentProfessional(professionalSelected);
   }, [professionalSelected]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ImageWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SwiperWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ArrowButtonWrapper, {
+  (0, _react.useEffect)(function () {
+    var _professionalListStat;
+    if (isCartProduct && (professionalListState === null || professionalListState === void 0 ? void 0 : (_professionalListStat = professionalListState.professionals) === null || _professionalListStat === void 0 ? void 0 : _professionalListStat.length) > 0) {
+      var _professionalListStat2;
+      var professional = professionalListState === null || professionalListState === void 0 ? void 0 : (_professionalListStat2 = professionalListState.professionals) === null || _professionalListStat2 === void 0 ? void 0 : _professionalListStat2.find(function (item) {
+        return item.id === (professionalSelected === null || professionalSelected === void 0 ? void 0 : professionalSelected.id);
+      });
+      setCurrentProfessional(professional);
+    }
+  }, [isCartProduct, professionalListState === null || professionalListState === void 0 ? void 0 : professionalListState.professionals]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+    width: 90
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect",
+    height: 50
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect",
+    height: 50
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect",
+    height: 200
+  })), product && !loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ImageWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SwiperWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ArrowButtonWrapper, {
     className: "button-prev"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronLeft, null)), /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 0,
@@ -221,7 +247,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
     className: "status"
   }, t('BUSY_ON_SELECTED_TIME', 'Busy on selected time'))) : /*#__PURE__*/_react.default.createElement("span", {
     className: "status"
-  }, t('AVAILABLE', 'Available'))))) : /*#__PURE__*/_react.default.createElement("p", null, t('SELECT_PROFESSIONAL', 'Select professional')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, null)), isDropDown && /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DropDownTitle, null, t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')), professionalList === null || professionalList === void 0 ? void 0 : professionalList.map(function (professional) {
+  }, t('AVAILABLE', 'Available'))))) : /*#__PURE__*/_react.default.createElement("p", null, t('SELECT_PROFESSIONAL', 'Select professional')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, null)), isDropDown && /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DropDownTitle, null, t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')), professionalListState === null || professionalListState === void 0 ? void 0 : (_professionalListStat3 = professionalListState.professionals) === null || _professionalListStat3 === void 0 ? void 0 : _professionalListStat3.map(function (professional) {
     return /*#__PURE__*/_react.default.createElement(_styles.SelectedItem, {
       key: professional === null || professional === void 0 ? void 0 : professional.id,
       isDropDown: true,
@@ -260,7 +286,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
     onClick: function onClick() {
       return setModalIsOpen(true);
     }
-  }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SOLD_OUT) || 'Sold out') : t('LOGIN_SIGNUP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN_SIGNUP) || 'Login / Sign Up'))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SOLD_OUT) || 'Sold out') : t('LOGIN_SIGNUP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN_SIGNUP) || 'Login / Sign Up')))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return closeModal();
