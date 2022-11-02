@@ -785,3 +785,8 @@ export const ProfessionalWrapper = styled.div`
     }
   }
 `
+
+export const ProfessionalBlock = styled.div`
+  border-bottom: 1px solid ${props => props.theme.colors.disabled};
+  margin-bottom: 15px;
+`
