@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
-  var _theme$images, _theme$images$categor, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var typesState = props.typesState,
     currentTypeSelected = props.currentTypeSelected,
     handleChangeBusinessType = props.handleChangeBusinessType;
@@ -45,7 +45,10 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     load = _useState2[0],
     setLoad = _useState2[1];
-  var defaultImage = (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$categor = _theme$images.categories) === null || _theme$images$categor === void 0 ? void 0 : _theme$images$categor.all;
+  var defaultImage = function defaultImage(name) {
+    var _theme$images, _theme$images$categor;
+    return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$categor = _theme$images.categories) === null || _theme$images$categor === void 0 ? void 0 : _theme$images$categor[name.toLowerCase()];
+  };
   var handleChangeCategory = function handleChangeCategory(category) {
     handleChangeBusinessType && handleChangeBusinessType(category);
   };
@@ -83,7 +86,7 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       active: type.id === currentTypeSelected,
       load: load
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: type.image || defaultImage,
+      src: type.image || defaultImage(type.name),
       alt: type.name.toLowerCase(),
       onLoad: function onLoad() {
         return setLoad(true);
