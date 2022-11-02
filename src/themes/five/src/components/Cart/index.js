@@ -15,6 +15,7 @@ import { TextArea } from '../../styles/Inputs'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { CartStoresListing } from '../../../../franchise/src/components/CartStoresListing'
 import { DriverTips } from '../DriverTips'
+import { ServiceForm } from '../ServiceForm'
 import {
   CartContainer,
   OrderBill,
@@ -565,15 +566,29 @@ const CartUI = (props) => {
             onClose={() => setModalIsOpen(false)}
             disableOverflowX
           >
-            <ProductForm
-              isCartProduct
-              productCart={curProduct}
-              businessSlug={cart?.business?.slug}
-              businessId={cart?.business_id}
-              categoryId={curProduct?.category_id}
-              productId={curProduct?.id}
-              onSave={handlerProductAction}
-            />
+            {!curProduct?.calendar_event ? (
+              <ProductForm
+                isCartProduct
+                productCart={curProduct}
+                businessSlug={cart?.business?.slug}
+                businessId={cart?.business_id}
+                categoryId={curProduct?.category_id}
+                productId={curProduct?.id}
+                onSave={handlerProductAction}
+              />
+            ) : (
+              <ServiceForm
+                isCartProduct
+                isService
+                productCart={curProduct}
+                businessSlug={cart?.business?.slug}
+                businessId={cart?.business_id}
+                categoryId={curProduct?.category_id}
+                productId={curProduct?.id}
+                onSave={handlerProductAction}
+                professionalSelected={curProduct?.calendar_event?.professional}
+              />
+            )}
           </Modal>
           <Modal
             width='70%'
