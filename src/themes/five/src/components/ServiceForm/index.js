@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useUtils, useLanguage, useSession, ProductForm as ProductFormController } from 'ordering-components'
+import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
 import { LoginForm } from '../LoginForm'
@@ -34,22 +35,25 @@ import {
   StatusInfo,
   DropDownWrapper,
   DropDownTitle,
-  EmptyProfessional
+  EmptyProfessional,
+  SkeletonBlock
 } from './styles'
 import moment from 'moment'
 SwiperCore.use([Navigation])
 
 const ServiceFormUI = (props) => {
   const {
-    product,
+    productObject,
     professionalSelected,
     handleSave,
     isSoldOut,
     maxProductQuantity,
     productCart,
-    professionalList
+    isCartProduct,
+    professionalListState
   } = props
 
+  const { product, loading, error } = productObject
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDate }] = useUtils()
@@ -151,102 +155,84 @@ const ServiceFormUI = (props) => {
   }, [isDropDown])
 
   useEffect(() => {
-    if (!professionalSelected) return
+    if (!professionalSelected?.schedule) return
     setCurrentProfessional(professionalSelected)
   }, [professionalSelected])
+
+  useEffect(() => {
+    if (isCartProduct && professionalListState?.professionals?.length > 0) {
+      const professional = professionalListState?.professionals?.find(item => item.id === professionalSelected?.id)
+      setCurrentProfessional(professional)
+    }
+  }, [isCartProduct, professionalListState?.professionals])
 
   return (
     <>
       <Container>
-        <ImageWrapper>
-          <SwiperWrapper>
-            <ArrowButtonWrapper className='button-prev'>
-              <ChevronLeft />
-            </ArrowButtonWrapper>
-            <Swiper
-              spaceBetween={0}
-              slidesPerView={1}
-              watchSlidesProgress
-              className='mySwiper2'
-              preventClicksPropagation={false}
-              navigation={{
-                nextEl: '.button-next',
-                prevEl: '.button-prev'
-              }}
-            >
-              {gallery?.map((photo, i) => (
-                <SwiperSlide key={i}>
-                  <img src={photo} alt='' />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <ArrowButtonWrapper className='button-next'>
-              <ChevronRight />
-            </ArrowButtonWrapper>
-          </SwiperWrapper>
-        </ImageWrapper>
-        <HeaderInfoWrapper>
-          <h2>{product?.name}</h2>
-          <PriceAndDuration>
-            <span>{parsePrice(product?.price)}</span>
-            <span className='dot'>•</span>
-            <span>{product?.duration}min</span>
-          </PriceAndDuration>
-          <p>{product?.description}</p>
-        </HeaderInfoWrapper>
-        <Divider />
-        <ProfessionalInfoWrapper>
-          <SectionHeader>
-            <h2>{t('PROFESSIONALS', 'Professionals')}</h2>
-            <span>{t('REQUIRED', 'Required')}</span>
-          </SectionHeader>
-          <ProfessionalSelectWrapper ref={dropDownRef}>
-            <SelectedItem onClick={() => setIsDropDown(prev => !prev)}>
-              {currentProfessional ? (
-                <InfoWrapper>
-                  {currentProfessional?.photo ? (
-                    <ProfessionalPhoto
-                      bgimage={currentProfessional?.photo}
-                    />
-                  ) : <FaUserAlt />}
-                  <NameWrapper>
-                    <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
-                    <StatusInfo available={!isBusyTime()}>
-                      {isBusyTime(currentProfessional) ? (
-                        <>
-                          <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
-                        </>
-                      ) : (
-                        <span className='status'>{t('AVAILABLE', 'Available')}</span>
-                      )}
-                    </StatusInfo>
-                  </NameWrapper>
-                </InfoWrapper>
-              ) : (
-                <p>{t('SELECT_PROFESSIONAL', 'Select professional')}</p>
-              )}
-              <ChevronDown />
-            </SelectedItem>
-            {isDropDown && (
-              <DropDownWrapper>
-                <DropDownTitle>{t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')}</DropDownTitle>
-                {professionalList?.map((professional) => (
-                  <SelectedItem
-                    key={professional?.id}
-                    isDropDown
-                    active={professional?.id === currentProfessional?.id}
-                    onClick={() => handleChangeProfessional(professional)}
-                  >
+        {loading && !error && (
+          <SkeletonBlock width={90}>
+            <Skeleton variant='rect' height={50} />
+            <Skeleton variant='rect' height={50} />
+            <Skeleton variant='rect' height={200} />
+          </SkeletonBlock>
+        )}
+        {product && !loading && (
+          <>
+            <ImageWrapper>
+              <SwiperWrapper>
+                <ArrowButtonWrapper className='button-prev'>
+                  <ChevronLeft />
+                </ArrowButtonWrapper>
+                <Swiper
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  watchSlidesProgress
+                  className='mySwiper2'
+                  preventClicksPropagation={false}
+                  navigation={{
+                    nextEl: '.button-next',
+                    prevEl: '.button-prev'
+                  }}
+                >
+                  {gallery?.map((photo, i) => (
+                    <SwiperSlide key={i}>
+                      <img src={photo} alt='' />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                <ArrowButtonWrapper className='button-next'>
+                  <ChevronRight />
+                </ArrowButtonWrapper>
+              </SwiperWrapper>
+            </ImageWrapper>
+            <HeaderInfoWrapper>
+              <h2>{product?.name}</h2>
+              <PriceAndDuration>
+                <span>{parsePrice(product?.price)}</span>
+                <span className='dot'>•</span>
+                <span>{product?.duration}min</span>
+              </PriceAndDuration>
+              <p>{product?.description}</p>
+            </HeaderInfoWrapper>
+            <Divider />
+            <ProfessionalInfoWrapper>
+              <SectionHeader>
+                <h2>{t('PROFESSIONALS', 'Professionals')}</h2>
+                <span>{t('REQUIRED', 'Required')}</span>
+              </SectionHeader>
+              <ProfessionalSelectWrapper ref={dropDownRef}>
+                <SelectedItem onClick={() => setIsDropDown(prev => !prev)}>
+                  {currentProfessional ? (
                     <InfoWrapper>
-                      {professional?.photo ? (
+                      {currentProfessional?.photo ? (
                         <ProfessionalPhoto
-                          bgimage={professional?.photo}
+                          bgimage={currentProfessional?.photo}
                         />
                       ) : <FaUserAlt />}
                       <NameWrapper>
-                        <p>{professional?.name} {professional?.lastname}</p>
-                        <StatusInfo available={!isBusyTime(professional)}>
-                          {isBusyTime(professional) ? (
+                        <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
+                        <StatusInfo available={!isBusyTime()}>
+                          {isBusyTime(currentProfessional) ? (
                             <>
                               <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
                             </>
@@ -256,58 +242,95 @@ const ServiceFormUI = (props) => {
                         </StatusInfo>
                       </NameWrapper>
                     </InfoWrapper>
-                  </SelectedItem>
-                ))}
-              </DropDownWrapper>
-            )}
+                  ) : (
+                    <p>{t('SELECT_PROFESSIONAL', 'Select professional')}</p>
+                  )}
+                  <ChevronDown />
+                </SelectedItem>
+                {isDropDown && (
+                  <DropDownWrapper>
+                    <DropDownTitle>{t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')}</DropDownTitle>
+                    {professionalListState?.professionals?.map((professional) => (
+                      <SelectedItem
+                        key={professional?.id}
+                        isDropDown
+                        active={professional?.id === currentProfessional?.id}
+                        onClick={() => handleChangeProfessional(professional)}
+                      >
+                        <InfoWrapper>
+                          {professional?.photo ? (
+                            <ProfessionalPhoto
+                              bgimage={professional?.photo}
+                            />
+                          ) : <FaUserAlt />}
+                          <NameWrapper>
+                            <p>{professional?.name} {professional?.lastname}</p>
+                            <StatusInfo available={!isBusyTime(professional)}>
+                              {isBusyTime(professional) ? (
+                                <>
+                                  <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                                </>
+                              ) : (
+                                <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                              )}
+                            </StatusInfo>
+                          </NameWrapper>
+                        </InfoWrapper>
+                      </SelectedItem>
+                    ))}
+                  </DropDownWrapper>
+                )}
 
-          </ProfessionalSelectWrapper>
-        </ProfessionalInfoWrapper>
-        <ScheduleWrapper>
-          <SectionHeader>
-            <h2>{t('SCHEDULE', 'Schedule')}</h2>
-            <span>{t('REQUIRED', 'Required')}</span>
-          </SectionHeader>
-          {currentProfessional ? (
-            <BusinessPreorder
-              business={currentProfessional}
-              isProfessional
-              maxDays={50}
-              onChangeMoment={setDateSelected}
-              useOrderContext={false}
-            />
-          ) : (
-            <EmptyProfessional>
-              {t('NO_SCHEDULE', 'No schedule')}
-            </EmptyProfessional>
-          )}
-        </ScheduleWrapper>
-        <ButtonWrapper>
-          <span>{dateSelected
-            ? parseDate(dateSelected, { outputFormat: 'hh:mm a' })
-            : t('ASAP_ABBREVIATION', 'ASAP')}
-          </span>
-          {!isSoldOut && maxProductQuantity > 0 && auth && (
-            <Button
-              onClick={() => handleAddProduct()}
-              color='primary'
-              disabled={isBusyTime(currentProfessional)}
-            >
-              {t('BOOK', 'Book')}
-            </Button>
-          )}
-          {(!auth || isSoldOut || maxProductQuantity <= 0) && (
-            <Button
-              className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
-              color='primary'
-              outline
-              disabled={isSoldOut || maxProductQuantity <= 0}
-              onClick={() => setModalIsOpen(true)}
-            >
-              {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
-            </Button>
-          )}
-        </ButtonWrapper>
+              </ProfessionalSelectWrapper>
+            </ProfessionalInfoWrapper>
+            <ScheduleWrapper>
+              <SectionHeader>
+                <h2>{t('SCHEDULE', 'Schedule')}</h2>
+                <span>{t('REQUIRED', 'Required')}</span>
+              </SectionHeader>
+              {currentProfessional ? (
+                <BusinessPreorder
+                  business={currentProfessional}
+                  isProfessional
+                  maxDays={50}
+                  onChangeMoment={setDateSelected}
+                  useOrderContext={false}
+                />
+              ) : (
+                <EmptyProfessional>
+                  {t('NO_SCHEDULE', 'No schedule')}
+                </EmptyProfessional>
+              )}
+            </ScheduleWrapper>
+            <ButtonWrapper>
+              <span>{dateSelected
+                ? parseDate(dateSelected, { outputFormat: 'hh:mm a' })
+                : t('ASAP_ABBREVIATION', 'ASAP')}
+              </span>
+              {!isSoldOut && maxProductQuantity > 0 && auth && (
+                <Button
+                  onClick={() => handleAddProduct()}
+                  color='primary'
+                  disabled={isBusyTime(currentProfessional)}
+                >
+                  {t('BOOK', 'Book')}
+                </Button>
+              )}
+              {(!auth || isSoldOut || maxProductQuantity <= 0) && (
+                <Button
+                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
+                  color='primary'
+                  outline
+                  disabled={isSoldOut || maxProductQuantity <= 0}
+                  onClick={() => setModalIsOpen(true)}
+                >
+                  {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
+                </Button>
+              )}
+            </ButtonWrapper>
+          </>
+        )}
+
         {modalIsOpen && !auth && (
           <Modal
             open={modalIsOpen}
