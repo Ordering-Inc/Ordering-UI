@@ -437,7 +437,7 @@ var Header = function Header(props) {
     location: location,
     isCustomerMode: isCustomerMode,
     setPreorderBusiness: setPreorderBusiness
-  }) : headerLayout !== 'pfchangs' && !pathname.includes('/checkout') && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }) : !pathname.includes('/checkout') && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "cart",
     totalCarts: cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length,
     onClick: function onClick(variant) {

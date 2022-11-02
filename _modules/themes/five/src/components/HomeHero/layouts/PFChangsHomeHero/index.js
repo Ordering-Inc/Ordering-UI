@@ -343,7 +343,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     pfchangs: true
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modals.listOpen,
-    width: "70%",
+    width: "80%",
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         listOpen: false
