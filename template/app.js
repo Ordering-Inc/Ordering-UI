@@ -76,7 +76,6 @@ export const App = () => {
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const signUplayout = 'new'
   const windowSize = useWindowSize()
   const [businessSignUpSuccessed, setBusinessSignUpSuccessed] = useState({ open: false, content: {} })
   const [lastOrderReview, setLastOrderReview] = useState({
@@ -103,6 +102,14 @@ export const App = () => {
     isActive: settings?.use_marketplace || isKioskApp,
     businessSlug: businessesSlug[isKioskApp ? 'kiosk' : 'marketplace']
   }
+
+  const signUpBusinesslayout = orderingTheme?.theme?.business_signup?.components?.layout?.type === 'old'
+    ? 'old'
+    : 'new'
+
+  const signUpDriverlayout = orderingTheme?.theme?.driver_signup?.components?.layout?.type === 'old'
+    ? 'old'
+    : 'new'
 
   const HeaderComponent =
     isKioskApp ? HeaderKiosk
@@ -139,7 +146,7 @@ export const App = () => {
 
   const handleSuccessSignup = (user) => {
     if (!user?.enabled && (configs?.business_signup_enabled_default?.value === '0' || configs?.driver_signup_enabled_default?.value === '0')) {
-      signUplayout === 'new'
+      signUpBusinesslayout === 'new'
         ? setBusinessSignUpSuccessed({
           open: true,
           content: {
@@ -157,7 +164,7 @@ export const App = () => {
     }
 
     if (configs?.business_signup_enabled_default?.value === '1' || configs?.driver_signup_enabled_default?.value === '1') {
-      signUplayout === 'new' ? setBusinessSignUpSuccessed({
+      signUpBusinesslayout === 'new' ? setBusinessSignUpSuccessed({
         open: true,
         content: {
           approvalType: 'automatic',
@@ -385,7 +392,7 @@ export const App = () => {
                         useLoginByCellphone
                         useChekoutFileds
                         handleSuccessSignup={handleSuccessSignup}
-                        layout={signUplayout}
+                        layout={signUpBusinesslayout}
                         isRecaptchaEnable
                       />
                     ) : (
@@ -395,7 +402,7 @@ export const App = () => {
                   <Route exact path='/signup-driver'>
                     {!auth && !isKioskApp ? (
                       <SignUpDriver
-                        layout={signUplayout}
+                        layout={signUpDriverlayout}
                         elementLinkToLogin={<Link to='/'>{t('LOGIN', 'Login')}</Link>}
                         useLoginByCellphone
                         useChekoutFileds
