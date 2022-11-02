@@ -311,3 +311,13 @@ export const EmptyProfessional = styled.div`
   align-items: center;
   justify-content: center;
 `
+
+export const SkeletonBlock = styled.div`
+  width: ${({ width }) => width && `${width}%`};
+  border-radius: 16px;
+  margin: 50px auto 20px auto;
+
+  span {
+    margin-bottom: 10px;
+  }
+`
