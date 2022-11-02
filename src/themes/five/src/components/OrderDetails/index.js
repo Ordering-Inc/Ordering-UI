@@ -12,6 +12,7 @@ import {
   useOrderingTheme
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -32,7 +33,6 @@ import { Confirm } from '../Confirm'
 import {
   Container,
   WrapperContainer,
-  HeaderInfo,
   Content,
   OrderBusiness,
   BusinessWrapper,
@@ -51,7 +51,6 @@ import {
   ShareOrder,
   WrapperLeftContainer,
   WrapperRightContainer,
-  MyOrderActions,
   ReviewOrderLink,
   SkeletonWrapper,
   ReviewWrapper,
@@ -65,7 +64,8 @@ import {
   OrderStatusAndLinkContainer,
   LinkWrapper,
   MapWrapper,
-  BusinessExternalWrapper
+  BusinessExternalWrapper,
+  ProfessionalWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
@@ -73,6 +73,8 @@ import { TaxInformation } from '../TaxInformation'
 import { getGoogleMapImage } from '../../../../../utils'
 import { OrderHistory } from './OrderHistory'
 import { ReviewProfessional } from '../ReviewProfessional'
+import { OrderActionsSection } from './OrderActionsSection'
+import { OrderHeaderInfoSection } from './OrderHeaderInfoSection'
 
 const OrderDetailsUI = (props) => {
   const {
@@ -299,9 +301,19 @@ const OrderDetailsUI = (props) => {
     setUnreadAlert
   }
 
+  const driverLocationString = typeof order?.driver?.location?.location === 'string' && order?.driver?.location?.location?.split(',').map((l) => l.replace(/[^-.0-9]/g, ''))
+  const parsedLocations = locations.map(location => typeof location?.location === 'string' ? {
+    ...location,
+    lat: parseFloat(location?.location?.split(',')[0].replace(/[^-.0-9]/g, '')),
+    lng: parseFloat(location?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+  } : location)
+
   useEffect(() => {
     if (driverLocation) {
-      locations[0] = driverLocation
+      parsedLocations[0] = {
+        ...locations[0],
+        ...driverLocation
+      }
     }
   }, [driverLocation])
 
@@ -344,35 +356,6 @@ const OrderDetailsUI = (props) => {
     businessLogoUrlValidation()
   }, [order])
 
-  const OrderHeaderInfoSection = () => {
-    return (
-      <HeaderInfo>
-        <h1>{isService ? t('SERVICES', 'Services') : t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-        <p>{!isService && t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
-      </HeaderInfo>
-    )
-  }
-
-  const OrderActionsSection = () => {
-    return (
-      <>
-        {!userCustomerId && (
-          <MyOrderActions>
-            <Button
-              color='primary'
-              outline
-              onClick={() => handleGoToPage({ page: 'orders' })}
-            >
-              {isService
-                ? t('YOUR_APPOINTMENTS', 'Your appointments')
-                : t('YOUR_ORDERS', theme?.defaultLanguages?.YOUR_ORDERS || 'Your Orders')}
-            </Button>
-          </MyOrderActions>
-        )}
-      </>
-    )
-  }
-
   return (
     <Container>
       {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
@@ -411,33 +394,33 @@ const OrderDetailsUI = (props) => {
                     }
                   </p>
                 )}
-                {(
-                  acceptedStatus.includes(parseInt(order?.status, 10)) ||
+                {(acceptedStatus.includes(parseInt(order?.status, 10)) ||
                   !isOriginalLayout
-                ) && (
-                  <ReOrder>
-                    <Button
-                      color='primary'
-                      outline
-                      onClick={() => handleStartNewOrder(order.id)}
-                      disabled={reorderState?.loading}
-                    >
-                      {t('START_NEW_ORDER', 'Start new order')}
-                    </Button>
-                    {completedStatus.includes(parseInt(order?.status, 10)) && (
+                ) &&
+                  (
+                    <ReOrder>
                       <Button
                         color='primary'
                         outline
-                        onClick={() => handleClickReorder(order)}
+                        onClick={() => handleStartNewOrder(order.id)}
                         disabled={reorderState?.loading}
                       >
-                        {reorderState?.loading
-                          ? t('LOADING', 'Loading...')
-                          : t('REORDER', 'Reorder')}
+                        {t('START_NEW_ORDER', 'Start new order')}
                       </Button>
-                    )}
-                  </ReOrder>
-                )}
+                      {completedStatus.includes(parseInt(order?.status, 10)) && (
+                        <Button
+                          color='primary'
+                          outline
+                          onClick={() => handleClickReorder(order)}
+                          disabled={reorderState?.loading}
+                        >
+                          {reorderState?.loading
+                            ? t('LOADING', 'Loading...')
+                            : t('REORDER', 'Reorder')}
+                        </Button>
+                      )}
+                    </ReOrder>
+                  )}
               </TitleContainer>
               {showDeliveryProgress && (
                 <>
@@ -526,7 +509,7 @@ const OrderDetailsUI = (props) => {
                           style={{ fontSize: 14 }}
                           color={order?.status === 20 ? 'secundary' : 'primary'}
                           onClick={() => handleChangeOrderStatus(20)}
-                          disabled={order?.status === 20}
+                          disabled={order?.status === 20 || order?.status === 21}
                         >
                           {getOrderStatus(20)?.value}
                         </Button>
@@ -614,19 +597,24 @@ const OrderDetailsUI = (props) => {
                     </div>
                   </WrapperDriver>
                 </OrderDriver>
-                {!isOriginalLayout &&
-                  order?.driver?.location?.lat && order?.driver?.location?.lng &&
+                {
+                  order?.driver?.location &&
                   validTrackingStatus.includes(parseInt(order?.status)) &&
-                (
-                  <Map style={{ width: '100%' }}>
-                    <GoogleMapsMap
-                      location={order?.driver?.location}
-                      locations={locations}
-                      mapControls={googleMapsControls}
-                      apiKey={configs?.google_maps_api_key?.value}
-                    />
-                  </Map>
-                )}
+                  (
+                    <Map style={{ width: '100%' }}>
+                      <GoogleMapsMap
+                        location={typeof order?.driver?.location?.location === 'string'
+                          ? {
+                            lat: parseFloat(driverLocationString[0]),
+                            lng: parseFloat(driverLocationString[1])
+                          } : driverLocation ?? order?.driver?.location}
+                        locations={parsedLocations}
+                        mapControls={googleMapsControls}
+                        apiKey={configs?.google_maps_api_key?.value}
+                      />
+                    </Map>
+                  )
+                }
               </>
             )}
             {(order?.delivery_type === 1 || order?.comment) && (
@@ -641,9 +629,21 @@ const OrderDetailsUI = (props) => {
           <WrapperRightContainer>
             <OrderProducts>
               <HeaderTitle>
-                <OrderHeaderInfoSection />
-                <OrderActionsSection />
+                <OrderHeaderInfoSection isService={isService} />
+                <OrderActionsSection
+                  userCustomerId={userCustomerId}
+                  isService={isService}
+                  handleGoToPage={handleGoToPage}
+                />
               </HeaderTitle>
+              {isService && order?.products[0]?.calendar_event?.professional && (
+                <ProfessionalWrapper>
+                  {order?.products[0]?.calendar_event?.professional?.photo
+                    ? <img src={order?.products[0]?.calendar_event?.professional?.photo} alt='' />
+                    : <FaUserAlt />}
+                  <p>{order?.products[0]?.calendar_event?.professional?.name} {order?.products[0]?.calendar_event?.professional?.lastname}</p>
+                </ProfessionalWrapper>
+              )}
               {order?.products?.length && order?.products.map(product => (
                 <ProductItemAccordion
                   key={product.id}
