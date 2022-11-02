@@ -50,7 +50,7 @@ export const CartContent = (props) => {
   return (
     <>
       <Container>
-        {!isSlideBar && (
+        {!isSlideBar && cartLayout !== 'pfchangs' && (
           <Title>{t('YOUR_CART', 'Your cart')}</Title>
         )}
         {showCarts &&

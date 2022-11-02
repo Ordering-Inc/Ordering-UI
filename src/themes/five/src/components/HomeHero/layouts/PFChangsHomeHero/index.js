@@ -312,7 +312,7 @@ export const PFChangsHomeHero = (props) => {
         </Modal>
         <Modal
           open={modals.listOpen}
-          width='70%'
+          width='80%'
           onClose={() => setModals({ ...modals, listOpen: false })}
         >
           <AddressList

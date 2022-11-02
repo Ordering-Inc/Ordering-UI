@@ -75,11 +75,18 @@ export const ProductComment = styled.div`
 
   textarea {
     margin-top: 8px;
+    height: 40px;
   }
 
   p {
     font-weight: 300;
     margin-bottom: 5px;
+  }
+
+  @media (min-width: 370px){
+    textarea{
+      height: initial;
+    }
   }
 
   @media (min-width: 577px) {

@@ -120,9 +120,13 @@ export const MenuLink = styled.a`
   text-align: inherit;
   display: block;
   width: 100%;
-  background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};;
+  background: ${({ isHome, theme }) => isHome ? '#333' : `${theme.colors.backgroundPage}`};
   outline: none !important;
-
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    span {
+      color: #fff;
+    }
+  `}
   &:hover {
     color: #f1f1f1;
   }
@@ -163,7 +167,7 @@ export const MenuLinkIcon = styled.div`
     color: #000;
     width: 24px;
     height: 24px;
-    color: ${({ active, theme, isHome }) => active ? theme.colors.primary : isHome ? '#FFF' : '#000'}
+    color: ${({ active, theme, isHome }) => active ? theme.colors.primary : isHome || theme?.general?.components?.layout?.type === 'pfchangs' ? '#FFF' : '#000'}
   }
 `
 

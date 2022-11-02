@@ -182,7 +182,7 @@ export const SidebarMenu = (props) => {
                   window.location.pathname === '/search'
                 }
               >
-                {options?.address?.location ? (
+                {options?.address?.location || layout === 'pfchangs' ? (
                   <BiStore />
                 ) : (
                   <AiOutlineHome />
@@ -196,7 +196,7 @@ export const SidebarMenu = (props) => {
                     window.location.pathname === '/search'
                   }
                 >
-                  {options?.address?.location ? (
+                  {options?.address?.location || layout === 'pfchangs' ? (
                     t('BUSINESSES', 'Businesses')
                   ) : (
                     t('HOME', 'Home')

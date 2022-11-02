@@ -150,9 +150,32 @@ export const SavedPlaces = styled.div`
   }
 
   ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
-      width: 100%;
+      width: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 25px auto auto;
+      box-sizing: border-box;
+      margin-bottom: 20px;
       * {
         color: #fff;
+      }
+      button { 
+        display: none;
+      }
+      > div {
+        padding: 0;
+      }
+      h1 { 
+        display: none;
+      }
+      
+      ul {
+        box-sizing: border-box;
+        border: 1px solid #fff;
+        padding: 0px;
+        width: 100%;
+        margin: 0px;
       }
     `
   }
@@ -171,30 +194,11 @@ export const SavedPlaces = styled.div`
       align-self: flex-end;
     }
     ${({ theme }) => theme?.profile?.components?.layout?.type === 'pfchangs' && css`
-      width: 90%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 25px auto auto;
-      box-sizing: border-box;
-      margin-bottom: 20px;
-      button { 
-        display: none;
-      }
-      > div {
-        padding: 0;
-      }
-      h1 { 
-        display: none;
-      }
-      ul {
-        box-sizing: border-box;
-        border: 1px solid #fff;
-        padding: 0px;
-        width: 70%;
-        margin: 30px 0 0 30px;
-      }
-    `}
+        ul {
+          width: 70%;
+          margin: 30px 0 0 30px;
+        }
+      `}
   }
 
 `

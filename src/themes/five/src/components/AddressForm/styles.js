@@ -184,7 +184,10 @@ export const AddressTagSection = styled.div`
   margin: 10px 0px;
   display: flex;
   justify-content: space-between;
-
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+    flex-wrap: wrap;
+    justify-content: center;
+  `}
   button {
     display: flex;
     justify-content: center;
@@ -212,6 +215,35 @@ export const AddressTagSection = styled.div`
 
   button.active {
     color: ${props => props.theme.colors.primary};
+  }
+
+  @media (min-width: 768px){
+    ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+      justify-content: space-between;
+      button{
+        min-width: 100px;
+        padding: 0 10px;
+        width: 36px;
+      }
+    `}
+  }
+  @media (min-width: 1000px){
+    ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+      justify-content: space-around;
+      button{
+        padding: 0 20px;
+        min-width: 80px;
+      }
+    `}
+  }
+  @media (min-width: 1200px){
+    ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      button{
+        min-width: 100px;
+      }
+    `}
   }
 `
 

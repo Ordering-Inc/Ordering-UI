@@ -268,11 +268,16 @@ export const CloseIcon = styled.div`
 export const TitleFormContainer = styled.div`
   display: flex; 
   align-items: center;
+  ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
+      justify-content: center;
+    `}
   h1 {
     margin: auto;
     font-size: 24px;
     ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
       font-family: ${theme?.fonts?.special?.name};
+      text-align: center;
+      margin: 0 30px;
     `}
   }
 `

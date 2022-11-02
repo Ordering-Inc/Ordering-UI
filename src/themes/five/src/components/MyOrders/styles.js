@@ -87,7 +87,9 @@ export const NoOrdersWrapper = styled.div`
   box-sizing: border-box;
   height: calc(100% - 120px);
   width: 100%;
-
+  ${({ theme }) => theme?.orders?.components?.layout?.type === 'pfchangs' && css`
+    position: relative;
+  `}
   > p {
     font-weight: 500;
     font-size: 16px;
@@ -98,6 +100,11 @@ export const NoOrdersWrapper = styled.div`
 
   button {
     height: 44px;
+  }
+  @media (min-width: 993px){
+    ${({ theme }) => theme?.orders?.components?.layout?.type === 'pfchangs' && css`
+      position: absolute;
+    `}
   }
 `
 

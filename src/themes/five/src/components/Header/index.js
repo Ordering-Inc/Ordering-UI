@@ -412,7 +412,7 @@ export const Header = (props) => {
                           isCustomerMode={isCustomerMode}
                           setPreorderBusiness={setPreorderBusiness}
                         />
-                      ) : headerLayout !== 'pfchangs' && !pathname.includes('/checkout') && (
+                      ) : !pathname.includes('/checkout') && (
                         <HeaderOption
                           variant='cart'
                           totalCarts={cartsWithProducts?.length}
