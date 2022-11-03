@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
@@ -124,6 +124,15 @@ export const RenderProductsLayout = (props) => {
   const BusinessLayoutProductsList = businessLayout.layoutOne
     ? ProductListLayoutGroceries
     : BusinessProductsList
+
+  const handleSaveProduct = () => {
+    const productContainer = document.getElementsByClassName('bp-list')[0]
+    scrollTo(productContainer, 500, 1250)
+  }
+
+  useEffect(() => {
+    handleSaveProduct()
+  }, [categorySelected])
 
   return (
     <>
