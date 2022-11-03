@@ -16,9 +16,11 @@ export const CategoriesContainer = styled.div`
   padding-bottom: 0;
   background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
-  top: 0;
   text-align: center;
   width: 100%;
+  top: 20px;
+  position: sticky;
+
   div.category {
     text-overflow: ellipsis;
     white-space: nowrap;
