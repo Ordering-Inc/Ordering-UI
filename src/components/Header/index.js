@@ -241,7 +241,7 @@ export const Header = (props) => {
             <RightHeader>
               <Menu>
                 {
-                  !auth && windowSize.width > 870 && (
+                  !auth && windowSize.width > 870 && !isCustomerMode && (
                     <>
                       <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</MenuLink>
                       {!isHideSignup && (
