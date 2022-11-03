@@ -627,6 +627,12 @@ Object.defineProperty(exports, "StripeRedirectForm", {
     return _StripeRedirectForm.StripeRedirectForm;
   }
 });
+Object.defineProperty(exports, "Switch", {
+  enumerable: true,
+  get: function get() {
+    return _Switch.Switch;
+  }
+});
 Object.defineProperty(exports, "TextArea", {
   enumerable: true,
   get: function get() {
@@ -792,4 +798,5 @@ var _Buttons = require("./src/styles/Buttons");
 var _Inputs = require("./src/styles/Inputs");
 var _Select = require("./src/styles/Select");
 var _Checkbox = require("../../styles/Checkbox");
+var _Switch = require("../../styles/Switch");
 var _NavigationBar = require("./src/components/NavigationBar");

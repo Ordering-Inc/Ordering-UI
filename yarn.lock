@@ -2557,46 +2557,61 @@
     "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/constants-float64-exponent-bias@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-exponent-bias/-/constants-float64-exponent-bias-0.0.7.tgz#caa9e6f95179001ae67bd76adca7ba13cce50350"
-  integrity sha512-F0f95YUVGijNzBEgOzvQXwZC41SQyefB0sYntfVMi071I5Luv1HlYc+H80Ree/Wfn3gFNACe7JdfFIMpeJgTNg==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-exponent-bias/-/constants-float64-exponent-bias-0.0.8.tgz#f5069931a9a16d69e90a7c925739d7f64e4d725e"
+  integrity sha512-IzBJQw9hYgWCki7VoC/zJxEA76Nmf8hmY+VkOWnJ8IyfgTXClgY8tfDGS1cc4l/hCOEllxGp9FRvVdn24A5tKQ==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/constants-float64-high-word-exponent-mask@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-high-word-exponent-mask/-/constants-float64-high-word-exponent-mask-0.0.7.tgz#7ded7c0c31dc4f08fb3aca5617afa621c72c9e36"
-  integrity sha512-7/GL1DW/BeWLvTcfbuWUyKJkcIN9fM6m8xPEGfq6vAvv+dRIAlwKsVZVTBIAD1FcoXLKV/GDptOPTQRAPoxGqA==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-high-word-exponent-mask/-/constants-float64-high-word-exponent-mask-0.0.8.tgz#c5671d462674ab09e48f25c2b3ca4d6d5cc4d875"
+  integrity sha512-z28/EQERc0VG7N36bqdvtrRWjFc8600PKkwvl/nqx6TpKAzMXNw55BS1xT4C28Sa9Z7uBWeUj3UbIFedbkoyMw==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/constants-float64-max-base2-exponent-subnormal@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-max-base2-exponent-subnormal/-/constants-float64-max-base2-exponent-subnormal-0.0.7.tgz#4d2e0981442572ff43290844e0c09effac2d428d"
-  integrity sha512-2SKF0w6XZe1O6S3TAPHjS8pUXujSCeiCzuskQyBBw1ZbbsU0Y6Qh4f99rk1L7f/C9Kp2h8GUh4KV25bdIO8jiQ==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-max-base2-exponent-subnormal/-/constants-float64-max-base2-exponent-subnormal-0.0.8.tgz#a24288c9c5e401eeb28d29f808c00a0bad481280"
+  integrity sha512-YGBZykSiXFebznnJfWFDwhho2Q9xhUWOL+X0lZJ4ItfTTo40W6VHAyNYz98tT/gJECFype0seNzzo1nUxCE7jQ==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/constants-float64-max-base2-exponent@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-max-base2-exponent/-/constants-float64-max-base2-exponent-0.0.7.tgz#a10640b200b282cfc5fe7f37a29ff518bf78dd23"
-  integrity sha512-9vOMjILdOE7f3glCWuvQtfmiipE/WsImmAbG3u5KAeLluJhosNRhnfGbfRGydJiyDDYcs3W3l1ViXhLnRLuJZA==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-max-base2-exponent/-/constants-float64-max-base2-exponent-0.0.8.tgz#1d93dd829129a9e77133c5ad4f8c390c93f31bcb"
+  integrity sha512-xBAOtso1eiy27GnTut2difuSdpsGxI8dJhXupw0UukGgvy/3CSsyNm+a1Suz/dhqK4tPOTe5QboIdNMw5IgXKQ==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/constants-float64-min-base2-exponent-subnormal@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-min-base2-exponent-subnormal/-/constants-float64-min-base2-exponent-subnormal-0.0.7.tgz#59a546567492bcfded6054585486f725eab50f3b"
-  integrity sha512-SFw/ZA2BP0pyLkKkbWdGGMJ9zqqHZs3NyXvGjuEAVgmCFwdH+xTyvcOo/dC543WUoPKTkLsZ4D8h4TBUksfw8A==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-min-base2-exponent-subnormal/-/constants-float64-min-base2-exponent-subnormal-0.0.8.tgz#a5bd5a84ae2dec5694daccdaf2da54759185b727"
+  integrity sha512-bt81nBus/91aEqGRQBenEFCyWNsf8uaxn4LN1NjgkvY92S1yVxXFlC65fJHsj9FTqvyZ+uj690/gdMKUDV3NjQ==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/constants-float64-ninf@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-ninf/-/constants-float64-ninf-0.0.7.tgz#ca961b0726abda273fe7fcdfb894bbfe41297f8c"
-  integrity sha512-piVlJxJDTd5v2ZTYNyXVV2qzc5kNibhpgK+H+ykaO80FNQvqt8bIP3TTca98q+u/8tmJi15qLLRBapiT+cczjA==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-ninf/-/constants-float64-ninf-0.0.8.tgz#4a83691d4d46503e2339fa3ec21d0440877b5bb7"
+  integrity sha512-bn/uuzCne35OSLsQZJlNrkvU1/40spGTm22g1+ZI1LL19J8XJi/o4iupIHRXuLSTLFDBqMoJlUNphZlWQ4l8zw==
   dependencies:
     "@stdlib/number-ctor" "^0.0.x"
+    "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/constants-float64-pinf@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-pinf/-/constants-float64-pinf-0.0.7.tgz#aac7325ff5437089ac364290e9cd3f88e1c7d0fa"
-  integrity sha512-kITkBiwGkrbjDOPG9TqwW9ryTpGKs5Evlf5CJjz59kvnXtVq2FDXpJ2oePPlyWa6cc1fyGkeLwBZMCWsRgs1rQ==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-pinf/-/constants-float64-pinf-0.0.8.tgz#ad3d5b267b142b0927363f6eda74c94b8c4be8bf"
+  integrity sha512-I3R4rm2cemoMuiDph07eo5oWZ4ucUtpuK73qBJiJPDQKz8fSjSe4wJBAigq2AmWYdd7yJHsl5NJd8AgC6mP5Qw==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/constants-float64-smallest-normal@^0.0.x":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-smallest-normal/-/constants-float64-smallest-normal-0.0.7.tgz#41511d44b58502a995c01400e259cde8acfb6b88"
-  integrity sha512-3v0kxGdIj9bW4s/jy/g1A3mmAlWP9sEEJwUMTW5QKjlw5vpYJj7QvDb8Ofvc2/hk5DgzIMNefkZMOUs3ancXfA==
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-smallest-normal/-/constants-float64-smallest-normal-0.0.8.tgz#ea1b2335175480f7e846fdf5bbe378a31b7409b6"
+  integrity sha512-Qwxpn5NA3RXf+mQcffCWRcsHSPTUQkalsz0+JDpblDszuz2XROcXkOdDr5LKgTAUPIXsjOgZzTsuRONENhsSEg==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/constants-uint16-max@^0.0.x":
   version "0.0.7"
@@ -2760,9 +2775,9 @@
     "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/number-float64-base-normalize@^0.0.x":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@stdlib/number-float64-base-normalize/-/number-float64-base-normalize-0.0.8.tgz#981149317bd34921c653ed526376718b961e17e9"
-  integrity sha512-4P3c7YD0hahCgflxxTWrjR8457o2ViYu32MH/M166Aj6nkPj0ZovYj/X1DdyiYAAMHhVePGGMl0JAL3X141FVQ==
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@stdlib/number-float64-base-normalize/-/number-float64-base-normalize-0.0.9.tgz#9e98eda47faa9ffc24bcf8161e587ae7b5f96a39"
+  integrity sha512-+rm7RQJEj8zHkqYFE2a6DgNQSB5oKE/IydHAajgZl40YB91BoYRYf/ozs5/tTwfy2Fc04+tIpSfFtzDr4ZY19Q==
   dependencies:
     "@stdlib/constants-float64-smallest-normal" "^0.0.x"
     "@stdlib/math-base-assert-is-infinite" "^0.0.x"
@@ -2770,6 +2785,7 @@
     "@stdlib/math-base-special-abs" "^0.0.x"
     "@stdlib/types" "^0.0.x"
     "@stdlib/utils-define-nonenumerable-read-only-property" "^0.0.x"
+    "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/number-float64-base-to-float32@^0.0.x":
   version "0.0.7"
@@ -3691,9 +3707,9 @@ aws4@^1.8.0:
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
 babel-loader@^8.1.0:
-  version "8.2.5"
-  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.2.5.tgz#d45f585e654d5a5d90f5350a779d7647c5ed512e"
-  integrity sha512-OSiFfH89LrEMiWd4pLNqGz4CwJDtbs2ZVc+iGu2HrkRfPxId9F2anQj38IxWpmRfsUY0aBZYi1EFcd3mhtRMLQ==
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.3.0.tgz#124936e841ba4fe8176786d6ff28add1f134d6a8"
+  integrity sha512-H8SvsMF+m9t15HNLMipppzkC+Y2Yq+v3SonZyU70RBL/h1gxPkH08Ot8pEE9Z4Kd+czyWJClmFS8qzIP9OZ04Q==
   dependencies:
     find-cache-dir "^3.3.1"
     loader-utils "^2.0.0"
@@ -9036,7 +9052,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/5d8e6fced0f0ea524c3f5747fa34dd67c92007b9"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/9dd3742c70834bb1223b1fbf0e50de427a8f4e73"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

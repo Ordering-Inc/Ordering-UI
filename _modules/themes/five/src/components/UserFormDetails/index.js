@@ -12,6 +12,7 @@ var _reactHookForm = require("react-hook-form");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _styledComponents = require("styled-components");
 var _styles = require("./styles");
+var _Switch = require("../../../../../styles/Switch");
 var _Inputs = require("../../styles/Inputs");
 var _Buttons = require("../../styles/Buttons");
 var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
@@ -27,6 +28,9 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -34,7 +38,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _formState$result7, _formState$result8, _formState$result8$re, _formState$result8$re2, _formState$result8$re3, _formState$changes$se2, _formState$changes9, _formState$changes9$s, _formState$changes9$s2, _user$settings2, _user$settings2$notif, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _formState$result, _formState$result2, _formState$result2$re, _formState$result2$re2, _formState$result2$re3, _formState$changes$se, _formState$changes, _formState$changes$se2, _formState$changes$se3, _user$settings, _user$settings$email, _formState$result3, _formState$result4, _formState$result4$re, _formState$result4$re2, _formState$result4$re3, _formState$changes$se4, _formState$changes2, _formState$changes2$s, _formState$changes2$s2, _user$settings2, _user$settings2$sms, _formState$result5, _formState$result6, _formState$result6$re, _formState$result6$re2, _formState$result6$re3, _formState$changes$se5, _formState$changes3, _formState$changes3$s, _formState$changes3$s2, _user$settings3, _user$settings3$notif, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
   var isEdit = props.isEdit,
     formState = props.formState,
     onCancel = props.onCancel,
@@ -51,7 +55,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     setWillVerifyOtpState = props.setWillVerifyOtpState,
     handleChangePromotions = props.handleChangePromotions,
     isOldLayout = props.isOldLayout,
-    requiredFields = props.requiredFields;
+    requiredFields = props.requiredFields,
+    handleChangeNotifications = props.handleChangeNotifications;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -90,10 +95,19 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     setIsChanged = _useState8[1];
   var emailInput = (0, _react.useRef)(null);
   var user = userData || userSession;
+  var _useState9 = (0, _react.useState)({
+      email: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? !!(formState !== null && formState !== void 0 && (_formState$result2 = formState.result) !== null && _formState$result2 !== void 0 && (_formState$result2$re = _formState$result2.result) !== null && _formState$result2$re !== void 0 && (_formState$result2$re2 = _formState$result2$re.settings) !== null && _formState$result2$re2 !== void 0 && (_formState$result2$re3 = _formState$result2$re2.email) !== null && _formState$result2$re3 !== void 0 && _formState$result2$re3.newsletter) : !!((_formState$changes$se = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$se2 = _formState$changes.settings) === null || _formState$changes$se2 === void 0 ? void 0 : (_formState$changes$se3 = _formState$changes$se2.email) === null || _formState$changes$se3 === void 0 ? void 0 : _formState$changes$se3.newsletter) !== null && _formState$changes$se !== void 0 ? _formState$changes$se : user && (user === null || user === void 0 ? void 0 : (_user$settings = user.settings) === null || _user$settings === void 0 ? void 0 : (_user$settings$email = _user$settings.email) === null || _user$settings$email === void 0 ? void 0 : _user$settings$email.newsletter)),
+      sms: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? !!(formState !== null && formState !== void 0 && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && (_formState$result4$re = _formState$result4.result) !== null && _formState$result4$re !== void 0 && (_formState$result4$re2 = _formState$result4$re.settings) !== null && _formState$result4$re2 !== void 0 && (_formState$result4$re3 = _formState$result4$re2.sms) !== null && _formState$result4$re3 !== void 0 && _formState$result4$re3.newsletter) : !!((_formState$changes$se4 = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : (_formState$changes2$s = _formState$changes2.settings) === null || _formState$changes2$s === void 0 ? void 0 : (_formState$changes2$s2 = _formState$changes2$s.sms) === null || _formState$changes2$s2 === void 0 ? void 0 : _formState$changes2$s2.newsletter) !== null && _formState$changes$se4 !== void 0 ? _formState$changes$se4 : user && (user === null || user === void 0 ? void 0 : (_user$settings2 = user.settings) === null || _user$settings2 === void 0 ? void 0 : (_user$settings2$sms = _user$settings2.sms) === null || _user$settings2$sms === void 0 ? void 0 : _user$settings2$sms.newsletter)),
+      notification: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? !!(formState !== null && formState !== void 0 && (_formState$result6 = formState.result) !== null && _formState$result6 !== void 0 && (_formState$result6$re = _formState$result6.result) !== null && _formState$result6$re !== void 0 && (_formState$result6$re2 = _formState$result6$re.settings) !== null && _formState$result6$re2 !== void 0 && (_formState$result6$re3 = _formState$result6$re2.notification) !== null && _formState$result6$re3 !== void 0 && _formState$result6$re3.newsletter) : !!((_formState$changes$se5 = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : (_formState$changes3$s = _formState$changes3.settings) === null || _formState$changes3$s === void 0 ? void 0 : (_formState$changes3$s2 = _formState$changes3$s.notification) === null || _formState$changes3$s2 === void 0 ? void 0 : _formState$changes3$s2.newsletter) !== null && _formState$changes$se5 !== void 0 ? _formState$changes$se5 : user && (user === null || user === void 0 ? void 0 : (_user$settings3 = user.settings) === null || _user$settings3 === void 0 ? void 0 : (_user$settings3$notif = _user$settings3.notification) === null || _user$settings3$notif === void 0 ? void 0 : _user$settings3$notif.newsletter))
+    }),
+    _useState10 = _slicedToArray(_useState9, 2),
+    notificationList = _useState10[0],
+    setNotificationList = _useState10[1];
   var showCustomerCellphone = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.profile) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cellphone) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
   var showCustomerPassword = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.profile) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.password) !== null && _orderingTheme$theme5 !== void 0 && _orderingTheme$theme5.hidden);
   var showCustomerPromotions = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme6 = orderingTheme.theme) !== null && _orderingTheme$theme6 !== void 0 && (_orderingTheme$theme7 = _orderingTheme$theme6.profile) !== null && _orderingTheme$theme7 !== void 0 && (_orderingTheme$theme8 = _orderingTheme$theme7.components) !== null && _orderingTheme$theme8 !== void 0 && (_orderingTheme$theme9 = _orderingTheme$theme8.promotions) !== null && _orderingTheme$theme9 !== void 0 && _orderingTheme$theme9.hidden);
   var showLangauges = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme10 = orderingTheme.theme) !== null && _orderingTheme$theme10 !== void 0 && (_orderingTheme$theme11 = _orderingTheme$theme10.profile) !== null && _orderingTheme$theme11 !== void 0 && (_orderingTheme$theme12 = _orderingTheme$theme11.components) !== null && _orderingTheme$theme12 !== void 0 && (_orderingTheme$theme13 = _orderingTheme$theme12.languages) !== null && _orderingTheme$theme13 !== void 0 && _orderingTheme$theme13.hidden);
+  var showNotifications = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme14 = orderingTheme.theme) !== null && _orderingTheme$theme14 !== void 0 && (_orderingTheme$theme15 = _orderingTheme$theme14.profile) !== null && _orderingTheme$theme15 !== void 0 && (_orderingTheme$theme16 = _orderingTheme$theme15.components) !== null && _orderingTheme$theme16 !== void 0 && (_orderingTheme$theme17 = _orderingTheme$theme16.notification_settings) !== null && _orderingTheme$theme17 !== void 0 && _orderingTheme$theme17.hidden);
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -113,11 +127,11 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return;
     }
     if (user !== null && user !== void 0 && user.cellphone) {
-      var _formState$changes, _formState$changes2;
+      var _formState$changes4, _formState$changes5;
       var phone = null;
-      if (formState.result.error && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.cellphone && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.country_phone_code) {
-        var _formState$changes3, _formState$changes4;
-        phone = "+".concat((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.country_phone_code, " ").concat((_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.cellphone);
+      if (formState.result.error && (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.cellphone && (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.country_phone_code) {
+        var _formState$changes6, _formState$changes7;
+        phone = "+".concat((_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.country_phone_code, " ").concat((_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.cellphone);
         setUserPhoneNumber(phone);
         return;
       }
@@ -213,8 +227,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   };
   var showFieldWithTheme = function showFieldWithTheme(name) {
-    var _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17;
-    return !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme14 = orderingTheme.theme) !== null && _orderingTheme$theme14 !== void 0 && (_orderingTheme$theme15 = _orderingTheme$theme14.profile) !== null && _orderingTheme$theme15 !== void 0 && (_orderingTheme$theme16 = _orderingTheme$theme15.components) !== null && _orderingTheme$theme16 !== void 0 && (_orderingTheme$theme17 = _orderingTheme$theme16[name]) !== null && _orderingTheme$theme17 !== void 0 && _orderingTheme$theme17.hidden);
+    var _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _orderingTheme$theme21;
+    return !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme18 = orderingTheme.theme) !== null && _orderingTheme$theme18 !== void 0 && (_orderingTheme$theme19 = _orderingTheme$theme18.profile) !== null && _orderingTheme$theme19 !== void 0 && (_orderingTheme$theme20 = _orderingTheme$theme19.components) !== null && _orderingTheme$theme20 !== void 0 && (_orderingTheme$theme21 = _orderingTheme$theme20[name]) !== null && _orderingTheme$theme21 !== void 0 && _orderingTheme$theme21.hidden);
   };
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
@@ -231,12 +245,12 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
-    var _formState$result;
-    if (!(formState !== null && formState !== void 0 && formState.loading) && formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
-      var _formState$result2;
+    var _formState$result7;
+    if (!(formState !== null && formState !== void 0 && formState.loading) && formState !== null && formState !== void 0 && (_formState$result7 = formState.result) !== null && _formState$result7 !== void 0 && _formState$result7.error) {
+      var _formState$result8;
       setAlertState({
         open: true,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
+        content: ((_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : _formState$result8.result) || [t('ERROR', 'Error')]
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
@@ -256,8 +270,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   }, [user, isEdit]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading && emailInput.current) {
-      var _formState$result3, _formState$result4, _formState$result4$re, _ref, _formState$changes$em, _formState$changes5;
-      formMethods.setValue('email', formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.email : (_ref = (_formState$changes$em = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.email) !== null && _formState$changes$em !== void 0 ? _formState$changes$em : user && (user === null || user === void 0 ? void 0 : user.email)) !== null && _ref !== void 0 ? _ref : '');
+      var _formState$result9, _formState$result10, _formState$result10$r, _ref, _formState$changes$em, _formState$changes8;
+      formMethods.setValue('email', formState !== null && formState !== void 0 && (_formState$result9 = formState.result) !== null && _formState$result9 !== void 0 && _formState$result9.result ? formState === null || formState === void 0 ? void 0 : (_formState$result10 = formState.result) === null || _formState$result10 === void 0 ? void 0 : (_formState$result10$r = _formState$result10.result) === null || _formState$result10$r === void 0 ? void 0 : _formState$result10$r.email : (_ref = (_formState$changes$em = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.email) !== null && _formState$changes$em !== void 0 ? _formState$changes$em : user && (user === null || user === void 0 ? void 0 : user.email)) !== null && _ref !== void 0 ? _ref : '');
     }
   }, [validationFields, emailInput.current]);
   (0, _react.useEffect)(function () {
@@ -271,14 +285,20 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     });
   }, [formMethods]);
   (0, _react.useEffect)(function () {
-    var _formState$changes6, _formState$changes7, _configs$verification2;
-    if (isChanged && userPhoneNumber && isValidPhoneNumber && formState !== null && formState !== void 0 && (_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.country_phone_code && formState !== null && formState !== void 0 && (_formState$changes7 = formState.changes) !== null && _formState$changes7 !== void 0 && _formState$changes7.cellphone && (configs === null || configs === void 0 ? void 0 : (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1') {
+    var _formState$changes9, _formState$changes10, _configs$verification2;
+    if (isChanged && userPhoneNumber && isValidPhoneNumber && formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.country_phone_code && formState !== null && formState !== void 0 && (_formState$changes10 = formState.changes) !== null && _formState$changes10 !== void 0 && _formState$changes10.cellphone && (configs === null || configs === void 0 ? void 0 : (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1') {
       setWillVerifyOtpState(true);
     }
   }, [isValidPhoneNumber, userPhoneNumber, configs === null || configs === void 0 ? void 0 : (_configs$verification3 = configs.verification_phone_required) === null || _configs$verification3 === void 0 ? void 0 : _configs$verification3.value, isChanged]);
   (0, _react.useEffect)(function () {
     if (requiredFields && !requiredFields.includes('cellphone')) setIsValidPhoneNumber(true);
   }, [requiredFields]);
+  var handleEditNotifications = function handleEditNotifications(key, value) {
+    setNotificationList(_objectSpread(_objectSpread({}, notificationList), {}, _defineProperty({}, key, value)));
+  };
+  (0, _react.useEffect)(function () {
+    isEdit && handleChangeNotifications(notificationList);
+  }, [notificationList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -354,17 +374,22 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  })), !isCheckout && showCustomerPromotions && /*#__PURE__*/_react.default.createElement(_styles.PromotionsWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
-    name: "promotions",
-    id: "promotions",
-    onChange: function onChange() {
-      var _formState$result5, _formState$result6, _formState$result6$re, _formState$result6$re2, _formState$result6$re3, _formState$changes$se, _formState$changes8, _formState$changes8$s, _formState$changes8$s2, _user$settings, _user$settings$notifi;
-      return handleChangePromotions(!(formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? !!(formState !== null && formState !== void 0 && (_formState$result6 = formState.result) !== null && _formState$result6 !== void 0 && (_formState$result6$re = _formState$result6.result) !== null && _formState$result6$re !== void 0 && (_formState$result6$re2 = _formState$result6$re.settings) !== null && _formState$result6$re2 !== void 0 && (_formState$result6$re3 = _formState$result6$re2.notification) !== null && _formState$result6$re3 !== void 0 && _formState$result6$re3.newsletter) : (_formState$changes$se = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : (_formState$changes8$s = _formState$changes8.settings) === null || _formState$changes8$s === void 0 ? void 0 : (_formState$changes8$s2 = _formState$changes8$s.notification) === null || _formState$changes8$s2 === void 0 ? void 0 : _formState$changes8$s2.newsletter) !== null && _formState$changes$se !== void 0 ? _formState$changes$se : user && (user === null || user === void 0 ? void 0 : (_user$settings = user.settings) === null || _user$settings === void 0 ? void 0 : (_user$settings$notifi = _user$settings.notification) === null || _user$settings$notifi === void 0 ? void 0 : _user$settings$notifi.newsletter)));
+  })), showNotifications && showCustomerPromotions && !requiredFields && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.NotificationsGroupSwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('MARKETING_NOTIFICATIONS', 'Marketing Notifications')), /*#__PURE__*/_react.default.createElement(_styles.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('EMAILS', 'Emails')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+    onChange: function onChange(value) {
+      return handleEditNotifications('email', value);
     },
-    defaultChecked: formState !== null && formState !== void 0 && (_formState$result7 = formState.result) !== null && _formState$result7 !== void 0 && _formState$result7.result ? !!(formState !== null && formState !== void 0 && (_formState$result8 = formState.result) !== null && _formState$result8 !== void 0 && (_formState$result8$re = _formState$result8.result) !== null && _formState$result8$re !== void 0 && (_formState$result8$re2 = _formState$result8$re.settings) !== null && _formState$result8$re2 !== void 0 && (_formState$result8$re3 = _formState$result8$re2.notification) !== null && _formState$result8$re3 !== void 0 && _formState$result8$re3.newsletter) : !!((_formState$changes$se2 = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : (_formState$changes9$s = _formState$changes9.settings) === null || _formState$changes9$s === void 0 ? void 0 : (_formState$changes9$s2 = _formState$changes9$s.notification) === null || _formState$changes9$s2 === void 0 ? void 0 : _formState$changes9$s2.newsletter) !== null && _formState$changes$se2 !== void 0 ? _formState$changes$se2 : user && (user === null || user === void 0 ? void 0 : (_user$settings2 = user.settings) === null || _user$settings2 === void 0 ? void 0 : (_user$settings2$notif = _user$settings2.notification) === null || _user$settings2$notif === void 0 ? void 0 : _user$settings2$notif.newsletter))
-  }), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "promotions"
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('RECEIVE_NEWS_EXCLUSIVE_PROMOTIONS', 'Receive newsletters and exclusive promotions')))), showLangauges && !requiredFields && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+    defaultChecked: notificationList === null || notificationList === void 0 ? void 0 : notificationList.email
+  })), /*#__PURE__*/_react.default.createElement(_styles.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('SMS', 'Sms')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+    onChange: function onChange(value) {
+      return handleEditNotifications('sms', value);
+    },
+    defaultChecked: notificationList === null || notificationList === void 0 ? void 0 : notificationList.sms
+  })), /*#__PURE__*/_react.default.createElement(_styles.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PUSH_NOTIFICATIONS', 'Push Notifications')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+    onChange: function onChange(value) {
+      return handleEditNotifications('notification', value);
+    },
+    defaultChecked: notificationList === null || notificationList === void 0 ? void 0 : notificationList.notification
+  })))), showLangauges && !requiredFields && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);
