@@ -156,7 +156,9 @@ const OrderDetailsUI = (props) => {
     try {
       const response = await fetch(`${ordering.root}/orders/${order.id}/receipt`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        headers: {
+          'Content-Type': 'application/json', Authorization: `Bearer ${token}`, 'X-App-X': ordering.appId
+        },
         body: JSON.stringify(body)
       })
       const { error, result } = await response.json()
