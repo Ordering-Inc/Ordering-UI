@@ -289,3 +289,33 @@ export const WrapperActionsInput = styled.div`
     font-size: 20px;
   }
 `
+
+export const MobileWrapperPlaceOrderButton = styled.div`
+  position: fixed;
+  width: 100vw;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  z-index: 1006;
+  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
+
+  span {
+    font-weight: 600;
+    font-size: 16px;
+
+    @media (min-width: 1200px) {
+      font-size: 18px;
+      padding-left: 20px;
+    }
+  }
+
+  button {
+    min-height: 44px;
+    border-radius: 7.6px;
+  }
+`
