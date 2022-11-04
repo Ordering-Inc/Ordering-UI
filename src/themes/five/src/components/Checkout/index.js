@@ -15,6 +15,7 @@ import {
   useCustomer,
   useEvent
 } from 'ordering-components'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useHistory } from 'react-router-dom'
@@ -41,7 +42,8 @@ import {
   WalletPaymentOptionContainer,
   CartHeader,
   SelectSpotContainer,
-  WrapperActionsInput
+  WrapperActionsInput,
+  MobileWrapperPlaceOrderButton
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -101,6 +103,7 @@ const CheckoutUI = (props) => {
   const [customerState] = useCustomer()
   const [events] = useEvent()
   const history = useHistory()
+  const windowSize = useWindowSize()
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
@@ -212,6 +215,12 @@ const CheckoutUI = (props) => {
     }
 
     setUserErrors(errors)
+  }
+
+  const handleScrollTo = () => {
+    if (!((!paymethodSelected && cart?.balance > 0) && cart?.status !== 2)) return
+    const scrollElement = document.querySelector('.paymentsContainer')
+    window.scrollTo(0, scrollElement.offsetTop - 20);
   }
 
   useEffect(() => {
@@ -375,7 +384,7 @@ const CheckoutUI = (props) => {
           )}
 
           {!cartState.loading && cart && (
-            <PaymentMethodContainer>
+            <PaymentMethodContainer className='paymentsContainer'>
               <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
               {!cartState.loading && cart?.status === 4 && (
                 <WarningMessage style={{ marginTop: 20 }}>
@@ -474,7 +483,7 @@ const CheckoutUI = (props) => {
           </CartContainer>
         )}
 
-        {!cartState.loading && cart && cart?.status !== 2 && (
+        {windowSize.width >= 576 && !cartState.loading && cart && cart?.status !== 2 && (
           <WrapperPlaceOrderButton>
             <Button
               color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
@@ -523,6 +532,22 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
       </WrapperRightContainer>
+      {windowSize.width < 576 && !cartState.loading && cart && cart?.status !== 2 && (
+        <MobileWrapperPlaceOrderButton>
+          <span>{parsePrice(cart?.total)}</span>
+          <Button
+              color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
+              // disabled={isDisablePlaceOrderButton}
+              onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
+            >
+              {!cart?.valid_maximum ? (
+                `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
+              ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
+                `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+              ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
+            </Button>
+          </MobileWrapperPlaceOrderButton>
+      )}
       <Alert
         title={t('CUSTOMER_DETAILS', 'Customer Details')}
         content={alertState.content}
