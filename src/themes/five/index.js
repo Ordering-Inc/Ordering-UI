@@ -105,6 +105,11 @@ import { ProfessionalFilter } from './src/components/ProfessionalFilter'
 import { SearchProducts } from './src/components/SearchProducts'
 import { MultiCartsPaymethodsAndWallets } from './src/components/MultiCartsPaymethodsAndWallets'
 import { ProfessionalProfile } from './src/components/ProfessionalProfile'
+import { OrderHistory } from './src/components/OrderDetails/OrderHistory'
+import { OrderBillSection } from './src/components/OrderDetails/OrderBillSection'
+import { OrderPreferencesSection } from './src/components/OrderDetails/OrderPreferencesSections'
+import { ActionsSection } from './src/components/OrderDetails/ActionsSection'
+import { ProductShare } from './src/components/ProductShare'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -221,6 +226,11 @@ export {
   SearchProducts,
   MultiCartsPaymethodsAndWallets,
   ProfessionalProfile,
+  OrderHistory,
+  OrderBillSection,
+  OrderPreferencesSection,
+  ActionsSection,
+  ProductShare,
 
   // styles
   Button,
