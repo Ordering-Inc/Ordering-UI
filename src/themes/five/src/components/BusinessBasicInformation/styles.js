@@ -376,6 +376,14 @@ export const RibbonBox = styled.div`
   ${({ isCapsule }) => isCapsule && css`
     border-radius: 50px;
   `}
+
+  ${({ colorText }) => colorText && css`
+    color: ${colorText ? 'black': 'white'};
+  `}
+
+  ${({ borderRibbon }) => borderRibbon && css`
+    border: 1px solid ${borderRibbon ? 'black': 'white'};
+  `}
 `
 export const SearchIconWrapper = styled.div`
   cursor: pointer;

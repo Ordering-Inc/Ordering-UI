@@ -10,7 +10,7 @@ import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
 import { useUtils, useOrder, useLanguage, useConfig, useOrderingTheme } from 'ordering-components'
 
-import { convertHoursToMinutes, shape } from '../../../../../utils'
+import { convertHoursToMinutes, shape, lightenDarkenColor } from '../../../../../utils'
 import { Select } from '../../styles/Select'
 import { MomentContent } from '../MomentContent'
 import CgSearch from '@meronex/icons/cg/CgSearch'
@@ -188,6 +188,8 @@ export const BusinessBasicInformation = (props) => {
                   {business?.ribbon?.enabled && (
                     <RibbonBox
                       bgColor={business?.ribbon?.color}
+                      colorText={lightenDarkenColor(business?.ribbon?.color)}
+                      borderRibbon={lightenDarkenColor(business?.ribbon?.color)}
                       isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}
                       isCapsule={business?.ribbon?.shape === shape?.capsuleShape}
                     >
