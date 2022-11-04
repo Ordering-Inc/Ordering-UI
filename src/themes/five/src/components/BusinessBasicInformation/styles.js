@@ -468,3 +468,29 @@ export const BusinessInfoWrapper = styled.div`
     flex-direction: column;
   }
 `
+
+export const WrapperFloatingSearch = styled.div`
+  position: absolute;
+  color: ${({ theme }) => theme.colors.white};
+  display: flex;
+  background: rgba(0,0,0,0.2);
+  top: 80px;
+  right: 10px;
+  width: 80%;
+  border-bottom: 1px solid #FFFFFF;
+  #select-input {
+    color: #FFFFFF !important;
+    background: transparent;
+  }
+  svg, span {
+    color: #FFFFFF !important;
+  }
+  @media (min-width: 681px){
+    top: 23px;
+    right: 60px;
+    width: 300px;
+    input {
+      width: 80%;
+    }
+  }
+`

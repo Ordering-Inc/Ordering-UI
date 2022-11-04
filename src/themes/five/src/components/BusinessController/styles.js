@@ -451,11 +451,11 @@ export const RibbonBox = styled.div`
   `}
 
   ${({ colorText }) => colorText && css`
-    color: ${colorText};
+    color: ${colorText ? 'black' : 'white'};
   `}
 
   ${({ borderRibbon }) => borderRibbon && css`
-    border: 1px solid ${borderRibbon};
+    border: 1px solid ${borderRibbon ? 'black' : 'white'};
   `}
 `
 
