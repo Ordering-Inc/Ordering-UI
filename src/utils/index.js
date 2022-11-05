@@ -132,35 +132,40 @@ export const bytesConverter = bytes => {
 }
 
 /**
- * Function to get colors darker/lighten.
+ * Function to get brightness of color.
  */
-export const LightenDarkenColor = (col, amt) => {
+export const lightenDarkenColor = (color) => {
 
-    var usePound = false;
-  
-    if (col[0] == "#") {
-        col = col.slice(1);
-        usePound = true;
-    }
- 
-    var num = parseInt(col,16);
- 
-    var r = (num >> 16) + amt;
- 
-    if (r > 255) r = 255;
-    else if  (r < 0) r = 0;
- 
-    var b = ((num >> 8) & 0x00FF) + amt;
- 
-    if (b > 255) b = 255;
-    else if  (b < 0) b = 0;
- 
-    var g = (num & 0x0000FF) + amt;
- 
-    if (g > 255) g = 255;
-    else if (g < 0) g = 0;
- 
-    return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+  let r, g, b, hsp;
+  if (color.match(/^rgb/)) {
+    // If HEX --> store the red, green, blue values in separate variables
+    color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+
+    r = color[1];
+    g = color[2];
+    b = color[3];
+  } else {
+    // If RGB --> Convert it to HEX
+    color = +("0x" + color.slice(1).replace(color.length < 5 && /./g, '$&$&'));
+
+    r = color >> 16;
+    g = color >> 8 & 255;
+    b = color & 255;
+  }
+
+  // HSP (Highly Sensitive Poo) equation
+  hsp = Math.sqrt(
+    0.299 * (r * r) +
+    0.587 * (g * g) +
+    0.114 * (b * b)
+  );
+
+  // Using the HSP value, determine whether the color is light or dark
+  if (hsp > 197) {
+    return true; //is light color
+  } else {
+    return false;
+  }
 }
 
 /**
