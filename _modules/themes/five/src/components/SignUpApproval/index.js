@@ -28,9 +28,9 @@ var SignUpApproval = function SignUpApproval(props) {
     dashboardLoginUrl = _props$content.dashboardLoginUrl,
     approvalType = _props$content.approvalType,
     businessType = _props$content.businessType,
+    contactEmail = _props$content.contactEmail,
     onAccept = props.onAccept,
     onCancel = props.onCancel;
-  var contactEmail = 'support@ordering.co';
   var showDomain = false;
   var logoImgUrl = businessType === 2 ? approvalType === 'automatic' ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.CongratulationApproval : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.CongratulationNoApproval : approvalType === 'automatic' ? (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.driverCongratulationApproval : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$genera = _theme$images4.general) === null || _theme$images4$genera === void 0 ? void 0 : _theme$images4$genera.driverCongratulationNoApproval;
   var userType = businessType === 2 ? 'business' : 'driver';
