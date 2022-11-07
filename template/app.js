@@ -158,7 +158,8 @@ export const App = () => {
             businessType: user?.level,
             project: settings.project,
             dashboardUrl: settings.url_dashboard,
-            dashboardLoginUrl: `${settings.url_dashboard}/login/?project=${settings.project}&token=${user?.session?.access_token}`
+            dashboardLoginUrl: `${settings.url_dashboard}/login/?project=${settings.project}&token=${user?.session?.access_token}`,
+            contact_email: settings.contact_email
           }
         }) : setAlertState({
           open: true,
@@ -175,7 +176,8 @@ export const App = () => {
           businessType: user?.level,
           project: settings.project,
           dashboardUrl: settings.url_dashboard,
-          dashboardLoginUrl: `${settings.url_dashboard}/login/?project=${settings.project}&token=${user?.session?.access_token}`
+          dashboardLoginUrl: `${settings.url_dashboard}/login/?project=${settings.project}&token=${user?.session?.access_token}`,
+          contact_email: settings.contact_email
         }
       }) : setAlertState({
         open: true,
