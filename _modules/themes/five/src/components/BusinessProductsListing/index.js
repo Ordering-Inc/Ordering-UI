@@ -297,7 +297,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     return function () {
       events.off('change_view', handleChangePage);
     };
-  }, [openProduct]);
+  }, []);
   (0, _react.useEffect)(function () {
     window.addEventListener('scroll', handleScroll);
     return function () {

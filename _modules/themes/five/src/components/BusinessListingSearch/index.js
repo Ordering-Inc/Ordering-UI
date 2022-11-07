@@ -277,7 +277,7 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     });
   })))), /*#__PURE__*/_react.default.createElement(_styles.ProductsList, null, (_businessesSearchList6 = businessesSearchList.businesses) === null || _businessesSearchList6 === void 0 ? void 0 : _businessesSearchList6.filter(function (business) {
     var _business$categories;
-    return (business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) > 0;
+    return (business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) >= 0;
   }).map(function (business) {
     var _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _orderState$options8, _orderState$options9, _business$categories2;
     return /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessSearch, {

@@ -33,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessControllerUI = function BusinessControllerUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _theme$business_listi30, _theme$business_listi31, _theme$business_listi32, _theme$business_listi33, _theme$business_listi34, _theme$business_listi35, _business$available_d, _business$busy_driver, _business$active_orde, _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _business$ribbon6, _business$ribbon7, _theme$images, _theme$images$dummies, _configState$configs, _configState$configs$, _orderState$options, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _business$reviews2, _orderState$options2, _business$available_d2, _business$available_d3, _business$busy_driver2, _business$busy_driver3, _business$active_orde2, _business$active_orde3, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _theme$business_listi30, _theme$business_listi31, _theme$business_listi32, _theme$business_listi33, _theme$business_listi34, _theme$business_listi35, _business$available_d, _business$busy_driver, _business$active_orde, _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _business$ribbon6, _business$ribbon7, _theme$images, _theme$images$dummies, _configState$configs, _configState$configs$, _orderState$options, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _business$reviews2, _businessState$busine2, _orderState$options2, _business$available_d2, _business$available_d3, _business$busy_driver2, _business$busy_driver3, _business$active_orde2, _business$active_orde3, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
   var isSkeleton = props.isSkeleton,
     business = props.business,
     getBusinessOffer = props.getBusinessOffer,
@@ -57,7 +57,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     businessDeliveryTime = props.businessDeliveryTime,
     businessPickupTime = props.businessPickupTime,
     businessDistance = props.businessDistance,
-    handleFavoriteBusiness = props.handleFavoriteBusiness;
+    handleFavoriteBusiness = props.handleFavoriteBusiness,
+    businessState = props.businessState;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -117,7 +118,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   };
   var handleChangeFavorite = function handleChangeFavorite() {
     if (auth) {
-      handleFavoriteBusiness && handleFavoriteBusiness(!(business !== null && business !== void 0 && business.favorite));
+      var _businessState$busine;
+      handleFavoriteBusiness && handleFavoriteBusiness(!(businessState !== null && businessState !== void 0 && (_businessState$busine = businessState.business) !== null && _businessState$busine !== void 0 && _businessState$busine.favorite));
     } else {
       setModalPageToShow('login');
       setIsModalOpen(true);
@@ -191,7 +193,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   })), !hideBusinessFavorite && /*#__PURE__*/_react.default.createElement(_styles.FavoriteWrapper, {
     ref: favoriteRef,
     onClick: handleChangeFavorite
-  }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, business !== null && business !== void 0 && business.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessState !== null && businessState !== void 0 && (_businessState$busine2 = businessState.business) !== null && _businessState$busine2 !== void 0 && _businessState$busine2.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 16,
     height: 16
   })))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
