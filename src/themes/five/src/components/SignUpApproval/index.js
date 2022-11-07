@@ -21,8 +21,7 @@ import {
 export const SignUpApproval = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
-  const { content: { project, dashboardUrl, dashboardLoginUrl, approvalType, businessType }, onAccept, onCancel } = props
-  const contactEmail = 'support@ordering.co'
+  const { content: { project, dashboardUrl, dashboardLoginUrl, approvalType, businessType, contactEmail }, onAccept, onCancel } = props
   const showDomain = false
 
   const logoImgUrl = businessType === 2
@@ -62,7 +61,7 @@ export const SignUpApproval = (props) => {
                 <td className='bigger td-text-right'>{t('DASHBOARD_WEBPAGE', 'Dashboard webpage')}: </td>
                 <td className='td-text-left'><a className='green-text' href={dashboardLoginUrl} target='_blank' rel='noopener noreferrer'>{dashboardUrl}</a></td>
               </tr>
-            </tbody> 
+            </tbody>
           </ProjectInfoContainer>
         </BodySection>
       ) : (
