@@ -29,8 +29,6 @@ export const SignUpApproval = (props) => {
     : approvalType === 'automatic' ? theme.images?.general?.driverCongratulationApproval : theme.images?.general?.driverCongratulationNoApproval
   const userType = businessType === 2 ? 'business' : 'driver'
 
-  console.log(props)
-
   return (
     <Container>
       <HeaderSection>
