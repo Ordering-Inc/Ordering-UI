@@ -92,7 +92,6 @@ var UserVerificationUI = function UserVerificationUI(props) {
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, isEmailVerifyRequired ? verificationState.email : verificationState.phone),
     _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
     otpLeftTime = _useCountdownTimer2[0],
-    _ = _useCountdownTimer2[1],
     resetOtpLeftTime = _useCountdownTimer2[2];
   var numOtpInputs = isEmailVerifyRequired ? 6 : 4;
   var handleSendOtp = function handleSendOtp(opt) {
@@ -139,7 +138,6 @@ var UserVerificationUI = function UserVerificationUI(props) {
           country_phone_code: +(phoneState === null || phoneState === void 0 ? void 0 : phoneState.country_phone_code),
           code: otpState
         });
-        return;
       }
     }
   }, [otpState]);
@@ -162,15 +160,22 @@ var UserVerificationUI = function UserVerificationUI(props) {
   (0, _react.useEffect)(function () {
     if (!(verifyEmailState !== null && verifyEmailState !== void 0 && verifyEmailState.loadingSendCode) && isEmailVerifyRequired) {
       setVerificationState(_objectSpread(_objectSpread({}, verificationState), {}, {
+        phone: false,
         email: !!(verifyEmailState !== null && verifyEmailState !== void 0 && verifyEmailState.resultSendCode)
       }));
     }
     if (!(verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.loadingSendCode) && isPhoneVerifyRequired && !isEmailVerifyRequired) {
       setVerificationState(_objectSpread(_objectSpread({}, verificationState), {}, {
+        email: false,
         phone: !!(verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.resultSendCode)
       }));
     }
   }, [verifyEmailState, verifyPhoneState]);
+  (0, _react.useEffect)(function () {
+    if (otpState) {
+      setOtpState('');
+    }
+  }, [verificationState]);
   (0, _react.useEffect)(function () {
     setupUserPhoneNumber();
   }, [user]);

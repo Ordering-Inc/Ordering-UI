@@ -123,6 +123,12 @@ Object.defineProperty(exports, "Button", {
     return _Buttons.Button;
   }
 });
+Object.defineProperty(exports, "CancellationComponent", {
+  enumerable: true,
+  get: function get() {
+    return _CancellationComponent.CancellationComponent;
+  }
+});
 Object.defineProperty(exports, "CardForm", {
   enumerable: true,
   get: function get() {
@@ -944,6 +950,7 @@ var _useWindowSize = require("./hooks/useWindowSize");
 var _useCountdownTimer = require("./hooks/useCountdownTimer");
 var _useIntersectionObserver = require("./hooks/useIntersectionObserver");
 var _useIsMounted = require("./hooks/useIsMounted");
+var _CancellationComponent = require("./components/CancellationComponent");
 var _Buttons = require("./styles/Buttons");
 var _Inputs = require("./styles/Inputs");
 var _Select = require("./styles/Select");
