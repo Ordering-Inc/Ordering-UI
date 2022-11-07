@@ -62,7 +62,8 @@ const BusinessControllerUI = (props) => {
     businessDeliveryTime,
     businessPickupTime,
     businessDistance,
-    handleFavoriteBusiness
+    handleFavoriteBusiness,
+    businessState
   } = props
   const [configState] = useConfig()
   const theme = useTheme()
@@ -99,7 +100,7 @@ const BusinessControllerUI = (props) => {
 
   const handleChangeFavorite = () => {
     if (auth) {
-      handleFavoriteBusiness && handleFavoriteBusiness(!business?.favorite)
+      handleFavoriteBusiness && handleFavoriteBusiness(!businessState?.business?.favorite)
     } else {
       setModalPageToShow('login')
       setIsModalOpen(true)
@@ -214,7 +215,7 @@ const BusinessControllerUI = (props) => {
                   <FavoriteWrapper ref={favoriteRef} onClick={handleChangeFavorite}>
                     {!isSkeleton ? (
                       <>
-                        {(business?.favorite) ? <Like /> : <DisLike />}
+                        {(businessState?.business?.favorite) ? <Like /> : <DisLike />}
                       </>
                     ) : (
                       <Skeleton width={16} height={16} />
