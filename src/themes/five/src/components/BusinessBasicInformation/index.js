@@ -359,6 +359,9 @@ export const BusinessBasicInformation = (props) => {
     )
   }
 
+  console.log(showLogo)
+  console.log(orderingTheme)
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -390,10 +393,8 @@ export const BusinessBasicInformation = (props) => {
           {showLogo && (
             <BusinessContent>
               <WrapperBusinessLogo>
-                {!loading ? (
+                {!loading && (
                   <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-                ) : (
-                  <Skeleton height={70} width={70} />
                 )}
               </WrapperBusinessLogo>
             </BusinessContent>
