@@ -159,7 +159,7 @@ export const App = () => {
             project: settings.project,
             dashboardUrl: settings.url_dashboard,
             dashboardLoginUrl: `${settings.url_dashboard}/login/?project=${settings.project}&token=${user?.session?.access_token}`,
-            contact_email: settings.contact_email
+            contactEmail: settings.contact_email
           }
         }) : setAlertState({
           open: true,
@@ -177,7 +177,7 @@ export const App = () => {
           project: settings.project,
           dashboardUrl: settings.url_dashboard,
           dashboardLoginUrl: `${settings.url_dashboard}/login/?project=${settings.project}&token=${user?.session?.access_token}`,
-          contact_email: settings.contact_email
+          contactEmail: settings.contact_email
         }
       }) : setAlertState({
         open: true,

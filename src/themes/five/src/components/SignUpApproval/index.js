@@ -21,7 +21,7 @@ import {
 export const SignUpApproval = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
-  const { content: { project, dashboardUrl, dashboardLoginUrl, approvalType, businessType, contact_email }, onAccept, onCancel } = props
+  const { content: { project, dashboardUrl, dashboardLoginUrl, approvalType, businessType, contactEmail }, onAccept, onCancel } = props
   const showDomain = false
 
   const logoImgUrl = businessType === 2
@@ -70,13 +70,13 @@ export const SignUpApproval = (props) => {
             <DescriptionContainer>
               <Description><span className='bigger'>{t('YOUR_STORE_UNDER_APPROVAL', 'Your store is under approval')}</span></Description>
               <Description>{t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')}</Description>
-              <Description>{t('FEEL_FREE_CONTACT_US', 'feel free to contact us at ')} <a className='green-text' href={`mailto:${t('SIGNUP_DRIVER_EMAIL', contact_email)}`}>{t('SIGNUP_DRIVER_EMAIL', contact_email)}</a></Description>
+              <Description>{t('FEEL_FREE_CONTACT_US', 'feel free to contact us at ')} <a className='green-text' href={`mailto:${t('SIGNUP_DRIVER_EMAIL', contactEmail)}`}>{t('SIGNUP_DRIVER_EMAIL', contactEmail)}</a></Description>
             </DescriptionContainer>
           ) : (
             <DescriptionContainer>
               <Description><span className='bigger'>{t('REQUEST_TO_START_UNDER_APPROVAL', 'Your request to start as a driver is under approval.')}</span></Description>
               <Description>{t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')}</Description>
-              <Description>{t('FEEL_FREE_CONTACT_US', 'feel free to contact us at ')} <a className='green-text' href={`mailto:${t('SIGNUP_DRIVER_EMAIL', contact_email)}`}>{t('SIGNUP_DRIVER_EMAIL', contact_email)}</a></Description>
+              <Description>{t('FEEL_FREE_CONTACT_US', 'feel free to contact us at ')} <a className='green-text' href={`mailto:${t('SIGNUP_DRIVER_EMAIL', contactEmail)}`}>{t('SIGNUP_DRIVER_EMAIL', contactEmail)}</a></Description>
             </DescriptionContainer>
           )}
         </BodySection>
@@ -100,7 +100,7 @@ export const SignUpApproval = (props) => {
           </Button>
         </ActionGroup>
         {(approvalType === 'automatic' && userType === 'business') && (
-          <ContactSection>{t('CONTACT_US_QUESTIONS', 'If you have some questions do no hestitate to contact us at ')} <a className='green-text' href={`mailto:${t('SIGNUP_DRIVER_EMAIL', contact_email)}`}>{t('SIGNUP_DRIVER_EMAIL', contact_email)}</a></ContactSection>
+          <ContactSection>{t('CONTACT_US_QUESTIONS', 'If you have some questions do no hestitate to contact us at ')} <a className='green-text' href={`mailto:${t('SIGNUP_DRIVER_EMAIL', contactEmail)}`}>{t('SIGNUP_DRIVER_EMAIL', contactEmail)}</a></ContactSection>
         )}
       </FooterSection>
     </Container>
