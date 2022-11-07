@@ -1,7 +1,6 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
 import { Button } from '../../styles/Buttons'
-import config from '../../../../../../template/config.json'
 
 import { useLanguage } from 'ordering-components'
 
