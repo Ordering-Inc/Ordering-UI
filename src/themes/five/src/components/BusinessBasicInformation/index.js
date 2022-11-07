@@ -359,9 +359,6 @@ export const BusinessBasicInformation = (props) => {
     )
   }
 
-  console.log(showLogo)
-  console.log(orderingTheme)
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
