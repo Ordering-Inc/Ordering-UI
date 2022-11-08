@@ -100,7 +100,6 @@ const PaymentOptionsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
-  const [{ loading: loadingOptions }] = useOrder()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
@@ -173,31 +172,31 @@ const PaymentOptionsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
-          {!(paymethodsList.loading || isLoading || loadingOptions) &&
-          supportedMethods.length > 0 && (
-            supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
-              <React.Fragment key={paymethod.id}>
-                {
-                  (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
-                    <PayCard
-                      isDisabled={isDisabled}
-                      className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
-                      onClick={() => handlePaymentMethodClick(paymethod)}
-                    >
-                      <div>
-                        {getPayIcon(paymethod.id)}
-                      </div>
-                      <p>
-                        {t(paymethod.gateway.toUpperCase(), paymethod.name)}
-                      </p>
-                    </PayCard>
-                  )
-                }
-              </React.Fragment>
-            ))
-          )}
+          {!(paymethodsList.loading || isLoading) &&
+            supportedMethods.length > 0 && (
+              supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
+                <React.Fragment key={paymethod.id}>
+                  {
+                    (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                      <PayCard
+                        isDisabled={isDisabled}
+                        className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
+                        onClick={() => handlePaymentMethodClick(paymethod)}
+                      >
+                        <div>
+                          {getPayIcon(paymethod.id)}
+                        </div>
+                        <p>
+                          {t(paymethod.gateway.toUpperCase(), paymethod.name)}
+                        </p>
+                      </PayCard>
+                    )
+                  }
+                </React.Fragment>
+              ))
+            )}
 
-          {(paymethodsList.loading || isLoading || loadingOptions) && (
+          {(paymethodsList.loading || isLoading) && (
             [...Array(5).keys()].map(i => (
               <PayCard key={i} isSkeleton>
                 <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />
@@ -211,7 +210,7 @@ const PaymentOptionsUI = (props) => {
             />
           )}
 
-          {!(paymethodsList.loading || isLoading || loadingOptions) &&
+          {!(paymethodsList.loading || isLoading) &&
             !paymethodsList.error &&
             (!paymethodsList?.paymethods || supportedMethods.length === 0) &&
             (

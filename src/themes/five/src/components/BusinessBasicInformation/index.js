@@ -390,10 +390,8 @@ export const BusinessBasicInformation = (props) => {
           {showLogo && (
             <BusinessContent>
               <WrapperBusinessLogo>
-                {!loading ? (
+                {!loading && (
                   <BusinessLogo bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
-                ) : (
-                  <Skeleton height={70} width={70} />
                 )}
               </WrapperBusinessLogo>
             </BusinessContent>
