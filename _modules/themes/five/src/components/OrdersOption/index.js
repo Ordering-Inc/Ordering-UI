@@ -75,7 +75,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     onBusinessClick = props.onBusinessClick,
     professionals = props.professionals,
     handleUpdateProfessionals = props.handleUpdateProfessionals,
-    businesses = props.businesses;
+    businesses = props.businesses,
+    handleUpdateBusinesses = props.handleUpdateBusinesses;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -295,7 +296,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   })), isBusiness && (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_PreviousBusinessOrdered.PreviousBusinessOrdered, {
     businesses: businesses,
     onRedirectPage: onRedirectPage,
-    isLoadingOrders: loading
+    isLoadingOrders: loading,
+    handleUpdateBusinesses: handleUpdateBusinesses
   }), isProducts && /*#__PURE__*/_react.default.createElement(_PreviousProductsOrdered.PreviousProductsOrdered, {
     products: products,
     onProductClick: onProductClick,
