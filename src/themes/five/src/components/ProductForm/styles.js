@@ -41,7 +41,9 @@ export const SwiperWrapper = styled.div`
   .mySwiper2 {
     height: 250px;
     width: 100%;
-
+    ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
+      height: 290px;
+    `}
     .swiper-slide-active {
       border-radius: 0px;
       img {
@@ -49,11 +51,35 @@ export const SwiperWrapper = styled.div`
       }
     }
 
+    @media (min-width: 480px){
+      ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
+        height: 340px;
+      `}
+    }
+
     @media (min-width: 576px) {
       height: 320px;
+      ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
+        height: 60vw;
+      `}
     }
+      ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
+      @media (min-width: 768px) {
+        height: 40vw;
+      }
+      @media (min-width: 993px) {
+        height: 30vw;
+      }
+      @media (min-width: 1024px){
+        height: 350px !important;
+      }
+      @media (min-width: 1200px) {
+        height: 300px !important;
+        width: 300px !important;
+      }
+    `}
   }
-
+  
 
   .swiper {
     width: 100%;
@@ -65,6 +91,10 @@ export const SwiperWrapper = styled.div`
   .swiper-slide {
     background-size: cover;
     background-position: center;
+    .active-img {
+      ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
+      `}
+    }
   }
 
   .product-thumb {
@@ -83,6 +113,10 @@ export const SwiperWrapper = styled.div`
       img {
         border-radius: 7.6px;
         max-height: 70px;
+        ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
+          max-width: 80px;
+          max-height: 80px;
+        `}
       }
     }
 
@@ -96,6 +130,33 @@ export const SwiperWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
+      border-radius: 50% !important;
+    `}
+  }
+
+  .active-img {
+    ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
+      height: 60vw !important;
+      width: 60vw !important;
+      margin: 0 auto;
+      @media (min-width: 768px) {
+        height: 40vw !important;
+        width: 40vw !important;
+      }
+      @media (min-width: 993px) {
+        height: 30vw !important;
+        width: 30vw !important;
+      }
+      @media (min-width: 1024px) {
+        height: 350px !important;
+        width: 350px !important;
+      }
+      @media (min-width: 1200px) {
+        height: 300px !important;
+        width: 300px !important;
+      }
+    `}
   }
 
   .swiper-button-next {

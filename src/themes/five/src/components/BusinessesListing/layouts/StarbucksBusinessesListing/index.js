@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import FiMap from '@meronex/icons/fi/FiMap'
+import FiFilter from '@meronex/icons/fi/FiFilter'
 import Skeleton from 'react-loading-skeleton'
 import {
   useOrder,
@@ -168,7 +169,11 @@ const BusinessesListingUI = (props) => {
                         placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
                         onSearch={handleChangeSearch}
                         handleCustomEnter={term => onRedirectPage({ page: configs?.advanced_business_search_enabled?.value === '1' && 'business_search', search: `?term=${term}` })}
+                        isHome
                       />
+                      {configs?.advanced_business_search_enabled?.value === '1' && (
+                        <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
+                      )}
                       {isCustomLayout && (
                         <FiMap onClick={toggleMap} />
                       )}

@@ -59,7 +59,7 @@ export const SignUpApproval = (props) => {
               </tr>
               <tr>
                 <td className='bigger td-text-right'>{t('DASHBOARD_WEBPAGE', 'Dashboard webpage')}: </td>
-                <td className='td-text-left'><a className='green-text' href={dashboardLoginUrl} target='_blank' rel='noopener noreferrer'>{dashboardUrl}</a></td>
+                <td className='td-text-left'><a className='green-text' href={t('SIGNUP_DASHBOARD_LOGIN_URL', dashboardLoginUrl)} target='_blank' rel='noopener noreferrer'>{t('SIGNUP_DASHBOARD_URL', dashboardUrl)}</a></td>
               </tr>
             </tbody>
           </ProjectInfoContainer>

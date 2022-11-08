@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { BusinessController as BusinessSingleCard, useLanguage, useUtils } from 'ordering-components'
+import React, { useState, useRef } from 'react'
+import { BusinessController as BusinessSingleCard, useLanguage, useSession, useUtils } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Alert } from '../../../../../components/Confirm'
@@ -19,7 +19,9 @@ import {
   CallCenterInformation,
   CallCenterInformationBullet,
   NameWrapper,
-  BusinessInfomation
+  BusinessInfomation,
+  Address,
+  SelectStoreContainer
 } from './styles'
 import GrClock from '@meronex/icons/gr/GrClock'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
@@ -27,6 +29,9 @@ import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrStar from '@meronex/icons/gr/GrStar'
 import BiCar from '@meronex/icons/bi/BiCar'
 import BiBasket from '@meronex/icons/bi/BiBasket'
+import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
+import dayjs from 'dayjs'
+import { Button } from '../../../../five'
 // import BusinessInformation from '../BusinessInformation'
 
 const BusinessControllerUI = (props) => {
@@ -38,12 +43,21 @@ const BusinessControllerUI = (props) => {
     orderType,
     isCustomLayout,
     isShowCallcenterInformation,
-    handleShowBusinessInfo
+    handleShowBusinessInfo,
+    handleFavoriteBusiness
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
+  const [{ auth }] = useSession()
+  const favoriteRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const layout = theme?.business_listing_view?.components?.layout?.type || 'starbucks'
+  const hideCategories = theme?.business_listing_view?.components?.business?.components?.categories?.hidden
+  const hideAddress = theme?.business_listing_view?.components?.business?.components?.address?.hidden ?? true
+  const hideBusinessFavorite = theme?.business_listing_view?.components?.business?.components?.favorite?.hidden
+
   const types = ['food', 'alcohol', 'groceries', 'laundry']
   const businessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
@@ -56,6 +70,31 @@ const BusinessControllerUI = (props) => {
   const handleShowAlert = () => {
     setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
   }
+
+  const handleChangeFavorite = () => {
+    if (auth) {
+      handleFavoriteBusiness && handleFavoriteBusiness(!business?.favorite)
+    }
+  }
+
+  const scheduleFormatted = ({ hour, minute }) => {
+    const checkTime = (val) => val < 10 ? `0${val}` : val
+    return `${checkTime(hour)}:${checkTime(minute)}`
+  }
+
+  const getScheduleOpen = (business) => {
+    const currentDate = dayjs().tz(business?.timezone)
+    let lapse = null
+    if (business?.today?.enabled) {
+      lapse = business?.today?.lapses?.find(lapse => {
+        const from = currentDate.hour(lapse.open.hour).minute(lapse.open.minute)
+        const to = currentDate.hour(lapse.close.hour).minute(lapse.close.minute)
+        return currentDate.unix() >= from.unix() && currentDate.unix() <= to.unix()
+      })
+    }
+    return lapse ? `${scheduleFormatted(lapse.open)} - ${scheduleFormatted(lapse.close)}` : ''
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -82,8 +121,38 @@ const BusinessControllerUI = (props) => {
                   ) : (
                     <Skeleton width={100} />
                   )}
+                  {layout === 'mapview' && (
+                    <BusinessInfomation>
+                      {business?.reviews?.total > 0 ? (
+                        <div className='reviews'>
+                          <GrStar />
+                          <span>{business?.reviews?.total}</span>
+                        </div>
+                      ) : (
+                        business?.reviews?.total !== 0 && <Skeleton width={50} />
+                      )}
+                      {!hideBusinessFavorite && (
+                        <div className='favorite' ref={favoriteRef} onClick={handleChangeFavorite}>
+                          {!isSkeleton ? (
+                            <>
+                              {(business?.favorite) ? <Like /> : <DisLike />}
+                            </>
+                          ) : (
+                            <Skeleton width={16} height={16} />
+                          )}
+                        </div>
+                      )}
+                      {
+                        (business && handleShowBusinessInfo) ? (
+                          <BsExclamationCircle onClick={() => handleShowBusinessInfo(business)} />
+                        ) : (
+                          <Skeleton width={20} />
+                        )
+                      }
+                    </BusinessInfomation>
+                  )}
                 </NameWrapper>
-                {!isShowCallcenterInformation && (
+                {!isShowCallcenterInformation && !hideCategories && (
                   <Categories>
                     {
                       Object.keys(business).length > 0 ? (
@@ -94,73 +163,91 @@ const BusinessControllerUI = (props) => {
                     }
                   </Categories>
                 )}
-                <Medadata isCustomerMode={isShowCallcenterInformation}>
-                  {Object.keys(business).length > 0 ? (
-                    <p className='bullet'>
-                      <GrClock />
-                      {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
-                    </p>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                  {business?.distance >= 0 ? (
-                    <p className='bullet'>
-                      <GrLocation />
-                      {parseDistance(business?.distance)}
-                    </p>
-                  ) : (
-                    <Skeleton width={70} />
-                  )}
-                  {orderType === 1 && (
-                    <>
-                      {business?.delivery_price >= 0 ? (
-                        <p>
-                          <GrDeliver />
-                          {business && parsePrice(business?.delivery_price)}
-                        </p>
+                {!isShowCallcenterInformation && !hideAddress && (
+                  <Address>
+                    {
+                      Object.keys(business).length > 0 ? (
+                        business?.address
                       ) : (
-                        <Skeleton width={70} />
+                        <Skeleton width={100} />
+                      )
+                    }
+                  </Address>
+                )}
+                {layout !== 'mapview' && (
+                  <Medadata isCustomerMode={isShowCallcenterInformation}>
+                    {Object.keys(business).length > 0 ? (
+                      <p className='bullet'>
+                        <GrClock />
+                        {convertHoursToMinutes(orderState?.options?.type === 1 ? business?.delivery_time : business?.pickup_time) || <Skeleton width={100} />}
+                      </p>
+                    ) : (
+                      <Skeleton width={70} />
+                    )}
+                    {business?.distance >= 0 ? (
+                      <p className='bullet'>
+                        <GrLocation />
+                        {parseDistance(business?.distance)}
+                      </p>
+                    ) : (
+                      <Skeleton width={70} />
+                    )}
+                    {orderType === 1 && (
+                      <>
+                        {business?.delivery_price >= 0 ? (
+                          <p>
+                            <GrDeliver />
+                            {business && parsePrice(business?.delivery_price)}
+                          </p>
+                        ) : (
+                          <Skeleton width={70} />
+                        )}
+                      </>
+                    )}
+                    {isShowCallcenterInformation && (
+                      <CallCenterInformation>
+                        <CallCenterInformationBullet bgcolor='green'>
+                          <BiCar />
+                          {business?.available_drivers?.length}
+                        </CallCenterInformationBullet>
+                        <CallCenterInformationBullet bgcolor='red'>
+                          <BiCar />
+                          {business?.busy_drivers?.length}
+                        </CallCenterInformationBullet>
+                        <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
+                          <BiBasket />
+                          {business?.active_orders?.length}
+                        </CallCenterInformationBullet>
+                      </CallCenterInformation>
+                    )}
+                    <>
+                      {business?.reviews?.total > 0 ? (
+                        <div className='reviews'>
+                          <GrStar />
+                          <span>{business?.reviews?.total}</span>
+                        </div>
+                      ) : (
+                        business?.reviews?.total !== 0 && <Skeleton width={50} />
                       )}
                     </>
-                  )}
-                  {isShowCallcenterInformation && (
-                    <CallCenterInformation>
-                      <CallCenterInformationBullet bgcolor='green'>
-                        <BiCar />
-                        {business?.available_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='red'>
-                        <BiCar />
-                        {business?.busy_drivers?.length}
-                      </CallCenterInformationBullet>
-                      <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
-                        <BiBasket />
-                        {business?.active_orders?.length}
-                      </CallCenterInformationBullet>
-                    </CallCenterInformation>
-                  )}
-                  {business?.reviews?.total > 0 ? (
-                    <div className='reviews'>
-                      <GrStar />
-                      <span>{business?.reviews?.total}</span>
-                    </div>
-                  ) : (
-                    business?.reviews?.total !== 0 && <Skeleton width={50} />
-                  )}
+                  </Medadata>
+                )}
+                <Medadata>
+                  <div className='schedule'>
+                    {`${t('SCHEDULE', 'Schedule')}: ${getScheduleOpen(business)}`}
+                  </div>
+                  <SelectStoreContainer>
+                    <Button
+                      outline
+                    >
+                      {t('SELECT_BUSINESS', 'Select business')}
+                    </Button>
+                  </SelectStoreContainer>
                 </Medadata>
               </BusinessInfoItem>
             </BusinessInfo>
           </BusinessContent>
         </WrapperBusinessCard>
-        <BusinessInfomation>
-          {
-            (business && handleShowBusinessInfo) ? (
-              <BsExclamationCircle onClick={() => handleShowBusinessInfo(business)} />
-            ) : (
-              <Skeleton width={20} />
-            )
-          }
-        </BusinessInfomation>
       </ContainerCard>
       <Alert
         title={t('BUSINESS_CLOSED', 'Business Closed')}
