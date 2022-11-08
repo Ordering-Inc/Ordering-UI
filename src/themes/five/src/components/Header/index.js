@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useOrderingTheme } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
-import { LanguageSelector } from '../LanguageSelector'
+import { LanguageSelector } from '../../../../../components/LanguageSelector'
 
 import { GeoAlt } from 'react-bootstrap-icons'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
@@ -25,7 +25,8 @@ import {
   MomentMenu,
   FarAwayMessage,
   Divider,
-  AddressFormWrapper
+  AddressFormWrapper,
+  LanguageSelectorWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -350,9 +351,6 @@ export const Header = (props) => {
                           />
                         )
                       )}
-                      {isCustomerMode && (
-                        <LanguageSelector />
-                      )}
                       {windowSize.width > 768 && (
                         <UserPopover
                           withLogout
@@ -365,6 +363,9 @@ export const Header = (props) => {
                     </>
                   )
                 }
+                <LanguageSelectorWrapper>
+                  <LanguageSelector />
+                </LanguageSelectorWrapper>
               </Menu>
             </RightHeader>
           )}
@@ -423,7 +424,7 @@ export const Header = (props) => {
             title={(!auth && modalSelected === 'address') && t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
-            width={modalSelected === 'address' ? orderState?.options?.user_id ? '70%' : '50%' : '700px'} 
+            width={modalSelected === 'address' ? orderState?.options?.user_id ? '70%' : '50%' : '700px'}
           >
             {modalSelected === 'cart' && (
               <CartContent

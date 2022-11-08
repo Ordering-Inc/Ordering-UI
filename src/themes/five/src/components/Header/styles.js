@@ -111,10 +111,8 @@ export const Menu = styled.div`
     }
 
     ${({ isCustomerMode }) => !isCustomerMode && css`
-      margin: 0px 10px;
+      margin: 0px 5px;
       height: 40px;
-      border-color: #CCC;
-      background-color: #CCC !important;
 
       svg {
         font-size: 16px;
