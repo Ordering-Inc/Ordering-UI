@@ -22,7 +22,7 @@ var PreviousBusinessOrdered = function PreviousBusinessOrdered(props) {
   var isCustomLayout = props.isCustomLayout,
     isCustomerMode = props.isCustomerMode,
     onRedirectPage = props.onRedirectPage,
-    handleUpdateBusinessList = props.handleUpdateBusinessList,
+    handleUpdateBusinesses = props.handleUpdateBusinesses,
     businesses = props.businesses;
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -62,7 +62,7 @@ var PreviousBusinessOrdered = function PreviousBusinessOrdered(props) {
       businessPickupTime: business === null || business === void 0 ? void 0 : business.pickup_time,
       businessDistance: business === null || business === void 0 ? void 0 : business.distance,
       firstCard: i === 0 && width > 681,
-      handleUpdateBusinessList: handleUpdateBusinessList
+      handleUpdateBusinessList: handleUpdateBusinesses
     });
   }))));
 };
