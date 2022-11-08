@@ -9,7 +9,9 @@ var _react = _interopRequireWildcard(require("react"));
 var _Inputs = require("../../styles/Inputs");
 var _ThemeContext = require("../../../../../contexts/ThemeContext");
 var _orderingComponents = require("ordering-components");
+var _AiOutlineSearch = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineSearch"));
 var _styles = require("./styles");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -20,15 +22,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SearchBar = function SearchBar(props) {
-  var _props$beforeElements, _props$beforeComponen, _el$current, _el$current2, _theme$images, _theme$images$general, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _el$current, _el$current2, _props$afterComponent, _props$afterElements;
   var onSearch = props.onSearch,
     search = props.search,
     placeholder = props.placeholder,
     lazyLoad = props.lazyLoad,
     isCustomLayout = props.isCustomLayout;
-  var _useTheme = (0, _ThemeContext.useTheme)(),
-    _useTheme2 = _slicedToArray(_useTheme, 1),
-    theme = _useTheme2[0];
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -71,20 +70,22 @@ var SearchBar = function SearchBar(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, {
     className: !isCustomLayout && 'search-bar',
     isCustomLayout: isCustomLayout,
-    hasValue: (_el$current = el.current) === null || _el$current === void 0 ? void 0 : _el$current.value
+    hasValue: (_el$current = el.current) === null || _el$current === void 0 ? void 0 : _el$current.value,
+    disablePadding: props.disablePadding
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     ref: el,
     name: "search",
     "aria-label": "search",
+    id: "select-input",
     placeholder: placeholder,
     isCustomLayout: isCustomLayout,
     autoComplete: "off",
     maxLength: "500"
-  }), /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, null, (_el$current2 = el.current) !== null && _el$current2 !== void 0 && _el$current2.value ? /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, {
+    isHome: props.isHome
+  }, (_el$current2 = el.current) !== null && _el$current2 !== void 0 && _el$current2.value ? /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleClear
-  }, t('CLEAR', 'Clear')) : /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.searchIcon
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, t('CLEAR', 'Clear')) : /*#__PURE__*/_react.default.createElement(_AiOutlineSearch.default, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

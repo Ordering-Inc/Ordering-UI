@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.StarbucksBusinessesListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _FiMap = _interopRequireDefault(require("@meronex/icons/fi/FiMap"));
+var _FiFilter = _interopRequireDefault(require("@meronex/icons/fi/FiFilter"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponents = require("ordering-components");
 var _Buttons = require("../../../../../../../styles/Buttons");
@@ -41,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 500;
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _configs$google_maps_, _businessesList$busin3, _orderState$options4, _orderState$options4$, _getCustomArray, _businessesList$busin4, _orderState$options5, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _configs$advanced_bus2, _businessesList$busin2, _configs$google_maps_, _businessesList$busin3, _orderState$options4, _orderState$options4$, _getCustomArray, _businessesList$busin4, _orderState$options5, _props$afterComponent, _props$afterElements;
   var businessesList = props.businessesList,
     paginationProps = props.paginationProps,
     searchValue = props.searchValue,
@@ -207,6 +208,13 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return onRedirectPage({
         page: (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' && 'business_search',
         search: "?term=".concat(term)
+      });
+    },
+    isHome: true
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus2 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus2 === void 0 ? void 0 : _configs$advanced_bus2.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
+    onClick: function onClick() {
+      return onRedirectPage({
+        page: 'business_search'
       });
     }
   }), isCustomLayout && /*#__PURE__*/_react.default.createElement(_FiMap.default, {

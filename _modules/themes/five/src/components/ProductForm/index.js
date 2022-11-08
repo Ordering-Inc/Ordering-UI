@@ -433,7 +433,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       key: i
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: img,
-      alt: ""
+      alt: "",
+      className: "active-img"
     }));
   }), videoGallery && videoGallery.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, videoGallery.map(function (video, j) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {

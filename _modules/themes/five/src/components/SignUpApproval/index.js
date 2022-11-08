@@ -55,10 +55,10 @@ var SignUpApproval = function SignUpApproval(props) {
     className: "td-text-left"
   }, /*#__PURE__*/_react.default.createElement("a", {
     className: "green-text",
-    href: dashboardLoginUrl,
+    href: t('SIGNUP_DASHBOARD_LOGIN_URL', dashboardLoginUrl),
     target: "_blank",
     rel: "noopener noreferrer"
-  }, dashboardUrl)))))) : /*#__PURE__*/_react.default.createElement(_styles.BodySection, null, userType === 'business' ? /*#__PURE__*/_react.default.createElement(_styles.DescriptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Description, null, /*#__PURE__*/_react.default.createElement("span", {
+  }, t('SIGNUP_DASHBOARD_URL', dashboardUrl))))))) : /*#__PURE__*/_react.default.createElement(_styles.BodySection, null, userType === 'business' ? /*#__PURE__*/_react.default.createElement(_styles.DescriptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Description, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "bigger"
   }, t('YOUR_STORE_UNDER_APPROVAL', 'Your store is under approval'))), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('BUSINESS_SIGNUP_MESSAGE', 'We will contact you as soon as possible')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('FEEL_FREE_CONTACT_US', 'feel free to contact us at '), " ", /*#__PURE__*/_react.default.createElement("a", {
     className: "green-text",
