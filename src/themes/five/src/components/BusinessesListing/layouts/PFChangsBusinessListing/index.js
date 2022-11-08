@@ -55,7 +55,8 @@ const BusinessesListingUI = (props) => {
     canBeRedirected,
     businessClikedId,
     mapActivated,
-    isResponsive
+    isResponsive,
+    businessesInsideZone
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -93,6 +94,15 @@ const BusinessesListingUI = (props) => {
     })
   }
 
+  const getBusinesses = async (newFetch, options) => {
+    const optionsDeliveryZone = {
+      ...options,
+      force_max_distance: false
+    }
+    await handleSearchbusinessAndProducts(newFetch, options)
+    await handleSearchbusinessAndProducts(newFetch, optionsDeliveryZone)
+  }
+
   useEffect(() => {
     if (mapErrors) {
       handleMapErrors(mapErrors)
@@ -127,7 +137,8 @@ const BusinessesListingUI = (props) => {
       markerPopup: markerPopup(
         business,
         t('GO_TO_THE_STORE', 'Go to the store'),
-        business?.cellphone || business?.phone || ''
+        business?.cellphone || business?.phone || '',
+        business?.open && businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) ? 'block' : 'none'
       ),
       id: business?.id,
       address: business?.address
@@ -166,7 +177,7 @@ const BusinessesListingUI = (props) => {
     setDistanceSelected(distance)
   }
 
-  const markerPopup = (business, type, cellphone) =>
+  const markerPopup = (business, type, cellphone, showButton) =>
     '<div id="content" style="width: 300px">' +
     '<h1 id="firstHeading" class="firstHeading" style="font-size: 12px">' + business.name + '</h1>' +
     '<div id="bodyContent" style="display: flex; justify-content: space-between; width: 100%">' +
@@ -174,7 +185,7 @@ const BusinessesListingUI = (props) => {
     '<a class="btn-address-map" id="address-map" style="font-size: 10px; margin: 0">' + business.address + '</a>' +
     '<p style="font-size: 10px; margin: 0">' + cellphone + '</p>' +
     '</div>' +
-    '<button onclick="handleClickBusinessButton(\'' + business.slug + '\')"' + business.id + '" class="btn-choose-store" style="">' + type + '</button></div></div>'
+    '<button style="display: ' + showButton + '" onclick="handleClickBusinessButton(\'' + business.slug + '\')"' + business.id + '" class="btn-choose-store" style="">' + type + '</button></div></div>'
 
   const handleGotoMaps = (business) => {
     window.open(
@@ -194,7 +205,7 @@ const BusinessesListingUI = (props) => {
     }
   }, [businessesSearchList.businesses[0]])
 
-  const SingleBusinessController = ({ business }) => {
+  const SingleBusinessController = ({ business, showGoToStore }) => {
     return (
       <SingleBusinessContainer isSelected={businessClikedId === business?.id} onClick={() => mapActivated && setBusinessClikedId(business?.id)}>
         <LeftContainer>
@@ -207,12 +218,25 @@ const BusinessesListingUI = (props) => {
           )}
         </LeftContainer>
         <RightContainer>
-          <Button color='primary' onClick={() => onBusinessClick(business)}>
-            {t('GO_TO_BUSINESS', 'Go to business')}
-          </Button>
+          {showGoToStore && (
+            <Button color='primary' onClick={() => onBusinessClick(business)}>
+              {t('GO_TO_BUSINESS', 'Go to business')}
+            </Button>
+          )}
         </RightContainer>
       </SingleBusinessContainer>
     )
+  }
+
+  const sortBusinessFunction = (businessA, businessB) => {
+    const businesses = businessesInsideZone?.businesses
+    if (businesses?.find(_business => _business?.id === businessA?.id) && !businesses?.find(_business => _business?.id === businessB?.id)) {
+      return -1
+    } else if (!businesses?.find(_business => _business?.id === businessA?.id) && businesses?.find(_business => _business?.id === businessB?.id)) {
+      return 1
+    } else {
+      return 0
+    }
   }
 
   return (
@@ -224,7 +248,7 @@ const BusinessesListingUI = (props) => {
       )}
       <BusinessContainer alignCenter={!businessesSearchList.loading && businessesSearchList.businesses.length === 0}>
         {currentLocation && (
-          <Button className='search-area' color='primary' onClick={() => handleSearchbusinessAndProducts(true, { location: currentLocation })}>
+          <Button className='search-area' color='primary' onClick={() => getBusinesses(true, { location: currentLocation })}>
             {t('SEARCH_THIS_AREA', 'Search This Area')}
           </Button>
         )}
@@ -260,13 +284,13 @@ const BusinessesListingUI = (props) => {
                     <>
                       {
                         businessesSearchList.businesses?.filter(business => business?.city_id === city?.id)?.map((business) => (
-                          <SingleBusinessController key={business?.id} business={business} />
+                          <SingleBusinessController key={business?.id} business={business} showGoToStore={businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id)} />
                         ))
                       }
                       {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
                         <LoadMoreButtonCityWrap>
                           <Button
-                            onClick={() => handleSearchbusinessAndProducts()}
+                            onClick={() => getBusinesses()}
                             color='primary'
                           >
                             {t('LOAD_MORE_BUSINESSES', 'Load more businesses')}
@@ -281,14 +305,14 @@ const BusinessesListingUI = (props) => {
           )}
           <>
             {
-              filterByAddress && !filterByCity && orderState?.options?.address?.location && businessesSearchList.businesses?.map((business) => (
-                <SingleBusinessController key={business?.id} business={business} />
+              filterByAddress && !filterByCity && orderState?.options?.address?.location && businessesSearchList.businesses?.sort((a, b) => sortBusinessFunction(a, b))?.map((business) => (
+                <SingleBusinessController key={business?.id} business={business} showGoToStore={business?.open && businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id)} />
               ))
             }
             {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && businessesSearchList?.businesses?.length > 0 && (
               <LoadMoreButtonWrap>
                 <Button
-                  onClick={() => handleSearchbusinessAndProducts()}
+                  onClick={() => getBusinesses()}
                   color='primary'
                 >
                   {t('LOAD_MORE_BUSINESSES', 'Load more businesses')}
