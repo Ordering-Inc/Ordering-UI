@@ -6,7 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessSearchList = void 0;
 var _react = _interopRequireWildcard(require("react"));
-var _propTypes = _interopRequireDefault(require("prop-types"));
+var _propTypes = _interopRequireWildcard(require("prop-types"));
+var _dayjs = _interopRequireDefault(require("dayjs"));
+var _utc = _interopRequireDefault(require("dayjs/plugin/utc"));
 var _orderingComponents = require("ordering-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -46,26 +48,35 @@ var BusinessSearchList = function BusinessSearchList(props) {
     _useState2 = _slicedToArray(_useState, 2),
     businessesSearchList = _useState2[0],
     setBusinessesSearchList = _useState2[1];
+  var _useState3 = (0, _react.useState)({
+      businesses: [],
+      loading: true,
+      error: null
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    businessesInsideZone = _useState4[0],
+    setBusinessesInsideZone = _useState4[1];
+
   /**
    * brandList, this must be contain a brands, loading and error to send UIComponent
    */
-  var _useState3 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
       loading: true,
       brands: [],
       error: null
     }),
-    _useState4 = _slicedToArray(_useState3, 2),
-    brandList = _useState4[0],
-    setBrandList = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+    _useState6 = _slicedToArray(_useState5, 2),
+    brandList = _useState6[0],
+    setBrandList = _useState6[1];
+  var _useState7 = (0, _react.useState)({
       currentPage: 1,
       pageSize: (_paginationSettings$p = paginationSettings.pageSize) !== null && _paginationSettings$p !== void 0 ? _paginationSettings$p : 10,
       totalItems: null,
       totalPages: null
     }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    paginationProps = _useState6[0],
-    setPaginationProps = _useState6[1];
+    _useState8 = _slicedToArray(_useState7, 2),
+    paginationProps = _useState8[0],
+    setPaginationProps = _useState8[1];
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
@@ -78,31 +89,38 @@ var BusinessSearchList = function BusinessSearchList(props) {
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
-  var _useState7 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)({
       business_types: [],
       orderBy: 'distance',
       franchise_ids: [],
       price_level: null
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    filters = _useState8[0],
-    setFilters = _useState8[1];
-  var _useState9 = (0, _react.useState)(defaultTerm || ''),
     _useState10 = _slicedToArray(_useState9, 2),
-    termValue = _useState10[0],
-    setTermValue = _useState10[1];
-  var _useState11 = (0, _react.useState)({
+    filters = _useState10[0],
+    setFilters = _useState10[1];
+  var _useState11 = (0, _react.useState)(defaultTerm || ''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    termValue = _useState12[0],
+    setTermValue = _useState12[1];
+  var _useState13 = (0, _react.useState)({
       loading: false,
       cities: [],
       error: null
     }),
-    _useState12 = _slicedToArray(_useState11, 2),
-    citiesState = _useState12[0],
-    setCitiesState = _useState12[1];
+    _useState14 = _slicedToArray(_useState13, 2),
+    citiesState = _useState14[0],
+    setCitiesState = _useState14[1];
   var showCities = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.business_listing_view) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cities) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
   (0, _react.useEffect)(function () {
     var _Object$keys, _orderState$options, _orderState$options$a;
-    !lazySearch && (((_Object$keys = Object.keys((orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location) || {})) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0 || defaultLocation) && handleSearchbusinessAndProducts(true);
+    if (!lazySearch && (((_Object$keys = Object.keys((orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location) || {})) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0 || defaultLocation)) {
+      if (isPfChangs) {
+        handleSearchbusinessAndProducts(true, {
+          force_max_distance: true
+        });
+      }
+      handleSearchbusinessAndProducts(true);
+    }
   }, [filters, JSON.stringify(orderState === null || orderState === void 0 ? void 0 : orderState.options)]);
   var handleChangeTermValue = function handleChangeTermValue(val) {
     setTermValue(val);
@@ -186,38 +204,44 @@ var BusinessSearchList = function BusinessSearchList(props) {
                 if (!filters[key] && filters[key] !== 0 || filters[key] === 'default' || ((_filters$key = filters[key]) === null || _filters$key === void 0 ? void 0 : _filters$key.length) === 0) return;
                 Array.isArray(filters[key]) ? filtParams = filtParams + "&".concat(key, "=[").concat(filters[key], "]") : filtParams = filtParams + "&".concat(key, "=").concat(filters[key]);
               });
-              filtParams = filtParams + isPfChangs ? '&forceOrderBy=enabled' : '&forceOrderBy=disabled';
-              filtParams = filtParams + ((orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 && defaultLocation ? '&max_distance=20000' : '');
+              filtParams = filtParams + isPfChangs ? "&forceOrderBy=enabled&closed_businesses=enabled&force_max_distance=".concat(options !== null && options !== void 0 && options.force_max_distance ? 'enabled' : 'disabled') : '&forceOrderBy=disabled';
+              filtParams = filtParams + ((orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 && defaultLocation && filters.max_distance ? "&max_distance=".concat(filters.max_distance) : '');
               filtParams = filtParams + "&page=".concat(newFetch ? 1 : paginationProps.currentPage + 1, "&page_size=").concat(paginationProps.pageSize);
               brandId && (filtParams = filtParams + "&franchise_ids=[".concat(brandId, "]"));
               setBusinessesSearchList(_objectSpread(_objectSpread({}, businessesSearchList), {}, {
                 loading: true,
                 lengthError: false
               }));
+              if (!(options !== null && options !== void 0 && options.force_max_distance || !isPfChangs)) {
+                setBusinessesInsideZone(_objectSpread(_objectSpread({}, businessesInsideZone), {}, {
+                  loading: true
+                }));
+              }
               requestOptions = {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
-                  Authorization: "Bearer ".concat(token)
+                  Authorization: "Bearer ".concat(token),
+                  'X-App-X': ordering.appId
                 }
               };
               location = {
                 lat: ((_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : (_orderState$options3$2 = _orderState$options3$.location) === null || _orderState$options3$2 === void 0 ? void 0 : _orderState$options3$2.lat) || (defaultLocation === null || defaultLocation === void 0 ? void 0 : defaultLocation.lat),
                 lng: ((_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : (_orderState$options4$2 = _orderState$options4$.location) === null || _orderState$options4$2 === void 0 ? void 0 : _orderState$options4$2.lng) || (defaultLocation === null || defaultLocation === void 0 ? void 0 : defaultLocation.lng)
               };
-              _context.next = 12;
+              _context.next = 13;
               return fetch("".concat(ordering.root, "/search?order_type_id=").concat(orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type, "&location=").concat(JSON.stringify((options === null || options === void 0 ? void 0 : options.location) || location)).concat(filtParams), requestOptions);
-            case 12:
+            case 13:
               response = _context.sent;
-              _context.next = 15;
+              _context.next = 16;
               return response.json();
-            case 15:
+            case 16:
               _yield$response$json = _context.sent;
               result = _yield$response$json.result;
               error = _yield$response$json.error;
               pagination = _yield$response$json.pagination;
               if (!error) {
-                _context.next = 22;
+                _context.next = 23;
                 break;
               }
               setBusinessesSearchList({
@@ -227,7 +251,7 @@ var BusinessSearchList = function BusinessSearchList(props) {
                 lengthError: false
               });
               return _context.abrupt("return");
-            case 22:
+            case 23:
               nextPageItems = 0;
               if (pagination.current_page !== pagination.total_pages) {
                 remainingItems = pagination.total - result.length;
@@ -239,15 +263,22 @@ var BusinessSearchList = function BusinessSearchList(props) {
                 totalItems: pagination.total,
                 nextPageItems: nextPageItems
               }));
-              setBusinessesSearchList(_objectSpread(_objectSpread({}, businessesSearchList), {}, {
-                businesses: newFetch ? result : [].concat(_toConsumableArray(businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.businesses), _toConsumableArray(result)),
-                loading: false,
-                lengthError: false
-              }));
-              _context.next = 31;
+              if (options !== null && options !== void 0 && options.force_max_distance || !isPfChangs) {
+                setBusinessesSearchList(_objectSpread(_objectSpread({}, businessesSearchList), {}, {
+                  businesses: newFetch ? result : [].concat(_toConsumableArray(businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.businesses), _toConsumableArray(result)),
+                  loading: false,
+                  lengthError: false
+                }));
+              } else {
+                setBusinessesInsideZone(_objectSpread(_objectSpread({}, businessesInsideZone), {}, {
+                  businesses: newFetch ? result : [].concat(_toConsumableArray(businessesInsideZone === null || businessesInsideZone === void 0 ? void 0 : businessesInsideZone.businesses), _toConsumableArray(result)),
+                  loading: false
+                }));
+              }
+              _context.next = 32;
               break;
-            case 28:
-              _context.prev = 28;
+            case 29:
+              _context.prev = 29;
               _context.t0 = _context["catch"](0);
               setBusinessesSearchList({
                 businesses: [],
@@ -255,12 +286,12 @@ var BusinessSearchList = function BusinessSearchList(props) {
                 error: _context.t0.message,
                 lengthError: false
               });
-            case 31:
+            case 32:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 28]]);
+      }, _callee, null, [[0, 29]]);
     }));
     return function handleSearchbusinessAndProducts(_x, _x2, _x3) {
       return _ref.apply(this, arguments);
@@ -285,7 +316,8 @@ var BusinessSearchList = function BusinessSearchList(props) {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
-                  Authorization: "Bearer ".concat(token)
+                  Authorization: "Bearer ".concat(token),
+                  'X-App-X': ordering.appId
                 }
               };
               _context2.next = 5;
@@ -339,7 +371,8 @@ var BusinessSearchList = function BusinessSearchList(props) {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
-                  Authorization: "Bearer ".concat(token)
+                  Authorization: "Bearer ".concat(token),
+                  'X-App-X': ordering.appId
                 }
               };
               setCitiesState(_objectSpread(_objectSpread({}, citiesState), {}, {
@@ -394,7 +427,8 @@ var BusinessSearchList = function BusinessSearchList(props) {
               requestOptions = {
                 method: 'GET',
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'X-App-X': ordering.appId
                 }
               };
               _context4.next = 5;
@@ -448,6 +482,7 @@ var BusinessSearchList = function BusinessSearchList(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, UIComponent && /*#__PURE__*/_react.default.createElement(UIComponent, _extends({}, props, {
     paginationProps: paginationProps,
     businessesSearchList: businessesSearchList,
+    businessesInsideZone: businessesInsideZone,
     handleChangeFilters: handleChangeFilters,
     filters: filters,
     termValue: termValue,
