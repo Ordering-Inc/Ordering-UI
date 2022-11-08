@@ -400,7 +400,7 @@ const ProductOptionsUI = (props) => {
               >
                 {gallery.map((img, i) => (
                   <SwiperSlide key={i}>
-                    <img src={img} alt='' />
+                    <img src={img} alt='' className='active-img' />
                   </SwiperSlide>
                 ))}
                 {videoGallery && videoGallery.length > 0 && (

@@ -88,6 +88,9 @@ export const CardInfo = styled.div`
   > * {
     margin: 3px;
   }
+  ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'pfchangs' && css`
+    
+  `}
   p {
     color: #909BA9;
     text-align: left;

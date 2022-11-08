@@ -56,5 +56,8 @@ export const ProductList = styled.div`
 
   #orderItAgain > div {
     width: 350px;
+    ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
+      width: 230px;
+    `}
   }
 `
