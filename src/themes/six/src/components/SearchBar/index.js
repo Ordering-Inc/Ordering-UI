@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { Input } from '../../styles/Inputs'
 import { useTheme } from '../../../../../contexts/ThemeContext'
 import { useLanguage } from 'ordering-components'
+import AiOutlineSearch from '@meronex/icons/ai/AiOutlineSearch'
 import {
   BusinessSearch,
   DeleteContent
@@ -14,7 +15,7 @@ export const SearchBar = (props) => {
     lazyLoad,
     isCustomLayout
   } = props
-  const [theme] = useTheme()
+
   const [, t] = useLanguage()
   let timeout = null
   let previousSearch
@@ -56,20 +57,24 @@ export const SearchBar = (props) => {
         className={!isCustomLayout && 'search-bar'}
         isCustomLayout={isCustomLayout}
         hasValue={el.current?.value}
+        disablePadding={props.disablePadding}
       >
         <Input
           ref={el}
           name='search'
           aria-label='search'
+          id='select-input'
           placeholder={placeholder}
           isCustomLayout={isCustomLayout}
           autoComplete='off'
           maxLength='500'
         />
-        <DeleteContent>
+        <DeleteContent
+          isHome={props.isHome}
+        >
           {el.current?.value
             ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span>
-            : <img src={theme?.images?.general?.searchIcon} />}
+            : <AiOutlineSearch />}
         </DeleteContent>
       </BusinessSearch>
       {props.afterComponents?.map((AfterComponent, i) => (

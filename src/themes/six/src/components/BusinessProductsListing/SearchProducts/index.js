@@ -19,6 +19,7 @@ export const SearchProducts = (props) => {
   const [, t] = useLanguage()
   const [orderingTheme] = useOrderingTheme()
   const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
+  const searchLayout = theme?.business_view?.components?.product_search?.components?.layout?.type
 
   return (
     <>
@@ -27,8 +28,9 @@ export const SearchProducts = (props) => {
         search={searchValue}
         placeholder={t('SEARCH_PRODUCTS', theme?.defaultLanguages?.SEARCH_PRODUCTS || 'Search Products')}
         lazyLoad={businessState?.business?.lazy_load_products_recommended}
+        disablePadding={props.disablePadding}
       />
-      {showSort && (
+      {showSort && searchLayout !== 'floating' && (
         <Select
           notAsync
           notReload

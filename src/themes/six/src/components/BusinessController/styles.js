@@ -2,10 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const ContainerCard = styled.div` 
-  margin: 12px 24px;
   width: 100%;
   position: relative;
-
 `
 
 export const WrapperBusinessCard = styled.div`
@@ -65,7 +63,10 @@ export const BusinessTags = styled.div`
   top: 0;
   margin: 15px;
   width: calc(100% - 35px);
-
+      
+  ${({ theme }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
+    width: 100%;
+  `}
   span.crown {
     background-color: rgba(0, 0, 0, 0.5);
     font-size: 20px;
@@ -97,14 +98,14 @@ export const BusinessTags = styled.div`
     ` : css`
         margin-right: 0px;
     `
-    }
+  }
     }
   }
 `
 
 export const BusinessContent = styled.div`
   display: flex;
-  margin-top: 15px;
+  margin: 12px 24px;
   max-height: 115px;
 `
 
@@ -113,8 +114,8 @@ export const WrapperBusinessLogo = styled.div`
   width: 65px;
   height: 65px;
   min-height: 65px;
-  max-width: 65px;
-
+  min-width: 65px;
+  min-height: 65px;
   ${({ isSkeleton }) => isSkeleton && css`
     width: auto;
     height: auto;
@@ -125,6 +126,8 @@ export const WrapperBusinessLogo = styled.div`
     max-height: 75px;
     height: 75px;
     width: 75px;
+    min-width: 75px;
+    min-height: 75px;
   }
 `
 
@@ -167,6 +170,8 @@ export const BusinessInfo = styled.div`
 
   @media (min-width: 481px){
     width: calc(100% - 75px);
+    ${({ theme }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
+    `}
   }
 `
 
@@ -197,6 +202,9 @@ export const BusinessInfoItem = styled.div`
   div {
     display: flex;
     justify-content: space-between;
+    ${({ theme }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
+      align-items: center;
+    `}
     p {
       text-transform: capitalize;
       display: flex;
@@ -223,6 +231,10 @@ export const BusinessInfoItem = styled.div`
   }
 
   @media (min-width: 481px){
+    ${({ theme }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
+      min-width: 100%;
+      width: 100%;
+    `}
     padding: 0px 5px 0px 16px;
     font-size: 16px;
 
@@ -256,6 +268,10 @@ export const Medadata = styled.div`
   display: flex;
   font-weight: 300;
   font-size: 12px;
+  .schedule{
+    font-size: 12px;
+    color: #ADB5BD;
+  }
   ${({ isCustomerMode }) => isCustomerMode && css`
     > div {
       flex-direction: column;
@@ -302,18 +318,20 @@ export const NameWrapper = styled.div`
   justify-content: space-between;
 `
 export const BusinessInfomation = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 0;
-  width: 30px;
-  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   z-index: 2;
-
-  
+  .reviews {
+    margin-right: 10px;
+  }
+  .favorite {
+    margin-right: 10px;
+    svg {
+      color: #E63757
+    }
+  }
   ${props => props.theme?.rtl && css`
     right: unset;
     left: 0;
@@ -325,5 +343,26 @@ export const BusinessInfomation = styled.div`
 
   &:hover svg{
     font-size: 21px;
+  }
+`
+
+export const Address = styled.p`
+  width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  font-size: 14px;
+`
+
+export const SelectStoreContainer = styled.div`
+  button{ 
+    background: transparent;
+    color: ${({ theme }) => theme?.colors?.primary};
+    border-color: ${({ theme }) => theme?.colors?.primary};
+    height: 27px;
+    line-height: 0;
+    font-size: 14px;
+    white-space: nowrap;
   }
 `

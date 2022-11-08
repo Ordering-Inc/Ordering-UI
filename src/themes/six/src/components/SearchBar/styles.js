@@ -22,7 +22,16 @@ export const BusinessSearch = styled.div`
       padding-right: 60px;
     `}
 
-    ${({ isCustomLayout }) => !isCustomLayout && css`
+    ${({ theme, disablePadding }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
+      border-bottom: none;
+        ${props => props.theme?.rtl ? css`
+          padding-right: 70px;
+        ` : css`
+          padding-left: 70px;
+        `}
+   `}
+
+    ${({ isCustomLayout, theme }) => !isCustomLayout && theme?.business_view?.components?.product_search?.components?.layout?.type !== 'floating' && css`
       justify-content: center;
       -webkit-transition: width 0.4s ease-in-out;
       transition: width 0.4s ease-in-out; 
@@ -30,12 +39,18 @@ export const BusinessSearch = styled.div`
 
     @media (min-width: 681px) {
       width: 100%;
-      ${({ isCustomLayout }) => !isCustomLayout && css`
+      ${({ isCustomLayout, theme }) => !isCustomLayout && theme?.business_view?.components?.product_search?.components?.layout?.type !== 'floating' && css`
         width: 200px;
         &:focus {
           width: 50%;
         }
       `}
+      ${({ theme, disablePadding }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
+      ${disablePadding && css`
+        padding-left: 0;
+        padding-right: 0;
+      `}
+   `}
     }
   }
 `
@@ -49,11 +64,21 @@ export const DeleteContent = styled.span`
   transform: translate(-30%, 0%);
   border-radius: 25%;
   max-height: 100%;
+  ${({ theme, isHome }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
+    left: ${isHome ? '40px' : '20px'};
+  `}
   ${props => props.theme?.rtl && css`
     transform: translate(30%, 0%);
   `}
   span{
     cursor: pointer;
+  }
+  svg {
+    color: ${({ isHome }) => isHome ? '#ADB5BD' : '#fff'};
+    width: 24px;
+    height: 24px;
+    position: relative;
+    bottom: 4px;
   }
   img{
     width: 20px;
