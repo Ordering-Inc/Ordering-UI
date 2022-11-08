@@ -15,7 +15,7 @@ import { Select } from '../../styles/Select'
 import { MomentContent } from '../MomentContent'
 import CgSearch from '@meronex/icons/cg/CgSearch'
 import { SearchProducts } from '../SearchProducts'
-
+import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/components/BusinessProductsListing/SearchProducts'
 import {
   BusinessContainer,
   BusinessContent,
@@ -34,7 +34,8 @@ import {
   SearchComponentContainer,
   SocialList,
   IconWrapper,
-  BusinessInfoWrapper
+  BusinessInfoWrapper,
+  WrapperFloatingSearch
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
 
@@ -83,6 +84,7 @@ export const BusinessBasicInformation = (props) => {
   const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
   const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
   const isInfoShrunken = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
+  const searchLayout = theme?.business_view?.components?.product_search?.components?.layout?.type
   const hideCity = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
   const layoutsWithOldSearch = ['starbucks', 'old']
   const hideSearch = layoutsWithOldSearch.includes(orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type)
@@ -405,6 +407,19 @@ export const BusinessBasicInformation = (props) => {
                 <SearchComponentContainer>
                   <SearchComponent />
                 </SearchComponentContainer>
+              )}
+              {searchLayout === 'floating' && (
+                <WrapperFloatingSearch>
+                  <SearchProductsStarbucks
+                    handleChangeSearch={handleChangeSearch}
+                    searchValue={searchValue}
+                    sortByOptions={sortByOptions}
+                    sortByValue={sortByValue}
+                    onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+                    businessState={businessState}
+                    disablePadding
+                  />
+                </WrapperFloatingSearch>
               )}
               <BusinessMoreDetail>
                 <BsInfoCircle onClick={() => setOpenBusinessInformation(true)} />

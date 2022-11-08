@@ -14,10 +14,19 @@ export const WrapperSearch = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  
+  position: relative;
+  svg{
+    ${({ theme }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
+      position: absolute;
+      right: 5px;
+      transform: translateY(70%);
+      cursor: pointer;
+    `}
+  }
   @media (min-width: 850px) {
     width: 100%;
   }
+    
   
   ${({ isCustomLayout }) => isCustomLayout && css`
     box-sizing: border-box;

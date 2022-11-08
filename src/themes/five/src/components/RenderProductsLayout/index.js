@@ -104,9 +104,9 @@ export const RenderProductsLayout = (props) => {
           : BusinessBasicInformation
 
   const SearchProductsComponent =
-    orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type === 'old'
+    theme?.business_view?.components?.product_search?.components?.layout?.type === 'old'
       ? SearchProductsOld
-      : orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type === 'starbucks'
+      : theme?.business_view?.components?.product_search?.components?.layout?.type === 'starbucks'
         ? SearchProductsStarbucks
         : null
 
