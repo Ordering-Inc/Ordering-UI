@@ -223,7 +223,7 @@ export const App = () => {
 
   const OrderReviewRequired = (order) => {
     setLastOrderReview({
-      isReviewOpen: true,
+      isReviewOpen: (location?.pathname === '/' || location?.pathname === '/search' || location?.pathname === '/home') ? true : false,
       order: order,
       defaultStar: 5,
       reviewStatus: { trigger: true, order: false, product: false, driver: false },

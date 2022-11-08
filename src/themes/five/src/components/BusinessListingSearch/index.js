@@ -321,7 +321,7 @@ export const BusinessListingSearchUI = (props) => {
             </BusinessList>
           </BusinessListWrapper>
           <ProductsList>
-            {businessesSearchList.businesses?.filter(business => business?.categories?.length > 0).map(business => (
+            {businessesSearchList.businesses?.filter(business => business?.categories?.length >= 0).map(business => (
               <SingleBusinessSearch key={`card-${business?.id}`}>
                 <BusinessInfo>
                   {(business?.logo || theme.images?.dummies?.businessLogo) && (
