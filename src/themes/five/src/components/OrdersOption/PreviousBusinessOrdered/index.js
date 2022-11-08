@@ -10,7 +10,7 @@ export const PreviousBusinessOrdered = (props) => {
     isCustomLayout,
     isCustomerMode,
     onRedirectPage,
-    handleUpdateBusinessList,
+    handleUpdateBusinesses,
     businesses
   } = props
 
@@ -45,7 +45,7 @@ export const PreviousBusinessOrdered = (props) => {
                 businessPickupTime={business?.pickup_time}
                 businessDistance={business?.distance}
                 firstCard={i === 0 && width > 681}
-                handleUpdateBusinessList={handleUpdateBusinessList}
+                handleUpdateBusinessList={handleUpdateBusinesses}
               />
             ))
           }
