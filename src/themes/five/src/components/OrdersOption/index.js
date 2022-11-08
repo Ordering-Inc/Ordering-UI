@@ -66,7 +66,8 @@ const OrdersOptionUI = (props) => {
     onBusinessClick,
     professionals,
     handleUpdateProfessionals,
-    businesses
+    businesses,
+    handleUpdateBusinesses
   } = props
 
   const [, t] = useLanguage()
@@ -228,6 +229,7 @@ const OrdersOptionUI = (props) => {
           businesses={businesses}
           onRedirectPage={onRedirectPage}
           isLoadingOrders={loading}
+          handleUpdateBusinesses={handleUpdateBusinesses}
         />
       )}
 
