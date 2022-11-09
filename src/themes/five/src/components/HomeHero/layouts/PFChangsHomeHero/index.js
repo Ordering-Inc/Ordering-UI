@@ -185,9 +185,9 @@ export const PFChangsHomeHero = (props) => {
                     <Button
                       color='primary'
                       style={{ width: '100%' }}
-                      onClick={() => setShowAllLocations(true)}
+                      onClick={() => !showAllLocations ? setShowAllLocations(true) : setShowAllLocations(false)}
                     >
-                      {t('VIEW_ALL_CITIES', 'View all cities')}
+                      {showAllLocations ? t('HIDE_ALL_CITIES', 'Hide all cities') : t('VIEW_ALL_CITIES', 'View all cities')}
                     </Button>
                   </ViewLocationsContainer>
                 )}
@@ -271,9 +271,9 @@ export const PFChangsHomeHero = (props) => {
                   <Button
                     color='primary'
                     style={{ width: '100%' }}
-                    onClick={() => setShowAllLocations(true)}
+                    onClick={() => !showAllLocations ? setShowAllLocations(true) : setShowAllLocations(false)}
                   >
-                    {t('VIEW_ALL_CITIES', 'View all cities')}
+                    {showAllLocations ? t('HIDE_ALL_CITIES', 'Hide all cities') : t('VIEW_ALL_CITIES', 'View all cities')}
                   </Button>
                 </ViewLocationsContainer>
               )}
