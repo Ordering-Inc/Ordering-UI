@@ -89,9 +89,9 @@
     semver "^6.3.0"
 
 "@babel/generator@^7.20.1", "@babel/generator@^7.20.2", "@babel/generator@^7.4.4":
-  version "7.20.3"
-  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.20.3.tgz#e58c9ae2f7bf7fdf4899160cf1e04400a82cd641"
-  integrity sha512-Wl5ilw2UD1+ZYprHVprxHZJCFeBWlzZYOovE4SDYLZnqCOD11j+0QzNeEWKLLTWM7nixrZEh7vNIyb76MyJg3A==
+  version "7.20.4"
+  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.20.4.tgz#4d9f8f0c30be75fd90a0562099a26e5839602ab8"
+  integrity sha512-luCf7yk/cm7yab6CAW1aiFnmEfBJplb/JojV56MYEK7ziWfGmFlTfmL9Ehwfy4gFhbjBfWO1wj7/TuSbVNEEtA==
   dependencies:
     "@babel/types" "^7.20.2"
     "@jridgewell/gen-mapping" "^0.3.2"
@@ -2075,25 +2075,25 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@segment/analytics-core@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.1.0.tgz#a27477a35d1a005ea6b3ee9842f6870bc5260498"
-  integrity sha512-Ccjt0cewP9QQU7g2p342QQ48mOaGlFNa9DTyQlEDoyRuInnVDcW6mPFS7RlNXEnmw3F2fi3YONNktn5Ja63xcw==
+"@segment/analytics-core@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.1.1.tgz#34a583d12fd42c82f3a55173dcaf121e03e27228"
+  integrity sha512-rnxhw5sBGfV0R79SI/C4nKw3OFjhhWQMo7lOwRv2GuL/JbnOcA6DxP1RMs1Vc7TaS/fjeSJrfpP84k3A5xPzHw==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     dset "^3.1.2"
     tslib "^2.4.0"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.45.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.45.0.tgz#458efc0b07421051a2f75ccc9f50e00ac62f17c4"
-  integrity sha512-dgMo5epHmQnQjtEWSSmFmWWq4lsaxoKlhJcfcVJ91CNuCDnGCZyjubL9I6F7A+3AydIpptzJKo+b7zztC/2Lew==
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.46.0.tgz#4bfa48200b8073d8d99b1a8e528122d149a74a9b"
+  integrity sha512-5QgBk2bQIgYmElY2Dk2hrruHrKlNZ0yyUOG+WWsz/6ca+jDdNHjMZLiKIGARg6Das8MLrmHbrXy67TXp3Ch82A==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
-    "@segment/analytics-core" "1.1.0"
+    "@segment/analytics-core" "1.1.1"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
-    "@segment/tsub" "^0.1.12"
+    "@segment/tsub" "^0.2.0"
     dset "^3.1.2"
     js-cookie "3.0.1"
     node-fetch "^2.6.7"
@@ -2130,10 +2130,10 @@
   resolved "https://registry.yarnpkg.com/@segment/isodate/-/isodate-1.0.3.tgz#f44e8202d5edd277ce822785239474b2c9411d4a"
   integrity sha512-BtanDuvJqnACFkeeYje7pWULVv8RgZaqKHWwGFnL/g/TH/CcZjkIVTfGDp/MAxmilYHUkrX70SqwnYSTNEaN7A==
 
-"@segment/tsub@^0.1.12":
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/@segment/tsub/-/tsub-0.1.12.tgz#1c301a8b81e5dbda54eb0435ae808fbe65553f23"
-  integrity sha512-35JB0+HuMZrn7mus/s4yOHAcuid+MzaOYxV8YAogTR4Z7AsHwn/Zn/y9XdoHp2kKdn54s6jO4IaO826v0j7qmw==
+"@segment/tsub@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@segment/tsub/-/tsub-0.2.0.tgz#456345ad04bca81f6c3fefacac722fd9eb4923ce"
+  integrity sha512-DThHEnZ+1PlSjj59Q7Ns/ESevjfztDV4PtKMcoVp1PWSWaaPcaktWGdTeDgi8ucsJO91qtY9N4aM2cbfGr/yWA==
   dependencies:
     "@stdlib/math-base-special-ldexp" "^0.0.5"
     dlv "^1.1.3"
@@ -10459,9 +10459,9 @@ sass-loader@^9.0.2:
     semver "^7.3.2"
 
 sass@^1.26.10:
-  version "1.56.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.56.0.tgz#134032075a3223c8d49cb5c35e091e5ba1de8e0a"
-  integrity sha512-WFJ9XrpkcnqZcYuLRJh5qiV6ibQOR4AezleeEjTjMsCocYW59dEG19U3fwTTXxzi2Ed3yjPBp727hbbj53pHFw==
+  version "1.56.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.56.1.tgz#94d3910cd468fd075fa87f5bb17437a0b617d8a7"
+  integrity sha512-VpEyKpyBPCxE7qGDtOcdJ6fFbcpOM+Emu7uZLxVrkX8KVU/Dp5UF7WLvzqRuUhB6mqqQt1xffLoG+AndxTZrCQ==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -10818,9 +10818,9 @@ socket.io-client@^2.3.0:
     to-array "0.1.4"
 
 socket.io-parser@~3.3.0:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-3.3.2.tgz#ef872009d0adcf704f2fbe830191a14752ad50b6"
-  integrity sha512-FJvDBuOALxdCI9qwRrO/Rfp9yfndRtc1jSgVgV8FDraihmSP/MLGD5PEuJrNfjALvcQ+vMDM/33AWOYP/JSjDg==
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-3.3.3.tgz#3a8b84823eba87f3f7624e64a8aaab6d6318a72f"
+  integrity sha512-qOg87q1PMWWTeO01768Yh9ogn7chB9zkKtQnya41Y355S0UmpXgpcrFwAgjYJxu9BdKug5r5e9YtVSeWhKBUZg==
   dependencies:
     component-emitter "~1.3.0"
     debug "~3.1.0"
