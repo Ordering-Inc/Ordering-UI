@@ -22,7 +22,7 @@ const ProductOptionUI = (props) => {
   if (option.min === 1 && option.max === 1) {
     maxMin = t('REQUIRED', 'Required')
   } else if (option.min === 0 && option.max > 0) {
-    maxMin = `${t('MAX', 'Max')}. ${option.max}`
+    maxMin = `${!option?.limit_suboptions_by_max ? t('MAX_PER_SUBOPTION', 'MAX PER SUBOPTION') : t('MAX', 'Max')}. ${option.max}`
   } else if (option.min > 0 && option.max === 0) {
     maxMin = `${t('MIN', 'Min')}. ${option.min})`
   }

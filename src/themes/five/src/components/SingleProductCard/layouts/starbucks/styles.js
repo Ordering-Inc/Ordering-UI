@@ -184,7 +184,7 @@ const CardLogoStyled = styled.div`
   background-position: center;
   object-fit: cover;
   min-height: 100px;
-  border-radius: ${({ theme }) => theme?.business_view?.components?.products?.components?.image?.components?.style?.borderRadius || '10px'};
+  border-radius: ${({ theme }) => theme?.business_view?.components?.products?.components?.photo?.components?.style?.borderRadius || '10px'};
 `
 export const CardLogo = (props) => {
   const style = {}
@@ -329,7 +329,7 @@ export const SkeletonCardLogo = styled.div`
   height: 100px;
   margin-left: 5px;
   span{
-    border-radius: ${({ theme }) => theme?.business_view?.components?.products?.components?.image?.components?.style?.borderRadius || '10px'};
+    border-radius: ${({ theme }) => theme?.business_view?.components?.products?.components?.photo?.components?.style?.borderRadius || '10px'};
   }
   ${props => props.theme?.rtl && css`
     margin-right: 5px;

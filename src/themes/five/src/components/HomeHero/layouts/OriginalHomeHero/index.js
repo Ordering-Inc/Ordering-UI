@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
-import { useSession, useOrder, useLanguage } from 'ordering-components'
+import { useSession, useOrder, useLanguage, useOrderingTheme } from 'ordering-components'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import {
   HeroContainer,
@@ -33,8 +33,11 @@ export const OriginalHomeHero = (props) => {
   const theme = useTheme()
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
   const windowSize = useWindowSize()
+  const [orderingTheme] = useOrderingTheme()
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
+
+  const isShowLoginAccount = !orderingTheme?.theme?.mobile_view_web?.components?.home?.components?.login_account?.hidden
 
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
@@ -86,7 +89,12 @@ export const OriginalHomeHero = (props) => {
   }, [])
 
   return (
-    <HeroContainer bgimage={theme.images?.general?.homeHero} mb={!auth && '30vh'}>
+    <HeroContainer
+      mb={!auth && '30vh'}
+      bgimage={windowSize.width < 576
+        ? theme.images?.general?.homeHeroMobile
+        : theme.images?.general?.homeHero}
+    >
       <ContentWrapper>
         {windowSize.width < 576 && (
           <LogoWrapper>
@@ -113,7 +121,7 @@ export const OriginalHomeHero = (props) => {
         </HeroContent>
       </ContentWrapper>
 
-      {windowSize.width < 576 && !auth && (
+      {windowSize.width < 576 && !auth && isShowLoginAccount && (
         <UseAccount>
           <SectionHeader>
             {t('YOUR_ACCOUNT', 'Use your account')}
