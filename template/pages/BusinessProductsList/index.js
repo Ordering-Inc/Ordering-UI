@@ -135,9 +135,9 @@ export const BusinessProductsList = (props) => {
     onProductRedirect: ({ slug, category, product }) => {
       if (!category && !product) {
         if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
-          return events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
+          return events.emit('go_to_page', { page: 'business', params: { business_slug: slug }, replace: true })
         } else {
-          return events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}` })
+          return events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}`, replace: true })
         }
       }
       if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
