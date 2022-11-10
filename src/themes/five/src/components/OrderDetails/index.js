@@ -23,7 +23,7 @@ import { Messages } from '../Messages'
 import { ReviewOrder } from '../ReviewOrder'
 import { ReviewProduct } from '../ReviewProduct'
 import { ReviewDriver } from '../ReviewDriver'
-import { ProductShare } from '../../../../../components/ProductShare'
+import { ProductShare } from '../ProductShare'
 import { OrderBillSection } from './OrderBillSection'
 import { ActionsSection } from './ActionsSection'
 import { OrderPreferencesSection } from './OrderPreferencesSections'
@@ -411,6 +411,10 @@ const OrderDetailsUI = (props) => {
                       <div className='wrap'>
                         <ProductShare
                           defaultUrl={urlToShare(order?.hash_key)}
+                          product={{
+                            images: order.business?.logo,
+                            name: order.business?.name
+                          }}
                         />
                       </div>
                     </ShareOrder>
