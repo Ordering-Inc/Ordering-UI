@@ -9,7 +9,8 @@ import {
   useOrder,
   useCustomer,
   GoogleMapsMap,
-  useOrderingTheme
+  useOrderingTheme,
+  AnalyticsSegment
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 
@@ -224,6 +225,7 @@ const OrderDetailsUI = (props) => {
   ]
 
   const handleOpenReview = () => {
+    setSegmentCustomData({type: 'Calificar Orden', data: {business_id: order.business_id, order_id: order.orderId, user_id: userCustomerId}})
     if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
     else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
     else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
@@ -467,6 +469,12 @@ const OrderDetailsUI = (props) => {
 
   return (
     <Container pfchangs={layout === 'pfchangs'}>
+      {!!configs?.segment_track_id?.value && (
+        <AnalyticsSegment
+          writeKey={configs?.segment_track_id?.value}
+          customData={segmentCustomData}
+        />
+      )}
       {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
         <WrapperContainer>
           <WrapperLeftContainer>
