@@ -247,9 +247,9 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       width: '100%'
     },
     onClick: function onClick() {
-      return setShowAllLocations(true);
+      return !showAllLocations ? setShowAllLocations(true) : setShowAllLocations(false);
     }
-  }, t('VIEW_ALL_CITIES', 'View all cities'))), /*#__PURE__*/_react.default.createElement(_styles.Diviver, null), /*#__PURE__*/_react.default.createElement(_PFChangsBusinessListing.PFChangsBusinesListing, _extends({}, businessListingProps, {
+  }, showAllLocations ? t('HIDE_ALL_CITIES', 'Hide all cities') : t('VIEW_ALL_CITIES', 'View all cities'))), /*#__PURE__*/_react.default.createElement(_styles.Diviver, null), /*#__PURE__*/_react.default.createElement(_PFChangsBusinessListing.PFChangsBusinesListing, _extends({}, businessListingProps, {
     filterByAddress: true,
     filterByCity: showAllLocations,
     setBusinessesLocations: setBusinessesLocations,
@@ -301,9 +301,9 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       width: '100%'
     },
     onClick: function onClick() {
-      return setShowAllLocations(true);
+      return !showAllLocations ? setShowAllLocations(true) : setShowAllLocations(false);
     }
-  }, t('VIEW_ALL_CITIES', 'View all cities'))), /*#__PURE__*/_react.default.createElement(_styles.Diviver, null), /*#__PURE__*/_react.default.createElement(_PFChangsBusinessListing.PFChangsBusinesListing, _extends({}, businessListingProps, {
+  }, showAllLocations ? t('HIDE_ALL_CITIES', 'Hide all cities') : t('VIEW_ALL_CITIES', 'View all cities'))), /*#__PURE__*/_react.default.createElement(_styles.Diviver, null), /*#__PURE__*/_react.default.createElement(_PFChangsBusinessListing.PFChangsBusinesListing, _extends({}, businessListingProps, {
     filterByAddress: true,
     filterByCity: showAllLocations,
     setBusinessesLocations: setBusinessesLocations,

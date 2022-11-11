@@ -311,7 +311,7 @@ var CartUI = function CartUI(props) {
     isStore: isStore,
     total: cart === null || cart === void 0 ? void 0 : cart.total,
     handleClickCheckout: handleClickCheckout,
-    checkoutButtonDisabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address),
+    checkoutButtonDisabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address) || !(cart !== null && cart !== void 0 && cart.valid_products),
     setPreorderBusiness: setPreorderBusiness,
     handleChangeStore: !useKioskApp && handleChangeStore,
     isMultiCheckout: isMultiCheckout,
