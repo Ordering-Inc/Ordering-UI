@@ -11,6 +11,7 @@
     "url": "https://socket.ordering.co"
   },
   "use_marketplace": false,
+  "use_project_domain": false,
   "store_android_id": "",
   "store_apple_id": "",
   "store_kindle_id": "",
