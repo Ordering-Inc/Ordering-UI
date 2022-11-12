@@ -166,7 +166,15 @@ smoothscroll.polyfill()
 const wrapper = document.getElementById('app')
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <OrderingProvider Alert={Alert} settings={settings}>
+    <OrderingProvider
+      Alert={Alert}
+      settings={{
+        ...settings,
+        project: settings?.use_project_domain
+          ? '_'
+          : settings?.project
+      }}
+    >
       <Router />
       <Toast />
     </OrderingProvider>
