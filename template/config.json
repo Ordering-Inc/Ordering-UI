@@ -12,6 +12,7 @@
   },
   "use_marketplace": false,
   "use_project_domain": false,
+  "use_project_subdomain": false,
   "store_android_id": "",
   "store_apple_id": "",
   "store_kindle_id": "",
