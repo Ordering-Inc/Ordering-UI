@@ -74,6 +74,14 @@ const PaymentOptionOpenPayUI = (props) => {
     if (validateInfo(values).variant === 'success') {
       setAddCardOpen(false)
       handleNewCard(values)
+      setValues({
+        cardName: '',
+        cardNumber: '',
+        cardMonth: '',
+        cardYear: '',
+        cardSecurityCode: '',
+        focus: ''
+      })
     } else {
       setErrors(validateInfo(values))
     }

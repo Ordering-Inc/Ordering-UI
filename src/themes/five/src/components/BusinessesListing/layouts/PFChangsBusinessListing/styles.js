@@ -63,12 +63,17 @@ export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0;
-  width: 70%;
+  width: 100%;
   color: #fff;
   padding-right: 10px;
   overflow: hidden;
   text-align: center;
   align-items: center;
+  a{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+  }
   p {
     margin: 0;
     overflow: hidden;
@@ -79,10 +84,8 @@ export const LeftContainer = styled.div`
     font-size: 18px;
     font-family: ${({ theme }) => theme?.fonts?.special?.name};
   }
-  @media (min-width: 1024px){
-
-  }
   @media (min-width: 768px){
+    width: 70%;
     text-align: start;
     align-items: flex-start;
   }
