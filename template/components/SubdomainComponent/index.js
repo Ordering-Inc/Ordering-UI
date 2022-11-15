@@ -6,7 +6,21 @@ import settings from '../../config'
 export const SubdomainComponent = (props) => {
   const [checkState, setCheckState] = useState({ loading: true, result: null, error: null })
 
-  const project = window.location.hostname.split('.').slice(0, 1).join()
+  const projectFromSubdomain = window.location.hostname.split('.').slice(0, 1).join()
+  const isValidSubdomain = window.location.hostname.includes('tryordering.com') || window.location.hostname.includes('ordering.co')
+
+  let project = settings?.project
+  if (settings?.use_project_subdomain) {
+    if (!settings?.use_project_domain || isValidSubdomain) {
+      project = projectFromSubdomain
+    }
+  }
+
+  if (settings?.use_project_domain) {
+    if (!settings?.use_project_subdomain || !isValidSubdomain) {
+      project = '_'
+    }
+  }
 
   const checkProject = async () => {
     try {
@@ -41,14 +55,7 @@ export const SubdomainComponent = (props) => {
     checkState.loading
       ? <SpinnerLoader />
       : cloneElement(props.children, {
-        settings: {
-          ...settings,
-          project: settings?.use_project_domain
-            ? '_'
-            : settings?.use_project_subdomain
-              ? project
-              : settings?.project
-        }
+        settings: { ...settings, project }
       })
   )
 }
