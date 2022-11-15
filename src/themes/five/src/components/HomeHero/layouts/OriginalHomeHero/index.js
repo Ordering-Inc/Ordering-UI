@@ -118,8 +118,8 @@ export const OriginalHomeHero = (props) => {
           <SectionHeader>
             {t('YOUR_ACCOUNT', 'Use your account')}
           </SectionHeader>
-          <Button color='primary' onClick={() => handleOpenLoginSignUp('login')}>login</Button>
-          <Button color='primary' onClick={() => handleOpenLoginSignUp('signup')}>signUp</Button>
+          <Button color='primary' onClick={() => handleOpenLoginSignUp('login')}>{t('LOGIN', 'login')}</Button>
+          <Button color='primary' onClick={() => handleOpenLoginSignUp('signup')}>{t('SIGNUP', 'signUp')}</Button>
         </UseAccount>
       )}
 
